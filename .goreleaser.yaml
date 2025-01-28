@@ -1,0 +1,21 @@
+---
+before:
+  hooks:
+    - go mod tidy
+builds:
+  - env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - darwin
+      - windows
+    goarch:
+      - amd64
+      - arm64
+    binary: "escape-cli"
+    main: ./cmd/main.go
+    ldflags:
+      - -s -w -X github.com/Escape-Technologies/cli/pkg/cli.version={{.Version}} -X github.com/Escape-Technologies/cli/pkg/cli.commit={{.ShortCommit}}
+
+checksum:
+  algorithm: sha256
