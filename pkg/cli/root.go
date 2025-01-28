@@ -42,7 +42,11 @@ func Run() error {
 			default:
 				return fmt.Errorf("invalid output format: %s", outputStr)
 			}
+			log.Trace("Output format set to %s", output)
 			return nil
+		},
+		PostRun: func(cmd *cobra.Command, args []string) {
+			log.Trace("Main cli done, exiting")
 		},
 	}
 
