@@ -1,0 +1,2642 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Escape Public API",
+        "description": "This API enables you to operate [Escape](https://escape.tech/) programmatically.\n\nAll requests must be authenticated with a valid API key, provided in the `Authorization` header.\nFor example: `Authorization: Key YOUR_API_KEY`.\n\nYou can find your API key in the [Escape dashboard](http://app.escape.tech/user/)."
+    },
+    "security": [
+        {
+            "apiKey": []
+        }
+    ],
+    "components": {
+        "securitySchemes": {
+            "apiKey": {
+                "type": "apiKey",
+                "name": "Authorization",
+                "in": "header",
+                "description": "API key to authenticate requests: `Authorization: Key YOUR_API_KEY`"
+            }
+        },
+        "schemas": {},
+        "parameters": {}
+    },
+    "paths": {
+        "/create-application": {
+            "post": {
+                "tags": [
+                    "Applications"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "application/json"
+                            ]
+                        },
+                        "required": true,
+                        "name": "content-type",
+                        "in": "header"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "maxLength": 255
+                                    },
+                                    "serverUrl": {
+                                        "type": "string",
+                                        "maxLength": 1024,
+                                        "format": "uri"
+                                    },
+                                    "readWrite": {
+                                        "type": "boolean"
+                                    },
+                                    "cron": {
+                                        "type": "string"
+                                    },
+                                    "disableScheduling": {
+                                        "type": "boolean"
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "enum": [
+                                            "GRAPHQL",
+                                            "REST"
+                                        ]
+                                    },
+                                    "authentication": {
+                                        "nullable": true
+                                    },
+                                    "organizationId": {
+                                        "type": "string",
+                                        "format": "uuid"
+                                    },
+                                    "locationId": {
+                                        "type": "string",
+                                        "format": "uuid"
+                                    },
+                                    "schema": {
+                                        "type": "string"
+                                    },
+                                    "schemaUrl": {
+                                        "type": "string",
+                                        "maxLength": 1024,
+                                        "format": "uri"
+                                    },
+                                    "fullConfiguration": {
+                                        "nullable": true
+                                    },
+                                    "labels": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "maxLength": 255
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "name",
+                                    "serverUrl",
+                                    "readWrite",
+                                    "type",
+                                    "organizationId"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Application created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "format": "uuid"
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "maxLength": 255
+                                        },
+                                        "lastScan": {
+                                            "type": "object",
+                                            "properties": {
+                                                "scanId": {
+                                                    "type": "string",
+                                                    "format": "uuid"
+                                                }
+                                            },
+                                            "required": [
+                                                "scanId"
+                                            ]
+                                        },
+                                        "href": {
+                                            "type": "string",
+                                            "format": "uri"
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "name",
+                                        "lastScan",
+                                        "href"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "events": {
+                                            "type": "array",
+                                            "items": {
+                                                "nullable": true
+                                            }
+                                        }
+                                    },
+                                    "required": [
+                                        "error",
+                                        "message"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "message"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/application/{id}": {
+            "get": {
+                "tags": [
+                    "Applications"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        },
+                        "required": true,
+                        "name": "id",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Application details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "format": "uuid"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "service": {
+                                            "type": "object",
+                                            "properties": {
+                                                "url": {
+                                                    "type": "string",
+                                                    "format": "uri"
+                                                },
+                                                "tags": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "name": {
+                                                                "type": "string"
+                                                            },
+                                                            "color": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "name",
+                                                            "color"
+                                                        ]
+                                                    }
+                                                }
+                                            },
+                                            "required": [
+                                                "url",
+                                                "tags"
+                                            ]
+                                        },
+                                        "autogeneratedFromInventory": {
+                                            "type": "boolean"
+                                        },
+                                        "createdAt": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                        },
+                                        "hasCI": {
+                                            "type": "boolean"
+                                        },
+                                        "cron": {
+                                            "type": "string",
+                                            "nullable": true
+                                        },
+                                        "scans": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "format": "uuid"
+                                                    },
+                                                    "status": {
+                                                        "type": "string",
+                                                        "enum": [
+                                                            "CANCELED",
+                                                            "CREATED",
+                                                            "FAILED",
+                                                            "RUNNING",
+                                                            "SUCCESS"
+                                                        ]
+                                                    },
+                                                    "createdAt": {
+                                                        "type": "string",
+                                                        "format": "date-time"
+                                                    },
+                                                    "alertCounts": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "HIGH": {
+                                                                "type": "number"
+                                                            },
+                                                            "MEDIUM": {
+                                                                "type": "number"
+                                                            },
+                                                            "LOW": {
+                                                                "type": "number"
+                                                            },
+                                                            "INFO": {
+                                                                "type": "number"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "HIGH",
+                                                            "MEDIUM",
+                                                            "LOW",
+                                                            "INFO"
+                                                        ]
+                                                    },
+                                                    "commitHash": {
+                                                        "type": "string",
+                                                        "nullable": true
+                                                    },
+                                                    "score": {
+                                                        "type": "number",
+                                                        "nullable": true,
+                                                        "minimum": 0,
+                                                        "maximum": 1
+                                                    },
+                                                    "coverage": {
+                                                        "type": "number",
+                                                        "nullable": true,
+                                                        "minimum": 0,
+                                                        "maximum": 1
+                                                    },
+                                                    "securityTestCategories": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "category": {
+                                                                    "type": "string"
+                                                                },
+                                                                "count": {
+                                                                    "type": "number"
+                                                                },
+                                                                "severity": {
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "category",
+                                                                "count",
+                                                                "severity"
+                                                            ]
+                                                        }
+                                                    }
+                                                },
+                                                "required": [
+                                                    "id",
+                                                    "status",
+                                                    "createdAt",
+                                                    "alertCounts",
+                                                    "commitHash",
+                                                    "score",
+                                                    "coverage",
+                                                    "securityTestCategories"
+                                                ]
+                                            }
+                                        },
+                                        "lastSuccessfulScan": {
+                                            "type": "object",
+                                            "nullable": true,
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "format": "uuid"
+                                                },
+                                                "createdAt": {
+                                                    "type": "string",
+                                                    "format": "date-time"
+                                                },
+                                                "alertCounts": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "HIGH": {
+                                                            "type": "number"
+                                                        },
+                                                        "MEDIUM": {
+                                                            "type": "number"
+                                                        },
+                                                        "LOW": {
+                                                            "type": "number"
+                                                        },
+                                                        "INFO": {
+                                                            "type": "number"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "HIGH",
+                                                        "MEDIUM",
+                                                        "LOW",
+                                                        "INFO"
+                                                    ]
+                                                },
+                                                "score": {
+                                                    "type": "number",
+                                                    "nullable": true,
+                                                    "minimum": 0,
+                                                    "maximum": 1
+                                                },
+                                                "commitHash": {
+                                                    "type": "string",
+                                                    "nullable": true
+                                                },
+                                                "coverage": {
+                                                    "type": "number",
+                                                    "nullable": true,
+                                                    "minimum": 0,
+                                                    "maximum": 1
+                                                },
+                                                "securityTestCategories": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "category": {
+                                                                "type": "string"
+                                                            },
+                                                            "count": {
+                                                                "type": "number"
+                                                            },
+                                                            "severity": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "category",
+                                                            "count",
+                                                            "severity"
+                                                        ]
+                                                    }
+                                                }
+                                            },
+                                            "required": [
+                                                "id",
+                                                "createdAt",
+                                                "alertCounts",
+                                                "score",
+                                                "commitHash",
+                                                "coverage",
+                                                "securityTestCategories"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "name",
+                                        "service",
+                                        "autogeneratedFromInventory",
+                                        "createdAt",
+                                        "hasCI",
+                                        "cron",
+                                        "scans",
+                                        "lastSuccessfulScan"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "events": {
+                                            "type": "array",
+                                            "items": {
+                                                "nullable": true
+                                            }
+                                        }
+                                    },
+                                    "required": [
+                                        "error",
+                                        "message"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "message"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Applications"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        },
+                        "required": true,
+                        "name": "id",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Application deleted",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "format": "uuid",
+                                            "description": "The application ID"
+                                        },
+                                        "deleteApplication": {
+                                            "type": "boolean",
+                                            "description": "`true` if the application was deleted"
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "deleteApplication"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "events": {
+                                            "type": "array",
+                                            "items": {
+                                                "nullable": true
+                                            }
+                                        }
+                                    },
+                                    "required": [
+                                        "error",
+                                        "message"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "message"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/applications/{id}/upload-schema": {
+            "post": {
+                "tags": [
+                    "Applications"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        },
+                        "required": true,
+                        "name": "id",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "application/json"
+                            ]
+                        },
+                        "required": true,
+                        "name": "content-type",
+                        "in": "header"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "schemaUrl": {
+                                        "type": "string",
+                                        "format": "uri"
+                                    },
+                                    "schema": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Schema object",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "format": "uuid"
+                                        }
+                                    },
+                                    "required": [
+                                        "id"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "events": {
+                                            "type": "array",
+                                            "items": {
+                                                "nullable": true
+                                            }
+                                        }
+                                    },
+                                    "required": [
+                                        "error",
+                                        "message"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "message"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/organization/{id}/applications": {
+            "get": {
+                "tags": [
+                    "Applications"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        },
+                        "required": true,
+                        "name": "id",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of application objects",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "type": "string",
+                                                "format": "uuid"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "service": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "url": {
+                                                        "type": "string",
+                                                        "format": "uri"
+                                                    },
+                                                    "tags": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string"
+                                                                },
+                                                                "color": {
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "name",
+                                                                "color"
+                                                            ]
+                                                        }
+                                                    }
+                                                },
+                                                "required": [
+                                                    "url",
+                                                    "tags"
+                                                ]
+                                            },
+                                            "autogeneratedFromInventory": {
+                                                "type": "boolean"
+                                            },
+                                            "createdAt": {
+                                                "type": "string",
+                                                "format": "date-time"
+                                            },
+                                            "hasCI": {
+                                                "type": "boolean"
+                                            },
+                                            "cron": {
+                                                "type": "string",
+                                                "nullable": true
+                                            },
+                                            "scans": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "string",
+                                                            "format": "uuid"
+                                                        },
+                                                        "status": {
+                                                            "type": "string",
+                                                            "enum": [
+                                                                "CANCELED",
+                                                                "CREATED",
+                                                                "FAILED",
+                                                                "RUNNING",
+                                                                "SUCCESS"
+                                                            ]
+                                                        },
+                                                        "createdAt": {
+                                                            "type": "string",
+                                                            "format": "date-time"
+                                                        },
+                                                        "alertCounts": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "HIGH": {
+                                                                    "type": "number"
+                                                                },
+                                                                "MEDIUM": {
+                                                                    "type": "number"
+                                                                },
+                                                                "LOW": {
+                                                                    "type": "number"
+                                                                },
+                                                                "INFO": {
+                                                                    "type": "number"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "HIGH",
+                                                                "MEDIUM",
+                                                                "LOW",
+                                                                "INFO"
+                                                            ]
+                                                        },
+                                                        "commitHash": {
+                                                            "type": "string",
+                                                            "nullable": true
+                                                        },
+                                                        "score": {
+                                                            "type": "number",
+                                                            "nullable": true,
+                                                            "minimum": 0,
+                                                            "maximum": 1
+                                                        },
+                                                        "coverage": {
+                                                            "type": "number",
+                                                            "nullable": true,
+                                                            "minimum": 0,
+                                                            "maximum": 1
+                                                        },
+                                                        "securityTestCategories": {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "category": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "count": {
+                                                                        "type": "number"
+                                                                    },
+                                                                    "severity": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "required": [
+                                                                    "category",
+                                                                    "count",
+                                                                    "severity"
+                                                                ]
+                                                            }
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "id",
+                                                        "status",
+                                                        "createdAt",
+                                                        "alertCounts",
+                                                        "commitHash",
+                                                        "score",
+                                                        "coverage",
+                                                        "securityTestCategories"
+                                                    ]
+                                                }
+                                            },
+                                            "lastSuccessfulScan": {
+                                                "type": "object",
+                                                "nullable": true,
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "format": "uuid"
+                                                    },
+                                                    "createdAt": {
+                                                        "type": "string",
+                                                        "format": "date-time"
+                                                    },
+                                                    "alertCounts": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "HIGH": {
+                                                                "type": "number"
+                                                            },
+                                                            "MEDIUM": {
+                                                                "type": "number"
+                                                            },
+                                                            "LOW": {
+                                                                "type": "number"
+                                                            },
+                                                            "INFO": {
+                                                                "type": "number"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "HIGH",
+                                                            "MEDIUM",
+                                                            "LOW",
+                                                            "INFO"
+                                                        ]
+                                                    },
+                                                    "score": {
+                                                        "type": "number",
+                                                        "nullable": true,
+                                                        "minimum": 0,
+                                                        "maximum": 1
+                                                    },
+                                                    "commitHash": {
+                                                        "type": "string",
+                                                        "nullable": true
+                                                    },
+                                                    "coverage": {
+                                                        "type": "number",
+                                                        "nullable": true,
+                                                        "minimum": 0,
+                                                        "maximum": 1
+                                                    },
+                                                    "securityTestCategories": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "category": {
+                                                                    "type": "string"
+                                                                },
+                                                                "count": {
+                                                                    "type": "number"
+                                                                },
+                                                                "severity": {
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "category",
+                                                                "count",
+                                                                "severity"
+                                                            ]
+                                                        }
+                                                    }
+                                                },
+                                                "required": [
+                                                    "id",
+                                                    "createdAt",
+                                                    "alertCounts",
+                                                    "score",
+                                                    "commitHash",
+                                                    "coverage",
+                                                    "securityTestCategories"
+                                                ]
+                                            }
+                                        },
+                                        "required": [
+                                            "id",
+                                            "name",
+                                            "service",
+                                            "autogeneratedFromInventory",
+                                            "createdAt",
+                                            "hasCI",
+                                            "cron",
+                                            "scans",
+                                            "lastSuccessfulScan"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/organization/{id}/applications/search": {
+            "get": {
+                "tags": [
+                    "Applications"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        },
+                        "required": true,
+                        "name": "id",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": false,
+                        "name": "search",
+                        "in": "query"
+                    },
+                    {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": false,
+                        "name": "cursor",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of applications matching the search query",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "cursor": {
+                                            "type": "string",
+                                            "nullable": true
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "format": "uuid"
+                                                    },
+                                                    "name": {
+                                                        "type": "string"
+                                                    },
+                                                    "service": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "url": {
+                                                                "type": "string",
+                                                                "format": "uri"
+                                                            },
+                                                            "tags": {
+                                                                "type": "array",
+                                                                "items": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "name": {
+                                                                            "type": "string"
+                                                                        },
+                                                                        "color": {
+                                                                            "type": "string"
+                                                                        }
+                                                                    },
+                                                                    "required": [
+                                                                        "name",
+                                                                        "color"
+                                                                    ]
+                                                                }
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "url",
+                                                            "tags"
+                                                        ]
+                                                    },
+                                                    "autogeneratedFromInventory": {
+                                                        "type": "boolean"
+                                                    },
+                                                    "createdAt": {
+                                                        "type": "string",
+                                                        "format": "date-time"
+                                                    },
+                                                    "hasCI": {
+                                                        "type": "boolean"
+                                                    },
+                                                    "cron": {
+                                                        "type": "string",
+                                                        "nullable": true
+                                                    }
+                                                },
+                                                "required": [
+                                                    "id",
+                                                    "name",
+                                                    "service",
+                                                    "autogeneratedFromInventory",
+                                                    "createdAt",
+                                                    "hasCI",
+                                                    "cron"
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "required": [
+                                        "cursor",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/applications/{id}/start-scan": {
+            "post": {
+                "tags": [
+                    "Applications",
+                    "Scans"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        },
+                        "required": true,
+                        "name": "id",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "application/json"
+                            ]
+                        },
+                        "required": true,
+                        "name": "content-type",
+                        "in": "header"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "commitHash": {
+                                        "type": "string"
+                                    },
+                                    "commitLink": {
+                                        "type": "string"
+                                    },
+                                    "commitBranch": {
+                                        "type": "string"
+                                    },
+                                    "commitAuthor": {
+                                        "type": "string"
+                                    },
+                                    "commitAuthorProfilePictureLink": {
+                                        "type": "string"
+                                    },
+                                    "configurationOverride": {
+                                        "type": "object",
+                                        "additionalProperties": {
+                                            "nullable": true
+                                        }
+                                    },
+                                    "schemaUrl": {
+                                        "type": "string",
+                                        "format": "uri"
+                                    },
+                                    "forceLockBypass": {
+                                        "type": "boolean"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Scan started",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "format": "uuid"
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "enum": [
+                                                "CANCELED",
+                                                "CREATED",
+                                                "FAILED",
+                                                "RUNNING",
+                                                "SUCCESS"
+                                            ]
+                                        },
+                                        "duration": {
+                                            "type": "number",
+                                            "nullable": true
+                                        },
+                                        "createdAt": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                        },
+                                        "createdSince": {
+                                            "type": "number"
+                                        },
+                                        "completionRatio": {
+                                            "type": "number",
+                                            "minimum": 0,
+                                            "maximum": 1
+                                        },
+                                        "readonlyAccessToken": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "status",
+                                        "duration",
+                                        "createdAt",
+                                        "createdSince",
+                                        "completionRatio",
+                                        "readonlyAccessToken"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "error",
+                                        "message"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "message"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/scans/{id}": {
+            "get": {
+                "tags": [
+                    "Scans"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        },
+                        "required": true,
+                        "name": "id",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Scan object",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "format": "uuid"
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "enum": [
+                                                "CANCELED",
+                                                "CREATED",
+                                                "FAILED",
+                                                "RUNNING",
+                                                "SUCCESS"
+                                            ]
+                                        },
+                                        "createdAt": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                        },
+                                        "completionRatio": {
+                                            "type": "number",
+                                            "minimum": 0,
+                                            "maximum": 1
+                                        },
+                                        "commitHash": {
+                                            "type": "string",
+                                            "nullable": true
+                                        },
+                                        "application": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "format": "uuid"
+                                                },
+                                                "createdAt": {
+                                                    "type": "string",
+                                                    "format": "date-time"
+                                                },
+                                                "name": {
+                                                    "type": "string"
+                                                },
+                                                "updatedAt": {
+                                                    "type": "string",
+                                                    "format": "date-time"
+                                                },
+                                                "activeSchema": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "string",
+                                                            "format": "uuid"
+                                                        },
+                                                        "applicationId": {
+                                                            "type": "string",
+                                                            "format": "uuid"
+                                                        },
+                                                        "createdAt": {
+                                                            "type": "string",
+                                                            "format": "date-time"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "id",
+                                                        "applicationId",
+                                                        "createdAt"
+                                                    ]
+                                                },
+                                                "service": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "framework": {
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "framework"
+                                                    ]
+                                                }
+                                            },
+                                            "required": [
+                                                "id",
+                                                "createdAt",
+                                                "name",
+                                                "updatedAt",
+                                                "activeSchema",
+                                                "service"
+                                            ]
+                                        },
+                                        "configuration": {
+                                            "type": "object",
+                                            "properties": {
+                                                "content": {
+                                                    "nullable": true
+                                                },
+                                                "createdAt": {
+                                                    "type": "string",
+                                                    "format": "date-time"
+                                                },
+                                                "isAuthenticationValid": {
+                                                    "type": "boolean"
+                                                },
+                                                "isConfigurationValid": {
+                                                    "type": "boolean"
+                                                },
+                                                "readWrite": {
+                                                    "type": "boolean"
+                                                },
+                                                "updatedAt": {
+                                                    "type": "string",
+                                                    "format": "date-time"
+                                                },
+                                                "authenticationUsers": {
+                                                    "type": "array",
+                                                    "nullable": true,
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "name": {
+                                                                "type": "string"
+                                                            },
+                                                            "headerName": {
+                                                                "type": "string"
+                                                            },
+                                                            "headerValue": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "name",
+                                                            "headerName",
+                                                            "headerValue"
+                                                        ]
+                                                    }
+                                                }
+                                            },
+                                            "required": [
+                                                "createdAt",
+                                                "isAuthenticationValid",
+                                                "isConfigurationValid",
+                                                "readWrite",
+                                                "updatedAt",
+                                                "authenticationUsers"
+                                            ]
+                                        },
+                                        "securityTests": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "securityTestUid": {
+                                                        "type": "string"
+                                                    },
+                                                    "category": {
+                                                        "type": "string"
+                                                    },
+                                                    "failureName": {
+                                                        "type": "string"
+                                                    },
+                                                    "description": {
+                                                        "type": "string"
+                                                    },
+                                                    "remediation": {
+                                                        "type": "string"
+                                                    },
+                                                    "compliance": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string"
+                                                                },
+                                                                "value": {
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "name",
+                                                                "value"
+                                                            ]
+                                                        }
+                                                    },
+                                                    "severity": {
+                                                        "type": "string",
+                                                        "enum": [
+                                                            "HIGH",
+                                                            "MEDIUM",
+                                                            "LOW",
+                                                            "INFO"
+                                                        ]
+                                                    },
+                                                    "alerts": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "id": {
+                                                                    "type": "string",
+                                                                    "format": "uuid"
+                                                                },
+                                                                "path": {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "context": {
+                                                                    "type": "string"
+                                                                },
+                                                                "risks": {
+                                                                    "type": "object",
+                                                                    "additionalProperties": {
+                                                                        "nullable": true
+                                                                    }
+                                                                },
+                                                                "severity": {
+                                                                    "type": "string",
+                                                                    "enum": [
+                                                                        "HIGH",
+                                                                        "MEDIUM",
+                                                                        "LOW",
+                                                                        "INFO"
+                                                                    ]
+                                                                },
+                                                                "exchanges": {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "curl": {
+                                                                                "type": "string"
+                                                                            }
+                                                                        },
+                                                                        "required": [
+                                                                            "curl"
+                                                                        ]
+                                                                    }
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "id",
+                                                                "path",
+                                                                "context",
+                                                                "risks",
+                                                                "severity",
+                                                                "exchanges"
+                                                            ]
+                                                        }
+                                                    }
+                                                },
+                                                "required": [
+                                                    "securityTestUid",
+                                                    "category",
+                                                    "failureName",
+                                                    "description",
+                                                    "remediation",
+                                                    "compliance",
+                                                    "severity",
+                                                    "alerts"
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "status",
+                                        "createdAt",
+                                        "completionRatio",
+                                        "commitHash",
+                                        "application",
+                                        "configuration",
+                                        "securityTests"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/organization/{id}/services": {
+            "get": {
+                "tags": [
+                    "Services"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        },
+                        "required": true,
+                        "name": "id",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of service objects",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "type": "string",
+                                                "format": "uuid"
+                                            },
+                                            "url": {
+                                                "type": "string",
+                                                "format": "uri"
+                                            },
+                                            "cloudProvider": {
+                                                "type": "string"
+                                            },
+                                            "wafProvider": {
+                                                "type": "string"
+                                            },
+                                            "authTechnology": {
+                                                "type": "string",
+                                                "nullable": true
+                                            },
+                                            "type": {
+                                                "type": "string"
+                                            },
+                                            "createdAt": {
+                                                "type": "string",
+                                                "format": "date-time"
+                                            },
+                                            "lastSeenAt": {
+                                                "type": "string",
+                                                "format": "date-time"
+                                            },
+                                            "tags": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "string",
+                                                            "format": "uuid"
+                                                        },
+                                                        "name": {
+                                                            "type": "string"
+                                                        },
+                                                        "color": {
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "id",
+                                                        "name",
+                                                        "color"
+                                                    ]
+                                                }
+                                            },
+                                            "domainId": {
+                                                "type": "string",
+                                                "format": "uuid"
+                                            },
+                                            "applicationsCount": {
+                                                "type": "number"
+                                            },
+                                            "softwareType": {
+                                                "type": "string",
+                                                "nullable": true
+                                            },
+                                            "framework": {
+                                                "type": "string",
+                                                "nullable": true
+                                            },
+                                            "ipAddresses": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "countryCodes": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "required": [
+                                            "id",
+                                            "url",
+                                            "cloudProvider",
+                                            "wafProvider",
+                                            "authTechnology",
+                                            "type",
+                                            "createdAt",
+                                            "lastSeenAt",
+                                            "tags",
+                                            "domainId",
+                                            "applicationsCount",
+                                            "softwareType",
+                                            "framework",
+                                            "ipAddresses",
+                                            "countryCodes"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/organization/{id}/domains": {
+            "post": {
+                "tags": [
+                    "Domains"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        },
+                        "required": true,
+                        "name": "id",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "application/json"
+                            ]
+                        },
+                        "required": true,
+                        "name": "content-type",
+                        "in": "header"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "domains": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "domains"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Batch results",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "addedDomains": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "invalidDomains": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "removedDomains": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "unchangedDomains": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    },
+                                    "required": [
+                                        "addedDomains",
+                                        "invalidDomains",
+                                        "removedDomains",
+                                        "unchangedDomains"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "name",
+                                        "message"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/organization/{id}/schemas": {
+            "get": {
+                "tags": [
+                    "Schemas"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        },
+                        "required": true,
+                        "name": "id",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of schemas objects",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "pageInfo": {
+                                            "type": "object",
+                                            "properties": {
+                                                "hasNextPage": {
+                                                    "type": "boolean"
+                                                },
+                                                "hasPreviousPage": {
+                                                    "type": "boolean"
+                                                },
+                                                "startCursor": {
+                                                    "type": "string",
+                                                    "nullable": true
+                                                },
+                                                "endCursor": {
+                                                    "type": "string",
+                                                    "nullable": true
+                                                }
+                                            },
+                                            "required": [
+                                                "hasNextPage",
+                                                "hasPreviousPage",
+                                                "startCursor",
+                                                "endCursor"
+                                            ]
+                                        },
+                                        "totalCount": {
+                                            "type": "number"
+                                        },
+                                        "edges": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "node": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "string",
+                                                                "format": "uuid"
+                                                            },
+                                                            "url": {
+                                                                "type": "string",
+                                                                "nullable": true,
+                                                                "format": "uri"
+                                                            },
+                                                            "name": {
+                                                                "type": "string"
+                                                            },
+                                                            "blobUrl": {
+                                                                "type": "string",
+                                                                "nullable": true
+                                                            },
+                                                            "description": {
+                                                                "type": "string",
+                                                                "nullable": true
+                                                            },
+                                                            "kind": {
+                                                                "type": "string"
+                                                            },
+                                                            "createdAt": {
+                                                                "type": "string",
+                                                                "format": "date-time"
+                                                            },
+                                                            "lastSeenAt": {
+                                                                "type": "string",
+                                                                "format": "date-time"
+                                                            },
+                                                            "tags": {
+                                                                "type": "array",
+                                                                "items": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "id": {
+                                                                            "type": "string",
+                                                                            "format": "uuid"
+                                                                        },
+                                                                        "name": {
+                                                                            "type": "string"
+                                                                        },
+                                                                        "color": {
+                                                                            "type": "string"
+                                                                        }
+                                                                    },
+                                                                    "required": [
+                                                                        "id",
+                                                                        "name",
+                                                                        "color"
+                                                                    ]
+                                                                }
+                                                            },
+                                                            "domainId": {
+                                                                "type": "string",
+                                                                "format": "uuid"
+                                                            },
+                                                            "useInServiceId": {
+                                                                "type": "array",
+                                                                "items": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "id": {
+                                                                            "type": "string",
+                                                                            "format": "uuid"
+                                                                        }
+                                                                    },
+                                                                    "required": [
+                                                                        "id"
+                                                                    ]
+                                                                }
+                                                            },
+                                                            "consumer": {
+                                                                "type": "string",
+                                                                "nullable": true
+                                                            },
+                                                            "generatedFromCodeProjectId": {
+                                                                "type": "object",
+                                                                "nullable": true,
+                                                                "properties": {
+                                                                    "id": {
+                                                                        "type": "string",
+                                                                        "format": "uuid"
+                                                                    }
+                                                                },
+                                                                "required": [
+                                                                    "id"
+                                                                ]
+                                                            },
+                                                            "generatedFromFrontendId": {
+                                                                "type": "object",
+                                                                "nullable": true,
+                                                                "properties": {
+                                                                    "id": {
+                                                                        "type": "string",
+                                                                        "format": "uuid"
+                                                                    }
+                                                                },
+                                                                "required": [
+                                                                    "id"
+                                                                ]
+                                                            },
+                                                            "generatedFromServiceId": {
+                                                                "type": "object",
+                                                                "nullable": true,
+                                                                "properties": {
+                                                                    "id": {
+                                                                        "type": "string",
+                                                                        "format": "uuid"
+                                                                    }
+                                                                },
+                                                                "required": [
+                                                                    "id"
+                                                                ]
+                                                            },
+                                                            "endpoints": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "id": {
+                                                                        "type": "string",
+                                                                        "format": "uuid"
+                                                                    },
+                                                                    "operation": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "name": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "parameters": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "returnType": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "required": [
+                                                                    "id",
+                                                                    "operation",
+                                                                    "name",
+                                                                    "parameters",
+                                                                    "returnType"
+                                                                ]
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "id",
+                                                            "url",
+                                                            "name",
+                                                            "blobUrl",
+                                                            "description",
+                                                            "kind",
+                                                            "createdAt",
+                                                            "lastSeenAt",
+                                                            "tags",
+                                                            "domainId",
+                                                            "useInServiceId",
+                                                            "consumer",
+                                                            "generatedFromCodeProjectId",
+                                                            "generatedFromFrontendId",
+                                                            "generatedFromServiceId",
+                                                            "endpoints"
+                                                        ]
+                                                    }
+                                                },
+                                                "required": [
+                                                    "node"
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "required": [
+                                        "pageInfo",
+                                        "totalCount",
+                                        "edges"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/organization/{id}/schemas/{schemaId}": {
+            "get": {
+                "tags": [
+                    "Schemas"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        },
+                        "required": true,
+                        "name": "id",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        },
+                        "required": true,
+                        "name": "schemaId",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Schema content",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "format": "uuid"
+                                        },
+                                        "url": {
+                                            "type": "string",
+                                            "nullable": true,
+                                            "format": "uri"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "blobUrl": {
+                                            "type": "string",
+                                            "nullable": true
+                                        },
+                                        "description": {
+                                            "type": "string",
+                                            "nullable": true
+                                        },
+                                        "temporaryDownloadUrl": {
+                                            "type": "string",
+                                            "nullable": true
+                                        },
+                                        "kind": {
+                                            "type": "string"
+                                        },
+                                        "createdAt": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                        },
+                                        "lastSeenAt": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                        },
+                                        "tags": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "format": "uuid"
+                                                    },
+                                                    "name": {
+                                                        "type": "string"
+                                                    },
+                                                    "color": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "id",
+                                                    "name",
+                                                    "color"
+                                                ]
+                                            }
+                                        },
+                                        "usedInServices": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "format": "uuid"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "id"
+                                                ]
+                                            }
+                                        },
+                                        "consumer": {
+                                            "type": "string",
+                                            "nullable": true
+                                        },
+                                        "generatedFromCodeProject": {
+                                            "type": "object",
+                                            "nullable": true,
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "format": "uuid"
+                                                }
+                                            },
+                                            "required": [
+                                                "id"
+                                            ]
+                                        },
+                                        "generatedFromFrontend": {
+                                            "type": "object",
+                                            "nullable": true,
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "format": "uuid"
+                                                }
+                                            },
+                                            "required": [
+                                                "id"
+                                            ]
+                                        },
+                                        "generatedFromService": {
+                                            "type": "object",
+                                            "nullable": true,
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "format": "uuid"
+                                                }
+                                            },
+                                            "required": [
+                                                "id"
+                                            ]
+                                        },
+                                        "endpoints": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "format": "uuid"
+                                                    },
+                                                    "operation": {
+                                                        "type": "string"
+                                                    },
+                                                    "name": {
+                                                        "type": "string"
+                                                    },
+                                                    "parameters": {
+                                                        "type": "string"
+                                                    },
+                                                    "returnType": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "id",
+                                                    "operation",
+                                                    "name",
+                                                    "parameters",
+                                                    "returnType"
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "url",
+                                        "name",
+                                        "blobUrl",
+                                        "description",
+                                        "temporaryDownloadUrl",
+                                        "kind",
+                                        "createdAt",
+                                        "lastSeenAt",
+                                        "tags",
+                                        "usedInServices",
+                                        "consumer",
+                                        "generatedFromCodeProject",
+                                        "generatedFromFrontend",
+                                        "generatedFromService",
+                                        "endpoints"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/private-locations": {
+            "get": {
+                "tags": [
+                    "Private Locations"
+                ],
+                "summary": "Get all private locations for an organization",
+                "description": "Returns a list of all private locations configured for the organization",
+                "responses": {
+                    "200": {
+                        "description": "List of private locations retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "locations": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string"
+                                                    },
+                                                    "name": {
+                                                        "type": "string"
+                                                    },
+                                                    "type": {
+                                                        "type": "string"
+                                                    },
+                                                    "tags": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "name"
+                                                            ]
+                                                        }
+                                                    }
+                                                },
+                                                "required": [
+                                                    "id",
+                                                    "name",
+                                                    "type",
+                                                    "tags"
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "required": [
+                                        "locations"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Private Locations"
+                ],
+                "summary": "Create a new private location",
+                "description": "Creates a new private location for the organization",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "name"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Private location created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "location": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string"
+                                                },
+                                                "name": {
+                                                    "type": "string"
+                                                },
+                                                "type": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "id",
+                                                "name",
+                                                "type"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "location"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "name",
+                                        "message"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failed to create private location",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "name",
+                                        "message"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/private-locations/{id}": {
+            "get": {
+                "tags": [
+                    "Private Locations"
+                ],
+                "summary": "Get a private location by ID",
+                "description": "Returns details of a specific private location",
+                "parameters": [
+                    {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "name": "id",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Private location retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "location": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string"
+                                                },
+                                                "name": {
+                                                    "type": "string"
+                                                },
+                                                "type": {
+                                                    "type": "string"
+                                                },
+                                                "tags": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "name": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "name"
+                                                        ]
+                                                    }
+                                                }
+                                            },
+                                            "required": [
+                                                "id",
+                                                "name",
+                                                "type",
+                                                "tags"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "location"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Private location not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "name",
+                                        "message"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Private Locations"
+                ],
+                "summary": "Delete a private location",
+                "description": "Deletes a private location from the organization",
+                "parameters": [
+                    {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "name": "id",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Private location deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "required": [
+                                        "success"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Failed to delete private location",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "name",
+                                        "message"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Private location not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "name",
+                                        "message"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
