@@ -2177,12 +2177,198 @@ func (r GetScansIdResponse) StatusCode() int {
 type GetV1IntegrationsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *[]struct {
-		Id         string              `json:"id"`
-		Kind       string              `json:"kind"`
-		LocationId *openapi_types.UUID `json:"locationId"`
-		Name       string              `json:"name"`
-	}
+	JSON200      *[]GetV1Integrations_200_Item
+}
+type GetV1Integrations2000 struct {
+	Kind       GetV1Integrations2000Kind `json:"kind"`
+	Parameters struct {
+		AccessToken  string `json:"access_token"`
+		ClientSecret string `json:"client_secret"`
+		ClientToken  string `json:"client_token"`
+		Host         string `json:"host"`
+	} `json:"parameters"`
+}
+type GetV1Integrations2000Kind string
+type GetV1Integrations2001 struct {
+	Kind       GetV1Integrations2001Kind `json:"kind"`
+	Parameters struct {
+		AuthProviderX509CertUrl string `json:"auth_provider_x509_cert_url"`
+		AuthUri                 string `json:"auth_uri"`
+		ClientEmail             string `json:"client_email"`
+		ClientId                string `json:"client_id"`
+		ClientX509CertUrl       string `json:"client_x509_cert_url"`
+		PrivateKey              string `json:"private_key"`
+		PrivateKeyId            string `json:"private_key_id"`
+		ProjectId               string `json:"project_id"`
+		TokenUri                string `json:"token_uri"`
+		Type                    string `json:"type"`
+		UniverseDomain          string `json:"universe_domain"`
+	} `json:"parameters"`
+}
+type GetV1Integrations2001Kind string
+type GetV1Integrations2002 struct {
+	Kind       GetV1Integrations2002Kind `json:"kind"`
+	Parameters struct {
+		PrivKey string `json:"priv_key"`
+		PubKey  string `json:"pub_key"`
+	} `json:"parameters"`
+}
+type GetV1Integrations2002Kind string
+type GetV1Integrations2003 struct {
+	Kind       GetV1Integrations2003Kind `json:"kind"`
+	Parameters struct {
+		ClientId       string  `json:"client_id"`
+		ClientSecret   string  `json:"client_secret"`
+		SubscriptionId *string `json:"subscription_id,omitempty"`
+		TenantId       string  `json:"tenant_id"`
+	} `json:"parameters"`
+}
+type GetV1Integrations2003Kind string
+type GetV1Integrations2004 struct {
+	Kind       GetV1Integrations2004Kind `json:"kind"`
+	Parameters struct {
+		ApiKey      string `json:"api_key"`
+		InstanceUrl string `json:"instance_url"`
+	} `json:"parameters"`
+}
+type GetV1Integrations2004Kind string
+type GetV1Integrations2005 struct {
+	Kind       GetV1Integrations2005Kind `json:"kind"`
+	Parameters struct {
+		ApiKey         string  `json:"api_key"`
+		InstanceUrl    *string `json:"instance_url,omitempty"`
+		RepositoryName string  `json:"repository_name"`
+		Username       *string `json:"username,omitempty"`
+		WorkspaceName  string  `json:"workspace_name"`
+	} `json:"parameters"`
+}
+type GetV1Integrations2005Kind string
+type GetV1Integrations2006 struct {
+	Kind       GetV1Integrations2006Kind `json:"kind"`
+	Parameters struct {
+		ApiKey string `json:"api_key"`
+	} `json:"parameters"`
+}
+type GetV1Integrations2006Kind string
+type GetV1Integrations2007 struct {
+	Kind       GetV1Integrations2007Kind `json:"kind"`
+	Parameters map[string]interface{}    `json:"parameters"`
+}
+type GetV1Integrations2007Kind string
+type GetV1Integrations2008 struct {
+	Kind       GetV1Integrations2008Kind `json:"kind"`
+	Parameters map[string]interface{}    `json:"parameters"`
+}
+type GetV1Integrations2008Kind string
+type GetV1Integrations2009 struct {
+	Kind       GetV1Integrations2009Kind `json:"kind"`
+	Parameters struct {
+		AuthProviderX509CertUrl string `json:"auth_provider_x509_cert_url"`
+		AuthUri                 string `json:"auth_uri"`
+		ClientEmail             string `json:"client_email"`
+		ClientId                string `json:"client_id"`
+		ClientX509CertUrl       string `json:"client_x509_cert_url"`
+		PrivateKey              string `json:"private_key"`
+		PrivateKeyId            string `json:"private_key_id"`
+		ProjectId               string `json:"project_id"`
+		TokenUri                string `json:"token_uri"`
+		Type                    string `json:"type"`
+		UniverseDomain          string `json:"universe_domain"`
+	} `json:"parameters"`
+}
+type GetV1Integrations2009Kind string
+type GetV1Integrations20010 struct {
+	Kind       GetV1Integrations20010Kind `json:"kind"`
+	Parameters struct {
+		ApiKey string `json:"api_key"`
+	} `json:"parameters"`
+}
+type GetV1Integrations20010Kind string
+type GetV1Integrations20011 struct {
+	Kind       GetV1Integrations20011Kind `json:"kind"`
+	Parameters struct {
+		ApiKey      string  `json:"api_key"`
+		InstanceUrl *string `json:"instance_url,omitempty"`
+	} `json:"parameters"`
+}
+type GetV1Integrations20011Kind string
+type GetV1Integrations20012 struct {
+	Kind       GetV1Integrations20012Kind `json:"kind"`
+	Parameters struct {
+		AccessToken  string  `json:"access_token"`
+		ApiKey       string  `json:"api_key"`
+		InstanceUrl  string  `json:"instance_url"`
+		RefreshToken *string `json:"refresh_token,omitempty"`
+	} `json:"parameters"`
+}
+type GetV1Integrations20012Kind string
+type GetV1Integrations20013 struct {
+	Kind       GetV1Integrations20013Kind `json:"kind"`
+	Parameters struct {
+		AdminApiUrl string `json:"admin_api_url"`
+		ApiKey      string `json:"api_key"`
+	} `json:"parameters"`
+}
+type GetV1Integrations20013Kind string
+type GetV1Integrations20014 struct {
+	Kind       GetV1Integrations20014Kind `json:"kind"`
+	Parameters struct {
+		Region             GetV1Integrations20014ParametersRegion `json:"region"`
+		SystemAccountToken string                                 `json:"system_account_token"`
+	} `json:"parameters"`
+}
+type GetV1Integrations20014Kind string
+type GetV1Integrations20014ParametersRegion string
+type GetV1Integrations20015 struct {
+	Kind       GetV1Integrations20015Kind `json:"kind"`
+	Parameters struct {
+		Blacklist struct {
+			Namespaces *[]string `json:"namespaces,omitempty"`
+		} `json:"blacklist"`
+		Tags struct {
+			Labels     *[]string `json:"labels,omitempty"`
+			Namespaces *bool     `json:"namespaces,omitempty"`
+		} `json:"tags"`
+	} `json:"parameters"`
+}
+type GetV1Integrations20015Kind string
+type GetV1Integrations20016 struct {
+	Kind       GetV1Integrations20016Kind `json:"kind"`
+	Parameters struct {
+		ApiKey string `json:"api_key"`
+	} `json:"parameters"`
+}
+type GetV1Integrations20016Kind string
+type GetV1Integrations20017 struct {
+	Kind       GetV1Integrations20017Kind `json:"kind"`
+	Parameters map[string]interface{}     `json:"parameters"`
+}
+type GetV1Integrations20017Kind string
+type GetV1Integrations20018 struct {
+	Kind       GetV1Integrations20018Kind `json:"kind"`
+	Parameters map[string]interface{}     `json:"parameters"`
+}
+type GetV1Integrations20018Kind string
+type GetV1Integrations20019 struct {
+	Kind       GetV1Integrations20019Kind `json:"kind"`
+	Parameters map[string]interface{}     `json:"parameters"`
+}
+type GetV1Integrations20019Kind string
+type GetV1Integrations20020 struct {
+	Kind       GetV1Integrations20020Kind `json:"kind"`
+	Parameters struct {
+		ApiEndpoint  string `json:"api_endpoint"`
+		ClientId     string `json:"client_id"`
+		ClientSecret string `json:"client_secret"`
+		TokenUri     string `json:"token_uri"`
+	} `json:"parameters"`
+}
+type GetV1Integrations20020Kind string
+type GetV1Integrations_200_Item struct {
+	Id         openapi_types.UUID  `json:"id"`
+	LocationId *openapi_types.UUID `json:"locationId"`
+	Name       string              `json:"name"`
+	union      json.RawMessage
 }
 
 // Status returns HTTPResponse.Status
@@ -2205,6 +2391,7 @@ type PostV1IntegrationsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *struct {
+		Id         openapi_types.UUID  `json:"id"`
 		LocationId *openapi_types.UUID `json:"locationId"`
 		Name       string              `json:"name"`
 		union      json.RawMessage
@@ -2460,6 +2647,7 @@ type GetV1IntegrationsIdResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *struct {
+		Id         openapi_types.UUID  `json:"id"`
 		LocationId *openapi_types.UUID `json:"locationId"`
 		Name       string              `json:"name"`
 		union      json.RawMessage
@@ -2678,15 +2866,10 @@ func (r GetV1IntegrationsIdResponse) StatusCode() int {
 type GetV1LocationsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *struct {
-		Locations []struct {
-			Id   string `json:"id"`
-			Name string `json:"name"`
-			Tags []struct {
-				Name string `json:"name"`
-			} `json:"tags"`
-			Type string `json:"type"`
-		} `json:"locations"`
+	JSON200      *[]struct {
+		Id   openapi_types.UUID `json:"id"`
+		Name string             `json:"name"`
+		Type string             `json:"type"`
 	}
 }
 
@@ -2710,11 +2893,9 @@ type PostV1LocationsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *struct {
-		Location struct {
-			Id   string `json:"id"`
-			Name string `json:"name"`
-			Type string `json:"type"`
-		} `json:"location"`
+		Id   openapi_types.UUID `json:"id"`
+		Name string             `json:"name"`
+		Type string             `json:"type"`
 	}
 	JSON400 *struct {
 		Message string `json:"message"`
@@ -2778,14 +2959,9 @@ type GetV1LocationsIdResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *struct {
-		Location struct {
-			Id   string `json:"id"`
-			Name string `json:"name"`
-			Tags []struct {
-				Name string `json:"name"`
-			} `json:"tags"`
-			Type string `json:"type"`
-		} `json:"location"`
+		Id   openapi_types.UUID `json:"id"`
+		Name string             `json:"name"`
+		Type string             `json:"type"`
 	}
 	JSON404 *struct {
 		Message string `json:"message"`
@@ -3645,12 +3821,7 @@ func ParseGetV1IntegrationsResponse(rsp *http.Response) (*GetV1IntegrationsRespo
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest []struct {
-			Id         string              `json:"id"`
-			Kind       string              `json:"kind"`
-			LocationId *openapi_types.UUID `json:"locationId"`
-			Name       string              `json:"name"`
-		}
+		var dest []GetV1Integrations_200_Item
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -3677,6 +3848,7 @@ func ParsePostV1IntegrationsResponse(rsp *http.Response) (*PostV1IntegrationsRes
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest struct {
+			Id         openapi_types.UUID  `json:"id"`
 			LocationId *openapi_types.UUID `json:"locationId"`
 			Name       string              `json:"name"`
 			union      json.RawMessage
@@ -3779,6 +3951,7 @@ func ParseGetV1IntegrationsIdResponse(rsp *http.Response) (*GetV1IntegrationsIdR
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest struct {
+			Id         openapi_types.UUID  `json:"id"`
 			LocationId *openapi_types.UUID `json:"locationId"`
 			Name       string              `json:"name"`
 			union      json.RawMessage
@@ -3828,15 +4001,10 @@ func ParseGetV1LocationsResponse(rsp *http.Response) (*GetV1LocationsResponse, e
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest struct {
-			Locations []struct {
-				Id   string `json:"id"`
-				Name string `json:"name"`
-				Tags []struct {
-					Name string `json:"name"`
-				} `json:"tags"`
-				Type string `json:"type"`
-			} `json:"locations"`
+		var dest []struct {
+			Id   openapi_types.UUID `json:"id"`
+			Name string             `json:"name"`
+			Type string             `json:"type"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
@@ -3864,11 +4032,9 @@ func ParsePostV1LocationsResponse(rsp *http.Response) (*PostV1LocationsResponse,
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest struct {
-			Location struct {
-				Id   string `json:"id"`
-				Name string `json:"name"`
-				Type string `json:"type"`
-			} `json:"location"`
+			Id   openapi_types.UUID `json:"id"`
+			Name string             `json:"name"`
+			Type string             `json:"type"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
@@ -3964,14 +4130,9 @@ func ParseGetV1LocationsIdResponse(rsp *http.Response) (*GetV1LocationsIdRespons
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest struct {
-			Location struct {
-				Id   string `json:"id"`
-				Name string `json:"name"`
-				Tags []struct {
-					Name string `json:"name"`
-				} `json:"tags"`
-				Type string `json:"type"`
-			} `json:"location"`
+			Id   openapi_types.UUID `json:"id"`
+			Name string             `json:"name"`
+			Type string             `json:"type"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
