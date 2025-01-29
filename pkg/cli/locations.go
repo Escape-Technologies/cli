@@ -20,7 +20,7 @@ var locationsListCmd = &cobra.Command{
 	Use:   "list",
 	Short: "List locations",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		client, err := initClient()
+		client, err := api.NewAPIClient()
 		if err != nil {
 			return err
 		}
