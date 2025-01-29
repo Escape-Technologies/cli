@@ -1,0 +1,5 @@
+{
+    "yaml.schemas": {
+        "assets/oapi-configuration-schema.json": "pkg/api/config.yaml"
+    }
+}
