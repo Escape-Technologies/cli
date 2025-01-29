@@ -9,7 +9,7 @@ import (
 
 func main() {
 	if err := cli.Run(); err != nil {
-		log.Error("Error running cli: %w", err)
+		log.Error("Error running cli: %s", err.Error())
 		os.Exit(1)
 	}
 }
