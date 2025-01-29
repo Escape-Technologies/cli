@@ -7,6 +7,7 @@ import (
 	"os"
 
 	"github.com/Escape-Technologies/cli/pkg/api"
+	"github.com/Escape-Technologies/cli/pkg/log"
 	"github.com/spf13/cobra"
 	"gopkg.in/yaml.v3"
 )
@@ -34,12 +35,66 @@ var locationsListCmd = &cobra.Command{
 		}
 		switch output {
 		case outputJSON:
-			json.NewEncoder(os.Stdout).Encode(locations.JSON200.Locations)
+			json.NewEncoder(os.Stdout).Encode(locations.JSON200)
 		case outputYAML:
-			yaml.NewEncoder(os.Stdout).Encode(locations.JSON200.Locations)
+			yaml.NewEncoder(os.Stdout).Encode(locations.JSON200)
 		default:
-			for _, location := range locations.JSON200.Locations {
-				fmt.Println(location.Name)
+			if locations.JSON200 == nil {
+				fmt.Println("No locations found")
+			} else {
+				for _, location := range *locations.JSON200 {
+					fmt.Println(location.Name)
+				}
+			}
+		}
+		return nil
+	},
+}
+
+var locationsDeleteCmd = &cobra.Command{
+	Use:   "del",
+	Short: "Delete location",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		if len(args) == 0 {
+			return fmt.Errorf("location id is required")
+		}
+		log.Info("Deleting location %s", args[0])
+		client, err := api.NewAPIClient()
+		if err != nil {
+			return err
+		}
+		res, err := client.DeleteV1LocationsId(context.Background(), args[0])
+		if err != nil {
+			return err
+		}
+		deleted, err := api.ParseDeleteV1LocationsIdResponse(res)
+		if err != nil {
+			return err
+		}
+		switch output {
+		case outputJSON:
+			if deleted.JSON200 != nil {
+				json.NewEncoder(os.Stdout).Encode(deleted.JSON200)
+			} else if deleted.JSON404 != nil {
+				json.NewEncoder(os.Stdout).Encode(deleted.JSON404)
+			} else {
+				json.NewEncoder(os.Stdout).Encode(deleted.JSON400)
+			}
+		case outputYAML:
+			if deleted.JSON200 != nil {
+				yaml.NewEncoder(os.Stdout).Encode(deleted.JSON200)
+			} else if deleted.JSON404 != nil {
+				yaml.NewEncoder(os.Stdout).Encode(deleted.JSON404)
+			} else {
+				yaml.NewEncoder(os.Stdout).Encode(deleted.JSON400)
+			}
+		default:
+			if deleted.JSON200 != nil {
+				fmt.Println("Location deleted")
+			} else if deleted.JSON404 != nil {
+				fmt.Println("Location not found")
+			} else {
+				fmt.Println("Unknown error")
 			}
 		}
 		return nil

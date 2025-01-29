@@ -9,6 +9,7 @@
 escape-cli
 vendor/
 go.work
+main
 
 # Env
 .env
