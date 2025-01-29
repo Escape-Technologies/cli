@@ -225,6 +225,7 @@ type GetOrganizationIdApplicationsSearchParams struct {
 
 // PostV1IntegrationsJSONBody defines parameters for PostV1Integrations.
 type PostV1IntegrationsJSONBody struct {
+	Kind       string              `json:"kind"`
 	LocationId *openapi_types.UUID `json:"locationId"`
 	Name       string              `json:"name"`
 	union      json.RawMessage
@@ -2366,6 +2367,7 @@ type GetV1Integrations20020 struct {
 type GetV1Integrations20020Kind string
 type GetV1Integrations_200_Item struct {
 	Id         openapi_types.UUID  `json:"id"`
+	Kind       string              `json:"kind"`
 	LocationId *openapi_types.UUID `json:"locationId"`
 	Name       string              `json:"name"`
 	union      json.RawMessage
@@ -2392,6 +2394,7 @@ type PostV1IntegrationsResponse struct {
 	HTTPResponse *http.Response
 	JSON200      *struct {
 		Id         openapi_types.UUID  `json:"id"`
+		Kind       string              `json:"kind"`
 		LocationId *openapi_types.UUID `json:"locationId"`
 		Name       string              `json:"name"`
 		union      json.RawMessage
@@ -2648,6 +2651,7 @@ type GetV1IntegrationsIdResponse struct {
 	HTTPResponse *http.Response
 	JSON200      *struct {
 		Id         openapi_types.UUID  `json:"id"`
+		Kind       string              `json:"kind"`
 		LocationId *openapi_types.UUID `json:"locationId"`
 		Name       string              `json:"name"`
 		union      json.RawMessage
@@ -3849,6 +3853,7 @@ func ParsePostV1IntegrationsResponse(rsp *http.Response) (*PostV1IntegrationsRes
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest struct {
 			Id         openapi_types.UUID  `json:"id"`
+			Kind       string              `json:"kind"`
 			LocationId *openapi_types.UUID `json:"locationId"`
 			Name       string              `json:"name"`
 			union      json.RawMessage
@@ -3952,6 +3957,7 @@ func ParseGetV1IntegrationsIdResponse(rsp *http.Response) (*GetV1IntegrationsIdR
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest struct {
 			Id         openapi_types.UUID  `json:"id"`
+			Kind       string              `json:"kind"`
 			LocationId *openapi_types.UUID `json:"locationId"`
 			Name       string              `json:"name"`
 			union      json.RawMessage
