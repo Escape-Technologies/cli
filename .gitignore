@@ -1,0 +1,14 @@
+# Go
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+escape-cli
+vendor/
+go.work
+
+# Env
+.env
