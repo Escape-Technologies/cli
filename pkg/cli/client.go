@@ -23,6 +23,7 @@ func initClient() (*api.Client, error) {
 	return api.NewClient(
 		server,
 		api.WithRequestEditorFn(func(ctx context.Context, req *http.Request) error {
+			log.Trace("Sending request %s %s", req.Method, req.URL)
 			req.Header.Set("Authorization", fmt.Sprintf("Key %s", key))
 			return nil
 		}),
