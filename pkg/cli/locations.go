@@ -64,6 +64,7 @@ var locationsDeleteCmd = &cobra.Command{
 			return err
 		}
 		res, err := client.DeleteV1LocationsId(context.Background(), args[0])
+		log.Debug("Deleting response %s", res.Status)
 		if err != nil {
 			return err
 		}
@@ -71,32 +72,26 @@ var locationsDeleteCmd = &cobra.Command{
 		if err != nil {
 			return err
 		}
-		switch output {
-		case outputJSON:
-			if deleted.JSON200 != nil {
-				json.NewEncoder(os.Stdout).Encode(deleted.JSON200)
-			} else if deleted.JSON404 != nil {
-				json.NewEncoder(os.Stdout).Encode(deleted.JSON404)
-			} else {
-				json.NewEncoder(os.Stdout).Encode(deleted.JSON400)
-			}
-		case outputYAML:
-			if deleted.JSON200 != nil {
-				yaml.NewEncoder(os.Stdout).Encode(deleted.JSON200)
-			} else if deleted.JSON404 != nil {
-				yaml.NewEncoder(os.Stdout).Encode(deleted.JSON404)
-			} else {
-				yaml.NewEncoder(os.Stdout).Encode(deleted.JSON400)
-			}
-		default:
-			if deleted.JSON200 != nil {
-				fmt.Println("Location deleted")
-			} else if deleted.JSON404 != nil {
-				fmt.Println("Location not found")
-			} else {
-				fmt.Println("Unknown error")
-			}
+		ok := true
+		var data interface{}
+		if deleted.JSON200 != nil {
+			data = deleted.JSON200
+		} else if deleted.JSON404 != nil {
+			ok = false
+			data = deleted.JSON404
+			log.Info("Location %s not found: %s", args[0], deleted.JSON404.Message)
+		} else {
+			ok = false
+			data = deleted.JSON400
+			log.Info("Error deleting location %s: %s", args[0], deleted.JSON400.Message)
 		}
+		print(data, func() {
+			if ok {
+				fmt.Println("Location deleted")
+			} else {
+				fmt.Println("unable to delete location")
+			}
+		})
 		return nil
 	},
 }

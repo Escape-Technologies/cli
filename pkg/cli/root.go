@@ -1,11 +1,14 @@
 package cli
 
 import (
+	"encoding/json"
 	"fmt"
+	"os"
 
 	"github.com/Escape-Technologies/cli/pkg/log"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
+	"gopkg.in/yaml.v3"
 )
 
 type outputT string
@@ -17,6 +20,17 @@ const (
 )
 
 var output outputT = outputPretty
+
+func print(data any, pretty func()) {
+	switch output {
+	case outputJSON:
+		json.NewEncoder(os.Stdout).Encode(data)
+	case outputYAML:
+		yaml.NewEncoder(os.Stdout).Encode(data)
+	default:
+		pretty()
+	}
+}
 
 func Run() error {
 	var verbose bool
@@ -60,7 +74,10 @@ func Run() error {
 	locationsCmd.AddCommand(locationsDeleteCmd)
 
 	rootCmd.AddCommand(integrationsCmd)
-	integrationsCmd.AddCommand(integrationsListCmd)
+	integrationsCmd.AddCommand(integrationsAkamaiCmd)
+	integrationsAkamaiCmd.AddCommand(integrationsAkamaiList)
+	integrationsCmd.AddCommand(integrationsKubernetesCmd)
+	integrationsKubernetesCmd.AddCommand(integrationsKubernetesList)
 
 	return rootCmd.Execute()
 }
