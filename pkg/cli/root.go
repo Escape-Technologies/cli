@@ -57,6 +57,10 @@ func Run() error {
 
 	rootCmd.AddCommand(locationsCmd)
 	locationsCmd.AddCommand(locationsListCmd)
+	locationsCmd.AddCommand(locationsDeleteCmd)
+
+	rootCmd.AddCommand(integrationsCmd)
+	integrationsCmd.AddCommand(integrationsListCmd)
 
 	return rootCmd.Execute()
 }
