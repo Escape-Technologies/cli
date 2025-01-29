@@ -14,8 +14,10 @@ var integrationsKubernetesCmd = &cobra.Command{
 }
 
 var integrationsKubernetesList = &cobra.Command{
-	Use:   "list",
-	Short: "List integrations",
+	Use:     "list",
+	Aliases: []string{"ls"},
+	Args:    cobra.ExactArgs(0),
+	Short:   "List integrations",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		client, err := api.NewAPIClient()
 		if err != nil {
@@ -37,6 +39,38 @@ var integrationsKubernetesList = &cobra.Command{
 				}
 			},
 		)
+		return nil
+	},
+}
+
+var integrationsKubernetesDelete = &cobra.Command{
+	Use:     "delete",
+	Aliases: []string{"del"},
+	Args:    cobra.ExactArgs(1),
+	Short:   "Delete integration given an id",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		id := args[0]
+		client, err := api.NewAPIClient()
+		if err != nil {
+			return err
+		}
+		res, err := client.DeleteV1IntegrationsKubernetesIdWithResponse(context.Background(), id)
+		if err != nil {
+			return err
+		}
+		if res.JSON200 != nil {
+			print(res.JSON200, func() {
+				fmt.Println("Integration deleted")
+			})
+		} else if res.JSON404 != nil {
+			print(res.JSON404, func() {
+				fmt.Println("Integration not found")
+			})
+		} else if res.JSON500 != nil {
+			print(res.JSON500, func() {
+				fmt.Println("Error deleting integration", res.JSON500.Message)
+			})
+		}
 		return nil
 	},
 }

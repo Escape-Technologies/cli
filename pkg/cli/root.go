@@ -78,6 +78,7 @@ func Run() error {
 	integrationsAkamaiCmd.AddCommand(integrationsAkamaiList)
 	integrationsCmd.AddCommand(integrationsKubernetesCmd)
 	integrationsKubernetesCmd.AddCommand(integrationsKubernetesList)
+	integrationsKubernetesCmd.AddCommand(integrationsKubernetesDelete)
 
 	return rootCmd.Execute()
 }
