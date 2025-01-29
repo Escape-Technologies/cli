@@ -24,11 +24,11 @@ var locationsListCmd = &cobra.Command{
 		if err != nil {
 			return err
 		}
-		res, err := client.GetPrivateLocations(context.Background())
+		res, err := client.GetV1Locations(context.Background())
 		if err != nil {
 			return err
 		}
-		locations, err := api.ParseGetPrivateLocationsResponse(res)
+		locations, err := api.ParseGetV1LocationsResponse(res)
 		if err != nil {
 			return err
 		}
