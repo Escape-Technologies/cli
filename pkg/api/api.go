@@ -3,7 +3,6 @@ package api
 import (
 	"context"
 	"fmt"
-	"io"
 	"net/http"
 	"os"
 
@@ -22,14 +21,6 @@ func NewAPIClient(opts ...ClientOption) (*ClientWithResponses, error) {
 	}
 	opts = append(opts, WithRequestEditorFn(func(ctx context.Context, req *http.Request) error {
 		log.Debug("Sending request %s %s", req.Method, req.URL)
-		if req.Body != nil {
-			clone := req.Clone(context.Background())
-			body, err := io.ReadAll(clone.Body)
-			if err != nil {
-				return err
-			}
-			log.Trace("Body %s", string(body))
-		}
 		req.Header.Set("Authorization", fmt.Sprintf("Key %s", key))
 		return nil
 	}))
