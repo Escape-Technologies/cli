@@ -37,4 +37,6 @@ git tag -a "v${new_version}" -m "v${new_version}"
 git push
 git push --tags
 
+GOPROXY=proxy.golang.org go list -m "github.com/Escape-Technologies/cli@v${new_version}"
+
 echo "Done !"
