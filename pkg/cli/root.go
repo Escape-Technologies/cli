@@ -63,22 +63,28 @@ func Run() error {
 			log.Trace("Main cli done, exiting")
 		},
 	}
-
+	// Flags
 	rootCmd.PersistentFlags().BoolVarP(&verbose, "verbose", "v", false, "Enable verbose output")
 	rootCmd.PersistentFlags().StringVarP(&outputStr, "output", "o", "pretty", "Output format (pretty|json|yaml)")
 
+	// Version
 	rootCmd.AddCommand(versionCmd)
 
+	// Locations
 	rootCmd.AddCommand(locationsCmd)
 	locationsCmd.AddCommand(locationsListCmd)
 	locationsCmd.AddCommand(locationsDeleteCmd)
 
+	// Integrations
 	rootCmd.AddCommand(integrationsCmd)
 	integrationsCmd.AddCommand(integrationsAkamaiCmd)
 	integrationsAkamaiCmd.AddCommand(integrationsAkamaiList)
 	integrationsCmd.AddCommand(integrationsKubernetesCmd)
 	integrationsKubernetesCmd.AddCommand(integrationsKubernetesList)
 	integrationsKubernetesCmd.AddCommand(integrationsKubernetesDelete)
+
+	// Scan
+	rootCmd.AddCommand(startScanCmd)
 
 	return rootCmd.Execute()
 }
