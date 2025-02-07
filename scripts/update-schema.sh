@@ -9,4 +9,3 @@ curl -s https://public.escape.tech/v1/openapi.json > $PROJECT_ROOT/assets/public
 
 # Generate the code binding on openAPI schema
 go generate $PROJECT_ROOT/pkg/api/...
-
