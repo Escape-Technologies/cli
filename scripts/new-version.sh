@@ -1,6 +1,10 @@
 #!/bin/bash
 
-old_version=$(cat version.txt)
+# Retrieve project root directory
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
+
+old_version=$(cat $PROJECT_ROOT/version.txt)
 SEMVER_REGEX="^([0-9]+)\.([0-9]+)\.([0-9]+)$"
 
 if [[ "$old_version" =~ $SEMVER_REGEX ]]; then
@@ -29,9 +33,9 @@ esac
 new_version="${_major}.${_minor}.${_patch}"
 echo "Bump done: $old_version -> $new_version"
 
-echo "${new_version}" > version.txt
+echo "${new_version}" > $PROJECT_ROOT/version.txt
 
-git add version.txt
+git add $PROJECT_ROOT/version.txt
 git commit -m "v${new_version}"
 git tag -a "v${new_version}" -m "v${new_version}"
 git push
