@@ -18,7 +18,7 @@ builds:
       - -s -w -X github.com/Escape-Technologies/cli/pkg/cli.version={{.Version}} -X github.com/Escape-Technologies/cli/pkg/cli.commit={{.ShortCommit}}
 dockers:
   - image_templates:
-      - "escapetech/app-cli:{{ .Version }}-amd64"
+      - "escapetech/app-cli:{{ .Version }}"
       - "escapetech/app-cli:latest-amd64"
     dockerfile: Dockerfile
     goarch: amd64
@@ -31,7 +31,7 @@ dockers:
       - "--label=org.opencontainers.image.version={{.Version}}"
       - "--label=org.opencontainers.image.licenses=Apache-2.0"
   - image_templates:
-      - "escapetech/app-cli:{{ .Version }}-arm64"
+      - "escapetech/app-cli:{{ .Version }}"
       - "escapetech/app-cli:latest-arm64"
     dockerfile: Dockerfile
     goarch: arm64
