@@ -23,6 +23,7 @@ dockers:
     dockerfile: Dockerfile
     goarch: amd64
     build_flag_templates: 
+      - "--pull"
       - "--platform=linux/amd64"
       - "--label=org.opencontainers.image.created={{.Date}}"
       - "--label=org.opencontainers.image.title=app-cli"
@@ -35,6 +36,7 @@ dockers:
     dockerfile: Dockerfile
     goarch: arm64
     build_flag_templates: 
+    - "--pull"
     - "--platform=linux/arm64"
     - "--label=org.opencontainers.image.created={{.Date}}"
     - "--label=org.opencontainers.image.title=app-cli"
