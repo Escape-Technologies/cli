@@ -22,7 +22,6 @@ dockers:
       - "escapetech/app-cli:latest-amd64"
     dockerfile: Dockerfile
     goarch: amd64
-    use: buildx
     build_flag_templates: 
       - "--platform=linux/amd64"
       - "--label=org.opencontainers.image.created={{.Date}}"
@@ -35,7 +34,6 @@ dockers:
       - "escapetech/app-cli:latest-arm64"
     dockerfile: Dockerfile
     goarch: arm64
-    use: buildx
     build_flag_templates: 
     - "--platform=linux/arm64"
     - "--label=org.opencontainers.image.created={{.Date}}"
