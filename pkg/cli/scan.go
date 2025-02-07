@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"os"
 
 	"github.com/Escape-Technologies/cli/pkg/api"
 	"github.com/google/uuid"
@@ -66,6 +67,7 @@ var startScanCmd = &cobra.Command{
 				fmt.Printf("%s\n\n", responseMessage["message"])
 			},
 		)
-		return nil
+		os.Exit(1)
+		return err
 	},
 }
