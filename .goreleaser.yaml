@@ -16,6 +16,18 @@ builds:
     main: ./cmd/main.go
     ldflags:
       - -s -w -X github.com/Escape-Technologies/cli/pkg/cli.version={{.Version}} -X github.com/Escape-Technologies/cli/pkg/cli.commit={{.ShortCommit}}
+dockers:
+  - image_templates:
+      - "escapetech/escape-cli:{{ .Version }}"
+      - "escapetech/escape-cli:latest"
+    dockerfile: Dockerfile
+    build_flag_templates:
+      - "--platform=linux/amd64"
+      - "--label=org.opencontainers.image.created={{.Date}}"
+      - "--label=org.opencontainers.image.title=escape-cli"
+      - "--label=org.opencontainers.image.revision={{.FullCommit}}"
+      - "--label=org.opencontainers.image.version={{.Version}}"
+      - "--label=org.opencontainers.image.licenses=Apache-2.0"
 
 checksum:
   algorithm: sha256
