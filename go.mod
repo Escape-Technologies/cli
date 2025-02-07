@@ -5,6 +5,7 @@ go 1.22.5
 toolchain go1.23.4
 
 require (
+	github.com/gofrs/uuid/v5 v5.0.0
 	github.com/oapi-codegen/oapi-codegen/v2 v2.4.1
 	github.com/oapi-codegen/runtime v1.1.1
 	github.com/sirupsen/logrus v1.9.3
