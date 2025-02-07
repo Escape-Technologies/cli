@@ -13,10 +13,10 @@ import (
 )
 
 var startScanCmd = &cobra.Command{
-	Use:     "scan [applicationId]",
+	Use:     "start-scan [applicationId]",
 	Short:   "Trigger a scan on an application",
 	Args:    cobra.ExactArgs(1),
-	Example: "escape-cli scan 123e4567-e89b-12d3-a456-426614174001",
+	Example: "escape-cli start-scan 123e4567-e89b-12d3-a456-426614174001",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		applicationID := args[0]
 		fmt.Printf("Triggering scan for application %s\n\n", applicationID)

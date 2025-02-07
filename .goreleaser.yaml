@@ -20,6 +20,7 @@ dockers:
   - image_templates:
       - "escapetech/app-cli:{{ .Version }}-amd64"
     dockerfile: Dockerfile
+    skip_push: true
     goarch: amd64
     build_flag_templates: 
       - "--pull"
@@ -32,6 +33,7 @@ dockers:
   - image_templates:
       - "escapetech/app-cli:{{ .Version }}-arm64"
     dockerfile: Dockerfile
+    skip_push: true
     goarch: arm64
     build_flag_templates: 
     - "--pull"
@@ -44,6 +46,12 @@ dockers:
 
 docker_manifests:
   - name_template: "escapetech/app-cli:latest"
+    skip_push: false
+    image_templates:
+      - escapetech/app-cli:{{ .Version }}-amd64
+      - escapetech/app-cli:{{ .Version }}-arm64
+  - name_template: "escapetech/app-cli:{{ .Version }}"
+    skip_push: false
     image_templates:
       - escapetech/app-cli:{{ .Version }}-amd64
       - escapetech/app-cli:{{ .Version }}-arm64
