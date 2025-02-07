@@ -18,16 +18,25 @@ builds:
       - -s -w -X github.com/Escape-Technologies/cli/pkg/cli.version={{.Version}} -X github.com/Escape-Technologies/cli/pkg/cli.commit={{.ShortCommit}}
 dockers:
   - image_templates:
-      - "escapetech/app-cli:{{ .Version }}"
-      - "escapetech/app-cli:latest"
+      - "escapetech/app-cli:{{ .Version }}-amd64"
+      - "escapetech/app-cli:latest-amd64"
     dockerfile: Dockerfile
-    build_flag_templates:
-      - "--platform=linux/amd64"
+    goarch: amd64
+    use: buildx
+    build_flag_templates: &build_flags
+      - "--platform=linux/{{ .Arch }}"
       - "--label=org.opencontainers.image.created={{.Date}}"
       - "--label=org.opencontainers.image.title=app-cli"
       - "--label=org.opencontainers.image.revision={{.FullCommit}}"
       - "--label=org.opencontainers.image.version={{.Version}}"
       - "--label=org.opencontainers.image.licenses=Apache-2.0"
+  - image_templates:
+      - "escapetech/app-cli:{{ .Version }}-arm64"
+      - "escapetech/app-cli:latest-arm64"
+    dockerfile: Dockerfile
+    goarch: arm64
+    use: buildx
+    build_flag_templates: *build_flags
 
 checksum:
   algorithm: sha256
