@@ -23,8 +23,8 @@ dockers:
     dockerfile: Dockerfile
     goarch: amd64
     use: buildx
-    build_flag_templates: &build_flags
-      - "--platform=linux/{{ .Arch }}"
+    build_flag_templates: 
+      - "--platform=linux/amd64"
       - "--label=org.opencontainers.image.created={{.Date}}"
       - "--label=org.opencontainers.image.title=app-cli"
       - "--label=org.opencontainers.image.revision={{.FullCommit}}"
@@ -36,7 +36,13 @@ dockers:
     dockerfile: Dockerfile
     goarch: arm64
     use: buildx
-    build_flag_templates: *build_flags
+    build_flag_templates: 
+    - "--platform=linux/arm64"
+    - "--label=org.opencontainers.image.created={{.Date}}"
+    - "--label=org.opencontainers.image.title=app-cli"
+    - "--label=org.opencontainers.image.revision={{.FullCommit}}"
+    - "--label=org.opencontainers.image.version={{.Version}}"
+    - "--label=org.opencontainers.image.licenses=Apache-2.0"
 
 checksum:
   algorithm: sha256
