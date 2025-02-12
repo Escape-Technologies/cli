@@ -1,7 +1,6 @@
 package cli
 
 import (
-	"context"
 	"fmt"
 
 	"github.com/Escape-Technologies/cli/pkg/api"
@@ -21,7 +20,7 @@ var integrationsAkamaiList = &cobra.Command{
 		if err != nil {
 			return err
 		}
-		integrations, err := client.GetV1IntegrationsAkamaiWithResponse(context.Background())
+		integrations, err := client.GetV1IntegrationsAkamaiWithResponse(cmd.Context())
 		if err != nil {
 			return err
 		}

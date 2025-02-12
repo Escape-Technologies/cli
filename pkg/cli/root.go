@@ -21,6 +21,12 @@ const (
 
 var output outputT = outputPretty
 
+var unknowError = struct {
+	Error string `json:"error"`
+}{
+	Error: "An unknown error occurred",
+}
+
 func print(data any, pretty func()) {
 	switch output {
 	case outputJSON:
@@ -74,6 +80,9 @@ func Run() error {
 	rootCmd.AddCommand(locationsCmd)
 	locationsCmd.AddCommand(locationsListCmd)
 	locationsCmd.AddCommand(locationsDeleteCmd)
+	locationsCmd.AddCommand(locationsGetCmd)
+	locationsCmd.AddCommand(locationsCreateCmd)
+	locationsCmd.AddCommand(locationsUpsertCmd)
 
 	// Integrations
 	rootCmd.AddCommand(integrationsCmd)

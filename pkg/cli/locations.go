@@ -1,97 +1,205 @@
 package cli
 
 import (
-	"context"
-	"encoding/json"
 	"fmt"
-	"os"
+	"strings"
 
 	"github.com/Escape-Technologies/cli/pkg/api"
 	"github.com/Escape-Technologies/cli/pkg/log"
+	"github.com/google/uuid"
 	"github.com/spf13/cobra"
-	"gopkg.in/yaml.v3"
 )
 
 var locationsCmd = &cobra.Command{
-	Use:   "locations",
-	Short: "Locations commands",
+	Use:     "locations",
+	Aliases: []string{"loc"},
+	Short:   "Locations commands",
 }
 
 var locationsListCmd = &cobra.Command{
-	Use:   "list",
-	Short: "List locations",
+	Use:     "list",
+	Aliases: []string{"ls"},
+	Short:   "List locations",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		client, err := api.NewAPIClient()
 		if err != nil {
 			return err
 		}
-		res, err := client.GetV1Locations(context.Background())
+		locations, err := client.ListLocationsWithResponse(cmd.Context())
 		if err != nil {
 			return err
 		}
-		locations, err := api.ParseGetV1LocationsResponse(res)
-		if err != nil {
-			return err
-		}
-		switch output {
-		case outputJSON:
-			json.NewEncoder(os.Stdout).Encode(locations.JSON200)
-		case outputYAML:
-			yaml.NewEncoder(os.Stdout).Encode(locations.JSON200)
-		default:
+		print(locations.JSON200, func() {
 			if locations.JSON200 == nil {
 				fmt.Println("No locations found")
 			} else {
 				for _, location := range *locations.JSON200 {
-					fmt.Println(location.Name)
+					size := len(*location.Type)
+					fmt.Printf("%s%s%s\n", *location.Type, strings.Repeat(" ", 10-size), *location.Name)
 				}
 			}
-		}
+		})
 		return nil
 	},
 }
 
 var locationsDeleteCmd = &cobra.Command{
-	Use:   "del",
-	Short: "Delete location",
+	Use:     "del",
+	Aliases: []string{"delete"},
+	Args:    cobra.ExactArgs(1),
+	Short:   "Delete location",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		if len(args) == 0 {
-			return fmt.Errorf("location id is required")
+		idString := args[0]
+		id, err := uuid.Parse(idString)
+		if err != nil {
+			return fmt.Errorf("invalid UUID format: %w", err)
 		}
 		log.Info("Deleting location %s", args[0])
 		client, err := api.NewAPIClient()
 		if err != nil {
 			return err
 		}
-		res, err := client.DeleteV1LocationsId(context.Background(), args[0])
-		log.Debug("Deleting response %s", res.Status)
+		deleted, err := client.DeleteLocationWithResponse(cmd.Context(), id)
 		if err != nil {
 			return err
 		}
-		deleted, err := api.ParseDeleteV1LocationsIdResponse(res)
-		if err != nil {
-			return err
-		}
-		ok := true
-		var data interface{}
 		if deleted.JSON200 != nil {
-			data = deleted.JSON200
-		} else if deleted.JSON404 != nil {
-			ok = false
-			data = deleted.JSON404
-			log.Info("Location %s not found: %s", args[0], deleted.JSON404.Message)
-		} else {
-			ok = false
-			data = deleted.JSON400
-			log.Info("Error deleting location %s: %s", args[0], deleted.JSON400.Message)
-		}
-		print(data, func() {
-			if ok {
+			print(deleted.JSON200, func() {
 				fmt.Println("Location deleted")
-			} else {
-				fmt.Println("unable to delete location")
-			}
+			})
+		} else if deleted.JSON404 != nil {
+			print(deleted.JSON404, func() {
+				fmt.Printf("Location %s not found: %s", idString, deleted.JSON404.Message)
+			})
+		} else if deleted.JSON400 != nil {
+			print(deleted.JSON400, func() {
+				fmt.Printf("Unable to delete location: %s", deleted.JSON400.Message)
+			})
+		} else {
+			print(unknowError, func() {
+				fmt.Printf("Unable to delete location: Unknown error")
+			})
+		}
+		return nil
+	},
+}
+
+var locationsGetCmd = &cobra.Command{
+	Use:     "get",
+	Aliases: []string{"read"},
+	Args:    cobra.ExactArgs(1),
+	Short:   "Get location",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		idString := args[0]
+		id, err := uuid.Parse(idString)
+		if err != nil {
+			return fmt.Errorf("invalid UUID format: %w", err)
+		}
+		log.Info("Getting location %s", args[0])
+		client, err := api.NewAPIClient()
+		if err != nil {
+			return err
+		}
+		location, err := client.GetLocationWithResponse(cmd.Context(), id)
+		if err != nil {
+			return err
+		}
+		if location.JSON200 != nil {
+			print(location.JSON200, func() {
+				fmt.Println("Location:", *location.JSON200.Name)
+				fmt.Println("Type:", *location.JSON200.Type)
+				fmt.Println("Id:", *location.JSON200.Id)
+			})
+		} else if location.JSON404 != nil {
+			print(location.JSON404, func() {
+				fmt.Printf("Location %s not found: %s", idString, location.JSON404.Message)
+			})
+		} else {
+			print(unknowError, func() {
+				fmt.Printf("Unable to get location: Unknown error")
+			})
+		}
+		return nil
+	},
+}
+
+var locationsCreateCmd = &cobra.Command{
+	Use:     "create",
+	Aliases: []string{"new"},
+	Args:    cobra.ExactArgs(1),
+	Short:   "Create a new location with the given name",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		name := args[0]
+		log.Info("Deleting location %s", args[0])
+		client, err := api.NewAPIClient()
+		if err != nil {
+			return err
+		}
+		location, err := client.CreateLocationWithResponse(cmd.Context(), api.CreateLocationJSONRequestBody{
+			Name: name,
 		})
+		if err != nil {
+			return err
+		}
+		if location.JSON200 != nil {
+			print(location.JSON200, func() {
+				fmt.Println("Location:", *location.JSON200.Name)
+				fmt.Println("Type:", *location.JSON200.Type)
+				fmt.Println("Id:", *location.JSON200.Id)
+			})
+		} else if location.JSON400 != nil {
+			print(location.JSON400, func() {
+				fmt.Printf("Unable to create location: %s", location.JSON400.Message)
+			})
+		} else if location.JSON500 != nil {
+			print(location.JSON500, func() {
+				fmt.Printf("Unable to create location: %s", location.JSON500.Message)
+			})
+		} else {
+			print(unknowError, func() {
+				fmt.Printf("Unable to upsert location: Unknown error")
+			})
+		}
+		return nil
+	},
+}
+
+var locationsUpsertCmd = &cobra.Command{
+	Use:   "upsert",
+	Args:  cobra.ExactArgs(1),
+	Short: "Get or create a location by it's name",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		name := args[0]
+		log.Info("Upserting location %s", args[0])
+		client, err := api.NewAPIClient()
+		if err != nil {
+			return err
+		}
+		location, err := client.UpsertLocationWithResponse(cmd.Context(), api.UpsertLocationJSONRequestBody{
+			Name: name,
+		})
+		if err != nil {
+			return err
+		}
+		if location.JSON200 != nil {
+			print(location.JSON200, func() {
+				fmt.Println("Location:", *location.JSON200.Name)
+				fmt.Println("Type:", *location.JSON200.Type)
+				fmt.Println("Id:", *location.JSON200.Id)
+			})
+		} else if location.JSON400 != nil {
+			print(location.JSON400, func() {
+				fmt.Printf("Unable to upsert location: %s", location.JSON400.Message)
+			})
+		} else if location.JSON500 != nil {
+			print(location.JSON500, func() {
+				fmt.Printf("Unable to upsert location: %s", location.JSON500.Message)
+			})
+		} else {
+			print(unknowError, func() {
+				fmt.Printf("Unable to upsert location: Unknown error")
+			})
+		}
 		return nil
 	},
 }

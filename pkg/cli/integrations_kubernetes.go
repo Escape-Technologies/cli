@@ -1,10 +1,10 @@
 package cli
 
 import (
-	"context"
 	"fmt"
 
 	"github.com/Escape-Technologies/cli/pkg/api"
+	"github.com/google/uuid"
 	"github.com/spf13/cobra"
 )
 
@@ -23,7 +23,7 @@ var integrationsKubernetesList = &cobra.Command{
 		if err != nil {
 			return err
 		}
-		integrations, err := client.GetV1IntegrationsKubernetesWithResponse(context.Background())
+		integrations, err := client.GetV1IntegrationsKubernetesWithResponse(cmd.Context())
 		if err != nil {
 			return err
 		}
@@ -49,12 +49,16 @@ var integrationsKubernetesDelete = &cobra.Command{
 	Args:    cobra.ExactArgs(1),
 	Short:   "Delete integration given an id",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		id := args[0]
+		idString := args[0]
+		id, err := uuid.Parse(idString)
+		if err != nil {
+			return fmt.Errorf("invalid UUID format: %w", err)
+		}
 		client, err := api.NewAPIClient()
 		if err != nil {
 			return err
 		}
-		res, err := client.DeleteV1IntegrationsKubernetesIdWithResponse(context.Background(), id)
+		res, err := client.DeleteV1IntegrationsKubernetesIdWithResponse(cmd.Context(), id)
 		if err != nil {
 			return err
 		}

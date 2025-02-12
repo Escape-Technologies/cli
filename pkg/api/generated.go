@@ -22,25 +22,15 @@ const (
 	ApiKeyScopes = "apiKey.Scopes"
 )
 
-// Defines values for PostApplicationsIdStartScanParamsContentType.
-const (
-	PostApplicationsIdStartScanParamsContentTypeApplicationjson PostApplicationsIdStartScanParamsContentType = "application/json"
-)
-
-// Defines values for PostApplicationsIdUploadSchemaParamsContentType.
-const (
-	PostApplicationsIdUploadSchemaParamsContentTypeApplicationjson PostApplicationsIdUploadSchemaParamsContentType = "application/json"
-)
-
-// Defines values for PostCreateApplicationParamsContentType.
-const (
-	Applicationjson PostCreateApplicationParamsContentType = "application/json"
-)
-
 // Defines values for PostCreateApplicationJSONBodyType.
 const (
 	GRAPHQL PostCreateApplicationJSONBodyType = "GRAPHQL"
 	REST    PostCreateApplicationJSONBodyType = "REST"
+)
+
+// Defines values for PostV1IntegrationsJiraJSONBodyParametersPropertiesMappingEscapeProperty.
+const (
+	Severity PostV1IntegrationsJiraJSONBodyParametersPropertiesMappingEscapeProperty = "severity"
 )
 
 // Defines values for PostV1IntegrationsKongKonnectJSONBodyParametersRegion.
@@ -62,27 +52,11 @@ type PostApplicationsIdStartScanJSONBody struct {
 	SchemaUrl                      *string                  `json:"schemaUrl,omitempty"`
 }
 
-// PostApplicationsIdStartScanParams defines parameters for PostApplicationsIdStartScan.
-type PostApplicationsIdStartScanParams struct {
-	ContentType PostApplicationsIdStartScanParamsContentType `json:"content-type"`
-}
-
-// PostApplicationsIdStartScanParamsContentType defines parameters for PostApplicationsIdStartScan.
-type PostApplicationsIdStartScanParamsContentType string
-
 // PostApplicationsIdUploadSchemaJSONBody defines parameters for PostApplicationsIdUploadSchema.
 type PostApplicationsIdUploadSchemaJSONBody struct {
 	Schema    *string `json:"schema,omitempty"`
 	SchemaUrl *string `json:"schemaUrl,omitempty"`
 }
-
-// PostApplicationsIdUploadSchemaParams defines parameters for PostApplicationsIdUploadSchema.
-type PostApplicationsIdUploadSchemaParams struct {
-	ContentType PostApplicationsIdUploadSchemaParamsContentType `json:"content-type"`
-}
-
-// PostApplicationsIdUploadSchemaParamsContentType defines parameters for PostApplicationsIdUploadSchema.
-type PostApplicationsIdUploadSchemaParamsContentType string
 
 // PostCreateApplicationJSONBody defines parameters for PostCreateApplication.
 type PostCreateApplicationJSONBody struct {
@@ -101,20 +75,15 @@ type PostCreateApplicationJSONBody struct {
 	Type              PostCreateApplicationJSONBodyType `json:"type"`
 }
 
-// PostCreateApplicationParams defines parameters for PostCreateApplication.
-type PostCreateApplicationParams struct {
-	ContentType PostCreateApplicationParamsContentType `json:"content-type"`
-}
-
-// PostCreateApplicationParamsContentType defines parameters for PostCreateApplication.
-type PostCreateApplicationParamsContentType string
-
 // PostCreateApplicationJSONBodyType defines parameters for PostCreateApplication.
 type PostCreateApplicationJSONBodyType string
 
 // GetOrganizationIdApplicationsSearchParams defines parameters for GetOrganizationIdApplicationsSearch.
 type GetOrganizationIdApplicationsSearchParams struct {
+	// Search Search query.
 	Search *string `form:"search,omitempty" json:"search,omitempty"`
+
+	// Cursor Cursor to start from. Given by the previous page.
 	Cursor *string `form:"cursor,omitempty" json:"cursor,omitempty"`
 }
 
@@ -260,12 +229,20 @@ type PostV1IntegrationsJiraJSONBody struct {
 	LocationId *openapi_types.UUID `json:"locationId"`
 	Name       string              `json:"name"`
 	Parameters struct {
-		AccessToken  string  `json:"access_token"`
-		ApiKey       string  `json:"api_key"`
-		InstanceUrl  string  `json:"instance_url"`
-		RefreshToken *string `json:"refresh_token,omitempty"`
+		AccountId         string `json:"account_id"`
+		ApiKey            string `json:"api_key"`
+		Email             string `json:"email"`
+		InstanceUrl       string `json:"instance_url"`
+		Name              string `json:"name"`
+		PropertiesMapping *[]struct {
+			EscapeProperty PostV1IntegrationsJiraJSONBodyParametersPropertiesMappingEscapeProperty `json:"escape_property"`
+			JiraProperty   string                                                                  `json:"jira_property"`
+		} `json:"properties_mapping,omitempty"`
 	} `json:"parameters"`
 }
+
+// PostV1IntegrationsJiraJSONBodyParametersPropertiesMappingEscapeProperty defines parameters for PostV1IntegrationsJira.
+type PostV1IntegrationsJiraJSONBodyParametersPropertiesMappingEscapeProperty string
 
 // PostV1IntegrationsKongGatewayJSONBody defines parameters for PostV1IntegrationsKongGateway.
 type PostV1IntegrationsKongGatewayJSONBody struct {
@@ -295,13 +272,13 @@ type PostV1IntegrationsKubernetesJSONBody struct {
 	LocationId *openapi_types.UUID `json:"locationId"`
 	Name       string              `json:"name"`
 	Parameters struct {
-		Blacklist struct {
+		Blacklist *struct {
 			Namespaces *[]string `json:"namespaces,omitempty"`
-		} `json:"blacklist"`
-		Tags struct {
+		} `json:"blacklist,omitempty"`
+		Tags *struct {
 			Labels     *[]string `json:"labels,omitempty"`
 			Namespaces *bool     `json:"namespaces,omitempty"`
-		} `json:"tags"`
+		} `json:"tags,omitempty"`
 	} `json:"parameters"`
 }
 
@@ -347,14 +324,28 @@ type PostV1IntegrationsWizJSONBody struct {
 	} `json:"parameters"`
 }
 
-// PostV1LocationsJSONBody defines parameters for PostV1Locations.
-type PostV1LocationsJSONBody struct {
+// CreateLocationJSONBody defines parameters for CreateLocation.
+type CreateLocationJSONBody struct {
+	// Name The name of the location.
 	Name string `json:"name"`
+
+	// PrivateLocationV2 Opt in to the new private location feature
+	PrivateLocationV2 *bool `json:"private_location_v2,omitempty"`
+}
+
+// UpsertLocationJSONBody defines parameters for UpsertLocation.
+type UpsertLocationJSONBody struct {
+	// Name The name of the location.
+	Name string `json:"name"`
+
+	// PrivateLocationV2 Opt in to the new private location feature
+	PrivateLocationV2 *bool `json:"private_location_v2,omitempty"`
 }
 
 // GetV1OrganizationIdSchemasParams defines parameters for GetV1OrganizationIdSchemas.
 type GetV1OrganizationIdSchemasParams struct {
-	After string `form:"after" json:"after"`
+	// After Cursor to start from. Given by the previous page.
+	After *string `form:"after,omitempty" json:"after,omitempty"`
 }
 
 // PostApplicationsIdStartScanJSONRequestBody defines body for PostApplicationsIdStartScan for application/json ContentType.
@@ -429,8 +420,11 @@ type PostV1IntegrationsWebhookJSONRequestBody PostV1IntegrationsWebhookJSONBody
 // PostV1IntegrationsWizJSONRequestBody defines body for PostV1IntegrationsWiz for application/json ContentType.
 type PostV1IntegrationsWizJSONRequestBody PostV1IntegrationsWizJSONBody
 
-// PostV1LocationsJSONRequestBody defines body for PostV1Locations for application/json ContentType.
-type PostV1LocationsJSONRequestBody PostV1LocationsJSONBody
+// CreateLocationJSONRequestBody defines body for CreateLocation for application/json ContentType.
+type CreateLocationJSONRequestBody CreateLocationJSONBody
+
+// UpsertLocationJSONRequestBody defines body for UpsertLocation for application/json ContentType.
+type UpsertLocationJSONRequestBody UpsertLocationJSONBody
 
 // RequestEditorFn  is the function signature for the RequestEditor callback function
 type RequestEditorFn func(ctx context.Context, req *http.Request) error
@@ -509,19 +503,19 @@ type ClientInterface interface {
 	GetApplicationId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// PostApplicationsIdStartScanWithBody request with any body
-	PostApplicationsIdStartScanWithBody(ctx context.Context, id openapi_types.UUID, params *PostApplicationsIdStartScanParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	PostApplicationsIdStartScanWithBody(ctx context.Context, id openapi_types.UUID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	PostApplicationsIdStartScan(ctx context.Context, id openapi_types.UUID, params *PostApplicationsIdStartScanParams, body PostApplicationsIdStartScanJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	PostApplicationsIdStartScan(ctx context.Context, id openapi_types.UUID, body PostApplicationsIdStartScanJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// PostApplicationsIdUploadSchemaWithBody request with any body
-	PostApplicationsIdUploadSchemaWithBody(ctx context.Context, id openapi_types.UUID, params *PostApplicationsIdUploadSchemaParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	PostApplicationsIdUploadSchemaWithBody(ctx context.Context, id openapi_types.UUID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	PostApplicationsIdUploadSchema(ctx context.Context, id openapi_types.UUID, params *PostApplicationsIdUploadSchemaParams, body PostApplicationsIdUploadSchemaJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	PostApplicationsIdUploadSchema(ctx context.Context, id openapi_types.UUID, body PostApplicationsIdUploadSchemaJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// PostCreateApplicationWithBody request with any body
-	PostCreateApplicationWithBody(ctx context.Context, params *PostCreateApplicationParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	PostCreateApplicationWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	PostCreateApplication(ctx context.Context, params *PostCreateApplicationParams, body PostCreateApplicationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	PostCreateApplication(ctx context.Context, body PostCreateApplicationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetOrganizationIdApplications request
 	GetOrganizationIdApplications(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -541,10 +535,10 @@ type ClientInterface interface {
 	PostV1IntegrationsAkamai(ctx context.Context, body PostV1IntegrationsAkamaiJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteV1IntegrationsAkamaiId request
-	DeleteV1IntegrationsAkamaiId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	DeleteV1IntegrationsAkamaiId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetV1IntegrationsAkamaiId request
-	GetV1IntegrationsAkamaiId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	GetV1IntegrationsAkamaiId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetV1IntegrationsApigee request
 	GetV1IntegrationsApigee(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -555,10 +549,10 @@ type ClientInterface interface {
 	PostV1IntegrationsApigee(ctx context.Context, body PostV1IntegrationsApigeeJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteV1IntegrationsApigeeId request
-	DeleteV1IntegrationsApigeeId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	DeleteV1IntegrationsApigeeId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetV1IntegrationsApigeeId request
-	GetV1IntegrationsApigeeId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	GetV1IntegrationsApigeeId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetV1IntegrationsAws request
 	GetV1IntegrationsAws(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -569,10 +563,10 @@ type ClientInterface interface {
 	PostV1IntegrationsAws(ctx context.Context, body PostV1IntegrationsAwsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteV1IntegrationsAwsId request
-	DeleteV1IntegrationsAwsId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	DeleteV1IntegrationsAwsId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetV1IntegrationsAwsId request
-	GetV1IntegrationsAwsId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	GetV1IntegrationsAwsId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetV1IntegrationsAzure request
 	GetV1IntegrationsAzure(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -583,10 +577,10 @@ type ClientInterface interface {
 	PostV1IntegrationsAzure(ctx context.Context, body PostV1IntegrationsAzureJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteV1IntegrationsAzureId request
-	DeleteV1IntegrationsAzureId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	DeleteV1IntegrationsAzureId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetV1IntegrationsAzureId request
-	GetV1IntegrationsAzureId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	GetV1IntegrationsAzureId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetV1IntegrationsAzureDevops request
 	GetV1IntegrationsAzureDevops(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -597,10 +591,10 @@ type ClientInterface interface {
 	PostV1IntegrationsAzureDevops(ctx context.Context, body PostV1IntegrationsAzureDevopsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteV1IntegrationsAzureDevopsId request
-	DeleteV1IntegrationsAzureDevopsId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	DeleteV1IntegrationsAzureDevopsId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetV1IntegrationsAzureDevopsId request
-	GetV1IntegrationsAzureDevopsId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	GetV1IntegrationsAzureDevopsId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetV1IntegrationsBitbucketRepo request
 	GetV1IntegrationsBitbucketRepo(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -611,10 +605,10 @@ type ClientInterface interface {
 	PostV1IntegrationsBitbucketRepo(ctx context.Context, body PostV1IntegrationsBitbucketRepoJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteV1IntegrationsBitbucketRepoId request
-	DeleteV1IntegrationsBitbucketRepoId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	DeleteV1IntegrationsBitbucketRepoId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetV1IntegrationsBitbucketRepoId request
-	GetV1IntegrationsBitbucketRepoId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	GetV1IntegrationsBitbucketRepoId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetV1IntegrationsCloudflare request
 	GetV1IntegrationsCloudflare(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -625,10 +619,10 @@ type ClientInterface interface {
 	PostV1IntegrationsCloudflare(ctx context.Context, body PostV1IntegrationsCloudflareJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteV1IntegrationsCloudflareId request
-	DeleteV1IntegrationsCloudflareId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	DeleteV1IntegrationsCloudflareId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetV1IntegrationsCloudflareId request
-	GetV1IntegrationsCloudflareId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	GetV1IntegrationsCloudflareId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetV1IntegrationsDiscordWebhook request
 	GetV1IntegrationsDiscordWebhook(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -639,10 +633,10 @@ type ClientInterface interface {
 	PostV1IntegrationsDiscordWebhook(ctx context.Context, body PostV1IntegrationsDiscordWebhookJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteV1IntegrationsDiscordWebhookId request
-	DeleteV1IntegrationsDiscordWebhookId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	DeleteV1IntegrationsDiscordWebhookId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetV1IntegrationsDiscordWebhookId request
-	GetV1IntegrationsDiscordWebhookId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	GetV1IntegrationsDiscordWebhookId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetV1IntegrationsEmail request
 	GetV1IntegrationsEmail(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -653,10 +647,10 @@ type ClientInterface interface {
 	PostV1IntegrationsEmail(ctx context.Context, body PostV1IntegrationsEmailJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteV1IntegrationsEmailId request
-	DeleteV1IntegrationsEmailId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	DeleteV1IntegrationsEmailId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetV1IntegrationsEmailId request
-	GetV1IntegrationsEmailId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	GetV1IntegrationsEmailId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetV1IntegrationsGcp request
 	GetV1IntegrationsGcp(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -667,10 +661,10 @@ type ClientInterface interface {
 	PostV1IntegrationsGcp(ctx context.Context, body PostV1IntegrationsGcpJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteV1IntegrationsGcpId request
-	DeleteV1IntegrationsGcpId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	DeleteV1IntegrationsGcpId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetV1IntegrationsGcpId request
-	GetV1IntegrationsGcpId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	GetV1IntegrationsGcpId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetV1IntegrationsGithubApiKey request
 	GetV1IntegrationsGithubApiKey(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -681,10 +675,10 @@ type ClientInterface interface {
 	PostV1IntegrationsGithubApiKey(ctx context.Context, body PostV1IntegrationsGithubApiKeyJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteV1IntegrationsGithubApiKeyId request
-	DeleteV1IntegrationsGithubApiKeyId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	DeleteV1IntegrationsGithubApiKeyId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetV1IntegrationsGithubApiKeyId request
-	GetV1IntegrationsGithubApiKeyId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	GetV1IntegrationsGithubApiKeyId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetV1IntegrationsGitlabApiKey request
 	GetV1IntegrationsGitlabApiKey(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -695,10 +689,10 @@ type ClientInterface interface {
 	PostV1IntegrationsGitlabApiKey(ctx context.Context, body PostV1IntegrationsGitlabApiKeyJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteV1IntegrationsGitlabApiKeyId request
-	DeleteV1IntegrationsGitlabApiKeyId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	DeleteV1IntegrationsGitlabApiKeyId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetV1IntegrationsGitlabApiKeyId request
-	GetV1IntegrationsGitlabApiKeyId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	GetV1IntegrationsGitlabApiKeyId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetV1IntegrationsJira request
 	GetV1IntegrationsJira(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -709,10 +703,10 @@ type ClientInterface interface {
 	PostV1IntegrationsJira(ctx context.Context, body PostV1IntegrationsJiraJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteV1IntegrationsJiraId request
-	DeleteV1IntegrationsJiraId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	DeleteV1IntegrationsJiraId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetV1IntegrationsJiraId request
-	GetV1IntegrationsJiraId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	GetV1IntegrationsJiraId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetV1IntegrationsKongGateway request
 	GetV1IntegrationsKongGateway(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -723,10 +717,10 @@ type ClientInterface interface {
 	PostV1IntegrationsKongGateway(ctx context.Context, body PostV1IntegrationsKongGatewayJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteV1IntegrationsKongGatewayId request
-	DeleteV1IntegrationsKongGatewayId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	DeleteV1IntegrationsKongGatewayId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetV1IntegrationsKongGatewayId request
-	GetV1IntegrationsKongGatewayId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	GetV1IntegrationsKongGatewayId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetV1IntegrationsKongKonnect request
 	GetV1IntegrationsKongKonnect(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -737,10 +731,10 @@ type ClientInterface interface {
 	PostV1IntegrationsKongKonnect(ctx context.Context, body PostV1IntegrationsKongKonnectJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteV1IntegrationsKongKonnectId request
-	DeleteV1IntegrationsKongKonnectId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	DeleteV1IntegrationsKongKonnectId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetV1IntegrationsKongKonnectId request
-	GetV1IntegrationsKongKonnectId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	GetV1IntegrationsKongKonnectId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetV1IntegrationsKubernetes request
 	GetV1IntegrationsKubernetes(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -751,10 +745,10 @@ type ClientInterface interface {
 	PostV1IntegrationsKubernetes(ctx context.Context, body PostV1IntegrationsKubernetesJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteV1IntegrationsKubernetesId request
-	DeleteV1IntegrationsKubernetesId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	DeleteV1IntegrationsKubernetesId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetV1IntegrationsKubernetesId request
-	GetV1IntegrationsKubernetesId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	GetV1IntegrationsKubernetesId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetV1IntegrationsPostmanApiKey request
 	GetV1IntegrationsPostmanApiKey(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -765,10 +759,10 @@ type ClientInterface interface {
 	PostV1IntegrationsPostmanApiKey(ctx context.Context, body PostV1IntegrationsPostmanApiKeyJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteV1IntegrationsPostmanApiKeyId request
-	DeleteV1IntegrationsPostmanApiKeyId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	DeleteV1IntegrationsPostmanApiKeyId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetV1IntegrationsPostmanApiKeyId request
-	GetV1IntegrationsPostmanApiKeyId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	GetV1IntegrationsPostmanApiKeyId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetV1IntegrationsSlackWebhook request
 	GetV1IntegrationsSlackWebhook(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -779,10 +773,10 @@ type ClientInterface interface {
 	PostV1IntegrationsSlackWebhook(ctx context.Context, body PostV1IntegrationsSlackWebhookJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteV1IntegrationsSlackWebhookId request
-	DeleteV1IntegrationsSlackWebhookId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	DeleteV1IntegrationsSlackWebhookId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetV1IntegrationsSlackWebhookId request
-	GetV1IntegrationsSlackWebhookId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	GetV1IntegrationsSlackWebhookId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetV1IntegrationsTeamsWebhook request
 	GetV1IntegrationsTeamsWebhook(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -793,10 +787,10 @@ type ClientInterface interface {
 	PostV1IntegrationsTeamsWebhook(ctx context.Context, body PostV1IntegrationsTeamsWebhookJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteV1IntegrationsTeamsWebhookId request
-	DeleteV1IntegrationsTeamsWebhookId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	DeleteV1IntegrationsTeamsWebhookId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetV1IntegrationsTeamsWebhookId request
-	GetV1IntegrationsTeamsWebhookId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	GetV1IntegrationsTeamsWebhookId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetV1IntegrationsWebhook request
 	GetV1IntegrationsWebhook(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -807,10 +801,10 @@ type ClientInterface interface {
 	PostV1IntegrationsWebhook(ctx context.Context, body PostV1IntegrationsWebhookJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteV1IntegrationsWebhookId request
-	DeleteV1IntegrationsWebhookId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	DeleteV1IntegrationsWebhookId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetV1IntegrationsWebhookId request
-	GetV1IntegrationsWebhookId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	GetV1IntegrationsWebhookId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetV1IntegrationsWiz request
 	GetV1IntegrationsWiz(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -821,24 +815,29 @@ type ClientInterface interface {
 	PostV1IntegrationsWiz(ctx context.Context, body PostV1IntegrationsWizJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteV1IntegrationsWizId request
-	DeleteV1IntegrationsWizId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	DeleteV1IntegrationsWizId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetV1IntegrationsWizId request
-	GetV1IntegrationsWizId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	GetV1IntegrationsWizId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetV1Locations request
-	GetV1Locations(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// ListLocations request
+	ListLocations(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// PostV1LocationsWithBody request with any body
-	PostV1LocationsWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// CreateLocationWithBody request with any body
+	CreateLocationWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	PostV1Locations(ctx context.Context, body PostV1LocationsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	CreateLocation(ctx context.Context, body CreateLocationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// DeleteV1LocationsId request
-	DeleteV1LocationsId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// UpsertLocationWithBody request with any body
+	UpsertLocationWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetV1LocationsId request
-	GetV1LocationsId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	UpsertLocation(ctx context.Context, body UpsertLocationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteLocation request
+	DeleteLocation(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetLocation request
+	GetLocation(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetV1OrganizationIdSchemas request
 	GetV1OrganizationIdSchemas(ctx context.Context, id openapi_types.UUID, params *GetV1OrganizationIdSchemasParams, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -862,8 +861,8 @@ func (c *Client) GetApplicationId(ctx context.Context, id openapi_types.UUID, re
 	return c.Client.Do(req)
 }
 
-func (c *Client) PostApplicationsIdStartScanWithBody(ctx context.Context, id openapi_types.UUID, params *PostApplicationsIdStartScanParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewPostApplicationsIdStartScanRequestWithBody(c.Server, id, params, contentType, body)
+func (c *Client) PostApplicationsIdStartScanWithBody(ctx context.Context, id openapi_types.UUID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPostApplicationsIdStartScanRequestWithBody(c.Server, id, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -874,8 +873,8 @@ func (c *Client) PostApplicationsIdStartScanWithBody(ctx context.Context, id ope
 	return c.Client.Do(req)
 }
 
-func (c *Client) PostApplicationsIdStartScan(ctx context.Context, id openapi_types.UUID, params *PostApplicationsIdStartScanParams, body PostApplicationsIdStartScanJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewPostApplicationsIdStartScanRequest(c.Server, id, params, body)
+func (c *Client) PostApplicationsIdStartScan(ctx context.Context, id openapi_types.UUID, body PostApplicationsIdStartScanJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPostApplicationsIdStartScanRequest(c.Server, id, body)
 	if err != nil {
 		return nil, err
 	}
@@ -886,8 +885,8 @@ func (c *Client) PostApplicationsIdStartScan(ctx context.Context, id openapi_typ
 	return c.Client.Do(req)
 }
 
-func (c *Client) PostApplicationsIdUploadSchemaWithBody(ctx context.Context, id openapi_types.UUID, params *PostApplicationsIdUploadSchemaParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewPostApplicationsIdUploadSchemaRequestWithBody(c.Server, id, params, contentType, body)
+func (c *Client) PostApplicationsIdUploadSchemaWithBody(ctx context.Context, id openapi_types.UUID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPostApplicationsIdUploadSchemaRequestWithBody(c.Server, id, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -898,8 +897,8 @@ func (c *Client) PostApplicationsIdUploadSchemaWithBody(ctx context.Context, id 
 	return c.Client.Do(req)
 }
 
-func (c *Client) PostApplicationsIdUploadSchema(ctx context.Context, id openapi_types.UUID, params *PostApplicationsIdUploadSchemaParams, body PostApplicationsIdUploadSchemaJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewPostApplicationsIdUploadSchemaRequest(c.Server, id, params, body)
+func (c *Client) PostApplicationsIdUploadSchema(ctx context.Context, id openapi_types.UUID, body PostApplicationsIdUploadSchemaJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPostApplicationsIdUploadSchemaRequest(c.Server, id, body)
 	if err != nil {
 		return nil, err
 	}
@@ -910,8 +909,8 @@ func (c *Client) PostApplicationsIdUploadSchema(ctx context.Context, id openapi_
 	return c.Client.Do(req)
 }
 
-func (c *Client) PostCreateApplicationWithBody(ctx context.Context, params *PostCreateApplicationParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewPostCreateApplicationRequestWithBody(c.Server, params, contentType, body)
+func (c *Client) PostCreateApplicationWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPostCreateApplicationRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -922,8 +921,8 @@ func (c *Client) PostCreateApplicationWithBody(ctx context.Context, params *Post
 	return c.Client.Do(req)
 }
 
-func (c *Client) PostCreateApplication(ctx context.Context, params *PostCreateApplicationParams, body PostCreateApplicationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewPostCreateApplicationRequest(c.Server, params, body)
+func (c *Client) PostCreateApplication(ctx context.Context, body PostCreateApplicationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPostCreateApplicationRequest(c.Server, body)
 	if err != nil {
 		return nil, err
 	}
@@ -1006,7 +1005,7 @@ func (c *Client) PostV1IntegrationsAkamai(ctx context.Context, body PostV1Integr
 	return c.Client.Do(req)
 }
 
-func (c *Client) DeleteV1IntegrationsAkamaiId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *Client) DeleteV1IntegrationsAkamaiId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteV1IntegrationsAkamaiIdRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -1018,7 +1017,7 @@ func (c *Client) DeleteV1IntegrationsAkamaiId(ctx context.Context, id string, re
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetV1IntegrationsAkamaiId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *Client) GetV1IntegrationsAkamaiId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetV1IntegrationsAkamaiIdRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -1066,7 +1065,7 @@ func (c *Client) PostV1IntegrationsApigee(ctx context.Context, body PostV1Integr
 	return c.Client.Do(req)
 }
 
-func (c *Client) DeleteV1IntegrationsApigeeId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *Client) DeleteV1IntegrationsApigeeId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteV1IntegrationsApigeeIdRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -1078,7 +1077,7 @@ func (c *Client) DeleteV1IntegrationsApigeeId(ctx context.Context, id string, re
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetV1IntegrationsApigeeId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *Client) GetV1IntegrationsApigeeId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetV1IntegrationsApigeeIdRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -1126,7 +1125,7 @@ func (c *Client) PostV1IntegrationsAws(ctx context.Context, body PostV1Integrati
 	return c.Client.Do(req)
 }
 
-func (c *Client) DeleteV1IntegrationsAwsId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *Client) DeleteV1IntegrationsAwsId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteV1IntegrationsAwsIdRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -1138,7 +1137,7 @@ func (c *Client) DeleteV1IntegrationsAwsId(ctx context.Context, id string, reqEd
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetV1IntegrationsAwsId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *Client) GetV1IntegrationsAwsId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetV1IntegrationsAwsIdRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -1186,7 +1185,7 @@ func (c *Client) PostV1IntegrationsAzure(ctx context.Context, body PostV1Integra
 	return c.Client.Do(req)
 }
 
-func (c *Client) DeleteV1IntegrationsAzureId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *Client) DeleteV1IntegrationsAzureId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteV1IntegrationsAzureIdRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -1198,7 +1197,7 @@ func (c *Client) DeleteV1IntegrationsAzureId(ctx context.Context, id string, req
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetV1IntegrationsAzureId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *Client) GetV1IntegrationsAzureId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetV1IntegrationsAzureIdRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -1246,7 +1245,7 @@ func (c *Client) PostV1IntegrationsAzureDevops(ctx context.Context, body PostV1I
 	return c.Client.Do(req)
 }
 
-func (c *Client) DeleteV1IntegrationsAzureDevopsId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *Client) DeleteV1IntegrationsAzureDevopsId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteV1IntegrationsAzureDevopsIdRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -1258,7 +1257,7 @@ func (c *Client) DeleteV1IntegrationsAzureDevopsId(ctx context.Context, id strin
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetV1IntegrationsAzureDevopsId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *Client) GetV1IntegrationsAzureDevopsId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetV1IntegrationsAzureDevopsIdRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -1306,7 +1305,7 @@ func (c *Client) PostV1IntegrationsBitbucketRepo(ctx context.Context, body PostV
 	return c.Client.Do(req)
 }
 
-func (c *Client) DeleteV1IntegrationsBitbucketRepoId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *Client) DeleteV1IntegrationsBitbucketRepoId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteV1IntegrationsBitbucketRepoIdRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -1318,7 +1317,7 @@ func (c *Client) DeleteV1IntegrationsBitbucketRepoId(ctx context.Context, id str
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetV1IntegrationsBitbucketRepoId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *Client) GetV1IntegrationsBitbucketRepoId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetV1IntegrationsBitbucketRepoIdRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -1366,7 +1365,7 @@ func (c *Client) PostV1IntegrationsCloudflare(ctx context.Context, body PostV1In
 	return c.Client.Do(req)
 }
 
-func (c *Client) DeleteV1IntegrationsCloudflareId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *Client) DeleteV1IntegrationsCloudflareId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteV1IntegrationsCloudflareIdRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -1378,7 +1377,7 @@ func (c *Client) DeleteV1IntegrationsCloudflareId(ctx context.Context, id string
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetV1IntegrationsCloudflareId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *Client) GetV1IntegrationsCloudflareId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetV1IntegrationsCloudflareIdRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -1426,7 +1425,7 @@ func (c *Client) PostV1IntegrationsDiscordWebhook(ctx context.Context, body Post
 	return c.Client.Do(req)
 }
 
-func (c *Client) DeleteV1IntegrationsDiscordWebhookId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *Client) DeleteV1IntegrationsDiscordWebhookId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteV1IntegrationsDiscordWebhookIdRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -1438,7 +1437,7 @@ func (c *Client) DeleteV1IntegrationsDiscordWebhookId(ctx context.Context, id st
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetV1IntegrationsDiscordWebhookId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *Client) GetV1IntegrationsDiscordWebhookId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetV1IntegrationsDiscordWebhookIdRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -1486,7 +1485,7 @@ func (c *Client) PostV1IntegrationsEmail(ctx context.Context, body PostV1Integra
 	return c.Client.Do(req)
 }
 
-func (c *Client) DeleteV1IntegrationsEmailId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *Client) DeleteV1IntegrationsEmailId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteV1IntegrationsEmailIdRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -1498,7 +1497,7 @@ func (c *Client) DeleteV1IntegrationsEmailId(ctx context.Context, id string, req
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetV1IntegrationsEmailId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *Client) GetV1IntegrationsEmailId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetV1IntegrationsEmailIdRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -1546,7 +1545,7 @@ func (c *Client) PostV1IntegrationsGcp(ctx context.Context, body PostV1Integrati
 	return c.Client.Do(req)
 }
 
-func (c *Client) DeleteV1IntegrationsGcpId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *Client) DeleteV1IntegrationsGcpId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteV1IntegrationsGcpIdRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -1558,7 +1557,7 @@ func (c *Client) DeleteV1IntegrationsGcpId(ctx context.Context, id string, reqEd
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetV1IntegrationsGcpId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *Client) GetV1IntegrationsGcpId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetV1IntegrationsGcpIdRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -1606,7 +1605,7 @@ func (c *Client) PostV1IntegrationsGithubApiKey(ctx context.Context, body PostV1
 	return c.Client.Do(req)
 }
 
-func (c *Client) DeleteV1IntegrationsGithubApiKeyId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *Client) DeleteV1IntegrationsGithubApiKeyId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteV1IntegrationsGithubApiKeyIdRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -1618,7 +1617,7 @@ func (c *Client) DeleteV1IntegrationsGithubApiKeyId(ctx context.Context, id stri
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetV1IntegrationsGithubApiKeyId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *Client) GetV1IntegrationsGithubApiKeyId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetV1IntegrationsGithubApiKeyIdRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -1666,7 +1665,7 @@ func (c *Client) PostV1IntegrationsGitlabApiKey(ctx context.Context, body PostV1
 	return c.Client.Do(req)
 }
 
-func (c *Client) DeleteV1IntegrationsGitlabApiKeyId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *Client) DeleteV1IntegrationsGitlabApiKeyId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteV1IntegrationsGitlabApiKeyIdRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -1678,7 +1677,7 @@ func (c *Client) DeleteV1IntegrationsGitlabApiKeyId(ctx context.Context, id stri
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetV1IntegrationsGitlabApiKeyId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *Client) GetV1IntegrationsGitlabApiKeyId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetV1IntegrationsGitlabApiKeyIdRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -1726,7 +1725,7 @@ func (c *Client) PostV1IntegrationsJira(ctx context.Context, body PostV1Integrat
 	return c.Client.Do(req)
 }
 
-func (c *Client) DeleteV1IntegrationsJiraId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *Client) DeleteV1IntegrationsJiraId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteV1IntegrationsJiraIdRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -1738,7 +1737,7 @@ func (c *Client) DeleteV1IntegrationsJiraId(ctx context.Context, id string, reqE
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetV1IntegrationsJiraId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *Client) GetV1IntegrationsJiraId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetV1IntegrationsJiraIdRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -1786,7 +1785,7 @@ func (c *Client) PostV1IntegrationsKongGateway(ctx context.Context, body PostV1I
 	return c.Client.Do(req)
 }
 
-func (c *Client) DeleteV1IntegrationsKongGatewayId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *Client) DeleteV1IntegrationsKongGatewayId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteV1IntegrationsKongGatewayIdRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -1798,7 +1797,7 @@ func (c *Client) DeleteV1IntegrationsKongGatewayId(ctx context.Context, id strin
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetV1IntegrationsKongGatewayId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *Client) GetV1IntegrationsKongGatewayId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetV1IntegrationsKongGatewayIdRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -1846,7 +1845,7 @@ func (c *Client) PostV1IntegrationsKongKonnect(ctx context.Context, body PostV1I
 	return c.Client.Do(req)
 }
 
-func (c *Client) DeleteV1IntegrationsKongKonnectId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *Client) DeleteV1IntegrationsKongKonnectId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteV1IntegrationsKongKonnectIdRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -1858,7 +1857,7 @@ func (c *Client) DeleteV1IntegrationsKongKonnectId(ctx context.Context, id strin
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetV1IntegrationsKongKonnectId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *Client) GetV1IntegrationsKongKonnectId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetV1IntegrationsKongKonnectIdRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -1906,7 +1905,7 @@ func (c *Client) PostV1IntegrationsKubernetes(ctx context.Context, body PostV1In
 	return c.Client.Do(req)
 }
 
-func (c *Client) DeleteV1IntegrationsKubernetesId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *Client) DeleteV1IntegrationsKubernetesId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteV1IntegrationsKubernetesIdRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -1918,7 +1917,7 @@ func (c *Client) DeleteV1IntegrationsKubernetesId(ctx context.Context, id string
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetV1IntegrationsKubernetesId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *Client) GetV1IntegrationsKubernetesId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetV1IntegrationsKubernetesIdRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -1966,7 +1965,7 @@ func (c *Client) PostV1IntegrationsPostmanApiKey(ctx context.Context, body PostV
 	return c.Client.Do(req)
 }
 
-func (c *Client) DeleteV1IntegrationsPostmanApiKeyId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *Client) DeleteV1IntegrationsPostmanApiKeyId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteV1IntegrationsPostmanApiKeyIdRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -1978,7 +1977,7 @@ func (c *Client) DeleteV1IntegrationsPostmanApiKeyId(ctx context.Context, id str
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetV1IntegrationsPostmanApiKeyId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *Client) GetV1IntegrationsPostmanApiKeyId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetV1IntegrationsPostmanApiKeyIdRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -2026,7 +2025,7 @@ func (c *Client) PostV1IntegrationsSlackWebhook(ctx context.Context, body PostV1
 	return c.Client.Do(req)
 }
 
-func (c *Client) DeleteV1IntegrationsSlackWebhookId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *Client) DeleteV1IntegrationsSlackWebhookId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteV1IntegrationsSlackWebhookIdRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -2038,7 +2037,7 @@ func (c *Client) DeleteV1IntegrationsSlackWebhookId(ctx context.Context, id stri
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetV1IntegrationsSlackWebhookId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *Client) GetV1IntegrationsSlackWebhookId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetV1IntegrationsSlackWebhookIdRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -2086,7 +2085,7 @@ func (c *Client) PostV1IntegrationsTeamsWebhook(ctx context.Context, body PostV1
 	return c.Client.Do(req)
 }
 
-func (c *Client) DeleteV1IntegrationsTeamsWebhookId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *Client) DeleteV1IntegrationsTeamsWebhookId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteV1IntegrationsTeamsWebhookIdRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -2098,7 +2097,7 @@ func (c *Client) DeleteV1IntegrationsTeamsWebhookId(ctx context.Context, id stri
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetV1IntegrationsTeamsWebhookId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *Client) GetV1IntegrationsTeamsWebhookId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetV1IntegrationsTeamsWebhookIdRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -2146,7 +2145,7 @@ func (c *Client) PostV1IntegrationsWebhook(ctx context.Context, body PostV1Integ
 	return c.Client.Do(req)
 }
 
-func (c *Client) DeleteV1IntegrationsWebhookId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *Client) DeleteV1IntegrationsWebhookId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteV1IntegrationsWebhookIdRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -2158,7 +2157,7 @@ func (c *Client) DeleteV1IntegrationsWebhookId(ctx context.Context, id string, r
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetV1IntegrationsWebhookId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *Client) GetV1IntegrationsWebhookId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetV1IntegrationsWebhookIdRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -2206,7 +2205,7 @@ func (c *Client) PostV1IntegrationsWiz(ctx context.Context, body PostV1Integrati
 	return c.Client.Do(req)
 }
 
-func (c *Client) DeleteV1IntegrationsWizId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *Client) DeleteV1IntegrationsWizId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteV1IntegrationsWizIdRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -2218,7 +2217,7 @@ func (c *Client) DeleteV1IntegrationsWizId(ctx context.Context, id string, reqEd
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetV1IntegrationsWizId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *Client) GetV1IntegrationsWizId(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetV1IntegrationsWizIdRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -2230,8 +2229,8 @@ func (c *Client) GetV1IntegrationsWizId(ctx context.Context, id string, reqEdito
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetV1Locations(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetV1LocationsRequest(c.Server)
+func (c *Client) ListLocations(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListLocationsRequest(c.Server)
 	if err != nil {
 		return nil, err
 	}
@@ -2242,8 +2241,8 @@ func (c *Client) GetV1Locations(ctx context.Context, reqEditors ...RequestEditor
 	return c.Client.Do(req)
 }
 
-func (c *Client) PostV1LocationsWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewPostV1LocationsRequestWithBody(c.Server, contentType, body)
+func (c *Client) CreateLocationWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateLocationRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -2254,8 +2253,8 @@ func (c *Client) PostV1LocationsWithBody(ctx context.Context, contentType string
 	return c.Client.Do(req)
 }
 
-func (c *Client) PostV1Locations(ctx context.Context, body PostV1LocationsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewPostV1LocationsRequest(c.Server, body)
+func (c *Client) CreateLocation(ctx context.Context, body CreateLocationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateLocationRequest(c.Server, body)
 	if err != nil {
 		return nil, err
 	}
@@ -2266,8 +2265,8 @@ func (c *Client) PostV1Locations(ctx context.Context, body PostV1LocationsJSONRe
 	return c.Client.Do(req)
 }
 
-func (c *Client) DeleteV1LocationsId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewDeleteV1LocationsIdRequest(c.Server, id)
+func (c *Client) UpsertLocationWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpsertLocationRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -2278,8 +2277,32 @@ func (c *Client) DeleteV1LocationsId(ctx context.Context, id string, reqEditors 
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetV1LocationsId(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetV1LocationsIdRequest(c.Server, id)
+func (c *Client) UpsertLocation(ctx context.Context, body UpsertLocationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpsertLocationRequest(c.Server, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteLocation(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteLocationRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetLocation(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetLocationRequest(c.Server, id)
 	if err != nil {
 		return nil, err
 	}
@@ -2361,18 +2384,18 @@ func NewGetApplicationIdRequest(server string, id openapi_types.UUID) (*http.Req
 }
 
 // NewPostApplicationsIdStartScanRequest calls the generic PostApplicationsIdStartScan builder with application/json body
-func NewPostApplicationsIdStartScanRequest(server string, id openapi_types.UUID, params *PostApplicationsIdStartScanParams, body PostApplicationsIdStartScanJSONRequestBody) (*http.Request, error) {
+func NewPostApplicationsIdStartScanRequest(server string, id openapi_types.UUID, body PostApplicationsIdStartScanJSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
 	bodyReader = bytes.NewReader(buf)
-	return NewPostApplicationsIdStartScanRequestWithBody(server, id, params, "application/json", bodyReader)
+	return NewPostApplicationsIdStartScanRequestWithBody(server, id, "application/json", bodyReader)
 }
 
 // NewPostApplicationsIdStartScanRequestWithBody generates requests for PostApplicationsIdStartScan with any type of body
-func NewPostApplicationsIdStartScanRequestWithBody(server string, id openapi_types.UUID, params *PostApplicationsIdStartScanParams, contentType string, body io.Reader) (*http.Request, error) {
+func NewPostApplicationsIdStartScanRequestWithBody(server string, id openapi_types.UUID, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -2404,35 +2427,22 @@ func NewPostApplicationsIdStartScanRequestWithBody(server string, id openapi_typ
 
 	req.Header.Add("Content-Type", contentType)
 
-	if params != nil {
-
-		var headerParam0 string
-
-		headerParam0, err = runtime.StyleParamWithLocation("simple", false, "content-type", runtime.ParamLocationHeader, params.ContentType)
-		if err != nil {
-			return nil, err
-		}
-
-		req.Header.Set("content-type", headerParam0)
-
-	}
-
 	return req, nil
 }
 
 // NewPostApplicationsIdUploadSchemaRequest calls the generic PostApplicationsIdUploadSchema builder with application/json body
-func NewPostApplicationsIdUploadSchemaRequest(server string, id openapi_types.UUID, params *PostApplicationsIdUploadSchemaParams, body PostApplicationsIdUploadSchemaJSONRequestBody) (*http.Request, error) {
+func NewPostApplicationsIdUploadSchemaRequest(server string, id openapi_types.UUID, body PostApplicationsIdUploadSchemaJSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
 	bodyReader = bytes.NewReader(buf)
-	return NewPostApplicationsIdUploadSchemaRequestWithBody(server, id, params, "application/json", bodyReader)
+	return NewPostApplicationsIdUploadSchemaRequestWithBody(server, id, "application/json", bodyReader)
 }
 
 // NewPostApplicationsIdUploadSchemaRequestWithBody generates requests for PostApplicationsIdUploadSchema with any type of body
-func NewPostApplicationsIdUploadSchemaRequestWithBody(server string, id openapi_types.UUID, params *PostApplicationsIdUploadSchemaParams, contentType string, body io.Reader) (*http.Request, error) {
+func NewPostApplicationsIdUploadSchemaRequestWithBody(server string, id openapi_types.UUID, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -2464,35 +2474,22 @@ func NewPostApplicationsIdUploadSchemaRequestWithBody(server string, id openapi_
 
 	req.Header.Add("Content-Type", contentType)
 
-	if params != nil {
-
-		var headerParam0 string
-
-		headerParam0, err = runtime.StyleParamWithLocation("simple", false, "content-type", runtime.ParamLocationHeader, params.ContentType)
-		if err != nil {
-			return nil, err
-		}
-
-		req.Header.Set("content-type", headerParam0)
-
-	}
-
 	return req, nil
 }
 
 // NewPostCreateApplicationRequest calls the generic PostCreateApplication builder with application/json body
-func NewPostCreateApplicationRequest(server string, params *PostCreateApplicationParams, body PostCreateApplicationJSONRequestBody) (*http.Request, error) {
+func NewPostCreateApplicationRequest(server string, body PostCreateApplicationJSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
 	bodyReader = bytes.NewReader(buf)
-	return NewPostCreateApplicationRequestWithBody(server, params, "application/json", bodyReader)
+	return NewPostCreateApplicationRequestWithBody(server, "application/json", bodyReader)
 }
 
 // NewPostCreateApplicationRequestWithBody generates requests for PostCreateApplication with any type of body
-func NewPostCreateApplicationRequestWithBody(server string, params *PostCreateApplicationParams, contentType string, body io.Reader) (*http.Request, error) {
+func NewPostCreateApplicationRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -2516,19 +2513,6 @@ func NewPostCreateApplicationRequestWithBody(server string, params *PostCreateAp
 	}
 
 	req.Header.Add("Content-Type", contentType)
-
-	if params != nil {
-
-		var headerParam0 string
-
-		headerParam0, err = runtime.StyleParamWithLocation("simple", false, "content-type", runtime.ParamLocationHeader, params.ContentType)
-		if err != nil {
-			return nil, err
-		}
-
-		req.Header.Set("content-type", headerParam0)
-
-	}
 
 	return req, nil
 }
@@ -2741,7 +2725,7 @@ func NewPostV1IntegrationsAkamaiRequestWithBody(server string, contentType strin
 }
 
 // NewDeleteV1IntegrationsAkamaiIdRequest generates requests for DeleteV1IntegrationsAkamaiId
-func NewDeleteV1IntegrationsAkamaiIdRequest(server string, id string) (*http.Request, error) {
+func NewDeleteV1IntegrationsAkamaiIdRequest(server string, id openapi_types.UUID) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -2775,7 +2759,7 @@ func NewDeleteV1IntegrationsAkamaiIdRequest(server string, id string) (*http.Req
 }
 
 // NewGetV1IntegrationsAkamaiIdRequest generates requests for GetV1IntegrationsAkamaiId
-func NewGetV1IntegrationsAkamaiIdRequest(server string, id string) (*http.Request, error) {
+func NewGetV1IntegrationsAkamaiIdRequest(server string, id openapi_types.UUID) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -2876,7 +2860,7 @@ func NewPostV1IntegrationsApigeeRequestWithBody(server string, contentType strin
 }
 
 // NewDeleteV1IntegrationsApigeeIdRequest generates requests for DeleteV1IntegrationsApigeeId
-func NewDeleteV1IntegrationsApigeeIdRequest(server string, id string) (*http.Request, error) {
+func NewDeleteV1IntegrationsApigeeIdRequest(server string, id openapi_types.UUID) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -2910,7 +2894,7 @@ func NewDeleteV1IntegrationsApigeeIdRequest(server string, id string) (*http.Req
 }
 
 // NewGetV1IntegrationsApigeeIdRequest generates requests for GetV1IntegrationsApigeeId
-func NewGetV1IntegrationsApigeeIdRequest(server string, id string) (*http.Request, error) {
+func NewGetV1IntegrationsApigeeIdRequest(server string, id openapi_types.UUID) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -3011,7 +2995,7 @@ func NewPostV1IntegrationsAwsRequestWithBody(server string, contentType string, 
 }
 
 // NewDeleteV1IntegrationsAwsIdRequest generates requests for DeleteV1IntegrationsAwsId
-func NewDeleteV1IntegrationsAwsIdRequest(server string, id string) (*http.Request, error) {
+func NewDeleteV1IntegrationsAwsIdRequest(server string, id openapi_types.UUID) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -3045,7 +3029,7 @@ func NewDeleteV1IntegrationsAwsIdRequest(server string, id string) (*http.Reques
 }
 
 // NewGetV1IntegrationsAwsIdRequest generates requests for GetV1IntegrationsAwsId
-func NewGetV1IntegrationsAwsIdRequest(server string, id string) (*http.Request, error) {
+func NewGetV1IntegrationsAwsIdRequest(server string, id openapi_types.UUID) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -3146,7 +3130,7 @@ func NewPostV1IntegrationsAzureRequestWithBody(server string, contentType string
 }
 
 // NewDeleteV1IntegrationsAzureIdRequest generates requests for DeleteV1IntegrationsAzureId
-func NewDeleteV1IntegrationsAzureIdRequest(server string, id string) (*http.Request, error) {
+func NewDeleteV1IntegrationsAzureIdRequest(server string, id openapi_types.UUID) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -3180,7 +3164,7 @@ func NewDeleteV1IntegrationsAzureIdRequest(server string, id string) (*http.Requ
 }
 
 // NewGetV1IntegrationsAzureIdRequest generates requests for GetV1IntegrationsAzureId
-func NewGetV1IntegrationsAzureIdRequest(server string, id string) (*http.Request, error) {
+func NewGetV1IntegrationsAzureIdRequest(server string, id openapi_types.UUID) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -3281,7 +3265,7 @@ func NewPostV1IntegrationsAzureDevopsRequestWithBody(server string, contentType 
 }
 
 // NewDeleteV1IntegrationsAzureDevopsIdRequest generates requests for DeleteV1IntegrationsAzureDevopsId
-func NewDeleteV1IntegrationsAzureDevopsIdRequest(server string, id string) (*http.Request, error) {
+func NewDeleteV1IntegrationsAzureDevopsIdRequest(server string, id openapi_types.UUID) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -3315,7 +3299,7 @@ func NewDeleteV1IntegrationsAzureDevopsIdRequest(server string, id string) (*htt
 }
 
 // NewGetV1IntegrationsAzureDevopsIdRequest generates requests for GetV1IntegrationsAzureDevopsId
-func NewGetV1IntegrationsAzureDevopsIdRequest(server string, id string) (*http.Request, error) {
+func NewGetV1IntegrationsAzureDevopsIdRequest(server string, id openapi_types.UUID) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -3416,7 +3400,7 @@ func NewPostV1IntegrationsBitbucketRepoRequestWithBody(server string, contentTyp
 }
 
 // NewDeleteV1IntegrationsBitbucketRepoIdRequest generates requests for DeleteV1IntegrationsBitbucketRepoId
-func NewDeleteV1IntegrationsBitbucketRepoIdRequest(server string, id string) (*http.Request, error) {
+func NewDeleteV1IntegrationsBitbucketRepoIdRequest(server string, id openapi_types.UUID) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -3450,7 +3434,7 @@ func NewDeleteV1IntegrationsBitbucketRepoIdRequest(server string, id string) (*h
 }
 
 // NewGetV1IntegrationsBitbucketRepoIdRequest generates requests for GetV1IntegrationsBitbucketRepoId
-func NewGetV1IntegrationsBitbucketRepoIdRequest(server string, id string) (*http.Request, error) {
+func NewGetV1IntegrationsBitbucketRepoIdRequest(server string, id openapi_types.UUID) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -3551,7 +3535,7 @@ func NewPostV1IntegrationsCloudflareRequestWithBody(server string, contentType s
 }
 
 // NewDeleteV1IntegrationsCloudflareIdRequest generates requests for DeleteV1IntegrationsCloudflareId
-func NewDeleteV1IntegrationsCloudflareIdRequest(server string, id string) (*http.Request, error) {
+func NewDeleteV1IntegrationsCloudflareIdRequest(server string, id openapi_types.UUID) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -3585,7 +3569,7 @@ func NewDeleteV1IntegrationsCloudflareIdRequest(server string, id string) (*http
 }
 
 // NewGetV1IntegrationsCloudflareIdRequest generates requests for GetV1IntegrationsCloudflareId
-func NewGetV1IntegrationsCloudflareIdRequest(server string, id string) (*http.Request, error) {
+func NewGetV1IntegrationsCloudflareIdRequest(server string, id openapi_types.UUID) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -3686,7 +3670,7 @@ func NewPostV1IntegrationsDiscordWebhookRequestWithBody(server string, contentTy
 }
 
 // NewDeleteV1IntegrationsDiscordWebhookIdRequest generates requests for DeleteV1IntegrationsDiscordWebhookId
-func NewDeleteV1IntegrationsDiscordWebhookIdRequest(server string, id string) (*http.Request, error) {
+func NewDeleteV1IntegrationsDiscordWebhookIdRequest(server string, id openapi_types.UUID) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -3720,7 +3704,7 @@ func NewDeleteV1IntegrationsDiscordWebhookIdRequest(server string, id string) (*
 }
 
 // NewGetV1IntegrationsDiscordWebhookIdRequest generates requests for GetV1IntegrationsDiscordWebhookId
-func NewGetV1IntegrationsDiscordWebhookIdRequest(server string, id string) (*http.Request, error) {
+func NewGetV1IntegrationsDiscordWebhookIdRequest(server string, id openapi_types.UUID) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -3821,7 +3805,7 @@ func NewPostV1IntegrationsEmailRequestWithBody(server string, contentType string
 }
 
 // NewDeleteV1IntegrationsEmailIdRequest generates requests for DeleteV1IntegrationsEmailId
-func NewDeleteV1IntegrationsEmailIdRequest(server string, id string) (*http.Request, error) {
+func NewDeleteV1IntegrationsEmailIdRequest(server string, id openapi_types.UUID) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -3855,7 +3839,7 @@ func NewDeleteV1IntegrationsEmailIdRequest(server string, id string) (*http.Requ
 }
 
 // NewGetV1IntegrationsEmailIdRequest generates requests for GetV1IntegrationsEmailId
-func NewGetV1IntegrationsEmailIdRequest(server string, id string) (*http.Request, error) {
+func NewGetV1IntegrationsEmailIdRequest(server string, id openapi_types.UUID) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -3956,7 +3940,7 @@ func NewPostV1IntegrationsGcpRequestWithBody(server string, contentType string, 
 }
 
 // NewDeleteV1IntegrationsGcpIdRequest generates requests for DeleteV1IntegrationsGcpId
-func NewDeleteV1IntegrationsGcpIdRequest(server string, id string) (*http.Request, error) {
+func NewDeleteV1IntegrationsGcpIdRequest(server string, id openapi_types.UUID) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -3990,7 +3974,7 @@ func NewDeleteV1IntegrationsGcpIdRequest(server string, id string) (*http.Reques
 }
 
 // NewGetV1IntegrationsGcpIdRequest generates requests for GetV1IntegrationsGcpId
-func NewGetV1IntegrationsGcpIdRequest(server string, id string) (*http.Request, error) {
+func NewGetV1IntegrationsGcpIdRequest(server string, id openapi_types.UUID) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -4091,7 +4075,7 @@ func NewPostV1IntegrationsGithubApiKeyRequestWithBody(server string, contentType
 }
 
 // NewDeleteV1IntegrationsGithubApiKeyIdRequest generates requests for DeleteV1IntegrationsGithubApiKeyId
-func NewDeleteV1IntegrationsGithubApiKeyIdRequest(server string, id string) (*http.Request, error) {
+func NewDeleteV1IntegrationsGithubApiKeyIdRequest(server string, id openapi_types.UUID) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -4125,7 +4109,7 @@ func NewDeleteV1IntegrationsGithubApiKeyIdRequest(server string, id string) (*ht
 }
 
 // NewGetV1IntegrationsGithubApiKeyIdRequest generates requests for GetV1IntegrationsGithubApiKeyId
-func NewGetV1IntegrationsGithubApiKeyIdRequest(server string, id string) (*http.Request, error) {
+func NewGetV1IntegrationsGithubApiKeyIdRequest(server string, id openapi_types.UUID) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -4226,7 +4210,7 @@ func NewPostV1IntegrationsGitlabApiKeyRequestWithBody(server string, contentType
 }
 
 // NewDeleteV1IntegrationsGitlabApiKeyIdRequest generates requests for DeleteV1IntegrationsGitlabApiKeyId
-func NewDeleteV1IntegrationsGitlabApiKeyIdRequest(server string, id string) (*http.Request, error) {
+func NewDeleteV1IntegrationsGitlabApiKeyIdRequest(server string, id openapi_types.UUID) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -4260,7 +4244,7 @@ func NewDeleteV1IntegrationsGitlabApiKeyIdRequest(server string, id string) (*ht
 }
 
 // NewGetV1IntegrationsGitlabApiKeyIdRequest generates requests for GetV1IntegrationsGitlabApiKeyId
-func NewGetV1IntegrationsGitlabApiKeyIdRequest(server string, id string) (*http.Request, error) {
+func NewGetV1IntegrationsGitlabApiKeyIdRequest(server string, id openapi_types.UUID) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -4361,7 +4345,7 @@ func NewPostV1IntegrationsJiraRequestWithBody(server string, contentType string,
 }
 
 // NewDeleteV1IntegrationsJiraIdRequest generates requests for DeleteV1IntegrationsJiraId
-func NewDeleteV1IntegrationsJiraIdRequest(server string, id string) (*http.Request, error) {
+func NewDeleteV1IntegrationsJiraIdRequest(server string, id openapi_types.UUID) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -4395,7 +4379,7 @@ func NewDeleteV1IntegrationsJiraIdRequest(server string, id string) (*http.Reque
 }
 
 // NewGetV1IntegrationsJiraIdRequest generates requests for GetV1IntegrationsJiraId
-func NewGetV1IntegrationsJiraIdRequest(server string, id string) (*http.Request, error) {
+func NewGetV1IntegrationsJiraIdRequest(server string, id openapi_types.UUID) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -4496,7 +4480,7 @@ func NewPostV1IntegrationsKongGatewayRequestWithBody(server string, contentType 
 }
 
 // NewDeleteV1IntegrationsKongGatewayIdRequest generates requests for DeleteV1IntegrationsKongGatewayId
-func NewDeleteV1IntegrationsKongGatewayIdRequest(server string, id string) (*http.Request, error) {
+func NewDeleteV1IntegrationsKongGatewayIdRequest(server string, id openapi_types.UUID) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -4530,7 +4514,7 @@ func NewDeleteV1IntegrationsKongGatewayIdRequest(server string, id string) (*htt
 }
 
 // NewGetV1IntegrationsKongGatewayIdRequest generates requests for GetV1IntegrationsKongGatewayId
-func NewGetV1IntegrationsKongGatewayIdRequest(server string, id string) (*http.Request, error) {
+func NewGetV1IntegrationsKongGatewayIdRequest(server string, id openapi_types.UUID) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -4631,7 +4615,7 @@ func NewPostV1IntegrationsKongKonnectRequestWithBody(server string, contentType 
 }
 
 // NewDeleteV1IntegrationsKongKonnectIdRequest generates requests for DeleteV1IntegrationsKongKonnectId
-func NewDeleteV1IntegrationsKongKonnectIdRequest(server string, id string) (*http.Request, error) {
+func NewDeleteV1IntegrationsKongKonnectIdRequest(server string, id openapi_types.UUID) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -4665,7 +4649,7 @@ func NewDeleteV1IntegrationsKongKonnectIdRequest(server string, id string) (*htt
 }
 
 // NewGetV1IntegrationsKongKonnectIdRequest generates requests for GetV1IntegrationsKongKonnectId
-func NewGetV1IntegrationsKongKonnectIdRequest(server string, id string) (*http.Request, error) {
+func NewGetV1IntegrationsKongKonnectIdRequest(server string, id openapi_types.UUID) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -4766,7 +4750,7 @@ func NewPostV1IntegrationsKubernetesRequestWithBody(server string, contentType s
 }
 
 // NewDeleteV1IntegrationsKubernetesIdRequest generates requests for DeleteV1IntegrationsKubernetesId
-func NewDeleteV1IntegrationsKubernetesIdRequest(server string, id string) (*http.Request, error) {
+func NewDeleteV1IntegrationsKubernetesIdRequest(server string, id openapi_types.UUID) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -4800,7 +4784,7 @@ func NewDeleteV1IntegrationsKubernetesIdRequest(server string, id string) (*http
 }
 
 // NewGetV1IntegrationsKubernetesIdRequest generates requests for GetV1IntegrationsKubernetesId
-func NewGetV1IntegrationsKubernetesIdRequest(server string, id string) (*http.Request, error) {
+func NewGetV1IntegrationsKubernetesIdRequest(server string, id openapi_types.UUID) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -4901,7 +4885,7 @@ func NewPostV1IntegrationsPostmanApiKeyRequestWithBody(server string, contentTyp
 }
 
 // NewDeleteV1IntegrationsPostmanApiKeyIdRequest generates requests for DeleteV1IntegrationsPostmanApiKeyId
-func NewDeleteV1IntegrationsPostmanApiKeyIdRequest(server string, id string) (*http.Request, error) {
+func NewDeleteV1IntegrationsPostmanApiKeyIdRequest(server string, id openapi_types.UUID) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -4935,7 +4919,7 @@ func NewDeleteV1IntegrationsPostmanApiKeyIdRequest(server string, id string) (*h
 }
 
 // NewGetV1IntegrationsPostmanApiKeyIdRequest generates requests for GetV1IntegrationsPostmanApiKeyId
-func NewGetV1IntegrationsPostmanApiKeyIdRequest(server string, id string) (*http.Request, error) {
+func NewGetV1IntegrationsPostmanApiKeyIdRequest(server string, id openapi_types.UUID) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -5036,7 +5020,7 @@ func NewPostV1IntegrationsSlackWebhookRequestWithBody(server string, contentType
 }
 
 // NewDeleteV1IntegrationsSlackWebhookIdRequest generates requests for DeleteV1IntegrationsSlackWebhookId
-func NewDeleteV1IntegrationsSlackWebhookIdRequest(server string, id string) (*http.Request, error) {
+func NewDeleteV1IntegrationsSlackWebhookIdRequest(server string, id openapi_types.UUID) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -5070,7 +5054,7 @@ func NewDeleteV1IntegrationsSlackWebhookIdRequest(server string, id string) (*ht
 }
 
 // NewGetV1IntegrationsSlackWebhookIdRequest generates requests for GetV1IntegrationsSlackWebhookId
-func NewGetV1IntegrationsSlackWebhookIdRequest(server string, id string) (*http.Request, error) {
+func NewGetV1IntegrationsSlackWebhookIdRequest(server string, id openapi_types.UUID) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -5171,7 +5155,7 @@ func NewPostV1IntegrationsTeamsWebhookRequestWithBody(server string, contentType
 }
 
 // NewDeleteV1IntegrationsTeamsWebhookIdRequest generates requests for DeleteV1IntegrationsTeamsWebhookId
-func NewDeleteV1IntegrationsTeamsWebhookIdRequest(server string, id string) (*http.Request, error) {
+func NewDeleteV1IntegrationsTeamsWebhookIdRequest(server string, id openapi_types.UUID) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -5205,7 +5189,7 @@ func NewDeleteV1IntegrationsTeamsWebhookIdRequest(server string, id string) (*ht
 }
 
 // NewGetV1IntegrationsTeamsWebhookIdRequest generates requests for GetV1IntegrationsTeamsWebhookId
-func NewGetV1IntegrationsTeamsWebhookIdRequest(server string, id string) (*http.Request, error) {
+func NewGetV1IntegrationsTeamsWebhookIdRequest(server string, id openapi_types.UUID) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -5306,7 +5290,7 @@ func NewPostV1IntegrationsWebhookRequestWithBody(server string, contentType stri
 }
 
 // NewDeleteV1IntegrationsWebhookIdRequest generates requests for DeleteV1IntegrationsWebhookId
-func NewDeleteV1IntegrationsWebhookIdRequest(server string, id string) (*http.Request, error) {
+func NewDeleteV1IntegrationsWebhookIdRequest(server string, id openapi_types.UUID) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -5340,7 +5324,7 @@ func NewDeleteV1IntegrationsWebhookIdRequest(server string, id string) (*http.Re
 }
 
 // NewGetV1IntegrationsWebhookIdRequest generates requests for GetV1IntegrationsWebhookId
-func NewGetV1IntegrationsWebhookIdRequest(server string, id string) (*http.Request, error) {
+func NewGetV1IntegrationsWebhookIdRequest(server string, id openapi_types.UUID) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -5441,7 +5425,7 @@ func NewPostV1IntegrationsWizRequestWithBody(server string, contentType string, 
 }
 
 // NewDeleteV1IntegrationsWizIdRequest generates requests for DeleteV1IntegrationsWizId
-func NewDeleteV1IntegrationsWizIdRequest(server string, id string) (*http.Request, error) {
+func NewDeleteV1IntegrationsWizIdRequest(server string, id openapi_types.UUID) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -5475,7 +5459,7 @@ func NewDeleteV1IntegrationsWizIdRequest(server string, id string) (*http.Reques
 }
 
 // NewGetV1IntegrationsWizIdRequest generates requests for GetV1IntegrationsWizId
-func NewGetV1IntegrationsWizIdRequest(server string, id string) (*http.Request, error) {
+func NewGetV1IntegrationsWizIdRequest(server string, id openapi_types.UUID) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -5508,8 +5492,8 @@ func NewGetV1IntegrationsWizIdRequest(server string, id string) (*http.Request, 
 	return req, nil
 }
 
-// NewGetV1LocationsRequest generates requests for GetV1Locations
-func NewGetV1LocationsRequest(server string) (*http.Request, error) {
+// NewListLocationsRequest generates requests for ListLocations
+func NewListLocationsRequest(server string) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -5535,19 +5519,19 @@ func NewGetV1LocationsRequest(server string) (*http.Request, error) {
 	return req, nil
 }
 
-// NewPostV1LocationsRequest calls the generic PostV1Locations builder with application/json body
-func NewPostV1LocationsRequest(server string, body PostV1LocationsJSONRequestBody) (*http.Request, error) {
+// NewCreateLocationRequest calls the generic CreateLocation builder with application/json body
+func NewCreateLocationRequest(server string, body CreateLocationJSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
 	bodyReader = bytes.NewReader(buf)
-	return NewPostV1LocationsRequestWithBody(server, "application/json", bodyReader)
+	return NewCreateLocationRequestWithBody(server, "application/json", bodyReader)
 }
 
-// NewPostV1LocationsRequestWithBody generates requests for PostV1Locations with any type of body
-func NewPostV1LocationsRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+// NewCreateLocationRequestWithBody generates requests for CreateLocation with any type of body
+func NewCreateLocationRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -5575,8 +5559,48 @@ func NewPostV1LocationsRequestWithBody(server string, contentType string, body i
 	return req, nil
 }
 
-// NewDeleteV1LocationsIdRequest generates requests for DeleteV1LocationsId
-func NewDeleteV1LocationsIdRequest(server string, id string) (*http.Request, error) {
+// NewUpsertLocationRequest calls the generic UpsertLocation builder with application/json body
+func NewUpsertLocationRequest(server string, body UpsertLocationJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpsertLocationRequestWithBody(server, "application/json", bodyReader)
+}
+
+// NewUpsertLocationRequestWithBody generates requests for UpsertLocation with any type of body
+func NewUpsertLocationRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/locations")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewDeleteLocationRequest generates requests for DeleteLocation
+func NewDeleteLocationRequest(server string, id openapi_types.UUID) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -5609,8 +5633,8 @@ func NewDeleteV1LocationsIdRequest(server string, id string) (*http.Request, err
 	return req, nil
 }
 
-// NewGetV1LocationsIdRequest generates requests for GetV1LocationsId
-func NewGetV1LocationsIdRequest(server string, id string) (*http.Request, error) {
+// NewGetLocationRequest generates requests for GetLocation
+func NewGetLocationRequest(server string, id openapi_types.UUID) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -5672,16 +5696,20 @@ func NewGetV1OrganizationIdSchemasRequest(server string, id openapi_types.UUID, 
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "after", runtime.ParamLocationQuery, params.After); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
+		if params.After != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "after", runtime.ParamLocationQuery, *params.After); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
 				}
 			}
+
 		}
 
 		queryURL.RawQuery = queryValues.Encode()
@@ -5817,19 +5845,19 @@ type ClientWithResponsesInterface interface {
 	GetApplicationIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetApplicationIdResponse, error)
 
 	// PostApplicationsIdStartScanWithBodyWithResponse request with any body
-	PostApplicationsIdStartScanWithBodyWithResponse(ctx context.Context, id openapi_types.UUID, params *PostApplicationsIdStartScanParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostApplicationsIdStartScanResponse, error)
+	PostApplicationsIdStartScanWithBodyWithResponse(ctx context.Context, id openapi_types.UUID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostApplicationsIdStartScanResponse, error)
 
-	PostApplicationsIdStartScanWithResponse(ctx context.Context, id openapi_types.UUID, params *PostApplicationsIdStartScanParams, body PostApplicationsIdStartScanJSONRequestBody, reqEditors ...RequestEditorFn) (*PostApplicationsIdStartScanResponse, error)
+	PostApplicationsIdStartScanWithResponse(ctx context.Context, id openapi_types.UUID, body PostApplicationsIdStartScanJSONRequestBody, reqEditors ...RequestEditorFn) (*PostApplicationsIdStartScanResponse, error)
 
 	// PostApplicationsIdUploadSchemaWithBodyWithResponse request with any body
-	PostApplicationsIdUploadSchemaWithBodyWithResponse(ctx context.Context, id openapi_types.UUID, params *PostApplicationsIdUploadSchemaParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostApplicationsIdUploadSchemaResponse, error)
+	PostApplicationsIdUploadSchemaWithBodyWithResponse(ctx context.Context, id openapi_types.UUID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostApplicationsIdUploadSchemaResponse, error)
 
-	PostApplicationsIdUploadSchemaWithResponse(ctx context.Context, id openapi_types.UUID, params *PostApplicationsIdUploadSchemaParams, body PostApplicationsIdUploadSchemaJSONRequestBody, reqEditors ...RequestEditorFn) (*PostApplicationsIdUploadSchemaResponse, error)
+	PostApplicationsIdUploadSchemaWithResponse(ctx context.Context, id openapi_types.UUID, body PostApplicationsIdUploadSchemaJSONRequestBody, reqEditors ...RequestEditorFn) (*PostApplicationsIdUploadSchemaResponse, error)
 
 	// PostCreateApplicationWithBodyWithResponse request with any body
-	PostCreateApplicationWithBodyWithResponse(ctx context.Context, params *PostCreateApplicationParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostCreateApplicationResponse, error)
+	PostCreateApplicationWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostCreateApplicationResponse, error)
 
-	PostCreateApplicationWithResponse(ctx context.Context, params *PostCreateApplicationParams, body PostCreateApplicationJSONRequestBody, reqEditors ...RequestEditorFn) (*PostCreateApplicationResponse, error)
+	PostCreateApplicationWithResponse(ctx context.Context, body PostCreateApplicationJSONRequestBody, reqEditors ...RequestEditorFn) (*PostCreateApplicationResponse, error)
 
 	// GetOrganizationIdApplicationsWithResponse request
 	GetOrganizationIdApplicationsWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetOrganizationIdApplicationsResponse, error)
@@ -5849,10 +5877,10 @@ type ClientWithResponsesInterface interface {
 	PostV1IntegrationsAkamaiWithResponse(ctx context.Context, body PostV1IntegrationsAkamaiJSONRequestBody, reqEditors ...RequestEditorFn) (*PostV1IntegrationsAkamaiResponse, error)
 
 	// DeleteV1IntegrationsAkamaiIdWithResponse request
-	DeleteV1IntegrationsAkamaiIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsAkamaiIdResponse, error)
+	DeleteV1IntegrationsAkamaiIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsAkamaiIdResponse, error)
 
 	// GetV1IntegrationsAkamaiIdWithResponse request
-	GetV1IntegrationsAkamaiIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetV1IntegrationsAkamaiIdResponse, error)
+	GetV1IntegrationsAkamaiIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetV1IntegrationsAkamaiIdResponse, error)
 
 	// GetV1IntegrationsApigeeWithResponse request
 	GetV1IntegrationsApigeeWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetV1IntegrationsApigeeResponse, error)
@@ -5863,10 +5891,10 @@ type ClientWithResponsesInterface interface {
 	PostV1IntegrationsApigeeWithResponse(ctx context.Context, body PostV1IntegrationsApigeeJSONRequestBody, reqEditors ...RequestEditorFn) (*PostV1IntegrationsApigeeResponse, error)
 
 	// DeleteV1IntegrationsApigeeIdWithResponse request
-	DeleteV1IntegrationsApigeeIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsApigeeIdResponse, error)
+	DeleteV1IntegrationsApigeeIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsApigeeIdResponse, error)
 
 	// GetV1IntegrationsApigeeIdWithResponse request
-	GetV1IntegrationsApigeeIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetV1IntegrationsApigeeIdResponse, error)
+	GetV1IntegrationsApigeeIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetV1IntegrationsApigeeIdResponse, error)
 
 	// GetV1IntegrationsAwsWithResponse request
 	GetV1IntegrationsAwsWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetV1IntegrationsAwsResponse, error)
@@ -5877,10 +5905,10 @@ type ClientWithResponsesInterface interface {
 	PostV1IntegrationsAwsWithResponse(ctx context.Context, body PostV1IntegrationsAwsJSONRequestBody, reqEditors ...RequestEditorFn) (*PostV1IntegrationsAwsResponse, error)
 
 	// DeleteV1IntegrationsAwsIdWithResponse request
-	DeleteV1IntegrationsAwsIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsAwsIdResponse, error)
+	DeleteV1IntegrationsAwsIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsAwsIdResponse, error)
 
 	// GetV1IntegrationsAwsIdWithResponse request
-	GetV1IntegrationsAwsIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetV1IntegrationsAwsIdResponse, error)
+	GetV1IntegrationsAwsIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetV1IntegrationsAwsIdResponse, error)
 
 	// GetV1IntegrationsAzureWithResponse request
 	GetV1IntegrationsAzureWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetV1IntegrationsAzureResponse, error)
@@ -5891,10 +5919,10 @@ type ClientWithResponsesInterface interface {
 	PostV1IntegrationsAzureWithResponse(ctx context.Context, body PostV1IntegrationsAzureJSONRequestBody, reqEditors ...RequestEditorFn) (*PostV1IntegrationsAzureResponse, error)
 
 	// DeleteV1IntegrationsAzureIdWithResponse request
-	DeleteV1IntegrationsAzureIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsAzureIdResponse, error)
+	DeleteV1IntegrationsAzureIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsAzureIdResponse, error)
 
 	// GetV1IntegrationsAzureIdWithResponse request
-	GetV1IntegrationsAzureIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetV1IntegrationsAzureIdResponse, error)
+	GetV1IntegrationsAzureIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetV1IntegrationsAzureIdResponse, error)
 
 	// GetV1IntegrationsAzureDevopsWithResponse request
 	GetV1IntegrationsAzureDevopsWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetV1IntegrationsAzureDevopsResponse, error)
@@ -5905,10 +5933,10 @@ type ClientWithResponsesInterface interface {
 	PostV1IntegrationsAzureDevopsWithResponse(ctx context.Context, body PostV1IntegrationsAzureDevopsJSONRequestBody, reqEditors ...RequestEditorFn) (*PostV1IntegrationsAzureDevopsResponse, error)
 
 	// DeleteV1IntegrationsAzureDevopsIdWithResponse request
-	DeleteV1IntegrationsAzureDevopsIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsAzureDevopsIdResponse, error)
+	DeleteV1IntegrationsAzureDevopsIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsAzureDevopsIdResponse, error)
 
 	// GetV1IntegrationsAzureDevopsIdWithResponse request
-	GetV1IntegrationsAzureDevopsIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetV1IntegrationsAzureDevopsIdResponse, error)
+	GetV1IntegrationsAzureDevopsIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetV1IntegrationsAzureDevopsIdResponse, error)
 
 	// GetV1IntegrationsBitbucketRepoWithResponse request
 	GetV1IntegrationsBitbucketRepoWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetV1IntegrationsBitbucketRepoResponse, error)
@@ -5919,10 +5947,10 @@ type ClientWithResponsesInterface interface {
 	PostV1IntegrationsBitbucketRepoWithResponse(ctx context.Context, body PostV1IntegrationsBitbucketRepoJSONRequestBody, reqEditors ...RequestEditorFn) (*PostV1IntegrationsBitbucketRepoResponse, error)
 
 	// DeleteV1IntegrationsBitbucketRepoIdWithResponse request
-	DeleteV1IntegrationsBitbucketRepoIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsBitbucketRepoIdResponse, error)
+	DeleteV1IntegrationsBitbucketRepoIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsBitbucketRepoIdResponse, error)
 
 	// GetV1IntegrationsBitbucketRepoIdWithResponse request
-	GetV1IntegrationsBitbucketRepoIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetV1IntegrationsBitbucketRepoIdResponse, error)
+	GetV1IntegrationsBitbucketRepoIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetV1IntegrationsBitbucketRepoIdResponse, error)
 
 	// GetV1IntegrationsCloudflareWithResponse request
 	GetV1IntegrationsCloudflareWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetV1IntegrationsCloudflareResponse, error)
@@ -5933,10 +5961,10 @@ type ClientWithResponsesInterface interface {
 	PostV1IntegrationsCloudflareWithResponse(ctx context.Context, body PostV1IntegrationsCloudflareJSONRequestBody, reqEditors ...RequestEditorFn) (*PostV1IntegrationsCloudflareResponse, error)
 
 	// DeleteV1IntegrationsCloudflareIdWithResponse request
-	DeleteV1IntegrationsCloudflareIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsCloudflareIdResponse, error)
+	DeleteV1IntegrationsCloudflareIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsCloudflareIdResponse, error)
 
 	// GetV1IntegrationsCloudflareIdWithResponse request
-	GetV1IntegrationsCloudflareIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetV1IntegrationsCloudflareIdResponse, error)
+	GetV1IntegrationsCloudflareIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetV1IntegrationsCloudflareIdResponse, error)
 
 	// GetV1IntegrationsDiscordWebhookWithResponse request
 	GetV1IntegrationsDiscordWebhookWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetV1IntegrationsDiscordWebhookResponse, error)
@@ -5947,10 +5975,10 @@ type ClientWithResponsesInterface interface {
 	PostV1IntegrationsDiscordWebhookWithResponse(ctx context.Context, body PostV1IntegrationsDiscordWebhookJSONRequestBody, reqEditors ...RequestEditorFn) (*PostV1IntegrationsDiscordWebhookResponse, error)
 
 	// DeleteV1IntegrationsDiscordWebhookIdWithResponse request
-	DeleteV1IntegrationsDiscordWebhookIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsDiscordWebhookIdResponse, error)
+	DeleteV1IntegrationsDiscordWebhookIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsDiscordWebhookIdResponse, error)
 
 	// GetV1IntegrationsDiscordWebhookIdWithResponse request
-	GetV1IntegrationsDiscordWebhookIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetV1IntegrationsDiscordWebhookIdResponse, error)
+	GetV1IntegrationsDiscordWebhookIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetV1IntegrationsDiscordWebhookIdResponse, error)
 
 	// GetV1IntegrationsEmailWithResponse request
 	GetV1IntegrationsEmailWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetV1IntegrationsEmailResponse, error)
@@ -5961,10 +5989,10 @@ type ClientWithResponsesInterface interface {
 	PostV1IntegrationsEmailWithResponse(ctx context.Context, body PostV1IntegrationsEmailJSONRequestBody, reqEditors ...RequestEditorFn) (*PostV1IntegrationsEmailResponse, error)
 
 	// DeleteV1IntegrationsEmailIdWithResponse request
-	DeleteV1IntegrationsEmailIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsEmailIdResponse, error)
+	DeleteV1IntegrationsEmailIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsEmailIdResponse, error)
 
 	// GetV1IntegrationsEmailIdWithResponse request
-	GetV1IntegrationsEmailIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetV1IntegrationsEmailIdResponse, error)
+	GetV1IntegrationsEmailIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetV1IntegrationsEmailIdResponse, error)
 
 	// GetV1IntegrationsGcpWithResponse request
 	GetV1IntegrationsGcpWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetV1IntegrationsGcpResponse, error)
@@ -5975,10 +6003,10 @@ type ClientWithResponsesInterface interface {
 	PostV1IntegrationsGcpWithResponse(ctx context.Context, body PostV1IntegrationsGcpJSONRequestBody, reqEditors ...RequestEditorFn) (*PostV1IntegrationsGcpResponse, error)
 
 	// DeleteV1IntegrationsGcpIdWithResponse request
-	DeleteV1IntegrationsGcpIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsGcpIdResponse, error)
+	DeleteV1IntegrationsGcpIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsGcpIdResponse, error)
 
 	// GetV1IntegrationsGcpIdWithResponse request
-	GetV1IntegrationsGcpIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetV1IntegrationsGcpIdResponse, error)
+	GetV1IntegrationsGcpIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetV1IntegrationsGcpIdResponse, error)
 
 	// GetV1IntegrationsGithubApiKeyWithResponse request
 	GetV1IntegrationsGithubApiKeyWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetV1IntegrationsGithubApiKeyResponse, error)
@@ -5989,10 +6017,10 @@ type ClientWithResponsesInterface interface {
 	PostV1IntegrationsGithubApiKeyWithResponse(ctx context.Context, body PostV1IntegrationsGithubApiKeyJSONRequestBody, reqEditors ...RequestEditorFn) (*PostV1IntegrationsGithubApiKeyResponse, error)
 
 	// DeleteV1IntegrationsGithubApiKeyIdWithResponse request
-	DeleteV1IntegrationsGithubApiKeyIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsGithubApiKeyIdResponse, error)
+	DeleteV1IntegrationsGithubApiKeyIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsGithubApiKeyIdResponse, error)
 
 	// GetV1IntegrationsGithubApiKeyIdWithResponse request
-	GetV1IntegrationsGithubApiKeyIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetV1IntegrationsGithubApiKeyIdResponse, error)
+	GetV1IntegrationsGithubApiKeyIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetV1IntegrationsGithubApiKeyIdResponse, error)
 
 	// GetV1IntegrationsGitlabApiKeyWithResponse request
 	GetV1IntegrationsGitlabApiKeyWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetV1IntegrationsGitlabApiKeyResponse, error)
@@ -6003,10 +6031,10 @@ type ClientWithResponsesInterface interface {
 	PostV1IntegrationsGitlabApiKeyWithResponse(ctx context.Context, body PostV1IntegrationsGitlabApiKeyJSONRequestBody, reqEditors ...RequestEditorFn) (*PostV1IntegrationsGitlabApiKeyResponse, error)
 
 	// DeleteV1IntegrationsGitlabApiKeyIdWithResponse request
-	DeleteV1IntegrationsGitlabApiKeyIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsGitlabApiKeyIdResponse, error)
+	DeleteV1IntegrationsGitlabApiKeyIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsGitlabApiKeyIdResponse, error)
 
 	// GetV1IntegrationsGitlabApiKeyIdWithResponse request
-	GetV1IntegrationsGitlabApiKeyIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetV1IntegrationsGitlabApiKeyIdResponse, error)
+	GetV1IntegrationsGitlabApiKeyIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetV1IntegrationsGitlabApiKeyIdResponse, error)
 
 	// GetV1IntegrationsJiraWithResponse request
 	GetV1IntegrationsJiraWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetV1IntegrationsJiraResponse, error)
@@ -6017,10 +6045,10 @@ type ClientWithResponsesInterface interface {
 	PostV1IntegrationsJiraWithResponse(ctx context.Context, body PostV1IntegrationsJiraJSONRequestBody, reqEditors ...RequestEditorFn) (*PostV1IntegrationsJiraResponse, error)
 
 	// DeleteV1IntegrationsJiraIdWithResponse request
-	DeleteV1IntegrationsJiraIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsJiraIdResponse, error)
+	DeleteV1IntegrationsJiraIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsJiraIdResponse, error)
 
 	// GetV1IntegrationsJiraIdWithResponse request
-	GetV1IntegrationsJiraIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetV1IntegrationsJiraIdResponse, error)
+	GetV1IntegrationsJiraIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetV1IntegrationsJiraIdResponse, error)
 
 	// GetV1IntegrationsKongGatewayWithResponse request
 	GetV1IntegrationsKongGatewayWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetV1IntegrationsKongGatewayResponse, error)
@@ -6031,10 +6059,10 @@ type ClientWithResponsesInterface interface {
 	PostV1IntegrationsKongGatewayWithResponse(ctx context.Context, body PostV1IntegrationsKongGatewayJSONRequestBody, reqEditors ...RequestEditorFn) (*PostV1IntegrationsKongGatewayResponse, error)
 
 	// DeleteV1IntegrationsKongGatewayIdWithResponse request
-	DeleteV1IntegrationsKongGatewayIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsKongGatewayIdResponse, error)
+	DeleteV1IntegrationsKongGatewayIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsKongGatewayIdResponse, error)
 
 	// GetV1IntegrationsKongGatewayIdWithResponse request
-	GetV1IntegrationsKongGatewayIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetV1IntegrationsKongGatewayIdResponse, error)
+	GetV1IntegrationsKongGatewayIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetV1IntegrationsKongGatewayIdResponse, error)
 
 	// GetV1IntegrationsKongKonnectWithResponse request
 	GetV1IntegrationsKongKonnectWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetV1IntegrationsKongKonnectResponse, error)
@@ -6045,10 +6073,10 @@ type ClientWithResponsesInterface interface {
 	PostV1IntegrationsKongKonnectWithResponse(ctx context.Context, body PostV1IntegrationsKongKonnectJSONRequestBody, reqEditors ...RequestEditorFn) (*PostV1IntegrationsKongKonnectResponse, error)
 
 	// DeleteV1IntegrationsKongKonnectIdWithResponse request
-	DeleteV1IntegrationsKongKonnectIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsKongKonnectIdResponse, error)
+	DeleteV1IntegrationsKongKonnectIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsKongKonnectIdResponse, error)
 
 	// GetV1IntegrationsKongKonnectIdWithResponse request
-	GetV1IntegrationsKongKonnectIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetV1IntegrationsKongKonnectIdResponse, error)
+	GetV1IntegrationsKongKonnectIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetV1IntegrationsKongKonnectIdResponse, error)
 
 	// GetV1IntegrationsKubernetesWithResponse request
 	GetV1IntegrationsKubernetesWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetV1IntegrationsKubernetesResponse, error)
@@ -6059,10 +6087,10 @@ type ClientWithResponsesInterface interface {
 	PostV1IntegrationsKubernetesWithResponse(ctx context.Context, body PostV1IntegrationsKubernetesJSONRequestBody, reqEditors ...RequestEditorFn) (*PostV1IntegrationsKubernetesResponse, error)
 
 	// DeleteV1IntegrationsKubernetesIdWithResponse request
-	DeleteV1IntegrationsKubernetesIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsKubernetesIdResponse, error)
+	DeleteV1IntegrationsKubernetesIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsKubernetesIdResponse, error)
 
 	// GetV1IntegrationsKubernetesIdWithResponse request
-	GetV1IntegrationsKubernetesIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetV1IntegrationsKubernetesIdResponse, error)
+	GetV1IntegrationsKubernetesIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetV1IntegrationsKubernetesIdResponse, error)
 
 	// GetV1IntegrationsPostmanApiKeyWithResponse request
 	GetV1IntegrationsPostmanApiKeyWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetV1IntegrationsPostmanApiKeyResponse, error)
@@ -6073,10 +6101,10 @@ type ClientWithResponsesInterface interface {
 	PostV1IntegrationsPostmanApiKeyWithResponse(ctx context.Context, body PostV1IntegrationsPostmanApiKeyJSONRequestBody, reqEditors ...RequestEditorFn) (*PostV1IntegrationsPostmanApiKeyResponse, error)
 
 	// DeleteV1IntegrationsPostmanApiKeyIdWithResponse request
-	DeleteV1IntegrationsPostmanApiKeyIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsPostmanApiKeyIdResponse, error)
+	DeleteV1IntegrationsPostmanApiKeyIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsPostmanApiKeyIdResponse, error)
 
 	// GetV1IntegrationsPostmanApiKeyIdWithResponse request
-	GetV1IntegrationsPostmanApiKeyIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetV1IntegrationsPostmanApiKeyIdResponse, error)
+	GetV1IntegrationsPostmanApiKeyIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetV1IntegrationsPostmanApiKeyIdResponse, error)
 
 	// GetV1IntegrationsSlackWebhookWithResponse request
 	GetV1IntegrationsSlackWebhookWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetV1IntegrationsSlackWebhookResponse, error)
@@ -6087,10 +6115,10 @@ type ClientWithResponsesInterface interface {
 	PostV1IntegrationsSlackWebhookWithResponse(ctx context.Context, body PostV1IntegrationsSlackWebhookJSONRequestBody, reqEditors ...RequestEditorFn) (*PostV1IntegrationsSlackWebhookResponse, error)
 
 	// DeleteV1IntegrationsSlackWebhookIdWithResponse request
-	DeleteV1IntegrationsSlackWebhookIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsSlackWebhookIdResponse, error)
+	DeleteV1IntegrationsSlackWebhookIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsSlackWebhookIdResponse, error)
 
 	// GetV1IntegrationsSlackWebhookIdWithResponse request
-	GetV1IntegrationsSlackWebhookIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetV1IntegrationsSlackWebhookIdResponse, error)
+	GetV1IntegrationsSlackWebhookIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetV1IntegrationsSlackWebhookIdResponse, error)
 
 	// GetV1IntegrationsTeamsWebhookWithResponse request
 	GetV1IntegrationsTeamsWebhookWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetV1IntegrationsTeamsWebhookResponse, error)
@@ -6101,10 +6129,10 @@ type ClientWithResponsesInterface interface {
 	PostV1IntegrationsTeamsWebhookWithResponse(ctx context.Context, body PostV1IntegrationsTeamsWebhookJSONRequestBody, reqEditors ...RequestEditorFn) (*PostV1IntegrationsTeamsWebhookResponse, error)
 
 	// DeleteV1IntegrationsTeamsWebhookIdWithResponse request
-	DeleteV1IntegrationsTeamsWebhookIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsTeamsWebhookIdResponse, error)
+	DeleteV1IntegrationsTeamsWebhookIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsTeamsWebhookIdResponse, error)
 
 	// GetV1IntegrationsTeamsWebhookIdWithResponse request
-	GetV1IntegrationsTeamsWebhookIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetV1IntegrationsTeamsWebhookIdResponse, error)
+	GetV1IntegrationsTeamsWebhookIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetV1IntegrationsTeamsWebhookIdResponse, error)
 
 	// GetV1IntegrationsWebhookWithResponse request
 	GetV1IntegrationsWebhookWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetV1IntegrationsWebhookResponse, error)
@@ -6115,10 +6143,10 @@ type ClientWithResponsesInterface interface {
 	PostV1IntegrationsWebhookWithResponse(ctx context.Context, body PostV1IntegrationsWebhookJSONRequestBody, reqEditors ...RequestEditorFn) (*PostV1IntegrationsWebhookResponse, error)
 
 	// DeleteV1IntegrationsWebhookIdWithResponse request
-	DeleteV1IntegrationsWebhookIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsWebhookIdResponse, error)
+	DeleteV1IntegrationsWebhookIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsWebhookIdResponse, error)
 
 	// GetV1IntegrationsWebhookIdWithResponse request
-	GetV1IntegrationsWebhookIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetV1IntegrationsWebhookIdResponse, error)
+	GetV1IntegrationsWebhookIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetV1IntegrationsWebhookIdResponse, error)
 
 	// GetV1IntegrationsWizWithResponse request
 	GetV1IntegrationsWizWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetV1IntegrationsWizResponse, error)
@@ -6129,24 +6157,29 @@ type ClientWithResponsesInterface interface {
 	PostV1IntegrationsWizWithResponse(ctx context.Context, body PostV1IntegrationsWizJSONRequestBody, reqEditors ...RequestEditorFn) (*PostV1IntegrationsWizResponse, error)
 
 	// DeleteV1IntegrationsWizIdWithResponse request
-	DeleteV1IntegrationsWizIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsWizIdResponse, error)
+	DeleteV1IntegrationsWizIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsWizIdResponse, error)
 
 	// GetV1IntegrationsWizIdWithResponse request
-	GetV1IntegrationsWizIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetV1IntegrationsWizIdResponse, error)
+	GetV1IntegrationsWizIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetV1IntegrationsWizIdResponse, error)
 
-	// GetV1LocationsWithResponse request
-	GetV1LocationsWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetV1LocationsResponse, error)
+	// ListLocationsWithResponse request
+	ListLocationsWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*ListLocationsResponse, error)
 
-	// PostV1LocationsWithBodyWithResponse request with any body
-	PostV1LocationsWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostV1LocationsResponse, error)
+	// CreateLocationWithBodyWithResponse request with any body
+	CreateLocationWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateLocationResponse, error)
 
-	PostV1LocationsWithResponse(ctx context.Context, body PostV1LocationsJSONRequestBody, reqEditors ...RequestEditorFn) (*PostV1LocationsResponse, error)
+	CreateLocationWithResponse(ctx context.Context, body CreateLocationJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateLocationResponse, error)
 
-	// DeleteV1LocationsIdWithResponse request
-	DeleteV1LocationsIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteV1LocationsIdResponse, error)
+	// UpsertLocationWithBodyWithResponse request with any body
+	UpsertLocationWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpsertLocationResponse, error)
 
-	// GetV1LocationsIdWithResponse request
-	GetV1LocationsIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetV1LocationsIdResponse, error)
+	UpsertLocationWithResponse(ctx context.Context, body UpsertLocationJSONRequestBody, reqEditors ...RequestEditorFn) (*UpsertLocationResponse, error)
+
+	// DeleteLocationWithResponse request
+	DeleteLocationWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*DeleteLocationResponse, error)
+
+	// GetLocationWithResponse request
+	GetLocationWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetLocationResponse, error)
 
 	// GetV1OrganizationIdSchemasWithResponse request
 	GetV1OrganizationIdSchemasWithResponse(ctx context.Context, id openapi_types.UUID, params *GetV1OrganizationIdSchemasParams, reqEditors ...RequestEditorFn) (*GetV1OrganizationIdSchemasResponse, error)
@@ -6253,7 +6286,11 @@ type PostApplicationsIdStartScanResponse struct {
 		Status              PostApplicationsIdStartScan200Status `json:"status"`
 	}
 	JSON400 *struct {
-		Error   string `json:"error"`
+		Error  string `json:"error"`
+		Events *[]struct {
+			Logline  string                                        `json:"logline"`
+			Severity *PostApplicationsIdStartScan400EventsSeverity `json:"severity"`
+		} `json:"events,omitempty"`
 		Message string `json:"message"`
 	}
 	JSON500 *struct {
@@ -6261,6 +6298,7 @@ type PostApplicationsIdStartScanResponse struct {
 	}
 }
 type PostApplicationsIdStartScan200Status string
+type PostApplicationsIdStartScan400EventsSeverity string
 
 // Status returns HTTPResponse.Status
 func (r PostApplicationsIdStartScanResponse) Status() string {
@@ -8376,14 +8414,20 @@ type GetV1IntegrationsJiraResponse struct {
 		LocationId *openapi_types.UUID          `json:"locationId"`
 		Name       string                       `json:"name"`
 		Parameters struct {
-			AccessToken  string  `json:"access_token"`
-			ApiKey       string  `json:"api_key"`
-			InstanceUrl  string  `json:"instance_url"`
-			RefreshToken *string `json:"refresh_token,omitempty"`
+			AccountId         string `json:"account_id"`
+			ApiKey            string `json:"api_key"`
+			Email             string `json:"email"`
+			InstanceUrl       string `json:"instance_url"`
+			Name              string `json:"name"`
+			PropertiesMapping *[]struct {
+				EscapeProperty GetV1IntegrationsJira200ParametersPropertiesMappingEscapeProperty `json:"escape_property"`
+				JiraProperty   string                                                            `json:"jira_property"`
+			} `json:"properties_mapping,omitempty"`
 		} `json:"parameters"`
 	}
 }
 type GetV1IntegrationsJira200Kind string
+type GetV1IntegrationsJira200ParametersPropertiesMappingEscapeProperty string
 
 // Status returns HTTPResponse.Status
 func (r GetV1IntegrationsJiraResponse) Status() string {
@@ -8410,10 +8454,15 @@ type PostV1IntegrationsJiraResponse struct {
 		LocationId *openapi_types.UUID           `json:"locationId"`
 		Name       string                        `json:"name"`
 		Parameters struct {
-			AccessToken  string  `json:"access_token"`
-			ApiKey       string  `json:"api_key"`
-			InstanceUrl  string  `json:"instance_url"`
-			RefreshToken *string `json:"refresh_token,omitempty"`
+			AccountId         string `json:"account_id"`
+			ApiKey            string `json:"api_key"`
+			Email             string `json:"email"`
+			InstanceUrl       string `json:"instance_url"`
+			Name              string `json:"name"`
+			PropertiesMapping *[]struct {
+				EscapeProperty PostV1IntegrationsJira200ParametersPropertiesMappingEscapeProperty `json:"escape_property"`
+				JiraProperty   string                                                             `json:"jira_property"`
+			} `json:"properties_mapping,omitempty"`
 		} `json:"parameters"`
 	}
 	JSON400 *struct {
@@ -8430,6 +8479,7 @@ type PostV1IntegrationsJiraResponse struct {
 	}
 }
 type PostV1IntegrationsJira200Kind string
+type PostV1IntegrationsJira200ParametersPropertiesMappingEscapeProperty string
 
 // Status returns HTTPResponse.Status
 func (r PostV1IntegrationsJiraResponse) Status() string {
@@ -8488,10 +8538,15 @@ type GetV1IntegrationsJiraIdResponse struct {
 		LocationId *openapi_types.UUID            `json:"locationId"`
 		Name       string                         `json:"name"`
 		Parameters struct {
-			AccessToken  string  `json:"access_token"`
-			ApiKey       string  `json:"api_key"`
-			InstanceUrl  string  `json:"instance_url"`
-			RefreshToken *string `json:"refresh_token,omitempty"`
+			AccountId         string `json:"account_id"`
+			ApiKey            string `json:"api_key"`
+			Email             string `json:"email"`
+			InstanceUrl       string `json:"instance_url"`
+			Name              string `json:"name"`
+			PropertiesMapping *[]struct {
+				EscapeProperty GetV1IntegrationsJiraId200ParametersPropertiesMappingEscapeProperty `json:"escape_property"`
+				JiraProperty   string                                                              `json:"jira_property"`
+			} `json:"properties_mapping,omitempty"`
 		} `json:"parameters"`
 	}
 	JSON404 *struct {
@@ -8504,6 +8559,7 @@ type GetV1IntegrationsJiraIdResponse struct {
 	}
 }
 type GetV1IntegrationsJiraId200Kind string
+type GetV1IntegrationsJiraId200ParametersPropertiesMappingEscapeProperty string
 
 // Status returns HTTPResponse.Status
 func (r GetV1IntegrationsJiraIdResponse) Status() string {
@@ -8829,13 +8885,13 @@ type GetV1IntegrationsKubernetesResponse struct {
 		LocationId *openapi_types.UUID                `json:"locationId"`
 		Name       string                             `json:"name"`
 		Parameters struct {
-			Blacklist struct {
+			Blacklist *struct {
 				Namespaces *[]string `json:"namespaces,omitempty"`
-			} `json:"blacklist"`
-			Tags struct {
+			} `json:"blacklist,omitempty"`
+			Tags *struct {
 				Labels     *[]string `json:"labels,omitempty"`
 				Namespaces *bool     `json:"namespaces,omitempty"`
-			} `json:"tags"`
+			} `json:"tags,omitempty"`
 		} `json:"parameters"`
 	}
 }
@@ -8866,13 +8922,13 @@ type PostV1IntegrationsKubernetesResponse struct {
 		LocationId *openapi_types.UUID                 `json:"locationId"`
 		Name       string                              `json:"name"`
 		Parameters struct {
-			Blacklist struct {
+			Blacklist *struct {
 				Namespaces *[]string `json:"namespaces,omitempty"`
-			} `json:"blacklist"`
-			Tags struct {
+			} `json:"blacklist,omitempty"`
+			Tags *struct {
 				Labels     *[]string `json:"labels,omitempty"`
 				Namespaces *bool     `json:"namespaces,omitempty"`
-			} `json:"tags"`
+			} `json:"tags,omitempty"`
 		} `json:"parameters"`
 	}
 	JSON400 *struct {
@@ -8947,13 +9003,13 @@ type GetV1IntegrationsKubernetesIdResponse struct {
 		LocationId *openapi_types.UUID                  `json:"locationId"`
 		Name       string                               `json:"name"`
 		Parameters struct {
-			Blacklist struct {
+			Blacklist *struct {
 				Namespaces *[]string `json:"namespaces,omitempty"`
-			} `json:"blacklist"`
-			Tags struct {
+			} `json:"blacklist,omitempty"`
+			Tags *struct {
 				Labels     *[]string `json:"labels,omitempty"`
 				Namespaces *bool     `json:"namespaces,omitempty"`
-			} `json:"tags"`
+			} `json:"tags,omitempty"`
 		} `json:"parameters"`
 	}
 	JSON404 *struct {
@@ -9699,18 +9755,25 @@ func (r GetV1IntegrationsWizIdResponse) StatusCode() int {
 	return 0
 }
 
-type GetV1LocationsResponse struct {
+type ListLocationsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *[]struct {
-		Id   openapi_types.UUID `json:"id"`
-		Name string             `json:"name"`
-		Type string             `json:"type"`
+		// Id The location ID.
+		Id *openapi_types.UUID `json:"id,omitempty"`
+
+		// Key The SSH private key to use to connect to the location.
+		Key string `json:"key"`
+
+		// Name The name of the location.
+		Name *string               `json:"name,omitempty"`
+		Type *ListLocations200Type `json:"type,omitempty"`
 	}
 }
+type ListLocations200Type string
 
 // Status returns HTTPResponse.Status
-func (r GetV1LocationsResponse) Status() string {
+func (r ListLocationsResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -9718,20 +9781,26 @@ func (r GetV1LocationsResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetV1LocationsResponse) StatusCode() int {
+func (r ListLocationsResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type PostV1LocationsResponse struct {
+type CreateLocationResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *struct {
-		Id   openapi_types.UUID `json:"id"`
-		Name string             `json:"name"`
-		Type string             `json:"type"`
+		// Id The location ID.
+		Id *openapi_types.UUID `json:"id,omitempty"`
+
+		// Key The SSH private key to use to connect to the location.
+		Key string `json:"key"`
+
+		// Name The name of the location.
+		Name *string                `json:"name,omitempty"`
+		Type *CreateLocation200Type `json:"type,omitempty"`
 	}
 	JSON400 *struct {
 		Message string `json:"message"`
@@ -9742,9 +9811,10 @@ type PostV1LocationsResponse struct {
 		Name    string `json:"name"`
 	}
 }
+type CreateLocation200Type string
 
 // Status returns HTTPResponse.Status
-func (r PostV1LocationsResponse) Status() string {
+func (r CreateLocationResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -9752,14 +9822,55 @@ func (r PostV1LocationsResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PostV1LocationsResponse) StatusCode() int {
+func (r CreateLocationResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type DeleteV1LocationsIdResponse struct {
+type UpsertLocationResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *struct {
+		// Id The location ID.
+		Id *openapi_types.UUID `json:"id,omitempty"`
+
+		// Key The SSH private key to use to connect to the location.
+		Key string `json:"key"`
+
+		// Name The name of the location.
+		Name *string                `json:"name,omitempty"`
+		Type *UpsertLocation200Type `json:"type,omitempty"`
+	}
+	JSON400 *struct {
+		Message string `json:"message"`
+		Name    string `json:"name"`
+	}
+	JSON500 *struct {
+		Message string `json:"message"`
+		Name    string `json:"name"`
+	}
+}
+type UpsertLocation200Type string
+
+// Status returns HTTPResponse.Status
+func (r UpsertLocationResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpsertLocationResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DeleteLocationResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *struct {
@@ -9776,7 +9887,7 @@ type DeleteV1LocationsIdResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r DeleteV1LocationsIdResponse) Status() string {
+func (r DeleteLocationResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -9784,29 +9895,36 @@ func (r DeleteV1LocationsIdResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r DeleteV1LocationsIdResponse) StatusCode() int {
+func (r DeleteLocationResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type GetV1LocationsIdResponse struct {
+type GetLocationResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *struct {
-		Id   openapi_types.UUID `json:"id"`
-		Name string             `json:"name"`
-		Type string             `json:"type"`
+		// Id The location ID.
+		Id *openapi_types.UUID `json:"id,omitempty"`
+
+		// Key The SSH private key to use to connect to the location.
+		Key string `json:"key"`
+
+		// Name The name of the location.
+		Name *string             `json:"name,omitempty"`
+		Type *GetLocation200Type `json:"type,omitempty"`
 	}
 	JSON404 *struct {
 		Message string `json:"message"`
 		Name    string `json:"name"`
 	}
 }
+type GetLocation200Type string
 
 // Status returns HTTPResponse.Status
-func (r GetV1LocationsIdResponse) Status() string {
+func (r GetLocationResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -9814,7 +9932,7 @@ func (r GetV1LocationsIdResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetV1LocationsIdResponse) StatusCode() int {
+func (r GetLocationResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -9998,16 +10116,16 @@ func (c *ClientWithResponses) GetApplicationIdWithResponse(ctx context.Context, 
 }
 
 // PostApplicationsIdStartScanWithBodyWithResponse request with arbitrary body returning *PostApplicationsIdStartScanResponse
-func (c *ClientWithResponses) PostApplicationsIdStartScanWithBodyWithResponse(ctx context.Context, id openapi_types.UUID, params *PostApplicationsIdStartScanParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostApplicationsIdStartScanResponse, error) {
-	rsp, err := c.PostApplicationsIdStartScanWithBody(ctx, id, params, contentType, body, reqEditors...)
+func (c *ClientWithResponses) PostApplicationsIdStartScanWithBodyWithResponse(ctx context.Context, id openapi_types.UUID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostApplicationsIdStartScanResponse, error) {
+	rsp, err := c.PostApplicationsIdStartScanWithBody(ctx, id, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParsePostApplicationsIdStartScanResponse(rsp)
 }
 
-func (c *ClientWithResponses) PostApplicationsIdStartScanWithResponse(ctx context.Context, id openapi_types.UUID, params *PostApplicationsIdStartScanParams, body PostApplicationsIdStartScanJSONRequestBody, reqEditors ...RequestEditorFn) (*PostApplicationsIdStartScanResponse, error) {
-	rsp, err := c.PostApplicationsIdStartScan(ctx, id, params, body, reqEditors...)
+func (c *ClientWithResponses) PostApplicationsIdStartScanWithResponse(ctx context.Context, id openapi_types.UUID, body PostApplicationsIdStartScanJSONRequestBody, reqEditors ...RequestEditorFn) (*PostApplicationsIdStartScanResponse, error) {
+	rsp, err := c.PostApplicationsIdStartScan(ctx, id, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -10015,16 +10133,16 @@ func (c *ClientWithResponses) PostApplicationsIdStartScanWithResponse(ctx contex
 }
 
 // PostApplicationsIdUploadSchemaWithBodyWithResponse request with arbitrary body returning *PostApplicationsIdUploadSchemaResponse
-func (c *ClientWithResponses) PostApplicationsIdUploadSchemaWithBodyWithResponse(ctx context.Context, id openapi_types.UUID, params *PostApplicationsIdUploadSchemaParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostApplicationsIdUploadSchemaResponse, error) {
-	rsp, err := c.PostApplicationsIdUploadSchemaWithBody(ctx, id, params, contentType, body, reqEditors...)
+func (c *ClientWithResponses) PostApplicationsIdUploadSchemaWithBodyWithResponse(ctx context.Context, id openapi_types.UUID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostApplicationsIdUploadSchemaResponse, error) {
+	rsp, err := c.PostApplicationsIdUploadSchemaWithBody(ctx, id, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParsePostApplicationsIdUploadSchemaResponse(rsp)
 }
 
-func (c *ClientWithResponses) PostApplicationsIdUploadSchemaWithResponse(ctx context.Context, id openapi_types.UUID, params *PostApplicationsIdUploadSchemaParams, body PostApplicationsIdUploadSchemaJSONRequestBody, reqEditors ...RequestEditorFn) (*PostApplicationsIdUploadSchemaResponse, error) {
-	rsp, err := c.PostApplicationsIdUploadSchema(ctx, id, params, body, reqEditors...)
+func (c *ClientWithResponses) PostApplicationsIdUploadSchemaWithResponse(ctx context.Context, id openapi_types.UUID, body PostApplicationsIdUploadSchemaJSONRequestBody, reqEditors ...RequestEditorFn) (*PostApplicationsIdUploadSchemaResponse, error) {
+	rsp, err := c.PostApplicationsIdUploadSchema(ctx, id, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -10032,16 +10150,16 @@ func (c *ClientWithResponses) PostApplicationsIdUploadSchemaWithResponse(ctx con
 }
 
 // PostCreateApplicationWithBodyWithResponse request with arbitrary body returning *PostCreateApplicationResponse
-func (c *ClientWithResponses) PostCreateApplicationWithBodyWithResponse(ctx context.Context, params *PostCreateApplicationParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostCreateApplicationResponse, error) {
-	rsp, err := c.PostCreateApplicationWithBody(ctx, params, contentType, body, reqEditors...)
+func (c *ClientWithResponses) PostCreateApplicationWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostCreateApplicationResponse, error) {
+	rsp, err := c.PostCreateApplicationWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParsePostCreateApplicationResponse(rsp)
 }
 
-func (c *ClientWithResponses) PostCreateApplicationWithResponse(ctx context.Context, params *PostCreateApplicationParams, body PostCreateApplicationJSONRequestBody, reqEditors ...RequestEditorFn) (*PostCreateApplicationResponse, error) {
-	rsp, err := c.PostCreateApplication(ctx, params, body, reqEditors...)
+func (c *ClientWithResponses) PostCreateApplicationWithResponse(ctx context.Context, body PostCreateApplicationJSONRequestBody, reqEditors ...RequestEditorFn) (*PostCreateApplicationResponse, error) {
+	rsp, err := c.PostCreateApplication(ctx, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -10102,7 +10220,7 @@ func (c *ClientWithResponses) PostV1IntegrationsAkamaiWithResponse(ctx context.C
 }
 
 // DeleteV1IntegrationsAkamaiIdWithResponse request returning *DeleteV1IntegrationsAkamaiIdResponse
-func (c *ClientWithResponses) DeleteV1IntegrationsAkamaiIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsAkamaiIdResponse, error) {
+func (c *ClientWithResponses) DeleteV1IntegrationsAkamaiIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsAkamaiIdResponse, error) {
 	rsp, err := c.DeleteV1IntegrationsAkamaiId(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
@@ -10111,7 +10229,7 @@ func (c *ClientWithResponses) DeleteV1IntegrationsAkamaiIdWithResponse(ctx conte
 }
 
 // GetV1IntegrationsAkamaiIdWithResponse request returning *GetV1IntegrationsAkamaiIdResponse
-func (c *ClientWithResponses) GetV1IntegrationsAkamaiIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetV1IntegrationsAkamaiIdResponse, error) {
+func (c *ClientWithResponses) GetV1IntegrationsAkamaiIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetV1IntegrationsAkamaiIdResponse, error) {
 	rsp, err := c.GetV1IntegrationsAkamaiId(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
@@ -10146,7 +10264,7 @@ func (c *ClientWithResponses) PostV1IntegrationsApigeeWithResponse(ctx context.C
 }
 
 // DeleteV1IntegrationsApigeeIdWithResponse request returning *DeleteV1IntegrationsApigeeIdResponse
-func (c *ClientWithResponses) DeleteV1IntegrationsApigeeIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsApigeeIdResponse, error) {
+func (c *ClientWithResponses) DeleteV1IntegrationsApigeeIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsApigeeIdResponse, error) {
 	rsp, err := c.DeleteV1IntegrationsApigeeId(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
@@ -10155,7 +10273,7 @@ func (c *ClientWithResponses) DeleteV1IntegrationsApigeeIdWithResponse(ctx conte
 }
 
 // GetV1IntegrationsApigeeIdWithResponse request returning *GetV1IntegrationsApigeeIdResponse
-func (c *ClientWithResponses) GetV1IntegrationsApigeeIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetV1IntegrationsApigeeIdResponse, error) {
+func (c *ClientWithResponses) GetV1IntegrationsApigeeIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetV1IntegrationsApigeeIdResponse, error) {
 	rsp, err := c.GetV1IntegrationsApigeeId(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
@@ -10190,7 +10308,7 @@ func (c *ClientWithResponses) PostV1IntegrationsAwsWithResponse(ctx context.Cont
 }
 
 // DeleteV1IntegrationsAwsIdWithResponse request returning *DeleteV1IntegrationsAwsIdResponse
-func (c *ClientWithResponses) DeleteV1IntegrationsAwsIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsAwsIdResponse, error) {
+func (c *ClientWithResponses) DeleteV1IntegrationsAwsIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsAwsIdResponse, error) {
 	rsp, err := c.DeleteV1IntegrationsAwsId(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
@@ -10199,7 +10317,7 @@ func (c *ClientWithResponses) DeleteV1IntegrationsAwsIdWithResponse(ctx context.
 }
 
 // GetV1IntegrationsAwsIdWithResponse request returning *GetV1IntegrationsAwsIdResponse
-func (c *ClientWithResponses) GetV1IntegrationsAwsIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetV1IntegrationsAwsIdResponse, error) {
+func (c *ClientWithResponses) GetV1IntegrationsAwsIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetV1IntegrationsAwsIdResponse, error) {
 	rsp, err := c.GetV1IntegrationsAwsId(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
@@ -10234,7 +10352,7 @@ func (c *ClientWithResponses) PostV1IntegrationsAzureWithResponse(ctx context.Co
 }
 
 // DeleteV1IntegrationsAzureIdWithResponse request returning *DeleteV1IntegrationsAzureIdResponse
-func (c *ClientWithResponses) DeleteV1IntegrationsAzureIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsAzureIdResponse, error) {
+func (c *ClientWithResponses) DeleteV1IntegrationsAzureIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsAzureIdResponse, error) {
 	rsp, err := c.DeleteV1IntegrationsAzureId(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
@@ -10243,7 +10361,7 @@ func (c *ClientWithResponses) DeleteV1IntegrationsAzureIdWithResponse(ctx contex
 }
 
 // GetV1IntegrationsAzureIdWithResponse request returning *GetV1IntegrationsAzureIdResponse
-func (c *ClientWithResponses) GetV1IntegrationsAzureIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetV1IntegrationsAzureIdResponse, error) {
+func (c *ClientWithResponses) GetV1IntegrationsAzureIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetV1IntegrationsAzureIdResponse, error) {
 	rsp, err := c.GetV1IntegrationsAzureId(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
@@ -10278,7 +10396,7 @@ func (c *ClientWithResponses) PostV1IntegrationsAzureDevopsWithResponse(ctx cont
 }
 
 // DeleteV1IntegrationsAzureDevopsIdWithResponse request returning *DeleteV1IntegrationsAzureDevopsIdResponse
-func (c *ClientWithResponses) DeleteV1IntegrationsAzureDevopsIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsAzureDevopsIdResponse, error) {
+func (c *ClientWithResponses) DeleteV1IntegrationsAzureDevopsIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsAzureDevopsIdResponse, error) {
 	rsp, err := c.DeleteV1IntegrationsAzureDevopsId(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
@@ -10287,7 +10405,7 @@ func (c *ClientWithResponses) DeleteV1IntegrationsAzureDevopsIdWithResponse(ctx 
 }
 
 // GetV1IntegrationsAzureDevopsIdWithResponse request returning *GetV1IntegrationsAzureDevopsIdResponse
-func (c *ClientWithResponses) GetV1IntegrationsAzureDevopsIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetV1IntegrationsAzureDevopsIdResponse, error) {
+func (c *ClientWithResponses) GetV1IntegrationsAzureDevopsIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetV1IntegrationsAzureDevopsIdResponse, error) {
 	rsp, err := c.GetV1IntegrationsAzureDevopsId(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
@@ -10322,7 +10440,7 @@ func (c *ClientWithResponses) PostV1IntegrationsBitbucketRepoWithResponse(ctx co
 }
 
 // DeleteV1IntegrationsBitbucketRepoIdWithResponse request returning *DeleteV1IntegrationsBitbucketRepoIdResponse
-func (c *ClientWithResponses) DeleteV1IntegrationsBitbucketRepoIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsBitbucketRepoIdResponse, error) {
+func (c *ClientWithResponses) DeleteV1IntegrationsBitbucketRepoIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsBitbucketRepoIdResponse, error) {
 	rsp, err := c.DeleteV1IntegrationsBitbucketRepoId(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
@@ -10331,7 +10449,7 @@ func (c *ClientWithResponses) DeleteV1IntegrationsBitbucketRepoIdWithResponse(ct
 }
 
 // GetV1IntegrationsBitbucketRepoIdWithResponse request returning *GetV1IntegrationsBitbucketRepoIdResponse
-func (c *ClientWithResponses) GetV1IntegrationsBitbucketRepoIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetV1IntegrationsBitbucketRepoIdResponse, error) {
+func (c *ClientWithResponses) GetV1IntegrationsBitbucketRepoIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetV1IntegrationsBitbucketRepoIdResponse, error) {
 	rsp, err := c.GetV1IntegrationsBitbucketRepoId(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
@@ -10366,7 +10484,7 @@ func (c *ClientWithResponses) PostV1IntegrationsCloudflareWithResponse(ctx conte
 }
 
 // DeleteV1IntegrationsCloudflareIdWithResponse request returning *DeleteV1IntegrationsCloudflareIdResponse
-func (c *ClientWithResponses) DeleteV1IntegrationsCloudflareIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsCloudflareIdResponse, error) {
+func (c *ClientWithResponses) DeleteV1IntegrationsCloudflareIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsCloudflareIdResponse, error) {
 	rsp, err := c.DeleteV1IntegrationsCloudflareId(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
@@ -10375,7 +10493,7 @@ func (c *ClientWithResponses) DeleteV1IntegrationsCloudflareIdWithResponse(ctx c
 }
 
 // GetV1IntegrationsCloudflareIdWithResponse request returning *GetV1IntegrationsCloudflareIdResponse
-func (c *ClientWithResponses) GetV1IntegrationsCloudflareIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetV1IntegrationsCloudflareIdResponse, error) {
+func (c *ClientWithResponses) GetV1IntegrationsCloudflareIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetV1IntegrationsCloudflareIdResponse, error) {
 	rsp, err := c.GetV1IntegrationsCloudflareId(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
@@ -10410,7 +10528,7 @@ func (c *ClientWithResponses) PostV1IntegrationsDiscordWebhookWithResponse(ctx c
 }
 
 // DeleteV1IntegrationsDiscordWebhookIdWithResponse request returning *DeleteV1IntegrationsDiscordWebhookIdResponse
-func (c *ClientWithResponses) DeleteV1IntegrationsDiscordWebhookIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsDiscordWebhookIdResponse, error) {
+func (c *ClientWithResponses) DeleteV1IntegrationsDiscordWebhookIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsDiscordWebhookIdResponse, error) {
 	rsp, err := c.DeleteV1IntegrationsDiscordWebhookId(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
@@ -10419,7 +10537,7 @@ func (c *ClientWithResponses) DeleteV1IntegrationsDiscordWebhookIdWithResponse(c
 }
 
 // GetV1IntegrationsDiscordWebhookIdWithResponse request returning *GetV1IntegrationsDiscordWebhookIdResponse
-func (c *ClientWithResponses) GetV1IntegrationsDiscordWebhookIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetV1IntegrationsDiscordWebhookIdResponse, error) {
+func (c *ClientWithResponses) GetV1IntegrationsDiscordWebhookIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetV1IntegrationsDiscordWebhookIdResponse, error) {
 	rsp, err := c.GetV1IntegrationsDiscordWebhookId(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
@@ -10454,7 +10572,7 @@ func (c *ClientWithResponses) PostV1IntegrationsEmailWithResponse(ctx context.Co
 }
 
 // DeleteV1IntegrationsEmailIdWithResponse request returning *DeleteV1IntegrationsEmailIdResponse
-func (c *ClientWithResponses) DeleteV1IntegrationsEmailIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsEmailIdResponse, error) {
+func (c *ClientWithResponses) DeleteV1IntegrationsEmailIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsEmailIdResponse, error) {
 	rsp, err := c.DeleteV1IntegrationsEmailId(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
@@ -10463,7 +10581,7 @@ func (c *ClientWithResponses) DeleteV1IntegrationsEmailIdWithResponse(ctx contex
 }
 
 // GetV1IntegrationsEmailIdWithResponse request returning *GetV1IntegrationsEmailIdResponse
-func (c *ClientWithResponses) GetV1IntegrationsEmailIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetV1IntegrationsEmailIdResponse, error) {
+func (c *ClientWithResponses) GetV1IntegrationsEmailIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetV1IntegrationsEmailIdResponse, error) {
 	rsp, err := c.GetV1IntegrationsEmailId(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
@@ -10498,7 +10616,7 @@ func (c *ClientWithResponses) PostV1IntegrationsGcpWithResponse(ctx context.Cont
 }
 
 // DeleteV1IntegrationsGcpIdWithResponse request returning *DeleteV1IntegrationsGcpIdResponse
-func (c *ClientWithResponses) DeleteV1IntegrationsGcpIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsGcpIdResponse, error) {
+func (c *ClientWithResponses) DeleteV1IntegrationsGcpIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsGcpIdResponse, error) {
 	rsp, err := c.DeleteV1IntegrationsGcpId(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
@@ -10507,7 +10625,7 @@ func (c *ClientWithResponses) DeleteV1IntegrationsGcpIdWithResponse(ctx context.
 }
 
 // GetV1IntegrationsGcpIdWithResponse request returning *GetV1IntegrationsGcpIdResponse
-func (c *ClientWithResponses) GetV1IntegrationsGcpIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetV1IntegrationsGcpIdResponse, error) {
+func (c *ClientWithResponses) GetV1IntegrationsGcpIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetV1IntegrationsGcpIdResponse, error) {
 	rsp, err := c.GetV1IntegrationsGcpId(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
@@ -10542,7 +10660,7 @@ func (c *ClientWithResponses) PostV1IntegrationsGithubApiKeyWithResponse(ctx con
 }
 
 // DeleteV1IntegrationsGithubApiKeyIdWithResponse request returning *DeleteV1IntegrationsGithubApiKeyIdResponse
-func (c *ClientWithResponses) DeleteV1IntegrationsGithubApiKeyIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsGithubApiKeyIdResponse, error) {
+func (c *ClientWithResponses) DeleteV1IntegrationsGithubApiKeyIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsGithubApiKeyIdResponse, error) {
 	rsp, err := c.DeleteV1IntegrationsGithubApiKeyId(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
@@ -10551,7 +10669,7 @@ func (c *ClientWithResponses) DeleteV1IntegrationsGithubApiKeyIdWithResponse(ctx
 }
 
 // GetV1IntegrationsGithubApiKeyIdWithResponse request returning *GetV1IntegrationsGithubApiKeyIdResponse
-func (c *ClientWithResponses) GetV1IntegrationsGithubApiKeyIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetV1IntegrationsGithubApiKeyIdResponse, error) {
+func (c *ClientWithResponses) GetV1IntegrationsGithubApiKeyIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetV1IntegrationsGithubApiKeyIdResponse, error) {
 	rsp, err := c.GetV1IntegrationsGithubApiKeyId(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
@@ -10586,7 +10704,7 @@ func (c *ClientWithResponses) PostV1IntegrationsGitlabApiKeyWithResponse(ctx con
 }
 
 // DeleteV1IntegrationsGitlabApiKeyIdWithResponse request returning *DeleteV1IntegrationsGitlabApiKeyIdResponse
-func (c *ClientWithResponses) DeleteV1IntegrationsGitlabApiKeyIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsGitlabApiKeyIdResponse, error) {
+func (c *ClientWithResponses) DeleteV1IntegrationsGitlabApiKeyIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsGitlabApiKeyIdResponse, error) {
 	rsp, err := c.DeleteV1IntegrationsGitlabApiKeyId(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
@@ -10595,7 +10713,7 @@ func (c *ClientWithResponses) DeleteV1IntegrationsGitlabApiKeyIdWithResponse(ctx
 }
 
 // GetV1IntegrationsGitlabApiKeyIdWithResponse request returning *GetV1IntegrationsGitlabApiKeyIdResponse
-func (c *ClientWithResponses) GetV1IntegrationsGitlabApiKeyIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetV1IntegrationsGitlabApiKeyIdResponse, error) {
+func (c *ClientWithResponses) GetV1IntegrationsGitlabApiKeyIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetV1IntegrationsGitlabApiKeyIdResponse, error) {
 	rsp, err := c.GetV1IntegrationsGitlabApiKeyId(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
@@ -10630,7 +10748,7 @@ func (c *ClientWithResponses) PostV1IntegrationsJiraWithResponse(ctx context.Con
 }
 
 // DeleteV1IntegrationsJiraIdWithResponse request returning *DeleteV1IntegrationsJiraIdResponse
-func (c *ClientWithResponses) DeleteV1IntegrationsJiraIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsJiraIdResponse, error) {
+func (c *ClientWithResponses) DeleteV1IntegrationsJiraIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsJiraIdResponse, error) {
 	rsp, err := c.DeleteV1IntegrationsJiraId(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
@@ -10639,7 +10757,7 @@ func (c *ClientWithResponses) DeleteV1IntegrationsJiraIdWithResponse(ctx context
 }
 
 // GetV1IntegrationsJiraIdWithResponse request returning *GetV1IntegrationsJiraIdResponse
-func (c *ClientWithResponses) GetV1IntegrationsJiraIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetV1IntegrationsJiraIdResponse, error) {
+func (c *ClientWithResponses) GetV1IntegrationsJiraIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetV1IntegrationsJiraIdResponse, error) {
 	rsp, err := c.GetV1IntegrationsJiraId(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
@@ -10674,7 +10792,7 @@ func (c *ClientWithResponses) PostV1IntegrationsKongGatewayWithResponse(ctx cont
 }
 
 // DeleteV1IntegrationsKongGatewayIdWithResponse request returning *DeleteV1IntegrationsKongGatewayIdResponse
-func (c *ClientWithResponses) DeleteV1IntegrationsKongGatewayIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsKongGatewayIdResponse, error) {
+func (c *ClientWithResponses) DeleteV1IntegrationsKongGatewayIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsKongGatewayIdResponse, error) {
 	rsp, err := c.DeleteV1IntegrationsKongGatewayId(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
@@ -10683,7 +10801,7 @@ func (c *ClientWithResponses) DeleteV1IntegrationsKongGatewayIdWithResponse(ctx 
 }
 
 // GetV1IntegrationsKongGatewayIdWithResponse request returning *GetV1IntegrationsKongGatewayIdResponse
-func (c *ClientWithResponses) GetV1IntegrationsKongGatewayIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetV1IntegrationsKongGatewayIdResponse, error) {
+func (c *ClientWithResponses) GetV1IntegrationsKongGatewayIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetV1IntegrationsKongGatewayIdResponse, error) {
 	rsp, err := c.GetV1IntegrationsKongGatewayId(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
@@ -10718,7 +10836,7 @@ func (c *ClientWithResponses) PostV1IntegrationsKongKonnectWithResponse(ctx cont
 }
 
 // DeleteV1IntegrationsKongKonnectIdWithResponse request returning *DeleteV1IntegrationsKongKonnectIdResponse
-func (c *ClientWithResponses) DeleteV1IntegrationsKongKonnectIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsKongKonnectIdResponse, error) {
+func (c *ClientWithResponses) DeleteV1IntegrationsKongKonnectIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsKongKonnectIdResponse, error) {
 	rsp, err := c.DeleteV1IntegrationsKongKonnectId(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
@@ -10727,7 +10845,7 @@ func (c *ClientWithResponses) DeleteV1IntegrationsKongKonnectIdWithResponse(ctx 
 }
 
 // GetV1IntegrationsKongKonnectIdWithResponse request returning *GetV1IntegrationsKongKonnectIdResponse
-func (c *ClientWithResponses) GetV1IntegrationsKongKonnectIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetV1IntegrationsKongKonnectIdResponse, error) {
+func (c *ClientWithResponses) GetV1IntegrationsKongKonnectIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetV1IntegrationsKongKonnectIdResponse, error) {
 	rsp, err := c.GetV1IntegrationsKongKonnectId(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
@@ -10762,7 +10880,7 @@ func (c *ClientWithResponses) PostV1IntegrationsKubernetesWithResponse(ctx conte
 }
 
 // DeleteV1IntegrationsKubernetesIdWithResponse request returning *DeleteV1IntegrationsKubernetesIdResponse
-func (c *ClientWithResponses) DeleteV1IntegrationsKubernetesIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsKubernetesIdResponse, error) {
+func (c *ClientWithResponses) DeleteV1IntegrationsKubernetesIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsKubernetesIdResponse, error) {
 	rsp, err := c.DeleteV1IntegrationsKubernetesId(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
@@ -10771,7 +10889,7 @@ func (c *ClientWithResponses) DeleteV1IntegrationsKubernetesIdWithResponse(ctx c
 }
 
 // GetV1IntegrationsKubernetesIdWithResponse request returning *GetV1IntegrationsKubernetesIdResponse
-func (c *ClientWithResponses) GetV1IntegrationsKubernetesIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetV1IntegrationsKubernetesIdResponse, error) {
+func (c *ClientWithResponses) GetV1IntegrationsKubernetesIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetV1IntegrationsKubernetesIdResponse, error) {
 	rsp, err := c.GetV1IntegrationsKubernetesId(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
@@ -10806,7 +10924,7 @@ func (c *ClientWithResponses) PostV1IntegrationsPostmanApiKeyWithResponse(ctx co
 }
 
 // DeleteV1IntegrationsPostmanApiKeyIdWithResponse request returning *DeleteV1IntegrationsPostmanApiKeyIdResponse
-func (c *ClientWithResponses) DeleteV1IntegrationsPostmanApiKeyIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsPostmanApiKeyIdResponse, error) {
+func (c *ClientWithResponses) DeleteV1IntegrationsPostmanApiKeyIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsPostmanApiKeyIdResponse, error) {
 	rsp, err := c.DeleteV1IntegrationsPostmanApiKeyId(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
@@ -10815,7 +10933,7 @@ func (c *ClientWithResponses) DeleteV1IntegrationsPostmanApiKeyIdWithResponse(ct
 }
 
 // GetV1IntegrationsPostmanApiKeyIdWithResponse request returning *GetV1IntegrationsPostmanApiKeyIdResponse
-func (c *ClientWithResponses) GetV1IntegrationsPostmanApiKeyIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetV1IntegrationsPostmanApiKeyIdResponse, error) {
+func (c *ClientWithResponses) GetV1IntegrationsPostmanApiKeyIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetV1IntegrationsPostmanApiKeyIdResponse, error) {
 	rsp, err := c.GetV1IntegrationsPostmanApiKeyId(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
@@ -10850,7 +10968,7 @@ func (c *ClientWithResponses) PostV1IntegrationsSlackWebhookWithResponse(ctx con
 }
 
 // DeleteV1IntegrationsSlackWebhookIdWithResponse request returning *DeleteV1IntegrationsSlackWebhookIdResponse
-func (c *ClientWithResponses) DeleteV1IntegrationsSlackWebhookIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsSlackWebhookIdResponse, error) {
+func (c *ClientWithResponses) DeleteV1IntegrationsSlackWebhookIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsSlackWebhookIdResponse, error) {
 	rsp, err := c.DeleteV1IntegrationsSlackWebhookId(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
@@ -10859,7 +10977,7 @@ func (c *ClientWithResponses) DeleteV1IntegrationsSlackWebhookIdWithResponse(ctx
 }
 
 // GetV1IntegrationsSlackWebhookIdWithResponse request returning *GetV1IntegrationsSlackWebhookIdResponse
-func (c *ClientWithResponses) GetV1IntegrationsSlackWebhookIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetV1IntegrationsSlackWebhookIdResponse, error) {
+func (c *ClientWithResponses) GetV1IntegrationsSlackWebhookIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetV1IntegrationsSlackWebhookIdResponse, error) {
 	rsp, err := c.GetV1IntegrationsSlackWebhookId(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
@@ -10894,7 +11012,7 @@ func (c *ClientWithResponses) PostV1IntegrationsTeamsWebhookWithResponse(ctx con
 }
 
 // DeleteV1IntegrationsTeamsWebhookIdWithResponse request returning *DeleteV1IntegrationsTeamsWebhookIdResponse
-func (c *ClientWithResponses) DeleteV1IntegrationsTeamsWebhookIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsTeamsWebhookIdResponse, error) {
+func (c *ClientWithResponses) DeleteV1IntegrationsTeamsWebhookIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsTeamsWebhookIdResponse, error) {
 	rsp, err := c.DeleteV1IntegrationsTeamsWebhookId(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
@@ -10903,7 +11021,7 @@ func (c *ClientWithResponses) DeleteV1IntegrationsTeamsWebhookIdWithResponse(ctx
 }
 
 // GetV1IntegrationsTeamsWebhookIdWithResponse request returning *GetV1IntegrationsTeamsWebhookIdResponse
-func (c *ClientWithResponses) GetV1IntegrationsTeamsWebhookIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetV1IntegrationsTeamsWebhookIdResponse, error) {
+func (c *ClientWithResponses) GetV1IntegrationsTeamsWebhookIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetV1IntegrationsTeamsWebhookIdResponse, error) {
 	rsp, err := c.GetV1IntegrationsTeamsWebhookId(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
@@ -10938,7 +11056,7 @@ func (c *ClientWithResponses) PostV1IntegrationsWebhookWithResponse(ctx context.
 }
 
 // DeleteV1IntegrationsWebhookIdWithResponse request returning *DeleteV1IntegrationsWebhookIdResponse
-func (c *ClientWithResponses) DeleteV1IntegrationsWebhookIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsWebhookIdResponse, error) {
+func (c *ClientWithResponses) DeleteV1IntegrationsWebhookIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsWebhookIdResponse, error) {
 	rsp, err := c.DeleteV1IntegrationsWebhookId(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
@@ -10947,7 +11065,7 @@ func (c *ClientWithResponses) DeleteV1IntegrationsWebhookIdWithResponse(ctx cont
 }
 
 // GetV1IntegrationsWebhookIdWithResponse request returning *GetV1IntegrationsWebhookIdResponse
-func (c *ClientWithResponses) GetV1IntegrationsWebhookIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetV1IntegrationsWebhookIdResponse, error) {
+func (c *ClientWithResponses) GetV1IntegrationsWebhookIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetV1IntegrationsWebhookIdResponse, error) {
 	rsp, err := c.GetV1IntegrationsWebhookId(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
@@ -10982,7 +11100,7 @@ func (c *ClientWithResponses) PostV1IntegrationsWizWithResponse(ctx context.Cont
 }
 
 // DeleteV1IntegrationsWizIdWithResponse request returning *DeleteV1IntegrationsWizIdResponse
-func (c *ClientWithResponses) DeleteV1IntegrationsWizIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsWizIdResponse, error) {
+func (c *ClientWithResponses) DeleteV1IntegrationsWizIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*DeleteV1IntegrationsWizIdResponse, error) {
 	rsp, err := c.DeleteV1IntegrationsWizId(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
@@ -10991,7 +11109,7 @@ func (c *ClientWithResponses) DeleteV1IntegrationsWizIdWithResponse(ctx context.
 }
 
 // GetV1IntegrationsWizIdWithResponse request returning *GetV1IntegrationsWizIdResponse
-func (c *ClientWithResponses) GetV1IntegrationsWizIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetV1IntegrationsWizIdResponse, error) {
+func (c *ClientWithResponses) GetV1IntegrationsWizIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetV1IntegrationsWizIdResponse, error) {
 	rsp, err := c.GetV1IntegrationsWizId(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
@@ -10999,48 +11117,65 @@ func (c *ClientWithResponses) GetV1IntegrationsWizIdWithResponse(ctx context.Con
 	return ParseGetV1IntegrationsWizIdResponse(rsp)
 }
 
-// GetV1LocationsWithResponse request returning *GetV1LocationsResponse
-func (c *ClientWithResponses) GetV1LocationsWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetV1LocationsResponse, error) {
-	rsp, err := c.GetV1Locations(ctx, reqEditors...)
+// ListLocationsWithResponse request returning *ListLocationsResponse
+func (c *ClientWithResponses) ListLocationsWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*ListLocationsResponse, error) {
+	rsp, err := c.ListLocations(ctx, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetV1LocationsResponse(rsp)
+	return ParseListLocationsResponse(rsp)
 }
 
-// PostV1LocationsWithBodyWithResponse request with arbitrary body returning *PostV1LocationsResponse
-func (c *ClientWithResponses) PostV1LocationsWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostV1LocationsResponse, error) {
-	rsp, err := c.PostV1LocationsWithBody(ctx, contentType, body, reqEditors...)
+// CreateLocationWithBodyWithResponse request with arbitrary body returning *CreateLocationResponse
+func (c *ClientWithResponses) CreateLocationWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateLocationResponse, error) {
+	rsp, err := c.CreateLocationWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePostV1LocationsResponse(rsp)
+	return ParseCreateLocationResponse(rsp)
 }
 
-func (c *ClientWithResponses) PostV1LocationsWithResponse(ctx context.Context, body PostV1LocationsJSONRequestBody, reqEditors ...RequestEditorFn) (*PostV1LocationsResponse, error) {
-	rsp, err := c.PostV1Locations(ctx, body, reqEditors...)
+func (c *ClientWithResponses) CreateLocationWithResponse(ctx context.Context, body CreateLocationJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateLocationResponse, error) {
+	rsp, err := c.CreateLocation(ctx, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePostV1LocationsResponse(rsp)
+	return ParseCreateLocationResponse(rsp)
 }
 
-// DeleteV1LocationsIdWithResponse request returning *DeleteV1LocationsIdResponse
-func (c *ClientWithResponses) DeleteV1LocationsIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteV1LocationsIdResponse, error) {
-	rsp, err := c.DeleteV1LocationsId(ctx, id, reqEditors...)
+// UpsertLocationWithBodyWithResponse request with arbitrary body returning *UpsertLocationResponse
+func (c *ClientWithResponses) UpsertLocationWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpsertLocationResponse, error) {
+	rsp, err := c.UpsertLocationWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseDeleteV1LocationsIdResponse(rsp)
+	return ParseUpsertLocationResponse(rsp)
 }
 
-// GetV1LocationsIdWithResponse request returning *GetV1LocationsIdResponse
-func (c *ClientWithResponses) GetV1LocationsIdWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetV1LocationsIdResponse, error) {
-	rsp, err := c.GetV1LocationsId(ctx, id, reqEditors...)
+func (c *ClientWithResponses) UpsertLocationWithResponse(ctx context.Context, body UpsertLocationJSONRequestBody, reqEditors ...RequestEditorFn) (*UpsertLocationResponse, error) {
+	rsp, err := c.UpsertLocation(ctx, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetV1LocationsIdResponse(rsp)
+	return ParseUpsertLocationResponse(rsp)
+}
+
+// DeleteLocationWithResponse request returning *DeleteLocationResponse
+func (c *ClientWithResponses) DeleteLocationWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*DeleteLocationResponse, error) {
+	rsp, err := c.DeleteLocation(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteLocationResponse(rsp)
+}
+
+// GetLocationWithResponse request returning *GetLocationResponse
+func (c *ClientWithResponses) GetLocationWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetLocationResponse, error) {
+	rsp, err := c.GetLocation(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetLocationResponse(rsp)
 }
 
 // GetV1OrganizationIdSchemasWithResponse request returning *GetV1OrganizationIdSchemasResponse
@@ -11198,7 +11333,11 @@ func ParsePostApplicationsIdStartScanResponse(rsp *http.Response) (*PostApplicat
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
 		var dest struct {
-			Error   string `json:"error"`
+			Error  string `json:"error"`
+			Events *[]struct {
+				Logline  string                                        `json:"logline"`
+				Severity *PostApplicationsIdStartScan400EventsSeverity `json:"severity"`
+			} `json:"events,omitempty"`
 			Message string `json:"message"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -13958,10 +14097,15 @@ func ParseGetV1IntegrationsJiraResponse(rsp *http.Response) (*GetV1IntegrationsJ
 			LocationId *openapi_types.UUID          `json:"locationId"`
 			Name       string                       `json:"name"`
 			Parameters struct {
-				AccessToken  string  `json:"access_token"`
-				ApiKey       string  `json:"api_key"`
-				InstanceUrl  string  `json:"instance_url"`
-				RefreshToken *string `json:"refresh_token,omitempty"`
+				AccountId         string `json:"account_id"`
+				ApiKey            string `json:"api_key"`
+				Email             string `json:"email"`
+				InstanceUrl       string `json:"instance_url"`
+				Name              string `json:"name"`
+				PropertiesMapping *[]struct {
+					EscapeProperty GetV1IntegrationsJira200ParametersPropertiesMappingEscapeProperty `json:"escape_property"`
+					JiraProperty   string                                                            `json:"jira_property"`
+				} `json:"properties_mapping,omitempty"`
 			} `json:"parameters"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -13995,10 +14139,15 @@ func ParsePostV1IntegrationsJiraResponse(rsp *http.Response) (*PostV1Integration
 			LocationId *openapi_types.UUID           `json:"locationId"`
 			Name       string                        `json:"name"`
 			Parameters struct {
-				AccessToken  string  `json:"access_token"`
-				ApiKey       string  `json:"api_key"`
-				InstanceUrl  string  `json:"instance_url"`
-				RefreshToken *string `json:"refresh_token,omitempty"`
+				AccountId         string `json:"account_id"`
+				ApiKey            string `json:"api_key"`
+				Email             string `json:"email"`
+				InstanceUrl       string `json:"instance_url"`
+				Name              string `json:"name"`
+				PropertiesMapping *[]struct {
+					EscapeProperty PostV1IntegrationsJira200ParametersPropertiesMappingEscapeProperty `json:"escape_property"`
+					JiraProperty   string                                                             `json:"jira_property"`
+				} `json:"properties_mapping,omitempty"`
 			} `json:"parameters"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -14104,10 +14253,15 @@ func ParseGetV1IntegrationsJiraIdResponse(rsp *http.Response) (*GetV1Integration
 			LocationId *openapi_types.UUID            `json:"locationId"`
 			Name       string                         `json:"name"`
 			Parameters struct {
-				AccessToken  string  `json:"access_token"`
-				ApiKey       string  `json:"api_key"`
-				InstanceUrl  string  `json:"instance_url"`
-				RefreshToken *string `json:"refresh_token,omitempty"`
+				AccountId         string `json:"account_id"`
+				ApiKey            string `json:"api_key"`
+				Email             string `json:"email"`
+				InstanceUrl       string `json:"instance_url"`
+				Name              string `json:"name"`
+				PropertiesMapping *[]struct {
+					EscapeProperty GetV1IntegrationsJiraId200ParametersPropertiesMappingEscapeProperty `json:"escape_property"`
+					JiraProperty   string                                                              `json:"jira_property"`
+				} `json:"properties_mapping,omitempty"`
 			} `json:"parameters"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -14555,13 +14709,13 @@ func ParseGetV1IntegrationsKubernetesResponse(rsp *http.Response) (*GetV1Integra
 			LocationId *openapi_types.UUID                `json:"locationId"`
 			Name       string                             `json:"name"`
 			Parameters struct {
-				Blacklist struct {
+				Blacklist *struct {
 					Namespaces *[]string `json:"namespaces,omitempty"`
-				} `json:"blacklist"`
-				Tags struct {
+				} `json:"blacklist,omitempty"`
+				Tags *struct {
 					Labels     *[]string `json:"labels,omitempty"`
 					Namespaces *bool     `json:"namespaces,omitempty"`
-				} `json:"tags"`
+				} `json:"tags,omitempty"`
 			} `json:"parameters"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -14595,13 +14749,13 @@ func ParsePostV1IntegrationsKubernetesResponse(rsp *http.Response) (*PostV1Integ
 			LocationId *openapi_types.UUID                 `json:"locationId"`
 			Name       string                              `json:"name"`
 			Parameters struct {
-				Blacklist struct {
+				Blacklist *struct {
 					Namespaces *[]string `json:"namespaces,omitempty"`
-				} `json:"blacklist"`
-				Tags struct {
+				} `json:"blacklist,omitempty"`
+				Tags *struct {
 					Labels     *[]string `json:"labels,omitempty"`
 					Namespaces *bool     `json:"namespaces,omitempty"`
-				} `json:"tags"`
+				} `json:"tags,omitempty"`
 			} `json:"parameters"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -14707,13 +14861,13 @@ func ParseGetV1IntegrationsKubernetesIdResponse(rsp *http.Response) (*GetV1Integ
 			LocationId *openapi_types.UUID                  `json:"locationId"`
 			Name       string                               `json:"name"`
 			Parameters struct {
-				Blacklist struct {
+				Blacklist *struct {
 					Namespaces *[]string `json:"namespaces,omitempty"`
-				} `json:"blacklist"`
-				Tags struct {
+				} `json:"blacklist,omitempty"`
+				Tags *struct {
 					Labels     *[]string `json:"labels,omitempty"`
 					Namespaces *bool     `json:"namespaces,omitempty"`
-				} `json:"tags"`
+				} `json:"tags,omitempty"`
 			} `json:"parameters"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -15707,15 +15861,15 @@ func ParseGetV1IntegrationsWizIdResponse(rsp *http.Response) (*GetV1Integrations
 	return response, nil
 }
 
-// ParseGetV1LocationsResponse parses an HTTP response from a GetV1LocationsWithResponse call
-func ParseGetV1LocationsResponse(rsp *http.Response) (*GetV1LocationsResponse, error) {
+// ParseListLocationsResponse parses an HTTP response from a ListLocationsWithResponse call
+func ParseListLocationsResponse(rsp *http.Response) (*ListLocationsResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GetV1LocationsResponse{
+	response := &ListLocationsResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -15723,9 +15877,15 @@ func ParseGetV1LocationsResponse(rsp *http.Response) (*GetV1LocationsResponse, e
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest []struct {
-			Id   openapi_types.UUID `json:"id"`
-			Name string             `json:"name"`
-			Type string             `json:"type"`
+			// Id The location ID.
+			Id *openapi_types.UUID `json:"id,omitempty"`
+
+			// Key The SSH private key to use to connect to the location.
+			Key string `json:"key"`
+
+			// Name The name of the location.
+			Name *string               `json:"name,omitempty"`
+			Type *ListLocations200Type `json:"type,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
@@ -15737,15 +15897,15 @@ func ParseGetV1LocationsResponse(rsp *http.Response) (*GetV1LocationsResponse, e
 	return response, nil
 }
 
-// ParsePostV1LocationsResponse parses an HTTP response from a PostV1LocationsWithResponse call
-func ParsePostV1LocationsResponse(rsp *http.Response) (*PostV1LocationsResponse, error) {
+// ParseCreateLocationResponse parses an HTTP response from a CreateLocationWithResponse call
+func ParseCreateLocationResponse(rsp *http.Response) (*CreateLocationResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PostV1LocationsResponse{
+	response := &CreateLocationResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -15753,9 +15913,15 @@ func ParsePostV1LocationsResponse(rsp *http.Response) (*PostV1LocationsResponse,
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest struct {
-			Id   openapi_types.UUID `json:"id"`
-			Name string             `json:"name"`
-			Type string             `json:"type"`
+			// Id The location ID.
+			Id *openapi_types.UUID `json:"id,omitempty"`
+
+			// Key The SSH private key to use to connect to the location.
+			Key string `json:"key"`
+
+			// Name The name of the location.
+			Name *string                `json:"name,omitempty"`
+			Type *CreateLocation200Type `json:"type,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
@@ -15787,15 +15953,71 @@ func ParsePostV1LocationsResponse(rsp *http.Response) (*PostV1LocationsResponse,
 	return response, nil
 }
 
-// ParseDeleteV1LocationsIdResponse parses an HTTP response from a DeleteV1LocationsIdWithResponse call
-func ParseDeleteV1LocationsIdResponse(rsp *http.Response) (*DeleteV1LocationsIdResponse, error) {
+// ParseUpsertLocationResponse parses an HTTP response from a UpsertLocationWithResponse call
+func ParseUpsertLocationResponse(rsp *http.Response) (*UpsertLocationResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &DeleteV1LocationsIdResponse{
+	response := &UpsertLocationResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest struct {
+			// Id The location ID.
+			Id *openapi_types.UUID `json:"id,omitempty"`
+
+			// Key The SSH private key to use to connect to the location.
+			Key string `json:"key"`
+
+			// Name The name of the location.
+			Name *string                `json:"name,omitempty"`
+			Type *UpsertLocation200Type `json:"type,omitempty"`
+		}
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest struct {
+			Message string `json:"message"`
+			Name    string `json:"name"`
+		}
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest struct {
+			Message string `json:"message"`
+			Name    string `json:"name"`
+		}
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDeleteLocationResponse parses an HTTP response from a DeleteLocationWithResponse call
+func ParseDeleteLocationResponse(rsp *http.Response) (*DeleteLocationResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteLocationResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -15835,15 +16057,15 @@ func ParseDeleteV1LocationsIdResponse(rsp *http.Response) (*DeleteV1LocationsIdR
 	return response, nil
 }
 
-// ParseGetV1LocationsIdResponse parses an HTTP response from a GetV1LocationsIdWithResponse call
-func ParseGetV1LocationsIdResponse(rsp *http.Response) (*GetV1LocationsIdResponse, error) {
+// ParseGetLocationResponse parses an HTTP response from a GetLocationWithResponse call
+func ParseGetLocationResponse(rsp *http.Response) (*GetLocationResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GetV1LocationsIdResponse{
+	response := &GetLocationResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -15851,9 +16073,15 @@ func ParseGetV1LocationsIdResponse(rsp *http.Response) (*GetV1LocationsIdRespons
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest struct {
-			Id   openapi_types.UUID `json:"id"`
-			Name string             `json:"name"`
-			Type string             `json:"type"`
+			// Id The location ID.
+			Id *openapi_types.UUID `json:"id,omitempty"`
+
+			// Key The SSH private key to use to connect to the location.
+			Key string `json:"key"`
+
+			// Name The name of the location.
+			Name *string             `json:"name,omitempty"`
+			Type *GetLocation200Type `json:"type,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
