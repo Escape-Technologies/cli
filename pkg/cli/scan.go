@@ -1,14 +1,12 @@
 package cli
 
 import (
-	"context"
 	"encoding/json"
 	"fmt"
 	"os"
 
 	"github.com/Escape-Technologies/cli/pkg/api"
 	"github.com/google/uuid"
-	"github.com/oapi-codegen/runtime/types"
 	"github.com/spf13/cobra"
 )
 
@@ -18,25 +16,20 @@ var startScanCmd = &cobra.Command{
 	Args:    cobra.ExactArgs(1),
 	Example: "escape-cli start-scan 123e4567-e89b-12d3-a456-426614174001",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		applicationID := args[0]
-		fmt.Printf("Triggering scan for application %s\n\n", applicationID)
+		applicationIdString := args[0]
+		fmt.Printf("Triggering scan for application %s\n\n", applicationIdString)
+		applicationId, err := uuid.Parse(applicationIdString)
+		if err != nil {
+			return fmt.Errorf("invalid UUID format: %w", err)
+		}
 
 		client, err := api.NewAPIClient()
 		if err != nil {
 			return fmt.Errorf("failed to create API client: %w", err)
 		}
 
-		parsedUUID, err := uuid.Parse(applicationID)
-		if err != nil {
-			return fmt.Errorf("invalid UUID format: %w", err)
-		}
-		applicationId := types.UUID(parsedUUID)
-		params := &api.PostApplicationsIdStartScanParams{
-			ContentType: api.PostApplicationsIdStartScanParamsContentTypeApplicationjson,
-		}
-
 		body := api.PostApplicationsIdStartScanJSONRequestBody{}
-		scan, err := client.PostApplicationsIdStartScanWithResponse(context.Background(), applicationId, params, body)
+		scan, err := client.PostApplicationsIdStartScanWithResponse(cmd.Context(), applicationId, body)
 		if err != nil {
 			return err
 		}
