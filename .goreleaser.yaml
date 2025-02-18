@@ -19,8 +19,8 @@ builds:
 dockers:
   - image_templates:
       - "escapetech/app-cli:{{ .Version }}-amd64"
+    use: buildx
     dockerfile: Dockerfile
-    goarch: amd64
     build_flag_templates: 
       - "--pull"
       - "--platform=linux/amd64"
@@ -31,6 +31,7 @@ dockers:
       - "--label=org.opencontainers.image.licenses=Apache-2.0"
   - image_templates:
       - "escapetech/app-cli:{{ .Version }}-arm64"
+    use: buildx
     dockerfile: Dockerfile
     goarch: arm64
     build_flag_templates: 
