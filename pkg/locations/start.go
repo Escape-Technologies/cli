@@ -3,24 +3,17 @@ package locations
 import (
 	"context"
 	"fmt"
-	"time"
 
 	"github.com/Escape-Technologies/cli/pkg/api"
 	"github.com/Escape-Technologies/cli/pkg/log"
+	"github.com/Escape-Technologies/cli/pkg/privatelocation"
 )
 
-func startLocation(ctx context.Context, key string) error {
-	log.Info("Location started with %s", key)
-	time.Sleep(10 * time.Second)
-	return nil
-}
-
-func genSSHKeys() (string, string) {
-	return "aaa", "bbb"
-}
 
 func Start(ctx context.Context, client *api.ClientWithResponses, name string) error {
-	privateSSHKey, publicSSHKey := genSSHKeys()
+	publicSSHKey, privateSSHKey := privatelocation.GenSSHKeys()
+	log.Info("Private SSH Key: %s", privateSSHKey)
+	log.Info("Public SSH Key: %s", publicSSHKey)
 
 	log.Info("Upserting location %s", name)
 	y := true
@@ -34,7 +27,7 @@ func Start(ctx context.Context, client *api.ClientWithResponses, name string) er
 	}
 
 	if location.JSON200 != nil {
-		return startLocation(ctx, privateSSHKey)
+		return privatelocation.StartLocation(ctx, string(privateSSHKey))
 	} else if location.JSON400 != nil {
 		return fmt.Errorf("unable to start location: %s", location.JSON400.Message)
 	} else if location.JSON500 != nil {
