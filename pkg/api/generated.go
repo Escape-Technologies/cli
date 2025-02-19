@@ -326,6 +326,9 @@ type PostV1IntegrationsWizJSONBody struct {
 
 // CreateLocationJSONBody defines parameters for CreateLocation.
 type CreateLocationJSONBody struct {
+	// Key The SSH public key to use to connect to the location.
+	Key *string `json:"key,omitempty"`
+
 	// Name The name of the location.
 	Name string `json:"name"`
 
@@ -335,6 +338,9 @@ type CreateLocationJSONBody struct {
 
 // UpsertLocationJSONBody defines parameters for UpsertLocation.
 type UpsertLocationJSONBody struct {
+	// Key The SSH public key to use to connect to the location.
+	Key *string `json:"key,omitempty"`
+
 	// Name The name of the location.
 	Name string `json:"name"`
 
@@ -9762,8 +9768,8 @@ type ListLocationsResponse struct {
 		// Id The location ID.
 		Id *openapi_types.UUID `json:"id,omitempty"`
 
-		// Key The SSH private key to use to connect to the location.
-		Key string `json:"key"`
+		// Key The SSH public key to use to connect to the location.
+		Key *string `json:"key,omitempty"`
 
 		// Name The name of the location.
 		Name *string               `json:"name,omitempty"`
@@ -9795,8 +9801,8 @@ type CreateLocationResponse struct {
 		// Id The location ID.
 		Id *openapi_types.UUID `json:"id,omitempty"`
 
-		// Key The SSH private key to use to connect to the location.
-		Key string `json:"key"`
+		// Key The SSH public key to use to connect to the location.
+		Key *string `json:"key,omitempty"`
 
 		// Name The name of the location.
 		Name *string                `json:"name,omitempty"`
@@ -9836,8 +9842,8 @@ type UpsertLocationResponse struct {
 		// Id The location ID.
 		Id *openapi_types.UUID `json:"id,omitempty"`
 
-		// Key The SSH private key to use to connect to the location.
-		Key string `json:"key"`
+		// Key The SSH public key to use to connect to the location.
+		Key *string `json:"key,omitempty"`
 
 		// Name The name of the location.
 		Name *string                `json:"name,omitempty"`
@@ -9909,8 +9915,8 @@ type GetLocationResponse struct {
 		// Id The location ID.
 		Id *openapi_types.UUID `json:"id,omitempty"`
 
-		// Key The SSH private key to use to connect to the location.
-		Key string `json:"key"`
+		// Key The SSH public key to use to connect to the location.
+		Key *string `json:"key,omitempty"`
 
 		// Name The name of the location.
 		Name *string             `json:"name,omitempty"`
@@ -15880,8 +15886,8 @@ func ParseListLocationsResponse(rsp *http.Response) (*ListLocationsResponse, err
 			// Id The location ID.
 			Id *openapi_types.UUID `json:"id,omitempty"`
 
-			// Key The SSH private key to use to connect to the location.
-			Key string `json:"key"`
+			// Key The SSH public key to use to connect to the location.
+			Key *string `json:"key,omitempty"`
 
 			// Name The name of the location.
 			Name *string               `json:"name,omitempty"`
@@ -15916,8 +15922,8 @@ func ParseCreateLocationResponse(rsp *http.Response) (*CreateLocationResponse, e
 			// Id The location ID.
 			Id *openapi_types.UUID `json:"id,omitempty"`
 
-			// Key The SSH private key to use to connect to the location.
-			Key string `json:"key"`
+			// Key The SSH public key to use to connect to the location.
+			Key *string `json:"key,omitempty"`
 
 			// Name The name of the location.
 			Name *string                `json:"name,omitempty"`
@@ -15972,8 +15978,8 @@ func ParseUpsertLocationResponse(rsp *http.Response) (*UpsertLocationResponse, e
 			// Id The location ID.
 			Id *openapi_types.UUID `json:"id,omitempty"`
 
-			// Key The SSH private key to use to connect to the location.
-			Key string `json:"key"`
+			// Key The SSH public key to use to connect to the location.
+			Key *string `json:"key,omitempty"`
 
 			// Name The name of the location.
 			Name *string                `json:"name,omitempty"`
@@ -16076,8 +16082,8 @@ func ParseGetLocationResponse(rsp *http.Response) (*GetLocationResponse, error) 
 			// Id The location ID.
 			Id *openapi_types.UUID `json:"id,omitempty"`
 
-			// Key The SSH private key to use to connect to the location.
-			Key string `json:"key"`
+			// Key The SSH public key to use to connect to the location.
+			Key *string `json:"key,omitempty"`
 
 			// Name The name of the location.
 			Name *string             `json:"name,omitempty"`

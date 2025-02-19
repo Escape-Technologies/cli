@@ -2188,6 +2188,10 @@
                   "private_location_v2": {
                     "type": "boolean",
                     "description": "Opt in to the new private location feature"
+                  },
+                  "key": {
+                    "type": "string",
+                    "description": "The SSH public key to use to connect to the location."
                   }
                 },
                 "required": [
@@ -2227,12 +2231,10 @@
                     },
                     "key": {
                       "type": "string",
-                      "description": "The SSH private key to use to connect to the location."
+                      "default": "",
+                      "description": "The SSH public key to use to connect to the location."
                     }
-                  },
-                  "required": [
-                    "key"
-                  ]
+                  }
                 }
               }
             }
@@ -2322,12 +2324,10 @@
                       },
                       "key": {
                         "type": "string",
-                        "description": "The SSH private key to use to connect to the location."
+                        "default": "",
+                        "description": "The SSH public key to use to connect to the location."
                       }
-                    },
-                    "required": [
-                      "key"
-                    ]
+                    }
                   }
                 }
               }
@@ -2357,6 +2357,10 @@
                   "private_location_v2": {
                     "type": "boolean",
                     "description": "Opt in to the new private location feature"
+                  },
+                  "key": {
+                    "type": "string",
+                    "description": "The SSH public key to use to connect to the location."
                   }
                 },
                 "required": [
@@ -2396,12 +2400,10 @@
                     },
                     "key": {
                       "type": "string",
-                      "description": "The SSH private key to use to connect to the location."
+                      "default": "",
+                      "description": "The SSH public key to use to connect to the location."
                     }
-                  },
-                  "required": [
-                    "key"
-                  ]
+                  }
                 }
               }
             }
@@ -2591,12 +2593,10 @@
                     },
                     "key": {
                       "type": "string",
-                      "description": "The SSH private key to use to connect to the location."
+                      "default": "",
+                      "description": "The SSH public key to use to connect to the location."
                     }
-                  },
-                  "required": [
-                    "key"
-                  ]
+                  }
                 }
               }
             }
