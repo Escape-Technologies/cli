@@ -21,21 +21,16 @@ const (
 
 var output outputT = outputPretty
 
-var unknowError = struct {
-	Error string `json:"error"`
-}{
-	Error: "An unknown error occurred",
-}
-
-func print(data any, pretty func()) {
+func print(data any, pretty func()) error {
 	switch output {
 	case outputJSON:
-		json.NewEncoder(os.Stdout).Encode(data)
+		return json.NewEncoder(os.Stdout).Encode(data)
 	case outputYAML:
-		yaml.NewEncoder(os.Stdout).Encode(data)
+		return yaml.NewEncoder(os.Stdout).Encode(data)
 	default:
 		pretty()
 	}
+	return nil
 }
 
 func Run() error {
