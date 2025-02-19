@@ -8,10 +8,11 @@ import (
 	"github.com/Escape-Technologies/cli/pkg/log"
 )
 
-func Upsert(ctx context.Context, client *api.ClientWithResponses, name string) (any, func(), error) {
-	log.Info("Upserting location %s", name)
+func Upsert(ctx context.Context, client *api.ClientWithResponses, input LocationSchemaInput) (any, func(), error) {
+	log.Info("Upserting location %s", input.Name)
 	location, err := client.UpsertLocationWithResponse(ctx, api.UpsertLocationJSONRequestBody{
-		Name: name,
+		Name:              input.Name,
+		PrivateLocationV2: &input.PrivateLocationV2,
 	})
 	if err != nil {
 		return nil, nil, err

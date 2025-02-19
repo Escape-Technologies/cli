@@ -76,8 +76,11 @@ func Run() error {
 	locationsCmd.AddCommand(locationsListCmd)
 	locationsCmd.AddCommand(locationsDeleteCmd)
 	locationsCmd.AddCommand(locationsGetCmd)
+	locationsCreateCmd.Flags().BoolVar(&locationsCreateInput.PrivateLocationV2, "new", false, "Opt in to the new private location feature.")
 	locationsCmd.AddCommand(locationsCreateCmd)
+	locationsUpsertCmd.Flags().BoolVar(&locationsUpsertInput.PrivateLocationV2, "new", false, "Opt in to the new private location feature.")
 	locationsCmd.AddCommand(locationsUpsertCmd)
+	locationsCmd.AddCommand(locationsStartCmd)
 
 	// Integrations
 	rootCmd.AddCommand(integrationsCmd)
