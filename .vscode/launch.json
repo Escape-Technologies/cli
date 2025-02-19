@@ -1,31 +1,32 @@
 {
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "Locations List",
-            "type": "go",
-            "request": "launch",
-            "mode": "auto",
-            "program": "cmd/main.go",
-            "envFile": "${workspaceFolder}/.env",
-            "args": [
-                "locations",
-                "list"
-            ]
-        },
-        {
-            "name": "Locations Upsert",
-            "type": "go",
-            "request": "launch",
-            "mode": "auto",
-            "program": "cmd/main.go",
-            "envFile": "${workspaceFolder}/.env",
-            "args": [
-                "locations",
-                "upsert",
-                "test",
-                "--new"
-            ]
-        },
-    ]
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Locations List",
+      "type": "go",
+      "request": "launch",
+      "mode": "auto",
+      "program": "cmd/main.go",
+      "envFile": "${workspaceFolder}/.env",
+      "args": ["locations", "list"]
+    },
+    {
+      "name": "Locations Upsert",
+      "type": "go",
+      "request": "launch",
+      "mode": "auto",
+      "program": "cmd/main.go",
+      "envFile": "${workspaceFolder}/.env",
+      "args": ["locations", "upsert", "test", "--new"]
+    },
+    {
+      "name": "Locations Start",
+      "type": "go",
+      "request": "launch",
+      "mode": "auto",
+      "program": "cmd/main.go",
+      "envFile": "${workspaceFolder}/.env",
+      "args": ["locations", "start", "test"]
+    }
+  ]
 }
