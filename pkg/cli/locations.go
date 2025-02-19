@@ -76,6 +76,7 @@ var locationsGetCmd = &cobra.Command{
 	},
 }
 
+var locationsCreateInput = locations.LocationSchemaInput{}
 var locationsCreateCmd = &cobra.Command{
 	Use:     "create",
 	Aliases: []string{"new"},
@@ -86,7 +87,8 @@ var locationsCreateCmd = &cobra.Command{
 		if err != nil {
 			return err
 		}
-		data, pretty, err := locations.Create(cmd.Context(), client, args[0])
+		locationsCreateInput.Name = args[0]
+		data, pretty, err := locations.Create(cmd.Context(), client, locationsCreateInput)
 		if err != nil {
 			return err
 		}
@@ -94,6 +96,7 @@ var locationsCreateCmd = &cobra.Command{
 	},
 }
 
+var locationsUpsertInput = locations.LocationSchemaInput{}
 var locationsUpsertCmd = &cobra.Command{
 	Use:   "upsert",
 	Args:  cobra.ExactArgs(1),
@@ -103,10 +106,24 @@ var locationsUpsertCmd = &cobra.Command{
 		if err != nil {
 			return err
 		}
-		data, pretty, err := locations.Upsert(cmd.Context(), client, args[0])
+		locationsUpsertInput.Name = args[0]
+		data, pretty, err := locations.Upsert(cmd.Context(), client, locationsUpsertInput)
 		if err != nil {
 			return err
 		}
 		return print(data, pretty)
+	},
+}
+
+var locationsStartCmd = &cobra.Command{
+	Use:   "start",
+	Args:  cobra.ExactArgs(1),
+	Short: "Start the private location",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		client, err := api.NewAPIClient()
+		if err != nil {
+			return err
+		}
+		return locations.Start(cmd.Context(), client, args[0])
 	},
 }
