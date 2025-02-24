@@ -1,0 +1,14 @@
+---
+ESCAPE_API_KEY: "00000000-0000-0000-0000-000000000000"
+
+# You can set the private location name here
+# or it will fallback to the helm release name
+ESCAPE_PRIVATE_LOCATION: ""
+
+container:
+  image: escapetech/cli:latest
+  resources:
+    cpu: "1"
+    memory: "2Gi"
+  env: []
+  extra: {}

@@ -34,7 +34,17 @@ new_version="${_major}.${_minor}.${_patch}"
 echo "Bump done: $old_version -> $new_version"
 
 echo "${new_version}" > $PROJECT_ROOT/version.txt
+cat <<EOF > helm/Chart.yaml
+---
+apiVersion: v2
+name: private-location
+description: Escape Private Location
+type: application
+version: ${new_version}
+appVersion: ${new_version}
+EOF
 
+git add helm/Chart.yaml
 git add $PROJECT_ROOT/version.txt
 git commit -m "v${new_version}"
 git tag -a "v${new_version}" -m "v${new_version}"
