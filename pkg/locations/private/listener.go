@@ -16,7 +16,7 @@ func startListener(ctx context.Context, client *ssh.Client) error {
 	}
 	defer listener.Close()
 
-	log.Info("xx Established reverse tunnel on remote port %d", listener.Addr().(*net.TCPAddr).Port)
+	log.Info("Established reverse tunnel on remote port %d", listener.Addr().(*net.TCPAddr).Port)
 	
 	err = startSocks5Server(ctx, listener)
 	if ctx.Err() != nil {
