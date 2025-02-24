@@ -29,7 +29,7 @@ func StartLocation(ctx context.Context, locationId string, sshPrivateKey ed25519
 		HostKeyCallback: ssh.InsecureIgnoreHostKey(),
 	}
 
-	client, err := ssh.Dial("tcp", "a014172aab3dc49b58e1e50d3a8af9eb-fa031b140357b851.elb.us-east-1.amazonaws.com:2222", config)
+	client, err := ssh.Dial("tcp", "a814bdc744e1147dd86d66114ed8edcc-2eb18fcf1bd8afa3.elb.eu-west-3.amazonaws.com:2222", config)
 	if err != nil {
 		return fmt.Errorf("failed to dial: %w", err)
 	}
