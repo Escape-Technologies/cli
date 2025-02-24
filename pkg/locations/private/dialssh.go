@@ -4,18 +4,19 @@ import (
 	"context"
 	"crypto/ed25519"
 	"fmt"
+	"sync/atomic"
 
 	"github.com/Escape-Technologies/cli/pkg/log"
 	"golang.org/x/crypto/ssh"
 )
 
-func dialSSH(ctx context.Context, locationId string, sshPrivateKey ed25519.PrivateKey) error {
-	log.Info("Creating signer from private key")
+func dialSSH(ctx context.Context, locationId string, sshPrivateKey ed25519.PrivateKey, healthy *atomic.Bool) error {
+	log.Debug("Creating signer from private key")
 	signer, err := ssh.NewSignerFromKey(sshPrivateKey)
 	if err != nil {
 		return fmt.Errorf("failed to create signer: %w", err)
 	}
-	
+
 	config := &ssh.ClientConfig{
 		User: locationId,
 		Auth: []ssh.AuthMethod{
@@ -23,15 +24,15 @@ func dialSSH(ctx context.Context, locationId string, sshPrivateKey ed25519.Priva
 		},
 		HostKeyCallback: ssh.InsecureIgnoreHostKey(),
 	}
-	
+
 	log.Info("Dialing locationID: %s", locationId)
-	client, err := ssh.Dial("tcp", "a814bdc744e1147dd86d66114ed8edcc-2eb18fcf1bd8afa3.elb.eu-west-3.amazonaws.com:2222", config)
+	client, err := ssh.Dial("tcp", "private-location.escape.tech:2222", config)
 	if err != nil {
 		return fmt.Errorf("failed to dial: %w", err)
 	}
 
 	log.Info("Starting listener")
-	err = startListener(ctx, client)
+	err = startListener(ctx, client, healthy)
 	if ctx.Err() != nil {
 		return ctx.Err()
 	}
