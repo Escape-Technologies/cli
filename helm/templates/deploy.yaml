@@ -22,6 +22,7 @@ spec:
           command:
             - locations
             - start
+            - "-v"
             - {{ .Values.ESCAPE_PRIVATE_LOCATION | default (include "fullname" .) | quote }}
           imagePullPolicy: Always
           resources:
