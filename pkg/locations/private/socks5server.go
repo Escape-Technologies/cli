@@ -9,15 +9,20 @@ import (
 	"github.com/Escape-Technologies/cli/pkg/socks5"
 )
 
-func StartSocks5Server(ctx context.Context, listener *net.Listener) error {
+func startSocks5Server(ctx context.Context, listener net.Listener) error {
+
+	log.Info("Starting socks5 server")
 	socks5Server, err := socks5.New(&socks5.Config{})
 	if err != nil {
 		return fmt.Errorf("failed to create socks5 server: %w", err)
 	}
 
-	log.Info("Established reverse tunnel on remote port %d", (*listener).Addr().(*net.TCPAddr).Port)
-	log.Info("SOCKS5 server created, waiting for connections")
+	log.Info("Socks5 server started")
+	err = socks5Server.Serve(listener)
+	if err != nil {
+		return fmt.Errorf("failed to serve socks5 server: %w", err)
+	}
 
-	return socks5Server.Serve(*listener)
+	return nil
 }
 
