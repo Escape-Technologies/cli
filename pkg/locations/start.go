@@ -25,8 +25,6 @@ func Start(ctx context.Context, client *api.ClientWithResponses, name string) er
 	if err != nil {
 		return err
 	}
-	ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
-	defer cancel()
 	if location.JSON200 != nil {
 		for {
 			err := private.StartLocation(ctx,location.JSON200.Id.String(), sshPrivateKey)
@@ -35,7 +33,7 @@ func Start(ctx context.Context, client *api.ClientWithResponses, name string) er
 			} else {
 				log.Error("Unknown error starting location")
 			}
-			time.Sleep(1 * time.Second)
+			time.Sleep(100 * time.Millisecond)
 			if ctx.Err() != nil {
 				return nil
 			}
