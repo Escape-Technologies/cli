@@ -10,11 +10,14 @@ import (
 func StartLocation(ctx context.Context, locationId string, sshPrivateKey ed25519.PrivateKey) error {
 	log.Info("Starting location")
 
-	client, err := dialSSH(ctx, locationId, sshPrivateKey)
-	if err != nil {
-		dialSSH(ctx, locationId, sshPrivateKey)
+	for {
+		_, err := dialSSH(ctx, locationId, sshPrivateKey)
+		if err != nil {
+			log.Info("failed to dial ssh, retrying...")
+			continue
+		}
+
 	}
-	defer client.Close()
 
 	// <-ctx.Done()
 	return nil
