@@ -1,9 +1,6 @@
-# Runtime
-FROM --platform=$BUILDPLATFORM alpine:3.20
+FROM alpine:3.20
+COPY ./escape-cli /usr/local/bin/escape-cli
 
 RUN adduser -D escape
 USER escape
-
-COPY --chown=escape:escape ./escape-cli /usr/local/bin/escape-cli
-
-ENTRYPOINT ["/bin/sh"]
+ENTRYPOINT ["/usr/local/bin/escape-cli"]

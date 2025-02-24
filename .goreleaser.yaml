@@ -18,42 +18,42 @@ builds:
       - -s -w -X github.com/Escape-Technologies/cli/pkg/cli.version={{.Version}} -X github.com/Escape-Technologies/cli/pkg/cli.commit={{.ShortCommit}}
 dockers:
   - image_templates:
-      - "escapetech/app-cli:{{ .Version }}-amd64"
+      - "escapetech/cli:{{ .Version }}-amd64"
     use: buildx
     dockerfile: Dockerfile
-    build_flag_templates: 
+    build_flag_templates:
       - "--pull"
       - "--platform=linux/amd64"
       - "--label=org.opencontainers.image.created={{.Date}}"
-      - "--label=org.opencontainers.image.title=app-cli"
+      - "--label=org.opencontainers.image.title=cli"
       - "--label=org.opencontainers.image.revision={{.FullCommit}}"
       - "--label=org.opencontainers.image.version={{.Version}}"
       - "--label=org.opencontainers.image.licenses=Apache-2.0"
   - image_templates:
-      - "escapetech/app-cli:{{ .Version }}-arm64"
+      - "escapetech/cli:{{ .Version }}-arm64"
     use: buildx
     dockerfile: Dockerfile
     goarch: arm64
-    build_flag_templates: 
-    - "--pull"
-    - "--platform=linux/arm64"
-    - "--label=org.opencontainers.image.created={{.Date}}"
-    - "--label=org.opencontainers.image.title=app-cli"
-    - "--label=org.opencontainers.image.revision={{.FullCommit}}"
-    - "--label=org.opencontainers.image.version={{.Version}}"
-    - "--label=org.opencontainers.image.licenses=Apache-2.0"
+    build_flag_templates:
+      - "--pull"
+      - "--platform=linux/arm64"
+      - "--label=org.opencontainers.image.created={{.Date}}"
+      - "--label=org.opencontainers.image.title=cli"
+      - "--label=org.opencontainers.image.revision={{.FullCommit}}"
+      - "--label=org.opencontainers.image.version={{.Version}}"
+      - "--label=org.opencontainers.image.licenses=Apache-2.0"
 
 docker_manifests:
-  - name_template: "escapetech/app-cli:{{ .Version }}"
+  - name_template: "escapetech/cli:{{ .Version }}"
     skip_push: false
     image_templates:
-      - escapetech/app-cli:{{ .Version }}-amd64
-      - escapetech/app-cli:{{ .Version }}-arm64
-  - name_template: "escapetech/app-cli:latest"
+      - escapetech/cli:{{ .Version }}-amd64
+      - escapetech/cli:{{ .Version }}-arm64
+  - name_template: "escapetech/cli:latest"
     skip_push: false
     image_templates:
-      - escapetech/app-cli:{{ .Version }}-amd64
-      - escapetech/app-cli:{{ .Version }}-arm64
+      - escapetech/cli:{{ .Version }}-amd64
+      - escapetech/cli:{{ .Version }}-arm64
 
 checksum:
   algorithm: sha256
