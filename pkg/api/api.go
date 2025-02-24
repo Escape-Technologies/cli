@@ -7,7 +7,6 @@ import (
 	"net/url"
 	"os"
 
-	"github.com/Escape-Technologies/cli/pkg/locations/private"
 	"github.com/Escape-Technologies/cli/pkg/log"
 )
 
@@ -24,8 +23,7 @@ func NewAPIClient(opts ...ClientOption) (*ClientWithResponses, error) {
 
 	transport := &http.Transport{}
 
-	proxyURL := private.SetupProxyURL()
-	log.Info("Proxy URL: %s", proxyURL)
+	proxyURL := os.Getenv("ESCAPE_REPEATER_PROXY_URL")
 	if proxyURL != "" {
 		log.Info("Using custom proxy url: %s", proxyURL)
 		url, err := url.Parse(proxyURL)
