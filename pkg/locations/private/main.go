@@ -3,6 +3,7 @@ package private
 import (
 	"context"
 	"crypto/ed25519"
+	"time"
 
 	"github.com/Escape-Technologies/cli/pkg/log"
 )
@@ -11,15 +12,16 @@ func StartLocation(ctx context.Context, locationId string, sshPrivateKey ed25519
 	log.Info("Starting location")
 
 	for {
-		_, err := dialSSH(ctx, locationId, sshPrivateKey)
-		if err != nil {
-			log.Info("failed to dial ssh, retrying...")
-			continue
+		err := dialSSH(ctx, locationId, sshPrivateKey)
+		if ctx.Err() != nil {
+			return ctx.Err()
 		}
+		if err != nil {
+			log.Info("failed to dial ssh: %v, retrying...", err)
 
+		} else {
+			log.Info("Disconnected from SSH, retrying...")
+		}
+		time.Sleep(1 * time.Second)
 	}
-
-	// <-ctx.Done()
-	return nil
 }
-

@@ -14,13 +14,16 @@ func startListener(ctx context.Context, client *ssh.Client) error {
 	if err != nil {
 		return fmt.Errorf("failed to create reverse tunnel: %w", err)
 	}
+	defer listener.Close()
 
-	for {
-		log.Info("Established reverse tunnel on remote port %d", listener.Addr().(*net.TCPAddr).Port)
-		err = startSocks5Server(ctx, listener)
-		if err != nil {
-			log.Info("failed to serve socks5 server, retrying...")
-			continue
-		}
+	log.Info("xx Established reverse tunnel on remote port %d", listener.Addr().(*net.TCPAddr).Port)
+	
+	err = startSocks5Server(ctx, listener)
+	if ctx.Err() != nil {
+		return ctx.Err()
 	}
+	if err != nil {
+		return fmt.Errorf("failed to start socks5 server: %w", err)
+	}
+	return nil
 }
