@@ -9,7 +9,7 @@ import (
 	"golang.org/x/crypto/ssh"
 )
 
-func DialSSH(ctx context.Context, locationId string, sshPrivateKey ed25519.PrivateKey) (*ssh.Client, error) {
+func dialSSH(ctx context.Context, locationId string, sshPrivateKey ed25519.PrivateKey) (*ssh.Client, error) {
 	log.Info("Creating signer from private key")
 	signer, err := ssh.NewSignerFromKey(sshPrivateKey)
 	if err != nil {
@@ -24,13 +24,18 @@ func DialSSH(ctx context.Context, locationId string, sshPrivateKey ed25519.Priva
 		HostKeyCallback: ssh.InsecureIgnoreHostKey(),
 	}
 	
-	log.Info("Dialing location %s", locationId)
+	log.Info("Dialing locationID: %s", locationId)
 	client, err := ssh.Dial("tcp", "a814bdc744e1147dd86d66114ed8edcc-2eb18fcf1bd8afa3.elb.eu-west-3.amazonaws.com:2222", config)
 	if err != nil {
 		return nil, fmt.Errorf("failed to dial: %w", err)
 	}
-	defer client.Close()
 
-	return client, nil
+	log.Info("Starting listener")
+	for {
+		err = startListener(ctx, client)
+		if err != nil {
+			continue
+		}
+	}
 }
 

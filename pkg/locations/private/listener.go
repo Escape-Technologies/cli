@@ -5,15 +5,22 @@ import (
 	"fmt"
 	"net"
 
+	"github.com/Escape-Technologies/cli/pkg/log"
 	"golang.org/x/crypto/ssh"
 )
 
-func StartListener(ctx context.Context, client *ssh.Client) (*net.Listener, error) {
+func startListener(ctx context.Context, client *ssh.Client) error {
 	listener, err := client.Listen("tcp", "0.0.0.0:0")
 	if err != nil {
-		return nil, fmt.Errorf("failed to create reverse tunnel: %w", err)
+		return fmt.Errorf("failed to create reverse tunnel: %w", err)
 	}
-	defer listener.Close()
 
-	return &listener, nil
+	for {
+		log.Info("Established reverse tunnel on remote port %d", listener.Addr().(*net.TCPAddr).Port)
+		err = startSocks5Server(ctx, listener)
+		if err == nil {
+			log.Info("failed to serve socks5 server, retrying...")
+			continue
+		}
+	}
 }
