@@ -1,0 +1,7 @@
+---
+apiVersion: v2
+name: private-location
+description: Escape Private Location
+type: application
+version: 0.0.18
+appVersion: 0.0.18
