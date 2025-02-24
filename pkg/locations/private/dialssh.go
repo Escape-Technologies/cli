@@ -30,7 +30,7 @@ func dialSSH(ctx context.Context, locationId string, sshPrivateKey ed25519.Priva
 		return fmt.Errorf("failed to dial: %w", err)
 	}
 
-	log.Info("x Starting listener")
+	log.Info("Starting listener")
 	err = startListener(ctx, client)
 	if ctx.Err() != nil {
 		return ctx.Err()
