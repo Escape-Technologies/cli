@@ -20,7 +20,6 @@ const (
 	defaultStaticPrefix = "/static/"
 	defaultAPIPrefix    = "/"
 	defaultAddress      = "127.0.0.1"
-
 )
 
 func inferConfig() (*rest.Config, error) {
@@ -66,11 +65,11 @@ func connectAndRun(ctx context.Context, client *api.ClientWithResponses, cfg *re
 			return
 		}
 		log.Debug("Connected to k8s API")
-			log.Info("Upserting integration")
-			err = UpsertIntegration(ctx, client, locationId, locationName)
-			if err != nil {
-				log.Error("Error upserting integration: %s", err)
-				return
+		log.Info("Upserting integration")
+		err = UpsertIntegration(ctx, client, locationId, locationName)
+		if err != nil {
+			log.Error("Error upserting integration: %s", err)
+			return
 		}
 
 		<-ctx.Done()
@@ -84,7 +83,6 @@ func connectAndRun(ctx context.Context, client *api.ClientWithResponses, cfg *re
 	}
 	return nil
 }
-
 
 func Start(ctx context.Context, client *api.ClientWithResponses, locationId *types.UUID, locationName string, healthy *atomic.Bool) {
 	cfg, err := inferConfig()
@@ -105,6 +103,4 @@ func Start(ctx context.Context, client *api.ClientWithResponses, locationId *typ
 		log.Info("Healthy: %t", healthy.Load())
 	}
 
-	
 }
-

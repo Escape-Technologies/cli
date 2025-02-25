@@ -32,7 +32,7 @@ func NewAPIClient(opts ...ClientOption) (*ClientWithResponses, error) {
 		}
 		transport.Proxy = http.ProxyURL(url)
 	}
-	
+
 	client := &http.Client{Transport: transport}
 	opts = append(opts, WithHTTPClient(client))
 	opts = append(opts, WithRequestEditorFn(func(ctx context.Context, req *http.Request) error {
