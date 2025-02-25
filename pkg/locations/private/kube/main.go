@@ -7,6 +7,7 @@ import (
 	"sync/atomic"
 	"time"
 
+	"github.com/Escape-Technologies/cli/pkg/api"
 	"github.com/Escape-Technologies/cli/pkg/log"
 	"github.com/oapi-codegen/runtime/types"
 	"k8s.io/client-go/rest"
@@ -34,7 +35,7 @@ func inferConfig() (*rest.Config, error) {
 	}
 }
 
-func connectAndRun(ctx context.Context, cfg *rest.Config, isConnected *atomic.Bool) error {
+func connectAndRun(ctx context.Context, client *api.ClientWithResponses, cfg *rest.Config, isConnected *atomic.Bool, locationId *types.UUID, locationName string) error {
 	ctx, cancel := context.WithCancel(ctx)
 	defer cancel()
 
@@ -64,6 +65,14 @@ func connectAndRun(ctx context.Context, cfg *rest.Config, isConnected *atomic.Bo
 			lis.Close()
 			return
 		}
+		log.Debug("Connected to k8s API")
+			log.Info("Upserting integration")
+			err = UpsertIntegration(ctx, client, locationId, locationName)
+			if err != nil {
+				log.Error("Error upserting integration: %s", err)
+				return
+		}
+
 		<-ctx.Done()
 		lis.Close()
 	}()
@@ -73,14 +82,11 @@ func connectAndRun(ctx context.Context, cfg *rest.Config, isConnected *atomic.Bo
 	if err != nil {
 		return fmt.Errorf("error serving: %w", err)
 	}
-	log.Debug("Connected to k8s API")
-	isConnected.Store(true)
-	log.Info("Healthy: %t", isConnected.Load())
 	return nil
 }
 
 
-func Start(ctx context.Context, locationId *types.UUID, locationName string, healthy *atomic.Bool) {
+func Start(ctx context.Context, client *api.ClientWithResponses, locationId *types.UUID, locationName string, healthy *atomic.Bool) {
 	cfg, err := inferConfig()
 	if err != nil {
 		log.Info("Not connected to k8s API")
@@ -89,25 +95,14 @@ func Start(ctx context.Context, locationId *types.UUID, locationName string, hea
 	}
 	for {
 		log.Info("Healthy: %t", healthy.Load())
-		err = connectAndRun(ctx, cfg, healthy)
-		log.Info("Healthy: %t", healthy.Load())
+		err = connectAndRun(ctx, client, cfg, healthy, locationId, locationName)
 		if err != nil {
 			log.Error("Error connecting to k8s API: %s", err)
-			return
 		}
-		time.Sleep(1 * time.Second)
 		if ctx.Err() != nil {
 			return
 		}
 		log.Info("Healthy: %t", healthy.Load())
-		if healthy.Load() {
-			log.Info("Upserting integration")
-			err = UpsertIntegration(ctx, locationId, locationName)
-			if err != nil {
-				log.Error("Error upserting integration: %s", err)
-				return
-			}
-		}
 	}
 
 	

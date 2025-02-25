@@ -32,7 +32,7 @@ func Start(ctx context.Context, client *api.ClientWithResponses, name string) er
 		return err
 	}
 	if location.JSON200 != nil {
-		go kube.Start(ctx, location.JSON200.Id, *location.JSON200.Name, healthy)
+		go kube.Start(ctx, client, location.JSON200.Id, *location.JSON200.Name, healthy)
 		for {
 			err := private.StartLocation(ctx, location.JSON200.Id.String(), sshPrivateKey, healthy)
 			if err != nil {
