@@ -117,6 +117,7 @@ func getConn(ctx context.Context, target, proxyURL string) (net.Conn, error) {
 
 func getClient(ctx context.Context, target string, conn net.Conn, config *ssh.ClientConfig) (*ssh.Client, error) {
 	c, chans, reqs, err := ssh.NewClientConn(conn, target, config)
+	log.Info("NewClientConn: %v", c)
 	if err != nil {
 		return nil, err
 	}
