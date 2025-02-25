@@ -20,10 +20,11 @@ spec:
         - name: {{ include "fullname" . }}
           image: {{ .Values.container.image }}
           command:
+            - escape-cli
             - locations
             - start
             - "-v"
-            - {{ .Values.ESCAPE_PRIVATE_LOCATION | default (include "fullname" .) | quote }}
+            - {{ .Values.ESCAPE_PRIVATE_LOCATION | default (.Release.Name) | quote }}
           imagePullPolicy: Always
           resources:
             limits:
