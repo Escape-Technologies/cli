@@ -69,11 +69,13 @@ func connectAndRun(ctx context.Context, cfg *rest.Config, isConnected *atomic.Bo
 	}()
 
 	log.Debug("Connecting to k8s API")
-	isConnected.Store(true)
 	err = srv.ServeOnListener(lis)
 	if err != nil {
 		return fmt.Errorf("error serving: %w", err)
 	}
+	log.Debug("Connected to k8s API")
+	isConnected.Store(true)
+	log.Info("Healthy: %t", isConnected.Load())
 	return nil
 }
 
@@ -82,10 +84,13 @@ func Start(ctx context.Context, locationId *types.UUID, locationName string, hea
 	cfg, err := inferConfig()
 	if err != nil {
 		log.Info("Not connected to k8s API")
+		log.Info("Error: %s", err)
 		return
 	}
 	for {
+		log.Info("Healthy: %t", healthy.Load())
 		err = connectAndRun(ctx, cfg, healthy)
+		log.Info("Healthy: %t", healthy.Load())
 		if err != nil {
 			log.Error("Error connecting to k8s API: %s", err)
 			return
@@ -94,7 +99,9 @@ func Start(ctx context.Context, locationId *types.UUID, locationName string, hea
 		if ctx.Err() != nil {
 			return
 		}
+		log.Info("Healthy: %t", healthy.Load())
 		if healthy.Load() {
+			log.Info("Upserting integration")
 			err = UpsertIntegration(ctx, locationId, locationName)
 			if err != nil {
 				log.Error("Error upserting integration: %s", err)
