@@ -4,10 +4,7 @@ import (
 	"context"
 	"net"
 	"net/url"
-	"time"
 )
-
-
 
 func proxyDialer(proxy string) func(context.Context, string) (net.Conn, error) {
 	return func(ctx context.Context, addr string) (net.Conn, error) {
@@ -23,12 +20,9 @@ func proxyDialer(proxy string) func(context.Context, string) (net.Conn, error) {
 		}
 		return doHTTPConnectHandshake(ctx, conn, addr, *proxyURL)
 	}
-}	
+}
 
 func getConn(ctx context.Context, target, proxyURL string) (net.Conn, error) {
-	ctx, cancel := context.WithTimeout(ctx, time.Second)
-	defer cancel()
-
 	if proxyURL == "" {
 		return netDialerWithTCPKeepalive().DialContext(ctx, "tcp", target)
 	}
