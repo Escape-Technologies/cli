@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"net"
 	"os"
+	"sync/atomic"
 
 	"github.com/Escape-Technologies/cli/pkg/log"
 	"golang.org/x/crypto/ssh"
