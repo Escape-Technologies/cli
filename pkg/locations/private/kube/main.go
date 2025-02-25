@@ -2,13 +2,13 @@ package kube
 
 import (
 	"context"
-	"errors"
 	"fmt"
 	"os"
 	"sync/atomic"
 	"time"
 
 	"github.com/Escape-Technologies/cli/pkg/log"
+	"github.com/oapi-codegen/runtime/types"
 	"k8s.io/client-go/rest"
 	"k8s.io/client-go/tools/clientcmd"
 	"k8s.io/kubectl/pkg/proxy"
@@ -20,8 +20,6 @@ const (
 	defaultAPIPrefix    = "/"
 	defaultAddress      = "127.0.0.1"
 
-	autoprovisioningRetryInterval = 5 * time.Second
-	autoprovisioningRetryCount    = 5
 )
 
 func inferConfig() (*rest.Config, error) {
@@ -36,7 +34,7 @@ func inferConfig() (*rest.Config, error) {
 	}
 }
 
-func connectAndRun(ctx context.Context, cfg *rest.Config, ap *autoprovisioning.Autoprovisioner, isConnected *atomic.Bool) error {
+func connectAndRun(ctx context.Context, cfg *rest.Config, isConnected *atomic.Bool) error {
 	ctx, cancel := context.WithCancel(ctx)
 	defer cancel()
 
@@ -66,15 +64,12 @@ func connectAndRun(ctx context.Context, cfg *rest.Config, ap *autoprovisioning.A
 			lis.Close()
 			return
 		}
-		err := provisionIntegrationWithRetry(ctx, ap, 0)
-		if err != nil {
-			log.Error("Error provisioning integration: %v", err)
-		}
 		<-ctx.Done()
 		lis.Close()
 	}()
 
 	log.Debug("Connecting to k8s API")
+	isConnected.Store(true)
 	err = srv.ServeOnListener(lis)
 	if err != nil {
 		return fmt.Errorf("error serving: %w", err)
@@ -82,32 +77,31 @@ func connectAndRun(ctx context.Context, cfg *rest.Config, ap *autoprovisioning.A
 	return nil
 }
 
-func provisionIntegrationWithRetry(ctx context.Context, ap *autoprovisioning.Autoprovisioner, count int) error {
-	if ap == nil {
-		return nil
-	}
-	if count > autoprovisioningRetryCount {
-		return errors.New("failed to provision integration")
-	}
-	err := ap.CreateIntegration(ctx)
-	if err == nil {
-		return nil
-	} else {
-		log.Debug("Error provisioning integration: %v", err)
-	}
-	time.Sleep(autoprovisioningRetryInterval)
-	// return provisionIntegrationWithRetry(ctx, ap, count+1)
-	return nil
-}
 
-func Start(ctx context.Context, locationId string, healthy *atomic.Bool) {
+func Start(ctx context.Context, locationId *types.UUID, locationName string, healthy *atomic.Bool) {
 	cfg, err := inferConfig()
 	if err != nil {
 		log.Info("Not connected to k8s API")
 		return
 	}
-	
-	// Start the proxy server
+	for {
+		err = connectAndRun(ctx, cfg, healthy)
+		if err != nil {
+			log.Error("Error connecting to k8s API: %s", err)
+			return
+		}
+		time.Sleep(1 * time.Second)
+		if ctx.Err() != nil {
+			return
+		}
+		if healthy.Load() {
+			err = UpsertIntegration(ctx, locationId, locationName)
+			if err != nil {
+				log.Error("Error upserting integration: %s", err)
+				return
+			}
+		}
+	}
 
 	
 }
