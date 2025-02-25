@@ -35,9 +35,12 @@ func dialSSH(ctx context.Context, locationId string, sshPrivateKey ed25519.Priva
 		HostKeyCallback: ssh.InsecureIgnoreHostKey(),
 	}
 
-	targetURL := "private-location.escape.tech:2222"
+	targetURL := os.Getenv("ESCAPE_PRIVATE_LOCATION_URL")
+	if targetURL == "" {
+		targetURL = "private-location.escape.tech:2222"
+	}
 	proxyURL := os.Getenv("ESCAPE_REPEATER_PROXY_URL")
-	
+
 	log.Info("Getting conn for target: %s", targetURL)
 	conn, err := getConn(ctx, targetURL, proxyURL)
 	if ctx.Err() != nil {
@@ -46,7 +49,7 @@ func dialSSH(ctx context.Context, locationId string, sshPrivateKey ed25519.Priva
 	if err != nil {
 		return fmt.Errorf("failed to get conn: %w", err)
 	}
-	
+
 	client, err := getClient(targetURL, conn, config)
 	if err != nil {
 		return fmt.Errorf("failed to create SSH client: %w", err)
