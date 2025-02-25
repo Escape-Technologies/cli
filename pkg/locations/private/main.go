@@ -23,6 +23,6 @@ func StartLocation(ctx context.Context, locationId string, sshPrivateKey ed25519
 		} else {
 			log.Info("Disconnected from SSH, retrying...")
 		}
-		time.Sleep(1 * time.Second)
+		time.Sleep(500 * time.Millisecond)
 	}
 }
