@@ -19,8 +19,7 @@ spec:
       containers:
         - name: {{ include "fullname" . }}
           image: {{ .Values.container.image }}
-          command:
-            - escape-cli
+          args:
             - locations
             - start
             - "-v"
