@@ -55,8 +55,12 @@ func dialSSH(ctx context.Context, locationId string, sshPrivateKey ed25519.Priva
 		return fmt.Errorf("failed to create SSH client: %w", err)
 	}
 
+	ctx, cancel := context.WithCancel(ctx)
+	go startMonitoring(ctx, client)
+
 	log.Info("Starting listener")
 	err = startListener(ctx, client, healthy)
+	cancel()
 	if ctx.Err() != nil {
 		return ctx.Err()
 	}
