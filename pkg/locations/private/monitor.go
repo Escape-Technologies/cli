@@ -10,12 +10,12 @@ import (
 )
 
 func healthTicker(ctx context.Context, client *ssh.Client) {
-	ch, _, err := client.OpenChannel("health", nil)
+	ch, _, err := client.OpenChannel("escape_health_channel", nil)
 	if err != nil {
 		log.Error("failed to open health channel: %v", err)
 		return
 	}
-	ticker := time.NewTicker(1 * time.Second)
+	ticker := time.NewTicker(5 * time.Second)
 	go func() {
 		<-ctx.Done()
 		ticker.Stop()
@@ -32,20 +32,22 @@ func sendLogBuilder(ch ssh.Channel) func(logrus.Level, string) {
 }
 
 func startMonitoring(ctx context.Context, client *ssh.Client) {
-	go healthTicker(ctx, client)
+	healthTicker(ctx, client)
 
-	ch, reqs, err := client.OpenChannel("log", nil)
-	if err != nil {
-		log.Error("failed to open channel: %v", err)
-		return
-	}
-	hookID := log.AddHook(sendLogBuilder(ch))
-	defer log.RemoveHook(hookID)
-	log.Info("Log channel opened")
-	ch.SendRequest("shell", true, nil)
-	go logRequests(reqs)
-	go func() {
-		<-ctx.Done()
-		ch.Close()
-	}()
+	// // ch, reqs, err := client.OpenChannel("log", nil)
+	// ch, _, err := client.OpenChannel("log", nil)
+
+	// if err != nil {
+	// 	log.Error("failed to open channel: %v", err)
+	// 	return
+	// }
+	// hookID := log.AddHook(sendLogBuilder(ch))
+	// defer log.RemoveHook(hookID)
+	// log.Info("Log channel opened")
+	// ch.SendRequest("shell", true, nil)
+	// // go logRequests(reqs)
+	// go func() {
+	// 	<-ctx.Done()
+	// 	ch.Close()
+	// }()
 }
