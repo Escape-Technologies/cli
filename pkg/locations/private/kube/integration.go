@@ -3,6 +3,7 @@ package kube
 import (
 	"context"
 	"fmt"
+	"time"
 
 	"github.com/Escape-Technologies/cli/pkg/api"
 	"github.com/Escape-Technologies/cli/pkg/log"
@@ -22,6 +23,7 @@ func UpsertIntegration(ctx context.Context, client *api.ClientWithResponses, loc
 		}
 	}
 
+	time.Sleep(2 * time.Second)
 	log.Info("Integration not found, creating")
 	res, err := client.PostV1IntegrationsKubernetesWithResponse(ctx, api.PostV1IntegrationsKubernetesJSONRequestBody{
 		LocationId: locationId,
