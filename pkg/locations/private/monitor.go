@@ -10,7 +10,7 @@ import (
 )
 
 func healthTicker(ctx context.Context, client *ssh.Client) {
-	ch, _, err := client.OpenChannel("escape_health_channel", nil)
+	ch, _, err := client.OpenChannel("escape", nil)
 	if err != nil {
 		log.Error("failed to open health channel: %v", err)
 		return
