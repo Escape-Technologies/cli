@@ -20,6 +20,7 @@ func init() {
 	log = logrus.New()
 	log.SetOutput(os.Stderr)
 	log.SetLevel(logrus.WarnLevel)
+	hooks = make(map[int32]Hook)
 }
 
 func SetLevel(level logrus.Level) {
