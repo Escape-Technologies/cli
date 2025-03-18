@@ -8,6 +8,7 @@ import (
 	"os"
 	"sync/atomic"
 
+	"github.com/Escape-Technologies/cli/pkg/env"
 	"github.com/Escape-Technologies/cli/pkg/log"
 	"golang.org/x/crypto/ssh"
 )
@@ -39,7 +40,7 @@ func dialSSH(ctx context.Context, locationId string, sshPrivateKey ed25519.Priva
 	if targetURL == "" {
 		targetURL = "private-location.escape.tech:2222"
 	}
-	proxyURL := os.Getenv("ESCAPE_REPEATER_PROXY_URL")
+	proxyURL := env.GetFrontendProxyURL()
 
 	log.Info("Getting conn for target: %s", targetURL)
 	conn, err := getConn(ctx, targetURL, proxyURL)
