@@ -2,6 +2,7 @@ package env
 
 import (
 	"context"
+	"net"
 	"net/url"
 	"os"
 
@@ -41,18 +42,27 @@ func GetBackendProxyURL() *url.URL {
 	return url
 }
 
-func BuildProxyDialer(ctx context.Context, proxyURL *url.URL) proxy.Dialer {
+func BuildProxyDialer(ctx context.Context, proxyURL *url.URL) func(ctx context.Context, network string, addr string) (net.Conn, error) {
 	defaultDialer := proxy.Direct
 
 	if proxyURL == nil {
-		return defaultDialer
+		return defaultDialer.DialContext
 	}
 
 	log.Debug("Building proxy dialer for %s", proxyURL.Host)
 	proxyDialer, err := proxy.FromURL(proxyURL, proxy.Direct)
 	if err != nil {
 		log.Error("Failed to create proxy dialer: %s", err)
-		return defaultDialer
+		return defaultDialer.DialContext
 	}
-	return proxyDialer
+
+	log.Debug("Testing proxy connection through %s", proxyURL.String())		
+	return func(ctx context.Context, network, addr string) (net.Conn, error) {
+		if addr == "127.0.0.1:8001" {
+			log.Debug("SOCKS5 dialing: network=%s addr=%s without proxy", network, addr)
+			return defaultDialer.DialContext(ctx, network, addr)
+		}
+		log.Debug("SOCKS5 dialing: network=%s addr=%s through proxy=%s", network, addr, proxyURL.String())
+		return proxyDialer.Dial(network, addr)
+	}
 }
