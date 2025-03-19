@@ -20,7 +20,9 @@ func startSocks5Server(ctx context.Context, listener net.Listener, healthy *atom
 	backendProxyURL := env.GetBackendProxyURL()
 	if backendProxyURL != nil {
 		proxyDialer := env.BuildProxyDialer(ctx, backendProxyURL)
+		log.Debug("Testing proxy connection through %s", backendProxyURL.String())		
 		socks5Config.Dial = func(ctx context.Context, network, addr string) (net.Conn, error) {
+			log.Debug("SOCKS5 dialing: network=%s addr=%s through proxy=%s", network, addr, backendProxyURL.String())
 			return proxyDialer.Dial(network, addr)
 		}
 	}

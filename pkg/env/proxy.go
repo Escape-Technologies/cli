@@ -26,6 +26,7 @@ func GetFrontendProxyURL() *url.URL {
 	return url
 }
 
+
 func GetBackendProxyURL() *url.URL {
 	proxyURL := os.Getenv("ESCAPE_BACKEND_PROXY_URL")
 	if proxyURL == "" {
@@ -40,32 +41,18 @@ func GetBackendProxyURL() *url.URL {
 	return url
 }
 
-
 func BuildProxyDialer(ctx context.Context, proxyURL *url.URL) proxy.Dialer {
 	defaultDialer := proxy.Direct
 
-	if proxyURL.Scheme == "socks5" || proxyURL.Scheme == "socks5h" {
-		auth := &proxy.Auth{}
-		if proxyURL.User != nil {
-			auth.User = proxyURL.User.Username()
-			if password, ok := proxyURL.User.Password(); ok {
-				auth.Password = password
-			}
-		}
-
-		socksDialer, err := proxy.SOCKS5("tcp", proxyURL.Host, auth, proxy.Direct)
-		if err != nil {
-			log.Error("Failed to create SOCKS5 dialer: %w", err)
-			return defaultDialer
-		}
-		return socksDialer
-	}
-
-	proxyDialer, err := proxy.FromURL(proxyURL, proxy.Direct)
-	if err != nil {
-		log.Error("Failed to create HTTP proxy dialer: %w", err)
+	if proxyURL == nil {
 		return defaultDialer
 	}
 
+	log.Debug("Building proxy dialer for %s", proxyURL.Host)
+	proxyDialer, err := proxy.FromURL(proxyURL, proxy.Direct)
+	if err != nil {
+		log.Error("Failed to create proxy dialer: %s", err)
+		return defaultDialer
+	}
 	return proxyDialer
 }
