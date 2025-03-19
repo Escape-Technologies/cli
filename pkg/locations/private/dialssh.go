@@ -8,7 +8,9 @@ import (
 	"os"
 	"sync/atomic"
 
+	"github.com/Escape-Technologies/cli/pkg/locations/private/bilogs"
 	"github.com/Escape-Technologies/cli/pkg/log"
+
 	"golang.org/x/crypto/ssh"
 )
 
@@ -56,7 +58,7 @@ func dialSSH(ctx context.Context, locationId string, sshPrivateKey ed25519.Priva
 	}
 
 	ctx, cancel := context.WithCancel(ctx)
-	go startMonitoring(ctx, client)
+	go bilogs.StartMonitoring(ctx, client)
 
 	log.Info("Starting listener")
 	err = startListener(ctx, client, healthy)
