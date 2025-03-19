@@ -1,9 +1,0 @@
-services:
-  mtls-proxy:
-    image: mitmproxy/mitmproxy:latest
-    restart: always
-    ports:
-      - "8080:8080"
-    command: "mitmdump -s /mitmproxy/mitmproxy.py"
-    volumes:
-      - ./mitmproxy:/mitmproxy
