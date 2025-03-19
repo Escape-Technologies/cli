@@ -23,7 +23,7 @@ var integrationsKubernetesList = &cobra.Command{
 		if err != nil {
 			return err
 		}
-		integrations, err := client.GetV1IntegrationsKubernetesWithResponse(cmd.Context())
+		integrations, err := client.GetKubernetesIntegrationsWithResponse(cmd.Context())
 		if err != nil {
 			return err
 		}
@@ -58,7 +58,7 @@ var integrationsKubernetesDelete = &cobra.Command{
 		if err != nil {
 			return err
 		}
-		res, err := client.DeleteV1IntegrationsKubernetesIdWithResponse(cmd.Context(), id)
+		res, err := client.DeleteKubernetesIntegrationWithResponse(cmd.Context(), id)
 		if err != nil {
 			return err
 		}
