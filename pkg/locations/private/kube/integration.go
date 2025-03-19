@@ -11,6 +11,28 @@ import (
 )
 
 func UpsertIntegration(ctx context.Context, client *api.ClientWithResponses, locationId *types.UUID, locationName string) error {
+	log.Info("Upserting location %s", locationName)
+	location, err := client.UpsertKubernetesIntegrationWithResponse(ctx, api.UpsertKubernetesIntegrationJSONRequestBody{
+		Name:       locationName,
+		LocationId: locationId,
+	})
+	if err != nil {
+		return err
+	}
+	if location.JSON200 != nil {
+		return location.JSON200, func() {
+			fmt.Println("Location:", *location.JSON200.Name)
+			fmt.Println("Type:", *location.JSON200.Type)
+			fmt.Println("Id:", *location.JSON200.Id)
+		}, nil
+	} else if location.JSON400 != nil {
+		return nil, nil, fmt.Errorf("unable to create location: %s", location.JSON400.Message)
+	} else if location.JSON500 != nil {
+		return nil, nil, fmt.Errorf("unable to create location: %s", location.JSON500.Message)
+	} else {
+		return nil, nil, fmt.Errorf("unable to create location: Unknown error")
+	}
+
 	integrations, err := client.GetV1IntegrationsKubernetesWithResponse(ctx)
 	if err != nil {
 		return err
