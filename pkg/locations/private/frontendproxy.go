@@ -6,12 +6,8 @@ import (
 	"net/url"
 )
 
-func proxyDialer(proxy string) func(context.Context, string) (net.Conn, error) {
+func proxyDialer(proxyURL *url.URL) func(context.Context, string) (net.Conn, error) {
 	return func(ctx context.Context, addr string) (net.Conn, error) {
-		proxyURL, err := url.Parse(proxy)
-		if err != nil {
-			return nil, err
-		}
 		proxyAddr := proxyURL.Host
 
 		conn, err := netDialerWithTCPKeepalive().DialContext(ctx, "tcp", proxyAddr)
@@ -22,11 +18,11 @@ func proxyDialer(proxy string) func(context.Context, string) (net.Conn, error) {
 	}
 }
 
-func getConn(ctx context.Context, target, proxyURL string) (net.Conn, error) {
-	if proxyURL == "" {
+func getConn(ctx context.Context, target string, frontendProxyURL *url.URL) (net.Conn, error) {
+	if frontendProxyURL == nil {
 		return netDialerWithTCPKeepalive().DialContext(ctx, "tcp", target)
 	}
 
-	dialer := proxyDialer(proxyURL)
+	dialer := proxyDialer(frontendProxyURL)
 	return dialer(ctx, target)
 }
