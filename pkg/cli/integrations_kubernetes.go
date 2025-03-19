@@ -23,7 +23,7 @@ var integrationsKubernetesList = &cobra.Command{
 		if err != nil {
 			return err
 		}
-		integrations, err := client.GetKubernetesIntegrationsWithResponse(cmd.Context())
+		integrations, err := client.ListKubernetesIntegrationsWithResponse(cmd.Context())
 		if err != nil {
 			return err
 		}
