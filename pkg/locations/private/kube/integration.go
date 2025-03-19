@@ -3,7 +3,6 @@ package kube
 import (
 	"context"
 	"fmt"
-	"time"
 
 	"github.com/Escape-Technologies/cli/pkg/api"
 	"github.com/Escape-Technologies/cli/pkg/log"
@@ -32,5 +31,4 @@ func UpsertIntegration(ctx context.Context, client *api.ClientWithResponses, loc
 	} else {
 		return fmt.Errorf("unable to create integration: Unknown error")
 	}
-	return nil
 }

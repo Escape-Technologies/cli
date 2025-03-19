@@ -20,7 +20,7 @@ var integrationsAkamaiList = &cobra.Command{
 		if err != nil {
 			return err
 		}
-		integrations, err := client.GetAkamaiIntegrationsWithResponse(cmd.Context())
+		integrations, err := client.ListAkamaiIntegrationsWithResponse(cmd.Context())
 		if err != nil {
 			return err
 		}
