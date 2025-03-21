@@ -1,4 +1,4 @@
-package bilogs
+package private
 
 import (
 	"context"
