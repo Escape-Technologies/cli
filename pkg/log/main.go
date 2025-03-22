@@ -13,8 +13,8 @@ type Hook struct {
 }
 
 var (
-	log        *logrus.Logger
-	hooks      map[string]Hook
+	log          *logrus.Logger
+	hooks        map[string]Hook
 	globalBuffer *logBuffer
 )
 
@@ -22,7 +22,6 @@ func init() {
 	log = logrus.New()
 	log.SetOutput(os.Stderr)
 	log.SetLevel(logrus.WarnLevel)
-	hooks = make(map[string]Hook)
 	globalBuffer = newLogBuffer(1000)
 }
 
@@ -30,21 +29,20 @@ func SetLevel(level logrus.Level) {
 	log.SetLevel(level)
 }
 
-func doLog(level logrus.Level, format string, args ...interface{}) {
+func doLog(level logrus.Level, format string, args ...any) {
 	line := fmt.Sprintf(format, args...)
 	log.Logf(level, format, args...)
-	globalBuffer.AddLog(level, line)
+	globalBuffer.Ingest(level, line)
 	for _, hook := range hooks {
 		hook.Callback(level, line)
 	}
 }
 
-func Trace(format string, args ...interface{}) { doLog(logrus.TraceLevel, format, args...) }
-func Debug(format string, args ...interface{}) { doLog(logrus.DebugLevel, format, args...) }
-func Info(format string, args ...interface{})  { doLog(logrus.InfoLevel, format, args...) }
-func Warn(format string, args ...interface{})  { doLog(logrus.WarnLevel, format, args...) }
-func Error(format string, args ...interface{}) { doLog(logrus.ErrorLevel, format, args...) }
-
+func Trace(format string, args ...any) { doLog(logrus.TraceLevel, format, args...) }
+func Debug(format string, args ...any) { doLog(logrus.DebugLevel, format, args...) }
+func Info(format string, args ...any)  { doLog(logrus.InfoLevel, format, args...) }
+func Warn(format string, args ...any)  { doLog(logrus.WarnLevel, format, args...) }
+func Error(format string, args ...any) { doLog(logrus.ErrorLevel, format, args...) }
 
 // AddHook adds a named hook to the logger.
 // The hook will be called with the level and message of the log entry.
