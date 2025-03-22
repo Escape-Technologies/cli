@@ -17,7 +17,7 @@ func startListener(ctx context.Context, client *ssh.Client, healthy *atomic.Bool
 	}
 	defer listener.Close()
 
-	log.Info("Established reverse tunnel on remote port %d", listener.Addr().(*net.TCPAddr).Port)
+	log.Debug("Established reverse tunnel on remote port %d", listener.Addr().(*net.TCPAddr).Port)
 
 	err = startSocks5Server(ctx, listener, healthy)
 	healthy.Store(false)
