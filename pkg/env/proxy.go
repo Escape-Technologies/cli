@@ -27,7 +27,6 @@ func GetFrontendProxyURL() *url.URL {
 	return url
 }
 
-
 func GetBackendProxyURL() *url.URL {
 	proxyURL := os.Getenv("ESCAPE_BACKEND_PROXY_URL")
 	if proxyURL == "" {
@@ -42,27 +41,35 @@ func GetBackendProxyURL() *url.URL {
 	return url
 }
 
-func BuildProxyDialer(ctx context.Context, proxyURL *url.URL) func(ctx context.Context, network string, addr string) (net.Conn, error) {
-	defaultDialer := proxy.Direct
-
+func buildProxyDialer(proxyURL *url.URL) func(ctx context.Context, network string, addr string) (net.Conn, error) {
 	if proxyURL == nil {
-		return defaultDialer.DialContext
+		return proxy.Direct.DialContext
 	}
 
 	log.Debug("Building proxy dialer for %s", proxyURL.Host)
 	proxyDialer, err := proxy.FromURL(proxyURL, proxy.Direct)
 	if err != nil {
-		log.Error("Failed to create proxy dialer: %s", err)
-		return defaultDialer.DialContext
+		log.Error("Failed to create proxy dialer, using direct connection")
+		log.Debug("Error: %s", err)
+		return proxy.Direct.DialContext
 	}
 
-	log.Debug("Testing proxy connection through %s", proxyURL.String())		
+	log.Debug("Testing proxy connection through %s", proxyURL.String())
 	return func(ctx context.Context, network, addr string) (net.Conn, error) {
 		if addr == "127.0.0.1:8001" {
-			log.Debug("SOCKS5 dialing: network=%s addr=%s without proxy", network, addr)
-			return defaultDialer.DialContext(ctx, network, addr)
+			log.Trace("SOCKS5 dialing: network=%s addr=%s without proxy", network, addr)
+			return proxy.Direct.DialContext(ctx, network, addr)
 		}
-		log.Debug("SOCKS5 dialing: network=%s addr=%s through proxy=%s", network, addr, proxyURL.String())
+		log.Trace("SOCKS5 dialing: network=%s addr=%s through proxy=%s", network, addr, proxyURL.String())
 		return proxyDialer.Dial(network, addr)
+	}
+}
+
+func BuildProxyDialer(proxyURL *url.URL) func(ctx context.Context, network string, addr string) (net.Conn, error) {
+	dial := buildProxyDialer(proxyURL)
+
+	return func(ctx context.Context, network string, addr string) (net.Conn, error) {
+		log.Info("Handling request from Escape Platform to %s", addr)
+		return dial(ctx, network, addr)
 	}
 }

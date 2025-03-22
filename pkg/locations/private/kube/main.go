@@ -92,7 +92,6 @@ func Start(ctx context.Context, client *api.ClientWithResponses, locationId *typ
 		return
 	}
 	for {
-		log.Info("Healthy: %t", healthy.Load())
 		err = connectAndRun(ctx, client, cfg, healthy, locationId, locationName)
 		if err != nil {
 			log.Error("Error connecting to k8s API: %s", err)
@@ -100,7 +99,6 @@ func Start(ctx context.Context, client *api.ClientWithResponses, locationId *typ
 		if ctx.Err() != nil {
 			return
 		}
-		log.Info("Healthy: %t", healthy.Load())
 	}
 
 }
