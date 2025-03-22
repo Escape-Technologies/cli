@@ -6,24 +6,24 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-type logItem struct {
-	level logrus.Level
-	log   string
+type LogItem struct {
+	Level   logrus.Level `json:"level"`
+	Message string       `json:"message"`
 }
 
 type logBuffer struct {
 	lock        sync.Mutex
-	queue       []logItem
+	queue       []LogItem
 	bufferSize  int
-	hooks       map[string]func(logrus.Level, string)
+	hooks       map[string]func(LogItem)
 	hooksOffset map[string]int
 }
 
 func newLogBuffer(bufferSize int) *logBuffer {
 	return &logBuffer{
 		bufferSize:  bufferSize,
-		queue:       make([]logItem, 0, bufferSize),
-		hooks:       map[string]func(logrus.Level, string){},
+		queue:       make([]LogItem, 0, bufferSize),
+		hooks:       map[string]func(LogItem){},
 		hooksOffset: map[string]int{},
 	}
 }
@@ -37,13 +37,13 @@ func (b *logBuffer) sync() {
 			offset = 0
 		}
 		for i := offset; i < len(b.queue); i++ {
-			callback(b.queue[i].level, b.queue[i].log)
+			callback(b.queue[i])
 		}
 		b.hooksOffset[name] = len(b.queue)
 	}
 }
 
-func (b *logBuffer) Ingest(level logrus.Level, log string) {
+func (b *logBuffer) Ingest(log LogItem) {
 	b.lock.Lock()
 	defer b.lock.Unlock()
 	if len(b.queue) >= b.bufferSize {
@@ -56,11 +56,11 @@ func (b *logBuffer) Ingest(level logrus.Level, log string) {
 			}
 		}
 	}
-	b.queue = append(b.queue, logItem{level: level, log: log})
+	b.queue = append(b.queue, log)
 	b.sync()
 }
 
-func (b *logBuffer) AddHook(name string, callback func(logrus.Level, string)) {
+func (b *logBuffer) AddHook(name string, callback func(LogItem)) {
 	b.lock.Lock()
 	defer b.lock.Unlock()
 	b.hooks[name] = callback

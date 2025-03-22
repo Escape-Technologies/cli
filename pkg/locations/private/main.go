@@ -10,8 +10,7 @@ import (
 )
 
 func StartLocation(ctx context.Context, locationId string, sshPrivateKey ed25519.PrivateKey, healthy *atomic.Bool) error {
-	log.Info("Starting location")
-
+	log.Trace("Starting private location %s", locationId)
 	for {
 		err := dialSSH(ctx, locationId, sshPrivateKey, healthy)
 		if ctx.Err() != nil {

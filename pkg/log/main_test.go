@@ -2,8 +2,6 @@ package log
 
 import (
 	"testing"
-
-	"github.com/sirupsen/logrus"
 )
 
 func equal(t *testing.T, expected, actual any, msg string) {
@@ -17,9 +15,9 @@ func TestWorkflow(t *testing.T) {
 	Info("1")
 
 	buf1 := []string{}
-	AddHook("test1", func(_ logrus.Level, message string) { buf1 = append(buf1, message) })
+	AddHook("test1", func(log LogItem) { buf1 = append(buf1, log.Message) })
 	buf2 := []string{}
-	AddHook("test2", func(_ logrus.Level, message string) { buf2 = append(buf2, message) })
+	AddHook("test2", func(log LogItem) { buf2 = append(buf2, log.Message) })
 
 	// Logs should be sent in order to hooks
 	equal(t, 2, len(buf1), "should have two logs in buf1")
@@ -42,7 +40,7 @@ func TestWorkflow(t *testing.T) {
 	equal(t, 4, len(buf2), "should have four logs in buf2")
 	equal(t, "3", buf2[3], "should have fourth log in buf2")
 
-	AddHook("test1", func(_ logrus.Level, message string) { buf1 = append(buf1, message) })
+	AddHook("test1", func(log LogItem) { buf1 = append(buf1, log.Message) })
 	equal(t, 4, len(buf1), "should have four logs in buf1")
 	equal(t, "3", buf1[3], "should have fourth log in buf1")
 }

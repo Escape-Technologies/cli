@@ -3,18 +3,16 @@ package log
 import (
 	"fmt"
 	"testing"
-
-	"github.com/sirupsen/logrus"
 )
 
 func TestLogShouldDropOldestLogsIfBufferIsFull(t *testing.T) {
 	b := newLogBuffer(5)
 	for i := range 10 {
-		b.Ingest(logrus.InfoLevel, fmt.Sprintf("log %d", i))
+		b.Ingest(LogItem{Message: fmt.Sprintf("log %d", i)})
 	}
 	logged := []string{}
-	b.AddHook("logged", func(level logrus.Level, log string) {
-		logged = append(logged, log)
+	b.AddHook("logged", func(log LogItem) {
+		logged = append(logged, log.Message)
 	})
 	equal(t, 5, len(logged), "should have 5 logs")
 	equal(t, "log 5", logged[0], "should have log 5")
@@ -27,18 +25,18 @@ func TestLogShouldDropOldestLogsIfBufferIsFull(t *testing.T) {
 func TestLogDropShouldUpdateOffsets(t *testing.T) {
 	b := newLogBuffer(5)
 	logged := []string{}
-	b.AddHook("logged", func(level logrus.Level, log string) {
-		logged = append(logged, log)
+	b.AddHook("logged", func(log LogItem) {
+		logged = append(logged, log.Message)
 	})
-	b.Ingest(logrus.InfoLevel, "before 1")
-	b.Ingest(logrus.InfoLevel, "before 2")
+	b.Ingest(LogItem{Message: "before 1"})
+	b.Ingest(LogItem{Message: "before 2"})
 	b.RemoveHook("logged")
 
 	for i := range 10 {
-		b.Ingest(logrus.InfoLevel, fmt.Sprintf("log %d", i))
+		b.Ingest(LogItem{Message: fmt.Sprintf("log %d", i)})
 	}
-	b.AddHook("logged", func(level logrus.Level, log string) {
-		logged = append(logged, log)
+	b.AddHook("logged", func(log LogItem) {
+		logged = append(logged, log.Message)
 	})
 	equal(t, 7, len(logged), "should have 7 logs")
 	equal(t, "before 1", logged[0], "should have before 1")

@@ -26,10 +26,10 @@ func inferConfig() (*rest.Config, error) {
 	kubeconfig := os.Getenv("KUBECONFIG")
 
 	if kubeconfig != "" {
-		log.Debug("Using kubeconfig : %s", kubeconfig)
+		log.Trace("Using kubeconfig : %s", kubeconfig)
 		return clientcmd.BuildConfigFromFlags("", kubeconfig)
 	} else {
-		log.Debug("Using in cluster config")
+		log.Trace("Using in cluster config")
 		return rest.InClusterConfig()
 	}
 }
@@ -64,8 +64,8 @@ func connectAndRun(ctx context.Context, client *api.ClientWithResponses, cfg *re
 			lis.Close()
 			return
 		}
-		log.Debug("Connected to k8s API")
-		log.Info("Upserting integration")
+		log.Info("Connected to k8s API")
+		log.Trace("Upserting k8s integration")
 		err = UpsertIntegration(ctx, client, locationId, locationName)
 		if err != nil {
 			log.Error("Error upserting integration: %s", err)
@@ -87,8 +87,8 @@ func connectAndRun(ctx context.Context, client *api.ClientWithResponses, cfg *re
 func Start(ctx context.Context, client *api.ClientWithResponses, locationId *types.UUID, locationName string, healthy *atomic.Bool) {
 	cfg, err := inferConfig()
 	if err != nil {
+		log.Debug("Error inferring kubeconfig: %s", err)
 		log.Info("Not connected to k8s API")
-		log.Info("Error: %s", err)
 		return
 	}
 	for {

@@ -18,10 +18,11 @@ func Start(ctx context.Context, client *api.ClientWithResponses, name string) er
 	healthy.Store(false)
 	go health.Start(ctx, healthy)
 
+	log.Trace("Generating SSH Keys")
 	sshPublicKey, sshPrivateKey := private.GenSSHKeys(name)
-	log.Info("Generated public SSH Key: %s", sshPublicKey)
+	log.Debug("Generated SSH Key: %s", sshPublicKey)
 
-	log.Info("Upserting location %s with public key %s", name, sshPublicKey)
+	log.Trace("Upserting location %s with public key %s", name, sshPublicKey)
 	y := true
 	location, err := client.UpsertLocationWithResponse(ctx, api.UpsertLocationJSONRequestBody{
 		Name:              name,
@@ -34,6 +35,7 @@ func Start(ctx context.Context, client *api.ClientWithResponses, name string) er
 	if location.JSON200 != nil {
 		go kube.Start(ctx, client, location.JSON200.Id, *location.JSON200.Name, healthy)
 		for {
+			log.Info("Private location %s in sync with Escape Platform, starting location...", name)
 			err := private.StartLocation(ctx, location.JSON200.Id.String(), sshPrivateKey, healthy)
 			if err != nil {
 				log.Error("Error starting location: %s", err)
