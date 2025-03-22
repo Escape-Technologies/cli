@@ -32,7 +32,7 @@ func NewAPIClient(opts ...ClientOption) (*ClientWithResponses, error) {
 	client := &http.Client{Transport: transport}
 	opts = append(opts, WithHTTPClient(client))
 	opts = append(opts, WithRequestEditorFn(func(ctx context.Context, req *http.Request) error {
-		log.Debug("Sending request %s %s", req.Method, req.URL)
+		log.Trace("Sending request %s %s", req.Method, req.URL)
 		req.Header.Set("Authorization", fmt.Sprintf("Key %s", key))
 		return nil
 	}))

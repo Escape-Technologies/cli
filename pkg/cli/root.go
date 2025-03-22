@@ -20,6 +20,7 @@ const (
 )
 
 var output outputT = outputPretty
+var verbose bool
 
 func print(data any, pretty func()) error {
 	switch output {
@@ -33,8 +34,32 @@ func print(data any, pretty func()) error {
 	return nil
 }
 
+func setupTerminalLog() {
+	if verbose {
+		// Already logging to terminal
+		return
+	}
+
+	switch output {
+	case outputJSON:
+		log.AddHook("termlog", func(log log.LogItem) {
+			json.NewEncoder(os.Stdout).Encode(log)
+		})
+	case outputYAML:
+		log.AddHook("termlog", func(log log.LogItem) {
+			// JSON is a valid YAML but multiline readable
+			json.NewEncoder(os.Stdout).Encode(log)
+		})
+	default:
+		log.AddHook("termlog", func(log log.LogItem) {
+			if log.Level <= logrus.InfoLevel {
+				fmt.Printf("[%s] %s\n", log.Level, log.Message)
+			}
+		})
+	}
+}
+
 func Run() error {
-	var verbose bool
 	var outputStr string
 	rootCmd := &cobra.Command{
 		Use:   "escape-cli",

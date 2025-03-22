@@ -124,6 +124,7 @@ var locationsStartCmd = &cobra.Command{
 		if err != nil {
 			return err
 		}
+		setupTerminalLog()
 		return locations.Start(cmd.Context(), client, args[0])
 	},
 }
