@@ -13,16 +13,9 @@ import (
 
 func startSocks5Server(ctx context.Context, listener net.Listener, healthy *atomic.Bool) error {
 	log.Trace("Starting socks5 server")
-
-	socks5Config := &socks5.Config{}
-
-	backendProxyURL := env.GetBackendProxyURL()
-	if backendProxyURL != nil {
-		socks5Config.Dial = env.BuildProxyDialer(ctx, backendProxyURL)
-
-	}
-
-	socks5Server, err := socks5.New(socks5Config)
+	socks5Server, err := socks5.New(&socks5.Config{
+		Dial: env.BuildProxyDialer(env.GetBackendProxyURL()),
+	})
 	if err != nil {
 		return fmt.Errorf("failed to create socks5 server config: %w", err)
 	}
