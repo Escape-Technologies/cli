@@ -3,5 +3,5 @@ apiVersion: v2
 name: private-location
 description: Escape Private Location
 type: application
-version: 0.0.28
-appVersion: 0.0.28
+version: 0.0.29
+appVersion: 0.0.29
