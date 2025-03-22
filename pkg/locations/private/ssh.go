@@ -9,6 +9,7 @@ import (
 	"sync/atomic"
 
 	"github.com/Escape-Technologies/cli/pkg/env"
+	"github.com/Escape-Technologies/cli/pkg/locations/private/monitor"
 	"github.com/Escape-Technologies/cli/pkg/log"
 
 	"golang.org/x/crypto/ssh"
@@ -43,7 +44,7 @@ func dialSSH(ctx context.Context, locationId string, sshPrivateKey ed25519.Priva
 	}
 	proxyURL := env.GetFrontendProxyURL()
 
-	log.Info("Getting conn for target: %s", targetURL)
+	log.Trace("Getting conn for target: %s", targetURL)
 	conn, err := getConn(ctx, targetURL, proxyURL)
 	if ctx.Err() != nil {
 		return ctx.Err()
@@ -58,9 +59,9 @@ func dialSSH(ctx context.Context, locationId string, sshPrivateKey ed25519.Priva
 	}
 
 	ctx, cancel := context.WithCancel(ctx)
-	go StartMonitoring(ctx, client)
+	go monitor.Start(ctx, client)
 
-	log.Info("Starting listener")
+	log.Trace("Starting listener")
 	err = startListener(ctx, client, healthy)
 	cancel()
 	if ctx.Err() != nil {

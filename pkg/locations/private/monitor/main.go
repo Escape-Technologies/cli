@@ -1,4 +1,4 @@
-package private
+package monitor
 
 import (
 	"context"
@@ -6,19 +6,12 @@ import (
 	"golang.org/x/crypto/ssh"
 )
 
-func StartMonitoring(ctx context.Context, client *ssh.Client) {
+func Start(ctx context.Context, client *ssh.Client) {
 	ch, err := openEscapeChannel(ctx, client)
 	if err != nil {
 		return
 	}
-	
+
+	sendLogs(ctx, ch)
 	go healthTicker(ctx, ch)
 }
-
-
-
-
-
-
-
-

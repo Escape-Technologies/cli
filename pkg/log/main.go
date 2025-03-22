@@ -7,14 +7,8 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-type Hook struct {
-	Name     string
-	Callback func(logrus.Level, string)
-}
-
 var (
 	log          *logrus.Logger
-	hooks        map[string]Hook
 	globalBuffer *logBuffer
 )
 
@@ -32,10 +26,7 @@ func SetLevel(level logrus.Level) {
 func doLog(level logrus.Level, format string, args ...any) {
 	line := fmt.Sprintf(format, args...)
 	log.Logf(level, format, args...)
-	globalBuffer.Ingest(level, line)
-	for _, hook := range hooks {
-		hook.Callback(level, line)
-	}
+	globalBuffer.Ingest(LogItem{Level: level, Message: line})
 }
 
 func Trace(format string, args ...any) { doLog(logrus.TraceLevel, format, args...) }
@@ -47,7 +38,7 @@ func Error(format string, args ...any) { doLog(logrus.ErrorLevel, format, args..
 // AddHook adds a named hook to the logger.
 // The hook will be called with the level and message of the log entry.
 // This function returns a unique ID for the hook, which can be used to remove the hook later.
-func AddHook(name string, callback func(logrus.Level, string)) {
+func AddHook(name string, callback func(LogItem)) {
 	globalBuffer.AddHook(name, callback)
 }
 

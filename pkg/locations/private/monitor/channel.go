@@ -1,4 +1,4 @@
-package private
+package monitor
 
 import (
 	"context"
@@ -13,7 +13,7 @@ func openEscapeChannel(ctx context.Context, client *ssh.Client) (ssh.Channel, er
 		log.Error("failed to open escape channel: %v", err)
 		return nil, err
 	}
-	log.Info("escape channel opened")
+	log.Trace("escape channel opened")
 
 	go func() {
 		<-ctx.Done()
