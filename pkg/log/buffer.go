@@ -1,74 +1,74 @@
 package log
 
 import (
+	"sync"
+
 	"github.com/sirupsen/logrus"
 )
 
+type logItem struct {
+	level logrus.Level
+	log   string
+}
+
 type logBuffer struct {
-	logs chan struct {
-		level logrus.Level
-		log   string
-	}
-	hooks      map[string]func(logrus.Level, string)
+	lock        sync.Mutex
+	queue       []logItem
+	bufferSize  int
+	hooks       map[string]func(logrus.Level, string)
+	hooksOffset map[string]int
 }
 
 func newLogBuffer(bufferSize int) *logBuffer {
 	return &logBuffer{
-		logs: make(chan struct {
-			level logrus.Level
-			log   string
-		}, bufferSize),
-		hooks: make(map[string]func(logrus.Level, string)),
+		bufferSize:  bufferSize,
+		queue:       make([]logItem, 0, bufferSize),
+		hooks:       map[string]func(logrus.Level, string){},
+		hooksOffset: map[string]int{},
 	}
 }
 
-func (b *logBuffer) GetLog() string {
-	select {
-	case log := <-b.logs:
-		return log
-	default:
-		return ""
-	}
-}
-
-func (b *logBuffer) GetLogs() []string {
-	logs := make([]string, 0, len(b.logs))
-	for {
-		log := b.GetLog()
-		if log == "" {
-			break
+// Warning: This function is not thread safe,
+// lock should be held when calling this function.
+func (b *logBuffer) sync() {
+	for name, callback := range b.hooks {
+		offset, ok := b.hooksOffset[name]
+		if !ok {
+			offset = 0
 		}
-		logs = append(logs, log)
-	}
-	return logs
-}
-
-func (b *logBuffer) AddLog(level logrus.Level, log string) {
-	for _, hook := range b.hooks {
-		hook(level, log)
-	}
-	select {
-	case b.logs <- struct {
-		level logrus.Level
-		log   string
-	}{level: level, log: log}:
-	default:
+		for i := offset; i < len(b.queue); i++ {
+			callback(b.queue[i].level, b.queue[i].log)
+		}
+		b.hooksOffset[name] = len(b.queue)
 	}
 }
 
-
-func (b *logBuffer) Close() {
-	close(b.logs)
+func (b *logBuffer) Ingest(level logrus.Level, log string) {
+	b.lock.Lock()
+	defer b.lock.Unlock()
+	if len(b.queue) >= b.bufferSize {
+		b.queue = b.queue[1:]
+		for name, offset := range b.hooksOffset {
+			if offset > 0 {
+				b.hooksOffset[name] = offset - 1
+			} else {
+				delete(b.hooksOffset, name)
+			}
+		}
+	}
+	b.queue = append(b.queue, logItem{level: level, log: log})
+	b.sync()
 }
-
 
 func (b *logBuffer) AddHook(name string, callback func(logrus.Level, string)) {
+	b.lock.Lock()
+	defer b.lock.Unlock()
 	b.hooks[name] = callback
-	for log := range b.logs {
-		callback(log.level, log.log)
-	}
+	b.sync()
 }
 
 func (b *logBuffer) RemoveHook(name string) {
+	b.lock.Lock()
+	defer b.lock.Unlock()
 	delete(b.hooks, name)
 }
