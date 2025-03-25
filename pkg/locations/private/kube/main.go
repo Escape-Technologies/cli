@@ -66,7 +66,7 @@ func connectAndRun(ctx context.Context, client *api.ClientWithResponses, cfg *re
 		}
 		log.Info("Connected to k8s API")
 		log.Trace("Upserting k8s integration")
-		err = UpsertIntegration(ctx, client, locationId, locationName)
+		err = CreateIntegration(ctx, client, locationId, locationName)
 		if err != nil {
 			log.Error("Error upserting integration: %s", err)
 			return
