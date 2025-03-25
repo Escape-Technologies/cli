@@ -1,6 +1,7 @@
 package kube
 
 import (
+	"bytes"
 	"context"
 	"fmt"
 
@@ -9,12 +10,17 @@ import (
 	"github.com/oapi-codegen/runtime/types"
 )
 
-func UpsertIntegration(ctx context.Context, client *api.ClientWithResponses, locationId *types.UUID, locationName string) error {
-	log.Trace("Upserting location %s", locationName)
-	res, err := client.UpsertKubernetesIntegrationWithResponse(ctx, api.UpsertKubernetesIntegrationJSONRequestBody{
-		Name:       locationName,
-		LocationId: locationId,
-	})
+
+func CreateIntegration(ctx context.Context, client *api.ClientWithResponses, locationId *types.UUID, locationName string) error {
+
+	var rawJson = []byte(`
+	{
+		"name": "` + locationName + `",
+		"locationId": "` + locationId.String() + `"
+	}
+	`)
+	log.Trace("Creating integration %s", locationName)
+	res, err := client.CreateIntegrationWithBodyWithResponse(ctx, "application/json", bytes.NewBuffer(rawJson))
 	if err != nil {
 		return err
 	}
@@ -23,9 +29,6 @@ func UpsertIntegration(ctx context.Context, client *api.ClientWithResponses, loc
 		return nil
 	} else if res.JSON400 != nil {
 		log.Error("Kubernetes integration %s creation failed", locationName)
-		for _, evt := range res.JSON400.Events {
-			log.Debug("Event: %s", evt.Logline)
-		}
 		return fmt.Errorf("unable to create integration: %s", res.JSON400.Message)
 	} else if res.JSON500 != nil {
 		return fmt.Errorf("unable to create integration: %s", res.JSON500.Message)
