@@ -3,7 +3,7 @@ package cli
 import (
 	"fmt"
 
-	"github.com/Escape-Technologies/cli/pkg/api"
+	v1 "github.com/Escape-Technologies/cli/pkg/api/v1"
 	"github.com/google/uuid"
 	"github.com/spf13/cobra"
 )
@@ -19,7 +19,7 @@ var integrationsKubernetesList = &cobra.Command{
 	Args:    cobra.ExactArgs(0),
 	Short:   "List integrations",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		client, err := api.NewAPIClient()
+		client, err := v1.NewAPIClient()
 		if err != nil {
 			return err
 		}
@@ -54,7 +54,7 @@ var integrationsKubernetesDelete = &cobra.Command{
 		if err != nil {
 			return fmt.Errorf("invalid UUID format: %w", err)
 		}
-		client, err := api.NewAPIClient()
+		client, err := v1.NewAPIClient()
 		if err != nil {
 			return err
 		}

@@ -3,7 +3,7 @@ package cli
 import (
 	"fmt"
 
-	"github.com/Escape-Technologies/cli/pkg/api"
+	v1 "github.com/Escape-Technologies/cli/pkg/api/v1"
 	"github.com/spf13/cobra"
 )
 
@@ -16,7 +16,7 @@ var integrationsAkamaiList = &cobra.Command{
 	Use:   "list",
 	Short: "List integrations",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		client, err := api.NewAPIClient()
+		client, err := v1.NewAPIClient()
 		if err != nil {
 			return err
 		}

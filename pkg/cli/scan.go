@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/Escape-Technologies/cli/pkg/api"
+	v1 "github.com/Escape-Technologies/cli/pkg/api/v1"
 	"github.com/google/uuid"
 	"github.com/spf13/cobra"
 )
@@ -23,12 +23,12 @@ var startScanCmd = &cobra.Command{
 			return fmt.Errorf("invalid UUID format: %w", err)
 		}
 
-		client, err := api.NewAPIClient()
+		client, err := v1.NewAPIClient()
 		if err != nil {
 			return fmt.Errorf("failed to create API client: %w", err)
 		}
 
-		body := api.PostApplicationsIdStartScanJSONRequestBody{}
+		body := v1.PostApplicationsIdStartScanJSONRequestBody{}
 		scan, err := client.PostApplicationsIdStartScanWithResponse(cmd.Context(), applicationId, body)
 		if err != nil {
 			return err

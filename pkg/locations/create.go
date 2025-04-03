@@ -4,13 +4,13 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/Escape-Technologies/cli/pkg/api"
+	v1 "github.com/Escape-Technologies/cli/pkg/api/v1"
 	"github.com/Escape-Technologies/cli/pkg/log"
 )
 
-func Create(ctx context.Context, client *api.ClientWithResponses, input LocationSchemaInput) (any, func(), error) {
+func Create(ctx context.Context, client *v1.ClientWithResponses, input LocationSchemaInput) (any, func(), error) {
 	log.Info("Creating location %s", input.Name)
-	location, err := client.CreateLocationWithResponse(ctx, api.CreateLocationJSONRequestBody{
+	location, err := client.CreateLocationWithResponse(ctx, v1.CreateLocationJSONRequestBody{
 		Name:              input.Name,
 		PrivateLocationV2: &input.PrivateLocationV2,
 	})

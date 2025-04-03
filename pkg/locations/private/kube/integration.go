@@ -4,14 +4,14 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/Escape-Technologies/cli/pkg/api"
+	v1 "github.com/Escape-Technologies/cli/pkg/api/v1"
 	"github.com/Escape-Technologies/cli/pkg/log"
 	"github.com/oapi-codegen/runtime/types"
 )
 
-func UpsertIntegration(ctx context.Context, client *api.ClientWithResponses, locationId *types.UUID, locationName string) error {
+func UpsertIntegration(ctx context.Context, client *v1.ClientWithResponses, locationId *types.UUID, locationName string) error {
 	log.Trace("Upserting location %s", locationName)
-	res, err := client.UpsertKubernetesIntegrationWithResponse(ctx, api.UpsertKubernetesIntegrationJSONRequestBody{
+	res, err := client.UpsertKubernetesIntegrationWithResponse(ctx, v1.UpsertKubernetesIntegrationJSONRequestBody{
 		Name:       locationName,
 		LocationId: locationId,
 	})
