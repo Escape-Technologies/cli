@@ -10,9 +10,9 @@ import (
 )
 
 type Subdomain struct {
-	Id            string  `json:"id"`
-	Fqdn          string  `json:"fqdn"`
-	ServicesCount float32 `json:"servicesCount"`
+	Id            string `json:"id"`
+	Fqdn          string `json:"fqdn"`
+	ServicesCount int    `json:"servicesCount"`
 }
 
 func GetSubdomains(ctx context.Context, count *int, after *string) ([]Subdomain, *string, error) {
@@ -38,7 +38,7 @@ func GetSubdomains(ctx context.Context, count *int, after *string) ([]Subdomain,
 		subdomains = append(subdomains, Subdomain{
 			Id:            subdomain.Id,
 			Fqdn:          subdomain.Fqdn,
-			ServicesCount: subdomain.ServicesCount,
+			ServicesCount: int(subdomain.ServicesCount),
 		})
 	}
 	return subdomains, resp.JSON200.NextCursor, nil
