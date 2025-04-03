@@ -3,7 +3,7 @@ package cli
 import (
 	"fmt"
 
-	"github.com/Escape-Technologies/cli/pkg/api"
+	v1 "github.com/Escape-Technologies/cli/pkg/api/v1"
 	"github.com/Escape-Technologies/cli/pkg/locations"
 	"github.com/google/uuid"
 	"github.com/spf13/cobra"
@@ -20,7 +20,7 @@ var locationsListCmd = &cobra.Command{
 	Aliases: []string{"ls"},
 	Short:   "List locations",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		client, err := api.NewAPIClient()
+		client, err := v1.NewAPIClient()
 		if err != nil {
 			return err
 		}
@@ -38,7 +38,7 @@ var locationsDeleteCmd = &cobra.Command{
 	Args:    cobra.ExactArgs(1),
 	Short:   "Delete location",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		client, err := api.NewAPIClient()
+		client, err := v1.NewAPIClient()
 		if err != nil {
 			return err
 		}
@@ -60,7 +60,7 @@ var locationsGetCmd = &cobra.Command{
 	Args:    cobra.ExactArgs(1),
 	Short:   "Get location",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		client, err := api.NewAPIClient()
+		client, err := v1.NewAPIClient()
 		if err != nil {
 			return err
 		}
@@ -83,7 +83,7 @@ var locationsCreateCmd = &cobra.Command{
 	Args:    cobra.ExactArgs(1),
 	Short:   "Create a new location with the given name",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		client, err := api.NewAPIClient()
+		client, err := v1.NewAPIClient()
 		if err != nil {
 			return err
 		}
@@ -102,7 +102,7 @@ var locationsUpsertCmd = &cobra.Command{
 	Args:  cobra.ExactArgs(1),
 	Short: "Get or create a location by it's name",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		client, err := api.NewAPIClient()
+		client, err := v1.NewAPIClient()
 		if err != nil {
 			return err
 		}
@@ -120,7 +120,7 @@ var locationsStartCmd = &cobra.Command{
 	Args:  cobra.ExactArgs(1),
 	Short: "Start the private location",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		client, err := api.NewAPIClient()
+		client, err := v1.NewAPIClient()
 		if err != nil {
 			return err
 		}

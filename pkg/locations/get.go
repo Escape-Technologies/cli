@@ -4,12 +4,12 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/Escape-Technologies/cli/pkg/api"
+	v1 "github.com/Escape-Technologies/cli/pkg/api/v1"
 	"github.com/Escape-Technologies/cli/pkg/log"
 	"github.com/google/uuid"
 )
 
-func Get(ctx context.Context, client *api.ClientWithResponses, id uuid.UUID) (any, func(), error) {
+func Get(ctx context.Context, client *v1.ClientWithResponses, id uuid.UUID) (any, func(), error) {
 	log.Info("Getting location %s", id.String())
 	location, err := client.GetLocationWithResponse(ctx, id)
 	if err != nil {
