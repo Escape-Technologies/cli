@@ -33,6 +33,10 @@
     {
       "name": "Subdomains",
       "description": "Manage your subdomains and their associated resources."
+    },
+    {
+      "name": "Upload",
+      "description": "Endpoints for uploading files to the platform."
     }
   ],
   "info": {
@@ -64,7 +68,7 @@
           "Applications"
         ],
         "summary": "Create a new application",
-        "operationId": "createApplication",
+        "operationId": "createApiApplication",
         "description": "Creates a new application",
         "requestBody": {
           "content": {
@@ -22307,7 +22311,7 @@
           "Applications"
         ],
         "summary": "Create a new application",
-        "operationId": "createApplication",
+        "operationId": "createFrontendApplication",
         "description": "Creates a new application",
         "requestBody": {
           "content": {
@@ -89821,16 +89825,16 @@
       }
     },
     "/upload/signed-url": {
-      "post": {
+      "get": {
         "tags": [
-          "Applications"
+          "Upload"
         ],
-        "summary": "Create a new application",
-        "operationId": "createApplication",
-        "description": "Creates a new application",
+        "summary": "Create signed URL",
+        "operationId": "createUploadSignedUrl",
+        "description": "Retrieve a signed URL link to upload a file to the Escape Platform.\n\nBy running a query with this endpoint, you will receive a signed URL that you can use to upload a file to the Escape Platform.\n\n```json\n{\n  \"url\": \"[SIGNED URL]\",\n  \"id\": \"[SIGNED URL ID]\"\n}\n```\n\nWith the url, you are able to upload one file:\n\n```bash\ncurl -X PUT --data-binary '@./schema.json' \"[SIGNED URL]\"\n```\n\nNow, you are able to use the previously received id in another query.\nFor example to update a schema of your application.\n",
         "responses": {
           "200": {
-            "description": "Application created successfully",
+            "description": "Signed URL id and endpoint",
             "content": {
               "application/json": {
                 "schema": {
@@ -89853,42 +89857,6 @@
                 }
               }
             }
-          },
-          "400": {
-            "description": "Invalid request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    }
-                  },
-                  "required": [
-                    "message"
-                  ]
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Server Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    }
-                  },
-                  "required": [
-                    "message"
-                  ]
-                }
-              }
-            }
           }
         }
       }
@@ -89901,119 +89869,43 @@
         "summary": "Get domains",
         "operationId": "getDomains",
         "description": "Get domains",
-        "parameters": [
-          {
-            "name": "cursor",
-            "in": "query",
-            "description": "The cursor to start the pagination from",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "Domains retrieved successfully",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "edges": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "node": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "string",
-                                "format": "uuid",
-                                "description": "The domain ID."
-                              },
-                              "domainId": {
-                                "type": "string",
-                                "description": "The domain ID."
-                              },
-                              "createdAt": {
-                                "type": "string",
-                                "format": "date-time",
-                                "description": "The date and time the domain was created."
-                              },
-                              "serviceCount": {
-                                "type": "number",
-                                "description": "The number of services associated with the domain."
-                              }
-                            },
-                            "required": [
-                              "id",
-                              "domainId",
-                              "createdAt",
-                              "serviceCount"
-                            ]
-                          }
-                        },
-                        "required": [
-                          "node"
-                        ]
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "description": "The domain ID."
+                      },
+                      "createdAt": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "The date and time the domain was created."
+                      },
+                      "serviceCount": {
+                        "type": "number",
+                        "description": "The number of services associated with the domain."
                       }
                     },
-                    "pageInfo": {
-                      "type": "object",
-                      "properties": {
-                        "hasNextPage": {
-                          "type": "boolean"
-                        },
-                        "hasPreviousPage": {
-                          "type": "boolean"
-                        },
-                        "startCursor": {
-                          "type": "string",
-                          "nullable": true
-                        },
-                        "endCursor": {
-                          "type": "string",
-                          "nullable": true
-                        }
-                      },
-                      "required": [
-                        "hasNextPage",
-                        "hasPreviousPage",
-                        "startCursor",
-                        "endCursor"
-                      ]
-                    }
-                  },
-                  "required": [
-                    "edges",
-                    "pageInfo"
-                  ]
+                    "required": [
+                      "id",
+                      "createdAt",
+                      "serviceCount"
+                    ]
+                  }
                 }
               }
             }
           },
           "400": {
             "description": "Invalid request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    }
-                  },
-                  "required": [
-                    "message"
-                  ]
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Server Error",
             "content": {
               "application/json": {
                 "schema": {
@@ -90070,10 +89962,6 @@
                       "format": "uuid",
                       "description": "The domain ID."
                     },
-                    "domainId": {
-                      "type": "string",
-                      "description": "The domain ID."
-                    },
                     "createdAt": {
                       "type": "string",
                       "format": "date-time",
@@ -90086,7 +89974,6 @@
                   },
                   "required": [
                     "id",
-                    "domainId",
                     "createdAt",
                     "serviceCount"
                   ]
@@ -90222,12 +90109,24 @@
         "description": "Returns a list of subdomains",
         "parameters": [
           {
-            "name": "cursor",
+            "name": "after",
             "in": "query",
             "description": "The cursor to start the pagination from",
             "required": false,
             "schema": {
               "type": "string"
+            }
+          },
+          {
+            "name": "count",
+            "in": "query",
+            "description": "The number of items to return",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 50,
+              "maximum": 100
             }
           }
         ],
@@ -90239,65 +90138,40 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "pageInfo": {
-                      "type": "object",
-                      "properties": {
-                        "hasNextPage": {
-                          "type": "boolean"
-                        },
-                        "hasPreviousPage": {
-                          "type": "boolean"
-                        },
-                        "startCursor": {
-                          "type": "string",
-                          "nullable": true
-                        },
-                        "endCursor": {
-                          "type": "string",
-                          "nullable": true
-                        }
-                      },
-                      "required": [
-                        "hasNextPage",
-                        "hasPreviousPage",
-                        "startCursor",
-                        "endCursor"
-                      ]
+                    "nextCursor": {
+                      "type": "string",
+                      "nullable": true
                     },
-                    "edges": {
+                    "totalCount": {
+                      "type": "number",
+                      "default": 100
+                    },
+                    "data": {
                       "type": "array",
                       "items": {
                         "type": "object",
                         "properties": {
-                          "node": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "string"
-                              },
-                              "fqdn": {
-                                "type": "string"
-                              },
-                              "servicesCount": {
-                                "type": "number"
-                              }
-                            },
-                            "required": [
-                              "id",
-                              "fqdn",
-                              "servicesCount"
-                            ]
+                          "id": {
+                            "type": "string"
+                          },
+                          "fqdn": {
+                            "type": "string"
+                          },
+                          "servicesCount": {
+                            "type": "number"
                           }
                         },
                         "required": [
-                          "node"
+                          "id",
+                          "fqdn",
+                          "servicesCount"
                         ]
                       }
                     }
                   },
                   "required": [
-                    "pageInfo",
-                    "edges"
+                    "nextCursor",
+                    "data"
                   ]
                 }
               }
