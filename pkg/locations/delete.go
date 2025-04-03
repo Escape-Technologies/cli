@@ -4,12 +4,12 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/Escape-Technologies/cli/pkg/api"
+	v1 "github.com/Escape-Technologies/cli/pkg/api/v1"
 	"github.com/Escape-Technologies/cli/pkg/log"
 	"github.com/google/uuid"
 )
 
-func Delete(ctx context.Context, client *api.ClientWithResponses, id uuid.UUID) (any, func(), error) {
+func Delete(ctx context.Context, client *v1.ClientWithResponses, id uuid.UUID) (any, func(), error) {
 	log.Info("Deleting location %s", id.String())
 	deleted, err := client.DeleteLocationWithResponse(ctx, id)
 	if err != nil {

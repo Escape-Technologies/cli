@@ -7,7 +7,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/Escape-Technologies/cli/pkg/api"
+	v1 "github.com/Escape-Technologies/cli/pkg/api/v1"
 	"github.com/Escape-Technologies/cli/pkg/log"
 	"github.com/oapi-codegen/runtime/types"
 	"k8s.io/client-go/rest"
@@ -34,7 +34,7 @@ func inferConfig() (*rest.Config, error) {
 	}
 }
 
-func connectAndRun(ctx context.Context, client *api.ClientWithResponses, cfg *rest.Config, isConnected *atomic.Bool, locationId *types.UUID, locationName string) error {
+func connectAndRun(ctx context.Context, client *v1.ClientWithResponses, cfg *rest.Config, isConnected *atomic.Bool, locationId *types.UUID, locationName string) error {
 	ctx, cancel := context.WithCancel(ctx)
 	defer cancel()
 
@@ -84,7 +84,7 @@ func connectAndRun(ctx context.Context, client *api.ClientWithResponses, cfg *re
 	return nil
 }
 
-func Start(ctx context.Context, client *api.ClientWithResponses, locationId *types.UUID, locationName string, healthy *atomic.Bool) {
+func Start(ctx context.Context, client *v1.ClientWithResponses, locationId *types.UUID, locationName string, healthy *atomic.Bool) {
 	cfg, err := inferConfig()
 	if err != nil {
 		log.Debug("Error inferring kubeconfig: %s", err)

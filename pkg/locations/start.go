@@ -6,14 +6,14 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/Escape-Technologies/cli/pkg/api"
+	v1 "github.com/Escape-Technologies/cli/pkg/api/v1"
 	"github.com/Escape-Technologies/cli/pkg/locations/health"
 	"github.com/Escape-Technologies/cli/pkg/locations/private"
 	"github.com/Escape-Technologies/cli/pkg/locations/private/kube"
 	"github.com/Escape-Technologies/cli/pkg/log"
 )
 
-func Start(ctx context.Context, client *api.ClientWithResponses, name string) error {
+func Start(ctx context.Context, client *v1.ClientWithResponses, name string) error {
 	healthy := &atomic.Bool{}
 	healthy.Store(false)
 	go health.Start(ctx, healthy)
@@ -24,7 +24,7 @@ func Start(ctx context.Context, client *api.ClientWithResponses, name string) er
 
 	log.Trace("Upserting location %s with public key %s", name, sshPublicKey)
 	y := true
-	location, err := client.UpsertLocationWithResponse(ctx, api.UpsertLocationJSONRequestBody{
+	location, err := client.UpsertLocationWithResponse(ctx, v1.UpsertLocationJSONRequestBody{
 		Name:              name,
 		PrivateLocationV2: &y,
 		Key:               &sshPublicKey,

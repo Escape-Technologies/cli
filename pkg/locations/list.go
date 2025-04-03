@@ -6,11 +6,11 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/Escape-Technologies/cli/pkg/api"
+	v1 "github.com/Escape-Technologies/cli/pkg/api/v1"
 	"github.com/Escape-Technologies/cli/pkg/log"
 )
 
-func List(ctx context.Context, client *api.ClientWithResponses) (any, func(), error) {
+func List(ctx context.Context, client *v1.ClientWithResponses) (any, func(), error) {
 	log.Info("Listing locations")
 	locations, err := client.ListLocationsWithResponse(ctx)
 	if err != nil {
