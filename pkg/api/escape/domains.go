@@ -15,7 +15,7 @@ import (
 type Domain struct {
 	CreatedAt    time.Time          `json:"createdAt"`
 	Id           openapi_types.UUID `json:"id"`
-	ServiceCount float32            `json:"serviceCount"`
+	ServiceCount int                `json:"serviceCount"`
 }
 
 func GetDomains(ctx context.Context) ([]Domain, error) {
@@ -38,7 +38,7 @@ func GetDomains(ctx context.Context) ([]Domain, error) {
 		domains = append(domains, Domain{
 			CreatedAt:    domain.CreatedAt,
 			Id:           domain.Id,
-			ServiceCount: domain.ServiceCount,
+			ServiceCount: int(domain.ServiceCount),
 		})
 	}
 	return domains, nil

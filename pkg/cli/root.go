@@ -118,5 +118,13 @@ func Run() error {
 	// Scan
 	rootCmd.AddCommand(startScanCmd)
 
+	// Domains
+	rootCmd.AddCommand(domainsCmd)
+	domainsCmd.AddCommand(domainsList)
+
+	// Subdomains
+	rootCmd.AddCommand(subdomainsCmd)
+	subdomainsCmd.AddCommand(subdomainsList)
+
 	return rootCmd.Execute()
 }

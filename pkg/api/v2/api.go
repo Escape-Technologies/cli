@@ -14,7 +14,7 @@ func NewAPIClient(opts ...ClientOption) (*ClientWithResponses, error) {
 	log.Trace("Initializing client")
 	server := os.Getenv("ESCAPE_API_URL")
 	if server == "" {
-		server = "https://public.escape.tech/"
+		server = "https://public.escape.tech/v2"
 	}
 	key := os.Getenv("ESCAPE_API_KEY")
 	if key == "" {
