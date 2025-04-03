@@ -2181,48 +2181,12 @@
                                               "login_url": {
                                                 "type": "string"
                                               },
-                                              "username": {
-                                                "type": "string"
-                                              },
-                                              "password": {
-                                                "type": "string"
-                                              },
-                                              "additional_fields": {
-                                                "type": "array",
-                                                "items": {
-                                                  "type": "object",
-                                                  "properties": {
-                                                    "action": {
-                                                      "type": "string",
-                                                      "enum": [
-                                                        "fill"
-                                                      ]
-                                                    },
-                                                    "locator": {
-                                                      "type": "string"
-                                                    },
-                                                    "value": {
-                                                      "type": "string"
-                                                    },
-                                                    "auto_submit": {
-                                                      "type": "boolean"
-                                                    }
-                                                  },
-                                                  "required": [
-                                                    "action",
-                                                    "locator",
-                                                    "value"
-                                                  ]
-                                                }
-                                              },
                                               "proxy": {
                                                 "type": "string"
                                               }
                                             },
                                             "required": [
-                                              "login_url",
-                                              "username",
-                                              "password"
+                                              "login_url"
                                             ]
                                           },
                                           "extractions": {
@@ -2317,192 +2281,15 @@
                                           "parameters": {
                                             "type": "object",
                                             "properties": {
-                                              "actions": {
-                                                "type": "array",
-                                                "items": {
-                                                  "oneOf": [
-                                                    {
-                                                      "type": "object",
-                                                      "properties": {
-                                                        "action": {
-                                                          "type": "string",
-                                                          "enum": [
-                                                            "click"
-                                                          ]
-                                                        },
-                                                        "locator": {
-                                                          "type": "string"
-                                                        }
-                                                      },
-                                                      "required": [
-                                                        "action",
-                                                        "locator"
-                                                      ]
-                                                    },
-                                                    {
-                                                      "type": "object",
-                                                      "properties": {
-                                                        "action": {
-                                                          "type": "string",
-                                                          "enum": [
-                                                            "fill"
-                                                          ]
-                                                        },
-                                                        "locator": {
-                                                          "type": "string"
-                                                        },
-                                                        "value": {
-                                                          "type": "string"
-                                                        },
-                                                        "auto_submit": {
-                                                          "type": "boolean"
-                                                        }
-                                                      },
-                                                      "required": [
-                                                        "action",
-                                                        "locator",
-                                                        "value"
-                                                      ]
-                                                    },
-                                                    {
-                                                      "type": "object",
-                                                      "properties": {
-                                                        "action": {
-                                                          "type": "string",
-                                                          "enum": [
-                                                            "goto"
-                                                          ]
-                                                        },
-                                                        "url": {
-                                                          "type": "string"
-                                                        }
-                                                      },
-                                                      "required": [
-                                                        "action",
-                                                        "url"
-                                                      ]
-                                                    },
-                                                    {
-                                                      "type": "object",
-                                                      "properties": {
-                                                        "action": {
-                                                          "type": "string",
-                                                          "enum": [
-                                                            "check"
-                                                          ]
-                                                        },
-                                                        "locator": {
-                                                          "type": "string"
-                                                        }
-                                                      },
-                                                      "required": [
-                                                        "action",
-                                                        "locator"
-                                                      ]
-                                                    },
-                                                    {
-                                                      "type": "object",
-                                                      "properties": {
-                                                        "action": {
-                                                          "type": "string",
-                                                          "enum": [
-                                                            "select"
-                                                          ]
-                                                        },
-                                                        "locator": {
-                                                          "type": "string"
-                                                        },
-                                                        "value": {
-                                                          "type": "string"
-                                                        }
-                                                      },
-                                                      "required": [
-                                                        "action",
-                                                        "locator",
-                                                        "value"
-                                                      ]
-                                                    },
-                                                    {
-                                                      "type": "object",
-                                                      "properties": {
-                                                        "action": {
-                                                          "type": "string",
-                                                          "enum": [
-                                                            "wait_element"
-                                                          ]
-                                                        },
-                                                        "locator": {
-                                                          "type": "string"
-                                                        },
-                                                        "timeout": {
-                                                          "type": "number"
-                                                        }
-                                                      },
-                                                      "required": [
-                                                        "action",
-                                                        "locator",
-                                                        "timeout"
-                                                      ]
-                                                    },
-                                                    {
-                                                      "type": "object",
-                                                      "properties": {
-                                                        "action": {
-                                                          "type": "string",
-                                                          "enum": [
-                                                            "wait_page_loaded"
-                                                          ]
-                                                        }
-                                                      },
-                                                      "required": [
-                                                        "action"
-                                                      ]
-                                                    },
-                                                    {
-                                                      "type": "object",
-                                                      "properties": {
-                                                        "action": {
-                                                          "type": "string",
-                                                          "enum": [
-                                                            "focus_page"
-                                                          ]
-                                                        },
-                                                        "url_pattern": {
-                                                          "type": "string"
-                                                        }
-                                                      },
-                                                      "required": [
-                                                        "action",
-                                                        "url_pattern"
-                                                      ]
-                                                    },
-                                                    {
-                                                      "type": "object",
-                                                      "properties": {
-                                                        "action": {
-                                                          "type": "string",
-                                                          "enum": [
-                                                            "sleep"
-                                                          ]
-                                                        },
-                                                        "seconds": {
-                                                          "type": "number"
-                                                        }
-                                                      },
-                                                      "required": [
-                                                        "action",
-                                                        "seconds"
-                                                      ]
-                                                    }
-                                                  ]
-                                                }
+                                              "login_url": {
+                                                "type": "string"
                                               },
                                               "proxy": {
                                                 "type": "string"
                                               }
                                             },
                                             "required": [
-                                              "actions"
+                                              "login_url"
                                             ]
                                           },
                                           "extractions": {
@@ -3939,20 +3726,6 @@
                                                     "action": {
                                                       "type": "string",
                                                       "enum": [
-                                                        "wait_page_loaded"
-                                                      ]
-                                                    }
-                                                  },
-                                                  "required": [
-                                                    "action"
-                                                  ]
-                                                },
-                                                {
-                                                  "type": "object",
-                                                  "properties": {
-                                                    "action": {
-                                                      "type": "string",
-                                                      "enum": [
                                                         "focus_page"
                                                       ]
                                                     },
@@ -4103,11 +3876,15 @@
                                           "nullable": true
                                         }
                                       ]
+                                    },
+                                    "login_url": {
+                                      "type": "string"
                                     }
                                   },
                                   "required": [
                                     "type",
-                                    "users"
+                                    "users",
+                                    "login_url"
                                   ]
                                 }
                               ]
@@ -4232,6 +4009,172 @@
                                         "additionalProperties": {
                                           "type": "string"
                                         }
+                                      }
+                                    },
+                                    "actions": {
+                                      "type": "array",
+                                      "items": {
+                                        "oneOf": [
+                                          {
+                                            "type": "object",
+                                            "properties": {
+                                              "action": {
+                                                "type": "string",
+                                                "enum": [
+                                                  "click"
+                                                ]
+                                              },
+                                              "locator": {
+                                                "type": "string"
+                                              }
+                                            },
+                                            "required": [
+                                              "action",
+                                              "locator"
+                                            ]
+                                          },
+                                          {
+                                            "type": "object",
+                                            "properties": {
+                                              "action": {
+                                                "type": "string",
+                                                "enum": [
+                                                  "fill"
+                                                ]
+                                              },
+                                              "locator": {
+                                                "type": "string"
+                                              },
+                                              "value": {
+                                                "type": "string"
+                                              },
+                                              "auto_submit": {
+                                                "type": "boolean"
+                                              }
+                                            },
+                                            "required": [
+                                              "action",
+                                              "locator",
+                                              "value"
+                                            ]
+                                          },
+                                          {
+                                            "type": "object",
+                                            "properties": {
+                                              "action": {
+                                                "type": "string",
+                                                "enum": [
+                                                  "goto"
+                                                ]
+                                              },
+                                              "url": {
+                                                "type": "string"
+                                              }
+                                            },
+                                            "required": [
+                                              "action",
+                                              "url"
+                                            ]
+                                          },
+                                          {
+                                            "type": "object",
+                                            "properties": {
+                                              "action": {
+                                                "type": "string",
+                                                "enum": [
+                                                  "check"
+                                                ]
+                                              },
+                                              "locator": {
+                                                "type": "string"
+                                              }
+                                            },
+                                            "required": [
+                                              "action",
+                                              "locator"
+                                            ]
+                                          },
+                                          {
+                                            "type": "object",
+                                            "properties": {
+                                              "action": {
+                                                "type": "string",
+                                                "enum": [
+                                                  "select"
+                                                ]
+                                              },
+                                              "locator": {
+                                                "type": "string"
+                                              },
+                                              "value": {
+                                                "type": "string"
+                                              }
+                                            },
+                                            "required": [
+                                              "action",
+                                              "locator",
+                                              "value"
+                                            ]
+                                          },
+                                          {
+                                            "type": "object",
+                                            "properties": {
+                                              "action": {
+                                                "type": "string",
+                                                "enum": [
+                                                  "wait_element"
+                                                ]
+                                              },
+                                              "locator": {
+                                                "type": "string"
+                                              },
+                                              "timeout": {
+                                                "type": "number"
+                                              }
+                                            },
+                                            "required": [
+                                              "action",
+                                              "locator",
+                                              "timeout"
+                                            ]
+                                          },
+                                          {
+                                            "type": "object",
+                                            "properties": {
+                                              "action": {
+                                                "type": "string",
+                                                "enum": [
+                                                  "focus_page"
+                                                ]
+                                              },
+                                              "url_pattern": {
+                                                "type": "string"
+                                              }
+                                            },
+                                            "required": [
+                                              "action",
+                                              "url_pattern"
+                                            ]
+                                          },
+                                          {
+                                            "type": "object",
+                                            "properties": {
+                                              "action": {
+                                                "type": "string",
+                                                "enum": [
+                                                  "sleep"
+                                                ]
+                                              },
+                                              "seconds": {
+                                                "type": "number"
+                                              }
+                                            },
+                                            "required": [
+                                              "action",
+                                              "seconds"
+                                            ]
+                                          }
+                                        ]
                                       }
                                     }
                                   }
@@ -4381,6 +4324,172 @@
                                               "type": "string"
                                             }
                                           }
+                                        },
+                                        "actions": {
+                                          "type": "array",
+                                          "items": {
+                                            "oneOf": [
+                                              {
+                                                "type": "object",
+                                                "properties": {
+                                                  "action": {
+                                                    "type": "string",
+                                                    "enum": [
+                                                      "click"
+                                                    ]
+                                                  },
+                                                  "locator": {
+                                                    "type": "string"
+                                                  }
+                                                },
+                                                "required": [
+                                                  "action",
+                                                  "locator"
+                                                ]
+                                              },
+                                              {
+                                                "type": "object",
+                                                "properties": {
+                                                  "action": {
+                                                    "type": "string",
+                                                    "enum": [
+                                                      "fill"
+                                                    ]
+                                                  },
+                                                  "locator": {
+                                                    "type": "string"
+                                                  },
+                                                  "value": {
+                                                    "type": "string"
+                                                  },
+                                                  "auto_submit": {
+                                                    "type": "boolean"
+                                                  }
+                                                },
+                                                "required": [
+                                                  "action",
+                                                  "locator",
+                                                  "value"
+                                                ]
+                                              },
+                                              {
+                                                "type": "object",
+                                                "properties": {
+                                                  "action": {
+                                                    "type": "string",
+                                                    "enum": [
+                                                      "goto"
+                                                    ]
+                                                  },
+                                                  "url": {
+                                                    "type": "string"
+                                                  }
+                                                },
+                                                "required": [
+                                                  "action",
+                                                  "url"
+                                                ]
+                                              },
+                                              {
+                                                "type": "object",
+                                                "properties": {
+                                                  "action": {
+                                                    "type": "string",
+                                                    "enum": [
+                                                      "check"
+                                                    ]
+                                                  },
+                                                  "locator": {
+                                                    "type": "string"
+                                                  }
+                                                },
+                                                "required": [
+                                                  "action",
+                                                  "locator"
+                                                ]
+                                              },
+                                              {
+                                                "type": "object",
+                                                "properties": {
+                                                  "action": {
+                                                    "type": "string",
+                                                    "enum": [
+                                                      "select"
+                                                    ]
+                                                  },
+                                                  "locator": {
+                                                    "type": "string"
+                                                  },
+                                                  "value": {
+                                                    "type": "string"
+                                                  }
+                                                },
+                                                "required": [
+                                                  "action",
+                                                  "locator",
+                                                  "value"
+                                                ]
+                                              },
+                                              {
+                                                "type": "object",
+                                                "properties": {
+                                                  "action": {
+                                                    "type": "string",
+                                                    "enum": [
+                                                      "wait_element"
+                                                    ]
+                                                  },
+                                                  "locator": {
+                                                    "type": "string"
+                                                  },
+                                                  "timeout": {
+                                                    "type": "number"
+                                                  }
+                                                },
+                                                "required": [
+                                                  "action",
+                                                  "locator",
+                                                  "timeout"
+                                                ]
+                                              },
+                                              {
+                                                "type": "object",
+                                                "properties": {
+                                                  "action": {
+                                                    "type": "string",
+                                                    "enum": [
+                                                      "focus_page"
+                                                    ]
+                                                  },
+                                                  "url_pattern": {
+                                                    "type": "string"
+                                                  }
+                                                },
+                                                "required": [
+                                                  "action",
+                                                  "url_pattern"
+                                                ]
+                                              },
+                                              {
+                                                "type": "object",
+                                                "properties": {
+                                                  "action": {
+                                                    "type": "string",
+                                                    "enum": [
+                                                      "sleep"
+                                                    ]
+                                                  },
+                                                  "seconds": {
+                                                    "type": "number"
+                                                  }
+                                                },
+                                                "required": [
+                                                  "action",
+                                                  "seconds"
+                                                ]
+                                              }
+                                            ]
+                                          }
                                         }
                                       }
                                     },
@@ -4473,7 +4582,7 @@
                               "type": "string"
                             }
                           },
-                          "blacklist": {
+                          "blocklist": {
                             "type": "object",
                             "properties": {
                               "routes": {
@@ -4545,7 +4654,13 @@
                                 "parents": {
                                   "type": "array",
                                   "items": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "enum": [
+                                      "String",
+                                      "Int",
+                                      "Float",
+                                      "Boolean"
+                                    ]
                                   }
                                 },
                                 "patterns": {
@@ -4607,16 +4722,10 @@
                           "force_full_scan": {
                             "type": "boolean"
                           },
-                          "frontend_scopes_regexes": {
+                          "frontend_in_scope_domains": {
                             "type": "array",
                             "items": {
                               "type": "string"
-                            }
-                          },
-                          "frontend_base_urls": {
-                            "type": "object",
-                            "additionalProperties": {
-                              "type": "number"
                             }
                           },
                           "max_duration": {
@@ -4633,6 +4742,12 @@
                           },
                           "frontend_parallel_workers": {
                             "type": "number"
+                          },
+                          "frontend_user_agent": {
+                            "type": "string"
+                          },
+                          "frontend_use_persistence": {
+                            "type": "boolean"
                           }
                         }
                       },
@@ -4642,12 +4757,14 @@
                           "scan_id": {
                             "type": "string"
                           },
-                          "initiator": {
-                            "type": "string",
-                            "enum": [
-                              "INITIATOR_PRODUCT",
-                              "INITIATOR_WIZARD"
-                            ]
+                          "escape_identifier": {
+                            "type": "string"
+                          },
+                          "s3_object": {
+                            "type": "string"
+                          },
+                          "s3_persistence_folder": {
+                            "type": "string"
                           },
                           "server_url_override": {
                             "type": "string"
@@ -4655,123 +4772,14 @@
                           "skip_validation": {
                             "type": "boolean"
                           },
-                          "export_schema": {
-                            "type": "boolean"
-                          },
-                          "verbose": {
-                            "type": "boolean"
-                          },
                           "skip_sourcing": {
                             "type": "boolean"
-                          },
-                          "skipped_sourcing_strategies": {
-                            "type": "array",
-                            "items": {
-                              "type": "string"
-                            }
-                          },
-                          "oracle_iterator": {
-                            "type": "object",
-                            "properties": {
-                              "iterator": {
-                                "type": "string",
-                                "enum": [
-                                  "single_pass",
-                                  "scored_paths",
-                                  "noop"
-                                ]
-                              },
-                              "sent_success_threshold": {
-                                "type": "number"
-                              },
-                              "sent_unprocessable_threshold": {
-                                "type": "number"
-                              },
-                              "sent_failure_threshold": {
-                                "type": "number"
-                              },
-                              "blacklist_params": {
-                                "type": "object",
-                                "properties": {
-                                  "routes": {
-                                    "type": "array",
-                                    "items": {
-                                      "type": "object",
-                                      "properties": {
-                                        "method": {
-                                          "type": "string"
-                                        },
-                                        "path": {
-                                          "type": "string"
-                                        }
-                                      }
-                                    }
-                                  },
-                                  "query": {
-                                    "type": "array",
-                                    "items": {
-                                      "type": "string"
-                                    }
-                                  },
-                                  "mutation": {
-                                    "type": "array",
-                                    "items": {
-                                      "type": "string"
-                                    }
-                                  },
-                                  "subscription": {
-                                    "type": "array",
-                                    "items": {
-                                      "type": "string"
-                                    }
-                                  },
-                                  "objects": {
-                                    "type": "array",
-                                    "items": {
-                                      "type": "string"
-                                    }
-                                  }
-                                }
-                              },
-                              "max_duration": {
-                                "type": "number"
-                              }
-                            },
-                            "required": [
-                              "iterator",
-                              "sent_success_threshold",
-                              "sent_unprocessable_threshold",
-                              "sent_failure_threshold",
-                              "blacklist_params",
-                              "max_duration"
-                            ]
-                          },
-                          "escape_identifier": {
-                            "type": "string"
-                          },
-                          "local_schema_path": {
-                            "type": "string"
-                          },
-                          "s3_object": {
-                            "type": "string"
                           },
                           "skip_fingerprinting": {
                             "type": "boolean"
                           },
                           "graphql_max_generated_depth": {
                             "type": "number"
-                          },
-                          "graphql_persisted_queries_url": {
-                            "type": "string"
-                          },
-                          "graphql_persisted_queries_raw": {
-                            "type": "string"
-                          },
-                          "graphql_persisted_queries_file": {
-                            "type": "string"
-                          },
-                          "no_split": {
-                            "type": "boolean"
                           },
                           "argument_max_generated_depth": {
                             "type": "number"
@@ -4788,13 +4796,13 @@
                           "cancel_unhealthy_scan_after": {
                             "type": "number"
                           },
-                          "wizard_parent_scan_id": {
+                          "graphql_persisted_queries_url": {
                             "type": "string"
                           },
-                          "wizard_child_index": {
+                          "graphql_persisted_queries_raw": {
                             "type": "string"
                           },
-                          "s3_persistence_folder": {
+                          "graphql_persisted_queries_file": {
                             "type": "string"
                           }
                         }
@@ -27926,19 +27934,39 @@
                         "items": {
                           "type": "object",
                           "properties": {
-                            "escape_property": {
-                              "type": "string",
-                              "enum": [
-                                "severity"
-                              ]
-                            },
-                            "jira_property": {
+                            "name": {
                               "type": "string"
+                            },
+                            "mapping": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "escape_property": {
+                                    "type": "string",
+                                    "enum": [
+                                      "severity",
+                                      "applicationName",
+                                      "context",
+                                      "testCategory",
+                                      "scanId",
+                                      "linkToEscape"
+                                    ]
+                                  },
+                                  "jira_property": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "escape_property",
+                                  "jira_property"
+                                ]
+                              }
                             }
                           },
                           "required": [
-                            "escape_property",
-                            "jira_property"
+                            "name",
+                            "mapping"
                           ]
                         }
                       }
@@ -28000,19 +28028,39 @@
                           "items": {
                             "type": "object",
                             "properties": {
-                              "escape_property": {
-                                "type": "string",
-                                "enum": [
-                                  "severity"
-                                ]
-                              },
-                              "jira_property": {
+                              "name": {
                                 "type": "string"
+                              },
+                              "mapping": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "escape_property": {
+                                      "type": "string",
+                                      "enum": [
+                                        "severity",
+                                        "applicationName",
+                                        "context",
+                                        "testCategory",
+                                        "scanId",
+                                        "linkToEscape"
+                                      ]
+                                    },
+                                    "jira_property": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "escape_property",
+                                    "jira_property"
+                                  ]
+                                }
                               }
                             },
                             "required": [
-                              "escape_property",
-                              "jira_property"
+                              "name",
+                              "mapping"
                             ]
                           }
                         }
@@ -28161,19 +28209,39 @@
                             "items": {
                               "type": "object",
                               "properties": {
-                                "escape_property": {
-                                  "type": "string",
-                                  "enum": [
-                                    "severity"
-                                  ]
-                                },
-                                "jira_property": {
+                                "name": {
                                   "type": "string"
+                                },
+                                "mapping": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "escape_property": {
+                                        "type": "string",
+                                        "enum": [
+                                          "severity",
+                                          "applicationName",
+                                          "context",
+                                          "testCategory",
+                                          "scanId",
+                                          "linkToEscape"
+                                        ]
+                                      },
+                                      "jira_property": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "escape_property",
+                                      "jira_property"
+                                    ]
+                                  }
                                 }
                               },
                               "required": [
-                                "escape_property",
-                                "jira_property"
+                                "name",
+                                "mapping"
                               ]
                             }
                           }
@@ -28255,19 +28323,39 @@
                         "items": {
                           "type": "object",
                           "properties": {
-                            "escape_property": {
-                              "type": "string",
-                              "enum": [
-                                "severity"
-                              ]
-                            },
-                            "jira_property": {
+                            "name": {
                               "type": "string"
+                            },
+                            "mapping": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "escape_property": {
+                                    "type": "string",
+                                    "enum": [
+                                      "severity",
+                                      "applicationName",
+                                      "context",
+                                      "testCategory",
+                                      "scanId",
+                                      "linkToEscape"
+                                    ]
+                                  },
+                                  "jira_property": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "escape_property",
+                                  "jira_property"
+                                ]
+                              }
                             }
                           },
                           "required": [
-                            "escape_property",
-                            "jira_property"
+                            "name",
+                            "mapping"
                           ]
                         }
                       }
@@ -28329,19 +28417,39 @@
                           "items": {
                             "type": "object",
                             "properties": {
-                              "escape_property": {
-                                "type": "string",
-                                "enum": [
-                                  "severity"
-                                ]
-                              },
-                              "jira_property": {
+                              "name": {
                                 "type": "string"
+                              },
+                              "mapping": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "escape_property": {
+                                      "type": "string",
+                                      "enum": [
+                                        "severity",
+                                        "applicationName",
+                                        "context",
+                                        "testCategory",
+                                        "scanId",
+                                        "linkToEscape"
+                                      ]
+                                    },
+                                    "jira_property": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "escape_property",
+                                    "jira_property"
+                                  ]
+                                }
                               }
                             },
                             "required": [
-                              "escape_property",
-                              "jira_property"
+                              "name",
+                              "mapping"
                             ]
                           }
                         }
@@ -36422,19 +36530,39 @@
                           "items": {
                             "type": "object",
                             "properties": {
-                              "escape_property": {
-                                "type": "string",
-                                "enum": [
-                                  "severity"
-                                ]
-                              },
-                              "jira_property": {
+                              "name": {
                                 "type": "string"
+                              },
+                              "mapping": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "escape_property": {
+                                      "type": "string",
+                                      "enum": [
+                                        "severity",
+                                        "applicationName",
+                                        "context",
+                                        "testCategory",
+                                        "scanId",
+                                        "linkToEscape"
+                                      ]
+                                    },
+                                    "jira_property": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "escape_property",
+                                    "jira_property"
+                                  ]
+                                }
                               }
                             },
                             "required": [
-                              "escape_property",
-                              "jira_property"
+                              "name",
+                              "mapping"
                             ]
                           }
                         }
@@ -36570,19 +36698,39 @@
                         "items": {
                           "type": "object",
                           "properties": {
-                            "escape_property": {
-                              "type": "string",
-                              "enum": [
-                                "severity"
-                              ]
-                            },
-                            "jira_property": {
+                            "name": {
                               "type": "string"
+                            },
+                            "mapping": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "escape_property": {
+                                    "type": "string",
+                                    "enum": [
+                                      "severity",
+                                      "applicationName",
+                                      "context",
+                                      "testCategory",
+                                      "scanId",
+                                      "linkToEscape"
+                                    ]
+                                  },
+                                  "jira_property": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "escape_property",
+                                  "jira_property"
+                                ]
+                              }
                             }
                           },
                           "required": [
-                            "escape_property",
-                            "jira_property"
+                            "name",
+                            "mapping"
                           ]
                         }
                       }
@@ -36644,19 +36792,39 @@
                           "items": {
                             "type": "object",
                             "properties": {
-                              "escape_property": {
-                                "type": "string",
-                                "enum": [
-                                  "severity"
-                                ]
-                              },
-                              "jira_property": {
+                              "name": {
                                 "type": "string"
+                              },
+                              "mapping": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "escape_property": {
+                                      "type": "string",
+                                      "enum": [
+                                        "severity",
+                                        "applicationName",
+                                        "context",
+                                        "testCategory",
+                                        "scanId",
+                                        "linkToEscape"
+                                      ]
+                                    },
+                                    "jira_property": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "escape_property",
+                                    "jira_property"
+                                  ]
+                                }
                               }
                             },
                             "required": [
-                              "escape_property",
-                              "jira_property"
+                              "name",
+                              "mapping"
                             ]
                           }
                         }
