@@ -24,7 +24,7 @@ var domainsList = &cobra.Command{
 			domains,
 			func() {
 				for _, d := range domains {
-					fmt.Printf("%s\t%s\t%d\n", d.CreatedAt, d.Id, d.ServiceCount)
+					fmt.Println(d.String())
 				}
 			},
 		)
