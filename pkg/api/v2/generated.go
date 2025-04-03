@@ -58502,11 +58502,14 @@ type GetDomainsResponse struct {
 		// CreatedAt The date and time the domain was created.
 		CreatedAt time.Time `json:"createdAt"`
 
+		// Fqdn The domain name.
+		Fqdn string `json:"fqdn"`
+
 		// Id The domain ID.
 		Id openapi_types.UUID `json:"id"`
 
-		// ServiceCount The number of services associated with the domain.
-		ServiceCount float32 `json:"serviceCount"`
+		// ServicesCount The number of services associated with the domain.
+		ServicesCount int `json:"servicesCount"`
 	}
 	JSON400 *struct {
 		Message string `json:"message"`
@@ -58536,11 +58539,14 @@ type CreateDomainResponse struct {
 		// CreatedAt The date and time the domain was created.
 		CreatedAt time.Time `json:"createdAt"`
 
+		// Fqdn The domain name.
+		Fqdn string `json:"fqdn"`
+
 		// Id The domain ID.
 		Id openapi_types.UUID `json:"id"`
 
-		// ServiceCount The number of services associated with the domain.
-		ServiceCount float32 `json:"serviceCount"`
+		// ServicesCount The number of services associated with the domain.
+		ServicesCount int `json:"servicesCount"`
 	}
 	JSON400 *struct {
 		Message string `json:"message"`
@@ -59876,12 +59882,17 @@ type GetSubdomainsResponse struct {
 	HTTPResponse *http.Response
 	JSON200      *struct {
 		Data []struct {
-			Fqdn          string  `json:"fqdn"`
-			Id            string  `json:"id"`
-			ServicesCount float32 `json:"servicesCount"`
+			// Fqdn The subdomain name.
+			Fqdn string `json:"fqdn"`
+
+			// Id The subdomain ID.
+			Id openapi_types.UUID `json:"id"`
+
+			// ServicesCount The number of services associated with the subdomain.
+			ServicesCount int `json:"servicesCount"`
 		} `json:"data"`
-		NextCursor *string  `json:"nextCursor"`
-		TotalCount *float32 `json:"totalCount,omitempty"`
+		NextCursor *string `json:"nextCursor"`
+		TotalCount *int    `json:"totalCount,omitempty"`
 	}
 	JSON400 *struct {
 		Message string `json:"message"`
@@ -60854,11 +60865,14 @@ func ParseGetDomainsResponse(rsp *http.Response) (*GetDomainsResponse, error) {
 			// CreatedAt The date and time the domain was created.
 			CreatedAt time.Time `json:"createdAt"`
 
+			// Fqdn The domain name.
+			Fqdn string `json:"fqdn"`
+
 			// Id The domain ID.
 			Id openapi_types.UUID `json:"id"`
 
-			// ServiceCount The number of services associated with the domain.
-			ServiceCount float32 `json:"serviceCount"`
+			// ServicesCount The number of services associated with the domain.
+			ServicesCount int `json:"servicesCount"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
@@ -60898,11 +60912,14 @@ func ParseCreateDomainResponse(rsp *http.Response) (*CreateDomainResponse, error
 			// CreatedAt The date and time the domain was created.
 			CreatedAt time.Time `json:"createdAt"`
 
+			// Fqdn The domain name.
+			Fqdn string `json:"fqdn"`
+
 			// Id The domain ID.
 			Id openapi_types.UUID `json:"id"`
 
-			// ServiceCount The number of services associated with the domain.
-			ServiceCount float32 `json:"serviceCount"`
+			// ServicesCount The number of services associated with the domain.
+			ServicesCount int `json:"servicesCount"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
@@ -61672,12 +61689,17 @@ func ParseGetSubdomainsResponse(rsp *http.Response) (*GetSubdomainsResponse, err
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest struct {
 			Data []struct {
-				Fqdn          string  `json:"fqdn"`
-				Id            string  `json:"id"`
-				ServicesCount float32 `json:"servicesCount"`
+				// Fqdn The subdomain name.
+				Fqdn string `json:"fqdn"`
+
+				// Id The subdomain ID.
+				Id openapi_types.UUID `json:"id"`
+
+				// ServicesCount The number of services associated with the subdomain.
+				ServicesCount int `json:"servicesCount"`
 			} `json:"data"`
-			NextCursor *string  `json:"nextCursor"`
-			TotalCount *float32 `json:"totalCount,omitempty"`
+			NextCursor *string `json:"nextCursor"`
+			TotalCount *int    `json:"totalCount,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err

@@ -7,12 +7,17 @@ import (
 	"net/http"
 
 	v2 "github.com/Escape-Technologies/cli/pkg/api/v2"
+	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
 type Subdomain struct {
-	Id            string `json:"id"`
-	Fqdn          string `json:"fqdn"`
-	ServicesCount int    `json:"servicesCount"`
+	Id            openapi_types.UUID `json:"id"`
+	Fqdn          string             `json:"fqdn"`
+	ServicesCount int                `json:"servicesCount"`
+}
+
+func (s *Subdomain) String() string {
+	return fmt.Sprintf("%s\t%s\t%d", s.Id, s.Fqdn, s.ServicesCount)
 }
 
 func GetSubdomains(ctx context.Context, count *int, after *string) ([]Subdomain, *string, error) {
@@ -38,7 +43,7 @@ func GetSubdomains(ctx context.Context, count *int, after *string) ([]Subdomain,
 		subdomains = append(subdomains, Subdomain{
 			Id:            subdomain.Id,
 			Fqdn:          subdomain.Fqdn,
-			ServicesCount: int(subdomain.ServicesCount),
+			ServicesCount: subdomain.ServicesCount,
 		})
 	}
 	return subdomains, resp.JSON200.NextCursor, nil

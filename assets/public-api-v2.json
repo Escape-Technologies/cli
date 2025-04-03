@@ -89884,20 +89884,25 @@
                         "format": "uuid",
                         "description": "The domain ID."
                       },
+                      "fqdn": {
+                        "type": "string",
+                        "description": "The domain name."
+                      },
                       "createdAt": {
                         "type": "string",
                         "format": "date-time",
                         "description": "The date and time the domain was created."
                       },
-                      "serviceCount": {
-                        "type": "number",
+                      "servicesCount": {
+                        "type": "integer",
                         "description": "The number of services associated with the domain."
                       }
                     },
                     "required": [
                       "id",
+                      "fqdn",
                       "createdAt",
-                      "serviceCount"
+                      "servicesCount"
                     ]
                   }
                 }
@@ -89962,20 +89967,25 @@
                       "format": "uuid",
                       "description": "The domain ID."
                     },
+                    "fqdn": {
+                      "type": "string",
+                      "description": "The domain name."
+                    },
                     "createdAt": {
                       "type": "string",
                       "format": "date-time",
                       "description": "The date and time the domain was created."
                     },
-                    "serviceCount": {
-                      "type": "number",
+                    "servicesCount": {
+                      "type": "integer",
                       "description": "The number of services associated with the domain."
                     }
                   },
                   "required": [
                     "id",
+                    "fqdn",
                     "createdAt",
-                    "serviceCount"
+                    "servicesCount"
                   ]
                 }
               }
@@ -90143,7 +90153,7 @@
                       "nullable": true
                     },
                     "totalCount": {
-                      "type": "number",
+                      "type": "integer",
                       "default": 100
                     },
                     "data": {
@@ -90152,13 +90162,17 @@
                         "type": "object",
                         "properties": {
                           "id": {
-                            "type": "string"
+                            "type": "string",
+                            "format": "uuid",
+                            "description": "The subdomain ID."
                           },
                           "fqdn": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "The subdomain name."
                           },
                           "servicesCount": {
-                            "type": "number"
+                            "type": "integer",
+                            "description": "The number of services associated with the subdomain."
                           }
                         },
                         "required": [

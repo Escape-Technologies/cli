@@ -13,9 +13,14 @@ import (
 )
 
 type Domain struct {
-	CreatedAt    time.Time          `json:"createdAt"`
-	Id           openapi_types.UUID `json:"id"`
-	ServiceCount int                `json:"serviceCount"`
+	CreatedAt     time.Time          `json:"createdAt"`
+	Id            openapi_types.UUID `json:"id"`
+	Fqdn          string             `json:"fqdn"`
+	ServicesCount int                `json:"servicesCount"`
+}
+
+func (d *Domain) String() string {
+	return fmt.Sprintf("%s\t%s\t%s\t%d", d.Id, d.CreatedAt, d.Fqdn, d.ServicesCount)
 }
 
 func GetDomains(ctx context.Context) ([]Domain, error) {
@@ -36,9 +41,10 @@ func GetDomains(ctx context.Context) ([]Domain, error) {
 	domains := []Domain{}
 	for _, domain := range *resp.JSON200 {
 		domains = append(domains, Domain{
-			CreatedAt:    domain.CreatedAt,
-			Id:           domain.Id,
-			ServiceCount: int(domain.ServiceCount),
+			CreatedAt:     domain.CreatedAt,
+			Id:            domain.Id,
+			Fqdn:          domain.Fqdn,
+			ServicesCount: domain.ServicesCount,
 		})
 	}
 	return domains, nil
