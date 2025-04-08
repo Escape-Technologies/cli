@@ -45748,34 +45748,10 @@ const (
 
 // Defines values for CreateRoleJSONBodyWorkflowsAccessLevel.
 const (
-	CreateRoleJSONBodyWorkflowsAccessLevelADMIN  CreateRoleJSONBodyWorkflowsAccessLevel = "ADMIN"
-	CreateRoleJSONBodyWorkflowsAccessLevelEDITOR CreateRoleJSONBodyWorkflowsAccessLevel = "EDITOR"
-	CreateRoleJSONBodyWorkflowsAccessLevelNONE   CreateRoleJSONBodyWorkflowsAccessLevel = "NONE"
-	CreateRoleJSONBodyWorkflowsAccessLevelVIEWER CreateRoleJSONBodyWorkflowsAccessLevel = "VIEWER"
-)
-
-// Defines values for UpdateRoleUsersJSONBodyApplicationAccessLevel.
-const (
-	UpdateRoleUsersJSONBodyApplicationAccessLevelADMIN  UpdateRoleUsersJSONBodyApplicationAccessLevel = "ADMIN"
-	UpdateRoleUsersJSONBodyApplicationAccessLevelEDITOR UpdateRoleUsersJSONBodyApplicationAccessLevel = "EDITOR"
-	UpdateRoleUsersJSONBodyApplicationAccessLevelNONE   UpdateRoleUsersJSONBodyApplicationAccessLevel = "NONE"
-	UpdateRoleUsersJSONBodyApplicationAccessLevelVIEWER UpdateRoleUsersJSONBodyApplicationAccessLevel = "VIEWER"
-)
-
-// Defines values for UpdateRoleUsersJSONBodyInventoryAccessLevel.
-const (
-	UpdateRoleUsersJSONBodyInventoryAccessLevelADMIN  UpdateRoleUsersJSONBodyInventoryAccessLevel = "ADMIN"
-	UpdateRoleUsersJSONBodyInventoryAccessLevelEDITOR UpdateRoleUsersJSONBodyInventoryAccessLevel = "EDITOR"
-	UpdateRoleUsersJSONBodyInventoryAccessLevelNONE   UpdateRoleUsersJSONBodyInventoryAccessLevel = "NONE"
-	UpdateRoleUsersJSONBodyInventoryAccessLevelVIEWER UpdateRoleUsersJSONBodyInventoryAccessLevel = "VIEWER"
-)
-
-// Defines values for UpdateRoleUsersJSONBodyWorkflowsAccessLevel.
-const (
-	UpdateRoleUsersJSONBodyWorkflowsAccessLevelADMIN  UpdateRoleUsersJSONBodyWorkflowsAccessLevel = "ADMIN"
-	UpdateRoleUsersJSONBodyWorkflowsAccessLevelEDITOR UpdateRoleUsersJSONBodyWorkflowsAccessLevel = "EDITOR"
-	UpdateRoleUsersJSONBodyWorkflowsAccessLevelNONE   UpdateRoleUsersJSONBodyWorkflowsAccessLevel = "NONE"
-	UpdateRoleUsersJSONBodyWorkflowsAccessLevelVIEWER UpdateRoleUsersJSONBodyWorkflowsAccessLevel = "VIEWER"
+	ADMIN  CreateRoleJSONBodyWorkflowsAccessLevel = "ADMIN"
+	EDITOR CreateRoleJSONBodyWorkflowsAccessLevel = "EDITOR"
+	NONE   CreateRoleJSONBodyWorkflowsAccessLevel = "NONE"
+	VIEWER CreateRoleJSONBodyWorkflowsAccessLevel = "VIEWER"
 )
 
 // CreateApiApplicationJSONBody defines parameters for CreateApiApplication.
@@ -54942,11 +54918,11 @@ type UpdateIntegrationJSONBody_Parameters_Data struct {
 
 // CreateLocationJSONBody defines parameters for CreateLocation.
 type CreateLocationJSONBody struct {
-	// Key The SSH public key to use to connect to the location.
-	Key *string `json:"key,omitempty"`
-
 	// Name The name of the location.
 	Name string `json:"name"`
+
+	// SshPublicKey The SSH public key to use to connect to the location.
+	SshPublicKey string `json:"sshPublicKey"`
 }
 
 // CreateRoleJSONBody defines parameters for CreateRole.
@@ -54965,13 +54941,6 @@ type CreateRoleJSONBody struct {
 
 	// ReportingAdministrator Set as administrator of the resource.
 	ReportingAdministrator *bool `json:"reportingAdministrator,omitempty"`
-	Users                  *[]struct {
-		// Email The email of the user.
-		Email openapi_types.Email `json:"email"`
-
-		// Id The ID of the user.
-		Id openapi_types.UUID `json:"id"`
-	} `json:"users,omitempty"`
 
 	// WorkflowsAccessLevel Access Level to the resource.
 	WorkflowsAccessLevel *CreateRoleJSONBodyWorkflowsAccessLevel `json:"workflowsAccessLevel,omitempty"`
@@ -54986,42 +54955,11 @@ type CreateRoleJSONBodyInventoryAccessLevel string
 // CreateRoleJSONBodyWorkflowsAccessLevel defines parameters for CreateRole.
 type CreateRoleJSONBodyWorkflowsAccessLevel string
 
-// UpdateRoleUsersJSONBody defines parameters for UpdateRoleUsers.
-type UpdateRoleUsersJSONBody struct {
-	// ApplicationAccessLevel Access Level to the resource.
-	ApplicationAccessLevel *UpdateRoleUsersJSONBodyApplicationAccessLevel `json:"applicationAccessLevel,omitempty"`
-
-	// IntegrationAdministrator Set as administrator of the resource.
-	IntegrationAdministrator *bool `json:"integrationAdministrator,omitempty"`
-
-	// InventoryAccessLevel Access Level to the resource.
-	InventoryAccessLevel *UpdateRoleUsersJSONBodyInventoryAccessLevel `json:"inventoryAccessLevel,omitempty"`
-
-	// Name The name of the role.
-	Name string `json:"name"`
-
-	// ReportingAdministrator Set as administrator of the resource.
-	ReportingAdministrator *bool `json:"reportingAdministrator,omitempty"`
-	Users                  *[]struct {
-		// Email The email of the user.
-		Email openapi_types.Email `json:"email"`
-
-		// Id The ID of the user.
-		Id openapi_types.UUID `json:"id"`
-	} `json:"users,omitempty"`
-
-	// WorkflowsAccessLevel Access Level to the resource.
-	WorkflowsAccessLevel *UpdateRoleUsersJSONBodyWorkflowsAccessLevel `json:"workflowsAccessLevel,omitempty"`
+// AddUserToRoleJSONBody defines parameters for AddUserToRole.
+type AddUserToRoleJSONBody struct {
+	// UserId The user ID of the user you want to add to the role.
+	UserId openapi_types.UUID `json:"userId"`
 }
-
-// UpdateRoleUsersJSONBodyApplicationAccessLevel defines parameters for UpdateRoleUsers.
-type UpdateRoleUsersJSONBodyApplicationAccessLevel string
-
-// UpdateRoleUsersJSONBodyInventoryAccessLevel defines parameters for UpdateRoleUsers.
-type UpdateRoleUsersJSONBodyInventoryAccessLevel string
-
-// UpdateRoleUsersJSONBodyWorkflowsAccessLevel defines parameters for UpdateRoleUsers.
-type UpdateRoleUsersJSONBodyWorkflowsAccessLevel string
 
 // GetSubdomainsParams defines parameters for GetSubdomains.
 type GetSubdomainsParams struct {
@@ -55062,8 +55000,8 @@ type CreateLocationJSONRequestBody CreateLocationJSONBody
 // CreateRoleJSONRequestBody defines body for CreateRole for application/json ContentType.
 type CreateRoleJSONRequestBody CreateRoleJSONBody
 
-// UpdateRoleUsersJSONRequestBody defines body for UpdateRoleUsers for application/json ContentType.
-type UpdateRoleUsersJSONRequestBody UpdateRoleUsersJSONBody
+// AddUserToRoleJSONRequestBody defines body for AddUserToRole for application/json ContentType.
+type AddUserToRoleJSONRequestBody AddUserToRoleJSONBody
 
 // RequestEditorFn  is the function signature for the RequestEditor callback function
 type RequestEditorFn func(ctx context.Context, req *http.Request) error
@@ -55196,6 +55134,9 @@ type ClientInterface interface {
 
 	UpdateIntegration(ctx context.Context, id openapi_types.UUID, body UpdateIntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// GetLocations request
+	GetLocations(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// CreateLocationWithBody request with any body
 	CreateLocationWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -55212,10 +55153,10 @@ type ClientInterface interface {
 
 	CreateRole(ctx context.Context, body CreateRoleJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// UpdateRoleUsersWithBody request with any body
-	UpdateRoleUsersWithBody(ctx context.Context, id openapi_types.UUID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// AddUserToRoleWithBody request with any body
+	AddUserToRoleWithBody(ctx context.Context, roleId openapi_types.UUID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	UpdateRoleUsers(ctx context.Context, id openapi_types.UUID, body UpdateRoleUsersJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	AddUserToRole(ctx context.Context, roleId openapi_types.UUID, body AddUserToRoleJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetScan request
 	GetScan(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -55223,8 +55164,8 @@ type ClientInterface interface {
 	// GetScanExchangesArchive request
 	GetScanExchangesArchive(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetScanReport request
-	GetScanReport(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// GetScanIssues request
+	GetScanIssues(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetSubdomains request
 	GetSubdomains(ctx context.Context, params *GetSubdomainsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -55497,6 +55438,18 @@ func (c *Client) UpdateIntegration(ctx context.Context, id openapi_types.UUID, b
 	return c.Client.Do(req)
 }
 
+func (c *Client) GetLocations(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetLocationsRequest(c.Server)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 func (c *Client) CreateLocationWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateLocationRequestWithBody(c.Server, contentType, body)
 	if err != nil {
@@ -55569,8 +55522,8 @@ func (c *Client) CreateRole(ctx context.Context, body CreateRoleJSONRequestBody,
 	return c.Client.Do(req)
 }
 
-func (c *Client) UpdateRoleUsersWithBody(ctx context.Context, id openapi_types.UUID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewUpdateRoleUsersRequestWithBody(c.Server, id, contentType, body)
+func (c *Client) AddUserToRoleWithBody(ctx context.Context, roleId openapi_types.UUID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAddUserToRoleRequestWithBody(c.Server, roleId, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -55581,8 +55534,8 @@ func (c *Client) UpdateRoleUsersWithBody(ctx context.Context, id openapi_types.U
 	return c.Client.Do(req)
 }
 
-func (c *Client) UpdateRoleUsers(ctx context.Context, id openapi_types.UUID, body UpdateRoleUsersJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewUpdateRoleUsersRequest(c.Server, id, body)
+func (c *Client) AddUserToRole(ctx context.Context, roleId openapi_types.UUID, body AddUserToRoleJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAddUserToRoleRequest(c.Server, roleId, body)
 	if err != nil {
 		return nil, err
 	}
@@ -55617,8 +55570,8 @@ func (c *Client) GetScanExchangesArchive(ctx context.Context, id openapi_types.U
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetScanReport(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetScanReportRequest(c.Server, id)
+func (c *Client) GetScanIssues(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetScanIssuesRequest(c.Server, id)
 	if err != nil {
 		return nil, err
 	}
@@ -56191,6 +56144,33 @@ func NewUpdateIntegrationRequestWithBody(server string, id openapi_types.UUID, c
 	return req, nil
 }
 
+// NewGetLocationsRequest generates requests for GetLocations
+func NewGetLocationsRequest(server string) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/locations")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
 // NewCreateLocationRequest calls the generic CreateLocation builder with application/json body
 func NewCreateLocationRequest(server string, body CreateLocationJSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
@@ -56332,24 +56312,24 @@ func NewCreateRoleRequestWithBody(server string, contentType string, body io.Rea
 	return req, nil
 }
 
-// NewUpdateRoleUsersRequest calls the generic UpdateRoleUsers builder with application/json body
-func NewUpdateRoleUsersRequest(server string, id openapi_types.UUID, body UpdateRoleUsersJSONRequestBody) (*http.Request, error) {
+// NewAddUserToRoleRequest calls the generic AddUserToRole builder with application/json body
+func NewAddUserToRoleRequest(server string, roleId openapi_types.UUID, body AddUserToRoleJSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
 	bodyReader = bytes.NewReader(buf)
-	return NewUpdateRoleUsersRequestWithBody(server, id, "application/json", bodyReader)
+	return NewAddUserToRoleRequestWithBody(server, roleId, "application/json", bodyReader)
 }
 
-// NewUpdateRoleUsersRequestWithBody generates requests for UpdateRoleUsers with any type of body
-func NewUpdateRoleUsersRequestWithBody(server string, id openapi_types.UUID, contentType string, body io.Reader) (*http.Request, error) {
+// NewAddUserToRoleRequestWithBody generates requests for AddUserToRole with any type of body
+func NewAddUserToRoleRequestWithBody(server string, roleId openapi_types.UUID, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
 
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "roleId", runtime.ParamLocationPath, roleId)
 	if err != nil {
 		return nil, err
 	}
@@ -56447,8 +56427,8 @@ func NewGetScanExchangesArchiveRequest(server string, id openapi_types.UUID) (*h
 	return req, nil
 }
 
-// NewGetScanReportRequest generates requests for GetScanReport
-func NewGetScanReportRequest(server string, id openapi_types.UUID) (*http.Request, error) {
+// NewGetScanIssuesRequest generates requests for GetScanIssues
+func NewGetScanIssuesRequest(server string, id openapi_types.UUID) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -56463,7 +56443,7 @@ func NewGetScanReportRequest(server string, id openapi_types.UUID) (*http.Reques
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/scans/%s/report", pathParam0)
+	operationPath := fmt.Sprintf("/scans/%s/issues", pathParam0)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -56674,6 +56654,9 @@ type ClientWithResponsesInterface interface {
 
 	UpdateIntegrationWithResponse(ctx context.Context, id openapi_types.UUID, body UpdateIntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateIntegrationResponse, error)
 
+	// GetLocationsWithResponse request
+	GetLocationsWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetLocationsResponse, error)
+
 	// CreateLocationWithBodyWithResponse request with any body
 	CreateLocationWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateLocationResponse, error)
 
@@ -56690,10 +56673,10 @@ type ClientWithResponsesInterface interface {
 
 	CreateRoleWithResponse(ctx context.Context, body CreateRoleJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateRoleResponse, error)
 
-	// UpdateRoleUsersWithBodyWithResponse request with any body
-	UpdateRoleUsersWithBodyWithResponse(ctx context.Context, id openapi_types.UUID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateRoleUsersResponse, error)
+	// AddUserToRoleWithBodyWithResponse request with any body
+	AddUserToRoleWithBodyWithResponse(ctx context.Context, roleId openapi_types.UUID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AddUserToRoleResponse, error)
 
-	UpdateRoleUsersWithResponse(ctx context.Context, id openapi_types.UUID, body UpdateRoleUsersJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateRoleUsersResponse, error)
+	AddUserToRoleWithResponse(ctx context.Context, roleId openapi_types.UUID, body AddUserToRoleJSONRequestBody, reqEditors ...RequestEditorFn) (*AddUserToRoleResponse, error)
 
 	// GetScanWithResponse request
 	GetScanWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetScanResponse, error)
@@ -56701,8 +56684,8 @@ type ClientWithResponsesInterface interface {
 	// GetScanExchangesArchiveWithResponse request
 	GetScanExchangesArchiveWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetScanExchangesArchiveResponse, error)
 
-	// GetScanReportWithResponse request
-	GetScanReportWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetScanReportResponse, error)
+	// GetScanIssuesWithResponse request
+	GetScanIssuesWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetScanIssuesResponse, error)
 
 	// GetSubdomainsWithResponse request
 	GetSubdomainsWithResponse(ctx context.Context, params *GetSubdomainsParams, reqEditors ...RequestEditorFn) (*GetSubdomainsResponse, error)
@@ -56725,7 +56708,6 @@ type CreateApiApplicationResponse struct {
 			CreatedAt time.Time                          `json:"createdAt"`
 			Id        openapi_types.UUID                 `json:"id"`
 			Status    CreateApiApplication200ScansStatus `json:"status"`
-			UpdatedAt time.Time                          `json:"updatedAt"`
 		} `json:"scans"`
 		Service struct {
 			Tags []struct {
@@ -56774,7 +56756,6 @@ type CreateFrontendApplicationResponse struct {
 			CreatedAt time.Time                               `json:"createdAt"`
 			Id        openapi_types.UUID                      `json:"id"`
 			Status    CreateFrontendApplication200ScansStatus `json:"status"`
-			UpdatedAt time.Time                               `json:"updatedAt"`
 		} `json:"scans"`
 		Service struct {
 			Tags []struct {
@@ -56823,7 +56804,6 @@ type UpdateApplicationResponse struct {
 			CreatedAt time.Time                       `json:"createdAt"`
 			Id        openapi_types.UUID              `json:"id"`
 			Status    UpdateApplication200ScansStatus `json:"status"`
-			UpdatedAt time.Time                       `json:"updatedAt"`
 		} `json:"scans"`
 		Service struct {
 			Tags []struct {
@@ -58362,50 +58342,25 @@ type GetApplicationScansResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *struct {
-		Archived                       bool       `json:"archived"`
-		ArchivedAt                     *time.Time `json:"archivedAt"`
-		CanceledAt                     *time.Time `json:"canceledAt"`
-		CommitAuthor                   *string    `json:"commitAuthor"`
-		CommitAuthorProfilePictureLink *string    `json:"commitAuthorProfilePictureLink"`
-		CommitBranch                   *string    `json:"commitBranch"`
-		CommitHash                     *string    `json:"commitHash"`
-		CommitLink                     *string    `json:"commitLink"`
-		Configuration                  struct {
-			AuthenticationUsers *[]struct {
+		Configuration struct {
+			AuthenticationContent  *interface{} `json:"authenticationContent"`
+			AuthenticationProblems *interface{} `json:"authenticationProblems"`
+			AuthenticationUsers    *[]struct {
 				HeaderName  string `json:"headerName"`
 				HeaderValue string `json:"headerValue"`
 				Name        string `json:"name"`
 			} `json:"authenticationUsers"`
-			Content               *interface{} `json:"content"`
-			CreatedAt             time.Time    `json:"createdAt"`
-			IsAuthenticationValid bool         `json:"isAuthenticationValid"`
-			IsConfigurationValid  bool         `json:"isConfigurationValid"`
-			ReadWrite             bool         `json:"readWrite"`
-			UpdatedAt             time.Time    `json:"updatedAt"`
+			CreatedAt time.Time          `json:"createdAt"`
+			Id        openapi_types.UUID `json:"id"`
 		} `json:"configuration"`
-		ConfigurationOverride  *interface{}                 `json:"configurationOverride"`
-		Coverage               *float32                     `json:"coverage"`
-		CreatedAt              time.Time                    `json:"createdAt"`
-		EndpointRenewalFailure *bool                        `json:"endpointRenewalFailure"`
-		FailedAt               *time.Time                   `json:"failedAt"`
-		FinishedAt             *time.Time                   `json:"finishedAt"`
-		Id                     openapi_types.UUID           `json:"id"`
-		IdempotencyKey         *openapi_types.UUID          `json:"idempotencyKey"`
-		Ignored                bool                         `json:"ignored"`
-		Initiator              string                       `json:"initiator"`
-		Kind                   GetApplicationScans200Kind   `json:"kind"`
-		MeanDuration           *float32                     `json:"meanDuration"`
-		ProgressRatio          float32                      `json:"progressRatio"`
-		ReadonlyAccessToken    openapi_types.UUID           `json:"readonlyAccessToken"`
-		ReportGeneratedAt      *time.Time                   `json:"reportGeneratedAt"`
-		RequestCount           *float32                     `json:"requestCount"`
-		RunnerId               *string                      `json:"runnerId"`
-		RunningAt              *time.Time                   `json:"runningAt"`
-		SchemaRenewalFailure   *bool                        `json:"schemaRenewalFailure"`
-		Score                  *float32                     `json:"score"`
-		Status                 GetApplicationScans200Status `json:"status"`
-		TotalDuration          *float32                     `json:"totalDuration"`
-		UpdatedAt              time.Time                    `json:"updatedAt"`
+		CreatedAt     time.Time                    `json:"createdAt"`
+		FinishedAt    *time.Time                   `json:"finishedAt"`
+		Id            openapi_types.UUID           `json:"id"`
+		Initiator     string                       `json:"initiator"`
+		ProgressRatio float32                      `json:"progressRatio"`
+		Score         *float32                     `json:"score"`
+		Status        GetApplicationScans200Status `json:"status"`
+		UpdatedAt     time.Time                    `json:"updatedAt"`
 	}
 	JSON404 *struct {
 		Message string `json:"message"`
@@ -58414,7 +58369,6 @@ type GetApplicationScansResponse struct {
 		Message string `json:"message"`
 	}
 }
-type GetApplicationScans200Kind string
 type GetApplicationScans200Status string
 
 // Status returns HTTPResponse.Status
@@ -59530,6 +59484,40 @@ func (r UpdateIntegrationResponse) StatusCode() int {
 	return 0
 }
 
+type GetLocationsResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *[]struct {
+		// Id The location ID.
+		Id *openapi_types.UUID `json:"id,omitempty"`
+
+		// Name The name of the location.
+		Name *string `json:"name,omitempty"`
+
+		// SshPublicKey The SSH public key used to connect to the location.
+		SshPublicKey *string `json:"sshPublicKey,omitempty"`
+	}
+	JSON400 *struct {
+		Message string `json:"message"`
+	}
+}
+
+// Status returns HTTPResponse.Status
+func (r GetLocationsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetLocationsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
 type CreateLocationResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -59537,16 +59525,16 @@ type CreateLocationResponse struct {
 		// Id The location ID.
 		Id *openapi_types.UUID `json:"id,omitempty"`
 
-		// Key The SSH public key used to connect to the location.
-		Key *string `json:"key,omitempty"`
-
 		// Name The name of the location.
 		Name *string `json:"name,omitempty"`
+
+		// SshPublicKey The SSH public key used to connect to the location.
+		SshPublicKey *string `json:"sshPublicKey,omitempty"`
 	}
 	JSON400 *struct {
 		Message string `json:"message"`
 	}
-	JSON500 *struct {
+	JSON409 *struct {
 		Message string `json:"message"`
 	}
 }
@@ -59574,16 +59562,16 @@ type GetLocationResponse struct {
 		// Id The location ID.
 		Id *openapi_types.UUID `json:"id,omitempty"`
 
-		// Key The SSH public key used to connect to the location.
-		Key *string `json:"key,omitempty"`
-
 		// Name The name of the location.
 		Name *string `json:"name,omitempty"`
+
+		// SshPublicKey The SSH public key used to connect to the location.
+		SshPublicKey *string `json:"sshPublicKey,omitempty"`
 	}
 	JSON400 *struct {
 		Message string `json:"message"`
 	}
-	JSON500 *struct {
+	JSON404 *struct {
 		Message string `json:"message"`
 	}
 }
@@ -59607,32 +59595,46 @@ func (r GetLocationResponse) StatusCode() int {
 type GetRolesResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *struct {
-		// Description The description of the role.
-		Description string `json:"description"`
+	JSON200      *[]struct {
+		// ApplicationAccessLevel Access level for applications.
+		ApplicationAccessLevel GetRoles200ApplicationAccessLevel `json:"applicationAccessLevel"`
 
 		// Id The ID of the role.
 		Id openapi_types.UUID `json:"id"`
 
+		// IntegrationAdministrator Whether the role has integration administrator privileges.
+		IntegrationAdministrator bool `json:"integrationAdministrator"`
+
+		// InventoryAccessLevel Access level for inventory.
+		InventoryAccessLevel GetRoles200InventoryAccessLevel `json:"inventoryAccessLevel"`
+
 		// Name The name of the role.
 		Name string `json:"name"`
 
-		// Users The users assigned to the role.
-		Users []struct {
-			// Email The email of the user.
-			Email openapi_types.Email `json:"email"`
+		// ReportingAdministrator Whether the role has reporting administrator privileges.
+		ReportingAdministrator bool `json:"reportingAdministrator"`
 
-			// Id The ID of the user.
-			Id openapi_types.UUID `json:"id"`
-		} `json:"users"`
+		// RoleUsers The users associated with the role.
+		RoleUsers []struct {
+			User struct {
+				// Email The email of the user.
+				Email openapi_types.Email `json:"email"`
+
+				// Id The ID of the user.
+				Id openapi_types.UUID `json:"id"`
+			} `json:"user"`
+		} `json:"roleUsers"`
+
+		// WorkflowsAccessLevel Access level for workflows.
+		WorkflowsAccessLevel GetRoles200WorkflowsAccessLevel `json:"workflowsAccessLevel"`
 	}
 	JSON400 *struct {
 		Message string `json:"message"`
 	}
-	JSON500 *struct {
-		Message string `json:"message"`
-	}
 }
+type GetRoles200ApplicationAccessLevel string
+type GetRoles200InventoryAccessLevel string
+type GetRoles200WorkflowsAccessLevel string
 
 // Status returns HTTPResponse.Status
 func (r GetRolesResponse) Status() string {
@@ -59654,31 +59656,45 @@ type CreateRoleResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *struct {
-		// Description The description of the role.
-		Description string `json:"description"`
+		// ApplicationAccessLevel Access level for applications.
+		ApplicationAccessLevel CreateRole200ApplicationAccessLevel `json:"applicationAccessLevel"`
 
 		// Id The ID of the role.
 		Id openapi_types.UUID `json:"id"`
 
+		// IntegrationAdministrator Whether the role has integration administrator privileges.
+		IntegrationAdministrator bool `json:"integrationAdministrator"`
+
+		// InventoryAccessLevel Access level for inventory.
+		InventoryAccessLevel CreateRole200InventoryAccessLevel `json:"inventoryAccessLevel"`
+
 		// Name The name of the role.
 		Name string `json:"name"`
 
-		// Users The users assigned to the role.
-		Users []struct {
-			// Email The email of the user.
-			Email openapi_types.Email `json:"email"`
+		// ReportingAdministrator Whether the role has reporting administrator privileges.
+		ReportingAdministrator bool `json:"reportingAdministrator"`
 
-			// Id The ID of the user.
-			Id openapi_types.UUID `json:"id"`
-		} `json:"users"`
+		// RoleUsers The users associated with the role.
+		RoleUsers []struct {
+			User struct {
+				// Email The email of the user.
+				Email openapi_types.Email `json:"email"`
+
+				// Id The ID of the user.
+				Id openapi_types.UUID `json:"id"`
+			} `json:"user"`
+		} `json:"roleUsers"`
+
+		// WorkflowsAccessLevel Access level for workflows.
+		WorkflowsAccessLevel CreateRole200WorkflowsAccessLevel `json:"workflowsAccessLevel"`
 	}
 	JSON400 *struct {
 		Message string `json:"message"`
 	}
-	JSON500 *struct {
-		Message string `json:"message"`
-	}
 }
+type CreateRole200ApplicationAccessLevel string
+type CreateRole200InventoryAccessLevel string
+type CreateRole200WorkflowsAccessLevel string
 
 // Status returns HTTPResponse.Status
 func (r CreateRoleResponse) Status() string {
@@ -59696,38 +59712,26 @@ func (r CreateRoleResponse) StatusCode() int {
 	return 0
 }
 
-type UpdateRoleUsersResponse struct {
+type AddUserToRoleResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *struct {
-		// Description The description of the role.
-		Description string `json:"description"`
+		// CreatedAt The date and time the user was added to the role.
+		CreatedAt time.Time `json:"createdAt"`
 
-		// Id The ID of the role.
-		Id openapi_types.UUID `json:"id"`
+		// RoleId The ID of the role.
+		RoleId openapi_types.UUID `json:"roleId"`
 
-		// Name The name of the role.
-		Name string `json:"name"`
-
-		// Users The users assigned to the role.
-		Users []struct {
-			// Email The email of the user.
-			Email openapi_types.Email `json:"email"`
-
-			// Id The ID of the user.
-			Id openapi_types.UUID `json:"id"`
-		} `json:"users"`
+		// UserId The ID of the user.
+		UserId openapi_types.UUID `json:"userId"`
 	}
 	JSON400 *struct {
-		Message string `json:"message"`
-	}
-	JSON500 *struct {
 		Message string `json:"message"`
 	}
 }
 
 // Status returns HTTPResponse.Status
-func (r UpdateRoleUsersResponse) Status() string {
+func (r AddUserToRoleResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -59735,7 +59739,7 @@ func (r UpdateRoleUsersResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r UpdateRoleUsersResponse) StatusCode() int {
+func (r AddUserToRoleResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -59746,59 +59750,30 @@ type GetScanResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *struct {
-		Archived                       bool       `json:"archived"`
-		ArchivedAt                     *time.Time `json:"archivedAt"`
-		CanceledAt                     *time.Time `json:"canceledAt"`
-		CommitAuthor                   *string    `json:"commitAuthor"`
-		CommitAuthorProfilePictureLink *string    `json:"commitAuthorProfilePictureLink"`
-		CommitBranch                   *string    `json:"commitBranch"`
-		CommitHash                     *string    `json:"commitHash"`
-		CommitLink                     *string    `json:"commitLink"`
-		Configuration                  struct {
-			AuthenticationUsers *[]struct {
+		Configuration struct {
+			AuthenticationContent  *interface{} `json:"authenticationContent"`
+			AuthenticationProblems *interface{} `json:"authenticationProblems"`
+			AuthenticationUsers    *[]struct {
 				HeaderName  string `json:"headerName"`
 				HeaderValue string `json:"headerValue"`
 				Name        string `json:"name"`
 			} `json:"authenticationUsers"`
-			Content               *interface{} `json:"content"`
-			CreatedAt             time.Time    `json:"createdAt"`
-			IsAuthenticationValid bool         `json:"isAuthenticationValid"`
-			IsConfigurationValid  bool         `json:"isConfigurationValid"`
-			ReadWrite             bool         `json:"readWrite"`
-			UpdatedAt             time.Time    `json:"updatedAt"`
+			CreatedAt time.Time          `json:"createdAt"`
+			Id        openapi_types.UUID `json:"id"`
 		} `json:"configuration"`
-		ConfigurationOverride  *interface{}        `json:"configurationOverride"`
-		Coverage               *float32            `json:"coverage"`
-		CreatedAt              time.Time           `json:"createdAt"`
-		EndpointRenewalFailure *bool               `json:"endpointRenewalFailure"`
-		FailedAt               *time.Time          `json:"failedAt"`
-		FinishedAt             *time.Time          `json:"finishedAt"`
-		Id                     openapi_types.UUID  `json:"id"`
-		IdempotencyKey         *openapi_types.UUID `json:"idempotencyKey"`
-		Ignored                bool                `json:"ignored"`
-		Initiator              string              `json:"initiator"`
-		Kind                   GetScan200Kind      `json:"kind"`
-		MeanDuration           *float32            `json:"meanDuration"`
-		ProgressRatio          float32             `json:"progressRatio"`
-		ReadonlyAccessToken    openapi_types.UUID  `json:"readonlyAccessToken"`
-		ReportGeneratedAt      *time.Time          `json:"reportGeneratedAt"`
-		RequestCount           *float32            `json:"requestCount"`
-		RunnerId               *string             `json:"runnerId"`
-		RunningAt              *time.Time          `json:"runningAt"`
-		SchemaRenewalFailure   *bool               `json:"schemaRenewalFailure"`
-		Score                  *float32            `json:"score"`
-		Status                 GetScan200Status    `json:"status"`
-		TotalDuration          *float32            `json:"totalDuration"`
-		UpdatedAt              time.Time           `json:"updatedAt"`
+		CreatedAt     time.Time          `json:"createdAt"`
+		FinishedAt    *time.Time         `json:"finishedAt"`
+		Id            openapi_types.UUID `json:"id"`
+		Initiator     string             `json:"initiator"`
+		ProgressRatio float32            `json:"progressRatio"`
+		Score         *float32           `json:"score"`
+		Status        GetScan200Status   `json:"status"`
+		UpdatedAt     time.Time          `json:"updatedAt"`
 	}
 	JSON400 *struct {
 		Message string `json:"message"`
 	}
-	JSON500 *struct {
-		Message string `json:"message"`
-	}
 }
-type GetScan200Kind string
 type GetScan200Status string
 
 // Status returns HTTPResponse.Status
@@ -59847,22 +59822,35 @@ func (r GetScanExchangesArchiveResponse) StatusCode() int {
 	return 0
 }
 
-type GetScanReportResponse struct {
+type GetScanIssuesResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *struct {
-		Report string `json:"report"`
+	JSON200      *[]struct {
+		Id      openapi_types.UUID `json:"id"`
+		Ignored bool               `json:"ignored"`
+		Issues  []struct {
+			Id      openapi_types.UUID `json:"id"`
+			Ignored bool               `json:"ignored"`
+		} `json:"issues"`
+		Severity GetScanIssues200Severity `json:"severity"`
+		Test     struct {
+			Category GetScanIssues200TestCategory `json:"category"`
+			Meta     struct {
+				TitleOnFail string `json:"titleOnFail"`
+				Type        string `json:"type"`
+			} `json:"meta"`
+			SecurityTestUid string `json:"securityTestUid"`
+		} `json:"test"`
 	}
 	JSON400 *struct {
 		Message string `json:"message"`
 	}
-	JSON500 *struct {
-		Message string `json:"message"`
-	}
 }
+type GetScanIssues200Severity string
+type GetScanIssues200TestCategory string
 
 // Status returns HTTPResponse.Status
-func (r GetScanReportResponse) Status() string {
+func (r GetScanIssuesResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -59870,7 +59858,7 @@ func (r GetScanReportResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetScanReportResponse) StatusCode() int {
+func (r GetScanIssuesResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -60130,6 +60118,15 @@ func (c *ClientWithResponses) UpdateIntegrationWithResponse(ctx context.Context,
 	return ParseUpdateIntegrationResponse(rsp)
 }
 
+// GetLocationsWithResponse request returning *GetLocationsResponse
+func (c *ClientWithResponses) GetLocationsWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetLocationsResponse, error) {
+	rsp, err := c.GetLocations(ctx, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetLocationsResponse(rsp)
+}
+
 // CreateLocationWithBodyWithResponse request with arbitrary body returning *CreateLocationResponse
 func (c *ClientWithResponses) CreateLocationWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateLocationResponse, error) {
 	rsp, err := c.CreateLocationWithBody(ctx, contentType, body, reqEditors...)
@@ -60182,21 +60179,21 @@ func (c *ClientWithResponses) CreateRoleWithResponse(ctx context.Context, body C
 	return ParseCreateRoleResponse(rsp)
 }
 
-// UpdateRoleUsersWithBodyWithResponse request with arbitrary body returning *UpdateRoleUsersResponse
-func (c *ClientWithResponses) UpdateRoleUsersWithBodyWithResponse(ctx context.Context, id openapi_types.UUID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateRoleUsersResponse, error) {
-	rsp, err := c.UpdateRoleUsersWithBody(ctx, id, contentType, body, reqEditors...)
+// AddUserToRoleWithBodyWithResponse request with arbitrary body returning *AddUserToRoleResponse
+func (c *ClientWithResponses) AddUserToRoleWithBodyWithResponse(ctx context.Context, roleId openapi_types.UUID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AddUserToRoleResponse, error) {
+	rsp, err := c.AddUserToRoleWithBody(ctx, roleId, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseUpdateRoleUsersResponse(rsp)
+	return ParseAddUserToRoleResponse(rsp)
 }
 
-func (c *ClientWithResponses) UpdateRoleUsersWithResponse(ctx context.Context, id openapi_types.UUID, body UpdateRoleUsersJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateRoleUsersResponse, error) {
-	rsp, err := c.UpdateRoleUsers(ctx, id, body, reqEditors...)
+func (c *ClientWithResponses) AddUserToRoleWithResponse(ctx context.Context, roleId openapi_types.UUID, body AddUserToRoleJSONRequestBody, reqEditors ...RequestEditorFn) (*AddUserToRoleResponse, error) {
+	rsp, err := c.AddUserToRole(ctx, roleId, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseUpdateRoleUsersResponse(rsp)
+	return ParseAddUserToRoleResponse(rsp)
 }
 
 // GetScanWithResponse request returning *GetScanResponse
@@ -60217,13 +60214,13 @@ func (c *ClientWithResponses) GetScanExchangesArchiveWithResponse(ctx context.Co
 	return ParseGetScanExchangesArchiveResponse(rsp)
 }
 
-// GetScanReportWithResponse request returning *GetScanReportResponse
-func (c *ClientWithResponses) GetScanReportWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetScanReportResponse, error) {
-	rsp, err := c.GetScanReport(ctx, id, reqEditors...)
+// GetScanIssuesWithResponse request returning *GetScanIssuesResponse
+func (c *ClientWithResponses) GetScanIssuesWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetScanIssuesResponse, error) {
+	rsp, err := c.GetScanIssues(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetScanReportResponse(rsp)
+	return ParseGetScanIssuesResponse(rsp)
 }
 
 // GetSubdomainsWithResponse request returning *GetSubdomainsResponse
@@ -60270,7 +60267,6 @@ func ParseCreateApiApplicationResponse(rsp *http.Response) (*CreateApiApplicatio
 				CreatedAt time.Time                          `json:"createdAt"`
 				Id        openapi_types.UUID                 `json:"id"`
 				Status    CreateApiApplication200ScansStatus `json:"status"`
-				UpdatedAt time.Time                          `json:"updatedAt"`
 			} `json:"scans"`
 			Service struct {
 				Tags []struct {
@@ -60334,7 +60330,6 @@ func ParseCreateFrontendApplicationResponse(rsp *http.Response) (*CreateFrontend
 				CreatedAt time.Time                               `json:"createdAt"`
 				Id        openapi_types.UUID                      `json:"id"`
 				Status    CreateFrontendApplication200ScansStatus `json:"status"`
-				UpdatedAt time.Time                               `json:"updatedAt"`
 			} `json:"scans"`
 			Service struct {
 				Tags []struct {
@@ -60398,7 +60393,6 @@ func ParseUpdateApplicationResponse(rsp *http.Response) (*UpdateApplicationRespo
 				CreatedAt time.Time                       `json:"createdAt"`
 				Id        openapi_types.UUID              `json:"id"`
 				Status    UpdateApplication200ScansStatus `json:"status"`
-				UpdatedAt time.Time                       `json:"updatedAt"`
 			} `json:"scans"`
 			Service struct {
 				Tags []struct {
@@ -60679,50 +60673,25 @@ func ParseGetApplicationScansResponse(rsp *http.Response) (*GetApplicationScansR
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest struct {
-			Archived                       bool       `json:"archived"`
-			ArchivedAt                     *time.Time `json:"archivedAt"`
-			CanceledAt                     *time.Time `json:"canceledAt"`
-			CommitAuthor                   *string    `json:"commitAuthor"`
-			CommitAuthorProfilePictureLink *string    `json:"commitAuthorProfilePictureLink"`
-			CommitBranch                   *string    `json:"commitBranch"`
-			CommitHash                     *string    `json:"commitHash"`
-			CommitLink                     *string    `json:"commitLink"`
-			Configuration                  struct {
-				AuthenticationUsers *[]struct {
+			Configuration struct {
+				AuthenticationContent  *interface{} `json:"authenticationContent"`
+				AuthenticationProblems *interface{} `json:"authenticationProblems"`
+				AuthenticationUsers    *[]struct {
 					HeaderName  string `json:"headerName"`
 					HeaderValue string `json:"headerValue"`
 					Name        string `json:"name"`
 				} `json:"authenticationUsers"`
-				Content               *interface{} `json:"content"`
-				CreatedAt             time.Time    `json:"createdAt"`
-				IsAuthenticationValid bool         `json:"isAuthenticationValid"`
-				IsConfigurationValid  bool         `json:"isConfigurationValid"`
-				ReadWrite             bool         `json:"readWrite"`
-				UpdatedAt             time.Time    `json:"updatedAt"`
+				CreatedAt time.Time          `json:"createdAt"`
+				Id        openapi_types.UUID `json:"id"`
 			} `json:"configuration"`
-			ConfigurationOverride  *interface{}                 `json:"configurationOverride"`
-			Coverage               *float32                     `json:"coverage"`
-			CreatedAt              time.Time                    `json:"createdAt"`
-			EndpointRenewalFailure *bool                        `json:"endpointRenewalFailure"`
-			FailedAt               *time.Time                   `json:"failedAt"`
-			FinishedAt             *time.Time                   `json:"finishedAt"`
-			Id                     openapi_types.UUID           `json:"id"`
-			IdempotencyKey         *openapi_types.UUID          `json:"idempotencyKey"`
-			Ignored                bool                         `json:"ignored"`
-			Initiator              string                       `json:"initiator"`
-			Kind                   GetApplicationScans200Kind   `json:"kind"`
-			MeanDuration           *float32                     `json:"meanDuration"`
-			ProgressRatio          float32                      `json:"progressRatio"`
-			ReadonlyAccessToken    openapi_types.UUID           `json:"readonlyAccessToken"`
-			ReportGeneratedAt      *time.Time                   `json:"reportGeneratedAt"`
-			RequestCount           *float32                     `json:"requestCount"`
-			RunnerId               *string                      `json:"runnerId"`
-			RunningAt              *time.Time                   `json:"runningAt"`
-			SchemaRenewalFailure   *bool                        `json:"schemaRenewalFailure"`
-			Score                  *float32                     `json:"score"`
-			Status                 GetApplicationScans200Status `json:"status"`
-			TotalDuration          *float32                     `json:"totalDuration"`
-			UpdatedAt              time.Time                    `json:"updatedAt"`
+			CreatedAt     time.Time                    `json:"createdAt"`
+			FinishedAt    *time.Time                   `json:"finishedAt"`
+			Id            openapi_types.UUID           `json:"id"`
+			Initiator     string                       `json:"initiator"`
+			ProgressRatio float32                      `json:"progressRatio"`
+			Score         *float32                     `json:"score"`
+			Status        GetApplicationScans200Status `json:"status"`
+			UpdatedAt     time.Time                    `json:"updatedAt"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
@@ -61199,6 +61168,50 @@ func ParseUpdateIntegrationResponse(rsp *http.Response) (*UpdateIntegrationRespo
 	return response, nil
 }
 
+// ParseGetLocationsResponse parses an HTTP response from a GetLocationsWithResponse call
+func ParseGetLocationsResponse(rsp *http.Response) (*GetLocationsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetLocationsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest []struct {
+			// Id The location ID.
+			Id *openapi_types.UUID `json:"id,omitempty"`
+
+			// Name The name of the location.
+			Name *string `json:"name,omitempty"`
+
+			// SshPublicKey The SSH public key used to connect to the location.
+			SshPublicKey *string `json:"sshPublicKey,omitempty"`
+		}
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest struct {
+			Message string `json:"message"`
+		}
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseCreateLocationResponse parses an HTTP response from a CreateLocationWithResponse call
 func ParseCreateLocationResponse(rsp *http.Response) (*CreateLocationResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -61218,11 +61231,11 @@ func ParseCreateLocationResponse(rsp *http.Response) (*CreateLocationResponse, e
 			// Id The location ID.
 			Id *openapi_types.UUID `json:"id,omitempty"`
 
-			// Key The SSH public key used to connect to the location.
-			Key *string `json:"key,omitempty"`
-
 			// Name The name of the location.
 			Name *string `json:"name,omitempty"`
+
+			// SshPublicKey The SSH public key used to connect to the location.
+			SshPublicKey *string `json:"sshPublicKey,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
@@ -61238,14 +61251,14 @@ func ParseCreateLocationResponse(rsp *http.Response) (*CreateLocationResponse, e
 		}
 		response.JSON400 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
 		var dest struct {
 			Message string `json:"message"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.JSON500 = &dest
+		response.JSON409 = &dest
 
 	}
 
@@ -61271,11 +61284,11 @@ func ParseGetLocationResponse(rsp *http.Response) (*GetLocationResponse, error) 
 			// Id The location ID.
 			Id *openapi_types.UUID `json:"id,omitempty"`
 
-			// Key The SSH public key used to connect to the location.
-			Key *string `json:"key,omitempty"`
-
 			// Name The name of the location.
 			Name *string `json:"name,omitempty"`
+
+			// SshPublicKey The SSH public key used to connect to the location.
+			SshPublicKey *string `json:"sshPublicKey,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
@@ -61291,14 +61304,14 @@ func ParseGetLocationResponse(rsp *http.Response) (*GetLocationResponse, error) 
 		}
 		response.JSON400 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest struct {
 			Message string `json:"message"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.JSON500 = &dest
+		response.JSON404 = &dest
 
 	}
 
@@ -61320,24 +61333,38 @@ func ParseGetRolesResponse(rsp *http.Response) (*GetRolesResponse, error) {
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest struct {
-			// Description The description of the role.
-			Description string `json:"description"`
+		var dest []struct {
+			// ApplicationAccessLevel Access level for applications.
+			ApplicationAccessLevel GetRoles200ApplicationAccessLevel `json:"applicationAccessLevel"`
 
 			// Id The ID of the role.
 			Id openapi_types.UUID `json:"id"`
 
+			// IntegrationAdministrator Whether the role has integration administrator privileges.
+			IntegrationAdministrator bool `json:"integrationAdministrator"`
+
+			// InventoryAccessLevel Access level for inventory.
+			InventoryAccessLevel GetRoles200InventoryAccessLevel `json:"inventoryAccessLevel"`
+
 			// Name The name of the role.
 			Name string `json:"name"`
 
-			// Users The users assigned to the role.
-			Users []struct {
-				// Email The email of the user.
-				Email openapi_types.Email `json:"email"`
+			// ReportingAdministrator Whether the role has reporting administrator privileges.
+			ReportingAdministrator bool `json:"reportingAdministrator"`
 
-				// Id The ID of the user.
-				Id openapi_types.UUID `json:"id"`
-			} `json:"users"`
+			// RoleUsers The users associated with the role.
+			RoleUsers []struct {
+				User struct {
+					// Email The email of the user.
+					Email openapi_types.Email `json:"email"`
+
+					// Id The ID of the user.
+					Id openapi_types.UUID `json:"id"`
+				} `json:"user"`
+			} `json:"roleUsers"`
+
+			// WorkflowsAccessLevel Access level for workflows.
+			WorkflowsAccessLevel GetRoles200WorkflowsAccessLevel `json:"workflowsAccessLevel"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
@@ -61352,15 +61379,6 @@ func ParseGetRolesResponse(rsp *http.Response) (*GetRolesResponse, error) {
 			return nil, err
 		}
 		response.JSON400 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
-		var dest struct {
-			Message string `json:"message"`
-		}
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON500 = &dest
 
 	}
 
@@ -61383,23 +61401,37 @@ func ParseCreateRoleResponse(rsp *http.Response) (*CreateRoleResponse, error) {
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest struct {
-			// Description The description of the role.
-			Description string `json:"description"`
+			// ApplicationAccessLevel Access level for applications.
+			ApplicationAccessLevel CreateRole200ApplicationAccessLevel `json:"applicationAccessLevel"`
 
 			// Id The ID of the role.
 			Id openapi_types.UUID `json:"id"`
 
+			// IntegrationAdministrator Whether the role has integration administrator privileges.
+			IntegrationAdministrator bool `json:"integrationAdministrator"`
+
+			// InventoryAccessLevel Access level for inventory.
+			InventoryAccessLevel CreateRole200InventoryAccessLevel `json:"inventoryAccessLevel"`
+
 			// Name The name of the role.
 			Name string `json:"name"`
 
-			// Users The users assigned to the role.
-			Users []struct {
-				// Email The email of the user.
-				Email openapi_types.Email `json:"email"`
+			// ReportingAdministrator Whether the role has reporting administrator privileges.
+			ReportingAdministrator bool `json:"reportingAdministrator"`
 
-				// Id The ID of the user.
-				Id openapi_types.UUID `json:"id"`
-			} `json:"users"`
+			// RoleUsers The users associated with the role.
+			RoleUsers []struct {
+				User struct {
+					// Email The email of the user.
+					Email openapi_types.Email `json:"email"`
+
+					// Id The ID of the user.
+					Id openapi_types.UUID `json:"id"`
+				} `json:"user"`
+			} `json:"roleUsers"`
+
+			// WorkflowsAccessLevel Access level for workflows.
+			WorkflowsAccessLevel CreateRole200WorkflowsAccessLevel `json:"workflowsAccessLevel"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
@@ -61415,29 +61447,20 @@ func ParseCreateRoleResponse(rsp *http.Response) (*CreateRoleResponse, error) {
 		}
 		response.JSON400 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
-		var dest struct {
-			Message string `json:"message"`
-		}
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON500 = &dest
-
 	}
 
 	return response, nil
 }
 
-// ParseUpdateRoleUsersResponse parses an HTTP response from a UpdateRoleUsersWithResponse call
-func ParseUpdateRoleUsersResponse(rsp *http.Response) (*UpdateRoleUsersResponse, error) {
+// ParseAddUserToRoleResponse parses an HTTP response from a AddUserToRoleWithResponse call
+func ParseAddUserToRoleResponse(rsp *http.Response) (*AddUserToRoleResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &UpdateRoleUsersResponse{
+	response := &AddUserToRoleResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -61445,23 +61468,14 @@ func ParseUpdateRoleUsersResponse(rsp *http.Response) (*UpdateRoleUsersResponse,
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest struct {
-			// Description The description of the role.
-			Description string `json:"description"`
+			// CreatedAt The date and time the user was added to the role.
+			CreatedAt time.Time `json:"createdAt"`
 
-			// Id The ID of the role.
-			Id openapi_types.UUID `json:"id"`
+			// RoleId The ID of the role.
+			RoleId openapi_types.UUID `json:"roleId"`
 
-			// Name The name of the role.
-			Name string `json:"name"`
-
-			// Users The users assigned to the role.
-			Users []struct {
-				// Email The email of the user.
-				Email openapi_types.Email `json:"email"`
-
-				// Id The ID of the user.
-				Id openapi_types.UUID `json:"id"`
-			} `json:"users"`
+			// UserId The ID of the user.
+			UserId openapi_types.UUID `json:"userId"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
@@ -61476,15 +61490,6 @@ func ParseUpdateRoleUsersResponse(rsp *http.Response) (*UpdateRoleUsersResponse,
 			return nil, err
 		}
 		response.JSON400 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
-		var dest struct {
-			Message string `json:"message"`
-		}
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON500 = &dest
 
 	}
 
@@ -61507,50 +61512,25 @@ func ParseGetScanResponse(rsp *http.Response) (*GetScanResponse, error) {
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest struct {
-			Archived                       bool       `json:"archived"`
-			ArchivedAt                     *time.Time `json:"archivedAt"`
-			CanceledAt                     *time.Time `json:"canceledAt"`
-			CommitAuthor                   *string    `json:"commitAuthor"`
-			CommitAuthorProfilePictureLink *string    `json:"commitAuthorProfilePictureLink"`
-			CommitBranch                   *string    `json:"commitBranch"`
-			CommitHash                     *string    `json:"commitHash"`
-			CommitLink                     *string    `json:"commitLink"`
-			Configuration                  struct {
-				AuthenticationUsers *[]struct {
+			Configuration struct {
+				AuthenticationContent  *interface{} `json:"authenticationContent"`
+				AuthenticationProblems *interface{} `json:"authenticationProblems"`
+				AuthenticationUsers    *[]struct {
 					HeaderName  string `json:"headerName"`
 					HeaderValue string `json:"headerValue"`
 					Name        string `json:"name"`
 				} `json:"authenticationUsers"`
-				Content               *interface{} `json:"content"`
-				CreatedAt             time.Time    `json:"createdAt"`
-				IsAuthenticationValid bool         `json:"isAuthenticationValid"`
-				IsConfigurationValid  bool         `json:"isConfigurationValid"`
-				ReadWrite             bool         `json:"readWrite"`
-				UpdatedAt             time.Time    `json:"updatedAt"`
+				CreatedAt time.Time          `json:"createdAt"`
+				Id        openapi_types.UUID `json:"id"`
 			} `json:"configuration"`
-			ConfigurationOverride  *interface{}        `json:"configurationOverride"`
-			Coverage               *float32            `json:"coverage"`
-			CreatedAt              time.Time           `json:"createdAt"`
-			EndpointRenewalFailure *bool               `json:"endpointRenewalFailure"`
-			FailedAt               *time.Time          `json:"failedAt"`
-			FinishedAt             *time.Time          `json:"finishedAt"`
-			Id                     openapi_types.UUID  `json:"id"`
-			IdempotencyKey         *openapi_types.UUID `json:"idempotencyKey"`
-			Ignored                bool                `json:"ignored"`
-			Initiator              string              `json:"initiator"`
-			Kind                   GetScan200Kind      `json:"kind"`
-			MeanDuration           *float32            `json:"meanDuration"`
-			ProgressRatio          float32             `json:"progressRatio"`
-			ReadonlyAccessToken    openapi_types.UUID  `json:"readonlyAccessToken"`
-			ReportGeneratedAt      *time.Time          `json:"reportGeneratedAt"`
-			RequestCount           *float32            `json:"requestCount"`
-			RunnerId               *string             `json:"runnerId"`
-			RunningAt              *time.Time          `json:"runningAt"`
-			SchemaRenewalFailure   *bool               `json:"schemaRenewalFailure"`
-			Score                  *float32            `json:"score"`
-			Status                 GetScan200Status    `json:"status"`
-			TotalDuration          *float32            `json:"totalDuration"`
-			UpdatedAt              time.Time           `json:"updatedAt"`
+			CreatedAt     time.Time          `json:"createdAt"`
+			FinishedAt    *time.Time         `json:"finishedAt"`
+			Id            openapi_types.UUID `json:"id"`
+			Initiator     string             `json:"initiator"`
+			ProgressRatio float32            `json:"progressRatio"`
+			Score         *float32           `json:"score"`
+			Status        GetScan200Status   `json:"status"`
+			UpdatedAt     time.Time          `json:"updatedAt"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
@@ -61565,15 +61545,6 @@ func ParseGetScanResponse(rsp *http.Response) (*GetScanResponse, error) {
 			return nil, err
 		}
 		response.JSON400 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
-		var dest struct {
-			Message string `json:"message"`
-		}
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON500 = &dest
 
 	}
 
@@ -61626,23 +61597,37 @@ func ParseGetScanExchangesArchiveResponse(rsp *http.Response) (*GetScanExchanges
 	return response, nil
 }
 
-// ParseGetScanReportResponse parses an HTTP response from a GetScanReportWithResponse call
-func ParseGetScanReportResponse(rsp *http.Response) (*GetScanReportResponse, error) {
+// ParseGetScanIssuesResponse parses an HTTP response from a GetScanIssuesWithResponse call
+func ParseGetScanIssuesResponse(rsp *http.Response) (*GetScanIssuesResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GetScanReportResponse{
+	response := &GetScanIssuesResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest struct {
-			Report string `json:"report"`
+		var dest []struct {
+			Id      openapi_types.UUID `json:"id"`
+			Ignored bool               `json:"ignored"`
+			Issues  []struct {
+				Id      openapi_types.UUID `json:"id"`
+				Ignored bool               `json:"ignored"`
+			} `json:"issues"`
+			Severity GetScanIssues200Severity `json:"severity"`
+			Test     struct {
+				Category GetScanIssues200TestCategory `json:"category"`
+				Meta     struct {
+					TitleOnFail string `json:"titleOnFail"`
+					Type        string `json:"type"`
+				} `json:"meta"`
+				SecurityTestUid string `json:"securityTestUid"`
+			} `json:"test"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
@@ -61657,15 +61642,6 @@ func ParseGetScanReportResponse(rsp *http.Response) (*GetScanReportResponse, err
 			return nil, err
 		}
 		response.JSON400 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
-		var dest struct {
-			Message string `json:"message"`
-		}
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON500 = &dest
 
 	}
 
