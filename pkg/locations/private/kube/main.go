@@ -34,7 +34,7 @@ func inferConfig() (*rest.Config, error) {
 	}
 }
 
-func connectAndRun(ctx context.Context, client *v1.ClientWithResponses, cfg *rest.Config, isConnected *atomic.Bool, locationId *types.UUID, locationName string) error {
+func connectAndRun(ctx context.Context, cfg *rest.Config, isConnected *atomic.Bool, locationId *types.UUID, locationName string) error {
 	ctx, cancel := context.WithCancel(ctx)
 	defer cancel()
 
@@ -54,6 +54,13 @@ func connectAndRun(ctx context.Context, client *v1.ClientWithResponses, cfg *res
 	lis, err := srv.Listen(defaultAddress, defaultPort)
 	if err != nil {
 		return fmt.Errorf("error listening: %w", err)
+	}
+
+	// Temporary client definition while integrations are migrated to v2
+	// TODO: Remove this once integrations are migrated to v2
+	client, err := v1.NewAPIClient()
+	if err != nil {
+		return fmt.Errorf("error creating client: %w", err)
 	}
 
 	go func() {
@@ -84,7 +91,7 @@ func connectAndRun(ctx context.Context, client *v1.ClientWithResponses, cfg *res
 	return nil
 }
 
-func Start(ctx context.Context, client *v1.ClientWithResponses, locationId *types.UUID, locationName string, healthy *atomic.Bool) {
+func Start(ctx context.Context, locationId *types.UUID, locationName string, healthy *atomic.Bool) {
 	cfg, err := inferConfig()
 	if err != nil {
 		log.Debug("Error inferring kubeconfig: %s", err)
@@ -92,7 +99,7 @@ func Start(ctx context.Context, client *v1.ClientWithResponses, locationId *type
 		return
 	}
 	for {
-		err = connectAndRun(ctx, client, cfg, healthy, locationId, locationName)
+		err = connectAndRun(ctx, cfg, healthy, locationId, locationName)
 		if err != nil {
 			log.Error("Error connecting to k8s API: %s", err)
 		}
