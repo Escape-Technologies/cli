@@ -1758,6 +1758,9 @@
                                           "parameters": {
                                             "type": "object",
                                             "properties": {
+                                              "proxy": {
+                                                "type": "string"
+                                              },
                                               "url": {
                                                 "type": "string"
                                               },
@@ -1861,9 +1864,6 @@
                                               "body": {
                                                 "nullable": true
                                               },
-                                              "proxy": {
-                                                "type": "string"
-                                              },
                                               "timeout": {
                                                 "type": "number"
                                               },
@@ -1932,9 +1932,15 @@
                                           "parameters": {
                                             "type": "object",
                                             "properties": {
+                                              "proxy": {
+                                                "type": "string"
+                                              },
                                               "first_request": {
                                                 "type": "object",
                                                 "properties": {
+                                                  "proxy": {
+                                                    "type": "string"
+                                                  },
                                                   "url": {
                                                     "type": "string"
                                                   },
@@ -2037,9 +2043,6 @@
                                                   },
                                                   "body": {
                                                     "nullable": true
-                                                  },
-                                                  "proxy": {
-                                                    "type": "string"
                                                   },
                                                   "timeout": {
                                                     "type": "number"
@@ -2178,11 +2181,17 @@
                                           "parameters": {
                                             "type": "object",
                                             "properties": {
+                                              "proxy": {
+                                                "type": "string"
+                                              },
                                               "login_url": {
                                                 "type": "string"
                                               },
-                                              "proxy": {
-                                                "type": "string"
+                                              "auto_extraction_urls": {
+                                                "type": "array",
+                                                "items": {
+                                                  "type": "string"
+                                                }
                                               }
                                             },
                                             "required": [
@@ -2281,11 +2290,17 @@
                                           "parameters": {
                                             "type": "object",
                                             "properties": {
+                                              "proxy": {
+                                                "type": "string"
+                                              },
                                               "login_url": {
                                                 "type": "string"
                                               },
-                                              "proxy": {
-                                                "type": "string"
+                                              "auto_extraction_urls": {
+                                                "type": "array",
+                                                "items": {
+                                                  "type": "string"
+                                                }
                                               }
                                             },
                                             "required": [
@@ -3556,6 +3571,12 @@
                                           "nullable": true
                                         }
                                       ]
+                                    },
+                                    "auto_extraction_urls": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "string"
+                                      }
                                     }
                                   },
                                   "required": [
@@ -3876,6 +3897,12 @@
                                           "nullable": true
                                         }
                                       ]
+                                    },
+                                    "auto_extraction_urls": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "string"
+                                      }
                                     },
                                     "login_url": {
                                       "type": "string"

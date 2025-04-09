@@ -1,66 +1,129 @@
 package cli
 
 import (
-	"encoding/json"
 	"fmt"
-	"os"
 
-	v1 "github.com/Escape-Technologies/cli/pkg/api/v1"
+	"github.com/Escape-Technologies/cli/pkg/api/escape/scans"
 	"github.com/google/uuid"
 	"github.com/spf13/cobra"
 )
 
-var startScanCmd = &cobra.Command{
-	Use:     "start-scan [applicationId]",
-	Short:   "Trigger a scan on an application",
+var scanCmd = &cobra.Command{
+	Use:     "scan",
+	Aliases: []string{"sc"},
+	Short:   "Scan commands",
+}
+
+var getScanCmd = &cobra.Command{
+	Use:     "get [scanId]",
+	Short:   "Get a scan by ID",
 	Args:    cobra.ExactArgs(1),
-	Example: "escape-cli start-scan 123e4567-e89b-12d3-a456-426614174001",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		applicationIdString := args[0]
-		fmt.Printf("Triggering scan for application %s\n\n", applicationIdString)
-		applicationId, err := uuid.Parse(applicationIdString)
+		scanId, err := uuid.Parse(args[0])
 		if err != nil {
 			return fmt.Errorf("invalid UUID format: %w", err)
 		}
-
-		client, err := v1.NewAPIClient()
+		scan, err := scans.GetScan(cmd.Context(), scanId)
 		if err != nil {
-			return fmt.Errorf("failed to create API client: %w", err)
+			return fmt.Errorf("failed to get scan: %w", err)
 		}
+		return print(scan, func() {
+			fmt.Println(scan.String())
+		})
+	},
+}
 
-		body := v1.PostApplicationsIdStartScanJSONRequestBody{}
-		scan, err := client.PostApplicationsIdStartScanWithResponse(cmd.Context(), applicationId, body)
+var getScanIssuesCmd = &cobra.Command{
+	Use:     "issues [scanId]",
+	Short:   "Get issues for a scan by ID",
+	Args:    cobra.ExactArgs(1),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		scanId, err := uuid.Parse(args[0])
 		if err != nil {
-			return err
+			return fmt.Errorf("invalid UUID format: %w", err)
 		}
-		// Handle response
-		var data interface{}
-		if scan.JSON200 != nil {
-			print(
-				scan.JSON200,
-				func() {
-					fmt.Printf("-> Scan successfully launched\n")
-					fmt.Printf("Scan ID: %s\n", scan.JSON200.Id)
-				},
-			)
-			return nil
-		} else if scan.JSON400 != nil {
-			data = scan.JSON400
-		} else {
-			data = scan.JSON500
+		issues, err := scans.GetScanIssues(cmd.Context(), scanId)
+		if err != nil {
+			return fmt.Errorf("failed to get scan issues: %w", err)
 		}
-		print(
-			data,
-			func() {
-				var responseMessage map[string]interface{}
-				json.Unmarshal(scan.Body, &responseMessage)
+		return print(issues, func() {
+			fmt.Print(scans.FormatReportsTable(issues))
+		})
+	},
+}
 
-				// Print status code and error message
-				fmt.Println(scan.HTTPResponse.Status)
-				fmt.Printf("%s\n\n", responseMessage["message"])
-			},
-		)
-		os.Exit(1)
-		return err
+var getScanIssueCmd = &cobra.Command{
+	Use:     "issue [scanId] [issueId]",
+	Short:   "Get an issue for a scan by Issue ID",
+	Args:    cobra.ExactArgs(2),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		scanId, err := uuid.Parse(args[0])
+		if err != nil {
+			return fmt.Errorf("invalid UUID format: %w", err)
+		}
+		issueId, err := uuid.Parse(args[1])
+		if err != nil {
+			return fmt.Errorf("invalid UUID format: %w", err)
+		}
+		issues, err := scans.GetScanIssue(cmd.Context(), scanId, issueId)
+		if err != nil {
+			return fmt.Errorf("failed to get scan issue: %w", err)
+		}
+		return print(issues, func() {
+			fmt.Print(scans.FormatIssuesTable(issues))
+		})
+	},
+}
+
+var getScanExchangeArchiveCmd = &cobra.Command{
+	Use:     "exchange-archive [scanId]",
+	Short:   "Get the exchange archive for a scan by ID",
+	Args:    cobra.ExactArgs(1),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		scanId, err := uuid.Parse(args[0])
+		if err != nil {
+			return fmt.Errorf("invalid UUID format: %w", err)
+		}
+		archive, err := scans.GetScanExchangeArchive(cmd.Context(), scanId)
+		if err != nil {
+			return fmt.Errorf("failed to get scan exchange archive: %w", err)
+		}
+		return print(archive, func() {
+			fmt.Println(archive.String())
+		})
+	},
+}
+
+var getScanEventsCmd = &cobra.Command{
+	Use:     "events [scanId]",
+	Short:   "Get events for a scan by ID",
+	Args:    cobra.ExactArgs(1),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		size := 100
+		scanId, err := uuid.Parse(args[0])
+		if err != nil {
+			return fmt.Errorf("invalid UUID format: %w", err)
+		}
+		
+		events, nextCursor, err := scans.GetScanEvents(cmd.Context(), scanId, &size, nil)
+		if err != nil {
+			return fmt.Errorf("failed to get scan events: %w", err)
+		}
+		
+		for _, event := range events {
+			print(event, func() { fmt.Println(event.String()) })
+		}
+
+		for nextCursor != nil {
+			events, nextCursor, err = scans.GetScanEvents(cmd.Context(), scanId, &size, nextCursor)
+			if err != nil {
+				return fmt.Errorf("failed to get scan events: %w", err)
+			}
+			
+			for _, event := range events {
+				print(event, func() { fmt.Println(event.String()) })
+			}
+		}
+		return nil
 	},
 }
