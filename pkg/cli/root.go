@@ -116,8 +116,13 @@ func Run() error {
 	integrationsKubernetesCmd.AddCommand(integrationsKubernetesDelete)
 
 	// Scan
-	rootCmd.AddCommand(startScanCmd)
-
+	rootCmd.AddCommand(scanCmd)
+	scanCmd.AddCommand(getScanCmd)
+	scanCmd.AddCommand(getScanIssuesCmd)
+	scanCmd.AddCommand(getScanIssueCmd)
+	scanCmd.AddCommand(getScanExchangeArchiveCmd)
+	scanCmd.AddCommand(getScanEventsCmd)
+	
 	// Domains
 	rootCmd.AddCommand(domainsCmd)
 	domainsCmd.AddCommand(domainsList)
