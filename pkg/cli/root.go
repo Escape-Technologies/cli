@@ -126,5 +126,9 @@ func Run() error {
 	rootCmd.AddCommand(subdomainsCmd)
 	subdomainsCmd.AddCommand(subdomainsList)
 
+	// Upload
+	rootCmd.AddCommand(uploadCmd)
+	uploadCmd.AddCommand(uploadUrlCmd)
+
 	return rootCmd.Execute()
 }
