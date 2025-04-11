@@ -13,4 +13,8 @@ PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
 
     # Generate the code binding on openAPI schema
     go generate ./...
+    docker run --rm -v "./:/local" openapitools/openapi-generator-cli generate \
+    -i https://public.escape.tech/v2/openapi.json \
+    -g go \
+    -o /local/out/go
 )
