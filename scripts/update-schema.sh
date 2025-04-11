@@ -9,7 +9,7 @@ PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
 
     # Retrieve the schema from the public API
     curl -s https://public.escape.tech/v1/openapi.json | jq > "${PROJECT_ROOT}/assets/public-api-v1.json"
-    curl -s https://public.escape.tech/v2/openapi.json | jq > "${PROJECT_ROOT}/assets/public-api-v2.json"
+    curl -s http://localhost:4004/v2/openapi.json | jq > "${PROJECT_ROOT}/assets/public-api-v2.json"
 
     # Generate the code binding on openAPI schema
     go generate ./...
