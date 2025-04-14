@@ -1,5 +1,9 @@
 {
     "yaml.schemas": {
         "assets/oapi-configuration-schema.json": "pkg/api/config.yaml"
+    },
+    "search.exclude": {
+        "pkg/api/v2/**": true,
+        "pkg/api/v1/**": true
     }
 }

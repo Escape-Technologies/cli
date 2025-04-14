@@ -110,7 +110,11 @@ func Run() error {
 	integrationsCmd.AddCommand(integrationsKubernetesCmd)
 	integrationsKubernetesCmd.AddCommand(integrationsKubernetesList)
 	integrationsKubernetesCmd.AddCommand(integrationsKubernetesDelete)
-
+	//v2
+	integrationsCmd.AddCommand(integrationsListCmd)
+	integrationsCmd.AddCommand(integrationsGetCmd)
+	integrationsCmd.AddCommand(integrationsCreateCmd)
+	
 	// Scan
 	rootCmd.AddCommand(startScanCmd)
 
