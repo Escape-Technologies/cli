@@ -1,4 +1,4 @@
-package cmds
+package cmd
 
 import (
 	"github.com/spf13/cobra"
@@ -42,5 +42,5 @@ func init() {
 	integrationsCmd.AddCommand(integrationsListCmd)
 	integrationsCmd.AddCommand(integrationsCreateCmd)
 	integrationsCmd.AddCommand(integrationsDeleteCmd)
-	RootCmd.AddCommand(integrationsCmd)
+	rootCmd.AddCommand(integrationsCmd)
 }

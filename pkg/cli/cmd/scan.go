@@ -1,4 +1,4 @@
-package cmds
+package cmd
 
 import (
 	"github.com/spf13/cobra"
@@ -78,5 +78,5 @@ func init() {
 	scansCmd.AddCommand(scanResultsCmd)
 	scansCmd.AddCommand(scanDownloadCmd)
 	scansCmd.AddCommand(scanReportCmd)
-	RootCmd.AddCommand(scansCmd)
+	rootCmd.AddCommand(scansCmd)
 }
