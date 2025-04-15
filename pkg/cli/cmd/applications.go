@@ -28,10 +28,19 @@ var applicationGetCmd = &cobra.Command{
 	},
 }
 
-var applicationUpdateCmd = &cobra.Command{
-	Use:     "update",
-	Aliases: []string{"up"},
-	Short:   "Update an application current configuration",
+var applicationUpdateSchemaCmd = &cobra.Command{
+	Use:   "update-schema",
+	Short: "Update the schema of an application",
+	Args:  cobra.ExactArgs(2),
+	Run: func(cmd *cobra.Command, args []string) {
+		// TODO(quentin@escape.tech): Implement this
+	},
+}
+
+var applicationUpdateConfigCmd = &cobra.Command{
+	Use:   "update-config",
+	Short: "Update the configuration of an application",
+	Args:  cobra.ExactArgs(2),
 	Run: func(cmd *cobra.Command, args []string) {
 		// TODO(quentin@escape.tech): Implement this
 	},
@@ -40,6 +49,7 @@ var applicationUpdateCmd = &cobra.Command{
 func init() {
 	applicationsCmd.AddCommand(applicationsListCmd)
 	applicationsCmd.AddCommand(applicationGetCmd)
-	applicationsCmd.AddCommand(applicationUpdateCmd)
+	applicationsCmd.AddCommand(applicationUpdateSchemaCmd)
+	applicationsCmd.AddCommand(applicationUpdateConfigCmd)
 	rootCmd.AddCommand(applicationsCmd)
 }
