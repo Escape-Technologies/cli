@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/Escape-Technologies/cli/pkg/cli/cmds"
 	"github.com/Escape-Technologies/cli/pkg/log"
 	"github.com/sirupsen/logrus"
-	"github.com/spf13/cobra"
 	"gopkg.in/yaml.v3"
 )
 
@@ -59,72 +59,76 @@ func setupTerminalLog() {
 	}
 }
 
+// func Run() error {
+// 	var outputStr string
+// 	rootCmd := &cobra.Command{
+// 		Use:   "escape-cli",
+// 		Short: "CLI to interact with Escape API",
+// 		PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
+// 			if verbose {
+// 				log.SetLevel(logrus.TraceLevel)
+// 			}
+// 			switch outputStr {
+// 			case "":
+// 				output = outputPretty
+// 			case "json":
+// 				output = outputJSON
+// 			case "yaml":
+// 				output = outputYAML
+// 			case "yml":
+// 				output = outputYAML
+// 			case "pretty":
+// 				output = outputPretty
+// 			default:
+// 				return fmt.Errorf("invalid output format: %s", outputStr)
+// 			}
+// 			log.Trace("Output format set to %s", output)
+// 			return nil
+// 		},
+// 		PostRun: func(cmd *cobra.Command, args []string) {
+// 			log.Trace("Main cli done, exiting")
+// 		},
+// 	}
+// 	// Flags
+// 	rootCmd.PersistentFlags().BoolVarP(&verbose, "verbose", "v", false, "Enable verbose output")
+// 	rootCmd.PersistentFlags().StringVarP(&outputStr, "output", "o", "pretty", "Output format (pretty|json|yaml)")
+
+// 	// Version
+// 	rootCmd.AddCommand(versionCmd)
+
+// 	// Locations
+// 	rootCmd.AddCommand(locationsCmd)
+// 	locationsCmd.AddCommand(locationsListCmd)
+// 	locationsCmd.AddCommand(locationsGetCmd)
+// 	locationsCmd.AddCommand(locationsCreateCmd)
+// 	locationsCmd.AddCommand(locationsStartCmd)
+
+// 	// Integrations
+// 	rootCmd.AddCommand(integrationsCmd)
+// 	integrationsCmd.AddCommand(integrationsAkamaiCmd)
+// 	integrationsAkamaiCmd.AddCommand(integrationsAkamaiList)
+// 	integrationsCmd.AddCommand(integrationsKubernetesCmd)
+// 	integrationsKubernetesCmd.AddCommand(integrationsKubernetesList)
+// 	integrationsKubernetesCmd.AddCommand(integrationsKubernetesDelete)
+// 	//v2
+// 	integrationsCmd.AddCommand(integrationsListCmd)
+// 	integrationsCmd.AddCommand(integrationsGetCmd)
+// 	integrationsCmd.AddCommand(integrationsCreateCmd)
+
+// 	// Scan
+// 	rootCmd.AddCommand(startScanCmd)
+
+// 	// Domains
+// 	rootCmd.AddCommand(domainsCmd)
+// 	domainsCmd.AddCommand(domainsList)
+
+// 	// Subdomains
+// 	rootCmd.AddCommand(subdomainsCmd)
+// 	subdomainsCmd.AddCommand(subdomainsList)
+
+// 	return rootCmd.Execute()
+// }
+
 func Run() error {
-	var outputStr string
-	rootCmd := &cobra.Command{
-		Use:   "escape-cli",
-		Short: "CLI to interact with Escape API",
-		PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
-			if verbose {
-				log.SetLevel(logrus.TraceLevel)
-			}
-			switch outputStr {
-			case "":
-				output = outputPretty
-			case "json":
-				output = outputJSON
-			case "yaml":
-				output = outputYAML
-			case "yml":
-				output = outputYAML
-			case "pretty":
-				output = outputPretty
-			default:
-				return fmt.Errorf("invalid output format: %s", outputStr)
-			}
-			log.Trace("Output format set to %s", output)
-			return nil
-		},
-		PostRun: func(cmd *cobra.Command, args []string) {
-			log.Trace("Main cli done, exiting")
-		},
-	}
-	// Flags
-	rootCmd.PersistentFlags().BoolVarP(&verbose, "verbose", "v", false, "Enable verbose output")
-	rootCmd.PersistentFlags().StringVarP(&outputStr, "output", "o", "pretty", "Output format (pretty|json|yaml)")
-
-	// Version
-	rootCmd.AddCommand(versionCmd)
-
-	// Locations
-	rootCmd.AddCommand(locationsCmd)
-	locationsCmd.AddCommand(locationsListCmd)
-	locationsCmd.AddCommand(locationsGetCmd)
-	locationsCmd.AddCommand(locationsCreateCmd)
-	locationsCmd.AddCommand(locationsStartCmd)
-
-	// Integrations
-	rootCmd.AddCommand(integrationsCmd)
-	integrationsCmd.AddCommand(integrationsAkamaiCmd)
-	integrationsAkamaiCmd.AddCommand(integrationsAkamaiList)
-	integrationsCmd.AddCommand(integrationsKubernetesCmd)
-	integrationsKubernetesCmd.AddCommand(integrationsKubernetesList)
-	integrationsKubernetesCmd.AddCommand(integrationsKubernetesDelete)
-	//v2
-	integrationsCmd.AddCommand(integrationsListCmd)
-	integrationsCmd.AddCommand(integrationsGetCmd)
-	integrationsCmd.AddCommand(integrationsCreateCmd)
-	
-	// Scan
-	rootCmd.AddCommand(startScanCmd)
-
-	// Domains
-	rootCmd.AddCommand(domainsCmd)
-	domainsCmd.AddCommand(domainsList)
-
-	// Subdomains
-	rootCmd.AddCommand(subdomainsCmd)
-	subdomainsCmd.AddCommand(subdomainsList)
-
-	return rootCmd.Execute()
+	return cmds.RootCmd.Execute()
 }

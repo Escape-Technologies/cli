@@ -7,7 +7,6 @@ import (
 	"sync/atomic"
 	"time"
 
-	v1 "github.com/Escape-Technologies/cli/pkg/api/v1"
 	"github.com/Escape-Technologies/cli/pkg/log"
 	"github.com/oapi-codegen/runtime/types"
 	"k8s.io/client-go/rest"
@@ -56,13 +55,6 @@ func connectAndRun(ctx context.Context, cfg *rest.Config, isConnected *atomic.Bo
 		return fmt.Errorf("error listening: %w", err)
 	}
 
-	// Temporary client definition while integrations are migrated to v2
-	// TODO: Remove this once integrations are migrated to v2
-	client, err := v1.NewAPIClient()
-	if err != nil {
-		return fmt.Errorf("error creating client: %w", err)
-	}
-
 	go func() {
 		for !isConnected.Load() || ctx.Err() != nil {
 			time.Sleep(1 * time.Second)
@@ -73,7 +65,7 @@ func connectAndRun(ctx context.Context, cfg *rest.Config, isConnected *atomic.Bo
 		}
 		log.Info("Connected to k8s API")
 		log.Trace("Upserting k8s integration")
-		err = UpsertIntegration(ctx, client, locationId, locationName)
+		err = UpsertIntegration(ctx, locationId, locationName)
 		if err != nil {
 			log.Error("Error upserting integration: %s", err)
 			return
