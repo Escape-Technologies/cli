@@ -20,10 +20,10 @@ var integrationsListCmd = &cobra.Command{
 }
 
 var integrationsCreateCmd = &cobra.Command{
-	Use:     "create",
-	Aliases: []string{"apply", "update"},
-	Short:   "Create an integration or update an existing one",
-	Args:    cobra.ExactArgs(1),
+	Use:     "apply",
+	Aliases: []string{"create", "update"},
+	Short:   "Update the integration based on a configuration file",
+	Args:    cobra.ExactArgs(2),
 	Run: func(cmd *cobra.Command, args []string) {
 		// TODO(quentin@escape.tech): Implement this
 	},
