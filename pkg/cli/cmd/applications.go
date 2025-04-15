@@ -1,4 +1,4 @@
-package cmds
+package cmd
 
 import (
 	"github.com/spf13/cobra"
@@ -41,5 +41,5 @@ func init() {
 	applicationsCmd.AddCommand(applicationsListCmd)
 	applicationsCmd.AddCommand(applicationGetCmd)
 	applicationsCmd.AddCommand(applicationUpdateCmd)
-	RootCmd.AddCommand(applicationsCmd)
+	rootCmd.AddCommand(applicationsCmd)
 }

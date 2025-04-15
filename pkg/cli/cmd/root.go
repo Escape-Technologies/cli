@@ -1,4 +1,4 @@
-package cmds
+package cmd
 
 import (
 	"fmt"
@@ -12,7 +12,7 @@ import (
 var rootCmdVerbose bool
 var rootCmdOutputStr string
 
-var RootCmd = &cobra.Command{
+var rootCmd = &cobra.Command{
 	Use:   "escape-cli",
 	Short: "CLI to interact with Escape API",
 	PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
@@ -31,6 +31,10 @@ var RootCmd = &cobra.Command{
 }
 
 func init() {
-	RootCmd.PersistentFlags().BoolVarP(&rootCmdVerbose, "verbose", "v", false, "enable verbose output")
-	RootCmd.PersistentFlags().StringVarP(&rootCmdOutputStr, "output", "o", "pretty", "output format (pretty|json|yaml)")
+	rootCmd.PersistentFlags().BoolVarP(&rootCmdVerbose, "verbose", "v", false, "enable verbose output")
+	rootCmd.PersistentFlags().StringVarP(&rootCmdOutputStr, "output", "o", "pretty", "output format (pretty|json|yaml)")
+}
+
+func Execute() error {
+	return rootCmd.Execute()
 }
