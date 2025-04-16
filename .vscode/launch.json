@@ -8,7 +8,10 @@
       "mode": "auto",
       "program": "cmd/main.go",
       "envFile": "${workspaceFolder}/.env",
-      "args": ["locations", "list"]
+      "args": [
+        "locations",
+        "list"
+      ]
     },
     {
       "name": "Locations Upsert",
@@ -17,7 +20,12 @@
       "mode": "auto",
       "program": "cmd/main.go",
       "envFile": "${workspaceFolder}/.env",
-      "args": ["locations", "upsert", "test", "--new"]
+      "args": [
+        "locations",
+        "upsert",
+        "test",
+        "--new"
+      ]
     },
     {
       "name": "Locations Start",
@@ -26,7 +34,24 @@
       "mode": "auto",
       "program": "cmd/main.go",
       "envFile": "${workspaceFolder}/.env",
-      "args": ["locations", "start", "test"]
+      "args": [
+        "locations",
+        "start",
+        "test"
+      ]
+    },
+    {
+      "name": "Integrations Get",
+      "type": "go",
+      "request": "launch",
+      "mode": "auto",
+      "program": "cmd/main.go",
+      "envFile": "${workspaceFolder}/.env",
+      "args": [
+        "integrations",
+        "get",
+        "438d2637-1cdf-47c7-983c-f46a580532ae"
+      ]
     }
   ]
 }
