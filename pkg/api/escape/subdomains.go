@@ -9,12 +9,12 @@ import (
 	v2 "github.com/Escape-Technologies/cli/pkg/api/v2"
 )
 
-func ListSubdomains(ctx context.Context, count *int, after *string) ([]v2.GetSubdomains200ResponseDataInner, string, error) {
+func ListSubdomains(ctx context.Context, count *int, after *string) ([]v2.ListSubdomains200ResponseDataInner, string, error) {
 	client, err := newAPIV2Client()
 	if err != nil {
 		return nil, "", fmt.Errorf("unable to init client: %w", err)
 	}
-	req := client.SubdomainsAPI.GetSubdomains(ctx)
+	req := client.SubdomainsAPI.ListSubdomains(ctx)
 	if count != nil {
 		req = req.Count(*count)
 	}
