@@ -1,0 +1,136 @@
+package escape
+
+import (
+	"context"
+	"encoding/json"
+	"errors"
+	"fmt"
+	"io"
+	"os"
+	"strings"
+
+	v2 "github.com/Escape-Technologies/cli/pkg/api/v2"
+	"github.com/Escape-Technologies/cli/pkg/env"
+	"gopkg.in/yaml.v2"
+)
+
+func ListApplications(ctx context.Context) ([]v2.ListApplications200ResponseInner, error) {
+	client, err := newAPIV2Client()
+	if err != nil {
+		return nil, fmt.Errorf("unable to init client: %w", err)
+	}
+	data, _, err := client.ApplicationsAPI.ListApplications(ctx).Execute()
+	if err != nil {
+		return nil, fmt.Errorf("api error: %w", err)
+	}
+	if data == nil {
+		return nil, errors.New("no data received")
+	}
+	return data, nil
+}
+
+func GetApplication(ctx context.Context, id string) (*v2.GetApplication200Response, error) {
+	client, err := newAPIV2Client()
+	if err != nil {
+		return nil, fmt.Errorf("unable to init client: %w", err)
+	}
+	data, _, err := client.ApplicationsAPI.GetApplication(ctx, id).Execute()
+	if err != nil {
+		return nil, fmt.Errorf("api error: %w", err)
+	}
+	if data == nil {
+		return nil, errors.New("no data received")
+	}
+	return data, nil
+}
+
+func UpdateApplicationSchema(ctx context.Context, id string, schemaPathOrURL string) error {
+	client, err := newAPIV2Client()
+	if err != nil {
+		return fmt.Errorf("unable to init client: %w", err)
+	}
+	blobId, url, err := schemaToS3(ctx, schemaPathOrURL)
+	if err != nil {
+		return fmt.Errorf("unable to upload schema: %w", err)
+	}
+	_, _, err = client.ApplicationsAPI.UpdateSchema(ctx, id).CreateApplicationRequestSchema(v2.CreateApplicationRequestSchema{
+		Url:    url,
+		BlobId: blobId,
+	}).Execute()
+	if err != nil {
+		return fmt.Errorf("api error: %w", err)
+	}
+	return nil
+}
+
+func schemaToS3(ctx context.Context, schemaPathOrURL string) (string, *string, error) {
+	body, url, err := pullSchema(schemaPathOrURL)
+	if err != nil {
+		return "", nil, fmt.Errorf("invalid schema: %w", err)
+	}
+	blobId, err := UploadToS3(ctx, body)
+	if err != nil {
+		return "", nil, fmt.Errorf("unable to upload schema: %w", err)
+	}
+	return blobId, url, nil
+}
+
+func pullSchema(schemaPathOrURL string) (string, *string, error) {
+	if strings.HasPrefix(schemaPathOrURL, "http") {
+		body, err := pullSchemaFromURL(schemaPathOrURL)
+		if err != nil {
+			return "", nil, fmt.Errorf("unable to pull schema from URL %s: %w", schemaPathOrURL, err)
+		}
+		return body, &schemaPathOrURL, nil
+	} else {
+		body, err := pullSchemaFromPath(schemaPathOrURL)
+		if err != nil {
+			return "", nil, fmt.Errorf("unable to read file %s: %w", schemaPathOrURL, err)
+		}
+		return body, nil, nil
+	}
+}
+
+func pullSchemaFromPath(path string) (string, error) {
+	body, err := os.ReadFile(path)
+	if err != nil {
+		return "", fmt.Errorf("read error: %w", err)
+	}
+	err = parseSchema(body)
+	if err != nil {
+		return "", fmt.Errorf("unable to parse schema: %w", err)
+	}
+	return string(body), nil
+}
+
+func pullSchemaFromURL(url string) (string, error) {
+	resp, err := env.GetHTTPClient().Get(url)
+	if err != nil {
+		return "", fmt.Errorf("HTTP error: %w", err)
+	}
+	defer resp.Body.Close()
+	if resp.StatusCode != 200 {
+		return "", fmt.Errorf("HTTP error: %w", fmt.Errorf("status code: %d", resp.StatusCode))
+	}
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return "", fmt.Errorf("unable to read body: %w", err)
+	}
+	err = parseSchema(body)
+	if err != nil {
+		return "", fmt.Errorf("unable to parse schema: %w", err)
+	}
+	return string(body), nil
+}
+
+func parseSchema(body []byte) error {
+	var schema map[string]interface{}
+	err := json.Unmarshal(body, &schema)
+	if err != nil {
+		err = yaml.Unmarshal(body, &schema)
+		if err != nil {
+			return fmt.Errorf("schema is neither json nor yaml: %w", err)
+		}
+	}
+	return nil
+}
