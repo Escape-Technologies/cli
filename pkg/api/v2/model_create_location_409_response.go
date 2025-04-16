@@ -23,6 +23,7 @@ var _ MappedNullable = &CreateLocation409Response{}
 type CreateLocation409Response struct {
 	Message string `json:"message"`
 	Field string `json:"field"`
+	InstanceId string `json:"instanceId"`
 }
 
 type _CreateLocation409Response CreateLocation409Response
@@ -31,10 +32,11 @@ type _CreateLocation409Response CreateLocation409Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateLocation409Response(message string, field string) *CreateLocation409Response {
+func NewCreateLocation409Response(message string, field string, instanceId string) *CreateLocation409Response {
 	this := CreateLocation409Response{}
 	this.Message = message
 	this.Field = field
+	this.InstanceId = instanceId
 	return &this
 }
 
@@ -94,6 +96,30 @@ func (o *CreateLocation409Response) SetField(v string) {
 	o.Field = v
 }
 
+// GetInstanceId returns the InstanceId field value
+func (o *CreateLocation409Response) GetInstanceId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.InstanceId
+}
+
+// GetInstanceIdOk returns a tuple with the InstanceId field value
+// and a boolean to check if the value has been set.
+func (o *CreateLocation409Response) GetInstanceIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.InstanceId, true
+}
+
+// SetInstanceId sets field value
+func (o *CreateLocation409Response) SetInstanceId(v string) {
+	o.InstanceId = v
+}
+
 func (o CreateLocation409Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -106,6 +132,7 @@ func (o CreateLocation409Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["message"] = o.Message
 	toSerialize["field"] = o.Field
+	toSerialize["instanceId"] = o.InstanceId
 	return toSerialize, nil
 }
 
@@ -116,6 +143,7 @@ func (o *CreateLocation409Response) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"message",
 		"field",
+		"instanceId",
 	}
 
 	allProperties := make(map[string]interface{})

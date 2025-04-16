@@ -5,6 +5,7 @@ import (
 	"fmt"
 
 	v2 "github.com/Escape-Technologies/cli/pkg/api/v2"
+	"github.com/Escape-Technologies/cli/pkg/log"
 )
 
 func ListLocations(ctx context.Context) ([]v2.ListLocations200ResponseInner, error) {
@@ -76,4 +77,19 @@ func DeleteLocation(ctx context.Context, id string) error {
 		return fmt.Errorf("unable to delete location: %w", err)
 	}
 	return nil
+}
+
+func UpsertLocation(ctx context.Context, name, sshPublicKey string) error {
+	err := CreateLocation(ctx, name, sshPublicKey)
+	if err == nil {
+		return nil
+	}
+
+	if oapiErr, ok := err.(v2.GenericOpenAPIError); ok {
+		if conflict, ok := oapiErr.Model().(v2.CreateLocation409Response); ok {
+			log.Debug("Location already exists, updating %s", conflict.InstanceId)
+			return UpdateLocation(ctx, conflict.InstanceId, name, sshPublicKey)
+		}
+	}
+	return err
 }
