@@ -76,8 +76,12 @@ var applicationUpdateConfigCmd = &cobra.Command{
 	Use:   "update-config",
 	Short: "Update the configuration of an application",
 	Args:  cobra.ExactArgs(2),
-	Run: func(cmd *cobra.Command, args []string) {
-		// TODO(quentin@escape.tech): Implement this
+	RunE: func(cmd *cobra.Command, args []string) error {
+		err := escape.UpdateApplicationConfig(cmd.Context(), args[0], args[1])
+		if err != nil {
+			return fmt.Errorf("unable to update config: %w", err)
+		}
+		return nil
 	},
 }
 
