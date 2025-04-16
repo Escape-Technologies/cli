@@ -7,8 +7,9 @@ import (
 	"sync/atomic"
 	"time"
 
+	"github.com/Escape-Technologies/cli/pkg/api/escape"
+	v2 "github.com/Escape-Technologies/cli/pkg/api/v2"
 	"github.com/Escape-Technologies/cli/pkg/log"
-	"github.com/oapi-codegen/runtime/types"
 	"k8s.io/client-go/rest"
 	"k8s.io/client-go/tools/clientcmd"
 	"k8s.io/kubectl/pkg/proxy"
@@ -33,7 +34,7 @@ func inferConfig() (*rest.Config, error) {
 	}
 }
 
-func connectAndRun(ctx context.Context, cfg *rest.Config, isConnected *atomic.Bool, locationId *types.UUID, locationName string) error {
+func connectAndRun(ctx context.Context, cfg *rest.Config, isConnected *atomic.Bool, locationId string, locationName string) error {
 	ctx, cancel := context.WithCancel(ctx)
 	defer cancel()
 
@@ -65,7 +66,10 @@ func connectAndRun(ctx context.Context, cfg *rest.Config, isConnected *atomic.Bo
 		}
 		log.Info("Connected to k8s API")
 		log.Trace("Upserting k8s integration")
-		err = UpsertIntegration(ctx, locationId, locationName)
+		err = escape.UpsertIntegration(ctx, &v2.UpdateIntegrationRequest{
+			Name:       locationName,
+			LocationId: &locationId,
+		})
 		if err != nil {
 			log.Error("Error upserting integration: %s", err)
 			return
@@ -83,7 +87,7 @@ func connectAndRun(ctx context.Context, cfg *rest.Config, isConnected *atomic.Bo
 	return nil
 }
 
-func Start(ctx context.Context, locationId *types.UUID, locationName string, healthy *atomic.Bool) {
+func Start(ctx context.Context, locationId string, locationName string, healthy *atomic.Bool) {
 	cfg, err := inferConfig()
 	if err != nil {
 		log.Debug("Error inferring kubeconfig: %s", err)

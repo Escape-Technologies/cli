@@ -5,6 +5,7 @@ import (
 
 	"github.com/Escape-Technologies/cli/pkg/api/escape"
 	"github.com/Escape-Technologies/cli/pkg/cli/out"
+	"github.com/Escape-Technologies/cli/pkg/locations"
 	"github.com/spf13/cobra"
 )
 
@@ -48,8 +49,8 @@ var locationsStartCmd = &cobra.Command{
 	Use:   "start",
 	Short: "Start a location",
 	Args:  cobra.ExactArgs(1),
-	Run: func(cmd *cobra.Command, args []string) {
-		// TODO(quentin@escape.tech): Implement this
+	RunE: func(cmd *cobra.Command, args []string) error {
+		return locations.Start(cmd.Context(), args[0])
 	},
 }
 

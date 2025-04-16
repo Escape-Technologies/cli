@@ -4,12 +4,13 @@ import (
 	"os"
 
 	"github.com/Escape-Technologies/cli/pkg/cli"
-	"github.com/Escape-Technologies/cli/pkg/log"
+	"github.com/Escape-Technologies/cli/pkg/cli/out"
 )
 
 func main() {
-	if err := cli.Run(); err != nil {
-		log.Error("Error running cli: %s", err.Error())
+	err := cli.Run()
+	if err != nil {
+		out.PrintError(err)
 		os.Exit(1)
 	}
 }
