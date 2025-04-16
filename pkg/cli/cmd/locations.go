@@ -54,9 +54,10 @@ var locationsStartCmd = &cobra.Command{
 }
 
 var locationsDeleteCmd = &cobra.Command{
-	Use:   "delete",
-	Short: "Delete a location",
-	Args:  cobra.ExactArgs(1),
+	Use:     "delete",
+	Aliases: []string{"del", "remove"},
+	Short:   "Delete a location",
+	Args:    cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		err := escape.DeleteLocation(cmd.Context(), args[0])
 		if err != nil {

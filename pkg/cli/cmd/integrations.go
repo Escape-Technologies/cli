@@ -55,9 +55,10 @@ var integrationsCreateCmd = &cobra.Command{
 }
 
 var integrationsDeleteCmd = &cobra.Command{
-	Use:   "delete",
-	Short: "Delete an integration",
-	Args:  cobra.ExactArgs(1),
+	Use:     "delete",
+	Aliases: []string{"del", "remove"},
+	Short:   "Delete an integration",
+	Args:    cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		err := escape.DeleteIntegration(cmd.Context(), args[0])
 		if err != nil {
@@ -72,9 +73,32 @@ var integrationsDeleteCmd = &cobra.Command{
 	},
 }
 
+var integrationsGetCmd = &cobra.Command{
+	Use:     "get",
+	Aliases: []string{"describe"},
+	Short:   "Get integration details",
+	Args:    cobra.ExactArgs(1),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		integration, err := escape.GetIntegration(cmd.Context(), args[0])
+		if err != nil {
+			return err
+		}
+		data, _ := integration.GetData().MarshalJSON()
+		out.Print(integration, fmt.Sprintf(
+			"Name: %s\nId: %s\nLocationId: %s\n\nData: %s",
+			integration.GetName(),
+			integration.GetId(),
+			integration.GetLocationId(),
+			string(data),
+		))
+		return nil
+	},
+}
+
 func init() {
 	integrationsCmd.AddCommand(integrationsListCmd)
 	integrationsCmd.AddCommand(integrationsCreateCmd)
 	integrationsCmd.AddCommand(integrationsDeleteCmd)
+	integrationsCmd.AddCommand(integrationsGetCmd)
 	rootCmd.AddCommand(integrationsCmd)
 }
