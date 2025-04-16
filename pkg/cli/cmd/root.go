@@ -31,6 +31,9 @@ var rootCmd = &cobra.Command{
 	PostRun: func(cmd *cobra.Command, args []string) {
 		log.Trace("Main cli done, exiting")
 	},
+
+	SilenceUsage:  true,
+	SilenceErrors: true,
 }
 
 // Recursive function to print command names and help
