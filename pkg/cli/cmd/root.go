@@ -13,17 +13,26 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var rootCmdVerbose bool
+var rootCmdVerbose int
 var rootCmdOutputStr string
 
 var rootCmd = &cobra.Command{
 	Use:   "escape-cli",
 	Short: "CLI to interact with Escape API",
 	PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
-		if rootCmdVerbose {
-			escape.Debug = true
+		if rootCmdVerbose > 0 {
+			log.SetLevel(logrus.InfoLevel)
+		}
+		if rootCmdVerbose > 1 {
+			log.SetLevel(logrus.DebugLevel)
+		}
+		if rootCmdVerbose > 2 {
 			log.SetLevel(logrus.TraceLevel)
 		}
+		if rootCmdVerbose > 3 {
+			escape.Debug = true
+		}
+		log.Info("Verbose mode: %d", rootCmdVerbose)
 		err := out.SetOutput(rootCmdOutputStr)
 		if err != nil {
 			return fmt.Errorf("failed to set output format: %w", err)
@@ -72,7 +81,7 @@ var helpAllCmd = &cobra.Command{
 }
 
 func init() {
-	rootCmd.PersistentFlags().BoolVarP(&rootCmdVerbose, "verbose", "v", false, "enable verbose output")
+	rootCmd.PersistentFlags().CountVarP(&rootCmdVerbose, "verbose", "v", "enable verbose output")
 	rootCmd.PersistentFlags().StringVarP(&rootCmdOutputStr, "output", "o", "pretty", "output format (pretty|json|yaml)")
 	rootCmd.AddCommand(helpAllCmd)
 }

@@ -96,7 +96,7 @@ func pullSchemaFromPath(path string) (string, error) {
 	if err != nil {
 		return "", fmt.Errorf("read error: %w", err)
 	}
-	err = parseSchema(body)
+	err = parseJSONOrYAML(body, &map[string]any{})
 	if err != nil {
 		return "", fmt.Errorf("unable to parse schema: %w", err)
 	}
@@ -116,21 +116,49 @@ func pullSchemaFromURL(url string) (string, error) {
 	if err != nil {
 		return "", fmt.Errorf("unable to read body: %w", err)
 	}
-	err = parseSchema(body)
+	err = parseJSONOrYAML(body, &map[string]any{})
 	if err != nil {
 		return "", fmt.Errorf("unable to parse schema: %w", err)
 	}
 	return string(body), nil
 }
 
-func parseSchema(body []byte) error {
-	var schema map[string]interface{}
-	err := json.Unmarshal(body, &schema)
+func parseJSONOrYAML(body []byte, v any) error {
+	err := json.Unmarshal(body, v)
 	if err != nil {
-		err = yaml.Unmarshal(body, &schema)
+		err = yaml.Unmarshal(body, v)
 		if err != nil {
-			return fmt.Errorf("schema is neither json nor yaml: %w", err)
+			return fmt.Errorf("file is neither json nor yaml: %w", err)
 		}
 	}
 	return nil
+}
+
+func UpdateApplicationConfig(ctx context.Context, id string, configPath string) error {
+	client, err := newAPIV2Client()
+	if err != nil {
+		return fmt.Errorf("unable to init client: %w", err)
+	}
+	cfg, err := readConfig(configPath)
+	if err != nil {
+		return fmt.Errorf("unable to read config at %s: %w", configPath, err)
+	}
+	_, _, err = client.ApplicationsAPI.UpdateConfiguration(ctx, id).CreateApplicationRequestConfiguration(*cfg).Execute()
+	if err != nil {
+		return fmt.Errorf("api error: %w", err)
+	}
+	return nil
+}
+
+func readConfig(path string) (*v2.CreateApplicationRequestConfiguration, error) {
+	body, err := os.ReadFile(path)
+	if err != nil {
+		return nil, fmt.Errorf("unable to read file: %w", err)
+	}
+	var cfg v2.CreateApplicationRequestConfiguration
+	err = parseJSONOrYAML(body, &cfg)
+	if err != nil {
+		return nil, fmt.Errorf("unable to parse config: %w", err)
+	}
+	return &cfg, nil
 }
