@@ -1,6 +1,10 @@
 package cmd
 
 import (
+	"fmt"
+
+	"github.com/Escape-Technologies/cli/pkg/api/escape"
+	"github.com/Escape-Technologies/cli/pkg/cli/out"
 	"github.com/spf13/cobra"
 )
 
@@ -14,8 +18,29 @@ var locationsListCmd = &cobra.Command{
 	Use:     "list",
 	Aliases: []string{"ls"},
 	Short:   "List all locations",
-	Run: func(cmd *cobra.Command, args []string) {
-		// TODO(quentin@escape.tech): Implement this
+	RunE: func(cmd *cobra.Command, args []string) error {
+		locations, err := escape.ListLocations(cmd.Context())
+		if err != nil {
+			return err
+		}
+		out.Table(locations, func() []string {
+			res := []string{"ID\tNAME\tSSH PUBLIC KEY"}
+			strPtr := ""
+			for _, location := range locations {
+				if location.Id == nil {
+					location.Id = &strPtr
+				}
+				if location.Name == nil {
+					location.Name = &strPtr
+				}
+				if location.SshPublicKey == nil {
+					location.SshPublicKey = &strPtr
+				}
+				res = append(res, fmt.Sprintf("%s\t%s\t%s", *location.Id, *location.Name, *location.SshPublicKey))
+			}
+			return res
+		})
+		return nil
 	},
 }
 
@@ -32,8 +57,17 @@ var locationsDeleteCmd = &cobra.Command{
 	Use:   "delete",
 	Short: "Delete a location",
 	Args:  cobra.ExactArgs(1),
-	Run: func(cmd *cobra.Command, args []string) {
-		// TODO(quentin@escape.tech): Implement this
+	RunE: func(cmd *cobra.Command, args []string) error {
+		err := escape.DeleteLocation(cmd.Context(), args[0])
+		if err != nil {
+			return err
+		}
+		out.Print(struct {
+			Msg string `json:"msg"`
+		}{
+			Msg: "Location deleted",
+		}, "Location deleted")
+		return nil
 	},
 }
 

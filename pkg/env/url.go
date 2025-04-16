@@ -9,7 +9,7 @@ import (
 func GetAPIURL() (*url.URL, error) {
 	rawURL := os.Getenv("ESCAPE_API_URL")
 	if rawURL == "" {
-		return nil, fmt.Errorf("ESCAPE_API_URL environment variable is not set")
+		rawURL = "https://public.escape.tech"
 	}
 	parsedURL, err := url.Parse(rawURL)
 	if err != nil {

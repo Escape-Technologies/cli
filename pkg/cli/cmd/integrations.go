@@ -1,6 +1,10 @@
 package cmd
 
 import (
+	"fmt"
+
+	"github.com/Escape-Technologies/cli/pkg/api/escape"
+	"github.com/Escape-Technologies/cli/pkg/cli/out"
 	"github.com/spf13/cobra"
 )
 
@@ -14,8 +18,29 @@ var integrationsListCmd = &cobra.Command{
 	Use:     "list",
 	Aliases: []string{"ls"},
 	Short:   "List all integrations",
-	Run: func(cmd *cobra.Command, args []string) {
-		// TODO(quentin@escape.tech): Implement this
+	RunE: func(cmd *cobra.Command, args []string) error {
+		integrations, err := escape.ListIntegrations(cmd.Context())
+		if err != nil {
+			return err
+		}
+		out.Table(integrations, func() []string {
+			res := []string{"ID\tKIND\tNAME\tLOCATION ID"}
+			strPtr := ""
+			for _, integration := range integrations {
+				if integration.Id == nil {
+					integration.Id = &strPtr
+				}
+				if integration.Name == nil {
+					integration.Name = &strPtr
+				}
+				if integration.LocationId == nil {
+					integration.LocationId = &strPtr
+				}
+				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s", *integration.Id, integration.Kind, *integration.Name, *integration.LocationId))
+			}
+			return res
+		})
+		return nil
 	},
 }
 
@@ -23,9 +48,9 @@ var integrationsCreateCmd = &cobra.Command{
 	Use:     "apply",
 	Aliases: []string{"create", "update"},
 	Short:   "Update the integration based on a configuration file",
-	Args:    cobra.ExactArgs(2),
-	Run: func(cmd *cobra.Command, args []string) {
-		// TODO(quentin@escape.tech): Implement this
+	Args:    cobra.ExactArgs(1),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		return escape.UpsertIntegrationFromFile(cmd.Context(), args[0])
 	},
 }
 
@@ -33,8 +58,17 @@ var integrationsDeleteCmd = &cobra.Command{
 	Use:   "delete",
 	Short: "Delete an integration",
 	Args:  cobra.ExactArgs(1),
-	Run: func(cmd *cobra.Command, args []string) {
-		// TODO(quentin@escape.tech): Implement this
+	RunE: func(cmd *cobra.Command, args []string) error {
+		err := escape.DeleteIntegration(cmd.Context(), args[0])
+		if err != nil {
+			return err
+		}
+		out.Print(struct {
+			Msg string `json:"msg"`
+		}{
+			Msg: "Integration deleted",
+		}, "Integration deleted")
+		return nil
 	},
 }
 

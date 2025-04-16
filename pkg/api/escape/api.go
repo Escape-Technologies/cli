@@ -36,6 +36,11 @@ func newAPIV2Client() (*v2.APIClient, error) {
 		UserAgent:  version.GetVersion().UserAgent(),
 		Debug:      false,
 		HTTPClient: &http.Client{Transport: transport},
+		Servers: []v2.ServerConfiguration{
+			{
+				URL: url.String() + "/v2",
+			},
+		},
 	}
 
 	return v2.NewAPIClient(&cfg), nil
