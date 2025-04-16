@@ -21,7 +21,7 @@ var _ MappedNullable = &GetIntegration200ResponseDataOneOf13{}
 
 // GetIntegration200ResponseDataOneOf13 struct for GetIntegration200ResponseDataOneOf13
 type GetIntegration200ResponseDataOneOf13 struct {
-	Kind string `json:"kind"`
+	Kind EnumKONGGATEWAY `json:"kind"`
 	Parameters GetIntegration200ResponseDataOneOf13Parameters `json:"parameters"`
 }
 
@@ -31,7 +31,7 @@ type _GetIntegration200ResponseDataOneOf13 GetIntegration200ResponseDataOneOf13
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetIntegration200ResponseDataOneOf13(kind string, parameters GetIntegration200ResponseDataOneOf13Parameters) *GetIntegration200ResponseDataOneOf13 {
+func NewGetIntegration200ResponseDataOneOf13(kind EnumKONGGATEWAY, parameters GetIntegration200ResponseDataOneOf13Parameters) *GetIntegration200ResponseDataOneOf13 {
 	this := GetIntegration200ResponseDataOneOf13{}
 	this.Kind = kind
 	this.Parameters = parameters
@@ -47,9 +47,9 @@ func NewGetIntegration200ResponseDataOneOf13WithDefaults() *GetIntegration200Res
 }
 
 // GetKind returns the Kind field value
-func (o *GetIntegration200ResponseDataOneOf13) GetKind() string {
+func (o *GetIntegration200ResponseDataOneOf13) GetKind() EnumKONGGATEWAY {
 	if o == nil {
-		var ret string
+		var ret EnumKONGGATEWAY
 		return ret
 	}
 
@@ -58,7 +58,7 @@ func (o *GetIntegration200ResponseDataOneOf13) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
-func (o *GetIntegration200ResponseDataOneOf13) GetKindOk() (*string, bool) {
+func (o *GetIntegration200ResponseDataOneOf13) GetKindOk() (*EnumKONGGATEWAY, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -66,7 +66,7 @@ func (o *GetIntegration200ResponseDataOneOf13) GetKindOk() (*string, bool) {
 }
 
 // SetKind sets field value
-func (o *GetIntegration200ResponseDataOneOf13) SetKind(v string) {
+func (o *GetIntegration200ResponseDataOneOf13) SetKind(v EnumKONGGATEWAY) {
 	o.Kind = v
 }
 

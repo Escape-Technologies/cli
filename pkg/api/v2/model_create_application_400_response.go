@@ -21,7 +21,7 @@ var _ MappedNullable = &CreateApplication400Response{}
 
 // CreateApplication400Response struct for CreateApplication400Response
 type CreateApplication400Response struct {
-	Message string `json:"message"`
+	Message EnumBADREQUEST `json:"message"`
 	Details string `json:"details"`
 }
 
@@ -31,7 +31,7 @@ type _CreateApplication400Response CreateApplication400Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateApplication400Response(message string, details string) *CreateApplication400Response {
+func NewCreateApplication400Response(message EnumBADREQUEST, details string) *CreateApplication400Response {
 	this := CreateApplication400Response{}
 	this.Message = message
 	this.Details = details
@@ -47,9 +47,9 @@ func NewCreateApplication400ResponseWithDefaults() *CreateApplication400Response
 }
 
 // GetMessage returns the Message field value
-func (o *CreateApplication400Response) GetMessage() string {
+func (o *CreateApplication400Response) GetMessage() EnumBADREQUEST {
 	if o == nil {
-		var ret string
+		var ret EnumBADREQUEST
 		return ret
 	}
 
@@ -58,7 +58,7 @@ func (o *CreateApplication400Response) GetMessage() string {
 
 // GetMessageOk returns a tuple with the Message field value
 // and a boolean to check if the value has been set.
-func (o *CreateApplication400Response) GetMessageOk() (*string, bool) {
+func (o *CreateApplication400Response) GetMessageOk() (*EnumBADREQUEST, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -66,7 +66,7 @@ func (o *CreateApplication400Response) GetMessageOk() (*string, bool) {
 }
 
 // SetMessage sets field value
-func (o *CreateApplication400Response) SetMessage(v string) {
+func (o *CreateApplication400Response) SetMessage(v EnumBADREQUEST) {
 	o.Message = v
 }
 

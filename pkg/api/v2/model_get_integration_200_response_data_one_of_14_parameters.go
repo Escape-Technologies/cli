@@ -22,7 +22,7 @@ var _ MappedNullable = &GetIntegration200ResponseDataOneOf14Parameters{}
 // GetIntegration200ResponseDataOneOf14Parameters struct for GetIntegration200ResponseDataOneOf14Parameters
 type GetIntegration200ResponseDataOneOf14Parameters struct {
 	SystemAccountToken string `json:"system_account_token"`
-	Region string `json:"region"`
+	Region Enum33e76a7bc4c97ff8dbfe29d1d45aaa56 `json:"region"`
 }
 
 type _GetIntegration200ResponseDataOneOf14Parameters GetIntegration200ResponseDataOneOf14Parameters
@@ -31,7 +31,7 @@ type _GetIntegration200ResponseDataOneOf14Parameters GetIntegration200ResponseDa
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetIntegration200ResponseDataOneOf14Parameters(systemAccountToken string, region string) *GetIntegration200ResponseDataOneOf14Parameters {
+func NewGetIntegration200ResponseDataOneOf14Parameters(systemAccountToken string, region Enum33e76a7bc4c97ff8dbfe29d1d45aaa56) *GetIntegration200ResponseDataOneOf14Parameters {
 	this := GetIntegration200ResponseDataOneOf14Parameters{}
 	this.SystemAccountToken = systemAccountToken
 	this.Region = region
@@ -71,9 +71,9 @@ func (o *GetIntegration200ResponseDataOneOf14Parameters) SetSystemAccountToken(v
 }
 
 // GetRegion returns the Region field value
-func (o *GetIntegration200ResponseDataOneOf14Parameters) GetRegion() string {
+func (o *GetIntegration200ResponseDataOneOf14Parameters) GetRegion() Enum33e76a7bc4c97ff8dbfe29d1d45aaa56 {
 	if o == nil {
-		var ret string
+		var ret Enum33e76a7bc4c97ff8dbfe29d1d45aaa56
 		return ret
 	}
 
@@ -82,7 +82,7 @@ func (o *GetIntegration200ResponseDataOneOf14Parameters) GetRegion() string {
 
 // GetRegionOk returns a tuple with the Region field value
 // and a boolean to check if the value has been set.
-func (o *GetIntegration200ResponseDataOneOf14Parameters) GetRegionOk() (*string, bool) {
+func (o *GetIntegration200ResponseDataOneOf14Parameters) GetRegionOk() (*Enum33e76a7bc4c97ff8dbfe29d1d45aaa56, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -90,7 +90,7 @@ func (o *GetIntegration200ResponseDataOneOf14Parameters) GetRegionOk() (*string,
 }
 
 // SetRegion sets field value
-func (o *GetIntegration200ResponseDataOneOf14Parameters) SetRegion(v string) {
+func (o *GetIntegration200ResponseDataOneOf14Parameters) SetRegion(v Enum33e76a7bc4c97ff8dbfe29d1d45aaa56) {
 	o.Region = v
 }
 

@@ -85,7 +85,7 @@ var integrationsGetCmd = &cobra.Command{
 		}
 		data, _ := integration.GetData().MarshalJSON()
 		out.Print(integration, fmt.Sprintf(
-			"Name: %s\nId: %s\nLocationId: %s\n\nData: %s",
+			"Name: %s\nId: %s\nLocationId: %s\nData: %s",
 			integration.GetName(),
 			integration.GetId(),
 			integration.GetLocationId(),

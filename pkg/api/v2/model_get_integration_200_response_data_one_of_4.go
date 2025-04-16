@@ -21,7 +21,7 @@ var _ MappedNullable = &GetIntegration200ResponseDataOneOf4{}
 
 // GetIntegration200ResponseDataOneOf4 struct for GetIntegration200ResponseDataOneOf4
 type GetIntegration200ResponseDataOneOf4 struct {
-	Kind string `json:"kind"`
+	Kind EnumAZUREDEVOPS `json:"kind"`
 	Parameters GetIntegration200ResponseDataOneOf4Parameters `json:"parameters"`
 }
 
@@ -31,7 +31,7 @@ type _GetIntegration200ResponseDataOneOf4 GetIntegration200ResponseDataOneOf4
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetIntegration200ResponseDataOneOf4(kind string, parameters GetIntegration200ResponseDataOneOf4Parameters) *GetIntegration200ResponseDataOneOf4 {
+func NewGetIntegration200ResponseDataOneOf4(kind EnumAZUREDEVOPS, parameters GetIntegration200ResponseDataOneOf4Parameters) *GetIntegration200ResponseDataOneOf4 {
 	this := GetIntegration200ResponseDataOneOf4{}
 	this.Kind = kind
 	this.Parameters = parameters
@@ -47,9 +47,9 @@ func NewGetIntegration200ResponseDataOneOf4WithDefaults() *GetIntegration200Resp
 }
 
 // GetKind returns the Kind field value
-func (o *GetIntegration200ResponseDataOneOf4) GetKind() string {
+func (o *GetIntegration200ResponseDataOneOf4) GetKind() EnumAZUREDEVOPS {
 	if o == nil {
-		var ret string
+		var ret EnumAZUREDEVOPS
 		return ret
 	}
 
@@ -58,7 +58,7 @@ func (o *GetIntegration200ResponseDataOneOf4) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
-func (o *GetIntegration200ResponseDataOneOf4) GetKindOk() (*string, bool) {
+func (o *GetIntegration200ResponseDataOneOf4) GetKindOk() (*EnumAZUREDEVOPS, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -66,7 +66,7 @@ func (o *GetIntegration200ResponseDataOneOf4) GetKindOk() (*string, bool) {
 }
 
 // SetKind sets field value
-func (o *GetIntegration200ResponseDataOneOf4) SetKind(v string) {
+func (o *GetIntegration200ResponseDataOneOf4) SetKind(v EnumAZUREDEVOPS) {
 	o.Kind = v
 }
 

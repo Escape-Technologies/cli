@@ -21,7 +21,7 @@ var _ MappedNullable = &GetIntegration200ResponseDataOneOf20{}
 
 // GetIntegration200ResponseDataOneOf20 struct for GetIntegration200ResponseDataOneOf20
 type GetIntegration200ResponseDataOneOf20 struct {
-	Kind string `json:"kind"`
+	Kind EnumWIZ `json:"kind"`
 	Parameters GetIntegration200ResponseDataOneOf20Parameters `json:"parameters"`
 }
 
@@ -31,7 +31,7 @@ type _GetIntegration200ResponseDataOneOf20 GetIntegration200ResponseDataOneOf20
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetIntegration200ResponseDataOneOf20(kind string, parameters GetIntegration200ResponseDataOneOf20Parameters) *GetIntegration200ResponseDataOneOf20 {
+func NewGetIntegration200ResponseDataOneOf20(kind EnumWIZ, parameters GetIntegration200ResponseDataOneOf20Parameters) *GetIntegration200ResponseDataOneOf20 {
 	this := GetIntegration200ResponseDataOneOf20{}
 	this.Kind = kind
 	this.Parameters = parameters
@@ -47,9 +47,9 @@ func NewGetIntegration200ResponseDataOneOf20WithDefaults() *GetIntegration200Res
 }
 
 // GetKind returns the Kind field value
-func (o *GetIntegration200ResponseDataOneOf20) GetKind() string {
+func (o *GetIntegration200ResponseDataOneOf20) GetKind() EnumWIZ {
 	if o == nil {
-		var ret string
+		var ret EnumWIZ
 		return ret
 	}
 
@@ -58,7 +58,7 @@ func (o *GetIntegration200ResponseDataOneOf20) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
-func (o *GetIntegration200ResponseDataOneOf20) GetKindOk() (*string, bool) {
+func (o *GetIntegration200ResponseDataOneOf20) GetKindOk() (*EnumWIZ, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -66,7 +66,7 @@ func (o *GetIntegration200ResponseDataOneOf20) GetKindOk() (*string, bool) {
 }
 
 // SetKind sets field value
-func (o *GetIntegration200ResponseDataOneOf20) SetKind(v string) {
+func (o *GetIntegration200ResponseDataOneOf20) SetKind(v EnumWIZ) {
 	o.Kind = v
 }
 

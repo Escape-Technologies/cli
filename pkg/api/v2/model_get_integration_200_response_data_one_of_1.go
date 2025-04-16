@@ -21,7 +21,7 @@ var _ MappedNullable = &GetIntegration200ResponseDataOneOf1{}
 
 // GetIntegration200ResponseDataOneOf1 struct for GetIntegration200ResponseDataOneOf1
 type GetIntegration200ResponseDataOneOf1 struct {
-	Kind string `json:"kind"`
+	Kind EnumAPIGEE `json:"kind"`
 	Parameters GetIntegration200ResponseDataOneOf1Parameters `json:"parameters"`
 }
 
@@ -31,7 +31,7 @@ type _GetIntegration200ResponseDataOneOf1 GetIntegration200ResponseDataOneOf1
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetIntegration200ResponseDataOneOf1(kind string, parameters GetIntegration200ResponseDataOneOf1Parameters) *GetIntegration200ResponseDataOneOf1 {
+func NewGetIntegration200ResponseDataOneOf1(kind EnumAPIGEE, parameters GetIntegration200ResponseDataOneOf1Parameters) *GetIntegration200ResponseDataOneOf1 {
 	this := GetIntegration200ResponseDataOneOf1{}
 	this.Kind = kind
 	this.Parameters = parameters
@@ -47,9 +47,9 @@ func NewGetIntegration200ResponseDataOneOf1WithDefaults() *GetIntegration200Resp
 }
 
 // GetKind returns the Kind field value
-func (o *GetIntegration200ResponseDataOneOf1) GetKind() string {
+func (o *GetIntegration200ResponseDataOneOf1) GetKind() EnumAPIGEE {
 	if o == nil {
-		var ret string
+		var ret EnumAPIGEE
 		return ret
 	}
 
@@ -58,7 +58,7 @@ func (o *GetIntegration200ResponseDataOneOf1) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
-func (o *GetIntegration200ResponseDataOneOf1) GetKindOk() (*string, bool) {
+func (o *GetIntegration200ResponseDataOneOf1) GetKindOk() (*EnumAPIGEE, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -66,7 +66,7 @@ func (o *GetIntegration200ResponseDataOneOf1) GetKindOk() (*string, bool) {
 }
 
 // SetKind sets field value
-func (o *GetIntegration200ResponseDataOneOf1) SetKind(v string) {
+func (o *GetIntegration200ResponseDataOneOf1) SetKind(v EnumAPIGEE) {
 	o.Kind = v
 }
 

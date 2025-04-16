@@ -21,7 +21,7 @@ var _ MappedNullable = &GetIntegration200ResponseDataOneOf3{}
 
 // GetIntegration200ResponseDataOneOf3 struct for GetIntegration200ResponseDataOneOf3
 type GetIntegration200ResponseDataOneOf3 struct {
-	Kind string `json:"kind"`
+	Kind EnumAZURE `json:"kind"`
 	Parameters GetIntegration200ResponseDataOneOf3Parameters `json:"parameters"`
 }
 
@@ -31,7 +31,7 @@ type _GetIntegration200ResponseDataOneOf3 GetIntegration200ResponseDataOneOf3
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetIntegration200ResponseDataOneOf3(kind string, parameters GetIntegration200ResponseDataOneOf3Parameters) *GetIntegration200ResponseDataOneOf3 {
+func NewGetIntegration200ResponseDataOneOf3(kind EnumAZURE, parameters GetIntegration200ResponseDataOneOf3Parameters) *GetIntegration200ResponseDataOneOf3 {
 	this := GetIntegration200ResponseDataOneOf3{}
 	this.Kind = kind
 	this.Parameters = parameters
@@ -47,9 +47,9 @@ func NewGetIntegration200ResponseDataOneOf3WithDefaults() *GetIntegration200Resp
 }
 
 // GetKind returns the Kind field value
-func (o *GetIntegration200ResponseDataOneOf3) GetKind() string {
+func (o *GetIntegration200ResponseDataOneOf3) GetKind() EnumAZURE {
 	if o == nil {
-		var ret string
+		var ret EnumAZURE
 		return ret
 	}
 
@@ -58,7 +58,7 @@ func (o *GetIntegration200ResponseDataOneOf3) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
-func (o *GetIntegration200ResponseDataOneOf3) GetKindOk() (*string, bool) {
+func (o *GetIntegration200ResponseDataOneOf3) GetKindOk() (*EnumAZURE, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -66,7 +66,7 @@ func (o *GetIntegration200ResponseDataOneOf3) GetKindOk() (*string, bool) {
 }
 
 // SetKind sets field value
-func (o *GetIntegration200ResponseDataOneOf3) SetKind(v string) {
+func (o *GetIntegration200ResponseDataOneOf3) SetKind(v EnumAZURE) {
 	o.Kind = v
 }
 

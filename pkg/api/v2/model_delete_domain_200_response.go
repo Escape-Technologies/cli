@@ -21,7 +21,7 @@ var _ MappedNullable = &DeleteDomain200Response{}
 
 // DeleteDomain200Response struct for DeleteDomain200Response
 type DeleteDomain200Response struct {
-	Message string `json:"message"`
+	Message EnumDOMAINDELETIONSCHEDULEDSUCCESSFULLY `json:"message"`
 }
 
 type _DeleteDomain200Response DeleteDomain200Response
@@ -30,7 +30,7 @@ type _DeleteDomain200Response DeleteDomain200Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDeleteDomain200Response(message string) *DeleteDomain200Response {
+func NewDeleteDomain200Response(message EnumDOMAINDELETIONSCHEDULEDSUCCESSFULLY) *DeleteDomain200Response {
 	this := DeleteDomain200Response{}
 	this.Message = message
 	return &this
@@ -45,9 +45,9 @@ func NewDeleteDomain200ResponseWithDefaults() *DeleteDomain200Response {
 }
 
 // GetMessage returns the Message field value
-func (o *DeleteDomain200Response) GetMessage() string {
+func (o *DeleteDomain200Response) GetMessage() EnumDOMAINDELETIONSCHEDULEDSUCCESSFULLY {
 	if o == nil {
-		var ret string
+		var ret EnumDOMAINDELETIONSCHEDULEDSUCCESSFULLY
 		return ret
 	}
 
@@ -56,7 +56,7 @@ func (o *DeleteDomain200Response) GetMessage() string {
 
 // GetMessageOk returns a tuple with the Message field value
 // and a boolean to check if the value has been set.
-func (o *DeleteDomain200Response) GetMessageOk() (*string, bool) {
+func (o *DeleteDomain200Response) GetMessageOk() (*EnumDOMAINDELETIONSCHEDULEDSUCCESSFULLY, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -64,7 +64,7 @@ func (o *DeleteDomain200Response) GetMessageOk() (*string, bool) {
 }
 
 // SetMessage sets field value
-func (o *DeleteDomain200Response) SetMessage(v string) {
+func (o *DeleteDomain200Response) SetMessage(v EnumDOMAINDELETIONSCHEDULEDSUCCESSFULLY) {
 	o.Message = v
 }
 

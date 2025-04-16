@@ -23,7 +23,7 @@ var _ MappedNullable = &ListIssues200ResponseInner{}
 type ListIssues200ResponseInner struct {
 	Id string `json:"id"`
 	Issues []ListIssues200ResponseInnerIssuesInner `json:"issues"`
-	Severity string `json:"severity"`
+	Severity Enum9c1e82c38fa16c4851aece69dc28da0b `json:"severity"`
 	Ignored bool `json:"ignored"`
 	Test ListIssues200ResponseInnerTest `json:"test"`
 }
@@ -34,7 +34,7 @@ type _ListIssues200ResponseInner ListIssues200ResponseInner
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewListIssues200ResponseInner(id string, issues []ListIssues200ResponseInnerIssuesInner, severity string, ignored bool, test ListIssues200ResponseInnerTest) *ListIssues200ResponseInner {
+func NewListIssues200ResponseInner(id string, issues []ListIssues200ResponseInnerIssuesInner, severity Enum9c1e82c38fa16c4851aece69dc28da0b, ignored bool, test ListIssues200ResponseInnerTest) *ListIssues200ResponseInner {
 	this := ListIssues200ResponseInner{}
 	this.Id = id
 	this.Issues = issues
@@ -101,9 +101,9 @@ func (o *ListIssues200ResponseInner) SetIssues(v []ListIssues200ResponseInnerIss
 }
 
 // GetSeverity returns the Severity field value
-func (o *ListIssues200ResponseInner) GetSeverity() string {
+func (o *ListIssues200ResponseInner) GetSeverity() Enum9c1e82c38fa16c4851aece69dc28da0b {
 	if o == nil {
-		var ret string
+		var ret Enum9c1e82c38fa16c4851aece69dc28da0b
 		return ret
 	}
 
@@ -112,7 +112,7 @@ func (o *ListIssues200ResponseInner) GetSeverity() string {
 
 // GetSeverityOk returns a tuple with the Severity field value
 // and a boolean to check if the value has been set.
-func (o *ListIssues200ResponseInner) GetSeverityOk() (*string, bool) {
+func (o *ListIssues200ResponseInner) GetSeverityOk() (*Enum9c1e82c38fa16c4851aece69dc28da0b, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -120,7 +120,7 @@ func (o *ListIssues200ResponseInner) GetSeverityOk() (*string, bool) {
 }
 
 // SetSeverity sets field value
-func (o *ListIssues200ResponseInner) SetSeverity(v string) {
+func (o *ListIssues200ResponseInner) SetSeverity(v Enum9c1e82c38fa16c4851aece69dc28da0b) {
 	o.Severity = v
 }
 

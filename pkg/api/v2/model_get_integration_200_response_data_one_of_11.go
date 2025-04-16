@@ -21,7 +21,7 @@ var _ MappedNullable = &GetIntegration200ResponseDataOneOf11{}
 
 // GetIntegration200ResponseDataOneOf11 struct for GetIntegration200ResponseDataOneOf11
 type GetIntegration200ResponseDataOneOf11 struct {
-	Kind string `json:"kind"`
+	Kind EnumGITLABAPIKEY `json:"kind"`
 	Parameters GetIntegration200ResponseDataOneOf11Parameters `json:"parameters"`
 }
 
@@ -31,7 +31,7 @@ type _GetIntegration200ResponseDataOneOf11 GetIntegration200ResponseDataOneOf11
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetIntegration200ResponseDataOneOf11(kind string, parameters GetIntegration200ResponseDataOneOf11Parameters) *GetIntegration200ResponseDataOneOf11 {
+func NewGetIntegration200ResponseDataOneOf11(kind EnumGITLABAPIKEY, parameters GetIntegration200ResponseDataOneOf11Parameters) *GetIntegration200ResponseDataOneOf11 {
 	this := GetIntegration200ResponseDataOneOf11{}
 	this.Kind = kind
 	this.Parameters = parameters
@@ -47,9 +47,9 @@ func NewGetIntegration200ResponseDataOneOf11WithDefaults() *GetIntegration200Res
 }
 
 // GetKind returns the Kind field value
-func (o *GetIntegration200ResponseDataOneOf11) GetKind() string {
+func (o *GetIntegration200ResponseDataOneOf11) GetKind() EnumGITLABAPIKEY {
 	if o == nil {
-		var ret string
+		var ret EnumGITLABAPIKEY
 		return ret
 	}
 
@@ -58,7 +58,7 @@ func (o *GetIntegration200ResponseDataOneOf11) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
-func (o *GetIntegration200ResponseDataOneOf11) GetKindOk() (*string, bool) {
+func (o *GetIntegration200ResponseDataOneOf11) GetKindOk() (*EnumGITLABAPIKEY, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -66,7 +66,7 @@ func (o *GetIntegration200ResponseDataOneOf11) GetKindOk() (*string, bool) {
 }
 
 // SetKind sets field value
-func (o *GetIntegration200ResponseDataOneOf11) SetKind(v string) {
+func (o *GetIntegration200ResponseDataOneOf11) SetKind(v EnumGITLABAPIKEY) {
 	o.Kind = v
 }
 

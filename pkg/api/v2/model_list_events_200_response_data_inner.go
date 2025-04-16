@@ -25,7 +25,7 @@ type ListEvents200ResponseDataInner struct {
 	Id string `json:"id"`
 	CreatedAt time.Time `json:"createdAt"`
 	Description string `json:"description"`
-	Level string `json:"level"`
+	Level EnumAc8825c946764c840068c1a5eddeee84 `json:"level"`
 	Title string `json:"title"`
 }
 
@@ -35,7 +35,7 @@ type _ListEvents200ResponseDataInner ListEvents200ResponseDataInner
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewListEvents200ResponseDataInner(id string, createdAt time.Time, description string, level string, title string) *ListEvents200ResponseDataInner {
+func NewListEvents200ResponseDataInner(id string, createdAt time.Time, description string, level EnumAc8825c946764c840068c1a5eddeee84, title string) *ListEvents200ResponseDataInner {
 	this := ListEvents200ResponseDataInner{}
 	this.Id = id
 	this.CreatedAt = createdAt
@@ -126,9 +126,9 @@ func (o *ListEvents200ResponseDataInner) SetDescription(v string) {
 }
 
 // GetLevel returns the Level field value
-func (o *ListEvents200ResponseDataInner) GetLevel() string {
+func (o *ListEvents200ResponseDataInner) GetLevel() EnumAc8825c946764c840068c1a5eddeee84 {
 	if o == nil {
-		var ret string
+		var ret EnumAc8825c946764c840068c1a5eddeee84
 		return ret
 	}
 
@@ -137,7 +137,7 @@ func (o *ListEvents200ResponseDataInner) GetLevel() string {
 
 // GetLevelOk returns a tuple with the Level field value
 // and a boolean to check if the value has been set.
-func (o *ListEvents200ResponseDataInner) GetLevelOk() (*string, bool) {
+func (o *ListEvents200ResponseDataInner) GetLevelOk() (*EnumAc8825c946764c840068c1a5eddeee84, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -145,7 +145,7 @@ func (o *ListEvents200ResponseDataInner) GetLevelOk() (*string, bool) {
 }
 
 // SetLevel sets field value
-func (o *ListEvents200ResponseDataInner) SetLevel(v string) {
+func (o *ListEvents200ResponseDataInner) SetLevel(v EnumAc8825c946764c840068c1a5eddeee84) {
 	o.Level = v
 }
 

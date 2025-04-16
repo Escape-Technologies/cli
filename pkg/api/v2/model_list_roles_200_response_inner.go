@@ -25,16 +25,13 @@ type ListRoles200ResponseInner struct {
 	Id string `json:"id"`
 	// The name of the role.
 	Name string `json:"name"`
-	// Access level for applications.
-	ApplicationAccessLevel string `json:"applicationAccessLevel"`
+	ApplicationAccessLevel Enum041c163680d484c3944c5d3c68a9635b `json:"applicationAccessLevel"`
 	// Whether the role has reporting administrator privileges.
 	ReportingAdministrator bool `json:"reportingAdministrator"`
-	// Access level for inventory.
-	InventoryAccessLevel string `json:"inventoryAccessLevel"`
+	InventoryAccessLevel Enum041c163680d484c3944c5d3c68a9635b `json:"inventoryAccessLevel"`
 	// Whether the role has integration administrator privileges.
 	IntegrationAdministrator bool `json:"integrationAdministrator"`
-	// Access level for workflows.
-	WorkflowsAccessLevel string `json:"workflowsAccessLevel"`
+	WorkflowsAccessLevel Enum041c163680d484c3944c5d3c68a9635b `json:"workflowsAccessLevel"`
 	// The users associated with the role.
 	RoleUsers []ListRoles200ResponseInnerRoleUsersInner `json:"roleUsers"`
 }
@@ -45,7 +42,7 @@ type _ListRoles200ResponseInner ListRoles200ResponseInner
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewListRoles200ResponseInner(id string, name string, applicationAccessLevel string, reportingAdministrator bool, inventoryAccessLevel string, integrationAdministrator bool, workflowsAccessLevel string, roleUsers []ListRoles200ResponseInnerRoleUsersInner) *ListRoles200ResponseInner {
+func NewListRoles200ResponseInner(id string, name string, applicationAccessLevel Enum041c163680d484c3944c5d3c68a9635b, reportingAdministrator bool, inventoryAccessLevel Enum041c163680d484c3944c5d3c68a9635b, integrationAdministrator bool, workflowsAccessLevel Enum041c163680d484c3944c5d3c68a9635b, roleUsers []ListRoles200ResponseInnerRoleUsersInner) *ListRoles200ResponseInner {
 	this := ListRoles200ResponseInner{}
 	this.Id = id
 	this.Name = name
@@ -115,9 +112,9 @@ func (o *ListRoles200ResponseInner) SetName(v string) {
 }
 
 // GetApplicationAccessLevel returns the ApplicationAccessLevel field value
-func (o *ListRoles200ResponseInner) GetApplicationAccessLevel() string {
+func (o *ListRoles200ResponseInner) GetApplicationAccessLevel() Enum041c163680d484c3944c5d3c68a9635b {
 	if o == nil {
-		var ret string
+		var ret Enum041c163680d484c3944c5d3c68a9635b
 		return ret
 	}
 
@@ -126,7 +123,7 @@ func (o *ListRoles200ResponseInner) GetApplicationAccessLevel() string {
 
 // GetApplicationAccessLevelOk returns a tuple with the ApplicationAccessLevel field value
 // and a boolean to check if the value has been set.
-func (o *ListRoles200ResponseInner) GetApplicationAccessLevelOk() (*string, bool) {
+func (o *ListRoles200ResponseInner) GetApplicationAccessLevelOk() (*Enum041c163680d484c3944c5d3c68a9635b, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -134,7 +131,7 @@ func (o *ListRoles200ResponseInner) GetApplicationAccessLevelOk() (*string, bool
 }
 
 // SetApplicationAccessLevel sets field value
-func (o *ListRoles200ResponseInner) SetApplicationAccessLevel(v string) {
+func (o *ListRoles200ResponseInner) SetApplicationAccessLevel(v Enum041c163680d484c3944c5d3c68a9635b) {
 	o.ApplicationAccessLevel = v
 }
 
@@ -163,9 +160,9 @@ func (o *ListRoles200ResponseInner) SetReportingAdministrator(v bool) {
 }
 
 // GetInventoryAccessLevel returns the InventoryAccessLevel field value
-func (o *ListRoles200ResponseInner) GetInventoryAccessLevel() string {
+func (o *ListRoles200ResponseInner) GetInventoryAccessLevel() Enum041c163680d484c3944c5d3c68a9635b {
 	if o == nil {
-		var ret string
+		var ret Enum041c163680d484c3944c5d3c68a9635b
 		return ret
 	}
 
@@ -174,7 +171,7 @@ func (o *ListRoles200ResponseInner) GetInventoryAccessLevel() string {
 
 // GetInventoryAccessLevelOk returns a tuple with the InventoryAccessLevel field value
 // and a boolean to check if the value has been set.
-func (o *ListRoles200ResponseInner) GetInventoryAccessLevelOk() (*string, bool) {
+func (o *ListRoles200ResponseInner) GetInventoryAccessLevelOk() (*Enum041c163680d484c3944c5d3c68a9635b, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -182,7 +179,7 @@ func (o *ListRoles200ResponseInner) GetInventoryAccessLevelOk() (*string, bool) 
 }
 
 // SetInventoryAccessLevel sets field value
-func (o *ListRoles200ResponseInner) SetInventoryAccessLevel(v string) {
+func (o *ListRoles200ResponseInner) SetInventoryAccessLevel(v Enum041c163680d484c3944c5d3c68a9635b) {
 	o.InventoryAccessLevel = v
 }
 
@@ -211,9 +208,9 @@ func (o *ListRoles200ResponseInner) SetIntegrationAdministrator(v bool) {
 }
 
 // GetWorkflowsAccessLevel returns the WorkflowsAccessLevel field value
-func (o *ListRoles200ResponseInner) GetWorkflowsAccessLevel() string {
+func (o *ListRoles200ResponseInner) GetWorkflowsAccessLevel() Enum041c163680d484c3944c5d3c68a9635b {
 	if o == nil {
-		var ret string
+		var ret Enum041c163680d484c3944c5d3c68a9635b
 		return ret
 	}
 
@@ -222,7 +219,7 @@ func (o *ListRoles200ResponseInner) GetWorkflowsAccessLevel() string {
 
 // GetWorkflowsAccessLevelOk returns a tuple with the WorkflowsAccessLevel field value
 // and a boolean to check if the value has been set.
-func (o *ListRoles200ResponseInner) GetWorkflowsAccessLevelOk() (*string, bool) {
+func (o *ListRoles200ResponseInner) GetWorkflowsAccessLevelOk() (*Enum041c163680d484c3944c5d3c68a9635b, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -230,7 +227,7 @@ func (o *ListRoles200ResponseInner) GetWorkflowsAccessLevelOk() (*string, bool) 
 }
 
 // SetWorkflowsAccessLevel sets field value
-func (o *ListRoles200ResponseInner) SetWorkflowsAccessLevel(v string) {
+func (o *ListRoles200ResponseInner) SetWorkflowsAccessLevel(v Enum041c163680d484c3944c5d3c68a9635b) {
 	o.WorkflowsAccessLevel = v
 }
 

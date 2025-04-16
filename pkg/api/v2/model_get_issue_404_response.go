@@ -21,7 +21,7 @@ var _ MappedNullable = &GetIssue404Response{}
 
 // GetIssue404Response struct for GetIssue404Response
 type GetIssue404Response struct {
-	Message string `json:"message"`
+	Message EnumNOTFOUND `json:"message"`
 }
 
 type _GetIssue404Response GetIssue404Response
@@ -30,7 +30,7 @@ type _GetIssue404Response GetIssue404Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetIssue404Response(message string) *GetIssue404Response {
+func NewGetIssue404Response(message EnumNOTFOUND) *GetIssue404Response {
 	this := GetIssue404Response{}
 	this.Message = message
 	return &this
@@ -45,9 +45,9 @@ func NewGetIssue404ResponseWithDefaults() *GetIssue404Response {
 }
 
 // GetMessage returns the Message field value
-func (o *GetIssue404Response) GetMessage() string {
+func (o *GetIssue404Response) GetMessage() EnumNOTFOUND {
 	if o == nil {
-		var ret string
+		var ret EnumNOTFOUND
 		return ret
 	}
 
@@ -56,7 +56,7 @@ func (o *GetIssue404Response) GetMessage() string {
 
 // GetMessageOk returns a tuple with the Message field value
 // and a boolean to check if the value has been set.
-func (o *GetIssue404Response) GetMessageOk() (*string, bool) {
+func (o *GetIssue404Response) GetMessageOk() (*EnumNOTFOUND, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -64,7 +64,7 @@ func (o *GetIssue404Response) GetMessageOk() (*string, bool) {
 }
 
 // SetMessage sets field value
-func (o *GetIssue404Response) SetMessage(v string) {
+func (o *GetIssue404Response) SetMessage(v EnumNOTFOUND) {
 	o.Message = v
 }
 

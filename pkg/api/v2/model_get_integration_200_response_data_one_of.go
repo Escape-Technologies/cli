@@ -21,7 +21,7 @@ var _ MappedNullable = &GetIntegration200ResponseDataOneOf{}
 
 // GetIntegration200ResponseDataOneOf struct for GetIntegration200ResponseDataOneOf
 type GetIntegration200ResponseDataOneOf struct {
-	Kind string `json:"kind"`
+	Kind EnumAKAMAI `json:"kind"`
 	Parameters GetIntegration200ResponseDataOneOfParameters `json:"parameters"`
 }
 
@@ -31,7 +31,7 @@ type _GetIntegration200ResponseDataOneOf GetIntegration200ResponseDataOneOf
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetIntegration200ResponseDataOneOf(kind string, parameters GetIntegration200ResponseDataOneOfParameters) *GetIntegration200ResponseDataOneOf {
+func NewGetIntegration200ResponseDataOneOf(kind EnumAKAMAI, parameters GetIntegration200ResponseDataOneOfParameters) *GetIntegration200ResponseDataOneOf {
 	this := GetIntegration200ResponseDataOneOf{}
 	this.Kind = kind
 	this.Parameters = parameters
@@ -47,9 +47,9 @@ func NewGetIntegration200ResponseDataOneOfWithDefaults() *GetIntegration200Respo
 }
 
 // GetKind returns the Kind field value
-func (o *GetIntegration200ResponseDataOneOf) GetKind() string {
+func (o *GetIntegration200ResponseDataOneOf) GetKind() EnumAKAMAI {
 	if o == nil {
-		var ret string
+		var ret EnumAKAMAI
 		return ret
 	}
 
@@ -58,7 +58,7 @@ func (o *GetIntegration200ResponseDataOneOf) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
-func (o *GetIntegration200ResponseDataOneOf) GetKindOk() (*string, bool) {
+func (o *GetIntegration200ResponseDataOneOf) GetKindOk() (*EnumAKAMAI, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -66,7 +66,7 @@ func (o *GetIntegration200ResponseDataOneOf) GetKindOk() (*string, bool) {
 }
 
 // SetKind sets field value
-func (o *GetIntegration200ResponseDataOneOf) SetKind(v string) {
+func (o *GetIntegration200ResponseDataOneOf) SetKind(v EnumAKAMAI) {
 	o.Kind = v
 }
 
