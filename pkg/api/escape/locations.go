@@ -57,13 +57,13 @@ func UpdateLocation(ctx context.Context, id string, name, sshPublicKey string) e
 	if err != nil {
 		return fmt.Errorf("unable to init client: %w", err)
 	}
-	req := client.LocationsAPI.CreateLocation(ctx).CreateLocationRequest(v2.CreateLocationRequest{
-		Name:         name,
-		SshPublicKey: sshPublicKey,
+	req := client.LocationsAPI.UpdateLocation(ctx, id).UpdateLocationRequest(v2.UpdateLocationRequest{
+		Name:         &name,
+		SshPublicKey: &sshPublicKey,
 	})
 	_, _, err = req.Execute()
 	if err != nil {
-		return fmt.Errorf("unable to create location: %w", err)
+		return fmt.Errorf("unable to update location: %w", err)
 	}
 	return nil
 }

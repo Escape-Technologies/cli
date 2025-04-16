@@ -6,6 +6,7 @@ import (
 	"strings"
 	"text/tabwriter"
 
+	"github.com/Escape-Technologies/cli/pkg/api/escape"
 	"github.com/Escape-Technologies/cli/pkg/cli/out"
 	"github.com/Escape-Technologies/cli/pkg/log"
 	"github.com/sirupsen/logrus"
@@ -20,6 +21,7 @@ var rootCmd = &cobra.Command{
 	Short: "CLI to interact with Escape API",
 	PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
 		if rootCmdVerbose {
+			escape.Debug = true
 			log.SetLevel(logrus.TraceLevel)
 		}
 		err := out.SetOutput(rootCmdOutputStr)

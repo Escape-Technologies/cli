@@ -2,13 +2,14 @@ package escape
 
 import (
 	"fmt"
-	"net/http"
 
 	v2 "github.com/Escape-Technologies/cli/pkg/api/v2"
 	"github.com/Escape-Technologies/cli/pkg/env"
 	"github.com/Escape-Technologies/cli/pkg/log"
 	"github.com/Escape-Technologies/cli/pkg/version"
 )
+
+var Debug = false
 
 func newAPIV2Client() (*v2.APIClient, error) {
 	log.Trace("Initializing v2 client")
@@ -21,12 +22,6 @@ func newAPIV2Client() (*v2.APIClient, error) {
 		return nil, fmt.Errorf("failed to get API key: %w", err)
 	}
 
-	transport := &http.Transport{}
-	proxyURL := env.GetFrontendProxyURL()
-	if proxyURL != nil {
-		transport.Proxy = http.ProxyURL(proxyURL)
-	}
-
 	cfg := v2.Configuration{
 		Host:   url.Host,
 		Scheme: url.Scheme,
@@ -34,8 +29,8 @@ func newAPIV2Client() (*v2.APIClient, error) {
 			"Authorization": fmt.Sprintf("Key %s", key),
 		},
 		UserAgent:  version.GetVersion().UserAgent(),
-		Debug:      false,
-		HTTPClient: &http.Client{Transport: transport},
+		Debug:      Debug,
+		HTTPClient: env.GetHTTPClient(),
 		Servers: []v2.ServerConfiguration{
 			{
 				URL: url.String() + "/v2",
