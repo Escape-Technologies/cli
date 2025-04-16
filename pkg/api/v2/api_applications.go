@@ -671,7 +671,7 @@ func (r ApiUpdateConfigurationRequest) CreateApplicationRequestConfiguration(cre
 	return r
 }
 
-func (r ApiUpdateConfigurationRequest) Execute() (*CreateApplicationRequestConfiguration, *http.Response, error) {
+func (r ApiUpdateConfigurationRequest) Execute() (*GetApplication200ResponseConfiguration, *http.Response, error) {
 	return r.ApiService.UpdateConfigurationExecute(r)
 }
 
@@ -693,13 +693,13 @@ func (a *ApplicationsAPIService) UpdateConfiguration(ctx context.Context, id str
 }
 
 // Execute executes the request
-//  @return CreateApplicationRequestConfiguration
-func (a *ApplicationsAPIService) UpdateConfigurationExecute(r ApiUpdateConfigurationRequest) (*CreateApplicationRequestConfiguration, *http.Response, error) {
+//  @return GetApplication200ResponseConfiguration
+func (a *ApplicationsAPIService) UpdateConfigurationExecute(r ApiUpdateConfigurationRequest) (*GetApplication200ResponseConfiguration, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateApplicationRequestConfiguration
+		localVarReturnValue  *GetApplication200ResponseConfiguration
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplicationsAPIService.UpdateConfiguration")

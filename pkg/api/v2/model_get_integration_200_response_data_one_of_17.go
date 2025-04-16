@@ -21,7 +21,7 @@ var _ MappedNullable = &GetIntegration200ResponseDataOneOf17{}
 
 // GetIntegration200ResponseDataOneOf17 struct for GetIntegration200ResponseDataOneOf17
 type GetIntegration200ResponseDataOneOf17 struct {
-	Kind string `json:"kind"`
+	Kind EnumSLACKWEBHOOK `json:"kind"`
 	Parameters map[string]interface{} `json:"parameters"`
 }
 
@@ -31,7 +31,7 @@ type _GetIntegration200ResponseDataOneOf17 GetIntegration200ResponseDataOneOf17
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetIntegration200ResponseDataOneOf17(kind string, parameters map[string]interface{}) *GetIntegration200ResponseDataOneOf17 {
+func NewGetIntegration200ResponseDataOneOf17(kind EnumSLACKWEBHOOK, parameters map[string]interface{}) *GetIntegration200ResponseDataOneOf17 {
 	this := GetIntegration200ResponseDataOneOf17{}
 	this.Kind = kind
 	this.Parameters = parameters
@@ -47,9 +47,9 @@ func NewGetIntegration200ResponseDataOneOf17WithDefaults() *GetIntegration200Res
 }
 
 // GetKind returns the Kind field value
-func (o *GetIntegration200ResponseDataOneOf17) GetKind() string {
+func (o *GetIntegration200ResponseDataOneOf17) GetKind() EnumSLACKWEBHOOK {
 	if o == nil {
-		var ret string
+		var ret EnumSLACKWEBHOOK
 		return ret
 	}
 
@@ -58,7 +58,7 @@ func (o *GetIntegration200ResponseDataOneOf17) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
-func (o *GetIntegration200ResponseDataOneOf17) GetKindOk() (*string, bool) {
+func (o *GetIntegration200ResponseDataOneOf17) GetKindOk() (*EnumSLACKWEBHOOK, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -66,7 +66,7 @@ func (o *GetIntegration200ResponseDataOneOf17) GetKindOk() (*string, bool) {
 }
 
 // SetKind sets field value
-func (o *GetIntegration200ResponseDataOneOf17) SetKind(v string) {
+func (o *GetIntegration200ResponseDataOneOf17) SetKind(v EnumSLACKWEBHOOK) {
 	o.Kind = v
 }
 

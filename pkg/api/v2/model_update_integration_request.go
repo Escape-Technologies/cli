@@ -21,7 +21,7 @@ var _ MappedNullable = &UpdateIntegrationRequest{}
 
 // UpdateIntegrationRequest struct for UpdateIntegrationRequest
 type UpdateIntegrationRequest struct {
-	Data GetIntegration200ResponseData `json:"data"`
+	Data UpdateIntegrationRequestData `json:"data"`
 	// The name of the integration.
 	Name string `json:"name"`
 	// A location ID to use with this integration.
@@ -34,7 +34,7 @@ type _UpdateIntegrationRequest UpdateIntegrationRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateIntegrationRequest(data GetIntegration200ResponseData, name string) *UpdateIntegrationRequest {
+func NewUpdateIntegrationRequest(data UpdateIntegrationRequestData, name string) *UpdateIntegrationRequest {
 	this := UpdateIntegrationRequest{}
 	this.Data = data
 	this.Name = name
@@ -50,9 +50,9 @@ func NewUpdateIntegrationRequestWithDefaults() *UpdateIntegrationRequest {
 }
 
 // GetData returns the Data field value
-func (o *UpdateIntegrationRequest) GetData() GetIntegration200ResponseData {
+func (o *UpdateIntegrationRequest) GetData() UpdateIntegrationRequestData {
 	if o == nil {
-		var ret GetIntegration200ResponseData
+		var ret UpdateIntegrationRequestData
 		return ret
 	}
 
@@ -61,7 +61,7 @@ func (o *UpdateIntegrationRequest) GetData() GetIntegration200ResponseData {
 
 // GetDataOk returns a tuple with the Data field value
 // and a boolean to check if the value has been set.
-func (o *UpdateIntegrationRequest) GetDataOk() (*GetIntegration200ResponseData, bool) {
+func (o *UpdateIntegrationRequest) GetDataOk() (*UpdateIntegrationRequestData, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -69,7 +69,7 @@ func (o *UpdateIntegrationRequest) GetDataOk() (*GetIntegration200ResponseData, 
 }
 
 // SetData sets field value
-func (o *UpdateIntegrationRequest) SetData(v GetIntegration200ResponseData) {
+func (o *UpdateIntegrationRequest) SetData(v UpdateIntegrationRequestData) {
 	o.Data = v
 }
 

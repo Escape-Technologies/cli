@@ -21,8 +21,10 @@ var _ MappedNullable = &GetIntegration200ResponseDataOneOf12ParametersTemplatesI
 
 // GetIntegration200ResponseDataOneOf12ParametersTemplatesInnerPropertiesMappingInnerMappingInner struct for GetIntegration200ResponseDataOneOf12ParametersTemplatesInnerPropertiesMappingInnerMappingInner
 type GetIntegration200ResponseDataOneOf12ParametersTemplatesInnerPropertiesMappingInnerMappingInner struct {
-	EscapeProperty string `json:"escape_property"`
+	EscapeProperty Enum6b715a076de4c8a128eec128b79c270b `json:"escape_property"`
 	JiraProperty string `json:"jira_property"`
+	EscapeOption *string `json:"escape_option,omitempty"`
+	JiraOption *string `json:"jira_option,omitempty"`
 }
 
 type _GetIntegration200ResponseDataOneOf12ParametersTemplatesInnerPropertiesMappingInnerMappingInner GetIntegration200ResponseDataOneOf12ParametersTemplatesInnerPropertiesMappingInnerMappingInner
@@ -31,7 +33,7 @@ type _GetIntegration200ResponseDataOneOf12ParametersTemplatesInnerPropertiesMapp
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetIntegration200ResponseDataOneOf12ParametersTemplatesInnerPropertiesMappingInnerMappingInner(escapeProperty string, jiraProperty string) *GetIntegration200ResponseDataOneOf12ParametersTemplatesInnerPropertiesMappingInnerMappingInner {
+func NewGetIntegration200ResponseDataOneOf12ParametersTemplatesInnerPropertiesMappingInnerMappingInner(escapeProperty Enum6b715a076de4c8a128eec128b79c270b, jiraProperty string) *GetIntegration200ResponseDataOneOf12ParametersTemplatesInnerPropertiesMappingInnerMappingInner {
 	this := GetIntegration200ResponseDataOneOf12ParametersTemplatesInnerPropertiesMappingInnerMappingInner{}
 	this.EscapeProperty = escapeProperty
 	this.JiraProperty = jiraProperty
@@ -47,9 +49,9 @@ func NewGetIntegration200ResponseDataOneOf12ParametersTemplatesInnerPropertiesMa
 }
 
 // GetEscapeProperty returns the EscapeProperty field value
-func (o *GetIntegration200ResponseDataOneOf12ParametersTemplatesInnerPropertiesMappingInnerMappingInner) GetEscapeProperty() string {
+func (o *GetIntegration200ResponseDataOneOf12ParametersTemplatesInnerPropertiesMappingInnerMappingInner) GetEscapeProperty() Enum6b715a076de4c8a128eec128b79c270b {
 	if o == nil {
-		var ret string
+		var ret Enum6b715a076de4c8a128eec128b79c270b
 		return ret
 	}
 
@@ -58,7 +60,7 @@ func (o *GetIntegration200ResponseDataOneOf12ParametersTemplatesInnerPropertiesM
 
 // GetEscapePropertyOk returns a tuple with the EscapeProperty field value
 // and a boolean to check if the value has been set.
-func (o *GetIntegration200ResponseDataOneOf12ParametersTemplatesInnerPropertiesMappingInnerMappingInner) GetEscapePropertyOk() (*string, bool) {
+func (o *GetIntegration200ResponseDataOneOf12ParametersTemplatesInnerPropertiesMappingInnerMappingInner) GetEscapePropertyOk() (*Enum6b715a076de4c8a128eec128b79c270b, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -66,7 +68,7 @@ func (o *GetIntegration200ResponseDataOneOf12ParametersTemplatesInnerPropertiesM
 }
 
 // SetEscapeProperty sets field value
-func (o *GetIntegration200ResponseDataOneOf12ParametersTemplatesInnerPropertiesMappingInnerMappingInner) SetEscapeProperty(v string) {
+func (o *GetIntegration200ResponseDataOneOf12ParametersTemplatesInnerPropertiesMappingInnerMappingInner) SetEscapeProperty(v Enum6b715a076de4c8a128eec128b79c270b) {
 	o.EscapeProperty = v
 }
 
@@ -94,6 +96,70 @@ func (o *GetIntegration200ResponseDataOneOf12ParametersTemplatesInnerPropertiesM
 	o.JiraProperty = v
 }
 
+// GetEscapeOption returns the EscapeOption field value if set, zero value otherwise.
+func (o *GetIntegration200ResponseDataOneOf12ParametersTemplatesInnerPropertiesMappingInnerMappingInner) GetEscapeOption() string {
+	if o == nil || IsNil(o.EscapeOption) {
+		var ret string
+		return ret
+	}
+	return *o.EscapeOption
+}
+
+// GetEscapeOptionOk returns a tuple with the EscapeOption field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetIntegration200ResponseDataOneOf12ParametersTemplatesInnerPropertiesMappingInnerMappingInner) GetEscapeOptionOk() (*string, bool) {
+	if o == nil || IsNil(o.EscapeOption) {
+		return nil, false
+	}
+	return o.EscapeOption, true
+}
+
+// HasEscapeOption returns a boolean if a field has been set.
+func (o *GetIntegration200ResponseDataOneOf12ParametersTemplatesInnerPropertiesMappingInnerMappingInner) HasEscapeOption() bool {
+	if o != nil && !IsNil(o.EscapeOption) {
+		return true
+	}
+
+	return false
+}
+
+// SetEscapeOption gets a reference to the given string and assigns it to the EscapeOption field.
+func (o *GetIntegration200ResponseDataOneOf12ParametersTemplatesInnerPropertiesMappingInnerMappingInner) SetEscapeOption(v string) {
+	o.EscapeOption = &v
+}
+
+// GetJiraOption returns the JiraOption field value if set, zero value otherwise.
+func (o *GetIntegration200ResponseDataOneOf12ParametersTemplatesInnerPropertiesMappingInnerMappingInner) GetJiraOption() string {
+	if o == nil || IsNil(o.JiraOption) {
+		var ret string
+		return ret
+	}
+	return *o.JiraOption
+}
+
+// GetJiraOptionOk returns a tuple with the JiraOption field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetIntegration200ResponseDataOneOf12ParametersTemplatesInnerPropertiesMappingInnerMappingInner) GetJiraOptionOk() (*string, bool) {
+	if o == nil || IsNil(o.JiraOption) {
+		return nil, false
+	}
+	return o.JiraOption, true
+}
+
+// HasJiraOption returns a boolean if a field has been set.
+func (o *GetIntegration200ResponseDataOneOf12ParametersTemplatesInnerPropertiesMappingInnerMappingInner) HasJiraOption() bool {
+	if o != nil && !IsNil(o.JiraOption) {
+		return true
+	}
+
+	return false
+}
+
+// SetJiraOption gets a reference to the given string and assigns it to the JiraOption field.
+func (o *GetIntegration200ResponseDataOneOf12ParametersTemplatesInnerPropertiesMappingInnerMappingInner) SetJiraOption(v string) {
+	o.JiraOption = &v
+}
+
 func (o GetIntegration200ResponseDataOneOf12ParametersTemplatesInnerPropertiesMappingInnerMappingInner) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -106,6 +172,12 @@ func (o GetIntegration200ResponseDataOneOf12ParametersTemplatesInnerPropertiesMa
 	toSerialize := map[string]interface{}{}
 	toSerialize["escape_property"] = o.EscapeProperty
 	toSerialize["jira_property"] = o.JiraProperty
+	if !IsNil(o.EscapeOption) {
+		toSerialize["escape_option"] = o.EscapeOption
+	}
+	if !IsNil(o.JiraOption) {
+		toSerialize["jira_option"] = o.JiraOption
+	}
 	return toSerialize, nil
 }
 

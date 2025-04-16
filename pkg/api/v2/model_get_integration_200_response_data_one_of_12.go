@@ -21,7 +21,7 @@ var _ MappedNullable = &GetIntegration200ResponseDataOneOf12{}
 
 // GetIntegration200ResponseDataOneOf12 struct for GetIntegration200ResponseDataOneOf12
 type GetIntegration200ResponseDataOneOf12 struct {
-	Kind string `json:"kind"`
+	Kind EnumJIRA `json:"kind"`
 	Parameters GetIntegration200ResponseDataOneOf12Parameters `json:"parameters"`
 }
 
@@ -31,7 +31,7 @@ type _GetIntegration200ResponseDataOneOf12 GetIntegration200ResponseDataOneOf12
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetIntegration200ResponseDataOneOf12(kind string, parameters GetIntegration200ResponseDataOneOf12Parameters) *GetIntegration200ResponseDataOneOf12 {
+func NewGetIntegration200ResponseDataOneOf12(kind EnumJIRA, parameters GetIntegration200ResponseDataOneOf12Parameters) *GetIntegration200ResponseDataOneOf12 {
 	this := GetIntegration200ResponseDataOneOf12{}
 	this.Kind = kind
 	this.Parameters = parameters
@@ -47,9 +47,9 @@ func NewGetIntegration200ResponseDataOneOf12WithDefaults() *GetIntegration200Res
 }
 
 // GetKind returns the Kind field value
-func (o *GetIntegration200ResponseDataOneOf12) GetKind() string {
+func (o *GetIntegration200ResponseDataOneOf12) GetKind() EnumJIRA {
 	if o == nil {
-		var ret string
+		var ret EnumJIRA
 		return ret
 	}
 
@@ -58,7 +58,7 @@ func (o *GetIntegration200ResponseDataOneOf12) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
-func (o *GetIntegration200ResponseDataOneOf12) GetKindOk() (*string, bool) {
+func (o *GetIntegration200ResponseDataOneOf12) GetKindOk() (*EnumJIRA, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -66,7 +66,7 @@ func (o *GetIntegration200ResponseDataOneOf12) GetKindOk() (*string, bool) {
 }
 
 // SetKind sets field value
-func (o *GetIntegration200ResponseDataOneOf12) SetKind(v string) {
+func (o *GetIntegration200ResponseDataOneOf12) SetKind(v EnumJIRA) {
 	o.Kind = v
 }
 

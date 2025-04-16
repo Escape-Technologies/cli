@@ -21,7 +21,7 @@ var _ MappedNullable = &GetIntegration200ResponseDataOneOf15{}
 
 // GetIntegration200ResponseDataOneOf15 struct for GetIntegration200ResponseDataOneOf15
 type GetIntegration200ResponseDataOneOf15 struct {
-	Kind string `json:"kind"`
+	Kind EnumKUBERNETES `json:"kind"`
 	Parameters GetIntegration200ResponseDataOneOf15Parameters `json:"parameters"`
 }
 
@@ -31,7 +31,7 @@ type _GetIntegration200ResponseDataOneOf15 GetIntegration200ResponseDataOneOf15
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetIntegration200ResponseDataOneOf15(kind string, parameters GetIntegration200ResponseDataOneOf15Parameters) *GetIntegration200ResponseDataOneOf15 {
+func NewGetIntegration200ResponseDataOneOf15(kind EnumKUBERNETES, parameters GetIntegration200ResponseDataOneOf15Parameters) *GetIntegration200ResponseDataOneOf15 {
 	this := GetIntegration200ResponseDataOneOf15{}
 	this.Kind = kind
 	this.Parameters = parameters
@@ -47,9 +47,9 @@ func NewGetIntegration200ResponseDataOneOf15WithDefaults() *GetIntegration200Res
 }
 
 // GetKind returns the Kind field value
-func (o *GetIntegration200ResponseDataOneOf15) GetKind() string {
+func (o *GetIntegration200ResponseDataOneOf15) GetKind() EnumKUBERNETES {
 	if o == nil {
-		var ret string
+		var ret EnumKUBERNETES
 		return ret
 	}
 
@@ -58,7 +58,7 @@ func (o *GetIntegration200ResponseDataOneOf15) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
-func (o *GetIntegration200ResponseDataOneOf15) GetKindOk() (*string, bool) {
+func (o *GetIntegration200ResponseDataOneOf15) GetKindOk() (*EnumKUBERNETES, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -66,7 +66,7 @@ func (o *GetIntegration200ResponseDataOneOf15) GetKindOk() (*string, bool) {
 }
 
 // SetKind sets field value
-func (o *GetIntegration200ResponseDataOneOf15) SetKind(v string) {
+func (o *GetIntegration200ResponseDataOneOf15) SetKind(v EnumKUBERNETES) {
 	o.Kind = v
 }
 

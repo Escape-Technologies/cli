@@ -21,7 +21,7 @@ var _ MappedNullable = &GetIntegration200ResponseDataOneOf5{}
 
 // GetIntegration200ResponseDataOneOf5 struct for GetIntegration200ResponseDataOneOf5
 type GetIntegration200ResponseDataOneOf5 struct {
-	Kind string `json:"kind"`
+	Kind EnumBITBUCKETREPO `json:"kind"`
 	Parameters GetIntegration200ResponseDataOneOf5Parameters `json:"parameters"`
 }
 
@@ -31,7 +31,7 @@ type _GetIntegration200ResponseDataOneOf5 GetIntegration200ResponseDataOneOf5
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetIntegration200ResponseDataOneOf5(kind string, parameters GetIntegration200ResponseDataOneOf5Parameters) *GetIntegration200ResponseDataOneOf5 {
+func NewGetIntegration200ResponseDataOneOf5(kind EnumBITBUCKETREPO, parameters GetIntegration200ResponseDataOneOf5Parameters) *GetIntegration200ResponseDataOneOf5 {
 	this := GetIntegration200ResponseDataOneOf5{}
 	this.Kind = kind
 	this.Parameters = parameters
@@ -47,9 +47,9 @@ func NewGetIntegration200ResponseDataOneOf5WithDefaults() *GetIntegration200Resp
 }
 
 // GetKind returns the Kind field value
-func (o *GetIntegration200ResponseDataOneOf5) GetKind() string {
+func (o *GetIntegration200ResponseDataOneOf5) GetKind() EnumBITBUCKETREPO {
 	if o == nil {
-		var ret string
+		var ret EnumBITBUCKETREPO
 		return ret
 	}
 
@@ -58,7 +58,7 @@ func (o *GetIntegration200ResponseDataOneOf5) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
-func (o *GetIntegration200ResponseDataOneOf5) GetKindOk() (*string, bool) {
+func (o *GetIntegration200ResponseDataOneOf5) GetKindOk() (*EnumBITBUCKETREPO, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -66,7 +66,7 @@ func (o *GetIntegration200ResponseDataOneOf5) GetKindOk() (*string, bool) {
 }
 
 // SetKind sets field value
-func (o *GetIntegration200ResponseDataOneOf5) SetKind(v string) {
+func (o *GetIntegration200ResponseDataOneOf5) SetKind(v EnumBITBUCKETREPO) {
 	o.Kind = v
 }
 

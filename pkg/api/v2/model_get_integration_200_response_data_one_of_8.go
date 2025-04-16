@@ -21,7 +21,7 @@ var _ MappedNullable = &GetIntegration200ResponseDataOneOf8{}
 
 // GetIntegration200ResponseDataOneOf8 struct for GetIntegration200ResponseDataOneOf8
 type GetIntegration200ResponseDataOneOf8 struct {
-	Kind string `json:"kind"`
+	Kind EnumEMAIL `json:"kind"`
 	Parameters map[string]interface{} `json:"parameters"`
 }
 
@@ -31,7 +31,7 @@ type _GetIntegration200ResponseDataOneOf8 GetIntegration200ResponseDataOneOf8
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetIntegration200ResponseDataOneOf8(kind string, parameters map[string]interface{}) *GetIntegration200ResponseDataOneOf8 {
+func NewGetIntegration200ResponseDataOneOf8(kind EnumEMAIL, parameters map[string]interface{}) *GetIntegration200ResponseDataOneOf8 {
 	this := GetIntegration200ResponseDataOneOf8{}
 	this.Kind = kind
 	this.Parameters = parameters
@@ -47,9 +47,9 @@ func NewGetIntegration200ResponseDataOneOf8WithDefaults() *GetIntegration200Resp
 }
 
 // GetKind returns the Kind field value
-func (o *GetIntegration200ResponseDataOneOf8) GetKind() string {
+func (o *GetIntegration200ResponseDataOneOf8) GetKind() EnumEMAIL {
 	if o == nil {
-		var ret string
+		var ret EnumEMAIL
 		return ret
 	}
 
@@ -58,7 +58,7 @@ func (o *GetIntegration200ResponseDataOneOf8) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
-func (o *GetIntegration200ResponseDataOneOf8) GetKindOk() (*string, bool) {
+func (o *GetIntegration200ResponseDataOneOf8) GetKindOk() (*EnumEMAIL, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -66,7 +66,7 @@ func (o *GetIntegration200ResponseDataOneOf8) GetKindOk() (*string, bool) {
 }
 
 // SetKind sets field value
-func (o *GetIntegration200ResponseDataOneOf8) SetKind(v string) {
+func (o *GetIntegration200ResponseDataOneOf8) SetKind(v EnumEMAIL) {
 	o.Kind = v
 }
 

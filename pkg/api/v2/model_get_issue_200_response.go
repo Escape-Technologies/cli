@@ -25,7 +25,7 @@ type GetIssue200Response struct {
 	Ignored bool `json:"ignored"`
 	FirstSeenScanId string `json:"firstSeenScanId"`
 	LastSeenScanId string `json:"lastSeenScanId"`
-	Severity string `json:"severity"`
+	Severity Enum9c1e82c38fa16c4851aece69dc28da0b `json:"severity"`
 	Risks []GetIssue200ResponseRisksInner `json:"risks"`
 }
 
@@ -35,7 +35,7 @@ type _GetIssue200Response GetIssue200Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetIssue200Response(id string, ignored bool, firstSeenScanId string, lastSeenScanId string, severity string, risks []GetIssue200ResponseRisksInner) *GetIssue200Response {
+func NewGetIssue200Response(id string, ignored bool, firstSeenScanId string, lastSeenScanId string, severity Enum9c1e82c38fa16c4851aece69dc28da0b, risks []GetIssue200ResponseRisksInner) *GetIssue200Response {
 	this := GetIssue200Response{}
 	this.Id = id
 	this.Ignored = ignored
@@ -151,9 +151,9 @@ func (o *GetIssue200Response) SetLastSeenScanId(v string) {
 }
 
 // GetSeverity returns the Severity field value
-func (o *GetIssue200Response) GetSeverity() string {
+func (o *GetIssue200Response) GetSeverity() Enum9c1e82c38fa16c4851aece69dc28da0b {
 	if o == nil {
-		var ret string
+		var ret Enum9c1e82c38fa16c4851aece69dc28da0b
 		return ret
 	}
 
@@ -162,7 +162,7 @@ func (o *GetIssue200Response) GetSeverity() string {
 
 // GetSeverityOk returns a tuple with the Severity field value
 // and a boolean to check if the value has been set.
-func (o *GetIssue200Response) GetSeverityOk() (*string, bool) {
+func (o *GetIssue200Response) GetSeverityOk() (*Enum9c1e82c38fa16c4851aece69dc28da0b, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -170,7 +170,7 @@ func (o *GetIssue200Response) GetSeverityOk() (*string, bool) {
 }
 
 // SetSeverity sets field value
-func (o *GetIssue200Response) SetSeverity(v string) {
+func (o *GetIssue200Response) SetSeverity(v Enum9c1e82c38fa16c4851aece69dc28da0b) {
 	o.Severity = v
 }
 

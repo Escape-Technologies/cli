@@ -23,7 +23,7 @@ var _ MappedNullable = &ListScans200ResponseDataInner{}
 // ListScans200ResponseDataInner struct for ListScans200ResponseDataInner
 type ListScans200ResponseDataInner struct {
 	Id string `json:"id"`
-	Status string `json:"status"`
+	Status EnumE48dd51fe8a350a4154904abf16320d7 `json:"status"`
 	CreatedAt time.Time `json:"createdAt"`
 	ProgressRatio float32 `json:"progressRatio"`
 }
@@ -34,7 +34,7 @@ type _ListScans200ResponseDataInner ListScans200ResponseDataInner
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewListScans200ResponseDataInner(id string, status string, createdAt time.Time, progressRatio float32) *ListScans200ResponseDataInner {
+func NewListScans200ResponseDataInner(id string, status EnumE48dd51fe8a350a4154904abf16320d7, createdAt time.Time, progressRatio float32) *ListScans200ResponseDataInner {
 	this := ListScans200ResponseDataInner{}
 	this.Id = id
 	this.Status = status
@@ -76,9 +76,9 @@ func (o *ListScans200ResponseDataInner) SetId(v string) {
 }
 
 // GetStatus returns the Status field value
-func (o *ListScans200ResponseDataInner) GetStatus() string {
+func (o *ListScans200ResponseDataInner) GetStatus() EnumE48dd51fe8a350a4154904abf16320d7 {
 	if o == nil {
-		var ret string
+		var ret EnumE48dd51fe8a350a4154904abf16320d7
 		return ret
 	}
 
@@ -87,7 +87,7 @@ func (o *ListScans200ResponseDataInner) GetStatus() string {
 
 // GetStatusOk returns a tuple with the Status field value
 // and a boolean to check if the value has been set.
-func (o *ListScans200ResponseDataInner) GetStatusOk() (*string, bool) {
+func (o *ListScans200ResponseDataInner) GetStatusOk() (*EnumE48dd51fe8a350a4154904abf16320d7, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -95,7 +95,7 @@ func (o *ListScans200ResponseDataInner) GetStatusOk() (*string, bool) {
 }
 
 // SetStatus sets field value
-func (o *ListScans200ResponseDataInner) SetStatus(v string) {
+func (o *ListScans200ResponseDataInner) SetStatus(v EnumE48dd51fe8a350a4154904abf16320d7) {
 	o.Status = v
 }
 

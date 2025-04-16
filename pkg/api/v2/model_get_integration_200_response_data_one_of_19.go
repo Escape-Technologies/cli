@@ -21,7 +21,7 @@ var _ MappedNullable = &GetIntegration200ResponseDataOneOf19{}
 
 // GetIntegration200ResponseDataOneOf19 struct for GetIntegration200ResponseDataOneOf19
 type GetIntegration200ResponseDataOneOf19 struct {
-	Kind string `json:"kind"`
+	Kind EnumWEBHOOK `json:"kind"`
 	Parameters map[string]interface{} `json:"parameters"`
 }
 
@@ -31,7 +31,7 @@ type _GetIntegration200ResponseDataOneOf19 GetIntegration200ResponseDataOneOf19
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetIntegration200ResponseDataOneOf19(kind string, parameters map[string]interface{}) *GetIntegration200ResponseDataOneOf19 {
+func NewGetIntegration200ResponseDataOneOf19(kind EnumWEBHOOK, parameters map[string]interface{}) *GetIntegration200ResponseDataOneOf19 {
 	this := GetIntegration200ResponseDataOneOf19{}
 	this.Kind = kind
 	this.Parameters = parameters
@@ -47,9 +47,9 @@ func NewGetIntegration200ResponseDataOneOf19WithDefaults() *GetIntegration200Res
 }
 
 // GetKind returns the Kind field value
-func (o *GetIntegration200ResponseDataOneOf19) GetKind() string {
+func (o *GetIntegration200ResponseDataOneOf19) GetKind() EnumWEBHOOK {
 	if o == nil {
-		var ret string
+		var ret EnumWEBHOOK
 		return ret
 	}
 
@@ -58,7 +58,7 @@ func (o *GetIntegration200ResponseDataOneOf19) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
-func (o *GetIntegration200ResponseDataOneOf19) GetKindOk() (*string, bool) {
+func (o *GetIntegration200ResponseDataOneOf19) GetKindOk() (*EnumWEBHOOK, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -66,7 +66,7 @@ func (o *GetIntegration200ResponseDataOneOf19) GetKindOk() (*string, bool) {
 }
 
 // SetKind sets field value
-func (o *GetIntegration200ResponseDataOneOf19) SetKind(v string) {
+func (o *GetIntegration200ResponseDataOneOf19) SetKind(v EnumWEBHOOK) {
 	o.Kind = v
 }
 

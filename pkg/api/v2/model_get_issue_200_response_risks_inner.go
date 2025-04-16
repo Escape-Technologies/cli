@@ -22,7 +22,7 @@ var _ MappedNullable = &GetIssue200ResponseRisksInner{}
 // GetIssue200ResponseRisksInner struct for GetIssue200ResponseRisksInner
 type GetIssue200ResponseRisksInner struct {
 	Id string `json:"id"`
-	Kind string `json:"kind"`
+	Kind Enum1ea54cdf1f4480ebf83fc671185f5693 `json:"kind"`
 }
 
 type _GetIssue200ResponseRisksInner GetIssue200ResponseRisksInner
@@ -31,7 +31,7 @@ type _GetIssue200ResponseRisksInner GetIssue200ResponseRisksInner
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetIssue200ResponseRisksInner(id string, kind string) *GetIssue200ResponseRisksInner {
+func NewGetIssue200ResponseRisksInner(id string, kind Enum1ea54cdf1f4480ebf83fc671185f5693) *GetIssue200ResponseRisksInner {
 	this := GetIssue200ResponseRisksInner{}
 	this.Id = id
 	this.Kind = kind
@@ -71,9 +71,9 @@ func (o *GetIssue200ResponseRisksInner) SetId(v string) {
 }
 
 // GetKind returns the Kind field value
-func (o *GetIssue200ResponseRisksInner) GetKind() string {
+func (o *GetIssue200ResponseRisksInner) GetKind() Enum1ea54cdf1f4480ebf83fc671185f5693 {
 	if o == nil {
-		var ret string
+		var ret Enum1ea54cdf1f4480ebf83fc671185f5693
 		return ret
 	}
 
@@ -82,7 +82,7 @@ func (o *GetIssue200ResponseRisksInner) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
-func (o *GetIssue200ResponseRisksInner) GetKindOk() (*string, bool) {
+func (o *GetIssue200ResponseRisksInner) GetKindOk() (*Enum1ea54cdf1f4480ebf83fc671185f5693, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -90,7 +90,7 @@ func (o *GetIssue200ResponseRisksInner) GetKindOk() (*string, bool) {
 }
 
 // SetKind sets field value
-func (o *GetIssue200ResponseRisksInner) SetKind(v string) {
+func (o *GetIssue200ResponseRisksInner) SetKind(v Enum1ea54cdf1f4480ebf83fc671185f5693) {
 	o.Kind = v
 }
 

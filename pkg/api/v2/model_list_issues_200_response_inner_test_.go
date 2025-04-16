@@ -21,7 +21,7 @@ var _ MappedNullable = &ListIssues200ResponseInnerTest{}
 
 // ListIssues200ResponseInnerTest struct for ListIssues200ResponseInnerTest
 type ListIssues200ResponseInnerTest struct {
-	Category string `json:"category"`
+	Category Enum517d458bf219c9da2092895cc6b18716 `json:"category"`
 	SecurityTestUid string `json:"securityTestUid"`
 	Meta ListIssues200ResponseInnerTestMeta `json:"meta"`
 }
@@ -32,7 +32,7 @@ type _ListIssues200ResponseInnerTest ListIssues200ResponseInnerTest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewListIssues200ResponseInnerTest(category string, securityTestUid string, meta ListIssues200ResponseInnerTestMeta) *ListIssues200ResponseInnerTest {
+func NewListIssues200ResponseInnerTest(category Enum517d458bf219c9da2092895cc6b18716, securityTestUid string, meta ListIssues200ResponseInnerTestMeta) *ListIssues200ResponseInnerTest {
 	this := ListIssues200ResponseInnerTest{}
 	this.Category = category
 	this.SecurityTestUid = securityTestUid
@@ -49,9 +49,9 @@ func NewListIssues200ResponseInnerTestWithDefaults() *ListIssues200ResponseInner
 }
 
 // GetCategory returns the Category field value
-func (o *ListIssues200ResponseInnerTest) GetCategory() string {
+func (o *ListIssues200ResponseInnerTest) GetCategory() Enum517d458bf219c9da2092895cc6b18716 {
 	if o == nil {
-		var ret string
+		var ret Enum517d458bf219c9da2092895cc6b18716
 		return ret
 	}
 
@@ -60,7 +60,7 @@ func (o *ListIssues200ResponseInnerTest) GetCategory() string {
 
 // GetCategoryOk returns a tuple with the Category field value
 // and a boolean to check if the value has been set.
-func (o *ListIssues200ResponseInnerTest) GetCategoryOk() (*string, bool) {
+func (o *ListIssues200ResponseInnerTest) GetCategoryOk() (*Enum517d458bf219c9da2092895cc6b18716, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -68,7 +68,7 @@ func (o *ListIssues200ResponseInnerTest) GetCategoryOk() (*string, bool) {
 }
 
 // SetCategory sets field value
-func (o *ListIssues200ResponseInnerTest) SetCategory(v string) {
+func (o *ListIssues200ResponseInnerTest) SetCategory(v Enum517d458bf219c9da2092895cc6b18716) {
 	o.Category = v
 }
 

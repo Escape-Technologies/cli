@@ -21,7 +21,7 @@ var _ MappedNullable = &GetIntegration200ResponseDataOneOf18{}
 
 // GetIntegration200ResponseDataOneOf18 struct for GetIntegration200ResponseDataOneOf18
 type GetIntegration200ResponseDataOneOf18 struct {
-	Kind string `json:"kind"`
+	Kind EnumTEAMSWEBHOOK `json:"kind"`
 	Parameters map[string]interface{} `json:"parameters"`
 }
 
@@ -31,7 +31,7 @@ type _GetIntegration200ResponseDataOneOf18 GetIntegration200ResponseDataOneOf18
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetIntegration200ResponseDataOneOf18(kind string, parameters map[string]interface{}) *GetIntegration200ResponseDataOneOf18 {
+func NewGetIntegration200ResponseDataOneOf18(kind EnumTEAMSWEBHOOK, parameters map[string]interface{}) *GetIntegration200ResponseDataOneOf18 {
 	this := GetIntegration200ResponseDataOneOf18{}
 	this.Kind = kind
 	this.Parameters = parameters
@@ -47,9 +47,9 @@ func NewGetIntegration200ResponseDataOneOf18WithDefaults() *GetIntegration200Res
 }
 
 // GetKind returns the Kind field value
-func (o *GetIntegration200ResponseDataOneOf18) GetKind() string {
+func (o *GetIntegration200ResponseDataOneOf18) GetKind() EnumTEAMSWEBHOOK {
 	if o == nil {
-		var ret string
+		var ret EnumTEAMSWEBHOOK
 		return ret
 	}
 
@@ -58,7 +58,7 @@ func (o *GetIntegration200ResponseDataOneOf18) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
-func (o *GetIntegration200ResponseDataOneOf18) GetKindOk() (*string, bool) {
+func (o *GetIntegration200ResponseDataOneOf18) GetKindOk() (*EnumTEAMSWEBHOOK, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -66,7 +66,7 @@ func (o *GetIntegration200ResponseDataOneOf18) GetKindOk() (*string, bool) {
 }
 
 // SetKind sets field value
-func (o *GetIntegration200ResponseDataOneOf18) SetKind(v string) {
+func (o *GetIntegration200ResponseDataOneOf18) SetKind(v EnumTEAMSWEBHOOK) {
 	o.Kind = v
 }
 

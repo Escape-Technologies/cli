@@ -21,7 +21,7 @@ var _ MappedNullable = &GetIntegration200ResponseDataOneOf2{}
 
 // GetIntegration200ResponseDataOneOf2 struct for GetIntegration200ResponseDataOneOf2
 type GetIntegration200ResponseDataOneOf2 struct {
-	Kind string `json:"kind"`
+	Kind EnumAWS `json:"kind"`
 	Parameters GetIntegration200ResponseDataOneOf2Parameters `json:"parameters"`
 }
 
@@ -31,7 +31,7 @@ type _GetIntegration200ResponseDataOneOf2 GetIntegration200ResponseDataOneOf2
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetIntegration200ResponseDataOneOf2(kind string, parameters GetIntegration200ResponseDataOneOf2Parameters) *GetIntegration200ResponseDataOneOf2 {
+func NewGetIntegration200ResponseDataOneOf2(kind EnumAWS, parameters GetIntegration200ResponseDataOneOf2Parameters) *GetIntegration200ResponseDataOneOf2 {
 	this := GetIntegration200ResponseDataOneOf2{}
 	this.Kind = kind
 	this.Parameters = parameters
@@ -47,9 +47,9 @@ func NewGetIntegration200ResponseDataOneOf2WithDefaults() *GetIntegration200Resp
 }
 
 // GetKind returns the Kind field value
-func (o *GetIntegration200ResponseDataOneOf2) GetKind() string {
+func (o *GetIntegration200ResponseDataOneOf2) GetKind() EnumAWS {
 	if o == nil {
-		var ret string
+		var ret EnumAWS
 		return ret
 	}
 
@@ -58,7 +58,7 @@ func (o *GetIntegration200ResponseDataOneOf2) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
-func (o *GetIntegration200ResponseDataOneOf2) GetKindOk() (*string, bool) {
+func (o *GetIntegration200ResponseDataOneOf2) GetKindOk() (*EnumAWS, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -66,7 +66,7 @@ func (o *GetIntegration200ResponseDataOneOf2) GetKindOk() (*string, bool) {
 }
 
 // SetKind sets field value
-func (o *GetIntegration200ResponseDataOneOf2) SetKind(v string) {
+func (o *GetIntegration200ResponseDataOneOf2) SetKind(v EnumAWS) {
 	o.Kind = v
 }
 

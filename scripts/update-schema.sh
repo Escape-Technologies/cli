@@ -9,18 +9,24 @@ VERSIONS=(
 TMP_DIR="${PROJECT_ROOT}/._openapi-generator/"
 
 docker pull openapitools/openapi-generator-cli:latest
+docker pull python:3.12.9
 
 (
     cd "${PROJECT_ROOT}"
     for VERSION in "${VERSIONS[@]}"; do
         rm -rf "${TMP_DIR}/${VERSION}"
         mkdir -p "${TMP_DIR}/${VERSION}"
-        curl -s -o "${TMP_DIR}/${VERSION}/openapi.json" "https://public.escape.tech/${VERSION}/openapi.json"
+        curl -s -o "${TMP_DIR}/${VERSION}/openapi-raw.json" "https://public.escape.tech/${VERSION}/openapi.json"
 
-        docker run -u "$(id -u):$(id -g)" --rm -v "${TMP_DIR}/${VERSION}:/local" \
+        docker run -u "$(id -u):$(id -g)" --rm -v "${TMP_DIR}/${VERSION}:/local" -v "${PROJECT_ROOT}/scripts:/scripts" \
+            python:3.12.9 \
+            python /scripts/convert.py /local/openapi-raw.json /local/openapi.json
+
+        docker run -u "$(id -u):$(id -g)" --rm -v "${TMP_DIR}/${VERSION}:/local" -v "${PROJECT_ROOT}/scripts:/scripts" \
             openapitools/openapi-generator-cli:latest \
             generate \
             -i /local/openapi.json \
+            -c /scripts/openapi-generator.yaml \
             -g go \
             --package-name "${VERSION}" \
             --type-mappings="integer=int" \

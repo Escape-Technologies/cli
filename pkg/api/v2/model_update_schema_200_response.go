@@ -21,7 +21,7 @@ var _ MappedNullable = &UpdateSchema200Response{}
 
 // UpdateSchema200Response struct for UpdateSchema200Response
 type UpdateSchema200Response struct {
-	Message string `json:"message"`
+	Message EnumSCHEMAUPDATED `json:"message"`
 }
 
 type _UpdateSchema200Response UpdateSchema200Response
@@ -30,7 +30,7 @@ type _UpdateSchema200Response UpdateSchema200Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateSchema200Response(message string) *UpdateSchema200Response {
+func NewUpdateSchema200Response(message EnumSCHEMAUPDATED) *UpdateSchema200Response {
 	this := UpdateSchema200Response{}
 	this.Message = message
 	return &this
@@ -45,9 +45,9 @@ func NewUpdateSchema200ResponseWithDefaults() *UpdateSchema200Response {
 }
 
 // GetMessage returns the Message field value
-func (o *UpdateSchema200Response) GetMessage() string {
+func (o *UpdateSchema200Response) GetMessage() EnumSCHEMAUPDATED {
 	if o == nil {
-		var ret string
+		var ret EnumSCHEMAUPDATED
 		return ret
 	}
 
@@ -56,7 +56,7 @@ func (o *UpdateSchema200Response) GetMessage() string {
 
 // GetMessageOk returns a tuple with the Message field value
 // and a boolean to check if the value has been set.
-func (o *UpdateSchema200Response) GetMessageOk() (*string, bool) {
+func (o *UpdateSchema200Response) GetMessageOk() (*EnumSCHEMAUPDATED, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -64,7 +64,7 @@ func (o *UpdateSchema200Response) GetMessageOk() (*string, bool) {
 }
 
 // SetMessage sets field value
-func (o *UpdateSchema200Response) SetMessage(v string) {
+func (o *UpdateSchema200Response) SetMessage(v EnumSCHEMAUPDATED) {
 	o.Message = v
 }
 

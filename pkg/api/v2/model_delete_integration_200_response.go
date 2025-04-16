@@ -21,7 +21,7 @@ var _ MappedNullable = &DeleteIntegration200Response{}
 
 // DeleteIntegration200Response struct for DeleteIntegration200Response
 type DeleteIntegration200Response struct {
-	Message string `json:"message"`
+	Message EnumINTEGRATIONDELETEDSUCCESSFULLY `json:"message"`
 }
 
 type _DeleteIntegration200Response DeleteIntegration200Response
@@ -30,7 +30,7 @@ type _DeleteIntegration200Response DeleteIntegration200Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDeleteIntegration200Response(message string) *DeleteIntegration200Response {
+func NewDeleteIntegration200Response(message EnumINTEGRATIONDELETEDSUCCESSFULLY) *DeleteIntegration200Response {
 	this := DeleteIntegration200Response{}
 	this.Message = message
 	return &this
@@ -45,9 +45,9 @@ func NewDeleteIntegration200ResponseWithDefaults() *DeleteIntegration200Response
 }
 
 // GetMessage returns the Message field value
-func (o *DeleteIntegration200Response) GetMessage() string {
+func (o *DeleteIntegration200Response) GetMessage() EnumINTEGRATIONDELETEDSUCCESSFULLY {
 	if o == nil {
-		var ret string
+		var ret EnumINTEGRATIONDELETEDSUCCESSFULLY
 		return ret
 	}
 
@@ -56,7 +56,7 @@ func (o *DeleteIntegration200Response) GetMessage() string {
 
 // GetMessageOk returns a tuple with the Message field value
 // and a boolean to check if the value has been set.
-func (o *DeleteIntegration200Response) GetMessageOk() (*string, bool) {
+func (o *DeleteIntegration200Response) GetMessageOk() (*EnumINTEGRATIONDELETEDSUCCESSFULLY, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -64,7 +64,7 @@ func (o *DeleteIntegration200Response) GetMessageOk() (*string, bool) {
 }
 
 // SetMessage sets field value
-func (o *DeleteIntegration200Response) SetMessage(v string) {
+func (o *DeleteIntegration200Response) SetMessage(v EnumINTEGRATIONDELETEDSUCCESSFULLY) {
 	o.Message = v
 }
 

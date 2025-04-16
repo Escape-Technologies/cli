@@ -27,7 +27,7 @@ type ListIntegrations200ResponseInner struct {
 	Name *string `json:"name,omitempty"`
 	// A location ID to use with this integration.
 	LocationId *string `json:"locationId,omitempty"`
-	Kind string `json:"kind"`
+	Kind Enum777e439dc57940d3df1f77b9e31ced05 `json:"kind"`
 }
 
 type _ListIntegrations200ResponseInner ListIntegrations200ResponseInner
@@ -36,7 +36,7 @@ type _ListIntegrations200ResponseInner ListIntegrations200ResponseInner
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewListIntegrations200ResponseInner(kind string) *ListIntegrations200ResponseInner {
+func NewListIntegrations200ResponseInner(kind Enum777e439dc57940d3df1f77b9e31ced05) *ListIntegrations200ResponseInner {
 	this := ListIntegrations200ResponseInner{}
 	var id string = "00000000-0000-0000-0000-000000000000"
 	this.Id = &id
@@ -159,9 +159,9 @@ func (o *ListIntegrations200ResponseInner) SetLocationId(v string) {
 }
 
 // GetKind returns the Kind field value
-func (o *ListIntegrations200ResponseInner) GetKind() string {
+func (o *ListIntegrations200ResponseInner) GetKind() Enum777e439dc57940d3df1f77b9e31ced05 {
 	if o == nil {
-		var ret string
+		var ret Enum777e439dc57940d3df1f77b9e31ced05
 		return ret
 	}
 
@@ -170,7 +170,7 @@ func (o *ListIntegrations200ResponseInner) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
-func (o *ListIntegrations200ResponseInner) GetKindOk() (*string, bool) {
+func (o *ListIntegrations200ResponseInner) GetKindOk() (*Enum777e439dc57940d3df1f77b9e31ced05, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -178,7 +178,7 @@ func (o *ListIntegrations200ResponseInner) GetKindOk() (*string, bool) {
 }
 
 // SetKind sets field value
-func (o *ListIntegrations200ResponseInner) SetKind(v string) {
+func (o *ListIntegrations200ResponseInner) SetKind(v Enum777e439dc57940d3df1f77b9e31ced05) {
 	o.Kind = v
 }
 
