@@ -8,6 +8,7 @@ import (
 	"strings"
 
 	v2 "github.com/Escape-Technologies/cli/pkg/api/v2"
+	"github.com/Escape-Technologies/cli/pkg/log"
 	"gopkg.in/yaml.v2"
 )
 
@@ -71,8 +72,23 @@ func DeleteIntegration(ctx context.Context, id string) error {
 	return nil
 }
 
+func UpsertIntegration(ctx context.Context, integration *v2.UpdateIntegrationRequest) error {
+	err := CreateIntegration(ctx, integration)
+	if err == nil {
+		return nil
+	}
+
+	if oapiErr, ok := err.(v2.GenericOpenAPIError); ok {
+		if conflict, ok := oapiErr.Model().(v2.CreateLocation409Response); ok {
+			log.Debug("Integration already exists, updating %s", conflict.InstanceId)
+			return UpdateIntegration(ctx, conflict.InstanceId, integration)
+		}
+	}
+	return err
+}
+
 func UpsertIntegrationFromFile(ctx context.Context, filePath string) error {
-	update := &v2.UpdateIntegrationRequest{}
+	integration := &v2.UpdateIntegrationRequest{}
 	format := "json"
 	if strings.HasSuffix(filePath, ".yaml") || strings.HasSuffix(filePath, ".yml") {
 		format = "yaml"
@@ -87,19 +103,15 @@ func UpsertIntegrationFromFile(ctx context.Context, filePath string) error {
 	}
 	defer file.Close()
 	if format == "json" {
-		err = json.NewDecoder(file).Decode(update)
+		err = json.NewDecoder(file).Decode(integration)
 		if err != nil {
 			return fmt.Errorf("failed to decode file %s as JSON: %w", filePath, err)
 		}
 	} else {
-		err = yaml.NewDecoder(file).Decode(update)
+		err = yaml.NewDecoder(file).Decode(integration)
 		if err != nil {
 			return fmt.Errorf("failed to decode file %s as YAML: %w", filePath, err)
 		}
 	}
-	err = CreateIntegration(ctx, update)
-	if err != nil {
-		return err
-	}
-	return nil
+	return UpsertIntegration(ctx, integration)
 }
