@@ -8,12 +8,12 @@ import (
 	v2 "github.com/Escape-Technologies/cli/pkg/api/v2"
 )
 
-func ListLocations(ctx context.Context) ([]v2.GetLocation200Response, error) {
+func ListLocations(ctx context.Context) ([]v2.ListLocations200ResponseInner, error) {
 	client, err := newAPIV2Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
-	req := client.LocationsAPI.GetLocations(ctx)
+	req := client.LocationsAPI.ListLocations(ctx)
 	data, resp, err := req.Execute()
 	if err != nil {
 		return nil, fmt.Errorf("unable to get locations: %w", err)
@@ -24,7 +24,7 @@ func ListLocations(ctx context.Context) ([]v2.GetLocation200Response, error) {
 	return data, nil
 }
 
-func GetLocation(ctx context.Context, id string) (*v2.GetLocation200Response, error) {
+func GetLocation(ctx context.Context, id string) (*v2.ListLocations200ResponseInner, error) {
 	client, err := newAPIV2Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)

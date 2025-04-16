@@ -15,11 +15,12 @@ docker pull openapitools/openapi-generator-cli:latest
     for VERSION in "${VERSIONS[@]}"; do
         rm -rf "${TMP_DIR}/${VERSION}"
         mkdir -p "${TMP_DIR}/${VERSION}"
+        curl -s -o "${TMP_DIR}/${VERSION}/openapi.json" "https://public.escape.tech/${VERSION}/openapi.json"
 
         docker run -u "$(id -u):$(id -g)" --rm -v "${TMP_DIR}/${VERSION}:/local" \
             openapitools/openapi-generator-cli:latest \
             generate \
-            -i https://public.escape.tech/${VERSION}/openapi.json \
+            -i /local/openapi.json \
             -g go \
             --package-name "${VERSION}" \
             --type-mappings="integer=int" \
