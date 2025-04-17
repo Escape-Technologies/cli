@@ -18,10 +18,10 @@ var integrationsListCmd = &cobra.Command{
 	Use:     "list",
 	Aliases: []string{"ls"},
 	Short:   "List all integrations",
-	RunE: func(cmd *cobra.Command, args []string) error {
+	RunE: func(cmd *cobra.Command, _ []string) error {
 		integrations, err := escape.ListIntegrations(cmd.Context())
 		if err != nil {
-			return err
+			return fmt.Errorf("failed to list integrations: %w", err)
 		}
 		out.Table(integrations, func() []string {
 			res := []string{"ID\tKIND\tNAME\tLOCATION ID"}
@@ -62,7 +62,7 @@ var integrationsDeleteCmd = &cobra.Command{
 	RunE: func(cmd *cobra.Command, args []string) error {
 		err := escape.DeleteIntegration(cmd.Context(), args[0])
 		if err != nil {
-			return err
+			return fmt.Errorf("failed to delete integration: %w", err)
 		}
 		out.Print(struct {
 			Msg string `json:"msg"`
@@ -81,7 +81,7 @@ var integrationsGetCmd = &cobra.Command{
 	RunE: func(cmd *cobra.Command, args []string) error {
 		integration, err := escape.GetIntegration(cmd.Context(), args[0])
 		if err != nil {
-			return err
+			return fmt.Errorf("failed to get integration: %w", err)
 		}
 		data, _ := integration.GetData().MarshalJSON()
 		out.Print(integration, fmt.Sprintf(

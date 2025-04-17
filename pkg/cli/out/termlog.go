@@ -11,19 +11,15 @@ import (
 
 var termlog = "termlog"
 
+// SetupTerminalLog sets up the terminal log
 func SetupTerminalLog() {
-	switch output {
-	case outputJSON:
-		log.AddHook(termlog, func(log log.LogItem) {
-			json.NewEncoder(os.Stdout).Encode(log)
-		})
-	case outputYAML:
-		log.AddHook(termlog, func(log log.LogItem) {
+	if output == outputJSON || output == outputYAML {
+		log.AddHook(termlog, func(log log.Entry) {
 			// JSON is a valid YAML but multiline readable
-			json.NewEncoder(os.Stdout).Encode(log)
+			json.NewEncoder(os.Stdout).Encode(log) //nolint:errcheck
 		})
-	default:
-		log.AddHook(termlog, func(log log.LogItem) {
+	} else {
+		log.AddHook(termlog, func(log log.Entry) {
 			if log.Level <= logrus.InfoLevel {
 				fmt.Printf("[%s] %s\n", log.Level, log.Message)
 			}
@@ -31,6 +27,7 @@ func SetupTerminalLog() {
 	}
 }
 
+// StopTerminalLog stops the terminal log
 func StopTerminalLog() {
 	log.RemoveHook(termlog)
 }

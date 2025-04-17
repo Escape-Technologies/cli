@@ -9,20 +9,21 @@ import (
 	"github.com/Escape-Technologies/cli/pkg/env"
 )
 
-func CreateUploadSignedUrl(ctx context.Context) (string, string, error) {
+func createUploadSignedURL(ctx context.Context) (string, string, error) {
 	client, err := newAPIV2Client()
 	if err != nil {
 		return "", "", fmt.Errorf("unable to init client: %w", err)
 	}
-	data, _, err := client.UploadAPI.CreateUploadSignedUrl(ctx).Execute()
+	data, resp, err := client.UploadAPI.CreateUploadSignedUrl(ctx).Execute()
+	defer resp.Body.Close() //nolint:errcheck
 	if err != nil {
 		return "", "", fmt.Errorf("unable to get upload url: %w", err)
 	}
 	return data.Url, data.Id, nil
 }
 
-func UploadToS3(ctx context.Context, data string) (string, error) {
-	url, id, err := CreateUploadSignedUrl(ctx)
+func uploadToS3(ctx context.Context, data string) (string, error) {
+	url, id, err := createUploadSignedURL(ctx)
 	if err != nil {
 		return "", fmt.Errorf("unable to get upload url: %w", err)
 	}
@@ -36,7 +37,7 @@ func UploadToS3(ctx context.Context, data string) (string, error) {
 	if err != nil {
 		return "", fmt.Errorf("unable to upload data: %w", err)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 
 	return id, nil
 }

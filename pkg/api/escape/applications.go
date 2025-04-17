@@ -6,6 +6,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"net/http"
 	"os"
 	"strings"
 
@@ -14,12 +15,14 @@ import (
 	"gopkg.in/yaml.v2"
 )
 
+// ListApplications lists all applications
 func ListApplications(ctx context.Context) ([]v2.ListApplications200ResponseInner, error) {
 	client, err := newAPIV2Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
-	data, _, err := client.ApplicationsAPI.ListApplications(ctx).Execute()
+	data, resp, err := client.ApplicationsAPI.ListApplications(ctx).Execute()
+	defer resp.Body.Close() //nolint:errcheck
 	if err != nil {
 		return nil, fmt.Errorf("api error: %w", err)
 	}
@@ -29,12 +32,14 @@ func ListApplications(ctx context.Context) ([]v2.ListApplications200ResponseInne
 	return data, nil
 }
 
+// GetApplication gets an application by ID
 func GetApplication(ctx context.Context, id string) (*v2.GetApplication200Response, error) {
 	client, err := newAPIV2Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
-	data, _, err := client.ApplicationsAPI.GetApplication(ctx, id).Execute()
+	data, resp, err := client.ApplicationsAPI.GetApplication(ctx, id).Execute()
+	defer resp.Body.Close() //nolint:errcheck
 	if err != nil {
 		return nil, fmt.Errorf("api error: %w", err)
 	}
@@ -44,19 +49,21 @@ func GetApplication(ctx context.Context, id string) (*v2.GetApplication200Respon
 	return data, nil
 }
 
+// UpdateApplicationSchema updates an application schema
 func UpdateApplicationSchema(ctx context.Context, id string, schemaPathOrURL string) error {
 	client, err := newAPIV2Client()
 	if err != nil {
 		return fmt.Errorf("unable to init client: %w", err)
 	}
-	blobId, url, err := schemaToS3(ctx, schemaPathOrURL)
+	blobID, url, err := schemaToS3(ctx, schemaPathOrURL)
 	if err != nil {
 		return fmt.Errorf("unable to upload schema: %w", err)
 	}
-	_, _, err = client.ApplicationsAPI.UpdateSchema(ctx, id).CreateApplicationRequestSchema(v2.CreateApplicationRequestSchema{
+	_, resp, err := client.ApplicationsAPI.UpdateSchema(ctx, id).CreateApplicationRequestSchema(v2.CreateApplicationRequestSchema{
 		Url:    url,
-		BlobId: blobId,
+		BlobId: blobID,
 	}).Execute()
+	defer resp.Body.Close() //nolint:errcheck
 	if err != nil {
 		return fmt.Errorf("api error: %w", err)
 	}
@@ -64,31 +71,30 @@ func UpdateApplicationSchema(ctx context.Context, id string, schemaPathOrURL str
 }
 
 func schemaToS3(ctx context.Context, schemaPathOrURL string) (string, *string, error) {
-	body, url, err := pullSchema(schemaPathOrURL)
+	body, url, err := pullSchema(ctx, schemaPathOrURL)
 	if err != nil {
 		return "", nil, fmt.Errorf("invalid schema: %w", err)
 	}
-	blobId, err := UploadToS3(ctx, body)
+	blobID, err := uploadToS3(ctx, body)
 	if err != nil {
 		return "", nil, fmt.Errorf("unable to upload schema: %w", err)
 	}
-	return blobId, url, nil
+	return blobID, url, nil
 }
 
-func pullSchema(schemaPathOrURL string) (string, *string, error) {
+func pullSchema(ctx context.Context, schemaPathOrURL string) (string, *string, error) {
 	if strings.HasPrefix(schemaPathOrURL, "http") {
-		body, err := pullSchemaFromURL(schemaPathOrURL)
+		body, err := pullSchemaFromURL(ctx, schemaPathOrURL)
 		if err != nil {
 			return "", nil, fmt.Errorf("unable to pull schema from URL %s: %w", schemaPathOrURL, err)
 		}
 		return body, &schemaPathOrURL, nil
-	} else {
-		body, err := pullSchemaFromPath(schemaPathOrURL)
-		if err != nil {
-			return "", nil, fmt.Errorf("unable to read file %s: %w", schemaPathOrURL, err)
-		}
-		return body, nil, nil
 	}
+	body, err := pullSchemaFromPath(schemaPathOrURL)
+	if err != nil {
+		return "", nil, fmt.Errorf("unable to read file %s: %w", schemaPathOrURL, err)
+	}
+	return body, nil, nil
 }
 
 func pullSchemaFromPath(path string) (string, error) {
@@ -103,13 +109,17 @@ func pullSchemaFromPath(path string) (string, error) {
 	return string(body), nil
 }
 
-func pullSchemaFromURL(url string) (string, error) {
-	resp, err := env.GetHTTPClient().Get(url)
+func pullSchemaFromURL(ctx context.Context, url string) (string, error) {
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, url, nil)
+	if err != nil {
+		return "", fmt.Errorf("unable to create request: %w", err)
+	}
+	resp, err := env.GetHTTPClient().Do(req)
 	if err != nil {
 		return "", fmt.Errorf("HTTP error: %w", err)
 	}
-	defer resp.Body.Close()
-	if resp.StatusCode != 200 {
+	defer resp.Body.Close() //nolint:errcheck
+	if resp.StatusCode != http.StatusOK {
 		return "", fmt.Errorf("HTTP error: %w", fmt.Errorf("status code: %d", resp.StatusCode))
 	}
 	body, err := io.ReadAll(resp.Body)
@@ -134,6 +144,7 @@ func parseJSONOrYAML(body []byte, v any) error {
 	return nil
 }
 
+// UpdateApplicationConfig updates an application configuration
 func UpdateApplicationConfig(ctx context.Context, id string, configPath string) error {
 	client, err := newAPIV2Client()
 	if err != nil {
@@ -143,7 +154,8 @@ func UpdateApplicationConfig(ctx context.Context, id string, configPath string) 
 	if err != nil {
 		return fmt.Errorf("unable to read config at %s: %w", configPath, err)
 	}
-	_, _, err = client.ApplicationsAPI.UpdateConfiguration(ctx, id).CreateApplicationRequestConfiguration(*cfg).Execute()
+	_, resp, err := client.ApplicationsAPI.UpdateConfiguration(ctx, id).CreateApplicationRequestConfiguration(*cfg).Execute()
+	defer resp.Body.Close() //nolint:errcheck
 	if err != nil {
 		return fmt.Errorf("api error: %w", err)
 	}

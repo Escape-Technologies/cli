@@ -1,3 +1,4 @@
+// Package out provides the output formatting for the CLI
 package out
 
 import (
@@ -17,21 +18,22 @@ const (
 	outputYAML   outputT = "yaml"
 )
 
-var output outputT = outputPretty
+var output = outputPretty
 
-func print(o outputT, data any, pretty string) {
+func pprint(o outputT, data any, pretty string) {
 	switch o {
 	case outputJSON:
-		json.NewEncoder(os.Stdout).Encode(data)
+		json.NewEncoder(os.Stdout).Encode(data) //nolint:errcheck
 	case outputYAML:
-		yaml.NewEncoder(os.Stdout).Encode(data)
-	default:
+		yaml.NewEncoder(os.Stdout).Encode(data) //nolint:errcheck
+	case outputPretty:
 		fmt.Println(pretty)
 	}
 }
 
+// Print prints the data in the output format
 func Print(data any, pretty string) {
-	print(output, data, pretty)
+	pprint(output, data, pretty)
 }
 
 func getOutput(o string) *outputT {
@@ -47,6 +49,7 @@ func getOutput(o string) *outputT {
 	return &res
 }
 
+// SetOutput sets the output format for the CLI
 func SetOutput(o string) error {
 	out := getOutput(o)
 	if out == nil {

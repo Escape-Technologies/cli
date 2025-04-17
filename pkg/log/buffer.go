@@ -1,3 +1,4 @@
+// Package log provides logging implementation with hooks to send logs to Escape Platform
 package log
 
 import (
@@ -6,24 +7,25 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-type LogItem struct {
+// Entry is a log line
+type Entry struct {
 	Level   logrus.Level `json:"level"`
 	Message string       `json:"message"`
 }
 
 type logBuffer struct {
 	lock        sync.Mutex
-	queue       []LogItem
+	queue       []Entry
 	bufferSize  int
-	hooks       map[string]func(LogItem)
+	hooks       map[string]func(Entry)
 	hooksOffset map[string]int
 }
 
 func newLogBuffer(bufferSize int) *logBuffer {
 	return &logBuffer{
 		bufferSize:  bufferSize,
-		queue:       make([]LogItem, 0, bufferSize),
-		hooks:       map[string]func(LogItem){},
+		queue:       make([]Entry, 0, bufferSize),
+		hooks:       map[string]func(Entry){},
 		hooksOffset: map[string]int{},
 	}
 }
@@ -43,7 +45,7 @@ func (b *logBuffer) sync() {
 	}
 }
 
-func (b *logBuffer) Ingest(log LogItem) {
+func (b *logBuffer) Ingest(log Entry) {
 	b.lock.Lock()
 	defer b.lock.Unlock()
 	if len(b.queue) >= b.bufferSize {
@@ -60,7 +62,7 @@ func (b *logBuffer) Ingest(log LogItem) {
 	b.sync()
 }
 
-func (b *logBuffer) AddHook(name string, callback func(LogItem)) {
+func (b *logBuffer) AddHook(name string, callback func(Entry)) {
 	b.lock.Lock()
 	defer b.lock.Unlock()
 	b.hooks[name] = callback

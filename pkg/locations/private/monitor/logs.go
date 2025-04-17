@@ -12,7 +12,7 @@ func sendLogs(ctx context.Context, ch ssh.Channel) {
 		<-ctx.Done()
 		log.RemoveHook("monitor")
 	}()
-	log.AddHook("monitor", func(log log.LogItem) {
-		ch.SendRequest("log", false, []byte(log.Message))
+	log.AddHook("monitor", func(log log.Entry) {
+		ch.SendRequest("log", false, []byte(log.Message)) //nolint:errcheck
 	})
 }

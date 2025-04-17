@@ -5,5 +5,7 @@
     "search.exclude": {
         "pkg/api/v2/**": true,
         "pkg/api/v1/**": true
-    }
+    },
+    "go.lintTool": "golangci-lint",
+    "go.lintFlags": [],
 }

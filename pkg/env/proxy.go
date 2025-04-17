@@ -10,6 +10,7 @@ import (
 	"golang.org/x/net/proxy"
 )
 
+// GetFrontendProxyURL returns the proxy between the location and the Escape Platform
 func GetFrontendProxyURL() *url.URL {
 	proxyURL := os.Getenv("ESCAPE_REPEATER_PROXY_URL")
 	if proxyURL == "" {
@@ -27,6 +28,7 @@ func GetFrontendProxyURL() *url.URL {
 	return url
 }
 
+// GetBackendProxyURL returns the proxy between the location and the customer API
 func GetBackendProxyURL() *url.URL {
 	proxyURL := os.Getenv("ESCAPE_BACKEND_PROXY_URL")
 	if proxyURL == "" {
@@ -65,6 +67,7 @@ func buildProxyDialer(proxyURL *url.URL) func(ctx context.Context, network strin
 	}
 }
 
+// BuildProxyDialer builds a proxy dialler from url
 func BuildProxyDialer(proxyURL *url.URL) func(ctx context.Context, network string, addr string) (net.Conn, error) {
 	dial := buildProxyDialer(proxyURL)
 

@@ -1,3 +1,4 @@
+// Package escape provides the API client for the Escape Platform
 package escape
 
 import (
@@ -9,6 +10,7 @@ import (
 	"github.com/Escape-Technologies/cli/pkg/version"
 )
 
+// Debug is a flag to enable debug mode for the API client
 var Debug = false
 
 func newAPIV2Client() (*v2.APIClient, error) {
@@ -26,7 +28,7 @@ func newAPIV2Client() (*v2.APIClient, error) {
 		Host:   url.Host,
 		Scheme: url.Scheme,
 		DefaultHeader: map[string]string{
-			"Authorization": fmt.Sprintf("Key %s", key),
+			"Authorization": "Key " + key,
 		},
 		UserAgent:  version.GetVersion().UserAgent(),
 		Debug:      Debug,
