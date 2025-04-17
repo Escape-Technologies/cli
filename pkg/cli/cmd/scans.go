@@ -1,6 +1,10 @@
 package cmd
 
 import (
+	"fmt"
+
+	"github.com/Escape-Technologies/cli/pkg/api/escape"
+	"github.com/Escape-Technologies/cli/pkg/cli/out"
 	"github.com/spf13/cobra"
 )
 
@@ -15,8 +19,33 @@ var scansListCmd = &cobra.Command{
 	Aliases: []string{"ls"},
 	Args:    cobra.ExactArgs(1),
 	Short:   "List all scans of an application",
-	Run: func(_ *cobra.Command, _ []string) {
-		// TODO(quentin@escape.tech): Implement this
+	RunE: func(cmd *cobra.Command, args []string) error {
+		applicationID := args[0]
+		scans, next, err := escape.ListScans(cmd.Context(), applicationID, "")
+		if err != nil {
+			return fmt.Errorf("unable to list scans: %w", err)
+		}
+		out.Table(scans, func() []string {
+			res := []string{"ID\tSTATUS\tCREATED AT\tPROGRESS RATIO"}
+			for _, scan := range scans {
+				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%f", scan.GetId(), scan.GetStatus(), scan.GetCreatedAt(), scan.GetProgressRatio()))
+			}
+			return res
+		})
+		for next != "" {
+			scans, next, err = escape.ListScans(cmd.Context(), applicationID, next)
+			if err != nil {
+				return fmt.Errorf("unable to list scans: %w", err)
+			}
+			out.Table(scans, func() []string {
+				res := []string{}
+				for _, scan := range scans {
+					res = append(res, fmt.Sprintf("%s\t%s\t%s\t%f", scan.GetId(), scan.GetStatus(), scan.GetCreatedAt(), scan.GetProgressRatio()))
+				}
+				return res
+			})
+		}
+		return nil
 	},
 }
 
@@ -41,9 +70,9 @@ var scanEventsCmd = &cobra.Command{
 	},
 }
 
-var scanResultsCmd = &cobra.Command{
-	Use:     "results",
-	Aliases: []string{"res", "result"},
+var scanGetCmd = &cobra.Command{
+	Use:     "get",
+	Aliases: []string{"describe", "results", "res", "result"},
 	Args:    cobra.ExactArgs(1),
 	Short:   "List all results (issues) of a scan",
 	Run: func(_ *cobra.Command, _ []string) {
@@ -67,7 +96,7 @@ func init() {
 	scansCmd.AddCommand(scanStartCmd)
 	scanEventsCmd.PersistentFlags().BoolVarP(&scanEventsCmdWatch, "watch", "w", false, "watch for events")
 	scansCmd.AddCommand(scanEventsCmd)
-	scansCmd.AddCommand(scanResultsCmd)
+	scansCmd.AddCommand(scanGetCmd)
 	scansCmd.AddCommand(scanDownloadCmd)
 	rootCmd.AddCommand(scansCmd)
 }
