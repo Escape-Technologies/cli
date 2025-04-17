@@ -25,9 +25,9 @@ var applicationsListCmd = &cobra.Command{
 			return fmt.Errorf("unable to list applications: %w", err)
 		}
 		out.Table(applications, func() []string {
-			result := []string{"ID\tNAME\tCREATED AT\tHAS CI\tCRON"}
+			result := []string{"ID\tTYPE\tNAME\tCREATED AT\tHAS CI\tCRON"}
 			for _, app := range applications {
-				result = append(result, fmt.Sprintf("%s\t%s\t%s\t%t\t%s", app.Id, app.Name, app.CreatedAt.Format(time.RFC3339), app.HasCI, app.Cron))
+				result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s\t%t\t%s", app.Id, app.Type, app.Name, app.CreatedAt.Format(time.RFC3339), app.HasCI, app.Cron))
 			}
 			return result
 		})

@@ -9,7 +9,7 @@ import (
 // Table prints a table of data
 func Table(data any, tableMaker func() []string) {
 	if output != outputPretty {
-		print(output, data, "")
+		pprint(output, data, "")
 		return
 	}
 

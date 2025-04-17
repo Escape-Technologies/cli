@@ -14,6 +14,20 @@
       ]
     },
     {
+      "name": "Locations List -o json",
+      "type": "go",
+      "request": "launch",
+      "mode": "auto",
+      "program": "cmd/main.go",
+      "envFile": "${workspaceFolder}/.env",
+      "args": [
+        "locations",
+        "list",
+        "--output",
+        "json"
+      ]
+    },
+    {
       "name": "Locations Upsert",
       "type": "go",
       "request": "launch",

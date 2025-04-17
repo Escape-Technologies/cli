@@ -2,9 +2,9 @@
 package out
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
-	"os"
 
 	"github.com/Escape-Technologies/cli/pkg/log"
 	"gopkg.in/yaml.v2"
@@ -21,14 +21,17 @@ const (
 var output = outputPretty
 
 func pprint(o outputT, data any, pretty string) {
-	switch o {
-	case outputJSON:
-		json.NewEncoder(os.Stdout).Encode(data) //nolint:errcheck
-	case outputYAML:
-		yaml.NewEncoder(os.Stdout).Encode(data) //nolint:errcheck
-	case outputPretty:
-		fmt.Println(pretty)
+	toPrint := pretty
+	if o == outputJSON {
+		buf := bytes.NewBuffer(nil)
+		json.NewEncoder(buf).Encode(data) //nolint:errcheck
+		toPrint = buf.String()
+	} else if o == outputYAML {
+		buf := bytes.NewBuffer(nil)
+		yaml.NewEncoder(buf).Encode(data) //nolint:errcheck
+		toPrint = buf.String()
 	}
+	fmt.Println(toPrint)
 }
 
 // Print prints the data in the output format
