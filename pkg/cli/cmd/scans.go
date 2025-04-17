@@ -20,6 +20,7 @@ var scansListCmd = &cobra.Command{
 	},
 }
 
+var scanStartCmdWatch bool
 var scanStartCmd = &cobra.Command{
 	Use:   "start",
 	Args:  cobra.ExactArgs(1),
@@ -60,23 +61,13 @@ var scanDownloadCmd = &cobra.Command{
 	},
 }
 
-var scanReportCmd = &cobra.Command{
-	Use:     "report",
-	Aliases: []string{"pdf"},
-	Args:    cobra.ExactArgs(2),
-	Short:   "Download a scan report (PDF export)",
-	Run: func(cmd *cobra.Command, args []string) {
-		// TODO(quentin@escape.tech): Implement this
-	},
-}
-
 func init() {
 	scansCmd.AddCommand(scansListCmd)
+	scanStartCmd.PersistentFlags().BoolVarP(&scanStartCmdWatch, "watch", "w", false, "watch for events")
 	scansCmd.AddCommand(scanStartCmd)
 	scanEventsCmd.PersistentFlags().BoolVarP(&scanEventsCmdWatch, "watch", "w", false, "watch for events")
 	scansCmd.AddCommand(scanEventsCmd)
 	scansCmd.AddCommand(scanResultsCmd)
 	scansCmd.AddCommand(scanDownloadCmd)
-	scansCmd.AddCommand(scanReportCmd)
 	rootCmd.AddCommand(scansCmd)
 }
