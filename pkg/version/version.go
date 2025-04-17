@@ -1,31 +1,39 @@
+// Package version contains the version information for the CLI
 package version
 
 import "fmt"
 
 var (
-	Version   = "local"
-	Commit    = "unknown"
+	// Version injected at build time
+	Version = "local"
+	// Commit injected at build time
+	Commit = "unknown"
+	// BuildDate injected at build time
 	BuildDate = "unknown"
 )
 
-type VersionT struct {
-	Version   string
-	Commit    string
-	BuildDate string
+// V Version JSON struct
+type V struct {
+	Version   string `json:"version"`
+	Commit    string `json:"commit"`
+	BuildDate string `json:"buildDate"`
 }
 
-func GetVersion() VersionT {
-	return VersionT{
+// GetVersion returns the version information
+func GetVersion() V {
+	return V{
 		Version:   Version,
 		Commit:    Commit,
 		BuildDate: BuildDate,
 	}
 }
 
-func (v VersionT) String() string {
+// String returns the version information as a string
+func (v V) String() string {
 	return fmt.Sprintf("Version: %s, Commit: %s, BuildDate: %s", v.Version, v.Commit, v.BuildDate)
 }
 
-func (v VersionT) UserAgent() string {
-	return fmt.Sprintf("escape-cli/%s", v.Version)
+// UserAgent returns the user agent string
+func (v V) UserAgent() string {
+	return "escape-cli/" + v.Version
 }

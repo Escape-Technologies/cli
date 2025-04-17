@@ -15,7 +15,7 @@ var scansListCmd = &cobra.Command{
 	Aliases: []string{"ls"},
 	Args:    cobra.ExactArgs(1),
 	Short:   "List all scans of an application",
-	Run: func(cmd *cobra.Command, args []string) {
+	Run: func(_ *cobra.Command, _ []string) {
 		// TODO(quentin@escape.tech): Implement this
 	},
 }
@@ -25,7 +25,7 @@ var scanStartCmd = &cobra.Command{
 	Use:   "start",
 	Args:  cobra.ExactArgs(1),
 	Short: "Start a new scan of an application",
-	Run: func(cmd *cobra.Command, args []string) {
+	Run: func(_ *cobra.Command, _ []string) {
 		// TODO(quentin@escape.tech): Implement this
 	},
 }
@@ -36,7 +36,7 @@ var scanEventsCmd = &cobra.Command{
 	Aliases: []string{"ev", "event"},
 	Args:    cobra.ExactArgs(1),
 	Short:   "List all events of a scan",
-	Run: func(cmd *cobra.Command, args []string) {
+	Run: func(_ *cobra.Command, _ []string) {
 		// TODO(quentin@escape.tech): Implement this
 	},
 }
@@ -46,7 +46,7 @@ var scanResultsCmd = &cobra.Command{
 	Aliases: []string{"res", "result"},
 	Args:    cobra.ExactArgs(1),
 	Short:   "List all results (issues) of a scan",
-	Run: func(cmd *cobra.Command, args []string) {
+	Run: func(_ *cobra.Command, _ []string) {
 		// TODO(quentin@escape.tech): Implement this
 	},
 }
@@ -54,9 +54,9 @@ var scanResultsCmd = &cobra.Command{
 var scanDownloadCmd = &cobra.Command{
 	Use:     "download",
 	Aliases: []string{"dl", "zip"},
-	Args:    cobra.ExactArgs(2),
+	Args:    cobra.ExactArgs(2), //nolint:mnd
 	Short:   "Download a scan result exchange archive (zip export)",
-	Run: func(cmd *cobra.Command, args []string) {
+	Run: func(_ *cobra.Command, _ []string) {
 		// TODO(quentin@escape.tech): Implement this
 	},
 }

@@ -1,3 +1,4 @@
+// Package kube provides the kubernetes integration for private locations
 package kube
 
 import (
@@ -24,17 +25,26 @@ const (
 
 func inferConfig() (*rest.Config, error) {
 	kubeconfig := os.Getenv("KUBECONFIG")
+	var c *rest.Config
+	var err error
 
 	if kubeconfig != "" {
 		log.Trace("Using kubeconfig : %s", kubeconfig)
-		return clientcmd.BuildConfigFromFlags("", kubeconfig)
+		c, err = clientcmd.BuildConfigFromFlags("", kubeconfig)
+		if err != nil {
+			return nil, fmt.Errorf("failed to build config from kubeconfig: %w", err)
+		}
 	} else {
 		log.Trace("Using in cluster config")
-		return rest.InClusterConfig()
+		c, err = rest.InClusterConfig()
+		if err != nil {
+			return nil, fmt.Errorf("failed to build in cluster config: %w", err)
+		}
 	}
+	return c, nil
 }
 
-func connectAndRun(ctx context.Context, cfg *rest.Config, isConnected *atomic.Bool, locationId string, locationName string) error {
+func connectAndRun(ctx context.Context, cfg *rest.Config, isConnected *atomic.Bool, locationID string, locationName string) error {
 	ctx, cancel := context.WithCancel(ctx)
 	defer cancel()
 
@@ -61,14 +71,14 @@ func connectAndRun(ctx context.Context, cfg *rest.Config, isConnected *atomic.Bo
 			time.Sleep(1 * time.Second)
 		}
 		if ctx.Err() != nil {
-			lis.Close()
+			lis.Close() //nolint:errcheck
 			return
 		}
 		log.Info("Connected to k8s API")
 		log.Trace("Upserting k8s integration")
 		err = escape.UpsertIntegration(ctx, &v2.UpdateIntegrationRequest{
 			Name:       locationName,
-			LocationId: &locationId,
+			LocationId: &locationID,
 		})
 		if err != nil {
 			log.Error("Error upserting integration: %s", err)
@@ -76,7 +86,7 @@ func connectAndRun(ctx context.Context, cfg *rest.Config, isConnected *atomic.Bo
 		}
 
 		<-ctx.Done()
-		lis.Close()
+		lis.Close() //nolint:errcheck
 	}()
 
 	log.Debug("Connecting to k8s API")
@@ -87,7 +97,8 @@ func connectAndRun(ctx context.Context, cfg *rest.Config, isConnected *atomic.Bo
 	return nil
 }
 
-func Start(ctx context.Context, locationId string, locationName string, healthy *atomic.Bool) {
+// Start the kubernetes integration
+func Start(ctx context.Context, locationID string, locationName string, healthy *atomic.Bool) {
 	cfg, err := inferConfig()
 	if err != nil {
 		log.Debug("Error inferring kubeconfig: %s", err)
@@ -95,7 +106,7 @@ func Start(ctx context.Context, locationId string, locationName string, healthy 
 		return
 	}
 	for {
-		err = connectAndRun(ctx, cfg, healthy, locationId, locationName)
+		err = connectAndRun(ctx, cfg, healthy, locationID, locationName)
 		if err != nil {
 			log.Error("Error connecting to k8s API: %s", err)
 		}
@@ -103,5 +114,4 @@ func Start(ctx context.Context, locationId string, locationName string, healthy 
 			return
 		}
 	}
-
 }

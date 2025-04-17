@@ -18,12 +18,12 @@ import (
 func getClient(target string, conn net.Conn, config *ssh.ClientConfig) (*ssh.Client, error) {
 	c, chans, reqs, err := ssh.NewClientConn(conn, target, config)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to create client conn: %w", err)
 	}
 	return ssh.NewClient(c, chans, reqs), nil
 }
 
-func dialSSH(ctx context.Context, locationId string, sshPrivateKey ed25519.PrivateKey, healthy *atomic.Bool) error {
+func dialSSH(ctx context.Context, locationID string, sshPrivateKey ed25519.PrivateKey, healthy *atomic.Bool) error {
 	log.Debug("Creating signer from private key")
 	signer, err := ssh.NewSignerFromKey(sshPrivateKey)
 	if err != nil {
@@ -31,7 +31,7 @@ func dialSSH(ctx context.Context, locationId string, sshPrivateKey ed25519.Priva
 	}
 
 	config := &ssh.ClientConfig{
-		User: locationId,
+		User: locationID,
 		Auth: []ssh.AuthMethod{
 			ssh.PublicKeys(signer),
 		},
@@ -47,7 +47,7 @@ func dialSSH(ctx context.Context, locationId string, sshPrivateKey ed25519.Priva
 	log.Trace("Getting conn for target: %s", targetURL)
 	conn, err := getConn(ctx, targetURL, proxyURL)
 	if ctx.Err() != nil {
-		return ctx.Err()
+		return fmt.Errorf("getConn: %w", ctx.Err())
 	}
 	if err != nil {
 		return fmt.Errorf("failed to get conn: %w", err)
@@ -65,7 +65,7 @@ func dialSSH(ctx context.Context, locationId string, sshPrivateKey ed25519.Priva
 	err = startListener(ctx, client, healthy)
 	cancel()
 	if ctx.Err() != nil {
-		return ctx.Err()
+		return fmt.Errorf("startListener: %w", ctx.Err())
 	}
 	if err != nil {
 		return fmt.Errorf("failed to start listener: %w", err)

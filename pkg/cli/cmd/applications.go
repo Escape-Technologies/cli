@@ -19,7 +19,7 @@ var applicationsListCmd = &cobra.Command{
 	Use:     "list",
 	Aliases: []string{"ls"},
 	Short:   "List all applications",
-	RunE: func(cmd *cobra.Command, args []string) error {
+	RunE: func(cmd *cobra.Command, _ []string) error {
 		applications, err := escape.ListApplications(cmd.Context())
 		if err != nil {
 			return fmt.Errorf("unable to list applications: %w", err)
@@ -62,7 +62,7 @@ var applicationGetCmd = &cobra.Command{
 var applicationUpdateSchemaCmd = &cobra.Command{
 	Use:   "update-schema",
 	Short: "Update the schema of an application",
-	Args:  cobra.ExactArgs(2),
+	Args:  cobra.ExactArgs(2), //nolint:mnd
 	RunE: func(cmd *cobra.Command, args []string) error {
 		err := escape.UpdateApplicationSchema(cmd.Context(), args[0], args[1])
 		if err != nil {
@@ -75,7 +75,7 @@ var applicationUpdateSchemaCmd = &cobra.Command{
 var applicationUpdateConfigCmd = &cobra.Command{
 	Use:   "update-config",
 	Short: "Update the configuration of an application",
-	Args:  cobra.ExactArgs(2),
+	Args:  cobra.ExactArgs(2), //nolint:mnd
 	RunE: func(cmd *cobra.Command, args []string) error {
 		err := escape.UpdateApplicationConfig(cmd.Context(), args[0], args[1])
 		if err != nil {

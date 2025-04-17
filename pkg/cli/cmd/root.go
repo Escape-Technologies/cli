@@ -1,10 +1,9 @@
+// Package cmd implements the CLI commands
 package cmd
 
 import (
+	"context"
 	"fmt"
-	"os"
-	"strings"
-	"text/tabwriter"
 
 	"github.com/Escape-Technologies/cli/pkg/api/escape"
 	"github.com/Escape-Technologies/cli/pkg/cli/out"
@@ -19,17 +18,17 @@ var rootCmdOutputStr string
 var rootCmd = &cobra.Command{
 	Use:   "escape-cli",
 	Short: "CLI to interact with Escape API",
-	PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
-		if rootCmdVerbose > 0 {
+	PersistentPreRunE: func(_ *cobra.Command, _ []string) error {
+		if rootCmdVerbose > 0 { //nolint:mnd
 			log.SetLevel(logrus.InfoLevel)
 		}
-		if rootCmdVerbose > 1 {
+		if rootCmdVerbose > 1 { //nolint:mnd
 			log.SetLevel(logrus.DebugLevel)
 		}
-		if rootCmdVerbose > 2 {
+		if rootCmdVerbose > 2 { //nolint:mnd
 			log.SetLevel(logrus.TraceLevel)
 		}
-		if rootCmdVerbose > 3 {
+		if rootCmdVerbose > 3 { //nolint:mnd
 			escape.Debug = true
 		}
 		log.Info("Verbose mode: %d", rootCmdVerbose)
@@ -39,7 +38,7 @@ var rootCmd = &cobra.Command{
 		}
 		return nil
 	},
-	PostRun: func(cmd *cobra.Command, args []string) {
+	PostRun: func(_ *cobra.Command, _ []string) {
 		log.Trace("Main cli done, exiting")
 	},
 
@@ -47,45 +46,16 @@ var rootCmd = &cobra.Command{
 	SilenceErrors: true,
 }
 
-// Recursive function to print command names and help
-func listCommands(cmd *cobra.Command, prefix string) []string {
-	commands := []string{}
-	for _, c := range cmd.Commands() {
-		if prefix == "" && (c.Name() == "help-all" ||
-			c.Name() == "help" ||
-			c.Name() == "completion") {
-			continue
-		}
-		line := fmt.Sprintf("%s%s\t%s", prefix, c.Name(), c.Short)
-		commands = append(commands, line)
-		commands = append(commands, listCommands(c, prefix+"  ")...)
-	}
-	return commands
-}
-
-var helpAllCmd = &cobra.Command{
-	Use:   "help-all",
-	Short: "List all commands",
-	Run: func(cmd *cobra.Command, args []string) {
-		commands := listCommands(rootCmd, "")
-		w := tabwriter.NewWriter(os.Stdout, 0, 0, 4, ' ', 0)
-		fmt.Fprintln(w, "COMMAND\tDESCRIPTION")
-		for _, command := range commands {
-			if !strings.HasPrefix(command, " ") {
-				fmt.Fprintln(w, "\t")
-			}
-			fmt.Fprintln(w, command)
-		}
-		w.Flush()
-	},
-}
-
 func init() {
 	rootCmd.PersistentFlags().CountVarP(&rootCmdVerbose, "verbose", "v", "enable verbose output")
 	rootCmd.PersistentFlags().StringVarP(&rootCmdOutputStr, "output", "o", "pretty", "output format (pretty|json|yaml)")
-	rootCmd.AddCommand(helpAllCmd)
 }
 
-func Execute() error {
-	return rootCmd.Execute()
+// Execute the CLI
+func Execute(ctx context.Context) error {
+	cmd, err := rootCmd.ExecuteContextC(ctx)
+	if err != nil {
+		return fmt.Errorf("command %s failed: %w", cmd.Name(), err)
+	}
+	return nil
 }

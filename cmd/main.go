@@ -1,6 +1,8 @@
+// Package main is the entry point for the CLI
 package main
 
 import (
+	"context"
 	"os"
 
 	"github.com/Escape-Technologies/cli/pkg/cli"
@@ -8,7 +10,7 @@ import (
 )
 
 func main() {
-	err := cli.Run()
+	err := cli.Run(context.Background())
 	if err != nil {
 		out.PrintError(err)
 		os.Exit(1)

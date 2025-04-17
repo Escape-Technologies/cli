@@ -9,6 +9,8 @@ import (
 	"net"
 	"net/http"
 	"net/url"
+
+	"github.com/Escape-Technologies/cli/pkg/log"
 )
 
 type bufConn struct {
@@ -17,7 +19,11 @@ type bufConn struct {
 }
 
 func (c *bufConn) Read(b []byte) (int, error) {
-	return c.r.Read(b)
+	n, err := c.r.Read(b)
+	if err != nil {
+		return n, fmt.Errorf("failed to read from buffer: %w", err)
+	}
+	return n, nil
 }
 
 func basicAuth(username, password string) string {
@@ -35,8 +41,11 @@ func sendHTTPRequest(ctx context.Context, req *http.Request, conn net.Conn) erro
 
 func doHTTPConnectHandshake(ctx context.Context, conn net.Conn, backendAddr string, proxyURL url.URL) (_ net.Conn, err error) {
 	defer func() {
-		if err != nil {
-			conn.Close()
+		if conn != nil {
+			err := conn.Close()
+			if err != nil {
+				log.Debug("Failed to close connection: %s", err)
+			}
 		}
 	}()
 
@@ -60,7 +69,7 @@ func doHTTPConnectHandshake(ctx context.Context, conn net.Conn, backendAddr stri
 	if err != nil {
 		return nil, fmt.Errorf("reading server HTTP response: %v", err)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("failed to do connect handshake, status code: %s", resp.Status)
 	}

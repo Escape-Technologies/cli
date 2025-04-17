@@ -19,10 +19,10 @@ var locationsListCmd = &cobra.Command{
 	Use:     "list",
 	Aliases: []string{"ls"},
 	Short:   "List all locations",
-	RunE: func(cmd *cobra.Command, args []string) error {
+	RunE: func(cmd *cobra.Command, _ []string) error {
 		locations, err := escape.ListLocations(cmd.Context())
 		if err != nil {
-			return err
+			return fmt.Errorf("failed to list locations: %w", err)
 		}
 		out.Table(locations, func() []string {
 			res := []string{"ID\tNAME\tSSH PUBLIC KEY"}
@@ -62,7 +62,7 @@ var locationsDeleteCmd = &cobra.Command{
 	RunE: func(cmd *cobra.Command, args []string) error {
 		err := escape.DeleteLocation(cmd.Context(), args[0])
 		if err != nil {
-			return err
+			return fmt.Errorf("failed to delete location: %w", err)
 		}
 		out.Print(struct {
 			Msg string `json:"msg"`

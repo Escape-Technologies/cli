@@ -1,18 +1,20 @@
 ---
 version: "2"
 linters:
+  exclusions:
+    generated: disable
+    paths:
+      - "pkg/api/v2/.*.go"
   enable:
     # https://golangci-lint.run/usage/linters/#disabled-by-default
     - gocyclo # Computes and checks the cyclomatic complexity of functions.
     - gocritic # Provides diagnostics that check for bugs, performance and style issues.
       # Extensible without recompilation through dynamic rules.
       # Dynamic rules are written declaratively with AST patterns, filters, report message and optional suggestion.
-    - goconst # Finds repeated strings that could be replaced by a constant.
     - mnd # An analyzer to detect magic numbers.
     - revive # Fast, configurable, extensible, flexible, and beautiful linter for Go. Drop-in replacement of golint.
     - bodyclose # Checks whether HTTP response body is closed successfully.
     - durationcheck
-    - gochecknoinits
     - containedctx
     - perfsprint
     - protogetter
@@ -22,7 +24,6 @@ linters:
     - exhaustive
     - contextcheck
     - whitespace
-    - exhaustruct
     - wrapcheck
 run:
   timeout: 5m

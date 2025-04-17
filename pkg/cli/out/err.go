@@ -6,6 +6,7 @@ import (
 	"strings"
 )
 
+// PrintError prints an error stack trace
 func PrintError(err error) {
 	fmt.Println("Error:")
 	printError(err)

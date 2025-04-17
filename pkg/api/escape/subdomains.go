@@ -8,6 +8,7 @@ import (
 	v2 "github.com/Escape-Technologies/cli/pkg/api/v2"
 )
 
+// ListSubdomains lists subdomains with pagination
 func ListSubdomains(ctx context.Context, count *int, after *string) ([]v2.ListSubdomains200ResponseDataInner, string, error) {
 	client, err := newAPIV2Client()
 	if err != nil {
@@ -20,7 +21,8 @@ func ListSubdomains(ctx context.Context, count *int, after *string) ([]v2.ListSu
 	if after != nil {
 		req = req.After(*after)
 	}
-	data, _, err := req.Execute()
+	data, resp, err := req.Execute()
+	defer resp.Body.Close() //nolint:errcheck
 	if err != nil {
 		return nil, "", fmt.Errorf("unable to get subdomains: %w", err)
 	}

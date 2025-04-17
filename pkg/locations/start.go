@@ -1,3 +1,4 @@
+// Package locations provides the location start implementation
 package locations
 
 import (
@@ -11,9 +12,15 @@ import (
 	"github.com/Escape-Technologies/cli/pkg/locations/health"
 	"github.com/Escape-Technologies/cli/pkg/locations/private"
 	"github.com/Escape-Technologies/cli/pkg/locations/private/kube"
+	"github.com/Escape-Technologies/cli/pkg/locations/ssh"
 	"github.com/Escape-Technologies/cli/pkg/log"
 )
 
+const (
+	retryInterval = 100 * time.Millisecond
+)
+
+// Start the private location
 func Start(ctx context.Context, name string) error {
 	out.SetupTerminalLog()
 	defer out.StopTerminalLog()
@@ -22,7 +29,10 @@ func Start(ctx context.Context, name string) error {
 	go health.Start(ctx, healthy)
 
 	log.Trace("Generating SSH Keys")
-	sshPublicKey, sshPrivateKey := private.GenSSHKeys(name)
+	sshPublicKey, sshPrivateKey, err := ssh.GenSSHKeys(name)
+	if err != nil {
+		return fmt.Errorf("unable to generate SSH keys: %w", err)
+	}
 	log.Debug("Generated SSH Key: %s", sshPublicKey)
 
 	log.Trace("Creating location %s with public key %s", name, sshPublicKey)
@@ -40,7 +50,7 @@ func Start(ctx context.Context, name string) error {
 		} else {
 			log.Error("Unknown error starting location")
 		}
-		time.Sleep(100 * time.Millisecond)
+		time.Sleep(retryInterval)
 		if ctx.Err() != nil {
 			return nil
 		}

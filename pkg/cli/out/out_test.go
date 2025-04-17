@@ -25,8 +25,8 @@ func TestPrintShouldNotPanicWithString(t *testing.T) {
 	}
 
 	for _, c := range cases {
-		t.Run(c, func(t *testing.T) {
-			print(outputPretty, nil, c)
+		t.Run(c, func(_ *testing.T) {
+			pprint(outputPretty, nil, c)
 		})
 	}
 }
@@ -48,8 +48,8 @@ func TestPrintShouldNotPanicWithObject(t *testing.T) {
 	for i, c := range cases {
 		for _, o := range []outputT{outputPretty, outputJSON, outputYAML} {
 			txt := fmt.Sprintf("case %d %s", i, o)
-			t.Run(txt, func(t *testing.T) {
-				print(o, c, txt)
+			t.Run(txt, func(_ *testing.T) {
+				pprint(o, c, txt)
 			})
 		}
 	}

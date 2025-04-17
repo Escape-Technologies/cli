@@ -6,6 +6,7 @@ import (
 	"text/tabwriter"
 )
 
+// Table prints a table of data
 func Table(data any, tableMaker func() []string) {
 	if output != outputPretty {
 		print(output, data, "")
@@ -13,9 +14,9 @@ func Table(data any, tableMaker func() []string) {
 	}
 
 	table := tableMaker()
-	w := tabwriter.NewWriter(os.Stdout, 0, 0, 4, ' ', 0)
+	w := tabwriter.NewWriter(os.Stdout, 0, 0, 4, ' ', 0) //nolint:mnd
 	for _, row := range table {
-		fmt.Fprintln(w, row)
+		fmt.Fprintln(w, row) //nolint:errcheck
 	}
-	w.Flush()
+	w.Flush() //nolint:errcheck
 }
