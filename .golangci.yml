@@ -5,6 +5,10 @@ linters:
     generated: disable
     paths:
       - "pkg/api/v2/.*.go"
+    rules:
+      - path: "pkg/api/escape/.*.go"
+        linters:
+          - bodyclose
   enable:
     # https://golangci-lint.run/usage/linters/#disabled-by-default
     - gocyclo # Computes and checks the cyclomatic complexity of functions.

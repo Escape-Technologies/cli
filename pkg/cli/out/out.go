@@ -22,7 +22,7 @@ var output = outputPretty
 
 func pprint(o outputT, data any, pretty string) {
 	toPrint := pretty
-	if o == outputJSON {
+	if o == outputJSON { //nolint:staticcheck
 		buf := bytes.NewBuffer(nil)
 		json.NewEncoder(buf).Encode(data) //nolint:errcheck
 		toPrint = buf.String()

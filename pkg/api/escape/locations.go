@@ -15,8 +15,7 @@ func ListLocations(ctx context.Context) ([]v2.ListLocations200ResponseInner, err
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
 	req := client.LocationsAPI.ListLocations(ctx)
-	data, resp, err := req.Execute()
-	defer resp.Body.Close() //nolint:errcheck
+	data, _, err := req.Execute()
 	if err != nil {
 		return nil, fmt.Errorf("unable to get locations: %w", err)
 	}
@@ -30,8 +29,7 @@ func GetLocation(ctx context.Context, id string) (*v2.ListLocations200ResponseIn
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
 	req := client.LocationsAPI.GetLocation(ctx, id)
-	data, resp, err := req.Execute()
-	defer resp.Body.Close() //nolint:errcheck
+	data, _, err := req.Execute()
 	if err != nil {
 		return nil, fmt.Errorf("unable to get location: %w", err)
 	}
@@ -48,8 +46,7 @@ func CreateLocation(ctx context.Context, name, sshPublicKey string) (string, err
 		Name:         name,
 		SshPublicKey: sshPublicKey,
 	})
-	data, resp, err := req.Execute()
-	defer resp.Body.Close() //nolint:errcheck
+	data, _, err := req.Execute()
 	if err != nil {
 		return "", fmt.Errorf("unable to create location: %w", err)
 	}
@@ -69,8 +66,7 @@ func UpdateLocation(ctx context.Context, id string, name, sshPublicKey string) e
 		Name:         &name,
 		SshPublicKey: &sshPublicKey,
 	})
-	_, resp, err := req.Execute()
-	defer resp.Body.Close() //nolint:errcheck
+	_, _, err = req.Execute()
 	if err != nil {
 		return fmt.Errorf("unable to update location: %w", err)
 	}
@@ -84,8 +80,7 @@ func DeleteLocation(ctx context.Context, id string) error {
 		return fmt.Errorf("unable to init client: %w", err)
 	}
 	req := client.LocationsAPI.DeleteLocation(ctx, id)
-	_, resp, err := req.Execute()
-	defer resp.Body.Close() //nolint:errcheck
+	_, _, err = req.Execute()
 	if err != nil {
 		return fmt.Errorf("unable to delete location: %w", err)
 	}

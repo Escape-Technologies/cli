@@ -14,8 +14,7 @@ func createUploadSignedURL(ctx context.Context) (string, string, error) {
 	if err != nil {
 		return "", "", fmt.Errorf("unable to init client: %w", err)
 	}
-	data, resp, err := client.UploadAPI.CreateUploadSignedUrl(ctx).Execute()
-	defer resp.Body.Close() //nolint:errcheck
+	data, _, err := client.UploadAPI.CreateUploadSignedUrl(ctx).Execute()
 	if err != nil {
 		return "", "", fmt.Errorf("unable to get upload url: %w", err)
 	}

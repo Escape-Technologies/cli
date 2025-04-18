@@ -72,7 +72,7 @@ var scanEventsCmd = &cobra.Command{
 
 var scanGetCmd = &cobra.Command{
 	Use:     "get",
-	Aliases: []string{"describe", "results", "res", "result"},
+	Aliases: []string{"describe", "results", "res", "result", "issues", "iss"},
 	Args:    cobra.ExactArgs(1),
 	Short:   "List all results (issues) of a scan",
 	Run: func(_ *cobra.Command, _ []string) {
