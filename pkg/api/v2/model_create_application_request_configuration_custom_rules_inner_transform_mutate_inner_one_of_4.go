@@ -21,7 +21,7 @@ var _ MappedNullable = &CreateApplicationRequestConfigurationCustomRulesInnerTra
 
 // CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf4 struct for CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf4
 type CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf4 struct {
-	Key string `json:"key"`
+	Key EnumREQUESTBODYJSON `json:"key"`
 	Jq *string `json:"jq,omitempty"`
 }
 
@@ -31,7 +31,7 @@ type _CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerO
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf4(key string) *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf4 {
+func NewCreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf4(key EnumREQUESTBODYJSON) *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf4 {
 	this := CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf4{}
 	this.Key = key
 	return &this
@@ -46,9 +46,9 @@ func NewCreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInne
 }
 
 // GetKey returns the Key field value
-func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf4) GetKey() string {
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf4) GetKey() EnumREQUESTBODYJSON {
 	if o == nil {
-		var ret string
+		var ret EnumREQUESTBODYJSON
 		return ret
 	}
 
@@ -57,7 +57,7 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInn
 
 // GetKeyOk returns a tuple with the Key field value
 // and a boolean to check if the value has been set.
-func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf4) GetKeyOk() (*string, bool) {
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf4) GetKeyOk() (*EnumREQUESTBODYJSON, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -65,7 +65,7 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInn
 }
 
 // SetKey sets field value
-func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf4) SetKey(v string) {
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf4) SetKey(v EnumREQUESTBODYJSON) {
 	o.Key = v
 }
 

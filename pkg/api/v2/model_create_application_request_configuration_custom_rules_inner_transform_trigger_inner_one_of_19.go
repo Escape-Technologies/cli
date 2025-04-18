@@ -22,7 +22,7 @@ var _ MappedNullable = &CreateApplicationRequestConfigurationCustomRulesInnerTra
 // CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf19 struct for CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf19
 type CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf19 struct {
 	And []interface{} `json:"and"`
-	If string `json:"if"`
+	If EnumAND `json:"if"`
 }
 
 type _CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf19 CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf19
@@ -31,7 +31,7 @@ type _CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInner
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf19(and []interface{}, if_ string) *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf19 {
+func NewCreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf19(and []interface{}, if_ EnumAND) *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf19 {
 	this := CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf19{}
 	this.And = and
 	this.If = if_
@@ -71,9 +71,9 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerIn
 }
 
 // GetIf returns the If field value
-func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf19) GetIf() string {
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf19) GetIf() EnumAND {
 	if o == nil {
-		var ret string
+		var ret EnumAND
 		return ret
 	}
 
@@ -82,7 +82,7 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerIn
 
 // GetIfOk returns a tuple with the If field value
 // and a boolean to check if the value has been set.
-func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf19) GetIfOk() (*string, bool) {
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf19) GetIfOk() (*EnumAND, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -90,7 +90,7 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerIn
 }
 
 // SetIf sets field value
-func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf19) SetIf(v string) {
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf19) SetIf(v EnumAND) {
 	o.If = v
 }
 

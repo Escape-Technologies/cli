@@ -25,11 +25,11 @@ type CreateApplicationRequestConfigurationScanScalarsValue struct {
 	Examples []string `json:"examples,omitempty"`
 	IgnoredNames []string `json:"ignored_names,omitempty"`
 	Names []string `json:"names,omitempty"`
-	Parents []string `json:"parents,omitempty"`
+	Parents []EnumA8e620669cc60d45b9f04eb14bdfef5d `json:"parents,omitempty"`
 	Patterns []string `json:"patterns,omitempty"`
 	IgnoredPatterns []string `json:"ignored_patterns,omitempty"`
-	Sensitivity *string `json:"sensitivity,omitempty"`
-	Strategy *string `json:"strategy,omitempty"`
+	Sensitivity *EnumC9df31378b5ab99a9fcb2d159ba1f602 `json:"sensitivity,omitempty"`
+	Strategy *EnumBafa7e8598be648bd1bf40163099110a `json:"strategy,omitempty"`
 	Entropy *float32 `json:"entropy,omitempty"`
 }
 
@@ -174,9 +174,9 @@ func (o *CreateApplicationRequestConfigurationScanScalarsValue) SetNames(v []str
 }
 
 // GetParents returns the Parents field value if set, zero value otherwise.
-func (o *CreateApplicationRequestConfigurationScanScalarsValue) GetParents() []string {
+func (o *CreateApplicationRequestConfigurationScanScalarsValue) GetParents() []EnumA8e620669cc60d45b9f04eb14bdfef5d {
 	if o == nil || IsNil(o.Parents) {
-		var ret []string
+		var ret []EnumA8e620669cc60d45b9f04eb14bdfef5d
 		return ret
 	}
 	return o.Parents
@@ -184,7 +184,7 @@ func (o *CreateApplicationRequestConfigurationScanScalarsValue) GetParents() []s
 
 // GetParentsOk returns a tuple with the Parents field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateApplicationRequestConfigurationScanScalarsValue) GetParentsOk() ([]string, bool) {
+func (o *CreateApplicationRequestConfigurationScanScalarsValue) GetParentsOk() ([]EnumA8e620669cc60d45b9f04eb14bdfef5d, bool) {
 	if o == nil || IsNil(o.Parents) {
 		return nil, false
 	}
@@ -200,8 +200,8 @@ func (o *CreateApplicationRequestConfigurationScanScalarsValue) HasParents() boo
 	return false
 }
 
-// SetParents gets a reference to the given []string and assigns it to the Parents field.
-func (o *CreateApplicationRequestConfigurationScanScalarsValue) SetParents(v []string) {
+// SetParents gets a reference to the given []EnumA8e620669cc60d45b9f04eb14bdfef5d and assigns it to the Parents field.
+func (o *CreateApplicationRequestConfigurationScanScalarsValue) SetParents(v []EnumA8e620669cc60d45b9f04eb14bdfef5d) {
 	o.Parents = v
 }
 
@@ -270,9 +270,9 @@ func (o *CreateApplicationRequestConfigurationScanScalarsValue) SetIgnoredPatter
 }
 
 // GetSensitivity returns the Sensitivity field value if set, zero value otherwise.
-func (o *CreateApplicationRequestConfigurationScanScalarsValue) GetSensitivity() string {
+func (o *CreateApplicationRequestConfigurationScanScalarsValue) GetSensitivity() EnumC9df31378b5ab99a9fcb2d159ba1f602 {
 	if o == nil || IsNil(o.Sensitivity) {
-		var ret string
+		var ret EnumC9df31378b5ab99a9fcb2d159ba1f602
 		return ret
 	}
 	return *o.Sensitivity
@@ -280,7 +280,7 @@ func (o *CreateApplicationRequestConfigurationScanScalarsValue) GetSensitivity()
 
 // GetSensitivityOk returns a tuple with the Sensitivity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateApplicationRequestConfigurationScanScalarsValue) GetSensitivityOk() (*string, bool) {
+func (o *CreateApplicationRequestConfigurationScanScalarsValue) GetSensitivityOk() (*EnumC9df31378b5ab99a9fcb2d159ba1f602, bool) {
 	if o == nil || IsNil(o.Sensitivity) {
 		return nil, false
 	}
@@ -296,15 +296,15 @@ func (o *CreateApplicationRequestConfigurationScanScalarsValue) HasSensitivity()
 	return false
 }
 
-// SetSensitivity gets a reference to the given string and assigns it to the Sensitivity field.
-func (o *CreateApplicationRequestConfigurationScanScalarsValue) SetSensitivity(v string) {
+// SetSensitivity gets a reference to the given EnumC9df31378b5ab99a9fcb2d159ba1f602 and assigns it to the Sensitivity field.
+func (o *CreateApplicationRequestConfigurationScanScalarsValue) SetSensitivity(v EnumC9df31378b5ab99a9fcb2d159ba1f602) {
 	o.Sensitivity = &v
 }
 
 // GetStrategy returns the Strategy field value if set, zero value otherwise.
-func (o *CreateApplicationRequestConfigurationScanScalarsValue) GetStrategy() string {
+func (o *CreateApplicationRequestConfigurationScanScalarsValue) GetStrategy() EnumBafa7e8598be648bd1bf40163099110a {
 	if o == nil || IsNil(o.Strategy) {
-		var ret string
+		var ret EnumBafa7e8598be648bd1bf40163099110a
 		return ret
 	}
 	return *o.Strategy
@@ -312,7 +312,7 @@ func (o *CreateApplicationRequestConfigurationScanScalarsValue) GetStrategy() st
 
 // GetStrategyOk returns a tuple with the Strategy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateApplicationRequestConfigurationScanScalarsValue) GetStrategyOk() (*string, bool) {
+func (o *CreateApplicationRequestConfigurationScanScalarsValue) GetStrategyOk() (*EnumBafa7e8598be648bd1bf40163099110a, bool) {
 	if o == nil || IsNil(o.Strategy) {
 		return nil, false
 	}
@@ -328,8 +328,8 @@ func (o *CreateApplicationRequestConfigurationScanScalarsValue) HasStrategy() bo
 	return false
 }
 
-// SetStrategy gets a reference to the given string and assigns it to the Strategy field.
-func (o *CreateApplicationRequestConfigurationScanScalarsValue) SetStrategy(v string) {
+// SetStrategy gets a reference to the given EnumBafa7e8598be648bd1bf40163099110a and assigns it to the Strategy field.
+func (o *CreateApplicationRequestConfigurationScanScalarsValue) SetStrategy(v EnumBafa7e8598be648bd1bf40163099110a) {
 	o.Strategy = &v
 }
 

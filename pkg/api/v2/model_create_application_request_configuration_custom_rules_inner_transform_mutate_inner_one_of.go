@@ -24,7 +24,7 @@ type CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOn
 	Value *string `json:"value,omitempty"`
 	Values []string `json:"values,omitempty"`
 	RegexReplace *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOfRegexReplace `json:"regex_replace,omitempty"`
-	Key string `json:"key"`
+	Key EnumSCHEMAURL `json:"key"`
 }
 
 type _CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf
@@ -33,7 +33,7 @@ type _CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerO
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf(key string) *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf {
+func NewCreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf(key EnumSCHEMAURL) *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf {
 	this := CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf{}
 	this.Key = key
 	return &this
@@ -144,9 +144,9 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInn
 }
 
 // GetKey returns the Key field value
-func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf) GetKey() string {
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf) GetKey() EnumSCHEMAURL {
 	if o == nil {
-		var ret string
+		var ret EnumSCHEMAURL
 		return ret
 	}
 
@@ -155,7 +155,7 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInn
 
 // GetKeyOk returns a tuple with the Key field value
 // and a boolean to check if the value has been set.
-func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf) GetKeyOk() (*string, bool) {
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf) GetKeyOk() (*EnumSCHEMAURL, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -163,7 +163,7 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInn
 }
 
 // SetKey sets field value
-func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf) SetKey(v string) {
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf) SetKey(v EnumSCHEMAURL) {
 	o.Key = v
 }
 

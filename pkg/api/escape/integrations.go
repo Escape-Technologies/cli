@@ -34,32 +34,6 @@ func GetIntegration(ctx context.Context, id string) (*v2.GetIntegration200Respon
 	return data, nil
 }
 
-// CreateIntegration Creates an integration
-func CreateIntegration(ctx context.Context, integration *v2.UpdateIntegrationRequest) error {
-	client, err := newAPIV2Client()
-	if err != nil {
-		return fmt.Errorf("unable to init client: %w", err)
-	}
-	_, _, err = client.IntegrationsAPI.CreateIntegration(ctx).UpdateIntegrationRequest(*integration).Execute()
-	if err != nil {
-		return fmt.Errorf("unable to create integration: %w", err)
-	}
-	return nil
-}
-
-// UpdateIntegration Updates an integration
-func UpdateIntegration(ctx context.Context, id string, integration *v2.UpdateIntegrationRequest) error {
-	client, err := newAPIV2Client()
-	if err != nil {
-		return fmt.Errorf("unable to init client: %w", err)
-	}
-	_, _, err = client.IntegrationsAPI.UpdateIntegration(ctx, id).UpdateIntegrationRequest(*integration).Execute()
-	if err != nil {
-		return fmt.Errorf("unable to update integration: %w", err)
-	}
-	return nil
-}
-
 // DeleteIntegration Deletes an integration
 func DeleteIntegration(ctx context.Context, id string) error {
 	client, err := newAPIV2Client()
@@ -74,8 +48,8 @@ func DeleteIntegration(ctx context.Context, id string) error {
 }
 
 // UpsertIntegration Upserts an integration
-func UpsertIntegration(ctx context.Context, integration *v2.UpdateIntegrationRequest) error {
-	err := CreateIntegration(ctx, integration)
+func UpsertIntegration(ctx context.Context, name string, locationID *string, integration *v2.GetIntegration200ResponseData) error {
+	err := createIntegration(ctx, name, locationID, integration)
 	if err == nil {
 		return nil
 	}
@@ -83,19 +57,56 @@ func UpsertIntegration(ctx context.Context, integration *v2.UpdateIntegrationReq
 	if err != nil {
 		return err
 	}
-	return UpdateIntegration(ctx, id, integration)
+	return updateIntegration(ctx, id, name, locationID, integration)
 }
 
 // UpsertIntegrationFromFile Upserts an integration from a file
 func UpsertIntegrationFromFile(ctx context.Context, filePath string) error {
-	integration := &v2.UpdateIntegrationRequest{}
 	body, err := os.ReadFile(filePath)
 	if err != nil {
 		return fmt.Errorf("unable to read file: %w", err)
 	}
-	err = parseJSONOrYAML(body, &integration)
+	integration, err := parseJSONOrYAML(body, &v2.UpdateIntegrationRequest{})
 	if err != nil {
 		return fmt.Errorf("unable to parse file: %w", err)
 	}
-	return UpsertIntegration(ctx, integration)
+	return UpsertIntegration(ctx, integration.Name, integration.LocationId, &integration.Data)
+}
+
+func createIntegration(ctx context.Context, name string, locationID *string, integration *v2.GetIntegration200ResponseData) error {
+	client, err := newAPIV2Client()
+	if err != nil {
+		return fmt.Errorf("unable to init client: %w", err)
+	}
+	req := v2.UpdateIntegrationRequest{
+		Name:       name,
+		LocationId: locationID,
+	}
+	if integration != nil {
+		req.Data = *integration
+	}
+	_, _, err = client.IntegrationsAPI.CreateIntegration(ctx).UpdateIntegrationRequest(req).Execute()
+	if err != nil {
+		return fmt.Errorf("unable to create integration: %w", err)
+	}
+	return nil
+}
+
+func updateIntegration(ctx context.Context, id string, name string, locationID *string, integration *v2.GetIntegration200ResponseData) error {
+	client, err := newAPIV2Client()
+	if err != nil {
+		return fmt.Errorf("unable to init client: %w", err)
+	}
+	req := v2.UpdateIntegrationRequest{
+		Name:       name,
+		LocationId: locationID,
+	}
+	if integration != nil {
+		req.Data = *integration
+	}
+	_, _, err = client.IntegrationsAPI.UpdateIntegration(ctx, id).UpdateIntegrationRequest(req).Execute()
+	if err != nil {
+		return fmt.Errorf("unable to update integration: %w", err)
+	}
+	return nil
 }

@@ -22,7 +22,7 @@ var _ MappedNullable = &CreateApplicationRequestConfigurationAuthenticationPrese
 // CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOfRequest struct for CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOfRequest
 type CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOfRequest struct {
 	Url string `json:"url"`
-	Method string `json:"method"`
+	Method Enum4e0943c4ae7a2a2d426c0a6c0b839e82 `json:"method"`
 	Headers map[string]string `json:"headers,omitempty"`
 	Cookies map[string]string `json:"cookies,omitempty"`
 	QueryParameters map[string]string `json:"query_parameters,omitempty"`
@@ -35,7 +35,7 @@ type _CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOfReques
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOfRequest(url string, method string) *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOfRequest {
+func NewCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOfRequest(url string, method Enum4e0943c4ae7a2a2d426c0a6c0b839e82) *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOfRequest {
 	this := CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOfRequest{}
 	this.Url = url
 	this.Method = method
@@ -75,9 +75,9 @@ func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOfReq
 }
 
 // GetMethod returns the Method field value
-func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOfRequest) GetMethod() string {
+func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOfRequest) GetMethod() Enum4e0943c4ae7a2a2d426c0a6c0b839e82 {
 	if o == nil {
-		var ret string
+		var ret Enum4e0943c4ae7a2a2d426c0a6c0b839e82
 		return ret
 	}
 
@@ -86,7 +86,7 @@ func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOfReq
 
 // GetMethodOk returns a tuple with the Method field value
 // and a boolean to check if the value has been set.
-func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOfRequest) GetMethodOk() (*string, bool) {
+func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOfRequest) GetMethodOk() (*Enum4e0943c4ae7a2a2d426c0a6c0b839e82, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -94,7 +94,7 @@ func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOfReq
 }
 
 // SetMethod sets field value
-func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOfRequest) SetMethod(v string) {
+func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOfRequest) SetMethod(v Enum4e0943c4ae7a2a2d426c0a6c0b839e82) {
 	o.Method = v
 }
 

@@ -24,7 +24,7 @@ type CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOn
 	Value *string `json:"value,omitempty"`
 	Values []string `json:"values,omitempty"`
 	RegexReplace *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOfRegexReplace `json:"regex_replace,omitempty"`
-	Key string `json:"key"`
+	Key EnumREQUESTHEADERS `json:"key"`
 	Name string `json:"name"`
 	Delete *bool `json:"delete,omitempty"`
 }
@@ -35,7 +35,7 @@ type _CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerO
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf3(key string, name string) *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf3 {
+func NewCreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf3(key EnumREQUESTHEADERS, name string) *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf3 {
 	this := CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf3{}
 	this.Key = key
 	this.Name = name
@@ -147,9 +147,9 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInn
 }
 
 // GetKey returns the Key field value
-func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf3) GetKey() string {
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf3) GetKey() EnumREQUESTHEADERS {
 	if o == nil {
-		var ret string
+		var ret EnumREQUESTHEADERS
 		return ret
 	}
 
@@ -158,7 +158,7 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInn
 
 // GetKeyOk returns a tuple with the Key field value
 // and a boolean to check if the value has been set.
-func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf3) GetKeyOk() (*string, bool) {
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf3) GetKeyOk() (*EnumREQUESTHEADERS, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -166,7 +166,7 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInn
 }
 
 // SetKey sets field value
-func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf3) SetKey(v string) {
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf3) SetKey(v EnumREQUESTHEADERS) {
 	o.Key = v
 }
 

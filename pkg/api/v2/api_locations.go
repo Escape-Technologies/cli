@@ -395,7 +395,7 @@ func (a *LocationsAPIService) GetLocationExecute(r ApiGetLocationRequest) (*List
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v GetIssue404Response
+			var v GetLocation404Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

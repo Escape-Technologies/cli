@@ -26,7 +26,7 @@ type CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerO
 	In []string `json:"in,omitempty"`
 	Contains *string `json:"contains,omitempty"`
 	Regex *string `json:"regex,omitempty"`
-	If string `json:"if"`
+	If EnumSCHEMAURL `json:"if"`
 }
 
 type _CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf8 CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf8
@@ -35,7 +35,7 @@ type _CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInner
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf8(if_ string) *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf8 {
+func NewCreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf8(if_ EnumSCHEMAURL) *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf8 {
 	this := CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf8{}
 	this.If = if_
 	return &this
@@ -210,9 +210,9 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerIn
 }
 
 // GetIf returns the If field value
-func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf8) GetIf() string {
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf8) GetIf() EnumSCHEMAURL {
 	if o == nil {
-		var ret string
+		var ret EnumSCHEMAURL
 		return ret
 	}
 
@@ -221,7 +221,7 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerIn
 
 // GetIfOk returns a tuple with the If field value
 // and a boolean to check if the value has been set.
-func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf8) GetIfOk() (*string, bool) {
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf8) GetIfOk() (*EnumSCHEMAURL, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -229,7 +229,7 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerIn
 }
 
 // SetIf sets field value
-func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf8) SetIf(v string) {
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf8) SetIf(v EnumSCHEMAURL) {
 	o.If = v
 }
 

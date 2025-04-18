@@ -26,7 +26,7 @@ type CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerO
 	In []float32 `json:"in,omitempty"`
 	Gt *float32 `json:"gt,omitempty"`
 	Lt *float32 `json:"lt,omitempty"`
-	If string `json:"if"`
+	If EnumRESPONSESTATUSCODE `json:"if"`
 }
 
 type _CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf2 CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf2
@@ -35,7 +35,7 @@ type _CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInner
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf2(if_ string) *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf2 {
+func NewCreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf2(if_ EnumRESPONSESTATUSCODE) *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf2 {
 	this := CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf2{}
 	this.If = if_
 	return &this
@@ -210,9 +210,9 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerIn
 }
 
 // GetIf returns the If field value
-func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf2) GetIf() string {
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf2) GetIf() EnumRESPONSESTATUSCODE {
 	if o == nil {
-		var ret string
+		var ret EnumRESPONSESTATUSCODE
 		return ret
 	}
 
@@ -221,7 +221,7 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerIn
 
 // GetIfOk returns a tuple with the If field value
 // and a boolean to check if the value has been set.
-func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf2) GetIfOk() (*string, bool) {
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf2) GetIfOk() (*EnumRESPONSESTATUSCODE, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -229,7 +229,7 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerIn
 }
 
 // SetIf sets field value
-func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf2) SetIf(v string) {
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf2) SetIf(v EnumRESPONSESTATUSCODE) {
 	o.If = v
 }
 

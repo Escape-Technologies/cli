@@ -21,9 +21,9 @@ var _ MappedNullable = &CreateApplicationRequestConfigurationCustomRulesInnerTra
 
 // CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf7 struct for CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf7
 type CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf7 struct {
-	Key string `json:"key"`
-	Value *string `json:"value,omitempty"`
-	Values []string `json:"values,omitempty"`
+	Key EnumREQUESTMETHOD `json:"key"`
+	Value *Enum549d6d987f9711d8c5b7a2472e0c9d65 `json:"value,omitempty"`
+	Values []Enum549d6d987f9711d8c5b7a2472e0c9d65 `json:"values,omitempty"`
 }
 
 type _CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf7 CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf7
@@ -32,7 +32,7 @@ type _CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerO
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf7(key string) *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf7 {
+func NewCreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf7(key EnumREQUESTMETHOD) *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf7 {
 	this := CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf7{}
 	this.Key = key
 	return &this
@@ -47,9 +47,9 @@ func NewCreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInne
 }
 
 // GetKey returns the Key field value
-func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf7) GetKey() string {
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf7) GetKey() EnumREQUESTMETHOD {
 	if o == nil {
-		var ret string
+		var ret EnumREQUESTMETHOD
 		return ret
 	}
 
@@ -58,7 +58,7 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInn
 
 // GetKeyOk returns a tuple with the Key field value
 // and a boolean to check if the value has been set.
-func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf7) GetKeyOk() (*string, bool) {
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf7) GetKeyOk() (*EnumREQUESTMETHOD, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -66,14 +66,14 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInn
 }
 
 // SetKey sets field value
-func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf7) SetKey(v string) {
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf7) SetKey(v EnumREQUESTMETHOD) {
 	o.Key = v
 }
 
 // GetValue returns the Value field value if set, zero value otherwise.
-func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf7) GetValue() string {
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf7) GetValue() Enum549d6d987f9711d8c5b7a2472e0c9d65 {
 	if o == nil || IsNil(o.Value) {
-		var ret string
+		var ret Enum549d6d987f9711d8c5b7a2472e0c9d65
 		return ret
 	}
 	return *o.Value
@@ -81,7 +81,7 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInn
 
 // GetValueOk returns a tuple with the Value field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf7) GetValueOk() (*string, bool) {
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf7) GetValueOk() (*Enum549d6d987f9711d8c5b7a2472e0c9d65, bool) {
 	if o == nil || IsNil(o.Value) {
 		return nil, false
 	}
@@ -97,15 +97,15 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInn
 	return false
 }
 
-// SetValue gets a reference to the given string and assigns it to the Value field.
-func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf7) SetValue(v string) {
+// SetValue gets a reference to the given Enum549d6d987f9711d8c5b7a2472e0c9d65 and assigns it to the Value field.
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf7) SetValue(v Enum549d6d987f9711d8c5b7a2472e0c9d65) {
 	o.Value = &v
 }
 
 // GetValues returns the Values field value if set, zero value otherwise.
-func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf7) GetValues() []string {
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf7) GetValues() []Enum549d6d987f9711d8c5b7a2472e0c9d65 {
 	if o == nil || IsNil(o.Values) {
-		var ret []string
+		var ret []Enum549d6d987f9711d8c5b7a2472e0c9d65
 		return ret
 	}
 	return o.Values
@@ -113,7 +113,7 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInn
 
 // GetValuesOk returns a tuple with the Values field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf7) GetValuesOk() ([]string, bool) {
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf7) GetValuesOk() ([]Enum549d6d987f9711d8c5b7a2472e0c9d65, bool) {
 	if o == nil || IsNil(o.Values) {
 		return nil, false
 	}
@@ -129,8 +129,8 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInn
 	return false
 }
 
-// SetValues gets a reference to the given []string and assigns it to the Values field.
-func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf7) SetValues(v []string) {
+// SetValues gets a reference to the given []Enum549d6d987f9711d8c5b7a2472e0c9d65 and assigns it to the Values field.
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf7) SetValues(v []Enum549d6d987f9711d8c5b7a2472e0c9d65) {
 	o.Values = v
 }
 

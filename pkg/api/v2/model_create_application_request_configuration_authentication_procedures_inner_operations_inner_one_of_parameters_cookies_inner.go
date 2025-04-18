@@ -26,7 +26,7 @@ type CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperation
 	Path *string `json:"path,omitempty"`
 	HttpOnly *bool `json:"http_only,omitempty"`
 	Secure *bool `json:"secure,omitempty"`
-	SameSite *string `json:"same_site,omitempty"`
+	SameSite *Enum200018d75ade9e46d41a8d1efb27c511 `json:"same_site,omitempty"`
 	Values []string `json:"values"`
 }
 
@@ -204,9 +204,9 @@ func (o *CreateApplicationRequestConfigurationAuthenticationProceduresInnerOpera
 }
 
 // GetSameSite returns the SameSite field value if set, zero value otherwise.
-func (o *CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) GetSameSite() string {
+func (o *CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) GetSameSite() Enum200018d75ade9e46d41a8d1efb27c511 {
 	if o == nil || IsNil(o.SameSite) {
-		var ret string
+		var ret Enum200018d75ade9e46d41a8d1efb27c511
 		return ret
 	}
 	return *o.SameSite
@@ -214,7 +214,7 @@ func (o *CreateApplicationRequestConfigurationAuthenticationProceduresInnerOpera
 
 // GetSameSiteOk returns a tuple with the SameSite field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) GetSameSiteOk() (*string, bool) {
+func (o *CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) GetSameSiteOk() (*Enum200018d75ade9e46d41a8d1efb27c511, bool) {
 	if o == nil || IsNil(o.SameSite) {
 		return nil, false
 	}
@@ -230,8 +230,8 @@ func (o *CreateApplicationRequestConfigurationAuthenticationProceduresInnerOpera
 	return false
 }
 
-// SetSameSite gets a reference to the given string and assigns it to the SameSite field.
-func (o *CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) SetSameSite(v string) {
+// SetSameSite gets a reference to the given Enum200018d75ade9e46d41a8d1efb27c511 and assigns it to the SameSite field.
+func (o *CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) SetSameSite(v Enum200018d75ade9e46d41a8d1efb27c511) {
 	o.SameSite = &v
 }
 

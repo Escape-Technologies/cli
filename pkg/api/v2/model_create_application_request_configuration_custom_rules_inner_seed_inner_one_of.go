@@ -21,10 +21,10 @@ var _ MappedNullable = &CreateApplicationRequestConfigurationCustomRulesInnerSee
 
 // CreateApplicationRequestConfigurationCustomRulesInnerSeedInnerOneOf struct for CreateApplicationRequestConfigurationCustomRulesInnerSeedInnerOneOf
 type CreateApplicationRequestConfigurationCustomRulesInnerSeedInnerOneOf struct {
-	Protocol string `json:"protocol"`
+	Protocol EnumREST `json:"protocol"`
 	User *string `json:"user,omitempty"`
 	Path *string `json:"path,omitempty"`
-	Method *string `json:"method,omitempty"`
+	Method *Enum549d6d987f9711d8c5b7a2472e0c9d65 `json:"method,omitempty"`
 	Headers map[string]string `json:"headers,omitempty"`
 	Body *string `json:"body,omitempty"`
 	Params map[string]string `json:"params,omitempty"`
@@ -36,7 +36,7 @@ type _CreateApplicationRequestConfigurationCustomRulesInnerSeedInnerOneOf Create
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateApplicationRequestConfigurationCustomRulesInnerSeedInnerOneOf(protocol string) *CreateApplicationRequestConfigurationCustomRulesInnerSeedInnerOneOf {
+func NewCreateApplicationRequestConfigurationCustomRulesInnerSeedInnerOneOf(protocol EnumREST) *CreateApplicationRequestConfigurationCustomRulesInnerSeedInnerOneOf {
 	this := CreateApplicationRequestConfigurationCustomRulesInnerSeedInnerOneOf{}
 	this.Protocol = protocol
 	return &this
@@ -51,9 +51,9 @@ func NewCreateApplicationRequestConfigurationCustomRulesInnerSeedInnerOneOfWithD
 }
 
 // GetProtocol returns the Protocol field value
-func (o *CreateApplicationRequestConfigurationCustomRulesInnerSeedInnerOneOf) GetProtocol() string {
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerSeedInnerOneOf) GetProtocol() EnumREST {
 	if o == nil {
-		var ret string
+		var ret EnumREST
 		return ret
 	}
 
@@ -62,7 +62,7 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerSeedInnerOneOf) Ge
 
 // GetProtocolOk returns a tuple with the Protocol field value
 // and a boolean to check if the value has been set.
-func (o *CreateApplicationRequestConfigurationCustomRulesInnerSeedInnerOneOf) GetProtocolOk() (*string, bool) {
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerSeedInnerOneOf) GetProtocolOk() (*EnumREST, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -70,7 +70,7 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerSeedInnerOneOf) Ge
 }
 
 // SetProtocol sets field value
-func (o *CreateApplicationRequestConfigurationCustomRulesInnerSeedInnerOneOf) SetProtocol(v string) {
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerSeedInnerOneOf) SetProtocol(v EnumREST) {
 	o.Protocol = v
 }
 
@@ -139,9 +139,9 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerSeedInnerOneOf) Se
 }
 
 // GetMethod returns the Method field value if set, zero value otherwise.
-func (o *CreateApplicationRequestConfigurationCustomRulesInnerSeedInnerOneOf) GetMethod() string {
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerSeedInnerOneOf) GetMethod() Enum549d6d987f9711d8c5b7a2472e0c9d65 {
 	if o == nil || IsNil(o.Method) {
-		var ret string
+		var ret Enum549d6d987f9711d8c5b7a2472e0c9d65
 		return ret
 	}
 	return *o.Method
@@ -149,7 +149,7 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerSeedInnerOneOf) Ge
 
 // GetMethodOk returns a tuple with the Method field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateApplicationRequestConfigurationCustomRulesInnerSeedInnerOneOf) GetMethodOk() (*string, bool) {
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerSeedInnerOneOf) GetMethodOk() (*Enum549d6d987f9711d8c5b7a2472e0c9d65, bool) {
 	if o == nil || IsNil(o.Method) {
 		return nil, false
 	}
@@ -165,8 +165,8 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerSeedInnerOneOf) Ha
 	return false
 }
 
-// SetMethod gets a reference to the given string and assigns it to the Method field.
-func (o *CreateApplicationRequestConfigurationCustomRulesInnerSeedInnerOneOf) SetMethod(v string) {
+// SetMethod gets a reference to the given Enum549d6d987f9711d8c5b7a2472e0c9d65 and assigns it to the Method field.
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerSeedInnerOneOf) SetMethod(v Enum549d6d987f9711d8c5b7a2472e0c9d65) {
 	o.Method = &v
 }
 

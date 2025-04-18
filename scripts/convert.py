@@ -76,6 +76,19 @@ for path, path_data in data["paths"].items():
         responses: dict[str, dict] = operation_object.get("responses", {})
         if not responses:
             continue
+        if (
+            json_schema := operation_object.get("requestBody", {})
+            .get("content", {})
+            .get("application/json", {})
+            .get("schema", {})
+        ):
+            schema, enums = _rec_extract_enums(json_schema, [])
+            if enums:
+                data["components"]["schemas"].update(enums)
+                data["paths"][path][method]["requestBody"]["content"][
+                    "application/json"
+                ]["schema"] = schema
+
         for status_code, response_object in responses.items():
             if "content" not in response_object:
                 continue

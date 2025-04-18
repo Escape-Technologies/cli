@@ -21,8 +21,7 @@ var _ MappedNullable = &CreateApplicationRequest{}
 
 // CreateApplicationRequest struct for CreateApplicationRequest
 type CreateApplicationRequest struct {
-	// Application type
-	Type string `json:"type"`
+	Type EnumE2faa1839c383d205180930f9bfb3583 `json:"type"`
 	// Application URL
 	Url string `json:"url"`
 	Schema CreateApplicationRequestSchema `json:"schema"`
@@ -39,7 +38,7 @@ type _CreateApplicationRequest CreateApplicationRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateApplicationRequest(type_ string, url string, schema CreateApplicationRequestSchema, name string, locationId string, cron string) *CreateApplicationRequest {
+func NewCreateApplicationRequest(type_ EnumE2faa1839c383d205180930f9bfb3583, url string, schema CreateApplicationRequestSchema, name string, locationId string, cron string) *CreateApplicationRequest {
 	this := CreateApplicationRequest{}
 	this.Type = type_
 	this.Url = url
@@ -59,9 +58,9 @@ func NewCreateApplicationRequestWithDefaults() *CreateApplicationRequest {
 }
 
 // GetType returns the Type field value
-func (o *CreateApplicationRequest) GetType() string {
+func (o *CreateApplicationRequest) GetType() EnumE2faa1839c383d205180930f9bfb3583 {
 	if o == nil {
-		var ret string
+		var ret EnumE2faa1839c383d205180930f9bfb3583
 		return ret
 	}
 
@@ -70,7 +69,7 @@ func (o *CreateApplicationRequest) GetType() string {
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *CreateApplicationRequest) GetTypeOk() (*string, bool) {
+func (o *CreateApplicationRequest) GetTypeOk() (*EnumE2faa1839c383d205180930f9bfb3583, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -78,7 +77,7 @@ func (o *CreateApplicationRequest) GetTypeOk() (*string, bool) {
 }
 
 // SetType sets field value
-func (o *CreateApplicationRequest) SetType(v string) {
+func (o *CreateApplicationRequest) SetType(v EnumE2faa1839c383d205180930f9bfb3583) {
 	o.Type = v
 }
 
