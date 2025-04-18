@@ -8,10 +8,10 @@ import (
 func TestLogShouldDropOldestLogsIfBufferIsFull(t *testing.T) {
 	b := newLogBuffer(5)
 	for i := range 10 {
-		b.Ingest(LogItem{Message: fmt.Sprintf("log %d", i)})
+		b.Ingest(Entry{Message: fmt.Sprintf("log %d", i)})
 	}
 	logged := []string{}
-	b.AddHook("logged", func(log LogItem) {
+	b.AddHook("logged", func(log Entry) {
 		logged = append(logged, log.Message)
 	})
 	equal(t, 5, len(logged), "should have 5 logs")
@@ -25,17 +25,17 @@ func TestLogShouldDropOldestLogsIfBufferIsFull(t *testing.T) {
 func TestLogDropShouldUpdateOffsets(t *testing.T) {
 	b := newLogBuffer(5)
 	logged := []string{}
-	b.AddHook("logged", func(log LogItem) {
+	b.AddHook("logged", func(log Entry) {
 		logged = append(logged, log.Message)
 	})
-	b.Ingest(LogItem{Message: "before 1"})
-	b.Ingest(LogItem{Message: "before 2"})
+	b.Ingest(Entry{Message: "before 1"})
+	b.Ingest(Entry{Message: "before 2"})
 	b.RemoveHook("logged")
 
 	for i := range 10 {
-		b.Ingest(LogItem{Message: fmt.Sprintf("log %d", i)})
+		b.Ingest(Entry{Message: fmt.Sprintf("log %d", i)})
 	}
-	b.AddHook("logged", func(log LogItem) {
+	b.AddHook("logged", func(log Entry) {
 		logged = append(logged, log.Message)
 	})
 	equal(t, 7, len(logged), "should have 7 logs")
@@ -48,6 +48,6 @@ func TestLogDropShouldUpdateOffsets(t *testing.T) {
 	equal(t, "log 9", logged[6], "should have log 9")
 }
 
-func TestShouldNotRaiseIfRemoveNonExistentHook(t *testing.T) {
+func TestShouldNotRaiseIfRemoveNonExistentHook(_ *testing.T) {
 	RemoveHook("nonExistentHook")
 }

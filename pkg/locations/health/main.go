@@ -1,3 +1,4 @@
+// Package health implements the health check server
 package health
 
 import (
@@ -10,7 +11,7 @@ import (
 )
 
 func buildHandler(healthy *atomic.Bool) func(http.ResponseWriter, *http.Request) {
-	return func(w http.ResponseWriter, r *http.Request) {
+	return func(w http.ResponseWriter, _ *http.Request) {
 		var msg string
 		if healthy.Load() {
 			w.WriteHeader(http.StatusOK)
@@ -26,6 +27,7 @@ func buildHandler(healthy *atomic.Bool) func(http.ResponseWriter, *http.Request)
 	}
 }
 
+// Start the health check server
 func Start(ctx context.Context, healthy *atomic.Bool) {
 	if os.Getenv("HEALTH_CHECK_PORT") == "" {
 		log.Trace("HEALTH_CHECK_PORT is not set, skipping health check")

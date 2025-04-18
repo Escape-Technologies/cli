@@ -31,23 +31,23 @@ func newHTTPSProxy(uri *url.URL, forward proxy.Dialer) (proxy.Dialer, error) {
 	return s, nil
 }
 
-func (s *httpsProxy) Dial(network, addr string) (net.Conn, error) {
+func (s *httpsProxy) Dial(_, addr string) (net.Conn, error) {
 	c, err := tls.Dial("tcp", s.host, &tls.Config{})
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to dial %s: %w", s.host, err)
 	}
 
 	reqURL, err := url.Parse("https://" + addr)
 	if err != nil {
-		c.Close()
-		return nil, err
+		c.Close() //nolint:errcheck
+		return nil, fmt.Errorf("failed to parse url: %w", err)
 	}
 	reqURL.Scheme = ""
 
-	req, err := http.NewRequest("CONNECT", reqURL.String(), nil)
+	req, err := http.NewRequest("CONNECT", reqURL.String(), nil) //nolint:noctx
 	if err != nil {
-		c.Close()
-		return nil, err
+		c.Close() //nolint:errcheck
+		return nil, fmt.Errorf("failed to create request: %w", err)
 	}
 	req.Close = false
 	if s.haveAuth {
@@ -56,23 +56,22 @@ func (s *httpsProxy) Dial(network, addr string) (net.Conn, error) {
 
 	err = req.Write(c)
 	if err != nil {
-		c.Close()
-		return nil, err
+		c.Close() //nolint:errcheck
+		return nil, fmt.Errorf("failed to write request: %w", err)
 	}
 
 	resp, err := http.ReadResponse(bufio.NewReader(c), req)
 	if err != nil {
 		if resp != nil && resp.Body != nil {
-			resp.Body.Close()
+			resp.Body.Close() //nolint:errcheck
 		}
-		c.Close()
-		return nil, err
+		c.Close() //nolint:errcheck
+		return nil, fmt.Errorf("failed to read response: %w", err)
 	}
-	resp.Body.Close()
-	if resp.StatusCode != 200 {
-		c.Close()
-		err = fmt.Errorf("connect server using proxy error, StatusCode [%d]", resp.StatusCode)
-		return nil, err
+	resp.Body.Close() //nolint:errcheck
+	if resp.StatusCode != http.StatusOK {
+		c.Close() //nolint:errcheck
+		return nil, fmt.Errorf("connect server using proxy error, StatusCode [%d]", resp.StatusCode)
 	}
 
 	return c, nil
@@ -80,4 +79,4 @@ func (s *httpsProxy) Dial(network, addr string) (net.Conn, error) {
 
 func init() {
 	proxy.RegisterDialerType("https", newHTTPSProxy)
-} 
+}

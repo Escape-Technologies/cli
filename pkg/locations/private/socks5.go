@@ -28,7 +28,7 @@ func startSocks5Server(ctx context.Context, listener net.Listener, healthy *atom
 
 	go func() {
 		<-ctx.Done()
-		listener.Close()
+		listener.Close() //nolint:errcheck
 		errChan <- nil
 	}()
 	go func() {
