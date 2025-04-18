@@ -21,7 +21,7 @@ var _ MappedNullable = &CreateApplicationRequestConfigurationAuthenticationPrese
 
 // CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf11UsersInnerActionsInnerOneOf5 struct for CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf11UsersInnerActionsInnerOneOf5
 type CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf11UsersInnerActionsInnerOneOf5 struct {
-	Action string `json:"action"`
+	Action EnumWAITELEMENT `json:"action"`
 	Locator string `json:"locator"`
 	Timeout float32 `json:"timeout"`
 }
@@ -32,7 +32,7 @@ type _CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf11User
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf11UsersInnerActionsInnerOneOf5(action string, locator string, timeout float32) *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf11UsersInnerActionsInnerOneOf5 {
+func NewCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf11UsersInnerActionsInnerOneOf5(action EnumWAITELEMENT, locator string, timeout float32) *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf11UsersInnerActionsInnerOneOf5 {
 	this := CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf11UsersInnerActionsInnerOneOf5{}
 	this.Action = action
 	this.Locator = locator
@@ -49,9 +49,9 @@ func NewCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf11Us
 }
 
 // GetAction returns the Action field value
-func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf11UsersInnerActionsInnerOneOf5) GetAction() string {
+func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf11UsersInnerActionsInnerOneOf5) GetAction() EnumWAITELEMENT {
 	if o == nil {
-		var ret string
+		var ret EnumWAITELEMENT
 		return ret
 	}
 
@@ -60,7 +60,7 @@ func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf11U
 
 // GetActionOk returns a tuple with the Action field value
 // and a boolean to check if the value has been set.
-func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf11UsersInnerActionsInnerOneOf5) GetActionOk() (*string, bool) {
+func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf11UsersInnerActionsInnerOneOf5) GetActionOk() (*EnumWAITELEMENT, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -68,7 +68,7 @@ func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf11U
 }
 
 // SetAction sets field value
-func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf11UsersInnerActionsInnerOneOf5) SetAction(v string) {
+func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf11UsersInnerActionsInnerOneOf5) SetAction(v EnumWAITELEMENT) {
 	o.Action = v
 }
 

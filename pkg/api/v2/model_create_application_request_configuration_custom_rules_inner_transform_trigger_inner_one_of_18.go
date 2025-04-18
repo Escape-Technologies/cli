@@ -21,10 +21,10 @@ var _ MappedNullable = &CreateApplicationRequestConfigurationCustomRulesInnerTra
 
 // CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf18 struct for CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf18
 type CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf18 struct {
-	Is *string `json:"is,omitempty"`
-	IsNot *string `json:"is_not,omitempty"`
-	In []string `json:"in,omitempty"`
-	If string `json:"if"`
+	Is *Enum549d6d987f9711d8c5b7a2472e0c9d65 `json:"is,omitempty"`
+	IsNot *Enum549d6d987f9711d8c5b7a2472e0c9d65 `json:"is_not,omitempty"`
+	In []Enum549d6d987f9711d8c5b7a2472e0c9d65 `json:"in,omitempty"`
+	If EnumREQUESTMETHOD `json:"if"`
 }
 
 type _CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf18 CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf18
@@ -33,7 +33,7 @@ type _CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInner
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf18(if_ string) *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf18 {
+func NewCreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf18(if_ EnumREQUESTMETHOD) *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf18 {
 	this := CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf18{}
 	this.If = if_
 	return &this
@@ -48,9 +48,9 @@ func NewCreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInn
 }
 
 // GetIs returns the Is field value if set, zero value otherwise.
-func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf18) GetIs() string {
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf18) GetIs() Enum549d6d987f9711d8c5b7a2472e0c9d65 {
 	if o == nil || IsNil(o.Is) {
-		var ret string
+		var ret Enum549d6d987f9711d8c5b7a2472e0c9d65
 		return ret
 	}
 	return *o.Is
@@ -58,7 +58,7 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerIn
 
 // GetIsOk returns a tuple with the Is field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf18) GetIsOk() (*string, bool) {
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf18) GetIsOk() (*Enum549d6d987f9711d8c5b7a2472e0c9d65, bool) {
 	if o == nil || IsNil(o.Is) {
 		return nil, false
 	}
@@ -74,15 +74,15 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerIn
 	return false
 }
 
-// SetIs gets a reference to the given string and assigns it to the Is field.
-func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf18) SetIs(v string) {
+// SetIs gets a reference to the given Enum549d6d987f9711d8c5b7a2472e0c9d65 and assigns it to the Is field.
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf18) SetIs(v Enum549d6d987f9711d8c5b7a2472e0c9d65) {
 	o.Is = &v
 }
 
 // GetIsNot returns the IsNot field value if set, zero value otherwise.
-func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf18) GetIsNot() string {
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf18) GetIsNot() Enum549d6d987f9711d8c5b7a2472e0c9d65 {
 	if o == nil || IsNil(o.IsNot) {
-		var ret string
+		var ret Enum549d6d987f9711d8c5b7a2472e0c9d65
 		return ret
 	}
 	return *o.IsNot
@@ -90,7 +90,7 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerIn
 
 // GetIsNotOk returns a tuple with the IsNot field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf18) GetIsNotOk() (*string, bool) {
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf18) GetIsNotOk() (*Enum549d6d987f9711d8c5b7a2472e0c9d65, bool) {
 	if o == nil || IsNil(o.IsNot) {
 		return nil, false
 	}
@@ -106,15 +106,15 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerIn
 	return false
 }
 
-// SetIsNot gets a reference to the given string and assigns it to the IsNot field.
-func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf18) SetIsNot(v string) {
+// SetIsNot gets a reference to the given Enum549d6d987f9711d8c5b7a2472e0c9d65 and assigns it to the IsNot field.
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf18) SetIsNot(v Enum549d6d987f9711d8c5b7a2472e0c9d65) {
 	o.IsNot = &v
 }
 
 // GetIn returns the In field value if set, zero value otherwise.
-func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf18) GetIn() []string {
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf18) GetIn() []Enum549d6d987f9711d8c5b7a2472e0c9d65 {
 	if o == nil || IsNil(o.In) {
-		var ret []string
+		var ret []Enum549d6d987f9711d8c5b7a2472e0c9d65
 		return ret
 	}
 	return o.In
@@ -122,7 +122,7 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerIn
 
 // GetInOk returns a tuple with the In field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf18) GetInOk() ([]string, bool) {
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf18) GetInOk() ([]Enum549d6d987f9711d8c5b7a2472e0c9d65, bool) {
 	if o == nil || IsNil(o.In) {
 		return nil, false
 	}
@@ -138,15 +138,15 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerIn
 	return false
 }
 
-// SetIn gets a reference to the given []string and assigns it to the In field.
-func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf18) SetIn(v []string) {
+// SetIn gets a reference to the given []Enum549d6d987f9711d8c5b7a2472e0c9d65 and assigns it to the In field.
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf18) SetIn(v []Enum549d6d987f9711d8c5b7a2472e0c9d65) {
 	o.In = v
 }
 
 // GetIf returns the If field value
-func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf18) GetIf() string {
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf18) GetIf() EnumREQUESTMETHOD {
 	if o == nil {
-		var ret string
+		var ret EnumREQUESTMETHOD
 		return ret
 	}
 
@@ -155,7 +155,7 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerIn
 
 // GetIfOk returns a tuple with the If field value
 // and a boolean to check if the value has been set.
-func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf18) GetIfOk() (*string, bool) {
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf18) GetIfOk() (*EnumREQUESTMETHOD, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -163,7 +163,7 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerIn
 }
 
 // SetIf sets field value
-func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf18) SetIf(v string) {
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf18) SetIf(v EnumREQUESTMETHOD) {
 	o.If = v
 }
 

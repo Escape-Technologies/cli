@@ -19,12 +19,12 @@ var _ MappedNullable = &CreateApplicationRequestConfigurationScan{}
 
 // CreateApplicationRequestConfigurationScan struct for CreateApplicationRequestConfigurationScan
 type CreateApplicationRequestConfigurationScan struct {
-	Profile *string `json:"profile,omitempty"`
+	Profile *Enum54f0a5f011be184847a3933abc4c6999 `json:"profile,omitempty"`
 	ReadOnly *bool `json:"read_only,omitempty"`
 	Hotstart []string `json:"hotstart,omitempty"`
 	Blocklist *CreateApplicationRequestConfigurationScanBlocklist `json:"blocklist,omitempty"`
 	Scalars map[string]CreateApplicationRequestConfigurationScanScalarsValue `json:"scalars,omitempty"`
-	ApiType *string `json:"api_type,omitempty"`
+	ApiType *EnumD528205b1dacf02f72b02e9e61efdb57 `json:"api_type,omitempty"`
 	NullIsUnauthenticated *bool `json:"null_is_unauthenticated,omitempty"`
 	HotstartOnly *bool `json:"hotstart_only,omitempty"`
 	ForceFullScan *bool `json:"force_full_scan,omitempty"`
@@ -57,9 +57,9 @@ func NewCreateApplicationRequestConfigurationScanWithDefaults() *CreateApplicati
 }
 
 // GetProfile returns the Profile field value if set, zero value otherwise.
-func (o *CreateApplicationRequestConfigurationScan) GetProfile() string {
+func (o *CreateApplicationRequestConfigurationScan) GetProfile() Enum54f0a5f011be184847a3933abc4c6999 {
 	if o == nil || IsNil(o.Profile) {
-		var ret string
+		var ret Enum54f0a5f011be184847a3933abc4c6999
 		return ret
 	}
 	return *o.Profile
@@ -67,7 +67,7 @@ func (o *CreateApplicationRequestConfigurationScan) GetProfile() string {
 
 // GetProfileOk returns a tuple with the Profile field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateApplicationRequestConfigurationScan) GetProfileOk() (*string, bool) {
+func (o *CreateApplicationRequestConfigurationScan) GetProfileOk() (*Enum54f0a5f011be184847a3933abc4c6999, bool) {
 	if o == nil || IsNil(o.Profile) {
 		return nil, false
 	}
@@ -83,8 +83,8 @@ func (o *CreateApplicationRequestConfigurationScan) HasProfile() bool {
 	return false
 }
 
-// SetProfile gets a reference to the given string and assigns it to the Profile field.
-func (o *CreateApplicationRequestConfigurationScan) SetProfile(v string) {
+// SetProfile gets a reference to the given Enum54f0a5f011be184847a3933abc4c6999 and assigns it to the Profile field.
+func (o *CreateApplicationRequestConfigurationScan) SetProfile(v Enum54f0a5f011be184847a3933abc4c6999) {
 	o.Profile = &v
 }
 
@@ -217,9 +217,9 @@ func (o *CreateApplicationRequestConfigurationScan) SetScalars(v map[string]Crea
 }
 
 // GetApiType returns the ApiType field value if set, zero value otherwise.
-func (o *CreateApplicationRequestConfigurationScan) GetApiType() string {
+func (o *CreateApplicationRequestConfigurationScan) GetApiType() EnumD528205b1dacf02f72b02e9e61efdb57 {
 	if o == nil || IsNil(o.ApiType) {
-		var ret string
+		var ret EnumD528205b1dacf02f72b02e9e61efdb57
 		return ret
 	}
 	return *o.ApiType
@@ -227,7 +227,7 @@ func (o *CreateApplicationRequestConfigurationScan) GetApiType() string {
 
 // GetApiTypeOk returns a tuple with the ApiType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateApplicationRequestConfigurationScan) GetApiTypeOk() (*string, bool) {
+func (o *CreateApplicationRequestConfigurationScan) GetApiTypeOk() (*EnumD528205b1dacf02f72b02e9e61efdb57, bool) {
 	if o == nil || IsNil(o.ApiType) {
 		return nil, false
 	}
@@ -243,8 +243,8 @@ func (o *CreateApplicationRequestConfigurationScan) HasApiType() bool {
 	return false
 }
 
-// SetApiType gets a reference to the given string and assigns it to the ApiType field.
-func (o *CreateApplicationRequestConfigurationScan) SetApiType(v string) {
+// SetApiType gets a reference to the given EnumD528205b1dacf02f72b02e9e61efdb57 and assigns it to the ApiType field.
+func (o *CreateApplicationRequestConfigurationScan) SetApiType(v EnumD528205b1dacf02f72b02e9e61efdb57) {
 	o.ApiType = &v
 }
 

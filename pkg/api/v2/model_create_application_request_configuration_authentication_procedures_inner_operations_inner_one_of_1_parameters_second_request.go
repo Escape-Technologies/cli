@@ -20,7 +20,7 @@ var _ MappedNullable = &CreateApplicationRequestConfigurationAuthenticationProce
 // CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersSecondRequest struct for CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersSecondRequest
 type CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersSecondRequest struct {
 	Url *string `json:"url,omitempty"`
-	Method *string `json:"method,omitempty"`
+	Method *Enum4e0943c4ae7a2a2d426c0a6c0b839e82 `json:"method,omitempty"`
 }
 
 // NewCreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersSecondRequest instantiates a new CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersSecondRequest object
@@ -73,9 +73,9 @@ func (o *CreateApplicationRequestConfigurationAuthenticationProceduresInnerOpera
 }
 
 // GetMethod returns the Method field value if set, zero value otherwise.
-func (o *CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersSecondRequest) GetMethod() string {
+func (o *CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersSecondRequest) GetMethod() Enum4e0943c4ae7a2a2d426c0a6c0b839e82 {
 	if o == nil || IsNil(o.Method) {
-		var ret string
+		var ret Enum4e0943c4ae7a2a2d426c0a6c0b839e82
 		return ret
 	}
 	return *o.Method
@@ -83,7 +83,7 @@ func (o *CreateApplicationRequestConfigurationAuthenticationProceduresInnerOpera
 
 // GetMethodOk returns a tuple with the Method field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersSecondRequest) GetMethodOk() (*string, bool) {
+func (o *CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersSecondRequest) GetMethodOk() (*Enum4e0943c4ae7a2a2d426c0a6c0b839e82, bool) {
 	if o == nil || IsNil(o.Method) {
 		return nil, false
 	}
@@ -99,8 +99,8 @@ func (o *CreateApplicationRequestConfigurationAuthenticationProceduresInnerOpera
 	return false
 }
 
-// SetMethod gets a reference to the given string and assigns it to the Method field.
-func (o *CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersSecondRequest) SetMethod(v string) {
+// SetMethod gets a reference to the given Enum4e0943c4ae7a2a2d426c0a6c0b839e82 and assigns it to the Method field.
+func (o *CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersSecondRequest) SetMethod(v Enum4e0943c4ae7a2a2d426c0a6c0b839e82) {
 	o.Method = &v
 }
 

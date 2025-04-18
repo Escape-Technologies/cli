@@ -21,7 +21,7 @@ var _ MappedNullable = &CreateApplicationRequestConfigurationCustomRulesInnerSee
 
 // CreateApplicationRequestConfigurationCustomRulesInnerSeedInnerOneOf1 struct for CreateApplicationRequestConfigurationCustomRulesInnerSeedInnerOneOf1
 type CreateApplicationRequestConfigurationCustomRulesInnerSeedInnerOneOf1 struct {
-	Protocol string `json:"protocol"`
+	Protocol EnumHTTP `json:"protocol"`
 	Raw string `json:"raw"`
 	User *string `json:"user,omitempty"`
 }
@@ -32,7 +32,7 @@ type _CreateApplicationRequestConfigurationCustomRulesInnerSeedInnerOneOf1 Creat
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateApplicationRequestConfigurationCustomRulesInnerSeedInnerOneOf1(protocol string, raw string) *CreateApplicationRequestConfigurationCustomRulesInnerSeedInnerOneOf1 {
+func NewCreateApplicationRequestConfigurationCustomRulesInnerSeedInnerOneOf1(protocol EnumHTTP, raw string) *CreateApplicationRequestConfigurationCustomRulesInnerSeedInnerOneOf1 {
 	this := CreateApplicationRequestConfigurationCustomRulesInnerSeedInnerOneOf1{}
 	this.Protocol = protocol
 	this.Raw = raw
@@ -48,9 +48,9 @@ func NewCreateApplicationRequestConfigurationCustomRulesInnerSeedInnerOneOf1With
 }
 
 // GetProtocol returns the Protocol field value
-func (o *CreateApplicationRequestConfigurationCustomRulesInnerSeedInnerOneOf1) GetProtocol() string {
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerSeedInnerOneOf1) GetProtocol() EnumHTTP {
 	if o == nil {
-		var ret string
+		var ret EnumHTTP
 		return ret
 	}
 
@@ -59,7 +59,7 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerSeedInnerOneOf1) G
 
 // GetProtocolOk returns a tuple with the Protocol field value
 // and a boolean to check if the value has been set.
-func (o *CreateApplicationRequestConfigurationCustomRulesInnerSeedInnerOneOf1) GetProtocolOk() (*string, bool) {
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerSeedInnerOneOf1) GetProtocolOk() (*EnumHTTP, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -67,7 +67,7 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerSeedInnerOneOf1) G
 }
 
 // SetProtocol sets field value
-func (o *CreateApplicationRequestConfigurationCustomRulesInnerSeedInnerOneOf1) SetProtocol(v string) {
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerSeedInnerOneOf1) SetProtocol(v EnumHTTP) {
 	o.Protocol = v
 }
 

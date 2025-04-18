@@ -21,9 +21,9 @@ var _ MappedNullable = &CreateApplicationRequestConfigurationAuthenticationPrese
 
 // CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf6 struct for CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf6
 type CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf6 struct {
-	Type string `json:"type"`
+	Type EnumCOGNITOUSERPASS `json:"type"`
 	Users []CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf1UsersInner `json:"users"`
-	Region string `json:"region"`
+	Region Enum099ff370106bbdadb403f9dd62027576 `json:"region"`
 	ClientId string `json:"client_id"`
 	ClientSecret string `json:"client_secret"`
 }
@@ -34,7 +34,7 @@ type _CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf6 Crea
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf6(type_ string, users []CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf1UsersInner, region string, clientId string, clientSecret string) *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf6 {
+func NewCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf6(type_ EnumCOGNITOUSERPASS, users []CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf1UsersInner, region Enum099ff370106bbdadb403f9dd62027576, clientId string, clientSecret string) *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf6 {
 	this := CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf6{}
 	this.Type = type_
 	this.Users = users
@@ -53,9 +53,9 @@ func NewCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf6Wit
 }
 
 // GetType returns the Type field value
-func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf6) GetType() string {
+func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf6) GetType() EnumCOGNITOUSERPASS {
 	if o == nil {
-		var ret string
+		var ret EnumCOGNITOUSERPASS
 		return ret
 	}
 
@@ -64,7 +64,7 @@ func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf6) 
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf6) GetTypeOk() (*string, bool) {
+func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf6) GetTypeOk() (*EnumCOGNITOUSERPASS, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -72,7 +72,7 @@ func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf6) 
 }
 
 // SetType sets field value
-func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf6) SetType(v string) {
+func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf6) SetType(v EnumCOGNITOUSERPASS) {
 	o.Type = v
 }
 
@@ -101,9 +101,9 @@ func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf6) 
 }
 
 // GetRegion returns the Region field value
-func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf6) GetRegion() string {
+func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf6) GetRegion() Enum099ff370106bbdadb403f9dd62027576 {
 	if o == nil {
-		var ret string
+		var ret Enum099ff370106bbdadb403f9dd62027576
 		return ret
 	}
 
@@ -112,7 +112,7 @@ func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf6) 
 
 // GetRegionOk returns a tuple with the Region field value
 // and a boolean to check if the value has been set.
-func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf6) GetRegionOk() (*string, bool) {
+func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf6) GetRegionOk() (*Enum099ff370106bbdadb403f9dd62027576, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -120,7 +120,7 @@ func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf6) 
 }
 
 // SetRegion sets field value
-func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf6) SetRegion(v string) {
+func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf6) SetRegion(v Enum099ff370106bbdadb403f9dd62027576) {
 	o.Region = v
 }
 

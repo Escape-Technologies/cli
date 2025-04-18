@@ -2,7 +2,6 @@ package escape
 
 import (
 	"context"
-	"encoding/json"
 	"errors"
 	"fmt"
 	"io"
@@ -12,7 +11,6 @@ import (
 
 	v2 "github.com/Escape-Technologies/cli/pkg/api/v2"
 	"github.com/Escape-Technologies/cli/pkg/env"
-	"gopkg.in/yaml.v2"
 )
 
 // ListApplications lists all applications
@@ -99,9 +97,8 @@ func pullSchemaFromPath(path string) (string, error) {
 	if err != nil {
 		return "", fmt.Errorf("read error: %w", err)
 	}
-	err = parseJSONOrYAML(body, &map[string]any{})
-	if err != nil {
-		return "", fmt.Errorf("unable to parse schema: %w", err)
+	if !isJSONOrYAML(body) {
+		return "", errors.New("file is neither json nor yaml")
 	}
 	return string(body), nil
 }
@@ -123,22 +120,10 @@ func pullSchemaFromURL(ctx context.Context, url string) (string, error) {
 	if err != nil {
 		return "", fmt.Errorf("unable to read body: %w", err)
 	}
-	err = parseJSONOrYAML(body, &map[string]any{})
-	if err != nil {
-		return "", fmt.Errorf("unable to parse schema: %w", err)
+	if !isJSONOrYAML(body) {
+		return "", errors.New("file is neither json nor yaml")
 	}
 	return string(body), nil
-}
-
-func parseJSONOrYAML(body []byte, v any) error {
-	err := json.Unmarshal(body, v)
-	if err != nil {
-		err = yaml.Unmarshal(body, v)
-		if err != nil {
-			return fmt.Errorf("file is neither json nor yaml: %w", err)
-		}
-	}
-	return nil
 }
 
 // UpdateApplicationConfig updates an application configuration
@@ -163,10 +148,9 @@ func readConfig(path string) (*v2.CreateApplicationRequestConfiguration, error) 
 	if err != nil {
 		return nil, fmt.Errorf("unable to read file: %w", err)
 	}
-	var cfg v2.CreateApplicationRequestConfiguration
-	err = parseJSONOrYAML(body, &cfg)
+	cfg, err := parseJSONOrYAML(body, &v2.NullableCreateApplicationRequestConfiguration{})
 	if err != nil {
 		return nil, fmt.Errorf("unable to parse config: %w", err)
 	}
-	return &cfg, nil
+	return cfg.Get(), nil
 }

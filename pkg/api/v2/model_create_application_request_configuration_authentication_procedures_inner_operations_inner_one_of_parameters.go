@@ -23,7 +23,7 @@ var _ MappedNullable = &CreateApplicationRequestConfigurationAuthenticationProce
 type CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters struct {
 	Proxy *string `json:"proxy,omitempty"`
 	Url string `json:"url"`
-	Method string `json:"method"`
+	Method Enum4e0943c4ae7a2a2d426c0a6c0b839e82 `json:"method"`
 	Headers []CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner `json:"headers"`
 	Cookies []CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner `json:"cookies"`
 	QueryParameters []CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner `json:"queryParameters"`
@@ -39,7 +39,7 @@ type _CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperatio
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters(url string, method string, headers []CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner, cookies []CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner, queryParameters []CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner) *CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters {
+func NewCreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters(url string, method Enum4e0943c4ae7a2a2d426c0a6c0b839e82, headers []CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner, cookies []CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner, queryParameters []CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner) *CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters {
 	this := CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters{}
 	this.Url = url
 	this.Method = method
@@ -114,9 +114,9 @@ func (o *CreateApplicationRequestConfigurationAuthenticationProceduresInnerOpera
 }
 
 // GetMethod returns the Method field value
-func (o *CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters) GetMethod() string {
+func (o *CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters) GetMethod() Enum4e0943c4ae7a2a2d426c0a6c0b839e82 {
 	if o == nil {
-		var ret string
+		var ret Enum4e0943c4ae7a2a2d426c0a6c0b839e82
 		return ret
 	}
 
@@ -125,7 +125,7 @@ func (o *CreateApplicationRequestConfigurationAuthenticationProceduresInnerOpera
 
 // GetMethodOk returns a tuple with the Method field value
 // and a boolean to check if the value has been set.
-func (o *CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters) GetMethodOk() (*string, bool) {
+func (o *CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters) GetMethodOk() (*Enum4e0943c4ae7a2a2d426c0a6c0b839e82, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -133,7 +133,7 @@ func (o *CreateApplicationRequestConfigurationAuthenticationProceduresInnerOpera
 }
 
 // SetMethod sets field value
-func (o *CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters) SetMethod(v string) {
+func (o *CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters) SetMethod(v Enum4e0943c4ae7a2a2d426c0a6c0b839e82) {
 	o.Method = v
 }
 

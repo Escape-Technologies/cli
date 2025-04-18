@@ -23,7 +23,7 @@ var _ MappedNullable = &CreateApplicationRequestConfigurationCustomRulesInnerTra
 type CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf4 struct {
 	Is *bool `json:"is,omitempty"`
 	IsNot *bool `json:"is_not,omitempty"`
-	If string `json:"if"`
+	If EnumSCHEMANEEDAUTHENTICATION `json:"if"`
 }
 
 type _CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf4 CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf4
@@ -32,7 +32,7 @@ type _CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInner
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf4(if_ string) *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf4 {
+func NewCreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf4(if_ EnumSCHEMANEEDAUTHENTICATION) *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf4 {
 	this := CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf4{}
 	this.If = if_
 	return &this
@@ -111,9 +111,9 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerIn
 }
 
 // GetIf returns the If field value
-func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf4) GetIf() string {
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf4) GetIf() EnumSCHEMANEEDAUTHENTICATION {
 	if o == nil {
-		var ret string
+		var ret EnumSCHEMANEEDAUTHENTICATION
 		return ret
 	}
 
@@ -122,7 +122,7 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerIn
 
 // GetIfOk returns a tuple with the If field value
 // and a boolean to check if the value has been set.
-func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf4) GetIfOk() (*string, bool) {
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf4) GetIfOk() (*EnumSCHEMANEEDAUTHENTICATION, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -130,7 +130,7 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerIn
 }
 
 // SetIf sets field value
-func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf4) SetIf(v string) {
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf4) SetIf(v EnumSCHEMANEEDAUTHENTICATION) {
 	o.If = v
 }
 

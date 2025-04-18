@@ -21,7 +21,7 @@ var _ MappedNullable = &CreateApplicationRequestConfigurationAuthenticationPrese
 
 // CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf10 struct for CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf10
 type CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf10 struct {
-	Type string `json:"type"`
+	Type EnumBROWSERAGENT `json:"type"`
 	Users []CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf10UsersInner `json:"users"`
 	LoginUrl string `json:"login_url"`
 	LoggedInDetectorText *string `json:"logged_in_detector_text,omitempty"`
@@ -37,7 +37,7 @@ type _CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf10 Cre
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf10(type_ string, users []CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf10UsersInner, loginUrl string) *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf10 {
+func NewCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf10(type_ EnumBROWSERAGENT, users []CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf10UsersInner, loginUrl string) *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf10 {
 	this := CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf10{}
 	this.Type = type_
 	this.Users = users
@@ -54,9 +54,9 @@ func NewCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf10Wi
 }
 
 // GetType returns the Type field value
-func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf10) GetType() string {
+func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf10) GetType() EnumBROWSERAGENT {
 	if o == nil {
-		var ret string
+		var ret EnumBROWSERAGENT
 		return ret
 	}
 
@@ -65,7 +65,7 @@ func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf10)
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf10) GetTypeOk() (*string, bool) {
+func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf10) GetTypeOk() (*EnumBROWSERAGENT, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -73,7 +73,7 @@ func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf10)
 }
 
 // SetType sets field value
-func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf10) SetType(v string) {
+func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf10) SetType(v EnumBROWSERAGENT) {
 	o.Type = v
 }
 

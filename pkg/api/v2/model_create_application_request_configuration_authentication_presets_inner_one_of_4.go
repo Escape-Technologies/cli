@@ -21,7 +21,7 @@ var _ MappedNullable = &CreateApplicationRequestConfigurationAuthenticationPrese
 
 // CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf4 struct for CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf4
 type CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf4 struct {
-	Type string `json:"type"`
+	Type EnumGRAPHQL `json:"type"`
 	Users []CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf4UsersInner `json:"users"`
 	Url string `json:"url"`
 	Query string `json:"query"`
@@ -35,7 +35,7 @@ type _CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf4 Crea
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf4(type_ string, users []CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf4UsersInner, url string, query string) *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf4 {
+func NewCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf4(type_ EnumGRAPHQL, users []CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf4UsersInner, url string, query string) *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf4 {
 	this := CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf4{}
 	this.Type = type_
 	this.Users = users
@@ -53,9 +53,9 @@ func NewCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf4Wit
 }
 
 // GetType returns the Type field value
-func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf4) GetType() string {
+func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf4) GetType() EnumGRAPHQL {
 	if o == nil {
-		var ret string
+		var ret EnumGRAPHQL
 		return ret
 	}
 
@@ -64,7 +64,7 @@ func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf4) 
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf4) GetTypeOk() (*string, bool) {
+func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf4) GetTypeOk() (*EnumGRAPHQL, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -72,7 +72,7 @@ func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf4) 
 }
 
 // SetType sets field value
-func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf4) SetType(v string) {
+func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf4) SetType(v EnumGRAPHQL) {
 	o.Type = v
 }
 

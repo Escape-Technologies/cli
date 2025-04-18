@@ -21,10 +21,10 @@ var _ MappedNullable = &CreateApplicationRequestConfigurationCustomRulesInnerAle
 
 // CreateApplicationRequestConfigurationCustomRulesInnerAlert struct for CreateApplicationRequestConfigurationCustomRulesInnerAlert
 type CreateApplicationRequestConfigurationCustomRulesInnerAlert struct {
-	Severity string `json:"severity"`
+	Severity Enum1f6d3642ca98942a86c3631840441183 `json:"severity"`
 	Name string `json:"name"`
 	Context string `json:"context"`
-	Category string `json:"category"`
+	Category Enum40fee81f148ca254301e1d4e8470e9cd `json:"category"`
 	Description *string `json:"description,omitempty"`
 	Remediation *string `json:"remediation,omitempty"`
 	Compliance *CreateApplicationRequestConfigurationCustomRulesInnerAlertCompliance `json:"compliance,omitempty"`
@@ -36,7 +36,7 @@ type _CreateApplicationRequestConfigurationCustomRulesInnerAlert CreateApplicati
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateApplicationRequestConfigurationCustomRulesInnerAlert(severity string, name string, context string, category string) *CreateApplicationRequestConfigurationCustomRulesInnerAlert {
+func NewCreateApplicationRequestConfigurationCustomRulesInnerAlert(severity Enum1f6d3642ca98942a86c3631840441183, name string, context string, category Enum40fee81f148ca254301e1d4e8470e9cd) *CreateApplicationRequestConfigurationCustomRulesInnerAlert {
 	this := CreateApplicationRequestConfigurationCustomRulesInnerAlert{}
 	this.Severity = severity
 	this.Name = name
@@ -54,9 +54,9 @@ func NewCreateApplicationRequestConfigurationCustomRulesInnerAlertWithDefaults()
 }
 
 // GetSeverity returns the Severity field value
-func (o *CreateApplicationRequestConfigurationCustomRulesInnerAlert) GetSeverity() string {
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerAlert) GetSeverity() Enum1f6d3642ca98942a86c3631840441183 {
 	if o == nil {
-		var ret string
+		var ret Enum1f6d3642ca98942a86c3631840441183
 		return ret
 	}
 
@@ -65,7 +65,7 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerAlert) GetSeverity
 
 // GetSeverityOk returns a tuple with the Severity field value
 // and a boolean to check if the value has been set.
-func (o *CreateApplicationRequestConfigurationCustomRulesInnerAlert) GetSeverityOk() (*string, bool) {
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerAlert) GetSeverityOk() (*Enum1f6d3642ca98942a86c3631840441183, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -73,7 +73,7 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerAlert) GetSeverity
 }
 
 // SetSeverity sets field value
-func (o *CreateApplicationRequestConfigurationCustomRulesInnerAlert) SetSeverity(v string) {
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerAlert) SetSeverity(v Enum1f6d3642ca98942a86c3631840441183) {
 	o.Severity = v
 }
 
@@ -126,9 +126,9 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerAlert) SetContext(
 }
 
 // GetCategory returns the Category field value
-func (o *CreateApplicationRequestConfigurationCustomRulesInnerAlert) GetCategory() string {
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerAlert) GetCategory() Enum40fee81f148ca254301e1d4e8470e9cd {
 	if o == nil {
-		var ret string
+		var ret Enum40fee81f148ca254301e1d4e8470e9cd
 		return ret
 	}
 
@@ -137,7 +137,7 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerAlert) GetCategory
 
 // GetCategoryOk returns a tuple with the Category field value
 // and a boolean to check if the value has been set.
-func (o *CreateApplicationRequestConfigurationCustomRulesInnerAlert) GetCategoryOk() (*string, bool) {
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerAlert) GetCategoryOk() (*Enum40fee81f148ca254301e1d4e8470e9cd, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -145,7 +145,7 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerAlert) GetCategory
 }
 
 // SetCategory sets field value
-func (o *CreateApplicationRequestConfigurationCustomRulesInnerAlert) SetCategory(v string) {
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerAlert) SetCategory(v Enum40fee81f148ca254301e1d4e8470e9cd) {
 	o.Category = v
 }
 

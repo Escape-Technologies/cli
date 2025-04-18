@@ -21,7 +21,7 @@ var _ MappedNullable = &CreateApplicationRequestConfigurationAuthenticationPrese
 
 // CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf5 struct for CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf5
 type CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf5 struct {
-	Type string `json:"type"`
+	Type EnumDIGEST `json:"type"`
 	Users []CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf3UsersInner `json:"users"`
 	FirstRequest CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOfRequest `json:"first_request"`
 	SecondRequest *CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersSecondRequest `json:"second_request,omitempty"`
@@ -33,7 +33,7 @@ type _CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf5 Crea
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf5(type_ string, users []CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf3UsersInner, firstRequest CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOfRequest) *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf5 {
+func NewCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf5(type_ EnumDIGEST, users []CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf3UsersInner, firstRequest CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOfRequest) *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf5 {
 	this := CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf5{}
 	this.Type = type_
 	this.Users = users
@@ -50,9 +50,9 @@ func NewCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf5Wit
 }
 
 // GetType returns the Type field value
-func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf5) GetType() string {
+func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf5) GetType() EnumDIGEST {
 	if o == nil {
-		var ret string
+		var ret EnumDIGEST
 		return ret
 	}
 
@@ -61,7 +61,7 @@ func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf5) 
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf5) GetTypeOk() (*string, bool) {
+func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf5) GetTypeOk() (*EnumDIGEST, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -69,7 +69,7 @@ func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf5) 
 }
 
 // SetType sets field value
-func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf5) SetType(v string) {
+func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf5) SetType(v EnumDIGEST) {
 	o.Type = v
 }
 

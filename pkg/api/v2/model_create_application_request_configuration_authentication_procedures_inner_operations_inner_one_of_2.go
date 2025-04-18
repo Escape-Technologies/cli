@@ -21,7 +21,7 @@ var _ MappedNullable = &CreateApplicationRequestConfigurationAuthenticationProce
 
 // CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf2 struct for CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf2
 type CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf2 struct {
-	Tech string `json:"tech"`
+	Tech EnumBROWSERAGENT `json:"tech"`
 	Parameters CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf2Parameters `json:"parameters"`
 	Extractions CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1Extractions `json:"extractions"`
 }
@@ -32,7 +32,7 @@ type _CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperatio
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf2(tech string, parameters CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf2Parameters, extractions CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1Extractions) *CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf2 {
+func NewCreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf2(tech EnumBROWSERAGENT, parameters CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf2Parameters, extractions CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1Extractions) *CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf2 {
 	this := CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf2{}
 	this.Tech = tech
 	this.Parameters = parameters
@@ -49,9 +49,9 @@ func NewCreateApplicationRequestConfigurationAuthenticationProceduresInnerOperat
 }
 
 // GetTech returns the Tech field value
-func (o *CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf2) GetTech() string {
+func (o *CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf2) GetTech() EnumBROWSERAGENT {
 	if o == nil {
-		var ret string
+		var ret EnumBROWSERAGENT
 		return ret
 	}
 
@@ -60,7 +60,7 @@ func (o *CreateApplicationRequestConfigurationAuthenticationProceduresInnerOpera
 
 // GetTechOk returns a tuple with the Tech field value
 // and a boolean to check if the value has been set.
-func (o *CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf2) GetTechOk() (*string, bool) {
+func (o *CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf2) GetTechOk() (*EnumBROWSERAGENT, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -68,7 +68,7 @@ func (o *CreateApplicationRequestConfigurationAuthenticationProceduresInnerOpera
 }
 
 // SetTech sets field value
-func (o *CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf2) SetTech(v string) {
+func (o *CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf2) SetTech(v EnumBROWSERAGENT) {
 	o.Tech = v
 }
 

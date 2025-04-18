@@ -25,7 +25,7 @@ func ListScans(ctx context.Context, applicationID, next string) ([]v2.ListScans2
 }
 
 // GetScanIssues returns issues found in a scan
-func GetScanIssues(ctx context.Context, scanID string) ([]v2.ListIssues200ResponseInner, error) {
+func GetScanIssues(ctx context.Context, scanID string) ([][]v2.ListIssues200ResponseInnerInner, error) {
 	client, err := newAPIV2Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)

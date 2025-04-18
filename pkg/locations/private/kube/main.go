@@ -9,7 +9,6 @@ import (
 	"time"
 
 	"github.com/Escape-Technologies/cli/pkg/api/escape"
-	v2 "github.com/Escape-Technologies/cli/pkg/api/v2"
 	"github.com/Escape-Technologies/cli/pkg/log"
 	"k8s.io/client-go/rest"
 	"k8s.io/client-go/tools/clientcmd"
@@ -76,10 +75,7 @@ func connectAndRun(ctx context.Context, cfg *rest.Config, isConnected *atomic.Bo
 		}
 		log.Info("Connected to k8s API")
 		log.Trace("Upserting k8s integration")
-		err = escape.UpsertIntegration(ctx, &v2.UpdateIntegrationRequest{
-			Name:       locationName,
-			LocationId: &locationID,
-		})
+		err = escape.UpsertIntegration(ctx, locationName, &locationID, nil)
 		if err != nil {
 			log.Error("Error upserting integration: %s", err)
 			return

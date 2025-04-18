@@ -21,7 +21,7 @@ var _ MappedNullable = &CreateApplicationRequestConfigurationAuthenticationProce
 
 // CreateApplicationRequestConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner1 struct for CreateApplicationRequestConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner1
 type CreateApplicationRequestConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner1 struct {
-	Location string `json:"location"`
+	Location Enum08a525336b538128cd395ea29110b935 `json:"location"`
 	Origin string `json:"origin"`
 	Key string `json:"key"`
 	Variable string `json:"variable"`
@@ -33,7 +33,7 @@ type _CreateApplicationRequestConfigurationAuthenticationProceduresInnerInjectio
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateApplicationRequestConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner1(location string, origin string, key string, variable string) *CreateApplicationRequestConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner1 {
+func NewCreateApplicationRequestConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner1(location Enum08a525336b538128cd395ea29110b935, origin string, key string, variable string) *CreateApplicationRequestConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner1 {
 	this := CreateApplicationRequestConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner1{}
 	this.Location = location
 	this.Origin = origin
@@ -51,9 +51,9 @@ func NewCreateApplicationRequestConfigurationAuthenticationProceduresInnerInject
 }
 
 // GetLocation returns the Location field value
-func (o *CreateApplicationRequestConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner1) GetLocation() string {
+func (o *CreateApplicationRequestConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner1) GetLocation() Enum08a525336b538128cd395ea29110b935 {
 	if o == nil {
-		var ret string
+		var ret Enum08a525336b538128cd395ea29110b935
 		return ret
 	}
 
@@ -62,7 +62,7 @@ func (o *CreateApplicationRequestConfigurationAuthenticationProceduresInnerInjec
 
 // GetLocationOk returns a tuple with the Location field value
 // and a boolean to check if the value has been set.
-func (o *CreateApplicationRequestConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner1) GetLocationOk() (*string, bool) {
+func (o *CreateApplicationRequestConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner1) GetLocationOk() (*Enum08a525336b538128cd395ea29110b935, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -70,7 +70,7 @@ func (o *CreateApplicationRequestConfigurationAuthenticationProceduresInnerInjec
 }
 
 // SetLocation sets field value
-func (o *CreateApplicationRequestConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner1) SetLocation(v string) {
+func (o *CreateApplicationRequestConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner1) SetLocation(v Enum08a525336b538128cd395ea29110b935) {
 	o.Location = v
 }
 
