@@ -46,7 +46,7 @@ var locationsListCmd = &cobra.Command{
 }
 
 var locationsStartCmd = &cobra.Command{
-	Use:   "start",
+	Use:   "start location-name",
 	Short: "Start a location",
 	Args:  cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
@@ -55,7 +55,7 @@ var locationsStartCmd = &cobra.Command{
 }
 
 var locationsDeleteCmd = &cobra.Command{
-	Use:     "delete",
+	Use:     "delete location-id",
 	Aliases: []string{"del", "remove"},
 	Short:   "Delete a location",
 	Args:    cobra.ExactArgs(1),

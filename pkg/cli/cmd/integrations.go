@@ -45,7 +45,7 @@ var integrationsListCmd = &cobra.Command{
 }
 
 var integrationsCreateCmd = &cobra.Command{
-	Use:     "apply",
+	Use:     "apply integration-path",
 	Aliases: []string{"create", "update"},
 	Short:   "Update the integration based on a configuration file",
 	Args:    cobra.ExactArgs(1),
@@ -55,7 +55,7 @@ var integrationsCreateCmd = &cobra.Command{
 }
 
 var integrationsDeleteCmd = &cobra.Command{
-	Use:     "delete",
+	Use:     "delete integration-id",
 	Aliases: []string{"del", "remove"},
 	Short:   "Delete an integration",
 	Args:    cobra.ExactArgs(1),
@@ -74,7 +74,7 @@ var integrationsDeleteCmd = &cobra.Command{
 }
 
 var integrationsGetCmd = &cobra.Command{
-	Use:     "get",
+	Use:     "get integration-id",
 	Aliases: []string{"describe"},
 	Short:   "Get integration details",
 	Args:    cobra.ExactArgs(1),
