@@ -21,8 +21,7 @@ func ListApplications(ctx context.Context) ([]v2.ListApplications200ResponseInne
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
-	data, resp, err := client.ApplicationsAPI.ListApplications(ctx).Execute()
-	defer resp.Body.Close() //nolint:errcheck
+	data, _, err := client.ApplicationsAPI.ListApplications(ctx).Execute()
 	if err != nil {
 		return nil, fmt.Errorf("api error: %w", err)
 	}
@@ -38,8 +37,7 @@ func GetApplication(ctx context.Context, id string) (*v2.GetApplication200Respon
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
-	data, resp, err := client.ApplicationsAPI.GetApplication(ctx, id).Execute()
-	defer resp.Body.Close() //nolint:errcheck
+	data, _, err := client.ApplicationsAPI.GetApplication(ctx, id).Execute()
 	if err != nil {
 		return nil, fmt.Errorf("api error: %w", err)
 	}
@@ -59,11 +57,10 @@ func UpdateApplicationSchema(ctx context.Context, id string, schemaPathOrURL str
 	if err != nil {
 		return fmt.Errorf("unable to upload schema: %w", err)
 	}
-	_, resp, err := client.ApplicationsAPI.UpdateSchema(ctx, id).CreateApplicationRequestSchema(v2.CreateApplicationRequestSchema{
+	_, _, err = client.ApplicationsAPI.UpdateSchema(ctx, id).CreateApplicationRequestSchema(v2.CreateApplicationRequestSchema{
 		Url:    url,
 		BlobId: blobID,
 	}).Execute()
-	defer resp.Body.Close() //nolint:errcheck
 	if err != nil {
 		return fmt.Errorf("api error: %w", err)
 	}
@@ -154,8 +151,7 @@ func UpdateApplicationConfig(ctx context.Context, id string, configPath string) 
 	if err != nil {
 		return fmt.Errorf("unable to read config at %s: %w", configPath, err)
 	}
-	_, resp, err := client.ApplicationsAPI.UpdateConfiguration(ctx, id).CreateApplicationRequestConfiguration(*cfg).Execute()
-	defer resp.Body.Close() //nolint:errcheck
+	_, _, err = client.ApplicationsAPI.UpdateConfiguration(ctx, id).CreateApplicationRequestConfiguration(*cfg).Execute()
 	if err != nil {
 		return fmt.Errorf("api error: %w", err)
 	}

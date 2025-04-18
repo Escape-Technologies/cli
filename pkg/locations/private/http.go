@@ -69,7 +69,9 @@ func doHTTPConnectHandshake(ctx context.Context, conn net.Conn, backendAddr stri
 	if err != nil {
 		return nil, fmt.Errorf("reading server HTTP response: %v", err)
 	}
-	defer resp.Body.Close() //nolint:errcheck
+	if resp != nil && resp.Body != nil {
+		defer resp.Body.Close() //nolint:errcheck
+	}
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("failed to do connect handshake, status code: %s", resp.Status)
 	}

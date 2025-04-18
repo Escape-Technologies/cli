@@ -21,8 +21,7 @@ func ListSubdomains(ctx context.Context, count *int, after *string) ([]v2.ListSu
 	if after != nil {
 		req = req.After(*after)
 	}
-	data, resp, err := req.Execute()
-	defer resp.Body.Close() //nolint:errcheck
+	data, _, err := req.Execute()
 	if err != nil {
 		return nil, "", fmt.Errorf("unable to get subdomains: %w", err)
 	}
