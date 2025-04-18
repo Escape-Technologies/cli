@@ -152,11 +152,40 @@ var scanStartCmd = &cobra.Command{
 
 var scanGetCmd = &cobra.Command{
 	Use:     "get scan-id",
-	Aliases: []string{"describe", "results", "res", "result", "issues", "iss"},
+	Aliases: []string{"describe"},
 	Args:    cobra.ExactArgs(1),
 	Short:   "List all results (issues) of a scan",
 	Run: func(_ *cobra.Command, _ []string) {
 		// TODO(quentin@escape.tech): Implement this
+	},
+}
+
+var scanIssuesCmd = &cobra.Command{
+	Use:     "issues scan-id",
+	Aliases: []string{"results", "res", "result", "issues", "iss"},
+	Args:    cobra.ExactArgs(1),
+	Short:   "List all issues of a scan",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		issues, err := escape.GetScanIssues(cmd.Context(), args[0])
+		if err != nil {
+			return fmt.Errorf("unable to get scan issues: %w", err)
+		}
+		out.Table(issues, func() []string {
+			res := []string{"ID\tSEVERITY\tTYPE\tCATEGORY\tNAME\tIGNORED\tURL"}
+			for _, i := range issues {
+				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%t\t%s",
+					i.GetId(),
+					i.GetSeverity(),
+					i.GetType(),
+					i.GetCategory(),
+					i.GetName(),
+					i.GetIgnored(),
+					i.GetPlatformUrl(),
+				))
+			}
+			return res
+		})
+		return nil
 	},
 }
 
@@ -186,5 +215,6 @@ func init() {
 	scansCmd.AddCommand(scanStartCmd)
 	scansCmd.AddCommand(scanGetCmd)
 	scansCmd.AddCommand(scanDownloadCmd)
+	scansCmd.AddCommand(scanIssuesCmd)
 	rootCmd.AddCommand(scansCmd)
 }

@@ -403,7 +403,7 @@ type ApiListIssuesRequest struct {
 	id string
 }
 
-func (r ApiListIssuesRequest) Execute() ([][]ListIssues200ResponseInnerInner, *http.Response, error) {
+func (r ApiListIssuesRequest) Execute() ([]ListIssues200ResponseInner, *http.Response, error) {
 	return r.ApiService.ListIssuesExecute(r)
 }
 
@@ -425,13 +425,13 @@ func (a *ScansAPIService) ListIssues(ctx context.Context, id string) ApiListIssu
 }
 
 // Execute executes the request
-//  @return [][]ListIssues200ResponseInnerInner
-func (a *ScansAPIService) ListIssuesExecute(r ApiListIssuesRequest) ([][]ListIssues200ResponseInnerInner, *http.Response, error) {
+//  @return []ListIssues200ResponseInner
+func (a *ScansAPIService) ListIssuesExecute(r ApiListIssuesRequest) ([]ListIssues200ResponseInner, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  [][]ListIssues200ResponseInnerInner
+		localVarReturnValue  []ListIssues200ResponseInner
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ScansAPIService.ListIssues")

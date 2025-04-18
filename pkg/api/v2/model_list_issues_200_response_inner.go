@@ -16,11 +16,11 @@ import (
 	"fmt"
 )
 
-// checks if the ListIssues200ResponseInnerInner type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &ListIssues200ResponseInnerInner{}
+// checks if the ListIssues200ResponseInner type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ListIssues200ResponseInner{}
 
-// ListIssues200ResponseInnerInner struct for ListIssues200ResponseInnerInner
-type ListIssues200ResponseInnerInner struct {
+// ListIssues200ResponseInner struct for ListIssues200ResponseInner
+type ListIssues200ResponseInner struct {
 	Id string `json:"id"`
 	Severity Enum9c1e82c38fa16c4851aece69dc28da0b `json:"severity"`
 	Name string `json:"name"`
@@ -30,14 +30,14 @@ type ListIssues200ResponseInnerInner struct {
 	Category Enum517d458bf219c9da2092895cc6b18716 `json:"category"`
 }
 
-type _ListIssues200ResponseInnerInner ListIssues200ResponseInnerInner
+type _ListIssues200ResponseInner ListIssues200ResponseInner
 
-// NewListIssues200ResponseInnerInner instantiates a new ListIssues200ResponseInnerInner object
+// NewListIssues200ResponseInner instantiates a new ListIssues200ResponseInner object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewListIssues200ResponseInnerInner(id string, severity Enum9c1e82c38fa16c4851aece69dc28da0b, name string, platformUrl string, ignored bool, type_ Enum1ab5d44a8d8b0e47bb5ab55e0fd2b986, category Enum517d458bf219c9da2092895cc6b18716) *ListIssues200ResponseInnerInner {
-	this := ListIssues200ResponseInnerInner{}
+func NewListIssues200ResponseInner(id string, severity Enum9c1e82c38fa16c4851aece69dc28da0b, name string, platformUrl string, ignored bool, type_ Enum1ab5d44a8d8b0e47bb5ab55e0fd2b986, category Enum517d458bf219c9da2092895cc6b18716) *ListIssues200ResponseInner {
+	this := ListIssues200ResponseInner{}
 	this.Id = id
 	this.Severity = severity
 	this.Name = name
@@ -48,16 +48,16 @@ func NewListIssues200ResponseInnerInner(id string, severity Enum9c1e82c38fa16c48
 	return &this
 }
 
-// NewListIssues200ResponseInnerInnerWithDefaults instantiates a new ListIssues200ResponseInnerInner object
+// NewListIssues200ResponseInnerWithDefaults instantiates a new ListIssues200ResponseInner object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewListIssues200ResponseInnerInnerWithDefaults() *ListIssues200ResponseInnerInner {
-	this := ListIssues200ResponseInnerInner{}
+func NewListIssues200ResponseInnerWithDefaults() *ListIssues200ResponseInner {
+	this := ListIssues200ResponseInner{}
 	return &this
 }
 
 // GetId returns the Id field value
-func (o *ListIssues200ResponseInnerInner) GetId() string {
+func (o *ListIssues200ResponseInner) GetId() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -68,7 +68,7 @@ func (o *ListIssues200ResponseInnerInner) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *ListIssues200ResponseInnerInner) GetIdOk() (*string, bool) {
+func (o *ListIssues200ResponseInner) GetIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -76,12 +76,12 @@ func (o *ListIssues200ResponseInnerInner) GetIdOk() (*string, bool) {
 }
 
 // SetId sets field value
-func (o *ListIssues200ResponseInnerInner) SetId(v string) {
+func (o *ListIssues200ResponseInner) SetId(v string) {
 	o.Id = v
 }
 
 // GetSeverity returns the Severity field value
-func (o *ListIssues200ResponseInnerInner) GetSeverity() Enum9c1e82c38fa16c4851aece69dc28da0b {
+func (o *ListIssues200ResponseInner) GetSeverity() Enum9c1e82c38fa16c4851aece69dc28da0b {
 	if o == nil {
 		var ret Enum9c1e82c38fa16c4851aece69dc28da0b
 		return ret
@@ -92,7 +92,7 @@ func (o *ListIssues200ResponseInnerInner) GetSeverity() Enum9c1e82c38fa16c4851ae
 
 // GetSeverityOk returns a tuple with the Severity field value
 // and a boolean to check if the value has been set.
-func (o *ListIssues200ResponseInnerInner) GetSeverityOk() (*Enum9c1e82c38fa16c4851aece69dc28da0b, bool) {
+func (o *ListIssues200ResponseInner) GetSeverityOk() (*Enum9c1e82c38fa16c4851aece69dc28da0b, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -100,12 +100,12 @@ func (o *ListIssues200ResponseInnerInner) GetSeverityOk() (*Enum9c1e82c38fa16c48
 }
 
 // SetSeverity sets field value
-func (o *ListIssues200ResponseInnerInner) SetSeverity(v Enum9c1e82c38fa16c4851aece69dc28da0b) {
+func (o *ListIssues200ResponseInner) SetSeverity(v Enum9c1e82c38fa16c4851aece69dc28da0b) {
 	o.Severity = v
 }
 
 // GetName returns the Name field value
-func (o *ListIssues200ResponseInnerInner) GetName() string {
+func (o *ListIssues200ResponseInner) GetName() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -116,7 +116,7 @@ func (o *ListIssues200ResponseInnerInner) GetName() string {
 
 // GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
-func (o *ListIssues200ResponseInnerInner) GetNameOk() (*string, bool) {
+func (o *ListIssues200ResponseInner) GetNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -124,12 +124,12 @@ func (o *ListIssues200ResponseInnerInner) GetNameOk() (*string, bool) {
 }
 
 // SetName sets field value
-func (o *ListIssues200ResponseInnerInner) SetName(v string) {
+func (o *ListIssues200ResponseInner) SetName(v string) {
 	o.Name = v
 }
 
 // GetPlatformUrl returns the PlatformUrl field value
-func (o *ListIssues200ResponseInnerInner) GetPlatformUrl() string {
+func (o *ListIssues200ResponseInner) GetPlatformUrl() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -140,7 +140,7 @@ func (o *ListIssues200ResponseInnerInner) GetPlatformUrl() string {
 
 // GetPlatformUrlOk returns a tuple with the PlatformUrl field value
 // and a boolean to check if the value has been set.
-func (o *ListIssues200ResponseInnerInner) GetPlatformUrlOk() (*string, bool) {
+func (o *ListIssues200ResponseInner) GetPlatformUrlOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -148,12 +148,12 @@ func (o *ListIssues200ResponseInnerInner) GetPlatformUrlOk() (*string, bool) {
 }
 
 // SetPlatformUrl sets field value
-func (o *ListIssues200ResponseInnerInner) SetPlatformUrl(v string) {
+func (o *ListIssues200ResponseInner) SetPlatformUrl(v string) {
 	o.PlatformUrl = v
 }
 
 // GetIgnored returns the Ignored field value
-func (o *ListIssues200ResponseInnerInner) GetIgnored() bool {
+func (o *ListIssues200ResponseInner) GetIgnored() bool {
 	if o == nil {
 		var ret bool
 		return ret
@@ -164,7 +164,7 @@ func (o *ListIssues200ResponseInnerInner) GetIgnored() bool {
 
 // GetIgnoredOk returns a tuple with the Ignored field value
 // and a boolean to check if the value has been set.
-func (o *ListIssues200ResponseInnerInner) GetIgnoredOk() (*bool, bool) {
+func (o *ListIssues200ResponseInner) GetIgnoredOk() (*bool, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -172,12 +172,12 @@ func (o *ListIssues200ResponseInnerInner) GetIgnoredOk() (*bool, bool) {
 }
 
 // SetIgnored sets field value
-func (o *ListIssues200ResponseInnerInner) SetIgnored(v bool) {
+func (o *ListIssues200ResponseInner) SetIgnored(v bool) {
 	o.Ignored = v
 }
 
 // GetType returns the Type field value
-func (o *ListIssues200ResponseInnerInner) GetType() Enum1ab5d44a8d8b0e47bb5ab55e0fd2b986 {
+func (o *ListIssues200ResponseInner) GetType() Enum1ab5d44a8d8b0e47bb5ab55e0fd2b986 {
 	if o == nil {
 		var ret Enum1ab5d44a8d8b0e47bb5ab55e0fd2b986
 		return ret
@@ -188,7 +188,7 @@ func (o *ListIssues200ResponseInnerInner) GetType() Enum1ab5d44a8d8b0e47bb5ab55e
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *ListIssues200ResponseInnerInner) GetTypeOk() (*Enum1ab5d44a8d8b0e47bb5ab55e0fd2b986, bool) {
+func (o *ListIssues200ResponseInner) GetTypeOk() (*Enum1ab5d44a8d8b0e47bb5ab55e0fd2b986, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -196,12 +196,12 @@ func (o *ListIssues200ResponseInnerInner) GetTypeOk() (*Enum1ab5d44a8d8b0e47bb5a
 }
 
 // SetType sets field value
-func (o *ListIssues200ResponseInnerInner) SetType(v Enum1ab5d44a8d8b0e47bb5ab55e0fd2b986) {
+func (o *ListIssues200ResponseInner) SetType(v Enum1ab5d44a8d8b0e47bb5ab55e0fd2b986) {
 	o.Type = v
 }
 
 // GetCategory returns the Category field value
-func (o *ListIssues200ResponseInnerInner) GetCategory() Enum517d458bf219c9da2092895cc6b18716 {
+func (o *ListIssues200ResponseInner) GetCategory() Enum517d458bf219c9da2092895cc6b18716 {
 	if o == nil {
 		var ret Enum517d458bf219c9da2092895cc6b18716
 		return ret
@@ -212,7 +212,7 @@ func (o *ListIssues200ResponseInnerInner) GetCategory() Enum517d458bf219c9da2092
 
 // GetCategoryOk returns a tuple with the Category field value
 // and a boolean to check if the value has been set.
-func (o *ListIssues200ResponseInnerInner) GetCategoryOk() (*Enum517d458bf219c9da2092895cc6b18716, bool) {
+func (o *ListIssues200ResponseInner) GetCategoryOk() (*Enum517d458bf219c9da2092895cc6b18716, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -220,11 +220,11 @@ func (o *ListIssues200ResponseInnerInner) GetCategoryOk() (*Enum517d458bf219c9da
 }
 
 // SetCategory sets field value
-func (o *ListIssues200ResponseInnerInner) SetCategory(v Enum517d458bf219c9da2092895cc6b18716) {
+func (o *ListIssues200ResponseInner) SetCategory(v Enum517d458bf219c9da2092895cc6b18716) {
 	o.Category = v
 }
 
-func (o ListIssues200ResponseInnerInner) MarshalJSON() ([]byte, error) {
+func (o ListIssues200ResponseInner) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -232,7 +232,7 @@ func (o ListIssues200ResponseInnerInner) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ListIssues200ResponseInnerInner) ToMap() (map[string]interface{}, error) {
+func (o ListIssues200ResponseInner) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["severity"] = o.Severity
@@ -244,7 +244,7 @@ func (o ListIssues200ResponseInnerInner) ToMap() (map[string]interface{}, error)
 	return toSerialize, nil
 }
 
-func (o *ListIssues200ResponseInnerInner) UnmarshalJSON(data []byte) (err error) {
+func (o *ListIssues200ResponseInner) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -272,53 +272,53 @@ func (o *ListIssues200ResponseInnerInner) UnmarshalJSON(data []byte) (err error)
 		}
 	}
 
-	varListIssues200ResponseInnerInner := _ListIssues200ResponseInnerInner{}
+	varListIssues200ResponseInner := _ListIssues200ResponseInner{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varListIssues200ResponseInnerInner)
+	err = decoder.Decode(&varListIssues200ResponseInner)
 
 	if err != nil {
 		return err
 	}
 
-	*o = ListIssues200ResponseInnerInner(varListIssues200ResponseInnerInner)
+	*o = ListIssues200ResponseInner(varListIssues200ResponseInner)
 
 	return err
 }
 
-type NullableListIssues200ResponseInnerInner struct {
-	value *ListIssues200ResponseInnerInner
+type NullableListIssues200ResponseInner struct {
+	value *ListIssues200ResponseInner
 	isSet bool
 }
 
-func (v NullableListIssues200ResponseInnerInner) Get() *ListIssues200ResponseInnerInner {
+func (v NullableListIssues200ResponseInner) Get() *ListIssues200ResponseInner {
 	return v.value
 }
 
-func (v *NullableListIssues200ResponseInnerInner) Set(val *ListIssues200ResponseInnerInner) {
+func (v *NullableListIssues200ResponseInner) Set(val *ListIssues200ResponseInner) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableListIssues200ResponseInnerInner) IsSet() bool {
+func (v NullableListIssues200ResponseInner) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableListIssues200ResponseInnerInner) Unset() {
+func (v *NullableListIssues200ResponseInner) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableListIssues200ResponseInnerInner(val *ListIssues200ResponseInnerInner) *NullableListIssues200ResponseInnerInner {
-	return &NullableListIssues200ResponseInnerInner{value: val, isSet: true}
+func NewNullableListIssues200ResponseInner(val *ListIssues200ResponseInner) *NullableListIssues200ResponseInner {
+	return &NullableListIssues200ResponseInner{value: val, isSet: true}
 }
 
-func (v NullableListIssues200ResponseInnerInner) MarshalJSON() ([]byte, error) {
+func (v NullableListIssues200ResponseInner) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableListIssues200ResponseInnerInner) UnmarshalJSON(src []byte) error {
+func (v *NullableListIssues200ResponseInner) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
