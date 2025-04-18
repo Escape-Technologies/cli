@@ -36,7 +36,7 @@ var applicationsListCmd = &cobra.Command{
 }
 
 var applicationGetCmd = &cobra.Command{
-	Use:     "get",
+	Use:     "get application-id",
 	Aliases: []string{"describe"},
 	Short:   "Get details about an application current configuration",
 	Args:    cobra.ExactArgs(1),
@@ -60,7 +60,7 @@ var applicationGetCmd = &cobra.Command{
 }
 
 var applicationUpdateSchemaCmd = &cobra.Command{
-	Use:   "update-schema",
+	Use:   "update-schema application-id schema-path|schema-url",
 	Short: "Update the schema of an application",
 	Args:  cobra.ExactArgs(2), //nolint:mnd
 	RunE: func(cmd *cobra.Command, args []string) error {
@@ -73,7 +73,7 @@ var applicationUpdateSchemaCmd = &cobra.Command{
 }
 
 var applicationUpdateConfigCmd = &cobra.Command{
-	Use:   "update-config",
+	Use:   "update-config application-id config-path",
 	Short: "Update the configuration of an application",
 	Args:  cobra.ExactArgs(2), //nolint:mnd
 	RunE: func(cmd *cobra.Command, args []string) error {
