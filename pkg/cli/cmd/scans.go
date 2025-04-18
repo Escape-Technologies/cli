@@ -119,11 +119,11 @@ func extractCommitDataFromEnv() {
 	log.Info("No commit data found in environment variables")
 }
 
-var scanStartCmdCommitHash *string
-var scanStartCmdCommitLink *string
-var scanStartCmdCommitBranch *string
-var scanStartCmdCommitAuthor *string
-var scanStartCmdCommitAuthorProfilePictureLink *string
+var scanStartCmdCommitHash = new(string)
+var scanStartCmdCommitLink = new(string)
+var scanStartCmdCommitBranch = new(string)
+var scanStartCmdCommitAuthor = new(string)
+var scanStartCmdCommitAuthorProfilePictureLink = new(string)
 var scanStartCmdWatch bool
 var scanStartCmd = &cobra.Command{
 	Use:   "start application-id",
