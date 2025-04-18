@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/Escape-Technologies/cli/pkg/api/escape"
+	v2 "github.com/Escape-Technologies/cli/pkg/api/v2"
 	"github.com/Escape-Technologies/cli/pkg/cli/out"
 	"github.com/Escape-Technologies/cli/pkg/log"
 	"github.com/spf13/cobra"
@@ -124,12 +125,25 @@ var scanStartCmdCommitLink = new(string)
 var scanStartCmdCommitBranch = new(string)
 var scanStartCmdCommitAuthor = new(string)
 var scanStartCmdCommitAuthorProfilePictureLink = new(string)
+var scanStartCmdConfigurationOverride = ""
 var scanStartCmdWatch bool
 var scanStartCmd = &cobra.Command{
-	Use:   "start application-id",
+	Use: "start application-id",
+	Example: `escape-cli scans start 00000000-0000-0000-0000-000000000000
+escape-cli scans start 00000000-0000-0000-0000-000000000000 --commit-hash 1234567890
+escape-cli scans start 00000000-0000-0000-0000-000000000000 --override '{"scan": {"read_only": true}}'`,
 	Args:  cobra.ExactArgs(1),
 	Short: "Start a new scan of an application",
 	RunE: func(cmd *cobra.Command, args []string) error {
+		override := v2.NullableCreateApplicationRequestConfiguration{}
+		if scanStartCmdConfigurationOverride != "" {
+			err := override.UnmarshalJSON([]byte(scanStartCmdConfigurationOverride))
+			if err != nil {
+				return fmt.Errorf("unable to unmarshal configuration override: %w", err)
+			}
+			ovr, _ := override.MarshalJSON()
+			log.Info("Configuration override: %s", string(ovr))
+		}
 		extractCommitDataFromEnv()
 		scan, err := escape.StartScan(
 			cmd.Context(),
@@ -139,14 +153,25 @@ var scanStartCmd = &cobra.Command{
 			scanStartCmdCommitBranch,
 			scanStartCmdCommitAuthor,
 			scanStartCmdCommitAuthorProfilePictureLink,
-			nil,
+			override.Get(),
 		)
 		if err != nil {
 			return fmt.Errorf("unable to start scan: %w", err)
 		}
 		out.Print(scan, "Scan started: "+scan.GetId())
-		// TODO(quentin@escape.tech): watch scan
+		if scanStartCmdWatch {
+			scanWatchCmd.Run(cmd, []string{scan.GetId()})
+		}
 		return nil
+	},
+}
+
+var scanWatchCmd = &cobra.Command{
+	Use:   "watch scan-id",
+	Args:  cobra.ExactArgs(1),
+	Short: "Bind the current terminal to a scan, listen for events and print them to the terminal. Exit when the scan is done.",
+	Run: func(_ *cobra.Command, _ []string) {
+		log.Error("Scan watch not implemented")
 	},
 }
 
@@ -207,14 +232,16 @@ var scanDownloadCmd = &cobra.Command{
 func init() {
 	scansCmd.AddCommand(scansListCmd)
 	scanStartCmd.PersistentFlags().BoolVarP(&scanStartCmdWatch, "watch", "w", false, "watch for events")
-	scanStartCmd.PersistentFlags().StringVarP(scanStartCmdCommitHash, "commit-hash", "c", "", "commit hash")
-	scanStartCmd.PersistentFlags().StringVarP(scanStartCmdCommitLink, "commit-link", "l", "", "commit link")
-	scanStartCmd.PersistentFlags().StringVarP(scanStartCmdCommitBranch, "commit-branch", "b", "", "commit branch")
-	scanStartCmd.PersistentFlags().StringVarP(scanStartCmdCommitAuthor, "commit-author", "a", "", "commit author")
-	scanStartCmd.PersistentFlags().StringVarP(scanStartCmdCommitAuthorProfilePictureLink, "profile-picture", "p", "", "commit author profile picture link")
+	scanStartCmd.PersistentFlags().StringVar(scanStartCmdCommitHash, "commit-hash", "", "commit hash")
+	scanStartCmd.PersistentFlags().StringVar(scanStartCmdCommitLink, "commit-link", "", "commit link")
+	scanStartCmd.PersistentFlags().StringVar(scanStartCmdCommitBranch, "commit-branch", "", "commit branch")
+	scanStartCmd.PersistentFlags().StringVar(scanStartCmdCommitAuthor, "commit-author", "", "commit author")
+	scanStartCmd.PersistentFlags().StringVar(scanStartCmdCommitAuthorProfilePictureLink, "profile-picture", "", "commit author profile picture link")
+	scanStartCmd.PersistentFlags().StringVarP(&scanStartCmdConfigurationOverride, "override", "c", "", "configuration override")
 	scansCmd.AddCommand(scanStartCmd)
 	scansCmd.AddCommand(scanGetCmd)
 	scansCmd.AddCommand(scanDownloadCmd)
 	scansCmd.AddCommand(scanIssuesCmd)
+	scansCmd.AddCommand(scanWatchCmd)
 	rootCmd.AddCommand(scansCmd)
 }
