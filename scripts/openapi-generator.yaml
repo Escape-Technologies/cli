@@ -1,0 +1,5 @@
+---
+additionalProperties:
+  # https://openapi-generator.tech/docs/generators/go
+  enumClassPrefix: "true"
+  disallowAdditionalPropertiesIfNotPresent: "false"

@@ -1,6 +1,0 @@
----
-package: v1
-output: generated.go
-generate:
-  models: true
-  client: true
