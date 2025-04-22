@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf11Users
 	Action EnumWAITTEXT `json:"action"`
 	Value string `json:"value"`
 	Timeout float32 `json:"timeout"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf11UsersInnerActionsInnerOneOf6 CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf11UsersInnerActionsInnerOneOf6
@@ -133,6 +133,11 @@ func (o CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf11Us
 	toSerialize["action"] = o.Action
 	toSerialize["value"] = o.Value
 	toSerialize["timeout"] = o.Timeout
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -162,15 +167,22 @@ func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf11U
 
 	varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf11UsersInnerActionsInnerOneOf6 := _CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf11UsersInnerActionsInnerOneOf6{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf11UsersInnerActionsInnerOneOf6)
+	err = json.Unmarshal(data, &varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf11UsersInnerActionsInnerOneOf6)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf11UsersInnerActionsInnerOneOf6(varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf11UsersInnerActionsInnerOneOf6)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "action")
+		delete(additionalProperties, "value")
+		delete(additionalProperties, "timeout")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

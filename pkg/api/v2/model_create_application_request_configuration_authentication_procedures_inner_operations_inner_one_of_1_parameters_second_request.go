@@ -21,7 +21,10 @@ var _ MappedNullable = &CreateApplicationRequestConfigurationAuthenticationProce
 type CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersSecondRequest struct {
 	Url *string `json:"url,omitempty"`
 	Method *Enum4e0943c4ae7a2a2d426c0a6c0b839e82 `json:"method,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersSecondRequest CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersSecondRequest
 
 // NewCreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersSecondRequest instantiates a new CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersSecondRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +123,34 @@ func (o CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperat
 	if !IsNil(o.Method) {
 		toSerialize["method"] = o.Method
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersSecondRequest) UnmarshalJSON(data []byte) (err error) {
+	varCreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersSecondRequest := _CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersSecondRequest{}
+
+	err = json.Unmarshal(data, &varCreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersSecondRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersSecondRequest(varCreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersSecondRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "url")
+		delete(additionalProperties, "method")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersSecondRequest struct {

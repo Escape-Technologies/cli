@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -28,6 +27,7 @@ type CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf2UsersI
 	ClientSecret string `json:"client_secret"`
 	Scopes []string `json:"scopes,omitempty"`
 	Audience *string `json:"audience,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf2UsersInner CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf2UsersInner
@@ -277,6 +277,11 @@ func (o CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf2Use
 	if !IsNil(o.Audience) {
 		toSerialize["audience"] = o.Audience
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -306,15 +311,26 @@ func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf2Us
 
 	varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf2UsersInner := _CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf2UsersInner{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf2UsersInner)
+	err = json.Unmarshal(data, &varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf2UsersInner)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf2UsersInner(varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf2UsersInner)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "username")
+		delete(additionalProperties, "headers")
+		delete(additionalProperties, "cookies")
+		delete(additionalProperties, "client_id")
+		delete(additionalProperties, "client_secret")
+		delete(additionalProperties, "scopes")
+		delete(additionalProperties, "audience")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

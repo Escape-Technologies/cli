@@ -24,7 +24,10 @@ type CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerO
 	In []string `json:"in,omitempty"`
 	Contains *string `json:"contains,omitempty"`
 	Regex *string `json:"regex,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf10Key CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf10Key
 
 // NewCreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf10Key instantiates a new CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf10Key object
 // This constructor will assign default values to properties that have it defined,
@@ -228,7 +231,37 @@ func (o CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInn
 	if !IsNil(o.Regex) {
 		toSerialize["regex"] = o.Regex
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf10Key) UnmarshalJSON(data []byte) (err error) {
+	varCreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf10Key := _CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf10Key{}
+
+	err = json.Unmarshal(data, &varCreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf10Key)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf10Key(varCreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf10Key)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "is")
+		delete(additionalProperties, "is_not")
+		delete(additionalProperties, "in")
+		delete(additionalProperties, "contains")
+		delete(additionalProperties, "regex")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf10Key struct {

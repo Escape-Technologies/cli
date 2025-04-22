@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type CreateLocation409Response struct {
 	Message EnumCONFLICTONTHEFOLLOWINGFIELD `json:"message"`
 	Field string `json:"field"`
 	InstanceId string `json:"instanceId"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateLocation409Response CreateLocation409Response
@@ -133,6 +133,11 @@ func (o CreateLocation409Response) ToMap() (map[string]interface{}, error) {
 	toSerialize["message"] = o.Message
 	toSerialize["field"] = o.Field
 	toSerialize["instanceId"] = o.InstanceId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -162,15 +167,22 @@ func (o *CreateLocation409Response) UnmarshalJSON(data []byte) (err error) {
 
 	varCreateLocation409Response := _CreateLocation409Response{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateLocation409Response)
+	err = json.Unmarshal(data, &varCreateLocation409Response)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateLocation409Response(varCreateLocation409Response)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "field")
+		delete(additionalProperties, "instanceId")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

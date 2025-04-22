@@ -25,7 +25,10 @@ type ListSubdomains200ResponseDataInner struct {
 	Fqdn *string `json:"fqdn,omitempty"`
 	// The number of services associated with the subdomain.
 	ServicesCount *int `json:"servicesCount,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ListSubdomains200ResponseDataInner ListSubdomains200ResponseDataInner
 
 // NewListSubdomains200ResponseDataInner instantiates a new ListSubdomains200ResponseDataInner object
 // This constructor will assign default values to properties that have it defined,
@@ -171,7 +174,35 @@ func (o ListSubdomains200ResponseDataInner) ToMap() (map[string]interface{}, err
 	if !IsNil(o.ServicesCount) {
 		toSerialize["servicesCount"] = o.ServicesCount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ListSubdomains200ResponseDataInner) UnmarshalJSON(data []byte) (err error) {
+	varListSubdomains200ResponseDataInner := _ListSubdomains200ResponseDataInner{}
+
+	err = json.Unmarshal(data, &varListSubdomains200ResponseDataInner)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ListSubdomains200ResponseDataInner(varListSubdomains200ResponseDataInner)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "fqdn")
+		delete(additionalProperties, "servicesCount")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableListSubdomains200ResponseDataInner struct {

@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type StartScanRequest struct {
 	CommitAuthor *string `json:"commitAuthor,omitempty"`
 	CommitAuthorProfilePictureLink *string `json:"commitAuthorProfilePictureLink,omitempty"`
 	ConfigurationOverride *CreateApplicationRequestConfiguration `json:"configurationOverride,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _StartScanRequest StartScanRequest
@@ -296,6 +296,11 @@ func (o StartScanRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ConfigurationOverride) {
 		toSerialize["configurationOverride"] = o.ConfigurationOverride
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -323,15 +328,26 @@ func (o *StartScanRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varStartScanRequest := _StartScanRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varStartScanRequest)
+	err = json.Unmarshal(data, &varStartScanRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = StartScanRequest(varStartScanRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "applicationId")
+		delete(additionalProperties, "commitHash")
+		delete(additionalProperties, "commitLink")
+		delete(additionalProperties, "commitBranch")
+		delete(additionalProperties, "commitAuthor")
+		delete(additionalProperties, "commitAuthorProfilePictureLink")
+		delete(additionalProperties, "configurationOverride")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -25,7 +25,10 @@ type CreateApplicationRequestConfigurationAuthentication struct {
 	Users []CreateApplicationRequestConfigurationAuthenticationUsersInner `json:"users,omitempty"`
 	Proxy *string `json:"proxy,omitempty"`
 	Validation *bool `json:"validation,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateApplicationRequestConfigurationAuthentication CreateApplicationRequestConfigurationAuthentication
 
 // NewCreateApplicationRequestConfigurationAuthentication instantiates a new CreateApplicationRequestConfigurationAuthentication object
 // This constructor will assign default values to properties that have it defined,
@@ -264,7 +267,38 @@ func (o CreateApplicationRequestConfigurationAuthentication) ToMap() (map[string
 	if !IsNil(o.Validation) {
 		toSerialize["validation"] = o.Validation
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateApplicationRequestConfigurationAuthentication) UnmarshalJSON(data []byte) (err error) {
+	varCreateApplicationRequestConfigurationAuthentication := _CreateApplicationRequestConfigurationAuthentication{}
+
+	err = json.Unmarshal(data, &varCreateApplicationRequestConfigurationAuthentication)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateApplicationRequestConfigurationAuthentication(varCreateApplicationRequestConfigurationAuthentication)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "$schema")
+		delete(additionalProperties, "procedures")
+		delete(additionalProperties, "presets")
+		delete(additionalProperties, "users")
+		delete(additionalProperties, "proxy")
+		delete(additionalProperties, "validation")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateApplicationRequestConfigurationAuthentication struct {

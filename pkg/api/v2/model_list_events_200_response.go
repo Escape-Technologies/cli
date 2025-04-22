@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type ListEvents200Response struct {
 	NextCursor string `json:"nextCursor"`
 	TotalCount *int `json:"totalCount,omitempty"`
 	Data []ListEvents200ResponseDataInner `json:"data"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ListEvents200Response ListEvents200Response
@@ -146,6 +146,11 @@ func (o ListEvents200Response) ToMap() (map[string]interface{}, error) {
 		toSerialize["totalCount"] = o.TotalCount
 	}
 	toSerialize["data"] = o.Data
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -174,15 +179,22 @@ func (o *ListEvents200Response) UnmarshalJSON(data []byte) (err error) {
 
 	varListEvents200Response := _ListEvents200Response{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varListEvents200Response)
+	err = json.Unmarshal(data, &varListEvents200Response)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ListEvents200Response(varListEvents200Response)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "nextCursor")
+		delete(additionalProperties, "totalCount")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

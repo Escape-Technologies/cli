@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerO
 	Key *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf10Key `json:"key,omitempty"`
 	Value *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf10Key `json:"value,omitempty"`
 	If EnumRESPONSEHEADERS `json:"if"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf11 CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf11
@@ -151,6 +151,11 @@ func (o CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInn
 		toSerialize["value"] = o.Value
 	}
 	toSerialize["if"] = o.If
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -178,15 +183,22 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerIn
 
 	varCreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf11 := _CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf11{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf11)
+	err = json.Unmarshal(data, &varCreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf11)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf11(varCreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf11)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "key")
+		delete(additionalProperties, "value")
+		delete(additionalProperties, "if")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

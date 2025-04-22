@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerO
 	IsNot *Enum1ab0ceef9ae9ece93c01f2d976ec3990 `json:"is_not,omitempty"`
 	In []Enum1ab0ceef9ae9ece93c01f2d976ec3990 `json:"in,omitempty"`
 	If EnumSCANTYPE `json:"if"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf
@@ -187,6 +187,11 @@ func (o CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInn
 		toSerialize["in"] = o.In
 	}
 	toSerialize["if"] = o.If
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -214,15 +219,23 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerIn
 
 	varCreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf := _CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf)
+	err = json.Unmarshal(data, &varCreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf(varCreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "is")
+		delete(additionalProperties, "is_not")
+		delete(additionalProperties, "in")
+		delete(additionalProperties, "if")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

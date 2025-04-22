@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &CreateApplicationRequestConfigurationAuthenticationPrese
 type CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf11UsersInnerActionsInnerOneOf8 struct {
 	Action EnumSLEEP `json:"action"`
 	Seconds float32 `json:"seconds"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf11UsersInnerActionsInnerOneOf8 CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf11UsersInnerActionsInnerOneOf8
@@ -106,6 +106,11 @@ func (o CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf11Us
 	toSerialize := map[string]interface{}{}
 	toSerialize["action"] = o.Action
 	toSerialize["seconds"] = o.Seconds
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -134,15 +139,21 @@ func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf11U
 
 	varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf11UsersInnerActionsInnerOneOf8 := _CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf11UsersInnerActionsInnerOneOf8{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf11UsersInnerActionsInnerOneOf8)
+	err = json.Unmarshal(data, &varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf11UsersInnerActionsInnerOneOf8)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf11UsersInnerActionsInnerOneOf8(varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf11UsersInnerActionsInnerOneOf8)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "action")
+		delete(additionalProperties, "seconds")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

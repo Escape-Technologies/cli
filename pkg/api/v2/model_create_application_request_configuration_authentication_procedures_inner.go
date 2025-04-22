@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type CreateApplicationRequestConfigurationAuthenticationProceduresInner struct {
 	Name string `json:"name"`
 	Operations []CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInner `json:"operations"`
 	Injections CreateApplicationRequestConfigurationAuthenticationProceduresInnerInjections `json:"injections"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateApplicationRequestConfigurationAuthenticationProceduresInner CreateApplicationRequestConfigurationAuthenticationProceduresInner
@@ -133,6 +133,11 @@ func (o CreateApplicationRequestConfigurationAuthenticationProceduresInner) ToMa
 	toSerialize["name"] = o.Name
 	toSerialize["operations"] = o.Operations
 	toSerialize["injections"] = o.Injections
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -162,15 +167,22 @@ func (o *CreateApplicationRequestConfigurationAuthenticationProceduresInner) Unm
 
 	varCreateApplicationRequestConfigurationAuthenticationProceduresInner := _CreateApplicationRequestConfigurationAuthenticationProceduresInner{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateApplicationRequestConfigurationAuthenticationProceduresInner)
+	err = json.Unmarshal(data, &varCreateApplicationRequestConfigurationAuthenticationProceduresInner)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateApplicationRequestConfigurationAuthenticationProceduresInner(varCreateApplicationRequestConfigurationAuthenticationProceduresInner)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "operations")
+		delete(additionalProperties, "injections")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

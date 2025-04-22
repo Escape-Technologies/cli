@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -31,6 +30,7 @@ type CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperation
 	Timeout *float32 `json:"timeout,omitempty"`
 	Insecure *bool `json:"insecure,omitempty"`
 	FollowRedirects *float32 `json:"follow_redirects,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters
@@ -368,6 +368,11 @@ func (o CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperat
 	if !IsNil(o.FollowRedirects) {
 		toSerialize["follow_redirects"] = o.FollowRedirects
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -399,15 +404,29 @@ func (o *CreateApplicationRequestConfigurationAuthenticationProceduresInnerOpera
 
 	varCreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters := _CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters)
+	err = json.Unmarshal(data, &varCreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters(varCreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "proxy")
+		delete(additionalProperties, "url")
+		delete(additionalProperties, "method")
+		delete(additionalProperties, "headers")
+		delete(additionalProperties, "cookies")
+		delete(additionalProperties, "queryParameters")
+		delete(additionalProperties, "body")
+		delete(additionalProperties, "timeout")
+		delete(additionalProperties, "insecure")
+		delete(additionalProperties, "follow_redirects")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

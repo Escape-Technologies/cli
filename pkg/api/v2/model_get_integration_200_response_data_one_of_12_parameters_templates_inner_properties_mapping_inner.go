@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &GetIntegration200ResponseDataOneOf12ParametersTemplatesI
 type GetIntegration200ResponseDataOneOf12ParametersTemplatesInnerPropertiesMappingInner struct {
 	Name string `json:"name"`
 	Mapping []GetIntegration200ResponseDataOneOf12ParametersTemplatesInnerPropertiesMappingInnerMappingInner `json:"mapping"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetIntegration200ResponseDataOneOf12ParametersTemplatesInnerPropertiesMappingInner GetIntegration200ResponseDataOneOf12ParametersTemplatesInnerPropertiesMappingInner
@@ -106,6 +106,11 @@ func (o GetIntegration200ResponseDataOneOf12ParametersTemplatesInnerPropertiesMa
 	toSerialize := map[string]interface{}{}
 	toSerialize["name"] = o.Name
 	toSerialize["mapping"] = o.Mapping
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -134,15 +139,21 @@ func (o *GetIntegration200ResponseDataOneOf12ParametersTemplatesInnerPropertiesM
 
 	varGetIntegration200ResponseDataOneOf12ParametersTemplatesInnerPropertiesMappingInner := _GetIntegration200ResponseDataOneOf12ParametersTemplatesInnerPropertiesMappingInner{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGetIntegration200ResponseDataOneOf12ParametersTemplatesInnerPropertiesMappingInner)
+	err = json.Unmarshal(data, &varGetIntegration200ResponseDataOneOf12ParametersTemplatesInnerPropertiesMappingInner)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GetIntegration200ResponseDataOneOf12ParametersTemplatesInnerPropertiesMappingInner(varGetIntegration200ResponseDataOneOf12ParametersTemplatesInnerPropertiesMappingInner)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "mapping")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

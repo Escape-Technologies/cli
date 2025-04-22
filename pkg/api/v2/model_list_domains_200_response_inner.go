@@ -13,7 +13,6 @@ package v2
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -32,6 +31,7 @@ type ListDomains200ResponseInner struct {
 	ServicesCount *int `json:"servicesCount,omitempty"`
 	// If the domain is deleting
 	ScheduledForDeletion *bool `json:"scheduledForDeletion,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ListDomains200ResponseInner ListDomains200ResponseInner
@@ -245,6 +245,11 @@ func (o ListDomains200ResponseInner) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ScheduledForDeletion) {
 		toSerialize["scheduledForDeletion"] = o.ScheduledForDeletion
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -272,15 +277,24 @@ func (o *ListDomains200ResponseInner) UnmarshalJSON(data []byte) (err error) {
 
 	varListDomains200ResponseInner := _ListDomains200ResponseInner{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varListDomains200ResponseInner)
+	err = json.Unmarshal(data, &varListDomains200ResponseInner)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ListDomains200ResponseInner(varListDomains200ResponseInner)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "fqdn")
+		delete(additionalProperties, "createdAt")
+		delete(additionalProperties, "servicesCount")
+		delete(additionalProperties, "scheduledForDeletion")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

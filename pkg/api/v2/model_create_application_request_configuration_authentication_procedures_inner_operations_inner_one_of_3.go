@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperation
 	Tech EnumBROWSERACTIONS `json:"tech"`
 	Parameters CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf2Parameters `json:"parameters"`
 	Extractions CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1Extractions `json:"extractions"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf3 CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf3
@@ -133,6 +133,11 @@ func (o CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperat
 	toSerialize["tech"] = o.Tech
 	toSerialize["parameters"] = o.Parameters
 	toSerialize["extractions"] = o.Extractions
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -162,15 +167,22 @@ func (o *CreateApplicationRequestConfigurationAuthenticationProceduresInnerOpera
 
 	varCreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf3 := _CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf3{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf3)
+	err = json.Unmarshal(data, &varCreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf3)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf3(varCreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf3)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "tech")
+		delete(additionalProperties, "parameters")
+		delete(additionalProperties, "extractions")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

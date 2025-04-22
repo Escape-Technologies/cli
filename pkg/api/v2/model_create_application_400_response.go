@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &CreateApplication400Response{}
 type CreateApplication400Response struct {
 	Message EnumBADREQUEST `json:"message"`
 	Details string `json:"details"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateApplication400Response CreateApplication400Response
@@ -106,6 +106,11 @@ func (o CreateApplication400Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["message"] = o.Message
 	toSerialize["details"] = o.Details
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -134,15 +139,21 @@ func (o *CreateApplication400Response) UnmarshalJSON(data []byte) (err error) {
 
 	varCreateApplication400Response := _CreateApplication400Response{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateApplication400Response)
+	err = json.Unmarshal(data, &varCreateApplication400Response)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateApplication400Response(varCreateApplication400Response)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "details")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

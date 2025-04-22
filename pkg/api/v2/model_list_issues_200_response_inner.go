@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -28,6 +27,7 @@ type ListIssues200ResponseInner struct {
 	Ignored bool `json:"ignored"`
 	Type Enum1ab5d44a8d8b0e47bb5ab55e0fd2b986 `json:"type"`
 	Category Enum517d458bf219c9da2092895cc6b18716 `json:"category"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ListIssues200ResponseInner ListIssues200ResponseInner
@@ -241,6 +241,11 @@ func (o ListIssues200ResponseInner) ToMap() (map[string]interface{}, error) {
 	toSerialize["ignored"] = o.Ignored
 	toSerialize["type"] = o.Type
 	toSerialize["category"] = o.Category
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -274,15 +279,26 @@ func (o *ListIssues200ResponseInner) UnmarshalJSON(data []byte) (err error) {
 
 	varListIssues200ResponseInner := _ListIssues200ResponseInner{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varListIssues200ResponseInner)
+	err = json.Unmarshal(data, &varListIssues200ResponseInner)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ListIssues200ResponseInner(varListIssues200ResponseInner)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "severity")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "platformUrl")
+		delete(additionalProperties, "ignored")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "category")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

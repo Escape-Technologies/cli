@@ -24,7 +24,10 @@ type CreateApplicationRequestConfigurationScanBlocklist struct {
 	Mutation []string `json:"mutation,omitempty"`
 	Subscription []string `json:"subscription,omitempty"`
 	Objects []string `json:"objects,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateApplicationRequestConfigurationScanBlocklist CreateApplicationRequestConfigurationScanBlocklist
 
 // NewCreateApplicationRequestConfigurationScanBlocklist instantiates a new CreateApplicationRequestConfigurationScanBlocklist object
 // This constructor will assign default values to properties that have it defined,
@@ -228,7 +231,37 @@ func (o CreateApplicationRequestConfigurationScanBlocklist) ToMap() (map[string]
 	if !IsNil(o.Objects) {
 		toSerialize["objects"] = o.Objects
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateApplicationRequestConfigurationScanBlocklist) UnmarshalJSON(data []byte) (err error) {
+	varCreateApplicationRequestConfigurationScanBlocklist := _CreateApplicationRequestConfigurationScanBlocklist{}
+
+	err = json.Unmarshal(data, &varCreateApplicationRequestConfigurationScanBlocklist)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateApplicationRequestConfigurationScanBlocklist(varCreateApplicationRequestConfigurationScanBlocklist)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "routes")
+		delete(additionalProperties, "query")
+		delete(additionalProperties, "mutation")
+		delete(additionalProperties, "subscription")
+		delete(additionalProperties, "objects")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateApplicationRequestConfigurationScanBlocklist struct {

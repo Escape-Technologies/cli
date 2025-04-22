@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &CreateApplicationRequestConfigurationCustomRulesInnerTra
 type CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf4 struct {
 	Key EnumREQUESTBODYJSON `json:"key"`
 	Jq *string `json:"jq,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf4 CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf4
@@ -115,6 +115,11 @@ func (o CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInne
 	if !IsNil(o.Jq) {
 		toSerialize["jq"] = o.Jq
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -142,15 +147,21 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInn
 
 	varCreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf4 := _CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf4{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf4)
+	err = json.Unmarshal(data, &varCreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf4)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf4(varCreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf4)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "key")
+		delete(additionalProperties, "jq")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

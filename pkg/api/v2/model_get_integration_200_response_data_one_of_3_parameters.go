@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type GetIntegration200ResponseDataOneOf3Parameters struct {
 	ClientSecret string `json:"client_secret"`
 	TenantId string `json:"tenant_id"`
 	SubscriptionId *string `json:"subscription_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetIntegration200ResponseDataOneOf3Parameters GetIntegration200ResponseDataOneOf3Parameters
@@ -169,6 +169,11 @@ func (o GetIntegration200ResponseDataOneOf3Parameters) ToMap() (map[string]inter
 	if !IsNil(o.SubscriptionId) {
 		toSerialize["subscription_id"] = o.SubscriptionId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -198,15 +203,23 @@ func (o *GetIntegration200ResponseDataOneOf3Parameters) UnmarshalJSON(data []byt
 
 	varGetIntegration200ResponseDataOneOf3Parameters := _GetIntegration200ResponseDataOneOf3Parameters{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGetIntegration200ResponseDataOneOf3Parameters)
+	err = json.Unmarshal(data, &varGetIntegration200ResponseDataOneOf3Parameters)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GetIntegration200ResponseDataOneOf3Parameters(varGetIntegration200ResponseDataOneOf3Parameters)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "client_id")
+		delete(additionalProperties, "client_secret")
+		delete(additionalProperties, "tenant_id")
+		delete(additionalProperties, "subscription_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

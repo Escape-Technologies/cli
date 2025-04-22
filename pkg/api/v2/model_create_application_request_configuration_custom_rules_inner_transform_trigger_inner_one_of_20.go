@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &CreateApplicationRequestConfigurationCustomRulesInnerTra
 type CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf20 struct {
 	Or []interface{} `json:"or"`
 	If EnumOR `json:"if"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf20 CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf20
@@ -106,6 +106,11 @@ func (o CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInn
 	toSerialize := map[string]interface{}{}
 	toSerialize["or"] = o.Or
 	toSerialize["if"] = o.If
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -134,15 +139,21 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerIn
 
 	varCreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf20 := _CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf20{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf20)
+	err = json.Unmarshal(data, &varCreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf20)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf20(varCreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf20)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "or")
+		delete(additionalProperties, "if")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

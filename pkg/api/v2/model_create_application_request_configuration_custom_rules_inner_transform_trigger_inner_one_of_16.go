@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerO
 	Name *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf10Key `json:"name,omitempty"`
 	Value *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf10Key `json:"value,omitempty"`
 	If EnumREQUESTOBJECT `json:"if"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf16 CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf16
@@ -187,6 +187,11 @@ func (o CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInn
 		toSerialize["value"] = o.Value
 	}
 	toSerialize["if"] = o.If
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -214,15 +219,23 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerIn
 
 	varCreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf16 := _CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf16{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf16)
+	err = json.Unmarshal(data, &varCreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf16)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf16(varCreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf16)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "value")
+		delete(additionalProperties, "if")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

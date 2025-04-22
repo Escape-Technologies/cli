@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type ListSubdomains200Response struct {
 	NextCursor string `json:"nextCursor"`
 	TotalCount *int `json:"totalCount,omitempty"`
 	Data []ListSubdomains200ResponseDataInner `json:"data"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ListSubdomains200Response ListSubdomains200Response
@@ -146,6 +146,11 @@ func (o ListSubdomains200Response) ToMap() (map[string]interface{}, error) {
 		toSerialize["totalCount"] = o.TotalCount
 	}
 	toSerialize["data"] = o.Data
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -174,15 +179,22 @@ func (o *ListSubdomains200Response) UnmarshalJSON(data []byte) (err error) {
 
 	varListSubdomains200Response := _ListSubdomains200Response{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varListSubdomains200Response)
+	err = json.Unmarshal(data, &varListSubdomains200Response)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ListSubdomains200Response(varListSubdomains200Response)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "nextCursor")
+		delete(additionalProperties, "totalCount")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

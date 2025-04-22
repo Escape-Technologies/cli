@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type CreateApplicationRequestConfigurationAuthenticationUsersInner struct {
 	Variables []CreateApplicationRequestConfigurationAuthenticationUsersInnerVariablesInner `json:"variables,omitempty"`
 	Refresh *CreateApplicationRequestConfigurationAuthenticationUsersInnerRefresh `json:"refresh,omitempty"`
 	RepeaterMtls *bool `json:"repeater_mtls,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateApplicationRequestConfigurationAuthenticationUsersInner CreateApplicationRequestConfigurationAuthenticationUsersInner
@@ -259,6 +259,11 @@ func (o CreateApplicationRequestConfigurationAuthenticationUsersInner) ToMap() (
 	if !IsNil(o.RepeaterMtls) {
 		toSerialize["repeater_mtls"] = o.RepeaterMtls
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -286,15 +291,25 @@ func (o *CreateApplicationRequestConfigurationAuthenticationUsersInner) Unmarsha
 
 	varCreateApplicationRequestConfigurationAuthenticationUsersInner := _CreateApplicationRequestConfigurationAuthenticationUsersInner{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateApplicationRequestConfigurationAuthenticationUsersInner)
+	err = json.Unmarshal(data, &varCreateApplicationRequestConfigurationAuthenticationUsersInner)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateApplicationRequestConfigurationAuthenticationUsersInner(varCreateApplicationRequestConfigurationAuthenticationUsersInner)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "credentials")
+		delete(additionalProperties, "procedure")
+		delete(additionalProperties, "variables")
+		delete(additionalProperties, "refresh")
+		delete(additionalProperties, "repeater_mtls")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

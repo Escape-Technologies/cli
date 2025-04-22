@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type UpdateIntegrationRequest struct {
 	Name string `json:"name"`
 	// A location ID to use with this integration.
 	LocationId *string `json:"locationId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpdateIntegrationRequest UpdateIntegrationRequest
@@ -144,6 +144,11 @@ func (o UpdateIntegrationRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.LocationId) {
 		toSerialize["locationId"] = o.LocationId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -172,15 +177,22 @@ func (o *UpdateIntegrationRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varUpdateIntegrationRequest := _UpdateIntegrationRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUpdateIntegrationRequest)
+	err = json.Unmarshal(data, &varUpdateIntegrationRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UpdateIntegrationRequest(varUpdateIntegrationRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "data")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "locationId")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

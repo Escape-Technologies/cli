@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOfRequest
 	Cookies map[string]string `json:"cookies,omitempty"`
 	QueryParameters map[string]string `json:"query_parameters,omitempty"`
 	Body interface{} `json:"body,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOfRequest CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOfRequest
@@ -251,6 +251,11 @@ func (o CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOfRequ
 	if o.Body != nil {
 		toSerialize["body"] = o.Body
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -279,15 +284,25 @@ func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOfReq
 
 	varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOfRequest := _CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOfRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOfRequest)
+	err = json.Unmarshal(data, &varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOfRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOfRequest(varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOfRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "url")
+		delete(additionalProperties, "method")
+		delete(additionalProperties, "headers")
+		delete(additionalProperties, "cookies")
+		delete(additionalProperties, "query_parameters")
+		delete(additionalProperties, "body")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

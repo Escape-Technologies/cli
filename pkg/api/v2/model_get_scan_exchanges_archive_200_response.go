@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &GetScanExchangesArchive200Response{}
 // GetScanExchangesArchive200Response struct for GetScanExchangesArchive200Response
 type GetScanExchangesArchive200Response struct {
 	Archive string `json:"archive"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetScanExchangesArchive200Response GetScanExchangesArchive200Response
@@ -79,6 +79,11 @@ func (o GetScanExchangesArchive200Response) MarshalJSON() ([]byte, error) {
 func (o GetScanExchangesArchive200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["archive"] = o.Archive
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -106,15 +111,20 @@ func (o *GetScanExchangesArchive200Response) UnmarshalJSON(data []byte) (err err
 
 	varGetScanExchangesArchive200Response := _GetScanExchangesArchive200Response{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGetScanExchangesArchive200Response)
+	err = json.Unmarshal(data, &varGetScanExchangesArchive200Response)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GetScanExchangesArchive200Response(varGetScanExchangesArchive200Response)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "archive")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

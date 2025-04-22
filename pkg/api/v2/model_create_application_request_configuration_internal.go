@@ -36,7 +36,10 @@ type CreateApplicationRequestConfigurationInternal struct {
 	GraphqlPersistedQueriesUrl *string `json:"graphql_persisted_queries_url,omitempty"`
 	GraphqlPersistedQueriesRaw *string `json:"graphql_persisted_queries_raw,omitempty"`
 	GraphqlPersistedQueriesFile *string `json:"graphql_persisted_queries_file,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateApplicationRequestConfigurationInternal CreateApplicationRequestConfigurationInternal
 
 // NewCreateApplicationRequestConfigurationInternal instantiates a new CreateApplicationRequestConfigurationInternal object
 // This constructor will assign default values to properties that have it defined,
@@ -660,7 +663,49 @@ func (o CreateApplicationRequestConfigurationInternal) ToMap() (map[string]inter
 	if !IsNil(o.GraphqlPersistedQueriesFile) {
 		toSerialize["graphql_persisted_queries_file"] = o.GraphqlPersistedQueriesFile
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateApplicationRequestConfigurationInternal) UnmarshalJSON(data []byte) (err error) {
+	varCreateApplicationRequestConfigurationInternal := _CreateApplicationRequestConfigurationInternal{}
+
+	err = json.Unmarshal(data, &varCreateApplicationRequestConfigurationInternal)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateApplicationRequestConfigurationInternal(varCreateApplicationRequestConfigurationInternal)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "scan_id")
+		delete(additionalProperties, "escape_identifier")
+		delete(additionalProperties, "s3_object")
+		delete(additionalProperties, "s3_persistence_folder")
+		delete(additionalProperties, "server_url_override")
+		delete(additionalProperties, "skip_validation")
+		delete(additionalProperties, "skip_sourcing")
+		delete(additionalProperties, "skip_fingerprinting")
+		delete(additionalProperties, "graphql_max_generated_depth")
+		delete(additionalProperties, "argument_max_generated_depth")
+		delete(additionalProperties, "skip_generating_unspecified_enum_values")
+		delete(additionalProperties, "graphql_no_operation_name")
+		delete(additionalProperties, "frontend_max_generated_depth")
+		delete(additionalProperties, "cancel_unhealthy_scan_after")
+		delete(additionalProperties, "graphql_persisted_queries_url")
+		delete(additionalProperties, "graphql_persisted_queries_raw")
+		delete(additionalProperties, "graphql_persisted_queries_file")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateApplicationRequestConfigurationInternal struct {

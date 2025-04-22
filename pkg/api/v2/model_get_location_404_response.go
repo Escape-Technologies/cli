@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &GetLocation404Response{}
 // GetLocation404Response struct for GetLocation404Response
 type GetLocation404Response struct {
 	Message EnumNOTFOUND `json:"message"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetLocation404Response GetLocation404Response
@@ -79,6 +79,11 @@ func (o GetLocation404Response) MarshalJSON() ([]byte, error) {
 func (o GetLocation404Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["message"] = o.Message
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -106,15 +111,20 @@ func (o *GetLocation404Response) UnmarshalJSON(data []byte) (err error) {
 
 	varGetLocation404Response := _GetLocation404Response{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGetLocation404Response)
+	err = json.Unmarshal(data, &varGetLocation404Response)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GetLocation404Response(varGetLocation404Response)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "message")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

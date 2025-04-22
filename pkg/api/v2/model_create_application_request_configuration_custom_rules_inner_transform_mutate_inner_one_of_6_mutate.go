@@ -22,7 +22,10 @@ type CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOn
 	Value *string `json:"value,omitempty"`
 	Values []string `json:"values,omitempty"`
 	RegexReplace *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOfRegexReplace `json:"regex_replace,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf6Mutate CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf6Mutate
 
 // NewCreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf6Mutate instantiates a new CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf6Mutate object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +159,35 @@ func (o CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInne
 	if !IsNil(o.RegexReplace) {
 		toSerialize["regex_replace"] = o.RegexReplace
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf6Mutate) UnmarshalJSON(data []byte) (err error) {
+	varCreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf6Mutate := _CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf6Mutate{}
+
+	err = json.Unmarshal(data, &varCreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf6Mutate)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf6Mutate(varCreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf6Mutate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "value")
+		delete(additionalProperties, "values")
+		delete(additionalProperties, "regex_replace")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf6Mutate struct {

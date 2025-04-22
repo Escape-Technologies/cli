@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type CreateApplicationRequestSchema struct {
 	Url *string `json:"url,omitempty"`
 	// Schema blob ID from upload url
 	BlobId string `json:"blobId"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateApplicationRequestSchema CreateApplicationRequestSchema
@@ -117,6 +117,11 @@ func (o CreateApplicationRequestSchema) ToMap() (map[string]interface{}, error) 
 		toSerialize["url"] = o.Url
 	}
 	toSerialize["blobId"] = o.BlobId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -144,15 +149,21 @@ func (o *CreateApplicationRequestSchema) UnmarshalJSON(data []byte) (err error) 
 
 	varCreateApplicationRequestSchema := _CreateApplicationRequestSchema{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateApplicationRequestSchema)
+	err = json.Unmarshal(data, &varCreateApplicationRequestSchema)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateApplicationRequestSchema(varCreateApplicationRequestSchema)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "url")
+		delete(additionalProperties, "blobId")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

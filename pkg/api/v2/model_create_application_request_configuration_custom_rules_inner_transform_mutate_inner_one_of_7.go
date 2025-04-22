@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOn
 	Key EnumREQUESTMETHOD `json:"key"`
 	Value *Enum549d6d987f9711d8c5b7a2472e0c9d65 `json:"value,omitempty"`
 	Values []Enum549d6d987f9711d8c5b7a2472e0c9d65 `json:"values,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf7 CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf7
@@ -151,6 +151,11 @@ func (o CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInne
 	if !IsNil(o.Values) {
 		toSerialize["values"] = o.Values
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -178,15 +183,22 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInn
 
 	varCreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf7 := _CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf7{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf7)
+	err = json.Unmarshal(data, &varCreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf7)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf7(varCreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf7)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "key")
+		delete(additionalProperties, "value")
+		delete(additionalProperties, "values")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

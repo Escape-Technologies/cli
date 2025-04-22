@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf struct
 	Request CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOfRequest `json:"request"`
 	Extractions []CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOfExtractionsInner `json:"extractions,omitempty"`
 	Injections []CreateApplicationRequestConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner `json:"injections,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf
@@ -205,6 +205,11 @@ func (o CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf) To
 	if !IsNil(o.Injections) {
 		toSerialize["injections"] = o.Injections
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -234,15 +239,24 @@ func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf) U
 
 	varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf := _CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf)
+	err = json.Unmarshal(data, &varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf(varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "users")
+		delete(additionalProperties, "request")
+		delete(additionalProperties, "extractions")
+		delete(additionalProperties, "injections")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

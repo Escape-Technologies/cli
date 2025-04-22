@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperation
 	Proxy *string `json:"proxy,omitempty"`
 	FirstRequest CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters `json:"first_request"`
 	SecondRequest *CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersSecondRequest `json:"second_request,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1Parameters CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1Parameters
@@ -151,6 +151,11 @@ func (o CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperat
 	if !IsNil(o.SecondRequest) {
 		toSerialize["second_request"] = o.SecondRequest
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -178,15 +183,22 @@ func (o *CreateApplicationRequestConfigurationAuthenticationProceduresInnerOpera
 
 	varCreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1Parameters := _CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1Parameters{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1Parameters)
+	err = json.Unmarshal(data, &varCreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1Parameters)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1Parameters(varCreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1Parameters)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "proxy")
+		delete(additionalProperties, "first_request")
+		delete(additionalProperties, "second_request")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

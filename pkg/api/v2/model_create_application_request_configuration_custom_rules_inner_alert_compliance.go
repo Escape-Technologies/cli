@@ -31,7 +31,10 @@ type CreateApplicationRequestConfigurationCustomRulesInnerAlertCompliance struct
 	Hipaa *EnumC48f4480ca763c1e3645aed08c52cfc1 `json:"hipaa,omitempty"`
 	OwaspLlm *Enum80229dc8a40727ab101f9b3e03267361 `json:"owasp_llm,omitempty"`
 	Cwe *Enum1303e600342c3d68dbe8782ba41410d0 `json:"cwe,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateApplicationRequestConfigurationCustomRulesInnerAlertCompliance CreateApplicationRequestConfigurationCustomRulesInnerAlertCompliance
 
 // NewCreateApplicationRequestConfigurationCustomRulesInnerAlertCompliance instantiates a new CreateApplicationRequestConfigurationCustomRulesInnerAlertCompliance object
 // This constructor will assign default values to properties that have it defined,
@@ -480,7 +483,44 @@ func (o CreateApplicationRequestConfigurationCustomRulesInnerAlertCompliance) To
 	if !IsNil(o.Cwe) {
 		toSerialize["cwe"] = o.Cwe
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerAlertCompliance) UnmarshalJSON(data []byte) (err error) {
+	varCreateApplicationRequestConfigurationCustomRulesInnerAlertCompliance := _CreateApplicationRequestConfigurationCustomRulesInnerAlertCompliance{}
+
+	err = json.Unmarshal(data, &varCreateApplicationRequestConfigurationCustomRulesInnerAlertCompliance)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateApplicationRequestConfigurationCustomRulesInnerAlertCompliance(varCreateApplicationRequestConfigurationCustomRulesInnerAlertCompliance)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "owasp")
+		delete(additionalProperties, "pci-dss")
+		delete(additionalProperties, "gdpr")
+		delete(additionalProperties, "soc2")
+		delete(additionalProperties, "psd2")
+		delete(additionalProperties, "iso27001")
+		delete(additionalProperties, "nist")
+		delete(additionalProperties, "fedramp")
+		delete(additionalProperties, "nis2")
+		delete(additionalProperties, "hipaa")
+		delete(additionalProperties, "owasp_llm")
+		delete(additionalProperties, "cwe")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateApplicationRequestConfigurationCustomRulesInnerAlertCompliance struct {

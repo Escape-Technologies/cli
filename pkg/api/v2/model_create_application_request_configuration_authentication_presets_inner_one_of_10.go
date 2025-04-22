@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf10 stru
 	Extractions []CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner `json:"extractions,omitempty"`
 	Injections NullableCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf10Injections `json:"injections,omitempty"`
 	AutoExtractionUrls []string `json:"auto_extraction_urls,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf10 CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf10
@@ -323,6 +323,11 @@ func (o CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf10) 
 	if !IsNil(o.AutoExtractionUrls) {
 		toSerialize["auto_extraction_urls"] = o.AutoExtractionUrls
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -352,15 +357,27 @@ func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf10)
 
 	varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf10 := _CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf10{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf10)
+	err = json.Unmarshal(data, &varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf10)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf10(varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf10)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "users")
+		delete(additionalProperties, "login_url")
+		delete(additionalProperties, "logged_in_detector_text")
+		delete(additionalProperties, "logged_in_detector_timeout")
+		delete(additionalProperties, "extractions")
+		delete(additionalProperties, "injections")
+		delete(additionalProperties, "auto_extraction_urls")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -22,7 +22,10 @@ type CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerO
 	Is *EnumC0231107b6d45e91cac90a1ae0a5d44b `json:"is,omitempty"`
 	IsNot *EnumC0231107b6d45e91cac90a1ae0a5d44b `json:"is_not,omitempty"`
 	In []EnumC0231107b6d45e91cac90a1ae0a5d44b `json:"in,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf16Type CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf16Type
 
 // NewCreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf16Type instantiates a new CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf16Type object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +159,35 @@ func (o CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInn
 	if !IsNil(o.In) {
 		toSerialize["in"] = o.In
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf16Type) UnmarshalJSON(data []byte) (err error) {
+	varCreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf16Type := _CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf16Type{}
+
+	err = json.Unmarshal(data, &varCreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf16Type)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf16Type(varCreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf16Type)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "is")
+		delete(additionalProperties, "is_not")
+		delete(additionalProperties, "in")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf16Type struct {

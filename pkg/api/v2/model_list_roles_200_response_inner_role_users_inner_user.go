@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type ListRoles200ResponseInnerRoleUsersInnerUser struct {
 	Id string `json:"id"`
 	// The email of the user.
 	Email string `json:"email"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ListRoles200ResponseInnerRoleUsersInnerUser ListRoles200ResponseInnerRoleUsersInnerUser
@@ -108,6 +108,11 @@ func (o ListRoles200ResponseInnerRoleUsersInnerUser) ToMap() (map[string]interfa
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["email"] = o.Email
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *ListRoles200ResponseInnerRoleUsersInnerUser) UnmarshalJSON(data []byte)
 
 	varListRoles200ResponseInnerRoleUsersInnerUser := _ListRoles200ResponseInnerRoleUsersInnerUser{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varListRoles200ResponseInnerRoleUsersInnerUser)
+	err = json.Unmarshal(data, &varListRoles200ResponseInnerRoleUsersInnerUser)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ListRoles200ResponseInnerRoleUsersInnerUser(varListRoles200ResponseInnerRoleUsersInnerUser)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "email")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

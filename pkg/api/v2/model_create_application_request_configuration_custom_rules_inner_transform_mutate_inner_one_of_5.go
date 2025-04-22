@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOn
 	Values []string `json:"values,omitempty"`
 	RegexReplace *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOfRegexReplace `json:"regex_replace,omitempty"`
 	Key EnumREQUESTBODYTEXT `json:"key"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf5 CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf5
@@ -187,6 +187,11 @@ func (o CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInne
 		toSerialize["regex_replace"] = o.RegexReplace
 	}
 	toSerialize["key"] = o.Key
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -214,15 +219,23 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInn
 
 	varCreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf5 := _CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf5{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf5)
+	err = json.Unmarshal(data, &varCreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf5)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf5(varCreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf5)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "value")
+		delete(additionalProperties, "values")
+		delete(additionalProperties, "regex_replace")
+		delete(additionalProperties, "key")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

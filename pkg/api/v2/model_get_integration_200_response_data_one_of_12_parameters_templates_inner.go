@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type GetIntegration200ResponseDataOneOf12ParametersTemplatesInner struct {
 	ProjectId string `json:"project_id"`
 	IssueType string `json:"issue_type"`
 	PropertiesMapping []GetIntegration200ResponseDataOneOf12ParametersTemplatesInnerPropertiesMappingInner `json:"properties_mapping,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetIntegration200ResponseDataOneOf12ParametersTemplatesInner GetIntegration200ResponseDataOneOf12ParametersTemplatesInner
@@ -169,6 +169,11 @@ func (o GetIntegration200ResponseDataOneOf12ParametersTemplatesInner) ToMap() (m
 	if !IsNil(o.PropertiesMapping) {
 		toSerialize["properties_mapping"] = o.PropertiesMapping
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -198,15 +203,23 @@ func (o *GetIntegration200ResponseDataOneOf12ParametersTemplatesInner) Unmarshal
 
 	varGetIntegration200ResponseDataOneOf12ParametersTemplatesInner := _GetIntegration200ResponseDataOneOf12ParametersTemplatesInner{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGetIntegration200ResponseDataOneOf12ParametersTemplatesInner)
+	err = json.Unmarshal(data, &varGetIntegration200ResponseDataOneOf12ParametersTemplatesInner)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GetIntegration200ResponseDataOneOf12ParametersTemplatesInner(varGetIntegration200ResponseDataOneOf12ParametersTemplatesInner)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "project_id")
+		delete(additionalProperties, "issue_type")
+		delete(additionalProperties, "properties_mapping")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

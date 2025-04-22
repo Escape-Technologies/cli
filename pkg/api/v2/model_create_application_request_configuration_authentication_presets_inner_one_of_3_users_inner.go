@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf3UsersI
 	Headers map[string]string `json:"headers,omitempty"`
 	Cookies map[string]string `json:"cookies,omitempty"`
 	Password string `json:"password"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf3UsersInner CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf3UsersInner
@@ -178,6 +178,11 @@ func (o CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf3Use
 		toSerialize["cookies"] = o.Cookies
 	}
 	toSerialize["password"] = o.Password
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -206,15 +211,23 @@ func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf3Us
 
 	varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf3UsersInner := _CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf3UsersInner{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf3UsersInner)
+	err = json.Unmarshal(data, &varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf3UsersInner)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf3UsersInner(varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf3UsersInner)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "username")
+		delete(additionalProperties, "headers")
+		delete(additionalProperties, "cookies")
+		delete(additionalProperties, "password")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

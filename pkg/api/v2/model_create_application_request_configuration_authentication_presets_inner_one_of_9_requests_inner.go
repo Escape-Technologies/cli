@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &CreateApplicationRequestConfigurationAuthenticationPrese
 type CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf9RequestsInner struct {
 	Curl string `json:"curl"`
 	Extractions []CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOfExtractionsInner `json:"extractions,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf9RequestsInner CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf9RequestsInner
@@ -115,6 +115,11 @@ func (o CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf9Req
 	if !IsNil(o.Extractions) {
 		toSerialize["extractions"] = o.Extractions
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -142,15 +147,21 @@ func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf9Re
 
 	varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf9RequestsInner := _CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf9RequestsInner{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf9RequestsInner)
+	err = json.Unmarshal(data, &varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf9RequestsInner)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf9RequestsInner(varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf9RequestsInner)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "curl")
+		delete(additionalProperties, "extractions")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

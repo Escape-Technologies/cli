@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type GetIntegration200ResponseDataOneOf12ParametersTemplatesInnerPropertiesMappi
 	JiraProperty string `json:"jira_property"`
 	EscapeOption *string `json:"escape_option,omitempty"`
 	JiraOption *string `json:"jira_option,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetIntegration200ResponseDataOneOf12ParametersTemplatesInnerPropertiesMappingInnerMappingInner GetIntegration200ResponseDataOneOf12ParametersTemplatesInnerPropertiesMappingInnerMappingInner
@@ -178,6 +178,11 @@ func (o GetIntegration200ResponseDataOneOf12ParametersTemplatesInnerPropertiesMa
 	if !IsNil(o.JiraOption) {
 		toSerialize["jira_option"] = o.JiraOption
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -206,15 +211,23 @@ func (o *GetIntegration200ResponseDataOneOf12ParametersTemplatesInnerPropertiesM
 
 	varGetIntegration200ResponseDataOneOf12ParametersTemplatesInnerPropertiesMappingInnerMappingInner := _GetIntegration200ResponseDataOneOf12ParametersTemplatesInnerPropertiesMappingInnerMappingInner{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGetIntegration200ResponseDataOneOf12ParametersTemplatesInnerPropertiesMappingInnerMappingInner)
+	err = json.Unmarshal(data, &varGetIntegration200ResponseDataOneOf12ParametersTemplatesInnerPropertiesMappingInnerMappingInner)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GetIntegration200ResponseDataOneOf12ParametersTemplatesInnerPropertiesMappingInnerMappingInner(varGetIntegration200ResponseDataOneOf12ParametersTemplatesInnerPropertiesMappingInnerMappingInner)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "escape_property")
+		delete(additionalProperties, "jira_property")
+		delete(additionalProperties, "escape_option")
+		delete(additionalProperties, "jira_option")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

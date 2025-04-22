@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -31,6 +30,7 @@ type CreateApplicationRequestConfigurationScanScalarsValue struct {
 	Sensitivity *EnumC9df31378b5ab99a9fcb2d159ba1f602 `json:"sensitivity,omitempty"`
 	Strategy *EnumBafa7e8598be648bd1bf40163099110a `json:"strategy,omitempty"`
 	Entropy *float32 `json:"entropy,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateApplicationRequestConfigurationScanScalarsValue CreateApplicationRequestConfigurationScanScalarsValue
@@ -403,6 +403,11 @@ func (o CreateApplicationRequestConfigurationScanScalarsValue) ToMap() (map[stri
 	if !IsNil(o.Entropy) {
 		toSerialize["entropy"] = o.Entropy
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -430,15 +435,29 @@ func (o *CreateApplicationRequestConfigurationScanScalarsValue) UnmarshalJSON(da
 
 	varCreateApplicationRequestConfigurationScanScalarsValue := _CreateApplicationRequestConfigurationScanScalarsValue{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateApplicationRequestConfigurationScanScalarsValue)
+	err = json.Unmarshal(data, &varCreateApplicationRequestConfigurationScanScalarsValue)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateApplicationRequestConfigurationScanScalarsValue(varCreateApplicationRequestConfigurationScanScalarsValue)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "examples")
+		delete(additionalProperties, "ignored_names")
+		delete(additionalProperties, "names")
+		delete(additionalProperties, "parents")
+		delete(additionalProperties, "patterns")
+		delete(additionalProperties, "ignored_patterns")
+		delete(additionalProperties, "sensitivity")
+		delete(additionalProperties, "strategy")
+		delete(additionalProperties, "entropy")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

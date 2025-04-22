@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -28,6 +27,7 @@ type CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperation
 	Secure *bool `json:"secure,omitempty"`
 	SameSite *Enum200018d75ade9e46d41a8d1efb27c511 `json:"same_site,omitempty"`
 	Values []string `json:"values"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner
@@ -286,6 +286,11 @@ func (o CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperat
 		toSerialize["same_site"] = o.SameSite
 	}
 	toSerialize["values"] = o.Values
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -314,15 +319,26 @@ func (o *CreateApplicationRequestConfigurationAuthenticationProceduresInnerOpera
 
 	varCreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner := _CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner)
+	err = json.Unmarshal(data, &varCreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner(varCreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "domain")
+		delete(additionalProperties, "path")
+		delete(additionalProperties, "http_only")
+		delete(additionalProperties, "secure")
+		delete(additionalProperties, "same_site")
+		delete(additionalProperties, "values")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

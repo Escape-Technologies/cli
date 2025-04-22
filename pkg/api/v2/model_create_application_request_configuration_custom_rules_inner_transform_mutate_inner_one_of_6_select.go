@@ -22,7 +22,10 @@ type CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOn
 	Type *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf16Type `json:"type,omitempty"`
 	Name *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf10Key `json:"name,omitempty"`
 	Value *CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInnerOneOf10Key `json:"value,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf6Select CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf6Select
 
 // NewCreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf6Select instantiates a new CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf6Select object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +159,35 @@ func (o CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInne
 	if !IsNil(o.Value) {
 		toSerialize["value"] = o.Value
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf6Select) UnmarshalJSON(data []byte) (err error) {
+	varCreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf6Select := _CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf6Select{}
+
+	err = json.Unmarshal(data, &varCreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf6Select)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf6Select(varCreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf6Select)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf6Select struct {

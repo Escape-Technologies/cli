@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf5 struc
 	Users []CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf3UsersInner `json:"users"`
 	FirstRequest CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOfRequest `json:"first_request"`
 	SecondRequest *CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersSecondRequest `json:"second_request,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf5 CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf5
@@ -169,6 +169,11 @@ func (o CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf5) T
 	if !IsNil(o.SecondRequest) {
 		toSerialize["second_request"] = o.SecondRequest
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -198,15 +203,23 @@ func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf5) 
 
 	varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf5 := _CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf5{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf5)
+	err = json.Unmarshal(data, &varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf5)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf5(varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf5)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "users")
+		delete(additionalProperties, "first_request")
+		delete(additionalProperties, "second_request")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

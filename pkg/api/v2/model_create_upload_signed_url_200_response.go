@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type CreateUploadSignedUrl200Response struct {
 	Url string `json:"url"`
 	// The signed URL ID to upload a file to the Escape Platform.
 	Id string `json:"id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateUploadSignedUrl200Response CreateUploadSignedUrl200Response
@@ -108,6 +108,11 @@ func (o CreateUploadSignedUrl200Response) ToMap() (map[string]interface{}, error
 	toSerialize := map[string]interface{}{}
 	toSerialize["url"] = o.Url
 	toSerialize["id"] = o.Id
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *CreateUploadSignedUrl200Response) UnmarshalJSON(data []byte) (err error
 
 	varCreateUploadSignedUrl200Response := _CreateUploadSignedUrl200Response{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateUploadSignedUrl200Response)
+	err = json.Unmarshal(data, &varCreateUploadSignedUrl200Response)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateUploadSignedUrl200Response(varCreateUploadSignedUrl200Response)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "url")
+		delete(additionalProperties, "id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

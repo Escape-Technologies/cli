@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &GetIntegration200ResponseDataOneOf13Parameters{}
 type GetIntegration200ResponseDataOneOf13Parameters struct {
 	ApiKey string `json:"api_key"`
 	AdminApiUrl string `json:"admin_api_url"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetIntegration200ResponseDataOneOf13Parameters GetIntegration200ResponseDataOneOf13Parameters
@@ -106,6 +106,11 @@ func (o GetIntegration200ResponseDataOneOf13Parameters) ToMap() (map[string]inte
 	toSerialize := map[string]interface{}{}
 	toSerialize["api_key"] = o.ApiKey
 	toSerialize["admin_api_url"] = o.AdminApiUrl
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -134,15 +139,21 @@ func (o *GetIntegration200ResponseDataOneOf13Parameters) UnmarshalJSON(data []by
 
 	varGetIntegration200ResponseDataOneOf13Parameters := _GetIntegration200ResponseDataOneOf13Parameters{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGetIntegration200ResponseDataOneOf13Parameters)
+	err = json.Unmarshal(data, &varGetIntegration200ResponseDataOneOf13Parameters)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GetIntegration200ResponseDataOneOf13Parameters(varGetIntegration200ResponseDataOneOf13Parameters)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "api_key")
+		delete(additionalProperties, "admin_api_url")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

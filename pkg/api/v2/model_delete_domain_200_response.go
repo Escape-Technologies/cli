@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &DeleteDomain200Response{}
 // DeleteDomain200Response struct for DeleteDomain200Response
 type DeleteDomain200Response struct {
 	Message EnumDOMAINDELETIONSCHEDULEDSUCCESSFULLY `json:"message"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _DeleteDomain200Response DeleteDomain200Response
@@ -79,6 +79,11 @@ func (o DeleteDomain200Response) MarshalJSON() ([]byte, error) {
 func (o DeleteDomain200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["message"] = o.Message
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -106,15 +111,20 @@ func (o *DeleteDomain200Response) UnmarshalJSON(data []byte) (err error) {
 
 	varDeleteDomain200Response := _DeleteDomain200Response{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varDeleteDomain200Response)
+	err = json.Unmarshal(data, &varDeleteDomain200Response)
 
 	if err != nil {
 		return err
 	}
 
 	*o = DeleteDomain200Response(varDeleteDomain200Response)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "message")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

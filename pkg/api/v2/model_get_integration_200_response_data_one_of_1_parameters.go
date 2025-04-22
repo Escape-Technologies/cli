@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -32,6 +31,7 @@ type GetIntegration200ResponseDataOneOf1Parameters struct {
 	TokenUri string `json:"token_uri"`
 	Type string `json:"type"`
 	UniverseDomain string `json:"universe_domain"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetIntegration200ResponseDataOneOf1Parameters GetIntegration200ResponseDataOneOf1Parameters
@@ -349,6 +349,11 @@ func (o GetIntegration200ResponseDataOneOf1Parameters) ToMap() (map[string]inter
 	toSerialize["token_uri"] = o.TokenUri
 	toSerialize["type"] = o.Type
 	toSerialize["universe_domain"] = o.UniverseDomain
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -386,15 +391,30 @@ func (o *GetIntegration200ResponseDataOneOf1Parameters) UnmarshalJSON(data []byt
 
 	varGetIntegration200ResponseDataOneOf1Parameters := _GetIntegration200ResponseDataOneOf1Parameters{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGetIntegration200ResponseDataOneOf1Parameters)
+	err = json.Unmarshal(data, &varGetIntegration200ResponseDataOneOf1Parameters)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GetIntegration200ResponseDataOneOf1Parameters(varGetIntegration200ResponseDataOneOf1Parameters)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "auth_provider_x509_cert_url")
+		delete(additionalProperties, "auth_uri")
+		delete(additionalProperties, "client_email")
+		delete(additionalProperties, "client_id")
+		delete(additionalProperties, "client_x509_cert_url")
+		delete(additionalProperties, "private_key")
+		delete(additionalProperties, "private_key_id")
+		delete(additionalProperties, "project_id")
+		delete(additionalProperties, "token_uri")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "universe_domain")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

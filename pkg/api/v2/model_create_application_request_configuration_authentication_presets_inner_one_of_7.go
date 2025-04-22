@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &CreateApplicationRequestConfigurationAuthenticationPrese
 type CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf7 struct {
 	Type EnumHEADERS `json:"type"`
 	Users []CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf7UsersInner `json:"users"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf7 CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf7
@@ -106,6 +106,11 @@ func (o CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf7) T
 	toSerialize := map[string]interface{}{}
 	toSerialize["type"] = o.Type
 	toSerialize["users"] = o.Users
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -134,15 +139,21 @@ func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf7) 
 
 	varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf7 := _CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf7{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf7)
+	err = json.Unmarshal(data, &varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf7)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf7(varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf7)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "users")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

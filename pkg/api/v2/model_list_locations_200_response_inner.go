@@ -25,7 +25,10 @@ type ListLocations200ResponseInner struct {
 	Name *string `json:"name,omitempty"`
 	// The SSH public key used to connect to the location.
 	SshPublicKey *string `json:"sshPublicKey,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ListLocations200ResponseInner ListLocations200ResponseInner
 
 // NewListLocations200ResponseInner instantiates a new ListLocations200ResponseInner object
 // This constructor will assign default values to properties that have it defined,
@@ -171,7 +174,35 @@ func (o ListLocations200ResponseInner) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SshPublicKey) {
 		toSerialize["sshPublicKey"] = o.SshPublicKey
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ListLocations200ResponseInner) UnmarshalJSON(data []byte) (err error) {
+	varListLocations200ResponseInner := _ListLocations200ResponseInner{}
+
+	err = json.Unmarshal(data, &varListLocations200ResponseInner)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ListLocations200ResponseInner(varListLocations200ResponseInner)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "sshPublicKey")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableListLocations200ResponseInner struct {
