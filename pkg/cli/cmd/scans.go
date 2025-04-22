@@ -52,8 +52,6 @@ var scansListCmd = &cobra.Command{
 	},
 }
 
-// TODO(quentin@escape.tech): var scanStartCmdConfigurationOverride *v2.CreateApplicationRequestConfiguration
-
 func extractCommitDataFromEnv() {
 	log.Trace("Extracting commit data from environment variables")
 	if scanStartCmdCommitHash != nil ||
@@ -167,9 +165,10 @@ escape-cli scans start 00000000-0000-0000-0000-000000000000 --override '{"scan":
 }
 
 var scanWatchCmd = &cobra.Command{
-	Use:   "watch scan-id",
-	Args:  cobra.ExactArgs(1),
-	Short: "Bind the current terminal to a scan, listen for events and print them to the terminal. Exit when the scan is done.",
+	Use:     "watch scan-id",
+	Example: `escape-cli scans watch 00000000-0000-0000-0000-000000000000`,
+	Args:    cobra.ExactArgs(1),
+	Short:   "Bind the current terminal to a scan, listen for events and print them to the terminal. Exit when the scan is done.",
 	Run: func(_ *cobra.Command, _ []string) {
 		log.Error("Scan watch not implemented")
 	},
@@ -179,9 +178,18 @@ var scanGetCmd = &cobra.Command{
 	Use:     "get scan-id",
 	Aliases: []string{"describe"},
 	Args:    cobra.ExactArgs(1),
-	Short:   "List all results (issues) of a scan",
-	Run: func(_ *cobra.Command, _ []string) {
-		// TODO(quentin@escape.tech): Implement this
+	Short:   "Return the scan status",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		scan, err := escape.GetScan(cmd.Context(), args[0])
+		if err != nil {
+			return fmt.Errorf("unable to get scan: %w", err)
+		}
+		out.Table(scan, func() []string {
+			res := []string{"ID\tSTATUS\tCREATED AT\tPROGRESS RATIO"}
+			res = append(res, fmt.Sprintf("%s\t%s\t%s\t%f", scan.GetId(), scan.GetStatus(), scan.GetCreatedAt(), scan.GetProgressRatio()))
+			return res
+		})
+		return nil
 	},
 }
 

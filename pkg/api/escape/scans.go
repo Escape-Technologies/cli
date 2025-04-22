@@ -102,3 +102,15 @@ func DownloadScanExchangesZip(ctx context.Context, scanID string, outPath string
 	}
 	return nil
 }
+
+func GetScan(ctx context.Context, scanID string) (*v2.ListScans200ResponseDataInner, error) {
+	client, err := newAPIV2Client()
+	if err != nil {
+		return nil, fmt.Errorf("unable to init client: %w", err)
+	}
+	data, _, err := client.ScansAPI.GetScan(ctx, scanID).Execute()
+	if err != nil {
+		return nil, fmt.Errorf("unable to get scan: %w", err)
+	}
+	return data, nil
+}
