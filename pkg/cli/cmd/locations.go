@@ -50,7 +50,7 @@ var locationsStartCmd = &cobra.Command{
 	Short: "Start a location",
 	Args:  cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		if rootCmdVerbose > 0 {
+		if rootCmdVerbose == 0 {
 			out.SetupTerminalLog()
 			defer out.StopTerminalLog()
 		}
