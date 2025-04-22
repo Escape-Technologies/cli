@@ -25,18 +25,17 @@ var integrationsListCmd = &cobra.Command{
 		}
 		out.Table(integrations, func() []string {
 			res := []string{"ID\tKIND\tNAME\tLOCATION ID"}
-			strPtr := ""
 			for _, integration := range integrations {
-				if integration.Id == nil {
-					integration.Id = &strPtr
-				}
-				if integration.Name == nil {
-					integration.Name = &strPtr
-				}
-				if integration.LocationId == nil {
-					integration.LocationId = &strPtr
-				}
-				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s", *integration.Id, integration.Kind, *integration.Name, *integration.LocationId))
+				res = append(
+					res,
+					fmt.Sprintf(
+						"%s\t%s\t%s\t%s",
+						integration.GetId(),
+						integration.GetKind(),
+						integration.GetName(),
+						integration.GetLocationId(),
+					),
+				)
 			}
 			return res
 		})
