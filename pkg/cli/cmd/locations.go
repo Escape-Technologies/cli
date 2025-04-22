@@ -26,18 +26,16 @@ var locationsListCmd = &cobra.Command{
 		}
 		out.Table(locations, func() []string {
 			res := []string{"ID\tNAME\tSSH PUBLIC KEY"}
-			strPtr := ""
 			for _, location := range locations {
-				if location.Id == nil {
-					location.Id = &strPtr
-				}
-				if location.Name == nil {
-					location.Name = &strPtr
-				}
-				if location.SshPublicKey == nil {
-					location.SshPublicKey = &strPtr
-				}
-				res = append(res, fmt.Sprintf("%s\t%s\t%s", *location.Id, *location.Name, *location.SshPublicKey))
+				res = append(
+					res,
+					fmt.Sprintf(
+						"%s\t%s\t%s",
+						location.GetId(),
+						location.GetName(),
+						location.GetSshPublicKey(),
+					),
+				)
 			}
 			return res
 		})
