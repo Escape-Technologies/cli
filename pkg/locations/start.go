@@ -8,7 +8,6 @@ import (
 	"time"
 
 	"github.com/Escape-Technologies/cli/pkg/api/escape"
-	"github.com/Escape-Technologies/cli/pkg/cli/out"
 	"github.com/Escape-Technologies/cli/pkg/locations/health"
 	"github.com/Escape-Technologies/cli/pkg/locations/private"
 	"github.com/Escape-Technologies/cli/pkg/locations/private/kube"
@@ -22,8 +21,6 @@ const (
 
 // Start the private location
 func Start(ctx context.Context, name string) error {
-	out.SetupTerminalLog()
-	defer out.StopTerminalLog()
 	healthy := &atomic.Bool{}
 	healthy.Store(false)
 	go health.Start(ctx, healthy)
