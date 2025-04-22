@@ -14,9 +14,9 @@ func TestParseJSONOrYAMLIntegration(t *testing.T) {
 
 	for _, test := range tests {
 		t.Run(test, func(t *testing.T) {
-			_, err := parseJSONOrYAML([]byte(test), &v2.UpdateIntegrationRequest{})
+			_, err := ParseJSONOrYAML([]byte(test), &v2.UpdateIntegrationRequest{})
 			if err != nil {
-				t.Errorf("parseJSONOrYAML(%s) = %s", test, err.Error())
+				t.Errorf("ParseJSONOrYAML(%s) = %s", test, err.Error())
 			}
 		})
 	}

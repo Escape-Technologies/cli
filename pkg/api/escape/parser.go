@@ -11,7 +11,7 @@ type parsable interface {
 	UnmarshalJSON(data []byte) (err error)
 }
 
-func parseJSONOrYAML[T parsable](body []byte, v T) (T, error) {
+func ParseJSONOrYAML[T parsable](body []byte, v T) (T, error) {
 	finalBody, err := yamlToJSON(body)
 	if err != nil {
 		finalBody = body
