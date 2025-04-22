@@ -23,7 +23,10 @@ type UpdateLocationRequest struct {
 	Name *string `json:"name,omitempty"`
 	// The SSH public key to use to connect to the location.
 	SshPublicKey *string `json:"sshPublicKey,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UpdateLocationRequest UpdateLocationRequest
 
 // NewUpdateLocationRequest instantiates a new UpdateLocationRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o UpdateLocationRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SshPublicKey) {
 		toSerialize["sshPublicKey"] = o.SshPublicKey
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UpdateLocationRequest) UnmarshalJSON(data []byte) (err error) {
+	varUpdateLocationRequest := _UpdateLocationRequest{}
+
+	err = json.Unmarshal(data, &varUpdateLocationRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UpdateLocationRequest(varUpdateLocationRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "sshPublicKey")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUpdateLocationRequest struct {

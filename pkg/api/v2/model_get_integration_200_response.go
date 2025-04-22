@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -28,6 +27,7 @@ type GetIntegration200Response struct {
 	Name *string `json:"name,omitempty"`
 	// A location ID to use with this integration.
 	LocationId *string `json:"locationId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetIntegration200Response GetIntegration200Response
@@ -202,6 +202,11 @@ func (o GetIntegration200Response) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.LocationId) {
 		toSerialize["locationId"] = o.LocationId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -229,15 +234,23 @@ func (o *GetIntegration200Response) UnmarshalJSON(data []byte) (err error) {
 
 	varGetIntegration200Response := _GetIntegration200Response{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGetIntegration200Response)
+	err = json.Unmarshal(data, &varGetIntegration200Response)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GetIntegration200Response(varGetIntegration200Response)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "data")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "locationId")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -28,6 +27,7 @@ type ListIntegrations200ResponseInner struct {
 	// A location ID to use with this integration.
 	LocationId *string `json:"locationId,omitempty"`
 	Kind Enum777e439dc57940d3df1f77b9e31ced05 `json:"kind"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ListIntegrations200ResponseInner ListIntegrations200ResponseInner
@@ -202,6 +202,11 @@ func (o ListIntegrations200ResponseInner) ToMap() (map[string]interface{}, error
 		toSerialize["locationId"] = o.LocationId
 	}
 	toSerialize["kind"] = o.Kind
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -229,15 +234,23 @@ func (o *ListIntegrations200ResponseInner) UnmarshalJSON(data []byte) (err error
 
 	varListIntegrations200ResponseInner := _ListIntegrations200ResponseInner{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varListIntegrations200ResponseInner)
+	err = json.Unmarshal(data, &varListIntegrations200ResponseInner)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ListIntegrations200ResponseInner(varListIntegrations200ResponseInner)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "locationId")
+		delete(additionalProperties, "kind")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &GetIntegration200ResponseDataOneOf13{}
 type GetIntegration200ResponseDataOneOf13 struct {
 	Kind EnumKONGGATEWAY `json:"kind"`
 	Parameters GetIntegration200ResponseDataOneOf13Parameters `json:"parameters"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetIntegration200ResponseDataOneOf13 GetIntegration200ResponseDataOneOf13
@@ -106,6 +106,11 @@ func (o GetIntegration200ResponseDataOneOf13) ToMap() (map[string]interface{}, e
 	toSerialize := map[string]interface{}{}
 	toSerialize["kind"] = o.Kind
 	toSerialize["parameters"] = o.Parameters
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -134,15 +139,21 @@ func (o *GetIntegration200ResponseDataOneOf13) UnmarshalJSON(data []byte) (err e
 
 	varGetIntegration200ResponseDataOneOf13 := _GetIntegration200ResponseDataOneOf13{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGetIntegration200ResponseDataOneOf13)
+	err = json.Unmarshal(data, &varGetIntegration200ResponseDataOneOf13)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GetIntegration200ResponseDataOneOf13(varGetIntegration200ResponseDataOneOf13)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "kind")
+		delete(additionalProperties, "parameters")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

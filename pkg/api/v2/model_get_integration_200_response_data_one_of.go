@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &GetIntegration200ResponseDataOneOf{}
 type GetIntegration200ResponseDataOneOf struct {
 	Kind EnumAKAMAI `json:"kind"`
 	Parameters GetIntegration200ResponseDataOneOfParameters `json:"parameters"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetIntegration200ResponseDataOneOf GetIntegration200ResponseDataOneOf
@@ -106,6 +106,11 @@ func (o GetIntegration200ResponseDataOneOf) ToMap() (map[string]interface{}, err
 	toSerialize := map[string]interface{}{}
 	toSerialize["kind"] = o.Kind
 	toSerialize["parameters"] = o.Parameters
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -134,15 +139,21 @@ func (o *GetIntegration200ResponseDataOneOf) UnmarshalJSON(data []byte) (err err
 
 	varGetIntegration200ResponseDataOneOf := _GetIntegration200ResponseDataOneOf{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGetIntegration200ResponseDataOneOf)
+	err = json.Unmarshal(data, &varGetIntegration200ResponseDataOneOf)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GetIntegration200ResponseDataOneOf(varGetIntegration200ResponseDataOneOf)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "kind")
+		delete(additionalProperties, "parameters")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

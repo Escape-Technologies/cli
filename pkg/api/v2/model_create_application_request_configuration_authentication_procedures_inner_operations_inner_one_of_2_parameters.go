@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperation
 	AutoExtractionUrls []string `json:"auto_extraction_urls,omitempty"`
 	LoggedInDetectorText *string `json:"logged_in_detector_text,omitempty"`
 	LoggedInDetectorTimeout *float32 `json:"logged_in_detector_timeout,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf2Parameters CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf2Parameters
@@ -223,6 +223,11 @@ func (o CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperat
 	if !IsNil(o.LoggedInDetectorTimeout) {
 		toSerialize["logged_in_detector_timeout"] = o.LoggedInDetectorTimeout
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -250,15 +255,24 @@ func (o *CreateApplicationRequestConfigurationAuthenticationProceduresInnerOpera
 
 	varCreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf2Parameters := _CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf2Parameters{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf2Parameters)
+	err = json.Unmarshal(data, &varCreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf2Parameters)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf2Parameters(varCreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf2Parameters)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "proxy")
+		delete(additionalProperties, "login_url")
+		delete(additionalProperties, "auto_extraction_urls")
+		delete(additionalProperties, "logged_in_detector_text")
+		delete(additionalProperties, "logged_in_detector_timeout")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

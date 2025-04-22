@@ -21,7 +21,10 @@ var _ MappedNullable = &GetIntegration200ResponseDataOneOf15ParametersTags{}
 type GetIntegration200ResponseDataOneOf15ParametersTags struct {
 	Labels []string `json:"labels,omitempty"`
 	Namespaces *bool `json:"namespaces,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetIntegration200ResponseDataOneOf15ParametersTags GetIntegration200ResponseDataOneOf15ParametersTags
 
 // NewGetIntegration200ResponseDataOneOf15ParametersTags instantiates a new GetIntegration200ResponseDataOneOf15ParametersTags object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +123,34 @@ func (o GetIntegration200ResponseDataOneOf15ParametersTags) ToMap() (map[string]
 	if !IsNil(o.Namespaces) {
 		toSerialize["namespaces"] = o.Namespaces
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetIntegration200ResponseDataOneOf15ParametersTags) UnmarshalJSON(data []byte) (err error) {
+	varGetIntegration200ResponseDataOneOf15ParametersTags := _GetIntegration200ResponseDataOneOf15ParametersTags{}
+
+	err = json.Unmarshal(data, &varGetIntegration200ResponseDataOneOf15ParametersTags)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetIntegration200ResponseDataOneOf15ParametersTags(varGetIntegration200ResponseDataOneOf15ParametersTags)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "labels")
+		delete(additionalProperties, "namespaces")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetIntegration200ResponseDataOneOf15ParametersTags struct {

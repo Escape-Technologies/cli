@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type CreateApplicationRequestConfigurationAuthenticationProceduresInnerInjection
 	Key string `json:"key"`
 	Prefix *string `json:"prefix,omitempty"`
 	Variable string `json:"variable"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateApplicationRequestConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner CreateApplicationRequestConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner
@@ -169,6 +169,11 @@ func (o CreateApplicationRequestConfigurationAuthenticationProceduresInnerInject
 		toSerialize["prefix"] = o.Prefix
 	}
 	toSerialize["variable"] = o.Variable
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -198,15 +203,23 @@ func (o *CreateApplicationRequestConfigurationAuthenticationProceduresInnerInjec
 
 	varCreateApplicationRequestConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner := _CreateApplicationRequestConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateApplicationRequestConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner)
+	err = json.Unmarshal(data, &varCreateApplicationRequestConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateApplicationRequestConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner(varCreateApplicationRequestConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "key")
+		delete(additionalProperties, "prefix")
+		delete(additionalProperties, "variable")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

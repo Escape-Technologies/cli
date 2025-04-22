@@ -13,7 +13,6 @@ package v2
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type ListScans200ResponseDataInner struct {
 	Status EnumE48dd51fe8a350a4154904abf16320d7 `json:"status"`
 	CreatedAt time.Time `json:"createdAt"`
 	ProgressRatio float32 `json:"progressRatio"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ListScans200ResponseDataInner ListScans200ResponseDataInner
@@ -161,6 +161,11 @@ func (o ListScans200ResponseDataInner) ToMap() (map[string]interface{}, error) {
 	toSerialize["status"] = o.Status
 	toSerialize["createdAt"] = o.CreatedAt
 	toSerialize["progressRatio"] = o.ProgressRatio
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -191,15 +196,23 @@ func (o *ListScans200ResponseDataInner) UnmarshalJSON(data []byte) (err error) {
 
 	varListScans200ResponseDataInner := _ListScans200ResponseDataInner{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varListScans200ResponseDataInner)
+	err = json.Unmarshal(data, &varListScans200ResponseDataInner)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ListScans200ResponseDataInner(varListScans200ResponseDataInner)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "createdAt")
+		delete(additionalProperties, "progressRatio")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

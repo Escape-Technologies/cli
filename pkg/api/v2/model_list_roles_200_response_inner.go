@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -34,6 +33,7 @@ type ListRoles200ResponseInner struct {
 	WorkflowsAccessLevel Enum041c163680d484c3944c5d3c68a9635b `json:"workflowsAccessLevel"`
 	// The users associated with the role.
 	RoleUsers []ListRoles200ResponseInnerRoleUsersInner `json:"roleUsers"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ListRoles200ResponseInner ListRoles200ResponseInner
@@ -273,6 +273,11 @@ func (o ListRoles200ResponseInner) ToMap() (map[string]interface{}, error) {
 	toSerialize["integrationAdministrator"] = o.IntegrationAdministrator
 	toSerialize["workflowsAccessLevel"] = o.WorkflowsAccessLevel
 	toSerialize["roleUsers"] = o.RoleUsers
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -307,15 +312,27 @@ func (o *ListRoles200ResponseInner) UnmarshalJSON(data []byte) (err error) {
 
 	varListRoles200ResponseInner := _ListRoles200ResponseInner{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varListRoles200ResponseInner)
+	err = json.Unmarshal(data, &varListRoles200ResponseInner)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ListRoles200ResponseInner(varListRoles200ResponseInner)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "applicationAccessLevel")
+		delete(additionalProperties, "reportingAdministrator")
+		delete(additionalProperties, "inventoryAccessLevel")
+		delete(additionalProperties, "integrationAdministrator")
+		delete(additionalProperties, "workflowsAccessLevel")
+		delete(additionalProperties, "roleUsers")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

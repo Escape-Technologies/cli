@@ -23,7 +23,10 @@ type UpdateApplicationRequest struct {
 	Name *string `json:"name,omitempty"`
 	LocationId *string `json:"locationId,omitempty"`
 	Cron *string `json:"cron,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UpdateApplicationRequest UpdateApplicationRequest
 
 // NewUpdateApplicationRequest instantiates a new UpdateApplicationRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -157,7 +160,35 @@ func (o UpdateApplicationRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Cron) {
 		toSerialize["cron"] = o.Cron
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UpdateApplicationRequest) UnmarshalJSON(data []byte) (err error) {
+	varUpdateApplicationRequest := _UpdateApplicationRequest{}
+
+	err = json.Unmarshal(data, &varUpdateApplicationRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UpdateApplicationRequest(varUpdateApplicationRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "locationId")
+		delete(additionalProperties, "cron")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUpdateApplicationRequest struct {

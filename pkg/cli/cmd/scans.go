@@ -1,8 +1,10 @@
 package cmd
 
 import (
+	"context"
 	"fmt"
 	"os"
+	"time"
 
 	"github.com/Escape-Technologies/cli/pkg/api/escape"
 	v2 "github.com/Escape-Technologies/cli/pkg/api/v2"
@@ -29,7 +31,7 @@ var scansListCmd = &cobra.Command{
 			return fmt.Errorf("unable to list scans: %w", err)
 		}
 		out.Table(scans, func() []string {
-			res := []string{"ID\tSTATUS\tCREATED AT\tPROGRESS RATIO"}
+			res := []string{"ID\tSTATUS\tCREATED AT\tPROGRESS"}
 			for _, scan := range scans {
 				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%f", scan.GetId(), scan.GetStatus(), scan.GetCreatedAt(), scan.GetProgressRatio()))
 			}
@@ -158,10 +160,49 @@ escape-cli scans start 00000000-0000-0000-0000-000000000000 --override '{"scan":
 		}
 		out.Print(scan, "Scan started: "+scan.GetId())
 		if scanStartCmdWatch {
-			scanWatchCmd.Run(cmd, []string{scan.GetId()})
+			err := watchScan(cmd.Context(), scan.GetId())
+			if err != nil {
+				return fmt.Errorf("unable to watch scan: %w", err)
+			}
 		}
 		return nil
 	},
+}
+
+func watchScan(ctx context.Context, scanID string) error {
+	ch, err := escape.WatchScan(ctx, scanID)
+	if err != nil {
+		return fmt.Errorf("unable to watch scan: %w", err)
+	}
+	firstEvent := <-ch
+	out.Table(firstEvent, func() []string {
+		return []string{
+			"STATUS\tPROGRESS\tCREATED AT\tLEVEL\tTITLE\tDESCRIPTION",
+			fmt.Sprintf("%s\t%f\t%s\t%s\t%s\t%s",
+				firstEvent.Status,
+				firstEvent.ProgressRatio,
+				firstEvent.CreatedAt.Format(time.RFC3339),
+				firstEvent.Level,
+				firstEvent.Title,
+				firstEvent.Description,
+			),
+		}
+	})
+	for event := range ch {
+		out.Table(event, func() []string {
+			return []string{
+				fmt.Sprintf("%s\t%f\t%s\t%s\t%s\t%s",
+					event.Status,
+					event.ProgressRatio,
+					event.CreatedAt.Format(time.RFC3339),
+					event.Level,
+					event.Title,
+					event.Description,
+				),
+			}
+		})
+	}
+	return nil
 }
 
 var scanWatchCmd = &cobra.Command{
@@ -169,8 +210,8 @@ var scanWatchCmd = &cobra.Command{
 	Example: `escape-cli scans watch 00000000-0000-0000-0000-000000000000`,
 	Args:    cobra.ExactArgs(1),
 	Short:   "Bind the current terminal to a scan, listen for events and print them to the terminal. Exit when the scan is done.",
-	Run: func(_ *cobra.Command, _ []string) {
-		log.Error("Scan watch not implemented")
+	RunE: func(cmd *cobra.Command, args []string) error {
+		return watchScan(cmd.Context(), args[0])
 	},
 }
 
@@ -185,7 +226,7 @@ var scanGetCmd = &cobra.Command{
 			return fmt.Errorf("unable to get scan: %w", err)
 		}
 		out.Table(scan, func() []string {
-			res := []string{"ID\tSTATUS\tCREATED AT\tPROGRESS RATIO"}
+			res := []string{"ID\tSTATUS\tCREATED AT\tPROGRESS"}
 			res = append(res, fmt.Sprintf("%s\t%s\t%s\t%f", scan.GetId(), scan.GetStatus(), scan.GetCreatedAt(), scan.GetProgressRatio()))
 			return res
 		})

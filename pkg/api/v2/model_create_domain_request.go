@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &CreateDomainRequest{}
 type CreateDomainRequest struct {
 	// The domain name to add.
 	Domain string `json:"domain"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateDomainRequest CreateDomainRequest
@@ -80,6 +80,11 @@ func (o CreateDomainRequest) MarshalJSON() ([]byte, error) {
 func (o CreateDomainRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["domain"] = o.Domain
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *CreateDomainRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varCreateDomainRequest := _CreateDomainRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateDomainRequest)
+	err = json.Unmarshal(data, &varCreateDomainRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateDomainRequest(varCreateDomainRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "domain")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

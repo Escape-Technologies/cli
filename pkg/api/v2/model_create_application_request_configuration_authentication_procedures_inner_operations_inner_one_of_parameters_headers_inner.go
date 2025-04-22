@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &CreateApplicationRequestConfigurationAuthenticationProce
 type CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner struct {
 	Name string `json:"name"`
 	Values []string `json:"values"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner
@@ -106,6 +106,11 @@ func (o CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperat
 	toSerialize := map[string]interface{}{}
 	toSerialize["name"] = o.Name
 	toSerialize["values"] = o.Values
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -134,15 +139,21 @@ func (o *CreateApplicationRequestConfigurationAuthenticationProceduresInnerOpera
 
 	varCreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner := _CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner)
+	err = json.Unmarshal(data, &varCreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner(varCreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "values")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

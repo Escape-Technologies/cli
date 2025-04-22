@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type CreateLocationRequest struct {
 	Name string `json:"name"`
 	// The SSH public key to use to connect to the location.
 	SshPublicKey string `json:"sshPublicKey"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateLocationRequest CreateLocationRequest
@@ -108,6 +108,11 @@ func (o CreateLocationRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["name"] = o.Name
 	toSerialize["sshPublicKey"] = o.SshPublicKey
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *CreateLocationRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varCreateLocationRequest := _CreateLocationRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateLocationRequest)
+	err = json.Unmarshal(data, &varCreateLocationRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateLocationRequest(varCreateLocationRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "sshPublicKey")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

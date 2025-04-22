@@ -21,7 +21,10 @@ var _ MappedNullable = &CreateApplicationRequestConfigurationScanBlocklistRoutes
 type CreateApplicationRequestConfigurationScanBlocklistRoutesInner struct {
 	Method *string `json:"method,omitempty"`
 	Path *string `json:"path,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateApplicationRequestConfigurationScanBlocklistRoutesInner CreateApplicationRequestConfigurationScanBlocklistRoutesInner
 
 // NewCreateApplicationRequestConfigurationScanBlocklistRoutesInner instantiates a new CreateApplicationRequestConfigurationScanBlocklistRoutesInner object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +123,34 @@ func (o CreateApplicationRequestConfigurationScanBlocklistRoutesInner) ToMap() (
 	if !IsNil(o.Path) {
 		toSerialize["path"] = o.Path
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateApplicationRequestConfigurationScanBlocklistRoutesInner) UnmarshalJSON(data []byte) (err error) {
+	varCreateApplicationRequestConfigurationScanBlocklistRoutesInner := _CreateApplicationRequestConfigurationScanBlocklistRoutesInner{}
+
+	err = json.Unmarshal(data, &varCreateApplicationRequestConfigurationScanBlocklistRoutesInner)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateApplicationRequestConfigurationScanBlocklistRoutesInner(varCreateApplicationRequestConfigurationScanBlocklistRoutesInner)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "method")
+		delete(additionalProperties, "path")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateApplicationRequestConfigurationScanBlocklistRoutesInner struct {

@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -28,6 +27,7 @@ type CreateApplicationRequestConfigurationCustomRulesInnerAlert struct {
 	Description *string `json:"description,omitempty"`
 	Remediation *string `json:"remediation,omitempty"`
 	Compliance *CreateApplicationRequestConfigurationCustomRulesInnerAlertCompliance `json:"compliance,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateApplicationRequestConfigurationCustomRulesInnerAlert CreateApplicationRequestConfigurationCustomRulesInnerAlert
@@ -268,6 +268,11 @@ func (o CreateApplicationRequestConfigurationCustomRulesInnerAlert) ToMap() (map
 	if !IsNil(o.Compliance) {
 		toSerialize["compliance"] = o.Compliance
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -298,15 +303,26 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerAlert) UnmarshalJS
 
 	varCreateApplicationRequestConfigurationCustomRulesInnerAlert := _CreateApplicationRequestConfigurationCustomRulesInnerAlert{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateApplicationRequestConfigurationCustomRulesInnerAlert)
+	err = json.Unmarshal(data, &varCreateApplicationRequestConfigurationCustomRulesInnerAlert)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateApplicationRequestConfigurationCustomRulesInnerAlert(varCreateApplicationRequestConfigurationCustomRulesInnerAlert)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "severity")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "context")
+		delete(additionalProperties, "category")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "remediation")
+		delete(additionalProperties, "compliance")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

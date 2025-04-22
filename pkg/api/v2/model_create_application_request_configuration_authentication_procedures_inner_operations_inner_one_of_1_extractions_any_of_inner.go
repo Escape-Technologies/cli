@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperation
 	Name string `json:"name"`
 	Regex *string `json:"regex,omitempty"`
 	Jq *string `json:"jq,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner
@@ -232,6 +232,11 @@ func (o CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperat
 	if !IsNil(o.Jq) {
 		toSerialize["jq"] = o.Jq
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -262,15 +267,25 @@ func (o *CreateApplicationRequestConfigurationAuthenticationProceduresInnerOpera
 
 	varCreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner := _CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner)
+	err = json.Unmarshal(data, &varCreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner(varCreateApplicationRequestConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "origin")
+		delete(additionalProperties, "key")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "regex")
+		delete(additionalProperties, "jq")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

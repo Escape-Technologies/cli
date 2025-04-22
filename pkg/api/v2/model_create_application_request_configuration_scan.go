@@ -37,7 +37,10 @@ type CreateApplicationRequestConfigurationScan struct {
 	FrontendUserAgent *string `json:"frontend_user_agent,omitempty"`
 	FrontendUsePersistence *bool `json:"frontend_use_persistence,omitempty"`
 	FrontendEscapeUserHeader *bool `json:"frontend_escape_user_header,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateApplicationRequestConfigurationScan CreateApplicationRequestConfigurationScan
 
 // NewCreateApplicationRequestConfigurationScan instantiates a new CreateApplicationRequestConfigurationScan object
 // This constructor will assign default values to properties that have it defined,
@@ -696,7 +699,50 @@ func (o CreateApplicationRequestConfigurationScan) ToMap() (map[string]interface
 	if !IsNil(o.FrontendEscapeUserHeader) {
 		toSerialize["frontend_escape_user_header"] = o.FrontendEscapeUserHeader
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateApplicationRequestConfigurationScan) UnmarshalJSON(data []byte) (err error) {
+	varCreateApplicationRequestConfigurationScan := _CreateApplicationRequestConfigurationScan{}
+
+	err = json.Unmarshal(data, &varCreateApplicationRequestConfigurationScan)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateApplicationRequestConfigurationScan(varCreateApplicationRequestConfigurationScan)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "profile")
+		delete(additionalProperties, "read_only")
+		delete(additionalProperties, "hotstart")
+		delete(additionalProperties, "blocklist")
+		delete(additionalProperties, "scalars")
+		delete(additionalProperties, "api_type")
+		delete(additionalProperties, "null_is_unauthenticated")
+		delete(additionalProperties, "hotstart_only")
+		delete(additionalProperties, "force_full_scan")
+		delete(additionalProperties, "frontend_in_scope_domains")
+		delete(additionalProperties, "max_duration")
+		delete(additionalProperties, "frontend_crawling_only")
+		delete(additionalProperties, "frontend_integrated_authentication")
+		delete(additionalProperties, "frontend_single_page_worker")
+		delete(additionalProperties, "frontend_parallel_workers")
+		delete(additionalProperties, "frontend_user_agent")
+		delete(additionalProperties, "frontend_use_persistence")
+		delete(additionalProperties, "frontend_escape_user_header")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateApplicationRequestConfigurationScan struct {

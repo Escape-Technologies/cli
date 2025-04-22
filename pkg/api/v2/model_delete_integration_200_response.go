@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &DeleteIntegration200Response{}
 // DeleteIntegration200Response struct for DeleteIntegration200Response
 type DeleteIntegration200Response struct {
 	Message EnumINTEGRATIONDELETEDSUCCESSFULLY `json:"message"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _DeleteIntegration200Response DeleteIntegration200Response
@@ -79,6 +79,11 @@ func (o DeleteIntegration200Response) MarshalJSON() ([]byte, error) {
 func (o DeleteIntegration200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["message"] = o.Message
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -106,15 +111,20 @@ func (o *DeleteIntegration200Response) UnmarshalJSON(data []byte) (err error) {
 
 	varDeleteIntegration200Response := _DeleteIntegration200Response{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varDeleteIntegration200Response)
+	err = json.Unmarshal(data, &varDeleteIntegration200Response)
 
 	if err != nil {
 		return err
 	}
 
 	*o = DeleteIntegration200Response(varDeleteIntegration200Response)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "message")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

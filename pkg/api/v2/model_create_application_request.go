@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -30,6 +29,7 @@ type CreateApplicationRequest struct {
 	Name string `json:"name"`
 	LocationId string `json:"locationId"`
 	Cron string `json:"cron"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateApplicationRequest CreateApplicationRequest
@@ -252,6 +252,11 @@ func (o CreateApplicationRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize["name"] = o.Name
 	toSerialize["locationId"] = o.LocationId
 	toSerialize["cron"] = o.Cron
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -284,15 +289,26 @@ func (o *CreateApplicationRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varCreateApplicationRequest := _CreateApplicationRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateApplicationRequest)
+	err = json.Unmarshal(data, &varCreateApplicationRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateApplicationRequest(varCreateApplicationRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "url")
+		delete(additionalProperties, "schema")
+		delete(additionalProperties, "configuration")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "locationId")
+		delete(additionalProperties, "cron")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

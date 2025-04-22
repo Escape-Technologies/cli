@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &ListRoles200ResponseInnerRoleUsersInner{}
 // ListRoles200ResponseInnerRoleUsersInner struct for ListRoles200ResponseInnerRoleUsersInner
 type ListRoles200ResponseInnerRoleUsersInner struct {
 	User ListRoles200ResponseInnerRoleUsersInnerUser `json:"user"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ListRoles200ResponseInnerRoleUsersInner ListRoles200ResponseInnerRoleUsersInner
@@ -79,6 +79,11 @@ func (o ListRoles200ResponseInnerRoleUsersInner) MarshalJSON() ([]byte, error) {
 func (o ListRoles200ResponseInnerRoleUsersInner) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["user"] = o.User
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -106,15 +111,20 @@ func (o *ListRoles200ResponseInnerRoleUsersInner) UnmarshalJSON(data []byte) (er
 
 	varListRoles200ResponseInnerRoleUsersInner := _ListRoles200ResponseInnerRoleUsersInner{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varListRoles200ResponseInnerRoleUsersInner)
+	err = json.Unmarshal(data, &varListRoles200ResponseInnerRoleUsersInner)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ListRoles200ResponseInnerRoleUsersInner(varListRoles200ResponseInnerRoleUsersInner)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "user")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf10Users
 	Cookies map[string]string `json:"cookies,omitempty"`
 	Password string `json:"password"`
 	AdditionalFields []CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf10UsersInnerAdditionalFieldsInner `json:"additional_fields,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf10UsersInner CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf10UsersInner
@@ -214,6 +214,11 @@ func (o CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf10Us
 	if !IsNil(o.AdditionalFields) {
 		toSerialize["additional_fields"] = o.AdditionalFields
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -242,15 +247,24 @@ func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf10U
 
 	varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf10UsersInner := _CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf10UsersInner{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf10UsersInner)
+	err = json.Unmarshal(data, &varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf10UsersInner)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf10UsersInner(varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf10UsersInner)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "username")
+		delete(additionalProperties, "headers")
+		delete(additionalProperties, "cookies")
+		delete(additionalProperties, "password")
+		delete(additionalProperties, "additional_fields")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

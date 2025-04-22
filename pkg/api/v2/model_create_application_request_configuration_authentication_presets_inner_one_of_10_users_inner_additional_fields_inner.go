@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf10Users
 	Locator string `json:"locator"`
 	Value string `json:"value"`
 	AutoSubmit *bool `json:"auto_submit,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf10UsersInnerAdditionalFieldsInner CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf10UsersInnerAdditionalFieldsInner
@@ -142,6 +142,11 @@ func (o CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf10Us
 	if !IsNil(o.AutoSubmit) {
 		toSerialize["auto_submit"] = o.AutoSubmit
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -170,15 +175,22 @@ func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf10U
 
 	varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf10UsersInnerAdditionalFieldsInner := _CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf10UsersInnerAdditionalFieldsInner{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf10UsersInnerAdditionalFieldsInner)
+	err = json.Unmarshal(data, &varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf10UsersInnerAdditionalFieldsInner)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf10UsersInnerAdditionalFieldsInner(varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf10UsersInnerAdditionalFieldsInner)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "locator")
+		delete(additionalProperties, "value")
+		delete(additionalProperties, "auto_submit")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

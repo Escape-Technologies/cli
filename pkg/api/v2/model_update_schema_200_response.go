@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &UpdateSchema200Response{}
 // UpdateSchema200Response struct for UpdateSchema200Response
 type UpdateSchema200Response struct {
 	Message EnumSCHEMAUPDATED `json:"message"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpdateSchema200Response UpdateSchema200Response
@@ -79,6 +79,11 @@ func (o UpdateSchema200Response) MarshalJSON() ([]byte, error) {
 func (o UpdateSchema200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["message"] = o.Message
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -106,15 +111,20 @@ func (o *UpdateSchema200Response) UnmarshalJSON(data []byte) (err error) {
 
 	varUpdateSchema200Response := _UpdateSchema200Response{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUpdateSchema200Response)
+	err = json.Unmarshal(data, &varUpdateSchema200Response)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UpdateSchema200Response(varUpdateSchema200Response)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "message")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

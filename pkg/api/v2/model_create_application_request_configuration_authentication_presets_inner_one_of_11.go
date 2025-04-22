@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf11 stru
 	LoginUrl string `json:"login_url"`
 	LoggedInDetectorText *string `json:"logged_in_detector_text,omitempty"`
 	LoggedInDetectorTimeout *float32 `json:"logged_in_detector_timeout,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf11 CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf11
@@ -323,6 +323,11 @@ func (o CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf11) 
 	if !IsNil(o.LoggedInDetectorTimeout) {
 		toSerialize["logged_in_detector_timeout"] = o.LoggedInDetectorTimeout
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -352,15 +357,27 @@ func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf11)
 
 	varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf11 := _CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf11{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf11)
+	err = json.Unmarshal(data, &varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf11)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf11(varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf11)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "users")
+		delete(additionalProperties, "extractions")
+		delete(additionalProperties, "injections")
+		delete(additionalProperties, "auto_extraction_urls")
+		delete(additionalProperties, "login_url")
+		delete(additionalProperties, "logged_in_detector_text")
+		delete(additionalProperties, "logged_in_detector_timeout")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

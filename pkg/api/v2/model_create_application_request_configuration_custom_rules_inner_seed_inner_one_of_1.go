@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type CreateApplicationRequestConfigurationCustomRulesInnerSeedInnerOneOf1 struct
 	Protocol EnumHTTP `json:"protocol"`
 	Raw string `json:"raw"`
 	User *string `json:"user,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateApplicationRequestConfigurationCustomRulesInnerSeedInnerOneOf1 CreateApplicationRequestConfigurationCustomRulesInnerSeedInnerOneOf1
@@ -142,6 +142,11 @@ func (o CreateApplicationRequestConfigurationCustomRulesInnerSeedInnerOneOf1) To
 	if !IsNil(o.User) {
 		toSerialize["user"] = o.User
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -170,15 +175,22 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerSeedInnerOneOf1) U
 
 	varCreateApplicationRequestConfigurationCustomRulesInnerSeedInnerOneOf1 := _CreateApplicationRequestConfigurationCustomRulesInnerSeedInnerOneOf1{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateApplicationRequestConfigurationCustomRulesInnerSeedInnerOneOf1)
+	err = json.Unmarshal(data, &varCreateApplicationRequestConfigurationCustomRulesInnerSeedInnerOneOf1)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateApplicationRequestConfigurationCustomRulesInnerSeedInnerOneOf1(varCreateApplicationRequestConfigurationCustomRulesInnerSeedInnerOneOf1)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "protocol")
+		delete(additionalProperties, "raw")
+		delete(additionalProperties, "user")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

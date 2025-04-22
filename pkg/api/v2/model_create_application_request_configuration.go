@@ -27,7 +27,10 @@ type CreateApplicationRequestConfiguration struct {
 	Checks map[string]interface{} `json:"checks,omitempty"`
 	Url *string `json:"url,omitempty"`
 	UndefinedBlobStr *string `json:"undefined_blob_str,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateApplicationRequestConfiguration CreateApplicationRequestConfiguration
 
 // NewCreateApplicationRequestConfiguration instantiates a new CreateApplicationRequestConfiguration object
 // This constructor will assign default values to properties that have it defined,
@@ -336,7 +339,40 @@ func (o CreateApplicationRequestConfiguration) ToMap() (map[string]interface{}, 
 	if !IsNil(o.UndefinedBlobStr) {
 		toSerialize["undefined_blob_str"] = o.UndefinedBlobStr
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateApplicationRequestConfiguration) UnmarshalJSON(data []byte) (err error) {
+	varCreateApplicationRequestConfiguration := _CreateApplicationRequestConfiguration{}
+
+	err = json.Unmarshal(data, &varCreateApplicationRequestConfiguration)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateApplicationRequestConfiguration(varCreateApplicationRequestConfiguration)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "authentication")
+		delete(additionalProperties, "client")
+		delete(additionalProperties, "scan")
+		delete(additionalProperties, "internal")
+		delete(additionalProperties, "custom_rules")
+		delete(additionalProperties, "checks")
+		delete(additionalProperties, "url")
+		delete(additionalProperties, "undefined_blob_str")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateApplicationRequestConfiguration struct {

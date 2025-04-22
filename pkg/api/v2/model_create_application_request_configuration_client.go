@@ -26,7 +26,10 @@ type CreateApplicationRequestConfigurationClient struct {
 	DiscretMode *bool `json:"discret_mode,omitempty"`
 	MaxRequests *float32 `json:"max_requests,omitempty"`
 	ProxyId *string `json:"proxy_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateApplicationRequestConfigurationClient CreateApplicationRequestConfigurationClient
 
 // NewCreateApplicationRequestConfigurationClient instantiates a new CreateApplicationRequestConfigurationClient object
 // This constructor will assign default values to properties that have it defined,
@@ -300,7 +303,39 @@ func (o CreateApplicationRequestConfigurationClient) ToMap() (map[string]interfa
 	if !IsNil(o.ProxyId) {
 		toSerialize["proxy_id"] = o.ProxyId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateApplicationRequestConfigurationClient) UnmarshalJSON(data []byte) (err error) {
+	varCreateApplicationRequestConfigurationClient := _CreateApplicationRequestConfigurationClient{}
+
+	err = json.Unmarshal(data, &varCreateApplicationRequestConfigurationClient)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateApplicationRequestConfigurationClient(varCreateApplicationRequestConfigurationClient)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "request_timeout")
+		delete(additionalProperties, "requests_per_minute")
+		delete(additionalProperties, "x_tracing_header")
+		delete(additionalProperties, "user_agent")
+		delete(additionalProperties, "discret_mode")
+		delete(additionalProperties, "max_requests")
+		delete(additionalProperties, "proxy_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateApplicationRequestConfigurationClient struct {

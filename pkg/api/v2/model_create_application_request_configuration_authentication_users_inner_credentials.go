@@ -28,7 +28,10 @@ type CreateApplicationRequestConfigurationAuthenticationUsersInnerCredentials st
 	LocalStorage map[string]map[string]string `json:"local_storage,omitempty"`
 	SessionStorage map[string]map[string]string `json:"session_storage,omitempty"`
 	Actions []CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf11UsersInnerActionsInner `json:"actions,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateApplicationRequestConfigurationAuthenticationUsersInnerCredentials CreateApplicationRequestConfigurationAuthenticationUsersInnerCredentials
 
 // NewCreateApplicationRequestConfigurationAuthenticationUsersInnerCredentials instantiates a new CreateApplicationRequestConfigurationAuthenticationUsersInnerCredentials object
 // This constructor will assign default values to properties that have it defined,
@@ -373,7 +376,41 @@ func (o CreateApplicationRequestConfigurationAuthenticationUsersInnerCredentials
 	if !IsNil(o.Actions) {
 		toSerialize["actions"] = o.Actions
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateApplicationRequestConfigurationAuthenticationUsersInnerCredentials) UnmarshalJSON(data []byte) (err error) {
+	varCreateApplicationRequestConfigurationAuthenticationUsersInnerCredentials := _CreateApplicationRequestConfigurationAuthenticationUsersInnerCredentials{}
+
+	err = json.Unmarshal(data, &varCreateApplicationRequestConfigurationAuthenticationUsersInnerCredentials)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateApplicationRequestConfigurationAuthenticationUsersInnerCredentials(varCreateApplicationRequestConfigurationAuthenticationUsersInnerCredentials)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "username")
+		delete(additionalProperties, "password")
+		delete(additionalProperties, "headers")
+		delete(additionalProperties, "cookies")
+		delete(additionalProperties, "queryParameters")
+		delete(additionalProperties, "body")
+		delete(additionalProperties, "local_storage")
+		delete(additionalProperties, "session_storage")
+		delete(additionalProperties, "actions")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateApplicationRequestConfigurationAuthenticationUsersInnerCredentials struct {

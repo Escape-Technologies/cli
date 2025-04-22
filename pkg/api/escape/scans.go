@@ -103,6 +103,7 @@ func DownloadScanExchangesZip(ctx context.Context, scanID string, outPath string
 	return nil
 }
 
+// GetScan returns a scan by its ID
 func GetScan(ctx context.Context, scanID string) (*v2.ListScans200ResponseDataInner, error) {
 	client, err := newAPIV2Client()
 	if err != nil {

@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &CreateApplicationRequestConfigurationCustomRulesInnerTra
 type CreateApplicationRequestConfigurationCustomRulesInnerTransform struct {
 	Trigger []CreateApplicationRequestConfigurationCustomRulesInnerTransformTriggerInner `json:"trigger"`
 	Mutate []CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInner `json:"mutate"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateApplicationRequestConfigurationCustomRulesInnerTransform CreateApplicationRequestConfigurationCustomRulesInnerTransform
@@ -106,6 +106,11 @@ func (o CreateApplicationRequestConfigurationCustomRulesInnerTransform) ToMap() 
 	toSerialize := map[string]interface{}{}
 	toSerialize["trigger"] = o.Trigger
 	toSerialize["mutate"] = o.Mutate
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -134,15 +139,21 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransform) Unmarsh
 
 	varCreateApplicationRequestConfigurationCustomRulesInnerTransform := _CreateApplicationRequestConfigurationCustomRulesInnerTransform{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateApplicationRequestConfigurationCustomRulesInnerTransform)
+	err = json.Unmarshal(data, &varCreateApplicationRequestConfigurationCustomRulesInnerTransform)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateApplicationRequestConfigurationCustomRulesInnerTransform(varCreateApplicationRequestConfigurationCustomRulesInnerTransform)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "trigger")
+		delete(additionalProperties, "mutate")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &CreateApplicationRequestConfigurationAuthenticationUsers
 type CreateApplicationRequestConfigurationAuthenticationUsersInnerVariablesInner struct {
 	Name string `json:"name"`
 	Value string `json:"value"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateApplicationRequestConfigurationAuthenticationUsersInnerVariablesInner CreateApplicationRequestConfigurationAuthenticationUsersInnerVariablesInner
@@ -106,6 +106,11 @@ func (o CreateApplicationRequestConfigurationAuthenticationUsersInnerVariablesIn
 	toSerialize := map[string]interface{}{}
 	toSerialize["name"] = o.Name
 	toSerialize["value"] = o.Value
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -134,15 +139,21 @@ func (o *CreateApplicationRequestConfigurationAuthenticationUsersInnerVariablesI
 
 	varCreateApplicationRequestConfigurationAuthenticationUsersInnerVariablesInner := _CreateApplicationRequestConfigurationAuthenticationUsersInnerVariablesInner{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateApplicationRequestConfigurationAuthenticationUsersInnerVariablesInner)
+	err = json.Unmarshal(data, &varCreateApplicationRequestConfigurationAuthenticationUsersInnerVariablesInner)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateApplicationRequestConfigurationAuthenticationUsersInnerVariablesInner(varCreateApplicationRequestConfigurationAuthenticationUsersInnerVariablesInner)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf1 struc
 	Url string `json:"url"`
 	ClientId string `json:"client_id"`
 	ClientSecret string `json:"client_secret"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf1 CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf1
@@ -187,6 +187,11 @@ func (o CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf1) T
 	toSerialize["url"] = o.Url
 	toSerialize["client_id"] = o.ClientId
 	toSerialize["client_secret"] = o.ClientSecret
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -218,15 +223,24 @@ func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf1) 
 
 	varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf1 := _CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf1{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf1)
+	err = json.Unmarshal(data, &varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf1)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf1(varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOf1)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "users")
+		delete(additionalProperties, "url")
+		delete(additionalProperties, "client_id")
+		delete(additionalProperties, "client_secret")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

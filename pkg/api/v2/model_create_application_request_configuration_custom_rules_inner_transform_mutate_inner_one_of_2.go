@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOn
 	RegexReplace *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOfRegexReplace `json:"regex_replace,omitempty"`
 	Key EnumREQUESTUSER `json:"key"`
 	DropUser *bool `json:"drop_user,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf2 CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf2
@@ -223,6 +223,11 @@ func (o CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInne
 	if !IsNil(o.DropUser) {
 		toSerialize["drop_user"] = o.DropUser
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -250,15 +255,24 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInn
 
 	varCreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf2 := _CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf2{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf2)
+	err = json.Unmarshal(data, &varCreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf2)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf2(varCreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf2)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "value")
+		delete(additionalProperties, "values")
+		delete(additionalProperties, "regex_replace")
+		delete(additionalProperties, "key")
+		delete(additionalProperties, "drop_user")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

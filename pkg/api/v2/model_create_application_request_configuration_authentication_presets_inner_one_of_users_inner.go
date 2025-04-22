@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOfUsersIn
 	Password *string `json:"password,omitempty"`
 	QueryParameters map[string]string `json:"queryParameters,omitempty"`
 	Body interface{} `json:"body,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOfUsersInner CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOfUsersInner
@@ -260,6 +260,11 @@ func (o CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOfUser
 	if o.Body != nil {
 		toSerialize["body"] = o.Body
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -287,15 +292,25 @@ func (o *CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOfUse
 
 	varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOfUsersInner := _CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOfUsersInner{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOfUsersInner)
+	err = json.Unmarshal(data, &varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOfUsersInner)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOfUsersInner(varCreateApplicationRequestConfigurationAuthenticationPresetsInnerOneOfUsersInner)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "username")
+		delete(additionalProperties, "headers")
+		delete(additionalProperties, "cookies")
+		delete(additionalProperties, "password")
+		delete(additionalProperties, "queryParameters")
+		delete(additionalProperties, "body")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

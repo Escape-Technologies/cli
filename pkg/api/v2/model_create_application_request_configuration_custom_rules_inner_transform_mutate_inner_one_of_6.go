@@ -12,7 +12,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOn
 	Key EnumREQUESTOBJECT `json:"key"`
 	Select CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf6Select `json:"select"`
 	Mutate CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf6Mutate `json:"mutate"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf6 CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf6
@@ -133,6 +133,11 @@ func (o CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInne
 	toSerialize["key"] = o.Key
 	toSerialize["select"] = o.Select
 	toSerialize["mutate"] = o.Mutate
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -162,15 +167,22 @@ func (o *CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInn
 
 	varCreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf6 := _CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf6{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf6)
+	err = json.Unmarshal(data, &varCreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf6)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf6(varCreateApplicationRequestConfigurationCustomRulesInnerTransformMutateInnerOneOf6)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "key")
+		delete(additionalProperties, "select")
+		delete(additionalProperties, "mutate")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -13,7 +13,6 @@ package v2
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type ListEvents200ResponseDataInner struct {
 	Description string `json:"description"`
 	Level EnumAc8825c946764c840068c1a5eddeee84 `json:"level"`
 	Title string `json:"title"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ListEvents200ResponseDataInner ListEvents200ResponseDataInner
@@ -188,6 +188,11 @@ func (o ListEvents200ResponseDataInner) ToMap() (map[string]interface{}, error) 
 	toSerialize["description"] = o.Description
 	toSerialize["level"] = o.Level
 	toSerialize["title"] = o.Title
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -219,15 +224,24 @@ func (o *ListEvents200ResponseDataInner) UnmarshalJSON(data []byte) (err error) 
 
 	varListEvents200ResponseDataInner := _ListEvents200ResponseDataInner{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varListEvents200ResponseDataInner)
+	err = json.Unmarshal(data, &varListEvents200ResponseDataInner)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ListEvents200ResponseDataInner(varListEvents200ResponseDataInner)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "createdAt")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "level")
+		delete(additionalProperties, "title")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
