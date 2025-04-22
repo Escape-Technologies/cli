@@ -2,6 +2,7 @@ package monitor
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/Escape-Technologies/cli/pkg/log"
 	"golang.org/x/crypto/ssh"
@@ -10,14 +11,13 @@ import (
 func openEscapeChannel(ctx context.Context, client *ssh.Client) (ssh.Channel, error) {
 	ch, _, err := client.OpenChannel("escape", nil)
 	if err != nil {
-		log.Error("failed to open escape channel: %v", err)
-		return nil, err
+		return nil, fmt.Errorf("failed to open log channel: %w", err)
 	}
 	log.Trace("escape channel opened")
 
 	go func() {
 		<-ctx.Done()
-		ch.Close()
+		ch.Close() //nolint:errcheck
 	}()
 
 	return ch, nil
