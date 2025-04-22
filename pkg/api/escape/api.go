@@ -14,7 +14,7 @@ import (
 var Debug = false
 
 func newAPIV2Client() (*v2.APIClient, error) {
-	log.Debug("Initializing v2 client")
+	log.Trace("Initializing v2 client")
 	url, err := env.GetAPIURL()
 	if err != nil {
 		return nil, fmt.Errorf("failed to get API URL: %w", err)
