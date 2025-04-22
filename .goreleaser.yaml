@@ -20,7 +20,7 @@ builds:
     binary: "escape-cli"
     main: ./cmd/
     ldflags:
-      - -s -w -X github.com/Escape-Technologies/cli/pkg/version.Version={{.Version}} -X github.com/Escape-Technologies/cli/pkg/version.Commit={{.ShortCommit}} -X github.com/Escape-Technologies/cli/pkg/version.BuildDate={{.BuildDate}}
+      - -s -w -X github.com/Escape-Technologies/cli/pkg/version.Version={{.Version}} -X github.com/Escape-Technologies/cli/pkg/version.Commit={{.ShortCommit}} -X github.com/Escape-Technologies/cli/pkg/version.BuildDate={{.CommitDate}}
 
 kos:
   - repositories: [escapetech/cli]
