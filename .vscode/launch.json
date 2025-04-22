@@ -51,7 +51,8 @@
       "args": [
         "locations",
         "start",
-        "test"
+        "test",
+        "-vvvv"
       ]
     },
     {

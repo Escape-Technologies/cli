@@ -2,6 +2,7 @@ package escape
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"os"
 
@@ -66,7 +67,7 @@ func UpsertIntegrationFromFile(ctx context.Context, filePath string) error {
 	if err != nil {
 		return fmt.Errorf("unable to read file: %w", err)
 	}
-	integration, err := parseJSONOrYAML(body, &v2.UpdateIntegrationRequest{})
+	integration, err := ParseJSONOrYAML(body, &v2.UpdateIntegrationRequest{})
 	if err != nil {
 		return fmt.Errorf("unable to parse file: %w", err)
 	}
@@ -78,12 +79,13 @@ func createIntegration(ctx context.Context, name string, locationID *string, int
 	if err != nil {
 		return fmt.Errorf("unable to init client: %w", err)
 	}
+	if integration == nil {
+		return errors.New("integration should be provided")
+	}
 	req := v2.UpdateIntegrationRequest{
 		Name:       name,
 		LocationId: locationID,
-	}
-	if integration != nil {
-		req.Data = *integration
+		Data:       *integration,
 	}
 	_, _, err = client.IntegrationsAPI.CreateIntegration(ctx).UpdateIntegrationRequest(req).Execute()
 	if err != nil {
@@ -97,12 +99,13 @@ func updateIntegration(ctx context.Context, id string, name string, locationID *
 	if err != nil {
 		return fmt.Errorf("unable to init client: %w", err)
 	}
+	if integration == nil {
+		return errors.New("integration should be provided")
+	}
 	req := v2.UpdateIntegrationRequest{
 		Name:       name,
 		LocationId: locationID,
-	}
-	if integration != nil {
-		req.Data = *integration
+		Data:       *integration,
 	}
 	_, _, err = client.IntegrationsAPI.UpdateIntegration(ctx, id).UpdateIntegrationRequest(req).Execute()
 	if err != nil {

@@ -148,7 +148,7 @@ func readConfig(path string) (*v2.CreateApplicationRequestConfiguration, error) 
 	if err != nil {
 		return nil, fmt.Errorf("unable to read file: %w", err)
 	}
-	cfg, err := parseJSONOrYAML(body, &v2.NullableCreateApplicationRequestConfiguration{})
+	cfg, err := ParseJSONOrYAML(body, &v2.NullableCreateApplicationRequestConfiguration{})
 	if err != nil {
 		return nil, fmt.Errorf("unable to parse config: %w", err)
 	}
