@@ -8,6 +8,7 @@ import (
 	"github.com/Escape-Technologies/cli/pkg/api/escape"
 	"github.com/Escape-Technologies/cli/pkg/cli/out"
 	"github.com/Escape-Technologies/cli/pkg/log"
+	"github.com/Escape-Technologies/cli/pkg/version"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 )
@@ -32,6 +33,7 @@ var rootCmd = &cobra.Command{
 			escape.Debug = true
 		}
 		log.Info("Verbose mode: %d", rootCmdVerbose)
+		log.Info("escape-cli version: %s", version.GetVersion().String())
 		err := out.SetOutput(rootCmdOutputStr)
 		if err != nil {
 			return fmt.Errorf("failed to set output format: %w", err)
