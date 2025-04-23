@@ -77,7 +77,6 @@ func WatchScan(ctx context.Context, scanID string) (chan *ScanWatchResult, error
 			if shouldStop.Load() {
 				return
 			}
-			scanLock.Lock()
 			req := client.ScansAPI.ListEvents(ctx, scanID)
 			if after != nil {
 				req = req.After(*after)
@@ -101,6 +100,7 @@ func WatchScan(ctx context.Context, scanID string) (chan *ScanWatchResult, error
 				continue
 			}
 			for _, event := range filterEvents(data.Data, lastEventID) {
+				scanLock.Lock()
 				ch <- &ScanWatchResult{
 					Status:        scan.Status,
 					ProgressRatio: scan.ProgressRatio,
@@ -109,10 +109,10 @@ func WatchScan(ctx context.Context, scanID string) (chan *ScanWatchResult, error
 					Level:         event.Level,
 					Title:         event.Title,
 				}
+				scanLock.Unlock()
 				hasMore = true
 			}
 			lastEventID = data.Data[len(data.Data)-1].Id
-			scanLock.Unlock()
 		}
 	}()
 	return ch, nil

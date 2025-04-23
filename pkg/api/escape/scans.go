@@ -49,7 +49,6 @@ func StartScan(ctx context.Context, applicationID string,
 	commitAuthor *string,
 	commitAuthorProfilePictureLink *string,
 	configurationOverride *v2.CreateApplicationRequestConfiguration,
-
 ) (*v2.ListScans200ResponseDataInner, error) {
 	client, err := newAPIV2Client()
 	if err != nil {
