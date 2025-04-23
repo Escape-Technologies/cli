@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -euxo pipefail
+set -euo pipefail
 
 # Get the latest version from the GitHub releases page
 version="$(curl https://github.com/Escape-Technologies/cli/releases/latest -o /dev/null -v 2>&1 | grep '< location:' | awk -F'/v' '{ sub("\r$", ""); print $NF}')"
@@ -32,13 +32,14 @@ case "$(uname -m)" in
     ;;
 esac
 
+echo "Installing escape-cli v${version} for ${os} ${platform}..."
+
 tarball_name="cli_${version}_${os}_${platform}.tar.gz"
 
 # create a temporary directory
 tmpdir=$(mktemp -d)
 mkdir -p "${tmpdir}"
 cd "${tmpdir}"
-pwd
 trap 'rm -rf "${tmpdir}"' EXIT
 
 # download the tarball
@@ -50,4 +51,18 @@ tar -xzf "${tarball_name}"
 # install the binary
 install -m 755 escape-cli /usr/local/bin/escape-cli
 
-echo "Done !"
+cat <<EOF
+Done ! You can now use the escape-cli command.
+
+If /usr/local/bin/ is not in your PATH, you can add this in your ~/.zshrc or ~/.bashrc file:
+
+export PATH="/usr/local/bin:\$PATH"
+
+Then, go to https://app.escape.tech/user/profile/ copy your API key and add the following to your ~/.zshrc or ~/.bashrc file:
+
+export ESCAPE_API_KEY="your-api-key"
+
+Then, you should be able to run:
+
+escape-cli applications list
+EOF
