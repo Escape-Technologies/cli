@@ -38,7 +38,7 @@ func WatchScan(ctx context.Context, scanID string) (chan *ScanWatchResult, error
 	}
 	var scanLock sync.Mutex
 	var lastEventID string
-	var after *string
+	after := ""
 	ch := make(chan *ScanWatchResult)
 	shouldStop := atomic.Bool{}
 	shouldStop.Store(false)
@@ -78,8 +78,8 @@ func WatchScan(ctx context.Context, scanID string) (chan *ScanWatchResult, error
 				return
 			}
 			req := client.ScansAPI.ListEvents(ctx, scanID)
-			if after != nil {
-				req = req.After(*after)
+			if after != "" {
+				req = req.After(after)
 			}
 			data, _, err := req.Execute()
 			if err != nil {
@@ -94,7 +94,7 @@ func WatchScan(ctx context.Context, scanID string) (chan *ScanWatchResult, error
 				continue
 			}
 			tries = 0
-			after = &data.NextCursor
+			after = data.NextCursor
 			hasMore = false
 			if len(data.Data) == 0 {
 				continue
