@@ -61,7 +61,7 @@ func extractCommitDataFromEnv() {
 		scanStartCmdCommitBranch != nil ||
 		scanStartCmdCommitAuthor != nil ||
 		scanStartCmdCommitAuthorProfilePictureLink != nil {
-		log.Debug("Commit data already set, skipping environment variables extraction")
+		log.Info("Commit data already set, skipping environment variables extraction")
 		return
 	}
 
@@ -120,6 +120,24 @@ func extractCommitDataFromEnv() {
 	log.Info("No commit data found in environment variables")
 }
 
+func debugCommitData() {
+	if scanStartCmdCommitHash != nil {
+		log.Debug("Commit Hash: %s", *scanStartCmdCommitHash)
+	}
+	if scanStartCmdCommitLink != nil {
+		log.Debug("Commit Link: %s", *scanStartCmdCommitLink)
+	}
+	if scanStartCmdCommitBranch != nil {
+		log.Debug("Commit Branch: %s", *scanStartCmdCommitBranch)
+	}
+	if scanStartCmdCommitAuthor != nil {
+		log.Debug("Commit Author: %s", *scanStartCmdCommitAuthor)
+	}
+	if scanStartCmdCommitAuthorProfilePictureLink != nil {
+		log.Debug("Commit AuthorProfilePictureLink: %s", *scanStartCmdCommitAuthorProfilePictureLink)
+	}
+}
+
 var scanStartCmdCommitHash = new(string)
 var scanStartCmdCommitLink = new(string)
 var scanStartCmdCommitBranch = new(string)
@@ -145,6 +163,7 @@ escape-cli scans start 00000000-0000-0000-0000-000000000000 --override '{"scan":
 			log.Info("Configuration override: %s", string(ovr))
 		}
 		extractCommitDataFromEnv()
+		debugCommitData()
 		scan, err := escape.StartScan(
 			cmd.Context(),
 			args[0],
