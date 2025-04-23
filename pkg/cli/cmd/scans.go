@@ -56,11 +56,11 @@ var scansListCmd = &cobra.Command{
 
 func extractCommitDataFromEnv() {
 	log.Trace("Extracting commit data from environment variables")
-	if scanStartCmdCommitHash != nil ||
-		scanStartCmdCommitLink != nil ||
-		scanStartCmdCommitBranch != nil ||
-		scanStartCmdCommitAuthor != nil ||
-		scanStartCmdCommitAuthorProfilePictureLink != nil {
+	if scanStartCmdCommitHash != "" ||
+		scanStartCmdCommitLink != "" ||
+		scanStartCmdCommitBranch != "" ||
+		scanStartCmdCommitAuthor != "" ||
+		scanStartCmdCommitAuthorProfilePictureLink != "" {
 		log.Info("Commit data already set, skipping environment variables extraction")
 		return
 	}
@@ -68,52 +68,36 @@ func extractCommitDataFromEnv() {
 	if os.Getenv("GITHUB_SHA") != "" {
 		log.Info("Extracting commit data from GitHub environment variables")
 		// https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/store-information-in-variables#default-environment-variables
-		localVarCommitHash := os.Getenv("GITHUB_SHA")
-		scanStartCmdCommitHash = &localVarCommitHash
-		localVarCommitBranch := os.Getenv("GITHUB_REF_NAME")
-		scanStartCmdCommitBranch = &localVarCommitBranch
-		localVarCommitAuthor := os.Getenv("GITHUB_ACTOR")
-		scanStartCmdCommitAuthor = &localVarCommitAuthor
-		localVarCommitAuthorProfilePictureLink := "https://avatars.githubusercontent.com/u/" + os.Getenv("GITHUB_ACTOR_ID") + "?v=4"
-		scanStartCmdCommitAuthorProfilePictureLink = &localVarCommitAuthorProfilePictureLink
-		localVarCommitLink := os.Getenv("GITHUB_SERVER_URL") + "/" + os.Getenv("GITHUB_REPOSITORY") + "/commit/" + localVarCommitHash
-		scanStartCmdCommitLink = &localVarCommitLink
+		scanStartCmdCommitHash = os.Getenv("GITHUB_SHA")
+		scanStartCmdCommitBranch = os.Getenv("GITHUB_REF_NAME")
+		scanStartCmdCommitAuthor = os.Getenv("GITHUB_ACTOR")
+		scanStartCmdCommitAuthorProfilePictureLink = "https://avatars.githubusercontent.com/u/" + os.Getenv("GITHUB_ACTOR_ID") + "?v=4"
+		scanStartCmdCommitLink = os.Getenv("GITHUB_SERVER_URL") + "/" + os.Getenv("GITHUB_REPOSITORY") + "/commit/" + scanStartCmdCommitHash
 		return
 	}
 	if os.Getenv("GITLAB_CI") != "" {
 		log.Info("Extracting commit data from GitLab environment variables")
 		// https://docs.gitlab.com/ci/variables/predefined_variables/
-		localVarCommitHash := os.Getenv("CI_COMMIT_SHA")
-		scanStartCmdCommitHash = &localVarCommitHash
-		localVarCommitBranch := os.Getenv("CI_COMMIT_REF_NAME")
-		scanStartCmdCommitBranch = &localVarCommitBranch
-		localVarCommitAuthor := os.Getenv("GITLAB_USER_EMAIL")
-		scanStartCmdCommitAuthor = &localVarCommitAuthor
-		localVarCommitLink := os.Getenv("CI_PROJECT_URL") + "/-/commit/" + localVarCommitHash
-		scanStartCmdCommitLink = &localVarCommitLink
+		scanStartCmdCommitHash = os.Getenv("CI_COMMIT_SHA")
+		scanStartCmdCommitBranch = os.Getenv("CI_COMMIT_REF_NAME")
+		scanStartCmdCommitAuthor = os.Getenv("GITLAB_USER_EMAIL")
+		scanStartCmdCommitLink = os.Getenv("CI_PROJECT_URL") + "/-/commit/" + scanStartCmdCommitHash
 		return
 	}
 	if os.Getenv("CIRCLE_SHA1") != "" {
 		log.Info("Extracting commit data from CircleCI environment variables")
 		// https://circleci.com/docs/variables/#built-in-environment-variables
-		localVarCommitHash := os.Getenv("CIRCLE_SHA1")
-		scanStartCmdCommitHash = &localVarCommitHash
-		localVarCommitBranch := os.Getenv("CIRCLE_BRANCH")
-		scanStartCmdCommitBranch = &localVarCommitBranch
-		localVarCommitAuthor := os.Getenv("CIRCLE_USERNAME")
-		scanStartCmdCommitAuthor = &localVarCommitAuthor
+		scanStartCmdCommitHash = os.Getenv("CIRCLE_SHA1")
+		scanStartCmdCommitBranch = os.Getenv("CIRCLE_BRANCH")
+		scanStartCmdCommitAuthor = os.Getenv("CIRCLE_USERNAME")
 		return
 	}
 	if os.Getenv("COMMIT_HASH") != "" {
 		log.Info("Extracting commit data from local environment variables")
-		localVarCommitHash := os.Getenv("COMMIT_HASH")
-		scanStartCmdCommitHash = &localVarCommitHash
-		localVarCommitLink := os.Getenv("COMMIT_LINK")
-		scanStartCmdCommitLink = &localVarCommitLink
-		localVarCommitBranch := os.Getenv("COMMIT_BRANCH")
-		scanStartCmdCommitBranch = &localVarCommitBranch
-		localVarCommitAuthor := os.Getenv("COMMIT_AUTHOR")
-		scanStartCmdCommitAuthor = &localVarCommitAuthor
+		scanStartCmdCommitHash = os.Getenv("COMMIT_HASH")
+		scanStartCmdCommitLink = os.Getenv("COMMIT_LINK")
+		scanStartCmdCommitBranch = os.Getenv("COMMIT_BRANCH")
+		scanStartCmdCommitAuthor = os.Getenv("COMMIT_AUTHOR")
 		return
 	}
 
@@ -121,28 +105,18 @@ func extractCommitDataFromEnv() {
 }
 
 func debugCommitData() {
-	if scanStartCmdCommitHash != nil {
-		log.Debug("Commit Hash: %s", *scanStartCmdCommitHash)
-	}
-	if scanStartCmdCommitLink != nil {
-		log.Debug("Commit Link: %s", *scanStartCmdCommitLink)
-	}
-	if scanStartCmdCommitBranch != nil {
-		log.Debug("Commit Branch: %s", *scanStartCmdCommitBranch)
-	}
-	if scanStartCmdCommitAuthor != nil {
-		log.Debug("Commit Author: %s", *scanStartCmdCommitAuthor)
-	}
-	if scanStartCmdCommitAuthorProfilePictureLink != nil {
-		log.Debug("Commit AuthorProfilePictureLink: %s", *scanStartCmdCommitAuthorProfilePictureLink)
-	}
+	log.Debug("Commit Hash: %s", scanStartCmdCommitHash)
+	log.Debug("Commit Link: %s", scanStartCmdCommitLink)
+	log.Debug("Commit Branch: %s", scanStartCmdCommitBranch)
+	log.Debug("Commit Author: %s", scanStartCmdCommitAuthor)
+	log.Debug("Commit AuthorProfilePictureLink: %s", scanStartCmdCommitAuthorProfilePictureLink)
 }
 
-var scanStartCmdCommitHash = new(string)
-var scanStartCmdCommitLink = new(string)
-var scanStartCmdCommitBranch = new(string)
-var scanStartCmdCommitAuthor = new(string)
-var scanStartCmdCommitAuthorProfilePictureLink = new(string)
+var scanStartCmdCommitHash = ""
+var scanStartCmdCommitLink = ""
+var scanStartCmdCommitBranch = ""
+var scanStartCmdCommitAuthor = ""
+var scanStartCmdCommitAuthorProfilePictureLink = ""
 var scanStartCmdConfigurationOverride = ""
 var scanStartCmdWatch bool
 var scanStartCmd = &cobra.Command{
@@ -300,11 +274,11 @@ var scanDownloadCmd = &cobra.Command{
 func init() {
 	scansCmd.AddCommand(scansListCmd)
 	scanStartCmd.PersistentFlags().BoolVarP(&scanStartCmdWatch, "watch", "w", false, "watch for events")
-	scanStartCmd.PersistentFlags().StringVar(scanStartCmdCommitHash, "commit-hash", "", "commit hash")
-	scanStartCmd.PersistentFlags().StringVar(scanStartCmdCommitLink, "commit-link", "", "commit link")
-	scanStartCmd.PersistentFlags().StringVar(scanStartCmdCommitBranch, "commit-branch", "", "commit branch")
-	scanStartCmd.PersistentFlags().StringVar(scanStartCmdCommitAuthor, "commit-author", "", "commit author")
-	scanStartCmd.PersistentFlags().StringVar(scanStartCmdCommitAuthorProfilePictureLink, "profile-picture", "", "commit author profile picture link")
+	scanStartCmd.PersistentFlags().StringVar(&scanStartCmdCommitHash, "commit-hash", "", "commit hash")
+	scanStartCmd.PersistentFlags().StringVar(&scanStartCmdCommitLink, "commit-link", "", "commit link")
+	scanStartCmd.PersistentFlags().StringVar(&scanStartCmdCommitBranch, "commit-branch", "", "commit branch")
+	scanStartCmd.PersistentFlags().StringVar(&scanStartCmdCommitAuthor, "commit-author", "", "commit author")
+	scanStartCmd.PersistentFlags().StringVar(&scanStartCmdCommitAuthorProfilePictureLink, "profile-picture", "", "commit author profile picture link")
 	scanStartCmd.PersistentFlags().StringVarP(&scanStartCmdConfigurationOverride, "override", "c", "", "configuration override")
 	scansCmd.AddCommand(scanStartCmd)
 	scansCmd.AddCommand(scanGetCmd)

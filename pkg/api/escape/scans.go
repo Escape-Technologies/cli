@@ -42,27 +42,40 @@ func GetScanIssues(ctx context.Context, scanID string) ([]v2.ListIssues200Respon
 }
 
 // StartScan starts a scan for an application
-func StartScan(ctx context.Context, applicationID string,
-	commitHash *string,
-	commitLink *string,
-	commitBranch *string,
-	commitAuthor *string,
-	commitAuthorProfilePictureLink *string,
+func StartScan(
+	ctx context.Context,
+	applicationID string,
+	commitHash string,
+	commitLink string,
+	commitBranch string,
+	commitAuthor string,
+	commitAuthorProfilePictureLink string,
 	configurationOverride *v2.CreateApplicationRequestConfiguration,
 ) (*v2.ListScans200ResponseDataInner, error) {
 	client, err := newAPIV2Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
-	data, _, err := client.ScansAPI.StartScan(ctx).StartScanRequest(v2.StartScanRequest{
-		ApplicationId:                  applicationID,
-		CommitHash:                     commitHash,
-		CommitLink:                     commitLink,
-		CommitBranch:                   commitBranch,
-		CommitAuthor:                   commitAuthor,
-		CommitAuthorProfilePictureLink: commitAuthorProfilePictureLink,
-		ConfigurationOverride:          configurationOverride,
-	}).Execute()
+	req := v2.StartScanRequest{
+		ApplicationId:         applicationID,
+		ConfigurationOverride: configurationOverride,
+	}
+	if commitHash != "" {
+		req.CommitHash = &commitHash
+	}
+	if commitLink != "" {
+		req.CommitLink = &commitLink
+	}
+	if commitBranch != "" {
+		req.CommitBranch = &commitBranch
+	}
+	if commitAuthor != "" {
+		req.CommitAuthor = &commitAuthor
+	}
+	if commitAuthorProfilePictureLink != "" {
+		req.CommitAuthorProfilePictureLink = &commitAuthorProfilePictureLink
+	}
+	data, _, err := client.ScansAPI.StartScan(ctx).StartScanRequest(req).Execute()
 	if err != nil {
 		return nil, fmt.Errorf("unable to start scan: %w", err)
 	}
