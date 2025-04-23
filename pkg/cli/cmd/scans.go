@@ -167,23 +167,19 @@ func watchScan(ctx context.Context, scanID string) error {
 	if err != nil {
 		return fmt.Errorf("unable to watch scan: %w", err)
 	}
-	firstEvent := <-ch
-	out.Table(firstEvent, func() []string {
-		return []string{
-			"STATUS\tPROGRESS\tCREATED AT\tLEVEL\tTITLE\tDESCRIPTION",
-			fmt.Sprintf("%s\t%f\t%s\t%s\t%s\t%s",
-				firstEvent.Status,
-				firstEvent.ProgressRatio,
-				firstEvent.CreatedAt.Format(time.RFC3339),
-				firstEvent.Level,
-				firstEvent.Title,
-				firstEvent.Description,
-			),
-		}
-	})
+	isFirst := true
 	for event := range ch {
+		if event == nil {
+			continue
+		}
 		out.Table(event, func() []string {
-			return []string{
+			res := []string{}
+			if isFirst {
+				res = append(res, "STATUS\tPROGRESS\tCREATED AT\tLEVEL\tTITLE\tDESCRIPTION")
+				isFirst = false
+			}
+			res = append(
+				res,
 				fmt.Sprintf("%s\t%f\t%s\t%s\t%s\t%s",
 					event.Status,
 					event.ProgressRatio,
@@ -192,7 +188,8 @@ func watchScan(ctx context.Context, scanID string) error {
 					event.Title,
 					event.Description,
 				),
-			}
+			)
+			return res
 		})
 	}
 	return nil
