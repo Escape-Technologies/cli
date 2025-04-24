@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 	"os"
-	"time"
 
 	"github.com/Escape-Technologies/cli/pkg/api/escape"
 	v2 "github.com/Escape-Technologies/cli/pkg/api/v2"
@@ -175,19 +174,12 @@ func watchScan(ctx context.Context, scanID string) error {
 		out.Table(event, func() []string {
 			res := []string{}
 			if isFirst {
-				res = append(res, "STATUS\tPROGRESS\tCREATED AT\tLEVEL\tTITLE\tDESCRIPTION")
+				res = append(res, "STATUS\tPROGRESS")
 				isFirst = false
 			}
 			res = append(
 				res,
-				fmt.Sprintf("%s\t%f\t%s\t%s\t%s\t%s",
-					event.Status,
-					event.ProgressRatio,
-					event.CreatedAt.Format(time.RFC3339),
-					event.Level,
-					event.Title,
-					event.Description,
-				),
+				fmt.Sprintf("%s\t%d%%", event.Status, int(event.ProgressRatio*100)), //nolint:mnd
 			)
 			return res
 		})
