@@ -188,7 +188,7 @@ func watchScan(ctx context.Context, scanID string) error {
 		})
 	}
 	if status == nil {
-		return errors.New("Unable to watch scan")
+		return errors.New("unable to watch scan")
 	} else if status.Status == v2.ENUME48DD51FE8A350A4154904ABF16320D7_CANCELED {
 		out.Log("Scan canceled")
 	} else if status.Status == v2.ENUME48DD51FE8A350A4154904ABF16320D7_FAILED {
@@ -196,7 +196,7 @@ func watchScan(ctx context.Context, scanID string) error {
 	} else {
 		err := printScanIssues(ctx, scanID)
 		if err != nil {
-			return fmt.Errorf("unable to print scan issues: %w", err)
+			return fmt.Errorf("unable to fetch scan issues: %w", err)
 		}
 	}
 	return nil
