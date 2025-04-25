@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"os"
 
@@ -166,11 +167,13 @@ func watchScan(ctx context.Context, scanID string) error {
 	if err != nil {
 		return fmt.Errorf("unable to watch scan: %w", err)
 	}
+	var status *v2.ListScans200ResponseDataInner
 	isFirst := true
 	for event := range ch {
 		if event == nil {
 			continue
 		}
+		status = event
 		out.Table(event, func() []string {
 			res := []string{}
 			if isFirst {
@@ -183,6 +186,18 @@ func watchScan(ctx context.Context, scanID string) error {
 			)
 			return res
 		})
+	}
+	if status == nil {
+		return errors.New("unable to watch scan")
+	} else if status.Status == v2.ENUME48DD51FE8A350A4154904ABF16320D7_CANCELED {
+		out.Log("Scan canceled")
+	} else if status.Status == v2.ENUME48DD51FE8A350A4154904ABF16320D7_FAILED {
+		out.Log("Scan failed")
+	} else {
+		err := printScanIssues(ctx, scanID)
+		if err != nil {
+			return fmt.Errorf("unable to fetch scan issues: %w", err)
+		}
 	}
 	return nil
 }
@@ -216,31 +231,39 @@ var scanGetCmd = &cobra.Command{
 	},
 }
 
+func printScanIssues(ctx context.Context, scanID string) error {
+	issues, err := escape.GetScanIssues(ctx, scanID)
+	if err != nil {
+		return fmt.Errorf("unable to fetch scan issues: %w", err)
+	}
+	out.Table(issues, func() []string {
+		res := []string{"ID\tSEVERITY\tTYPE\tCATEGORY\tNAME\tIGNORED\tURL"}
+		for _, i := range issues {
+			res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%t\t%s",
+				i.GetId(),
+				i.GetSeverity(),
+				i.GetType(),
+				i.GetCategory(),
+				i.GetName(),
+				i.GetIgnored(),
+				i.GetPlatformUrl(),
+			))
+		}
+		return res
+	})
+	return nil
+}
+
 var scanIssuesCmd = &cobra.Command{
 	Use:     "issues scan-id",
 	Aliases: []string{"results", "res", "result", "issues", "iss"},
 	Args:    cobra.ExactArgs(1),
 	Short:   "List all issues of a scan",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		issues, err := escape.GetScanIssues(cmd.Context(), args[0])
+		err := printScanIssues(cmd.Context(), args[0])
 		if err != nil {
 			return fmt.Errorf("unable to get scan issues: %w", err)
 		}
-		out.Table(issues, func() []string {
-			res := []string{"ID\tSEVERITY\tTYPE\tCATEGORY\tNAME\tIGNORED\tURL"}
-			for _, i := range issues {
-				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%t\t%s",
-					i.GetId(),
-					i.GetSeverity(),
-					i.GetType(),
-					i.GetCategory(),
-					i.GetName(),
-					i.GetIgnored(),
-					i.GetPlatformUrl(),
-				))
-			}
-			return res
-		})
 		return nil
 	},
 }
