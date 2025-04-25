@@ -12,7 +12,6 @@ linters:
   enable:
     # https://golangci-lint.run/usage/linters/#disabled-by-default
     - gocyclo # Computes and checks the cyclomatic complexity of functions.
-    - gocritic # Provides diagnostics that check for bugs, performance and style issues.
       # Extensible without recompilation through dynamic rules.
       # Dynamic rules are written declaratively with AST patterns, filters, report message and optional suggestion.
     - mnd # An analyzer to detect magic numbers.
