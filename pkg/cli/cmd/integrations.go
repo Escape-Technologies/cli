@@ -63,11 +63,7 @@ var integrationsDeleteCmd = &cobra.Command{
 		if err != nil {
 			return fmt.Errorf("failed to delete integration: %w", err)
 		}
-		out.Print(struct {
-			Msg string `json:"msg"`
-		}{
-			Msg: "Integration deleted",
-		}, "Integration deleted")
+		out.Log("Integration deleted")
 		return nil
 	},
 }
