@@ -66,11 +66,7 @@ var locationsDeleteCmd = &cobra.Command{
 		if err != nil {
 			return fmt.Errorf("failed to delete location: %w", err)
 		}
-		out.Print(struct {
-			Msg string `json:"msg"`
-		}{
-			Msg: "Location deleted",
-		}, "Location deleted")
+		out.Log("Location deleted")
 		return nil
 	},
 }

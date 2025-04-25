@@ -39,6 +39,15 @@ func Print(data any, pretty string) {
 	pprint(output, data, pretty)
 }
 
+// Log prints the data in the output format
+func Log(pretty string) {
+	Print(struct {
+		Msg string `json:"msg"`
+	}{
+		Msg: pretty,
+	}, pretty)
+}
+
 func getOutput(o string) *outputT {
 	var res outputT
 	switch o {
