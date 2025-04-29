@@ -15,6 +15,7 @@ func ListLocations(ctx context.Context) ([]v2.ListLocations200ResponseInner, err
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
 	req := client.LocationsAPI.ListLocations(ctx)
+	fmt.Println(req)
 	data, _, err := req.Execute()
 	if err != nil {
 		return nil, fmt.Errorf("unable to get locations: %w", err)

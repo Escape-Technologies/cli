@@ -37,6 +37,7 @@ type CreateApplicationRequestConfigurationScan struct {
 	FrontendUserAgent *string `json:"frontend_user_agent,omitempty"`
 	FrontendUsePersistence *bool `json:"frontend_use_persistence,omitempty"`
 	FrontendEscapeUserHeader *bool `json:"frontend_escape_user_header,omitempty"`
+	FrontendPrefetchSitemap *bool `json:"frontend_prefetch_sitemap,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -635,6 +636,38 @@ func (o *CreateApplicationRequestConfigurationScan) SetFrontendEscapeUserHeader(
 	o.FrontendEscapeUserHeader = &v
 }
 
+// GetFrontendPrefetchSitemap returns the FrontendPrefetchSitemap field value if set, zero value otherwise.
+func (o *CreateApplicationRequestConfigurationScan) GetFrontendPrefetchSitemap() bool {
+	if o == nil || IsNil(o.FrontendPrefetchSitemap) {
+		var ret bool
+		return ret
+	}
+	return *o.FrontendPrefetchSitemap
+}
+
+// GetFrontendPrefetchSitemapOk returns a tuple with the FrontendPrefetchSitemap field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateApplicationRequestConfigurationScan) GetFrontendPrefetchSitemapOk() (*bool, bool) {
+	if o == nil || IsNil(o.FrontendPrefetchSitemap) {
+		return nil, false
+	}
+	return o.FrontendPrefetchSitemap, true
+}
+
+// HasFrontendPrefetchSitemap returns a boolean if a field has been set.
+func (o *CreateApplicationRequestConfigurationScan) HasFrontendPrefetchSitemap() bool {
+	if o != nil && !IsNil(o.FrontendPrefetchSitemap) {
+		return true
+	}
+
+	return false
+}
+
+// SetFrontendPrefetchSitemap gets a reference to the given bool and assigns it to the FrontendPrefetchSitemap field.
+func (o *CreateApplicationRequestConfigurationScan) SetFrontendPrefetchSitemap(v bool) {
+	o.FrontendPrefetchSitemap = &v
+}
+
 func (o CreateApplicationRequestConfigurationScan) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -699,6 +732,9 @@ func (o CreateApplicationRequestConfigurationScan) ToMap() (map[string]interface
 	if !IsNil(o.FrontendEscapeUserHeader) {
 		toSerialize["frontend_escape_user_header"] = o.FrontendEscapeUserHeader
 	}
+	if !IsNil(o.FrontendPrefetchSitemap) {
+		toSerialize["frontend_prefetch_sitemap"] = o.FrontendPrefetchSitemap
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -739,6 +775,7 @@ func (o *CreateApplicationRequestConfigurationScan) UnmarshalJSON(data []byte) (
 		delete(additionalProperties, "frontend_user_agent")
 		delete(additionalProperties, "frontend_use_persistence")
 		delete(additionalProperties, "frontend_escape_user_header")
+		delete(additionalProperties, "frontend_prefetch_sitemap")
 		o.AdditionalProperties = additionalProperties
 	}
 

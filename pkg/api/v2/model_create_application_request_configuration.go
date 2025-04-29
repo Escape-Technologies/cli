@@ -27,6 +27,7 @@ type CreateApplicationRequestConfiguration struct {
 	Checks map[string]interface{} `json:"checks,omitempty"`
 	Url *string `json:"url,omitempty"`
 	UndefinedBlobStr *string `json:"undefined_blob_str,omitempty"`
+	AuthenticationId *string `json:"authentication_id,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -305,6 +306,38 @@ func (o *CreateApplicationRequestConfiguration) SetUndefinedBlobStr(v string) {
 	o.UndefinedBlobStr = &v
 }
 
+// GetAuthenticationId returns the AuthenticationId field value if set, zero value otherwise.
+func (o *CreateApplicationRequestConfiguration) GetAuthenticationId() string {
+	if o == nil || IsNil(o.AuthenticationId) {
+		var ret string
+		return ret
+	}
+	return *o.AuthenticationId
+}
+
+// GetAuthenticationIdOk returns a tuple with the AuthenticationId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateApplicationRequestConfiguration) GetAuthenticationIdOk() (*string, bool) {
+	if o == nil || IsNil(o.AuthenticationId) {
+		return nil, false
+	}
+	return o.AuthenticationId, true
+}
+
+// HasAuthenticationId returns a boolean if a field has been set.
+func (o *CreateApplicationRequestConfiguration) HasAuthenticationId() bool {
+	if o != nil && !IsNil(o.AuthenticationId) {
+		return true
+	}
+
+	return false
+}
+
+// SetAuthenticationId gets a reference to the given string and assigns it to the AuthenticationId field.
+func (o *CreateApplicationRequestConfiguration) SetAuthenticationId(v string) {
+	o.AuthenticationId = &v
+}
+
 func (o CreateApplicationRequestConfiguration) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -339,6 +372,9 @@ func (o CreateApplicationRequestConfiguration) ToMap() (map[string]interface{}, 
 	if !IsNil(o.UndefinedBlobStr) {
 		toSerialize["undefined_blob_str"] = o.UndefinedBlobStr
 	}
+	if !IsNil(o.AuthenticationId) {
+		toSerialize["authentication_id"] = o.AuthenticationId
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -369,6 +405,7 @@ func (o *CreateApplicationRequestConfiguration) UnmarshalJSON(data []byte) (err 
 		delete(additionalProperties, "checks")
 		delete(additionalProperties, "url")
 		delete(additionalProperties, "undefined_blob_str")
+		delete(additionalProperties, "authentication_id")
 		o.AdditionalProperties = additionalProperties
 	}
 

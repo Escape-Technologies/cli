@@ -16,7 +16,7 @@ docker pull python:3.12.9
     for VERSION in "${VERSIONS[@]}"; do
         rm -rf "${TMP_DIR}/${VERSION}"
         mkdir -p "${TMP_DIR}/${VERSION}"
-        curl -s -o "${TMP_DIR}/${VERSION}/openapi-raw.json" "https://public.escape.tech/${VERSION}/openapi.json"
+        curl -s -o "${TMP_DIR}/${VERSION}/openapi-raw.json" "https://public.staging.escape.tech/${VERSION}/openapi.json"
 
         docker run -u "$(id -u):$(id -g)" --rm -v "${TMP_DIR}/${VERSION}:/local" -v "${PROJECT_ROOT}/scripts:/scripts" \
             python:3.12.9 \
