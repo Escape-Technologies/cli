@@ -19,6 +19,7 @@ var locationsListCmd = &cobra.Command{
 	Use:     "list",
 	Aliases: []string{"ls"},
 	Short:   "List all locations",
+	Example: `escape-cli locations list`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
 		locations, err := escape.ListLocations(cmd.Context())
 		if err != nil {
@@ -44,9 +45,10 @@ var locationsListCmd = &cobra.Command{
 }
 
 var locationsStartCmd = &cobra.Command{
-	Use:   "start location-name",
-	Short: "Start a location",
-	Args:  cobra.ExactArgs(1),
+	Use:     "start location-name",
+	Short:   "Start a location",
+	Args:    cobra.ExactArgs(1),
+	Example: `escape-cli locations start my-location`,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		if rootCmdVerbose == 0 {
 			out.SetupTerminalLog()
@@ -61,6 +63,7 @@ var locationsDeleteCmd = &cobra.Command{
 	Aliases: []string{"del", "remove"},
 	Short:   "Delete a location",
 	Args:    cobra.ExactArgs(1),
+	Example: `escape-cli locations delete 00000000-0000-0000-0000-000000000000`,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		err := escape.DeleteLocation(cmd.Context(), args[0])
 		if err != nil {
