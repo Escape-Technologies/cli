@@ -18,6 +18,7 @@ var integrationsListCmd = &cobra.Command{
 	Use:     "list",
 	Aliases: []string{"ls"},
 	Short:   "List all integrations",
+	Example: `escape-cli integrations list`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
 		integrations, err := escape.ListIntegrations(cmd.Context())
 		if err != nil {
@@ -46,7 +47,9 @@ var integrationsListCmd = &cobra.Command{
 var integrationsCreateCmd = &cobra.Command{
 	Use:     "apply integration-path",
 	Aliases: []string{"create", "update"},
-	Short:   "Update the integration based on a configuration file",
+	Short:   "Update the integration based on a configuration file (yaml or json)",
+	Example: `escape-cli integrations apply integration.yaml
+escape-cli integrations apply integration.json`,
 	Args:    cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		return escape.UpsertIntegrationFromFile(cmd.Context(), args[0])
@@ -57,6 +60,7 @@ var integrationsDeleteCmd = &cobra.Command{
 	Use:     "delete integration-id",
 	Aliases: []string{"del", "remove"},
 	Short:   "Delete an integration",
+	Example: `escape-cli integrations delete 00000000-0000-0000-0000-000000000000`,
 	Args:    cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		err := escape.DeleteIntegration(cmd.Context(), args[0])
@@ -73,6 +77,7 @@ var integrationsGetCmd = &cobra.Command{
 	Aliases: []string{"describe"},
 	Short:   "Get integration details",
 	Args:    cobra.ExactArgs(1),
+	Example: `escape-cli integrations get 00000000-0000-0000-0000-000000000000`,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		integration, err := escape.GetIntegration(cmd.Context(), args[0])
 		if err != nil {

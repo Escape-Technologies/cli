@@ -19,6 +19,7 @@ var applicationsListCmd = &cobra.Command{
 	Use:     "list",
 	Aliases: []string{"ls"},
 	Short:   "List all applications",
+	Example: `escape-cli applications list`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
 		applications, err := escape.ListApplications(cmd.Context())
 		if err != nil {
@@ -40,6 +41,7 @@ var applicationGetCmd = &cobra.Command{
 	Aliases: []string{"describe"},
 	Short:   "Get details about an application current configuration",
 	Args:    cobra.ExactArgs(1),
+	Example: `escape-cli applications get 00000000-0000-0000-0000-000000000000`,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		application, err := escape.GetApplication(cmd.Context(), args[0])
 		if err != nil {
@@ -60,9 +62,12 @@ var applicationGetCmd = &cobra.Command{
 }
 
 var applicationUpdateSchemaCmd = &cobra.Command{
-	Use:   "update-schema application-id schema-path|schema-url",
-	Short: "Update the schema of an application",
-	Args:  cobra.ExactArgs(2), //nolint:mnd
+	Use:     "update-schema application-id schema-path|schema-url",
+	Short:   "Update the schema of an application based on a configuration file (yaml or json)",
+	Args:    cobra.ExactArgs(2), //nolint:mnd
+	Example: `escape-cli applications update-schema 00000000-0000-0000-0000-000000000000 schema.json
+escape-cli applications update-schema 00000000-0000-0000-0000-000000000000 schema.yaml
+escape-cli applications update-schema 00000000-0000-0000-0000-000000000000 https://example.com/schema.json`,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		err := escape.UpdateApplicationSchema(cmd.Context(), args[0], args[1])
 		if err != nil {
@@ -73,9 +78,11 @@ var applicationUpdateSchemaCmd = &cobra.Command{
 }
 
 var applicationUpdateConfigCmd = &cobra.Command{
-	Use:   "update-config application-id config-path",
-	Short: "Update the configuration of an application",
-	Args:  cobra.ExactArgs(2), //nolint:mnd
+	Use:     "update-config application-id config-path",
+	Short:   "Update the configuration of an application based on a configuration file (yaml or json)",
+	Example: `escape-cli applications update-config 00000000-0000-0000-0000-000000000000 config.json
+escape-cli applications update-config 00000000-0000-0000-0000-000000000000 config.yaml`,
+	Args:    cobra.ExactArgs(2), //nolint:mnd
 	RunE: func(cmd *cobra.Command, args []string) error {
 		err := escape.UpdateApplicationConfig(cmd.Context(), args[0], args[1])
 		if err != nil {

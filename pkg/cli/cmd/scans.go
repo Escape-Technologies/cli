@@ -24,6 +24,7 @@ var scansListCmd = &cobra.Command{
 	Aliases: []string{"ls"},
 	Args:    cobra.ExactArgs(1),
 	Short:   "List all scans of an application",
+	Example: `escape-cli scans list 00000000-0000-0000-0000-000000000000`,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		applicationID := args[0]
 		scans, next, err := escape.ListScans(cmd.Context(), applicationID, "")
@@ -217,6 +218,7 @@ var scanGetCmd = &cobra.Command{
 	Aliases: []string{"describe"},
 	Args:    cobra.ExactArgs(1),
 	Short:   "Return the scan status",
+	Example: `escape-cli scans get 00000000-0000-0000-0000-000000000000`,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		scan, err := escape.GetScan(cmd.Context(), args[0])
 		if err != nil {
@@ -259,6 +261,7 @@ var scanIssuesCmd = &cobra.Command{
 	Aliases: []string{"results", "res", "result", "issues", "iss"},
 	Args:    cobra.ExactArgs(1),
 	Short:   "List all issues of a scan",
+	Example: `escape-cli scans issues 00000000-0000-0000-0000-000000000000`,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		err := printScanIssues(cmd.Context(), args[0])
 		if err != nil {
