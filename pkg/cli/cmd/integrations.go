@@ -11,13 +11,20 @@ import (
 var integrationsCmd = &cobra.Command{
 	Use:     "integrations",
 	Aliases: []string{"int", "integration"},
-	Short:   "Interact with your escape integrations",
+	Short:   "Interact with integrations",
+	Long:    "Interact with your escape integrations",
 }
 
 var integrationsListCmd = &cobra.Command{
 	Use:     "list",
 	Aliases: []string{"ls"},
-	Short:   "List all integrations",
+	Short:   "List integrations",
+	Long:    `List all integrations.
+
+Example output:
+ID                                      KIND               NAME                          LOCATION ID
+00000000-0000-0000-0000-000000000001    AZURE_DEVOPS       Example Azure Integration     
+00000000-0000-0000-0000-000000000002    KUBERNETES         Example K8s Integration      00000000-0000-0000-0000-000000000099`,
 	Example: `escape-cli integrations list`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
 		integrations, err := escape.ListIntegrations(cmd.Context())
@@ -47,7 +54,24 @@ var integrationsListCmd = &cobra.Command{
 var integrationsCreateCmd = &cobra.Command{
 	Use:     "apply integration-path",
 	Aliases: []string{"create", "update"},
-	Short:   "Update the integration based on a configuration file (yaml or json)",
+	Short:   "Apply integration config",
+	Long:    `Update the integration based on a configuration file (yaml or json).
+
+Example file content:
+{
+  "data": {
+    "kind": "AKAMAI",
+    "parameters": {
+      "client_secret": "your-secret",
+      "host": "your-host",
+      "access_token": "your-token",
+      "client_token": "your-client-token"
+    }
+  },
+  "name": "Your Integration Name"
+}
+
+More information about the integration file format can be found here: https://public.escape.tech/v2/#tag/integrations/POST/integrations`,
 	Example: `escape-cli integrations apply integration.yaml
 escape-cli integrations apply integration.json`,
 	Args:    cobra.ExactArgs(1),
@@ -59,7 +83,11 @@ escape-cli integrations apply integration.json`,
 var integrationsDeleteCmd = &cobra.Command{
 	Use:     "delete integration-id",
 	Aliases: []string{"del", "remove"},
-	Short:   "Delete an integration",
+	Short:   "Delete integration",
+	Long:    `Delete an integration
+	
+Example output:
+Integration deleted`,
 	Example: `escape-cli integrations delete 00000000-0000-0000-0000-000000000000`,
 	Args:    cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
@@ -76,6 +104,13 @@ var integrationsGetCmd = &cobra.Command{
 	Use:     "get integration-id",
 	Aliases: []string{"describe"},
 	Short:   "Get integration details",
+	Long:    `Get detailed information about an integration.
+
+Example output:
+Name: example-github-integration
+Id: 00000000-0000-0000-0000-000000000001
+LocationId: 
+Data: {"kind":"GITHUB_API_KEY","parameters":{"api_key":"github_pat_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"}}`,
 	Args:    cobra.ExactArgs(1),
 	Example: `escape-cli integrations get 00000000-0000-0000-0000-000000000000`,
 	RunE: func(cmd *cobra.Command, args []string) error {
