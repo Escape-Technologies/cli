@@ -24,7 +24,14 @@ var scansListCmd = &cobra.Command{
 	Aliases: []string{"ls"},
 	Args:    cobra.ExactArgs(1),
 	Short:   "List scans",
-	Long:    "List all scans of an application",
+	Long:    `List all scans of an application.
+
+Example output:
+ID                                      STATUS      CREATED AT                           PROGRESS
+00000000-0000-0000-0000-000000000001    FINISHED    2025-02-05 08:34:47.541 +0000 UTC    0.000000
+00000000-0000-0000-0000-000000000002    FINISHED    2025-02-02 08:27:23.919 +0000 UTC    0.000000
+00000000-0000-0000-0000-000000000003    FINISHED    2025-01-31 18:35:48.477 +0000 UTC    0.000000
+00000000-0000-0000-0000-000000000004    FINISHED    2025-01-30 08:25:49.656 +0000 UTC    0.000000`,
 	Example: `escape-cli scans list 00000000-0000-0000-0000-000000000000`,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		applicationID := args[0]
@@ -221,7 +228,11 @@ var scanGetCmd = &cobra.Command{
 	Aliases: []string{"describe"},
 	Args:    cobra.ExactArgs(1),
 	Short:   "Get scan status",
-	Long:    "Return the scan status",
+	Long:    `Return the scan status.
+
+Example output:
+ID                                      STATUS      CREATED AT                           PROGRESS
+00000000-0000-0000-0000-000000000001    FINISHED    2024-11-27 08:06:59.576 +0000 UTC    1.000000`,
 	Example: `escape-cli scans get 00000000-0000-0000-0000-000000000000`,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		scan, err := escape.GetScan(cmd.Context(), args[0])
@@ -265,7 +276,12 @@ var scanIssuesCmd = &cobra.Command{
 	Aliases: []string{"results", "res", "result", "issues", "iss"},
 	Args:    cobra.ExactArgs(1),
 	Short:   "List scan issues",
-	Long:    "List all issues of a scan",
+	Long:    `List all issues of a scan.
+
+Example output:
+ID                                      SEVERITY    TYPE    CATEGORY                  NAME                                         IGNORED    URL
+00000000-0000-0000-0000-000000000001    MEDIUM      API     PROTOCOL                  Insecure Security Policy header              false      https://app.escape.tech/scan/00000000-0000-0000-0000-000000000005/issues/00000000-0000-0000-0000-000000000001/overview/
+00000000-0000-0000-0000-000000000002    LOW         API     INFORMATION_DISCLOSURE    Debug mode enabled                           false      https://app.escape.tech/scan/00000000-0000-0000-0000-000000000005/issues/00000000-0000-0000-0000-000000000002/overview/`,
 	Example: `escape-cli scans issues 00000000-0000-0000-0000-000000000000`,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		err := printScanIssues(cmd.Context(), args[0])
