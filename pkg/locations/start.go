@@ -35,13 +35,20 @@ func Start(ctx context.Context, name string) error {
 	log.Trace("Creating location %s with public key %s", name, sshPublicKey)
 	id, err := escape.UpsertLocation(ctx, name, sshPublicKey)
 	if err != nil {
-		return fmt.Errorf("unable to start private location: %w", err)
+		return fmt.Errorf("unable to update private location on Escape Platform: %w", err)
 	}
 
 	go kube.Start(ctx, id, name, healthy)
 	for {
+		log.Trace("Creating location %s with public key %s", name, sshPublicKey)
+		id, err := escape.UpsertLocation(ctx, name, sshPublicKey)
+		if err != nil {
+			log.Error("unable to update private location on Escape Platform: %s", err)
+			time.Sleep(retryInterval)
+			continue
+		}
 		log.Info("Private location %s in sync with Escape Platform, starting location...", name)
-		err := private.StartLocation(ctx, id, sshPrivateKey, healthy)
+		err = private.StartLocation(ctx, id, sshPrivateKey, healthy)
 		if err != nil {
 			log.Error("Error starting location: %s", err)
 		} else {
