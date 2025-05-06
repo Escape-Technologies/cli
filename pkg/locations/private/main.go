@@ -4,7 +4,6 @@ package private
 import (
 	"context"
 	"crypto/ed25519"
-	"fmt"
 	"sync/atomic"
 	"time"
 
@@ -16,9 +15,6 @@ func StartLocation(ctx context.Context, locationID string, sshPrivateKey ed25519
 	log.Trace("Starting private location %s", locationID)
 	for {
 		err := dialSSH(ctx, locationID, sshPrivateKey, healthy)
-		if ctx.Err() != nil {
-			return fmt.Errorf("dialSSH: %w", ctx.Err())
-		}
 		if err != nil {
 			log.Info("failed to dial ssh: %v, retrying...", err)
 		} else {

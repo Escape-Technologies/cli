@@ -64,9 +64,6 @@ func dialSSH(ctx context.Context, locationID string, sshPrivateKey ed25519.Priva
 	log.Trace("Starting listener")
 	err = startListener(ctx, client, healthy)
 	cancel()
-	if ctx.Err() != nil {
-		return fmt.Errorf("startListener: %w", ctx.Err())
-	}
 	if err != nil {
 		return fmt.Errorf("failed to start listener: %w", err)
 	}

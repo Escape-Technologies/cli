@@ -21,9 +21,6 @@ func startListener(ctx context.Context, client *ssh.Client, healthy *atomic.Bool
 
 	err = startSocks5Server(ctx, listener, healthy)
 	healthy.Store(false)
-	if ctx.Err() != nil {
-		return fmt.Errorf("startListener: %w", ctx.Err())
-	}
 	if err != nil {
 		return fmt.Errorf("failed to start socks5 server: %w", err)
 	}
