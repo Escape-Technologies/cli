@@ -11,15 +11,9 @@ try {
     
     Write-Host "Installing escape-cli v$version for Windows..."
     
-    $platform = "amd64"
-    if ([Environment]::Is64BitOperatingSystem -eq $false) {
-        Write-Host "Error: Only 64-bit Windows is supported" -ForegroundColor Red
-        exit 1
-    }
-    
     $installDir = "$env:ProgramFiles\Escape-Technologies\CLI"
     
-    $zipName = "escape-cli_${version}_windows_${platform}.zip"
+    $zipName = "escape-cli_${version}_windows_amd64.zip"
     $zipUrl = "https://github.com/Escape-Technologies/cli/releases/download/v${version}/${zipName}"
     
     Write-Host "Downloading from: $zipUrl"
