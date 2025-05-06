@@ -5,6 +5,7 @@ import (
 	"time"
 )
 
+//TCP keepalive timeout.
 const DefaultKeepAliveDuration = 30 * time.Second
 
 type netDialerWithTCPKeepaliveFunc func() *net.Dialer
