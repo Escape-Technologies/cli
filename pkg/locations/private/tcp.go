@@ -5,11 +5,13 @@ import (
 	"time"
 )
 
+const DefaultKeepAliveDuration = 30 * time.Second
+
 type netDialerWithTCPKeepaliveFunc func() *net.Dialer
 
 var netDialerWithTCPKeepaliveImpl netDialerWithTCPKeepaliveFunc = func() *net.Dialer {
 	return &net.Dialer{
-		KeepAlive: 30 * time.Second,
+		KeepAlive: DefaultKeepAliveDuration,
 	}
 }
 
