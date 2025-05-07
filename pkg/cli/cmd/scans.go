@@ -23,7 +23,16 @@ var scansListCmd = &cobra.Command{
 	Use:     "list application-id",
 	Aliases: []string{"ls"},
 	Args:    cobra.ExactArgs(1),
-	Short:   "List all scans of an application",
+	Short:   "List scans",
+	Long:    `List all scans of an application.
+
+Example output:
+ID                                      STATUS      CREATED AT                           PROGRESS
+00000000-0000-0000-0000-000000000001    FINISHED    2025-02-05 08:34:47.541 +0000 UTC    0.000000
+00000000-0000-0000-0000-000000000002    FINISHED    2025-02-02 08:27:23.919 +0000 UTC    0.000000
+00000000-0000-0000-0000-000000000003    FINISHED    2025-01-31 18:35:48.477 +0000 UTC    0.000000
+00000000-0000-0000-0000-000000000004    FINISHED    2025-01-30 08:25:49.656 +0000 UTC    0.000000`,
+	Example: `escape-cli scans list 00000000-0000-0000-0000-000000000000`,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		applicationID := args[0]
 		scans, next, err := escape.ListScans(cmd.Context(), applicationID, "")
@@ -125,7 +134,8 @@ var scanStartCmd = &cobra.Command{
 escape-cli scans start 00000000-0000-0000-0000-000000000000 --commit-hash 1234567890
 escape-cli scans start 00000000-0000-0000-0000-000000000000 --override '{"scan": {"read_only": true}}'`,
 	Args:  cobra.ExactArgs(1),
-	Short: "Start a new scan of an application",
+	Short: "Start a scan",
+	Long:  "Start a new scan of an application",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		override := v2.NullableCreateApplicationRequestConfiguration{}
 		if scanStartCmdConfigurationOverride != "" {
@@ -206,7 +216,8 @@ var scanWatchCmd = &cobra.Command{
 	Use:     "watch scan-id",
 	Example: `escape-cli scans watch 00000000-0000-0000-0000-000000000000`,
 	Args:    cobra.ExactArgs(1),
-	Short:   "Bind the current terminal to a scan, listen for events and print them to the terminal. Exit when the scan is done.",
+	Short:   "Watch a scan",
+	Long:    "Bind the current terminal to a scan, listen for events and print them to the terminal. Exit when the scan is done.",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		return watchScan(cmd.Context(), args[0])
 	},
@@ -216,7 +227,13 @@ var scanGetCmd = &cobra.Command{
 	Use:     "get scan-id",
 	Aliases: []string{"describe"},
 	Args:    cobra.ExactArgs(1),
-	Short:   "Return the scan status",
+	Short:   "Get scan status",
+	Long:    `Return the scan status.
+
+Example output:
+ID                                      STATUS      CREATED AT                           PROGRESS
+00000000-0000-0000-0000-000000000001    FINISHED    2024-11-27 08:06:59.576 +0000 UTC    1.000000`,
+	Example: `escape-cli scans get 00000000-0000-0000-0000-000000000000`,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		scan, err := escape.GetScan(cmd.Context(), args[0])
 		if err != nil {
@@ -258,7 +275,14 @@ var scanIssuesCmd = &cobra.Command{
 	Use:     "issues scan-id",
 	Aliases: []string{"results", "res", "result", "issues", "iss"},
 	Args:    cobra.ExactArgs(1),
-	Short:   "List all issues of a scan",
+	Short:   "List scan issues",
+	Long:    `List all issues of a scan.
+
+Example output:
+ID                                      SEVERITY    TYPE    CATEGORY                  NAME                                         IGNORED    URL
+00000000-0000-0000-0000-000000000001    MEDIUM      API     PROTOCOL                  Insecure Security Policy header              false      https://app.escape.tech/scan/00000000-0000-0000-0000-000000000005/issues/00000000-0000-0000-0000-000000000001/overview/
+00000000-0000-0000-0000-000000000002    LOW         API     INFORMATION_DISCLOSURE    Debug mode enabled                           false      https://app.escape.tech/scan/00000000-0000-0000-0000-000000000005/issues/00000000-0000-0000-0000-000000000002/overview/`,
+	Example: `escape-cli scans issues 00000000-0000-0000-0000-000000000000`,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		err := printScanIssues(cmd.Context(), args[0])
 		if err != nil {
@@ -273,7 +297,8 @@ var scanDownloadCmd = &cobra.Command{
 	Example: "escape-cli scans download 00000000-0000-0000-0000-000000000000 ./exchanges.zip",
 	Aliases: []string{"dl", "zip"},
 	Args:    cobra.ExactArgs(2), //nolint:mnd
-	Short:   "Download a scan result exchange archive (zip export)",
+	Short:   "Download scan results",
+	Long:    "Download a scan result exchange archive (zip export)",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		err := escape.DownloadScanExchangesZip(cmd.Context(), args[0], args[1])
 		if err != nil {
