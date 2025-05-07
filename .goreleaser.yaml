@@ -14,7 +14,6 @@ builds:
     goos:
       - linux
       - darwin
-      - windows
     goarch:
       - amd64
       - arm64
@@ -22,6 +21,21 @@ builds:
     main: ./cmd/
     ldflags:
       - -s -w -X github.com/Escape-Technologies/cli/pkg/version.Version={{.Version}} -X github.com/Escape-Technologies/cli/pkg/version.Commit={{.ShortCommit}} -X github.com/Escape-Technologies/cli/pkg/version.BuildDate={{.CommitDate}}
+  - env:
+      - CGO_ENABLED=0
+    goos:
+      - windows
+    goarch:
+      - amd64
+    binary: "escape-cli"
+    main: ./cmd/
+    ldflags:
+      - -s -w -X github.com/Escape-Technologies/cli/pkg/version.Version={{.Version}} -X github.com/Escape-Technologies/cli/pkg/version.Commit={{.ShortCommit}} -X github.com/Escape-Technologies/cli/pkg/version.BuildDate={{.CommitDate}}
+
+archives:
+  - format_overrides:
+      - goos: windows
+        format: zip
 
 kos:
   - repositories: [escapetech/cli]
