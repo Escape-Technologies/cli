@@ -1,3 +1,4 @@
+{{- if .Values.ESCAPE_K8S_INTEGRATION }}
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -38,3 +39,4 @@ roleRef:
   kind: ClusterRole
   name: {{ include "fullname" . }}-{{ .Release.Namespace }}
   apiGroup: rbac.authorization.k8s.io
+{{- end }}
