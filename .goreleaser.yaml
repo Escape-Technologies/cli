@@ -29,15 +29,16 @@ builds:
       - windows
     goarch:
       - amd64
-    binary: "escape-cli"
+    binary: "escape-cli-win"
     main: ./cmd/
     ldflags:
       - -s -w -X github.com/Escape-Technologies/cli/pkg/version.Version={{.Version}} -X github.com/Escape-Technologies/cli/pkg/version.Commit={{.ShortCommit}} -X github.com/Escape-Technologies/cli/pkg/version.BuildDate={{.CommitDate}}
 
 archives:
-  - format_overrides:
+  - id: windows
+    format_overrides:
       - goos: windows
-        format: zip
+        formats: [zip]
 
 kos:
   - repositories: [escapetech/cli]
@@ -49,3 +50,4 @@ kos:
     platforms:
       - linux/amd64
       - linux/arm64
+    build: unix
