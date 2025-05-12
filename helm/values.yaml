@@ -5,6 +5,9 @@ ESCAPE_API_KEY: "00000000-0000-0000-0000-000000000000"
 # or it will fallback to the helm release name
 ESCAPE_PRIVATE_LOCATION: ""
 
+# Enable/disable Kubernetes integration. (disables ClusterRole and ClusterRoleBinding)
+ESCAPE_K8S_INTEGRATION: true
+
 container:
   image: escapetech/cli:latest
   resources:
