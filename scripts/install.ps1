@@ -13,7 +13,7 @@ try {
     
     $installDir = "$env:ProgramFiles\Escape-Technologies\CLI"
     
-    $zipName = "escape-cli_${version}_windows_amd64.zip"
+    $zipName = "cli_${version}_windows_amd64.zip"
     $zipUrl = "https://github.com/Escape-Technologies/cli/releases/download/v${version}/${zipName}"
     
     Write-Host "Downloading from: $zipUrl"
