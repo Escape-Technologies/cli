@@ -9,7 +9,8 @@ checksum:
   algorithm: sha256
 
 builds:
-  - env:
+  - id: unix
+    env:
       - CGO_ENABLED=0
     goos:
       - linux
@@ -21,7 +22,8 @@ builds:
     main: ./cmd/
     ldflags:
       - -s -w -X github.com/Escape-Technologies/cli/pkg/version.Version={{.Version}} -X github.com/Escape-Technologies/cli/pkg/version.Commit={{.ShortCommit}} -X github.com/Escape-Technologies/cli/pkg/version.BuildDate={{.CommitDate}}
-  - env:
+  - id: windows
+    env:
       - CGO_ENABLED=0
     goos:
       - windows
@@ -33,9 +35,10 @@ builds:
       - -s -w -X github.com/Escape-Technologies/cli/pkg/version.Version={{.Version}} -X github.com/Escape-Technologies/cli/pkg/version.Commit={{.ShortCommit}} -X github.com/Escape-Technologies/cli/pkg/version.BuildDate={{.CommitDate}}
 
 archives:
-  - format_overrides:
+  - id: windows
+    format_overrides:
       - goos: windows
-        format: zip
+        formats: [zip]
 
 kos:
   - repositories: [escapetech/cli]
@@ -47,3 +50,4 @@ kos:
     platforms:
       - linux/amd64
       - linux/arm64
+    build: unix
