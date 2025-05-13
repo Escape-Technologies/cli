@@ -38,7 +38,7 @@ func Start(ctx context.Context, name string) error {
 	if err != nil {
 		return fmt.Errorf("unable to update private location on Escape Platform: %w", err)
 	}
-	if os.Getenv("ESCAPE_K8S_INTEGRATION") == "true" {
+	if os.Getenv("ESCAPE_K8S_INTEGRATION") != "false" {
 		go kube.Start(ctx, id, name, healthy)
 	}
 	
