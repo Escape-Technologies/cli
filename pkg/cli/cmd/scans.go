@@ -24,7 +24,7 @@ var scansListCmd = &cobra.Command{
 	Aliases: []string{"ls"},
 	Args:    cobra.ExactArgs(1),
 	Short:   "List scans",
-	Long:    `List all scans of an application.
+	Long: `List all scans of an application.
 
 Example output:
 ID                                      STATUS      CREATED AT                           PROGRESS
@@ -137,7 +137,7 @@ escape-cli scans start 00000000-0000-0000-0000-000000000000 --override '{"scan":
 	Short: "Start a scan",
 	Long:  "Start a new scan of an application",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		override := v2.NullableCreateApplicationRequestConfiguration{}
+		override := v2.NullableCreateApplicationRequestAnyOfConfiguration{}
 		if scanStartCmdConfigurationOverride != "" {
 			err := override.UnmarshalJSON([]byte(scanStartCmdConfigurationOverride))
 			if err != nil {
@@ -228,7 +228,7 @@ var scanGetCmd = &cobra.Command{
 	Aliases: []string{"describe"},
 	Args:    cobra.ExactArgs(1),
 	Short:   "Get scan status",
-	Long:    `Return the scan status.
+	Long: `Return the scan status.
 
 Example output:
 ID                                      STATUS      CREATED AT                           PROGRESS
@@ -276,7 +276,7 @@ var scanIssuesCmd = &cobra.Command{
 	Aliases: []string{"results", "res", "result", "issues", "iss"},
 	Args:    cobra.ExactArgs(1),
 	Short:   "List scan issues",
-	Long:    `List all issues of a scan.
+	Long: `List all issues of a scan.
 
 Example output:
 ID                                      SEVERITY    TYPE    CATEGORY                  NAME                                         IGNORED    URL
