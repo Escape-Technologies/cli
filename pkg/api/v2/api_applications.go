@@ -369,6 +369,16 @@ func (a *ApplicationsAPIService) ListApplicationsExecute(r ApiListApplicationsRe
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ListScans400Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -508,6 +518,16 @@ func (a *ApplicationsAPIService) ListScansExecute(r ApiListScansRequest) (*ListS
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ListScans400Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -663,15 +683,15 @@ type ApiUpdateConfigurationRequest struct {
 	ctx context.Context
 	ApiService *ApplicationsAPIService
 	id string
-	createApplicationRequestConfiguration *CreateApplicationRequestConfiguration
+	createApplicationRequestAnyOfConfiguration *CreateApplicationRequestAnyOfConfiguration
 }
 
-func (r ApiUpdateConfigurationRequest) CreateApplicationRequestConfiguration(createApplicationRequestConfiguration CreateApplicationRequestConfiguration) ApiUpdateConfigurationRequest {
-	r.createApplicationRequestConfiguration = &createApplicationRequestConfiguration
+func (r ApiUpdateConfigurationRequest) CreateApplicationRequestAnyOfConfiguration(createApplicationRequestAnyOfConfiguration CreateApplicationRequestAnyOfConfiguration) ApiUpdateConfigurationRequest {
+	r.createApplicationRequestAnyOfConfiguration = &createApplicationRequestAnyOfConfiguration
 	return r
 }
 
-func (r ApiUpdateConfigurationRequest) Execute() (*CreateApplicationRequestConfiguration, *http.Response, error) {
+func (r ApiUpdateConfigurationRequest) Execute() (*CreateApplicationRequestAnyOfConfiguration, *http.Response, error) {
 	return r.ApiService.UpdateConfigurationExecute(r)
 }
 
@@ -693,13 +713,13 @@ func (a *ApplicationsAPIService) UpdateConfiguration(ctx context.Context, id str
 }
 
 // Execute executes the request
-//  @return CreateApplicationRequestConfiguration
-func (a *ApplicationsAPIService) UpdateConfigurationExecute(r ApiUpdateConfigurationRequest) (*CreateApplicationRequestConfiguration, *http.Response, error) {
+//  @return CreateApplicationRequestAnyOfConfiguration
+func (a *ApplicationsAPIService) UpdateConfigurationExecute(r ApiUpdateConfigurationRequest) (*CreateApplicationRequestAnyOfConfiguration, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateApplicationRequestConfiguration
+		localVarReturnValue  *CreateApplicationRequestAnyOfConfiguration
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplicationsAPIService.UpdateConfiguration")
@@ -732,7 +752,7 @@ func (a *ApplicationsAPIService) UpdateConfigurationExecute(r ApiUpdateConfigura
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.createApplicationRequestConfiguration
+	localVarPostBody = r.createApplicationRequestAnyOfConfiguration
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -798,11 +818,11 @@ type ApiUpdateSchemaRequest struct {
 	ctx context.Context
 	ApiService *ApplicationsAPIService
 	id string
-	createApplicationRequestSchema *CreateApplicationRequestSchema
+	createApplicationRequestAnyOf1Schema *CreateApplicationRequestAnyOf1Schema
 }
 
-func (r ApiUpdateSchemaRequest) CreateApplicationRequestSchema(createApplicationRequestSchema CreateApplicationRequestSchema) ApiUpdateSchemaRequest {
-	r.createApplicationRequestSchema = &createApplicationRequestSchema
+func (r ApiUpdateSchemaRequest) CreateApplicationRequestAnyOf1Schema(createApplicationRequestAnyOf1Schema CreateApplicationRequestAnyOf1Schema) ApiUpdateSchemaRequest {
+	r.createApplicationRequestAnyOf1Schema = &createApplicationRequestAnyOf1Schema
 	return r
 }
 
@@ -867,7 +887,7 @@ func (a *ApplicationsAPIService) UpdateSchemaExecute(r ApiUpdateSchemaRequest) (
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.createApplicationRequestSchema
+	localVarPostBody = r.createApplicationRequestAnyOf1Schema
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

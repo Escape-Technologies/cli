@@ -15,303 +15,76 @@ import (
 	"fmt"
 )
 
-// checks if the CreateApplicationRequest type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &CreateApplicationRequest{}
 
 // CreateApplicationRequest struct for CreateApplicationRequest
 type CreateApplicationRequest struct {
-	Type EnumE2faa1839c383d205180930f9bfb3583 `json:"type"`
-	// Application URL
-	Url string `json:"url"`
-	Schema CreateApplicationRequestSchema `json:"schema"`
-	Configuration *CreateApplicationRequestConfiguration `json:"configuration,omitempty"`
-	// Application name
-	Name string `json:"name"`
-	LocationId string `json:"locationId"`
-	Cron string `json:"cron"`
-	AdditionalProperties map[string]interface{}
+	CreateApplicationRequestAnyOf *CreateApplicationRequestAnyOf
+	CreateApplicationRequestAnyOf1 *CreateApplicationRequestAnyOf1
+	CreateApplicationRequestAnyOf2 *CreateApplicationRequestAnyOf2
 }
 
-type _CreateApplicationRequest CreateApplicationRequest
-
-// NewCreateApplicationRequest instantiates a new CreateApplicationRequest object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
-func NewCreateApplicationRequest(type_ EnumE2faa1839c383d205180930f9bfb3583, url string, schema CreateApplicationRequestSchema, name string, locationId string, cron string) *CreateApplicationRequest {
-	this := CreateApplicationRequest{}
-	this.Type = type_
-	this.Url = url
-	this.Schema = schema
-	this.Name = name
-	this.LocationId = locationId
-	this.Cron = cron
-	return &this
-}
-
-// NewCreateApplicationRequestWithDefaults instantiates a new CreateApplicationRequest object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
-func NewCreateApplicationRequestWithDefaults() *CreateApplicationRequest {
-	this := CreateApplicationRequest{}
-	return &this
-}
-
-// GetType returns the Type field value
-func (o *CreateApplicationRequest) GetType() EnumE2faa1839c383d205180930f9bfb3583 {
-	if o == nil {
-		var ret EnumE2faa1839c383d205180930f9bfb3583
-		return ret
-	}
-
-	return o.Type
-}
-
-// GetTypeOk returns a tuple with the Type field value
-// and a boolean to check if the value has been set.
-func (o *CreateApplicationRequest) GetTypeOk() (*EnumE2faa1839c383d205180930f9bfb3583, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Type, true
-}
-
-// SetType sets field value
-func (o *CreateApplicationRequest) SetType(v EnumE2faa1839c383d205180930f9bfb3583) {
-	o.Type = v
-}
-
-// GetUrl returns the Url field value
-func (o *CreateApplicationRequest) GetUrl() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Url
-}
-
-// GetUrlOk returns a tuple with the Url field value
-// and a boolean to check if the value has been set.
-func (o *CreateApplicationRequest) GetUrlOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Url, true
-}
-
-// SetUrl sets field value
-func (o *CreateApplicationRequest) SetUrl(v string) {
-	o.Url = v
-}
-
-// GetSchema returns the Schema field value
-func (o *CreateApplicationRequest) GetSchema() CreateApplicationRequestSchema {
-	if o == nil {
-		var ret CreateApplicationRequestSchema
-		return ret
-	}
-
-	return o.Schema
-}
-
-// GetSchemaOk returns a tuple with the Schema field value
-// and a boolean to check if the value has been set.
-func (o *CreateApplicationRequest) GetSchemaOk() (*CreateApplicationRequestSchema, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Schema, true
-}
-
-// SetSchema sets field value
-func (o *CreateApplicationRequest) SetSchema(v CreateApplicationRequestSchema) {
-	o.Schema = v
-}
-
-// GetConfiguration returns the Configuration field value if set, zero value otherwise.
-func (o *CreateApplicationRequest) GetConfiguration() CreateApplicationRequestConfiguration {
-	if o == nil || IsNil(o.Configuration) {
-		var ret CreateApplicationRequestConfiguration
-		return ret
-	}
-	return *o.Configuration
-}
-
-// GetConfigurationOk returns a tuple with the Configuration field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateApplicationRequest) GetConfigurationOk() (*CreateApplicationRequestConfiguration, bool) {
-	if o == nil || IsNil(o.Configuration) {
-		return nil, false
-	}
-	return o.Configuration, true
-}
-
-// HasConfiguration returns a boolean if a field has been set.
-func (o *CreateApplicationRequest) HasConfiguration() bool {
-	if o != nil && !IsNil(o.Configuration) {
-		return true
-	}
-
-	return false
-}
-
-// SetConfiguration gets a reference to the given CreateApplicationRequestConfiguration and assigns it to the Configuration field.
-func (o *CreateApplicationRequest) SetConfiguration(v CreateApplicationRequestConfiguration) {
-	o.Configuration = &v
-}
-
-// GetName returns the Name field value
-func (o *CreateApplicationRequest) GetName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value
-// and a boolean to check if the value has been set.
-func (o *CreateApplicationRequest) GetNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Name, true
-}
-
-// SetName sets field value
-func (o *CreateApplicationRequest) SetName(v string) {
-	o.Name = v
-}
-
-// GetLocationId returns the LocationId field value
-func (o *CreateApplicationRequest) GetLocationId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.LocationId
-}
-
-// GetLocationIdOk returns a tuple with the LocationId field value
-// and a boolean to check if the value has been set.
-func (o *CreateApplicationRequest) GetLocationIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.LocationId, true
-}
-
-// SetLocationId sets field value
-func (o *CreateApplicationRequest) SetLocationId(v string) {
-	o.LocationId = v
-}
-
-// GetCron returns the Cron field value
-func (o *CreateApplicationRequest) GetCron() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Cron
-}
-
-// GetCronOk returns a tuple with the Cron field value
-// and a boolean to check if the value has been set.
-func (o *CreateApplicationRequest) GetCronOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Cron, true
-}
-
-// SetCron sets field value
-func (o *CreateApplicationRequest) SetCron(v string) {
-	o.Cron = v
-}
-
-func (o CreateApplicationRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o CreateApplicationRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
-	toSerialize["type"] = o.Type
-	toSerialize["url"] = o.Url
-	toSerialize["schema"] = o.Schema
-	if !IsNil(o.Configuration) {
-		toSerialize["configuration"] = o.Configuration
-	}
-	toSerialize["name"] = o.Name
-	toSerialize["locationId"] = o.LocationId
-	toSerialize["cron"] = o.Cron
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
-	return toSerialize, nil
-}
-
-func (o *CreateApplicationRequest) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"type",
-		"url",
-		"schema",
-		"name",
-		"locationId",
-		"cron",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
+// Unmarshal JSON data into any of the pointers in the struct
+func (dst *CreateApplicationRequest) UnmarshalJSON(data []byte) error {
+	var err error
+	// try to unmarshal JSON data into CreateApplicationRequestAnyOf
+	err = json.Unmarshal(data, &dst.CreateApplicationRequestAnyOf);
+	if err == nil {
+		jsonCreateApplicationRequestAnyOf, _ := json.Marshal(dst.CreateApplicationRequestAnyOf)
+		if string(jsonCreateApplicationRequestAnyOf) == "{}" { // empty struct
+			dst.CreateApplicationRequestAnyOf = nil
+		} else {
+			return nil // data stored in dst.CreateApplicationRequestAnyOf, return on the first match
 		}
+	} else {
+		dst.CreateApplicationRequestAnyOf = nil
 	}
 
-	varCreateApplicationRequest := _CreateApplicationRequest{}
-
-	err = json.Unmarshal(data, &varCreateApplicationRequest)
-
-	if err != nil {
-		return err
+	// try to unmarshal JSON data into CreateApplicationRequestAnyOf1
+	err = json.Unmarshal(data, &dst.CreateApplicationRequestAnyOf1);
+	if err == nil {
+		jsonCreateApplicationRequestAnyOf1, _ := json.Marshal(dst.CreateApplicationRequestAnyOf1)
+		if string(jsonCreateApplicationRequestAnyOf1) == "{}" { // empty struct
+			dst.CreateApplicationRequestAnyOf1 = nil
+		} else {
+			return nil // data stored in dst.CreateApplicationRequestAnyOf1, return on the first match
+		}
+	} else {
+		dst.CreateApplicationRequestAnyOf1 = nil
 	}
 
-	*o = CreateApplicationRequest(varCreateApplicationRequest)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "type")
-		delete(additionalProperties, "url")
-		delete(additionalProperties, "schema")
-		delete(additionalProperties, "configuration")
-		delete(additionalProperties, "name")
-		delete(additionalProperties, "locationId")
-		delete(additionalProperties, "cron")
-		o.AdditionalProperties = additionalProperties
+	// try to unmarshal JSON data into CreateApplicationRequestAnyOf2
+	err = json.Unmarshal(data, &dst.CreateApplicationRequestAnyOf2);
+	if err == nil {
+		jsonCreateApplicationRequestAnyOf2, _ := json.Marshal(dst.CreateApplicationRequestAnyOf2)
+		if string(jsonCreateApplicationRequestAnyOf2) == "{}" { // empty struct
+			dst.CreateApplicationRequestAnyOf2 = nil
+		} else {
+			return nil // data stored in dst.CreateApplicationRequestAnyOf2, return on the first match
+		}
+	} else {
+		dst.CreateApplicationRequestAnyOf2 = nil
 	}
 
-	return err
+	return fmt.Errorf("data failed to match schemas in anyOf(CreateApplicationRequest)")
 }
+
+// Marshal data from the first non-nil pointers in the struct to JSON
+func (src CreateApplicationRequest) MarshalJSON() ([]byte, error) {
+	if src.CreateApplicationRequestAnyOf != nil {
+		return json.Marshal(&src.CreateApplicationRequestAnyOf)
+	}
+
+	if src.CreateApplicationRequestAnyOf1 != nil {
+		return json.Marshal(&src.CreateApplicationRequestAnyOf1)
+	}
+
+	if src.CreateApplicationRequestAnyOf2 != nil {
+		return json.Marshal(&src.CreateApplicationRequestAnyOf2)
+	}
+
+	return nil, nil // no data in anyOf schemas
+}
+
 
 type NullableCreateApplicationRequest struct {
 	value *CreateApplicationRequest

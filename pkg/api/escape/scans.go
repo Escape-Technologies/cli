@@ -50,7 +50,7 @@ func StartScan(
 	commitBranch string,
 	commitAuthor string,
 	commitAuthorProfilePictureLink string,
-	configurationOverride *v2.CreateApplicationRequestConfiguration,
+	configurationOverride *v2.CreateApplicationRequestAnyOfConfiguration,
 ) (*v2.ListScans200ResponseDataInner, error) {
 	client, err := newAPIV2Client()
 	if err != nil {
