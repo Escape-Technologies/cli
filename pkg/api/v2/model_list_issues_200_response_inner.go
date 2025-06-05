@@ -26,7 +26,7 @@ type ListIssues200ResponseInner struct {
 	PlatformUrl string `json:"platformUrl"`
 	Ignored bool `json:"ignored"`
 	Type Enum1ab5d44a8d8b0e47bb5ab55e0fd2b986 `json:"type"`
-	Category Enum517d458bf219c9da2092895cc6b18716 `json:"category"`
+	Category Enum5cf07f4dc5d62ad66f92942c1b7ce23f `json:"category"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -36,7 +36,7 @@ type _ListIssues200ResponseInner ListIssues200ResponseInner
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewListIssues200ResponseInner(id string, severity Enum9c1e82c38fa16c4851aece69dc28da0b, name string, platformUrl string, ignored bool, type_ Enum1ab5d44a8d8b0e47bb5ab55e0fd2b986, category Enum517d458bf219c9da2092895cc6b18716) *ListIssues200ResponseInner {
+func NewListIssues200ResponseInner(id string, severity Enum9c1e82c38fa16c4851aece69dc28da0b, name string, platformUrl string, ignored bool, type_ Enum1ab5d44a8d8b0e47bb5ab55e0fd2b986, category Enum5cf07f4dc5d62ad66f92942c1b7ce23f) *ListIssues200ResponseInner {
 	this := ListIssues200ResponseInner{}
 	this.Id = id
 	this.Severity = severity
@@ -201,9 +201,9 @@ func (o *ListIssues200ResponseInner) SetType(v Enum1ab5d44a8d8b0e47bb5ab55e0fd2b
 }
 
 // GetCategory returns the Category field value
-func (o *ListIssues200ResponseInner) GetCategory() Enum517d458bf219c9da2092895cc6b18716 {
+func (o *ListIssues200ResponseInner) GetCategory() Enum5cf07f4dc5d62ad66f92942c1b7ce23f {
 	if o == nil {
-		var ret Enum517d458bf219c9da2092895cc6b18716
+		var ret Enum5cf07f4dc5d62ad66f92942c1b7ce23f
 		return ret
 	}
 
@@ -212,7 +212,7 @@ func (o *ListIssues200ResponseInner) GetCategory() Enum517d458bf219c9da2092895cc
 
 // GetCategoryOk returns a tuple with the Category field value
 // and a boolean to check if the value has been set.
-func (o *ListIssues200ResponseInner) GetCategoryOk() (*Enum517d458bf219c9da2092895cc6b18716, bool) {
+func (o *ListIssues200ResponseInner) GetCategoryOk() (*Enum5cf07f4dc5d62ad66f92942c1b7ce23f, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -220,7 +220,7 @@ func (o *ListIssues200ResponseInner) GetCategoryOk() (*Enum517d458bf219c9da20928
 }
 
 // SetCategory sets field value
-func (o *ListIssues200ResponseInner) SetCategory(v Enum517d458bf219c9da2092895cc6b18716) {
+func (o *ListIssues200ResponseInner) SetCategory(v Enum5cf07f4dc5d62ad66f92942c1b7ce23f) {
 	o.Category = v
 }
 

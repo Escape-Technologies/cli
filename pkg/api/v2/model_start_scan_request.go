@@ -27,7 +27,7 @@ type StartScanRequest struct {
 	CommitBranch *string `json:"commitBranch,omitempty"`
 	CommitAuthor *string `json:"commitAuthor,omitempty"`
 	CommitAuthorProfilePictureLink *string `json:"commitAuthorProfilePictureLink,omitempty"`
-	ConfigurationOverride *CreateApplicationRequestAnyOfConfiguration `json:"configurationOverride,omitempty"`
+	ConfigurationOverride *FrontendConfiguration `json:"configurationOverride,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -236,9 +236,9 @@ func (o *StartScanRequest) SetCommitAuthorProfilePictureLink(v string) {
 }
 
 // GetConfigurationOverride returns the ConfigurationOverride field value if set, zero value otherwise.
-func (o *StartScanRequest) GetConfigurationOverride() CreateApplicationRequestAnyOfConfiguration {
+func (o *StartScanRequest) GetConfigurationOverride() FrontendConfiguration {
 	if o == nil || IsNil(o.ConfigurationOverride) {
-		var ret CreateApplicationRequestAnyOfConfiguration
+		var ret FrontendConfiguration
 		return ret
 	}
 	return *o.ConfigurationOverride
@@ -246,7 +246,7 @@ func (o *StartScanRequest) GetConfigurationOverride() CreateApplicationRequestAn
 
 // GetConfigurationOverrideOk returns a tuple with the ConfigurationOverride field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *StartScanRequest) GetConfigurationOverrideOk() (*CreateApplicationRequestAnyOfConfiguration, bool) {
+func (o *StartScanRequest) GetConfigurationOverrideOk() (*FrontendConfiguration, bool) {
 	if o == nil || IsNil(o.ConfigurationOverride) {
 		return nil, false
 	}
@@ -262,8 +262,8 @@ func (o *StartScanRequest) HasConfigurationOverride() bool {
 	return false
 }
 
-// SetConfigurationOverride gets a reference to the given CreateApplicationRequestAnyOfConfiguration and assigns it to the ConfigurationOverride field.
-func (o *StartScanRequest) SetConfigurationOverride(v CreateApplicationRequestAnyOfConfiguration) {
+// SetConfigurationOverride gets a reference to the given FrontendConfiguration and assigns it to the ConfigurationOverride field.
+func (o *StartScanRequest) SetConfigurationOverride(v FrontendConfiguration) {
 	o.ConfigurationOverride = &v
 }
 

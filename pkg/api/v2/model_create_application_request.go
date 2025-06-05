@@ -18,51 +18,51 @@ import (
 
 // CreateApplicationRequest struct for CreateApplicationRequest
 type CreateApplicationRequest struct {
-	CreateApplicationRequestAnyOf *CreateApplicationRequestAnyOf
-	CreateApplicationRequestAnyOf1 *CreateApplicationRequestAnyOf1
-	CreateApplicationRequestAnyOf2 *CreateApplicationRequestAnyOf2
+	Frontend *Frontend
+	GraphQL *GraphQL
+	REST *REST
 }
 
 // Unmarshal JSON data into any of the pointers in the struct
 func (dst *CreateApplicationRequest) UnmarshalJSON(data []byte) error {
 	var err error
-	// try to unmarshal JSON data into CreateApplicationRequestAnyOf
-	err = json.Unmarshal(data, &dst.CreateApplicationRequestAnyOf);
+	// try to unmarshal JSON data into Frontend
+	err = json.Unmarshal(data, &dst.Frontend);
 	if err == nil {
-		jsonCreateApplicationRequestAnyOf, _ := json.Marshal(dst.CreateApplicationRequestAnyOf)
-		if string(jsonCreateApplicationRequestAnyOf) == "{}" { // empty struct
-			dst.CreateApplicationRequestAnyOf = nil
+		jsonFrontend, _ := json.Marshal(dst.Frontend)
+		if string(jsonFrontend) == "{}" { // empty struct
+			dst.Frontend = nil
 		} else {
-			return nil // data stored in dst.CreateApplicationRequestAnyOf, return on the first match
+			return nil // data stored in dst.Frontend, return on the first match
 		}
 	} else {
-		dst.CreateApplicationRequestAnyOf = nil
+		dst.Frontend = nil
 	}
 
-	// try to unmarshal JSON data into CreateApplicationRequestAnyOf1
-	err = json.Unmarshal(data, &dst.CreateApplicationRequestAnyOf1);
+	// try to unmarshal JSON data into GraphQL
+	err = json.Unmarshal(data, &dst.GraphQL);
 	if err == nil {
-		jsonCreateApplicationRequestAnyOf1, _ := json.Marshal(dst.CreateApplicationRequestAnyOf1)
-		if string(jsonCreateApplicationRequestAnyOf1) == "{}" { // empty struct
-			dst.CreateApplicationRequestAnyOf1 = nil
+		jsonGraphQL, _ := json.Marshal(dst.GraphQL)
+		if string(jsonGraphQL) == "{}" { // empty struct
+			dst.GraphQL = nil
 		} else {
-			return nil // data stored in dst.CreateApplicationRequestAnyOf1, return on the first match
+			return nil // data stored in dst.GraphQL, return on the first match
 		}
 	} else {
-		dst.CreateApplicationRequestAnyOf1 = nil
+		dst.GraphQL = nil
 	}
 
-	// try to unmarshal JSON data into CreateApplicationRequestAnyOf2
-	err = json.Unmarshal(data, &dst.CreateApplicationRequestAnyOf2);
+	// try to unmarshal JSON data into REST
+	err = json.Unmarshal(data, &dst.REST);
 	if err == nil {
-		jsonCreateApplicationRequestAnyOf2, _ := json.Marshal(dst.CreateApplicationRequestAnyOf2)
-		if string(jsonCreateApplicationRequestAnyOf2) == "{}" { // empty struct
-			dst.CreateApplicationRequestAnyOf2 = nil
+		jsonREST, _ := json.Marshal(dst.REST)
+		if string(jsonREST) == "{}" { // empty struct
+			dst.REST = nil
 		} else {
-			return nil // data stored in dst.CreateApplicationRequestAnyOf2, return on the first match
+			return nil // data stored in dst.REST, return on the first match
 		}
 	} else {
-		dst.CreateApplicationRequestAnyOf2 = nil
+		dst.REST = nil
 	}
 
 	return fmt.Errorf("data failed to match schemas in anyOf(CreateApplicationRequest)")
@@ -70,16 +70,16 @@ func (dst *CreateApplicationRequest) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src CreateApplicationRequest) MarshalJSON() ([]byte, error) {
-	if src.CreateApplicationRequestAnyOf != nil {
-		return json.Marshal(&src.CreateApplicationRequestAnyOf)
+	if src.Frontend != nil {
+		return json.Marshal(&src.Frontend)
 	}
 
-	if src.CreateApplicationRequestAnyOf1 != nil {
-		return json.Marshal(&src.CreateApplicationRequestAnyOf1)
+	if src.GraphQL != nil {
+		return json.Marshal(&src.GraphQL)
 	}
 
-	if src.CreateApplicationRequestAnyOf2 != nil {
-		return json.Marshal(&src.CreateApplicationRequestAnyOf2)
+	if src.REST != nil {
+		return json.Marshal(&src.REST)
 	}
 
 	return nil, nil // no data in anyOf schemas
