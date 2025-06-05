@@ -683,15 +683,15 @@ type ApiUpdateConfigurationRequest struct {
 	ctx context.Context
 	ApiService *ApplicationsAPIService
 	id string
-	createApplicationRequestAnyOfConfiguration *CreateApplicationRequestAnyOfConfiguration
+	frontendConfiguration *FrontendConfiguration
 }
 
-func (r ApiUpdateConfigurationRequest) CreateApplicationRequestAnyOfConfiguration(createApplicationRequestAnyOfConfiguration CreateApplicationRequestAnyOfConfiguration) ApiUpdateConfigurationRequest {
-	r.createApplicationRequestAnyOfConfiguration = &createApplicationRequestAnyOfConfiguration
+func (r ApiUpdateConfigurationRequest) FrontendConfiguration(frontendConfiguration FrontendConfiguration) ApiUpdateConfigurationRequest {
+	r.frontendConfiguration = &frontendConfiguration
 	return r
 }
 
-func (r ApiUpdateConfigurationRequest) Execute() (*CreateApplicationRequestAnyOfConfiguration, *http.Response, error) {
+func (r ApiUpdateConfigurationRequest) Execute() (*FrontendConfiguration, *http.Response, error) {
 	return r.ApiService.UpdateConfigurationExecute(r)
 }
 
@@ -713,13 +713,13 @@ func (a *ApplicationsAPIService) UpdateConfiguration(ctx context.Context, id str
 }
 
 // Execute executes the request
-//  @return CreateApplicationRequestAnyOfConfiguration
-func (a *ApplicationsAPIService) UpdateConfigurationExecute(r ApiUpdateConfigurationRequest) (*CreateApplicationRequestAnyOfConfiguration, *http.Response, error) {
+//  @return FrontendConfiguration
+func (a *ApplicationsAPIService) UpdateConfigurationExecute(r ApiUpdateConfigurationRequest) (*FrontendConfiguration, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateApplicationRequestAnyOfConfiguration
+		localVarReturnValue  *FrontendConfiguration
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplicationsAPIService.UpdateConfiguration")
@@ -752,7 +752,7 @@ func (a *ApplicationsAPIService) UpdateConfigurationExecute(r ApiUpdateConfigura
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.createApplicationRequestAnyOfConfiguration
+	localVarPostBody = r.frontendConfiguration
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -818,11 +818,11 @@ type ApiUpdateSchemaRequest struct {
 	ctx context.Context
 	ApiService *ApplicationsAPIService
 	id string
-	createApplicationRequestAnyOf1Schema *CreateApplicationRequestAnyOf1Schema
+	graphQLSchema *GraphQLSchema
 }
 
-func (r ApiUpdateSchemaRequest) CreateApplicationRequestAnyOf1Schema(createApplicationRequestAnyOf1Schema CreateApplicationRequestAnyOf1Schema) ApiUpdateSchemaRequest {
-	r.createApplicationRequestAnyOf1Schema = &createApplicationRequestAnyOf1Schema
+func (r ApiUpdateSchemaRequest) GraphQLSchema(graphQLSchema GraphQLSchema) ApiUpdateSchemaRequest {
+	r.graphQLSchema = &graphQLSchema
 	return r
 }
 
@@ -887,7 +887,7 @@ func (a *ApplicationsAPIService) UpdateSchemaExecute(r ApiUpdateSchemaRequest) (
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.createApplicationRequestAnyOf1Schema
+	localVarPostBody = r.graphQLSchema
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
