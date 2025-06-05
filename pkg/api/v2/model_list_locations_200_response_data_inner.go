@@ -14,11 +14,11 @@ import (
 	"encoding/json"
 )
 
-// checks if the ListLocations200ResponseInner type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &ListLocations200ResponseInner{}
+// checks if the ListLocations200ResponseDataInner type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ListLocations200ResponseDataInner{}
 
-// ListLocations200ResponseInner struct for ListLocations200ResponseInner
-type ListLocations200ResponseInner struct {
+// ListLocations200ResponseDataInner struct for ListLocations200ResponseDataInner
+type ListLocations200ResponseDataInner struct {
 	// The location ID.
 	Id *string `json:"id,omitempty"`
 	// The name of the location.
@@ -28,14 +28,14 @@ type ListLocations200ResponseInner struct {
 	AdditionalProperties map[string]interface{}
 }
 
-type _ListLocations200ResponseInner ListLocations200ResponseInner
+type _ListLocations200ResponseDataInner ListLocations200ResponseDataInner
 
-// NewListLocations200ResponseInner instantiates a new ListLocations200ResponseInner object
+// NewListLocations200ResponseDataInner instantiates a new ListLocations200ResponseDataInner object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewListLocations200ResponseInner() *ListLocations200ResponseInner {
-	this := ListLocations200ResponseInner{}
+func NewListLocations200ResponseDataInner() *ListLocations200ResponseDataInner {
+	this := ListLocations200ResponseDataInner{}
 	var id string = "00000000-0000-0000-0000-000000000000"
 	this.Id = &id
 	var name string = "Location Name"
@@ -45,11 +45,11 @@ func NewListLocations200ResponseInner() *ListLocations200ResponseInner {
 	return &this
 }
 
-// NewListLocations200ResponseInnerWithDefaults instantiates a new ListLocations200ResponseInner object
+// NewListLocations200ResponseDataInnerWithDefaults instantiates a new ListLocations200ResponseDataInner object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewListLocations200ResponseInnerWithDefaults() *ListLocations200ResponseInner {
-	this := ListLocations200ResponseInner{}
+func NewListLocations200ResponseDataInnerWithDefaults() *ListLocations200ResponseDataInner {
+	this := ListLocations200ResponseDataInner{}
 	var id string = "00000000-0000-0000-0000-000000000000"
 	this.Id = &id
 	var name string = "Location Name"
@@ -60,7 +60,7 @@ func NewListLocations200ResponseInnerWithDefaults() *ListLocations200ResponseInn
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
-func (o *ListLocations200ResponseInner) GetId() string {
+func (o *ListLocations200ResponseDataInner) GetId() string {
 	if o == nil || IsNil(o.Id) {
 		var ret string
 		return ret
@@ -70,7 +70,7 @@ func (o *ListLocations200ResponseInner) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ListLocations200ResponseInner) GetIdOk() (*string, bool) {
+func (o *ListLocations200ResponseDataInner) GetIdOk() (*string, bool) {
 	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
@@ -78,7 +78,7 @@ func (o *ListLocations200ResponseInner) GetIdOk() (*string, bool) {
 }
 
 // HasId returns a boolean if a field has been set.
-func (o *ListLocations200ResponseInner) HasId() bool {
+func (o *ListLocations200ResponseDataInner) HasId() bool {
 	if o != nil && !IsNil(o.Id) {
 		return true
 	}
@@ -87,12 +87,12 @@ func (o *ListLocations200ResponseInner) HasId() bool {
 }
 
 // SetId gets a reference to the given string and assigns it to the Id field.
-func (o *ListLocations200ResponseInner) SetId(v string) {
+func (o *ListLocations200ResponseDataInner) SetId(v string) {
 	o.Id = &v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
-func (o *ListLocations200ResponseInner) GetName() string {
+func (o *ListLocations200ResponseDataInner) GetName() string {
 	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
@@ -102,7 +102,7 @@ func (o *ListLocations200ResponseInner) GetName() string {
 
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ListLocations200ResponseInner) GetNameOk() (*string, bool) {
+func (o *ListLocations200ResponseDataInner) GetNameOk() (*string, bool) {
 	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
@@ -110,7 +110,7 @@ func (o *ListLocations200ResponseInner) GetNameOk() (*string, bool) {
 }
 
 // HasName returns a boolean if a field has been set.
-func (o *ListLocations200ResponseInner) HasName() bool {
+func (o *ListLocations200ResponseDataInner) HasName() bool {
 	if o != nil && !IsNil(o.Name) {
 		return true
 	}
@@ -119,12 +119,12 @@ func (o *ListLocations200ResponseInner) HasName() bool {
 }
 
 // SetName gets a reference to the given string and assigns it to the Name field.
-func (o *ListLocations200ResponseInner) SetName(v string) {
+func (o *ListLocations200ResponseDataInner) SetName(v string) {
 	o.Name = &v
 }
 
 // GetSshPublicKey returns the SshPublicKey field value if set, zero value otherwise.
-func (o *ListLocations200ResponseInner) GetSshPublicKey() string {
+func (o *ListLocations200ResponseDataInner) GetSshPublicKey() string {
 	if o == nil || IsNil(o.SshPublicKey) {
 		var ret string
 		return ret
@@ -134,7 +134,7 @@ func (o *ListLocations200ResponseInner) GetSshPublicKey() string {
 
 // GetSshPublicKeyOk returns a tuple with the SshPublicKey field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ListLocations200ResponseInner) GetSshPublicKeyOk() (*string, bool) {
+func (o *ListLocations200ResponseDataInner) GetSshPublicKeyOk() (*string, bool) {
 	if o == nil || IsNil(o.SshPublicKey) {
 		return nil, false
 	}
@@ -142,7 +142,7 @@ func (o *ListLocations200ResponseInner) GetSshPublicKeyOk() (*string, bool) {
 }
 
 // HasSshPublicKey returns a boolean if a field has been set.
-func (o *ListLocations200ResponseInner) HasSshPublicKey() bool {
+func (o *ListLocations200ResponseDataInner) HasSshPublicKey() bool {
 	if o != nil && !IsNil(o.SshPublicKey) {
 		return true
 	}
@@ -151,11 +151,11 @@ func (o *ListLocations200ResponseInner) HasSshPublicKey() bool {
 }
 
 // SetSshPublicKey gets a reference to the given string and assigns it to the SshPublicKey field.
-func (o *ListLocations200ResponseInner) SetSshPublicKey(v string) {
+func (o *ListLocations200ResponseDataInner) SetSshPublicKey(v string) {
 	o.SshPublicKey = &v
 }
 
-func (o ListLocations200ResponseInner) MarshalJSON() ([]byte, error) {
+func (o ListLocations200ResponseDataInner) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -163,7 +163,7 @@ func (o ListLocations200ResponseInner) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ListLocations200ResponseInner) ToMap() (map[string]interface{}, error) {
+func (o ListLocations200ResponseDataInner) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
@@ -182,16 +182,16 @@ func (o ListLocations200ResponseInner) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *ListLocations200ResponseInner) UnmarshalJSON(data []byte) (err error) {
-	varListLocations200ResponseInner := _ListLocations200ResponseInner{}
+func (o *ListLocations200ResponseDataInner) UnmarshalJSON(data []byte) (err error) {
+	varListLocations200ResponseDataInner := _ListLocations200ResponseDataInner{}
 
-	err = json.Unmarshal(data, &varListLocations200ResponseInner)
+	err = json.Unmarshal(data, &varListLocations200ResponseDataInner)
 
 	if err != nil {
 		return err
 	}
 
-	*o = ListLocations200ResponseInner(varListLocations200ResponseInner)
+	*o = ListLocations200ResponseDataInner(varListLocations200ResponseDataInner)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -205,38 +205,38 @@ func (o *ListLocations200ResponseInner) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableListLocations200ResponseInner struct {
-	value *ListLocations200ResponseInner
+type NullableListLocations200ResponseDataInner struct {
+	value *ListLocations200ResponseDataInner
 	isSet bool
 }
 
-func (v NullableListLocations200ResponseInner) Get() *ListLocations200ResponseInner {
+func (v NullableListLocations200ResponseDataInner) Get() *ListLocations200ResponseDataInner {
 	return v.value
 }
 
-func (v *NullableListLocations200ResponseInner) Set(val *ListLocations200ResponseInner) {
+func (v *NullableListLocations200ResponseDataInner) Set(val *ListLocations200ResponseDataInner) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableListLocations200ResponseInner) IsSet() bool {
+func (v NullableListLocations200ResponseDataInner) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableListLocations200ResponseInner) Unset() {
+func (v *NullableListLocations200ResponseDataInner) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableListLocations200ResponseInner(val *ListLocations200ResponseInner) *NullableListLocations200ResponseInner {
-	return &NullableListLocations200ResponseInner{value: val, isSet: true}
+func NewNullableListLocations200ResponseDataInner(val *ListLocations200ResponseDataInner) *NullableListLocations200ResponseDataInner {
+	return &NullableListLocations200ResponseDataInner{value: val, isSet: true}
 }
 
-func (v NullableListLocations200ResponseInner) MarshalJSON() ([]byte, error) {
+func (v NullableListLocations200ResponseDataInner) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableListLocations200ResponseInner) UnmarshalJSON(src []byte) error {
+func (v *NullableListLocations200ResponseDataInner) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
