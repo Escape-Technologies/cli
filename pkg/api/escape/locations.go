@@ -9,21 +9,27 @@ import (
 )
 
 // ListLocations lists all locations
-func ListLocations(ctx context.Context) ([]v2.ListLocations200ResponseInner, error) {
+func ListLocations(ctx context.Context, count *int, after *string) ([]v2.ListLocations200ResponseDataInner, error) {
 	client, err := newAPIV2Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
 	req := client.LocationsAPI.ListLocations(ctx)
-	data, _, err := req.Execute()
+	if count != nil {
+		req = req.Count(*count)
+	}
+	if after != nil {
+		req = req.After(*after)
+	}
+	result, _, err := req.Execute()
 	if err != nil {
 		return nil, fmt.Errorf("unable to get locations: %w", err)
 	}
-	return data, nil
+	return result.Data, nil
 }
 
 // GetLocation gets a location by ID
-func GetLocation(ctx context.Context, id string) (*v2.ListLocations200ResponseInner, error) {
+func GetLocation(ctx context.Context, id string) (*v2.ListLocations200ResponseDataInner, error) {
 	client, err := newAPIV2Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)

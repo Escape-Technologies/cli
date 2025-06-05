@@ -137,7 +137,7 @@ escape-cli scans start 00000000-0000-0000-0000-000000000000 --override '{"scan":
 	Short: "Start a scan",
 	Long:  "Start a new scan of an application",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		override := v2.NullableCreateApplicationRequestAnyOfConfiguration{}
+		override := v2.NullableFrontendConfiguration{}
 		if scanStartCmdConfigurationOverride != "" {
 			err := override.UnmarshalJSON([]byte(scanStartCmdConfigurationOverride))
 			if err != nil {
