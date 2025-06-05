@@ -55,7 +55,7 @@ func UpdateApplicationSchema(ctx context.Context, id string, schemaPathOrURL str
 	if err != nil {
 		return fmt.Errorf("unable to upload schema: %w", err)
 	}
-	_, _, err = client.ApplicationsAPI.UpdateSchema(ctx, id).CreateApplicationRequestAnyOf1Schema(v2.CreateApplicationRequestAnyOf1Schema{
+	_, _, err = client.ApplicationsAPI.UpdateSchema(ctx, id).GraphQLSchema(v2.GraphQLSchema{
 		Url:    url,
 		BlobId: blobID,
 	}).Execute()
@@ -136,19 +136,19 @@ func UpdateApplicationConfig(ctx context.Context, id string, configPath string) 
 	if err != nil {
 		return fmt.Errorf("unable to read config at %s: %w", configPath, err)
 	}
-	_, _, err = client.ApplicationsAPI.UpdateConfiguration(ctx, id).CreateApplicationRequestAnyOfConfiguration(*cfg).Execute()
+	_, _, err = client.ApplicationsAPI.UpdateConfiguration(ctx, id).FrontendConfiguration(*cfg).Execute()
 	if err != nil {
 		return fmt.Errorf("api error: %w", err)
 	}
 	return nil
 }
 
-func readConfig(path string) (*v2.CreateApplicationRequestAnyOfConfiguration, error) {
+func readConfig(path string) (*v2.FrontendConfiguration, error) {
 	body, err := os.ReadFile(path)
 	if err != nil {
 		return nil, fmt.Errorf("unable to read file: %w", err)
 	}
-	cfg, err := ParseJSONOrYAML(body, &v2.NullableCreateApplicationRequestAnyOfConfiguration{})
+	cfg, err := ParseJSONOrYAML(body, &v2.NullableFrontendConfiguration{})
 	if err != nil {
 		return nil, fmt.Errorf("unable to parse config: %w", err)
 	}

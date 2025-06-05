@@ -34,7 +34,7 @@ func (r ApiCreateLocationRequest) CreateLocationRequest(createLocationRequest Cr
 	return r
 }
 
-func (r ApiCreateLocationRequest) Execute() (*ListLocations200ResponseInner, *http.Response, error) {
+func (r ApiCreateLocationRequest) Execute() (*ListLocations200ResponseDataInner, *http.Response, error) {
 	return r.ApiService.CreateLocationExecute(r)
 }
 
@@ -54,13 +54,13 @@ func (a *LocationsAPIService) CreateLocation(ctx context.Context) ApiCreateLocat
 }
 
 // Execute executes the request
-//  @return ListLocations200ResponseInner
-func (a *LocationsAPIService) CreateLocationExecute(r ApiCreateLocationRequest) (*ListLocations200ResponseInner, *http.Response, error) {
+//  @return ListLocations200ResponseDataInner
+func (a *LocationsAPIService) CreateLocationExecute(r ApiCreateLocationRequest) (*ListLocations200ResponseDataInner, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ListLocations200ResponseInner
+		localVarReturnValue  *ListLocations200ResponseDataInner
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LocationsAPIService.CreateLocation")
@@ -298,7 +298,7 @@ type ApiGetLocationRequest struct {
 	id string
 }
 
-func (r ApiGetLocationRequest) Execute() (*ListLocations200ResponseInner, *http.Response, error) {
+func (r ApiGetLocationRequest) Execute() (*ListLocations200ResponseDataInner, *http.Response, error) {
 	return r.ApiService.GetLocationExecute(r)
 }
 
@@ -320,13 +320,13 @@ func (a *LocationsAPIService) GetLocation(ctx context.Context, id string) ApiGet
 }
 
 // Execute executes the request
-//  @return ListLocations200ResponseInner
-func (a *LocationsAPIService) GetLocationExecute(r ApiGetLocationRequest) (*ListLocations200ResponseInner, *http.Response, error) {
+//  @return ListLocations200ResponseDataInner
+func (a *LocationsAPIService) GetLocationExecute(r ApiGetLocationRequest) (*ListLocations200ResponseDataInner, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ListLocations200ResponseInner
+		localVarReturnValue  *ListLocations200ResponseDataInner
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LocationsAPIService.GetLocation")
@@ -422,9 +422,23 @@ func (a *LocationsAPIService) GetLocationExecute(r ApiGetLocationRequest) (*List
 type ApiListLocationsRequest struct {
 	ctx context.Context
 	ApiService *LocationsAPIService
+	after *string
+	count *int
 }
 
-func (r ApiListLocationsRequest) Execute() ([]ListLocations200ResponseInner, *http.Response, error) {
+// The cursor to start the pagination from
+func (r ApiListLocationsRequest) After(after string) ApiListLocationsRequest {
+	r.after = &after
+	return r
+}
+
+// The number of items to return
+func (r ApiListLocationsRequest) Count(count int) ApiListLocationsRequest {
+	r.count = &count
+	return r
+}
+
+func (r ApiListLocationsRequest) Execute() (*ListLocations200Response, *http.Response, error) {
 	return r.ApiService.ListLocationsExecute(r)
 }
 
@@ -442,13 +456,13 @@ func (a *LocationsAPIService) ListLocations(ctx context.Context) ApiListLocation
 }
 
 // Execute executes the request
-//  @return []ListLocations200ResponseInner
-func (a *LocationsAPIService) ListLocationsExecute(r ApiListLocationsRequest) ([]ListLocations200ResponseInner, *http.Response, error) {
+//  @return ListLocations200Response
+func (a *LocationsAPIService) ListLocationsExecute(r ApiListLocationsRequest) (*ListLocations200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []ListLocations200ResponseInner
+		localVarReturnValue  *ListLocations200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LocationsAPIService.ListLocations")
@@ -462,6 +476,15 @@ func (a *LocationsAPIService) ListLocationsExecute(r ApiListLocationsRequest) ([
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.after != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "after", r.after, "form", "")
+	}
+	if r.count != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "count", r.count, "form", "")
+	} else {
+		var defaultValue int = 50
+		r.count = &defaultValue
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -515,6 +538,16 @@ func (a *LocationsAPIService) ListLocationsExecute(r ApiListLocationsRequest) ([
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ListScans400Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -542,7 +575,7 @@ func (r ApiUpdateLocationRequest) UpdateLocationRequest(updateLocationRequest Up
 	return r
 }
 
-func (r ApiUpdateLocationRequest) Execute() (*ListLocations200ResponseInner, *http.Response, error) {
+func (r ApiUpdateLocationRequest) Execute() (*ListLocations200ResponseDataInner, *http.Response, error) {
 	return r.ApiService.UpdateLocationExecute(r)
 }
 
@@ -564,13 +597,13 @@ func (a *LocationsAPIService) UpdateLocation(ctx context.Context, id string) Api
 }
 
 // Execute executes the request
-//  @return ListLocations200ResponseInner
-func (a *LocationsAPIService) UpdateLocationExecute(r ApiUpdateLocationRequest) (*ListLocations200ResponseInner, *http.Response, error) {
+//  @return ListLocations200ResponseDataInner
+func (a *LocationsAPIService) UpdateLocationExecute(r ApiUpdateLocationRequest) (*ListLocations200ResponseDataInner, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ListLocations200ResponseInner
+		localVarReturnValue  *ListLocations200ResponseDataInner
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LocationsAPIService.UpdateLocation")
