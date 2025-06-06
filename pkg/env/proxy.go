@@ -67,7 +67,6 @@ func buildProxyDialer(proxyURL *url.URL) func(ctx context.Context, network strin
 	}
 }
 
-// BuildProxyDialer builds a proxy dialler from url
 func BuildProxyDialer(proxyURL *url.URL) func(ctx context.Context, network string, addr string) (net.Conn, error) {
 	dial := buildProxyDialer(proxyURL)
 
