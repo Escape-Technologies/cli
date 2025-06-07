@@ -28,7 +28,7 @@ ID                                      NAME                       SSH PUBLIC KE
 00000000-0000-0000-0000-000000000002    example-location-2         ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAI... example2@email.com`,
 	Example: `escape-cli locations list`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
-		locations, err := escape.ListLocations(cmd.Context(), nil, nil)
+		locations, next, err := escape.ListLocations(cmd.Context(), "")
 		if err != nil {
 			return fmt.Errorf("failed to list locations: %w", err)
 		}
@@ -47,6 +47,19 @@ ID                                      NAME                       SSH PUBLIC KE
 			}
 			return res
 		})
+		for next != "" {
+			locations, next, err = escape.ListLocations(cmd.Context(), next)
+			if err != nil {
+				return fmt.Errorf("failed to list locations: %w", err)
+			}
+			out.Table(locations, func() []string {
+				res := []string{}
+				for _, location := range locations {
+					res = append(res, fmt.Sprintf("%s\t%s\t%s", location.GetId(), location.GetName(), location.GetSshPublicKey()))
+				}
+				return res
+			})
+		}
 		return nil
 	},
 }
