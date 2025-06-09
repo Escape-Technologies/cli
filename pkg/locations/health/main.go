@@ -14,7 +14,6 @@ import (
 func buildHandler(healthy *atomic.Bool) http.Handler {
 	mux := http.NewServeMux()
 
-	// Health check endpoint
 	mux.HandleFunc("/health", func(w http.ResponseWriter, _ *http.Request) {
 		var msg string
 		if healthy.Load() {
@@ -30,7 +29,6 @@ func buildHandler(healthy *atomic.Bool) http.Handler {
 		}
 	})
 
-	// Log endpoint for mitmproxy
 	if os.Getenv("ESCAPE_FORWARD_MITM_LOGS") == "true" {
 		mux.HandleFunc("/log", func(w http.ResponseWriter, r *http.Request) {
 			if r.Method != http.MethodPost {
@@ -50,7 +48,6 @@ func buildHandler(healthy *atomic.Bool) http.Handler {
 	return mux
 }
 
-// Start the health check server
 func Start(ctx context.Context, healthy *atomic.Bool) {
 	if os.Getenv("ESCAPE_HEALTH_CHECK_PORT") == "" {
 		log.Trace("ESCAPE_HEALTH_CHECK_PORT is not set, skipping health check")
