@@ -52,13 +52,13 @@ func buildHandler(healthy *atomic.Bool) http.Handler {
 
 // Start the health check server
 func Start(ctx context.Context, healthy *atomic.Bool) {
-	if os.Getenv("HEALTH_CHECK_PORT") == "" {
-		log.Trace("HEALTH_CHECK_PORT is not set, skipping health check")
+	if os.Getenv("ESCAPE_HEALTH_CHECK_PORT") == "" {
+		log.Trace("ESCAPE_HEALTH_CHECK_PORT is not set, skipping health check")
 		return
 	}
 
 	srv := &http.Server{
-		Addr:    ":" + os.Getenv("HEALTH_CHECK_PORT"),
+		Addr:    ":" + os.Getenv("ESCAPE_HEALTH_CHECK_PORT"),
 		Handler: buildHandler(healthy),
 	}
 	go func() {
@@ -74,8 +74,8 @@ func Start(ctx context.Context, healthy *atomic.Bool) {
 			log.Error("Error starting the health check server: %v", err)
 		}
 	}()
-	log.Info("Health check server started on http://0.0.0.0:%s/health", os.Getenv("HEALTH_CHECK_PORT"))
+	log.Info("Health check server started on http://0.0.0.0:%s/health", os.Getenv("ESCAPE_HEALTH_CHECK_PORT"))
 	if os.Getenv("ESCAPE_FORWARD_MITM_LOGS") == "true" {
-		log.Info("Log endpoint available at http://0.0.0.0:%s/log", os.Getenv("HEALTH_CHECK_PORT"))
+		log.Info("Log endpoint available at http://0.0.0.0:%s/log", os.Getenv("ESCAPE_HEALTH_CHECK_PORT"))
 	}
 }
