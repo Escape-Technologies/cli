@@ -8,7 +8,7 @@ ESCAPE_PRIVATE_LOCATION: ""
 # Enable/disable Kubernetes integration. (disables ClusterRole and ClusterRoleBinding)
 ESCAPE_K8S_INTEGRATION: true
 
-# Enable/disable forwarding mitm logs to the health check server (requires ESCAPE_HEALTH_CHECK_PORT to be set + mitmproxy to be running)
+# Enable/disable forwarding mitm logs to the health check server (requires mitmproxy to be running with the addon)
 ESCAPE_FORWARD_MITM_LOGS: false
 
 container:
