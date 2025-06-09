@@ -4,7 +4,7 @@ import os
 
 class Addon:
     def __init__(self):
-        port = os.getenv("HEALTH_CHECK_PORT", "8080")
+        port = os.getenv("ESCAPE_HEALTH_CHECK_PORT", "8080")
         self.log_url = f"http://127.0.0.1:{port}/log"
 
     def request(self, flow):
