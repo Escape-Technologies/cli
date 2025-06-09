@@ -42,7 +42,7 @@ spec:
             periodSeconds: 60
             failureThreshold: 60
           env:
-            - name: ESCAPE_HEALTH_CHECK_PORT
+            - name: HEALTH_CHECK_PORT
               value: '8080'
             - name: ESCAPE_API_KEY
               value: {{ .Values.ESCAPE_API_KEY | default "" | quote }}
