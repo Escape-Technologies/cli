@@ -8,7 +8,7 @@ import (
 )
 
 // GetAPIURL returns the escape api url
-// Default to public.escape.tech if not set
+// Default to https://public.escape.tech if not set
 func GetAPIURL() (*url.URL, error) {
 	rawURL := os.Getenv("ESCAPE_API_URL")
 	if rawURL == "" {
