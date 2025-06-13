@@ -8,7 +8,6 @@ import (
 	"os"
 	"sync/atomic"
 
-	"github.com/Escape-Technologies/cli/pkg/env"
 	"github.com/Escape-Technologies/cli/pkg/locations/private/monitor"
 	"github.com/Escape-Technologies/cli/pkg/log"
 
@@ -42,10 +41,9 @@ func dialSSH(ctx context.Context, locationID string, sshPrivateKey ed25519.Priva
 	if targetURL == "" {
 		targetURL = "private-location.escape.tech:2222"
 	}
-	proxyURL := env.GetFrontendProxyURL()
 
 	log.Trace("Getting conn for target: %s", targetURL)
-	conn, err := getConn(ctx, targetURL, proxyURL)
+	conn, err := getConn(ctx, targetURL, nil)
 	if ctx.Err() != nil {
 		return fmt.Errorf("getConn: %w", ctx.Err())
 	}
