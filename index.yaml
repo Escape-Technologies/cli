@@ -2,13 +2,13 @@ apiVersion: v1
 entries:
   private-location:
   - apiVersion: v2
-    appVersion: 0.2.0
-    created: "2025-06-13T13:20:25.066884547Z"
+    appVersion: 0.2.1
+    created: "2025-06-13T14:49:06.340433861Z"
     description: Escape Private Location
-    digest: c7ec0ddcec9c44faf16421811e3f165b68dd9af59f2adab813c95b8bd1a184ca
+    digest: 04e5dd30ad1399f1c1e1f2f198a2c2a661a59cc59c67400a0e8bba8e82179cc7
     name: private-location
     type: application
     urls:
-    - https://escape-technologies.github.io/cli/private-location-0.2.0.tgz
-    version: 0.2.0
-generated: "2025-06-13T13:20:25.066535776Z"
+    - https://escape-technologies.github.io/cli/private-location-0.2.1.tgz
+    version: 0.2.1
+generated: "2025-06-13T14:49:06.340051896Z"
