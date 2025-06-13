@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/url"
 	"os"
+	"strings"
 )
 
 // GetAPIURL returns the escape api url
@@ -13,6 +14,7 @@ func GetAPIURL() (*url.URL, error) {
 	if rawURL == "" {
 		rawURL = "https://public.escape.tech"
 	}
+	rawURL = strings.TrimSuffix(rawURL, "/")
 	parsedURL, err := url.Parse(rawURL)
 	if err != nil {
 		return nil, fmt.Errorf("failed to parse ESCAPE_API_URL: %w", err)
