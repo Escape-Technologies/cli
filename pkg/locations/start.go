@@ -9,9 +9,10 @@ import (
 	"time"
 
 	"github.com/Escape-Technologies/cli/pkg/api/escape"
+	"github.com/Escape-Technologies/cli/pkg/locations/dns"
 	"github.com/Escape-Technologies/cli/pkg/locations/health"
+	"github.com/Escape-Technologies/cli/pkg/locations/kube"
 	"github.com/Escape-Technologies/cli/pkg/locations/private"
-	"github.com/Escape-Technologies/cli/pkg/locations/private/kube"
 	"github.com/Escape-Technologies/cli/pkg/locations/ssh"
 	"github.com/Escape-Technologies/cli/pkg/log"
 )
@@ -41,7 +42,8 @@ func Start(ctx context.Context, name string) error {
 	if os.Getenv("ESCAPE_K8S_INTEGRATION") != "false" {
 		go kube.Start(ctx, id, name, healthy)
 	}
-	
+	go dns.Start()
+
 	for {
 		log.Trace("Creating location %s with public key %s", name, sshPublicKey)
 		id, err := escape.UpsertLocation(ctx, name, sshPublicKey)
