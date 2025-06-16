@@ -1,3 +1,4 @@
+// Package dns provides the DNS integration for private locations
 package dns
 
 import (
@@ -12,6 +13,7 @@ const (
 	listenAddr = "127.0.0.1:1053"
 )
 
+// Start starts the DNS server
 func Start() {
 	// Load system resolvers from /etc/resolv.conf
 	config, err := dns.ClientConfigFromFile("/etc/resolv.conf")
