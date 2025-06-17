@@ -48,6 +48,8 @@ spec:
               value: {{ .Values.ESCAPE_API_KEY | default "" | quote }}
             - name: ESCAPE_K8S_INTEGRATION
               value: {{ .Values.ESCAPE_K8S_INTEGRATION | quote }}
+            - name: ESCAPE_ENABLE_LOGS_ENDPOINT
+              value: {{ .Values.ESCAPE_ENABLE_LOGS_ENDPOINT | quote }}
             {{- with .Values.container.env }}
             {{- toYaml . | nindent 12 }}
             {{- end }}
