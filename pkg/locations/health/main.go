@@ -3,6 +3,7 @@ package health
 
 import (
 	"context"
+	"io"
 	"net/http"
 	"os"
 	"sync/atomic"
@@ -10,8 +11,10 @@ import (
 	"github.com/Escape-Technologies/cli/pkg/log"
 )
 
-func buildHandler(healthy *atomic.Bool) func(http.ResponseWriter, *http.Request) {
-	return func(w http.ResponseWriter, _ *http.Request) {
+func buildHandler(healthy *atomic.Bool) http.Handler {
+	mux := http.NewServeMux()
+
+	mux.HandleFunc("/health", func(w http.ResponseWriter, _ *http.Request) {
 		var msg string
 		if healthy.Load() {
 			w.WriteHeader(http.StatusOK)
@@ -24,9 +27,26 @@ func buildHandler(healthy *atomic.Bool) func(http.ResponseWriter, *http.Request)
 		if err != nil {
 			log.Debug("Error during health check: %v", err)
 		}
-	}
-}
+	})
 
+	if os.Getenv("ESCAPE_ENABLE_LOGS_ENDPOINT") == "true" {
+		mux.HandleFunc("/log", func(w http.ResponseWriter, r *http.Request) {
+			if r.Method != http.MethodPost {
+				http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+				return
+			}
+
+			bodyBytes, err := io.ReadAll(r.Body)
+			if err != nil {
+				http.Error(w, "Failed to read request body", http.StatusBadRequest)
+				return
+			}
+			log.Info("%s", string(bodyBytes))
+		})
+	}
+
+	return mux
+}
 // Start the health check server
 func Start(ctx context.Context, healthy *atomic.Bool) {
 	if os.Getenv("HEALTH_CHECK_PORT") == "" {
@@ -36,7 +56,7 @@ func Start(ctx context.Context, healthy *atomic.Bool) {
 
 	srv := &http.Server{
 		Addr:    ":" + os.Getenv("HEALTH_CHECK_PORT"),
-		Handler: http.HandlerFunc(buildHandler(healthy)),
+		Handler: buildHandler(healthy),
 	}
 	go func() {
 		<-ctx.Done()
@@ -52,4 +72,7 @@ func Start(ctx context.Context, healthy *atomic.Bool) {
 		}
 	}()
 	log.Info("Health check server started on http://0.0.0.0:%s/health", os.Getenv("HEALTH_CHECK_PORT"))
+	if os.Getenv("ESCAPE_ENABLE_LOGS_ENDPOINT") == "true" {
+		log.Info("Log endpoint available at http://0.0.0.0:%s/log", os.Getenv("HEALTH_CHECK_PORT"))
+	}
 }
