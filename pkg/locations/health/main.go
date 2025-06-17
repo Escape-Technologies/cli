@@ -47,7 +47,7 @@ func buildHandler(healthy *atomic.Bool) http.Handler {
 
 	return mux
 }
-
+// Start the health check server
 func Start(ctx context.Context, healthy *atomic.Bool) {
 	if os.Getenv("HEALTH_CHECK_PORT") == "" {
 		log.Trace("HEALTH_CHECK_PORT is not set, skipping health check")
