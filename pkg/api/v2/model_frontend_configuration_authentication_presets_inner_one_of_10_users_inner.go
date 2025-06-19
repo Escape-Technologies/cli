@@ -25,6 +25,7 @@ type FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInner struct {
 	Cookies map[string]string `json:"cookies,omitempty"`
 	Password string `json:"password"`
 	AdditionalFields []FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInnerAdditionalFieldsInner `json:"additional_fields,omitempty"`
+	PostLoginActions []FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInner `json:"post_login_actions,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -193,6 +194,38 @@ func (o *FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInner) SetAd
 	o.AdditionalFields = v
 }
 
+// GetPostLoginActions returns the PostLoginActions field value if set, zero value otherwise.
+func (o *FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInner) GetPostLoginActions() []FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInner {
+	if o == nil || IsNil(o.PostLoginActions) {
+		var ret []FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInner
+		return ret
+	}
+	return o.PostLoginActions
+}
+
+// GetPostLoginActionsOk returns a tuple with the PostLoginActions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInner) GetPostLoginActionsOk() ([]FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInner, bool) {
+	if o == nil || IsNil(o.PostLoginActions) {
+		return nil, false
+	}
+	return o.PostLoginActions, true
+}
+
+// HasPostLoginActions returns a boolean if a field has been set.
+func (o *FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInner) HasPostLoginActions() bool {
+	if o != nil && !IsNil(o.PostLoginActions) {
+		return true
+	}
+
+	return false
+}
+
+// SetPostLoginActions gets a reference to the given []FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInner and assigns it to the PostLoginActions field.
+func (o *FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInner) SetPostLoginActions(v []FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInner) {
+	o.PostLoginActions = v
+}
+
 func (o FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInner) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -213,6 +246,9 @@ func (o FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInner) ToMap(
 	toSerialize["password"] = o.Password
 	if !IsNil(o.AdditionalFields) {
 		toSerialize["additional_fields"] = o.AdditionalFields
+	}
+	if !IsNil(o.PostLoginActions) {
+		toSerialize["post_login_actions"] = o.PostLoginActions
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -263,6 +299,7 @@ func (o *FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInner) Unmar
 		delete(additionalProperties, "cookies")
 		delete(additionalProperties, "password")
 		delete(additionalProperties, "additional_fields")
+		delete(additionalProperties, "post_login_actions")
 		o.AdditionalProperties = additionalProperties
 	}
 

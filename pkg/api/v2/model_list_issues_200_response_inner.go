@@ -25,7 +25,7 @@ type ListIssues200ResponseInner struct {
 	Name string `json:"name"`
 	PlatformUrl string `json:"platformUrl"`
 	Ignored bool `json:"ignored"`
-	Type Enum1ab5d44a8d8b0e47bb5ab55e0fd2b986 `json:"type"`
+	Type Enum15559151725d4598e75cbc5c6c9bd96e `json:"type"`
 	Category Enum5cf07f4dc5d62ad66f92942c1b7ce23f `json:"category"`
 	AdditionalProperties map[string]interface{}
 }
@@ -36,7 +36,7 @@ type _ListIssues200ResponseInner ListIssues200ResponseInner
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewListIssues200ResponseInner(id string, severity Enum9c1e82c38fa16c4851aece69dc28da0b, name string, platformUrl string, ignored bool, type_ Enum1ab5d44a8d8b0e47bb5ab55e0fd2b986, category Enum5cf07f4dc5d62ad66f92942c1b7ce23f) *ListIssues200ResponseInner {
+func NewListIssues200ResponseInner(id string, severity Enum9c1e82c38fa16c4851aece69dc28da0b, name string, platformUrl string, ignored bool, type_ Enum15559151725d4598e75cbc5c6c9bd96e, category Enum5cf07f4dc5d62ad66f92942c1b7ce23f) *ListIssues200ResponseInner {
 	this := ListIssues200ResponseInner{}
 	this.Id = id
 	this.Severity = severity
@@ -177,9 +177,9 @@ func (o *ListIssues200ResponseInner) SetIgnored(v bool) {
 }
 
 // GetType returns the Type field value
-func (o *ListIssues200ResponseInner) GetType() Enum1ab5d44a8d8b0e47bb5ab55e0fd2b986 {
+func (o *ListIssues200ResponseInner) GetType() Enum15559151725d4598e75cbc5c6c9bd96e {
 	if o == nil {
-		var ret Enum1ab5d44a8d8b0e47bb5ab55e0fd2b986
+		var ret Enum15559151725d4598e75cbc5c6c9bd96e
 		return ret
 	}
 
@@ -188,7 +188,7 @@ func (o *ListIssues200ResponseInner) GetType() Enum1ab5d44a8d8b0e47bb5ab55e0fd2b
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *ListIssues200ResponseInner) GetTypeOk() (*Enum1ab5d44a8d8b0e47bb5ab55e0fd2b986, bool) {
+func (o *ListIssues200ResponseInner) GetTypeOk() (*Enum15559151725d4598e75cbc5c6c9bd96e, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -196,7 +196,7 @@ func (o *ListIssues200ResponseInner) GetTypeOk() (*Enum1ab5d44a8d8b0e47bb5ab55e0
 }
 
 // SetType sets field value
-func (o *ListIssues200ResponseInner) SetType(v Enum1ab5d44a8d8b0e47bb5ab55e0fd2b986) {
+func (o *ListIssues200ResponseInner) SetType(v Enum15559151725d4598e75cbc5c6c9bd96e) {
 	o.Type = v
 }
 

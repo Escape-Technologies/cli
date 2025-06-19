@@ -27,7 +27,8 @@ type FrontendConfigurationAuthenticationUsersInnerCredentials struct {
 	Body interface{} `json:"body,omitempty"`
 	LocalStorage map[string]map[string]string `json:"local_storage,omitempty"`
 	SessionStorage map[string]map[string]string `json:"session_storage,omitempty"`
-	Actions []FrontendConfigurationAuthenticationPresetsInnerOneOf11UsersInnerActionsInner `json:"actions,omitempty"`
+	Actions []FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInner `json:"actions,omitempty"`
+	PostLoginActions []FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInner `json:"post_login_actions,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -308,9 +309,9 @@ func (o *FrontendConfigurationAuthenticationUsersInnerCredentials) SetSessionSto
 }
 
 // GetActions returns the Actions field value if set, zero value otherwise.
-func (o *FrontendConfigurationAuthenticationUsersInnerCredentials) GetActions() []FrontendConfigurationAuthenticationPresetsInnerOneOf11UsersInnerActionsInner {
+func (o *FrontendConfigurationAuthenticationUsersInnerCredentials) GetActions() []FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInner {
 	if o == nil || IsNil(o.Actions) {
-		var ret []FrontendConfigurationAuthenticationPresetsInnerOneOf11UsersInnerActionsInner
+		var ret []FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInner
 		return ret
 	}
 	return o.Actions
@@ -318,7 +319,7 @@ func (o *FrontendConfigurationAuthenticationUsersInnerCredentials) GetActions() 
 
 // GetActionsOk returns a tuple with the Actions field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FrontendConfigurationAuthenticationUsersInnerCredentials) GetActionsOk() ([]FrontendConfigurationAuthenticationPresetsInnerOneOf11UsersInnerActionsInner, bool) {
+func (o *FrontendConfigurationAuthenticationUsersInnerCredentials) GetActionsOk() ([]FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInner, bool) {
 	if o == nil || IsNil(o.Actions) {
 		return nil, false
 	}
@@ -334,9 +335,41 @@ func (o *FrontendConfigurationAuthenticationUsersInnerCredentials) HasActions() 
 	return false
 }
 
-// SetActions gets a reference to the given []FrontendConfigurationAuthenticationPresetsInnerOneOf11UsersInnerActionsInner and assigns it to the Actions field.
-func (o *FrontendConfigurationAuthenticationUsersInnerCredentials) SetActions(v []FrontendConfigurationAuthenticationPresetsInnerOneOf11UsersInnerActionsInner) {
+// SetActions gets a reference to the given []FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInner and assigns it to the Actions field.
+func (o *FrontendConfigurationAuthenticationUsersInnerCredentials) SetActions(v []FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInner) {
 	o.Actions = v
+}
+
+// GetPostLoginActions returns the PostLoginActions field value if set, zero value otherwise.
+func (o *FrontendConfigurationAuthenticationUsersInnerCredentials) GetPostLoginActions() []FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInner {
+	if o == nil || IsNil(o.PostLoginActions) {
+		var ret []FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInner
+		return ret
+	}
+	return o.PostLoginActions
+}
+
+// GetPostLoginActionsOk returns a tuple with the PostLoginActions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FrontendConfigurationAuthenticationUsersInnerCredentials) GetPostLoginActionsOk() ([]FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInner, bool) {
+	if o == nil || IsNil(o.PostLoginActions) {
+		return nil, false
+	}
+	return o.PostLoginActions, true
+}
+
+// HasPostLoginActions returns a boolean if a field has been set.
+func (o *FrontendConfigurationAuthenticationUsersInnerCredentials) HasPostLoginActions() bool {
+	if o != nil && !IsNil(o.PostLoginActions) {
+		return true
+	}
+
+	return false
+}
+
+// SetPostLoginActions gets a reference to the given []FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInner and assigns it to the PostLoginActions field.
+func (o *FrontendConfigurationAuthenticationUsersInnerCredentials) SetPostLoginActions(v []FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInner) {
+	o.PostLoginActions = v
 }
 
 func (o FrontendConfigurationAuthenticationUsersInnerCredentials) MarshalJSON() ([]byte, error) {
@@ -376,6 +409,9 @@ func (o FrontendConfigurationAuthenticationUsersInnerCredentials) ToMap() (map[s
 	if !IsNil(o.Actions) {
 		toSerialize["actions"] = o.Actions
 	}
+	if !IsNil(o.PostLoginActions) {
+		toSerialize["post_login_actions"] = o.PostLoginActions
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -407,6 +443,7 @@ func (o *FrontendConfigurationAuthenticationUsersInnerCredentials) UnmarshalJSON
 		delete(additionalProperties, "local_storage")
 		delete(additionalProperties, "session_storage")
 		delete(additionalProperties, "actions")
+		delete(additionalProperties, "post_login_actions")
 		o.AdditionalProperties = additionalProperties
 	}
 
