@@ -38,16 +38,17 @@ func WatchScan(ctx context.Context, scanID string) (chan *v2.ListScans200Respons
 				continue
 			}
 			tries = 0
+			if scan.Status != v2.ENUME48DD51FE8A350A4154904ABF16320D7_STARTING &&
+				scan.Status != v2.ENUME48DD51FE8A350A4154904ABF16320D7_RUNNING {
+				log.Info("Scan ended with status %s", scan.Status)
+				ch <- scan
+				return
+			}
 			if lastProgressRatio == scan.ProgressRatio {
 				continue
 			}
 			ch <- scan
 			lastProgressRatio = scan.ProgressRatio
-			if scan.Status != v2.ENUME48DD51FE8A350A4154904ABF16320D7_STARTING &&
-				scan.Status != v2.ENUME48DD51FE8A350A4154904ABF16320D7_RUNNING {
-				log.Info("Scan ended with status %s", scan.Status)
-				return
-			}
 		}
 	}()
 	return ch, nil
