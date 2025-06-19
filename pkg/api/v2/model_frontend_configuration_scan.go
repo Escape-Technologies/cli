@@ -38,6 +38,11 @@ type FrontendConfigurationScan struct {
 	FrontendUsePersistence *bool `json:"frontend_use_persistence,omitempty"`
 	FrontendEscapeUserHeader *bool `json:"frontend_escape_user_header,omitempty"`
 	FrontendPrefetchSitemap *bool `json:"frontend_prefetch_sitemap,omitempty"`
+	FrontendBlocklistedElementSelectors []string `json:"frontend_blocklisted_element_selectors,omitempty"`
+	FrontendMaxQueryParamsVisits *float32 `json:"frontend_max_query_params_visits,omitempty"`
+	FrontendMaxFragmentsVisits *float32 `json:"frontend_max_fragments_visits,omitempty"`
+	FrontendMaxParameterOccurence *float32 `json:"frontend_max_parameter_occurence,omitempty"`
+	FrontendSecurityChecksEnabled []EnumF5dfa531fb3e4e3c30dbe59e58d11d44 `json:"frontend_security_checks_enabled,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -668,6 +673,166 @@ func (o *FrontendConfigurationScan) SetFrontendPrefetchSitemap(v bool) {
 	o.FrontendPrefetchSitemap = &v
 }
 
+// GetFrontendBlocklistedElementSelectors returns the FrontendBlocklistedElementSelectors field value if set, zero value otherwise.
+func (o *FrontendConfigurationScan) GetFrontendBlocklistedElementSelectors() []string {
+	if o == nil || IsNil(o.FrontendBlocklistedElementSelectors) {
+		var ret []string
+		return ret
+	}
+	return o.FrontendBlocklistedElementSelectors
+}
+
+// GetFrontendBlocklistedElementSelectorsOk returns a tuple with the FrontendBlocklistedElementSelectors field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FrontendConfigurationScan) GetFrontendBlocklistedElementSelectorsOk() ([]string, bool) {
+	if o == nil || IsNil(o.FrontendBlocklistedElementSelectors) {
+		return nil, false
+	}
+	return o.FrontendBlocklistedElementSelectors, true
+}
+
+// HasFrontendBlocklistedElementSelectors returns a boolean if a field has been set.
+func (o *FrontendConfigurationScan) HasFrontendBlocklistedElementSelectors() bool {
+	if o != nil && !IsNil(o.FrontendBlocklistedElementSelectors) {
+		return true
+	}
+
+	return false
+}
+
+// SetFrontendBlocklistedElementSelectors gets a reference to the given []string and assigns it to the FrontendBlocklistedElementSelectors field.
+func (o *FrontendConfigurationScan) SetFrontendBlocklistedElementSelectors(v []string) {
+	o.FrontendBlocklistedElementSelectors = v
+}
+
+// GetFrontendMaxQueryParamsVisits returns the FrontendMaxQueryParamsVisits field value if set, zero value otherwise.
+func (o *FrontendConfigurationScan) GetFrontendMaxQueryParamsVisits() float32 {
+	if o == nil || IsNil(o.FrontendMaxQueryParamsVisits) {
+		var ret float32
+		return ret
+	}
+	return *o.FrontendMaxQueryParamsVisits
+}
+
+// GetFrontendMaxQueryParamsVisitsOk returns a tuple with the FrontendMaxQueryParamsVisits field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FrontendConfigurationScan) GetFrontendMaxQueryParamsVisitsOk() (*float32, bool) {
+	if o == nil || IsNil(o.FrontendMaxQueryParamsVisits) {
+		return nil, false
+	}
+	return o.FrontendMaxQueryParamsVisits, true
+}
+
+// HasFrontendMaxQueryParamsVisits returns a boolean if a field has been set.
+func (o *FrontendConfigurationScan) HasFrontendMaxQueryParamsVisits() bool {
+	if o != nil && !IsNil(o.FrontendMaxQueryParamsVisits) {
+		return true
+	}
+
+	return false
+}
+
+// SetFrontendMaxQueryParamsVisits gets a reference to the given float32 and assigns it to the FrontendMaxQueryParamsVisits field.
+func (o *FrontendConfigurationScan) SetFrontendMaxQueryParamsVisits(v float32) {
+	o.FrontendMaxQueryParamsVisits = &v
+}
+
+// GetFrontendMaxFragmentsVisits returns the FrontendMaxFragmentsVisits field value if set, zero value otherwise.
+func (o *FrontendConfigurationScan) GetFrontendMaxFragmentsVisits() float32 {
+	if o == nil || IsNil(o.FrontendMaxFragmentsVisits) {
+		var ret float32
+		return ret
+	}
+	return *o.FrontendMaxFragmentsVisits
+}
+
+// GetFrontendMaxFragmentsVisitsOk returns a tuple with the FrontendMaxFragmentsVisits field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FrontendConfigurationScan) GetFrontendMaxFragmentsVisitsOk() (*float32, bool) {
+	if o == nil || IsNil(o.FrontendMaxFragmentsVisits) {
+		return nil, false
+	}
+	return o.FrontendMaxFragmentsVisits, true
+}
+
+// HasFrontendMaxFragmentsVisits returns a boolean if a field has been set.
+func (o *FrontendConfigurationScan) HasFrontendMaxFragmentsVisits() bool {
+	if o != nil && !IsNil(o.FrontendMaxFragmentsVisits) {
+		return true
+	}
+
+	return false
+}
+
+// SetFrontendMaxFragmentsVisits gets a reference to the given float32 and assigns it to the FrontendMaxFragmentsVisits field.
+func (o *FrontendConfigurationScan) SetFrontendMaxFragmentsVisits(v float32) {
+	o.FrontendMaxFragmentsVisits = &v
+}
+
+// GetFrontendMaxParameterOccurence returns the FrontendMaxParameterOccurence field value if set, zero value otherwise.
+func (o *FrontendConfigurationScan) GetFrontendMaxParameterOccurence() float32 {
+	if o == nil || IsNil(o.FrontendMaxParameterOccurence) {
+		var ret float32
+		return ret
+	}
+	return *o.FrontendMaxParameterOccurence
+}
+
+// GetFrontendMaxParameterOccurenceOk returns a tuple with the FrontendMaxParameterOccurence field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FrontendConfigurationScan) GetFrontendMaxParameterOccurenceOk() (*float32, bool) {
+	if o == nil || IsNil(o.FrontendMaxParameterOccurence) {
+		return nil, false
+	}
+	return o.FrontendMaxParameterOccurence, true
+}
+
+// HasFrontendMaxParameterOccurence returns a boolean if a field has been set.
+func (o *FrontendConfigurationScan) HasFrontendMaxParameterOccurence() bool {
+	if o != nil && !IsNil(o.FrontendMaxParameterOccurence) {
+		return true
+	}
+
+	return false
+}
+
+// SetFrontendMaxParameterOccurence gets a reference to the given float32 and assigns it to the FrontendMaxParameterOccurence field.
+func (o *FrontendConfigurationScan) SetFrontendMaxParameterOccurence(v float32) {
+	o.FrontendMaxParameterOccurence = &v
+}
+
+// GetFrontendSecurityChecksEnabled returns the FrontendSecurityChecksEnabled field value if set, zero value otherwise.
+func (o *FrontendConfigurationScan) GetFrontendSecurityChecksEnabled() []EnumF5dfa531fb3e4e3c30dbe59e58d11d44 {
+	if o == nil || IsNil(o.FrontendSecurityChecksEnabled) {
+		var ret []EnumF5dfa531fb3e4e3c30dbe59e58d11d44
+		return ret
+	}
+	return o.FrontendSecurityChecksEnabled
+}
+
+// GetFrontendSecurityChecksEnabledOk returns a tuple with the FrontendSecurityChecksEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FrontendConfigurationScan) GetFrontendSecurityChecksEnabledOk() ([]EnumF5dfa531fb3e4e3c30dbe59e58d11d44, bool) {
+	if o == nil || IsNil(o.FrontendSecurityChecksEnabled) {
+		return nil, false
+	}
+	return o.FrontendSecurityChecksEnabled, true
+}
+
+// HasFrontendSecurityChecksEnabled returns a boolean if a field has been set.
+func (o *FrontendConfigurationScan) HasFrontendSecurityChecksEnabled() bool {
+	if o != nil && !IsNil(o.FrontendSecurityChecksEnabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetFrontendSecurityChecksEnabled gets a reference to the given []EnumF5dfa531fb3e4e3c30dbe59e58d11d44 and assigns it to the FrontendSecurityChecksEnabled field.
+func (o *FrontendConfigurationScan) SetFrontendSecurityChecksEnabled(v []EnumF5dfa531fb3e4e3c30dbe59e58d11d44) {
+	o.FrontendSecurityChecksEnabled = v
+}
+
 func (o FrontendConfigurationScan) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -735,6 +900,21 @@ func (o FrontendConfigurationScan) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.FrontendPrefetchSitemap) {
 		toSerialize["frontend_prefetch_sitemap"] = o.FrontendPrefetchSitemap
 	}
+	if !IsNil(o.FrontendBlocklistedElementSelectors) {
+		toSerialize["frontend_blocklisted_element_selectors"] = o.FrontendBlocklistedElementSelectors
+	}
+	if !IsNil(o.FrontendMaxQueryParamsVisits) {
+		toSerialize["frontend_max_query_params_visits"] = o.FrontendMaxQueryParamsVisits
+	}
+	if !IsNil(o.FrontendMaxFragmentsVisits) {
+		toSerialize["frontend_max_fragments_visits"] = o.FrontendMaxFragmentsVisits
+	}
+	if !IsNil(o.FrontendMaxParameterOccurence) {
+		toSerialize["frontend_max_parameter_occurence"] = o.FrontendMaxParameterOccurence
+	}
+	if !IsNil(o.FrontendSecurityChecksEnabled) {
+		toSerialize["frontend_security_checks_enabled"] = o.FrontendSecurityChecksEnabled
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -776,6 +956,11 @@ func (o *FrontendConfigurationScan) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "frontend_use_persistence")
 		delete(additionalProperties, "frontend_escape_user_header")
 		delete(additionalProperties, "frontend_prefetch_sitemap")
+		delete(additionalProperties, "frontend_blocklisted_element_selectors")
+		delete(additionalProperties, "frontend_max_query_params_visits")
+		delete(additionalProperties, "frontend_max_fragments_visits")
+		delete(additionalProperties, "frontend_max_parameter_occurence")
+		delete(additionalProperties, "frontend_security_checks_enabled")
 		o.AdditionalProperties = additionalProperties
 	}
 

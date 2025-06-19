@@ -93,7 +93,7 @@ func NewConfiguration() *Configuration {
 		Debug:            false,
 		Servers:          ServerConfigurations{
 			{
-				URL: "https://public.staging.escape.tech/v2",
+				URL: "https://public.escape.tech/v2",
 				Description: "No description provided",
 			},
 		},

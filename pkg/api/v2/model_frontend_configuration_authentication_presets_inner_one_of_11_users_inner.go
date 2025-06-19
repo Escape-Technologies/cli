@@ -23,7 +23,7 @@ type FrontendConfigurationAuthenticationPresetsInnerOneOf11UsersInner struct {
 	Username string `json:"username"`
 	Headers map[string]string `json:"headers,omitempty"`
 	Cookies map[string]string `json:"cookies,omitempty"`
-	Actions []FrontendConfigurationAuthenticationPresetsInnerOneOf11UsersInnerActionsInner `json:"actions"`
+	Actions []FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInner `json:"actions"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -33,7 +33,7 @@ type _FrontendConfigurationAuthenticationPresetsInnerOneOf11UsersInner FrontendC
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFrontendConfigurationAuthenticationPresetsInnerOneOf11UsersInner(username string, actions []FrontendConfigurationAuthenticationPresetsInnerOneOf11UsersInnerActionsInner) *FrontendConfigurationAuthenticationPresetsInnerOneOf11UsersInner {
+func NewFrontendConfigurationAuthenticationPresetsInnerOneOf11UsersInner(username string, actions []FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInner) *FrontendConfigurationAuthenticationPresetsInnerOneOf11UsersInner {
 	this := FrontendConfigurationAuthenticationPresetsInnerOneOf11UsersInner{}
 	this.Username = username
 	this.Actions = actions
@@ -137,9 +137,9 @@ func (o *FrontendConfigurationAuthenticationPresetsInnerOneOf11UsersInner) SetCo
 }
 
 // GetActions returns the Actions field value
-func (o *FrontendConfigurationAuthenticationPresetsInnerOneOf11UsersInner) GetActions() []FrontendConfigurationAuthenticationPresetsInnerOneOf11UsersInnerActionsInner {
+func (o *FrontendConfigurationAuthenticationPresetsInnerOneOf11UsersInner) GetActions() []FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInner {
 	if o == nil {
-		var ret []FrontendConfigurationAuthenticationPresetsInnerOneOf11UsersInnerActionsInner
+		var ret []FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInner
 		return ret
 	}
 
@@ -148,7 +148,7 @@ func (o *FrontendConfigurationAuthenticationPresetsInnerOneOf11UsersInner) GetAc
 
 // GetActionsOk returns a tuple with the Actions field value
 // and a boolean to check if the value has been set.
-func (o *FrontendConfigurationAuthenticationPresetsInnerOneOf11UsersInner) GetActionsOk() ([]FrontendConfigurationAuthenticationPresetsInnerOneOf11UsersInnerActionsInner, bool) {
+func (o *FrontendConfigurationAuthenticationPresetsInnerOneOf11UsersInner) GetActionsOk() ([]FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInner, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -156,7 +156,7 @@ func (o *FrontendConfigurationAuthenticationPresetsInnerOneOf11UsersInner) GetAc
 }
 
 // SetActions sets field value
-func (o *FrontendConfigurationAuthenticationPresetsInnerOneOf11UsersInner) SetActions(v []FrontendConfigurationAuthenticationPresetsInnerOneOf11UsersInnerActionsInner) {
+func (o *FrontendConfigurationAuthenticationPresetsInnerOneOf11UsersInner) SetActions(v []FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInner) {
 	o.Actions = v
 }
 
