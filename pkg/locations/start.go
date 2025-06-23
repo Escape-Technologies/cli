@@ -48,7 +48,7 @@ func Start(ctx context.Context, name string) error {
 		log.Trace("Creating location %s with public key %s", name, sshPublicKey)
 		id, err := escape.UpsertLocation(ctx, name, sshPublicKey)
 		if err != nil {
-			log.Error("unable to update private location on Escape Platform: %s", err)
+			log.Error("Unable to update private location on Escape Platform: %s", err)
 			time.Sleep(retryInterval)
 			continue
 		}

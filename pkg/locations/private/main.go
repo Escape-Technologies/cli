@@ -16,7 +16,7 @@ func StartLocation(ctx context.Context, locationID string, sshPrivateKey ed25519
 	for {
 		err := dialSSH(ctx, locationID, sshPrivateKey, healthy)
 		if err != nil {
-			log.Error("Failed to dial ssh: %v, retrying...", err)
+			log.Error("Failed to dial SSH: %s, retrying...", err)
 		} else {
 			log.Error("SSH connection lost, retrying...")
 		}

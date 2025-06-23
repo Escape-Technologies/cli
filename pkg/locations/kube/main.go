@@ -78,12 +78,12 @@ func connectAndRun(ctx context.Context, cfg *rest.Config, isConnected *atomic.Bo
 		log.Trace("Upserting K8s integration")
 		integ, err := escape.ParseJSONOrYAML([]byte(`{"kind": "KUBERNETES", "parameters": {}}`), &v2.GetIntegration200ResponseData{})
 		if err != nil {
-			log.Error("Error parsing integration: %s", err)
+			log.Error("Failed to parse Kubernetes integration: %s", err)
 			return
 		}
 		err = escape.UpsertIntegration(ctx, locationName, &locationID, integ)
 		if err != nil {
-			log.Error("Error upserting integration: %s", err)
+			log.Error("Failed to register Kubernetes integration: %s", err)
 			return
 		}
 
@@ -110,7 +110,7 @@ func Start(ctx context.Context, locationID string, locationName string, healthy 
 	for {
 		err = connectAndRun(ctx, cfg, healthy, locationID, locationName)
 		if err != nil {
-			log.Error("Error connecting to k8s API: %s", err)
+			log.Error("Failed to connect to Kubernetes API: %s", err)
 		}
 		if ctx.Err() != nil {
 			return
