@@ -56,6 +56,7 @@ func dialSSH(ctx context.Context, locationID string, sshPrivateKey ed25519.Priva
 		return fmt.Errorf("failed to create SSH client: %w", err)
 	}
 
+	log.Debug("SSH connection established to Escape Platform")
 	ctx, cancel := context.WithCancel(ctx)
 	go monitor.Start(ctx, client)
 
