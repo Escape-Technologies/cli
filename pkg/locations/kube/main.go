@@ -74,8 +74,8 @@ func connectAndRun(ctx context.Context, cfg *rest.Config, isConnected *atomic.Bo
 			lis.Close() //nolint:errcheck
 			return
 		}
-		log.Info("Connected to k8s API")
-		log.Trace("Upserting k8s integration")
+		log.Info("Connected to K8s API")
+		log.Trace("Upserting K8s integration")
 		integ, err := escape.ParseJSONOrYAML([]byte(`{"kind": "KUBERNETES", "parameters": {}}`), &v2.GetIntegration200ResponseData{})
 		if err != nil {
 			log.Error("Error parsing integration: %s", err)

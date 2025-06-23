@@ -41,7 +41,7 @@ func buildHandler(healthy *atomic.Bool) http.Handler {
 				http.Error(w, "Failed to read request body", http.StatusBadRequest)
 				return
 			}
-			log.Info("%s", string(bodyBytes))
+			log.Debug("Forwarded log: %s", string(bodyBytes))
 		})
 	}
 
@@ -71,8 +71,8 @@ func Start(ctx context.Context, healthy *atomic.Bool) {
 			log.Error("Error starting the health check server: %v", err)
 		}
 	}()
-	log.Info("Health check server started on http://0.0.0.0:%s/health", os.Getenv("HEALTH_CHECK_PORT"))
+	log.Debug("Health check server started on http://0.0.0.0:%s/health", os.Getenv("HEALTH_CHECK_PORT"))
 	if os.Getenv("ESCAPE_ENABLE_LOGS_ENDPOINT") == "true" {
-		log.Info("Log endpoint available at http://0.0.0.0:%s/log", os.Getenv("HEALTH_CHECK_PORT"))
+		log.Debug("Log endpoint available at http://0.0.0.0:%s/log", os.Getenv("HEALTH_CHECK_PORT"))
 	}
 }
