@@ -20,7 +20,7 @@ func init() {
 				return c.Control(func(fd uintptr) {
 					err := unix.SetsockoptInt(int(fd), unix.SOL_SOCKET, unix.SO_KEEPALIVE, 1)
 					if err != nil {
-						log.Error("failed to set SO_KEEPALIVE: %v", err)
+						log.Error("Failed to set SO_KEEPALIVE: %v", err)
 					}
 				})
 			},

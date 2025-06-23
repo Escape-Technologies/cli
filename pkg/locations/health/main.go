@@ -62,13 +62,13 @@ func Start(ctx context.Context, healthy *atomic.Bool) {
 		<-ctx.Done()
 		err := srv.Shutdown(ctx)
 		if err != nil {
-			log.Error("Error shutting down health check server: %v", err)
+			log.Error("Failed to shutdown health check server: %v", err)
 		}
 	}()
 	go func() {
 		err := srv.ListenAndServe()
 		if err != nil {
-			log.Error("Error starting the health check server: %v", err)
+			log.Error("Failed to start health check server: %v", err)
 		}
 	}()
 	log.Debug("Health check server started on http://0.0.0.0:%s/health", os.Getenv("HEALTH_CHECK_PORT"))

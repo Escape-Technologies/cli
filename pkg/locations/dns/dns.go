@@ -43,6 +43,6 @@ func Start() {
 
 	log.Debug("[DNS] Starting TCP DNS server on %s, forwarding to %s", listenAddr, strings.Join(config.Servers, ", "))
 	if err := server.ListenAndServe(); err != nil {
-		log.Error("[DNS] Failed TCP server: %v", err)
+		log.Error("[DNS] Failed to start TCP DNS server: %v", err)
 	}
 }
