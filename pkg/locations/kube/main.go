@@ -5,6 +5,7 @@ import (
 	"context"
 	"fmt"
 	"os"
+	"strings"
 	"sync/atomic"
 	"time"
 
@@ -83,7 +84,12 @@ func connectAndRun(ctx context.Context, cfg *rest.Config, isConnected *atomic.Bo
 		}
 		err = escape.UpsertIntegration(ctx, locationName, &locationID, integ)
 		if err != nil {
-			log.Error("Failed to register Kubernetes integration: %s", err)
+			errMsg := fmt.Sprintf("%s", err)
+			log.Error("Failed to register Kubernetes integration: %s", errMsg)
+			if strings.Contains(errMsg, "401") || strings.Contains(errMsg, "unauthorized") {
+				log.Error("Check your ESCAPE_API_KEY environment variable")
+				log.Error("Get your API key from https://app.escape.tech/organization/settings")
+			}
 			return
 		}
 
