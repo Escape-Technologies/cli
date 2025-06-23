@@ -57,7 +57,7 @@ func Start(ctx context.Context, name string) error {
 		if err != nil {
 			log.Error("Error starting location: %s", err)
 		} else {
-			log.Error("Unknown error starting location")
+			log.Error("Location connection terminated unexpectedly")
 		}
 		time.Sleep(retryInterval)
 		if ctx.Err() != nil {
