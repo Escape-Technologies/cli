@@ -12,7 +12,7 @@ import (
 func Start(ctx context.Context, client *ssh.Client) {
 	ch, err := openEscapeChannel(ctx, client)
 	if err != nil {
-		log.Error("Logs will not be sent to Escape Platform: %v", err)
+		log.Error("Failed to establish log forwarding to Escape Platform: %s", err)
 		return
 	}
 

@@ -5,6 +5,7 @@ import (
 	"context"
 	"fmt"
 	"os"
+	"strings"
 	"sync/atomic"
 	"time"
 
@@ -48,7 +49,12 @@ func Start(ctx context.Context, name string) error {
 		log.Trace("Creating location %s with public key %s", name, sshPublicKey)
 		id, err := escape.UpsertLocation(ctx, name, sshPublicKey)
 		if err != nil {
-			log.Error("unable to update private location on Escape Platform: %s", err)
+			log.Error("Unable to update private location on Escape Platform: %s", err)
+			errMsg := err.Error()
+			if strings.Contains(errMsg, "401") || strings.Contains(errMsg, "unauthorized") {
+				log.Error("Check your ESCAPE_API_KEY environment variable")
+				log.Error("Get your API key from https://app.escape.tech/organization/settings")
+			}
 			time.Sleep(retryInterval)
 			continue
 		}
