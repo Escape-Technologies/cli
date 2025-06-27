@@ -71,7 +71,7 @@ func BuildProxyDialer(proxyURL *url.URL) func(ctx context.Context, network strin
 	dial := buildProxyDialer(proxyURL)
 
 	return func(ctx context.Context, network string, addr string) (net.Conn, error) {
-		log.Info("Handling request from Escape Platform to %s", addr)
+		log.Debug("Handling request from Escape Platform to %s", addr)
 		return dial(ctx, network, addr)
 	}
 }
