@@ -75,7 +75,6 @@ Example output:
 [info] Private location testdoc in sync with Escape Platform, starting location...
 [info] Private location ready to accept connections
 [info] Connected to k8s API
-[info] Handling request from Escape Platform to 127.0.0.1:8001
 ...
 [The command will continue running until interrupted with Ctrl+C]`,
 	Args:    cobra.ExactArgs(1),
