@@ -6,6 +6,7 @@ toolchain go1.23.6
 
 require (
 	github.com/Escape-Technologies/go-socks5 v1.0.0
+	github.com/fatih/color v1.18.0
 	github.com/miekg/dns v1.1.66
 	github.com/sirupsen/logrus v1.9.3
 	github.com/spf13/cobra v1.9.1
@@ -20,7 +21,6 @@ require (
 
 require (
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
-	github.com/fatih/color v1.18.0 // indirect
 	github.com/fxamacker/cbor/v2 v2.8.0 // indirect
 	github.com/go-logr/logr v1.4.2 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
