@@ -21,6 +21,8 @@ var _ MappedNullable = &UpdateProfileRequest{}
 type UpdateProfileRequest struct {
 	// The name of the profile
 	Name *string `json:"name,omitempty"`
+	// The cron of the profile
+	Cron *string `json:"cron,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -75,6 +77,38 @@ func (o *UpdateProfileRequest) SetName(v string) {
 	o.Name = &v
 }
 
+// GetCron returns the Cron field value if set, zero value otherwise.
+func (o *UpdateProfileRequest) GetCron() string {
+	if o == nil || IsNil(o.Cron) {
+		var ret string
+		return ret
+	}
+	return *o.Cron
+}
+
+// GetCronOk returns a tuple with the Cron field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateProfileRequest) GetCronOk() (*string, bool) {
+	if o == nil || IsNil(o.Cron) {
+		return nil, false
+	}
+	return o.Cron, true
+}
+
+// HasCron returns a boolean if a field has been set.
+func (o *UpdateProfileRequest) HasCron() bool {
+	if o != nil && !IsNil(o.Cron) {
+		return true
+	}
+
+	return false
+}
+
+// SetCron gets a reference to the given string and assigns it to the Cron field.
+func (o *UpdateProfileRequest) SetCron(v string) {
+	o.Cron = &v
+}
+
 func (o UpdateProfileRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -87,6 +121,9 @@ func (o UpdateProfileRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
+	}
+	if !IsNil(o.Cron) {
+		toSerialize["cron"] = o.Cron
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -111,6 +148,7 @@ func (o *UpdateProfileRequest) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "name")
+		delete(additionalProperties, "cron")
 		o.AdditionalProperties = additionalProperties
 	}
 

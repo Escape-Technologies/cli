@@ -21,6 +21,7 @@ var _ MappedNullable = &FrontendConfigurationAuthenticationPresetsInnerOneOf10Us
 // FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInnerOneOf2 struct for FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInnerOneOf2
 type FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInnerOneOf2 struct {
 	Action EnumFILLTOTP `json:"action"`
+	AllowFailure *bool `json:"allow_failure,omitempty"`
 	Locator string `json:"locator"`
 	Secret string `json:"secret"`
 	AutoSubmit *bool `json:"auto_submit,omitempty"`
@@ -71,6 +72,38 @@ func (o *FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInnerPostLog
 // SetAction sets field value
 func (o *FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInnerOneOf2) SetAction(v EnumFILLTOTP) {
 	o.Action = v
+}
+
+// GetAllowFailure returns the AllowFailure field value if set, zero value otherwise.
+func (o *FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInnerOneOf2) GetAllowFailure() bool {
+	if o == nil || IsNil(o.AllowFailure) {
+		var ret bool
+		return ret
+	}
+	return *o.AllowFailure
+}
+
+// GetAllowFailureOk returns a tuple with the AllowFailure field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInnerOneOf2) GetAllowFailureOk() (*bool, bool) {
+	if o == nil || IsNil(o.AllowFailure) {
+		return nil, false
+	}
+	return o.AllowFailure, true
+}
+
+// HasAllowFailure returns a boolean if a field has been set.
+func (o *FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInnerOneOf2) HasAllowFailure() bool {
+	if o != nil && !IsNil(o.AllowFailure) {
+		return true
+	}
+
+	return false
+}
+
+// SetAllowFailure gets a reference to the given bool and assigns it to the AllowFailure field.
+func (o *FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInnerOneOf2) SetAllowFailure(v bool) {
+	o.AllowFailure = &v
 }
 
 // GetLocator returns the Locator field value
@@ -164,6 +197,9 @@ func (o FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInnerPostLogi
 func (o FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInnerOneOf2) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["action"] = o.Action
+	if !IsNil(o.AllowFailure) {
+		toSerialize["allow_failure"] = o.AllowFailure
+	}
 	toSerialize["locator"] = o.Locator
 	toSerialize["secret"] = o.Secret
 	if !IsNil(o.AutoSubmit) {
@@ -215,6 +251,7 @@ func (o *FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInnerPostLog
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "action")
+		delete(additionalProperties, "allow_failure")
 		delete(additionalProperties, "locator")
 		delete(additionalProperties, "secret")
 		delete(additionalProperties, "auto_submit")

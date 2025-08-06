@@ -5,18 +5,18 @@ import (
 	"errors"
 	"fmt"
 
-	v2 "github.com/Escape-Technologies/cli/pkg/api/v2"
+	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
 )
 
 // ListLocations lists all locations
-func ListLocations(ctx context.Context, next string) ([]v2.ListLocations200ResponseDataInner, string, error) {
-	client, err := newAPIV2Client()
+func ListLocations(ctx context.Context, next string) ([]v3.ListLocations200ResponseDataInner, string, error) {
+	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, "", fmt.Errorf("unable to init client: %w", err)
 	}
 	req := client.LocationsAPI.ListLocations(ctx)
 	if next != "" {
-		req = req.After(next)
+		req = req.Cursor(next)
 	}
 	data, _, err := req.Execute()
 	if err != nil {
@@ -26,8 +26,8 @@ func ListLocations(ctx context.Context, next string) ([]v2.ListLocations200Respo
 }
 
 // GetLocation gets a location by ID
-func GetLocation(ctx context.Context, id string) (*v2.ListLocations200ResponseDataInner, error) {
-	client, err := newAPIV2Client()
+func GetLocation(ctx context.Context, id string) (*v3.CreateLocation200Response, error) {
+	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
@@ -41,11 +41,11 @@ func GetLocation(ctx context.Context, id string) (*v2.ListLocations200ResponseDa
 
 // CreateLocation creates a location
 func CreateLocation(ctx context.Context, name, sshPublicKey string) (string, error) {
-	client, err := newAPIV2Client()
+	client, err := newAPIV3Client()
 	if err != nil {
 		return "", fmt.Errorf("unable to init client: %w", err)
 	}
-	req := client.LocationsAPI.CreateLocation(ctx).CreateLocationRequest(v2.CreateLocationRequest{
+	req := client.LocationsAPI.CreateLocation(ctx).CreateLocationRequest(v3.CreateLocationRequest{
 		Name:         name,
 		SshPublicKey: sshPublicKey,
 	})
@@ -61,13 +61,14 @@ func CreateLocation(ctx context.Context, name, sshPublicKey string) (string, err
 
 // UpdateLocation updates a location
 func UpdateLocation(ctx context.Context, id string, name, sshPublicKey string) error {
-	client, err := newAPIV2Client()
+	client, err := newAPIV3Client()
 	if err != nil {
 		return fmt.Errorf("unable to init client: %w", err)
 	}
-	req := client.LocationsAPI.UpdateLocation(ctx, id).UpdateLocationRequest(v2.UpdateLocationRequest{
-		Name:         &name,
-		SshPublicKey: &sshPublicKey,
+	req := client.LocationsAPI.UpdateLocation(ctx, id).UpdateLocationRequest(v3.UpdateLocationRequest{
+		Name:         name,
+		SshPublicKey: sshPublicKey,
+		Enabled:      true,
 	})
 	_, _, err = req.Execute()
 	if err != nil {
@@ -78,7 +79,7 @@ func UpdateLocation(ctx context.Context, id string, name, sshPublicKey string) e
 
 // DeleteLocation deletes a location
 func DeleteLocation(ctx context.Context, id string) error {
-	client, err := newAPIV2Client()
+	client, err := newAPIV3Client()
 	if err != nil {
 		return fmt.Errorf("unable to init client: %w", err)
 	}

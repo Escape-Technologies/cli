@@ -46,6 +46,7 @@ type FrontendConfigurationScan struct {
 	FrontendSecurityChecksEnabled []EnumF5dfa531fb3e4e3c30dbe59e58d11d44 `json:"frontend_security_checks_enabled,omitempty"`
 	FrontendAllowedUrlPatterns []string `json:"frontend_allowed_url_patterns,omitempty"`
 	DoNotFuzzParams []string `json:"do_not_fuzz_params,omitempty"`
+	FrontendLogoutDetectionConfig *FrontendConfigurationScanFrontendLogoutDetectionConfig `json:"frontend_logout_detection_config,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -932,6 +933,38 @@ func (o *FrontendConfigurationScan) SetDoNotFuzzParams(v []string) {
 	o.DoNotFuzzParams = v
 }
 
+// GetFrontendLogoutDetectionConfig returns the FrontendLogoutDetectionConfig field value if set, zero value otherwise.
+func (o *FrontendConfigurationScan) GetFrontendLogoutDetectionConfig() FrontendConfigurationScanFrontendLogoutDetectionConfig {
+	if o == nil || IsNil(o.FrontendLogoutDetectionConfig) {
+		var ret FrontendConfigurationScanFrontendLogoutDetectionConfig
+		return ret
+	}
+	return *o.FrontendLogoutDetectionConfig
+}
+
+// GetFrontendLogoutDetectionConfigOk returns a tuple with the FrontendLogoutDetectionConfig field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FrontendConfigurationScan) GetFrontendLogoutDetectionConfigOk() (*FrontendConfigurationScanFrontendLogoutDetectionConfig, bool) {
+	if o == nil || IsNil(o.FrontendLogoutDetectionConfig) {
+		return nil, false
+	}
+	return o.FrontendLogoutDetectionConfig, true
+}
+
+// HasFrontendLogoutDetectionConfig returns a boolean if a field has been set.
+func (o *FrontendConfigurationScan) HasFrontendLogoutDetectionConfig() bool {
+	if o != nil && !IsNil(o.FrontendLogoutDetectionConfig) {
+		return true
+	}
+
+	return false
+}
+
+// SetFrontendLogoutDetectionConfig gets a reference to the given FrontendConfigurationScanFrontendLogoutDetectionConfig and assigns it to the FrontendLogoutDetectionConfig field.
+func (o *FrontendConfigurationScan) SetFrontendLogoutDetectionConfig(v FrontendConfigurationScanFrontendLogoutDetectionConfig) {
+	o.FrontendLogoutDetectionConfig = &v
+}
+
 func (o FrontendConfigurationScan) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -1023,6 +1056,9 @@ func (o FrontendConfigurationScan) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.DoNotFuzzParams) {
 		toSerialize["do_not_fuzz_params"] = o.DoNotFuzzParams
 	}
+	if !IsNil(o.FrontendLogoutDetectionConfig) {
+		toSerialize["frontend_logout_detection_config"] = o.FrontendLogoutDetectionConfig
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -1072,6 +1108,7 @@ func (o *FrontendConfigurationScan) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "frontend_security_checks_enabled")
 		delete(additionalProperties, "frontend_allowed_url_patterns")
 		delete(additionalProperties, "do_not_fuzz_params")
+		delete(additionalProperties, "frontend_logout_detection_config")
 		o.AdditionalProperties = additionalProperties
 	}
 
