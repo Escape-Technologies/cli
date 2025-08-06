@@ -31,6 +31,7 @@ type CreateAssetGRAPHQLRequest struct {
 	Ips []string `json:"ips,omitempty"`
 	RegionCountryCodes []string `json:"region_country_codes,omitempty"`
 	Framework *Enum66ad4191701e5e8ad147df828a0d18a2 `json:"framework,omitempty"`
+	Operations []CreateAssetGRAPHQLRequestOperationsInner `json:"operations,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -384,6 +385,38 @@ func (o *CreateAssetGRAPHQLRequest) SetFramework(v Enum66ad4191701e5e8ad147df828
 	o.Framework = &v
 }
 
+// GetOperations returns the Operations field value if set, zero value otherwise.
+func (o *CreateAssetGRAPHQLRequest) GetOperations() []CreateAssetGRAPHQLRequestOperationsInner {
+	if o == nil || IsNil(o.Operations) {
+		var ret []CreateAssetGRAPHQLRequestOperationsInner
+		return ret
+	}
+	return o.Operations
+}
+
+// GetOperationsOk returns a tuple with the Operations field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetGRAPHQLRequest) GetOperationsOk() ([]CreateAssetGRAPHQLRequestOperationsInner, bool) {
+	if o == nil || IsNil(o.Operations) {
+		return nil, false
+	}
+	return o.Operations, true
+}
+
+// HasOperations returns a boolean if a field has been set.
+func (o *CreateAssetGRAPHQLRequest) HasOperations() bool {
+	if o != nil && !IsNil(o.Operations) {
+		return true
+	}
+
+	return false
+}
+
+// SetOperations gets a reference to the given []CreateAssetGRAPHQLRequestOperationsInner and assigns it to the Operations field.
+func (o *CreateAssetGRAPHQLRequest) SetOperations(v []CreateAssetGRAPHQLRequestOperationsInner) {
+	o.Operations = v
+}
+
 func (o CreateAssetGRAPHQLRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -420,6 +453,9 @@ func (o CreateAssetGRAPHQLRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Framework) {
 		toSerialize["framework"] = o.Framework
+	}
+	if !IsNil(o.Operations) {
+		toSerialize["operations"] = o.Operations
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -477,6 +513,7 @@ func (o *CreateAssetGRAPHQLRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ips")
 		delete(additionalProperties, "region_country_codes")
 		delete(additionalProperties, "framework")
+		delete(additionalProperties, "operations")
 		o.AdditionalProperties = additionalProperties
 	}
 

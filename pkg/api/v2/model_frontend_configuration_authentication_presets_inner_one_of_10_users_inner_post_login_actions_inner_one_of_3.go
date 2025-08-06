@@ -21,6 +21,7 @@ var _ MappedNullable = &FrontendConfigurationAuthenticationPresetsInnerOneOf10Us
 // FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInnerOneOf3 struct for FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInnerOneOf3
 type FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInnerOneOf3 struct {
 	Action EnumGOTO `json:"action"`
+	AllowFailure *bool `json:"allow_failure,omitempty"`
 	Url string `json:"url"`
 	AdditionalProperties map[string]interface{}
 }
@@ -70,6 +71,38 @@ func (o *FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInnerPostLog
 	o.Action = v
 }
 
+// GetAllowFailure returns the AllowFailure field value if set, zero value otherwise.
+func (o *FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInnerOneOf3) GetAllowFailure() bool {
+	if o == nil || IsNil(o.AllowFailure) {
+		var ret bool
+		return ret
+	}
+	return *o.AllowFailure
+}
+
+// GetAllowFailureOk returns a tuple with the AllowFailure field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInnerOneOf3) GetAllowFailureOk() (*bool, bool) {
+	if o == nil || IsNil(o.AllowFailure) {
+		return nil, false
+	}
+	return o.AllowFailure, true
+}
+
+// HasAllowFailure returns a boolean if a field has been set.
+func (o *FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInnerOneOf3) HasAllowFailure() bool {
+	if o != nil && !IsNil(o.AllowFailure) {
+		return true
+	}
+
+	return false
+}
+
+// SetAllowFailure gets a reference to the given bool and assigns it to the AllowFailure field.
+func (o *FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInnerOneOf3) SetAllowFailure(v bool) {
+	o.AllowFailure = &v
+}
+
 // GetUrl returns the Url field value
 func (o *FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInnerOneOf3) GetUrl() string {
 	if o == nil {
@@ -105,6 +138,9 @@ func (o FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInnerPostLogi
 func (o FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInnerOneOf3) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["action"] = o.Action
+	if !IsNil(o.AllowFailure) {
+		toSerialize["allow_failure"] = o.AllowFailure
+	}
 	toSerialize["url"] = o.Url
 
 	for key, value := range o.AdditionalProperties {
@@ -151,6 +187,7 @@ func (o *FrontendConfigurationAuthenticationPresetsInnerOneOf10UsersInnerPostLog
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "action")
+		delete(additionalProperties, "allow_failure")
 		delete(additionalProperties, "url")
 		o.AdditionalProperties = additionalProperties
 	}

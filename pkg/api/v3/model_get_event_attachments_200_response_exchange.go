@@ -26,7 +26,7 @@ type GetEventAttachments200ResponseExchange struct {
 	Id string `json:"id"`
 	InferredScalars []GetEventAttachments200ResponseExchangeInferredScalarsInner `json:"inferredScalars"`
 	ResponseBody string `json:"responseBody"`
-	ResponseHeaders []CreateBlstRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner `json:"responseHeaders"`
+	ResponseHeaders []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner `json:"responseHeaders"`
 	ResponseStatusCode float32 `json:"responseStatusCode"`
 	Url string `json:"url"`
 	AdditionalProperties map[string]interface{}
@@ -38,7 +38,7 @@ type _GetEventAttachments200ResponseExchange GetEventAttachments200ResponseExcha
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetEventAttachments200ResponseExchange(createdAt string, curl string, duration float32, id string, inferredScalars []GetEventAttachments200ResponseExchangeInferredScalarsInner, responseBody string, responseHeaders []CreateBlstRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner, responseStatusCode float32, url string) *GetEventAttachments200ResponseExchange {
+func NewGetEventAttachments200ResponseExchange(createdAt string, curl string, duration float32, id string, inferredScalars []GetEventAttachments200ResponseExchangeInferredScalarsInner, responseBody string, responseHeaders []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner, responseStatusCode float32, url string) *GetEventAttachments200ResponseExchange {
 	this := GetEventAttachments200ResponseExchange{}
 	this.CreatedAt = createdAt
 	this.Curl = curl
@@ -205,9 +205,9 @@ func (o *GetEventAttachments200ResponseExchange) SetResponseBody(v string) {
 }
 
 // GetResponseHeaders returns the ResponseHeaders field value
-func (o *GetEventAttachments200ResponseExchange) GetResponseHeaders() []CreateBlstRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner {
+func (o *GetEventAttachments200ResponseExchange) GetResponseHeaders() []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner {
 	if o == nil {
-		var ret []CreateBlstRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner
+		var ret []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner
 		return ret
 	}
 
@@ -216,7 +216,7 @@ func (o *GetEventAttachments200ResponseExchange) GetResponseHeaders() []CreateBl
 
 // GetResponseHeadersOk returns a tuple with the ResponseHeaders field value
 // and a boolean to check if the value has been set.
-func (o *GetEventAttachments200ResponseExchange) GetResponseHeadersOk() ([]CreateBlstRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner, bool) {
+func (o *GetEventAttachments200ResponseExchange) GetResponseHeadersOk() ([]CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -224,7 +224,7 @@ func (o *GetEventAttachments200ResponseExchange) GetResponseHeadersOk() ([]Creat
 }
 
 // SetResponseHeaders sets field value
-func (o *GetEventAttachments200ResponseExchange) SetResponseHeaders(v []CreateBlstRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner) {
+func (o *GetEventAttachments200ResponseExchange) SetResponseHeaders(v []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner) {
 	o.ResponseHeaders = v
 }
 
