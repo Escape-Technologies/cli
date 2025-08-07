@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"log"
 
 	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
 )
@@ -97,6 +98,8 @@ func UpsertLocation(ctx context.Context, name, sshPublicKey string) (string, err
 	if err == nil {
 		return id, nil
 	}
+	log.Println("id", id)
+	log.Println("err", err)
 	id, err = extractConflict(err)
 	if err != nil {
 		return "", fmt.Errorf("unable to extract conflict: %w", err)
