@@ -5,6 +5,7 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
 VERSIONS=(
     "v2"
+    "v3"
 )
 TMP_DIR="${PROJECT_ROOT}/._openapi-generator/"
 

@@ -5,6 +5,7 @@ linters:
     generated: disable
     paths:
       - "pkg/api/v2/.*.go"
+      - "pkg/api/v3/.*.go"
     rules:
       - path: "pkg/api/escape/.*.go"
         linters:

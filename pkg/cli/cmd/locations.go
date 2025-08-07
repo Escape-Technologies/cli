@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"strconv"
 
 	"github.com/Escape-Technologies/cli/pkg/api/escape"
 	"github.com/Escape-Technologies/cli/pkg/cli/out"
@@ -33,15 +34,17 @@ ID                                      NAME                       SSH PUBLIC KE
 			return fmt.Errorf("failed to list locations: %w", err)
 		}
 		out.Table(locations, func() []string {
-			res := []string{"ID\tNAME\tSSH PUBLIC KEY"}
+			res := []string{"ID\tNAME\tTYPE\tENABLED\tLINK"}
 			for _, location := range locations {
 				res = append(
 					res,
 					fmt.Sprintf(
-						"%s\t%s\t%s",
+						"%s\t%s\t%s\t%t\t%s",
 						location.GetId(),
 						location.GetName(),
-						location.GetSshPublicKey(),
+						location.GetType(),
+						location.GetEnabled(),
+						location.GetLinks().LocationOverview,
 					),
 				)
 			}
@@ -55,7 +58,7 @@ ID                                      NAME                       SSH PUBLIC KE
 			out.Table(locations, func() []string {
 				res := []string{}
 				for _, location := range locations {
-					res = append(res, fmt.Sprintf("%s\t%s\t%s", location.GetId(), location.GetName(), location.GetSshPublicKey()))
+					res = append(res, fmt.Sprintf("%s\t%s\t%s\t%t", location.GetId(), location.GetName(), location.GetType(), location.GetEnabled()))
 				}
 				return res
 			})
@@ -64,6 +67,27 @@ ID                                      NAME                       SSH PUBLIC KE
 	},
 }
 
+var locationsGetCmd = &cobra.Command{
+	Use:     "get location-id",
+	Aliases: []string{"g"},
+	Short:   "Get a location",
+	Long:    `Get a location by its ID.`,
+	Args:    cobra.ExactArgs(1),
+	Example: `escape-cli locations get 00000000-0000-0000-0000-000000000000`,
+	RunE: func(cmd *cobra.Command, args []string) error {
+		location, err := escape.GetLocation(cmd.Context(), args[0])
+		if err != nil {
+			return fmt.Errorf("failed to get location: %w", err)
+		}
+		out.Table(location, func() []string {
+			return []string{
+				"ID\tNAME\tTYPE\tENABLED\tLINK",
+				fmt.Sprintf("%s\t%s\t%s\t%s\t%s", location.GetId(), location.GetName(), location.GetType(), strconv.FormatBool(location.GetEnabled()), location.GetLinks().LocationOverview),
+			}
+		})
+		return nil
+	},
+}
 var locationsStartCmd = &cobra.Command{
 	Use:     "start location-name",
 	Short:   "Start a location",
@@ -110,6 +134,7 @@ Location deleted`,
 
 func init() {
 	locationsCmd.AddCommand(locationsListCmd)
+	locationsCmd.AddCommand(locationsGetCmd)
 	locationsCmd.AddCommand(locationsStartCmd)
 	locationsCmd.AddCommand(locationsDeleteCmd)
 	rootCmd.AddCommand(locationsCmd)
