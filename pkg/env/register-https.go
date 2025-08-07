@@ -2,6 +2,7 @@ package env
 
 import (
 	"bufio"
+	"context"
 	"crypto/tls"
 	"fmt"
 	"net"
@@ -32,7 +33,10 @@ func newHTTPSProxy(uri *url.URL, forward proxy.Dialer) (proxy.Dialer, error) {
 }
 
 func (s *httpsProxy) Dial(_, addr string) (net.Conn, error) {
-	c, err := tls.Dial("tcp", s.host, &tls.Config{})
+	dialer := &tls.Dialer{
+		Config: &tls.Config{},
+	}
+	c, err := dialer.DialContext(context.Background(), "tcp", s.host)
 	if err != nil {
 		return nil, fmt.Errorf("failed to dial %s: %w", s.host, err)
 	}
