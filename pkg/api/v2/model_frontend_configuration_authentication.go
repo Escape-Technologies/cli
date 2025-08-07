@@ -19,6 +19,7 @@ var _ MappedNullable = &FrontendConfigurationAuthentication{}
 
 // FrontendConfigurationAuthentication struct for FrontendConfigurationAuthentication
 type FrontendConfigurationAuthentication struct {
+	Lifetime *float32 `json:"lifetime,omitempty"`
 	Schema *string `json:"$schema,omitempty"`
 	Procedures []FrontendConfigurationAuthenticationProceduresInner `json:"procedures,omitempty"`
 	Presets []FrontendConfigurationAuthenticationPresetsInner `json:"presets,omitempty"`
@@ -45,6 +46,38 @@ func NewFrontendConfigurationAuthentication() *FrontendConfigurationAuthenticati
 func NewFrontendConfigurationAuthenticationWithDefaults() *FrontendConfigurationAuthentication {
 	this := FrontendConfigurationAuthentication{}
 	return &this
+}
+
+// GetLifetime returns the Lifetime field value if set, zero value otherwise.
+func (o *FrontendConfigurationAuthentication) GetLifetime() float32 {
+	if o == nil || IsNil(o.Lifetime) {
+		var ret float32
+		return ret
+	}
+	return *o.Lifetime
+}
+
+// GetLifetimeOk returns a tuple with the Lifetime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FrontendConfigurationAuthentication) GetLifetimeOk() (*float32, bool) {
+	if o == nil || IsNil(o.Lifetime) {
+		return nil, false
+	}
+	return o.Lifetime, true
+}
+
+// HasLifetime returns a boolean if a field has been set.
+func (o *FrontendConfigurationAuthentication) HasLifetime() bool {
+	if o != nil && !IsNil(o.Lifetime) {
+		return true
+	}
+
+	return false
+}
+
+// SetLifetime gets a reference to the given float32 and assigns it to the Lifetime field.
+func (o *FrontendConfigurationAuthentication) SetLifetime(v float32) {
+	o.Lifetime = &v
 }
 
 // GetSchema returns the Schema field value if set, zero value otherwise.
@@ -249,6 +282,9 @@ func (o FrontendConfigurationAuthentication) MarshalJSON() ([]byte, error) {
 
 func (o FrontendConfigurationAuthentication) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Lifetime) {
+		toSerialize["lifetime"] = o.Lifetime
+	}
 	if !IsNil(o.Schema) {
 		toSerialize["$schema"] = o.Schema
 	}
@@ -289,6 +325,7 @@ func (o *FrontendConfigurationAuthentication) UnmarshalJSON(data []byte) (err er
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "lifetime")
 		delete(additionalProperties, "$schema")
 		delete(additionalProperties, "procedures")
 		delete(additionalProperties, "presets")

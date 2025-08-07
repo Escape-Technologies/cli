@@ -20,8 +20,9 @@ var _ MappedNullable = &IgnoreScan409Response{}
 
 // IgnoreScan409Response struct for IgnoreScan409Response
 type IgnoreScan409Response struct {
-	Message EnumCONFLICT `json:"message"`
-	Details string `json:"details"`
+	Message EnumCONFLICTONTHEFOLLOWINGFIELD `json:"message"`
+	Field string `json:"field"`
+	InstanceId string `json:"instanceId"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -31,10 +32,11 @@ type _IgnoreScan409Response IgnoreScan409Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIgnoreScan409Response(message EnumCONFLICT, details string) *IgnoreScan409Response {
+func NewIgnoreScan409Response(message EnumCONFLICTONTHEFOLLOWINGFIELD, field string, instanceId string) *IgnoreScan409Response {
 	this := IgnoreScan409Response{}
 	this.Message = message
-	this.Details = details
+	this.Field = field
+	this.InstanceId = instanceId
 	return &this
 }
 
@@ -47,9 +49,9 @@ func NewIgnoreScan409ResponseWithDefaults() *IgnoreScan409Response {
 }
 
 // GetMessage returns the Message field value
-func (o *IgnoreScan409Response) GetMessage() EnumCONFLICT {
+func (o *IgnoreScan409Response) GetMessage() EnumCONFLICTONTHEFOLLOWINGFIELD {
 	if o == nil {
-		var ret EnumCONFLICT
+		var ret EnumCONFLICTONTHEFOLLOWINGFIELD
 		return ret
 	}
 
@@ -58,7 +60,7 @@ func (o *IgnoreScan409Response) GetMessage() EnumCONFLICT {
 
 // GetMessageOk returns a tuple with the Message field value
 // and a boolean to check if the value has been set.
-func (o *IgnoreScan409Response) GetMessageOk() (*EnumCONFLICT, bool) {
+func (o *IgnoreScan409Response) GetMessageOk() (*EnumCONFLICTONTHEFOLLOWINGFIELD, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -66,32 +68,56 @@ func (o *IgnoreScan409Response) GetMessageOk() (*EnumCONFLICT, bool) {
 }
 
 // SetMessage sets field value
-func (o *IgnoreScan409Response) SetMessage(v EnumCONFLICT) {
+func (o *IgnoreScan409Response) SetMessage(v EnumCONFLICTONTHEFOLLOWINGFIELD) {
 	o.Message = v
 }
 
-// GetDetails returns the Details field value
-func (o *IgnoreScan409Response) GetDetails() string {
+// GetField returns the Field field value
+func (o *IgnoreScan409Response) GetField() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Details
+	return o.Field
 }
 
-// GetDetailsOk returns a tuple with the Details field value
+// GetFieldOk returns a tuple with the Field field value
 // and a boolean to check if the value has been set.
-func (o *IgnoreScan409Response) GetDetailsOk() (*string, bool) {
+func (o *IgnoreScan409Response) GetFieldOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Details, true
+	return &o.Field, true
 }
 
-// SetDetails sets field value
-func (o *IgnoreScan409Response) SetDetails(v string) {
-	o.Details = v
+// SetField sets field value
+func (o *IgnoreScan409Response) SetField(v string) {
+	o.Field = v
+}
+
+// GetInstanceId returns the InstanceId field value
+func (o *IgnoreScan409Response) GetInstanceId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.InstanceId
+}
+
+// GetInstanceIdOk returns a tuple with the InstanceId field value
+// and a boolean to check if the value has been set.
+func (o *IgnoreScan409Response) GetInstanceIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.InstanceId, true
+}
+
+// SetInstanceId sets field value
+func (o *IgnoreScan409Response) SetInstanceId(v string) {
+	o.InstanceId = v
 }
 
 func (o IgnoreScan409Response) MarshalJSON() ([]byte, error) {
@@ -105,7 +131,8 @@ func (o IgnoreScan409Response) MarshalJSON() ([]byte, error) {
 func (o IgnoreScan409Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["message"] = o.Message
-	toSerialize["details"] = o.Details
+	toSerialize["field"] = o.Field
+	toSerialize["instanceId"] = o.InstanceId
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -120,7 +147,8 @@ func (o *IgnoreScan409Response) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"message",
-		"details",
+		"field",
+		"instanceId",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -151,7 +179,8 @@ func (o *IgnoreScan409Response) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "message")
-		delete(additionalProperties, "details")
+		delete(additionalProperties, "field")
+		delete(additionalProperties, "instanceId")
 		o.AdditionalProperties = additionalProperties
 	}
 
