@@ -1,7 +1,7 @@
 /*
 Escape Public API
 
-This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `Authorization` header. For example: `Authorization: Key YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
+This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `X-ESCAPE-API-KEY` header. For example: `X-ESCAPE-API-KEY: YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
 
 API version: 3.0.0
 */
@@ -29,7 +29,7 @@ type ApiGetEventRequest struct {
 	eventId string
 }
 
-func (r ApiGetEventRequest) Execute() (*GetEvent200Response, *http.Response, error) {
+func (r ApiGetEventRequest) Execute() (*EventDetailed, *http.Response, error) {
 	return r.ApiService.GetEventExecute(r)
 }
 
@@ -51,13 +51,13 @@ func (a *EventsAPIService) GetEvent(ctx context.Context, eventId string) ApiGetE
 }
 
 // Execute executes the request
-//  @return GetEvent200Response
-func (a *EventsAPIService) GetEventExecute(r ApiGetEventRequest) (*GetEvent200Response, *http.Response, error) {
+//  @return EventDetailed
+func (a *EventsAPIService) GetEventExecute(r ApiGetEventRequest) (*EventDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetEvent200Response
+		localVarReturnValue  *EventDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EventsAPIService.GetEvent")
@@ -99,7 +99,7 @@ func (a *EventsAPIService) GetEventExecute(r ApiGetEventRequest) (*GetEvent200Re
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -156,7 +156,7 @@ type ApiGetEventAttachmentsRequest struct {
 	eventId string
 }
 
-func (r ApiGetEventAttachmentsRequest) Execute() (*GetEventAttachments200Response, *http.Response, error) {
+func (r ApiGetEventAttachmentsRequest) Execute() ([]AttachmentDetailed, *http.Response, error) {
 	return r.ApiService.GetEventAttachmentsExecute(r)
 }
 
@@ -178,13 +178,13 @@ func (a *EventsAPIService) GetEventAttachments(ctx context.Context, eventId stri
 }
 
 // Execute executes the request
-//  @return GetEventAttachments200Response
-func (a *EventsAPIService) GetEventAttachmentsExecute(r ApiGetEventAttachmentsRequest) (*GetEventAttachments200Response, *http.Response, error) {
+//  @return []AttachmentDetailed
+func (a *EventsAPIService) GetEventAttachmentsExecute(r ApiGetEventAttachmentsRequest) ([]AttachmentDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetEventAttachments200Response
+		localVarReturnValue  []AttachmentDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EventsAPIService.GetEventAttachments")
@@ -226,7 +226,7 @@ func (a *EventsAPIService) GetEventAttachmentsExecute(r ApiGetEventAttachmentsRe
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -461,7 +461,7 @@ func (a *EventsAPIService) ListEventsExecute(r ApiListEventsRequest) (*ListEvent
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}

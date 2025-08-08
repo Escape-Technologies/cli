@@ -1,7 +1,7 @@
 /*
 Escape Public API
 
-This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `Authorization` header. For example: `Authorization: Key YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
+This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `X-ESCAPE-API-KEY` header. For example: `X-ESCAPE-API-KEY: YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
 
 API version: 3.0.0
 */
@@ -34,7 +34,7 @@ func (r ApiCreateTagRequest) CreateTagRequest(createTagRequest CreateTagRequest)
 	return r
 }
 
-func (r ApiCreateTagRequest) Execute() (*ListTags200ResponseDataInner, *http.Response, error) {
+func (r ApiCreateTagRequest) Execute() (*TagDetail, *http.Response, error) {
 	return r.ApiService.CreateTagExecute(r)
 }
 
@@ -54,13 +54,13 @@ func (a *TagsAPIService) CreateTag(ctx context.Context) ApiCreateTagRequest {
 }
 
 // Execute executes the request
-//  @return ListTags200ResponseDataInner
-func (a *TagsAPIService) CreateTagExecute(r ApiCreateTagRequest) (*ListTags200ResponseDataInner, *http.Response, error) {
+//  @return TagDetail
+func (a *TagsAPIService) CreateTagExecute(r ApiCreateTagRequest) (*TagDetail, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ListTags200ResponseDataInner
+		localVarReturnValue  *TagDetail
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TagsAPIService.CreateTag")
@@ -103,7 +103,7 @@ func (a *TagsAPIService) CreateTagExecute(r ApiCreateTagRequest) (*ListTags200Re
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -159,7 +159,7 @@ type ApiListTagsRequest struct {
 	ApiService *TagsAPIService
 }
 
-func (r ApiListTagsRequest) Execute() (*ListTags200Response, *http.Response, error) {
+func (r ApiListTagsRequest) Execute() ([]TagDetail, *http.Response, error) {
 	return r.ApiService.ListTagsExecute(r)
 }
 
@@ -179,13 +179,13 @@ func (a *TagsAPIService) ListTags(ctx context.Context) ApiListTagsRequest {
 }
 
 // Execute executes the request
-//  @return ListTags200Response
-func (a *TagsAPIService) ListTagsExecute(r ApiListTagsRequest) (*ListTags200Response, *http.Response, error) {
+//  @return []TagDetail
+func (a *TagsAPIService) ListTagsExecute(r ApiListTagsRequest) ([]TagDetail, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ListTags200Response
+		localVarReturnValue  []TagDetail
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TagsAPIService.ListTags")
@@ -226,7 +226,7 @@ func (a *TagsAPIService) ListTagsExecute(r ApiListTagsRequest) (*ListTags200Resp
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}

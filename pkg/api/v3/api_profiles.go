@@ -1,7 +1,7 @@
 /*
 Escape Public API
 
-This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `Authorization` header. For example: `Authorization: Key YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
+This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `X-ESCAPE-API-KEY` header. For example: `X-ESCAPE-API-KEY: YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
 
 API version: 3.0.0
 */
@@ -34,7 +34,7 @@ func (r ApiCreateASMAKAMAIProfileRequest) CreateASMDNSProfileRequest(createASMDN
 	return r
 }
 
-func (r ApiCreateASMAKAMAIProfileRequest) Execute() (*CreateASMDNSProfile200Response, *http.Response, error) {
+func (r ApiCreateASMAKAMAIProfileRequest) Execute() (*ProfileDetailed, *http.Response, error) {
 	return r.ApiService.CreateASMAKAMAIProfileExecute(r)
 }
 
@@ -54,13 +54,13 @@ func (a *ProfilesAPIService) CreateASMAKAMAIProfile(ctx context.Context) ApiCrea
 }
 
 // Execute executes the request
-//  @return CreateASMDNSProfile200Response
-func (a *ProfilesAPIService) CreateASMAKAMAIProfileExecute(r ApiCreateASMAKAMAIProfileRequest) (*CreateASMDNSProfile200Response, *http.Response, error) {
+//  @return ProfileDetailed
+func (a *ProfilesAPIService) CreateASMAKAMAIProfileExecute(r ApiCreateASMAKAMAIProfileRequest) (*ProfileDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateASMDNSProfile200Response
+		localVarReturnValue  *ProfileDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProfilesAPIService.CreateASMAKAMAIProfile")
@@ -103,7 +103,7 @@ func (a *ProfilesAPIService) CreateASMAKAMAIProfileExecute(r ApiCreateASMAKAMAIP
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -165,7 +165,7 @@ func (r ApiCreateASMAWSProfileRequest) CreateASMDNSProfileRequest(createASMDNSPr
 	return r
 }
 
-func (r ApiCreateASMAWSProfileRequest) Execute() (*CreateASMDNSProfile200Response, *http.Response, error) {
+func (r ApiCreateASMAWSProfileRequest) Execute() (*ProfileDetailed, *http.Response, error) {
 	return r.ApiService.CreateASMAWSProfileExecute(r)
 }
 
@@ -185,13 +185,13 @@ func (a *ProfilesAPIService) CreateASMAWSProfile(ctx context.Context) ApiCreateA
 }
 
 // Execute executes the request
-//  @return CreateASMDNSProfile200Response
-func (a *ProfilesAPIService) CreateASMAWSProfileExecute(r ApiCreateASMAWSProfileRequest) (*CreateASMDNSProfile200Response, *http.Response, error) {
+//  @return ProfileDetailed
+func (a *ProfilesAPIService) CreateASMAWSProfileExecute(r ApiCreateASMAWSProfileRequest) (*ProfileDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateASMDNSProfile200Response
+		localVarReturnValue  *ProfileDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProfilesAPIService.CreateASMAWSProfile")
@@ -234,7 +234,7 @@ func (a *ProfilesAPIService) CreateASMAWSProfileExecute(r ApiCreateASMAWSProfile
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -296,7 +296,7 @@ func (r ApiCreateASMAZUREProfileRequest) CreateASMDNSProfileRequest(createASMDNS
 	return r
 }
 
-func (r ApiCreateASMAZUREProfileRequest) Execute() (*CreateASMDNSProfile200Response, *http.Response, error) {
+func (r ApiCreateASMAZUREProfileRequest) Execute() (*ProfileDetailed, *http.Response, error) {
 	return r.ApiService.CreateASMAZUREProfileExecute(r)
 }
 
@@ -316,13 +316,13 @@ func (a *ProfilesAPIService) CreateASMAZUREProfile(ctx context.Context) ApiCreat
 }
 
 // Execute executes the request
-//  @return CreateASMDNSProfile200Response
-func (a *ProfilesAPIService) CreateASMAZUREProfileExecute(r ApiCreateASMAZUREProfileRequest) (*CreateASMDNSProfile200Response, *http.Response, error) {
+//  @return ProfileDetailed
+func (a *ProfilesAPIService) CreateASMAZUREProfileExecute(r ApiCreateASMAZUREProfileRequest) (*ProfileDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateASMDNSProfile200Response
+		localVarReturnValue  *ProfileDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProfilesAPIService.CreateASMAZUREProfile")
@@ -365,7 +365,7 @@ func (a *ProfilesAPIService) CreateASMAZUREProfileExecute(r ApiCreateASMAZUREPro
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -427,7 +427,7 @@ func (r ApiCreateASMCLOUDFLAREProfileRequest) CreateASMDNSProfileRequest(createA
 	return r
 }
 
-func (r ApiCreateASMCLOUDFLAREProfileRequest) Execute() (*CreateASMDNSProfile200Response, *http.Response, error) {
+func (r ApiCreateASMCLOUDFLAREProfileRequest) Execute() (*ProfileDetailed, *http.Response, error) {
 	return r.ApiService.CreateASMCLOUDFLAREProfileExecute(r)
 }
 
@@ -447,13 +447,13 @@ func (a *ProfilesAPIService) CreateASMCLOUDFLAREProfile(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return CreateASMDNSProfile200Response
-func (a *ProfilesAPIService) CreateASMCLOUDFLAREProfileExecute(r ApiCreateASMCLOUDFLAREProfileRequest) (*CreateASMDNSProfile200Response, *http.Response, error) {
+//  @return ProfileDetailed
+func (a *ProfilesAPIService) CreateASMCLOUDFLAREProfileExecute(r ApiCreateASMCLOUDFLAREProfileRequest) (*ProfileDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateASMDNSProfile200Response
+		localVarReturnValue  *ProfileDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProfilesAPIService.CreateASMCLOUDFLAREProfile")
@@ -496,7 +496,7 @@ func (a *ProfilesAPIService) CreateASMCLOUDFLAREProfileExecute(r ApiCreateASMCLO
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -558,7 +558,7 @@ func (r ApiCreateASMDNSProfileRequest) CreateASMDNSProfileRequest(createASMDNSPr
 	return r
 }
 
-func (r ApiCreateASMDNSProfileRequest) Execute() (*CreateASMDNSProfile200Response, *http.Response, error) {
+func (r ApiCreateASMDNSProfileRequest) Execute() (*ProfileDetailed, *http.Response, error) {
 	return r.ApiService.CreateASMDNSProfileExecute(r)
 }
 
@@ -578,13 +578,13 @@ func (a *ProfilesAPIService) CreateASMDNSProfile(ctx context.Context) ApiCreateA
 }
 
 // Execute executes the request
-//  @return CreateASMDNSProfile200Response
-func (a *ProfilesAPIService) CreateASMDNSProfileExecute(r ApiCreateASMDNSProfileRequest) (*CreateASMDNSProfile200Response, *http.Response, error) {
+//  @return ProfileDetailed
+func (a *ProfilesAPIService) CreateASMDNSProfileExecute(r ApiCreateASMDNSProfileRequest) (*ProfileDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateASMDNSProfile200Response
+		localVarReturnValue  *ProfileDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProfilesAPIService.CreateASMDNSProfile")
@@ -627,7 +627,7 @@ func (a *ProfilesAPIService) CreateASMDNSProfileExecute(r ApiCreateASMDNSProfile
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -689,7 +689,7 @@ func (r ApiCreateASMGCPProfileRequest) CreateASMDNSProfileRequest(createASMDNSPr
 	return r
 }
 
-func (r ApiCreateASMGCPProfileRequest) Execute() (*CreateASMDNSProfile200Response, *http.Response, error) {
+func (r ApiCreateASMGCPProfileRequest) Execute() (*ProfileDetailed, *http.Response, error) {
 	return r.ApiService.CreateASMGCPProfileExecute(r)
 }
 
@@ -709,13 +709,13 @@ func (a *ProfilesAPIService) CreateASMGCPProfile(ctx context.Context) ApiCreateA
 }
 
 // Execute executes the request
-//  @return CreateASMDNSProfile200Response
-func (a *ProfilesAPIService) CreateASMGCPProfileExecute(r ApiCreateASMGCPProfileRequest) (*CreateASMDNSProfile200Response, *http.Response, error) {
+//  @return ProfileDetailed
+func (a *ProfilesAPIService) CreateASMGCPProfileExecute(r ApiCreateASMGCPProfileRequest) (*ProfileDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateASMDNSProfile200Response
+		localVarReturnValue  *ProfileDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProfilesAPIService.CreateASMGCPProfile")
@@ -758,7 +758,7 @@ func (a *ProfilesAPIService) CreateASMGCPProfileExecute(r ApiCreateASMGCPProfile
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -820,7 +820,7 @@ func (r ApiCreateASMGITHUBORGANIZATIONProfileRequest) CreateASMDNSProfileRequest
 	return r
 }
 
-func (r ApiCreateASMGITHUBORGANIZATIONProfileRequest) Execute() (*CreateASMDNSProfile200Response, *http.Response, error) {
+func (r ApiCreateASMGITHUBORGANIZATIONProfileRequest) Execute() (*ProfileDetailed, *http.Response, error) {
 	return r.ApiService.CreateASMGITHUBORGANIZATIONProfileExecute(r)
 }
 
@@ -840,13 +840,13 @@ func (a *ProfilesAPIService) CreateASMGITHUBORGANIZATIONProfile(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return CreateASMDNSProfile200Response
-func (a *ProfilesAPIService) CreateASMGITHUBORGANIZATIONProfileExecute(r ApiCreateASMGITHUBORGANIZATIONProfileRequest) (*CreateASMDNSProfile200Response, *http.Response, error) {
+//  @return ProfileDetailed
+func (a *ProfilesAPIService) CreateASMGITHUBORGANIZATIONProfileExecute(r ApiCreateASMGITHUBORGANIZATIONProfileRequest) (*ProfileDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateASMDNSProfile200Response
+		localVarReturnValue  *ProfileDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProfilesAPIService.CreateASMGITHUBORGANIZATIONProfile")
@@ -889,7 +889,7 @@ func (a *ProfilesAPIService) CreateASMGITHUBORGANIZATIONProfileExecute(r ApiCrea
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -951,7 +951,7 @@ func (r ApiCreateASMGITHUBProfileRequest) CreateASMDNSProfileRequest(createASMDN
 	return r
 }
 
-func (r ApiCreateASMGITHUBProfileRequest) Execute() (*CreateASMDNSProfile200Response, *http.Response, error) {
+func (r ApiCreateASMGITHUBProfileRequest) Execute() (*ProfileDetailed, *http.Response, error) {
 	return r.ApiService.CreateASMGITHUBProfileExecute(r)
 }
 
@@ -971,13 +971,13 @@ func (a *ProfilesAPIService) CreateASMGITHUBProfile(ctx context.Context) ApiCrea
 }
 
 // Execute executes the request
-//  @return CreateASMDNSProfile200Response
-func (a *ProfilesAPIService) CreateASMGITHUBProfileExecute(r ApiCreateASMGITHUBProfileRequest) (*CreateASMDNSProfile200Response, *http.Response, error) {
+//  @return ProfileDetailed
+func (a *ProfilesAPIService) CreateASMGITHUBProfileExecute(r ApiCreateASMGITHUBProfileRequest) (*ProfileDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateASMDNSProfile200Response
+		localVarReturnValue  *ProfileDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProfilesAPIService.CreateASMGITHUBProfile")
@@ -1020,7 +1020,7 @@ func (a *ProfilesAPIService) CreateASMGITHUBProfileExecute(r ApiCreateASMGITHUBP
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -1082,7 +1082,7 @@ func (r ApiCreateASMGITLABGROUPProfileRequest) CreateASMDNSProfileRequest(create
 	return r
 }
 
-func (r ApiCreateASMGITLABGROUPProfileRequest) Execute() (*CreateASMDNSProfile200Response, *http.Response, error) {
+func (r ApiCreateASMGITLABGROUPProfileRequest) Execute() (*ProfileDetailed, *http.Response, error) {
 	return r.ApiService.CreateASMGITLABGROUPProfileExecute(r)
 }
 
@@ -1102,13 +1102,13 @@ func (a *ProfilesAPIService) CreateASMGITLABGROUPProfile(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//  @return CreateASMDNSProfile200Response
-func (a *ProfilesAPIService) CreateASMGITLABGROUPProfileExecute(r ApiCreateASMGITLABGROUPProfileRequest) (*CreateASMDNSProfile200Response, *http.Response, error) {
+//  @return ProfileDetailed
+func (a *ProfilesAPIService) CreateASMGITLABGROUPProfileExecute(r ApiCreateASMGITLABGROUPProfileRequest) (*ProfileDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateASMDNSProfile200Response
+		localVarReturnValue  *ProfileDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProfilesAPIService.CreateASMGITLABGROUPProfile")
@@ -1151,7 +1151,7 @@ func (a *ProfilesAPIService) CreateASMGITLABGROUPProfileExecute(r ApiCreateASMGI
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -1213,7 +1213,7 @@ func (r ApiCreateASMGITLABProfileRequest) CreateASMDNSProfileRequest(createASMDN
 	return r
 }
 
-func (r ApiCreateASMGITLABProfileRequest) Execute() (*CreateASMDNSProfile200Response, *http.Response, error) {
+func (r ApiCreateASMGITLABProfileRequest) Execute() (*ProfileDetailed, *http.Response, error) {
 	return r.ApiService.CreateASMGITLABProfileExecute(r)
 }
 
@@ -1233,13 +1233,13 @@ func (a *ProfilesAPIService) CreateASMGITLABProfile(ctx context.Context) ApiCrea
 }
 
 // Execute executes the request
-//  @return CreateASMDNSProfile200Response
-func (a *ProfilesAPIService) CreateASMGITLABProfileExecute(r ApiCreateASMGITLABProfileRequest) (*CreateASMDNSProfile200Response, *http.Response, error) {
+//  @return ProfileDetailed
+func (a *ProfilesAPIService) CreateASMGITLABProfileExecute(r ApiCreateASMGITLABProfileRequest) (*ProfileDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateASMDNSProfile200Response
+		localVarReturnValue  *ProfileDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProfilesAPIService.CreateASMGITLABProfile")
@@ -1282,7 +1282,7 @@ func (a *ProfilesAPIService) CreateASMGITLABProfileExecute(r ApiCreateASMGITLABP
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -1344,7 +1344,7 @@ func (r ApiCreateASMGRAPHQLProfileRequest) CreateASMDNSProfileRequest(createASMD
 	return r
 }
 
-func (r ApiCreateASMGRAPHQLProfileRequest) Execute() (*CreateASMDNSProfile200Response, *http.Response, error) {
+func (r ApiCreateASMGRAPHQLProfileRequest) Execute() (*ProfileDetailed, *http.Response, error) {
 	return r.ApiService.CreateASMGRAPHQLProfileExecute(r)
 }
 
@@ -1364,13 +1364,13 @@ func (a *ProfilesAPIService) CreateASMGRAPHQLProfile(ctx context.Context) ApiCre
 }
 
 // Execute executes the request
-//  @return CreateASMDNSProfile200Response
-func (a *ProfilesAPIService) CreateASMGRAPHQLProfileExecute(r ApiCreateASMGRAPHQLProfileRequest) (*CreateASMDNSProfile200Response, *http.Response, error) {
+//  @return ProfileDetailed
+func (a *ProfilesAPIService) CreateASMGRAPHQLProfileExecute(r ApiCreateASMGRAPHQLProfileRequest) (*ProfileDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateASMDNSProfile200Response
+		localVarReturnValue  *ProfileDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProfilesAPIService.CreateASMGRAPHQLProfile")
@@ -1413,7 +1413,7 @@ func (a *ProfilesAPIService) CreateASMGRAPHQLProfileExecute(r ApiCreateASMGRAPHQ
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -1475,7 +1475,7 @@ func (r ApiCreateASMGRPCProfileRequest) CreateASMDNSProfileRequest(createASMDNSP
 	return r
 }
 
-func (r ApiCreateASMGRPCProfileRequest) Execute() (*CreateASMDNSProfile200Response, *http.Response, error) {
+func (r ApiCreateASMGRPCProfileRequest) Execute() (*ProfileDetailed, *http.Response, error) {
 	return r.ApiService.CreateASMGRPCProfileExecute(r)
 }
 
@@ -1495,13 +1495,13 @@ func (a *ProfilesAPIService) CreateASMGRPCProfile(ctx context.Context) ApiCreate
 }
 
 // Execute executes the request
-//  @return CreateASMDNSProfile200Response
-func (a *ProfilesAPIService) CreateASMGRPCProfileExecute(r ApiCreateASMGRPCProfileRequest) (*CreateASMDNSProfile200Response, *http.Response, error) {
+//  @return ProfileDetailed
+func (a *ProfilesAPIService) CreateASMGRPCProfileExecute(r ApiCreateASMGRPCProfileRequest) (*ProfileDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateASMDNSProfile200Response
+		localVarReturnValue  *ProfileDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProfilesAPIService.CreateASMGRPCProfile")
@@ -1544,7 +1544,7 @@ func (a *ProfilesAPIService) CreateASMGRPCProfileExecute(r ApiCreateASMGRPCProfi
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -1606,7 +1606,7 @@ func (r ApiCreateASMIPV4ProfileRequest) CreateASMDNSProfileRequest(createASMDNSP
 	return r
 }
 
-func (r ApiCreateASMIPV4ProfileRequest) Execute() (*CreateASMDNSProfile200Response, *http.Response, error) {
+func (r ApiCreateASMIPV4ProfileRequest) Execute() (*ProfileDetailed, *http.Response, error) {
 	return r.ApiService.CreateASMIPV4ProfileExecute(r)
 }
 
@@ -1626,13 +1626,13 @@ func (a *ProfilesAPIService) CreateASMIPV4Profile(ctx context.Context) ApiCreate
 }
 
 // Execute executes the request
-//  @return CreateASMDNSProfile200Response
-func (a *ProfilesAPIService) CreateASMIPV4ProfileExecute(r ApiCreateASMIPV4ProfileRequest) (*CreateASMDNSProfile200Response, *http.Response, error) {
+//  @return ProfileDetailed
+func (a *ProfilesAPIService) CreateASMIPV4ProfileExecute(r ApiCreateASMIPV4ProfileRequest) (*ProfileDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateASMDNSProfile200Response
+		localVarReturnValue  *ProfileDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProfilesAPIService.CreateASMIPV4Profile")
@@ -1675,7 +1675,7 @@ func (a *ProfilesAPIService) CreateASMIPV4ProfileExecute(r ApiCreateASMIPV4Profi
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -1737,7 +1737,7 @@ func (r ApiCreateASMIPV6ProfileRequest) CreateASMDNSProfileRequest(createASMDNSP
 	return r
 }
 
-func (r ApiCreateASMIPV6ProfileRequest) Execute() (*CreateASMDNSProfile200Response, *http.Response, error) {
+func (r ApiCreateASMIPV6ProfileRequest) Execute() (*ProfileDetailed, *http.Response, error) {
 	return r.ApiService.CreateASMIPV6ProfileExecute(r)
 }
 
@@ -1757,13 +1757,13 @@ func (a *ProfilesAPIService) CreateASMIPV6Profile(ctx context.Context) ApiCreate
 }
 
 // Execute executes the request
-//  @return CreateASMDNSProfile200Response
-func (a *ProfilesAPIService) CreateASMIPV6ProfileExecute(r ApiCreateASMIPV6ProfileRequest) (*CreateASMDNSProfile200Response, *http.Response, error) {
+//  @return ProfileDetailed
+func (a *ProfilesAPIService) CreateASMIPV6ProfileExecute(r ApiCreateASMIPV6ProfileRequest) (*ProfileDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateASMDNSProfile200Response
+		localVarReturnValue  *ProfileDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProfilesAPIService.CreateASMIPV6Profile")
@@ -1806,7 +1806,7 @@ func (a *ProfilesAPIService) CreateASMIPV6ProfileExecute(r ApiCreateASMIPV6Profi
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -1868,7 +1868,7 @@ func (r ApiCreateASMKUBERNETESProfileRequest) CreateASMDNSProfileRequest(createA
 	return r
 }
 
-func (r ApiCreateASMKUBERNETESProfileRequest) Execute() (*CreateASMDNSProfile200Response, *http.Response, error) {
+func (r ApiCreateASMKUBERNETESProfileRequest) Execute() (*ProfileDetailed, *http.Response, error) {
 	return r.ApiService.CreateASMKUBERNETESProfileExecute(r)
 }
 
@@ -1888,13 +1888,13 @@ func (a *ProfilesAPIService) CreateASMKUBERNETESProfile(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return CreateASMDNSProfile200Response
-func (a *ProfilesAPIService) CreateASMKUBERNETESProfileExecute(r ApiCreateASMKUBERNETESProfileRequest) (*CreateASMDNSProfile200Response, *http.Response, error) {
+//  @return ProfileDetailed
+func (a *ProfilesAPIService) CreateASMKUBERNETESProfileExecute(r ApiCreateASMKUBERNETESProfileRequest) (*ProfileDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateASMDNSProfile200Response
+		localVarReturnValue  *ProfileDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProfilesAPIService.CreateASMKUBERNETESProfile")
@@ -1937,7 +1937,7 @@ func (a *ProfilesAPIService) CreateASMKUBERNETESProfileExecute(r ApiCreateASMKUB
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -1999,7 +1999,7 @@ func (r ApiCreateASMPOSTMANProfileRequest) CreateASMDNSProfileRequest(createASMD
 	return r
 }
 
-func (r ApiCreateASMPOSTMANProfileRequest) Execute() (*CreateASMDNSProfile200Response, *http.Response, error) {
+func (r ApiCreateASMPOSTMANProfileRequest) Execute() (*ProfileDetailed, *http.Response, error) {
 	return r.ApiService.CreateASMPOSTMANProfileExecute(r)
 }
 
@@ -2019,13 +2019,13 @@ func (a *ProfilesAPIService) CreateASMPOSTMANProfile(ctx context.Context) ApiCre
 }
 
 // Execute executes the request
-//  @return CreateASMDNSProfile200Response
-func (a *ProfilesAPIService) CreateASMPOSTMANProfileExecute(r ApiCreateASMPOSTMANProfileRequest) (*CreateASMDNSProfile200Response, *http.Response, error) {
+//  @return ProfileDetailed
+func (a *ProfilesAPIService) CreateASMPOSTMANProfileExecute(r ApiCreateASMPOSTMANProfileRequest) (*ProfileDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateASMDNSProfile200Response
+		localVarReturnValue  *ProfileDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProfilesAPIService.CreateASMPOSTMANProfile")
@@ -2068,7 +2068,7 @@ func (a *ProfilesAPIService) CreateASMPOSTMANProfileExecute(r ApiCreateASMPOSTMA
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -2130,7 +2130,7 @@ func (r ApiCreateASMRESTProfileRequest) CreateASMDNSProfileRequest(createASMDNSP
 	return r
 }
 
-func (r ApiCreateASMRESTProfileRequest) Execute() (*CreateASMDNSProfile200Response, *http.Response, error) {
+func (r ApiCreateASMRESTProfileRequest) Execute() (*ProfileDetailed, *http.Response, error) {
 	return r.ApiService.CreateASMRESTProfileExecute(r)
 }
 
@@ -2150,13 +2150,13 @@ func (a *ProfilesAPIService) CreateASMRESTProfile(ctx context.Context) ApiCreate
 }
 
 // Execute executes the request
-//  @return CreateASMDNSProfile200Response
-func (a *ProfilesAPIService) CreateASMRESTProfileExecute(r ApiCreateASMRESTProfileRequest) (*CreateASMDNSProfile200Response, *http.Response, error) {
+//  @return ProfileDetailed
+func (a *ProfilesAPIService) CreateASMRESTProfileExecute(r ApiCreateASMRESTProfileRequest) (*ProfileDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateASMDNSProfile200Response
+		localVarReturnValue  *ProfileDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProfilesAPIService.CreateASMRESTProfile")
@@ -2199,7 +2199,7 @@ func (a *ProfilesAPIService) CreateASMRESTProfileExecute(r ApiCreateASMRESTProfi
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -2261,7 +2261,7 @@ func (r ApiCreateASMWEBAPPProfileRequest) CreateASMDNSProfileRequest(createASMDN
 	return r
 }
 
-func (r ApiCreateASMWEBAPPProfileRequest) Execute() (*CreateASMDNSProfile200Response, *http.Response, error) {
+func (r ApiCreateASMWEBAPPProfileRequest) Execute() (*ProfileDetailed, *http.Response, error) {
 	return r.ApiService.CreateASMWEBAPPProfileExecute(r)
 }
 
@@ -2281,13 +2281,13 @@ func (a *ProfilesAPIService) CreateASMWEBAPPProfile(ctx context.Context) ApiCrea
 }
 
 // Execute executes the request
-//  @return CreateASMDNSProfile200Response
-func (a *ProfilesAPIService) CreateASMWEBAPPProfileExecute(r ApiCreateASMWEBAPPProfileRequest) (*CreateASMDNSProfile200Response, *http.Response, error) {
+//  @return ProfileDetailed
+func (a *ProfilesAPIService) CreateASMWEBAPPProfileExecute(r ApiCreateASMWEBAPPProfileRequest) (*ProfileDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateASMDNSProfile200Response
+		localVarReturnValue  *ProfileDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProfilesAPIService.CreateASMWEBAPPProfile")
@@ -2330,7 +2330,7 @@ func (a *ProfilesAPIService) CreateASMWEBAPPProfileExecute(r ApiCreateASMWEBAPPP
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -2392,7 +2392,7 @@ func (r ApiCreateASMWIZProfileRequest) CreateASMDNSProfileRequest(createASMDNSPr
 	return r
 }
 
-func (r ApiCreateASMWIZProfileRequest) Execute() (*CreateASMDNSProfile200Response, *http.Response, error) {
+func (r ApiCreateASMWIZProfileRequest) Execute() (*ProfileDetailed, *http.Response, error) {
 	return r.ApiService.CreateASMWIZProfileExecute(r)
 }
 
@@ -2412,13 +2412,13 @@ func (a *ProfilesAPIService) CreateASMWIZProfile(ctx context.Context) ApiCreateA
 }
 
 // Execute executes the request
-//  @return CreateASMDNSProfile200Response
-func (a *ProfilesAPIService) CreateASMWIZProfileExecute(r ApiCreateASMWIZProfileRequest) (*CreateASMDNSProfile200Response, *http.Response, error) {
+//  @return ProfileDetailed
+func (a *ProfilesAPIService) CreateASMWIZProfileExecute(r ApiCreateASMWIZProfileRequest) (*ProfileDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateASMDNSProfile200Response
+		localVarReturnValue  *ProfileDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProfilesAPIService.CreateASMWIZProfile")
@@ -2461,7 +2461,7 @@ func (a *ProfilesAPIService) CreateASMWIZProfileExecute(r ApiCreateASMWIZProfile
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -2524,7 +2524,7 @@ func (r ApiCreateDastGraphqlProfileRequest) CreateDastRestProfileRequest(createD
 	return r
 }
 
-func (r ApiCreateDastGraphqlProfileRequest) Execute() (*CreateASMDNSProfile200Response, *http.Response, error) {
+func (r ApiCreateDastGraphqlProfileRequest) Execute() (*ProfileDetailed, *http.Response, error) {
 	return r.ApiService.CreateDastGraphqlProfileExecute(r)
 }
 
@@ -2544,13 +2544,13 @@ func (a *ProfilesAPIService) CreateDastGraphqlProfile(ctx context.Context) ApiCr
 }
 
 // Execute executes the request
-//  @return CreateASMDNSProfile200Response
-func (a *ProfilesAPIService) CreateDastGraphqlProfileExecute(r ApiCreateDastGraphqlProfileRequest) (*CreateASMDNSProfile200Response, *http.Response, error) {
+//  @return ProfileDetailed
+func (a *ProfilesAPIService) CreateDastGraphqlProfileExecute(r ApiCreateDastGraphqlProfileRequest) (*ProfileDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateASMDNSProfile200Response
+		localVarReturnValue  *ProfileDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProfilesAPIService.CreateDastGraphqlProfile")
@@ -2593,7 +2593,7 @@ func (a *ProfilesAPIService) CreateDastGraphqlProfileExecute(r ApiCreateDastGrap
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -2656,7 +2656,7 @@ func (r ApiCreateDastRestProfileRequest) CreateDastRestProfileRequest(createDast
 	return r
 }
 
-func (r ApiCreateDastRestProfileRequest) Execute() (*CreateASMDNSProfile200Response, *http.Response, error) {
+func (r ApiCreateDastRestProfileRequest) Execute() (*ProfileDetailed, *http.Response, error) {
 	return r.ApiService.CreateDastRestProfileExecute(r)
 }
 
@@ -2676,13 +2676,13 @@ func (a *ProfilesAPIService) CreateDastRestProfile(ctx context.Context) ApiCreat
 }
 
 // Execute executes the request
-//  @return CreateASMDNSProfile200Response
-func (a *ProfilesAPIService) CreateDastRestProfileExecute(r ApiCreateDastRestProfileRequest) (*CreateASMDNSProfile200Response, *http.Response, error) {
+//  @return ProfileDetailed
+func (a *ProfilesAPIService) CreateDastRestProfileExecute(r ApiCreateDastRestProfileRequest) (*ProfileDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateASMDNSProfile200Response
+		localVarReturnValue  *ProfileDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProfilesAPIService.CreateDastRestProfile")
@@ -2725,7 +2725,7 @@ func (a *ProfilesAPIService) CreateDastRestProfileExecute(r ApiCreateDastRestPro
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -2788,7 +2788,7 @@ func (r ApiCreateDastWebAppProfileRequest) CreateDastWebAppProfileRequest(create
 	return r
 }
 
-func (r ApiCreateDastWebAppProfileRequest) Execute() (*CreateASMDNSProfile200Response, *http.Response, error) {
+func (r ApiCreateDastWebAppProfileRequest) Execute() (*ProfileDetailed, *http.Response, error) {
 	return r.ApiService.CreateDastWebAppProfileExecute(r)
 }
 
@@ -2808,13 +2808,13 @@ func (a *ProfilesAPIService) CreateDastWebAppProfile(ctx context.Context) ApiCre
 }
 
 // Execute executes the request
-//  @return CreateASMDNSProfile200Response
-func (a *ProfilesAPIService) CreateDastWebAppProfileExecute(r ApiCreateDastWebAppProfileRequest) (*CreateASMDNSProfile200Response, *http.Response, error) {
+//  @return ProfileDetailed
+func (a *ProfilesAPIService) CreateDastWebAppProfileExecute(r ApiCreateDastWebAppProfileRequest) (*ProfileDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateASMDNSProfile200Response
+		localVarReturnValue  *ProfileDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProfilesAPIService.CreateDastWebAppProfile")
@@ -2857,7 +2857,7 @@ func (a *ProfilesAPIService) CreateDastWebAppProfileExecute(r ApiCreateDastWebAp
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -2984,7 +2984,7 @@ func (a *ProfilesAPIService) DeleteProfileExecute(r ApiDeleteProfileRequest) (*D
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -3041,7 +3041,7 @@ type ApiGetProfileRequest struct {
 	profileId string
 }
 
-func (r ApiGetProfileRequest) Execute() (*CreateASMDNSProfile200Response, *http.Response, error) {
+func (r ApiGetProfileRequest) Execute() (*ProfileDetailed, *http.Response, error) {
 	return r.ApiService.GetProfileExecute(r)
 }
 
@@ -3063,13 +3063,13 @@ func (a *ProfilesAPIService) GetProfile(ctx context.Context, profileId string) A
 }
 
 // Execute executes the request
-//  @return CreateASMDNSProfile200Response
-func (a *ProfilesAPIService) GetProfileExecute(r ApiGetProfileRequest) (*CreateASMDNSProfile200Response, *http.Response, error) {
+//  @return ProfileDetailed
+func (a *ProfilesAPIService) GetProfileExecute(r ApiGetProfileRequest) (*ProfileDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateASMDNSProfile200Response
+		localVarReturnValue  *ProfileDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProfilesAPIService.GetProfile")
@@ -3111,7 +3111,7 @@ func (a *ProfilesAPIService) GetProfileExecute(r ApiGetProfileRequest) (*CreateA
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -3346,7 +3346,7 @@ func (a *ProfilesAPIService) ListProfilesExecute(r ApiListProfilesRequest) (*Lis
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -3410,7 +3410,7 @@ func (r ApiUpdateProfileRequest) UpdateProfileRequest(updateProfileRequest Updat
 	return r
 }
 
-func (r ApiUpdateProfileRequest) Execute() (*CreateASMDNSProfile200Response, *http.Response, error) {
+func (r ApiUpdateProfileRequest) Execute() (*ProfileDetailed, *http.Response, error) {
 	return r.ApiService.UpdateProfileExecute(r)
 }
 
@@ -3432,13 +3432,13 @@ func (a *ProfilesAPIService) UpdateProfile(ctx context.Context, profileId string
 }
 
 // Execute executes the request
-//  @return CreateASMDNSProfile200Response
-func (a *ProfilesAPIService) UpdateProfileExecute(r ApiUpdateProfileRequest) (*CreateASMDNSProfile200Response, *http.Response, error) {
+//  @return ProfileDetailed
+func (a *ProfilesAPIService) UpdateProfileExecute(r ApiUpdateProfileRequest) (*ProfileDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateASMDNSProfile200Response
+		localVarReturnValue  *ProfileDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProfilesAPIService.UpdateProfile")
@@ -3482,7 +3482,7 @@ func (a *ProfilesAPIService) UpdateProfileExecute(r ApiUpdateProfileRequest) (*C
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -3546,7 +3546,7 @@ func (r ApiUpdateProfileConfigurationRequest) UpdateProfileConfigurationRequest(
 	return r
 }
 
-func (r ApiUpdateProfileConfigurationRequest) Execute() (*CreateASMDNSProfile200ResponseActiveConfiguration, *http.Response, error) {
+func (r ApiUpdateProfileConfigurationRequest) Execute() (*ConfigurationDetailed, *http.Response, error) {
 	return r.ApiService.UpdateProfileConfigurationExecute(r)
 }
 
@@ -3568,13 +3568,13 @@ func (a *ProfilesAPIService) UpdateProfileConfiguration(ctx context.Context, pro
 }
 
 // Execute executes the request
-//  @return CreateASMDNSProfile200ResponseActiveConfiguration
-func (a *ProfilesAPIService) UpdateProfileConfigurationExecute(r ApiUpdateProfileConfigurationRequest) (*CreateASMDNSProfile200ResponseActiveConfiguration, *http.Response, error) {
+//  @return ConfigurationDetailed
+func (a *ProfilesAPIService) UpdateProfileConfigurationExecute(r ApiUpdateProfileConfigurationRequest) (*ConfigurationDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateASMDNSProfile200ResponseActiveConfiguration
+		localVarReturnValue  *ConfigurationDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProfilesAPIService.UpdateProfileConfiguration")
@@ -3618,7 +3618,7 @@ func (a *ProfilesAPIService) UpdateProfileConfigurationExecute(r ApiUpdateProfil
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -3643,6 +3643,17 @@ func (a *ProfilesAPIService) UpdateProfileConfigurationExecute(r ApiUpdateProfil
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v CreateASMDNSProfile400Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
 			var v GetProfile404Response
@@ -3682,7 +3693,7 @@ func (r ApiUpdateProfileSchemaRequest) UpdateProfileSchemaRequest(updateProfileS
 	return r
 }
 
-func (r ApiUpdateProfileSchemaRequest) Execute() (*CreateASMDNSProfile200ResponseActiveSchema, *http.Response, error) {
+func (r ApiUpdateProfileSchemaRequest) Execute() (*SchemaDetailed, *http.Response, error) {
 	return r.ApiService.UpdateProfileSchemaExecute(r)
 }
 
@@ -3704,13 +3715,13 @@ func (a *ProfilesAPIService) UpdateProfileSchema(ctx context.Context, profileId 
 }
 
 // Execute executes the request
-//  @return CreateASMDNSProfile200ResponseActiveSchema
-func (a *ProfilesAPIService) UpdateProfileSchemaExecute(r ApiUpdateProfileSchemaRequest) (*CreateASMDNSProfile200ResponseActiveSchema, *http.Response, error) {
+//  @return SchemaDetailed
+func (a *ProfilesAPIService) UpdateProfileSchemaExecute(r ApiUpdateProfileSchemaRequest) (*SchemaDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateASMDNSProfile200ResponseActiveSchema
+		localVarReturnValue  *SchemaDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProfilesAPIService.UpdateProfileSchema")
@@ -3754,7 +3765,7 @@ func (a *ProfilesAPIService) UpdateProfileSchemaExecute(r ApiUpdateProfileSchema
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -3779,6 +3790,17 @@ func (a *ProfilesAPIService) UpdateProfileSchemaExecute(r ApiUpdateProfileSchema
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v CreateASMDNSProfile400Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
 			var v GetProfile404Response

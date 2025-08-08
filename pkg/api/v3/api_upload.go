@@ -1,7 +1,7 @@
 /*
 Escape Public API
 
-This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `Authorization` header. For example: `Authorization: Key YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
+This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `X-ESCAPE-API-KEY` header. For example: `X-ESCAPE-API-KEY: YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
 
 API version: 3.0.0
 */
@@ -27,7 +27,7 @@ type ApiCreateUploadSignedUrlRequest struct {
 	ApiService *UploadAPIService
 }
 
-func (r ApiCreateUploadSignedUrlRequest) Execute() (*CreateUploadSignedUrl200Response, *http.Response, error) {
+func (r ApiCreateUploadSignedUrlRequest) Execute() (*UploadSummary, *http.Response, error) {
 	return r.ApiService.CreateUploadSignedUrlExecute(r)
 }
 
@@ -66,13 +66,13 @@ func (a *UploadAPIService) CreateUploadSignedUrl(ctx context.Context) ApiCreateU
 }
 
 // Execute executes the request
-//  @return CreateUploadSignedUrl200Response
-func (a *UploadAPIService) CreateUploadSignedUrlExecute(r ApiCreateUploadSignedUrlRequest) (*CreateUploadSignedUrl200Response, *http.Response, error) {
+//  @return UploadSummary
+func (a *UploadAPIService) CreateUploadSignedUrlExecute(r ApiCreateUploadSignedUrlRequest) (*UploadSummary, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateUploadSignedUrl200Response
+		localVarReturnValue  *UploadSummary
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UploadAPIService.CreateUploadSignedUrl")
@@ -113,7 +113,7 @@ func (a *UploadAPIService) CreateUploadSignedUrlExecute(r ApiCreateUploadSignedU
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
