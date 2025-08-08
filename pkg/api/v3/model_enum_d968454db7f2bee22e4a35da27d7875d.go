@@ -1,7 +1,7 @@
 /*
 Escape Public API
 
-This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `Authorization` header. For example: `Authorization: Key YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
+This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `X-ESCAPE-API-KEY` header. For example: `X-ESCAPE-API-KEY: YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
 
 API version: 3.0.0
 */
@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// EnumD968454db7f2bee22e4a35da27d7875d the model 'EnumD968454db7f2bee22e4a35da27d7875d'
+// EnumD968454db7f2bee22e4a35da27d7875d The origin of the DAST
 type EnumD968454db7f2bee22e4a35da27d7875d string
 
 // List of Enum_d968454db7f2bee22e4a35da27d7875d

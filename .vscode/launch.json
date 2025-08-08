@@ -8,10 +8,16 @@
       "mode": "auto",
       "program": "cmd/main.go",
       "envFile": "${workspaceFolder}/.env",
-      "args": [
-        "locations",
-        "list"
-      ]
+      "args": ["locations", "list"]
+    },
+    {
+      "name": "Profiles List",
+      "type": "go",
+      "request": "launch",
+      "mode": "auto",
+      "program": "cmd/main.go",
+      "envFile": "${workspaceFolder}/.env",
+      "args": ["profiles", "list"]
     },
     {
       "name": "Locations List -o json",
@@ -20,12 +26,7 @@
       "mode": "auto",
       "program": "cmd/main.go",
       "envFile": "${workspaceFolder}/.env",
-      "args": [
-        "locations",
-        "list",
-        "--output",
-        "json"
-      ]
+      "args": ["locations", "list", "--output", "json"]
     },
     {
       "name": "Locations Upsert",
@@ -34,12 +35,7 @@
       "mode": "auto",
       "program": "cmd/main.go",
       "envFile": "${workspaceFolder}/.env",
-      "args": [
-        "locations",
-        "upsert",
-        "test",
-        "--new"
-      ]
+      "args": ["locations", "upsert", "test", "--new"]
     },
     {
       "name": "Locations Start",
@@ -48,12 +44,7 @@
       "mode": "auto",
       "program": "cmd/main.go",
       "envFile": "${workspaceFolder}/.env",
-      "args": [
-        "locations",
-        "start",
-        "test",
-        "-vvvv"
-      ]
+      "args": ["locations", "start", "test", "-vvvv"]
     },
     {
       "name": "Integrations Get",
@@ -62,11 +53,7 @@
       "mode": "auto",
       "program": "cmd/main.go",
       "envFile": "${workspaceFolder}/.env",
-      "args": [
-        "integrations",
-        "get",
-        "438d2637-1cdf-47c7-983c-f46a580532ae"
-      ]
+      "args": ["integrations", "get", "438d2637-1cdf-47c7-983c-f46a580532ae"]
     }
   ]
 }

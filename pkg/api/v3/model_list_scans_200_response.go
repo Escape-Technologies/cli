@@ -1,7 +1,7 @@
 /*
 Escape Public API
 
-This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `Authorization` header. For example: `Authorization: Key YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
+This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `X-ESCAPE-API-KEY` header. For example: `X-ESCAPE-API-KEY: YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
 
 API version: 3.0.0
 */
@@ -22,7 +22,7 @@ var _ MappedNullable = &ListScans200Response{}
 type ListScans200Response struct {
 	NextCursor string `json:"nextCursor"`
 	TotalCount *int `json:"totalCount,omitempty"`
-	Data []ListScans200ResponseDataInner `json:"data"`
+	Data []ScanSummarized1 `json:"data"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -32,7 +32,7 @@ type _ListScans200Response ListScans200Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewListScans200Response(nextCursor string, data []ListScans200ResponseDataInner) *ListScans200Response {
+func NewListScans200Response(nextCursor string, data []ScanSummarized1) *ListScans200Response {
 	this := ListScans200Response{}
 	this.NextCursor = nextCursor
 	var totalCount int = 100
@@ -108,9 +108,9 @@ func (o *ListScans200Response) SetTotalCount(v int) {
 }
 
 // GetData returns the Data field value
-func (o *ListScans200Response) GetData() []ListScans200ResponseDataInner {
+func (o *ListScans200Response) GetData() []ScanSummarized1 {
 	if o == nil {
-		var ret []ListScans200ResponseDataInner
+		var ret []ScanSummarized1
 		return ret
 	}
 
@@ -119,7 +119,7 @@ func (o *ListScans200Response) GetData() []ListScans200ResponseDataInner {
 
 // GetDataOk returns a tuple with the Data field value
 // and a boolean to check if the value has been set.
-func (o *ListScans200Response) GetDataOk() ([]ListScans200ResponseDataInner, bool) {
+func (o *ListScans200Response) GetDataOk() ([]ScanSummarized1, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -127,7 +127,7 @@ func (o *ListScans200Response) GetDataOk() ([]ListScans200ResponseDataInner, boo
 }
 
 // SetData sets field value
-func (o *ListScans200Response) SetData(v []ListScans200ResponseDataInner) {
+func (o *ListScans200Response) SetData(v []ScanSummarized1) {
 	o.Data = v
 }
 

@@ -1,7 +1,7 @@
 /*
 Escape Public API
 
-This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `Authorization` header. For example: `Authorization: Key YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
+This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `X-ESCAPE-API-KEY` header. For example: `X-ESCAPE-API-KEY: YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
 
 API version: 3.0.0
 */
@@ -34,7 +34,7 @@ func (r ApiCreateLocationRequest) CreateLocationRequest(createLocationRequest Cr
 	return r
 }
 
-func (r ApiCreateLocationRequest) Execute() (*CreateLocation200Response, *http.Response, error) {
+func (r ApiCreateLocationRequest) Execute() (*LocationDetailed, *http.Response, error) {
 	return r.ApiService.CreateLocationExecute(r)
 }
 
@@ -54,13 +54,13 @@ func (a *LocationsAPIService) CreateLocation(ctx context.Context) ApiCreateLocat
 }
 
 // Execute executes the request
-//  @return CreateLocation200Response
-func (a *LocationsAPIService) CreateLocationExecute(r ApiCreateLocationRequest) (*CreateLocation200Response, *http.Response, error) {
+//  @return LocationDetailed
+func (a *LocationsAPIService) CreateLocationExecute(r ApiCreateLocationRequest) (*LocationDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateLocation200Response
+		localVarReturnValue  *LocationDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LocationsAPIService.CreateLocation")
@@ -103,7 +103,7 @@ func (a *LocationsAPIService) CreateLocationExecute(r ApiCreateLocationRequest) 
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -241,7 +241,7 @@ func (a *LocationsAPIService) DeleteLocationExecute(r ApiDeleteLocationRequest) 
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -298,7 +298,7 @@ type ApiGetLocationRequest struct {
 	locationId string
 }
 
-func (r ApiGetLocationRequest) Execute() (*CreateLocation200Response, *http.Response, error) {
+func (r ApiGetLocationRequest) Execute() (*LocationDetailed, *http.Response, error) {
 	return r.ApiService.GetLocationExecute(r)
 }
 
@@ -320,13 +320,13 @@ func (a *LocationsAPIService) GetLocation(ctx context.Context, locationId string
 }
 
 // Execute executes the request
-//  @return CreateLocation200Response
-func (a *LocationsAPIService) GetLocationExecute(r ApiGetLocationRequest) (*CreateLocation200Response, *http.Response, error) {
+//  @return LocationDetailed
+func (a *LocationsAPIService) GetLocationExecute(r ApiGetLocationRequest) (*LocationDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateLocation200Response
+		localVarReturnValue  *LocationDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LocationsAPIService.GetLocation")
@@ -368,7 +368,7 @@ func (a *LocationsAPIService) GetLocationExecute(r ApiGetLocationRequest) (*Crea
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -532,7 +532,7 @@ func (a *LocationsAPIService) ListLocationsExecute(r ApiListLocationsRequest) (*
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -595,7 +595,7 @@ func (r ApiUpdateLocationRequest) UpdateLocationRequest(updateLocationRequest Up
 	return r
 }
 
-func (r ApiUpdateLocationRequest) Execute() (*CreateLocation200Response, *http.Response, error) {
+func (r ApiUpdateLocationRequest) Execute() (*LocationDetailed, *http.Response, error) {
 	return r.ApiService.UpdateLocationExecute(r)
 }
 
@@ -617,13 +617,13 @@ func (a *LocationsAPIService) UpdateLocation(ctx context.Context, locationId str
 }
 
 // Execute executes the request
-//  @return CreateLocation200Response
-func (a *LocationsAPIService) UpdateLocationExecute(r ApiUpdateLocationRequest) (*CreateLocation200Response, *http.Response, error) {
+//  @return LocationDetailed
+func (a *LocationsAPIService) UpdateLocationExecute(r ApiUpdateLocationRequest) (*LocationDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateLocation200Response
+		localVarReturnValue  *LocationDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LocationsAPIService.UpdateLocation")
@@ -667,7 +667,7 @@ func (a *LocationsAPIService) UpdateLocationExecute(r ApiUpdateLocationRequest) 
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}

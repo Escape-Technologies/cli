@@ -1,7 +1,7 @@
 /*
 Escape Public API
 
-This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `Authorization` header. For example: `Authorization: Key YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
+This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `X-ESCAPE-API-KEY` header. For example: `X-ESCAPE-API-KEY: YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
 
 API version: 3.0.0
 */
@@ -32,7 +32,7 @@ type CreateDastRestProfileRequest struct {
 	Name string `json:"name"`
 	// The proxy ID for the profile
 	ProxyId *string `json:"proxyId,omitempty"`
-	Schema CreateDastRestProfileRequestSchema `json:"schema"`
+	Schema DASTDetailed `json:"schema"`
 	// The tags IDs for the profile
 	TagsIds []string `json:"tagsIds,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -44,7 +44,7 @@ type _CreateDastRestProfileRequest CreateDastRestProfileRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateDastRestProfileRequest(assetId string, configurationJsonStr CreateDastRestProfileRequestConfigurationJsonStr, mode Enum914e857146e58d03de169dd809874be9, name string, schema CreateDastRestProfileRequestSchema) *CreateDastRestProfileRequest {
+func NewCreateDastRestProfileRequest(assetId string, configurationJsonStr CreateDastRestProfileRequestConfigurationJsonStr, mode Enum914e857146e58d03de169dd809874be9, name string, schema DASTDetailed) *CreateDastRestProfileRequest {
 	this := CreateDastRestProfileRequest{}
 	this.AssetId = assetId
 	this.ConfigurationJsonStr = configurationJsonStr
@@ -255,9 +255,9 @@ func (o *CreateDastRestProfileRequest) SetProxyId(v string) {
 }
 
 // GetSchema returns the Schema field value
-func (o *CreateDastRestProfileRequest) GetSchema() CreateDastRestProfileRequestSchema {
+func (o *CreateDastRestProfileRequest) GetSchema() DASTDetailed {
 	if o == nil {
-		var ret CreateDastRestProfileRequestSchema
+		var ret DASTDetailed
 		return ret
 	}
 
@@ -266,7 +266,7 @@ func (o *CreateDastRestProfileRequest) GetSchema() CreateDastRestProfileRequestS
 
 // GetSchemaOk returns a tuple with the Schema field value
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequest) GetSchemaOk() (*CreateDastRestProfileRequestSchema, bool) {
+func (o *CreateDastRestProfileRequest) GetSchemaOk() (*DASTDetailed, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -274,7 +274,7 @@ func (o *CreateDastRestProfileRequest) GetSchemaOk() (*CreateDastRestProfileRequ
 }
 
 // SetSchema sets field value
-func (o *CreateDastRestProfileRequest) SetSchema(v CreateDastRestProfileRequestSchema) {
+func (o *CreateDastRestProfileRequest) SetSchema(v DASTDetailed) {
 	o.Schema = v
 }
 
