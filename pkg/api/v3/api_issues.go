@@ -1,7 +1,7 @@
 /*
 Escape Public API
 
-This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `Authorization` header. For example: `Authorization: Key YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
+This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `X-ESCAPE-API-KEY` header. For example: `X-ESCAPE-API-KEY: YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
 
 API version: 3.0.0
 */
@@ -29,7 +29,7 @@ type ApiGetIssueRequest struct {
 	issueId string
 }
 
-func (r ApiGetIssueRequest) Execute() (*GetIssue200Response, *http.Response, error) {
+func (r ApiGetIssueRequest) Execute() (*IssueDetailed, *http.Response, error) {
 	return r.ApiService.GetIssueExecute(r)
 }
 
@@ -51,13 +51,13 @@ func (a *IssuesAPIService) GetIssue(ctx context.Context, issueId string) ApiGetI
 }
 
 // Execute executes the request
-//  @return GetIssue200Response
-func (a *IssuesAPIService) GetIssueExecute(r ApiGetIssueRequest) (*GetIssue200Response, *http.Response, error) {
+//  @return IssueDetailed
+func (a *IssuesAPIService) GetIssueExecute(r ApiGetIssueRequest) (*IssueDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetIssue200Response
+		localVarReturnValue  *IssueDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IssuesAPIService.GetIssue")
@@ -99,7 +99,7 @@ func (a *IssuesAPIService) GetIssueExecute(r ApiGetIssueRequest) (*GetIssue200Re
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -156,7 +156,7 @@ type ApiListIssueActivitiesRequest struct {
 	issueId string
 }
 
-func (r ApiListIssueActivitiesRequest) Execute() (*ListIssueActivities200Response, *http.Response, error) {
+func (r ApiListIssueActivitiesRequest) Execute() (*ActivitySummarized, *http.Response, error) {
 	return r.ApiService.ListIssueActivitiesExecute(r)
 }
 
@@ -178,13 +178,13 @@ func (a *IssuesAPIService) ListIssueActivities(ctx context.Context, issueId stri
 }
 
 // Execute executes the request
-//  @return ListIssueActivities200Response
-func (a *IssuesAPIService) ListIssueActivitiesExecute(r ApiListIssueActivitiesRequest) (*ListIssueActivities200Response, *http.Response, error) {
+//  @return ActivitySummarized
+func (a *IssuesAPIService) ListIssueActivitiesExecute(r ApiListIssueActivitiesRequest) (*ActivitySummarized, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ListIssueActivities200Response
+		localVarReturnValue  *ActivitySummarized
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IssuesAPIService.ListIssueActivities")
@@ -226,7 +226,7 @@ func (a *IssuesAPIService) ListIssueActivitiesExecute(r ApiListIssueActivitiesRe
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -252,8 +252,8 @@ func (a *IssuesAPIService) ListIssueActivitiesExecute(r ApiListIssueActivitiesRe
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400Response
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v GetProfile404Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -521,7 +521,7 @@ func (a *IssuesAPIService) ListIssuesExecute(r ApiListIssuesRequest) (*ListIssue
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -585,7 +585,7 @@ func (r ApiUpdateIssueRequest) UpdateIssueRequest(updateIssueRequest UpdateIssue
 	return r
 }
 
-func (r ApiUpdateIssueRequest) Execute() (*GetIssue200Response, *http.Response, error) {
+func (r ApiUpdateIssueRequest) Execute() (*UpdateIssue200Response, *http.Response, error) {
 	return r.ApiService.UpdateIssueExecute(r)
 }
 
@@ -607,13 +607,13 @@ func (a *IssuesAPIService) UpdateIssue(ctx context.Context, issueId string) ApiU
 }
 
 // Execute executes the request
-//  @return GetIssue200Response
-func (a *IssuesAPIService) UpdateIssueExecute(r ApiUpdateIssueRequest) (*GetIssue200Response, *http.Response, error) {
+//  @return UpdateIssue200Response
+func (a *IssuesAPIService) UpdateIssueExecute(r ApiUpdateIssueRequest) (*UpdateIssue200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetIssue200Response
+		localVarReturnValue  *UpdateIssue200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IssuesAPIService.UpdateIssue")
@@ -657,7 +657,7 @@ func (a *IssuesAPIService) UpdateIssueExecute(r ApiUpdateIssueRequest) (*GetIssu
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}

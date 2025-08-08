@@ -1,7 +1,7 @@
 /*
 Escape Public API
 
-This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `Authorization` header. For example: `Authorization: Key YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
+This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `X-ESCAPE-API-KEY` header. For example: `X-ESCAPE-API-KEY: YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
 
 API version: 3.0.0
 */
@@ -22,7 +22,7 @@ var _ MappedNullable = &ListIssues200Response{}
 type ListIssues200Response struct {
 	NextCursor string `json:"nextCursor"`
 	TotalCount *int `json:"totalCount,omitempty"`
-	Data []ListIssues200ResponseDataInner `json:"data"`
+	Data []IssueSummarized `json:"data"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -32,7 +32,7 @@ type _ListIssues200Response ListIssues200Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewListIssues200Response(nextCursor string, data []ListIssues200ResponseDataInner) *ListIssues200Response {
+func NewListIssues200Response(nextCursor string, data []IssueSummarized) *ListIssues200Response {
 	this := ListIssues200Response{}
 	this.NextCursor = nextCursor
 	var totalCount int = 100
@@ -108,9 +108,9 @@ func (o *ListIssues200Response) SetTotalCount(v int) {
 }
 
 // GetData returns the Data field value
-func (o *ListIssues200Response) GetData() []ListIssues200ResponseDataInner {
+func (o *ListIssues200Response) GetData() []IssueSummarized {
 	if o == nil {
-		var ret []ListIssues200ResponseDataInner
+		var ret []IssueSummarized
 		return ret
 	}
 
@@ -119,7 +119,7 @@ func (o *ListIssues200Response) GetData() []ListIssues200ResponseDataInner {
 
 // GetDataOk returns a tuple with the Data field value
 // and a boolean to check if the value has been set.
-func (o *ListIssues200Response) GetDataOk() ([]ListIssues200ResponseDataInner, bool) {
+func (o *ListIssues200Response) GetDataOk() ([]IssueSummarized, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -127,7 +127,7 @@ func (o *ListIssues200Response) GetDataOk() ([]ListIssues200ResponseDataInner, b
 }
 
 // SetData sets field value
-func (o *ListIssues200Response) SetData(v []ListIssues200ResponseDataInner) {
+func (o *ListIssues200Response) SetData(v []IssueSummarized) {
 	o.Data = v
 }
 

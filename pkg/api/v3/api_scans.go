@@ -1,7 +1,7 @@
 /*
 Escape Public API
 
-This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `Authorization` header. For example: `Authorization: Key YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
+This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `X-ESCAPE-API-KEY` header. For example: `X-ESCAPE-API-KEY: YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
 
 API version: 3.0.0
 */
@@ -29,7 +29,7 @@ type ApiCancelScanRequest struct {
 	scanId string
 }
 
-func (r ApiCancelScanRequest) Execute() (*StartScan200Response, *http.Response, error) {
+func (r ApiCancelScanRequest) Execute() (*ScanDetailed1, *http.Response, error) {
 	return r.ApiService.CancelScanExecute(r)
 }
 
@@ -51,13 +51,13 @@ func (a *ScansAPIService) CancelScan(ctx context.Context, scanId string) ApiCanc
 }
 
 // Execute executes the request
-//  @return StartScan200Response
-func (a *ScansAPIService) CancelScanExecute(r ApiCancelScanRequest) (*StartScan200Response, *http.Response, error) {
+//  @return ScanDetailed1
+func (a *ScansAPIService) CancelScanExecute(r ApiCancelScanRequest) (*ScanDetailed1, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *StartScan200Response
+		localVarReturnValue  *ScanDetailed1
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ScansAPIService.CancelScan")
@@ -99,7 +99,7 @@ func (a *ScansAPIService) CancelScanExecute(r ApiCancelScanRequest) (*StartScan2
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -167,7 +167,7 @@ type ApiGetScanRequest struct {
 	scanId string
 }
 
-func (r ApiGetScanRequest) Execute() (*StartScan200Response, *http.Response, error) {
+func (r ApiGetScanRequest) Execute() (*ScanDetailed1, *http.Response, error) {
 	return r.ApiService.GetScanExecute(r)
 }
 
@@ -189,13 +189,13 @@ func (a *ScansAPIService) GetScan(ctx context.Context, scanId string) ApiGetScan
 }
 
 // Execute executes the request
-//  @return StartScan200Response
-func (a *ScansAPIService) GetScanExecute(r ApiGetScanRequest) (*StartScan200Response, *http.Response, error) {
+//  @return ScanDetailed1
+func (a *ScansAPIService) GetScanExecute(r ApiGetScanRequest) (*ScanDetailed1, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *StartScan200Response
+		localVarReturnValue  *ScanDetailed1
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ScansAPIService.GetScan")
@@ -237,7 +237,7 @@ func (a *ScansAPIService) GetScanExecute(r ApiGetScanRequest) (*StartScan200Resp
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -373,7 +373,7 @@ func (a *ScansAPIService) IgnoreScanExecute(r ApiIgnoreScanRequest) (*IgnoreScan
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -620,7 +620,7 @@ func (a *ScansAPIService) ListScansExecute(r ApiListScansRequest) (*ListScans200
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -683,7 +683,7 @@ func (r ApiStartScanRequest) StartScanRequest(startScanRequest StartScanRequest)
 	return r
 }
 
-func (r ApiStartScanRequest) Execute() (*StartScan200Response, *http.Response, error) {
+func (r ApiStartScanRequest) Execute() (*ScanDetailed1, *http.Response, error) {
 	return r.ApiService.StartScanExecute(r)
 }
 
@@ -703,13 +703,13 @@ func (a *ScansAPIService) StartScan(ctx context.Context) ApiStartScanRequest {
 }
 
 // Execute executes the request
-//  @return StartScan200Response
-func (a *ScansAPIService) StartScanExecute(r ApiStartScanRequest) (*StartScan200Response, *http.Response, error) {
+//  @return ScanDetailed1
+func (a *ScansAPIService) StartScanExecute(r ApiStartScanRequest) (*ScanDetailed1, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *StartScan200Response
+		localVarReturnValue  *ScanDetailed1
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ScansAPIService.StartScan")
@@ -752,7 +752,7 @@ func (a *ScansAPIService) StartScanExecute(r ApiStartScanRequest) (*StartScan200
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}

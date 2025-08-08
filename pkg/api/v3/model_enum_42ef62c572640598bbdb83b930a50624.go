@@ -1,7 +1,7 @@
 /*
 Escape Public API
 
-This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `Authorization` header. For example: `Authorization: Key YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
+This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `X-ESCAPE-API-KEY` header. For example: `X-ESCAPE-API-KEY: YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
 
 API version: 3.0.0
 */
@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// Enum42ef62c572640598bbdb83b930a50624 the model 'Enum42ef62c572640598bbdb83b930a50624'
+// Enum42ef62c572640598bbdb83b930a50624 The class of the asset
 type Enum42ef62c572640598bbdb83b930a50624 string
 
 // List of Enum_42ef62c572640598bbdb83b930a50624
