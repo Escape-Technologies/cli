@@ -19,7 +19,7 @@ var integrationsListCmd = &cobra.Command{
 	Use:     "list",
 	Aliases: []string{"ls"},
 	Short:   "List integrations",
-	Long:    `List all integrations.
+	Long: `List all integrations.
 
 Example output:
 ID                                      KIND               NAME                          LOCATION ID
@@ -55,7 +55,7 @@ var integrationsCreateCmd = &cobra.Command{
 	Use:     "apply integration-path",
 	Aliases: []string{"create", "update"},
 	Short:   "Apply integration config",
-	Long:    `Update the integration based on a configuration file (yaml or json).
+	Long: `Update the integration based on a configuration file (yaml or json).
 
 Example file content:
 {
@@ -74,7 +74,7 @@ Example file content:
 More information about the integration file format can be found here: https://public.escape.tech/v2/#tag/integrations/POST/integrations`,
 	Example: `escape-cli integrations apply integration.yaml
 escape-cli integrations apply integration.json`,
-	Args:    cobra.ExactArgs(1),
+	Args: cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		return escape.UpsertIntegrationFromFile(cmd.Context(), args[0])
 	},
@@ -84,7 +84,7 @@ var integrationsDeleteCmd = &cobra.Command{
 	Use:     "delete integration-id",
 	Aliases: []string{"del", "remove"},
 	Short:   "Delete integration",
-	Long:    `Delete an integration
+	Long: `Delete an integration
 	
 Example output:
 Integration deleted`,
@@ -104,7 +104,7 @@ var integrationsGetCmd = &cobra.Command{
 	Use:     "get integration-id",
 	Aliases: []string{"describe"},
 	Short:   "Get integration details",
-	Long:    `Get detailed information about an integration.
+	Long: `Get detailed information about an integration.
 
 Example output:
 Name: example-github-integration

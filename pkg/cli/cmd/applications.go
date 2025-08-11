@@ -20,7 +20,7 @@ var applicationsListCmd = &cobra.Command{
 	Use:     "list",
 	Aliases: []string{"ls"},
 	Short:   "List applications",
-	Long:    `List all applications.
+	Long: `List all applications.
 
 Example output:
 ID                                      TYPE         NAME                                                           CREATED AT              HAS CI    CRON
@@ -47,7 +47,7 @@ var applicationGetCmd = &cobra.Command{
 	Use:     "get application-id",
 	Aliases: []string{"describe"},
 	Short:   "Get application details",
-	Long:    `Get details about an application's current configuration.
+	Long: `Get details about an application's current configuration.
 
 Example output:
 Name: Example-Application
@@ -79,10 +79,10 @@ Configuration:
 }
 
 var applicationUpdateSchemaCmd = &cobra.Command{
-	Use:     "update-schema application-id schema-path|schema-url",
-	Short:   "Update application schema",
-	Long:    "Update the schema of an application based on a configuration file (yaml or json)",
-	Args:    cobra.ExactArgs(2), //nolint:mnd
+	Use:   "update-schema application-id schema-path|schema-url",
+	Short: "Update application schema",
+	Long:  "Update the schema of an application based on a configuration file (yaml or json)",
+	Args:  cobra.ExactArgs(2), //nolint:mnd
 	Example: `escape-cli applications update-schema 00000000-0000-0000-0000-000000000000 schema.json
 escape-cli applications update-schema 00000000-0000-0000-0000-000000000000 schema.yaml
 escape-cli applications update-schema 00000000-0000-0000-0000-000000000000 https://example.com/schema.json`,
@@ -96,12 +96,12 @@ escape-cli applications update-schema 00000000-0000-0000-0000-000000000000 https
 }
 
 var applicationUpdateConfigCmd = &cobra.Command{
-	Use:     "update-config application-id config-path",
-	Short:   "Update application config",
-	Long:    "Update the configuration of an application based on a configuration file (yaml or json)",
+	Use:   "update-config application-id config-path",
+	Short: "Update application config",
+	Long:  "Update the configuration of an application based on a configuration file (yaml or json)",
 	Example: `escape-cli applications update-config 00000000-0000-0000-0000-000000000000 config.json
 escape-cli applications update-config 00000000-0000-0000-0000-000000000000 config.yaml`,
-	Args:    cobra.ExactArgs(2), //nolint:mnd
+	Args: cobra.ExactArgs(2), //nolint:mnd
 	RunE: func(cmd *cobra.Command, args []string) error {
 		err := escape.UpdateApplicationConfig(cmd.Context(), args[0], args[1])
 		if err != nil {

@@ -22,7 +22,7 @@ func ListLocations(ctx context.Context, next string) ([]v3.LocationSummarized, s
 	if err != nil {
 		return nil, "", fmt.Errorf("unable to get locations: %w", err)
 	}
-	return data.Data, data.NextCursor, nil
+	return data.Data, *data.NextCursor, nil
 }
 
 // GetLocation gets a location by ID
