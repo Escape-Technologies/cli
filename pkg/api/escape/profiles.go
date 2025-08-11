@@ -7,6 +7,7 @@ import (
 	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
 )
 
+// ListProfiles lists all profiles
 func ListProfiles(ctx context.Context, next string) ([]v3.ProfileSummarized, *string, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
@@ -23,6 +24,7 @@ func ListProfiles(ctx context.Context, next string) ([]v3.ProfileSummarized, *st
 	return data.Data, data.NextCursor, nil
 }
 
+// GetProfile gets a profile by ID
 func GetProfile(ctx context.Context, profileID string) (*v3.ProfileDetailed, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
