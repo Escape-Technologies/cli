@@ -19,7 +19,7 @@ var profilesListCmd = &cobra.Command{
 	Use:     "list",
 	Aliases: []string{"ls"},
 	Short:   "List profiles",
-	Long:    `List all profiles.
+	Long: `List all profiles.
 
 Example output:
 ID                                      TYPE         NAME                                                           CREATED AT              HAS CI    CRON
@@ -31,31 +31,64 @@ ID                                      TYPE         NAME                       
 		if err != nil {
 			return fmt.Errorf("unable to list profiles: %w", err)
 		}
-		out.Table(profiles, func() []string {
-			result := []string{"ID\tNAME\tCREATED AT\tINITIATORS"}
-			for _, profile := range profiles {
-				result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s\t%s", profile.GetId(), profile.GetName(), profile.GetCreatedAt(), profile.GetInitiators(), profile.GetLinks().ProfileSummary))
-			}
-			return result
-		})
-		for next != "" {
-			profiles, next, err = escape.ListProfiles(cmd.Context(), next)
+
+		// First result
+		result := []string{"ID\tNAME\tCREATED AT\tINITIATORS"}
+		for _, profile := range profiles {
+			result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s\t%s", profile.GetId(), profile.GetName(), profile.GetCreatedAt(), profile.GetInitiators(), profile.GetLinks().ProfileSummary))
+		}
+
+		for next != nil && *next != "" {
+			profiles, next, err = escape.ListProfiles(cmd.Context(), *next)
 			if err != nil {
 				return fmt.Errorf("unable to list profiles: %w", err)
 			}
-			out.Table(profiles, func() []string {
-				result := []string{}
-				for _, profile := range profiles {
-					result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s\t%s", profile.GetId(), profile.GetName(), profile.GetCreatedAt(), profile.GetInitiators(), profile.GetLinks().ProfileSummary))
-				}
-				return result
-			})
+			for _, profile := range profiles {
+				result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s\t%s", profile.GetId(), profile.GetName(), profile.GetCreatedAt(), profile.GetInitiators(), profile.GetLinks().ProfileSummary))
+			}
 		}
+
+		out.Table(result, func() []string {
+			return result
+		})
+
+		return nil
+	},
+}
+
+var profileGetCmd = &cobra.Command{
+	Use:     "get profile-id",
+	Aliases: []string{"describe"},
+	Short:   "Get a profile",
+	Long: `Get a profile by ID.
+
+Example output:
+ID                                      TYPE         NAME                                                           CREATED AT              HAS CI    CRON
+00000000-0000-0000-0000-000000000001    REST         Example-Application-1                                          2025-02-21T11:15:07Z    false     0 11 * * 5`,
+	Example: `escape-cli profiles get 00000000-0000-0000-0000-000000000001`,
+	RunE: func(cmd *cobra.Command, args []string) error {
+		profileID := args[0]
+		profile, err := escape.GetProfile(cmd.Context(), profileID)
+		if err != nil || profile == nil {
+			return fmt.Errorf("unable to get profile %s: %w", profileID, err)
+		}
+
+		// TODO : better display
+		result := []string{"ID\tNAME\tCREATED AT\tUPDATED AT\tLINK"}
+		result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t", profile.GetId(), profile.GetName(), profile.GetCreatedAt(), profile.GetUpdatedAt(), profile.GetLinks().ProfileSummary))
+
+		out.Table(result, func() []string {
+			return result
+		})
+
 		return nil
 	},
 }
 
 func init() {
-	profilesCmd.AddCommand(profilesListCmd)
+	profilesCmd.AddCommand(
+		profilesListCmd,
+		profileGetCmd,
+	)
 	rootCmd.AddCommand(profilesCmd)
 }

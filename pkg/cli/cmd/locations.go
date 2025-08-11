@@ -21,7 +21,7 @@ var locationsListCmd = &cobra.Command{
 	Use:     "list",
 	Aliases: []string{"ls"},
 	Short:   "List locations",
-	Long:    `List all locations.
+	Long: `List all locations.
 
 Example output:
 ID                                      NAME                       SSH PUBLIC KEY
@@ -89,9 +89,9 @@ var locationsGetCmd = &cobra.Command{
 	},
 }
 var locationsStartCmd = &cobra.Command{
-	Use:     "start location-name",
-	Short:   "Start a location",
-	Long:    `Start a location by its name. This will establish a connection to the Escape Platform.
+	Use:   "start location-name",
+	Short: "Start a location",
+	Long: `Start a location by its name. This will establish a connection to the Escape Platform.
 
 Example output:
 [info] Verbose mode: 0
@@ -116,7 +116,7 @@ var locationsDeleteCmd = &cobra.Command{
 	Use:     "delete location-id",
 	Aliases: []string{"del", "remove"},
 	Short:   "Delete a location",
-	Long:    `Delete a location by its ID.
+	Long: `Delete a location by its ID.
 
 Example output:
 Location deleted`,
