@@ -17,6 +17,7 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"reflect"
 )
 
 
@@ -282,15 +283,16 @@ type ApiListEventsRequest struct {
 	ApiService *EventsAPIService
 	cursor *string
 	size *int
-	sort *ListProfilesSortParameter
+	sortType *string
+	sortDirection *string
 	search *string
 	scanIds *ListIssuesScanIdsParameter
 	assetIds *ListProfilesAssetIdsParameter
 	issueIds *ListProfilesIssueIdsParameter
-	levels *string
-	stages *string
+	levels *[]string
+	stages *[]string
 	hasAttachments *string
-	attachments *string
+	attachments *[]string
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
@@ -305,8 +307,15 @@ func (r ApiListEventsRequest) Size(size int) ApiListEventsRequest {
 	return r
 }
 
-func (r ApiListEventsRequest) Sort(sort ListProfilesSortParameter) ApiListEventsRequest {
-	r.sort = &sort
+// The type to sort by
+func (r ApiListEventsRequest) SortType(sortType string) ApiListEventsRequest {
+	r.sortType = &sortType
+	return r
+}
+
+// The direction to sort by
+func (r ApiListEventsRequest) SortDirection(sortDirection string) ApiListEventsRequest {
+	r.sortDirection = &sortDirection
 	return r
 }
 
@@ -335,13 +344,13 @@ func (r ApiListEventsRequest) IssueIds(issueIds ListProfilesIssueIdsParameter) A
 }
 
 // Filter by level
-func (r ApiListEventsRequest) Levels(levels string) ApiListEventsRequest {
+func (r ApiListEventsRequest) Levels(levels []string) ApiListEventsRequest {
 	r.levels = &levels
 	return r
 }
 
 // Filter by stage
-func (r ApiListEventsRequest) Stages(stages string) ApiListEventsRequest {
+func (r ApiListEventsRequest) Stages(stages []string) ApiListEventsRequest {
 	r.stages = &stages
 	return r
 }
@@ -353,7 +362,7 @@ func (r ApiListEventsRequest) HasAttachments(hasAttachments string) ApiListEvent
 }
 
 // Filter by attachments
-func (r ApiListEventsRequest) Attachments(attachments string) ApiListEventsRequest {
+func (r ApiListEventsRequest) Attachments(attachments []string) ApiListEventsRequest {
 	r.attachments = &attachments
 	return r
 }
@@ -407,8 +416,14 @@ func (a *EventsAPIService) ListEventsExecute(r ApiListEventsRequest) (*ListEvent
 		var defaultValue int = 50
 		r.size = &defaultValue
 	}
-	if r.sort != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "sort", r.sort, "form", "")
+	if r.sortType != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortType", r.sortType, "form", "")
+	}
+	if r.sortDirection != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
+	} else {
+		var defaultValue string = "asc"
+		r.sortDirection = &defaultValue
 	}
 	if r.search != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")
@@ -423,16 +438,40 @@ func (a *EventsAPIService) ListEventsExecute(r ApiListEventsRequest) (*ListEvent
 		parameterAddToHeaderOrQuery(localVarQueryParams, "issueIds", r.issueIds, "form", "")
 	}
 	if r.levels != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "levels", r.levels, "form", "")
+		t := *r.levels
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "levels", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "levels", t, "form", "multi")
+		}
 	}
 	if r.stages != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "stages", r.stages, "form", "")
+		t := *r.stages
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "stages", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "stages", t, "form", "multi")
+		}
 	}
 	if r.hasAttachments != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "hasAttachments", r.hasAttachments, "form", "")
 	}
 	if r.attachments != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "attachments", r.attachments, "form", "")
+		t := *r.attachments
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "attachments", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "attachments", t, "form", "multi")
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

@@ -24,11 +24,13 @@ type EventDetailed struct {
 	Issues []IssueSummarized `json:"issues,omitempty"`
 	// The number of issues of the event
 	IssuesCount float32 `json:"issuesCount"`
-	Level EnumAc8825c946764c840068c1a5eddeee84 `json:"level"`
-	Scan ScanDetailed `json:"scan"`
+	// The level of the event
+	Level string `json:"level"`
+	Scan *ScanDetailed `json:"scan,omitempty"`
 	// The id of the scan of the event
-	ScanId string `json:"scanId"`
-	Stage Enum34c4bb5e862eb0ecedb41ea70fd4e2a4 `json:"stage"`
+	ScanId *string `json:"scanId,omitempty"`
+	// The stage of the event
+	Stage string `json:"stage"`
 	// The title of the event
 	Title string `json:"title"`
 	AdditionalProperties map[string]interface{}
@@ -40,12 +42,10 @@ type _EventDetailed EventDetailed
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewEventDetailed(issuesCount float32, level EnumAc8825c946764c840068c1a5eddeee84, scan ScanDetailed, scanId string, stage Enum34c4bb5e862eb0ecedb41ea70fd4e2a4, title string) *EventDetailed {
+func NewEventDetailed(issuesCount float32, level string, stage string, title string) *EventDetailed {
 	this := EventDetailed{}
 	this.IssuesCount = issuesCount
 	this.Level = level
-	this.Scan = scan
-	this.ScanId = scanId
 	this.Stage = stage
 	this.Title = title
 	return &this
@@ -116,9 +116,9 @@ func (o *EventDetailed) SetIssuesCount(v float32) {
 }
 
 // GetLevel returns the Level field value
-func (o *EventDetailed) GetLevel() EnumAc8825c946764c840068c1a5eddeee84 {
+func (o *EventDetailed) GetLevel() string {
 	if o == nil {
-		var ret EnumAc8825c946764c840068c1a5eddeee84
+		var ret string
 		return ret
 	}
 
@@ -127,7 +127,7 @@ func (o *EventDetailed) GetLevel() EnumAc8825c946764c840068c1a5eddeee84 {
 
 // GetLevelOk returns a tuple with the Level field value
 // and a boolean to check if the value has been set.
-func (o *EventDetailed) GetLevelOk() (*EnumAc8825c946764c840068c1a5eddeee84, bool) {
+func (o *EventDetailed) GetLevelOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -135,62 +135,78 @@ func (o *EventDetailed) GetLevelOk() (*EnumAc8825c946764c840068c1a5eddeee84, boo
 }
 
 // SetLevel sets field value
-func (o *EventDetailed) SetLevel(v EnumAc8825c946764c840068c1a5eddeee84) {
+func (o *EventDetailed) SetLevel(v string) {
 	o.Level = v
 }
 
-// GetScan returns the Scan field value
+// GetScan returns the Scan field value if set, zero value otherwise.
 func (o *EventDetailed) GetScan() ScanDetailed {
-	if o == nil {
+	if o == nil || IsNil(o.Scan) {
 		var ret ScanDetailed
 		return ret
 	}
-
-	return o.Scan
+	return *o.Scan
 }
 
-// GetScanOk returns a tuple with the Scan field value
+// GetScanOk returns a tuple with the Scan field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EventDetailed) GetScanOk() (*ScanDetailed, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Scan) {
 		return nil, false
 	}
-	return &o.Scan, true
+	return o.Scan, true
 }
 
-// SetScan sets field value
+// HasScan returns a boolean if a field has been set.
+func (o *EventDetailed) HasScan() bool {
+	if o != nil && !IsNil(o.Scan) {
+		return true
+	}
+
+	return false
+}
+
+// SetScan gets a reference to the given ScanDetailed and assigns it to the Scan field.
 func (o *EventDetailed) SetScan(v ScanDetailed) {
-	o.Scan = v
+	o.Scan = &v
 }
 
-// GetScanId returns the ScanId field value
+// GetScanId returns the ScanId field value if set, zero value otherwise.
 func (o *EventDetailed) GetScanId() string {
-	if o == nil {
+	if o == nil || IsNil(o.ScanId) {
 		var ret string
 		return ret
 	}
-
-	return o.ScanId
+	return *o.ScanId
 }
 
-// GetScanIdOk returns a tuple with the ScanId field value
+// GetScanIdOk returns a tuple with the ScanId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EventDetailed) GetScanIdOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.ScanId) {
 		return nil, false
 	}
-	return &o.ScanId, true
+	return o.ScanId, true
 }
 
-// SetScanId sets field value
+// HasScanId returns a boolean if a field has been set.
+func (o *EventDetailed) HasScanId() bool {
+	if o != nil && !IsNil(o.ScanId) {
+		return true
+	}
+
+	return false
+}
+
+// SetScanId gets a reference to the given string and assigns it to the ScanId field.
 func (o *EventDetailed) SetScanId(v string) {
-	o.ScanId = v
+	o.ScanId = &v
 }
 
 // GetStage returns the Stage field value
-func (o *EventDetailed) GetStage() Enum34c4bb5e862eb0ecedb41ea70fd4e2a4 {
+func (o *EventDetailed) GetStage() string {
 	if o == nil {
-		var ret Enum34c4bb5e862eb0ecedb41ea70fd4e2a4
+		var ret string
 		return ret
 	}
 
@@ -199,7 +215,7 @@ func (o *EventDetailed) GetStage() Enum34c4bb5e862eb0ecedb41ea70fd4e2a4 {
 
 // GetStageOk returns a tuple with the Stage field value
 // and a boolean to check if the value has been set.
-func (o *EventDetailed) GetStageOk() (*Enum34c4bb5e862eb0ecedb41ea70fd4e2a4, bool) {
+func (o *EventDetailed) GetStageOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -207,7 +223,7 @@ func (o *EventDetailed) GetStageOk() (*Enum34c4bb5e862eb0ecedb41ea70fd4e2a4, boo
 }
 
 // SetStage sets field value
-func (o *EventDetailed) SetStage(v Enum34c4bb5e862eb0ecedb41ea70fd4e2a4) {
+func (o *EventDetailed) SetStage(v string) {
 	o.Stage = v
 }
 
@@ -250,8 +266,12 @@ func (o EventDetailed) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["issuesCount"] = o.IssuesCount
 	toSerialize["level"] = o.Level
-	toSerialize["scan"] = o.Scan
-	toSerialize["scanId"] = o.ScanId
+	if !IsNil(o.Scan) {
+		toSerialize["scan"] = o.Scan
+	}
+	if !IsNil(o.ScanId) {
+		toSerialize["scanId"] = o.ScanId
+	}
 	toSerialize["stage"] = o.Stage
 	toSerialize["title"] = o.Title
 
@@ -269,8 +289,6 @@ func (o *EventDetailed) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"issuesCount",
 		"level",
-		"scan",
-		"scanId",
 		"stage",
 		"title",
 	}

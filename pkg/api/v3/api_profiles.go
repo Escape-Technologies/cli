@@ -17,6 +17,7 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"reflect"
 )
 
 
@@ -3167,15 +3168,16 @@ type ApiListProfilesRequest struct {
 	ApiService *ProfilesAPIService
 	cursor *string
 	size *int
-	sort *ListProfilesSortParameter
+	sortType *string
+	sortDirection *string
 	assetIds *ListProfilesAssetIdsParameter
 	domains *ListProfilesDomainsParameter
 	issueIds *ListProfilesIssueIdsParameter
 	tagIds *ListProfilesTagIdsParameter
 	search *string
-	initiators *string
-	kinds *string
-	risks *string
+	initiators *[]string
+	kinds *[]string
+	risks *[]string
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
@@ -3190,8 +3192,15 @@ func (r ApiListProfilesRequest) Size(size int) ApiListProfilesRequest {
 	return r
 }
 
-func (r ApiListProfilesRequest) Sort(sort ListProfilesSortParameter) ApiListProfilesRequest {
-	r.sort = &sort
+// The type to sort by
+func (r ApiListProfilesRequest) SortType(sortType string) ApiListProfilesRequest {
+	r.sortType = &sortType
+	return r
+}
+
+// The direction to sort by
+func (r ApiListProfilesRequest) SortDirection(sortDirection string) ApiListProfilesRequest {
+	r.sortDirection = &sortDirection
 	return r
 }
 
@@ -3226,19 +3235,19 @@ func (r ApiListProfilesRequest) Search(search string) ApiListProfilesRequest {
 }
 
 // Filter by initiator
-func (r ApiListProfilesRequest) Initiators(initiators string) ApiListProfilesRequest {
+func (r ApiListProfilesRequest) Initiators(initiators []string) ApiListProfilesRequest {
 	r.initiators = &initiators
 	return r
 }
 
 // Filter by kind
-func (r ApiListProfilesRequest) Kinds(kinds string) ApiListProfilesRequest {
+func (r ApiListProfilesRequest) Kinds(kinds []string) ApiListProfilesRequest {
 	r.kinds = &kinds
 	return r
 }
 
 // Filter by risk
-func (r ApiListProfilesRequest) Risks(risks string) ApiListProfilesRequest {
+func (r ApiListProfilesRequest) Risks(risks []string) ApiListProfilesRequest {
 	r.risks = &risks
 	return r
 }
@@ -3292,8 +3301,14 @@ func (a *ProfilesAPIService) ListProfilesExecute(r ApiListProfilesRequest) (*Lis
 		var defaultValue int = 50
 		r.size = &defaultValue
 	}
-	if r.sort != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "sort", r.sort, "form", "")
+	if r.sortType != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortType", r.sortType, "form", "")
+	}
+	if r.sortDirection != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
+	} else {
+		var defaultValue string = "asc"
+		r.sortDirection = &defaultValue
 	}
 	if r.assetIds != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "assetIds", r.assetIds, "form", "")
@@ -3311,13 +3326,37 @@ func (a *ProfilesAPIService) ListProfilesExecute(r ApiListProfilesRequest) (*Lis
 		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")
 	}
 	if r.initiators != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "initiators", r.initiators, "form", "")
+		t := *r.initiators
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "initiators", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "initiators", t, "form", "multi")
+		}
 	}
 	if r.kinds != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "kinds", r.kinds, "form", "")
+		t := *r.kinds
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "kinds", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "kinds", t, "form", "multi")
+		}
 	}
 	if r.risks != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "risks", r.risks, "form", "")
+		t := *r.risks
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "risks", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "risks", t, "form", "multi")
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

@@ -20,7 +20,7 @@ var _ MappedNullable = &CreateDastRestProfileRequestConfigurationJsonStrAuthenti
 
 // CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf8 struct for CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf8
 type CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf8 struct {
-	Type EnumCURL `json:"type"`
+	Type string `json:"type"`
 	Users []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf8UsersInner `json:"users"`
 	Extractions []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOfExtractionsInner `json:"extractions"`
 	Injections []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerInjectionsAnyOfInner `json:"injections"`
@@ -33,7 +33,7 @@ type _CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInner
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf8(type_ EnumCURL, users []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf8UsersInner, extractions []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOfExtractionsInner, injections []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerInjectionsAnyOfInner) *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf8 {
+func NewCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf8(type_ string, users []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf8UsersInner, extractions []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOfExtractionsInner, injections []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerInjectionsAnyOfInner) *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf8 {
 	this := CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf8{}
 	this.Type = type_
 	this.Users = users
@@ -51,9 +51,9 @@ func NewCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInn
 }
 
 // GetType returns the Type field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf8) GetType() EnumCURL {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf8) GetType() string {
 	if o == nil {
-		var ret EnumCURL
+		var ret string
 		return ret
 	}
 
@@ -62,7 +62,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsIn
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf8) GetTypeOk() (*EnumCURL, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf8) GetTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -70,7 +70,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsIn
 }
 
 // SetType sets field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf8) SetType(v EnumCURL) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf8) SetType(v string) {
 	o.Type = v
 }
 

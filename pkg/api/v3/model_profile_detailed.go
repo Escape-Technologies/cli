@@ -31,20 +31,20 @@ type ProfileDetailed struct {
 	// The date and time the profile was updated
 	UpdatedAt string `json:"updatedAt"`
 	// The cron of the profile
-	Cron string `json:"cron"`
+	Cron *string `json:"cron,omitempty"`
 	// The date and time the profile is scheduled for deletion
-	ScheduledForDeletionAt string `json:"scheduledForDeletionAt"`
+	ScheduledForDeletionAt *string `json:"scheduledForDeletionAt,omitempty"`
 	// The score of the profile
-	Score float32 `json:"score"`
+	Score *float32 `json:"score,omitempty"`
 	// The coverage of the profile
-	Coverage float32 `json:"coverage"`
+	Coverage *float32 `json:"coverage,omitempty"`
 	ActiveConfiguration ConfigurationDetailed `json:"activeConfiguration"`
 	ActiveSchema SchemaDetailed `json:"activeSchema"`
 	Asset AssetDetailed `json:"asset"`
-	LastResourceScan ScanDetailed `json:"lastResourceScan"`
-	LastSuccessfulResourceScan ScanDetailed `json:"lastSuccessfulResourceScan"`
+	LastResourceScan *ScanDetailed `json:"lastResourceScan,omitempty"`
+	LastSuccessfulResourceScan *ScanDetailed `json:"lastSuccessfulResourceScan,omitempty"`
 	// The risks of the profile
-	Risks []Enum1ea54cdf1f4480ebf83fc671185f5693 `json:"risks"`
+	Risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS `json:"risks"`
 	Statistics StatisticsDetailed `json:"statistics"`
 	Links ProfileSummarizedLinks `json:"links"`
 	AdditionalProperties map[string]interface{}
@@ -56,22 +56,16 @@ type _ProfileDetailed ProfileDetailed
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProfileDetailed(id string, name string, scannerKind string, createdAt string, updatedAt string, cron string, scheduledForDeletionAt string, score float32, coverage float32, activeConfiguration ConfigurationDetailed, activeSchema SchemaDetailed, asset AssetDetailed, lastResourceScan ScanDetailed, lastSuccessfulResourceScan ScanDetailed, risks []Enum1ea54cdf1f4480ebf83fc671185f5693, statistics StatisticsDetailed, links ProfileSummarizedLinks) *ProfileDetailed {
+func NewProfileDetailed(id string, name string, scannerKind string, createdAt string, updatedAt string, activeConfiguration ConfigurationDetailed, activeSchema SchemaDetailed, asset AssetDetailed, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, statistics StatisticsDetailed, links ProfileSummarizedLinks) *ProfileDetailed {
 	this := ProfileDetailed{}
 	this.Id = id
 	this.Name = name
 	this.ScannerKind = scannerKind
 	this.CreatedAt = createdAt
 	this.UpdatedAt = updatedAt
-	this.Cron = cron
-	this.ScheduledForDeletionAt = scheduledForDeletionAt
-	this.Score = score
-	this.Coverage = coverage
 	this.ActiveConfiguration = activeConfiguration
 	this.ActiveSchema = activeSchema
 	this.Asset = asset
-	this.LastResourceScan = lastResourceScan
-	this.LastSuccessfulResourceScan = lastSuccessfulResourceScan
 	this.Risks = risks
 	this.Statistics = statistics
 	this.Links = links
@@ -206,100 +200,132 @@ func (o *ProfileDetailed) SetUpdatedAt(v string) {
 	o.UpdatedAt = v
 }
 
-// GetCron returns the Cron field value
+// GetCron returns the Cron field value if set, zero value otherwise.
 func (o *ProfileDetailed) GetCron() string {
-	if o == nil {
+	if o == nil || IsNil(o.Cron) {
 		var ret string
 		return ret
 	}
-
-	return o.Cron
+	return *o.Cron
 }
 
-// GetCronOk returns a tuple with the Cron field value
+// GetCronOk returns a tuple with the Cron field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ProfileDetailed) GetCronOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Cron) {
 		return nil, false
 	}
-	return &o.Cron, true
+	return o.Cron, true
 }
 
-// SetCron sets field value
+// HasCron returns a boolean if a field has been set.
+func (o *ProfileDetailed) HasCron() bool {
+	if o != nil && !IsNil(o.Cron) {
+		return true
+	}
+
+	return false
+}
+
+// SetCron gets a reference to the given string and assigns it to the Cron field.
 func (o *ProfileDetailed) SetCron(v string) {
-	o.Cron = v
+	o.Cron = &v
 }
 
-// GetScheduledForDeletionAt returns the ScheduledForDeletionAt field value
+// GetScheduledForDeletionAt returns the ScheduledForDeletionAt field value if set, zero value otherwise.
 func (o *ProfileDetailed) GetScheduledForDeletionAt() string {
-	if o == nil {
+	if o == nil || IsNil(o.ScheduledForDeletionAt) {
 		var ret string
 		return ret
 	}
-
-	return o.ScheduledForDeletionAt
+	return *o.ScheduledForDeletionAt
 }
 
-// GetScheduledForDeletionAtOk returns a tuple with the ScheduledForDeletionAt field value
+// GetScheduledForDeletionAtOk returns a tuple with the ScheduledForDeletionAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ProfileDetailed) GetScheduledForDeletionAtOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.ScheduledForDeletionAt) {
 		return nil, false
 	}
-	return &o.ScheduledForDeletionAt, true
+	return o.ScheduledForDeletionAt, true
 }
 
-// SetScheduledForDeletionAt sets field value
+// HasScheduledForDeletionAt returns a boolean if a field has been set.
+func (o *ProfileDetailed) HasScheduledForDeletionAt() bool {
+	if o != nil && !IsNil(o.ScheduledForDeletionAt) {
+		return true
+	}
+
+	return false
+}
+
+// SetScheduledForDeletionAt gets a reference to the given string and assigns it to the ScheduledForDeletionAt field.
 func (o *ProfileDetailed) SetScheduledForDeletionAt(v string) {
-	o.ScheduledForDeletionAt = v
+	o.ScheduledForDeletionAt = &v
 }
 
-// GetScore returns the Score field value
+// GetScore returns the Score field value if set, zero value otherwise.
 func (o *ProfileDetailed) GetScore() float32 {
-	if o == nil {
+	if o == nil || IsNil(o.Score) {
 		var ret float32
 		return ret
 	}
-
-	return o.Score
+	return *o.Score
 }
 
-// GetScoreOk returns a tuple with the Score field value
+// GetScoreOk returns a tuple with the Score field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ProfileDetailed) GetScoreOk() (*float32, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Score) {
 		return nil, false
 	}
-	return &o.Score, true
+	return o.Score, true
 }
 
-// SetScore sets field value
+// HasScore returns a boolean if a field has been set.
+func (o *ProfileDetailed) HasScore() bool {
+	if o != nil && !IsNil(o.Score) {
+		return true
+	}
+
+	return false
+}
+
+// SetScore gets a reference to the given float32 and assigns it to the Score field.
 func (o *ProfileDetailed) SetScore(v float32) {
-	o.Score = v
+	o.Score = &v
 }
 
-// GetCoverage returns the Coverage field value
+// GetCoverage returns the Coverage field value if set, zero value otherwise.
 func (o *ProfileDetailed) GetCoverage() float32 {
-	if o == nil {
+	if o == nil || IsNil(o.Coverage) {
 		var ret float32
 		return ret
 	}
-
-	return o.Coverage
+	return *o.Coverage
 }
 
-// GetCoverageOk returns a tuple with the Coverage field value
+// GetCoverageOk returns a tuple with the Coverage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ProfileDetailed) GetCoverageOk() (*float32, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Coverage) {
 		return nil, false
 	}
-	return &o.Coverage, true
+	return o.Coverage, true
 }
 
-// SetCoverage sets field value
+// HasCoverage returns a boolean if a field has been set.
+func (o *ProfileDetailed) HasCoverage() bool {
+	if o != nil && !IsNil(o.Coverage) {
+		return true
+	}
+
+	return false
+}
+
+// SetCoverage gets a reference to the given float32 and assigns it to the Coverage field.
 func (o *ProfileDetailed) SetCoverage(v float32) {
-	o.Coverage = v
+	o.Coverage = &v
 }
 
 // GetActiveConfiguration returns the ActiveConfiguration field value
@@ -374,58 +400,74 @@ func (o *ProfileDetailed) SetAsset(v AssetDetailed) {
 	o.Asset = v
 }
 
-// GetLastResourceScan returns the LastResourceScan field value
+// GetLastResourceScan returns the LastResourceScan field value if set, zero value otherwise.
 func (o *ProfileDetailed) GetLastResourceScan() ScanDetailed {
-	if o == nil {
+	if o == nil || IsNil(o.LastResourceScan) {
 		var ret ScanDetailed
 		return ret
 	}
-
-	return o.LastResourceScan
+	return *o.LastResourceScan
 }
 
-// GetLastResourceScanOk returns a tuple with the LastResourceScan field value
+// GetLastResourceScanOk returns a tuple with the LastResourceScan field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ProfileDetailed) GetLastResourceScanOk() (*ScanDetailed, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.LastResourceScan) {
 		return nil, false
 	}
-	return &o.LastResourceScan, true
+	return o.LastResourceScan, true
 }
 
-// SetLastResourceScan sets field value
+// HasLastResourceScan returns a boolean if a field has been set.
+func (o *ProfileDetailed) HasLastResourceScan() bool {
+	if o != nil && !IsNil(o.LastResourceScan) {
+		return true
+	}
+
+	return false
+}
+
+// SetLastResourceScan gets a reference to the given ScanDetailed and assigns it to the LastResourceScan field.
 func (o *ProfileDetailed) SetLastResourceScan(v ScanDetailed) {
-	o.LastResourceScan = v
+	o.LastResourceScan = &v
 }
 
-// GetLastSuccessfulResourceScan returns the LastSuccessfulResourceScan field value
+// GetLastSuccessfulResourceScan returns the LastSuccessfulResourceScan field value if set, zero value otherwise.
 func (o *ProfileDetailed) GetLastSuccessfulResourceScan() ScanDetailed {
-	if o == nil {
+	if o == nil || IsNil(o.LastSuccessfulResourceScan) {
 		var ret ScanDetailed
 		return ret
 	}
-
-	return o.LastSuccessfulResourceScan
+	return *o.LastSuccessfulResourceScan
 }
 
-// GetLastSuccessfulResourceScanOk returns a tuple with the LastSuccessfulResourceScan field value
+// GetLastSuccessfulResourceScanOk returns a tuple with the LastSuccessfulResourceScan field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ProfileDetailed) GetLastSuccessfulResourceScanOk() (*ScanDetailed, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.LastSuccessfulResourceScan) {
 		return nil, false
 	}
-	return &o.LastSuccessfulResourceScan, true
+	return o.LastSuccessfulResourceScan, true
 }
 
-// SetLastSuccessfulResourceScan sets field value
+// HasLastSuccessfulResourceScan returns a boolean if a field has been set.
+func (o *ProfileDetailed) HasLastSuccessfulResourceScan() bool {
+	if o != nil && !IsNil(o.LastSuccessfulResourceScan) {
+		return true
+	}
+
+	return false
+}
+
+// SetLastSuccessfulResourceScan gets a reference to the given ScanDetailed and assigns it to the LastSuccessfulResourceScan field.
 func (o *ProfileDetailed) SetLastSuccessfulResourceScan(v ScanDetailed) {
-	o.LastSuccessfulResourceScan = v
+	o.LastSuccessfulResourceScan = &v
 }
 
 // GetRisks returns the Risks field value
-func (o *ProfileDetailed) GetRisks() []Enum1ea54cdf1f4480ebf83fc671185f5693 {
+func (o *ProfileDetailed) GetRisks() []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS {
 	if o == nil {
-		var ret []Enum1ea54cdf1f4480ebf83fc671185f5693
+		var ret []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS
 		return ret
 	}
 
@@ -434,7 +476,7 @@ func (o *ProfileDetailed) GetRisks() []Enum1ea54cdf1f4480ebf83fc671185f5693 {
 
 // GetRisksOk returns a tuple with the Risks field value
 // and a boolean to check if the value has been set.
-func (o *ProfileDetailed) GetRisksOk() ([]Enum1ea54cdf1f4480ebf83fc671185f5693, bool) {
+func (o *ProfileDetailed) GetRisksOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -442,7 +484,7 @@ func (o *ProfileDetailed) GetRisksOk() ([]Enum1ea54cdf1f4480ebf83fc671185f5693, 
 }
 
 // SetRisks sets field value
-func (o *ProfileDetailed) SetRisks(v []Enum1ea54cdf1f4480ebf83fc671185f5693) {
+func (o *ProfileDetailed) SetRisks(v []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS) {
 	o.Risks = v
 }
 
@@ -509,15 +551,27 @@ func (o ProfileDetailed) ToMap() (map[string]interface{}, error) {
 	toSerialize["scannerKind"] = o.ScannerKind
 	toSerialize["createdAt"] = o.CreatedAt
 	toSerialize["updatedAt"] = o.UpdatedAt
-	toSerialize["cron"] = o.Cron
-	toSerialize["scheduledForDeletionAt"] = o.ScheduledForDeletionAt
-	toSerialize["score"] = o.Score
-	toSerialize["coverage"] = o.Coverage
+	if !IsNil(o.Cron) {
+		toSerialize["cron"] = o.Cron
+	}
+	if !IsNil(o.ScheduledForDeletionAt) {
+		toSerialize["scheduledForDeletionAt"] = o.ScheduledForDeletionAt
+	}
+	if !IsNil(o.Score) {
+		toSerialize["score"] = o.Score
+	}
+	if !IsNil(o.Coverage) {
+		toSerialize["coverage"] = o.Coverage
+	}
 	toSerialize["activeConfiguration"] = o.ActiveConfiguration
 	toSerialize["activeSchema"] = o.ActiveSchema
 	toSerialize["asset"] = o.Asset
-	toSerialize["lastResourceScan"] = o.LastResourceScan
-	toSerialize["lastSuccessfulResourceScan"] = o.LastSuccessfulResourceScan
+	if !IsNil(o.LastResourceScan) {
+		toSerialize["lastResourceScan"] = o.LastResourceScan
+	}
+	if !IsNil(o.LastSuccessfulResourceScan) {
+		toSerialize["lastSuccessfulResourceScan"] = o.LastSuccessfulResourceScan
+	}
 	toSerialize["risks"] = o.Risks
 	toSerialize["statistics"] = o.Statistics
 	toSerialize["links"] = o.Links
@@ -539,15 +593,9 @@ func (o *ProfileDetailed) UnmarshalJSON(data []byte) (err error) {
 		"scannerKind",
 		"createdAt",
 		"updatedAt",
-		"cron",
-		"scheduledForDeletionAt",
-		"score",
-		"coverage",
 		"activeConfiguration",
 		"activeSchema",
 		"asset",
-		"lastResourceScan",
-		"lastSuccessfulResourceScan",
 		"risks",
 		"statistics",
 		"links",

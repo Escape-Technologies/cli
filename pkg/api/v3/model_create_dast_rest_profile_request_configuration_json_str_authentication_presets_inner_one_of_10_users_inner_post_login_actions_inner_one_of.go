@@ -20,7 +20,7 @@ var _ MappedNullable = &CreateDastRestProfileRequestConfigurationJsonStrAuthenti
 
 // CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInnerOneOf struct for CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInnerOneOf
 type CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInnerOneOf struct {
-	Action EnumCLICK `json:"action"`
+	Action string `json:"action"`
 	AllowFailure *bool `json:"allow_failure,omitempty"`
 	Locator string `json:"locator"`
 	AdditionalProperties map[string]interface{}
@@ -32,7 +32,7 @@ type _CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInner
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInnerOneOf(action EnumCLICK, locator string) *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInnerOneOf {
+func NewCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInnerOneOf(action string, locator string) *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInnerOneOf {
 	this := CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInnerOneOf{}
 	this.Action = action
 	this.Locator = locator
@@ -48,9 +48,9 @@ func NewCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInn
 }
 
 // GetAction returns the Action field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInnerOneOf) GetAction() EnumCLICK {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInnerOneOf) GetAction() string {
 	if o == nil {
-		var ret EnumCLICK
+		var ret string
 		return ret
 	}
 
@@ -59,7 +59,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsIn
 
 // GetActionOk returns a tuple with the Action field value
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInnerOneOf) GetActionOk() (*EnumCLICK, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInnerOneOf) GetActionOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -67,7 +67,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsIn
 }
 
 // SetAction sets field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInnerOneOf) SetAction(v EnumCLICK) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInnerOneOf) SetAction(v string) {
 	o.Action = v
 }
 

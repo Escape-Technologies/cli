@@ -19,12 +19,12 @@ var _ MappedNullable = &CreateDastRestProfileRequestConfigurationJsonStrScan{}
 
 // CreateDastRestProfileRequestConfigurationJsonStrScan struct for CreateDastRestProfileRequestConfigurationJsonStrScan
 type CreateDastRestProfileRequestConfigurationJsonStrScan struct {
-	Profile *Enum54f0a5f011be184847a3933abc4c6999 `json:"profile,omitempty"`
+	Profile *string `json:"profile,omitempty"`
 	ReadOnly *bool `json:"read_only,omitempty"`
 	Hotstart []string `json:"hotstart,omitempty"`
 	Blocklist *CreateDastRestProfileRequestConfigurationJsonStrScanBlocklist `json:"blocklist,omitempty"`
 	Scalars map[string]CreateDastRestProfileRequestConfigurationJsonStrScanScalarsValue `json:"scalars,omitempty"`
-	ApiType *EnumD528205b1dacf02f72b02e9e61efdb57 `json:"api_type,omitempty"`
+	ApiType *string `json:"api_type,omitempty"`
 	NullIsUnauthenticated *bool `json:"null_is_unauthenticated,omitempty"`
 	HotstartOnly *bool `json:"hotstart_only,omitempty"`
 	ForceFullScan *bool `json:"force_full_scan,omitempty"`
@@ -43,7 +43,7 @@ type CreateDastRestProfileRequestConfigurationJsonStrScan struct {
 	FrontendMaxQueryParamsVisits *float32 `json:"frontend_max_query_params_visits,omitempty"`
 	FrontendMaxFragmentsVisits *float32 `json:"frontend_max_fragments_visits,omitempty"`
 	FrontendMaxParameterOccurence *float32 `json:"frontend_max_parameter_occurence,omitempty"`
-	FrontendSecurityChecksEnabled []EnumF5dfa531fb3e4e3c30dbe59e58d11d44 `json:"frontend_security_checks_enabled,omitempty"`
+	FrontendSecurityChecksEnabled []ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESSCANPROPERTIESFRONTENDSECURITYCHECKSENABLEDITEMS `json:"frontend_security_checks_enabled,omitempty"`
 	FrontendAllowedUrlPatterns []string `json:"frontend_allowed_url_patterns,omitempty"`
 	DoNotFuzzParams []string `json:"do_not_fuzz_params,omitempty"`
 	FrontendLogoutDetectionConfig *CreateDastRestProfileRequestConfigurationJsonStrScanFrontendLogoutDetectionConfig `json:"frontend_logout_detection_config,omitempty"`
@@ -70,9 +70,9 @@ func NewCreateDastRestProfileRequestConfigurationJsonStrScanWithDefaults() *Crea
 }
 
 // GetProfile returns the Profile field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrScan) GetProfile() Enum54f0a5f011be184847a3933abc4c6999 {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrScan) GetProfile() string {
 	if o == nil || IsNil(o.Profile) {
-		var ret Enum54f0a5f011be184847a3933abc4c6999
+		var ret string
 		return ret
 	}
 	return *o.Profile
@@ -80,7 +80,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrScan) GetProfile() Enum
 
 // GetProfileOk returns a tuple with the Profile field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrScan) GetProfileOk() (*Enum54f0a5f011be184847a3933abc4c6999, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrScan) GetProfileOk() (*string, bool) {
 	if o == nil || IsNil(o.Profile) {
 		return nil, false
 	}
@@ -96,8 +96,8 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrScan) HasProfile() bool
 	return false
 }
 
-// SetProfile gets a reference to the given Enum54f0a5f011be184847a3933abc4c6999 and assigns it to the Profile field.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrScan) SetProfile(v Enum54f0a5f011be184847a3933abc4c6999) {
+// SetProfile gets a reference to the given string and assigns it to the Profile field.
+func (o *CreateDastRestProfileRequestConfigurationJsonStrScan) SetProfile(v string) {
 	o.Profile = &v
 }
 
@@ -230,9 +230,9 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrScan) SetScalars(v map[
 }
 
 // GetApiType returns the ApiType field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrScan) GetApiType() EnumD528205b1dacf02f72b02e9e61efdb57 {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrScan) GetApiType() string {
 	if o == nil || IsNil(o.ApiType) {
-		var ret EnumD528205b1dacf02f72b02e9e61efdb57
+		var ret string
 		return ret
 	}
 	return *o.ApiType
@@ -240,7 +240,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrScan) GetApiType() Enum
 
 // GetApiTypeOk returns a tuple with the ApiType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrScan) GetApiTypeOk() (*EnumD528205b1dacf02f72b02e9e61efdb57, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrScan) GetApiTypeOk() (*string, bool) {
 	if o == nil || IsNil(o.ApiType) {
 		return nil, false
 	}
@@ -256,8 +256,8 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrScan) HasApiType() bool
 	return false
 }
 
-// SetApiType gets a reference to the given EnumD528205b1dacf02f72b02e9e61efdb57 and assigns it to the ApiType field.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrScan) SetApiType(v EnumD528205b1dacf02f72b02e9e61efdb57) {
+// SetApiType gets a reference to the given string and assigns it to the ApiType field.
+func (o *CreateDastRestProfileRequestConfigurationJsonStrScan) SetApiType(v string) {
 	o.ApiType = &v
 }
 
@@ -838,9 +838,9 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrScan) SetFrontendMaxPar
 }
 
 // GetFrontendSecurityChecksEnabled returns the FrontendSecurityChecksEnabled field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrScan) GetFrontendSecurityChecksEnabled() []EnumF5dfa531fb3e4e3c30dbe59e58d11d44 {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrScan) GetFrontendSecurityChecksEnabled() []ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESSCANPROPERTIESFRONTENDSECURITYCHECKSENABLEDITEMS {
 	if o == nil || IsNil(o.FrontendSecurityChecksEnabled) {
-		var ret []EnumF5dfa531fb3e4e3c30dbe59e58d11d44
+		var ret []ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESSCANPROPERTIESFRONTENDSECURITYCHECKSENABLEDITEMS
 		return ret
 	}
 	return o.FrontendSecurityChecksEnabled
@@ -848,7 +848,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrScan) GetFrontendSecuri
 
 // GetFrontendSecurityChecksEnabledOk returns a tuple with the FrontendSecurityChecksEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrScan) GetFrontendSecurityChecksEnabledOk() ([]EnumF5dfa531fb3e4e3c30dbe59e58d11d44, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrScan) GetFrontendSecurityChecksEnabledOk() ([]ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESSCANPROPERTIESFRONTENDSECURITYCHECKSENABLEDITEMS, bool) {
 	if o == nil || IsNil(o.FrontendSecurityChecksEnabled) {
 		return nil, false
 	}
@@ -864,8 +864,8 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrScan) HasFrontendSecuri
 	return false
 }
 
-// SetFrontendSecurityChecksEnabled gets a reference to the given []EnumF5dfa531fb3e4e3c30dbe59e58d11d44 and assigns it to the FrontendSecurityChecksEnabled field.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrScan) SetFrontendSecurityChecksEnabled(v []EnumF5dfa531fb3e4e3c30dbe59e58d11d44) {
+// SetFrontendSecurityChecksEnabled gets a reference to the given []ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESSCANPROPERTIESFRONTENDSECURITYCHECKSENABLEDITEMS and assigns it to the FrontendSecurityChecksEnabled field.
+func (o *CreateDastRestProfileRequestConfigurationJsonStrScan) SetFrontendSecurityChecksEnabled(v []ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESSCANPROPERTIESFRONTENDSECURITYCHECKSENABLEDITEMS) {
 	o.FrontendSecurityChecksEnabled = v
 }
 

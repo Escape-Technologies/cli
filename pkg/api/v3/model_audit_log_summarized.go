@@ -25,7 +25,7 @@ type AuditLogSummarized struct {
 	// The action of the audit log
 	Action string `json:"action"`
 	// The actor of the audit log
-	Actor string `json:"actor"`
+	Actor *string `json:"actor,omitempty"`
 	// The date of the audit log
 	Date string `json:"date"`
 	// The target of the audit log
@@ -41,11 +41,10 @@ type _AuditLogSummarized AuditLogSummarized
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAuditLogSummarized(id string, action string, actor string, date string, target string, title string) *AuditLogSummarized {
+func NewAuditLogSummarized(id string, action string, date string, target string, title string) *AuditLogSummarized {
 	this := AuditLogSummarized{}
 	this.Id = id
 	this.Action = action
-	this.Actor = actor
 	this.Date = date
 	this.Target = target
 	this.Title = title
@@ -108,28 +107,36 @@ func (o *AuditLogSummarized) SetAction(v string) {
 	o.Action = v
 }
 
-// GetActor returns the Actor field value
+// GetActor returns the Actor field value if set, zero value otherwise.
 func (o *AuditLogSummarized) GetActor() string {
-	if o == nil {
+	if o == nil || IsNil(o.Actor) {
 		var ret string
 		return ret
 	}
-
-	return o.Actor
+	return *o.Actor
 }
 
-// GetActorOk returns a tuple with the Actor field value
+// GetActorOk returns a tuple with the Actor field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AuditLogSummarized) GetActorOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Actor) {
 		return nil, false
 	}
-	return &o.Actor, true
+	return o.Actor, true
 }
 
-// SetActor sets field value
+// HasActor returns a boolean if a field has been set.
+func (o *AuditLogSummarized) HasActor() bool {
+	if o != nil && !IsNil(o.Actor) {
+		return true
+	}
+
+	return false
+}
+
+// SetActor gets a reference to the given string and assigns it to the Actor field.
 func (o *AuditLogSummarized) SetActor(v string) {
-	o.Actor = v
+	o.Actor = &v
 }
 
 // GetDate returns the Date field value
@@ -216,7 +223,9 @@ func (o AuditLogSummarized) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["action"] = o.Action
-	toSerialize["actor"] = o.Actor
+	if !IsNil(o.Actor) {
+		toSerialize["actor"] = o.Actor
+	}
 	toSerialize["date"] = o.Date
 	toSerialize["target"] = o.Target
 	toSerialize["title"] = o.Title
@@ -235,7 +244,6 @@ func (o *AuditLogSummarized) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"id",
 		"action",
-		"actor",
 		"date",
 		"target",
 		"title",

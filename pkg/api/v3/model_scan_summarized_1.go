@@ -27,9 +27,9 @@ type ScanSummarized1 struct {
 	// The date and time the scan was created
 	CreatedAt string `json:"createdAt"`
 	// The date and time the scan was finished
-	FinishedAt string `json:"finishedAt"`
+	FinishedAt *string `json:"finishedAt,omitempty"`
 	// The score of the scan
-	Score float32 `json:"score"`
+	Score *float32 `json:"score,omitempty"`
 	// The duration of the scan
 	Duration float32 `json:"duration"`
 	// The progress ratio of the scan
@@ -39,9 +39,9 @@ type ScanSummarized1 struct {
 	// The kind of the scan
 	Kind string `json:"kind"`
 	// The commit hash of the scan
-	CommitHash string `json:"commitHash"`
+	CommitHash *string `json:"commitHash,omitempty"`
 	// The commit branch of the scan
-	CommitBranch string `json:"commitBranch"`
+	CommitBranch *string `json:"commitBranch,omitempty"`
 	Links ScanSummarizedLinks `json:"links"`
 	AdditionalProperties map[string]interface{}
 }
@@ -52,19 +52,15 @@ type _ScanSummarized1 ScanSummarized1
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewScanSummarized1(id string, status string, createdAt string, finishedAt string, score float32, duration float32, progressRatio float32, initiator string, kind string, commitHash string, commitBranch string, links ScanSummarizedLinks) *ScanSummarized1 {
+func NewScanSummarized1(id string, status string, createdAt string, duration float32, progressRatio float32, initiator string, kind string, links ScanSummarizedLinks) *ScanSummarized1 {
 	this := ScanSummarized1{}
 	this.Id = id
 	this.Status = status
 	this.CreatedAt = createdAt
-	this.FinishedAt = finishedAt
-	this.Score = score
 	this.Duration = duration
 	this.ProgressRatio = progressRatio
 	this.Initiator = initiator
 	this.Kind = kind
-	this.CommitHash = commitHash
-	this.CommitBranch = commitBranch
 	this.Links = links
 	return &this
 }
@@ -149,52 +145,68 @@ func (o *ScanSummarized1) SetCreatedAt(v string) {
 	o.CreatedAt = v
 }
 
-// GetFinishedAt returns the FinishedAt field value
+// GetFinishedAt returns the FinishedAt field value if set, zero value otherwise.
 func (o *ScanSummarized1) GetFinishedAt() string {
-	if o == nil {
+	if o == nil || IsNil(o.FinishedAt) {
 		var ret string
 		return ret
 	}
-
-	return o.FinishedAt
+	return *o.FinishedAt
 }
 
-// GetFinishedAtOk returns a tuple with the FinishedAt field value
+// GetFinishedAtOk returns a tuple with the FinishedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ScanSummarized1) GetFinishedAtOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.FinishedAt) {
 		return nil, false
 	}
-	return &o.FinishedAt, true
+	return o.FinishedAt, true
 }
 
-// SetFinishedAt sets field value
+// HasFinishedAt returns a boolean if a field has been set.
+func (o *ScanSummarized1) HasFinishedAt() bool {
+	if o != nil && !IsNil(o.FinishedAt) {
+		return true
+	}
+
+	return false
+}
+
+// SetFinishedAt gets a reference to the given string and assigns it to the FinishedAt field.
 func (o *ScanSummarized1) SetFinishedAt(v string) {
-	o.FinishedAt = v
+	o.FinishedAt = &v
 }
 
-// GetScore returns the Score field value
+// GetScore returns the Score field value if set, zero value otherwise.
 func (o *ScanSummarized1) GetScore() float32 {
-	if o == nil {
+	if o == nil || IsNil(o.Score) {
 		var ret float32
 		return ret
 	}
-
-	return o.Score
+	return *o.Score
 }
 
-// GetScoreOk returns a tuple with the Score field value
+// GetScoreOk returns a tuple with the Score field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ScanSummarized1) GetScoreOk() (*float32, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Score) {
 		return nil, false
 	}
-	return &o.Score, true
+	return o.Score, true
 }
 
-// SetScore sets field value
+// HasScore returns a boolean if a field has been set.
+func (o *ScanSummarized1) HasScore() bool {
+	if o != nil && !IsNil(o.Score) {
+		return true
+	}
+
+	return false
+}
+
+// SetScore gets a reference to the given float32 and assigns it to the Score field.
 func (o *ScanSummarized1) SetScore(v float32) {
-	o.Score = v
+	o.Score = &v
 }
 
 // GetDuration returns the Duration field value
@@ -293,52 +305,68 @@ func (o *ScanSummarized1) SetKind(v string) {
 	o.Kind = v
 }
 
-// GetCommitHash returns the CommitHash field value
+// GetCommitHash returns the CommitHash field value if set, zero value otherwise.
 func (o *ScanSummarized1) GetCommitHash() string {
-	if o == nil {
+	if o == nil || IsNil(o.CommitHash) {
 		var ret string
 		return ret
 	}
-
-	return o.CommitHash
+	return *o.CommitHash
 }
 
-// GetCommitHashOk returns a tuple with the CommitHash field value
+// GetCommitHashOk returns a tuple with the CommitHash field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ScanSummarized1) GetCommitHashOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.CommitHash) {
 		return nil, false
 	}
-	return &o.CommitHash, true
+	return o.CommitHash, true
 }
 
-// SetCommitHash sets field value
+// HasCommitHash returns a boolean if a field has been set.
+func (o *ScanSummarized1) HasCommitHash() bool {
+	if o != nil && !IsNil(o.CommitHash) {
+		return true
+	}
+
+	return false
+}
+
+// SetCommitHash gets a reference to the given string and assigns it to the CommitHash field.
 func (o *ScanSummarized1) SetCommitHash(v string) {
-	o.CommitHash = v
+	o.CommitHash = &v
 }
 
-// GetCommitBranch returns the CommitBranch field value
+// GetCommitBranch returns the CommitBranch field value if set, zero value otherwise.
 func (o *ScanSummarized1) GetCommitBranch() string {
-	if o == nil {
+	if o == nil || IsNil(o.CommitBranch) {
 		var ret string
 		return ret
 	}
-
-	return o.CommitBranch
+	return *o.CommitBranch
 }
 
-// GetCommitBranchOk returns a tuple with the CommitBranch field value
+// GetCommitBranchOk returns a tuple with the CommitBranch field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ScanSummarized1) GetCommitBranchOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.CommitBranch) {
 		return nil, false
 	}
-	return &o.CommitBranch, true
+	return o.CommitBranch, true
 }
 
-// SetCommitBranch sets field value
+// HasCommitBranch returns a boolean if a field has been set.
+func (o *ScanSummarized1) HasCommitBranch() bool {
+	if o != nil && !IsNil(o.CommitBranch) {
+		return true
+	}
+
+	return false
+}
+
+// SetCommitBranch gets a reference to the given string and assigns it to the CommitBranch field.
 func (o *ScanSummarized1) SetCommitBranch(v string) {
-	o.CommitBranch = v
+	o.CommitBranch = &v
 }
 
 // GetLinks returns the Links field value
@@ -378,14 +406,22 @@ func (o ScanSummarized1) ToMap() (map[string]interface{}, error) {
 	toSerialize["id"] = o.Id
 	toSerialize["status"] = o.Status
 	toSerialize["createdAt"] = o.CreatedAt
-	toSerialize["finishedAt"] = o.FinishedAt
-	toSerialize["score"] = o.Score
+	if !IsNil(o.FinishedAt) {
+		toSerialize["finishedAt"] = o.FinishedAt
+	}
+	if !IsNil(o.Score) {
+		toSerialize["score"] = o.Score
+	}
 	toSerialize["duration"] = o.Duration
 	toSerialize["progressRatio"] = o.ProgressRatio
 	toSerialize["initiator"] = o.Initiator
 	toSerialize["kind"] = o.Kind
-	toSerialize["commitHash"] = o.CommitHash
-	toSerialize["commitBranch"] = o.CommitBranch
+	if !IsNil(o.CommitHash) {
+		toSerialize["commitHash"] = o.CommitHash
+	}
+	if !IsNil(o.CommitBranch) {
+		toSerialize["commitBranch"] = o.CommitBranch
+	}
 	toSerialize["links"] = o.Links
 
 	for key, value := range o.AdditionalProperties {
@@ -403,14 +439,10 @@ func (o *ScanSummarized1) UnmarshalJSON(data []byte) (err error) {
 		"id",
 		"status",
 		"createdAt",
-		"finishedAt",
-		"score",
 		"duration",
 		"progressRatio",
 		"initiator",
 		"kind",
-		"commitHash",
-		"commitBranch",
 		"links",
 	}
 

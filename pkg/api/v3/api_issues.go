@@ -17,6 +17,7 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"reflect"
 )
 
 
@@ -282,7 +283,8 @@ type ApiListIssuesRequest struct {
 	ApiService *IssuesAPIService
 	cursor *string
 	size *int
-	sort *ListProfilesSortParameter
+	sortType *string
+	sortDirection *string
 	profileIds *ListIssuesProfileIdsParameter
 	assetIds *ListProfilesAssetIdsParameter
 	domains *ListProfilesDomainsParameter
@@ -292,11 +294,11 @@ type ApiListIssuesRequest struct {
 	tagsIds *ListProfilesTagIdsParameter
 	search *string
 	jiraTicket *string
-	risks *string
-	assetClasses *string
-	scannerKinds *string
-	severities *string
-	status *string
+	risks *[]string
+	assetClasses *[]string
+	scannerKinds *[]string
+	severities *[]string
+	status *[]string
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
@@ -311,8 +313,15 @@ func (r ApiListIssuesRequest) Size(size int) ApiListIssuesRequest {
 	return r
 }
 
-func (r ApiListIssuesRequest) Sort(sort ListProfilesSortParameter) ApiListIssuesRequest {
-	r.sort = &sort
+// The type to sort by
+func (r ApiListIssuesRequest) SortType(sortType string) ApiListIssuesRequest {
+	r.sortType = &sortType
+	return r
+}
+
+// The direction to sort by
+func (r ApiListIssuesRequest) SortDirection(sortDirection string) ApiListIssuesRequest {
+	r.sortDirection = &sortDirection
 	return r
 }
 
@@ -371,31 +380,31 @@ func (r ApiListIssuesRequest) JiraTicket(jiraTicket string) ApiListIssuesRequest
 }
 
 // Filter by risk types
-func (r ApiListIssuesRequest) Risks(risks string) ApiListIssuesRequest {
+func (r ApiListIssuesRequest) Risks(risks []string) ApiListIssuesRequest {
 	r.risks = &risks
 	return r
 }
 
 // Filter by asset classes
-func (r ApiListIssuesRequest) AssetClasses(assetClasses string) ApiListIssuesRequest {
+func (r ApiListIssuesRequest) AssetClasses(assetClasses []string) ApiListIssuesRequest {
 	r.assetClasses = &assetClasses
 	return r
 }
 
 // Filter by scanner kinds
-func (r ApiListIssuesRequest) ScannerKinds(scannerKinds string) ApiListIssuesRequest {
+func (r ApiListIssuesRequest) ScannerKinds(scannerKinds []string) ApiListIssuesRequest {
 	r.scannerKinds = &scannerKinds
 	return r
 }
 
 // Filter by issue severities
-func (r ApiListIssuesRequest) Severities(severities string) ApiListIssuesRequest {
+func (r ApiListIssuesRequest) Severities(severities []string) ApiListIssuesRequest {
 	r.severities = &severities
 	return r
 }
 
 // Filter by issue status
-func (r ApiListIssuesRequest) Status(status string) ApiListIssuesRequest {
+func (r ApiListIssuesRequest) Status(status []string) ApiListIssuesRequest {
 	r.status = &status
 	return r
 }
@@ -449,8 +458,14 @@ func (a *IssuesAPIService) ListIssuesExecute(r ApiListIssuesRequest) (*ListIssue
 		var defaultValue int = 50
 		r.size = &defaultValue
 	}
-	if r.sort != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "sort", r.sort, "form", "")
+	if r.sortType != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortType", r.sortType, "form", "")
+	}
+	if r.sortDirection != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
+	} else {
+		var defaultValue string = "asc"
+		r.sortDirection = &defaultValue
 	}
 	if r.profileIds != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "profileIds", r.profileIds, "form", "")
@@ -480,19 +495,59 @@ func (a *IssuesAPIService) ListIssuesExecute(r ApiListIssuesRequest) (*ListIssue
 		parameterAddToHeaderOrQuery(localVarQueryParams, "jiraTicket", r.jiraTicket, "form", "")
 	}
 	if r.risks != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "risks", r.risks, "form", "")
+		t := *r.risks
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "risks", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "risks", t, "form", "multi")
+		}
 	}
 	if r.assetClasses != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "assetClasses", r.assetClasses, "form", "")
+		t := *r.assetClasses
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "assetClasses", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "assetClasses", t, "form", "multi")
+		}
 	}
 	if r.scannerKinds != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "scannerKinds", r.scannerKinds, "form", "")
+		t := *r.scannerKinds
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "scannerKinds", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "scannerKinds", t, "form", "multi")
+		}
 	}
 	if r.severities != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "severities", r.severities, "form", "")
+		t := *r.severities
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "severities", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "severities", t, "form", "multi")
+		}
 	}
 	if r.status != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "status", r.status, "form", "")
+		t := *r.status
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "status", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "status", t, "form", "multi")
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

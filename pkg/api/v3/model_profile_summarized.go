@@ -27,11 +27,11 @@ type ProfileSummarized struct {
 	// The date and time the profile was created
 	CreatedAt string `json:"createdAt"`
 	// The initiators of the profile
-	Initiators []Enum2c20635ab94c5d403a582bcda248706d `json:"initiators"`
+	Initiators []ENUMPROPERTIESDATAITEMSPROPERTIESINITIATORSITEMS `json:"initiators"`
 	// The cron of the profile
-	Cron string `json:"cron"`
-	Asset AssetDetailed `json:"asset"`
-	Links ProfileSummarizedLinks `json:"links"`
+	Cron                 *string                `json:"cron,omitempty"`
+	Asset                AssetDetailed          `json:"asset"`
+	Links                ProfileSummarizedLinks `json:"links"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -41,13 +41,12 @@ type _ProfileSummarized ProfileSummarized
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProfileSummarized(id string, name string, createdAt string, initiators []Enum2c20635ab94c5d403a582bcda248706d, cron string, asset AssetDetailed, links ProfileSummarizedLinks) *ProfileSummarized {
+func NewProfileSummarized(id string, name string, createdAt string, initiators []ENUMPROPERTIESDATAITEMSPROPERTIESINITIATORSITEMS, asset AssetDetailed, links ProfileSummarizedLinks) *ProfileSummarized {
 	this := ProfileSummarized{}
 	this.Id = id
 	this.Name = name
 	this.CreatedAt = createdAt
 	this.Initiators = initiators
-	this.Cron = cron
 	this.Asset = asset
 	this.Links = links
 	return &this
@@ -115,7 +114,6 @@ func (o *ProfileSummarized) GetCreatedAt() string {
 		var ret string
 		return ret
 	}
-
 	return o.CreatedAt
 }
 
@@ -134,9 +132,9 @@ func (o *ProfileSummarized) SetCreatedAt(v string) {
 }
 
 // GetInitiators returns the Initiators field value
-func (o *ProfileSummarized) GetInitiators() []Enum2c20635ab94c5d403a582bcda248706d {
+func (o *ProfileSummarized) GetInitiators() []ENUMPROPERTIESDATAITEMSPROPERTIESINITIATORSITEMS {
 	if o == nil {
-		var ret []Enum2c20635ab94c5d403a582bcda248706d
+		var ret []ENUMPROPERTIESDATAITEMSPROPERTIESINITIATORSITEMS
 		return ret
 	}
 
@@ -145,7 +143,7 @@ func (o *ProfileSummarized) GetInitiators() []Enum2c20635ab94c5d403a582bcda24870
 
 // GetInitiatorsOk returns a tuple with the Initiators field value
 // and a boolean to check if the value has been set.
-func (o *ProfileSummarized) GetInitiatorsOk() ([]Enum2c20635ab94c5d403a582bcda248706d, bool) {
+func (o *ProfileSummarized) GetInitiatorsOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESINITIATORSITEMS, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -153,32 +151,40 @@ func (o *ProfileSummarized) GetInitiatorsOk() ([]Enum2c20635ab94c5d403a582bcda24
 }
 
 // SetInitiators sets field value
-func (o *ProfileSummarized) SetInitiators(v []Enum2c20635ab94c5d403a582bcda248706d) {
+func (o *ProfileSummarized) SetInitiators(v []ENUMPROPERTIESDATAITEMSPROPERTIESINITIATORSITEMS) {
 	o.Initiators = v
 }
 
-// GetCron returns the Cron field value
+// GetCron returns the Cron field value if set, zero value otherwise.
 func (o *ProfileSummarized) GetCron() string {
-	if o == nil {
+	if o == nil || IsNil(o.Cron) {
 		var ret string
 		return ret
 	}
-
-	return o.Cron
+	return *o.Cron
 }
 
-// GetCronOk returns a tuple with the Cron field value
+// GetCronOk returns a tuple with the Cron field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ProfileSummarized) GetCronOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Cron) {
 		return nil, false
 	}
-	return &o.Cron, true
+	return o.Cron, true
 }
 
-// SetCron sets field value
+// HasCron returns a boolean if a field has been set.
+func (o *ProfileSummarized) HasCron() bool {
+	if o != nil && !IsNil(o.Cron) {
+		return true
+	}
+
+	return false
+}
+
+// SetCron gets a reference to the given string and assigns it to the Cron field.
 func (o *ProfileSummarized) SetCron(v string) {
-	o.Cron = v
+	o.Cron = &v
 }
 
 // GetAsset returns the Asset field value
@@ -230,7 +236,7 @@ func (o *ProfileSummarized) SetLinks(v ProfileSummarizedLinks) {
 }
 
 func (o ProfileSummarized) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -243,7 +249,9 @@ func (o ProfileSummarized) ToMap() (map[string]interface{}, error) {
 	toSerialize["name"] = o.Name
 	toSerialize["createdAt"] = o.CreatedAt
 	toSerialize["initiators"] = o.Initiators
-	toSerialize["cron"] = o.Cron
+	if !IsNil(o.Cron) {
+		toSerialize["cron"] = o.Cron
+	}
 	toSerialize["asset"] = o.Asset
 	toSerialize["links"] = o.Links
 
@@ -263,7 +271,6 @@ func (o *ProfileSummarized) UnmarshalJSON(data []byte) (err error) {
 		"name",
 		"createdAt",
 		"initiators",
-		"cron",
 		"asset",
 		"links",
 	}
@@ -273,10 +280,10 @@ func (o *ProfileSummarized) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -343,5 +350,3 @@ func (v *NullableProfileSummarized) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -22,7 +22,8 @@ var _ MappedNullable = &AssetHostSummarized{}
 type AssetHostSummarized struct {
 	// The address of the asset host
 	Address string `json:"address"`
-	Type EnumB19d734396f7b72a94c996eabb2db968 `json:"type"`
+	// The type of the asset host
+	Type string `json:"type"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -32,7 +33,7 @@ type _AssetHostSummarized AssetHostSummarized
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAssetHostSummarized(address string, type_ EnumB19d734396f7b72a94c996eabb2db968) *AssetHostSummarized {
+func NewAssetHostSummarized(address string, type_ string) *AssetHostSummarized {
 	this := AssetHostSummarized{}
 	this.Address = address
 	this.Type = type_
@@ -72,9 +73,9 @@ func (o *AssetHostSummarized) SetAddress(v string) {
 }
 
 // GetType returns the Type field value
-func (o *AssetHostSummarized) GetType() EnumB19d734396f7b72a94c996eabb2db968 {
+func (o *AssetHostSummarized) GetType() string {
 	if o == nil {
-		var ret EnumB19d734396f7b72a94c996eabb2db968
+		var ret string
 		return ret
 	}
 
@@ -83,7 +84,7 @@ func (o *AssetHostSummarized) GetType() EnumB19d734396f7b72a94c996eabb2db968 {
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *AssetHostSummarized) GetTypeOk() (*EnumB19d734396f7b72a94c996eabb2db968, bool) {
+func (o *AssetHostSummarized) GetTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -91,7 +92,7 @@ func (o *AssetHostSummarized) GetTypeOk() (*EnumB19d734396f7b72a94c996eabb2db968
 }
 
 // SetType sets field value
-func (o *AssetHostSummarized) SetType(v EnumB19d734396f7b72a94c996eabb2db968) {
+func (o *AssetHostSummarized) SetType(v string) {
 	o.Type = v
 }
 

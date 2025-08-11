@@ -20,7 +20,7 @@ var _ MappedNullable = &CreateASMDNSProfile400Response{}
 
 // CreateASMDNSProfile400Response struct for CreateASMDNSProfile400Response
 type CreateASMDNSProfile400Response struct {
-	Message EnumBADREQUEST `json:"message"`
+	Message string `json:"message"`
 	Details string `json:"details"`
 	AdditionalProperties map[string]interface{}
 }
@@ -31,7 +31,7 @@ type _CreateASMDNSProfile400Response CreateASMDNSProfile400Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateASMDNSProfile400Response(message EnumBADREQUEST, details string) *CreateASMDNSProfile400Response {
+func NewCreateASMDNSProfile400Response(message string, details string) *CreateASMDNSProfile400Response {
 	this := CreateASMDNSProfile400Response{}
 	this.Message = message
 	this.Details = details
@@ -47,9 +47,9 @@ func NewCreateASMDNSProfile400ResponseWithDefaults() *CreateASMDNSProfile400Resp
 }
 
 // GetMessage returns the Message field value
-func (o *CreateASMDNSProfile400Response) GetMessage() EnumBADREQUEST {
+func (o *CreateASMDNSProfile400Response) GetMessage() string {
 	if o == nil {
-		var ret EnumBADREQUEST
+		var ret string
 		return ret
 	}
 
@@ -58,7 +58,7 @@ func (o *CreateASMDNSProfile400Response) GetMessage() EnumBADREQUEST {
 
 // GetMessageOk returns a tuple with the Message field value
 // and a boolean to check if the value has been set.
-func (o *CreateASMDNSProfile400Response) GetMessageOk() (*EnumBADREQUEST, bool) {
+func (o *CreateASMDNSProfile400Response) GetMessageOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -66,7 +66,7 @@ func (o *CreateASMDNSProfile400Response) GetMessageOk() (*EnumBADREQUEST, bool) 
 }
 
 // SetMessage sets field value
-func (o *CreateASMDNSProfile400Response) SetMessage(v EnumBADREQUEST) {
+func (o *CreateASMDNSProfile400Response) SetMessage(v string) {
 	o.Message = v
 }
 
