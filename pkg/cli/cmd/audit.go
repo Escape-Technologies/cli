@@ -67,5 +67,5 @@ func init() {
 	rootCmd.AddCommand(auditCmd)
 	auditCmd.Flags().StringVarP(&auditCmdDateFrom, "date-from", "f", auditCmdDateFrom, "Filter by date from (ISO 8601)")
 	auditCmd.Flags().StringVarP(&auditCmdDateTo, "date-to", "t", auditCmdDateTo, "Filter by date to (ISO 8601)")
-	auditCmd.Flags().StringVarP(&auditCmdEventType, "event-type", "e", "", "Filter by event type: (scan.started, scan.scheduled)")
+	auditCmd.Flags().StringVarP(&auditCmdEventType, "event-type", "e", "", "Filter by event type: (scan.scheduled, scan.started, scan.finished)")
 }
