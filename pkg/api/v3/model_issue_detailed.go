@@ -24,30 +24,33 @@ type IssueDetailed struct {
 	Id string `json:"id"`
 	// The name of the issue
 	Name string `json:"name"`
-	Category EnumDcc3623d9a53d3b28806d473bba5c6d7 `json:"category"`
-	Severity Enum5dfd39f2a10625d7f95d7bff8a1402c3 `json:"severity"`
-	Status EnumA1f51229f2b334ae6e9ff63b66c5a598 `json:"status"`
+	// The category of the issue
+	Category string `json:"category"`
+	// The severity level of the issue
+	Severity string `json:"severity"`
+	// The current status of the issue
+	Status string `json:"status"`
 	// The context of the issue
 	Context string `json:"context"`
 	// Array of risk types associated with the issue
-	Risks []Enum1ea54cdf1f4480ebf83fc671185f5693 `json:"risks"`
+	Risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS `json:"risks"`
 	// Unique identifier for the alert
 	AlertUid string `json:"alertUid"`
 	// When the issue was first created
 	CreatedAt string `json:"createdAt"`
 	Asset AssetSummarized `json:"asset"`
 	// ID of the last scan where this issue was seen
-	LastSeenScanId string `json:"lastSeenScanId"`
+	LastSeenScanId *string `json:"lastSeenScanId,omitempty"`
 	// ID of the first scan where this issue was seen
-	FirstSeenScanId string `json:"firstSeenScanId"`
+	FirstSeenScanId *string `json:"firstSeenScanId,omitempty"`
 	// ID of the custom rule if this is a custom issue
-	CustomRuleId string `json:"customRuleId"`
+	CustomRuleId *string `json:"customRuleId,omitempty"`
 	// AI-generated remediation for the issue
-	AiRemediation string `json:"aiRemediation"`
+	AiRemediation *string `json:"aiRemediation,omitempty"`
 	// Framework used for AI remediation
 	AiRemediationFramework string `json:"aiRemediationFramework"`
 	// URL to the associated Jira ticket if exists
-	TicketUrl string `json:"ticketUrl"`
+	TicketUrl *string `json:"ticketUrl,omitempty"`
 	Links IssueSummarizedLinks `json:"links"`
 	AdditionalProperties map[string]interface{}
 }
@@ -58,7 +61,7 @@ type _IssueDetailed IssueDetailed
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIssueDetailed(id string, name string, category EnumDcc3623d9a53d3b28806d473bba5c6d7, severity Enum5dfd39f2a10625d7f95d7bff8a1402c3, status EnumA1f51229f2b334ae6e9ff63b66c5a598, context string, risks []Enum1ea54cdf1f4480ebf83fc671185f5693, alertUid string, createdAt string, asset AssetSummarized, lastSeenScanId string, firstSeenScanId string, customRuleId string, aiRemediation string, aiRemediationFramework string, ticketUrl string, links IssueSummarizedLinks) *IssueDetailed {
+func NewIssueDetailed(id string, name string, category string, severity string, status string, context string, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, alertUid string, createdAt string, asset AssetSummarized, aiRemediationFramework string, links IssueSummarizedLinks) *IssueDetailed {
 	this := IssueDetailed{}
 	this.Id = id
 	this.Name = name
@@ -70,12 +73,7 @@ func NewIssueDetailed(id string, name string, category EnumDcc3623d9a53d3b28806d
 	this.AlertUid = alertUid
 	this.CreatedAt = createdAt
 	this.Asset = asset
-	this.LastSeenScanId = lastSeenScanId
-	this.FirstSeenScanId = firstSeenScanId
-	this.CustomRuleId = customRuleId
-	this.AiRemediation = aiRemediation
 	this.AiRemediationFramework = aiRemediationFramework
-	this.TicketUrl = ticketUrl
 	this.Links = links
 	return &this
 }
@@ -137,9 +135,9 @@ func (o *IssueDetailed) SetName(v string) {
 }
 
 // GetCategory returns the Category field value
-func (o *IssueDetailed) GetCategory() EnumDcc3623d9a53d3b28806d473bba5c6d7 {
+func (o *IssueDetailed) GetCategory() string {
 	if o == nil {
-		var ret EnumDcc3623d9a53d3b28806d473bba5c6d7
+		var ret string
 		return ret
 	}
 
@@ -148,7 +146,7 @@ func (o *IssueDetailed) GetCategory() EnumDcc3623d9a53d3b28806d473bba5c6d7 {
 
 // GetCategoryOk returns a tuple with the Category field value
 // and a boolean to check if the value has been set.
-func (o *IssueDetailed) GetCategoryOk() (*EnumDcc3623d9a53d3b28806d473bba5c6d7, bool) {
+func (o *IssueDetailed) GetCategoryOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -156,14 +154,14 @@ func (o *IssueDetailed) GetCategoryOk() (*EnumDcc3623d9a53d3b28806d473bba5c6d7, 
 }
 
 // SetCategory sets field value
-func (o *IssueDetailed) SetCategory(v EnumDcc3623d9a53d3b28806d473bba5c6d7) {
+func (o *IssueDetailed) SetCategory(v string) {
 	o.Category = v
 }
 
 // GetSeverity returns the Severity field value
-func (o *IssueDetailed) GetSeverity() Enum5dfd39f2a10625d7f95d7bff8a1402c3 {
+func (o *IssueDetailed) GetSeverity() string {
 	if o == nil {
-		var ret Enum5dfd39f2a10625d7f95d7bff8a1402c3
+		var ret string
 		return ret
 	}
 
@@ -172,7 +170,7 @@ func (o *IssueDetailed) GetSeverity() Enum5dfd39f2a10625d7f95d7bff8a1402c3 {
 
 // GetSeverityOk returns a tuple with the Severity field value
 // and a boolean to check if the value has been set.
-func (o *IssueDetailed) GetSeverityOk() (*Enum5dfd39f2a10625d7f95d7bff8a1402c3, bool) {
+func (o *IssueDetailed) GetSeverityOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -180,14 +178,14 @@ func (o *IssueDetailed) GetSeverityOk() (*Enum5dfd39f2a10625d7f95d7bff8a1402c3, 
 }
 
 // SetSeverity sets field value
-func (o *IssueDetailed) SetSeverity(v Enum5dfd39f2a10625d7f95d7bff8a1402c3) {
+func (o *IssueDetailed) SetSeverity(v string) {
 	o.Severity = v
 }
 
 // GetStatus returns the Status field value
-func (o *IssueDetailed) GetStatus() EnumA1f51229f2b334ae6e9ff63b66c5a598 {
+func (o *IssueDetailed) GetStatus() string {
 	if o == nil {
-		var ret EnumA1f51229f2b334ae6e9ff63b66c5a598
+		var ret string
 		return ret
 	}
 
@@ -196,7 +194,7 @@ func (o *IssueDetailed) GetStatus() EnumA1f51229f2b334ae6e9ff63b66c5a598 {
 
 // GetStatusOk returns a tuple with the Status field value
 // and a boolean to check if the value has been set.
-func (o *IssueDetailed) GetStatusOk() (*EnumA1f51229f2b334ae6e9ff63b66c5a598, bool) {
+func (o *IssueDetailed) GetStatusOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -204,7 +202,7 @@ func (o *IssueDetailed) GetStatusOk() (*EnumA1f51229f2b334ae6e9ff63b66c5a598, bo
 }
 
 // SetStatus sets field value
-func (o *IssueDetailed) SetStatus(v EnumA1f51229f2b334ae6e9ff63b66c5a598) {
+func (o *IssueDetailed) SetStatus(v string) {
 	o.Status = v
 }
 
@@ -233,9 +231,9 @@ func (o *IssueDetailed) SetContext(v string) {
 }
 
 // GetRisks returns the Risks field value
-func (o *IssueDetailed) GetRisks() []Enum1ea54cdf1f4480ebf83fc671185f5693 {
+func (o *IssueDetailed) GetRisks() []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS {
 	if o == nil {
-		var ret []Enum1ea54cdf1f4480ebf83fc671185f5693
+		var ret []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS
 		return ret
 	}
 
@@ -244,7 +242,7 @@ func (o *IssueDetailed) GetRisks() []Enum1ea54cdf1f4480ebf83fc671185f5693 {
 
 // GetRisksOk returns a tuple with the Risks field value
 // and a boolean to check if the value has been set.
-func (o *IssueDetailed) GetRisksOk() ([]Enum1ea54cdf1f4480ebf83fc671185f5693, bool) {
+func (o *IssueDetailed) GetRisksOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -252,7 +250,7 @@ func (o *IssueDetailed) GetRisksOk() ([]Enum1ea54cdf1f4480ebf83fc671185f5693, bo
 }
 
 // SetRisks sets field value
-func (o *IssueDetailed) SetRisks(v []Enum1ea54cdf1f4480ebf83fc671185f5693) {
+func (o *IssueDetailed) SetRisks(v []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS) {
 	o.Risks = v
 }
 
@@ -328,100 +326,132 @@ func (o *IssueDetailed) SetAsset(v AssetSummarized) {
 	o.Asset = v
 }
 
-// GetLastSeenScanId returns the LastSeenScanId field value
+// GetLastSeenScanId returns the LastSeenScanId field value if set, zero value otherwise.
 func (o *IssueDetailed) GetLastSeenScanId() string {
-	if o == nil {
+	if o == nil || IsNil(o.LastSeenScanId) {
 		var ret string
 		return ret
 	}
-
-	return o.LastSeenScanId
+	return *o.LastSeenScanId
 }
 
-// GetLastSeenScanIdOk returns a tuple with the LastSeenScanId field value
+// GetLastSeenScanIdOk returns a tuple with the LastSeenScanId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IssueDetailed) GetLastSeenScanIdOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.LastSeenScanId) {
 		return nil, false
 	}
-	return &o.LastSeenScanId, true
+	return o.LastSeenScanId, true
 }
 
-// SetLastSeenScanId sets field value
+// HasLastSeenScanId returns a boolean if a field has been set.
+func (o *IssueDetailed) HasLastSeenScanId() bool {
+	if o != nil && !IsNil(o.LastSeenScanId) {
+		return true
+	}
+
+	return false
+}
+
+// SetLastSeenScanId gets a reference to the given string and assigns it to the LastSeenScanId field.
 func (o *IssueDetailed) SetLastSeenScanId(v string) {
-	o.LastSeenScanId = v
+	o.LastSeenScanId = &v
 }
 
-// GetFirstSeenScanId returns the FirstSeenScanId field value
+// GetFirstSeenScanId returns the FirstSeenScanId field value if set, zero value otherwise.
 func (o *IssueDetailed) GetFirstSeenScanId() string {
-	if o == nil {
+	if o == nil || IsNil(o.FirstSeenScanId) {
 		var ret string
 		return ret
 	}
-
-	return o.FirstSeenScanId
+	return *o.FirstSeenScanId
 }
 
-// GetFirstSeenScanIdOk returns a tuple with the FirstSeenScanId field value
+// GetFirstSeenScanIdOk returns a tuple with the FirstSeenScanId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IssueDetailed) GetFirstSeenScanIdOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.FirstSeenScanId) {
 		return nil, false
 	}
-	return &o.FirstSeenScanId, true
+	return o.FirstSeenScanId, true
 }
 
-// SetFirstSeenScanId sets field value
+// HasFirstSeenScanId returns a boolean if a field has been set.
+func (o *IssueDetailed) HasFirstSeenScanId() bool {
+	if o != nil && !IsNil(o.FirstSeenScanId) {
+		return true
+	}
+
+	return false
+}
+
+// SetFirstSeenScanId gets a reference to the given string and assigns it to the FirstSeenScanId field.
 func (o *IssueDetailed) SetFirstSeenScanId(v string) {
-	o.FirstSeenScanId = v
+	o.FirstSeenScanId = &v
 }
 
-// GetCustomRuleId returns the CustomRuleId field value
+// GetCustomRuleId returns the CustomRuleId field value if set, zero value otherwise.
 func (o *IssueDetailed) GetCustomRuleId() string {
-	if o == nil {
+	if o == nil || IsNil(o.CustomRuleId) {
 		var ret string
 		return ret
 	}
-
-	return o.CustomRuleId
+	return *o.CustomRuleId
 }
 
-// GetCustomRuleIdOk returns a tuple with the CustomRuleId field value
+// GetCustomRuleIdOk returns a tuple with the CustomRuleId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IssueDetailed) GetCustomRuleIdOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.CustomRuleId) {
 		return nil, false
 	}
-	return &o.CustomRuleId, true
+	return o.CustomRuleId, true
 }
 
-// SetCustomRuleId sets field value
+// HasCustomRuleId returns a boolean if a field has been set.
+func (o *IssueDetailed) HasCustomRuleId() bool {
+	if o != nil && !IsNil(o.CustomRuleId) {
+		return true
+	}
+
+	return false
+}
+
+// SetCustomRuleId gets a reference to the given string and assigns it to the CustomRuleId field.
 func (o *IssueDetailed) SetCustomRuleId(v string) {
-	o.CustomRuleId = v
+	o.CustomRuleId = &v
 }
 
-// GetAiRemediation returns the AiRemediation field value
+// GetAiRemediation returns the AiRemediation field value if set, zero value otherwise.
 func (o *IssueDetailed) GetAiRemediation() string {
-	if o == nil {
+	if o == nil || IsNil(o.AiRemediation) {
 		var ret string
 		return ret
 	}
-
-	return o.AiRemediation
+	return *o.AiRemediation
 }
 
-// GetAiRemediationOk returns a tuple with the AiRemediation field value
+// GetAiRemediationOk returns a tuple with the AiRemediation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IssueDetailed) GetAiRemediationOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.AiRemediation) {
 		return nil, false
 	}
-	return &o.AiRemediation, true
+	return o.AiRemediation, true
 }
 
-// SetAiRemediation sets field value
+// HasAiRemediation returns a boolean if a field has been set.
+func (o *IssueDetailed) HasAiRemediation() bool {
+	if o != nil && !IsNil(o.AiRemediation) {
+		return true
+	}
+
+	return false
+}
+
+// SetAiRemediation gets a reference to the given string and assigns it to the AiRemediation field.
 func (o *IssueDetailed) SetAiRemediation(v string) {
-	o.AiRemediation = v
+	o.AiRemediation = &v
 }
 
 // GetAiRemediationFramework returns the AiRemediationFramework field value
@@ -448,28 +478,36 @@ func (o *IssueDetailed) SetAiRemediationFramework(v string) {
 	o.AiRemediationFramework = v
 }
 
-// GetTicketUrl returns the TicketUrl field value
+// GetTicketUrl returns the TicketUrl field value if set, zero value otherwise.
 func (o *IssueDetailed) GetTicketUrl() string {
-	if o == nil {
+	if o == nil || IsNil(o.TicketUrl) {
 		var ret string
 		return ret
 	}
-
-	return o.TicketUrl
+	return *o.TicketUrl
 }
 
-// GetTicketUrlOk returns a tuple with the TicketUrl field value
+// GetTicketUrlOk returns a tuple with the TicketUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IssueDetailed) GetTicketUrlOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.TicketUrl) {
 		return nil, false
 	}
-	return &o.TicketUrl, true
+	return o.TicketUrl, true
 }
 
-// SetTicketUrl sets field value
+// HasTicketUrl returns a boolean if a field has been set.
+func (o *IssueDetailed) HasTicketUrl() bool {
+	if o != nil && !IsNil(o.TicketUrl) {
+		return true
+	}
+
+	return false
+}
+
+// SetTicketUrl gets a reference to the given string and assigns it to the TicketUrl field.
 func (o *IssueDetailed) SetTicketUrl(v string) {
-	o.TicketUrl = v
+	o.TicketUrl = &v
 }
 
 // GetLinks returns the Links field value
@@ -516,12 +554,22 @@ func (o IssueDetailed) ToMap() (map[string]interface{}, error) {
 	toSerialize["alertUid"] = o.AlertUid
 	toSerialize["createdAt"] = o.CreatedAt
 	toSerialize["asset"] = o.Asset
-	toSerialize["lastSeenScanId"] = o.LastSeenScanId
-	toSerialize["firstSeenScanId"] = o.FirstSeenScanId
-	toSerialize["customRuleId"] = o.CustomRuleId
-	toSerialize["aiRemediation"] = o.AiRemediation
+	if !IsNil(o.LastSeenScanId) {
+		toSerialize["lastSeenScanId"] = o.LastSeenScanId
+	}
+	if !IsNil(o.FirstSeenScanId) {
+		toSerialize["firstSeenScanId"] = o.FirstSeenScanId
+	}
+	if !IsNil(o.CustomRuleId) {
+		toSerialize["customRuleId"] = o.CustomRuleId
+	}
+	if !IsNil(o.AiRemediation) {
+		toSerialize["aiRemediation"] = o.AiRemediation
+	}
 	toSerialize["aiRemediationFramework"] = o.AiRemediationFramework
-	toSerialize["ticketUrl"] = o.TicketUrl
+	if !IsNil(o.TicketUrl) {
+		toSerialize["ticketUrl"] = o.TicketUrl
+	}
 	toSerialize["links"] = o.Links
 
 	for key, value := range o.AdditionalProperties {
@@ -546,12 +594,7 @@ func (o *IssueDetailed) UnmarshalJSON(data []byte) (err error) {
 		"alertUid",
 		"createdAt",
 		"asset",
-		"lastSeenScanId",
-		"firstSeenScanId",
-		"customRuleId",
-		"aiRemediation",
 		"aiRemediationFramework",
-		"ticketUrl",
 		"links",
 	}
 

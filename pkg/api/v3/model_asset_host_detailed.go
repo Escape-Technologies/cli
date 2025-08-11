@@ -20,7 +20,7 @@ var _ MappedNullable = &AssetHostDetailed{}
 
 // AssetHostDetailed Detailed information about an asset host
 type AssetHostDetailed struct {
-	Type EnumB19d734396f7b72a94c996eabb2db968 `json:"type"`
+	Type string `json:"type"`
 	Address string `json:"address"`
 	Ips []string `json:"ips"`
 	Ports []AssetHostDetailedPortsInner `json:"ports"`
@@ -34,7 +34,7 @@ type _AssetHostDetailed AssetHostDetailed
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAssetHostDetailed(type_ EnumB19d734396f7b72a94c996eabb2db968, address string, ips []string, ports []AssetHostDetailedPortsInner, records []AssetHostDetailedRecordsInner) *AssetHostDetailed {
+func NewAssetHostDetailed(type_ string, address string, ips []string, ports []AssetHostDetailedPortsInner, records []AssetHostDetailedRecordsInner) *AssetHostDetailed {
 	this := AssetHostDetailed{}
 	this.Type = type_
 	this.Address = address
@@ -53,9 +53,9 @@ func NewAssetHostDetailedWithDefaults() *AssetHostDetailed {
 }
 
 // GetType returns the Type field value
-func (o *AssetHostDetailed) GetType() EnumB19d734396f7b72a94c996eabb2db968 {
+func (o *AssetHostDetailed) GetType() string {
 	if o == nil {
-		var ret EnumB19d734396f7b72a94c996eabb2db968
+		var ret string
 		return ret
 	}
 
@@ -64,7 +64,7 @@ func (o *AssetHostDetailed) GetType() EnumB19d734396f7b72a94c996eabb2db968 {
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *AssetHostDetailed) GetTypeOk() (*EnumB19d734396f7b72a94c996eabb2db968, bool) {
+func (o *AssetHostDetailed) GetTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -72,7 +72,7 @@ func (o *AssetHostDetailed) GetTypeOk() (*EnumB19d734396f7b72a94c996eabb2db968, 
 }
 
 // SetType sets field value
-func (o *AssetHostDetailed) SetType(v EnumB19d734396f7b72a94c996eabb2db968) {
+func (o *AssetHostDetailed) SetType(v string) {
 	o.Type = v
 }
 

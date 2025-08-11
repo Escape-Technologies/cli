@@ -2790,7 +2790,8 @@ type ApiListAssetsRequest struct {
 	ApiService *AssetsAPIService
 	cursor *string
 	size *int
-	sort *ListProfilesSortParameter
+	sortType *string
+	sortDirection *string
 	search *string
 }
 
@@ -2806,8 +2807,15 @@ func (r ApiListAssetsRequest) Size(size int) ApiListAssetsRequest {
 	return r
 }
 
-func (r ApiListAssetsRequest) Sort(sort ListProfilesSortParameter) ApiListAssetsRequest {
-	r.sort = &sort
+// The type to sort by
+func (r ApiListAssetsRequest) SortType(sortType string) ApiListAssetsRequest {
+	r.sortType = &sortType
+	return r
+}
+
+// The direction to sort by
+func (r ApiListAssetsRequest) SortDirection(sortDirection string) ApiListAssetsRequest {
+	r.sortDirection = &sortDirection
 	return r
 }
 
@@ -2866,8 +2874,14 @@ func (a *AssetsAPIService) ListAssetsExecute(r ApiListAssetsRequest) (*ListAsset
 		var defaultValue int = 50
 		r.size = &defaultValue
 	}
-	if r.sort != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "sort", r.sort, "form", "")
+	if r.sortType != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortType", r.sortType, "form", "")
+	}
+	if r.sortDirection != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
+	} else {
+		var defaultValue string = "asc"
+		r.sortDirection = &defaultValue
 	}
 	if r.search != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")

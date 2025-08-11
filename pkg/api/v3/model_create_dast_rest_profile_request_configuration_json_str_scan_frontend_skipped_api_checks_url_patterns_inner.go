@@ -19,7 +19,7 @@ var _ MappedNullable = &CreateDastRestProfileRequestConfigurationJsonStrScanFron
 
 // CreateDastRestProfileRequestConfigurationJsonStrScanFrontendSkippedApiChecksUrlPatternsInner struct for CreateDastRestProfileRequestConfigurationJsonStrScanFrontendSkippedApiChecksUrlPatternsInner
 type CreateDastRestProfileRequestConfigurationJsonStrScanFrontendSkippedApiChecksUrlPatternsInner struct {
-	Method *Enum696fc667cd43eba107ec8b85842fb743 `json:"method,omitempty"`
+	Method *string `json:"method,omitempty"`
 	UrlPattern *string `json:"url_pattern,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -44,9 +44,9 @@ func NewCreateDastRestProfileRequestConfigurationJsonStrScanFrontendSkippedApiCh
 }
 
 // GetMethod returns the Method field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrScanFrontendSkippedApiChecksUrlPatternsInner) GetMethod() Enum696fc667cd43eba107ec8b85842fb743 {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrScanFrontendSkippedApiChecksUrlPatternsInner) GetMethod() string {
 	if o == nil || IsNil(o.Method) {
-		var ret Enum696fc667cd43eba107ec8b85842fb743
+		var ret string
 		return ret
 	}
 	return *o.Method
@@ -54,7 +54,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrScanFrontendSkippedApiC
 
 // GetMethodOk returns a tuple with the Method field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrScanFrontendSkippedApiChecksUrlPatternsInner) GetMethodOk() (*Enum696fc667cd43eba107ec8b85842fb743, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrScanFrontendSkippedApiChecksUrlPatternsInner) GetMethodOk() (*string, bool) {
 	if o == nil || IsNil(o.Method) {
 		return nil, false
 	}
@@ -70,8 +70,8 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrScanFrontendSkippedApiC
 	return false
 }
 
-// SetMethod gets a reference to the given Enum696fc667cd43eba107ec8b85842fb743 and assigns it to the Method field.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrScanFrontendSkippedApiChecksUrlPatternsInner) SetMethod(v Enum696fc667cd43eba107ec8b85842fb743) {
+// SetMethod gets a reference to the given string and assigns it to the Method field.
+func (o *CreateDastRestProfileRequestConfigurationJsonStrScanFrontendSkippedApiChecksUrlPatternsInner) SetMethod(v string) {
 	o.Method = &v
 }
 

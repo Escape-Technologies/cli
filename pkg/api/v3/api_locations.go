@@ -17,6 +17,7 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"reflect"
 )
 
 
@@ -424,8 +425,11 @@ type ApiListLocationsRequest struct {
 	ApiService *LocationsAPIService
 	cursor *string
 	size *int
-	sort *ListProfilesSortParameter
+	sortType *string
+	sortDirection *string
 	search *string
+	enabled *string
+	type_ *[]string
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
@@ -440,13 +444,30 @@ func (r ApiListLocationsRequest) Size(size int) ApiListLocationsRequest {
 	return r
 }
 
-func (r ApiListLocationsRequest) Sort(sort ListProfilesSortParameter) ApiListLocationsRequest {
-	r.sort = &sort
+// The type to sort by
+func (r ApiListLocationsRequest) SortType(sortType string) ApiListLocationsRequest {
+	r.sortType = &sortType
+	return r
+}
+
+// The direction to sort by
+func (r ApiListLocationsRequest) SortDirection(sortDirection string) ApiListLocationsRequest {
+	r.sortDirection = &sortDirection
 	return r
 }
 
 func (r ApiListLocationsRequest) Search(search string) ApiListLocationsRequest {
 	r.search = &search
+	return r
+}
+
+func (r ApiListLocationsRequest) Enabled(enabled string) ApiListLocationsRequest {
+	r.enabled = &enabled
+	return r
+}
+
+func (r ApiListLocationsRequest) Type_(type_ []string) ApiListLocationsRequest {
+	r.type_ = &type_
 	return r
 }
 
@@ -499,11 +520,31 @@ func (a *LocationsAPIService) ListLocationsExecute(r ApiListLocationsRequest) (*
 		var defaultValue int = 50
 		r.size = &defaultValue
 	}
-	if r.sort != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "sort", r.sort, "form", "")
+	if r.sortType != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortType", r.sortType, "form", "")
+	}
+	if r.sortDirection != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
+	} else {
+		var defaultValue string = "asc"
+		r.sortDirection = &defaultValue
 	}
 	if r.search != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")
+	}
+	if r.enabled != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "enabled", r.enabled, "form", "")
+	}
+	if r.type_ != nil {
+		t := *r.type_
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "type", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "type", t, "form", "multi")
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

@@ -38,7 +38,8 @@ type ApiRouteDetailed struct {
 	RequestCount float32 `json:"requestCount"`
 	// The return type of the api route
 	ReturnType string `json:"returnType"`
-	Source Enum0410d7bce63db604e9e878b01274b5a3 `json:"source"`
+	// The source of the api route
+	Source string `json:"source"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -48,7 +49,7 @@ type _ApiRouteDetailed ApiRouteDetailed
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewApiRouteDetailed(blacklisted bool, createdAt string, displayName string, id string, name string, operation string, parameters map[string]string, requestCount float32, returnType string, source Enum0410d7bce63db604e9e878b01274b5a3) *ApiRouteDetailed {
+func NewApiRouteDetailed(blacklisted bool, createdAt string, displayName string, id string, name string, operation string, parameters map[string]string, requestCount float32, returnType string, source string) *ApiRouteDetailed {
 	this := ApiRouteDetailed{}
 	this.Blacklisted = blacklisted
 	this.CreatedAt = createdAt
@@ -288,9 +289,9 @@ func (o *ApiRouteDetailed) SetReturnType(v string) {
 }
 
 // GetSource returns the Source field value
-func (o *ApiRouteDetailed) GetSource() Enum0410d7bce63db604e9e878b01274b5a3 {
+func (o *ApiRouteDetailed) GetSource() string {
 	if o == nil {
-		var ret Enum0410d7bce63db604e9e878b01274b5a3
+		var ret string
 		return ret
 	}
 
@@ -299,7 +300,7 @@ func (o *ApiRouteDetailed) GetSource() Enum0410d7bce63db604e9e878b01274b5a3 {
 
 // GetSourceOk returns a tuple with the Source field value
 // and a boolean to check if the value has been set.
-func (o *ApiRouteDetailed) GetSourceOk() (*Enum0410d7bce63db604e9e878b01274b5a3, bool) {
+func (o *ApiRouteDetailed) GetSourceOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -307,7 +308,7 @@ func (o *ApiRouteDetailed) GetSourceOk() (*Enum0410d7bce63db604e9e878b01274b5a3,
 }
 
 // SetSource sets field value
-func (o *ApiRouteDetailed) SetSource(v Enum0410d7bce63db604e9e878b01274b5a3) {
+func (o *ApiRouteDetailed) SetSource(v string) {
 	o.Source = v
 }
 

@@ -27,7 +27,8 @@ type CreateDastRestProfileRequest struct {
 	ConfigurationJsonStr CreateDastRestProfileRequestConfigurationJsonStr `json:"configurationJsonStr"`
 	// The cron string
 	Cron *string `json:"cron,omitempty"`
-	Mode Enum914e857146e58d03de169dd809874be9 `json:"mode"`
+	// The mode of the profile
+	Mode string `json:"mode"`
 	// The name of the profile
 	Name string `json:"name"`
 	// The proxy ID for the profile
@@ -44,7 +45,7 @@ type _CreateDastRestProfileRequest CreateDastRestProfileRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateDastRestProfileRequest(assetId string, configurationJsonStr CreateDastRestProfileRequestConfigurationJsonStr, mode Enum914e857146e58d03de169dd809874be9, name string, schema DASTDetailed) *CreateDastRestProfileRequest {
+func NewCreateDastRestProfileRequest(assetId string, configurationJsonStr CreateDastRestProfileRequestConfigurationJsonStr, mode string, name string, schema DASTDetailed) *CreateDastRestProfileRequest {
 	this := CreateDastRestProfileRequest{}
 	this.AssetId = assetId
 	this.ConfigurationJsonStr = configurationJsonStr
@@ -175,9 +176,9 @@ func (o *CreateDastRestProfileRequest) SetCron(v string) {
 }
 
 // GetMode returns the Mode field value
-func (o *CreateDastRestProfileRequest) GetMode() Enum914e857146e58d03de169dd809874be9 {
+func (o *CreateDastRestProfileRequest) GetMode() string {
 	if o == nil {
-		var ret Enum914e857146e58d03de169dd809874be9
+		var ret string
 		return ret
 	}
 
@@ -186,7 +187,7 @@ func (o *CreateDastRestProfileRequest) GetMode() Enum914e857146e58d03de169dd8098
 
 // GetModeOk returns a tuple with the Mode field value
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequest) GetModeOk() (*Enum914e857146e58d03de169dd809874be9, bool) {
+func (o *CreateDastRestProfileRequest) GetModeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -194,7 +195,7 @@ func (o *CreateDastRestProfileRequest) GetModeOk() (*Enum914e857146e58d03de169dd
 }
 
 // SetMode sets field value
-func (o *CreateDastRestProfileRequest) SetMode(v Enum914e857146e58d03de169dd809874be9) {
+func (o *CreateDastRestProfileRequest) SetMode(v string) {
 	o.Mode = v
 }
 

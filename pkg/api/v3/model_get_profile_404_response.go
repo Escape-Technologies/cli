@@ -20,7 +20,7 @@ var _ MappedNullable = &GetProfile404Response{}
 
 // GetProfile404Response struct for GetProfile404Response
 type GetProfile404Response struct {
-	Message EnumNOTFOUND `json:"message"`
+	Message string `json:"message"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -30,7 +30,7 @@ type _GetProfile404Response GetProfile404Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetProfile404Response(message EnumNOTFOUND) *GetProfile404Response {
+func NewGetProfile404Response(message string) *GetProfile404Response {
 	this := GetProfile404Response{}
 	this.Message = message
 	return &this
@@ -45,9 +45,9 @@ func NewGetProfile404ResponseWithDefaults() *GetProfile404Response {
 }
 
 // GetMessage returns the Message field value
-func (o *GetProfile404Response) GetMessage() EnumNOTFOUND {
+func (o *GetProfile404Response) GetMessage() string {
 	if o == nil {
-		var ret EnumNOTFOUND
+		var ret string
 		return ret
 	}
 
@@ -56,7 +56,7 @@ func (o *GetProfile404Response) GetMessage() EnumNOTFOUND {
 
 // GetMessageOk returns a tuple with the Message field value
 // and a boolean to check if the value has been set.
-func (o *GetProfile404Response) GetMessageOk() (*EnumNOTFOUND, bool) {
+func (o *GetProfile404Response) GetMessageOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -64,7 +64,7 @@ func (o *GetProfile404Response) GetMessageOk() (*EnumNOTFOUND, bool) {
 }
 
 // SetMessage sets field value
-func (o *GetProfile404Response) SetMessage(v EnumNOTFOUND) {
+func (o *GetProfile404Response) SetMessage(v string) {
 	o.Message = v
 }
 

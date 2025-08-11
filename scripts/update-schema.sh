@@ -4,7 +4,6 @@
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
 VERSIONS=(
-    "v2"
     "v3"
 )
 TMP_DIR="${PROJECT_ROOT}/._openapi-generator/"
@@ -12,7 +11,7 @@ TMP_DIR="${PROJECT_ROOT}/._openapi-generator/"
 docker pull openapitools/openapi-generator-cli:latest
 docker pull python:3.12.9
 
-(
+( 
     cd "${PROJECT_ROOT}"
     for VERSION in "${VERSIONS[@]}"; do
         rm -rf "${TMP_DIR}/${VERSION}"

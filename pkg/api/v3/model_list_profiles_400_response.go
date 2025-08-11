@@ -20,7 +20,7 @@ var _ MappedNullable = &ListProfiles400Response{}
 
 // ListProfiles400Response struct for ListProfiles400Response
 type ListProfiles400Response struct {
-	Message EnumINVALIDCURSOR `json:"message"`
+	Message string `json:"message"`
 	Details string `json:"details"`
 	AdditionalProperties map[string]interface{}
 }
@@ -31,7 +31,7 @@ type _ListProfiles400Response ListProfiles400Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewListProfiles400Response(message EnumINVALIDCURSOR, details string) *ListProfiles400Response {
+func NewListProfiles400Response(message string, details string) *ListProfiles400Response {
 	this := ListProfiles400Response{}
 	this.Message = message
 	this.Details = details
@@ -47,9 +47,9 @@ func NewListProfiles400ResponseWithDefaults() *ListProfiles400Response {
 }
 
 // GetMessage returns the Message field value
-func (o *ListProfiles400Response) GetMessage() EnumINVALIDCURSOR {
+func (o *ListProfiles400Response) GetMessage() string {
 	if o == nil {
-		var ret EnumINVALIDCURSOR
+		var ret string
 		return ret
 	}
 
@@ -58,7 +58,7 @@ func (o *ListProfiles400Response) GetMessage() EnumINVALIDCURSOR {
 
 // GetMessageOk returns a tuple with the Message field value
 // and a boolean to check if the value has been set.
-func (o *ListProfiles400Response) GetMessageOk() (*EnumINVALIDCURSOR, bool) {
+func (o *ListProfiles400Response) GetMessageOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -66,7 +66,7 @@ func (o *ListProfiles400Response) GetMessageOk() (*EnumINVALIDCURSOR, bool) {
 }
 
 // SetMessage sets field value
-func (o *ListProfiles400Response) SetMessage(v EnumINVALIDCURSOR) {
+func (o *ListProfiles400Response) SetMessage(v string) {
 	o.Message = v
 }
 

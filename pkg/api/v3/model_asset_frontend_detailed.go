@@ -20,15 +20,15 @@ var _ MappedNullable = &AssetFrontendDetailed{}
 
 // AssetFrontendDetailed Detailed information about an asset frontend
 type AssetFrontendDetailed struct {
-	Type EnumWEBAPP `json:"type"`
+	Type string `json:"type"`
 	Url string `json:"url"`
-	Framework string `json:"framework"`
-	APIFramework string `json:"APIFramework"`
-	AuthProtocol string `json:"authProtocol"`
-	AuthTechnology Enum7131cb862e5f93d14a362eb5322f61c6 `json:"authTechnology"`
-	CloudProvider Enum741dab4414f7700666ee11933c4b67dc `json:"cloudProvider"`
-	WafProvider EnumD5ec29254b9548bd036fd9a88cab2d76 `json:"wafProvider"`
-	Environment EnumF8e14e002b8aa0a74fbc1dbbe77d0a43 `json:"environment"`
+	Framework *string `json:"framework,omitempty"`
+	APIFramework *string `json:"APIFramework,omitempty"`
+	AuthProtocol *string `json:"authProtocol,omitempty"`
+	AuthTechnology *string `json:"authTechnology,omitempty"`
+	CloudProvider *string `json:"cloudProvider,omitempty"`
+	WafProvider *string `json:"wafProvider,omitempty"`
+	Environment *string `json:"environment,omitempty"`
 	Ips []string `json:"ips"`
 	Tls bool `json:"tls"`
 	AdditionalProperties map[string]interface{}
@@ -40,17 +40,10 @@ type _AssetFrontendDetailed AssetFrontendDetailed
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAssetFrontendDetailed(type_ EnumWEBAPP, url string, framework string, aPIFramework string, authProtocol string, authTechnology Enum7131cb862e5f93d14a362eb5322f61c6, cloudProvider Enum741dab4414f7700666ee11933c4b67dc, wafProvider EnumD5ec29254b9548bd036fd9a88cab2d76, environment EnumF8e14e002b8aa0a74fbc1dbbe77d0a43, ips []string, tls bool) *AssetFrontendDetailed {
+func NewAssetFrontendDetailed(type_ string, url string, ips []string, tls bool) *AssetFrontendDetailed {
 	this := AssetFrontendDetailed{}
 	this.Type = type_
 	this.Url = url
-	this.Framework = framework
-	this.APIFramework = aPIFramework
-	this.AuthProtocol = authProtocol
-	this.AuthTechnology = authTechnology
-	this.CloudProvider = cloudProvider
-	this.WafProvider = wafProvider
-	this.Environment = environment
 	this.Ips = ips
 	this.Tls = tls
 	return &this
@@ -65,9 +58,9 @@ func NewAssetFrontendDetailedWithDefaults() *AssetFrontendDetailed {
 }
 
 // GetType returns the Type field value
-func (o *AssetFrontendDetailed) GetType() EnumWEBAPP {
+func (o *AssetFrontendDetailed) GetType() string {
 	if o == nil {
-		var ret EnumWEBAPP
+		var ret string
 		return ret
 	}
 
@@ -76,7 +69,7 @@ func (o *AssetFrontendDetailed) GetType() EnumWEBAPP {
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *AssetFrontendDetailed) GetTypeOk() (*EnumWEBAPP, bool) {
+func (o *AssetFrontendDetailed) GetTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -84,7 +77,7 @@ func (o *AssetFrontendDetailed) GetTypeOk() (*EnumWEBAPP, bool) {
 }
 
 // SetType sets field value
-func (o *AssetFrontendDetailed) SetType(v EnumWEBAPP) {
+func (o *AssetFrontendDetailed) SetType(v string) {
 	o.Type = v
 }
 
@@ -112,172 +105,228 @@ func (o *AssetFrontendDetailed) SetUrl(v string) {
 	o.Url = v
 }
 
-// GetFramework returns the Framework field value
+// GetFramework returns the Framework field value if set, zero value otherwise.
 func (o *AssetFrontendDetailed) GetFramework() string {
-	if o == nil {
+	if o == nil || IsNil(o.Framework) {
 		var ret string
 		return ret
 	}
-
-	return o.Framework
+	return *o.Framework
 }
 
-// GetFrameworkOk returns a tuple with the Framework field value
+// GetFrameworkOk returns a tuple with the Framework field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetFrontendDetailed) GetFrameworkOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Framework) {
 		return nil, false
 	}
-	return &o.Framework, true
+	return o.Framework, true
 }
 
-// SetFramework sets field value
+// HasFramework returns a boolean if a field has been set.
+func (o *AssetFrontendDetailed) HasFramework() bool {
+	if o != nil && !IsNil(o.Framework) {
+		return true
+	}
+
+	return false
+}
+
+// SetFramework gets a reference to the given string and assigns it to the Framework field.
 func (o *AssetFrontendDetailed) SetFramework(v string) {
-	o.Framework = v
+	o.Framework = &v
 }
 
-// GetAPIFramework returns the APIFramework field value
+// GetAPIFramework returns the APIFramework field value if set, zero value otherwise.
 func (o *AssetFrontendDetailed) GetAPIFramework() string {
-	if o == nil {
+	if o == nil || IsNil(o.APIFramework) {
 		var ret string
 		return ret
 	}
-
-	return o.APIFramework
+	return *o.APIFramework
 }
 
-// GetAPIFrameworkOk returns a tuple with the APIFramework field value
+// GetAPIFrameworkOk returns a tuple with the APIFramework field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetFrontendDetailed) GetAPIFrameworkOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.APIFramework) {
 		return nil, false
 	}
-	return &o.APIFramework, true
+	return o.APIFramework, true
 }
 
-// SetAPIFramework sets field value
+// HasAPIFramework returns a boolean if a field has been set.
+func (o *AssetFrontendDetailed) HasAPIFramework() bool {
+	if o != nil && !IsNil(o.APIFramework) {
+		return true
+	}
+
+	return false
+}
+
+// SetAPIFramework gets a reference to the given string and assigns it to the APIFramework field.
 func (o *AssetFrontendDetailed) SetAPIFramework(v string) {
-	o.APIFramework = v
+	o.APIFramework = &v
 }
 
-// GetAuthProtocol returns the AuthProtocol field value
+// GetAuthProtocol returns the AuthProtocol field value if set, zero value otherwise.
 func (o *AssetFrontendDetailed) GetAuthProtocol() string {
-	if o == nil {
+	if o == nil || IsNil(o.AuthProtocol) {
 		var ret string
 		return ret
 	}
-
-	return o.AuthProtocol
+	return *o.AuthProtocol
 }
 
-// GetAuthProtocolOk returns a tuple with the AuthProtocol field value
+// GetAuthProtocolOk returns a tuple with the AuthProtocol field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetFrontendDetailed) GetAuthProtocolOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.AuthProtocol) {
 		return nil, false
 	}
-	return &o.AuthProtocol, true
+	return o.AuthProtocol, true
 }
 
-// SetAuthProtocol sets field value
+// HasAuthProtocol returns a boolean if a field has been set.
+func (o *AssetFrontendDetailed) HasAuthProtocol() bool {
+	if o != nil && !IsNil(o.AuthProtocol) {
+		return true
+	}
+
+	return false
+}
+
+// SetAuthProtocol gets a reference to the given string and assigns it to the AuthProtocol field.
 func (o *AssetFrontendDetailed) SetAuthProtocol(v string) {
-	o.AuthProtocol = v
+	o.AuthProtocol = &v
 }
 
-// GetAuthTechnology returns the AuthTechnology field value
-func (o *AssetFrontendDetailed) GetAuthTechnology() Enum7131cb862e5f93d14a362eb5322f61c6 {
-	if o == nil {
-		var ret Enum7131cb862e5f93d14a362eb5322f61c6
+// GetAuthTechnology returns the AuthTechnology field value if set, zero value otherwise.
+func (o *AssetFrontendDetailed) GetAuthTechnology() string {
+	if o == nil || IsNil(o.AuthTechnology) {
+		var ret string
 		return ret
 	}
-
-	return o.AuthTechnology
+	return *o.AuthTechnology
 }
 
-// GetAuthTechnologyOk returns a tuple with the AuthTechnology field value
+// GetAuthTechnologyOk returns a tuple with the AuthTechnology field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AssetFrontendDetailed) GetAuthTechnologyOk() (*Enum7131cb862e5f93d14a362eb5322f61c6, bool) {
-	if o == nil {
+func (o *AssetFrontendDetailed) GetAuthTechnologyOk() (*string, bool) {
+	if o == nil || IsNil(o.AuthTechnology) {
 		return nil, false
 	}
-	return &o.AuthTechnology, true
+	return o.AuthTechnology, true
 }
 
-// SetAuthTechnology sets field value
-func (o *AssetFrontendDetailed) SetAuthTechnology(v Enum7131cb862e5f93d14a362eb5322f61c6) {
-	o.AuthTechnology = v
+// HasAuthTechnology returns a boolean if a field has been set.
+func (o *AssetFrontendDetailed) HasAuthTechnology() bool {
+	if o != nil && !IsNil(o.AuthTechnology) {
+		return true
+	}
+
+	return false
 }
 
-// GetCloudProvider returns the CloudProvider field value
-func (o *AssetFrontendDetailed) GetCloudProvider() Enum741dab4414f7700666ee11933c4b67dc {
-	if o == nil {
-		var ret Enum741dab4414f7700666ee11933c4b67dc
+// SetAuthTechnology gets a reference to the given string and assigns it to the AuthTechnology field.
+func (o *AssetFrontendDetailed) SetAuthTechnology(v string) {
+	o.AuthTechnology = &v
+}
+
+// GetCloudProvider returns the CloudProvider field value if set, zero value otherwise.
+func (o *AssetFrontendDetailed) GetCloudProvider() string {
+	if o == nil || IsNil(o.CloudProvider) {
+		var ret string
 		return ret
 	}
-
-	return o.CloudProvider
+	return *o.CloudProvider
 }
 
-// GetCloudProviderOk returns a tuple with the CloudProvider field value
+// GetCloudProviderOk returns a tuple with the CloudProvider field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AssetFrontendDetailed) GetCloudProviderOk() (*Enum741dab4414f7700666ee11933c4b67dc, bool) {
-	if o == nil {
+func (o *AssetFrontendDetailed) GetCloudProviderOk() (*string, bool) {
+	if o == nil || IsNil(o.CloudProvider) {
 		return nil, false
 	}
-	return &o.CloudProvider, true
+	return o.CloudProvider, true
 }
 
-// SetCloudProvider sets field value
-func (o *AssetFrontendDetailed) SetCloudProvider(v Enum741dab4414f7700666ee11933c4b67dc) {
-	o.CloudProvider = v
+// HasCloudProvider returns a boolean if a field has been set.
+func (o *AssetFrontendDetailed) HasCloudProvider() bool {
+	if o != nil && !IsNil(o.CloudProvider) {
+		return true
+	}
+
+	return false
 }
 
-// GetWafProvider returns the WafProvider field value
-func (o *AssetFrontendDetailed) GetWafProvider() EnumD5ec29254b9548bd036fd9a88cab2d76 {
-	if o == nil {
-		var ret EnumD5ec29254b9548bd036fd9a88cab2d76
+// SetCloudProvider gets a reference to the given string and assigns it to the CloudProvider field.
+func (o *AssetFrontendDetailed) SetCloudProvider(v string) {
+	o.CloudProvider = &v
+}
+
+// GetWafProvider returns the WafProvider field value if set, zero value otherwise.
+func (o *AssetFrontendDetailed) GetWafProvider() string {
+	if o == nil || IsNil(o.WafProvider) {
+		var ret string
 		return ret
 	}
-
-	return o.WafProvider
+	return *o.WafProvider
 }
 
-// GetWafProviderOk returns a tuple with the WafProvider field value
+// GetWafProviderOk returns a tuple with the WafProvider field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AssetFrontendDetailed) GetWafProviderOk() (*EnumD5ec29254b9548bd036fd9a88cab2d76, bool) {
-	if o == nil {
+func (o *AssetFrontendDetailed) GetWafProviderOk() (*string, bool) {
+	if o == nil || IsNil(o.WafProvider) {
 		return nil, false
 	}
-	return &o.WafProvider, true
+	return o.WafProvider, true
 }
 
-// SetWafProvider sets field value
-func (o *AssetFrontendDetailed) SetWafProvider(v EnumD5ec29254b9548bd036fd9a88cab2d76) {
-	o.WafProvider = v
+// HasWafProvider returns a boolean if a field has been set.
+func (o *AssetFrontendDetailed) HasWafProvider() bool {
+	if o != nil && !IsNil(o.WafProvider) {
+		return true
+	}
+
+	return false
 }
 
-// GetEnvironment returns the Environment field value
-func (o *AssetFrontendDetailed) GetEnvironment() EnumF8e14e002b8aa0a74fbc1dbbe77d0a43 {
-	if o == nil {
-		var ret EnumF8e14e002b8aa0a74fbc1dbbe77d0a43
+// SetWafProvider gets a reference to the given string and assigns it to the WafProvider field.
+func (o *AssetFrontendDetailed) SetWafProvider(v string) {
+	o.WafProvider = &v
+}
+
+// GetEnvironment returns the Environment field value if set, zero value otherwise.
+func (o *AssetFrontendDetailed) GetEnvironment() string {
+	if o == nil || IsNil(o.Environment) {
+		var ret string
 		return ret
 	}
-
-	return o.Environment
+	return *o.Environment
 }
 
-// GetEnvironmentOk returns a tuple with the Environment field value
+// GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AssetFrontendDetailed) GetEnvironmentOk() (*EnumF8e14e002b8aa0a74fbc1dbbe77d0a43, bool) {
-	if o == nil {
+func (o *AssetFrontendDetailed) GetEnvironmentOk() (*string, bool) {
+	if o == nil || IsNil(o.Environment) {
 		return nil, false
 	}
-	return &o.Environment, true
+	return o.Environment, true
 }
 
-// SetEnvironment sets field value
-func (o *AssetFrontendDetailed) SetEnvironment(v EnumF8e14e002b8aa0a74fbc1dbbe77d0a43) {
-	o.Environment = v
+// HasEnvironment returns a boolean if a field has been set.
+func (o *AssetFrontendDetailed) HasEnvironment() bool {
+	if o != nil && !IsNil(o.Environment) {
+		return true
+	}
+
+	return false
+}
+
+// SetEnvironment gets a reference to the given string and assigns it to the Environment field.
+func (o *AssetFrontendDetailed) SetEnvironment(v string) {
+	o.Environment = &v
 }
 
 // GetIps returns the Ips field value
@@ -340,13 +389,27 @@ func (o AssetFrontendDetailed) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["type"] = o.Type
 	toSerialize["url"] = o.Url
-	toSerialize["framework"] = o.Framework
-	toSerialize["APIFramework"] = o.APIFramework
-	toSerialize["authProtocol"] = o.AuthProtocol
-	toSerialize["authTechnology"] = o.AuthTechnology
-	toSerialize["cloudProvider"] = o.CloudProvider
-	toSerialize["wafProvider"] = o.WafProvider
-	toSerialize["environment"] = o.Environment
+	if !IsNil(o.Framework) {
+		toSerialize["framework"] = o.Framework
+	}
+	if !IsNil(o.APIFramework) {
+		toSerialize["APIFramework"] = o.APIFramework
+	}
+	if !IsNil(o.AuthProtocol) {
+		toSerialize["authProtocol"] = o.AuthProtocol
+	}
+	if !IsNil(o.AuthTechnology) {
+		toSerialize["authTechnology"] = o.AuthTechnology
+	}
+	if !IsNil(o.CloudProvider) {
+		toSerialize["cloudProvider"] = o.CloudProvider
+	}
+	if !IsNil(o.WafProvider) {
+		toSerialize["wafProvider"] = o.WafProvider
+	}
+	if !IsNil(o.Environment) {
+		toSerialize["environment"] = o.Environment
+	}
 	toSerialize["ips"] = o.Ips
 	toSerialize["tls"] = o.Tls
 
@@ -364,13 +427,6 @@ func (o *AssetFrontendDetailed) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"type",
 		"url",
-		"framework",
-		"APIFramework",
-		"authProtocol",
-		"authTechnology",
-		"cloudProvider",
-		"wafProvider",
-		"environment",
 		"ips",
 		"tls",
 	}

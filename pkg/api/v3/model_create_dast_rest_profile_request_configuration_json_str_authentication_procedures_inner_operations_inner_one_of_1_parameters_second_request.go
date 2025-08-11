@@ -20,7 +20,7 @@ var _ MappedNullable = &CreateDastRestProfileRequestConfigurationJsonStrAuthenti
 // CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOf1ParametersSecondRequest struct for CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOf1ParametersSecondRequest
 type CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOf1ParametersSecondRequest struct {
 	Url *string `json:"url,omitempty"`
-	Method *Enum4e0943c4ae7a2a2d426c0a6c0b839e82 `json:"method,omitempty"`
+	Method *string `json:"method,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -76,9 +76,9 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProcedure
 }
 
 // GetMethod returns the Method field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOf1ParametersSecondRequest) GetMethod() Enum4e0943c4ae7a2a2d426c0a6c0b839e82 {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOf1ParametersSecondRequest) GetMethod() string {
 	if o == nil || IsNil(o.Method) {
-		var ret Enum4e0943c4ae7a2a2d426c0a6c0b839e82
+		var ret string
 		return ret
 	}
 	return *o.Method
@@ -86,7 +86,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProcedure
 
 // GetMethodOk returns a tuple with the Method field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOf1ParametersSecondRequest) GetMethodOk() (*Enum4e0943c4ae7a2a2d426c0a6c0b839e82, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOf1ParametersSecondRequest) GetMethodOk() (*string, bool) {
 	if o == nil || IsNil(o.Method) {
 		return nil, false
 	}
@@ -102,8 +102,8 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProcedure
 	return false
 }
 
-// SetMethod gets a reference to the given Enum4e0943c4ae7a2a2d426c0a6c0b839e82 and assigns it to the Method field.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOf1ParametersSecondRequest) SetMethod(v Enum4e0943c4ae7a2a2d426c0a6c0b839e82) {
+// SetMethod gets a reference to the given string and assigns it to the Method field.
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOf1ParametersSecondRequest) SetMethod(v string) {
 	o.Method = &v
 }
 

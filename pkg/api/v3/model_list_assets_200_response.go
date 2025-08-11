@@ -20,7 +20,7 @@ var _ MappedNullable = &ListAssets200Response{}
 
 // ListAssets200Response struct for ListAssets200Response
 type ListAssets200Response struct {
-	NextCursor string `json:"nextCursor"`
+	NextCursor *string `json:"nextCursor,omitempty"`
 	TotalCount *int `json:"totalCount,omitempty"`
 	Data []AssetSummarized `json:"data"`
 	AdditionalProperties map[string]interface{}
@@ -32,9 +32,8 @@ type _ListAssets200Response ListAssets200Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewListAssets200Response(nextCursor string, data []AssetSummarized) *ListAssets200Response {
+func NewListAssets200Response(data []AssetSummarized) *ListAssets200Response {
 	this := ListAssets200Response{}
-	this.NextCursor = nextCursor
 	var totalCount int = 100
 	this.TotalCount = &totalCount
 	this.Data = data
@@ -51,28 +50,36 @@ func NewListAssets200ResponseWithDefaults() *ListAssets200Response {
 	return &this
 }
 
-// GetNextCursor returns the NextCursor field value
+// GetNextCursor returns the NextCursor field value if set, zero value otherwise.
 func (o *ListAssets200Response) GetNextCursor() string {
-	if o == nil {
+	if o == nil || IsNil(o.NextCursor) {
 		var ret string
 		return ret
 	}
-
-	return o.NextCursor
+	return *o.NextCursor
 }
 
-// GetNextCursorOk returns a tuple with the NextCursor field value
+// GetNextCursorOk returns a tuple with the NextCursor field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ListAssets200Response) GetNextCursorOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.NextCursor) {
 		return nil, false
 	}
-	return &o.NextCursor, true
+	return o.NextCursor, true
 }
 
-// SetNextCursor sets field value
+// HasNextCursor returns a boolean if a field has been set.
+func (o *ListAssets200Response) HasNextCursor() bool {
+	if o != nil && !IsNil(o.NextCursor) {
+		return true
+	}
+
+	return false
+}
+
+// SetNextCursor gets a reference to the given string and assigns it to the NextCursor field.
 func (o *ListAssets200Response) SetNextCursor(v string) {
-	o.NextCursor = v
+	o.NextCursor = &v
 }
 
 // GetTotalCount returns the TotalCount field value if set, zero value otherwise.
@@ -141,7 +148,9 @@ func (o ListAssets200Response) MarshalJSON() ([]byte, error) {
 
 func (o ListAssets200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["nextCursor"] = o.NextCursor
+	if !IsNil(o.NextCursor) {
+		toSerialize["nextCursor"] = o.NextCursor
+	}
 	if !IsNil(o.TotalCount) {
 		toSerialize["totalCount"] = o.TotalCount
 	}
@@ -159,7 +168,6 @@ func (o *ListAssets200Response) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"nextCursor",
 		"data",
 	}
 

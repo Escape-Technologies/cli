@@ -23,7 +23,7 @@ type SchemaDetailed struct {
 	// The id of the schema
 	Id string `json:"id"`
 	// The url of the schema
-	Url string `json:"url"`
+	Url *string `json:"url,omitempty"`
 	// Whether the schema is generated
 	Generated bool `json:"generated"`
 	AdditionalProperties map[string]interface{}
@@ -35,10 +35,9 @@ type _SchemaDetailed SchemaDetailed
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSchemaDetailed(id string, url string, generated bool) *SchemaDetailed {
+func NewSchemaDetailed(id string, generated bool) *SchemaDetailed {
 	this := SchemaDetailed{}
 	this.Id = id
-	this.Url = url
 	this.Generated = generated
 	return &this
 }
@@ -75,28 +74,36 @@ func (o *SchemaDetailed) SetId(v string) {
 	o.Id = v
 }
 
-// GetUrl returns the Url field value
+// GetUrl returns the Url field value if set, zero value otherwise.
 func (o *SchemaDetailed) GetUrl() string {
-	if o == nil {
+	if o == nil || IsNil(o.Url) {
 		var ret string
 		return ret
 	}
-
-	return o.Url
+	return *o.Url
 }
 
-// GetUrlOk returns a tuple with the Url field value
+// GetUrlOk returns a tuple with the Url field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SchemaDetailed) GetUrlOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Url) {
 		return nil, false
 	}
-	return &o.Url, true
+	return o.Url, true
 }
 
-// SetUrl sets field value
+// HasUrl returns a boolean if a field has been set.
+func (o *SchemaDetailed) HasUrl() bool {
+	if o != nil && !IsNil(o.Url) {
+		return true
+	}
+
+	return false
+}
+
+// SetUrl gets a reference to the given string and assigns it to the Url field.
 func (o *SchemaDetailed) SetUrl(v string) {
-	o.Url = v
+	o.Url = &v
 }
 
 // GetGenerated returns the Generated field value
@@ -134,7 +141,9 @@ func (o SchemaDetailed) MarshalJSON() ([]byte, error) {
 func (o SchemaDetailed) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
-	toSerialize["url"] = o.Url
+	if !IsNil(o.Url) {
+		toSerialize["url"] = o.Url
+	}
 	toSerialize["generated"] = o.Generated
 
 	for key, value := range o.AdditionalProperties {
@@ -150,7 +159,6 @@ func (o *SchemaDetailed) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"id",
-		"url",
 		"generated",
 	}
 
