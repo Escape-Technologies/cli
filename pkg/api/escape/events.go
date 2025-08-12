@@ -26,25 +26,25 @@ func ListEvents(ctx context.Context, next string, levels []string) ([]v3.EventSu
 }
 
 // GetEvent gets an event
-func GetEvent(ctx context.Context, eventId string) (*v3.EventDetailed, error) {
+func GetEvent(ctx context.Context, eventID string) (*v3.EventDetailed, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
-	data, _, err := client.EventsAPI.GetEvent(ctx, eventId).Execute()
+	data, _, err := client.EventsAPI.GetEvent(ctx, eventID).Execute()
 	if err != nil {
 		return nil, fmt.Errorf("api error: %w", err)
 	}
 	return data, nil
 }
 
-// GetEventAttachment gets an event attachment
-func GetEventAttachments(ctx context.Context, eventId string) ([]v3.AttachmentDetailed, error) {
+// GetEventAttachments gets an event attachment
+func GetEventAttachments(ctx context.Context, eventID string) ([]v3.AttachmentDetailed, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
-	data, _, err := client.EventsAPI.GetEventAttachments(ctx, eventId).Execute()
+	data, _, err := client.EventsAPI.GetEventAttachments(ctx, eventID).Execute()
 	if err != nil {
 		return nil, fmt.Errorf("api error: %w", err)
 	}
