@@ -22,7 +22,7 @@ var _ MappedNullable = &CreateDastRestProfileRequestConfigurationJsonStrCustomRu
 type CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInner struct {
 	Id string `json:"id"`
 	Alert CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlert `json:"alert"`
-	Type string `json:"type"`
+	Type ENUMAPI `json:"type"`
 	Seed []CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInner `json:"seed,omitempty"`
 	Transform *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransform `json:"transform,omitempty"`
 	Detect []CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInner `json:"detect"`
@@ -35,7 +35,7 @@ type _CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInner CreateDas
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateDastRestProfileRequestConfigurationJsonStrCustomRulesInner(id string, alert CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlert, type_ string, detect []CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInner) *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInner {
+func NewCreateDastRestProfileRequestConfigurationJsonStrCustomRulesInner(id string, alert CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlert, type_ ENUMAPI, detect []CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInner) *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInner {
 	this := CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInner{}
 	this.Id = id
 	this.Alert = alert
@@ -101,9 +101,9 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInner) SetAl
 }
 
 // GetType returns the Type field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInner) GetType() string {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInner) GetType() ENUMAPI {
 	if o == nil {
-		var ret string
+		var ret ENUMAPI
 		return ret
 	}
 
@@ -112,7 +112,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInner) GetTy
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInner) GetTypeOk() (*string, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInner) GetTypeOk() (*ENUMAPI, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -120,7 +120,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInner) GetTy
 }
 
 // SetType sets field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInner) SetType(v string) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInner) SetType(v ENUMAPI) {
 	o.Type = v
 }
 

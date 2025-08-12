@@ -20,8 +20,8 @@ var _ MappedNullable = &CreateAssetAZURERequest{}
 
 // CreateAssetAZURERequest struct for CreateAssetAZURERequest
 type CreateAssetAZURERequest struct {
-	AssetClass string `json:"asset_class"`
-	AssetType string `json:"asset_type"`
+	AssetClass ENUMCLOUDHOSTING `json:"asset_class"`
+	AssetType ENUMAZURETENANT `json:"asset_type"`
 	Name *string `json:"name,omitempty"`
 	ClientId string `json:"client_id"`
 	ClientSecret string `json:"client_secret"`
@@ -35,7 +35,7 @@ type _CreateAssetAZURERequest CreateAssetAZURERequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetAZURERequest(assetClass string, assetType string, clientId string, clientSecret string, tenantId string) *CreateAssetAZURERequest {
+func NewCreateAssetAZURERequest(assetClass ENUMCLOUDHOSTING, assetType ENUMAZURETENANT, clientId string, clientSecret string, tenantId string) *CreateAssetAZURERequest {
 	this := CreateAssetAZURERequest{}
 	this.AssetClass = assetClass
 	this.AssetType = assetType
@@ -54,9 +54,9 @@ func NewCreateAssetAZURERequestWithDefaults() *CreateAssetAZURERequest {
 }
 
 // GetAssetClass returns the AssetClass field value
-func (o *CreateAssetAZURERequest) GetAssetClass() string {
+func (o *CreateAssetAZURERequest) GetAssetClass() ENUMCLOUDHOSTING {
 	if o == nil {
-		var ret string
+		var ret ENUMCLOUDHOSTING
 		return ret
 	}
 
@@ -65,7 +65,7 @@ func (o *CreateAssetAZURERequest) GetAssetClass() string {
 
 // GetAssetClassOk returns a tuple with the AssetClass field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetAZURERequest) GetAssetClassOk() (*string, bool) {
+func (o *CreateAssetAZURERequest) GetAssetClassOk() (*ENUMCLOUDHOSTING, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -73,14 +73,14 @@ func (o *CreateAssetAZURERequest) GetAssetClassOk() (*string, bool) {
 }
 
 // SetAssetClass sets field value
-func (o *CreateAssetAZURERequest) SetAssetClass(v string) {
+func (o *CreateAssetAZURERequest) SetAssetClass(v ENUMCLOUDHOSTING) {
 	o.AssetClass = v
 }
 
 // GetAssetType returns the AssetType field value
-func (o *CreateAssetAZURERequest) GetAssetType() string {
+func (o *CreateAssetAZURERequest) GetAssetType() ENUMAZURETENANT {
 	if o == nil {
-		var ret string
+		var ret ENUMAZURETENANT
 		return ret
 	}
 
@@ -89,7 +89,7 @@ func (o *CreateAssetAZURERequest) GetAssetType() string {
 
 // GetAssetTypeOk returns a tuple with the AssetType field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetAZURERequest) GetAssetTypeOk() (*string, bool) {
+func (o *CreateAssetAZURERequest) GetAssetTypeOk() (*ENUMAZURETENANT, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -97,7 +97,7 @@ func (o *CreateAssetAZURERequest) GetAssetTypeOk() (*string, bool) {
 }
 
 // SetAssetType sets field value
-func (o *CreateAssetAZURERequest) SetAssetType(v string) {
+func (o *CreateAssetAZURERequest) SetAssetType(v ENUMAZURETENANT) {
 	o.AssetType = v
 }
 

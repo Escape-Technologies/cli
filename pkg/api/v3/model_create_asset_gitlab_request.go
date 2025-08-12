@@ -20,8 +20,8 @@ var _ MappedNullable = &CreateAssetGITLABRequest{}
 
 // CreateAssetGITLABRequest struct for CreateAssetGITLABRequest
 type CreateAssetGITLABRequest struct {
-	AssetClass string `json:"asset_class"`
-	AssetType string `json:"asset_type"`
+	AssetClass ENUMREPOSITORY `json:"asset_class"`
+	AssetType ENUMGITLABREPOSITORY `json:"asset_type"`
 	Url string `json:"url"`
 	Name *string `json:"name,omitempty"`
 	HttpUrlToRepo *string `json:"http_url_to_repo,omitempty"`
@@ -34,7 +34,7 @@ type CreateAssetGITLABRequest struct {
 	GroupWebUrl *string `json:"group_web_url,omitempty"`
 	ProjectId *float32 `json:"project_id,omitempty"`
 	Archived *bool `json:"archived,omitempty"`
-	Visibility *string `json:"visibility,omitempty"`
+	Visibility *ENUMPROPERTIESVISIBILITY `json:"visibility,omitempty"`
 	Group *CreateAssetGITLABRequestGroup `json:"group,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -45,7 +45,7 @@ type _CreateAssetGITLABRequest CreateAssetGITLABRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetGITLABRequest(assetClass string, assetType string, url string) *CreateAssetGITLABRequest {
+func NewCreateAssetGITLABRequest(assetClass ENUMREPOSITORY, assetType ENUMGITLABREPOSITORY, url string) *CreateAssetGITLABRequest {
 	this := CreateAssetGITLABRequest{}
 	this.AssetClass = assetClass
 	this.AssetType = assetType
@@ -62,9 +62,9 @@ func NewCreateAssetGITLABRequestWithDefaults() *CreateAssetGITLABRequest {
 }
 
 // GetAssetClass returns the AssetClass field value
-func (o *CreateAssetGITLABRequest) GetAssetClass() string {
+func (o *CreateAssetGITLABRequest) GetAssetClass() ENUMREPOSITORY {
 	if o == nil {
-		var ret string
+		var ret ENUMREPOSITORY
 		return ret
 	}
 
@@ -73,7 +73,7 @@ func (o *CreateAssetGITLABRequest) GetAssetClass() string {
 
 // GetAssetClassOk returns a tuple with the AssetClass field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGITLABRequest) GetAssetClassOk() (*string, bool) {
+func (o *CreateAssetGITLABRequest) GetAssetClassOk() (*ENUMREPOSITORY, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -81,14 +81,14 @@ func (o *CreateAssetGITLABRequest) GetAssetClassOk() (*string, bool) {
 }
 
 // SetAssetClass sets field value
-func (o *CreateAssetGITLABRequest) SetAssetClass(v string) {
+func (o *CreateAssetGITLABRequest) SetAssetClass(v ENUMREPOSITORY) {
 	o.AssetClass = v
 }
 
 // GetAssetType returns the AssetType field value
-func (o *CreateAssetGITLABRequest) GetAssetType() string {
+func (o *CreateAssetGITLABRequest) GetAssetType() ENUMGITLABREPOSITORY {
 	if o == nil {
-		var ret string
+		var ret ENUMGITLABREPOSITORY
 		return ret
 	}
 
@@ -97,7 +97,7 @@ func (o *CreateAssetGITLABRequest) GetAssetType() string {
 
 // GetAssetTypeOk returns a tuple with the AssetType field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGITLABRequest) GetAssetTypeOk() (*string, bool) {
+func (o *CreateAssetGITLABRequest) GetAssetTypeOk() (*ENUMGITLABREPOSITORY, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -105,7 +105,7 @@ func (o *CreateAssetGITLABRequest) GetAssetTypeOk() (*string, bool) {
 }
 
 // SetAssetType sets field value
-func (o *CreateAssetGITLABRequest) SetAssetType(v string) {
+func (o *CreateAssetGITLABRequest) SetAssetType(v ENUMGITLABREPOSITORY) {
 	o.AssetType = v
 }
 
@@ -486,9 +486,9 @@ func (o *CreateAssetGITLABRequest) SetArchived(v bool) {
 }
 
 // GetVisibility returns the Visibility field value if set, zero value otherwise.
-func (o *CreateAssetGITLABRequest) GetVisibility() string {
+func (o *CreateAssetGITLABRequest) GetVisibility() ENUMPROPERTIESVISIBILITY {
 	if o == nil || IsNil(o.Visibility) {
-		var ret string
+		var ret ENUMPROPERTIESVISIBILITY
 		return ret
 	}
 	return *o.Visibility
@@ -496,7 +496,7 @@ func (o *CreateAssetGITLABRequest) GetVisibility() string {
 
 // GetVisibilityOk returns a tuple with the Visibility field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGITLABRequest) GetVisibilityOk() (*string, bool) {
+func (o *CreateAssetGITLABRequest) GetVisibilityOk() (*ENUMPROPERTIESVISIBILITY, bool) {
 	if o == nil || IsNil(o.Visibility) {
 		return nil, false
 	}
@@ -512,8 +512,8 @@ func (o *CreateAssetGITLABRequest) HasVisibility() bool {
 	return false
 }
 
-// SetVisibility gets a reference to the given string and assigns it to the Visibility field.
-func (o *CreateAssetGITLABRequest) SetVisibility(v string) {
+// SetVisibility gets a reference to the given ENUMPROPERTIESVISIBILITY and assigns it to the Visibility field.
+func (o *CreateAssetGITLABRequest) SetVisibility(v ENUMPROPERTIESVISIBILITY) {
 	o.Visibility = &v
 }
 
