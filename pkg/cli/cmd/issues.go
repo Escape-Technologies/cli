@@ -33,10 +33,9 @@ var issueListCmd = &cobra.Command{
 	Long: `List issues.
 
 Example output:
-ID                                      TYPE         NAME                                                           CREATED AT              HAS CI    CRON
-00000000-0000-0000-0000-000000000001    REST         Example-Application-1                                          2025-02-21T11:15:07Z    false     0 11 * * 5`,
-	Example: `escape-cli issues list`,
-	RunE: func(cmd *cobra.Command, _ []string) error {
+ID                                      SEVERITY    CATEGORY                  NAME                     STATUS          ASSET                                  CREATED AT                  LINK
+00000000-0000-0000-0000-000000000001    HIGH        INJECTION                 XXE Injection            OPEN            https://gontoz.escape.tech/            2025-06-26T06:03:26.128Z    https://app.escape.tech/all-risks/issues/00000000-0000-0000-0000-000000000001/overview/`,
+	Example: `escape-cli issues list`, RunE: func(cmd *cobra.Command, _ []string) error {
 		issues, next, err := escape.ListIssues(cmd.Context(), "", issueStatus, issueSeverity)
 		if err != nil {
 			return fmt.Errorf("unable to list issues: %w", err)
@@ -72,8 +71,8 @@ var issueGetCmd = &cobra.Command{
 	Long: `Get a profile by ID.
 
 Example output:
-ID                                      TYPE         NAME                                                           CREATED AT              HAS CI    CRON
-00000000-0000-0000-0000-000000000001    REST         Example-Application-1                                          2025-02-21T11:15:07Z    false     0 11 * * 5`,
+SEVERITY    CATEGORY    NAME                                  STATUS    ASSET                     CREATED AT                  LINK
+INFO        PROTOCOL    Misconfigured Cache Control Header    OPEN      https://assets.com        2025-06-27T06:02:18.874Z    https://app.escape.tech/all-risks/issues/00000000-0000-0000-0000-000000000001/overview/`,
 	Example: `escape-cli profiles get 00000000-0000-0000-0000-000000000001`,
 	Args:    cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
@@ -102,9 +101,8 @@ var issueUpdateStatusCmd = &cobra.Command{
 	Long: `Update the status of an issue.
 
 Example output:
-ID                                      TYPE         NAME                                                           CREATED AT              HAS CI    CRON
-00000000-0000-0000-0000-000000000001    REST         Example-Application-1                                          2025-02-21T11:15:07Z    false     0 11 * * 5`,
-	Example: `escape-cli issues update 00000000-0000-0000-0000-000000000001`,
+Issue dc8a5509-348c-4319-ab68-3d8382c6f084 updated to status MANUAL_REVIEW`,
+	Example: `escape-cli issues update 00000000-0000-0000-0000-000000000001 -s MANUAL_REVIEW`,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		issueID := args[0]
 		if issueUpdateStatusStr == "" {
@@ -140,8 +138,8 @@ var issueListActivitiesCmd = &cobra.Command{
 	Long: `List the activities of an issue.
 
 Example output:
-ID                                      TYPE         NAME                                                           CREATED AT              HAS CI    CRON
-00000000-0000-0000-0000-000000000001    REST         Example-Application-1                                          2025-02-21T11:15:07Z    false     0 11 * * 5`,
+ID                                      KIND    CREATED AT
+00000000-0000-0000-0000-000000000001    CREATED 2025-06-27T06:02:18.874Z`,
 	Example: `escape-cli issues list-activities 00000000-0000-0000-0000-000000000001`,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		issueID := args[0]
