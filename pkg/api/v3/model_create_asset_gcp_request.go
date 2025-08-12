@@ -20,8 +20,8 @@ var _ MappedNullable = &CreateAssetGCPRequest{}
 
 // CreateAssetGCPRequest struct for CreateAssetGCPRequest
 type CreateAssetGCPRequest struct {
-	AssetClass string `json:"asset_class"`
-	AssetType string `json:"asset_type"`
+	AssetClass ENUMCLOUDHOSTING `json:"asset_class"`
+	AssetType ENUMGCPPROJECT `json:"asset_type"`
 	Name *string `json:"name,omitempty"`
 	AuthProviderX509CertUrl string `json:"auth_provider_x509_cert_url"`
 	AuthUri string `json:"auth_uri"`
@@ -42,7 +42,7 @@ type _CreateAssetGCPRequest CreateAssetGCPRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetGCPRequest(assetClass string, assetType string, authProviderX509CertUrl string, authUri string, clientEmail string, clientId string, clientX509CertUrl string, privateKey string, privateKeyId string, tokenUri string, universeDomain string, projectId string) *CreateAssetGCPRequest {
+func NewCreateAssetGCPRequest(assetClass ENUMCLOUDHOSTING, assetType ENUMGCPPROJECT, authProviderX509CertUrl string, authUri string, clientEmail string, clientId string, clientX509CertUrl string, privateKey string, privateKeyId string, tokenUri string, universeDomain string, projectId string) *CreateAssetGCPRequest {
 	this := CreateAssetGCPRequest{}
 	this.AssetClass = assetClass
 	this.AssetType = assetType
@@ -68,9 +68,9 @@ func NewCreateAssetGCPRequestWithDefaults() *CreateAssetGCPRequest {
 }
 
 // GetAssetClass returns the AssetClass field value
-func (o *CreateAssetGCPRequest) GetAssetClass() string {
+func (o *CreateAssetGCPRequest) GetAssetClass() ENUMCLOUDHOSTING {
 	if o == nil {
-		var ret string
+		var ret ENUMCLOUDHOSTING
 		return ret
 	}
 
@@ -79,7 +79,7 @@ func (o *CreateAssetGCPRequest) GetAssetClass() string {
 
 // GetAssetClassOk returns a tuple with the AssetClass field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGCPRequest) GetAssetClassOk() (*string, bool) {
+func (o *CreateAssetGCPRequest) GetAssetClassOk() (*ENUMCLOUDHOSTING, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -87,14 +87,14 @@ func (o *CreateAssetGCPRequest) GetAssetClassOk() (*string, bool) {
 }
 
 // SetAssetClass sets field value
-func (o *CreateAssetGCPRequest) SetAssetClass(v string) {
+func (o *CreateAssetGCPRequest) SetAssetClass(v ENUMCLOUDHOSTING) {
 	o.AssetClass = v
 }
 
 // GetAssetType returns the AssetType field value
-func (o *CreateAssetGCPRequest) GetAssetType() string {
+func (o *CreateAssetGCPRequest) GetAssetType() ENUMGCPPROJECT {
 	if o == nil {
-		var ret string
+		var ret ENUMGCPPROJECT
 		return ret
 	}
 
@@ -103,7 +103,7 @@ func (o *CreateAssetGCPRequest) GetAssetType() string {
 
 // GetAssetTypeOk returns a tuple with the AssetType field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGCPRequest) GetAssetTypeOk() (*string, bool) {
+func (o *CreateAssetGCPRequest) GetAssetTypeOk() (*ENUMGCPPROJECT, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -111,7 +111,7 @@ func (o *CreateAssetGCPRequest) GetAssetTypeOk() (*string, bool) {
 }
 
 // SetAssetType sets field value
-func (o *CreateAssetGCPRequest) SetAssetType(v string) {
+func (o *CreateAssetGCPRequest) SetAssetType(v ENUMGCPPROJECT) {
 	o.AssetType = v
 }
 

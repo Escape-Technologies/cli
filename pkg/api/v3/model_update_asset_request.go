@@ -21,10 +21,8 @@ var _ MappedNullable = &UpdateAssetRequest{}
 type UpdateAssetRequest struct {
 	TagIds *UpdateAssetRequestTagIds `json:"tagIds,omitempty"`
 	Owners *UpdateAssetRequestOwners `json:"owners,omitempty"`
-	// The framework of the asset
-	Framework *string `json:"framework,omitempty"`
-	// The status of the asset
-	Status *string `json:"status,omitempty"`
+	Framework *ENUMPROPERTIESFRAMEWORK `json:"framework,omitempty"`
+	Status *ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS `json:"status,omitempty"`
 	// The description of the asset
 	Description *string `json:"description,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -114,9 +112,9 @@ func (o *UpdateAssetRequest) SetOwners(v UpdateAssetRequestOwners) {
 }
 
 // GetFramework returns the Framework field value if set, zero value otherwise.
-func (o *UpdateAssetRequest) GetFramework() string {
+func (o *UpdateAssetRequest) GetFramework() ENUMPROPERTIESFRAMEWORK {
 	if o == nil || IsNil(o.Framework) {
-		var ret string
+		var ret ENUMPROPERTIESFRAMEWORK
 		return ret
 	}
 	return *o.Framework
@@ -124,7 +122,7 @@ func (o *UpdateAssetRequest) GetFramework() string {
 
 // GetFrameworkOk returns a tuple with the Framework field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateAssetRequest) GetFrameworkOk() (*string, bool) {
+func (o *UpdateAssetRequest) GetFrameworkOk() (*ENUMPROPERTIESFRAMEWORK, bool) {
 	if o == nil || IsNil(o.Framework) {
 		return nil, false
 	}
@@ -140,15 +138,15 @@ func (o *UpdateAssetRequest) HasFramework() bool {
 	return false
 }
 
-// SetFramework gets a reference to the given string and assigns it to the Framework field.
-func (o *UpdateAssetRequest) SetFramework(v string) {
+// SetFramework gets a reference to the given ENUMPROPERTIESFRAMEWORK and assigns it to the Framework field.
+func (o *UpdateAssetRequest) SetFramework(v ENUMPROPERTIESFRAMEWORK) {
 	o.Framework = &v
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
-func (o *UpdateAssetRequest) GetStatus() string {
+func (o *UpdateAssetRequest) GetStatus() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS {
 	if o == nil || IsNil(o.Status) {
-		var ret string
+		var ret ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS
 		return ret
 	}
 	return *o.Status
@@ -156,7 +154,7 @@ func (o *UpdateAssetRequest) GetStatus() string {
 
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateAssetRequest) GetStatusOk() (*string, bool) {
+func (o *UpdateAssetRequest) GetStatusOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS, bool) {
 	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
@@ -172,8 +170,8 @@ func (o *UpdateAssetRequest) HasStatus() bool {
 	return false
 }
 
-// SetStatus gets a reference to the given string and assigns it to the Status field.
-func (o *UpdateAssetRequest) SetStatus(v string) {
+// SetStatus gets a reference to the given ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS and assigns it to the Status field.
+func (o *UpdateAssetRequest) SetStatus(v ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS) {
 	o.Status = &v
 }
 

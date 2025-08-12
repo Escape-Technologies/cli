@@ -20,7 +20,7 @@ var _ MappedNullable = &CreateDastRestProfileRequestConfigurationJsonStrCustomRu
 
 // CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf2 struct for CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf2
 type CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf2 struct {
-	Protocol string `json:"protocol"`
+	Protocol ENUMCURL `json:"protocol"`
 	User *string `json:"user,omitempty"`
 	Curl string `json:"curl"`
 	AdditionalProperties map[string]interface{}
@@ -32,7 +32,7 @@ type _CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerO
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf2(protocol string, curl string) *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf2 {
+func NewCreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf2(protocol ENUMCURL, curl string) *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf2 {
 	this := CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf2{}
 	this.Protocol = protocol
 	this.Curl = curl
@@ -48,9 +48,9 @@ func NewCreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInne
 }
 
 // GetProtocol returns the Protocol field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf2) GetProtocol() string {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf2) GetProtocol() ENUMCURL {
 	if o == nil {
-		var ret string
+		var ret ENUMCURL
 		return ret
 	}
 
@@ -59,7 +59,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInn
 
 // GetProtocolOk returns a tuple with the Protocol field value
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf2) GetProtocolOk() (*string, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf2) GetProtocolOk() (*ENUMCURL, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -67,7 +67,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInn
 }
 
 // SetProtocol sets field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf2) SetProtocol(v string) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf2) SetProtocol(v ENUMCURL) {
 	o.Protocol = v
 }
 

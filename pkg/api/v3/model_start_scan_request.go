@@ -34,8 +34,7 @@ type StartScanRequest struct {
 	CommitAuthorProfilePictureLink *string `json:"commitAuthorProfilePictureLink,omitempty"`
 	// The configuration override to use
 	ConfigurationOverride map[string]interface{} `json:"configurationOverride,omitempty"`
-	// The initiator of the scan
-	Initiator string `json:"initiator"`
+	Initiator ENUMPROPERTIESDATAITEMSPROPERTIESINITIATORSITEMS `json:"initiator"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -45,7 +44,7 @@ type _StartScanRequest StartScanRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewStartScanRequest(profileId string, initiator string) *StartScanRequest {
+func NewStartScanRequest(profileId string, initiator ENUMPROPERTIESDATAITEMSPROPERTIESINITIATORSITEMS) *StartScanRequest {
 	this := StartScanRequest{}
 	this.ProfileId = profileId
 	this.Initiator = initiator
@@ -277,9 +276,9 @@ func (o *StartScanRequest) SetConfigurationOverride(v map[string]interface{}) {
 }
 
 // GetInitiator returns the Initiator field value
-func (o *StartScanRequest) GetInitiator() string {
+func (o *StartScanRequest) GetInitiator() ENUMPROPERTIESDATAITEMSPROPERTIESINITIATORSITEMS {
 	if o == nil {
-		var ret string
+		var ret ENUMPROPERTIESDATAITEMSPROPERTIESINITIATORSITEMS
 		return ret
 	}
 
@@ -288,7 +287,7 @@ func (o *StartScanRequest) GetInitiator() string {
 
 // GetInitiatorOk returns a tuple with the Initiator field value
 // and a boolean to check if the value has been set.
-func (o *StartScanRequest) GetInitiatorOk() (*string, bool) {
+func (o *StartScanRequest) GetInitiatorOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESINITIATORSITEMS, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -296,7 +295,7 @@ func (o *StartScanRequest) GetInitiatorOk() (*string, bool) {
 }
 
 // SetInitiator sets field value
-func (o *StartScanRequest) SetInitiator(v string) {
+func (o *StartScanRequest) SetInitiator(v ENUMPROPERTIESDATAITEMSPROPERTIESINITIATORSITEMS) {
 	o.Initiator = v
 }
 

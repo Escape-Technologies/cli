@@ -38,8 +38,7 @@ type ApiRouteDetailed struct {
 	RequestCount float32 `json:"requestCount"`
 	// The return type of the api route
 	ReturnType string `json:"returnType"`
-	// The source of the api route
-	Source string `json:"source"`
+	Source ENUMITEMSPROPERTIESTARGETPROPERTIESAPIROUTEPROPERTIESSOURCE `json:"source"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -49,7 +48,7 @@ type _ApiRouteDetailed ApiRouteDetailed
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewApiRouteDetailed(blacklisted bool, createdAt string, displayName string, id string, name string, operation string, parameters map[string]string, requestCount float32, returnType string, source string) *ApiRouteDetailed {
+func NewApiRouteDetailed(blacklisted bool, createdAt string, displayName string, id string, name string, operation string, parameters map[string]string, requestCount float32, returnType string, source ENUMITEMSPROPERTIESTARGETPROPERTIESAPIROUTEPROPERTIESSOURCE) *ApiRouteDetailed {
 	this := ApiRouteDetailed{}
 	this.Blacklisted = blacklisted
 	this.CreatedAt = createdAt
@@ -289,9 +288,9 @@ func (o *ApiRouteDetailed) SetReturnType(v string) {
 }
 
 // GetSource returns the Source field value
-func (o *ApiRouteDetailed) GetSource() string {
+func (o *ApiRouteDetailed) GetSource() ENUMITEMSPROPERTIESTARGETPROPERTIESAPIROUTEPROPERTIESSOURCE {
 	if o == nil {
-		var ret string
+		var ret ENUMITEMSPROPERTIESTARGETPROPERTIESAPIROUTEPROPERTIESSOURCE
 		return ret
 	}
 
@@ -300,7 +299,7 @@ func (o *ApiRouteDetailed) GetSource() string {
 
 // GetSourceOk returns a tuple with the Source field value
 // and a boolean to check if the value has been set.
-func (o *ApiRouteDetailed) GetSourceOk() (*string, bool) {
+func (o *ApiRouteDetailed) GetSourceOk() (*ENUMITEMSPROPERTIESTARGETPROPERTIESAPIROUTEPROPERTIESSOURCE, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -308,7 +307,7 @@ func (o *ApiRouteDetailed) GetSourceOk() (*string, bool) {
 }
 
 // SetSource sets field value
-func (o *ApiRouteDetailed) SetSource(v string) {
+func (o *ApiRouteDetailed) SetSource(v ENUMITEMSPROPERTIESTARGETPROPERTIESAPIROUTEPROPERTIESSOURCE) {
 	o.Source = v
 }
 

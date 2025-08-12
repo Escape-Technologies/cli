@@ -20,8 +20,8 @@ var _ MappedNullable = &CreateAssetAKAMAIRequest{}
 
 // CreateAssetAKAMAIRequest struct for CreateAssetAKAMAIRequest
 type CreateAssetAKAMAIRequest struct {
-	AssetClass string `json:"asset_class"`
-	AssetType string `json:"asset_type"`
+	AssetClass ENUMCDN `json:"asset_class"`
+	AssetType ENUMAKAMAIACCOUNT `json:"asset_type"`
 	Name *string `json:"name,omitempty"`
 	Host string `json:"host"`
 	ClientSecret string `json:"client_secret"`
@@ -36,7 +36,7 @@ type _CreateAssetAKAMAIRequest CreateAssetAKAMAIRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetAKAMAIRequest(assetClass string, assetType string, host string, clientSecret string, accessToken string, clientToken string) *CreateAssetAKAMAIRequest {
+func NewCreateAssetAKAMAIRequest(assetClass ENUMCDN, assetType ENUMAKAMAIACCOUNT, host string, clientSecret string, accessToken string, clientToken string) *CreateAssetAKAMAIRequest {
 	this := CreateAssetAKAMAIRequest{}
 	this.AssetClass = assetClass
 	this.AssetType = assetType
@@ -56,9 +56,9 @@ func NewCreateAssetAKAMAIRequestWithDefaults() *CreateAssetAKAMAIRequest {
 }
 
 // GetAssetClass returns the AssetClass field value
-func (o *CreateAssetAKAMAIRequest) GetAssetClass() string {
+func (o *CreateAssetAKAMAIRequest) GetAssetClass() ENUMCDN {
 	if o == nil {
-		var ret string
+		var ret ENUMCDN
 		return ret
 	}
 
@@ -67,7 +67,7 @@ func (o *CreateAssetAKAMAIRequest) GetAssetClass() string {
 
 // GetAssetClassOk returns a tuple with the AssetClass field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetAKAMAIRequest) GetAssetClassOk() (*string, bool) {
+func (o *CreateAssetAKAMAIRequest) GetAssetClassOk() (*ENUMCDN, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -75,14 +75,14 @@ func (o *CreateAssetAKAMAIRequest) GetAssetClassOk() (*string, bool) {
 }
 
 // SetAssetClass sets field value
-func (o *CreateAssetAKAMAIRequest) SetAssetClass(v string) {
+func (o *CreateAssetAKAMAIRequest) SetAssetClass(v ENUMCDN) {
 	o.AssetClass = v
 }
 
 // GetAssetType returns the AssetType field value
-func (o *CreateAssetAKAMAIRequest) GetAssetType() string {
+func (o *CreateAssetAKAMAIRequest) GetAssetType() ENUMAKAMAIACCOUNT {
 	if o == nil {
-		var ret string
+		var ret ENUMAKAMAIACCOUNT
 		return ret
 	}
 
@@ -91,7 +91,7 @@ func (o *CreateAssetAKAMAIRequest) GetAssetType() string {
 
 // GetAssetTypeOk returns a tuple with the AssetType field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetAKAMAIRequest) GetAssetTypeOk() (*string, bool) {
+func (o *CreateAssetAKAMAIRequest) GetAssetTypeOk() (*ENUMAKAMAIACCOUNT, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -99,7 +99,7 @@ func (o *CreateAssetAKAMAIRequest) GetAssetTypeOk() (*string, bool) {
 }
 
 // SetAssetType sets field value
-func (o *CreateAssetAKAMAIRequest) SetAssetType(v string) {
+func (o *CreateAssetAKAMAIRequest) SetAssetType(v ENUMAKAMAIACCOUNT) {
 	o.AssetType = v
 }
 

@@ -20,8 +20,8 @@ var _ MappedNullable = &CreateAssetAWSRequest{}
 
 // CreateAssetAWSRequest struct for CreateAssetAWSRequest
 type CreateAssetAWSRequest struct {
-	AssetClass string `json:"asset_class"`
-	AssetType string `json:"asset_type"`
+	AssetClass ENUMCLOUDHOSTING `json:"asset_class"`
+	AssetType ENUMAWSACCOUNT `json:"asset_type"`
 	Name *string `json:"name,omitempty"`
 	PublicKey string `json:"public_key"`
 	PrivateKey string `json:"private_key"`
@@ -34,7 +34,7 @@ type _CreateAssetAWSRequest CreateAssetAWSRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetAWSRequest(assetClass string, assetType string, publicKey string, privateKey string) *CreateAssetAWSRequest {
+func NewCreateAssetAWSRequest(assetClass ENUMCLOUDHOSTING, assetType ENUMAWSACCOUNT, publicKey string, privateKey string) *CreateAssetAWSRequest {
 	this := CreateAssetAWSRequest{}
 	this.AssetClass = assetClass
 	this.AssetType = assetType
@@ -52,9 +52,9 @@ func NewCreateAssetAWSRequestWithDefaults() *CreateAssetAWSRequest {
 }
 
 // GetAssetClass returns the AssetClass field value
-func (o *CreateAssetAWSRequest) GetAssetClass() string {
+func (o *CreateAssetAWSRequest) GetAssetClass() ENUMCLOUDHOSTING {
 	if o == nil {
-		var ret string
+		var ret ENUMCLOUDHOSTING
 		return ret
 	}
 
@@ -63,7 +63,7 @@ func (o *CreateAssetAWSRequest) GetAssetClass() string {
 
 // GetAssetClassOk returns a tuple with the AssetClass field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetAWSRequest) GetAssetClassOk() (*string, bool) {
+func (o *CreateAssetAWSRequest) GetAssetClassOk() (*ENUMCLOUDHOSTING, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -71,14 +71,14 @@ func (o *CreateAssetAWSRequest) GetAssetClassOk() (*string, bool) {
 }
 
 // SetAssetClass sets field value
-func (o *CreateAssetAWSRequest) SetAssetClass(v string) {
+func (o *CreateAssetAWSRequest) SetAssetClass(v ENUMCLOUDHOSTING) {
 	o.AssetClass = v
 }
 
 // GetAssetType returns the AssetType field value
-func (o *CreateAssetAWSRequest) GetAssetType() string {
+func (o *CreateAssetAWSRequest) GetAssetType() ENUMAWSACCOUNT {
 	if o == nil {
-		var ret string
+		var ret ENUMAWSACCOUNT
 		return ret
 	}
 
@@ -87,7 +87,7 @@ func (o *CreateAssetAWSRequest) GetAssetType() string {
 
 // GetAssetTypeOk returns a tuple with the AssetType field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetAWSRequest) GetAssetTypeOk() (*string, bool) {
+func (o *CreateAssetAWSRequest) GetAssetTypeOk() (*ENUMAWSACCOUNT, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -95,7 +95,7 @@ func (o *CreateAssetAWSRequest) GetAssetTypeOk() (*string, bool) {
 }
 
 // SetAssetType sets field value
-func (o *CreateAssetAWSRequest) SetAssetType(v string) {
+func (o *CreateAssetAWSRequest) SetAssetType(v ENUMAWSACCOUNT) {
 	o.AssetType = v
 }
 
