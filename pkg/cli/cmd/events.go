@@ -31,8 +31,8 @@ var eventsListCmd = &cobra.Command{
 	Long: `List issues.
 
 Example output:
-ID                                      TYPE         NAME                                                           CREATED AT              HAS CI    CRON
-00000000-0000-0000-0000-000000000001    REST         Example-Application-1                                          2025-02-21T11:15:07Z    false     0 11 * * 5`,
+ID                                      LEVEL    TITLE                      STAGE            CREATED AT
+00000000-0000-0000-0000-000000000001    INFO     Scan started              	EXECUTION        2025-08-12T14:04:58.117Z`,
 	Example: `escape-cli issues list`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
 		events, next, err := escape.ListEvents(cmd.Context(), "", eventLevels)
@@ -70,8 +70,8 @@ var eventGetCmd = &cobra.Command{
 	Long: `Get an event.
 
 Example output:
-ID                                      TYPE         NAME                                                           CREATED AT              HAS CI    CRON
-00000000-0000-0000-0000-000000000001    REST         Example-Application-1                                          2025-02-21T11:15:07Z    false     0 11 * * 5`,
+ID                                      LEVEL    TITLE                          STAGE           LINK
+00000000-0000-0000-0000-000000000001    INFO     Scan started              	    EXECUTION       https://app.escape.tech/events/00000000-0000-0000-0000-000000000001/logs`,
 	Example: `escape-cli events get event-id`,
 	Args:    cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
