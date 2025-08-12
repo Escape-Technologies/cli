@@ -105,11 +105,6 @@ def _rec_extract_enums(schema: dict, path: list[str]) -> tuple[dict, dict[str, d
 
     return schema, enums
 
-
-# if len(sys.argv) != 3:
-#     print("Usage: convert.py <input_file> <output_file>")
-#     sys.exit(1)
-
 with open(input_file, "r") as f:
     raw = (
         json.dumps(json.loads(f.read()))
