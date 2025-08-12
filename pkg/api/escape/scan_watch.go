@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	v2 "github.com/Escape-Technologies/cli/pkg/api/v2"
+	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
 	"github.com/Escape-Technologies/cli/pkg/log"
 )
 
@@ -15,12 +15,12 @@ const (
 )
 
 // WatchScan watches scans status and logs
-func WatchScan(ctx context.Context, scanID string) (chan *v2.ListScans200ResponseDataInner, error) {
-	client, err := newAPIV2Client()
+func WatchScan(ctx context.Context, scanID string) (chan *v3.ScanDetailed1, error) {
+	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
-	ch := make(chan *v2.ListScans200ResponseDataInner)
+	ch := make(chan *v3.ScanDetailed1)
 	go func() {
 		defer close(ch)
 		tries := 0
@@ -38,8 +38,8 @@ func WatchScan(ctx context.Context, scanID string) (chan *v2.ListScans200Respons
 				continue
 			}
 			tries = 0
-			if scan.Status != v2.ENUME48DD51FE8A350A4154904ABF16320D7_STARTING &&
-				scan.Status != v2.ENUME48DD51FE8A350A4154904ABF16320D7_RUNNING {
+			if scan.Status != "STARTING" &&
+				scan.Status != "RUNNING" {
 				log.Info("Scan ended with status %s", scan.Status)
 				ch <- scan
 				return
