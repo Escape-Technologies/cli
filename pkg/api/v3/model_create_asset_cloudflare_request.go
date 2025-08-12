@@ -1,7 +1,7 @@
 /*
 Escape Public API
 
-This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `Authorization` header. For example: `Authorization: Key YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
+This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `X-ESCAPE-API-KEY` header. For example: `X-ESCAPE-API-KEY: YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
 
 API version: 3.0.0
 */
@@ -20,8 +20,8 @@ var _ MappedNullable = &CreateAssetCLOUDFLARERequest{}
 
 // CreateAssetCLOUDFLARERequest struct for CreateAssetCLOUDFLARERequest
 type CreateAssetCLOUDFLARERequest struct {
-	AssetClass EnumCDN `json:"asset_class"`
-	AssetType EnumCLOUDFLAREACCOUNT `json:"asset_type"`
+	AssetClass string `json:"asset_class"`
+	AssetType string `json:"asset_type"`
 	Name *string `json:"name,omitempty"`
 	ApiKey string `json:"api_key"`
 	AdditionalProperties map[string]interface{}
@@ -33,7 +33,7 @@ type _CreateAssetCLOUDFLARERequest CreateAssetCLOUDFLARERequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetCLOUDFLARERequest(assetClass EnumCDN, assetType EnumCLOUDFLAREACCOUNT, apiKey string) *CreateAssetCLOUDFLARERequest {
+func NewCreateAssetCLOUDFLARERequest(assetClass string, assetType string, apiKey string) *CreateAssetCLOUDFLARERequest {
 	this := CreateAssetCLOUDFLARERequest{}
 	this.AssetClass = assetClass
 	this.AssetType = assetType
@@ -50,9 +50,9 @@ func NewCreateAssetCLOUDFLARERequestWithDefaults() *CreateAssetCLOUDFLARERequest
 }
 
 // GetAssetClass returns the AssetClass field value
-func (o *CreateAssetCLOUDFLARERequest) GetAssetClass() EnumCDN {
+func (o *CreateAssetCLOUDFLARERequest) GetAssetClass() string {
 	if o == nil {
-		var ret EnumCDN
+		var ret string
 		return ret
 	}
 
@@ -61,7 +61,7 @@ func (o *CreateAssetCLOUDFLARERequest) GetAssetClass() EnumCDN {
 
 // GetAssetClassOk returns a tuple with the AssetClass field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetCLOUDFLARERequest) GetAssetClassOk() (*EnumCDN, bool) {
+func (o *CreateAssetCLOUDFLARERequest) GetAssetClassOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -69,14 +69,14 @@ func (o *CreateAssetCLOUDFLARERequest) GetAssetClassOk() (*EnumCDN, bool) {
 }
 
 // SetAssetClass sets field value
-func (o *CreateAssetCLOUDFLARERequest) SetAssetClass(v EnumCDN) {
+func (o *CreateAssetCLOUDFLARERequest) SetAssetClass(v string) {
 	o.AssetClass = v
 }
 
 // GetAssetType returns the AssetType field value
-func (o *CreateAssetCLOUDFLARERequest) GetAssetType() EnumCLOUDFLAREACCOUNT {
+func (o *CreateAssetCLOUDFLARERequest) GetAssetType() string {
 	if o == nil {
-		var ret EnumCLOUDFLAREACCOUNT
+		var ret string
 		return ret
 	}
 
@@ -85,7 +85,7 @@ func (o *CreateAssetCLOUDFLARERequest) GetAssetType() EnumCLOUDFLAREACCOUNT {
 
 // GetAssetTypeOk returns a tuple with the AssetType field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetCLOUDFLARERequest) GetAssetTypeOk() (*EnumCLOUDFLAREACCOUNT, bool) {
+func (o *CreateAssetCLOUDFLARERequest) GetAssetTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -93,7 +93,7 @@ func (o *CreateAssetCLOUDFLARERequest) GetAssetTypeOk() (*EnumCLOUDFLAREACCOUNT,
 }
 
 // SetAssetType sets field value
-func (o *CreateAssetCLOUDFLARERequest) SetAssetType(v EnumCLOUDFLAREACCOUNT) {
+func (o *CreateAssetCLOUDFLARERequest) SetAssetType(v string) {
 	o.AssetType = v
 }
 

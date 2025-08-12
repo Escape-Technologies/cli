@@ -1,7 +1,7 @@
 /*
 Escape Public API
 
-This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `Authorization` header. For example: `Authorization: Key YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
+This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `X-ESCAPE-API-KEY` header. For example: `X-ESCAPE-API-KEY: YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
 
 API version: 3.0.0
 */
@@ -20,7 +20,7 @@ var _ MappedNullable = &CreateDastRestProfileRequestConfigurationJsonStrCustomRu
 
 // CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf struct for CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf
 type CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf struct {
-	Key EnumSCHEMAURL `json:"key"`
+	Key string `json:"key"`
 	Value *string `json:"value,omitempty"`
 	Values []string `json:"values,omitempty"`
 	RegexReplace *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOfRegexReplace `json:"regex_replace,omitempty"`
@@ -33,7 +33,7 @@ type _CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformM
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf(key EnumSCHEMAURL) *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf {
+func NewCreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf(key string) *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf {
 	this := CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf{}
 	this.Key = key
 	return &this
@@ -48,9 +48,9 @@ func NewCreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransfor
 }
 
 // GetKey returns the Key field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf) GetKey() EnumSCHEMAURL {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf) GetKey() string {
 	if o == nil {
-		var ret EnumSCHEMAURL
+		var ret string
 		return ret
 	}
 
@@ -59,7 +59,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransfo
 
 // GetKeyOk returns a tuple with the Key field value
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf) GetKeyOk() (*EnumSCHEMAURL, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf) GetKeyOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -67,7 +67,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransfo
 }
 
 // SetKey sets field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf) SetKey(v EnumSCHEMAURL) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf) SetKey(v string) {
 	o.Key = v
 }
 

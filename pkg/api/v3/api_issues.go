@@ -1,7 +1,7 @@
 /*
 Escape Public API
 
-This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `Authorization` header. For example: `Authorization: Key YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
+This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `X-ESCAPE-API-KEY` header. For example: `X-ESCAPE-API-KEY: YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
 
 API version: 3.0.0
 */
@@ -17,6 +17,7 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"reflect"
 )
 
 
@@ -29,7 +30,7 @@ type ApiGetIssueRequest struct {
 	issueId string
 }
 
-func (r ApiGetIssueRequest) Execute() (*GetIssue200Response, *http.Response, error) {
+func (r ApiGetIssueRequest) Execute() (*IssueDetailed, *http.Response, error) {
 	return r.ApiService.GetIssueExecute(r)
 }
 
@@ -51,13 +52,13 @@ func (a *IssuesAPIService) GetIssue(ctx context.Context, issueId string) ApiGetI
 }
 
 // Execute executes the request
-//  @return GetIssue200Response
-func (a *IssuesAPIService) GetIssueExecute(r ApiGetIssueRequest) (*GetIssue200Response, *http.Response, error) {
+//  @return IssueDetailed
+func (a *IssuesAPIService) GetIssueExecute(r ApiGetIssueRequest) (*IssueDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetIssue200Response
+		localVarReturnValue  *IssueDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IssuesAPIService.GetIssue")
@@ -99,7 +100,7 @@ func (a *IssuesAPIService) GetIssueExecute(r ApiGetIssueRequest) (*GetIssue200Re
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -156,7 +157,7 @@ type ApiListIssueActivitiesRequest struct {
 	issueId string
 }
 
-func (r ApiListIssueActivitiesRequest) Execute() (*ListIssueActivities200Response, *http.Response, error) {
+func (r ApiListIssueActivitiesRequest) Execute() (*ActivitySummarized, *http.Response, error) {
 	return r.ApiService.ListIssueActivitiesExecute(r)
 }
 
@@ -178,13 +179,13 @@ func (a *IssuesAPIService) ListIssueActivities(ctx context.Context, issueId stri
 }
 
 // Execute executes the request
-//  @return ListIssueActivities200Response
-func (a *IssuesAPIService) ListIssueActivitiesExecute(r ApiListIssueActivitiesRequest) (*ListIssueActivities200Response, *http.Response, error) {
+//  @return ActivitySummarized
+func (a *IssuesAPIService) ListIssueActivitiesExecute(r ApiListIssueActivitiesRequest) (*ActivitySummarized, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ListIssueActivities200Response
+		localVarReturnValue  *ActivitySummarized
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IssuesAPIService.ListIssueActivities")
@@ -226,7 +227,7 @@ func (a *IssuesAPIService) ListIssueActivitiesExecute(r ApiListIssueActivitiesRe
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -252,8 +253,8 @@ func (a *IssuesAPIService) ListIssueActivitiesExecute(r ApiListIssueActivitiesRe
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400Response
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v GetProfile404Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -282,7 +283,8 @@ type ApiListIssuesRequest struct {
 	ApiService *IssuesAPIService
 	cursor *string
 	size *int
-	sort *ListProfilesSortParameter
+	sortType *string
+	sortDirection *string
 	profileIds *ListIssuesProfileIdsParameter
 	assetIds *ListProfilesAssetIdsParameter
 	domains *ListProfilesDomainsParameter
@@ -292,11 +294,11 @@ type ApiListIssuesRequest struct {
 	tagsIds *ListProfilesTagIdsParameter
 	search *string
 	jiraTicket *string
-	risks *string
-	assetClasses *string
-	scannerKinds *string
-	severities *string
-	status *string
+	risks *[]string
+	assetClasses *[]string
+	scannerKinds *[]string
+	severities *[]string
+	status *[]string
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
@@ -311,8 +313,15 @@ func (r ApiListIssuesRequest) Size(size int) ApiListIssuesRequest {
 	return r
 }
 
-func (r ApiListIssuesRequest) Sort(sort ListProfilesSortParameter) ApiListIssuesRequest {
-	r.sort = &sort
+// The type to sort by
+func (r ApiListIssuesRequest) SortType(sortType string) ApiListIssuesRequest {
+	r.sortType = &sortType
+	return r
+}
+
+// The direction to sort by
+func (r ApiListIssuesRequest) SortDirection(sortDirection string) ApiListIssuesRequest {
+	r.sortDirection = &sortDirection
 	return r
 }
 
@@ -371,31 +380,31 @@ func (r ApiListIssuesRequest) JiraTicket(jiraTicket string) ApiListIssuesRequest
 }
 
 // Filter by risk types
-func (r ApiListIssuesRequest) Risks(risks string) ApiListIssuesRequest {
+func (r ApiListIssuesRequest) Risks(risks []string) ApiListIssuesRequest {
 	r.risks = &risks
 	return r
 }
 
 // Filter by asset classes
-func (r ApiListIssuesRequest) AssetClasses(assetClasses string) ApiListIssuesRequest {
+func (r ApiListIssuesRequest) AssetClasses(assetClasses []string) ApiListIssuesRequest {
 	r.assetClasses = &assetClasses
 	return r
 }
 
 // Filter by scanner kinds
-func (r ApiListIssuesRequest) ScannerKinds(scannerKinds string) ApiListIssuesRequest {
+func (r ApiListIssuesRequest) ScannerKinds(scannerKinds []string) ApiListIssuesRequest {
 	r.scannerKinds = &scannerKinds
 	return r
 }
 
 // Filter by issue severities
-func (r ApiListIssuesRequest) Severities(severities string) ApiListIssuesRequest {
+func (r ApiListIssuesRequest) Severities(severities []string) ApiListIssuesRequest {
 	r.severities = &severities
 	return r
 }
 
 // Filter by issue status
-func (r ApiListIssuesRequest) Status(status string) ApiListIssuesRequest {
+func (r ApiListIssuesRequest) Status(status []string) ApiListIssuesRequest {
 	r.status = &status
 	return r
 }
@@ -449,8 +458,14 @@ func (a *IssuesAPIService) ListIssuesExecute(r ApiListIssuesRequest) (*ListIssue
 		var defaultValue int = 50
 		r.size = &defaultValue
 	}
-	if r.sort != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "sort", r.sort, "form", "")
+	if r.sortType != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortType", r.sortType, "form", "")
+	}
+	if r.sortDirection != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
+	} else {
+		var defaultValue string = "asc"
+		r.sortDirection = &defaultValue
 	}
 	if r.profileIds != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "profileIds", r.profileIds, "form", "")
@@ -480,19 +495,59 @@ func (a *IssuesAPIService) ListIssuesExecute(r ApiListIssuesRequest) (*ListIssue
 		parameterAddToHeaderOrQuery(localVarQueryParams, "jiraTicket", r.jiraTicket, "form", "")
 	}
 	if r.risks != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "risks", r.risks, "form", "")
+		t := *r.risks
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "risks", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "risks", t, "form", "multi")
+		}
 	}
 	if r.assetClasses != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "assetClasses", r.assetClasses, "form", "")
+		t := *r.assetClasses
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "assetClasses", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "assetClasses", t, "form", "multi")
+		}
 	}
 	if r.scannerKinds != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "scannerKinds", r.scannerKinds, "form", "")
+		t := *r.scannerKinds
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "scannerKinds", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "scannerKinds", t, "form", "multi")
+		}
 	}
 	if r.severities != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "severities", r.severities, "form", "")
+		t := *r.severities
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "severities", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "severities", t, "form", "multi")
+		}
 	}
 	if r.status != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "status", r.status, "form", "")
+		t := *r.status
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "status", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "status", t, "form", "multi")
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -521,7 +576,7 @@ func (a *IssuesAPIService) ListIssuesExecute(r ApiListIssuesRequest) (*ListIssue
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -585,7 +640,7 @@ func (r ApiUpdateIssueRequest) UpdateIssueRequest(updateIssueRequest UpdateIssue
 	return r
 }
 
-func (r ApiUpdateIssueRequest) Execute() (*GetIssue200Response, *http.Response, error) {
+func (r ApiUpdateIssueRequest) Execute() (*UpdateIssue200Response, *http.Response, error) {
 	return r.ApiService.UpdateIssueExecute(r)
 }
 
@@ -607,13 +662,13 @@ func (a *IssuesAPIService) UpdateIssue(ctx context.Context, issueId string) ApiU
 }
 
 // Execute executes the request
-//  @return GetIssue200Response
-func (a *IssuesAPIService) UpdateIssueExecute(r ApiUpdateIssueRequest) (*GetIssue200Response, *http.Response, error) {
+//  @return UpdateIssue200Response
+func (a *IssuesAPIService) UpdateIssueExecute(r ApiUpdateIssueRequest) (*UpdateIssue200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetIssue200Response
+		localVarReturnValue  *UpdateIssue200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IssuesAPIService.UpdateIssue")
@@ -657,7 +712,7 @@ func (a *IssuesAPIService) UpdateIssueExecute(r ApiUpdateIssueRequest) (*GetIssu
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}

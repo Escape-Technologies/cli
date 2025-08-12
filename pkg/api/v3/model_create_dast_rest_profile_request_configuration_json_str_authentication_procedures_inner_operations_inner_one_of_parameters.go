@@ -1,7 +1,7 @@
 /*
 Escape Public API
 
-This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `Authorization` header. For example: `Authorization: Key YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
+This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `X-ESCAPE-API-KEY` header. For example: `X-ESCAPE-API-KEY: YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
 
 API version: 3.0.0
 */
@@ -22,7 +22,7 @@ var _ MappedNullable = &CreateDastRestProfileRequestConfigurationJsonStrAuthenti
 type CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOfParameters struct {
 	Proxy *string `json:"proxy,omitempty"`
 	Url string `json:"url"`
-	Method Enum4e0943c4ae7a2a2d426c0a6c0b839e82 `json:"method"`
+	Method string `json:"method"`
 	Headers []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner `json:"headers"`
 	Cookies []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner `json:"cookies"`
 	QueryParameters []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner `json:"queryParameters"`
@@ -39,7 +39,7 @@ type _CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresIn
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOfParameters(url string, method Enum4e0943c4ae7a2a2d426c0a6c0b839e82, headers []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner, cookies []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner, queryParameters []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner) *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOfParameters {
+func NewCreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOfParameters(url string, method string, headers []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner, cookies []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner, queryParameters []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner) *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOfParameters {
 	this := CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOfParameters{}
 	this.Url = url
 	this.Method = method
@@ -114,9 +114,9 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProcedure
 }
 
 // GetMethod returns the Method field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOfParameters) GetMethod() Enum4e0943c4ae7a2a2d426c0a6c0b839e82 {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOfParameters) GetMethod() string {
 	if o == nil {
-		var ret Enum4e0943c4ae7a2a2d426c0a6c0b839e82
+		var ret string
 		return ret
 	}
 
@@ -125,7 +125,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProcedure
 
 // GetMethodOk returns a tuple with the Method field value
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOfParameters) GetMethodOk() (*Enum4e0943c4ae7a2a2d426c0a6c0b839e82, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOfParameters) GetMethodOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -133,7 +133,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProcedure
 }
 
 // SetMethod sets field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOfParameters) SetMethod(v Enum4e0943c4ae7a2a2d426c0a6c0b839e82) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOfParameters) SetMethod(v string) {
 	o.Method = v
 }
 

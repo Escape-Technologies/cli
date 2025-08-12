@@ -1,7 +1,7 @@
 /*
 Escape Public API
 
-This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `Authorization` header. For example: `Authorization: Key YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
+This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `X-ESCAPE-API-KEY` header. For example: `X-ESCAPE-API-KEY: YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
 
 API version: 3.0.0
 */
@@ -27,11 +27,13 @@ type ApiListAuditLogsRequest struct {
 	ApiService *AuditAPIService
 	cursor *string
 	size *int
-	sort *ListProfilesSortParameter
+	sortType *string
+	sortDirection *string
 	startTime *string
 	endTime *string
 	action *string
 	actor *string
+	search *string
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
@@ -46,8 +48,15 @@ func (r ApiListAuditLogsRequest) Size(size int) ApiListAuditLogsRequest {
 	return r
 }
 
-func (r ApiListAuditLogsRequest) Sort(sort ListProfilesSortParameter) ApiListAuditLogsRequest {
-	r.sort = &sort
+// The type to sort by
+func (r ApiListAuditLogsRequest) SortType(sortType string) ApiListAuditLogsRequest {
+	r.sortType = &sortType
+	return r
+}
+
+// The direction to sort by
+func (r ApiListAuditLogsRequest) SortDirection(sortDirection string) ApiListAuditLogsRequest {
+	r.sortDirection = &sortDirection
 	return r
 }
 
@@ -72,6 +81,12 @@ func (r ApiListAuditLogsRequest) Action(action string) ApiListAuditLogsRequest {
 // Filter by actor
 func (r ApiListAuditLogsRequest) Actor(actor string) ApiListAuditLogsRequest {
 	r.actor = &actor
+	return r
+}
+
+// Filter by search term
+func (r ApiListAuditLogsRequest) Search(search string) ApiListAuditLogsRequest {
+	r.search = &search
 	return r
 }
 
@@ -124,8 +139,14 @@ func (a *AuditAPIService) ListAuditLogsExecute(r ApiListAuditLogsRequest) (*List
 		var defaultValue int = 50
 		r.size = &defaultValue
 	}
-	if r.sort != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "sort", r.sort, "form", "")
+	if r.sortType != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortType", r.sortType, "form", "")
+	}
+	if r.sortDirection != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
+	} else {
+		var defaultValue string = "asc"
+		r.sortDirection = &defaultValue
 	}
 	if r.startTime != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "startTime", r.startTime, "form", "")
@@ -138,6 +159,9 @@ func (a *AuditAPIService) ListAuditLogsExecute(r ApiListAuditLogsRequest) (*List
 	}
 	if r.actor != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "actor", r.actor, "form", "")
+	}
+	if r.search != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -166,7 +190,7 @@ func (a *AuditAPIService) ListAuditLogsExecute(r ApiListAuditLogsRequest) (*List
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}

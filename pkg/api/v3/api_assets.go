@@ -1,7 +1,7 @@
 /*
 Escape Public API
 
-This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `Authorization` header. For example: `Authorization: Key YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
+This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `X-ESCAPE-API-KEY` header. For example: `X-ESCAPE-API-KEY: YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
 
 API version: 3.0.0
 */
@@ -35,7 +35,7 @@ func (r ApiCreateAssetAKAMAIRequest) CreateAssetAKAMAIRequest(createAssetAKAMAIR
 	return r
 }
 
-func (r ApiCreateAssetAKAMAIRequest) Execute() (*ListProfiles200ResponseDataInnerAsset, *http.Response, error) {
+func (r ApiCreateAssetAKAMAIRequest) Execute() (*AssetDetailed, *http.Response, error) {
 	return r.ApiService.CreateAssetAKAMAIExecute(r)
 }
 
@@ -55,13 +55,13 @@ func (a *AssetsAPIService) CreateAssetAKAMAI(ctx context.Context) ApiCreateAsset
 }
 
 // Execute executes the request
-//  @return ListProfiles200ResponseDataInnerAsset
-func (a *AssetsAPIService) CreateAssetAKAMAIExecute(r ApiCreateAssetAKAMAIRequest) (*ListProfiles200ResponseDataInnerAsset, *http.Response, error) {
+//  @return AssetDetailed
+func (a *AssetsAPIService) CreateAssetAKAMAIExecute(r ApiCreateAssetAKAMAIRequest) (*AssetDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ListProfiles200ResponseDataInnerAsset
+		localVarReturnValue  *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetAKAMAI")
@@ -104,7 +104,7 @@ func (a *AssetsAPIService) CreateAssetAKAMAIExecute(r ApiCreateAssetAKAMAIReques
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -167,7 +167,7 @@ func (r ApiCreateAssetAWSRequest) CreateAssetAWSRequest(createAssetAWSRequest Cr
 	return r
 }
 
-func (r ApiCreateAssetAWSRequest) Execute() (*ListProfiles200ResponseDataInnerAsset, *http.Response, error) {
+func (r ApiCreateAssetAWSRequest) Execute() (*AssetDetailed, *http.Response, error) {
 	return r.ApiService.CreateAssetAWSExecute(r)
 }
 
@@ -187,13 +187,13 @@ func (a *AssetsAPIService) CreateAssetAWS(ctx context.Context) ApiCreateAssetAWS
 }
 
 // Execute executes the request
-//  @return ListProfiles200ResponseDataInnerAsset
-func (a *AssetsAPIService) CreateAssetAWSExecute(r ApiCreateAssetAWSRequest) (*ListProfiles200ResponseDataInnerAsset, *http.Response, error) {
+//  @return AssetDetailed
+func (a *AssetsAPIService) CreateAssetAWSExecute(r ApiCreateAssetAWSRequest) (*AssetDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ListProfiles200ResponseDataInnerAsset
+		localVarReturnValue  *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetAWS")
@@ -236,7 +236,7 @@ func (a *AssetsAPIService) CreateAssetAWSExecute(r ApiCreateAssetAWSRequest) (*L
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -299,7 +299,7 @@ func (r ApiCreateAssetAZURERequest) CreateAssetAZURERequest(createAssetAZURERequ
 	return r
 }
 
-func (r ApiCreateAssetAZURERequest) Execute() (*ListProfiles200ResponseDataInnerAsset, *http.Response, error) {
+func (r ApiCreateAssetAZURERequest) Execute() (*AssetDetailed, *http.Response, error) {
 	return r.ApiService.CreateAssetAZUREExecute(r)
 }
 
@@ -319,13 +319,13 @@ func (a *AssetsAPIService) CreateAssetAZURE(ctx context.Context) ApiCreateAssetA
 }
 
 // Execute executes the request
-//  @return ListProfiles200ResponseDataInnerAsset
-func (a *AssetsAPIService) CreateAssetAZUREExecute(r ApiCreateAssetAZURERequest) (*ListProfiles200ResponseDataInnerAsset, *http.Response, error) {
+//  @return AssetDetailed
+func (a *AssetsAPIService) CreateAssetAZUREExecute(r ApiCreateAssetAZURERequest) (*AssetDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ListProfiles200ResponseDataInnerAsset
+		localVarReturnValue  *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetAZURE")
@@ -368,7 +368,7 @@ func (a *AssetsAPIService) CreateAssetAZUREExecute(r ApiCreateAssetAZURERequest)
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -431,7 +431,7 @@ func (r ApiCreateAssetCLOUDFLARERequest) CreateAssetCLOUDFLARERequest(createAsse
 	return r
 }
 
-func (r ApiCreateAssetCLOUDFLARERequest) Execute() (*ListProfiles200ResponseDataInnerAsset, *http.Response, error) {
+func (r ApiCreateAssetCLOUDFLARERequest) Execute() (*AssetDetailed, *http.Response, error) {
 	return r.ApiService.CreateAssetCLOUDFLAREExecute(r)
 }
 
@@ -451,13 +451,13 @@ func (a *AssetsAPIService) CreateAssetCLOUDFLARE(ctx context.Context) ApiCreateA
 }
 
 // Execute executes the request
-//  @return ListProfiles200ResponseDataInnerAsset
-func (a *AssetsAPIService) CreateAssetCLOUDFLAREExecute(r ApiCreateAssetCLOUDFLARERequest) (*ListProfiles200ResponseDataInnerAsset, *http.Response, error) {
+//  @return AssetDetailed
+func (a *AssetsAPIService) CreateAssetCLOUDFLAREExecute(r ApiCreateAssetCLOUDFLARERequest) (*AssetDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ListProfiles200ResponseDataInnerAsset
+		localVarReturnValue  *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetCLOUDFLARE")
@@ -500,7 +500,7 @@ func (a *AssetsAPIService) CreateAssetCLOUDFLAREExecute(r ApiCreateAssetCLOUDFLA
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -563,7 +563,7 @@ func (r ApiCreateAssetDNSRequest) CreateAssetDNSRequest(createAssetDNSRequest Cr
 	return r
 }
 
-func (r ApiCreateAssetDNSRequest) Execute() (*ListProfiles200ResponseDataInnerAsset, *http.Response, error) {
+func (r ApiCreateAssetDNSRequest) Execute() (*AssetDetailed, *http.Response, error) {
 	return r.ApiService.CreateAssetDNSExecute(r)
 }
 
@@ -583,13 +583,13 @@ func (a *AssetsAPIService) CreateAssetDNS(ctx context.Context) ApiCreateAssetDNS
 }
 
 // Execute executes the request
-//  @return ListProfiles200ResponseDataInnerAsset
-func (a *AssetsAPIService) CreateAssetDNSExecute(r ApiCreateAssetDNSRequest) (*ListProfiles200ResponseDataInnerAsset, *http.Response, error) {
+//  @return AssetDetailed
+func (a *AssetsAPIService) CreateAssetDNSExecute(r ApiCreateAssetDNSRequest) (*AssetDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ListProfiles200ResponseDataInnerAsset
+		localVarReturnValue  *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetDNS")
@@ -632,7 +632,7 @@ func (a *AssetsAPIService) CreateAssetDNSExecute(r ApiCreateAssetDNSRequest) (*L
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -695,7 +695,7 @@ func (r ApiCreateAssetGCPRequest) CreateAssetGCPRequest(createAssetGCPRequest Cr
 	return r
 }
 
-func (r ApiCreateAssetGCPRequest) Execute() (*ListProfiles200ResponseDataInnerAsset, *http.Response, error) {
+func (r ApiCreateAssetGCPRequest) Execute() (*AssetDetailed, *http.Response, error) {
 	return r.ApiService.CreateAssetGCPExecute(r)
 }
 
@@ -715,13 +715,13 @@ func (a *AssetsAPIService) CreateAssetGCP(ctx context.Context) ApiCreateAssetGCP
 }
 
 // Execute executes the request
-//  @return ListProfiles200ResponseDataInnerAsset
-func (a *AssetsAPIService) CreateAssetGCPExecute(r ApiCreateAssetGCPRequest) (*ListProfiles200ResponseDataInnerAsset, *http.Response, error) {
+//  @return AssetDetailed
+func (a *AssetsAPIService) CreateAssetGCPExecute(r ApiCreateAssetGCPRequest) (*AssetDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ListProfiles200ResponseDataInnerAsset
+		localVarReturnValue  *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetGCP")
@@ -764,7 +764,7 @@ func (a *AssetsAPIService) CreateAssetGCPExecute(r ApiCreateAssetGCPRequest) (*L
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -827,7 +827,7 @@ func (r ApiCreateAssetGITHUBRequest) CreateAssetGITHUBRequest(createAssetGITHUBR
 	return r
 }
 
-func (r ApiCreateAssetGITHUBRequest) Execute() (*ListProfiles200ResponseDataInnerAsset, *http.Response, error) {
+func (r ApiCreateAssetGITHUBRequest) Execute() (*AssetDetailed, *http.Response, error) {
 	return r.ApiService.CreateAssetGITHUBExecute(r)
 }
 
@@ -847,13 +847,13 @@ func (a *AssetsAPIService) CreateAssetGITHUB(ctx context.Context) ApiCreateAsset
 }
 
 // Execute executes the request
-//  @return ListProfiles200ResponseDataInnerAsset
-func (a *AssetsAPIService) CreateAssetGITHUBExecute(r ApiCreateAssetGITHUBRequest) (*ListProfiles200ResponseDataInnerAsset, *http.Response, error) {
+//  @return AssetDetailed
+func (a *AssetsAPIService) CreateAssetGITHUBExecute(r ApiCreateAssetGITHUBRequest) (*AssetDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ListProfiles200ResponseDataInnerAsset
+		localVarReturnValue  *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetGITHUB")
@@ -896,7 +896,7 @@ func (a *AssetsAPIService) CreateAssetGITHUBExecute(r ApiCreateAssetGITHUBReques
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -959,7 +959,7 @@ func (r ApiCreateAssetGITHUBORGANIZATIONRequest) CreateAssetGITHUBORGANIZATIONRe
 	return r
 }
 
-func (r ApiCreateAssetGITHUBORGANIZATIONRequest) Execute() (*ListProfiles200ResponseDataInnerAsset, *http.Response, error) {
+func (r ApiCreateAssetGITHUBORGANIZATIONRequest) Execute() (*AssetDetailed, *http.Response, error) {
 	return r.ApiService.CreateAssetGITHUBORGANIZATIONExecute(r)
 }
 
@@ -979,13 +979,13 @@ func (a *AssetsAPIService) CreateAssetGITHUBORGANIZATION(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//  @return ListProfiles200ResponseDataInnerAsset
-func (a *AssetsAPIService) CreateAssetGITHUBORGANIZATIONExecute(r ApiCreateAssetGITHUBORGANIZATIONRequest) (*ListProfiles200ResponseDataInnerAsset, *http.Response, error) {
+//  @return AssetDetailed
+func (a *AssetsAPIService) CreateAssetGITHUBORGANIZATIONExecute(r ApiCreateAssetGITHUBORGANIZATIONRequest) (*AssetDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ListProfiles200ResponseDataInnerAsset
+		localVarReturnValue  *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetGITHUBORGANIZATION")
@@ -1028,7 +1028,7 @@ func (a *AssetsAPIService) CreateAssetGITHUBORGANIZATIONExecute(r ApiCreateAsset
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -1091,7 +1091,7 @@ func (r ApiCreateAssetGITLABRequest) CreateAssetGITLABRequest(createAssetGITLABR
 	return r
 }
 
-func (r ApiCreateAssetGITLABRequest) Execute() (*ListProfiles200ResponseDataInnerAsset, *http.Response, error) {
+func (r ApiCreateAssetGITLABRequest) Execute() (*AssetDetailed, *http.Response, error) {
 	return r.ApiService.CreateAssetGITLABExecute(r)
 }
 
@@ -1111,13 +1111,13 @@ func (a *AssetsAPIService) CreateAssetGITLAB(ctx context.Context) ApiCreateAsset
 }
 
 // Execute executes the request
-//  @return ListProfiles200ResponseDataInnerAsset
-func (a *AssetsAPIService) CreateAssetGITLABExecute(r ApiCreateAssetGITLABRequest) (*ListProfiles200ResponseDataInnerAsset, *http.Response, error) {
+//  @return AssetDetailed
+func (a *AssetsAPIService) CreateAssetGITLABExecute(r ApiCreateAssetGITLABRequest) (*AssetDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ListProfiles200ResponseDataInnerAsset
+		localVarReturnValue  *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetGITLAB")
@@ -1160,7 +1160,7 @@ func (a *AssetsAPIService) CreateAssetGITLABExecute(r ApiCreateAssetGITLABReques
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -1223,7 +1223,7 @@ func (r ApiCreateAssetGITLABGROUPRequest) CreateAssetGITLABGROUPRequest(createAs
 	return r
 }
 
-func (r ApiCreateAssetGITLABGROUPRequest) Execute() (*ListProfiles200ResponseDataInnerAsset, *http.Response, error) {
+func (r ApiCreateAssetGITLABGROUPRequest) Execute() (*AssetDetailed, *http.Response, error) {
 	return r.ApiService.CreateAssetGITLABGROUPExecute(r)
 }
 
@@ -1243,13 +1243,13 @@ func (a *AssetsAPIService) CreateAssetGITLABGROUP(ctx context.Context) ApiCreate
 }
 
 // Execute executes the request
-//  @return ListProfiles200ResponseDataInnerAsset
-func (a *AssetsAPIService) CreateAssetGITLABGROUPExecute(r ApiCreateAssetGITLABGROUPRequest) (*ListProfiles200ResponseDataInnerAsset, *http.Response, error) {
+//  @return AssetDetailed
+func (a *AssetsAPIService) CreateAssetGITLABGROUPExecute(r ApiCreateAssetGITLABGROUPRequest) (*AssetDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ListProfiles200ResponseDataInnerAsset
+		localVarReturnValue  *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetGITLABGROUP")
@@ -1292,7 +1292,7 @@ func (a *AssetsAPIService) CreateAssetGITLABGROUPExecute(r ApiCreateAssetGITLABG
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -1355,7 +1355,7 @@ func (r ApiCreateAssetGRAPHQLRequest) CreateAssetGRAPHQLRequest(createAssetGRAPH
 	return r
 }
 
-func (r ApiCreateAssetGRAPHQLRequest) Execute() (*ListProfiles200ResponseDataInnerAsset, *http.Response, error) {
+func (r ApiCreateAssetGRAPHQLRequest) Execute() (*AssetDetailed, *http.Response, error) {
 	return r.ApiService.CreateAssetGRAPHQLExecute(r)
 }
 
@@ -1375,13 +1375,13 @@ func (a *AssetsAPIService) CreateAssetGRAPHQL(ctx context.Context) ApiCreateAsse
 }
 
 // Execute executes the request
-//  @return ListProfiles200ResponseDataInnerAsset
-func (a *AssetsAPIService) CreateAssetGRAPHQLExecute(r ApiCreateAssetGRAPHQLRequest) (*ListProfiles200ResponseDataInnerAsset, *http.Response, error) {
+//  @return AssetDetailed
+func (a *AssetsAPIService) CreateAssetGRAPHQLExecute(r ApiCreateAssetGRAPHQLRequest) (*AssetDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ListProfiles200ResponseDataInnerAsset
+		localVarReturnValue  *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetGRAPHQL")
@@ -1424,7 +1424,7 @@ func (a *AssetsAPIService) CreateAssetGRAPHQLExecute(r ApiCreateAssetGRAPHQLRequ
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -1487,7 +1487,7 @@ func (r ApiCreateAssetGRPCRequest) CreateAssetGRPCRequest(createAssetGRPCRequest
 	return r
 }
 
-func (r ApiCreateAssetGRPCRequest) Execute() (*ListProfiles200ResponseDataInnerAsset, *http.Response, error) {
+func (r ApiCreateAssetGRPCRequest) Execute() (*AssetDetailed, *http.Response, error) {
 	return r.ApiService.CreateAssetGRPCExecute(r)
 }
 
@@ -1507,13 +1507,13 @@ func (a *AssetsAPIService) CreateAssetGRPC(ctx context.Context) ApiCreateAssetGR
 }
 
 // Execute executes the request
-//  @return ListProfiles200ResponseDataInnerAsset
-func (a *AssetsAPIService) CreateAssetGRPCExecute(r ApiCreateAssetGRPCRequest) (*ListProfiles200ResponseDataInnerAsset, *http.Response, error) {
+//  @return AssetDetailed
+func (a *AssetsAPIService) CreateAssetGRPCExecute(r ApiCreateAssetGRPCRequest) (*AssetDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ListProfiles200ResponseDataInnerAsset
+		localVarReturnValue  *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetGRPC")
@@ -1556,7 +1556,7 @@ func (a *AssetsAPIService) CreateAssetGRPCExecute(r ApiCreateAssetGRPCRequest) (
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -1619,7 +1619,7 @@ func (r ApiCreateAssetIPV4Request) CreateAssetIPV4Request(createAssetIPV4Request
 	return r
 }
 
-func (r ApiCreateAssetIPV4Request) Execute() (*ListProfiles200ResponseDataInnerAsset, *http.Response, error) {
+func (r ApiCreateAssetIPV4Request) Execute() (*AssetDetailed, *http.Response, error) {
 	return r.ApiService.CreateAssetIPV4Execute(r)
 }
 
@@ -1639,13 +1639,13 @@ func (a *AssetsAPIService) CreateAssetIPV4(ctx context.Context) ApiCreateAssetIP
 }
 
 // Execute executes the request
-//  @return ListProfiles200ResponseDataInnerAsset
-func (a *AssetsAPIService) CreateAssetIPV4Execute(r ApiCreateAssetIPV4Request) (*ListProfiles200ResponseDataInnerAsset, *http.Response, error) {
+//  @return AssetDetailed
+func (a *AssetsAPIService) CreateAssetIPV4Execute(r ApiCreateAssetIPV4Request) (*AssetDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ListProfiles200ResponseDataInnerAsset
+		localVarReturnValue  *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetIPV4")
@@ -1688,7 +1688,7 @@ func (a *AssetsAPIService) CreateAssetIPV4Execute(r ApiCreateAssetIPV4Request) (
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -1751,7 +1751,7 @@ func (r ApiCreateAssetIPV6Request) CreateAssetIPV6Request(createAssetIPV6Request
 	return r
 }
 
-func (r ApiCreateAssetIPV6Request) Execute() (*ListProfiles200ResponseDataInnerAsset, *http.Response, error) {
+func (r ApiCreateAssetIPV6Request) Execute() (*AssetDetailed, *http.Response, error) {
 	return r.ApiService.CreateAssetIPV6Execute(r)
 }
 
@@ -1771,13 +1771,13 @@ func (a *AssetsAPIService) CreateAssetIPV6(ctx context.Context) ApiCreateAssetIP
 }
 
 // Execute executes the request
-//  @return ListProfiles200ResponseDataInnerAsset
-func (a *AssetsAPIService) CreateAssetIPV6Execute(r ApiCreateAssetIPV6Request) (*ListProfiles200ResponseDataInnerAsset, *http.Response, error) {
+//  @return AssetDetailed
+func (a *AssetsAPIService) CreateAssetIPV6Execute(r ApiCreateAssetIPV6Request) (*AssetDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ListProfiles200ResponseDataInnerAsset
+		localVarReturnValue  *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetIPV6")
@@ -1820,7 +1820,7 @@ func (a *AssetsAPIService) CreateAssetIPV6Execute(r ApiCreateAssetIPV6Request) (
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -1883,7 +1883,7 @@ func (r ApiCreateAssetKUBERNETESRequest) CreateAssetKUBERNETESRequest(createAsse
 	return r
 }
 
-func (r ApiCreateAssetKUBERNETESRequest) Execute() (*ListProfiles200ResponseDataInnerAsset, *http.Response, error) {
+func (r ApiCreateAssetKUBERNETESRequest) Execute() (*AssetDetailed, *http.Response, error) {
 	return r.ApiService.CreateAssetKUBERNETESExecute(r)
 }
 
@@ -1903,13 +1903,13 @@ func (a *AssetsAPIService) CreateAssetKUBERNETES(ctx context.Context) ApiCreateA
 }
 
 // Execute executes the request
-//  @return ListProfiles200ResponseDataInnerAsset
-func (a *AssetsAPIService) CreateAssetKUBERNETESExecute(r ApiCreateAssetKUBERNETESRequest) (*ListProfiles200ResponseDataInnerAsset, *http.Response, error) {
+//  @return AssetDetailed
+func (a *AssetsAPIService) CreateAssetKUBERNETESExecute(r ApiCreateAssetKUBERNETESRequest) (*AssetDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ListProfiles200ResponseDataInnerAsset
+		localVarReturnValue  *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetKUBERNETES")
@@ -1952,7 +1952,7 @@ func (a *AssetsAPIService) CreateAssetKUBERNETESExecute(r ApiCreateAssetKUBERNET
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -2015,7 +2015,7 @@ func (r ApiCreateAssetPOSTMANRequest) CreateAssetPOSTMANRequest(createAssetPOSTM
 	return r
 }
 
-func (r ApiCreateAssetPOSTMANRequest) Execute() (*ListProfiles200ResponseDataInnerAsset, *http.Response, error) {
+func (r ApiCreateAssetPOSTMANRequest) Execute() (*AssetDetailed, *http.Response, error) {
 	return r.ApiService.CreateAssetPOSTMANExecute(r)
 }
 
@@ -2035,13 +2035,13 @@ func (a *AssetsAPIService) CreateAssetPOSTMAN(ctx context.Context) ApiCreateAsse
 }
 
 // Execute executes the request
-//  @return ListProfiles200ResponseDataInnerAsset
-func (a *AssetsAPIService) CreateAssetPOSTMANExecute(r ApiCreateAssetPOSTMANRequest) (*ListProfiles200ResponseDataInnerAsset, *http.Response, error) {
+//  @return AssetDetailed
+func (a *AssetsAPIService) CreateAssetPOSTMANExecute(r ApiCreateAssetPOSTMANRequest) (*AssetDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ListProfiles200ResponseDataInnerAsset
+		localVarReturnValue  *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetPOSTMAN")
@@ -2084,7 +2084,7 @@ func (a *AssetsAPIService) CreateAssetPOSTMANExecute(r ApiCreateAssetPOSTMANRequ
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -2147,7 +2147,7 @@ func (r ApiCreateAssetRESTRequest) CreateAssetRESTRequest(createAssetRESTRequest
 	return r
 }
 
-func (r ApiCreateAssetRESTRequest) Execute() (*ListProfiles200ResponseDataInnerAsset, *http.Response, error) {
+func (r ApiCreateAssetRESTRequest) Execute() (*AssetDetailed, *http.Response, error) {
 	return r.ApiService.CreateAssetRESTExecute(r)
 }
 
@@ -2167,13 +2167,13 @@ func (a *AssetsAPIService) CreateAssetREST(ctx context.Context) ApiCreateAssetRE
 }
 
 // Execute executes the request
-//  @return ListProfiles200ResponseDataInnerAsset
-func (a *AssetsAPIService) CreateAssetRESTExecute(r ApiCreateAssetRESTRequest) (*ListProfiles200ResponseDataInnerAsset, *http.Response, error) {
+//  @return AssetDetailed
+func (a *AssetsAPIService) CreateAssetRESTExecute(r ApiCreateAssetRESTRequest) (*AssetDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ListProfiles200ResponseDataInnerAsset
+		localVarReturnValue  *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetREST")
@@ -2216,7 +2216,7 @@ func (a *AssetsAPIService) CreateAssetRESTExecute(r ApiCreateAssetRESTRequest) (
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -2279,7 +2279,7 @@ func (r ApiCreateAssetWEBAPPRequest) CreateAssetWEBAPPRequest(createAssetWEBAPPR
 	return r
 }
 
-func (r ApiCreateAssetWEBAPPRequest) Execute() (*ListProfiles200ResponseDataInnerAsset, *http.Response, error) {
+func (r ApiCreateAssetWEBAPPRequest) Execute() (*AssetDetailed, *http.Response, error) {
 	return r.ApiService.CreateAssetWEBAPPExecute(r)
 }
 
@@ -2299,13 +2299,13 @@ func (a *AssetsAPIService) CreateAssetWEBAPP(ctx context.Context) ApiCreateAsset
 }
 
 // Execute executes the request
-//  @return ListProfiles200ResponseDataInnerAsset
-func (a *AssetsAPIService) CreateAssetWEBAPPExecute(r ApiCreateAssetWEBAPPRequest) (*ListProfiles200ResponseDataInnerAsset, *http.Response, error) {
+//  @return AssetDetailed
+func (a *AssetsAPIService) CreateAssetWEBAPPExecute(r ApiCreateAssetWEBAPPRequest) (*AssetDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ListProfiles200ResponseDataInnerAsset
+		localVarReturnValue  *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetWEBAPP")
@@ -2348,7 +2348,7 @@ func (a *AssetsAPIService) CreateAssetWEBAPPExecute(r ApiCreateAssetWEBAPPReques
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -2411,7 +2411,7 @@ func (r ApiCreateAssetWIZRequest) CreateAssetWIZRequest(createAssetWIZRequest Cr
 	return r
 }
 
-func (r ApiCreateAssetWIZRequest) Execute() (*ListProfiles200ResponseDataInnerAsset, *http.Response, error) {
+func (r ApiCreateAssetWIZRequest) Execute() (*AssetDetailed, *http.Response, error) {
 	return r.ApiService.CreateAssetWIZExecute(r)
 }
 
@@ -2431,13 +2431,13 @@ func (a *AssetsAPIService) CreateAssetWIZ(ctx context.Context) ApiCreateAssetWIZ
 }
 
 // Execute executes the request
-//  @return ListProfiles200ResponseDataInnerAsset
-func (a *AssetsAPIService) CreateAssetWIZExecute(r ApiCreateAssetWIZRequest) (*ListProfiles200ResponseDataInnerAsset, *http.Response, error) {
+//  @return AssetDetailed
+func (a *AssetsAPIService) CreateAssetWIZExecute(r ApiCreateAssetWIZRequest) (*AssetDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ListProfiles200ResponseDataInnerAsset
+		localVarReturnValue  *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetWIZ")
@@ -2480,7 +2480,7 @@ func (a *AssetsAPIService) CreateAssetWIZExecute(r ApiCreateAssetWIZRequest) (*L
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -2607,7 +2607,7 @@ func (a *AssetsAPIService) DeleteAssetExecute(r ApiDeleteAssetRequest) (*DeleteP
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -2664,7 +2664,7 @@ type ApiGetAssetRequest struct {
 	assetId string
 }
 
-func (r ApiGetAssetRequest) Execute() (*ListProfiles200ResponseDataInnerAsset, *http.Response, error) {
+func (r ApiGetAssetRequest) Execute() (*AssetDetailed, *http.Response, error) {
 	return r.ApiService.GetAssetExecute(r)
 }
 
@@ -2686,13 +2686,13 @@ func (a *AssetsAPIService) GetAsset(ctx context.Context, assetId string) ApiGetA
 }
 
 // Execute executes the request
-//  @return ListProfiles200ResponseDataInnerAsset
-func (a *AssetsAPIService) GetAssetExecute(r ApiGetAssetRequest) (*ListProfiles200ResponseDataInnerAsset, *http.Response, error) {
+//  @return AssetDetailed
+func (a *AssetsAPIService) GetAssetExecute(r ApiGetAssetRequest) (*AssetDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ListProfiles200ResponseDataInnerAsset
+		localVarReturnValue  *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.GetAsset")
@@ -2734,7 +2734,7 @@ func (a *AssetsAPIService) GetAssetExecute(r ApiGetAssetRequest) (*ListProfiles2
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -2790,7 +2790,8 @@ type ApiListAssetsRequest struct {
 	ApiService *AssetsAPIService
 	cursor *string
 	size *int
-	sort *ListProfilesSortParameter
+	sortType *string
+	sortDirection *string
 	search *string
 }
 
@@ -2806,8 +2807,15 @@ func (r ApiListAssetsRequest) Size(size int) ApiListAssetsRequest {
 	return r
 }
 
-func (r ApiListAssetsRequest) Sort(sort ListProfilesSortParameter) ApiListAssetsRequest {
-	r.sort = &sort
+// The type to sort by
+func (r ApiListAssetsRequest) SortType(sortType string) ApiListAssetsRequest {
+	r.sortType = &sortType
+	return r
+}
+
+// The direction to sort by
+func (r ApiListAssetsRequest) SortDirection(sortDirection string) ApiListAssetsRequest {
+	r.sortDirection = &sortDirection
 	return r
 }
 
@@ -2866,8 +2874,14 @@ func (a *AssetsAPIService) ListAssetsExecute(r ApiListAssetsRequest) (*ListAsset
 		var defaultValue int = 50
 		r.size = &defaultValue
 	}
-	if r.sort != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "sort", r.sort, "form", "")
+	if r.sortType != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortType", r.sortType, "form", "")
+	}
+	if r.sortDirection != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
+	} else {
+		var defaultValue string = "asc"
+		r.sortDirection = &defaultValue
 	}
 	if r.search != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")
@@ -2899,7 +2913,7 @@ func (a *AssetsAPIService) ListAssetsExecute(r ApiListAssetsRequest) (*ListAsset
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -2963,7 +2977,7 @@ func (r ApiUpdateAssetRequest) UpdateAssetRequest(updateAssetRequest UpdateAsset
 	return r
 }
 
-func (r ApiUpdateAssetRequest) Execute() (*ListProfiles200ResponseDataInnerAsset, *http.Response, error) {
+func (r ApiUpdateAssetRequest) Execute() (*AssetDetailed, *http.Response, error) {
 	return r.ApiService.UpdateAssetExecute(r)
 }
 
@@ -2985,13 +2999,13 @@ func (a *AssetsAPIService) UpdateAsset(ctx context.Context, assetId string) ApiU
 }
 
 // Execute executes the request
-//  @return ListProfiles200ResponseDataInnerAsset
-func (a *AssetsAPIService) UpdateAssetExecute(r ApiUpdateAssetRequest) (*ListProfiles200ResponseDataInnerAsset, *http.Response, error) {
+//  @return AssetDetailed
+func (a *AssetsAPIService) UpdateAssetExecute(r ApiUpdateAssetRequest) (*AssetDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ListProfiles200ResponseDataInnerAsset
+		localVarReturnValue  *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.UpdateAsset")
@@ -3035,7 +3049,7 @@ func (a *AssetsAPIService) UpdateAssetExecute(r ApiUpdateAssetRequest) (*ListPro
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}

@@ -1,7 +1,7 @@
 /*
 Escape Public API
 
-This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `Authorization` header. For example: `Authorization: Key YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
+This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `X-ESCAPE-API-KEY` header. For example: `X-ESCAPE-API-KEY: YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
 
 API version: 3.0.0
 */
@@ -19,9 +19,9 @@ var _ MappedNullable = &CreateDastRestProfileRequestConfigurationJsonStrCustomRu
 
 // CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf7Type struct for CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf7Type
 type CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf7Type struct {
-	Is *Enum88381acf2baeed408becef5653510069 `json:"is,omitempty"`
-	IsNot *Enum88381acf2baeed408becef5653510069 `json:"is_not,omitempty"`
-	In []Enum88381acf2baeed408becef5653510069 `json:"in,omitempty"`
+	Is *string `json:"is,omitempty"`
+	IsNot *string `json:"is_not,omitempty"`
+	In []ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS7PROPERTIESTYPEPROPERTIESINITEMS `json:"in,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -45,9 +45,9 @@ func NewCreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransfor
 }
 
 // GetIs returns the Is field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf7Type) GetIs() Enum88381acf2baeed408becef5653510069 {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf7Type) GetIs() string {
 	if o == nil || IsNil(o.Is) {
-		var ret Enum88381acf2baeed408becef5653510069
+		var ret string
 		return ret
 	}
 	return *o.Is
@@ -55,7 +55,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransfo
 
 // GetIsOk returns a tuple with the Is field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf7Type) GetIsOk() (*Enum88381acf2baeed408becef5653510069, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf7Type) GetIsOk() (*string, bool) {
 	if o == nil || IsNil(o.Is) {
 		return nil, false
 	}
@@ -71,15 +71,15 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransfo
 	return false
 }
 
-// SetIs gets a reference to the given Enum88381acf2baeed408becef5653510069 and assigns it to the Is field.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf7Type) SetIs(v Enum88381acf2baeed408becef5653510069) {
+// SetIs gets a reference to the given string and assigns it to the Is field.
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf7Type) SetIs(v string) {
 	o.Is = &v
 }
 
 // GetIsNot returns the IsNot field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf7Type) GetIsNot() Enum88381acf2baeed408becef5653510069 {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf7Type) GetIsNot() string {
 	if o == nil || IsNil(o.IsNot) {
-		var ret Enum88381acf2baeed408becef5653510069
+		var ret string
 		return ret
 	}
 	return *o.IsNot
@@ -87,7 +87,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransfo
 
 // GetIsNotOk returns a tuple with the IsNot field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf7Type) GetIsNotOk() (*Enum88381acf2baeed408becef5653510069, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf7Type) GetIsNotOk() (*string, bool) {
 	if o == nil || IsNil(o.IsNot) {
 		return nil, false
 	}
@@ -103,15 +103,15 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransfo
 	return false
 }
 
-// SetIsNot gets a reference to the given Enum88381acf2baeed408becef5653510069 and assigns it to the IsNot field.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf7Type) SetIsNot(v Enum88381acf2baeed408becef5653510069) {
+// SetIsNot gets a reference to the given string and assigns it to the IsNot field.
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf7Type) SetIsNot(v string) {
 	o.IsNot = &v
 }
 
 // GetIn returns the In field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf7Type) GetIn() []Enum88381acf2baeed408becef5653510069 {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf7Type) GetIn() []ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS7PROPERTIESTYPEPROPERTIESINITEMS {
 	if o == nil || IsNil(o.In) {
-		var ret []Enum88381acf2baeed408becef5653510069
+		var ret []ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS7PROPERTIESTYPEPROPERTIESINITEMS
 		return ret
 	}
 	return o.In
@@ -119,7 +119,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransfo
 
 // GetInOk returns a tuple with the In field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf7Type) GetInOk() ([]Enum88381acf2baeed408becef5653510069, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf7Type) GetInOk() ([]ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS7PROPERTIESTYPEPROPERTIESINITEMS, bool) {
 	if o == nil || IsNil(o.In) {
 		return nil, false
 	}
@@ -135,8 +135,8 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransfo
 	return false
 }
 
-// SetIn gets a reference to the given []Enum88381acf2baeed408becef5653510069 and assigns it to the In field.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf7Type) SetIn(v []Enum88381acf2baeed408becef5653510069) {
+// SetIn gets a reference to the given []ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS7PROPERTIESTYPEPROPERTIESINITEMS and assigns it to the In field.
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf7Type) SetIn(v []ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS7PROPERTIESTYPEPROPERTIESINITEMS) {
 	o.In = v
 }
 

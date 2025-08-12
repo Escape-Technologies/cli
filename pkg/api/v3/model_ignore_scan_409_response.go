@@ -1,7 +1,7 @@
 /*
 Escape Public API
 
-This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `Authorization` header. For example: `Authorization: Key YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
+This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `X-ESCAPE-API-KEY` header. For example: `X-ESCAPE-API-KEY: YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
 
 API version: 3.0.0
 */
@@ -20,7 +20,7 @@ var _ MappedNullable = &IgnoreScan409Response{}
 
 // IgnoreScan409Response struct for IgnoreScan409Response
 type IgnoreScan409Response struct {
-	Message EnumCONFLICTONTHEFOLLOWINGFIELD `json:"message"`
+	Message string `json:"message"`
 	Field string `json:"field"`
 	InstanceId string `json:"instanceId"`
 	AdditionalProperties map[string]interface{}
@@ -32,7 +32,7 @@ type _IgnoreScan409Response IgnoreScan409Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIgnoreScan409Response(message EnumCONFLICTONTHEFOLLOWINGFIELD, field string, instanceId string) *IgnoreScan409Response {
+func NewIgnoreScan409Response(message string, field string, instanceId string) *IgnoreScan409Response {
 	this := IgnoreScan409Response{}
 	this.Message = message
 	this.Field = field
@@ -49,9 +49,9 @@ func NewIgnoreScan409ResponseWithDefaults() *IgnoreScan409Response {
 }
 
 // GetMessage returns the Message field value
-func (o *IgnoreScan409Response) GetMessage() EnumCONFLICTONTHEFOLLOWINGFIELD {
+func (o *IgnoreScan409Response) GetMessage() string {
 	if o == nil {
-		var ret EnumCONFLICTONTHEFOLLOWINGFIELD
+		var ret string
 		return ret
 	}
 
@@ -60,7 +60,7 @@ func (o *IgnoreScan409Response) GetMessage() EnumCONFLICTONTHEFOLLOWINGFIELD {
 
 // GetMessageOk returns a tuple with the Message field value
 // and a boolean to check if the value has been set.
-func (o *IgnoreScan409Response) GetMessageOk() (*EnumCONFLICTONTHEFOLLOWINGFIELD, bool) {
+func (o *IgnoreScan409Response) GetMessageOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -68,7 +68,7 @@ func (o *IgnoreScan409Response) GetMessageOk() (*EnumCONFLICTONTHEFOLLOWINGFIELD
 }
 
 // SetMessage sets field value
-func (o *IgnoreScan409Response) SetMessage(v EnumCONFLICTONTHEFOLLOWINGFIELD) {
+func (o *IgnoreScan409Response) SetMessage(v string) {
 	o.Message = v
 }
 

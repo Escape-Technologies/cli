@@ -1,7 +1,7 @@
 /*
 Escape Public API
 
-This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `Authorization` header. For example: `Authorization: Key YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
+This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `X-ESCAPE-API-KEY` header. For example: `X-ESCAPE-API-KEY: YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
 
 API version: 3.0.0
 */
@@ -20,7 +20,7 @@ var _ MappedNullable = &CreateDastRestProfileRequestConfigurationJsonStrAuthenti
 
 // CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInnerOneOf3 struct for CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInnerOneOf3
 type CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInnerOneOf3 struct {
-	Action EnumGOTO `json:"action"`
+	Action string `json:"action"`
 	AllowFailure *bool `json:"allow_failure,omitempty"`
 	Url string `json:"url"`
 	AdditionalProperties map[string]interface{}
@@ -32,7 +32,7 @@ type _CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInner
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInnerOneOf3(action EnumGOTO, url string) *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInnerOneOf3 {
+func NewCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInnerOneOf3(action string, url string) *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInnerOneOf3 {
 	this := CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInnerOneOf3{}
 	this.Action = action
 	this.Url = url
@@ -48,9 +48,9 @@ func NewCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInn
 }
 
 // GetAction returns the Action field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInnerOneOf3) GetAction() EnumGOTO {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInnerOneOf3) GetAction() string {
 	if o == nil {
-		var ret EnumGOTO
+		var ret string
 		return ret
 	}
 
@@ -59,7 +59,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsIn
 
 // GetActionOk returns a tuple with the Action field value
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInnerOneOf3) GetActionOk() (*EnumGOTO, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInnerOneOf3) GetActionOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -67,7 +67,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsIn
 }
 
 // SetAction sets field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInnerOneOf3) SetAction(v EnumGOTO) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInnerOneOf3) SetAction(v string) {
 	o.Action = v
 }
 

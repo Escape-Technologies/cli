@@ -1,7 +1,7 @@
 /*
 Escape Public API
 
-This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `Authorization` header. For example: `Authorization: Key YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
+This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `X-ESCAPE-API-KEY` header. For example: `X-ESCAPE-API-KEY: YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
 
 API version: 3.0.0
 */
@@ -20,8 +20,8 @@ var _ MappedNullable = &CreateAssetAWSRequest{}
 
 // CreateAssetAWSRequest struct for CreateAssetAWSRequest
 type CreateAssetAWSRequest struct {
-	AssetClass EnumCLOUDHOSTING `json:"asset_class"`
-	AssetType EnumAWSACCOUNT `json:"asset_type"`
+	AssetClass string `json:"asset_class"`
+	AssetType string `json:"asset_type"`
 	Name *string `json:"name,omitempty"`
 	PublicKey string `json:"public_key"`
 	PrivateKey string `json:"private_key"`
@@ -34,7 +34,7 @@ type _CreateAssetAWSRequest CreateAssetAWSRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetAWSRequest(assetClass EnumCLOUDHOSTING, assetType EnumAWSACCOUNT, publicKey string, privateKey string) *CreateAssetAWSRequest {
+func NewCreateAssetAWSRequest(assetClass string, assetType string, publicKey string, privateKey string) *CreateAssetAWSRequest {
 	this := CreateAssetAWSRequest{}
 	this.AssetClass = assetClass
 	this.AssetType = assetType
@@ -52,9 +52,9 @@ func NewCreateAssetAWSRequestWithDefaults() *CreateAssetAWSRequest {
 }
 
 // GetAssetClass returns the AssetClass field value
-func (o *CreateAssetAWSRequest) GetAssetClass() EnumCLOUDHOSTING {
+func (o *CreateAssetAWSRequest) GetAssetClass() string {
 	if o == nil {
-		var ret EnumCLOUDHOSTING
+		var ret string
 		return ret
 	}
 
@@ -63,7 +63,7 @@ func (o *CreateAssetAWSRequest) GetAssetClass() EnumCLOUDHOSTING {
 
 // GetAssetClassOk returns a tuple with the AssetClass field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetAWSRequest) GetAssetClassOk() (*EnumCLOUDHOSTING, bool) {
+func (o *CreateAssetAWSRequest) GetAssetClassOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -71,14 +71,14 @@ func (o *CreateAssetAWSRequest) GetAssetClassOk() (*EnumCLOUDHOSTING, bool) {
 }
 
 // SetAssetClass sets field value
-func (o *CreateAssetAWSRequest) SetAssetClass(v EnumCLOUDHOSTING) {
+func (o *CreateAssetAWSRequest) SetAssetClass(v string) {
 	o.AssetClass = v
 }
 
 // GetAssetType returns the AssetType field value
-func (o *CreateAssetAWSRequest) GetAssetType() EnumAWSACCOUNT {
+func (o *CreateAssetAWSRequest) GetAssetType() string {
 	if o == nil {
-		var ret EnumAWSACCOUNT
+		var ret string
 		return ret
 	}
 
@@ -87,7 +87,7 @@ func (o *CreateAssetAWSRequest) GetAssetType() EnumAWSACCOUNT {
 
 // GetAssetTypeOk returns a tuple with the AssetType field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetAWSRequest) GetAssetTypeOk() (*EnumAWSACCOUNT, bool) {
+func (o *CreateAssetAWSRequest) GetAssetTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -95,7 +95,7 @@ func (o *CreateAssetAWSRequest) GetAssetTypeOk() (*EnumAWSACCOUNT, bool) {
 }
 
 // SetAssetType sets field value
-func (o *CreateAssetAWSRequest) SetAssetType(v EnumAWSACCOUNT) {
+func (o *CreateAssetAWSRequest) SetAssetType(v string) {
 	o.AssetType = v
 }
 

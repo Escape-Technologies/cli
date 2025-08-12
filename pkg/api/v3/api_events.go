@@ -1,7 +1,7 @@
 /*
 Escape Public API
 
-This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `Authorization` header. For example: `Authorization: Key YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
+This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `X-ESCAPE-API-KEY` header. For example: `X-ESCAPE-API-KEY: YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
 
 API version: 3.0.0
 */
@@ -17,6 +17,7 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"reflect"
 )
 
 
@@ -29,7 +30,7 @@ type ApiGetEventRequest struct {
 	eventId string
 }
 
-func (r ApiGetEventRequest) Execute() (*GetEvent200Response, *http.Response, error) {
+func (r ApiGetEventRequest) Execute() (*EventDetailed, *http.Response, error) {
 	return r.ApiService.GetEventExecute(r)
 }
 
@@ -51,13 +52,13 @@ func (a *EventsAPIService) GetEvent(ctx context.Context, eventId string) ApiGetE
 }
 
 // Execute executes the request
-//  @return GetEvent200Response
-func (a *EventsAPIService) GetEventExecute(r ApiGetEventRequest) (*GetEvent200Response, *http.Response, error) {
+//  @return EventDetailed
+func (a *EventsAPIService) GetEventExecute(r ApiGetEventRequest) (*EventDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetEvent200Response
+		localVarReturnValue  *EventDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EventsAPIService.GetEvent")
@@ -99,7 +100,7 @@ func (a *EventsAPIService) GetEventExecute(r ApiGetEventRequest) (*GetEvent200Re
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -156,7 +157,7 @@ type ApiGetEventAttachmentsRequest struct {
 	eventId string
 }
 
-func (r ApiGetEventAttachmentsRequest) Execute() (*GetEventAttachments200Response, *http.Response, error) {
+func (r ApiGetEventAttachmentsRequest) Execute() ([]AttachmentDetailed, *http.Response, error) {
 	return r.ApiService.GetEventAttachmentsExecute(r)
 }
 
@@ -178,13 +179,13 @@ func (a *EventsAPIService) GetEventAttachments(ctx context.Context, eventId stri
 }
 
 // Execute executes the request
-//  @return GetEventAttachments200Response
-func (a *EventsAPIService) GetEventAttachmentsExecute(r ApiGetEventAttachmentsRequest) (*GetEventAttachments200Response, *http.Response, error) {
+//  @return []AttachmentDetailed
+func (a *EventsAPIService) GetEventAttachmentsExecute(r ApiGetEventAttachmentsRequest) ([]AttachmentDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetEventAttachments200Response
+		localVarReturnValue  []AttachmentDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EventsAPIService.GetEventAttachments")
@@ -226,7 +227,7 @@ func (a *EventsAPIService) GetEventAttachmentsExecute(r ApiGetEventAttachmentsRe
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -282,15 +283,16 @@ type ApiListEventsRequest struct {
 	ApiService *EventsAPIService
 	cursor *string
 	size *int
-	sort *ListProfilesSortParameter
+	sortType *string
+	sortDirection *string
 	search *string
 	scanIds *ListIssuesScanIdsParameter
 	assetIds *ListProfilesAssetIdsParameter
 	issueIds *ListProfilesIssueIdsParameter
-	levels *string
-	stages *string
+	levels *[]string
+	stages *[]string
 	hasAttachments *string
-	attachments *string
+	attachments *[]string
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
@@ -305,8 +307,15 @@ func (r ApiListEventsRequest) Size(size int) ApiListEventsRequest {
 	return r
 }
 
-func (r ApiListEventsRequest) Sort(sort ListProfilesSortParameter) ApiListEventsRequest {
-	r.sort = &sort
+// The type to sort by
+func (r ApiListEventsRequest) SortType(sortType string) ApiListEventsRequest {
+	r.sortType = &sortType
+	return r
+}
+
+// The direction to sort by
+func (r ApiListEventsRequest) SortDirection(sortDirection string) ApiListEventsRequest {
+	r.sortDirection = &sortDirection
 	return r
 }
 
@@ -335,13 +344,13 @@ func (r ApiListEventsRequest) IssueIds(issueIds ListProfilesIssueIdsParameter) A
 }
 
 // Filter by level
-func (r ApiListEventsRequest) Levels(levels string) ApiListEventsRequest {
+func (r ApiListEventsRequest) Levels(levels []string) ApiListEventsRequest {
 	r.levels = &levels
 	return r
 }
 
 // Filter by stage
-func (r ApiListEventsRequest) Stages(stages string) ApiListEventsRequest {
+func (r ApiListEventsRequest) Stages(stages []string) ApiListEventsRequest {
 	r.stages = &stages
 	return r
 }
@@ -353,7 +362,7 @@ func (r ApiListEventsRequest) HasAttachments(hasAttachments string) ApiListEvent
 }
 
 // Filter by attachments
-func (r ApiListEventsRequest) Attachments(attachments string) ApiListEventsRequest {
+func (r ApiListEventsRequest) Attachments(attachments []string) ApiListEventsRequest {
 	r.attachments = &attachments
 	return r
 }
@@ -407,8 +416,14 @@ func (a *EventsAPIService) ListEventsExecute(r ApiListEventsRequest) (*ListEvent
 		var defaultValue int = 50
 		r.size = &defaultValue
 	}
-	if r.sort != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "sort", r.sort, "form", "")
+	if r.sortType != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortType", r.sortType, "form", "")
+	}
+	if r.sortDirection != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
+	} else {
+		var defaultValue string = "asc"
+		r.sortDirection = &defaultValue
 	}
 	if r.search != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")
@@ -423,16 +438,40 @@ func (a *EventsAPIService) ListEventsExecute(r ApiListEventsRequest) (*ListEvent
 		parameterAddToHeaderOrQuery(localVarQueryParams, "issueIds", r.issueIds, "form", "")
 	}
 	if r.levels != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "levels", r.levels, "form", "")
+		t := *r.levels
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "levels", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "levels", t, "form", "multi")
+		}
 	}
 	if r.stages != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "stages", r.stages, "form", "")
+		t := *r.stages
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "stages", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "stages", t, "form", "multi")
+		}
 	}
 	if r.hasAttachments != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "hasAttachments", r.hasAttachments, "form", "")
 	}
 	if r.attachments != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "attachments", r.attachments, "form", "")
+		t := *r.attachments
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "attachments", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "attachments", t, "form", "multi")
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -461,7 +500,7 @@ func (a *EventsAPIService) ListEventsExecute(r ApiListEventsRequest) (*ListEvent
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}

@@ -1,7 +1,7 @@
 /*
 Escape Public API
 
-This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `Authorization` header. For example: `Authorization: Key YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
+This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `X-ESCAPE-API-KEY` header. For example: `X-ESCAPE-API-KEY: YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
 
 API version: 3.0.0
 */
@@ -20,7 +20,7 @@ var _ MappedNullable = &CreateDastRestProfileRequestConfigurationJsonStrAuthenti
 
 // CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOf2 struct for CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOf2
 type CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOf2 struct {
-	Tech EnumBROWSERAGENT `json:"tech"`
+	Tech string `json:"tech"`
 	Parameters CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOf2Parameters `json:"parameters"`
 	Extractions CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOf1Extractions `json:"extractions"`
 	AdditionalProperties map[string]interface{}
@@ -32,7 +32,7 @@ type _CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresIn
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOf2(tech EnumBROWSERAGENT, parameters CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOf2Parameters, extractions CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOf1Extractions) *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOf2 {
+func NewCreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOf2(tech string, parameters CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOf2Parameters, extractions CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOf1Extractions) *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOf2 {
 	this := CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOf2{}
 	this.Tech = tech
 	this.Parameters = parameters
@@ -49,9 +49,9 @@ func NewCreateDastRestProfileRequestConfigurationJsonStrAuthenticationProcedures
 }
 
 // GetTech returns the Tech field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOf2) GetTech() EnumBROWSERAGENT {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOf2) GetTech() string {
 	if o == nil {
-		var ret EnumBROWSERAGENT
+		var ret string
 		return ret
 	}
 
@@ -60,7 +60,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProcedure
 
 // GetTechOk returns a tuple with the Tech field value
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOf2) GetTechOk() (*EnumBROWSERAGENT, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOf2) GetTechOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -68,7 +68,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProcedure
 }
 
 // SetTech sets field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOf2) SetTech(v EnumBROWSERAGENT) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOf2) SetTech(v string) {
 	o.Tech = v
 }
 

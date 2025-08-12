@@ -1,7 +1,7 @@
 /*
 Escape Public API
 
-This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `Authorization` header. For example: `Authorization: Key YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
+This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `X-ESCAPE-API-KEY` header. For example: `X-ESCAPE-API-KEY: YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
 
 API version: 3.0.0
 */
@@ -20,7 +20,7 @@ var _ MappedNullable = &CreateDastRestProfileRequestConfigurationJsonStrAuthenti
 
 // CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf1 struct for CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf1
 type CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf1 struct {
-	Type EnumOAUTHUSERPASS `json:"type"`
+	Type string `json:"type"`
 	Users []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf1UsersInner `json:"users"`
 	Url string `json:"url"`
 	ClientId string `json:"client_id"`
@@ -34,7 +34,7 @@ type _CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInner
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf1(type_ EnumOAUTHUSERPASS, users []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf1UsersInner, url string, clientId string, clientSecret string) *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf1 {
+func NewCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf1(type_ string, users []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf1UsersInner, url string, clientId string, clientSecret string) *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf1 {
 	this := CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf1{}
 	this.Type = type_
 	this.Users = users
@@ -53,9 +53,9 @@ func NewCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInn
 }
 
 // GetType returns the Type field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf1) GetType() EnumOAUTHUSERPASS {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf1) GetType() string {
 	if o == nil {
-		var ret EnumOAUTHUSERPASS
+		var ret string
 		return ret
 	}
 
@@ -64,7 +64,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsIn
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf1) GetTypeOk() (*EnumOAUTHUSERPASS, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf1) GetTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -72,7 +72,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsIn
 }
 
 // SetType sets field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf1) SetType(v EnumOAUTHUSERPASS) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf1) SetType(v string) {
 	o.Type = v
 }
 

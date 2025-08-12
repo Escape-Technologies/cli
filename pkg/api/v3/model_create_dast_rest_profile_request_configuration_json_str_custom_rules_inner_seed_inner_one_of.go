@@ -1,7 +1,7 @@
 /*
 Escape Public API
 
-This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `Authorization` header. For example: `Authorization: Key YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
+This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `X-ESCAPE-API-KEY` header. For example: `X-ESCAPE-API-KEY: YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
 
 API version: 3.0.0
 */
@@ -20,10 +20,10 @@ var _ MappedNullable = &CreateDastRestProfileRequestConfigurationJsonStrCustomRu
 
 // CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf struct for CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf
 type CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf struct {
-	Protocol EnumREST `json:"protocol"`
+	Protocol string `json:"protocol"`
 	User *string `json:"user,omitempty"`
 	Path *string `json:"path,omitempty"`
-	Method *Enum4e0943c4ae7a2a2d426c0a6c0b839e82 `json:"method,omitempty"`
+	Method *string `json:"method,omitempty"`
 	Headers map[string]string `json:"headers,omitempty"`
 	Body *string `json:"body,omitempty"`
 	Params map[string]string `json:"params,omitempty"`
@@ -36,7 +36,7 @@ type _CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerO
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf(protocol EnumREST) *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf {
+func NewCreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf(protocol string) *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf {
 	this := CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf{}
 	this.Protocol = protocol
 	return &this
@@ -51,9 +51,9 @@ func NewCreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInne
 }
 
 // GetProtocol returns the Protocol field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf) GetProtocol() EnumREST {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf) GetProtocol() string {
 	if o == nil {
-		var ret EnumREST
+		var ret string
 		return ret
 	}
 
@@ -62,7 +62,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInn
 
 // GetProtocolOk returns a tuple with the Protocol field value
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf) GetProtocolOk() (*EnumREST, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf) GetProtocolOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -70,7 +70,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInn
 }
 
 // SetProtocol sets field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf) SetProtocol(v EnumREST) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf) SetProtocol(v string) {
 	o.Protocol = v
 }
 
@@ -139,9 +139,9 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInn
 }
 
 // GetMethod returns the Method field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf) GetMethod() Enum4e0943c4ae7a2a2d426c0a6c0b839e82 {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf) GetMethod() string {
 	if o == nil || IsNil(o.Method) {
-		var ret Enum4e0943c4ae7a2a2d426c0a6c0b839e82
+		var ret string
 		return ret
 	}
 	return *o.Method
@@ -149,7 +149,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInn
 
 // GetMethodOk returns a tuple with the Method field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf) GetMethodOk() (*Enum4e0943c4ae7a2a2d426c0a6c0b839e82, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf) GetMethodOk() (*string, bool) {
 	if o == nil || IsNil(o.Method) {
 		return nil, false
 	}
@@ -165,8 +165,8 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInn
 	return false
 }
 
-// SetMethod gets a reference to the given Enum4e0943c4ae7a2a2d426c0a6c0b839e82 and assigns it to the Method field.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf) SetMethod(v Enum4e0943c4ae7a2a2d426c0a6c0b839e82) {
+// SetMethod gets a reference to the given string and assigns it to the Method field.
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf) SetMethod(v string) {
 	o.Method = &v
 }
 

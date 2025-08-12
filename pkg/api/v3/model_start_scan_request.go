@@ -1,7 +1,7 @@
 /*
 Escape Public API
 
-This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `Authorization` header. For example: `Authorization: Key YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
+This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `X-ESCAPE-API-KEY` header. For example: `X-ESCAPE-API-KEY: YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
 
 API version: 3.0.0
 */
@@ -34,7 +34,8 @@ type StartScanRequest struct {
 	CommitAuthorProfilePictureLink *string `json:"commitAuthorProfilePictureLink,omitempty"`
 	// The configuration override to use
 	ConfigurationOverride map[string]interface{} `json:"configurationOverride,omitempty"`
-	Initiator Enum2c20635ab94c5d403a582bcda248706d `json:"initiator"`
+	// The initiator of the scan
+	Initiator string `json:"initiator"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -44,7 +45,7 @@ type _StartScanRequest StartScanRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewStartScanRequest(profileId string, initiator Enum2c20635ab94c5d403a582bcda248706d) *StartScanRequest {
+func NewStartScanRequest(profileId string, initiator string) *StartScanRequest {
 	this := StartScanRequest{}
 	this.ProfileId = profileId
 	this.Initiator = initiator
@@ -276,9 +277,9 @@ func (o *StartScanRequest) SetConfigurationOverride(v map[string]interface{}) {
 }
 
 // GetInitiator returns the Initiator field value
-func (o *StartScanRequest) GetInitiator() Enum2c20635ab94c5d403a582bcda248706d {
+func (o *StartScanRequest) GetInitiator() string {
 	if o == nil {
-		var ret Enum2c20635ab94c5d403a582bcda248706d
+		var ret string
 		return ret
 	}
 
@@ -287,7 +288,7 @@ func (o *StartScanRequest) GetInitiator() Enum2c20635ab94c5d403a582bcda248706d {
 
 // GetInitiatorOk returns a tuple with the Initiator field value
 // and a boolean to check if the value has been set.
-func (o *StartScanRequest) GetInitiatorOk() (*Enum2c20635ab94c5d403a582bcda248706d, bool) {
+func (o *StartScanRequest) GetInitiatorOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -295,7 +296,7 @@ func (o *StartScanRequest) GetInitiatorOk() (*Enum2c20635ab94c5d403a582bcda24870
 }
 
 // SetInitiator sets field value
-func (o *StartScanRequest) SetInitiator(v Enum2c20635ab94c5d403a582bcda248706d) {
+func (o *StartScanRequest) SetInitiator(v string) {
 	o.Initiator = v
 }
 

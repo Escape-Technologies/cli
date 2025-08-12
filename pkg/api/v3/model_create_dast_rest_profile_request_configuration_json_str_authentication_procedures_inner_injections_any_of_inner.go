@@ -1,7 +1,7 @@
 /*
 Escape Public API
 
-This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `Authorization` header. For example: `Authorization: Key YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
+This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `X-ESCAPE-API-KEY` header. For example: `X-ESCAPE-API-KEY: YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
 
 API version: 3.0.0
 */
@@ -20,7 +20,7 @@ var _ MappedNullable = &CreateDastRestProfileRequestConfigurationJsonStrAuthenti
 
 // CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerInjectionsAnyOfInner struct for CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerInjectionsAnyOfInner
 type CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerInjectionsAnyOfInner struct {
-	Location Enum83878678114937d099c9b534cb78beaf `json:"location"`
+	Location string `json:"location"`
 	Key string `json:"key"`
 	Prefix *string `json:"prefix,omitempty"`
 	Variable string `json:"variable"`
@@ -33,7 +33,7 @@ type _CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresIn
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerInjectionsAnyOfInner(location Enum83878678114937d099c9b534cb78beaf, key string, variable string) *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerInjectionsAnyOfInner {
+func NewCreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerInjectionsAnyOfInner(location string, key string, variable string) *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerInjectionsAnyOfInner {
 	this := CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerInjectionsAnyOfInner{}
 	this.Location = location
 	this.Key = key
@@ -50,9 +50,9 @@ func NewCreateDastRestProfileRequestConfigurationJsonStrAuthenticationProcedures
 }
 
 // GetLocation returns the Location field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerInjectionsAnyOfInner) GetLocation() Enum83878678114937d099c9b534cb78beaf {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerInjectionsAnyOfInner) GetLocation() string {
 	if o == nil {
-		var ret Enum83878678114937d099c9b534cb78beaf
+		var ret string
 		return ret
 	}
 
@@ -61,7 +61,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProcedure
 
 // GetLocationOk returns a tuple with the Location field value
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerInjectionsAnyOfInner) GetLocationOk() (*Enum83878678114937d099c9b534cb78beaf, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerInjectionsAnyOfInner) GetLocationOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -69,7 +69,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProcedure
 }
 
 // SetLocation sets field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerInjectionsAnyOfInner) SetLocation(v Enum83878678114937d099c9b534cb78beaf) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerInjectionsAnyOfInner) SetLocation(v string) {
 	o.Location = v
 }
 

@@ -1,7 +1,7 @@
 /*
 Escape Public API
 
-This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `Authorization` header. For example: `Authorization: Key YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
+This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `X-ESCAPE-API-KEY` header. For example: `X-ESCAPE-API-KEY: YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
 
 API version: 3.0.0
 */
@@ -22,7 +22,7 @@ var _ MappedNullable = &CreateDastRestProfileRequestConfigurationJsonStrFrontend
 type CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInnerDetectInnerOneOf5 struct {
 	Key *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf7Name `json:"key,omitempty"`
 	Value *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf7Name `json:"value,omitempty"`
-	If EnumSESSIONSTORAGE `json:"if"`
+	If string `json:"if"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -32,7 +32,7 @@ type _CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInnerDe
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInnerDetectInnerOneOf5(if_ EnumSESSIONSTORAGE) *CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInnerDetectInnerOneOf5 {
+func NewCreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInnerDetectInnerOneOf5(if_ string) *CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInnerDetectInnerOneOf5 {
 	this := CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInnerDetectInnerOneOf5{}
 	this.If = if_
 	return &this
@@ -111,9 +111,9 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInne
 }
 
 // GetIf returns the If field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInnerDetectInnerOneOf5) GetIf() EnumSESSIONSTORAGE {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInnerDetectInnerOneOf5) GetIf() string {
 	if o == nil {
-		var ret EnumSESSIONSTORAGE
+		var ret string
 		return ret
 	}
 
@@ -122,7 +122,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInne
 
 // GetIfOk returns a tuple with the If field value
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInnerDetectInnerOneOf5) GetIfOk() (*EnumSESSIONSTORAGE, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInnerDetectInnerOneOf5) GetIfOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -130,7 +130,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInne
 }
 
 // SetIf sets field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInnerDetectInnerOneOf5) SetIf(v EnumSESSIONSTORAGE) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInnerDetectInnerOneOf5) SetIf(v string) {
 	o.If = v
 }
 

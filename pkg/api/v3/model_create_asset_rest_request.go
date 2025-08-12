@@ -1,7 +1,7 @@
 /*
 Escape Public API
 
-This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `Authorization` header. For example: `Authorization: Key YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
+This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `X-ESCAPE-API-KEY` header. For example: `X-ESCAPE-API-KEY: YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
 
 API version: 3.0.0
 */
@@ -20,17 +20,17 @@ var _ MappedNullable = &CreateAssetRESTRequest{}
 
 // CreateAssetRESTRequest struct for CreateAssetRESTRequest
 type CreateAssetRESTRequest struct {
-	AssetClass EnumAPISERVICE `json:"asset_class"`
-	AssetType EnumREST `json:"asset_type"`
+	AssetClass string `json:"asset_class"`
+	AssetType string `json:"asset_type"`
 	Url string `json:"url"`
 	Favicon *string `json:"favicon,omitempty"`
 	ReachableVia []string `json:"reachable_via,omitempty"`
-	Environment *Enum0bdcaaff7655a1ccf93d249cab8f0d41 `json:"environment,omitempty"`
-	CloudProvider *Enum461e4d210f1062ae8e63863a9180f177 `json:"cloud_provider,omitempty"`
-	WafProvider *EnumD27aab5ce42044022690de5c30368794 `json:"waf_provider,omitempty"`
+	Environment *string `json:"environment,omitempty"`
+	CloudProvider *string `json:"cloud_provider,omitempty"`
+	WafProvider *string `json:"waf_provider,omitempty"`
 	Ips []string `json:"ips,omitempty"`
 	RegionCountryCodes []string `json:"region_country_codes,omitempty"`
-	Framework *Enum256b596554d623886b0de07a15a4e3a6 `json:"framework,omitempty"`
+	Framework *string `json:"framework,omitempty"`
 	Endpoints []CreateAssetDNSRequestPathsInsightsInner `json:"endpoints,omitempty"`
 	OpenapiUrl *string `json:"openapi_url,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -42,7 +42,7 @@ type _CreateAssetRESTRequest CreateAssetRESTRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetRESTRequest(assetClass EnumAPISERVICE, assetType EnumREST, url string) *CreateAssetRESTRequest {
+func NewCreateAssetRESTRequest(assetClass string, assetType string, url string) *CreateAssetRESTRequest {
 	this := CreateAssetRESTRequest{}
 	this.AssetClass = assetClass
 	this.AssetType = assetType
@@ -59,9 +59,9 @@ func NewCreateAssetRESTRequestWithDefaults() *CreateAssetRESTRequest {
 }
 
 // GetAssetClass returns the AssetClass field value
-func (o *CreateAssetRESTRequest) GetAssetClass() EnumAPISERVICE {
+func (o *CreateAssetRESTRequest) GetAssetClass() string {
 	if o == nil {
-		var ret EnumAPISERVICE
+		var ret string
 		return ret
 	}
 
@@ -70,7 +70,7 @@ func (o *CreateAssetRESTRequest) GetAssetClass() EnumAPISERVICE {
 
 // GetAssetClassOk returns a tuple with the AssetClass field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetRESTRequest) GetAssetClassOk() (*EnumAPISERVICE, bool) {
+func (o *CreateAssetRESTRequest) GetAssetClassOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -78,14 +78,14 @@ func (o *CreateAssetRESTRequest) GetAssetClassOk() (*EnumAPISERVICE, bool) {
 }
 
 // SetAssetClass sets field value
-func (o *CreateAssetRESTRequest) SetAssetClass(v EnumAPISERVICE) {
+func (o *CreateAssetRESTRequest) SetAssetClass(v string) {
 	o.AssetClass = v
 }
 
 // GetAssetType returns the AssetType field value
-func (o *CreateAssetRESTRequest) GetAssetType() EnumREST {
+func (o *CreateAssetRESTRequest) GetAssetType() string {
 	if o == nil {
-		var ret EnumREST
+		var ret string
 		return ret
 	}
 
@@ -94,7 +94,7 @@ func (o *CreateAssetRESTRequest) GetAssetType() EnumREST {
 
 // GetAssetTypeOk returns a tuple with the AssetType field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetRESTRequest) GetAssetTypeOk() (*EnumREST, bool) {
+func (o *CreateAssetRESTRequest) GetAssetTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -102,7 +102,7 @@ func (o *CreateAssetRESTRequest) GetAssetTypeOk() (*EnumREST, bool) {
 }
 
 // SetAssetType sets field value
-func (o *CreateAssetRESTRequest) SetAssetType(v EnumREST) {
+func (o *CreateAssetRESTRequest) SetAssetType(v string) {
 	o.AssetType = v
 }
 
@@ -195,9 +195,9 @@ func (o *CreateAssetRESTRequest) SetReachableVia(v []string) {
 }
 
 // GetEnvironment returns the Environment field value if set, zero value otherwise.
-func (o *CreateAssetRESTRequest) GetEnvironment() Enum0bdcaaff7655a1ccf93d249cab8f0d41 {
+func (o *CreateAssetRESTRequest) GetEnvironment() string {
 	if o == nil || IsNil(o.Environment) {
-		var ret Enum0bdcaaff7655a1ccf93d249cab8f0d41
+		var ret string
 		return ret
 	}
 	return *o.Environment
@@ -205,7 +205,7 @@ func (o *CreateAssetRESTRequest) GetEnvironment() Enum0bdcaaff7655a1ccf93d249cab
 
 // GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetRESTRequest) GetEnvironmentOk() (*Enum0bdcaaff7655a1ccf93d249cab8f0d41, bool) {
+func (o *CreateAssetRESTRequest) GetEnvironmentOk() (*string, bool) {
 	if o == nil || IsNil(o.Environment) {
 		return nil, false
 	}
@@ -221,15 +221,15 @@ func (o *CreateAssetRESTRequest) HasEnvironment() bool {
 	return false
 }
 
-// SetEnvironment gets a reference to the given Enum0bdcaaff7655a1ccf93d249cab8f0d41 and assigns it to the Environment field.
-func (o *CreateAssetRESTRequest) SetEnvironment(v Enum0bdcaaff7655a1ccf93d249cab8f0d41) {
+// SetEnvironment gets a reference to the given string and assigns it to the Environment field.
+func (o *CreateAssetRESTRequest) SetEnvironment(v string) {
 	o.Environment = &v
 }
 
 // GetCloudProvider returns the CloudProvider field value if set, zero value otherwise.
-func (o *CreateAssetRESTRequest) GetCloudProvider() Enum461e4d210f1062ae8e63863a9180f177 {
+func (o *CreateAssetRESTRequest) GetCloudProvider() string {
 	if o == nil || IsNil(o.CloudProvider) {
-		var ret Enum461e4d210f1062ae8e63863a9180f177
+		var ret string
 		return ret
 	}
 	return *o.CloudProvider
@@ -237,7 +237,7 @@ func (o *CreateAssetRESTRequest) GetCloudProvider() Enum461e4d210f1062ae8e63863a
 
 // GetCloudProviderOk returns a tuple with the CloudProvider field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetRESTRequest) GetCloudProviderOk() (*Enum461e4d210f1062ae8e63863a9180f177, bool) {
+func (o *CreateAssetRESTRequest) GetCloudProviderOk() (*string, bool) {
 	if o == nil || IsNil(o.CloudProvider) {
 		return nil, false
 	}
@@ -253,15 +253,15 @@ func (o *CreateAssetRESTRequest) HasCloudProvider() bool {
 	return false
 }
 
-// SetCloudProvider gets a reference to the given Enum461e4d210f1062ae8e63863a9180f177 and assigns it to the CloudProvider field.
-func (o *CreateAssetRESTRequest) SetCloudProvider(v Enum461e4d210f1062ae8e63863a9180f177) {
+// SetCloudProvider gets a reference to the given string and assigns it to the CloudProvider field.
+func (o *CreateAssetRESTRequest) SetCloudProvider(v string) {
 	o.CloudProvider = &v
 }
 
 // GetWafProvider returns the WafProvider field value if set, zero value otherwise.
-func (o *CreateAssetRESTRequest) GetWafProvider() EnumD27aab5ce42044022690de5c30368794 {
+func (o *CreateAssetRESTRequest) GetWafProvider() string {
 	if o == nil || IsNil(o.WafProvider) {
-		var ret EnumD27aab5ce42044022690de5c30368794
+		var ret string
 		return ret
 	}
 	return *o.WafProvider
@@ -269,7 +269,7 @@ func (o *CreateAssetRESTRequest) GetWafProvider() EnumD27aab5ce42044022690de5c30
 
 // GetWafProviderOk returns a tuple with the WafProvider field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetRESTRequest) GetWafProviderOk() (*EnumD27aab5ce42044022690de5c30368794, bool) {
+func (o *CreateAssetRESTRequest) GetWafProviderOk() (*string, bool) {
 	if o == nil || IsNil(o.WafProvider) {
 		return nil, false
 	}
@@ -285,8 +285,8 @@ func (o *CreateAssetRESTRequest) HasWafProvider() bool {
 	return false
 }
 
-// SetWafProvider gets a reference to the given EnumD27aab5ce42044022690de5c30368794 and assigns it to the WafProvider field.
-func (o *CreateAssetRESTRequest) SetWafProvider(v EnumD27aab5ce42044022690de5c30368794) {
+// SetWafProvider gets a reference to the given string and assigns it to the WafProvider field.
+func (o *CreateAssetRESTRequest) SetWafProvider(v string) {
 	o.WafProvider = &v
 }
 
@@ -355,9 +355,9 @@ func (o *CreateAssetRESTRequest) SetRegionCountryCodes(v []string) {
 }
 
 // GetFramework returns the Framework field value if set, zero value otherwise.
-func (o *CreateAssetRESTRequest) GetFramework() Enum256b596554d623886b0de07a15a4e3a6 {
+func (o *CreateAssetRESTRequest) GetFramework() string {
 	if o == nil || IsNil(o.Framework) {
-		var ret Enum256b596554d623886b0de07a15a4e3a6
+		var ret string
 		return ret
 	}
 	return *o.Framework
@@ -365,7 +365,7 @@ func (o *CreateAssetRESTRequest) GetFramework() Enum256b596554d623886b0de07a15a4
 
 // GetFrameworkOk returns a tuple with the Framework field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetRESTRequest) GetFrameworkOk() (*Enum256b596554d623886b0de07a15a4e3a6, bool) {
+func (o *CreateAssetRESTRequest) GetFrameworkOk() (*string, bool) {
 	if o == nil || IsNil(o.Framework) {
 		return nil, false
 	}
@@ -381,8 +381,8 @@ func (o *CreateAssetRESTRequest) HasFramework() bool {
 	return false
 }
 
-// SetFramework gets a reference to the given Enum256b596554d623886b0de07a15a4e3a6 and assigns it to the Framework field.
-func (o *CreateAssetRESTRequest) SetFramework(v Enum256b596554d623886b0de07a15a4e3a6) {
+// SetFramework gets a reference to the given string and assigns it to the Framework field.
+func (o *CreateAssetRESTRequest) SetFramework(v string) {
 	o.Framework = &v
 }
 

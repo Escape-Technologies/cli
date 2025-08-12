@@ -1,7 +1,7 @@
 /*
 Escape Public API
 
-This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `Authorization` header. For example: `Authorization: Key YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
+This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `X-ESCAPE-API-KEY` header. For example: `X-ESCAPE-API-KEY: YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
 
 API version: 3.0.0
 */
@@ -21,7 +21,7 @@ var _ MappedNullable = &CreateDastRestProfileRequestConfigurationJsonStrCustomRu
 // CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf21 struct for CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf21
 type CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf21 struct {
 	Not interface{} `json:"not,omitempty"`
-	If EnumNOT `json:"if"`
+	If string `json:"if"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -31,7 +31,7 @@ type _CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformT
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf21(if_ EnumNOT) *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf21 {
+func NewCreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf21(if_ string) *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf21 {
 	this := CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf21{}
 	this.If = if_
 	return &this
@@ -79,9 +79,9 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransfo
 }
 
 // GetIf returns the If field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf21) GetIf() EnumNOT {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf21) GetIf() string {
 	if o == nil {
-		var ret EnumNOT
+		var ret string
 		return ret
 	}
 
@@ -90,7 +90,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransfo
 
 // GetIfOk returns a tuple with the If field value
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf21) GetIfOk() (*EnumNOT, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf21) GetIfOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -98,7 +98,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransfo
 }
 
 // SetIf sets field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf21) SetIf(v EnumNOT) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf21) SetIf(v string) {
 	o.If = v
 }
 

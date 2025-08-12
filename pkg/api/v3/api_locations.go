@@ -1,7 +1,7 @@
 /*
 Escape Public API
 
-This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `Authorization` header. For example: `Authorization: Key YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
+This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `X-ESCAPE-API-KEY` header. For example: `X-ESCAPE-API-KEY: YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
 
 API version: 3.0.0
 */
@@ -17,6 +17,7 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"reflect"
 )
 
 
@@ -34,7 +35,7 @@ func (r ApiCreateLocationRequest) CreateLocationRequest(createLocationRequest Cr
 	return r
 }
 
-func (r ApiCreateLocationRequest) Execute() (*CreateLocation200Response, *http.Response, error) {
+func (r ApiCreateLocationRequest) Execute() (*LocationDetailed, *http.Response, error) {
 	return r.ApiService.CreateLocationExecute(r)
 }
 
@@ -54,13 +55,13 @@ func (a *LocationsAPIService) CreateLocation(ctx context.Context) ApiCreateLocat
 }
 
 // Execute executes the request
-//  @return CreateLocation200Response
-func (a *LocationsAPIService) CreateLocationExecute(r ApiCreateLocationRequest) (*CreateLocation200Response, *http.Response, error) {
+//  @return LocationDetailed
+func (a *LocationsAPIService) CreateLocationExecute(r ApiCreateLocationRequest) (*LocationDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateLocation200Response
+		localVarReturnValue  *LocationDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LocationsAPIService.CreateLocation")
@@ -103,7 +104,7 @@ func (a *LocationsAPIService) CreateLocationExecute(r ApiCreateLocationRequest) 
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -241,7 +242,7 @@ func (a *LocationsAPIService) DeleteLocationExecute(r ApiDeleteLocationRequest) 
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -298,7 +299,7 @@ type ApiGetLocationRequest struct {
 	locationId string
 }
 
-func (r ApiGetLocationRequest) Execute() (*CreateLocation200Response, *http.Response, error) {
+func (r ApiGetLocationRequest) Execute() (*LocationDetailed, *http.Response, error) {
 	return r.ApiService.GetLocationExecute(r)
 }
 
@@ -320,13 +321,13 @@ func (a *LocationsAPIService) GetLocation(ctx context.Context, locationId string
 }
 
 // Execute executes the request
-//  @return CreateLocation200Response
-func (a *LocationsAPIService) GetLocationExecute(r ApiGetLocationRequest) (*CreateLocation200Response, *http.Response, error) {
+//  @return LocationDetailed
+func (a *LocationsAPIService) GetLocationExecute(r ApiGetLocationRequest) (*LocationDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateLocation200Response
+		localVarReturnValue  *LocationDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LocationsAPIService.GetLocation")
@@ -368,7 +369,7 @@ func (a *LocationsAPIService) GetLocationExecute(r ApiGetLocationRequest) (*Crea
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -424,8 +425,11 @@ type ApiListLocationsRequest struct {
 	ApiService *LocationsAPIService
 	cursor *string
 	size *int
-	sort *ListProfilesSortParameter
+	sortType *string
+	sortDirection *string
 	search *string
+	enabled *string
+	type_ *[]string
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
@@ -440,13 +444,30 @@ func (r ApiListLocationsRequest) Size(size int) ApiListLocationsRequest {
 	return r
 }
 
-func (r ApiListLocationsRequest) Sort(sort ListProfilesSortParameter) ApiListLocationsRequest {
-	r.sort = &sort
+// The type to sort by
+func (r ApiListLocationsRequest) SortType(sortType string) ApiListLocationsRequest {
+	r.sortType = &sortType
+	return r
+}
+
+// The direction to sort by
+func (r ApiListLocationsRequest) SortDirection(sortDirection string) ApiListLocationsRequest {
+	r.sortDirection = &sortDirection
 	return r
 }
 
 func (r ApiListLocationsRequest) Search(search string) ApiListLocationsRequest {
 	r.search = &search
+	return r
+}
+
+func (r ApiListLocationsRequest) Enabled(enabled string) ApiListLocationsRequest {
+	r.enabled = &enabled
+	return r
+}
+
+func (r ApiListLocationsRequest) Type_(type_ []string) ApiListLocationsRequest {
+	r.type_ = &type_
 	return r
 }
 
@@ -499,11 +520,31 @@ func (a *LocationsAPIService) ListLocationsExecute(r ApiListLocationsRequest) (*
 		var defaultValue int = 50
 		r.size = &defaultValue
 	}
-	if r.sort != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "sort", r.sort, "form", "")
+	if r.sortType != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortType", r.sortType, "form", "")
+	}
+	if r.sortDirection != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
+	} else {
+		var defaultValue string = "asc"
+		r.sortDirection = &defaultValue
 	}
 	if r.search != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")
+	}
+	if r.enabled != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "enabled", r.enabled, "form", "")
+	}
+	if r.type_ != nil {
+		t := *r.type_
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "type", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "type", t, "form", "multi")
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -532,7 +573,7 @@ func (a *LocationsAPIService) ListLocationsExecute(r ApiListLocationsRequest) (*
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -595,7 +636,7 @@ func (r ApiUpdateLocationRequest) UpdateLocationRequest(updateLocationRequest Up
 	return r
 }
 
-func (r ApiUpdateLocationRequest) Execute() (*CreateLocation200Response, *http.Response, error) {
+func (r ApiUpdateLocationRequest) Execute() (*LocationDetailed, *http.Response, error) {
 	return r.ApiService.UpdateLocationExecute(r)
 }
 
@@ -617,13 +658,13 @@ func (a *LocationsAPIService) UpdateLocation(ctx context.Context, locationId str
 }
 
 // Execute executes the request
-//  @return CreateLocation200Response
-func (a *LocationsAPIService) UpdateLocationExecute(r ApiUpdateLocationRequest) (*CreateLocation200Response, *http.Response, error) {
+//  @return LocationDetailed
+func (a *LocationsAPIService) UpdateLocationExecute(r ApiUpdateLocationRequest) (*LocationDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateLocation200Response
+		localVarReturnValue  *LocationDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LocationsAPIService.UpdateLocation")
@@ -667,7 +708,7 @@ func (a *LocationsAPIService) UpdateLocationExecute(r ApiUpdateLocationRequest) 
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
