@@ -1,7 +1,7 @@
 /*
 Escape Public API
 
-This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `Authorization` header. For example: `Authorization: Key YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
+This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `X-ESCAPE-API-KEY` header. For example: `X-ESCAPE-API-KEY: YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
 
 API version: 3.0.0
 */
@@ -20,8 +20,8 @@ var _ MappedNullable = &CreateAssetGITHUBRequest{}
 
 // CreateAssetGITHUBRequest struct for CreateAssetGITHUBRequest
 type CreateAssetGITHUBRequest struct {
-	AssetClass EnumREPOSITORY `json:"asset_class"`
-	AssetType EnumGITHUBREPOSITORY `json:"asset_type"`
+	AssetClass string `json:"asset_class"`
+	AssetType string `json:"asset_type"`
 	Url string `json:"url"`
 	Name *string `json:"name,omitempty"`
 	HttpUrlToRepo *string `json:"http_url_to_repo,omitempty"`
@@ -47,7 +47,7 @@ type _CreateAssetGITHUBRequest CreateAssetGITHUBRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetGITHUBRequest(assetClass EnumREPOSITORY, assetType EnumGITHUBREPOSITORY, url string) *CreateAssetGITHUBRequest {
+func NewCreateAssetGITHUBRequest(assetClass string, assetType string, url string) *CreateAssetGITHUBRequest {
 	this := CreateAssetGITHUBRequest{}
 	this.AssetClass = assetClass
 	this.AssetType = assetType
@@ -64,9 +64,9 @@ func NewCreateAssetGITHUBRequestWithDefaults() *CreateAssetGITHUBRequest {
 }
 
 // GetAssetClass returns the AssetClass field value
-func (o *CreateAssetGITHUBRequest) GetAssetClass() EnumREPOSITORY {
+func (o *CreateAssetGITHUBRequest) GetAssetClass() string {
 	if o == nil {
-		var ret EnumREPOSITORY
+		var ret string
 		return ret
 	}
 
@@ -75,7 +75,7 @@ func (o *CreateAssetGITHUBRequest) GetAssetClass() EnumREPOSITORY {
 
 // GetAssetClassOk returns a tuple with the AssetClass field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGITHUBRequest) GetAssetClassOk() (*EnumREPOSITORY, bool) {
+func (o *CreateAssetGITHUBRequest) GetAssetClassOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -83,14 +83,14 @@ func (o *CreateAssetGITHUBRequest) GetAssetClassOk() (*EnumREPOSITORY, bool) {
 }
 
 // SetAssetClass sets field value
-func (o *CreateAssetGITHUBRequest) SetAssetClass(v EnumREPOSITORY) {
+func (o *CreateAssetGITHUBRequest) SetAssetClass(v string) {
 	o.AssetClass = v
 }
 
 // GetAssetType returns the AssetType field value
-func (o *CreateAssetGITHUBRequest) GetAssetType() EnumGITHUBREPOSITORY {
+func (o *CreateAssetGITHUBRequest) GetAssetType() string {
 	if o == nil {
-		var ret EnumGITHUBREPOSITORY
+		var ret string
 		return ret
 	}
 
@@ -99,7 +99,7 @@ func (o *CreateAssetGITHUBRequest) GetAssetType() EnumGITHUBREPOSITORY {
 
 // GetAssetTypeOk returns a tuple with the AssetType field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGITHUBRequest) GetAssetTypeOk() (*EnumGITHUBREPOSITORY, bool) {
+func (o *CreateAssetGITHUBRequest) GetAssetTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -107,7 +107,7 @@ func (o *CreateAssetGITHUBRequest) GetAssetTypeOk() (*EnumGITHUBREPOSITORY, bool
 }
 
 // SetAssetType sets field value
-func (o *CreateAssetGITHUBRequest) SetAssetType(v EnumGITHUBREPOSITORY) {
+func (o *CreateAssetGITHUBRequest) SetAssetType(v string) {
 	o.AssetType = v
 }
 

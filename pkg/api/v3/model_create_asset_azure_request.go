@@ -1,7 +1,7 @@
 /*
 Escape Public API
 
-This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `Authorization` header. For example: `Authorization: Key YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
+This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `X-ESCAPE-API-KEY` header. For example: `X-ESCAPE-API-KEY: YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
 
 API version: 3.0.0
 */
@@ -20,8 +20,8 @@ var _ MappedNullable = &CreateAssetAZURERequest{}
 
 // CreateAssetAZURERequest struct for CreateAssetAZURERequest
 type CreateAssetAZURERequest struct {
-	AssetClass EnumCLOUDHOSTING `json:"asset_class"`
-	AssetType EnumAZURETENANT `json:"asset_type"`
+	AssetClass string `json:"asset_class"`
+	AssetType string `json:"asset_type"`
 	Name *string `json:"name,omitempty"`
 	ClientId string `json:"client_id"`
 	ClientSecret string `json:"client_secret"`
@@ -35,7 +35,7 @@ type _CreateAssetAZURERequest CreateAssetAZURERequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetAZURERequest(assetClass EnumCLOUDHOSTING, assetType EnumAZURETENANT, clientId string, clientSecret string, tenantId string) *CreateAssetAZURERequest {
+func NewCreateAssetAZURERequest(assetClass string, assetType string, clientId string, clientSecret string, tenantId string) *CreateAssetAZURERequest {
 	this := CreateAssetAZURERequest{}
 	this.AssetClass = assetClass
 	this.AssetType = assetType
@@ -54,9 +54,9 @@ func NewCreateAssetAZURERequestWithDefaults() *CreateAssetAZURERequest {
 }
 
 // GetAssetClass returns the AssetClass field value
-func (o *CreateAssetAZURERequest) GetAssetClass() EnumCLOUDHOSTING {
+func (o *CreateAssetAZURERequest) GetAssetClass() string {
 	if o == nil {
-		var ret EnumCLOUDHOSTING
+		var ret string
 		return ret
 	}
 
@@ -65,7 +65,7 @@ func (o *CreateAssetAZURERequest) GetAssetClass() EnumCLOUDHOSTING {
 
 // GetAssetClassOk returns a tuple with the AssetClass field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetAZURERequest) GetAssetClassOk() (*EnumCLOUDHOSTING, bool) {
+func (o *CreateAssetAZURERequest) GetAssetClassOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -73,14 +73,14 @@ func (o *CreateAssetAZURERequest) GetAssetClassOk() (*EnumCLOUDHOSTING, bool) {
 }
 
 // SetAssetClass sets field value
-func (o *CreateAssetAZURERequest) SetAssetClass(v EnumCLOUDHOSTING) {
+func (o *CreateAssetAZURERequest) SetAssetClass(v string) {
 	o.AssetClass = v
 }
 
 // GetAssetType returns the AssetType field value
-func (o *CreateAssetAZURERequest) GetAssetType() EnumAZURETENANT {
+func (o *CreateAssetAZURERequest) GetAssetType() string {
 	if o == nil {
-		var ret EnumAZURETENANT
+		var ret string
 		return ret
 	}
 
@@ -89,7 +89,7 @@ func (o *CreateAssetAZURERequest) GetAssetType() EnumAZURETENANT {
 
 // GetAssetTypeOk returns a tuple with the AssetType field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetAZURERequest) GetAssetTypeOk() (*EnumAZURETENANT, bool) {
+func (o *CreateAssetAZURERequest) GetAssetTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -97,7 +97,7 @@ func (o *CreateAssetAZURERequest) GetAssetTypeOk() (*EnumAZURETENANT, bool) {
 }
 
 // SetAssetType sets field value
-func (o *CreateAssetAZURERequest) SetAssetType(v EnumAZURETENANT) {
+func (o *CreateAssetAZURERequest) SetAssetType(v string) {
 	o.AssetType = v
 }
 

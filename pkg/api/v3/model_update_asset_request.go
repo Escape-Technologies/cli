@@ -1,7 +1,7 @@
 /*
 Escape Public API
 
-This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `Authorization` header. For example: `Authorization: Key YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
+This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `X-ESCAPE-API-KEY` header. For example: `X-ESCAPE-API-KEY: YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
 
 API version: 3.0.0
 */
@@ -19,12 +19,12 @@ var _ MappedNullable = &UpdateAssetRequest{}
 
 // UpdateAssetRequest struct for UpdateAssetRequest
 type UpdateAssetRequest struct {
-	// The tag IDs of the asset
-	TagIds []string `json:"tagIds,omitempty"`
-	// The owners of the asset
-	Owners []string `json:"owners,omitempty"`
-	Framework *EnumAaccef0c05ed72dfa82b28d54c8e6410 `json:"framework,omitempty"`
-	Status *Enum979d32dc69b8f72f50564e75367bcbb5 `json:"status,omitempty"`
+	TagIds *UpdateAssetRequestTagIds `json:"tagIds,omitempty"`
+	Owners *UpdateAssetRequestOwners `json:"owners,omitempty"`
+	// The framework of the asset
+	Framework *string `json:"framework,omitempty"`
+	// The status of the asset
+	Status *string `json:"status,omitempty"`
 	// The description of the asset
 	Description *string `json:"description,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -50,17 +50,17 @@ func NewUpdateAssetRequestWithDefaults() *UpdateAssetRequest {
 }
 
 // GetTagIds returns the TagIds field value if set, zero value otherwise.
-func (o *UpdateAssetRequest) GetTagIds() []string {
+func (o *UpdateAssetRequest) GetTagIds() UpdateAssetRequestTagIds {
 	if o == nil || IsNil(o.TagIds) {
-		var ret []string
+		var ret UpdateAssetRequestTagIds
 		return ret
 	}
-	return o.TagIds
+	return *o.TagIds
 }
 
 // GetTagIdsOk returns a tuple with the TagIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateAssetRequest) GetTagIdsOk() ([]string, bool) {
+func (o *UpdateAssetRequest) GetTagIdsOk() (*UpdateAssetRequestTagIds, bool) {
 	if o == nil || IsNil(o.TagIds) {
 		return nil, false
 	}
@@ -76,23 +76,23 @@ func (o *UpdateAssetRequest) HasTagIds() bool {
 	return false
 }
 
-// SetTagIds gets a reference to the given []string and assigns it to the TagIds field.
-func (o *UpdateAssetRequest) SetTagIds(v []string) {
-	o.TagIds = v
+// SetTagIds gets a reference to the given UpdateAssetRequestTagIds and assigns it to the TagIds field.
+func (o *UpdateAssetRequest) SetTagIds(v UpdateAssetRequestTagIds) {
+	o.TagIds = &v
 }
 
 // GetOwners returns the Owners field value if set, zero value otherwise.
-func (o *UpdateAssetRequest) GetOwners() []string {
+func (o *UpdateAssetRequest) GetOwners() UpdateAssetRequestOwners {
 	if o == nil || IsNil(o.Owners) {
-		var ret []string
+		var ret UpdateAssetRequestOwners
 		return ret
 	}
-	return o.Owners
+	return *o.Owners
 }
 
 // GetOwnersOk returns a tuple with the Owners field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateAssetRequest) GetOwnersOk() ([]string, bool) {
+func (o *UpdateAssetRequest) GetOwnersOk() (*UpdateAssetRequestOwners, bool) {
 	if o == nil || IsNil(o.Owners) {
 		return nil, false
 	}
@@ -108,15 +108,15 @@ func (o *UpdateAssetRequest) HasOwners() bool {
 	return false
 }
 
-// SetOwners gets a reference to the given []string and assigns it to the Owners field.
-func (o *UpdateAssetRequest) SetOwners(v []string) {
-	o.Owners = v
+// SetOwners gets a reference to the given UpdateAssetRequestOwners and assigns it to the Owners field.
+func (o *UpdateAssetRequest) SetOwners(v UpdateAssetRequestOwners) {
+	o.Owners = &v
 }
 
 // GetFramework returns the Framework field value if set, zero value otherwise.
-func (o *UpdateAssetRequest) GetFramework() EnumAaccef0c05ed72dfa82b28d54c8e6410 {
+func (o *UpdateAssetRequest) GetFramework() string {
 	if o == nil || IsNil(o.Framework) {
-		var ret EnumAaccef0c05ed72dfa82b28d54c8e6410
+		var ret string
 		return ret
 	}
 	return *o.Framework
@@ -124,7 +124,7 @@ func (o *UpdateAssetRequest) GetFramework() EnumAaccef0c05ed72dfa82b28d54c8e6410
 
 // GetFrameworkOk returns a tuple with the Framework field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateAssetRequest) GetFrameworkOk() (*EnumAaccef0c05ed72dfa82b28d54c8e6410, bool) {
+func (o *UpdateAssetRequest) GetFrameworkOk() (*string, bool) {
 	if o == nil || IsNil(o.Framework) {
 		return nil, false
 	}
@@ -140,15 +140,15 @@ func (o *UpdateAssetRequest) HasFramework() bool {
 	return false
 }
 
-// SetFramework gets a reference to the given EnumAaccef0c05ed72dfa82b28d54c8e6410 and assigns it to the Framework field.
-func (o *UpdateAssetRequest) SetFramework(v EnumAaccef0c05ed72dfa82b28d54c8e6410) {
+// SetFramework gets a reference to the given string and assigns it to the Framework field.
+func (o *UpdateAssetRequest) SetFramework(v string) {
 	o.Framework = &v
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
-func (o *UpdateAssetRequest) GetStatus() Enum979d32dc69b8f72f50564e75367bcbb5 {
+func (o *UpdateAssetRequest) GetStatus() string {
 	if o == nil || IsNil(o.Status) {
-		var ret Enum979d32dc69b8f72f50564e75367bcbb5
+		var ret string
 		return ret
 	}
 	return *o.Status
@@ -156,7 +156,7 @@ func (o *UpdateAssetRequest) GetStatus() Enum979d32dc69b8f72f50564e75367bcbb5 {
 
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateAssetRequest) GetStatusOk() (*Enum979d32dc69b8f72f50564e75367bcbb5, bool) {
+func (o *UpdateAssetRequest) GetStatusOk() (*string, bool) {
 	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
@@ -172,8 +172,8 @@ func (o *UpdateAssetRequest) HasStatus() bool {
 	return false
 }
 
-// SetStatus gets a reference to the given Enum979d32dc69b8f72f50564e75367bcbb5 and assigns it to the Status field.
-func (o *UpdateAssetRequest) SetStatus(v Enum979d32dc69b8f72f50564e75367bcbb5) {
+// SetStatus gets a reference to the given string and assigns it to the Status field.
+func (o *UpdateAssetRequest) SetStatus(v string) {
 	o.Status = &v
 }
 

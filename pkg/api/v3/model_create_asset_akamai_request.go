@@ -1,7 +1,7 @@
 /*
 Escape Public API
 
-This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `Authorization` header. For example: `Authorization: Key YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
+This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `X-ESCAPE-API-KEY` header. For example: `X-ESCAPE-API-KEY: YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
 
 API version: 3.0.0
 */
@@ -20,8 +20,8 @@ var _ MappedNullable = &CreateAssetAKAMAIRequest{}
 
 // CreateAssetAKAMAIRequest struct for CreateAssetAKAMAIRequest
 type CreateAssetAKAMAIRequest struct {
-	AssetClass EnumCDN `json:"asset_class"`
-	AssetType EnumAKAMAIACCOUNT `json:"asset_type"`
+	AssetClass string `json:"asset_class"`
+	AssetType string `json:"asset_type"`
 	Name *string `json:"name,omitempty"`
 	Host string `json:"host"`
 	ClientSecret string `json:"client_secret"`
@@ -36,7 +36,7 @@ type _CreateAssetAKAMAIRequest CreateAssetAKAMAIRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetAKAMAIRequest(assetClass EnumCDN, assetType EnumAKAMAIACCOUNT, host string, clientSecret string, accessToken string, clientToken string) *CreateAssetAKAMAIRequest {
+func NewCreateAssetAKAMAIRequest(assetClass string, assetType string, host string, clientSecret string, accessToken string, clientToken string) *CreateAssetAKAMAIRequest {
 	this := CreateAssetAKAMAIRequest{}
 	this.AssetClass = assetClass
 	this.AssetType = assetType
@@ -56,9 +56,9 @@ func NewCreateAssetAKAMAIRequestWithDefaults() *CreateAssetAKAMAIRequest {
 }
 
 // GetAssetClass returns the AssetClass field value
-func (o *CreateAssetAKAMAIRequest) GetAssetClass() EnumCDN {
+func (o *CreateAssetAKAMAIRequest) GetAssetClass() string {
 	if o == nil {
-		var ret EnumCDN
+		var ret string
 		return ret
 	}
 
@@ -67,7 +67,7 @@ func (o *CreateAssetAKAMAIRequest) GetAssetClass() EnumCDN {
 
 // GetAssetClassOk returns a tuple with the AssetClass field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetAKAMAIRequest) GetAssetClassOk() (*EnumCDN, bool) {
+func (o *CreateAssetAKAMAIRequest) GetAssetClassOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -75,14 +75,14 @@ func (o *CreateAssetAKAMAIRequest) GetAssetClassOk() (*EnumCDN, bool) {
 }
 
 // SetAssetClass sets field value
-func (o *CreateAssetAKAMAIRequest) SetAssetClass(v EnumCDN) {
+func (o *CreateAssetAKAMAIRequest) SetAssetClass(v string) {
 	o.AssetClass = v
 }
 
 // GetAssetType returns the AssetType field value
-func (o *CreateAssetAKAMAIRequest) GetAssetType() EnumAKAMAIACCOUNT {
+func (o *CreateAssetAKAMAIRequest) GetAssetType() string {
 	if o == nil {
-		var ret EnumAKAMAIACCOUNT
+		var ret string
 		return ret
 	}
 
@@ -91,7 +91,7 @@ func (o *CreateAssetAKAMAIRequest) GetAssetType() EnumAKAMAIACCOUNT {
 
 // GetAssetTypeOk returns a tuple with the AssetType field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetAKAMAIRequest) GetAssetTypeOk() (*EnumAKAMAIACCOUNT, bool) {
+func (o *CreateAssetAKAMAIRequest) GetAssetTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -99,7 +99,7 @@ func (o *CreateAssetAKAMAIRequest) GetAssetTypeOk() (*EnumAKAMAIACCOUNT, bool) {
 }
 
 // SetAssetType sets field value
-func (o *CreateAssetAKAMAIRequest) SetAssetType(v EnumAKAMAIACCOUNT) {
+func (o *CreateAssetAKAMAIRequest) SetAssetType(v string) {
 	o.AssetType = v
 }
 

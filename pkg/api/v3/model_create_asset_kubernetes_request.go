@@ -1,7 +1,7 @@
 /*
 Escape Public API
 
-This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `Authorization` header. For example: `Authorization: Key YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
+This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `X-ESCAPE-API-KEY` header. For example: `X-ESCAPE-API-KEY: YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
 
 API version: 3.0.0
 */
@@ -20,8 +20,8 @@ var _ MappedNullable = &CreateAssetKUBERNETESRequest{}
 
 // CreateAssetKUBERNETESRequest struct for CreateAssetKUBERNETESRequest
 type CreateAssetKUBERNETESRequest struct {
-	AssetClass EnumCLOUDHOSTING `json:"asset_class"`
-	AssetType EnumKUBERNETESCLUSTER `json:"asset_type"`
+	AssetClass string `json:"asset_class"`
+	AssetType string `json:"asset_type"`
 	Name *string `json:"name,omitempty"`
 	PrivateLocationId string `json:"private_location_id"`
 	AdditionalProperties map[string]interface{}
@@ -33,7 +33,7 @@ type _CreateAssetKUBERNETESRequest CreateAssetKUBERNETESRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetKUBERNETESRequest(assetClass EnumCLOUDHOSTING, assetType EnumKUBERNETESCLUSTER, privateLocationId string) *CreateAssetKUBERNETESRequest {
+func NewCreateAssetKUBERNETESRequest(assetClass string, assetType string, privateLocationId string) *CreateAssetKUBERNETESRequest {
 	this := CreateAssetKUBERNETESRequest{}
 	this.AssetClass = assetClass
 	this.AssetType = assetType
@@ -50,9 +50,9 @@ func NewCreateAssetKUBERNETESRequestWithDefaults() *CreateAssetKUBERNETESRequest
 }
 
 // GetAssetClass returns the AssetClass field value
-func (o *CreateAssetKUBERNETESRequest) GetAssetClass() EnumCLOUDHOSTING {
+func (o *CreateAssetKUBERNETESRequest) GetAssetClass() string {
 	if o == nil {
-		var ret EnumCLOUDHOSTING
+		var ret string
 		return ret
 	}
 
@@ -61,7 +61,7 @@ func (o *CreateAssetKUBERNETESRequest) GetAssetClass() EnumCLOUDHOSTING {
 
 // GetAssetClassOk returns a tuple with the AssetClass field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetKUBERNETESRequest) GetAssetClassOk() (*EnumCLOUDHOSTING, bool) {
+func (o *CreateAssetKUBERNETESRequest) GetAssetClassOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -69,14 +69,14 @@ func (o *CreateAssetKUBERNETESRequest) GetAssetClassOk() (*EnumCLOUDHOSTING, boo
 }
 
 // SetAssetClass sets field value
-func (o *CreateAssetKUBERNETESRequest) SetAssetClass(v EnumCLOUDHOSTING) {
+func (o *CreateAssetKUBERNETESRequest) SetAssetClass(v string) {
 	o.AssetClass = v
 }
 
 // GetAssetType returns the AssetType field value
-func (o *CreateAssetKUBERNETESRequest) GetAssetType() EnumKUBERNETESCLUSTER {
+func (o *CreateAssetKUBERNETESRequest) GetAssetType() string {
 	if o == nil {
-		var ret EnumKUBERNETESCLUSTER
+		var ret string
 		return ret
 	}
 
@@ -85,7 +85,7 @@ func (o *CreateAssetKUBERNETESRequest) GetAssetType() EnumKUBERNETESCLUSTER {
 
 // GetAssetTypeOk returns a tuple with the AssetType field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetKUBERNETESRequest) GetAssetTypeOk() (*EnumKUBERNETESCLUSTER, bool) {
+func (o *CreateAssetKUBERNETESRequest) GetAssetTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -93,7 +93,7 @@ func (o *CreateAssetKUBERNETESRequest) GetAssetTypeOk() (*EnumKUBERNETESCLUSTER,
 }
 
 // SetAssetType sets field value
-func (o *CreateAssetKUBERNETESRequest) SetAssetType(v EnumKUBERNETESCLUSTER) {
+func (o *CreateAssetKUBERNETESRequest) SetAssetType(v string) {
 	o.AssetType = v
 }
 

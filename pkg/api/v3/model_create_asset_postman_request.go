@@ -1,7 +1,7 @@
 /*
 Escape Public API
 
-This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `Authorization` header. For example: `Authorization: Key YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
+This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `X-ESCAPE-API-KEY` header. For example: `X-ESCAPE-API-KEY: YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
 
 API version: 3.0.0
 */
@@ -20,8 +20,8 @@ var _ MappedNullable = &CreateAssetPOSTMANRequest{}
 
 // CreateAssetPOSTMANRequest struct for CreateAssetPOSTMANRequest
 type CreateAssetPOSTMANRequest struct {
-	AssetClass EnumDEVTOOLS `json:"asset_class"`
-	AssetType EnumPOSTMANORGANIZATION `json:"asset_type"`
+	AssetClass string `json:"asset_class"`
+	AssetType string `json:"asset_type"`
 	Name *string `json:"name,omitempty"`
 	ApiKey string `json:"api_key"`
 	AdditionalProperties map[string]interface{}
@@ -33,7 +33,7 @@ type _CreateAssetPOSTMANRequest CreateAssetPOSTMANRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetPOSTMANRequest(assetClass EnumDEVTOOLS, assetType EnumPOSTMANORGANIZATION, apiKey string) *CreateAssetPOSTMANRequest {
+func NewCreateAssetPOSTMANRequest(assetClass string, assetType string, apiKey string) *CreateAssetPOSTMANRequest {
 	this := CreateAssetPOSTMANRequest{}
 	this.AssetClass = assetClass
 	this.AssetType = assetType
@@ -50,9 +50,9 @@ func NewCreateAssetPOSTMANRequestWithDefaults() *CreateAssetPOSTMANRequest {
 }
 
 // GetAssetClass returns the AssetClass field value
-func (o *CreateAssetPOSTMANRequest) GetAssetClass() EnumDEVTOOLS {
+func (o *CreateAssetPOSTMANRequest) GetAssetClass() string {
 	if o == nil {
-		var ret EnumDEVTOOLS
+		var ret string
 		return ret
 	}
 
@@ -61,7 +61,7 @@ func (o *CreateAssetPOSTMANRequest) GetAssetClass() EnumDEVTOOLS {
 
 // GetAssetClassOk returns a tuple with the AssetClass field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetPOSTMANRequest) GetAssetClassOk() (*EnumDEVTOOLS, bool) {
+func (o *CreateAssetPOSTMANRequest) GetAssetClassOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -69,14 +69,14 @@ func (o *CreateAssetPOSTMANRequest) GetAssetClassOk() (*EnumDEVTOOLS, bool) {
 }
 
 // SetAssetClass sets field value
-func (o *CreateAssetPOSTMANRequest) SetAssetClass(v EnumDEVTOOLS) {
+func (o *CreateAssetPOSTMANRequest) SetAssetClass(v string) {
 	o.AssetClass = v
 }
 
 // GetAssetType returns the AssetType field value
-func (o *CreateAssetPOSTMANRequest) GetAssetType() EnumPOSTMANORGANIZATION {
+func (o *CreateAssetPOSTMANRequest) GetAssetType() string {
 	if o == nil {
-		var ret EnumPOSTMANORGANIZATION
+		var ret string
 		return ret
 	}
 
@@ -85,7 +85,7 @@ func (o *CreateAssetPOSTMANRequest) GetAssetType() EnumPOSTMANORGANIZATION {
 
 // GetAssetTypeOk returns a tuple with the AssetType field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetPOSTMANRequest) GetAssetTypeOk() (*EnumPOSTMANORGANIZATION, bool) {
+func (o *CreateAssetPOSTMANRequest) GetAssetTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -93,7 +93,7 @@ func (o *CreateAssetPOSTMANRequest) GetAssetTypeOk() (*EnumPOSTMANORGANIZATION, 
 }
 
 // SetAssetType sets field value
-func (o *CreateAssetPOSTMANRequest) SetAssetType(v EnumPOSTMANORGANIZATION) {
+func (o *CreateAssetPOSTMANRequest) SetAssetType(v string) {
 	o.AssetType = v
 }
 

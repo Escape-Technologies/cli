@@ -1,7 +1,7 @@
 /*
 Escape Public API
 
-This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `Authorization` header. For example: `Authorization: Key YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
+This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `X-ESCAPE-API-KEY` header. For example: `X-ESCAPE-API-KEY: YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
 
 API version: 3.0.0
 */
@@ -17,6 +17,7 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"reflect"
 )
 
 
@@ -29,7 +30,7 @@ type ApiCancelScanRequest struct {
 	scanId string
 }
 
-func (r ApiCancelScanRequest) Execute() (*StartScan200Response, *http.Response, error) {
+func (r ApiCancelScanRequest) Execute() (*ScanDetailed1, *http.Response, error) {
 	return r.ApiService.CancelScanExecute(r)
 }
 
@@ -51,13 +52,13 @@ func (a *ScansAPIService) CancelScan(ctx context.Context, scanId string) ApiCanc
 }
 
 // Execute executes the request
-//  @return StartScan200Response
-func (a *ScansAPIService) CancelScanExecute(r ApiCancelScanRequest) (*StartScan200Response, *http.Response, error) {
+//  @return ScanDetailed1
+func (a *ScansAPIService) CancelScanExecute(r ApiCancelScanRequest) (*ScanDetailed1, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *StartScan200Response
+		localVarReturnValue  *ScanDetailed1
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ScansAPIService.CancelScan")
@@ -99,7 +100,7 @@ func (a *ScansAPIService) CancelScanExecute(r ApiCancelScanRequest) (*StartScan2
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -167,7 +168,7 @@ type ApiGetScanRequest struct {
 	scanId string
 }
 
-func (r ApiGetScanRequest) Execute() (*StartScan200Response, *http.Response, error) {
+func (r ApiGetScanRequest) Execute() (*ScanDetailed1, *http.Response, error) {
 	return r.ApiService.GetScanExecute(r)
 }
 
@@ -189,13 +190,13 @@ func (a *ScansAPIService) GetScan(ctx context.Context, scanId string) ApiGetScan
 }
 
 // Execute executes the request
-//  @return StartScan200Response
-func (a *ScansAPIService) GetScanExecute(r ApiGetScanRequest) (*StartScan200Response, *http.Response, error) {
+//  @return ScanDetailed1
+func (a *ScansAPIService) GetScanExecute(r ApiGetScanRequest) (*ScanDetailed1, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *StartScan200Response
+		localVarReturnValue  *ScanDetailed1
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ScansAPIService.GetScan")
@@ -237,7 +238,7 @@ func (a *ScansAPIService) GetScanExecute(r ApiGetScanRequest) (*StartScan200Resp
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -373,7 +374,7 @@ func (a *ScansAPIService) IgnoreScanExecute(r ApiIgnoreScanRequest) (*IgnoreScan
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -451,14 +452,15 @@ type ApiListScansRequest struct {
 	ApiService *ScansAPIService
 	cursor *string
 	size *int
-	sort *ListProfilesSortParameter
+	sortType *string
+	sortDirection *string
 	after *string
 	before *string
 	profileIds *ListScansProfileIdsParameter
 	ignored *string
-	initiator *string
-	kinds *string
-	status *string
+	initiator *[]string
+	kinds *[]string
+	status *[]string
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
@@ -473,8 +475,15 @@ func (r ApiListScansRequest) Size(size int) ApiListScansRequest {
 	return r
 }
 
-func (r ApiListScansRequest) Sort(sort ListProfilesSortParameter) ApiListScansRequest {
-	r.sort = &sort
+// The type to sort by
+func (r ApiListScansRequest) SortType(sortType string) ApiListScansRequest {
+	r.sortType = &sortType
+	return r
+}
+
+// The direction to sort by
+func (r ApiListScansRequest) SortDirection(sortDirection string) ApiListScansRequest {
+	r.sortDirection = &sortDirection
 	return r
 }
 
@@ -503,19 +512,19 @@ func (r ApiListScansRequest) Ignored(ignored string) ApiListScansRequest {
 }
 
 // Filter by initiator
-func (r ApiListScansRequest) Initiator(initiator string) ApiListScansRequest {
+func (r ApiListScansRequest) Initiator(initiator []string) ApiListScansRequest {
 	r.initiator = &initiator
 	return r
 }
 
 // Filter by kind
-func (r ApiListScansRequest) Kinds(kinds string) ApiListScansRequest {
+func (r ApiListScansRequest) Kinds(kinds []string) ApiListScansRequest {
 	r.kinds = &kinds
 	return r
 }
 
 // Filter by status
-func (r ApiListScansRequest) Status(status string) ApiListScansRequest {
+func (r ApiListScansRequest) Status(status []string) ApiListScansRequest {
 	r.status = &status
 	return r
 }
@@ -569,8 +578,14 @@ func (a *ScansAPIService) ListScansExecute(r ApiListScansRequest) (*ListScans200
 		var defaultValue int = 50
 		r.size = &defaultValue
 	}
-	if r.sort != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "sort", r.sort, "form", "")
+	if r.sortType != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortType", r.sortType, "form", "")
+	}
+	if r.sortDirection != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
+	} else {
+		var defaultValue string = "asc"
+		r.sortDirection = &defaultValue
 	}
 	if r.after != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "after", r.after, "form", "")
@@ -585,13 +600,37 @@ func (a *ScansAPIService) ListScansExecute(r ApiListScansRequest) (*ListScans200
 		parameterAddToHeaderOrQuery(localVarQueryParams, "ignored", r.ignored, "form", "")
 	}
 	if r.initiator != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "initiator", r.initiator, "form", "")
+		t := *r.initiator
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "initiator", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "initiator", t, "form", "multi")
+		}
 	}
 	if r.kinds != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "kinds", r.kinds, "form", "")
+		t := *r.kinds
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "kinds", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "kinds", t, "form", "multi")
+		}
 	}
 	if r.status != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "status", r.status, "form", "")
+		t := *r.status
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "status", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "status", t, "form", "multi")
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -620,7 +659,7 @@ func (a *ScansAPIService) ListScansExecute(r ApiListScansRequest) (*ListScans200
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}
@@ -683,7 +722,7 @@ func (r ApiStartScanRequest) StartScanRequest(startScanRequest StartScanRequest)
 	return r
 }
 
-func (r ApiStartScanRequest) Execute() (*StartScan200Response, *http.Response, error) {
+func (r ApiStartScanRequest) Execute() (*ScanDetailed1, *http.Response, error) {
 	return r.ApiService.StartScanExecute(r)
 }
 
@@ -703,13 +742,13 @@ func (a *ScansAPIService) StartScan(ctx context.Context) ApiStartScanRequest {
 }
 
 // Execute executes the request
-//  @return StartScan200Response
-func (a *ScansAPIService) StartScanExecute(r ApiStartScanRequest) (*StartScan200Response, *http.Response, error) {
+//  @return ScanDetailed1
+func (a *ScansAPIService) StartScanExecute(r ApiStartScanRequest) (*ScanDetailed1, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *StartScan200Response
+		localVarReturnValue  *ScanDetailed1
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ScansAPIService.StartScan")
@@ -752,7 +791,7 @@ func (a *ScansAPIService) StartScanExecute(r ApiStartScanRequest) (*StartScan200
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Authorization"] = key
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
 			}
 		}
 	}

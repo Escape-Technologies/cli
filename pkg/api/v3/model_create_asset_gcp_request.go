@@ -1,7 +1,7 @@
 /*
 Escape Public API
 
-This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `Authorization` header. For example: `Authorization: Key YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
+This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `X-ESCAPE-API-KEY` header. For example: `X-ESCAPE-API-KEY: YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
 
 API version: 3.0.0
 */
@@ -20,8 +20,8 @@ var _ MappedNullable = &CreateAssetGCPRequest{}
 
 // CreateAssetGCPRequest struct for CreateAssetGCPRequest
 type CreateAssetGCPRequest struct {
-	AssetClass EnumCLOUDHOSTING `json:"asset_class"`
-	AssetType EnumGCPPROJECT `json:"asset_type"`
+	AssetClass string `json:"asset_class"`
+	AssetType string `json:"asset_type"`
 	Name *string `json:"name,omitempty"`
 	AuthProviderX509CertUrl string `json:"auth_provider_x509_cert_url"`
 	AuthUri string `json:"auth_uri"`
@@ -42,7 +42,7 @@ type _CreateAssetGCPRequest CreateAssetGCPRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetGCPRequest(assetClass EnumCLOUDHOSTING, assetType EnumGCPPROJECT, authProviderX509CertUrl string, authUri string, clientEmail string, clientId string, clientX509CertUrl string, privateKey string, privateKeyId string, tokenUri string, universeDomain string, projectId string) *CreateAssetGCPRequest {
+func NewCreateAssetGCPRequest(assetClass string, assetType string, authProviderX509CertUrl string, authUri string, clientEmail string, clientId string, clientX509CertUrl string, privateKey string, privateKeyId string, tokenUri string, universeDomain string, projectId string) *CreateAssetGCPRequest {
 	this := CreateAssetGCPRequest{}
 	this.AssetClass = assetClass
 	this.AssetType = assetType
@@ -68,9 +68,9 @@ func NewCreateAssetGCPRequestWithDefaults() *CreateAssetGCPRequest {
 }
 
 // GetAssetClass returns the AssetClass field value
-func (o *CreateAssetGCPRequest) GetAssetClass() EnumCLOUDHOSTING {
+func (o *CreateAssetGCPRequest) GetAssetClass() string {
 	if o == nil {
-		var ret EnumCLOUDHOSTING
+		var ret string
 		return ret
 	}
 
@@ -79,7 +79,7 @@ func (o *CreateAssetGCPRequest) GetAssetClass() EnumCLOUDHOSTING {
 
 // GetAssetClassOk returns a tuple with the AssetClass field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGCPRequest) GetAssetClassOk() (*EnumCLOUDHOSTING, bool) {
+func (o *CreateAssetGCPRequest) GetAssetClassOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -87,14 +87,14 @@ func (o *CreateAssetGCPRequest) GetAssetClassOk() (*EnumCLOUDHOSTING, bool) {
 }
 
 // SetAssetClass sets field value
-func (o *CreateAssetGCPRequest) SetAssetClass(v EnumCLOUDHOSTING) {
+func (o *CreateAssetGCPRequest) SetAssetClass(v string) {
 	o.AssetClass = v
 }
 
 // GetAssetType returns the AssetType field value
-func (o *CreateAssetGCPRequest) GetAssetType() EnumGCPPROJECT {
+func (o *CreateAssetGCPRequest) GetAssetType() string {
 	if o == nil {
-		var ret EnumGCPPROJECT
+		var ret string
 		return ret
 	}
 
@@ -103,7 +103,7 @@ func (o *CreateAssetGCPRequest) GetAssetType() EnumGCPPROJECT {
 
 // GetAssetTypeOk returns a tuple with the AssetType field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGCPRequest) GetAssetTypeOk() (*EnumGCPPROJECT, bool) {
+func (o *CreateAssetGCPRequest) GetAssetTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -111,7 +111,7 @@ func (o *CreateAssetGCPRequest) GetAssetTypeOk() (*EnumGCPPROJECT, bool) {
 }
 
 // SetAssetType sets field value
-func (o *CreateAssetGCPRequest) SetAssetType(v EnumGCPPROJECT) {
+func (o *CreateAssetGCPRequest) SetAssetType(v string) {
 	o.AssetType = v
 }
 

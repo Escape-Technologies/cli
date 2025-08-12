@@ -1,7 +1,7 @@
 /*
 Escape Public API
 
-This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `Authorization` header. For example: `Authorization: Key YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
+This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `X-ESCAPE-API-KEY` header. For example: `X-ESCAPE-API-KEY: YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
 
 API version: 3.0.0
 */
@@ -20,15 +20,15 @@ var _ MappedNullable = &CreateAssetWEBAPPRequest{}
 
 // CreateAssetWEBAPPRequest struct for CreateAssetWEBAPPRequest
 type CreateAssetWEBAPPRequest struct {
-	AssetClass EnumFRONTEND `json:"asset_class"`
-	AssetType EnumWEBAPP `json:"asset_type"`
+	AssetClass string `json:"asset_class"`
+	AssetType string `json:"asset_type"`
 	Url string `json:"url"`
 	Favicon *string `json:"favicon,omitempty"`
 	ReachableVia []string `json:"reachable_via,omitempty"`
-	Framework *Enum111ee63b8407108414444e681aa5aa2c `json:"framework,omitempty"`
-	Environment *Enum0bdcaaff7655a1ccf93d249cab8f0d41 `json:"environment,omitempty"`
-	CloudProvider *Enum461e4d210f1062ae8e63863a9180f177 `json:"cloud_provider,omitempty"`
-	WafProvider *EnumD27aab5ce42044022690de5c30368794 `json:"waf_provider,omitempty"`
+	Framework *string `json:"framework,omitempty"`
+	Environment *string `json:"environment,omitempty"`
+	CloudProvider *string `json:"cloud_provider,omitempty"`
+	WafProvider *string `json:"waf_provider,omitempty"`
 	Ips []string `json:"ips,omitempty"`
 	RegionCountryCodes []string `json:"region_country_codes,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -40,7 +40,7 @@ type _CreateAssetWEBAPPRequest CreateAssetWEBAPPRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetWEBAPPRequest(assetClass EnumFRONTEND, assetType EnumWEBAPP, url string) *CreateAssetWEBAPPRequest {
+func NewCreateAssetWEBAPPRequest(assetClass string, assetType string, url string) *CreateAssetWEBAPPRequest {
 	this := CreateAssetWEBAPPRequest{}
 	this.AssetClass = assetClass
 	this.AssetType = assetType
@@ -57,9 +57,9 @@ func NewCreateAssetWEBAPPRequestWithDefaults() *CreateAssetWEBAPPRequest {
 }
 
 // GetAssetClass returns the AssetClass field value
-func (o *CreateAssetWEBAPPRequest) GetAssetClass() EnumFRONTEND {
+func (o *CreateAssetWEBAPPRequest) GetAssetClass() string {
 	if o == nil {
-		var ret EnumFRONTEND
+		var ret string
 		return ret
 	}
 
@@ -68,7 +68,7 @@ func (o *CreateAssetWEBAPPRequest) GetAssetClass() EnumFRONTEND {
 
 // GetAssetClassOk returns a tuple with the AssetClass field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetWEBAPPRequest) GetAssetClassOk() (*EnumFRONTEND, bool) {
+func (o *CreateAssetWEBAPPRequest) GetAssetClassOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -76,14 +76,14 @@ func (o *CreateAssetWEBAPPRequest) GetAssetClassOk() (*EnumFRONTEND, bool) {
 }
 
 // SetAssetClass sets field value
-func (o *CreateAssetWEBAPPRequest) SetAssetClass(v EnumFRONTEND) {
+func (o *CreateAssetWEBAPPRequest) SetAssetClass(v string) {
 	o.AssetClass = v
 }
 
 // GetAssetType returns the AssetType field value
-func (o *CreateAssetWEBAPPRequest) GetAssetType() EnumWEBAPP {
+func (o *CreateAssetWEBAPPRequest) GetAssetType() string {
 	if o == nil {
-		var ret EnumWEBAPP
+		var ret string
 		return ret
 	}
 
@@ -92,7 +92,7 @@ func (o *CreateAssetWEBAPPRequest) GetAssetType() EnumWEBAPP {
 
 // GetAssetTypeOk returns a tuple with the AssetType field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetWEBAPPRequest) GetAssetTypeOk() (*EnumWEBAPP, bool) {
+func (o *CreateAssetWEBAPPRequest) GetAssetTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -100,7 +100,7 @@ func (o *CreateAssetWEBAPPRequest) GetAssetTypeOk() (*EnumWEBAPP, bool) {
 }
 
 // SetAssetType sets field value
-func (o *CreateAssetWEBAPPRequest) SetAssetType(v EnumWEBAPP) {
+func (o *CreateAssetWEBAPPRequest) SetAssetType(v string) {
 	o.AssetType = v
 }
 
@@ -193,9 +193,9 @@ func (o *CreateAssetWEBAPPRequest) SetReachableVia(v []string) {
 }
 
 // GetFramework returns the Framework field value if set, zero value otherwise.
-func (o *CreateAssetWEBAPPRequest) GetFramework() Enum111ee63b8407108414444e681aa5aa2c {
+func (o *CreateAssetWEBAPPRequest) GetFramework() string {
 	if o == nil || IsNil(o.Framework) {
-		var ret Enum111ee63b8407108414444e681aa5aa2c
+		var ret string
 		return ret
 	}
 	return *o.Framework
@@ -203,7 +203,7 @@ func (o *CreateAssetWEBAPPRequest) GetFramework() Enum111ee63b8407108414444e681a
 
 // GetFrameworkOk returns a tuple with the Framework field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetWEBAPPRequest) GetFrameworkOk() (*Enum111ee63b8407108414444e681aa5aa2c, bool) {
+func (o *CreateAssetWEBAPPRequest) GetFrameworkOk() (*string, bool) {
 	if o == nil || IsNil(o.Framework) {
 		return nil, false
 	}
@@ -219,15 +219,15 @@ func (o *CreateAssetWEBAPPRequest) HasFramework() bool {
 	return false
 }
 
-// SetFramework gets a reference to the given Enum111ee63b8407108414444e681aa5aa2c and assigns it to the Framework field.
-func (o *CreateAssetWEBAPPRequest) SetFramework(v Enum111ee63b8407108414444e681aa5aa2c) {
+// SetFramework gets a reference to the given string and assigns it to the Framework field.
+func (o *CreateAssetWEBAPPRequest) SetFramework(v string) {
 	o.Framework = &v
 }
 
 // GetEnvironment returns the Environment field value if set, zero value otherwise.
-func (o *CreateAssetWEBAPPRequest) GetEnvironment() Enum0bdcaaff7655a1ccf93d249cab8f0d41 {
+func (o *CreateAssetWEBAPPRequest) GetEnvironment() string {
 	if o == nil || IsNil(o.Environment) {
-		var ret Enum0bdcaaff7655a1ccf93d249cab8f0d41
+		var ret string
 		return ret
 	}
 	return *o.Environment
@@ -235,7 +235,7 @@ func (o *CreateAssetWEBAPPRequest) GetEnvironment() Enum0bdcaaff7655a1ccf93d249c
 
 // GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetWEBAPPRequest) GetEnvironmentOk() (*Enum0bdcaaff7655a1ccf93d249cab8f0d41, bool) {
+func (o *CreateAssetWEBAPPRequest) GetEnvironmentOk() (*string, bool) {
 	if o == nil || IsNil(o.Environment) {
 		return nil, false
 	}
@@ -251,15 +251,15 @@ func (o *CreateAssetWEBAPPRequest) HasEnvironment() bool {
 	return false
 }
 
-// SetEnvironment gets a reference to the given Enum0bdcaaff7655a1ccf93d249cab8f0d41 and assigns it to the Environment field.
-func (o *CreateAssetWEBAPPRequest) SetEnvironment(v Enum0bdcaaff7655a1ccf93d249cab8f0d41) {
+// SetEnvironment gets a reference to the given string and assigns it to the Environment field.
+func (o *CreateAssetWEBAPPRequest) SetEnvironment(v string) {
 	o.Environment = &v
 }
 
 // GetCloudProvider returns the CloudProvider field value if set, zero value otherwise.
-func (o *CreateAssetWEBAPPRequest) GetCloudProvider() Enum461e4d210f1062ae8e63863a9180f177 {
+func (o *CreateAssetWEBAPPRequest) GetCloudProvider() string {
 	if o == nil || IsNil(o.CloudProvider) {
-		var ret Enum461e4d210f1062ae8e63863a9180f177
+		var ret string
 		return ret
 	}
 	return *o.CloudProvider
@@ -267,7 +267,7 @@ func (o *CreateAssetWEBAPPRequest) GetCloudProvider() Enum461e4d210f1062ae8e6386
 
 // GetCloudProviderOk returns a tuple with the CloudProvider field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetWEBAPPRequest) GetCloudProviderOk() (*Enum461e4d210f1062ae8e63863a9180f177, bool) {
+func (o *CreateAssetWEBAPPRequest) GetCloudProviderOk() (*string, bool) {
 	if o == nil || IsNil(o.CloudProvider) {
 		return nil, false
 	}
@@ -283,15 +283,15 @@ func (o *CreateAssetWEBAPPRequest) HasCloudProvider() bool {
 	return false
 }
 
-// SetCloudProvider gets a reference to the given Enum461e4d210f1062ae8e63863a9180f177 and assigns it to the CloudProvider field.
-func (o *CreateAssetWEBAPPRequest) SetCloudProvider(v Enum461e4d210f1062ae8e63863a9180f177) {
+// SetCloudProvider gets a reference to the given string and assigns it to the CloudProvider field.
+func (o *CreateAssetWEBAPPRequest) SetCloudProvider(v string) {
 	o.CloudProvider = &v
 }
 
 // GetWafProvider returns the WafProvider field value if set, zero value otherwise.
-func (o *CreateAssetWEBAPPRequest) GetWafProvider() EnumD27aab5ce42044022690de5c30368794 {
+func (o *CreateAssetWEBAPPRequest) GetWafProvider() string {
 	if o == nil || IsNil(o.WafProvider) {
-		var ret EnumD27aab5ce42044022690de5c30368794
+		var ret string
 		return ret
 	}
 	return *o.WafProvider
@@ -299,7 +299,7 @@ func (o *CreateAssetWEBAPPRequest) GetWafProvider() EnumD27aab5ce42044022690de5c
 
 // GetWafProviderOk returns a tuple with the WafProvider field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetWEBAPPRequest) GetWafProviderOk() (*EnumD27aab5ce42044022690de5c30368794, bool) {
+func (o *CreateAssetWEBAPPRequest) GetWafProviderOk() (*string, bool) {
 	if o == nil || IsNil(o.WafProvider) {
 		return nil, false
 	}
@@ -315,8 +315,8 @@ func (o *CreateAssetWEBAPPRequest) HasWafProvider() bool {
 	return false
 }
 
-// SetWafProvider gets a reference to the given EnumD27aab5ce42044022690de5c30368794 and assigns it to the WafProvider field.
-func (o *CreateAssetWEBAPPRequest) SetWafProvider(v EnumD27aab5ce42044022690de5c30368794) {
+// SetWafProvider gets a reference to the given string and assigns it to the WafProvider field.
+func (o *CreateAssetWEBAPPRequest) SetWafProvider(v string) {
 	o.WafProvider = &v
 }
 

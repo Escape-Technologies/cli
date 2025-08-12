@@ -1,7 +1,7 @@
 /*
 Escape Public API
 
-This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `Authorization` header. For example: `Authorization: Key YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
+This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `X-ESCAPE-API-KEY` header. For example: `X-ESCAPE-API-KEY: YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
 
 API version: 3.0.0
 */
@@ -20,9 +20,9 @@ var _ MappedNullable = &ListEvents200Response{}
 
 // ListEvents200Response struct for ListEvents200Response
 type ListEvents200Response struct {
-	NextCursor string `json:"nextCursor"`
+	NextCursor *string `json:"nextCursor,omitempty"`
 	TotalCount *int `json:"totalCount,omitempty"`
-	Data []ListEvents200ResponseDataInner `json:"data"`
+	Data []EventSummarized `json:"data"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -32,9 +32,8 @@ type _ListEvents200Response ListEvents200Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewListEvents200Response(nextCursor string, data []ListEvents200ResponseDataInner) *ListEvents200Response {
+func NewListEvents200Response(data []EventSummarized) *ListEvents200Response {
 	this := ListEvents200Response{}
-	this.NextCursor = nextCursor
 	var totalCount int = 100
 	this.TotalCount = &totalCount
 	this.Data = data
@@ -51,28 +50,36 @@ func NewListEvents200ResponseWithDefaults() *ListEvents200Response {
 	return &this
 }
 
-// GetNextCursor returns the NextCursor field value
+// GetNextCursor returns the NextCursor field value if set, zero value otherwise.
 func (o *ListEvents200Response) GetNextCursor() string {
-	if o == nil {
+	if o == nil || IsNil(o.NextCursor) {
 		var ret string
 		return ret
 	}
-
-	return o.NextCursor
+	return *o.NextCursor
 }
 
-// GetNextCursorOk returns a tuple with the NextCursor field value
+// GetNextCursorOk returns a tuple with the NextCursor field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ListEvents200Response) GetNextCursorOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.NextCursor) {
 		return nil, false
 	}
-	return &o.NextCursor, true
+	return o.NextCursor, true
 }
 
-// SetNextCursor sets field value
+// HasNextCursor returns a boolean if a field has been set.
+func (o *ListEvents200Response) HasNextCursor() bool {
+	if o != nil && !IsNil(o.NextCursor) {
+		return true
+	}
+
+	return false
+}
+
+// SetNextCursor gets a reference to the given string and assigns it to the NextCursor field.
 func (o *ListEvents200Response) SetNextCursor(v string) {
-	o.NextCursor = v
+	o.NextCursor = &v
 }
 
 // GetTotalCount returns the TotalCount field value if set, zero value otherwise.
@@ -108,9 +115,9 @@ func (o *ListEvents200Response) SetTotalCount(v int) {
 }
 
 // GetData returns the Data field value
-func (o *ListEvents200Response) GetData() []ListEvents200ResponseDataInner {
+func (o *ListEvents200Response) GetData() []EventSummarized {
 	if o == nil {
-		var ret []ListEvents200ResponseDataInner
+		var ret []EventSummarized
 		return ret
 	}
 
@@ -119,7 +126,7 @@ func (o *ListEvents200Response) GetData() []ListEvents200ResponseDataInner {
 
 // GetDataOk returns a tuple with the Data field value
 // and a boolean to check if the value has been set.
-func (o *ListEvents200Response) GetDataOk() ([]ListEvents200ResponseDataInner, bool) {
+func (o *ListEvents200Response) GetDataOk() ([]EventSummarized, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -127,7 +134,7 @@ func (o *ListEvents200Response) GetDataOk() ([]ListEvents200ResponseDataInner, b
 }
 
 // SetData sets field value
-func (o *ListEvents200Response) SetData(v []ListEvents200ResponseDataInner) {
+func (o *ListEvents200Response) SetData(v []EventSummarized) {
 	o.Data = v
 }
 
@@ -141,7 +148,9 @@ func (o ListEvents200Response) MarshalJSON() ([]byte, error) {
 
 func (o ListEvents200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["nextCursor"] = o.NextCursor
+	if !IsNil(o.NextCursor) {
+		toSerialize["nextCursor"] = o.NextCursor
+	}
 	if !IsNil(o.TotalCount) {
 		toSerialize["totalCount"] = o.TotalCount
 	}
@@ -159,7 +168,6 @@ func (o *ListEvents200Response) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"nextCursor",
 		"data",
 	}
 

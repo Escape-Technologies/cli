@@ -1,7 +1,7 @@
 /*
 Escape Public API
 
-This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `Authorization` header. For example: `Authorization: Key YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
+This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `X-ESCAPE-API-KEY` header. For example: `X-ESCAPE-API-KEY: YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
 
 API version: 3.0.0
 */
@@ -20,7 +20,7 @@ var _ MappedNullable = &CreateDastRestProfileRequestConfigurationJsonStrAuthenti
 
 // CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf9 struct for CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf9
 type CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf9 struct {
-	Type EnumCURLSEQUENCE `json:"type"`
+	Type string `json:"type"`
 	Users []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf9UsersInner `json:"users"`
 	Requests []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf9RequestsInner `json:"requests"`
 	Injections []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerInjectionsAnyOfInner `json:"injections,omitempty"`
@@ -33,7 +33,7 @@ type _CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInner
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf9(type_ EnumCURLSEQUENCE, users []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf9UsersInner, requests []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf9RequestsInner) *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf9 {
+func NewCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf9(type_ string, users []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf9UsersInner, requests []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf9RequestsInner) *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf9 {
 	this := CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf9{}
 	this.Type = type_
 	this.Users = users
@@ -50,9 +50,9 @@ func NewCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInn
 }
 
 // GetType returns the Type field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf9) GetType() EnumCURLSEQUENCE {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf9) GetType() string {
 	if o == nil {
-		var ret EnumCURLSEQUENCE
+		var ret string
 		return ret
 	}
 
@@ -61,7 +61,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsIn
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf9) GetTypeOk() (*EnumCURLSEQUENCE, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf9) GetTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -69,7 +69,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsIn
 }
 
 // SetType sets field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf9) SetType(v EnumCURLSEQUENCE) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf9) SetType(v string) {
 	o.Type = v
 }
 

@@ -1,7 +1,7 @@
 /*
 Escape Public API
 
-This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `Authorization` header. For example: `Authorization: Key YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
+This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `X-ESCAPE-API-KEY` header. For example: `X-ESCAPE-API-KEY: YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
 
 API version: 3.0.0
 */
@@ -21,7 +21,7 @@ var _ MappedNullable = &CreateAssetDNSRequestPathsInsightsInner{}
 // CreateAssetDNSRequestPathsInsightsInner struct for CreateAssetDNSRequestPathsInsightsInner
 type CreateAssetDNSRequestPathsInsightsInner struct {
 	Path string `json:"path"`
-	Method Enum54a7b523dcbb5e56a2afe6ee9c245568 `json:"method"`
+	Method string `json:"method"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -31,7 +31,7 @@ type _CreateAssetDNSRequestPathsInsightsInner CreateAssetDNSRequestPathsInsights
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetDNSRequestPathsInsightsInner(path string, method Enum54a7b523dcbb5e56a2afe6ee9c245568) *CreateAssetDNSRequestPathsInsightsInner {
+func NewCreateAssetDNSRequestPathsInsightsInner(path string, method string) *CreateAssetDNSRequestPathsInsightsInner {
 	this := CreateAssetDNSRequestPathsInsightsInner{}
 	this.Path = path
 	this.Method = method
@@ -71,9 +71,9 @@ func (o *CreateAssetDNSRequestPathsInsightsInner) SetPath(v string) {
 }
 
 // GetMethod returns the Method field value
-func (o *CreateAssetDNSRequestPathsInsightsInner) GetMethod() Enum54a7b523dcbb5e56a2afe6ee9c245568 {
+func (o *CreateAssetDNSRequestPathsInsightsInner) GetMethod() string {
 	if o == nil {
-		var ret Enum54a7b523dcbb5e56a2afe6ee9c245568
+		var ret string
 		return ret
 	}
 
@@ -82,7 +82,7 @@ func (o *CreateAssetDNSRequestPathsInsightsInner) GetMethod() Enum54a7b523dcbb5e
 
 // GetMethodOk returns a tuple with the Method field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetDNSRequestPathsInsightsInner) GetMethodOk() (*Enum54a7b523dcbb5e56a2afe6ee9c245568, bool) {
+func (o *CreateAssetDNSRequestPathsInsightsInner) GetMethodOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -90,7 +90,7 @@ func (o *CreateAssetDNSRequestPathsInsightsInner) GetMethodOk() (*Enum54a7b523dc
 }
 
 // SetMethod sets field value
-func (o *CreateAssetDNSRequestPathsInsightsInner) SetMethod(v Enum54a7b523dcbb5e56a2afe6ee9c245568) {
+func (o *CreateAssetDNSRequestPathsInsightsInner) SetMethod(v string) {
 	o.Method = v
 }
 

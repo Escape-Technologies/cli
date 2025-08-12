@@ -1,7 +1,7 @@
 /*
 Escape Public API
 
-This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `Authorization` header. For example: `Authorization: Key YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
+This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `X-ESCAPE-API-KEY` header. For example: `X-ESCAPE-API-KEY: YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
 
 API version: 3.0.0
 */
@@ -20,9 +20,9 @@ var _ MappedNullable = &ListProfiles200Response{}
 
 // ListProfiles200Response struct for ListProfiles200Response
 type ListProfiles200Response struct {
-	NextCursor string `json:"nextCursor"`
+	NextCursor *string `json:"nextCursor,omitempty"`
 	TotalCount *int `json:"totalCount,omitempty"`
-	Data []ListProfiles200ResponseDataInner `json:"data"`
+	Data []ProfileSummarized `json:"data"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -32,9 +32,8 @@ type _ListProfiles200Response ListProfiles200Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewListProfiles200Response(nextCursor string, data []ListProfiles200ResponseDataInner) *ListProfiles200Response {
+func NewListProfiles200Response(data []ProfileSummarized) *ListProfiles200Response {
 	this := ListProfiles200Response{}
-	this.NextCursor = nextCursor
 	var totalCount int = 100
 	this.TotalCount = &totalCount
 	this.Data = data
@@ -51,28 +50,36 @@ func NewListProfiles200ResponseWithDefaults() *ListProfiles200Response {
 	return &this
 }
 
-// GetNextCursor returns the NextCursor field value
+// GetNextCursor returns the NextCursor field value if set, zero value otherwise.
 func (o *ListProfiles200Response) GetNextCursor() string {
-	if o == nil {
+	if o == nil || IsNil(o.NextCursor) {
 		var ret string
 		return ret
 	}
-
-	return o.NextCursor
+	return *o.NextCursor
 }
 
-// GetNextCursorOk returns a tuple with the NextCursor field value
+// GetNextCursorOk returns a tuple with the NextCursor field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ListProfiles200Response) GetNextCursorOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.NextCursor) {
 		return nil, false
 	}
-	return &o.NextCursor, true
+	return o.NextCursor, true
 }
 
-// SetNextCursor sets field value
+// HasNextCursor returns a boolean if a field has been set.
+func (o *ListProfiles200Response) HasNextCursor() bool {
+	if o != nil && !IsNil(o.NextCursor) {
+		return true
+	}
+
+	return false
+}
+
+// SetNextCursor gets a reference to the given string and assigns it to the NextCursor field.
 func (o *ListProfiles200Response) SetNextCursor(v string) {
-	o.NextCursor = v
+	o.NextCursor = &v
 }
 
 // GetTotalCount returns the TotalCount field value if set, zero value otherwise.
@@ -108,9 +115,9 @@ func (o *ListProfiles200Response) SetTotalCount(v int) {
 }
 
 // GetData returns the Data field value
-func (o *ListProfiles200Response) GetData() []ListProfiles200ResponseDataInner {
+func (o *ListProfiles200Response) GetData() []ProfileSummarized {
 	if o == nil {
-		var ret []ListProfiles200ResponseDataInner
+		var ret []ProfileSummarized
 		return ret
 	}
 
@@ -119,7 +126,7 @@ func (o *ListProfiles200Response) GetData() []ListProfiles200ResponseDataInner {
 
 // GetDataOk returns a tuple with the Data field value
 // and a boolean to check if the value has been set.
-func (o *ListProfiles200Response) GetDataOk() ([]ListProfiles200ResponseDataInner, bool) {
+func (o *ListProfiles200Response) GetDataOk() ([]ProfileSummarized, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -127,7 +134,7 @@ func (o *ListProfiles200Response) GetDataOk() ([]ListProfiles200ResponseDataInne
 }
 
 // SetData sets field value
-func (o *ListProfiles200Response) SetData(v []ListProfiles200ResponseDataInner) {
+func (o *ListProfiles200Response) SetData(v []ProfileSummarized) {
 	o.Data = v
 }
 
@@ -141,7 +148,9 @@ func (o ListProfiles200Response) MarshalJSON() ([]byte, error) {
 
 func (o ListProfiles200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["nextCursor"] = o.NextCursor
+	if !IsNil(o.NextCursor) {
+		toSerialize["nextCursor"] = o.NextCursor
+	}
 	if !IsNil(o.TotalCount) {
 		toSerialize["totalCount"] = o.TotalCount
 	}
@@ -159,7 +168,6 @@ func (o *ListProfiles200Response) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"nextCursor",
 		"data",
 	}
 

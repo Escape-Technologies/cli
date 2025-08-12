@@ -1,7 +1,7 @@
 /*
 Escape Public API
 
-This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `Authorization` header. For example: `Authorization: Key YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
+This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `X-ESCAPE-API-KEY` header. For example: `X-ESCAPE-API-KEY: YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
 
 API version: 3.0.0
 */
@@ -20,8 +20,8 @@ var _ MappedNullable = &CreateAssetIPV4Request{}
 
 // CreateAssetIPV4Request struct for CreateAssetIPV4Request
 type CreateAssetIPV4Request struct {
-	AssetClass EnumHOST `json:"asset_class"`
-	AssetType EnumIPV4 `json:"asset_type"`
+	AssetClass string `json:"asset_class"`
+	AssetType string `json:"asset_type"`
 	Address string `json:"address"`
 	Favicon *string `json:"favicon,omitempty"`
 	OpenPorts []CreateAssetDNSRequestOpenPortsInner `json:"open_ports,omitempty"`
@@ -40,7 +40,7 @@ type _CreateAssetIPV4Request CreateAssetIPV4Request
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetIPV4Request(assetClass EnumHOST, assetType EnumIPV4, address string) *CreateAssetIPV4Request {
+func NewCreateAssetIPV4Request(assetClass string, assetType string, address string) *CreateAssetIPV4Request {
 	this := CreateAssetIPV4Request{}
 	this.AssetClass = assetClass
 	this.AssetType = assetType
@@ -57,9 +57,9 @@ func NewCreateAssetIPV4RequestWithDefaults() *CreateAssetIPV4Request {
 }
 
 // GetAssetClass returns the AssetClass field value
-func (o *CreateAssetIPV4Request) GetAssetClass() EnumHOST {
+func (o *CreateAssetIPV4Request) GetAssetClass() string {
 	if o == nil {
-		var ret EnumHOST
+		var ret string
 		return ret
 	}
 
@@ -68,7 +68,7 @@ func (o *CreateAssetIPV4Request) GetAssetClass() EnumHOST {
 
 // GetAssetClassOk returns a tuple with the AssetClass field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetIPV4Request) GetAssetClassOk() (*EnumHOST, bool) {
+func (o *CreateAssetIPV4Request) GetAssetClassOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -76,14 +76,14 @@ func (o *CreateAssetIPV4Request) GetAssetClassOk() (*EnumHOST, bool) {
 }
 
 // SetAssetClass sets field value
-func (o *CreateAssetIPV4Request) SetAssetClass(v EnumHOST) {
+func (o *CreateAssetIPV4Request) SetAssetClass(v string) {
 	o.AssetClass = v
 }
 
 // GetAssetType returns the AssetType field value
-func (o *CreateAssetIPV4Request) GetAssetType() EnumIPV4 {
+func (o *CreateAssetIPV4Request) GetAssetType() string {
 	if o == nil {
-		var ret EnumIPV4
+		var ret string
 		return ret
 	}
 
@@ -92,7 +92,7 @@ func (o *CreateAssetIPV4Request) GetAssetType() EnumIPV4 {
 
 // GetAssetTypeOk returns a tuple with the AssetType field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetIPV4Request) GetAssetTypeOk() (*EnumIPV4, bool) {
+func (o *CreateAssetIPV4Request) GetAssetTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -100,7 +100,7 @@ func (o *CreateAssetIPV4Request) GetAssetTypeOk() (*EnumIPV4, bool) {
 }
 
 // SetAssetType sets field value
-func (o *CreateAssetIPV4Request) SetAssetType(v EnumIPV4) {
+func (o *CreateAssetIPV4Request) SetAssetType(v string) {
 	o.AssetType = v
 }
 

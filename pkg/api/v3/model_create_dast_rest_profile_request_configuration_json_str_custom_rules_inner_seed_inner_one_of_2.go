@@ -1,7 +1,7 @@
 /*
 Escape Public API
 
-This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `Authorization` header. For example: `Authorization: Key YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
+This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `X-ESCAPE-API-KEY` header. For example: `X-ESCAPE-API-KEY: YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
 
 API version: 3.0.0
 */
@@ -20,7 +20,7 @@ var _ MappedNullable = &CreateDastRestProfileRequestConfigurationJsonStrCustomRu
 
 // CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf2 struct for CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf2
 type CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf2 struct {
-	Protocol EnumCURL `json:"protocol"`
+	Protocol string `json:"protocol"`
 	User *string `json:"user,omitempty"`
 	Curl string `json:"curl"`
 	AdditionalProperties map[string]interface{}
@@ -32,7 +32,7 @@ type _CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerO
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf2(protocol EnumCURL, curl string) *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf2 {
+func NewCreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf2(protocol string, curl string) *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf2 {
 	this := CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf2{}
 	this.Protocol = protocol
 	this.Curl = curl
@@ -48,9 +48,9 @@ func NewCreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInne
 }
 
 // GetProtocol returns the Protocol field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf2) GetProtocol() EnumCURL {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf2) GetProtocol() string {
 	if o == nil {
-		var ret EnumCURL
+		var ret string
 		return ret
 	}
 
@@ -59,7 +59,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInn
 
 // GetProtocolOk returns a tuple with the Protocol field value
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf2) GetProtocolOk() (*EnumCURL, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf2) GetProtocolOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -67,7 +67,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInn
 }
 
 // SetProtocol sets field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf2) SetProtocol(v EnumCURL) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf2) SetProtocol(v string) {
 	o.Protocol = v
 }
 

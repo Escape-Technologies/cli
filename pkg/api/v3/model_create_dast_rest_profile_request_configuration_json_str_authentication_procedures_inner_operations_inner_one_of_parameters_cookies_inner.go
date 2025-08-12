@@ -1,7 +1,7 @@
 /*
 Escape Public API
 
-This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `Authorization` header. For example: `Authorization: Key YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
+This API enables you to operate [Escape](https://escape.tech/) programmatically.  All requests must be authenticated with a valid API key, provided in the `X-ESCAPE-API-KEY` header. For example: `X-ESCAPE-API-KEY: YOUR_API_KEY`.  You can find your API key in the [Escape dashboard](http://app.escape.tech/user/).
 
 API version: 3.0.0
 */
@@ -25,7 +25,7 @@ type CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInn
 	Path *string `json:"path,omitempty"`
 	HttpOnly *bool `json:"http_only,omitempty"`
 	Secure *bool `json:"secure,omitempty"`
-	SameSite *Enum200018d75ade9e46d41a8d1efb27c511 `json:"same_site,omitempty"`
+	SameSite *string `json:"same_site,omitempty"`
 	Values []string `json:"values"`
 	AdditionalProperties map[string]interface{}
 }
@@ -204,9 +204,9 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProcedure
 }
 
 // GetSameSite returns the SameSite field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) GetSameSite() Enum200018d75ade9e46d41a8d1efb27c511 {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) GetSameSite() string {
 	if o == nil || IsNil(o.SameSite) {
-		var ret Enum200018d75ade9e46d41a8d1efb27c511
+		var ret string
 		return ret
 	}
 	return *o.SameSite
@@ -214,7 +214,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProcedure
 
 // GetSameSiteOk returns a tuple with the SameSite field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) GetSameSiteOk() (*Enum200018d75ade9e46d41a8d1efb27c511, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) GetSameSiteOk() (*string, bool) {
 	if o == nil || IsNil(o.SameSite) {
 		return nil, false
 	}
@@ -230,8 +230,8 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProcedure
 	return false
 }
 
-// SetSameSite gets a reference to the given Enum200018d75ade9e46d41a8d1efb27c511 and assigns it to the SameSite field.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) SetSameSite(v Enum200018d75ade9e46d41a8d1efb27c511) {
+// SetSameSite gets a reference to the given string and assigns it to the SameSite field.
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) SetSameSite(v string) {
 	o.SameSite = &v
 }
 
