@@ -2,6 +2,7 @@ package escape
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"io"
 	"net/http"
@@ -147,7 +148,7 @@ func CancelScan(ctx context.Context, scanID string) error {
 	_, httpResp, err := client.ScansAPI.CancelScan(ctx, scanID).Execute()
 	if err != nil {
 		if httpResp.StatusCode == http.StatusBadRequest {
-			return fmt.Errorf("scan is not running or already canceled")
+			return errors.New("scan is not running or already canceled")
 		}
 		return fmt.Errorf("unable to cancel scan: %w", err)
 	}
