@@ -21,7 +21,7 @@ var _ MappedNullable = &CreateAssetDNSRequestPathsInsightsInner{}
 // CreateAssetDNSRequestPathsInsightsInner struct for CreateAssetDNSRequestPathsInsightsInner
 type CreateAssetDNSRequestPathsInsightsInner struct {
 	Path string `json:"path"`
-	Method string `json:"method"`
+	Method ENUMPROPERTIESPATHSINSIGHTSITEMSPROPERTIESMETHOD `json:"method"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -31,7 +31,7 @@ type _CreateAssetDNSRequestPathsInsightsInner CreateAssetDNSRequestPathsInsights
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetDNSRequestPathsInsightsInner(path string, method string) *CreateAssetDNSRequestPathsInsightsInner {
+func NewCreateAssetDNSRequestPathsInsightsInner(path string, method ENUMPROPERTIESPATHSINSIGHTSITEMSPROPERTIESMETHOD) *CreateAssetDNSRequestPathsInsightsInner {
 	this := CreateAssetDNSRequestPathsInsightsInner{}
 	this.Path = path
 	this.Method = method
@@ -71,9 +71,9 @@ func (o *CreateAssetDNSRequestPathsInsightsInner) SetPath(v string) {
 }
 
 // GetMethod returns the Method field value
-func (o *CreateAssetDNSRequestPathsInsightsInner) GetMethod() string {
+func (o *CreateAssetDNSRequestPathsInsightsInner) GetMethod() ENUMPROPERTIESPATHSINSIGHTSITEMSPROPERTIESMETHOD {
 	if o == nil {
-		var ret string
+		var ret ENUMPROPERTIESPATHSINSIGHTSITEMSPROPERTIESMETHOD
 		return ret
 	}
 
@@ -82,7 +82,7 @@ func (o *CreateAssetDNSRequestPathsInsightsInner) GetMethod() string {
 
 // GetMethodOk returns a tuple with the Method field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetDNSRequestPathsInsightsInner) GetMethodOk() (*string, bool) {
+func (o *CreateAssetDNSRequestPathsInsightsInner) GetMethodOk() (*ENUMPROPERTIESPATHSINSIGHTSITEMSPROPERTIESMETHOD, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -90,7 +90,7 @@ func (o *CreateAssetDNSRequestPathsInsightsInner) GetMethodOk() (*string, bool) 
 }
 
 // SetMethod sets field value
-func (o *CreateAssetDNSRequestPathsInsightsInner) SetMethod(v string) {
+func (o *CreateAssetDNSRequestPathsInsightsInner) SetMethod(v ENUMPROPERTIESPATHSINSIGHTSITEMSPROPERTIESMETHOD) {
 	o.Method = v
 }
 

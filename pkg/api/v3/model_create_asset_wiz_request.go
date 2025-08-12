@@ -20,8 +20,8 @@ var _ MappedNullable = &CreateAssetWIZRequest{}
 
 // CreateAssetWIZRequest struct for CreateAssetWIZRequest
 type CreateAssetWIZRequest struct {
-	AssetClass string `json:"asset_class"`
-	AssetType string `json:"asset_type"`
+	AssetClass ENUMCSPM `json:"asset_class"`
+	AssetType ENUMWIZACCOUNT `json:"asset_type"`
 	Name *string `json:"name,omitempty"`
 	ClientId string `json:"client_id"`
 	ClientSecret string `json:"client_secret"`
@@ -36,7 +36,7 @@ type _CreateAssetWIZRequest CreateAssetWIZRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetWIZRequest(assetClass string, assetType string, clientId string, clientSecret string, tokenUri string, apiEndpoint string) *CreateAssetWIZRequest {
+func NewCreateAssetWIZRequest(assetClass ENUMCSPM, assetType ENUMWIZACCOUNT, clientId string, clientSecret string, tokenUri string, apiEndpoint string) *CreateAssetWIZRequest {
 	this := CreateAssetWIZRequest{}
 	this.AssetClass = assetClass
 	this.AssetType = assetType
@@ -56,9 +56,9 @@ func NewCreateAssetWIZRequestWithDefaults() *CreateAssetWIZRequest {
 }
 
 // GetAssetClass returns the AssetClass field value
-func (o *CreateAssetWIZRequest) GetAssetClass() string {
+func (o *CreateAssetWIZRequest) GetAssetClass() ENUMCSPM {
 	if o == nil {
-		var ret string
+		var ret ENUMCSPM
 		return ret
 	}
 
@@ -67,7 +67,7 @@ func (o *CreateAssetWIZRequest) GetAssetClass() string {
 
 // GetAssetClassOk returns a tuple with the AssetClass field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetWIZRequest) GetAssetClassOk() (*string, bool) {
+func (o *CreateAssetWIZRequest) GetAssetClassOk() (*ENUMCSPM, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -75,14 +75,14 @@ func (o *CreateAssetWIZRequest) GetAssetClassOk() (*string, bool) {
 }
 
 // SetAssetClass sets field value
-func (o *CreateAssetWIZRequest) SetAssetClass(v string) {
+func (o *CreateAssetWIZRequest) SetAssetClass(v ENUMCSPM) {
 	o.AssetClass = v
 }
 
 // GetAssetType returns the AssetType field value
-func (o *CreateAssetWIZRequest) GetAssetType() string {
+func (o *CreateAssetWIZRequest) GetAssetType() ENUMWIZACCOUNT {
 	if o == nil {
-		var ret string
+		var ret ENUMWIZACCOUNT
 		return ret
 	}
 
@@ -91,7 +91,7 @@ func (o *CreateAssetWIZRequest) GetAssetType() string {
 
 // GetAssetTypeOk returns a tuple with the AssetType field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetWIZRequest) GetAssetTypeOk() (*string, bool) {
+func (o *CreateAssetWIZRequest) GetAssetTypeOk() (*ENUMWIZACCOUNT, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -99,7 +99,7 @@ func (o *CreateAssetWIZRequest) GetAssetTypeOk() (*string, bool) {
 }
 
 // SetAssetType sets field value
-func (o *CreateAssetWIZRequest) SetAssetType(v string) {
+func (o *CreateAssetWIZRequest) SetAssetType(v ENUMWIZACCOUNT) {
 	o.AssetType = v
 }
 

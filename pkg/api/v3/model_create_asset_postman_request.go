@@ -20,8 +20,8 @@ var _ MappedNullable = &CreateAssetPOSTMANRequest{}
 
 // CreateAssetPOSTMANRequest struct for CreateAssetPOSTMANRequest
 type CreateAssetPOSTMANRequest struct {
-	AssetClass string `json:"asset_class"`
-	AssetType string `json:"asset_type"`
+	AssetClass ENUMDEVTOOLS `json:"asset_class"`
+	AssetType ENUMPOSTMANORGANIZATION `json:"asset_type"`
 	Name *string `json:"name,omitempty"`
 	ApiKey string `json:"api_key"`
 	AdditionalProperties map[string]interface{}
@@ -33,7 +33,7 @@ type _CreateAssetPOSTMANRequest CreateAssetPOSTMANRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetPOSTMANRequest(assetClass string, assetType string, apiKey string) *CreateAssetPOSTMANRequest {
+func NewCreateAssetPOSTMANRequest(assetClass ENUMDEVTOOLS, assetType ENUMPOSTMANORGANIZATION, apiKey string) *CreateAssetPOSTMANRequest {
 	this := CreateAssetPOSTMANRequest{}
 	this.AssetClass = assetClass
 	this.AssetType = assetType
@@ -50,9 +50,9 @@ func NewCreateAssetPOSTMANRequestWithDefaults() *CreateAssetPOSTMANRequest {
 }
 
 // GetAssetClass returns the AssetClass field value
-func (o *CreateAssetPOSTMANRequest) GetAssetClass() string {
+func (o *CreateAssetPOSTMANRequest) GetAssetClass() ENUMDEVTOOLS {
 	if o == nil {
-		var ret string
+		var ret ENUMDEVTOOLS
 		return ret
 	}
 
@@ -61,7 +61,7 @@ func (o *CreateAssetPOSTMANRequest) GetAssetClass() string {
 
 // GetAssetClassOk returns a tuple with the AssetClass field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetPOSTMANRequest) GetAssetClassOk() (*string, bool) {
+func (o *CreateAssetPOSTMANRequest) GetAssetClassOk() (*ENUMDEVTOOLS, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -69,14 +69,14 @@ func (o *CreateAssetPOSTMANRequest) GetAssetClassOk() (*string, bool) {
 }
 
 // SetAssetClass sets field value
-func (o *CreateAssetPOSTMANRequest) SetAssetClass(v string) {
+func (o *CreateAssetPOSTMANRequest) SetAssetClass(v ENUMDEVTOOLS) {
 	o.AssetClass = v
 }
 
 // GetAssetType returns the AssetType field value
-func (o *CreateAssetPOSTMANRequest) GetAssetType() string {
+func (o *CreateAssetPOSTMANRequest) GetAssetType() ENUMPOSTMANORGANIZATION {
 	if o == nil {
-		var ret string
+		var ret ENUMPOSTMANORGANIZATION
 		return ret
 	}
 
@@ -85,7 +85,7 @@ func (o *CreateAssetPOSTMANRequest) GetAssetType() string {
 
 // GetAssetTypeOk returns a tuple with the AssetType field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetPOSTMANRequest) GetAssetTypeOk() (*string, bool) {
+func (o *CreateAssetPOSTMANRequest) GetAssetTypeOk() (*ENUMPOSTMANORGANIZATION, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -93,7 +93,7 @@ func (o *CreateAssetPOSTMANRequest) GetAssetTypeOk() (*string, bool) {
 }
 
 // SetAssetType sets field value
-func (o *CreateAssetPOSTMANRequest) SetAssetType(v string) {
+func (o *CreateAssetPOSTMANRequest) SetAssetType(v ENUMPOSTMANORGANIZATION) {
 	o.AssetType = v
 }
 

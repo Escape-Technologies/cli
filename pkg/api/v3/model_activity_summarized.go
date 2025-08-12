@@ -25,7 +25,7 @@ type ActivitySummarized struct {
 	Id string `json:"id"`
 	// The date and time the activity was created
 	CreatedAt string `json:"createdAt"`
-	Kind string `json:"kind"`
+	Kind ENUMPROPERTIESKIND `json:"kind"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -35,7 +35,7 @@ type _ActivitySummarized ActivitySummarized
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewActivitySummarized(author AuthorSummarized, id string, createdAt string, kind string) *ActivitySummarized {
+func NewActivitySummarized(author AuthorSummarized, id string, createdAt string, kind ENUMPROPERTIESKIND) *ActivitySummarized {
 	this := ActivitySummarized{}
 	this.Author = author
 	this.Id = id
@@ -125,9 +125,9 @@ func (o *ActivitySummarized) SetCreatedAt(v string) {
 }
 
 // GetKind returns the Kind field value
-func (o *ActivitySummarized) GetKind() string {
+func (o *ActivitySummarized) GetKind() ENUMPROPERTIESKIND {
 	if o == nil {
-		var ret string
+		var ret ENUMPROPERTIESKIND
 		return ret
 	}
 
@@ -136,7 +136,7 @@ func (o *ActivitySummarized) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
-func (o *ActivitySummarized) GetKindOk() (*string, bool) {
+func (o *ActivitySummarized) GetKindOk() (*ENUMPROPERTIESKIND, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -144,7 +144,7 @@ func (o *ActivitySummarized) GetKindOk() (*string, bool) {
 }
 
 // SetKind sets field value
-func (o *ActivitySummarized) SetKind(v string) {
+func (o *ActivitySummarized) SetKind(v ENUMPROPERTIESKIND) {
 	o.Kind = v
 }
 

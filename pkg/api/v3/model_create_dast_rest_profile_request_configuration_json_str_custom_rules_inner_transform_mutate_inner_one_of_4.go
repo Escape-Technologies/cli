@@ -20,7 +20,7 @@ var _ MappedNullable = &CreateDastRestProfileRequestConfigurationJsonStrCustomRu
 
 // CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf4 struct for CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf4
 type CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf4 struct {
-	Key string `json:"key"`
+	Key ENUMREQUESTBODYJSON `json:"key"`
 	Jq *string `json:"jq,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -31,7 +31,7 @@ type _CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformM
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf4(key string) *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf4 {
+func NewCreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf4(key ENUMREQUESTBODYJSON) *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf4 {
 	this := CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf4{}
 	this.Key = key
 	return &this
@@ -46,9 +46,9 @@ func NewCreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransfor
 }
 
 // GetKey returns the Key field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf4) GetKey() string {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf4) GetKey() ENUMREQUESTBODYJSON {
 	if o == nil {
-		var ret string
+		var ret ENUMREQUESTBODYJSON
 		return ret
 	}
 
@@ -57,7 +57,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransfo
 
 // GetKeyOk returns a tuple with the Key field value
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf4) GetKeyOk() (*string, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf4) GetKeyOk() (*ENUMREQUESTBODYJSON, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -65,7 +65,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransfo
 }
 
 // SetKey sets field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf4) SetKey(v string) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf4) SetKey(v ENUMREQUESTBODYJSON) {
 	o.Key = v
 }
 

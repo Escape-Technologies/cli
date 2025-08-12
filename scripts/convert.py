@@ -48,6 +48,15 @@ def _rec_extract_enums(schema: dict, path: list[str]) -> tuple[dict, dict[str, d
     """
     enums: dict[str, dict] = {}
 
+    # If the current schema node itself is an enum, extract it immediately
+    if isinstance(schema, dict) and 'enum' in schema:
+        target = _enum_name(path, schema)
+        enums[target] = schema
+        ref_node: dict[str, Any] = {"$ref": "#/components/schemas/" + target}
+        if schema.get('nullable', False):
+            ref_node['nullable'] = True
+        return ref_node, enums
+
     if isinstance(schema, dict):
         # If this is an object schema, first process its properties
         if isinstance(schema.get('properties'), dict):

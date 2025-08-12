@@ -20,7 +20,7 @@ var _ MappedNullable = &CreateDastRestProfileRequestConfigurationJsonStrAuthenti
 
 // CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner struct for CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner
 type CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner struct {
-	Location string `json:"location"`
+	Location ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS1PROPERTIESEXTRACTIONS1ITEMSPROPERTIESLOCATION `json:"location"`
 	Origin string `json:"origin"`
 	Key string `json:"key"`
 	Name string `json:"name"`
@@ -35,7 +35,7 @@ type _CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresIn
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner(location string, origin string, key string, name string) *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner {
+func NewCreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner(location ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS1PROPERTIESEXTRACTIONS1ITEMSPROPERTIESLOCATION, origin string, key string, name string) *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner {
 	this := CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner{}
 	this.Location = location
 	this.Origin = origin
@@ -53,9 +53,9 @@ func NewCreateDastRestProfileRequestConfigurationJsonStrAuthenticationProcedures
 }
 
 // GetLocation returns the Location field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner) GetLocation() string {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner) GetLocation() ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS1PROPERTIESEXTRACTIONS1ITEMSPROPERTIESLOCATION {
 	if o == nil {
-		var ret string
+		var ret ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS1PROPERTIESEXTRACTIONS1ITEMSPROPERTIESLOCATION
 		return ret
 	}
 
@@ -64,7 +64,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProcedure
 
 // GetLocationOk returns a tuple with the Location field value
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner) GetLocationOk() (*string, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner) GetLocationOk() (*ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS1PROPERTIESEXTRACTIONS1ITEMSPROPERTIESLOCATION, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -72,7 +72,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProcedure
 }
 
 // SetLocation sets field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner) SetLocation(v string) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner) SetLocation(v ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS1PROPERTIESEXTRACTIONS1ITEMSPROPERTIESLOCATION) {
 	o.Location = v
 }
 

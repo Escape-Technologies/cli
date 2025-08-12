@@ -20,14 +20,14 @@ var _ MappedNullable = &AssetServiceDetailed{}
 
 // AssetServiceDetailed Detailed information about an asset service
 type AssetServiceDetailed struct {
-	Type string `json:"type"`
+	Type ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESTYPE `json:"type"`
 	Url string `json:"url"`
 	Framework *string `json:"framework,omitempty"`
 	AuthProtocol *string `json:"authProtocol,omitempty"`
-	AuthTechnology *string `json:"authTechnology,omitempty"`
-	CloudProvider *string `json:"cloudProvider,omitempty"`
-	WafProvider *string `json:"wafProvider,omitempty"`
-	Environment *string `json:"environment,omitempty"`
+	AuthTechnology *ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESAUTHTECHNOLOGY `json:"authTechnology,omitempty"`
+	CloudProvider *ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER `json:"cloudProvider,omitempty"`
+	WafProvider *ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESWAFPROVIDER `json:"wafProvider,omitempty"`
+	Environment *ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESENVIRONMENT `json:"environment,omitempty"`
 	Tls bool `json:"tls"`
 	Ips []string `json:"ips"`
 	AdditionalProperties map[string]interface{}
@@ -39,7 +39,7 @@ type _AssetServiceDetailed AssetServiceDetailed
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAssetServiceDetailed(type_ string, url string, tls bool, ips []string) *AssetServiceDetailed {
+func NewAssetServiceDetailed(type_ ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESTYPE, url string, tls bool, ips []string) *AssetServiceDetailed {
 	this := AssetServiceDetailed{}
 	this.Type = type_
 	this.Url = url
@@ -57,9 +57,9 @@ func NewAssetServiceDetailedWithDefaults() *AssetServiceDetailed {
 }
 
 // GetType returns the Type field value
-func (o *AssetServiceDetailed) GetType() string {
+func (o *AssetServiceDetailed) GetType() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESTYPE {
 	if o == nil {
-		var ret string
+		var ret ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESTYPE
 		return ret
 	}
 
@@ -68,7 +68,7 @@ func (o *AssetServiceDetailed) GetType() string {
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *AssetServiceDetailed) GetTypeOk() (*string, bool) {
+func (o *AssetServiceDetailed) GetTypeOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESTYPE, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -76,7 +76,7 @@ func (o *AssetServiceDetailed) GetTypeOk() (*string, bool) {
 }
 
 // SetType sets field value
-func (o *AssetServiceDetailed) SetType(v string) {
+func (o *AssetServiceDetailed) SetType(v ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESTYPE) {
 	o.Type = v
 }
 
@@ -169,9 +169,9 @@ func (o *AssetServiceDetailed) SetAuthProtocol(v string) {
 }
 
 // GetAuthTechnology returns the AuthTechnology field value if set, zero value otherwise.
-func (o *AssetServiceDetailed) GetAuthTechnology() string {
+func (o *AssetServiceDetailed) GetAuthTechnology() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESAUTHTECHNOLOGY {
 	if o == nil || IsNil(o.AuthTechnology) {
-		var ret string
+		var ret ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESAUTHTECHNOLOGY
 		return ret
 	}
 	return *o.AuthTechnology
@@ -179,7 +179,7 @@ func (o *AssetServiceDetailed) GetAuthTechnology() string {
 
 // GetAuthTechnologyOk returns a tuple with the AuthTechnology field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AssetServiceDetailed) GetAuthTechnologyOk() (*string, bool) {
+func (o *AssetServiceDetailed) GetAuthTechnologyOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESAUTHTECHNOLOGY, bool) {
 	if o == nil || IsNil(o.AuthTechnology) {
 		return nil, false
 	}
@@ -195,15 +195,15 @@ func (o *AssetServiceDetailed) HasAuthTechnology() bool {
 	return false
 }
 
-// SetAuthTechnology gets a reference to the given string and assigns it to the AuthTechnology field.
-func (o *AssetServiceDetailed) SetAuthTechnology(v string) {
+// SetAuthTechnology gets a reference to the given ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESAUTHTECHNOLOGY and assigns it to the AuthTechnology field.
+func (o *AssetServiceDetailed) SetAuthTechnology(v ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESAUTHTECHNOLOGY) {
 	o.AuthTechnology = &v
 }
 
 // GetCloudProvider returns the CloudProvider field value if set, zero value otherwise.
-func (o *AssetServiceDetailed) GetCloudProvider() string {
+func (o *AssetServiceDetailed) GetCloudProvider() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER {
 	if o == nil || IsNil(o.CloudProvider) {
-		var ret string
+		var ret ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER
 		return ret
 	}
 	return *o.CloudProvider
@@ -211,7 +211,7 @@ func (o *AssetServiceDetailed) GetCloudProvider() string {
 
 // GetCloudProviderOk returns a tuple with the CloudProvider field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AssetServiceDetailed) GetCloudProviderOk() (*string, bool) {
+func (o *AssetServiceDetailed) GetCloudProviderOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER, bool) {
 	if o == nil || IsNil(o.CloudProvider) {
 		return nil, false
 	}
@@ -227,15 +227,15 @@ func (o *AssetServiceDetailed) HasCloudProvider() bool {
 	return false
 }
 
-// SetCloudProvider gets a reference to the given string and assigns it to the CloudProvider field.
-func (o *AssetServiceDetailed) SetCloudProvider(v string) {
+// SetCloudProvider gets a reference to the given ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER and assigns it to the CloudProvider field.
+func (o *AssetServiceDetailed) SetCloudProvider(v ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER) {
 	o.CloudProvider = &v
 }
 
 // GetWafProvider returns the WafProvider field value if set, zero value otherwise.
-func (o *AssetServiceDetailed) GetWafProvider() string {
+func (o *AssetServiceDetailed) GetWafProvider() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESWAFPROVIDER {
 	if o == nil || IsNil(o.WafProvider) {
-		var ret string
+		var ret ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESWAFPROVIDER
 		return ret
 	}
 	return *o.WafProvider
@@ -243,7 +243,7 @@ func (o *AssetServiceDetailed) GetWafProvider() string {
 
 // GetWafProviderOk returns a tuple with the WafProvider field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AssetServiceDetailed) GetWafProviderOk() (*string, bool) {
+func (o *AssetServiceDetailed) GetWafProviderOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESWAFPROVIDER, bool) {
 	if o == nil || IsNil(o.WafProvider) {
 		return nil, false
 	}
@@ -259,15 +259,15 @@ func (o *AssetServiceDetailed) HasWafProvider() bool {
 	return false
 }
 
-// SetWafProvider gets a reference to the given string and assigns it to the WafProvider field.
-func (o *AssetServiceDetailed) SetWafProvider(v string) {
+// SetWafProvider gets a reference to the given ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESWAFPROVIDER and assigns it to the WafProvider field.
+func (o *AssetServiceDetailed) SetWafProvider(v ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESWAFPROVIDER) {
 	o.WafProvider = &v
 }
 
 // GetEnvironment returns the Environment field value if set, zero value otherwise.
-func (o *AssetServiceDetailed) GetEnvironment() string {
+func (o *AssetServiceDetailed) GetEnvironment() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESENVIRONMENT {
 	if o == nil || IsNil(o.Environment) {
-		var ret string
+		var ret ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESENVIRONMENT
 		return ret
 	}
 	return *o.Environment
@@ -275,7 +275,7 @@ func (o *AssetServiceDetailed) GetEnvironment() string {
 
 // GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AssetServiceDetailed) GetEnvironmentOk() (*string, bool) {
+func (o *AssetServiceDetailed) GetEnvironmentOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESENVIRONMENT, bool) {
 	if o == nil || IsNil(o.Environment) {
 		return nil, false
 	}
@@ -291,8 +291,8 @@ func (o *AssetServiceDetailed) HasEnvironment() bool {
 	return false
 }
 
-// SetEnvironment gets a reference to the given string and assigns it to the Environment field.
-func (o *AssetServiceDetailed) SetEnvironment(v string) {
+// SetEnvironment gets a reference to the given ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESENVIRONMENT and assigns it to the Environment field.
+func (o *AssetServiceDetailed) SetEnvironment(v ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESENVIRONMENT) {
 	o.Environment = &v
 }
 

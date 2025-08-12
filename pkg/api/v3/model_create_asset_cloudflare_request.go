@@ -20,8 +20,8 @@ var _ MappedNullable = &CreateAssetCLOUDFLARERequest{}
 
 // CreateAssetCLOUDFLARERequest struct for CreateAssetCLOUDFLARERequest
 type CreateAssetCLOUDFLARERequest struct {
-	AssetClass string `json:"asset_class"`
-	AssetType string `json:"asset_type"`
+	AssetClass ENUMCDN `json:"asset_class"`
+	AssetType ENUMCLOUDFLAREACCOUNT `json:"asset_type"`
 	Name *string `json:"name,omitempty"`
 	ApiKey string `json:"api_key"`
 	AdditionalProperties map[string]interface{}
@@ -33,7 +33,7 @@ type _CreateAssetCLOUDFLARERequest CreateAssetCLOUDFLARERequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetCLOUDFLARERequest(assetClass string, assetType string, apiKey string) *CreateAssetCLOUDFLARERequest {
+func NewCreateAssetCLOUDFLARERequest(assetClass ENUMCDN, assetType ENUMCLOUDFLAREACCOUNT, apiKey string) *CreateAssetCLOUDFLARERequest {
 	this := CreateAssetCLOUDFLARERequest{}
 	this.AssetClass = assetClass
 	this.AssetType = assetType
@@ -50,9 +50,9 @@ func NewCreateAssetCLOUDFLARERequestWithDefaults() *CreateAssetCLOUDFLARERequest
 }
 
 // GetAssetClass returns the AssetClass field value
-func (o *CreateAssetCLOUDFLARERequest) GetAssetClass() string {
+func (o *CreateAssetCLOUDFLARERequest) GetAssetClass() ENUMCDN {
 	if o == nil {
-		var ret string
+		var ret ENUMCDN
 		return ret
 	}
 
@@ -61,7 +61,7 @@ func (o *CreateAssetCLOUDFLARERequest) GetAssetClass() string {
 
 // GetAssetClassOk returns a tuple with the AssetClass field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetCLOUDFLARERequest) GetAssetClassOk() (*string, bool) {
+func (o *CreateAssetCLOUDFLARERequest) GetAssetClassOk() (*ENUMCDN, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -69,14 +69,14 @@ func (o *CreateAssetCLOUDFLARERequest) GetAssetClassOk() (*string, bool) {
 }
 
 // SetAssetClass sets field value
-func (o *CreateAssetCLOUDFLARERequest) SetAssetClass(v string) {
+func (o *CreateAssetCLOUDFLARERequest) SetAssetClass(v ENUMCDN) {
 	o.AssetClass = v
 }
 
 // GetAssetType returns the AssetType field value
-func (o *CreateAssetCLOUDFLARERequest) GetAssetType() string {
+func (o *CreateAssetCLOUDFLARERequest) GetAssetType() ENUMCLOUDFLAREACCOUNT {
 	if o == nil {
-		var ret string
+		var ret ENUMCLOUDFLAREACCOUNT
 		return ret
 	}
 
@@ -85,7 +85,7 @@ func (o *CreateAssetCLOUDFLARERequest) GetAssetType() string {
 
 // GetAssetTypeOk returns a tuple with the AssetType field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetCLOUDFLARERequest) GetAssetTypeOk() (*string, bool) {
+func (o *CreateAssetCLOUDFLARERequest) GetAssetTypeOk() (*ENUMCLOUDFLAREACCOUNT, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -93,7 +93,7 @@ func (o *CreateAssetCLOUDFLARERequest) GetAssetTypeOk() (*string, bool) {
 }
 
 // SetAssetType sets field value
-func (o *CreateAssetCLOUDFLARERequest) SetAssetType(v string) {
+func (o *CreateAssetCLOUDFLARERequest) SetAssetType(v ENUMCLOUDFLAREACCOUNT) {
 	o.AssetType = v
 }
 

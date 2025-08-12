@@ -20,7 +20,7 @@ var _ MappedNullable = &CreateASMDNSProfile400Response{}
 
 // CreateASMDNSProfile400Response struct for CreateASMDNSProfile400Response
 type CreateASMDNSProfile400Response struct {
-	Message string `json:"message"`
+	Message ENUMBADREQUEST `json:"message"`
 	Details string `json:"details"`
 	AdditionalProperties map[string]interface{}
 }
@@ -31,7 +31,7 @@ type _CreateASMDNSProfile400Response CreateASMDNSProfile400Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateASMDNSProfile400Response(message string, details string) *CreateASMDNSProfile400Response {
+func NewCreateASMDNSProfile400Response(message ENUMBADREQUEST, details string) *CreateASMDNSProfile400Response {
 	this := CreateASMDNSProfile400Response{}
 	this.Message = message
 	this.Details = details
@@ -47,9 +47,9 @@ func NewCreateASMDNSProfile400ResponseWithDefaults() *CreateASMDNSProfile400Resp
 }
 
 // GetMessage returns the Message field value
-func (o *CreateASMDNSProfile400Response) GetMessage() string {
+func (o *CreateASMDNSProfile400Response) GetMessage() ENUMBADREQUEST {
 	if o == nil {
-		var ret string
+		var ret ENUMBADREQUEST
 		return ret
 	}
 
@@ -58,7 +58,7 @@ func (o *CreateASMDNSProfile400Response) GetMessage() string {
 
 // GetMessageOk returns a tuple with the Message field value
 // and a boolean to check if the value has been set.
-func (o *CreateASMDNSProfile400Response) GetMessageOk() (*string, bool) {
+func (o *CreateASMDNSProfile400Response) GetMessageOk() (*ENUMBADREQUEST, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -66,7 +66,7 @@ func (o *CreateASMDNSProfile400Response) GetMessageOk() (*string, bool) {
 }
 
 // SetMessage sets field value
-func (o *CreateASMDNSProfile400Response) SetMessage(v string) {
+func (o *CreateASMDNSProfile400Response) SetMessage(v ENUMBADREQUEST) {
 	o.Message = v
 }
 
