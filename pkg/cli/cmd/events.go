@@ -92,6 +92,7 @@ ID                                      TYPE         NAME                       
 	},
 }
 
+// Todo(@ValentinR01): Rework fields displayed
 var eventGetAttachmentsCmd = &cobra.Command{
 	Use:     "attachments",
 	Aliases: []string{"a"},
@@ -112,7 +113,7 @@ ID                                      TYPE         NAME                       
 
 		result := []string{"ID\tCREATED AT\tEXCHANGE\tTARGET\tSCREENSHOT\tSNIPPET"}
 		for _, attachment := range attachments {
-			result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s", attachment.GetId(), attachment.GetCreatedAt(), attachment.GetExchange(), attachment.GetTarget(), attachment.GetScreenshot(), attachment.GetSnippet()))
+			result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s", attachment.GetId(), attachment.GetCreatedAt(), attachment.GetExchange().Curl, attachment.GetTarget().AdditionalProperties, attachment.GetScreenshot(), attachment.GetSnippet()))
 		}
 
 		out.Table(result, func() []string {
