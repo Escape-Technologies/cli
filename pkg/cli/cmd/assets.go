@@ -34,8 +34,13 @@ var assetsListCmd = &cobra.Command{
 	Use:     "list",
 	Aliases: []string{"ls"},
 	Short:   "List assets",
-	Long:    `List assets of the organization.`,
 	Example: `escape-cli asset list`,
+	Long: `List assets of the organization.
+Example output:
+ID                                      TYPE                            NAME                            RISKS                           STATUS       LAST SEEN
+00000000-0000-0000-0000-000000000001    KUBERNETES_CLUSTER              private-location                []                              MONITORED    2025-07-22T15:42:12.127Z
+00000000-0000-0000-0000-000000000002    WEBAPP                          https://escape.tech             [EXPOSED UNAUTHENTICATED]       MONITORED    2025-07-22T15:52:41.697Z`,
+
 	RunE: func(cmd *cobra.Command, _ []string) error {
 		assets, next, err := escape.ListAssets(cmd.Context(), "", assetTypes, assetStatuses)
 		if err != nil {
@@ -75,8 +80,11 @@ var assetGetCmd = &cobra.Command{
 	Use:     "get",
 	Aliases: []string{"g"},
 	Short:   "Get an asset",
-	Long:    `Get an asset by ID.`,
 	Example: `escape-cli asset get <asset-id>`,
+	Long: `Get an asset by ID.
+Example output:
+ID                                      TYPE                            NAME                            RISKS                           STATUS       LAST SEEN
+00000000-0000-0000-0000-000000000001    WEBAPP                          https://escape.tech             [EXPOSED UNAUTHENTICATED]       MONITORED    2025-07-22T15:52:41.697Z`,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		if len(args) != 1 {
 			return errors.New("asset ID is required")
@@ -100,15 +108,17 @@ var assetDeleteCmd = &cobra.Command{
 	Use:     "delete",
 	Aliases: []string{"d"},
 	Short:   "Delete an asset",
-	Long:    `Delete an asset by ID.`,
 	Example: `escape-cli asset delete <asset-id>`,
 	Args:    cobra.ExactArgs(1),
+	Long: `Delete an asset by ID.
+Example output:
+Asset 00000000-0000-0000-0000-000000000001 successfully deleted`,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		err := escape.DeleteAsset(cmd.Context(), args[0])
 		if err != nil {
 			return fmt.Errorf("unable to delete asset: %w", err)
 		}
-		fmt.Printf("Asset %s deleted successfully\n", args[0])
+		fmt.Printf("Asset %s successfully deleted\n", args[0])
 		return nil
 	},
 }
@@ -117,8 +127,10 @@ var assetUpdateCmd = &cobra.Command{
 	Use:     "update",
 	Aliases: []string{"u"},
 	Short:   "Update an asset",
-	Long:    `Update an asset by ID.`,
 	Example: `escape-cli asset update <asset-id>`,
+	Long: `Update an asset by ID.
+Example output:
+Asset 00000000-0000-0000-0000-000000000001 successfully updated`,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		if len(args) != 1 {
 			return errors.New("asset ID is required")
@@ -144,7 +156,7 @@ var assetUpdateCmd = &cobra.Command{
 		if err != nil {
 			return fmt.Errorf("unable to update asset: %w", err)
 		}
-		fmt.Printf("Asset %s updated successfully\n", args[0])
+		fmt.Printf("Asset %s successfully updated\n", args[0])
 		return nil
 	},
 }
