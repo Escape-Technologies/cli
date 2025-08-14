@@ -20,7 +20,7 @@ var _ MappedNullable = &CreateDastRestProfileRequestConfigurationJsonStrAuthenti
 
 // CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerInjectionsAnyOfInner1 struct for CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerInjectionsAnyOfInner1
 type CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerInjectionsAnyOfInner1 struct {
-	Location string `json:"location"`
+	Location ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS1PROPERTIESEXTRACTIONS1ITEMSPROPERTIESLOCATION `json:"location"`
 	Origin string `json:"origin"`
 	Key string `json:"key"`
 	Variable string `json:"variable"`
@@ -33,7 +33,7 @@ type _CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresIn
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerInjectionsAnyOfInner1(location string, origin string, key string, variable string) *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerInjectionsAnyOfInner1 {
+func NewCreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerInjectionsAnyOfInner1(location ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS1PROPERTIESEXTRACTIONS1ITEMSPROPERTIESLOCATION, origin string, key string, variable string) *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerInjectionsAnyOfInner1 {
 	this := CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerInjectionsAnyOfInner1{}
 	this.Location = location
 	this.Origin = origin
@@ -51,9 +51,9 @@ func NewCreateDastRestProfileRequestConfigurationJsonStrAuthenticationProcedures
 }
 
 // GetLocation returns the Location field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerInjectionsAnyOfInner1) GetLocation() string {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerInjectionsAnyOfInner1) GetLocation() ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS1PROPERTIESEXTRACTIONS1ITEMSPROPERTIESLOCATION {
 	if o == nil {
-		var ret string
+		var ret ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS1PROPERTIESEXTRACTIONS1ITEMSPROPERTIESLOCATION
 		return ret
 	}
 
@@ -62,7 +62,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProcedure
 
 // GetLocationOk returns a tuple with the Location field value
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerInjectionsAnyOfInner1) GetLocationOk() (*string, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerInjectionsAnyOfInner1) GetLocationOk() (*ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS1PROPERTIESEXTRACTIONS1ITEMSPROPERTIESLOCATION, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -70,7 +70,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProcedure
 }
 
 // SetLocation sets field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerInjectionsAnyOfInner1) SetLocation(v string) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerInjectionsAnyOfInner1) SetLocation(v ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS1PROPERTIESEXTRACTIONS1ITEMSPROPERTIESLOCATION) {
 	o.Location = v
 }
 

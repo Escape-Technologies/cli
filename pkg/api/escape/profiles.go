@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"strings"
 
 	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
 )
@@ -142,4 +143,87 @@ func UpdateProfileConfiguration(
 	}
 
 	return errors.New("no configuration provided")
+}
+
+// CreateProfile creates a profile by ID
+func CreateProfile(
+	ctx context.Context,
+	assetID string,
+	cron *string,
+	proxyID *string,
+	mode string,
+	profileName string,
+	schemaURL *string,
+	tagsIDs []string,
+	profileType string,
+) error {
+	client, err := newAPIV3Client()
+	if err != nil {
+		return fmt.Errorf("unable to init client: %w", err)
+	}
+
+	modEnum, err := v3.NewENUMPROPERTIESMODEFromValue(mode)
+	if err != nil {
+		return fmt.Errorf("invalid mode value: %w", err)
+	}
+
+	if proxyID != nil {
+		fmt.Println("proxyID", *proxyID)
+	}
+
+	authenticationJSONStr := "{}"
+
+	switch strings.ToLower(profileType) {
+	case "webapp":
+		body := v3.CreateDastWebAppProfileRequest{
+			// Required fields
+			AssetId:              assetID,
+			ConfigurationJsonStr: v3.CreateDastRestProfileRequestConfigurationJsonStr{},
+			Name:                 profileName,
+			Mode:                 *modEnum,
+			// Optional fields
+			AuthenticationJsonStr: &authenticationJSONStr,
+			Cron:                  cron,
+			TagsIds:               tagsIDs,
+		}
+		_, _, err = client.ProfilesAPI.CreateDastWebAppProfile(ctx).CreateDastWebAppProfileRequest(body).Execute()
+	case "rest":
+		// For REST profiles, we need a schema
+		schema := v3.NewDASTDetailed(v3.ENUMPROPERTIESSCHEMAPROPERTIESORIGIN_FETCH, "")
+		schema.SetUrl(*schemaURL)
+
+		body := v3.CreateDastRestProfileRequest{
+			// Required fields
+			AssetId:              assetID,
+			ConfigurationJsonStr: v3.CreateDastRestProfileRequestConfigurationJsonStr{},
+			Mode:                 *modEnum,
+			Name:                 profileName,
+			Schema:               *schema,
+			// Optional fields
+			AuthenticationJsonStr: &authenticationJSONStr,
+			Cron:                  cron,
+			TagsIds:               tagsIDs,
+		}
+		_, _, err = client.ProfilesAPI.CreateDastRestProfile(ctx).CreateDastRestProfileRequest(body).Execute()
+	case "graphql":
+		body := v3.CreateDastRestProfileRequest{
+			// Required fields
+			AssetId:              assetID,
+			ConfigurationJsonStr: v3.CreateDastRestProfileRequestConfigurationJsonStr{},
+			Mode:                 *modEnum,
+			Name:                 profileName,
+			// Optional fields
+			AuthenticationJsonStr: &authenticationJSONStr,
+			Cron:                  cron,
+			TagsIds:               tagsIDs,
+		}
+		_, _, err = client.ProfilesAPI.CreateDastGraphqlProfile(ctx).CreateDastRestProfileRequest(body).Execute()
+	default:
+		return fmt.Errorf("unsupported profile type: %s", profileType)
+	}
+
+	if err != nil {
+		return fmt.Errorf("api error: %w", err)
+	}
+	return nil
 }

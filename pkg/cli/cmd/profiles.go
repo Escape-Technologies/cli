@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/Escape-Technologies/cli/pkg/api/escape"
+	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
 	"github.com/Escape-Technologies/cli/pkg/cli/out"
 	"github.com/spf13/cobra"
 )
@@ -13,6 +14,10 @@ var (
 	newProfileCron          string
 	newProfileSchemaURL     string
 	newProfileConfiguration map[string]string
+	newProfileAssetID       string
+	newProfileProxyID       string
+	newProfileMode          string
+	newProfileTagsIDs       []string
 )
 
 var profilesCmd = &cobra.Command{
@@ -179,10 +184,43 @@ var profileUpdateConfiguration = &cobra.Command{
 	},
 }
 
+var profileCreate = &cobra.Command{
+	Use:     "create",
+	Aliases: []string{"create"},
+	Short:   "create a profile",
+	Long:    `create a profile by type.`,
+	Example: `escape-cli profiles create webapp --asset-id 00000000-0000-0000-0000-000000000001 --name "My Profile"`,
+	RunE: func(cmd *cobra.Command, args []string) error {
+		if len(args) == 0 {
+			return cmd.Help()
+		}
+		profileType := args[0]
+		err := escape.CreateProfile(
+			cmd.Context(),
+			newProfileAssetID,
+			&newProfileCron,
+			&newProfileProxyID,
+			newProfileMode,
+			newProfileName,
+			&newProfileSchemaURL,
+			newProfileTagsIDs,
+			profileType,
+		)
+		if err != nil {
+			return fmt.Errorf("unable to create profile %s: %w", profileType, err)
+		}
+
+		fmt.Printf("Profile %s successfully created\n", profileType)
+
+		return nil
+	},
+}
+
 func init() {
 	profilesCmd.AddCommand(
 		profilesListCmd,
 		profileGetCmd,
+		profileCreate,
 		profileDeleteCmd,
 		profileUpdateCmd,
 		profileUpdateSchema,
@@ -192,5 +230,9 @@ func init() {
 	profileUpdateCmd.Flags().StringVarP(&newProfileCron, "cron", "c", "", "cron of the profile")
 	profileUpdateSchema.Flags().StringVarP(&newProfileSchemaURL, "schema", "s", "", "schema of the profile")
 	profileUpdateConfiguration.Flags().StringToStringVarP(&newProfileConfiguration, "configuration", "c", map[string]string{}, "configuration of the profile")
+	profileCreate.Flags().StringVarP(&newProfileAssetID, "asset-id", "a", "", "asset ID for the profile (required)")
+	profileCreate.Flags().StringVarP(&newProfileName, "name", "n", "", "name of the profile (required)")
+	profileCreate.Flags().StringVarP(&newProfileSchemaURL, "schema", "s", "", "schema url of the profile")
+	profileCreate.Flags().StringVarP(&newProfileMode, "mode", "m", "", fmt.Sprintf("mode of the scanner (required, one of %s)", v3.AllowedENUMPROPERTIESMODEEnumValues))
 	rootCmd.AddCommand(profilesCmd)
 }

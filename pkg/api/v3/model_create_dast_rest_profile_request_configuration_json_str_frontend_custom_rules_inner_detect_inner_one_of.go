@@ -21,7 +21,7 @@ var _ MappedNullable = &CreateDastRestProfileRequestConfigurationJsonStrFrontend
 // CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInnerDetectInnerOneOf struct for CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInnerDetectInnerOneOf
 type CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInnerDetectInnerOneOf struct {
 	Command *string `json:"command,omitempty"`
-	If string `json:"if"`
+	If ENUMJSASSERTION `json:"if"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -31,7 +31,7 @@ type _CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInnerDe
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInnerDetectInnerOneOf(if_ string) *CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInnerDetectInnerOneOf {
+func NewCreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInnerDetectInnerOneOf(if_ ENUMJSASSERTION) *CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInnerDetectInnerOneOf {
 	this := CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInnerDetectInnerOneOf{}
 	this.If = if_
 	return &this
@@ -78,9 +78,9 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInne
 }
 
 // GetIf returns the If field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInnerDetectInnerOneOf) GetIf() string {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInnerDetectInnerOneOf) GetIf() ENUMJSASSERTION {
 	if o == nil {
-		var ret string
+		var ret ENUMJSASSERTION
 		return ret
 	}
 
@@ -89,7 +89,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInne
 
 // GetIfOk returns a tuple with the If field value
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInnerDetectInnerOneOf) GetIfOk() (*string, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInnerDetectInnerOneOf) GetIfOk() (*ENUMJSASSERTION, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -97,7 +97,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInne
 }
 
 // SetIf sets field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInnerDetectInnerOneOf) SetIf(v string) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInnerDetectInnerOneOf) SetIf(v ENUMJSASSERTION) {
 	o.If = v
 }
 
