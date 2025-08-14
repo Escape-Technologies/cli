@@ -57,6 +57,10 @@ var rootCmd = &cobra.Command{
 func init() {
 	rootCmd.PersistentFlags().CountVarP(&rootCmdVerbose, "verbose", "v", "enable verbose output")
 	rootCmd.PersistentFlags().StringVarP(&rootCmdOutputStr, "output", "o", "pretty", "output format (pretty|json|yaml)")
+	rootCmd.SetUsageTemplate(rootCmd.UsageTemplate() + `
+For additional information, see the documentation: 
+	https://docs.escape.tech/documentation/tooling/cli
+`)
 }
 
 // Execute the CLI
