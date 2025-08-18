@@ -17,8 +17,14 @@ var rootCmdVerbose int
 var rootCmdOutputStr string
 
 var rootCmd = &cobra.Command{
-	Use:   "escape-cli",
-	Short: "CLI to interact with Escape API",
+	Use: "escape-cli",
+	Short: `
+  _____ ____   ____    _    ____  _____    ____ _     ___ 
+ | ____/ ___| / ___|  / \  |  _ \| ____|  / ___| |   |_ _|
+ |  _| \___ \| |     / _ \ | |_) |  _|   | |   | |    | | 
+ | |___ ___) | |___ / ___ \|  __/| |___  | |___| |___ | | 
+ |_____|____/ \____/_/   \_\_|   |_____|  \____|_____|___|
+`,
 	PersistentPreRunE: func(_ *cobra.Command, _ []string) error {
 		if rootCmdVerbose > 0 { //nolint:mnd
 			log.SetLevel(logrus.InfoLevel)
@@ -51,6 +57,10 @@ var rootCmd = &cobra.Command{
 func init() {
 	rootCmd.PersistentFlags().CountVarP(&rootCmdVerbose, "verbose", "v", "enable verbose output")
 	rootCmd.PersistentFlags().StringVarP(&rootCmdOutputStr, "output", "o", "pretty", "output format (pretty|json|yaml)")
+	rootCmd.SetUsageTemplate(rootCmd.UsageTemplate() + `
+For additional information, see the documentation: 
+	https://docs.escape.tech/documentation/tooling/cli
+`)
 }
 
 // Execute the CLI
