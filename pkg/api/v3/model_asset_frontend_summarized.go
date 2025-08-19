@@ -22,7 +22,8 @@ var _ MappedNullable = &AssetFrontendSummarized{}
 type AssetFrontendSummarized struct {
 	// The url of the asset frontend
 	Url string `json:"url"`
-	Type ENUMWEBAPP `json:"type"`
+	// The type of the asset frontend
+	Type string `json:"type"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -32,7 +33,7 @@ type _AssetFrontendSummarized AssetFrontendSummarized
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAssetFrontendSummarized(url string, type_ ENUMWEBAPP) *AssetFrontendSummarized {
+func NewAssetFrontendSummarized(url string, type_ string) *AssetFrontendSummarized {
 	this := AssetFrontendSummarized{}
 	this.Url = url
 	this.Type = type_
@@ -72,9 +73,9 @@ func (o *AssetFrontendSummarized) SetUrl(v string) {
 }
 
 // GetType returns the Type field value
-func (o *AssetFrontendSummarized) GetType() ENUMWEBAPP {
+func (o *AssetFrontendSummarized) GetType() string {
 	if o == nil {
-		var ret ENUMWEBAPP
+		var ret string
 		return ret
 	}
 
@@ -83,7 +84,7 @@ func (o *AssetFrontendSummarized) GetType() ENUMWEBAPP {
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *AssetFrontendSummarized) GetTypeOk() (*ENUMWEBAPP, bool) {
+func (o *AssetFrontendSummarized) GetTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -91,7 +92,7 @@ func (o *AssetFrontendSummarized) GetTypeOk() (*ENUMWEBAPP, bool) {
 }
 
 // SetType sets field value
-func (o *AssetFrontendSummarized) SetType(v ENUMWEBAPP) {
+func (o *AssetFrontendSummarized) SetType(v string) {
 	o.Type = v
 }
 

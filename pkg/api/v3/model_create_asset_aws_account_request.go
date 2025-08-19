@@ -54,7 +54,7 @@ func NewCreateAssetAWSACCOUNTRequestWithDefaults() *CreateAssetAWSACCOUNTRequest
 // GetAssetClass returns the AssetClass field value
 func (o *CreateAssetAWSACCOUNTRequest) GetAssetClass() ENUMCLOUDHOSTING {
 	if o == nil {
-		var ret ENUMCLOUDHOSTING
+		var ret string
 		return ret
 	}
 
@@ -78,7 +78,7 @@ func (o *CreateAssetAWSACCOUNTRequest) SetAssetClass(v ENUMCLOUDHOSTING) {
 // GetAssetType returns the AssetType field value
 func (o *CreateAssetAWSACCOUNTRequest) GetAssetType() ENUMAWSACCOUNT {
 	if o == nil {
-		var ret ENUMAWSACCOUNT
+		var ret string
 		return ret
 	}
 

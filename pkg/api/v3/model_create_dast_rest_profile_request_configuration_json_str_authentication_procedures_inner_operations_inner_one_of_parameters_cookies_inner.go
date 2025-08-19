@@ -25,7 +25,7 @@ type CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInn
 	Path *string `json:"path,omitempty"`
 	HttpOnly *bool `json:"http_only,omitempty"`
 	Secure *bool `json:"secure,omitempty"`
-	SameSite *ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS0PROPERTIESPARAMETERSPROPERTIESCOOKIESITEMSPROPERTIESSAMESITE `json:"same_site,omitempty"`
+	SameSite *string `json:"same_site,omitempty"`
 	Values []string `json:"values"`
 	AdditionalProperties map[string]interface{}
 }
@@ -204,9 +204,9 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProcedure
 }
 
 // GetSameSite returns the SameSite field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) GetSameSite() ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS0PROPERTIESPARAMETERSPROPERTIESCOOKIESITEMSPROPERTIESSAMESITE {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) GetSameSite() string {
 	if o == nil || IsNil(o.SameSite) {
-		var ret ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS0PROPERTIESPARAMETERSPROPERTIESCOOKIESITEMSPROPERTIESSAMESITE
+		var ret string
 		return ret
 	}
 	return *o.SameSite
@@ -214,7 +214,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProcedure
 
 // GetSameSiteOk returns a tuple with the SameSite field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) GetSameSiteOk() (*ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS0PROPERTIESPARAMETERSPROPERTIESCOOKIESITEMSPROPERTIESSAMESITE, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) GetSameSiteOk() (*string, bool) {
 	if o == nil || IsNil(o.SameSite) {
 		return nil, false
 	}
@@ -230,8 +230,8 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProcedure
 	return false
 }
 
-// SetSameSite gets a reference to the given ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS0PROPERTIESPARAMETERSPROPERTIESCOOKIESITEMSPROPERTIESSAMESITE and assigns it to the SameSite field.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) SetSameSite(v ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS0PROPERTIESPARAMETERSPROPERTIESCOOKIESITEMSPROPERTIESSAMESITE) {
+// SetSameSite gets a reference to the given string and assigns it to the SameSite field.
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) SetSameSite(v string) {
 	o.SameSite = &v
 }
 

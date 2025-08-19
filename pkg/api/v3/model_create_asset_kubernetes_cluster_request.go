@@ -52,7 +52,7 @@ func NewCreateAssetKUBERNETESCLUSTERRequestWithDefaults() *CreateAssetKUBERNETES
 // GetAssetClass returns the AssetClass field value
 func (o *CreateAssetKUBERNETESCLUSTERRequest) GetAssetClass() ENUMCLOUDHOSTING {
 	if o == nil {
-		var ret ENUMCLOUDHOSTING
+		var ret string
 		return ret
 	}
 
@@ -76,7 +76,7 @@ func (o *CreateAssetKUBERNETESCLUSTERRequest) SetAssetClass(v ENUMCLOUDHOSTING) 
 // GetAssetType returns the AssetType field value
 func (o *CreateAssetKUBERNETESCLUSTERRequest) GetAssetType() ENUMKUBERNETESCLUSTER {
 	if o == nil {
-		var ret ENUMKUBERNETESCLUSTER
+		var ret string
 		return ret
 	}
 

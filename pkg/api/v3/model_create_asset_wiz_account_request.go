@@ -58,7 +58,7 @@ func NewCreateAssetWIZACCOUNTRequestWithDefaults() *CreateAssetWIZACCOUNTRequest
 // GetAssetClass returns the AssetClass field value
 func (o *CreateAssetWIZACCOUNTRequest) GetAssetClass() ENUMCSPM {
 	if o == nil {
-		var ret ENUMCSPM
+		var ret string
 		return ret
 	}
 
@@ -82,7 +82,7 @@ func (o *CreateAssetWIZACCOUNTRequest) SetAssetClass(v ENUMCSPM) {
 // GetAssetType returns the AssetType field value
 func (o *CreateAssetWIZACCOUNTRequest) GetAssetType() ENUMWIZACCOUNT {
 	if o == nil {
-		var ret ENUMWIZACCOUNT
+		var ret string
 		return ret
 	}
 

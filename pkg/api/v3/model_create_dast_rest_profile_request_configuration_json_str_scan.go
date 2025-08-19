@@ -19,12 +19,12 @@ var _ MappedNullable = &CreateDastRestProfileRequestConfigurationJsonStrScan{}
 
 // CreateDastRestProfileRequestConfigurationJsonStrScan struct for CreateDastRestProfileRequestConfigurationJsonStrScan
 type CreateDastRestProfileRequestConfigurationJsonStrScan struct {
-	Profile *ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESSCANPROPERTIESPROFILE `json:"profile,omitempty"`
+	Profile *string `json:"profile,omitempty"`
 	ReadOnly *bool `json:"read_only,omitempty"`
 	Hotstart []string `json:"hotstart,omitempty"`
 	Blocklist *CreateDastRestProfileRequestConfigurationJsonStrScanBlocklist `json:"blocklist,omitempty"`
 	Scalars map[string]CreateDastRestProfileRequestConfigurationJsonStrScanScalarsValue `json:"scalars,omitempty"`
-	ApiType *ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESSCANPROPERTIESAPITYPE `json:"api_type,omitempty"`
+	ApiType *string `json:"api_type,omitempty"`
 	NullIsUnauthenticated *bool `json:"null_is_unauthenticated,omitempty"`
 	HotstartOnly *bool `json:"hotstart_only,omitempty"`
 	ForceFullScan *bool `json:"force_full_scan,omitempty"`
@@ -70,9 +70,9 @@ func NewCreateDastRestProfileRequestConfigurationJsonStrScanWithDefaults() *Crea
 }
 
 // GetProfile returns the Profile field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrScan) GetProfile() ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESSCANPROPERTIESPROFILE {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrScan) GetProfile() string {
 	if o == nil || IsNil(o.Profile) {
-		var ret ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESSCANPROPERTIESPROFILE
+		var ret string
 		return ret
 	}
 	return *o.Profile
@@ -80,7 +80,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrScan) GetProfile() ENUM
 
 // GetProfileOk returns a tuple with the Profile field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrScan) GetProfileOk() (*ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESSCANPROPERTIESPROFILE, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrScan) GetProfileOk() (*string, bool) {
 	if o == nil || IsNil(o.Profile) {
 		return nil, false
 	}
@@ -96,8 +96,8 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrScan) HasProfile() bool
 	return false
 }
 
-// SetProfile gets a reference to the given ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESSCANPROPERTIESPROFILE and assigns it to the Profile field.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrScan) SetProfile(v ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESSCANPROPERTIESPROFILE) {
+// SetProfile gets a reference to the given string and assigns it to the Profile field.
+func (o *CreateDastRestProfileRequestConfigurationJsonStrScan) SetProfile(v string) {
 	o.Profile = &v
 }
 
@@ -230,9 +230,9 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrScan) SetScalars(v map[
 }
 
 // GetApiType returns the ApiType field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrScan) GetApiType() ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESSCANPROPERTIESAPITYPE {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrScan) GetApiType() string {
 	if o == nil || IsNil(o.ApiType) {
-		var ret ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESSCANPROPERTIESAPITYPE
+		var ret string
 		return ret
 	}
 	return *o.ApiType
@@ -240,7 +240,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrScan) GetApiType() ENUM
 
 // GetApiTypeOk returns a tuple with the ApiType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrScan) GetApiTypeOk() (*ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESSCANPROPERTIESAPITYPE, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrScan) GetApiTypeOk() (*string, bool) {
 	if o == nil || IsNil(o.ApiType) {
 		return nil, false
 	}
@@ -256,8 +256,8 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrScan) HasApiType() bool
 	return false
 }
 
-// SetApiType gets a reference to the given ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESSCANPROPERTIESAPITYPE and assigns it to the ApiType field.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrScan) SetApiType(v ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESSCANPROPERTIESAPITYPE) {
+// SetApiType gets a reference to the given string and assigns it to the ApiType field.
+func (o *CreateDastRestProfileRequestConfigurationJsonStrScan) SetApiType(v string) {
 	o.ApiType = &v
 }
 
