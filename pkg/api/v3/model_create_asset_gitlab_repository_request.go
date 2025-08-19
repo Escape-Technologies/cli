@@ -64,7 +64,7 @@ func NewCreateAssetGITLABREPOSITORYRequestWithDefaults() *CreateAssetGITLABREPOS
 // GetAssetClass returns the AssetClass field value
 func (o *CreateAssetGITLABREPOSITORYRequest) GetAssetClass() ENUMREPOSITORY {
 	if o == nil {
-		var ret ENUMREPOSITORY
+		var ret string
 		return ret
 	}
 
@@ -88,7 +88,7 @@ func (o *CreateAssetGITLABREPOSITORYRequest) SetAssetClass(v ENUMREPOSITORY) {
 // GetAssetType returns the AssetType field value
 func (o *CreateAssetGITLABREPOSITORYRequest) GetAssetType() ENUMGITLABREPOSITORY {
 	if o == nil {
-		var ret ENUMGITLABREPOSITORY
+		var ret string
 		return ret
 	}
 
@@ -488,7 +488,7 @@ func (o *CreateAssetGITLABREPOSITORYRequest) SetArchived(v bool) {
 // GetVisibility returns the Visibility field value if set, zero value otherwise.
 func (o *CreateAssetGITLABREPOSITORYRequest) GetVisibility() ENUMPROPERTIESVISIBILITY {
 	if o == nil || IsNil(o.Visibility) {
-		var ret ENUMPROPERTIESVISIBILITY
+		var ret string
 		return ret
 	}
 	return *o.Visibility

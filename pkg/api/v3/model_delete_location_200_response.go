@@ -20,7 +20,7 @@ var _ MappedNullable = &DeleteLocation200Response{}
 
 // DeleteLocation200Response struct for DeleteLocation200Response
 type DeleteLocation200Response struct {
-	Message ENUMLOCATIONDELETEDSUCCESSFULLY `json:"message"`
+	Message string `json:"message"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -30,7 +30,7 @@ type _DeleteLocation200Response DeleteLocation200Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDeleteLocation200Response(message ENUMLOCATIONDELETEDSUCCESSFULLY) *DeleteLocation200Response {
+func NewDeleteLocation200Response(message string) *DeleteLocation200Response {
 	this := DeleteLocation200Response{}
 	this.Message = message
 	return &this
@@ -45,9 +45,9 @@ func NewDeleteLocation200ResponseWithDefaults() *DeleteLocation200Response {
 }
 
 // GetMessage returns the Message field value
-func (o *DeleteLocation200Response) GetMessage() ENUMLOCATIONDELETEDSUCCESSFULLY {
+func (o *DeleteLocation200Response) GetMessage() string {
 	if o == nil {
-		var ret ENUMLOCATIONDELETEDSUCCESSFULLY
+		var ret string
 		return ret
 	}
 
@@ -56,7 +56,7 @@ func (o *DeleteLocation200Response) GetMessage() ENUMLOCATIONDELETEDSUCCESSFULLY
 
 // GetMessageOk returns a tuple with the Message field value
 // and a boolean to check if the value has been set.
-func (o *DeleteLocation200Response) GetMessageOk() (*ENUMLOCATIONDELETEDSUCCESSFULLY, bool) {
+func (o *DeleteLocation200Response) GetMessageOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -64,7 +64,7 @@ func (o *DeleteLocation200Response) GetMessageOk() (*ENUMLOCATIONDELETEDSUCCESSF
 }
 
 // SetMessage sets field value
-func (o *DeleteLocation200Response) SetMessage(v ENUMLOCATIONDELETEDSUCCESSFULLY) {
+func (o *DeleteLocation200Response) SetMessage(v string) {
 	o.Message = v
 }
 

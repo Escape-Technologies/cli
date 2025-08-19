@@ -66,7 +66,7 @@ func NewCreateAssetGITHUBREPOSITORYRequestWithDefaults() *CreateAssetGITHUBREPOS
 // GetAssetClass returns the AssetClass field value
 func (o *CreateAssetGITHUBREPOSITORYRequest) GetAssetClass() ENUMREPOSITORY {
 	if o == nil {
-		var ret ENUMREPOSITORY
+		var ret string
 		return ret
 	}
 
@@ -90,7 +90,7 @@ func (o *CreateAssetGITHUBREPOSITORYRequest) SetAssetClass(v ENUMREPOSITORY) {
 // GetAssetType returns the AssetType field value
 func (o *CreateAssetGITHUBREPOSITORYRequest) GetAssetType() ENUMGITHUBREPOSITORY {
 	if o == nil {
-		var ret ENUMGITHUBREPOSITORY
+		var ret string
 		return ret
 	}
 

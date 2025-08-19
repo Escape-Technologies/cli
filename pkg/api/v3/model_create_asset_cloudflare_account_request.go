@@ -52,7 +52,7 @@ func NewCreateAssetCLOUDFLAREACCOUNTRequestWithDefaults() *CreateAssetCLOUDFLARE
 // GetAssetClass returns the AssetClass field value
 func (o *CreateAssetCLOUDFLAREACCOUNTRequest) GetAssetClass() ENUMCDN {
 	if o == nil {
-		var ret ENUMCDN
+		var ret string
 		return ret
 	}
 
@@ -76,7 +76,7 @@ func (o *CreateAssetCLOUDFLAREACCOUNTRequest) SetAssetClass(v ENUMCDN) {
 // GetAssetType returns the AssetType field value
 func (o *CreateAssetCLOUDFLAREACCOUNTRequest) GetAssetType() ENUMCLOUDFLAREACCOUNT {
 	if o == nil {
-		var ret ENUMCLOUDFLAREACCOUNT
+		var ret string
 		return ret
 	}
 

@@ -54,7 +54,7 @@ func NewCreateAssetGITLABREPOSITORYRequestGroupWithDefaults() *CreateAssetGITLAB
 // GetAssetClass returns the AssetClass field value
 func (o *CreateAssetGITLABREPOSITORYRequestGroup) GetAssetClass() ENUMSOURCECODEMANAGEMENT {
 	if o == nil {
-		var ret ENUMSOURCECODEMANAGEMENT
+		var ret string
 		return ret
 	}
 
@@ -78,7 +78,7 @@ func (o *CreateAssetGITLABREPOSITORYRequestGroup) SetAssetClass(v ENUMSOURCECODE
 // GetAssetType returns the AssetType field value
 func (o *CreateAssetGITLABREPOSITORYRequestGroup) GetAssetType() ENUMGITLABGROUP {
 	if o == nil {
-		var ret ENUMGITLABGROUP
+		var ret string
 		return ret
 	}
 

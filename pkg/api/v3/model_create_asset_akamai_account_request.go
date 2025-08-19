@@ -58,7 +58,7 @@ func NewCreateAssetAKAMAIACCOUNTRequestWithDefaults() *CreateAssetAKAMAIACCOUNTR
 // GetAssetClass returns the AssetClass field value
 func (o *CreateAssetAKAMAIACCOUNTRequest) GetAssetClass() ENUMCDN {
 	if o == nil {
-		var ret ENUMCDN
+		var ret string
 		return ret
 	}
 
@@ -82,7 +82,7 @@ func (o *CreateAssetAKAMAIACCOUNTRequest) SetAssetClass(v ENUMCDN) {
 // GetAssetType returns the AssetType field value
 func (o *CreateAssetAKAMAIACCOUNTRequest) GetAssetType() ENUMAKAMAIACCOUNT {
 	if o == nil {
-		var ret ENUMAKAMAIACCOUNT
+		var ret string
 		return ret
 	}
 

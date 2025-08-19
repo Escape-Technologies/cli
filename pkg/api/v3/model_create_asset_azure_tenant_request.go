@@ -56,7 +56,7 @@ func NewCreateAssetAZURETENANTRequestWithDefaults() *CreateAssetAZURETENANTReque
 // GetAssetClass returns the AssetClass field value
 func (o *CreateAssetAZURETENANTRequest) GetAssetClass() ENUMCLOUDHOSTING {
 	if o == nil {
-		var ret ENUMCLOUDHOSTING
+		var ret string
 		return ret
 	}
 
@@ -80,7 +80,7 @@ func (o *CreateAssetAZURETENANTRequest) SetAssetClass(v ENUMCLOUDHOSTING) {
 // GetAssetType returns the AssetType field value
 func (o *CreateAssetAZURETENANTRequest) GetAssetType() ENUMAZURETENANT {
 	if o == nil {
-		var ret ENUMAZURETENANT
+		var ret string
 		return ret
 	}
 

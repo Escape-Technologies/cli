@@ -70,7 +70,7 @@ func NewCreateAssetGCPPROJECTRequestWithDefaults() *CreateAssetGCPPROJECTRequest
 // GetAssetClass returns the AssetClass field value
 func (o *CreateAssetGCPPROJECTRequest) GetAssetClass() ENUMCLOUDHOSTING {
 	if o == nil {
-		var ret ENUMCLOUDHOSTING
+		var ret string
 		return ret
 	}
 
@@ -94,7 +94,7 @@ func (o *CreateAssetGCPPROJECTRequest) SetAssetClass(v ENUMCLOUDHOSTING) {
 // GetAssetType returns the AssetType field value
 func (o *CreateAssetGCPPROJECTRequest) GetAssetType() ENUMGCPPROJECT {
 	if o == nil {
-		var ret ENUMGCPPROJECT
+		var ret string
 		return ret
 	}
 

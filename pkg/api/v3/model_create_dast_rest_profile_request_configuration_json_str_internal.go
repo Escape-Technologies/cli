@@ -37,7 +37,7 @@ type CreateDastRestProfileRequestConfigurationJsonStrInternal struct {
 	GraphqlPersistedQueriesRaw *string `json:"graphql_persisted_queries_raw,omitempty"`
 	GraphqlPersistedQueriesFile *string `json:"graphql_persisted_queries_file,omitempty"`
 	FrontendUseV2Crawling *bool `json:"frontend_use_v2_crawling,omitempty"`
-	FrontendCrawlingStateBuilder *ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESINTERNALPROPERTIESFRONTENDCRAWLINGSTATEBUILDER `json:"frontend_crawling_state_builder,omitempty"`
+	FrontendCrawlingStateBuilder *string `json:"frontend_crawling_state_builder,omitempty"`
 	AgenticScanning *bool `json:"agentic_scanning,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -638,9 +638,9 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrInternal) SetFrontendUs
 }
 
 // GetFrontendCrawlingStateBuilder returns the FrontendCrawlingStateBuilder field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrInternal) GetFrontendCrawlingStateBuilder() ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESINTERNALPROPERTIESFRONTENDCRAWLINGSTATEBUILDER {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrInternal) GetFrontendCrawlingStateBuilder() string {
 	if o == nil || IsNil(o.FrontendCrawlingStateBuilder) {
-		var ret ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESINTERNALPROPERTIESFRONTENDCRAWLINGSTATEBUILDER
+		var ret string
 		return ret
 	}
 	return *o.FrontendCrawlingStateBuilder
@@ -648,7 +648,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrInternal) GetFrontendCr
 
 // GetFrontendCrawlingStateBuilderOk returns a tuple with the FrontendCrawlingStateBuilder field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrInternal) GetFrontendCrawlingStateBuilderOk() (*ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESINTERNALPROPERTIESFRONTENDCRAWLINGSTATEBUILDER, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrInternal) GetFrontendCrawlingStateBuilderOk() (*string, bool) {
 	if o == nil || IsNil(o.FrontendCrawlingStateBuilder) {
 		return nil, false
 	}
@@ -664,8 +664,8 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrInternal) HasFrontendCr
 	return false
 }
 
-// SetFrontendCrawlingStateBuilder gets a reference to the given ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESINTERNALPROPERTIESFRONTENDCRAWLINGSTATEBUILDER and assigns it to the FrontendCrawlingStateBuilder field.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrInternal) SetFrontendCrawlingStateBuilder(v ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESINTERNALPROPERTIESFRONTENDCRAWLINGSTATEBUILDER) {
+// SetFrontendCrawlingStateBuilder gets a reference to the given string and assigns it to the FrontendCrawlingStateBuilder field.
+func (o *CreateDastRestProfileRequestConfigurationJsonStrInternal) SetFrontendCrawlingStateBuilder(v string) {
 	o.FrontendCrawlingStateBuilder = &v
 }
 
