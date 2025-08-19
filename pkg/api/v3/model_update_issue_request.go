@@ -19,8 +19,7 @@ var _ MappedNullable = &UpdateIssueRequest{}
 
 // UpdateIssueRequest struct for UpdateIssueRequest
 type UpdateIssueRequest struct {
-	// The issue status
-	Status *string `json:"status,omitempty"`
+	Status *ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS `json:"status,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -44,9 +43,9 @@ func NewUpdateIssueRequestWithDefaults() *UpdateIssueRequest {
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
-func (o *UpdateIssueRequest) GetStatus() string {
+func (o *UpdateIssueRequest) GetStatus() ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS {
 	if o == nil || IsNil(o.Status) {
-		var ret string
+		var ret ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS
 		return ret
 	}
 	return *o.Status
@@ -54,7 +53,7 @@ func (o *UpdateIssueRequest) GetStatus() string {
 
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateIssueRequest) GetStatusOk() (*string, bool) {
+func (o *UpdateIssueRequest) GetStatusOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS, bool) {
 	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
@@ -70,8 +69,8 @@ func (o *UpdateIssueRequest) HasStatus() bool {
 	return false
 }
 
-// SetStatus gets a reference to the given string and assigns it to the Status field.
-func (o *UpdateIssueRequest) SetStatus(v string) {
+// SetStatus gets a reference to the given ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS and assigns it to the Status field.
+func (o *UpdateIssueRequest) SetStatus(v ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS) {
 	o.Status = &v
 }
 

@@ -20,7 +20,7 @@ var _ MappedNullable = &CreateDastRestProfileRequestConfigurationJsonStrAuthenti
 
 // CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf11 struct for CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf11
 type CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf11 struct {
-	Type string `json:"type"`
+	Type ENUMBROWSERACTIONS `json:"type"`
 	Users []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf11UsersInner `json:"users"`
 	Extractions []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner `json:"extractions,omitempty"`
 	Injections NullableCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10Injections `json:"injections,omitempty"`
@@ -38,7 +38,7 @@ type _CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInner
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf11(type_ string, users []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf11UsersInner, loginUrl string) *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf11 {
+func NewCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf11(type_ ENUMBROWSERACTIONS, users []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf11UsersInner, loginUrl string) *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf11 {
 	this := CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf11{}
 	this.Type = type_
 	this.Users = users
@@ -55,9 +55,9 @@ func NewCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInn
 }
 
 // GetType returns the Type field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf11) GetType() string {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf11) GetType() ENUMBROWSERACTIONS {
 	if o == nil {
-		var ret string
+		var ret ENUMBROWSERACTIONS
 		return ret
 	}
 
@@ -66,7 +66,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsIn
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf11) GetTypeOk() (*string, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf11) GetTypeOk() (*ENUMBROWSERACTIONS, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -74,7 +74,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsIn
 }
 
 // SetType sets field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf11) SetType(v string) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf11) SetType(v ENUMBROWSERACTIONS) {
 	o.Type = v
 }
 
