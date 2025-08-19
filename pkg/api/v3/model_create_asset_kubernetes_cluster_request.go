@@ -15,11 +15,11 @@ import (
 	"fmt"
 )
 
-// checks if the CreateAssetKUBERNETESRequest type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &CreateAssetKUBERNETESRequest{}
+// checks if the CreateAssetKUBERNETESCLUSTERRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CreateAssetKUBERNETESCLUSTERRequest{}
 
-// CreateAssetKUBERNETESRequest struct for CreateAssetKUBERNETESRequest
-type CreateAssetKUBERNETESRequest struct {
+// CreateAssetKUBERNETESCLUSTERRequest struct for CreateAssetKUBERNETESCLUSTERRequest
+type CreateAssetKUBERNETESCLUSTERRequest struct {
 	AssetClass ENUMCLOUDHOSTING `json:"asset_class"`
 	AssetType ENUMKUBERNETESCLUSTER `json:"asset_type"`
 	Name *string `json:"name,omitempty"`
@@ -27,30 +27,30 @@ type CreateAssetKUBERNETESRequest struct {
 	AdditionalProperties map[string]interface{}
 }
 
-type _CreateAssetKUBERNETESRequest CreateAssetKUBERNETESRequest
+type _CreateAssetKUBERNETESCLUSTERRequest CreateAssetKUBERNETESCLUSTERRequest
 
-// NewCreateAssetKUBERNETESRequest instantiates a new CreateAssetKUBERNETESRequest object
+// NewCreateAssetKUBERNETESCLUSTERRequest instantiates a new CreateAssetKUBERNETESCLUSTERRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetKUBERNETESRequest(assetClass ENUMCLOUDHOSTING, assetType ENUMKUBERNETESCLUSTER, privateLocationId string) *CreateAssetKUBERNETESRequest {
-	this := CreateAssetKUBERNETESRequest{}
+func NewCreateAssetKUBERNETESCLUSTERRequest(assetClass ENUMCLOUDHOSTING, assetType ENUMKUBERNETESCLUSTER, privateLocationId string) *CreateAssetKUBERNETESCLUSTERRequest {
+	this := CreateAssetKUBERNETESCLUSTERRequest{}
 	this.AssetClass = assetClass
 	this.AssetType = assetType
 	this.PrivateLocationId = privateLocationId
 	return &this
 }
 
-// NewCreateAssetKUBERNETESRequestWithDefaults instantiates a new CreateAssetKUBERNETESRequest object
+// NewCreateAssetKUBERNETESCLUSTERRequestWithDefaults instantiates a new CreateAssetKUBERNETESCLUSTERRequest object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCreateAssetKUBERNETESRequestWithDefaults() *CreateAssetKUBERNETESRequest {
-	this := CreateAssetKUBERNETESRequest{}
+func NewCreateAssetKUBERNETESCLUSTERRequestWithDefaults() *CreateAssetKUBERNETESCLUSTERRequest {
+	this := CreateAssetKUBERNETESCLUSTERRequest{}
 	return &this
 }
 
 // GetAssetClass returns the AssetClass field value
-func (o *CreateAssetKUBERNETESRequest) GetAssetClass() ENUMCLOUDHOSTING {
+func (o *CreateAssetKUBERNETESCLUSTERRequest) GetAssetClass() ENUMCLOUDHOSTING {
 	if o == nil {
 		var ret ENUMCLOUDHOSTING
 		return ret
@@ -61,7 +61,7 @@ func (o *CreateAssetKUBERNETESRequest) GetAssetClass() ENUMCLOUDHOSTING {
 
 // GetAssetClassOk returns a tuple with the AssetClass field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetKUBERNETESRequest) GetAssetClassOk() (*ENUMCLOUDHOSTING, bool) {
+func (o *CreateAssetKUBERNETESCLUSTERRequest) GetAssetClassOk() (*ENUMCLOUDHOSTING, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -69,12 +69,12 @@ func (o *CreateAssetKUBERNETESRequest) GetAssetClassOk() (*ENUMCLOUDHOSTING, boo
 }
 
 // SetAssetClass sets field value
-func (o *CreateAssetKUBERNETESRequest) SetAssetClass(v ENUMCLOUDHOSTING) {
+func (o *CreateAssetKUBERNETESCLUSTERRequest) SetAssetClass(v ENUMCLOUDHOSTING) {
 	o.AssetClass = v
 }
 
 // GetAssetType returns the AssetType field value
-func (o *CreateAssetKUBERNETESRequest) GetAssetType() ENUMKUBERNETESCLUSTER {
+func (o *CreateAssetKUBERNETESCLUSTERRequest) GetAssetType() ENUMKUBERNETESCLUSTER {
 	if o == nil {
 		var ret ENUMKUBERNETESCLUSTER
 		return ret
@@ -85,7 +85,7 @@ func (o *CreateAssetKUBERNETESRequest) GetAssetType() ENUMKUBERNETESCLUSTER {
 
 // GetAssetTypeOk returns a tuple with the AssetType field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetKUBERNETESRequest) GetAssetTypeOk() (*ENUMKUBERNETESCLUSTER, bool) {
+func (o *CreateAssetKUBERNETESCLUSTERRequest) GetAssetTypeOk() (*ENUMKUBERNETESCLUSTER, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -93,12 +93,12 @@ func (o *CreateAssetKUBERNETESRequest) GetAssetTypeOk() (*ENUMKUBERNETESCLUSTER,
 }
 
 // SetAssetType sets field value
-func (o *CreateAssetKUBERNETESRequest) SetAssetType(v ENUMKUBERNETESCLUSTER) {
+func (o *CreateAssetKUBERNETESCLUSTERRequest) SetAssetType(v ENUMKUBERNETESCLUSTER) {
 	o.AssetType = v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
-func (o *CreateAssetKUBERNETESRequest) GetName() string {
+func (o *CreateAssetKUBERNETESCLUSTERRequest) GetName() string {
 	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
@@ -108,7 +108,7 @@ func (o *CreateAssetKUBERNETESRequest) GetName() string {
 
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetKUBERNETESRequest) GetNameOk() (*string, bool) {
+func (o *CreateAssetKUBERNETESCLUSTERRequest) GetNameOk() (*string, bool) {
 	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
@@ -116,7 +116,7 @@ func (o *CreateAssetKUBERNETESRequest) GetNameOk() (*string, bool) {
 }
 
 // HasName returns a boolean if a field has been set.
-func (o *CreateAssetKUBERNETESRequest) HasName() bool {
+func (o *CreateAssetKUBERNETESCLUSTERRequest) HasName() bool {
 	if o != nil && !IsNil(o.Name) {
 		return true
 	}
@@ -125,12 +125,12 @@ func (o *CreateAssetKUBERNETESRequest) HasName() bool {
 }
 
 // SetName gets a reference to the given string and assigns it to the Name field.
-func (o *CreateAssetKUBERNETESRequest) SetName(v string) {
+func (o *CreateAssetKUBERNETESCLUSTERRequest) SetName(v string) {
 	o.Name = &v
 }
 
 // GetPrivateLocationId returns the PrivateLocationId field value
-func (o *CreateAssetKUBERNETESRequest) GetPrivateLocationId() string {
+func (o *CreateAssetKUBERNETESCLUSTERRequest) GetPrivateLocationId() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -141,7 +141,7 @@ func (o *CreateAssetKUBERNETESRequest) GetPrivateLocationId() string {
 
 // GetPrivateLocationIdOk returns a tuple with the PrivateLocationId field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetKUBERNETESRequest) GetPrivateLocationIdOk() (*string, bool) {
+func (o *CreateAssetKUBERNETESCLUSTERRequest) GetPrivateLocationIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -149,11 +149,11 @@ func (o *CreateAssetKUBERNETESRequest) GetPrivateLocationIdOk() (*string, bool) 
 }
 
 // SetPrivateLocationId sets field value
-func (o *CreateAssetKUBERNETESRequest) SetPrivateLocationId(v string) {
+func (o *CreateAssetKUBERNETESCLUSTERRequest) SetPrivateLocationId(v string) {
 	o.PrivateLocationId = v
 }
 
-func (o CreateAssetKUBERNETESRequest) MarshalJSON() ([]byte, error) {
+func (o CreateAssetKUBERNETESCLUSTERRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -161,7 +161,7 @@ func (o CreateAssetKUBERNETESRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CreateAssetKUBERNETESRequest) ToMap() (map[string]interface{}, error) {
+func (o CreateAssetKUBERNETESCLUSTERRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["asset_class"] = o.AssetClass
 	toSerialize["asset_type"] = o.AssetType
@@ -177,7 +177,7 @@ func (o CreateAssetKUBERNETESRequest) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *CreateAssetKUBERNETESRequest) UnmarshalJSON(data []byte) (err error) {
+func (o *CreateAssetKUBERNETESCLUSTERRequest) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -201,15 +201,15 @@ func (o *CreateAssetKUBERNETESRequest) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varCreateAssetKUBERNETESRequest := _CreateAssetKUBERNETESRequest{}
+	varCreateAssetKUBERNETESCLUSTERRequest := _CreateAssetKUBERNETESCLUSTERRequest{}
 
-	err = json.Unmarshal(data, &varCreateAssetKUBERNETESRequest)
+	err = json.Unmarshal(data, &varCreateAssetKUBERNETESCLUSTERRequest)
 
 	if err != nil {
 		return err
 	}
 
-	*o = CreateAssetKUBERNETESRequest(varCreateAssetKUBERNETESRequest)
+	*o = CreateAssetKUBERNETESCLUSTERRequest(varCreateAssetKUBERNETESCLUSTERRequest)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -224,38 +224,38 @@ func (o *CreateAssetKUBERNETESRequest) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableCreateAssetKUBERNETESRequest struct {
-	value *CreateAssetKUBERNETESRequest
+type NullableCreateAssetKUBERNETESCLUSTERRequest struct {
+	value *CreateAssetKUBERNETESCLUSTERRequest
 	isSet bool
 }
 
-func (v NullableCreateAssetKUBERNETESRequest) Get() *CreateAssetKUBERNETESRequest {
+func (v NullableCreateAssetKUBERNETESCLUSTERRequest) Get() *CreateAssetKUBERNETESCLUSTERRequest {
 	return v.value
 }
 
-func (v *NullableCreateAssetKUBERNETESRequest) Set(val *CreateAssetKUBERNETESRequest) {
+func (v *NullableCreateAssetKUBERNETESCLUSTERRequest) Set(val *CreateAssetKUBERNETESCLUSTERRequest) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCreateAssetKUBERNETESRequest) IsSet() bool {
+func (v NullableCreateAssetKUBERNETESCLUSTERRequest) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCreateAssetKUBERNETESRequest) Unset() {
+func (v *NullableCreateAssetKUBERNETESCLUSTERRequest) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCreateAssetKUBERNETESRequest(val *CreateAssetKUBERNETESRequest) *NullableCreateAssetKUBERNETESRequest {
-	return &NullableCreateAssetKUBERNETESRequest{value: val, isSet: true}
+func NewNullableCreateAssetKUBERNETESCLUSTERRequest(val *CreateAssetKUBERNETESCLUSTERRequest) *NullableCreateAssetKUBERNETESCLUSTERRequest {
+	return &NullableCreateAssetKUBERNETESCLUSTERRequest{value: val, isSet: true}
 }
 
-func (v NullableCreateAssetKUBERNETESRequest) MarshalJSON() ([]byte, error) {
+func (v NullableCreateAssetKUBERNETESCLUSTERRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCreateAssetKUBERNETESRequest) UnmarshalJSON(src []byte) error {
+func (v *NullableCreateAssetKUBERNETESCLUSTERRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

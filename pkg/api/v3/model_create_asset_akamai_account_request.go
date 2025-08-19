@@ -15,11 +15,11 @@ import (
 	"fmt"
 )
 
-// checks if the CreateAssetAKAMAIRequest type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &CreateAssetAKAMAIRequest{}
+// checks if the CreateAssetAKAMAIACCOUNTRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CreateAssetAKAMAIACCOUNTRequest{}
 
-// CreateAssetAKAMAIRequest struct for CreateAssetAKAMAIRequest
-type CreateAssetAKAMAIRequest struct {
+// CreateAssetAKAMAIACCOUNTRequest struct for CreateAssetAKAMAIACCOUNTRequest
+type CreateAssetAKAMAIACCOUNTRequest struct {
 	AssetClass ENUMCDN `json:"asset_class"`
 	AssetType ENUMAKAMAIACCOUNT `json:"asset_type"`
 	Name *string `json:"name,omitempty"`
@@ -30,14 +30,14 @@ type CreateAssetAKAMAIRequest struct {
 	AdditionalProperties map[string]interface{}
 }
 
-type _CreateAssetAKAMAIRequest CreateAssetAKAMAIRequest
+type _CreateAssetAKAMAIACCOUNTRequest CreateAssetAKAMAIACCOUNTRequest
 
-// NewCreateAssetAKAMAIRequest instantiates a new CreateAssetAKAMAIRequest object
+// NewCreateAssetAKAMAIACCOUNTRequest instantiates a new CreateAssetAKAMAIACCOUNTRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetAKAMAIRequest(assetClass ENUMCDN, assetType ENUMAKAMAIACCOUNT, host string, clientSecret string, accessToken string, clientToken string) *CreateAssetAKAMAIRequest {
-	this := CreateAssetAKAMAIRequest{}
+func NewCreateAssetAKAMAIACCOUNTRequest(assetClass ENUMCDN, assetType ENUMAKAMAIACCOUNT, host string, clientSecret string, accessToken string, clientToken string) *CreateAssetAKAMAIACCOUNTRequest {
+	this := CreateAssetAKAMAIACCOUNTRequest{}
 	this.AssetClass = assetClass
 	this.AssetType = assetType
 	this.Host = host
@@ -47,16 +47,16 @@ func NewCreateAssetAKAMAIRequest(assetClass ENUMCDN, assetType ENUMAKAMAIACCOUNT
 	return &this
 }
 
-// NewCreateAssetAKAMAIRequestWithDefaults instantiates a new CreateAssetAKAMAIRequest object
+// NewCreateAssetAKAMAIACCOUNTRequestWithDefaults instantiates a new CreateAssetAKAMAIACCOUNTRequest object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCreateAssetAKAMAIRequestWithDefaults() *CreateAssetAKAMAIRequest {
-	this := CreateAssetAKAMAIRequest{}
+func NewCreateAssetAKAMAIACCOUNTRequestWithDefaults() *CreateAssetAKAMAIACCOUNTRequest {
+	this := CreateAssetAKAMAIACCOUNTRequest{}
 	return &this
 }
 
 // GetAssetClass returns the AssetClass field value
-func (o *CreateAssetAKAMAIRequest) GetAssetClass() ENUMCDN {
+func (o *CreateAssetAKAMAIACCOUNTRequest) GetAssetClass() ENUMCDN {
 	if o == nil {
 		var ret ENUMCDN
 		return ret
@@ -67,7 +67,7 @@ func (o *CreateAssetAKAMAIRequest) GetAssetClass() ENUMCDN {
 
 // GetAssetClassOk returns a tuple with the AssetClass field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetAKAMAIRequest) GetAssetClassOk() (*ENUMCDN, bool) {
+func (o *CreateAssetAKAMAIACCOUNTRequest) GetAssetClassOk() (*ENUMCDN, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -75,12 +75,12 @@ func (o *CreateAssetAKAMAIRequest) GetAssetClassOk() (*ENUMCDN, bool) {
 }
 
 // SetAssetClass sets field value
-func (o *CreateAssetAKAMAIRequest) SetAssetClass(v ENUMCDN) {
+func (o *CreateAssetAKAMAIACCOUNTRequest) SetAssetClass(v ENUMCDN) {
 	o.AssetClass = v
 }
 
 // GetAssetType returns the AssetType field value
-func (o *CreateAssetAKAMAIRequest) GetAssetType() ENUMAKAMAIACCOUNT {
+func (o *CreateAssetAKAMAIACCOUNTRequest) GetAssetType() ENUMAKAMAIACCOUNT {
 	if o == nil {
 		var ret ENUMAKAMAIACCOUNT
 		return ret
@@ -91,7 +91,7 @@ func (o *CreateAssetAKAMAIRequest) GetAssetType() ENUMAKAMAIACCOUNT {
 
 // GetAssetTypeOk returns a tuple with the AssetType field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetAKAMAIRequest) GetAssetTypeOk() (*ENUMAKAMAIACCOUNT, bool) {
+func (o *CreateAssetAKAMAIACCOUNTRequest) GetAssetTypeOk() (*ENUMAKAMAIACCOUNT, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -99,12 +99,12 @@ func (o *CreateAssetAKAMAIRequest) GetAssetTypeOk() (*ENUMAKAMAIACCOUNT, bool) {
 }
 
 // SetAssetType sets field value
-func (o *CreateAssetAKAMAIRequest) SetAssetType(v ENUMAKAMAIACCOUNT) {
+func (o *CreateAssetAKAMAIACCOUNTRequest) SetAssetType(v ENUMAKAMAIACCOUNT) {
 	o.AssetType = v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
-func (o *CreateAssetAKAMAIRequest) GetName() string {
+func (o *CreateAssetAKAMAIACCOUNTRequest) GetName() string {
 	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
@@ -114,7 +114,7 @@ func (o *CreateAssetAKAMAIRequest) GetName() string {
 
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetAKAMAIRequest) GetNameOk() (*string, bool) {
+func (o *CreateAssetAKAMAIACCOUNTRequest) GetNameOk() (*string, bool) {
 	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
@@ -122,7 +122,7 @@ func (o *CreateAssetAKAMAIRequest) GetNameOk() (*string, bool) {
 }
 
 // HasName returns a boolean if a field has been set.
-func (o *CreateAssetAKAMAIRequest) HasName() bool {
+func (o *CreateAssetAKAMAIACCOUNTRequest) HasName() bool {
 	if o != nil && !IsNil(o.Name) {
 		return true
 	}
@@ -131,12 +131,12 @@ func (o *CreateAssetAKAMAIRequest) HasName() bool {
 }
 
 // SetName gets a reference to the given string and assigns it to the Name field.
-func (o *CreateAssetAKAMAIRequest) SetName(v string) {
+func (o *CreateAssetAKAMAIACCOUNTRequest) SetName(v string) {
 	o.Name = &v
 }
 
 // GetHost returns the Host field value
-func (o *CreateAssetAKAMAIRequest) GetHost() string {
+func (o *CreateAssetAKAMAIACCOUNTRequest) GetHost() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -147,7 +147,7 @@ func (o *CreateAssetAKAMAIRequest) GetHost() string {
 
 // GetHostOk returns a tuple with the Host field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetAKAMAIRequest) GetHostOk() (*string, bool) {
+func (o *CreateAssetAKAMAIACCOUNTRequest) GetHostOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -155,12 +155,12 @@ func (o *CreateAssetAKAMAIRequest) GetHostOk() (*string, bool) {
 }
 
 // SetHost sets field value
-func (o *CreateAssetAKAMAIRequest) SetHost(v string) {
+func (o *CreateAssetAKAMAIACCOUNTRequest) SetHost(v string) {
 	o.Host = v
 }
 
 // GetClientSecret returns the ClientSecret field value
-func (o *CreateAssetAKAMAIRequest) GetClientSecret() string {
+func (o *CreateAssetAKAMAIACCOUNTRequest) GetClientSecret() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -171,7 +171,7 @@ func (o *CreateAssetAKAMAIRequest) GetClientSecret() string {
 
 // GetClientSecretOk returns a tuple with the ClientSecret field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetAKAMAIRequest) GetClientSecretOk() (*string, bool) {
+func (o *CreateAssetAKAMAIACCOUNTRequest) GetClientSecretOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -179,12 +179,12 @@ func (o *CreateAssetAKAMAIRequest) GetClientSecretOk() (*string, bool) {
 }
 
 // SetClientSecret sets field value
-func (o *CreateAssetAKAMAIRequest) SetClientSecret(v string) {
+func (o *CreateAssetAKAMAIACCOUNTRequest) SetClientSecret(v string) {
 	o.ClientSecret = v
 }
 
 // GetAccessToken returns the AccessToken field value
-func (o *CreateAssetAKAMAIRequest) GetAccessToken() string {
+func (o *CreateAssetAKAMAIACCOUNTRequest) GetAccessToken() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -195,7 +195,7 @@ func (o *CreateAssetAKAMAIRequest) GetAccessToken() string {
 
 // GetAccessTokenOk returns a tuple with the AccessToken field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetAKAMAIRequest) GetAccessTokenOk() (*string, bool) {
+func (o *CreateAssetAKAMAIACCOUNTRequest) GetAccessTokenOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -203,12 +203,12 @@ func (o *CreateAssetAKAMAIRequest) GetAccessTokenOk() (*string, bool) {
 }
 
 // SetAccessToken sets field value
-func (o *CreateAssetAKAMAIRequest) SetAccessToken(v string) {
+func (o *CreateAssetAKAMAIACCOUNTRequest) SetAccessToken(v string) {
 	o.AccessToken = v
 }
 
 // GetClientToken returns the ClientToken field value
-func (o *CreateAssetAKAMAIRequest) GetClientToken() string {
+func (o *CreateAssetAKAMAIACCOUNTRequest) GetClientToken() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -219,7 +219,7 @@ func (o *CreateAssetAKAMAIRequest) GetClientToken() string {
 
 // GetClientTokenOk returns a tuple with the ClientToken field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetAKAMAIRequest) GetClientTokenOk() (*string, bool) {
+func (o *CreateAssetAKAMAIACCOUNTRequest) GetClientTokenOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -227,11 +227,11 @@ func (o *CreateAssetAKAMAIRequest) GetClientTokenOk() (*string, bool) {
 }
 
 // SetClientToken sets field value
-func (o *CreateAssetAKAMAIRequest) SetClientToken(v string) {
+func (o *CreateAssetAKAMAIACCOUNTRequest) SetClientToken(v string) {
 	o.ClientToken = v
 }
 
-func (o CreateAssetAKAMAIRequest) MarshalJSON() ([]byte, error) {
+func (o CreateAssetAKAMAIACCOUNTRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -239,7 +239,7 @@ func (o CreateAssetAKAMAIRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CreateAssetAKAMAIRequest) ToMap() (map[string]interface{}, error) {
+func (o CreateAssetAKAMAIACCOUNTRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["asset_class"] = o.AssetClass
 	toSerialize["asset_type"] = o.AssetType
@@ -258,7 +258,7 @@ func (o CreateAssetAKAMAIRequest) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *CreateAssetAKAMAIRequest) UnmarshalJSON(data []byte) (err error) {
+func (o *CreateAssetAKAMAIACCOUNTRequest) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -285,15 +285,15 @@ func (o *CreateAssetAKAMAIRequest) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varCreateAssetAKAMAIRequest := _CreateAssetAKAMAIRequest{}
+	varCreateAssetAKAMAIACCOUNTRequest := _CreateAssetAKAMAIACCOUNTRequest{}
 
-	err = json.Unmarshal(data, &varCreateAssetAKAMAIRequest)
+	err = json.Unmarshal(data, &varCreateAssetAKAMAIACCOUNTRequest)
 
 	if err != nil {
 		return err
 	}
 
-	*o = CreateAssetAKAMAIRequest(varCreateAssetAKAMAIRequest)
+	*o = CreateAssetAKAMAIACCOUNTRequest(varCreateAssetAKAMAIACCOUNTRequest)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -311,38 +311,38 @@ func (o *CreateAssetAKAMAIRequest) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableCreateAssetAKAMAIRequest struct {
-	value *CreateAssetAKAMAIRequest
+type NullableCreateAssetAKAMAIACCOUNTRequest struct {
+	value *CreateAssetAKAMAIACCOUNTRequest
 	isSet bool
 }
 
-func (v NullableCreateAssetAKAMAIRequest) Get() *CreateAssetAKAMAIRequest {
+func (v NullableCreateAssetAKAMAIACCOUNTRequest) Get() *CreateAssetAKAMAIACCOUNTRequest {
 	return v.value
 }
 
-func (v *NullableCreateAssetAKAMAIRequest) Set(val *CreateAssetAKAMAIRequest) {
+func (v *NullableCreateAssetAKAMAIACCOUNTRequest) Set(val *CreateAssetAKAMAIACCOUNTRequest) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCreateAssetAKAMAIRequest) IsSet() bool {
+func (v NullableCreateAssetAKAMAIACCOUNTRequest) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCreateAssetAKAMAIRequest) Unset() {
+func (v *NullableCreateAssetAKAMAIACCOUNTRequest) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCreateAssetAKAMAIRequest(val *CreateAssetAKAMAIRequest) *NullableCreateAssetAKAMAIRequest {
-	return &NullableCreateAssetAKAMAIRequest{value: val, isSet: true}
+func NewNullableCreateAssetAKAMAIACCOUNTRequest(val *CreateAssetAKAMAIACCOUNTRequest) *NullableCreateAssetAKAMAIACCOUNTRequest {
+	return &NullableCreateAssetAKAMAIACCOUNTRequest{value: val, isSet: true}
 }
 
-func (v NullableCreateAssetAKAMAIRequest) MarshalJSON() ([]byte, error) {
+func (v NullableCreateAssetAKAMAIACCOUNTRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCreateAssetAKAMAIRequest) UnmarshalJSON(src []byte) error {
+func (v *NullableCreateAssetAKAMAIACCOUNTRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

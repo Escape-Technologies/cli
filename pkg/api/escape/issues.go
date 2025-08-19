@@ -73,7 +73,7 @@ func UpdateIssue(ctx context.Context, issueID string, status v3.ENUMPROPERTIESDA
 }
 
 // ListIssueActivities lists the activities of an issue
-func ListIssueActivities(ctx context.Context, issueID string) (*v3.ActivitySummarized, error) {
+func ListIssueActivities(ctx context.Context, issueID string) ([]v3.ActivitySummarized, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)

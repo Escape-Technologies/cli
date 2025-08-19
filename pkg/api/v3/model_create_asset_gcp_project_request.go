@@ -15,11 +15,11 @@ import (
 	"fmt"
 )
 
-// checks if the CreateAssetGCPRequest type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &CreateAssetGCPRequest{}
+// checks if the CreateAssetGCPPROJECTRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CreateAssetGCPPROJECTRequest{}
 
-// CreateAssetGCPRequest struct for CreateAssetGCPRequest
-type CreateAssetGCPRequest struct {
+// CreateAssetGCPPROJECTRequest struct for CreateAssetGCPPROJECTRequest
+type CreateAssetGCPPROJECTRequest struct {
 	AssetClass ENUMCLOUDHOSTING `json:"asset_class"`
 	AssetType ENUMGCPPROJECT `json:"asset_type"`
 	Name *string `json:"name,omitempty"`
@@ -36,14 +36,14 @@ type CreateAssetGCPRequest struct {
 	AdditionalProperties map[string]interface{}
 }
 
-type _CreateAssetGCPRequest CreateAssetGCPRequest
+type _CreateAssetGCPPROJECTRequest CreateAssetGCPPROJECTRequest
 
-// NewCreateAssetGCPRequest instantiates a new CreateAssetGCPRequest object
+// NewCreateAssetGCPPROJECTRequest instantiates a new CreateAssetGCPPROJECTRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetGCPRequest(assetClass ENUMCLOUDHOSTING, assetType ENUMGCPPROJECT, authProviderX509CertUrl string, authUri string, clientEmail string, clientId string, clientX509CertUrl string, privateKey string, privateKeyId string, tokenUri string, universeDomain string, projectId string) *CreateAssetGCPRequest {
-	this := CreateAssetGCPRequest{}
+func NewCreateAssetGCPPROJECTRequest(assetClass ENUMCLOUDHOSTING, assetType ENUMGCPPROJECT, authProviderX509CertUrl string, authUri string, clientEmail string, clientId string, clientX509CertUrl string, privateKey string, privateKeyId string, tokenUri string, universeDomain string, projectId string) *CreateAssetGCPPROJECTRequest {
+	this := CreateAssetGCPPROJECTRequest{}
 	this.AssetClass = assetClass
 	this.AssetType = assetType
 	this.AuthProviderX509CertUrl = authProviderX509CertUrl
@@ -59,16 +59,16 @@ func NewCreateAssetGCPRequest(assetClass ENUMCLOUDHOSTING, assetType ENUMGCPPROJ
 	return &this
 }
 
-// NewCreateAssetGCPRequestWithDefaults instantiates a new CreateAssetGCPRequest object
+// NewCreateAssetGCPPROJECTRequestWithDefaults instantiates a new CreateAssetGCPPROJECTRequest object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCreateAssetGCPRequestWithDefaults() *CreateAssetGCPRequest {
-	this := CreateAssetGCPRequest{}
+func NewCreateAssetGCPPROJECTRequestWithDefaults() *CreateAssetGCPPROJECTRequest {
+	this := CreateAssetGCPPROJECTRequest{}
 	return &this
 }
 
 // GetAssetClass returns the AssetClass field value
-func (o *CreateAssetGCPRequest) GetAssetClass() ENUMCLOUDHOSTING {
+func (o *CreateAssetGCPPROJECTRequest) GetAssetClass() ENUMCLOUDHOSTING {
 	if o == nil {
 		var ret ENUMCLOUDHOSTING
 		return ret
@@ -79,7 +79,7 @@ func (o *CreateAssetGCPRequest) GetAssetClass() ENUMCLOUDHOSTING {
 
 // GetAssetClassOk returns a tuple with the AssetClass field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGCPRequest) GetAssetClassOk() (*ENUMCLOUDHOSTING, bool) {
+func (o *CreateAssetGCPPROJECTRequest) GetAssetClassOk() (*ENUMCLOUDHOSTING, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -87,12 +87,12 @@ func (o *CreateAssetGCPRequest) GetAssetClassOk() (*ENUMCLOUDHOSTING, bool) {
 }
 
 // SetAssetClass sets field value
-func (o *CreateAssetGCPRequest) SetAssetClass(v ENUMCLOUDHOSTING) {
+func (o *CreateAssetGCPPROJECTRequest) SetAssetClass(v ENUMCLOUDHOSTING) {
 	o.AssetClass = v
 }
 
 // GetAssetType returns the AssetType field value
-func (o *CreateAssetGCPRequest) GetAssetType() ENUMGCPPROJECT {
+func (o *CreateAssetGCPPROJECTRequest) GetAssetType() ENUMGCPPROJECT {
 	if o == nil {
 		var ret ENUMGCPPROJECT
 		return ret
@@ -103,7 +103,7 @@ func (o *CreateAssetGCPRequest) GetAssetType() ENUMGCPPROJECT {
 
 // GetAssetTypeOk returns a tuple with the AssetType field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGCPRequest) GetAssetTypeOk() (*ENUMGCPPROJECT, bool) {
+func (o *CreateAssetGCPPROJECTRequest) GetAssetTypeOk() (*ENUMGCPPROJECT, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -111,12 +111,12 @@ func (o *CreateAssetGCPRequest) GetAssetTypeOk() (*ENUMGCPPROJECT, bool) {
 }
 
 // SetAssetType sets field value
-func (o *CreateAssetGCPRequest) SetAssetType(v ENUMGCPPROJECT) {
+func (o *CreateAssetGCPPROJECTRequest) SetAssetType(v ENUMGCPPROJECT) {
 	o.AssetType = v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
-func (o *CreateAssetGCPRequest) GetName() string {
+func (o *CreateAssetGCPPROJECTRequest) GetName() string {
 	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
@@ -126,7 +126,7 @@ func (o *CreateAssetGCPRequest) GetName() string {
 
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGCPRequest) GetNameOk() (*string, bool) {
+func (o *CreateAssetGCPPROJECTRequest) GetNameOk() (*string, bool) {
 	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
@@ -134,7 +134,7 @@ func (o *CreateAssetGCPRequest) GetNameOk() (*string, bool) {
 }
 
 // HasName returns a boolean if a field has been set.
-func (o *CreateAssetGCPRequest) HasName() bool {
+func (o *CreateAssetGCPPROJECTRequest) HasName() bool {
 	if o != nil && !IsNil(o.Name) {
 		return true
 	}
@@ -143,12 +143,12 @@ func (o *CreateAssetGCPRequest) HasName() bool {
 }
 
 // SetName gets a reference to the given string and assigns it to the Name field.
-func (o *CreateAssetGCPRequest) SetName(v string) {
+func (o *CreateAssetGCPPROJECTRequest) SetName(v string) {
 	o.Name = &v
 }
 
 // GetAuthProviderX509CertUrl returns the AuthProviderX509CertUrl field value
-func (o *CreateAssetGCPRequest) GetAuthProviderX509CertUrl() string {
+func (o *CreateAssetGCPPROJECTRequest) GetAuthProviderX509CertUrl() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -159,7 +159,7 @@ func (o *CreateAssetGCPRequest) GetAuthProviderX509CertUrl() string {
 
 // GetAuthProviderX509CertUrlOk returns a tuple with the AuthProviderX509CertUrl field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGCPRequest) GetAuthProviderX509CertUrlOk() (*string, bool) {
+func (o *CreateAssetGCPPROJECTRequest) GetAuthProviderX509CertUrlOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -167,12 +167,12 @@ func (o *CreateAssetGCPRequest) GetAuthProviderX509CertUrlOk() (*string, bool) {
 }
 
 // SetAuthProviderX509CertUrl sets field value
-func (o *CreateAssetGCPRequest) SetAuthProviderX509CertUrl(v string) {
+func (o *CreateAssetGCPPROJECTRequest) SetAuthProviderX509CertUrl(v string) {
 	o.AuthProviderX509CertUrl = v
 }
 
 // GetAuthUri returns the AuthUri field value
-func (o *CreateAssetGCPRequest) GetAuthUri() string {
+func (o *CreateAssetGCPPROJECTRequest) GetAuthUri() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -183,7 +183,7 @@ func (o *CreateAssetGCPRequest) GetAuthUri() string {
 
 // GetAuthUriOk returns a tuple with the AuthUri field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGCPRequest) GetAuthUriOk() (*string, bool) {
+func (o *CreateAssetGCPPROJECTRequest) GetAuthUriOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -191,12 +191,12 @@ func (o *CreateAssetGCPRequest) GetAuthUriOk() (*string, bool) {
 }
 
 // SetAuthUri sets field value
-func (o *CreateAssetGCPRequest) SetAuthUri(v string) {
+func (o *CreateAssetGCPPROJECTRequest) SetAuthUri(v string) {
 	o.AuthUri = v
 }
 
 // GetClientEmail returns the ClientEmail field value
-func (o *CreateAssetGCPRequest) GetClientEmail() string {
+func (o *CreateAssetGCPPROJECTRequest) GetClientEmail() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -207,7 +207,7 @@ func (o *CreateAssetGCPRequest) GetClientEmail() string {
 
 // GetClientEmailOk returns a tuple with the ClientEmail field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGCPRequest) GetClientEmailOk() (*string, bool) {
+func (o *CreateAssetGCPPROJECTRequest) GetClientEmailOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -215,12 +215,12 @@ func (o *CreateAssetGCPRequest) GetClientEmailOk() (*string, bool) {
 }
 
 // SetClientEmail sets field value
-func (o *CreateAssetGCPRequest) SetClientEmail(v string) {
+func (o *CreateAssetGCPPROJECTRequest) SetClientEmail(v string) {
 	o.ClientEmail = v
 }
 
 // GetClientId returns the ClientId field value
-func (o *CreateAssetGCPRequest) GetClientId() string {
+func (o *CreateAssetGCPPROJECTRequest) GetClientId() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -231,7 +231,7 @@ func (o *CreateAssetGCPRequest) GetClientId() string {
 
 // GetClientIdOk returns a tuple with the ClientId field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGCPRequest) GetClientIdOk() (*string, bool) {
+func (o *CreateAssetGCPPROJECTRequest) GetClientIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -239,12 +239,12 @@ func (o *CreateAssetGCPRequest) GetClientIdOk() (*string, bool) {
 }
 
 // SetClientId sets field value
-func (o *CreateAssetGCPRequest) SetClientId(v string) {
+func (o *CreateAssetGCPPROJECTRequest) SetClientId(v string) {
 	o.ClientId = v
 }
 
 // GetClientX509CertUrl returns the ClientX509CertUrl field value
-func (o *CreateAssetGCPRequest) GetClientX509CertUrl() string {
+func (o *CreateAssetGCPPROJECTRequest) GetClientX509CertUrl() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -255,7 +255,7 @@ func (o *CreateAssetGCPRequest) GetClientX509CertUrl() string {
 
 // GetClientX509CertUrlOk returns a tuple with the ClientX509CertUrl field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGCPRequest) GetClientX509CertUrlOk() (*string, bool) {
+func (o *CreateAssetGCPPROJECTRequest) GetClientX509CertUrlOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -263,12 +263,12 @@ func (o *CreateAssetGCPRequest) GetClientX509CertUrlOk() (*string, bool) {
 }
 
 // SetClientX509CertUrl sets field value
-func (o *CreateAssetGCPRequest) SetClientX509CertUrl(v string) {
+func (o *CreateAssetGCPPROJECTRequest) SetClientX509CertUrl(v string) {
 	o.ClientX509CertUrl = v
 }
 
 // GetPrivateKey returns the PrivateKey field value
-func (o *CreateAssetGCPRequest) GetPrivateKey() string {
+func (o *CreateAssetGCPPROJECTRequest) GetPrivateKey() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -279,7 +279,7 @@ func (o *CreateAssetGCPRequest) GetPrivateKey() string {
 
 // GetPrivateKeyOk returns a tuple with the PrivateKey field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGCPRequest) GetPrivateKeyOk() (*string, bool) {
+func (o *CreateAssetGCPPROJECTRequest) GetPrivateKeyOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -287,12 +287,12 @@ func (o *CreateAssetGCPRequest) GetPrivateKeyOk() (*string, bool) {
 }
 
 // SetPrivateKey sets field value
-func (o *CreateAssetGCPRequest) SetPrivateKey(v string) {
+func (o *CreateAssetGCPPROJECTRequest) SetPrivateKey(v string) {
 	o.PrivateKey = v
 }
 
 // GetPrivateKeyId returns the PrivateKeyId field value
-func (o *CreateAssetGCPRequest) GetPrivateKeyId() string {
+func (o *CreateAssetGCPPROJECTRequest) GetPrivateKeyId() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -303,7 +303,7 @@ func (o *CreateAssetGCPRequest) GetPrivateKeyId() string {
 
 // GetPrivateKeyIdOk returns a tuple with the PrivateKeyId field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGCPRequest) GetPrivateKeyIdOk() (*string, bool) {
+func (o *CreateAssetGCPPROJECTRequest) GetPrivateKeyIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -311,12 +311,12 @@ func (o *CreateAssetGCPRequest) GetPrivateKeyIdOk() (*string, bool) {
 }
 
 // SetPrivateKeyId sets field value
-func (o *CreateAssetGCPRequest) SetPrivateKeyId(v string) {
+func (o *CreateAssetGCPPROJECTRequest) SetPrivateKeyId(v string) {
 	o.PrivateKeyId = v
 }
 
 // GetTokenUri returns the TokenUri field value
-func (o *CreateAssetGCPRequest) GetTokenUri() string {
+func (o *CreateAssetGCPPROJECTRequest) GetTokenUri() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -327,7 +327,7 @@ func (o *CreateAssetGCPRequest) GetTokenUri() string {
 
 // GetTokenUriOk returns a tuple with the TokenUri field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGCPRequest) GetTokenUriOk() (*string, bool) {
+func (o *CreateAssetGCPPROJECTRequest) GetTokenUriOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -335,12 +335,12 @@ func (o *CreateAssetGCPRequest) GetTokenUriOk() (*string, bool) {
 }
 
 // SetTokenUri sets field value
-func (o *CreateAssetGCPRequest) SetTokenUri(v string) {
+func (o *CreateAssetGCPPROJECTRequest) SetTokenUri(v string) {
 	o.TokenUri = v
 }
 
 // GetUniverseDomain returns the UniverseDomain field value
-func (o *CreateAssetGCPRequest) GetUniverseDomain() string {
+func (o *CreateAssetGCPPROJECTRequest) GetUniverseDomain() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -351,7 +351,7 @@ func (o *CreateAssetGCPRequest) GetUniverseDomain() string {
 
 // GetUniverseDomainOk returns a tuple with the UniverseDomain field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGCPRequest) GetUniverseDomainOk() (*string, bool) {
+func (o *CreateAssetGCPPROJECTRequest) GetUniverseDomainOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -359,12 +359,12 @@ func (o *CreateAssetGCPRequest) GetUniverseDomainOk() (*string, bool) {
 }
 
 // SetUniverseDomain sets field value
-func (o *CreateAssetGCPRequest) SetUniverseDomain(v string) {
+func (o *CreateAssetGCPPROJECTRequest) SetUniverseDomain(v string) {
 	o.UniverseDomain = v
 }
 
 // GetProjectId returns the ProjectId field value
-func (o *CreateAssetGCPRequest) GetProjectId() string {
+func (o *CreateAssetGCPPROJECTRequest) GetProjectId() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -375,7 +375,7 @@ func (o *CreateAssetGCPRequest) GetProjectId() string {
 
 // GetProjectIdOk returns a tuple with the ProjectId field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGCPRequest) GetProjectIdOk() (*string, bool) {
+func (o *CreateAssetGCPPROJECTRequest) GetProjectIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -383,11 +383,11 @@ func (o *CreateAssetGCPRequest) GetProjectIdOk() (*string, bool) {
 }
 
 // SetProjectId sets field value
-func (o *CreateAssetGCPRequest) SetProjectId(v string) {
+func (o *CreateAssetGCPPROJECTRequest) SetProjectId(v string) {
 	o.ProjectId = v
 }
 
-func (o CreateAssetGCPRequest) MarshalJSON() ([]byte, error) {
+func (o CreateAssetGCPPROJECTRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -395,7 +395,7 @@ func (o CreateAssetGCPRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CreateAssetGCPRequest) ToMap() (map[string]interface{}, error) {
+func (o CreateAssetGCPPROJECTRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["asset_class"] = o.AssetClass
 	toSerialize["asset_type"] = o.AssetType
@@ -420,7 +420,7 @@ func (o CreateAssetGCPRequest) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *CreateAssetGCPRequest) UnmarshalJSON(data []byte) (err error) {
+func (o *CreateAssetGCPPROJECTRequest) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -453,15 +453,15 @@ func (o *CreateAssetGCPRequest) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varCreateAssetGCPRequest := _CreateAssetGCPRequest{}
+	varCreateAssetGCPPROJECTRequest := _CreateAssetGCPPROJECTRequest{}
 
-	err = json.Unmarshal(data, &varCreateAssetGCPRequest)
+	err = json.Unmarshal(data, &varCreateAssetGCPPROJECTRequest)
 
 	if err != nil {
 		return err
 	}
 
-	*o = CreateAssetGCPRequest(varCreateAssetGCPRequest)
+	*o = CreateAssetGCPPROJECTRequest(varCreateAssetGCPPROJECTRequest)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -485,38 +485,38 @@ func (o *CreateAssetGCPRequest) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableCreateAssetGCPRequest struct {
-	value *CreateAssetGCPRequest
+type NullableCreateAssetGCPPROJECTRequest struct {
+	value *CreateAssetGCPPROJECTRequest
 	isSet bool
 }
 
-func (v NullableCreateAssetGCPRequest) Get() *CreateAssetGCPRequest {
+func (v NullableCreateAssetGCPPROJECTRequest) Get() *CreateAssetGCPPROJECTRequest {
 	return v.value
 }
 
-func (v *NullableCreateAssetGCPRequest) Set(val *CreateAssetGCPRequest) {
+func (v *NullableCreateAssetGCPPROJECTRequest) Set(val *CreateAssetGCPPROJECTRequest) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCreateAssetGCPRequest) IsSet() bool {
+func (v NullableCreateAssetGCPPROJECTRequest) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCreateAssetGCPRequest) Unset() {
+func (v *NullableCreateAssetGCPPROJECTRequest) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCreateAssetGCPRequest(val *CreateAssetGCPRequest) *NullableCreateAssetGCPRequest {
-	return &NullableCreateAssetGCPRequest{value: val, isSet: true}
+func NewNullableCreateAssetGCPPROJECTRequest(val *CreateAssetGCPPROJECTRequest) *NullableCreateAssetGCPPROJECTRequest {
+	return &NullableCreateAssetGCPPROJECTRequest{value: val, isSet: true}
 }
 
-func (v NullableCreateAssetGCPRequest) MarshalJSON() ([]byte, error) {
+func (v NullableCreateAssetGCPPROJECTRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCreateAssetGCPRequest) UnmarshalJSON(src []byte) error {
+func (v *NullableCreateAssetGCPPROJECTRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

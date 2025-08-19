@@ -33,32 +33,37 @@ var issueListCmd = &cobra.Command{
 	Long: `List issues.
 
 Example output:
-ID                                      SEVERITY    CATEGORY                  NAME                     STATUS          ASSET                                  CREATED AT                  LINK
-00000000-0000-0000-0000-000000000001    HIGH        INJECTION                 XXE Injection            OPEN            https://gontoz.escape.tech/            2025-06-26T06:03:26.128Z    https://app.escape.tech/all-risks/issues/00000000-0000-0000-0000-000000000001/overview/`,
+ID                                      CREATED AT                  	LINK       												SEVERITY    CATEGORY                  STATUS        NAME                     ASSET
+00000000-0000-0000-0000-000000000001    2025-06-26T06:03:26.128Z        https://app.escape.tech/all-risks/issues/00000000-0000-0000-0000-000000000001/overview/       HIGH          XXE Injection            https://gontoz.escape.tech/`,
 	Example: `escape-cli issues list`, RunE: func(cmd *cobra.Command, _ []string) error {
 		issues, next, err := escape.ListIssues(cmd.Context(), "", issueStatus, issueSeverity)
 		if err != nil {
 			return fmt.Errorf("unable to list issues: %w", err)
 		}
 
-		result := []string{"ID\tSEVERITY\tCATEGORY\tNAME\tSTATUS\tASSET\tCREATED AT\tLINK"}
+		result := []string{"ID\tCREATED AT\tLINK\tSEVERITY\tCATEGORY\tSTATUS\tNAME\tASSET"}
 		for _, issue := range issues {
-			result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s", issue.GetId(), issue.GetSeverity(), issue.GetCategory(), issue.GetName(), issue.GetStatus(), issue.GetAsset().Name, issue.GetCreatedAt(), issue.GetLinks().IssueOverview))
+			result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s", issue.GetId(), issue.GetCreatedAt(), issue.GetLinks().IssueOverview, issue.GetSeverity(), issue.GetCategory(), issue.GetStatus(), issue.GetName(), issue.GetAsset().Name))
 		}
+		out.Table(result, func() []string {
+			return result
+		})
 
 		for next != nil && *next != "" {
+			result = []string{
+				"ID\tCREATED AT\tLINK\tSEVERITY\tCATEGORY\tSTATUS\tNAME\tASSET",
+			}
 			issues, next, err = escape.ListIssues(cmd.Context(), *next, issueStatus, issueSeverity)
 			if err != nil {
 				return fmt.Errorf("unable to list profiles: %w", err)
 			}
 			for _, issue := range issues {
-				result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s", issue.GetId(), issue.GetSeverity(), issue.GetCategory(), issue.GetName(), issue.GetAsset().Name, issue.GetCreatedAt(), issue.GetLinks().IssueOverview))
+				result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s", issue.GetId(), issue.GetCreatedAt(), issue.GetLinks().IssueOverview, issue.GetSeverity(), issue.GetCategory(), issue.GetStatus(), issue.GetName(), issue.GetAsset().Name))
 			}
+			out.Table(result, func() []string {
+				return result
+			})
 		}
-
-		out.Table(result, func() []string {
-			return result
-		})
 
 		return nil
 	},
@@ -71,8 +76,8 @@ var issueGetCmd = &cobra.Command{
 	Long: `Get a profile by ID.
 
 Example output:
-SEVERITY    CATEGORY    NAME                                  STATUS    ASSET                     CREATED AT                  LINK
-INFO        PROTOCOL    Misconfigured Cache Control Header    OPEN      https://assets.com        2025-06-27T06:02:18.874Z    https://app.escape.tech/all-risks/issues/00000000-0000-0000-0000-000000000001/overview/`,
+ID                                      CREATED AT                  	LINK       												SEVERITY    CATEGORY                  STATUS        NAME                     ASSET
+00000000-0000-0000-0000-000000000001    2025-06-26T06:03:26.128Z        https://app.escape.tech/all-risks/issues/00000000-0000-0000-0000-000000000001/overview/       HIGH          XXE Injection            https://gontoz.escape.tech/`,
 	Example: `escape-cli profiles get 00000000-0000-0000-0000-000000000001`,
 	Args:    cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
@@ -82,8 +87,8 @@ INFO        PROTOCOL    Misconfigured Cache Control Header    OPEN      https://
 			return fmt.Errorf("unable to get issue %s: %w", issueID, err)
 		}
 
-		result := []string{"SEVERITY\tCATEGORY\tNAME\tSTATUS\tASSET\tCREATED AT\tLINK"}
-		result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s", issue.GetSeverity(), issue.GetCategory(), issue.GetName(), issue.GetStatus(), issue.GetAsset().Name, issue.GetCreatedAt(), issue.GetLinks().IssueOverview))
+		result := []string{"ID\tCREATED AT\tLINK\tSEVERITY\tCATEGORY\tSTATUS\tNAME\tASSET"}
+		result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s", issue.GetId(), issue.GetCreatedAt(), issue.GetLinks().IssueOverview, issue.GetSeverity(), issue.GetCategory(), issue.GetStatus(), issue.GetName(), issue.GetAsset().Name))
 
 		out.Table(result, func() []string {
 			return result
@@ -148,8 +153,17 @@ ID                                      KIND    CREATED AT
 			return fmt.Errorf("unable to list activities: %w", err)
 		}
 
-		result := []string{"ID\tKIND\tCREATED AT"}
-		result = append(result, fmt.Sprintf("%s\t%s\t%s", activities.GetId(), activities.GetKind(), activities.GetCreatedAt()))
+		result := []string{"ID\tCREATED AT\tKIND\tAUTHOR ID\tAUTHOR EMAIL"}
+		for _, activity := range activities {
+			author := activity.GetAuthor()
+			authorID := "null"
+			authorEmail := "null"
+			if author.GetId() != "" || author.GetEmail() != "" {
+				authorID = author.GetId()
+				authorEmail = author.GetEmail()
+			}
+			result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s\t%s", activity.GetId(), activity.GetCreatedAt(), activity.GetKind(), authorID, authorEmail))
+		}
 
 		out.Table(result, func() []string {
 			return result

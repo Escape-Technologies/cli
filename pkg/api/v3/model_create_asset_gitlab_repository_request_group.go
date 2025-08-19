@@ -15,11 +15,11 @@ import (
 	"fmt"
 )
 
-// checks if the CreateAssetGITLABRequestGroup type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &CreateAssetGITLABRequestGroup{}
+// checks if the CreateAssetGITLABREPOSITORYRequestGroup type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CreateAssetGITLABREPOSITORYRequestGroup{}
 
-// CreateAssetGITLABRequestGroup struct for CreateAssetGITLABRequestGroup
-type CreateAssetGITLABRequestGroup struct {
+// CreateAssetGITLABREPOSITORYRequestGroup struct for CreateAssetGITLABREPOSITORYRequestGroup
+type CreateAssetGITLABREPOSITORYRequestGroup struct {
 	AssetClass ENUMSOURCECODEMANAGEMENT `json:"asset_class"`
 	AssetType ENUMGITLABGROUP `json:"asset_type"`
 	Name *string `json:"name,omitempty"`
@@ -29,30 +29,30 @@ type CreateAssetGITLABRequestGroup struct {
 	AdditionalProperties map[string]interface{}
 }
 
-type _CreateAssetGITLABRequestGroup CreateAssetGITLABRequestGroup
+type _CreateAssetGITLABREPOSITORYRequestGroup CreateAssetGITLABREPOSITORYRequestGroup
 
-// NewCreateAssetGITLABRequestGroup instantiates a new CreateAssetGITLABRequestGroup object
+// NewCreateAssetGITLABREPOSITORYRequestGroup instantiates a new CreateAssetGITLABREPOSITORYRequestGroup object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetGITLABRequestGroup(assetClass ENUMSOURCECODEMANAGEMENT, assetType ENUMGITLABGROUP, apiKey string) *CreateAssetGITLABRequestGroup {
-	this := CreateAssetGITLABRequestGroup{}
+func NewCreateAssetGITLABREPOSITORYRequestGroup(assetClass ENUMSOURCECODEMANAGEMENT, assetType ENUMGITLABGROUP, apiKey string) *CreateAssetGITLABREPOSITORYRequestGroup {
+	this := CreateAssetGITLABREPOSITORYRequestGroup{}
 	this.AssetClass = assetClass
 	this.AssetType = assetType
 	this.ApiKey = apiKey
 	return &this
 }
 
-// NewCreateAssetGITLABRequestGroupWithDefaults instantiates a new CreateAssetGITLABRequestGroup object
+// NewCreateAssetGITLABREPOSITORYRequestGroupWithDefaults instantiates a new CreateAssetGITLABREPOSITORYRequestGroup object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCreateAssetGITLABRequestGroupWithDefaults() *CreateAssetGITLABRequestGroup {
-	this := CreateAssetGITLABRequestGroup{}
+func NewCreateAssetGITLABREPOSITORYRequestGroupWithDefaults() *CreateAssetGITLABREPOSITORYRequestGroup {
+	this := CreateAssetGITLABREPOSITORYRequestGroup{}
 	return &this
 }
 
 // GetAssetClass returns the AssetClass field value
-func (o *CreateAssetGITLABRequestGroup) GetAssetClass() ENUMSOURCECODEMANAGEMENT {
+func (o *CreateAssetGITLABREPOSITORYRequestGroup) GetAssetClass() ENUMSOURCECODEMANAGEMENT {
 	if o == nil {
 		var ret ENUMSOURCECODEMANAGEMENT
 		return ret
@@ -63,7 +63,7 @@ func (o *CreateAssetGITLABRequestGroup) GetAssetClass() ENUMSOURCECODEMANAGEMENT
 
 // GetAssetClassOk returns a tuple with the AssetClass field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGITLABRequestGroup) GetAssetClassOk() (*ENUMSOURCECODEMANAGEMENT, bool) {
+func (o *CreateAssetGITLABREPOSITORYRequestGroup) GetAssetClassOk() (*ENUMSOURCECODEMANAGEMENT, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -71,12 +71,12 @@ func (o *CreateAssetGITLABRequestGroup) GetAssetClassOk() (*ENUMSOURCECODEMANAGE
 }
 
 // SetAssetClass sets field value
-func (o *CreateAssetGITLABRequestGroup) SetAssetClass(v ENUMSOURCECODEMANAGEMENT) {
+func (o *CreateAssetGITLABREPOSITORYRequestGroup) SetAssetClass(v ENUMSOURCECODEMANAGEMENT) {
 	o.AssetClass = v
 }
 
 // GetAssetType returns the AssetType field value
-func (o *CreateAssetGITLABRequestGroup) GetAssetType() ENUMGITLABGROUP {
+func (o *CreateAssetGITLABREPOSITORYRequestGroup) GetAssetType() ENUMGITLABGROUP {
 	if o == nil {
 		var ret ENUMGITLABGROUP
 		return ret
@@ -87,7 +87,7 @@ func (o *CreateAssetGITLABRequestGroup) GetAssetType() ENUMGITLABGROUP {
 
 // GetAssetTypeOk returns a tuple with the AssetType field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGITLABRequestGroup) GetAssetTypeOk() (*ENUMGITLABGROUP, bool) {
+func (o *CreateAssetGITLABREPOSITORYRequestGroup) GetAssetTypeOk() (*ENUMGITLABGROUP, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -95,12 +95,12 @@ func (o *CreateAssetGITLABRequestGroup) GetAssetTypeOk() (*ENUMGITLABGROUP, bool
 }
 
 // SetAssetType sets field value
-func (o *CreateAssetGITLABRequestGroup) SetAssetType(v ENUMGITLABGROUP) {
+func (o *CreateAssetGITLABREPOSITORYRequestGroup) SetAssetType(v ENUMGITLABGROUP) {
 	o.AssetType = v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
-func (o *CreateAssetGITLABRequestGroup) GetName() string {
+func (o *CreateAssetGITLABREPOSITORYRequestGroup) GetName() string {
 	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
@@ -110,7 +110,7 @@ func (o *CreateAssetGITLABRequestGroup) GetName() string {
 
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGITLABRequestGroup) GetNameOk() (*string, bool) {
+func (o *CreateAssetGITLABREPOSITORYRequestGroup) GetNameOk() (*string, bool) {
 	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
@@ -118,7 +118,7 @@ func (o *CreateAssetGITLABRequestGroup) GetNameOk() (*string, bool) {
 }
 
 // HasName returns a boolean if a field has been set.
-func (o *CreateAssetGITLABRequestGroup) HasName() bool {
+func (o *CreateAssetGITLABREPOSITORYRequestGroup) HasName() bool {
 	if o != nil && !IsNil(o.Name) {
 		return true
 	}
@@ -127,12 +127,12 @@ func (o *CreateAssetGITLABRequestGroup) HasName() bool {
 }
 
 // SetName gets a reference to the given string and assigns it to the Name field.
-func (o *CreateAssetGITLABRequestGroup) SetName(v string) {
+func (o *CreateAssetGITLABREPOSITORYRequestGroup) SetName(v string) {
 	o.Name = &v
 }
 
 // GetApiKey returns the ApiKey field value
-func (o *CreateAssetGITLABRequestGroup) GetApiKey() string {
+func (o *CreateAssetGITLABREPOSITORYRequestGroup) GetApiKey() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -143,7 +143,7 @@ func (o *CreateAssetGITLABRequestGroup) GetApiKey() string {
 
 // GetApiKeyOk returns a tuple with the ApiKey field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGITLABRequestGroup) GetApiKeyOk() (*string, bool) {
+func (o *CreateAssetGITLABREPOSITORYRequestGroup) GetApiKeyOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -151,12 +151,12 @@ func (o *CreateAssetGITLABRequestGroup) GetApiKeyOk() (*string, bool) {
 }
 
 // SetApiKey sets field value
-func (o *CreateAssetGITLABRequestGroup) SetApiKey(v string) {
+func (o *CreateAssetGITLABREPOSITORYRequestGroup) SetApiKey(v string) {
 	o.ApiKey = v
 }
 
 // GetInstanceUrl returns the InstanceUrl field value if set, zero value otherwise.
-func (o *CreateAssetGITLABRequestGroup) GetInstanceUrl() string {
+func (o *CreateAssetGITLABREPOSITORYRequestGroup) GetInstanceUrl() string {
 	if o == nil || IsNil(o.InstanceUrl) {
 		var ret string
 		return ret
@@ -166,7 +166,7 @@ func (o *CreateAssetGITLABRequestGroup) GetInstanceUrl() string {
 
 // GetInstanceUrlOk returns a tuple with the InstanceUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGITLABRequestGroup) GetInstanceUrlOk() (*string, bool) {
+func (o *CreateAssetGITLABREPOSITORYRequestGroup) GetInstanceUrlOk() (*string, bool) {
 	if o == nil || IsNil(o.InstanceUrl) {
 		return nil, false
 	}
@@ -174,7 +174,7 @@ func (o *CreateAssetGITLABRequestGroup) GetInstanceUrlOk() (*string, bool) {
 }
 
 // HasInstanceUrl returns a boolean if a field has been set.
-func (o *CreateAssetGITLABRequestGroup) HasInstanceUrl() bool {
+func (o *CreateAssetGITLABREPOSITORYRequestGroup) HasInstanceUrl() bool {
 	if o != nil && !IsNil(o.InstanceUrl) {
 		return true
 	}
@@ -183,12 +183,12 @@ func (o *CreateAssetGITLABRequestGroup) HasInstanceUrl() bool {
 }
 
 // SetInstanceUrl gets a reference to the given string and assigns it to the InstanceUrl field.
-func (o *CreateAssetGITLABRequestGroup) SetInstanceUrl(v string) {
+func (o *CreateAssetGITLABREPOSITORYRequestGroup) SetInstanceUrl(v string) {
 	o.InstanceUrl = &v
 }
 
 // GetLocationId returns the LocationId field value if set, zero value otherwise.
-func (o *CreateAssetGITLABRequestGroup) GetLocationId() string {
+func (o *CreateAssetGITLABREPOSITORYRequestGroup) GetLocationId() string {
 	if o == nil || IsNil(o.LocationId) {
 		var ret string
 		return ret
@@ -198,7 +198,7 @@ func (o *CreateAssetGITLABRequestGroup) GetLocationId() string {
 
 // GetLocationIdOk returns a tuple with the LocationId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGITLABRequestGroup) GetLocationIdOk() (*string, bool) {
+func (o *CreateAssetGITLABREPOSITORYRequestGroup) GetLocationIdOk() (*string, bool) {
 	if o == nil || IsNil(o.LocationId) {
 		return nil, false
 	}
@@ -206,7 +206,7 @@ func (o *CreateAssetGITLABRequestGroup) GetLocationIdOk() (*string, bool) {
 }
 
 // HasLocationId returns a boolean if a field has been set.
-func (o *CreateAssetGITLABRequestGroup) HasLocationId() bool {
+func (o *CreateAssetGITLABREPOSITORYRequestGroup) HasLocationId() bool {
 	if o != nil && !IsNil(o.LocationId) {
 		return true
 	}
@@ -215,11 +215,11 @@ func (o *CreateAssetGITLABRequestGroup) HasLocationId() bool {
 }
 
 // SetLocationId gets a reference to the given string and assigns it to the LocationId field.
-func (o *CreateAssetGITLABRequestGroup) SetLocationId(v string) {
+func (o *CreateAssetGITLABREPOSITORYRequestGroup) SetLocationId(v string) {
 	o.LocationId = &v
 }
 
-func (o CreateAssetGITLABRequestGroup) MarshalJSON() ([]byte, error) {
+func (o CreateAssetGITLABREPOSITORYRequestGroup) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -227,7 +227,7 @@ func (o CreateAssetGITLABRequestGroup) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CreateAssetGITLABRequestGroup) ToMap() (map[string]interface{}, error) {
+func (o CreateAssetGITLABREPOSITORYRequestGroup) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["asset_class"] = o.AssetClass
 	toSerialize["asset_type"] = o.AssetType
@@ -249,7 +249,7 @@ func (o CreateAssetGITLABRequestGroup) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *CreateAssetGITLABRequestGroup) UnmarshalJSON(data []byte) (err error) {
+func (o *CreateAssetGITLABREPOSITORYRequestGroup) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -273,15 +273,15 @@ func (o *CreateAssetGITLABRequestGroup) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varCreateAssetGITLABRequestGroup := _CreateAssetGITLABRequestGroup{}
+	varCreateAssetGITLABREPOSITORYRequestGroup := _CreateAssetGITLABREPOSITORYRequestGroup{}
 
-	err = json.Unmarshal(data, &varCreateAssetGITLABRequestGroup)
+	err = json.Unmarshal(data, &varCreateAssetGITLABREPOSITORYRequestGroup)
 
 	if err != nil {
 		return err
 	}
 
-	*o = CreateAssetGITLABRequestGroup(varCreateAssetGITLABRequestGroup)
+	*o = CreateAssetGITLABREPOSITORYRequestGroup(varCreateAssetGITLABREPOSITORYRequestGroup)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -298,38 +298,38 @@ func (o *CreateAssetGITLABRequestGroup) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableCreateAssetGITLABRequestGroup struct {
-	value *CreateAssetGITLABRequestGroup
+type NullableCreateAssetGITLABREPOSITORYRequestGroup struct {
+	value *CreateAssetGITLABREPOSITORYRequestGroup
 	isSet bool
 }
 
-func (v NullableCreateAssetGITLABRequestGroup) Get() *CreateAssetGITLABRequestGroup {
+func (v NullableCreateAssetGITLABREPOSITORYRequestGroup) Get() *CreateAssetGITLABREPOSITORYRequestGroup {
 	return v.value
 }
 
-func (v *NullableCreateAssetGITLABRequestGroup) Set(val *CreateAssetGITLABRequestGroup) {
+func (v *NullableCreateAssetGITLABREPOSITORYRequestGroup) Set(val *CreateAssetGITLABREPOSITORYRequestGroup) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCreateAssetGITLABRequestGroup) IsSet() bool {
+func (v NullableCreateAssetGITLABREPOSITORYRequestGroup) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCreateAssetGITLABRequestGroup) Unset() {
+func (v *NullableCreateAssetGITLABREPOSITORYRequestGroup) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCreateAssetGITLABRequestGroup(val *CreateAssetGITLABRequestGroup) *NullableCreateAssetGITLABRequestGroup {
-	return &NullableCreateAssetGITLABRequestGroup{value: val, isSet: true}
+func NewNullableCreateAssetGITLABREPOSITORYRequestGroup(val *CreateAssetGITLABREPOSITORYRequestGroup) *NullableCreateAssetGITLABREPOSITORYRequestGroup {
+	return &NullableCreateAssetGITLABREPOSITORYRequestGroup{value: val, isSet: true}
 }
 
-func (v NullableCreateAssetGITLABRequestGroup) MarshalJSON() ([]byte, error) {
+func (v NullableCreateAssetGITLABREPOSITORYRequestGroup) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCreateAssetGITLABRequestGroup) UnmarshalJSON(src []byte) error {
+func (v *NullableCreateAssetGITLABREPOSITORYRequestGroup) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
