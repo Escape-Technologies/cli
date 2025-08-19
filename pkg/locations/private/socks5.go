@@ -3,8 +3,11 @@ package private
 import (
 	"context"
 	"fmt"
+	"io"
 	"net"
 	"sync/atomic"
+
+	stdlog "log"
 
 	"github.com/Escape-Technologies/cli/pkg/env"
 	"github.com/Escape-Technologies/cli/pkg/log"
@@ -15,6 +18,7 @@ func startSocks5Server(ctx context.Context, listener net.Listener, healthy *atom
 	log.Trace("Starting socks5 server")
 	socks5Server, err := socks5.New(&socks5.Config{
 		Dial: env.BuildProxyDialer(env.GetBackendProxyURL()),
+		Logger: stdlog.New(io.Discard, "", 0),
 	})
 	if err != nil {
 		return fmt.Errorf("failed to create socks5 server config: %w", err)
