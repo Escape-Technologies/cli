@@ -2,79 +2,103 @@ package escape
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"io"
 	"net/http"
 	"os"
 
-	v2 "github.com/Escape-Technologies/cli/pkg/api/v2"
+	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
 	"github.com/Escape-Technologies/cli/pkg/env"
 )
 
 // ListScans lists all scans for an application
-func ListScans(ctx context.Context, applicationID, next string) ([]v2.ListScans200ResponseDataInner, string, error) {
-	client, err := newAPIV2Client()
+func ListScans(ctx context.Context, profileIDs *[]string, next string) ([]v3.ScanSummarized1, string, error) {
+	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, "", fmt.Errorf("unable to init client: %w", err)
 	}
-	req := client.ApplicationsAPI.ListScans(ctx, applicationID)
+	req := client.ScansAPI.ListScans(ctx)
+
+	if profileIDs != nil {
+		req.ProfileIds(v3.ListScansProfileIdsParameter{
+			ArrayOfString: profileIDs,
+		})
+	}
+
+	req = req.SortType("createdAt").SortDirection("desc")
 	if next != "" {
-		req.After(next)
+		req.Cursor(next)
 	}
 	data, _, err := req.Execute()
 	if err != nil {
 		return nil, "", fmt.Errorf("unable to list scans: %w", err)
 	}
-	return data.Data, data.NextCursor, nil
+	return data.Data, *data.NextCursor, nil
 }
 
-// GetScanIssues returns issues found in a scan
-func GetScanIssues(ctx context.Context, scanID string) ([]v2.ListIssues200ResponseInner, error) {
-	client, err := newAPIV2Client()
+// GetScan returns a scan by its ID
+func GetScan(ctx context.Context, scanID string) (*v3.ScanDetailed1, error) {
+	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
-	data, _, err := client.ScansAPI.ListIssues(ctx, scanID).Execute()
+	data, _, err := client.ScansAPI.GetScan(ctx, scanID).Execute()
 	if err != nil {
 		return nil, fmt.Errorf("unable to get scan: %w", err)
 	}
 	return data, nil
 }
 
+// GetScanIssues returns issues found in a scan
+func GetScanIssues(ctx context.Context, scanID string) ([]v3.IssueSummarized, error) {
+	client, err := newAPIV3Client()
+	if err != nil {
+		return nil, fmt.Errorf("unable to init client: %w", err)
+	}
+
+	// Use IssuesAPI.ListIssues with scanIds filter
+	req := client.IssuesAPI.ListIssues(ctx)
+	req = req.ScanIds(v3.ListIssuesScanIdsParameter{
+		String: &scanID,
+	})
+
+	data, _, err := req.Execute()
+	if err != nil {
+		return nil, fmt.Errorf("unable to get scan issues: %w", err)
+	}
+	return data.Data, nil
+}
+
 // StartScan starts a scan for an application
 func StartScan(
 	ctx context.Context,
-	applicationID string,
+	profileID string,
 	commitHash string,
 	commitLink string,
 	commitBranch string,
 	commitAuthor string,
 	commitAuthorProfilePictureLink string,
-	configurationOverride *v2.FrontendConfiguration,
-) (*v2.ListScans200ResponseDataInner, error) {
-	client, err := newAPIV2Client()
+	configurationOverride map[string]interface{},
+	additionalProperties map[string]interface{},
+	initiator v3.ENUMPROPERTIESDATAITEMSPROPERTIESINITIATORSITEMS,
+) (*v3.ScanDetailed1, error) {
+	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
-	req := v2.StartScanRequest{
-		ApplicationId:         applicationID,
-		ConfigurationOverride: configurationOverride,
+	req := v3.StartScanRequest{
+		ProfileId:                      profileID,
+		CommitHash:                     &commitHash,
+		CommitLink:                     &commitLink,
+		CommitBranch:                   &commitBranch,
+		CommitAuthor:                   &commitAuthor,
+		CommitAuthorProfilePictureLink: &commitAuthorProfilePictureLink,
+		Initiator:                      initiator,
+		ConfigurationOverride:          configurationOverride,
+		AdditionalProperties:           additionalProperties,
 	}
-	if commitHash != "" {
-		req.CommitHash = &commitHash
-	}
-	if commitLink != "" {
-		req.CommitLink = &commitLink
-	}
-	if commitBranch != "" {
-		req.CommitBranch = &commitBranch
-	}
-	if commitAuthor != "" {
-		req.CommitAuthor = &commitAuthor
-	}
-	if commitAuthorProfilePictureLink != "" {
-		req.CommitAuthorProfilePictureLink = &commitAuthorProfilePictureLink
-	}
+
 	data, _, err := client.ScansAPI.StartScan(ctx).StartScanRequest(req).Execute()
 	if err != nil {
 		return nil, fmt.Errorf("unable to start scan: %w", err)
@@ -115,15 +139,36 @@ func DownloadScanExchangesZip(ctx context.Context, scanID string, outPath string
 	return nil
 }
 
-// GetScan returns a scan by its ID
-func GetScan(ctx context.Context, scanID string) (*v2.ListScans200ResponseDataInner, error) {
-	client, err := newAPIV2Client()
+// CancelScan cancels a scan
+func CancelScan(ctx context.Context, scanID string) error {
+	client, err := newAPIV3Client()
 	if err != nil {
-		return nil, fmt.Errorf("unable to init client: %w", err)
+		return fmt.Errorf("unable to init client: %w", err)
 	}
-	data, _, err := client.ScansAPI.GetScan(ctx, scanID).Execute()
+	_, httpResp, err := client.ScansAPI.CancelScan(ctx, scanID).Execute()
 	if err != nil {
-		return nil, fmt.Errorf("unable to get scan: %w", err)
+		if httpResp.StatusCode == http.StatusBadRequest {
+			return errors.New("scan is not running or already canceled")
+		}
+		return fmt.Errorf("unable to cancel scan: %w", err)
 	}
-	return data, nil
+	return nil
+}
+
+// IgnoreScan ignore a scan
+func IgnoreScan(ctx context.Context, scanID string) error {
+	client, err := newAPIV3Client()
+	if err != nil {
+		return fmt.Errorf("unable to init client: %w", err)
+	}
+
+	ignoreScanRequest := v3.IgnoreScanRequest{
+		Ignored: true,
+	}
+
+	_, _, err = client.ScansAPI.IgnoreScan(ctx, scanID).IgnoreScanRequest(ignoreScanRequest).Execute()
+	if err != nil {
+		return fmt.Errorf("unable to ignore scan: %w", err)
+	}
+	return nil
 }
