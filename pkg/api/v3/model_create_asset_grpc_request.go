@@ -20,14 +20,14 @@ var _ MappedNullable = &CreateAssetGRPCRequest{}
 
 // CreateAssetGRPCRequest struct for CreateAssetGRPCRequest
 type CreateAssetGRPCRequest struct {
-	AssetClass string `json:"asset_class"`
-	AssetType string `json:"asset_type"`
+	AssetClass ENUMAPISERVICE `json:"asset_class"`
+	AssetType ENUMGRPC `json:"asset_type"`
 	Url string `json:"url"`
 	Favicon *string `json:"favicon,omitempty"`
 	ReachableVia []string `json:"reachable_via,omitempty"`
-	Environment *string `json:"environment,omitempty"`
-	CloudProvider *string `json:"cloud_provider,omitempty"`
-	WafProvider *string `json:"waf_provider,omitempty"`
+	Environment *ENUMPROPERTIESENVIRONMENT `json:"environment,omitempty"`
+	CloudProvider *ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER `json:"cloud_provider,omitempty"`
+	WafProvider *ENUMPROPERTIESWAFPROVIDER `json:"waf_provider,omitempty"`
 	Ips []string `json:"ips,omitempty"`
 	RegionCountryCodes []string `json:"region_country_codes,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -39,7 +39,7 @@ type _CreateAssetGRPCRequest CreateAssetGRPCRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetGRPCRequest(assetClass string, assetType string, url string) *CreateAssetGRPCRequest {
+func NewCreateAssetGRPCRequest(assetClass ENUMAPISERVICE, assetType ENUMGRPC, url string) *CreateAssetGRPCRequest {
 	this := CreateAssetGRPCRequest{}
 	this.AssetClass = assetClass
 	this.AssetType = assetType
@@ -56,9 +56,9 @@ func NewCreateAssetGRPCRequestWithDefaults() *CreateAssetGRPCRequest {
 }
 
 // GetAssetClass returns the AssetClass field value
-func (o *CreateAssetGRPCRequest) GetAssetClass() string {
+func (o *CreateAssetGRPCRequest) GetAssetClass() ENUMAPISERVICE {
 	if o == nil {
-		var ret string
+		var ret ENUMAPISERVICE
 		return ret
 	}
 
@@ -67,7 +67,7 @@ func (o *CreateAssetGRPCRequest) GetAssetClass() string {
 
 // GetAssetClassOk returns a tuple with the AssetClass field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGRPCRequest) GetAssetClassOk() (*string, bool) {
+func (o *CreateAssetGRPCRequest) GetAssetClassOk() (*ENUMAPISERVICE, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -75,14 +75,14 @@ func (o *CreateAssetGRPCRequest) GetAssetClassOk() (*string, bool) {
 }
 
 // SetAssetClass sets field value
-func (o *CreateAssetGRPCRequest) SetAssetClass(v string) {
+func (o *CreateAssetGRPCRequest) SetAssetClass(v ENUMAPISERVICE) {
 	o.AssetClass = v
 }
 
 // GetAssetType returns the AssetType field value
-func (o *CreateAssetGRPCRequest) GetAssetType() string {
+func (o *CreateAssetGRPCRequest) GetAssetType() ENUMGRPC {
 	if o == nil {
-		var ret string
+		var ret ENUMGRPC
 		return ret
 	}
 
@@ -91,7 +91,7 @@ func (o *CreateAssetGRPCRequest) GetAssetType() string {
 
 // GetAssetTypeOk returns a tuple with the AssetType field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGRPCRequest) GetAssetTypeOk() (*string, bool) {
+func (o *CreateAssetGRPCRequest) GetAssetTypeOk() (*ENUMGRPC, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -99,7 +99,7 @@ func (o *CreateAssetGRPCRequest) GetAssetTypeOk() (*string, bool) {
 }
 
 // SetAssetType sets field value
-func (o *CreateAssetGRPCRequest) SetAssetType(v string) {
+func (o *CreateAssetGRPCRequest) SetAssetType(v ENUMGRPC) {
 	o.AssetType = v
 }
 
@@ -192,9 +192,9 @@ func (o *CreateAssetGRPCRequest) SetReachableVia(v []string) {
 }
 
 // GetEnvironment returns the Environment field value if set, zero value otherwise.
-func (o *CreateAssetGRPCRequest) GetEnvironment() string {
+func (o *CreateAssetGRPCRequest) GetEnvironment() ENUMPROPERTIESENVIRONMENT {
 	if o == nil || IsNil(o.Environment) {
-		var ret string
+		var ret ENUMPROPERTIESENVIRONMENT
 		return ret
 	}
 	return *o.Environment
@@ -202,7 +202,7 @@ func (o *CreateAssetGRPCRequest) GetEnvironment() string {
 
 // GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGRPCRequest) GetEnvironmentOk() (*string, bool) {
+func (o *CreateAssetGRPCRequest) GetEnvironmentOk() (*ENUMPROPERTIESENVIRONMENT, bool) {
 	if o == nil || IsNil(o.Environment) {
 		return nil, false
 	}
@@ -218,15 +218,15 @@ func (o *CreateAssetGRPCRequest) HasEnvironment() bool {
 	return false
 }
 
-// SetEnvironment gets a reference to the given string and assigns it to the Environment field.
-func (o *CreateAssetGRPCRequest) SetEnvironment(v string) {
+// SetEnvironment gets a reference to the given ENUMPROPERTIESENVIRONMENT and assigns it to the Environment field.
+func (o *CreateAssetGRPCRequest) SetEnvironment(v ENUMPROPERTIESENVIRONMENT) {
 	o.Environment = &v
 }
 
 // GetCloudProvider returns the CloudProvider field value if set, zero value otherwise.
-func (o *CreateAssetGRPCRequest) GetCloudProvider() string {
+func (o *CreateAssetGRPCRequest) GetCloudProvider() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER {
 	if o == nil || IsNil(o.CloudProvider) {
-		var ret string
+		var ret ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER
 		return ret
 	}
 	return *o.CloudProvider
@@ -234,7 +234,7 @@ func (o *CreateAssetGRPCRequest) GetCloudProvider() string {
 
 // GetCloudProviderOk returns a tuple with the CloudProvider field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGRPCRequest) GetCloudProviderOk() (*string, bool) {
+func (o *CreateAssetGRPCRequest) GetCloudProviderOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER, bool) {
 	if o == nil || IsNil(o.CloudProvider) {
 		return nil, false
 	}
@@ -250,15 +250,15 @@ func (o *CreateAssetGRPCRequest) HasCloudProvider() bool {
 	return false
 }
 
-// SetCloudProvider gets a reference to the given string and assigns it to the CloudProvider field.
-func (o *CreateAssetGRPCRequest) SetCloudProvider(v string) {
+// SetCloudProvider gets a reference to the given ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER and assigns it to the CloudProvider field.
+func (o *CreateAssetGRPCRequest) SetCloudProvider(v ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER) {
 	o.CloudProvider = &v
 }
 
 // GetWafProvider returns the WafProvider field value if set, zero value otherwise.
-func (o *CreateAssetGRPCRequest) GetWafProvider() string {
+func (o *CreateAssetGRPCRequest) GetWafProvider() ENUMPROPERTIESWAFPROVIDER {
 	if o == nil || IsNil(o.WafProvider) {
-		var ret string
+		var ret ENUMPROPERTIESWAFPROVIDER
 		return ret
 	}
 	return *o.WafProvider
@@ -266,7 +266,7 @@ func (o *CreateAssetGRPCRequest) GetWafProvider() string {
 
 // GetWafProviderOk returns a tuple with the WafProvider field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGRPCRequest) GetWafProviderOk() (*string, bool) {
+func (o *CreateAssetGRPCRequest) GetWafProviderOk() (*ENUMPROPERTIESWAFPROVIDER, bool) {
 	if o == nil || IsNil(o.WafProvider) {
 		return nil, false
 	}
@@ -282,8 +282,8 @@ func (o *CreateAssetGRPCRequest) HasWafProvider() bool {
 	return false
 }
 
-// SetWafProvider gets a reference to the given string and assigns it to the WafProvider field.
-func (o *CreateAssetGRPCRequest) SetWafProvider(v string) {
+// SetWafProvider gets a reference to the given ENUMPROPERTIESWAFPROVIDER and assigns it to the WafProvider field.
+func (o *CreateAssetGRPCRequest) SetWafProvider(v ENUMPROPERTIESWAFPROVIDER) {
 	o.WafProvider = &v
 }
 

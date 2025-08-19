@@ -17,38 +17,39 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"reflect"
 )
 
 
 // AssetsAPIService AssetsAPI service
 type AssetsAPIService service
 
-type ApiCreateAssetAKAMAIRequest struct {
+type ApiCreateAssetAKAMAIACCOUNTRequest struct {
 	ctx context.Context
 	ApiService *AssetsAPIService
-	createAssetAKAMAIRequest *CreateAssetAKAMAIRequest
+	createAssetAKAMAIACCOUNTRequest *CreateAssetAKAMAIACCOUNTRequest
 }
 
 // Body of the request to create an asset
-func (r ApiCreateAssetAKAMAIRequest) CreateAssetAKAMAIRequest(createAssetAKAMAIRequest CreateAssetAKAMAIRequest) ApiCreateAssetAKAMAIRequest {
-	r.createAssetAKAMAIRequest = &createAssetAKAMAIRequest
+func (r ApiCreateAssetAKAMAIACCOUNTRequest) CreateAssetAKAMAIACCOUNTRequest(createAssetAKAMAIACCOUNTRequest CreateAssetAKAMAIACCOUNTRequest) ApiCreateAssetAKAMAIACCOUNTRequest {
+	r.createAssetAKAMAIACCOUNTRequest = &createAssetAKAMAIACCOUNTRequest
 	return r
 }
 
-func (r ApiCreateAssetAKAMAIRequest) Execute() (*AssetDetailed, *http.Response, error) {
-	return r.ApiService.CreateAssetAKAMAIExecute(r)
+func (r ApiCreateAssetAKAMAIACCOUNTRequest) Execute() (*AssetDetailed, *http.Response, error) {
+	return r.ApiService.CreateAssetAKAMAIACCOUNTExecute(r)
 }
 
 /*
-CreateAssetAKAMAI Create asset akamai
+CreateAssetAKAMAIACCOUNT Create asset akamai-account
 
-Create a akamai
+Create a akamai-account
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateAssetAKAMAIRequest
+ @return ApiCreateAssetAKAMAIACCOUNTRequest
 */
-func (a *AssetsAPIService) CreateAssetAKAMAI(ctx context.Context) ApiCreateAssetAKAMAIRequest {
-	return ApiCreateAssetAKAMAIRequest{
+func (a *AssetsAPIService) CreateAssetAKAMAIACCOUNT(ctx context.Context) ApiCreateAssetAKAMAIACCOUNTRequest {
+	return ApiCreateAssetAKAMAIACCOUNTRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -56,7 +57,7 @@ func (a *AssetsAPIService) CreateAssetAKAMAI(ctx context.Context) ApiCreateAsset
 
 // Execute executes the request
 //  @return AssetDetailed
-func (a *AssetsAPIService) CreateAssetAKAMAIExecute(r ApiCreateAssetAKAMAIRequest) (*AssetDetailed, *http.Response, error) {
+func (a *AssetsAPIService) CreateAssetAKAMAIACCOUNTExecute(r ApiCreateAssetAKAMAIACCOUNTRequest) (*AssetDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -64,12 +65,12 @@ func (a *AssetsAPIService) CreateAssetAKAMAIExecute(r ApiCreateAssetAKAMAIReques
 		localVarReturnValue  *AssetDetailed
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetAKAMAI")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetAKAMAIACCOUNT")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/assets/akamai"
+	localVarPath := localBasePath + "/assets/akamai-account"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -93,7 +94,7 @@ func (a *AssetsAPIService) CreateAssetAKAMAIExecute(r ApiCreateAssetAKAMAIReques
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.createAssetAKAMAIRequest
+	localVarPostBody = r.createAssetAKAMAIACCOUNTRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -131,7 +132,7 @@ func (a *AssetsAPIService) CreateAssetAKAMAIExecute(r ApiCreateAssetAKAMAIReques
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v CreateASMDNSProfile400Response
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -155,32 +156,32 @@ func (a *AssetsAPIService) CreateAssetAKAMAIExecute(r ApiCreateAssetAKAMAIReques
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiCreateAssetAWSRequest struct {
+type ApiCreateAssetAWSACCOUNTRequest struct {
 	ctx context.Context
 	ApiService *AssetsAPIService
-	createAssetAWSRequest *CreateAssetAWSRequest
+	createAssetAWSACCOUNTRequest *CreateAssetAWSACCOUNTRequest
 }
 
 // Body of the request to create an asset
-func (r ApiCreateAssetAWSRequest) CreateAssetAWSRequest(createAssetAWSRequest CreateAssetAWSRequest) ApiCreateAssetAWSRequest {
-	r.createAssetAWSRequest = &createAssetAWSRequest
+func (r ApiCreateAssetAWSACCOUNTRequest) CreateAssetAWSACCOUNTRequest(createAssetAWSACCOUNTRequest CreateAssetAWSACCOUNTRequest) ApiCreateAssetAWSACCOUNTRequest {
+	r.createAssetAWSACCOUNTRequest = &createAssetAWSACCOUNTRequest
 	return r
 }
 
-func (r ApiCreateAssetAWSRequest) Execute() (*AssetDetailed, *http.Response, error) {
-	return r.ApiService.CreateAssetAWSExecute(r)
+func (r ApiCreateAssetAWSACCOUNTRequest) Execute() (*AssetDetailed, *http.Response, error) {
+	return r.ApiService.CreateAssetAWSACCOUNTExecute(r)
 }
 
 /*
-CreateAssetAWS Create asset aws
+CreateAssetAWSACCOUNT Create asset aws-account
 
-Create a aws
+Create a aws-account
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateAssetAWSRequest
+ @return ApiCreateAssetAWSACCOUNTRequest
 */
-func (a *AssetsAPIService) CreateAssetAWS(ctx context.Context) ApiCreateAssetAWSRequest {
-	return ApiCreateAssetAWSRequest{
+func (a *AssetsAPIService) CreateAssetAWSACCOUNT(ctx context.Context) ApiCreateAssetAWSACCOUNTRequest {
+	return ApiCreateAssetAWSACCOUNTRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -188,7 +189,7 @@ func (a *AssetsAPIService) CreateAssetAWS(ctx context.Context) ApiCreateAssetAWS
 
 // Execute executes the request
 //  @return AssetDetailed
-func (a *AssetsAPIService) CreateAssetAWSExecute(r ApiCreateAssetAWSRequest) (*AssetDetailed, *http.Response, error) {
+func (a *AssetsAPIService) CreateAssetAWSACCOUNTExecute(r ApiCreateAssetAWSACCOUNTRequest) (*AssetDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -196,12 +197,12 @@ func (a *AssetsAPIService) CreateAssetAWSExecute(r ApiCreateAssetAWSRequest) (*A
 		localVarReturnValue  *AssetDetailed
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetAWS")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetAWSACCOUNT")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/assets/aws"
+	localVarPath := localBasePath + "/assets/aws-account"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -225,7 +226,7 @@ func (a *AssetsAPIService) CreateAssetAWSExecute(r ApiCreateAssetAWSRequest) (*A
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.createAssetAWSRequest
+	localVarPostBody = r.createAssetAWSACCOUNTRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -263,7 +264,7 @@ func (a *AssetsAPIService) CreateAssetAWSExecute(r ApiCreateAssetAWSRequest) (*A
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v CreateASMDNSProfile400Response
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -287,32 +288,32 @@ func (a *AssetsAPIService) CreateAssetAWSExecute(r ApiCreateAssetAWSRequest) (*A
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiCreateAssetAZURERequest struct {
+type ApiCreateAssetAZURETENANTRequest struct {
 	ctx context.Context
 	ApiService *AssetsAPIService
-	createAssetAZURERequest *CreateAssetAZURERequest
+	createAssetAZURETENANTRequest *CreateAssetAZURETENANTRequest
 }
 
 // Body of the request to create an asset
-func (r ApiCreateAssetAZURERequest) CreateAssetAZURERequest(createAssetAZURERequest CreateAssetAZURERequest) ApiCreateAssetAZURERequest {
-	r.createAssetAZURERequest = &createAssetAZURERequest
+func (r ApiCreateAssetAZURETENANTRequest) CreateAssetAZURETENANTRequest(createAssetAZURETENANTRequest CreateAssetAZURETENANTRequest) ApiCreateAssetAZURETENANTRequest {
+	r.createAssetAZURETENANTRequest = &createAssetAZURETENANTRequest
 	return r
 }
 
-func (r ApiCreateAssetAZURERequest) Execute() (*AssetDetailed, *http.Response, error) {
-	return r.ApiService.CreateAssetAZUREExecute(r)
+func (r ApiCreateAssetAZURETENANTRequest) Execute() (*AssetDetailed, *http.Response, error) {
+	return r.ApiService.CreateAssetAZURETENANTExecute(r)
 }
 
 /*
-CreateAssetAZURE Create asset azure
+CreateAssetAZURETENANT Create asset azure-tenant
 
-Create a azure
+Create a azure-tenant
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateAssetAZURERequest
+ @return ApiCreateAssetAZURETENANTRequest
 */
-func (a *AssetsAPIService) CreateAssetAZURE(ctx context.Context) ApiCreateAssetAZURERequest {
-	return ApiCreateAssetAZURERequest{
+func (a *AssetsAPIService) CreateAssetAZURETENANT(ctx context.Context) ApiCreateAssetAZURETENANTRequest {
+	return ApiCreateAssetAZURETENANTRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -320,7 +321,7 @@ func (a *AssetsAPIService) CreateAssetAZURE(ctx context.Context) ApiCreateAssetA
 
 // Execute executes the request
 //  @return AssetDetailed
-func (a *AssetsAPIService) CreateAssetAZUREExecute(r ApiCreateAssetAZURERequest) (*AssetDetailed, *http.Response, error) {
+func (a *AssetsAPIService) CreateAssetAZURETENANTExecute(r ApiCreateAssetAZURETENANTRequest) (*AssetDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -328,12 +329,12 @@ func (a *AssetsAPIService) CreateAssetAZUREExecute(r ApiCreateAssetAZURERequest)
 		localVarReturnValue  *AssetDetailed
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetAZURE")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetAZURETENANT")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/assets/azure"
+	localVarPath := localBasePath + "/assets/azure-tenant"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -357,7 +358,7 @@ func (a *AssetsAPIService) CreateAssetAZUREExecute(r ApiCreateAssetAZURERequest)
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.createAssetAZURERequest
+	localVarPostBody = r.createAssetAZURETENANTRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -395,7 +396,7 @@ func (a *AssetsAPIService) CreateAssetAZUREExecute(r ApiCreateAssetAZURERequest)
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v CreateASMDNSProfile400Response
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -419,32 +420,32 @@ func (a *AssetsAPIService) CreateAssetAZUREExecute(r ApiCreateAssetAZURERequest)
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiCreateAssetCLOUDFLARERequest struct {
+type ApiCreateAssetCLOUDFLAREACCOUNTRequest struct {
 	ctx context.Context
 	ApiService *AssetsAPIService
-	createAssetCLOUDFLARERequest *CreateAssetCLOUDFLARERequest
+	createAssetCLOUDFLAREACCOUNTRequest *CreateAssetCLOUDFLAREACCOUNTRequest
 }
 
 // Body of the request to create an asset
-func (r ApiCreateAssetCLOUDFLARERequest) CreateAssetCLOUDFLARERequest(createAssetCLOUDFLARERequest CreateAssetCLOUDFLARERequest) ApiCreateAssetCLOUDFLARERequest {
-	r.createAssetCLOUDFLARERequest = &createAssetCLOUDFLARERequest
+func (r ApiCreateAssetCLOUDFLAREACCOUNTRequest) CreateAssetCLOUDFLAREACCOUNTRequest(createAssetCLOUDFLAREACCOUNTRequest CreateAssetCLOUDFLAREACCOUNTRequest) ApiCreateAssetCLOUDFLAREACCOUNTRequest {
+	r.createAssetCLOUDFLAREACCOUNTRequest = &createAssetCLOUDFLAREACCOUNTRequest
 	return r
 }
 
-func (r ApiCreateAssetCLOUDFLARERequest) Execute() (*AssetDetailed, *http.Response, error) {
-	return r.ApiService.CreateAssetCLOUDFLAREExecute(r)
+func (r ApiCreateAssetCLOUDFLAREACCOUNTRequest) Execute() (*AssetDetailed, *http.Response, error) {
+	return r.ApiService.CreateAssetCLOUDFLAREACCOUNTExecute(r)
 }
 
 /*
-CreateAssetCLOUDFLARE Create asset cloudflare
+CreateAssetCLOUDFLAREACCOUNT Create asset cloudflare-account
 
-Create a cloudflare
+Create a cloudflare-account
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateAssetCLOUDFLARERequest
+ @return ApiCreateAssetCLOUDFLAREACCOUNTRequest
 */
-func (a *AssetsAPIService) CreateAssetCLOUDFLARE(ctx context.Context) ApiCreateAssetCLOUDFLARERequest {
-	return ApiCreateAssetCLOUDFLARERequest{
+func (a *AssetsAPIService) CreateAssetCLOUDFLAREACCOUNT(ctx context.Context) ApiCreateAssetCLOUDFLAREACCOUNTRequest {
+	return ApiCreateAssetCLOUDFLAREACCOUNTRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -452,7 +453,7 @@ func (a *AssetsAPIService) CreateAssetCLOUDFLARE(ctx context.Context) ApiCreateA
 
 // Execute executes the request
 //  @return AssetDetailed
-func (a *AssetsAPIService) CreateAssetCLOUDFLAREExecute(r ApiCreateAssetCLOUDFLARERequest) (*AssetDetailed, *http.Response, error) {
+func (a *AssetsAPIService) CreateAssetCLOUDFLAREACCOUNTExecute(r ApiCreateAssetCLOUDFLAREACCOUNTRequest) (*AssetDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -460,12 +461,12 @@ func (a *AssetsAPIService) CreateAssetCLOUDFLAREExecute(r ApiCreateAssetCLOUDFLA
 		localVarReturnValue  *AssetDetailed
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetCLOUDFLARE")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetCLOUDFLAREACCOUNT")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/assets/cloudflare"
+	localVarPath := localBasePath + "/assets/cloudflare-account"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -489,7 +490,7 @@ func (a *AssetsAPIService) CreateAssetCLOUDFLAREExecute(r ApiCreateAssetCLOUDFLA
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.createAssetCLOUDFLARERequest
+	localVarPostBody = r.createAssetCLOUDFLAREACCOUNTRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -527,7 +528,7 @@ func (a *AssetsAPIService) CreateAssetCLOUDFLAREExecute(r ApiCreateAssetCLOUDFLA
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v CreateASMDNSProfile400Response
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -659,7 +660,7 @@ func (a *AssetsAPIService) CreateAssetDNSExecute(r ApiCreateAssetDNSRequest) (*A
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v CreateASMDNSProfile400Response
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -683,32 +684,32 @@ func (a *AssetsAPIService) CreateAssetDNSExecute(r ApiCreateAssetDNSRequest) (*A
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiCreateAssetGCPRequest struct {
+type ApiCreateAssetGCPPROJECTRequest struct {
 	ctx context.Context
 	ApiService *AssetsAPIService
-	createAssetGCPRequest *CreateAssetGCPRequest
+	createAssetGCPPROJECTRequest *CreateAssetGCPPROJECTRequest
 }
 
 // Body of the request to create an asset
-func (r ApiCreateAssetGCPRequest) CreateAssetGCPRequest(createAssetGCPRequest CreateAssetGCPRequest) ApiCreateAssetGCPRequest {
-	r.createAssetGCPRequest = &createAssetGCPRequest
+func (r ApiCreateAssetGCPPROJECTRequest) CreateAssetGCPPROJECTRequest(createAssetGCPPROJECTRequest CreateAssetGCPPROJECTRequest) ApiCreateAssetGCPPROJECTRequest {
+	r.createAssetGCPPROJECTRequest = &createAssetGCPPROJECTRequest
 	return r
 }
 
-func (r ApiCreateAssetGCPRequest) Execute() (*AssetDetailed, *http.Response, error) {
-	return r.ApiService.CreateAssetGCPExecute(r)
+func (r ApiCreateAssetGCPPROJECTRequest) Execute() (*AssetDetailed, *http.Response, error) {
+	return r.ApiService.CreateAssetGCPPROJECTExecute(r)
 }
 
 /*
-CreateAssetGCP Create asset gcp
+CreateAssetGCPPROJECT Create asset gcp-project
 
-Create a gcp
+Create a gcp-project
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateAssetGCPRequest
+ @return ApiCreateAssetGCPPROJECTRequest
 */
-func (a *AssetsAPIService) CreateAssetGCP(ctx context.Context) ApiCreateAssetGCPRequest {
-	return ApiCreateAssetGCPRequest{
+func (a *AssetsAPIService) CreateAssetGCPPROJECT(ctx context.Context) ApiCreateAssetGCPPROJECTRequest {
+	return ApiCreateAssetGCPPROJECTRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -716,7 +717,7 @@ func (a *AssetsAPIService) CreateAssetGCP(ctx context.Context) ApiCreateAssetGCP
 
 // Execute executes the request
 //  @return AssetDetailed
-func (a *AssetsAPIService) CreateAssetGCPExecute(r ApiCreateAssetGCPRequest) (*AssetDetailed, *http.Response, error) {
+func (a *AssetsAPIService) CreateAssetGCPPROJECTExecute(r ApiCreateAssetGCPPROJECTRequest) (*AssetDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -724,12 +725,12 @@ func (a *AssetsAPIService) CreateAssetGCPExecute(r ApiCreateAssetGCPRequest) (*A
 		localVarReturnValue  *AssetDetailed
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetGCP")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetGCPPROJECT")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/assets/gcp"
+	localVarPath := localBasePath + "/assets/gcp-project"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -753,7 +754,7 @@ func (a *AssetsAPIService) CreateAssetGCPExecute(r ApiCreateAssetGCPRequest) (*A
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.createAssetGCPRequest
+	localVarPostBody = r.createAssetGCPPROJECTRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -791,139 +792,7 @@ func (a *AssetsAPIService) CreateAssetGCPExecute(r ApiCreateAssetGCPRequest) (*A
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v CreateASMDNSProfile400Response
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiCreateAssetGITHUBRequest struct {
-	ctx context.Context
-	ApiService *AssetsAPIService
-	createAssetGITHUBRequest *CreateAssetGITHUBRequest
-}
-
-// Body of the request to create an asset
-func (r ApiCreateAssetGITHUBRequest) CreateAssetGITHUBRequest(createAssetGITHUBRequest CreateAssetGITHUBRequest) ApiCreateAssetGITHUBRequest {
-	r.createAssetGITHUBRequest = &createAssetGITHUBRequest
-	return r
-}
-
-func (r ApiCreateAssetGITHUBRequest) Execute() (*AssetDetailed, *http.Response, error) {
-	return r.ApiService.CreateAssetGITHUBExecute(r)
-}
-
-/*
-CreateAssetGITHUB Create asset github
-
-Create a github
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateAssetGITHUBRequest
-*/
-func (a *AssetsAPIService) CreateAssetGITHUB(ctx context.Context) ApiCreateAssetGITHUBRequest {
-	return ApiCreateAssetGITHUBRequest{
-		ApiService: a,
-		ctx: ctx,
-	}
-}
-
-// Execute executes the request
-//  @return AssetDetailed
-func (a *AssetsAPIService) CreateAssetGITHUBExecute(r ApiCreateAssetGITHUBRequest) (*AssetDetailed, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AssetDetailed
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetGITHUB")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/assets/github"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	localVarPostBody = r.createAssetGITHUBRequest
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["apiKey"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v CreateASMDNSProfile400Response
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1055,7 +924,7 @@ func (a *AssetsAPIService) CreateAssetGITHUBORGANIZATIONExecute(r ApiCreateAsset
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v CreateASMDNSProfile400Response
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1079,32 +948,32 @@ func (a *AssetsAPIService) CreateAssetGITHUBORGANIZATIONExecute(r ApiCreateAsset
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiCreateAssetGITLABRequest struct {
+type ApiCreateAssetGITHUBREPOSITORYRequest struct {
 	ctx context.Context
 	ApiService *AssetsAPIService
-	createAssetGITLABRequest *CreateAssetGITLABRequest
+	createAssetGITHUBREPOSITORYRequest *CreateAssetGITHUBREPOSITORYRequest
 }
 
 // Body of the request to create an asset
-func (r ApiCreateAssetGITLABRequest) CreateAssetGITLABRequest(createAssetGITLABRequest CreateAssetGITLABRequest) ApiCreateAssetGITLABRequest {
-	r.createAssetGITLABRequest = &createAssetGITLABRequest
+func (r ApiCreateAssetGITHUBREPOSITORYRequest) CreateAssetGITHUBREPOSITORYRequest(createAssetGITHUBREPOSITORYRequest CreateAssetGITHUBREPOSITORYRequest) ApiCreateAssetGITHUBREPOSITORYRequest {
+	r.createAssetGITHUBREPOSITORYRequest = &createAssetGITHUBREPOSITORYRequest
 	return r
 }
 
-func (r ApiCreateAssetGITLABRequest) Execute() (*AssetDetailed, *http.Response, error) {
-	return r.ApiService.CreateAssetGITLABExecute(r)
+func (r ApiCreateAssetGITHUBREPOSITORYRequest) Execute() (*AssetDetailed, *http.Response, error) {
+	return r.ApiService.CreateAssetGITHUBREPOSITORYExecute(r)
 }
 
 /*
-CreateAssetGITLAB Create asset gitlab
+CreateAssetGITHUBREPOSITORY Create asset github-repository
 
-Create a gitlab
+Create a github-repository
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateAssetGITLABRequest
+ @return ApiCreateAssetGITHUBREPOSITORYRequest
 */
-func (a *AssetsAPIService) CreateAssetGITLAB(ctx context.Context) ApiCreateAssetGITLABRequest {
-	return ApiCreateAssetGITLABRequest{
+func (a *AssetsAPIService) CreateAssetGITHUBREPOSITORY(ctx context.Context) ApiCreateAssetGITHUBREPOSITORYRequest {
+	return ApiCreateAssetGITHUBREPOSITORYRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -1112,7 +981,7 @@ func (a *AssetsAPIService) CreateAssetGITLAB(ctx context.Context) ApiCreateAsset
 
 // Execute executes the request
 //  @return AssetDetailed
-func (a *AssetsAPIService) CreateAssetGITLABExecute(r ApiCreateAssetGITLABRequest) (*AssetDetailed, *http.Response, error) {
+func (a *AssetsAPIService) CreateAssetGITHUBREPOSITORYExecute(r ApiCreateAssetGITHUBREPOSITORYRequest) (*AssetDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -1120,12 +989,12 @@ func (a *AssetsAPIService) CreateAssetGITLABExecute(r ApiCreateAssetGITLABReques
 		localVarReturnValue  *AssetDetailed
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetGITLAB")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetGITHUBREPOSITORY")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/assets/gitlab"
+	localVarPath := localBasePath + "/assets/github-repository"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1149,7 +1018,7 @@ func (a *AssetsAPIService) CreateAssetGITLABExecute(r ApiCreateAssetGITLABReques
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.createAssetGITLABRequest
+	localVarPostBody = r.createAssetGITHUBREPOSITORYRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1187,7 +1056,7 @@ func (a *AssetsAPIService) CreateAssetGITLABExecute(r ApiCreateAssetGITLABReques
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v CreateASMDNSProfile400Response
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1319,7 +1188,139 @@ func (a *AssetsAPIService) CreateAssetGITLABGROUPExecute(r ApiCreateAssetGITLABG
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v CreateASMDNSProfile400Response
+			var v UpdateProfile400Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCreateAssetGITLABREPOSITORYRequest struct {
+	ctx context.Context
+	ApiService *AssetsAPIService
+	createAssetGITLABREPOSITORYRequest *CreateAssetGITLABREPOSITORYRequest
+}
+
+// Body of the request to create an asset
+func (r ApiCreateAssetGITLABREPOSITORYRequest) CreateAssetGITLABREPOSITORYRequest(createAssetGITLABREPOSITORYRequest CreateAssetGITLABREPOSITORYRequest) ApiCreateAssetGITLABREPOSITORYRequest {
+	r.createAssetGITLABREPOSITORYRequest = &createAssetGITLABREPOSITORYRequest
+	return r
+}
+
+func (r ApiCreateAssetGITLABREPOSITORYRequest) Execute() (*AssetDetailed, *http.Response, error) {
+	return r.ApiService.CreateAssetGITLABREPOSITORYExecute(r)
+}
+
+/*
+CreateAssetGITLABREPOSITORY Create asset gitlab-repository
+
+Create a gitlab-repository
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateAssetGITLABREPOSITORYRequest
+*/
+func (a *AssetsAPIService) CreateAssetGITLABREPOSITORY(ctx context.Context) ApiCreateAssetGITLABREPOSITORYRequest {
+	return ApiCreateAssetGITLABREPOSITORYRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return AssetDetailed
+func (a *AssetsAPIService) CreateAssetGITLABREPOSITORYExecute(r ApiCreateAssetGITLABREPOSITORYRequest) (*AssetDetailed, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *AssetDetailed
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetGITLABREPOSITORY")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/assets/gitlab-repository"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.createAssetGITLABREPOSITORYRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1451,7 +1452,139 @@ func (a *AssetsAPIService) CreateAssetGRAPHQLExecute(r ApiCreateAssetGRAPHQLRequ
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v CreateASMDNSProfile400Response
+			var v UpdateProfile400Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCreateAssetGRAPHQLSCHEMARequest struct {
+	ctx context.Context
+	ApiService *AssetsAPIService
+	createAssetGRAPHQLSCHEMARequest *CreateAssetGRAPHQLSCHEMARequest
+}
+
+// Body of the request to create an asset
+func (r ApiCreateAssetGRAPHQLSCHEMARequest) CreateAssetGRAPHQLSCHEMARequest(createAssetGRAPHQLSCHEMARequest CreateAssetGRAPHQLSCHEMARequest) ApiCreateAssetGRAPHQLSCHEMARequest {
+	r.createAssetGRAPHQLSCHEMARequest = &createAssetGRAPHQLSCHEMARequest
+	return r
+}
+
+func (r ApiCreateAssetGRAPHQLSCHEMARequest) Execute() (*AssetDetailed, *http.Response, error) {
+	return r.ApiService.CreateAssetGRAPHQLSCHEMAExecute(r)
+}
+
+/*
+CreateAssetGRAPHQLSCHEMA Create asset graphql-schema
+
+Create a graphql-schema
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateAssetGRAPHQLSCHEMARequest
+*/
+func (a *AssetsAPIService) CreateAssetGRAPHQLSCHEMA(ctx context.Context) ApiCreateAssetGRAPHQLSCHEMARequest {
+	return ApiCreateAssetGRAPHQLSCHEMARequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return AssetDetailed
+func (a *AssetsAPIService) CreateAssetGRAPHQLSCHEMAExecute(r ApiCreateAssetGRAPHQLSCHEMARequest) (*AssetDetailed, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *AssetDetailed
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetGRAPHQLSCHEMA")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/assets/graphql-schema"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.createAssetGRAPHQLSCHEMARequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1583,7 +1716,139 @@ func (a *AssetsAPIService) CreateAssetGRPCExecute(r ApiCreateAssetGRPCRequest) (
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v CreateASMDNSProfile400Response
+			var v UpdateProfile400Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCreateAssetHOSTPORTRequest struct {
+	ctx context.Context
+	ApiService *AssetsAPIService
+	createAssetHOSTPORTRequest *CreateAssetHOSTPORTRequest
+}
+
+// Body of the request to create an asset
+func (r ApiCreateAssetHOSTPORTRequest) CreateAssetHOSTPORTRequest(createAssetHOSTPORTRequest CreateAssetHOSTPORTRequest) ApiCreateAssetHOSTPORTRequest {
+	r.createAssetHOSTPORTRequest = &createAssetHOSTPORTRequest
+	return r
+}
+
+func (r ApiCreateAssetHOSTPORTRequest) Execute() (*AssetDetailed, *http.Response, error) {
+	return r.ApiService.CreateAssetHOSTPORTExecute(r)
+}
+
+/*
+CreateAssetHOSTPORT Create asset host-port
+
+Create a host-port
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateAssetHOSTPORTRequest
+*/
+func (a *AssetsAPIService) CreateAssetHOSTPORT(ctx context.Context) ApiCreateAssetHOSTPORTRequest {
+	return ApiCreateAssetHOSTPORTRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return AssetDetailed
+func (a *AssetsAPIService) CreateAssetHOSTPORTExecute(r ApiCreateAssetHOSTPORTRequest) (*AssetDetailed, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *AssetDetailed
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetHOSTPORT")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/assets/host-port"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.createAssetHOSTPORTRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1715,7 +1980,7 @@ func (a *AssetsAPIService) CreateAssetIPV4Execute(r ApiCreateAssetIPV4Request) (
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v CreateASMDNSProfile400Response
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1847,7 +2112,7 @@ func (a *AssetsAPIService) CreateAssetIPV6Execute(r ApiCreateAssetIPV6Request) (
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v CreateASMDNSProfile400Response
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1871,32 +2136,32 @@ func (a *AssetsAPIService) CreateAssetIPV6Execute(r ApiCreateAssetIPV6Request) (
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiCreateAssetKUBERNETESRequest struct {
+type ApiCreateAssetKUBERNETESCLUSTERRequest struct {
 	ctx context.Context
 	ApiService *AssetsAPIService
-	createAssetKUBERNETESRequest *CreateAssetKUBERNETESRequest
+	createAssetKUBERNETESCLUSTERRequest *CreateAssetKUBERNETESCLUSTERRequest
 }
 
 // Body of the request to create an asset
-func (r ApiCreateAssetKUBERNETESRequest) CreateAssetKUBERNETESRequest(createAssetKUBERNETESRequest CreateAssetKUBERNETESRequest) ApiCreateAssetKUBERNETESRequest {
-	r.createAssetKUBERNETESRequest = &createAssetKUBERNETESRequest
+func (r ApiCreateAssetKUBERNETESCLUSTERRequest) CreateAssetKUBERNETESCLUSTERRequest(createAssetKUBERNETESCLUSTERRequest CreateAssetKUBERNETESCLUSTERRequest) ApiCreateAssetKUBERNETESCLUSTERRequest {
+	r.createAssetKUBERNETESCLUSTERRequest = &createAssetKUBERNETESCLUSTERRequest
 	return r
 }
 
-func (r ApiCreateAssetKUBERNETESRequest) Execute() (*AssetDetailed, *http.Response, error) {
-	return r.ApiService.CreateAssetKUBERNETESExecute(r)
+func (r ApiCreateAssetKUBERNETESCLUSTERRequest) Execute() (*AssetDetailed, *http.Response, error) {
+	return r.ApiService.CreateAssetKUBERNETESCLUSTERExecute(r)
 }
 
 /*
-CreateAssetKUBERNETES Create asset kubernetes
+CreateAssetKUBERNETESCLUSTER Create asset kubernetes-cluster
 
-Create a kubernetes
+Create a kubernetes-cluster
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateAssetKUBERNETESRequest
+ @return ApiCreateAssetKUBERNETESCLUSTERRequest
 */
-func (a *AssetsAPIService) CreateAssetKUBERNETES(ctx context.Context) ApiCreateAssetKUBERNETESRequest {
-	return ApiCreateAssetKUBERNETESRequest{
+func (a *AssetsAPIService) CreateAssetKUBERNETESCLUSTER(ctx context.Context) ApiCreateAssetKUBERNETESCLUSTERRequest {
+	return ApiCreateAssetKUBERNETESCLUSTERRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -1904,7 +2169,7 @@ func (a *AssetsAPIService) CreateAssetKUBERNETES(ctx context.Context) ApiCreateA
 
 // Execute executes the request
 //  @return AssetDetailed
-func (a *AssetsAPIService) CreateAssetKUBERNETESExecute(r ApiCreateAssetKUBERNETESRequest) (*AssetDetailed, *http.Response, error) {
+func (a *AssetsAPIService) CreateAssetKUBERNETESCLUSTERExecute(r ApiCreateAssetKUBERNETESCLUSTERRequest) (*AssetDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -1912,12 +2177,12 @@ func (a *AssetsAPIService) CreateAssetKUBERNETESExecute(r ApiCreateAssetKUBERNET
 		localVarReturnValue  *AssetDetailed
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetKUBERNETES")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetKUBERNETESCLUSTER")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/assets/kubernetes"
+	localVarPath := localBasePath + "/assets/kubernetes-cluster"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1941,7 +2206,7 @@ func (a *AssetsAPIService) CreateAssetKUBERNETESExecute(r ApiCreateAssetKUBERNET
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.createAssetKUBERNETESRequest
+	localVarPostBody = r.createAssetKUBERNETESCLUSTERRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1979,7 +2244,7 @@ func (a *AssetsAPIService) CreateAssetKUBERNETESExecute(r ApiCreateAssetKUBERNET
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v CreateASMDNSProfile400Response
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2003,32 +2268,32 @@ func (a *AssetsAPIService) CreateAssetKUBERNETESExecute(r ApiCreateAssetKUBERNET
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiCreateAssetPOSTMANRequest struct {
+type ApiCreateAssetOPENAPIRequest struct {
 	ctx context.Context
 	ApiService *AssetsAPIService
-	createAssetPOSTMANRequest *CreateAssetPOSTMANRequest
+	createAssetOPENAPIRequest *CreateAssetOPENAPIRequest
 }
 
 // Body of the request to create an asset
-func (r ApiCreateAssetPOSTMANRequest) CreateAssetPOSTMANRequest(createAssetPOSTMANRequest CreateAssetPOSTMANRequest) ApiCreateAssetPOSTMANRequest {
-	r.createAssetPOSTMANRequest = &createAssetPOSTMANRequest
+func (r ApiCreateAssetOPENAPIRequest) CreateAssetOPENAPIRequest(createAssetOPENAPIRequest CreateAssetOPENAPIRequest) ApiCreateAssetOPENAPIRequest {
+	r.createAssetOPENAPIRequest = &createAssetOPENAPIRequest
 	return r
 }
 
-func (r ApiCreateAssetPOSTMANRequest) Execute() (*AssetDetailed, *http.Response, error) {
-	return r.ApiService.CreateAssetPOSTMANExecute(r)
+func (r ApiCreateAssetOPENAPIRequest) Execute() (*AssetDetailed, *http.Response, error) {
+	return r.ApiService.CreateAssetOPENAPIExecute(r)
 }
 
 /*
-CreateAssetPOSTMAN Create asset postman
+CreateAssetOPENAPI Create asset openapi
 
-Create a postman
+Create a openapi
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateAssetPOSTMANRequest
+ @return ApiCreateAssetOPENAPIRequest
 */
-func (a *AssetsAPIService) CreateAssetPOSTMAN(ctx context.Context) ApiCreateAssetPOSTMANRequest {
-	return ApiCreateAssetPOSTMANRequest{
+func (a *AssetsAPIService) CreateAssetOPENAPI(ctx context.Context) ApiCreateAssetOPENAPIRequest {
+	return ApiCreateAssetOPENAPIRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -2036,7 +2301,7 @@ func (a *AssetsAPIService) CreateAssetPOSTMAN(ctx context.Context) ApiCreateAsse
 
 // Execute executes the request
 //  @return AssetDetailed
-func (a *AssetsAPIService) CreateAssetPOSTMANExecute(r ApiCreateAssetPOSTMANRequest) (*AssetDetailed, *http.Response, error) {
+func (a *AssetsAPIService) CreateAssetOPENAPIExecute(r ApiCreateAssetOPENAPIRequest) (*AssetDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -2044,12 +2309,12 @@ func (a *AssetsAPIService) CreateAssetPOSTMANExecute(r ApiCreateAssetPOSTMANRequ
 		localVarReturnValue  *AssetDetailed
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetPOSTMAN")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetOPENAPI")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/assets/postman"
+	localVarPath := localBasePath + "/assets/openapi"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -2073,7 +2338,7 @@ func (a *AssetsAPIService) CreateAssetPOSTMANExecute(r ApiCreateAssetPOSTMANRequ
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.createAssetPOSTMANRequest
+	localVarPostBody = r.createAssetOPENAPIRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -2111,7 +2376,271 @@ func (a *AssetsAPIService) CreateAssetPOSTMANExecute(r ApiCreateAssetPOSTMANRequ
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v CreateASMDNSProfile400Response
+			var v UpdateProfile400Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCreateAssetPOSTMANCOLLECTIONRequest struct {
+	ctx context.Context
+	ApiService *AssetsAPIService
+	createAssetPOSTMANCOLLECTIONRequest *CreateAssetPOSTMANCOLLECTIONRequest
+}
+
+// Body of the request to create an asset
+func (r ApiCreateAssetPOSTMANCOLLECTIONRequest) CreateAssetPOSTMANCOLLECTIONRequest(createAssetPOSTMANCOLLECTIONRequest CreateAssetPOSTMANCOLLECTIONRequest) ApiCreateAssetPOSTMANCOLLECTIONRequest {
+	r.createAssetPOSTMANCOLLECTIONRequest = &createAssetPOSTMANCOLLECTIONRequest
+	return r
+}
+
+func (r ApiCreateAssetPOSTMANCOLLECTIONRequest) Execute() (*AssetDetailed, *http.Response, error) {
+	return r.ApiService.CreateAssetPOSTMANCOLLECTIONExecute(r)
+}
+
+/*
+CreateAssetPOSTMANCOLLECTION Create asset postman-collection
+
+Create a postman-collection
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateAssetPOSTMANCOLLECTIONRequest
+*/
+func (a *AssetsAPIService) CreateAssetPOSTMANCOLLECTION(ctx context.Context) ApiCreateAssetPOSTMANCOLLECTIONRequest {
+	return ApiCreateAssetPOSTMANCOLLECTIONRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return AssetDetailed
+func (a *AssetsAPIService) CreateAssetPOSTMANCOLLECTIONExecute(r ApiCreateAssetPOSTMANCOLLECTIONRequest) (*AssetDetailed, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *AssetDetailed
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetPOSTMANCOLLECTION")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/assets/postman-collection"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.createAssetPOSTMANCOLLECTIONRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v UpdateProfile400Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCreateAssetPOSTMANORGANIZATIONRequest struct {
+	ctx context.Context
+	ApiService *AssetsAPIService
+	createAssetPOSTMANORGANIZATIONRequest *CreateAssetPOSTMANORGANIZATIONRequest
+}
+
+// Body of the request to create an asset
+func (r ApiCreateAssetPOSTMANORGANIZATIONRequest) CreateAssetPOSTMANORGANIZATIONRequest(createAssetPOSTMANORGANIZATIONRequest CreateAssetPOSTMANORGANIZATIONRequest) ApiCreateAssetPOSTMANORGANIZATIONRequest {
+	r.createAssetPOSTMANORGANIZATIONRequest = &createAssetPOSTMANORGANIZATIONRequest
+	return r
+}
+
+func (r ApiCreateAssetPOSTMANORGANIZATIONRequest) Execute() (*AssetDetailed, *http.Response, error) {
+	return r.ApiService.CreateAssetPOSTMANORGANIZATIONExecute(r)
+}
+
+/*
+CreateAssetPOSTMANORGANIZATION Create asset postman-organization
+
+Create a postman-organization
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateAssetPOSTMANORGANIZATIONRequest
+*/
+func (a *AssetsAPIService) CreateAssetPOSTMANORGANIZATION(ctx context.Context) ApiCreateAssetPOSTMANORGANIZATIONRequest {
+	return ApiCreateAssetPOSTMANORGANIZATIONRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return AssetDetailed
+func (a *AssetsAPIService) CreateAssetPOSTMANORGANIZATIONExecute(r ApiCreateAssetPOSTMANORGANIZATIONRequest) (*AssetDetailed, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *AssetDetailed
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetPOSTMANORGANIZATION")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/assets/postman-organization"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.createAssetPOSTMANORGANIZATIONRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2243,7 +2772,7 @@ func (a *AssetsAPIService) CreateAssetRESTExecute(r ApiCreateAssetRESTRequest) (
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v CreateASMDNSProfile400Response
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2375,7 +2904,7 @@ func (a *AssetsAPIService) CreateAssetWEBAPPExecute(r ApiCreateAssetWEBAPPReques
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v CreateASMDNSProfile400Response
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2399,32 +2928,32 @@ func (a *AssetsAPIService) CreateAssetWEBAPPExecute(r ApiCreateAssetWEBAPPReques
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiCreateAssetWIZRequest struct {
+type ApiCreateAssetWIZACCOUNTRequest struct {
 	ctx context.Context
 	ApiService *AssetsAPIService
-	createAssetWIZRequest *CreateAssetWIZRequest
+	createAssetWIZACCOUNTRequest *CreateAssetWIZACCOUNTRequest
 }
 
 // Body of the request to create an asset
-func (r ApiCreateAssetWIZRequest) CreateAssetWIZRequest(createAssetWIZRequest CreateAssetWIZRequest) ApiCreateAssetWIZRequest {
-	r.createAssetWIZRequest = &createAssetWIZRequest
+func (r ApiCreateAssetWIZACCOUNTRequest) CreateAssetWIZACCOUNTRequest(createAssetWIZACCOUNTRequest CreateAssetWIZACCOUNTRequest) ApiCreateAssetWIZACCOUNTRequest {
+	r.createAssetWIZACCOUNTRequest = &createAssetWIZACCOUNTRequest
 	return r
 }
 
-func (r ApiCreateAssetWIZRequest) Execute() (*AssetDetailed, *http.Response, error) {
-	return r.ApiService.CreateAssetWIZExecute(r)
+func (r ApiCreateAssetWIZACCOUNTRequest) Execute() (*AssetDetailed, *http.Response, error) {
+	return r.ApiService.CreateAssetWIZACCOUNTExecute(r)
 }
 
 /*
-CreateAssetWIZ Create asset wiz
+CreateAssetWIZACCOUNT Create asset wiz-account
 
-Create a wiz
+Create a wiz-account
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateAssetWIZRequest
+ @return ApiCreateAssetWIZACCOUNTRequest
 */
-func (a *AssetsAPIService) CreateAssetWIZ(ctx context.Context) ApiCreateAssetWIZRequest {
-	return ApiCreateAssetWIZRequest{
+func (a *AssetsAPIService) CreateAssetWIZACCOUNT(ctx context.Context) ApiCreateAssetWIZACCOUNTRequest {
+	return ApiCreateAssetWIZACCOUNTRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -2432,7 +2961,7 @@ func (a *AssetsAPIService) CreateAssetWIZ(ctx context.Context) ApiCreateAssetWIZ
 
 // Execute executes the request
 //  @return AssetDetailed
-func (a *AssetsAPIService) CreateAssetWIZExecute(r ApiCreateAssetWIZRequest) (*AssetDetailed, *http.Response, error) {
+func (a *AssetsAPIService) CreateAssetWIZACCOUNTExecute(r ApiCreateAssetWIZACCOUNTRequest) (*AssetDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -2440,12 +2969,12 @@ func (a *AssetsAPIService) CreateAssetWIZExecute(r ApiCreateAssetWIZRequest) (*A
 		localVarReturnValue  *AssetDetailed
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetWIZ")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetWIZACCOUNT")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/assets/wiz"
+	localVarPath := localBasePath + "/assets/wiz-account"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -2469,7 +2998,7 @@ func (a *AssetsAPIService) CreateAssetWIZExecute(r ApiCreateAssetWIZRequest) (*A
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.createAssetWIZRequest
+	localVarPostBody = r.createAssetWIZACCOUNTRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -2507,7 +3036,139 @@ func (a *AssetsAPIService) CreateAssetWIZExecute(r ApiCreateAssetWIZRequest) (*A
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v CreateASMDNSProfile400Response
+			var v UpdateProfile400Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCreateAssetWPJSONRequest struct {
+	ctx context.Context
+	ApiService *AssetsAPIService
+	createAssetWPJSONRequest *CreateAssetWPJSONRequest
+}
+
+// Body of the request to create an asset
+func (r ApiCreateAssetWPJSONRequest) CreateAssetWPJSONRequest(createAssetWPJSONRequest CreateAssetWPJSONRequest) ApiCreateAssetWPJSONRequest {
+	r.createAssetWPJSONRequest = &createAssetWPJSONRequest
+	return r
+}
+
+func (r ApiCreateAssetWPJSONRequest) Execute() (*AssetDetailed, *http.Response, error) {
+	return r.ApiService.CreateAssetWPJSONExecute(r)
+}
+
+/*
+CreateAssetWPJSON Create asset wp-json
+
+Create a wp-json
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateAssetWPJSONRequest
+*/
+func (a *AssetsAPIService) CreateAssetWPJSON(ctx context.Context) ApiCreateAssetWPJSONRequest {
+	return ApiCreateAssetWPJSONRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return AssetDetailed
+func (a *AssetsAPIService) CreateAssetWPJSONExecute(r ApiCreateAssetWPJSONRequest) (*AssetDetailed, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *AssetDetailed
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetWPJSON")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/assets/wp-json"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.createAssetWPJSONRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2793,6 +3454,9 @@ type ApiListAssetsRequest struct {
 	sortType *string
 	sortDirection *string
 	search *string
+	types *[]string
+	statuses *[]string
+	manuallyCreated *bool
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
@@ -2822,6 +3486,24 @@ func (r ApiListAssetsRequest) SortDirection(sortDirection string) ApiListAssetsR
 // Search term to filter assets by name or description
 func (r ApiListAssetsRequest) Search(search string) ApiListAssetsRequest {
 	r.search = &search
+	return r
+}
+
+// Filter by type
+func (r ApiListAssetsRequest) Types(types []string) ApiListAssetsRequest {
+	r.types = &types
+	return r
+}
+
+// Filter by status
+func (r ApiListAssetsRequest) Statuses(statuses []string) ApiListAssetsRequest {
+	r.statuses = &statuses
+	return r
+}
+
+// Filter by manually created
+func (r ApiListAssetsRequest) ManuallyCreated(manuallyCreated bool) ApiListAssetsRequest {
+	r.manuallyCreated = &manuallyCreated
 	return r
 }
 
@@ -2885,6 +3567,31 @@ func (a *AssetsAPIService) ListAssetsExecute(r ApiListAssetsRequest) (*ListAsset
 	}
 	if r.search != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")
+	}
+	if r.types != nil {
+		t := *r.types
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "types", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "types", t, "form", "multi")
+		}
+	}
+	if r.statuses != nil {
+		t := *r.statuses
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "statuses", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "statuses", t, "form", "multi")
+		}
+	}
+	if r.manuallyCreated != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "manuallyCreated", r.manuallyCreated, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

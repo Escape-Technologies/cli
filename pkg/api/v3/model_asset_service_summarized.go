@@ -22,8 +22,7 @@ var _ MappedNullable = &AssetServiceSummarized{}
 type AssetServiceSummarized struct {
 	// The url of the asset service
 	Url string `json:"url"`
-	// The type of the asset service
-	Type string `json:"type"`
+	Type ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESTYPE `json:"type"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -33,7 +32,7 @@ type _AssetServiceSummarized AssetServiceSummarized
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAssetServiceSummarized(url string, type_ string) *AssetServiceSummarized {
+func NewAssetServiceSummarized(url string, type_ ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESTYPE) *AssetServiceSummarized {
 	this := AssetServiceSummarized{}
 	this.Url = url
 	this.Type = type_
@@ -73,9 +72,9 @@ func (o *AssetServiceSummarized) SetUrl(v string) {
 }
 
 // GetType returns the Type field value
-func (o *AssetServiceSummarized) GetType() string {
+func (o *AssetServiceSummarized) GetType() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESTYPE {
 	if o == nil {
-		var ret string
+		var ret ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESTYPE
 		return ret
 	}
 
@@ -84,7 +83,7 @@ func (o *AssetServiceSummarized) GetType() string {
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *AssetServiceSummarized) GetTypeOk() (*string, bool) {
+func (o *AssetServiceSummarized) GetTypeOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESTYPE, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -92,7 +91,7 @@ func (o *AssetServiceSummarized) GetTypeOk() (*string, bool) {
 }
 
 // SetType sets field value
-func (o *AssetServiceSummarized) SetType(v string) {
+func (o *AssetServiceSummarized) SetType(v ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESTYPE) {
 	o.Type = v
 }
 
