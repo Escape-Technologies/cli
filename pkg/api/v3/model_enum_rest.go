@@ -21,11 +21,13 @@ type ENUMREST string
 // List of ENUM_REST
 const (
 	ENUMREST_REST ENUMREST = "REST"
+	ENUMREST_REST2 ENUMREST = "rest"
 )
 
 // All allowed values of ENUMREST enum
 var AllowedENUMRESTEnumValues = []ENUMREST{
 	"REST",
+	"rest",
 }
 
 func (v *ENUMREST) UnmarshalJSON(src []byte) error {
@@ -106,3 +108,4 @@ func (v *NullableENUMREST) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
