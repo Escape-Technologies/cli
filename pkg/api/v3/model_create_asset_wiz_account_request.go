@@ -15,11 +15,11 @@ import (
 	"fmt"
 )
 
-// checks if the CreateAssetWIZRequest type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &CreateAssetWIZRequest{}
+// checks if the CreateAssetWIZACCOUNTRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CreateAssetWIZACCOUNTRequest{}
 
-// CreateAssetWIZRequest struct for CreateAssetWIZRequest
-type CreateAssetWIZRequest struct {
+// CreateAssetWIZACCOUNTRequest struct for CreateAssetWIZACCOUNTRequest
+type CreateAssetWIZACCOUNTRequest struct {
 	AssetClass ENUMCSPM `json:"asset_class"`
 	AssetType ENUMWIZACCOUNT `json:"asset_type"`
 	Name *string `json:"name,omitempty"`
@@ -30,14 +30,14 @@ type CreateAssetWIZRequest struct {
 	AdditionalProperties map[string]interface{}
 }
 
-type _CreateAssetWIZRequest CreateAssetWIZRequest
+type _CreateAssetWIZACCOUNTRequest CreateAssetWIZACCOUNTRequest
 
-// NewCreateAssetWIZRequest instantiates a new CreateAssetWIZRequest object
+// NewCreateAssetWIZACCOUNTRequest instantiates a new CreateAssetWIZACCOUNTRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetWIZRequest(assetClass ENUMCSPM, assetType ENUMWIZACCOUNT, clientId string, clientSecret string, tokenUri string, apiEndpoint string) *CreateAssetWIZRequest {
-	this := CreateAssetWIZRequest{}
+func NewCreateAssetWIZACCOUNTRequest(assetClass ENUMCSPM, assetType ENUMWIZACCOUNT, clientId string, clientSecret string, tokenUri string, apiEndpoint string) *CreateAssetWIZACCOUNTRequest {
+	this := CreateAssetWIZACCOUNTRequest{}
 	this.AssetClass = assetClass
 	this.AssetType = assetType
 	this.ClientId = clientId
@@ -47,16 +47,16 @@ func NewCreateAssetWIZRequest(assetClass ENUMCSPM, assetType ENUMWIZACCOUNT, cli
 	return &this
 }
 
-// NewCreateAssetWIZRequestWithDefaults instantiates a new CreateAssetWIZRequest object
+// NewCreateAssetWIZACCOUNTRequestWithDefaults instantiates a new CreateAssetWIZACCOUNTRequest object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCreateAssetWIZRequestWithDefaults() *CreateAssetWIZRequest {
-	this := CreateAssetWIZRequest{}
+func NewCreateAssetWIZACCOUNTRequestWithDefaults() *CreateAssetWIZACCOUNTRequest {
+	this := CreateAssetWIZACCOUNTRequest{}
 	return &this
 }
 
 // GetAssetClass returns the AssetClass field value
-func (o *CreateAssetWIZRequest) GetAssetClass() ENUMCSPM {
+func (o *CreateAssetWIZACCOUNTRequest) GetAssetClass() ENUMCSPM {
 	if o == nil {
 		var ret ENUMCSPM
 		return ret
@@ -67,7 +67,7 @@ func (o *CreateAssetWIZRequest) GetAssetClass() ENUMCSPM {
 
 // GetAssetClassOk returns a tuple with the AssetClass field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetWIZRequest) GetAssetClassOk() (*ENUMCSPM, bool) {
+func (o *CreateAssetWIZACCOUNTRequest) GetAssetClassOk() (*ENUMCSPM, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -75,12 +75,12 @@ func (o *CreateAssetWIZRequest) GetAssetClassOk() (*ENUMCSPM, bool) {
 }
 
 // SetAssetClass sets field value
-func (o *CreateAssetWIZRequest) SetAssetClass(v ENUMCSPM) {
+func (o *CreateAssetWIZACCOUNTRequest) SetAssetClass(v ENUMCSPM) {
 	o.AssetClass = v
 }
 
 // GetAssetType returns the AssetType field value
-func (o *CreateAssetWIZRequest) GetAssetType() ENUMWIZACCOUNT {
+func (o *CreateAssetWIZACCOUNTRequest) GetAssetType() ENUMWIZACCOUNT {
 	if o == nil {
 		var ret ENUMWIZACCOUNT
 		return ret
@@ -91,7 +91,7 @@ func (o *CreateAssetWIZRequest) GetAssetType() ENUMWIZACCOUNT {
 
 // GetAssetTypeOk returns a tuple with the AssetType field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetWIZRequest) GetAssetTypeOk() (*ENUMWIZACCOUNT, bool) {
+func (o *CreateAssetWIZACCOUNTRequest) GetAssetTypeOk() (*ENUMWIZACCOUNT, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -99,12 +99,12 @@ func (o *CreateAssetWIZRequest) GetAssetTypeOk() (*ENUMWIZACCOUNT, bool) {
 }
 
 // SetAssetType sets field value
-func (o *CreateAssetWIZRequest) SetAssetType(v ENUMWIZACCOUNT) {
+func (o *CreateAssetWIZACCOUNTRequest) SetAssetType(v ENUMWIZACCOUNT) {
 	o.AssetType = v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
-func (o *CreateAssetWIZRequest) GetName() string {
+func (o *CreateAssetWIZACCOUNTRequest) GetName() string {
 	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
@@ -114,7 +114,7 @@ func (o *CreateAssetWIZRequest) GetName() string {
 
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetWIZRequest) GetNameOk() (*string, bool) {
+func (o *CreateAssetWIZACCOUNTRequest) GetNameOk() (*string, bool) {
 	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
@@ -122,7 +122,7 @@ func (o *CreateAssetWIZRequest) GetNameOk() (*string, bool) {
 }
 
 // HasName returns a boolean if a field has been set.
-func (o *CreateAssetWIZRequest) HasName() bool {
+func (o *CreateAssetWIZACCOUNTRequest) HasName() bool {
 	if o != nil && !IsNil(o.Name) {
 		return true
 	}
@@ -131,12 +131,12 @@ func (o *CreateAssetWIZRequest) HasName() bool {
 }
 
 // SetName gets a reference to the given string and assigns it to the Name field.
-func (o *CreateAssetWIZRequest) SetName(v string) {
+func (o *CreateAssetWIZACCOUNTRequest) SetName(v string) {
 	o.Name = &v
 }
 
 // GetClientId returns the ClientId field value
-func (o *CreateAssetWIZRequest) GetClientId() string {
+func (o *CreateAssetWIZACCOUNTRequest) GetClientId() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -147,7 +147,7 @@ func (o *CreateAssetWIZRequest) GetClientId() string {
 
 // GetClientIdOk returns a tuple with the ClientId field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetWIZRequest) GetClientIdOk() (*string, bool) {
+func (o *CreateAssetWIZACCOUNTRequest) GetClientIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -155,12 +155,12 @@ func (o *CreateAssetWIZRequest) GetClientIdOk() (*string, bool) {
 }
 
 // SetClientId sets field value
-func (o *CreateAssetWIZRequest) SetClientId(v string) {
+func (o *CreateAssetWIZACCOUNTRequest) SetClientId(v string) {
 	o.ClientId = v
 }
 
 // GetClientSecret returns the ClientSecret field value
-func (o *CreateAssetWIZRequest) GetClientSecret() string {
+func (o *CreateAssetWIZACCOUNTRequest) GetClientSecret() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -171,7 +171,7 @@ func (o *CreateAssetWIZRequest) GetClientSecret() string {
 
 // GetClientSecretOk returns a tuple with the ClientSecret field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetWIZRequest) GetClientSecretOk() (*string, bool) {
+func (o *CreateAssetWIZACCOUNTRequest) GetClientSecretOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -179,12 +179,12 @@ func (o *CreateAssetWIZRequest) GetClientSecretOk() (*string, bool) {
 }
 
 // SetClientSecret sets field value
-func (o *CreateAssetWIZRequest) SetClientSecret(v string) {
+func (o *CreateAssetWIZACCOUNTRequest) SetClientSecret(v string) {
 	o.ClientSecret = v
 }
 
 // GetTokenUri returns the TokenUri field value
-func (o *CreateAssetWIZRequest) GetTokenUri() string {
+func (o *CreateAssetWIZACCOUNTRequest) GetTokenUri() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -195,7 +195,7 @@ func (o *CreateAssetWIZRequest) GetTokenUri() string {
 
 // GetTokenUriOk returns a tuple with the TokenUri field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetWIZRequest) GetTokenUriOk() (*string, bool) {
+func (o *CreateAssetWIZACCOUNTRequest) GetTokenUriOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -203,12 +203,12 @@ func (o *CreateAssetWIZRequest) GetTokenUriOk() (*string, bool) {
 }
 
 // SetTokenUri sets field value
-func (o *CreateAssetWIZRequest) SetTokenUri(v string) {
+func (o *CreateAssetWIZACCOUNTRequest) SetTokenUri(v string) {
 	o.TokenUri = v
 }
 
 // GetApiEndpoint returns the ApiEndpoint field value
-func (o *CreateAssetWIZRequest) GetApiEndpoint() string {
+func (o *CreateAssetWIZACCOUNTRequest) GetApiEndpoint() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -219,7 +219,7 @@ func (o *CreateAssetWIZRequest) GetApiEndpoint() string {
 
 // GetApiEndpointOk returns a tuple with the ApiEndpoint field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetWIZRequest) GetApiEndpointOk() (*string, bool) {
+func (o *CreateAssetWIZACCOUNTRequest) GetApiEndpointOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -227,11 +227,11 @@ func (o *CreateAssetWIZRequest) GetApiEndpointOk() (*string, bool) {
 }
 
 // SetApiEndpoint sets field value
-func (o *CreateAssetWIZRequest) SetApiEndpoint(v string) {
+func (o *CreateAssetWIZACCOUNTRequest) SetApiEndpoint(v string) {
 	o.ApiEndpoint = v
 }
 
-func (o CreateAssetWIZRequest) MarshalJSON() ([]byte, error) {
+func (o CreateAssetWIZACCOUNTRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -239,7 +239,7 @@ func (o CreateAssetWIZRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CreateAssetWIZRequest) ToMap() (map[string]interface{}, error) {
+func (o CreateAssetWIZACCOUNTRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["asset_class"] = o.AssetClass
 	toSerialize["asset_type"] = o.AssetType
@@ -258,7 +258,7 @@ func (o CreateAssetWIZRequest) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *CreateAssetWIZRequest) UnmarshalJSON(data []byte) (err error) {
+func (o *CreateAssetWIZACCOUNTRequest) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -285,15 +285,15 @@ func (o *CreateAssetWIZRequest) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varCreateAssetWIZRequest := _CreateAssetWIZRequest{}
+	varCreateAssetWIZACCOUNTRequest := _CreateAssetWIZACCOUNTRequest{}
 
-	err = json.Unmarshal(data, &varCreateAssetWIZRequest)
+	err = json.Unmarshal(data, &varCreateAssetWIZACCOUNTRequest)
 
 	if err != nil {
 		return err
 	}
 
-	*o = CreateAssetWIZRequest(varCreateAssetWIZRequest)
+	*o = CreateAssetWIZACCOUNTRequest(varCreateAssetWIZACCOUNTRequest)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -311,38 +311,38 @@ func (o *CreateAssetWIZRequest) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableCreateAssetWIZRequest struct {
-	value *CreateAssetWIZRequest
+type NullableCreateAssetWIZACCOUNTRequest struct {
+	value *CreateAssetWIZACCOUNTRequest
 	isSet bool
 }
 
-func (v NullableCreateAssetWIZRequest) Get() *CreateAssetWIZRequest {
+func (v NullableCreateAssetWIZACCOUNTRequest) Get() *CreateAssetWIZACCOUNTRequest {
 	return v.value
 }
 
-func (v *NullableCreateAssetWIZRequest) Set(val *CreateAssetWIZRequest) {
+func (v *NullableCreateAssetWIZACCOUNTRequest) Set(val *CreateAssetWIZACCOUNTRequest) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCreateAssetWIZRequest) IsSet() bool {
+func (v NullableCreateAssetWIZACCOUNTRequest) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCreateAssetWIZRequest) Unset() {
+func (v *NullableCreateAssetWIZACCOUNTRequest) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCreateAssetWIZRequest(val *CreateAssetWIZRequest) *NullableCreateAssetWIZRequest {
-	return &NullableCreateAssetWIZRequest{value: val, isSet: true}
+func NewNullableCreateAssetWIZACCOUNTRequest(val *CreateAssetWIZACCOUNTRequest) *NullableCreateAssetWIZACCOUNTRequest {
+	return &NullableCreateAssetWIZACCOUNTRequest{value: val, isSet: true}
 }
 
-func (v NullableCreateAssetWIZRequest) MarshalJSON() ([]byte, error) {
+func (v NullableCreateAssetWIZACCOUNTRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCreateAssetWIZRequest) UnmarshalJSON(src []byte) error {
+func (v *NullableCreateAssetWIZACCOUNTRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

@@ -15,11 +15,11 @@ import (
 	"fmt"
 )
 
-// checks if the CreateAssetAZURERequest type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &CreateAssetAZURERequest{}
+// checks if the CreateAssetAZURETENANTRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CreateAssetAZURETENANTRequest{}
 
-// CreateAssetAZURERequest struct for CreateAssetAZURERequest
-type CreateAssetAZURERequest struct {
+// CreateAssetAZURETENANTRequest struct for CreateAssetAZURETENANTRequest
+type CreateAssetAZURETENANTRequest struct {
 	AssetClass ENUMCLOUDHOSTING `json:"asset_class"`
 	AssetType ENUMAZURETENANT `json:"asset_type"`
 	Name *string `json:"name,omitempty"`
@@ -29,14 +29,14 @@ type CreateAssetAZURERequest struct {
 	AdditionalProperties map[string]interface{}
 }
 
-type _CreateAssetAZURERequest CreateAssetAZURERequest
+type _CreateAssetAZURETENANTRequest CreateAssetAZURETENANTRequest
 
-// NewCreateAssetAZURERequest instantiates a new CreateAssetAZURERequest object
+// NewCreateAssetAZURETENANTRequest instantiates a new CreateAssetAZURETENANTRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetAZURERequest(assetClass ENUMCLOUDHOSTING, assetType ENUMAZURETENANT, clientId string, clientSecret string, tenantId string) *CreateAssetAZURERequest {
-	this := CreateAssetAZURERequest{}
+func NewCreateAssetAZURETENANTRequest(assetClass ENUMCLOUDHOSTING, assetType ENUMAZURETENANT, clientId string, clientSecret string, tenantId string) *CreateAssetAZURETENANTRequest {
+	this := CreateAssetAZURETENANTRequest{}
 	this.AssetClass = assetClass
 	this.AssetType = assetType
 	this.ClientId = clientId
@@ -45,16 +45,16 @@ func NewCreateAssetAZURERequest(assetClass ENUMCLOUDHOSTING, assetType ENUMAZURE
 	return &this
 }
 
-// NewCreateAssetAZURERequestWithDefaults instantiates a new CreateAssetAZURERequest object
+// NewCreateAssetAZURETENANTRequestWithDefaults instantiates a new CreateAssetAZURETENANTRequest object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCreateAssetAZURERequestWithDefaults() *CreateAssetAZURERequest {
-	this := CreateAssetAZURERequest{}
+func NewCreateAssetAZURETENANTRequestWithDefaults() *CreateAssetAZURETENANTRequest {
+	this := CreateAssetAZURETENANTRequest{}
 	return &this
 }
 
 // GetAssetClass returns the AssetClass field value
-func (o *CreateAssetAZURERequest) GetAssetClass() ENUMCLOUDHOSTING {
+func (o *CreateAssetAZURETENANTRequest) GetAssetClass() ENUMCLOUDHOSTING {
 	if o == nil {
 		var ret ENUMCLOUDHOSTING
 		return ret
@@ -65,7 +65,7 @@ func (o *CreateAssetAZURERequest) GetAssetClass() ENUMCLOUDHOSTING {
 
 // GetAssetClassOk returns a tuple with the AssetClass field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetAZURERequest) GetAssetClassOk() (*ENUMCLOUDHOSTING, bool) {
+func (o *CreateAssetAZURETENANTRequest) GetAssetClassOk() (*ENUMCLOUDHOSTING, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -73,12 +73,12 @@ func (o *CreateAssetAZURERequest) GetAssetClassOk() (*ENUMCLOUDHOSTING, bool) {
 }
 
 // SetAssetClass sets field value
-func (o *CreateAssetAZURERequest) SetAssetClass(v ENUMCLOUDHOSTING) {
+func (o *CreateAssetAZURETENANTRequest) SetAssetClass(v ENUMCLOUDHOSTING) {
 	o.AssetClass = v
 }
 
 // GetAssetType returns the AssetType field value
-func (o *CreateAssetAZURERequest) GetAssetType() ENUMAZURETENANT {
+func (o *CreateAssetAZURETENANTRequest) GetAssetType() ENUMAZURETENANT {
 	if o == nil {
 		var ret ENUMAZURETENANT
 		return ret
@@ -89,7 +89,7 @@ func (o *CreateAssetAZURERequest) GetAssetType() ENUMAZURETENANT {
 
 // GetAssetTypeOk returns a tuple with the AssetType field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetAZURERequest) GetAssetTypeOk() (*ENUMAZURETENANT, bool) {
+func (o *CreateAssetAZURETENANTRequest) GetAssetTypeOk() (*ENUMAZURETENANT, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -97,12 +97,12 @@ func (o *CreateAssetAZURERequest) GetAssetTypeOk() (*ENUMAZURETENANT, bool) {
 }
 
 // SetAssetType sets field value
-func (o *CreateAssetAZURERequest) SetAssetType(v ENUMAZURETENANT) {
+func (o *CreateAssetAZURETENANTRequest) SetAssetType(v ENUMAZURETENANT) {
 	o.AssetType = v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
-func (o *CreateAssetAZURERequest) GetName() string {
+func (o *CreateAssetAZURETENANTRequest) GetName() string {
 	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
@@ -112,7 +112,7 @@ func (o *CreateAssetAZURERequest) GetName() string {
 
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetAZURERequest) GetNameOk() (*string, bool) {
+func (o *CreateAssetAZURETENANTRequest) GetNameOk() (*string, bool) {
 	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
@@ -120,7 +120,7 @@ func (o *CreateAssetAZURERequest) GetNameOk() (*string, bool) {
 }
 
 // HasName returns a boolean if a field has been set.
-func (o *CreateAssetAZURERequest) HasName() bool {
+func (o *CreateAssetAZURETENANTRequest) HasName() bool {
 	if o != nil && !IsNil(o.Name) {
 		return true
 	}
@@ -129,12 +129,12 @@ func (o *CreateAssetAZURERequest) HasName() bool {
 }
 
 // SetName gets a reference to the given string and assigns it to the Name field.
-func (o *CreateAssetAZURERequest) SetName(v string) {
+func (o *CreateAssetAZURETENANTRequest) SetName(v string) {
 	o.Name = &v
 }
 
 // GetClientId returns the ClientId field value
-func (o *CreateAssetAZURERequest) GetClientId() string {
+func (o *CreateAssetAZURETENANTRequest) GetClientId() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -145,7 +145,7 @@ func (o *CreateAssetAZURERequest) GetClientId() string {
 
 // GetClientIdOk returns a tuple with the ClientId field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetAZURERequest) GetClientIdOk() (*string, bool) {
+func (o *CreateAssetAZURETENANTRequest) GetClientIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -153,12 +153,12 @@ func (o *CreateAssetAZURERequest) GetClientIdOk() (*string, bool) {
 }
 
 // SetClientId sets field value
-func (o *CreateAssetAZURERequest) SetClientId(v string) {
+func (o *CreateAssetAZURETENANTRequest) SetClientId(v string) {
 	o.ClientId = v
 }
 
 // GetClientSecret returns the ClientSecret field value
-func (o *CreateAssetAZURERequest) GetClientSecret() string {
+func (o *CreateAssetAZURETENANTRequest) GetClientSecret() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -169,7 +169,7 @@ func (o *CreateAssetAZURERequest) GetClientSecret() string {
 
 // GetClientSecretOk returns a tuple with the ClientSecret field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetAZURERequest) GetClientSecretOk() (*string, bool) {
+func (o *CreateAssetAZURETENANTRequest) GetClientSecretOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -177,12 +177,12 @@ func (o *CreateAssetAZURERequest) GetClientSecretOk() (*string, bool) {
 }
 
 // SetClientSecret sets field value
-func (o *CreateAssetAZURERequest) SetClientSecret(v string) {
+func (o *CreateAssetAZURETENANTRequest) SetClientSecret(v string) {
 	o.ClientSecret = v
 }
 
 // GetTenantId returns the TenantId field value
-func (o *CreateAssetAZURERequest) GetTenantId() string {
+func (o *CreateAssetAZURETENANTRequest) GetTenantId() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -193,7 +193,7 @@ func (o *CreateAssetAZURERequest) GetTenantId() string {
 
 // GetTenantIdOk returns a tuple with the TenantId field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetAZURERequest) GetTenantIdOk() (*string, bool) {
+func (o *CreateAssetAZURETENANTRequest) GetTenantIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -201,11 +201,11 @@ func (o *CreateAssetAZURERequest) GetTenantIdOk() (*string, bool) {
 }
 
 // SetTenantId sets field value
-func (o *CreateAssetAZURERequest) SetTenantId(v string) {
+func (o *CreateAssetAZURETENANTRequest) SetTenantId(v string) {
 	o.TenantId = v
 }
 
-func (o CreateAssetAZURERequest) MarshalJSON() ([]byte, error) {
+func (o CreateAssetAZURETENANTRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -213,7 +213,7 @@ func (o CreateAssetAZURERequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CreateAssetAZURERequest) ToMap() (map[string]interface{}, error) {
+func (o CreateAssetAZURETENANTRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["asset_class"] = o.AssetClass
 	toSerialize["asset_type"] = o.AssetType
@@ -231,7 +231,7 @@ func (o CreateAssetAZURERequest) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *CreateAssetAZURERequest) UnmarshalJSON(data []byte) (err error) {
+func (o *CreateAssetAZURETENANTRequest) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -257,15 +257,15 @@ func (o *CreateAssetAZURERequest) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varCreateAssetAZURERequest := _CreateAssetAZURERequest{}
+	varCreateAssetAZURETENANTRequest := _CreateAssetAZURETENANTRequest{}
 
-	err = json.Unmarshal(data, &varCreateAssetAZURERequest)
+	err = json.Unmarshal(data, &varCreateAssetAZURETENANTRequest)
 
 	if err != nil {
 		return err
 	}
 
-	*o = CreateAssetAZURERequest(varCreateAssetAZURERequest)
+	*o = CreateAssetAZURETENANTRequest(varCreateAssetAZURETENANTRequest)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -282,38 +282,38 @@ func (o *CreateAssetAZURERequest) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableCreateAssetAZURERequest struct {
-	value *CreateAssetAZURERequest
+type NullableCreateAssetAZURETENANTRequest struct {
+	value *CreateAssetAZURETENANTRequest
 	isSet bool
 }
 
-func (v NullableCreateAssetAZURERequest) Get() *CreateAssetAZURERequest {
+func (v NullableCreateAssetAZURETENANTRequest) Get() *CreateAssetAZURETENANTRequest {
 	return v.value
 }
 
-func (v *NullableCreateAssetAZURERequest) Set(val *CreateAssetAZURERequest) {
+func (v *NullableCreateAssetAZURETENANTRequest) Set(val *CreateAssetAZURETENANTRequest) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCreateAssetAZURERequest) IsSet() bool {
+func (v NullableCreateAssetAZURETENANTRequest) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCreateAssetAZURERequest) Unset() {
+func (v *NullableCreateAssetAZURETENANTRequest) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCreateAssetAZURERequest(val *CreateAssetAZURERequest) *NullableCreateAssetAZURERequest {
-	return &NullableCreateAssetAZURERequest{value: val, isSet: true}
+func NewNullableCreateAssetAZURETENANTRequest(val *CreateAssetAZURETENANTRequest) *NullableCreateAssetAZURETENANTRequest {
+	return &NullableCreateAssetAZURETENANTRequest{value: val, isSet: true}
 }
 
-func (v NullableCreateAssetAZURERequest) MarshalJSON() ([]byte, error) {
+func (v NullableCreateAssetAZURETENANTRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCreateAssetAZURERequest) UnmarshalJSON(src []byte) error {
+func (v *NullableCreateAssetAZURETENANTRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

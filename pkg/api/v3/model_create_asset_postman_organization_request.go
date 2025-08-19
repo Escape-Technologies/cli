@@ -15,44 +15,44 @@ import (
 	"fmt"
 )
 
-// checks if the CreateAssetGITHUBRequestOrg type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &CreateAssetGITHUBRequestOrg{}
+// checks if the CreateAssetPOSTMANORGANIZATIONRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CreateAssetPOSTMANORGANIZATIONRequest{}
 
-// CreateAssetGITHUBRequestOrg struct for CreateAssetGITHUBRequestOrg
-type CreateAssetGITHUBRequestOrg struct {
-	AssetClass ENUMSOURCECODEMANAGEMENT `json:"asset_class"`
-	AssetType ENUMGITHUBORGANIZATION `json:"asset_type"`
+// CreateAssetPOSTMANORGANIZATIONRequest struct for CreateAssetPOSTMANORGANIZATIONRequest
+type CreateAssetPOSTMANORGANIZATIONRequest struct {
+	AssetClass ENUMDEVTOOLS `json:"asset_class"`
+	AssetType ENUMPOSTMANORGANIZATION `json:"asset_type"`
 	Name *string `json:"name,omitempty"`
 	ApiKey string `json:"api_key"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _CreateAssetGITHUBRequestOrg CreateAssetGITHUBRequestOrg
+type _CreateAssetPOSTMANORGANIZATIONRequest CreateAssetPOSTMANORGANIZATIONRequest
 
-// NewCreateAssetGITHUBRequestOrg instantiates a new CreateAssetGITHUBRequestOrg object
+// NewCreateAssetPOSTMANORGANIZATIONRequest instantiates a new CreateAssetPOSTMANORGANIZATIONRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetGITHUBRequestOrg(assetClass ENUMSOURCECODEMANAGEMENT, assetType ENUMGITHUBORGANIZATION, apiKey string) *CreateAssetGITHUBRequestOrg {
-	this := CreateAssetGITHUBRequestOrg{}
+func NewCreateAssetPOSTMANORGANIZATIONRequest(assetClass ENUMDEVTOOLS, assetType ENUMPOSTMANORGANIZATION, apiKey string) *CreateAssetPOSTMANORGANIZATIONRequest {
+	this := CreateAssetPOSTMANORGANIZATIONRequest{}
 	this.AssetClass = assetClass
 	this.AssetType = assetType
 	this.ApiKey = apiKey
 	return &this
 }
 
-// NewCreateAssetGITHUBRequestOrgWithDefaults instantiates a new CreateAssetGITHUBRequestOrg object
+// NewCreateAssetPOSTMANORGANIZATIONRequestWithDefaults instantiates a new CreateAssetPOSTMANORGANIZATIONRequest object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCreateAssetGITHUBRequestOrgWithDefaults() *CreateAssetGITHUBRequestOrg {
-	this := CreateAssetGITHUBRequestOrg{}
+func NewCreateAssetPOSTMANORGANIZATIONRequestWithDefaults() *CreateAssetPOSTMANORGANIZATIONRequest {
+	this := CreateAssetPOSTMANORGANIZATIONRequest{}
 	return &this
 }
 
 // GetAssetClass returns the AssetClass field value
-func (o *CreateAssetGITHUBRequestOrg) GetAssetClass() ENUMSOURCECODEMANAGEMENT {
+func (o *CreateAssetPOSTMANORGANIZATIONRequest) GetAssetClass() ENUMDEVTOOLS {
 	if o == nil {
-		var ret ENUMSOURCECODEMANAGEMENT
+		var ret ENUMDEVTOOLS
 		return ret
 	}
 
@@ -61,7 +61,7 @@ func (o *CreateAssetGITHUBRequestOrg) GetAssetClass() ENUMSOURCECODEMANAGEMENT {
 
 // GetAssetClassOk returns a tuple with the AssetClass field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGITHUBRequestOrg) GetAssetClassOk() (*ENUMSOURCECODEMANAGEMENT, bool) {
+func (o *CreateAssetPOSTMANORGANIZATIONRequest) GetAssetClassOk() (*ENUMDEVTOOLS, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -69,14 +69,14 @@ func (o *CreateAssetGITHUBRequestOrg) GetAssetClassOk() (*ENUMSOURCECODEMANAGEME
 }
 
 // SetAssetClass sets field value
-func (o *CreateAssetGITHUBRequestOrg) SetAssetClass(v ENUMSOURCECODEMANAGEMENT) {
+func (o *CreateAssetPOSTMANORGANIZATIONRequest) SetAssetClass(v ENUMDEVTOOLS) {
 	o.AssetClass = v
 }
 
 // GetAssetType returns the AssetType field value
-func (o *CreateAssetGITHUBRequestOrg) GetAssetType() ENUMGITHUBORGANIZATION {
+func (o *CreateAssetPOSTMANORGANIZATIONRequest) GetAssetType() ENUMPOSTMANORGANIZATION {
 	if o == nil {
-		var ret ENUMGITHUBORGANIZATION
+		var ret ENUMPOSTMANORGANIZATION
 		return ret
 	}
 
@@ -85,7 +85,7 @@ func (o *CreateAssetGITHUBRequestOrg) GetAssetType() ENUMGITHUBORGANIZATION {
 
 // GetAssetTypeOk returns a tuple with the AssetType field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGITHUBRequestOrg) GetAssetTypeOk() (*ENUMGITHUBORGANIZATION, bool) {
+func (o *CreateAssetPOSTMANORGANIZATIONRequest) GetAssetTypeOk() (*ENUMPOSTMANORGANIZATION, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -93,12 +93,12 @@ func (o *CreateAssetGITHUBRequestOrg) GetAssetTypeOk() (*ENUMGITHUBORGANIZATION,
 }
 
 // SetAssetType sets field value
-func (o *CreateAssetGITHUBRequestOrg) SetAssetType(v ENUMGITHUBORGANIZATION) {
+func (o *CreateAssetPOSTMANORGANIZATIONRequest) SetAssetType(v ENUMPOSTMANORGANIZATION) {
 	o.AssetType = v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
-func (o *CreateAssetGITHUBRequestOrg) GetName() string {
+func (o *CreateAssetPOSTMANORGANIZATIONRequest) GetName() string {
 	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
@@ -108,7 +108,7 @@ func (o *CreateAssetGITHUBRequestOrg) GetName() string {
 
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGITHUBRequestOrg) GetNameOk() (*string, bool) {
+func (o *CreateAssetPOSTMANORGANIZATIONRequest) GetNameOk() (*string, bool) {
 	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
@@ -116,7 +116,7 @@ func (o *CreateAssetGITHUBRequestOrg) GetNameOk() (*string, bool) {
 }
 
 // HasName returns a boolean if a field has been set.
-func (o *CreateAssetGITHUBRequestOrg) HasName() bool {
+func (o *CreateAssetPOSTMANORGANIZATIONRequest) HasName() bool {
 	if o != nil && !IsNil(o.Name) {
 		return true
 	}
@@ -125,12 +125,12 @@ func (o *CreateAssetGITHUBRequestOrg) HasName() bool {
 }
 
 // SetName gets a reference to the given string and assigns it to the Name field.
-func (o *CreateAssetGITHUBRequestOrg) SetName(v string) {
+func (o *CreateAssetPOSTMANORGANIZATIONRequest) SetName(v string) {
 	o.Name = &v
 }
 
 // GetApiKey returns the ApiKey field value
-func (o *CreateAssetGITHUBRequestOrg) GetApiKey() string {
+func (o *CreateAssetPOSTMANORGANIZATIONRequest) GetApiKey() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -141,7 +141,7 @@ func (o *CreateAssetGITHUBRequestOrg) GetApiKey() string {
 
 // GetApiKeyOk returns a tuple with the ApiKey field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGITHUBRequestOrg) GetApiKeyOk() (*string, bool) {
+func (o *CreateAssetPOSTMANORGANIZATIONRequest) GetApiKeyOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -149,11 +149,11 @@ func (o *CreateAssetGITHUBRequestOrg) GetApiKeyOk() (*string, bool) {
 }
 
 // SetApiKey sets field value
-func (o *CreateAssetGITHUBRequestOrg) SetApiKey(v string) {
+func (o *CreateAssetPOSTMANORGANIZATIONRequest) SetApiKey(v string) {
 	o.ApiKey = v
 }
 
-func (o CreateAssetGITHUBRequestOrg) MarshalJSON() ([]byte, error) {
+func (o CreateAssetPOSTMANORGANIZATIONRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -161,7 +161,7 @@ func (o CreateAssetGITHUBRequestOrg) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CreateAssetGITHUBRequestOrg) ToMap() (map[string]interface{}, error) {
+func (o CreateAssetPOSTMANORGANIZATIONRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["asset_class"] = o.AssetClass
 	toSerialize["asset_type"] = o.AssetType
@@ -177,7 +177,7 @@ func (o CreateAssetGITHUBRequestOrg) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *CreateAssetGITHUBRequestOrg) UnmarshalJSON(data []byte) (err error) {
+func (o *CreateAssetPOSTMANORGANIZATIONRequest) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -201,15 +201,15 @@ func (o *CreateAssetGITHUBRequestOrg) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varCreateAssetGITHUBRequestOrg := _CreateAssetGITHUBRequestOrg{}
+	varCreateAssetPOSTMANORGANIZATIONRequest := _CreateAssetPOSTMANORGANIZATIONRequest{}
 
-	err = json.Unmarshal(data, &varCreateAssetGITHUBRequestOrg)
+	err = json.Unmarshal(data, &varCreateAssetPOSTMANORGANIZATIONRequest)
 
 	if err != nil {
 		return err
 	}
 
-	*o = CreateAssetGITHUBRequestOrg(varCreateAssetGITHUBRequestOrg)
+	*o = CreateAssetPOSTMANORGANIZATIONRequest(varCreateAssetPOSTMANORGANIZATIONRequest)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -224,38 +224,38 @@ func (o *CreateAssetGITHUBRequestOrg) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableCreateAssetGITHUBRequestOrg struct {
-	value *CreateAssetGITHUBRequestOrg
+type NullableCreateAssetPOSTMANORGANIZATIONRequest struct {
+	value *CreateAssetPOSTMANORGANIZATIONRequest
 	isSet bool
 }
 
-func (v NullableCreateAssetGITHUBRequestOrg) Get() *CreateAssetGITHUBRequestOrg {
+func (v NullableCreateAssetPOSTMANORGANIZATIONRequest) Get() *CreateAssetPOSTMANORGANIZATIONRequest {
 	return v.value
 }
 
-func (v *NullableCreateAssetGITHUBRequestOrg) Set(val *CreateAssetGITHUBRequestOrg) {
+func (v *NullableCreateAssetPOSTMANORGANIZATIONRequest) Set(val *CreateAssetPOSTMANORGANIZATIONRequest) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCreateAssetGITHUBRequestOrg) IsSet() bool {
+func (v NullableCreateAssetPOSTMANORGANIZATIONRequest) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCreateAssetGITHUBRequestOrg) Unset() {
+func (v *NullableCreateAssetPOSTMANORGANIZATIONRequest) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCreateAssetGITHUBRequestOrg(val *CreateAssetGITHUBRequestOrg) *NullableCreateAssetGITHUBRequestOrg {
-	return &NullableCreateAssetGITHUBRequestOrg{value: val, isSet: true}
+func NewNullableCreateAssetPOSTMANORGANIZATIONRequest(val *CreateAssetPOSTMANORGANIZATIONRequest) *NullableCreateAssetPOSTMANORGANIZATIONRequest {
+	return &NullableCreateAssetPOSTMANORGANIZATIONRequest{value: val, isSet: true}
 }
 
-func (v NullableCreateAssetGITHUBRequestOrg) MarshalJSON() ([]byte, error) {
+func (v NullableCreateAssetPOSTMANORGANIZATIONRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCreateAssetGITHUBRequestOrg) UnmarshalJSON(src []byte) error {
+func (v *NullableCreateAssetPOSTMANORGANIZATIONRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

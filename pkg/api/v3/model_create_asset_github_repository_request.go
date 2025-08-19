@@ -15,11 +15,11 @@ import (
 	"fmt"
 )
 
-// checks if the CreateAssetGITHUBRequest type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &CreateAssetGITHUBRequest{}
+// checks if the CreateAssetGITHUBREPOSITORYRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CreateAssetGITHUBREPOSITORYRequest{}
 
-// CreateAssetGITHUBRequest struct for CreateAssetGITHUBRequest
-type CreateAssetGITHUBRequest struct {
+// CreateAssetGITHUBREPOSITORYRequest struct for CreateAssetGITHUBREPOSITORYRequest
+type CreateAssetGITHUBREPOSITORYRequest struct {
 	AssetClass ENUMREPOSITORY `json:"asset_class"`
 	AssetType ENUMGITHUBREPOSITORY `json:"asset_type"`
 	Url string `json:"url"`
@@ -37,34 +37,34 @@ type CreateAssetGITHUBRequest struct {
 	Disabled *bool `json:"disabled,omitempty"`
 	Clonable *bool `json:"clonable,omitempty"`
 	Private *bool `json:"private,omitempty"`
-	Org *CreateAssetGITHUBRequestOrg `json:"org,omitempty"`
+	Org *CreateAssetGITHUBREPOSITORYRequestOrg `json:"org,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _CreateAssetGITHUBRequest CreateAssetGITHUBRequest
+type _CreateAssetGITHUBREPOSITORYRequest CreateAssetGITHUBREPOSITORYRequest
 
-// NewCreateAssetGITHUBRequest instantiates a new CreateAssetGITHUBRequest object
+// NewCreateAssetGITHUBREPOSITORYRequest instantiates a new CreateAssetGITHUBREPOSITORYRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetGITHUBRequest(assetClass ENUMREPOSITORY, assetType ENUMGITHUBREPOSITORY, url string) *CreateAssetGITHUBRequest {
-	this := CreateAssetGITHUBRequest{}
+func NewCreateAssetGITHUBREPOSITORYRequest(assetClass ENUMREPOSITORY, assetType ENUMGITHUBREPOSITORY, url string) *CreateAssetGITHUBREPOSITORYRequest {
+	this := CreateAssetGITHUBREPOSITORYRequest{}
 	this.AssetClass = assetClass
 	this.AssetType = assetType
 	this.Url = url
 	return &this
 }
 
-// NewCreateAssetGITHUBRequestWithDefaults instantiates a new CreateAssetGITHUBRequest object
+// NewCreateAssetGITHUBREPOSITORYRequestWithDefaults instantiates a new CreateAssetGITHUBREPOSITORYRequest object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCreateAssetGITHUBRequestWithDefaults() *CreateAssetGITHUBRequest {
-	this := CreateAssetGITHUBRequest{}
+func NewCreateAssetGITHUBREPOSITORYRequestWithDefaults() *CreateAssetGITHUBREPOSITORYRequest {
+	this := CreateAssetGITHUBREPOSITORYRequest{}
 	return &this
 }
 
 // GetAssetClass returns the AssetClass field value
-func (o *CreateAssetGITHUBRequest) GetAssetClass() ENUMREPOSITORY {
+func (o *CreateAssetGITHUBREPOSITORYRequest) GetAssetClass() ENUMREPOSITORY {
 	if o == nil {
 		var ret ENUMREPOSITORY
 		return ret
@@ -75,7 +75,7 @@ func (o *CreateAssetGITHUBRequest) GetAssetClass() ENUMREPOSITORY {
 
 // GetAssetClassOk returns a tuple with the AssetClass field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGITHUBRequest) GetAssetClassOk() (*ENUMREPOSITORY, bool) {
+func (o *CreateAssetGITHUBREPOSITORYRequest) GetAssetClassOk() (*ENUMREPOSITORY, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -83,12 +83,12 @@ func (o *CreateAssetGITHUBRequest) GetAssetClassOk() (*ENUMREPOSITORY, bool) {
 }
 
 // SetAssetClass sets field value
-func (o *CreateAssetGITHUBRequest) SetAssetClass(v ENUMREPOSITORY) {
+func (o *CreateAssetGITHUBREPOSITORYRequest) SetAssetClass(v ENUMREPOSITORY) {
 	o.AssetClass = v
 }
 
 // GetAssetType returns the AssetType field value
-func (o *CreateAssetGITHUBRequest) GetAssetType() ENUMGITHUBREPOSITORY {
+func (o *CreateAssetGITHUBREPOSITORYRequest) GetAssetType() ENUMGITHUBREPOSITORY {
 	if o == nil {
 		var ret ENUMGITHUBREPOSITORY
 		return ret
@@ -99,7 +99,7 @@ func (o *CreateAssetGITHUBRequest) GetAssetType() ENUMGITHUBREPOSITORY {
 
 // GetAssetTypeOk returns a tuple with the AssetType field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGITHUBRequest) GetAssetTypeOk() (*ENUMGITHUBREPOSITORY, bool) {
+func (o *CreateAssetGITHUBREPOSITORYRequest) GetAssetTypeOk() (*ENUMGITHUBREPOSITORY, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -107,12 +107,12 @@ func (o *CreateAssetGITHUBRequest) GetAssetTypeOk() (*ENUMGITHUBREPOSITORY, bool
 }
 
 // SetAssetType sets field value
-func (o *CreateAssetGITHUBRequest) SetAssetType(v ENUMGITHUBREPOSITORY) {
+func (o *CreateAssetGITHUBREPOSITORYRequest) SetAssetType(v ENUMGITHUBREPOSITORY) {
 	o.AssetType = v
 }
 
 // GetUrl returns the Url field value
-func (o *CreateAssetGITHUBRequest) GetUrl() string {
+func (o *CreateAssetGITHUBREPOSITORYRequest) GetUrl() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -123,7 +123,7 @@ func (o *CreateAssetGITHUBRequest) GetUrl() string {
 
 // GetUrlOk returns a tuple with the Url field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGITHUBRequest) GetUrlOk() (*string, bool) {
+func (o *CreateAssetGITHUBREPOSITORYRequest) GetUrlOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -131,12 +131,12 @@ func (o *CreateAssetGITHUBRequest) GetUrlOk() (*string, bool) {
 }
 
 // SetUrl sets field value
-func (o *CreateAssetGITHUBRequest) SetUrl(v string) {
+func (o *CreateAssetGITHUBREPOSITORYRequest) SetUrl(v string) {
 	o.Url = v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
-func (o *CreateAssetGITHUBRequest) GetName() string {
+func (o *CreateAssetGITHUBREPOSITORYRequest) GetName() string {
 	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
@@ -146,7 +146,7 @@ func (o *CreateAssetGITHUBRequest) GetName() string {
 
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGITHUBRequest) GetNameOk() (*string, bool) {
+func (o *CreateAssetGITHUBREPOSITORYRequest) GetNameOk() (*string, bool) {
 	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
@@ -154,7 +154,7 @@ func (o *CreateAssetGITHUBRequest) GetNameOk() (*string, bool) {
 }
 
 // HasName returns a boolean if a field has been set.
-func (o *CreateAssetGITHUBRequest) HasName() bool {
+func (o *CreateAssetGITHUBREPOSITORYRequest) HasName() bool {
 	if o != nil && !IsNil(o.Name) {
 		return true
 	}
@@ -163,12 +163,12 @@ func (o *CreateAssetGITHUBRequest) HasName() bool {
 }
 
 // SetName gets a reference to the given string and assigns it to the Name field.
-func (o *CreateAssetGITHUBRequest) SetName(v string) {
+func (o *CreateAssetGITHUBREPOSITORYRequest) SetName(v string) {
 	o.Name = &v
 }
 
 // GetHttpUrlToRepo returns the HttpUrlToRepo field value if set, zero value otherwise.
-func (o *CreateAssetGITHUBRequest) GetHttpUrlToRepo() string {
+func (o *CreateAssetGITHUBREPOSITORYRequest) GetHttpUrlToRepo() string {
 	if o == nil || IsNil(o.HttpUrlToRepo) {
 		var ret string
 		return ret
@@ -178,7 +178,7 @@ func (o *CreateAssetGITHUBRequest) GetHttpUrlToRepo() string {
 
 // GetHttpUrlToRepoOk returns a tuple with the HttpUrlToRepo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGITHUBRequest) GetHttpUrlToRepoOk() (*string, bool) {
+func (o *CreateAssetGITHUBREPOSITORYRequest) GetHttpUrlToRepoOk() (*string, bool) {
 	if o == nil || IsNil(o.HttpUrlToRepo) {
 		return nil, false
 	}
@@ -186,7 +186,7 @@ func (o *CreateAssetGITHUBRequest) GetHttpUrlToRepoOk() (*string, bool) {
 }
 
 // HasHttpUrlToRepo returns a boolean if a field has been set.
-func (o *CreateAssetGITHUBRequest) HasHttpUrlToRepo() bool {
+func (o *CreateAssetGITHUBREPOSITORYRequest) HasHttpUrlToRepo() bool {
 	if o != nil && !IsNil(o.HttpUrlToRepo) {
 		return true
 	}
@@ -195,12 +195,12 @@ func (o *CreateAssetGITHUBRequest) HasHttpUrlToRepo() bool {
 }
 
 // SetHttpUrlToRepo gets a reference to the given string and assigns it to the HttpUrlToRepo field.
-func (o *CreateAssetGITHUBRequest) SetHttpUrlToRepo(v string) {
+func (o *CreateAssetGITHUBREPOSITORYRequest) SetHttpUrlToRepo(v string) {
 	o.HttpUrlToRepo = &v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
-func (o *CreateAssetGITHUBRequest) GetDescription() string {
+func (o *CreateAssetGITHUBREPOSITORYRequest) GetDescription() string {
 	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
@@ -210,7 +210,7 @@ func (o *CreateAssetGITHUBRequest) GetDescription() string {
 
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGITHUBRequest) GetDescriptionOk() (*string, bool) {
+func (o *CreateAssetGITHUBREPOSITORYRequest) GetDescriptionOk() (*string, bool) {
 	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
@@ -218,7 +218,7 @@ func (o *CreateAssetGITHUBRequest) GetDescriptionOk() (*string, bool) {
 }
 
 // HasDescription returns a boolean if a field has been set.
-func (o *CreateAssetGITHUBRequest) HasDescription() bool {
+func (o *CreateAssetGITHUBREPOSITORYRequest) HasDescription() bool {
 	if o != nil && !IsNil(o.Description) {
 		return true
 	}
@@ -227,12 +227,12 @@ func (o *CreateAssetGITHUBRequest) HasDescription() bool {
 }
 
 // SetDescription gets a reference to the given string and assigns it to the Description field.
-func (o *CreateAssetGITHUBRequest) SetDescription(v string) {
+func (o *CreateAssetGITHUBREPOSITORYRequest) SetDescription(v string) {
 	o.Description = &v
 }
 
 // GetLocationId returns the LocationId field value if set, zero value otherwise.
-func (o *CreateAssetGITHUBRequest) GetLocationId() string {
+func (o *CreateAssetGITHUBREPOSITORYRequest) GetLocationId() string {
 	if o == nil || IsNil(o.LocationId) {
 		var ret string
 		return ret
@@ -242,7 +242,7 @@ func (o *CreateAssetGITHUBRequest) GetLocationId() string {
 
 // GetLocationIdOk returns a tuple with the LocationId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGITHUBRequest) GetLocationIdOk() (*string, bool) {
+func (o *CreateAssetGITHUBREPOSITORYRequest) GetLocationIdOk() (*string, bool) {
 	if o == nil || IsNil(o.LocationId) {
 		return nil, false
 	}
@@ -250,7 +250,7 @@ func (o *CreateAssetGITHUBRequest) GetLocationIdOk() (*string, bool) {
 }
 
 // HasLocationId returns a boolean if a field has been set.
-func (o *CreateAssetGITHUBRequest) HasLocationId() bool {
+func (o *CreateAssetGITHUBREPOSITORYRequest) HasLocationId() bool {
 	if o != nil && !IsNil(o.LocationId) {
 		return true
 	}
@@ -259,12 +259,12 @@ func (o *CreateAssetGITHUBRequest) HasLocationId() bool {
 }
 
 // SetLocationId gets a reference to the given string and assigns it to the LocationId field.
-func (o *CreateAssetGITHUBRequest) SetLocationId(v string) {
+func (o *CreateAssetGITHUBREPOSITORYRequest) SetLocationId(v string) {
 	o.LocationId = &v
 }
 
 // GetDefaultBranch returns the DefaultBranch field value if set, zero value otherwise.
-func (o *CreateAssetGITHUBRequest) GetDefaultBranch() string {
+func (o *CreateAssetGITHUBREPOSITORYRequest) GetDefaultBranch() string {
 	if o == nil || IsNil(o.DefaultBranch) {
 		var ret string
 		return ret
@@ -274,7 +274,7 @@ func (o *CreateAssetGITHUBRequest) GetDefaultBranch() string {
 
 // GetDefaultBranchOk returns a tuple with the DefaultBranch field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGITHUBRequest) GetDefaultBranchOk() (*string, bool) {
+func (o *CreateAssetGITHUBREPOSITORYRequest) GetDefaultBranchOk() (*string, bool) {
 	if o == nil || IsNil(o.DefaultBranch) {
 		return nil, false
 	}
@@ -282,7 +282,7 @@ func (o *CreateAssetGITHUBRequest) GetDefaultBranchOk() (*string, bool) {
 }
 
 // HasDefaultBranch returns a boolean if a field has been set.
-func (o *CreateAssetGITHUBRequest) HasDefaultBranch() bool {
+func (o *CreateAssetGITHUBREPOSITORYRequest) HasDefaultBranch() bool {
 	if o != nil && !IsNil(o.DefaultBranch) {
 		return true
 	}
@@ -291,12 +291,12 @@ func (o *CreateAssetGITHUBRequest) HasDefaultBranch() bool {
 }
 
 // SetDefaultBranch gets a reference to the given string and assigns it to the DefaultBranch field.
-func (o *CreateAssetGITHUBRequest) SetDefaultBranch(v string) {
+func (o *CreateAssetGITHUBREPOSITORYRequest) SetDefaultBranch(v string) {
 	o.DefaultBranch = &v
 }
 
 // GetBlobBaseUrl returns the BlobBaseUrl field value if set, zero value otherwise.
-func (o *CreateAssetGITHUBRequest) GetBlobBaseUrl() string {
+func (o *CreateAssetGITHUBREPOSITORYRequest) GetBlobBaseUrl() string {
 	if o == nil || IsNil(o.BlobBaseUrl) {
 		var ret string
 		return ret
@@ -306,7 +306,7 @@ func (o *CreateAssetGITHUBRequest) GetBlobBaseUrl() string {
 
 // GetBlobBaseUrlOk returns a tuple with the BlobBaseUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGITHUBRequest) GetBlobBaseUrlOk() (*string, bool) {
+func (o *CreateAssetGITHUBREPOSITORYRequest) GetBlobBaseUrlOk() (*string, bool) {
 	if o == nil || IsNil(o.BlobBaseUrl) {
 		return nil, false
 	}
@@ -314,7 +314,7 @@ func (o *CreateAssetGITHUBRequest) GetBlobBaseUrlOk() (*string, bool) {
 }
 
 // HasBlobBaseUrl returns a boolean if a field has been set.
-func (o *CreateAssetGITHUBRequest) HasBlobBaseUrl() bool {
+func (o *CreateAssetGITHUBREPOSITORYRequest) HasBlobBaseUrl() bool {
 	if o != nil && !IsNil(o.BlobBaseUrl) {
 		return true
 	}
@@ -323,12 +323,12 @@ func (o *CreateAssetGITHUBRequest) HasBlobBaseUrl() bool {
 }
 
 // SetBlobBaseUrl gets a reference to the given string and assigns it to the BlobBaseUrl field.
-func (o *CreateAssetGITHUBRequest) SetBlobBaseUrl(v string) {
+func (o *CreateAssetGITHUBREPOSITORYRequest) SetBlobBaseUrl(v string) {
 	o.BlobBaseUrl = &v
 }
 
 // GetOwnerId returns the OwnerId field value if set, zero value otherwise.
-func (o *CreateAssetGITHUBRequest) GetOwnerId() float32 {
+func (o *CreateAssetGITHUBREPOSITORYRequest) GetOwnerId() float32 {
 	if o == nil || IsNil(o.OwnerId) {
 		var ret float32
 		return ret
@@ -338,7 +338,7 @@ func (o *CreateAssetGITHUBRequest) GetOwnerId() float32 {
 
 // GetOwnerIdOk returns a tuple with the OwnerId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGITHUBRequest) GetOwnerIdOk() (*float32, bool) {
+func (o *CreateAssetGITHUBREPOSITORYRequest) GetOwnerIdOk() (*float32, bool) {
 	if o == nil || IsNil(o.OwnerId) {
 		return nil, false
 	}
@@ -346,7 +346,7 @@ func (o *CreateAssetGITHUBRequest) GetOwnerIdOk() (*float32, bool) {
 }
 
 // HasOwnerId returns a boolean if a field has been set.
-func (o *CreateAssetGITHUBRequest) HasOwnerId() bool {
+func (o *CreateAssetGITHUBREPOSITORYRequest) HasOwnerId() bool {
 	if o != nil && !IsNil(o.OwnerId) {
 		return true
 	}
@@ -355,12 +355,12 @@ func (o *CreateAssetGITHUBRequest) HasOwnerId() bool {
 }
 
 // SetOwnerId gets a reference to the given float32 and assigns it to the OwnerId field.
-func (o *CreateAssetGITHUBRequest) SetOwnerId(v float32) {
+func (o *CreateAssetGITHUBREPOSITORYRequest) SetOwnerId(v float32) {
 	o.OwnerId = &v
 }
 
 // GetOwnerLogin returns the OwnerLogin field value if set, zero value otherwise.
-func (o *CreateAssetGITHUBRequest) GetOwnerLogin() string {
+func (o *CreateAssetGITHUBREPOSITORYRequest) GetOwnerLogin() string {
 	if o == nil || IsNil(o.OwnerLogin) {
 		var ret string
 		return ret
@@ -370,7 +370,7 @@ func (o *CreateAssetGITHUBRequest) GetOwnerLogin() string {
 
 // GetOwnerLoginOk returns a tuple with the OwnerLogin field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGITHUBRequest) GetOwnerLoginOk() (*string, bool) {
+func (o *CreateAssetGITHUBREPOSITORYRequest) GetOwnerLoginOk() (*string, bool) {
 	if o == nil || IsNil(o.OwnerLogin) {
 		return nil, false
 	}
@@ -378,7 +378,7 @@ func (o *CreateAssetGITHUBRequest) GetOwnerLoginOk() (*string, bool) {
 }
 
 // HasOwnerLogin returns a boolean if a field has been set.
-func (o *CreateAssetGITHUBRequest) HasOwnerLogin() bool {
+func (o *CreateAssetGITHUBREPOSITORYRequest) HasOwnerLogin() bool {
 	if o != nil && !IsNil(o.OwnerLogin) {
 		return true
 	}
@@ -387,12 +387,12 @@ func (o *CreateAssetGITHUBRequest) HasOwnerLogin() bool {
 }
 
 // SetOwnerLogin gets a reference to the given string and assigns it to the OwnerLogin field.
-func (o *CreateAssetGITHUBRequest) SetOwnerLogin(v string) {
+func (o *CreateAssetGITHUBREPOSITORYRequest) SetOwnerLogin(v string) {
 	o.OwnerLogin = &v
 }
 
 // GetOwnerHtmlUrl returns the OwnerHtmlUrl field value if set, zero value otherwise.
-func (o *CreateAssetGITHUBRequest) GetOwnerHtmlUrl() string {
+func (o *CreateAssetGITHUBREPOSITORYRequest) GetOwnerHtmlUrl() string {
 	if o == nil || IsNil(o.OwnerHtmlUrl) {
 		var ret string
 		return ret
@@ -402,7 +402,7 @@ func (o *CreateAssetGITHUBRequest) GetOwnerHtmlUrl() string {
 
 // GetOwnerHtmlUrlOk returns a tuple with the OwnerHtmlUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGITHUBRequest) GetOwnerHtmlUrlOk() (*string, bool) {
+func (o *CreateAssetGITHUBREPOSITORYRequest) GetOwnerHtmlUrlOk() (*string, bool) {
 	if o == nil || IsNil(o.OwnerHtmlUrl) {
 		return nil, false
 	}
@@ -410,7 +410,7 @@ func (o *CreateAssetGITHUBRequest) GetOwnerHtmlUrlOk() (*string, bool) {
 }
 
 // HasOwnerHtmlUrl returns a boolean if a field has been set.
-func (o *CreateAssetGITHUBRequest) HasOwnerHtmlUrl() bool {
+func (o *CreateAssetGITHUBREPOSITORYRequest) HasOwnerHtmlUrl() bool {
 	if o != nil && !IsNil(o.OwnerHtmlUrl) {
 		return true
 	}
@@ -419,12 +419,12 @@ func (o *CreateAssetGITHUBRequest) HasOwnerHtmlUrl() bool {
 }
 
 // SetOwnerHtmlUrl gets a reference to the given string and assigns it to the OwnerHtmlUrl field.
-func (o *CreateAssetGITHUBRequest) SetOwnerHtmlUrl(v string) {
+func (o *CreateAssetGITHUBREPOSITORYRequest) SetOwnerHtmlUrl(v string) {
 	o.OwnerHtmlUrl = &v
 }
 
 // GetFork returns the Fork field value if set, zero value otherwise.
-func (o *CreateAssetGITHUBRequest) GetFork() bool {
+func (o *CreateAssetGITHUBREPOSITORYRequest) GetFork() bool {
 	if o == nil || IsNil(o.Fork) {
 		var ret bool
 		return ret
@@ -434,7 +434,7 @@ func (o *CreateAssetGITHUBRequest) GetFork() bool {
 
 // GetForkOk returns a tuple with the Fork field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGITHUBRequest) GetForkOk() (*bool, bool) {
+func (o *CreateAssetGITHUBREPOSITORYRequest) GetForkOk() (*bool, bool) {
 	if o == nil || IsNil(o.Fork) {
 		return nil, false
 	}
@@ -442,7 +442,7 @@ func (o *CreateAssetGITHUBRequest) GetForkOk() (*bool, bool) {
 }
 
 // HasFork returns a boolean if a field has been set.
-func (o *CreateAssetGITHUBRequest) HasFork() bool {
+func (o *CreateAssetGITHUBREPOSITORYRequest) HasFork() bool {
 	if o != nil && !IsNil(o.Fork) {
 		return true
 	}
@@ -451,12 +451,12 @@ func (o *CreateAssetGITHUBRequest) HasFork() bool {
 }
 
 // SetFork gets a reference to the given bool and assigns it to the Fork field.
-func (o *CreateAssetGITHUBRequest) SetFork(v bool) {
+func (o *CreateAssetGITHUBREPOSITORYRequest) SetFork(v bool) {
 	o.Fork = &v
 }
 
 // GetArchived returns the Archived field value if set, zero value otherwise.
-func (o *CreateAssetGITHUBRequest) GetArchived() bool {
+func (o *CreateAssetGITHUBREPOSITORYRequest) GetArchived() bool {
 	if o == nil || IsNil(o.Archived) {
 		var ret bool
 		return ret
@@ -466,7 +466,7 @@ func (o *CreateAssetGITHUBRequest) GetArchived() bool {
 
 // GetArchivedOk returns a tuple with the Archived field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGITHUBRequest) GetArchivedOk() (*bool, bool) {
+func (o *CreateAssetGITHUBREPOSITORYRequest) GetArchivedOk() (*bool, bool) {
 	if o == nil || IsNil(o.Archived) {
 		return nil, false
 	}
@@ -474,7 +474,7 @@ func (o *CreateAssetGITHUBRequest) GetArchivedOk() (*bool, bool) {
 }
 
 // HasArchived returns a boolean if a field has been set.
-func (o *CreateAssetGITHUBRequest) HasArchived() bool {
+func (o *CreateAssetGITHUBREPOSITORYRequest) HasArchived() bool {
 	if o != nil && !IsNil(o.Archived) {
 		return true
 	}
@@ -483,12 +483,12 @@ func (o *CreateAssetGITHUBRequest) HasArchived() bool {
 }
 
 // SetArchived gets a reference to the given bool and assigns it to the Archived field.
-func (o *CreateAssetGITHUBRequest) SetArchived(v bool) {
+func (o *CreateAssetGITHUBREPOSITORYRequest) SetArchived(v bool) {
 	o.Archived = &v
 }
 
 // GetDisabled returns the Disabled field value if set, zero value otherwise.
-func (o *CreateAssetGITHUBRequest) GetDisabled() bool {
+func (o *CreateAssetGITHUBREPOSITORYRequest) GetDisabled() bool {
 	if o == nil || IsNil(o.Disabled) {
 		var ret bool
 		return ret
@@ -498,7 +498,7 @@ func (o *CreateAssetGITHUBRequest) GetDisabled() bool {
 
 // GetDisabledOk returns a tuple with the Disabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGITHUBRequest) GetDisabledOk() (*bool, bool) {
+func (o *CreateAssetGITHUBREPOSITORYRequest) GetDisabledOk() (*bool, bool) {
 	if o == nil || IsNil(o.Disabled) {
 		return nil, false
 	}
@@ -506,7 +506,7 @@ func (o *CreateAssetGITHUBRequest) GetDisabledOk() (*bool, bool) {
 }
 
 // HasDisabled returns a boolean if a field has been set.
-func (o *CreateAssetGITHUBRequest) HasDisabled() bool {
+func (o *CreateAssetGITHUBREPOSITORYRequest) HasDisabled() bool {
 	if o != nil && !IsNil(o.Disabled) {
 		return true
 	}
@@ -515,12 +515,12 @@ func (o *CreateAssetGITHUBRequest) HasDisabled() bool {
 }
 
 // SetDisabled gets a reference to the given bool and assigns it to the Disabled field.
-func (o *CreateAssetGITHUBRequest) SetDisabled(v bool) {
+func (o *CreateAssetGITHUBREPOSITORYRequest) SetDisabled(v bool) {
 	o.Disabled = &v
 }
 
 // GetClonable returns the Clonable field value if set, zero value otherwise.
-func (o *CreateAssetGITHUBRequest) GetClonable() bool {
+func (o *CreateAssetGITHUBREPOSITORYRequest) GetClonable() bool {
 	if o == nil || IsNil(o.Clonable) {
 		var ret bool
 		return ret
@@ -530,7 +530,7 @@ func (o *CreateAssetGITHUBRequest) GetClonable() bool {
 
 // GetClonableOk returns a tuple with the Clonable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGITHUBRequest) GetClonableOk() (*bool, bool) {
+func (o *CreateAssetGITHUBREPOSITORYRequest) GetClonableOk() (*bool, bool) {
 	if o == nil || IsNil(o.Clonable) {
 		return nil, false
 	}
@@ -538,7 +538,7 @@ func (o *CreateAssetGITHUBRequest) GetClonableOk() (*bool, bool) {
 }
 
 // HasClonable returns a boolean if a field has been set.
-func (o *CreateAssetGITHUBRequest) HasClonable() bool {
+func (o *CreateAssetGITHUBREPOSITORYRequest) HasClonable() bool {
 	if o != nil && !IsNil(o.Clonable) {
 		return true
 	}
@@ -547,12 +547,12 @@ func (o *CreateAssetGITHUBRequest) HasClonable() bool {
 }
 
 // SetClonable gets a reference to the given bool and assigns it to the Clonable field.
-func (o *CreateAssetGITHUBRequest) SetClonable(v bool) {
+func (o *CreateAssetGITHUBREPOSITORYRequest) SetClonable(v bool) {
 	o.Clonable = &v
 }
 
 // GetPrivate returns the Private field value if set, zero value otherwise.
-func (o *CreateAssetGITHUBRequest) GetPrivate() bool {
+func (o *CreateAssetGITHUBREPOSITORYRequest) GetPrivate() bool {
 	if o == nil || IsNil(o.Private) {
 		var ret bool
 		return ret
@@ -562,7 +562,7 @@ func (o *CreateAssetGITHUBRequest) GetPrivate() bool {
 
 // GetPrivateOk returns a tuple with the Private field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGITHUBRequest) GetPrivateOk() (*bool, bool) {
+func (o *CreateAssetGITHUBREPOSITORYRequest) GetPrivateOk() (*bool, bool) {
 	if o == nil || IsNil(o.Private) {
 		return nil, false
 	}
@@ -570,7 +570,7 @@ func (o *CreateAssetGITHUBRequest) GetPrivateOk() (*bool, bool) {
 }
 
 // HasPrivate returns a boolean if a field has been set.
-func (o *CreateAssetGITHUBRequest) HasPrivate() bool {
+func (o *CreateAssetGITHUBREPOSITORYRequest) HasPrivate() bool {
 	if o != nil && !IsNil(o.Private) {
 		return true
 	}
@@ -579,14 +579,14 @@ func (o *CreateAssetGITHUBRequest) HasPrivate() bool {
 }
 
 // SetPrivate gets a reference to the given bool and assigns it to the Private field.
-func (o *CreateAssetGITHUBRequest) SetPrivate(v bool) {
+func (o *CreateAssetGITHUBREPOSITORYRequest) SetPrivate(v bool) {
 	o.Private = &v
 }
 
 // GetOrg returns the Org field value if set, zero value otherwise.
-func (o *CreateAssetGITHUBRequest) GetOrg() CreateAssetGITHUBRequestOrg {
+func (o *CreateAssetGITHUBREPOSITORYRequest) GetOrg() CreateAssetGITHUBREPOSITORYRequestOrg {
 	if o == nil || IsNil(o.Org) {
-		var ret CreateAssetGITHUBRequestOrg
+		var ret CreateAssetGITHUBREPOSITORYRequestOrg
 		return ret
 	}
 	return *o.Org
@@ -594,7 +594,7 @@ func (o *CreateAssetGITHUBRequest) GetOrg() CreateAssetGITHUBRequestOrg {
 
 // GetOrgOk returns a tuple with the Org field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGITHUBRequest) GetOrgOk() (*CreateAssetGITHUBRequestOrg, bool) {
+func (o *CreateAssetGITHUBREPOSITORYRequest) GetOrgOk() (*CreateAssetGITHUBREPOSITORYRequestOrg, bool) {
 	if o == nil || IsNil(o.Org) {
 		return nil, false
 	}
@@ -602,7 +602,7 @@ func (o *CreateAssetGITHUBRequest) GetOrgOk() (*CreateAssetGITHUBRequestOrg, boo
 }
 
 // HasOrg returns a boolean if a field has been set.
-func (o *CreateAssetGITHUBRequest) HasOrg() bool {
+func (o *CreateAssetGITHUBREPOSITORYRequest) HasOrg() bool {
 	if o != nil && !IsNil(o.Org) {
 		return true
 	}
@@ -610,12 +610,12 @@ func (o *CreateAssetGITHUBRequest) HasOrg() bool {
 	return false
 }
 
-// SetOrg gets a reference to the given CreateAssetGITHUBRequestOrg and assigns it to the Org field.
-func (o *CreateAssetGITHUBRequest) SetOrg(v CreateAssetGITHUBRequestOrg) {
+// SetOrg gets a reference to the given CreateAssetGITHUBREPOSITORYRequestOrg and assigns it to the Org field.
+func (o *CreateAssetGITHUBREPOSITORYRequest) SetOrg(v CreateAssetGITHUBREPOSITORYRequestOrg) {
 	o.Org = &v
 }
 
-func (o CreateAssetGITHUBRequest) MarshalJSON() ([]byte, error) {
+func (o CreateAssetGITHUBREPOSITORYRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -623,7 +623,7 @@ func (o CreateAssetGITHUBRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CreateAssetGITHUBRequest) ToMap() (map[string]interface{}, error) {
+func (o CreateAssetGITHUBREPOSITORYRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["asset_class"] = o.AssetClass
 	toSerialize["asset_type"] = o.AssetType
@@ -681,7 +681,7 @@ func (o CreateAssetGITHUBRequest) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *CreateAssetGITHUBRequest) UnmarshalJSON(data []byte) (err error) {
+func (o *CreateAssetGITHUBREPOSITORYRequest) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -705,15 +705,15 @@ func (o *CreateAssetGITHUBRequest) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varCreateAssetGITHUBRequest := _CreateAssetGITHUBRequest{}
+	varCreateAssetGITHUBREPOSITORYRequest := _CreateAssetGITHUBREPOSITORYRequest{}
 
-	err = json.Unmarshal(data, &varCreateAssetGITHUBRequest)
+	err = json.Unmarshal(data, &varCreateAssetGITHUBREPOSITORYRequest)
 
 	if err != nil {
 		return err
 	}
 
-	*o = CreateAssetGITHUBRequest(varCreateAssetGITHUBRequest)
+	*o = CreateAssetGITHUBREPOSITORYRequest(varCreateAssetGITHUBREPOSITORYRequest)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -742,38 +742,38 @@ func (o *CreateAssetGITHUBRequest) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableCreateAssetGITHUBRequest struct {
-	value *CreateAssetGITHUBRequest
+type NullableCreateAssetGITHUBREPOSITORYRequest struct {
+	value *CreateAssetGITHUBREPOSITORYRequest
 	isSet bool
 }
 
-func (v NullableCreateAssetGITHUBRequest) Get() *CreateAssetGITHUBRequest {
+func (v NullableCreateAssetGITHUBREPOSITORYRequest) Get() *CreateAssetGITHUBREPOSITORYRequest {
 	return v.value
 }
 
-func (v *NullableCreateAssetGITHUBRequest) Set(val *CreateAssetGITHUBRequest) {
+func (v *NullableCreateAssetGITHUBREPOSITORYRequest) Set(val *CreateAssetGITHUBREPOSITORYRequest) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCreateAssetGITHUBRequest) IsSet() bool {
+func (v NullableCreateAssetGITHUBREPOSITORYRequest) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCreateAssetGITHUBRequest) Unset() {
+func (v *NullableCreateAssetGITHUBREPOSITORYRequest) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCreateAssetGITHUBRequest(val *CreateAssetGITHUBRequest) *NullableCreateAssetGITHUBRequest {
-	return &NullableCreateAssetGITHUBRequest{value: val, isSet: true}
+func NewNullableCreateAssetGITHUBREPOSITORYRequest(val *CreateAssetGITHUBREPOSITORYRequest) *NullableCreateAssetGITHUBREPOSITORYRequest {
+	return &NullableCreateAssetGITHUBREPOSITORYRequest{value: val, isSet: true}
 }
 
-func (v NullableCreateAssetGITHUBRequest) MarshalJSON() ([]byte, error) {
+func (v NullableCreateAssetGITHUBREPOSITORYRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCreateAssetGITHUBRequest) UnmarshalJSON(src []byte) error {
+func (v *NullableCreateAssetGITHUBREPOSITORYRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

@@ -15,46 +15,44 @@ import (
 	"fmt"
 )
 
-// checks if the CreateAssetAWSRequest type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &CreateAssetAWSRequest{}
+// checks if the CreateAssetCLOUDFLAREACCOUNTRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CreateAssetCLOUDFLAREACCOUNTRequest{}
 
-// CreateAssetAWSRequest struct for CreateAssetAWSRequest
-type CreateAssetAWSRequest struct {
-	AssetClass ENUMCLOUDHOSTING `json:"asset_class"`
-	AssetType ENUMAWSACCOUNT `json:"asset_type"`
+// CreateAssetCLOUDFLAREACCOUNTRequest struct for CreateAssetCLOUDFLAREACCOUNTRequest
+type CreateAssetCLOUDFLAREACCOUNTRequest struct {
+	AssetClass ENUMCDN `json:"asset_class"`
+	AssetType ENUMCLOUDFLAREACCOUNT `json:"asset_type"`
 	Name *string `json:"name,omitempty"`
-	PublicKey string `json:"public_key"`
-	PrivateKey string `json:"private_key"`
+	ApiKey string `json:"api_key"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _CreateAssetAWSRequest CreateAssetAWSRequest
+type _CreateAssetCLOUDFLAREACCOUNTRequest CreateAssetCLOUDFLAREACCOUNTRequest
 
-// NewCreateAssetAWSRequest instantiates a new CreateAssetAWSRequest object
+// NewCreateAssetCLOUDFLAREACCOUNTRequest instantiates a new CreateAssetCLOUDFLAREACCOUNTRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetAWSRequest(assetClass ENUMCLOUDHOSTING, assetType ENUMAWSACCOUNT, publicKey string, privateKey string) *CreateAssetAWSRequest {
-	this := CreateAssetAWSRequest{}
+func NewCreateAssetCLOUDFLAREACCOUNTRequest(assetClass ENUMCDN, assetType ENUMCLOUDFLAREACCOUNT, apiKey string) *CreateAssetCLOUDFLAREACCOUNTRequest {
+	this := CreateAssetCLOUDFLAREACCOUNTRequest{}
 	this.AssetClass = assetClass
 	this.AssetType = assetType
-	this.PublicKey = publicKey
-	this.PrivateKey = privateKey
+	this.ApiKey = apiKey
 	return &this
 }
 
-// NewCreateAssetAWSRequestWithDefaults instantiates a new CreateAssetAWSRequest object
+// NewCreateAssetCLOUDFLAREACCOUNTRequestWithDefaults instantiates a new CreateAssetCLOUDFLAREACCOUNTRequest object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCreateAssetAWSRequestWithDefaults() *CreateAssetAWSRequest {
-	this := CreateAssetAWSRequest{}
+func NewCreateAssetCLOUDFLAREACCOUNTRequestWithDefaults() *CreateAssetCLOUDFLAREACCOUNTRequest {
+	this := CreateAssetCLOUDFLAREACCOUNTRequest{}
 	return &this
 }
 
 // GetAssetClass returns the AssetClass field value
-func (o *CreateAssetAWSRequest) GetAssetClass() ENUMCLOUDHOSTING {
+func (o *CreateAssetCLOUDFLAREACCOUNTRequest) GetAssetClass() ENUMCDN {
 	if o == nil {
-		var ret ENUMCLOUDHOSTING
+		var ret ENUMCDN
 		return ret
 	}
 
@@ -63,7 +61,7 @@ func (o *CreateAssetAWSRequest) GetAssetClass() ENUMCLOUDHOSTING {
 
 // GetAssetClassOk returns a tuple with the AssetClass field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetAWSRequest) GetAssetClassOk() (*ENUMCLOUDHOSTING, bool) {
+func (o *CreateAssetCLOUDFLAREACCOUNTRequest) GetAssetClassOk() (*ENUMCDN, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -71,14 +69,14 @@ func (o *CreateAssetAWSRequest) GetAssetClassOk() (*ENUMCLOUDHOSTING, bool) {
 }
 
 // SetAssetClass sets field value
-func (o *CreateAssetAWSRequest) SetAssetClass(v ENUMCLOUDHOSTING) {
+func (o *CreateAssetCLOUDFLAREACCOUNTRequest) SetAssetClass(v ENUMCDN) {
 	o.AssetClass = v
 }
 
 // GetAssetType returns the AssetType field value
-func (o *CreateAssetAWSRequest) GetAssetType() ENUMAWSACCOUNT {
+func (o *CreateAssetCLOUDFLAREACCOUNTRequest) GetAssetType() ENUMCLOUDFLAREACCOUNT {
 	if o == nil {
-		var ret ENUMAWSACCOUNT
+		var ret ENUMCLOUDFLAREACCOUNT
 		return ret
 	}
 
@@ -87,7 +85,7 @@ func (o *CreateAssetAWSRequest) GetAssetType() ENUMAWSACCOUNT {
 
 // GetAssetTypeOk returns a tuple with the AssetType field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetAWSRequest) GetAssetTypeOk() (*ENUMAWSACCOUNT, bool) {
+func (o *CreateAssetCLOUDFLAREACCOUNTRequest) GetAssetTypeOk() (*ENUMCLOUDFLAREACCOUNT, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -95,12 +93,12 @@ func (o *CreateAssetAWSRequest) GetAssetTypeOk() (*ENUMAWSACCOUNT, bool) {
 }
 
 // SetAssetType sets field value
-func (o *CreateAssetAWSRequest) SetAssetType(v ENUMAWSACCOUNT) {
+func (o *CreateAssetCLOUDFLAREACCOUNTRequest) SetAssetType(v ENUMCLOUDFLAREACCOUNT) {
 	o.AssetType = v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
-func (o *CreateAssetAWSRequest) GetName() string {
+func (o *CreateAssetCLOUDFLAREACCOUNTRequest) GetName() string {
 	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
@@ -110,7 +108,7 @@ func (o *CreateAssetAWSRequest) GetName() string {
 
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetAWSRequest) GetNameOk() (*string, bool) {
+func (o *CreateAssetCLOUDFLAREACCOUNTRequest) GetNameOk() (*string, bool) {
 	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
@@ -118,7 +116,7 @@ func (o *CreateAssetAWSRequest) GetNameOk() (*string, bool) {
 }
 
 // HasName returns a boolean if a field has been set.
-func (o *CreateAssetAWSRequest) HasName() bool {
+func (o *CreateAssetCLOUDFLAREACCOUNTRequest) HasName() bool {
 	if o != nil && !IsNil(o.Name) {
 		return true
 	}
@@ -127,59 +125,35 @@ func (o *CreateAssetAWSRequest) HasName() bool {
 }
 
 // SetName gets a reference to the given string and assigns it to the Name field.
-func (o *CreateAssetAWSRequest) SetName(v string) {
+func (o *CreateAssetCLOUDFLAREACCOUNTRequest) SetName(v string) {
 	o.Name = &v
 }
 
-// GetPublicKey returns the PublicKey field value
-func (o *CreateAssetAWSRequest) GetPublicKey() string {
+// GetApiKey returns the ApiKey field value
+func (o *CreateAssetCLOUDFLAREACCOUNTRequest) GetApiKey() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.PublicKey
+	return o.ApiKey
 }
 
-// GetPublicKeyOk returns a tuple with the PublicKey field value
+// GetApiKeyOk returns a tuple with the ApiKey field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetAWSRequest) GetPublicKeyOk() (*string, bool) {
+func (o *CreateAssetCLOUDFLAREACCOUNTRequest) GetApiKeyOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.PublicKey, true
+	return &o.ApiKey, true
 }
 
-// SetPublicKey sets field value
-func (o *CreateAssetAWSRequest) SetPublicKey(v string) {
-	o.PublicKey = v
+// SetApiKey sets field value
+func (o *CreateAssetCLOUDFLAREACCOUNTRequest) SetApiKey(v string) {
+	o.ApiKey = v
 }
 
-// GetPrivateKey returns the PrivateKey field value
-func (o *CreateAssetAWSRequest) GetPrivateKey() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.PrivateKey
-}
-
-// GetPrivateKeyOk returns a tuple with the PrivateKey field value
-// and a boolean to check if the value has been set.
-func (o *CreateAssetAWSRequest) GetPrivateKeyOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.PrivateKey, true
-}
-
-// SetPrivateKey sets field value
-func (o *CreateAssetAWSRequest) SetPrivateKey(v string) {
-	o.PrivateKey = v
-}
-
-func (o CreateAssetAWSRequest) MarshalJSON() ([]byte, error) {
+func (o CreateAssetCLOUDFLAREACCOUNTRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -187,15 +161,14 @@ func (o CreateAssetAWSRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CreateAssetAWSRequest) ToMap() (map[string]interface{}, error) {
+func (o CreateAssetCLOUDFLAREACCOUNTRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["asset_class"] = o.AssetClass
 	toSerialize["asset_type"] = o.AssetType
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
-	toSerialize["public_key"] = o.PublicKey
-	toSerialize["private_key"] = o.PrivateKey
+	toSerialize["api_key"] = o.ApiKey
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -204,15 +177,14 @@ func (o CreateAssetAWSRequest) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *CreateAssetAWSRequest) UnmarshalJSON(data []byte) (err error) {
+func (o *CreateAssetCLOUDFLAREACCOUNTRequest) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"asset_class",
 		"asset_type",
-		"public_key",
-		"private_key",
+		"api_key",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -229,15 +201,15 @@ func (o *CreateAssetAWSRequest) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varCreateAssetAWSRequest := _CreateAssetAWSRequest{}
+	varCreateAssetCLOUDFLAREACCOUNTRequest := _CreateAssetCLOUDFLAREACCOUNTRequest{}
 
-	err = json.Unmarshal(data, &varCreateAssetAWSRequest)
+	err = json.Unmarshal(data, &varCreateAssetCLOUDFLAREACCOUNTRequest)
 
 	if err != nil {
 		return err
 	}
 
-	*o = CreateAssetAWSRequest(varCreateAssetAWSRequest)
+	*o = CreateAssetCLOUDFLAREACCOUNTRequest(varCreateAssetCLOUDFLAREACCOUNTRequest)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -245,46 +217,45 @@ func (o *CreateAssetAWSRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "asset_class")
 		delete(additionalProperties, "asset_type")
 		delete(additionalProperties, "name")
-		delete(additionalProperties, "public_key")
-		delete(additionalProperties, "private_key")
+		delete(additionalProperties, "api_key")
 		o.AdditionalProperties = additionalProperties
 	}
 
 	return err
 }
 
-type NullableCreateAssetAWSRequest struct {
-	value *CreateAssetAWSRequest
+type NullableCreateAssetCLOUDFLAREACCOUNTRequest struct {
+	value *CreateAssetCLOUDFLAREACCOUNTRequest
 	isSet bool
 }
 
-func (v NullableCreateAssetAWSRequest) Get() *CreateAssetAWSRequest {
+func (v NullableCreateAssetCLOUDFLAREACCOUNTRequest) Get() *CreateAssetCLOUDFLAREACCOUNTRequest {
 	return v.value
 }
 
-func (v *NullableCreateAssetAWSRequest) Set(val *CreateAssetAWSRequest) {
+func (v *NullableCreateAssetCLOUDFLAREACCOUNTRequest) Set(val *CreateAssetCLOUDFLAREACCOUNTRequest) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCreateAssetAWSRequest) IsSet() bool {
+func (v NullableCreateAssetCLOUDFLAREACCOUNTRequest) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCreateAssetAWSRequest) Unset() {
+func (v *NullableCreateAssetCLOUDFLAREACCOUNTRequest) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCreateAssetAWSRequest(val *CreateAssetAWSRequest) *NullableCreateAssetAWSRequest {
-	return &NullableCreateAssetAWSRequest{value: val, isSet: true}
+func NewNullableCreateAssetCLOUDFLAREACCOUNTRequest(val *CreateAssetCLOUDFLAREACCOUNTRequest) *NullableCreateAssetCLOUDFLAREACCOUNTRequest {
+	return &NullableCreateAssetCLOUDFLAREACCOUNTRequest{value: val, isSet: true}
 }
 
-func (v NullableCreateAssetAWSRequest) MarshalJSON() ([]byte, error) {
+func (v NullableCreateAssetCLOUDFLAREACCOUNTRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCreateAssetAWSRequest) UnmarshalJSON(src []byte) error {
+func (v *NullableCreateAssetCLOUDFLAREACCOUNTRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
