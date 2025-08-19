@@ -27,8 +27,8 @@ type CreateDastRestProfileRequestConfigurationJsonStrScanScalarsValue struct {
 	Parents []ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESSCANPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESPARENTSITEMS `json:"parents,omitempty"`
 	Patterns []string `json:"patterns,omitempty"`
 	IgnoredPatterns []string `json:"ignored_patterns,omitempty"`
-	Sensitivity *ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESSCANPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESSENSITIVITY `json:"sensitivity,omitempty"`
-	Strategy *ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESSCANPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESSTRATEGY `json:"strategy,omitempty"`
+	Sensitivity *string `json:"sensitivity,omitempty"`
+	Strategy *string `json:"strategy,omitempty"`
 	Entropy *float32 `json:"entropy,omitempty"`
 	RaiseOnCommit *bool `json:"raise_on_commit,omitempty"`
 	RaiseOnExposure *bool `json:"raise_on_exposure,omitempty"`
@@ -274,9 +274,9 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrScanScalarsValue) SetIg
 }
 
 // GetSensitivity returns the Sensitivity field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrScanScalarsValue) GetSensitivity() ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESSCANPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESSENSITIVITY {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrScanScalarsValue) GetSensitivity() string {
 	if o == nil || IsNil(o.Sensitivity) {
-		var ret ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESSCANPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESSENSITIVITY
+		var ret string
 		return ret
 	}
 	return *o.Sensitivity
@@ -284,7 +284,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrScanScalarsValue) GetSe
 
 // GetSensitivityOk returns a tuple with the Sensitivity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrScanScalarsValue) GetSensitivityOk() (*ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESSCANPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESSENSITIVITY, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrScanScalarsValue) GetSensitivityOk() (*string, bool) {
 	if o == nil || IsNil(o.Sensitivity) {
 		return nil, false
 	}
@@ -300,15 +300,15 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrScanScalarsValue) HasSe
 	return false
 }
 
-// SetSensitivity gets a reference to the given ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESSCANPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESSENSITIVITY and assigns it to the Sensitivity field.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrScanScalarsValue) SetSensitivity(v ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESSCANPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESSENSITIVITY) {
+// SetSensitivity gets a reference to the given string and assigns it to the Sensitivity field.
+func (o *CreateDastRestProfileRequestConfigurationJsonStrScanScalarsValue) SetSensitivity(v string) {
 	o.Sensitivity = &v
 }
 
 // GetStrategy returns the Strategy field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrScanScalarsValue) GetStrategy() ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESSCANPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESSTRATEGY {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrScanScalarsValue) GetStrategy() string {
 	if o == nil || IsNil(o.Strategy) {
-		var ret ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESSCANPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESSTRATEGY
+		var ret string
 		return ret
 	}
 	return *o.Strategy
@@ -316,7 +316,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrScanScalarsValue) GetSt
 
 // GetStrategyOk returns a tuple with the Strategy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrScanScalarsValue) GetStrategyOk() (*ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESSCANPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESSTRATEGY, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrScanScalarsValue) GetStrategyOk() (*string, bool) {
 	if o == nil || IsNil(o.Strategy) {
 		return nil, false
 	}
@@ -332,8 +332,8 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrScanScalarsValue) HasSt
 	return false
 }
 
-// SetStrategy gets a reference to the given ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESSCANPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESSTRATEGY and assigns it to the Strategy field.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrScanScalarsValue) SetStrategy(v ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESSCANPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESSTRATEGY) {
+// SetStrategy gets a reference to the given string and assigns it to the Strategy field.
+func (o *CreateDastRestProfileRequestConfigurationJsonStrScanScalarsValue) SetStrategy(v string) {
 	o.Strategy = &v
 }
 

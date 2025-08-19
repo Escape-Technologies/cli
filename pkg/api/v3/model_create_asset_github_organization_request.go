@@ -20,8 +20,8 @@ var _ MappedNullable = &CreateAssetGITHUBORGANIZATIONRequest{}
 
 // CreateAssetGITHUBORGANIZATIONRequest struct for CreateAssetGITHUBORGANIZATIONRequest
 type CreateAssetGITHUBORGANIZATIONRequest struct {
-	AssetClass ENUMSOURCECODEMANAGEMENT `json:"asset_class"`
-	AssetType ENUMGITHUBORGANIZATION `json:"asset_type"`
+	AssetClass string `json:"asset_class"`
+	AssetType string `json:"asset_type"`
 	Name *string `json:"name,omitempty"`
 	ApiKey string `json:"api_key"`
 	AdditionalProperties map[string]interface{}
@@ -33,7 +33,7 @@ type _CreateAssetGITHUBORGANIZATIONRequest CreateAssetGITHUBORGANIZATIONRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetGITHUBORGANIZATIONRequest(assetClass ENUMSOURCECODEMANAGEMENT, assetType ENUMGITHUBORGANIZATION, apiKey string) *CreateAssetGITHUBORGANIZATIONRequest {
+func NewCreateAssetGITHUBORGANIZATIONRequest(assetClass string, assetType string, apiKey string) *CreateAssetGITHUBORGANIZATIONRequest {
 	this := CreateAssetGITHUBORGANIZATIONRequest{}
 	this.AssetClass = assetClass
 	this.AssetType = assetType
@@ -50,9 +50,9 @@ func NewCreateAssetGITHUBORGANIZATIONRequestWithDefaults() *CreateAssetGITHUBORG
 }
 
 // GetAssetClass returns the AssetClass field value
-func (o *CreateAssetGITHUBORGANIZATIONRequest) GetAssetClass() ENUMSOURCECODEMANAGEMENT {
+func (o *CreateAssetGITHUBORGANIZATIONRequest) GetAssetClass() string {
 	if o == nil {
-		var ret ENUMSOURCECODEMANAGEMENT
+		var ret string
 		return ret
 	}
 
@@ -61,7 +61,7 @@ func (o *CreateAssetGITHUBORGANIZATIONRequest) GetAssetClass() ENUMSOURCECODEMAN
 
 // GetAssetClassOk returns a tuple with the AssetClass field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGITHUBORGANIZATIONRequest) GetAssetClassOk() (*ENUMSOURCECODEMANAGEMENT, bool) {
+func (o *CreateAssetGITHUBORGANIZATIONRequest) GetAssetClassOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -69,14 +69,14 @@ func (o *CreateAssetGITHUBORGANIZATIONRequest) GetAssetClassOk() (*ENUMSOURCECOD
 }
 
 // SetAssetClass sets field value
-func (o *CreateAssetGITHUBORGANIZATIONRequest) SetAssetClass(v ENUMSOURCECODEMANAGEMENT) {
+func (o *CreateAssetGITHUBORGANIZATIONRequest) SetAssetClass(v string) {
 	o.AssetClass = v
 }
 
 // GetAssetType returns the AssetType field value
-func (o *CreateAssetGITHUBORGANIZATIONRequest) GetAssetType() ENUMGITHUBORGANIZATION {
+func (o *CreateAssetGITHUBORGANIZATIONRequest) GetAssetType() string {
 	if o == nil {
-		var ret ENUMGITHUBORGANIZATION
+		var ret string
 		return ret
 	}
 
@@ -85,7 +85,7 @@ func (o *CreateAssetGITHUBORGANIZATIONRequest) GetAssetType() ENUMGITHUBORGANIZA
 
 // GetAssetTypeOk returns a tuple with the AssetType field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGITHUBORGANIZATIONRequest) GetAssetTypeOk() (*ENUMGITHUBORGANIZATION, bool) {
+func (o *CreateAssetGITHUBORGANIZATIONRequest) GetAssetTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -93,7 +93,7 @@ func (o *CreateAssetGITHUBORGANIZATIONRequest) GetAssetTypeOk() (*ENUMGITHUBORGA
 }
 
 // SetAssetType sets field value
-func (o *CreateAssetGITHUBORGANIZATIONRequest) SetAssetType(v ENUMGITHUBORGANIZATION) {
+func (o *CreateAssetGITHUBORGANIZATIONRequest) SetAssetType(v string) {
 	o.AssetType = v
 }
 

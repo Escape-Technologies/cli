@@ -20,7 +20,7 @@ var _ MappedNullable = &IgnoreScan409Response{}
 
 // IgnoreScan409Response struct for IgnoreScan409Response
 type IgnoreScan409Response struct {
-	Message ENUMCONFLICTONTHEFOLLOWINGFIELD `json:"message"`
+	Message string `json:"message"`
 	Field string `json:"field"`
 	InstanceId string `json:"instanceId"`
 	AdditionalProperties map[string]interface{}
@@ -32,7 +32,7 @@ type _IgnoreScan409Response IgnoreScan409Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIgnoreScan409Response(message ENUMCONFLICTONTHEFOLLOWINGFIELD, field string, instanceId string) *IgnoreScan409Response {
+func NewIgnoreScan409Response(message string, field string, instanceId string) *IgnoreScan409Response {
 	this := IgnoreScan409Response{}
 	this.Message = message
 	this.Field = field
@@ -49,9 +49,9 @@ func NewIgnoreScan409ResponseWithDefaults() *IgnoreScan409Response {
 }
 
 // GetMessage returns the Message field value
-func (o *IgnoreScan409Response) GetMessage() ENUMCONFLICTONTHEFOLLOWINGFIELD {
+func (o *IgnoreScan409Response) GetMessage() string {
 	if o == nil {
-		var ret ENUMCONFLICTONTHEFOLLOWINGFIELD
+		var ret string
 		return ret
 	}
 
@@ -60,7 +60,7 @@ func (o *IgnoreScan409Response) GetMessage() ENUMCONFLICTONTHEFOLLOWINGFIELD {
 
 // GetMessageOk returns a tuple with the Message field value
 // and a boolean to check if the value has been set.
-func (o *IgnoreScan409Response) GetMessageOk() (*ENUMCONFLICTONTHEFOLLOWINGFIELD, bool) {
+func (o *IgnoreScan409Response) GetMessageOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -68,7 +68,7 @@ func (o *IgnoreScan409Response) GetMessageOk() (*ENUMCONFLICTONTHEFOLLOWINGFIELD
 }
 
 // SetMessage sets field value
-func (o *IgnoreScan409Response) SetMessage(v ENUMCONFLICTONTHEFOLLOWINGFIELD) {
+func (o *IgnoreScan409Response) SetMessage(v string) {
 	o.Message = v
 }
 

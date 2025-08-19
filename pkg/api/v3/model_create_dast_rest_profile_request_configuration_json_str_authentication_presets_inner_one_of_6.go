@@ -20,9 +20,9 @@ var _ MappedNullable = &CreateDastRestProfileRequestConfigurationJsonStrAuthenti
 
 // CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf6 struct for CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf6
 type CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf6 struct {
-	Type ENUMCOGNITOUSERPASS `json:"type"`
+	Type string `json:"type"`
 	Users []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf1UsersInner `json:"users"`
-	Region ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESAUTHENTICATIONPROPERTIESPRESETSITEMS6PROPERTIESREGION `json:"region"`
+	Region string `json:"region"`
 	ClientId string `json:"client_id"`
 	ClientSecret string `json:"client_secret"`
 	AdditionalProperties map[string]interface{}
@@ -34,7 +34,7 @@ type _CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInner
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf6(type_ ENUMCOGNITOUSERPASS, users []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf1UsersInner, region ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESAUTHENTICATIONPROPERTIESPRESETSITEMS6PROPERTIESREGION, clientId string, clientSecret string) *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf6 {
+func NewCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf6(type_ string, users []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf1UsersInner, region string, clientId string, clientSecret string) *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf6 {
 	this := CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf6{}
 	this.Type = type_
 	this.Users = users
@@ -53,9 +53,9 @@ func NewCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInn
 }
 
 // GetType returns the Type field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf6) GetType() ENUMCOGNITOUSERPASS {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf6) GetType() string {
 	if o == nil {
-		var ret ENUMCOGNITOUSERPASS
+		var ret string
 		return ret
 	}
 
@@ -64,7 +64,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsIn
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf6) GetTypeOk() (*ENUMCOGNITOUSERPASS, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf6) GetTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -72,7 +72,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsIn
 }
 
 // SetType sets field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf6) SetType(v ENUMCOGNITOUSERPASS) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf6) SetType(v string) {
 	o.Type = v
 }
 
@@ -101,9 +101,9 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsIn
 }
 
 // GetRegion returns the Region field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf6) GetRegion() ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESAUTHENTICATIONPROPERTIESPRESETSITEMS6PROPERTIESREGION {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf6) GetRegion() string {
 	if o == nil {
-		var ret ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESAUTHENTICATIONPROPERTIESPRESETSITEMS6PROPERTIESREGION
+		var ret string
 		return ret
 	}
 
@@ -112,7 +112,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsIn
 
 // GetRegionOk returns a tuple with the Region field value
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf6) GetRegionOk() (*ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESAUTHENTICATIONPROPERTIESPRESETSITEMS6PROPERTIESREGION, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf6) GetRegionOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -120,7 +120,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsIn
 }
 
 // SetRegion sets field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf6) SetRegion(v ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESAUTHENTICATIONPROPERTIESPRESETSITEMS6PROPERTIESREGION) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf6) SetRegion(v string) {
 	o.Region = v
 }
 
