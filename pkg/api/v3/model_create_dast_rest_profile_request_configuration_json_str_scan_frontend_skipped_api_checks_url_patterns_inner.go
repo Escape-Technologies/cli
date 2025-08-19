@@ -19,7 +19,7 @@ var _ MappedNullable = &CreateDastRestProfileRequestConfigurationJsonStrScanFron
 
 // CreateDastRestProfileRequestConfigurationJsonStrScanFrontendSkippedApiChecksUrlPatternsInner struct for CreateDastRestProfileRequestConfigurationJsonStrScanFrontendSkippedApiChecksUrlPatternsInner
 type CreateDastRestProfileRequestConfigurationJsonStrScanFrontendSkippedApiChecksUrlPatternsInner struct {
-	Method *string `json:"method,omitempty"`
+	Method *ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESSCANPROPERTIESFRONTENDSKIPPEDAPICHECKSURLPATTERNSITEMSPROPERTIESMETHOD `json:"method,omitempty"`
 	UrlPattern *string `json:"url_pattern,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -44,9 +44,9 @@ func NewCreateDastRestProfileRequestConfigurationJsonStrScanFrontendSkippedApiCh
 }
 
 // GetMethod returns the Method field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrScanFrontendSkippedApiChecksUrlPatternsInner) GetMethod() string {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrScanFrontendSkippedApiChecksUrlPatternsInner) GetMethod() ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESSCANPROPERTIESFRONTENDSKIPPEDAPICHECKSURLPATTERNSITEMSPROPERTIESMETHOD {
 	if o == nil || IsNil(o.Method) {
-		var ret string
+		var ret ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESSCANPROPERTIESFRONTENDSKIPPEDAPICHECKSURLPATTERNSITEMSPROPERTIESMETHOD
 		return ret
 	}
 	return *o.Method
@@ -54,7 +54,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrScanFrontendSkippedApiC
 
 // GetMethodOk returns a tuple with the Method field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrScanFrontendSkippedApiChecksUrlPatternsInner) GetMethodOk() (*string, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrScanFrontendSkippedApiChecksUrlPatternsInner) GetMethodOk() (*ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESSCANPROPERTIESFRONTENDSKIPPEDAPICHECKSURLPATTERNSITEMSPROPERTIESMETHOD, bool) {
 	if o == nil || IsNil(o.Method) {
 		return nil, false
 	}
@@ -70,8 +70,8 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrScanFrontendSkippedApiC
 	return false
 }
 
-// SetMethod gets a reference to the given string and assigns it to the Method field.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrScanFrontendSkippedApiChecksUrlPatternsInner) SetMethod(v string) {
+// SetMethod gets a reference to the given ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESSCANPROPERTIESFRONTENDSKIPPEDAPICHECKSURLPATTERNSITEMSPROPERTIESMETHOD and assigns it to the Method field.
+func (o *CreateDastRestProfileRequestConfigurationJsonStrScanFrontendSkippedApiChecksUrlPatternsInner) SetMethod(v ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESSCANPROPERTIESFRONTENDSKIPPEDAPICHECKSURLPATTERNSITEMSPROPERTIESMETHOD) {
 	o.Method = &v
 }
 

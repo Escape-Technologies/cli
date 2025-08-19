@@ -24,12 +24,9 @@ type IssueSummarized struct {
 	Id string `json:"id"`
 	// The name of the issue
 	Name string `json:"name"`
-	// The category of the issue
-	Category string `json:"category"`
-	// The severity level of the issue
-	Severity string `json:"severity"`
-	// The current status of the issue
-	Status string `json:"status"`
+	Category ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCATEGORY `json:"category"`
+	Severity ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY `json:"severity"`
+	Status ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS `json:"status"`
 	// The context of the issue
 	Context string `json:"context"`
 	// Array of risk types associated with the issue
@@ -57,7 +54,7 @@ type _IssueSummarized IssueSummarized
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIssueSummarized(id string, name string, category string, severity string, status string, context string, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, alertUid string, createdAt string, asset AssetSummarized, links IssueSummarizedLinks) *IssueSummarized {
+func NewIssueSummarized(id string, name string, category ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCATEGORY, severity ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY, status ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS, context string, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, alertUid string, createdAt string, asset AssetSummarized, links IssueSummarizedLinks) *IssueSummarized {
 	this := IssueSummarized{}
 	this.Id = id
 	this.Name = name
@@ -130,9 +127,9 @@ func (o *IssueSummarized) SetName(v string) {
 }
 
 // GetCategory returns the Category field value
-func (o *IssueSummarized) GetCategory() string {
+func (o *IssueSummarized) GetCategory() ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCATEGORY {
 	if o == nil {
-		var ret string
+		var ret ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCATEGORY
 		return ret
 	}
 
@@ -141,7 +138,7 @@ func (o *IssueSummarized) GetCategory() string {
 
 // GetCategoryOk returns a tuple with the Category field value
 // and a boolean to check if the value has been set.
-func (o *IssueSummarized) GetCategoryOk() (*string, bool) {
+func (o *IssueSummarized) GetCategoryOk() (*ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCATEGORY, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -149,14 +146,14 @@ func (o *IssueSummarized) GetCategoryOk() (*string, bool) {
 }
 
 // SetCategory sets field value
-func (o *IssueSummarized) SetCategory(v string) {
+func (o *IssueSummarized) SetCategory(v ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCATEGORY) {
 	o.Category = v
 }
 
 // GetSeverity returns the Severity field value
-func (o *IssueSummarized) GetSeverity() string {
+func (o *IssueSummarized) GetSeverity() ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY {
 	if o == nil {
-		var ret string
+		var ret ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY
 		return ret
 	}
 
@@ -165,7 +162,7 @@ func (o *IssueSummarized) GetSeverity() string {
 
 // GetSeverityOk returns a tuple with the Severity field value
 // and a boolean to check if the value has been set.
-func (o *IssueSummarized) GetSeverityOk() (*string, bool) {
+func (o *IssueSummarized) GetSeverityOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -173,14 +170,14 @@ func (o *IssueSummarized) GetSeverityOk() (*string, bool) {
 }
 
 // SetSeverity sets field value
-func (o *IssueSummarized) SetSeverity(v string) {
+func (o *IssueSummarized) SetSeverity(v ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY) {
 	o.Severity = v
 }
 
 // GetStatus returns the Status field value
-func (o *IssueSummarized) GetStatus() string {
+func (o *IssueSummarized) GetStatus() ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS {
 	if o == nil {
-		var ret string
+		var ret ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS
 		return ret
 	}
 
@@ -189,7 +186,7 @@ func (o *IssueSummarized) GetStatus() string {
 
 // GetStatusOk returns a tuple with the Status field value
 // and a boolean to check if the value has been set.
-func (o *IssueSummarized) GetStatusOk() (*string, bool) {
+func (o *IssueSummarized) GetStatusOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -197,7 +194,7 @@ func (o *IssueSummarized) GetStatusOk() (*string, bool) {
 }
 
 // SetStatus sets field value
-func (o *IssueSummarized) SetStatus(v string) {
+func (o *IssueSummarized) SetStatus(v ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS) {
 	o.Status = v
 }
 

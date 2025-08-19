@@ -52,7 +52,7 @@ func NewCreateAssetPOSTMANORGANIZATIONRequestWithDefaults() *CreateAssetPOSTMANO
 // GetAssetClass returns the AssetClass field value
 func (o *CreateAssetPOSTMANORGANIZATIONRequest) GetAssetClass() ENUMDEVTOOLS {
 	if o == nil {
-		var ret string
+		var ret ENUMDEVTOOLS
 		return ret
 	}
 
@@ -76,7 +76,7 @@ func (o *CreateAssetPOSTMANORGANIZATIONRequest) SetAssetClass(v ENUMDEVTOOLS) {
 // GetAssetType returns the AssetType field value
 func (o *CreateAssetPOSTMANORGANIZATIONRequest) GetAssetType() ENUMPOSTMANORGANIZATION {
 	if o == nil {
-		var ret string
+		var ret ENUMPOSTMANORGANIZATION
 		return ret
 	}
 

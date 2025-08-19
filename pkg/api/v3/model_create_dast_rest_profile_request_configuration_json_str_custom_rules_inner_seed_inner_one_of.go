@@ -20,10 +20,10 @@ var _ MappedNullable = &CreateDastRestProfileRequestConfigurationJsonStrCustomRu
 
 // CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf struct for CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf
 type CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf struct {
-	Protocol string `json:"protocol"`
+	Protocol ENUMREST `json:"protocol"`
 	User *string `json:"user,omitempty"`
 	Path *string `json:"path,omitempty"`
-	Method *string `json:"method,omitempty"`
+	Method *ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS0PROPERTIESPARAMETERSPROPERTIESMETHOD `json:"method,omitempty"`
 	Headers map[string]string `json:"headers,omitempty"`
 	Body *string `json:"body,omitempty"`
 	Params map[string]string `json:"params,omitempty"`
@@ -36,7 +36,7 @@ type _CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerO
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf(protocol string) *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf {
+func NewCreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf(protocol ENUMREST) *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf {
 	this := CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf{}
 	this.Protocol = protocol
 	return &this
@@ -51,9 +51,9 @@ func NewCreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInne
 }
 
 // GetProtocol returns the Protocol field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf) GetProtocol() string {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf) GetProtocol() ENUMREST {
 	if o == nil {
-		var ret string
+		var ret ENUMREST
 		return ret
 	}
 
@@ -62,7 +62,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInn
 
 // GetProtocolOk returns a tuple with the Protocol field value
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf) GetProtocolOk() (*string, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf) GetProtocolOk() (*ENUMREST, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -70,7 +70,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInn
 }
 
 // SetProtocol sets field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf) SetProtocol(v string) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf) SetProtocol(v ENUMREST) {
 	o.Protocol = v
 }
 
@@ -139,9 +139,9 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInn
 }
 
 // GetMethod returns the Method field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf) GetMethod() string {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf) GetMethod() ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS0PROPERTIESPARAMETERSPROPERTIESMETHOD {
 	if o == nil || IsNil(o.Method) {
-		var ret string
+		var ret ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS0PROPERTIESPARAMETERSPROPERTIESMETHOD
 		return ret
 	}
 	return *o.Method
@@ -149,7 +149,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInn
 
 // GetMethodOk returns a tuple with the Method field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf) GetMethodOk() (*string, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf) GetMethodOk() (*ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS0PROPERTIESPARAMETERSPROPERTIESMETHOD, bool) {
 	if o == nil || IsNil(o.Method) {
 		return nil, false
 	}
@@ -165,8 +165,8 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInn
 	return false
 }
 
-// SetMethod gets a reference to the given string and assigns it to the Method field.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf) SetMethod(v string) {
+// SetMethod gets a reference to the given ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS0PROPERTIESPARAMETERSPROPERTIESMETHOD and assigns it to the Method field.
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerSeedInnerOneOf) SetMethod(v ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS0PROPERTIESPARAMETERSPROPERTIESMETHOD) {
 	o.Method = &v
 }
 
