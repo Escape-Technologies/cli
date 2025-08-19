@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/Escape-Technologies/cli/pkg/api/escape"
+	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
 	"github.com/Escape-Technologies/cli/pkg/cli/out"
 	"github.com/spf13/cobra"
 )
@@ -33,10 +34,9 @@ var auditCmd = &cobra.Command{
 			return fmt.Errorf("unable to list audits: %w", err)
 		}
 
-		// First result
-		result := []string{"ACTOR\t ACTION\t NAME\t DATE"}
+		result := make([]*v3.AuditLogSummarized, 0, len(logs))
 		for _, log := range logs {
-			result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s", log.GetActor(), log.GetAction(), log.GetTitle(), log.GetDate()))
+			result = append(result, &log)
 		}
 
 		for next != nil && *next != "" {
@@ -51,12 +51,23 @@ var auditCmd = &cobra.Command{
 				return fmt.Errorf("unable to list audits: %w", err)
 			}
 			for _, log := range logs {
-				result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s", log.GetActor(), log.GetAction(), log.GetTitle(), log.GetDate()))
+				result = append(result, &log)
 			}
 		}
 
 		out.Table(result, func() []string {
-			return result
+			fields := []string{"ACTOR\t ACTION\t NAME\t DATE\t"}
+			for _, log := range result {
+				fields = append(fields, fmt.Sprintf(
+					"%s\t%s\t%s\t%s\t%s",
+					log.GetActor(),
+					log.GetAction(),
+					log.GetTitle(),
+					log.GetDate(),
+					log.GetTarget(),
+				))
+			}
+			return fields
 		})
 
 		return nil

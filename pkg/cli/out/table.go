@@ -11,15 +11,15 @@ import (
 )
 
 var (
-	greenBool = color.New(color.FgGreen).SprintFunc()
-	linkText = color.New(color.FgBlue).SprintFunc()
-	cyanText  = color.New(color.FgCyan).SprintFunc()
+	greenBool  = color.New(color.FgGreen).SprintFunc()
+	linkText   = color.New(color.FgBlue).SprintFunc()
+	cyanText   = color.New(color.FgCyan).SprintFunc()
 	yellowText = color.New(color.FgYellow).SprintFunc()
-	redBool   = color.New(color.FgRed).SprintFunc()
-	grayText    = color.New(color.FgHiBlack).SprintFunc()
-	boldText  = color.New(color.Bold).SprintFunc()
-	noColor   = color.New(color.Reset).SprintFunc()
-	idText = color.New(color.FgHiMagenta).SprintFunc()
+	redBool    = color.New(color.FgRed).SprintFunc()
+	grayText   = color.New(color.FgHiBlack).SprintFunc()
+	boldText   = color.New(color.Bold).SprintFunc()
+	noColor    = color.New(color.Reset).SprintFunc()
+	idText     = color.New(color.FgHiMagenta).SprintFunc()
 )
 
 func colorizeBool(value string) string {
@@ -134,6 +134,6 @@ func Table(data any, tableMaker func() []string) {
 			fmt.Fprintln(w, strings.Join(fields, "\t")) //nolint:errcheck
 		}
 	}
-	
+
 	w.Flush() //nolint:errcheck
 }
