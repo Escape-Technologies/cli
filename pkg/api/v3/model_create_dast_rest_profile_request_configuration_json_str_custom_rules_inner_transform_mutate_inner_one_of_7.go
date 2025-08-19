@@ -20,9 +20,9 @@ var _ MappedNullable = &CreateDastRestProfileRequestConfigurationJsonStrCustomRu
 
 // CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf7 struct for CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf7
 type CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf7 struct {
-	Key string `json:"key"`
-	Value *string `json:"value,omitempty"`
-	Values []ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS6PROPERTIESINITEMS `json:"values,omitempty"`
+	Key ENUMREQUESTMETHOD `json:"key"`
+	Value *ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS0PROPERTIESPARAMETERSPROPERTIESMETHOD `json:"value,omitempty"`
+	Values []ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS0PROPERTIESPARAMETERSPROPERTIESMETHOD `json:"values,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -32,7 +32,7 @@ type _CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformM
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf7(key string) *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf7 {
+func NewCreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf7(key ENUMREQUESTMETHOD) *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf7 {
 	this := CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf7{}
 	this.Key = key
 	return &this
@@ -47,9 +47,9 @@ func NewCreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransfor
 }
 
 // GetKey returns the Key field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf7) GetKey() string {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf7) GetKey() ENUMREQUESTMETHOD {
 	if o == nil {
-		var ret string
+		var ret ENUMREQUESTMETHOD
 		return ret
 	}
 
@@ -58,7 +58,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransfo
 
 // GetKeyOk returns a tuple with the Key field value
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf7) GetKeyOk() (*string, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf7) GetKeyOk() (*ENUMREQUESTMETHOD, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -66,14 +66,14 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransfo
 }
 
 // SetKey sets field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf7) SetKey(v string) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf7) SetKey(v ENUMREQUESTMETHOD) {
 	o.Key = v
 }
 
 // GetValue returns the Value field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf7) GetValue() string {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf7) GetValue() ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS0PROPERTIESPARAMETERSPROPERTIESMETHOD {
 	if o == nil || IsNil(o.Value) {
-		var ret string
+		var ret ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS0PROPERTIESPARAMETERSPROPERTIESMETHOD
 		return ret
 	}
 	return *o.Value
@@ -81,7 +81,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransfo
 
 // GetValueOk returns a tuple with the Value field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf7) GetValueOk() (*string, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf7) GetValueOk() (*ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS0PROPERTIESPARAMETERSPROPERTIESMETHOD, bool) {
 	if o == nil || IsNil(o.Value) {
 		return nil, false
 	}
@@ -97,15 +97,15 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransfo
 	return false
 }
 
-// SetValue gets a reference to the given string and assigns it to the Value field.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf7) SetValue(v string) {
+// SetValue gets a reference to the given ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS0PROPERTIESPARAMETERSPROPERTIESMETHOD and assigns it to the Value field.
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf7) SetValue(v ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS0PROPERTIESPARAMETERSPROPERTIESMETHOD) {
 	o.Value = &v
 }
 
 // GetValues returns the Values field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf7) GetValues() []ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS6PROPERTIESINITEMS {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf7) GetValues() []ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS0PROPERTIESPARAMETERSPROPERTIESMETHOD {
 	if o == nil || IsNil(o.Values) {
-		var ret []ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS6PROPERTIESINITEMS
+		var ret []ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS0PROPERTIESPARAMETERSPROPERTIESMETHOD
 		return ret
 	}
 	return o.Values
@@ -113,7 +113,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransfo
 
 // GetValuesOk returns a tuple with the Values field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf7) GetValuesOk() ([]ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS6PROPERTIESINITEMS, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf7) GetValuesOk() ([]ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS0PROPERTIESPARAMETERSPROPERTIESMETHOD, bool) {
 	if o == nil || IsNil(o.Values) {
 		return nil, false
 	}
@@ -129,8 +129,8 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransfo
 	return false
 }
 
-// SetValues gets a reference to the given []ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS6PROPERTIESINITEMS and assigns it to the Values field.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf7) SetValues(v []ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS6PROPERTIESINITEMS) {
+// SetValues gets a reference to the given []ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS0PROPERTIESPARAMETERSPROPERTIESMETHOD and assigns it to the Values field.
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf7) SetValues(v []ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS0PROPERTIESPARAMETERSPROPERTIESMETHOD) {
 	o.Values = v
 }
 

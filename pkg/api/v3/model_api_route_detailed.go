@@ -33,13 +33,12 @@ type ApiRouteDetailed struct {
 	// The operation of the api route
 	Operation string `json:"operation"`
 	// The parameters of the api route
-	Parameters map[string]string `json:"parameters"`
+	Parameters map[string]string `json:"parameters,omitempty"`
 	// The request count of the api route
 	RequestCount float32 `json:"requestCount"`
 	// The return type of the api route
-	ReturnType string `json:"returnType"`
-	// The source of the api route
-	Source string `json:"source"`
+	ReturnType *string `json:"returnType,omitempty"`
+	Source ENUMITEMSPROPERTIESTARGETPROPERTIESAPIROUTEPROPERTIESSOURCE `json:"source"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -49,7 +48,7 @@ type _ApiRouteDetailed ApiRouteDetailed
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewApiRouteDetailed(blacklisted bool, createdAt string, displayName string, id string, name string, operation string, parameters map[string]string, requestCount float32, returnType string, source string) *ApiRouteDetailed {
+func NewApiRouteDetailed(blacklisted bool, createdAt string, displayName string, id string, name string, operation string, requestCount float32, source ENUMITEMSPROPERTIESTARGETPROPERTIESAPIROUTEPROPERTIESSOURCE) *ApiRouteDetailed {
 	this := ApiRouteDetailed{}
 	this.Blacklisted = blacklisted
 	this.CreatedAt = createdAt
@@ -57,9 +56,7 @@ func NewApiRouteDetailed(blacklisted bool, createdAt string, displayName string,
 	this.Id = id
 	this.Name = name
 	this.Operation = operation
-	this.Parameters = parameters
 	this.RequestCount = requestCount
-	this.ReturnType = returnType
 	this.Source = source
 	return &this
 }
@@ -216,26 +213,34 @@ func (o *ApiRouteDetailed) SetOperation(v string) {
 	o.Operation = v
 }
 
-// GetParameters returns the Parameters field value
+// GetParameters returns the Parameters field value if set, zero value otherwise.
 func (o *ApiRouteDetailed) GetParameters() map[string]string {
-	if o == nil {
+	if o == nil || IsNil(o.Parameters) {
 		var ret map[string]string
 		return ret
 	}
-
 	return o.Parameters
 }
 
-// GetParametersOk returns a tuple with the Parameters field value
+// GetParametersOk returns a tuple with the Parameters field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApiRouteDetailed) GetParametersOk() (map[string]string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Parameters) {
 		return map[string]string{}, false
 	}
 	return o.Parameters, true
 }
 
-// SetParameters sets field value
+// HasParameters returns a boolean if a field has been set.
+func (o *ApiRouteDetailed) HasParameters() bool {
+	if o != nil && !IsNil(o.Parameters) {
+		return true
+	}
+
+	return false
+}
+
+// SetParameters gets a reference to the given map[string]string and assigns it to the Parameters field.
 func (o *ApiRouteDetailed) SetParameters(v map[string]string) {
 	o.Parameters = v
 }
@@ -264,34 +269,42 @@ func (o *ApiRouteDetailed) SetRequestCount(v float32) {
 	o.RequestCount = v
 }
 
-// GetReturnType returns the ReturnType field value
+// GetReturnType returns the ReturnType field value if set, zero value otherwise.
 func (o *ApiRouteDetailed) GetReturnType() string {
-	if o == nil {
+	if o == nil || IsNil(o.ReturnType) {
 		var ret string
 		return ret
 	}
-
-	return o.ReturnType
+	return *o.ReturnType
 }
 
-// GetReturnTypeOk returns a tuple with the ReturnType field value
+// GetReturnTypeOk returns a tuple with the ReturnType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApiRouteDetailed) GetReturnTypeOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.ReturnType) {
 		return nil, false
 	}
-	return &o.ReturnType, true
+	return o.ReturnType, true
 }
 
-// SetReturnType sets field value
+// HasReturnType returns a boolean if a field has been set.
+func (o *ApiRouteDetailed) HasReturnType() bool {
+	if o != nil && !IsNil(o.ReturnType) {
+		return true
+	}
+
+	return false
+}
+
+// SetReturnType gets a reference to the given string and assigns it to the ReturnType field.
 func (o *ApiRouteDetailed) SetReturnType(v string) {
-	o.ReturnType = v
+	o.ReturnType = &v
 }
 
 // GetSource returns the Source field value
-func (o *ApiRouteDetailed) GetSource() string {
+func (o *ApiRouteDetailed) GetSource() ENUMITEMSPROPERTIESTARGETPROPERTIESAPIROUTEPROPERTIESSOURCE {
 	if o == nil {
-		var ret string
+		var ret ENUMITEMSPROPERTIESTARGETPROPERTIESAPIROUTEPROPERTIESSOURCE
 		return ret
 	}
 
@@ -300,7 +313,7 @@ func (o *ApiRouteDetailed) GetSource() string {
 
 // GetSourceOk returns a tuple with the Source field value
 // and a boolean to check if the value has been set.
-func (o *ApiRouteDetailed) GetSourceOk() (*string, bool) {
+func (o *ApiRouteDetailed) GetSourceOk() (*ENUMITEMSPROPERTIESTARGETPROPERTIESAPIROUTEPROPERTIESSOURCE, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -308,7 +321,7 @@ func (o *ApiRouteDetailed) GetSourceOk() (*string, bool) {
 }
 
 // SetSource sets field value
-func (o *ApiRouteDetailed) SetSource(v string) {
+func (o *ApiRouteDetailed) SetSource(v ENUMITEMSPROPERTIESTARGETPROPERTIESAPIROUTEPROPERTIESSOURCE) {
 	o.Source = v
 }
 
@@ -328,9 +341,13 @@ func (o ApiRouteDetailed) ToMap() (map[string]interface{}, error) {
 	toSerialize["id"] = o.Id
 	toSerialize["name"] = o.Name
 	toSerialize["operation"] = o.Operation
-	toSerialize["parameters"] = o.Parameters
+	if !IsNil(o.Parameters) {
+		toSerialize["parameters"] = o.Parameters
+	}
 	toSerialize["requestCount"] = o.RequestCount
-	toSerialize["returnType"] = o.ReturnType
+	if !IsNil(o.ReturnType) {
+		toSerialize["returnType"] = o.ReturnType
+	}
 	toSerialize["source"] = o.Source
 
 	for key, value := range o.AdditionalProperties {
@@ -351,9 +368,7 @@ func (o *ApiRouteDetailed) UnmarshalJSON(data []byte) (err error) {
 		"id",
 		"name",
 		"operation",
-		"parameters",
 		"requestCount",
-		"returnType",
 		"source",
 	}
 

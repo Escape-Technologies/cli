@@ -24,13 +24,11 @@ type EventDetailed struct {
 	Issues []IssueSummarized `json:"issues,omitempty"`
 	// The number of issues of the event
 	IssuesCount float32 `json:"issuesCount"`
-	// The level of the event
-	Level string `json:"level"`
+	Level ENUMPROPERTIESDATAITEMSPROPERTIESLEVEL `json:"level"`
 	Scan *ScanDetailed `json:"scan,omitempty"`
 	// The id of the scan of the event
 	ScanId *string `json:"scanId,omitempty"`
-	// The stage of the event
-	Stage string `json:"stage"`
+	Stage ENUMPROPERTIESDATAITEMSPROPERTIESSTAGE `json:"stage"`
 	// The title of the event
 	Title string `json:"title"`
 	AdditionalProperties map[string]interface{}
@@ -42,7 +40,7 @@ type _EventDetailed EventDetailed
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewEventDetailed(issuesCount float32, level string, stage string, title string) *EventDetailed {
+func NewEventDetailed(issuesCount float32, level ENUMPROPERTIESDATAITEMSPROPERTIESLEVEL, stage ENUMPROPERTIESDATAITEMSPROPERTIESSTAGE, title string) *EventDetailed {
 	this := EventDetailed{}
 	this.IssuesCount = issuesCount
 	this.Level = level
@@ -116,9 +114,9 @@ func (o *EventDetailed) SetIssuesCount(v float32) {
 }
 
 // GetLevel returns the Level field value
-func (o *EventDetailed) GetLevel() string {
+func (o *EventDetailed) GetLevel() ENUMPROPERTIESDATAITEMSPROPERTIESLEVEL {
 	if o == nil {
-		var ret string
+		var ret ENUMPROPERTIESDATAITEMSPROPERTIESLEVEL
 		return ret
 	}
 
@@ -127,7 +125,7 @@ func (o *EventDetailed) GetLevel() string {
 
 // GetLevelOk returns a tuple with the Level field value
 // and a boolean to check if the value has been set.
-func (o *EventDetailed) GetLevelOk() (*string, bool) {
+func (o *EventDetailed) GetLevelOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESLEVEL, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -135,7 +133,7 @@ func (o *EventDetailed) GetLevelOk() (*string, bool) {
 }
 
 // SetLevel sets field value
-func (o *EventDetailed) SetLevel(v string) {
+func (o *EventDetailed) SetLevel(v ENUMPROPERTIESDATAITEMSPROPERTIESLEVEL) {
 	o.Level = v
 }
 
@@ -204,9 +202,9 @@ func (o *EventDetailed) SetScanId(v string) {
 }
 
 // GetStage returns the Stage field value
-func (o *EventDetailed) GetStage() string {
+func (o *EventDetailed) GetStage() ENUMPROPERTIESDATAITEMSPROPERTIESSTAGE {
 	if o == nil {
-		var ret string
+		var ret ENUMPROPERTIESDATAITEMSPROPERTIESSTAGE
 		return ret
 	}
 
@@ -215,7 +213,7 @@ func (o *EventDetailed) GetStage() string {
 
 // GetStageOk returns a tuple with the Stage field value
 // and a boolean to check if the value has been set.
-func (o *EventDetailed) GetStageOk() (*string, bool) {
+func (o *EventDetailed) GetStageOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESSTAGE, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -223,7 +221,7 @@ func (o *EventDetailed) GetStageOk() (*string, bool) {
 }
 
 // SetStage sets field value
-func (o *EventDetailed) SetStage(v string) {
+func (o *EventDetailed) SetStage(v ENUMPROPERTIESDATAITEMSPROPERTIESSTAGE) {
 	o.Stage = v
 }
 

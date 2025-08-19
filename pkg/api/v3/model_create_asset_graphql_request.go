@@ -20,17 +20,17 @@ var _ MappedNullable = &CreateAssetGRAPHQLRequest{}
 
 // CreateAssetGRAPHQLRequest struct for CreateAssetGRAPHQLRequest
 type CreateAssetGRAPHQLRequest struct {
-	AssetClass string `json:"asset_class"`
-	AssetType string `json:"asset_type"`
+	AssetClass ENUMAPISERVICE `json:"asset_class"`
+	AssetType ENUMGRAPHQL `json:"asset_type"`
 	Url string `json:"url"`
 	Favicon *string `json:"favicon,omitempty"`
 	ReachableVia []string `json:"reachable_via,omitempty"`
-	Environment *string `json:"environment,omitempty"`
-	CloudProvider *string `json:"cloud_provider,omitempty"`
-	WafProvider *string `json:"waf_provider,omitempty"`
+	Environment *ENUMPROPERTIESENVIRONMENT `json:"environment,omitempty"`
+	CloudProvider *ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER `json:"cloud_provider,omitempty"`
+	WafProvider *ENUMPROPERTIESWAFPROVIDER `json:"waf_provider,omitempty"`
 	Ips []string `json:"ips,omitempty"`
 	RegionCountryCodes []string `json:"region_country_codes,omitempty"`
-	Framework *string `json:"framework,omitempty"`
+	Framework *ENUMPROPERTIESFRAMEWORK `json:"framework,omitempty"`
 	Operations []CreateAssetGRAPHQLRequestOperationsInner `json:"operations,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -41,7 +41,7 @@ type _CreateAssetGRAPHQLRequest CreateAssetGRAPHQLRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetGRAPHQLRequest(assetClass string, assetType string, url string) *CreateAssetGRAPHQLRequest {
+func NewCreateAssetGRAPHQLRequest(assetClass ENUMAPISERVICE, assetType ENUMGRAPHQL, url string) *CreateAssetGRAPHQLRequest {
 	this := CreateAssetGRAPHQLRequest{}
 	this.AssetClass = assetClass
 	this.AssetType = assetType
@@ -58,9 +58,9 @@ func NewCreateAssetGRAPHQLRequestWithDefaults() *CreateAssetGRAPHQLRequest {
 }
 
 // GetAssetClass returns the AssetClass field value
-func (o *CreateAssetGRAPHQLRequest) GetAssetClass() string {
+func (o *CreateAssetGRAPHQLRequest) GetAssetClass() ENUMAPISERVICE {
 	if o == nil {
-		var ret string
+		var ret ENUMAPISERVICE
 		return ret
 	}
 
@@ -69,7 +69,7 @@ func (o *CreateAssetGRAPHQLRequest) GetAssetClass() string {
 
 // GetAssetClassOk returns a tuple with the AssetClass field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGRAPHQLRequest) GetAssetClassOk() (*string, bool) {
+func (o *CreateAssetGRAPHQLRequest) GetAssetClassOk() (*ENUMAPISERVICE, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -77,14 +77,14 @@ func (o *CreateAssetGRAPHQLRequest) GetAssetClassOk() (*string, bool) {
 }
 
 // SetAssetClass sets field value
-func (o *CreateAssetGRAPHQLRequest) SetAssetClass(v string) {
+func (o *CreateAssetGRAPHQLRequest) SetAssetClass(v ENUMAPISERVICE) {
 	o.AssetClass = v
 }
 
 // GetAssetType returns the AssetType field value
-func (o *CreateAssetGRAPHQLRequest) GetAssetType() string {
+func (o *CreateAssetGRAPHQLRequest) GetAssetType() ENUMGRAPHQL {
 	if o == nil {
-		var ret string
+		var ret ENUMGRAPHQL
 		return ret
 	}
 
@@ -93,7 +93,7 @@ func (o *CreateAssetGRAPHQLRequest) GetAssetType() string {
 
 // GetAssetTypeOk returns a tuple with the AssetType field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGRAPHQLRequest) GetAssetTypeOk() (*string, bool) {
+func (o *CreateAssetGRAPHQLRequest) GetAssetTypeOk() (*ENUMGRAPHQL, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -101,7 +101,7 @@ func (o *CreateAssetGRAPHQLRequest) GetAssetTypeOk() (*string, bool) {
 }
 
 // SetAssetType sets field value
-func (o *CreateAssetGRAPHQLRequest) SetAssetType(v string) {
+func (o *CreateAssetGRAPHQLRequest) SetAssetType(v ENUMGRAPHQL) {
 	o.AssetType = v
 }
 
@@ -194,9 +194,9 @@ func (o *CreateAssetGRAPHQLRequest) SetReachableVia(v []string) {
 }
 
 // GetEnvironment returns the Environment field value if set, zero value otherwise.
-func (o *CreateAssetGRAPHQLRequest) GetEnvironment() string {
+func (o *CreateAssetGRAPHQLRequest) GetEnvironment() ENUMPROPERTIESENVIRONMENT {
 	if o == nil || IsNil(o.Environment) {
-		var ret string
+		var ret ENUMPROPERTIESENVIRONMENT
 		return ret
 	}
 	return *o.Environment
@@ -204,7 +204,7 @@ func (o *CreateAssetGRAPHQLRequest) GetEnvironment() string {
 
 // GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGRAPHQLRequest) GetEnvironmentOk() (*string, bool) {
+func (o *CreateAssetGRAPHQLRequest) GetEnvironmentOk() (*ENUMPROPERTIESENVIRONMENT, bool) {
 	if o == nil || IsNil(o.Environment) {
 		return nil, false
 	}
@@ -220,15 +220,15 @@ func (o *CreateAssetGRAPHQLRequest) HasEnvironment() bool {
 	return false
 }
 
-// SetEnvironment gets a reference to the given string and assigns it to the Environment field.
-func (o *CreateAssetGRAPHQLRequest) SetEnvironment(v string) {
+// SetEnvironment gets a reference to the given ENUMPROPERTIESENVIRONMENT and assigns it to the Environment field.
+func (o *CreateAssetGRAPHQLRequest) SetEnvironment(v ENUMPROPERTIESENVIRONMENT) {
 	o.Environment = &v
 }
 
 // GetCloudProvider returns the CloudProvider field value if set, zero value otherwise.
-func (o *CreateAssetGRAPHQLRequest) GetCloudProvider() string {
+func (o *CreateAssetGRAPHQLRequest) GetCloudProvider() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER {
 	if o == nil || IsNil(o.CloudProvider) {
-		var ret string
+		var ret ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER
 		return ret
 	}
 	return *o.CloudProvider
@@ -236,7 +236,7 @@ func (o *CreateAssetGRAPHQLRequest) GetCloudProvider() string {
 
 // GetCloudProviderOk returns a tuple with the CloudProvider field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGRAPHQLRequest) GetCloudProviderOk() (*string, bool) {
+func (o *CreateAssetGRAPHQLRequest) GetCloudProviderOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER, bool) {
 	if o == nil || IsNil(o.CloudProvider) {
 		return nil, false
 	}
@@ -252,15 +252,15 @@ func (o *CreateAssetGRAPHQLRequest) HasCloudProvider() bool {
 	return false
 }
 
-// SetCloudProvider gets a reference to the given string and assigns it to the CloudProvider field.
-func (o *CreateAssetGRAPHQLRequest) SetCloudProvider(v string) {
+// SetCloudProvider gets a reference to the given ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER and assigns it to the CloudProvider field.
+func (o *CreateAssetGRAPHQLRequest) SetCloudProvider(v ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER) {
 	o.CloudProvider = &v
 }
 
 // GetWafProvider returns the WafProvider field value if set, zero value otherwise.
-func (o *CreateAssetGRAPHQLRequest) GetWafProvider() string {
+func (o *CreateAssetGRAPHQLRequest) GetWafProvider() ENUMPROPERTIESWAFPROVIDER {
 	if o == nil || IsNil(o.WafProvider) {
-		var ret string
+		var ret ENUMPROPERTIESWAFPROVIDER
 		return ret
 	}
 	return *o.WafProvider
@@ -268,7 +268,7 @@ func (o *CreateAssetGRAPHQLRequest) GetWafProvider() string {
 
 // GetWafProviderOk returns a tuple with the WafProvider field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGRAPHQLRequest) GetWafProviderOk() (*string, bool) {
+func (o *CreateAssetGRAPHQLRequest) GetWafProviderOk() (*ENUMPROPERTIESWAFPROVIDER, bool) {
 	if o == nil || IsNil(o.WafProvider) {
 		return nil, false
 	}
@@ -284,8 +284,8 @@ func (o *CreateAssetGRAPHQLRequest) HasWafProvider() bool {
 	return false
 }
 
-// SetWafProvider gets a reference to the given string and assigns it to the WafProvider field.
-func (o *CreateAssetGRAPHQLRequest) SetWafProvider(v string) {
+// SetWafProvider gets a reference to the given ENUMPROPERTIESWAFPROVIDER and assigns it to the WafProvider field.
+func (o *CreateAssetGRAPHQLRequest) SetWafProvider(v ENUMPROPERTIESWAFPROVIDER) {
 	o.WafProvider = &v
 }
 
@@ -354,9 +354,9 @@ func (o *CreateAssetGRAPHQLRequest) SetRegionCountryCodes(v []string) {
 }
 
 // GetFramework returns the Framework field value if set, zero value otherwise.
-func (o *CreateAssetGRAPHQLRequest) GetFramework() string {
+func (o *CreateAssetGRAPHQLRequest) GetFramework() ENUMPROPERTIESFRAMEWORK {
 	if o == nil || IsNil(o.Framework) {
-		var ret string
+		var ret ENUMPROPERTIESFRAMEWORK
 		return ret
 	}
 	return *o.Framework
@@ -364,7 +364,7 @@ func (o *CreateAssetGRAPHQLRequest) GetFramework() string {
 
 // GetFrameworkOk returns a tuple with the Framework field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGRAPHQLRequest) GetFrameworkOk() (*string, bool) {
+func (o *CreateAssetGRAPHQLRequest) GetFrameworkOk() (*ENUMPROPERTIESFRAMEWORK, bool) {
 	if o == nil || IsNil(o.Framework) {
 		return nil, false
 	}
@@ -380,8 +380,8 @@ func (o *CreateAssetGRAPHQLRequest) HasFramework() bool {
 	return false
 }
 
-// SetFramework gets a reference to the given string and assigns it to the Framework field.
-func (o *CreateAssetGRAPHQLRequest) SetFramework(v string) {
+// SetFramework gets a reference to the given ENUMPROPERTIESFRAMEWORK and assigns it to the Framework field.
+func (o *CreateAssetGRAPHQLRequest) SetFramework(v ENUMPROPERTIESFRAMEWORK) {
 	o.Framework = &v
 }
 

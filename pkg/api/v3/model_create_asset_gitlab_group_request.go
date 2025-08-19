@@ -20,8 +20,8 @@ var _ MappedNullable = &CreateAssetGITLABGROUPRequest{}
 
 // CreateAssetGITLABGROUPRequest struct for CreateAssetGITLABGROUPRequest
 type CreateAssetGITLABGROUPRequest struct {
-	AssetClass string `json:"asset_class"`
-	AssetType string `json:"asset_type"`
+	AssetClass ENUMSOURCECODEMANAGEMENT `json:"asset_class"`
+	AssetType ENUMGITLABGROUP `json:"asset_type"`
 	Name *string `json:"name,omitempty"`
 	ApiKey string `json:"api_key"`
 	InstanceUrl *string `json:"instance_url,omitempty"`
@@ -35,7 +35,7 @@ type _CreateAssetGITLABGROUPRequest CreateAssetGITLABGROUPRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetGITLABGROUPRequest(assetClass string, assetType string, apiKey string) *CreateAssetGITLABGROUPRequest {
+func NewCreateAssetGITLABGROUPRequest(assetClass ENUMSOURCECODEMANAGEMENT, assetType ENUMGITLABGROUP, apiKey string) *CreateAssetGITLABGROUPRequest {
 	this := CreateAssetGITLABGROUPRequest{}
 	this.AssetClass = assetClass
 	this.AssetType = assetType
@@ -52,9 +52,9 @@ func NewCreateAssetGITLABGROUPRequestWithDefaults() *CreateAssetGITLABGROUPReque
 }
 
 // GetAssetClass returns the AssetClass field value
-func (o *CreateAssetGITLABGROUPRequest) GetAssetClass() string {
+func (o *CreateAssetGITLABGROUPRequest) GetAssetClass() ENUMSOURCECODEMANAGEMENT {
 	if o == nil {
-		var ret string
+		var ret ENUMSOURCECODEMANAGEMENT
 		return ret
 	}
 
@@ -63,7 +63,7 @@ func (o *CreateAssetGITLABGROUPRequest) GetAssetClass() string {
 
 // GetAssetClassOk returns a tuple with the AssetClass field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGITLABGROUPRequest) GetAssetClassOk() (*string, bool) {
+func (o *CreateAssetGITLABGROUPRequest) GetAssetClassOk() (*ENUMSOURCECODEMANAGEMENT, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -71,14 +71,14 @@ func (o *CreateAssetGITLABGROUPRequest) GetAssetClassOk() (*string, bool) {
 }
 
 // SetAssetClass sets field value
-func (o *CreateAssetGITLABGROUPRequest) SetAssetClass(v string) {
+func (o *CreateAssetGITLABGROUPRequest) SetAssetClass(v ENUMSOURCECODEMANAGEMENT) {
 	o.AssetClass = v
 }
 
 // GetAssetType returns the AssetType field value
-func (o *CreateAssetGITLABGROUPRequest) GetAssetType() string {
+func (o *CreateAssetGITLABGROUPRequest) GetAssetType() ENUMGITLABGROUP {
 	if o == nil {
-		var ret string
+		var ret ENUMGITLABGROUP
 		return ret
 	}
 
@@ -87,7 +87,7 @@ func (o *CreateAssetGITLABGROUPRequest) GetAssetType() string {
 
 // GetAssetTypeOk returns a tuple with the AssetType field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGITLABGROUPRequest) GetAssetTypeOk() (*string, bool) {
+func (o *CreateAssetGITLABGROUPRequest) GetAssetTypeOk() (*ENUMGITLABGROUP, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -95,7 +95,7 @@ func (o *CreateAssetGITLABGROUPRequest) GetAssetTypeOk() (*string, bool) {
 }
 
 // SetAssetType sets field value
-func (o *CreateAssetGITLABGROUPRequest) SetAssetType(v string) {
+func (o *CreateAssetGITLABGROUPRequest) SetAssetType(v ENUMGITLABGROUP) {
 	o.AssetType = v
 }
 

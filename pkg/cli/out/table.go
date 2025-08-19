@@ -3,6 +3,7 @@ package out
 import (
 	"fmt"
 	"os"
+	"regexp"
 	"strings"
 	"text/tabwriter"
 
@@ -11,29 +12,92 @@ import (
 
 var (
 	greenBool = color.New(color.FgGreen).SprintFunc()
+	linkText = color.New(color.FgBlue).SprintFunc()
+	cyanText  = color.New(color.FgCyan).SprintFunc()
+	yellowText = color.New(color.FgYellow).SprintFunc()
 	redBool   = color.New(color.FgRed).SprintFunc()
-	grayIDLink    = color.New(color.FgHiBlack).SprintFunc()
+	grayText    = color.New(color.FgHiBlack).SprintFunc()
 	boldText  = color.New(color.Bold).SprintFunc()
 	noColor   = color.New(color.Reset).SprintFunc()
+	idText = color.New(color.FgHiMagenta).SprintFunc()
 )
 
-func colorizeValue(value string, columnName string) string {
-	// handle based on column name
-	switch strings.ToUpper(columnName) {
-	case "NAME":
-		return boldText(value)
-	case "ID":
-		return grayIDLink(value)
-	case "LINK":
-		return grayIDLink(value)
-	}
-
-	// handle boolean values
+func colorizeBool(value string) string {
 	switch strings.ToLower(value) {
 	case "true":
 		return greenBool(value)
 	case "false":
 		return redBool(value)
+	default:
+		return value
+	}
+}
+
+func colorizeSeverity(value string) string {
+	switch strings.ToLower(value) {
+	case "info":
+		return grayText(value)
+	case "low":
+		return greenBool(value)
+	case "medium":
+		return yellowText(value)
+	case "high":
+		return redBool(value)
+	default:
+		return value
+	}
+}
+
+func colorizeStatus(value string) string {
+	switch strings.ToLower(value) {
+	case "open":
+		return redBool(value)
+	case "resolved":
+		return greenBool(value)
+	case "manual_review":
+		return yellowText(value)
+	case "ignored":
+		return grayText(value)
+	default:
+		return noColor(value)
+	}
+}
+
+func colorizeEnum(value string) string {
+	return cyanText(value)
+}
+
+func colorizeDate(value string) string {
+	return grayText(value)
+}
+
+func colorizeValue(value string, columnName string) string {
+	// handle links
+	urlRegex := regexp.MustCompile(`\b(?:(?:https?|grpc):\/\/)?(?:localhost|(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}|(?:\d{1,3}\.){3}\d{1,3})(?::\d+)?\b`)
+	if urlRegex.MatchString(strings.ToLower(value)) {
+		return linkText(value)
+	}
+
+	// handle based on column name
+	switch strings.ToUpper(columnName) {
+	case "NAME":
+		return boldText(value)
+	case "ID":
+		return idText(value)
+	case "STATUS":
+		return colorizeStatus(value)
+	case "SEVERITY":
+		return colorizeSeverity(value)
+	case "CATEGORY", "KIND":
+		return colorizeEnum(value)
+	case "CREATED AT", "UPDATED AT":
+		return colorizeDate(value)
+	}
+
+	// handle boolean values
+	switch strings.ToLower(value) {
+	case "true", "false":
+		return colorizeBool(value)
 	default:
 		return noColor(value)
 	}
