@@ -20,8 +20,8 @@ var _ MappedNullable = &CreateAssetDNSRequest{}
 
 // CreateAssetDNSRequest struct for CreateAssetDNSRequest
 type CreateAssetDNSRequest struct {
-	AssetClass ENUMHOST `json:"asset_class"`
-	AssetType ENUMDNS `json:"asset_type"`
+	AssetClass string `json:"asset_class"`
+	AssetType string `json:"asset_type"`
 	Address string `json:"address"`
 	Favicon *string `json:"favicon,omitempty"`
 	OpenPorts []CreateAssetDNSRequestOpenPortsInner `json:"open_ports,omitempty"`
@@ -42,7 +42,7 @@ type _CreateAssetDNSRequest CreateAssetDNSRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetDNSRequest(assetClass ENUMHOST, assetType ENUMDNS, address string) *CreateAssetDNSRequest {
+func NewCreateAssetDNSRequest(assetClass string, assetType string, address string) *CreateAssetDNSRequest {
 	this := CreateAssetDNSRequest{}
 	this.AssetClass = assetClass
 	this.AssetType = assetType
@@ -59,9 +59,9 @@ func NewCreateAssetDNSRequestWithDefaults() *CreateAssetDNSRequest {
 }
 
 // GetAssetClass returns the AssetClass field value
-func (o *CreateAssetDNSRequest) GetAssetClass() ENUMHOST {
+func (o *CreateAssetDNSRequest) GetAssetClass() string {
 	if o == nil {
-		var ret ENUMHOST
+		var ret string
 		return ret
 	}
 
@@ -70,7 +70,7 @@ func (o *CreateAssetDNSRequest) GetAssetClass() ENUMHOST {
 
 // GetAssetClassOk returns a tuple with the AssetClass field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetDNSRequest) GetAssetClassOk() (*ENUMHOST, bool) {
+func (o *CreateAssetDNSRequest) GetAssetClassOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -78,14 +78,14 @@ func (o *CreateAssetDNSRequest) GetAssetClassOk() (*ENUMHOST, bool) {
 }
 
 // SetAssetClass sets field value
-func (o *CreateAssetDNSRequest) SetAssetClass(v ENUMHOST) {
+func (o *CreateAssetDNSRequest) SetAssetClass(v string) {
 	o.AssetClass = v
 }
 
 // GetAssetType returns the AssetType field value
-func (o *CreateAssetDNSRequest) GetAssetType() ENUMDNS {
+func (o *CreateAssetDNSRequest) GetAssetType() string {
 	if o == nil {
-		var ret ENUMDNS
+		var ret string
 		return ret
 	}
 
@@ -94,7 +94,7 @@ func (o *CreateAssetDNSRequest) GetAssetType() ENUMDNS {
 
 // GetAssetTypeOk returns a tuple with the AssetType field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetDNSRequest) GetAssetTypeOk() (*ENUMDNS, bool) {
+func (o *CreateAssetDNSRequest) GetAssetTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -102,7 +102,7 @@ func (o *CreateAssetDNSRequest) GetAssetTypeOk() (*ENUMDNS, bool) {
 }
 
 // SetAssetType sets field value
-func (o *CreateAssetDNSRequest) SetAssetType(v ENUMDNS) {
+func (o *CreateAssetDNSRequest) SetAssetType(v string) {
 	o.AssetType = v
 }
 

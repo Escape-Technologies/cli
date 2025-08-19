@@ -19,18 +19,18 @@ var _ MappedNullable = &CreateDastRestProfileRequestConfigurationJsonStrCustomRu
 
 // CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance struct for CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance
 type CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance struct {
-	Owasp *ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESOWASP `json:"owasp,omitempty"`
-	PciDss *ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESPCIDSS `json:"pci-dss,omitempty"`
-	Gdpr *ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESGDPR `json:"gdpr,omitempty"`
-	Soc2 *ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESSOC2 `json:"soc2,omitempty"`
-	Psd2 *ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESPSD2 `json:"psd2,omitempty"`
-	Iso27001 *ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESISO27001 `json:"iso27001,omitempty"`
-	Nist *ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESNIST `json:"nist,omitempty"`
-	Fedramp *ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESFEDRAMP `json:"fedramp,omitempty"`
-	Nis2 *ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESNIS2 `json:"nis2,omitempty"`
-	Hipaa *ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESHIPAA `json:"hipaa,omitempty"`
-	OwaspLlm *ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESOWASPLLM `json:"owasp_llm,omitempty"`
-	Cwe *ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESCWE `json:"cwe,omitempty"`
+	Owasp *string `json:"owasp,omitempty"`
+	PciDss *string `json:"pci-dss,omitempty"`
+	Gdpr *string `json:"gdpr,omitempty"`
+	Soc2 *string `json:"soc2,omitempty"`
+	Psd2 *string `json:"psd2,omitempty"`
+	Iso27001 *string `json:"iso27001,omitempty"`
+	Nist *string `json:"nist,omitempty"`
+	Fedramp *string `json:"fedramp,omitempty"`
+	Nis2 *string `json:"nis2,omitempty"`
+	Hipaa *string `json:"hipaa,omitempty"`
+	OwaspLlm *string `json:"owasp_llm,omitempty"`
+	Cwe *string `json:"cwe,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -54,9 +54,9 @@ func NewCreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCom
 }
 
 // GetOwasp returns the Owasp field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) GetOwasp() ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESOWASP {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) GetOwasp() string {
 	if o == nil || IsNil(o.Owasp) {
-		var ret ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESOWASP
+		var ret string
 		return ret
 	}
 	return *o.Owasp
@@ -64,7 +64,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCo
 
 // GetOwaspOk returns a tuple with the Owasp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) GetOwaspOk() (*ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESOWASP, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) GetOwaspOk() (*string, bool) {
 	if o == nil || IsNil(o.Owasp) {
 		return nil, false
 	}
@@ -80,15 +80,15 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCo
 	return false
 }
 
-// SetOwasp gets a reference to the given ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESOWASP and assigns it to the Owasp field.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) SetOwasp(v ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESOWASP) {
+// SetOwasp gets a reference to the given string and assigns it to the Owasp field.
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) SetOwasp(v string) {
 	o.Owasp = &v
 }
 
 // GetPciDss returns the PciDss field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) GetPciDss() ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESPCIDSS {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) GetPciDss() string {
 	if o == nil || IsNil(o.PciDss) {
-		var ret ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESPCIDSS
+		var ret string
 		return ret
 	}
 	return *o.PciDss
@@ -96,7 +96,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCo
 
 // GetPciDssOk returns a tuple with the PciDss field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) GetPciDssOk() (*ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESPCIDSS, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) GetPciDssOk() (*string, bool) {
 	if o == nil || IsNil(o.PciDss) {
 		return nil, false
 	}
@@ -112,15 +112,15 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCo
 	return false
 }
 
-// SetPciDss gets a reference to the given ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESPCIDSS and assigns it to the PciDss field.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) SetPciDss(v ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESPCIDSS) {
+// SetPciDss gets a reference to the given string and assigns it to the PciDss field.
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) SetPciDss(v string) {
 	o.PciDss = &v
 }
 
 // GetGdpr returns the Gdpr field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) GetGdpr() ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESGDPR {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) GetGdpr() string {
 	if o == nil || IsNil(o.Gdpr) {
-		var ret ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESGDPR
+		var ret string
 		return ret
 	}
 	return *o.Gdpr
@@ -128,7 +128,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCo
 
 // GetGdprOk returns a tuple with the Gdpr field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) GetGdprOk() (*ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESGDPR, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) GetGdprOk() (*string, bool) {
 	if o == nil || IsNil(o.Gdpr) {
 		return nil, false
 	}
@@ -144,15 +144,15 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCo
 	return false
 }
 
-// SetGdpr gets a reference to the given ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESGDPR and assigns it to the Gdpr field.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) SetGdpr(v ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESGDPR) {
+// SetGdpr gets a reference to the given string and assigns it to the Gdpr field.
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) SetGdpr(v string) {
 	o.Gdpr = &v
 }
 
 // GetSoc2 returns the Soc2 field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) GetSoc2() ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESSOC2 {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) GetSoc2() string {
 	if o == nil || IsNil(o.Soc2) {
-		var ret ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESSOC2
+		var ret string
 		return ret
 	}
 	return *o.Soc2
@@ -160,7 +160,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCo
 
 // GetSoc2Ok returns a tuple with the Soc2 field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) GetSoc2Ok() (*ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESSOC2, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) GetSoc2Ok() (*string, bool) {
 	if o == nil || IsNil(o.Soc2) {
 		return nil, false
 	}
@@ -176,15 +176,15 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCo
 	return false
 }
 
-// SetSoc2 gets a reference to the given ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESSOC2 and assigns it to the Soc2 field.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) SetSoc2(v ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESSOC2) {
+// SetSoc2 gets a reference to the given string and assigns it to the Soc2 field.
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) SetSoc2(v string) {
 	o.Soc2 = &v
 }
 
 // GetPsd2 returns the Psd2 field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) GetPsd2() ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESPSD2 {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) GetPsd2() string {
 	if o == nil || IsNil(o.Psd2) {
-		var ret ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESPSD2
+		var ret string
 		return ret
 	}
 	return *o.Psd2
@@ -192,7 +192,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCo
 
 // GetPsd2Ok returns a tuple with the Psd2 field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) GetPsd2Ok() (*ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESPSD2, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) GetPsd2Ok() (*string, bool) {
 	if o == nil || IsNil(o.Psd2) {
 		return nil, false
 	}
@@ -208,15 +208,15 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCo
 	return false
 }
 
-// SetPsd2 gets a reference to the given ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESPSD2 and assigns it to the Psd2 field.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) SetPsd2(v ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESPSD2) {
+// SetPsd2 gets a reference to the given string and assigns it to the Psd2 field.
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) SetPsd2(v string) {
 	o.Psd2 = &v
 }
 
 // GetIso27001 returns the Iso27001 field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) GetIso27001() ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESISO27001 {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) GetIso27001() string {
 	if o == nil || IsNil(o.Iso27001) {
-		var ret ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESISO27001
+		var ret string
 		return ret
 	}
 	return *o.Iso27001
@@ -224,7 +224,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCo
 
 // GetIso27001Ok returns a tuple with the Iso27001 field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) GetIso27001Ok() (*ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESISO27001, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) GetIso27001Ok() (*string, bool) {
 	if o == nil || IsNil(o.Iso27001) {
 		return nil, false
 	}
@@ -240,15 +240,15 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCo
 	return false
 }
 
-// SetIso27001 gets a reference to the given ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESISO27001 and assigns it to the Iso27001 field.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) SetIso27001(v ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESISO27001) {
+// SetIso27001 gets a reference to the given string and assigns it to the Iso27001 field.
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) SetIso27001(v string) {
 	o.Iso27001 = &v
 }
 
 // GetNist returns the Nist field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) GetNist() ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESNIST {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) GetNist() string {
 	if o == nil || IsNil(o.Nist) {
-		var ret ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESNIST
+		var ret string
 		return ret
 	}
 	return *o.Nist
@@ -256,7 +256,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCo
 
 // GetNistOk returns a tuple with the Nist field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) GetNistOk() (*ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESNIST, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) GetNistOk() (*string, bool) {
 	if o == nil || IsNil(o.Nist) {
 		return nil, false
 	}
@@ -272,15 +272,15 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCo
 	return false
 }
 
-// SetNist gets a reference to the given ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESNIST and assigns it to the Nist field.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) SetNist(v ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESNIST) {
+// SetNist gets a reference to the given string and assigns it to the Nist field.
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) SetNist(v string) {
 	o.Nist = &v
 }
 
 // GetFedramp returns the Fedramp field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) GetFedramp() ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESFEDRAMP {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) GetFedramp() string {
 	if o == nil || IsNil(o.Fedramp) {
-		var ret ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESFEDRAMP
+		var ret string
 		return ret
 	}
 	return *o.Fedramp
@@ -288,7 +288,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCo
 
 // GetFedrampOk returns a tuple with the Fedramp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) GetFedrampOk() (*ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESFEDRAMP, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) GetFedrampOk() (*string, bool) {
 	if o == nil || IsNil(o.Fedramp) {
 		return nil, false
 	}
@@ -304,15 +304,15 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCo
 	return false
 }
 
-// SetFedramp gets a reference to the given ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESFEDRAMP and assigns it to the Fedramp field.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) SetFedramp(v ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESFEDRAMP) {
+// SetFedramp gets a reference to the given string and assigns it to the Fedramp field.
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) SetFedramp(v string) {
 	o.Fedramp = &v
 }
 
 // GetNis2 returns the Nis2 field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) GetNis2() ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESNIS2 {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) GetNis2() string {
 	if o == nil || IsNil(o.Nis2) {
-		var ret ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESNIS2
+		var ret string
 		return ret
 	}
 	return *o.Nis2
@@ -320,7 +320,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCo
 
 // GetNis2Ok returns a tuple with the Nis2 field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) GetNis2Ok() (*ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESNIS2, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) GetNis2Ok() (*string, bool) {
 	if o == nil || IsNil(o.Nis2) {
 		return nil, false
 	}
@@ -336,15 +336,15 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCo
 	return false
 }
 
-// SetNis2 gets a reference to the given ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESNIS2 and assigns it to the Nis2 field.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) SetNis2(v ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESNIS2) {
+// SetNis2 gets a reference to the given string and assigns it to the Nis2 field.
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) SetNis2(v string) {
 	o.Nis2 = &v
 }
 
 // GetHipaa returns the Hipaa field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) GetHipaa() ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESHIPAA {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) GetHipaa() string {
 	if o == nil || IsNil(o.Hipaa) {
-		var ret ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESHIPAA
+		var ret string
 		return ret
 	}
 	return *o.Hipaa
@@ -352,7 +352,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCo
 
 // GetHipaaOk returns a tuple with the Hipaa field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) GetHipaaOk() (*ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESHIPAA, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) GetHipaaOk() (*string, bool) {
 	if o == nil || IsNil(o.Hipaa) {
 		return nil, false
 	}
@@ -368,15 +368,15 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCo
 	return false
 }
 
-// SetHipaa gets a reference to the given ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESHIPAA and assigns it to the Hipaa field.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) SetHipaa(v ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESHIPAA) {
+// SetHipaa gets a reference to the given string and assigns it to the Hipaa field.
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) SetHipaa(v string) {
 	o.Hipaa = &v
 }
 
 // GetOwaspLlm returns the OwaspLlm field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) GetOwaspLlm() ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESOWASPLLM {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) GetOwaspLlm() string {
 	if o == nil || IsNil(o.OwaspLlm) {
-		var ret ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESOWASPLLM
+		var ret string
 		return ret
 	}
 	return *o.OwaspLlm
@@ -384,7 +384,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCo
 
 // GetOwaspLlmOk returns a tuple with the OwaspLlm field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) GetOwaspLlmOk() (*ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESOWASPLLM, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) GetOwaspLlmOk() (*string, bool) {
 	if o == nil || IsNil(o.OwaspLlm) {
 		return nil, false
 	}
@@ -400,15 +400,15 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCo
 	return false
 }
 
-// SetOwaspLlm gets a reference to the given ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESOWASPLLM and assigns it to the OwaspLlm field.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) SetOwaspLlm(v ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESOWASPLLM) {
+// SetOwaspLlm gets a reference to the given string and assigns it to the OwaspLlm field.
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) SetOwaspLlm(v string) {
 	o.OwaspLlm = &v
 }
 
 // GetCwe returns the Cwe field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) GetCwe() ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESCWE {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) GetCwe() string {
 	if o == nil || IsNil(o.Cwe) {
-		var ret ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESCWE
+		var ret string
 		return ret
 	}
 	return *o.Cwe
@@ -416,7 +416,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCo
 
 // GetCweOk returns a tuple with the Cwe field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) GetCweOk() (*ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESCWE, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) GetCweOk() (*string, bool) {
 	if o == nil || IsNil(o.Cwe) {
 		return nil, false
 	}
@@ -432,8 +432,8 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCo
 	return false
 }
 
-// SetCwe gets a reference to the given ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESCWE and assigns it to the Cwe field.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) SetCwe(v ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESCWE) {
+// SetCwe gets a reference to the given string and assigns it to the Cwe field.
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance) SetCwe(v string) {
 	o.Cwe = &v
 }
 

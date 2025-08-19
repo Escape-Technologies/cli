@@ -49,7 +49,7 @@ func NewUpdateProfile400ResponseWithDefaults() *UpdateProfile400Response {
 // GetMessage returns the Message field value
 func (o *UpdateProfile400Response) GetMessage() ENUMBADREQUEST {
 	if o == nil {
-		var ret ENUMBADREQUEST
+		var ret string
 		return ret
 	}
 

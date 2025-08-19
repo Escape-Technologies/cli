@@ -27,7 +27,8 @@ type CreateDastWebAppProfileRequest struct {
 	ConfigurationJsonStr CreateDastRestProfileRequestConfigurationJsonStr `json:"configurationJsonStr"`
 	// The cron string
 	Cron *string `json:"cron,omitempty"`
-	Mode ENUMPROPERTIESMODE `json:"mode"`
+	// The mode of the profile
+	Mode string `json:"mode"`
 	// The name of the profile
 	Name string `json:"name"`
 	// The proxy ID for the profile
@@ -43,7 +44,7 @@ type _CreateDastWebAppProfileRequest CreateDastWebAppProfileRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateDastWebAppProfileRequest(assetId string, configurationJsonStr CreateDastRestProfileRequestConfigurationJsonStr, mode ENUMPROPERTIESMODE, name string) *CreateDastWebAppProfileRequest {
+func NewCreateDastWebAppProfileRequest(assetId string, configurationJsonStr CreateDastRestProfileRequestConfigurationJsonStr, mode string, name string) *CreateDastWebAppProfileRequest {
 	this := CreateDastWebAppProfileRequest{}
 	this.AssetId = assetId
 	this.ConfigurationJsonStr = configurationJsonStr
@@ -173,9 +174,9 @@ func (o *CreateDastWebAppProfileRequest) SetCron(v string) {
 }
 
 // GetMode returns the Mode field value
-func (o *CreateDastWebAppProfileRequest) GetMode() ENUMPROPERTIESMODE {
+func (o *CreateDastWebAppProfileRequest) GetMode() string {
 	if o == nil {
-		var ret ENUMPROPERTIESMODE
+		var ret string
 		return ret
 	}
 
@@ -184,7 +185,7 @@ func (o *CreateDastWebAppProfileRequest) GetMode() ENUMPROPERTIESMODE {
 
 // GetModeOk returns a tuple with the Mode field value
 // and a boolean to check if the value has been set.
-func (o *CreateDastWebAppProfileRequest) GetModeOk() (*ENUMPROPERTIESMODE, bool) {
+func (o *CreateDastWebAppProfileRequest) GetModeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -192,7 +193,7 @@ func (o *CreateDastWebAppProfileRequest) GetModeOk() (*ENUMPROPERTIESMODE, bool)
 }
 
 // SetMode sets field value
-func (o *CreateDastWebAppProfileRequest) SetMode(v ENUMPROPERTIESMODE) {
+func (o *CreateDastWebAppProfileRequest) SetMode(v string) {
 	o.Mode = v
 }
 

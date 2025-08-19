@@ -52,7 +52,7 @@ func NewCreateAssetGITHUBREPOSITORYRequestOrgWithDefaults() *CreateAssetGITHUBRE
 // GetAssetClass returns the AssetClass field value
 func (o *CreateAssetGITHUBREPOSITORYRequestOrg) GetAssetClass() ENUMSOURCECODEMANAGEMENT {
 	if o == nil {
-		var ret ENUMSOURCECODEMANAGEMENT
+		var ret string
 		return ret
 	}
 
@@ -76,7 +76,7 @@ func (o *CreateAssetGITHUBREPOSITORYRequestOrg) SetAssetClass(v ENUMSOURCECODEMA
 // GetAssetType returns the AssetType field value
 func (o *CreateAssetGITHUBREPOSITORYRequestOrg) GetAssetType() ENUMGITHUBORGANIZATION {
 	if o == nil {
-		var ret ENUMGITHUBORGANIZATION
+		var ret string
 		return ret
 	}
 

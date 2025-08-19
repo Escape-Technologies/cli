@@ -22,7 +22,8 @@ var _ MappedNullable = &DASTDetailed{}
 type DASTDetailed struct {
 	// The url of the DAST
 	Url *string `json:"url,omitempty"`
-	Origin ENUMPROPERTIESSCHEMAPROPERTIESORIGIN `json:"origin"`
+	// The origin of the DAST
+	Origin string `json:"origin"`
 	// The blob id of the DAST
 	BlobId string `json:"blobId"`
 	AdditionalProperties map[string]interface{}
@@ -34,7 +35,7 @@ type _DASTDetailed DASTDetailed
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDASTDetailed(origin ENUMPROPERTIESSCHEMAPROPERTIESORIGIN, blobId string) *DASTDetailed {
+func NewDASTDetailed(origin string, blobId string) *DASTDetailed {
 	this := DASTDetailed{}
 	this.Origin = origin
 	this.BlobId = blobId
@@ -82,9 +83,9 @@ func (o *DASTDetailed) SetUrl(v string) {
 }
 
 // GetOrigin returns the Origin field value
-func (o *DASTDetailed) GetOrigin() ENUMPROPERTIESSCHEMAPROPERTIESORIGIN {
+func (o *DASTDetailed) GetOrigin() string {
 	if o == nil {
-		var ret ENUMPROPERTIESSCHEMAPROPERTIESORIGIN
+		var ret string
 		return ret
 	}
 
@@ -93,7 +94,7 @@ func (o *DASTDetailed) GetOrigin() ENUMPROPERTIESSCHEMAPROPERTIESORIGIN {
 
 // GetOriginOk returns a tuple with the Origin field value
 // and a boolean to check if the value has been set.
-func (o *DASTDetailed) GetOriginOk() (*ENUMPROPERTIESSCHEMAPROPERTIESORIGIN, bool) {
+func (o *DASTDetailed) GetOriginOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -101,7 +102,7 @@ func (o *DASTDetailed) GetOriginOk() (*ENUMPROPERTIESSCHEMAPROPERTIESORIGIN, boo
 }
 
 // SetOrigin sets field value
-func (o *DASTDetailed) SetOrigin(v ENUMPROPERTIESSCHEMAPROPERTIESORIGIN) {
+func (o *DASTDetailed) SetOrigin(v string) {
 	o.Origin = v
 }
 
