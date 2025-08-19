@@ -25,7 +25,7 @@ type CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTr
 	In []string `json:"in,omitempty"`
 	Contains *string `json:"contains,omitempty"`
 	Regex *string `json:"regex,omitempty"`
-	If ENUMREQUESTBODYTEXT `json:"if"`
+	If string `json:"if"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -35,7 +35,7 @@ type _CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformT
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf12(if_ ENUMREQUESTBODYTEXT) *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf12 {
+func NewCreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf12(if_ string) *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf12 {
 	this := CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf12{}
 	this.If = if_
 	return &this
@@ -210,9 +210,9 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransfo
 }
 
 // GetIf returns the If field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf12) GetIf() ENUMREQUESTBODYTEXT {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf12) GetIf() string {
 	if o == nil {
-		var ret ENUMREQUESTBODYTEXT
+		var ret string
 		return ret
 	}
 
@@ -221,7 +221,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransfo
 
 // GetIfOk returns a tuple with the If field value
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf12) GetIfOk() (*ENUMREQUESTBODYTEXT, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf12) GetIfOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -229,7 +229,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransfo
 }
 
 // SetIf sets field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf12) SetIf(v ENUMREQUESTBODYTEXT) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf12) SetIf(v string) {
 	o.If = v
 }
 

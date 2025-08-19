@@ -157,7 +157,7 @@ type ApiListIssueActivitiesRequest struct {
 	issueId string
 }
 
-func (r ApiListIssueActivitiesRequest) Execute() (*ActivitySummarized, *http.Response, error) {
+func (r ApiListIssueActivitiesRequest) Execute() ([]ActivitySummarized, *http.Response, error) {
 	return r.ApiService.ListIssueActivitiesExecute(r)
 }
 
@@ -179,13 +179,13 @@ func (a *IssuesAPIService) ListIssueActivities(ctx context.Context, issueId stri
 }
 
 // Execute executes the request
-//  @return ActivitySummarized
-func (a *IssuesAPIService) ListIssueActivitiesExecute(r ApiListIssueActivitiesRequest) (*ActivitySummarized, *http.Response, error) {
+//  @return []ActivitySummarized
+func (a *IssuesAPIService) ListIssueActivitiesExecute(r ApiListIssueActivitiesRequest) ([]ActivitySummarized, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ActivitySummarized
+		localVarReturnValue  []ActivitySummarized
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IssuesAPIService.ListIssueActivities")
@@ -739,7 +739,7 @@ func (a *IssuesAPIService) UpdateIssueExecute(r ApiUpdateIssueRequest) (*UpdateI
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v CreateASMDNSProfile400Response
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

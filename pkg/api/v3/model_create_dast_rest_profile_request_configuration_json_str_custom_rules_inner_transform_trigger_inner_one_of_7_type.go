@@ -19,9 +19,9 @@ var _ MappedNullable = &CreateDastRestProfileRequestConfigurationJsonStrCustomRu
 
 // CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf7Type struct for CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf7Type
 type CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf7Type struct {
-	Is *ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS7PROPERTIESTYPEPROPERTIESIS `json:"is,omitempty"`
-	IsNot *ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS7PROPERTIESTYPEPROPERTIESIS `json:"is_not,omitempty"`
-	In []ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS7PROPERTIESTYPEPROPERTIESIS `json:"in,omitempty"`
+	Is *string `json:"is,omitempty"`
+	IsNot *string `json:"is_not,omitempty"`
+	In []ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS7PROPERTIESTYPEPROPERTIESINITEMS `json:"in,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -45,9 +45,9 @@ func NewCreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransfor
 }
 
 // GetIs returns the Is field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf7Type) GetIs() ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS7PROPERTIESTYPEPROPERTIESIS {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf7Type) GetIs() string {
 	if o == nil || IsNil(o.Is) {
-		var ret ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS7PROPERTIESTYPEPROPERTIESIS
+		var ret string
 		return ret
 	}
 	return *o.Is
@@ -55,7 +55,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransfo
 
 // GetIsOk returns a tuple with the Is field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf7Type) GetIsOk() (*ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS7PROPERTIESTYPEPROPERTIESIS, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf7Type) GetIsOk() (*string, bool) {
 	if o == nil || IsNil(o.Is) {
 		return nil, false
 	}
@@ -71,15 +71,15 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransfo
 	return false
 }
 
-// SetIs gets a reference to the given ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS7PROPERTIESTYPEPROPERTIESIS and assigns it to the Is field.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf7Type) SetIs(v ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS7PROPERTIESTYPEPROPERTIESIS) {
+// SetIs gets a reference to the given string and assigns it to the Is field.
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf7Type) SetIs(v string) {
 	o.Is = &v
 }
 
 // GetIsNot returns the IsNot field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf7Type) GetIsNot() ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS7PROPERTIESTYPEPROPERTIESIS {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf7Type) GetIsNot() string {
 	if o == nil || IsNil(o.IsNot) {
-		var ret ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS7PROPERTIESTYPEPROPERTIESIS
+		var ret string
 		return ret
 	}
 	return *o.IsNot
@@ -87,7 +87,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransfo
 
 // GetIsNotOk returns a tuple with the IsNot field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf7Type) GetIsNotOk() (*ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS7PROPERTIESTYPEPROPERTIESIS, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf7Type) GetIsNotOk() (*string, bool) {
 	if o == nil || IsNil(o.IsNot) {
 		return nil, false
 	}
@@ -103,15 +103,15 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransfo
 	return false
 }
 
-// SetIsNot gets a reference to the given ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS7PROPERTIESTYPEPROPERTIESIS and assigns it to the IsNot field.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf7Type) SetIsNot(v ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS7PROPERTIESTYPEPROPERTIESIS) {
+// SetIsNot gets a reference to the given string and assigns it to the IsNot field.
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf7Type) SetIsNot(v string) {
 	o.IsNot = &v
 }
 
 // GetIn returns the In field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf7Type) GetIn() []ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS7PROPERTIESTYPEPROPERTIESIS {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf7Type) GetIn() []ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS7PROPERTIESTYPEPROPERTIESINITEMS {
 	if o == nil || IsNil(o.In) {
-		var ret []ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS7PROPERTIESTYPEPROPERTIESIS
+		var ret []ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS7PROPERTIESTYPEPROPERTIESINITEMS
 		return ret
 	}
 	return o.In
@@ -119,7 +119,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransfo
 
 // GetInOk returns a tuple with the In field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf7Type) GetInOk() ([]ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS7PROPERTIESTYPEPROPERTIESIS, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf7Type) GetInOk() ([]ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS7PROPERTIESTYPEPROPERTIESINITEMS, bool) {
 	if o == nil || IsNil(o.In) {
 		return nil, false
 	}
@@ -135,8 +135,8 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransfo
 	return false
 }
 
-// SetIn gets a reference to the given []ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS7PROPERTIESTYPEPROPERTIESIS and assigns it to the In field.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf7Type) SetIn(v []ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS7PROPERTIESTYPEPROPERTIESIS) {
+// SetIn gets a reference to the given []ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS7PROPERTIESTYPEPROPERTIESINITEMS and assigns it to the In field.
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformTriggerInnerOneOf7Type) SetIn(v []ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS7PROPERTIESTYPEPROPERTIESINITEMS) {
 	o.In = v
 }
 

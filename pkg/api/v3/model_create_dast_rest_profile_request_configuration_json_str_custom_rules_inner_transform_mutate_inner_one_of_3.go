@@ -20,7 +20,7 @@ var _ MappedNullable = &CreateDastRestProfileRequestConfigurationJsonStrCustomRu
 
 // CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf3 struct for CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf3
 type CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf3 struct {
-	Key ENUMREQUESTHEADERS `json:"key"`
+	Key string `json:"key"`
 	Value *string `json:"value,omitempty"`
 	Values []string `json:"values,omitempty"`
 	RegexReplace *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOfRegexReplace `json:"regex_replace,omitempty"`
@@ -35,7 +35,7 @@ type _CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformM
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf3(key ENUMREQUESTHEADERS, name string) *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf3 {
+func NewCreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf3(key string, name string) *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf3 {
 	this := CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf3{}
 	this.Key = key
 	this.Name = name
@@ -51,9 +51,9 @@ func NewCreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransfor
 }
 
 // GetKey returns the Key field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf3) GetKey() ENUMREQUESTHEADERS {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf3) GetKey() string {
 	if o == nil {
-		var ret ENUMREQUESTHEADERS
+		var ret string
 		return ret
 	}
 
@@ -62,7 +62,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransfo
 
 // GetKeyOk returns a tuple with the Key field value
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf3) GetKeyOk() (*ENUMREQUESTHEADERS, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf3) GetKeyOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -70,7 +70,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransfo
 }
 
 // SetKey sets field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf3) SetKey(v ENUMREQUESTHEADERS) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerTransformMutateInnerOneOf3) SetKey(v string) {
 	o.Key = v
 }
 

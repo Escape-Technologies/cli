@@ -20,10 +20,10 @@ var _ MappedNullable = &CreateDastRestProfileRequestConfigurationJsonStrCustomRu
 
 // CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlert struct for CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlert
 type CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlert struct {
-	Severity ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESSEVERITY `json:"severity"`
+	Severity string `json:"severity"`
 	Name string `json:"name"`
 	Context string `json:"context"`
-	Category ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCATEGORY `json:"category"`
+	Category string `json:"category"`
 	Description *string `json:"description,omitempty"`
 	Remediation *string `json:"remediation,omitempty"`
 	Compliance *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertCompliance `json:"compliance,omitempty"`
@@ -36,7 +36,7 @@ type _CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlert Crea
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlert(severity ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESSEVERITY, name string, context string, category ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCATEGORY) *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlert {
+func NewCreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlert(severity string, name string, context string, category string) *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlert {
 	this := CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlert{}
 	this.Severity = severity
 	this.Name = name
@@ -54,9 +54,9 @@ func NewCreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlertWit
 }
 
 // GetSeverity returns the Severity field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlert) GetSeverity() ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESSEVERITY {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlert) GetSeverity() string {
 	if o == nil {
-		var ret ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESSEVERITY
+		var ret string
 		return ret
 	}
 
@@ -65,7 +65,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlert) 
 
 // GetSeverityOk returns a tuple with the Severity field value
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlert) GetSeverityOk() (*ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESSEVERITY, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlert) GetSeverityOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -73,7 +73,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlert) 
 }
 
 // SetSeverity sets field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlert) SetSeverity(v ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESSEVERITY) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlert) SetSeverity(v string) {
 	o.Severity = v
 }
 
@@ -126,9 +126,9 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlert) 
 }
 
 // GetCategory returns the Category field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlert) GetCategory() ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCATEGORY {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlert) GetCategory() string {
 	if o == nil {
-		var ret ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCATEGORY
+		var ret string
 		return ret
 	}
 
@@ -137,7 +137,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlert) 
 
 // GetCategoryOk returns a tuple with the Category field value
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlert) GetCategoryOk() (*ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCATEGORY, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlert) GetCategoryOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -145,7 +145,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlert) 
 }
 
 // SetCategory sets field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlert) SetCategory(v ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCATEGORY) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlert) SetCategory(v string) {
 	o.Category = v
 }
 
