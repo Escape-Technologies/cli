@@ -2,16 +2,19 @@ package cmd
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"os"
 
 	"github.com/Escape-Technologies/cli/pkg/api/escape"
-	v2 "github.com/Escape-Technologies/cli/pkg/api/v2"
+	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
 	"github.com/Escape-Technologies/cli/pkg/cli/out"
 	"github.com/Escape-Technologies/cli/pkg/log"
 	"github.com/spf13/cobra"
 )
+
+var profileID []string
 
 var scansCmd = &cobra.Command{
 	Use:     "scans",
@@ -20,45 +23,72 @@ var scansCmd = &cobra.Command{
 }
 
 var scansListCmd = &cobra.Command{
-	Use:     "list application-id",
+	Use:     "list profile-id",
 	Aliases: []string{"ls"},
 	Args:    cobra.ExactArgs(1),
 	Short:   "List scans",
-	Long: `List all scans of an application.
+	Long: `List all scans of a profile.
 
 Example output:
-ID                                      STATUS      CREATED AT                           PROGRESS
-00000000-0000-0000-0000-000000000001    FINISHED    2025-02-05 08:34:47.541 +0000 UTC    0.000000
-00000000-0000-0000-0000-000000000002    FINISHED    2025-02-02 08:27:23.919 +0000 UTC    0.000000
-00000000-0000-0000-0000-000000000003    FINISHED    2025-01-31 18:35:48.477 +0000 UTC    0.000000
-00000000-0000-0000-0000-000000000004    FINISHED    2025-01-30 08:25:49.656 +0000 UTC    0.000000`,
+ID                                      CREATED AT      STATUS                           PROGRESS
+00000000-0000-0000-0000-000000000001    2025-02-05 08:34:47.541 +0000 UTC    FINISHED                          0.000000
+00000000-0000-0000-0000-000000000002    2025-02-02 08:27:23.919 +0000 UTC    FINISHED                          0.000000
+00000000-0000-0000-0000-000000000003    2025-01-31 18:35:48.477 +0000 UTC    FINISHED                          0.000000
+00000000-0000-0000-0000-000000000004    2025-01-30 08:25:49.656 +0000 UTC    FINISHED                          0.000000`,
 	Example: `escape-cli scans list 00000000-0000-0000-0000-000000000000`,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		applicationID := args[0]
-		scans, next, err := escape.ListScans(cmd.Context(), applicationID, "")
+		profileID = []string{args[0]}
+		scans, next, err := escape.ListScans(cmd.Context(), &profileID, "")
 		if err != nil {
 			return fmt.Errorf("unable to list scans: %w", err)
 		}
 		out.Table(scans, func() []string {
-			res := []string{"ID\tSTATUS\tCREATED AT\tPROGRESS"}
+			res := []string{"ID\tCREATED AT\tSTATUS\tPROGRESS"}
 			for _, scan := range scans {
-				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%f", scan.GetId(), scan.GetStatus(), scan.GetCreatedAt(), scan.GetProgressRatio()))
+				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%f", scan.GetId(), scan.GetCreatedAt(), scan.GetStatus(), scan.GetProgressRatio()))
 			}
 			return res
 		})
 		for next != "" {
-			scans, next, err = escape.ListScans(cmd.Context(), applicationID, next)
+			scans, next, err = escape.ListScans(cmd.Context(), &profileID, next)
 			if err != nil {
 				return fmt.Errorf("unable to list scans: %w", err)
 			}
 			out.Table(scans, func() []string {
-				res := []string{}
+				res := []string{
+					"ID\tCREATED AT\tSTATUS\tPROGRESS",
+				}
 				for _, scan := range scans {
-					res = append(res, fmt.Sprintf("%s\t%s\t%s\t%f", scan.GetId(), scan.GetStatus(), scan.GetCreatedAt(), scan.GetProgressRatio()))
+					res = append(res, fmt.Sprintf("%s\t%s\t%s\t%f", scan.GetId(), scan.GetCreatedAt(), scan.GetStatus(), scan.GetProgressRatio()))
 				}
 				return res
 			})
 		}
+		return nil
+	},
+}
+
+var scanGetCmd = &cobra.Command{
+	Use:     "get scan-id",
+	Aliases: []string{"describe"},
+	Args:    cobra.ExactArgs(1),
+	Short:   "Get scan status",
+	Long: `Return the scan status.
+
+Example output:
+ID                                      CREATED AT      					 STATUS                           PROGRESS
+00000000-0000-0000-0000-000000000001    2024-11-27 08:06:59.576 +0000 UTC    FINISHED                         1.000000`,
+	Example: `escape-cli scans get 00000000-0000-0000-0000-000000000000`,
+	RunE: func(cmd *cobra.Command, args []string) error {
+		scan, err := escape.GetScan(cmd.Context(), args[0])
+		if err != nil {
+			return fmt.Errorf("unable to get scan: %w", err)
+		}
+		out.Table(scan, func() []string {
+			res := []string{"ID\tCREATED AT\tSTATUS\tPROGRESS"}
+			res = append(res, fmt.Sprintf("%s\t%s\t%s\t%f", scan.GetId(), scan.GetCreatedAt(), scan.GetStatus(), scan.GetProgressRatio()))
+			return res
+		})
 		return nil
 	},
 }
@@ -127,24 +157,30 @@ var scanStartCmdCommitBranch = ""
 var scanStartCmdCommitAuthor = ""
 var scanStartCmdCommitAuthorProfilePictureLink = ""
 var scanStartCmdConfigurationOverride = ""
+var scanStartCmdAdditionalProperties = ""
 var scanStartCmdWatch bool
 var scanStartCmd = &cobra.Command{
-	Use: "start application-id",
+	Use: "start profile-id",
 	Example: `escape-cli scans start 00000000-0000-0000-0000-000000000000
 escape-cli scans start 00000000-0000-0000-0000-000000000000 --commit-hash 1234567890
 escape-cli scans start 00000000-0000-0000-0000-000000000000 --override '{"scan": {"read_only": true}}'`,
 	Args:  cobra.ExactArgs(1),
 	Short: "Start a scan",
-	Long:  "Start a new scan of an application",
+	Long:  "Start a new scan on a profile",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		override := v2.NullableFrontendConfiguration{}
+		configurationOverride := map[string]interface{}{}
 		if scanStartCmdConfigurationOverride != "" {
-			err := override.UnmarshalJSON([]byte(scanStartCmdConfigurationOverride))
+			err := json.Unmarshal([]byte(scanStartCmdConfigurationOverride), &configurationOverride)
 			if err != nil {
 				return fmt.Errorf("unable to unmarshal configuration override: %w", err)
 			}
-			ovr, _ := override.MarshalJSON()
-			log.Info("Configuration override: %s", string(ovr))
+		}
+		additionalProperties := map[string]interface{}{}
+		if scanStartCmdAdditionalProperties != "" {
+			err := json.Unmarshal([]byte(scanStartCmdAdditionalProperties), &additionalProperties)
+			if err != nil {
+				return fmt.Errorf("unable to unmarshal additional properties: %w", err)
+			}
 		}
 		extractCommitDataFromEnv()
 		debugCommitData()
@@ -156,7 +192,9 @@ escape-cli scans start 00000000-0000-0000-0000-000000000000 --override '{"scan":
 			scanStartCmdCommitBranch,
 			scanStartCmdCommitAuthor,
 			scanStartCmdCommitAuthorProfilePictureLink,
-			override.Get(),
+			configurationOverride,
+			additionalProperties,
+			v3.ENUMPROPERTIESDATAITEMSPROPERTIESINITIATORSITEMS_MANUAL,
 		)
 		if err != nil {
 			return fmt.Errorf("unable to start scan: %w", err)
@@ -172,13 +210,46 @@ escape-cli scans start 00000000-0000-0000-0000-000000000000 --override '{"scan":
 	},
 }
 
+var scanCancelCmd = &cobra.Command{
+	Use:     "cancel scan-id",
+	Example: `escape-cli scans cancel 00000000-0000-0000-0000-000000000000`,
+	Args:    cobra.ExactArgs(1),
+	Short:   "Cancel a scan",
+	Long:    "Cancel a scan",
+	RunE: func(cmd *cobra.Command, args []string) error {
+
+		err := escape.CancelScan(cmd.Context(), args[0])
+		if err != nil {
+			return fmt.Errorf("unable to cancel scan: %w", err)
+		}
+		out.Log("Scan canceled")
+		return nil
+	},
+}
+
+var scanIgnoreCmd = &cobra.Command{
+	Use:     "ignore scan-id",
+	Example: `escape-cli scans ignore 00000000-0000-0000-0000-000000000000`,
+	Args:    cobra.ExactArgs(1),
+	Short:   "Ignore a scan",
+	Long:    "Ignore a scan",
+	RunE: func(cmd *cobra.Command, args []string) error {
+
+		err := escape.IgnoreScan(cmd.Context(), args[0])
+		if err != nil {
+			return fmt.Errorf("unable to ignore scan: %w", err)
+		}
+		out.Log("Scan ignored")
+		return nil
+	},
+}
+
 func watchScan(ctx context.Context, scanID string) error {
 	ch, err := escape.WatchScan(ctx, scanID)
 	if err != nil {
 		return fmt.Errorf("unable to watch scan: %w", err)
 	}
-	var status *v2.ListScans200ResponseDataInner
-	isFirst := true
+	var status *v3.ScanDetailed1
 	for event := range ch {
 		if event == nil {
 			continue
@@ -186,10 +257,7 @@ func watchScan(ctx context.Context, scanID string) error {
 		status = event
 		out.Table(event, func() []string {
 			res := []string{}
-			if isFirst {
-				res = append(res, "STATUS\tPROGRESS")
-				isFirst = false
-			}
+			res = append(res, "STATUS\tPROGRESS")
 			res = append(
 				res,
 				fmt.Sprintf("%s\t%d%%", event.Status, int(event.ProgressRatio*100)), //nolint:mnd
@@ -199,10 +267,12 @@ func watchScan(ctx context.Context, scanID string) error {
 	}
 	if status == nil {
 		return errors.New("unable to watch scan")
-	} else if status.Status == v2.ENUME48DD51FE8A350A4154904ABF16320D7_CANCELED {
+	} else if status.Status == "CANCELED" {
 		out.Log("Scan canceled")
-	} else if status.Status == v2.ENUME48DD51FE8A350A4154904ABF16320D7_FAILED {
+	} else if status.Status == "FAILED" {
 		out.Log("Scan failed")
+	} else if status.Status == "FINISHED" {
+		out.Log("Scan finished")
 	} else {
 		err := printScanIssues(ctx, scanID)
 		if err != nil {
@@ -223,47 +293,20 @@ var scanWatchCmd = &cobra.Command{
 	},
 }
 
-var scanGetCmd = &cobra.Command{
-	Use:     "get scan-id",
-	Aliases: []string{"describe"},
-	Args:    cobra.ExactArgs(1),
-	Short:   "Get scan status",
-	Long: `Return the scan status.
-
-Example output:
-ID                                      STATUS      CREATED AT                           PROGRESS
-00000000-0000-0000-0000-000000000001    FINISHED    2024-11-27 08:06:59.576 +0000 UTC    1.000000`,
-	Example: `escape-cli scans get 00000000-0000-0000-0000-000000000000`,
-	RunE: func(cmd *cobra.Command, args []string) error {
-		scan, err := escape.GetScan(cmd.Context(), args[0])
-		if err != nil {
-			return fmt.Errorf("unable to get scan: %w", err)
-		}
-		out.Table(scan, func() []string {
-			res := []string{"ID\tSTATUS\tCREATED AT\tPROGRESS"}
-			res = append(res, fmt.Sprintf("%s\t%s\t%s\t%f", scan.GetId(), scan.GetStatus(), scan.GetCreatedAt(), scan.GetProgressRatio()))
-			return res
-		})
-		return nil
-	},
-}
-
 func printScanIssues(ctx context.Context, scanID string) error {
 	issues, err := escape.GetScanIssues(ctx, scanID)
 	if err != nil {
 		return fmt.Errorf("unable to fetch scan issues: %w", err)
 	}
 	out.Table(issues, func() []string {
-		res := []string{"ID\tSEVERITY\tTYPE\tCATEGORY\tNAME\tIGNORED\tURL"}
+		res := []string{"ID\tSEVERITY\tTYPE\tCATEGORY\tNAME\tIGNORED\tURL\tLINK"}
 		for _, i := range issues {
-			res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%t\t%s",
+			res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s",
 				i.GetId(),
 				i.GetSeverity(),
-				i.GetType(),
 				i.GetCategory(),
 				i.GetName(),
-				i.GetIgnored(),
-				i.GetPlatformUrl(),
+				i.GetLinks().IssueOverview,
 			))
 		}
 		return res
@@ -322,5 +365,7 @@ func init() {
 	scansCmd.AddCommand(scanDownloadCmd)
 	scansCmd.AddCommand(scanIssuesCmd)
 	scansCmd.AddCommand(scanWatchCmd)
+	scansCmd.AddCommand(scanCancelCmd)
+	scansCmd.AddCommand(scanIgnoreCmd)
 	rootCmd.AddCommand(scansCmd)
 }

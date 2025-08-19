@@ -11,11 +11,11 @@ import (
 )
 
 var (
-	greenBool = color.New(color.FgGreen).SprintFunc()
+	greenText = color.New(color.FgGreen).SprintFunc()
 	linkText = color.New(color.FgBlue).SprintFunc()
 	cyanText  = color.New(color.FgCyan).SprintFunc()
 	yellowText = color.New(color.FgYellow).SprintFunc()
-	redBool   = color.New(color.FgRed).SprintFunc()
+	redText   = color.New(color.FgRed).SprintFunc()
 	grayText    = color.New(color.FgHiBlack).SprintFunc()
 	boldText  = color.New(color.Bold).SprintFunc()
 	noColor   = color.New(color.Reset).SprintFunc()
@@ -25,9 +25,9 @@ var (
 func colorizeBool(value string) string {
 	switch strings.ToLower(value) {
 	case "true":
-		return greenBool(value)
+		return greenText(value)
 	case "false":
-		return redBool(value)
+		return redText(value)
 	default:
 		return value
 	}
@@ -38,25 +38,40 @@ func colorizeSeverity(value string) string {
 	case "info":
 		return grayText(value)
 	case "low":
-		return greenBool(value)
+		return greenText(value)
 	case "medium":
 		return yellowText(value)
 	case "high":
-		return redBool(value)
+		return redText(value)
 	default:
 		return value
 	}
 }
 
+func colorizeProgress(value string) string {
+	if strings.HasPrefix(value, "100") {
+		return greenText(value)
+	}
+	return yellowText(value)
+}
+
 func colorizeStatus(value string) string {
 	switch strings.ToLower(value) {
 	case "open":
-		return redBool(value)
+		return redText(value)
 	case "resolved":
-		return greenBool(value)
+		return greenText(value)
 	case "manual_review":
 		return yellowText(value)
 	case "ignored":
+		return grayText(value)
+	case "running":
+		return yellowText(value)
+	case "finished":
+		return greenText(value)
+	case "failed":
+		return redText(value)
+	case "canceled":
 		return grayText(value)
 	default:
 		return noColor(value)
@@ -92,6 +107,8 @@ func colorizeValue(value string, columnName string) string {
 		return colorizeEnum(value)
 	case "CREATED AT", "UPDATED AT":
 		return colorizeDate(value)
+	case "PROGRESS":
+		return colorizeProgress(value)
 	}
 
 	// handle boolean values
