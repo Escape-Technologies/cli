@@ -56,7 +56,7 @@ var auditCmd = &cobra.Command{
 		}
 
 		out.Table(result, func() []string {
-			fields := []string{"ACTOR\t ACTION\t NAME\t DATE\t"}
+			fields := []string{"ACTOR ID\t ACTION\t NAME\t DATE\t"}
 			for _, log := range result {
 				fields = append(fields, fmt.Sprintf(
 					"%s\t%s\t%s\t%s\t%s",
