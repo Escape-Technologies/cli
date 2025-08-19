@@ -22,7 +22,7 @@ var _ MappedNullable = &CreateDastRestProfileRequestConfigurationJsonStrFrontend
 type CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInner struct {
 	Id string `json:"id"`
 	Alert CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlert `json:"alert"`
-	Type string `json:"type"`
+	Type ENUMWEBAPP `json:"type"`
 	Seed []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInner `json:"seed"`
 	Detect []CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInnerDetectInner `json:"detect"`
 	AdditionalProperties map[string]interface{}
@@ -34,7 +34,7 @@ type _CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInner C
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInner(id string, alert CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlert, type_ string, seed []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInner, detect []CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInnerDetectInner) *CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInner {
+func NewCreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInner(id string, alert CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAlert, type_ ENUMWEBAPP, seed []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInner, detect []CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInnerDetectInner) *CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInner {
 	this := CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInner{}
 	this.Id = id
 	this.Alert = alert
@@ -101,9 +101,9 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInne
 }
 
 // GetType returns the Type field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInner) GetType() string {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInner) GetType() ENUMWEBAPP {
 	if o == nil {
-		var ret string
+		var ret ENUMWEBAPP
 		return ret
 	}
 
@@ -112,7 +112,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInne
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInner) GetTypeOk() (*string, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInner) GetTypeOk() (*ENUMWEBAPP, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -120,7 +120,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInne
 }
 
 // SetType sets field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInner) SetType(v string) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInner) SetType(v ENUMWEBAPP) {
 	o.Type = v
 }
 
