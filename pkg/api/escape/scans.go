@@ -28,7 +28,7 @@ func ListScans(ctx context.Context, profileIDs *[]string, next string) ([]v3.Sca
 
 	req = req.SortType("createdAt").SortDirection("desc")
 	if next != "" {
-		req.Cursor(next)
+		req = req.Cursor(next)
 	}
 	data, _, err := req.Execute()
 	if err != nil {
