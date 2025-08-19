@@ -22,8 +22,7 @@ var _ MappedNullable = &AssetHostSummarized{}
 type AssetHostSummarized struct {
 	// The address of the asset host
 	Address string `json:"address"`
-	// The type of the asset host
-	Type string `json:"type"`
+	Type ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESHOSTPROPERTIESTYPE `json:"type"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -33,7 +32,7 @@ type _AssetHostSummarized AssetHostSummarized
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAssetHostSummarized(address string, type_ string) *AssetHostSummarized {
+func NewAssetHostSummarized(address string, type_ ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESHOSTPROPERTIESTYPE) *AssetHostSummarized {
 	this := AssetHostSummarized{}
 	this.Address = address
 	this.Type = type_
@@ -73,9 +72,9 @@ func (o *AssetHostSummarized) SetAddress(v string) {
 }
 
 // GetType returns the Type field value
-func (o *AssetHostSummarized) GetType() string {
+func (o *AssetHostSummarized) GetType() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESHOSTPROPERTIESTYPE {
 	if o == nil {
-		var ret string
+		var ret ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESHOSTPROPERTIESTYPE
 		return ret
 	}
 
@@ -84,7 +83,7 @@ func (o *AssetHostSummarized) GetType() string {
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *AssetHostSummarized) GetTypeOk() (*string, bool) {
+func (o *AssetHostSummarized) GetTypeOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESHOSTPROPERTIESTYPE, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -92,7 +91,7 @@ func (o *AssetHostSummarized) GetTypeOk() (*string, bool) {
 }
 
 // SetType sets field value
-func (o *AssetHostSummarized) SetType(v string) {
+func (o *AssetHostSummarized) SetType(v ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESHOSTPROPERTIESTYPE) {
 	o.Type = v
 }
 

@@ -302,9 +302,9 @@ func (o *ApiRouteDetailed) SetReturnType(v string) {
 }
 
 // GetSource returns the Source field value
-func (o *ApiRouteDetailed) GetSource() string {
+func (o *ApiRouteDetailed) GetSource() ENUMITEMSPROPERTIESTARGETPROPERTIESAPIROUTEPROPERTIESSOURCE {
 	if o == nil {
-		var ret string
+		var ret ENUMITEMSPROPERTIESTARGETPROPERTIESAPIROUTEPROPERTIESSOURCE
 		return ret
 	}
 
@@ -313,7 +313,7 @@ func (o *ApiRouteDetailed) GetSource() string {
 
 // GetSourceOk returns a tuple with the Source field value
 // and a boolean to check if the value has been set.
-func (o *ApiRouteDetailed) GetSourceOk() (*string, bool) {
+func (o *ApiRouteDetailed) GetSourceOk() (*ENUMITEMSPROPERTIESTARGETPROPERTIESAPIROUTEPROPERTIESSOURCE, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -321,7 +321,7 @@ func (o *ApiRouteDetailed) GetSourceOk() (*string, bool) {
 }
 
 // SetSource sets field value
-func (o *ApiRouteDetailed) SetSource(v string) {
+func (o *ApiRouteDetailed) SetSource(v ENUMITEMSPROPERTIESTARGETPROPERTIESAPIROUTEPROPERTIESSOURCE) {
 	o.Source = v
 }
 

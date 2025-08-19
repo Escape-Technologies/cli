@@ -26,10 +26,8 @@ type EventSummarized struct {
 	CreatedAt string `json:"createdAt"`
 	// The title of the event
 	Title string `json:"title"`
-	// The level of the event
-	Level string `json:"level"`
-	// The stage of the event
-	Stage string `json:"stage"`
+	Level ENUMPROPERTIESDATAITEMSPROPERTIESLEVEL `json:"level"`
+	Stage ENUMPROPERTIESDATAITEMSPROPERTIESSTAGE `json:"stage"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -39,7 +37,7 @@ type _EventSummarized EventSummarized
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewEventSummarized(id string, createdAt string, title string, level string, stage string) *EventSummarized {
+func NewEventSummarized(id string, createdAt string, title string, level ENUMPROPERTIESDATAITEMSPROPERTIESLEVEL, stage ENUMPROPERTIESDATAITEMSPROPERTIESSTAGE) *EventSummarized {
 	this := EventSummarized{}
 	this.Id = id
 	this.CreatedAt = createdAt
@@ -130,9 +128,9 @@ func (o *EventSummarized) SetTitle(v string) {
 }
 
 // GetLevel returns the Level field value
-func (o *EventSummarized) GetLevel() string {
+func (o *EventSummarized) GetLevel() ENUMPROPERTIESDATAITEMSPROPERTIESLEVEL {
 	if o == nil {
-		var ret string
+		var ret ENUMPROPERTIESDATAITEMSPROPERTIESLEVEL
 		return ret
 	}
 
@@ -141,7 +139,7 @@ func (o *EventSummarized) GetLevel() string {
 
 // GetLevelOk returns a tuple with the Level field value
 // and a boolean to check if the value has been set.
-func (o *EventSummarized) GetLevelOk() (*string, bool) {
+func (o *EventSummarized) GetLevelOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESLEVEL, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -149,14 +147,14 @@ func (o *EventSummarized) GetLevelOk() (*string, bool) {
 }
 
 // SetLevel sets field value
-func (o *EventSummarized) SetLevel(v string) {
+func (o *EventSummarized) SetLevel(v ENUMPROPERTIESDATAITEMSPROPERTIESLEVEL) {
 	o.Level = v
 }
 
 // GetStage returns the Stage field value
-func (o *EventSummarized) GetStage() string {
+func (o *EventSummarized) GetStage() ENUMPROPERTIESDATAITEMSPROPERTIESSTAGE {
 	if o == nil {
-		var ret string
+		var ret ENUMPROPERTIESDATAITEMSPROPERTIESSTAGE
 		return ret
 	}
 
@@ -165,7 +163,7 @@ func (o *EventSummarized) GetStage() string {
 
 // GetStageOk returns a tuple with the Stage field value
 // and a boolean to check if the value has been set.
-func (o *EventSummarized) GetStageOk() (*string, bool) {
+func (o *EventSummarized) GetStageOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESSTAGE, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -173,7 +171,7 @@ func (o *EventSummarized) GetStageOk() (*string, bool) {
 }
 
 // SetStage sets field value
-func (o *EventSummarized) SetStage(v string) {
+func (o *EventSummarized) SetStage(v ENUMPROPERTIESDATAITEMSPROPERTIESSTAGE) {
 	o.Stage = v
 }
 

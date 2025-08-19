@@ -22,8 +22,8 @@ var _ MappedNullable = &AssetDetailed{}
 type AssetDetailed struct {
 	// The id of the asset
 	Id string `json:"id"`
-	Class string `json:"class"`
-	Type string `json:"type"`
+	Class ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS `json:"class"`
+	Type ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE `json:"type"`
 	// The name of the asset
 	Name string `json:"name"`
 	// The external url of the asset
@@ -38,8 +38,7 @@ type AssetDetailed struct {
 	LastSeenAt string `json:"lastSeenAt"`
 	// The date and time the asset is scheduled for deletion
 	ScheduledForDeletionAt *string `json:"scheduledForDeletionAt,omitempty"`
-	// The status of the asset
-	Status string `json:"status"`
+	Status ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS `json:"status"`
 	// The tags of the asset
 	Tags []Tag `json:"tags"`
 	// The risks of the asset
@@ -59,7 +58,7 @@ type _AssetDetailed AssetDetailed
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAssetDetailed(id string, class string, type_ string, name string, createdAt string, lastSeenAt string, status string, tags []Tag, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, links AssetDetailedLinks) *AssetDetailed {
+func NewAssetDetailed(id string, class ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS, type_ ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE, name string, createdAt string, lastSeenAt string, status ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS, tags []Tag, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, links AssetDetailedLinks) *AssetDetailed {
 	this := AssetDetailed{}
 	this.Id = id
 	this.Class = class
@@ -107,9 +106,9 @@ func (o *AssetDetailed) SetId(v string) {
 }
 
 // GetClass returns the Class field value
-func (o *AssetDetailed) GetClass() string {
+func (o *AssetDetailed) GetClass() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS {
 	if o == nil {
-		var ret string
+		var ret ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS
 		return ret
 	}
 
@@ -118,7 +117,7 @@ func (o *AssetDetailed) GetClass() string {
 
 // GetClassOk returns a tuple with the Class field value
 // and a boolean to check if the value has been set.
-func (o *AssetDetailed) GetClassOk() (*string, bool) {
+func (o *AssetDetailed) GetClassOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -126,14 +125,14 @@ func (o *AssetDetailed) GetClassOk() (*string, bool) {
 }
 
 // SetClass sets field value
-func (o *AssetDetailed) SetClass(v string) {
+func (o *AssetDetailed) SetClass(v ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS) {
 	o.Class = v
 }
 
 // GetType returns the Type field value
-func (o *AssetDetailed) GetType() string {
+func (o *AssetDetailed) GetType() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE {
 	if o == nil {
-		var ret string
+		var ret ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE
 		return ret
 	}
 
@@ -142,7 +141,7 @@ func (o *AssetDetailed) GetType() string {
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *AssetDetailed) GetTypeOk() (*string, bool) {
+func (o *AssetDetailed) GetTypeOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -150,7 +149,7 @@ func (o *AssetDetailed) GetTypeOk() (*string, bool) {
 }
 
 // SetType sets field value
-func (o *AssetDetailed) SetType(v string) {
+func (o *AssetDetailed) SetType(v ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE) {
 	o.Type = v
 }
 
@@ -355,9 +354,9 @@ func (o *AssetDetailed) SetScheduledForDeletionAt(v string) {
 }
 
 // GetStatus returns the Status field value
-func (o *AssetDetailed) GetStatus() string {
+func (o *AssetDetailed) GetStatus() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS {
 	if o == nil {
-		var ret string
+		var ret ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS
 		return ret
 	}
 
@@ -366,7 +365,7 @@ func (o *AssetDetailed) GetStatus() string {
 
 // GetStatusOk returns a tuple with the Status field value
 // and a boolean to check if the value has been set.
-func (o *AssetDetailed) GetStatusOk() (*string, bool) {
+func (o *AssetDetailed) GetStatusOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -374,7 +373,7 @@ func (o *AssetDetailed) GetStatusOk() (*string, bool) {
 }
 
 // SetStatus sets field value
-func (o *AssetDetailed) SetStatus(v string) {
+func (o *AssetDetailed) SetStatus(v ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS) {
 	o.Status = v
 }
 
