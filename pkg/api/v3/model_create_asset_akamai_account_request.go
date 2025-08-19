@@ -20,13 +20,13 @@ var _ MappedNullable = &CreateAssetAKAMAIACCOUNTRequest{}
 
 // CreateAssetAKAMAIACCOUNTRequest struct for CreateAssetAKAMAIACCOUNTRequest
 type CreateAssetAKAMAIACCOUNTRequest struct {
-	AssetClass           ENUMCDN           `json:"asset_class"`
-	AssetType            ENUMAKAMAIACCOUNT `json:"asset_type"`
-	Name                 *string           `json:"name,omitempty"`
-	Host                 string            `json:"host"`
-	ClientSecret         string            `json:"client_secret"`
-	AccessToken          string            `json:"access_token"`
-	ClientToken          string            `json:"client_token"`
+	AssetClass ENUMCDN `json:"asset_class"`
+	AssetType ENUMAKAMAIACCOUNT `json:"asset_type"`
+	Name *string `json:"name,omitempty"`
+	Host string `json:"host"`
+	ClientSecret string `json:"client_secret"`
+	AccessToken string `json:"access_token"`
+	ClientToken string `json:"client_token"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -232,7 +232,7 @@ func (o *CreateAssetAKAMAIACCOUNTRequest) SetClientToken(v string) {
 }
 
 func (o CreateAssetAKAMAIACCOUNTRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -276,10 +276,10 @@ func (o *CreateAssetAKAMAIACCOUNTRequest) UnmarshalJSON(data []byte) (err error)
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -346,3 +346,5 @@ func (v *NullableCreateAssetAKAMAIACCOUNTRequest) UnmarshalJSON(src []byte) erro
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
