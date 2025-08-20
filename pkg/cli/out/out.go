@@ -5,6 +5,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"time"
 
 	"github.com/Escape-Technologies/cli/pkg/log"
 	"gopkg.in/yaml.v2"
@@ -70,4 +71,13 @@ func SetOutput(o string) error {
 	output = *out
 	log.Trace("Output format set to %s", output)
 	return nil
+}
+
+// GetShortDate returns the short date format of the given date
+func GetShortDate(date string) string {
+	parsed, err := time.Parse(time.RFC3339, date)
+	if err != nil {
+		return date
+	}
+	return parsed.Format("2006-01-02")
 }

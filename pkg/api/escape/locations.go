@@ -9,10 +9,10 @@ import (
 )
 
 // ListLocations lists all locations
-func ListLocations(ctx context.Context, next string) ([]v3.LocationSummarized, string, error) {
+func ListLocations(ctx context.Context, next string) ([]v3.LocationSummarized, *string, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
-		return nil, "", fmt.Errorf("unable to init client: %w", err)
+		return nil, nil, fmt.Errorf("unable to init client: %w", err)
 	}
 	req := client.LocationsAPI.ListLocations(ctx)
 	if next != "" {
@@ -20,9 +20,9 @@ func ListLocations(ctx context.Context, next string) ([]v3.LocationSummarized, s
 	}
 	data, _, err := req.Execute()
 	if err != nil {
-		return nil, "", fmt.Errorf("unable to get locations: %w", err)
+		return nil, nil, fmt.Errorf("unable to get locations: %w", err)
 	}
-	return data.Data, *data.NextCursor, nil
+	return data.Data, data.NextCursor, nil
 }
 
 // GetLocation gets a location by ID
