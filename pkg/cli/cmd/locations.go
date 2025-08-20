@@ -50,8 +50,8 @@ ID                                      NAME                       SSH PUBLIC KE
 			}
 			return res
 		})
-		for next != "" {
-			locations, next, err = escape.ListLocations(cmd.Context(), next)
+		for next != nil && *next != "" {
+			locations, next, err = escape.ListLocations(cmd.Context(), *next)
 			if err != nil {
 				return fmt.Errorf("failed to list locations: %w", err)
 			}
