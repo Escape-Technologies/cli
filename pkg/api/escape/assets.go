@@ -2,9 +2,12 @@ package escape
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"io"
 	"net/http"
+	"reflect"
+	"strings"
 
 	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
 )
@@ -109,4 +112,34 @@ func UpdateAsset(
 		return fmt.Errorf("api error: %w", err)
 	}
 	return nil
+}
+
+// CreateAsset creates an asset
+func CreateAsset(ctx context.Context, data []byte, assetType string, body interface{}) (interface{}, error) {
+	typ := reflect.TypeOf((*v3.AssetsAPIService)(nil))
+	for i := 0; i < typ.NumMethod(); i++ {
+		method := typ.Method(i)
+		if strings.HasPrefix(method.Name, "Create") && !strings.HasSuffix(method.Name, "Execute") {
+			if strings.Contains(method.Name, strings.ToUpper(assetType)) {
+				fmt.Println(method.Name)
+				//client, err := newAPIV3Client()
+				if err != nil {
+					return nil, fmt.Errorf("unable to init client: %w", err)
+				}
+				// Create request object
+				req := method.Func.Call([]reflect.Value{reflect.ValueOf(ctx)})[0]
+
+				executeMethod := req.MethodByName("Execute")
+				if !executeMethod.IsValid() {
+					return nil, errors.New("failed to find Execute method")
+				}
+
+				results := executeMethod.Call(nil)
+
+				// Return the response (first return value)
+				return results[0].Interface(), nil
+			}
+		}
+	}
+	return nil, fmt.Errorf("asset type %s not found", assetType)
 }
