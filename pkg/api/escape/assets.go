@@ -18,7 +18,7 @@ func ListAssets(ctx context.Context, next string, assetTypes []string, assetStat
 	rSize := 100
 	req := client.AssetsAPI.ListAssets(ctx).Size(rSize)
 	if next != "" {
-		req.Cursor(next)
+		req = req.Cursor(next)
 	}
 	if len(assetTypes) > 0 {
 		req = req.Types(assetTypes)

@@ -130,17 +130,10 @@ def _rec_extract_enums(schema: dict, path: list[str]) -> tuple[dict, dict[str, d
                         value = dict(value)
                         value['enum'] = merged
                     enums[target] = value
-<<<<<<< HEAD
                     ref_schema: dict[str, Any] = {"$ref": "#/components/schemas/" + target}
                     if value.get('nullable', False):
                         ref_schema['nullable'] = True
                     schema[key] = ref_schema
-=======
-                    ref_node_2: dict[str, Any] = {"$ref": "#/components/schemas/" + target}
-                    if value.get('nullable', False):
-                        ref_node_2['nullable'] = True
-                    schema[key] = ref_node_2
->>>>>>> a3abbe9 (feat: add assets v3)
                 else:
                     new_schema, new_enums = _rec_extract_enums(value, path + [key])
                     if new_enums:

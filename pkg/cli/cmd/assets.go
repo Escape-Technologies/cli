@@ -37,9 +37,9 @@ var assetsListCmd = &cobra.Command{
 	Example: `escape-cli asset list`,
 	Long: `List assets of the organization.
 Example output:
-ID                                      TYPE                            NAME                            RISKS                           STATUS       LAST SEEN
-00000000-0000-0000-0000-000000000001    KUBERNETES_CLUSTER              private-location                []                              MONITORED    2025-07-22T15:42:12.127Z
-00000000-0000-0000-0000-000000000002    WEBAPP                          https://escape.tech             [EXPOSED UNAUTHENTICATED]       MONITORED    2025-07-22T15:52:41.697Z`,
+ID                                      CREATED AT                            TYPE                            NAME                            RISKS                           STATUS       LAST SEEN
+00000000-0000-0000-0000-000000000001    2025-07-22T15:42:12.127Z              KUBERNETES_CLUSTER              private-location                []                              MONITORED    2025-07-22T15:42:12.127Z
+00000000-0000-0000-0000-000000000002    2025-07-22T15:52:41.697Z              WEBAPP                          https://escape.tech             [EXPOSED UNAUTHENTICATED]       MONITORED    2025-07-22T15:52:41.697Z`,
 
 	RunE: func(cmd *cobra.Command, _ []string) error {
 		assets, next, err := escape.ListAssets(cmd.Context(), "", assetTypes, assetStatuses)
@@ -47,11 +47,13 @@ ID                                      TYPE                            NAME    
 			return fmt.Errorf("unable to list assets: %w", err)
 		}
 
-		// First result
-		result := []string{"ID\tTYPE\tNAME\tRISKS\tSTATUS\tLAST SEEN"}
-		for _, asset := range assets {
-			result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s", asset.GetId(), asset.GetName(), asset.GetType(), asset.GetRisks(), asset.GetStatus(), asset.GetLastSeenAt()))
-		}
+		out.Table(assets, func() []string {
+			res := []string{"ID\tCREATED AT\tTYPE\tSTATUS\tLAST SEEN\tRISKS\tNAME"}
+			for _, asset := range assets {
+				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s", asset.GetId(), asset.GetCreatedAt(), asset.GetType(), asset.GetStatus(), asset.GetLastSeenAt(), asset.GetRisks(), asset.GetName()))
+			}
+			return res
+		})
 
 		for next != nil && *next != "" {
 			assets, next, err = escape.ListAssets(
@@ -63,14 +65,14 @@ ID                                      TYPE                            NAME    
 			if err != nil {
 				return fmt.Errorf("unable to list assets: %w", err)
 			}
-			for _, asset := range assets {
-				result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s", asset.GetId(), asset.GetName(), asset.GetType(), asset.GetCreatedAt()))
-			}
+			out.Table(assets, func() []string {
+				res := []string{"ID\tCREATED AT\tTYPE\tSTATUS\tLAST SEEN\tRISKS\tNAME"}
+				for _, asset := range assets {
+					res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s", asset.GetId(), asset.GetCreatedAt(), asset.GetType(), asset.GetStatus(), asset.GetLastSeenAt(), asset.GetRisks(), asset.GetName()))
+				}
+				return res
+			})
 		}
-
-		out.Table(result, func() []string {
-			return result
-		})
 
 		return nil
 	},
@@ -83,8 +85,8 @@ var assetGetCmd = &cobra.Command{
 	Example: `escape-cli asset get <asset-id>`,
 	Long: `Get an asset by ID.
 Example output:
-ID                                      TYPE                            NAME                            RISKS                           STATUS       LAST SEEN
-00000000-0000-0000-0000-000000000001    WEBAPP                          https://escape.tech             [EXPOSED UNAUTHENTICATED]       MONITORED    2025-07-22T15:52:41.697Z`,
+ID                                      CREATED AT                            TYPE                            NAME                            RISKS                           STATUS       LAST SEEN
+00000000-0000-0000-0000-000000000001    2025-07-22T15:52:41.697Z              WEBAPP                          https://escape.tech             [EXPOSED UNAUTHENTICATED]       MONITORED    2025-07-22T15:52:41.697Z`,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		if len(args) != 1 {
 			return errors.New("asset ID is required")
@@ -94,10 +96,10 @@ ID                                      TYPE                            NAME    
 			return fmt.Errorf("unable to get asset: %w", err)
 		}
 
-		result := []string{"ID\tTYPE\tNAME\tRISKS\tSTATUS\tLAST SEEN"}
-		result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s", asset.GetId(), asset.GetType(), asset.GetName(), asset.GetRisks(), asset.GetStatus(), asset.GetLastSeenAt()))
-		out.Table(result, func() []string {
-			return result
+		out.Table(asset, func() []string {
+			res := []string{"ID\tCREATED AT\tTYPE\tSTATUS\tLAST SEEN\tRISKS\tNAME"}
+			res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s", asset.GetId(), asset.GetCreatedAt(), asset.GetType(), asset.GetStatus(), asset.GetLastSeenAt(), asset.GetRisks(), asset.GetName()))
+			return res
 		})
 
 		return nil
@@ -127,7 +129,7 @@ var assetUpdateCmd = &cobra.Command{
 	Use:     "update",
 	Aliases: []string{"u"},
 	Short:   "Update an asset",
-	Example: `escape-cli asset update <asset-id>`,
+	Example: `escape-cli asset update <asset-id> -s MONITORED -f KUBERNETES_CLUSTER -d "My Kubernetes Cluster" -o "owner1-id,owner2-id" -t "tag1-id,tag2-id"`,
 	Long: `Update an asset by ID.
 Example output:
 Asset 00000000-0000-0000-0000-000000000001 successfully updated`,
@@ -152,7 +154,17 @@ Asset 00000000-0000-0000-0000-000000000001 successfully updated`,
 			desc = &assetDescription
 		}
 
-		err := escape.UpdateAsset(cmd.Context(), args[0], desc, framework, &assetOwners, status, &assetTagIDs)
+		var owners *[]string
+		if len(assetOwners) > 0 {
+			owners = &assetOwners
+		}
+
+		var tagIDs *[]string
+		if len(assetTagIDs) > 0 {
+			tagIDs = &assetTagIDs
+		}
+
+		err := escape.UpdateAsset(cmd.Context(), args[0], desc, framework, owners, status, tagIDs)
 		if err != nil {
 			return fmt.Errorf("unable to update asset: %w", err)
 		}
