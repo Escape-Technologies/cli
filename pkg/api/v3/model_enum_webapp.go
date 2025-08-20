@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// ENUMWEBAPP The type of the asset frontend
+// ENUMWEBAPP the model 'ENUMWEBAPP'
 type ENUMWEBAPP string
 
 // List of ENUM_WEBAPP

@@ -20,10 +20,10 @@ var _ MappedNullable = &AttachmentDetailed{}
 
 // AttachmentDetailed Detailed information about an attachment
 type AttachmentDetailed struct {
-	// The date and time the attachment was created
-	CreatedAt string `json:"createdAt"`
 	// The id of the attachment
 	Id string `json:"id"`
+	// The date and time the attachment was created
+	CreatedAt string `json:"createdAt"`
 	Exchange *ExchangeDetailed `json:"exchange,omitempty"`
 	GeneratedOpenapiSpec *GeneratedOpenapiSpecDetailed `json:"generatedOpenapiSpec,omitempty"`
 	Graph *GraphDetailed `json:"graph,omitempty"`
@@ -39,10 +39,10 @@ type _AttachmentDetailed AttachmentDetailed
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAttachmentDetailed(createdAt string, id string) *AttachmentDetailed {
+func NewAttachmentDetailed(id string, createdAt string) *AttachmentDetailed {
 	this := AttachmentDetailed{}
-	this.CreatedAt = createdAt
 	this.Id = id
+	this.CreatedAt = createdAt
 	return &this
 }
 
@@ -52,30 +52,6 @@ func NewAttachmentDetailed(createdAt string, id string) *AttachmentDetailed {
 func NewAttachmentDetailedWithDefaults() *AttachmentDetailed {
 	this := AttachmentDetailed{}
 	return &this
-}
-
-// GetCreatedAt returns the CreatedAt field value
-func (o *AttachmentDetailed) GetCreatedAt() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.CreatedAt
-}
-
-// GetCreatedAtOk returns a tuple with the CreatedAt field value
-// and a boolean to check if the value has been set.
-func (o *AttachmentDetailed) GetCreatedAtOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.CreatedAt, true
-}
-
-// SetCreatedAt sets field value
-func (o *AttachmentDetailed) SetCreatedAt(v string) {
-	o.CreatedAt = v
 }
 
 // GetId returns the Id field value
@@ -100,6 +76,30 @@ func (o *AttachmentDetailed) GetIdOk() (*string, bool) {
 // SetId sets field value
 func (o *AttachmentDetailed) SetId(v string) {
 	o.Id = v
+}
+
+// GetCreatedAt returns the CreatedAt field value
+func (o *AttachmentDetailed) GetCreatedAt() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.CreatedAt
+}
+
+// GetCreatedAtOk returns a tuple with the CreatedAt field value
+// and a boolean to check if the value has been set.
+func (o *AttachmentDetailed) GetCreatedAtOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.CreatedAt, true
+}
+
+// SetCreatedAt sets field value
+func (o *AttachmentDetailed) SetCreatedAt(v string) {
+	o.CreatedAt = v
 }
 
 // GetExchange returns the Exchange field value if set, zero value otherwise.
@@ -304,8 +304,8 @@ func (o AttachmentDetailed) MarshalJSON() ([]byte, error) {
 
 func (o AttachmentDetailed) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["createdAt"] = o.CreatedAt
 	toSerialize["id"] = o.Id
+	toSerialize["createdAt"] = o.CreatedAt
 	if !IsNil(o.Exchange) {
 		toSerialize["exchange"] = o.Exchange
 	}
@@ -337,8 +337,8 @@ func (o *AttachmentDetailed) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"createdAt",
 		"id",
+		"createdAt",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -368,8 +368,8 @@ func (o *AttachmentDetailed) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "createdAt")
 		delete(additionalProperties, "id")
+		delete(additionalProperties, "createdAt")
 		delete(additionalProperties, "exchange")
 		delete(additionalProperties, "generatedOpenapiSpec")
 		delete(additionalProperties, "graph")
