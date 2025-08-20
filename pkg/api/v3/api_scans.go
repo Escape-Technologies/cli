@@ -456,7 +456,7 @@ type ApiListScansRequest struct {
 	sortDirection *string
 	after *string
 	before *string
-	profileIds *ListScansProfileIdsParameter
+	profileIds *string
 	ignored *string
 	initiator *[]string
 	kinds *[]string
@@ -500,7 +500,7 @@ func (r ApiListScansRequest) Before(before string) ApiListScansRequest {
 }
 
 // Filter by profile IDs
-func (r ApiListScansRequest) ProfileIds(profileIds ListScansProfileIdsParameter) ApiListScansRequest {
+func (r ApiListScansRequest) ProfileIds(profileIds string) ApiListScansRequest {
 	r.profileIds = &profileIds
 	return r
 }

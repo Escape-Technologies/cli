@@ -25,7 +25,6 @@ var scansCmd = &cobra.Command{
 var scansListCmd = &cobra.Command{
 	Use:     "list profile-id",
 	Aliases: []string{"ls"},
-	Args:    cobra.ExactArgs(1),
 	Short:   "List scans",
 	Long: `List all scans of a profile.
 
@@ -35,9 +34,8 @@ ID                                      CREATED AT      STATUS                  
 00000000-0000-0000-0000-000000000002    2025-02-02 08:27:23.919 +0000 UTC    FINISHED                          0.000000
 00000000-0000-0000-0000-000000000003    2025-01-31 18:35:48.477 +0000 UTC    FINISHED                          0.000000
 00000000-0000-0000-0000-000000000004    2025-01-30 08:25:49.656 +0000 UTC    FINISHED                          0.000000`,
-	Example: `escape-cli scans list 00000000-0000-0000-0000-000000000000`,
-	RunE: func(cmd *cobra.Command, args []string) error {
-		profileID = []string{args[0]}
+	Example: `escape-cli scans list -p 00000000-0000-0000-0000-000000000000`,
+	RunE: func(cmd *cobra.Command, _ []string) error {
 		scans, next, err := escape.ListScans(cmd.Context(), &profileID, "")
 		if err != nil {
 			return fmt.Errorf("unable to list scans: %w", err)
@@ -49,8 +47,8 @@ ID                                      CREATED AT      STATUS                  
 			}
 			return res
 		})
-		for next != "" {
-			scans, next, err = escape.ListScans(cmd.Context(), &profileID, next)
+		for next != nil && *next != "" {
+			scans, next, err = escape.ListScans(cmd.Context(), &profileID, *next)
 			if err != nil {
 				return fmt.Errorf("unable to list scans: %w", err)
 			}
@@ -353,6 +351,7 @@ var scanDownloadCmd = &cobra.Command{
 
 func init() {
 	scansCmd.AddCommand(scansListCmd)
+	scansListCmd.PersistentFlags().StringSliceVarP(&profileID, "profile-id", "p", []string{}, "profile IDs")
 	scanStartCmd.PersistentFlags().BoolVarP(&scanStartCmdWatch, "watch", "w", false, "watch for events")
 	scanStartCmd.PersistentFlags().StringVar(&scanStartCmdCommitHash, "commit-hash", "", "commit hash")
 	scanStartCmd.PersistentFlags().StringVar(&scanStartCmdCommitLink, "commit-link", "", "commit link")

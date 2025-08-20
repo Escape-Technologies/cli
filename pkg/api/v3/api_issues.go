@@ -285,7 +285,7 @@ type ApiListIssuesRequest struct {
 	size *int
 	sortType *string
 	sortDirection *string
-	profileIds *ListIssuesProfileIdsParameter
+	profileIds *string
 	assetIds *ListProfilesAssetIdsParameter
 	domains *ListProfilesDomainsParameter
 	ids *ListIssuesIdsParameter
@@ -326,7 +326,7 @@ func (r ApiListIssuesRequest) SortDirection(sortDirection string) ApiListIssuesR
 }
 
 // Filter by application IDs
-func (r ApiListIssuesRequest) ProfileIds(profileIds ListIssuesProfileIdsParameter) ApiListIssuesRequest {
+func (r ApiListIssuesRequest) ProfileIds(profileIds string) ApiListIssuesRequest {
 	r.profileIds = &profileIds
 	return r
 }
