@@ -37,16 +37,3 @@ func GetEvent(ctx context.Context, eventID string) (*v3.EventDetailed, error) {
 	}
 	return data, nil
 }
-
-// GetEventAttachments gets an event attachment
-func GetEventAttachments(ctx context.Context, eventID string) ([]v3.AttachmentDetailed, error) {
-	client, err := newAPIV3Client()
-	if err != nil {
-		return nil, fmt.Errorf("unable to init client: %w", err)
-	}
-	data, _, err := client.EventsAPI.GetEventAttachments(ctx, eventID).Execute()
-	if err != nil {
-		return nil, fmt.Errorf("api error: %w", err)
-	}
-	return data, nil
-}
