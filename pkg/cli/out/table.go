@@ -129,6 +129,13 @@ func colorizeLastSeen(value string) string {
 	return redText(value)
 }
 
+func colorizeHelpAll(value string) string {
+		if strings.HasPrefix(value, "  ") {
+			return cyanText(boldText(value))
+		}
+		return redText(boldText(value))
+}
+
 func colorizeValue(value string, columnName string) string {
 	if value == "[]" || value == "" {
 		return boldText("-")
@@ -162,6 +169,10 @@ func colorizeValue(value string, columnName string) string {
 		return colorizeProgress(value)
 	case "LEVEL":
 		return colorizeLevel(value)
+	case "COMMAND":
+		return colorizeHelpAll(value)
+	case "DESCRIPTION":
+		return grayText(value)
 	}
 
 	// handle boolean values
