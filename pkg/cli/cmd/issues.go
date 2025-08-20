@@ -33,8 +33,8 @@ var issueListCmd = &cobra.Command{
 	Long: `List issues.
 
 Example output:
-ID                                      CREATED AT                  	LINK       												SEVERITY    CATEGORY                  STATUS        NAME                     ASSET
-00000000-0000-0000-0000-000000000001    2025-06-26T06:03:26.128Z        https://app.escape.tech/all-risks/issues/00000000-0000-0000-0000-000000000001/overview/       HIGH          XXE Injection            https://gontoz.escape.tech/`,
+ID                                      CREATED AT                     		  SEVERITY      CATEGORY                  STATUS        NAME                     ASSET
+00000000-0000-0000-0000-000000000001    2025-06-26T06:03:26.128Z              HIGH          XXE Injection            https://gontoz.escape.tech/`,
 	Example: `escape-cli issues list`, RunE: func(cmd *cobra.Command, _ []string) error {
 		issues, next, err := escape.ListIssues(cmd.Context(), "", issueStatus, issueSeverity)
 		if err != nil {
@@ -42,14 +42,14 @@ ID                                      CREATED AT                  	LINK       
 		}
 
 		result := make([]*v3.IssueSummarized, 0, len(issues))
-		fields := []string{"ID\tCREATED AT\tLINK\tSEVERITY\tCATEGORY\tSTATUS\tNAME\tASSET"}
+		fields := []string{"ID\tCREATED AT\tSEVERITY\tCATEGORY\tSTATUS\tNAME\tASSET"}
 
 		for _, issue := range issues {
 			result = append(result, &issue)
 		}
 		out.Table(result, func() []string {
 			for _, issue := range result {
-				fields = append(fields, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s", issue.GetId(), issue.GetCreatedAt(), issue.GetLinks().IssueOverview, issue.GetSeverity(), issue.GetCategory(), issue.GetStatus(), issue.GetName(), issue.GetAsset().Name))
+				fields = append(fields, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s", issue.GetId(), issue.GetCreatedAt(), issue.GetSeverity(), issue.GetCategory(), issue.GetStatus(), issue.GetName(), issue.GetAsset().Name))
 			}
 			return fields
 		})
@@ -64,7 +64,7 @@ ID                                      CREATED AT                  	LINK       
 			}
 			out.Table(result, func() []string {
 				for _, issue := range result {
-					fields = append(fields, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s", issue.GetId(), issue.GetCreatedAt(), issue.GetLinks().IssueOverview, issue.GetSeverity(), issue.GetCategory(), issue.GetStatus(), issue.GetName(), issue.GetAsset().Name))
+					fields = append(fields, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s", issue.GetId(), issue.GetCreatedAt(), issue.GetSeverity(), issue.GetCategory(), issue.GetStatus(), issue.GetName(), issue.GetAsset().Name))
 				}
 				return fields
 			})
