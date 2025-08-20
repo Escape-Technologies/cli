@@ -46,6 +46,7 @@ def _rec_extract_enums(schema: dict, path: list[str]) -> tuple[dict, dict[str, d
     - Filter object.required to drop fields that are marked optional (nullable: true)
     - Enforce custom required additions when needed
     """
+    
     enums: dict[str, dict] = {}
 
     # If the current schema node itself is an enum, extract it immediately
@@ -94,10 +95,10 @@ def _rec_extract_enums(schema: dict, path: list[str]) -> tuple[dict, dict[str, d
                 if 'enum' in value:
                     target = _enum_name(path + [key], value)
                     enums[target] = value
-                    ref_node: dict[str, Any] = {"$ref": "#/components/schemas/" + target}
+                    ref_schema: dict[str, Any] = {"$ref": "#/components/schemas/" + target}
                     if value.get('nullable', False):
-                        ref_node['nullable'] = True
-                    schema[key] = ref_node
+                        ref_schema['nullable'] = True
+                    schema[key] = ref_schema
                 else:
                     new_schema, new_enums = _rec_extract_enums(value, path + [key])
                     if new_enums:
@@ -141,6 +142,12 @@ for path, path_data in data["paths"].items():
             "trace",
         ]:
             continue
+
+        # Handle profileIds parameter at the entry point
+        if "parameters" in operation_object:
+            for param in operation_object["parameters"]:
+                if param.get("name") == "profileIds":
+                    param["schema"] = {"type": "string"}
 
         responses: dict[str, dict] = operation_object.get("responses", {})
         if not responses:

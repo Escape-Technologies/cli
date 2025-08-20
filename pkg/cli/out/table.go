@@ -11,11 +11,11 @@ import (
 )
 
 var (
-	greenBool  = color.New(color.FgGreen).SprintFunc()
+	greenText  = color.New(color.FgGreen).SprintFunc()
 	linkText   = color.New(color.FgBlue).SprintFunc()
 	cyanText   = color.New(color.FgCyan).SprintFunc()
 	yellowText = color.New(color.FgYellow).SprintFunc()
-	redBool    = color.New(color.FgRed).SprintFunc()
+	redText    = color.New(color.FgRed).SprintFunc()
 	grayText   = color.New(color.FgHiBlack).SprintFunc()
 	boldText   = color.New(color.Bold).SprintFunc()
 	noColor    = color.New(color.Reset).SprintFunc()
