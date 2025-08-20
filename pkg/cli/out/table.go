@@ -55,6 +55,19 @@ func colorizeProgress(value string) string {
 	return yellowText(value)
 }
 
+func colorizeLevel(value string) string {
+	switch strings.ToLower(value) {
+	case "info":
+		return grayText(value)
+	case "warning":
+		return yellowText(value)
+	case "error":
+		return redText(value)
+	default:
+		return noColor(value)
+	}
+}
+
 func colorizeStatus(value string) string {
 	switch strings.ToLower(value) {
 	case "open":
@@ -103,12 +116,14 @@ func colorizeValue(value string, columnName string) string {
 		return colorizeStatus(value)
 	case "SEVERITY":
 		return colorizeSeverity(value)
-	case "CATEGORY", "KIND":
+	case "CATEGORY", "KIND", "STAGE":
 		return colorizeEnum(value)
 	case "CREATED AT", "UPDATED AT":
 		return colorizeDate(value)
 	case "PROGRESS":
 		return colorizeProgress(value)
+	case "LEVEL":
+		return colorizeLevel(value)
 	}
 
 	// handle boolean values
