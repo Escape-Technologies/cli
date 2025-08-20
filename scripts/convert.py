@@ -21,13 +21,34 @@ output_file = sys.argv[2]
 
 cache: dict[str, str] = {}
 
+# When multiple inline enums appear for the same logical property across different
+# schemas (e.g. "framework"), we want to unify them into a single component enum
+# and merge all values together so nothing is lost.
+# key: property name → component schema name
+UNIFY_ENUMS_BY_PROPERTY: dict[str, str] = {
+    "framework": "ENUMPROPERTIESFRAMEWORK",
+}
+
 def md5(s: str) -> str:
     return hashlib.md5(s.encode()).hexdigest()
 
 
 def _enum_name(path: list[str], value: dict) -> str:
-    if '-'.join(sorted(value["enum"])) in cache:
-        return cache['-'.join(sorted(value["enum"]))]
+    # If the enum belongs to a known property we want to unify, return a fixed name
+    # like ENUMPROPERTIESFRAMEWORK regardless of the path to ensure merging.
+    try:
+        for i, p in enumerate(path):
+            if p == "properties" and i + 1 < len(path):
+                prop_name = path[i + 1]
+                if prop_name in UNIFY_ENUMS_BY_PROPERTY:
+                    return UNIFY_ENUMS_BY_PROPERTY[prop_name]
+    except Exception:
+        pass
+
+    cache_key = '-'.join(sorted(value["enum"]))
+    if cache_key in cache:
+        return cache[cache_key]
+
     raw: str = "Enum_"
     if len(value["enum"]) == 1:
         raw += str(value["enum"][0])
@@ -36,7 +57,7 @@ def _enum_name(path: list[str], value: dict) -> str:
     final = re.sub(r"[^a-zA-Z0-9_]", "_", raw).upper()
     if len(final) > 200:
         final =  "Enum_" + md5("-".join(sorted(value["enum"])))
-    cache['-'.join(sorted(value["enum"]))] = final
+    cache[cache_key] = final
     return final
 
 
@@ -52,11 +73,18 @@ def _rec_extract_enums(schema: dict, path: list[str]) -> tuple[dict, dict[str, d
     # If the current schema node itself is an enum, extract it immediately
     if isinstance(schema, dict) and 'enum' in schema:
         target = _enum_name(path, schema)
+        # Merge enum values if the target already exists
+        if target in enums and 'enum' in enums[target]:
+            existing = set(enums[target]['enum'])
+            incoming = set(schema['enum'])
+            merged = sorted(existing.union(incoming))
+            schema = dict(schema)
+            schema['enum'] = merged
         enums[target] = schema
-        ref_node: dict[str, Any] = {"$ref": "#/components/schemas/" + target}
+        ref_node_1: dict[str, Any] = {"$ref": "#/components/schemas/" + target}
         if schema.get('nullable', False):
-            ref_node['nullable'] = True
-        return ref_node, enums
+            ref_node_1['nullable'] = True
+        return ref_node_1, enums
 
     if isinstance(schema, dict):
         # If this is an object schema, first process its properties
@@ -94,6 +122,13 @@ def _rec_extract_enums(schema: dict, path: list[str]) -> tuple[dict, dict[str, d
             if isinstance(value, dict):
                 if 'enum' in value:
                     target = _enum_name(path + [key], value)
+                    # Merge enum values if same target already discovered in this subtree
+                    if target in enums and 'enum' in enums[target]:
+                        existing = set(enums[target]['enum'])
+                        incoming = set(value['enum'])
+                        merged = sorted(existing.union(incoming))
+                        value = dict(value)
+                        value['enum'] = merged
                     enums[target] = value
                     ref_schema: dict[str, Any] = {"$ref": "#/components/schemas/" + target}
                     if value.get('nullable', False):
@@ -160,7 +195,18 @@ for path, path_data in data["paths"].items():
         ):
             schema, enums = _rec_extract_enums(json_schema1, [])
             if enums:
-                data["components"]["schemas"].update(enums)
+                # Merge enums into global components, preserving and unifying values
+                for name, enum_schema in enums.items():
+                    if name in data["components"]["schemas"] and 'enum' in enum_schema:
+                        existing_schema = data["components"]["schemas"][name]
+                        if 'enum' in existing_schema:
+                            merged = sorted(set(existing_schema['enum']).union(set(enum_schema['enum'])))
+                            existing_schema['enum'] = merged
+                            data["components"]["schemas"][name] = existing_schema
+                        else:
+                            data["components"]["schemas"][name] = enum_schema
+                    else:
+                        data["components"]["schemas"][name] = enum_schema
                 data["paths"][path][method]["requestBody"]["content"]["application/json"]["schema"] = schema
 
         for status_code, response_object in responses.items():
@@ -172,7 +218,17 @@ for path, path_data in data["paths"].items():
             json_schema2: dict = content.get("application/json", {}).get("schema", {})
             schema, enums = _rec_extract_enums(json_schema2, [])
             if enums:
-                data["components"]["schemas"].update(enums)
+                for name, enum_schema in enums.items():
+                    if name in data["components"]["schemas"] and 'enum' in enum_schema:
+                        existing_schema = data["components"]["schemas"][name]
+                        if 'enum' in existing_schema:
+                            merged = sorted(set(existing_schema['enum']).union(set(enum_schema['enum'])))
+                            existing_schema['enum'] = merged
+                            data["components"]["schemas"][name] = existing_schema
+                        else:
+                            data["components"]["schemas"][name] = enum_schema
+                    else:
+                        data["components"]["schemas"][name] = enum_schema
                 data["paths"][path][method]["responses"][status_code]["content"]["application/json"]["schema"] = schema
 
 with open(output_file, "w") as f:

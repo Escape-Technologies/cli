@@ -21,11 +21,13 @@ type ENUMGRAPHQL string
 // List of ENUM_GRAPHQL
 const (
 	ENUMGRAPHQL_GRAPHQL ENUMGRAPHQL = "GRAPHQL"
+	ENUMGRAPHQL_GRAPHQL2 ENUMGRAPHQL = "graphql"
 )
 
 // All allowed values of ENUMGRAPHQL enum
 var AllowedENUMGRAPHQLEnumValues = []ENUMGRAPHQL{
 	"GRAPHQL",
+	"graphql",
 }
 
 func (v *ENUMGRAPHQL) UnmarshalJSON(src []byte) error {
