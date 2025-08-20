@@ -47,8 +47,10 @@ ID                                      CREATED AT      STATUS                  
 			}
 			return res
 		})
+
 		for next != nil && *next != "" {
 			scans, next, err = escape.ListScans(cmd.Context(), &profileID, *next)
+
 			if err != nil {
 				return fmt.Errorf("unable to list scans: %w", err)
 			}
