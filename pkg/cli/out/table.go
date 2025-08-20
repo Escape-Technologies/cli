@@ -107,7 +107,6 @@ func colorizeValue(value string, columnName string) string {
 	// handle links
 	urlRegex := regexp.MustCompile(`\b(?:(?:https?|grpc):\/\/)?(?:localhost|(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}|(?:\d{1,3}\.){3}\d{1,3})(?::\d+)?\b`)
 	if urlRegex.MatchString(strings.ToLower(value)) {
-
 		if strings.HasPrefix(value, "https://app.escape") {
 			value = shortEscapeLink(value)
 		}
