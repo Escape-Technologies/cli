@@ -116,7 +116,7 @@ func UpdateAsset(
 }
 
 // CreateAsset creates an asset
-func CreateAsset(ctx context.Context, data []byte, assetType string, body interface{}) (interface{}, error) {
+func CreateAsset(ctx context.Context, data []byte, assetType string) (interface{}, error) {
 	typ := reflect.TypeOf((*v3.AssetsAPIService)(nil))
 	for i := 0; i < typ.NumMethod(); i++ {
 		method := typ.Method(i)
