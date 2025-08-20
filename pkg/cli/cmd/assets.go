@@ -3,6 +3,9 @@ package cmd
 import (
 	"errors"
 	"fmt"
+	"io"
+	"os"
+	"strings"
 
 	"github.com/Escape-Technologies/cli/pkg/api/escape"
 	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
@@ -169,6 +172,54 @@ Asset 00000000-0000-0000-0000-000000000001 successfully updated`,
 			return fmt.Errorf("unable to update asset: %w", err)
 		}
 		fmt.Printf("Asset %s successfully updated\n", args[0])
+		return nil
+	},
+}
+
+var createAssetCmd = &cobra.Command{
+	Use:     "create",
+	Aliases: []string{"c"},
+	Short:   "Create an asset",
+	Example: `escape-cli asset create <test.json`,
+	Long: `Create an asset by JSON.
+Example output:
+Asset 00000000-0000-0000-0000-000000000001 successfully created`,
+	RunE: func(cmd *cobra.Command, _ []string) error {
+		var data []byte
+
+		b, err := io.ReadAll(os.Stdin)
+		if err != nil {
+			return fmt.Errorf("failed to read stdin: %w", err)
+		}
+		data = b
+		
+		var asset map[string]interface{}
+		if err := json.Unmarshal(data, &asset); err != nil {
+			return fmt.Errorf("invalid JSON: %w", err)
+		}
+
+		typeVal, _ := asset["asset_type"].(string)
+		if strings.TrimSpace(typeVal) == "" {
+			return errors.New("invalid JSON: missing 'asset_type'")
+		}
+
+		response, err := escape.CreateAsset(cmd.Context(), data, strings.ToUpper(typeVal), asset)
+		if err != nil {
+			return fmt.Errorf("failed to create asset: %w", err)
+		}
+
+		out.Table(response, func() []string {
+			result := []string{"ID\tTYPE\tNAME\tSTATUS"}
+			if assetResponse, ok := response.(*v3.AssetDetailed); ok {
+				result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s",
+					assetResponse.GetId(),
+					assetResponse.GetType(),
+					assetResponse.GetName(),
+					assetResponse.GetStatus(),
+				))
+			}
+			return result
+		})
 		return nil
 	},
 }
