@@ -129,18 +129,11 @@ func colorizeLastSeen(value string) string {
 	return redText(value)
 }
 
-func colorizeHelpAll(value string, columnName string) string {
-	switch strings.ToUpper(columnName) {
-	case "DESCRIPTION":
-		return grayText(value)
-	case "COMMAND":
+func colorizeHelpAll(value string) string {
 		if strings.HasPrefix(value, "  ") {
 			return cyanText(boldText(value))
 		}
 		return redText(boldText(value))
-	default:
-		return noColor(value)
-	}
 }
 
 func colorizeValue(value string, columnName string) string {
@@ -177,9 +170,9 @@ func colorizeValue(value string, columnName string) string {
 	case "LEVEL":
 		return colorizeLevel(value)
 	case "COMMAND":
-		return colorizeHelpAll(value, "COMMAND")
+		return colorizeHelpAll(value)
 	case "DESCRIPTION":
-		return colorizeHelpAll(value, "DESCRIPTION")
+		return grayText(value)
 	}
 
 	// handle boolean values
