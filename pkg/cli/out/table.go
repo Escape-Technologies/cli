@@ -48,6 +48,10 @@ func colorizeSeverity(value string) string {
 	}
 }
 
+func shortEscapeLink(value string) string {
+	return fmt.Sprintf("\x1b]8;;%s\x1b\\%s\x1b]8;;\x1b\\", value, "Link")
+}
+
 func colorizeProgress(value string) string {
 	if strings.HasPrefix(value, "100") {
 		return greenText(value)
@@ -103,6 +107,10 @@ func colorizeValue(value string, columnName string) string {
 	// handle links
 	urlRegex := regexp.MustCompile(`\b(?:(?:https?|grpc):\/\/)?(?:localhost|(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}|(?:\d{1,3}\.){3}\d{1,3})(?::\d+)?\b`)
 	if urlRegex.MatchString(strings.ToLower(value)) {
+
+		if strings.HasPrefix(value, "https://app.escape") {
+			value = shortEscapeLink(value)
+		}
 		return linkText(value)
 	}
 
@@ -143,7 +151,7 @@ func Table(data any, tableMaker func() []string) {
 	}
 
 	table := tableMaker()
-	w := tabwriter.NewWriter(os.Stdout, 0, 0, 4, ' ', 0) //nolint:mnd
+	w := tabwriter.NewWriter(os.Stdout, 0, 0, 2, ' ', 0) //nolint:mnd
 
 	if len(table) > 0 {
 		// Make headers bold
