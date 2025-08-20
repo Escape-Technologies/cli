@@ -35,7 +35,7 @@ type IssueDetailed struct {
 	AlertUid string `json:"alertUid"`
 	// When the issue was first created
 	CreatedAt string `json:"createdAt"`
-	Asset AssetSummarized `json:"asset"`
+	Asset AssetDetailed `json:"asset"`
 	// ID of the last scan where this issue was seen
 	LastSeenScanId *string `json:"lastSeenScanId,omitempty"`
 	// ID of the first scan where this issue was seen
@@ -58,7 +58,7 @@ type _IssueDetailed IssueDetailed
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIssueDetailed(id string, name string, category ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCATEGORY, severity ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY, status ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS, context string, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, alertUid string, createdAt string, asset AssetSummarized, aiRemediationFramework string, links IssueSummarizedLinks) *IssueDetailed {
+func NewIssueDetailed(id string, name string, category ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCATEGORY, severity ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY, status ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS, context string, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, alertUid string, createdAt string, asset AssetDetailed, aiRemediationFramework string, links IssueSummarizedLinks) *IssueDetailed {
 	this := IssueDetailed{}
 	this.Id = id
 	this.Name = name
@@ -300,9 +300,9 @@ func (o *IssueDetailed) SetCreatedAt(v string) {
 }
 
 // GetAsset returns the Asset field value
-func (o *IssueDetailed) GetAsset() AssetSummarized {
+func (o *IssueDetailed) GetAsset() AssetDetailed {
 	if o == nil {
-		var ret AssetSummarized
+		var ret AssetDetailed
 		return ret
 	}
 
@@ -311,7 +311,7 @@ func (o *IssueDetailed) GetAsset() AssetSummarized {
 
 // GetAssetOk returns a tuple with the Asset field value
 // and a boolean to check if the value has been set.
-func (o *IssueDetailed) GetAssetOk() (*AssetSummarized, bool) {
+func (o *IssueDetailed) GetAssetOk() (*AssetDetailed, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -319,7 +319,7 @@ func (o *IssueDetailed) GetAssetOk() (*AssetSummarized, bool) {
 }
 
 // SetAsset sets field value
-func (o *IssueDetailed) SetAsset(v AssetSummarized) {
+func (o *IssueDetailed) SetAsset(v AssetDetailed) {
 	o.Asset = v
 }
 

@@ -30,12 +30,10 @@ type GraphqlResolverDetailed struct {
 	Id string `json:"id"`
 	// The name of the graphql resolver
 	Name string `json:"name"`
-	// The operation of the graphql resolver
-	Operation string `json:"operation"`
 	// The parameters of the graphql resolver
-	Parameters map[string]string `json:"parameters"`
+	Parameters map[string]string `json:"parameters,omitempty"`
 	// The return type of the graphql resolver
-	ReturnType string `json:"returnType"`
+	ReturnType *string `json:"returnType,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -45,16 +43,13 @@ type _GraphqlResolverDetailed GraphqlResolverDetailed
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGraphqlResolverDetailed(blacklisted bool, createdAt string, displayName string, id string, name string, operation string, parameters map[string]string, returnType string) *GraphqlResolverDetailed {
+func NewGraphqlResolverDetailed(blacklisted bool, createdAt string, displayName string, id string, name string) *GraphqlResolverDetailed {
 	this := GraphqlResolverDetailed{}
 	this.Blacklisted = blacklisted
 	this.CreatedAt = createdAt
 	this.DisplayName = displayName
 	this.Id = id
 	this.Name = name
-	this.Operation = operation
-	this.Parameters = parameters
-	this.ReturnType = returnType
 	return &this
 }
 
@@ -186,76 +181,68 @@ func (o *GraphqlResolverDetailed) SetName(v string) {
 	o.Name = v
 }
 
-// GetOperation returns the Operation field value
-func (o *GraphqlResolverDetailed) GetOperation() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Operation
-}
-
-// GetOperationOk returns a tuple with the Operation field value
-// and a boolean to check if the value has been set.
-func (o *GraphqlResolverDetailed) GetOperationOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Operation, true
-}
-
-// SetOperation sets field value
-func (o *GraphqlResolverDetailed) SetOperation(v string) {
-	o.Operation = v
-}
-
-// GetParameters returns the Parameters field value
+// GetParameters returns the Parameters field value if set, zero value otherwise.
 func (o *GraphqlResolverDetailed) GetParameters() map[string]string {
-	if o == nil {
+	if o == nil || IsNil(o.Parameters) {
 		var ret map[string]string
 		return ret
 	}
-
 	return o.Parameters
 }
 
-// GetParametersOk returns a tuple with the Parameters field value
+// GetParametersOk returns a tuple with the Parameters field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GraphqlResolverDetailed) GetParametersOk() (map[string]string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Parameters) {
 		return map[string]string{}, false
 	}
 	return o.Parameters, true
 }
 
-// SetParameters sets field value
+// HasParameters returns a boolean if a field has been set.
+func (o *GraphqlResolverDetailed) HasParameters() bool {
+	if o != nil && !IsNil(o.Parameters) {
+		return true
+	}
+
+	return false
+}
+
+// SetParameters gets a reference to the given map[string]string and assigns it to the Parameters field.
 func (o *GraphqlResolverDetailed) SetParameters(v map[string]string) {
 	o.Parameters = v
 }
 
-// GetReturnType returns the ReturnType field value
+// GetReturnType returns the ReturnType field value if set, zero value otherwise.
 func (o *GraphqlResolverDetailed) GetReturnType() string {
-	if o == nil {
+	if o == nil || IsNil(o.ReturnType) {
 		var ret string
 		return ret
 	}
-
-	return o.ReturnType
+	return *o.ReturnType
 }
 
-// GetReturnTypeOk returns a tuple with the ReturnType field value
+// GetReturnTypeOk returns a tuple with the ReturnType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GraphqlResolverDetailed) GetReturnTypeOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.ReturnType) {
 		return nil, false
 	}
-	return &o.ReturnType, true
+	return o.ReturnType, true
 }
 
-// SetReturnType sets field value
+// HasReturnType returns a boolean if a field has been set.
+func (o *GraphqlResolverDetailed) HasReturnType() bool {
+	if o != nil && !IsNil(o.ReturnType) {
+		return true
+	}
+
+	return false
+}
+
+// SetReturnType gets a reference to the given string and assigns it to the ReturnType field.
 func (o *GraphqlResolverDetailed) SetReturnType(v string) {
-	o.ReturnType = v
+	o.ReturnType = &v
 }
 
 func (o GraphqlResolverDetailed) MarshalJSON() ([]byte, error) {
@@ -273,9 +260,12 @@ func (o GraphqlResolverDetailed) ToMap() (map[string]interface{}, error) {
 	toSerialize["displayName"] = o.DisplayName
 	toSerialize["id"] = o.Id
 	toSerialize["name"] = o.Name
-	toSerialize["operation"] = o.Operation
-	toSerialize["parameters"] = o.Parameters
-	toSerialize["returnType"] = o.ReturnType
+	if !IsNil(o.Parameters) {
+		toSerialize["parameters"] = o.Parameters
+	}
+	if !IsNil(o.ReturnType) {
+		toSerialize["returnType"] = o.ReturnType
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -294,9 +284,6 @@ func (o *GraphqlResolverDetailed) UnmarshalJSON(data []byte) (err error) {
 		"displayName",
 		"id",
 		"name",
-		"operation",
-		"parameters",
-		"returnType",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -331,7 +318,6 @@ func (o *GraphqlResolverDetailed) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "displayName")
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "name")
-		delete(additionalProperties, "operation")
 		delete(additionalProperties, "parameters")
 		delete(additionalProperties, "returnType")
 		o.AdditionalProperties = additionalProperties

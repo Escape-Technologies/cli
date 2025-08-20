@@ -21,7 +21,7 @@ var _ MappedNullable = &ScreenshotDetailed{}
 // ScreenshotDetailed Detailed information about a screenshot
 type ScreenshotDetailed struct {
 	// The alt of the screenshot
-	Alt string `json:"alt"`
+	Alt *string `json:"alt,omitempty"`
 	// The date and time the screenshot was created
 	CreatedAt string `json:"createdAt"`
 	// The id of the screenshot
@@ -37,9 +37,8 @@ type _ScreenshotDetailed ScreenshotDetailed
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewScreenshotDetailed(alt string, createdAt string, id string, temporarySignedUrl string) *ScreenshotDetailed {
+func NewScreenshotDetailed(createdAt string, id string, temporarySignedUrl string) *ScreenshotDetailed {
 	this := ScreenshotDetailed{}
-	this.Alt = alt
 	this.CreatedAt = createdAt
 	this.Id = id
 	this.TemporarySignedUrl = temporarySignedUrl
@@ -54,28 +53,36 @@ func NewScreenshotDetailedWithDefaults() *ScreenshotDetailed {
 	return &this
 }
 
-// GetAlt returns the Alt field value
+// GetAlt returns the Alt field value if set, zero value otherwise.
 func (o *ScreenshotDetailed) GetAlt() string {
-	if o == nil {
+	if o == nil || IsNil(o.Alt) {
 		var ret string
 		return ret
 	}
-
-	return o.Alt
+	return *o.Alt
 }
 
-// GetAltOk returns a tuple with the Alt field value
+// GetAltOk returns a tuple with the Alt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ScreenshotDetailed) GetAltOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Alt) {
 		return nil, false
 	}
-	return &o.Alt, true
+	return o.Alt, true
 }
 
-// SetAlt sets field value
+// HasAlt returns a boolean if a field has been set.
+func (o *ScreenshotDetailed) HasAlt() bool {
+	if o != nil && !IsNil(o.Alt) {
+		return true
+	}
+
+	return false
+}
+
+// SetAlt gets a reference to the given string and assigns it to the Alt field.
 func (o *ScreenshotDetailed) SetAlt(v string) {
-	o.Alt = v
+	o.Alt = &v
 }
 
 // GetCreatedAt returns the CreatedAt field value
@@ -160,7 +167,9 @@ func (o ScreenshotDetailed) MarshalJSON() ([]byte, error) {
 
 func (o ScreenshotDetailed) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["alt"] = o.Alt
+	if !IsNil(o.Alt) {
+		toSerialize["alt"] = o.Alt
+	}
 	toSerialize["createdAt"] = o.CreatedAt
 	toSerialize["id"] = o.Id
 	toSerialize["temporarySignedUrl"] = o.TemporarySignedUrl
@@ -177,7 +186,6 @@ func (o *ScreenshotDetailed) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"alt",
 		"createdAt",
 		"id",
 		"temporarySignedUrl",

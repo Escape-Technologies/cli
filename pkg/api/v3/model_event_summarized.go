@@ -28,6 +28,8 @@ type EventSummarized struct {
 	Title string `json:"title"`
 	Level ENUMPROPERTIESDATAITEMSPROPERTIESLEVEL `json:"level"`
 	Stage ENUMPROPERTIESDATAITEMSPROPERTIESSTAGE `json:"stage"`
+	// The attachments of the event
+	Attachments []EventSummarizedAttachmentsInner `json:"attachments,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -175,6 +177,38 @@ func (o *EventSummarized) SetStage(v ENUMPROPERTIESDATAITEMSPROPERTIESSTAGE) {
 	o.Stage = v
 }
 
+// GetAttachments returns the Attachments field value if set, zero value otherwise.
+func (o *EventSummarized) GetAttachments() []EventSummarizedAttachmentsInner {
+	if o == nil || IsNil(o.Attachments) {
+		var ret []EventSummarizedAttachmentsInner
+		return ret
+	}
+	return o.Attachments
+}
+
+// GetAttachmentsOk returns a tuple with the Attachments field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EventSummarized) GetAttachmentsOk() ([]EventSummarizedAttachmentsInner, bool) {
+	if o == nil || IsNil(o.Attachments) {
+		return nil, false
+	}
+	return o.Attachments, true
+}
+
+// HasAttachments returns a boolean if a field has been set.
+func (o *EventSummarized) HasAttachments() bool {
+	if o != nil && !IsNil(o.Attachments) {
+		return true
+	}
+
+	return false
+}
+
+// SetAttachments gets a reference to the given []EventSummarizedAttachmentsInner and assigns it to the Attachments field.
+func (o *EventSummarized) SetAttachments(v []EventSummarizedAttachmentsInner) {
+	o.Attachments = v
+}
+
 func (o EventSummarized) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -190,6 +224,9 @@ func (o EventSummarized) ToMap() (map[string]interface{}, error) {
 	toSerialize["title"] = o.Title
 	toSerialize["level"] = o.Level
 	toSerialize["stage"] = o.Stage
+	if !IsNil(o.Attachments) {
+		toSerialize["attachments"] = o.Attachments
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -242,6 +279,7 @@ func (o *EventSummarized) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "title")
 		delete(additionalProperties, "level")
 		delete(additionalProperties, "stage")
+		delete(additionalProperties, "attachments")
 		o.AdditionalProperties = additionalProperties
 	}
 
