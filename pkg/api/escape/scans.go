@@ -7,34 +7,35 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"strings"
 
 	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
 	"github.com/Escape-Technologies/cli/pkg/env"
 )
 
 // ListScans lists all scans for an application
-func ListScans(ctx context.Context, profileIDs *[]string, next string) ([]v3.ScanSummarized1, string, error) {
+func ListScans(ctx context.Context, profileIDs *[]string, next string) ([]v3.ScanSummarized1, *string, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
-		return nil, "", fmt.Errorf("unable to init client: %w", err)
+		return nil, nil, fmt.Errorf("unable to init client: %w", err)
 	}
 	req := client.ScansAPI.ListScans(ctx)
 
-	if profileIDs != nil {
-		req.ProfileIds(v3.ListScansProfileIdsParameter{
-			ArrayOfString: profileIDs,
-		})
+	if profileIDs != nil && len(*profileIDs) > 0 {
+		req = req.ProfileIds(strings.Join(*profileIDs, ","))
 	}
 
-	req = req.SortType("createdAt").SortDirection("desc")
+	batchSize := 100
+	req = req.SortType("createdAt").SortDirection("desc").Size(batchSize)
 	if next != "" {
 		req = req.Cursor(next)
 	}
 	data, _, err := req.Execute()
+
 	if err != nil {
-		return nil, "", fmt.Errorf("unable to list scans: %w", err)
+		return nil, nil, fmt.Errorf("unable to list scans: %w", err)
 	}
-	return data.Data, *data.NextCursor, nil
+	return data.Data, data.NextCursor, nil
 }
 
 // GetScan returns a scan by its ID

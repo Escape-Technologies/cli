@@ -41,27 +41,32 @@ ID                                      CREATED AT                  	LINK       
 			return fmt.Errorf("unable to list issues: %w", err)
 		}
 
-		result := []string{"ID\tCREATED AT\tLINK\tSEVERITY\tCATEGORY\tSTATUS\tNAME\tASSET"}
+		result := make([]*v3.IssueSummarized, 0, len(issues))
+		fields := []string{"ID\tCREATED AT\tLINK\tSEVERITY\tCATEGORY\tSTATUS\tNAME\tASSET"}
+
 		for _, issue := range issues {
-			result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s", issue.GetId(), issue.GetCreatedAt(), issue.GetLinks().IssueOverview, issue.GetSeverity(), issue.GetCategory(), issue.GetStatus(), issue.GetName(), issue.GetAsset().Name))
+			result = append(result, &issue)
 		}
 		out.Table(result, func() []string {
-			return result
+			for _, issue := range result {
+				fields = append(fields, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s", issue.GetId(), issue.GetCreatedAt(), issue.GetLinks().IssueOverview, issue.GetSeverity(), issue.GetCategory(), issue.GetStatus(), issue.GetName(), issue.GetAsset().Name))
+			}
+			return fields
 		})
 
 		for next != nil && *next != "" {
-			result = []string{
-				"ID\tCREATED AT\tLINK\tSEVERITY\tCATEGORY\tSTATUS\tNAME\tASSET",
-			}
 			issues, next, err = escape.ListIssues(cmd.Context(), *next, issueStatus, issueSeverity)
 			if err != nil {
 				return fmt.Errorf("unable to list profiles: %w", err)
 			}
 			for _, issue := range issues {
-				result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s", issue.GetId(), issue.GetCreatedAt(), issue.GetLinks().IssueOverview, issue.GetSeverity(), issue.GetCategory(), issue.GetStatus(), issue.GetName(), issue.GetAsset().Name))
+				result = append(result, &issue)
 			}
 			out.Table(result, func() []string {
-				return result
+				for _, issue := range result {
+					fields = append(fields, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s", issue.GetId(), issue.GetCreatedAt(), issue.GetLinks().IssueOverview, issue.GetSeverity(), issue.GetCategory(), issue.GetStatus(), issue.GetName(), issue.GetAsset().Name))
+				}
+				return fields
 			})
 		}
 
