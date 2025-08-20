@@ -122,19 +122,22 @@ func CreateAsset(ctx context.Context, data []byte, assetType string, body interf
 		if strings.HasPrefix(method.Name, "Create") && !strings.HasSuffix(method.Name, "Execute") {
 			if strings.Contains(method.Name, strings.ToUpper(assetType)) {
 				fmt.Println(method.Name)
-				//client, err := newAPIV3Client()
+				client, err := newAPIV3Client()
 				if err != nil {
 					return nil, fmt.Errorf("unable to init client: %w", err)
 				}
 				// Create request object
-				req := method.Func.Call([]reflect.Value{reflect.ValueOf(ctx)})[0]
+				req := method.Func.Call([]reflect.Value{reflect.ValueOf(client.AssetsAPI), reflect.ValueOf(ctx)})[0]
 
 				executeMethod := req.MethodByName("Execute")
 				if !executeMethod.IsValid() {
 					return nil, errors.New("failed to find Execute method")
 				}
 
+				fmt.Println("Executed method: ", method.Name)
+
 				results := executeMethod.Call(nil)
+				fmt.Println(results[1].Interface())
 
 				// Return the response (first return value)
 				return results[0].Interface(), nil

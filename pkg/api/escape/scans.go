@@ -28,7 +28,7 @@ func ListScans(ctx context.Context, profileIDs *[]string, next string) ([]v3.Sca
 	batchSize := 100
 	req = req.SortType("createdAt").SortDirection("desc").Size(batchSize)
 	if next != "" {
-		req = req.Cursor(next)
+		req = req.After(next)
 	}
 	data, _, err := req.Execute()
 
@@ -146,6 +146,7 @@ func CancelScan(ctx context.Context, scanID string) error {
 	if err != nil {
 		return fmt.Errorf("unable to init client: %w", err)
 	}
+
 	_, httpResp, err := client.ScansAPI.CancelScan(ctx, scanID).Execute()
 	if err != nil {
 		if httpResp.StatusCode == http.StatusBadRequest {
