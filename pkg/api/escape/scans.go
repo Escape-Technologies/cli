@@ -35,7 +35,7 @@ func ListScans(ctx context.Context, profileIDs *[]string, next string) ([]v3.Sca
 	if err != nil {
 		return nil, nil, fmt.Errorf("unable to list scans: %w", err)
 	}
-	return data.Data, *data.NextCursor, nil
+	return data.Data, data.NextCursor, nil
 }
 
 // GetScan returns a scan by its ID
