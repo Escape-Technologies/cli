@@ -6,6 +6,7 @@ import (
 	"regexp"
 	"strings"
 	"text/tabwriter"
+	"time"
 
 	"github.com/fatih/color"
 )
@@ -86,6 +87,14 @@ func colorizeStatus(value string) string {
 		return redText(value)
 	case "canceled":
 		return grayText(value)
+	case "deprecated":
+		return yellowText(value)
+	case "monitored":
+		return greenText(value)
+	case "false_positive":
+		return yellowText(value)
+	case "out_of_scope":
+		return grayText(value)
 	default:
 		return noColor(value)
 	}
@@ -99,7 +108,27 @@ func colorizeDate(value string) string {
 	return grayText(value)
 }
 
+func colorizeLastSeen(value string) string {
+	lastSeen, err := time.Parse(time.RFC3339, value)
+	if err != nil {
+		return grayText(value)
+	}
+	//if less than 15 days, return green
+	if time.Since(lastSeen) < 15*24*time.Hour {
+		return greenText(value)
+	}
+	//if less than 30 days, return yellow
+	if time.Since(lastSeen) < 30*24*time.Hour {
+		return yellowText(value)
+	}
+
+	return redText(value)
+}
+
 func colorizeValue(value string, columnName string) string {
+	if value == "[]" || value == "" {
+		return boldText("-")
+	}
 	// handle links
 	urlRegex := regexp.MustCompile(`\b(?:(?:https?|grpc):\/\/)?(?:localhost|(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}|(?:\d{1,3}\.){3}\d{1,3})(?::\d+)?\b`)
 	if urlRegex.MatchString(strings.ToLower(value)) {
@@ -116,10 +145,12 @@ func colorizeValue(value string, columnName string) string {
 		return colorizeStatus(value)
 	case "SEVERITY":
 		return colorizeSeverity(value)
-	case "CATEGORY", "KIND", "STAGE":
+	case "CATEGORY", "KIND", "STAGE", "TYPE", "RISKS":
 		return colorizeEnum(value)
 	case "CREATED AT", "UPDATED AT":
 		return colorizeDate(value)
+	case "LAST SEEN":
+		return colorizeLastSeen(value)
 	case "PROGRESS":
 		return colorizeProgress(value)
 	case "LEVEL":
@@ -169,3 +200,4 @@ func Table(data any, tableMaker func() []string) {
 
 	w.Flush() //nolint:errcheck
 }
+
