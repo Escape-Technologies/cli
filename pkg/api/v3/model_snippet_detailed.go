@@ -31,7 +31,7 @@ type SnippetDetailed struct {
 	// The snippet of the snippet
 	Snippet string `json:"snippet"`
 	// The url of the snippet
-	Url string `json:"url"`
+	Url *string `json:"url,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -41,14 +41,13 @@ type _SnippetDetailed SnippetDetailed
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSnippetDetailed(createdAt string, id string, language string, name string, snippet string, url string) *SnippetDetailed {
+func NewSnippetDetailed(createdAt string, id string, language string, name string, snippet string) *SnippetDetailed {
 	this := SnippetDetailed{}
 	this.CreatedAt = createdAt
 	this.Id = id
 	this.Language = language
 	this.Name = name
 	this.Snippet = snippet
-	this.Url = url
 	return &this
 }
 
@@ -180,28 +179,36 @@ func (o *SnippetDetailed) SetSnippet(v string) {
 	o.Snippet = v
 }
 
-// GetUrl returns the Url field value
+// GetUrl returns the Url field value if set, zero value otherwise.
 func (o *SnippetDetailed) GetUrl() string {
-	if o == nil {
+	if o == nil || IsNil(o.Url) {
 		var ret string
 		return ret
 	}
-
-	return o.Url
+	return *o.Url
 }
 
-// GetUrlOk returns a tuple with the Url field value
+// GetUrlOk returns a tuple with the Url field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SnippetDetailed) GetUrlOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Url) {
 		return nil, false
 	}
-	return &o.Url, true
+	return o.Url, true
 }
 
-// SetUrl sets field value
+// HasUrl returns a boolean if a field has been set.
+func (o *SnippetDetailed) HasUrl() bool {
+	if o != nil && !IsNil(o.Url) {
+		return true
+	}
+
+	return false
+}
+
+// SetUrl gets a reference to the given string and assigns it to the Url field.
 func (o *SnippetDetailed) SetUrl(v string) {
-	o.Url = v
+	o.Url = &v
 }
 
 func (o SnippetDetailed) MarshalJSON() ([]byte, error) {
@@ -219,7 +226,9 @@ func (o SnippetDetailed) ToMap() (map[string]interface{}, error) {
 	toSerialize["language"] = o.Language
 	toSerialize["name"] = o.Name
 	toSerialize["snippet"] = o.Snippet
-	toSerialize["url"] = o.Url
+	if !IsNil(o.Url) {
+		toSerialize["url"] = o.Url
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -238,7 +247,6 @@ func (o *SnippetDetailed) UnmarshalJSON(data []byte) (err error) {
 		"language",
 		"name",
 		"snippet",
-		"url",
 	}
 
 	allProperties := make(map[string]interface{})

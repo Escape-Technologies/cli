@@ -20,8 +20,14 @@ var _ MappedNullable = &EventDetailed{}
 
 // EventDetailed Detailed information about an event
 type EventDetailed struct {
+	// The id of the event
+	Id string `json:"id"`
+	// The date and time the event was created
+	CreatedAt string `json:"createdAt"`
+	// The attachments of the event
+	Attachments []AttachmentDetailed `json:"attachments,omitempty"`
 	// The issues of the event
-	Issues []IssueSummarized `json:"issues,omitempty"`
+	Issues []IssueDetailed `json:"issues,omitempty"`
 	// The number of issues of the event
 	IssuesCount float32 `json:"issuesCount"`
 	Level ENUMPROPERTIESDATAITEMSPROPERTIESLEVEL `json:"level"`
@@ -40,8 +46,10 @@ type _EventDetailed EventDetailed
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewEventDetailed(issuesCount float32, level ENUMPROPERTIESDATAITEMSPROPERTIESLEVEL, stage ENUMPROPERTIESDATAITEMSPROPERTIESSTAGE, title string) *EventDetailed {
+func NewEventDetailed(id string, createdAt string, issuesCount float32, level ENUMPROPERTIESDATAITEMSPROPERTIESLEVEL, stage ENUMPROPERTIESDATAITEMSPROPERTIESSTAGE, title string) *EventDetailed {
 	this := EventDetailed{}
+	this.Id = id
+	this.CreatedAt = createdAt
 	this.IssuesCount = issuesCount
 	this.Level = level
 	this.Stage = stage
@@ -57,10 +65,90 @@ func NewEventDetailedWithDefaults() *EventDetailed {
 	return &this
 }
 
+// GetId returns the Id field value
+func (o *EventDetailed) GetId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Id
+}
+
+// GetIdOk returns a tuple with the Id field value
+// and a boolean to check if the value has been set.
+func (o *EventDetailed) GetIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Id, true
+}
+
+// SetId sets field value
+func (o *EventDetailed) SetId(v string) {
+	o.Id = v
+}
+
+// GetCreatedAt returns the CreatedAt field value
+func (o *EventDetailed) GetCreatedAt() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.CreatedAt
+}
+
+// GetCreatedAtOk returns a tuple with the CreatedAt field value
+// and a boolean to check if the value has been set.
+func (o *EventDetailed) GetCreatedAtOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.CreatedAt, true
+}
+
+// SetCreatedAt sets field value
+func (o *EventDetailed) SetCreatedAt(v string) {
+	o.CreatedAt = v
+}
+
+// GetAttachments returns the Attachments field value if set, zero value otherwise.
+func (o *EventDetailed) GetAttachments() []AttachmentDetailed {
+	if o == nil || IsNil(o.Attachments) {
+		var ret []AttachmentDetailed
+		return ret
+	}
+	return o.Attachments
+}
+
+// GetAttachmentsOk returns a tuple with the Attachments field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EventDetailed) GetAttachmentsOk() ([]AttachmentDetailed, bool) {
+	if o == nil || IsNil(o.Attachments) {
+		return nil, false
+	}
+	return o.Attachments, true
+}
+
+// HasAttachments returns a boolean if a field has been set.
+func (o *EventDetailed) HasAttachments() bool {
+	if o != nil && !IsNil(o.Attachments) {
+		return true
+	}
+
+	return false
+}
+
+// SetAttachments gets a reference to the given []AttachmentDetailed and assigns it to the Attachments field.
+func (o *EventDetailed) SetAttachments(v []AttachmentDetailed) {
+	o.Attachments = v
+}
+
 // GetIssues returns the Issues field value if set, zero value otherwise.
-func (o *EventDetailed) GetIssues() []IssueSummarized {
+func (o *EventDetailed) GetIssues() []IssueDetailed {
 	if o == nil || IsNil(o.Issues) {
-		var ret []IssueSummarized
+		var ret []IssueDetailed
 		return ret
 	}
 	return o.Issues
@@ -68,7 +156,7 @@ func (o *EventDetailed) GetIssues() []IssueSummarized {
 
 // GetIssuesOk returns a tuple with the Issues field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *EventDetailed) GetIssuesOk() ([]IssueSummarized, bool) {
+func (o *EventDetailed) GetIssuesOk() ([]IssueDetailed, bool) {
 	if o == nil || IsNil(o.Issues) {
 		return nil, false
 	}
@@ -84,8 +172,8 @@ func (o *EventDetailed) HasIssues() bool {
 	return false
 }
 
-// SetIssues gets a reference to the given []IssueSummarized and assigns it to the Issues field.
-func (o *EventDetailed) SetIssues(v []IssueSummarized) {
+// SetIssues gets a reference to the given []IssueDetailed and assigns it to the Issues field.
+func (o *EventDetailed) SetIssues(v []IssueDetailed) {
 	o.Issues = v
 }
 
@@ -259,6 +347,11 @@ func (o EventDetailed) MarshalJSON() ([]byte, error) {
 
 func (o EventDetailed) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["id"] = o.Id
+	toSerialize["createdAt"] = o.CreatedAt
+	if !IsNil(o.Attachments) {
+		toSerialize["attachments"] = o.Attachments
+	}
 	if !IsNil(o.Issues) {
 		toSerialize["issues"] = o.Issues
 	}
@@ -285,6 +378,8 @@ func (o *EventDetailed) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"id",
+		"createdAt",
 		"issuesCount",
 		"level",
 		"stage",
@@ -318,6 +413,9 @@ func (o *EventDetailed) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "createdAt")
+		delete(additionalProperties, "attachments")
 		delete(additionalProperties, "issues")
 		delete(additionalProperties, "issuesCount")
 		delete(additionalProperties, "level")
