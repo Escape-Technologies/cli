@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
 	"io"
@@ -183,7 +184,11 @@ var createAssetCmd = &cobra.Command{
 	Example: `escape-cli asset create <test.json`,
 	Long: `Create an asset by JSON.
 Example output:
-Asset 00000000-0000-0000-0000-000000000001 successfully created`,
+ID                                    TYPE  NAME                                     STATUS
+8163b58c-5413-4224-bdae-a0d395c4a766  IPV6  2001:0db8:85a3:0000:0000:8a2e:0370:7334  MONITORED
+		
+for more examples see required fields at https://public.escape.tech/v3/#tag/assets`,
+
 	RunE: func(cmd *cobra.Command, _ []string) error {
 		var data []byte
 
@@ -238,4 +243,6 @@ func init() {
 	assetUpdateCmd.Flags().StringSliceVarP(&assetOwners, "owners", "", []string{}, "list of asset owners (email)")
 	assetUpdateCmd.Flags().StringVarP(&assetStatus, "status", "s", "", fmt.Sprintf("status of the asset: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUSEnumValues))
 	assetUpdateCmd.Flags().StringSliceVarP(&assetTagIDs, "tag-ids", "t", []string{}, "list of tag IDs")
+
+	assetsCmd.AddCommand(createAssetCmd)
 }
