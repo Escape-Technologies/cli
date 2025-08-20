@@ -39,25 +39,28 @@ ID                                      LEVEL    TITLE                      STAG
 		if err != nil {
 			return fmt.Errorf("unable to list events: %w", err)
 		}
-
-		result := []string{"ID\tLEVEL\tTITLE\tSTAGE\tCREATED AT"}
-		for _, event := range events {
-			result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s\t%s", event.GetId(), event.GetLevel(), event.GetTitle(), event.GetStage(), event.GetCreatedAt()))
-		}
+		out.Table(events, func() []string {
+			res := []string{"ID\tCREATED AT\tLEVEL\tSTAGE\tTITLE"}
+			for _, event := range events {
+				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s", event.GetId(), event.GetCreatedAt(), event.GetLevel(), event.GetStage(), event.GetTitle()))
+			}
+			return res
+		})
 
 		for next != nil && *next != "" {
 			events, next, err = escape.ListEvents(cmd.Context(), *next, eventLevels)
+		
 			if err != nil {
 				return fmt.Errorf("unable to list profiles: %w", err)
 			}
-			for _, event := range events {
-				result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s\t%s", event.GetId(), event.GetLevel(), event.GetTitle(), event.GetStage(), event.GetCreatedAt()))
-			}
+			out.Table(events, func() []string {
+				res := []string{"ID\tCREATED AT\tLEVEL\tSTAGE\tTITLE"}
+				for _, event := range events {
+					res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s", event.GetId(), event.GetCreatedAt(), event.GetLevel(), event.GetStage(), event.GetTitle()))
+				}
+				return res
+			})
 		}
-
-		out.Table(result, func() []string {
-			return result
-		})
 
 		return nil
 	},
@@ -81,11 +84,10 @@ ID                                      LEVEL    TITLE                          
 			return fmt.Errorf("unable to get event: %w", err)
 		}
 
-		result := []string{"ID\tLEVEL\tTITLE\tSTAGE\tLINK"}
-		result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s\t%s", event.GetScanId(), event.GetLevel(), event.GetTitle(), event.GetStage(), strings.Replace(event.Scan.GetLinks().ScanIssues, "/issues", "/logs", 1)))
-
-		out.Table(result, func() []string {
-			return result
+		out.Table(event, func() []string {
+			res := []string{"ID\tCREATED AT\tLEVEL\tSTAGE\tTITLE\tLINK"}
+			res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s", event.GetId(), event.GetCreatedAt(), event.GetLevel(), event.GetStage(), event.GetTitle(), strings.Replace(event.Scan.GetLinks().ScanIssues, "/issues", "/logs", 1)))
+			return res
 		})
 
 		return nil
