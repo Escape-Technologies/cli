@@ -208,7 +208,7 @@ for more examples see required fields at https://public.escape.tech/v3/#tag/asse
 			return errors.New("invalid JSON: missing 'asset_type'")
 		}
 
-		response, err := escape.CreateAsset(cmd.Context(), data, strings.ToUpper(typeVal), asset)
+		response, err := escape.CreateAsset(cmd.Context(), data, strings.ToUpper(typeVal))
 		if err != nil {
 			return fmt.Errorf("failed to create asset: %w", err)
 		}
