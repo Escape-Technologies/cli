@@ -33,8 +33,8 @@ var issueListCmd = &cobra.Command{
 	Long: `List issues.
 
 Example output:
-ID                                      CREATED AT                     		  SEVERITY      CATEGORY                  STATUS        NAME                     ASSET
-00000000-0000-0000-0000-000000000001    2025-06-26T06:03:26.128Z              HIGH          XXE Injection            https://gontoz.escape.tech/`,
+ID                                      CREATED AT  SEVERITY  STATUS  NAME                                    ASSET                          LINK
+00000000-0000-0000-0000-000000000001    2025-07-24  INFO      OPEN    Misconfigured CSP Header                https://my.app                 Link`,
 	Example: `escape-cli issues list`, RunE: func(cmd *cobra.Command, _ []string) error {
 		issues, next, err := escape.ListIssues(cmd.Context(), "", issueStatus, issueSeverity)
 		if err != nil {
@@ -42,14 +42,14 @@ ID                                      CREATED AT                     		  SEVER
 		}
 
 		result := make([]*v3.IssueSummarized, 0, len(issues))
-		fields := []string{"ID\tCREATED AT\tSEVERITY\tCATEGORY\tSTATUS\tNAME\tASSET"}
+		fields := []string{"ID\tCREATED AT\tSEVERITY\tSTATUS\tNAME\tASSET\tLINK"}
 
 		for _, issue := range issues {
 			result = append(result, &issue)
 		}
 		out.Table(result, func() []string {
 			for _, issue := range result {
-				fields = append(fields, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s", issue.GetId(), issue.GetCreatedAt(), issue.GetSeverity(), issue.GetCategory(), issue.GetStatus(), issue.GetName(), issue.GetAsset().Name))
+				fields = append(fields, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s", issue.GetId(), out.GetShortDate(issue.GetCreatedAt()), issue.GetSeverity(), issue.GetStatus(), issue.GetName(), issue.GetAsset().Name, issue.GetLinks().IssueOverview))
 			}
 			return fields
 		})
@@ -64,7 +64,7 @@ ID                                      CREATED AT                     		  SEVER
 			}
 			out.Table(result, func() []string {
 				for _, issue := range result {
-					fields = append(fields, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s", issue.GetId(), issue.GetCreatedAt(), issue.GetSeverity(), issue.GetCategory(), issue.GetStatus(), issue.GetName(), issue.GetAsset().Name))
+					fields = append(fields, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s", issue.GetId(), out.GetShortDate(issue.GetCreatedAt()), issue.GetSeverity(), issue.GetStatus(), issue.GetName(), issue.GetAsset().Name, issue.GetLinks().IssueOverview))
 				}
 				return fields
 			})
@@ -92,8 +92,8 @@ ID                                      CREATED AT                  	LINK       
 			return fmt.Errorf("unable to get issue %s: %w", issueID, err)
 		}
 
-		result := []string{"ID\tCREATED AT\tLINK\tSEVERITY\tCATEGORY\tSTATUS\tNAME\tASSET"}
-		result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s", issue.GetId(), issue.GetCreatedAt(), issue.GetLinks().IssueOverview, issue.GetSeverity(), issue.GetCategory(), issue.GetStatus(), issue.GetName(), issue.GetAsset().Name))
+		result := []string{"ID\tCREATED AT\tSEVERITY\tCATEGORY\tSTATUS\tNAME\tASSET\tLINK"}
+		result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s", issue.GetId(), issue.GetCreatedAt(), issue.GetSeverity(), issue.GetCategory(), issue.GetStatus(), issue.GetName(), issue.GetAsset().Name, issue.GetLinks().IssueOverview))
 
 		out.Table(result, func() []string {
 			return result
