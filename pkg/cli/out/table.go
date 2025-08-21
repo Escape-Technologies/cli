@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"regexp"
+	"strconv"
 	"strings"
 	"text/tabwriter"
 	"time"
@@ -136,6 +137,20 @@ func colorizeHelpAll(value string) string {
 		return redText(boldText(value))
 }
 
+func colorizeColor(value string) string {
+	const expectedHexRGBLen = 6
+	if len(value) == expectedHexRGBLen {
+		if r, errR := strconv.ParseInt(value[0:2], 16, 0); errR == nil {
+			if g, errG := strconv.ParseInt(value[2:4], 16, 0); errG == nil {
+				if b, errB := strconv.ParseInt(value[4:6], 16, 0); errB == nil {
+					return fmt.Sprintf("\x1b[38;2;%d;%d;%dm%s\x1b[0m", r, g, b, value)
+				}
+			}
+		}
+	}
+	return grayText(value)
+}
+
 func colorizeValue(value string, columnName string) string {
 	if value == "[]" || value == "" {
 		return boldText("-")
@@ -175,6 +190,8 @@ func colorizeValue(value string, columnName string) string {
 		return grayText(value)
 	case "CRON":
 		return greenText(value)
+	case "COLOR":
+		return colorizeColor(value)
 	}
 
 	// handle boolean values
