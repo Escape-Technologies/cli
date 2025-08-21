@@ -84,13 +84,13 @@ func CreateProfileGraphql(ctx context.Context, data []byte) (interface{}, error)
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
 
-	var payload v3.CreateDastRestProfileRequest
+	var payload v3.ApiCreateDastGraphqlProfileRequest
 	if err := json.Unmarshal(data, &payload); err != nil {
 		return nil, fmt.Errorf("invalid JSON: %w", err)
 	}
 
 	req := client.ProfilesAPI.CreateDastGraphqlProfile(ctx)
-	profile, _, err := req.CreateDastRestProfileRequest(payload).Execute()
+	profile, _, err := req.ApiService.CreateDastGraphqlProfileExecute(payload)
 	if err != nil {
 		return nil, fmt.Errorf("api error: %w", err)
 	}

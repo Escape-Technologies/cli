@@ -29,6 +29,7 @@ type CreateDastRestProfileRequestConfigurationJsonStrAuthenticationUsersInnerCre
 	SessionStorage map[string]map[string]string `json:"session_storage,omitempty"`
 	Actions []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInner `json:"actions,omitempty"`
 	PostLoginActions []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10UsersInnerPostLoginActionsInner `json:"post_login_actions,omitempty"`
+	ExtraInstructions *string `json:"extra_instructions,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -372,6 +373,38 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationUsersInne
 	o.PostLoginActions = v
 }
 
+// GetExtraInstructions returns the ExtraInstructions field value if set, zero value otherwise.
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationUsersInnerCredentials) GetExtraInstructions() string {
+	if o == nil || IsNil(o.ExtraInstructions) {
+		var ret string
+		return ret
+	}
+	return *o.ExtraInstructions
+}
+
+// GetExtraInstructionsOk returns a tuple with the ExtraInstructions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationUsersInnerCredentials) GetExtraInstructionsOk() (*string, bool) {
+	if o == nil || IsNil(o.ExtraInstructions) {
+		return nil, false
+	}
+	return o.ExtraInstructions, true
+}
+
+// HasExtraInstructions returns a boolean if a field has been set.
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationUsersInnerCredentials) HasExtraInstructions() bool {
+	if o != nil && !IsNil(o.ExtraInstructions) {
+		return true
+	}
+
+	return false
+}
+
+// SetExtraInstructions gets a reference to the given string and assigns it to the ExtraInstructions field.
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationUsersInnerCredentials) SetExtraInstructions(v string) {
+	o.ExtraInstructions = &v
+}
+
 func (o CreateDastRestProfileRequestConfigurationJsonStrAuthenticationUsersInnerCredentials) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -412,6 +445,9 @@ func (o CreateDastRestProfileRequestConfigurationJsonStrAuthenticationUsersInner
 	if !IsNil(o.PostLoginActions) {
 		toSerialize["post_login_actions"] = o.PostLoginActions
 	}
+	if !IsNil(o.ExtraInstructions) {
+		toSerialize["extra_instructions"] = o.ExtraInstructions
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -444,6 +480,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationUsersInne
 		delete(additionalProperties, "session_storage")
 		delete(additionalProperties, "actions")
 		delete(additionalProperties, "post_login_actions")
+		delete(additionalProperties, "extra_instructions")
 		o.AdditionalProperties = additionalProperties
 	}
 

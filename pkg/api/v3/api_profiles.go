@@ -1254,7 +1254,7 @@ func (r ApiUpdateProfileSchemaRequest) UpdateProfileSchemaRequest(updateProfileS
 	return r
 }
 
-func (r ApiUpdateProfileSchemaRequest) Execute() (*SchemaDetailed, *http.Response, error) {
+func (r ApiUpdateProfileSchemaRequest) Execute() (*SchemaDetailed1, *http.Response, error) {
 	return r.ApiService.UpdateProfileSchemaExecute(r)
 }
 
@@ -1276,13 +1276,13 @@ func (a *ProfilesAPIService) UpdateProfileSchema(ctx context.Context, profileId 
 }
 
 // Execute executes the request
-//  @return SchemaDetailed
-func (a *ProfilesAPIService) UpdateProfileSchemaExecute(r ApiUpdateProfileSchemaRequest) (*SchemaDetailed, *http.Response, error) {
+//  @return SchemaDetailed1
+func (a *ProfilesAPIService) UpdateProfileSchemaExecute(r ApiUpdateProfileSchemaRequest) (*SchemaDetailed1, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *SchemaDetailed
+		localVarReturnValue  *SchemaDetailed1
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProfilesAPIService.UpdateProfileSchema")

@@ -15,13 +15,13 @@ import (
 	"fmt"
 )
 
-// checks if the CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10 type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10{}
+// checks if the CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12 type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12{}
 
-// CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10 struct for CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10
-type CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10 struct {
-	Type ENUMBROWSERAGENT `json:"type"`
-	Users []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10UsersInner `json:"users"`
+// CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12 struct for CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12
+type CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12 struct {
+	Type ENUMBROWSERUSE `json:"type"`
+	Users []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12UsersInner `json:"users"`
 	LoginUrl string `json:"login_url"`
 	StealthMode *bool `json:"stealth_mode,omitempty"`
 	Extractions []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner `json:"extractions,omitempty"`
@@ -32,32 +32,32 @@ type CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerO
 	AdditionalProperties map[string]interface{}
 }
 
-type _CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10 CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10
+type _CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12 CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12
 
-// NewCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10 instantiates a new CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10 object
+// NewCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12 instantiates a new CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12 object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10(type_ ENUMBROWSERAGENT, users []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10UsersInner, loginUrl string) *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10 {
-	this := CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10{}
+func NewCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12(type_ ENUMBROWSERUSE, users []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12UsersInner, loginUrl string) *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12 {
+	this := CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12{}
 	this.Type = type_
 	this.Users = users
 	this.LoginUrl = loginUrl
 	return &this
 }
 
-// NewCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10WithDefaults instantiates a new CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10 object
+// NewCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12WithDefaults instantiates a new CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12 object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10WithDefaults() *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10 {
-	this := CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10{}
+func NewCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12WithDefaults() *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12 {
+	this := CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12{}
 	return &this
 }
 
 // GetType returns the Type field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10) GetType() ENUMBROWSERAGENT {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12) GetType() ENUMBROWSERUSE {
 	if o == nil {
-		var ret ENUMBROWSERAGENT
+		var ret ENUMBROWSERUSE
 		return ret
 	}
 
@@ -66,7 +66,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsIn
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10) GetTypeOk() (*ENUMBROWSERAGENT, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12) GetTypeOk() (*ENUMBROWSERUSE, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -74,14 +74,14 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsIn
 }
 
 // SetType sets field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10) SetType(v ENUMBROWSERAGENT) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12) SetType(v ENUMBROWSERUSE) {
 	o.Type = v
 }
 
 // GetUsers returns the Users field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10) GetUsers() []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10UsersInner {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12) GetUsers() []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12UsersInner {
 	if o == nil {
-		var ret []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10UsersInner
+		var ret []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12UsersInner
 		return ret
 	}
 
@@ -90,7 +90,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsIn
 
 // GetUsersOk returns a tuple with the Users field value
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10) GetUsersOk() ([]CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10UsersInner, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12) GetUsersOk() ([]CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12UsersInner, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -98,12 +98,12 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsIn
 }
 
 // SetUsers sets field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10) SetUsers(v []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10UsersInner) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12) SetUsers(v []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12UsersInner) {
 	o.Users = v
 }
 
 // GetLoginUrl returns the LoginUrl field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10) GetLoginUrl() string {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12) GetLoginUrl() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -114,7 +114,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsIn
 
 // GetLoginUrlOk returns a tuple with the LoginUrl field value
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10) GetLoginUrlOk() (*string, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12) GetLoginUrlOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -122,12 +122,12 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsIn
 }
 
 // SetLoginUrl sets field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10) SetLoginUrl(v string) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12) SetLoginUrl(v string) {
 	o.LoginUrl = v
 }
 
 // GetStealthMode returns the StealthMode field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10) GetStealthMode() bool {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12) GetStealthMode() bool {
 	if o == nil || IsNil(o.StealthMode) {
 		var ret bool
 		return ret
@@ -137,7 +137,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsIn
 
 // GetStealthModeOk returns a tuple with the StealthMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10) GetStealthModeOk() (*bool, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12) GetStealthModeOk() (*bool, bool) {
 	if o == nil || IsNil(o.StealthMode) {
 		return nil, false
 	}
@@ -145,7 +145,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsIn
 }
 
 // HasStealthMode returns a boolean if a field has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10) HasStealthMode() bool {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12) HasStealthMode() bool {
 	if o != nil && !IsNil(o.StealthMode) {
 		return true
 	}
@@ -154,12 +154,12 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsIn
 }
 
 // SetStealthMode gets a reference to the given bool and assigns it to the StealthMode field.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10) SetStealthMode(v bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12) SetStealthMode(v bool) {
 	o.StealthMode = &v
 }
 
 // GetExtractions returns the Extractions field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10) GetExtractions() []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12) GetExtractions() []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner {
 	if o == nil || IsNil(o.Extractions) {
 		var ret []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner
 		return ret
@@ -169,7 +169,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsIn
 
 // GetExtractionsOk returns a tuple with the Extractions field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10) GetExtractionsOk() ([]CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12) GetExtractionsOk() ([]CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner, bool) {
 	if o == nil || IsNil(o.Extractions) {
 		return nil, false
 	}
@@ -177,7 +177,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsIn
 }
 
 // HasExtractions returns a boolean if a field has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10) HasExtractions() bool {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12) HasExtractions() bool {
 	if o != nil && !IsNil(o.Extractions) {
 		return true
 	}
@@ -186,12 +186,12 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsIn
 }
 
 // SetExtractions gets a reference to the given []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner and assigns it to the Extractions field.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10) SetExtractions(v []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12) SetExtractions(v []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner) {
 	o.Extractions = v
 }
 
 // GetInjections returns the Injections field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10) GetInjections() CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10Injections {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12) GetInjections() CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10Injections {
 	if o == nil || IsNil(o.Injections.Get()) {
 		var ret CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10Injections
 		return ret
@@ -202,7 +202,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsIn
 // GetInjectionsOk returns a tuple with the Injections field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10) GetInjectionsOk() (*CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10Injections, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12) GetInjectionsOk() (*CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10Injections, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -210,7 +210,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsIn
 }
 
 // HasInjections returns a boolean if a field has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10) HasInjections() bool {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12) HasInjections() bool {
 	if o != nil && o.Injections.IsSet() {
 		return true
 	}
@@ -219,21 +219,21 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsIn
 }
 
 // SetInjections gets a reference to the given NullableCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10Injections and assigns it to the Injections field.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10) SetInjections(v CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10Injections) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12) SetInjections(v CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10Injections) {
 	o.Injections.Set(&v)
 }
 // SetInjectionsNil sets the value for Injections to be an explicit nil
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10) SetInjectionsNil() {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12) SetInjectionsNil() {
 	o.Injections.Set(nil)
 }
 
 // UnsetInjections ensures that no value is present for Injections, not even an explicit nil
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10) UnsetInjections() {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12) UnsetInjections() {
 	o.Injections.Unset()
 }
 
 // GetAutoExtractionUrls returns the AutoExtractionUrls field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10) GetAutoExtractionUrls() []string {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12) GetAutoExtractionUrls() []string {
 	if o == nil || IsNil(o.AutoExtractionUrls) {
 		var ret []string
 		return ret
@@ -243,7 +243,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsIn
 
 // GetAutoExtractionUrlsOk returns a tuple with the AutoExtractionUrls field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10) GetAutoExtractionUrlsOk() ([]string, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12) GetAutoExtractionUrlsOk() ([]string, bool) {
 	if o == nil || IsNil(o.AutoExtractionUrls) {
 		return nil, false
 	}
@@ -251,7 +251,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsIn
 }
 
 // HasAutoExtractionUrls returns a boolean if a field has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10) HasAutoExtractionUrls() bool {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12) HasAutoExtractionUrls() bool {
 	if o != nil && !IsNil(o.AutoExtractionUrls) {
 		return true
 	}
@@ -260,12 +260,12 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsIn
 }
 
 // SetAutoExtractionUrls gets a reference to the given []string and assigns it to the AutoExtractionUrls field.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10) SetAutoExtractionUrls(v []string) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12) SetAutoExtractionUrls(v []string) {
 	o.AutoExtractionUrls = v
 }
 
 // GetLoggedInDetectorText returns the LoggedInDetectorText field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10) GetLoggedInDetectorText() string {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12) GetLoggedInDetectorText() string {
 	if o == nil || IsNil(o.LoggedInDetectorText) {
 		var ret string
 		return ret
@@ -275,7 +275,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsIn
 
 // GetLoggedInDetectorTextOk returns a tuple with the LoggedInDetectorText field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10) GetLoggedInDetectorTextOk() (*string, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12) GetLoggedInDetectorTextOk() (*string, bool) {
 	if o == nil || IsNil(o.LoggedInDetectorText) {
 		return nil, false
 	}
@@ -283,7 +283,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsIn
 }
 
 // HasLoggedInDetectorText returns a boolean if a field has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10) HasLoggedInDetectorText() bool {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12) HasLoggedInDetectorText() bool {
 	if o != nil && !IsNil(o.LoggedInDetectorText) {
 		return true
 	}
@@ -292,12 +292,12 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsIn
 }
 
 // SetLoggedInDetectorText gets a reference to the given string and assigns it to the LoggedInDetectorText field.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10) SetLoggedInDetectorText(v string) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12) SetLoggedInDetectorText(v string) {
 	o.LoggedInDetectorText = &v
 }
 
 // GetLoggedInDetectorTimeout returns the LoggedInDetectorTimeout field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10) GetLoggedInDetectorTimeout() float32 {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12) GetLoggedInDetectorTimeout() float32 {
 	if o == nil || IsNil(o.LoggedInDetectorTimeout) {
 		var ret float32
 		return ret
@@ -307,7 +307,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsIn
 
 // GetLoggedInDetectorTimeoutOk returns a tuple with the LoggedInDetectorTimeout field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10) GetLoggedInDetectorTimeoutOk() (*float32, bool) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12) GetLoggedInDetectorTimeoutOk() (*float32, bool) {
 	if o == nil || IsNil(o.LoggedInDetectorTimeout) {
 		return nil, false
 	}
@@ -315,7 +315,7 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsIn
 }
 
 // HasLoggedInDetectorTimeout returns a boolean if a field has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10) HasLoggedInDetectorTimeout() bool {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12) HasLoggedInDetectorTimeout() bool {
 	if o != nil && !IsNil(o.LoggedInDetectorTimeout) {
 		return true
 	}
@@ -324,11 +324,11 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsIn
 }
 
 // SetLoggedInDetectorTimeout gets a reference to the given float32 and assigns it to the LoggedInDetectorTimeout field.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10) SetLoggedInDetectorTimeout(v float32) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12) SetLoggedInDetectorTimeout(v float32) {
 	o.LoggedInDetectorTimeout = &v
 }
 
-func (o CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10) MarshalJSON() ([]byte, error) {
+func (o CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -336,7 +336,7 @@ func (o CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInn
 	return json.Marshal(toSerialize)
 }
 
-func (o CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10) ToMap() (map[string]interface{}, error) {
+func (o CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["type"] = o.Type
 	toSerialize["users"] = o.Users
@@ -367,7 +367,7 @@ func (o CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInn
 	return toSerialize, nil
 }
 
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10) UnmarshalJSON(data []byte) (err error) {
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -391,15 +391,15 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsIn
 		}
 	}
 
-	varCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10 := _CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10{}
+	varCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12 := _CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12{}
 
-	err = json.Unmarshal(data, &varCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10)
+	err = json.Unmarshal(data, &varCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12)
 
 	if err != nil {
 		return err
 	}
 
-	*o = CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10(varCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10)
+	*o = CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12(varCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -419,38 +419,38 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsIn
 	return err
 }
 
-type NullableCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10 struct {
-	value *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10
+type NullableCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12 struct {
+	value *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12
 	isSet bool
 }
 
-func (v NullableCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10) Get() *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10 {
+func (v NullableCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12) Get() *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12 {
 	return v.value
 }
 
-func (v *NullableCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10) Set(val *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10) {
+func (v *NullableCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12) Set(val *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10) IsSet() bool {
+func (v NullableCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10) Unset() {
+func (v *NullableCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10(val *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10) *NullableCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10 {
-	return &NullableCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10{value: val, isSet: true}
+func NewNullableCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12(val *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12) *NullableCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12 {
+	return &NullableCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12{value: val, isSet: true}
 }
 
-func (v NullableCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10) MarshalJSON() ([]byte, error) {
+func (v NullableCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10) UnmarshalJSON(src []byte) error {
+func (v *NullableCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf12) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

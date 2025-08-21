@@ -34,7 +34,7 @@ type StartScanRequest struct {
 	CommitAuthorProfilePictureLink *string `json:"commitAuthorProfilePictureLink,omitempty"`
 	// The configuration override to use
 	ConfigurationOverride map[string]interface{} `json:"configurationOverride,omitempty"`
-	Initiator ENUMPROPERTIESDATAITEMSPROPERTIESINITIATORSITEMS `json:"initiator"`
+	Initiator *ENUMPROPERTIESINITIATOR `json:"initiator,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -44,10 +44,11 @@ type _StartScanRequest StartScanRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewStartScanRequest(profileId string, initiator ENUMPROPERTIESDATAITEMSPROPERTIESINITIATORSITEMS) *StartScanRequest {
+func NewStartScanRequest(profileId string) *StartScanRequest {
 	this := StartScanRequest{}
 	this.ProfileId = profileId
-	this.Initiator = initiator
+	var initiator ENUMPROPERTIESINITIATOR = ENUMPROPERTIESINITIATOR_CI
+	this.Initiator = &initiator
 	return &this
 }
 
@@ -56,6 +57,8 @@ func NewStartScanRequest(profileId string, initiator ENUMPROPERTIESDATAITEMSPROP
 // but it doesn't guarantee that properties required by API are set
 func NewStartScanRequestWithDefaults() *StartScanRequest {
 	this := StartScanRequest{}
+	var initiator ENUMPROPERTIESINITIATOR = ENUMPROPERTIESINITIATOR_CI
+	this.Initiator = &initiator
 	return &this
 }
 
@@ -275,28 +278,36 @@ func (o *StartScanRequest) SetConfigurationOverride(v map[string]interface{}) {
 	o.ConfigurationOverride = v
 }
 
-// GetInitiator returns the Initiator field value
-func (o *StartScanRequest) GetInitiator() ENUMPROPERTIESDATAITEMSPROPERTIESINITIATORSITEMS {
-	if o == nil {
-		var ret ENUMPROPERTIESDATAITEMSPROPERTIESINITIATORSITEMS
+// GetInitiator returns the Initiator field value if set, zero value otherwise.
+func (o *StartScanRequest) GetInitiator() ENUMPROPERTIESINITIATOR {
+	if o == nil || IsNil(o.Initiator) {
+		var ret ENUMPROPERTIESINITIATOR
 		return ret
 	}
-
-	return o.Initiator
+	return *o.Initiator
 }
 
-// GetInitiatorOk returns a tuple with the Initiator field value
+// GetInitiatorOk returns a tuple with the Initiator field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *StartScanRequest) GetInitiatorOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESINITIATORSITEMS, bool) {
-	if o == nil {
+func (o *StartScanRequest) GetInitiatorOk() (*ENUMPROPERTIESINITIATOR, bool) {
+	if o == nil || IsNil(o.Initiator) {
 		return nil, false
 	}
-	return &o.Initiator, true
+	return o.Initiator, true
 }
 
-// SetInitiator sets field value
-func (o *StartScanRequest) SetInitiator(v ENUMPROPERTIESDATAITEMSPROPERTIESINITIATORSITEMS) {
-	o.Initiator = v
+// HasInitiator returns a boolean if a field has been set.
+func (o *StartScanRequest) HasInitiator() bool {
+	if o != nil && !IsNil(o.Initiator) {
+		return true
+	}
+
+	return false
+}
+
+// SetInitiator gets a reference to the given ENUMPROPERTIESINITIATOR and assigns it to the Initiator field.
+func (o *StartScanRequest) SetInitiator(v ENUMPROPERTIESINITIATOR) {
+	o.Initiator = &v
 }
 
 func (o StartScanRequest) MarshalJSON() ([]byte, error) {
@@ -328,7 +339,9 @@ func (o StartScanRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ConfigurationOverride) {
 		toSerialize["configurationOverride"] = o.ConfigurationOverride
 	}
-	toSerialize["initiator"] = o.Initiator
+	if !IsNil(o.Initiator) {
+		toSerialize["initiator"] = o.Initiator
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -343,7 +356,6 @@ func (o *StartScanRequest) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"profileId",
-		"initiator",
 	}
 
 	allProperties := make(map[string]interface{})
