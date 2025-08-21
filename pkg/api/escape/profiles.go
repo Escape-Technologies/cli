@@ -2,6 +2,7 @@ package escape
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 
 	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
@@ -37,4 +38,64 @@ func GetProfile(ctx context.Context, profileID string) (*v3.ProfileDetailed, err
 		return nil, fmt.Errorf("api error: %w", err)
 	}
 	return data, nil
+}
+
+// CreateProfileRest creates a profile for a REST application
+func CreateProfileRest(ctx context.Context, data []byte) (interface{}, error) {
+	client, err := newAPIV3Client()
+	if err != nil {
+		return nil, fmt.Errorf("unable to init client: %w", err)
+	}
+
+	var payload v3.CreateDastRestProfileRequest
+	if err := json.Unmarshal(data, &payload); err != nil {
+		return nil, fmt.Errorf("invalid JSON: %w", err)
+	}
+
+	req := client.ProfilesAPI.CreateDastRestProfile(ctx)
+	profile, _, err := req.CreateDastRestProfileRequest(payload).Execute()
+	if err != nil {
+		return nil, fmt.Errorf("api error: %w", err)
+	}
+	return profile, nil
+}
+
+// CreateProfileWebapp creates a profile for a web application
+func CreateProfileWebapp(ctx context.Context, data []byte) (interface{}, error) {
+	client, err := newAPIV3Client()
+	if err != nil {
+		return nil, fmt.Errorf("unable to init client: %w", err)
+	}
+
+	var payload v3.CreateDastWebAppProfileRequest
+	if err := json.Unmarshal(data, &payload); err != nil {
+		return nil, fmt.Errorf("invalid JSON: %w", err)
+	}
+
+	req := client.ProfilesAPI.CreateDastWebAppProfile(ctx)
+	profile, _, err := req.CreateDastWebAppProfileRequest(payload).Execute()
+	if err != nil {
+		return nil, fmt.Errorf("api error: %w", err)
+	}
+	return profile, nil
+}
+
+// CreateProfileGraphql creates a profile for a GraphQL application
+func CreateProfileGraphql(ctx context.Context, data []byte) (interface{}, error) {
+	client, err := newAPIV3Client()
+	if err != nil {
+		return nil, fmt.Errorf("unable to init client: %w", err)
+	}
+
+	var payload v3.ApiCreateDastGraphqlProfileRequest
+	if err := json.Unmarshal(data, &payload); err != nil {
+		return nil, fmt.Errorf("invalid JSON: %w", err)
+	}
+
+	req := client.ProfilesAPI.CreateDastGraphqlProfile(ctx)
+	profile, _, err := req.ApiService.CreateDastGraphqlProfileExecute(payload)
+	if err != nil {
+		return nil, fmt.Errorf("api error: %w", err)
+	}
+	return profile, nil
 }

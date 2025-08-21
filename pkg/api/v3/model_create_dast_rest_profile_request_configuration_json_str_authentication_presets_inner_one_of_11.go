@@ -22,11 +22,11 @@ var _ MappedNullable = &CreateDastRestProfileRequestConfigurationJsonStrAuthenti
 type CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf11 struct {
 	Type ENUMBROWSERACTIONS `json:"type"`
 	Users []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf11UsersInner `json:"users"`
+	LoginUrl string `json:"login_url"`
+	StealthMode *bool `json:"stealth_mode,omitempty"`
 	Extractions []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner `json:"extractions,omitempty"`
 	Injections NullableCreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf10Injections `json:"injections,omitempty"`
-	StealthMode *bool `json:"stealth_mode,omitempty"`
 	AutoExtractionUrls []string `json:"auto_extraction_urls,omitempty"`
-	LoginUrl string `json:"login_url"`
 	LoggedInDetectorText *string `json:"logged_in_detector_text,omitempty"`
 	LoggedInDetectorTimeout *float32 `json:"logged_in_detector_timeout,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -100,6 +100,62 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsIn
 // SetUsers sets field value
 func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf11) SetUsers(v []CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf11UsersInner) {
 	o.Users = v
+}
+
+// GetLoginUrl returns the LoginUrl field value
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf11) GetLoginUrl() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.LoginUrl
+}
+
+// GetLoginUrlOk returns a tuple with the LoginUrl field value
+// and a boolean to check if the value has been set.
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf11) GetLoginUrlOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.LoginUrl, true
+}
+
+// SetLoginUrl sets field value
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf11) SetLoginUrl(v string) {
+	o.LoginUrl = v
+}
+
+// GetStealthMode returns the StealthMode field value if set, zero value otherwise.
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf11) GetStealthMode() bool {
+	if o == nil || IsNil(o.StealthMode) {
+		var ret bool
+		return ret
+	}
+	return *o.StealthMode
+}
+
+// GetStealthModeOk returns a tuple with the StealthMode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf11) GetStealthModeOk() (*bool, bool) {
+	if o == nil || IsNil(o.StealthMode) {
+		return nil, false
+	}
+	return o.StealthMode, true
+}
+
+// HasStealthMode returns a boolean if a field has been set.
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf11) HasStealthMode() bool {
+	if o != nil && !IsNil(o.StealthMode) {
+		return true
+	}
+
+	return false
+}
+
+// SetStealthMode gets a reference to the given bool and assigns it to the StealthMode field.
+func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf11) SetStealthMode(v bool) {
+	o.StealthMode = &v
 }
 
 // GetExtractions returns the Extractions field value if set, zero value otherwise.
@@ -176,38 +232,6 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsIn
 	o.Injections.Unset()
 }
 
-// GetStealthMode returns the StealthMode field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf11) GetStealthMode() bool {
-	if o == nil || IsNil(o.StealthMode) {
-		var ret bool
-		return ret
-	}
-	return *o.StealthMode
-}
-
-// GetStealthModeOk returns a tuple with the StealthMode field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf11) GetStealthModeOk() (*bool, bool) {
-	if o == nil || IsNil(o.StealthMode) {
-		return nil, false
-	}
-	return o.StealthMode, true
-}
-
-// HasStealthMode returns a boolean if a field has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf11) HasStealthMode() bool {
-	if o != nil && !IsNil(o.StealthMode) {
-		return true
-	}
-
-	return false
-}
-
-// SetStealthMode gets a reference to the given bool and assigns it to the StealthMode field.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf11) SetStealthMode(v bool) {
-	o.StealthMode = &v
-}
-
 // GetAutoExtractionUrls returns the AutoExtractionUrls field value if set, zero value otherwise.
 func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf11) GetAutoExtractionUrls() []string {
 	if o == nil || IsNil(o.AutoExtractionUrls) {
@@ -238,30 +262,6 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsIn
 // SetAutoExtractionUrls gets a reference to the given []string and assigns it to the AutoExtractionUrls field.
 func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf11) SetAutoExtractionUrls(v []string) {
 	o.AutoExtractionUrls = v
-}
-
-// GetLoginUrl returns the LoginUrl field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf11) GetLoginUrl() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.LoginUrl
-}
-
-// GetLoginUrlOk returns a tuple with the LoginUrl field value
-// and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf11) GetLoginUrlOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.LoginUrl, true
-}
-
-// SetLoginUrl sets field value
-func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInnerOneOf11) SetLoginUrl(v string) {
-	o.LoginUrl = v
 }
 
 // GetLoggedInDetectorText returns the LoggedInDetectorText field value if set, zero value otherwise.
@@ -340,19 +340,19 @@ func (o CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsInn
 	toSerialize := map[string]interface{}{}
 	toSerialize["type"] = o.Type
 	toSerialize["users"] = o.Users
+	toSerialize["login_url"] = o.LoginUrl
+	if !IsNil(o.StealthMode) {
+		toSerialize["stealth_mode"] = o.StealthMode
+	}
 	if !IsNil(o.Extractions) {
 		toSerialize["extractions"] = o.Extractions
 	}
 	if o.Injections.IsSet() {
 		toSerialize["injections"] = o.Injections.Get()
 	}
-	if !IsNil(o.StealthMode) {
-		toSerialize["stealth_mode"] = o.StealthMode
-	}
 	if !IsNil(o.AutoExtractionUrls) {
 		toSerialize["auto_extraction_urls"] = o.AutoExtractionUrls
 	}
-	toSerialize["login_url"] = o.LoginUrl
 	if !IsNil(o.LoggedInDetectorText) {
 		toSerialize["logged_in_detector_text"] = o.LoggedInDetectorText
 	}
@@ -406,11 +406,11 @@ func (o *CreateDastRestProfileRequestConfigurationJsonStrAuthenticationPresetsIn
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "type")
 		delete(additionalProperties, "users")
+		delete(additionalProperties, "login_url")
+		delete(additionalProperties, "stealth_mode")
 		delete(additionalProperties, "extractions")
 		delete(additionalProperties, "injections")
-		delete(additionalProperties, "stealth_mode")
 		delete(additionalProperties, "auto_extraction_urls")
-		delete(additionalProperties, "login_url")
 		delete(additionalProperties, "logged_in_detector_text")
 		delete(additionalProperties, "logged_in_detector_timeout")
 		o.AdditionalProperties = additionalProperties

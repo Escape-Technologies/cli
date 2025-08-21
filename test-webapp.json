@@ -1,0 +1,8 @@
+{
+  "assetId": "00546e7d-03ec-44a0-9a67-1a2425346c8a",
+  "configurationJsonStr": {
+    "url": "https://visage-test-app.tools.escape.tech/"
+  },
+  "mode": "readOnly",
+  "name": "test-cli-v3-webapp"
+}

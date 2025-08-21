@@ -39,7 +39,7 @@ type ProfileDetailed struct {
 	// The coverage of the profile
 	Coverage *float32 `json:"coverage,omitempty"`
 	ActiveConfiguration ConfigurationDetailed `json:"activeConfiguration"`
-	ActiveSchema SchemaDetailed `json:"activeSchema"`
+	ActiveSchema *SchemaDetailed `json:"activeSchema,omitempty"`
 	Asset AssetDetailed `json:"asset"`
 	LastResourceScan *ScanDetailed `json:"lastResourceScan,omitempty"`
 	LastSuccessfulResourceScan *ScanDetailed `json:"lastSuccessfulResourceScan,omitempty"`
@@ -56,7 +56,7 @@ type _ProfileDetailed ProfileDetailed
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProfileDetailed(id string, name string, scannerKind string, createdAt string, updatedAt string, activeConfiguration ConfigurationDetailed, activeSchema SchemaDetailed, asset AssetDetailed, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, statistics StatisticsDetailed, links ProfileSummarizedLinks) *ProfileDetailed {
+func NewProfileDetailed(id string, name string, scannerKind string, createdAt string, updatedAt string, activeConfiguration ConfigurationDetailed, asset AssetDetailed, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, statistics StatisticsDetailed, links ProfileSummarizedLinks) *ProfileDetailed {
 	this := ProfileDetailed{}
 	this.Id = id
 	this.Name = name
@@ -64,7 +64,6 @@ func NewProfileDetailed(id string, name string, scannerKind string, createdAt st
 	this.CreatedAt = createdAt
 	this.UpdatedAt = updatedAt
 	this.ActiveConfiguration = activeConfiguration
-	this.ActiveSchema = activeSchema
 	this.Asset = asset
 	this.Risks = risks
 	this.Statistics = statistics
@@ -352,28 +351,36 @@ func (o *ProfileDetailed) SetActiveConfiguration(v ConfigurationDetailed) {
 	o.ActiveConfiguration = v
 }
 
-// GetActiveSchema returns the ActiveSchema field value
+// GetActiveSchema returns the ActiveSchema field value if set, zero value otherwise.
 func (o *ProfileDetailed) GetActiveSchema() SchemaDetailed {
-	if o == nil {
+	if o == nil || IsNil(o.ActiveSchema) {
 		var ret SchemaDetailed
 		return ret
 	}
-
-	return o.ActiveSchema
+	return *o.ActiveSchema
 }
 
-// GetActiveSchemaOk returns a tuple with the ActiveSchema field value
+// GetActiveSchemaOk returns a tuple with the ActiveSchema field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ProfileDetailed) GetActiveSchemaOk() (*SchemaDetailed, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.ActiveSchema) {
 		return nil, false
 	}
-	return &o.ActiveSchema, true
+	return o.ActiveSchema, true
 }
 
-// SetActiveSchema sets field value
+// HasActiveSchema returns a boolean if a field has been set.
+func (o *ProfileDetailed) HasActiveSchema() bool {
+	if o != nil && !IsNil(o.ActiveSchema) {
+		return true
+	}
+
+	return false
+}
+
+// SetActiveSchema gets a reference to the given SchemaDetailed and assigns it to the ActiveSchema field.
 func (o *ProfileDetailed) SetActiveSchema(v SchemaDetailed) {
-	o.ActiveSchema = v
+	o.ActiveSchema = &v
 }
 
 // GetAsset returns the Asset field value
@@ -564,7 +571,9 @@ func (o ProfileDetailed) ToMap() (map[string]interface{}, error) {
 		toSerialize["coverage"] = o.Coverage
 	}
 	toSerialize["activeConfiguration"] = o.ActiveConfiguration
-	toSerialize["activeSchema"] = o.ActiveSchema
+	if !IsNil(o.ActiveSchema) {
+		toSerialize["activeSchema"] = o.ActiveSchema
+	}
 	toSerialize["asset"] = o.Asset
 	if !IsNil(o.LastResourceScan) {
 		toSerialize["lastResourceScan"] = o.LastResourceScan
@@ -594,7 +603,6 @@ func (o *ProfileDetailed) UnmarshalJSON(data []byte) (err error) {
 		"createdAt",
 		"updatedAt",
 		"activeConfiguration",
-		"activeSchema",
 		"asset",
 		"risks",
 		"statistics",
