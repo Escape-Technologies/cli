@@ -159,7 +159,7 @@ func colorizeValue(value string, columnName string) string {
 		return colorizeStatus(value)
 	case "SEVERITY":
 		return colorizeSeverity(value)
-	case "CATEGORY", "KIND", "STAGE", "TYPE", "RISKS":
+	case "CATEGORY", "KIND", "STAGE", "TYPE", "RISKS", "INITIATORS":
 		return colorizeEnum(value)
 	case "CREATED AT", "UPDATED AT":
 		return colorizeDate(value)
@@ -173,6 +173,8 @@ func colorizeValue(value string, columnName string) string {
 		return colorizeHelpAll(value)
 	case "DESCRIPTION":
 		return grayText(value)
+	case "CRON":
+		return greenText(value)
 	}
 
 	// handle boolean values
