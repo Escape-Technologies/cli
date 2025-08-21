@@ -40,6 +40,7 @@ func GetProfile(ctx context.Context, profileID string) (*v3.ProfileDetailed, err
 	return data, nil
 }
 
+// CreateProfileRest creates a profile for a REST application
 func CreateProfileRest(ctx context.Context, data []byte) (interface{}, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
@@ -59,6 +60,7 @@ func CreateProfileRest(ctx context.Context, data []byte) (interface{}, error) {
 	return profile, nil
 }
 
+// CreateProfileWebapp creates a profile for a web application
 func CreateProfileWebapp(ctx context.Context, data []byte) (interface{}, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
@@ -78,6 +80,7 @@ func CreateProfileWebapp(ctx context.Context, data []byte) (interface{}, error) 
 	return profile, nil
 }
 
+// CreateProfileGraphql creates a profile for a GraphQL application
 func CreateProfileGraphql(ctx context.Context, data []byte) (interface{}, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
