@@ -95,7 +95,7 @@ func StartScan(
 		CommitBranch:                   &commitBranch,
 		CommitAuthor:                   &commitAuthor,
 		CommitAuthorProfilePictureLink: &commitAuthorProfilePictureLink,
-		Initiator:                      initiator,
+		Initiator:                      (*v3.ENUMPROPERTIESINITIATOR)(&initiator),
 		ConfigurationOverride:          configurationOverride,
 		AdditionalProperties:           additionalProperties,
 	}
