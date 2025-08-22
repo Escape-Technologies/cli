@@ -28,7 +28,7 @@ func ListScans(ctx context.Context, profileIDs *[]string, next string) ([]v3.Sca
 	batchSize := 100
 	req = req.SortType("createdAt").SortDirection("desc").Size(batchSize)
 	if next != "" {
-		req = req.After(next)
+		req = req.Cursor(next)
 	}
 	data, _, err := req.Execute()
 
