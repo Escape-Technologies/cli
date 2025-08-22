@@ -336,22 +336,6 @@ ID                                      SEVERITY    TYPE    CATEGORY            
 	},
 }
 
-var scanDownloadCmd = &cobra.Command{
-	Use:     "download scan-id archive-path",
-	Example: "escape-cli scans download 00000000-0000-0000-0000-000000000000 ./exchanges.zip",
-	Aliases: []string{"dl", "zip"},
-	Args:    cobra.ExactArgs(2), //nolint:mnd
-	Short:   "Download scan results",
-	Long:    "Download a scan result exchange archive (zip export)",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		err := escape.DownloadScanExchangesZip(cmd.Context(), args[0], args[1])
-		if err != nil {
-			return fmt.Errorf("unable to download scan exchanges zip: %w", err)
-		}
-		return nil
-	},
-}
-
 func init() {
 	scansCmd.AddCommand(scansListCmd)
 	scansListCmd.PersistentFlags().StringSliceVarP(&profileID, "profile-id", "p", []string{}, "profile IDs")
@@ -364,7 +348,6 @@ func init() {
 	scanStartCmd.PersistentFlags().StringVarP(&scanStartCmdConfigurationOverride, "override", "c", "", "configuration override")
 	scansCmd.AddCommand(scanStartCmd)
 	scansCmd.AddCommand(scanGetCmd)
-	scansCmd.AddCommand(scanDownloadCmd)
 	scansCmd.AddCommand(scanIssuesCmd)
 	scansCmd.AddCommand(scanWatchCmd)
 	scansCmd.AddCommand(scanCancelCmd)
