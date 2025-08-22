@@ -8,21 +8,42 @@ import (
 	"strings"
 	"text/tabwriter"
 	"time"
-
-	"github.com/fatih/color"
 )
 
-var (
-	greenText  = color.New(color.FgGreen).SprintFunc()
-	linkText   = color.New(color.FgBlue).SprintFunc()
-	cyanText   = color.New(color.FgCyan).SprintFunc()
-	yellowText = color.New(color.FgYellow).SprintFunc()
-	redText    = color.New(color.FgRed).SprintFunc()
-	grayText   = color.New(color.FgHiBlack).SprintFunc()
-	boldText   = color.New(color.Bold).SprintFunc()
-	noColor    = color.New(color.Reset).SprintFunc()
-	idText     = color.New(color.FgHiMagenta).SprintFunc()
+const (
+	ansiReset       = "\x1b[0m"
+	ansiFgDefault   = "\x1b[39m"
+	targetOverhead = 29
 )
+
+func makeColored(value string, prefix string) string {
+	base := prefix + value + ansiReset
+	used := len(prefix) + len(ansiReset)
+	remaining := max(0, targetOverhead-used)
+	var b strings.Builder
+	b.WriteString(base)
+	for remaining > 0 {
+		if remaining%4 == 0 {
+			b.WriteString(ansiReset)
+			remaining -= 4
+			continue
+		}
+		b.WriteString(ansiFgDefault)
+		remaining -= 5
+	}
+	return b.String()
+}
+
+func greenText(value string) string  { return makeColored(value, "\x1b[32m") }
+func linkText(value string) string   { return makeColored(value, "\x1b[34m") }
+func yellowText(value string) string { return makeColored(value, "\x1b[33m") }
+func redText(value string) string    { return makeColored(value, "\x1b[31m") }
+func grayText(value string) string   { return makeColored(value, "\x1b[90m") }
+func boldText(value string) string   { return makeColored(value, "\x1b[1m") }
+func idText(value string) string     { return makeColored(value, "\x1b[95m") }
+func escapeText(value string) string {return makeColored(value, "\x1b[38;2;6;226;183m")}
+func shortEscapeLink(value string) string { return fmt.Sprintf("\x1b]8;;%s\x1b\\%s\x1b]8;;\x1b\\", value, linkText("Link")) }
+func noColor(value string) string    { return makeColored(value, "") }
 
 func colorizeBool(value string) string {
 	switch strings.ToLower(value) {
@@ -31,7 +52,7 @@ func colorizeBool(value string) string {
 	case "false":
 		return redText(value)
 	default:
-		return value
+		return noColor(value)
 	}
 }
 
@@ -46,16 +67,13 @@ func colorizeSeverity(value string) string {
 	case "high":
 		return redText(value)
 	default:
-		return value
+		return noColor(value)
 	}
 }
 
-func shortEscapeLink(value string) string {
-	return fmt.Sprintf("\x1b]8;;%s\x1b\\%s\x1b]8;;\x1b\\", value, "Link")
-}
 
 func colorizeProgress(value string) string {
-	if strings.HasPrefix(value, "100") {
+	if strings.HasPrefix(value, "100") || strings.HasPrefix(value, "1.000") {
 		return greenText(value)
 	}
 	return yellowText(value)
@@ -106,7 +124,7 @@ func colorizeStatus(value string) string {
 }
 
 func colorizeEnum(value string) string {
-	return cyanText(value)
+	return escapeText(value)
 }
 
 func colorizeDate(value string) string {
@@ -132,9 +150,16 @@ func colorizeLastSeen(value string) string {
 
 func colorizeHelpAll(value string) string {
 		if strings.HasPrefix(value, "  ") {
-			return cyanText(boldText(value))
+			return escapeText(boldText(value))
 		}
 		return redText(boldText(value))
+}
+
+func colorizeActor(value string) string {
+	if strings.ToLower(value) == "escape" {
+		return escapeText(value)
+	}
+	return idText(value)
 }
 
 func colorizeColor(value string) string {
@@ -143,7 +168,8 @@ func colorizeColor(value string) string {
 		if r, errR := strconv.ParseInt(value[0:2], 16, 0); errR == nil {
 			if g, errG := strconv.ParseInt(value[2:4], 16, 0); errG == nil {
 				if b, errB := strconv.ParseInt(value[4:6], 16, 0); errB == nil {
-					return fmt.Sprintf("\x1b[38;2;%d;%d;%dm%s\x1b[0m", r, g, b, value)
+					seq := fmt.Sprintf("\x1b[38;2;%d;%d;%dm", r, g, b)
+					return makeColored(value, seq)
 				}
 			}
 		}
@@ -151,15 +177,24 @@ func colorizeColor(value string) string {
 	return grayText(value)
 }
 
-func colorizeValue(value string, columnName string) string {
+func colorizeValue(value string, columnName string, isLastColumn bool) string {
 	if value == "[]" || value == "" {
 		return boldText("-")
+	}
+	if columnName == "ACTION" {
+		return escapeText(value)
+	}
+	if columnName == "ACTOR EMAIL" {
+		return yellowText(value)
 	}
 	// handle links
 	urlRegex := regexp.MustCompile(`\b(?:(?:https?|grpc):\/\/)?(?:localhost|(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}|(?:\d{1,3}\.){3}\d{1,3})(?::\d+)?\b`)
 	if urlRegex.MatchString(strings.ToLower(value)) {
-		if strings.HasPrefix(value, "https://app.escape") {
-			value = shortEscapeLink(value)
+		if isLastColumn && strings.HasPrefix(value, "https://app.escape") {
+			return shortEscapeLink(value)
+		}
+		if strings.Contains(value, " ") {
+			return boldText(value)
 		}
 		return linkText(value)
 	}
@@ -172,11 +207,17 @@ func colorizeValue(value string, columnName string) string {
 		return idText(value)
 	case "STATUS":
 		return colorizeStatus(value)
+	case "ACTOR EMAIL":
+		return yellowText(value)
+	case "ACTOR":
+		return colorizeActor(value)
 	case "SEVERITY":
 		return colorizeSeverity(value)
-	case "CATEGORY", "KIND", "STAGE", "TYPE", "RISKS", "INITIATORS":
+	case "TITLE":
+		return boldText(value)
+	case "CATEGORY", "KIND", "STAGE", "TYPE", "RISKS", "INITIATORS", "ASSET TYPE":
 		return colorizeEnum(value)
-	case "CREATED AT", "UPDATED AT":
+	case "CREATED AT", "UPDATED AT", "DATE":
 		return colorizeDate(value)
 	case "LAST SEEN":
 		return colorizeLastSeen(value)
@@ -225,10 +266,11 @@ func Table(data any, tableMaker func() []string) {
 		for i := 1; i < len(table); i++ {
 			fields := strings.Split(table[i], "\t")
 			for j, field := range fields {
+				isLastColumn := j == len(headers)-1
 				if j < len(headers) {
-					fields[j] = colorizeValue(field, strings.TrimSpace(headers[j]))
+					fields[j] = colorizeValue(field, strings.TrimSpace(headers[j]), isLastColumn)
 				} else {
-					fields[j] = colorizeValue(field, "")
+					fields[j] = colorizeValue(field, "", isLastColumn)
 				}
 			}
 			fmt.Fprintln(w, strings.Join(fields, "\t")) //nolint:errcheck

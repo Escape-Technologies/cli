@@ -39,7 +39,6 @@ type ProfileDetailed struct {
 	// The coverage of the profile
 	Coverage *float32 `json:"coverage,omitempty"`
 	ActiveConfiguration ConfigurationDetailed `json:"activeConfiguration"`
-	ActiveSchema *SchemaDetailed `json:"activeSchema,omitempty"`
 	Asset AssetDetailed `json:"asset"`
 	LastResourceScan *ScanDetailed `json:"lastResourceScan,omitempty"`
 	LastSuccessfulResourceScan *ScanDetailed `json:"lastSuccessfulResourceScan,omitempty"`
@@ -351,38 +350,6 @@ func (o *ProfileDetailed) SetActiveConfiguration(v ConfigurationDetailed) {
 	o.ActiveConfiguration = v
 }
 
-// GetActiveSchema returns the ActiveSchema field value if set, zero value otherwise.
-func (o *ProfileDetailed) GetActiveSchema() SchemaDetailed {
-	if o == nil || IsNil(o.ActiveSchema) {
-		var ret SchemaDetailed
-		return ret
-	}
-	return *o.ActiveSchema
-}
-
-// GetActiveSchemaOk returns a tuple with the ActiveSchema field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ProfileDetailed) GetActiveSchemaOk() (*SchemaDetailed, bool) {
-	if o == nil || IsNil(o.ActiveSchema) {
-		return nil, false
-	}
-	return o.ActiveSchema, true
-}
-
-// HasActiveSchema returns a boolean if a field has been set.
-func (o *ProfileDetailed) HasActiveSchema() bool {
-	if o != nil && !IsNil(o.ActiveSchema) {
-		return true
-	}
-
-	return false
-}
-
-// SetActiveSchema gets a reference to the given SchemaDetailed and assigns it to the ActiveSchema field.
-func (o *ProfileDetailed) SetActiveSchema(v SchemaDetailed) {
-	o.ActiveSchema = &v
-}
-
 // GetAsset returns the Asset field value
 func (o *ProfileDetailed) GetAsset() AssetDetailed {
 	if o == nil {
@@ -571,9 +538,6 @@ func (o ProfileDetailed) ToMap() (map[string]interface{}, error) {
 		toSerialize["coverage"] = o.Coverage
 	}
 	toSerialize["activeConfiguration"] = o.ActiveConfiguration
-	if !IsNil(o.ActiveSchema) {
-		toSerialize["activeSchema"] = o.ActiveSchema
-	}
 	toSerialize["asset"] = o.Asset
 	if !IsNil(o.LastResourceScan) {
 		toSerialize["lastResourceScan"] = o.LastResourceScan
@@ -646,7 +610,6 @@ func (o *ProfileDetailed) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "score")
 		delete(additionalProperties, "coverage")
 		delete(additionalProperties, "activeConfiguration")
-		delete(additionalProperties, "activeSchema")
 		delete(additionalProperties, "asset")
 		delete(additionalProperties, "lastResourceScan")
 		delete(additionalProperties, "lastSuccessfulResourceScan")
