@@ -21,6 +21,8 @@ var _ MappedNullable = &CreateAssetWEBAPPRequest{}
 // CreateAssetWEBAPPRequest struct for CreateAssetWEBAPPRequest
 type CreateAssetWEBAPPRequest struct {
 	AssetClass ENUMFRONTEND `json:"asset_class"`
+	WizProviderId *string `json:"wiz_provider_id,omitempty"`
+	WizCloudPlatform *string `json:"wiz_cloud_platform,omitempty"`
 	AssetType ENUMWEBAPP `json:"asset_type"`
 	Url string `json:"url"`
 	Favicon *string `json:"favicon,omitempty"`
@@ -78,6 +80,70 @@ func (o *CreateAssetWEBAPPRequest) GetAssetClassOk() (*ENUMFRONTEND, bool) {
 // SetAssetClass sets field value
 func (o *CreateAssetWEBAPPRequest) SetAssetClass(v ENUMFRONTEND) {
 	o.AssetClass = v
+}
+
+// GetWizProviderId returns the WizProviderId field value if set, zero value otherwise.
+func (o *CreateAssetWEBAPPRequest) GetWizProviderId() string {
+	if o == nil || IsNil(o.WizProviderId) {
+		var ret string
+		return ret
+	}
+	return *o.WizProviderId
+}
+
+// GetWizProviderIdOk returns a tuple with the WizProviderId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetWEBAPPRequest) GetWizProviderIdOk() (*string, bool) {
+	if o == nil || IsNil(o.WizProviderId) {
+		return nil, false
+	}
+	return o.WizProviderId, true
+}
+
+// HasWizProviderId returns a boolean if a field has been set.
+func (o *CreateAssetWEBAPPRequest) HasWizProviderId() bool {
+	if o != nil && !IsNil(o.WizProviderId) {
+		return true
+	}
+
+	return false
+}
+
+// SetWizProviderId gets a reference to the given string and assigns it to the WizProviderId field.
+func (o *CreateAssetWEBAPPRequest) SetWizProviderId(v string) {
+	o.WizProviderId = &v
+}
+
+// GetWizCloudPlatform returns the WizCloudPlatform field value if set, zero value otherwise.
+func (o *CreateAssetWEBAPPRequest) GetWizCloudPlatform() string {
+	if o == nil || IsNil(o.WizCloudPlatform) {
+		var ret string
+		return ret
+	}
+	return *o.WizCloudPlatform
+}
+
+// GetWizCloudPlatformOk returns a tuple with the WizCloudPlatform field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetWEBAPPRequest) GetWizCloudPlatformOk() (*string, bool) {
+	if o == nil || IsNil(o.WizCloudPlatform) {
+		return nil, false
+	}
+	return o.WizCloudPlatform, true
+}
+
+// HasWizCloudPlatform returns a boolean if a field has been set.
+func (o *CreateAssetWEBAPPRequest) HasWizCloudPlatform() bool {
+	if o != nil && !IsNil(o.WizCloudPlatform) {
+		return true
+	}
+
+	return false
+}
+
+// SetWizCloudPlatform gets a reference to the given string and assigns it to the WizCloudPlatform field.
+func (o *CreateAssetWEBAPPRequest) SetWizCloudPlatform(v string) {
+	o.WizCloudPlatform = &v
 }
 
 // GetAssetType returns the AssetType field value
@@ -395,6 +461,12 @@ func (o CreateAssetWEBAPPRequest) MarshalJSON() ([]byte, error) {
 func (o CreateAssetWEBAPPRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["asset_class"] = o.AssetClass
+	if !IsNil(o.WizProviderId) {
+		toSerialize["wiz_provider_id"] = o.WizProviderId
+	}
+	if !IsNil(o.WizCloudPlatform) {
+		toSerialize["wiz_cloud_platform"] = o.WizCloudPlatform
+	}
 	toSerialize["asset_type"] = o.AssetType
 	toSerialize["url"] = o.Url
 	if !IsNil(o.Favicon) {
@@ -467,6 +539,8 @@ func (o *CreateAssetWEBAPPRequest) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "asset_class")
+		delete(additionalProperties, "wiz_provider_id")
+		delete(additionalProperties, "wiz_cloud_platform")
 		delete(additionalProperties, "asset_type")
 		delete(additionalProperties, "url")
 		delete(additionalProperties, "favicon")

@@ -22,16 +22,16 @@ var _ MappedNullable = &AuditLogSummarized{}
 type AuditLogSummarized struct {
 	// The id of the audit log
 	Id string `json:"id"`
+	// The date of the audit log
+	Date string `json:"date"`
+	// The title of the audit log
+	Title string `json:"title"`
 	// The action of the audit log
 	Action string `json:"action"`
 	// The actor of the audit log
 	Actor *string `json:"actor,omitempty"`
-	// The date of the audit log
-	Date string `json:"date"`
-	// The target of the audit log
-	Target string `json:"target"`
-	// The title of the audit log
-	Title string `json:"title"`
+	// The email of the actor
+	ActorEmail *string `json:"actorEmail,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -41,13 +41,12 @@ type _AuditLogSummarized AuditLogSummarized
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAuditLogSummarized(id string, action string, date string, target string, title string) *AuditLogSummarized {
+func NewAuditLogSummarized(id string, date string, title string, action string) *AuditLogSummarized {
 	this := AuditLogSummarized{}
 	this.Id = id
-	this.Action = action
 	this.Date = date
-	this.Target = target
 	this.Title = title
+	this.Action = action
 	return &this
 }
 
@@ -81,6 +80,54 @@ func (o *AuditLogSummarized) GetIdOk() (*string, bool) {
 // SetId sets field value
 func (o *AuditLogSummarized) SetId(v string) {
 	o.Id = v
+}
+
+// GetDate returns the Date field value
+func (o *AuditLogSummarized) GetDate() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Date
+}
+
+// GetDateOk returns a tuple with the Date field value
+// and a boolean to check if the value has been set.
+func (o *AuditLogSummarized) GetDateOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Date, true
+}
+
+// SetDate sets field value
+func (o *AuditLogSummarized) SetDate(v string) {
+	o.Date = v
+}
+
+// GetTitle returns the Title field value
+func (o *AuditLogSummarized) GetTitle() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Title
+}
+
+// GetTitleOk returns a tuple with the Title field value
+// and a boolean to check if the value has been set.
+func (o *AuditLogSummarized) GetTitleOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Title, true
+}
+
+// SetTitle sets field value
+func (o *AuditLogSummarized) SetTitle(v string) {
+	o.Title = v
 }
 
 // GetAction returns the Action field value
@@ -139,76 +186,36 @@ func (o *AuditLogSummarized) SetActor(v string) {
 	o.Actor = &v
 }
 
-// GetDate returns the Date field value
-func (o *AuditLogSummarized) GetDate() string {
-	if o == nil {
+// GetActorEmail returns the ActorEmail field value if set, zero value otherwise.
+func (o *AuditLogSummarized) GetActorEmail() string {
+	if o == nil || IsNil(o.ActorEmail) {
 		var ret string
 		return ret
 	}
-
-	return o.Date
+	return *o.ActorEmail
 }
 
-// GetDateOk returns a tuple with the Date field value
+// GetActorEmailOk returns a tuple with the ActorEmail field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AuditLogSummarized) GetDateOk() (*string, bool) {
-	if o == nil {
+func (o *AuditLogSummarized) GetActorEmailOk() (*string, bool) {
+	if o == nil || IsNil(o.ActorEmail) {
 		return nil, false
 	}
-	return &o.Date, true
+	return o.ActorEmail, true
 }
 
-// SetDate sets field value
-func (o *AuditLogSummarized) SetDate(v string) {
-	o.Date = v
-}
-
-// GetTarget returns the Target field value
-func (o *AuditLogSummarized) GetTarget() string {
-	if o == nil {
-		var ret string
-		return ret
+// HasActorEmail returns a boolean if a field has been set.
+func (o *AuditLogSummarized) HasActorEmail() bool {
+	if o != nil && !IsNil(o.ActorEmail) {
+		return true
 	}
 
-	return o.Target
+	return false
 }
 
-// GetTargetOk returns a tuple with the Target field value
-// and a boolean to check if the value has been set.
-func (o *AuditLogSummarized) GetTargetOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Target, true
-}
-
-// SetTarget sets field value
-func (o *AuditLogSummarized) SetTarget(v string) {
-	o.Target = v
-}
-
-// GetTitle returns the Title field value
-func (o *AuditLogSummarized) GetTitle() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Title
-}
-
-// GetTitleOk returns a tuple with the Title field value
-// and a boolean to check if the value has been set.
-func (o *AuditLogSummarized) GetTitleOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Title, true
-}
-
-// SetTitle sets field value
-func (o *AuditLogSummarized) SetTitle(v string) {
-	o.Title = v
+// SetActorEmail gets a reference to the given string and assigns it to the ActorEmail field.
+func (o *AuditLogSummarized) SetActorEmail(v string) {
+	o.ActorEmail = &v
 }
 
 func (o AuditLogSummarized) MarshalJSON() ([]byte, error) {
@@ -222,13 +229,15 @@ func (o AuditLogSummarized) MarshalJSON() ([]byte, error) {
 func (o AuditLogSummarized) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
+	toSerialize["date"] = o.Date
+	toSerialize["title"] = o.Title
 	toSerialize["action"] = o.Action
 	if !IsNil(o.Actor) {
 		toSerialize["actor"] = o.Actor
 	}
-	toSerialize["date"] = o.Date
-	toSerialize["target"] = o.Target
-	toSerialize["title"] = o.Title
+	if !IsNil(o.ActorEmail) {
+		toSerialize["actorEmail"] = o.ActorEmail
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -243,10 +252,9 @@ func (o *AuditLogSummarized) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"id",
-		"action",
 		"date",
-		"target",
 		"title",
+		"action",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -277,11 +285,11 @@ func (o *AuditLogSummarized) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "id")
+		delete(additionalProperties, "date")
+		delete(additionalProperties, "title")
 		delete(additionalProperties, "action")
 		delete(additionalProperties, "actor")
-		delete(additionalProperties, "date")
-		delete(additionalProperties, "target")
-		delete(additionalProperties, "title")
+		delete(additionalProperties, "actorEmail")
 		o.AdditionalProperties = additionalProperties
 	}
 
