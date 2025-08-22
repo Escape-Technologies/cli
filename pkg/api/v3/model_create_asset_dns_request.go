@@ -21,12 +21,12 @@ var _ MappedNullable = &CreateAssetDNSRequest{}
 // CreateAssetDNSRequest struct for CreateAssetDNSRequest
 type CreateAssetDNSRequest struct {
 	AssetClass ENUMHOST `json:"asset_class"`
+	WizProviderId *string `json:"wiz_provider_id,omitempty"`
+	WizCloudPlatform *string `json:"wiz_cloud_platform,omitempty"`
 	AssetType ENUMDNS `json:"asset_type"`
 	Address string `json:"address"`
 	Favicon *string `json:"favicon,omitempty"`
 	OpenPorts []CreateAssetDNSRequestOpenPortsInner `json:"open_ports,omitempty"`
-	WizProviderId *string `json:"wiz_provider_id,omitempty"`
-	WizCloudPlatform *string `json:"wiz_cloud_platform,omitempty"`
 	PortsInsights []float32 `json:"ports_insights,omitempty"`
 	PathsInsights []CreateAssetDNSRequestPathsInsightsInner `json:"paths_insights,omitempty"`
 	DnsRecords []CreateAssetDNSRequestDnsRecordsInner `json:"dns_records,omitempty"`
@@ -80,6 +80,70 @@ func (o *CreateAssetDNSRequest) GetAssetClassOk() (*ENUMHOST, bool) {
 // SetAssetClass sets field value
 func (o *CreateAssetDNSRequest) SetAssetClass(v ENUMHOST) {
 	o.AssetClass = v
+}
+
+// GetWizProviderId returns the WizProviderId field value if set, zero value otherwise.
+func (o *CreateAssetDNSRequest) GetWizProviderId() string {
+	if o == nil || IsNil(o.WizProviderId) {
+		var ret string
+		return ret
+	}
+	return *o.WizProviderId
+}
+
+// GetWizProviderIdOk returns a tuple with the WizProviderId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetDNSRequest) GetWizProviderIdOk() (*string, bool) {
+	if o == nil || IsNil(o.WizProviderId) {
+		return nil, false
+	}
+	return o.WizProviderId, true
+}
+
+// HasWizProviderId returns a boolean if a field has been set.
+func (o *CreateAssetDNSRequest) HasWizProviderId() bool {
+	if o != nil && !IsNil(o.WizProviderId) {
+		return true
+	}
+
+	return false
+}
+
+// SetWizProviderId gets a reference to the given string and assigns it to the WizProviderId field.
+func (o *CreateAssetDNSRequest) SetWizProviderId(v string) {
+	o.WizProviderId = &v
+}
+
+// GetWizCloudPlatform returns the WizCloudPlatform field value if set, zero value otherwise.
+func (o *CreateAssetDNSRequest) GetWizCloudPlatform() string {
+	if o == nil || IsNil(o.WizCloudPlatform) {
+		var ret string
+		return ret
+	}
+	return *o.WizCloudPlatform
+}
+
+// GetWizCloudPlatformOk returns a tuple with the WizCloudPlatform field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetDNSRequest) GetWizCloudPlatformOk() (*string, bool) {
+	if o == nil || IsNil(o.WizCloudPlatform) {
+		return nil, false
+	}
+	return o.WizCloudPlatform, true
+}
+
+// HasWizCloudPlatform returns a boolean if a field has been set.
+func (o *CreateAssetDNSRequest) HasWizCloudPlatform() bool {
+	if o != nil && !IsNil(o.WizCloudPlatform) {
+		return true
+	}
+
+	return false
+}
+
+// SetWizCloudPlatform gets a reference to the given string and assigns it to the WizCloudPlatform field.
+func (o *CreateAssetDNSRequest) SetWizCloudPlatform(v string) {
+	o.WizCloudPlatform = &v
 }
 
 // GetAssetType returns the AssetType field value
@@ -192,70 +256,6 @@ func (o *CreateAssetDNSRequest) HasOpenPorts() bool {
 // SetOpenPorts gets a reference to the given []CreateAssetDNSRequestOpenPortsInner and assigns it to the OpenPorts field.
 func (o *CreateAssetDNSRequest) SetOpenPorts(v []CreateAssetDNSRequestOpenPortsInner) {
 	o.OpenPorts = v
-}
-
-// GetWizProviderId returns the WizProviderId field value if set, zero value otherwise.
-func (o *CreateAssetDNSRequest) GetWizProviderId() string {
-	if o == nil || IsNil(o.WizProviderId) {
-		var ret string
-		return ret
-	}
-	return *o.WizProviderId
-}
-
-// GetWizProviderIdOk returns a tuple with the WizProviderId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateAssetDNSRequest) GetWizProviderIdOk() (*string, bool) {
-	if o == nil || IsNil(o.WizProviderId) {
-		return nil, false
-	}
-	return o.WizProviderId, true
-}
-
-// HasWizProviderId returns a boolean if a field has been set.
-func (o *CreateAssetDNSRequest) HasWizProviderId() bool {
-	if o != nil && !IsNil(o.WizProviderId) {
-		return true
-	}
-
-	return false
-}
-
-// SetWizProviderId gets a reference to the given string and assigns it to the WizProviderId field.
-func (o *CreateAssetDNSRequest) SetWizProviderId(v string) {
-	o.WizProviderId = &v
-}
-
-// GetWizCloudPlatform returns the WizCloudPlatform field value if set, zero value otherwise.
-func (o *CreateAssetDNSRequest) GetWizCloudPlatform() string {
-	if o == nil || IsNil(o.WizCloudPlatform) {
-		var ret string
-		return ret
-	}
-	return *o.WizCloudPlatform
-}
-
-// GetWizCloudPlatformOk returns a tuple with the WizCloudPlatform field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateAssetDNSRequest) GetWizCloudPlatformOk() (*string, bool) {
-	if o == nil || IsNil(o.WizCloudPlatform) {
-		return nil, false
-	}
-	return o.WizCloudPlatform, true
-}
-
-// HasWizCloudPlatform returns a boolean if a field has been set.
-func (o *CreateAssetDNSRequest) HasWizCloudPlatform() bool {
-	if o != nil && !IsNil(o.WizCloudPlatform) {
-		return true
-	}
-
-	return false
-}
-
-// SetWizCloudPlatform gets a reference to the given string and assigns it to the WizCloudPlatform field.
-func (o *CreateAssetDNSRequest) SetWizCloudPlatform(v string) {
-	o.WizCloudPlatform = &v
 }
 
 // GetPortsInsights returns the PortsInsights field value if set, zero value otherwise.
@@ -461,6 +461,12 @@ func (o CreateAssetDNSRequest) MarshalJSON() ([]byte, error) {
 func (o CreateAssetDNSRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["asset_class"] = o.AssetClass
+	if !IsNil(o.WizProviderId) {
+		toSerialize["wiz_provider_id"] = o.WizProviderId
+	}
+	if !IsNil(o.WizCloudPlatform) {
+		toSerialize["wiz_cloud_platform"] = o.WizCloudPlatform
+	}
 	toSerialize["asset_type"] = o.AssetType
 	toSerialize["address"] = o.Address
 	if !IsNil(o.Favicon) {
@@ -468,12 +474,6 @@ func (o CreateAssetDNSRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.OpenPorts) {
 		toSerialize["open_ports"] = o.OpenPorts
-	}
-	if !IsNil(o.WizProviderId) {
-		toSerialize["wiz_provider_id"] = o.WizProviderId
-	}
-	if !IsNil(o.WizCloudPlatform) {
-		toSerialize["wiz_cloud_platform"] = o.WizCloudPlatform
 	}
 	if !IsNil(o.PortsInsights) {
 		toSerialize["ports_insights"] = o.PortsInsights
@@ -539,12 +539,12 @@ func (o *CreateAssetDNSRequest) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "asset_class")
+		delete(additionalProperties, "wiz_provider_id")
+		delete(additionalProperties, "wiz_cloud_platform")
 		delete(additionalProperties, "asset_type")
 		delete(additionalProperties, "address")
 		delete(additionalProperties, "favicon")
 		delete(additionalProperties, "open_ports")
-		delete(additionalProperties, "wiz_provider_id")
-		delete(additionalProperties, "wiz_cloud_platform")
 		delete(additionalProperties, "ports_insights")
 		delete(additionalProperties, "paths_insights")
 		delete(additionalProperties, "dns_records")

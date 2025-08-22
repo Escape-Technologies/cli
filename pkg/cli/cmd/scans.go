@@ -29,12 +29,12 @@ var scansListCmd = &cobra.Command{
 	Long: `List all scans of a profile.
 
 Example output:
-ID                                      CREATED AT                           STATUS                            PROGRESS    LINK
+ID                                      CREATED AT                           KIND    	  STATUS		PROGRESS    LINK
 
-00000000-0000-0000-0000-000000000001    2025-02-05 08:34:47.541 +0000 UTC    FINISHED                          0.000000    Link
-00000000-0000-0000-0000-000000000002    2025-02-02 08:27:23.919 +0000 UTC    FINISHED                          0.000000    Link	
-00000000-0000-0000-0000-000000000003    2025-01-31 18:35:48.477 +0000 UTC    FINISHED                          0.000000    Link
-00000000-0000-0000-0000-000000000004    2025-01-30 08:25:49.656 +0000 UTC    FINISHED                          0.000000    Link`,
+00000000-0000-0000-0000-000000000001    2025-02-05 08:34:47.541 +0000 UTC    BLST_REST    FINISHED		0.000000    Link
+00000000-0000-0000-0000-000000000002    2025-02-02 08:27:23.919 +0000 UTC    BLST_REST    FINISHED		0.000000    Link	
+00000000-0000-0000-0000-000000000003    2025-01-31 18:35:48.477 +0000 UTC    BLST_REST    FINISHED		0.000000    Link
+00000000-0000-0000-0000-000000000004    2025-01-30 08:25:49.656 +0000 UTC    BLST_REST    FINISHED		0.000000    Link`,
 	Example: `escape-cli scans list -p 00000000-0000-0000-0000-000000000000`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
 		scans, next, err := escape.ListScans(cmd.Context(), &profileID, "")
@@ -42,9 +42,9 @@ ID                                      CREATED AT                           STA
 			return fmt.Errorf("unable to list scans: %w", err)
 		}
 		out.Table(scans, func() []string {
-			res := []string{"ID\tCREATED AT\tSTATUS\tPROGRESS\tLINK"}
+			res := []string{"ID\tCREATED AT\tKIND\tSTATUS\tPROGRESS\tLINK"}
 			for _, scan := range scans {
-				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%f\t%s", scan.GetId(), scan.GetCreatedAt(), scan.GetStatus(), scan.GetProgressRatio(), scan.GetLinks().ScanIssues))
+				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%f\t%s", scan.GetId(), scan.GetCreatedAt(), scan.GetKind(), scan.GetStatus(), scan.GetProgressRatio(), scan.GetLinks().ScanIssues))
 			}
 			return res
 		})
@@ -57,10 +57,10 @@ ID                                      CREATED AT                           STA
 			}
 			out.Table(scans, func() []string {
 				res := []string{
-					"ID\tCREATED AT\tSTATUS\tPROGRESS\tLINK",
+					"ID\tCREATED AT\tKIND\tSTATUS\tPROGRESS\tLINK",
 				}
 				for _, scan := range scans {
-					res = append(res, fmt.Sprintf("%s\t%s\t%s\t%f\t%s", scan.GetId(), scan.GetCreatedAt(), scan.GetStatus(), scan.GetProgressRatio(), scan.GetLinks().ScanIssues))
+					res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%f\t%s", scan.GetId(), scan.GetCreatedAt(), scan.GetKind(), scan.GetStatus(), scan.GetProgressRatio(), scan.GetLinks().ScanIssues))
 				}
 				return res
 			})
@@ -77,8 +77,8 @@ var scanGetCmd = &cobra.Command{
 	Long: `Return the scan status.
 
 Example output:
-ID                                      CREATED AT      					 STATUS                           PROGRESS    LINK
-00000000-0000-0000-0000-000000000001    2024-11-27 08:06:59.576 +0000 UTC    FINISHED                         1.000000    Link`,
+ID                                      CREATED AT      					 KIND    STATUS                           PROGRESS    LINK
+00000000-0000-0000-0000-000000000001    2024-11-27 08:06:59.576 +0000 UTC    BLST_REST    FINISHED                         1.000000    Link`,
 	Example: `escape-cli scans get 00000000-0000-0000-0000-000000000000`,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		scan, err := escape.GetScan(cmd.Context(), args[0])
@@ -86,8 +86,8 @@ ID                                      CREATED AT      					 STATUS            
 			return fmt.Errorf("unable to get scan: %w", err)
 		}
 		out.Table(scan, func() []string {
-			res := []string{"ID\tCREATED AT\tSTATUS\tPROGRESS\tLINK"}
-			res = append(res, fmt.Sprintf("%s\t%s\t%s\t%f\t%s", scan.GetId(), scan.GetCreatedAt(), scan.GetStatus(), scan.GetProgressRatio(), scan.GetLinks().ScanIssues))
+			res := []string{"ID\tCREATED AT\tKIND\tSTATUS\tPROGRESS\tLINK"}
+			res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%f\t%s", scan.GetId(), scan.GetCreatedAt(), scan.GetKind(), scan.GetStatus(), scan.GetProgressRatio(), scan.GetLinks().ScanIssues))
 			return res
 		})
 		return nil
@@ -336,22 +336,6 @@ ID                                      SEVERITY    TYPE    CATEGORY            
 	},
 }
 
-var scanDownloadCmd = &cobra.Command{
-	Use:     "download scan-id archive-path",
-	Example: "escape-cli scans download 00000000-0000-0000-0000-000000000000 ./exchanges.zip",
-	Aliases: []string{"dl", "zip"},
-	Args:    cobra.ExactArgs(2), //nolint:mnd
-	Short:   "Download scan results",
-	Long:    "Download a scan result exchange archive (zip export)",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		err := escape.DownloadScanExchangesZip(cmd.Context(), args[0], args[1])
-		if err != nil {
-			return fmt.Errorf("unable to download scan exchanges zip: %w", err)
-		}
-		return nil
-	},
-}
-
 func init() {
 	scansCmd.AddCommand(scansListCmd)
 	scansListCmd.PersistentFlags().StringSliceVarP(&profileID, "profile-id", "p", []string{}, "profile IDs")
@@ -364,7 +348,6 @@ func init() {
 	scanStartCmd.PersistentFlags().StringVarP(&scanStartCmdConfigurationOverride, "override", "c", "", "configuration override")
 	scansCmd.AddCommand(scanStartCmd)
 	scansCmd.AddCommand(scanGetCmd)
-	scansCmd.AddCommand(scanDownloadCmd)
 	scansCmd.AddCommand(scanIssuesCmd)
 	scansCmd.AddCommand(scanWatchCmd)
 	scansCmd.AddCommand(scanCancelCmd)
