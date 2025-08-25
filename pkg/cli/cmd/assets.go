@@ -92,10 +92,14 @@ var assetGetCmd = &cobra.Command{
 Example output:
 ID                                      CREATED AT                            TYPE                            NAME                            RISKS                           STATUS       LAST SEEN
 00000000-0000-0000-0000-000000000001    2025-07-22T15:52:41.697Z              WEBAPP                          https://escape.tech             [EXPOSED UNAUTHENTICATED]       MONITORED    2025-07-22T15:52:41.697Z`,
-	RunE: func(cmd *cobra.Command, args []string) error {
+	Args: func(cmd *cobra.Command, args []string) error {
 		if len(args) != 1 {
+			_ = cmd.Help()
 			return errors.New("asset ID is required")
 		}
+		return nil
+	},
+	RunE: func(cmd *cobra.Command, args []string) error {
 		asset, err := escape.GetAsset(cmd.Context(), args[0])
 		if err != nil {
 			return fmt.Errorf("unable to get asset: %w", err)
@@ -143,7 +147,13 @@ var assetDeleteCmd = &cobra.Command{
 	Aliases: []string{"d"},
 	Short:   "Delete an asset",
 	Example: `escape-cli asset delete <asset-id>`,
-	Args:    cobra.ExactArgs(1),
+	Args: func(cmd *cobra.Command, args []string) error {
+		if len(args) != 1 {
+			_ = cmd.Help()
+			return errors.New("asset ID is required")
+		}
+		return nil
+	},
 	Long: `Delete an asset by ID.
 Example output:
 Asset 00000000-0000-0000-0000-000000000001 successfully deleted`,
@@ -158,17 +168,21 @@ Asset 00000000-0000-0000-0000-000000000001 successfully deleted`,
 }
 
 var assetUpdateCmd = &cobra.Command{
-	Use:     "update",
+	Use:     "update asset-id",
 	Aliases: []string{"u"},
 	Short:   "Update an asset",
 	Example: `escape-cli asset update <asset-id> -s MONITORED -f KUBERNETES_CLUSTER -d "My Kubernetes Cluster" -o "owner1-id,owner2-id" -t "tag1-id,tag2-id"`,
 	Long: `Update an asset by ID.
 Example output:
 Asset 00000000-0000-0000-0000-000000000001 successfully updated`,
-	RunE: func(cmd *cobra.Command, args []string) error {
+	Args: func(cmd *cobra.Command, args []string) error {
 		if len(args) != 1 {
+			_ = cmd.Help()
 			return errors.New("asset ID is required")
 		}
+		return nil
+	},
+	RunE: func(cmd *cobra.Command, args []string) error {
 		var framework *v3.ENUMPROPERTIESFRAMEWORK
 		if assetFramework != "" {
 			f := v3.ENUMPROPERTIESFRAMEWORK(assetFramework)
@@ -216,7 +230,13 @@ ID                                    TYPE  NAME                                
 8163b58c-5413-4224-bdae-a0d395c4a766  IPV6  2001:0db8:85a3:0000:0000:8a2e:0370:7334  MONITORED
 		
 for more examples see required fields at https://public.escape.tech/v3/#tag/assets`,
-
+	Args: func(cmd *cobra.Command, args []string) error {
+		if len(args) > 0 {
+			_ = cmd.Help()
+			return errors.New("this command does not accept any arguments, it reads from stdin")
+		}
+		return nil
+	},
 	RunE: func(cmd *cobra.Command, _ []string) error {
 		var data []byte
 
