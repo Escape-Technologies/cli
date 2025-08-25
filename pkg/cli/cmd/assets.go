@@ -17,6 +17,7 @@ import (
 var (
 	assetTypes    = []string{}
 	assetStatuses = []string{}
+	assetActivities = false
 )
 
 var (
@@ -100,11 +101,38 @@ ID                                      CREATED AT                            TY
 			return fmt.Errorf("unable to get asset: %w", err)
 		}
 
+		if assetActivities {
+			issues, _, err := escape.ListIssues(cmd.Context(), "", &escape.ListIssuesFilters{
+				AssetIDs: []string{args[0]},
+			})
+			if err != nil {
+				return fmt.Errorf("unable to list issues: %w", err)
+			}
+
+			allActivities := []v3.ActivitySummarized{}
+			for _, issue := range issues {
+				activities, err := escape.ListIssueActivities(cmd.Context(), issue.GetId())
+				if err != nil {
+					return fmt.Errorf("unable to list activities: %w", err)
+				}
+				allActivities = append(allActivities, activities...)
+			}
+
+			out.Table(allActivities, func() []string {
+				res := []string{"ID\tCREATED AT\tKIND"}
+				for _, activity := range allActivities {
+					res = append(res, fmt.Sprintf("%s\t%s\t%s", activity.GetId(), activity.GetCreatedAt(), activity.GetKind()))
+				}
+				return res
+			})
+		} else {
+
 		out.Table(asset, func() []string {
 			res := []string{"ID\tCREATED AT\tTYPE\tSTATUS\tLAST SEEN\tRISKS\tNAME"}
-			res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s", asset.GetId(), asset.GetCreatedAt(), asset.GetType(), asset.GetStatus(), asset.GetLastSeenAt(), asset.GetRisks(), asset.GetName()))
-			return res
-		})
+				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s", asset.GetId(), asset.GetCreatedAt(), asset.GetType(), asset.GetStatus(), asset.GetLastSeenAt(), asset.GetRisks(), asset.GetName()))
+				return res
+			})
+		}
 
 		return nil
 	},
@@ -232,10 +260,13 @@ for more examples see required fields at https://public.escape.tech/v3/#tag/asse
 func init() {
 	rootCmd.AddCommand(assetsCmd)
 	assetsCmd.AddCommand(assetsListCmd)
-	assetsCmd.AddCommand(assetGetCmd)
-	assetsCmd.AddCommand(assetDeleteCmd)
 	assetsListCmd.Flags().StringSliceVarP(&assetTypes, "types", "t", []string{}, fmt.Sprintf("Filter by asset types: %v", v3.AllowedENUMPROPERTIESFRAMEWORKEnumValues))
 	assetsListCmd.Flags().StringSliceVarP(&assetStatuses, "statuses", "s", []string{}, fmt.Sprintf("Filter by asset statuses: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUSEnumValues))
+	
+	assetsCmd.AddCommand(assetGetCmd)
+	assetGetCmd.Flags().BoolVarP(&assetActivities, "activities", "a", false, "list of activities attached to the issues of the asset")
+	assetsCmd.AddCommand(assetDeleteCmd)
+	
 
 	assetsCmd.AddCommand(assetUpdateCmd)
 	assetUpdateCmd.Flags().StringVarP(&assetDescription, "description", "d", "", "description of the asset")
