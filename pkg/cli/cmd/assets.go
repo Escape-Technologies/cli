@@ -31,8 +31,8 @@ var (
 var assetsCmd = &cobra.Command{
 	Use:     "assets",
 	Aliases: []string{"asset"},
-	Short:   "Interact with assets (integrations)",
-	Long:    "Interact with your assets (integrations)",
+	Short:   "Interact with assets or integrations",
+	Long:    "Interact with your assets or integrations",
 }
 
 var assetsListCmd = &cobra.Command{
