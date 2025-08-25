@@ -17,7 +17,6 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
-	"reflect"
 )
 
 
@@ -286,19 +285,19 @@ type ApiListIssuesRequest struct {
 	sortType *string
 	sortDirection *string
 	profileIds *string
-	assetIds *ListProfilesAssetIdsParameter
-	domains *ListProfilesDomainsParameter
-	ids *ListIssuesIdsParameter
+	assetIds *string
+	domains *string
+	ids *string
 	name *string
-	scanIds *ListIssuesScanIdsParameter
-	tagsIds *ListProfilesTagIdsParameter
+	scanIds *string
+	tagsIds *string
 	search *string
 	jiraTicket *string
-	risks *[]string
-	assetClasses *[]string
-	scannerKinds *[]string
-	severities *[]string
-	status *[]string
+	risks *string
+	assetClasses *string
+	scannerKinds *string
+	severities *string
+	status *string
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
@@ -332,19 +331,19 @@ func (r ApiListIssuesRequest) ProfileIds(profileIds string) ApiListIssuesRequest
 }
 
 // Filter by asset IDs
-func (r ApiListIssuesRequest) AssetIds(assetIds ListProfilesAssetIdsParameter) ApiListIssuesRequest {
+func (r ApiListIssuesRequest) AssetIds(assetIds string) ApiListIssuesRequest {
 	r.assetIds = &assetIds
 	return r
 }
 
 // Filter by domain
-func (r ApiListIssuesRequest) Domains(domains ListProfilesDomainsParameter) ApiListIssuesRequest {
+func (r ApiListIssuesRequest) Domains(domains string) ApiListIssuesRequest {
 	r.domains = &domains
 	return r
 }
 
 // Filter by specific issue IDs
-func (r ApiListIssuesRequest) Ids(ids ListIssuesIdsParameter) ApiListIssuesRequest {
+func (r ApiListIssuesRequest) Ids(ids string) ApiListIssuesRequest {
 	r.ids = &ids
 	return r
 }
@@ -356,13 +355,13 @@ func (r ApiListIssuesRequest) Name(name string) ApiListIssuesRequest {
 }
 
 // Filter by scan IDs
-func (r ApiListIssuesRequest) ScanIds(scanIds ListIssuesScanIdsParameter) ApiListIssuesRequest {
+func (r ApiListIssuesRequest) ScanIds(scanIds string) ApiListIssuesRequest {
 	r.scanIds = &scanIds
 	return r
 }
 
 // Filter by tag IDs
-func (r ApiListIssuesRequest) TagsIds(tagsIds ListProfilesTagIdsParameter) ApiListIssuesRequest {
+func (r ApiListIssuesRequest) TagsIds(tagsIds string) ApiListIssuesRequest {
 	r.tagsIds = &tagsIds
 	return r
 }
@@ -380,31 +379,31 @@ func (r ApiListIssuesRequest) JiraTicket(jiraTicket string) ApiListIssuesRequest
 }
 
 // Filter by risk types
-func (r ApiListIssuesRequest) Risks(risks []string) ApiListIssuesRequest {
+func (r ApiListIssuesRequest) Risks(risks string) ApiListIssuesRequest {
 	r.risks = &risks
 	return r
 }
 
 // Filter by asset classes
-func (r ApiListIssuesRequest) AssetClasses(assetClasses []string) ApiListIssuesRequest {
+func (r ApiListIssuesRequest) AssetClasses(assetClasses string) ApiListIssuesRequest {
 	r.assetClasses = &assetClasses
 	return r
 }
 
 // Filter by scanner kinds
-func (r ApiListIssuesRequest) ScannerKinds(scannerKinds []string) ApiListIssuesRequest {
+func (r ApiListIssuesRequest) ScannerKinds(scannerKinds string) ApiListIssuesRequest {
 	r.scannerKinds = &scannerKinds
 	return r
 }
 
 // Filter by issue severities
-func (r ApiListIssuesRequest) Severities(severities []string) ApiListIssuesRequest {
+func (r ApiListIssuesRequest) Severities(severities string) ApiListIssuesRequest {
 	r.severities = &severities
 	return r
 }
 
 // Filter by issue status
-func (r ApiListIssuesRequest) Status(status []string) ApiListIssuesRequest {
+func (r ApiListIssuesRequest) Status(status string) ApiListIssuesRequest {
 	r.status = &status
 	return r
 }
@@ -495,59 +494,19 @@ func (a *IssuesAPIService) ListIssuesExecute(r ApiListIssuesRequest) (*ListIssue
 		parameterAddToHeaderOrQuery(localVarQueryParams, "jiraTicket", r.jiraTicket, "form", "")
 	}
 	if r.risks != nil {
-		t := *r.risks
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "risks", s.Index(i).Interface(), "form", "multi")
-			}
-		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "risks", t, "form", "multi")
-		}
+		parameterAddToHeaderOrQuery(localVarQueryParams, "risks", r.risks, "form", "")
 	}
 	if r.assetClasses != nil {
-		t := *r.assetClasses
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "assetClasses", s.Index(i).Interface(), "form", "multi")
-			}
-		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "assetClasses", t, "form", "multi")
-		}
+		parameterAddToHeaderOrQuery(localVarQueryParams, "assetClasses", r.assetClasses, "form", "")
 	}
 	if r.scannerKinds != nil {
-		t := *r.scannerKinds
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "scannerKinds", s.Index(i).Interface(), "form", "multi")
-			}
-		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "scannerKinds", t, "form", "multi")
-		}
+		parameterAddToHeaderOrQuery(localVarQueryParams, "scannerKinds", r.scannerKinds, "form", "")
 	}
 	if r.severities != nil {
-		t := *r.severities
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "severities", s.Index(i).Interface(), "form", "multi")
-			}
-		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "severities", t, "form", "multi")
-		}
+		parameterAddToHeaderOrQuery(localVarQueryParams, "severities", r.severities, "form", "")
 	}
 	if r.status != nil {
-		t := *r.status
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "status", s.Index(i).Interface(), "form", "multi")
-			}
-		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "status", t, "form", "multi")
-		}
+		parameterAddToHeaderOrQuery(localVarQueryParams, "status", r.status, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

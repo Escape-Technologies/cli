@@ -4,9 +4,27 @@ import (
 	"context"
 	"fmt"
 	"net/http"
+	"strings"
 
 	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
 )
+
+// ListIssuesFilters holds optional filters for listing issues
+type ListIssuesFilters struct {
+	Status       []string
+	Severities   []string
+	ProfileIDs   []string
+	AssetIDs     []string
+	Domains      []string
+	IssueIDs     []string
+	ScanIDs      []string
+	TagsIDs      []string
+	Search       string
+	JiraTicket   string
+	Risks        []string
+	AssetClasses []string
+	ScannerKinds []string
+}
 
 // GetIssue gets an issue by ID
 func GetIssue(ctx context.Context, issueID string) (*v3.IssueDetailed, error) {
@@ -23,8 +41,8 @@ func GetIssue(ctx context.Context, issueID string) (*v3.IssueDetailed, error) {
 	return data, nil
 }
 
-// ListIssues lists all issues
-func ListIssues(ctx context.Context, next string, issueStatus []string, issueSeverity []string) ([]v3.IssueSummarized, *string, error) {
+// ListIssues lists all issues.
+func ListIssues(ctx context.Context, next string, filters *ListIssuesFilters) ([]v3.IssueSummarized, *string, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, nil, fmt.Errorf("unable to init client: %w", err)
@@ -35,12 +53,46 @@ func ListIssues(ctx context.Context, next string, issueStatus []string, issueSev
 		req = req.Cursor(next)
 	}
 
-	if issueStatus != nil {
-		req = req.Status(issueStatus)
-	}
-
-	if issueSeverity != nil {
-		req = req.Severities(issueSeverity)
+	if filters != nil {
+		if len(filters.Status) > 0 {
+			req = req.Status(strings.Join(filters.Status, ","))
+		}
+		if len(filters.Severities) > 0 {
+			req = req.Severities(strings.Join(filters.Severities, ","))
+		}
+		if len(filters.ProfileIDs) > 0 {
+			req = req.ProfileIds(strings.Join(filters.ProfileIDs, ","))
+		}
+		if len(filters.AssetIDs) > 0 {
+			req = req.AssetIds(strings.Join(filters.AssetIDs, ","))
+		}
+		if len(filters.Domains) > 0 {
+			req = req.Domains(strings.Join(filters.Domains, ","))
+		}
+		if len(filters.IssueIDs) > 0 {
+			req = req.Ids(strings.Join(filters.IssueIDs, ","))
+		}
+		if len(filters.ScanIDs) > 0 {
+			req = req.ScanIds(strings.Join(filters.ScanIDs, ","))
+		}
+		if len(filters.TagsIDs) > 0 {
+			req = req.TagsIds(strings.Join(filters.TagsIDs, ","))
+		}
+		if filters.Search != "" {
+			req = req.Search(filters.Search)
+		}
+		if filters.JiraTicket != "" {
+			req = req.JiraTicket(filters.JiraTicket)
+		}
+		if len(filters.Risks) > 0 {
+			req = req.Risks(strings.Join(filters.Risks, ","))
+		}
+		if len(filters.AssetClasses) > 0 {
+			req = req.AssetClasses(strings.Join(filters.AssetClasses, ","))
+		}
+		if len(filters.ScannerKinds) > 0 {
+			req = req.ScannerKinds(strings.Join(filters.ScannerKinds, ","))
+		}
 	}
 
 	data, _, err := req.Execute()
