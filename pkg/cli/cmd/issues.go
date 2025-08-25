@@ -13,10 +13,17 @@ import (
 var (
 	issueUpdateStatusStr string
 	issueSeverity        []string
-	issueStatus          = []string{
-		string(v3.ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS_OPEN),
-		string(v3.ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS_MANUAL_REVIEW),
-	}
+	issueStatus          []string
+	profileIDs           []string
+	assetIDs             []string
+	domains              []string
+	issueIDs             []string
+	scanIDs              []string
+	tagsIDs              []string
+	search               string
+	jiraTicket           string
+	risks                []string
+	assetClasses         []string
 )
 
 var issuesCmd = &cobra.Command{
@@ -36,37 +43,42 @@ Example output:
 ID                                      CREATED AT  SEVERITY  STATUS  NAME                                    ASSET                          LINK
 00000000-0000-0000-0000-000000000001    2025-07-24  INFO      OPEN    Misconfigured CSP Header                https://my.app                 Link`,
 	Example: `escape-cli issues list`, RunE: func(cmd *cobra.Command, _ []string) error {
-		issues, next, err := escape.ListIssues(cmd.Context(), "", issueStatus, issueSeverity)
+		filters := &escape.ListIssuesFilters{
+			Status:       issueStatus,
+			Severities:   issueSeverity,
+			ProfileIDs:   profileIDs,
+			AssetIDs:     assetIDs,
+			Domains:      domains,
+			IssueIds:     issueIDs,
+			ScanIDs:      scanIDs,
+			TagsIDs:      tagsIDs,
+			Risks:        risks,
+			AssetClasses: assetClasses,
+		}
+		issues, next, err := escape.ListIssues(cmd.Context(), "", filters)
 		if err != nil {
 			return fmt.Errorf("unable to list issues: %w", err)
 		}
 
-		result := make([]*v3.IssueSummarized, 0, len(issues))
-		fields := []string{"ID\tCREATED AT\tSEVERITY\tSTATUS\tNAME\tASSET\tLINK"}
-
-		for _, issue := range issues {
-			result = append(result, &issue)
-		}
-		out.Table(result, func() []string {
-			for _, issue := range result {
-				fields = append(fields, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s", issue.GetId(), out.GetShortDate(issue.GetCreatedAt()), issue.GetSeverity(), issue.GetStatus(), issue.GetName(), issue.GetAsset().Name, issue.GetLinks().IssueOverview))
+		out.Table(issues, func() []string {
+			res := []string{"ID\tCREATED AT\tSEVERITY\tSTATUS\tNAME\tASSET\tLINK"}
+			for _, issue := range issues {
+				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s", issue.GetId(), out.GetShortDate(issue.GetCreatedAt()), issue.GetSeverity(), issue.GetStatus(), issue.GetName(), issue.GetAsset().Name, issue.GetLinks().IssueOverview))
 			}
-			return fields
+			return res
 		})
 
 		for next != nil && *next != "" {
-			issues, next, err = escape.ListIssues(cmd.Context(), *next, issueStatus, issueSeverity)
+			issues, next, err = escape.ListIssues(cmd.Context(), *next, filters)
 			if err != nil {
 				return fmt.Errorf("unable to list profiles: %w", err)
 			}
-			for _, issue := range issues {
-				result = append(result, &issue)
-			}
-			out.Table(result, func() []string {
-				for _, issue := range result {
-					fields = append(fields, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s", issue.GetId(), out.GetShortDate(issue.GetCreatedAt()), issue.GetSeverity(), issue.GetStatus(), issue.GetName(), issue.GetAsset().Name, issue.GetLinks().IssueOverview))
+			out.Table(issues, func() []string {
+				res := []string{"ID\tCREATED AT\tSEVERITY\tSTATUS\tNAME\tASSET\tLINK"}
+				for _, issue := range issues {
+					res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s", issue.GetId(), out.GetShortDate(issue.GetCreatedAt()), issue.GetSeverity(), issue.GetStatus(), issue.GetName(), issue.GetAsset().Name, issue.GetLinks().IssueOverview))
 				}
-				return fields
+				return res
 			})
 		}
 
@@ -81,7 +93,7 @@ var issueGetCmd = &cobra.Command{
 	Long: `Get a profile by ID.
 
 Example output:
-ID                                      CREATED AT                  	LINK       												SEVERITY    CATEGORY                  STATUS        NAME                     ASSET
+ID                                      CREATED AT                  \tLINK       \t\t\t\t\t\t\tSEVERITY    CATEGORY                  STATUS        NAME                     ASSET
 00000000-0000-0000-0000-000000000001    2025-06-26T06:03:26.128Z        https://app.escape.tech/all-risks/issues/00000000-0000-0000-0000-000000000001/overview/       HIGH          XXE Injection            https://gontoz.escape.tech/`,
 	Example: `escape-cli profiles get 00000000-0000-0000-0000-000000000001`,
 	Args:    cobra.ExactArgs(1),
@@ -189,6 +201,16 @@ func init() {
 
 	issueListCmd.Flags().StringSliceVarP(&issueStatus, "status", "s", issueStatus, fmt.Sprintf("Status of issues: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESSTATUSEnumValues))
 	issueListCmd.Flags().StringSliceVarP(&issueSeverity, "severity", "l", issueSeverity, fmt.Sprintf("Severity of issues: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESSEVERITYEnumValues))
+	issueListCmd.Flags().StringSliceVarP(&profileIDs, "profile-id", "p", profileIDs, "Profile ID to filter issues by")
+	issueListCmd.Flags().StringSliceVarP(&assetIDs, "asset-id", "a", assetIDs, "Asset ID to filter issues by")
+	issueListCmd.Flags().StringSliceVarP(&domains, "domain", "d", domains, "Domain to filter issues by")
+	issueListCmd.Flags().StringSliceVarP(&issueIDs, "issue-id", "i", issueIDs, "Issue ID to filter issues by")
+	issueListCmd.Flags().StringSliceVarP(&scanIDs, "scan-id", "", []string{}, "Scan ID to filter issues by")
+	issueListCmd.Flags().StringSliceVarP(&tagsIDs, "tag-id", "t", []string{}, "Tag ID to filter issues by")
+	issueListCmd.Flags().StringVarP(&search, "search", "", "", "Search term to filter issues by")
+	issueListCmd.Flags().StringVarP(&jiraTicket, "jira-ticket", "j", "", "Jira ticket to filter issues by")
+	issueListCmd.Flags().StringSliceVarP(&risks, "risk", "r", []string{}, fmt.Sprintf("Risk of issues: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMSEnumValues))
+	issueListCmd.Flags().StringSliceVarP(&assetClasses, "asset-class", "", []string{}, fmt.Sprintf("Asset class of issues: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASSEnumValues))
 
 	rootCmd.AddCommand(issuesCmd)
 }

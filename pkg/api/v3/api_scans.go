@@ -460,7 +460,7 @@ type ApiListScansRequest struct {
 	ignored *string
 	initiator *[]string
 	kinds *[]string
-	status *[]string
+	status *string
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
@@ -524,7 +524,7 @@ func (r ApiListScansRequest) Kinds(kinds []string) ApiListScansRequest {
 }
 
 // Filter by status
-func (r ApiListScansRequest) Status(status []string) ApiListScansRequest {
+func (r ApiListScansRequest) Status(status string) ApiListScansRequest {
 	r.status = &status
 	return r
 }
@@ -622,15 +622,7 @@ func (a *ScansAPIService) ListScansExecute(r ApiListScansRequest) (*ListScans200
 		}
 	}
 	if r.status != nil {
-		t := *r.status
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "status", s.Index(i).Interface(), "form", "multi")
-			}
-		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "status", t, "form", "multi")
-		}
+		parameterAddToHeaderOrQuery(localVarQueryParams, "status", r.status, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
