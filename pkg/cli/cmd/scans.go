@@ -72,7 +72,13 @@ ID                                      CREATED AT                           KIN
 var scanGetCmd = &cobra.Command{
 	Use:     "get scan-id",
 	Aliases: []string{"describe"},
-	Args:    cobra.ExactArgs(1),
+	Args: func(cmd *cobra.Command, args []string) error {
+		if len(args) != 1 {
+			_ = cmd.Help()
+			return errors.New("scan ID is required")
+		}
+		return nil
+	},
 	Short:   "Get scan status",
 	Long: `Return the scan status.
 
@@ -165,7 +171,13 @@ var scanStartCmd = &cobra.Command{
 	Example: `escape-cli scans start 00000000-0000-0000-0000-000000000000
 escape-cli scans start 00000000-0000-0000-0000-000000000000 --commit-hash 1234567890
 escape-cli scans start 00000000-0000-0000-0000-000000000000 --override '{"scan": {"read_only": true}}'`,
-	Args:  cobra.ExactArgs(1),
+	Args: func(cmd *cobra.Command, args []string) error {
+		if len(args) != 1 {
+			_ = cmd.Help()
+			return errors.New("profile ID is required")
+		}
+		return nil
+	},
 	Short: "Start a scan",
 	Long:  "Start a new scan on a profile",
 	RunE: func(cmd *cobra.Command, args []string) error {
@@ -214,7 +226,13 @@ escape-cli scans start 00000000-0000-0000-0000-000000000000 --override '{"scan":
 var scanCancelCmd = &cobra.Command{
 	Use:     "cancel scan-id",
 	Example: `escape-cli scans cancel 00000000-0000-0000-0000-000000000000`,
-	Args:    cobra.ExactArgs(1),
+	Args: func(cmd *cobra.Command, args []string) error {
+		if len(args) != 1 {
+			_ = cmd.Help()
+			return errors.New("scan ID is required")
+		}
+		return nil
+	},
 	Short:   "Cancel a scan",
 	Long:    "Cancel a scan",
 	RunE: func(cmd *cobra.Command, args []string) error {
@@ -231,7 +249,13 @@ var scanCancelCmd = &cobra.Command{
 var scanIgnoreCmd = &cobra.Command{
 	Use:     "ignore scan-id",
 	Example: `escape-cli scans ignore 00000000-0000-0000-0000-000000000000`,
-	Args:    cobra.ExactArgs(1),
+	Args: func(cmd *cobra.Command, args []string) error {
+		if len(args) != 1 {
+			_ = cmd.Help()
+			return errors.New("scan ID is required")
+		}
+		return nil
+	},
 	Short:   "Ignore a scan",
 	Long:    "Ignore a scan",
 	RunE: func(cmd *cobra.Command, args []string) error {
@@ -286,7 +310,13 @@ func watchScan(ctx context.Context, scanID string) error {
 var scanWatchCmd = &cobra.Command{
 	Use:     "watch scan-id",
 	Example: `escape-cli scans watch 00000000-0000-0000-0000-000000000000`,
-	Args:    cobra.ExactArgs(1),
+	Args: func(cmd *cobra.Command, args []string) error {
+		if len(args) != 1 {
+			_ = cmd.Help()
+			return errors.New("scan ID is required")
+		}
+		return nil
+	},
 	Short:   "Watch a scan",
 	Long:    "Bind the current terminal to a scan, listen for events and print them to the terminal. Exit when the scan is done.",
 	RunE: func(cmd *cobra.Command, args []string) error {
@@ -318,7 +348,13 @@ func printScanIssues(ctx context.Context, scanID string) error {
 var scanIssuesCmd = &cobra.Command{
 	Use:     "issues scan-id",
 	Aliases: []string{"results", "res", "result", "issues", "iss"},
-	Args:    cobra.ExactArgs(1),
+	Args: func(cmd *cobra.Command, args []string) error {
+		if len(args) != 1 {
+			_ = cmd.Help()
+			return errors.New("scan ID is required")
+		}
+		return nil
+	},
 	Short:   "List scan issues",
 	Long: `List all issues of a scan.
 
@@ -328,6 +364,10 @@ ID                                      SEVERITY    TYPE    CATEGORY            
 00000000-0000-0000-0000-000000000002    LOW         API     INFORMATION_DISCLOSURE    Debug mode enabled                           false      https://app.escape.tech/scan/00000000-0000-0000-0000-000000000005/issues/00000000-0000-0000-0000-000000000002/overview/`,
 	Example: `escape-cli scans issues 00000000-0000-0000-0000-000000000000`,
 	RunE: func(cmd *cobra.Command, args []string) error {
+		if len(args) != 1 {
+			_ = cmd.Help()
+			return errors.New("scan ID is required")
+		}
 		err := printScanIssues(cmd.Context(), args[0])
 		if err != nil {
 			return fmt.Errorf("unable to get scan issues: %w", err)

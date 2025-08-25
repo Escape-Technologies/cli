@@ -27,7 +27,7 @@ var rootCmd = &cobra.Command{
  ░███ ░   █ ███    ░███░░███     ███ ░███    ░███  ░███         ░███ ░   █   ░░███     ███ ░███      █ ░███ 
  ██████████░░█████████  ░░█████████  █████   █████ █████        ██████████    ░░█████████  ███████████ █████
 ░░░░░░░░░░  ░░░░░░░░░    ░░░░░░░░░  ░░░░░   ░░░░░ ░░░░░        ░░░░░░░░░░      ░░░░░░░░░  ░░░░░░░░░░░ ░░░░░                                                                                                        
-` + "\x1b[0m",
+` + "\x1b[0m" + "\x1b[38;2;6;226;183mEscape CLI V3\x1b[0m",
 	PersistentPreRunE: func(_ *cobra.Command, _ []string) error {
 		if rootCmdVerbose > 0 { //nolint:mnd
 			log.SetLevel(logrus.InfoLevel)
@@ -61,8 +61,10 @@ func init() {
 	rootCmd.PersistentFlags().CountVarP(&rootCmdVerbose, "verbose", "v", "enable verbose output")
 	rootCmd.PersistentFlags().StringVarP(&rootCmdOutputStr, "output", "o", "pretty", "output format (pretty|json|yaml)")
 	rootCmd.SetUsageTemplate(rootCmd.UsageTemplate() + `
+This CLI is based on the Escape API V3.
+
 For additional information, see the documentation: 
-	https://docs.escape.tech/documentation/tooling/cli
+https://docs.escape.tech/documentation/tooling/cli
 `)
 }
 
