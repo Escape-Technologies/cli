@@ -96,7 +96,13 @@ Example output:
 ID                                      CREATED AT                  \tLINK       \t\t\t\t\t\t\tSEVERITY    CATEGORY                  STATUS        NAME                     ASSET
 00000000-0000-0000-0000-000000000001    2025-06-26T06:03:26.128Z        https://app.escape.tech/all-risks/issues/00000000-0000-0000-0000-000000000001/overview/       HIGH          XXE Injection            https://gontoz.escape.tech/`,
 	Example: `escape-cli profiles get 00000000-0000-0000-0000-000000000001`,
-	Args:    cobra.ExactArgs(1),
+	Args: func(cmd *cobra.Command, args []string) error {
+		if len(args) != 1 {
+			_ = cmd.Help()
+			return errors.New("issue ID is required")
+		}
+		return nil
+	},
 	RunE: func(cmd *cobra.Command, args []string) error {
 		issueID := args[0]
 		issue, err := escape.GetIssue(cmd.Context(), issueID)
@@ -119,7 +125,13 @@ var issueUpdateStatusCmd = &cobra.Command{
 	Use:     "update issue-id --status MANUAL_REVIEW",
 	Aliases: []string{"update"},
 	Short:   "Update an issue",
-	Args:    cobra.ExactArgs(1),
+	Args: func(cmd *cobra.Command, args []string) error {
+		if len(args) != 1 {
+			_ = cmd.Help()
+			return errors.New("issue ID is required")
+		}
+		return nil
+	},
 	Long: `Update the status of an issue.
 
 Example output:
@@ -127,8 +139,12 @@ Issue dc8a5509-348c-4319-ab68-3d8382c6f084 updated to status MANUAL_REVIEW`,
 	Example: `escape-cli issues update 00000000-0000-0000-0000-000000000001 -s MANUAL_REVIEW`,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		issueID := args[0]
+		if err := cmd.MarkFlagRequired("status"); err != nil {
+			return fmt.Errorf("failed to mark status flag as required: %w", err)
+		}
 		if issueUpdateStatusStr == "" {
-			return errors.New("no new issue status passed, please use --status to update the issue status")
+			_ = cmd.Help()
+			return errors.New("--status flag is required")
 		}
 
 		// Validate provided status against generated enum
@@ -163,6 +179,13 @@ Example output:
 ID                                      KIND    CREATED AT
 00000000-0000-0000-0000-000000000001    CREATED 2025-06-27T06:02:18.874Z`,
 	Example: `escape-cli issues list-activities 00000000-0000-0000-0000-000000000001`,
+	Args: func(cmd *cobra.Command, args []string) error {
+		if len(args) != 1 {
+			_ = cmd.Help()
+			return errors.New("issue ID is required")
+		}
+		return nil
+	},
 	RunE: func(cmd *cobra.Command, args []string) error {
 		issueID := args[0]
 		activities, err := escape.ListIssueActivities(cmd.Context(), issueID)
