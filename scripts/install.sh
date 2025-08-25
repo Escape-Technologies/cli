@@ -64,5 +64,5 @@ export ESCAPE_API_KEY="your-api-key"
 
 Then, you should be able to run:
 
-escape-cli applications list
+escape-cli profiles list
 EOF

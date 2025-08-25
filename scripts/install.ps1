@@ -48,7 +48,7 @@ Or run this in your terminal:
 
 Then, you should be able to run:
 
-escape-cli applications list
+escape-cli profiles list
 "@
 }
 finally {
