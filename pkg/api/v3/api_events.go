@@ -159,8 +159,8 @@ type ApiListEventsRequest struct {
 	sortType *string
 	sortDirection *string
 	search *string
-	scanIds *ListIssuesScanIdsParameter
-	assetIds *ListProfilesAssetIdsParameter
+	scanIds *string
+	assetIds *string
 	issueIds *ListProfilesIssueIdsParameter
 	levels *[]string
 	stages *[]string
@@ -199,13 +199,13 @@ func (r ApiListEventsRequest) Search(search string) ApiListEventsRequest {
 }
 
 // Filter by scan IDs
-func (r ApiListEventsRequest) ScanIds(scanIds ListIssuesScanIdsParameter) ApiListEventsRequest {
+func (r ApiListEventsRequest) ScanIds(scanIds string) ApiListEventsRequest {
 	r.scanIds = &scanIds
 	return r
 }
 
 // Filter by asset IDs
-func (r ApiListEventsRequest) AssetIds(assetIds ListProfilesAssetIdsParameter) ApiListEventsRequest {
+func (r ApiListEventsRequest) AssetIds(assetIds string) ApiListEventsRequest {
 	r.assetIds = &assetIds
 	return r
 }

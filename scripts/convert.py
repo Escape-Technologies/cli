@@ -177,13 +177,29 @@ for path, path_data in data["paths"].items():
             "trace",
         ]:
             continue
+        
+        list_params = [
+            "profileIds",
+            "assetIds",
+            "domains",
+            "ids",
+            "scanIds",
+            "tagsIds",
+            "search",
+            "jiraTicket",
+            "risks",
+            "assetClasses",
+            "scannerKinds",
+            "severities",
+            "status",
+        ]
 
-        # Handle profileIds parameter at the entry point
+        # Handle profileIds, assetIds, domains parameters at the entry point (support string or array of strings)
         if "parameters" in operation_object:
             for param in operation_object["parameters"]:
-                if param.get("name") == "profileIds":
+                if param.get("name") in list_params:
                     param["schema"] = {"type": "string"}
-
+                    
         responses: dict[str, dict] = operation_object.get("responses", {})
         if not responses:
             continue

@@ -57,9 +57,9 @@ func GetScanIssues(ctx context.Context, scanID string) ([]v3.IssueSummarized, er
 
 	// Use IssuesAPI.ListIssues with scanIds filter
 	req := client.IssuesAPI.ListIssues(ctx)
-	req = req.ScanIds(v3.ListIssuesScanIdsParameter{
-		String: &scanID,
-	})
+	if scanID != "" {
+		req = req.ScanIds(scanID)
+	}
 
 	data, _, err := req.Execute()
 	if err != nil {

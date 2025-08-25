@@ -681,14 +681,14 @@ type ApiListProfilesRequest struct {
 	size *int
 	sortType *string
 	sortDirection *string
-	assetIds *ListProfilesAssetIdsParameter
-	domains *ListProfilesDomainsParameter
+	assetIds *string
+	domains *string
 	issueIds *ListProfilesIssueIdsParameter
 	tagIds *ListProfilesTagIdsParameter
 	search *string
 	initiators *[]string
 	kinds *[]string
-	risks *[]string
+	risks *string
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
@@ -716,13 +716,13 @@ func (r ApiListProfilesRequest) SortDirection(sortDirection string) ApiListProfi
 }
 
 // Filter by asset IDs
-func (r ApiListProfilesRequest) AssetIds(assetIds ListProfilesAssetIdsParameter) ApiListProfilesRequest {
+func (r ApiListProfilesRequest) AssetIds(assetIds string) ApiListProfilesRequest {
 	r.assetIds = &assetIds
 	return r
 }
 
 // Filter by domain
-func (r ApiListProfilesRequest) Domains(domains ListProfilesDomainsParameter) ApiListProfilesRequest {
+func (r ApiListProfilesRequest) Domains(domains string) ApiListProfilesRequest {
 	r.domains = &domains
 	return r
 }
@@ -758,7 +758,7 @@ func (r ApiListProfilesRequest) Kinds(kinds []string) ApiListProfilesRequest {
 }
 
 // Filter by risk
-func (r ApiListProfilesRequest) Risks(risks []string) ApiListProfilesRequest {
+func (r ApiListProfilesRequest) Risks(risks string) ApiListProfilesRequest {
 	r.risks = &risks
 	return r
 }
@@ -859,15 +859,7 @@ func (a *ProfilesAPIService) ListProfilesExecute(r ApiListProfilesRequest) (*Lis
 		}
 	}
 	if r.risks != nil {
-		t := *r.risks
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "risks", s.Index(i).Interface(), "form", "multi")
-			}
-		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "risks", t, "form", "multi")
-		}
+		parameterAddToHeaderOrQuery(localVarQueryParams, "risks", r.risks, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
