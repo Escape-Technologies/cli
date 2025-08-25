@@ -49,7 +49,7 @@ ID                                      CREATED AT  SEVERITY  STATUS  NAME      
 			ProfileIDs:   profileIDs,
 			AssetIDs:     assetIDs,
 			Domains:      domains,
-			IssueIds:     issueIDs,
+			IssueIDs:     issueIDs,
 			ScanIDs:      scanIDs,
 			TagsIDs:      tagsIDs,
 			Risks:        risks,

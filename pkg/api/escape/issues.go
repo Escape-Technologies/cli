@@ -16,7 +16,7 @@ type ListIssuesFilters struct {
 	ProfileIDs   []string
 	AssetIDs     []string
 	Domains      []string
-	IssueIds     []string
+	IssueIDs     []string
 	ScanIDs      []string
 	TagsIDs      []string
 	Search       string
@@ -69,8 +69,8 @@ func ListIssues(ctx context.Context, next string, filters *ListIssuesFilters) ([
 		if len(filters.Domains) > 0 {
 			req = req.Domains(strings.Join(filters.Domains, ","))
 		}
-		if len(filters.IssueIds) > 0 {
-			req = req.Ids(strings.Join(filters.IssueIds, ","))
+		if len(filters.IssueIDs) > 0 {
+			req = req.Ids(strings.Join(filters.IssueIDs, ","))
 		}
 		if len(filters.ScanIDs) > 0 {
 			req = req.ScanIds(strings.Join(filters.ScanIDs, ","))
