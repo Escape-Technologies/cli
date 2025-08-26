@@ -17,6 +17,7 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"reflect"
 )
 
 
@@ -458,7 +459,7 @@ type ApiListScansRequest struct {
 	profileIds *string
 	ignored *string
 	initiator *string
-	kinds *string
+	kinds *[]string
 	status *string
 }
 
@@ -517,7 +518,7 @@ func (r ApiListScansRequest) Initiator(initiator string) ApiListScansRequest {
 }
 
 // Filter by kind
-func (r ApiListScansRequest) Kinds(kinds string) ApiListScansRequest {
+func (r ApiListScansRequest) Kinds(kinds []string) ApiListScansRequest {
 	r.kinds = &kinds
 	return r
 }
@@ -602,7 +603,15 @@ func (a *ScansAPIService) ListScansExecute(r ApiListScansRequest) (*ListScans200
 		parameterAddToHeaderOrQuery(localVarQueryParams, "initiator", r.initiator, "form", "")
 	}
 	if r.kinds != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "kinds", r.kinds, "form", "")
+		t := *r.kinds
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "kinds", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "kinds", t, "form", "multi")
+		}
 	}
 	if r.status != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "status", r.status, "form", "")

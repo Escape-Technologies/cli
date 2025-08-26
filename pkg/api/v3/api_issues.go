@@ -17,6 +17,7 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"reflect"
 )
 
 
@@ -293,7 +294,7 @@ type ApiListIssuesRequest struct {
 	tagsIds *string
 	search *string
 	jiraTicket *string
-	risks *string
+	risks *[]string
 	assetClasses *string
 	scannerKinds *string
 	severities *string
@@ -379,7 +380,7 @@ func (r ApiListIssuesRequest) JiraTicket(jiraTicket string) ApiListIssuesRequest
 }
 
 // Filter by risk types
-func (r ApiListIssuesRequest) Risks(risks string) ApiListIssuesRequest {
+func (r ApiListIssuesRequest) Risks(risks []string) ApiListIssuesRequest {
 	r.risks = &risks
 	return r
 }
@@ -494,7 +495,15 @@ func (a *IssuesAPIService) ListIssuesExecute(r ApiListIssuesRequest) (*ListIssue
 		parameterAddToHeaderOrQuery(localVarQueryParams, "jiraTicket", r.jiraTicket, "form", "")
 	}
 	if r.risks != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "risks", r.risks, "form", "")
+		t := *r.risks
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "risks", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "risks", t, "form", "multi")
+		}
 	}
 	if r.assetClasses != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "assetClasses", r.assetClasses, "form", "")
