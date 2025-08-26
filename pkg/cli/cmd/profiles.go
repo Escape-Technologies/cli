@@ -12,13 +12,18 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var profileKinds = []string{
+	"BLST_REST",
+	"BLST_GRAPHQL",
+	"FRONTEND_DAST",
+}
+
 var profileAssetIDs []string
 var profileDomains []string
 var profileIssueIDs []string
 var profileTagsIDs []string
 var profileSearch string
 var profileInitiators []string
-var profileKinds []string
 var profileRisks []string
 
 var profilesCmd = &cobra.Command{
@@ -28,12 +33,6 @@ var profilesCmd = &cobra.Command{
 	Long:    "Interact with your escape profiles",
 }
 
-func filterProfiles(assetType string) bool {
-	if assetType == string(v3.ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE_REST) || assetType == string(v3.ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE_WEBAPP) || assetType == string(v3.ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE_GRAPHQL) {
-		return true
-	}
-	return false
-}
 
 var profilesListCmd = &cobra.Command{
 	Use:     "list",
@@ -48,7 +47,15 @@ ID                                      CREATED AT              INITIATORS  NAME
 00000000-0000-0000-0000-000000000002    2025-03-12T19:19:08Z    [API]       Example-Application-2`,
 	Example: `escape-cli profiles list`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
-		showAll, _ := cmd.Flags().GetBool("all")
+		allFlag, _ := cmd.Flags().GetBool("all")
+		userKindsProvided := cmd.Flags().Changed("kind")
+		kindsToUse := profileKinds
+		if allFlag && !userKindsProvided {
+			kindsToUse = []string{}
+		} else if !allFlag && !userKindsProvided {
+			kindsToUse = []string{"BLST_REST", "BLST_GRAPHQL", "FRONTEND_DAST"}
+		}
+
 		profiles, next, err := escape.ListProfiles(cmd.Context(), "", &escape.ListProfilesFilters{
 			AssetIDs: profileAssetIDs,
 			Domains: profileDomains,
@@ -56,7 +63,7 @@ ID                                      CREATED AT              INITIATORS  NAME
 			TagsIDs: profileTagsIDs,
 			Search: profileSearch,
 			Initiators: profileInitiators,
-			Kinds: profileKinds,
+			Kinds: kindsToUse,
 			Risks: profileRisks,
 		})
 		if err != nil {
@@ -66,9 +73,7 @@ ID                                      CREATED AT              INITIATORS  NAME
 		out.Table(profiles, func() []string {
 			result := []string{"ID\tCREATED AT\tASSET TYPE\tINITIATORS\tNAME"}
 			for _, profile := range profiles {
-				if filterProfiles(string(profile.GetAsset().Type)) || showAll {
-					result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s\t%s", profile.GetId(), profile.GetCreatedAt(), profile.Asset.GetType(), profile.GetInitiators(), profile.GetName()))
-				}
+				result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s\t%s", profile.GetId(), profile.GetCreatedAt(), profile.Asset.GetType(), profile.GetInitiators(), profile.GetName()))
 			}
 			return result
 		})
@@ -81,7 +86,7 @@ ID                                      CREATED AT              INITIATORS  NAME
 				TagsIDs: profileTagsIDs,
 				Search: profileSearch,
 				Initiators: profileInitiators,
-				Kinds: profileKinds,
+				Kinds: kindsToUse,
 				Risks: profileRisks,
 			})
 			if err != nil {
@@ -90,9 +95,7 @@ ID                                      CREATED AT              INITIATORS  NAME
 			out.Table(profiles, func() []string {
 				result := []string{"ID\tCREATED AT\tASSET TYPE\tINITIATORS\tNAME"}
 				for _, profile := range profiles {
-					if filterProfiles(string(profile.GetAsset().Type)) || showAll {
-						result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s\t%s", profile.GetId(), profile.GetCreatedAt(), profile.Asset.GetType(), profile.GetInitiators(), profile.GetName()))
-					}
+					result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s\t%s", profile.GetId(), profile.GetCreatedAt(), profile.Asset.GetType(), profile.GetInitiators(), profile.GetName()))
 				}
 				return result
 			})

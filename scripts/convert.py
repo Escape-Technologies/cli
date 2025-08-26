@@ -205,11 +205,20 @@ for path, path_data in data["paths"].items():
             "kinds",
         ]
 
-        # Handle profileIds, assetIds, domains parameters at the entry point (support string or array of strings)
+        # Normalize list-like query params
+        # - For params backed by arrayOrSingle on the server (initiators, kinds, risks),
+        #   expose them as arrays so the client sends repeated query params (form+explode)
+        # - Keep others as strings (server accepts CSV via commaSeparatedString)
         if "parameters" in operation_object:
             for param in operation_object["parameters"]:
-                if param.get("name") in list_params:
-                    param["schema"] = {"type": "string"}
+                name = param.get("name")
+                if name in list_params:
+                    if name in ["initiators", "kinds", "risks"]:
+                        param["schema"] = {"type": "array", "items": {"type": "string"}}
+                        param["style"] = "form"
+                        param["explode"] = True
+                    else:
+                        param["schema"] = {"type": "string"}
                     
         responses: dict[str, dict] = operation_object.get("responses", {})
         if not responses:

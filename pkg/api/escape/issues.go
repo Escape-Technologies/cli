@@ -85,7 +85,7 @@ func ListIssues(ctx context.Context, next string, filters *ListIssuesFilters) ([
 			req = req.JiraTicket(filters.JiraTicket)
 		}
 		if len(filters.Risks) > 0 {
-			req = req.Risks(strings.Join(filters.Risks, ","))
+			req = req.Risks(filters.Risks)
 		}
 		if len(filters.AssetClasses) > 0 {
 			req = req.AssetClasses(strings.Join(filters.AssetClasses, ","))
