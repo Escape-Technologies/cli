@@ -184,7 +184,11 @@ for path, path_data in data["paths"].items():
             "domains",
             "ids",
             "scanIds",
+            "issueIds",
+            "stages",
+            "attachments",
             "tagsIds",
+            "tagIds",
             "search",
             "jiraTicket",
             "risks",
@@ -192,6 +196,13 @@ for path, path_data in data["paths"].items():
             "scannerKinds",
             "severities",
             "status",
+            "levels",
+            "types",
+            "statuses",
+            "type",
+            "initiator",
+            "initiators",
+            "kinds",
         ]
 
         # Handle profileIds, assetIds, domains parameters at the entry point (support string or array of strings)

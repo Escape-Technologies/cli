@@ -9,6 +9,9 @@ import (
 	"github.com/Escape-Technologies/cli/pkg/locations"
 	"github.com/spf13/cobra"
 )
+var locationsSearch = ""
+var locationsEnabled = false
+var locationsLocationTypes = []string{}
 
 var locationsCmd = &cobra.Command{
 	Use:     "locations",
@@ -29,7 +32,11 @@ ID                                      NAME                       SSH PUBLIC KE
 00000000-0000-0000-0000-000000000002    example-location-2         ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAI... example2@email.com`,
 	Example: `escape-cli locations list`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
-		locations, next, err := escape.ListLocations(cmd.Context(), "")
+		locations, next, err := escape.ListLocations(cmd.Context(), "", &escape.ListLocationsFilters{
+			Search: locationsSearch,
+			Enabled: locationsEnabled,
+			LocationTypes: locationsLocationTypes,
+		})
 		if err != nil {
 			return fmt.Errorf("failed to list locations: %w", err)
 		}
@@ -51,7 +58,11 @@ ID                                      NAME                       SSH PUBLIC KE
 			return res
 		})
 		for next != nil && *next != "" {
-			locations, next, err = escape.ListLocations(cmd.Context(), *next)
+			locations, next, err = escape.ListLocations(cmd.Context(), *next, &escape.ListLocationsFilters{
+				Search: locationsSearch,
+				Enabled: locationsEnabled,
+				LocationTypes: locationsLocationTypes,
+			})
 			if err != nil {
 				return fmt.Errorf("failed to list locations: %w", err)
 			}
@@ -138,4 +149,7 @@ func init() {
 	locationsCmd.AddCommand(locationsStartCmd)
 	locationsCmd.AddCommand(locationsDeleteCmd)
 	rootCmd.AddCommand(locationsCmd)
+	locationsListCmd.Flags().StringVarP(&locationsSearch, "search", "s", "", "Search term to filter locations by")
+	locationsListCmd.Flags().BoolVarP(&locationsEnabled, "enabled", "e", false, "Filter by enabled locations")
+	locationsListCmd.Flags().StringSliceVarP(&locationsLocationTypes, "type", "t", []string{}, "Filter by location type (private, escape, repeater)")
 }

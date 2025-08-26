@@ -13,6 +13,8 @@ var (
 	auditCmdDateFrom  = time.Now().Add(-12 * time.Hour).Format(time.RFC3339)
 	auditCmdDateTo    = time.Now().Format(time.RFC3339)
 	auditCmdEventType = ""
+	auditCmdActor     = ""
+	auditCmdSearch    = ""
 )
 
 var auditCmd = &cobra.Command{
@@ -31,10 +33,14 @@ var auditListCmd = &cobra.Command{
 	RunE: func(cmd *cobra.Command, _ []string) error {
 		logs, next, err := escape.ListAuditLogs(
 			cmd.Context(),
-			auditCmdDateFrom,
-			auditCmdDateTo,
-			auditCmdEventType,
 			"",
+			&escape.ListAuditLogsFilters{
+				DateFrom:   auditCmdDateFrom,
+				DateTo:     auditCmdDateTo,
+				ActionType: auditCmdEventType,
+				Actor:      auditCmdActor,
+				Search:     auditCmdSearch,
+			},
 		)
 		if err != nil {
 			return fmt.Errorf("unable to list audits: %w", err)
@@ -58,10 +64,12 @@ var auditListCmd = &cobra.Command{
 		for next != nil && *next != "" {
 			logs, next, err = escape.ListAuditLogs(
 				cmd.Context(),
-				auditCmdDateFrom,
-				auditCmdDateTo,
-				auditCmdEventType,
 				*next,
+				&escape.ListAuditLogsFilters{
+					DateFrom: auditCmdDateFrom,
+					DateTo:   auditCmdDateTo,
+					ActionType: auditCmdEventType,
+				},
 			)
 			if err != nil {
 				return fmt.Errorf("unable to list audits: %w", err)
@@ -92,5 +100,7 @@ func init() {
 	// theses are optional flags for the list command
 	auditListCmd.Flags().StringVarP(&auditCmdDateFrom, "date-from", "f", auditCmdDateFrom, "Filter by date from (ISO 8601)")
 	auditListCmd.Flags().StringVarP(&auditCmdDateTo, "date-to", "t", auditCmdDateTo, "Filter by date to (ISO 8601)")
-	auditListCmd.Flags().StringVarP(&auditCmdEventType, "event-type", "e", "", "Filter by event type: (scan.scheduled, scan.started, scan.finished)")
+	auditListCmd.Flags().StringVarP(&auditCmdEventType, "event-type", "e", "", "Filter by event type: (scan.scheduled, scan.started, scan.finished, user.authenticated)")
+	auditListCmd.Flags().StringVarP(&auditCmdActor, "actor", "a", "", "Filter by actor")
+	auditListCmd.Flags().StringVarP(&auditCmdSearch, "search", "s", "", "Search term to filter audit logs by")
 }

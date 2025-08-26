@@ -17,7 +17,6 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
-	"reflect"
 )
 
 
@@ -429,7 +428,7 @@ type ApiListLocationsRequest struct {
 	sortDirection *string
 	search *string
 	enabled *string
-	type_ *[]string
+	type_ *string
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
@@ -466,7 +465,7 @@ func (r ApiListLocationsRequest) Enabled(enabled string) ApiListLocationsRequest
 	return r
 }
 
-func (r ApiListLocationsRequest) Type_(type_ []string) ApiListLocationsRequest {
+func (r ApiListLocationsRequest) Type_(type_ string) ApiListLocationsRequest {
 	r.type_ = &type_
 	return r
 }
@@ -536,15 +535,7 @@ func (a *LocationsAPIService) ListLocationsExecute(r ApiListLocationsRequest) (*
 		parameterAddToHeaderOrQuery(localVarQueryParams, "enabled", r.enabled, "form", "")
 	}
 	if r.type_ != nil {
-		t := *r.type_
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "type", s.Index(i).Interface(), "form", "multi")
-			}
-		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "type", t, "form", "multi")
-		}
+		parameterAddToHeaderOrQuery(localVarQueryParams, "type", r.type_, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
