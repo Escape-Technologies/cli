@@ -14,7 +14,13 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var profileID []string
+var scanProfileIDs []string
+var scanAfter string
+var scanBefore string
+var scanIgnored string
+var scanInitiator []string
+var scanKinds []string
+var scanStatus []string
 
 var scansCmd = &cobra.Command{
 	Use:     "scans",
@@ -37,7 +43,15 @@ ID                                      CREATED AT                           KIN
 00000000-0000-0000-0000-000000000004    2025-01-30 08:25:49.656 +0000 UTC    BLST_REST    FINISHED		0.000000    Link`,
 	Example: `escape-cli scans list -p 00000000-0000-0000-0000-000000000000`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
-		scans, next, err := escape.ListScans(cmd.Context(), &profileID, "")
+		scans, next, err := escape.ListScans(cmd.Context(), "", &escape.ListScansFilters{
+			ProfileIDs: &scanProfileIDs,
+			After:      scanAfter,
+			Before:     scanBefore,
+			Ignored:    scanIgnored,
+			Initiator:  &scanInitiator,
+			Kinds:      &scanKinds,
+			Status:     &scanStatus,
+		})
 		if err != nil {
 			return fmt.Errorf("unable to list scans: %w", err)
 		}
@@ -50,7 +64,15 @@ ID                                      CREATED AT                           KIN
 		})
 
 		for next != nil && *next != "" {
-			scans, next, err = escape.ListScans(cmd.Context(), &profileID, *next)
+			scans, next, err = escape.ListScans(cmd.Context(), *next, &escape.ListScansFilters{
+				ProfileIDs: &scanProfileIDs,
+				After:      scanAfter,
+				Before:     scanBefore,
+				Ignored:    scanIgnored,
+				Initiator:  &scanInitiator,
+				Kinds:      &scanKinds,
+				Status:     &scanStatus,
+			})
 
 			if err != nil {
 				return fmt.Errorf("unable to list scans: %w", err)
@@ -378,7 +400,13 @@ ID                                      SEVERITY    TYPE    CATEGORY            
 
 func init() {
 	scansCmd.AddCommand(scansListCmd)
-	scansListCmd.PersistentFlags().StringSliceVarP(&profileID, "profile-id", "p", []string{}, "profile IDs")
+	scansListCmd.PersistentFlags().StringSliceVarP(&scanProfileIDs, "profile-id", "p", []string{}, "profile IDs")
+	scansListCmd.PersistentFlags().StringVar(&scanAfter, "after", "", "after")
+	scansListCmd.PersistentFlags().StringVar(&scanBefore, "before", "", "before")
+	scansListCmd.PersistentFlags().StringVar(&scanIgnored, "ignored", "", "ignored")
+	scansListCmd.PersistentFlags().StringSliceVarP(&scanInitiator, "initiator", "i", []string{}, "initiator")
+	scansListCmd.PersistentFlags().StringSliceVarP(&scanKinds, "kind", "k", []string{}, "scanner kind")
+	scansListCmd.PersistentFlags().StringSliceVarP(&scanStatus, "status", "s", []string{}, "scan status: (CANCELED, FAILED, FINISHED, RUNNING, STARTING)")
 	scanStartCmd.PersistentFlags().BoolVarP(&scanStartCmdWatch, "watch", "w", false, "watch for events")
 	scanStartCmd.PersistentFlags().StringVar(&scanStartCmdCommitHash, "commit-hash", "", "commit hash")
 	scanStartCmd.PersistentFlags().StringVar(&scanStartCmdCommitLink, "commit-link", "", "commit link")

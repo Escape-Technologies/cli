@@ -17,7 +17,6 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
-	"reflect"
 )
 
 
@@ -161,11 +160,11 @@ type ApiListEventsRequest struct {
 	search *string
 	scanIds *string
 	assetIds *string
-	issueIds *ListProfilesIssueIdsParameter
-	levels *[]string
-	stages *[]string
+	issueIds *string
+	levels *string
+	stages *string
 	hasAttachments *string
-	attachments *[]string
+	attachments *string
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
@@ -211,19 +210,19 @@ func (r ApiListEventsRequest) AssetIds(assetIds string) ApiListEventsRequest {
 }
 
 // Filter by issue IDs
-func (r ApiListEventsRequest) IssueIds(issueIds ListProfilesIssueIdsParameter) ApiListEventsRequest {
+func (r ApiListEventsRequest) IssueIds(issueIds string) ApiListEventsRequest {
 	r.issueIds = &issueIds
 	return r
 }
 
 // Filter by level
-func (r ApiListEventsRequest) Levels(levels []string) ApiListEventsRequest {
+func (r ApiListEventsRequest) Levels(levels string) ApiListEventsRequest {
 	r.levels = &levels
 	return r
 }
 
 // Filter by stage
-func (r ApiListEventsRequest) Stages(stages []string) ApiListEventsRequest {
+func (r ApiListEventsRequest) Stages(stages string) ApiListEventsRequest {
 	r.stages = &stages
 	return r
 }
@@ -235,7 +234,7 @@ func (r ApiListEventsRequest) HasAttachments(hasAttachments string) ApiListEvent
 }
 
 // Filter by attachments
-func (r ApiListEventsRequest) Attachments(attachments []string) ApiListEventsRequest {
+func (r ApiListEventsRequest) Attachments(attachments string) ApiListEventsRequest {
 	r.attachments = &attachments
 	return r
 }
@@ -311,40 +310,16 @@ func (a *EventsAPIService) ListEventsExecute(r ApiListEventsRequest) (*ListEvent
 		parameterAddToHeaderOrQuery(localVarQueryParams, "issueIds", r.issueIds, "form", "")
 	}
 	if r.levels != nil {
-		t := *r.levels
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "levels", s.Index(i).Interface(), "form", "multi")
-			}
-		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "levels", t, "form", "multi")
-		}
+		parameterAddToHeaderOrQuery(localVarQueryParams, "levels", r.levels, "form", "")
 	}
 	if r.stages != nil {
-		t := *r.stages
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "stages", s.Index(i).Interface(), "form", "multi")
-			}
-		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "stages", t, "form", "multi")
-		}
+		parameterAddToHeaderOrQuery(localVarQueryParams, "stages", r.stages, "form", "")
 	}
 	if r.hasAttachments != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "hasAttachments", r.hasAttachments, "form", "")
 	}
 	if r.attachments != nil {
-		t := *r.attachments
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "attachments", s.Index(i).Interface(), "form", "multi")
-			}
-		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "attachments", t, "form", "multi")
-		}
+		parameterAddToHeaderOrQuery(localVarQueryParams, "attachments", r.attachments, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

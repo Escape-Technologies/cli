@@ -42,7 +42,8 @@ var issueListCmd = &cobra.Command{
 Example output:
 ID                                      CREATED AT  SEVERITY  STATUS  NAME                                    ASSET                          LINK
 00000000-0000-0000-0000-000000000001    2025-07-24  INFO      OPEN    Misconfigured CSP Header                https://my.app                 Link`,
-	Example: `escape-cli issues list`, RunE: func(cmd *cobra.Command, _ []string) error {
+	Example: `escape-cli issues list`, 
+	RunE: func(cmd *cobra.Command, _ []string) error {
 		filters := &escape.ListIssuesFilters{
 			Status:       issueStatus,
 			Severities:   issueSeverity,
@@ -222,7 +223,8 @@ func init() {
 
 	issuesCmd.AddCommand(issueListCmd)
 
-	issueListCmd.Flags().StringSliceVarP(&issueStatus, "status", "s", issueStatus, fmt.Sprintf("Status of issues: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESSTATUSEnumValues))
+	issueListCmd.Flags().StringVarP(&search, "search", "s", "", "Search term to filter issues by")
+	issueListCmd.Flags().StringSliceVarP(&issueStatus, "status", "", issueStatus, fmt.Sprintf("Status of issues: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESSTATUSEnumValues))
 	issueListCmd.Flags().StringSliceVarP(&issueSeverity, "severity", "l", issueSeverity, fmt.Sprintf("Severity of issues: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESSEVERITYEnumValues))
 	issueListCmd.Flags().StringSliceVarP(&profileIDs, "profile-id", "p", profileIDs, "Profile ID to filter issues by")
 	issueListCmd.Flags().StringSliceVarP(&assetIDs, "asset-id", "a", assetIDs, "Asset ID to filter issues by")
@@ -230,7 +232,6 @@ func init() {
 	issueListCmd.Flags().StringSliceVarP(&issueIDs, "issue-id", "i", issueIDs, "Issue ID to filter issues by")
 	issueListCmd.Flags().StringSliceVarP(&scanIDs, "scan-id", "", []string{}, "Scan ID to filter issues by")
 	issueListCmd.Flags().StringSliceVarP(&tagsIDs, "tag-id", "t", []string{}, "Tag ID to filter issues by")
-	issueListCmd.Flags().StringVarP(&search, "search", "", "", "Search term to filter issues by")
 	issueListCmd.Flags().StringVarP(&jiraTicket, "jira-ticket", "j", "", "Jira ticket to filter issues by")
 	issueListCmd.Flags().StringSliceVarP(&risks, "risk", "r", []string{}, fmt.Sprintf("Risk of issues: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMSEnumValues))
 	issueListCmd.Flags().StringSliceVarP(&assetClasses, "asset-class", "", []string{}, fmt.Sprintf("Asset class of issues: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASSEnumValues))

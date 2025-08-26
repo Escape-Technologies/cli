@@ -10,22 +10,52 @@ import (
 	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
 )
 
+// ListScansFilters holds optional filters for listing scans
+type ListScansFilters struct {
+	After      string
+	Before     string
+	ProfileIDs *[]string
+	Ignored    string
+	Initiator  *[]string
+	Kinds      *[]string
+	Status     *[]string
+}
+
 // ListScans lists all scans for an application
-func ListScans(ctx context.Context, profileIDs *[]string, next string) ([]v3.ScanSummarized1, *string, error) {
+func ListScans(ctx context.Context, next string, filters *ListScansFilters) ([]v3.ScanSummarized1, *string, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, nil, fmt.Errorf("unable to init client: %w", err)
 	}
 	req := client.ScansAPI.ListScans(ctx)
 
-	if profileIDs != nil && len(*profileIDs) > 0 {
-		req = req.ProfileIds(strings.Join(*profileIDs, ","))
-	}
-
 	batchSize := 100
 	req = req.SortType("createdAt").SortDirection("desc").Size(batchSize)
 	if next != "" {
 		req = req.Cursor(next)
+	}
+	if filters != nil {
+		if filters.After != "" {
+			req = req.After(filters.After)
+		}
+		if filters.Before != "" {
+			req = req.Before(filters.Before)
+		}
+		if filters.ProfileIDs != nil && len(*filters.ProfileIDs) > 0 {
+			req = req.ProfileIds(strings.Join(*filters.ProfileIDs, ","))
+		}
+		if filters.Ignored != "" {
+			req = req.Ignored(filters.Ignored)
+		}
+		if filters.Initiator != nil && len(*filters.Initiator) > 0 {
+			req = req.Initiator(strings.Join(*filters.Initiator, ","))
+		}
+		if filters.Kinds != nil && len(*filters.Kinds) > 0 {
+			req = req.Kinds(strings.Join(*filters.Kinds, ","))
+		}
+		if filters.Status != nil && len(*filters.Status) > 0 {
+			req = req.Status(strings.Join(*filters.Status, ","))
+		}
 	}
 	data, _, err := req.Execute()
 

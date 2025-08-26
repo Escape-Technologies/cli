@@ -17,7 +17,6 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
-	"reflect"
 )
 
 
@@ -458,8 +457,8 @@ type ApiListScansRequest struct {
 	before *string
 	profileIds *string
 	ignored *string
-	initiator *[]string
-	kinds *[]string
+	initiator *string
+	kinds *string
 	status *string
 }
 
@@ -512,13 +511,13 @@ func (r ApiListScansRequest) Ignored(ignored string) ApiListScansRequest {
 }
 
 // Filter by initiator
-func (r ApiListScansRequest) Initiator(initiator []string) ApiListScansRequest {
+func (r ApiListScansRequest) Initiator(initiator string) ApiListScansRequest {
 	r.initiator = &initiator
 	return r
 }
 
 // Filter by kind
-func (r ApiListScansRequest) Kinds(kinds []string) ApiListScansRequest {
+func (r ApiListScansRequest) Kinds(kinds string) ApiListScansRequest {
 	r.kinds = &kinds
 	return r
 }
@@ -600,26 +599,10 @@ func (a *ScansAPIService) ListScansExecute(r ApiListScansRequest) (*ListScans200
 		parameterAddToHeaderOrQuery(localVarQueryParams, "ignored", r.ignored, "form", "")
 	}
 	if r.initiator != nil {
-		t := *r.initiator
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "initiator", s.Index(i).Interface(), "form", "multi")
-			}
-		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "initiator", t, "form", "multi")
-		}
+		parameterAddToHeaderOrQuery(localVarQueryParams, "initiator", r.initiator, "form", "")
 	}
 	if r.kinds != nil {
-		t := *r.kinds
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "kinds", s.Index(i).Interface(), "form", "multi")
-			}
-		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "kinds", t, "form", "multi")
-		}
+		parameterAddToHeaderOrQuery(localVarQueryParams, "kinds", r.kinds, "form", "")
 	}
 	if r.status != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "status", r.status, "form", "")

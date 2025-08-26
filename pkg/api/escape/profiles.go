@@ -4,12 +4,25 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"strings"
 
 	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
 )
 
+// ListProfilesFilters holds optional filters for listing profiles
+type ListProfilesFilters struct {
+	AssetIDs []string
+	Domains []string
+	IssueIDs []string
+	TagsIDs []string
+	Search string
+	Initiators []string
+	Kinds []string
+	Risks []string
+}
+
 // ListProfiles lists all profiles
-func ListProfiles(ctx context.Context, next string) ([]v3.ProfileSummarized, *string, error) {
+func ListProfiles(ctx context.Context, next string, filters *ListProfilesFilters) ([]v3.ProfileSummarized, *string, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, nil, fmt.Errorf("unable to init client: %w", err)
@@ -17,6 +30,32 @@ func ListProfiles(ctx context.Context, next string) ([]v3.ProfileSummarized, *st
 	req := client.ProfilesAPI.ListProfiles(ctx)
 	if next != "" {
 		req = req.Cursor(next)
+	}
+	if filters != nil {
+		if len(filters.AssetIDs) > 0 {
+			req = req.AssetIds(strings.Join(filters.AssetIDs, ","))
+		}
+		if len(filters.Domains) > 0 {
+			req = req.Domains(strings.Join(filters.Domains, ","))
+		}
+		if len(filters.IssueIDs) > 0 {
+			req = req.IssueIds(strings.Join(filters.IssueIDs, ","))
+		}
+		if len(filters.TagsIDs) > 0 {
+			req = req.TagIds(strings.Join(filters.TagsIDs, ","))
+		}
+		if filters.Search != "" {
+			req = req.Search(filters.Search)
+		}
+		if len(filters.Initiators) > 0 {
+			req = req.Initiators(strings.Join(filters.Initiators, ","))
+		}
+		if len(filters.Kinds) > 0 {
+			req = req.Kinds(strings.Join(filters.Kinds, ","))
+		}
+		if len(filters.Risks) > 0 {
+			req = req.Risks(strings.Join(filters.Risks, ","))
+		}
 	}
 	data, _, err := req.Execute()
 	if err != nil {
