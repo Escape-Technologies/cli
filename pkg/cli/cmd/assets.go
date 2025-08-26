@@ -18,6 +18,7 @@ var (
 	assetTypes    = []string{}
 	assetStatuses = []string{}
 	assetActivities = false
+	manuallyCreated = false
 )
 
 var (
@@ -47,7 +48,12 @@ ID                                      CREATED AT                            TY
 00000000-0000-0000-0000-000000000002    2025-07-22T15:52:41.697Z              WEBAPP                          https://escape.tech             [EXPOSED UNAUTHENTICATED]       MONITORED    2025-07-22T15:52:41.697Z`,
 
 	RunE: func(cmd *cobra.Command, _ []string) error {
-		assets, next, err := escape.ListAssets(cmd.Context(), "", assetTypes, assetStatuses)
+		assets, next, err := escape.ListAssets(cmd.Context(), "", &escape.ListAssetsFilters{
+			AssetTypes: assetTypes,
+			AssetStatuses: assetStatuses,
+			Search: search,
+			ManuallyCreated: manuallyCreated,
+		})
 		if err != nil {
 			return fmt.Errorf("unable to list assets: %w", err)
 		}
@@ -64,8 +70,12 @@ ID                                      CREATED AT                            TY
 			assets, next, err = escape.ListAssets(
 				cmd.Context(),
 				*next,
-				assetTypes,
-				assetStatuses,
+				&escape.ListAssetsFilters{
+					AssetTypes: assetTypes,
+					AssetStatuses: assetStatuses,
+					Search: search,
+					ManuallyCreated: manuallyCreated,
+				},
 			)
 			if err != nil {
 				return fmt.Errorf("unable to list assets: %w", err)
@@ -281,7 +291,9 @@ func init() {
 	rootCmd.AddCommand(assetsCmd)
 	assetsCmd.AddCommand(assetsListCmd)
 	assetsListCmd.Flags().StringSliceVarP(&assetTypes, "types", "t", []string{}, fmt.Sprintf("Filter by asset types: %v", v3.AllowedENUMPROPERTIESFRAMEWORKEnumValues))
-	assetsListCmd.Flags().StringSliceVarP(&assetStatuses, "statuses", "s", []string{}, fmt.Sprintf("Filter by asset statuses: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUSEnumValues))
+	assetsListCmd.Flags().StringSliceVarP(&assetStatuses, "statuses", "", []string{}, fmt.Sprintf("Filter by asset statuses: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUSEnumValues))
+	assetsListCmd.Flags().StringVarP(&search, "search", "s", "", "Search term to filter assets by")
+	assetsListCmd.Flags().BoolVarP(&manuallyCreated, "manually-created", "m", false, "Filter by manually created assets")
 	
 	assetsCmd.AddCommand(assetGetCmd)
 	assetGetCmd.Flags().BoolVarP(&assetActivities, "activities", "a", false, "list of activities attached to the issues of the asset")

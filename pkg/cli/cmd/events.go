@@ -12,10 +12,10 @@ import (
 )
 
 var (
-	eventLevels = []string{
-		string(v3.ENUMPROPERTIESDATAITEMSPROPERTIESLEVEL_ERROR),
-		//string(v3.ENUMPROPERTIESDATAITEMSPROPERTIESLEVEL_WARNING),
-	}
+	stages []string
+	hasAttachments bool
+	attachments []string
+	eventLevels []string
 )
 
 var eventsCmd = &cobra.Command{
@@ -36,7 +36,17 @@ ID                                      LEVEL    TITLE                      STAG
 00000000-0000-0000-0000-000000000001    INFO     Scan started              	EXECUTION        2025-08-12T14:04:58.117Z`,
 	Example: `escape-cli events list`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
-		events, next, err := escape.ListEvents(cmd.Context(), "", eventLevels)
+		filters := &escape.ListEventsFilters{
+			Search: search,
+			ScanIDs: scanIDs,
+			AssetIDs: assetIDs,
+			IssueIDs: issueIDs,
+			Stages: stages,
+			HasAttachments: hasAttachments,
+			Attachments: attachments,
+			Levels: eventLevels,
+		}
+		events, next, err := escape.ListEvents(cmd.Context(), "", filters)
 		if err != nil {
 			return fmt.Errorf("unable to list events: %w", err)
 		}
@@ -49,7 +59,7 @@ ID                                      LEVEL    TITLE                      STAG
 		})
 
 		for next != nil && *next != "" {
-			events, next, err = escape.ListEvents(cmd.Context(), *next, eventLevels)
+			events, next, err = escape.ListEvents(cmd.Context(), *next, filters)
 		
 			if err != nil {
 				return fmt.Errorf("unable to list profiles: %w", err)
@@ -104,6 +114,13 @@ ID                                      LEVEL    TITLE                          
 
 func init() {
 	eventsCmd.AddCommand(eventsListCmd)
+	eventsListCmd.Flags().StringVarP(&search, "search", "s", "", "Search term to filter events by")
+	eventsListCmd.Flags().StringSliceVarP(&scanIDs, "scan-id", "", []string{}, "Scan ID to filter events by")
+	eventsListCmd.Flags().StringSliceVarP(&assetIDs, "asset-id", "a", assetIDs, "Asset ID to filter events by")
+	eventsListCmd.Flags().StringSliceVarP(&issueIDs, "issue-id", "i", []string{}, "Issue ID to filter events by")
+	eventsListCmd.Flags().StringSliceVarP(&stages, "stage", "", stages, fmt.Sprintf("Stages of events: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESSTAGEEnumValues))
+	eventsListCmd.Flags().BoolVarP(&hasAttachments, "has-attachments", "", hasAttachments, "Has attachments")
+	eventsListCmd.Flags().StringSliceVarP(&attachments, "attachments", "t", attachments, "Attachments to filter events by")
 	eventsListCmd.Flags().StringSliceVarP(&eventLevels, "levels", "l", eventLevels, fmt.Sprintf("levels of events: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESLEVELEnumValues))
 
 	eventsCmd.AddCommand(eventGetCmd)

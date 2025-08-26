@@ -12,6 +12,15 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var profileAssetIDs []string
+var profileDomains []string
+var profileIssueIDs []string
+var profileTagsIDs []string
+var profileSearch string
+var profileInitiators []string
+var profileKinds []string
+var profileRisks []string
+
 var profilesCmd = &cobra.Command{
 	Use:     "profiles",
 	Aliases: []string{"profile", "profiles"},
@@ -40,7 +49,16 @@ ID                                      CREATED AT              INITIATORS  NAME
 	Example: `escape-cli profiles list`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
 		showAll, _ := cmd.Flags().GetBool("all")
-		profiles, next, err := escape.ListProfiles(cmd.Context(), "")
+		profiles, next, err := escape.ListProfiles(cmd.Context(), "", &escape.ListProfilesFilters{
+			AssetIDs: profileAssetIDs,
+			Domains: profileDomains,
+			IssueIDs: profileIssueIDs,
+			TagsIDs: profileTagsIDs,
+			Search: profileSearch,
+			Initiators: profileInitiators,
+			Kinds: profileKinds,
+			Risks: profileRisks,
+		})
 		if err != nil {
 			return fmt.Errorf("unable to list profiles: %w", err)
 		}
@@ -56,7 +74,16 @@ ID                                      CREATED AT              INITIATORS  NAME
 		})
 
 		for next != nil && *next != "" {
-			profiles, next, err = escape.ListProfiles(cmd.Context(), *next)
+			profiles, next, err = escape.ListProfiles(cmd.Context(), *next, &escape.ListProfilesFilters{
+				AssetIDs: profileAssetIDs,
+				Domains: profileDomains,
+				IssueIDs: profileIssueIDs,
+				TagsIDs: profileTagsIDs,
+				Search: profileSearch,
+				Initiators: profileInitiators,
+				Kinds: profileKinds,
+				Risks: profileRisks,
+			})
 			if err != nil {
 				return fmt.Errorf("unable to list profiles: %w", err)
 			}
@@ -211,5 +238,13 @@ func init() {
 		profileCreateGraphqlCmd,
 	)
 	profilesListCmd.Flags().Bool("all", false, "Show profiles for all asset types")
+	profilesListCmd.Flags().StringSliceVarP(&profileAssetIDs, "asset-id", "a", []string{}, "asset ID")
+	profilesListCmd.Flags().StringSliceVarP(&profileDomains, "domain", "d", []string{}, "domain")
+	profilesListCmd.Flags().StringSliceVarP(&profileIssueIDs, "issue-id", "i", []string{}, "issue ID")
+	profilesListCmd.Flags().StringSliceVarP(&profileTagsIDs, "tag-id", "t", []string{}, "tag ID")
+	profilesListCmd.Flags().StringVarP(&profileSearch, "search", "s", "", "search")
+	profilesListCmd.Flags().StringSliceVarP(&profileInitiators, "initiator", "n", []string{}, "initiator")
+	profilesListCmd.Flags().StringSliceVarP(&profileKinds, "kind", "k", []string{}, "kind")
+	profilesListCmd.Flags().StringSliceVarP(&profileRisks, "risk", "r", []string{}, "risk")
 	rootCmd.AddCommand(profilesCmd)
 }

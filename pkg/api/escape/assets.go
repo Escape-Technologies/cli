@@ -8,13 +8,22 @@ import (
 	"io"
 	"net/http"
 	"reflect"
+	"strconv"
 	"strings"
 
 	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
 )
 
+// ListAssetsFilters holds optional filters for listing assets
+type ListAssetsFilters struct {
+	AssetTypes []string
+	AssetStatuses []string
+	Search string
+	ManuallyCreated bool
+}
+
 // ListAssets lists all assets
-func ListAssets(ctx context.Context, next string, assetTypes []string, assetStatuses []string) ([]v3.AssetSummarized, *string, error) {
+func ListAssets(ctx context.Context, next string, filters *ListAssetsFilters) ([]v3.AssetSummarized, *string, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, nil, fmt.Errorf("unable to init client: %w", err)
@@ -24,11 +33,19 @@ func ListAssets(ctx context.Context, next string, assetTypes []string, assetStat
 	if next != "" {
 		req = req.Cursor(next)
 	}
-	if len(assetTypes) > 0 {
-		req = req.Types(assetTypes)
-	}
-	if len(assetStatuses) > 0 {
-		req = req.Statuses(assetStatuses)
+	if filters != nil {
+		if len(filters.AssetTypes) > 0 {
+			req = req.Types(strings.Join(filters.AssetTypes, ","))
+		}
+		if len(filters.AssetStatuses) > 0 {
+			req = req.Statuses(strings.Join(filters.AssetStatuses, ","))
+		}
+		if filters.Search != "" {
+			req = req.Search(filters.Search)
+		}
+		if filters.ManuallyCreated {
+			req = req.ManuallyCreated(strconv.FormatBool(filters.ManuallyCreated))
+		}
 	}
 	data, _, err := req.Execute()
 	if err != nil {

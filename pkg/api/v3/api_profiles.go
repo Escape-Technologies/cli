@@ -17,7 +17,6 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
-	"reflect"
 )
 
 
@@ -683,11 +682,11 @@ type ApiListProfilesRequest struct {
 	sortDirection *string
 	assetIds *string
 	domains *string
-	issueIds *ListProfilesIssueIdsParameter
-	tagIds *ListProfilesTagIdsParameter
+	issueIds *string
+	tagIds *string
 	search *string
-	initiators *[]string
-	kinds *[]string
+	initiators *string
+	kinds *string
 	risks *string
 }
 
@@ -728,13 +727,13 @@ func (r ApiListProfilesRequest) Domains(domains string) ApiListProfilesRequest {
 }
 
 // Filter by issue IDs
-func (r ApiListProfilesRequest) IssueIds(issueIds ListProfilesIssueIdsParameter) ApiListProfilesRequest {
+func (r ApiListProfilesRequest) IssueIds(issueIds string) ApiListProfilesRequest {
 	r.issueIds = &issueIds
 	return r
 }
 
 // Filter by tag IDs
-func (r ApiListProfilesRequest) TagIds(tagIds ListProfilesTagIdsParameter) ApiListProfilesRequest {
+func (r ApiListProfilesRequest) TagIds(tagIds string) ApiListProfilesRequest {
 	r.tagIds = &tagIds
 	return r
 }
@@ -746,13 +745,13 @@ func (r ApiListProfilesRequest) Search(search string) ApiListProfilesRequest {
 }
 
 // Filter by initiator
-func (r ApiListProfilesRequest) Initiators(initiators []string) ApiListProfilesRequest {
+func (r ApiListProfilesRequest) Initiators(initiators string) ApiListProfilesRequest {
 	r.initiators = &initiators
 	return r
 }
 
 // Filter by kind
-func (r ApiListProfilesRequest) Kinds(kinds []string) ApiListProfilesRequest {
+func (r ApiListProfilesRequest) Kinds(kinds string) ApiListProfilesRequest {
 	r.kinds = &kinds
 	return r
 }
@@ -837,26 +836,10 @@ func (a *ProfilesAPIService) ListProfilesExecute(r ApiListProfilesRequest) (*Lis
 		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")
 	}
 	if r.initiators != nil {
-		t := *r.initiators
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "initiators", s.Index(i).Interface(), "form", "multi")
-			}
-		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "initiators", t, "form", "multi")
-		}
+		parameterAddToHeaderOrQuery(localVarQueryParams, "initiators", r.initiators, "form", "")
 	}
 	if r.kinds != nil {
-		t := *r.kinds
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "kinds", s.Index(i).Interface(), "form", "multi")
-			}
-		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "kinds", t, "form", "multi")
-		}
+		parameterAddToHeaderOrQuery(localVarQueryParams, "kinds", r.kinds, "form", "")
 	}
 	if r.risks != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "risks", r.risks, "form", "")
