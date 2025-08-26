@@ -4,12 +4,21 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"strconv"
+	"strings"
 
 	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
 )
 
+// ListLocationsFilters holds optional filters for listing locations
+type ListLocationsFilters struct {
+	Search string
+	Enabled bool
+	LocationTypes []string
+}
+
 // ListLocations lists all locations
-func ListLocations(ctx context.Context, next string) ([]v3.LocationSummarized, *string, error) {
+func ListLocations(ctx context.Context, next string, filters *ListLocationsFilters) ([]v3.LocationSummarized, *string, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, nil, fmt.Errorf("unable to init client: %w", err)
@@ -17,6 +26,17 @@ func ListLocations(ctx context.Context, next string) ([]v3.LocationSummarized, *
 	req := client.LocationsAPI.ListLocations(ctx)
 	if next != "" {
 		req = req.Cursor(next)
+	}
+	if filters != nil {
+		if filters.Search != "" {
+			req = req.Search(filters.Search)
+		}
+		if filters.Enabled {
+			req = req.Enabled(strconv.FormatBool(filters.Enabled))
+		}
+		if len(filters.LocationTypes) > 0 {
+			req = req.Type_(strings.Join(filters.LocationTypes, ","))
+		}
 	}
 	data, _, err := req.Execute()
 	if err != nil {

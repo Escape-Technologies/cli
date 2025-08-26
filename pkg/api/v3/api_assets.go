@@ -17,7 +17,6 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
-	"reflect"
 )
 
 
@@ -2928,6 +2927,138 @@ func (a *AssetsAPIService) CreateAssetWEBAPPExecute(r ApiCreateAssetWEBAPPReques
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiCreateAssetWEBSOCKETRequest struct {
+	ctx context.Context
+	ApiService *AssetsAPIService
+	createAssetWEBSOCKETRequest *CreateAssetWEBSOCKETRequest
+}
+
+// Body of the request to create an asset
+func (r ApiCreateAssetWEBSOCKETRequest) CreateAssetWEBSOCKETRequest(createAssetWEBSOCKETRequest CreateAssetWEBSOCKETRequest) ApiCreateAssetWEBSOCKETRequest {
+	r.createAssetWEBSOCKETRequest = &createAssetWEBSOCKETRequest
+	return r
+}
+
+func (r ApiCreateAssetWEBSOCKETRequest) Execute() (*AssetDetailed, *http.Response, error) {
+	return r.ApiService.CreateAssetWEBSOCKETExecute(r)
+}
+
+/*
+CreateAssetWEBSOCKET Create asset websocket
+
+Create a websocket
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateAssetWEBSOCKETRequest
+*/
+func (a *AssetsAPIService) CreateAssetWEBSOCKET(ctx context.Context) ApiCreateAssetWEBSOCKETRequest {
+	return ApiCreateAssetWEBSOCKETRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return AssetDetailed
+func (a *AssetsAPIService) CreateAssetWEBSOCKETExecute(r ApiCreateAssetWEBSOCKETRequest) (*AssetDetailed, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *AssetDetailed
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetWEBSOCKET")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/assets/websocket"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.createAssetWEBSOCKETRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v UpdateProfile400Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiCreateAssetWIZACCOUNTRequest struct {
 	ctx context.Context
 	ApiService *AssetsAPIService
@@ -3454,9 +3585,9 @@ type ApiListAssetsRequest struct {
 	sortType *string
 	sortDirection *string
 	search *string
-	types *[]string
-	statuses *[]string
-	manuallyCreated *bool
+	types *string
+	statuses *string
+	manuallyCreated *string
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
@@ -3490,19 +3621,19 @@ func (r ApiListAssetsRequest) Search(search string) ApiListAssetsRequest {
 }
 
 // Filter by type
-func (r ApiListAssetsRequest) Types(types []string) ApiListAssetsRequest {
+func (r ApiListAssetsRequest) Types(types string) ApiListAssetsRequest {
 	r.types = &types
 	return r
 }
 
 // Filter by status
-func (r ApiListAssetsRequest) Statuses(statuses []string) ApiListAssetsRequest {
+func (r ApiListAssetsRequest) Statuses(statuses string) ApiListAssetsRequest {
 	r.statuses = &statuses
 	return r
 }
 
 // Filter by manually created
-func (r ApiListAssetsRequest) ManuallyCreated(manuallyCreated bool) ApiListAssetsRequest {
+func (r ApiListAssetsRequest) ManuallyCreated(manuallyCreated string) ApiListAssetsRequest {
 	r.manuallyCreated = &manuallyCreated
 	return r
 }
@@ -3569,26 +3700,10 @@ func (a *AssetsAPIService) ListAssetsExecute(r ApiListAssetsRequest) (*ListAsset
 		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")
 	}
 	if r.types != nil {
-		t := *r.types
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "types", s.Index(i).Interface(), "form", "multi")
-			}
-		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "types", t, "form", "multi")
-		}
+		parameterAddToHeaderOrQuery(localVarQueryParams, "types", r.types, "form", "")
 	}
 	if r.statuses != nil {
-		t := *r.statuses
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "statuses", s.Index(i).Interface(), "form", "multi")
-			}
-		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "statuses", t, "form", "multi")
-		}
+		parameterAddToHeaderOrQuery(localVarQueryParams, "statuses", r.statuses, "form", "")
 	}
 	if r.manuallyCreated != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "manuallyCreated", r.manuallyCreated, "form", "")
