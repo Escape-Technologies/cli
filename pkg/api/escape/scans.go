@@ -51,7 +51,7 @@ func ListScans(ctx context.Context, next string, filters *ListScansFilters) ([]v
 			req = req.Initiator(strings.Join(*filters.Initiator, ","))
 		}
 		if filters.Kinds != nil && len(*filters.Kinds) > 0 {
-			req = req.Kinds(strings.Join(*filters.Kinds, ","))
+			req = req.Kinds(*filters.Kinds)
 		}
 		if filters.Status != nil && len(*filters.Status) > 0 {
 			req = req.Status(strings.Join(*filters.Status, ","))

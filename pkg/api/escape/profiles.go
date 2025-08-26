@@ -48,13 +48,13 @@ func ListProfiles(ctx context.Context, next string, filters *ListProfilesFilters
 			req = req.Search(filters.Search)
 		}
 		if len(filters.Initiators) > 0 {
-			req = req.Initiators(strings.Join(filters.Initiators, ","))
+			req = req.Initiators((filters.Initiators))
 		}
 		if len(filters.Kinds) > 0 {
-			req = req.Kinds(strings.Join(filters.Kinds, ","))
+			req = req.Kinds((filters.Kinds))
 		}
 		if len(filters.Risks) > 0 {
-			req = req.Risks(strings.Join(filters.Risks, ","))
+			req = req.Risks((filters.Risks))
 		}
 	}
 	data, _, err := req.Execute()
