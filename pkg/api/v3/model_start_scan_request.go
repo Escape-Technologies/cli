@@ -32,8 +32,7 @@ type StartScanRequest struct {
 	CommitAuthor *string `json:"commitAuthor,omitempty"`
 	// The commit author profile picture link to scan
 	CommitAuthorProfilePictureLink *string `json:"commitAuthorProfilePictureLink,omitempty"`
-	// The configuration override to use
-	ConfigurationOverride map[string]interface{} `json:"configurationOverride,omitempty"`
+	ConfigurationOverride interface{} `json:"configurationOverride,omitempty"`
 	Initiator *ENUMPROPERTIESINITIATOR `json:"initiator,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -246,10 +245,10 @@ func (o *StartScanRequest) SetCommitAuthorProfilePictureLink(v string) {
 	o.CommitAuthorProfilePictureLink = &v
 }
 
-// GetConfigurationOverride returns the ConfigurationOverride field value if set, zero value otherwise.
-func (o *StartScanRequest) GetConfigurationOverride() map[string]interface{} {
-	if o == nil || IsNil(o.ConfigurationOverride) {
-		var ret map[string]interface{}
+// GetConfigurationOverride returns the ConfigurationOverride field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *StartScanRequest) GetConfigurationOverride() interface{} {
+	if o == nil {
+		var ret interface{}
 		return ret
 	}
 	return o.ConfigurationOverride
@@ -257,11 +256,12 @@ func (o *StartScanRequest) GetConfigurationOverride() map[string]interface{} {
 
 // GetConfigurationOverrideOk returns a tuple with the ConfigurationOverride field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *StartScanRequest) GetConfigurationOverrideOk() (map[string]interface{}, bool) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *StartScanRequest) GetConfigurationOverrideOk() (*interface{}, bool) {
 	if o == nil || IsNil(o.ConfigurationOverride) {
-		return map[string]interface{}{}, false
+		return nil, false
 	}
-	return o.ConfigurationOverride, true
+	return &o.ConfigurationOverride, true
 }
 
 // HasConfigurationOverride returns a boolean if a field has been set.
@@ -273,8 +273,8 @@ func (o *StartScanRequest) HasConfigurationOverride() bool {
 	return false
 }
 
-// SetConfigurationOverride gets a reference to the given map[string]interface{} and assigns it to the ConfigurationOverride field.
-func (o *StartScanRequest) SetConfigurationOverride(v map[string]interface{}) {
+// SetConfigurationOverride gets a reference to the given interface{} and assigns it to the ConfigurationOverride field.
+func (o *StartScanRequest) SetConfigurationOverride(v interface{}) {
 	o.ConfigurationOverride = v
 }
 
@@ -336,7 +336,7 @@ func (o StartScanRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CommitAuthorProfilePictureLink) {
 		toSerialize["commitAuthorProfilePictureLink"] = o.CommitAuthorProfilePictureLink
 	}
-	if !IsNil(o.ConfigurationOverride) {
+	if o.ConfigurationOverride != nil {
 		toSerialize["configurationOverride"] = o.ConfigurationOverride
 	}
 	if !IsNil(o.Initiator) {
