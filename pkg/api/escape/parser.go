@@ -13,10 +13,6 @@ type parsable interface {
 
 // ParseJSONOrYAML parses a JSON or YAML data into the requested struct
 // It returns an error if the data is neither JSON nor YAML
-//
-// Example:
-//
-//	d, err := ParseJSONOrYAML([]byte(`{"kind": "KUBERNETES", "parameters": {}}`), &v2.GetIntegration200ResponseData{})
 func ParseJSONOrYAML[T parsable](body []byte, v T) (T, error) {
 	finalBody, err := yamlToJSON(body)
 	if err != nil {
