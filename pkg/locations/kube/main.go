@@ -10,7 +10,7 @@ import (
 	"time"
 
 	"github.com/Escape-Technologies/cli/pkg/api/escape"
-	v2 "github.com/Escape-Technologies/cli/pkg/api/v2"
+	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
 	"github.com/Escape-Technologies/cli/pkg/log"
 	"k8s.io/client-go/rest"
 	"k8s.io/client-go/tools/clientcmd"
@@ -77,12 +77,15 @@ func connectAndRun(ctx context.Context, cfg *rest.Config, isConnected *atomic.Bo
 		}
 		log.Info("Connected to K8s API")
 		log.Trace("Upserting K8s integration")
-		integ, err := escape.ParseJSONOrYAML([]byte(`{"kind": "KUBERNETES", "parameters": {}}`), &v2.GetIntegration200ResponseData{})
+		asset := v3.NewCreateAssetKUBERNETESCLUSTERRequestWithDefaults()
+		asset.PrivateLocationId = locationID
+		asset.Name = &locationName
+		data, err := asset.MarshalJSON()
 		if err != nil {
-			log.Error("Failed to parse Kubernetes integration: %s", err)
+			log.Error("Failed to marshal Kubernetes integration: %s", err)
 			return
 		}
-		err = escape.UpsertIntegration(ctx, locationName, &locationID, integ)
+		_, err = escape.CreateAsset(ctx, data, "KUBERNETES_CLUSTER")
 		if err != nil {
 			errMsg := fmt.Sprintf("%s", err)
 			log.Error("Failed to register Kubernetes integration: %s", errMsg)
