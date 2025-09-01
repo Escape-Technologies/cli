@@ -3,18 +3,18 @@ package escape
 import (
 	"testing"
 
-	v2 "github.com/Escape-Technologies/cli/pkg/api/v2"
+	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
 )
 
 func TestParseJSONOrYAMLIntegration(t *testing.T) {
 	t.Parallel()
 	tests := []string{
-		`{"name": "test", "data":{"kind": "KUBERNETES", "parameters": {}}}`,
+		`{"id": "test", "name": "test", "color": "test"}`,
 	}
 
 	for _, test := range tests {
 		t.Run(test, func(t *testing.T) {
-			_, err := ParseJSONOrYAML([]byte(test), &v2.UpdateIntegrationRequest{})
+			_, err := ParseJSONOrYAML([]byte(test), &v3.Tag{})
 			if err != nil {
 				t.Errorf("ParseJSONOrYAML(%s) = %s", test, err.Error())
 			}
