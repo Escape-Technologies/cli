@@ -17,7 +17,7 @@ import (
 func startSocks5Server(ctx context.Context, listener net.Listener, healthy *atomic.Bool) error {
 	log.Trace("Starting socks5 server")
 	socks5Server, err := socks5.New(&socks5.Config{
-		Dial: env.BuildProxyDialer(env.GetBackendProxyURL()),
+		Dial:   env.BuildProxyDialer(env.GetBackendProxyURL()),
 		Logger: stdlog.New(io.Discard, "", 0),
 	})
 	if err != nil {
@@ -37,7 +37,7 @@ func startSocks5Server(ctx context.Context, listener net.Listener, healthy *atom
 	}()
 	go func() {
 		err = socks5Server.Serve(listener)
-		if err != nil {
+		if err != nil && err != io.EOF {
 			errChan <- fmt.Errorf("failed to serve socks5 server: %w", err)
 		} else {
 			errChan <- nil
