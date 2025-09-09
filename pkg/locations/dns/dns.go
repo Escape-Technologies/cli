@@ -29,7 +29,7 @@ func Start() {
 		Handler: dns.HandlerFunc(func(w dns.ResponseWriter, r *dns.Msg) {
 			for _, s := range config.Servers {
 				resp, err := dns.Exchange(r, s+":"+config.Port)
-				if err != nil {
+				if err == nil && resp != nil {
 					_ = w.WriteMsg(resp)
 					return
 				}
