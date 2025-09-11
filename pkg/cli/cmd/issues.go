@@ -42,7 +42,7 @@ var issueListCmd = &cobra.Command{
 Example output:
 ID                                      CREATED AT  SEVERITY  STATUS  NAME                                    ASSET                          LINK
 00000000-0000-0000-0000-000000000001    2025-07-24  INFO      OPEN    Misconfigured CSP Header                https://my.app                 Link`,
-	Example: `escape-cli issues list`, 
+	Example: `escape-cli issues list`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
 		filters := &escape.ListIssuesFilters{
 			Status:       issueStatus,
@@ -54,6 +54,7 @@ ID                                      CREATED AT  SEVERITY  STATUS  NAME      
 			ScanIDs:      scanIDs,
 			TagsIDs:      tagsIDs,
 			Risks:        risks,
+			Search:       search,
 			AssetClasses: assetClasses,
 		}
 		issues, next, err := escape.ListIssues(cmd.Context(), "", filters)
