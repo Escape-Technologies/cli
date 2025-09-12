@@ -53,6 +53,8 @@ func ListIssues(ctx context.Context, next string, filters *ListIssuesFilters) ([
 		req = req.Cursor(next)
 	}
 
+	req = req.SortType("LAST_SEEN")
+
 	if filters != nil {
 		if len(filters.Status) > 0 {
 			req = req.Status(strings.Join(filters.Status, ","))
