@@ -28,7 +28,8 @@ var rootCmd = &cobra.Command{
  ██████████░░█████████  ░░█████████  █████   █████ █████        ██████████    ░░█████████  ███████████ █████
 ░░░░░░░░░░  ░░░░░░░░░    ░░░░░░░░░  ░░░░░   ░░░░░ ░░░░░        ░░░░░░░░░░      ░░░░░░░░░  ░░░░░░░░░░░ ░░░░░                                                                                                        
 ` + "\x1b[0m" + "\x1b[38;2;6;226;183mEscape CLI V3\x1b[0m",
-	PersistentPreRunE: func(_ *cobra.Command, _ []string) error {
+    PersistentPreRunE: func(c *cobra.Command, _ []string) error {
+        version.WarnIfNotLatestVersion(c.Context())
 		if rootCmdVerbose > 0 { //nolint:mnd
 			log.SetLevel(logrus.InfoLevel)
 		}
