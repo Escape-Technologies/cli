@@ -12,6 +12,7 @@ package v3
 
 import (
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the CreateAssetSchemaRequest type satisfies the MappedNullable interface at compile time
@@ -19,6 +20,7 @@ var _ MappedNullable = &CreateAssetSchemaRequest{}
 
 // CreateAssetSchemaRequest struct for CreateAssetSchemaRequest
 type CreateAssetSchemaRequest struct {
+	AssetType ENUMSCHEMA `json:"asset_type"`
 	// The URL of the asset
 	Url *string `json:"url,omitempty"`
 	// The data of the asset
@@ -36,8 +38,9 @@ type _CreateAssetSchemaRequest CreateAssetSchemaRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetSchemaRequest() *CreateAssetSchemaRequest {
+func NewCreateAssetSchemaRequest(assetType ENUMSCHEMA) *CreateAssetSchemaRequest {
 	this := CreateAssetSchemaRequest{}
+	this.AssetType = assetType
 	return &this
 }
 
@@ -47,6 +50,30 @@ func NewCreateAssetSchemaRequest() *CreateAssetSchemaRequest {
 func NewCreateAssetSchemaRequestWithDefaults() *CreateAssetSchemaRequest {
 	this := CreateAssetSchemaRequest{}
 	return &this
+}
+
+// GetAssetType returns the AssetType field value
+func (o *CreateAssetSchemaRequest) GetAssetType() ENUMSCHEMA {
+	if o == nil {
+		var ret ENUMSCHEMA
+		return ret
+	}
+
+	return o.AssetType
+}
+
+// GetAssetTypeOk returns a tuple with the AssetType field value
+// and a boolean to check if the value has been set.
+func (o *CreateAssetSchemaRequest) GetAssetTypeOk() (*ENUMSCHEMA, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.AssetType, true
+}
+
+// SetAssetType sets field value
+func (o *CreateAssetSchemaRequest) SetAssetType(v ENUMSCHEMA) {
+	o.AssetType = v
 }
 
 // GetUrl returns the Url field value if set, zero value otherwise.
@@ -187,6 +214,7 @@ func (o CreateAssetSchemaRequest) MarshalJSON() ([]byte, error) {
 
 func (o CreateAssetSchemaRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["asset_type"] = o.AssetType
 	if !IsNil(o.Url) {
 		toSerialize["url"] = o.Url
 	}
@@ -208,6 +236,27 @@ func (o CreateAssetSchemaRequest) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *CreateAssetSchemaRequest) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"asset_type",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varCreateAssetSchemaRequest := _CreateAssetSchemaRequest{}
 
 	err = json.Unmarshal(data, &varCreateAssetSchemaRequest)
@@ -221,6 +270,7 @@ func (o *CreateAssetSchemaRequest) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "asset_type")
 		delete(additionalProperties, "url")
 		delete(additionalProperties, "data")
 		delete(additionalProperties, "proxyId")

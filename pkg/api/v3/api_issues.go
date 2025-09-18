@@ -289,7 +289,7 @@ type ApiListIssuesRequest struct {
 	assetIds *string
 	domains *string
 	ids *string
-	name *string
+	names *ListIssuesNamesParameter
 	scanIds *string
 	tagsIds *string
 	search *string
@@ -349,9 +349,9 @@ func (r ApiListIssuesRequest) Ids(ids string) ApiListIssuesRequest {
 	return r
 }
 
-// Filter by issue name
-func (r ApiListIssuesRequest) Name(name string) ApiListIssuesRequest {
-	r.name = &name
+// Filter by issue names
+func (r ApiListIssuesRequest) Names(names ListIssuesNamesParameter) ApiListIssuesRequest {
+	r.names = &names
 	return r
 }
 
@@ -479,8 +479,8 @@ func (a *IssuesAPIService) ListIssuesExecute(r ApiListIssuesRequest) (*ListIssue
 	if r.ids != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "ids", r.ids, "form", "")
 	}
-	if r.name != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "name", r.name, "form", "")
+	if r.names != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "names", r.names, "form", "")
 	}
 	if r.scanIds != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "scanIds", r.scanIds, "form", "")

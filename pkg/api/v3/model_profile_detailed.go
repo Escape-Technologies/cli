@@ -38,7 +38,7 @@ type ProfileDetailed struct {
 	Score *float32 `json:"score,omitempty"`
 	// The coverage of the profile
 	Coverage *float32 `json:"coverage,omitempty"`
-	ActiveConfiguration ConfigurationDetailed `json:"activeConfiguration"`
+	Configuration ProfileDetailedConfiguration `json:"configuration"`
 	Asset AssetDetailed `json:"asset"`
 	LastResourceScan *ScanDetailed `json:"lastResourceScan,omitempty"`
 	LastSuccessfulResourceScan *ScanDetailed `json:"lastSuccessfulResourceScan,omitempty"`
@@ -55,14 +55,14 @@ type _ProfileDetailed ProfileDetailed
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProfileDetailed(id string, name string, scannerKind string, createdAt string, updatedAt string, activeConfiguration ConfigurationDetailed, asset AssetDetailed, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, statistics StatisticsDetailed, links ProfileSummarizedLinks) *ProfileDetailed {
+func NewProfileDetailed(id string, name string, scannerKind string, createdAt string, updatedAt string, configuration ProfileDetailedConfiguration, asset AssetDetailed, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, statistics StatisticsDetailed, links ProfileSummarizedLinks) *ProfileDetailed {
 	this := ProfileDetailed{}
 	this.Id = id
 	this.Name = name
 	this.ScannerKind = scannerKind
 	this.CreatedAt = createdAt
 	this.UpdatedAt = updatedAt
-	this.ActiveConfiguration = activeConfiguration
+	this.Configuration = configuration
 	this.Asset = asset
 	this.Risks = risks
 	this.Statistics = statistics
@@ -326,28 +326,28 @@ func (o *ProfileDetailed) SetCoverage(v float32) {
 	o.Coverage = &v
 }
 
-// GetActiveConfiguration returns the ActiveConfiguration field value
-func (o *ProfileDetailed) GetActiveConfiguration() ConfigurationDetailed {
+// GetConfiguration returns the Configuration field value
+func (o *ProfileDetailed) GetConfiguration() ProfileDetailedConfiguration {
 	if o == nil {
-		var ret ConfigurationDetailed
+		var ret ProfileDetailedConfiguration
 		return ret
 	}
 
-	return o.ActiveConfiguration
+	return o.Configuration
 }
 
-// GetActiveConfigurationOk returns a tuple with the ActiveConfiguration field value
+// GetConfigurationOk returns a tuple with the Configuration field value
 // and a boolean to check if the value has been set.
-func (o *ProfileDetailed) GetActiveConfigurationOk() (*ConfigurationDetailed, bool) {
+func (o *ProfileDetailed) GetConfigurationOk() (*ProfileDetailedConfiguration, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.ActiveConfiguration, true
+	return &o.Configuration, true
 }
 
-// SetActiveConfiguration sets field value
-func (o *ProfileDetailed) SetActiveConfiguration(v ConfigurationDetailed) {
-	o.ActiveConfiguration = v
+// SetConfiguration sets field value
+func (o *ProfileDetailed) SetConfiguration(v ProfileDetailedConfiguration) {
+	o.Configuration = v
 }
 
 // GetAsset returns the Asset field value
@@ -537,7 +537,7 @@ func (o ProfileDetailed) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Coverage) {
 		toSerialize["coverage"] = o.Coverage
 	}
-	toSerialize["activeConfiguration"] = o.ActiveConfiguration
+	toSerialize["configuration"] = o.Configuration
 	toSerialize["asset"] = o.Asset
 	if !IsNil(o.LastResourceScan) {
 		toSerialize["lastResourceScan"] = o.LastResourceScan
@@ -566,7 +566,7 @@ func (o *ProfileDetailed) UnmarshalJSON(data []byte) (err error) {
 		"scannerKind",
 		"createdAt",
 		"updatedAt",
-		"activeConfiguration",
+		"configuration",
 		"asset",
 		"risks",
 		"statistics",
@@ -609,7 +609,7 @@ func (o *ProfileDetailed) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "scheduledForDeletionAt")
 		delete(additionalProperties, "score")
 		delete(additionalProperties, "coverage")
-		delete(additionalProperties, "activeConfiguration")
+		delete(additionalProperties, "configuration")
 		delete(additionalProperties, "asset")
 		delete(additionalProperties, "lastResourceScan")
 		delete(additionalProperties, "lastSuccessfulResourceScan")
