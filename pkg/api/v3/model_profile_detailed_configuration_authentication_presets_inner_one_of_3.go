@@ -29,7 +29,7 @@ type ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3 struct {
 	RedirectUri string `json:"redirect_uri"`
 	Scopes []string `json:"scopes,omitempty"`
 	UsePkce bool `json:"use_pkce"`
-	LoginTimeout float32 `json:"login_timeout"`
+	LoginTimeout *float32 `json:"login_timeout,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -39,7 +39,7 @@ type _ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3 ProfileDetail
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3(type_ ENUMOAUTHAUTHZCODEBROWSER, users []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf1UsersInner, authorizationUrl string, tokenUrl string, clientId string, clientSecret string, redirectUri string, usePkce bool, loginTimeout float32) *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3 {
+func NewProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3(type_ ENUMOAUTHAUTHZCODEBROWSER, users []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf1UsersInner, authorizationUrl string, tokenUrl string, clientId string, clientSecret string, redirectUri string, usePkce bool) *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3 {
 	this := ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3{}
 	this.Type = type_
 	this.Users = users
@@ -49,7 +49,6 @@ func NewProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3(type_ ENUMO
 	this.ClientSecret = clientSecret
 	this.RedirectUri = redirectUri
 	this.UsePkce = usePkce
-	this.LoginTimeout = loginTimeout
 	return &this
 }
 
@@ -285,28 +284,36 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3) SetUsePkc
 	o.UsePkce = v
 }
 
-// GetLoginTimeout returns the LoginTimeout field value
+// GetLoginTimeout returns the LoginTimeout field value if set, zero value otherwise.
 func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3) GetLoginTimeout() float32 {
-	if o == nil {
+	if o == nil || IsNil(o.LoginTimeout) {
 		var ret float32
 		return ret
 	}
-
-	return o.LoginTimeout
+	return *o.LoginTimeout
 }
 
-// GetLoginTimeoutOk returns a tuple with the LoginTimeout field value
+// GetLoginTimeoutOk returns a tuple with the LoginTimeout field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3) GetLoginTimeoutOk() (*float32, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.LoginTimeout) {
 		return nil, false
 	}
-	return &o.LoginTimeout, true
+	return o.LoginTimeout, true
 }
 
-// SetLoginTimeout sets field value
+// HasLoginTimeout returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3) HasLoginTimeout() bool {
+	if o != nil && !IsNil(o.LoginTimeout) {
+		return true
+	}
+
+	return false
+}
+
+// SetLoginTimeout gets a reference to the given float32 and assigns it to the LoginTimeout field.
 func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3) SetLoginTimeout(v float32) {
-	o.LoginTimeout = v
+	o.LoginTimeout = &v
 }
 
 func (o ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3) MarshalJSON() ([]byte, error) {
@@ -330,7 +337,9 @@ func (o ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3) ToMap() (m
 		toSerialize["scopes"] = o.Scopes
 	}
 	toSerialize["use_pkce"] = o.UsePkce
-	toSerialize["login_timeout"] = o.LoginTimeout
+	if !IsNil(o.LoginTimeout) {
+		toSerialize["login_timeout"] = o.LoginTimeout
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -352,7 +361,6 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3) Unmarshal
 		"client_secret",
 		"redirect_uri",
 		"use_pkce",
-		"login_timeout",
 	}
 
 	allProperties := make(map[string]interface{})

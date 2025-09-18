@@ -20,12 +20,12 @@ var _ MappedNullable = &ProfileDetailedConfigurationAuthenticationPresetsInnerOn
 
 // ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12 struct for ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12
 type ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12 struct {
-	Type ENUMBROWSERAGENT `json:"type"`
+	Type ENUMBROWSERACTIONS `json:"type"`
 	Users []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInner `json:"users"`
 	LoginUrl string `json:"login_url"`
 	StealthMode *bool `json:"stealth_mode,omitempty"`
 	Extractions []ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner `json:"extractions,omitempty"`
-	Injections NullableProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12Injections `json:"injections,omitempty"`
+	Injections NullableProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11Injections `json:"injections,omitempty"`
 	AutoExtractionUrls []string `json:"auto_extraction_urls,omitempty"`
 	LoggedInDetectorText *string `json:"logged_in_detector_text,omitempty"`
 	LoggedInDetectorTimeout *float32 `json:"logged_in_detector_timeout,omitempty"`
@@ -38,7 +38,7 @@ type _ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12 ProfileDetai
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12(type_ ENUMBROWSERAGENT, users []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInner, loginUrl string) *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12 {
+func NewProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12(type_ ENUMBROWSERACTIONS, users []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInner, loginUrl string) *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12 {
 	this := ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12{}
 	this.Type = type_
 	this.Users = users
@@ -55,9 +55,9 @@ func NewProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12WithDefault
 }
 
 // GetType returns the Type field value
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12) GetType() ENUMBROWSERAGENT {
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12) GetType() ENUMBROWSERACTIONS {
 	if o == nil {
-		var ret ENUMBROWSERAGENT
+		var ret ENUMBROWSERACTIONS
 		return ret
 	}
 
@@ -66,7 +66,7 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12) GetType(
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12) GetTypeOk() (*ENUMBROWSERAGENT, bool) {
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12) GetTypeOk() (*ENUMBROWSERACTIONS, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -74,7 +74,7 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12) GetTypeO
 }
 
 // SetType sets field value
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12) SetType(v ENUMBROWSERAGENT) {
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12) SetType(v ENUMBROWSERACTIONS) {
 	o.Type = v
 }
 
@@ -191,9 +191,9 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12) SetExtra
 }
 
 // GetInjections returns the Injections field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12) GetInjections() ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12Injections {
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12) GetInjections() ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11Injections {
 	if o == nil || IsNil(o.Injections.Get()) {
-		var ret ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12Injections
+		var ret ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11Injections
 		return ret
 	}
 	return *o.Injections.Get()
@@ -202,7 +202,7 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12) GetInjec
 // GetInjectionsOk returns a tuple with the Injections field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12) GetInjectionsOk() (*ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12Injections, bool) {
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12) GetInjectionsOk() (*ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11Injections, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -218,8 +218,8 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12) HasInjec
 	return false
 }
 
-// SetInjections gets a reference to the given NullableProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12Injections and assigns it to the Injections field.
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12) SetInjections(v ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12Injections) {
+// SetInjections gets a reference to the given NullableProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11Injections and assigns it to the Injections field.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12) SetInjections(v ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11Injections) {
 	o.Injections.Set(&v)
 }
 // SetInjectionsNil sets the value for Injections to be an explicit nil

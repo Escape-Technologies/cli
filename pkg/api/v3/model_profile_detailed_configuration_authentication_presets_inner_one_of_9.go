@@ -20,8 +20,10 @@ var _ MappedNullable = &ProfileDetailedConfigurationAuthenticationPresetsInnerOn
 
 // ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9 struct for ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9
 type ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9 struct {
-	Type ENUMHEADERS `json:"type"`
+	Type ENUMCURL `json:"type"`
 	Users []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9UsersInner `json:"users"`
+	Extractions []ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInnerOneOfExtractionsInner `json:"extractions"`
+	Injections []ProfileDetailedConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner `json:"injections"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -31,10 +33,12 @@ type _ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9 ProfileDetail
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9(type_ ENUMHEADERS, users []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9UsersInner) *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9 {
+func NewProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9(type_ ENUMCURL, users []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9UsersInner, extractions []ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInnerOneOfExtractionsInner, injections []ProfileDetailedConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner) *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9 {
 	this := ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9{}
 	this.Type = type_
 	this.Users = users
+	this.Extractions = extractions
+	this.Injections = injections
 	return &this
 }
 
@@ -47,9 +51,9 @@ func NewProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9WithDefaults
 }
 
 // GetType returns the Type field value
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9) GetType() ENUMHEADERS {
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9) GetType() ENUMCURL {
 	if o == nil {
-		var ret ENUMHEADERS
+		var ret ENUMCURL
 		return ret
 	}
 
@@ -58,7 +62,7 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9) GetType()
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9) GetTypeOk() (*ENUMHEADERS, bool) {
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9) GetTypeOk() (*ENUMCURL, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -66,7 +70,7 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9) GetTypeOk
 }
 
 // SetType sets field value
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9) SetType(v ENUMHEADERS) {
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9) SetType(v ENUMCURL) {
 	o.Type = v
 }
 
@@ -94,6 +98,54 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9) SetUsers(
 	o.Users = v
 }
 
+// GetExtractions returns the Extractions field value
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9) GetExtractions() []ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInnerOneOfExtractionsInner {
+	if o == nil {
+		var ret []ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInnerOneOfExtractionsInner
+		return ret
+	}
+
+	return o.Extractions
+}
+
+// GetExtractionsOk returns a tuple with the Extractions field value
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9) GetExtractionsOk() ([]ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInnerOneOfExtractionsInner, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Extractions, true
+}
+
+// SetExtractions sets field value
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9) SetExtractions(v []ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInnerOneOfExtractionsInner) {
+	o.Extractions = v
+}
+
+// GetInjections returns the Injections field value
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9) GetInjections() []ProfileDetailedConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner {
+	if o == nil {
+		var ret []ProfileDetailedConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner
+		return ret
+	}
+
+	return o.Injections
+}
+
+// GetInjectionsOk returns a tuple with the Injections field value
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9) GetInjectionsOk() ([]ProfileDetailedConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Injections, true
+}
+
+// SetInjections sets field value
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9) SetInjections(v []ProfileDetailedConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner) {
+	o.Injections = v
+}
+
 func (o ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -106,6 +158,8 @@ func (o ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9) ToMap() (m
 	toSerialize := map[string]interface{}{}
 	toSerialize["type"] = o.Type
 	toSerialize["users"] = o.Users
+	toSerialize["extractions"] = o.Extractions
+	toSerialize["injections"] = o.Injections
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -121,6 +175,8 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9) Unmarshal
 	requiredProperties := []string{
 		"type",
 		"users",
+		"extractions",
+		"injections",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -152,6 +208,8 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9) Unmarshal
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "type")
 		delete(additionalProperties, "users")
+		delete(additionalProperties, "extractions")
+		delete(additionalProperties, "injections")
 		o.AdditionalProperties = additionalProperties
 	}
 

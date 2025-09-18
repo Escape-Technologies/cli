@@ -25,7 +25,6 @@ type ProfileDetailedConfigurationAuthenticationPresetsInner struct {
 	ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12 *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12
 	ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13 *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13
 	ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf14 *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf14
-	ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf15 *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf15
 	ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf2 *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf2
 	ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3 *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3
 	ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf4 *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf4
@@ -82,13 +81,6 @@ func ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13AsProfileDetai
 func ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf14AsProfileDetailedConfigurationAuthenticationPresetsInner(v *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf14) ProfileDetailedConfigurationAuthenticationPresetsInner {
 	return ProfileDetailedConfigurationAuthenticationPresetsInner{
 		ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf14: v,
-	}
-}
-
-// ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf15AsProfileDetailedConfigurationAuthenticationPresetsInner is a convenience function that returns ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf15 wrapped in ProfileDetailedConfigurationAuthenticationPresetsInner
-func ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf15AsProfileDetailedConfigurationAuthenticationPresetsInner(v *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf15) ProfileDetailedConfigurationAuthenticationPresetsInner {
-	return ProfileDetailedConfigurationAuthenticationPresetsInner{
-		ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf15: v,
 	}
 }
 
@@ -272,23 +264,6 @@ func (dst *ProfileDetailedConfigurationAuthenticationPresetsInner) UnmarshalJSON
 		dst.ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf14 = nil
 	}
 
-	// try to unmarshal data into ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf15
-	err = newStrictDecoder(data).Decode(&dst.ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf15)
-	if err == nil {
-		jsonProfileDetailedConfigurationAuthenticationPresetsInnerOneOf15, _ := json.Marshal(dst.ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf15)
-		if string(jsonProfileDetailedConfigurationAuthenticationPresetsInnerOneOf15) == "{}" { // empty struct
-			dst.ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf15 = nil
-		} else {
-			if err = validator.Validate(dst.ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf15); err != nil {
-				dst.ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf15 = nil
-			} else {
-				match++
-			}
-		}
-	} else {
-		dst.ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf15 = nil
-	}
-
 	// try to unmarshal data into ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf2
 	err = newStrictDecoder(data).Decode(&dst.ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf2)
 	if err == nil {
@@ -434,7 +409,6 @@ func (dst *ProfileDetailedConfigurationAuthenticationPresetsInner) UnmarshalJSON
 		dst.ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12 = nil
 		dst.ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13 = nil
 		dst.ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf14 = nil
-		dst.ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf15 = nil
 		dst.ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf2 = nil
 		dst.ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3 = nil
 		dst.ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf4 = nil
@@ -480,10 +454,6 @@ func (src ProfileDetailedConfigurationAuthenticationPresetsInner) MarshalJSON() 
 
 	if src.ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf14 != nil {
 		return json.Marshal(&src.ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf14)
-	}
-
-	if src.ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf15 != nil {
-		return json.Marshal(&src.ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf15)
 	}
 
 	if src.ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf2 != nil {
@@ -554,10 +524,6 @@ func (obj *ProfileDetailedConfigurationAuthenticationPresetsInner) GetActualInst
 		return obj.ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf14
 	}
 
-	if obj.ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf15 != nil {
-		return obj.ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf15
-	}
-
 	if obj.ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf2 != nil {
 		return obj.ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf2
 	}
@@ -622,10 +588,6 @@ func (obj ProfileDetailedConfigurationAuthenticationPresetsInner) GetActualInsta
 
 	if obj.ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf14 != nil {
 		return *obj.ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf14
-	}
-
-	if obj.ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf15 != nil {
-		return *obj.ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf15
 	}
 
 	if obj.ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf2 != nil {

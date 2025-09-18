@@ -27,6 +27,7 @@ type ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInnerOne
 	LoggedInDetectorTimeout *float32 `json:"logged_in_detector_timeout,omitempty"`
 	StealthMode *bool `json:"stealth_mode,omitempty"`
 	ExtraInstructions *string `json:"extra_instructions,omitempty"`
+	AutoSignup *bool `json:"auto_signup,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -266,6 +267,38 @@ func (o *ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInne
 	o.ExtraInstructions = &v
 }
 
+// GetAutoSignup returns the AutoSignup field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInnerOneOf4Parameters) GetAutoSignup() bool {
+	if o == nil || IsNil(o.AutoSignup) {
+		var ret bool
+		return ret
+	}
+	return *o.AutoSignup
+}
+
+// GetAutoSignupOk returns a tuple with the AutoSignup field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInnerOneOf4Parameters) GetAutoSignupOk() (*bool, bool) {
+	if o == nil || IsNil(o.AutoSignup) {
+		return nil, false
+	}
+	return o.AutoSignup, true
+}
+
+// HasAutoSignup returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInnerOneOf4Parameters) HasAutoSignup() bool {
+	if o != nil && !IsNil(o.AutoSignup) {
+		return true
+	}
+
+	return false
+}
+
+// SetAutoSignup gets a reference to the given bool and assigns it to the AutoSignup field.
+func (o *ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInnerOneOf4Parameters) SetAutoSignup(v bool) {
+	o.AutoSignup = &v
+}
+
 func (o ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInnerOneOf4Parameters) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -294,6 +327,9 @@ func (o ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInner
 	}
 	if !IsNil(o.ExtraInstructions) {
 		toSerialize["extra_instructions"] = o.ExtraInstructions
+	}
+	if !IsNil(o.AutoSignup) {
+		toSerialize["auto_signup"] = o.AutoSignup
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -345,6 +381,7 @@ func (o *ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInne
 		delete(additionalProperties, "logged_in_detector_timeout")
 		delete(additionalProperties, "stealth_mode")
 		delete(additionalProperties, "extra_instructions")
+		delete(additionalProperties, "auto_signup")
 		o.AdditionalProperties = additionalProperties
 	}
 

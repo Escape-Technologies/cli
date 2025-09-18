@@ -41,7 +41,7 @@ type ProfileDetailedConfigurationSecurityTests struct {
 	AwstatsConfigExposure *ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure `json:"awstats_config_exposure,omitempty"`
 	AwstatsExposure *ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure `json:"awstats_exposure,omitempty"`
 	AzureTenantIdExposure *ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure `json:"azure_tenant_id_exposure,omitempty"`
-	Bola *ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure `json:"bola,omitempty"`
+	Bola *ProfileDetailedConfigurationSecurityTestsBola `json:"bola,omitempty"`
 	CharacterLimit *ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure `json:"character_limit,omitempty"`
 	Command *ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure `json:"command,omitempty"`
 	ConsoleError *ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure `json:"console_error,omitempty"`
@@ -921,9 +921,9 @@ func (o *ProfileDetailedConfigurationSecurityTests) SetAzureTenantIdExposure(v P
 }
 
 // GetBola returns the Bola field value if set, zero value otherwise.
-func (o *ProfileDetailedConfigurationSecurityTests) GetBola() ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure {
+func (o *ProfileDetailedConfigurationSecurityTests) GetBola() ProfileDetailedConfigurationSecurityTestsBola {
 	if o == nil || IsNil(o.Bola) {
-		var ret ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure
+		var ret ProfileDetailedConfigurationSecurityTestsBola
 		return ret
 	}
 	return *o.Bola
@@ -931,7 +931,7 @@ func (o *ProfileDetailedConfigurationSecurityTests) GetBola() ProfileDetailedCon
 
 // GetBolaOk returns a tuple with the Bola field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationSecurityTests) GetBolaOk() (*ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure, bool) {
+func (o *ProfileDetailedConfigurationSecurityTests) GetBolaOk() (*ProfileDetailedConfigurationSecurityTestsBola, bool) {
 	if o == nil || IsNil(o.Bola) {
 		return nil, false
 	}
@@ -947,8 +947,8 @@ func (o *ProfileDetailedConfigurationSecurityTests) HasBola() bool {
 	return false
 }
 
-// SetBola gets a reference to the given ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure and assigns it to the Bola field.
-func (o *ProfileDetailedConfigurationSecurityTests) SetBola(v ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure) {
+// SetBola gets a reference to the given ProfileDetailedConfigurationSecurityTestsBola and assigns it to the Bola field.
+func (o *ProfileDetailedConfigurationSecurityTests) SetBola(v ProfileDetailedConfigurationSecurityTestsBola) {
 	o.Bola = &v
 }
 

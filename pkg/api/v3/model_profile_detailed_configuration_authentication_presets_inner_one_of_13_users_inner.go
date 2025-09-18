@@ -24,7 +24,8 @@ type ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13UsersInner str
 	Headers map[string]string `json:"headers,omitempty"`
 	Cookies map[string]string `json:"cookies,omitempty"`
 	QueryParameters map[string]string `json:"query_parameters,omitempty"`
-	Actions []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInnerPostLoginActionsInner `json:"actions"`
+	Password string `json:"password"`
+	ExtraInstructions *string `json:"extra_instructions,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -34,10 +35,10 @@ type _ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13UsersInner Pr
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13UsersInner(username string, actions []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInnerPostLoginActionsInner) *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13UsersInner {
+func NewProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13UsersInner(username string, password string) *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13UsersInner {
 	this := ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13UsersInner{}
 	this.Username = username
-	this.Actions = actions
+	this.Password = password
 	return &this
 }
 
@@ -169,28 +170,60 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13UsersInner
 	o.QueryParameters = v
 }
 
-// GetActions returns the Actions field value
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13UsersInner) GetActions() []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInnerPostLoginActionsInner {
+// GetPassword returns the Password field value
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13UsersInner) GetPassword() string {
 	if o == nil {
-		var ret []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInnerPostLoginActionsInner
+		var ret string
 		return ret
 	}
 
-	return o.Actions
+	return o.Password
 }
 
-// GetActionsOk returns a tuple with the Actions field value
+// GetPasswordOk returns a tuple with the Password field value
 // and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13UsersInner) GetActionsOk() ([]ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInnerPostLoginActionsInner, bool) {
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13UsersInner) GetPasswordOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Actions, true
+	return &o.Password, true
 }
 
-// SetActions sets field value
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13UsersInner) SetActions(v []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInnerPostLoginActionsInner) {
-	o.Actions = v
+// SetPassword sets field value
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13UsersInner) SetPassword(v string) {
+	o.Password = v
+}
+
+// GetExtraInstructions returns the ExtraInstructions field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13UsersInner) GetExtraInstructions() string {
+	if o == nil || IsNil(o.ExtraInstructions) {
+		var ret string
+		return ret
+	}
+	return *o.ExtraInstructions
+}
+
+// GetExtraInstructionsOk returns a tuple with the ExtraInstructions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13UsersInner) GetExtraInstructionsOk() (*string, bool) {
+	if o == nil || IsNil(o.ExtraInstructions) {
+		return nil, false
+	}
+	return o.ExtraInstructions, true
+}
+
+// HasExtraInstructions returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13UsersInner) HasExtraInstructions() bool {
+	if o != nil && !IsNil(o.ExtraInstructions) {
+		return true
+	}
+
+	return false
+}
+
+// SetExtraInstructions gets a reference to the given string and assigns it to the ExtraInstructions field.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13UsersInner) SetExtraInstructions(v string) {
+	o.ExtraInstructions = &v
 }
 
 func (o ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13UsersInner) MarshalJSON() ([]byte, error) {
@@ -213,7 +246,10 @@ func (o ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13UsersInner)
 	if !IsNil(o.QueryParameters) {
 		toSerialize["query_parameters"] = o.QueryParameters
 	}
-	toSerialize["actions"] = o.Actions
+	toSerialize["password"] = o.Password
+	if !IsNil(o.ExtraInstructions) {
+		toSerialize["extra_instructions"] = o.ExtraInstructions
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -228,7 +264,7 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13UsersInner
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"username",
-		"actions",
+		"password",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -262,7 +298,8 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13UsersInner
 		delete(additionalProperties, "headers")
 		delete(additionalProperties, "cookies")
 		delete(additionalProperties, "query_parameters")
-		delete(additionalProperties, "actions")
+		delete(additionalProperties, "password")
+		delete(additionalProperties, "extra_instructions")
 		o.AdditionalProperties = additionalProperties
 	}
 

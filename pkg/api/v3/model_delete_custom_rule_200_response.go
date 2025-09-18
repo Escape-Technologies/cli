@@ -20,7 +20,7 @@ var _ MappedNullable = &DeleteCustomRule200Response{}
 
 // DeleteCustomRule200Response struct for DeleteCustomRule200Response
 type DeleteCustomRule200Response struct {
-	Message ENUMCUSTOMRULEDELETEDSUCCESSFULLY `json:"message"`
+	Deleted bool `json:"deleted"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -30,9 +30,9 @@ type _DeleteCustomRule200Response DeleteCustomRule200Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDeleteCustomRule200Response(message ENUMCUSTOMRULEDELETEDSUCCESSFULLY) *DeleteCustomRule200Response {
+func NewDeleteCustomRule200Response(deleted bool) *DeleteCustomRule200Response {
 	this := DeleteCustomRule200Response{}
-	this.Message = message
+	this.Deleted = deleted
 	return &this
 }
 
@@ -44,28 +44,28 @@ func NewDeleteCustomRule200ResponseWithDefaults() *DeleteCustomRule200Response {
 	return &this
 }
 
-// GetMessage returns the Message field value
-func (o *DeleteCustomRule200Response) GetMessage() ENUMCUSTOMRULEDELETEDSUCCESSFULLY {
+// GetDeleted returns the Deleted field value
+func (o *DeleteCustomRule200Response) GetDeleted() bool {
 	if o == nil {
-		var ret ENUMCUSTOMRULEDELETEDSUCCESSFULLY
+		var ret bool
 		return ret
 	}
 
-	return o.Message
+	return o.Deleted
 }
 
-// GetMessageOk returns a tuple with the Message field value
+// GetDeletedOk returns a tuple with the Deleted field value
 // and a boolean to check if the value has been set.
-func (o *DeleteCustomRule200Response) GetMessageOk() (*ENUMCUSTOMRULEDELETEDSUCCESSFULLY, bool) {
+func (o *DeleteCustomRule200Response) GetDeletedOk() (*bool, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Message, true
+	return &o.Deleted, true
 }
 
-// SetMessage sets field value
-func (o *DeleteCustomRule200Response) SetMessage(v ENUMCUSTOMRULEDELETEDSUCCESSFULLY) {
-	o.Message = v
+// SetDeleted sets field value
+func (o *DeleteCustomRule200Response) SetDeleted(v bool) {
+	o.Deleted = v
 }
 
 func (o DeleteCustomRule200Response) MarshalJSON() ([]byte, error) {
@@ -78,7 +78,7 @@ func (o DeleteCustomRule200Response) MarshalJSON() ([]byte, error) {
 
 func (o DeleteCustomRule200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["message"] = o.Message
+	toSerialize["deleted"] = o.Deleted
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -92,7 +92,7 @@ func (o *DeleteCustomRule200Response) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"message",
+		"deleted",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -122,7 +122,7 @@ func (o *DeleteCustomRule200Response) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "message")
+		delete(additionalProperties, "deleted")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -24,7 +24,7 @@ type ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10UsersInner str
 	Headers map[string]string `json:"headers,omitempty"`
 	Cookies map[string]string `json:"cookies,omitempty"`
 	QueryParameters map[string]string `json:"query_parameters,omitempty"`
-	Curl string `json:"curl"`
+	Variables map[string]string `json:"variables,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -34,10 +34,9 @@ type _ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10UsersInner Pr
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10UsersInner(username string, curl string) *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10UsersInner {
+func NewProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10UsersInner(username string) *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10UsersInner {
 	this := ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10UsersInner{}
 	this.Username = username
-	this.Curl = curl
 	return &this
 }
 
@@ -169,28 +168,36 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10UsersInner
 	o.QueryParameters = v
 }
 
-// GetCurl returns the Curl field value
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10UsersInner) GetCurl() string {
-	if o == nil {
-		var ret string
+// GetVariables returns the Variables field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10UsersInner) GetVariables() map[string]string {
+	if o == nil || IsNil(o.Variables) {
+		var ret map[string]string
 		return ret
 	}
-
-	return o.Curl
+	return o.Variables
 }
 
-// GetCurlOk returns a tuple with the Curl field value
+// GetVariablesOk returns a tuple with the Variables field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10UsersInner) GetCurlOk() (*string, bool) {
-	if o == nil {
-		return nil, false
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10UsersInner) GetVariablesOk() (map[string]string, bool) {
+	if o == nil || IsNil(o.Variables) {
+		return map[string]string{}, false
 	}
-	return &o.Curl, true
+	return o.Variables, true
 }
 
-// SetCurl sets field value
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10UsersInner) SetCurl(v string) {
-	o.Curl = v
+// HasVariables returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10UsersInner) HasVariables() bool {
+	if o != nil && !IsNil(o.Variables) {
+		return true
+	}
+
+	return false
+}
+
+// SetVariables gets a reference to the given map[string]string and assigns it to the Variables field.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10UsersInner) SetVariables(v map[string]string) {
+	o.Variables = v
 }
 
 func (o ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10UsersInner) MarshalJSON() ([]byte, error) {
@@ -213,7 +220,9 @@ func (o ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10UsersInner)
 	if !IsNil(o.QueryParameters) {
 		toSerialize["query_parameters"] = o.QueryParameters
 	}
-	toSerialize["curl"] = o.Curl
+	if !IsNil(o.Variables) {
+		toSerialize["variables"] = o.Variables
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -228,7 +237,6 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10UsersInner
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"username",
-		"curl",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -262,7 +270,7 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10UsersInner
 		delete(additionalProperties, "headers")
 		delete(additionalProperties, "cookies")
 		delete(additionalProperties, "query_parameters")
-		delete(additionalProperties, "curl")
+		delete(additionalProperties, "variables")
 		o.AdditionalProperties = additionalProperties
 	}
 

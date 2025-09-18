@@ -162,19 +162,26 @@ func colorizeActor(value string) string {
 	return idText(value)
 }
 
-func colorizeColor(value string) string {
-	const expectedHexRGBLen = 6
-	if len(value) == expectedHexRGBLen {
-		if r, errR := strconv.ParseInt(value[0:2], 16, 0); errR == nil {
-			if g, errG := strconv.ParseInt(value[2:4], 16, 0); errG == nil {
-				if b, errB := strconv.ParseInt(value[4:6], 16, 0); errB == nil {
-					seq := fmt.Sprintf("\x1b[38;2;%d;%d;%dm", r, g, b)
-					return makeColored(value, seq)
-				}
-			}
-		}
-	}
-	return grayText(value)
+
+// colorizeWithHex applies an ANSI 24-bit foreground color to text using a hex RGB string (e.g. "6a63f0").
+func colorizeWithHex(text string, hexRGB string) string {
+    const expectedHexRGBLen = 6
+    if len(hexRGB) == expectedHexRGBLen {
+        if r, errR := strconv.ParseInt(hexRGB[0:2], 16, 0); errR == nil {
+            if g, errG := strconv.ParseInt(hexRGB[2:4], 16, 0); errG == nil {
+                if b, errB := strconv.ParseInt(hexRGB[4:6], 16, 0); errB == nil {
+                    seq := fmt.Sprintf("\x1b[38;2;%d;%d;%dm", r, g, b)
+                    return makeColored(text, seq)
+                }
+            }
+        }
+    }
+    return grayText(text)
+}
+
+// TagText is a helper function to colorize a tag name based on its hexRGB color
+func TagText(name string, hexRGB string) string {
+    return colorizeWithHex(name, hexRGB)
 }
 
 func colorizeValue(value string, columnName string, isLastColumn bool) string {
@@ -232,7 +239,7 @@ func colorizeValue(value string, columnName string, isLastColumn bool) string {
 	case "CRON":
 		return greenText(value)
 	case "COLOR":
-		return colorizeColor(value)
+		return colorizeWithHex(value, value)
 	}
 
 	// handle boolean values
@@ -279,4 +286,5 @@ func Table(data any, tableMaker func() []string) {
 
 	w.Flush() //nolint:errcheck
 }
+
 

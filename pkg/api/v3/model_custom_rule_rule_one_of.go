@@ -21,11 +21,11 @@ var _ MappedNullable = &CustomRuleRuleOneOf{}
 // CustomRuleRuleOneOf struct for CustomRuleRuleOneOf
 type CustomRuleRuleOneOf struct {
 	Id string `json:"id"`
-	Alert CustomRuleRuleOneOfAlert `json:"alert"`
+	Alert CreateCustomRuleRequestContentRuleOneOfAlert `json:"alert"`
 	Type ENUMAPI `json:"type"`
-	Seed []CustomRuleRuleOneOfSeedInner `json:"seed,omitempty"`
-	Transform *CustomRuleRuleOneOfTransform `json:"transform,omitempty"`
-	Detect []CustomRuleRuleOneOfTransformTriggerInner `json:"detect"`
+	Seed []CreateCustomRuleRequestContentRuleOneOfSeedInner `json:"seed,omitempty"`
+	Transform *CreateCustomRuleRequestContentRuleOneOfTransform `json:"transform,omitempty"`
+	Detect []CreateCustomRuleRequestContentRuleOneOfTransformTriggerInner `json:"detect"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -35,7 +35,7 @@ type _CustomRuleRuleOneOf CustomRuleRuleOneOf
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCustomRuleRuleOneOf(id string, alert CustomRuleRuleOneOfAlert, type_ ENUMAPI, detect []CustomRuleRuleOneOfTransformTriggerInner) *CustomRuleRuleOneOf {
+func NewCustomRuleRuleOneOf(id string, alert CreateCustomRuleRequestContentRuleOneOfAlert, type_ ENUMAPI, detect []CreateCustomRuleRequestContentRuleOneOfTransformTriggerInner) *CustomRuleRuleOneOf {
 	this := CustomRuleRuleOneOf{}
 	this.Id = id
 	this.Alert = alert
@@ -77,9 +77,9 @@ func (o *CustomRuleRuleOneOf) SetId(v string) {
 }
 
 // GetAlert returns the Alert field value
-func (o *CustomRuleRuleOneOf) GetAlert() CustomRuleRuleOneOfAlert {
+func (o *CustomRuleRuleOneOf) GetAlert() CreateCustomRuleRequestContentRuleOneOfAlert {
 	if o == nil {
-		var ret CustomRuleRuleOneOfAlert
+		var ret CreateCustomRuleRequestContentRuleOneOfAlert
 		return ret
 	}
 
@@ -88,7 +88,7 @@ func (o *CustomRuleRuleOneOf) GetAlert() CustomRuleRuleOneOfAlert {
 
 // GetAlertOk returns a tuple with the Alert field value
 // and a boolean to check if the value has been set.
-func (o *CustomRuleRuleOneOf) GetAlertOk() (*CustomRuleRuleOneOfAlert, bool) {
+func (o *CustomRuleRuleOneOf) GetAlertOk() (*CreateCustomRuleRequestContentRuleOneOfAlert, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -96,7 +96,7 @@ func (o *CustomRuleRuleOneOf) GetAlertOk() (*CustomRuleRuleOneOfAlert, bool) {
 }
 
 // SetAlert sets field value
-func (o *CustomRuleRuleOneOf) SetAlert(v CustomRuleRuleOneOfAlert) {
+func (o *CustomRuleRuleOneOf) SetAlert(v CreateCustomRuleRequestContentRuleOneOfAlert) {
 	o.Alert = v
 }
 
@@ -125,9 +125,9 @@ func (o *CustomRuleRuleOneOf) SetType(v ENUMAPI) {
 }
 
 // GetSeed returns the Seed field value if set, zero value otherwise.
-func (o *CustomRuleRuleOneOf) GetSeed() []CustomRuleRuleOneOfSeedInner {
+func (o *CustomRuleRuleOneOf) GetSeed() []CreateCustomRuleRequestContentRuleOneOfSeedInner {
 	if o == nil || IsNil(o.Seed) {
-		var ret []CustomRuleRuleOneOfSeedInner
+		var ret []CreateCustomRuleRequestContentRuleOneOfSeedInner
 		return ret
 	}
 	return o.Seed
@@ -135,7 +135,7 @@ func (o *CustomRuleRuleOneOf) GetSeed() []CustomRuleRuleOneOfSeedInner {
 
 // GetSeedOk returns a tuple with the Seed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CustomRuleRuleOneOf) GetSeedOk() ([]CustomRuleRuleOneOfSeedInner, bool) {
+func (o *CustomRuleRuleOneOf) GetSeedOk() ([]CreateCustomRuleRequestContentRuleOneOfSeedInner, bool) {
 	if o == nil || IsNil(o.Seed) {
 		return nil, false
 	}
@@ -151,15 +151,15 @@ func (o *CustomRuleRuleOneOf) HasSeed() bool {
 	return false
 }
 
-// SetSeed gets a reference to the given []CustomRuleRuleOneOfSeedInner and assigns it to the Seed field.
-func (o *CustomRuleRuleOneOf) SetSeed(v []CustomRuleRuleOneOfSeedInner) {
+// SetSeed gets a reference to the given []CreateCustomRuleRequestContentRuleOneOfSeedInner and assigns it to the Seed field.
+func (o *CustomRuleRuleOneOf) SetSeed(v []CreateCustomRuleRequestContentRuleOneOfSeedInner) {
 	o.Seed = v
 }
 
 // GetTransform returns the Transform field value if set, zero value otherwise.
-func (o *CustomRuleRuleOneOf) GetTransform() CustomRuleRuleOneOfTransform {
+func (o *CustomRuleRuleOneOf) GetTransform() CreateCustomRuleRequestContentRuleOneOfTransform {
 	if o == nil || IsNil(o.Transform) {
-		var ret CustomRuleRuleOneOfTransform
+		var ret CreateCustomRuleRequestContentRuleOneOfTransform
 		return ret
 	}
 	return *o.Transform
@@ -167,7 +167,7 @@ func (o *CustomRuleRuleOneOf) GetTransform() CustomRuleRuleOneOfTransform {
 
 // GetTransformOk returns a tuple with the Transform field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CustomRuleRuleOneOf) GetTransformOk() (*CustomRuleRuleOneOfTransform, bool) {
+func (o *CustomRuleRuleOneOf) GetTransformOk() (*CreateCustomRuleRequestContentRuleOneOfTransform, bool) {
 	if o == nil || IsNil(o.Transform) {
 		return nil, false
 	}
@@ -183,15 +183,15 @@ func (o *CustomRuleRuleOneOf) HasTransform() bool {
 	return false
 }
 
-// SetTransform gets a reference to the given CustomRuleRuleOneOfTransform and assigns it to the Transform field.
-func (o *CustomRuleRuleOneOf) SetTransform(v CustomRuleRuleOneOfTransform) {
+// SetTransform gets a reference to the given CreateCustomRuleRequestContentRuleOneOfTransform and assigns it to the Transform field.
+func (o *CustomRuleRuleOneOf) SetTransform(v CreateCustomRuleRequestContentRuleOneOfTransform) {
 	o.Transform = &v
 }
 
 // GetDetect returns the Detect field value
-func (o *CustomRuleRuleOneOf) GetDetect() []CustomRuleRuleOneOfTransformTriggerInner {
+func (o *CustomRuleRuleOneOf) GetDetect() []CreateCustomRuleRequestContentRuleOneOfTransformTriggerInner {
 	if o == nil {
-		var ret []CustomRuleRuleOneOfTransformTriggerInner
+		var ret []CreateCustomRuleRequestContentRuleOneOfTransformTriggerInner
 		return ret
 	}
 
@@ -200,7 +200,7 @@ func (o *CustomRuleRuleOneOf) GetDetect() []CustomRuleRuleOneOfTransformTriggerI
 
 // GetDetectOk returns a tuple with the Detect field value
 // and a boolean to check if the value has been set.
-func (o *CustomRuleRuleOneOf) GetDetectOk() ([]CustomRuleRuleOneOfTransformTriggerInner, bool) {
+func (o *CustomRuleRuleOneOf) GetDetectOk() ([]CreateCustomRuleRequestContentRuleOneOfTransformTriggerInner, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -208,7 +208,7 @@ func (o *CustomRuleRuleOneOf) GetDetectOk() ([]CustomRuleRuleOneOfTransformTrigg
 }
 
 // SetDetect sets field value
-func (o *CustomRuleRuleOneOf) SetDetect(v []CustomRuleRuleOneOfTransformTriggerInner) {
+func (o *CustomRuleRuleOneOf) SetDetect(v []CreateCustomRuleRequestContentRuleOneOfTransformTriggerInner) {
 	o.Detect = v
 }
 

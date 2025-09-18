@@ -20,11 +20,8 @@ var _ MappedNullable = &ProfileDetailedConfigurationAuthenticationPresetsInnerOn
 
 // ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf8 struct for ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf8
 type ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf8 struct {
-	Type ENUMCOGNITOUSERPASS `json:"type"`
-	Users []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf1UsersInner `json:"users"`
-	Region ENUMPROPERTIESCONFIGURATIONPROPERTIESAUTHENTICATIONPROPERTIESPRESETSITEMS8PROPERTIESREGION `json:"region"`
-	ClientId string `json:"client_id"`
-	ClientSecret string `json:"client_secret"`
+	Type ENUMHEADERS `json:"type"`
+	Users []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf8UsersInner `json:"users"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -34,13 +31,10 @@ type _ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf8 ProfileDetail
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProfileDetailedConfigurationAuthenticationPresetsInnerOneOf8(type_ ENUMCOGNITOUSERPASS, users []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf1UsersInner, region ENUMPROPERTIESCONFIGURATIONPROPERTIESAUTHENTICATIONPROPERTIESPRESETSITEMS8PROPERTIESREGION, clientId string, clientSecret string) *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf8 {
+func NewProfileDetailedConfigurationAuthenticationPresetsInnerOneOf8(type_ ENUMHEADERS, users []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf8UsersInner) *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf8 {
 	this := ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf8{}
 	this.Type = type_
 	this.Users = users
-	this.Region = region
-	this.ClientId = clientId
-	this.ClientSecret = clientSecret
 	return &this
 }
 
@@ -53,9 +47,9 @@ func NewProfileDetailedConfigurationAuthenticationPresetsInnerOneOf8WithDefaults
 }
 
 // GetType returns the Type field value
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf8) GetType() ENUMCOGNITOUSERPASS {
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf8) GetType() ENUMHEADERS {
 	if o == nil {
-		var ret ENUMCOGNITOUSERPASS
+		var ret ENUMHEADERS
 		return ret
 	}
 
@@ -64,7 +58,7 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf8) GetType()
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf8) GetTypeOk() (*ENUMCOGNITOUSERPASS, bool) {
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf8) GetTypeOk() (*ENUMHEADERS, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -72,14 +66,14 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf8) GetTypeOk
 }
 
 // SetType sets field value
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf8) SetType(v ENUMCOGNITOUSERPASS) {
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf8) SetType(v ENUMHEADERS) {
 	o.Type = v
 }
 
 // GetUsers returns the Users field value
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf8) GetUsers() []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf1UsersInner {
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf8) GetUsers() []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf8UsersInner {
 	if o == nil {
-		var ret []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf1UsersInner
+		var ret []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf8UsersInner
 		return ret
 	}
 
@@ -88,7 +82,7 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf8) GetUsers(
 
 // GetUsersOk returns a tuple with the Users field value
 // and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf8) GetUsersOk() ([]ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf1UsersInner, bool) {
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf8) GetUsersOk() ([]ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf8UsersInner, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -96,80 +90,8 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf8) GetUsersO
 }
 
 // SetUsers sets field value
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf8) SetUsers(v []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf1UsersInner) {
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf8) SetUsers(v []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf8UsersInner) {
 	o.Users = v
-}
-
-// GetRegion returns the Region field value
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf8) GetRegion() ENUMPROPERTIESCONFIGURATIONPROPERTIESAUTHENTICATIONPROPERTIESPRESETSITEMS8PROPERTIESREGION {
-	if o == nil {
-		var ret ENUMPROPERTIESCONFIGURATIONPROPERTIESAUTHENTICATIONPROPERTIESPRESETSITEMS8PROPERTIESREGION
-		return ret
-	}
-
-	return o.Region
-}
-
-// GetRegionOk returns a tuple with the Region field value
-// and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf8) GetRegionOk() (*ENUMPROPERTIESCONFIGURATIONPROPERTIESAUTHENTICATIONPROPERTIESPRESETSITEMS8PROPERTIESREGION, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Region, true
-}
-
-// SetRegion sets field value
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf8) SetRegion(v ENUMPROPERTIESCONFIGURATIONPROPERTIESAUTHENTICATIONPROPERTIESPRESETSITEMS8PROPERTIESREGION) {
-	o.Region = v
-}
-
-// GetClientId returns the ClientId field value
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf8) GetClientId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ClientId
-}
-
-// GetClientIdOk returns a tuple with the ClientId field value
-// and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf8) GetClientIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ClientId, true
-}
-
-// SetClientId sets field value
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf8) SetClientId(v string) {
-	o.ClientId = v
-}
-
-// GetClientSecret returns the ClientSecret field value
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf8) GetClientSecret() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ClientSecret
-}
-
-// GetClientSecretOk returns a tuple with the ClientSecret field value
-// and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf8) GetClientSecretOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ClientSecret, true
-}
-
-// SetClientSecret sets field value
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf8) SetClientSecret(v string) {
-	o.ClientSecret = v
 }
 
 func (o ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf8) MarshalJSON() ([]byte, error) {
@@ -184,9 +106,6 @@ func (o ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf8) ToMap() (m
 	toSerialize := map[string]interface{}{}
 	toSerialize["type"] = o.Type
 	toSerialize["users"] = o.Users
-	toSerialize["region"] = o.Region
-	toSerialize["client_id"] = o.ClientId
-	toSerialize["client_secret"] = o.ClientSecret
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -202,9 +121,6 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf8) Unmarshal
 	requiredProperties := []string{
 		"type",
 		"users",
-		"region",
-		"client_id",
-		"client_secret",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -236,9 +152,6 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf8) Unmarshal
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "type")
 		delete(additionalProperties, "users")
-		delete(additionalProperties, "region")
-		delete(additionalProperties, "client_id")
-		delete(additionalProperties, "client_secret")
 		o.AdditionalProperties = additionalProperties
 	}
 
