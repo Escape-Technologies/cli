@@ -20,15 +20,16 @@ var _ MappedNullable = &ProfileDetailedConfigurationAuthenticationPresetsInnerOn
 
 // ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13 struct for ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13
 type ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13 struct {
-	Type ENUMBROWSERACTIONS `json:"type"`
+	Type ENUMBROWSERUSE `json:"type"`
 	Users []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13UsersInner `json:"users"`
 	LoginUrl string `json:"login_url"`
 	StealthMode *bool `json:"stealth_mode,omitempty"`
 	Extractions []ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner `json:"extractions,omitempty"`
-	Injections NullableProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12Injections `json:"injections,omitempty"`
+	Injections NullableProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11Injections `json:"injections,omitempty"`
 	AutoExtractionUrls []string `json:"auto_extraction_urls,omitempty"`
 	LoggedInDetectorText *string `json:"logged_in_detector_text,omitempty"`
 	LoggedInDetectorTimeout *float32 `json:"logged_in_detector_timeout,omitempty"`
+	AutoSignup *bool `json:"auto_signup,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -38,7 +39,7 @@ type _ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13 ProfileDetai
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13(type_ ENUMBROWSERACTIONS, users []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13UsersInner, loginUrl string) *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13 {
+func NewProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13(type_ ENUMBROWSERUSE, users []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13UsersInner, loginUrl string) *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13 {
 	this := ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13{}
 	this.Type = type_
 	this.Users = users
@@ -55,9 +56,9 @@ func NewProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13WithDefault
 }
 
 // GetType returns the Type field value
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13) GetType() ENUMBROWSERACTIONS {
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13) GetType() ENUMBROWSERUSE {
 	if o == nil {
-		var ret ENUMBROWSERACTIONS
+		var ret ENUMBROWSERUSE
 		return ret
 	}
 
@@ -66,7 +67,7 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13) GetType(
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13) GetTypeOk() (*ENUMBROWSERACTIONS, bool) {
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13) GetTypeOk() (*ENUMBROWSERUSE, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -74,7 +75,7 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13) GetTypeO
 }
 
 // SetType sets field value
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13) SetType(v ENUMBROWSERACTIONS) {
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13) SetType(v ENUMBROWSERUSE) {
 	o.Type = v
 }
 
@@ -191,9 +192,9 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13) SetExtra
 }
 
 // GetInjections returns the Injections field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13) GetInjections() ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12Injections {
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13) GetInjections() ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11Injections {
 	if o == nil || IsNil(o.Injections.Get()) {
-		var ret ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12Injections
+		var ret ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11Injections
 		return ret
 	}
 	return *o.Injections.Get()
@@ -202,7 +203,7 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13) GetInjec
 // GetInjectionsOk returns a tuple with the Injections field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13) GetInjectionsOk() (*ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12Injections, bool) {
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13) GetInjectionsOk() (*ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11Injections, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -218,8 +219,8 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13) HasInjec
 	return false
 }
 
-// SetInjections gets a reference to the given NullableProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12Injections and assigns it to the Injections field.
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13) SetInjections(v ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12Injections) {
+// SetInjections gets a reference to the given NullableProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11Injections and assigns it to the Injections field.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13) SetInjections(v ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11Injections) {
 	o.Injections.Set(&v)
 }
 // SetInjectionsNil sets the value for Injections to be an explicit nil
@@ -328,6 +329,38 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13) SetLogge
 	o.LoggedInDetectorTimeout = &v
 }
 
+// GetAutoSignup returns the AutoSignup field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13) GetAutoSignup() bool {
+	if o == nil || IsNil(o.AutoSignup) {
+		var ret bool
+		return ret
+	}
+	return *o.AutoSignup
+}
+
+// GetAutoSignupOk returns a tuple with the AutoSignup field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13) GetAutoSignupOk() (*bool, bool) {
+	if o == nil || IsNil(o.AutoSignup) {
+		return nil, false
+	}
+	return o.AutoSignup, true
+}
+
+// HasAutoSignup returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13) HasAutoSignup() bool {
+	if o != nil && !IsNil(o.AutoSignup) {
+		return true
+	}
+
+	return false
+}
+
+// SetAutoSignup gets a reference to the given bool and assigns it to the AutoSignup field.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13) SetAutoSignup(v bool) {
+	o.AutoSignup = &v
+}
+
 func (o ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -358,6 +391,9 @@ func (o ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13) ToMap() (
 	}
 	if !IsNil(o.LoggedInDetectorTimeout) {
 		toSerialize["logged_in_detector_timeout"] = o.LoggedInDetectorTimeout
+	}
+	if !IsNil(o.AutoSignup) {
+		toSerialize["auto_signup"] = o.AutoSignup
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -413,6 +449,7 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13) Unmarsha
 		delete(additionalProperties, "auto_extraction_urls")
 		delete(additionalProperties, "logged_in_detector_text")
 		delete(additionalProperties, "logged_in_detector_timeout")
+		delete(additionalProperties, "auto_signup")
 		o.AdditionalProperties = additionalProperties
 	}
 

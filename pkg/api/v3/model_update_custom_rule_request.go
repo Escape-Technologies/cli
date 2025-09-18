@@ -12,7 +12,6 @@ package v3
 
 import (
 	"encoding/json"
-	"fmt"
 )
 
 // checks if the UpdateCustomRuleRequest type satisfies the MappedNullable interface at compile time
@@ -21,13 +20,13 @@ var _ MappedNullable = &UpdateCustomRuleRequest{}
 // UpdateCustomRuleRequest struct for UpdateCustomRuleRequest
 type UpdateCustomRuleRequest struct {
 	// The content of the custom rule
-	Content map[string]interface{} `json:"content"`
+	Content map[string]interface{} `json:"content,omitempty"`
 	// Whether the custom rule is enabled for DAST
-	DastEnabled string `json:"dastEnabled"`
+	DastEnabled *string `json:"dastEnabled,omitempty"`
 	// Whether the custom rule is enabled for ASM
-	AsmEnabled string `json:"asmEnabled"`
+	AsmEnabled *string `json:"asmEnabled,omitempty"`
 	// The tags of the custom rule
-	Tags []string `json:"tags"`
+	Tags []string `json:"tags,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -37,12 +36,8 @@ type _UpdateCustomRuleRequest UpdateCustomRuleRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateCustomRuleRequest(content map[string]interface{}, dastEnabled string, asmEnabled string, tags []string) *UpdateCustomRuleRequest {
+func NewUpdateCustomRuleRequest() *UpdateCustomRuleRequest {
 	this := UpdateCustomRuleRequest{}
-	this.Content = content
-	this.DastEnabled = dastEnabled
-	this.AsmEnabled = asmEnabled
-	this.Tags = tags
 	return &this
 }
 
@@ -54,98 +49,130 @@ func NewUpdateCustomRuleRequestWithDefaults() *UpdateCustomRuleRequest {
 	return &this
 }
 
-// GetContent returns the Content field value
+// GetContent returns the Content field value if set, zero value otherwise.
 func (o *UpdateCustomRuleRequest) GetContent() map[string]interface{} {
-	if o == nil {
+	if o == nil || IsNil(o.Content) {
 		var ret map[string]interface{}
 		return ret
 	}
-
 	return o.Content
 }
 
-// GetContentOk returns a tuple with the Content field value
+// GetContentOk returns a tuple with the Content field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateCustomRuleRequest) GetContentOk() (map[string]interface{}, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Content) {
 		return map[string]interface{}{}, false
 	}
 	return o.Content, true
 }
 
-// SetContent sets field value
+// HasContent returns a boolean if a field has been set.
+func (o *UpdateCustomRuleRequest) HasContent() bool {
+	if o != nil && !IsNil(o.Content) {
+		return true
+	}
+
+	return false
+}
+
+// SetContent gets a reference to the given map[string]interface{} and assigns it to the Content field.
 func (o *UpdateCustomRuleRequest) SetContent(v map[string]interface{}) {
 	o.Content = v
 }
 
-// GetDastEnabled returns the DastEnabled field value
+// GetDastEnabled returns the DastEnabled field value if set, zero value otherwise.
 func (o *UpdateCustomRuleRequest) GetDastEnabled() string {
-	if o == nil {
+	if o == nil || IsNil(o.DastEnabled) {
 		var ret string
 		return ret
 	}
-
-	return o.DastEnabled
+	return *o.DastEnabled
 }
 
-// GetDastEnabledOk returns a tuple with the DastEnabled field value
+// GetDastEnabledOk returns a tuple with the DastEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateCustomRuleRequest) GetDastEnabledOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.DastEnabled) {
 		return nil, false
 	}
-	return &o.DastEnabled, true
+	return o.DastEnabled, true
 }
 
-// SetDastEnabled sets field value
+// HasDastEnabled returns a boolean if a field has been set.
+func (o *UpdateCustomRuleRequest) HasDastEnabled() bool {
+	if o != nil && !IsNil(o.DastEnabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetDastEnabled gets a reference to the given string and assigns it to the DastEnabled field.
 func (o *UpdateCustomRuleRequest) SetDastEnabled(v string) {
-	o.DastEnabled = v
+	o.DastEnabled = &v
 }
 
-// GetAsmEnabled returns the AsmEnabled field value
+// GetAsmEnabled returns the AsmEnabled field value if set, zero value otherwise.
 func (o *UpdateCustomRuleRequest) GetAsmEnabled() string {
-	if o == nil {
+	if o == nil || IsNil(o.AsmEnabled) {
 		var ret string
 		return ret
 	}
-
-	return o.AsmEnabled
+	return *o.AsmEnabled
 }
 
-// GetAsmEnabledOk returns a tuple with the AsmEnabled field value
+// GetAsmEnabledOk returns a tuple with the AsmEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateCustomRuleRequest) GetAsmEnabledOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.AsmEnabled) {
 		return nil, false
 	}
-	return &o.AsmEnabled, true
+	return o.AsmEnabled, true
 }
 
-// SetAsmEnabled sets field value
+// HasAsmEnabled returns a boolean if a field has been set.
+func (o *UpdateCustomRuleRequest) HasAsmEnabled() bool {
+	if o != nil && !IsNil(o.AsmEnabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetAsmEnabled gets a reference to the given string and assigns it to the AsmEnabled field.
 func (o *UpdateCustomRuleRequest) SetAsmEnabled(v string) {
-	o.AsmEnabled = v
+	o.AsmEnabled = &v
 }
 
-// GetTags returns the Tags field value
+// GetTags returns the Tags field value if set, zero value otherwise.
 func (o *UpdateCustomRuleRequest) GetTags() []string {
-	if o == nil {
+	if o == nil || IsNil(o.Tags) {
 		var ret []string
 		return ret
 	}
-
 	return o.Tags
 }
 
-// GetTagsOk returns a tuple with the Tags field value
+// GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateCustomRuleRequest) GetTagsOk() ([]string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Tags) {
 		return nil, false
 	}
 	return o.Tags, true
 }
 
-// SetTags sets field value
+// HasTags returns a boolean if a field has been set.
+func (o *UpdateCustomRuleRequest) HasTags() bool {
+	if o != nil && !IsNil(o.Tags) {
+		return true
+	}
+
+	return false
+}
+
+// SetTags gets a reference to the given []string and assigns it to the Tags field.
 func (o *UpdateCustomRuleRequest) SetTags(v []string) {
 	o.Tags = v
 }
@@ -160,10 +187,18 @@ func (o UpdateCustomRuleRequest) MarshalJSON() ([]byte, error) {
 
 func (o UpdateCustomRuleRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["content"] = o.Content
-	toSerialize["dastEnabled"] = o.DastEnabled
-	toSerialize["asmEnabled"] = o.AsmEnabled
-	toSerialize["tags"] = o.Tags
+	if !IsNil(o.Content) {
+		toSerialize["content"] = o.Content
+	}
+	if !IsNil(o.DastEnabled) {
+		toSerialize["dastEnabled"] = o.DastEnabled
+	}
+	if !IsNil(o.AsmEnabled) {
+		toSerialize["asmEnabled"] = o.AsmEnabled
+	}
+	if !IsNil(o.Tags) {
+		toSerialize["tags"] = o.Tags
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -173,30 +208,6 @@ func (o UpdateCustomRuleRequest) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *UpdateCustomRuleRequest) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"content",
-		"dastEnabled",
-		"asmEnabled",
-		"tags",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
 	varUpdateCustomRuleRequest := _UpdateCustomRuleRequest{}
 
 	err = json.Unmarshal(data, &varUpdateCustomRuleRequest)

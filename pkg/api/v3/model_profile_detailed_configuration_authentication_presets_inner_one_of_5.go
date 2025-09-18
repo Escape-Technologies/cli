@@ -20,8 +20,12 @@ var _ MappedNullable = &ProfileDetailedConfigurationAuthenticationPresetsInnerOn
 
 // ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5 struct for ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5
 type ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5 struct {
-	Type ENUMBASIC `json:"type"`
+	Type ENUMGRAPHQL `json:"type"`
 	Users []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5UsersInner `json:"users"`
+	Url string `json:"url"`
+	Query string `json:"query"`
+	Extractions []ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInnerOneOfExtractionsInner `json:"extractions,omitempty"`
+	Injections []ProfileDetailedConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner `json:"injections,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -31,10 +35,12 @@ type _ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5 ProfileDetail
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5(type_ ENUMBASIC, users []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5UsersInner) *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5 {
+func NewProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5(type_ ENUMGRAPHQL, users []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5UsersInner, url string, query string) *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5 {
 	this := ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5{}
 	this.Type = type_
 	this.Users = users
+	this.Url = url
+	this.Query = query
 	return &this
 }
 
@@ -47,9 +53,9 @@ func NewProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5WithDefaults
 }
 
 // GetType returns the Type field value
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5) GetType() ENUMBASIC {
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5) GetType() ENUMGRAPHQL {
 	if o == nil {
-		var ret ENUMBASIC
+		var ret ENUMGRAPHQL
 		return ret
 	}
 
@@ -58,7 +64,7 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5) GetType()
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5) GetTypeOk() (*ENUMBASIC, bool) {
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5) GetTypeOk() (*ENUMGRAPHQL, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -66,7 +72,7 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5) GetTypeOk
 }
 
 // SetType sets field value
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5) SetType(v ENUMBASIC) {
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5) SetType(v ENUMGRAPHQL) {
 	o.Type = v
 }
 
@@ -94,6 +100,118 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5) SetUsers(
 	o.Users = v
 }
 
+// GetUrl returns the Url field value
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5) GetUrl() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Url
+}
+
+// GetUrlOk returns a tuple with the Url field value
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5) GetUrlOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Url, true
+}
+
+// SetUrl sets field value
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5) SetUrl(v string) {
+	o.Url = v
+}
+
+// GetQuery returns the Query field value
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5) GetQuery() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Query
+}
+
+// GetQueryOk returns a tuple with the Query field value
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5) GetQueryOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Query, true
+}
+
+// SetQuery sets field value
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5) SetQuery(v string) {
+	o.Query = v
+}
+
+// GetExtractions returns the Extractions field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5) GetExtractions() []ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInnerOneOfExtractionsInner {
+	if o == nil || IsNil(o.Extractions) {
+		var ret []ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInnerOneOfExtractionsInner
+		return ret
+	}
+	return o.Extractions
+}
+
+// GetExtractionsOk returns a tuple with the Extractions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5) GetExtractionsOk() ([]ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInnerOneOfExtractionsInner, bool) {
+	if o == nil || IsNil(o.Extractions) {
+		return nil, false
+	}
+	return o.Extractions, true
+}
+
+// HasExtractions returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5) HasExtractions() bool {
+	if o != nil && !IsNil(o.Extractions) {
+		return true
+	}
+
+	return false
+}
+
+// SetExtractions gets a reference to the given []ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInnerOneOfExtractionsInner and assigns it to the Extractions field.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5) SetExtractions(v []ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInnerOneOfExtractionsInner) {
+	o.Extractions = v
+}
+
+// GetInjections returns the Injections field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5) GetInjections() []ProfileDetailedConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner {
+	if o == nil || IsNil(o.Injections) {
+		var ret []ProfileDetailedConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner
+		return ret
+	}
+	return o.Injections
+}
+
+// GetInjectionsOk returns a tuple with the Injections field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5) GetInjectionsOk() ([]ProfileDetailedConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner, bool) {
+	if o == nil || IsNil(o.Injections) {
+		return nil, false
+	}
+	return o.Injections, true
+}
+
+// HasInjections returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5) HasInjections() bool {
+	if o != nil && !IsNil(o.Injections) {
+		return true
+	}
+
+	return false
+}
+
+// SetInjections gets a reference to the given []ProfileDetailedConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner and assigns it to the Injections field.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5) SetInjections(v []ProfileDetailedConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner) {
+	o.Injections = v
+}
+
 func (o ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -106,6 +224,14 @@ func (o ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5) ToMap() (m
 	toSerialize := map[string]interface{}{}
 	toSerialize["type"] = o.Type
 	toSerialize["users"] = o.Users
+	toSerialize["url"] = o.Url
+	toSerialize["query"] = o.Query
+	if !IsNil(o.Extractions) {
+		toSerialize["extractions"] = o.Extractions
+	}
+	if !IsNil(o.Injections) {
+		toSerialize["injections"] = o.Injections
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -121,6 +247,8 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5) Unmarshal
 	requiredProperties := []string{
 		"type",
 		"users",
+		"url",
+		"query",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -152,6 +280,10 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5) Unmarshal
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "type")
 		delete(additionalProperties, "users")
+		delete(additionalProperties, "url")
+		delete(additionalProperties, "query")
+		delete(additionalProperties, "extractions")
+		delete(additionalProperties, "injections")
 		o.AdditionalProperties = additionalProperties
 	}
 

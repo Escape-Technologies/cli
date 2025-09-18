@@ -20,10 +20,10 @@ var _ MappedNullable = &ProfileDetailedConfigurationAuthenticationPresetsInnerOn
 
 // ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10 struct for ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10
 type ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10 struct {
-	Type ENUMCURL `json:"type"`
+	Type ENUMCURLSEQUENCE `json:"type"`
 	Users []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10UsersInner `json:"users"`
-	Extractions []ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInnerOneOfExtractionsInner `json:"extractions"`
-	Injections []ProfileDetailedConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner `json:"injections"`
+	Requests []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10RequestsInner `json:"requests"`
+	Injections []ProfileDetailedConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner `json:"injections,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -33,12 +33,11 @@ type _ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10 ProfileDetai
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10(type_ ENUMCURL, users []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10UsersInner, extractions []ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInnerOneOfExtractionsInner, injections []ProfileDetailedConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner) *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10 {
+func NewProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10(type_ ENUMCURLSEQUENCE, users []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10UsersInner, requests []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10RequestsInner) *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10 {
 	this := ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10{}
 	this.Type = type_
 	this.Users = users
-	this.Extractions = extractions
-	this.Injections = injections
+	this.Requests = requests
 	return &this
 }
 
@@ -51,9 +50,9 @@ func NewProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10WithDefault
 }
 
 // GetType returns the Type field value
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10) GetType() ENUMCURL {
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10) GetType() ENUMCURLSEQUENCE {
 	if o == nil {
-		var ret ENUMCURL
+		var ret ENUMCURLSEQUENCE
 		return ret
 	}
 
@@ -62,7 +61,7 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10) GetType(
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10) GetTypeOk() (*ENUMCURL, bool) {
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10) GetTypeOk() (*ENUMCURLSEQUENCE, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -70,7 +69,7 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10) GetTypeO
 }
 
 // SetType sets field value
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10) SetType(v ENUMCURL) {
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10) SetType(v ENUMCURLSEQUENCE) {
 	o.Type = v
 }
 
@@ -98,50 +97,58 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10) SetUsers
 	o.Users = v
 }
 
-// GetExtractions returns the Extractions field value
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10) GetExtractions() []ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInnerOneOfExtractionsInner {
+// GetRequests returns the Requests field value
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10) GetRequests() []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10RequestsInner {
 	if o == nil {
-		var ret []ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInnerOneOfExtractionsInner
+		var ret []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10RequestsInner
 		return ret
 	}
 
-	return o.Extractions
+	return o.Requests
 }
 
-// GetExtractionsOk returns a tuple with the Extractions field value
+// GetRequestsOk returns a tuple with the Requests field value
 // and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10) GetExtractionsOk() ([]ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInnerOneOfExtractionsInner, bool) {
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10) GetRequestsOk() ([]ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10RequestsInner, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Extractions, true
+	return o.Requests, true
 }
 
-// SetExtractions sets field value
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10) SetExtractions(v []ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInnerOneOfExtractionsInner) {
-	o.Extractions = v
+// SetRequests sets field value
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10) SetRequests(v []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10RequestsInner) {
+	o.Requests = v
 }
 
-// GetInjections returns the Injections field value
+// GetInjections returns the Injections field value if set, zero value otherwise.
 func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10) GetInjections() []ProfileDetailedConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner {
-	if o == nil {
+	if o == nil || IsNil(o.Injections) {
 		var ret []ProfileDetailedConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner
 		return ret
 	}
-
 	return o.Injections
 }
 
-// GetInjectionsOk returns a tuple with the Injections field value
+// GetInjectionsOk returns a tuple with the Injections field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10) GetInjectionsOk() ([]ProfileDetailedConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Injections) {
 		return nil, false
 	}
 	return o.Injections, true
 }
 
-// SetInjections sets field value
+// HasInjections returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10) HasInjections() bool {
+	if o != nil && !IsNil(o.Injections) {
+		return true
+	}
+
+	return false
+}
+
+// SetInjections gets a reference to the given []ProfileDetailedConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner and assigns it to the Injections field.
 func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10) SetInjections(v []ProfileDetailedConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner) {
 	o.Injections = v
 }
@@ -158,8 +165,10 @@ func (o ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10) ToMap() (
 	toSerialize := map[string]interface{}{}
 	toSerialize["type"] = o.Type
 	toSerialize["users"] = o.Users
-	toSerialize["extractions"] = o.Extractions
-	toSerialize["injections"] = o.Injections
+	toSerialize["requests"] = o.Requests
+	if !IsNil(o.Injections) {
+		toSerialize["injections"] = o.Injections
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -175,8 +184,7 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10) Unmarsha
 	requiredProperties := []string{
 		"type",
 		"users",
-		"extractions",
-		"injections",
+		"requests",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -208,7 +216,7 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10) Unmarsha
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "type")
 		delete(additionalProperties, "users")
-		delete(additionalProperties, "extractions")
+		delete(additionalProperties, "requests")
 		delete(additionalProperties, "injections")
 		o.AdditionalProperties = additionalProperties
 	}

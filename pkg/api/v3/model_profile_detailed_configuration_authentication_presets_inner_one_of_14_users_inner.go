@@ -25,7 +25,7 @@ type ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf14UsersInner str
 	Cookies map[string]string `json:"cookies,omitempty"`
 	QueryParameters map[string]string `json:"query_parameters,omitempty"`
 	Password string `json:"password"`
-	ExtraInstructions *string `json:"extra_instructions,omitempty"`
+	Otp string `json:"otp"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -35,10 +35,11 @@ type _ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf14UsersInner Pr
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProfileDetailedConfigurationAuthenticationPresetsInnerOneOf14UsersInner(username string, password string) *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf14UsersInner {
+func NewProfileDetailedConfigurationAuthenticationPresetsInnerOneOf14UsersInner(username string, password string, otp string) *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf14UsersInner {
 	this := ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf14UsersInner{}
 	this.Username = username
 	this.Password = password
+	this.Otp = otp
 	return &this
 }
 
@@ -194,36 +195,28 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf14UsersInner
 	o.Password = v
 }
 
-// GetExtraInstructions returns the ExtraInstructions field value if set, zero value otherwise.
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf14UsersInner) GetExtraInstructions() string {
-	if o == nil || IsNil(o.ExtraInstructions) {
+// GetOtp returns the Otp field value
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf14UsersInner) GetOtp() string {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.ExtraInstructions
+
+	return o.Otp
 }
 
-// GetExtraInstructionsOk returns a tuple with the ExtraInstructions field value if set, nil otherwise
+// GetOtpOk returns a tuple with the Otp field value
 // and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf14UsersInner) GetExtraInstructionsOk() (*string, bool) {
-	if o == nil || IsNil(o.ExtraInstructions) {
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf14UsersInner) GetOtpOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ExtraInstructions, true
+	return &o.Otp, true
 }
 
-// HasExtraInstructions returns a boolean if a field has been set.
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf14UsersInner) HasExtraInstructions() bool {
-	if o != nil && !IsNil(o.ExtraInstructions) {
-		return true
-	}
-
-	return false
-}
-
-// SetExtraInstructions gets a reference to the given string and assigns it to the ExtraInstructions field.
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf14UsersInner) SetExtraInstructions(v string) {
-	o.ExtraInstructions = &v
+// SetOtp sets field value
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf14UsersInner) SetOtp(v string) {
+	o.Otp = v
 }
 
 func (o ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf14UsersInner) MarshalJSON() ([]byte, error) {
@@ -247,9 +240,7 @@ func (o ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf14UsersInner)
 		toSerialize["query_parameters"] = o.QueryParameters
 	}
 	toSerialize["password"] = o.Password
-	if !IsNil(o.ExtraInstructions) {
-		toSerialize["extra_instructions"] = o.ExtraInstructions
-	}
+	toSerialize["otp"] = o.Otp
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -265,6 +256,7 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf14UsersInner
 	requiredProperties := []string{
 		"username",
 		"password",
+		"otp",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -299,7 +291,7 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf14UsersInner
 		delete(additionalProperties, "cookies")
 		delete(additionalProperties, "query_parameters")
 		delete(additionalProperties, "password")
-		delete(additionalProperties, "extra_instructions")
+		delete(additionalProperties, "otp")
 		o.AdditionalProperties = additionalProperties
 	}
 

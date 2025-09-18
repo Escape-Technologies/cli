@@ -23,6 +23,7 @@ type CreateAssetAKAMAIACCOUNTRequest struct {
 	AssetClass ENUMCDN `json:"asset_class"`
 	WizProviderId *string `json:"wiz_provider_id,omitempty"`
 	WizCloudPlatform *string `json:"wiz_cloud_platform,omitempty"`
+	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
 	AssetType ENUMAKAMAIACCOUNT `json:"asset_type"`
 	Name *string `json:"name,omitempty"`
 	Host string `json:"host"`
@@ -143,6 +144,38 @@ func (o *CreateAssetAKAMAIACCOUNTRequest) HasWizCloudPlatform() bool {
 // SetWizCloudPlatform gets a reference to the given string and assigns it to the WizCloudPlatform field.
 func (o *CreateAssetAKAMAIACCOUNTRequest) SetWizCloudPlatform(v string) {
 	o.WizCloudPlatform = &v
+}
+
+// GetExtraMetadata returns the ExtraMetadata field value if set, zero value otherwise.
+func (o *CreateAssetAKAMAIACCOUNTRequest) GetExtraMetadata() map[string]interface{} {
+	if o == nil || IsNil(o.ExtraMetadata) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.ExtraMetadata
+}
+
+// GetExtraMetadataOk returns a tuple with the ExtraMetadata field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetAKAMAIACCOUNTRequest) GetExtraMetadataOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.ExtraMetadata) {
+		return map[string]interface{}{}, false
+	}
+	return o.ExtraMetadata, true
+}
+
+// HasExtraMetadata returns a boolean if a field has been set.
+func (o *CreateAssetAKAMAIACCOUNTRequest) HasExtraMetadata() bool {
+	if o != nil && !IsNil(o.ExtraMetadata) {
+		return true
+	}
+
+	return false
+}
+
+// SetExtraMetadata gets a reference to the given map[string]interface{} and assigns it to the ExtraMetadata field.
+func (o *CreateAssetAKAMAIACCOUNTRequest) SetExtraMetadata(v map[string]interface{}) {
+	o.ExtraMetadata = v
 }
 
 // GetAssetType returns the AssetType field value
@@ -314,6 +347,9 @@ func (o CreateAssetAKAMAIACCOUNTRequest) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.WizCloudPlatform) {
 		toSerialize["wiz_cloud_platform"] = o.WizCloudPlatform
 	}
+	if !IsNil(o.ExtraMetadata) {
+		toSerialize["extra_metadata"] = o.ExtraMetadata
+	}
 	toSerialize["asset_type"] = o.AssetType
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
@@ -373,6 +409,7 @@ func (o *CreateAssetAKAMAIACCOUNTRequest) UnmarshalJSON(data []byte) (err error)
 		delete(additionalProperties, "asset_class")
 		delete(additionalProperties, "wiz_provider_id")
 		delete(additionalProperties, "wiz_cloud_platform")
+		delete(additionalProperties, "extra_metadata")
 		delete(additionalProperties, "asset_type")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "host")

@@ -24,7 +24,7 @@ type ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5UsersInner stru
 	Headers map[string]string `json:"headers,omitempty"`
 	Cookies map[string]string `json:"cookies,omitempty"`
 	QueryParameters map[string]string `json:"query_parameters,omitempty"`
-	Password string `json:"password"`
+	Variables map[string]string `json:"variables"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -34,10 +34,10 @@ type _ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5UsersInner Pro
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5UsersInner(username string, password string) *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5UsersInner {
+func NewProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5UsersInner(username string, variables map[string]string) *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5UsersInner {
 	this := ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5UsersInner{}
 	this.Username = username
-	this.Password = password
+	this.Variables = variables
 	return &this
 }
 
@@ -169,28 +169,28 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5UsersInner)
 	o.QueryParameters = v
 }
 
-// GetPassword returns the Password field value
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5UsersInner) GetPassword() string {
+// GetVariables returns the Variables field value
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5UsersInner) GetVariables() map[string]string {
 	if o == nil {
-		var ret string
+		var ret map[string]string
 		return ret
 	}
 
-	return o.Password
+	return o.Variables
 }
 
-// GetPasswordOk returns a tuple with the Password field value
+// GetVariablesOk returns a tuple with the Variables field value
 // and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5UsersInner) GetPasswordOk() (*string, bool) {
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5UsersInner) GetVariablesOk() (map[string]string, bool) {
 	if o == nil {
-		return nil, false
+		return map[string]string{}, false
 	}
-	return &o.Password, true
+	return o.Variables, true
 }
 
-// SetPassword sets field value
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5UsersInner) SetPassword(v string) {
-	o.Password = v
+// SetVariables sets field value
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5UsersInner) SetVariables(v map[string]string) {
+	o.Variables = v
 }
 
 func (o ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5UsersInner) MarshalJSON() ([]byte, error) {
@@ -213,7 +213,7 @@ func (o ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5UsersInner) 
 	if !IsNil(o.QueryParameters) {
 		toSerialize["query_parameters"] = o.QueryParameters
 	}
-	toSerialize["password"] = o.Password
+	toSerialize["variables"] = o.Variables
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -228,7 +228,7 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5UsersInner)
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"username",
-		"password",
+		"variables",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -262,7 +262,7 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf5UsersInner)
 		delete(additionalProperties, "headers")
 		delete(additionalProperties, "cookies")
 		delete(additionalProperties, "query_parameters")
-		delete(additionalProperties, "password")
+		delete(additionalProperties, "variables")
 		o.AdditionalProperties = additionalProperties
 	}
 

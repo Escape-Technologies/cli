@@ -21,9 +21,10 @@ var _ MappedNullable = &ProfileDetailedConfigurationAuthenticationPresetsInnerOn
 // ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9UsersInner struct for ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9UsersInner
 type ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9UsersInner struct {
 	Username string `json:"username"`
-	Headers map[string]string `json:"headers"`
+	Headers map[string]string `json:"headers,omitempty"`
 	Cookies map[string]string `json:"cookies,omitempty"`
 	QueryParameters map[string]string `json:"query_parameters,omitempty"`
+	Curl string `json:"curl"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -33,10 +34,10 @@ type _ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9UsersInner Pro
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9UsersInner(username string, headers map[string]string) *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9UsersInner {
+func NewProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9UsersInner(username string, curl string) *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9UsersInner {
 	this := ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9UsersInner{}
 	this.Username = username
-	this.Headers = headers
+	this.Curl = curl
 	return &this
 }
 
@@ -72,26 +73,34 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9UsersInner)
 	o.Username = v
 }
 
-// GetHeaders returns the Headers field value
+// GetHeaders returns the Headers field value if set, zero value otherwise.
 func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9UsersInner) GetHeaders() map[string]string {
-	if o == nil {
+	if o == nil || IsNil(o.Headers) {
 		var ret map[string]string
 		return ret
 	}
-
 	return o.Headers
 }
 
-// GetHeadersOk returns a tuple with the Headers field value
+// GetHeadersOk returns a tuple with the Headers field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9UsersInner) GetHeadersOk() (map[string]string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Headers) {
 		return map[string]string{}, false
 	}
 	return o.Headers, true
 }
 
-// SetHeaders sets field value
+// HasHeaders returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9UsersInner) HasHeaders() bool {
+	if o != nil && !IsNil(o.Headers) {
+		return true
+	}
+
+	return false
+}
+
+// SetHeaders gets a reference to the given map[string]string and assigns it to the Headers field.
 func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9UsersInner) SetHeaders(v map[string]string) {
 	o.Headers = v
 }
@@ -160,6 +169,30 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9UsersInner)
 	o.QueryParameters = v
 }
 
+// GetCurl returns the Curl field value
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9UsersInner) GetCurl() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Curl
+}
+
+// GetCurlOk returns a tuple with the Curl field value
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9UsersInner) GetCurlOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Curl, true
+}
+
+// SetCurl sets field value
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9UsersInner) SetCurl(v string) {
+	o.Curl = v
+}
+
 func (o ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9UsersInner) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -171,13 +204,16 @@ func (o ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9UsersInner) 
 func (o ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9UsersInner) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["username"] = o.Username
-	toSerialize["headers"] = o.Headers
+	if !IsNil(o.Headers) {
+		toSerialize["headers"] = o.Headers
+	}
 	if !IsNil(o.Cookies) {
 		toSerialize["cookies"] = o.Cookies
 	}
 	if !IsNil(o.QueryParameters) {
 		toSerialize["query_parameters"] = o.QueryParameters
 	}
+	toSerialize["curl"] = o.Curl
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -192,7 +228,7 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9UsersInner)
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"username",
-		"headers",
+		"curl",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -226,6 +262,7 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9UsersInner)
 		delete(additionalProperties, "headers")
 		delete(additionalProperties, "cookies")
 		delete(additionalProperties, "query_parameters")
+		delete(additionalProperties, "curl")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -26,8 +26,6 @@ type TagDetail struct {
 	Name string `json:"name"`
 	// The color of the tag
 	Color string `json:"color"`
-	// The id of the organization of the tag
-	OrganizationId string `json:"organizationId"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -37,12 +35,11 @@ type _TagDetail TagDetail
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTagDetail(id string, name string, color string, organizationId string) *TagDetail {
+func NewTagDetail(id string, name string, color string) *TagDetail {
 	this := TagDetail{}
 	this.Id = id
 	this.Name = name
 	this.Color = color
-	this.OrganizationId = organizationId
 	return &this
 }
 
@@ -126,30 +123,6 @@ func (o *TagDetail) SetColor(v string) {
 	o.Color = v
 }
 
-// GetOrganizationId returns the OrganizationId field value
-func (o *TagDetail) GetOrganizationId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.OrganizationId
-}
-
-// GetOrganizationIdOk returns a tuple with the OrganizationId field value
-// and a boolean to check if the value has been set.
-func (o *TagDetail) GetOrganizationIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.OrganizationId, true
-}
-
-// SetOrganizationId sets field value
-func (o *TagDetail) SetOrganizationId(v string) {
-	o.OrganizationId = v
-}
-
 func (o TagDetail) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -163,7 +136,6 @@ func (o TagDetail) ToMap() (map[string]interface{}, error) {
 	toSerialize["id"] = o.Id
 	toSerialize["name"] = o.Name
 	toSerialize["color"] = o.Color
-	toSerialize["organizationId"] = o.OrganizationId
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -180,7 +152,6 @@ func (o *TagDetail) UnmarshalJSON(data []byte) (err error) {
 		"id",
 		"name",
 		"color",
-		"organizationId",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -213,7 +184,6 @@ func (o *TagDetail) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "color")
-		delete(additionalProperties, "organizationId")
 		o.AdditionalProperties = additionalProperties
 	}
 

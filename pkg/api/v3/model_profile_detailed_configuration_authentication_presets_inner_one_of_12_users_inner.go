@@ -24,9 +24,7 @@ type ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInner str
 	Headers map[string]string `json:"headers,omitempty"`
 	Cookies map[string]string `json:"cookies,omitempty"`
 	QueryParameters map[string]string `json:"query_parameters,omitempty"`
-	Password string `json:"password"`
-	AdditionalFields []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInnerAdditionalFieldsInner `json:"additional_fields,omitempty"`
-	PostLoginActions []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInnerPostLoginActionsInner `json:"post_login_actions,omitempty"`
+	Actions []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11UsersInnerPostLoginActionsInner `json:"actions"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -36,10 +34,10 @@ type _ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInner Pr
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInner(username string, password string) *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInner {
+func NewProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInner(username string, actions []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11UsersInnerPostLoginActionsInner) *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInner {
 	this := ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInner{}
 	this.Username = username
-	this.Password = password
+	this.Actions = actions
 	return &this
 }
 
@@ -171,92 +169,28 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInner
 	o.QueryParameters = v
 }
 
-// GetPassword returns the Password field value
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInner) GetPassword() string {
+// GetActions returns the Actions field value
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInner) GetActions() []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11UsersInnerPostLoginActionsInner {
 	if o == nil {
-		var ret string
+		var ret []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11UsersInnerPostLoginActionsInner
 		return ret
 	}
 
-	return o.Password
+	return o.Actions
 }
 
-// GetPasswordOk returns a tuple with the Password field value
+// GetActionsOk returns a tuple with the Actions field value
 // and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInner) GetPasswordOk() (*string, bool) {
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInner) GetActionsOk() ([]ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11UsersInnerPostLoginActionsInner, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Password, true
+	return o.Actions, true
 }
 
-// SetPassword sets field value
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInner) SetPassword(v string) {
-	o.Password = v
-}
-
-// GetAdditionalFields returns the AdditionalFields field value if set, zero value otherwise.
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInner) GetAdditionalFields() []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInnerAdditionalFieldsInner {
-	if o == nil || IsNil(o.AdditionalFields) {
-		var ret []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInnerAdditionalFieldsInner
-		return ret
-	}
-	return o.AdditionalFields
-}
-
-// GetAdditionalFieldsOk returns a tuple with the AdditionalFields field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInner) GetAdditionalFieldsOk() ([]ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInnerAdditionalFieldsInner, bool) {
-	if o == nil || IsNil(o.AdditionalFields) {
-		return nil, false
-	}
-	return o.AdditionalFields, true
-}
-
-// HasAdditionalFields returns a boolean if a field has been set.
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInner) HasAdditionalFields() bool {
-	if o != nil && !IsNil(o.AdditionalFields) {
-		return true
-	}
-
-	return false
-}
-
-// SetAdditionalFields gets a reference to the given []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInnerAdditionalFieldsInner and assigns it to the AdditionalFields field.
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInner) SetAdditionalFields(v []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInnerAdditionalFieldsInner) {
-	o.AdditionalFields = v
-}
-
-// GetPostLoginActions returns the PostLoginActions field value if set, zero value otherwise.
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInner) GetPostLoginActions() []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInnerPostLoginActionsInner {
-	if o == nil || IsNil(o.PostLoginActions) {
-		var ret []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInnerPostLoginActionsInner
-		return ret
-	}
-	return o.PostLoginActions
-}
-
-// GetPostLoginActionsOk returns a tuple with the PostLoginActions field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInner) GetPostLoginActionsOk() ([]ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInnerPostLoginActionsInner, bool) {
-	if o == nil || IsNil(o.PostLoginActions) {
-		return nil, false
-	}
-	return o.PostLoginActions, true
-}
-
-// HasPostLoginActions returns a boolean if a field has been set.
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInner) HasPostLoginActions() bool {
-	if o != nil && !IsNil(o.PostLoginActions) {
-		return true
-	}
-
-	return false
-}
-
-// SetPostLoginActions gets a reference to the given []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInnerPostLoginActionsInner and assigns it to the PostLoginActions field.
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInner) SetPostLoginActions(v []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInnerPostLoginActionsInner) {
-	o.PostLoginActions = v
+// SetActions sets field value
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInner) SetActions(v []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11UsersInnerPostLoginActionsInner) {
+	o.Actions = v
 }
 
 func (o ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInner) MarshalJSON() ([]byte, error) {
@@ -279,13 +213,7 @@ func (o ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInner)
 	if !IsNil(o.QueryParameters) {
 		toSerialize["query_parameters"] = o.QueryParameters
 	}
-	toSerialize["password"] = o.Password
-	if !IsNil(o.AdditionalFields) {
-		toSerialize["additional_fields"] = o.AdditionalFields
-	}
-	if !IsNil(o.PostLoginActions) {
-		toSerialize["post_login_actions"] = o.PostLoginActions
-	}
+	toSerialize["actions"] = o.Actions
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -300,7 +228,7 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInner
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"username",
-		"password",
+		"actions",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -334,9 +262,7 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInner
 		delete(additionalProperties, "headers")
 		delete(additionalProperties, "cookies")
 		delete(additionalProperties, "query_parameters")
-		delete(additionalProperties, "password")
-		delete(additionalProperties, "additional_fields")
-		delete(additionalProperties, "post_login_actions")
+		delete(additionalProperties, "actions")
 		o.AdditionalProperties = additionalProperties
 	}
 

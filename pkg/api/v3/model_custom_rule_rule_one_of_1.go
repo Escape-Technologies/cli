@@ -21,10 +21,10 @@ var _ MappedNullable = &CustomRuleRuleOneOf1{}
 // CustomRuleRuleOneOf1 struct for CustomRuleRuleOneOf1
 type CustomRuleRuleOneOf1 struct {
 	Id string `json:"id"`
-	Alert CustomRuleRuleOneOfAlert `json:"alert"`
+	Alert CreateCustomRuleRequestContentRuleOneOfAlert `json:"alert"`
 	Type ENUMWEBAPP `json:"type"`
-	Seed []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInnerPostLoginActionsInner `json:"seed"`
-	Detect []CustomRuleRuleOneOf1DetectInner `json:"detect"`
+	Seed []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11UsersInnerPostLoginActionsInner `json:"seed"`
+	Detect []CreateCustomRuleRequestContentRuleOneOf1DetectInner `json:"detect"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -34,7 +34,7 @@ type _CustomRuleRuleOneOf1 CustomRuleRuleOneOf1
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCustomRuleRuleOneOf1(id string, alert CustomRuleRuleOneOfAlert, type_ ENUMWEBAPP, seed []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInnerPostLoginActionsInner, detect []CustomRuleRuleOneOf1DetectInner) *CustomRuleRuleOneOf1 {
+func NewCustomRuleRuleOneOf1(id string, alert CreateCustomRuleRequestContentRuleOneOfAlert, type_ ENUMWEBAPP, seed []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11UsersInnerPostLoginActionsInner, detect []CreateCustomRuleRequestContentRuleOneOf1DetectInner) *CustomRuleRuleOneOf1 {
 	this := CustomRuleRuleOneOf1{}
 	this.Id = id
 	this.Alert = alert
@@ -77,9 +77,9 @@ func (o *CustomRuleRuleOneOf1) SetId(v string) {
 }
 
 // GetAlert returns the Alert field value
-func (o *CustomRuleRuleOneOf1) GetAlert() CustomRuleRuleOneOfAlert {
+func (o *CustomRuleRuleOneOf1) GetAlert() CreateCustomRuleRequestContentRuleOneOfAlert {
 	if o == nil {
-		var ret CustomRuleRuleOneOfAlert
+		var ret CreateCustomRuleRequestContentRuleOneOfAlert
 		return ret
 	}
 
@@ -88,7 +88,7 @@ func (o *CustomRuleRuleOneOf1) GetAlert() CustomRuleRuleOneOfAlert {
 
 // GetAlertOk returns a tuple with the Alert field value
 // and a boolean to check if the value has been set.
-func (o *CustomRuleRuleOneOf1) GetAlertOk() (*CustomRuleRuleOneOfAlert, bool) {
+func (o *CustomRuleRuleOneOf1) GetAlertOk() (*CreateCustomRuleRequestContentRuleOneOfAlert, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -96,7 +96,7 @@ func (o *CustomRuleRuleOneOf1) GetAlertOk() (*CustomRuleRuleOneOfAlert, bool) {
 }
 
 // SetAlert sets field value
-func (o *CustomRuleRuleOneOf1) SetAlert(v CustomRuleRuleOneOfAlert) {
+func (o *CustomRuleRuleOneOf1) SetAlert(v CreateCustomRuleRequestContentRuleOneOfAlert) {
 	o.Alert = v
 }
 
@@ -125,9 +125,9 @@ func (o *CustomRuleRuleOneOf1) SetType(v ENUMWEBAPP) {
 }
 
 // GetSeed returns the Seed field value
-func (o *CustomRuleRuleOneOf1) GetSeed() []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInnerPostLoginActionsInner {
+func (o *CustomRuleRuleOneOf1) GetSeed() []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11UsersInnerPostLoginActionsInner {
 	if o == nil {
-		var ret []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInnerPostLoginActionsInner
+		var ret []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11UsersInnerPostLoginActionsInner
 		return ret
 	}
 
@@ -136,7 +136,7 @@ func (o *CustomRuleRuleOneOf1) GetSeed() []ProfileDetailedConfigurationAuthentic
 
 // GetSeedOk returns a tuple with the Seed field value
 // and a boolean to check if the value has been set.
-func (o *CustomRuleRuleOneOf1) GetSeedOk() ([]ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInnerPostLoginActionsInner, bool) {
+func (o *CustomRuleRuleOneOf1) GetSeedOk() ([]ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11UsersInnerPostLoginActionsInner, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -144,14 +144,14 @@ func (o *CustomRuleRuleOneOf1) GetSeedOk() ([]ProfileDetailedConfigurationAuthen
 }
 
 // SetSeed sets field value
-func (o *CustomRuleRuleOneOf1) SetSeed(v []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInnerPostLoginActionsInner) {
+func (o *CustomRuleRuleOneOf1) SetSeed(v []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11UsersInnerPostLoginActionsInner) {
 	o.Seed = v
 }
 
 // GetDetect returns the Detect field value
-func (o *CustomRuleRuleOneOf1) GetDetect() []CustomRuleRuleOneOf1DetectInner {
+func (o *CustomRuleRuleOneOf1) GetDetect() []CreateCustomRuleRequestContentRuleOneOf1DetectInner {
 	if o == nil {
-		var ret []CustomRuleRuleOneOf1DetectInner
+		var ret []CreateCustomRuleRequestContentRuleOneOf1DetectInner
 		return ret
 	}
 
@@ -160,7 +160,7 @@ func (o *CustomRuleRuleOneOf1) GetDetect() []CustomRuleRuleOneOf1DetectInner {
 
 // GetDetectOk returns a tuple with the Detect field value
 // and a boolean to check if the value has been set.
-func (o *CustomRuleRuleOneOf1) GetDetectOk() ([]CustomRuleRuleOneOf1DetectInner, bool) {
+func (o *CustomRuleRuleOneOf1) GetDetectOk() ([]CreateCustomRuleRequestContentRuleOneOf1DetectInner, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -168,7 +168,7 @@ func (o *CustomRuleRuleOneOf1) GetDetectOk() ([]CustomRuleRuleOneOf1DetectInner,
 }
 
 // SetDetect sets field value
-func (o *CustomRuleRuleOneOf1) SetDetect(v []CustomRuleRuleOneOf1DetectInner) {
+func (o *CustomRuleRuleOneOf1) SetDetect(v []CreateCustomRuleRequestContentRuleOneOf1DetectInner) {
 	o.Detect = v
 }
 
