@@ -18,21 +18,21 @@ import (
 
 // CustomRuleRule - struct for CustomRuleRule
 type CustomRuleRule struct {
-	CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInner *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInner
-	CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInner *CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInner
+	CustomRuleRuleOneOf *CustomRuleRuleOneOf
+	CustomRuleRuleOneOf1 *CustomRuleRuleOneOf1
 }
 
-// CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAsCustomRuleRule is a convenience function that returns CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInner wrapped in CustomRuleRule
-func CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInnerAsCustomRuleRule(v *CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInner) CustomRuleRule {
+// CustomRuleRuleOneOfAsCustomRuleRule is a convenience function that returns CustomRuleRuleOneOf wrapped in CustomRuleRule
+func CustomRuleRuleOneOfAsCustomRuleRule(v *CustomRuleRuleOneOf) CustomRuleRule {
 	return CustomRuleRule{
-		CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInner: v,
+		CustomRuleRuleOneOf: v,
 	}
 }
 
-// CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInnerAsCustomRuleRule is a convenience function that returns CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInner wrapped in CustomRuleRule
-func CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInnerAsCustomRuleRule(v *CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInner) CustomRuleRule {
+// CustomRuleRuleOneOf1AsCustomRuleRule is a convenience function that returns CustomRuleRuleOneOf1 wrapped in CustomRuleRule
+func CustomRuleRuleOneOf1AsCustomRuleRule(v *CustomRuleRuleOneOf1) CustomRuleRule {
 	return CustomRuleRule{
-		CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInner: v,
+		CustomRuleRuleOneOf1: v,
 	}
 }
 
@@ -41,44 +41,44 @@ func CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInnerAsC
 func (dst *CustomRuleRule) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInner
-	err = newStrictDecoder(data).Decode(&dst.CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInner)
+	// try to unmarshal data into CustomRuleRuleOneOf
+	err = newStrictDecoder(data).Decode(&dst.CustomRuleRuleOneOf)
 	if err == nil {
-		jsonCreateDastRestProfileRequestConfigurationJsonStrCustomRulesInner, _ := json.Marshal(dst.CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInner)
-		if string(jsonCreateDastRestProfileRequestConfigurationJsonStrCustomRulesInner) == "{}" { // empty struct
-			dst.CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInner = nil
+		jsonCustomRuleRuleOneOf, _ := json.Marshal(dst.CustomRuleRuleOneOf)
+		if string(jsonCustomRuleRuleOneOf) == "{}" { // empty struct
+			dst.CustomRuleRuleOneOf = nil
 		} else {
-			if err = validator.Validate(dst.CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInner); err != nil {
-				dst.CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInner = nil
+			if err = validator.Validate(dst.CustomRuleRuleOneOf); err != nil {
+				dst.CustomRuleRuleOneOf = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInner = nil
+		dst.CustomRuleRuleOneOf = nil
 	}
 
-	// try to unmarshal data into CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInner
-	err = newStrictDecoder(data).Decode(&dst.CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInner)
+	// try to unmarshal data into CustomRuleRuleOneOf1
+	err = newStrictDecoder(data).Decode(&dst.CustomRuleRuleOneOf1)
 	if err == nil {
-		jsonCreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInner, _ := json.Marshal(dst.CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInner)
-		if string(jsonCreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInner) == "{}" { // empty struct
-			dst.CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInner = nil
+		jsonCustomRuleRuleOneOf1, _ := json.Marshal(dst.CustomRuleRuleOneOf1)
+		if string(jsonCustomRuleRuleOneOf1) == "{}" { // empty struct
+			dst.CustomRuleRuleOneOf1 = nil
 		} else {
-			if err = validator.Validate(dst.CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInner); err != nil {
-				dst.CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInner = nil
+			if err = validator.Validate(dst.CustomRuleRuleOneOf1); err != nil {
+				dst.CustomRuleRuleOneOf1 = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInner = nil
+		dst.CustomRuleRuleOneOf1 = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInner = nil
-		dst.CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInner = nil
+		dst.CustomRuleRuleOneOf = nil
+		dst.CustomRuleRuleOneOf1 = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(CustomRuleRule)")
 	} else if match == 1 {
@@ -90,12 +90,12 @@ func (dst *CustomRuleRule) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src CustomRuleRule) MarshalJSON() ([]byte, error) {
-	if src.CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInner != nil {
-		return json.Marshal(&src.CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInner)
+	if src.CustomRuleRuleOneOf != nil {
+		return json.Marshal(&src.CustomRuleRuleOneOf)
 	}
 
-	if src.CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInner != nil {
-		return json.Marshal(&src.CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInner)
+	if src.CustomRuleRuleOneOf1 != nil {
+		return json.Marshal(&src.CustomRuleRuleOneOf1)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -106,12 +106,12 @@ func (obj *CustomRuleRule) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInner != nil {
-		return obj.CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInner
+	if obj.CustomRuleRuleOneOf != nil {
+		return obj.CustomRuleRuleOneOf
 	}
 
-	if obj.CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInner != nil {
-		return obj.CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInner
+	if obj.CustomRuleRuleOneOf1 != nil {
+		return obj.CustomRuleRuleOneOf1
 	}
 
 	// all schemas are nil
@@ -120,12 +120,12 @@ func (obj *CustomRuleRule) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj CustomRuleRule) GetActualInstanceValue() (interface{}) {
-	if obj.CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInner != nil {
-		return *obj.CreateDastRestProfileRequestConfigurationJsonStrCustomRulesInner
+	if obj.CustomRuleRuleOneOf != nil {
+		return *obj.CustomRuleRuleOneOf
 	}
 
-	if obj.CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInner != nil {
-		return *obj.CreateDastRestProfileRequestConfigurationJsonStrFrontendCustomRulesInner
+	if obj.CustomRuleRuleOneOf1 != nil {
+		return *obj.CustomRuleRuleOneOf1
 	}
 
 	// all schemas are nil

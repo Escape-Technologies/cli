@@ -146,6 +146,142 @@ func (a *CustomRulesAPIService) CreateCustomRuleExecute(r ApiCreateCustomRuleReq
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiDeleteCustomRuleRequest struct {
+	ctx context.Context
+	ApiService *CustomRulesAPIService
+	customRuleId string
+	deleteCustomRuleRequest *DeleteCustomRuleRequest
+}
+
+// Body of the request to delete a custom rule
+func (r ApiDeleteCustomRuleRequest) DeleteCustomRuleRequest(deleteCustomRuleRequest DeleteCustomRuleRequest) ApiDeleteCustomRuleRequest {
+	r.deleteCustomRuleRequest = &deleteCustomRuleRequest
+	return r
+}
+
+func (r ApiDeleteCustomRuleRequest) Execute() (*DeleteCustomRule200Response, *http.Response, error) {
+	return r.ApiService.DeleteCustomRuleExecute(r)
+}
+
+/*
+DeleteCustomRule Delete a custom rule
+
+Update a custom rule for the organization.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param customRuleId The ID of the custom rule to delete
+ @return ApiDeleteCustomRuleRequest
+*/
+func (a *CustomRulesAPIService) DeleteCustomRule(ctx context.Context, customRuleId string) ApiDeleteCustomRuleRequest {
+	return ApiDeleteCustomRuleRequest{
+		ApiService: a,
+		ctx: ctx,
+		customRuleId: customRuleId,
+	}
+}
+
+// Execute executes the request
+//  @return DeleteCustomRule200Response
+func (a *CustomRulesAPIService) DeleteCustomRuleExecute(r ApiDeleteCustomRuleRequest) (*DeleteCustomRule200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *DeleteCustomRule200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomRulesAPIService.DeleteCustomRule")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/custom-rules/{customRuleId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"customRuleId"+"}", url.PathEscape(parameterValueToString(r.customRuleId, "customRuleId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.deleteCustomRuleRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v UpdateProfile400Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetCustomRuleRequest struct {
 	ctx context.Context
 	ApiService *CustomRulesAPIService
@@ -384,6 +520,142 @@ func (a *CustomRulesAPIService) ListCustomRulesExecute(r ApiListCustomRulesReque
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
 			var v ListProfiles400Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiUpdateCustomRuleRequest struct {
+	ctx context.Context
+	ApiService *CustomRulesAPIService
+	customRuleId string
+	updateCustomRuleRequest *UpdateCustomRuleRequest
+}
+
+// Body of the request to update a custom rule
+func (r ApiUpdateCustomRuleRequest) UpdateCustomRuleRequest(updateCustomRuleRequest UpdateCustomRuleRequest) ApiUpdateCustomRuleRequest {
+	r.updateCustomRuleRequest = &updateCustomRuleRequest
+	return r
+}
+
+func (r ApiUpdateCustomRuleRequest) Execute() (*CustomRule, *http.Response, error) {
+	return r.ApiService.UpdateCustomRuleExecute(r)
+}
+
+/*
+UpdateCustomRule Update a custom rule
+
+Update a custom rule for the organization.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param customRuleId The ID of the custom rule to update
+ @return ApiUpdateCustomRuleRequest
+*/
+func (a *CustomRulesAPIService) UpdateCustomRule(ctx context.Context, customRuleId string) ApiUpdateCustomRuleRequest {
+	return ApiUpdateCustomRuleRequest{
+		ApiService: a,
+		ctx: ctx,
+		customRuleId: customRuleId,
+	}
+}
+
+// Execute executes the request
+//  @return CustomRule
+func (a *CustomRulesAPIService) UpdateCustomRuleExecute(r ApiUpdateCustomRuleRequest) (*CustomRule, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CustomRule
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomRulesAPIService.UpdateCustomRule")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/custom-rules/{customRuleId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"customRuleId"+"}", url.PathEscape(parameterValueToString(r.customRuleId, "customRuleId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.updateCustomRuleRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

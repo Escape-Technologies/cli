@@ -24,7 +24,7 @@ type IssueSummarized struct {
 	Id string `json:"id"`
 	// The name of the issue
 	Name string `json:"name"`
-	Category ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCATEGORY `json:"category"`
+	Category ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY `json:"category"`
 	Severity ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY `json:"severity"`
 	Status ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS `json:"status"`
 	// The context of the issue
@@ -54,7 +54,7 @@ type _IssueSummarized IssueSummarized
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIssueSummarized(id string, name string, category ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCATEGORY, severity ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY, status ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS, context string, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, alertUid string, createdAt string, asset AssetSummarized, links IssueSummarizedLinks) *IssueSummarized {
+func NewIssueSummarized(id string, name string, category ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY, severity ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY, status ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS, context string, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, alertUid string, createdAt string, asset AssetSummarized, links IssueSummarizedLinks) *IssueSummarized {
 	this := IssueSummarized{}
 	this.Id = id
 	this.Name = name
@@ -127,9 +127,9 @@ func (o *IssueSummarized) SetName(v string) {
 }
 
 // GetCategory returns the Category field value
-func (o *IssueSummarized) GetCategory() ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCATEGORY {
+func (o *IssueSummarized) GetCategory() ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY {
 	if o == nil {
-		var ret ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCATEGORY
+		var ret ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY
 		return ret
 	}
 
@@ -138,7 +138,7 @@ func (o *IssueSummarized) GetCategory() ENUMPROPERTIESCONFIGURATIONJSONSTRPROPER
 
 // GetCategoryOk returns a tuple with the Category field value
 // and a boolean to check if the value has been set.
-func (o *IssueSummarized) GetCategoryOk() (*ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCATEGORY, bool) {
+func (o *IssueSummarized) GetCategoryOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -146,7 +146,7 @@ func (o *IssueSummarized) GetCategoryOk() (*ENUMPROPERTIESCONFIGURATIONJSONSTRPR
 }
 
 // SetCategory sets field value
-func (o *IssueSummarized) SetCategory(v ENUMPROPERTIESCONFIGURATIONJSONSTRPROPERTIESCUSTOMRULESITEMSPROPERTIESALERTPROPERTIESCATEGORY) {
+func (o *IssueSummarized) SetCategory(v ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY) {
 	o.Category = v
 }
 

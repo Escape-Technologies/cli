@@ -22,17 +22,16 @@ var _ MappedNullable = &CreateDastRestProfileRequest{}
 type CreateDastRestProfileRequest struct {
 	// The asset ID for the profile
 	AssetId string `json:"assetId"`
-	// The authentication JSON string
-	AuthenticationJsonStr *string `json:"authenticationJsonStr,omitempty"`
-	ConfigurationJsonStr CreateDastRestProfileRequestConfigurationJsonStr `json:"configurationJsonStr"`
+	// The configuration as JSON string
+	Configuration *string `json:"configuration,omitempty"`
 	// The cron string
 	Cron *string `json:"cron,omitempty"`
-	Mode ENUMPROPERTIESMODE `json:"mode"`
 	// The name of the profile
 	Name string `json:"name"`
 	// The proxy ID for the profile
 	ProxyId *string `json:"proxyId,omitempty"`
-	Schema DASTDetailed `json:"schema"`
+	// The ID of the asset schema for the profile
+	SchemaId string `json:"schemaId"`
 	// The tags IDs for the profile
 	TagsIds []string `json:"tagsIds,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -44,13 +43,11 @@ type _CreateDastRestProfileRequest CreateDastRestProfileRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateDastRestProfileRequest(assetId string, configurationJsonStr CreateDastRestProfileRequestConfigurationJsonStr, mode ENUMPROPERTIESMODE, name string, schema DASTDetailed) *CreateDastRestProfileRequest {
+func NewCreateDastRestProfileRequest(assetId string, name string, schemaId string) *CreateDastRestProfileRequest {
 	this := CreateDastRestProfileRequest{}
 	this.AssetId = assetId
-	this.ConfigurationJsonStr = configurationJsonStr
-	this.Mode = mode
 	this.Name = name
-	this.Schema = schema
+	this.SchemaId = schemaId
 	return &this
 }
 
@@ -86,60 +83,36 @@ func (o *CreateDastRestProfileRequest) SetAssetId(v string) {
 	o.AssetId = v
 }
 
-// GetAuthenticationJsonStr returns the AuthenticationJsonStr field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequest) GetAuthenticationJsonStr() string {
-	if o == nil || IsNil(o.AuthenticationJsonStr) {
+// GetConfiguration returns the Configuration field value if set, zero value otherwise.
+func (o *CreateDastRestProfileRequest) GetConfiguration() string {
+	if o == nil || IsNil(o.Configuration) {
 		var ret string
 		return ret
 	}
-	return *o.AuthenticationJsonStr
+	return *o.Configuration
 }
 
-// GetAuthenticationJsonStrOk returns a tuple with the AuthenticationJsonStr field value if set, nil otherwise
+// GetConfigurationOk returns a tuple with the Configuration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequest) GetAuthenticationJsonStrOk() (*string, bool) {
-	if o == nil || IsNil(o.AuthenticationJsonStr) {
+func (o *CreateDastRestProfileRequest) GetConfigurationOk() (*string, bool) {
+	if o == nil || IsNil(o.Configuration) {
 		return nil, false
 	}
-	return o.AuthenticationJsonStr, true
+	return o.Configuration, true
 }
 
-// HasAuthenticationJsonStr returns a boolean if a field has been set.
-func (o *CreateDastRestProfileRequest) HasAuthenticationJsonStr() bool {
-	if o != nil && !IsNil(o.AuthenticationJsonStr) {
+// HasConfiguration returns a boolean if a field has been set.
+func (o *CreateDastRestProfileRequest) HasConfiguration() bool {
+	if o != nil && !IsNil(o.Configuration) {
 		return true
 	}
 
 	return false
 }
 
-// SetAuthenticationJsonStr gets a reference to the given string and assigns it to the AuthenticationJsonStr field.
-func (o *CreateDastRestProfileRequest) SetAuthenticationJsonStr(v string) {
-	o.AuthenticationJsonStr = &v
-}
-
-// GetConfigurationJsonStr returns the ConfigurationJsonStr field value
-func (o *CreateDastRestProfileRequest) GetConfigurationJsonStr() CreateDastRestProfileRequestConfigurationJsonStr {
-	if o == nil {
-		var ret CreateDastRestProfileRequestConfigurationJsonStr
-		return ret
-	}
-
-	return o.ConfigurationJsonStr
-}
-
-// GetConfigurationJsonStrOk returns a tuple with the ConfigurationJsonStr field value
-// and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequest) GetConfigurationJsonStrOk() (*CreateDastRestProfileRequestConfigurationJsonStr, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ConfigurationJsonStr, true
-}
-
-// SetConfigurationJsonStr sets field value
-func (o *CreateDastRestProfileRequest) SetConfigurationJsonStr(v CreateDastRestProfileRequestConfigurationJsonStr) {
-	o.ConfigurationJsonStr = v
+// SetConfiguration gets a reference to the given string and assigns it to the Configuration field.
+func (o *CreateDastRestProfileRequest) SetConfiguration(v string) {
+	o.Configuration = &v
 }
 
 // GetCron returns the Cron field value if set, zero value otherwise.
@@ -172,30 +145,6 @@ func (o *CreateDastRestProfileRequest) HasCron() bool {
 // SetCron gets a reference to the given string and assigns it to the Cron field.
 func (o *CreateDastRestProfileRequest) SetCron(v string) {
 	o.Cron = &v
-}
-
-// GetMode returns the Mode field value
-func (o *CreateDastRestProfileRequest) GetMode() ENUMPROPERTIESMODE {
-	if o == nil {
-		var ret ENUMPROPERTIESMODE
-		return ret
-	}
-
-	return o.Mode
-}
-
-// GetModeOk returns a tuple with the Mode field value
-// and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequest) GetModeOk() (*ENUMPROPERTIESMODE, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Mode, true
-}
-
-// SetMode sets field value
-func (o *CreateDastRestProfileRequest) SetMode(v ENUMPROPERTIESMODE) {
-	o.Mode = v
 }
 
 // GetName returns the Name field value
@@ -254,28 +203,28 @@ func (o *CreateDastRestProfileRequest) SetProxyId(v string) {
 	o.ProxyId = &v
 }
 
-// GetSchema returns the Schema field value
-func (o *CreateDastRestProfileRequest) GetSchema() DASTDetailed {
+// GetSchemaId returns the SchemaId field value
+func (o *CreateDastRestProfileRequest) GetSchemaId() string {
 	if o == nil {
-		var ret DASTDetailed
+		var ret string
 		return ret
 	}
 
-	return o.Schema
+	return o.SchemaId
 }
 
-// GetSchemaOk returns a tuple with the Schema field value
+// GetSchemaIdOk returns a tuple with the SchemaId field value
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequest) GetSchemaOk() (*DASTDetailed, bool) {
+func (o *CreateDastRestProfileRequest) GetSchemaIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Schema, true
+	return &o.SchemaId, true
 }
 
-// SetSchema sets field value
-func (o *CreateDastRestProfileRequest) SetSchema(v DASTDetailed) {
-	o.Schema = v
+// SetSchemaId sets field value
+func (o *CreateDastRestProfileRequest) SetSchemaId(v string) {
+	o.SchemaId = v
 }
 
 // GetTagsIds returns the TagsIds field value if set, zero value otherwise.
@@ -321,19 +270,17 @@ func (o CreateDastRestProfileRequest) MarshalJSON() ([]byte, error) {
 func (o CreateDastRestProfileRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["assetId"] = o.AssetId
-	if !IsNil(o.AuthenticationJsonStr) {
-		toSerialize["authenticationJsonStr"] = o.AuthenticationJsonStr
+	if !IsNil(o.Configuration) {
+		toSerialize["configuration"] = o.Configuration
 	}
-	toSerialize["configurationJsonStr"] = o.ConfigurationJsonStr
 	if !IsNil(o.Cron) {
 		toSerialize["cron"] = o.Cron
 	}
-	toSerialize["mode"] = o.Mode
 	toSerialize["name"] = o.Name
 	if !IsNil(o.ProxyId) {
 		toSerialize["proxyId"] = o.ProxyId
 	}
-	toSerialize["schema"] = o.Schema
+	toSerialize["schemaId"] = o.SchemaId
 	if !IsNil(o.TagsIds) {
 		toSerialize["tagsIds"] = o.TagsIds
 	}
@@ -351,10 +298,8 @@ func (o *CreateDastRestProfileRequest) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"assetId",
-		"configurationJsonStr",
-		"mode",
 		"name",
-		"schema",
+		"schemaId",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -385,13 +330,11 @@ func (o *CreateDastRestProfileRequest) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "assetId")
-		delete(additionalProperties, "authenticationJsonStr")
-		delete(additionalProperties, "configurationJsonStr")
+		delete(additionalProperties, "configuration")
 		delete(additionalProperties, "cron")
-		delete(additionalProperties, "mode")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "proxyId")
-		delete(additionalProperties, "schema")
+		delete(additionalProperties, "schemaId")
 		delete(additionalProperties, "tagsIds")
 		o.AdditionalProperties = additionalProperties
 	}
