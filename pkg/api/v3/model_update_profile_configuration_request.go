@@ -20,8 +20,7 @@ var _ MappedNullable = &UpdateProfileConfigurationRequest{}
 
 // UpdateProfileConfigurationRequest struct for UpdateProfileConfigurationRequest
 type UpdateProfileConfigurationRequest struct {
-	// The configuration to update
-	Configuration map[string]interface{} `json:"configuration"`
+	Configuration UpdateProfileConfigurationRequestConfiguration `json:"configuration"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -31,7 +30,7 @@ type _UpdateProfileConfigurationRequest UpdateProfileConfigurationRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateProfileConfigurationRequest(configuration map[string]interface{}) *UpdateProfileConfigurationRequest {
+func NewUpdateProfileConfigurationRequest(configuration UpdateProfileConfigurationRequestConfiguration) *UpdateProfileConfigurationRequest {
 	this := UpdateProfileConfigurationRequest{}
 	this.Configuration = configuration
 	return &this
@@ -46,9 +45,9 @@ func NewUpdateProfileConfigurationRequestWithDefaults() *UpdateProfileConfigurat
 }
 
 // GetConfiguration returns the Configuration field value
-func (o *UpdateProfileConfigurationRequest) GetConfiguration() map[string]interface{} {
+func (o *UpdateProfileConfigurationRequest) GetConfiguration() UpdateProfileConfigurationRequestConfiguration {
 	if o == nil {
-		var ret map[string]interface{}
+		var ret UpdateProfileConfigurationRequestConfiguration
 		return ret
 	}
 
@@ -57,15 +56,15 @@ func (o *UpdateProfileConfigurationRequest) GetConfiguration() map[string]interf
 
 // GetConfigurationOk returns a tuple with the Configuration field value
 // and a boolean to check if the value has been set.
-func (o *UpdateProfileConfigurationRequest) GetConfigurationOk() (map[string]interface{}, bool) {
+func (o *UpdateProfileConfigurationRequest) GetConfigurationOk() (*UpdateProfileConfigurationRequestConfiguration, bool) {
 	if o == nil {
-		return map[string]interface{}{}, false
+		return nil, false
 	}
-	return o.Configuration, true
+	return &o.Configuration, true
 }
 
 // SetConfiguration sets field value
-func (o *UpdateProfileConfigurationRequest) SetConfiguration(v map[string]interface{}) {
+func (o *UpdateProfileConfigurationRequest) SetConfiguration(v UpdateProfileConfigurationRequestConfiguration) {
 	o.Configuration = v
 }
 
