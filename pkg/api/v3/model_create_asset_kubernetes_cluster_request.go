@@ -23,6 +23,7 @@ type CreateAssetKUBERNETESCLUSTERRequest struct {
 	AssetClass ENUMCLOUDHOSTING `json:"asset_class"`
 	WizProviderId *string `json:"wiz_provider_id,omitempty"`
 	WizCloudPlatform *string `json:"wiz_cloud_platform,omitempty"`
+	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
 	AssetType ENUMKUBERNETESCLUSTER `json:"asset_type"`
 	Name *string `json:"name,omitempty"`
 	PrivateLocationId string `json:"private_location_id"`
@@ -139,6 +140,38 @@ func (o *CreateAssetKUBERNETESCLUSTERRequest) SetWizCloudPlatform(v string) {
 	o.WizCloudPlatform = &v
 }
 
+// GetExtraMetadata returns the ExtraMetadata field value if set, zero value otherwise.
+func (o *CreateAssetKUBERNETESCLUSTERRequest) GetExtraMetadata() map[string]interface{} {
+	if o == nil || IsNil(o.ExtraMetadata) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.ExtraMetadata
+}
+
+// GetExtraMetadataOk returns a tuple with the ExtraMetadata field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetKUBERNETESCLUSTERRequest) GetExtraMetadataOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.ExtraMetadata) {
+		return map[string]interface{}{}, false
+	}
+	return o.ExtraMetadata, true
+}
+
+// HasExtraMetadata returns a boolean if a field has been set.
+func (o *CreateAssetKUBERNETESCLUSTERRequest) HasExtraMetadata() bool {
+	if o != nil && !IsNil(o.ExtraMetadata) {
+		return true
+	}
+
+	return false
+}
+
+// SetExtraMetadata gets a reference to the given map[string]interface{} and assigns it to the ExtraMetadata field.
+func (o *CreateAssetKUBERNETESCLUSTERRequest) SetExtraMetadata(v map[string]interface{}) {
+	o.ExtraMetadata = v
+}
+
 // GetAssetType returns the AssetType field value
 func (o *CreateAssetKUBERNETESCLUSTERRequest) GetAssetType() ENUMKUBERNETESCLUSTER {
 	if o == nil {
@@ -236,6 +269,9 @@ func (o CreateAssetKUBERNETESCLUSTERRequest) ToMap() (map[string]interface{}, er
 	if !IsNil(o.WizCloudPlatform) {
 		toSerialize["wiz_cloud_platform"] = o.WizCloudPlatform
 	}
+	if !IsNil(o.ExtraMetadata) {
+		toSerialize["extra_metadata"] = o.ExtraMetadata
+	}
 	toSerialize["asset_type"] = o.AssetType
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
@@ -289,6 +325,7 @@ func (o *CreateAssetKUBERNETESCLUSTERRequest) UnmarshalJSON(data []byte) (err er
 		delete(additionalProperties, "asset_class")
 		delete(additionalProperties, "wiz_provider_id")
 		delete(additionalProperties, "wiz_cloud_platform")
+		delete(additionalProperties, "extra_metadata")
 		delete(additionalProperties, "asset_type")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "private_location_id")

@@ -12,6 +12,7 @@ package v3
 
 import (
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the CreateAssetSchemaRequest type satisfies the MappedNullable interface at compile time
@@ -19,12 +20,9 @@ var _ MappedNullable = &CreateAssetSchemaRequest{}
 
 // CreateAssetSchemaRequest struct for CreateAssetSchemaRequest
 type CreateAssetSchemaRequest struct {
-	// The URL of the asset
-	Url *string `json:"url,omitempty"`
-	// The data of the asset
-	Data *string `json:"data,omitempty"`
-	// The proxy ID of the asset
-	ProxyId *string `json:"proxyId,omitempty"`
+	AssetType ENUMSCHEMA `json:"asset_type"`
+	Fetch *CreateAssetSchemaRequestFetch `json:"fetch,omitempty"`
+	Upload *CreateAssetSchemaRequestUpload `json:"upload,omitempty"`
 	// The authentication string of the asset
 	AuthenticationStr *string `json:"authenticationStr,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -36,8 +34,9 @@ type _CreateAssetSchemaRequest CreateAssetSchemaRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetSchemaRequest() *CreateAssetSchemaRequest {
+func NewCreateAssetSchemaRequest(assetType ENUMSCHEMA) *CreateAssetSchemaRequest {
 	this := CreateAssetSchemaRequest{}
+	this.AssetType = assetType
 	return &this
 }
 
@@ -49,100 +48,92 @@ func NewCreateAssetSchemaRequestWithDefaults() *CreateAssetSchemaRequest {
 	return &this
 }
 
-// GetUrl returns the Url field value if set, zero value otherwise.
-func (o *CreateAssetSchemaRequest) GetUrl() string {
-	if o == nil || IsNil(o.Url) {
-		var ret string
+// GetAssetType returns the AssetType field value
+func (o *CreateAssetSchemaRequest) GetAssetType() ENUMSCHEMA {
+	if o == nil {
+		var ret ENUMSCHEMA
 		return ret
 	}
-	return *o.Url
+
+	return o.AssetType
 }
 
-// GetUrlOk returns a tuple with the Url field value if set, nil otherwise
+// GetAssetTypeOk returns a tuple with the AssetType field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetSchemaRequest) GetUrlOk() (*string, bool) {
-	if o == nil || IsNil(o.Url) {
+func (o *CreateAssetSchemaRequest) GetAssetTypeOk() (*ENUMSCHEMA, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Url, true
+	return &o.AssetType, true
 }
 
-// HasUrl returns a boolean if a field has been set.
-func (o *CreateAssetSchemaRequest) HasUrl() bool {
-	if o != nil && !IsNil(o.Url) {
+// SetAssetType sets field value
+func (o *CreateAssetSchemaRequest) SetAssetType(v ENUMSCHEMA) {
+	o.AssetType = v
+}
+
+// GetFetch returns the Fetch field value if set, zero value otherwise.
+func (o *CreateAssetSchemaRequest) GetFetch() CreateAssetSchemaRequestFetch {
+	if o == nil || IsNil(o.Fetch) {
+		var ret CreateAssetSchemaRequestFetch
+		return ret
+	}
+	return *o.Fetch
+}
+
+// GetFetchOk returns a tuple with the Fetch field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetSchemaRequest) GetFetchOk() (*CreateAssetSchemaRequestFetch, bool) {
+	if o == nil || IsNil(o.Fetch) {
+		return nil, false
+	}
+	return o.Fetch, true
+}
+
+// HasFetch returns a boolean if a field has been set.
+func (o *CreateAssetSchemaRequest) HasFetch() bool {
+	if o != nil && !IsNil(o.Fetch) {
 		return true
 	}
 
 	return false
 }
 
-// SetUrl gets a reference to the given string and assigns it to the Url field.
-func (o *CreateAssetSchemaRequest) SetUrl(v string) {
-	o.Url = &v
+// SetFetch gets a reference to the given CreateAssetSchemaRequestFetch and assigns it to the Fetch field.
+func (o *CreateAssetSchemaRequest) SetFetch(v CreateAssetSchemaRequestFetch) {
+	o.Fetch = &v
 }
 
-// GetData returns the Data field value if set, zero value otherwise.
-func (o *CreateAssetSchemaRequest) GetData() string {
-	if o == nil || IsNil(o.Data) {
-		var ret string
+// GetUpload returns the Upload field value if set, zero value otherwise.
+func (o *CreateAssetSchemaRequest) GetUpload() CreateAssetSchemaRequestUpload {
+	if o == nil || IsNil(o.Upload) {
+		var ret CreateAssetSchemaRequestUpload
 		return ret
 	}
-	return *o.Data
+	return *o.Upload
 }
 
-// GetDataOk returns a tuple with the Data field value if set, nil otherwise
+// GetUploadOk returns a tuple with the Upload field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetSchemaRequest) GetDataOk() (*string, bool) {
-	if o == nil || IsNil(o.Data) {
+func (o *CreateAssetSchemaRequest) GetUploadOk() (*CreateAssetSchemaRequestUpload, bool) {
+	if o == nil || IsNil(o.Upload) {
 		return nil, false
 	}
-	return o.Data, true
+	return o.Upload, true
 }
 
-// HasData returns a boolean if a field has been set.
-func (o *CreateAssetSchemaRequest) HasData() bool {
-	if o != nil && !IsNil(o.Data) {
+// HasUpload returns a boolean if a field has been set.
+func (o *CreateAssetSchemaRequest) HasUpload() bool {
+	if o != nil && !IsNil(o.Upload) {
 		return true
 	}
 
 	return false
 }
 
-// SetData gets a reference to the given string and assigns it to the Data field.
-func (o *CreateAssetSchemaRequest) SetData(v string) {
-	o.Data = &v
-}
-
-// GetProxyId returns the ProxyId field value if set, zero value otherwise.
-func (o *CreateAssetSchemaRequest) GetProxyId() string {
-	if o == nil || IsNil(o.ProxyId) {
-		var ret string
-		return ret
-	}
-	return *o.ProxyId
-}
-
-// GetProxyIdOk returns a tuple with the ProxyId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateAssetSchemaRequest) GetProxyIdOk() (*string, bool) {
-	if o == nil || IsNil(o.ProxyId) {
-		return nil, false
-	}
-	return o.ProxyId, true
-}
-
-// HasProxyId returns a boolean if a field has been set.
-func (o *CreateAssetSchemaRequest) HasProxyId() bool {
-	if o != nil && !IsNil(o.ProxyId) {
-		return true
-	}
-
-	return false
-}
-
-// SetProxyId gets a reference to the given string and assigns it to the ProxyId field.
-func (o *CreateAssetSchemaRequest) SetProxyId(v string) {
-	o.ProxyId = &v
+// SetUpload gets a reference to the given CreateAssetSchemaRequestUpload and assigns it to the Upload field.
+func (o *CreateAssetSchemaRequest) SetUpload(v CreateAssetSchemaRequestUpload) {
+	o.Upload = &v
 }
 
 // GetAuthenticationStr returns the AuthenticationStr field value if set, zero value otherwise.
@@ -187,14 +178,12 @@ func (o CreateAssetSchemaRequest) MarshalJSON() ([]byte, error) {
 
 func (o CreateAssetSchemaRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Url) {
-		toSerialize["url"] = o.Url
+	toSerialize["asset_type"] = o.AssetType
+	if !IsNil(o.Fetch) {
+		toSerialize["fetch"] = o.Fetch
 	}
-	if !IsNil(o.Data) {
-		toSerialize["data"] = o.Data
-	}
-	if !IsNil(o.ProxyId) {
-		toSerialize["proxyId"] = o.ProxyId
+	if !IsNil(o.Upload) {
+		toSerialize["upload"] = o.Upload
 	}
 	if !IsNil(o.AuthenticationStr) {
 		toSerialize["authenticationStr"] = o.AuthenticationStr
@@ -208,6 +197,27 @@ func (o CreateAssetSchemaRequest) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *CreateAssetSchemaRequest) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"asset_type",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varCreateAssetSchemaRequest := _CreateAssetSchemaRequest{}
 
 	err = json.Unmarshal(data, &varCreateAssetSchemaRequest)
@@ -221,9 +231,9 @@ func (o *CreateAssetSchemaRequest) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "url")
-		delete(additionalProperties, "data")
-		delete(additionalProperties, "proxyId")
+		delete(additionalProperties, "asset_type")
+		delete(additionalProperties, "fetch")
+		delete(additionalProperties, "upload")
 		delete(additionalProperties, "authenticationStr")
 		o.AdditionalProperties = additionalProperties
 	}

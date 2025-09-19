@@ -27,12 +27,12 @@ type ProfilesAPIService service
 type ApiCreateDastGraphqlProfileRequest struct {
 	ctx context.Context
 	ApiService *ProfilesAPIService
-	createDastRestProfileRequest *CreateDastRestProfileRequest
+	createDastGraphqlProfileRequest *CreateDastGraphqlProfileRequest
 }
 
 // Body of the request to create an asset
-func (r ApiCreateDastGraphqlProfileRequest) CreateDastRestProfileRequest(createDastRestProfileRequest CreateDastRestProfileRequest) ApiCreateDastGraphqlProfileRequest {
-	r.createDastRestProfileRequest = &createDastRestProfileRequest
+func (r ApiCreateDastGraphqlProfileRequest) CreateDastGraphqlProfileRequest(createDastGraphqlProfileRequest CreateDastGraphqlProfileRequest) ApiCreateDastGraphqlProfileRequest {
+	r.createDastGraphqlProfileRequest = &createDastGraphqlProfileRequest
 	return r
 }
 
@@ -94,7 +94,7 @@ func (a *ProfilesAPIService) CreateDastGraphqlProfileExecute(r ApiCreateDastGrap
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.createDastRestProfileRequest
+	localVarPostBody = r.createDastGraphqlProfileRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1107,7 +1107,7 @@ func (r ApiUpdateProfileConfigurationRequest) UpdateProfileConfigurationRequest(
 	return r
 }
 
-func (r ApiUpdateProfileConfigurationRequest) Execute() (*ConfigurationDetailed, *http.Response, error) {
+func (r ApiUpdateProfileConfigurationRequest) Execute() (map[string]interface{}, *http.Response, error) {
 	return r.ApiService.UpdateProfileConfigurationExecute(r)
 }
 
@@ -1129,13 +1129,13 @@ func (a *ProfilesAPIService) UpdateProfileConfiguration(ctx context.Context, pro
 }
 
 // Execute executes the request
-//  @return ConfigurationDetailed
-func (a *ProfilesAPIService) UpdateProfileConfigurationExecute(r ApiUpdateProfileConfigurationRequest) (*ConfigurationDetailed, *http.Response, error) {
+//  @return map[string]interface{}
+func (a *ProfilesAPIService) UpdateProfileConfigurationExecute(r ApiUpdateProfileConfigurationRequest) (map[string]interface{}, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ConfigurationDetailed
+		localVarReturnValue  map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProfilesAPIService.UpdateProfileConfiguration")

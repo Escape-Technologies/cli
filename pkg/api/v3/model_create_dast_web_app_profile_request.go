@@ -22,12 +22,10 @@ var _ MappedNullable = &CreateDastWebAppProfileRequest{}
 type CreateDastWebAppProfileRequest struct {
 	// The asset ID for the profile
 	AssetId string `json:"assetId"`
-	// The authentication JSON string
-	AuthenticationJsonStr *string `json:"authenticationJsonStr,omitempty"`
-	ConfigurationJsonStr CreateDastRestProfileRequestConfigurationJsonStr `json:"configurationJsonStr"`
+	// The configuration as JSON string
+	Configuration *string `json:"configuration,omitempty"`
 	// The cron string
 	Cron *string `json:"cron,omitempty"`
-	Mode ENUMPROPERTIESMODE `json:"mode"`
 	// The name of the profile
 	Name string `json:"name"`
 	// The proxy ID for the profile
@@ -43,11 +41,9 @@ type _CreateDastWebAppProfileRequest CreateDastWebAppProfileRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateDastWebAppProfileRequest(assetId string, configurationJsonStr CreateDastRestProfileRequestConfigurationJsonStr, mode ENUMPROPERTIESMODE, name string) *CreateDastWebAppProfileRequest {
+func NewCreateDastWebAppProfileRequest(assetId string, name string) *CreateDastWebAppProfileRequest {
 	this := CreateDastWebAppProfileRequest{}
 	this.AssetId = assetId
-	this.ConfigurationJsonStr = configurationJsonStr
-	this.Mode = mode
 	this.Name = name
 	return &this
 }
@@ -84,60 +80,36 @@ func (o *CreateDastWebAppProfileRequest) SetAssetId(v string) {
 	o.AssetId = v
 }
 
-// GetAuthenticationJsonStr returns the AuthenticationJsonStr field value if set, zero value otherwise.
-func (o *CreateDastWebAppProfileRequest) GetAuthenticationJsonStr() string {
-	if o == nil || IsNil(o.AuthenticationJsonStr) {
+// GetConfiguration returns the Configuration field value if set, zero value otherwise.
+func (o *CreateDastWebAppProfileRequest) GetConfiguration() string {
+	if o == nil || IsNil(o.Configuration) {
 		var ret string
 		return ret
 	}
-	return *o.AuthenticationJsonStr
+	return *o.Configuration
 }
 
-// GetAuthenticationJsonStrOk returns a tuple with the AuthenticationJsonStr field value if set, nil otherwise
+// GetConfigurationOk returns a tuple with the Configuration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastWebAppProfileRequest) GetAuthenticationJsonStrOk() (*string, bool) {
-	if o == nil || IsNil(o.AuthenticationJsonStr) {
+func (o *CreateDastWebAppProfileRequest) GetConfigurationOk() (*string, bool) {
+	if o == nil || IsNil(o.Configuration) {
 		return nil, false
 	}
-	return o.AuthenticationJsonStr, true
+	return o.Configuration, true
 }
 
-// HasAuthenticationJsonStr returns a boolean if a field has been set.
-func (o *CreateDastWebAppProfileRequest) HasAuthenticationJsonStr() bool {
-	if o != nil && !IsNil(o.AuthenticationJsonStr) {
+// HasConfiguration returns a boolean if a field has been set.
+func (o *CreateDastWebAppProfileRequest) HasConfiguration() bool {
+	if o != nil && !IsNil(o.Configuration) {
 		return true
 	}
 
 	return false
 }
 
-// SetAuthenticationJsonStr gets a reference to the given string and assigns it to the AuthenticationJsonStr field.
-func (o *CreateDastWebAppProfileRequest) SetAuthenticationJsonStr(v string) {
-	o.AuthenticationJsonStr = &v
-}
-
-// GetConfigurationJsonStr returns the ConfigurationJsonStr field value
-func (o *CreateDastWebAppProfileRequest) GetConfigurationJsonStr() CreateDastRestProfileRequestConfigurationJsonStr {
-	if o == nil {
-		var ret CreateDastRestProfileRequestConfigurationJsonStr
-		return ret
-	}
-
-	return o.ConfigurationJsonStr
-}
-
-// GetConfigurationJsonStrOk returns a tuple with the ConfigurationJsonStr field value
-// and a boolean to check if the value has been set.
-func (o *CreateDastWebAppProfileRequest) GetConfigurationJsonStrOk() (*CreateDastRestProfileRequestConfigurationJsonStr, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ConfigurationJsonStr, true
-}
-
-// SetConfigurationJsonStr sets field value
-func (o *CreateDastWebAppProfileRequest) SetConfigurationJsonStr(v CreateDastRestProfileRequestConfigurationJsonStr) {
-	o.ConfigurationJsonStr = v
+// SetConfiguration gets a reference to the given string and assigns it to the Configuration field.
+func (o *CreateDastWebAppProfileRequest) SetConfiguration(v string) {
+	o.Configuration = &v
 }
 
 // GetCron returns the Cron field value if set, zero value otherwise.
@@ -170,30 +142,6 @@ func (o *CreateDastWebAppProfileRequest) HasCron() bool {
 // SetCron gets a reference to the given string and assigns it to the Cron field.
 func (o *CreateDastWebAppProfileRequest) SetCron(v string) {
 	o.Cron = &v
-}
-
-// GetMode returns the Mode field value
-func (o *CreateDastWebAppProfileRequest) GetMode() ENUMPROPERTIESMODE {
-	if o == nil {
-		var ret ENUMPROPERTIESMODE
-		return ret
-	}
-
-	return o.Mode
-}
-
-// GetModeOk returns a tuple with the Mode field value
-// and a boolean to check if the value has been set.
-func (o *CreateDastWebAppProfileRequest) GetModeOk() (*ENUMPROPERTIESMODE, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Mode, true
-}
-
-// SetMode sets field value
-func (o *CreateDastWebAppProfileRequest) SetMode(v ENUMPROPERTIESMODE) {
-	o.Mode = v
 }
 
 // GetName returns the Name field value
@@ -295,14 +243,12 @@ func (o CreateDastWebAppProfileRequest) MarshalJSON() ([]byte, error) {
 func (o CreateDastWebAppProfileRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["assetId"] = o.AssetId
-	if !IsNil(o.AuthenticationJsonStr) {
-		toSerialize["authenticationJsonStr"] = o.AuthenticationJsonStr
+	if !IsNil(o.Configuration) {
+		toSerialize["configuration"] = o.Configuration
 	}
-	toSerialize["configurationJsonStr"] = o.ConfigurationJsonStr
 	if !IsNil(o.Cron) {
 		toSerialize["cron"] = o.Cron
 	}
-	toSerialize["mode"] = o.Mode
 	toSerialize["name"] = o.Name
 	if !IsNil(o.ProxyId) {
 		toSerialize["proxyId"] = o.ProxyId
@@ -324,8 +270,6 @@ func (o *CreateDastWebAppProfileRequest) UnmarshalJSON(data []byte) (err error) 
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"assetId",
-		"configurationJsonStr",
-		"mode",
 		"name",
 	}
 
@@ -357,10 +301,8 @@ func (o *CreateDastWebAppProfileRequest) UnmarshalJSON(data []byte) (err error) 
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "assetId")
-		delete(additionalProperties, "authenticationJsonStr")
-		delete(additionalProperties, "configurationJsonStr")
+		delete(additionalProperties, "configuration")
 		delete(additionalProperties, "cron")
-		delete(additionalProperties, "mode")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "proxyId")
 		delete(additionalProperties, "tagsIds")
