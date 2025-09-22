@@ -77,8 +77,11 @@ func connectAndRun(ctx context.Context, cfg *rest.Config, isConnected *atomic.Bo
 		}
 		log.Info("Connected to K8s API")
 		log.Trace("Upserting K8s integration")
-		asset := v3.NewCreateAssetKUBERNETESCLUSTERRequestWithDefaults()
-		asset.PrivateLocationId = locationID
+		asset := v3.NewCreateAssetKUBERNETESCLUSTERRequest(
+			v3.ENUMCLOUDHOSTING_CLOUD_HOSTING,
+			v3.ENUMKUBERNETESCLUSTER_KUBERNETES_CLUSTER,
+			locationID,
+		)
 		asset.Name = &locationName
 		data, err := asset.MarshalJSON()
 		if err != nil {
