@@ -132,13 +132,22 @@ func UpdateAsset(
 	return nil
 }
 
+// normalizeAssetType normalizes asset type tokens to match generated method names
+// e.g. KUBERNETES_CLUSTER -> KUBERNETESCLUSTER, http-endpoint -> HTTPENDPOINT
+func normalizeAssetType(s string) string {
+    upper := strings.ToUpper(s)
+    upper = strings.ReplaceAll(upper, "_", "")
+    upper = strings.ReplaceAll(upper, "-", "")
+    return upper
+}
+
 // CreateAsset creates an asset
 func CreateAsset(ctx context.Context, data []byte, assetType string) (interface{}, error) {
 	typ := reflect.TypeOf((*v3.AssetsAPIService)(nil))
 	for i := 0; i < typ.NumMethod(); i++ {
 		method := typ.Method(i)
-		if strings.HasPrefix(method.Name, "Create") && !strings.HasSuffix(method.Name, "Execute") {
-			if strings.Contains(method.Name, strings.ToUpper(assetType)) {
+    	if strings.HasPrefix(method.Name, "Create") && !strings.HasSuffix(method.Name, "Execute") {
+            if strings.Contains(method.Name, normalizeAssetType(assetType)) {
 				client, err := newAPIV3Client()
 				if err != nil {
 					return nil, fmt.Errorf("unable to init client: %w", err)

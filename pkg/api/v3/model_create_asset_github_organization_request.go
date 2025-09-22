@@ -27,6 +27,7 @@ type CreateAssetGITHUBORGANIZATIONRequest struct {
 	AssetType ENUMGITHUBORGANIZATION `json:"asset_type"`
 	Name *string `json:"name,omitempty"`
 	ApiKey string `json:"api_key"`
+	LocationId *string `json:"location_id,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -252,6 +253,38 @@ func (o *CreateAssetGITHUBORGANIZATIONRequest) SetApiKey(v string) {
 	o.ApiKey = v
 }
 
+// GetLocationId returns the LocationId field value if set, zero value otherwise.
+func (o *CreateAssetGITHUBORGANIZATIONRequest) GetLocationId() string {
+	if o == nil || IsNil(o.LocationId) {
+		var ret string
+		return ret
+	}
+	return *o.LocationId
+}
+
+// GetLocationIdOk returns a tuple with the LocationId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetGITHUBORGANIZATIONRequest) GetLocationIdOk() (*string, bool) {
+	if o == nil || IsNil(o.LocationId) {
+		return nil, false
+	}
+	return o.LocationId, true
+}
+
+// HasLocationId returns a boolean if a field has been set.
+func (o *CreateAssetGITHUBORGANIZATIONRequest) HasLocationId() bool {
+	if o != nil && !IsNil(o.LocationId) {
+		return true
+	}
+
+	return false
+}
+
+// SetLocationId gets a reference to the given string and assigns it to the LocationId field.
+func (o *CreateAssetGITHUBORGANIZATIONRequest) SetLocationId(v string) {
+	o.LocationId = &v
+}
+
 func (o CreateAssetGITHUBORGANIZATIONRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -277,6 +310,9 @@ func (o CreateAssetGITHUBORGANIZATIONRequest) ToMap() (map[string]interface{}, e
 		toSerialize["name"] = o.Name
 	}
 	toSerialize["api_key"] = o.ApiKey
+	if !IsNil(o.LocationId) {
+		toSerialize["location_id"] = o.LocationId
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -329,6 +365,7 @@ func (o *CreateAssetGITHUBORGANIZATIONRequest) UnmarshalJSON(data []byte) (err e
 		delete(additionalProperties, "asset_type")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "api_key")
+		delete(additionalProperties, "location_id")
 		o.AdditionalProperties = additionalProperties
 	}
 
