@@ -11,6 +11,9 @@ ESCAPE_K8S_INTEGRATION: true
 # Enable/disable forwarding mitm logs to the health check server (requires mitmproxy to be running with the addon)
 ESCAPE_ENABLE_LOGS_ENDPOINT: false
 
+# Disable color output in the cli
+ESCAPE_NO_COLOR: false
+
 container:
   image: escapetech/cli:latest
   resources:

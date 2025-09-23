@@ -7,6 +7,7 @@ import (
 
 	"github.com/Escape-Technologies/cli/pkg/api/escape"
 	"github.com/Escape-Technologies/cli/pkg/cli/out"
+	"github.com/Escape-Technologies/cli/pkg/env"
 	"github.com/Escape-Technologies/cli/pkg/log"
 	"github.com/Escape-Technologies/cli/pkg/version"
 	"github.com/sirupsen/logrus"
@@ -16,9 +17,7 @@ import (
 var rootCmdVerbose int
 var rootCmdOutputStr string
 
-var rootCmd = &cobra.Command{
-	Use: "escape-cli",
-	Short: "\x1b[38;2;6;226;183m" + `
+var asciiLogo = `
  ██████████  █████████    █████████    █████████   ███████████  ██████████      █████████  █████       █████
 ░░███░░░░░█ ███░░░░░███  ███░░░░░███  ███░░░░░███ ░░███░░░░░███░░███░░░░░█     ███░░░░░███░░███       ░░███ 
  ░███  █ ░ ░███    ░░░  ███     ░░░  ░███    ░███  ░███    ░███ ░███  █ ░     ███     ░░░  ░███        ░███ 
@@ -27,7 +26,13 @@ var rootCmd = &cobra.Command{
  ░███ ░   █ ███    ░███░░███     ███ ░███    ░███  ░███         ░███ ░   █   ░░███     ███ ░███      █ ░███ 
  ██████████░░█████████  ░░█████████  █████   █████ █████        ██████████    ░░█████████  ███████████ █████
 ░░░░░░░░░░  ░░░░░░░░░    ░░░░░░░░░  ░░░░░   ░░░░░ ░░░░░        ░░░░░░░░░░      ░░░░░░░░░  ░░░░░░░░░░░ ░░░░░                                                                                                        
-` + "\x1b[0m" + "\x1b[38;2;6;226;183mEscape CLI V3\x1b[0m",
+`
+
+var asciiHeader = "Escape CLI V3"
+
+var rootCmd = &cobra.Command{
+	Use: "escape-cli",
+	Short: asciiLogo + "\n" + asciiHeader,
     PersistentPreRunE: func(c *cobra.Command, _ []string) error {
         version.WarnIfNotLatestVersion(c.Context())
 		if rootCmdVerbose > 0 { //nolint:mnd
@@ -67,10 +72,22 @@ This CLI is based on the Escape API V3.
 For additional information, see the documentation: 
 https://docs.escape.tech/documentation/tooling/cli
 `)
+
+	noColor, err := env.GetColorPreference()
+	if err == nil && !noColor {
+		rootCmd.Short = "\x1b[38;2;6;226;183m" + asciiLogo + "\x1b[0m" + "\n" + "\x1b[38;2;6;226;183m" + asciiHeader + "\x1b[0m"
+	}
 }
 
 // Execute the CLI
 func Execute(ctx context.Context) error {
+	noColor, err := env.GetColorPreference()
+	if err != nil {
+		return fmt.Errorf("failed to get color preference: %w", err)
+	}
+	if noColor {
+		out.DisableColor()
+	}
 	cmd, err := rootCmd.ExecuteContextC(ctx)
 	if err != nil {
 		return fmt.Errorf("command %s failed: %w", cmd.Name(), err)
