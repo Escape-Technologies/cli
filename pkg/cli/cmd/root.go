@@ -73,19 +73,17 @@ For additional information, see the documentation:
 https://docs.escape.tech/documentation/tooling/cli
 `)
 
-	noColor, err := env.GetColorPreference()
-	if err == nil && !noColor {
+	isColorDisabled := env.GetColorPreference()
+	if !isColorDisabled {
 		rootCmd.Short = "\x1b[38;2;6;226;183m" + asciiLogo + "\x1b[0m" + "\n" + "\x1b[38;2;6;226;183m" + asciiHeader + "\x1b[0m"
 	}
 }
 
 // Execute the CLI
 func Execute(ctx context.Context) error {
-	noColor, err := env.GetColorPreference()
-	if err != nil {
-		return fmt.Errorf("failed to get color preference: %w", err)
-	}
-	if noColor {
+	isColorDisabled := env.GetColorPreference()
+	
+	if isColorDisabled {
 		out.DisableColor()
 	}
 	cmd, err := rootCmd.ExecuteContextC(ctx)

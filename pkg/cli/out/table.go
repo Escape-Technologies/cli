@@ -16,15 +16,15 @@ const (
 	targetOverhead = 29
 )
 
-var noColorEnabled bool
+var isColorDisabled bool
 
 // DisableColor disables color output called if the ESCAPE_NO_COLOR environment variable is set
 func DisableColor() {
-	noColorEnabled = true
+	isColorDisabled = true
 }
 
 func makeColored(value string, prefix string) string {
-	if noColorEnabled {
+	if isColorDisabled {
 		return value
 	}
 	base := prefix + value + ansiReset
@@ -56,7 +56,7 @@ func shortEscapeLink(value string) string { return fmt.Sprintf("\x1b]8;;%s\x1b\\
 func noColor(value string) string    { return makeColored(value, "") }
 
 func colorizeBool(value string) string {
-	if noColorEnabled {
+	if isColorDisabled {
 		return value
 	}
 	switch strings.ToLower(value) {
@@ -70,7 +70,7 @@ func colorizeBool(value string) string {
 }
 
 func colorizeSeverity(value string) string {
-	if noColorEnabled {
+	if isColorDisabled {
 		return value
 	}
 	switch strings.ToLower(value) {
@@ -89,7 +89,7 @@ func colorizeSeverity(value string) string {
 
 
 func colorizeProgress(value string) string {
-	if noColorEnabled {
+	if isColorDisabled {
 		return value
 	}
 	if strings.HasPrefix(value, "100") || strings.HasPrefix(value, "1.000") {
@@ -99,7 +99,7 @@ func colorizeProgress(value string) string {
 }
 
 func colorizeLevel(value string) string {
-	if noColorEnabled {
+	if isColorDisabled {
 		return value
 	}
 	switch strings.ToLower(value) {
@@ -115,7 +115,7 @@ func colorizeLevel(value string) string {
 }
 
 func colorizeStatus(value string) string {
-	if noColorEnabled {
+	if isColorDisabled {
 		return value
 	}
 	switch strings.ToLower(value) {
@@ -149,21 +149,21 @@ func colorizeStatus(value string) string {
 }
 
 func colorizeEnum(value string) string {
-	if noColorEnabled {
+	if isColorDisabled {
 		return value
 	}
 	return escapeText(value)
 }
 
 func colorizeDate(value string) string {
-	if noColorEnabled {
+	if isColorDisabled {
 		return value
 	}
 	return grayText(value)
 }
 
 func colorizeLastSeen(value string) string {
-	if noColorEnabled {
+	if isColorDisabled {
 		return value
 	}
 	lastSeen, err := time.Parse(time.RFC3339, value)
@@ -183,7 +183,7 @@ func colorizeLastSeen(value string) string {
 }
 
 func colorizeHelpAll(value string) string {
-	if noColorEnabled {
+	if isColorDisabled {
 		return value
 	}
 	if strings.HasPrefix(value, "  ") {
@@ -193,7 +193,7 @@ func colorizeHelpAll(value string) string {
 }
 
 func colorizeActor(value string) string {
-	if noColorEnabled {
+	if isColorDisabled {
 		return value
 	}
 	if strings.ToLower(value) == "escape" {
@@ -205,7 +205,7 @@ func colorizeActor(value string) string {
 
 // colorizeWithHex applies an ANSI 24-bit foreground color to text using a hex RGB string (e.g. "6a63f0").
 func colorizeWithHex(text string, hexRGB string) string {
-	if noColorEnabled {
+	if isColorDisabled {
 		return text
 	}
     const expectedHexRGBLen = 6
@@ -228,7 +228,7 @@ func TagText(name string, hexRGB string) string {
 }
 
 func colorizeValue(value string, columnName string, isLastColumn bool) string {
-	if noColorEnabled {
+	if isColorDisabled {
 		return value
 	}
 	if value == "[]" || value == "" {
