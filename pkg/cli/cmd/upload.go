@@ -28,7 +28,7 @@ Example output:
 ID
 00000000-0000-0000-0000-000000000000
 `,
-	Example: `escape-cli upload signed-url<schema.json`, RunE: func(cmd *cobra.Command, _ []string) error {
+	Example: `escape-cli upload schema < schema.json`, RunE: func(cmd *cobra.Command, _ []string) error {
 		upload, err := escape.GetUploadSignedURL(cmd.Context())
 		if err != nil {
 			return fmt.Errorf("unable to get signed url: %w", err)
