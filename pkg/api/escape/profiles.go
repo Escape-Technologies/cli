@@ -138,3 +138,18 @@ func CreateProfileGraphql(ctx context.Context, data []byte) (interface{}, error)
 	}
 	return profile, nil
 }
+
+// DeleteProfile deletes a profile by ID
+func DeleteProfile(ctx context.Context, profileID string) error {
+	client, err := newAPIV3Client()
+	if err != nil {
+		return fmt.Errorf("unable to init client: %w", err)
+	}
+
+	req := client.ProfilesAPI.DeleteProfile(ctx, profileID)
+	_, _, err = req.Execute()
+	if err != nil {
+		return fmt.Errorf("api error: %w", err)
+	}
+	return nil
+}

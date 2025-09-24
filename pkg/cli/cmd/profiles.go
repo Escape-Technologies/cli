@@ -232,6 +232,23 @@ var profileCreateGraphqlCmd = &cobra.Command{
 		return nil
 	},
 }
+
+var profileDeleteCmd = &cobra.Command{
+	Use:     "delete profile-id",
+	Aliases: []string{"del"},
+	Short:   "Delete a profile",
+	Long:    "Delete a profile",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		profileID := args[0]
+		err := escape.DeleteProfile(cmd.Context(), profileID)
+		if err != nil {
+			return fmt.Errorf("unable to delete profile %s: %w", profileID, err)
+		}
+		out.Log(fmt.Sprintf("Profile %s successfully deleted", profileID))
+		return nil
+	},
+	Args: cobra.ExactArgs(1),
+}
 func init() {
 	profilesCmd.AddCommand(
 		profilesListCmd,
@@ -239,6 +256,7 @@ func init() {
 		profileCreateRestCmd,
 		profileCreateWebappCmd,
 		profileCreateGraphqlCmd,
+		profileDeleteCmd,
 	)
 	profilesListCmd.Flags().Bool("all", false, "Show profiles for all asset types")
 	profilesListCmd.Flags().StringSliceVarP(&profileAssetIDs, "asset-id", "a", []string{}, "asset ID")
