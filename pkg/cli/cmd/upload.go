@@ -18,11 +18,11 @@ var uploadCmd = &cobra.Command{
 	Long:    "Upload assets to a temporary Escape storage to pass large files as schemas to other commands",
 }
 
-var uploadSignedURLCmd = &cobra.Command{
-	Use:     "signed-url",
-	Aliases: []string{"su"},
-	Short:   "Get a signed url to upload a file",
-	Long: `Get a signed url to upload a file.
+var uploadSchemaCmd = &cobra.Command{
+	Use:     "schema",
+	Aliases: []string{"s"},
+	Short:   "Upload a schema to Escape",
+	Long: `Upload a schema to Escape.
 
 Example output:
 ID
