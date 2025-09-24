@@ -50,6 +50,8 @@ spec:
               value: {{ .Values.ESCAPE_K8S_INTEGRATION | quote }}
             - name: ESCAPE_ENABLE_LOGS_ENDPOINT
               value: {{ .Values.ESCAPE_ENABLE_LOGS_ENDPOINT | quote }}
+            - name: ESCAPE_COLOR_DISABLED
+              value: {{ .Values.ESCAPE_COLOR_DISABLED | quote }}
             {{- with .Values.container.env }}
             {{- toYaml . | nindent 12 }}
             {{- end }}
