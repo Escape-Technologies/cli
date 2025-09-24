@@ -14,7 +14,6 @@ import (
 
 var uploadCmd = &cobra.Command{
 	Use:     "upload",
-	Aliases: []string{"tag"},
 	Short:   "Interact with upload",
 	Long:    "Interact with your escape upload",
 }
