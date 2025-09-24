@@ -14,8 +14,8 @@ import (
 
 var uploadCmd = &cobra.Command{
 	Use:     "upload",
-	Short:   "Interact with upload",
-	Long:    "Interact with your escape upload",
+	Short:   "Upload assets to the platform",
+	Long:    "Upload assets to a temporary Escape storage to pass large files as schemas to other commands",
 }
 
 var uploadSignedURLCmd = &cobra.Command{
