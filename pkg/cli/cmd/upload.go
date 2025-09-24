@@ -65,7 +65,7 @@ ID
 }
 
 func init() {
-	uploadCmd.AddCommand(uploadSignedURLCmd)
+	uploadCmd.AddCommand(uploadSchemaCmd)
 
 	rootCmd.AddCommand(uploadCmd)
 }
