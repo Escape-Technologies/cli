@@ -15,37 +15,37 @@ import (
 	"fmt"
 )
 
-// checks if the CreateAssetSchemaRequestUpload type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &CreateAssetSchemaRequestUpload{}
+// checks if the CreateSchemaViaUploadUpload type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CreateSchemaViaUploadUpload{}
 
-// CreateAssetSchemaRequestUpload struct for CreateAssetSchemaRequestUpload
-type CreateAssetSchemaRequestUpload struct {
+// CreateSchemaViaUploadUpload struct for CreateSchemaViaUploadUpload
+type CreateSchemaViaUploadUpload struct {
 	TemporaryObjectKey string `json:"temporaryObjectKey"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _CreateAssetSchemaRequestUpload CreateAssetSchemaRequestUpload
+type _CreateSchemaViaUploadUpload CreateSchemaViaUploadUpload
 
-// NewCreateAssetSchemaRequestUpload instantiates a new CreateAssetSchemaRequestUpload object
+// NewCreateSchemaViaUploadUpload instantiates a new CreateSchemaViaUploadUpload object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetSchemaRequestUpload(temporaryObjectKey string) *CreateAssetSchemaRequestUpload {
-	this := CreateAssetSchemaRequestUpload{}
+func NewCreateSchemaViaUploadUpload(temporaryObjectKey string) *CreateSchemaViaUploadUpload {
+	this := CreateSchemaViaUploadUpload{}
 	this.TemporaryObjectKey = temporaryObjectKey
 	return &this
 }
 
-// NewCreateAssetSchemaRequestUploadWithDefaults instantiates a new CreateAssetSchemaRequestUpload object
+// NewCreateSchemaViaUploadUploadWithDefaults instantiates a new CreateSchemaViaUploadUpload object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCreateAssetSchemaRequestUploadWithDefaults() *CreateAssetSchemaRequestUpload {
-	this := CreateAssetSchemaRequestUpload{}
+func NewCreateSchemaViaUploadUploadWithDefaults() *CreateSchemaViaUploadUpload {
+	this := CreateSchemaViaUploadUpload{}
 	return &this
 }
 
 // GetTemporaryObjectKey returns the TemporaryObjectKey field value
-func (o *CreateAssetSchemaRequestUpload) GetTemporaryObjectKey() string {
+func (o *CreateSchemaViaUploadUpload) GetTemporaryObjectKey() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -56,7 +56,7 @@ func (o *CreateAssetSchemaRequestUpload) GetTemporaryObjectKey() string {
 
 // GetTemporaryObjectKeyOk returns a tuple with the TemporaryObjectKey field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetSchemaRequestUpload) GetTemporaryObjectKeyOk() (*string, bool) {
+func (o *CreateSchemaViaUploadUpload) GetTemporaryObjectKeyOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -64,11 +64,11 @@ func (o *CreateAssetSchemaRequestUpload) GetTemporaryObjectKeyOk() (*string, boo
 }
 
 // SetTemporaryObjectKey sets field value
-func (o *CreateAssetSchemaRequestUpload) SetTemporaryObjectKey(v string) {
+func (o *CreateSchemaViaUploadUpload) SetTemporaryObjectKey(v string) {
 	o.TemporaryObjectKey = v
 }
 
-func (o CreateAssetSchemaRequestUpload) MarshalJSON() ([]byte, error) {
+func (o CreateSchemaViaUploadUpload) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -76,7 +76,7 @@ func (o CreateAssetSchemaRequestUpload) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CreateAssetSchemaRequestUpload) ToMap() (map[string]interface{}, error) {
+func (o CreateSchemaViaUploadUpload) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["temporaryObjectKey"] = o.TemporaryObjectKey
 
@@ -87,7 +87,7 @@ func (o CreateAssetSchemaRequestUpload) ToMap() (map[string]interface{}, error) 
 	return toSerialize, nil
 }
 
-func (o *CreateAssetSchemaRequestUpload) UnmarshalJSON(data []byte) (err error) {
+func (o *CreateSchemaViaUploadUpload) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -109,15 +109,15 @@ func (o *CreateAssetSchemaRequestUpload) UnmarshalJSON(data []byte) (err error) 
 		}
 	}
 
-	varCreateAssetSchemaRequestUpload := _CreateAssetSchemaRequestUpload{}
+	varCreateSchemaViaUploadUpload := _CreateSchemaViaUploadUpload{}
 
-	err = json.Unmarshal(data, &varCreateAssetSchemaRequestUpload)
+	err = json.Unmarshal(data, &varCreateSchemaViaUploadUpload)
 
 	if err != nil {
 		return err
 	}
 
-	*o = CreateAssetSchemaRequestUpload(varCreateAssetSchemaRequestUpload)
+	*o = CreateSchemaViaUploadUpload(varCreateSchemaViaUploadUpload)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -129,38 +129,38 @@ func (o *CreateAssetSchemaRequestUpload) UnmarshalJSON(data []byte) (err error) 
 	return err
 }
 
-type NullableCreateAssetSchemaRequestUpload struct {
-	value *CreateAssetSchemaRequestUpload
+type NullableCreateSchemaViaUploadUpload struct {
+	value *CreateSchemaViaUploadUpload
 	isSet bool
 }
 
-func (v NullableCreateAssetSchemaRequestUpload) Get() *CreateAssetSchemaRequestUpload {
+func (v NullableCreateSchemaViaUploadUpload) Get() *CreateSchemaViaUploadUpload {
 	return v.value
 }
 
-func (v *NullableCreateAssetSchemaRequestUpload) Set(val *CreateAssetSchemaRequestUpload) {
+func (v *NullableCreateSchemaViaUploadUpload) Set(val *CreateSchemaViaUploadUpload) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCreateAssetSchemaRequestUpload) IsSet() bool {
+func (v NullableCreateSchemaViaUploadUpload) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCreateAssetSchemaRequestUpload) Unset() {
+func (v *NullableCreateSchemaViaUploadUpload) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCreateAssetSchemaRequestUpload(val *CreateAssetSchemaRequestUpload) *NullableCreateAssetSchemaRequestUpload {
-	return &NullableCreateAssetSchemaRequestUpload{value: val, isSet: true}
+func NewNullableCreateSchemaViaUploadUpload(val *CreateSchemaViaUploadUpload) *NullableCreateSchemaViaUploadUpload {
+	return &NullableCreateSchemaViaUploadUpload{value: val, isSet: true}
 }
 
-func (v NullableCreateAssetSchemaRequestUpload) MarshalJSON() ([]byte, error) {
+func (v NullableCreateSchemaViaUploadUpload) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCreateAssetSchemaRequestUpload) UnmarshalJSON(src []byte) error {
+func (v *NullableCreateSchemaViaUploadUpload) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
