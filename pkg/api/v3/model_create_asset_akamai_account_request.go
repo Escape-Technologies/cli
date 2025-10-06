@@ -26,6 +26,7 @@ type CreateAssetAKAMAIACCOUNTRequest struct {
 	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
 	AssetType ENUMAKAMAIACCOUNT `json:"asset_type"`
 	Name *string `json:"name,omitempty"`
+	ImmutableKey string `json:"immutable_key"`
 	Host string `json:"host"`
 	ClientSecret string `json:"client_secret"`
 	AccessToken string `json:"access_token"`
@@ -39,10 +40,11 @@ type _CreateAssetAKAMAIACCOUNTRequest CreateAssetAKAMAIACCOUNTRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetAKAMAIACCOUNTRequest(assetClass ENUMCDN, assetType ENUMAKAMAIACCOUNT, host string, clientSecret string, accessToken string, clientToken string) *CreateAssetAKAMAIACCOUNTRequest {
+func NewCreateAssetAKAMAIACCOUNTRequest(assetClass ENUMCDN, assetType ENUMAKAMAIACCOUNT, immutableKey string, host string, clientSecret string, accessToken string, clientToken string) *CreateAssetAKAMAIACCOUNTRequest {
 	this := CreateAssetAKAMAIACCOUNTRequest{}
 	this.AssetClass = assetClass
 	this.AssetType = assetType
+	this.ImmutableKey = immutableKey
 	this.Host = host
 	this.ClientSecret = clientSecret
 	this.AccessToken = accessToken
@@ -234,6 +236,30 @@ func (o *CreateAssetAKAMAIACCOUNTRequest) SetName(v string) {
 	o.Name = &v
 }
 
+// GetImmutableKey returns the ImmutableKey field value
+func (o *CreateAssetAKAMAIACCOUNTRequest) GetImmutableKey() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.ImmutableKey
+}
+
+// GetImmutableKeyOk returns a tuple with the ImmutableKey field value
+// and a boolean to check if the value has been set.
+func (o *CreateAssetAKAMAIACCOUNTRequest) GetImmutableKeyOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ImmutableKey, true
+}
+
+// SetImmutableKey sets field value
+func (o *CreateAssetAKAMAIACCOUNTRequest) SetImmutableKey(v string) {
+	o.ImmutableKey = v
+}
+
 // GetHost returns the Host field value
 func (o *CreateAssetAKAMAIACCOUNTRequest) GetHost() string {
 	if o == nil {
@@ -354,6 +380,7 @@ func (o CreateAssetAKAMAIACCOUNTRequest) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
+	toSerialize["immutable_key"] = o.ImmutableKey
 	toSerialize["host"] = o.Host
 	toSerialize["client_secret"] = o.ClientSecret
 	toSerialize["access_token"] = o.AccessToken
@@ -373,6 +400,7 @@ func (o *CreateAssetAKAMAIACCOUNTRequest) UnmarshalJSON(data []byte) (err error)
 	requiredProperties := []string{
 		"asset_class",
 		"asset_type",
+		"immutable_key",
 		"host",
 		"client_secret",
 		"access_token",
@@ -412,6 +440,7 @@ func (o *CreateAssetAKAMAIACCOUNTRequest) UnmarshalJSON(data []byte) (err error)
 		delete(additionalProperties, "extra_metadata")
 		delete(additionalProperties, "asset_type")
 		delete(additionalProperties, "name")
+		delete(additionalProperties, "immutable_key")
 		delete(additionalProperties, "host")
 		delete(additionalProperties, "client_secret")
 		delete(additionalProperties, "access_token")

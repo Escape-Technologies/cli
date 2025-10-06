@@ -15,38 +15,38 @@ import (
 	"fmt"
 )
 
-// checks if the CreateAssetSchemaRequestFetch type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &CreateAssetSchemaRequestFetch{}
+// checks if the CreateSchemaViaFetchFetch type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CreateSchemaViaFetchFetch{}
 
-// CreateAssetSchemaRequestFetch struct for CreateAssetSchemaRequestFetch
-type CreateAssetSchemaRequestFetch struct {
+// CreateSchemaViaFetchFetch struct for CreateSchemaViaFetchFetch
+type CreateSchemaViaFetchFetch struct {
 	Url string `json:"url"`
 	ProxyId *string `json:"proxyId,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _CreateAssetSchemaRequestFetch CreateAssetSchemaRequestFetch
+type _CreateSchemaViaFetchFetch CreateSchemaViaFetchFetch
 
-// NewCreateAssetSchemaRequestFetch instantiates a new CreateAssetSchemaRequestFetch object
+// NewCreateSchemaViaFetchFetch instantiates a new CreateSchemaViaFetchFetch object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetSchemaRequestFetch(url string) *CreateAssetSchemaRequestFetch {
-	this := CreateAssetSchemaRequestFetch{}
+func NewCreateSchemaViaFetchFetch(url string) *CreateSchemaViaFetchFetch {
+	this := CreateSchemaViaFetchFetch{}
 	this.Url = url
 	return &this
 }
 
-// NewCreateAssetSchemaRequestFetchWithDefaults instantiates a new CreateAssetSchemaRequestFetch object
+// NewCreateSchemaViaFetchFetchWithDefaults instantiates a new CreateSchemaViaFetchFetch object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCreateAssetSchemaRequestFetchWithDefaults() *CreateAssetSchemaRequestFetch {
-	this := CreateAssetSchemaRequestFetch{}
+func NewCreateSchemaViaFetchFetchWithDefaults() *CreateSchemaViaFetchFetch {
+	this := CreateSchemaViaFetchFetch{}
 	return &this
 }
 
 // GetUrl returns the Url field value
-func (o *CreateAssetSchemaRequestFetch) GetUrl() string {
+func (o *CreateSchemaViaFetchFetch) GetUrl() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -57,7 +57,7 @@ func (o *CreateAssetSchemaRequestFetch) GetUrl() string {
 
 // GetUrlOk returns a tuple with the Url field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetSchemaRequestFetch) GetUrlOk() (*string, bool) {
+func (o *CreateSchemaViaFetchFetch) GetUrlOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -65,12 +65,12 @@ func (o *CreateAssetSchemaRequestFetch) GetUrlOk() (*string, bool) {
 }
 
 // SetUrl sets field value
-func (o *CreateAssetSchemaRequestFetch) SetUrl(v string) {
+func (o *CreateSchemaViaFetchFetch) SetUrl(v string) {
 	o.Url = v
 }
 
 // GetProxyId returns the ProxyId field value if set, zero value otherwise.
-func (o *CreateAssetSchemaRequestFetch) GetProxyId() string {
+func (o *CreateSchemaViaFetchFetch) GetProxyId() string {
 	if o == nil || IsNil(o.ProxyId) {
 		var ret string
 		return ret
@@ -80,7 +80,7 @@ func (o *CreateAssetSchemaRequestFetch) GetProxyId() string {
 
 // GetProxyIdOk returns a tuple with the ProxyId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetSchemaRequestFetch) GetProxyIdOk() (*string, bool) {
+func (o *CreateSchemaViaFetchFetch) GetProxyIdOk() (*string, bool) {
 	if o == nil || IsNil(o.ProxyId) {
 		return nil, false
 	}
@@ -88,7 +88,7 @@ func (o *CreateAssetSchemaRequestFetch) GetProxyIdOk() (*string, bool) {
 }
 
 // HasProxyId returns a boolean if a field has been set.
-func (o *CreateAssetSchemaRequestFetch) HasProxyId() bool {
+func (o *CreateSchemaViaFetchFetch) HasProxyId() bool {
 	if o != nil && !IsNil(o.ProxyId) {
 		return true
 	}
@@ -97,11 +97,11 @@ func (o *CreateAssetSchemaRequestFetch) HasProxyId() bool {
 }
 
 // SetProxyId gets a reference to the given string and assigns it to the ProxyId field.
-func (o *CreateAssetSchemaRequestFetch) SetProxyId(v string) {
+func (o *CreateSchemaViaFetchFetch) SetProxyId(v string) {
 	o.ProxyId = &v
 }
 
-func (o CreateAssetSchemaRequestFetch) MarshalJSON() ([]byte, error) {
+func (o CreateSchemaViaFetchFetch) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -109,7 +109,7 @@ func (o CreateAssetSchemaRequestFetch) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CreateAssetSchemaRequestFetch) ToMap() (map[string]interface{}, error) {
+func (o CreateSchemaViaFetchFetch) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["url"] = o.Url
 	if !IsNil(o.ProxyId) {
@@ -123,7 +123,7 @@ func (o CreateAssetSchemaRequestFetch) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *CreateAssetSchemaRequestFetch) UnmarshalJSON(data []byte) (err error) {
+func (o *CreateSchemaViaFetchFetch) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -145,15 +145,15 @@ func (o *CreateAssetSchemaRequestFetch) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varCreateAssetSchemaRequestFetch := _CreateAssetSchemaRequestFetch{}
+	varCreateSchemaViaFetchFetch := _CreateSchemaViaFetchFetch{}
 
-	err = json.Unmarshal(data, &varCreateAssetSchemaRequestFetch)
+	err = json.Unmarshal(data, &varCreateSchemaViaFetchFetch)
 
 	if err != nil {
 		return err
 	}
 
-	*o = CreateAssetSchemaRequestFetch(varCreateAssetSchemaRequestFetch)
+	*o = CreateSchemaViaFetchFetch(varCreateSchemaViaFetchFetch)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -166,38 +166,38 @@ func (o *CreateAssetSchemaRequestFetch) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableCreateAssetSchemaRequestFetch struct {
-	value *CreateAssetSchemaRequestFetch
+type NullableCreateSchemaViaFetchFetch struct {
+	value *CreateSchemaViaFetchFetch
 	isSet bool
 }
 
-func (v NullableCreateAssetSchemaRequestFetch) Get() *CreateAssetSchemaRequestFetch {
+func (v NullableCreateSchemaViaFetchFetch) Get() *CreateSchemaViaFetchFetch {
 	return v.value
 }
 
-func (v *NullableCreateAssetSchemaRequestFetch) Set(val *CreateAssetSchemaRequestFetch) {
+func (v *NullableCreateSchemaViaFetchFetch) Set(val *CreateSchemaViaFetchFetch) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCreateAssetSchemaRequestFetch) IsSet() bool {
+func (v NullableCreateSchemaViaFetchFetch) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCreateAssetSchemaRequestFetch) Unset() {
+func (v *NullableCreateSchemaViaFetchFetch) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCreateAssetSchemaRequestFetch(val *CreateAssetSchemaRequestFetch) *NullableCreateAssetSchemaRequestFetch {
-	return &NullableCreateAssetSchemaRequestFetch{value: val, isSet: true}
+func NewNullableCreateSchemaViaFetchFetch(val *CreateSchemaViaFetchFetch) *NullableCreateSchemaViaFetchFetch {
+	return &NullableCreateSchemaViaFetchFetch{value: val, isSet: true}
 }
 
-func (v NullableCreateAssetSchemaRequestFetch) MarshalJSON() ([]byte, error) {
+func (v NullableCreateSchemaViaFetchFetch) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCreateAssetSchemaRequestFetch) UnmarshalJSON(src []byte) error {
+func (v *NullableCreateSchemaViaFetchFetch) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

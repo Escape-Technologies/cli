@@ -21,7 +21,7 @@ var _ MappedNullable = &ProfileDetailedConfigurationAuthenticationPresetsInnerOn
 // ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3 struct for ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3
 type ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3 struct {
 	Type ENUMOAUTHAUTHZCODEBROWSER `json:"type"`
-	Users []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf1UsersInner `json:"users"`
+	Users []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3UsersInner `json:"users"`
 	AuthorizationUrl string `json:"authorization_url"`
 	TokenUrl string `json:"token_url"`
 	ClientId string `json:"client_id"`
@@ -39,7 +39,7 @@ type _ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3 ProfileDetail
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3(type_ ENUMOAUTHAUTHZCODEBROWSER, users []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf1UsersInner, authorizationUrl string, tokenUrl string, clientId string, clientSecret string, redirectUri string, usePkce bool) *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3 {
+func NewProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3(type_ ENUMOAUTHAUTHZCODEBROWSER, users []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3UsersInner, authorizationUrl string, tokenUrl string, clientId string, clientSecret string, redirectUri string, usePkce bool) *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3 {
 	this := ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3{}
 	this.Type = type_
 	this.Users = users
@@ -85,9 +85,9 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3) SetType(v
 }
 
 // GetUsers returns the Users field value
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3) GetUsers() []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf1UsersInner {
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3) GetUsers() []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3UsersInner {
 	if o == nil {
-		var ret []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf1UsersInner
+		var ret []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3UsersInner
 		return ret
 	}
 
@@ -96,7 +96,7 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3) GetUsers(
 
 // GetUsersOk returns a tuple with the Users field value
 // and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3) GetUsersOk() ([]ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf1UsersInner, bool) {
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3) GetUsersOk() ([]ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3UsersInner, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -104,7 +104,7 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3) GetUsersO
 }
 
 // SetUsers sets field value
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3) SetUsers(v []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf1UsersInner) {
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3) SetUsers(v []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3UsersInner) {
 	o.Users = v
 }
 

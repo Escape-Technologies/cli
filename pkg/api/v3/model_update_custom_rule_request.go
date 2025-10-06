@@ -19,12 +19,9 @@ var _ MappedNullable = &UpdateCustomRuleRequest{}
 
 // UpdateCustomRuleRequest struct for UpdateCustomRuleRequest
 type UpdateCustomRuleRequest struct {
-	// The content of the custom rule
-	Content map[string]interface{} `json:"content,omitempty"`
-	// Whether the custom rule is enabled for DAST
-	DastEnabled *string `json:"dastEnabled,omitempty"`
-	// Whether the custom rule is enabled for ASM
-	AsmEnabled *string `json:"asmEnabled,omitempty"`
+	Content *UpdateCustomRuleRequestContent `json:"content,omitempty"`
+	DastEnabled *ENUMPROPERTIESDASTENABLED `json:"dastEnabled,omitempty"`
+	AsmEnabled *ENUMPROPERTIESDASTENABLED `json:"asmEnabled,omitempty"`
 	// The tags of the custom rule
 	Tags []string `json:"tags,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -50,19 +47,19 @@ func NewUpdateCustomRuleRequestWithDefaults() *UpdateCustomRuleRequest {
 }
 
 // GetContent returns the Content field value if set, zero value otherwise.
-func (o *UpdateCustomRuleRequest) GetContent() map[string]interface{} {
+func (o *UpdateCustomRuleRequest) GetContent() UpdateCustomRuleRequestContent {
 	if o == nil || IsNil(o.Content) {
-		var ret map[string]interface{}
+		var ret UpdateCustomRuleRequestContent
 		return ret
 	}
-	return o.Content
+	return *o.Content
 }
 
 // GetContentOk returns a tuple with the Content field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateCustomRuleRequest) GetContentOk() (map[string]interface{}, bool) {
+func (o *UpdateCustomRuleRequest) GetContentOk() (*UpdateCustomRuleRequestContent, bool) {
 	if o == nil || IsNil(o.Content) {
-		return map[string]interface{}{}, false
+		return nil, false
 	}
 	return o.Content, true
 }
@@ -76,15 +73,15 @@ func (o *UpdateCustomRuleRequest) HasContent() bool {
 	return false
 }
 
-// SetContent gets a reference to the given map[string]interface{} and assigns it to the Content field.
-func (o *UpdateCustomRuleRequest) SetContent(v map[string]interface{}) {
-	o.Content = v
+// SetContent gets a reference to the given UpdateCustomRuleRequestContent and assigns it to the Content field.
+func (o *UpdateCustomRuleRequest) SetContent(v UpdateCustomRuleRequestContent) {
+	o.Content = &v
 }
 
 // GetDastEnabled returns the DastEnabled field value if set, zero value otherwise.
-func (o *UpdateCustomRuleRequest) GetDastEnabled() string {
+func (o *UpdateCustomRuleRequest) GetDastEnabled() ENUMPROPERTIESDASTENABLED {
 	if o == nil || IsNil(o.DastEnabled) {
-		var ret string
+		var ret ENUMPROPERTIESDASTENABLED
 		return ret
 	}
 	return *o.DastEnabled
@@ -92,7 +89,7 @@ func (o *UpdateCustomRuleRequest) GetDastEnabled() string {
 
 // GetDastEnabledOk returns a tuple with the DastEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateCustomRuleRequest) GetDastEnabledOk() (*string, bool) {
+func (o *UpdateCustomRuleRequest) GetDastEnabledOk() (*ENUMPROPERTIESDASTENABLED, bool) {
 	if o == nil || IsNil(o.DastEnabled) {
 		return nil, false
 	}
@@ -108,15 +105,15 @@ func (o *UpdateCustomRuleRequest) HasDastEnabled() bool {
 	return false
 }
 
-// SetDastEnabled gets a reference to the given string and assigns it to the DastEnabled field.
-func (o *UpdateCustomRuleRequest) SetDastEnabled(v string) {
+// SetDastEnabled gets a reference to the given ENUMPROPERTIESDASTENABLED and assigns it to the DastEnabled field.
+func (o *UpdateCustomRuleRequest) SetDastEnabled(v ENUMPROPERTIESDASTENABLED) {
 	o.DastEnabled = &v
 }
 
 // GetAsmEnabled returns the AsmEnabled field value if set, zero value otherwise.
-func (o *UpdateCustomRuleRequest) GetAsmEnabled() string {
+func (o *UpdateCustomRuleRequest) GetAsmEnabled() ENUMPROPERTIESDASTENABLED {
 	if o == nil || IsNil(o.AsmEnabled) {
-		var ret string
+		var ret ENUMPROPERTIESDASTENABLED
 		return ret
 	}
 	return *o.AsmEnabled
@@ -124,7 +121,7 @@ func (o *UpdateCustomRuleRequest) GetAsmEnabled() string {
 
 // GetAsmEnabledOk returns a tuple with the AsmEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateCustomRuleRequest) GetAsmEnabledOk() (*string, bool) {
+func (o *UpdateCustomRuleRequest) GetAsmEnabledOk() (*ENUMPROPERTIESDASTENABLED, bool) {
 	if o == nil || IsNil(o.AsmEnabled) {
 		return nil, false
 	}
@@ -140,8 +137,8 @@ func (o *UpdateCustomRuleRequest) HasAsmEnabled() bool {
 	return false
 }
 
-// SetAsmEnabled gets a reference to the given string and assigns it to the AsmEnabled field.
-func (o *UpdateCustomRuleRequest) SetAsmEnabled(v string) {
+// SetAsmEnabled gets a reference to the given ENUMPROPERTIESDASTENABLED and assigns it to the AsmEnabled field.
+func (o *UpdateCustomRuleRequest) SetAsmEnabled(v ENUMPROPERTIESDASTENABLED) {
 	o.AsmEnabled = &v
 }
 

@@ -26,6 +26,7 @@ type CreateAssetGCPPROJECTRequest struct {
 	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
 	AssetType ENUMGCPPROJECT `json:"asset_type"`
 	Name *string `json:"name,omitempty"`
+	ImmutableKey string `json:"immutable_key"`
 	AuthProviderX509CertUrl string `json:"auth_provider_x509_cert_url"`
 	AuthUri string `json:"auth_uri"`
 	ClientEmail string `json:"client_email"`
@@ -45,10 +46,11 @@ type _CreateAssetGCPPROJECTRequest CreateAssetGCPPROJECTRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetGCPPROJECTRequest(assetClass ENUMCLOUDHOSTING, assetType ENUMGCPPROJECT, authProviderX509CertUrl string, authUri string, clientEmail string, clientId string, clientX509CertUrl string, privateKey string, privateKeyId string, tokenUri string, universeDomain string, projectId string) *CreateAssetGCPPROJECTRequest {
+func NewCreateAssetGCPPROJECTRequest(assetClass ENUMCLOUDHOSTING, assetType ENUMGCPPROJECT, immutableKey string, authProviderX509CertUrl string, authUri string, clientEmail string, clientId string, clientX509CertUrl string, privateKey string, privateKeyId string, tokenUri string, universeDomain string, projectId string) *CreateAssetGCPPROJECTRequest {
 	this := CreateAssetGCPPROJECTRequest{}
 	this.AssetClass = assetClass
 	this.AssetType = assetType
+	this.ImmutableKey = immutableKey
 	this.AuthProviderX509CertUrl = authProviderX509CertUrl
 	this.AuthUri = authUri
 	this.ClientEmail = clientEmail
@@ -244,6 +246,30 @@ func (o *CreateAssetGCPPROJECTRequest) HasName() bool {
 // SetName gets a reference to the given string and assigns it to the Name field.
 func (o *CreateAssetGCPPROJECTRequest) SetName(v string) {
 	o.Name = &v
+}
+
+// GetImmutableKey returns the ImmutableKey field value
+func (o *CreateAssetGCPPROJECTRequest) GetImmutableKey() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.ImmutableKey
+}
+
+// GetImmutableKeyOk returns a tuple with the ImmutableKey field value
+// and a boolean to check if the value has been set.
+func (o *CreateAssetGCPPROJECTRequest) GetImmutableKeyOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ImmutableKey, true
+}
+
+// SetImmutableKey sets field value
+func (o *CreateAssetGCPPROJECTRequest) SetImmutableKey(v string) {
+	o.ImmutableKey = v
 }
 
 // GetAuthProviderX509CertUrl returns the AuthProviderX509CertUrl field value
@@ -510,6 +536,7 @@ func (o CreateAssetGCPPROJECTRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
+	toSerialize["immutable_key"] = o.ImmutableKey
 	toSerialize["auth_provider_x509_cert_url"] = o.AuthProviderX509CertUrl
 	toSerialize["auth_uri"] = o.AuthUri
 	toSerialize["client_email"] = o.ClientEmail
@@ -535,6 +562,7 @@ func (o *CreateAssetGCPPROJECTRequest) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"asset_class",
 		"asset_type",
+		"immutable_key",
 		"auth_provider_x509_cert_url",
 		"auth_uri",
 		"client_email",
@@ -580,6 +608,7 @@ func (o *CreateAssetGCPPROJECTRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "extra_metadata")
 		delete(additionalProperties, "asset_type")
 		delete(additionalProperties, "name")
+		delete(additionalProperties, "immutable_key")
 		delete(additionalProperties, "auth_provider_x509_cert_url")
 		delete(additionalProperties, "auth_uri")
 		delete(additionalProperties, "client_email")
