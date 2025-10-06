@@ -22,6 +22,7 @@ var _ MappedNullable = &CreateAssetDNSRequestPathsInsightsInner{}
 type CreateAssetDNSRequestPathsInsightsInner struct {
 	Path string `json:"path"`
 	Method ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSKIPPEDAPICHECKSURLPATTERNSITEMSPROPERTIESMETHOD `json:"method"`
+	Operation *CreateAssetDNSRequestPathsInsightsInnerOperation `json:"operation,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -94,6 +95,38 @@ func (o *CreateAssetDNSRequestPathsInsightsInner) SetMethod(v ENUMPROPERTIESCONF
 	o.Method = v
 }
 
+// GetOperation returns the Operation field value if set, zero value otherwise.
+func (o *CreateAssetDNSRequestPathsInsightsInner) GetOperation() CreateAssetDNSRequestPathsInsightsInnerOperation {
+	if o == nil || IsNil(o.Operation) {
+		var ret CreateAssetDNSRequestPathsInsightsInnerOperation
+		return ret
+	}
+	return *o.Operation
+}
+
+// GetOperationOk returns a tuple with the Operation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetDNSRequestPathsInsightsInner) GetOperationOk() (*CreateAssetDNSRequestPathsInsightsInnerOperation, bool) {
+	if o == nil || IsNil(o.Operation) {
+		return nil, false
+	}
+	return o.Operation, true
+}
+
+// HasOperation returns a boolean if a field has been set.
+func (o *CreateAssetDNSRequestPathsInsightsInner) HasOperation() bool {
+	if o != nil && !IsNil(o.Operation) {
+		return true
+	}
+
+	return false
+}
+
+// SetOperation gets a reference to the given CreateAssetDNSRequestPathsInsightsInnerOperation and assigns it to the Operation field.
+func (o *CreateAssetDNSRequestPathsInsightsInner) SetOperation(v CreateAssetDNSRequestPathsInsightsInnerOperation) {
+	o.Operation = &v
+}
+
 func (o CreateAssetDNSRequestPathsInsightsInner) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -106,6 +139,9 @@ func (o CreateAssetDNSRequestPathsInsightsInner) ToMap() (map[string]interface{}
 	toSerialize := map[string]interface{}{}
 	toSerialize["path"] = o.Path
 	toSerialize["method"] = o.Method
+	if !IsNil(o.Operation) {
+		toSerialize["operation"] = o.Operation
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -152,6 +188,7 @@ func (o *CreateAssetDNSRequestPathsInsightsInner) UnmarshalJSON(data []byte) (er
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "path")
 		delete(additionalProperties, "method")
+		delete(additionalProperties, "operation")
 		o.AdditionalProperties = additionalProperties
 	}
 

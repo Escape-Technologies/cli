@@ -26,6 +26,7 @@ type CreateAssetAZURETENANTRequest struct {
 	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
 	AssetType ENUMAZURETENANT `json:"asset_type"`
 	Name *string `json:"name,omitempty"`
+	ImmutableKey string `json:"immutable_key"`
 	ClientId string `json:"client_id"`
 	ClientSecret string `json:"client_secret"`
 	TenantId string `json:"tenant_id"`
@@ -38,10 +39,11 @@ type _CreateAssetAZURETENANTRequest CreateAssetAZURETENANTRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetAZURETENANTRequest(assetClass ENUMCLOUDHOSTING, assetType ENUMAZURETENANT, clientId string, clientSecret string, tenantId string) *CreateAssetAZURETENANTRequest {
+func NewCreateAssetAZURETENANTRequest(assetClass ENUMCLOUDHOSTING, assetType ENUMAZURETENANT, immutableKey string, clientId string, clientSecret string, tenantId string) *CreateAssetAZURETENANTRequest {
 	this := CreateAssetAZURETENANTRequest{}
 	this.AssetClass = assetClass
 	this.AssetType = assetType
+	this.ImmutableKey = immutableKey
 	this.ClientId = clientId
 	this.ClientSecret = clientSecret
 	this.TenantId = tenantId
@@ -232,6 +234,30 @@ func (o *CreateAssetAZURETENANTRequest) SetName(v string) {
 	o.Name = &v
 }
 
+// GetImmutableKey returns the ImmutableKey field value
+func (o *CreateAssetAZURETENANTRequest) GetImmutableKey() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.ImmutableKey
+}
+
+// GetImmutableKeyOk returns a tuple with the ImmutableKey field value
+// and a boolean to check if the value has been set.
+func (o *CreateAssetAZURETENANTRequest) GetImmutableKeyOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ImmutableKey, true
+}
+
+// SetImmutableKey sets field value
+func (o *CreateAssetAZURETENANTRequest) SetImmutableKey(v string) {
+	o.ImmutableKey = v
+}
+
 // GetClientId returns the ClientId field value
 func (o *CreateAssetAZURETENANTRequest) GetClientId() string {
 	if o == nil {
@@ -328,6 +354,7 @@ func (o CreateAssetAZURETENANTRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
+	toSerialize["immutable_key"] = o.ImmutableKey
 	toSerialize["client_id"] = o.ClientId
 	toSerialize["client_secret"] = o.ClientSecret
 	toSerialize["tenant_id"] = o.TenantId
@@ -346,6 +373,7 @@ func (o *CreateAssetAZURETENANTRequest) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"asset_class",
 		"asset_type",
+		"immutable_key",
 		"client_id",
 		"client_secret",
 		"tenant_id",
@@ -384,6 +412,7 @@ func (o *CreateAssetAZURETENANTRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "extra_metadata")
 		delete(additionalProperties, "asset_type")
 		delete(additionalProperties, "name")
+		delete(additionalProperties, "immutable_key")
 		delete(additionalProperties, "client_id")
 		delete(additionalProperties, "client_secret")
 		delete(additionalProperties, "tenant_id")

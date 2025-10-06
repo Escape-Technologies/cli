@@ -24,6 +24,9 @@ type ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9UsersInner stru
 	Headers map[string]string `json:"headers,omitempty"`
 	Cookies map[string]string `json:"cookies,omitempty"`
 	QueryParameters map[string]string `json:"query_parameters,omitempty"`
+	MainUser *bool `json:"main_user,omitempty"`
+	Basic *string `json:"basic,omitempty"`
+	Digest *string `json:"digest,omitempty"`
 	Curl string `json:"curl"`
 	AdditionalProperties map[string]interface{}
 }
@@ -169,6 +172,102 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9UsersInner)
 	o.QueryParameters = v
 }
 
+// GetMainUser returns the MainUser field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9UsersInner) GetMainUser() bool {
+	if o == nil || IsNil(o.MainUser) {
+		var ret bool
+		return ret
+	}
+	return *o.MainUser
+}
+
+// GetMainUserOk returns a tuple with the MainUser field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9UsersInner) GetMainUserOk() (*bool, bool) {
+	if o == nil || IsNil(o.MainUser) {
+		return nil, false
+	}
+	return o.MainUser, true
+}
+
+// HasMainUser returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9UsersInner) HasMainUser() bool {
+	if o != nil && !IsNil(o.MainUser) {
+		return true
+	}
+
+	return false
+}
+
+// SetMainUser gets a reference to the given bool and assigns it to the MainUser field.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9UsersInner) SetMainUser(v bool) {
+	o.MainUser = &v
+}
+
+// GetBasic returns the Basic field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9UsersInner) GetBasic() string {
+	if o == nil || IsNil(o.Basic) {
+		var ret string
+		return ret
+	}
+	return *o.Basic
+}
+
+// GetBasicOk returns a tuple with the Basic field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9UsersInner) GetBasicOk() (*string, bool) {
+	if o == nil || IsNil(o.Basic) {
+		return nil, false
+	}
+	return o.Basic, true
+}
+
+// HasBasic returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9UsersInner) HasBasic() bool {
+	if o != nil && !IsNil(o.Basic) {
+		return true
+	}
+
+	return false
+}
+
+// SetBasic gets a reference to the given string and assigns it to the Basic field.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9UsersInner) SetBasic(v string) {
+	o.Basic = &v
+}
+
+// GetDigest returns the Digest field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9UsersInner) GetDigest() string {
+	if o == nil || IsNil(o.Digest) {
+		var ret string
+		return ret
+	}
+	return *o.Digest
+}
+
+// GetDigestOk returns a tuple with the Digest field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9UsersInner) GetDigestOk() (*string, bool) {
+	if o == nil || IsNil(o.Digest) {
+		return nil, false
+	}
+	return o.Digest, true
+}
+
+// HasDigest returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9UsersInner) HasDigest() bool {
+	if o != nil && !IsNil(o.Digest) {
+		return true
+	}
+
+	return false
+}
+
+// SetDigest gets a reference to the given string and assigns it to the Digest field.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9UsersInner) SetDigest(v string) {
+	o.Digest = &v
+}
+
 // GetCurl returns the Curl field value
 func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9UsersInner) GetCurl() string {
 	if o == nil {
@@ -212,6 +311,15 @@ func (o ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9UsersInner) 
 	}
 	if !IsNil(o.QueryParameters) {
 		toSerialize["query_parameters"] = o.QueryParameters
+	}
+	if !IsNil(o.MainUser) {
+		toSerialize["main_user"] = o.MainUser
+	}
+	if !IsNil(o.Basic) {
+		toSerialize["basic"] = o.Basic
+	}
+	if !IsNil(o.Digest) {
+		toSerialize["digest"] = o.Digest
 	}
 	toSerialize["curl"] = o.Curl
 
@@ -262,6 +370,9 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf9UsersInner)
 		delete(additionalProperties, "headers")
 		delete(additionalProperties, "cookies")
 		delete(additionalProperties, "query_parameters")
+		delete(additionalProperties, "main_user")
+		delete(additionalProperties, "basic")
+		delete(additionalProperties, "digest")
 		delete(additionalProperties, "curl")
 		o.AdditionalProperties = additionalProperties
 	}

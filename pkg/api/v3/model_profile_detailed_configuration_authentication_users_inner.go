@@ -26,6 +26,7 @@ type ProfileDetailedConfigurationAuthenticationUsersInner struct {
 	Variables []ProfileDetailedConfigurationAuthenticationUsersInnerVariablesInner `json:"variables,omitempty"`
 	Refresh *ProfileDetailedConfigurationAuthenticationUsersInnerRefresh `json:"refresh,omitempty"`
 	RepeaterMtls *bool `json:"repeater_mtls,omitempty"`
+	MainUser *bool `json:"main_user,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -233,6 +234,38 @@ func (o *ProfileDetailedConfigurationAuthenticationUsersInner) SetRepeaterMtls(v
 	o.RepeaterMtls = &v
 }
 
+// GetMainUser returns the MainUser field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationAuthenticationUsersInner) GetMainUser() bool {
+	if o == nil || IsNil(o.MainUser) {
+		var ret bool
+		return ret
+	}
+	return *o.MainUser
+}
+
+// GetMainUserOk returns a tuple with the MainUser field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationAuthenticationUsersInner) GetMainUserOk() (*bool, bool) {
+	if o == nil || IsNil(o.MainUser) {
+		return nil, false
+	}
+	return o.MainUser, true
+}
+
+// HasMainUser returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationAuthenticationUsersInner) HasMainUser() bool {
+	if o != nil && !IsNil(o.MainUser) {
+		return true
+	}
+
+	return false
+}
+
+// SetMainUser gets a reference to the given bool and assigns it to the MainUser field.
+func (o *ProfileDetailedConfigurationAuthenticationUsersInner) SetMainUser(v bool) {
+	o.MainUser = &v
+}
+
 func (o ProfileDetailedConfigurationAuthenticationUsersInner) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -258,6 +291,9 @@ func (o ProfileDetailedConfigurationAuthenticationUsersInner) ToMap() (map[strin
 	}
 	if !IsNil(o.RepeaterMtls) {
 		toSerialize["repeater_mtls"] = o.RepeaterMtls
+	}
+	if !IsNil(o.MainUser) {
+		toSerialize["main_user"] = o.MainUser
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -308,6 +344,7 @@ func (o *ProfileDetailedConfigurationAuthenticationUsersInner) UnmarshalJSON(dat
 		delete(additionalProperties, "variables")
 		delete(additionalProperties, "refresh")
 		delete(additionalProperties, "repeater_mtls")
+		delete(additionalProperties, "main_user")
 		o.AdditionalProperties = additionalProperties
 	}
 

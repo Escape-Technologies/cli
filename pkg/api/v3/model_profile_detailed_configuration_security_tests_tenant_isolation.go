@@ -21,6 +21,10 @@ var _ MappedNullable = &ProfileDetailedConfigurationSecurityTestsTenantIsolation
 type ProfileDetailedConfigurationSecurityTestsTenantIsolation struct {
 	Skip *bool `json:"skip,omitempty"`
 	AssetsAllowed []ENUMPROPERTIESCONFIGURATIONPROPERTIESSECURITYTESTSPROPERTIESHIGHNUMBEROFCUSTOMSCALARSPROPERTIESASSETSALLOWEDITEMS `json:"assets_allowed,omitempty"`
+	MainUser *string `json:"main_user,omitempty"`
+	NaturalLanguageRule *string `json:"natural_language_rule,omitempty"`
+	OtherUsers *ProfileDetailedConfigurationSecurityTestsTenantIsolationOtherUsers `json:"other_users,omitempty"`
+	SpecificUsers map[string]ProfileDetailedConfigurationSecurityTestsTenantIsolationSpecificUsersValue `json:"specific_users,omitempty"`
 	Paths []string `json:"paths,omitempty"`
 	KeysMatching []string `json:"keys_matching,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -109,6 +113,134 @@ func (o *ProfileDetailedConfigurationSecurityTestsTenantIsolation) SetAssetsAllo
 	o.AssetsAllowed = v
 }
 
+// GetMainUser returns the MainUser field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationSecurityTestsTenantIsolation) GetMainUser() string {
+	if o == nil || IsNil(o.MainUser) {
+		var ret string
+		return ret
+	}
+	return *o.MainUser
+}
+
+// GetMainUserOk returns a tuple with the MainUser field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationSecurityTestsTenantIsolation) GetMainUserOk() (*string, bool) {
+	if o == nil || IsNil(o.MainUser) {
+		return nil, false
+	}
+	return o.MainUser, true
+}
+
+// HasMainUser returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationSecurityTestsTenantIsolation) HasMainUser() bool {
+	if o != nil && !IsNil(o.MainUser) {
+		return true
+	}
+
+	return false
+}
+
+// SetMainUser gets a reference to the given string and assigns it to the MainUser field.
+func (o *ProfileDetailedConfigurationSecurityTestsTenantIsolation) SetMainUser(v string) {
+	o.MainUser = &v
+}
+
+// GetNaturalLanguageRule returns the NaturalLanguageRule field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationSecurityTestsTenantIsolation) GetNaturalLanguageRule() string {
+	if o == nil || IsNil(o.NaturalLanguageRule) {
+		var ret string
+		return ret
+	}
+	return *o.NaturalLanguageRule
+}
+
+// GetNaturalLanguageRuleOk returns a tuple with the NaturalLanguageRule field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationSecurityTestsTenantIsolation) GetNaturalLanguageRuleOk() (*string, bool) {
+	if o == nil || IsNil(o.NaturalLanguageRule) {
+		return nil, false
+	}
+	return o.NaturalLanguageRule, true
+}
+
+// HasNaturalLanguageRule returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationSecurityTestsTenantIsolation) HasNaturalLanguageRule() bool {
+	if o != nil && !IsNil(o.NaturalLanguageRule) {
+		return true
+	}
+
+	return false
+}
+
+// SetNaturalLanguageRule gets a reference to the given string and assigns it to the NaturalLanguageRule field.
+func (o *ProfileDetailedConfigurationSecurityTestsTenantIsolation) SetNaturalLanguageRule(v string) {
+	o.NaturalLanguageRule = &v
+}
+
+// GetOtherUsers returns the OtherUsers field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationSecurityTestsTenantIsolation) GetOtherUsers() ProfileDetailedConfigurationSecurityTestsTenantIsolationOtherUsers {
+	if o == nil || IsNil(o.OtherUsers) {
+		var ret ProfileDetailedConfigurationSecurityTestsTenantIsolationOtherUsers
+		return ret
+	}
+	return *o.OtherUsers
+}
+
+// GetOtherUsersOk returns a tuple with the OtherUsers field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationSecurityTestsTenantIsolation) GetOtherUsersOk() (*ProfileDetailedConfigurationSecurityTestsTenantIsolationOtherUsers, bool) {
+	if o == nil || IsNil(o.OtherUsers) {
+		return nil, false
+	}
+	return o.OtherUsers, true
+}
+
+// HasOtherUsers returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationSecurityTestsTenantIsolation) HasOtherUsers() bool {
+	if o != nil && !IsNil(o.OtherUsers) {
+		return true
+	}
+
+	return false
+}
+
+// SetOtherUsers gets a reference to the given ProfileDetailedConfigurationSecurityTestsTenantIsolationOtherUsers and assigns it to the OtherUsers field.
+func (o *ProfileDetailedConfigurationSecurityTestsTenantIsolation) SetOtherUsers(v ProfileDetailedConfigurationSecurityTestsTenantIsolationOtherUsers) {
+	o.OtherUsers = &v
+}
+
+// GetSpecificUsers returns the SpecificUsers field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationSecurityTestsTenantIsolation) GetSpecificUsers() map[string]ProfileDetailedConfigurationSecurityTestsTenantIsolationSpecificUsersValue {
+	if o == nil || IsNil(o.SpecificUsers) {
+		var ret map[string]ProfileDetailedConfigurationSecurityTestsTenantIsolationSpecificUsersValue
+		return ret
+	}
+	return o.SpecificUsers
+}
+
+// GetSpecificUsersOk returns a tuple with the SpecificUsers field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationSecurityTestsTenantIsolation) GetSpecificUsersOk() (map[string]ProfileDetailedConfigurationSecurityTestsTenantIsolationSpecificUsersValue, bool) {
+	if o == nil || IsNil(o.SpecificUsers) {
+		return map[string]ProfileDetailedConfigurationSecurityTestsTenantIsolationSpecificUsersValue{}, false
+	}
+	return o.SpecificUsers, true
+}
+
+// HasSpecificUsers returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationSecurityTestsTenantIsolation) HasSpecificUsers() bool {
+	if o != nil && !IsNil(o.SpecificUsers) {
+		return true
+	}
+
+	return false
+}
+
+// SetSpecificUsers gets a reference to the given map[string]ProfileDetailedConfigurationSecurityTestsTenantIsolationSpecificUsersValue and assigns it to the SpecificUsers field.
+func (o *ProfileDetailedConfigurationSecurityTestsTenantIsolation) SetSpecificUsers(v map[string]ProfileDetailedConfigurationSecurityTestsTenantIsolationSpecificUsersValue) {
+	o.SpecificUsers = v
+}
+
 // GetPaths returns the Paths field value if set, zero value otherwise.
 func (o *ProfileDetailedConfigurationSecurityTestsTenantIsolation) GetPaths() []string {
 	if o == nil || IsNil(o.Paths) {
@@ -189,6 +321,18 @@ func (o ProfileDetailedConfigurationSecurityTestsTenantIsolation) ToMap() (map[s
 	if !IsNil(o.AssetsAllowed) {
 		toSerialize["assets_allowed"] = o.AssetsAllowed
 	}
+	if !IsNil(o.MainUser) {
+		toSerialize["main_user"] = o.MainUser
+	}
+	if !IsNil(o.NaturalLanguageRule) {
+		toSerialize["natural_language_rule"] = o.NaturalLanguageRule
+	}
+	if !IsNil(o.OtherUsers) {
+		toSerialize["other_users"] = o.OtherUsers
+	}
+	if !IsNil(o.SpecificUsers) {
+		toSerialize["specific_users"] = o.SpecificUsers
+	}
 	if !IsNil(o.Paths) {
 		toSerialize["paths"] = o.Paths
 	}
@@ -219,6 +363,10 @@ func (o *ProfileDetailedConfigurationSecurityTestsTenantIsolation) UnmarshalJSON
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "skip")
 		delete(additionalProperties, "assets_allowed")
+		delete(additionalProperties, "main_user")
+		delete(additionalProperties, "natural_language_rule")
+		delete(additionalProperties, "other_users")
+		delete(additionalProperties, "specific_users")
 		delete(additionalProperties, "paths")
 		delete(additionalProperties, "keys_matching")
 		o.AdditionalProperties = additionalProperties

@@ -12,7 +12,6 @@ package v3
 
 import (
 	"encoding/json"
-	"fmt"
 )
 
 // checks if the UpdateLocationRequest type satisfies the MappedNullable interface at compile time
@@ -21,11 +20,11 @@ var _ MappedNullable = &UpdateLocationRequest{}
 // UpdateLocationRequest struct for UpdateLocationRequest
 type UpdateLocationRequest struct {
 	// The name of the location.
-	Name string `json:"name"`
+	Name *string `json:"name,omitempty"`
 	// Whether the location is enabled.
-	Enabled bool `json:"enabled"`
+	Enabled *bool `json:"enabled,omitempty"`
 	// The SSH public key of the location.
-	SshPublicKey string `json:"sshPublicKey"`
+	SshPublicKey *string `json:"sshPublicKey,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -35,11 +34,8 @@ type _UpdateLocationRequest UpdateLocationRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateLocationRequest(name string, enabled bool, sshPublicKey string) *UpdateLocationRequest {
+func NewUpdateLocationRequest() *UpdateLocationRequest {
 	this := UpdateLocationRequest{}
-	this.Name = name
-	this.Enabled = enabled
-	this.SshPublicKey = sshPublicKey
 	return &this
 }
 
@@ -51,76 +47,100 @@ func NewUpdateLocationRequestWithDefaults() *UpdateLocationRequest {
 	return &this
 }
 
-// GetName returns the Name field value
+// GetName returns the Name field value if set, zero value otherwise.
 func (o *UpdateLocationRequest) GetName() string {
-	if o == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
-
-	return o.Name
+	return *o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateLocationRequest) GetNameOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
-	return &o.Name, true
+	return o.Name, true
 }
 
-// SetName sets field value
+// HasName returns a boolean if a field has been set.
+func (o *UpdateLocationRequest) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
 func (o *UpdateLocationRequest) SetName(v string) {
-	o.Name = v
+	o.Name = &v
 }
 
-// GetEnabled returns the Enabled field value
+// GetEnabled returns the Enabled field value if set, zero value otherwise.
 func (o *UpdateLocationRequest) GetEnabled() bool {
-	if o == nil {
+	if o == nil || IsNil(o.Enabled) {
 		var ret bool
 		return ret
 	}
-
-	return o.Enabled
+	return *o.Enabled
 }
 
-// GetEnabledOk returns a tuple with the Enabled field value
+// GetEnabledOk returns a tuple with the Enabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateLocationRequest) GetEnabledOk() (*bool, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Enabled) {
 		return nil, false
 	}
-	return &o.Enabled, true
+	return o.Enabled, true
 }
 
-// SetEnabled sets field value
+// HasEnabled returns a boolean if a field has been set.
+func (o *UpdateLocationRequest) HasEnabled() bool {
+	if o != nil && !IsNil(o.Enabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetEnabled gets a reference to the given bool and assigns it to the Enabled field.
 func (o *UpdateLocationRequest) SetEnabled(v bool) {
-	o.Enabled = v
+	o.Enabled = &v
 }
 
-// GetSshPublicKey returns the SshPublicKey field value
+// GetSshPublicKey returns the SshPublicKey field value if set, zero value otherwise.
 func (o *UpdateLocationRequest) GetSshPublicKey() string {
-	if o == nil {
+	if o == nil || IsNil(o.SshPublicKey) {
 		var ret string
 		return ret
 	}
-
-	return o.SshPublicKey
+	return *o.SshPublicKey
 }
 
-// GetSshPublicKeyOk returns a tuple with the SshPublicKey field value
+// GetSshPublicKeyOk returns a tuple with the SshPublicKey field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateLocationRequest) GetSshPublicKeyOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.SshPublicKey) {
 		return nil, false
 	}
-	return &o.SshPublicKey, true
+	return o.SshPublicKey, true
 }
 
-// SetSshPublicKey sets field value
+// HasSshPublicKey returns a boolean if a field has been set.
+func (o *UpdateLocationRequest) HasSshPublicKey() bool {
+	if o != nil && !IsNil(o.SshPublicKey) {
+		return true
+	}
+
+	return false
+}
+
+// SetSshPublicKey gets a reference to the given string and assigns it to the SshPublicKey field.
 func (o *UpdateLocationRequest) SetSshPublicKey(v string) {
-	o.SshPublicKey = v
+	o.SshPublicKey = &v
 }
 
 func (o UpdateLocationRequest) MarshalJSON() ([]byte, error) {
@@ -133,9 +153,15 @@ func (o UpdateLocationRequest) MarshalJSON() ([]byte, error) {
 
 func (o UpdateLocationRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["name"] = o.Name
-	toSerialize["enabled"] = o.Enabled
-	toSerialize["sshPublicKey"] = o.SshPublicKey
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
+	if !IsNil(o.Enabled) {
+		toSerialize["enabled"] = o.Enabled
+	}
+	if !IsNil(o.SshPublicKey) {
+		toSerialize["sshPublicKey"] = o.SshPublicKey
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -145,29 +171,6 @@ func (o UpdateLocationRequest) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *UpdateLocationRequest) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"name",
-		"enabled",
-		"sshPublicKey",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
 	varUpdateLocationRequest := _UpdateLocationRequest{}
 
 	err = json.Unmarshal(data, &varUpdateLocationRequest)

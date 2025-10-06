@@ -26,6 +26,7 @@ type CreateAssetCLOUDFLAREACCOUNTRequest struct {
 	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
 	AssetType ENUMCLOUDFLAREACCOUNT `json:"asset_type"`
 	Name *string `json:"name,omitempty"`
+	ImmutableKey string `json:"immutable_key"`
 	ApiKey string `json:"api_key"`
 	AdditionalProperties map[string]interface{}
 }
@@ -36,10 +37,11 @@ type _CreateAssetCLOUDFLAREACCOUNTRequest CreateAssetCLOUDFLAREACCOUNTRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetCLOUDFLAREACCOUNTRequest(assetClass ENUMCDN, assetType ENUMCLOUDFLAREACCOUNT, apiKey string) *CreateAssetCLOUDFLAREACCOUNTRequest {
+func NewCreateAssetCLOUDFLAREACCOUNTRequest(assetClass ENUMCDN, assetType ENUMCLOUDFLAREACCOUNT, immutableKey string, apiKey string) *CreateAssetCLOUDFLAREACCOUNTRequest {
 	this := CreateAssetCLOUDFLAREACCOUNTRequest{}
 	this.AssetClass = assetClass
 	this.AssetType = assetType
+	this.ImmutableKey = immutableKey
 	this.ApiKey = apiKey
 	return &this
 }
@@ -228,6 +230,30 @@ func (o *CreateAssetCLOUDFLAREACCOUNTRequest) SetName(v string) {
 	o.Name = &v
 }
 
+// GetImmutableKey returns the ImmutableKey field value
+func (o *CreateAssetCLOUDFLAREACCOUNTRequest) GetImmutableKey() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.ImmutableKey
+}
+
+// GetImmutableKeyOk returns a tuple with the ImmutableKey field value
+// and a boolean to check if the value has been set.
+func (o *CreateAssetCLOUDFLAREACCOUNTRequest) GetImmutableKeyOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ImmutableKey, true
+}
+
+// SetImmutableKey sets field value
+func (o *CreateAssetCLOUDFLAREACCOUNTRequest) SetImmutableKey(v string) {
+	o.ImmutableKey = v
+}
+
 // GetApiKey returns the ApiKey field value
 func (o *CreateAssetCLOUDFLAREACCOUNTRequest) GetApiKey() string {
 	if o == nil {
@@ -276,6 +302,7 @@ func (o CreateAssetCLOUDFLAREACCOUNTRequest) ToMap() (map[string]interface{}, er
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
+	toSerialize["immutable_key"] = o.ImmutableKey
 	toSerialize["api_key"] = o.ApiKey
 
 	for key, value := range o.AdditionalProperties {
@@ -292,6 +319,7 @@ func (o *CreateAssetCLOUDFLAREACCOUNTRequest) UnmarshalJSON(data []byte) (err er
 	requiredProperties := []string{
 		"asset_class",
 		"asset_type",
+		"immutable_key",
 		"api_key",
 	}
 
@@ -328,6 +356,7 @@ func (o *CreateAssetCLOUDFLAREACCOUNTRequest) UnmarshalJSON(data []byte) (err er
 		delete(additionalProperties, "extra_metadata")
 		delete(additionalProperties, "asset_type")
 		delete(additionalProperties, "name")
+		delete(additionalProperties, "immutable_key")
 		delete(additionalProperties, "api_key")
 		o.AdditionalProperties = additionalProperties
 	}

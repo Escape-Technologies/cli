@@ -194,6 +194,7 @@ type ProfileDetailedConfigurationSecurityTests struct {
 	Xxe *ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure `json:"xxe,omitempty"`
 	ZombieObject *ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure `json:"zombie_object,omitempty"`
 	FlaskSessionCookie *ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure `json:"flask_session_cookie,omitempty"`
+	RowLevelSecurity *ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure `json:"row_level_security,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -5816,6 +5817,38 @@ func (o *ProfileDetailedConfigurationSecurityTests) SetFlaskSessionCookie(v Prof
 	o.FlaskSessionCookie = &v
 }
 
+// GetRowLevelSecurity returns the RowLevelSecurity field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationSecurityTests) GetRowLevelSecurity() ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure {
+	if o == nil || IsNil(o.RowLevelSecurity) {
+		var ret ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure
+		return ret
+	}
+	return *o.RowLevelSecurity
+}
+
+// GetRowLevelSecurityOk returns a tuple with the RowLevelSecurity field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationSecurityTests) GetRowLevelSecurityOk() (*ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure, bool) {
+	if o == nil || IsNil(o.RowLevelSecurity) {
+		return nil, false
+	}
+	return o.RowLevelSecurity, true
+}
+
+// HasRowLevelSecurity returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationSecurityTests) HasRowLevelSecurity() bool {
+	if o != nil && !IsNil(o.RowLevelSecurity) {
+		return true
+	}
+
+	return false
+}
+
+// SetRowLevelSecurity gets a reference to the given ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure and assigns it to the RowLevelSecurity field.
+func (o *ProfileDetailedConfigurationSecurityTests) SetRowLevelSecurity(v ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure) {
+	o.RowLevelSecurity = &v
+}
+
 func (o ProfileDetailedConfigurationSecurityTests) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -6351,6 +6384,9 @@ func (o ProfileDetailedConfigurationSecurityTests) ToMap() (map[string]interface
 	if !IsNil(o.FlaskSessionCookie) {
 		toSerialize["flask_session_cookie"] = o.FlaskSessionCookie
 	}
+	if !IsNil(o.RowLevelSecurity) {
+		toSerialize["row_level_security"] = o.RowLevelSecurity
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -6548,6 +6584,7 @@ func (o *ProfileDetailedConfigurationSecurityTests) UnmarshalJSON(data []byte) (
 		delete(additionalProperties, "xxe")
 		delete(additionalProperties, "zombie_object")
 		delete(additionalProperties, "flask_session_cookie")
+		delete(additionalProperties, "row_level_security")
 		o.AdditionalProperties = additionalProperties
 	}
 

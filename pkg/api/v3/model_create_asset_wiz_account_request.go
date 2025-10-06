@@ -26,6 +26,7 @@ type CreateAssetWIZACCOUNTRequest struct {
 	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
 	AssetType ENUMWIZACCOUNT `json:"asset_type"`
 	Name *string `json:"name,omitempty"`
+	ImmutableKey string `json:"immutable_key"`
 	ClientId string `json:"client_id"`
 	ClientSecret string `json:"client_secret"`
 	TokenUri string `json:"token_uri"`
@@ -39,10 +40,11 @@ type _CreateAssetWIZACCOUNTRequest CreateAssetWIZACCOUNTRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetWIZACCOUNTRequest(assetClass ENUMCSPM, assetType ENUMWIZACCOUNT, clientId string, clientSecret string, tokenUri string, apiEndpoint string) *CreateAssetWIZACCOUNTRequest {
+func NewCreateAssetWIZACCOUNTRequest(assetClass ENUMCSPM, assetType ENUMWIZACCOUNT, immutableKey string, clientId string, clientSecret string, tokenUri string, apiEndpoint string) *CreateAssetWIZACCOUNTRequest {
 	this := CreateAssetWIZACCOUNTRequest{}
 	this.AssetClass = assetClass
 	this.AssetType = assetType
+	this.ImmutableKey = immutableKey
 	this.ClientId = clientId
 	this.ClientSecret = clientSecret
 	this.TokenUri = tokenUri
@@ -234,6 +236,30 @@ func (o *CreateAssetWIZACCOUNTRequest) SetName(v string) {
 	o.Name = &v
 }
 
+// GetImmutableKey returns the ImmutableKey field value
+func (o *CreateAssetWIZACCOUNTRequest) GetImmutableKey() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.ImmutableKey
+}
+
+// GetImmutableKeyOk returns a tuple with the ImmutableKey field value
+// and a boolean to check if the value has been set.
+func (o *CreateAssetWIZACCOUNTRequest) GetImmutableKeyOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ImmutableKey, true
+}
+
+// SetImmutableKey sets field value
+func (o *CreateAssetWIZACCOUNTRequest) SetImmutableKey(v string) {
+	o.ImmutableKey = v
+}
+
 // GetClientId returns the ClientId field value
 func (o *CreateAssetWIZACCOUNTRequest) GetClientId() string {
 	if o == nil {
@@ -354,6 +380,7 @@ func (o CreateAssetWIZACCOUNTRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
+	toSerialize["immutable_key"] = o.ImmutableKey
 	toSerialize["client_id"] = o.ClientId
 	toSerialize["client_secret"] = o.ClientSecret
 	toSerialize["token_uri"] = o.TokenUri
@@ -373,6 +400,7 @@ func (o *CreateAssetWIZACCOUNTRequest) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"asset_class",
 		"asset_type",
+		"immutable_key",
 		"client_id",
 		"client_secret",
 		"token_uri",
@@ -412,6 +440,7 @@ func (o *CreateAssetWIZACCOUNTRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "extra_metadata")
 		delete(additionalProperties, "asset_type")
 		delete(additionalProperties, "name")
+		delete(additionalProperties, "immutable_key")
 		delete(additionalProperties, "client_id")
 		delete(additionalProperties, "client_secret")
 		delete(additionalProperties, "token_uri")
