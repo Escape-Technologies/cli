@@ -24,9 +24,12 @@ type ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11UsersInner str
 	Headers map[string]string `json:"headers,omitempty"`
 	Cookies map[string]string `json:"cookies,omitempty"`
 	QueryParameters map[string]string `json:"query_parameters,omitempty"`
+	MainUser *bool `json:"main_user,omitempty"`
+	Basic *string `json:"basic,omitempty"`
+	Digest *string `json:"digest,omitempty"`
 	Password string `json:"password"`
 	AdditionalFields []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11UsersInnerAdditionalFieldsInner `json:"additional_fields,omitempty"`
-	PostLoginActions []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11UsersInnerPostLoginActionsInner `json:"post_login_actions,omitempty"`
+	PostLoginActions []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3UsersInnerPostLoginActionsInner `json:"post_login_actions,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -171,6 +174,102 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11UsersInner
 	o.QueryParameters = v
 }
 
+// GetMainUser returns the MainUser field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11UsersInner) GetMainUser() bool {
+	if o == nil || IsNil(o.MainUser) {
+		var ret bool
+		return ret
+	}
+	return *o.MainUser
+}
+
+// GetMainUserOk returns a tuple with the MainUser field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11UsersInner) GetMainUserOk() (*bool, bool) {
+	if o == nil || IsNil(o.MainUser) {
+		return nil, false
+	}
+	return o.MainUser, true
+}
+
+// HasMainUser returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11UsersInner) HasMainUser() bool {
+	if o != nil && !IsNil(o.MainUser) {
+		return true
+	}
+
+	return false
+}
+
+// SetMainUser gets a reference to the given bool and assigns it to the MainUser field.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11UsersInner) SetMainUser(v bool) {
+	o.MainUser = &v
+}
+
+// GetBasic returns the Basic field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11UsersInner) GetBasic() string {
+	if o == nil || IsNil(o.Basic) {
+		var ret string
+		return ret
+	}
+	return *o.Basic
+}
+
+// GetBasicOk returns a tuple with the Basic field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11UsersInner) GetBasicOk() (*string, bool) {
+	if o == nil || IsNil(o.Basic) {
+		return nil, false
+	}
+	return o.Basic, true
+}
+
+// HasBasic returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11UsersInner) HasBasic() bool {
+	if o != nil && !IsNil(o.Basic) {
+		return true
+	}
+
+	return false
+}
+
+// SetBasic gets a reference to the given string and assigns it to the Basic field.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11UsersInner) SetBasic(v string) {
+	o.Basic = &v
+}
+
+// GetDigest returns the Digest field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11UsersInner) GetDigest() string {
+	if o == nil || IsNil(o.Digest) {
+		var ret string
+		return ret
+	}
+	return *o.Digest
+}
+
+// GetDigestOk returns a tuple with the Digest field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11UsersInner) GetDigestOk() (*string, bool) {
+	if o == nil || IsNil(o.Digest) {
+		return nil, false
+	}
+	return o.Digest, true
+}
+
+// HasDigest returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11UsersInner) HasDigest() bool {
+	if o != nil && !IsNil(o.Digest) {
+		return true
+	}
+
+	return false
+}
+
+// SetDigest gets a reference to the given string and assigns it to the Digest field.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11UsersInner) SetDigest(v string) {
+	o.Digest = &v
+}
+
 // GetPassword returns the Password field value
 func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11UsersInner) GetPassword() string {
 	if o == nil {
@@ -228,9 +327,9 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11UsersInner
 }
 
 // GetPostLoginActions returns the PostLoginActions field value if set, zero value otherwise.
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11UsersInner) GetPostLoginActions() []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11UsersInnerPostLoginActionsInner {
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11UsersInner) GetPostLoginActions() []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3UsersInnerPostLoginActionsInner {
 	if o == nil || IsNil(o.PostLoginActions) {
-		var ret []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11UsersInnerPostLoginActionsInner
+		var ret []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3UsersInnerPostLoginActionsInner
 		return ret
 	}
 	return o.PostLoginActions
@@ -238,7 +337,7 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11UsersInner
 
 // GetPostLoginActionsOk returns a tuple with the PostLoginActions field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11UsersInner) GetPostLoginActionsOk() ([]ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11UsersInnerPostLoginActionsInner, bool) {
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11UsersInner) GetPostLoginActionsOk() ([]ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3UsersInnerPostLoginActionsInner, bool) {
 	if o == nil || IsNil(o.PostLoginActions) {
 		return nil, false
 	}
@@ -254,8 +353,8 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11UsersInner
 	return false
 }
 
-// SetPostLoginActions gets a reference to the given []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11UsersInnerPostLoginActionsInner and assigns it to the PostLoginActions field.
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11UsersInner) SetPostLoginActions(v []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11UsersInnerPostLoginActionsInner) {
+// SetPostLoginActions gets a reference to the given []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3UsersInnerPostLoginActionsInner and assigns it to the PostLoginActions field.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11UsersInner) SetPostLoginActions(v []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3UsersInnerPostLoginActionsInner) {
 	o.PostLoginActions = v
 }
 
@@ -278,6 +377,15 @@ func (o ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11UsersInner)
 	}
 	if !IsNil(o.QueryParameters) {
 		toSerialize["query_parameters"] = o.QueryParameters
+	}
+	if !IsNil(o.MainUser) {
+		toSerialize["main_user"] = o.MainUser
+	}
+	if !IsNil(o.Basic) {
+		toSerialize["basic"] = o.Basic
+	}
+	if !IsNil(o.Digest) {
+		toSerialize["digest"] = o.Digest
 	}
 	toSerialize["password"] = o.Password
 	if !IsNil(o.AdditionalFields) {
@@ -334,6 +442,9 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11UsersInner
 		delete(additionalProperties, "headers")
 		delete(additionalProperties, "cookies")
 		delete(additionalProperties, "query_parameters")
+		delete(additionalProperties, "main_user")
+		delete(additionalProperties, "basic")
+		delete(additionalProperties, "digest")
 		delete(additionalProperties, "password")
 		delete(additionalProperties, "additional_fields")
 		delete(additionalProperties, "post_login_actions")

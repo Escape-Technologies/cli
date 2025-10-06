@@ -23,7 +23,7 @@ type CustomRuleRuleOneOf1 struct {
 	Id string `json:"id"`
 	Alert CreateCustomRuleRequestContentRuleOneOfAlert `json:"alert"`
 	Type ENUMWEBAPP `json:"type"`
-	Seed []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11UsersInnerPostLoginActionsInner `json:"seed"`
+	Seed []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3UsersInnerPostLoginActionsInner `json:"seed"`
 	Detect []CreateCustomRuleRequestContentRuleOneOf1DetectInner `json:"detect"`
 	AdditionalProperties map[string]interface{}
 }
@@ -34,7 +34,7 @@ type _CustomRuleRuleOneOf1 CustomRuleRuleOneOf1
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCustomRuleRuleOneOf1(id string, alert CreateCustomRuleRequestContentRuleOneOfAlert, type_ ENUMWEBAPP, seed []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11UsersInnerPostLoginActionsInner, detect []CreateCustomRuleRequestContentRuleOneOf1DetectInner) *CustomRuleRuleOneOf1 {
+func NewCustomRuleRuleOneOf1(id string, alert CreateCustomRuleRequestContentRuleOneOfAlert, type_ ENUMWEBAPP, seed []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3UsersInnerPostLoginActionsInner, detect []CreateCustomRuleRequestContentRuleOneOf1DetectInner) *CustomRuleRuleOneOf1 {
 	this := CustomRuleRuleOneOf1{}
 	this.Id = id
 	this.Alert = alert
@@ -125,9 +125,9 @@ func (o *CustomRuleRuleOneOf1) SetType(v ENUMWEBAPP) {
 }
 
 // GetSeed returns the Seed field value
-func (o *CustomRuleRuleOneOf1) GetSeed() []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11UsersInnerPostLoginActionsInner {
+func (o *CustomRuleRuleOneOf1) GetSeed() []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3UsersInnerPostLoginActionsInner {
 	if o == nil {
-		var ret []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11UsersInnerPostLoginActionsInner
+		var ret []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3UsersInnerPostLoginActionsInner
 		return ret
 	}
 
@@ -136,7 +136,7 @@ func (o *CustomRuleRuleOneOf1) GetSeed() []ProfileDetailedConfigurationAuthentic
 
 // GetSeedOk returns a tuple with the Seed field value
 // and a boolean to check if the value has been set.
-func (o *CustomRuleRuleOneOf1) GetSeedOk() ([]ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11UsersInnerPostLoginActionsInner, bool) {
+func (o *CustomRuleRuleOneOf1) GetSeedOk() ([]ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3UsersInnerPostLoginActionsInner, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -144,7 +144,7 @@ func (o *CustomRuleRuleOneOf1) GetSeedOk() ([]ProfileDetailedConfigurationAuthen
 }
 
 // SetSeed sets field value
-func (o *CustomRuleRuleOneOf1) SetSeed(v []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11UsersInnerPostLoginActionsInner) {
+func (o *CustomRuleRuleOneOf1) SetSeed(v []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3UsersInnerPostLoginActionsInner) {
 	o.Seed = v
 }
 

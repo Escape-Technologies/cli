@@ -20,7 +20,9 @@ var _ MappedNullable = &CreateTagRequest{}
 
 // CreateTagRequest struct for CreateTagRequest
 type CreateTagRequest struct {
+	// The name of the tag
 	Name string `json:"name"`
+	// The color of the tag (hexadecimal color code)
 	Color string `json:"color"`
 	AdditionalProperties map[string]interface{}
 }

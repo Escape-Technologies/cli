@@ -32,10 +32,12 @@ type ProfileDetailedConfigurationFrontendDast struct {
 	EscapeUserHeader *bool `json:"escape_user_header,omitempty"`
 	PrefetchSitemap *bool `json:"prefetch_sitemap,omitempty"`
 	BlocklistedElementSelectors []string `json:"blocklisted_element_selectors,omitempty"`
+	WhitelistElementSelectors []string `json:"whitelist_element_selectors,omitempty"`
 	MaxQueryParamsVisits *float32 `json:"max_query_params_visits,omitempty"`
 	MaxFragmentsVisits *float32 `json:"max_fragments_visits,omitempty"`
 	MaxParameterOccurence *float32 `json:"max_parameter_occurence,omitempty"`
 	SecurityChecksEnabled []ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSECURITYCHECKSENABLEDITEMS `json:"security_checks_enabled,omitempty"`
+	ApiChecksDuringAuth *bool `json:"api_checks_during_auth,omitempty"`
 	AllowedUrlPatterns []string `json:"allowed_url_patterns,omitempty"`
 	LogoutDetection *ProfileDetailedConfigurationFrontendDastLogoutDetection `json:"logout_detection,omitempty"`
 	AgenticScanning *bool `json:"agentic_scanning,omitempty"`
@@ -479,6 +481,38 @@ func (o *ProfileDetailedConfigurationFrontendDast) SetBlocklistedElementSelector
 	o.BlocklistedElementSelectors = v
 }
 
+// GetWhitelistElementSelectors returns the WhitelistElementSelectors field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationFrontendDast) GetWhitelistElementSelectors() []string {
+	if o == nil || IsNil(o.WhitelistElementSelectors) {
+		var ret []string
+		return ret
+	}
+	return o.WhitelistElementSelectors
+}
+
+// GetWhitelistElementSelectorsOk returns a tuple with the WhitelistElementSelectors field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationFrontendDast) GetWhitelistElementSelectorsOk() ([]string, bool) {
+	if o == nil || IsNil(o.WhitelistElementSelectors) {
+		return nil, false
+	}
+	return o.WhitelistElementSelectors, true
+}
+
+// HasWhitelistElementSelectors returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationFrontendDast) HasWhitelistElementSelectors() bool {
+	if o != nil && !IsNil(o.WhitelistElementSelectors) {
+		return true
+	}
+
+	return false
+}
+
+// SetWhitelistElementSelectors gets a reference to the given []string and assigns it to the WhitelistElementSelectors field.
+func (o *ProfileDetailedConfigurationFrontendDast) SetWhitelistElementSelectors(v []string) {
+	o.WhitelistElementSelectors = v
+}
+
 // GetMaxQueryParamsVisits returns the MaxQueryParamsVisits field value if set, zero value otherwise.
 func (o *ProfileDetailedConfigurationFrontendDast) GetMaxQueryParamsVisits() float32 {
 	if o == nil || IsNil(o.MaxQueryParamsVisits) {
@@ -605,6 +639,38 @@ func (o *ProfileDetailedConfigurationFrontendDast) HasSecurityChecksEnabled() bo
 // SetSecurityChecksEnabled gets a reference to the given []ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSECURITYCHECKSENABLEDITEMS and assigns it to the SecurityChecksEnabled field.
 func (o *ProfileDetailedConfigurationFrontendDast) SetSecurityChecksEnabled(v []ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSECURITYCHECKSENABLEDITEMS) {
 	o.SecurityChecksEnabled = v
+}
+
+// GetApiChecksDuringAuth returns the ApiChecksDuringAuth field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationFrontendDast) GetApiChecksDuringAuth() bool {
+	if o == nil || IsNil(o.ApiChecksDuringAuth) {
+		var ret bool
+		return ret
+	}
+	return *o.ApiChecksDuringAuth
+}
+
+// GetApiChecksDuringAuthOk returns a tuple with the ApiChecksDuringAuth field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationFrontendDast) GetApiChecksDuringAuthOk() (*bool, bool) {
+	if o == nil || IsNil(o.ApiChecksDuringAuth) {
+		return nil, false
+	}
+	return o.ApiChecksDuringAuth, true
+}
+
+// HasApiChecksDuringAuth returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationFrontendDast) HasApiChecksDuringAuth() bool {
+	if o != nil && !IsNil(o.ApiChecksDuringAuth) {
+		return true
+	}
+
+	return false
+}
+
+// SetApiChecksDuringAuth gets a reference to the given bool and assigns it to the ApiChecksDuringAuth field.
+func (o *ProfileDetailedConfigurationFrontendDast) SetApiChecksDuringAuth(v bool) {
+	o.ApiChecksDuringAuth = &v
 }
 
 // GetAllowedUrlPatterns returns the AllowedUrlPatterns field value if set, zero value otherwise.
@@ -816,6 +882,9 @@ func (o ProfileDetailedConfigurationFrontendDast) ToMap() (map[string]interface{
 	if !IsNil(o.BlocklistedElementSelectors) {
 		toSerialize["blocklisted_element_selectors"] = o.BlocklistedElementSelectors
 	}
+	if !IsNil(o.WhitelistElementSelectors) {
+		toSerialize["whitelist_element_selectors"] = o.WhitelistElementSelectors
+	}
 	if !IsNil(o.MaxQueryParamsVisits) {
 		toSerialize["max_query_params_visits"] = o.MaxQueryParamsVisits
 	}
@@ -827,6 +896,9 @@ func (o ProfileDetailedConfigurationFrontendDast) ToMap() (map[string]interface{
 	}
 	if !IsNil(o.SecurityChecksEnabled) {
 		toSerialize["security_checks_enabled"] = o.SecurityChecksEnabled
+	}
+	if !IsNil(o.ApiChecksDuringAuth) {
+		toSerialize["api_checks_during_auth"] = o.ApiChecksDuringAuth
 	}
 	if !IsNil(o.AllowedUrlPatterns) {
 		toSerialize["allowed_url_patterns"] = o.AllowedUrlPatterns
@@ -878,10 +950,12 @@ func (o *ProfileDetailedConfigurationFrontendDast) UnmarshalJSON(data []byte) (e
 		delete(additionalProperties, "escape_user_header")
 		delete(additionalProperties, "prefetch_sitemap")
 		delete(additionalProperties, "blocklisted_element_selectors")
+		delete(additionalProperties, "whitelist_element_selectors")
 		delete(additionalProperties, "max_query_params_visits")
 		delete(additionalProperties, "max_fragments_visits")
 		delete(additionalProperties, "max_parameter_occurence")
 		delete(additionalProperties, "security_checks_enabled")
+		delete(additionalProperties, "api_checks_during_auth")
 		delete(additionalProperties, "allowed_url_patterns")
 		delete(additionalProperties, "logout_detection")
 		delete(additionalProperties, "agentic_scanning")

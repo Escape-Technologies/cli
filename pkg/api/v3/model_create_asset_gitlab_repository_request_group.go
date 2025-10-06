@@ -26,6 +26,7 @@ type CreateAssetGITLABREPOSITORYRequestGroup struct {
 	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
 	AssetType ENUMGITLABGROUP `json:"asset_type"`
 	Name *string `json:"name,omitempty"`
+	ImmutableKey string `json:"immutable_key"`
 	ApiKey string `json:"api_key"`
 	InstanceUrl *string `json:"instance_url,omitempty"`
 	LocationId *string `json:"location_id,omitempty"`
@@ -38,10 +39,11 @@ type _CreateAssetGITLABREPOSITORYRequestGroup CreateAssetGITLABREPOSITORYRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetGITLABREPOSITORYRequestGroup(assetClass ENUMSOURCECODEMANAGEMENT, assetType ENUMGITLABGROUP, apiKey string) *CreateAssetGITLABREPOSITORYRequestGroup {
+func NewCreateAssetGITLABREPOSITORYRequestGroup(assetClass ENUMSOURCECODEMANAGEMENT, assetType ENUMGITLABGROUP, immutableKey string, apiKey string) *CreateAssetGITLABREPOSITORYRequestGroup {
 	this := CreateAssetGITLABREPOSITORYRequestGroup{}
 	this.AssetClass = assetClass
 	this.AssetType = assetType
+	this.ImmutableKey = immutableKey
 	this.ApiKey = apiKey
 	return &this
 }
@@ -230,6 +232,30 @@ func (o *CreateAssetGITLABREPOSITORYRequestGroup) SetName(v string) {
 	o.Name = &v
 }
 
+// GetImmutableKey returns the ImmutableKey field value
+func (o *CreateAssetGITLABREPOSITORYRequestGroup) GetImmutableKey() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.ImmutableKey
+}
+
+// GetImmutableKeyOk returns a tuple with the ImmutableKey field value
+// and a boolean to check if the value has been set.
+func (o *CreateAssetGITLABREPOSITORYRequestGroup) GetImmutableKeyOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ImmutableKey, true
+}
+
+// SetImmutableKey sets field value
+func (o *CreateAssetGITLABREPOSITORYRequestGroup) SetImmutableKey(v string) {
+	o.ImmutableKey = v
+}
+
 // GetApiKey returns the ApiKey field value
 func (o *CreateAssetGITLABREPOSITORYRequestGroup) GetApiKey() string {
 	if o == nil {
@@ -342,6 +368,7 @@ func (o CreateAssetGITLABREPOSITORYRequestGroup) ToMap() (map[string]interface{}
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
+	toSerialize["immutable_key"] = o.ImmutableKey
 	toSerialize["api_key"] = o.ApiKey
 	if !IsNil(o.InstanceUrl) {
 		toSerialize["instance_url"] = o.InstanceUrl
@@ -364,6 +391,7 @@ func (o *CreateAssetGITLABREPOSITORYRequestGroup) UnmarshalJSON(data []byte) (er
 	requiredProperties := []string{
 		"asset_class",
 		"asset_type",
+		"immutable_key",
 		"api_key",
 	}
 
@@ -400,6 +428,7 @@ func (o *CreateAssetGITLABREPOSITORYRequestGroup) UnmarshalJSON(data []byte) (er
 		delete(additionalProperties, "extra_metadata")
 		delete(additionalProperties, "asset_type")
 		delete(additionalProperties, "name")
+		delete(additionalProperties, "immutable_key")
 		delete(additionalProperties, "api_key")
 		delete(additionalProperties, "instance_url")
 		delete(additionalProperties, "location_id")

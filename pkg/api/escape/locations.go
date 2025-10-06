@@ -85,10 +85,11 @@ func UpdateLocation(ctx context.Context, id string, name, sshPublicKey string) e
 	if err != nil {
 		return fmt.Errorf("unable to init client: %w", err)
 	}
+	enabled := true
 	req := client.LocationsAPI.UpdateLocation(ctx, id).UpdateLocationRequest(v3.UpdateLocationRequest{
-		Name:         name,
-		SshPublicKey: sshPublicKey,
-		Enabled:      true,
+		Name:         &name,
+		SshPublicKey: &sshPublicKey,
+		Enabled:      &enabled,
 	})
 	_, _, err = req.Execute()
 	if err != nil {
