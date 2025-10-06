@@ -90,7 +90,6 @@ func UpdateLocation(ctx context.Context, id string, name, sshPublicKey string) e
 		Name:         &name,
 		SshPublicKey: &sshPublicKey,
 		Enabled:      &enabled,
-		AdditionalProperties: map[string]interface{}{},
 	})
 	_, _, err = req.Execute()
 	if err != nil {
