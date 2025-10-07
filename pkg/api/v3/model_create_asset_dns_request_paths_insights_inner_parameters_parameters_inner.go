@@ -15,13 +15,13 @@ import (
 	"fmt"
 )
 
-// checks if the CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner{}
+// checks if the CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner{}
 
-// CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner struct for CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner
-type CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner struct {
+// CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner struct for CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner
+type CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner struct {
 	Name string `json:"name"`
-	In ENUMPROPERTIESPATHSINSIGHTSITEMSPROPERTIESOPERATIONPROPERTIESPARAMETERSITEMSPROPERTIESIN `json:"in"`
+	In ENUMPROPERTIESPATHSINSIGHTSITEMSPROPERTIESPARAMETERSPROPERTIESPARAMETERSITEMSPROPERTIESIN `json:"in"`
 	Required *bool `json:"required,omitempty"`
 	Deprecated *bool `json:"deprecated,omitempty"`
 	Description *string `json:"description,omitempty"`
@@ -29,35 +29,35 @@ type CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner struct {
 	Explode *bool `json:"explode,omitempty"`
 	AllowedReserved *bool `json:"allowedReserved,omitempty"`
 	Schema map[string]interface{} `json:"schema,omitempty"`
-	Example NullableCreateAssetDNSRequestPathsInsightsInnerOperationResponsesValueHeadersValueExample `json:"example,omitempty"`
-	Examples map[string]CreateAssetDNSRequestPathsInsightsInnerOperationResponsesValueHeadersValueExamplesValue `json:"examples,omitempty"`
-	Content map[string]CreateAssetDNSRequestPathsInsightsInnerOperationResponsesValueContentValue `json:"content,omitempty"`
+	Example NullableCreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample `json:"example,omitempty"`
+	Examples map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue `json:"examples,omitempty"`
+	Content map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValue `json:"content,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner
+type _CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner
 
-// NewCreateAssetDNSRequestPathsInsightsInnerOperationParametersInner instantiates a new CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner object
+// NewCreateAssetDNSRequestPathsInsightsInnerParametersParametersInner instantiates a new CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetDNSRequestPathsInsightsInnerOperationParametersInner(name string, in ENUMPROPERTIESPATHSINSIGHTSITEMSPROPERTIESOPERATIONPROPERTIESPARAMETERSITEMSPROPERTIESIN) *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner {
-	this := CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner{}
+func NewCreateAssetDNSRequestPathsInsightsInnerParametersParametersInner(name string, in ENUMPROPERTIESPATHSINSIGHTSITEMSPROPERTIESPARAMETERSPROPERTIESPARAMETERSITEMSPROPERTIESIN) *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner {
+	this := CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner{}
 	this.Name = name
 	this.In = in
 	return &this
 }
 
-// NewCreateAssetDNSRequestPathsInsightsInnerOperationParametersInnerWithDefaults instantiates a new CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner object
+// NewCreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerWithDefaults instantiates a new CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCreateAssetDNSRequestPathsInsightsInnerOperationParametersInnerWithDefaults() *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner {
-	this := CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner{}
+func NewCreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerWithDefaults() *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner {
+	this := CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner{}
 	return &this
 }
 
 // GetName returns the Name field value
-func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) GetName() string {
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) GetName() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -68,7 +68,7 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) GetNam
 
 // GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) GetNameOk() (*string, bool) {
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) GetNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -76,14 +76,14 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) GetNam
 }
 
 // SetName sets field value
-func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) SetName(v string) {
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) SetName(v string) {
 	o.Name = v
 }
 
 // GetIn returns the In field value
-func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) GetIn() ENUMPROPERTIESPATHSINSIGHTSITEMSPROPERTIESOPERATIONPROPERTIESPARAMETERSITEMSPROPERTIESIN {
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) GetIn() ENUMPROPERTIESPATHSINSIGHTSITEMSPROPERTIESPARAMETERSPROPERTIESPARAMETERSITEMSPROPERTIESIN {
 	if o == nil {
-		var ret ENUMPROPERTIESPATHSINSIGHTSITEMSPROPERTIESOPERATIONPROPERTIESPARAMETERSITEMSPROPERTIESIN
+		var ret ENUMPROPERTIESPATHSINSIGHTSITEMSPROPERTIESPARAMETERSPROPERTIESPARAMETERSITEMSPROPERTIESIN
 		return ret
 	}
 
@@ -92,7 +92,7 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) GetIn(
 
 // GetInOk returns a tuple with the In field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) GetInOk() (*ENUMPROPERTIESPATHSINSIGHTSITEMSPROPERTIESOPERATIONPROPERTIESPARAMETERSITEMSPROPERTIESIN, bool) {
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) GetInOk() (*ENUMPROPERTIESPATHSINSIGHTSITEMSPROPERTIESPARAMETERSPROPERTIESPARAMETERSITEMSPROPERTIESIN, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -100,12 +100,12 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) GetInO
 }
 
 // SetIn sets field value
-func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) SetIn(v ENUMPROPERTIESPATHSINSIGHTSITEMSPROPERTIESOPERATIONPROPERTIESPARAMETERSITEMSPROPERTIESIN) {
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) SetIn(v ENUMPROPERTIESPATHSINSIGHTSITEMSPROPERTIESPARAMETERSPROPERTIESPARAMETERSITEMSPROPERTIESIN) {
 	o.In = v
 }
 
 // GetRequired returns the Required field value if set, zero value otherwise.
-func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) GetRequired() bool {
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) GetRequired() bool {
 	if o == nil || IsNil(o.Required) {
 		var ret bool
 		return ret
@@ -115,7 +115,7 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) GetReq
 
 // GetRequiredOk returns a tuple with the Required field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) GetRequiredOk() (*bool, bool) {
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) GetRequiredOk() (*bool, bool) {
 	if o == nil || IsNil(o.Required) {
 		return nil, false
 	}
@@ -123,7 +123,7 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) GetReq
 }
 
 // HasRequired returns a boolean if a field has been set.
-func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) HasRequired() bool {
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) HasRequired() bool {
 	if o != nil && !IsNil(o.Required) {
 		return true
 	}
@@ -132,12 +132,12 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) HasReq
 }
 
 // SetRequired gets a reference to the given bool and assigns it to the Required field.
-func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) SetRequired(v bool) {
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) SetRequired(v bool) {
 	o.Required = &v
 }
 
 // GetDeprecated returns the Deprecated field value if set, zero value otherwise.
-func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) GetDeprecated() bool {
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) GetDeprecated() bool {
 	if o == nil || IsNil(o.Deprecated) {
 		var ret bool
 		return ret
@@ -147,7 +147,7 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) GetDep
 
 // GetDeprecatedOk returns a tuple with the Deprecated field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) GetDeprecatedOk() (*bool, bool) {
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) GetDeprecatedOk() (*bool, bool) {
 	if o == nil || IsNil(o.Deprecated) {
 		return nil, false
 	}
@@ -155,7 +155,7 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) GetDep
 }
 
 // HasDeprecated returns a boolean if a field has been set.
-func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) HasDeprecated() bool {
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) HasDeprecated() bool {
 	if o != nil && !IsNil(o.Deprecated) {
 		return true
 	}
@@ -164,12 +164,12 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) HasDep
 }
 
 // SetDeprecated gets a reference to the given bool and assigns it to the Deprecated field.
-func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) SetDeprecated(v bool) {
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) SetDeprecated(v bool) {
 	o.Deprecated = &v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
-func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) GetDescription() string {
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) GetDescription() string {
 	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
@@ -179,7 +179,7 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) GetDes
 
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) GetDescriptionOk() (*string, bool) {
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) GetDescriptionOk() (*string, bool) {
 	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
@@ -187,7 +187,7 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) GetDes
 }
 
 // HasDescription returns a boolean if a field has been set.
-func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) HasDescription() bool {
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) HasDescription() bool {
 	if o != nil && !IsNil(o.Description) {
 		return true
 	}
@@ -196,12 +196,12 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) HasDes
 }
 
 // SetDescription gets a reference to the given string and assigns it to the Description field.
-func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) SetDescription(v string) {
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) SetDescription(v string) {
 	o.Description = &v
 }
 
 // GetStyle returns the Style field value if set, zero value otherwise.
-func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) GetStyle() string {
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) GetStyle() string {
 	if o == nil || IsNil(o.Style) {
 		var ret string
 		return ret
@@ -211,7 +211,7 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) GetSty
 
 // GetStyleOk returns a tuple with the Style field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) GetStyleOk() (*string, bool) {
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) GetStyleOk() (*string, bool) {
 	if o == nil || IsNil(o.Style) {
 		return nil, false
 	}
@@ -219,7 +219,7 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) GetSty
 }
 
 // HasStyle returns a boolean if a field has been set.
-func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) HasStyle() bool {
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) HasStyle() bool {
 	if o != nil && !IsNil(o.Style) {
 		return true
 	}
@@ -228,12 +228,12 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) HasSty
 }
 
 // SetStyle gets a reference to the given string and assigns it to the Style field.
-func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) SetStyle(v string) {
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) SetStyle(v string) {
 	o.Style = &v
 }
 
 // GetExplode returns the Explode field value if set, zero value otherwise.
-func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) GetExplode() bool {
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) GetExplode() bool {
 	if o == nil || IsNil(o.Explode) {
 		var ret bool
 		return ret
@@ -243,7 +243,7 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) GetExp
 
 // GetExplodeOk returns a tuple with the Explode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) GetExplodeOk() (*bool, bool) {
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) GetExplodeOk() (*bool, bool) {
 	if o == nil || IsNil(o.Explode) {
 		return nil, false
 	}
@@ -251,7 +251,7 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) GetExp
 }
 
 // HasExplode returns a boolean if a field has been set.
-func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) HasExplode() bool {
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) HasExplode() bool {
 	if o != nil && !IsNil(o.Explode) {
 		return true
 	}
@@ -260,12 +260,12 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) HasExp
 }
 
 // SetExplode gets a reference to the given bool and assigns it to the Explode field.
-func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) SetExplode(v bool) {
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) SetExplode(v bool) {
 	o.Explode = &v
 }
 
 // GetAllowedReserved returns the AllowedReserved field value if set, zero value otherwise.
-func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) GetAllowedReserved() bool {
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) GetAllowedReserved() bool {
 	if o == nil || IsNil(o.AllowedReserved) {
 		var ret bool
 		return ret
@@ -275,7 +275,7 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) GetAll
 
 // GetAllowedReservedOk returns a tuple with the AllowedReserved field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) GetAllowedReservedOk() (*bool, bool) {
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) GetAllowedReservedOk() (*bool, bool) {
 	if o == nil || IsNil(o.AllowedReserved) {
 		return nil, false
 	}
@@ -283,7 +283,7 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) GetAll
 }
 
 // HasAllowedReserved returns a boolean if a field has been set.
-func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) HasAllowedReserved() bool {
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) HasAllowedReserved() bool {
 	if o != nil && !IsNil(o.AllowedReserved) {
 		return true
 	}
@@ -292,12 +292,12 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) HasAll
 }
 
 // SetAllowedReserved gets a reference to the given bool and assigns it to the AllowedReserved field.
-func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) SetAllowedReserved(v bool) {
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) SetAllowedReserved(v bool) {
 	o.AllowedReserved = &v
 }
 
 // GetSchema returns the Schema field value if set, zero value otherwise.
-func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) GetSchema() map[string]interface{} {
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) GetSchema() map[string]interface{} {
 	if o == nil || IsNil(o.Schema) {
 		var ret map[string]interface{}
 		return ret
@@ -307,7 +307,7 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) GetSch
 
 // GetSchemaOk returns a tuple with the Schema field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) GetSchemaOk() (map[string]interface{}, bool) {
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) GetSchemaOk() (map[string]interface{}, bool) {
 	if o == nil || IsNil(o.Schema) {
 		return map[string]interface{}{}, false
 	}
@@ -315,7 +315,7 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) GetSch
 }
 
 // HasSchema returns a boolean if a field has been set.
-func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) HasSchema() bool {
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) HasSchema() bool {
 	if o != nil && !IsNil(o.Schema) {
 		return true
 	}
@@ -324,14 +324,14 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) HasSch
 }
 
 // SetSchema gets a reference to the given map[string]interface{} and assigns it to the Schema field.
-func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) SetSchema(v map[string]interface{}) {
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) SetSchema(v map[string]interface{}) {
 	o.Schema = v
 }
 
 // GetExample returns the Example field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) GetExample() CreateAssetDNSRequestPathsInsightsInnerOperationResponsesValueHeadersValueExample {
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) GetExample() CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample {
 	if o == nil || IsNil(o.Example.Get()) {
-		var ret CreateAssetDNSRequestPathsInsightsInnerOperationResponsesValueHeadersValueExample
+		var ret CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample
 		return ret
 	}
 	return *o.Example.Get()
@@ -340,7 +340,7 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) GetExa
 // GetExampleOk returns a tuple with the Example field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) GetExampleOk() (*CreateAssetDNSRequestPathsInsightsInnerOperationResponsesValueHeadersValueExample, bool) {
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) GetExampleOk() (*CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -348,7 +348,7 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) GetExa
 }
 
 // HasExample returns a boolean if a field has been set.
-func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) HasExample() bool {
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) HasExample() bool {
 	if o != nil && o.Example.IsSet() {
 		return true
 	}
@@ -356,24 +356,24 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) HasExa
 	return false
 }
 
-// SetExample gets a reference to the given NullableCreateAssetDNSRequestPathsInsightsInnerOperationResponsesValueHeadersValueExample and assigns it to the Example field.
-func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) SetExample(v CreateAssetDNSRequestPathsInsightsInnerOperationResponsesValueHeadersValueExample) {
+// SetExample gets a reference to the given NullableCreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample and assigns it to the Example field.
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) SetExample(v CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample) {
 	o.Example.Set(&v)
 }
 // SetExampleNil sets the value for Example to be an explicit nil
-func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) SetExampleNil() {
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) SetExampleNil() {
 	o.Example.Set(nil)
 }
 
 // UnsetExample ensures that no value is present for Example, not even an explicit nil
-func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) UnsetExample() {
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) UnsetExample() {
 	o.Example.Unset()
 }
 
 // GetExamples returns the Examples field value if set, zero value otherwise.
-func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) GetExamples() map[string]CreateAssetDNSRequestPathsInsightsInnerOperationResponsesValueHeadersValueExamplesValue {
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) GetExamples() map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue {
 	if o == nil || IsNil(o.Examples) {
-		var ret map[string]CreateAssetDNSRequestPathsInsightsInnerOperationResponsesValueHeadersValueExamplesValue
+		var ret map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue
 		return ret
 	}
 	return o.Examples
@@ -381,15 +381,15 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) GetExa
 
 // GetExamplesOk returns a tuple with the Examples field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) GetExamplesOk() (map[string]CreateAssetDNSRequestPathsInsightsInnerOperationResponsesValueHeadersValueExamplesValue, bool) {
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) GetExamplesOk() (map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue, bool) {
 	if o == nil || IsNil(o.Examples) {
-		return map[string]CreateAssetDNSRequestPathsInsightsInnerOperationResponsesValueHeadersValueExamplesValue{}, false
+		return map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue{}, false
 	}
 	return o.Examples, true
 }
 
 // HasExamples returns a boolean if a field has been set.
-func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) HasExamples() bool {
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) HasExamples() bool {
 	if o != nil && !IsNil(o.Examples) {
 		return true
 	}
@@ -397,15 +397,15 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) HasExa
 	return false
 }
 
-// SetExamples gets a reference to the given map[string]CreateAssetDNSRequestPathsInsightsInnerOperationResponsesValueHeadersValueExamplesValue and assigns it to the Examples field.
-func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) SetExamples(v map[string]CreateAssetDNSRequestPathsInsightsInnerOperationResponsesValueHeadersValueExamplesValue) {
+// SetExamples gets a reference to the given map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue and assigns it to the Examples field.
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) SetExamples(v map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue) {
 	o.Examples = v
 }
 
 // GetContent returns the Content field value if set, zero value otherwise.
-func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) GetContent() map[string]CreateAssetDNSRequestPathsInsightsInnerOperationResponsesValueContentValue {
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) GetContent() map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValue {
 	if o == nil || IsNil(o.Content) {
-		var ret map[string]CreateAssetDNSRequestPathsInsightsInnerOperationResponsesValueContentValue
+		var ret map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValue
 		return ret
 	}
 	return o.Content
@@ -413,15 +413,15 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) GetCon
 
 // GetContentOk returns a tuple with the Content field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) GetContentOk() (map[string]CreateAssetDNSRequestPathsInsightsInnerOperationResponsesValueContentValue, bool) {
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) GetContentOk() (map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValue, bool) {
 	if o == nil || IsNil(o.Content) {
-		return map[string]CreateAssetDNSRequestPathsInsightsInnerOperationResponsesValueContentValue{}, false
+		return map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValue{}, false
 	}
 	return o.Content, true
 }
 
 // HasContent returns a boolean if a field has been set.
-func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) HasContent() bool {
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) HasContent() bool {
 	if o != nil && !IsNil(o.Content) {
 		return true
 	}
@@ -429,12 +429,12 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) HasCon
 	return false
 }
 
-// SetContent gets a reference to the given map[string]CreateAssetDNSRequestPathsInsightsInnerOperationResponsesValueContentValue and assigns it to the Content field.
-func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) SetContent(v map[string]CreateAssetDNSRequestPathsInsightsInnerOperationResponsesValueContentValue) {
+// SetContent gets a reference to the given map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValue and assigns it to the Content field.
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) SetContent(v map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValue) {
 	o.Content = v
 }
 
-func (o CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) MarshalJSON() ([]byte, error) {
+func (o CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -442,7 +442,7 @@ func (o CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) Marshal
 	return json.Marshal(toSerialize)
 }
 
-func (o CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) ToMap() (map[string]interface{}, error) {
+func (o CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["name"] = o.Name
 	toSerialize["in"] = o.In
@@ -484,7 +484,7 @@ func (o CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) ToMap()
 	return toSerialize, nil
 }
 
-func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) UnmarshalJSON(data []byte) (err error) {
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -507,15 +507,15 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) Unmars
 		}
 	}
 
-	varCreateAssetDNSRequestPathsInsightsInnerOperationParametersInner := _CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner{}
+	varCreateAssetDNSRequestPathsInsightsInnerParametersParametersInner := _CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner{}
 
-	err = json.Unmarshal(data, &varCreateAssetDNSRequestPathsInsightsInnerOperationParametersInner)
+	err = json.Unmarshal(data, &varCreateAssetDNSRequestPathsInsightsInnerParametersParametersInner)
 
 	if err != nil {
 		return err
 	}
 
-	*o = CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner(varCreateAssetDNSRequestPathsInsightsInnerOperationParametersInner)
+	*o = CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner(varCreateAssetDNSRequestPathsInsightsInnerParametersParametersInner)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -538,38 +538,38 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) Unmars
 	return err
 }
 
-type NullableCreateAssetDNSRequestPathsInsightsInnerOperationParametersInner struct {
-	value *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner
+type NullableCreateAssetDNSRequestPathsInsightsInnerParametersParametersInner struct {
+	value *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner
 	isSet bool
 }
 
-func (v NullableCreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) Get() *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner {
+func (v NullableCreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) Get() *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner {
 	return v.value
 }
 
-func (v *NullableCreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) Set(val *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) {
+func (v *NullableCreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) Set(val *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) IsSet() bool {
+func (v NullableCreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) Unset() {
+func (v *NullableCreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCreateAssetDNSRequestPathsInsightsInnerOperationParametersInner(val *CreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) *NullableCreateAssetDNSRequestPathsInsightsInnerOperationParametersInner {
-	return &NullableCreateAssetDNSRequestPathsInsightsInnerOperationParametersInner{value: val, isSet: true}
+func NewNullableCreateAssetDNSRequestPathsInsightsInnerParametersParametersInner(val *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) *NullableCreateAssetDNSRequestPathsInsightsInnerParametersParametersInner {
+	return &NullableCreateAssetDNSRequestPathsInsightsInnerParametersParametersInner{value: val, isSet: true}
 }
 
-func (v NullableCreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) MarshalJSON() ([]byte, error) {
+func (v NullableCreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCreateAssetDNSRequestPathsInsightsInnerOperationParametersInner) UnmarshalJSON(src []byte) error {
+func (v *NullableCreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

@@ -20,7 +20,7 @@ var _ MappedNullable = &ProfileDetailedConfigurationAuthenticationProceduresInne
 
 // ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters struct for ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters
 type ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters struct {
-	Proxy *string `json:"proxy,omitempty"`
+	ProxyOverride *string `json:"proxy_override,omitempty"`
 	Url string `json:"url"`
 	Method ENUMPROPERTIESCONFIGURATIONPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS0PROPERTIESPARAMETERSPROPERTIESMETHOD `json:"method"`
 	Headers []ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner `json:"headers"`
@@ -57,36 +57,36 @@ func NewProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInner
 	return &this
 }
 
-// GetProxy returns the Proxy field value if set, zero value otherwise.
-func (o *ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters) GetProxy() string {
-	if o == nil || IsNil(o.Proxy) {
+// GetProxyOverride returns the ProxyOverride field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters) GetProxyOverride() string {
+	if o == nil || IsNil(o.ProxyOverride) {
 		var ret string
 		return ret
 	}
-	return *o.Proxy
+	return *o.ProxyOverride
 }
 
-// GetProxyOk returns a tuple with the Proxy field value if set, nil otherwise
+// GetProxyOverrideOk returns a tuple with the ProxyOverride field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters) GetProxyOk() (*string, bool) {
-	if o == nil || IsNil(o.Proxy) {
+func (o *ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters) GetProxyOverrideOk() (*string, bool) {
+	if o == nil || IsNil(o.ProxyOverride) {
 		return nil, false
 	}
-	return o.Proxy, true
+	return o.ProxyOverride, true
 }
 
-// HasProxy returns a boolean if a field has been set.
-func (o *ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters) HasProxy() bool {
-	if o != nil && !IsNil(o.Proxy) {
+// HasProxyOverride returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters) HasProxyOverride() bool {
+	if o != nil && !IsNil(o.ProxyOverride) {
 		return true
 	}
 
 	return false
 }
 
-// SetProxy gets a reference to the given string and assigns it to the Proxy field.
-func (o *ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters) SetProxy(v string) {
-	o.Proxy = &v
+// SetProxyOverride gets a reference to the given string and assigns it to the ProxyOverride field.
+func (o *ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters) SetProxyOverride(v string) {
+	o.ProxyOverride = &v
 }
 
 // GetUrl returns the Url field value
@@ -348,8 +348,8 @@ func (o ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInner
 
 func (o ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Proxy) {
-		toSerialize["proxy"] = o.Proxy
+	if !IsNil(o.ProxyOverride) {
+		toSerialize["proxy_override"] = o.ProxyOverride
 	}
 	toSerialize["url"] = o.Url
 	toSerialize["method"] = o.Method
@@ -415,7 +415,7 @@ func (o *ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInne
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "proxy")
+		delete(additionalProperties, "proxy_override")
 		delete(additionalProperties, "url")
 		delete(additionalProperties, "method")
 		delete(additionalProperties, "headers")

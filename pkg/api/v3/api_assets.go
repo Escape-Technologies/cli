@@ -35,7 +35,7 @@ func (r ApiCreateAssetAKAMAIACCOUNTRequest) CreateAssetAKAMAIACCOUNTRequest(crea
 	return r
 }
 
-func (r ApiCreateAssetAKAMAIACCOUNTRequest) Execute() (*CreateAssetAKAMAIACCOUNTRequest, *http.Response, error) {
+func (r ApiCreateAssetAKAMAIACCOUNTRequest) Execute() (*AssetDetailed, *http.Response, error) {
 	return r.ApiService.CreateAssetAKAMAIACCOUNTExecute(r)
 }
 
@@ -55,13 +55,13 @@ func (a *AssetsAPIService) CreateAssetAKAMAIACCOUNT(ctx context.Context) ApiCrea
 }
 
 // Execute executes the request
-//  @return CreateAssetAKAMAIACCOUNTRequest
-func (a *AssetsAPIService) CreateAssetAKAMAIACCOUNTExecute(r ApiCreateAssetAKAMAIACCOUNTRequest) (*CreateAssetAKAMAIACCOUNTRequest, *http.Response, error) {
+//  @return AssetDetailed
+func (a *AssetsAPIService) CreateAssetAKAMAIACCOUNTExecute(r ApiCreateAssetAKAMAIACCOUNTRequest) (*AssetDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateAssetAKAMAIACCOUNTRequest
+		localVarReturnValue  *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetAKAMAIACCOUNT")
@@ -167,7 +167,7 @@ func (r ApiCreateAssetAWSACCOUNTRequest) CreateAssetAWSACCOUNTRequest(createAsse
 	return r
 }
 
-func (r ApiCreateAssetAWSACCOUNTRequest) Execute() (*CreateAssetAWSACCOUNTRequest, *http.Response, error) {
+func (r ApiCreateAssetAWSACCOUNTRequest) Execute() (*AssetDetailed, *http.Response, error) {
 	return r.ApiService.CreateAssetAWSACCOUNTExecute(r)
 }
 
@@ -187,13 +187,13 @@ func (a *AssetsAPIService) CreateAssetAWSACCOUNT(ctx context.Context) ApiCreateA
 }
 
 // Execute executes the request
-//  @return CreateAssetAWSACCOUNTRequest
-func (a *AssetsAPIService) CreateAssetAWSACCOUNTExecute(r ApiCreateAssetAWSACCOUNTRequest) (*CreateAssetAWSACCOUNTRequest, *http.Response, error) {
+//  @return AssetDetailed
+func (a *AssetsAPIService) CreateAssetAWSACCOUNTExecute(r ApiCreateAssetAWSACCOUNTRequest) (*AssetDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateAssetAWSACCOUNTRequest
+		localVarReturnValue  *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetAWSACCOUNT")
@@ -299,7 +299,7 @@ func (r ApiCreateAssetAZURETENANTRequest) CreateAssetAZURETENANTRequest(createAs
 	return r
 }
 
-func (r ApiCreateAssetAZURETENANTRequest) Execute() (*CreateAssetAZURETENANTRequest, *http.Response, error) {
+func (r ApiCreateAssetAZURETENANTRequest) Execute() (*AssetDetailed, *http.Response, error) {
 	return r.ApiService.CreateAssetAZURETENANTExecute(r)
 }
 
@@ -319,13 +319,13 @@ func (a *AssetsAPIService) CreateAssetAZURETENANT(ctx context.Context) ApiCreate
 }
 
 // Execute executes the request
-//  @return CreateAssetAZURETENANTRequest
-func (a *AssetsAPIService) CreateAssetAZURETENANTExecute(r ApiCreateAssetAZURETENANTRequest) (*CreateAssetAZURETENANTRequest, *http.Response, error) {
+//  @return AssetDetailed
+func (a *AssetsAPIService) CreateAssetAZURETENANTExecute(r ApiCreateAssetAZURETENANTRequest) (*AssetDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateAssetAZURETENANTRequest
+		localVarReturnValue  *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetAZURETENANT")
@@ -431,7 +431,7 @@ func (r ApiCreateAssetCLOUDFLAREACCOUNTRequest) CreateAssetCLOUDFLAREACCOUNTRequ
 	return r
 }
 
-func (r ApiCreateAssetCLOUDFLAREACCOUNTRequest) Execute() (*CreateAssetCLOUDFLAREACCOUNTRequest, *http.Response, error) {
+func (r ApiCreateAssetCLOUDFLAREACCOUNTRequest) Execute() (*AssetDetailed, *http.Response, error) {
 	return r.ApiService.CreateAssetCLOUDFLAREACCOUNTExecute(r)
 }
 
@@ -451,13 +451,13 @@ func (a *AssetsAPIService) CreateAssetCLOUDFLAREACCOUNT(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return CreateAssetCLOUDFLAREACCOUNTRequest
-func (a *AssetsAPIService) CreateAssetCLOUDFLAREACCOUNTExecute(r ApiCreateAssetCLOUDFLAREACCOUNTRequest) (*CreateAssetCLOUDFLAREACCOUNTRequest, *http.Response, error) {
+//  @return AssetDetailed
+func (a *AssetsAPIService) CreateAssetCLOUDFLAREACCOUNTExecute(r ApiCreateAssetCLOUDFLAREACCOUNTRequest) (*AssetDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateAssetCLOUDFLAREACCOUNTRequest
+		localVarReturnValue  *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetCLOUDFLAREACCOUNT")
@@ -563,7 +563,7 @@ func (r ApiCreateAssetDNSRequest) CreateAssetDNSRequest(createAssetDNSRequest Cr
 	return r
 }
 
-func (r ApiCreateAssetDNSRequest) Execute() (*CreateAssetDNSRequest, *http.Response, error) {
+func (r ApiCreateAssetDNSRequest) Execute() (*AssetDetailed, *http.Response, error) {
 	return r.ApiService.CreateAssetDNSExecute(r)
 }
 
@@ -583,13 +583,13 @@ func (a *AssetsAPIService) CreateAssetDNS(ctx context.Context) ApiCreateAssetDNS
 }
 
 // Execute executes the request
-//  @return CreateAssetDNSRequest
-func (a *AssetsAPIService) CreateAssetDNSExecute(r ApiCreateAssetDNSRequest) (*CreateAssetDNSRequest, *http.Response, error) {
+//  @return AssetDetailed
+func (a *AssetsAPIService) CreateAssetDNSExecute(r ApiCreateAssetDNSRequest) (*AssetDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateAssetDNSRequest
+		localVarReturnValue  *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetDNS")
@@ -695,7 +695,7 @@ func (r ApiCreateAssetGCPPROJECTRequest) CreateAssetGCPPROJECTRequest(createAsse
 	return r
 }
 
-func (r ApiCreateAssetGCPPROJECTRequest) Execute() (*CreateAssetGCPPROJECTRequest, *http.Response, error) {
+func (r ApiCreateAssetGCPPROJECTRequest) Execute() (*AssetDetailed, *http.Response, error) {
 	return r.ApiService.CreateAssetGCPPROJECTExecute(r)
 }
 
@@ -715,13 +715,13 @@ func (a *AssetsAPIService) CreateAssetGCPPROJECT(ctx context.Context) ApiCreateA
 }
 
 // Execute executes the request
-//  @return CreateAssetGCPPROJECTRequest
-func (a *AssetsAPIService) CreateAssetGCPPROJECTExecute(r ApiCreateAssetGCPPROJECTRequest) (*CreateAssetGCPPROJECTRequest, *http.Response, error) {
+//  @return AssetDetailed
+func (a *AssetsAPIService) CreateAssetGCPPROJECTExecute(r ApiCreateAssetGCPPROJECTRequest) (*AssetDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateAssetGCPPROJECTRequest
+		localVarReturnValue  *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetGCPPROJECT")
@@ -827,7 +827,7 @@ func (r ApiCreateAssetGITHUBORGANIZATIONRequest) CreateAssetGITHUBORGANIZATIONRe
 	return r
 }
 
-func (r ApiCreateAssetGITHUBORGANIZATIONRequest) Execute() (*CreateAssetGITHUBORGANIZATIONRequest, *http.Response, error) {
+func (r ApiCreateAssetGITHUBORGANIZATIONRequest) Execute() (*AssetDetailed, *http.Response, error) {
 	return r.ApiService.CreateAssetGITHUBORGANIZATIONExecute(r)
 }
 
@@ -847,13 +847,13 @@ func (a *AssetsAPIService) CreateAssetGITHUBORGANIZATION(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//  @return CreateAssetGITHUBORGANIZATIONRequest
-func (a *AssetsAPIService) CreateAssetGITHUBORGANIZATIONExecute(r ApiCreateAssetGITHUBORGANIZATIONRequest) (*CreateAssetGITHUBORGANIZATIONRequest, *http.Response, error) {
+//  @return AssetDetailed
+func (a *AssetsAPIService) CreateAssetGITHUBORGANIZATIONExecute(r ApiCreateAssetGITHUBORGANIZATIONRequest) (*AssetDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateAssetGITHUBORGANIZATIONRequest
+		localVarReturnValue  *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetGITHUBORGANIZATION")
@@ -959,7 +959,7 @@ func (r ApiCreateAssetGITHUBREPOSITORYRequest) CreateAssetGITHUBREPOSITORYReques
 	return r
 }
 
-func (r ApiCreateAssetGITHUBREPOSITORYRequest) Execute() (*CreateAssetGITHUBREPOSITORYRequest, *http.Response, error) {
+func (r ApiCreateAssetGITHUBREPOSITORYRequest) Execute() (*AssetDetailed, *http.Response, error) {
 	return r.ApiService.CreateAssetGITHUBREPOSITORYExecute(r)
 }
 
@@ -979,13 +979,13 @@ func (a *AssetsAPIService) CreateAssetGITHUBREPOSITORY(ctx context.Context) ApiC
 }
 
 // Execute executes the request
-//  @return CreateAssetGITHUBREPOSITORYRequest
-func (a *AssetsAPIService) CreateAssetGITHUBREPOSITORYExecute(r ApiCreateAssetGITHUBREPOSITORYRequest) (*CreateAssetGITHUBREPOSITORYRequest, *http.Response, error) {
+//  @return AssetDetailed
+func (a *AssetsAPIService) CreateAssetGITHUBREPOSITORYExecute(r ApiCreateAssetGITHUBREPOSITORYRequest) (*AssetDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateAssetGITHUBREPOSITORYRequest
+		localVarReturnValue  *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetGITHUBREPOSITORY")
@@ -1091,7 +1091,7 @@ func (r ApiCreateAssetGITLABGROUPRequest) CreateAssetGITLABGROUPRequest(createAs
 	return r
 }
 
-func (r ApiCreateAssetGITLABGROUPRequest) Execute() (*CreateAssetGITLABGROUPRequest, *http.Response, error) {
+func (r ApiCreateAssetGITLABGROUPRequest) Execute() (*AssetDetailed, *http.Response, error) {
 	return r.ApiService.CreateAssetGITLABGROUPExecute(r)
 }
 
@@ -1111,13 +1111,13 @@ func (a *AssetsAPIService) CreateAssetGITLABGROUP(ctx context.Context) ApiCreate
 }
 
 // Execute executes the request
-//  @return CreateAssetGITLABGROUPRequest
-func (a *AssetsAPIService) CreateAssetGITLABGROUPExecute(r ApiCreateAssetGITLABGROUPRequest) (*CreateAssetGITLABGROUPRequest, *http.Response, error) {
+//  @return AssetDetailed
+func (a *AssetsAPIService) CreateAssetGITLABGROUPExecute(r ApiCreateAssetGITLABGROUPRequest) (*AssetDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateAssetGITLABGROUPRequest
+		localVarReturnValue  *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetGITLABGROUP")
@@ -1223,7 +1223,7 @@ func (r ApiCreateAssetGITLABREPOSITORYRequest) CreateAssetGITLABREPOSITORYReques
 	return r
 }
 
-func (r ApiCreateAssetGITLABREPOSITORYRequest) Execute() (*CreateAssetGITLABREPOSITORYRequest, *http.Response, error) {
+func (r ApiCreateAssetGITLABREPOSITORYRequest) Execute() (*AssetDetailed, *http.Response, error) {
 	return r.ApiService.CreateAssetGITLABREPOSITORYExecute(r)
 }
 
@@ -1243,13 +1243,13 @@ func (a *AssetsAPIService) CreateAssetGITLABREPOSITORY(ctx context.Context) ApiC
 }
 
 // Execute executes the request
-//  @return CreateAssetGITLABREPOSITORYRequest
-func (a *AssetsAPIService) CreateAssetGITLABREPOSITORYExecute(r ApiCreateAssetGITLABREPOSITORYRequest) (*CreateAssetGITLABREPOSITORYRequest, *http.Response, error) {
+//  @return AssetDetailed
+func (a *AssetsAPIService) CreateAssetGITLABREPOSITORYExecute(r ApiCreateAssetGITLABREPOSITORYRequest) (*AssetDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateAssetGITLABREPOSITORYRequest
+		localVarReturnValue  *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetGITLABREPOSITORY")
@@ -1355,7 +1355,7 @@ func (r ApiCreateAssetGRAPHQLRequest) CreateAssetGRAPHQLRequest(createAssetGRAPH
 	return r
 }
 
-func (r ApiCreateAssetGRAPHQLRequest) Execute() (*CreateAssetGRAPHQLRequest, *http.Response, error) {
+func (r ApiCreateAssetGRAPHQLRequest) Execute() (*AssetDetailed, *http.Response, error) {
 	return r.ApiService.CreateAssetGRAPHQLExecute(r)
 }
 
@@ -1375,13 +1375,13 @@ func (a *AssetsAPIService) CreateAssetGRAPHQL(ctx context.Context) ApiCreateAsse
 }
 
 // Execute executes the request
-//  @return CreateAssetGRAPHQLRequest
-func (a *AssetsAPIService) CreateAssetGRAPHQLExecute(r ApiCreateAssetGRAPHQLRequest) (*CreateAssetGRAPHQLRequest, *http.Response, error) {
+//  @return AssetDetailed
+func (a *AssetsAPIService) CreateAssetGRAPHQLExecute(r ApiCreateAssetGRAPHQLRequest) (*AssetDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateAssetGRAPHQLRequest
+		localVarReturnValue  *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetGRAPHQL")
@@ -1487,7 +1487,7 @@ func (r ApiCreateAssetGRPCRequest) CreateAssetGRPCRequest(createAssetGRPCRequest
 	return r
 }
 
-func (r ApiCreateAssetGRPCRequest) Execute() (*CreateAssetGRPCRequest, *http.Response, error) {
+func (r ApiCreateAssetGRPCRequest) Execute() (*AssetDetailed, *http.Response, error) {
 	return r.ApiService.CreateAssetGRPCExecute(r)
 }
 
@@ -1507,13 +1507,13 @@ func (a *AssetsAPIService) CreateAssetGRPC(ctx context.Context) ApiCreateAssetGR
 }
 
 // Execute executes the request
-//  @return CreateAssetGRPCRequest
-func (a *AssetsAPIService) CreateAssetGRPCExecute(r ApiCreateAssetGRPCRequest) (*CreateAssetGRPCRequest, *http.Response, error) {
+//  @return AssetDetailed
+func (a *AssetsAPIService) CreateAssetGRPCExecute(r ApiCreateAssetGRPCRequest) (*AssetDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateAssetGRPCRequest
+		localVarReturnValue  *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetGRPC")
@@ -1619,7 +1619,7 @@ func (r ApiCreateAssetIPV4Request) CreateAssetIPV4Request(createAssetIPV4Request
 	return r
 }
 
-func (r ApiCreateAssetIPV4Request) Execute() (*CreateAssetIPV4Request, *http.Response, error) {
+func (r ApiCreateAssetIPV4Request) Execute() (*AssetDetailed, *http.Response, error) {
 	return r.ApiService.CreateAssetIPV4Execute(r)
 }
 
@@ -1639,13 +1639,13 @@ func (a *AssetsAPIService) CreateAssetIPV4(ctx context.Context) ApiCreateAssetIP
 }
 
 // Execute executes the request
-//  @return CreateAssetIPV4Request
-func (a *AssetsAPIService) CreateAssetIPV4Execute(r ApiCreateAssetIPV4Request) (*CreateAssetIPV4Request, *http.Response, error) {
+//  @return AssetDetailed
+func (a *AssetsAPIService) CreateAssetIPV4Execute(r ApiCreateAssetIPV4Request) (*AssetDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateAssetIPV4Request
+		localVarReturnValue  *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetIPV4")
@@ -1751,7 +1751,7 @@ func (r ApiCreateAssetIPV6Request) CreateAssetIPV6Request(createAssetIPV6Request
 	return r
 }
 
-func (r ApiCreateAssetIPV6Request) Execute() (*CreateAssetIPV6Request, *http.Response, error) {
+func (r ApiCreateAssetIPV6Request) Execute() (*AssetDetailed, *http.Response, error) {
 	return r.ApiService.CreateAssetIPV6Execute(r)
 }
 
@@ -1771,13 +1771,13 @@ func (a *AssetsAPIService) CreateAssetIPV6(ctx context.Context) ApiCreateAssetIP
 }
 
 // Execute executes the request
-//  @return CreateAssetIPV6Request
-func (a *AssetsAPIService) CreateAssetIPV6Execute(r ApiCreateAssetIPV6Request) (*CreateAssetIPV6Request, *http.Response, error) {
+//  @return AssetDetailed
+func (a *AssetsAPIService) CreateAssetIPV6Execute(r ApiCreateAssetIPV6Request) (*AssetDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateAssetIPV6Request
+		localVarReturnValue  *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetIPV6")
@@ -1883,7 +1883,7 @@ func (r ApiCreateAssetKUBERNETESCLUSTERRequest) CreateAssetKUBERNETESCLUSTERRequ
 	return r
 }
 
-func (r ApiCreateAssetKUBERNETESCLUSTERRequest) Execute() (*CreateAssetKUBERNETESCLUSTERRequest, *http.Response, error) {
+func (r ApiCreateAssetKUBERNETESCLUSTERRequest) Execute() (*AssetDetailed, *http.Response, error) {
 	return r.ApiService.CreateAssetKUBERNETESCLUSTERExecute(r)
 }
 
@@ -1903,13 +1903,13 @@ func (a *AssetsAPIService) CreateAssetKUBERNETESCLUSTER(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return CreateAssetKUBERNETESCLUSTERRequest
-func (a *AssetsAPIService) CreateAssetKUBERNETESCLUSTERExecute(r ApiCreateAssetKUBERNETESCLUSTERRequest) (*CreateAssetKUBERNETESCLUSTERRequest, *http.Response, error) {
+//  @return AssetDetailed
+func (a *AssetsAPIService) CreateAssetKUBERNETESCLUSTERExecute(r ApiCreateAssetKUBERNETESCLUSTERRequest) (*AssetDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateAssetKUBERNETESCLUSTERRequest
+		localVarReturnValue  *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetKUBERNETESCLUSTER")
@@ -2015,7 +2015,7 @@ func (r ApiCreateAssetPOSTMANORGANIZATIONRequest) CreateAssetPOSTMANORGANIZATION
 	return r
 }
 
-func (r ApiCreateAssetPOSTMANORGANIZATIONRequest) Execute() (*CreateAssetPOSTMANORGANIZATIONRequest, *http.Response, error) {
+func (r ApiCreateAssetPOSTMANORGANIZATIONRequest) Execute() (*AssetDetailed, *http.Response, error) {
 	return r.ApiService.CreateAssetPOSTMANORGANIZATIONExecute(r)
 }
 
@@ -2035,13 +2035,13 @@ func (a *AssetsAPIService) CreateAssetPOSTMANORGANIZATION(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return CreateAssetPOSTMANORGANIZATIONRequest
-func (a *AssetsAPIService) CreateAssetPOSTMANORGANIZATIONExecute(r ApiCreateAssetPOSTMANORGANIZATIONRequest) (*CreateAssetPOSTMANORGANIZATIONRequest, *http.Response, error) {
+//  @return AssetDetailed
+func (a *AssetsAPIService) CreateAssetPOSTMANORGANIZATIONExecute(r ApiCreateAssetPOSTMANORGANIZATIONRequest) (*AssetDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateAssetPOSTMANORGANIZATIONRequest
+		localVarReturnValue  *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetPOSTMANORGANIZATION")
@@ -2147,7 +2147,7 @@ func (r ApiCreateAssetRESTRequest) CreateAssetRESTRequest(createAssetRESTRequest
 	return r
 }
 
-func (r ApiCreateAssetRESTRequest) Execute() (*CreateAssetRESTRequest, *http.Response, error) {
+func (r ApiCreateAssetRESTRequest) Execute() (*AssetDetailed, *http.Response, error) {
 	return r.ApiService.CreateAssetRESTExecute(r)
 }
 
@@ -2167,13 +2167,13 @@ func (a *AssetsAPIService) CreateAssetREST(ctx context.Context) ApiCreateAssetRE
 }
 
 // Execute executes the request
-//  @return CreateAssetRESTRequest
-func (a *AssetsAPIService) CreateAssetRESTExecute(r ApiCreateAssetRESTRequest) (*CreateAssetRESTRequest, *http.Response, error) {
+//  @return AssetDetailed
+func (a *AssetsAPIService) CreateAssetRESTExecute(r ApiCreateAssetRESTRequest) (*AssetDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateAssetRESTRequest
+		localVarReturnValue  *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetREST")
@@ -2411,7 +2411,7 @@ func (r ApiCreateAssetWEBAPPRequest) CreateAssetWEBAPPRequest(createAssetWEBAPPR
 	return r
 }
 
-func (r ApiCreateAssetWEBAPPRequest) Execute() (*CreateAssetWEBAPPRequest, *http.Response, error) {
+func (r ApiCreateAssetWEBAPPRequest) Execute() (*AssetDetailed, *http.Response, error) {
 	return r.ApiService.CreateAssetWEBAPPExecute(r)
 }
 
@@ -2431,13 +2431,13 @@ func (a *AssetsAPIService) CreateAssetWEBAPP(ctx context.Context) ApiCreateAsset
 }
 
 // Execute executes the request
-//  @return CreateAssetWEBAPPRequest
-func (a *AssetsAPIService) CreateAssetWEBAPPExecute(r ApiCreateAssetWEBAPPRequest) (*CreateAssetWEBAPPRequest, *http.Response, error) {
+//  @return AssetDetailed
+func (a *AssetsAPIService) CreateAssetWEBAPPExecute(r ApiCreateAssetWEBAPPRequest) (*AssetDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateAssetWEBAPPRequest
+		localVarReturnValue  *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetWEBAPP")
@@ -2543,7 +2543,7 @@ func (r ApiCreateAssetWEBSOCKETRequest) CreateAssetWEBSOCKETRequest(createAssetW
 	return r
 }
 
-func (r ApiCreateAssetWEBSOCKETRequest) Execute() (*CreateAssetWEBSOCKETRequest, *http.Response, error) {
+func (r ApiCreateAssetWEBSOCKETRequest) Execute() (*AssetDetailed, *http.Response, error) {
 	return r.ApiService.CreateAssetWEBSOCKETExecute(r)
 }
 
@@ -2563,13 +2563,13 @@ func (a *AssetsAPIService) CreateAssetWEBSOCKET(ctx context.Context) ApiCreateAs
 }
 
 // Execute executes the request
-//  @return CreateAssetWEBSOCKETRequest
-func (a *AssetsAPIService) CreateAssetWEBSOCKETExecute(r ApiCreateAssetWEBSOCKETRequest) (*CreateAssetWEBSOCKETRequest, *http.Response, error) {
+//  @return AssetDetailed
+func (a *AssetsAPIService) CreateAssetWEBSOCKETExecute(r ApiCreateAssetWEBSOCKETRequest) (*AssetDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateAssetWEBSOCKETRequest
+		localVarReturnValue  *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetWEBSOCKET")
@@ -2675,7 +2675,7 @@ func (r ApiCreateAssetWIZACCOUNTRequest) CreateAssetWIZACCOUNTRequest(createAsse
 	return r
 }
 
-func (r ApiCreateAssetWIZACCOUNTRequest) Execute() (*CreateAssetWIZACCOUNTRequest, *http.Response, error) {
+func (r ApiCreateAssetWIZACCOUNTRequest) Execute() (*AssetDetailed, *http.Response, error) {
 	return r.ApiService.CreateAssetWIZACCOUNTExecute(r)
 }
 
@@ -2695,13 +2695,13 @@ func (a *AssetsAPIService) CreateAssetWIZACCOUNT(ctx context.Context) ApiCreateA
 }
 
 // Execute executes the request
-//  @return CreateAssetWIZACCOUNTRequest
-func (a *AssetsAPIService) CreateAssetWIZACCOUNTExecute(r ApiCreateAssetWIZACCOUNTRequest) (*CreateAssetWIZACCOUNTRequest, *http.Response, error) {
+//  @return AssetDetailed
+func (a *AssetsAPIService) CreateAssetWIZACCOUNTExecute(r ApiCreateAssetWIZACCOUNTRequest) (*AssetDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateAssetWIZACCOUNTRequest
+		localVarReturnValue  *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetWIZACCOUNT")
