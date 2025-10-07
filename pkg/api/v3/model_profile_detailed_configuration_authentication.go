@@ -19,13 +19,13 @@ var _ MappedNullable = &ProfileDetailedConfigurationAuthentication{}
 
 // ProfileDetailedConfigurationAuthentication struct for ProfileDetailedConfigurationAuthentication
 type ProfileDetailedConfigurationAuthentication struct {
-	Lifetime *float32 `json:"lifetime,omitempty"`
 	Schema *string `json:"$schema,omitempty"`
+	Lifetime *float32 `json:"lifetime,omitempty"`
 	Procedures []ProfileDetailedConfigurationAuthenticationProceduresInner `json:"procedures,omitempty"`
-	Presets []ProfileDetailedConfigurationAuthenticationPresetsInner `json:"presets,omitempty"`
 	Users []ProfileDetailedConfigurationAuthenticationUsersInner `json:"users,omitempty"`
-	Proxy *string `json:"proxy,omitempty"`
 	Validation *bool `json:"validation,omitempty"`
+	Proxy *string `json:"proxy,omitempty"`
+	Presets []ProfileDetailedConfigurationAuthenticationPresetsInner `json:"presets,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -46,38 +46,6 @@ func NewProfileDetailedConfigurationAuthentication() *ProfileDetailedConfigurati
 func NewProfileDetailedConfigurationAuthenticationWithDefaults() *ProfileDetailedConfigurationAuthentication {
 	this := ProfileDetailedConfigurationAuthentication{}
 	return &this
-}
-
-// GetLifetime returns the Lifetime field value if set, zero value otherwise.
-func (o *ProfileDetailedConfigurationAuthentication) GetLifetime() float32 {
-	if o == nil || IsNil(o.Lifetime) {
-		var ret float32
-		return ret
-	}
-	return *o.Lifetime
-}
-
-// GetLifetimeOk returns a tuple with the Lifetime field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationAuthentication) GetLifetimeOk() (*float32, bool) {
-	if o == nil || IsNil(o.Lifetime) {
-		return nil, false
-	}
-	return o.Lifetime, true
-}
-
-// HasLifetime returns a boolean if a field has been set.
-func (o *ProfileDetailedConfigurationAuthentication) HasLifetime() bool {
-	if o != nil && !IsNil(o.Lifetime) {
-		return true
-	}
-
-	return false
-}
-
-// SetLifetime gets a reference to the given float32 and assigns it to the Lifetime field.
-func (o *ProfileDetailedConfigurationAuthentication) SetLifetime(v float32) {
-	o.Lifetime = &v
 }
 
 // GetSchema returns the Schema field value if set, zero value otherwise.
@@ -112,6 +80,38 @@ func (o *ProfileDetailedConfigurationAuthentication) SetSchema(v string) {
 	o.Schema = &v
 }
 
+// GetLifetime returns the Lifetime field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationAuthentication) GetLifetime() float32 {
+	if o == nil || IsNil(o.Lifetime) {
+		var ret float32
+		return ret
+	}
+	return *o.Lifetime
+}
+
+// GetLifetimeOk returns a tuple with the Lifetime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationAuthentication) GetLifetimeOk() (*float32, bool) {
+	if o == nil || IsNil(o.Lifetime) {
+		return nil, false
+	}
+	return o.Lifetime, true
+}
+
+// HasLifetime returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationAuthentication) HasLifetime() bool {
+	if o != nil && !IsNil(o.Lifetime) {
+		return true
+	}
+
+	return false
+}
+
+// SetLifetime gets a reference to the given float32 and assigns it to the Lifetime field.
+func (o *ProfileDetailedConfigurationAuthentication) SetLifetime(v float32) {
+	o.Lifetime = &v
+}
+
 // GetProcedures returns the Procedures field value if set, zero value otherwise.
 func (o *ProfileDetailedConfigurationAuthentication) GetProcedures() []ProfileDetailedConfigurationAuthenticationProceduresInner {
 	if o == nil || IsNil(o.Procedures) {
@@ -142,38 +142,6 @@ func (o *ProfileDetailedConfigurationAuthentication) HasProcedures() bool {
 // SetProcedures gets a reference to the given []ProfileDetailedConfigurationAuthenticationProceduresInner and assigns it to the Procedures field.
 func (o *ProfileDetailedConfigurationAuthentication) SetProcedures(v []ProfileDetailedConfigurationAuthenticationProceduresInner) {
 	o.Procedures = v
-}
-
-// GetPresets returns the Presets field value if set, zero value otherwise.
-func (o *ProfileDetailedConfigurationAuthentication) GetPresets() []ProfileDetailedConfigurationAuthenticationPresetsInner {
-	if o == nil || IsNil(o.Presets) {
-		var ret []ProfileDetailedConfigurationAuthenticationPresetsInner
-		return ret
-	}
-	return o.Presets
-}
-
-// GetPresetsOk returns a tuple with the Presets field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationAuthentication) GetPresetsOk() ([]ProfileDetailedConfigurationAuthenticationPresetsInner, bool) {
-	if o == nil || IsNil(o.Presets) {
-		return nil, false
-	}
-	return o.Presets, true
-}
-
-// HasPresets returns a boolean if a field has been set.
-func (o *ProfileDetailedConfigurationAuthentication) HasPresets() bool {
-	if o != nil && !IsNil(o.Presets) {
-		return true
-	}
-
-	return false
-}
-
-// SetPresets gets a reference to the given []ProfileDetailedConfigurationAuthenticationPresetsInner and assigns it to the Presets field.
-func (o *ProfileDetailedConfigurationAuthentication) SetPresets(v []ProfileDetailedConfigurationAuthenticationPresetsInner) {
-	o.Presets = v
 }
 
 // GetUsers returns the Users field value if set, zero value otherwise.
@@ -208,38 +176,6 @@ func (o *ProfileDetailedConfigurationAuthentication) SetUsers(v []ProfileDetaile
 	o.Users = v
 }
 
-// GetProxy returns the Proxy field value if set, zero value otherwise.
-func (o *ProfileDetailedConfigurationAuthentication) GetProxy() string {
-	if o == nil || IsNil(o.Proxy) {
-		var ret string
-		return ret
-	}
-	return *o.Proxy
-}
-
-// GetProxyOk returns a tuple with the Proxy field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationAuthentication) GetProxyOk() (*string, bool) {
-	if o == nil || IsNil(o.Proxy) {
-		return nil, false
-	}
-	return o.Proxy, true
-}
-
-// HasProxy returns a boolean if a field has been set.
-func (o *ProfileDetailedConfigurationAuthentication) HasProxy() bool {
-	if o != nil && !IsNil(o.Proxy) {
-		return true
-	}
-
-	return false
-}
-
-// SetProxy gets a reference to the given string and assigns it to the Proxy field.
-func (o *ProfileDetailedConfigurationAuthentication) SetProxy(v string) {
-	o.Proxy = &v
-}
-
 // GetValidation returns the Validation field value if set, zero value otherwise.
 func (o *ProfileDetailedConfigurationAuthentication) GetValidation() bool {
 	if o == nil || IsNil(o.Validation) {
@@ -272,6 +208,70 @@ func (o *ProfileDetailedConfigurationAuthentication) SetValidation(v bool) {
 	o.Validation = &v
 }
 
+// GetProxy returns the Proxy field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationAuthentication) GetProxy() string {
+	if o == nil || IsNil(o.Proxy) {
+		var ret string
+		return ret
+	}
+	return *o.Proxy
+}
+
+// GetProxyOk returns a tuple with the Proxy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationAuthentication) GetProxyOk() (*string, bool) {
+	if o == nil || IsNil(o.Proxy) {
+		return nil, false
+	}
+	return o.Proxy, true
+}
+
+// HasProxy returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationAuthentication) HasProxy() bool {
+	if o != nil && !IsNil(o.Proxy) {
+		return true
+	}
+
+	return false
+}
+
+// SetProxy gets a reference to the given string and assigns it to the Proxy field.
+func (o *ProfileDetailedConfigurationAuthentication) SetProxy(v string) {
+	o.Proxy = &v
+}
+
+// GetPresets returns the Presets field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationAuthentication) GetPresets() []ProfileDetailedConfigurationAuthenticationPresetsInner {
+	if o == nil || IsNil(o.Presets) {
+		var ret []ProfileDetailedConfigurationAuthenticationPresetsInner
+		return ret
+	}
+	return o.Presets
+}
+
+// GetPresetsOk returns a tuple with the Presets field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationAuthentication) GetPresetsOk() ([]ProfileDetailedConfigurationAuthenticationPresetsInner, bool) {
+	if o == nil || IsNil(o.Presets) {
+		return nil, false
+	}
+	return o.Presets, true
+}
+
+// HasPresets returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationAuthentication) HasPresets() bool {
+	if o != nil && !IsNil(o.Presets) {
+		return true
+	}
+
+	return false
+}
+
+// SetPresets gets a reference to the given []ProfileDetailedConfigurationAuthenticationPresetsInner and assigns it to the Presets field.
+func (o *ProfileDetailedConfigurationAuthentication) SetPresets(v []ProfileDetailedConfigurationAuthenticationPresetsInner) {
+	o.Presets = v
+}
+
 func (o ProfileDetailedConfigurationAuthentication) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -282,26 +282,26 @@ func (o ProfileDetailedConfigurationAuthentication) MarshalJSON() ([]byte, error
 
 func (o ProfileDetailedConfigurationAuthentication) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Lifetime) {
-		toSerialize["lifetime"] = o.Lifetime
-	}
 	if !IsNil(o.Schema) {
 		toSerialize["$schema"] = o.Schema
+	}
+	if !IsNil(o.Lifetime) {
+		toSerialize["lifetime"] = o.Lifetime
 	}
 	if !IsNil(o.Procedures) {
 		toSerialize["procedures"] = o.Procedures
 	}
-	if !IsNil(o.Presets) {
-		toSerialize["presets"] = o.Presets
-	}
 	if !IsNil(o.Users) {
 		toSerialize["users"] = o.Users
+	}
+	if !IsNil(o.Validation) {
+		toSerialize["validation"] = o.Validation
 	}
 	if !IsNil(o.Proxy) {
 		toSerialize["proxy"] = o.Proxy
 	}
-	if !IsNil(o.Validation) {
-		toSerialize["validation"] = o.Validation
+	if !IsNil(o.Presets) {
+		toSerialize["presets"] = o.Presets
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -325,13 +325,13 @@ func (o *ProfileDetailedConfigurationAuthentication) UnmarshalJSON(data []byte) 
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "lifetime")
 		delete(additionalProperties, "$schema")
+		delete(additionalProperties, "lifetime")
 		delete(additionalProperties, "procedures")
-		delete(additionalProperties, "presets")
 		delete(additionalProperties, "users")
-		delete(additionalProperties, "proxy")
 		delete(additionalProperties, "validation")
+		delete(additionalProperties, "proxy")
+		delete(additionalProperties, "presets")
 		o.AdditionalProperties = additionalProperties
 	}
 
