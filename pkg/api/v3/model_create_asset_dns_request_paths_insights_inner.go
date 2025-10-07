@@ -22,7 +22,8 @@ var _ MappedNullable = &CreateAssetDNSRequestPathsInsightsInner{}
 type CreateAssetDNSRequestPathsInsightsInner struct {
 	Path string `json:"path"`
 	Method ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSKIPPEDAPICHECKSURLPATTERNSITEMSPROPERTIESMETHOD `json:"method"`
-	Operation *CreateAssetDNSRequestPathsInsightsInnerOperation `json:"operation,omitempty"`
+	Parameters *CreateAssetDNSRequestPathsInsightsInnerParameters `json:"parameters,omitempty"`
+	ReturnType *CreateAssetDNSRequestPathsInsightsInnerReturnType `json:"returnType,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -95,36 +96,68 @@ func (o *CreateAssetDNSRequestPathsInsightsInner) SetMethod(v ENUMPROPERTIESCONF
 	o.Method = v
 }
 
-// GetOperation returns the Operation field value if set, zero value otherwise.
-func (o *CreateAssetDNSRequestPathsInsightsInner) GetOperation() CreateAssetDNSRequestPathsInsightsInnerOperation {
-	if o == nil || IsNil(o.Operation) {
-		var ret CreateAssetDNSRequestPathsInsightsInnerOperation
+// GetParameters returns the Parameters field value if set, zero value otherwise.
+func (o *CreateAssetDNSRequestPathsInsightsInner) GetParameters() CreateAssetDNSRequestPathsInsightsInnerParameters {
+	if o == nil || IsNil(o.Parameters) {
+		var ret CreateAssetDNSRequestPathsInsightsInnerParameters
 		return ret
 	}
-	return *o.Operation
+	return *o.Parameters
 }
 
-// GetOperationOk returns a tuple with the Operation field value if set, nil otherwise
+// GetParametersOk returns a tuple with the Parameters field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetDNSRequestPathsInsightsInner) GetOperationOk() (*CreateAssetDNSRequestPathsInsightsInnerOperation, bool) {
-	if o == nil || IsNil(o.Operation) {
+func (o *CreateAssetDNSRequestPathsInsightsInner) GetParametersOk() (*CreateAssetDNSRequestPathsInsightsInnerParameters, bool) {
+	if o == nil || IsNil(o.Parameters) {
 		return nil, false
 	}
-	return o.Operation, true
+	return o.Parameters, true
 }
 
-// HasOperation returns a boolean if a field has been set.
-func (o *CreateAssetDNSRequestPathsInsightsInner) HasOperation() bool {
-	if o != nil && !IsNil(o.Operation) {
+// HasParameters returns a boolean if a field has been set.
+func (o *CreateAssetDNSRequestPathsInsightsInner) HasParameters() bool {
+	if o != nil && !IsNil(o.Parameters) {
 		return true
 	}
 
 	return false
 }
 
-// SetOperation gets a reference to the given CreateAssetDNSRequestPathsInsightsInnerOperation and assigns it to the Operation field.
-func (o *CreateAssetDNSRequestPathsInsightsInner) SetOperation(v CreateAssetDNSRequestPathsInsightsInnerOperation) {
-	o.Operation = &v
+// SetParameters gets a reference to the given CreateAssetDNSRequestPathsInsightsInnerParameters and assigns it to the Parameters field.
+func (o *CreateAssetDNSRequestPathsInsightsInner) SetParameters(v CreateAssetDNSRequestPathsInsightsInnerParameters) {
+	o.Parameters = &v
+}
+
+// GetReturnType returns the ReturnType field value if set, zero value otherwise.
+func (o *CreateAssetDNSRequestPathsInsightsInner) GetReturnType() CreateAssetDNSRequestPathsInsightsInnerReturnType {
+	if o == nil || IsNil(o.ReturnType) {
+		var ret CreateAssetDNSRequestPathsInsightsInnerReturnType
+		return ret
+	}
+	return *o.ReturnType
+}
+
+// GetReturnTypeOk returns a tuple with the ReturnType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetDNSRequestPathsInsightsInner) GetReturnTypeOk() (*CreateAssetDNSRequestPathsInsightsInnerReturnType, bool) {
+	if o == nil || IsNil(o.ReturnType) {
+		return nil, false
+	}
+	return o.ReturnType, true
+}
+
+// HasReturnType returns a boolean if a field has been set.
+func (o *CreateAssetDNSRequestPathsInsightsInner) HasReturnType() bool {
+	if o != nil && !IsNil(o.ReturnType) {
+		return true
+	}
+
+	return false
+}
+
+// SetReturnType gets a reference to the given CreateAssetDNSRequestPathsInsightsInnerReturnType and assigns it to the ReturnType field.
+func (o *CreateAssetDNSRequestPathsInsightsInner) SetReturnType(v CreateAssetDNSRequestPathsInsightsInnerReturnType) {
+	o.ReturnType = &v
 }
 
 func (o CreateAssetDNSRequestPathsInsightsInner) MarshalJSON() ([]byte, error) {
@@ -139,8 +172,11 @@ func (o CreateAssetDNSRequestPathsInsightsInner) ToMap() (map[string]interface{}
 	toSerialize := map[string]interface{}{}
 	toSerialize["path"] = o.Path
 	toSerialize["method"] = o.Method
-	if !IsNil(o.Operation) {
-		toSerialize["operation"] = o.Operation
+	if !IsNil(o.Parameters) {
+		toSerialize["parameters"] = o.Parameters
+	}
+	if !IsNil(o.ReturnType) {
+		toSerialize["returnType"] = o.ReturnType
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -188,7 +224,8 @@ func (o *CreateAssetDNSRequestPathsInsightsInner) UnmarshalJSON(data []byte) (er
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "path")
 		delete(additionalProperties, "method")
-		delete(additionalProperties, "operation")
+		delete(additionalProperties, "parameters")
+		delete(additionalProperties, "returnType")
 		o.AdditionalProperties = additionalProperties
 	}
 

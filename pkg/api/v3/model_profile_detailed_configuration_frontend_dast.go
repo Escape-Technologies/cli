@@ -20,6 +20,7 @@ var _ MappedNullable = &ProfileDetailedConfigurationFrontendDast{}
 // ProfileDetailedConfigurationFrontendDast struct for ProfileDetailedConfigurationFrontendDast
 type ProfileDetailedConfigurationFrontendDast struct {
 	LocationId *string `json:"location_id,omitempty"`
+	ReadOnly *bool `json:"read_only,omitempty"`
 	MaxDuration *float32 `json:"max_duration,omitempty"`
 	Hotstart []string `json:"hotstart,omitempty"`
 	BlocklistPatterns []string `json:"blocklist_patterns,omitempty"`
@@ -95,6 +96,38 @@ func (o *ProfileDetailedConfigurationFrontendDast) HasLocationId() bool {
 // SetLocationId gets a reference to the given string and assigns it to the LocationId field.
 func (o *ProfileDetailedConfigurationFrontendDast) SetLocationId(v string) {
 	o.LocationId = &v
+}
+
+// GetReadOnly returns the ReadOnly field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationFrontendDast) GetReadOnly() bool {
+	if o == nil || IsNil(o.ReadOnly) {
+		var ret bool
+		return ret
+	}
+	return *o.ReadOnly
+}
+
+// GetReadOnlyOk returns a tuple with the ReadOnly field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationFrontendDast) GetReadOnlyOk() (*bool, bool) {
+	if o == nil || IsNil(o.ReadOnly) {
+		return nil, false
+	}
+	return o.ReadOnly, true
+}
+
+// HasReadOnly returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationFrontendDast) HasReadOnly() bool {
+	if o != nil && !IsNil(o.ReadOnly) {
+		return true
+	}
+
+	return false
+}
+
+// SetReadOnly gets a reference to the given bool and assigns it to the ReadOnly field.
+func (o *ProfileDetailedConfigurationFrontendDast) SetReadOnly(v bool) {
+	o.ReadOnly = &v
 }
 
 // GetMaxDuration returns the MaxDuration field value if set, zero value otherwise.
@@ -846,6 +879,9 @@ func (o ProfileDetailedConfigurationFrontendDast) ToMap() (map[string]interface{
 	if !IsNil(o.LocationId) {
 		toSerialize["location_id"] = o.LocationId
 	}
+	if !IsNil(o.ReadOnly) {
+		toSerialize["read_only"] = o.ReadOnly
+	}
 	if !IsNil(o.MaxDuration) {
 		toSerialize["max_duration"] = o.MaxDuration
 	}
@@ -938,6 +974,7 @@ func (o *ProfileDetailedConfigurationFrontendDast) UnmarshalJSON(data []byte) (e
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "location_id")
+		delete(additionalProperties, "read_only")
 		delete(additionalProperties, "max_duration")
 		delete(additionalProperties, "hotstart")
 		delete(additionalProperties, "blocklist_patterns")
