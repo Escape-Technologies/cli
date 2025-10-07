@@ -29,7 +29,7 @@ type ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3UsersInner stru
 	Digest *string `json:"digest,omitempty"`
 	Password string `json:"password"`
 	Scopes []string `json:"scopes,omitempty"`
-	PostLoginActions []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3UsersInnerPostLoginActionsInner `json:"post_login_actions,omitempty"`
+	PostLoginActions []ProfileDetailedConfigurationAuthenticationUsersInnerCredentialsActionsInner `json:"post_login_actions,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -327,9 +327,9 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3UsersInner)
 }
 
 // GetPostLoginActions returns the PostLoginActions field value if set, zero value otherwise.
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3UsersInner) GetPostLoginActions() []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3UsersInnerPostLoginActionsInner {
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3UsersInner) GetPostLoginActions() []ProfileDetailedConfigurationAuthenticationUsersInnerCredentialsActionsInner {
 	if o == nil || IsNil(o.PostLoginActions) {
-		var ret []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3UsersInnerPostLoginActionsInner
+		var ret []ProfileDetailedConfigurationAuthenticationUsersInnerCredentialsActionsInner
 		return ret
 	}
 	return o.PostLoginActions
@@ -337,7 +337,7 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3UsersInner)
 
 // GetPostLoginActionsOk returns a tuple with the PostLoginActions field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3UsersInner) GetPostLoginActionsOk() ([]ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3UsersInnerPostLoginActionsInner, bool) {
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3UsersInner) GetPostLoginActionsOk() ([]ProfileDetailedConfigurationAuthenticationUsersInnerCredentialsActionsInner, bool) {
 	if o == nil || IsNil(o.PostLoginActions) {
 		return nil, false
 	}
@@ -353,8 +353,8 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3UsersInner)
 	return false
 }
 
-// SetPostLoginActions gets a reference to the given []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3UsersInnerPostLoginActionsInner and assigns it to the PostLoginActions field.
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3UsersInner) SetPostLoginActions(v []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3UsersInnerPostLoginActionsInner) {
+// SetPostLoginActions gets a reference to the given []ProfileDetailedConfigurationAuthenticationUsersInnerCredentialsActionsInner and assigns it to the PostLoginActions field.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3UsersInner) SetPostLoginActions(v []ProfileDetailedConfigurationAuthenticationUsersInnerCredentialsActionsInner) {
 	o.PostLoginActions = v
 }
 

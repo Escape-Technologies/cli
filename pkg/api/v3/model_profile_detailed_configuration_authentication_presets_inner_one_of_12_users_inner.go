@@ -27,7 +27,7 @@ type ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInner str
 	MainUser *bool `json:"main_user,omitempty"`
 	Basic *string `json:"basic,omitempty"`
 	Digest *string `json:"digest,omitempty"`
-	Actions []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3UsersInnerPostLoginActionsInner `json:"actions"`
+	Actions []ProfileDetailedConfigurationAuthenticationUsersInnerCredentialsActionsInner `json:"actions"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -37,7 +37,7 @@ type _ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInner Pr
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInner(username string, actions []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3UsersInnerPostLoginActionsInner) *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInner {
+func NewProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInner(username string, actions []ProfileDetailedConfigurationAuthenticationUsersInnerCredentialsActionsInner) *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInner {
 	this := ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInner{}
 	this.Username = username
 	this.Actions = actions
@@ -269,9 +269,9 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInner
 }
 
 // GetActions returns the Actions field value
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInner) GetActions() []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3UsersInnerPostLoginActionsInner {
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInner) GetActions() []ProfileDetailedConfigurationAuthenticationUsersInnerCredentialsActionsInner {
 	if o == nil {
-		var ret []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3UsersInnerPostLoginActionsInner
+		var ret []ProfileDetailedConfigurationAuthenticationUsersInnerCredentialsActionsInner
 		return ret
 	}
 
@@ -280,7 +280,7 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInner
 
 // GetActionsOk returns a tuple with the Actions field value
 // and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInner) GetActionsOk() ([]ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3UsersInnerPostLoginActionsInner, bool) {
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInner) GetActionsOk() ([]ProfileDetailedConfigurationAuthenticationUsersInnerCredentialsActionsInner, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -288,7 +288,7 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInner
 }
 
 // SetActions sets field value
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInner) SetActions(v []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3UsersInnerPostLoginActionsInner) {
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInner) SetActions(v []ProfileDetailedConfigurationAuthenticationUsersInnerCredentialsActionsInner) {
 	o.Actions = v
 }
 

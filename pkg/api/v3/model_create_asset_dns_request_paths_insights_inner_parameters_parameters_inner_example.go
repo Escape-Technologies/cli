@@ -16,8 +16,8 @@ import (
 )
 
 
-// CreateAssetDNSRequestPathsInsightsInnerOperationResponsesValueHeadersValueExample struct for CreateAssetDNSRequestPathsInsightsInnerOperationResponsesValueHeadersValueExample
-type CreateAssetDNSRequestPathsInsightsInnerOperationResponsesValueHeadersValueExample struct {
+// CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample struct for CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample
+type CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample struct {
 	ArrayOfAny *[]interface{}
 	Bool *bool
 	Float32 *float32
@@ -26,7 +26,7 @@ type CreateAssetDNSRequestPathsInsightsInnerOperationResponsesValueHeadersValueE
 }
 
 // Unmarshal JSON data into any of the pointers in the struct
-func (dst *CreateAssetDNSRequestPathsInsightsInnerOperationResponsesValueHeadersValueExample) UnmarshalJSON(data []byte) error {
+func (dst *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample) UnmarshalJSON(data []byte) error {
 	var err error
 	// this object is nullable so check if the payload is null or empty string
 	if string(data) == "" || string(data) == "{}" {
@@ -98,11 +98,11 @@ func (dst *CreateAssetDNSRequestPathsInsightsInnerOperationResponsesValueHeaders
 		dst.String = nil
 	}
 
-	return fmt.Errorf("data failed to match schemas in anyOf(CreateAssetDNSRequestPathsInsightsInnerOperationResponsesValueHeadersValueExample)")
+	return fmt.Errorf("data failed to match schemas in anyOf(CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample)")
 }
 
 // Marshal data from the first non-nil pointers in the struct to JSON
-func (src CreateAssetDNSRequestPathsInsightsInnerOperationResponsesValueHeadersValueExample) MarshalJSON() ([]byte, error) {
+func (src CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample) MarshalJSON() ([]byte, error) {
 	if src.ArrayOfAny != nil {
 		return json.Marshal(&src.ArrayOfAny)
 	}
@@ -127,38 +127,38 @@ func (src CreateAssetDNSRequestPathsInsightsInnerOperationResponsesValueHeadersV
 }
 
 
-type NullableCreateAssetDNSRequestPathsInsightsInnerOperationResponsesValueHeadersValueExample struct {
-	value *CreateAssetDNSRequestPathsInsightsInnerOperationResponsesValueHeadersValueExample
+type NullableCreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample struct {
+	value *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample
 	isSet bool
 }
 
-func (v NullableCreateAssetDNSRequestPathsInsightsInnerOperationResponsesValueHeadersValueExample) Get() *CreateAssetDNSRequestPathsInsightsInnerOperationResponsesValueHeadersValueExample {
+func (v NullableCreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample) Get() *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample {
 	return v.value
 }
 
-func (v *NullableCreateAssetDNSRequestPathsInsightsInnerOperationResponsesValueHeadersValueExample) Set(val *CreateAssetDNSRequestPathsInsightsInnerOperationResponsesValueHeadersValueExample) {
+func (v *NullableCreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample) Set(val *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCreateAssetDNSRequestPathsInsightsInnerOperationResponsesValueHeadersValueExample) IsSet() bool {
+func (v NullableCreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCreateAssetDNSRequestPathsInsightsInnerOperationResponsesValueHeadersValueExample) Unset() {
+func (v *NullableCreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCreateAssetDNSRequestPathsInsightsInnerOperationResponsesValueHeadersValueExample(val *CreateAssetDNSRequestPathsInsightsInnerOperationResponsesValueHeadersValueExample) *NullableCreateAssetDNSRequestPathsInsightsInnerOperationResponsesValueHeadersValueExample {
-	return &NullableCreateAssetDNSRequestPathsInsightsInnerOperationResponsesValueHeadersValueExample{value: val, isSet: true}
+func NewNullableCreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample(val *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample) *NullableCreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample {
+	return &NullableCreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample{value: val, isSet: true}
 }
 
-func (v NullableCreateAssetDNSRequestPathsInsightsInnerOperationResponsesValueHeadersValueExample) MarshalJSON() ([]byte, error) {
+func (v NullableCreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCreateAssetDNSRequestPathsInsightsInnerOperationResponsesValueHeadersValueExample) UnmarshalJSON(src []byte) error {
+func (v *NullableCreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
