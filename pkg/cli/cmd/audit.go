@@ -19,17 +19,54 @@ var (
 
 var auditCmd = &cobra.Command{
 	Use:     "audit",
-	Aliases: []string{"audits"},
-	Short:   "Interact with audits",
-	Long:    `Interact with your escape audit logs`,
+	Aliases: []string{"audits", "logs"},
+	Short:   "View audit logs and activity history",
+	Long: `View Audit Logs - Organization Activity Timeline
+
+Audit logs track all actions performed in your organization including scans,
+configuration changes, user actions, and security events. Essential for compliance
+and security monitoring.
+
+LOGGED ACTIVITIES:
+  • User authentication and access
+  • Scan lifecycle events (started, finished, failed)
+  • Configuration changes
+  • Issue status updates
+  • Profile and asset modifications
+
+COMPLIANCE:
+  Use audit logs for compliance reporting (SOC 2, ISO 27001, PCI DSS, etc.)`,
 }
 
 var auditListCmd = &cobra.Command{
 	Use:     "list",
 	Aliases: []string{"ls"},
-	Short:   "List audit logs",
-	Long:    `List audit logs of the organization.`,
-	Example: `escape-cli audit list`,
+	Short:   "List organization audit logs",
+	Long: `List Audit Logs - View Activity History
+
+Display audit logs with filtering by date range, event type, and actor.
+By default shows logs from the last 12 hours.
+
+FILTER OPTIONS:
+  -f, --date-from    Start date (RFC3339 format)
+  -t, --date-to      End date (RFC3339 format)
+  -e, --event-type   Event type (scan.started, scan.finished, user.authenticated, etc.)
+  -a, --actor        Filter by actor (user ID or email)
+  -s, --search       Free-text search`,
+	Example: `  # List recent audit logs
+  escape-cli audit list
+
+  # List logs for specific date range
+  escape-cli audit list --date-from 2025-01-01T00:00:00Z --date-to 2025-01-31T23:59:59Z
+
+  # List scan events
+  escape-cli audit list --event-type scan.started
+
+  # List actions by specific user
+  escape-cli audit list --actor user@example.com
+
+  # Export for compliance reporting
+  escape-cli audit list --date-from 2025-01-01T00:00:00Z -o json > audit-report-jan2025.json`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
 		logs, next, err := escape.ListAuditLogs(
 			cmd.Context(),
@@ -66,8 +103,8 @@ var auditListCmd = &cobra.Command{
 				cmd.Context(),
 				*next,
 				&escape.ListAuditLogsFilters{
-					DateFrom: auditCmdDateFrom,
-					DateTo:   auditCmdDateTo,
+					DateFrom:   auditCmdDateFrom,
+					DateTo:     auditCmdDateTo,
 					ActionType: auditCmdEventType,
 				},
 			)
@@ -80,7 +117,7 @@ var auditListCmd = &cobra.Command{
 					fields = append(fields, fmt.Sprintf(
 						"%s\t%s\t%s\t%s\t%s",
 						log.GetDate(),
-						log.GetAction(),	
+						log.GetAction(),
 						log.GetActor(),
 						log.GetActorEmail(),
 						log.GetTitle(),

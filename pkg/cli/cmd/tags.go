@@ -11,24 +11,36 @@ import (
 	"github.com/spf13/cobra"
 )
 
-
 var tagsCmd = &cobra.Command{
 	Use:     "tags",
 	Aliases: []string{"tag"},
-	Short:   "Interact with tags",
-	Long:    "Interact with your escape tags",
+	Short:   "Manage tags for organizing assets and profiles",
+	Long: `Manage Tags - Organize Your Security Resources
+
+Tags help you organize and filter assets, profiles, issues, and other resources.
+Create custom tags with colors for visual organization in the platform.
+
+COMMON USE CASES:
+  • Environment labels (production, staging, development)
+  • Team ownership (frontend-team, backend-team, security-team)
+  • Criticality (critical, high-priority, low-priority)
+  • Compliance (pci-dss, hipaa, gdpr)
+  • Project grouping (project-alpha, project-beta)`,
 }
 
 var tagsListCmd = &cobra.Command{
 	Use:     "list",
 	Aliases: []string{"ls"},
-	Short:   "List tags",
-	Long: `List tags.
+	Short:   "List all organization tags",
+	Long: `List Tags - View All Available Tags
 
-Example output:
-ID                                      NAME    COLOR
-00000000-0000-0000-0000-000000000001    test    #000000`,
-	Example: `escape-cli tags list`, RunE: func(cmd *cobra.Command, _ []string) error {
+Display all tags in your organization with their IDs, names, and color codes.
+Use these tag IDs when filtering or updating assets, profiles, and issues.`,
+	Example: `  # List all tags
+  escape-cli tags list
+
+  # Export tags to JSON
+  escape-cli tags list -o json`, RunE: func(cmd *cobra.Command, _ []string) error {
 		tags, err := escape.ListTags(cmd.Context())
 		if err != nil {
 			return fmt.Errorf("unable to list tags: %w", err)
@@ -53,11 +65,20 @@ ID                                      NAME    COLOR
 
 var tagsCreateCmd = &cobra.Command{
 	Use:     "create",
-	Aliases: []string{"cr"},
+	Aliases: []string{"cr", "add", "new"},
 	Args:    cobra.NoArgs,
-	Short:   "Create a tag",
-	Long:    "Create a tag",
-	Example: `escape-cli tags create --name test --color e03d3d`,
+	Short:   "Create a new tag",
+	Long: `Create Tag - Add New Organization Label
+
+Create a new tag with a custom name and color. Use hex color codes without the # prefix.`,
+	Example: `  # Create a production tag (red)
+  escape-cli tags create --name production --color e03d3d
+
+  # Create a staging tag (yellow)
+  escape-cli tags create --name staging --color f5a623
+
+  # Create a team tag (blue)
+  escape-cli tags create --name backend-team --color 4a90e2`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
 		name, _ := cmd.Flags().GetString("name")
 		color, _ := cmd.Flags().GetString("color")

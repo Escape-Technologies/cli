@@ -28,24 +28,68 @@ var profileRisks []string
 
 var profilesCmd = &cobra.Command{
 	Use:     "profiles",
-	Aliases: []string{"profile", "profiles"},
-	Short:   "Interact with profiles",
-	Long:    "Interact with your escape profiles",
-}
+	Aliases: []string{"profile"},
+	Short:   "Manage security testing profiles and configurations",
+	Long: `Manage Security Profiles - Configure API Testing
 
+Profiles define HOW your APIs are tested. Each profile configures test settings,
+authentication, and security checks for a specific asset. One asset can have
+multiple profiles for different testing scenarios.
+
+PROFILE TYPES:
+  • BLST_REST         - REST API security testing
+  • BLST_GRAPHQL      - GraphQL API security testing
+  • FRONTEND_DAST     - Web application security testing
+
+KEY FEATURES:
+  • Authentication configuration (API keys, OAuth, JWT, etc.)
+  • Test scope and endpoint selection
+  • Custom security rules and checks
+  • Scheduled scanning (cron expressions)
+  • CI/CD integration settings
+
+COMMON WORKFLOWS:
+  • List all profiles:       escape-cli profiles list
+  • Get profile details:     escape-cli profiles get <profile-id>
+  • Create REST profile:     escape-cli profiles create-rest < config.json
+  • Start scan on profile:   escape-cli scans start <profile-id>`,
+}
 
 var profilesListCmd = &cobra.Command{
 	Use:     "list",
 	Aliases: []string{"ls"},
 	Args:    cobra.NoArgs,
-	Short:   "List profiles",
-	Long: `List REST, WEBAPP and GRAPHQL profiles. (use --all to show all profiles kinds)
-	
+	Short:   "List security testing profiles",
+	Long: `List Security Profiles - View Test Configurations
+
+List all security testing profiles in your organization. By default, shows REST,
+GraphQL, and WEBAPP profiles. Use --all to include all profile types.
+
+FILTER OPTIONS:
+  -a, --asset-id     Filter by asset ID
+  -d, --domain       Filter by domain
+  -i, --issue-id     Filter by issues found
+  -t, --tag-id       Filter by tags
+  -s, --search       Free-text search
+  -k, --kind         Filter by profile type
+  -r, --risk         Filter by risk level
+  --all              Show all profile types (default: REST, GraphQL, WEBAPP only)
+
 Example output:
-ID                                      CREATED AT              INITIATORS  NAME
-00000000-0000-0000-0000-000000000001    2025-02-21T11:15:07Z    [API]       Example-Application-1
-00000000-0000-0000-0000-000000000002    2025-03-12T19:19:08Z    [API]       Example-Application-2`,
-	Example: `escape-cli profiles list`,
+ID                                      CREATED AT              ASSET TYPE    INITIATORS  NAME
+00000000-0000-0000-0000-000000000001    2025-02-21T11:15:07Z    WEBAPP        [API]       Example-App-1
+00000000-0000-0000-0000-000000000002    2025-03-12T19:19:08Z    REST_API      [CI]        Example-API-2`,
+	Example: `  # List all standard profiles
+  escape-cli profiles list
+
+  # List all profile types
+  escape-cli profiles list --all
+
+  # List profiles for a specific asset
+  escape-cli profiles list --asset-id <asset-id>
+
+  # Search for profiles
+  escape-cli profiles list --search "production"`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
 		allFlag, _ := cmd.Flags().GetBool("all")
 		userKindsProvided := cmd.Flags().Changed("kind")
@@ -57,14 +101,14 @@ ID                                      CREATED AT              INITIATORS  NAME
 		}
 
 		profiles, next, err := escape.ListProfiles(cmd.Context(), "", &escape.ListProfilesFilters{
-			AssetIDs: profileAssetIDs,
-			Domains: profileDomains,
-			IssueIDs: profileIssueIDs,
-			TagsIDs: profileTagsIDs,
-			Search: profileSearch,
+			AssetIDs:   profileAssetIDs,
+			Domains:    profileDomains,
+			IssueIDs:   profileIssueIDs,
+			TagsIDs:    profileTagsIDs,
+			Search:     profileSearch,
 			Initiators: profileInitiators,
-			Kinds: kindsToUse,
-			Risks: profileRisks,
+			Kinds:      kindsToUse,
+			Risks:      profileRisks,
 		})
 		if err != nil {
 			return fmt.Errorf("unable to list profiles: %w", err)
@@ -80,14 +124,14 @@ ID                                      CREATED AT              INITIATORS  NAME
 
 		for next != nil && *next != "" {
 			profiles, next, err = escape.ListProfiles(cmd.Context(), *next, &escape.ListProfilesFilters{
-				AssetIDs: profileAssetIDs,
-				Domains: profileDomains,
-				IssueIDs: profileIssueIDs,
-				TagsIDs: profileTagsIDs,
-				Search: profileSearch,
+				AssetIDs:   profileAssetIDs,
+				Domains:    profileDomains,
+				IssueIDs:   profileIssueIDs,
+				TagsIDs:    profileTagsIDs,
+				Search:     profileSearch,
 				Initiators: profileInitiators,
-				Kinds: kindsToUse,
-				Risks: profileRisks,
+				Kinds:      kindsToUse,
+				Risks:      profileRisks,
 			})
 			if err != nil {
 				return fmt.Errorf("unable to list profiles: %w", err)
@@ -107,14 +151,17 @@ ID                                      CREATED AT              INITIATORS  NAME
 
 var profileGetCmd = &cobra.Command{
 	Use:     "get profile-id",
-	Aliases: []string{"describe"},
-	Short:   "Get a profile",
-	Long: `Get a profile by ID.
+	Aliases: []string{"describe", "show"},
+	Short:   "Get detailed profile information",
+	Long: `Get Profile Details - View Complete Configuration
 
-Example output:
-ID                                      CREATED AT              INITIATORS  NAME
-00000000-0000-0000-0000-000000000001    2025-02-21T11:15:07Z    [API]       Example-Application-1`,
-	Example: `escape-cli profiles get 00000000-0000-0000-0000-000000000001`,
+Retrieve comprehensive information about a security testing profile including
+schedule, risks, and configuration details.`,
+	Example: `  # Get profile details
+  escape-cli profiles get 00000000-0000-0000-0000-000000000001
+
+  # Export profile configuration
+  escape-cli profiles get <profile-id> -o json`,
 	Args: cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		profileID := args[0]
@@ -125,7 +172,7 @@ ID                                      CREATED AT              INITIATORS  NAME
 
 		out.Table(profile, func() []string {
 			result := []string{"ID\tCREATED AT\tCRON\tRISKS\tNAME"}
-			result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s\t%s", profile.GetId(), profile.GetCreatedAt(), profile.GetCron(), profile.GetRisks(),profile.GetName()))
+			result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s\t%s", profile.GetId(), profile.GetCreatedAt(), profile.GetCron(), profile.GetRisks(), profile.GetName()))
 			return result
 		})
 		return nil
@@ -133,10 +180,13 @@ ID                                      CREATED AT              INITIATORS  NAME
 }
 
 var profileCreateRestCmd = &cobra.Command{
-	Use:     "create-rest <profile.json",
+	Use:     "create-rest",
 	Aliases: []string{"cr"},
-	Short:   "Create a REST profile",
-	Long:    "Create a REST profile",
+	Short:   "Create a REST API security testing profile",
+	Long: `Create REST Profile - Configure REST API Security Testing
+
+Create a new profile for testing REST APIs. Provide configuration via JSON through stdin.
+See https://public.escape.tech/v3/#tag/profiles for complete schema.`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
 		var data []byte
 		b, err := io.ReadAll(os.Stdin)
@@ -167,10 +217,12 @@ var profileCreateRestCmd = &cobra.Command{
 }
 
 var profileCreateWebappCmd = &cobra.Command{
-	Use:     "create-webapp <profile.json",
+	Use:     "create-webapp",
 	Aliases: []string{"cw"},
-	Short:   "Create a WEBAPP profile",
-	Long:    "Create a WEBAPP profile",
+	Short:   "Create a web application security testing profile",
+	Long: `Create WEBAPP Profile - Configure Web Application Security Testing
+
+Create a new profile for testing web applications. Provide configuration via JSON through stdin.`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
 		var data []byte
 		b, err := io.ReadAll(os.Stdin)
@@ -200,10 +252,12 @@ var profileCreateWebappCmd = &cobra.Command{
 	},
 }
 var profileCreateGraphqlCmd = &cobra.Command{
-	Use:     "create-graphql <profile.json",
+	Use:     "create-graphql",
 	Aliases: []string{"cg"},
-	Short:   "Create a GRAPHQL profile",
-	Long:    "Create a GRAPHQL profile",
+	Short:   "Create a GraphQL API security testing profile",
+	Long: `Create GraphQL Profile - Configure GraphQL API Security Testing
+
+Create a new profile for testing GraphQL APIs. Provide configuration via JSON through stdin.`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
 		var data []byte
 		b, err := io.ReadAll(os.Stdin)
@@ -235,9 +289,12 @@ var profileCreateGraphqlCmd = &cobra.Command{
 
 var profileDeleteCmd = &cobra.Command{
 	Use:     "delete profile-id",
-	Aliases: []string{"del"},
-	Short:   "Delete a profile",
-	Long:    "Delete a profile",
+	Aliases: []string{"del", "rm"},
+	Short:   "Delete a security testing profile",
+	Long: `Delete Profile - Remove Test Configuration
+
+Permanently delete a security testing profile. This will also remove scan history
+and scheduled scans. The asset itself is NOT deleted.`,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		profileID := args[0]
 		err := escape.DeleteProfile(cmd.Context(), profileID)
@@ -249,6 +306,7 @@ var profileDeleteCmd = &cobra.Command{
 	},
 	Args: cobra.ExactArgs(1),
 }
+
 func init() {
 	profilesCmd.AddCommand(
 		profilesListCmd,
