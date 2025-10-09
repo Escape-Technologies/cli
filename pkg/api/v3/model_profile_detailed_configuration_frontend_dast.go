@@ -20,7 +20,7 @@ var _ MappedNullable = &ProfileDetailedConfigurationFrontendDast{}
 // ProfileDetailedConfigurationFrontendDast struct for ProfileDetailedConfigurationFrontendDast
 type ProfileDetailedConfigurationFrontendDast struct {
 	LocationId *string `json:"location_id,omitempty"`
-	ReadOnly *bool `json:"read_only,omitempty"`
+	Mode *ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE `json:"mode,omitempty"`
 	MaxDuration *float32 `json:"max_duration,omitempty"`
 	Hotstart []string `json:"hotstart,omitempty"`
 	BlocklistPatterns []string `json:"blocklist_patterns,omitempty"`
@@ -41,7 +41,7 @@ type ProfileDetailedConfigurationFrontendDast struct {
 	ApiChecksDuringAuth *bool `json:"api_checks_during_auth,omitempty"`
 	AllowedUrlPatterns []string `json:"allowed_url_patterns,omitempty"`
 	LogoutDetection *ProfileDetailedConfigurationFrontendDastLogoutDetection `json:"logout_detection,omitempty"`
-	AgenticScanning *bool `json:"agentic_scanning,omitempty"`
+	FrontendAgenticPentesting *bool `json:"frontend_agentic_pentesting,omitempty"`
 	UseLegacyCrawling *bool `json:"use_legacy_crawling,omitempty"`
 	StaticCrawling *ProfileDetailedConfigurationFrontendDastStaticCrawling `json:"static_crawling,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -98,36 +98,36 @@ func (o *ProfileDetailedConfigurationFrontendDast) SetLocationId(v string) {
 	o.LocationId = &v
 }
 
-// GetReadOnly returns the ReadOnly field value if set, zero value otherwise.
-func (o *ProfileDetailedConfigurationFrontendDast) GetReadOnly() bool {
-	if o == nil || IsNil(o.ReadOnly) {
-		var ret bool
+// GetMode returns the Mode field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationFrontendDast) GetMode() ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE {
+	if o == nil || IsNil(o.Mode) {
+		var ret ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE
 		return ret
 	}
-	return *o.ReadOnly
+	return *o.Mode
 }
 
-// GetReadOnlyOk returns a tuple with the ReadOnly field value if set, nil otherwise
+// GetModeOk returns a tuple with the Mode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationFrontendDast) GetReadOnlyOk() (*bool, bool) {
-	if o == nil || IsNil(o.ReadOnly) {
+func (o *ProfileDetailedConfigurationFrontendDast) GetModeOk() (*ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE, bool) {
+	if o == nil || IsNil(o.Mode) {
 		return nil, false
 	}
-	return o.ReadOnly, true
+	return o.Mode, true
 }
 
-// HasReadOnly returns a boolean if a field has been set.
-func (o *ProfileDetailedConfigurationFrontendDast) HasReadOnly() bool {
-	if o != nil && !IsNil(o.ReadOnly) {
+// HasMode returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationFrontendDast) HasMode() bool {
+	if o != nil && !IsNil(o.Mode) {
 		return true
 	}
 
 	return false
 }
 
-// SetReadOnly gets a reference to the given bool and assigns it to the ReadOnly field.
-func (o *ProfileDetailedConfigurationFrontendDast) SetReadOnly(v bool) {
-	o.ReadOnly = &v
+// SetMode gets a reference to the given ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE and assigns it to the Mode field.
+func (o *ProfileDetailedConfigurationFrontendDast) SetMode(v ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE) {
+	o.Mode = &v
 }
 
 // GetMaxDuration returns the MaxDuration field value if set, zero value otherwise.
@@ -770,36 +770,36 @@ func (o *ProfileDetailedConfigurationFrontendDast) SetLogoutDetection(v ProfileD
 	o.LogoutDetection = &v
 }
 
-// GetAgenticScanning returns the AgenticScanning field value if set, zero value otherwise.
-func (o *ProfileDetailedConfigurationFrontendDast) GetAgenticScanning() bool {
-	if o == nil || IsNil(o.AgenticScanning) {
+// GetFrontendAgenticPentesting returns the FrontendAgenticPentesting field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationFrontendDast) GetFrontendAgenticPentesting() bool {
+	if o == nil || IsNil(o.FrontendAgenticPentesting) {
 		var ret bool
 		return ret
 	}
-	return *o.AgenticScanning
+	return *o.FrontendAgenticPentesting
 }
 
-// GetAgenticScanningOk returns a tuple with the AgenticScanning field value if set, nil otherwise
+// GetFrontendAgenticPentestingOk returns a tuple with the FrontendAgenticPentesting field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationFrontendDast) GetAgenticScanningOk() (*bool, bool) {
-	if o == nil || IsNil(o.AgenticScanning) {
+func (o *ProfileDetailedConfigurationFrontendDast) GetFrontendAgenticPentestingOk() (*bool, bool) {
+	if o == nil || IsNil(o.FrontendAgenticPentesting) {
 		return nil, false
 	}
-	return o.AgenticScanning, true
+	return o.FrontendAgenticPentesting, true
 }
 
-// HasAgenticScanning returns a boolean if a field has been set.
-func (o *ProfileDetailedConfigurationFrontendDast) HasAgenticScanning() bool {
-	if o != nil && !IsNil(o.AgenticScanning) {
+// HasFrontendAgenticPentesting returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationFrontendDast) HasFrontendAgenticPentesting() bool {
+	if o != nil && !IsNil(o.FrontendAgenticPentesting) {
 		return true
 	}
 
 	return false
 }
 
-// SetAgenticScanning gets a reference to the given bool and assigns it to the AgenticScanning field.
-func (o *ProfileDetailedConfigurationFrontendDast) SetAgenticScanning(v bool) {
-	o.AgenticScanning = &v
+// SetFrontendAgenticPentesting gets a reference to the given bool and assigns it to the FrontendAgenticPentesting field.
+func (o *ProfileDetailedConfigurationFrontendDast) SetFrontendAgenticPentesting(v bool) {
+	o.FrontendAgenticPentesting = &v
 }
 
 // GetUseLegacyCrawling returns the UseLegacyCrawling field value if set, zero value otherwise.
@@ -879,8 +879,8 @@ func (o ProfileDetailedConfigurationFrontendDast) ToMap() (map[string]interface{
 	if !IsNil(o.LocationId) {
 		toSerialize["location_id"] = o.LocationId
 	}
-	if !IsNil(o.ReadOnly) {
-		toSerialize["read_only"] = o.ReadOnly
+	if !IsNil(o.Mode) {
+		toSerialize["mode"] = o.Mode
 	}
 	if !IsNil(o.MaxDuration) {
 		toSerialize["max_duration"] = o.MaxDuration
@@ -942,8 +942,8 @@ func (o ProfileDetailedConfigurationFrontendDast) ToMap() (map[string]interface{
 	if !IsNil(o.LogoutDetection) {
 		toSerialize["logout_detection"] = o.LogoutDetection
 	}
-	if !IsNil(o.AgenticScanning) {
-		toSerialize["agentic_scanning"] = o.AgenticScanning
+	if !IsNil(o.FrontendAgenticPentesting) {
+		toSerialize["frontend_agentic_pentesting"] = o.FrontendAgenticPentesting
 	}
 	if !IsNil(o.UseLegacyCrawling) {
 		toSerialize["use_legacy_crawling"] = o.UseLegacyCrawling
@@ -974,7 +974,7 @@ func (o *ProfileDetailedConfigurationFrontendDast) UnmarshalJSON(data []byte) (e
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "location_id")
-		delete(additionalProperties, "read_only")
+		delete(additionalProperties, "mode")
 		delete(additionalProperties, "max_duration")
 		delete(additionalProperties, "hotstart")
 		delete(additionalProperties, "blocklist_patterns")
@@ -995,7 +995,7 @@ func (o *ProfileDetailedConfigurationFrontendDast) UnmarshalJSON(data []byte) (e
 		delete(additionalProperties, "api_checks_during_auth")
 		delete(additionalProperties, "allowed_url_patterns")
 		delete(additionalProperties, "logout_detection")
-		delete(additionalProperties, "agentic_scanning")
+		delete(additionalProperties, "frontend_agentic_pentesting")
 		delete(additionalProperties, "use_legacy_crawling")
 		delete(additionalProperties, "static_crawling")
 		o.AdditionalProperties = additionalProperties

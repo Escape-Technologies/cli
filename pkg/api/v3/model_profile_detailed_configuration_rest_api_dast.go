@@ -22,7 +22,7 @@ type ProfileDetailedConfigurationRestApiDast struct {
 	SchemaS3Key *string `json:"schema_s3_key,omitempty"`
 	LocationId *string `json:"location_id,omitempty"`
 	Profile *ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESPROFILE `json:"profile,omitempty"`
-	Mode *ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESMODE `json:"mode,omitempty"`
+	Mode *ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE `json:"mode,omitempty"`
 	MaxDuration *float32 `json:"max_duration,omitempty"`
 	Hotstart []string `json:"hotstart,omitempty"`
 	HotstartOnly *bool `json:"hotstart_only,omitempty"`
@@ -146,9 +146,9 @@ func (o *ProfileDetailedConfigurationRestApiDast) SetProfile(v ENUMPROPERTIESCON
 }
 
 // GetMode returns the Mode field value if set, zero value otherwise.
-func (o *ProfileDetailedConfigurationRestApiDast) GetMode() ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESMODE {
+func (o *ProfileDetailedConfigurationRestApiDast) GetMode() ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE {
 	if o == nil || IsNil(o.Mode) {
-		var ret ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESMODE
+		var ret ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE
 		return ret
 	}
 	return *o.Mode
@@ -156,7 +156,7 @@ func (o *ProfileDetailedConfigurationRestApiDast) GetMode() ENUMPROPERTIESCONFIG
 
 // GetModeOk returns a tuple with the Mode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationRestApiDast) GetModeOk() (*ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESMODE, bool) {
+func (o *ProfileDetailedConfigurationRestApiDast) GetModeOk() (*ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE, bool) {
 	if o == nil || IsNil(o.Mode) {
 		return nil, false
 	}
@@ -172,8 +172,8 @@ func (o *ProfileDetailedConfigurationRestApiDast) HasMode() bool {
 	return false
 }
 
-// SetMode gets a reference to the given ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESMODE and assigns it to the Mode field.
-func (o *ProfileDetailedConfigurationRestApiDast) SetMode(v ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESMODE) {
+// SetMode gets a reference to the given ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE and assigns it to the Mode field.
+func (o *ProfileDetailedConfigurationRestApiDast) SetMode(v ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE) {
 	o.Mode = &v
 }
 

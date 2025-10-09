@@ -22,6 +22,7 @@ type ProfileDetailedConfigurationExperimental struct {
 	EnableWebappSurfaceScan *bool `json:"enable_webapp_surface_scan,omitempty"`
 	EnableWebappExtractor *bool `json:"enable_webapp_extractor,omitempty"`
 	EnableAsmNucleiChecks *bool `json:"enable_asm_nuclei_checks,omitempty"`
+	AgenticPentesting *bool `json:"agentic_pentesting,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -140,6 +141,38 @@ func (o *ProfileDetailedConfigurationExperimental) SetEnableAsmNucleiChecks(v bo
 	o.EnableAsmNucleiChecks = &v
 }
 
+// GetAgenticPentesting returns the AgenticPentesting field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationExperimental) GetAgenticPentesting() bool {
+	if o == nil || IsNil(o.AgenticPentesting) {
+		var ret bool
+		return ret
+	}
+	return *o.AgenticPentesting
+}
+
+// GetAgenticPentestingOk returns a tuple with the AgenticPentesting field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationExperimental) GetAgenticPentestingOk() (*bool, bool) {
+	if o == nil || IsNil(o.AgenticPentesting) {
+		return nil, false
+	}
+	return o.AgenticPentesting, true
+}
+
+// HasAgenticPentesting returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationExperimental) HasAgenticPentesting() bool {
+	if o != nil && !IsNil(o.AgenticPentesting) {
+		return true
+	}
+
+	return false
+}
+
+// SetAgenticPentesting gets a reference to the given bool and assigns it to the AgenticPentesting field.
+func (o *ProfileDetailedConfigurationExperimental) SetAgenticPentesting(v bool) {
+	o.AgenticPentesting = &v
+}
+
 func (o ProfileDetailedConfigurationExperimental) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -158,6 +191,9 @@ func (o ProfileDetailedConfigurationExperimental) ToMap() (map[string]interface{
 	}
 	if !IsNil(o.EnableAsmNucleiChecks) {
 		toSerialize["enable_asm_nuclei_checks"] = o.EnableAsmNucleiChecks
+	}
+	if !IsNil(o.AgenticPentesting) {
+		toSerialize["agentic_pentesting"] = o.AgenticPentesting
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -184,6 +220,7 @@ func (o *ProfileDetailedConfigurationExperimental) UnmarshalJSON(data []byte) (e
 		delete(additionalProperties, "enable_webapp_surface_scan")
 		delete(additionalProperties, "enable_webapp_extractor")
 		delete(additionalProperties, "enable_asm_nuclei_checks")
+		delete(additionalProperties, "agentic_pentesting")
 		o.AdditionalProperties = additionalProperties
 	}
 
