@@ -9,6 +9,7 @@ import (
 	"github.com/Escape-Technologies/cli/pkg/locations"
 	"github.com/spf13/cobra"
 )
+
 var locationsSearch = ""
 var locationsEnabled = false
 var locationsLocationTypes = []string{}
@@ -16,8 +17,29 @@ var locationsLocationTypes = []string{}
 var locationsCmd = &cobra.Command{
 	Use:     "locations",
 	Aliases: []string{"loc", "location"},
-	Short:   "Interact with locations",
-	Long:    "Interact with your escape locations",
+	Short:   "Manage private scanning locations for internal APIs",
+	Long: `Manage Private Locations - Scan Internal and Private APIs
+
+Private locations allow you to scan APIs behind firewalls, in private networks,
+or on-premises infrastructure. Deploy agents in your environment to enable
+security testing without exposing your APIs to the internet.
+
+LOCATION TYPES:
+  • PRIVATE   - Self-hosted agents in your infrastructure
+  • ESCAPE    - Escape-managed cloud scanners
+  • REPEATER  - Proxy/repeater configurations
+
+USE CASES:
+  • Scan APIs in private VPCs
+  • Test pre-production environments
+  • Kubernetes cluster scanning
+  • On-premises application security
+
+SETUP:
+  1. Create location in Escape platform
+  2. Deploy agent: escape-cli locations start <location-name>
+  3. Configure profiles to use the location
+  4. Start scans`,
 }
 
 var locationsListCmd = &cobra.Command{
@@ -33,8 +55,8 @@ ID                                      NAME                       SSH PUBLIC KE
 	Example: `escape-cli locations list`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
 		locations, next, err := escape.ListLocations(cmd.Context(), "", &escape.ListLocationsFilters{
-			Search: locationsSearch,
-			Enabled: locationsEnabled,
+			Search:        locationsSearch,
+			Enabled:       locationsEnabled,
 			LocationTypes: locationsLocationTypes,
 		})
 		if err != nil {
@@ -59,8 +81,8 @@ ID                                      NAME                       SSH PUBLIC KE
 		})
 		for next != nil && *next != "" {
 			locations, next, err = escape.ListLocations(cmd.Context(), *next, &escape.ListLocationsFilters{
-				Search: locationsSearch,
-				Enabled: locationsEnabled,
+				Search:        locationsSearch,
+				Enabled:       locationsEnabled,
 				LocationTypes: locationsLocationTypes,
 			})
 			if err != nil {
@@ -101,19 +123,35 @@ var locationsGetCmd = &cobra.Command{
 }
 var locationsStartCmd = &cobra.Command{
 	Use:   "start location-name",
-	Short: "Start a location",
-	Long: `Start a location by its name. This will establish a connection to the Escape Platform.
+	Short: "Start private location agent",
+	Long: `Start Private Location Agent - Enable Internal API Scanning
 
-Example output:
-[info] Verbose mode: 0
-[info] escape-cli version: Version: 0.1.14, Commit: 05ffe67, BuildDate: 2025-04-25T15:30:54Z
-[info] Private location testdoc in sync with Escape Platform, starting location...
-[info] Private location ready to accept connections
-[info] Connected to k8s API
-...
-[The command will continue running until interrupted with Ctrl+C]`,
-	Args:    cobra.ExactArgs(1),
-	Example: `escape-cli locations start my-location`,
+Start the private location agent to establish a secure connection to the Escape Platform.
+The agent will run continuously, processing scan requests for your internal APIs.
+
+DEPLOYMENT:
+  • Run on infrastructure with access to your private APIs
+  • Requires network connectivity to Escape Platform
+  • Supports Kubernetes, Docker, or bare metal deployment
+
+OPERATION:
+  The agent will:
+  1. Authenticate with Escape Platform
+  2. Establish secure tunnel
+  3. Wait for scan requests
+  4. Execute scans on internal APIs
+  5. Report results back to platform
+
+Run with -v for detailed logging. Use Ctrl+C to stop gracefully.`,
+	Args: cobra.ExactArgs(1),
+	Example: `  # Start location agent
+  escape-cli locations start my-private-location
+
+  # Start with verbose logging
+  escape-cli locations start my-location -v
+
+  # Run as systemd service
+  sudo systemctl start escape-location@my-location`,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		if rootCmdVerbose == 0 {
 			out.SetupTerminalLog()

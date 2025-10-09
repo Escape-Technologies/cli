@@ -12,39 +12,72 @@ import (
 )
 
 var (
-	stages []string
+	stages         []string
 	hasAttachments bool
-	attachments []string
-	eventLevels []string
+	attachments    []string
+	eventLevels    []string
 )
 
 var eventsCmd = &cobra.Command{
 	Use:     "events",
 	Aliases: []string{"event"},
-	Short:   "Interact with events",
-	Long:    "Interact with your escape events",
+	Short:   "View scan events and execution logs",
+	Long: `View Scan Events - Monitor Security Testing Activity
+
+Events track detailed activities during security scans including test execution,
+discoveries, errors, and progress updates. Use events for troubleshooting scans
+and understanding test behavior.
+
+EVENT LEVELS:
+  • ERROR   - Scan errors and failures
+  • WARN    - Warnings and potential issues
+  • INFO    - General informational messages
+  • DEBUG   - Detailed debugging information
+
+EVENT STAGES:
+  • DISCOVERY  - API endpoint discovery
+  • EXECUTION  - Active security testing
+  • ANALYSIS   - Results processing
+  • REPORTING  - Report generation`,
 }
 
 var eventsListCmd = &cobra.Command{
 	Use:     "list",
 	Aliases: []string{"ls"},
-	Short:   "List events",
-	Long: `List events.
+	Short:   "List scan events",
+	Long: `List Scan Events - View Testing Activity Logs
 
-Example output:
-ID                                      LEVEL    TITLE                      STAGE            CREATED AT
-00000000-0000-0000-0000-000000000001    INFO     Scan started              	EXECUTION        2025-08-12T14:04:58.117Z`,
-	Example: `escape-cli events list`,
+Display events from security scans with filtering by scan, asset, severity, and type.
+
+FILTER OPTIONS:
+  -s, --search         Free-text search
+  --scan-id            Filter by scan ID
+  -a, --asset-id       Filter by asset ID
+  -i, --issue-id       Filter by issue ID
+  --stage              Filter by execution stage
+  -l, --levels         Filter by level (ERROR, WARN, INFO, DEBUG)
+  --has-attachments    Show only events with attachments`,
+	Example: `  # List recent events
+  escape-cli events list
+
+  # List events for a specific scan
+  escape-cli events list --scan-id <scan-id>
+
+  # List errors only
+  escape-cli events list --levels ERROR
+
+  # Search event logs
+  escape-cli events list --search "timeout"`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
 		filters := &escape.ListEventsFilters{
-			Search: search,
-			ScanIDs: scanIDs,
-			AssetIDs: assetIDs,
-			IssueIDs: issueIDs,
-			Stages: stages,
+			Search:         search,
+			ScanIDs:        scanIDs,
+			AssetIDs:       assetIDs,
+			IssueIDs:       issueIDs,
+			Stages:         stages,
 			HasAttachments: hasAttachments,
-			Attachments: attachments,
-			Levels: eventLevels,
+			Attachments:    attachments,
+			Levels:         eventLevels,
 		}
 		events, next, err := escape.ListEvents(cmd.Context(), "", filters)
 		if err != nil {
@@ -60,7 +93,7 @@ ID                                      LEVEL    TITLE                      STAG
 
 		for next != nil && *next != "" {
 			events, next, err = escape.ListEvents(cmd.Context(), *next, filters)
-		
+
 			if err != nil {
 				return fmt.Errorf("unable to list profiles: %w", err)
 			}
@@ -110,7 +143,6 @@ ID                                      LEVEL    TITLE                          
 		return nil
 	},
 }
-
 
 func init() {
 	eventsCmd.AddCommand(eventsListCmd)
