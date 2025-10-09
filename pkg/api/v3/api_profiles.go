@@ -947,6 +947,279 @@ func (a *ProfilesAPIService) ListProfilesExecute(r ApiListProfilesRequest) (*Lis
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiProblemsRequest struct {
+	ctx context.Context
+	ApiService *ProfilesAPIService
+	cursor *string
+	size *int
+	sortType *string
+	sortDirection *string
+	assetIds *string
+	domains *string
+	issueIds *string
+	tagIds *string
+	search *string
+	initiators *[]string
+	kinds *[]string
+	risks *[]string
+}
+
+// The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
+func (r ApiProblemsRequest) Cursor(cursor string) ApiProblemsRequest {
+	r.cursor = &cursor
+	return r
+}
+
+// The number of items to return per page
+func (r ApiProblemsRequest) Size(size int) ApiProblemsRequest {
+	r.size = &size
+	return r
+}
+
+// The type to sort by
+func (r ApiProblemsRequest) SortType(sortType string) ApiProblemsRequest {
+	r.sortType = &sortType
+	return r
+}
+
+// The direction to sort by
+func (r ApiProblemsRequest) SortDirection(sortDirection string) ApiProblemsRequest {
+	r.sortDirection = &sortDirection
+	return r
+}
+
+// Filter by asset IDs
+func (r ApiProblemsRequest) AssetIds(assetIds string) ApiProblemsRequest {
+	r.assetIds = &assetIds
+	return r
+}
+
+// Filter by domain
+func (r ApiProblemsRequest) Domains(domains string) ApiProblemsRequest {
+	r.domains = &domains
+	return r
+}
+
+// Filter by issue IDs
+func (r ApiProblemsRequest) IssueIds(issueIds string) ApiProblemsRequest {
+	r.issueIds = &issueIds
+	return r
+}
+
+// Filter by tag IDs
+func (r ApiProblemsRequest) TagIds(tagIds string) ApiProblemsRequest {
+	r.tagIds = &tagIds
+	return r
+}
+
+// Search term to filter profiles by name or description
+func (r ApiProblemsRequest) Search(search string) ApiProblemsRequest {
+	r.search = &search
+	return r
+}
+
+// Filter by initiator
+func (r ApiProblemsRequest) Initiators(initiators []string) ApiProblemsRequest {
+	r.initiators = &initiators
+	return r
+}
+
+// Filter by kind
+func (r ApiProblemsRequest) Kinds(kinds []string) ApiProblemsRequest {
+	r.kinds = &kinds
+	return r
+}
+
+// Filter by risk
+func (r ApiProblemsRequest) Risks(risks []string) ApiProblemsRequest {
+	r.risks = &risks
+	return r
+}
+
+func (r ApiProblemsRequest) Execute() (*Problems200Response, *http.Response, error) {
+	return r.ApiService.ProblemsExecute(r)
+}
+
+/*
+Problems List all scan statuses and problems
+
+List all scan statuses and problems
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiProblemsRequest
+*/
+func (a *ProfilesAPIService) Problems(ctx context.Context) ApiProblemsRequest {
+	return ApiProblemsRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return Problems200Response
+func (a *ProfilesAPIService) ProblemsExecute(r ApiProblemsRequest) (*Problems200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *Problems200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProfilesAPIService.Problems")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/profiles/problems"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.cursor != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
+	}
+	if r.size != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
+	} else {
+		var defaultValue int = 50
+		r.size = &defaultValue
+	}
+	if r.sortType != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortType", r.sortType, "form", "")
+	}
+	if r.sortDirection != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
+	} else {
+		var defaultValue string = "asc"
+		r.sortDirection = &defaultValue
+	}
+	if r.assetIds != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "assetIds", r.assetIds, "form", "")
+	}
+	if r.domains != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "domains", r.domains, "form", "")
+	}
+	if r.issueIds != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "issueIds", r.issueIds, "form", "")
+	}
+	if r.tagIds != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tagIds", r.tagIds, "form", "")
+	}
+	if r.search != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")
+	}
+	if r.initiators != nil {
+		t := *r.initiators
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "initiators", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "initiators", t, "form", "multi")
+		}
+	}
+	if r.kinds != nil {
+		t := *r.kinds
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "kinds", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "kinds", t, "form", "multi")
+		}
+	}
+	if r.risks != nil {
+		t := *r.risks
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "risks", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "risks", t, "form", "multi")
+		}
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ListProfiles400Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiUpdateProfileRequest struct {
 	ctx context.Context
 	ApiService *ProfilesAPIService

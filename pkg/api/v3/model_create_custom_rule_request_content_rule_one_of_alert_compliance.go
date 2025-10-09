@@ -30,7 +30,14 @@ type CreateCustomRuleRequestContentRuleOneOfAlertCompliance struct {
 	Nis2 *ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESNIS2 `json:"nis2,omitempty"`
 	Hipaa *ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESHIPAA `json:"hipaa,omitempty"`
 	OwaspLlm *ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESOWASPLLM `json:"owasp_llm,omitempty"`
+	Iec62443 *ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESIEC62443 `json:"iec62443,omitempty"`
 	Cwe *ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESCWE `json:"cwe,omitempty"`
+	Cra *ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESCRA `json:"cra,omitempty"`
+	Dora *ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESDORA `json:"dora,omitempty"`
+	OwaspAsvs *ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESOWASPASVS `json:"owasp_asvs,omitempty"`
+	Wasc *ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESWASC `json:"wasc,omitempty"`
+	MitreAttack *ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESMITREATTACK `json:"mitre_attack,omitempty"`
+	HitrustCsf *ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESHITRUSTCSF `json:"hitrust_csf,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -405,6 +412,38 @@ func (o *CreateCustomRuleRequestContentRuleOneOfAlertCompliance) SetOwaspLlm(v E
 	o.OwaspLlm = &v
 }
 
+// GetIec62443 returns the Iec62443 field value if set, zero value otherwise.
+func (o *CreateCustomRuleRequestContentRuleOneOfAlertCompliance) GetIec62443() ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESIEC62443 {
+	if o == nil || IsNil(o.Iec62443) {
+		var ret ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESIEC62443
+		return ret
+	}
+	return *o.Iec62443
+}
+
+// GetIec62443Ok returns a tuple with the Iec62443 field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateCustomRuleRequestContentRuleOneOfAlertCompliance) GetIec62443Ok() (*ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESIEC62443, bool) {
+	if o == nil || IsNil(o.Iec62443) {
+		return nil, false
+	}
+	return o.Iec62443, true
+}
+
+// HasIec62443 returns a boolean if a field has been set.
+func (o *CreateCustomRuleRequestContentRuleOneOfAlertCompliance) HasIec62443() bool {
+	if o != nil && !IsNil(o.Iec62443) {
+		return true
+	}
+
+	return false
+}
+
+// SetIec62443 gets a reference to the given ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESIEC62443 and assigns it to the Iec62443 field.
+func (o *CreateCustomRuleRequestContentRuleOneOfAlertCompliance) SetIec62443(v ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESIEC62443) {
+	o.Iec62443 = &v
+}
+
 // GetCwe returns the Cwe field value if set, zero value otherwise.
 func (o *CreateCustomRuleRequestContentRuleOneOfAlertCompliance) GetCwe() ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESCWE {
 	if o == nil || IsNil(o.Cwe) {
@@ -435,6 +474,198 @@ func (o *CreateCustomRuleRequestContentRuleOneOfAlertCompliance) HasCwe() bool {
 // SetCwe gets a reference to the given ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESCWE and assigns it to the Cwe field.
 func (o *CreateCustomRuleRequestContentRuleOneOfAlertCompliance) SetCwe(v ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESCWE) {
 	o.Cwe = &v
+}
+
+// GetCra returns the Cra field value if set, zero value otherwise.
+func (o *CreateCustomRuleRequestContentRuleOneOfAlertCompliance) GetCra() ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESCRA {
+	if o == nil || IsNil(o.Cra) {
+		var ret ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESCRA
+		return ret
+	}
+	return *o.Cra
+}
+
+// GetCraOk returns a tuple with the Cra field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateCustomRuleRequestContentRuleOneOfAlertCompliance) GetCraOk() (*ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESCRA, bool) {
+	if o == nil || IsNil(o.Cra) {
+		return nil, false
+	}
+	return o.Cra, true
+}
+
+// HasCra returns a boolean if a field has been set.
+func (o *CreateCustomRuleRequestContentRuleOneOfAlertCompliance) HasCra() bool {
+	if o != nil && !IsNil(o.Cra) {
+		return true
+	}
+
+	return false
+}
+
+// SetCra gets a reference to the given ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESCRA and assigns it to the Cra field.
+func (o *CreateCustomRuleRequestContentRuleOneOfAlertCompliance) SetCra(v ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESCRA) {
+	o.Cra = &v
+}
+
+// GetDora returns the Dora field value if set, zero value otherwise.
+func (o *CreateCustomRuleRequestContentRuleOneOfAlertCompliance) GetDora() ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESDORA {
+	if o == nil || IsNil(o.Dora) {
+		var ret ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESDORA
+		return ret
+	}
+	return *o.Dora
+}
+
+// GetDoraOk returns a tuple with the Dora field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateCustomRuleRequestContentRuleOneOfAlertCompliance) GetDoraOk() (*ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESDORA, bool) {
+	if o == nil || IsNil(o.Dora) {
+		return nil, false
+	}
+	return o.Dora, true
+}
+
+// HasDora returns a boolean if a field has been set.
+func (o *CreateCustomRuleRequestContentRuleOneOfAlertCompliance) HasDora() bool {
+	if o != nil && !IsNil(o.Dora) {
+		return true
+	}
+
+	return false
+}
+
+// SetDora gets a reference to the given ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESDORA and assigns it to the Dora field.
+func (o *CreateCustomRuleRequestContentRuleOneOfAlertCompliance) SetDora(v ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESDORA) {
+	o.Dora = &v
+}
+
+// GetOwaspAsvs returns the OwaspAsvs field value if set, zero value otherwise.
+func (o *CreateCustomRuleRequestContentRuleOneOfAlertCompliance) GetOwaspAsvs() ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESOWASPASVS {
+	if o == nil || IsNil(o.OwaspAsvs) {
+		var ret ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESOWASPASVS
+		return ret
+	}
+	return *o.OwaspAsvs
+}
+
+// GetOwaspAsvsOk returns a tuple with the OwaspAsvs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateCustomRuleRequestContentRuleOneOfAlertCompliance) GetOwaspAsvsOk() (*ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESOWASPASVS, bool) {
+	if o == nil || IsNil(o.OwaspAsvs) {
+		return nil, false
+	}
+	return o.OwaspAsvs, true
+}
+
+// HasOwaspAsvs returns a boolean if a field has been set.
+func (o *CreateCustomRuleRequestContentRuleOneOfAlertCompliance) HasOwaspAsvs() bool {
+	if o != nil && !IsNil(o.OwaspAsvs) {
+		return true
+	}
+
+	return false
+}
+
+// SetOwaspAsvs gets a reference to the given ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESOWASPASVS and assigns it to the OwaspAsvs field.
+func (o *CreateCustomRuleRequestContentRuleOneOfAlertCompliance) SetOwaspAsvs(v ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESOWASPASVS) {
+	o.OwaspAsvs = &v
+}
+
+// GetWasc returns the Wasc field value if set, zero value otherwise.
+func (o *CreateCustomRuleRequestContentRuleOneOfAlertCompliance) GetWasc() ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESWASC {
+	if o == nil || IsNil(o.Wasc) {
+		var ret ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESWASC
+		return ret
+	}
+	return *o.Wasc
+}
+
+// GetWascOk returns a tuple with the Wasc field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateCustomRuleRequestContentRuleOneOfAlertCompliance) GetWascOk() (*ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESWASC, bool) {
+	if o == nil || IsNil(o.Wasc) {
+		return nil, false
+	}
+	return o.Wasc, true
+}
+
+// HasWasc returns a boolean if a field has been set.
+func (o *CreateCustomRuleRequestContentRuleOneOfAlertCompliance) HasWasc() bool {
+	if o != nil && !IsNil(o.Wasc) {
+		return true
+	}
+
+	return false
+}
+
+// SetWasc gets a reference to the given ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESWASC and assigns it to the Wasc field.
+func (o *CreateCustomRuleRequestContentRuleOneOfAlertCompliance) SetWasc(v ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESWASC) {
+	o.Wasc = &v
+}
+
+// GetMitreAttack returns the MitreAttack field value if set, zero value otherwise.
+func (o *CreateCustomRuleRequestContentRuleOneOfAlertCompliance) GetMitreAttack() ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESMITREATTACK {
+	if o == nil || IsNil(o.MitreAttack) {
+		var ret ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESMITREATTACK
+		return ret
+	}
+	return *o.MitreAttack
+}
+
+// GetMitreAttackOk returns a tuple with the MitreAttack field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateCustomRuleRequestContentRuleOneOfAlertCompliance) GetMitreAttackOk() (*ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESMITREATTACK, bool) {
+	if o == nil || IsNil(o.MitreAttack) {
+		return nil, false
+	}
+	return o.MitreAttack, true
+}
+
+// HasMitreAttack returns a boolean if a field has been set.
+func (o *CreateCustomRuleRequestContentRuleOneOfAlertCompliance) HasMitreAttack() bool {
+	if o != nil && !IsNil(o.MitreAttack) {
+		return true
+	}
+
+	return false
+}
+
+// SetMitreAttack gets a reference to the given ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESMITREATTACK and assigns it to the MitreAttack field.
+func (o *CreateCustomRuleRequestContentRuleOneOfAlertCompliance) SetMitreAttack(v ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESMITREATTACK) {
+	o.MitreAttack = &v
+}
+
+// GetHitrustCsf returns the HitrustCsf field value if set, zero value otherwise.
+func (o *CreateCustomRuleRequestContentRuleOneOfAlertCompliance) GetHitrustCsf() ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESHITRUSTCSF {
+	if o == nil || IsNil(o.HitrustCsf) {
+		var ret ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESHITRUSTCSF
+		return ret
+	}
+	return *o.HitrustCsf
+}
+
+// GetHitrustCsfOk returns a tuple with the HitrustCsf field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateCustomRuleRequestContentRuleOneOfAlertCompliance) GetHitrustCsfOk() (*ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESHITRUSTCSF, bool) {
+	if o == nil || IsNil(o.HitrustCsf) {
+		return nil, false
+	}
+	return o.HitrustCsf, true
+}
+
+// HasHitrustCsf returns a boolean if a field has been set.
+func (o *CreateCustomRuleRequestContentRuleOneOfAlertCompliance) HasHitrustCsf() bool {
+	if o != nil && !IsNil(o.HitrustCsf) {
+		return true
+	}
+
+	return false
+}
+
+// SetHitrustCsf gets a reference to the given ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESHITRUSTCSF and assigns it to the HitrustCsf field.
+func (o *CreateCustomRuleRequestContentRuleOneOfAlertCompliance) SetHitrustCsf(v ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESCOMPLIANCEPROPERTIESHITRUSTCSF) {
+	o.HitrustCsf = &v
 }
 
 func (o CreateCustomRuleRequestContentRuleOneOfAlertCompliance) MarshalJSON() ([]byte, error) {
@@ -480,8 +711,29 @@ func (o CreateCustomRuleRequestContentRuleOneOfAlertCompliance) ToMap() (map[str
 	if !IsNil(o.OwaspLlm) {
 		toSerialize["owasp_llm"] = o.OwaspLlm
 	}
+	if !IsNil(o.Iec62443) {
+		toSerialize["iec62443"] = o.Iec62443
+	}
 	if !IsNil(o.Cwe) {
 		toSerialize["cwe"] = o.Cwe
+	}
+	if !IsNil(o.Cra) {
+		toSerialize["cra"] = o.Cra
+	}
+	if !IsNil(o.Dora) {
+		toSerialize["dora"] = o.Dora
+	}
+	if !IsNil(o.OwaspAsvs) {
+		toSerialize["owasp_asvs"] = o.OwaspAsvs
+	}
+	if !IsNil(o.Wasc) {
+		toSerialize["wasc"] = o.Wasc
+	}
+	if !IsNil(o.MitreAttack) {
+		toSerialize["mitre_attack"] = o.MitreAttack
+	}
+	if !IsNil(o.HitrustCsf) {
+		toSerialize["hitrust_csf"] = o.HitrustCsf
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -516,7 +768,14 @@ func (o *CreateCustomRuleRequestContentRuleOneOfAlertCompliance) UnmarshalJSON(d
 		delete(additionalProperties, "nis2")
 		delete(additionalProperties, "hipaa")
 		delete(additionalProperties, "owasp_llm")
+		delete(additionalProperties, "iec62443")
 		delete(additionalProperties, "cwe")
+		delete(additionalProperties, "cra")
+		delete(additionalProperties, "dora")
+		delete(additionalProperties, "owasp_asvs")
+		delete(additionalProperties, "wasc")
+		delete(additionalProperties, "mitre_attack")
+		delete(additionalProperties, "hitrust_csf")
 		o.AdditionalProperties = additionalProperties
 	}
 

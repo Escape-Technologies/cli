@@ -27,7 +27,7 @@ type ProfileDetailedConfigurationSecurityTests struct {
 	HighNumberOfPii *ProfileDetailedConfigurationSecurityTestsHighNumberOfCustomScalars `json:"high_number_of_pii,omitempty"`
 	HighNumberOfPhi *ProfileDetailedConfigurationSecurityTestsHighNumberOfCustomScalars `json:"high_number_of_phi,omitempty"`
 	HighNumberOfSecrets *ProfileDetailedConfigurationSecurityTestsHighNumberOfCustomScalars `json:"high_number_of_secrets,omitempty"`
-	Agentic *ProfileDetailedConfigurationSecurityTestsAgentic `json:"agentic,omitempty"`
+	ApiAgenticPentesting *ProfileDetailedConfigurationSecurityTestsApiAgenticPentesting `json:"api_agentic_pentesting,omitempty"`
 	AirflowConfigExposure *ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure `json:"airflow_config_exposure,omitempty"`
 	AlibabaCanalLeak *ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure `json:"alibaba_canal_leak,omitempty"`
 	AnsibleConfigExposure *ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure `json:"ansible_config_exposure,omitempty"`
@@ -473,36 +473,36 @@ func (o *ProfileDetailedConfigurationSecurityTests) SetHighNumberOfSecrets(v Pro
 	o.HighNumberOfSecrets = &v
 }
 
-// GetAgentic returns the Agentic field value if set, zero value otherwise.
-func (o *ProfileDetailedConfigurationSecurityTests) GetAgentic() ProfileDetailedConfigurationSecurityTestsAgentic {
-	if o == nil || IsNil(o.Agentic) {
-		var ret ProfileDetailedConfigurationSecurityTestsAgentic
+// GetApiAgenticPentesting returns the ApiAgenticPentesting field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationSecurityTests) GetApiAgenticPentesting() ProfileDetailedConfigurationSecurityTestsApiAgenticPentesting {
+	if o == nil || IsNil(o.ApiAgenticPentesting) {
+		var ret ProfileDetailedConfigurationSecurityTestsApiAgenticPentesting
 		return ret
 	}
-	return *o.Agentic
+	return *o.ApiAgenticPentesting
 }
 
-// GetAgenticOk returns a tuple with the Agentic field value if set, nil otherwise
+// GetApiAgenticPentestingOk returns a tuple with the ApiAgenticPentesting field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationSecurityTests) GetAgenticOk() (*ProfileDetailedConfigurationSecurityTestsAgentic, bool) {
-	if o == nil || IsNil(o.Agentic) {
+func (o *ProfileDetailedConfigurationSecurityTests) GetApiAgenticPentestingOk() (*ProfileDetailedConfigurationSecurityTestsApiAgenticPentesting, bool) {
+	if o == nil || IsNil(o.ApiAgenticPentesting) {
 		return nil, false
 	}
-	return o.Agentic, true
+	return o.ApiAgenticPentesting, true
 }
 
-// HasAgentic returns a boolean if a field has been set.
-func (o *ProfileDetailedConfigurationSecurityTests) HasAgentic() bool {
-	if o != nil && !IsNil(o.Agentic) {
+// HasApiAgenticPentesting returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationSecurityTests) HasApiAgenticPentesting() bool {
+	if o != nil && !IsNil(o.ApiAgenticPentesting) {
 		return true
 	}
 
 	return false
 }
 
-// SetAgentic gets a reference to the given ProfileDetailedConfigurationSecurityTestsAgentic and assigns it to the Agentic field.
-func (o *ProfileDetailedConfigurationSecurityTests) SetAgentic(v ProfileDetailedConfigurationSecurityTestsAgentic) {
-	o.Agentic = &v
+// SetApiAgenticPentesting gets a reference to the given ProfileDetailedConfigurationSecurityTestsApiAgenticPentesting and assigns it to the ApiAgenticPentesting field.
+func (o *ProfileDetailedConfigurationSecurityTests) SetApiAgenticPentesting(v ProfileDetailedConfigurationSecurityTestsApiAgenticPentesting) {
+	o.ApiAgenticPentesting = &v
 }
 
 // GetAirflowConfigExposure returns the AirflowConfigExposure field value if set, zero value otherwise.
@@ -5883,8 +5883,8 @@ func (o ProfileDetailedConfigurationSecurityTests) ToMap() (map[string]interface
 	if !IsNil(o.HighNumberOfSecrets) {
 		toSerialize["high_number_of_secrets"] = o.HighNumberOfSecrets
 	}
-	if !IsNil(o.Agentic) {
-		toSerialize["agentic"] = o.Agentic
+	if !IsNil(o.ApiAgenticPentesting) {
+		toSerialize["api_agentic_pentesting"] = o.ApiAgenticPentesting
 	}
 	if !IsNil(o.AirflowConfigExposure) {
 		toSerialize["airflow_config_exposure"] = o.AirflowConfigExposure
@@ -6417,7 +6417,7 @@ func (o *ProfileDetailedConfigurationSecurityTests) UnmarshalJSON(data []byte) (
 		delete(additionalProperties, "high_number_of_pii")
 		delete(additionalProperties, "high_number_of_phi")
 		delete(additionalProperties, "high_number_of_secrets")
-		delete(additionalProperties, "agentic")
+		delete(additionalProperties, "api_agentic_pentesting")
 		delete(additionalProperties, "airflow_config_exposure")
 		delete(additionalProperties, "alibaba_canal_leak")
 		delete(additionalProperties, "ansible_config_exposure")
