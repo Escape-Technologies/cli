@@ -31,10 +31,46 @@ var asciiLogo = `
 var asciiHeader = "Escape CLI V3"
 
 var rootCmd = &cobra.Command{
-	Use: "escape-cli",
+	Use:   "escape-cli",
 	Short: asciiLogo + "\n" + asciiHeader,
-    PersistentPreRunE: func(c *cobra.Command, _ []string) error {
-        version.WarnIfNotLatestVersion(c.Context())
+	Long: `Escape CLI - Your Gateway to Comprehensive API Security Testing
+
+Escape is the most advanced API security platform, helping you discover, test,
+and secure your APIs with cutting-edge DAST (Dynamic Application Security Testing)
+capabilities.
+
+🎯 WHAT YOU CAN DO:
+  • Start security scans on your REST, GraphQL, and Web APIs
+  • Monitor and track security issues across your API ecosystem
+  • Manage security profiles, assets, and test configurations
+  • Review audit logs and security events
+  • Deploy private scanning locations for internal APIs
+
+📚 GETTING STARTED:
+  1. First time? Check your version:
+     $ escape-cli version
+  
+  2. List your API profiles:
+     $ escape-cli profiles list
+  
+  3. Start a security scan:
+     $ escape-cli scans start <profile-id> --watch
+  
+  4. Review discovered issues:
+     $ escape-cli issues list --severity HIGH,CRITICAL
+
+💡 PRO TIPS:
+  • Use -v for verbose logging (-vv for debug, -vvv for trace)
+  • Output in JSON or YAML with -o json or -o yaml
+  • Most list commands support powerful filtering options
+  • Use --watch flag when starting scans for real-time updates
+
+🔗 RESOURCES:
+  • Documentation: https://docs.escape.tech/documentation/tooling/cli
+  • API Reference: https://public.escape.tech/v3
+  • Support: https://escape.tech/contact`,
+	PersistentPreRunE: func(c *cobra.Command, _ []string) error {
+		version.WarnIfNotLatestVersion(c.Context())
 		if rootCmdVerbose > 0 { //nolint:mnd
 			log.SetLevel(logrus.InfoLevel)
 		}
@@ -64,10 +100,28 @@ var rootCmd = &cobra.Command{
 }
 
 func init() {
-	rootCmd.PersistentFlags().CountVarP(&rootCmdVerbose, "verbose", "v", "enable verbose output")
-	rootCmd.PersistentFlags().StringVarP(&rootCmdOutputStr, "output", "o", "pretty", "output format (pretty|json|yaml)")
+	rootCmd.PersistentFlags().CountVarP(&rootCmdVerbose, "verbose", "v", "verbose output: -v (info), -vv (debug), -vvv (trace), -vvvv (http debug)")
+	rootCmd.PersistentFlags().StringVarP(&rootCmdOutputStr, "output", "o", "pretty", "output format: pretty (human-readable tables), json (machine-readable), yaml (configuration files)")
 	rootCmd.SetUsageTemplate(rootCmd.UsageTemplate() + `
-This CLI is based on the Escape API V3.
+COMMAND CATEGORIES:
+  Scanning:       scans     - Run security scans and view results
+  Security:       issues    - Manage security vulnerabilities
+  Configuration:  profiles  - Configure scan targets and settings
+  Assets:         assets    - Manage your API inventory
+  Infrastructure: locations - Deploy private scanning locations
+  Organization:   audit     - Review activity logs and events
+  Customization:  custom-rules, tags - Extend and organize
+
+ENVIRONMENT VARIABLES:
+  ESCAPE_APPLICATION_URL      - Escape platform URL (default: https://public.escape.tech)
+  ESCAPE_API_KEY              - Your API key for authentication
+  NO_COLOR                    - Disable colored output (set to any value)
+  HTTP_PROXY, HTTPS_PROXY     - Configure proxy settings
+  
+  CI/CD Auto-Detection (commit information):
+  - GitHub Actions: GITHUB_SHA, GITHUB_REF_NAME, GITHUB_ACTOR
+  - GitLab CI: CI_COMMIT_SHA, CI_COMMIT_REF_NAME, GITLAB_USER_EMAIL
+  - CircleCI: CIRCLE_SHA1, CIRCLE_BRANCH, CIRCLE_USERNAME
 
 For additional information, see the documentation: 
 https://docs.escape.tech/documentation/tooling/cli
@@ -82,7 +136,7 @@ https://docs.escape.tech/documentation/tooling/cli
 // Execute the CLI
 func Execute(ctx context.Context) error {
 	isColorDisabled := env.GetColorPreference()
-	
+
 	if isColorDisabled {
 		out.DisableColor()
 	}
