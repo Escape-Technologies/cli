@@ -81,7 +81,6 @@ func connectAndRun(ctx context.Context, cfg *rest.Config, isConnected *atomic.Bo
 			v3.ENUMCLOUDHOSTING_CLOUD_HOSTING,
 			v3.ENUMKUBERNETESCLUSTER_KUBERNETES_CLUSTER,
 			locationID,
-			locationID, // immutableKey
 		)
 		asset.Name = &locationName
 		data, err := asset.MarshalJSON()

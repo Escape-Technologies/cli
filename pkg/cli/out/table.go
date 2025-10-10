@@ -258,7 +258,7 @@ func colorizeValue(value string, columnName string, isLastColumn bool) string {
 		return boldText(value)
 	case "ID":
 		return idText(value)
-	case "STATUS":
+	case "STATUS", "SCAN STATUS":
 		return colorizeStatus(value)
 	case "ACTOR EMAIL":
 		return yellowText(value)
@@ -268,7 +268,7 @@ func colorizeValue(value string, columnName string, isLastColumn bool) string {
 		return colorizeSeverity(value)
 	case "TITLE":
 		return boldText(value)
-	case "CATEGORY", "KIND", "STAGE", "TYPE", "RISKS", "INITIATORS", "ASSET TYPE":
+	case "CATEGORY", "KIND", "STAGE", "TYPE", "RISKS", "INITIATORS", "ASSET TYPE", "PROBLEM CODE":
 		return colorizeEnum(value)
 	case "CREATED AT", "UPDATED AT", "DATE":
 		return colorizeDate(value)

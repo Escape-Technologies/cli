@@ -26,7 +26,6 @@ type CreateAssetKUBERNETESCLUSTERRequest struct {
 	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
 	AssetType ENUMKUBERNETESCLUSTER `json:"asset_type"`
 	Name *string `json:"name,omitempty"`
-	ImmutableKey string `json:"immutable_key"`
 	PrivateLocationId string `json:"private_location_id"`
 	AdditionalProperties map[string]interface{}
 }
@@ -37,11 +36,10 @@ type _CreateAssetKUBERNETESCLUSTERRequest CreateAssetKUBERNETESCLUSTERRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetKUBERNETESCLUSTERRequest(assetClass ENUMCLOUDHOSTING, assetType ENUMKUBERNETESCLUSTER, immutableKey string, privateLocationId string) *CreateAssetKUBERNETESCLUSTERRequest {
+func NewCreateAssetKUBERNETESCLUSTERRequest(assetClass ENUMCLOUDHOSTING, assetType ENUMKUBERNETESCLUSTER, privateLocationId string) *CreateAssetKUBERNETESCLUSTERRequest {
 	this := CreateAssetKUBERNETESCLUSTERRequest{}
 	this.AssetClass = assetClass
 	this.AssetType = assetType
-	this.ImmutableKey = immutableKey
 	this.PrivateLocationId = privateLocationId
 	return &this
 }
@@ -230,30 +228,6 @@ func (o *CreateAssetKUBERNETESCLUSTERRequest) SetName(v string) {
 	o.Name = &v
 }
 
-// GetImmutableKey returns the ImmutableKey field value
-func (o *CreateAssetKUBERNETESCLUSTERRequest) GetImmutableKey() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ImmutableKey
-}
-
-// GetImmutableKeyOk returns a tuple with the ImmutableKey field value
-// and a boolean to check if the value has been set.
-func (o *CreateAssetKUBERNETESCLUSTERRequest) GetImmutableKeyOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ImmutableKey, true
-}
-
-// SetImmutableKey sets field value
-func (o *CreateAssetKUBERNETESCLUSTERRequest) SetImmutableKey(v string) {
-	o.ImmutableKey = v
-}
-
 // GetPrivateLocationId returns the PrivateLocationId field value
 func (o *CreateAssetKUBERNETESCLUSTERRequest) GetPrivateLocationId() string {
 	if o == nil {
@@ -302,7 +276,6 @@ func (o CreateAssetKUBERNETESCLUSTERRequest) ToMap() (map[string]interface{}, er
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
-	toSerialize["immutable_key"] = o.ImmutableKey
 	toSerialize["private_location_id"] = o.PrivateLocationId
 
 	for key, value := range o.AdditionalProperties {
@@ -319,7 +292,6 @@ func (o *CreateAssetKUBERNETESCLUSTERRequest) UnmarshalJSON(data []byte) (err er
 	requiredProperties := []string{
 		"asset_class",
 		"asset_type",
-		"immutable_key",
 		"private_location_id",
 	}
 
@@ -356,7 +328,6 @@ func (o *CreateAssetKUBERNETESCLUSTERRequest) UnmarshalJSON(data []byte) (err er
 		delete(additionalProperties, "extra_metadata")
 		delete(additionalProperties, "asset_type")
 		delete(additionalProperties, "name")
-		delete(additionalProperties, "immutable_key")
 		delete(additionalProperties, "private_location_id")
 		o.AdditionalProperties = additionalProperties
 	}

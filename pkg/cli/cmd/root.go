@@ -106,6 +106,7 @@ func init() {
 COMMAND CATEGORIES:
   Scanning:       scans     - Run security scans and view results
   Security:       issues    - Manage security vulnerabilities
+  Monitoring:     problems  - View scan problems and failures
   Configuration:  profiles  - Configure scan targets and settings
   Assets:         assets    - Manage your API inventory
   Infrastructure: locations - Deploy private scanning locations
