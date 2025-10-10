@@ -153,3 +153,58 @@ func DeleteProfile(ctx context.Context, profileID string) error {
 	}
 	return nil
 }
+
+// ListProblemsFilters holds optional filters for listing problems
+type ListProblemsFilters struct {
+	AssetIDs []string
+	Domains []string
+	IssueIDs []string
+	TagsIDs []string
+	Search string
+	Initiators []string
+	Kinds []string
+	Risks []string
+}
+
+// ListProblems lists all scan problems
+func ListProblems(ctx context.Context, next string, filters *ListProblemsFilters) ([]v3.LastScanStatusSummarized, *string, error) {
+	client, err := newAPIV3Client()
+	if err != nil {
+		return nil, nil, fmt.Errorf("unable to init client: %w", err)
+	}
+	req := client.ProfilesAPI.Problems(ctx)
+	if next != "" {
+		req = req.Cursor(next)
+	}
+	if filters != nil {
+		if len(filters.AssetIDs) > 0 {
+			req = req.AssetIds(strings.Join(filters.AssetIDs, ","))
+		}
+		if len(filters.Domains) > 0 {
+			req = req.Domains(strings.Join(filters.Domains, ","))
+		}
+		if len(filters.IssueIDs) > 0 {
+			req = req.IssueIds(strings.Join(filters.IssueIDs, ","))
+		}
+		if len(filters.TagsIDs) > 0 {
+			req = req.TagIds(strings.Join(filters.TagsIDs, ","))
+		}
+		if filters.Search != "" {
+			req = req.Search(filters.Search)
+		}
+		if len(filters.Initiators) > 0 {
+			req = req.Initiators((filters.Initiators))
+		}
+		if len(filters.Kinds) > 0 {
+			req = req.Kinds((filters.Kinds))
+		}
+		if len(filters.Risks) > 0 {
+			req = req.Risks((filters.Risks))
+		}
+	}
+	data, _, err := req.Execute()
+	if err != nil {
+		return nil, nil, fmt.Errorf("api error: %w", err)
+	}
+	return data.Data, data.NextCursor, nil
+}
