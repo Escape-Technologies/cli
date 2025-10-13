@@ -16,14 +16,14 @@ import (
 )
 
 
-// CreateSchemaRequest struct for CreateSchemaRequest
-type CreateSchemaRequest struct {
+// CreateAssetSchemaRequest struct for CreateAssetSchemaRequest
+type CreateAssetSchemaRequest struct {
 	CreateSchemaViaFetch *CreateSchemaViaFetch
 	CreateSchemaViaUpload *CreateSchemaViaUpload
 }
 
 // Unmarshal JSON data into any of the pointers in the struct
-func (dst *CreateSchemaRequest) UnmarshalJSON(data []byte) error {
+func (dst *CreateAssetSchemaRequest) UnmarshalJSON(data []byte) error {
 	var err error
 	// try to unmarshal JSON data into CreateSchemaViaFetch
 	err = json.Unmarshal(data, &dst.CreateSchemaViaFetch);
@@ -51,11 +51,11 @@ func (dst *CreateSchemaRequest) UnmarshalJSON(data []byte) error {
 		dst.CreateSchemaViaUpload = nil
 	}
 
-	return fmt.Errorf("data failed to match schemas in anyOf(CreateSchemaRequest)")
+	return fmt.Errorf("data failed to match schemas in anyOf(CreateAssetSchemaRequest)")
 }
 
 // Marshal data from the first non-nil pointers in the struct to JSON
-func (src CreateSchemaRequest) MarshalJSON() ([]byte, error) {
+func (src CreateAssetSchemaRequest) MarshalJSON() ([]byte, error) {
 	if src.CreateSchemaViaFetch != nil {
 		return json.Marshal(&src.CreateSchemaViaFetch)
 	}
@@ -68,38 +68,38 @@ func (src CreateSchemaRequest) MarshalJSON() ([]byte, error) {
 }
 
 
-type NullableCreateSchemaRequest struct {
-	value *CreateSchemaRequest
+type NullableCreateAssetSchemaRequest struct {
+	value *CreateAssetSchemaRequest
 	isSet bool
 }
 
-func (v NullableCreateSchemaRequest) Get() *CreateSchemaRequest {
+func (v NullableCreateAssetSchemaRequest) Get() *CreateAssetSchemaRequest {
 	return v.value
 }
 
-func (v *NullableCreateSchemaRequest) Set(val *CreateSchemaRequest) {
+func (v *NullableCreateAssetSchemaRequest) Set(val *CreateAssetSchemaRequest) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCreateSchemaRequest) IsSet() bool {
+func (v NullableCreateAssetSchemaRequest) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCreateSchemaRequest) Unset() {
+func (v *NullableCreateAssetSchemaRequest) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCreateSchemaRequest(val *CreateSchemaRequest) *NullableCreateSchemaRequest {
-	return &NullableCreateSchemaRequest{value: val, isSet: true}
+func NewNullableCreateAssetSchemaRequest(val *CreateAssetSchemaRequest) *NullableCreateAssetSchemaRequest {
+	return &NullableCreateAssetSchemaRequest{value: val, isSet: true}
 }
 
-func (v NullableCreateSchemaRequest) MarshalJSON() ([]byte, error) {
+func (v NullableCreateAssetSchemaRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCreateSchemaRequest) UnmarshalJSON(src []byte) error {
+func (v *NullableCreateAssetSchemaRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
