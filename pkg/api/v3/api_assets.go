@@ -2270,16 +2270,16 @@ func (a *AssetsAPIService) CreateAssetRESTExecute(r ApiCreateAssetRESTRequest) (
 type ApiCreateAssetSchemaRequest struct {
 	ctx context.Context
 	ApiService *AssetsAPIService
-	createSchemaRequest *CreateSchemaRequest
+	createAssetSchemaRequest *CreateAssetSchemaRequest
 }
 
 // Body of the request to create an asset
-func (r ApiCreateAssetSchemaRequest) CreateSchemaRequest(createSchemaRequest CreateSchemaRequest) ApiCreateAssetSchemaRequest {
-	r.createSchemaRequest = &createSchemaRequest
+func (r ApiCreateAssetSchemaRequest) CreateAssetSchemaRequest(createAssetSchemaRequest CreateAssetSchemaRequest) ApiCreateAssetSchemaRequest {
+	r.createAssetSchemaRequest = &createAssetSchemaRequest
 	return r
 }
 
-func (r ApiCreateAssetSchemaRequest) Execute() (*CreateAssetSchema200Response, *http.Response, error) {
+func (r ApiCreateAssetSchemaRequest) Execute() (*AssetDetailed, *http.Response, error) {
 	return r.ApiService.CreateAssetSchemaExecute(r)
 }
 
@@ -2299,13 +2299,13 @@ func (a *AssetsAPIService) CreateAssetSchema(ctx context.Context) ApiCreateAsset
 }
 
 // Execute executes the request
-//  @return CreateAssetSchema200Response
-func (a *AssetsAPIService) CreateAssetSchemaExecute(r ApiCreateAssetSchemaRequest) (*CreateAssetSchema200Response, *http.Response, error) {
+//  @return AssetDetailed
+func (a *AssetsAPIService) CreateAssetSchemaExecute(r ApiCreateAssetSchemaRequest) (*AssetDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateAssetSchema200Response
+		localVarReturnValue  *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetSchema")
@@ -2337,7 +2337,7 @@ func (a *AssetsAPIService) CreateAssetSchemaExecute(r ApiCreateAssetSchemaReques
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.createSchemaRequest
+	localVarPostBody = r.createAssetSchemaRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
