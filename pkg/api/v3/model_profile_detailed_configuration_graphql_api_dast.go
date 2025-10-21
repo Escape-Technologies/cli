@@ -29,6 +29,7 @@ type ProfileDetailedConfigurationGraphqlApiDast struct {
 	Hotstart []string `json:"hotstart,omitempty"`
 	HotstartOnly *bool `json:"hotstart_only,omitempty"`
 	Blocklist *ProfileDetailedConfigurationGraphqlApiDastBlocklist `json:"blocklist,omitempty"`
+	Scope *ProfileDetailedConfigurationGraphqlApiDastScope `json:"scope,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -371,6 +372,38 @@ func (o *ProfileDetailedConfigurationGraphqlApiDast) SetBlocklist(v ProfileDetai
 	o.Blocklist = &v
 }
 
+// GetScope returns the Scope field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationGraphqlApiDast) GetScope() ProfileDetailedConfigurationGraphqlApiDastScope {
+	if o == nil || IsNil(o.Scope) {
+		var ret ProfileDetailedConfigurationGraphqlApiDastScope
+		return ret
+	}
+	return *o.Scope
+}
+
+// GetScopeOk returns a tuple with the Scope field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationGraphqlApiDast) GetScopeOk() (*ProfileDetailedConfigurationGraphqlApiDastScope, bool) {
+	if o == nil || IsNil(o.Scope) {
+		return nil, false
+	}
+	return o.Scope, true
+}
+
+// HasScope returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationGraphqlApiDast) HasScope() bool {
+	if o != nil && !IsNil(o.Scope) {
+		return true
+	}
+
+	return false
+}
+
+// SetScope gets a reference to the given ProfileDetailedConfigurationGraphqlApiDastScope and assigns it to the Scope field.
+func (o *ProfileDetailedConfigurationGraphqlApiDast) SetScope(v ProfileDetailedConfigurationGraphqlApiDastScope) {
+	o.Scope = &v
+}
+
 func (o ProfileDetailedConfigurationGraphqlApiDast) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -411,6 +444,9 @@ func (o ProfileDetailedConfigurationGraphqlApiDast) ToMap() (map[string]interfac
 	if !IsNil(o.Blocklist) {
 		toSerialize["blocklist"] = o.Blocklist
 	}
+	if !IsNil(o.Scope) {
+		toSerialize["scope"] = o.Scope
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -443,6 +479,7 @@ func (o *ProfileDetailedConfigurationGraphqlApiDast) UnmarshalJSON(data []byte) 
 		delete(additionalProperties, "hotstart")
 		delete(additionalProperties, "hotstart_only")
 		delete(additionalProperties, "blocklist")
+		delete(additionalProperties, "scope")
 		o.AdditionalProperties = additionalProperties
 	}
 
