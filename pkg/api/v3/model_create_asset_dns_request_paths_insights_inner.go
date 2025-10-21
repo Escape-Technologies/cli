@@ -21,7 +21,7 @@ var _ MappedNullable = &CreateAssetDNSRequestPathsInsightsInner{}
 // CreateAssetDNSRequestPathsInsightsInner struct for CreateAssetDNSRequestPathsInsightsInner
 type CreateAssetDNSRequestPathsInsightsInner struct {
 	Path string `json:"path"`
-	Method ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSKIPPEDAPICHECKSURLPATTERNSITEMSPROPERTIESMETHOD `json:"method"`
+	Method ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSCOPEPROPERTIESAPIPROPERTIESSKIPPEDURLPATTERNSITEMSPROPERTIESMETHOD `json:"method"`
 	Parameters *CreateAssetDNSRequestPathsInsightsInnerParameters `json:"parameters,omitempty"`
 	ReturnType *CreateAssetDNSRequestPathsInsightsInnerReturnType `json:"returnType,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -33,7 +33,7 @@ type _CreateAssetDNSRequestPathsInsightsInner CreateAssetDNSRequestPathsInsights
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetDNSRequestPathsInsightsInner(path string, method ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSKIPPEDAPICHECKSURLPATTERNSITEMSPROPERTIESMETHOD) *CreateAssetDNSRequestPathsInsightsInner {
+func NewCreateAssetDNSRequestPathsInsightsInner(path string, method ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSCOPEPROPERTIESAPIPROPERTIESSKIPPEDURLPATTERNSITEMSPROPERTIESMETHOD) *CreateAssetDNSRequestPathsInsightsInner {
 	this := CreateAssetDNSRequestPathsInsightsInner{}
 	this.Path = path
 	this.Method = method
@@ -73,9 +73,9 @@ func (o *CreateAssetDNSRequestPathsInsightsInner) SetPath(v string) {
 }
 
 // GetMethod returns the Method field value
-func (o *CreateAssetDNSRequestPathsInsightsInner) GetMethod() ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSKIPPEDAPICHECKSURLPATTERNSITEMSPROPERTIESMETHOD {
+func (o *CreateAssetDNSRequestPathsInsightsInner) GetMethod() ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSCOPEPROPERTIESAPIPROPERTIESSKIPPEDURLPATTERNSITEMSPROPERTIESMETHOD {
 	if o == nil {
-		var ret ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSKIPPEDAPICHECKSURLPATTERNSITEMSPROPERTIESMETHOD
+		var ret ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSCOPEPROPERTIESAPIPROPERTIESSKIPPEDURLPATTERNSITEMSPROPERTIESMETHOD
 		return ret
 	}
 
@@ -84,7 +84,7 @@ func (o *CreateAssetDNSRequestPathsInsightsInner) GetMethod() ENUMPROPERTIESCONF
 
 // GetMethodOk returns a tuple with the Method field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetDNSRequestPathsInsightsInner) GetMethodOk() (*ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSKIPPEDAPICHECKSURLPATTERNSITEMSPROPERTIESMETHOD, bool) {
+func (o *CreateAssetDNSRequestPathsInsightsInner) GetMethodOk() (*ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSCOPEPROPERTIESAPIPROPERTIESSKIPPEDURLPATTERNSITEMSPROPERTIESMETHOD, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -92,7 +92,7 @@ func (o *CreateAssetDNSRequestPathsInsightsInner) GetMethodOk() (*ENUMPROPERTIES
 }
 
 // SetMethod sets field value
-func (o *CreateAssetDNSRequestPathsInsightsInner) SetMethod(v ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSKIPPEDAPICHECKSURLPATTERNSITEMSPROPERTIESMETHOD) {
+func (o *CreateAssetDNSRequestPathsInsightsInner) SetMethod(v ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSCOPEPROPERTIESAPIPROPERTIESSKIPPEDURLPATTERNSITEMSPROPERTIESMETHOD) {
 	o.Method = v
 }
 

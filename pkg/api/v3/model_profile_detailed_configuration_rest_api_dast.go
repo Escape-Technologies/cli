@@ -27,6 +27,7 @@ type ProfileDetailedConfigurationRestApiDast struct {
 	Hotstart []string `json:"hotstart,omitempty"`
 	HotstartOnly *bool `json:"hotstart_only,omitempty"`
 	Blocklist []ProfileDetailedConfigurationRestApiDastBlocklistInner `json:"blocklist,omitempty"`
+	Scope *ProfileDetailedConfigurationRestApiDastScope `json:"scope,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -305,6 +306,38 @@ func (o *ProfileDetailedConfigurationRestApiDast) SetBlocklist(v []ProfileDetail
 	o.Blocklist = v
 }
 
+// GetScope returns the Scope field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationRestApiDast) GetScope() ProfileDetailedConfigurationRestApiDastScope {
+	if o == nil || IsNil(o.Scope) {
+		var ret ProfileDetailedConfigurationRestApiDastScope
+		return ret
+	}
+	return *o.Scope
+}
+
+// GetScopeOk returns a tuple with the Scope field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationRestApiDast) GetScopeOk() (*ProfileDetailedConfigurationRestApiDastScope, bool) {
+	if o == nil || IsNil(o.Scope) {
+		return nil, false
+	}
+	return o.Scope, true
+}
+
+// HasScope returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationRestApiDast) HasScope() bool {
+	if o != nil && !IsNil(o.Scope) {
+		return true
+	}
+
+	return false
+}
+
+// SetScope gets a reference to the given ProfileDetailedConfigurationRestApiDastScope and assigns it to the Scope field.
+func (o *ProfileDetailedConfigurationRestApiDast) SetScope(v ProfileDetailedConfigurationRestApiDastScope) {
+	o.Scope = &v
+}
+
 func (o ProfileDetailedConfigurationRestApiDast) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -339,6 +372,9 @@ func (o ProfileDetailedConfigurationRestApiDast) ToMap() (map[string]interface{}
 	if !IsNil(o.Blocklist) {
 		toSerialize["blocklist"] = o.Blocklist
 	}
+	if !IsNil(o.Scope) {
+		toSerialize["scope"] = o.Scope
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -369,6 +405,7 @@ func (o *ProfileDetailedConfigurationRestApiDast) UnmarshalJSON(data []byte) (er
 		delete(additionalProperties, "hotstart")
 		delete(additionalProperties, "hotstart_only")
 		delete(additionalProperties, "blocklist")
+		delete(additionalProperties, "scope")
 		o.AdditionalProperties = additionalProperties
 	}
 

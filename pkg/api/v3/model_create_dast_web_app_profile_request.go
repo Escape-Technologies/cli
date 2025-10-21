@@ -32,6 +32,8 @@ type CreateDastWebAppProfileRequest struct {
 	ProxyId *string `json:"proxyId,omitempty"`
 	// The tags IDs for the profile
 	TagsIds []string `json:"tagsIds,omitempty"`
+	// Whether to start the scan immediately
+	Start *bool `json:"start,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -45,6 +47,8 @@ func NewCreateDastWebAppProfileRequest(assetId string, name string) *CreateDastW
 	this := CreateDastWebAppProfileRequest{}
 	this.AssetId = assetId
 	this.Name = name
+	var start bool = true
+	this.Start = &start
 	return &this
 }
 
@@ -53,6 +57,8 @@ func NewCreateDastWebAppProfileRequest(assetId string, name string) *CreateDastW
 // but it doesn't guarantee that properties required by API are set
 func NewCreateDastWebAppProfileRequestWithDefaults() *CreateDastWebAppProfileRequest {
 	this := CreateDastWebAppProfileRequest{}
+	var start bool = true
+	this.Start = &start
 	return &this
 }
 
@@ -232,6 +238,38 @@ func (o *CreateDastWebAppProfileRequest) SetTagsIds(v []string) {
 	o.TagsIds = v
 }
 
+// GetStart returns the Start field value if set, zero value otherwise.
+func (o *CreateDastWebAppProfileRequest) GetStart() bool {
+	if o == nil || IsNil(o.Start) {
+		var ret bool
+		return ret
+	}
+	return *o.Start
+}
+
+// GetStartOk returns a tuple with the Start field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateDastWebAppProfileRequest) GetStartOk() (*bool, bool) {
+	if o == nil || IsNil(o.Start) {
+		return nil, false
+	}
+	return o.Start, true
+}
+
+// HasStart returns a boolean if a field has been set.
+func (o *CreateDastWebAppProfileRequest) HasStart() bool {
+	if o != nil && !IsNil(o.Start) {
+		return true
+	}
+
+	return false
+}
+
+// SetStart gets a reference to the given bool and assigns it to the Start field.
+func (o *CreateDastWebAppProfileRequest) SetStart(v bool) {
+	o.Start = &v
+}
+
 func (o CreateDastWebAppProfileRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -255,6 +293,9 @@ func (o CreateDastWebAppProfileRequest) ToMap() (map[string]interface{}, error) 
 	}
 	if !IsNil(o.TagsIds) {
 		toSerialize["tagsIds"] = o.TagsIds
+	}
+	if !IsNil(o.Start) {
+		toSerialize["start"] = o.Start
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -306,6 +347,7 @@ func (o *CreateDastWebAppProfileRequest) UnmarshalJSON(data []byte) (err error) 
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "proxyId")
 		delete(additionalProperties, "tagsIds")
+		delete(additionalProperties, "start")
 		o.AdditionalProperties = additionalProperties
 	}
 

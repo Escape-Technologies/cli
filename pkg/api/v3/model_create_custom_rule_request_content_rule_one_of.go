@@ -25,6 +25,7 @@ type CreateCustomRuleRequestContentRuleOneOf struct {
 	Seed []CreateCustomRuleRequestContentRuleOneOfSeedInner `json:"seed,omitempty"`
 	Transform *CreateCustomRuleRequestContentRuleOneOfTransform `json:"transform,omitempty"`
 	Detect []CreateCustomRuleRequestContentRuleOneOfTransformTriggerInner `json:"detect"`
+	Extractors []CreateCustomRuleRequestContentRuleOneOfExtractorsInner `json:"extractors,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -186,6 +187,38 @@ func (o *CreateCustomRuleRequestContentRuleOneOf) SetDetect(v []CreateCustomRule
 	o.Detect = v
 }
 
+// GetExtractors returns the Extractors field value if set, zero value otherwise.
+func (o *CreateCustomRuleRequestContentRuleOneOf) GetExtractors() []CreateCustomRuleRequestContentRuleOneOfExtractorsInner {
+	if o == nil || IsNil(o.Extractors) {
+		var ret []CreateCustomRuleRequestContentRuleOneOfExtractorsInner
+		return ret
+	}
+	return o.Extractors
+}
+
+// GetExtractorsOk returns a tuple with the Extractors field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateCustomRuleRequestContentRuleOneOf) GetExtractorsOk() ([]CreateCustomRuleRequestContentRuleOneOfExtractorsInner, bool) {
+	if o == nil || IsNil(o.Extractors) {
+		return nil, false
+	}
+	return o.Extractors, true
+}
+
+// HasExtractors returns a boolean if a field has been set.
+func (o *CreateCustomRuleRequestContentRuleOneOf) HasExtractors() bool {
+	if o != nil && !IsNil(o.Extractors) {
+		return true
+	}
+
+	return false
+}
+
+// SetExtractors gets a reference to the given []CreateCustomRuleRequestContentRuleOneOfExtractorsInner and assigns it to the Extractors field.
+func (o *CreateCustomRuleRequestContentRuleOneOf) SetExtractors(v []CreateCustomRuleRequestContentRuleOneOfExtractorsInner) {
+	o.Extractors = v
+}
+
 func (o CreateCustomRuleRequestContentRuleOneOf) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -205,6 +238,9 @@ func (o CreateCustomRuleRequestContentRuleOneOf) ToMap() (map[string]interface{}
 		toSerialize["transform"] = o.Transform
 	}
 	toSerialize["detect"] = o.Detect
+	if !IsNil(o.Extractors) {
+		toSerialize["extractors"] = o.Extractors
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -255,6 +291,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOf) UnmarshalJSON(data []byte) (er
 		delete(additionalProperties, "seed")
 		delete(additionalProperties, "transform")
 		delete(additionalProperties, "detect")
+		delete(additionalProperties, "extractors")
 		o.AdditionalProperties = additionalProperties
 	}
 

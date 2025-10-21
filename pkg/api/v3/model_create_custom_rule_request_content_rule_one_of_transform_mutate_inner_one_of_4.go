@@ -21,6 +21,7 @@ var _ MappedNullable = &CreateCustomRuleRequestContentRuleOneOfTransformMutateIn
 // CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf4 struct for CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf4
 type CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf4 struct {
 	Key ENUMREQUESTBODYJSON `json:"key"`
+	UseExtraction *bool `json:"use_extraction,omitempty"`
 	Jq *string `json:"jq,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -69,6 +70,38 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf4) SetK
 	o.Key = v
 }
 
+// GetUseExtraction returns the UseExtraction field value if set, zero value otherwise.
+func (o *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf4) GetUseExtraction() bool {
+	if o == nil || IsNil(o.UseExtraction) {
+		var ret bool
+		return ret
+	}
+	return *o.UseExtraction
+}
+
+// GetUseExtractionOk returns a tuple with the UseExtraction field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf4) GetUseExtractionOk() (*bool, bool) {
+	if o == nil || IsNil(o.UseExtraction) {
+		return nil, false
+	}
+	return o.UseExtraction, true
+}
+
+// HasUseExtraction returns a boolean if a field has been set.
+func (o *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf4) HasUseExtraction() bool {
+	if o != nil && !IsNil(o.UseExtraction) {
+		return true
+	}
+
+	return false
+}
+
+// SetUseExtraction gets a reference to the given bool and assigns it to the UseExtraction field.
+func (o *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf4) SetUseExtraction(v bool) {
+	o.UseExtraction = &v
+}
+
 // GetJq returns the Jq field value if set, zero value otherwise.
 func (o *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf4) GetJq() string {
 	if o == nil || IsNil(o.Jq) {
@@ -112,6 +145,9 @@ func (o CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf4) Marsh
 func (o CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf4) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["key"] = o.Key
+	if !IsNil(o.UseExtraction) {
+		toSerialize["use_extraction"] = o.UseExtraction
+	}
 	if !IsNil(o.Jq) {
 		toSerialize["jq"] = o.Jq
 	}
@@ -159,6 +195,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf4) Unma
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "key")
+		delete(additionalProperties, "use_extraction")
 		delete(additionalProperties, "jq")
 		o.AdditionalProperties = additionalProperties
 	}

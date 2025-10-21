@@ -25,6 +25,7 @@ type CustomRuleRuleOneOf1 struct {
 	Type ENUMWEBAPP `json:"type"`
 	Seed []ProfileDetailedConfigurationAuthenticationUsersInnerCredentialsActionsInner `json:"seed"`
 	Detect []CreateCustomRuleRequestContentRuleOneOf1DetectInner `json:"detect"`
+	Extractors []interface{} `json:"extractors,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -172,6 +173,38 @@ func (o *CustomRuleRuleOneOf1) SetDetect(v []CreateCustomRuleRequestContentRuleO
 	o.Detect = v
 }
 
+// GetExtractors returns the Extractors field value if set, zero value otherwise.
+func (o *CustomRuleRuleOneOf1) GetExtractors() []interface{} {
+	if o == nil || IsNil(o.Extractors) {
+		var ret []interface{}
+		return ret
+	}
+	return o.Extractors
+}
+
+// GetExtractorsOk returns a tuple with the Extractors field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CustomRuleRuleOneOf1) GetExtractorsOk() ([]interface{}, bool) {
+	if o == nil || IsNil(o.Extractors) {
+		return nil, false
+	}
+	return o.Extractors, true
+}
+
+// HasExtractors returns a boolean if a field has been set.
+func (o *CustomRuleRuleOneOf1) HasExtractors() bool {
+	if o != nil && !IsNil(o.Extractors) {
+		return true
+	}
+
+	return false
+}
+
+// SetExtractors gets a reference to the given []interface{} and assigns it to the Extractors field.
+func (o *CustomRuleRuleOneOf1) SetExtractors(v []interface{}) {
+	o.Extractors = v
+}
+
 func (o CustomRuleRuleOneOf1) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -187,6 +220,9 @@ func (o CustomRuleRuleOneOf1) ToMap() (map[string]interface{}, error) {
 	toSerialize["type"] = o.Type
 	toSerialize["seed"] = o.Seed
 	toSerialize["detect"] = o.Detect
+	if !IsNil(o.Extractors) {
+		toSerialize["extractors"] = o.Extractors
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -239,6 +275,7 @@ func (o *CustomRuleRuleOneOf1) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "type")
 		delete(additionalProperties, "seed")
 		delete(additionalProperties, "detect")
+		delete(additionalProperties, "extractors")
 		o.AdditionalProperties = additionalProperties
 	}
 
