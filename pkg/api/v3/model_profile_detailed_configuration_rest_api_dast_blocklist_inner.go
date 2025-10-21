@@ -19,7 +19,7 @@ var _ MappedNullable = &ProfileDetailedConfigurationRestApiDastBlocklistInner{}
 
 // ProfileDetailedConfigurationRestApiDastBlocklistInner struct for ProfileDetailedConfigurationRestApiDastBlocklistInner
 type ProfileDetailedConfigurationRestApiDastBlocklistInner struct {
-	Method *ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSKIPPEDAPICHECKSURLPATTERNSITEMSPROPERTIESMETHOD `json:"method,omitempty"`
+	Method *ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSCOPEPROPERTIESAPIPROPERTIESSKIPPEDURLPATTERNSITEMSPROPERTIESMETHOD `json:"method,omitempty"`
 	Path *string `json:"path,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -44,9 +44,9 @@ func NewProfileDetailedConfigurationRestApiDastBlocklistInnerWithDefaults() *Pro
 }
 
 // GetMethod returns the Method field value if set, zero value otherwise.
-func (o *ProfileDetailedConfigurationRestApiDastBlocklistInner) GetMethod() ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSKIPPEDAPICHECKSURLPATTERNSITEMSPROPERTIESMETHOD {
+func (o *ProfileDetailedConfigurationRestApiDastBlocklistInner) GetMethod() ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSCOPEPROPERTIESAPIPROPERTIESSKIPPEDURLPATTERNSITEMSPROPERTIESMETHOD {
 	if o == nil || IsNil(o.Method) {
-		var ret ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSKIPPEDAPICHECKSURLPATTERNSITEMSPROPERTIESMETHOD
+		var ret ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSCOPEPROPERTIESAPIPROPERTIESSKIPPEDURLPATTERNSITEMSPROPERTIESMETHOD
 		return ret
 	}
 	return *o.Method
@@ -54,7 +54,7 @@ func (o *ProfileDetailedConfigurationRestApiDastBlocklistInner) GetMethod() ENUM
 
 // GetMethodOk returns a tuple with the Method field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationRestApiDastBlocklistInner) GetMethodOk() (*ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSKIPPEDAPICHECKSURLPATTERNSITEMSPROPERTIESMETHOD, bool) {
+func (o *ProfileDetailedConfigurationRestApiDastBlocklistInner) GetMethodOk() (*ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSCOPEPROPERTIESAPIPROPERTIESSKIPPEDURLPATTERNSITEMSPROPERTIESMETHOD, bool) {
 	if o == nil || IsNil(o.Method) {
 		return nil, false
 	}
@@ -70,8 +70,8 @@ func (o *ProfileDetailedConfigurationRestApiDastBlocklistInner) HasMethod() bool
 	return false
 }
 
-// SetMethod gets a reference to the given ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSKIPPEDAPICHECKSURLPATTERNSITEMSPROPERTIESMETHOD and assigns it to the Method field.
-func (o *ProfileDetailedConfigurationRestApiDastBlocklistInner) SetMethod(v ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSKIPPEDAPICHECKSURLPATTERNSITEMSPROPERTIESMETHOD) {
+// SetMethod gets a reference to the given ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSCOPEPROPERTIESAPIPROPERTIESSKIPPEDURLPATTERNSITEMSPROPERTIESMETHOD and assigns it to the Method field.
+func (o *ProfileDetailedConfigurationRestApiDastBlocklistInner) SetMethod(v ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSCOPEPROPERTIESAPIPROPERTIESSKIPPEDURLPATTERNSITEMSPROPERTIESMETHOD) {
 	o.Method = &v
 }
 

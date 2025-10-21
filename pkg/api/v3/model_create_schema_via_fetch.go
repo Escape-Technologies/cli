@@ -21,6 +21,7 @@ var _ MappedNullable = &CreateSchemaViaFetch{}
 // CreateSchemaViaFetch struct for CreateSchemaViaFetch
 type CreateSchemaViaFetch struct {
 	AssetType ENUMSCHEMA `json:"asset_type"`
+	Name *string `json:"name,omitempty"`
 	Fetch CreateSchemaViaFetchFetch `json:"fetch"`
 	// The authentication string of the asset
 	AuthenticationStr *string `json:"authenticationStr,omitempty"`
@@ -70,6 +71,38 @@ func (o *CreateSchemaViaFetch) GetAssetTypeOk() (*ENUMSCHEMA, bool) {
 // SetAssetType sets field value
 func (o *CreateSchemaViaFetch) SetAssetType(v ENUMSCHEMA) {
 	o.AssetType = v
+}
+
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *CreateSchemaViaFetch) GetName() string {
+	if o == nil || IsNil(o.Name) {
+		var ret string
+		return ret
+	}
+	return *o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateSchemaViaFetch) GetNameOk() (*string, bool) {
+	if o == nil || IsNil(o.Name) {
+		return nil, false
+	}
+	return o.Name, true
+}
+
+// HasName returns a boolean if a field has been set.
+func (o *CreateSchemaViaFetch) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *CreateSchemaViaFetch) SetName(v string) {
+	o.Name = &v
 }
 
 // GetFetch returns the Fetch field value
@@ -139,6 +172,9 @@ func (o CreateSchemaViaFetch) MarshalJSON() ([]byte, error) {
 func (o CreateSchemaViaFetch) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["asset_type"] = o.AssetType
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
 	toSerialize["fetch"] = o.Fetch
 	if !IsNil(o.AuthenticationStr) {
 		toSerialize["authenticationStr"] = o.AuthenticationStr
@@ -188,6 +224,7 @@ func (o *CreateSchemaViaFetch) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "asset_type")
+		delete(additionalProperties, "name")
 		delete(additionalProperties, "fetch")
 		delete(additionalProperties, "authenticationStr")
 		o.AdditionalProperties = additionalProperties

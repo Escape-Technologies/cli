@@ -461,6 +461,7 @@ type ApiListScansRequest struct {
 	initiator *string
 	kinds *[]string
 	status *string
+	projectIds *ListScansProjectIdsParameter
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
@@ -526,6 +527,12 @@ func (r ApiListScansRequest) Kinds(kinds []string) ApiListScansRequest {
 // Filter by status
 func (r ApiListScansRequest) Status(status string) ApiListScansRequest {
 	r.status = &status
+	return r
+}
+
+// Filter by project IDs
+func (r ApiListScansRequest) ProjectIds(projectIds ListScansProjectIdsParameter) ApiListScansRequest {
+	r.projectIds = &projectIds
 	return r
 }
 
@@ -615,6 +622,9 @@ func (a *ScansAPIService) ListScansExecute(r ApiListScansRequest) (*ListScans200
 	}
 	if r.status != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "status", r.status, "form", "")
+	}
+	if r.projectIds != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "projectIds", r.projectIds, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

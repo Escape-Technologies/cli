@@ -24,6 +24,8 @@ type EventDetailed struct {
 	Id string `json:"id"`
 	// The date and time the event was created
 	CreatedAt string `json:"createdAt"`
+	// The description of the event
+	Description string `json:"description"`
 	// The attachments of the event
 	Attachments []AttachmentDetailed `json:"attachments,omitempty"`
 	// The issues of the event
@@ -46,10 +48,11 @@ type _EventDetailed EventDetailed
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewEventDetailed(id string, createdAt string, issuesCount float32, level ENUMPROPERTIESDATAITEMSPROPERTIESLEVEL, stage ENUMPROPERTIESDATAITEMSPROPERTIESSTAGE, title string) *EventDetailed {
+func NewEventDetailed(id string, createdAt string, description string, issuesCount float32, level ENUMPROPERTIESDATAITEMSPROPERTIESLEVEL, stage ENUMPROPERTIESDATAITEMSPROPERTIESSTAGE, title string) *EventDetailed {
 	this := EventDetailed{}
 	this.Id = id
 	this.CreatedAt = createdAt
+	this.Description = description
 	this.IssuesCount = issuesCount
 	this.Level = level
 	this.Stage = stage
@@ -111,6 +114,30 @@ func (o *EventDetailed) GetCreatedAtOk() (*string, bool) {
 // SetCreatedAt sets field value
 func (o *EventDetailed) SetCreatedAt(v string) {
 	o.CreatedAt = v
+}
+
+// GetDescription returns the Description field value
+func (o *EventDetailed) GetDescription() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value
+// and a boolean to check if the value has been set.
+func (o *EventDetailed) GetDescriptionOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Description, true
+}
+
+// SetDescription sets field value
+func (o *EventDetailed) SetDescription(v string) {
+	o.Description = v
 }
 
 // GetAttachments returns the Attachments field value if set, zero value otherwise.
@@ -349,6 +376,7 @@ func (o EventDetailed) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["createdAt"] = o.CreatedAt
+	toSerialize["description"] = o.Description
 	if !IsNil(o.Attachments) {
 		toSerialize["attachments"] = o.Attachments
 	}
@@ -380,6 +408,7 @@ func (o *EventDetailed) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"id",
 		"createdAt",
+		"description",
 		"issuesCount",
 		"level",
 		"stage",
@@ -415,6 +444,7 @@ func (o *EventDetailed) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "createdAt")
+		delete(additionalProperties, "description")
 		delete(additionalProperties, "attachments")
 		delete(additionalProperties, "issues")
 		delete(additionalProperties, "issuesCount")

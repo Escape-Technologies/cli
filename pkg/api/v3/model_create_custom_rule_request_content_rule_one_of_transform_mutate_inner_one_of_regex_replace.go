@@ -20,6 +20,7 @@ var _ MappedNullable = &CreateCustomRuleRequestContentRuleOneOfTransformMutateIn
 
 // CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOfRegexReplace struct for CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOfRegexReplace
 type CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOfRegexReplace struct {
+	UseExtraction *bool `json:"use_extraction,omitempty"`
 	Pattern string `json:"pattern"`
 	Replacement string `json:"replacement"`
 	AdditionalProperties map[string]interface{}
@@ -44,6 +45,38 @@ func NewCreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOfRegexRep
 func NewCreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOfRegexReplaceWithDefaults() *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOfRegexReplace {
 	this := CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOfRegexReplace{}
 	return &this
+}
+
+// GetUseExtraction returns the UseExtraction field value if set, zero value otherwise.
+func (o *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOfRegexReplace) GetUseExtraction() bool {
+	if o == nil || IsNil(o.UseExtraction) {
+		var ret bool
+		return ret
+	}
+	return *o.UseExtraction
+}
+
+// GetUseExtractionOk returns a tuple with the UseExtraction field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOfRegexReplace) GetUseExtractionOk() (*bool, bool) {
+	if o == nil || IsNil(o.UseExtraction) {
+		return nil, false
+	}
+	return o.UseExtraction, true
+}
+
+// HasUseExtraction returns a boolean if a field has been set.
+func (o *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOfRegexReplace) HasUseExtraction() bool {
+	if o != nil && !IsNil(o.UseExtraction) {
+		return true
+	}
+
+	return false
+}
+
+// SetUseExtraction gets a reference to the given bool and assigns it to the UseExtraction field.
+func (o *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOfRegexReplace) SetUseExtraction(v bool) {
+	o.UseExtraction = &v
 }
 
 // GetPattern returns the Pattern field value
@@ -104,6 +137,9 @@ func (o CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOfRegexRep
 
 func (o CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOfRegexReplace) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.UseExtraction) {
+		toSerialize["use_extraction"] = o.UseExtraction
+	}
 	toSerialize["pattern"] = o.Pattern
 	toSerialize["replacement"] = o.Replacement
 
@@ -150,6 +186,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOfRegexRe
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "use_extraction")
 		delete(additionalProperties, "pattern")
 		delete(additionalProperties, "replacement")
 		o.AdditionalProperties = additionalProperties

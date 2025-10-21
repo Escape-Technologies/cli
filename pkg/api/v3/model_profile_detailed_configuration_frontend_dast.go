@@ -23,27 +23,29 @@ type ProfileDetailedConfigurationFrontendDast struct {
 	Mode *ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE `json:"mode,omitempty"`
 	MaxDuration *float32 `json:"max_duration,omitempty"`
 	Hotstart []string `json:"hotstart,omitempty"`
-	BlocklistPatterns []string `json:"blocklist_patterns,omitempty"`
-	SkippedApiChecksUrlPatterns []ProfileDetailedConfigurationFrontendDastSkippedApiChecksUrlPatternsInner `json:"skipped_api_checks_url_patterns,omitempty"`
-	RelaxCorsSecurity *bool `json:"relax_cors_security,omitempty"`
+	SecurityChecksEnabled []ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSECURITYCHECKSENABLEDITEMS `json:"security_checks_enabled,omitempty"`
+	ApiChecksDuringAuth *bool `json:"api_checks_during_auth,omitempty"`
 	SinglePageWorker *bool `json:"single_page_worker,omitempty"`
 	ParallelWorkers *float32 `json:"parallel_workers,omitempty"`
+	RelaxCorsSecurity *bool `json:"relax_cors_security,omitempty"`
 	UserAgent *string `json:"user_agent,omitempty"`
 	UsePersistence *bool `json:"use_persistence,omitempty"`
 	EscapeUserHeader *bool `json:"escape_user_header,omitempty"`
 	PrefetchSitemap *bool `json:"prefetch_sitemap,omitempty"`
+	StaticCrawling *ProfileDetailedConfigurationFrontendDastStaticCrawling `json:"static_crawling,omitempty"`
+	LogoutDetection *ProfileDetailedConfigurationFrontendDastLogoutDetection `json:"logout_detection,omitempty"`
+	Scope *ProfileDetailedConfigurationFrontendDastScope `json:"scope,omitempty"`
+	BlocklistPatterns []string `json:"blocklist_patterns,omitempty"`
+	SkippedApiChecksUrlPatterns []ProfileDetailedConfigurationFrontendDastScopeApiSkippedUrlPatternsInner `json:"skipped_api_checks_url_patterns,omitempty"`
 	BlocklistedElementSelectors []string `json:"blocklisted_element_selectors,omitempty"`
 	WhitelistElementSelectors []string `json:"whitelist_element_selectors,omitempty"`
 	MaxQueryParamsVisits *float32 `json:"max_query_params_visits,omitempty"`
 	MaxFragmentsVisits *float32 `json:"max_fragments_visits,omitempty"`
 	MaxParameterOccurence *float32 `json:"max_parameter_occurence,omitempty"`
-	SecurityChecksEnabled []ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSECURITYCHECKSENABLEDITEMS `json:"security_checks_enabled,omitempty"`
-	ApiChecksDuringAuth *bool `json:"api_checks_during_auth,omitempty"`
 	AllowedUrlPatterns []string `json:"allowed_url_patterns,omitempty"`
-	LogoutDetection *ProfileDetailedConfigurationFrontendDastLogoutDetection `json:"logout_detection,omitempty"`
+	AgenticCrawling *ProfileDetailedConfigurationFrontendDastAgenticCrawling `json:"agentic_crawling,omitempty"`
 	FrontendAgenticPentesting *bool `json:"frontend_agentic_pentesting,omitempty"`
 	UseLegacyCrawling *bool `json:"use_legacy_crawling,omitempty"`
-	StaticCrawling *ProfileDetailedConfigurationFrontendDastStaticCrawling `json:"static_crawling,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -194,100 +196,68 @@ func (o *ProfileDetailedConfigurationFrontendDast) SetHotstart(v []string) {
 	o.Hotstart = v
 }
 
-// GetBlocklistPatterns returns the BlocklistPatterns field value if set, zero value otherwise.
-func (o *ProfileDetailedConfigurationFrontendDast) GetBlocklistPatterns() []string {
-	if o == nil || IsNil(o.BlocklistPatterns) {
-		var ret []string
+// GetSecurityChecksEnabled returns the SecurityChecksEnabled field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationFrontendDast) GetSecurityChecksEnabled() []ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSECURITYCHECKSENABLEDITEMS {
+	if o == nil || IsNil(o.SecurityChecksEnabled) {
+		var ret []ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSECURITYCHECKSENABLEDITEMS
 		return ret
 	}
-	return o.BlocklistPatterns
+	return o.SecurityChecksEnabled
 }
 
-// GetBlocklistPatternsOk returns a tuple with the BlocklistPatterns field value if set, nil otherwise
+// GetSecurityChecksEnabledOk returns a tuple with the SecurityChecksEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationFrontendDast) GetBlocklistPatternsOk() ([]string, bool) {
-	if o == nil || IsNil(o.BlocklistPatterns) {
+func (o *ProfileDetailedConfigurationFrontendDast) GetSecurityChecksEnabledOk() ([]ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSECURITYCHECKSENABLEDITEMS, bool) {
+	if o == nil || IsNil(o.SecurityChecksEnabled) {
 		return nil, false
 	}
-	return o.BlocklistPatterns, true
+	return o.SecurityChecksEnabled, true
 }
 
-// HasBlocklistPatterns returns a boolean if a field has been set.
-func (o *ProfileDetailedConfigurationFrontendDast) HasBlocklistPatterns() bool {
-	if o != nil && !IsNil(o.BlocklistPatterns) {
+// HasSecurityChecksEnabled returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationFrontendDast) HasSecurityChecksEnabled() bool {
+	if o != nil && !IsNil(o.SecurityChecksEnabled) {
 		return true
 	}
 
 	return false
 }
 
-// SetBlocklistPatterns gets a reference to the given []string and assigns it to the BlocklistPatterns field.
-func (o *ProfileDetailedConfigurationFrontendDast) SetBlocklistPatterns(v []string) {
-	o.BlocklistPatterns = v
+// SetSecurityChecksEnabled gets a reference to the given []ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSECURITYCHECKSENABLEDITEMS and assigns it to the SecurityChecksEnabled field.
+func (o *ProfileDetailedConfigurationFrontendDast) SetSecurityChecksEnabled(v []ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSECURITYCHECKSENABLEDITEMS) {
+	o.SecurityChecksEnabled = v
 }
 
-// GetSkippedApiChecksUrlPatterns returns the SkippedApiChecksUrlPatterns field value if set, zero value otherwise.
-func (o *ProfileDetailedConfigurationFrontendDast) GetSkippedApiChecksUrlPatterns() []ProfileDetailedConfigurationFrontendDastSkippedApiChecksUrlPatternsInner {
-	if o == nil || IsNil(o.SkippedApiChecksUrlPatterns) {
-		var ret []ProfileDetailedConfigurationFrontendDastSkippedApiChecksUrlPatternsInner
-		return ret
-	}
-	return o.SkippedApiChecksUrlPatterns
-}
-
-// GetSkippedApiChecksUrlPatternsOk returns a tuple with the SkippedApiChecksUrlPatterns field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationFrontendDast) GetSkippedApiChecksUrlPatternsOk() ([]ProfileDetailedConfigurationFrontendDastSkippedApiChecksUrlPatternsInner, bool) {
-	if o == nil || IsNil(o.SkippedApiChecksUrlPatterns) {
-		return nil, false
-	}
-	return o.SkippedApiChecksUrlPatterns, true
-}
-
-// HasSkippedApiChecksUrlPatterns returns a boolean if a field has been set.
-func (o *ProfileDetailedConfigurationFrontendDast) HasSkippedApiChecksUrlPatterns() bool {
-	if o != nil && !IsNil(o.SkippedApiChecksUrlPatterns) {
-		return true
-	}
-
-	return false
-}
-
-// SetSkippedApiChecksUrlPatterns gets a reference to the given []ProfileDetailedConfigurationFrontendDastSkippedApiChecksUrlPatternsInner and assigns it to the SkippedApiChecksUrlPatterns field.
-func (o *ProfileDetailedConfigurationFrontendDast) SetSkippedApiChecksUrlPatterns(v []ProfileDetailedConfigurationFrontendDastSkippedApiChecksUrlPatternsInner) {
-	o.SkippedApiChecksUrlPatterns = v
-}
-
-// GetRelaxCorsSecurity returns the RelaxCorsSecurity field value if set, zero value otherwise.
-func (o *ProfileDetailedConfigurationFrontendDast) GetRelaxCorsSecurity() bool {
-	if o == nil || IsNil(o.RelaxCorsSecurity) {
+// GetApiChecksDuringAuth returns the ApiChecksDuringAuth field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationFrontendDast) GetApiChecksDuringAuth() bool {
+	if o == nil || IsNil(o.ApiChecksDuringAuth) {
 		var ret bool
 		return ret
 	}
-	return *o.RelaxCorsSecurity
+	return *o.ApiChecksDuringAuth
 }
 
-// GetRelaxCorsSecurityOk returns a tuple with the RelaxCorsSecurity field value if set, nil otherwise
+// GetApiChecksDuringAuthOk returns a tuple with the ApiChecksDuringAuth field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationFrontendDast) GetRelaxCorsSecurityOk() (*bool, bool) {
-	if o == nil || IsNil(o.RelaxCorsSecurity) {
+func (o *ProfileDetailedConfigurationFrontendDast) GetApiChecksDuringAuthOk() (*bool, bool) {
+	if o == nil || IsNil(o.ApiChecksDuringAuth) {
 		return nil, false
 	}
-	return o.RelaxCorsSecurity, true
+	return o.ApiChecksDuringAuth, true
 }
 
-// HasRelaxCorsSecurity returns a boolean if a field has been set.
-func (o *ProfileDetailedConfigurationFrontendDast) HasRelaxCorsSecurity() bool {
-	if o != nil && !IsNil(o.RelaxCorsSecurity) {
+// HasApiChecksDuringAuth returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationFrontendDast) HasApiChecksDuringAuth() bool {
+	if o != nil && !IsNil(o.ApiChecksDuringAuth) {
 		return true
 	}
 
 	return false
 }
 
-// SetRelaxCorsSecurity gets a reference to the given bool and assigns it to the RelaxCorsSecurity field.
-func (o *ProfileDetailedConfigurationFrontendDast) SetRelaxCorsSecurity(v bool) {
-	o.RelaxCorsSecurity = &v
+// SetApiChecksDuringAuth gets a reference to the given bool and assigns it to the ApiChecksDuringAuth field.
+func (o *ProfileDetailedConfigurationFrontendDast) SetApiChecksDuringAuth(v bool) {
+	o.ApiChecksDuringAuth = &v
 }
 
 // GetSinglePageWorker returns the SinglePageWorker field value if set, zero value otherwise.
@@ -352,6 +322,38 @@ func (o *ProfileDetailedConfigurationFrontendDast) HasParallelWorkers() bool {
 // SetParallelWorkers gets a reference to the given float32 and assigns it to the ParallelWorkers field.
 func (o *ProfileDetailedConfigurationFrontendDast) SetParallelWorkers(v float32) {
 	o.ParallelWorkers = &v
+}
+
+// GetRelaxCorsSecurity returns the RelaxCorsSecurity field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationFrontendDast) GetRelaxCorsSecurity() bool {
+	if o == nil || IsNil(o.RelaxCorsSecurity) {
+		var ret bool
+		return ret
+	}
+	return *o.RelaxCorsSecurity
+}
+
+// GetRelaxCorsSecurityOk returns a tuple with the RelaxCorsSecurity field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationFrontendDast) GetRelaxCorsSecurityOk() (*bool, bool) {
+	if o == nil || IsNil(o.RelaxCorsSecurity) {
+		return nil, false
+	}
+	return o.RelaxCorsSecurity, true
+}
+
+// HasRelaxCorsSecurity returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationFrontendDast) HasRelaxCorsSecurity() bool {
+	if o != nil && !IsNil(o.RelaxCorsSecurity) {
+		return true
+	}
+
+	return false
+}
+
+// SetRelaxCorsSecurity gets a reference to the given bool and assigns it to the RelaxCorsSecurity field.
+func (o *ProfileDetailedConfigurationFrontendDast) SetRelaxCorsSecurity(v bool) {
+	o.RelaxCorsSecurity = &v
 }
 
 // GetUserAgent returns the UserAgent field value if set, zero value otherwise.
@@ -480,6 +482,166 @@ func (o *ProfileDetailedConfigurationFrontendDast) HasPrefetchSitemap() bool {
 // SetPrefetchSitemap gets a reference to the given bool and assigns it to the PrefetchSitemap field.
 func (o *ProfileDetailedConfigurationFrontendDast) SetPrefetchSitemap(v bool) {
 	o.PrefetchSitemap = &v
+}
+
+// GetStaticCrawling returns the StaticCrawling field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationFrontendDast) GetStaticCrawling() ProfileDetailedConfigurationFrontendDastStaticCrawling {
+	if o == nil || IsNil(o.StaticCrawling) {
+		var ret ProfileDetailedConfigurationFrontendDastStaticCrawling
+		return ret
+	}
+	return *o.StaticCrawling
+}
+
+// GetStaticCrawlingOk returns a tuple with the StaticCrawling field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationFrontendDast) GetStaticCrawlingOk() (*ProfileDetailedConfigurationFrontendDastStaticCrawling, bool) {
+	if o == nil || IsNil(o.StaticCrawling) {
+		return nil, false
+	}
+	return o.StaticCrawling, true
+}
+
+// HasStaticCrawling returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationFrontendDast) HasStaticCrawling() bool {
+	if o != nil && !IsNil(o.StaticCrawling) {
+		return true
+	}
+
+	return false
+}
+
+// SetStaticCrawling gets a reference to the given ProfileDetailedConfigurationFrontendDastStaticCrawling and assigns it to the StaticCrawling field.
+func (o *ProfileDetailedConfigurationFrontendDast) SetStaticCrawling(v ProfileDetailedConfigurationFrontendDastStaticCrawling) {
+	o.StaticCrawling = &v
+}
+
+// GetLogoutDetection returns the LogoutDetection field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationFrontendDast) GetLogoutDetection() ProfileDetailedConfigurationFrontendDastLogoutDetection {
+	if o == nil || IsNil(o.LogoutDetection) {
+		var ret ProfileDetailedConfigurationFrontendDastLogoutDetection
+		return ret
+	}
+	return *o.LogoutDetection
+}
+
+// GetLogoutDetectionOk returns a tuple with the LogoutDetection field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationFrontendDast) GetLogoutDetectionOk() (*ProfileDetailedConfigurationFrontendDastLogoutDetection, bool) {
+	if o == nil || IsNil(o.LogoutDetection) {
+		return nil, false
+	}
+	return o.LogoutDetection, true
+}
+
+// HasLogoutDetection returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationFrontendDast) HasLogoutDetection() bool {
+	if o != nil && !IsNil(o.LogoutDetection) {
+		return true
+	}
+
+	return false
+}
+
+// SetLogoutDetection gets a reference to the given ProfileDetailedConfigurationFrontendDastLogoutDetection and assigns it to the LogoutDetection field.
+func (o *ProfileDetailedConfigurationFrontendDast) SetLogoutDetection(v ProfileDetailedConfigurationFrontendDastLogoutDetection) {
+	o.LogoutDetection = &v
+}
+
+// GetScope returns the Scope field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationFrontendDast) GetScope() ProfileDetailedConfigurationFrontendDastScope {
+	if o == nil || IsNil(o.Scope) {
+		var ret ProfileDetailedConfigurationFrontendDastScope
+		return ret
+	}
+	return *o.Scope
+}
+
+// GetScopeOk returns a tuple with the Scope field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationFrontendDast) GetScopeOk() (*ProfileDetailedConfigurationFrontendDastScope, bool) {
+	if o == nil || IsNil(o.Scope) {
+		return nil, false
+	}
+	return o.Scope, true
+}
+
+// HasScope returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationFrontendDast) HasScope() bool {
+	if o != nil && !IsNil(o.Scope) {
+		return true
+	}
+
+	return false
+}
+
+// SetScope gets a reference to the given ProfileDetailedConfigurationFrontendDastScope and assigns it to the Scope field.
+func (o *ProfileDetailedConfigurationFrontendDast) SetScope(v ProfileDetailedConfigurationFrontendDastScope) {
+	o.Scope = &v
+}
+
+// GetBlocklistPatterns returns the BlocklistPatterns field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationFrontendDast) GetBlocklistPatterns() []string {
+	if o == nil || IsNil(o.BlocklistPatterns) {
+		var ret []string
+		return ret
+	}
+	return o.BlocklistPatterns
+}
+
+// GetBlocklistPatternsOk returns a tuple with the BlocklistPatterns field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationFrontendDast) GetBlocklistPatternsOk() ([]string, bool) {
+	if o == nil || IsNil(o.BlocklistPatterns) {
+		return nil, false
+	}
+	return o.BlocklistPatterns, true
+}
+
+// HasBlocklistPatterns returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationFrontendDast) HasBlocklistPatterns() bool {
+	if o != nil && !IsNil(o.BlocklistPatterns) {
+		return true
+	}
+
+	return false
+}
+
+// SetBlocklistPatterns gets a reference to the given []string and assigns it to the BlocklistPatterns field.
+func (o *ProfileDetailedConfigurationFrontendDast) SetBlocklistPatterns(v []string) {
+	o.BlocklistPatterns = v
+}
+
+// GetSkippedApiChecksUrlPatterns returns the SkippedApiChecksUrlPatterns field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationFrontendDast) GetSkippedApiChecksUrlPatterns() []ProfileDetailedConfigurationFrontendDastScopeApiSkippedUrlPatternsInner {
+	if o == nil || IsNil(o.SkippedApiChecksUrlPatterns) {
+		var ret []ProfileDetailedConfigurationFrontendDastScopeApiSkippedUrlPatternsInner
+		return ret
+	}
+	return o.SkippedApiChecksUrlPatterns
+}
+
+// GetSkippedApiChecksUrlPatternsOk returns a tuple with the SkippedApiChecksUrlPatterns field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationFrontendDast) GetSkippedApiChecksUrlPatternsOk() ([]ProfileDetailedConfigurationFrontendDastScopeApiSkippedUrlPatternsInner, bool) {
+	if o == nil || IsNil(o.SkippedApiChecksUrlPatterns) {
+		return nil, false
+	}
+	return o.SkippedApiChecksUrlPatterns, true
+}
+
+// HasSkippedApiChecksUrlPatterns returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationFrontendDast) HasSkippedApiChecksUrlPatterns() bool {
+	if o != nil && !IsNil(o.SkippedApiChecksUrlPatterns) {
+		return true
+	}
+
+	return false
+}
+
+// SetSkippedApiChecksUrlPatterns gets a reference to the given []ProfileDetailedConfigurationFrontendDastScopeApiSkippedUrlPatternsInner and assigns it to the SkippedApiChecksUrlPatterns field.
+func (o *ProfileDetailedConfigurationFrontendDast) SetSkippedApiChecksUrlPatterns(v []ProfileDetailedConfigurationFrontendDastScopeApiSkippedUrlPatternsInner) {
+	o.SkippedApiChecksUrlPatterns = v
 }
 
 // GetBlocklistedElementSelectors returns the BlocklistedElementSelectors field value if set, zero value otherwise.
@@ -642,70 +804,6 @@ func (o *ProfileDetailedConfigurationFrontendDast) SetMaxParameterOccurence(v fl
 	o.MaxParameterOccurence = &v
 }
 
-// GetSecurityChecksEnabled returns the SecurityChecksEnabled field value if set, zero value otherwise.
-func (o *ProfileDetailedConfigurationFrontendDast) GetSecurityChecksEnabled() []ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSECURITYCHECKSENABLEDITEMS {
-	if o == nil || IsNil(o.SecurityChecksEnabled) {
-		var ret []ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSECURITYCHECKSENABLEDITEMS
-		return ret
-	}
-	return o.SecurityChecksEnabled
-}
-
-// GetSecurityChecksEnabledOk returns a tuple with the SecurityChecksEnabled field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationFrontendDast) GetSecurityChecksEnabledOk() ([]ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSECURITYCHECKSENABLEDITEMS, bool) {
-	if o == nil || IsNil(o.SecurityChecksEnabled) {
-		return nil, false
-	}
-	return o.SecurityChecksEnabled, true
-}
-
-// HasSecurityChecksEnabled returns a boolean if a field has been set.
-func (o *ProfileDetailedConfigurationFrontendDast) HasSecurityChecksEnabled() bool {
-	if o != nil && !IsNil(o.SecurityChecksEnabled) {
-		return true
-	}
-
-	return false
-}
-
-// SetSecurityChecksEnabled gets a reference to the given []ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSECURITYCHECKSENABLEDITEMS and assigns it to the SecurityChecksEnabled field.
-func (o *ProfileDetailedConfigurationFrontendDast) SetSecurityChecksEnabled(v []ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSECURITYCHECKSENABLEDITEMS) {
-	o.SecurityChecksEnabled = v
-}
-
-// GetApiChecksDuringAuth returns the ApiChecksDuringAuth field value if set, zero value otherwise.
-func (o *ProfileDetailedConfigurationFrontendDast) GetApiChecksDuringAuth() bool {
-	if o == nil || IsNil(o.ApiChecksDuringAuth) {
-		var ret bool
-		return ret
-	}
-	return *o.ApiChecksDuringAuth
-}
-
-// GetApiChecksDuringAuthOk returns a tuple with the ApiChecksDuringAuth field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationFrontendDast) GetApiChecksDuringAuthOk() (*bool, bool) {
-	if o == nil || IsNil(o.ApiChecksDuringAuth) {
-		return nil, false
-	}
-	return o.ApiChecksDuringAuth, true
-}
-
-// HasApiChecksDuringAuth returns a boolean if a field has been set.
-func (o *ProfileDetailedConfigurationFrontendDast) HasApiChecksDuringAuth() bool {
-	if o != nil && !IsNil(o.ApiChecksDuringAuth) {
-		return true
-	}
-
-	return false
-}
-
-// SetApiChecksDuringAuth gets a reference to the given bool and assigns it to the ApiChecksDuringAuth field.
-func (o *ProfileDetailedConfigurationFrontendDast) SetApiChecksDuringAuth(v bool) {
-	o.ApiChecksDuringAuth = &v
-}
-
 // GetAllowedUrlPatterns returns the AllowedUrlPatterns field value if set, zero value otherwise.
 func (o *ProfileDetailedConfigurationFrontendDast) GetAllowedUrlPatterns() []string {
 	if o == nil || IsNil(o.AllowedUrlPatterns) {
@@ -738,36 +836,36 @@ func (o *ProfileDetailedConfigurationFrontendDast) SetAllowedUrlPatterns(v []str
 	o.AllowedUrlPatterns = v
 }
 
-// GetLogoutDetection returns the LogoutDetection field value if set, zero value otherwise.
-func (o *ProfileDetailedConfigurationFrontendDast) GetLogoutDetection() ProfileDetailedConfigurationFrontendDastLogoutDetection {
-	if o == nil || IsNil(o.LogoutDetection) {
-		var ret ProfileDetailedConfigurationFrontendDastLogoutDetection
+// GetAgenticCrawling returns the AgenticCrawling field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationFrontendDast) GetAgenticCrawling() ProfileDetailedConfigurationFrontendDastAgenticCrawling {
+	if o == nil || IsNil(o.AgenticCrawling) {
+		var ret ProfileDetailedConfigurationFrontendDastAgenticCrawling
 		return ret
 	}
-	return *o.LogoutDetection
+	return *o.AgenticCrawling
 }
 
-// GetLogoutDetectionOk returns a tuple with the LogoutDetection field value if set, nil otherwise
+// GetAgenticCrawlingOk returns a tuple with the AgenticCrawling field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationFrontendDast) GetLogoutDetectionOk() (*ProfileDetailedConfigurationFrontendDastLogoutDetection, bool) {
-	if o == nil || IsNil(o.LogoutDetection) {
+func (o *ProfileDetailedConfigurationFrontendDast) GetAgenticCrawlingOk() (*ProfileDetailedConfigurationFrontendDastAgenticCrawling, bool) {
+	if o == nil || IsNil(o.AgenticCrawling) {
 		return nil, false
 	}
-	return o.LogoutDetection, true
+	return o.AgenticCrawling, true
 }
 
-// HasLogoutDetection returns a boolean if a field has been set.
-func (o *ProfileDetailedConfigurationFrontendDast) HasLogoutDetection() bool {
-	if o != nil && !IsNil(o.LogoutDetection) {
+// HasAgenticCrawling returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationFrontendDast) HasAgenticCrawling() bool {
+	if o != nil && !IsNil(o.AgenticCrawling) {
 		return true
 	}
 
 	return false
 }
 
-// SetLogoutDetection gets a reference to the given ProfileDetailedConfigurationFrontendDastLogoutDetection and assigns it to the LogoutDetection field.
-func (o *ProfileDetailedConfigurationFrontendDast) SetLogoutDetection(v ProfileDetailedConfigurationFrontendDastLogoutDetection) {
-	o.LogoutDetection = &v
+// SetAgenticCrawling gets a reference to the given ProfileDetailedConfigurationFrontendDastAgenticCrawling and assigns it to the AgenticCrawling field.
+func (o *ProfileDetailedConfigurationFrontendDast) SetAgenticCrawling(v ProfileDetailedConfigurationFrontendDastAgenticCrawling) {
+	o.AgenticCrawling = &v
 }
 
 // GetFrontendAgenticPentesting returns the FrontendAgenticPentesting field value if set, zero value otherwise.
@@ -834,38 +932,6 @@ func (o *ProfileDetailedConfigurationFrontendDast) SetUseLegacyCrawling(v bool) 
 	o.UseLegacyCrawling = &v
 }
 
-// GetStaticCrawling returns the StaticCrawling field value if set, zero value otherwise.
-func (o *ProfileDetailedConfigurationFrontendDast) GetStaticCrawling() ProfileDetailedConfigurationFrontendDastStaticCrawling {
-	if o == nil || IsNil(o.StaticCrawling) {
-		var ret ProfileDetailedConfigurationFrontendDastStaticCrawling
-		return ret
-	}
-	return *o.StaticCrawling
-}
-
-// GetStaticCrawlingOk returns a tuple with the StaticCrawling field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationFrontendDast) GetStaticCrawlingOk() (*ProfileDetailedConfigurationFrontendDastStaticCrawling, bool) {
-	if o == nil || IsNil(o.StaticCrawling) {
-		return nil, false
-	}
-	return o.StaticCrawling, true
-}
-
-// HasStaticCrawling returns a boolean if a field has been set.
-func (o *ProfileDetailedConfigurationFrontendDast) HasStaticCrawling() bool {
-	if o != nil && !IsNil(o.StaticCrawling) {
-		return true
-	}
-
-	return false
-}
-
-// SetStaticCrawling gets a reference to the given ProfileDetailedConfigurationFrontendDastStaticCrawling and assigns it to the StaticCrawling field.
-func (o *ProfileDetailedConfigurationFrontendDast) SetStaticCrawling(v ProfileDetailedConfigurationFrontendDastStaticCrawling) {
-	o.StaticCrawling = &v
-}
-
 func (o ProfileDetailedConfigurationFrontendDast) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -888,20 +954,20 @@ func (o ProfileDetailedConfigurationFrontendDast) ToMap() (map[string]interface{
 	if !IsNil(o.Hotstart) {
 		toSerialize["hotstart"] = o.Hotstart
 	}
-	if !IsNil(o.BlocklistPatterns) {
-		toSerialize["blocklist_patterns"] = o.BlocklistPatterns
+	if !IsNil(o.SecurityChecksEnabled) {
+		toSerialize["security_checks_enabled"] = o.SecurityChecksEnabled
 	}
-	if !IsNil(o.SkippedApiChecksUrlPatterns) {
-		toSerialize["skipped_api_checks_url_patterns"] = o.SkippedApiChecksUrlPatterns
-	}
-	if !IsNil(o.RelaxCorsSecurity) {
-		toSerialize["relax_cors_security"] = o.RelaxCorsSecurity
+	if !IsNil(o.ApiChecksDuringAuth) {
+		toSerialize["api_checks_during_auth"] = o.ApiChecksDuringAuth
 	}
 	if !IsNil(o.SinglePageWorker) {
 		toSerialize["single_page_worker"] = o.SinglePageWorker
 	}
 	if !IsNil(o.ParallelWorkers) {
 		toSerialize["parallel_workers"] = o.ParallelWorkers
+	}
+	if !IsNil(o.RelaxCorsSecurity) {
+		toSerialize["relax_cors_security"] = o.RelaxCorsSecurity
 	}
 	if !IsNil(o.UserAgent) {
 		toSerialize["user_agent"] = o.UserAgent
@@ -914,6 +980,21 @@ func (o ProfileDetailedConfigurationFrontendDast) ToMap() (map[string]interface{
 	}
 	if !IsNil(o.PrefetchSitemap) {
 		toSerialize["prefetch_sitemap"] = o.PrefetchSitemap
+	}
+	if !IsNil(o.StaticCrawling) {
+		toSerialize["static_crawling"] = o.StaticCrawling
+	}
+	if !IsNil(o.LogoutDetection) {
+		toSerialize["logout_detection"] = o.LogoutDetection
+	}
+	if !IsNil(o.Scope) {
+		toSerialize["scope"] = o.Scope
+	}
+	if !IsNil(o.BlocklistPatterns) {
+		toSerialize["blocklist_patterns"] = o.BlocklistPatterns
+	}
+	if !IsNil(o.SkippedApiChecksUrlPatterns) {
+		toSerialize["skipped_api_checks_url_patterns"] = o.SkippedApiChecksUrlPatterns
 	}
 	if !IsNil(o.BlocklistedElementSelectors) {
 		toSerialize["blocklisted_element_selectors"] = o.BlocklistedElementSelectors
@@ -930,26 +1011,17 @@ func (o ProfileDetailedConfigurationFrontendDast) ToMap() (map[string]interface{
 	if !IsNil(o.MaxParameterOccurence) {
 		toSerialize["max_parameter_occurence"] = o.MaxParameterOccurence
 	}
-	if !IsNil(o.SecurityChecksEnabled) {
-		toSerialize["security_checks_enabled"] = o.SecurityChecksEnabled
-	}
-	if !IsNil(o.ApiChecksDuringAuth) {
-		toSerialize["api_checks_during_auth"] = o.ApiChecksDuringAuth
-	}
 	if !IsNil(o.AllowedUrlPatterns) {
 		toSerialize["allowed_url_patterns"] = o.AllowedUrlPatterns
 	}
-	if !IsNil(o.LogoutDetection) {
-		toSerialize["logout_detection"] = o.LogoutDetection
+	if !IsNil(o.AgenticCrawling) {
+		toSerialize["agentic_crawling"] = o.AgenticCrawling
 	}
 	if !IsNil(o.FrontendAgenticPentesting) {
 		toSerialize["frontend_agentic_pentesting"] = o.FrontendAgenticPentesting
 	}
 	if !IsNil(o.UseLegacyCrawling) {
 		toSerialize["use_legacy_crawling"] = o.UseLegacyCrawling
-	}
-	if !IsNil(o.StaticCrawling) {
-		toSerialize["static_crawling"] = o.StaticCrawling
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -977,27 +1049,29 @@ func (o *ProfileDetailedConfigurationFrontendDast) UnmarshalJSON(data []byte) (e
 		delete(additionalProperties, "mode")
 		delete(additionalProperties, "max_duration")
 		delete(additionalProperties, "hotstart")
-		delete(additionalProperties, "blocklist_patterns")
-		delete(additionalProperties, "skipped_api_checks_url_patterns")
-		delete(additionalProperties, "relax_cors_security")
+		delete(additionalProperties, "security_checks_enabled")
+		delete(additionalProperties, "api_checks_during_auth")
 		delete(additionalProperties, "single_page_worker")
 		delete(additionalProperties, "parallel_workers")
+		delete(additionalProperties, "relax_cors_security")
 		delete(additionalProperties, "user_agent")
 		delete(additionalProperties, "use_persistence")
 		delete(additionalProperties, "escape_user_header")
 		delete(additionalProperties, "prefetch_sitemap")
+		delete(additionalProperties, "static_crawling")
+		delete(additionalProperties, "logout_detection")
+		delete(additionalProperties, "scope")
+		delete(additionalProperties, "blocklist_patterns")
+		delete(additionalProperties, "skipped_api_checks_url_patterns")
 		delete(additionalProperties, "blocklisted_element_selectors")
 		delete(additionalProperties, "whitelist_element_selectors")
 		delete(additionalProperties, "max_query_params_visits")
 		delete(additionalProperties, "max_fragments_visits")
 		delete(additionalProperties, "max_parameter_occurence")
-		delete(additionalProperties, "security_checks_enabled")
-		delete(additionalProperties, "api_checks_during_auth")
 		delete(additionalProperties, "allowed_url_patterns")
-		delete(additionalProperties, "logout_detection")
+		delete(additionalProperties, "agentic_crawling")
 		delete(additionalProperties, "frontend_agentic_pentesting")
 		delete(additionalProperties, "use_legacy_crawling")
-		delete(additionalProperties, "static_crawling")
 		o.AdditionalProperties = additionalProperties
 	}
 

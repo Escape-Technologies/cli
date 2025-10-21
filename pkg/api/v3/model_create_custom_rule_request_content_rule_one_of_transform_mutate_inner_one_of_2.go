@@ -21,6 +21,7 @@ var _ MappedNullable = &CreateCustomRuleRequestContentRuleOneOfTransformMutateIn
 // CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf2 struct for CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf2
 type CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf2 struct {
 	Key ENUMREQUESTUSER `json:"key"`
+	UseExtraction *bool `json:"use_extraction,omitempty"`
 	Value *string `json:"value,omitempty"`
 	Values []string `json:"values,omitempty"`
 	RegexReplace *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOfRegexReplace `json:"regex_replace,omitempty"`
@@ -70,6 +71,38 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf2) GetK
 // SetKey sets field value
 func (o *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf2) SetKey(v ENUMREQUESTUSER) {
 	o.Key = v
+}
+
+// GetUseExtraction returns the UseExtraction field value if set, zero value otherwise.
+func (o *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf2) GetUseExtraction() bool {
+	if o == nil || IsNil(o.UseExtraction) {
+		var ret bool
+		return ret
+	}
+	return *o.UseExtraction
+}
+
+// GetUseExtractionOk returns a tuple with the UseExtraction field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf2) GetUseExtractionOk() (*bool, bool) {
+	if o == nil || IsNil(o.UseExtraction) {
+		return nil, false
+	}
+	return o.UseExtraction, true
+}
+
+// HasUseExtraction returns a boolean if a field has been set.
+func (o *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf2) HasUseExtraction() bool {
+	if o != nil && !IsNil(o.UseExtraction) {
+		return true
+	}
+
+	return false
+}
+
+// SetUseExtraction gets a reference to the given bool and assigns it to the UseExtraction field.
+func (o *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf2) SetUseExtraction(v bool) {
+	o.UseExtraction = &v
 }
 
 // GetValue returns the Value field value if set, zero value otherwise.
@@ -211,6 +244,9 @@ func (o CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf2) Marsh
 func (o CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf2) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["key"] = o.Key
+	if !IsNil(o.UseExtraction) {
+		toSerialize["use_extraction"] = o.UseExtraction
+	}
 	if !IsNil(o.Value) {
 		toSerialize["value"] = o.Value
 	}
@@ -267,6 +303,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf2) Unma
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "key")
+		delete(additionalProperties, "use_extraction")
 		delete(additionalProperties, "value")
 		delete(additionalProperties, "values")
 		delete(additionalProperties, "regex_replace")
