@@ -34,6 +34,8 @@ type CreateDastGraphqlProfileRequest struct {
 	SchemaId string `json:"schemaId"`
 	// The tags IDs for the profile
 	TagsIds []string `json:"tagsIds,omitempty"`
+	// Whether to start the scan immediately
+	Start *bool `json:"start,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -48,6 +50,8 @@ func NewCreateDastGraphqlProfileRequest(assetId string, name string, schemaId st
 	this.AssetId = assetId
 	this.Name = name
 	this.SchemaId = schemaId
+	var start bool = true
+	this.Start = &start
 	return &this
 }
 
@@ -56,6 +60,8 @@ func NewCreateDastGraphqlProfileRequest(assetId string, name string, schemaId st
 // but it doesn't guarantee that properties required by API are set
 func NewCreateDastGraphqlProfileRequestWithDefaults() *CreateDastGraphqlProfileRequest {
 	this := CreateDastGraphqlProfileRequest{}
+	var start bool = true
+	this.Start = &start
 	return &this
 }
 
@@ -259,6 +265,38 @@ func (o *CreateDastGraphqlProfileRequest) SetTagsIds(v []string) {
 	o.TagsIds = v
 }
 
+// GetStart returns the Start field value if set, zero value otherwise.
+func (o *CreateDastGraphqlProfileRequest) GetStart() bool {
+	if o == nil || IsNil(o.Start) {
+		var ret bool
+		return ret
+	}
+	return *o.Start
+}
+
+// GetStartOk returns a tuple with the Start field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateDastGraphqlProfileRequest) GetStartOk() (*bool, bool) {
+	if o == nil || IsNil(o.Start) {
+		return nil, false
+	}
+	return o.Start, true
+}
+
+// HasStart returns a boolean if a field has been set.
+func (o *CreateDastGraphqlProfileRequest) HasStart() bool {
+	if o != nil && !IsNil(o.Start) {
+		return true
+	}
+
+	return false
+}
+
+// SetStart gets a reference to the given bool and assigns it to the Start field.
+func (o *CreateDastGraphqlProfileRequest) SetStart(v bool) {
+	o.Start = &v
+}
+
 func (o CreateDastGraphqlProfileRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -283,6 +321,9 @@ func (o CreateDastGraphqlProfileRequest) ToMap() (map[string]interface{}, error)
 	toSerialize["schemaId"] = o.SchemaId
 	if !IsNil(o.TagsIds) {
 		toSerialize["tagsIds"] = o.TagsIds
+	}
+	if !IsNil(o.Start) {
+		toSerialize["start"] = o.Start
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -336,6 +377,7 @@ func (o *CreateDastGraphqlProfileRequest) UnmarshalJSON(data []byte) (err error)
 		delete(additionalProperties, "proxyId")
 		delete(additionalProperties, "schemaId")
 		delete(additionalProperties, "tagsIds")
+		delete(additionalProperties, "start")
 		o.AdditionalProperties = additionalProperties
 	}
 

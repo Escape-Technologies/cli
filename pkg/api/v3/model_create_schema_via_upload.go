@@ -21,9 +21,8 @@ var _ MappedNullable = &CreateSchemaViaUpload{}
 // CreateSchemaViaUpload struct for CreateSchemaViaUpload
 type CreateSchemaViaUpload struct {
 	AssetType ENUMSCHEMA `json:"asset_type"`
+	Name *string `json:"name,omitempty"`
 	Upload CreateSchemaViaUploadUpload `json:"upload"`
-	// The authentication string of the asset
-	AuthenticationStr *string `json:"authenticationStr,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -72,6 +71,38 @@ func (o *CreateSchemaViaUpload) SetAssetType(v ENUMSCHEMA) {
 	o.AssetType = v
 }
 
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *CreateSchemaViaUpload) GetName() string {
+	if o == nil || IsNil(o.Name) {
+		var ret string
+		return ret
+	}
+	return *o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateSchemaViaUpload) GetNameOk() (*string, bool) {
+	if o == nil || IsNil(o.Name) {
+		return nil, false
+	}
+	return o.Name, true
+}
+
+// HasName returns a boolean if a field has been set.
+func (o *CreateSchemaViaUpload) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *CreateSchemaViaUpload) SetName(v string) {
+	o.Name = &v
+}
+
 // GetUpload returns the Upload field value
 func (o *CreateSchemaViaUpload) GetUpload() CreateSchemaViaUploadUpload {
 	if o == nil {
@@ -96,38 +127,6 @@ func (o *CreateSchemaViaUpload) SetUpload(v CreateSchemaViaUploadUpload) {
 	o.Upload = v
 }
 
-// GetAuthenticationStr returns the AuthenticationStr field value if set, zero value otherwise.
-func (o *CreateSchemaViaUpload) GetAuthenticationStr() string {
-	if o == nil || IsNil(o.AuthenticationStr) {
-		var ret string
-		return ret
-	}
-	return *o.AuthenticationStr
-}
-
-// GetAuthenticationStrOk returns a tuple with the AuthenticationStr field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateSchemaViaUpload) GetAuthenticationStrOk() (*string, bool) {
-	if o == nil || IsNil(o.AuthenticationStr) {
-		return nil, false
-	}
-	return o.AuthenticationStr, true
-}
-
-// HasAuthenticationStr returns a boolean if a field has been set.
-func (o *CreateSchemaViaUpload) HasAuthenticationStr() bool {
-	if o != nil && !IsNil(o.AuthenticationStr) {
-		return true
-	}
-
-	return false
-}
-
-// SetAuthenticationStr gets a reference to the given string and assigns it to the AuthenticationStr field.
-func (o *CreateSchemaViaUpload) SetAuthenticationStr(v string) {
-	o.AuthenticationStr = &v
-}
-
 func (o CreateSchemaViaUpload) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -139,10 +138,10 @@ func (o CreateSchemaViaUpload) MarshalJSON() ([]byte, error) {
 func (o CreateSchemaViaUpload) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["asset_type"] = o.AssetType
-	toSerialize["upload"] = o.Upload
-	if !IsNil(o.AuthenticationStr) {
-		toSerialize["authenticationStr"] = o.AuthenticationStr
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
 	}
+	toSerialize["upload"] = o.Upload
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -188,8 +187,8 @@ func (o *CreateSchemaViaUpload) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "asset_type")
+		delete(additionalProperties, "name")
 		delete(additionalProperties, "upload")
-		delete(additionalProperties, "authenticationStr")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -20,6 +20,7 @@ var _ MappedNullable = &CreateCustomRuleRequestContentRuleOneOfTransformTriggerI
 
 // CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf17 struct for CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf17
 type CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf17 struct {
+	UseExtraction *bool `json:"use_extraction,omitempty"`
 	Is *string `json:"is,omitempty"`
 	IsNot *string `json:"is_not,omitempty"`
 	In []string `json:"in,omitempty"`
@@ -47,6 +48,38 @@ func NewCreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf17(if_ 
 func NewCreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf17WithDefaults() *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf17 {
 	this := CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf17{}
 	return &this
+}
+
+// GetUseExtraction returns the UseExtraction field value if set, zero value otherwise.
+func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf17) GetUseExtraction() bool {
+	if o == nil || IsNil(o.UseExtraction) {
+		var ret bool
+		return ret
+	}
+	return *o.UseExtraction
+}
+
+// GetUseExtractionOk returns a tuple with the UseExtraction field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf17) GetUseExtractionOk() (*bool, bool) {
+	if o == nil || IsNil(o.UseExtraction) {
+		return nil, false
+	}
+	return o.UseExtraction, true
+}
+
+// HasUseExtraction returns a boolean if a field has been set.
+func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf17) HasUseExtraction() bool {
+	if o != nil && !IsNil(o.UseExtraction) {
+		return true
+	}
+
+	return false
+}
+
+// SetUseExtraction gets a reference to the given bool and assigns it to the UseExtraction field.
+func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf17) SetUseExtraction(v bool) {
+	o.UseExtraction = &v
 }
 
 // GetIs returns the Is field value if set, zero value otherwise.
@@ -243,6 +276,9 @@ func (o CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf17) Mar
 
 func (o CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf17) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.UseExtraction) {
+		toSerialize["use_extraction"] = o.UseExtraction
+	}
 	if !IsNil(o.Is) {
 		toSerialize["is"] = o.Is
 	}
@@ -302,6 +338,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf17) Un
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "use_extraction")
 		delete(additionalProperties, "is")
 		delete(additionalProperties, "is_not")
 		delete(additionalProperties, "in")

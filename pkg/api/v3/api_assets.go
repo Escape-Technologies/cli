@@ -2273,7 +2273,7 @@ type ApiCreateAssetSchemaRequest struct {
 	createAssetSchemaRequest *CreateAssetSchemaRequest
 }
 
-// Body of the request to create an asset
+// Body of the request to create a schema asset
 func (r ApiCreateAssetSchemaRequest) CreateAssetSchemaRequest(createAssetSchemaRequest CreateAssetSchemaRequest) ApiCreateAssetSchemaRequest {
 	r.createAssetSchemaRequest = &createAssetSchemaRequest
 	return r
@@ -2286,7 +2286,36 @@ func (r ApiCreateAssetSchemaRequest) Execute() (*AssetDetailed, *http.Response, 
 /*
 CreateAssetSchema Create asset schema
 
-Create a schema
+Create a schema asset.
+
+The schema data can either be fetched from a URL or uploaded from a file.
+
+**Fetch example:**
+```json
+{
+  "asset_type": "SCHEMA",
+  "fetch": {
+    "url": "https://api.example.com/v1"
+  }
+}
+```
+
+
+**Upload example:**
+
+The file should first be uploaded to the Escape Platform using the [upload endpoint](/v3/#tag/upload/post/upload/signed-url).
+
+The upload endpoint returns an `id` that should be used in the `temporaryObjectKey` field.
+
+```json
+{
+  "asset_type": "SCHEMA",
+  "upload": {
+    "temporaryObjectKey": "00000000-0000-0000-0000-000000000000"
+  }
+}
+```
+
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateAssetSchemaRequest
