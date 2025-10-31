@@ -25,7 +25,7 @@ func StartLocation(ctx context.Context, locationID string, sshPrivateKey ed25519
 				failureStartTime = time.Now()
 			}
 
-			if time.Since(failureStartTime) >= failureThreshold {
+			if !hasEverConnected.Load() || time.Since(failureStartTime) >= failureThreshold {
 				log.Error("Failed to dial SSH: %s, retrying...", err)
 			}
 			errMsg := err.Error()
