@@ -1,5 +1,4 @@
 //go:build windows
-// +build windows
 
 package private
 
@@ -13,4 +12,4 @@ func init() {
 			KeepAlive: DefaultKeepAliveDuration,
 		}
 	}
-} 
+}
