@@ -3,6 +3,7 @@ package log
 import (
 	"fmt"
 	"os"
+	"time"
 
 	"github.com/sirupsen/logrus"
 )
@@ -31,7 +32,7 @@ func SetLevel(level logrus.Level) {
 func doLog(level logrus.Level, format string, args ...any) {
 	line := fmt.Sprintf(format, args...)
 	log.Logf(level, format, args...)
-	globalBuffer.Ingest(Entry{Level: level, Message: line})
+	globalBuffer.Ingest(Entry{Level: level, Message: line, Timestamp: time.Now().UnixMilli()})
 }
 
 // Trace log level
