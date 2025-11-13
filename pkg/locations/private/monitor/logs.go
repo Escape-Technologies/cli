@@ -3,7 +3,6 @@ package monitor
 import (
 	"context"
 	"encoding/json"
-	"time"
 
 	"github.com/Escape-Technologies/cli/pkg/log"
 	"golang.org/x/crypto/ssh"
@@ -16,7 +15,7 @@ const (
 
 type logPayload struct {
 	Message   string `json:"message"`
-	Timestamp int64  `json:"timestamp_ns,omitempty"`
+	Timestamp int64  `json:"timestamp_ms"`
 }
 
 func sendLogs(ctx context.Context, ch ssh.Channel) {
@@ -37,7 +36,7 @@ func sendLogs(ctx context.Context, ch ssh.Channel) {
 				}
 				payload := logPayload{
 					Message:   entry.Message,
-					Timestamp: time.Now().UnixMilli(),
+					Timestamp: entry.Timestamp,
 				}
 				data, err := json.Marshal(payload)
 				if err != nil {
