@@ -21,6 +21,8 @@ var _ MappedNullable = &UpdateAssetRequest{}
 type UpdateAssetRequest struct {
 	TagIds *UpdateAssetRequestTagIds `json:"tagIds,omitempty"`
 	Owners *UpdateAssetRequestOwners `json:"owners,omitempty"`
+	// The project IDs of the asset
+	ProjectIds []string `json:"projectIds,omitempty"`
 	Framework *ENUMPROPERTIESFRAMEWORK `json:"framework,omitempty"`
 	Status *ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS `json:"status,omitempty"`
 	// The description of the asset
@@ -109,6 +111,38 @@ func (o *UpdateAssetRequest) HasOwners() bool {
 // SetOwners gets a reference to the given UpdateAssetRequestOwners and assigns it to the Owners field.
 func (o *UpdateAssetRequest) SetOwners(v UpdateAssetRequestOwners) {
 	o.Owners = &v
+}
+
+// GetProjectIds returns the ProjectIds field value if set, zero value otherwise.
+func (o *UpdateAssetRequest) GetProjectIds() []string {
+	if o == nil || IsNil(o.ProjectIds) {
+		var ret []string
+		return ret
+	}
+	return o.ProjectIds
+}
+
+// GetProjectIdsOk returns a tuple with the ProjectIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateAssetRequest) GetProjectIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.ProjectIds) {
+		return nil, false
+	}
+	return o.ProjectIds, true
+}
+
+// HasProjectIds returns a boolean if a field has been set.
+func (o *UpdateAssetRequest) HasProjectIds() bool {
+	if o != nil && !IsNil(o.ProjectIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetProjectIds gets a reference to the given []string and assigns it to the ProjectIds field.
+func (o *UpdateAssetRequest) SetProjectIds(v []string) {
+	o.ProjectIds = v
 }
 
 // GetFramework returns the Framework field value if set, zero value otherwise.
@@ -223,6 +257,9 @@ func (o UpdateAssetRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Owners) {
 		toSerialize["owners"] = o.Owners
 	}
+	if !IsNil(o.ProjectIds) {
+		toSerialize["projectIds"] = o.ProjectIds
+	}
 	if !IsNil(o.Framework) {
 		toSerialize["framework"] = o.Framework
 	}
@@ -256,6 +293,7 @@ func (o *UpdateAssetRequest) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "tagIds")
 		delete(additionalProperties, "owners")
+		delete(additionalProperties, "projectIds")
 		delete(additionalProperties, "framework")
 		delete(additionalProperties, "status")
 		delete(additionalProperties, "description")

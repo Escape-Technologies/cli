@@ -31,6 +31,7 @@ type ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf2UsersInner stru
 	ClientSecret string `json:"client_secret"`
 	Scopes []string `json:"scopes,omitempty"`
 	Audience *string `json:"audience,omitempty"`
+	BasicStyle *bool `json:"basic_style,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -384,6 +385,38 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf2UsersInner)
 	o.Audience = &v
 }
 
+// GetBasicStyle returns the BasicStyle field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf2UsersInner) GetBasicStyle() bool {
+	if o == nil || IsNil(o.BasicStyle) {
+		var ret bool
+		return ret
+	}
+	return *o.BasicStyle
+}
+
+// GetBasicStyleOk returns a tuple with the BasicStyle field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf2UsersInner) GetBasicStyleOk() (*bool, bool) {
+	if o == nil || IsNil(o.BasicStyle) {
+		return nil, false
+	}
+	return o.BasicStyle, true
+}
+
+// HasBasicStyle returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf2UsersInner) HasBasicStyle() bool {
+	if o != nil && !IsNil(o.BasicStyle) {
+		return true
+	}
+
+	return false
+}
+
+// SetBasicStyle gets a reference to the given bool and assigns it to the BasicStyle field.
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf2UsersInner) SetBasicStyle(v bool) {
+	o.BasicStyle = &v
+}
+
 func (o ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf2UsersInner) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -420,6 +453,9 @@ func (o ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf2UsersInner) 
 	}
 	if !IsNil(o.Audience) {
 		toSerialize["audience"] = o.Audience
+	}
+	if !IsNil(o.BasicStyle) {
+		toSerialize["basic_style"] = o.BasicStyle
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -477,6 +513,7 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf2UsersInner)
 		delete(additionalProperties, "client_secret")
 		delete(additionalProperties, "scopes")
 		delete(additionalProperties, "audience")
+		delete(additionalProperties, "basic_style")
 		o.AdditionalProperties = additionalProperties
 	}
 

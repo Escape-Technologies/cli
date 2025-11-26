@@ -30,6 +30,7 @@ type CreateAssetDNSRequest struct {
 	OpenPorts []CreateAssetDNSRequestOpenPortsInner `json:"open_ports,omitempty"`
 	PortsInsights []float32 `json:"ports_insights,omitempty"`
 	PathsInsights []CreateAssetDNSRequestPathsInsightsInner `json:"paths_insights,omitempty"`
+	ThirdParty *ENUMPROPERTIESTHIRDPARTY `json:"third_party,omitempty"`
 	DnsRecords []CreateAssetDNSRequestDnsRecordsInner `json:"dns_records,omitempty"`
 	Ips []string `json:"ips,omitempty"`
 	RegionCountryCodes []string `json:"region_country_codes,omitempty"`
@@ -355,6 +356,38 @@ func (o *CreateAssetDNSRequest) SetPathsInsights(v []CreateAssetDNSRequestPathsI
 	o.PathsInsights = v
 }
 
+// GetThirdParty returns the ThirdParty field value if set, zero value otherwise.
+func (o *CreateAssetDNSRequest) GetThirdParty() ENUMPROPERTIESTHIRDPARTY {
+	if o == nil || IsNil(o.ThirdParty) {
+		var ret ENUMPROPERTIESTHIRDPARTY
+		return ret
+	}
+	return *o.ThirdParty
+}
+
+// GetThirdPartyOk returns a tuple with the ThirdParty field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetDNSRequest) GetThirdPartyOk() (*ENUMPROPERTIESTHIRDPARTY, bool) {
+	if o == nil || IsNil(o.ThirdParty) {
+		return nil, false
+	}
+	return o.ThirdParty, true
+}
+
+// HasThirdParty returns a boolean if a field has been set.
+func (o *CreateAssetDNSRequest) HasThirdParty() bool {
+	if o != nil && !IsNil(o.ThirdParty) {
+		return true
+	}
+
+	return false
+}
+
+// SetThirdParty gets a reference to the given ENUMPROPERTIESTHIRDPARTY and assigns it to the ThirdParty field.
+func (o *CreateAssetDNSRequest) SetThirdParty(v ENUMPROPERTIESTHIRDPARTY) {
+	o.ThirdParty = &v
+}
+
 // GetDnsRecords returns the DnsRecords field value if set, zero value otherwise.
 func (o *CreateAssetDNSRequest) GetDnsRecords() []CreateAssetDNSRequestDnsRecordsInner {
 	if o == nil || IsNil(o.DnsRecords) {
@@ -517,6 +550,9 @@ func (o CreateAssetDNSRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PathsInsights) {
 		toSerialize["paths_insights"] = o.PathsInsights
 	}
+	if !IsNil(o.ThirdParty) {
+		toSerialize["third_party"] = o.ThirdParty
+	}
 	if !IsNil(o.DnsRecords) {
 		toSerialize["dns_records"] = o.DnsRecords
 	}
@@ -584,6 +620,7 @@ func (o *CreateAssetDNSRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "open_ports")
 		delete(additionalProperties, "ports_insights")
 		delete(additionalProperties, "paths_insights")
+		delete(additionalProperties, "third_party")
 		delete(additionalProperties, "dns_records")
 		delete(additionalProperties, "ips")
 		delete(additionalProperties, "region_country_codes")

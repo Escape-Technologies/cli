@@ -30,6 +30,7 @@ type CreateAssetIPV6Request struct {
 	OpenPorts []CreateAssetDNSRequestOpenPortsInner `json:"open_ports,omitempty"`
 	PortsInsights []float32 `json:"ports_insights,omitempty"`
 	PathsInsights []CreateAssetDNSRequestPathsInsightsInner `json:"paths_insights,omitempty"`
+	ThirdParty *ENUMPROPERTIESTHIRDPARTY `json:"third_party,omitempty"`
 	Organization *string `json:"organization,omitempty"`
 	Country *string `json:"country,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -353,6 +354,38 @@ func (o *CreateAssetIPV6Request) SetPathsInsights(v []CreateAssetDNSRequestPaths
 	o.PathsInsights = v
 }
 
+// GetThirdParty returns the ThirdParty field value if set, zero value otherwise.
+func (o *CreateAssetIPV6Request) GetThirdParty() ENUMPROPERTIESTHIRDPARTY {
+	if o == nil || IsNil(o.ThirdParty) {
+		var ret ENUMPROPERTIESTHIRDPARTY
+		return ret
+	}
+	return *o.ThirdParty
+}
+
+// GetThirdPartyOk returns a tuple with the ThirdParty field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetIPV6Request) GetThirdPartyOk() (*ENUMPROPERTIESTHIRDPARTY, bool) {
+	if o == nil || IsNil(o.ThirdParty) {
+		return nil, false
+	}
+	return o.ThirdParty, true
+}
+
+// HasThirdParty returns a boolean if a field has been set.
+func (o *CreateAssetIPV6Request) HasThirdParty() bool {
+	if o != nil && !IsNil(o.ThirdParty) {
+		return true
+	}
+
+	return false
+}
+
+// SetThirdParty gets a reference to the given ENUMPROPERTIESTHIRDPARTY and assigns it to the ThirdParty field.
+func (o *CreateAssetIPV6Request) SetThirdParty(v ENUMPROPERTIESTHIRDPARTY) {
+	o.ThirdParty = &v
+}
+
 // GetOrganization returns the Organization field value if set, zero value otherwise.
 func (o *CreateAssetIPV6Request) GetOrganization() string {
 	if o == nil || IsNil(o.Organization) {
@@ -451,6 +484,9 @@ func (o CreateAssetIPV6Request) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PathsInsights) {
 		toSerialize["paths_insights"] = o.PathsInsights
 	}
+	if !IsNil(o.ThirdParty) {
+		toSerialize["third_party"] = o.ThirdParty
+	}
 	if !IsNil(o.Organization) {
 		toSerialize["organization"] = o.Organization
 	}
@@ -512,6 +548,7 @@ func (o *CreateAssetIPV6Request) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "open_ports")
 		delete(additionalProperties, "ports_insights")
 		delete(additionalProperties, "paths_insights")
+		delete(additionalProperties, "third_party")
 		delete(additionalProperties, "organization")
 		delete(additionalProperties, "country")
 		o.AdditionalProperties = additionalProperties
