@@ -24,6 +24,8 @@ type ProfileDetailedConfigurationExperimental struct {
 	EnableAsmNucleiChecks *bool `json:"enable_asm_nuclei_checks,omitempty"`
 	AgenticPentesting *bool `json:"agentic_pentesting,omitempty"`
 	BlstEnabled *bool `json:"blst_enabled,omitempty"`
+	BlstExplorationOnly *bool `json:"blst_exploration_only,omitempty"`
+	DisableOracle *bool `json:"disable_oracle,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -206,6 +208,70 @@ func (o *ProfileDetailedConfigurationExperimental) SetBlstEnabled(v bool) {
 	o.BlstEnabled = &v
 }
 
+// GetBlstExplorationOnly returns the BlstExplorationOnly field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationExperimental) GetBlstExplorationOnly() bool {
+	if o == nil || IsNil(o.BlstExplorationOnly) {
+		var ret bool
+		return ret
+	}
+	return *o.BlstExplorationOnly
+}
+
+// GetBlstExplorationOnlyOk returns a tuple with the BlstExplorationOnly field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationExperimental) GetBlstExplorationOnlyOk() (*bool, bool) {
+	if o == nil || IsNil(o.BlstExplorationOnly) {
+		return nil, false
+	}
+	return o.BlstExplorationOnly, true
+}
+
+// HasBlstExplorationOnly returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationExperimental) HasBlstExplorationOnly() bool {
+	if o != nil && !IsNil(o.BlstExplorationOnly) {
+		return true
+	}
+
+	return false
+}
+
+// SetBlstExplorationOnly gets a reference to the given bool and assigns it to the BlstExplorationOnly field.
+func (o *ProfileDetailedConfigurationExperimental) SetBlstExplorationOnly(v bool) {
+	o.BlstExplorationOnly = &v
+}
+
+// GetDisableOracle returns the DisableOracle field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationExperimental) GetDisableOracle() bool {
+	if o == nil || IsNil(o.DisableOracle) {
+		var ret bool
+		return ret
+	}
+	return *o.DisableOracle
+}
+
+// GetDisableOracleOk returns a tuple with the DisableOracle field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationExperimental) GetDisableOracleOk() (*bool, bool) {
+	if o == nil || IsNil(o.DisableOracle) {
+		return nil, false
+	}
+	return o.DisableOracle, true
+}
+
+// HasDisableOracle returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationExperimental) HasDisableOracle() bool {
+	if o != nil && !IsNil(o.DisableOracle) {
+		return true
+	}
+
+	return false
+}
+
+// SetDisableOracle gets a reference to the given bool and assigns it to the DisableOracle field.
+func (o *ProfileDetailedConfigurationExperimental) SetDisableOracle(v bool) {
+	o.DisableOracle = &v
+}
+
 func (o ProfileDetailedConfigurationExperimental) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -230,6 +296,12 @@ func (o ProfileDetailedConfigurationExperimental) ToMap() (map[string]interface{
 	}
 	if !IsNil(o.BlstEnabled) {
 		toSerialize["blst_enabled"] = o.BlstEnabled
+	}
+	if !IsNil(o.BlstExplorationOnly) {
+		toSerialize["blst_exploration_only"] = o.BlstExplorationOnly
+	}
+	if !IsNil(o.DisableOracle) {
+		toSerialize["disable_oracle"] = o.DisableOracle
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -258,6 +330,8 @@ func (o *ProfileDetailedConfigurationExperimental) UnmarshalJSON(data []byte) (e
 		delete(additionalProperties, "enable_asm_nuclei_checks")
 		delete(additionalProperties, "agentic_pentesting")
 		delete(additionalProperties, "blst_enabled")
+		delete(additionalProperties, "blst_exploration_only")
+		delete(additionalProperties, "disable_oracle")
 		o.AdditionalProperties = additionalProperties
 	}
 

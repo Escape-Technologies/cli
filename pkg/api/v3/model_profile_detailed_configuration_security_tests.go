@@ -22,6 +22,7 @@ type ProfileDetailedConfigurationSecurityTests struct {
 	DoNotFuzzParams []string `json:"do_not_fuzz_params,omitempty"`
 	MaxAttemptsPerPath *float32 `json:"max_attempts_per_path,omitempty"`
 	MaxRequestsPerPath *float32 `json:"max_requests_per_path,omitempty"`
+	LlmSecurityTesting *bool `json:"llm_security_testing,omitempty"`
 	HighNumberOfCustomScalars *ProfileDetailedConfigurationSecurityTestsHighNumberOfCustomScalars `json:"high_number_of_custom_scalars,omitempty"`
 	HighNumberOfPci *ProfileDetailedConfigurationSecurityTestsHighNumberOfCustomScalars `json:"high_number_of_pci,omitempty"`
 	HighNumberOfPii *ProfileDetailedConfigurationSecurityTestsHighNumberOfCustomScalars `json:"high_number_of_pii,omitempty"`
@@ -65,6 +66,7 @@ type ProfileDetailedConfigurationSecurityTests struct {
 	DuplicatedObject *ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure `json:"duplicated_object,omitempty"`
 	ErrorTypeInconsistency *ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure `json:"error_type_inconsistency,omitempty"`
 	ExcessiveBrowserPermissions *ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure `json:"excessive_browser_permissions,omitempty"`
+	ExposedConfigFile *ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure `json:"exposed_config_file,omitempty"`
 	ExposedMysqlConfig *ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure `json:"exposed_mysql_config,omitempty"`
 	ExposedSettingsPhp *ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure `json:"exposed_settings_php,omitempty"`
 	ExposedSourcemap *ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure `json:"exposed_sourcemap,omitempty"`
@@ -311,6 +313,38 @@ func (o *ProfileDetailedConfigurationSecurityTests) HasMaxRequestsPerPath() bool
 // SetMaxRequestsPerPath gets a reference to the given float32 and assigns it to the MaxRequestsPerPath field.
 func (o *ProfileDetailedConfigurationSecurityTests) SetMaxRequestsPerPath(v float32) {
 	o.MaxRequestsPerPath = &v
+}
+
+// GetLlmSecurityTesting returns the LlmSecurityTesting field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationSecurityTests) GetLlmSecurityTesting() bool {
+	if o == nil || IsNil(o.LlmSecurityTesting) {
+		var ret bool
+		return ret
+	}
+	return *o.LlmSecurityTesting
+}
+
+// GetLlmSecurityTestingOk returns a tuple with the LlmSecurityTesting field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationSecurityTests) GetLlmSecurityTestingOk() (*bool, bool) {
+	if o == nil || IsNil(o.LlmSecurityTesting) {
+		return nil, false
+	}
+	return o.LlmSecurityTesting, true
+}
+
+// HasLlmSecurityTesting returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationSecurityTests) HasLlmSecurityTesting() bool {
+	if o != nil && !IsNil(o.LlmSecurityTesting) {
+		return true
+	}
+
+	return false
+}
+
+// SetLlmSecurityTesting gets a reference to the given bool and assigns it to the LlmSecurityTesting field.
+func (o *ProfileDetailedConfigurationSecurityTests) SetLlmSecurityTesting(v bool) {
+	o.LlmSecurityTesting = &v
 }
 
 // GetHighNumberOfCustomScalars returns the HighNumberOfCustomScalars field value if set, zero value otherwise.
@@ -1687,6 +1721,38 @@ func (o *ProfileDetailedConfigurationSecurityTests) HasExcessiveBrowserPermissio
 // SetExcessiveBrowserPermissions gets a reference to the given ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure and assigns it to the ExcessiveBrowserPermissions field.
 func (o *ProfileDetailedConfigurationSecurityTests) SetExcessiveBrowserPermissions(v ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure) {
 	o.ExcessiveBrowserPermissions = &v
+}
+
+// GetExposedConfigFile returns the ExposedConfigFile field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationSecurityTests) GetExposedConfigFile() ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure {
+	if o == nil || IsNil(o.ExposedConfigFile) {
+		var ret ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure
+		return ret
+	}
+	return *o.ExposedConfigFile
+}
+
+// GetExposedConfigFileOk returns a tuple with the ExposedConfigFile field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationSecurityTests) GetExposedConfigFileOk() (*ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure, bool) {
+	if o == nil || IsNil(o.ExposedConfigFile) {
+		return nil, false
+	}
+	return o.ExposedConfigFile, true
+}
+
+// HasExposedConfigFile returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationSecurityTests) HasExposedConfigFile() bool {
+	if o != nil && !IsNil(o.ExposedConfigFile) {
+		return true
+	}
+
+	return false
+}
+
+// SetExposedConfigFile gets a reference to the given ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure and assigns it to the ExposedConfigFile field.
+func (o *ProfileDetailedConfigurationSecurityTests) SetExposedConfigFile(v ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure) {
+	o.ExposedConfigFile = &v
 }
 
 // GetExposedMysqlConfig returns the ExposedMysqlConfig field value if set, zero value otherwise.
@@ -5868,6 +5934,9 @@ func (o ProfileDetailedConfigurationSecurityTests) ToMap() (map[string]interface
 	if !IsNil(o.MaxRequestsPerPath) {
 		toSerialize["max_requests_per_path"] = o.MaxRequestsPerPath
 	}
+	if !IsNil(o.LlmSecurityTesting) {
+		toSerialize["llm_security_testing"] = o.LlmSecurityTesting
+	}
 	if !IsNil(o.HighNumberOfCustomScalars) {
 		toSerialize["high_number_of_custom_scalars"] = o.HighNumberOfCustomScalars
 	}
@@ -5996,6 +6065,9 @@ func (o ProfileDetailedConfigurationSecurityTests) ToMap() (map[string]interface
 	}
 	if !IsNil(o.ExcessiveBrowserPermissions) {
 		toSerialize["excessive_browser_permissions"] = o.ExcessiveBrowserPermissions
+	}
+	if !IsNil(o.ExposedConfigFile) {
+		toSerialize["exposed_config_file"] = o.ExposedConfigFile
 	}
 	if !IsNil(o.ExposedMysqlConfig) {
 		toSerialize["exposed_mysql_config"] = o.ExposedMysqlConfig
@@ -6412,6 +6484,7 @@ func (o *ProfileDetailedConfigurationSecurityTests) UnmarshalJSON(data []byte) (
 		delete(additionalProperties, "do_not_fuzz_params")
 		delete(additionalProperties, "max_attempts_per_path")
 		delete(additionalProperties, "max_requests_per_path")
+		delete(additionalProperties, "llm_security_testing")
 		delete(additionalProperties, "high_number_of_custom_scalars")
 		delete(additionalProperties, "high_number_of_pci")
 		delete(additionalProperties, "high_number_of_pii")
@@ -6455,6 +6528,7 @@ func (o *ProfileDetailedConfigurationSecurityTests) UnmarshalJSON(data []byte) (
 		delete(additionalProperties, "duplicated_object")
 		delete(additionalProperties, "error_type_inconsistency")
 		delete(additionalProperties, "excessive_browser_permissions")
+		delete(additionalProperties, "exposed_config_file")
 		delete(additionalProperties, "exposed_mysql_config")
 		delete(additionalProperties, "exposed_settings_php")
 		delete(additionalProperties, "exposed_sourcemap")

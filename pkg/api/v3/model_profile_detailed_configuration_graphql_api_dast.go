@@ -20,6 +20,8 @@ var _ MappedNullable = &ProfileDetailedConfigurationGraphqlApiDast{}
 // ProfileDetailedConfigurationGraphqlApiDast struct for ProfileDetailedConfigurationGraphqlApiDast
 type ProfileDetailedConfigurationGraphqlApiDast struct {
 	SchemaS3Key *string `json:"schema_s3_key,omitempty"`
+	AdditionalSchemaS3Keys []string `json:"additional_schema_s3_keys,omitempty"`
+	Url *string `json:"url,omitempty"`
 	LocationId *string `json:"location_id,omitempty"`
 	Profile *ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESPROFILE `json:"profile,omitempty"`
 	Mode *ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE `json:"mode,omitempty"`
@@ -82,6 +84,70 @@ func (o *ProfileDetailedConfigurationGraphqlApiDast) HasSchemaS3Key() bool {
 // SetSchemaS3Key gets a reference to the given string and assigns it to the SchemaS3Key field.
 func (o *ProfileDetailedConfigurationGraphqlApiDast) SetSchemaS3Key(v string) {
 	o.SchemaS3Key = &v
+}
+
+// GetAdditionalSchemaS3Keys returns the AdditionalSchemaS3Keys field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationGraphqlApiDast) GetAdditionalSchemaS3Keys() []string {
+	if o == nil || IsNil(o.AdditionalSchemaS3Keys) {
+		var ret []string
+		return ret
+	}
+	return o.AdditionalSchemaS3Keys
+}
+
+// GetAdditionalSchemaS3KeysOk returns a tuple with the AdditionalSchemaS3Keys field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationGraphqlApiDast) GetAdditionalSchemaS3KeysOk() ([]string, bool) {
+	if o == nil || IsNil(o.AdditionalSchemaS3Keys) {
+		return nil, false
+	}
+	return o.AdditionalSchemaS3Keys, true
+}
+
+// HasAdditionalSchemaS3Keys returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationGraphqlApiDast) HasAdditionalSchemaS3Keys() bool {
+	if o != nil && !IsNil(o.AdditionalSchemaS3Keys) {
+		return true
+	}
+
+	return false
+}
+
+// SetAdditionalSchemaS3Keys gets a reference to the given []string and assigns it to the AdditionalSchemaS3Keys field.
+func (o *ProfileDetailedConfigurationGraphqlApiDast) SetAdditionalSchemaS3Keys(v []string) {
+	o.AdditionalSchemaS3Keys = v
+}
+
+// GetUrl returns the Url field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationGraphqlApiDast) GetUrl() string {
+	if o == nil || IsNil(o.Url) {
+		var ret string
+		return ret
+	}
+	return *o.Url
+}
+
+// GetUrlOk returns a tuple with the Url field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationGraphqlApiDast) GetUrlOk() (*string, bool) {
+	if o == nil || IsNil(o.Url) {
+		return nil, false
+	}
+	return o.Url, true
+}
+
+// HasUrl returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationGraphqlApiDast) HasUrl() bool {
+	if o != nil && !IsNil(o.Url) {
+		return true
+	}
+
+	return false
+}
+
+// SetUrl gets a reference to the given string and assigns it to the Url field.
+func (o *ProfileDetailedConfigurationGraphqlApiDast) SetUrl(v string) {
+	o.Url = &v
 }
 
 // GetLocationId returns the LocationId field value if set, zero value otherwise.
@@ -417,6 +483,12 @@ func (o ProfileDetailedConfigurationGraphqlApiDast) ToMap() (map[string]interfac
 	if !IsNil(o.SchemaS3Key) {
 		toSerialize["schema_s3_key"] = o.SchemaS3Key
 	}
+	if !IsNil(o.AdditionalSchemaS3Keys) {
+		toSerialize["additional_schema_s3_keys"] = o.AdditionalSchemaS3Keys
+	}
+	if !IsNil(o.Url) {
+		toSerialize["url"] = o.Url
+	}
 	if !IsNil(o.LocationId) {
 		toSerialize["location_id"] = o.LocationId
 	}
@@ -470,6 +542,8 @@ func (o *ProfileDetailedConfigurationGraphqlApiDast) UnmarshalJSON(data []byte) 
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "schema_s3_key")
+		delete(additionalProperties, "additional_schema_s3_keys")
+		delete(additionalProperties, "url")
 		delete(additionalProperties, "location_id")
 		delete(additionalProperties, "profile")
 		delete(additionalProperties, "mode")

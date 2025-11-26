@@ -28,6 +28,7 @@ type ProfileDetailedConfigurationAuthenticationUsersInnerCredentials struct {
 	LocalStorage map[string]map[string]string `json:"local_storage,omitempty"`
 	SessionStorage map[string]map[string]string `json:"session_storage,omitempty"`
 	Actions []ProfileDetailedConfigurationAuthenticationUsersInnerCredentialsActionsInner `json:"actions,omitempty"`
+	PreLoginActions []ProfileDetailedConfigurationAuthenticationUsersInnerCredentialsActionsInner `json:"pre_login_actions,omitempty"`
 	PostLoginActions []ProfileDetailedConfigurationAuthenticationUsersInnerCredentialsActionsInner `json:"post_login_actions,omitempty"`
 	ExtraInstructions *string `json:"extra_instructions,omitempty"`
 	Digest *string `json:"digest,omitempty"`
@@ -343,6 +344,38 @@ func (o *ProfileDetailedConfigurationAuthenticationUsersInnerCredentials) SetAct
 	o.Actions = v
 }
 
+// GetPreLoginActions returns the PreLoginActions field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationAuthenticationUsersInnerCredentials) GetPreLoginActions() []ProfileDetailedConfigurationAuthenticationUsersInnerCredentialsActionsInner {
+	if o == nil || IsNil(o.PreLoginActions) {
+		var ret []ProfileDetailedConfigurationAuthenticationUsersInnerCredentialsActionsInner
+		return ret
+	}
+	return o.PreLoginActions
+}
+
+// GetPreLoginActionsOk returns a tuple with the PreLoginActions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationAuthenticationUsersInnerCredentials) GetPreLoginActionsOk() ([]ProfileDetailedConfigurationAuthenticationUsersInnerCredentialsActionsInner, bool) {
+	if o == nil || IsNil(o.PreLoginActions) {
+		return nil, false
+	}
+	return o.PreLoginActions, true
+}
+
+// HasPreLoginActions returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationAuthenticationUsersInnerCredentials) HasPreLoginActions() bool {
+	if o != nil && !IsNil(o.PreLoginActions) {
+		return true
+	}
+
+	return false
+}
+
+// SetPreLoginActions gets a reference to the given []ProfileDetailedConfigurationAuthenticationUsersInnerCredentialsActionsInner and assigns it to the PreLoginActions field.
+func (o *ProfileDetailedConfigurationAuthenticationUsersInnerCredentials) SetPreLoginActions(v []ProfileDetailedConfigurationAuthenticationUsersInnerCredentialsActionsInner) {
+	o.PreLoginActions = v
+}
+
 // GetPostLoginActions returns the PostLoginActions field value if set, zero value otherwise.
 func (o *ProfileDetailedConfigurationAuthenticationUsersInnerCredentials) GetPostLoginActions() []ProfileDetailedConfigurationAuthenticationUsersInnerCredentialsActionsInner {
 	if o == nil || IsNil(o.PostLoginActions) {
@@ -508,6 +541,9 @@ func (o ProfileDetailedConfigurationAuthenticationUsersInnerCredentials) ToMap()
 	if !IsNil(o.Actions) {
 		toSerialize["actions"] = o.Actions
 	}
+	if !IsNil(o.PreLoginActions) {
+		toSerialize["pre_login_actions"] = o.PreLoginActions
+	}
 	if !IsNil(o.PostLoginActions) {
 		toSerialize["post_login_actions"] = o.PostLoginActions
 	}
@@ -551,6 +587,7 @@ func (o *ProfileDetailedConfigurationAuthenticationUsersInnerCredentials) Unmars
 		delete(additionalProperties, "local_storage")
 		delete(additionalProperties, "session_storage")
 		delete(additionalProperties, "actions")
+		delete(additionalProperties, "pre_login_actions")
 		delete(additionalProperties, "post_login_actions")
 		delete(additionalProperties, "extra_instructions")
 		delete(additionalProperties, "digest")
