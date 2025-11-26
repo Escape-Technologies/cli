@@ -28,9 +28,13 @@ type CreateAssetWEBSOCKETRequest struct {
 	Url string `json:"url"`
 	Favicon *string `json:"favicon,omitempty"`
 	ReachableVia []string `json:"reachable_via,omitempty"`
+	ReachableViaExternalProxy *bool `json:"reachable_via_external_proxy,omitempty"`
+	Private *bool `json:"private,omitempty"`
+	PrivateLocationId *string `json:"private_location_id,omitempty"`
 	Environment *ENUMPROPERTIESENVIRONMENT `json:"environment,omitempty"`
 	CloudProvider *ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER `json:"cloud_provider,omitempty"`
 	WafProvider *ENUMPROPERTIESWAFPROVIDER `json:"waf_provider,omitempty"`
+	ThirdParty *ENUMPROPERTIESTHIRDPARTY `json:"third_party,omitempty"`
 	Ips []string `json:"ips,omitempty"`
 	RegionCountryCodes []string `json:"region_country_codes,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -290,6 +294,102 @@ func (o *CreateAssetWEBSOCKETRequest) SetReachableVia(v []string) {
 	o.ReachableVia = v
 }
 
+// GetReachableViaExternalProxy returns the ReachableViaExternalProxy field value if set, zero value otherwise.
+func (o *CreateAssetWEBSOCKETRequest) GetReachableViaExternalProxy() bool {
+	if o == nil || IsNil(o.ReachableViaExternalProxy) {
+		var ret bool
+		return ret
+	}
+	return *o.ReachableViaExternalProxy
+}
+
+// GetReachableViaExternalProxyOk returns a tuple with the ReachableViaExternalProxy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetWEBSOCKETRequest) GetReachableViaExternalProxyOk() (*bool, bool) {
+	if o == nil || IsNil(o.ReachableViaExternalProxy) {
+		return nil, false
+	}
+	return o.ReachableViaExternalProxy, true
+}
+
+// HasReachableViaExternalProxy returns a boolean if a field has been set.
+func (o *CreateAssetWEBSOCKETRequest) HasReachableViaExternalProxy() bool {
+	if o != nil && !IsNil(o.ReachableViaExternalProxy) {
+		return true
+	}
+
+	return false
+}
+
+// SetReachableViaExternalProxy gets a reference to the given bool and assigns it to the ReachableViaExternalProxy field.
+func (o *CreateAssetWEBSOCKETRequest) SetReachableViaExternalProxy(v bool) {
+	o.ReachableViaExternalProxy = &v
+}
+
+// GetPrivate returns the Private field value if set, zero value otherwise.
+func (o *CreateAssetWEBSOCKETRequest) GetPrivate() bool {
+	if o == nil || IsNil(o.Private) {
+		var ret bool
+		return ret
+	}
+	return *o.Private
+}
+
+// GetPrivateOk returns a tuple with the Private field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetWEBSOCKETRequest) GetPrivateOk() (*bool, bool) {
+	if o == nil || IsNil(o.Private) {
+		return nil, false
+	}
+	return o.Private, true
+}
+
+// HasPrivate returns a boolean if a field has been set.
+func (o *CreateAssetWEBSOCKETRequest) HasPrivate() bool {
+	if o != nil && !IsNil(o.Private) {
+		return true
+	}
+
+	return false
+}
+
+// SetPrivate gets a reference to the given bool and assigns it to the Private field.
+func (o *CreateAssetWEBSOCKETRequest) SetPrivate(v bool) {
+	o.Private = &v
+}
+
+// GetPrivateLocationId returns the PrivateLocationId field value if set, zero value otherwise.
+func (o *CreateAssetWEBSOCKETRequest) GetPrivateLocationId() string {
+	if o == nil || IsNil(o.PrivateLocationId) {
+		var ret string
+		return ret
+	}
+	return *o.PrivateLocationId
+}
+
+// GetPrivateLocationIdOk returns a tuple with the PrivateLocationId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetWEBSOCKETRequest) GetPrivateLocationIdOk() (*string, bool) {
+	if o == nil || IsNil(o.PrivateLocationId) {
+		return nil, false
+	}
+	return o.PrivateLocationId, true
+}
+
+// HasPrivateLocationId returns a boolean if a field has been set.
+func (o *CreateAssetWEBSOCKETRequest) HasPrivateLocationId() bool {
+	if o != nil && !IsNil(o.PrivateLocationId) {
+		return true
+	}
+
+	return false
+}
+
+// SetPrivateLocationId gets a reference to the given string and assigns it to the PrivateLocationId field.
+func (o *CreateAssetWEBSOCKETRequest) SetPrivateLocationId(v string) {
+	o.PrivateLocationId = &v
+}
+
 // GetEnvironment returns the Environment field value if set, zero value otherwise.
 func (o *CreateAssetWEBSOCKETRequest) GetEnvironment() ENUMPROPERTIESENVIRONMENT {
 	if o == nil || IsNil(o.Environment) {
@@ -386,6 +486,38 @@ func (o *CreateAssetWEBSOCKETRequest) SetWafProvider(v ENUMPROPERTIESWAFPROVIDER
 	o.WafProvider = &v
 }
 
+// GetThirdParty returns the ThirdParty field value if set, zero value otherwise.
+func (o *CreateAssetWEBSOCKETRequest) GetThirdParty() ENUMPROPERTIESTHIRDPARTY {
+	if o == nil || IsNil(o.ThirdParty) {
+		var ret ENUMPROPERTIESTHIRDPARTY
+		return ret
+	}
+	return *o.ThirdParty
+}
+
+// GetThirdPartyOk returns a tuple with the ThirdParty field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetWEBSOCKETRequest) GetThirdPartyOk() (*ENUMPROPERTIESTHIRDPARTY, bool) {
+	if o == nil || IsNil(o.ThirdParty) {
+		return nil, false
+	}
+	return o.ThirdParty, true
+}
+
+// HasThirdParty returns a boolean if a field has been set.
+func (o *CreateAssetWEBSOCKETRequest) HasThirdParty() bool {
+	if o != nil && !IsNil(o.ThirdParty) {
+		return true
+	}
+
+	return false
+}
+
+// SetThirdParty gets a reference to the given ENUMPROPERTIESTHIRDPARTY and assigns it to the ThirdParty field.
+func (o *CreateAssetWEBSOCKETRequest) SetThirdParty(v ENUMPROPERTIESTHIRDPARTY) {
+	o.ThirdParty = &v
+}
+
 // GetIps returns the Ips field value if set, zero value otherwise.
 func (o *CreateAssetWEBSOCKETRequest) GetIps() []string {
 	if o == nil || IsNil(o.Ips) {
@@ -478,6 +610,15 @@ func (o CreateAssetWEBSOCKETRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ReachableVia) {
 		toSerialize["reachable_via"] = o.ReachableVia
 	}
+	if !IsNil(o.ReachableViaExternalProxy) {
+		toSerialize["reachable_via_external_proxy"] = o.ReachableViaExternalProxy
+	}
+	if !IsNil(o.Private) {
+		toSerialize["private"] = o.Private
+	}
+	if !IsNil(o.PrivateLocationId) {
+		toSerialize["private_location_id"] = o.PrivateLocationId
+	}
 	if !IsNil(o.Environment) {
 		toSerialize["environment"] = o.Environment
 	}
@@ -486,6 +627,9 @@ func (o CreateAssetWEBSOCKETRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.WafProvider) {
 		toSerialize["waf_provider"] = o.WafProvider
+	}
+	if !IsNil(o.ThirdParty) {
+		toSerialize["third_party"] = o.ThirdParty
 	}
 	if !IsNil(o.Ips) {
 		toSerialize["ips"] = o.Ips
@@ -546,9 +690,13 @@ func (o *CreateAssetWEBSOCKETRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "url")
 		delete(additionalProperties, "favicon")
 		delete(additionalProperties, "reachable_via")
+		delete(additionalProperties, "reachable_via_external_proxy")
+		delete(additionalProperties, "private")
+		delete(additionalProperties, "private_location_id")
 		delete(additionalProperties, "environment")
 		delete(additionalProperties, "cloud_provider")
 		delete(additionalProperties, "waf_provider")
+		delete(additionalProperties, "third_party")
 		delete(additionalProperties, "ips")
 		delete(additionalProperties, "region_country_codes")
 		o.AdditionalProperties = additionalProperties

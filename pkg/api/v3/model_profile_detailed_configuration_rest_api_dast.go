@@ -28,6 +28,7 @@ type ProfileDetailedConfigurationRestApiDast struct {
 	HotstartOnly *bool `json:"hotstart_only,omitempty"`
 	Blocklist []ProfileDetailedConfigurationRestApiDastBlocklistInner `json:"blocklist,omitempty"`
 	Scope *ProfileDetailedConfigurationRestApiDastScope `json:"scope,omitempty"`
+	AdditionalSchemaS3Keys []string `json:"additional_schema_s3_keys,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -338,6 +339,38 @@ func (o *ProfileDetailedConfigurationRestApiDast) SetScope(v ProfileDetailedConf
 	o.Scope = &v
 }
 
+// GetAdditionalSchemaS3Keys returns the AdditionalSchemaS3Keys field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationRestApiDast) GetAdditionalSchemaS3Keys() []string {
+	if o == nil || IsNil(o.AdditionalSchemaS3Keys) {
+		var ret []string
+		return ret
+	}
+	return o.AdditionalSchemaS3Keys
+}
+
+// GetAdditionalSchemaS3KeysOk returns a tuple with the AdditionalSchemaS3Keys field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationRestApiDast) GetAdditionalSchemaS3KeysOk() ([]string, bool) {
+	if o == nil || IsNil(o.AdditionalSchemaS3Keys) {
+		return nil, false
+	}
+	return o.AdditionalSchemaS3Keys, true
+}
+
+// HasAdditionalSchemaS3Keys returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationRestApiDast) HasAdditionalSchemaS3Keys() bool {
+	if o != nil && !IsNil(o.AdditionalSchemaS3Keys) {
+		return true
+	}
+
+	return false
+}
+
+// SetAdditionalSchemaS3Keys gets a reference to the given []string and assigns it to the AdditionalSchemaS3Keys field.
+func (o *ProfileDetailedConfigurationRestApiDast) SetAdditionalSchemaS3Keys(v []string) {
+	o.AdditionalSchemaS3Keys = v
+}
+
 func (o ProfileDetailedConfigurationRestApiDast) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -375,6 +408,9 @@ func (o ProfileDetailedConfigurationRestApiDast) ToMap() (map[string]interface{}
 	if !IsNil(o.Scope) {
 		toSerialize["scope"] = o.Scope
 	}
+	if !IsNil(o.AdditionalSchemaS3Keys) {
+		toSerialize["additional_schema_s3_keys"] = o.AdditionalSchemaS3Keys
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -406,6 +442,7 @@ func (o *ProfileDetailedConfigurationRestApiDast) UnmarshalJSON(data []byte) (er
 		delete(additionalProperties, "hotstart_only")
 		delete(additionalProperties, "blocklist")
 		delete(additionalProperties, "scope")
+		delete(additionalProperties, "additional_schema_s3_keys")
 		o.AdditionalProperties = additionalProperties
 	}
 

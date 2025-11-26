@@ -15,23 +15,22 @@ import (
 	"fmt"
 )
 
-// checks if the CreateAssetWEBAPPRequest type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &CreateAssetWEBAPPRequest{}
+// checks if the CreateAssetMCPRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CreateAssetMCPRequest{}
 
-// CreateAssetWEBAPPRequest struct for CreateAssetWEBAPPRequest
-type CreateAssetWEBAPPRequest struct {
-	AssetClass ENUMFRONTEND `json:"asset_class"`
+// CreateAssetMCPRequest struct for CreateAssetMCPRequest
+type CreateAssetMCPRequest struct {
+	AssetClass ENUMAPISERVICE `json:"asset_class"`
 	WizProviderId *string `json:"wiz_provider_id,omitempty"`
 	WizCloudPlatform *string `json:"wiz_cloud_platform,omitempty"`
 	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
-	AssetType ENUMWEBAPP `json:"asset_type"`
+	AssetType ENUMMCP `json:"asset_type"`
 	Url string `json:"url"`
 	Favicon *string `json:"favicon,omitempty"`
 	ReachableVia []string `json:"reachable_via,omitempty"`
 	ReachableViaExternalProxy *bool `json:"reachable_via_external_proxy,omitempty"`
 	Private *bool `json:"private,omitempty"`
 	PrivateLocationId *string `json:"private_location_id,omitempty"`
-	Framework *ENUMPROPERTIESFRAMEWORK `json:"framework,omitempty"`
 	Environment *ENUMPROPERTIESENVIRONMENT `json:"environment,omitempty"`
 	CloudProvider *ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER `json:"cloud_provider,omitempty"`
 	WafProvider *ENUMPROPERTIESWAFPROVIDER `json:"waf_provider,omitempty"`
@@ -41,32 +40,32 @@ type CreateAssetWEBAPPRequest struct {
 	AdditionalProperties map[string]interface{}
 }
 
-type _CreateAssetWEBAPPRequest CreateAssetWEBAPPRequest
+type _CreateAssetMCPRequest CreateAssetMCPRequest
 
-// NewCreateAssetWEBAPPRequest instantiates a new CreateAssetWEBAPPRequest object
+// NewCreateAssetMCPRequest instantiates a new CreateAssetMCPRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetWEBAPPRequest(assetClass ENUMFRONTEND, assetType ENUMWEBAPP, url string) *CreateAssetWEBAPPRequest {
-	this := CreateAssetWEBAPPRequest{}
+func NewCreateAssetMCPRequest(assetClass ENUMAPISERVICE, assetType ENUMMCP, url string) *CreateAssetMCPRequest {
+	this := CreateAssetMCPRequest{}
 	this.AssetClass = assetClass
 	this.AssetType = assetType
 	this.Url = url
 	return &this
 }
 
-// NewCreateAssetWEBAPPRequestWithDefaults instantiates a new CreateAssetWEBAPPRequest object
+// NewCreateAssetMCPRequestWithDefaults instantiates a new CreateAssetMCPRequest object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCreateAssetWEBAPPRequestWithDefaults() *CreateAssetWEBAPPRequest {
-	this := CreateAssetWEBAPPRequest{}
+func NewCreateAssetMCPRequestWithDefaults() *CreateAssetMCPRequest {
+	this := CreateAssetMCPRequest{}
 	return &this
 }
 
 // GetAssetClass returns the AssetClass field value
-func (o *CreateAssetWEBAPPRequest) GetAssetClass() ENUMFRONTEND {
+func (o *CreateAssetMCPRequest) GetAssetClass() ENUMAPISERVICE {
 	if o == nil {
-		var ret ENUMFRONTEND
+		var ret ENUMAPISERVICE
 		return ret
 	}
 
@@ -75,7 +74,7 @@ func (o *CreateAssetWEBAPPRequest) GetAssetClass() ENUMFRONTEND {
 
 // GetAssetClassOk returns a tuple with the AssetClass field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetWEBAPPRequest) GetAssetClassOk() (*ENUMFRONTEND, bool) {
+func (o *CreateAssetMCPRequest) GetAssetClassOk() (*ENUMAPISERVICE, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -83,12 +82,12 @@ func (o *CreateAssetWEBAPPRequest) GetAssetClassOk() (*ENUMFRONTEND, bool) {
 }
 
 // SetAssetClass sets field value
-func (o *CreateAssetWEBAPPRequest) SetAssetClass(v ENUMFRONTEND) {
+func (o *CreateAssetMCPRequest) SetAssetClass(v ENUMAPISERVICE) {
 	o.AssetClass = v
 }
 
 // GetWizProviderId returns the WizProviderId field value if set, zero value otherwise.
-func (o *CreateAssetWEBAPPRequest) GetWizProviderId() string {
+func (o *CreateAssetMCPRequest) GetWizProviderId() string {
 	if o == nil || IsNil(o.WizProviderId) {
 		var ret string
 		return ret
@@ -98,7 +97,7 @@ func (o *CreateAssetWEBAPPRequest) GetWizProviderId() string {
 
 // GetWizProviderIdOk returns a tuple with the WizProviderId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetWEBAPPRequest) GetWizProviderIdOk() (*string, bool) {
+func (o *CreateAssetMCPRequest) GetWizProviderIdOk() (*string, bool) {
 	if o == nil || IsNil(o.WizProviderId) {
 		return nil, false
 	}
@@ -106,7 +105,7 @@ func (o *CreateAssetWEBAPPRequest) GetWizProviderIdOk() (*string, bool) {
 }
 
 // HasWizProviderId returns a boolean if a field has been set.
-func (o *CreateAssetWEBAPPRequest) HasWizProviderId() bool {
+func (o *CreateAssetMCPRequest) HasWizProviderId() bool {
 	if o != nil && !IsNil(o.WizProviderId) {
 		return true
 	}
@@ -115,12 +114,12 @@ func (o *CreateAssetWEBAPPRequest) HasWizProviderId() bool {
 }
 
 // SetWizProviderId gets a reference to the given string and assigns it to the WizProviderId field.
-func (o *CreateAssetWEBAPPRequest) SetWizProviderId(v string) {
+func (o *CreateAssetMCPRequest) SetWizProviderId(v string) {
 	o.WizProviderId = &v
 }
 
 // GetWizCloudPlatform returns the WizCloudPlatform field value if set, zero value otherwise.
-func (o *CreateAssetWEBAPPRequest) GetWizCloudPlatform() string {
+func (o *CreateAssetMCPRequest) GetWizCloudPlatform() string {
 	if o == nil || IsNil(o.WizCloudPlatform) {
 		var ret string
 		return ret
@@ -130,7 +129,7 @@ func (o *CreateAssetWEBAPPRequest) GetWizCloudPlatform() string {
 
 // GetWizCloudPlatformOk returns a tuple with the WizCloudPlatform field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetWEBAPPRequest) GetWizCloudPlatformOk() (*string, bool) {
+func (o *CreateAssetMCPRequest) GetWizCloudPlatformOk() (*string, bool) {
 	if o == nil || IsNil(o.WizCloudPlatform) {
 		return nil, false
 	}
@@ -138,7 +137,7 @@ func (o *CreateAssetWEBAPPRequest) GetWizCloudPlatformOk() (*string, bool) {
 }
 
 // HasWizCloudPlatform returns a boolean if a field has been set.
-func (o *CreateAssetWEBAPPRequest) HasWizCloudPlatform() bool {
+func (o *CreateAssetMCPRequest) HasWizCloudPlatform() bool {
 	if o != nil && !IsNil(o.WizCloudPlatform) {
 		return true
 	}
@@ -147,12 +146,12 @@ func (o *CreateAssetWEBAPPRequest) HasWizCloudPlatform() bool {
 }
 
 // SetWizCloudPlatform gets a reference to the given string and assigns it to the WizCloudPlatform field.
-func (o *CreateAssetWEBAPPRequest) SetWizCloudPlatform(v string) {
+func (o *CreateAssetMCPRequest) SetWizCloudPlatform(v string) {
 	o.WizCloudPlatform = &v
 }
 
 // GetExtraMetadata returns the ExtraMetadata field value if set, zero value otherwise.
-func (o *CreateAssetWEBAPPRequest) GetExtraMetadata() map[string]interface{} {
+func (o *CreateAssetMCPRequest) GetExtraMetadata() map[string]interface{} {
 	if o == nil || IsNil(o.ExtraMetadata) {
 		var ret map[string]interface{}
 		return ret
@@ -162,7 +161,7 @@ func (o *CreateAssetWEBAPPRequest) GetExtraMetadata() map[string]interface{} {
 
 // GetExtraMetadataOk returns a tuple with the ExtraMetadata field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetWEBAPPRequest) GetExtraMetadataOk() (map[string]interface{}, bool) {
+func (o *CreateAssetMCPRequest) GetExtraMetadataOk() (map[string]interface{}, bool) {
 	if o == nil || IsNil(o.ExtraMetadata) {
 		return map[string]interface{}{}, false
 	}
@@ -170,7 +169,7 @@ func (o *CreateAssetWEBAPPRequest) GetExtraMetadataOk() (map[string]interface{},
 }
 
 // HasExtraMetadata returns a boolean if a field has been set.
-func (o *CreateAssetWEBAPPRequest) HasExtraMetadata() bool {
+func (o *CreateAssetMCPRequest) HasExtraMetadata() bool {
 	if o != nil && !IsNil(o.ExtraMetadata) {
 		return true
 	}
@@ -179,14 +178,14 @@ func (o *CreateAssetWEBAPPRequest) HasExtraMetadata() bool {
 }
 
 // SetExtraMetadata gets a reference to the given map[string]interface{} and assigns it to the ExtraMetadata field.
-func (o *CreateAssetWEBAPPRequest) SetExtraMetadata(v map[string]interface{}) {
+func (o *CreateAssetMCPRequest) SetExtraMetadata(v map[string]interface{}) {
 	o.ExtraMetadata = v
 }
 
 // GetAssetType returns the AssetType field value
-func (o *CreateAssetWEBAPPRequest) GetAssetType() ENUMWEBAPP {
+func (o *CreateAssetMCPRequest) GetAssetType() ENUMMCP {
 	if o == nil {
-		var ret ENUMWEBAPP
+		var ret ENUMMCP
 		return ret
 	}
 
@@ -195,7 +194,7 @@ func (o *CreateAssetWEBAPPRequest) GetAssetType() ENUMWEBAPP {
 
 // GetAssetTypeOk returns a tuple with the AssetType field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetWEBAPPRequest) GetAssetTypeOk() (*ENUMWEBAPP, bool) {
+func (o *CreateAssetMCPRequest) GetAssetTypeOk() (*ENUMMCP, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -203,12 +202,12 @@ func (o *CreateAssetWEBAPPRequest) GetAssetTypeOk() (*ENUMWEBAPP, bool) {
 }
 
 // SetAssetType sets field value
-func (o *CreateAssetWEBAPPRequest) SetAssetType(v ENUMWEBAPP) {
+func (o *CreateAssetMCPRequest) SetAssetType(v ENUMMCP) {
 	o.AssetType = v
 }
 
 // GetUrl returns the Url field value
-func (o *CreateAssetWEBAPPRequest) GetUrl() string {
+func (o *CreateAssetMCPRequest) GetUrl() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -219,7 +218,7 @@ func (o *CreateAssetWEBAPPRequest) GetUrl() string {
 
 // GetUrlOk returns a tuple with the Url field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetWEBAPPRequest) GetUrlOk() (*string, bool) {
+func (o *CreateAssetMCPRequest) GetUrlOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -227,12 +226,12 @@ func (o *CreateAssetWEBAPPRequest) GetUrlOk() (*string, bool) {
 }
 
 // SetUrl sets field value
-func (o *CreateAssetWEBAPPRequest) SetUrl(v string) {
+func (o *CreateAssetMCPRequest) SetUrl(v string) {
 	o.Url = v
 }
 
 // GetFavicon returns the Favicon field value if set, zero value otherwise.
-func (o *CreateAssetWEBAPPRequest) GetFavicon() string {
+func (o *CreateAssetMCPRequest) GetFavicon() string {
 	if o == nil || IsNil(o.Favicon) {
 		var ret string
 		return ret
@@ -242,7 +241,7 @@ func (o *CreateAssetWEBAPPRequest) GetFavicon() string {
 
 // GetFaviconOk returns a tuple with the Favicon field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetWEBAPPRequest) GetFaviconOk() (*string, bool) {
+func (o *CreateAssetMCPRequest) GetFaviconOk() (*string, bool) {
 	if o == nil || IsNil(o.Favicon) {
 		return nil, false
 	}
@@ -250,7 +249,7 @@ func (o *CreateAssetWEBAPPRequest) GetFaviconOk() (*string, bool) {
 }
 
 // HasFavicon returns a boolean if a field has been set.
-func (o *CreateAssetWEBAPPRequest) HasFavicon() bool {
+func (o *CreateAssetMCPRequest) HasFavicon() bool {
 	if o != nil && !IsNil(o.Favicon) {
 		return true
 	}
@@ -259,12 +258,12 @@ func (o *CreateAssetWEBAPPRequest) HasFavicon() bool {
 }
 
 // SetFavicon gets a reference to the given string and assigns it to the Favicon field.
-func (o *CreateAssetWEBAPPRequest) SetFavicon(v string) {
+func (o *CreateAssetMCPRequest) SetFavicon(v string) {
 	o.Favicon = &v
 }
 
 // GetReachableVia returns the ReachableVia field value if set, zero value otherwise.
-func (o *CreateAssetWEBAPPRequest) GetReachableVia() []string {
+func (o *CreateAssetMCPRequest) GetReachableVia() []string {
 	if o == nil || IsNil(o.ReachableVia) {
 		var ret []string
 		return ret
@@ -274,7 +273,7 @@ func (o *CreateAssetWEBAPPRequest) GetReachableVia() []string {
 
 // GetReachableViaOk returns a tuple with the ReachableVia field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetWEBAPPRequest) GetReachableViaOk() ([]string, bool) {
+func (o *CreateAssetMCPRequest) GetReachableViaOk() ([]string, bool) {
 	if o == nil || IsNil(o.ReachableVia) {
 		return nil, false
 	}
@@ -282,7 +281,7 @@ func (o *CreateAssetWEBAPPRequest) GetReachableViaOk() ([]string, bool) {
 }
 
 // HasReachableVia returns a boolean if a field has been set.
-func (o *CreateAssetWEBAPPRequest) HasReachableVia() bool {
+func (o *CreateAssetMCPRequest) HasReachableVia() bool {
 	if o != nil && !IsNil(o.ReachableVia) {
 		return true
 	}
@@ -291,12 +290,12 @@ func (o *CreateAssetWEBAPPRequest) HasReachableVia() bool {
 }
 
 // SetReachableVia gets a reference to the given []string and assigns it to the ReachableVia field.
-func (o *CreateAssetWEBAPPRequest) SetReachableVia(v []string) {
+func (o *CreateAssetMCPRequest) SetReachableVia(v []string) {
 	o.ReachableVia = v
 }
 
 // GetReachableViaExternalProxy returns the ReachableViaExternalProxy field value if set, zero value otherwise.
-func (o *CreateAssetWEBAPPRequest) GetReachableViaExternalProxy() bool {
+func (o *CreateAssetMCPRequest) GetReachableViaExternalProxy() bool {
 	if o == nil || IsNil(o.ReachableViaExternalProxy) {
 		var ret bool
 		return ret
@@ -306,7 +305,7 @@ func (o *CreateAssetWEBAPPRequest) GetReachableViaExternalProxy() bool {
 
 // GetReachableViaExternalProxyOk returns a tuple with the ReachableViaExternalProxy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetWEBAPPRequest) GetReachableViaExternalProxyOk() (*bool, bool) {
+func (o *CreateAssetMCPRequest) GetReachableViaExternalProxyOk() (*bool, bool) {
 	if o == nil || IsNil(o.ReachableViaExternalProxy) {
 		return nil, false
 	}
@@ -314,7 +313,7 @@ func (o *CreateAssetWEBAPPRequest) GetReachableViaExternalProxyOk() (*bool, bool
 }
 
 // HasReachableViaExternalProxy returns a boolean if a field has been set.
-func (o *CreateAssetWEBAPPRequest) HasReachableViaExternalProxy() bool {
+func (o *CreateAssetMCPRequest) HasReachableViaExternalProxy() bool {
 	if o != nil && !IsNil(o.ReachableViaExternalProxy) {
 		return true
 	}
@@ -323,12 +322,12 @@ func (o *CreateAssetWEBAPPRequest) HasReachableViaExternalProxy() bool {
 }
 
 // SetReachableViaExternalProxy gets a reference to the given bool and assigns it to the ReachableViaExternalProxy field.
-func (o *CreateAssetWEBAPPRequest) SetReachableViaExternalProxy(v bool) {
+func (o *CreateAssetMCPRequest) SetReachableViaExternalProxy(v bool) {
 	o.ReachableViaExternalProxy = &v
 }
 
 // GetPrivate returns the Private field value if set, zero value otherwise.
-func (o *CreateAssetWEBAPPRequest) GetPrivate() bool {
+func (o *CreateAssetMCPRequest) GetPrivate() bool {
 	if o == nil || IsNil(o.Private) {
 		var ret bool
 		return ret
@@ -338,7 +337,7 @@ func (o *CreateAssetWEBAPPRequest) GetPrivate() bool {
 
 // GetPrivateOk returns a tuple with the Private field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetWEBAPPRequest) GetPrivateOk() (*bool, bool) {
+func (o *CreateAssetMCPRequest) GetPrivateOk() (*bool, bool) {
 	if o == nil || IsNil(o.Private) {
 		return nil, false
 	}
@@ -346,7 +345,7 @@ func (o *CreateAssetWEBAPPRequest) GetPrivateOk() (*bool, bool) {
 }
 
 // HasPrivate returns a boolean if a field has been set.
-func (o *CreateAssetWEBAPPRequest) HasPrivate() bool {
+func (o *CreateAssetMCPRequest) HasPrivate() bool {
 	if o != nil && !IsNil(o.Private) {
 		return true
 	}
@@ -355,12 +354,12 @@ func (o *CreateAssetWEBAPPRequest) HasPrivate() bool {
 }
 
 // SetPrivate gets a reference to the given bool and assigns it to the Private field.
-func (o *CreateAssetWEBAPPRequest) SetPrivate(v bool) {
+func (o *CreateAssetMCPRequest) SetPrivate(v bool) {
 	o.Private = &v
 }
 
 // GetPrivateLocationId returns the PrivateLocationId field value if set, zero value otherwise.
-func (o *CreateAssetWEBAPPRequest) GetPrivateLocationId() string {
+func (o *CreateAssetMCPRequest) GetPrivateLocationId() string {
 	if o == nil || IsNil(o.PrivateLocationId) {
 		var ret string
 		return ret
@@ -370,7 +369,7 @@ func (o *CreateAssetWEBAPPRequest) GetPrivateLocationId() string {
 
 // GetPrivateLocationIdOk returns a tuple with the PrivateLocationId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetWEBAPPRequest) GetPrivateLocationIdOk() (*string, bool) {
+func (o *CreateAssetMCPRequest) GetPrivateLocationIdOk() (*string, bool) {
 	if o == nil || IsNil(o.PrivateLocationId) {
 		return nil, false
 	}
@@ -378,7 +377,7 @@ func (o *CreateAssetWEBAPPRequest) GetPrivateLocationIdOk() (*string, bool) {
 }
 
 // HasPrivateLocationId returns a boolean if a field has been set.
-func (o *CreateAssetWEBAPPRequest) HasPrivateLocationId() bool {
+func (o *CreateAssetMCPRequest) HasPrivateLocationId() bool {
 	if o != nil && !IsNil(o.PrivateLocationId) {
 		return true
 	}
@@ -387,44 +386,12 @@ func (o *CreateAssetWEBAPPRequest) HasPrivateLocationId() bool {
 }
 
 // SetPrivateLocationId gets a reference to the given string and assigns it to the PrivateLocationId field.
-func (o *CreateAssetWEBAPPRequest) SetPrivateLocationId(v string) {
+func (o *CreateAssetMCPRequest) SetPrivateLocationId(v string) {
 	o.PrivateLocationId = &v
 }
 
-// GetFramework returns the Framework field value if set, zero value otherwise.
-func (o *CreateAssetWEBAPPRequest) GetFramework() ENUMPROPERTIESFRAMEWORK {
-	if o == nil || IsNil(o.Framework) {
-		var ret ENUMPROPERTIESFRAMEWORK
-		return ret
-	}
-	return *o.Framework
-}
-
-// GetFrameworkOk returns a tuple with the Framework field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateAssetWEBAPPRequest) GetFrameworkOk() (*ENUMPROPERTIESFRAMEWORK, bool) {
-	if o == nil || IsNil(o.Framework) {
-		return nil, false
-	}
-	return o.Framework, true
-}
-
-// HasFramework returns a boolean if a field has been set.
-func (o *CreateAssetWEBAPPRequest) HasFramework() bool {
-	if o != nil && !IsNil(o.Framework) {
-		return true
-	}
-
-	return false
-}
-
-// SetFramework gets a reference to the given ENUMPROPERTIESFRAMEWORK and assigns it to the Framework field.
-func (o *CreateAssetWEBAPPRequest) SetFramework(v ENUMPROPERTIESFRAMEWORK) {
-	o.Framework = &v
-}
-
 // GetEnvironment returns the Environment field value if set, zero value otherwise.
-func (o *CreateAssetWEBAPPRequest) GetEnvironment() ENUMPROPERTIESENVIRONMENT {
+func (o *CreateAssetMCPRequest) GetEnvironment() ENUMPROPERTIESENVIRONMENT {
 	if o == nil || IsNil(o.Environment) {
 		var ret ENUMPROPERTIESENVIRONMENT
 		return ret
@@ -434,7 +401,7 @@ func (o *CreateAssetWEBAPPRequest) GetEnvironment() ENUMPROPERTIESENVIRONMENT {
 
 // GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetWEBAPPRequest) GetEnvironmentOk() (*ENUMPROPERTIESENVIRONMENT, bool) {
+func (o *CreateAssetMCPRequest) GetEnvironmentOk() (*ENUMPROPERTIESENVIRONMENT, bool) {
 	if o == nil || IsNil(o.Environment) {
 		return nil, false
 	}
@@ -442,7 +409,7 @@ func (o *CreateAssetWEBAPPRequest) GetEnvironmentOk() (*ENUMPROPERTIESENVIRONMEN
 }
 
 // HasEnvironment returns a boolean if a field has been set.
-func (o *CreateAssetWEBAPPRequest) HasEnvironment() bool {
+func (o *CreateAssetMCPRequest) HasEnvironment() bool {
 	if o != nil && !IsNil(o.Environment) {
 		return true
 	}
@@ -451,12 +418,12 @@ func (o *CreateAssetWEBAPPRequest) HasEnvironment() bool {
 }
 
 // SetEnvironment gets a reference to the given ENUMPROPERTIESENVIRONMENT and assigns it to the Environment field.
-func (o *CreateAssetWEBAPPRequest) SetEnvironment(v ENUMPROPERTIESENVIRONMENT) {
+func (o *CreateAssetMCPRequest) SetEnvironment(v ENUMPROPERTIESENVIRONMENT) {
 	o.Environment = &v
 }
 
 // GetCloudProvider returns the CloudProvider field value if set, zero value otherwise.
-func (o *CreateAssetWEBAPPRequest) GetCloudProvider() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER {
+func (o *CreateAssetMCPRequest) GetCloudProvider() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER {
 	if o == nil || IsNil(o.CloudProvider) {
 		var ret ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER
 		return ret
@@ -466,7 +433,7 @@ func (o *CreateAssetWEBAPPRequest) GetCloudProvider() ENUMPROPERTIESDATAITEMSPRO
 
 // GetCloudProviderOk returns a tuple with the CloudProvider field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetWEBAPPRequest) GetCloudProviderOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER, bool) {
+func (o *CreateAssetMCPRequest) GetCloudProviderOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER, bool) {
 	if o == nil || IsNil(o.CloudProvider) {
 		return nil, false
 	}
@@ -474,7 +441,7 @@ func (o *CreateAssetWEBAPPRequest) GetCloudProviderOk() (*ENUMPROPERTIESDATAITEM
 }
 
 // HasCloudProvider returns a boolean if a field has been set.
-func (o *CreateAssetWEBAPPRequest) HasCloudProvider() bool {
+func (o *CreateAssetMCPRequest) HasCloudProvider() bool {
 	if o != nil && !IsNil(o.CloudProvider) {
 		return true
 	}
@@ -483,12 +450,12 @@ func (o *CreateAssetWEBAPPRequest) HasCloudProvider() bool {
 }
 
 // SetCloudProvider gets a reference to the given ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER and assigns it to the CloudProvider field.
-func (o *CreateAssetWEBAPPRequest) SetCloudProvider(v ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER) {
+func (o *CreateAssetMCPRequest) SetCloudProvider(v ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER) {
 	o.CloudProvider = &v
 }
 
 // GetWafProvider returns the WafProvider field value if set, zero value otherwise.
-func (o *CreateAssetWEBAPPRequest) GetWafProvider() ENUMPROPERTIESWAFPROVIDER {
+func (o *CreateAssetMCPRequest) GetWafProvider() ENUMPROPERTIESWAFPROVIDER {
 	if o == nil || IsNil(o.WafProvider) {
 		var ret ENUMPROPERTIESWAFPROVIDER
 		return ret
@@ -498,7 +465,7 @@ func (o *CreateAssetWEBAPPRequest) GetWafProvider() ENUMPROPERTIESWAFPROVIDER {
 
 // GetWafProviderOk returns a tuple with the WafProvider field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetWEBAPPRequest) GetWafProviderOk() (*ENUMPROPERTIESWAFPROVIDER, bool) {
+func (o *CreateAssetMCPRequest) GetWafProviderOk() (*ENUMPROPERTIESWAFPROVIDER, bool) {
 	if o == nil || IsNil(o.WafProvider) {
 		return nil, false
 	}
@@ -506,7 +473,7 @@ func (o *CreateAssetWEBAPPRequest) GetWafProviderOk() (*ENUMPROPERTIESWAFPROVIDE
 }
 
 // HasWafProvider returns a boolean if a field has been set.
-func (o *CreateAssetWEBAPPRequest) HasWafProvider() bool {
+func (o *CreateAssetMCPRequest) HasWafProvider() bool {
 	if o != nil && !IsNil(o.WafProvider) {
 		return true
 	}
@@ -515,12 +482,12 @@ func (o *CreateAssetWEBAPPRequest) HasWafProvider() bool {
 }
 
 // SetWafProvider gets a reference to the given ENUMPROPERTIESWAFPROVIDER and assigns it to the WafProvider field.
-func (o *CreateAssetWEBAPPRequest) SetWafProvider(v ENUMPROPERTIESWAFPROVIDER) {
+func (o *CreateAssetMCPRequest) SetWafProvider(v ENUMPROPERTIESWAFPROVIDER) {
 	o.WafProvider = &v
 }
 
 // GetThirdParty returns the ThirdParty field value if set, zero value otherwise.
-func (o *CreateAssetWEBAPPRequest) GetThirdParty() ENUMPROPERTIESTHIRDPARTY {
+func (o *CreateAssetMCPRequest) GetThirdParty() ENUMPROPERTIESTHIRDPARTY {
 	if o == nil || IsNil(o.ThirdParty) {
 		var ret ENUMPROPERTIESTHIRDPARTY
 		return ret
@@ -530,7 +497,7 @@ func (o *CreateAssetWEBAPPRequest) GetThirdParty() ENUMPROPERTIESTHIRDPARTY {
 
 // GetThirdPartyOk returns a tuple with the ThirdParty field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetWEBAPPRequest) GetThirdPartyOk() (*ENUMPROPERTIESTHIRDPARTY, bool) {
+func (o *CreateAssetMCPRequest) GetThirdPartyOk() (*ENUMPROPERTIESTHIRDPARTY, bool) {
 	if o == nil || IsNil(o.ThirdParty) {
 		return nil, false
 	}
@@ -538,7 +505,7 @@ func (o *CreateAssetWEBAPPRequest) GetThirdPartyOk() (*ENUMPROPERTIESTHIRDPARTY,
 }
 
 // HasThirdParty returns a boolean if a field has been set.
-func (o *CreateAssetWEBAPPRequest) HasThirdParty() bool {
+func (o *CreateAssetMCPRequest) HasThirdParty() bool {
 	if o != nil && !IsNil(o.ThirdParty) {
 		return true
 	}
@@ -547,12 +514,12 @@ func (o *CreateAssetWEBAPPRequest) HasThirdParty() bool {
 }
 
 // SetThirdParty gets a reference to the given ENUMPROPERTIESTHIRDPARTY and assigns it to the ThirdParty field.
-func (o *CreateAssetWEBAPPRequest) SetThirdParty(v ENUMPROPERTIESTHIRDPARTY) {
+func (o *CreateAssetMCPRequest) SetThirdParty(v ENUMPROPERTIESTHIRDPARTY) {
 	o.ThirdParty = &v
 }
 
 // GetIps returns the Ips field value if set, zero value otherwise.
-func (o *CreateAssetWEBAPPRequest) GetIps() []string {
+func (o *CreateAssetMCPRequest) GetIps() []string {
 	if o == nil || IsNil(o.Ips) {
 		var ret []string
 		return ret
@@ -562,7 +529,7 @@ func (o *CreateAssetWEBAPPRequest) GetIps() []string {
 
 // GetIpsOk returns a tuple with the Ips field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetWEBAPPRequest) GetIpsOk() ([]string, bool) {
+func (o *CreateAssetMCPRequest) GetIpsOk() ([]string, bool) {
 	if o == nil || IsNil(o.Ips) {
 		return nil, false
 	}
@@ -570,7 +537,7 @@ func (o *CreateAssetWEBAPPRequest) GetIpsOk() ([]string, bool) {
 }
 
 // HasIps returns a boolean if a field has been set.
-func (o *CreateAssetWEBAPPRequest) HasIps() bool {
+func (o *CreateAssetMCPRequest) HasIps() bool {
 	if o != nil && !IsNil(o.Ips) {
 		return true
 	}
@@ -579,12 +546,12 @@ func (o *CreateAssetWEBAPPRequest) HasIps() bool {
 }
 
 // SetIps gets a reference to the given []string and assigns it to the Ips field.
-func (o *CreateAssetWEBAPPRequest) SetIps(v []string) {
+func (o *CreateAssetMCPRequest) SetIps(v []string) {
 	o.Ips = v
 }
 
 // GetRegionCountryCodes returns the RegionCountryCodes field value if set, zero value otherwise.
-func (o *CreateAssetWEBAPPRequest) GetRegionCountryCodes() []string {
+func (o *CreateAssetMCPRequest) GetRegionCountryCodes() []string {
 	if o == nil || IsNil(o.RegionCountryCodes) {
 		var ret []string
 		return ret
@@ -594,7 +561,7 @@ func (o *CreateAssetWEBAPPRequest) GetRegionCountryCodes() []string {
 
 // GetRegionCountryCodesOk returns a tuple with the RegionCountryCodes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetWEBAPPRequest) GetRegionCountryCodesOk() ([]string, bool) {
+func (o *CreateAssetMCPRequest) GetRegionCountryCodesOk() ([]string, bool) {
 	if o == nil || IsNil(o.RegionCountryCodes) {
 		return nil, false
 	}
@@ -602,7 +569,7 @@ func (o *CreateAssetWEBAPPRequest) GetRegionCountryCodesOk() ([]string, bool) {
 }
 
 // HasRegionCountryCodes returns a boolean if a field has been set.
-func (o *CreateAssetWEBAPPRequest) HasRegionCountryCodes() bool {
+func (o *CreateAssetMCPRequest) HasRegionCountryCodes() bool {
 	if o != nil && !IsNil(o.RegionCountryCodes) {
 		return true
 	}
@@ -611,11 +578,11 @@ func (o *CreateAssetWEBAPPRequest) HasRegionCountryCodes() bool {
 }
 
 // SetRegionCountryCodes gets a reference to the given []string and assigns it to the RegionCountryCodes field.
-func (o *CreateAssetWEBAPPRequest) SetRegionCountryCodes(v []string) {
+func (o *CreateAssetMCPRequest) SetRegionCountryCodes(v []string) {
 	o.RegionCountryCodes = v
 }
 
-func (o CreateAssetWEBAPPRequest) MarshalJSON() ([]byte, error) {
+func (o CreateAssetMCPRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -623,7 +590,7 @@ func (o CreateAssetWEBAPPRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CreateAssetWEBAPPRequest) ToMap() (map[string]interface{}, error) {
+func (o CreateAssetMCPRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["asset_class"] = o.AssetClass
 	if !IsNil(o.WizProviderId) {
@@ -652,9 +619,6 @@ func (o CreateAssetWEBAPPRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PrivateLocationId) {
 		toSerialize["private_location_id"] = o.PrivateLocationId
 	}
-	if !IsNil(o.Framework) {
-		toSerialize["framework"] = o.Framework
-	}
 	if !IsNil(o.Environment) {
 		toSerialize["environment"] = o.Environment
 	}
@@ -681,7 +645,7 @@ func (o CreateAssetWEBAPPRequest) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *CreateAssetWEBAPPRequest) UnmarshalJSON(data []byte) (err error) {
+func (o *CreateAssetMCPRequest) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -705,15 +669,15 @@ func (o *CreateAssetWEBAPPRequest) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varCreateAssetWEBAPPRequest := _CreateAssetWEBAPPRequest{}
+	varCreateAssetMCPRequest := _CreateAssetMCPRequest{}
 
-	err = json.Unmarshal(data, &varCreateAssetWEBAPPRequest)
+	err = json.Unmarshal(data, &varCreateAssetMCPRequest)
 
 	if err != nil {
 		return err
 	}
 
-	*o = CreateAssetWEBAPPRequest(varCreateAssetWEBAPPRequest)
+	*o = CreateAssetMCPRequest(varCreateAssetMCPRequest)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -729,7 +693,6 @@ func (o *CreateAssetWEBAPPRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "reachable_via_external_proxy")
 		delete(additionalProperties, "private")
 		delete(additionalProperties, "private_location_id")
-		delete(additionalProperties, "framework")
 		delete(additionalProperties, "environment")
 		delete(additionalProperties, "cloud_provider")
 		delete(additionalProperties, "waf_provider")
@@ -742,38 +705,38 @@ func (o *CreateAssetWEBAPPRequest) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableCreateAssetWEBAPPRequest struct {
-	value *CreateAssetWEBAPPRequest
+type NullableCreateAssetMCPRequest struct {
+	value *CreateAssetMCPRequest
 	isSet bool
 }
 
-func (v NullableCreateAssetWEBAPPRequest) Get() *CreateAssetWEBAPPRequest {
+func (v NullableCreateAssetMCPRequest) Get() *CreateAssetMCPRequest {
 	return v.value
 }
 
-func (v *NullableCreateAssetWEBAPPRequest) Set(val *CreateAssetWEBAPPRequest) {
+func (v *NullableCreateAssetMCPRequest) Set(val *CreateAssetMCPRequest) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCreateAssetWEBAPPRequest) IsSet() bool {
+func (v NullableCreateAssetMCPRequest) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCreateAssetWEBAPPRequest) Unset() {
+func (v *NullableCreateAssetMCPRequest) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCreateAssetWEBAPPRequest(val *CreateAssetWEBAPPRequest) *NullableCreateAssetWEBAPPRequest {
-	return &NullableCreateAssetWEBAPPRequest{value: val, isSet: true}
+func NewNullableCreateAssetMCPRequest(val *CreateAssetMCPRequest) *NullableCreateAssetMCPRequest {
+	return &NullableCreateAssetMCPRequest{value: val, isSet: true}
 }
 
-func (v NullableCreateAssetWEBAPPRequest) MarshalJSON() ([]byte, error) {
+func (v NullableCreateAssetMCPRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCreateAssetWEBAPPRequest) UnmarshalJSON(src []byte) error {
+func (v *NullableCreateAssetMCPRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
