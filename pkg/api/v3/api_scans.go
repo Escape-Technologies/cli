@@ -582,8 +582,9 @@ func (a *ScansAPIService) ListScansExecute(r ApiListScansRequest) (*ListScans200
 	if r.size != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
-		var defaultValue int = 50
-		r.size = &defaultValue
+        var defaultValue int = 50
+        parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
+        r.size = &defaultValue
 	}
 	if r.sortType != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortType", r.sortType, "form", "")
@@ -591,8 +592,9 @@ func (a *ScansAPIService) ListScansExecute(r ApiListScansRequest) (*ListScans200
 	if r.sortDirection != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
-		var defaultValue string = "asc"
-		r.sortDirection = &defaultValue
+        var defaultValue string = "asc"
+        parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
+        r.sortDirection = &defaultValue
 	}
 	if r.after != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "after", r.after, "form", "")

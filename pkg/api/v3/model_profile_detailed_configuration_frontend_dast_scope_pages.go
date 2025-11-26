@@ -19,6 +19,7 @@ var _ MappedNullable = &ProfileDetailedConfigurationFrontendDastScopePages{}
 
 // ProfileDetailedConfigurationFrontendDastScopePages struct for ProfileDetailedConfigurationFrontendDastScopePages
 type ProfileDetailedConfigurationFrontendDastScopePages struct {
+	ExtraAllowedDomains []string `json:"extra_allowed_domains,omitempty"`
 	AllowlistUrlPatterns []string `json:"allowlist_url_patterns,omitempty"`
 	BlocklistPatterns []string `json:"blocklist_patterns,omitempty"`
 	AllowlistElementSelectors []string `json:"allowlist_element_selectors,omitempty"`
@@ -47,6 +48,38 @@ func NewProfileDetailedConfigurationFrontendDastScopePages() *ProfileDetailedCon
 func NewProfileDetailedConfigurationFrontendDastScopePagesWithDefaults() *ProfileDetailedConfigurationFrontendDastScopePages {
 	this := ProfileDetailedConfigurationFrontendDastScopePages{}
 	return &this
+}
+
+// GetExtraAllowedDomains returns the ExtraAllowedDomains field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationFrontendDastScopePages) GetExtraAllowedDomains() []string {
+	if o == nil || IsNil(o.ExtraAllowedDomains) {
+		var ret []string
+		return ret
+	}
+	return o.ExtraAllowedDomains
+}
+
+// GetExtraAllowedDomainsOk returns a tuple with the ExtraAllowedDomains field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationFrontendDastScopePages) GetExtraAllowedDomainsOk() ([]string, bool) {
+	if o == nil || IsNil(o.ExtraAllowedDomains) {
+		return nil, false
+	}
+	return o.ExtraAllowedDomains, true
+}
+
+// HasExtraAllowedDomains returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationFrontendDastScopePages) HasExtraAllowedDomains() bool {
+	if o != nil && !IsNil(o.ExtraAllowedDomains) {
+		return true
+	}
+
+	return false
+}
+
+// SetExtraAllowedDomains gets a reference to the given []string and assigns it to the ExtraAllowedDomains field.
+func (o *ProfileDetailedConfigurationFrontendDastScopePages) SetExtraAllowedDomains(v []string) {
+	o.ExtraAllowedDomains = v
 }
 
 // GetAllowlistUrlPatterns returns the AllowlistUrlPatterns field value if set, zero value otherwise.
@@ -315,6 +348,9 @@ func (o ProfileDetailedConfigurationFrontendDastScopePages) MarshalJSON() ([]byt
 
 func (o ProfileDetailedConfigurationFrontendDastScopePages) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.ExtraAllowedDomains) {
+		toSerialize["extra_allowed_domains"] = o.ExtraAllowedDomains
+	}
 	if !IsNil(o.AllowlistUrlPatterns) {
 		toSerialize["allowlist_url_patterns"] = o.AllowlistUrlPatterns
 	}
@@ -361,6 +397,7 @@ func (o *ProfileDetailedConfigurationFrontendDastScopePages) UnmarshalJSON(data 
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "extra_allowed_domains")
 		delete(additionalProperties, "allowlist_url_patterns")
 		delete(additionalProperties, "blocklist_patterns")
 		delete(additionalProperties, "allowlist_element_selectors")

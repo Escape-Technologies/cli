@@ -39,6 +39,7 @@ type CreateCustomRuleRequestContentRuleOneOfTransformTriggerInner struct {
 	CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf25 *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf25
 	CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf26 *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf26
 	CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf27 *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf27
+	CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf28 *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf28
 	CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf3 *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf3
 	CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf4 *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf4
 	CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf5 *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf5
@@ -192,6 +193,13 @@ func CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf26AsCreate
 func CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf27AsCreateCustomRuleRequestContentRuleOneOfTransformTriggerInner(v *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf27) CreateCustomRuleRequestContentRuleOneOfTransformTriggerInner {
 	return CreateCustomRuleRequestContentRuleOneOfTransformTriggerInner{
 		CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf27: v,
+	}
+}
+
+// CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf28AsCreateCustomRuleRequestContentRuleOneOfTransformTriggerInner is a convenience function that returns CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf28 wrapped in CreateCustomRuleRequestContentRuleOneOfTransformTriggerInner
+func CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf28AsCreateCustomRuleRequestContentRuleOneOfTransformTriggerInner(v *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf28) CreateCustomRuleRequestContentRuleOneOfTransformTriggerInner {
+	return CreateCustomRuleRequestContentRuleOneOfTransformTriggerInner{
+		CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf28: v,
 	}
 }
 
@@ -606,6 +614,23 @@ func (dst *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInner) Unmarsh
 		dst.CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf27 = nil
 	}
 
+	// try to unmarshal data into CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf28
+	err = newStrictDecoder(data).Decode(&dst.CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf28)
+	if err == nil {
+		jsonCreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf28, _ := json.Marshal(dst.CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf28)
+		if string(jsonCreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf28) == "{}" { // empty struct
+			dst.CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf28 = nil
+		} else {
+			if err = validator.Validate(dst.CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf28); err != nil {
+				dst.CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf28 = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf28 = nil
+	}
+
 	// try to unmarshal data into CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf3
 	err = newStrictDecoder(data).Decode(&dst.CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf3)
 	if err == nil {
@@ -748,6 +773,7 @@ func (dst *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInner) Unmarsh
 		dst.CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf25 = nil
 		dst.CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf26 = nil
 		dst.CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf27 = nil
+		dst.CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf28 = nil
 		dst.CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf3 = nil
 		dst.CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf4 = nil
 		dst.CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf5 = nil
@@ -848,6 +874,10 @@ func (src CreateCustomRuleRequestContentRuleOneOfTransformTriggerInner) MarshalJ
 
 	if src.CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf27 != nil {
 		return json.Marshal(&src.CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf27)
+	}
+
+	if src.CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf28 != nil {
+		return json.Marshal(&src.CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf28)
 	}
 
 	if src.CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf3 != nil {
@@ -970,6 +1000,10 @@ func (obj *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInner) GetActu
 		return obj.CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf27
 	}
 
+	if obj.CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf28 != nil {
+		return obj.CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf28
+	}
+
 	if obj.CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf3 != nil {
 		return obj.CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf3
 	}
@@ -1086,6 +1120,10 @@ func (obj CreateCustomRuleRequestContentRuleOneOfTransformTriggerInner) GetActua
 
 	if obj.CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf27 != nil {
 		return *obj.CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf27
+	}
+
+	if obj.CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf28 != nil {
+		return *obj.CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf28
 	}
 
 	if obj.CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf3 != nil {
