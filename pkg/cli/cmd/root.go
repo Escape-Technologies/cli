@@ -71,6 +71,10 @@ capabilities.
   • Support: https://escape.tech/contact`,
 	PersistentPreRunE: func(c *cobra.Command, _ []string) error {
 		version.WarnIfNotLatestVersion(c.Context())
+
+		var envVerbosity = env.GetVerbosity()
+		rootCmdVerbose = rootCmdVerbose + envVerbosity
+
 		if rootCmdVerbose > 0 { //nolint:mnd
 			log.SetLevel(logrus.InfoLevel)
 		}
