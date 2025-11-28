@@ -41,10 +41,10 @@ func sendHTTPRequest(ctx context.Context, req *http.Request, conn net.Conn) erro
 
 func doHTTPConnectHandshake(ctx context.Context, conn net.Conn, backendAddr string, proxyURL url.URL) (_ net.Conn, err error) {
 	defer func() {
-		if conn != nil {
-			err := conn.Close()
-			if err != nil {
-				log.Debug("Failed to close connection: %s", err)
+		if err != nil && conn != nil {
+			closeErr := conn.Close()
+			if closeErr != nil {
+				log.Debug("Failed to close connection: %s", closeErr)
 			}
 		}
 	}()
