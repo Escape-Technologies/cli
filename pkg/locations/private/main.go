@@ -41,7 +41,8 @@ func StartLocation(ctx context.Context, locationID string, sshPrivateKey ed25519
 		} else {
 			hasEverConnected.Store(true)
 			failureStartTime = time.Time{}
-			log.Error("SSH connection lost, retrying...")
+			// First failure may just be a network issue, we dont want to notify the customer yet
+			log.Info("SSH connection lost, retrying...")
 		}
 		time.Sleep(1 * time.Second)
 	}
