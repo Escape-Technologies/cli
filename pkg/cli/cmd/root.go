@@ -4,6 +4,7 @@ package cmd
 import (
 	"context"
 	"fmt"
+	"math"
 
 	"github.com/Escape-Technologies/cli/pkg/api/escape"
 	"github.com/Escape-Technologies/cli/pkg/cli/out"
@@ -73,7 +74,7 @@ capabilities.
 		version.WarnIfNotLatestVersion(c.Context())
 
 		var envVerbosity = env.GetVerbosity()
-		rootCmdVerbose = rootCmdVerbose + envVerbosity
+		rootCmdVerbose = int(math.Max(float64(rootCmdVerbose), float64(envVerbosity)))
 
 		if rootCmdVerbose > 0 { //nolint:mnd
 			log.SetLevel(logrus.InfoLevel)
