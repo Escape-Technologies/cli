@@ -4,7 +4,6 @@ package cmd
 import (
 	"context"
 	"fmt"
-	"math"
 
 	"github.com/Escape-Technologies/cli/pkg/api/escape"
 	"github.com/Escape-Technologies/cli/pkg/cli/out"
@@ -73,8 +72,11 @@ capabilities.
 	PersistentPreRunE: func(c *cobra.Command, _ []string) error {
 		version.WarnIfNotLatestVersion(c.Context())
 
-		var envVerbosity = env.GetVerbosity()
-		rootCmdVerbose = int(math.Max(float64(rootCmdVerbose), float64(envVerbosity)))
+		verbosityFrom := "command line argument"
+		if envVerbosity := env.GetVerbosity(); envVerbosity > rootCmdVerbose {
+			rootCmdVerbose = envVerbosity
+			verbosityFrom = "environment variable ESCAPE_VERBOSITY"
+		}
 
 		if rootCmdVerbose > 0 { //nolint:mnd
 			log.SetLevel(logrus.InfoLevel)
@@ -88,7 +90,7 @@ capabilities.
 		if rootCmdVerbose > 3 { //nolint:mnd
 			escape.Debug = true
 		}
-		log.Info("Verbose mode: %d", rootCmdVerbose)
+		log.Info("Verbose mode: %d from %s", rootCmdVerbose, verbosityFrom)
 		log.Info("escape-cli version: %s", version.GetVersion().String())
 		err := out.SetOutput(rootCmdOutputStr)
 		if err != nil {
