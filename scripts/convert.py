@@ -205,6 +205,9 @@ for path, path_data in data["paths"].items():
             "kinds",
         ]
 
+        if "tags" in operation_object and isinstance(operation_object["tags"], list) and "Beta" in operation_object["tags"]:
+            operation_object["tags"].remove("Beta")
+
         # Normalize list-like query params
         # - For params backed by arrayOrSingle on the server (initiators, kinds, risks),
         #   expose them as arrays so the client sends repeated query params (form+explode)
