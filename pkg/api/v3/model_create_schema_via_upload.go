@@ -22,6 +22,8 @@ var _ MappedNullable = &CreateSchemaViaUpload{}
 type CreateSchemaViaUpload struct {
 	AssetType ENUMSCHEMA `json:"asset_type"`
 	Name *string `json:"name,omitempty"`
+	// The list of project IDs bind the asset on.
+	ProjectIds []string `json:"projectIds,omitempty"`
 	Upload CreateSchemaViaUploadUpload `json:"upload"`
 	AdditionalProperties map[string]interface{}
 }
@@ -103,6 +105,38 @@ func (o *CreateSchemaViaUpload) SetName(v string) {
 	o.Name = &v
 }
 
+// GetProjectIds returns the ProjectIds field value if set, zero value otherwise.
+func (o *CreateSchemaViaUpload) GetProjectIds() []string {
+	if o == nil || IsNil(o.ProjectIds) {
+		var ret []string
+		return ret
+	}
+	return o.ProjectIds
+}
+
+// GetProjectIdsOk returns a tuple with the ProjectIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateSchemaViaUpload) GetProjectIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.ProjectIds) {
+		return nil, false
+	}
+	return o.ProjectIds, true
+}
+
+// HasProjectIds returns a boolean if a field has been set.
+func (o *CreateSchemaViaUpload) HasProjectIds() bool {
+	if o != nil && !IsNil(o.ProjectIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetProjectIds gets a reference to the given []string and assigns it to the ProjectIds field.
+func (o *CreateSchemaViaUpload) SetProjectIds(v []string) {
+	o.ProjectIds = v
+}
+
 // GetUpload returns the Upload field value
 func (o *CreateSchemaViaUpload) GetUpload() CreateSchemaViaUploadUpload {
 	if o == nil {
@@ -140,6 +174,9 @@ func (o CreateSchemaViaUpload) ToMap() (map[string]interface{}, error) {
 	toSerialize["asset_type"] = o.AssetType
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
+	}
+	if !IsNil(o.ProjectIds) {
+		toSerialize["projectIds"] = o.ProjectIds
 	}
 	toSerialize["upload"] = o.Upload
 
@@ -188,6 +225,7 @@ func (o *CreateSchemaViaUpload) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "asset_type")
 		delete(additionalProperties, "name")
+		delete(additionalProperties, "projectIds")
 		delete(additionalProperties, "upload")
 		o.AdditionalProperties = additionalProperties
 	}

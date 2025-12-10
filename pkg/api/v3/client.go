@@ -53,11 +53,13 @@ type APIClient struct {
 
 	AuditAPI *AuditAPIService
 
-	BetaAPI *BetaAPIService
-
 	CustomRulesAPI *CustomRulesAPIService
 
+	DefaultAPI *DefaultAPIService
+
 	EventsAPI *EventsAPIService
+
+	IntegrationsAPI *IntegrationsAPIService
 
 	IssuesAPI *IssuesAPIService
 
@@ -70,6 +72,8 @@ type APIClient struct {
 	TagsAPI *TagsAPIService
 
 	UploadAPI *UploadAPIService
+
+	WorkflowsAPI *WorkflowsAPIService
 }
 
 type service struct {
@@ -90,15 +94,17 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	// API Services
 	c.AssetsAPI = (*AssetsAPIService)(&c.common)
 	c.AuditAPI = (*AuditAPIService)(&c.common)
-	c.BetaAPI = (*BetaAPIService)(&c.common)
 	c.CustomRulesAPI = (*CustomRulesAPIService)(&c.common)
+	c.DefaultAPI = (*DefaultAPIService)(&c.common)
 	c.EventsAPI = (*EventsAPIService)(&c.common)
+	c.IntegrationsAPI = (*IntegrationsAPIService)(&c.common)
 	c.IssuesAPI = (*IssuesAPIService)(&c.common)
 	c.LocationsAPI = (*LocationsAPIService)(&c.common)
 	c.ProfilesAPI = (*ProfilesAPIService)(&c.common)
 	c.ScansAPI = (*ScansAPIService)(&c.common)
 	c.TagsAPI = (*TagsAPIService)(&c.common)
 	c.UploadAPI = (*UploadAPIService)(&c.common)
+	c.WorkflowsAPI = (*WorkflowsAPIService)(&c.common)
 
 	return c
 }

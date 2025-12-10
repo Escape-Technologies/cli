@@ -20,6 +20,8 @@ var _ MappedNullable = &CreateAssetAWSACCOUNTRequest{}
 
 // CreateAssetAWSACCOUNTRequest struct for CreateAssetAWSACCOUNTRequest
 type CreateAssetAWSACCOUNTRequest struct {
+	// The list of project IDs bind the asset on.
+	ProjectIds []string `json:"projectIds,omitempty"`
 	AssetClass ENUMCLOUDHOSTING `json:"asset_class"`
 	WizProviderId *string `json:"wiz_provider_id,omitempty"`
 	WizCloudPlatform *string `json:"wiz_cloud_platform,omitempty"`
@@ -29,6 +31,7 @@ type CreateAssetAWSACCOUNTRequest struct {
 	ImmutableKey string `json:"immutable_key"`
 	PublicKey string `json:"public_key"`
 	PrivateKey string `json:"private_key"`
+	ExternalIntegrationRoleArn *string `json:"external_integration_role_arn,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -54,6 +57,38 @@ func NewCreateAssetAWSACCOUNTRequest(assetClass ENUMCLOUDHOSTING, assetType ENUM
 func NewCreateAssetAWSACCOUNTRequestWithDefaults() *CreateAssetAWSACCOUNTRequest {
 	this := CreateAssetAWSACCOUNTRequest{}
 	return &this
+}
+
+// GetProjectIds returns the ProjectIds field value if set, zero value otherwise.
+func (o *CreateAssetAWSACCOUNTRequest) GetProjectIds() []string {
+	if o == nil || IsNil(o.ProjectIds) {
+		var ret []string
+		return ret
+	}
+	return o.ProjectIds
+}
+
+// GetProjectIdsOk returns a tuple with the ProjectIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetAWSACCOUNTRequest) GetProjectIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.ProjectIds) {
+		return nil, false
+	}
+	return o.ProjectIds, true
+}
+
+// HasProjectIds returns a boolean if a field has been set.
+func (o *CreateAssetAWSACCOUNTRequest) HasProjectIds() bool {
+	if o != nil && !IsNil(o.ProjectIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetProjectIds gets a reference to the given []string and assigns it to the ProjectIds field.
+func (o *CreateAssetAWSACCOUNTRequest) SetProjectIds(v []string) {
+	o.ProjectIds = v
 }
 
 // GetAssetClass returns the AssetClass field value
@@ -304,6 +339,38 @@ func (o *CreateAssetAWSACCOUNTRequest) SetPrivateKey(v string) {
 	o.PrivateKey = v
 }
 
+// GetExternalIntegrationRoleArn returns the ExternalIntegrationRoleArn field value if set, zero value otherwise.
+func (o *CreateAssetAWSACCOUNTRequest) GetExternalIntegrationRoleArn() string {
+	if o == nil || IsNil(o.ExternalIntegrationRoleArn) {
+		var ret string
+		return ret
+	}
+	return *o.ExternalIntegrationRoleArn
+}
+
+// GetExternalIntegrationRoleArnOk returns a tuple with the ExternalIntegrationRoleArn field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetAWSACCOUNTRequest) GetExternalIntegrationRoleArnOk() (*string, bool) {
+	if o == nil || IsNil(o.ExternalIntegrationRoleArn) {
+		return nil, false
+	}
+	return o.ExternalIntegrationRoleArn, true
+}
+
+// HasExternalIntegrationRoleArn returns a boolean if a field has been set.
+func (o *CreateAssetAWSACCOUNTRequest) HasExternalIntegrationRoleArn() bool {
+	if o != nil && !IsNil(o.ExternalIntegrationRoleArn) {
+		return true
+	}
+
+	return false
+}
+
+// SetExternalIntegrationRoleArn gets a reference to the given string and assigns it to the ExternalIntegrationRoleArn field.
+func (o *CreateAssetAWSACCOUNTRequest) SetExternalIntegrationRoleArn(v string) {
+	o.ExternalIntegrationRoleArn = &v
+}
+
 func (o CreateAssetAWSACCOUNTRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -314,6 +381,9 @@ func (o CreateAssetAWSACCOUNTRequest) MarshalJSON() ([]byte, error) {
 
 func (o CreateAssetAWSACCOUNTRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.ProjectIds) {
+		toSerialize["projectIds"] = o.ProjectIds
+	}
 	toSerialize["asset_class"] = o.AssetClass
 	if !IsNil(o.WizProviderId) {
 		toSerialize["wiz_provider_id"] = o.WizProviderId
@@ -331,6 +401,9 @@ func (o CreateAssetAWSACCOUNTRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize["immutable_key"] = o.ImmutableKey
 	toSerialize["public_key"] = o.PublicKey
 	toSerialize["private_key"] = o.PrivateKey
+	if !IsNil(o.ExternalIntegrationRoleArn) {
+		toSerialize["external_integration_role_arn"] = o.ExternalIntegrationRoleArn
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -378,6 +451,7 @@ func (o *CreateAssetAWSACCOUNTRequest) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "projectIds")
 		delete(additionalProperties, "asset_class")
 		delete(additionalProperties, "wiz_provider_id")
 		delete(additionalProperties, "wiz_cloud_platform")
@@ -387,6 +461,7 @@ func (o *CreateAssetAWSACCOUNTRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "immutable_key")
 		delete(additionalProperties, "public_key")
 		delete(additionalProperties, "private_key")
+		delete(additionalProperties, "external_integration_role_arn")
 		o.AdditionalProperties = additionalProperties
 	}
 

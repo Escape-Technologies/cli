@@ -22,7 +22,7 @@ var _ MappedNullable = &CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf
 type CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf6 struct {
 	Key *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf7Name `json:"key,omitempty"`
 	Value *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf7Name `json:"value,omitempty"`
-	If ENUMCOOKIE `json:"if"`
+	If ENUMSESSIONSTORAGE `json:"if"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -32,7 +32,7 @@ type _CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf6 CreateCustomRule
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf6(if_ ENUMCOOKIE) *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf6 {
+func NewCreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf6(if_ ENUMSESSIONSTORAGE) *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf6 {
 	this := CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf6{}
 	this.If = if_
 	return &this
@@ -111,9 +111,9 @@ func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf6) SetValue(v C
 }
 
 // GetIf returns the If field value
-func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf6) GetIf() ENUMCOOKIE {
+func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf6) GetIf() ENUMSESSIONSTORAGE {
 	if o == nil {
-		var ret ENUMCOOKIE
+		var ret ENUMSESSIONSTORAGE
 		return ret
 	}
 
@@ -122,7 +122,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf6) GetIf() ENUM
 
 // GetIfOk returns a tuple with the If field value
 // and a boolean to check if the value has been set.
-func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf6) GetIfOk() (*ENUMCOOKIE, bool) {
+func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf6) GetIfOk() (*ENUMSESSIONSTORAGE, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -130,7 +130,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf6) GetIfOk() (*
 }
 
 // SetIf sets field value
-func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf6) SetIf(v ENUMCOOKIE) {
+func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf6) SetIf(v ENUMSESSIONSTORAGE) {
 	o.If = v
 }
 

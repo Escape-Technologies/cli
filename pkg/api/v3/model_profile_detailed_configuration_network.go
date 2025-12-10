@@ -24,6 +24,7 @@ type ProfileDetailedConfigurationNetwork struct {
 	CustomHeaders map[string][]string `json:"custom_headers,omitempty"`
 	CancelUnhealthyScanAfter *float32 `json:"cancel_unhealthy_scan_after,omitempty"`
 	EscapeUser *bool `json:"escape_user,omitempty"`
+	SecEscapeUser *bool `json:"sec_escape_user,omitempty"`
 	FfFrontendNextSender *bool `json:"ff_frontend_next_sender,omitempty"`
 	ParallelRequests *float32 `json:"parallel_requests,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -208,6 +209,38 @@ func (o *ProfileDetailedConfigurationNetwork) SetEscapeUser(v bool) {
 	o.EscapeUser = &v
 }
 
+// GetSecEscapeUser returns the SecEscapeUser field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationNetwork) GetSecEscapeUser() bool {
+	if o == nil || IsNil(o.SecEscapeUser) {
+		var ret bool
+		return ret
+	}
+	return *o.SecEscapeUser
+}
+
+// GetSecEscapeUserOk returns a tuple with the SecEscapeUser field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationNetwork) GetSecEscapeUserOk() (*bool, bool) {
+	if o == nil || IsNil(o.SecEscapeUser) {
+		return nil, false
+	}
+	return o.SecEscapeUser, true
+}
+
+// HasSecEscapeUser returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationNetwork) HasSecEscapeUser() bool {
+	if o != nil && !IsNil(o.SecEscapeUser) {
+		return true
+	}
+
+	return false
+}
+
+// SetSecEscapeUser gets a reference to the given bool and assigns it to the SecEscapeUser field.
+func (o *ProfileDetailedConfigurationNetwork) SetSecEscapeUser(v bool) {
+	o.SecEscapeUser = &v
+}
+
 // GetFfFrontendNextSender returns the FfFrontendNextSender field value if set, zero value otherwise.
 func (o *ProfileDetailedConfigurationNetwork) GetFfFrontendNextSender() bool {
 	if o == nil || IsNil(o.FfFrontendNextSender) {
@@ -297,6 +330,9 @@ func (o ProfileDetailedConfigurationNetwork) ToMap() (map[string]interface{}, er
 	if !IsNil(o.EscapeUser) {
 		toSerialize["escape_user"] = o.EscapeUser
 	}
+	if !IsNil(o.SecEscapeUser) {
+		toSerialize["sec_escape_user"] = o.SecEscapeUser
+	}
 	if !IsNil(o.FfFrontendNextSender) {
 		toSerialize["ff_frontend_next_sender"] = o.FfFrontendNextSender
 	}
@@ -330,6 +366,7 @@ func (o *ProfileDetailedConfigurationNetwork) UnmarshalJSON(data []byte) (err er
 		delete(additionalProperties, "custom_headers")
 		delete(additionalProperties, "cancel_unhealthy_scan_after")
 		delete(additionalProperties, "escape_user")
+		delete(additionalProperties, "sec_escape_user")
 		delete(additionalProperties, "ff_frontend_next_sender")
 		delete(additionalProperties, "parallel_requests")
 		o.AdditionalProperties = additionalProperties

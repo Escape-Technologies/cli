@@ -26,6 +26,7 @@ type ProfileDetailedConfigurationExperimental struct {
 	BlstEnabled *bool `json:"blst_enabled,omitempty"`
 	BlstExplorationOnly *bool `json:"blst_exploration_only,omitempty"`
 	DisableOracle *bool `json:"disable_oracle,omitempty"`
+	AgenticIdor *bool `json:"agentic_idor,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -272,6 +273,38 @@ func (o *ProfileDetailedConfigurationExperimental) SetDisableOracle(v bool) {
 	o.DisableOracle = &v
 }
 
+// GetAgenticIdor returns the AgenticIdor field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationExperimental) GetAgenticIdor() bool {
+	if o == nil || IsNil(o.AgenticIdor) {
+		var ret bool
+		return ret
+	}
+	return *o.AgenticIdor
+}
+
+// GetAgenticIdorOk returns a tuple with the AgenticIdor field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationExperimental) GetAgenticIdorOk() (*bool, bool) {
+	if o == nil || IsNil(o.AgenticIdor) {
+		return nil, false
+	}
+	return o.AgenticIdor, true
+}
+
+// HasAgenticIdor returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationExperimental) HasAgenticIdor() bool {
+	if o != nil && !IsNil(o.AgenticIdor) {
+		return true
+	}
+
+	return false
+}
+
+// SetAgenticIdor gets a reference to the given bool and assigns it to the AgenticIdor field.
+func (o *ProfileDetailedConfigurationExperimental) SetAgenticIdor(v bool) {
+	o.AgenticIdor = &v
+}
+
 func (o ProfileDetailedConfigurationExperimental) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -303,6 +336,9 @@ func (o ProfileDetailedConfigurationExperimental) ToMap() (map[string]interface{
 	if !IsNil(o.DisableOracle) {
 		toSerialize["disable_oracle"] = o.DisableOracle
 	}
+	if !IsNil(o.AgenticIdor) {
+		toSerialize["agentic_idor"] = o.AgenticIdor
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -332,6 +368,7 @@ func (o *ProfileDetailedConfigurationExperimental) UnmarshalJSON(data []byte) (e
 		delete(additionalProperties, "blst_enabled")
 		delete(additionalProperties, "blst_exploration_only")
 		delete(additionalProperties, "disable_oracle")
+		delete(additionalProperties, "agentic_idor")
 		o.AdditionalProperties = additionalProperties
 	}
 

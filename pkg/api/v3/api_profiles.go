@@ -1531,14 +1531,17 @@ func (r ApiUpdateProfileSchemaRequest) UpdateProfileSchemaRequest(updateProfileS
 	return r
 }
 
-func (r ApiUpdateProfileSchemaRequest) Execute() (*SchemaDetailed, *http.Response, error) {
+func (r ApiUpdateProfileSchemaRequest) Execute() (*ProfileDetailed, *http.Response, error) {
 	return r.ApiService.UpdateProfileSchemaExecute(r)
 }
 
 /*
 UpdateProfileSchema Update profile schema
 
-Update the schema of a profile
+Update the schema used to scan this profile.
+
+The schema ID is the ID of a schema uploaded to the Escape Platform using the [POST /assets/schema](#tag/assets/POST/assets/schema) endpoint.
+
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param profileId The profile ID
@@ -1553,13 +1556,13 @@ func (a *ProfilesAPIService) UpdateProfileSchema(ctx context.Context, profileId 
 }
 
 // Execute executes the request
-//  @return SchemaDetailed
-func (a *ProfilesAPIService) UpdateProfileSchemaExecute(r ApiUpdateProfileSchemaRequest) (*SchemaDetailed, *http.Response, error) {
+//  @return ProfileDetailed
+func (a *ProfilesAPIService) UpdateProfileSchemaExecute(r ApiUpdateProfileSchemaRequest) (*ProfileDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *SchemaDetailed
+		localVarReturnValue  *ProfileDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProfilesAPIService.UpdateProfileSchema")
