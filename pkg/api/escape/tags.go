@@ -37,3 +37,17 @@ func CreateTag(ctx context.Context, name string, color string) (*v3.TagDetail, e
 	}
 	return data, nil
 }
+
+// DeleteTag deletes a tag
+func DeleteTag(ctx context.Context, id string) error {
+	client, err := newAPIV3Client()
+	if err != nil {
+		return fmt.Errorf("unable to init client: %w", err)
+	}
+	req := client.TagsAPI.DeleteTag(ctx, id)
+	_, _, err = req.Execute()
+	if err != nil {
+		return fmt.Errorf("unable to delete tag: %w", err)
+	}
+	return nil
+}
