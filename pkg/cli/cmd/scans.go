@@ -467,9 +467,8 @@ func watchScan(ctx context.Context, scanID string) error {
 		out.Log("Scan canceled")
 	} else if status.Status == "FAILED" {
 		out.Log("Scan failed")
-	} else if status.Status == "FINISHED" {
-		out.Log("Scan finished")
 	} else {
+		out.Print(status, "Scan completed")
 		err := printScanIssues(ctx, scanID)
 		if err != nil {
 			return fmt.Errorf("unable to fetch scan issues: %w", err)
@@ -526,7 +525,7 @@ func printScanIssues(ctx context.Context, scanID string) error {
 		return fmt.Errorf("unable to fetch scan issues: %w", err)
 	}
 	out.Table(issues, func() []string {
-		res := []string{"ID\tSEVERITY\tTYPE\tCATEGORY\tNAME\tIGNORED\tURL\tLINK"}
+		res := []string{"ID\tSEVERITY\tCATEGORY\tNAME\tLINK"}
 		for _, i := range issues {
 			res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s",
 				i.GetId(),
