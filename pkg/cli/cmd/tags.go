@@ -94,9 +94,31 @@ Create a new tag with a custom name and color. Use hex color codes without the #
 	},
 }
 
+var tagsDeleteCmd = &cobra.Command{
+	Use:     "delete tag-id",
+	Aliases: []string{"del", "rm", "remove"},
+	Args:    cobra.ExactArgs(1),
+	Short:   "Delete a tag",
+	Long:    `Delete Tag - Remove tag from organization
+
+Permanently delete a tag from your organization`,
+	Example: `  # Delete a tag
+  escape-cli tags delete 00000000-0000-0000-0000-000000000000`,
+	RunE: func(cmd *cobra.Command, args []string) error {
+		id := args[0]
+		err := escape.DeleteTag(cmd.Context(), id)
+		if err != nil {
+			return fmt.Errorf("unable to delete tag: %w", err)
+		}
+		out.Log("Tag deleted")
+		return nil
+	},
+}
+
 func init() {
 	tagsCmd.AddCommand(tagsListCmd)
 	tagsCmd.AddCommand(tagsCreateCmd)
+	tagsCmd.AddCommand(tagsDeleteCmd)
 
 	tagsCreateCmd.Flags().StringP("name", "n", "", "Name of the tag")
 	tagsCreateCmd.Flags().StringP("color", "c", "", "Color of the tag")
