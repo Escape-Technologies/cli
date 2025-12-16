@@ -23,7 +23,7 @@ case "$(uname -m)" in
   "x86_64")
     platform="amd64"
     ;;
-  "arm64")
+  "arm64"|"aarch64")
     platform="arm64"
     ;;
   *)
