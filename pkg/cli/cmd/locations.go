@@ -89,9 +89,19 @@ ID                                      NAME                       SSH PUBLIC KE
 				return fmt.Errorf("failed to list locations: %w", err)
 			}
 			out.Table(locations, func() []string {
-				res := []string{}
+				res := []string{"ID\tNAME\tTYPE\tENABLED\tLINK"}
 				for _, location := range locations {
-					res = append(res, fmt.Sprintf("%s\t%s\t%s\t%t", location.GetId(), location.GetName(), location.GetType(), location.GetEnabled()))
+					res = append(
+						res,
+						fmt.Sprintf(
+							"%s\t%s\t%s\t%t\t%s",
+							location.GetId(),
+							location.GetName(),
+							location.GetType(),
+							location.GetEnabled(),
+							location.GetLinks().LocationOverview,
+						),
+					)
 				}
 				return res
 			})

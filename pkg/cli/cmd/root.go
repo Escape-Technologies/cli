@@ -30,45 +30,72 @@ var asciiLogo = `
 
 var asciiHeader = "Escape CLI V3"
 
+func getHelpTemplate(colorEnabled bool) string {
+	logo := asciiLogo
+	header := asciiHeader
+	if colorEnabled {
+		logo = "\x1b[38;2;6;226;183m" + asciiLogo + "\x1b[0m"
+		header = "\x1b[38;2;6;226;183m" + asciiHeader + "\x1b[0m"
+	}
+
+	return logo + "\n" + header + `
+
+{{with (or .Long .Short)}}{{. | trimTrailingWhitespaces}}
+
+{{end}}{{if or .Runnable .HasSubCommands}}{{.UsageString}}{{end}}{{if .HasAvailableSubCommands}}
+
+Command Categories:
+  Scanning:       scans     - Run security scans and view results
+  Security:       issues    - Manage security vulnerabilities
+  Monitoring:     problems  - View scan problems and failures
+  Configuration:  profiles  - Configure scan targets and settings
+  Assets:         assets    - Manage your API inventory
+  Infrastructure: locations - Deploy private scanning locations
+  Organization:   audit     - Review activity logs and events
+  Customization:  custom-rules, tags - Extend and organize
+{{end}}{{if .HasAvailableLocalFlags}}
+
+Flags:
+{{.LocalFlags.FlagUsages | trimTrailingWhitespaces}}{{end}}{{if .HasAvailableInheritedFlags}}
+
+Global Flags:
+{{.InheritedFlags.FlagUsages | trimTrailingWhitespaces}}{{end}}{{if .HasExample}}
+
+Examples:
+{{.Example}}{{end}}{{if .HasAvailableSubCommands}}
+
+Use "{{.CommandPath}} [command] --help" for more information about a command.{{end}}
+
+Environment Variables:
+  ESCAPE_API_KEY              - Your API key for authentication
+  ESCAPE_COLOR_DISABLED       - Disable colored output (set to \"true\")
+  
+  CI/CD Auto-Detection (commit information):
+  - GitHub Actions: GITHUB_SHA, GITHUB_REF_NAME, GITHUB_ACTOR
+  - GitLab CI: CI_COMMIT_SHA, CI_COMMIT_REF_NAME, GITLAB_USER_EMAIL
+  - CircleCI: CIRCLE_SHA1, CIRCLE_BRANCH, CIRCLE_USERNAME
+
+For additional information, see: https://docs.escape.tech/documentation/tooling/cli
+`
+}
+
 var rootCmd = &cobra.Command{
 	Use:   "escape-cli",
-	Short: asciiLogo + "\n" + asciiHeader,
-	Long: `Escape CLI - Your Gateway to Comprehensive API Security Testing
+	Short: "Escape CLI - Comprehensive API Security Testing Platform",
+	Long: `Escape CLI - Comprehensive API Security Testing Platform
 
 Escape is the most advanced API security platform, helping you discover, test,
 and secure your APIs with cutting-edge DAST (Dynamic Application Security Testing)
 capabilities.
 
-🎯 WHAT YOU CAN DO:
-  • Start security scans on your REST, GraphQL, and Web APIs
+Use this CLI to:
+  • Start security scans on REST, GraphQL, and Web APIs
   • Monitor and track security issues across your API ecosystem
   • Manage security profiles, assets, and test configurations
   • Review audit logs and security events
   • Deploy private scanning locations for internal APIs
 
-📚 GETTING STARTED:
-  1. First time? Check your version:
-     $ escape-cli version
-  
-  2. List your API profiles:
-     $ escape-cli profiles list
-  
-  3. Start a security scan:
-     $ escape-cli scans start <profile-id> --watch
-  
-  4. Review discovered issues:
-     $ escape-cli issues list --severity HIGH,CRITICAL
-
-💡 PRO TIPS:
-  • Use -v for verbose logging (-vv for debug, -vvv for trace)
-  • Output in JSON or YAML with -o json or -o yaml
-  • Most list commands support powerful filtering options
-  • Use --watch flag when starting scans for real-time updates
-
-🔗 RESOURCES:
-  • Documentation: https://docs.escape.tech/documentation/tooling/cli
-  • API Reference: https://public.escape.tech/v3
-  • Support: https://escape.tech/contact`,
+For more information, see: https://docs.escape.tech/documentation/tooling/cli`,
 	PersistentPreRunE: func(c *cobra.Command, _ []string) error {
 		version.WarnIfNotLatestVersion(c.Context())
 
@@ -109,36 +136,10 @@ capabilities.
 func init() {
 	rootCmd.PersistentFlags().CountVarP(&rootCmdVerbose, "verbose", "v", "verbose output: -v (info), -vv (debug), -vvv (trace), -vvvv (http debug)")
 	rootCmd.PersistentFlags().StringVarP(&rootCmdOutputStr, "output", "o", "pretty", "output format: pretty (human-readable tables), json (machine-readable), yaml (configuration files)")
-	rootCmd.SetUsageTemplate(rootCmd.UsageTemplate() + `
-COMMAND CATEGORIES:
-  Scanning:       scans     - Run security scans and view results
-  Security:       issues    - Manage security vulnerabilities
-  Monitoring:     problems  - View scan problems and failures
-  Configuration:  profiles  - Configure scan targets and settings
-  Assets:         assets    - Manage your API inventory
-  Infrastructure: locations - Deploy private scanning locations
-  Organization:   audit     - Review activity logs and events
-  Customization:  custom-rules, tags - Extend and organize
-
-ENVIRONMENT VARIABLES:
-  ESCAPE_APPLICATION_URL      - Escape platform URL (default: https://public.escape.tech)
-  ESCAPE_API_KEY              - Your API key for authentication
-  NO_COLOR                    - Disable colored output (set to any value)
-  HTTP_PROXY, HTTPS_PROXY     - Configure proxy settings
-  
-  CI/CD Auto-Detection (commit information):
-  - GitHub Actions: GITHUB_SHA, GITHUB_REF_NAME, GITHUB_ACTOR
-  - GitLab CI: CI_COMMIT_SHA, CI_COMMIT_REF_NAME, GITLAB_USER_EMAIL
-  - CircleCI: CIRCLE_SHA1, CIRCLE_BRANCH, CIRCLE_USERNAME
-
-For additional information, see the documentation: 
-https://docs.escape.tech/documentation/tooling/cli
-`)
 
 	isColorDisabled := env.GetColorPreference()
-	if !isColorDisabled {
-		rootCmd.Short = "\x1b[38;2;6;226;183m" + asciiLogo + "\x1b[0m" + "\n" + "\x1b[38;2;6;226;183m" + asciiHeader + "\x1b[0m"
-	}
+	helpTemplate := getHelpTemplate(!isColorDisabled)
+	rootCmd.SetHelpTemplate(helpTemplate)
 }
 
 // Execute the CLI
