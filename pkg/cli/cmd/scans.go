@@ -66,7 +66,7 @@ FILTER OPTIONS:
   -p, --profile-id    Filter by one or more profile IDs
   -s, --status        Filter by scan status (RUNNING, FINISHED, FAILED, CANCELED)
   -k, --kind          Filter by scanner type (BLST_REST, BLST_GRAPHQL, FRONTEND_DAST)
-  -i, --initiator     Filter by who started the scan (MANUAL, API, SCHEDULED, CI)
+  -i, --initiator     Filter by who started the scan (CI, MANUAL, SCHEDULED)
   --after             Show scans created after this date (RFC3339 format)
   --before            Show scans created before this date (RFC3339 format)
   --ignored           Filter by ignored status (true/false)

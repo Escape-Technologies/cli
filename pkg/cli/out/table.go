@@ -18,7 +18,6 @@ const (
 
 var isColorDisabled bool
 
-// DisableColor disables color output called if the ESCAPE_NO_COLOR environment variable is set
 func DisableColor() {
 	isColorDisabled = true
 }

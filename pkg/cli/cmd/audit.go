@@ -68,17 +68,15 @@ FILTER OPTIONS:
   # Export for compliance reporting
   escape-cli audit list --date-from 2025-01-01T00:00:00Z -o json > audit-report-jan2025.json`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
-		logs, next, err := escape.ListAuditLogs(
-			cmd.Context(),
-			"",
-			&escape.ListAuditLogsFilters{
-				DateFrom:   auditCmdDateFrom,
-				DateTo:     auditCmdDateTo,
-				ActionType: auditCmdEventType,
-				Actor:      auditCmdActor,
-				Search:     auditCmdSearch,
-			},
-		)
+		filters := &escape.ListAuditLogsFilters{
+			DateFrom:   auditCmdDateFrom,
+			DateTo:     auditCmdDateTo,
+			ActionType: auditCmdEventType,
+			Actor:      auditCmdActor,
+			Search:     auditCmdSearch,
+		}
+
+		logs, next, err := escape.ListAuditLogs(cmd.Context(), "", filters)
 		if err != nil {
 			return fmt.Errorf("unable to list audits: %w", err)
 		}
@@ -99,15 +97,7 @@ FILTER OPTIONS:
 		})
 
 		for next != nil && *next != "" {
-			logs, next, err = escape.ListAuditLogs(
-				cmd.Context(),
-				*next,
-				&escape.ListAuditLogsFilters{
-					DateFrom:   auditCmdDateFrom,
-					DateTo:     auditCmdDateTo,
-					ActionType: auditCmdEventType,
-				},
-			)
+			logs, next, err = escape.ListAuditLogs(cmd.Context(), *next, filters)
 			if err != nil {
 				return fmt.Errorf("unable to list audits: %w", err)
 			}

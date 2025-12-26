@@ -50,9 +50,12 @@ ASSET TYPES:
   • DOMAIN              - DNS domains
 
 ASSET STATUS:
-  • MONITORED    - Active monitoring and scanning
-  • UNMONITORED  - Discovered but not actively tested
-  • ARCHIVED     - No longer in use
+  • MONITORED       - Active monitoring and scanning
+  • DEPRECATED      - Deprecated asset (kept for tracking)
+  • OUT_OF_SCOPE    - Excluded from scope
+  • PERMANENT       - Permanent asset status
+  • THIRD_PARTY     - Third-party owned/managed asset
+  • FALSE_POSITIVE  - Incorrectly flagged asset status
 
 COMMON WORKFLOWS:
   • List all monitored assets:
@@ -79,7 +82,7 @@ the APIs, applications, and infrastructure being monitored by Escape.
 
 FILTER OPTIONS:
   -t, --types            Filter by asset types (WEBAPP, REST_API, GRAPHQL_API, etc.)
-  --statuses             Filter by monitoring status (MONITORED, UNMONITORED, ARCHIVED)
+  --statuses             Filter by monitoring status (DEPRECATED, FALSE_POSITIVE, MONITORED, OUT_OF_SCOPE, PERMANENT, THIRD_PARTY)
   -s, --search           Free-text search across asset names and URLs
   -m, --manually-created Filter assets created manually vs auto-discovered
 
@@ -261,12 +264,12 @@ Permanently delete an asset from your inventory. This will also remove:
   • Issue findings linked to this asset
   • Activity logs and events
 
-⚠️  WARNING: This action is IRREVERSIBLE!
+WARNING: This action is IRREVERSIBLE!
 
 ALTERNATIVES TO DELETION:
   Instead of deleting, consider:
-  • Archiving: Use 'escape-cli assets update <id> --status ARCHIVED'
-  • Unmonitoring: Use 'escape-cli assets update <id> --status UNMONITORED'
+  • Changing status: Use 'escape-cli assets update <id> --status <STATUS>'
+    (valid STATUS values: DEPRECATED, FALSE_POSITIVE, MONITORED, OUT_OF_SCOPE, PERMANENT, THIRD_PARTY)
 
 WHEN TO DELETE:
   • Test/temporary assets no longer needed
@@ -316,21 +319,16 @@ and framework classification. Use this to maintain accurate asset inventory.
 UPDATABLE FIELDS:
   -d, --description    Human-readable description
   -f, --framework      Asset framework/type classification
-  -s, --status         Monitoring status (MONITORED, UNMONITORED, ARCHIVED)
+  -s, --status         Monitoring status (DEPRECATED, FALSE_POSITIVE, MONITORED, OUT_OF_SCOPE, PERMANENT, THIRD_PARTY)
   --owners             Asset owners (email addresses)
   -t, --tag-ids        Tag IDs for organization
-
-STATUS TRANSITIONS:
-  • MONITORED    → UNMONITORED   Stop active scanning
-  • UNMONITORED  → MONITORED     Resume security testing
-  • Any          → ARCHIVED      Mark as decommissioned
 
 USE CASES:
   • Update asset description for clarity
   • Change monitoring status
   • Assign ownership for accountability
   • Add tags for organization and filtering
-  • Archive deprecated APIs`,
+  • Mark assets as DEPRECATED / OUT_OF_SCOPE`,
 	Example: `  # Update asset description
   escape-cli assets update <asset-id> --description "Production REST API"
 
@@ -341,10 +339,10 @@ USE CASES:
   escape-cli assets update <asset-id> --owners "security@example.com,devops@example.com"
 
   # Add tags for organization
-  escape-cli assets update <asset-id> --tag-ids "tag-prod,tag-critical"
+  escape-cli assets update <asset-id> --tag-ids "00000000-0000-0000-0000-000000000000,00000000-0000-0000-0000-000000000001"
 
-  # Archive decommissioned asset
-  escape-cli assets update <asset-id> --status ARCHIVED --description "Deprecated - removed 2025-10-01"
+  # Mark deprecated asset
+  escape-cli assets update <asset-id> --status DEPRECATED --description "Deprecated - removed 2025-10-01"
 
   # Update multiple fields at once
   escape-cli assets update <asset-id> \

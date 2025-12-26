@@ -30,15 +30,15 @@ and understanding test behavior.
 
 EVENT LEVELS:
   • ERROR   - Scan errors and failures
-  • WARN    - Warnings and potential issues
+  • WARNING - Warnings and potential issues
   • INFO    - General informational messages
   • DEBUG   - Detailed debugging information
 
 EVENT STAGES:
-  • DISCOVERY  - API endpoint discovery
-  • EXECUTION  - Active security testing
-  • ANALYSIS   - Results processing
-  • REPORTING  - Report generation`,
+  • AGENT_ACTION     - Agent action
+  • AGENT_REASONING  - Agent reasoning
+  • CONFIGURATION    - Configuration
+  • EXECUTION        - Execution`,
 }
 
 var eventsListCmd = &cobra.Command{
@@ -55,7 +55,7 @@ FILTER OPTIONS:
   -a, --asset-id       Filter by asset ID
   -i, --issue-id       Filter by issue ID
   --stage              Filter by execution stage
-  -l, --levels         Filter by level (ERROR, WARN, INFO, DEBUG)
+  -l, --levels         Filter by level (ERROR, WARNING, INFO, DEBUG)
   --has-attachments    Show only events with attachments`,
 	Example: `  # List recent events
   escape-cli events list
@@ -95,7 +95,7 @@ FILTER OPTIONS:
 			events, next, err = escape.ListEvents(cmd.Context(), *next, filters)
 
 			if err != nil {
-				return fmt.Errorf("unable to list profiles: %w", err)
+				return fmt.Errorf("unable to list events: %w", err)
 			}
 			out.Table(events, func() []string {
 				res := []string{"ID\tCREATED AT\tLEVEL\tSTAGE\tTITLE"}

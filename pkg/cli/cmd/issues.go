@@ -37,12 +37,11 @@ discovered during security scans. Each issue represents a specific security conc
 that should be reviewed and remediated.
 
 ISSUE LIFECYCLE:
-  1. OPEN              - Newly discovered, needs review
-  2. MANUAL_REVIEW     - Under investigation
-  3. IN_PROGRESS       - Actively being fixed
-  4. RESOLVED          - Fixed and verified
-  5. FALSE_POSITIVE    - Not a real issue
-  6. ACCEPTED_RISK     - Acknowledged but not fixing
+  1. OPEN           - Newly discovered, needs review
+  2. MANUAL_REVIEW  - Under investigation
+  3. RESOLVED       - Fixed and verified
+  4. FALSE_POSITIVE - Not a real issue
+  5. IGNORED        - Ignored / excluded from tracking
 
 COMMON WORKFLOWS:
   • List high-priority issues:
@@ -52,7 +51,7 @@ COMMON WORKFLOWS:
     $ escape-cli issues list --asset-id <asset-id>
 
   • Update issue status as you fix them:
-    $ escape-cli issues update <issue-id> --status IN_PROGRESS
+    $ escape-cli issues update <issue-id> --status MANUAL_REVIEW
 
   • Track issue history:
     $ escape-cli issues list-activities <issue-id>`,
@@ -69,7 +68,7 @@ filtering options to find exactly the issues you need to review or remediate.
 
 FILTER OPTIONS:
   --severity         Filter by severity: CRITICAL, HIGH, MEDIUM, LOW, INFO
-  --status           Filter by status: OPEN, MANUAL_REVIEW, IN_PROGRESS, RESOLVED
+  --status           Filter by status: FALSE_POSITIVE, IGNORED, MANUAL_REVIEW, OPEN, RESOLVED
   -p, --profile-id   Filter by profile ID
   -a, --asset-id     Filter by asset ID  
   -d, --domain       Filter by domain name
@@ -138,7 +137,7 @@ ID                                      CREATED AT  SEVERITY  STATUS  NAME      
 		for next != nil && *next != "" {
 			issues, next, err = escape.ListIssues(cmd.Context(), *next, filters)
 			if err != nil {
-				return fmt.Errorf("unable to list profiles: %w", err)
+				return fmt.Errorf("unable to list issues: %w", err)
 			}
 			out.Table(issues, func() []string {
 				res := []string{"ID\tCREATED AT\tSEVERITY\tSTATUS\tNAME\tASSET\tLINK"}
@@ -227,19 +226,16 @@ Change the status of a security issue as you progress through remediation.
 Status updates create an audit trail and help teams track security work.
 
 AVAILABLE STATUSES:
-  OPEN              - Newly discovered, awaiting review
-  MANUAL_REVIEW     - Under investigation by security team
-  IN_PROGRESS       - Actively being fixed by developers
-  RESOLVED          - Fixed and verified
-  FALSE_POSITIVE    - Determined not to be a real issue
-  ACCEPTED_RISK     - Acknowledged but not fixing (with justification)
-  REOPENED          - Previously resolved but found again
+  OPEN           - Newly discovered, awaiting review
+  MANUAL_REVIEW  - Under investigation by security team
+  RESOLVED       - Fixed and verified
+  FALSE_POSITIVE - Determined not to be a real issue
+  IGNORED        - Ignored / excluded from tracking
 
 WORKFLOW EXAMPLE:
   1. New issue discovered:        OPEN
   2. Security team reviews:       MANUAL_REVIEW
-  3. Assigned to developers:      IN_PROGRESS
-  4. Fix deployed and tested:     RESOLVED
+  3. Fix deployed and tested:     RESOLVED
 
 TRACKING:
   All status changes are logged in the issue's activity history.
@@ -247,17 +243,17 @@ TRACKING:
 	Example: `  # Mark issue under review
   escape-cli issues update <issue-id> --status MANUAL_REVIEW
 
-  # Mark as in progress when fixing
-  escape-cli issues update <issue-id> --status IN_PROGRESS
-
   # Mark as resolved after fixing
   escape-cli issues update <issue-id> --status RESOLVED
 
   # Mark as false positive
   escape-cli issues update <issue-id> --status FALSE_POSITIVE
+  
+  # Ignore an issue
+  escape-cli issues update <issue-id> --status IGNORED
 
   # Bulk update issues from a list
-  cat issue_ids.txt | xargs -I {} escape-cli issues update {} --status IN_PROGRESS`,
+  cat issue_ids.txt | xargs -I {} escape-cli issues update {} --status MANUAL_REVIEW`,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		issueID := args[0]
 		if err := cmd.MarkFlagRequired("status"); err != nil {
