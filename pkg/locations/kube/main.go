@@ -80,9 +80,9 @@ func connectAndRun(ctx context.Context, cfg *rest.Config, isConnected *atomic.Bo
 		asset := v3.NewCreateAssetKUBERNETESCLUSTERRequest(
 			v3.ENUMCLOUDHOSTING_CLOUD_HOSTING,
 			v3.ENUMKUBERNETESCLUSTER_KUBERNETES_CLUSTER,
-			locationID,
 		)
 		asset.Name = &locationName
+		asset.PrivateLocationId = &locationID
 		data, err := asset.MarshalJSON()
 		if err != nil {
 			log.Error("Failed to marshal Kubernetes integration: %s", err)

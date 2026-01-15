@@ -20,12 +20,8 @@ var _ MappedNullable = &UpdateProfileSchemaRequest{}
 
 // UpdateProfileSchemaRequest struct for UpdateProfileSchemaRequest
 type UpdateProfileSchemaRequest struct {
-	// The profile ID
-	ProfileId string `json:"profileId"`
-	// The schema URL
-	SchemaUrl string `json:"schemaUrl"`
-	// Whether the schema is uploaded
-	Uploaded bool `json:"uploaded"`
+	// The asset schema ID
+	SchemaId string `json:"schemaId"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -35,11 +31,9 @@ type _UpdateProfileSchemaRequest UpdateProfileSchemaRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateProfileSchemaRequest(profileId string, schemaUrl string, uploaded bool) *UpdateProfileSchemaRequest {
+func NewUpdateProfileSchemaRequest(schemaId string) *UpdateProfileSchemaRequest {
 	this := UpdateProfileSchemaRequest{}
-	this.ProfileId = profileId
-	this.SchemaUrl = schemaUrl
-	this.Uploaded = uploaded
+	this.SchemaId = schemaId
 	return &this
 }
 
@@ -51,76 +45,28 @@ func NewUpdateProfileSchemaRequestWithDefaults() *UpdateProfileSchemaRequest {
 	return &this
 }
 
-// GetProfileId returns the ProfileId field value
-func (o *UpdateProfileSchemaRequest) GetProfileId() string {
+// GetSchemaId returns the SchemaId field value
+func (o *UpdateProfileSchemaRequest) GetSchemaId() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.ProfileId
+	return o.SchemaId
 }
 
-// GetProfileIdOk returns a tuple with the ProfileId field value
+// GetSchemaIdOk returns a tuple with the SchemaId field value
 // and a boolean to check if the value has been set.
-func (o *UpdateProfileSchemaRequest) GetProfileIdOk() (*string, bool) {
+func (o *UpdateProfileSchemaRequest) GetSchemaIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.ProfileId, true
+	return &o.SchemaId, true
 }
 
-// SetProfileId sets field value
-func (o *UpdateProfileSchemaRequest) SetProfileId(v string) {
-	o.ProfileId = v
-}
-
-// GetSchemaUrl returns the SchemaUrl field value
-func (o *UpdateProfileSchemaRequest) GetSchemaUrl() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.SchemaUrl
-}
-
-// GetSchemaUrlOk returns a tuple with the SchemaUrl field value
-// and a boolean to check if the value has been set.
-func (o *UpdateProfileSchemaRequest) GetSchemaUrlOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.SchemaUrl, true
-}
-
-// SetSchemaUrl sets field value
-func (o *UpdateProfileSchemaRequest) SetSchemaUrl(v string) {
-	o.SchemaUrl = v
-}
-
-// GetUploaded returns the Uploaded field value
-func (o *UpdateProfileSchemaRequest) GetUploaded() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.Uploaded
-}
-
-// GetUploadedOk returns a tuple with the Uploaded field value
-// and a boolean to check if the value has been set.
-func (o *UpdateProfileSchemaRequest) GetUploadedOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Uploaded, true
-}
-
-// SetUploaded sets field value
-func (o *UpdateProfileSchemaRequest) SetUploaded(v bool) {
-	o.Uploaded = v
+// SetSchemaId sets field value
+func (o *UpdateProfileSchemaRequest) SetSchemaId(v string) {
+	o.SchemaId = v
 }
 
 func (o UpdateProfileSchemaRequest) MarshalJSON() ([]byte, error) {
@@ -133,9 +79,7 @@ func (o UpdateProfileSchemaRequest) MarshalJSON() ([]byte, error) {
 
 func (o UpdateProfileSchemaRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["profileId"] = o.ProfileId
-	toSerialize["schemaUrl"] = o.SchemaUrl
-	toSerialize["uploaded"] = o.Uploaded
+	toSerialize["schemaId"] = o.SchemaId
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -149,9 +93,7 @@ func (o *UpdateProfileSchemaRequest) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"profileId",
-		"schemaUrl",
-		"uploaded",
+		"schemaId",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -181,9 +123,7 @@ func (o *UpdateProfileSchemaRequest) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "profileId")
-		delete(additionalProperties, "schemaUrl")
-		delete(additionalProperties, "uploaded")
+		delete(additionalProperties, "schemaId")
 		o.AdditionalProperties = additionalProperties
 	}
 

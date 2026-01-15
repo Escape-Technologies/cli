@@ -197,6 +197,7 @@ type ProfileDetailedConfigurationSecurityTests struct {
 	ZombieObject *ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure `json:"zombie_object,omitempty"`
 	FlaskSessionCookie *ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure `json:"flask_session_cookie,omitempty"`
 	RowLevelSecurity *ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure `json:"row_level_security,omitempty"`
+	CompromisedSupplyChain *ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure `json:"compromised_supply_chain,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -5915,6 +5916,38 @@ func (o *ProfileDetailedConfigurationSecurityTests) SetRowLevelSecurity(v Profil
 	o.RowLevelSecurity = &v
 }
 
+// GetCompromisedSupplyChain returns the CompromisedSupplyChain field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationSecurityTests) GetCompromisedSupplyChain() ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure {
+	if o == nil || IsNil(o.CompromisedSupplyChain) {
+		var ret ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure
+		return ret
+	}
+	return *o.CompromisedSupplyChain
+}
+
+// GetCompromisedSupplyChainOk returns a tuple with the CompromisedSupplyChain field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationSecurityTests) GetCompromisedSupplyChainOk() (*ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure, bool) {
+	if o == nil || IsNil(o.CompromisedSupplyChain) {
+		return nil, false
+	}
+	return o.CompromisedSupplyChain, true
+}
+
+// HasCompromisedSupplyChain returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationSecurityTests) HasCompromisedSupplyChain() bool {
+	if o != nil && !IsNil(o.CompromisedSupplyChain) {
+		return true
+	}
+
+	return false
+}
+
+// SetCompromisedSupplyChain gets a reference to the given ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure and assigns it to the CompromisedSupplyChain field.
+func (o *ProfileDetailedConfigurationSecurityTests) SetCompromisedSupplyChain(v ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure) {
+	o.CompromisedSupplyChain = &v
+}
+
 func (o ProfileDetailedConfigurationSecurityTests) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -6459,6 +6492,9 @@ func (o ProfileDetailedConfigurationSecurityTests) ToMap() (map[string]interface
 	if !IsNil(o.RowLevelSecurity) {
 		toSerialize["row_level_security"] = o.RowLevelSecurity
 	}
+	if !IsNil(o.CompromisedSupplyChain) {
+		toSerialize["compromised_supply_chain"] = o.CompromisedSupplyChain
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -6659,6 +6695,7 @@ func (o *ProfileDetailedConfigurationSecurityTests) UnmarshalJSON(data []byte) (
 		delete(additionalProperties, "zombie_object")
 		delete(additionalProperties, "flask_session_cookie")
 		delete(additionalProperties, "row_level_security")
+		delete(additionalProperties, "compromised_supply_chain")
 		o.AdditionalProperties = additionalProperties
 	}
 

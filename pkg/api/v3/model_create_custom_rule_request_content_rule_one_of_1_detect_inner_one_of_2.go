@@ -20,8 +20,13 @@ var _ MappedNullable = &CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf
 
 // CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf2 struct for CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf2
 type CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf2 struct {
+	UseExtraction *bool `json:"use_extraction,omitempty"`
+	Is *string `json:"is,omitempty"`
+	IsNot *string `json:"is_not,omitempty"`
+	In []string `json:"in,omitempty"`
 	Contains *string `json:"contains,omitempty"`
-	If ENUMPAGETEXT `json:"if"`
+	Regex *string `json:"regex,omitempty"`
+	If ENUMDIALOGMESSAGE `json:"if"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -31,7 +36,7 @@ type _CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf2 CreateCustomRule
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf2(if_ ENUMPAGETEXT) *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf2 {
+func NewCreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf2(if_ ENUMDIALOGMESSAGE) *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf2 {
 	this := CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf2{}
 	this.If = if_
 	return &this
@@ -43,6 +48,134 @@ func NewCreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf2(if_ ENUMPAGETE
 func NewCreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf2WithDefaults() *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf2 {
 	this := CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf2{}
 	return &this
+}
+
+// GetUseExtraction returns the UseExtraction field value if set, zero value otherwise.
+func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf2) GetUseExtraction() bool {
+	if o == nil || IsNil(o.UseExtraction) {
+		var ret bool
+		return ret
+	}
+	return *o.UseExtraction
+}
+
+// GetUseExtractionOk returns a tuple with the UseExtraction field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf2) GetUseExtractionOk() (*bool, bool) {
+	if o == nil || IsNil(o.UseExtraction) {
+		return nil, false
+	}
+	return o.UseExtraction, true
+}
+
+// HasUseExtraction returns a boolean if a field has been set.
+func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf2) HasUseExtraction() bool {
+	if o != nil && !IsNil(o.UseExtraction) {
+		return true
+	}
+
+	return false
+}
+
+// SetUseExtraction gets a reference to the given bool and assigns it to the UseExtraction field.
+func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf2) SetUseExtraction(v bool) {
+	o.UseExtraction = &v
+}
+
+// GetIs returns the Is field value if set, zero value otherwise.
+func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf2) GetIs() string {
+	if o == nil || IsNil(o.Is) {
+		var ret string
+		return ret
+	}
+	return *o.Is
+}
+
+// GetIsOk returns a tuple with the Is field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf2) GetIsOk() (*string, bool) {
+	if o == nil || IsNil(o.Is) {
+		return nil, false
+	}
+	return o.Is, true
+}
+
+// HasIs returns a boolean if a field has been set.
+func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf2) HasIs() bool {
+	if o != nil && !IsNil(o.Is) {
+		return true
+	}
+
+	return false
+}
+
+// SetIs gets a reference to the given string and assigns it to the Is field.
+func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf2) SetIs(v string) {
+	o.Is = &v
+}
+
+// GetIsNot returns the IsNot field value if set, zero value otherwise.
+func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf2) GetIsNot() string {
+	if o == nil || IsNil(o.IsNot) {
+		var ret string
+		return ret
+	}
+	return *o.IsNot
+}
+
+// GetIsNotOk returns a tuple with the IsNot field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf2) GetIsNotOk() (*string, bool) {
+	if o == nil || IsNil(o.IsNot) {
+		return nil, false
+	}
+	return o.IsNot, true
+}
+
+// HasIsNot returns a boolean if a field has been set.
+func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf2) HasIsNot() bool {
+	if o != nil && !IsNil(o.IsNot) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsNot gets a reference to the given string and assigns it to the IsNot field.
+func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf2) SetIsNot(v string) {
+	o.IsNot = &v
+}
+
+// GetIn returns the In field value if set, zero value otherwise.
+func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf2) GetIn() []string {
+	if o == nil || IsNil(o.In) {
+		var ret []string
+		return ret
+	}
+	return o.In
+}
+
+// GetInOk returns a tuple with the In field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf2) GetInOk() ([]string, bool) {
+	if o == nil || IsNil(o.In) {
+		return nil, false
+	}
+	return o.In, true
+}
+
+// HasIn returns a boolean if a field has been set.
+func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf2) HasIn() bool {
+	if o != nil && !IsNil(o.In) {
+		return true
+	}
+
+	return false
+}
+
+// SetIn gets a reference to the given []string and assigns it to the In field.
+func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf2) SetIn(v []string) {
+	o.In = v
 }
 
 // GetContains returns the Contains field value if set, zero value otherwise.
@@ -77,10 +210,42 @@ func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf2) SetContains(
 	o.Contains = &v
 }
 
+// GetRegex returns the Regex field value if set, zero value otherwise.
+func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf2) GetRegex() string {
+	if o == nil || IsNil(o.Regex) {
+		var ret string
+		return ret
+	}
+	return *o.Regex
+}
+
+// GetRegexOk returns a tuple with the Regex field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf2) GetRegexOk() (*string, bool) {
+	if o == nil || IsNil(o.Regex) {
+		return nil, false
+	}
+	return o.Regex, true
+}
+
+// HasRegex returns a boolean if a field has been set.
+func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf2) HasRegex() bool {
+	if o != nil && !IsNil(o.Regex) {
+		return true
+	}
+
+	return false
+}
+
+// SetRegex gets a reference to the given string and assigns it to the Regex field.
+func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf2) SetRegex(v string) {
+	o.Regex = &v
+}
+
 // GetIf returns the If field value
-func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf2) GetIf() ENUMPAGETEXT {
+func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf2) GetIf() ENUMDIALOGMESSAGE {
 	if o == nil {
-		var ret ENUMPAGETEXT
+		var ret ENUMDIALOGMESSAGE
 		return ret
 	}
 
@@ -89,7 +254,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf2) GetIf() ENUM
 
 // GetIfOk returns a tuple with the If field value
 // and a boolean to check if the value has been set.
-func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf2) GetIfOk() (*ENUMPAGETEXT, bool) {
+func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf2) GetIfOk() (*ENUMDIALOGMESSAGE, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -97,7 +262,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf2) GetIfOk() (*
 }
 
 // SetIf sets field value
-func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf2) SetIf(v ENUMPAGETEXT) {
+func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf2) SetIf(v ENUMDIALOGMESSAGE) {
 	o.If = v
 }
 
@@ -111,8 +276,23 @@ func (o CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf2) MarshalJSON()
 
 func (o CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf2) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.UseExtraction) {
+		toSerialize["use_extraction"] = o.UseExtraction
+	}
+	if !IsNil(o.Is) {
+		toSerialize["is"] = o.Is
+	}
+	if !IsNil(o.IsNot) {
+		toSerialize["is_not"] = o.IsNot
+	}
+	if !IsNil(o.In) {
+		toSerialize["in"] = o.In
+	}
 	if !IsNil(o.Contains) {
 		toSerialize["contains"] = o.Contains
+	}
+	if !IsNil(o.Regex) {
+		toSerialize["regex"] = o.Regex
 	}
 	toSerialize["if"] = o.If
 
@@ -158,7 +338,12 @@ func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf2) UnmarshalJSO
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "use_extraction")
+		delete(additionalProperties, "is")
+		delete(additionalProperties, "is_not")
+		delete(additionalProperties, "in")
 		delete(additionalProperties, "contains")
+		delete(additionalProperties, "regex")
 		delete(additionalProperties, "if")
 		o.AdditionalProperties = additionalProperties
 	}
