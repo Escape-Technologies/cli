@@ -20,13 +20,15 @@ var _ MappedNullable = &CreateAssetKUBERNETESCLUSTERRequest{}
 
 // CreateAssetKUBERNETESCLUSTERRequest struct for CreateAssetKUBERNETESCLUSTERRequest
 type CreateAssetKUBERNETESCLUSTERRequest struct {
+	// The list of project IDs bind the asset on.
+	ProjectIds []string `json:"projectIds,omitempty"`
 	AssetClass ENUMCLOUDHOSTING `json:"asset_class"`
 	WizProviderId *string `json:"wiz_provider_id,omitempty"`
 	WizCloudPlatform *string `json:"wiz_cloud_platform,omitempty"`
 	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
 	AssetType ENUMKUBERNETESCLUSTER `json:"asset_type"`
 	Name *string `json:"name,omitempty"`
-	PrivateLocationId string `json:"private_location_id"`
+	PrivateLocationId *string `json:"private_location_id,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -36,11 +38,10 @@ type _CreateAssetKUBERNETESCLUSTERRequest CreateAssetKUBERNETESCLUSTERRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetKUBERNETESCLUSTERRequest(assetClass ENUMCLOUDHOSTING, assetType ENUMKUBERNETESCLUSTER, privateLocationId string) *CreateAssetKUBERNETESCLUSTERRequest {
+func NewCreateAssetKUBERNETESCLUSTERRequest(assetClass ENUMCLOUDHOSTING, assetType ENUMKUBERNETESCLUSTER) *CreateAssetKUBERNETESCLUSTERRequest {
 	this := CreateAssetKUBERNETESCLUSTERRequest{}
 	this.AssetClass = assetClass
 	this.AssetType = assetType
-	this.PrivateLocationId = privateLocationId
 	return &this
 }
 
@@ -50,6 +51,38 @@ func NewCreateAssetKUBERNETESCLUSTERRequest(assetClass ENUMCLOUDHOSTING, assetTy
 func NewCreateAssetKUBERNETESCLUSTERRequestWithDefaults() *CreateAssetKUBERNETESCLUSTERRequest {
 	this := CreateAssetKUBERNETESCLUSTERRequest{}
 	return &this
+}
+
+// GetProjectIds returns the ProjectIds field value if set, zero value otherwise.
+func (o *CreateAssetKUBERNETESCLUSTERRequest) GetProjectIds() []string {
+	if o == nil || IsNil(o.ProjectIds) {
+		var ret []string
+		return ret
+	}
+	return o.ProjectIds
+}
+
+// GetProjectIdsOk returns a tuple with the ProjectIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetKUBERNETESCLUSTERRequest) GetProjectIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.ProjectIds) {
+		return nil, false
+	}
+	return o.ProjectIds, true
+}
+
+// HasProjectIds returns a boolean if a field has been set.
+func (o *CreateAssetKUBERNETESCLUSTERRequest) HasProjectIds() bool {
+	if o != nil && !IsNil(o.ProjectIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetProjectIds gets a reference to the given []string and assigns it to the ProjectIds field.
+func (o *CreateAssetKUBERNETESCLUSTERRequest) SetProjectIds(v []string) {
+	o.ProjectIds = v
 }
 
 // GetAssetClass returns the AssetClass field value
@@ -228,28 +261,36 @@ func (o *CreateAssetKUBERNETESCLUSTERRequest) SetName(v string) {
 	o.Name = &v
 }
 
-// GetPrivateLocationId returns the PrivateLocationId field value
+// GetPrivateLocationId returns the PrivateLocationId field value if set, zero value otherwise.
 func (o *CreateAssetKUBERNETESCLUSTERRequest) GetPrivateLocationId() string {
-	if o == nil {
+	if o == nil || IsNil(o.PrivateLocationId) {
 		var ret string
 		return ret
 	}
-
-	return o.PrivateLocationId
+	return *o.PrivateLocationId
 }
 
-// GetPrivateLocationIdOk returns a tuple with the PrivateLocationId field value
+// GetPrivateLocationIdOk returns a tuple with the PrivateLocationId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CreateAssetKUBERNETESCLUSTERRequest) GetPrivateLocationIdOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.PrivateLocationId) {
 		return nil, false
 	}
-	return &o.PrivateLocationId, true
+	return o.PrivateLocationId, true
 }
 
-// SetPrivateLocationId sets field value
+// HasPrivateLocationId returns a boolean if a field has been set.
+func (o *CreateAssetKUBERNETESCLUSTERRequest) HasPrivateLocationId() bool {
+	if o != nil && !IsNil(o.PrivateLocationId) {
+		return true
+	}
+
+	return false
+}
+
+// SetPrivateLocationId gets a reference to the given string and assigns it to the PrivateLocationId field.
 func (o *CreateAssetKUBERNETESCLUSTERRequest) SetPrivateLocationId(v string) {
-	o.PrivateLocationId = v
+	o.PrivateLocationId = &v
 }
 
 func (o CreateAssetKUBERNETESCLUSTERRequest) MarshalJSON() ([]byte, error) {
@@ -262,6 +303,9 @@ func (o CreateAssetKUBERNETESCLUSTERRequest) MarshalJSON() ([]byte, error) {
 
 func (o CreateAssetKUBERNETESCLUSTERRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.ProjectIds) {
+		toSerialize["projectIds"] = o.ProjectIds
+	}
 	toSerialize["asset_class"] = o.AssetClass
 	if !IsNil(o.WizProviderId) {
 		toSerialize["wiz_provider_id"] = o.WizProviderId
@@ -276,7 +320,9 @@ func (o CreateAssetKUBERNETESCLUSTERRequest) ToMap() (map[string]interface{}, er
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
-	toSerialize["private_location_id"] = o.PrivateLocationId
+	if !IsNil(o.PrivateLocationId) {
+		toSerialize["private_location_id"] = o.PrivateLocationId
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -292,7 +338,6 @@ func (o *CreateAssetKUBERNETESCLUSTERRequest) UnmarshalJSON(data []byte) (err er
 	requiredProperties := []string{
 		"asset_class",
 		"asset_type",
-		"private_location_id",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -322,6 +367,7 @@ func (o *CreateAssetKUBERNETESCLUSTERRequest) UnmarshalJSON(data []byte) (err er
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "projectIds")
 		delete(additionalProperties, "asset_class")
 		delete(additionalProperties, "wiz_provider_id")
 		delete(additionalProperties, "wiz_cloud_platform")

@@ -24,6 +24,7 @@ type ProfileDetailedConfigurationFrontendDastLogoutDetection struct {
 	LogoutRedirectionUrlPatterns []string `json:"logout_redirection_url_patterns,omitempty"`
 	SessionCookieRegexPatterns []string `json:"session_cookie_regex_patterns,omitempty"`
 	AutoReauthenticate *bool `json:"auto_reauthenticate,omitempty"`
+	AgenticDetectionEnabled *bool `json:"agentic_detection_enabled,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -206,6 +207,38 @@ func (o *ProfileDetailedConfigurationFrontendDastLogoutDetection) SetAutoReauthe
 	o.AutoReauthenticate = &v
 }
 
+// GetAgenticDetectionEnabled returns the AgenticDetectionEnabled field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationFrontendDastLogoutDetection) GetAgenticDetectionEnabled() bool {
+	if o == nil || IsNil(o.AgenticDetectionEnabled) {
+		var ret bool
+		return ret
+	}
+	return *o.AgenticDetectionEnabled
+}
+
+// GetAgenticDetectionEnabledOk returns a tuple with the AgenticDetectionEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationFrontendDastLogoutDetection) GetAgenticDetectionEnabledOk() (*bool, bool) {
+	if o == nil || IsNil(o.AgenticDetectionEnabled) {
+		return nil, false
+	}
+	return o.AgenticDetectionEnabled, true
+}
+
+// HasAgenticDetectionEnabled returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationFrontendDastLogoutDetection) HasAgenticDetectionEnabled() bool {
+	if o != nil && !IsNil(o.AgenticDetectionEnabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetAgenticDetectionEnabled gets a reference to the given bool and assigns it to the AgenticDetectionEnabled field.
+func (o *ProfileDetailedConfigurationFrontendDastLogoutDetection) SetAgenticDetectionEnabled(v bool) {
+	o.AgenticDetectionEnabled = &v
+}
+
 func (o ProfileDetailedConfigurationFrontendDastLogoutDetection) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -230,6 +263,9 @@ func (o ProfileDetailedConfigurationFrontendDastLogoutDetection) ToMap() (map[st
 	}
 	if !IsNil(o.AutoReauthenticate) {
 		toSerialize["auto_reauthenticate"] = o.AutoReauthenticate
+	}
+	if !IsNil(o.AgenticDetectionEnabled) {
+		toSerialize["agentic_detection_enabled"] = o.AgenticDetectionEnabled
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -258,6 +294,7 @@ func (o *ProfileDetailedConfigurationFrontendDastLogoutDetection) UnmarshalJSON(
 		delete(additionalProperties, "logout_redirection_url_patterns")
 		delete(additionalProperties, "session_cookie_regex_patterns")
 		delete(additionalProperties, "auto_reauthenticate")
+		delete(additionalProperties, "agentic_detection_enabled")
 		o.AdditionalProperties = additionalProperties
 	}
 

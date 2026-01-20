@@ -177,6 +177,13 @@ for path, path_data in data["paths"].items():
             "trace",
         ]:
             continue
+
+        # Remove "Beta" tag from operations that have other tags to avoid duplicate type declarations
+        # The generator creates request types per tag, causing redeclarations when the same operation
+        # appears under multiple tags (e.g., both "Beta" and "Integrations")
+        tags = operation_object.get("tags", [])
+        if len(tags) > 1 and "Beta" in tags:
+            operation_object["tags"] = [t for t in tags if t != "Beta"]
         
         list_params = [
             "profileIds",

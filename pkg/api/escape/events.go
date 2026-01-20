@@ -23,7 +23,7 @@ type ListEventsFilters struct {
 
 // ListEvents lists events
 func ListEvents(ctx context.Context, next string, filters *ListEventsFilters) ([]v3.EventSummarized, *string, error) {
-	client, err := newAPIV3Client()
+	client, err := NewAPIV3Client()
 	if err != nil {
 		return nil, nil, fmt.Errorf("unable to init client: %w", err)
 	}
@@ -69,7 +69,7 @@ func ListEvents(ctx context.Context, next string, filters *ListEventsFilters) ([
 
 // GetEvent gets an event
 func GetEvent(ctx context.Context, eventID string) (*v3.EventDetailed, error) {
-	client, err := newAPIV3Client()
+	client, err := NewAPIV3Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}

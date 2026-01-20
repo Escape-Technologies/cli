@@ -59,6 +59,8 @@ type APIClient struct {
 
 	EventsAPI *EventsAPIService
 
+	IntegrationsAPI *IntegrationsAPIService
+
 	IssuesAPI *IssuesAPIService
 
 	LocationsAPI *LocationsAPIService
@@ -70,6 +72,8 @@ type APIClient struct {
 	TagsAPI *TagsAPIService
 
 	UploadAPI *UploadAPIService
+
+	WorkflowsAPI *WorkflowsAPIService
 }
 
 type service struct {
@@ -93,12 +97,14 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.BetaAPI = (*BetaAPIService)(&c.common)
 	c.CustomRulesAPI = (*CustomRulesAPIService)(&c.common)
 	c.EventsAPI = (*EventsAPIService)(&c.common)
+	c.IntegrationsAPI = (*IntegrationsAPIService)(&c.common)
 	c.IssuesAPI = (*IssuesAPIService)(&c.common)
 	c.LocationsAPI = (*LocationsAPIService)(&c.common)
 	c.ProfilesAPI = (*ProfilesAPIService)(&c.common)
 	c.ScansAPI = (*ScansAPIService)(&c.common)
 	c.TagsAPI = (*TagsAPIService)(&c.common)
 	c.UploadAPI = (*UploadAPIService)(&c.common)
+	c.WorkflowsAPI = (*WorkflowsAPIService)(&c.common)
 
 	return c
 }
@@ -517,10 +523,7 @@ func addFile(w *multipart.Writer, fieldName, path string) error {
 	if err != nil {
 		return err
 	}
-	err = file.Close()
-	if err != nil {
-		return err
-	}
+	defer file.Close()
 
 	part, err := w.CreateFormFile(fieldName, filepath.Base(path))
 	if err != nil {

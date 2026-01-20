@@ -22,6 +22,8 @@ var _ MappedNullable = &CreateSchemaViaFetch{}
 type CreateSchemaViaFetch struct {
 	AssetType ENUMSCHEMA `json:"asset_type"`
 	Name *string `json:"name,omitempty"`
+	// The list of project IDs bind the asset on.
+	ProjectIds []string `json:"projectIds,omitempty"`
 	Fetch CreateSchemaViaFetchFetch `json:"fetch"`
 	// The authentication string of the asset
 	AuthenticationStr *string `json:"authenticationStr,omitempty"`
@@ -105,6 +107,38 @@ func (o *CreateSchemaViaFetch) SetName(v string) {
 	o.Name = &v
 }
 
+// GetProjectIds returns the ProjectIds field value if set, zero value otherwise.
+func (o *CreateSchemaViaFetch) GetProjectIds() []string {
+	if o == nil || IsNil(o.ProjectIds) {
+		var ret []string
+		return ret
+	}
+	return o.ProjectIds
+}
+
+// GetProjectIdsOk returns a tuple with the ProjectIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateSchemaViaFetch) GetProjectIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.ProjectIds) {
+		return nil, false
+	}
+	return o.ProjectIds, true
+}
+
+// HasProjectIds returns a boolean if a field has been set.
+func (o *CreateSchemaViaFetch) HasProjectIds() bool {
+	if o != nil && !IsNil(o.ProjectIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetProjectIds gets a reference to the given []string and assigns it to the ProjectIds field.
+func (o *CreateSchemaViaFetch) SetProjectIds(v []string) {
+	o.ProjectIds = v
+}
+
 // GetFetch returns the Fetch field value
 func (o *CreateSchemaViaFetch) GetFetch() CreateSchemaViaFetchFetch {
 	if o == nil {
@@ -175,6 +209,9 @@ func (o CreateSchemaViaFetch) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
+	if !IsNil(o.ProjectIds) {
+		toSerialize["projectIds"] = o.ProjectIds
+	}
 	toSerialize["fetch"] = o.Fetch
 	if !IsNil(o.AuthenticationStr) {
 		toSerialize["authenticationStr"] = o.AuthenticationStr
@@ -225,6 +262,7 @@ func (o *CreateSchemaViaFetch) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "asset_type")
 		delete(additionalProperties, "name")
+		delete(additionalProperties, "projectIds")
 		delete(additionalProperties, "fetch")
 		delete(additionalProperties, "authenticationStr")
 		o.AdditionalProperties = additionalProperties

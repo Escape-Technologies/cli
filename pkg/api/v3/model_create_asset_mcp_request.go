@@ -20,6 +20,8 @@ var _ MappedNullable = &CreateAssetMCPRequest{}
 
 // CreateAssetMCPRequest struct for CreateAssetMCPRequest
 type CreateAssetMCPRequest struct {
+	// The list of project IDs bind the asset on.
+	ProjectIds []string `json:"projectIds,omitempty"`
 	AssetClass ENUMAPISERVICE `json:"asset_class"`
 	WizProviderId *string `json:"wiz_provider_id,omitempty"`
 	WizCloudPlatform *string `json:"wiz_cloud_platform,omitempty"`
@@ -60,6 +62,38 @@ func NewCreateAssetMCPRequest(assetClass ENUMAPISERVICE, assetType ENUMMCP, url 
 func NewCreateAssetMCPRequestWithDefaults() *CreateAssetMCPRequest {
 	this := CreateAssetMCPRequest{}
 	return &this
+}
+
+// GetProjectIds returns the ProjectIds field value if set, zero value otherwise.
+func (o *CreateAssetMCPRequest) GetProjectIds() []string {
+	if o == nil || IsNil(o.ProjectIds) {
+		var ret []string
+		return ret
+	}
+	return o.ProjectIds
+}
+
+// GetProjectIdsOk returns a tuple with the ProjectIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetMCPRequest) GetProjectIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.ProjectIds) {
+		return nil, false
+	}
+	return o.ProjectIds, true
+}
+
+// HasProjectIds returns a boolean if a field has been set.
+func (o *CreateAssetMCPRequest) HasProjectIds() bool {
+	if o != nil && !IsNil(o.ProjectIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetProjectIds gets a reference to the given []string and assigns it to the ProjectIds field.
+func (o *CreateAssetMCPRequest) SetProjectIds(v []string) {
+	o.ProjectIds = v
 }
 
 // GetAssetClass returns the AssetClass field value
@@ -592,6 +626,9 @@ func (o CreateAssetMCPRequest) MarshalJSON() ([]byte, error) {
 
 func (o CreateAssetMCPRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.ProjectIds) {
+		toSerialize["projectIds"] = o.ProjectIds
+	}
 	toSerialize["asset_class"] = o.AssetClass
 	if !IsNil(o.WizProviderId) {
 		toSerialize["wiz_provider_id"] = o.WizProviderId
@@ -682,6 +719,7 @@ func (o *CreateAssetMCPRequest) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "projectIds")
 		delete(additionalProperties, "asset_class")
 		delete(additionalProperties, "wiz_provider_id")
 		delete(additionalProperties, "wiz_cloud_platform")

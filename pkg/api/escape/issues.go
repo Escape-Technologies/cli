@@ -28,7 +28,7 @@ type ListIssuesFilters struct {
 
 // GetIssue gets an issue by ID
 func GetIssue(ctx context.Context, issueID string) (*v3.IssueDetailed, error) {
-	client, err := newAPIV3Client()
+	client, err := NewAPIV3Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
@@ -43,7 +43,7 @@ func GetIssue(ctx context.Context, issueID string) (*v3.IssueDetailed, error) {
 
 // ListIssues lists all issues.
 func ListIssues(ctx context.Context, next string, filters *ListIssuesFilters) ([]v3.IssueSummarized, *string, error) {
-	client, err := newAPIV3Client()
+	client, err := NewAPIV3Client()
 	if err != nil {
 		return nil, nil, fmt.Errorf("unable to init client: %w", err)
 	}
@@ -78,7 +78,7 @@ func ListIssues(ctx context.Context, next string, filters *ListIssuesFilters) ([
 			req = req.ScanIds(strings.Join(filters.ScanIDs, ","))
 		}
 		if len(filters.TagsIDs) > 0 {
-			req = req.TagsIds(strings.Join(filters.TagsIDs, ","))
+			req = req.TagIds(strings.Join(filters.TagsIDs, ","))
 		}
 		if filters.Search != "" {
 			req = req.Search(filters.Search)
@@ -106,7 +106,7 @@ func ListIssues(ctx context.Context, next string, filters *ListIssuesFilters) ([
 
 // UpdateIssue updates an issue
 func UpdateIssue(ctx context.Context, issueID string, status v3.ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS) (bool, error) {
-	client, err := newAPIV3Client()
+	client, err := NewAPIV3Client()
 	if err != nil {
 		return false, fmt.Errorf("unable to init client: %w", err)
 	}
@@ -128,7 +128,7 @@ func UpdateIssue(ctx context.Context, issueID string, status v3.ENUMPROPERTIESDA
 
 // ListIssueActivities lists the activities of an issue
 func ListIssueActivities(ctx context.Context, issueID string) ([]v3.ActivitySummarized, error) {
-	client, err := newAPIV3Client()
+	client, err := NewAPIV3Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}

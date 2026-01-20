@@ -19,8 +19,8 @@ var _ MappedNullable = &ProfileDetailedConfigurationFrontendDastScope{}
 
 // ProfileDetailedConfigurationFrontendDastScope struct for ProfileDetailedConfigurationFrontendDastScope
 type ProfileDetailedConfigurationFrontendDastScope struct {
-	Pages *ProfileDetailedConfigurationFrontendDastScopePages `json:"pages,omitempty"`
-	Api *ProfileDetailedConfigurationFrontendDastScopeApi `json:"api,omitempty"`
+	ApiTesting *ProfileDetailedConfigurationFrontendDastScopeApiTesting `json:"api_testing,omitempty"`
+	Crawling *ProfileDetailedConfigurationFrontendDastScopeCrawling `json:"crawling,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -43,68 +43,68 @@ func NewProfileDetailedConfigurationFrontendDastScopeWithDefaults() *ProfileDeta
 	return &this
 }
 
-// GetPages returns the Pages field value if set, zero value otherwise.
-func (o *ProfileDetailedConfigurationFrontendDastScope) GetPages() ProfileDetailedConfigurationFrontendDastScopePages {
-	if o == nil || IsNil(o.Pages) {
-		var ret ProfileDetailedConfigurationFrontendDastScopePages
+// GetApiTesting returns the ApiTesting field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationFrontendDastScope) GetApiTesting() ProfileDetailedConfigurationFrontendDastScopeApiTesting {
+	if o == nil || IsNil(o.ApiTesting) {
+		var ret ProfileDetailedConfigurationFrontendDastScopeApiTesting
 		return ret
 	}
-	return *o.Pages
+	return *o.ApiTesting
 }
 
-// GetPagesOk returns a tuple with the Pages field value if set, nil otherwise
+// GetApiTestingOk returns a tuple with the ApiTesting field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationFrontendDastScope) GetPagesOk() (*ProfileDetailedConfigurationFrontendDastScopePages, bool) {
-	if o == nil || IsNil(o.Pages) {
+func (o *ProfileDetailedConfigurationFrontendDastScope) GetApiTestingOk() (*ProfileDetailedConfigurationFrontendDastScopeApiTesting, bool) {
+	if o == nil || IsNil(o.ApiTesting) {
 		return nil, false
 	}
-	return o.Pages, true
+	return o.ApiTesting, true
 }
 
-// HasPages returns a boolean if a field has been set.
-func (o *ProfileDetailedConfigurationFrontendDastScope) HasPages() bool {
-	if o != nil && !IsNil(o.Pages) {
+// HasApiTesting returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationFrontendDastScope) HasApiTesting() bool {
+	if o != nil && !IsNil(o.ApiTesting) {
 		return true
 	}
 
 	return false
 }
 
-// SetPages gets a reference to the given ProfileDetailedConfigurationFrontendDastScopePages and assigns it to the Pages field.
-func (o *ProfileDetailedConfigurationFrontendDastScope) SetPages(v ProfileDetailedConfigurationFrontendDastScopePages) {
-	o.Pages = &v
+// SetApiTesting gets a reference to the given ProfileDetailedConfigurationFrontendDastScopeApiTesting and assigns it to the ApiTesting field.
+func (o *ProfileDetailedConfigurationFrontendDastScope) SetApiTesting(v ProfileDetailedConfigurationFrontendDastScopeApiTesting) {
+	o.ApiTesting = &v
 }
 
-// GetApi returns the Api field value if set, zero value otherwise.
-func (o *ProfileDetailedConfigurationFrontendDastScope) GetApi() ProfileDetailedConfigurationFrontendDastScopeApi {
-	if o == nil || IsNil(o.Api) {
-		var ret ProfileDetailedConfigurationFrontendDastScopeApi
+// GetCrawling returns the Crawling field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationFrontendDastScope) GetCrawling() ProfileDetailedConfigurationFrontendDastScopeCrawling {
+	if o == nil || IsNil(o.Crawling) {
+		var ret ProfileDetailedConfigurationFrontendDastScopeCrawling
 		return ret
 	}
-	return *o.Api
+	return *o.Crawling
 }
 
-// GetApiOk returns a tuple with the Api field value if set, nil otherwise
+// GetCrawlingOk returns a tuple with the Crawling field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationFrontendDastScope) GetApiOk() (*ProfileDetailedConfigurationFrontendDastScopeApi, bool) {
-	if o == nil || IsNil(o.Api) {
+func (o *ProfileDetailedConfigurationFrontendDastScope) GetCrawlingOk() (*ProfileDetailedConfigurationFrontendDastScopeCrawling, bool) {
+	if o == nil || IsNil(o.Crawling) {
 		return nil, false
 	}
-	return o.Api, true
+	return o.Crawling, true
 }
 
-// HasApi returns a boolean if a field has been set.
-func (o *ProfileDetailedConfigurationFrontendDastScope) HasApi() bool {
-	if o != nil && !IsNil(o.Api) {
+// HasCrawling returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationFrontendDastScope) HasCrawling() bool {
+	if o != nil && !IsNil(o.Crawling) {
 		return true
 	}
 
 	return false
 }
 
-// SetApi gets a reference to the given ProfileDetailedConfigurationFrontendDastScopeApi and assigns it to the Api field.
-func (o *ProfileDetailedConfigurationFrontendDastScope) SetApi(v ProfileDetailedConfigurationFrontendDastScopeApi) {
-	o.Api = &v
+// SetCrawling gets a reference to the given ProfileDetailedConfigurationFrontendDastScopeCrawling and assigns it to the Crawling field.
+func (o *ProfileDetailedConfigurationFrontendDastScope) SetCrawling(v ProfileDetailedConfigurationFrontendDastScopeCrawling) {
+	o.Crawling = &v
 }
 
 func (o ProfileDetailedConfigurationFrontendDastScope) MarshalJSON() ([]byte, error) {
@@ -117,11 +117,11 @@ func (o ProfileDetailedConfigurationFrontendDastScope) MarshalJSON() ([]byte, er
 
 func (o ProfileDetailedConfigurationFrontendDastScope) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Pages) {
-		toSerialize["pages"] = o.Pages
+	if !IsNil(o.ApiTesting) {
+		toSerialize["api_testing"] = o.ApiTesting
 	}
-	if !IsNil(o.Api) {
-		toSerialize["api"] = o.Api
+	if !IsNil(o.Crawling) {
+		toSerialize["crawling"] = o.Crawling
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -145,8 +145,8 @@ func (o *ProfileDetailedConfigurationFrontendDastScope) UnmarshalJSON(data []byt
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "pages")
-		delete(additionalProperties, "api")
+		delete(additionalProperties, "api_testing")
+		delete(additionalProperties, "crawling")
 		o.AdditionalProperties = additionalProperties
 	}
 

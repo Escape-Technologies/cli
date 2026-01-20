@@ -22,7 +22,7 @@ var _ MappedNullable = &CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf
 type CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf7 struct {
 	Key *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf7Name `json:"key,omitempty"`
 	Value *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf7Name `json:"value,omitempty"`
-	If ENUMHEADER `json:"if"`
+	If ENUMCOOKIE `json:"if"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -32,7 +32,7 @@ type _CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf7 CreateCustomRule
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf7(if_ ENUMHEADER) *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf7 {
+func NewCreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf7(if_ ENUMCOOKIE) *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf7 {
 	this := CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf7{}
 	this.If = if_
 	return &this
@@ -111,9 +111,9 @@ func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf7) SetValue(v C
 }
 
 // GetIf returns the If field value
-func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf7) GetIf() ENUMHEADER {
+func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf7) GetIf() ENUMCOOKIE {
 	if o == nil {
-		var ret ENUMHEADER
+		var ret ENUMCOOKIE
 		return ret
 	}
 
@@ -122,7 +122,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf7) GetIf() ENUM
 
 // GetIfOk returns a tuple with the If field value
 // and a boolean to check if the value has been set.
-func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf7) GetIfOk() (*ENUMHEADER, bool) {
+func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf7) GetIfOk() (*ENUMCOOKIE, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -130,7 +130,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf7) GetIfOk() (*
 }
 
 // SetIf sets field value
-func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf7) SetIf(v ENUMHEADER) {
+func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf7) SetIf(v ENUMCOOKIE) {
 	o.If = v
 }
 

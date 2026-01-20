@@ -30,7 +30,6 @@ type ProfileDetailedConfigurationGraphqlApiDast struct {
 	NoOperationName *bool `json:"no_operation_name,omitempty"`
 	Hotstart []string `json:"hotstart,omitempty"`
 	HotstartOnly *bool `json:"hotstart_only,omitempty"`
-	Blocklist *ProfileDetailedConfigurationGraphqlApiDastBlocklist `json:"blocklist,omitempty"`
 	Scope *ProfileDetailedConfigurationGraphqlApiDastScope `json:"scope,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -406,38 +405,6 @@ func (o *ProfileDetailedConfigurationGraphqlApiDast) SetHotstartOnly(v bool) {
 	o.HotstartOnly = &v
 }
 
-// GetBlocklist returns the Blocklist field value if set, zero value otherwise.
-func (o *ProfileDetailedConfigurationGraphqlApiDast) GetBlocklist() ProfileDetailedConfigurationGraphqlApiDastBlocklist {
-	if o == nil || IsNil(o.Blocklist) {
-		var ret ProfileDetailedConfigurationGraphqlApiDastBlocklist
-		return ret
-	}
-	return *o.Blocklist
-}
-
-// GetBlocklistOk returns a tuple with the Blocklist field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationGraphqlApiDast) GetBlocklistOk() (*ProfileDetailedConfigurationGraphqlApiDastBlocklist, bool) {
-	if o == nil || IsNil(o.Blocklist) {
-		return nil, false
-	}
-	return o.Blocklist, true
-}
-
-// HasBlocklist returns a boolean if a field has been set.
-func (o *ProfileDetailedConfigurationGraphqlApiDast) HasBlocklist() bool {
-	if o != nil && !IsNil(o.Blocklist) {
-		return true
-	}
-
-	return false
-}
-
-// SetBlocklist gets a reference to the given ProfileDetailedConfigurationGraphqlApiDastBlocklist and assigns it to the Blocklist field.
-func (o *ProfileDetailedConfigurationGraphqlApiDast) SetBlocklist(v ProfileDetailedConfigurationGraphqlApiDastBlocklist) {
-	o.Blocklist = &v
-}
-
 // GetScope returns the Scope field value if set, zero value otherwise.
 func (o *ProfileDetailedConfigurationGraphqlApiDast) GetScope() ProfileDetailedConfigurationGraphqlApiDastScope {
 	if o == nil || IsNil(o.Scope) {
@@ -513,9 +480,6 @@ func (o ProfileDetailedConfigurationGraphqlApiDast) ToMap() (map[string]interfac
 	if !IsNil(o.HotstartOnly) {
 		toSerialize["hotstart_only"] = o.HotstartOnly
 	}
-	if !IsNil(o.Blocklist) {
-		toSerialize["blocklist"] = o.Blocklist
-	}
 	if !IsNil(o.Scope) {
 		toSerialize["scope"] = o.Scope
 	}
@@ -552,7 +516,6 @@ func (o *ProfileDetailedConfigurationGraphqlApiDast) UnmarshalJSON(data []byte) 
 		delete(additionalProperties, "no_operation_name")
 		delete(additionalProperties, "hotstart")
 		delete(additionalProperties, "hotstart_only")
-		delete(additionalProperties, "blocklist")
 		delete(additionalProperties, "scope")
 		o.AdditionalProperties = additionalProperties
 	}
