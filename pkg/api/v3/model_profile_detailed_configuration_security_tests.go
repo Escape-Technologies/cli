@@ -19,10 +19,6 @@ var _ MappedNullable = &ProfileDetailedConfigurationSecurityTests{}
 
 // ProfileDetailedConfigurationSecurityTests struct for ProfileDetailedConfigurationSecurityTests
 type ProfileDetailedConfigurationSecurityTests struct {
-	DoNotFuzzParams []string `json:"do_not_fuzz_params,omitempty"`
-	MaxAttemptsPerPath *float32 `json:"max_attempts_per_path,omitempty"`
-	MaxRequestsPerPath *float32 `json:"max_requests_per_path,omitempty"`
-	LlmSecurityTesting *bool `json:"llm_security_testing,omitempty"`
 	HighNumberOfCustomScalars *ProfileDetailedConfigurationSecurityTestsHighNumberOfCustomScalars `json:"high_number_of_custom_scalars,omitempty"`
 	HighNumberOfPci *ProfileDetailedConfigurationSecurityTestsHighNumberOfCustomScalars `json:"high_number_of_pci,omitempty"`
 	HighNumberOfPii *ProfileDetailedConfigurationSecurityTestsHighNumberOfCustomScalars `json:"high_number_of_pii,omitempty"`
@@ -62,6 +58,7 @@ type ProfileDetailedConfigurationSecurityTests struct {
 	DnsrecordTxtLength *ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure `json:"dnsrecord_txt_length,omitempty"`
 	DnsrecordTxtSensitive *ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure `json:"dnsrecord_txt_sensitive,omitempty"`
 	DnssecDisabled *ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure `json:"dnssec_disabled,omitempty"`
+	StoredXss *ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure `json:"stored_xss,omitempty"`
 	DomainTakeover *ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure `json:"domain_takeover,omitempty"`
 	DuplicatedObject *ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure `json:"duplicated_object,omitempty"`
 	ErrorTypeInconsistency *ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure `json:"error_type_inconsistency,omitempty"`
@@ -149,9 +146,8 @@ type ProfileDetailedConfigurationSecurityTests struct {
 	RequestSmuggling *ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure `json:"request_smuggling,omitempty"`
 	RequestUrlOverride *ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure `json:"request_url_override,omitempty"`
 	ResourceLimitingBypass *ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure `json:"resource_limiting_bypass,omitempty"`
-	ResponseSize *ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure `json:"response_size,omitempty"`
+	ResponseSize *ProfileDetailedConfigurationSecurityTestsResponseSize `json:"response_size,omitempty"`
 	ResponseTypeMismatch *ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure `json:"response_type_mismatch,omitempty"`
-	SecurityChecks *ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure `json:"security_checks,omitempty"`
 	SensitiveComments *ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure `json:"sensitive_comments,omitempty"`
 	SensitiveEndpointBruteforce *ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure `json:"sensitive_endpoint_bruteforce,omitempty"`
 	ServerError *ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure `json:"server_error,omitempty"`
@@ -197,6 +193,7 @@ type ProfileDetailedConfigurationSecurityTests struct {
 	ZombieObject *ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure `json:"zombie_object,omitempty"`
 	FlaskSessionCookie *ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure `json:"flask_session_cookie,omitempty"`
 	RowLevelSecurity *ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure `json:"row_level_security,omitempty"`
+	CompromisedSupplyChain *ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure `json:"compromised_supply_chain,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -217,134 +214,6 @@ func NewProfileDetailedConfigurationSecurityTests() *ProfileDetailedConfiguratio
 func NewProfileDetailedConfigurationSecurityTestsWithDefaults() *ProfileDetailedConfigurationSecurityTests {
 	this := ProfileDetailedConfigurationSecurityTests{}
 	return &this
-}
-
-// GetDoNotFuzzParams returns the DoNotFuzzParams field value if set, zero value otherwise.
-func (o *ProfileDetailedConfigurationSecurityTests) GetDoNotFuzzParams() []string {
-	if o == nil || IsNil(o.DoNotFuzzParams) {
-		var ret []string
-		return ret
-	}
-	return o.DoNotFuzzParams
-}
-
-// GetDoNotFuzzParamsOk returns a tuple with the DoNotFuzzParams field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationSecurityTests) GetDoNotFuzzParamsOk() ([]string, bool) {
-	if o == nil || IsNil(o.DoNotFuzzParams) {
-		return nil, false
-	}
-	return o.DoNotFuzzParams, true
-}
-
-// HasDoNotFuzzParams returns a boolean if a field has been set.
-func (o *ProfileDetailedConfigurationSecurityTests) HasDoNotFuzzParams() bool {
-	if o != nil && !IsNil(o.DoNotFuzzParams) {
-		return true
-	}
-
-	return false
-}
-
-// SetDoNotFuzzParams gets a reference to the given []string and assigns it to the DoNotFuzzParams field.
-func (o *ProfileDetailedConfigurationSecurityTests) SetDoNotFuzzParams(v []string) {
-	o.DoNotFuzzParams = v
-}
-
-// GetMaxAttemptsPerPath returns the MaxAttemptsPerPath field value if set, zero value otherwise.
-func (o *ProfileDetailedConfigurationSecurityTests) GetMaxAttemptsPerPath() float32 {
-	if o == nil || IsNil(o.MaxAttemptsPerPath) {
-		var ret float32
-		return ret
-	}
-	return *o.MaxAttemptsPerPath
-}
-
-// GetMaxAttemptsPerPathOk returns a tuple with the MaxAttemptsPerPath field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationSecurityTests) GetMaxAttemptsPerPathOk() (*float32, bool) {
-	if o == nil || IsNil(o.MaxAttemptsPerPath) {
-		return nil, false
-	}
-	return o.MaxAttemptsPerPath, true
-}
-
-// HasMaxAttemptsPerPath returns a boolean if a field has been set.
-func (o *ProfileDetailedConfigurationSecurityTests) HasMaxAttemptsPerPath() bool {
-	if o != nil && !IsNil(o.MaxAttemptsPerPath) {
-		return true
-	}
-
-	return false
-}
-
-// SetMaxAttemptsPerPath gets a reference to the given float32 and assigns it to the MaxAttemptsPerPath field.
-func (o *ProfileDetailedConfigurationSecurityTests) SetMaxAttemptsPerPath(v float32) {
-	o.MaxAttemptsPerPath = &v
-}
-
-// GetMaxRequestsPerPath returns the MaxRequestsPerPath field value if set, zero value otherwise.
-func (o *ProfileDetailedConfigurationSecurityTests) GetMaxRequestsPerPath() float32 {
-	if o == nil || IsNil(o.MaxRequestsPerPath) {
-		var ret float32
-		return ret
-	}
-	return *o.MaxRequestsPerPath
-}
-
-// GetMaxRequestsPerPathOk returns a tuple with the MaxRequestsPerPath field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationSecurityTests) GetMaxRequestsPerPathOk() (*float32, bool) {
-	if o == nil || IsNil(o.MaxRequestsPerPath) {
-		return nil, false
-	}
-	return o.MaxRequestsPerPath, true
-}
-
-// HasMaxRequestsPerPath returns a boolean if a field has been set.
-func (o *ProfileDetailedConfigurationSecurityTests) HasMaxRequestsPerPath() bool {
-	if o != nil && !IsNil(o.MaxRequestsPerPath) {
-		return true
-	}
-
-	return false
-}
-
-// SetMaxRequestsPerPath gets a reference to the given float32 and assigns it to the MaxRequestsPerPath field.
-func (o *ProfileDetailedConfigurationSecurityTests) SetMaxRequestsPerPath(v float32) {
-	o.MaxRequestsPerPath = &v
-}
-
-// GetLlmSecurityTesting returns the LlmSecurityTesting field value if set, zero value otherwise.
-func (o *ProfileDetailedConfigurationSecurityTests) GetLlmSecurityTesting() bool {
-	if o == nil || IsNil(o.LlmSecurityTesting) {
-		var ret bool
-		return ret
-	}
-	return *o.LlmSecurityTesting
-}
-
-// GetLlmSecurityTestingOk returns a tuple with the LlmSecurityTesting field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationSecurityTests) GetLlmSecurityTestingOk() (*bool, bool) {
-	if o == nil || IsNil(o.LlmSecurityTesting) {
-		return nil, false
-	}
-	return o.LlmSecurityTesting, true
-}
-
-// HasLlmSecurityTesting returns a boolean if a field has been set.
-func (o *ProfileDetailedConfigurationSecurityTests) HasLlmSecurityTesting() bool {
-	if o != nil && !IsNil(o.LlmSecurityTesting) {
-		return true
-	}
-
-	return false
-}
-
-// SetLlmSecurityTesting gets a reference to the given bool and assigns it to the LlmSecurityTesting field.
-func (o *ProfileDetailedConfigurationSecurityTests) SetLlmSecurityTesting(v bool) {
-	o.LlmSecurityTesting = &v
 }
 
 // GetHighNumberOfCustomScalars returns the HighNumberOfCustomScalars field value if set, zero value otherwise.
@@ -1593,6 +1462,38 @@ func (o *ProfileDetailedConfigurationSecurityTests) HasDnssecDisabled() bool {
 // SetDnssecDisabled gets a reference to the given ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure and assigns it to the DnssecDisabled field.
 func (o *ProfileDetailedConfigurationSecurityTests) SetDnssecDisabled(v ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure) {
 	o.DnssecDisabled = &v
+}
+
+// GetStoredXss returns the StoredXss field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationSecurityTests) GetStoredXss() ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure {
+	if o == nil || IsNil(o.StoredXss) {
+		var ret ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure
+		return ret
+	}
+	return *o.StoredXss
+}
+
+// GetStoredXssOk returns a tuple with the StoredXss field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationSecurityTests) GetStoredXssOk() (*ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure, bool) {
+	if o == nil || IsNil(o.StoredXss) {
+		return nil, false
+	}
+	return o.StoredXss, true
+}
+
+// HasStoredXss returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationSecurityTests) HasStoredXss() bool {
+	if o != nil && !IsNil(o.StoredXss) {
+		return true
+	}
+
+	return false
+}
+
+// SetStoredXss gets a reference to the given ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure and assigns it to the StoredXss field.
+func (o *ProfileDetailedConfigurationSecurityTests) SetStoredXss(v ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure) {
+	o.StoredXss = &v
 }
 
 // GetDomainTakeover returns the DomainTakeover field value if set, zero value otherwise.
@@ -4380,9 +4281,9 @@ func (o *ProfileDetailedConfigurationSecurityTests) SetResourceLimitingBypass(v 
 }
 
 // GetResponseSize returns the ResponseSize field value if set, zero value otherwise.
-func (o *ProfileDetailedConfigurationSecurityTests) GetResponseSize() ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure {
+func (o *ProfileDetailedConfigurationSecurityTests) GetResponseSize() ProfileDetailedConfigurationSecurityTestsResponseSize {
 	if o == nil || IsNil(o.ResponseSize) {
-		var ret ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure
+		var ret ProfileDetailedConfigurationSecurityTestsResponseSize
 		return ret
 	}
 	return *o.ResponseSize
@@ -4390,7 +4291,7 @@ func (o *ProfileDetailedConfigurationSecurityTests) GetResponseSize() ProfileDet
 
 // GetResponseSizeOk returns a tuple with the ResponseSize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationSecurityTests) GetResponseSizeOk() (*ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure, bool) {
+func (o *ProfileDetailedConfigurationSecurityTests) GetResponseSizeOk() (*ProfileDetailedConfigurationSecurityTestsResponseSize, bool) {
 	if o == nil || IsNil(o.ResponseSize) {
 		return nil, false
 	}
@@ -4406,8 +4307,8 @@ func (o *ProfileDetailedConfigurationSecurityTests) HasResponseSize() bool {
 	return false
 }
 
-// SetResponseSize gets a reference to the given ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure and assigns it to the ResponseSize field.
-func (o *ProfileDetailedConfigurationSecurityTests) SetResponseSize(v ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure) {
+// SetResponseSize gets a reference to the given ProfileDetailedConfigurationSecurityTestsResponseSize and assigns it to the ResponseSize field.
+func (o *ProfileDetailedConfigurationSecurityTests) SetResponseSize(v ProfileDetailedConfigurationSecurityTestsResponseSize) {
 	o.ResponseSize = &v
 }
 
@@ -4441,38 +4342,6 @@ func (o *ProfileDetailedConfigurationSecurityTests) HasResponseTypeMismatch() bo
 // SetResponseTypeMismatch gets a reference to the given ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure and assigns it to the ResponseTypeMismatch field.
 func (o *ProfileDetailedConfigurationSecurityTests) SetResponseTypeMismatch(v ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure) {
 	o.ResponseTypeMismatch = &v
-}
-
-// GetSecurityChecks returns the SecurityChecks field value if set, zero value otherwise.
-func (o *ProfileDetailedConfigurationSecurityTests) GetSecurityChecks() ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure {
-	if o == nil || IsNil(o.SecurityChecks) {
-		var ret ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure
-		return ret
-	}
-	return *o.SecurityChecks
-}
-
-// GetSecurityChecksOk returns a tuple with the SecurityChecks field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationSecurityTests) GetSecurityChecksOk() (*ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure, bool) {
-	if o == nil || IsNil(o.SecurityChecks) {
-		return nil, false
-	}
-	return o.SecurityChecks, true
-}
-
-// HasSecurityChecks returns a boolean if a field has been set.
-func (o *ProfileDetailedConfigurationSecurityTests) HasSecurityChecks() bool {
-	if o != nil && !IsNil(o.SecurityChecks) {
-		return true
-	}
-
-	return false
-}
-
-// SetSecurityChecks gets a reference to the given ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure and assigns it to the SecurityChecks field.
-func (o *ProfileDetailedConfigurationSecurityTests) SetSecurityChecks(v ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure) {
-	o.SecurityChecks = &v
 }
 
 // GetSensitiveComments returns the SensitiveComments field value if set, zero value otherwise.
@@ -5915,6 +5784,38 @@ func (o *ProfileDetailedConfigurationSecurityTests) SetRowLevelSecurity(v Profil
 	o.RowLevelSecurity = &v
 }
 
+// GetCompromisedSupplyChain returns the CompromisedSupplyChain field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationSecurityTests) GetCompromisedSupplyChain() ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure {
+	if o == nil || IsNil(o.CompromisedSupplyChain) {
+		var ret ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure
+		return ret
+	}
+	return *o.CompromisedSupplyChain
+}
+
+// GetCompromisedSupplyChainOk returns a tuple with the CompromisedSupplyChain field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationSecurityTests) GetCompromisedSupplyChainOk() (*ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure, bool) {
+	if o == nil || IsNil(o.CompromisedSupplyChain) {
+		return nil, false
+	}
+	return o.CompromisedSupplyChain, true
+}
+
+// HasCompromisedSupplyChain returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationSecurityTests) HasCompromisedSupplyChain() bool {
+	if o != nil && !IsNil(o.CompromisedSupplyChain) {
+		return true
+	}
+
+	return false
+}
+
+// SetCompromisedSupplyChain gets a reference to the given ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure and assigns it to the CompromisedSupplyChain field.
+func (o *ProfileDetailedConfigurationSecurityTests) SetCompromisedSupplyChain(v ProfileDetailedConfigurationSecurityTestsAirflowConfigExposure) {
+	o.CompromisedSupplyChain = &v
+}
+
 func (o ProfileDetailedConfigurationSecurityTests) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -5925,18 +5826,6 @@ func (o ProfileDetailedConfigurationSecurityTests) MarshalJSON() ([]byte, error)
 
 func (o ProfileDetailedConfigurationSecurityTests) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.DoNotFuzzParams) {
-		toSerialize["do_not_fuzz_params"] = o.DoNotFuzzParams
-	}
-	if !IsNil(o.MaxAttemptsPerPath) {
-		toSerialize["max_attempts_per_path"] = o.MaxAttemptsPerPath
-	}
-	if !IsNil(o.MaxRequestsPerPath) {
-		toSerialize["max_requests_per_path"] = o.MaxRequestsPerPath
-	}
-	if !IsNil(o.LlmSecurityTesting) {
-		toSerialize["llm_security_testing"] = o.LlmSecurityTesting
-	}
 	if !IsNil(o.HighNumberOfCustomScalars) {
 		toSerialize["high_number_of_custom_scalars"] = o.HighNumberOfCustomScalars
 	}
@@ -6053,6 +5942,9 @@ func (o ProfileDetailedConfigurationSecurityTests) ToMap() (map[string]interface
 	}
 	if !IsNil(o.DnssecDisabled) {
 		toSerialize["dnssec_disabled"] = o.DnssecDisabled
+	}
+	if !IsNil(o.StoredXss) {
+		toSerialize["stored_xss"] = o.StoredXss
 	}
 	if !IsNil(o.DomainTakeover) {
 		toSerialize["domain_takeover"] = o.DomainTakeover
@@ -6321,9 +6213,6 @@ func (o ProfileDetailedConfigurationSecurityTests) ToMap() (map[string]interface
 	if !IsNil(o.ResponseTypeMismatch) {
 		toSerialize["response_type_mismatch"] = o.ResponseTypeMismatch
 	}
-	if !IsNil(o.SecurityChecks) {
-		toSerialize["security_checks"] = o.SecurityChecks
-	}
 	if !IsNil(o.SensitiveComments) {
 		toSerialize["sensitive_comments"] = o.SensitiveComments
 	}
@@ -6459,6 +6348,9 @@ func (o ProfileDetailedConfigurationSecurityTests) ToMap() (map[string]interface
 	if !IsNil(o.RowLevelSecurity) {
 		toSerialize["row_level_security"] = o.RowLevelSecurity
 	}
+	if !IsNil(o.CompromisedSupplyChain) {
+		toSerialize["compromised_supply_chain"] = o.CompromisedSupplyChain
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -6481,10 +6373,6 @@ func (o *ProfileDetailedConfigurationSecurityTests) UnmarshalJSON(data []byte) (
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "do_not_fuzz_params")
-		delete(additionalProperties, "max_attempts_per_path")
-		delete(additionalProperties, "max_requests_per_path")
-		delete(additionalProperties, "llm_security_testing")
 		delete(additionalProperties, "high_number_of_custom_scalars")
 		delete(additionalProperties, "high_number_of_pci")
 		delete(additionalProperties, "high_number_of_pii")
@@ -6524,6 +6412,7 @@ func (o *ProfileDetailedConfigurationSecurityTests) UnmarshalJSON(data []byte) (
 		delete(additionalProperties, "dnsrecord_txt_length")
 		delete(additionalProperties, "dnsrecord_txt_sensitive")
 		delete(additionalProperties, "dnssec_disabled")
+		delete(additionalProperties, "stored_xss")
 		delete(additionalProperties, "domain_takeover")
 		delete(additionalProperties, "duplicated_object")
 		delete(additionalProperties, "error_type_inconsistency")
@@ -6613,7 +6502,6 @@ func (o *ProfileDetailedConfigurationSecurityTests) UnmarshalJSON(data []byte) (
 		delete(additionalProperties, "resource_limiting_bypass")
 		delete(additionalProperties, "response_size")
 		delete(additionalProperties, "response_type_mismatch")
-		delete(additionalProperties, "security_checks")
 		delete(additionalProperties, "sensitive_comments")
 		delete(additionalProperties, "sensitive_endpoint_bruteforce")
 		delete(additionalProperties, "server_error")
@@ -6659,6 +6547,7 @@ func (o *ProfileDetailedConfigurationSecurityTests) UnmarshalJSON(data []byte) (
 		delete(additionalProperties, "zombie_object")
 		delete(additionalProperties, "flask_session_cookie")
 		delete(additionalProperties, "row_level_security")
+		delete(additionalProperties, "compromised_supply_chain")
 		o.AdditionalProperties = additionalProperties
 	}
 

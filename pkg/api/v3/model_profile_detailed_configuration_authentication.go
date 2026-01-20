@@ -26,6 +26,7 @@ type ProfileDetailedConfigurationAuthentication struct {
 	Validation *bool `json:"validation,omitempty"`
 	Proxy *string `json:"proxy,omitempty"`
 	Presets []ProfileDetailedConfigurationAuthenticationPresetsInner `json:"presets,omitempty"`
+	MultiUserIsFallback *bool `json:"multi_user_is_fallback,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -272,6 +273,38 @@ func (o *ProfileDetailedConfigurationAuthentication) SetPresets(v []ProfileDetai
 	o.Presets = v
 }
 
+// GetMultiUserIsFallback returns the MultiUserIsFallback field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationAuthentication) GetMultiUserIsFallback() bool {
+	if o == nil || IsNil(o.MultiUserIsFallback) {
+		var ret bool
+		return ret
+	}
+	return *o.MultiUserIsFallback
+}
+
+// GetMultiUserIsFallbackOk returns a tuple with the MultiUserIsFallback field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationAuthentication) GetMultiUserIsFallbackOk() (*bool, bool) {
+	if o == nil || IsNil(o.MultiUserIsFallback) {
+		return nil, false
+	}
+	return o.MultiUserIsFallback, true
+}
+
+// HasMultiUserIsFallback returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationAuthentication) HasMultiUserIsFallback() bool {
+	if o != nil && !IsNil(o.MultiUserIsFallback) {
+		return true
+	}
+
+	return false
+}
+
+// SetMultiUserIsFallback gets a reference to the given bool and assigns it to the MultiUserIsFallback field.
+func (o *ProfileDetailedConfigurationAuthentication) SetMultiUserIsFallback(v bool) {
+	o.MultiUserIsFallback = &v
+}
+
 func (o ProfileDetailedConfigurationAuthentication) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -303,6 +336,9 @@ func (o ProfileDetailedConfigurationAuthentication) ToMap() (map[string]interfac
 	if !IsNil(o.Presets) {
 		toSerialize["presets"] = o.Presets
 	}
+	if !IsNil(o.MultiUserIsFallback) {
+		toSerialize["multi_user_is_fallback"] = o.MultiUserIsFallback
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -332,6 +368,7 @@ func (o *ProfileDetailedConfigurationAuthentication) UnmarshalJSON(data []byte) 
 		delete(additionalProperties, "validation")
 		delete(additionalProperties, "proxy")
 		delete(additionalProperties, "presets")
+		delete(additionalProperties, "multi_user_is_fallback")
 		o.AdditionalProperties = additionalProperties
 	}
 

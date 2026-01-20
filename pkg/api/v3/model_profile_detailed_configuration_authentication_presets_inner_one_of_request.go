@@ -21,7 +21,7 @@ var _ MappedNullable = &ProfileDetailedConfigurationAuthenticationPresetsInnerOn
 // ProfileDetailedConfigurationAuthenticationPresetsInnerOneOfRequest struct for ProfileDetailedConfigurationAuthenticationPresetsInnerOneOfRequest
 type ProfileDetailedConfigurationAuthenticationPresetsInnerOneOfRequest struct {
 	Url string `json:"url"`
-	Method ENUMPROPERTIESCONFIGURATIONPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS0PROPERTIESPARAMETERSPROPERTIESMETHOD `json:"method"`
+	Method ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD `json:"method"`
 	Headers map[string]string `json:"headers,omitempty"`
 	Cookies map[string]string `json:"cookies,omitempty"`
 	QueryParameters map[string]string `json:"query_parameters,omitempty"`
@@ -35,7 +35,7 @@ type _ProfileDetailedConfigurationAuthenticationPresetsInnerOneOfRequest Profile
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProfileDetailedConfigurationAuthenticationPresetsInnerOneOfRequest(url string, method ENUMPROPERTIESCONFIGURATIONPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS0PROPERTIESPARAMETERSPROPERTIESMETHOD) *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOfRequest {
+func NewProfileDetailedConfigurationAuthenticationPresetsInnerOneOfRequest(url string, method ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD) *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOfRequest {
 	this := ProfileDetailedConfigurationAuthenticationPresetsInnerOneOfRequest{}
 	this.Url = url
 	this.Method = method
@@ -75,9 +75,9 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOfRequest) Set
 }
 
 // GetMethod returns the Method field value
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOfRequest) GetMethod() ENUMPROPERTIESCONFIGURATIONPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS0PROPERTIESPARAMETERSPROPERTIESMETHOD {
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOfRequest) GetMethod() ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD {
 	if o == nil {
-		var ret ENUMPROPERTIESCONFIGURATIONPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS0PROPERTIESPARAMETERSPROPERTIESMETHOD
+		var ret ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD
 		return ret
 	}
 
@@ -86,7 +86,7 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOfRequest) Get
 
 // GetMethodOk returns a tuple with the Method field value
 // and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOfRequest) GetMethodOk() (*ENUMPROPERTIESCONFIGURATIONPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS0PROPERTIESPARAMETERSPROPERTIESMETHOD, bool) {
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOfRequest) GetMethodOk() (*ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -94,7 +94,7 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOfRequest) Get
 }
 
 // SetMethod sets field value
-func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOfRequest) SetMethod(v ENUMPROPERTIESCONFIGURATIONPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS0PROPERTIESPARAMETERSPROPERTIESMETHOD) {
+func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOfRequest) SetMethod(v ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD) {
 	o.Method = v
 }
 

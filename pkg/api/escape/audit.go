@@ -18,7 +18,7 @@ type ListAuditLogsFilters struct {
 
 // ListAuditLogs lists audit logs
 func ListAuditLogs(ctx context.Context, next string, filters *ListAuditLogsFilters) ([]v3.AuditLogSummarized, *string, error) {
-	client, err := newAPIV3Client()
+	client, err := NewAPIV3Client()
 	if err != nil {
 		return nil, nil, fmt.Errorf("unable to init client: %w", err)
 	}

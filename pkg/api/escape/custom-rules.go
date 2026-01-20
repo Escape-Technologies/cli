@@ -11,7 +11,7 @@ import (
 
 // ListCustomRules lists all custom rules
 func ListCustomRules(ctx context.Context) ([]v3.CustomRuleSummarized, error) {
-	client, err := newAPIV3Client()
+	client, err := NewAPIV3Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
@@ -25,7 +25,7 @@ func ListCustomRules(ctx context.Context) ([]v3.CustomRuleSummarized, error) {
 
 // GetCustomRule gets a custom rule
 func GetCustomRule(ctx context.Context, id string) (*v3.CreateCustomRule200Response, error) {
-	client, err := newAPIV3Client()
+	client, err := NewAPIV3Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
@@ -39,7 +39,7 @@ func GetCustomRule(ctx context.Context, id string) (*v3.CreateCustomRule200Respo
 
 // CreateCustomRule creates a custom rule from raw JSON
 func CreateCustomRule(ctx context.Context, data []byte) (*v3.CreateCustomRule200Response, error) {
-    client, err := newAPIV3Client()
+    client, err := NewAPIV3Client()
     if err != nil {
         return nil, fmt.Errorf("unable to init client: %w", err)
     }
@@ -57,7 +57,7 @@ func CreateCustomRule(ctx context.Context, data []byte) (*v3.CreateCustomRule200
 
 // UpdateCustomRule updates a custom rule from raw JSON
 func UpdateCustomRule(ctx context.Context, id string, data []byte) (*v3.CreateCustomRule200Response, error) {
-    client, err := newAPIV3Client()
+    client, err := NewAPIV3Client()
     if err != nil {
         return nil, fmt.Errorf("unable to init client: %w", err)
     }
@@ -79,7 +79,7 @@ func UpdateCustomRule(ctx context.Context, id string, data []byte) (*v3.CreateCu
 
 // DeleteCustomRule deletes a custom rule
 func DeleteCustomRule(ctx context.Context, id string) (*v3.DeleteCustomRule200Response, error) {
-	client, err := newAPIV3Client()
+	client, err := NewAPIV3Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}

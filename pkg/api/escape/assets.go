@@ -16,15 +16,15 @@ import (
 
 // ListAssetsFilters holds optional filters for listing assets
 type ListAssetsFilters struct {
-	AssetTypes []string
-	AssetStatuses []string
-	Search string
+	AssetTypes      []string
+	AssetStatuses   []string
+	Search          string
 	ManuallyCreated bool
 }
 
 // ListAssets lists all assets
 func ListAssets(ctx context.Context, next string, filters *ListAssetsFilters) ([]v3.AssetSummarized, *string, error) {
-	client, err := newAPIV3Client()
+	client, err := NewAPIV3Client()
 	if err != nil {
 		return nil, nil, fmt.Errorf("unable to init client: %w", err)
 	}
@@ -56,7 +56,7 @@ func ListAssets(ctx context.Context, next string, filters *ListAssetsFilters) ([
 
 // GetAsset gets an asset by ID
 func GetAsset(ctx context.Context, id string) (*v3.AssetDetailed, error) {
-	client, err := newAPIV3Client()
+	client, err := NewAPIV3Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
@@ -69,7 +69,7 @@ func GetAsset(ctx context.Context, id string) (*v3.AssetDetailed, error) {
 
 // DeleteAsset deletes an asset by ID
 func DeleteAsset(ctx context.Context, id string) error {
-	client, err := newAPIV3Client()
+	client, err := NewAPIV3Client()
 	if err != nil {
 		return fmt.Errorf("unable to init client: %w", err)
 	}
@@ -90,7 +90,7 @@ func UpdateAsset(
 	assetStatus *v3.ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS,
 	assetTagIDs *[]string,
 ) error {
-	client, err := newAPIV3Client()
+	client, err := NewAPIV3Client()
 	if err != nil {
 		return fmt.Errorf("unable to init client: %w", err)
 	}
@@ -135,9 +135,9 @@ func UpdateAsset(
 // normalizeAssetType normalizes asset type tokens to match generated method names
 // e.g. KUBERNETES_CLUSTER -> KUBERNETESCLUSTER, http-endpoint -> httpendpoint
 func normalizeAssetType(s string) string {
-    s = strings.ReplaceAll(s, "_", "")
-    s = strings.ReplaceAll(s, "-", "")
-    return s
+	s = strings.ReplaceAll(s, "_", "")
+	s = strings.ReplaceAll(s, "-", "")
+	return s
 }
 
 // CreateAsset creates an asset
@@ -147,7 +147,7 @@ func CreateAsset(ctx context.Context, data []byte, assetType string) (interface{
 		method := typ.Method(i)
 		if strings.HasPrefix(method.Name, "Create") && !strings.HasSuffix(method.Name, "Execute") {
 			if strings.Contains(strings.ToUpper(method.Name), strings.ToUpper(normalizeAssetType(assetType))) {
-				client, err := newAPIV3Client()
+				client, err := NewAPIV3Client()
 				if err != nil {
 					return nil, fmt.Errorf("unable to init client: %w", err)
 				}
@@ -168,7 +168,7 @@ func CreateAsset(ctx context.Context, data []byte, assetType string) (interface{
 				// unmarshal raw JSON to typed payload
 				payloadType := setter.Type().In(0)
 				payloadPtr := reflect.New(payloadType)
-				
+
 				err = json.Unmarshal(data, payloadPtr.Interface())
 				if err != nil {
 					return nil, fmt.Errorf("invalid JSON for %s: %w", payloadType.Name(), err)
@@ -182,7 +182,7 @@ func CreateAsset(ctx context.Context, data []byte, assetType string) (interface{
 					return nil, errors.New("failed to find Execute method")
 				}
 				results := executeMethod.Call(nil)
-				
+
 				return results[0].Interface(), nil
 			}
 		}

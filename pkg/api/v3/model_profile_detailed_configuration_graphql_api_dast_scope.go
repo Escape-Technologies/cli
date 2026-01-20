@@ -19,8 +19,9 @@ var _ MappedNullable = &ProfileDetailedConfigurationGraphqlApiDastScope{}
 
 // ProfileDetailedConfigurationGraphqlApiDastScope struct for ProfileDetailedConfigurationGraphqlApiDastScope
 type ProfileDetailedConfigurationGraphqlApiDastScope struct {
-	Blocklist []string `json:"blocklist,omitempty"`
-	Allowlist []string `json:"allowlist,omitempty"`
+	ExtendGlobalScope *bool `json:"extend_global_scope,omitempty"`
+	Allowlist []ProfileDetailedConfigurationScopeAllowlistInner `json:"allowlist,omitempty"`
+	Blocklist []ProfileDetailedConfigurationScopeAllowlistInner `json:"blocklist,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -43,42 +44,42 @@ func NewProfileDetailedConfigurationGraphqlApiDastScopeWithDefaults() *ProfileDe
 	return &this
 }
 
-// GetBlocklist returns the Blocklist field value if set, zero value otherwise.
-func (o *ProfileDetailedConfigurationGraphqlApiDastScope) GetBlocklist() []string {
-	if o == nil || IsNil(o.Blocklist) {
-		var ret []string
+// GetExtendGlobalScope returns the ExtendGlobalScope field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationGraphqlApiDastScope) GetExtendGlobalScope() bool {
+	if o == nil || IsNil(o.ExtendGlobalScope) {
+		var ret bool
 		return ret
 	}
-	return o.Blocklist
+	return *o.ExtendGlobalScope
 }
 
-// GetBlocklistOk returns a tuple with the Blocklist field value if set, nil otherwise
+// GetExtendGlobalScopeOk returns a tuple with the ExtendGlobalScope field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationGraphqlApiDastScope) GetBlocklistOk() ([]string, bool) {
-	if o == nil || IsNil(o.Blocklist) {
+func (o *ProfileDetailedConfigurationGraphqlApiDastScope) GetExtendGlobalScopeOk() (*bool, bool) {
+	if o == nil || IsNil(o.ExtendGlobalScope) {
 		return nil, false
 	}
-	return o.Blocklist, true
+	return o.ExtendGlobalScope, true
 }
 
-// HasBlocklist returns a boolean if a field has been set.
-func (o *ProfileDetailedConfigurationGraphqlApiDastScope) HasBlocklist() bool {
-	if o != nil && !IsNil(o.Blocklist) {
+// HasExtendGlobalScope returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationGraphqlApiDastScope) HasExtendGlobalScope() bool {
+	if o != nil && !IsNil(o.ExtendGlobalScope) {
 		return true
 	}
 
 	return false
 }
 
-// SetBlocklist gets a reference to the given []string and assigns it to the Blocklist field.
-func (o *ProfileDetailedConfigurationGraphqlApiDastScope) SetBlocklist(v []string) {
-	o.Blocklist = v
+// SetExtendGlobalScope gets a reference to the given bool and assigns it to the ExtendGlobalScope field.
+func (o *ProfileDetailedConfigurationGraphqlApiDastScope) SetExtendGlobalScope(v bool) {
+	o.ExtendGlobalScope = &v
 }
 
 // GetAllowlist returns the Allowlist field value if set, zero value otherwise.
-func (o *ProfileDetailedConfigurationGraphqlApiDastScope) GetAllowlist() []string {
+func (o *ProfileDetailedConfigurationGraphqlApiDastScope) GetAllowlist() []ProfileDetailedConfigurationScopeAllowlistInner {
 	if o == nil || IsNil(o.Allowlist) {
-		var ret []string
+		var ret []ProfileDetailedConfigurationScopeAllowlistInner
 		return ret
 	}
 	return o.Allowlist
@@ -86,7 +87,7 @@ func (o *ProfileDetailedConfigurationGraphqlApiDastScope) GetAllowlist() []strin
 
 // GetAllowlistOk returns a tuple with the Allowlist field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationGraphqlApiDastScope) GetAllowlistOk() ([]string, bool) {
+func (o *ProfileDetailedConfigurationGraphqlApiDastScope) GetAllowlistOk() ([]ProfileDetailedConfigurationScopeAllowlistInner, bool) {
 	if o == nil || IsNil(o.Allowlist) {
 		return nil, false
 	}
@@ -102,9 +103,41 @@ func (o *ProfileDetailedConfigurationGraphqlApiDastScope) HasAllowlist() bool {
 	return false
 }
 
-// SetAllowlist gets a reference to the given []string and assigns it to the Allowlist field.
-func (o *ProfileDetailedConfigurationGraphqlApiDastScope) SetAllowlist(v []string) {
+// SetAllowlist gets a reference to the given []ProfileDetailedConfigurationScopeAllowlistInner and assigns it to the Allowlist field.
+func (o *ProfileDetailedConfigurationGraphqlApiDastScope) SetAllowlist(v []ProfileDetailedConfigurationScopeAllowlistInner) {
 	o.Allowlist = v
+}
+
+// GetBlocklist returns the Blocklist field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationGraphqlApiDastScope) GetBlocklist() []ProfileDetailedConfigurationScopeAllowlistInner {
+	if o == nil || IsNil(o.Blocklist) {
+		var ret []ProfileDetailedConfigurationScopeAllowlistInner
+		return ret
+	}
+	return o.Blocklist
+}
+
+// GetBlocklistOk returns a tuple with the Blocklist field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationGraphqlApiDastScope) GetBlocklistOk() ([]ProfileDetailedConfigurationScopeAllowlistInner, bool) {
+	if o == nil || IsNil(o.Blocklist) {
+		return nil, false
+	}
+	return o.Blocklist, true
+}
+
+// HasBlocklist returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationGraphqlApiDastScope) HasBlocklist() bool {
+	if o != nil && !IsNil(o.Blocklist) {
+		return true
+	}
+
+	return false
+}
+
+// SetBlocklist gets a reference to the given []ProfileDetailedConfigurationScopeAllowlistInner and assigns it to the Blocklist field.
+func (o *ProfileDetailedConfigurationGraphqlApiDastScope) SetBlocklist(v []ProfileDetailedConfigurationScopeAllowlistInner) {
+	o.Blocklist = v
 }
 
 func (o ProfileDetailedConfigurationGraphqlApiDastScope) MarshalJSON() ([]byte, error) {
@@ -117,11 +150,14 @@ func (o ProfileDetailedConfigurationGraphqlApiDastScope) MarshalJSON() ([]byte, 
 
 func (o ProfileDetailedConfigurationGraphqlApiDastScope) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Blocklist) {
-		toSerialize["blocklist"] = o.Blocklist
+	if !IsNil(o.ExtendGlobalScope) {
+		toSerialize["extend_global_scope"] = o.ExtendGlobalScope
 	}
 	if !IsNil(o.Allowlist) {
 		toSerialize["allowlist"] = o.Allowlist
+	}
+	if !IsNil(o.Blocklist) {
+		toSerialize["blocklist"] = o.Blocklist
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -145,8 +181,9 @@ func (o *ProfileDetailedConfigurationGraphqlApiDastScope) UnmarshalJSON(data []b
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "blocklist")
+		delete(additionalProperties, "extend_global_scope")
 		delete(additionalProperties, "allowlist")
+		delete(additionalProperties, "blocklist")
 		o.AdditionalProperties = additionalProperties
 	}
 

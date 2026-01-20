@@ -11,7 +11,7 @@ import (
 
 // GetUploadSignedURL gets a signed url
 func GetUploadSignedURL(ctx context.Context) (*v3.UploadSummary, error) {
-	client, err := newAPIV3Client()
+	client, err := NewAPIV3Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}

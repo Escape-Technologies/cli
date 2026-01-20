@@ -23,7 +23,7 @@ type ListScansFilters struct {
 
 // ListScans lists all scans for an application
 func ListScans(ctx context.Context, next string, filters *ListScansFilters) ([]v3.ScanSummarized1, *string, error) {
-	client, err := newAPIV3Client()
+	client, err := NewAPIV3Client()
 	if err != nil {
 		return nil, nil, fmt.Errorf("unable to init client: %w", err)
 	}
@@ -67,7 +67,7 @@ func ListScans(ctx context.Context, next string, filters *ListScansFilters) ([]v
 
 // GetScan returns a scan by its ID
 func GetScan(ctx context.Context, scanID string) (*v3.ScanDetailed1, error) {
-	client, err := newAPIV3Client()
+	client, err := NewAPIV3Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
@@ -80,7 +80,7 @@ func GetScan(ctx context.Context, scanID string) (*v3.ScanDetailed1, error) {
 
 // GetScanIssues returns issues found in a scan
 func GetScanIssues(ctx context.Context, scanID string) ([]v3.IssueSummarized, error) {
-	client, err := newAPIV3Client()
+	client, err := NewAPIV3Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
@@ -111,7 +111,7 @@ func StartScan(
 	additionalProperties map[string]interface{},
 	initiator v3.ENUMPROPERTIESDATAITEMSPROPERTIESINITIATORSITEMS,
 ) (*v3.ScanDetailed1, error) {
-	client, err := newAPIV3Client()
+	client, err := NewAPIV3Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
@@ -136,7 +136,7 @@ func StartScan(
 
 // CancelScan cancels a scan
 func CancelScan(ctx context.Context, scanID string) error {
-	client, err := newAPIV3Client()
+	client, err := NewAPIV3Client()
 	if err != nil {
 		return fmt.Errorf("unable to init client: %w", err)
 	}
@@ -153,7 +153,7 @@ func CancelScan(ctx context.Context, scanID string) error {
 
 // IgnoreScan ignore a scan
 func IgnoreScan(ctx context.Context, scanID string) error {
-	client, err := newAPIV3Client()
+	client, err := NewAPIV3Client()
 	if err != nil {
 		return fmt.Errorf("unable to init client: %w", err)
 	}

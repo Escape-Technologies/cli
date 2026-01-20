@@ -20,6 +20,8 @@ var _ MappedNullable = &CreateAssetIPV4Request{}
 
 // CreateAssetIPV4Request struct for CreateAssetIPV4Request
 type CreateAssetIPV4Request struct {
+	// The list of project IDs bind the asset on.
+	ProjectIds []string `json:"projectIds,omitempty"`
 	AssetClass ENUMHOST `json:"asset_class"`
 	WizProviderId *string `json:"wiz_provider_id,omitempty"`
 	WizCloudPlatform *string `json:"wiz_cloud_platform,omitempty"`
@@ -30,6 +32,7 @@ type CreateAssetIPV4Request struct {
 	OpenPorts []CreateAssetDNSRequestOpenPortsInner `json:"open_ports,omitempty"`
 	PortsInsights []float32 `json:"ports_insights,omitempty"`
 	PathsInsights []CreateAssetDNSRequestPathsInsightsInner `json:"paths_insights,omitempty"`
+	Private *bool `json:"private,omitempty"`
 	ThirdParty *ENUMPROPERTIESTHIRDPARTY `json:"third_party,omitempty"`
 	Organization *string `json:"organization,omitempty"`
 	Country *string `json:"country,omitempty"`
@@ -56,6 +59,38 @@ func NewCreateAssetIPV4Request(assetClass ENUMHOST, assetType ENUMIPV4, address 
 func NewCreateAssetIPV4RequestWithDefaults() *CreateAssetIPV4Request {
 	this := CreateAssetIPV4Request{}
 	return &this
+}
+
+// GetProjectIds returns the ProjectIds field value if set, zero value otherwise.
+func (o *CreateAssetIPV4Request) GetProjectIds() []string {
+	if o == nil || IsNil(o.ProjectIds) {
+		var ret []string
+		return ret
+	}
+	return o.ProjectIds
+}
+
+// GetProjectIdsOk returns a tuple with the ProjectIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetIPV4Request) GetProjectIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.ProjectIds) {
+		return nil, false
+	}
+	return o.ProjectIds, true
+}
+
+// HasProjectIds returns a boolean if a field has been set.
+func (o *CreateAssetIPV4Request) HasProjectIds() bool {
+	if o != nil && !IsNil(o.ProjectIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetProjectIds gets a reference to the given []string and assigns it to the ProjectIds field.
+func (o *CreateAssetIPV4Request) SetProjectIds(v []string) {
+	o.ProjectIds = v
 }
 
 // GetAssetClass returns the AssetClass field value
@@ -354,6 +389,38 @@ func (o *CreateAssetIPV4Request) SetPathsInsights(v []CreateAssetDNSRequestPaths
 	o.PathsInsights = v
 }
 
+// GetPrivate returns the Private field value if set, zero value otherwise.
+func (o *CreateAssetIPV4Request) GetPrivate() bool {
+	if o == nil || IsNil(o.Private) {
+		var ret bool
+		return ret
+	}
+	return *o.Private
+}
+
+// GetPrivateOk returns a tuple with the Private field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetIPV4Request) GetPrivateOk() (*bool, bool) {
+	if o == nil || IsNil(o.Private) {
+		return nil, false
+	}
+	return o.Private, true
+}
+
+// HasPrivate returns a boolean if a field has been set.
+func (o *CreateAssetIPV4Request) HasPrivate() bool {
+	if o != nil && !IsNil(o.Private) {
+		return true
+	}
+
+	return false
+}
+
+// SetPrivate gets a reference to the given bool and assigns it to the Private field.
+func (o *CreateAssetIPV4Request) SetPrivate(v bool) {
+	o.Private = &v
+}
+
 // GetThirdParty returns the ThirdParty field value if set, zero value otherwise.
 func (o *CreateAssetIPV4Request) GetThirdParty() ENUMPROPERTIESTHIRDPARTY {
 	if o == nil || IsNil(o.ThirdParty) {
@@ -460,6 +527,9 @@ func (o CreateAssetIPV4Request) MarshalJSON() ([]byte, error) {
 
 func (o CreateAssetIPV4Request) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.ProjectIds) {
+		toSerialize["projectIds"] = o.ProjectIds
+	}
 	toSerialize["asset_class"] = o.AssetClass
 	if !IsNil(o.WizProviderId) {
 		toSerialize["wiz_provider_id"] = o.WizProviderId
@@ -483,6 +553,9 @@ func (o CreateAssetIPV4Request) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.PathsInsights) {
 		toSerialize["paths_insights"] = o.PathsInsights
+	}
+	if !IsNil(o.Private) {
+		toSerialize["private"] = o.Private
 	}
 	if !IsNil(o.ThirdParty) {
 		toSerialize["third_party"] = o.ThirdParty
@@ -538,6 +611,7 @@ func (o *CreateAssetIPV4Request) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "projectIds")
 		delete(additionalProperties, "asset_class")
 		delete(additionalProperties, "wiz_provider_id")
 		delete(additionalProperties, "wiz_cloud_platform")
@@ -548,6 +622,7 @@ func (o *CreateAssetIPV4Request) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "open_ports")
 		delete(additionalProperties, "ports_insights")
 		delete(additionalProperties, "paths_insights")
+		delete(additionalProperties, "private")
 		delete(additionalProperties, "third_party")
 		delete(additionalProperties, "organization")
 		delete(additionalProperties, "country")

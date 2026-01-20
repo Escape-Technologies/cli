@@ -32,6 +32,7 @@ type ProfileDetailedConfigurationFrontendDast struct {
 	UsePersistence *bool `json:"use_persistence,omitempty"`
 	EscapeUserHeader *bool `json:"escape_user_header,omitempty"`
 	PrefetchSitemap *bool `json:"prefetch_sitemap,omitempty"`
+	CrawlingTuning *ProfileDetailedConfigurationFrontendDastCrawlingTuning `json:"crawling_tuning,omitempty"`
 	StaticCrawling *ProfileDetailedConfigurationFrontendDastStaticCrawling `json:"static_crawling,omitempty"`
 	LogoutDetection *ProfileDetailedConfigurationFrontendDastLogoutDetection `json:"logout_detection,omitempty"`
 	Scope *ProfileDetailedConfigurationFrontendDastScope `json:"scope,omitempty"`
@@ -474,6 +475,38 @@ func (o *ProfileDetailedConfigurationFrontendDast) SetPrefetchSitemap(v bool) {
 	o.PrefetchSitemap = &v
 }
 
+// GetCrawlingTuning returns the CrawlingTuning field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationFrontendDast) GetCrawlingTuning() ProfileDetailedConfigurationFrontendDastCrawlingTuning {
+	if o == nil || IsNil(o.CrawlingTuning) {
+		var ret ProfileDetailedConfigurationFrontendDastCrawlingTuning
+		return ret
+	}
+	return *o.CrawlingTuning
+}
+
+// GetCrawlingTuningOk returns a tuple with the CrawlingTuning field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationFrontendDast) GetCrawlingTuningOk() (*ProfileDetailedConfigurationFrontendDastCrawlingTuning, bool) {
+	if o == nil || IsNil(o.CrawlingTuning) {
+		return nil, false
+	}
+	return o.CrawlingTuning, true
+}
+
+// HasCrawlingTuning returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationFrontendDast) HasCrawlingTuning() bool {
+	if o != nil && !IsNil(o.CrawlingTuning) {
+		return true
+	}
+
+	return false
+}
+
+// SetCrawlingTuning gets a reference to the given ProfileDetailedConfigurationFrontendDastCrawlingTuning and assigns it to the CrawlingTuning field.
+func (o *ProfileDetailedConfigurationFrontendDast) SetCrawlingTuning(v ProfileDetailedConfigurationFrontendDastCrawlingTuning) {
+	o.CrawlingTuning = &v
+}
+
 // GetStaticCrawling returns the StaticCrawling field value if set, zero value otherwise.
 func (o *ProfileDetailedConfigurationFrontendDast) GetStaticCrawling() ProfileDetailedConfigurationFrontendDastStaticCrawling {
 	if o == nil || IsNil(o.StaticCrawling) {
@@ -651,6 +684,9 @@ func (o ProfileDetailedConfigurationFrontendDast) ToMap() (map[string]interface{
 	if !IsNil(o.PrefetchSitemap) {
 		toSerialize["prefetch_sitemap"] = o.PrefetchSitemap
 	}
+	if !IsNil(o.CrawlingTuning) {
+		toSerialize["crawling_tuning"] = o.CrawlingTuning
+	}
 	if !IsNil(o.StaticCrawling) {
 		toSerialize["static_crawling"] = o.StaticCrawling
 	}
@@ -698,6 +734,7 @@ func (o *ProfileDetailedConfigurationFrontendDast) UnmarshalJSON(data []byte) (e
 		delete(additionalProperties, "use_persistence")
 		delete(additionalProperties, "escape_user_header")
 		delete(additionalProperties, "prefetch_sitemap")
+		delete(additionalProperties, "crawling_tuning")
 		delete(additionalProperties, "static_crawling")
 		delete(additionalProperties, "logout_detection")
 		delete(additionalProperties, "scope")

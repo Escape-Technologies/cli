@@ -24,6 +24,7 @@ type ProfileDetailedConfigurationAuthenticationUsersInnerCredentialsActionsInner
 	AllowFailure *bool `json:"allow_failure,omitempty"`
 	Locator string `json:"locator"`
 	Timeout *float32 `json:"timeout,omitempty"`
+	SelectFirstIfMultiple *bool `json:"select_first_if_multiple,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -160,6 +161,38 @@ func (o *ProfileDetailedConfigurationAuthenticationUsersInnerCredentialsActionsI
 	o.Timeout = &v
 }
 
+// GetSelectFirstIfMultiple returns the SelectFirstIfMultiple field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf4) GetSelectFirstIfMultiple() bool {
+	if o == nil || IsNil(o.SelectFirstIfMultiple) {
+		var ret bool
+		return ret
+	}
+	return *o.SelectFirstIfMultiple
+}
+
+// GetSelectFirstIfMultipleOk returns a tuple with the SelectFirstIfMultiple field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf4) GetSelectFirstIfMultipleOk() (*bool, bool) {
+	if o == nil || IsNil(o.SelectFirstIfMultiple) {
+		return nil, false
+	}
+	return o.SelectFirstIfMultiple, true
+}
+
+// HasSelectFirstIfMultiple returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf4) HasSelectFirstIfMultiple() bool {
+	if o != nil && !IsNil(o.SelectFirstIfMultiple) {
+		return true
+	}
+
+	return false
+}
+
+// SetSelectFirstIfMultiple gets a reference to the given bool and assigns it to the SelectFirstIfMultiple field.
+func (o *ProfileDetailedConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf4) SetSelectFirstIfMultiple(v bool) {
+	o.SelectFirstIfMultiple = &v
+}
+
 func (o ProfileDetailedConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf4) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -177,6 +210,9 @@ func (o ProfileDetailedConfigurationAuthenticationUsersInnerCredentialsActionsIn
 	toSerialize["locator"] = o.Locator
 	if !IsNil(o.Timeout) {
 		toSerialize["timeout"] = o.Timeout
+	}
+	if !IsNil(o.SelectFirstIfMultiple) {
+		toSerialize["select_first_if_multiple"] = o.SelectFirstIfMultiple
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -226,6 +262,7 @@ func (o *ProfileDetailedConfigurationAuthenticationUsersInnerCredentialsActionsI
 		delete(additionalProperties, "allow_failure")
 		delete(additionalProperties, "locator")
 		delete(additionalProperties, "timeout")
+		delete(additionalProperties, "select_first_if_multiple")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -25,7 +25,6 @@ type ProfileDetailedConfigurationAuthenticationUsersInner struct {
 	Procedure *string `json:"procedure,omitempty"`
 	Variables []ProfileDetailedConfigurationAuthenticationUsersInnerVariablesInner `json:"variables,omitempty"`
 	Refresh *ProfileDetailedConfigurationAuthenticationUsersInnerRefresh `json:"refresh,omitempty"`
-	RepeaterMtls *bool `json:"repeater_mtls,omitempty"`
 	MainUser *bool `json:"main_user,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -202,38 +201,6 @@ func (o *ProfileDetailedConfigurationAuthenticationUsersInner) SetRefresh(v Prof
 	o.Refresh = &v
 }
 
-// GetRepeaterMtls returns the RepeaterMtls field value if set, zero value otherwise.
-func (o *ProfileDetailedConfigurationAuthenticationUsersInner) GetRepeaterMtls() bool {
-	if o == nil || IsNil(o.RepeaterMtls) {
-		var ret bool
-		return ret
-	}
-	return *o.RepeaterMtls
-}
-
-// GetRepeaterMtlsOk returns a tuple with the RepeaterMtls field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationAuthenticationUsersInner) GetRepeaterMtlsOk() (*bool, bool) {
-	if o == nil || IsNil(o.RepeaterMtls) {
-		return nil, false
-	}
-	return o.RepeaterMtls, true
-}
-
-// HasRepeaterMtls returns a boolean if a field has been set.
-func (o *ProfileDetailedConfigurationAuthenticationUsersInner) HasRepeaterMtls() bool {
-	if o != nil && !IsNil(o.RepeaterMtls) {
-		return true
-	}
-
-	return false
-}
-
-// SetRepeaterMtls gets a reference to the given bool and assigns it to the RepeaterMtls field.
-func (o *ProfileDetailedConfigurationAuthenticationUsersInner) SetRepeaterMtls(v bool) {
-	o.RepeaterMtls = &v
-}
-
 // GetMainUser returns the MainUser field value if set, zero value otherwise.
 func (o *ProfileDetailedConfigurationAuthenticationUsersInner) GetMainUser() bool {
 	if o == nil || IsNil(o.MainUser) {
@@ -289,9 +256,6 @@ func (o ProfileDetailedConfigurationAuthenticationUsersInner) ToMap() (map[strin
 	if !IsNil(o.Refresh) {
 		toSerialize["refresh"] = o.Refresh
 	}
-	if !IsNil(o.RepeaterMtls) {
-		toSerialize["repeater_mtls"] = o.RepeaterMtls
-	}
 	if !IsNil(o.MainUser) {
 		toSerialize["main_user"] = o.MainUser
 	}
@@ -343,7 +307,6 @@ func (o *ProfileDetailedConfigurationAuthenticationUsersInner) UnmarshalJSON(dat
 		delete(additionalProperties, "procedure")
 		delete(additionalProperties, "variables")
 		delete(additionalProperties, "refresh")
-		delete(additionalProperties, "repeater_mtls")
 		delete(additionalProperties, "main_user")
 		o.AdditionalProperties = additionalProperties
 	}
