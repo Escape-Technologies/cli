@@ -31,16 +31,19 @@ func createKubernetesIntegrationIfNotExists(ctx context.Context, req v3.Createku
 	if list.Data != nil {
 		for _, integration := range list.Data {
 			if integration.Name == req.Name {
+				log.Info("Kubernetes integration already exists")
 				return nil, nil
 			}
 		}
 	}
+	log.Info("Creating Kubernetes integration..")
 	resp, _, err := client.IntegrationsAPI.CreatekubernetesIntegration(ctx).
 		CreatekubernetesIntegrationRequest(req).
 		Execute()
 	if err != nil {
 		return nil, fmt.Errorf("api error: %w", err)
 	}
+	log.Info("Kubernetes integration created")
 	return resp, nil
 }
 
