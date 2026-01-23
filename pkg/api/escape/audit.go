@@ -9,16 +9,16 @@ import (
 
 // ListAuditLogsFilters holds optional filters for listing audit logs
 type ListAuditLogsFilters struct {
-	DateFrom string
-	DateTo string
+	DateFrom   string
+	DateTo     string
 	ActionType string
-	Actor string
-	Search string
+	Actor      string
+	Search     string
 }
 
 // ListAuditLogs lists audit logs
 func ListAuditLogs(ctx context.Context, next string, filters *ListAuditLogsFilters) ([]v3.AuditLogSummarized, *string, error) {
-	client, err := NewAPIV3Client()
+	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, nil, fmt.Errorf("unable to init client: %w", err)
 	}

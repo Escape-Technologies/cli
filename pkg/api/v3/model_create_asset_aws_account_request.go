@@ -31,7 +31,6 @@ type CreateAssetAWSACCOUNTRequest struct {
 	ImmutableKey string `json:"immutable_key"`
 	PublicKey string `json:"public_key"`
 	PrivateKey string `json:"private_key"`
-	ExternalIntegrationRoleArn *string `json:"external_integration_role_arn,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -339,38 +338,6 @@ func (o *CreateAssetAWSACCOUNTRequest) SetPrivateKey(v string) {
 	o.PrivateKey = v
 }
 
-// GetExternalIntegrationRoleArn returns the ExternalIntegrationRoleArn field value if set, zero value otherwise.
-func (o *CreateAssetAWSACCOUNTRequest) GetExternalIntegrationRoleArn() string {
-	if o == nil || IsNil(o.ExternalIntegrationRoleArn) {
-		var ret string
-		return ret
-	}
-	return *o.ExternalIntegrationRoleArn
-}
-
-// GetExternalIntegrationRoleArnOk returns a tuple with the ExternalIntegrationRoleArn field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateAssetAWSACCOUNTRequest) GetExternalIntegrationRoleArnOk() (*string, bool) {
-	if o == nil || IsNil(o.ExternalIntegrationRoleArn) {
-		return nil, false
-	}
-	return o.ExternalIntegrationRoleArn, true
-}
-
-// HasExternalIntegrationRoleArn returns a boolean if a field has been set.
-func (o *CreateAssetAWSACCOUNTRequest) HasExternalIntegrationRoleArn() bool {
-	if o != nil && !IsNil(o.ExternalIntegrationRoleArn) {
-		return true
-	}
-
-	return false
-}
-
-// SetExternalIntegrationRoleArn gets a reference to the given string and assigns it to the ExternalIntegrationRoleArn field.
-func (o *CreateAssetAWSACCOUNTRequest) SetExternalIntegrationRoleArn(v string) {
-	o.ExternalIntegrationRoleArn = &v
-}
-
 func (o CreateAssetAWSACCOUNTRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -401,9 +368,6 @@ func (o CreateAssetAWSACCOUNTRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize["immutable_key"] = o.ImmutableKey
 	toSerialize["public_key"] = o.PublicKey
 	toSerialize["private_key"] = o.PrivateKey
-	if !IsNil(o.ExternalIntegrationRoleArn) {
-		toSerialize["external_integration_role_arn"] = o.ExternalIntegrationRoleArn
-	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -461,7 +425,6 @@ func (o *CreateAssetAWSACCOUNTRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "immutable_key")
 		delete(additionalProperties, "public_key")
 		delete(additionalProperties, "private_key")
-		delete(additionalProperties, "external_integration_role_arn")
 		o.AdditionalProperties = additionalProperties
 	}
 

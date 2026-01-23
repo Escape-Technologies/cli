@@ -17,36 +17,6 @@ import (
 	"k8s.io/kubectl/pkg/proxy"
 )
 
-func createKubernetesIntegrationIfNotExists(ctx context.Context, req v3.CreatekubernetesIntegrationRequest) (*v3.CreatekubernetesIntegration200Response, error) {
-	client, err := escape.NewAPIV3Client()
-	if err != nil {
-		return nil, fmt.Errorf("unable to init client: %w", err)
-	}
-	// Check if the integration already exists
-	list, _, err := client.IntegrationsAPI.ListkubernetesIntegrations(ctx).
-		Execute()
-	if err != nil {
-		return nil, fmt.Errorf("api error: %w", err)
-	}
-	if list.Data != nil {
-		for _, integration := range list.Data {
-			if integration.Name == req.Name {
-				log.Info("Kubernetes integration already exists")
-				return nil, nil
-			}
-		}
-	}
-	log.Info("Creating Kubernetes integration..")
-	resp, _, err := client.IntegrationsAPI.CreatekubernetesIntegration(ctx).
-		CreatekubernetesIntegrationRequest(req).
-		Execute()
-	if err != nil {
-		return nil, fmt.Errorf("api error: %w", err)
-	}
-	log.Info("Kubernetes integration created")
-	return resp, nil
-}
-
 const (
 	defaultPort         = 8001
 	defaultStaticPrefix = "/static/"
@@ -112,7 +82,7 @@ func connectAndRun(ctx context.Context, cfg *rest.Config, isConnected *atomic.Bo
 			*v3.NewCreatekubernetesIntegrationRequestParameters(),
 		)
 		req.ProxyId = &locationID
-		_, err := createKubernetesIntegrationIfNotExists(ctx, *req)
+		_, err := escape.UpsertKubernetesIntegration(ctx, *req)
 		if err != nil {
 			errMsg := fmt.Sprintf("%s", err)
 			log.Error("Failed to register Kubernetes integration: %s", errMsg)

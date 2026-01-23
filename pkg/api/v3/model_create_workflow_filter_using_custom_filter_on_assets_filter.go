@@ -39,6 +39,7 @@ type CreateWorkflowFilterUsingCustomFilterOnAssetsFilter struct {
 	Severities []ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY `json:"severities,omitempty"`
 	SourceAssetIds []string `json:"sourceAssetIds,omitempty"`
 	SourceAssets *bool `json:"sourceAssets,omitempty"`
+	ParentAssetIds []string `json:"parentAssetIds,omitempty"`
 	SchemaIds []string `json:"schemaIds,omitempty"`
 	AssetIds []string `json:"assetIds,omitempty"`
 	BlacklistAssetIds []string `json:"blacklistAssetIds,omitempty"`
@@ -710,6 +711,38 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilter) SetSourceAssets(v 
 	o.SourceAssets = &v
 }
 
+// GetParentAssetIds returns the ParentAssetIds field value if set, zero value otherwise.
+func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilter) GetParentAssetIds() []string {
+	if o == nil || IsNil(o.ParentAssetIds) {
+		var ret []string
+		return ret
+	}
+	return o.ParentAssetIds
+}
+
+// GetParentAssetIdsOk returns a tuple with the ParentAssetIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilter) GetParentAssetIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.ParentAssetIds) {
+		return nil, false
+	}
+	return o.ParentAssetIds, true
+}
+
+// HasParentAssetIds returns a boolean if a field has been set.
+func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilter) HasParentAssetIds() bool {
+	if o != nil && !IsNil(o.ParentAssetIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetParentAssetIds gets a reference to the given []string and assigns it to the ParentAssetIds field.
+func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilter) SetParentAssetIds(v []string) {
+	o.ParentAssetIds = v
+}
+
 // GetSchemaIds returns the SchemaIds field value if set, zero value otherwise.
 func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilter) GetSchemaIds() []string {
 	if o == nil || IsNil(o.SchemaIds) {
@@ -1068,6 +1101,9 @@ func (o CreateWorkflowFilterUsingCustomFilterOnAssetsFilter) ToMap() (map[string
 	if !IsNil(o.SourceAssets) {
 		toSerialize["sourceAssets"] = o.SourceAssets
 	}
+	if !IsNil(o.ParentAssetIds) {
+		toSerialize["parentAssetIds"] = o.ParentAssetIds
+	}
 	if !IsNil(o.SchemaIds) {
 		toSerialize["schemaIds"] = o.SchemaIds
 	}
@@ -1137,6 +1173,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilter) UnmarshalJSON(data
 		delete(additionalProperties, "severities")
 		delete(additionalProperties, "sourceAssetIds")
 		delete(additionalProperties, "sourceAssets")
+		delete(additionalProperties, "parentAssetIds")
 		delete(additionalProperties, "schemaIds")
 		delete(additionalProperties, "assetIds")
 		delete(additionalProperties, "blacklistAssetIds")

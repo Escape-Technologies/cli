@@ -33,6 +33,7 @@ type CreateWorkflowFilterUsingCustomFilterOnProfilesFilter struct {
 	Initiators []ENUMPROPERTIESDATAITEMSPROPERTIESINITIATORSITEMS `json:"initiators,omitempty"`
 	LastScanStatuses []ENUMPROPERTIESFILTERSITEMS2PROPERTIESFILTERPROPERTIESLASTSCANSTATUSESITEMS `json:"lastScanStatuses,omitempty"`
 	AssetClasses []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS `json:"assetClasses,omitempty"`
+	AssetStatuses []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS `json:"assetStatuses,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -503,6 +504,38 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) SetAssetClasses(
 	o.AssetClasses = v
 }
 
+// GetAssetStatuses returns the AssetStatuses field value if set, zero value otherwise.
+func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetAssetStatuses() []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS {
+	if o == nil || IsNil(o.AssetStatuses) {
+		var ret []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS
+		return ret
+	}
+	return o.AssetStatuses
+}
+
+// GetAssetStatusesOk returns a tuple with the AssetStatuses field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetAssetStatusesOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS, bool) {
+	if o == nil || IsNil(o.AssetStatuses) {
+		return nil, false
+	}
+	return o.AssetStatuses, true
+}
+
+// HasAssetStatuses returns a boolean if a field has been set.
+func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) HasAssetStatuses() bool {
+	if o != nil && !IsNil(o.AssetStatuses) {
+		return true
+	}
+
+	return false
+}
+
+// SetAssetStatuses gets a reference to the given []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS and assigns it to the AssetStatuses field.
+func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) SetAssetStatuses(v []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS) {
+	o.AssetStatuses = v
+}
+
 func (o CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -555,6 +588,9 @@ func (o CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) ToMap() (map[stri
 	if !IsNil(o.AssetClasses) {
 		toSerialize["assetClasses"] = o.AssetClasses
 	}
+	if !IsNil(o.AssetStatuses) {
+		toSerialize["assetStatuses"] = o.AssetStatuses
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -591,6 +627,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) UnmarshalJSON(da
 		delete(additionalProperties, "initiators")
 		delete(additionalProperties, "lastScanStatuses")
 		delete(additionalProperties, "assetClasses")
+		delete(additionalProperties, "assetStatuses")
 		o.AdditionalProperties = additionalProperties
 	}
 

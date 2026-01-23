@@ -11,19 +11,19 @@ import (
 
 // ListProfilesFilters holds optional filters for listing profiles
 type ListProfilesFilters struct {
-	AssetIDs []string
-	Domains []string
-	IssueIDs []string
-	TagsIDs []string
-	Search string
+	AssetIDs   []string
+	Domains    []string
+	IssueIDs   []string
+	TagsIDs    []string
+	Search     string
 	Initiators []string
-	Kinds []string
-	Risks []string
+	Kinds      []string
+	Risks      []string
 }
 
 // ListProfiles lists all profiles
 func ListProfiles(ctx context.Context, next string, filters *ListProfilesFilters) ([]v3.ProfileSummarized, *string, error) {
-	client, err := NewAPIV3Client()
+	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, nil, fmt.Errorf("unable to init client: %w", err)
 	}
@@ -66,7 +66,7 @@ func ListProfiles(ctx context.Context, next string, filters *ListProfilesFilters
 
 // GetProfile gets a profile by ID
 func GetProfile(ctx context.Context, profileID string) (*v3.ProfileDetailed, error) {
-	client, err := NewAPIV3Client()
+	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
@@ -81,7 +81,7 @@ func GetProfile(ctx context.Context, profileID string) (*v3.ProfileDetailed, err
 
 // CreateProfileRest creates a profile for a REST application
 func CreateProfileRest(ctx context.Context, data []byte) (interface{}, error) {
-	client, err := NewAPIV3Client()
+	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
@@ -101,7 +101,7 @@ func CreateProfileRest(ctx context.Context, data []byte) (interface{}, error) {
 
 // CreateProfileWebapp creates a profile for a web application
 func CreateProfileWebapp(ctx context.Context, data []byte) (interface{}, error) {
-	client, err := NewAPIV3Client()
+	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
@@ -121,18 +121,18 @@ func CreateProfileWebapp(ctx context.Context, data []byte) (interface{}, error) 
 
 // CreateProfileGraphql creates a profile for a GraphQL application
 func CreateProfileGraphql(ctx context.Context, data []byte) (interface{}, error) {
-	client, err := NewAPIV3Client()
+	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
 
-    var payload v3.CreateDastGraphqlProfileRequest
+	var payload v3.CreateDastGraphqlProfileRequest
 	if err := json.Unmarshal(data, &payload); err != nil {
 		return nil, fmt.Errorf("invalid JSON: %w", err)
 	}
 
 	req := client.ProfilesAPI.CreateDastGraphqlProfile(ctx)
-    profile, _, err := req.CreateDastGraphqlProfileRequest(payload).Execute()
+	profile, _, err := req.CreateDastGraphqlProfileRequest(payload).Execute()
 	if err != nil {
 		return nil, fmt.Errorf("api error: %w", err)
 	}
@@ -141,7 +141,7 @@ func CreateProfileGraphql(ctx context.Context, data []byte) (interface{}, error)
 
 // DeleteProfile deletes a profile by ID
 func DeleteProfile(ctx context.Context, profileID string) error {
-	client, err := NewAPIV3Client()
+	client, err := newAPIV3Client()
 	if err != nil {
 		return fmt.Errorf("unable to init client: %w", err)
 	}
@@ -156,19 +156,19 @@ func DeleteProfile(ctx context.Context, profileID string) error {
 
 // ListProblemsFilters holds optional filters for listing problems
 type ListProblemsFilters struct {
-	AssetIDs []string
-	Domains []string
-	IssueIDs []string
-	TagsIDs []string
-	Search string
+	AssetIDs   []string
+	Domains    []string
+	IssueIDs   []string
+	TagsIDs    []string
+	Search     string
 	Initiators []string
-	Kinds []string
-	Risks []string
+	Kinds      []string
+	Risks      []string
 }
 
 // ListProblems lists all scan problems
 func ListProblems(ctx context.Context, next string, filters *ListProblemsFilters) ([]v3.LastScanStatusSummarized, *string, error) {
-	client, err := NewAPIV3Client()
+	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, nil, fmt.Errorf("unable to init client: %w", err)
 	}

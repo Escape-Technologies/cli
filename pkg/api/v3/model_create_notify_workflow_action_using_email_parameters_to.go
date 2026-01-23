@@ -21,6 +21,7 @@ type CreateNotifyWorkflowActionUsingEmailParametersTo struct {
 	CreateNotifyWorkflowActionUsingEmailParametersToOneOf *CreateNotifyWorkflowActionUsingEmailParametersToOneOf
 	CreateNotifyWorkflowActionUsingEmailParametersToOneOf1 *CreateNotifyWorkflowActionUsingEmailParametersToOneOf1
 	CreateNotifyWorkflowActionUsingEmailParametersToOneOf2 *CreateNotifyWorkflowActionUsingEmailParametersToOneOf2
+	CreateNotifyWorkflowActionUsingEmailParametersToOneOf3 *CreateNotifyWorkflowActionUsingEmailParametersToOneOf3
 }
 
 // CreateNotifyWorkflowActionUsingEmailParametersToOneOfAsCreateNotifyWorkflowActionUsingEmailParametersTo is a convenience function that returns CreateNotifyWorkflowActionUsingEmailParametersToOneOf wrapped in CreateNotifyWorkflowActionUsingEmailParametersTo
@@ -41,6 +42,13 @@ func CreateNotifyWorkflowActionUsingEmailParametersToOneOf1AsCreateNotifyWorkflo
 func CreateNotifyWorkflowActionUsingEmailParametersToOneOf2AsCreateNotifyWorkflowActionUsingEmailParametersTo(v *CreateNotifyWorkflowActionUsingEmailParametersToOneOf2) CreateNotifyWorkflowActionUsingEmailParametersTo {
 	return CreateNotifyWorkflowActionUsingEmailParametersTo{
 		CreateNotifyWorkflowActionUsingEmailParametersToOneOf2: v,
+	}
+}
+
+// CreateNotifyWorkflowActionUsingEmailParametersToOneOf3AsCreateNotifyWorkflowActionUsingEmailParametersTo is a convenience function that returns CreateNotifyWorkflowActionUsingEmailParametersToOneOf3 wrapped in CreateNotifyWorkflowActionUsingEmailParametersTo
+func CreateNotifyWorkflowActionUsingEmailParametersToOneOf3AsCreateNotifyWorkflowActionUsingEmailParametersTo(v *CreateNotifyWorkflowActionUsingEmailParametersToOneOf3) CreateNotifyWorkflowActionUsingEmailParametersTo {
+	return CreateNotifyWorkflowActionUsingEmailParametersTo{
+		CreateNotifyWorkflowActionUsingEmailParametersToOneOf3: v,
 	}
 }
 
@@ -100,11 +108,29 @@ func (dst *CreateNotifyWorkflowActionUsingEmailParametersTo) UnmarshalJSON(data 
 		dst.CreateNotifyWorkflowActionUsingEmailParametersToOneOf2 = nil
 	}
 
+	// try to unmarshal data into CreateNotifyWorkflowActionUsingEmailParametersToOneOf3
+	err = newStrictDecoder(data).Decode(&dst.CreateNotifyWorkflowActionUsingEmailParametersToOneOf3)
+	if err == nil {
+		jsonCreateNotifyWorkflowActionUsingEmailParametersToOneOf3, _ := json.Marshal(dst.CreateNotifyWorkflowActionUsingEmailParametersToOneOf3)
+		if string(jsonCreateNotifyWorkflowActionUsingEmailParametersToOneOf3) == "{}" { // empty struct
+			dst.CreateNotifyWorkflowActionUsingEmailParametersToOneOf3 = nil
+		} else {
+			if err = validator.Validate(dst.CreateNotifyWorkflowActionUsingEmailParametersToOneOf3); err != nil {
+				dst.CreateNotifyWorkflowActionUsingEmailParametersToOneOf3 = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.CreateNotifyWorkflowActionUsingEmailParametersToOneOf3 = nil
+	}
+
 	if match > 1 { // more than 1 match
 		// reset to nil
 		dst.CreateNotifyWorkflowActionUsingEmailParametersToOneOf = nil
 		dst.CreateNotifyWorkflowActionUsingEmailParametersToOneOf1 = nil
 		dst.CreateNotifyWorkflowActionUsingEmailParametersToOneOf2 = nil
+		dst.CreateNotifyWorkflowActionUsingEmailParametersToOneOf3 = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(CreateNotifyWorkflowActionUsingEmailParametersTo)")
 	} else if match == 1 {
@@ -128,6 +154,10 @@ func (src CreateNotifyWorkflowActionUsingEmailParametersTo) MarshalJSON() ([]byt
 		return json.Marshal(&src.CreateNotifyWorkflowActionUsingEmailParametersToOneOf2)
 	}
 
+	if src.CreateNotifyWorkflowActionUsingEmailParametersToOneOf3 != nil {
+		return json.Marshal(&src.CreateNotifyWorkflowActionUsingEmailParametersToOneOf3)
+	}
+
 	return nil, nil // no data in oneOf schemas
 }
 
@@ -148,6 +178,10 @@ func (obj *CreateNotifyWorkflowActionUsingEmailParametersTo) GetActualInstance()
 		return obj.CreateNotifyWorkflowActionUsingEmailParametersToOneOf2
 	}
 
+	if obj.CreateNotifyWorkflowActionUsingEmailParametersToOneOf3 != nil {
+		return obj.CreateNotifyWorkflowActionUsingEmailParametersToOneOf3
+	}
+
 	// all schemas are nil
 	return nil
 }
@@ -164,6 +198,10 @@ func (obj CreateNotifyWorkflowActionUsingEmailParametersTo) GetActualInstanceVal
 
 	if obj.CreateNotifyWorkflowActionUsingEmailParametersToOneOf2 != nil {
 		return *obj.CreateNotifyWorkflowActionUsingEmailParametersToOneOf2
+	}
+
+	if obj.CreateNotifyWorkflowActionUsingEmailParametersToOneOf3 != nil {
+		return *obj.CreateNotifyWorkflowActionUsingEmailParametersToOneOf3
 	}
 
 	// all schemas are nil
