@@ -24,7 +24,7 @@ type ListAssetsFilters struct {
 
 // ListAssets lists all assets
 func ListAssets(ctx context.Context, next string, filters *ListAssetsFilters) ([]v3.AssetSummarized, *string, error) {
-	client, err := NewAPIV3Client()
+	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, nil, fmt.Errorf("unable to init client: %w", err)
 	}
@@ -56,7 +56,7 @@ func ListAssets(ctx context.Context, next string, filters *ListAssetsFilters) ([
 
 // GetAsset gets an asset by ID
 func GetAsset(ctx context.Context, id string) (*v3.AssetDetailed, error) {
-	client, err := NewAPIV3Client()
+	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
@@ -69,7 +69,7 @@ func GetAsset(ctx context.Context, id string) (*v3.AssetDetailed, error) {
 
 // DeleteAsset deletes an asset by ID
 func DeleteAsset(ctx context.Context, id string) error {
-	client, err := NewAPIV3Client()
+	client, err := newAPIV3Client()
 	if err != nil {
 		return fmt.Errorf("unable to init client: %w", err)
 	}
@@ -90,7 +90,7 @@ func UpdateAsset(
 	assetStatus *v3.ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS,
 	assetTagIDs *[]string,
 ) error {
-	client, err := NewAPIV3Client()
+	client, err := newAPIV3Client()
 	if err != nil {
 		return fmt.Errorf("unable to init client: %w", err)
 	}
@@ -147,7 +147,7 @@ func CreateAsset(ctx context.Context, data []byte, assetType string) (interface{
 		method := typ.Method(i)
 		if strings.HasPrefix(method.Name, "Create") && !strings.HasSuffix(method.Name, "Execute") {
 			if strings.Contains(strings.ToUpper(method.Name), strings.ToUpper(normalizeAssetType(assetType))) {
-				client, err := NewAPIV3Client()
+				client, err := newAPIV3Client()
 				if err != nil {
 					return nil, fmt.Errorf("unable to init client: %w", err)
 				}

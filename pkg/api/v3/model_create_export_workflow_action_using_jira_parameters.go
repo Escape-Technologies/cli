@@ -25,7 +25,6 @@ type CreateExportWorkflowActionUsingJiraParameters struct {
 	PropertiesMapping []CreateExportWorkflowActionUsingJiraParametersPropertiesMappingInner `json:"propertiesMapping"`
 	StaticPropertiesMapping []CreateExportWorkflowActionUsingJiraParametersStaticPropertiesMappingInner `json:"staticPropertiesMapping,omitempty"`
 	ParentKey *string `json:"parentKey,omitempty"`
-	ClosureTransitionId *string `json:"closureTransitionId,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -187,38 +186,6 @@ func (o *CreateExportWorkflowActionUsingJiraParameters) SetParentKey(v string) {
 	o.ParentKey = &v
 }
 
-// GetClosureTransitionId returns the ClosureTransitionId field value if set, zero value otherwise.
-func (o *CreateExportWorkflowActionUsingJiraParameters) GetClosureTransitionId() string {
-	if o == nil || IsNil(o.ClosureTransitionId) {
-		var ret string
-		return ret
-	}
-	return *o.ClosureTransitionId
-}
-
-// GetClosureTransitionIdOk returns a tuple with the ClosureTransitionId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateExportWorkflowActionUsingJiraParameters) GetClosureTransitionIdOk() (*string, bool) {
-	if o == nil || IsNil(o.ClosureTransitionId) {
-		return nil, false
-	}
-	return o.ClosureTransitionId, true
-}
-
-// HasClosureTransitionId returns a boolean if a field has been set.
-func (o *CreateExportWorkflowActionUsingJiraParameters) HasClosureTransitionId() bool {
-	if o != nil && !IsNil(o.ClosureTransitionId) {
-		return true
-	}
-
-	return false
-}
-
-// SetClosureTransitionId gets a reference to the given string and assigns it to the ClosureTransitionId field.
-func (o *CreateExportWorkflowActionUsingJiraParameters) SetClosureTransitionId(v string) {
-	o.ClosureTransitionId = &v
-}
-
 func (o CreateExportWorkflowActionUsingJiraParameters) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -237,9 +204,6 @@ func (o CreateExportWorkflowActionUsingJiraParameters) ToMap() (map[string]inter
 	}
 	if !IsNil(o.ParentKey) {
 		toSerialize["parentKey"] = o.ParentKey
-	}
-	if !IsNil(o.ClosureTransitionId) {
-		toSerialize["closureTransitionId"] = o.ClosureTransitionId
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -291,7 +255,6 @@ func (o *CreateExportWorkflowActionUsingJiraParameters) UnmarshalJSON(data []byt
 		delete(additionalProperties, "propertiesMapping")
 		delete(additionalProperties, "staticPropertiesMapping")
 		delete(additionalProperties, "parentKey")
-		delete(additionalProperties, "closureTransitionId")
 		o.AdditionalProperties = additionalProperties
 	}
 

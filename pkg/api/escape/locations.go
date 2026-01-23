@@ -12,14 +12,14 @@ import (
 
 // ListLocationsFilters holds optional filters for listing locations
 type ListLocationsFilters struct {
-	Search string
-	Enabled bool
+	Search        string
+	Enabled       bool
 	LocationTypes []string
 }
 
 // ListLocations lists all locations
 func ListLocations(ctx context.Context, next string, filters *ListLocationsFilters) ([]v3.LocationSummarized, *string, error) {
-	client, err := NewAPIV3Client()
+	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, nil, fmt.Errorf("unable to init client: %w", err)
 	}
@@ -47,7 +47,7 @@ func ListLocations(ctx context.Context, next string, filters *ListLocationsFilte
 
 // GetLocation gets a location by ID
 func GetLocation(ctx context.Context, id string) (*v3.LocationDetailed, error) {
-	client, err := NewAPIV3Client()
+	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
@@ -61,7 +61,7 @@ func GetLocation(ctx context.Context, id string) (*v3.LocationDetailed, error) {
 
 // CreateLocation creates a location
 func CreateLocation(ctx context.Context, name, sshPublicKey string) (string, error) {
-	client, err := NewAPIV3Client()
+	client, err := newAPIV3Client()
 	if err != nil {
 		return "", fmt.Errorf("unable to init client: %w", err)
 	}
@@ -81,7 +81,7 @@ func CreateLocation(ctx context.Context, name, sshPublicKey string) (string, err
 
 // UpdateLocation updates a location
 func UpdateLocation(ctx context.Context, id string, name, sshPublicKey string) error {
-	client, err := NewAPIV3Client()
+	client, err := newAPIV3Client()
 	if err != nil {
 		return fmt.Errorf("unable to init client: %w", err)
 	}
@@ -100,7 +100,7 @@ func UpdateLocation(ctx context.Context, id string, name, sshPublicKey string) e
 
 // DeleteLocation deletes a location
 func DeleteLocation(ctx context.Context, id string) error {
-	client, err := NewAPIV3Client()
+	client, err := newAPIV3Client()
 	if err != nil {
 		return fmt.Errorf("unable to init client: %w", err)
 	}

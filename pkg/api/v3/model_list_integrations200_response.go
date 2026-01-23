@@ -15,43 +15,43 @@ import (
 	"fmt"
 )
 
-// checks if the ListakamaiIntegrations200Response type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &ListakamaiIntegrations200Response{}
+// checks if the ListIntegrations200Response type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ListIntegrations200Response{}
 
-// ListakamaiIntegrations200Response struct for ListakamaiIntegrations200Response
-type ListakamaiIntegrations200Response struct {
+// ListIntegrations200Response struct for ListIntegrations200Response
+type ListIntegrations200Response struct {
 	NextCursor *string `json:"nextCursor,omitempty"`
 	TotalCount *int `json:"totalCount,omitempty"`
-	Data []ListakamaiIntegrations200ResponseDataInner `json:"data"`
+	Data []ListIntegrations200ResponseDataInner `json:"data"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _ListakamaiIntegrations200Response ListakamaiIntegrations200Response
+type _ListIntegrations200Response ListIntegrations200Response
 
-// NewListakamaiIntegrations200Response instantiates a new ListakamaiIntegrations200Response object
+// NewListIntegrations200Response instantiates a new ListIntegrations200Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewListakamaiIntegrations200Response(data []ListakamaiIntegrations200ResponseDataInner) *ListakamaiIntegrations200Response {
-	this := ListakamaiIntegrations200Response{}
+func NewListIntegrations200Response(data []ListIntegrations200ResponseDataInner) *ListIntegrations200Response {
+	this := ListIntegrations200Response{}
 	var totalCount int = 100
 	this.TotalCount = &totalCount
 	this.Data = data
 	return &this
 }
 
-// NewListakamaiIntegrations200ResponseWithDefaults instantiates a new ListakamaiIntegrations200Response object
+// NewListIntegrations200ResponseWithDefaults instantiates a new ListIntegrations200Response object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewListakamaiIntegrations200ResponseWithDefaults() *ListakamaiIntegrations200Response {
-	this := ListakamaiIntegrations200Response{}
+func NewListIntegrations200ResponseWithDefaults() *ListIntegrations200Response {
+	this := ListIntegrations200Response{}
 	var totalCount int = 100
 	this.TotalCount = &totalCount
 	return &this
 }
 
 // GetNextCursor returns the NextCursor field value if set, zero value otherwise.
-func (o *ListakamaiIntegrations200Response) GetNextCursor() string {
+func (o *ListIntegrations200Response) GetNextCursor() string {
 	if o == nil || IsNil(o.NextCursor) {
 		var ret string
 		return ret
@@ -61,7 +61,7 @@ func (o *ListakamaiIntegrations200Response) GetNextCursor() string {
 
 // GetNextCursorOk returns a tuple with the NextCursor field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ListakamaiIntegrations200Response) GetNextCursorOk() (*string, bool) {
+func (o *ListIntegrations200Response) GetNextCursorOk() (*string, bool) {
 	if o == nil || IsNil(o.NextCursor) {
 		return nil, false
 	}
@@ -69,7 +69,7 @@ func (o *ListakamaiIntegrations200Response) GetNextCursorOk() (*string, bool) {
 }
 
 // HasNextCursor returns a boolean if a field has been set.
-func (o *ListakamaiIntegrations200Response) HasNextCursor() bool {
+func (o *ListIntegrations200Response) HasNextCursor() bool {
 	if o != nil && !IsNil(o.NextCursor) {
 		return true
 	}
@@ -78,12 +78,12 @@ func (o *ListakamaiIntegrations200Response) HasNextCursor() bool {
 }
 
 // SetNextCursor gets a reference to the given string and assigns it to the NextCursor field.
-func (o *ListakamaiIntegrations200Response) SetNextCursor(v string) {
+func (o *ListIntegrations200Response) SetNextCursor(v string) {
 	o.NextCursor = &v
 }
 
 // GetTotalCount returns the TotalCount field value if set, zero value otherwise.
-func (o *ListakamaiIntegrations200Response) GetTotalCount() int {
+func (o *ListIntegrations200Response) GetTotalCount() int {
 	if o == nil || IsNil(o.TotalCount) {
 		var ret int
 		return ret
@@ -93,7 +93,7 @@ func (o *ListakamaiIntegrations200Response) GetTotalCount() int {
 
 // GetTotalCountOk returns a tuple with the TotalCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ListakamaiIntegrations200Response) GetTotalCountOk() (*int, bool) {
+func (o *ListIntegrations200Response) GetTotalCountOk() (*int, bool) {
 	if o == nil || IsNil(o.TotalCount) {
 		return nil, false
 	}
@@ -101,7 +101,7 @@ func (o *ListakamaiIntegrations200Response) GetTotalCountOk() (*int, bool) {
 }
 
 // HasTotalCount returns a boolean if a field has been set.
-func (o *ListakamaiIntegrations200Response) HasTotalCount() bool {
+func (o *ListIntegrations200Response) HasTotalCount() bool {
 	if o != nil && !IsNil(o.TotalCount) {
 		return true
 	}
@@ -110,14 +110,14 @@ func (o *ListakamaiIntegrations200Response) HasTotalCount() bool {
 }
 
 // SetTotalCount gets a reference to the given int and assigns it to the TotalCount field.
-func (o *ListakamaiIntegrations200Response) SetTotalCount(v int) {
+func (o *ListIntegrations200Response) SetTotalCount(v int) {
 	o.TotalCount = &v
 }
 
 // GetData returns the Data field value
-func (o *ListakamaiIntegrations200Response) GetData() []ListakamaiIntegrations200ResponseDataInner {
+func (o *ListIntegrations200Response) GetData() []ListIntegrations200ResponseDataInner {
 	if o == nil {
-		var ret []ListakamaiIntegrations200ResponseDataInner
+		var ret []ListIntegrations200ResponseDataInner
 		return ret
 	}
 
@@ -126,7 +126,7 @@ func (o *ListakamaiIntegrations200Response) GetData() []ListakamaiIntegrations20
 
 // GetDataOk returns a tuple with the Data field value
 // and a boolean to check if the value has been set.
-func (o *ListakamaiIntegrations200Response) GetDataOk() ([]ListakamaiIntegrations200ResponseDataInner, bool) {
+func (o *ListIntegrations200Response) GetDataOk() ([]ListIntegrations200ResponseDataInner, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -134,11 +134,11 @@ func (o *ListakamaiIntegrations200Response) GetDataOk() ([]ListakamaiIntegration
 }
 
 // SetData sets field value
-func (o *ListakamaiIntegrations200Response) SetData(v []ListakamaiIntegrations200ResponseDataInner) {
+func (o *ListIntegrations200Response) SetData(v []ListIntegrations200ResponseDataInner) {
 	o.Data = v
 }
 
-func (o ListakamaiIntegrations200Response) MarshalJSON() ([]byte, error) {
+func (o ListIntegrations200Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -146,7 +146,7 @@ func (o ListakamaiIntegrations200Response) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ListakamaiIntegrations200Response) ToMap() (map[string]interface{}, error) {
+func (o ListIntegrations200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.NextCursor) {
 		toSerialize["nextCursor"] = o.NextCursor
@@ -163,7 +163,7 @@ func (o ListakamaiIntegrations200Response) ToMap() (map[string]interface{}, erro
 	return toSerialize, nil
 }
 
-func (o *ListakamaiIntegrations200Response) UnmarshalJSON(data []byte) (err error) {
+func (o *ListIntegrations200Response) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -185,15 +185,15 @@ func (o *ListakamaiIntegrations200Response) UnmarshalJSON(data []byte) (err erro
 		}
 	}
 
-	varListakamaiIntegrations200Response := _ListakamaiIntegrations200Response{}
+	varListIntegrations200Response := _ListIntegrations200Response{}
 
-	err = json.Unmarshal(data, &varListakamaiIntegrations200Response)
+	err = json.Unmarshal(data, &varListIntegrations200Response)
 
 	if err != nil {
 		return err
 	}
 
-	*o = ListakamaiIntegrations200Response(varListakamaiIntegrations200Response)
+	*o = ListIntegrations200Response(varListIntegrations200Response)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -207,38 +207,38 @@ func (o *ListakamaiIntegrations200Response) UnmarshalJSON(data []byte) (err erro
 	return err
 }
 
-type NullableListakamaiIntegrations200Response struct {
-	value *ListakamaiIntegrations200Response
+type NullableListIntegrations200Response struct {
+	value *ListIntegrations200Response
 	isSet bool
 }
 
-func (v NullableListakamaiIntegrations200Response) Get() *ListakamaiIntegrations200Response {
+func (v NullableListIntegrations200Response) Get() *ListIntegrations200Response {
 	return v.value
 }
 
-func (v *NullableListakamaiIntegrations200Response) Set(val *ListakamaiIntegrations200Response) {
+func (v *NullableListIntegrations200Response) Set(val *ListIntegrations200Response) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableListakamaiIntegrations200Response) IsSet() bool {
+func (v NullableListIntegrations200Response) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableListakamaiIntegrations200Response) Unset() {
+func (v *NullableListIntegrations200Response) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableListakamaiIntegrations200Response(val *ListakamaiIntegrations200Response) *NullableListakamaiIntegrations200Response {
-	return &NullableListakamaiIntegrations200Response{value: val, isSet: true}
+func NewNullableListIntegrations200Response(val *ListIntegrations200Response) *NullableListIntegrations200Response {
+	return &NullableListIntegrations200Response{value: val, isSet: true}
 }
 
-func (v NullableListakamaiIntegrations200Response) MarshalJSON() ([]byte, error) {
+func (v NullableListIntegrations200Response) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableListakamaiIntegrations200Response) UnmarshalJSON(src []byte) error {
+func (v *NullableListIntegrations200Response) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

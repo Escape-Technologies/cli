@@ -16,11 +16,11 @@ import (
 	"fmt"
 )
 
-// checks if the ListakamaiIntegrations200ResponseDataInner type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &ListakamaiIntegrations200ResponseDataInner{}
+// checks if the ListIntegrations200ResponseDataInner type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ListIntegrations200ResponseDataInner{}
 
-// ListakamaiIntegrations200ResponseDataInner struct for ListakamaiIntegrations200ResponseDataInner
-type ListakamaiIntegrations200ResponseDataInner struct {
+// ListIntegrations200ResponseDataInner struct for ListIntegrations200ResponseDataInner
+type ListIntegrations200ResponseDataInner struct {
 	// The id of the integration
 	Id string `json:"id"`
 	// The name of the integration
@@ -37,36 +37,42 @@ type ListakamaiIntegrations200ResponseDataInner struct {
 	Projects []ListProjects200ResponseDataInner `json:"projects"`
 	Location *LocationSummarized1 `json:"location,omitempty"`
 	Kind ENUMPROPERTIESDATAITEMSPROPERTIESKIND `json:"kind"`
+	// Whether the integration is valid
+	Valid bool `json:"valid"`
+	// The validation errors of the integration
+	ValidationErrors []string `json:"validationErrors"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _ListakamaiIntegrations200ResponseDataInner ListakamaiIntegrations200ResponseDataInner
+type _ListIntegrations200ResponseDataInner ListIntegrations200ResponseDataInner
 
-// NewListakamaiIntegrations200ResponseDataInner instantiates a new ListakamaiIntegrations200ResponseDataInner object
+// NewListIntegrations200ResponseDataInner instantiates a new ListIntegrations200ResponseDataInner object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewListakamaiIntegrations200ResponseDataInner(id string, name string, createdAt time.Time, updatedAt time.Time, projects []ListProjects200ResponseDataInner, kind ENUMPROPERTIESDATAITEMSPROPERTIESKIND) *ListakamaiIntegrations200ResponseDataInner {
-	this := ListakamaiIntegrations200ResponseDataInner{}
+func NewListIntegrations200ResponseDataInner(id string, name string, createdAt time.Time, updatedAt time.Time, projects []ListProjects200ResponseDataInner, kind ENUMPROPERTIESDATAITEMSPROPERTIESKIND, valid bool, validationErrors []string) *ListIntegrations200ResponseDataInner {
+	this := ListIntegrations200ResponseDataInner{}
 	this.Id = id
 	this.Name = name
 	this.CreatedAt = createdAt
 	this.UpdatedAt = updatedAt
 	this.Projects = projects
 	this.Kind = kind
+	this.Valid = valid
+	this.ValidationErrors = validationErrors
 	return &this
 }
 
-// NewListakamaiIntegrations200ResponseDataInnerWithDefaults instantiates a new ListakamaiIntegrations200ResponseDataInner object
+// NewListIntegrations200ResponseDataInnerWithDefaults instantiates a new ListIntegrations200ResponseDataInner object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewListakamaiIntegrations200ResponseDataInnerWithDefaults() *ListakamaiIntegrations200ResponseDataInner {
-	this := ListakamaiIntegrations200ResponseDataInner{}
+func NewListIntegrations200ResponseDataInnerWithDefaults() *ListIntegrations200ResponseDataInner {
+	this := ListIntegrations200ResponseDataInner{}
 	return &this
 }
 
 // GetId returns the Id field value
-func (o *ListakamaiIntegrations200ResponseDataInner) GetId() string {
+func (o *ListIntegrations200ResponseDataInner) GetId() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -77,7 +83,7 @@ func (o *ListakamaiIntegrations200ResponseDataInner) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *ListakamaiIntegrations200ResponseDataInner) GetIdOk() (*string, bool) {
+func (o *ListIntegrations200ResponseDataInner) GetIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -85,12 +91,12 @@ func (o *ListakamaiIntegrations200ResponseDataInner) GetIdOk() (*string, bool) {
 }
 
 // SetId sets field value
-func (o *ListakamaiIntegrations200ResponseDataInner) SetId(v string) {
+func (o *ListIntegrations200ResponseDataInner) SetId(v string) {
 	o.Id = v
 }
 
 // GetName returns the Name field value
-func (o *ListakamaiIntegrations200ResponseDataInner) GetName() string {
+func (o *ListIntegrations200ResponseDataInner) GetName() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -101,7 +107,7 @@ func (o *ListakamaiIntegrations200ResponseDataInner) GetName() string {
 
 // GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
-func (o *ListakamaiIntegrations200ResponseDataInner) GetNameOk() (*string, bool) {
+func (o *ListIntegrations200ResponseDataInner) GetNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -109,12 +115,12 @@ func (o *ListakamaiIntegrations200ResponseDataInner) GetNameOk() (*string, bool)
 }
 
 // SetName sets field value
-func (o *ListakamaiIntegrations200ResponseDataInner) SetName(v string) {
+func (o *ListIntegrations200ResponseDataInner) SetName(v string) {
 	o.Name = v
 }
 
 // GetCreatedAt returns the CreatedAt field value
-func (o *ListakamaiIntegrations200ResponseDataInner) GetCreatedAt() time.Time {
+func (o *ListIntegrations200ResponseDataInner) GetCreatedAt() time.Time {
 	if o == nil {
 		var ret time.Time
 		return ret
@@ -125,7 +131,7 @@ func (o *ListakamaiIntegrations200ResponseDataInner) GetCreatedAt() time.Time {
 
 // GetCreatedAtOk returns a tuple with the CreatedAt field value
 // and a boolean to check if the value has been set.
-func (o *ListakamaiIntegrations200ResponseDataInner) GetCreatedAtOk() (*time.Time, bool) {
+func (o *ListIntegrations200ResponseDataInner) GetCreatedAtOk() (*time.Time, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -133,12 +139,12 @@ func (o *ListakamaiIntegrations200ResponseDataInner) GetCreatedAtOk() (*time.Tim
 }
 
 // SetCreatedAt sets field value
-func (o *ListakamaiIntegrations200ResponseDataInner) SetCreatedAt(v time.Time) {
+func (o *ListIntegrations200ResponseDataInner) SetCreatedAt(v time.Time) {
 	o.CreatedAt = v
 }
 
 // GetUpdatedAt returns the UpdatedAt field value
-func (o *ListakamaiIntegrations200ResponseDataInner) GetUpdatedAt() time.Time {
+func (o *ListIntegrations200ResponseDataInner) GetUpdatedAt() time.Time {
 	if o == nil {
 		var ret time.Time
 		return ret
@@ -149,7 +155,7 @@ func (o *ListakamaiIntegrations200ResponseDataInner) GetUpdatedAt() time.Time {
 
 // GetUpdatedAtOk returns a tuple with the UpdatedAt field value
 // and a boolean to check if the value has been set.
-func (o *ListakamaiIntegrations200ResponseDataInner) GetUpdatedAtOk() (*time.Time, bool) {
+func (o *ListIntegrations200ResponseDataInner) GetUpdatedAtOk() (*time.Time, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -157,12 +163,12 @@ func (o *ListakamaiIntegrations200ResponseDataInner) GetUpdatedAtOk() (*time.Tim
 }
 
 // SetUpdatedAt sets field value
-func (o *ListakamaiIntegrations200ResponseDataInner) SetUpdatedAt(v time.Time) {
+func (o *ListIntegrations200ResponseDataInner) SetUpdatedAt(v time.Time) {
 	o.UpdatedAt = v
 }
 
 // GetScheduledForDeletionAt returns the ScheduledForDeletionAt field value if set, zero value otherwise.
-func (o *ListakamaiIntegrations200ResponseDataInner) GetScheduledForDeletionAt() time.Time {
+func (o *ListIntegrations200ResponseDataInner) GetScheduledForDeletionAt() time.Time {
 	if o == nil || IsNil(o.ScheduledForDeletionAt) {
 		var ret time.Time
 		return ret
@@ -172,7 +178,7 @@ func (o *ListakamaiIntegrations200ResponseDataInner) GetScheduledForDeletionAt()
 
 // GetScheduledForDeletionAtOk returns a tuple with the ScheduledForDeletionAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ListakamaiIntegrations200ResponseDataInner) GetScheduledForDeletionAtOk() (*time.Time, bool) {
+func (o *ListIntegrations200ResponseDataInner) GetScheduledForDeletionAtOk() (*time.Time, bool) {
 	if o == nil || IsNil(o.ScheduledForDeletionAt) {
 		return nil, false
 	}
@@ -180,7 +186,7 @@ func (o *ListakamaiIntegrations200ResponseDataInner) GetScheduledForDeletionAtOk
 }
 
 // HasScheduledForDeletionAt returns a boolean if a field has been set.
-func (o *ListakamaiIntegrations200ResponseDataInner) HasScheduledForDeletionAt() bool {
+func (o *ListIntegrations200ResponseDataInner) HasScheduledForDeletionAt() bool {
 	if o != nil && !IsNil(o.ScheduledForDeletionAt) {
 		return true
 	}
@@ -189,12 +195,12 @@ func (o *ListakamaiIntegrations200ResponseDataInner) HasScheduledForDeletionAt()
 }
 
 // SetScheduledForDeletionAt gets a reference to the given time.Time and assigns it to the ScheduledForDeletionAt field.
-func (o *ListakamaiIntegrations200ResponseDataInner) SetScheduledForDeletionAt(v time.Time) {
+func (o *ListIntegrations200ResponseDataInner) SetScheduledForDeletionAt(v time.Time) {
 	o.ScheduledForDeletionAt = &v
 }
 
 // GetLastPullWorkflowAt returns the LastPullWorkflowAt field value if set, zero value otherwise.
-func (o *ListakamaiIntegrations200ResponseDataInner) GetLastPullWorkflowAt() time.Time {
+func (o *ListIntegrations200ResponseDataInner) GetLastPullWorkflowAt() time.Time {
 	if o == nil || IsNil(o.LastPullWorkflowAt) {
 		var ret time.Time
 		return ret
@@ -204,7 +210,7 @@ func (o *ListakamaiIntegrations200ResponseDataInner) GetLastPullWorkflowAt() tim
 
 // GetLastPullWorkflowAtOk returns a tuple with the LastPullWorkflowAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ListakamaiIntegrations200ResponseDataInner) GetLastPullWorkflowAtOk() (*time.Time, bool) {
+func (o *ListIntegrations200ResponseDataInner) GetLastPullWorkflowAtOk() (*time.Time, bool) {
 	if o == nil || IsNil(o.LastPullWorkflowAt) {
 		return nil, false
 	}
@@ -212,7 +218,7 @@ func (o *ListakamaiIntegrations200ResponseDataInner) GetLastPullWorkflowAtOk() (
 }
 
 // HasLastPullWorkflowAt returns a boolean if a field has been set.
-func (o *ListakamaiIntegrations200ResponseDataInner) HasLastPullWorkflowAt() bool {
+func (o *ListIntegrations200ResponseDataInner) HasLastPullWorkflowAt() bool {
 	if o != nil && !IsNil(o.LastPullWorkflowAt) {
 		return true
 	}
@@ -221,12 +227,12 @@ func (o *ListakamaiIntegrations200ResponseDataInner) HasLastPullWorkflowAt() boo
 }
 
 // SetLastPullWorkflowAt gets a reference to the given time.Time and assigns it to the LastPullWorkflowAt field.
-func (o *ListakamaiIntegrations200ResponseDataInner) SetLastPullWorkflowAt(v time.Time) {
+func (o *ListIntegrations200ResponseDataInner) SetLastPullWorkflowAt(v time.Time) {
 	o.LastPullWorkflowAt = &v
 }
 
 // GetProjects returns the Projects field value
-func (o *ListakamaiIntegrations200ResponseDataInner) GetProjects() []ListProjects200ResponseDataInner {
+func (o *ListIntegrations200ResponseDataInner) GetProjects() []ListProjects200ResponseDataInner {
 	if o == nil {
 		var ret []ListProjects200ResponseDataInner
 		return ret
@@ -237,7 +243,7 @@ func (o *ListakamaiIntegrations200ResponseDataInner) GetProjects() []ListProject
 
 // GetProjectsOk returns a tuple with the Projects field value
 // and a boolean to check if the value has been set.
-func (o *ListakamaiIntegrations200ResponseDataInner) GetProjectsOk() ([]ListProjects200ResponseDataInner, bool) {
+func (o *ListIntegrations200ResponseDataInner) GetProjectsOk() ([]ListProjects200ResponseDataInner, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -245,12 +251,12 @@ func (o *ListakamaiIntegrations200ResponseDataInner) GetProjectsOk() ([]ListProj
 }
 
 // SetProjects sets field value
-func (o *ListakamaiIntegrations200ResponseDataInner) SetProjects(v []ListProjects200ResponseDataInner) {
+func (o *ListIntegrations200ResponseDataInner) SetProjects(v []ListProjects200ResponseDataInner) {
 	o.Projects = v
 }
 
 // GetLocation returns the Location field value if set, zero value otherwise.
-func (o *ListakamaiIntegrations200ResponseDataInner) GetLocation() LocationSummarized1 {
+func (o *ListIntegrations200ResponseDataInner) GetLocation() LocationSummarized1 {
 	if o == nil || IsNil(o.Location) {
 		var ret LocationSummarized1
 		return ret
@@ -260,7 +266,7 @@ func (o *ListakamaiIntegrations200ResponseDataInner) GetLocation() LocationSumma
 
 // GetLocationOk returns a tuple with the Location field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ListakamaiIntegrations200ResponseDataInner) GetLocationOk() (*LocationSummarized1, bool) {
+func (o *ListIntegrations200ResponseDataInner) GetLocationOk() (*LocationSummarized1, bool) {
 	if o == nil || IsNil(o.Location) {
 		return nil, false
 	}
@@ -268,7 +274,7 @@ func (o *ListakamaiIntegrations200ResponseDataInner) GetLocationOk() (*LocationS
 }
 
 // HasLocation returns a boolean if a field has been set.
-func (o *ListakamaiIntegrations200ResponseDataInner) HasLocation() bool {
+func (o *ListIntegrations200ResponseDataInner) HasLocation() bool {
 	if o != nil && !IsNil(o.Location) {
 		return true
 	}
@@ -277,12 +283,12 @@ func (o *ListakamaiIntegrations200ResponseDataInner) HasLocation() bool {
 }
 
 // SetLocation gets a reference to the given LocationSummarized1 and assigns it to the Location field.
-func (o *ListakamaiIntegrations200ResponseDataInner) SetLocation(v LocationSummarized1) {
+func (o *ListIntegrations200ResponseDataInner) SetLocation(v LocationSummarized1) {
 	o.Location = &v
 }
 
 // GetKind returns the Kind field value
-func (o *ListakamaiIntegrations200ResponseDataInner) GetKind() ENUMPROPERTIESDATAITEMSPROPERTIESKIND {
+func (o *ListIntegrations200ResponseDataInner) GetKind() ENUMPROPERTIESDATAITEMSPROPERTIESKIND {
 	if o == nil {
 		var ret ENUMPROPERTIESDATAITEMSPROPERTIESKIND
 		return ret
@@ -293,7 +299,7 @@ func (o *ListakamaiIntegrations200ResponseDataInner) GetKind() ENUMPROPERTIESDAT
 
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
-func (o *ListakamaiIntegrations200ResponseDataInner) GetKindOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESKIND, bool) {
+func (o *ListIntegrations200ResponseDataInner) GetKindOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESKIND, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -301,11 +307,59 @@ func (o *ListakamaiIntegrations200ResponseDataInner) GetKindOk() (*ENUMPROPERTIE
 }
 
 // SetKind sets field value
-func (o *ListakamaiIntegrations200ResponseDataInner) SetKind(v ENUMPROPERTIESDATAITEMSPROPERTIESKIND) {
+func (o *ListIntegrations200ResponseDataInner) SetKind(v ENUMPROPERTIESDATAITEMSPROPERTIESKIND) {
 	o.Kind = v
 }
 
-func (o ListakamaiIntegrations200ResponseDataInner) MarshalJSON() ([]byte, error) {
+// GetValid returns the Valid field value
+func (o *ListIntegrations200ResponseDataInner) GetValid() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.Valid
+}
+
+// GetValidOk returns a tuple with the Valid field value
+// and a boolean to check if the value has been set.
+func (o *ListIntegrations200ResponseDataInner) GetValidOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Valid, true
+}
+
+// SetValid sets field value
+func (o *ListIntegrations200ResponseDataInner) SetValid(v bool) {
+	o.Valid = v
+}
+
+// GetValidationErrors returns the ValidationErrors field value
+func (o *ListIntegrations200ResponseDataInner) GetValidationErrors() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+
+	return o.ValidationErrors
+}
+
+// GetValidationErrorsOk returns a tuple with the ValidationErrors field value
+// and a boolean to check if the value has been set.
+func (o *ListIntegrations200ResponseDataInner) GetValidationErrorsOk() ([]string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ValidationErrors, true
+}
+
+// SetValidationErrors sets field value
+func (o *ListIntegrations200ResponseDataInner) SetValidationErrors(v []string) {
+	o.ValidationErrors = v
+}
+
+func (o ListIntegrations200ResponseDataInner) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -313,7 +367,7 @@ func (o ListakamaiIntegrations200ResponseDataInner) MarshalJSON() ([]byte, error
 	return json.Marshal(toSerialize)
 }
 
-func (o ListakamaiIntegrations200ResponseDataInner) ToMap() (map[string]interface{}, error) {
+func (o ListIntegrations200ResponseDataInner) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["name"] = o.Name
@@ -330,6 +384,8 @@ func (o ListakamaiIntegrations200ResponseDataInner) ToMap() (map[string]interfac
 		toSerialize["location"] = o.Location
 	}
 	toSerialize["kind"] = o.Kind
+	toSerialize["valid"] = o.Valid
+	toSerialize["validationErrors"] = o.ValidationErrors
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -338,7 +394,7 @@ func (o ListakamaiIntegrations200ResponseDataInner) ToMap() (map[string]interfac
 	return toSerialize, nil
 }
 
-func (o *ListakamaiIntegrations200ResponseDataInner) UnmarshalJSON(data []byte) (err error) {
+func (o *ListIntegrations200ResponseDataInner) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -349,6 +405,8 @@ func (o *ListakamaiIntegrations200ResponseDataInner) UnmarshalJSON(data []byte) 
 		"updatedAt",
 		"projects",
 		"kind",
+		"valid",
+		"validationErrors",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -365,15 +423,15 @@ func (o *ListakamaiIntegrations200ResponseDataInner) UnmarshalJSON(data []byte) 
 		}
 	}
 
-	varListakamaiIntegrations200ResponseDataInner := _ListakamaiIntegrations200ResponseDataInner{}
+	varListIntegrations200ResponseDataInner := _ListIntegrations200ResponseDataInner{}
 
-	err = json.Unmarshal(data, &varListakamaiIntegrations200ResponseDataInner)
+	err = json.Unmarshal(data, &varListIntegrations200ResponseDataInner)
 
 	if err != nil {
 		return err
 	}
 
-	*o = ListakamaiIntegrations200ResponseDataInner(varListakamaiIntegrations200ResponseDataInner)
+	*o = ListIntegrations200ResponseDataInner(varListIntegrations200ResponseDataInner)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -387,44 +445,46 @@ func (o *ListakamaiIntegrations200ResponseDataInner) UnmarshalJSON(data []byte) 
 		delete(additionalProperties, "projects")
 		delete(additionalProperties, "location")
 		delete(additionalProperties, "kind")
+		delete(additionalProperties, "valid")
+		delete(additionalProperties, "validationErrors")
 		o.AdditionalProperties = additionalProperties
 	}
 
 	return err
 }
 
-type NullableListakamaiIntegrations200ResponseDataInner struct {
-	value *ListakamaiIntegrations200ResponseDataInner
+type NullableListIntegrations200ResponseDataInner struct {
+	value *ListIntegrations200ResponseDataInner
 	isSet bool
 }
 
-func (v NullableListakamaiIntegrations200ResponseDataInner) Get() *ListakamaiIntegrations200ResponseDataInner {
+func (v NullableListIntegrations200ResponseDataInner) Get() *ListIntegrations200ResponseDataInner {
 	return v.value
 }
 
-func (v *NullableListakamaiIntegrations200ResponseDataInner) Set(val *ListakamaiIntegrations200ResponseDataInner) {
+func (v *NullableListIntegrations200ResponseDataInner) Set(val *ListIntegrations200ResponseDataInner) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableListakamaiIntegrations200ResponseDataInner) IsSet() bool {
+func (v NullableListIntegrations200ResponseDataInner) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableListakamaiIntegrations200ResponseDataInner) Unset() {
+func (v *NullableListIntegrations200ResponseDataInner) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableListakamaiIntegrations200ResponseDataInner(val *ListakamaiIntegrations200ResponseDataInner) *NullableListakamaiIntegrations200ResponseDataInner {
-	return &NullableListakamaiIntegrations200ResponseDataInner{value: val, isSet: true}
+func NewNullableListIntegrations200ResponseDataInner(val *ListIntegrations200ResponseDataInner) *NullableListIntegrations200ResponseDataInner {
+	return &NullableListIntegrations200ResponseDataInner{value: val, isSet: true}
 }
 
-func (v NullableListakamaiIntegrations200ResponseDataInner) MarshalJSON() ([]byte, error) {
+func (v NullableListIntegrations200ResponseDataInner) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableListakamaiIntegrations200ResponseDataInner) UnmarshalJSON(src []byte) error {
+func (v *NullableListIntegrations200ResponseDataInner) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

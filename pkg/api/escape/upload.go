@@ -11,7 +11,7 @@ import (
 
 // GetUploadSignedURL gets a signed url
 func GetUploadSignedURL(ctx context.Context) (*v3.UploadSummary, error) {
-	client, err := NewAPIV3Client()
+	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
@@ -25,7 +25,7 @@ func GetUploadSignedURL(ctx context.Context) (*v3.UploadSummary, error) {
 
 // UploadSchema uploads a file to the signed url
 func UploadSchema(ctx context.Context, url string, data []byte) error {
-    req, err := http.NewRequestWithContext(ctx, http.MethodPut, url, bytes.NewBuffer(data))
+	req, err := http.NewRequestWithContext(ctx, http.MethodPut, url, bytes.NewBuffer(data))
 	req.Header.Set("Content-Type", "application/json")
 	if err != nil {
 		return fmt.Errorf("unable to create request: %w", err)
@@ -43,5 +43,3 @@ func UploadSchema(ctx context.Context, url string, data []byte) error {
 
 	return nil
 }
-
-

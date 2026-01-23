@@ -5423,6 +5423,7 @@ type ApiListakamaiIntegrationsRequest struct {
 	sortDirection *string
 	projectIds *[]string
 	ids *string
+	locationId *string
 	search *string
 }
 
@@ -5462,13 +5463,19 @@ func (r ApiListakamaiIntegrationsRequest) Ids(ids string) ApiListakamaiIntegrati
 	return r
 }
 
+// Filter by location ID
+func (r ApiListakamaiIntegrationsRequest) LocationId(locationId string) ApiListakamaiIntegrationsRequest {
+	r.locationId = &locationId
+	return r
+}
+
 // Search term to filter integrations by name or description
 func (r ApiListakamaiIntegrationsRequest) Search(search string) ApiListakamaiIntegrationsRequest {
 	r.search = &search
 	return r
 }
 
-func (r ApiListakamaiIntegrationsRequest) Execute() (*ListakamaiIntegrations200Response, *http.Response, error) {
+func (r ApiListakamaiIntegrationsRequest) Execute() (*ListIntegrations200Response, *http.Response, error) {
 	return r.ApiService.ListakamaiIntegrationsExecute(r)
 }
 
@@ -5488,13 +5495,13 @@ func (a *IntegrationsAPIService) ListakamaiIntegrations(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return ListakamaiIntegrations200Response
-func (a *IntegrationsAPIService) ListakamaiIntegrationsExecute(r ApiListakamaiIntegrationsRequest) (*ListakamaiIntegrations200Response, *http.Response, error) {
+//  @return ListIntegrations200Response
+func (a *IntegrationsAPIService) ListakamaiIntegrationsExecute(r ApiListakamaiIntegrationsRequest) (*ListIntegrations200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ListakamaiIntegrations200Response
+		localVarReturnValue  *ListIntegrations200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.ListakamaiIntegrations")
@@ -5541,6 +5548,9 @@ func (a *IntegrationsAPIService) ListakamaiIntegrationsExecute(r ApiListakamaiIn
 	}
 	if r.ids != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "ids", r.ids, "form", "")
+	}
+	if r.locationId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "locationId", r.locationId, "form", "")
 	}
 	if r.search != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")
@@ -5632,6 +5642,7 @@ type ApiListapigeeIntegrationsRequest struct {
 	sortDirection *string
 	projectIds *[]string
 	ids *string
+	locationId *string
 	search *string
 }
 
@@ -5671,13 +5682,19 @@ func (r ApiListapigeeIntegrationsRequest) Ids(ids string) ApiListapigeeIntegrati
 	return r
 }
 
+// Filter by location ID
+func (r ApiListapigeeIntegrationsRequest) LocationId(locationId string) ApiListapigeeIntegrationsRequest {
+	r.locationId = &locationId
+	return r
+}
+
 // Search term to filter integrations by name or description
 func (r ApiListapigeeIntegrationsRequest) Search(search string) ApiListapigeeIntegrationsRequest {
 	r.search = &search
 	return r
 }
 
-func (r ApiListapigeeIntegrationsRequest) Execute() (*ListakamaiIntegrations200Response, *http.Response, error) {
+func (r ApiListapigeeIntegrationsRequest) Execute() (*ListIntegrations200Response, *http.Response, error) {
 	return r.ApiService.ListapigeeIntegrationsExecute(r)
 }
 
@@ -5697,13 +5714,13 @@ func (a *IntegrationsAPIService) ListapigeeIntegrations(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return ListakamaiIntegrations200Response
-func (a *IntegrationsAPIService) ListapigeeIntegrationsExecute(r ApiListapigeeIntegrationsRequest) (*ListakamaiIntegrations200Response, *http.Response, error) {
+//  @return ListIntegrations200Response
+func (a *IntegrationsAPIService) ListapigeeIntegrationsExecute(r ApiListapigeeIntegrationsRequest) (*ListIntegrations200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ListakamaiIntegrations200Response
+		localVarReturnValue  *ListIntegrations200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.ListapigeeIntegrations")
@@ -5750,6 +5767,9 @@ func (a *IntegrationsAPIService) ListapigeeIntegrationsExecute(r ApiListapigeeIn
 	}
 	if r.ids != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "ids", r.ids, "form", "")
+	}
+	if r.locationId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "locationId", r.locationId, "form", "")
 	}
 	if r.search != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")
@@ -5841,6 +5861,7 @@ type ApiListawsIntegrationsRequest struct {
 	sortDirection *string
 	projectIds *[]string
 	ids *string
+	locationId *string
 	search *string
 }
 
@@ -5880,13 +5901,19 @@ func (r ApiListawsIntegrationsRequest) Ids(ids string) ApiListawsIntegrationsReq
 	return r
 }
 
+// Filter by location ID
+func (r ApiListawsIntegrationsRequest) LocationId(locationId string) ApiListawsIntegrationsRequest {
+	r.locationId = &locationId
+	return r
+}
+
 // Search term to filter integrations by name or description
 func (r ApiListawsIntegrationsRequest) Search(search string) ApiListawsIntegrationsRequest {
 	r.search = &search
 	return r
 }
 
-func (r ApiListawsIntegrationsRequest) Execute() (*ListakamaiIntegrations200Response, *http.Response, error) {
+func (r ApiListawsIntegrationsRequest) Execute() (*ListIntegrations200Response, *http.Response, error) {
 	return r.ApiService.ListawsIntegrationsExecute(r)
 }
 
@@ -5906,13 +5933,13 @@ func (a *IntegrationsAPIService) ListawsIntegrations(ctx context.Context) ApiLis
 }
 
 // Execute executes the request
-//  @return ListakamaiIntegrations200Response
-func (a *IntegrationsAPIService) ListawsIntegrationsExecute(r ApiListawsIntegrationsRequest) (*ListakamaiIntegrations200Response, *http.Response, error) {
+//  @return ListIntegrations200Response
+func (a *IntegrationsAPIService) ListawsIntegrationsExecute(r ApiListawsIntegrationsRequest) (*ListIntegrations200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ListakamaiIntegrations200Response
+		localVarReturnValue  *ListIntegrations200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.ListawsIntegrations")
@@ -5959,6 +5986,9 @@ func (a *IntegrationsAPIService) ListawsIntegrationsExecute(r ApiListawsIntegrat
 	}
 	if r.ids != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "ids", r.ids, "form", "")
+	}
+	if r.locationId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "locationId", r.locationId, "form", "")
 	}
 	if r.search != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")
@@ -6050,6 +6080,7 @@ type ApiListazureIntegrationsRequest struct {
 	sortDirection *string
 	projectIds *[]string
 	ids *string
+	locationId *string
 	search *string
 }
 
@@ -6089,13 +6120,19 @@ func (r ApiListazureIntegrationsRequest) Ids(ids string) ApiListazureIntegration
 	return r
 }
 
+// Filter by location ID
+func (r ApiListazureIntegrationsRequest) LocationId(locationId string) ApiListazureIntegrationsRequest {
+	r.locationId = &locationId
+	return r
+}
+
 // Search term to filter integrations by name or description
 func (r ApiListazureIntegrationsRequest) Search(search string) ApiListazureIntegrationsRequest {
 	r.search = &search
 	return r
 }
 
-func (r ApiListazureIntegrationsRequest) Execute() (*ListakamaiIntegrations200Response, *http.Response, error) {
+func (r ApiListazureIntegrationsRequest) Execute() (*ListIntegrations200Response, *http.Response, error) {
 	return r.ApiService.ListazureIntegrationsExecute(r)
 }
 
@@ -6115,13 +6152,13 @@ func (a *IntegrationsAPIService) ListazureIntegrations(ctx context.Context) ApiL
 }
 
 // Execute executes the request
-//  @return ListakamaiIntegrations200Response
-func (a *IntegrationsAPIService) ListazureIntegrationsExecute(r ApiListazureIntegrationsRequest) (*ListakamaiIntegrations200Response, *http.Response, error) {
+//  @return ListIntegrations200Response
+func (a *IntegrationsAPIService) ListazureIntegrationsExecute(r ApiListazureIntegrationsRequest) (*ListIntegrations200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ListakamaiIntegrations200Response
+		localVarReturnValue  *ListIntegrations200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.ListazureIntegrations")
@@ -6168,6 +6205,9 @@ func (a *IntegrationsAPIService) ListazureIntegrationsExecute(r ApiListazureInte
 	}
 	if r.ids != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "ids", r.ids, "form", "")
+	}
+	if r.locationId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "locationId", r.locationId, "form", "")
 	}
 	if r.search != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")
@@ -6259,6 +6299,7 @@ type ApiListbitbucketRepoIntegrationsRequest struct {
 	sortDirection *string
 	projectIds *[]string
 	ids *string
+	locationId *string
 	search *string
 }
 
@@ -6298,13 +6339,19 @@ func (r ApiListbitbucketRepoIntegrationsRequest) Ids(ids string) ApiListbitbucke
 	return r
 }
 
+// Filter by location ID
+func (r ApiListbitbucketRepoIntegrationsRequest) LocationId(locationId string) ApiListbitbucketRepoIntegrationsRequest {
+	r.locationId = &locationId
+	return r
+}
+
 // Search term to filter integrations by name or description
 func (r ApiListbitbucketRepoIntegrationsRequest) Search(search string) ApiListbitbucketRepoIntegrationsRequest {
 	r.search = &search
 	return r
 }
 
-func (r ApiListbitbucketRepoIntegrationsRequest) Execute() (*ListakamaiIntegrations200Response, *http.Response, error) {
+func (r ApiListbitbucketRepoIntegrationsRequest) Execute() (*ListIntegrations200Response, *http.Response, error) {
 	return r.ApiService.ListbitbucketRepoIntegrationsExecute(r)
 }
 
@@ -6324,13 +6371,13 @@ func (a *IntegrationsAPIService) ListbitbucketRepoIntegrations(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return ListakamaiIntegrations200Response
-func (a *IntegrationsAPIService) ListbitbucketRepoIntegrationsExecute(r ApiListbitbucketRepoIntegrationsRequest) (*ListakamaiIntegrations200Response, *http.Response, error) {
+//  @return ListIntegrations200Response
+func (a *IntegrationsAPIService) ListbitbucketRepoIntegrationsExecute(r ApiListbitbucketRepoIntegrationsRequest) (*ListIntegrations200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ListakamaiIntegrations200Response
+		localVarReturnValue  *ListIntegrations200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.ListbitbucketRepoIntegrations")
@@ -6377,6 +6424,9 @@ func (a *IntegrationsAPIService) ListbitbucketRepoIntegrationsExecute(r ApiListb
 	}
 	if r.ids != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "ids", r.ids, "form", "")
+	}
+	if r.locationId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "locationId", r.locationId, "form", "")
 	}
 	if r.search != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")
@@ -6468,6 +6518,7 @@ type ApiListcloudflareIntegrationsRequest struct {
 	sortDirection *string
 	projectIds *[]string
 	ids *string
+	locationId *string
 	search *string
 }
 
@@ -6507,13 +6558,19 @@ func (r ApiListcloudflareIntegrationsRequest) Ids(ids string) ApiListcloudflareI
 	return r
 }
 
+// Filter by location ID
+func (r ApiListcloudflareIntegrationsRequest) LocationId(locationId string) ApiListcloudflareIntegrationsRequest {
+	r.locationId = &locationId
+	return r
+}
+
 // Search term to filter integrations by name or description
 func (r ApiListcloudflareIntegrationsRequest) Search(search string) ApiListcloudflareIntegrationsRequest {
 	r.search = &search
 	return r
 }
 
-func (r ApiListcloudflareIntegrationsRequest) Execute() (*ListakamaiIntegrations200Response, *http.Response, error) {
+func (r ApiListcloudflareIntegrationsRequest) Execute() (*ListIntegrations200Response, *http.Response, error) {
 	return r.ApiService.ListcloudflareIntegrationsExecute(r)
 }
 
@@ -6533,13 +6590,13 @@ func (a *IntegrationsAPIService) ListcloudflareIntegrations(ctx context.Context)
 }
 
 // Execute executes the request
-//  @return ListakamaiIntegrations200Response
-func (a *IntegrationsAPIService) ListcloudflareIntegrationsExecute(r ApiListcloudflareIntegrationsRequest) (*ListakamaiIntegrations200Response, *http.Response, error) {
+//  @return ListIntegrations200Response
+func (a *IntegrationsAPIService) ListcloudflareIntegrationsExecute(r ApiListcloudflareIntegrationsRequest) (*ListIntegrations200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ListakamaiIntegrations200Response
+		localVarReturnValue  *ListIntegrations200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.ListcloudflareIntegrations")
@@ -6586,6 +6643,9 @@ func (a *IntegrationsAPIService) ListcloudflareIntegrationsExecute(r ApiListclou
 	}
 	if r.ids != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "ids", r.ids, "form", "")
+	}
+	if r.locationId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "locationId", r.locationId, "form", "")
 	}
 	if r.search != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")
@@ -6677,6 +6737,7 @@ type ApiListcustomIntegrationsRequest struct {
 	sortDirection *string
 	projectIds *[]string
 	ids *string
+	locationId *string
 	search *string
 }
 
@@ -6716,13 +6777,19 @@ func (r ApiListcustomIntegrationsRequest) Ids(ids string) ApiListcustomIntegrati
 	return r
 }
 
+// Filter by location ID
+func (r ApiListcustomIntegrationsRequest) LocationId(locationId string) ApiListcustomIntegrationsRequest {
+	r.locationId = &locationId
+	return r
+}
+
 // Search term to filter integrations by name or description
 func (r ApiListcustomIntegrationsRequest) Search(search string) ApiListcustomIntegrationsRequest {
 	r.search = &search
 	return r
 }
 
-func (r ApiListcustomIntegrationsRequest) Execute() (*ListakamaiIntegrations200Response, *http.Response, error) {
+func (r ApiListcustomIntegrationsRequest) Execute() (*ListIntegrations200Response, *http.Response, error) {
 	return r.ApiService.ListcustomIntegrationsExecute(r)
 }
 
@@ -6742,13 +6809,13 @@ func (a *IntegrationsAPIService) ListcustomIntegrations(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return ListakamaiIntegrations200Response
-func (a *IntegrationsAPIService) ListcustomIntegrationsExecute(r ApiListcustomIntegrationsRequest) (*ListakamaiIntegrations200Response, *http.Response, error) {
+//  @return ListIntegrations200Response
+func (a *IntegrationsAPIService) ListcustomIntegrationsExecute(r ApiListcustomIntegrationsRequest) (*ListIntegrations200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ListakamaiIntegrations200Response
+		localVarReturnValue  *ListIntegrations200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.ListcustomIntegrations")
@@ -6795,6 +6862,9 @@ func (a *IntegrationsAPIService) ListcustomIntegrationsExecute(r ApiListcustomIn
 	}
 	if r.ids != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "ids", r.ids, "form", "")
+	}
+	if r.locationId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "locationId", r.locationId, "form", "")
 	}
 	if r.search != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")
@@ -6886,6 +6956,7 @@ type ApiListgcpIntegrationsRequest struct {
 	sortDirection *string
 	projectIds *[]string
 	ids *string
+	locationId *string
 	search *string
 }
 
@@ -6925,13 +6996,19 @@ func (r ApiListgcpIntegrationsRequest) Ids(ids string) ApiListgcpIntegrationsReq
 	return r
 }
 
+// Filter by location ID
+func (r ApiListgcpIntegrationsRequest) LocationId(locationId string) ApiListgcpIntegrationsRequest {
+	r.locationId = &locationId
+	return r
+}
+
 // Search term to filter integrations by name or description
 func (r ApiListgcpIntegrationsRequest) Search(search string) ApiListgcpIntegrationsRequest {
 	r.search = &search
 	return r
 }
 
-func (r ApiListgcpIntegrationsRequest) Execute() (*ListakamaiIntegrations200Response, *http.Response, error) {
+func (r ApiListgcpIntegrationsRequest) Execute() (*ListIntegrations200Response, *http.Response, error) {
 	return r.ApiService.ListgcpIntegrationsExecute(r)
 }
 
@@ -6951,13 +7028,13 @@ func (a *IntegrationsAPIService) ListgcpIntegrations(ctx context.Context) ApiLis
 }
 
 // Execute executes the request
-//  @return ListakamaiIntegrations200Response
-func (a *IntegrationsAPIService) ListgcpIntegrationsExecute(r ApiListgcpIntegrationsRequest) (*ListakamaiIntegrations200Response, *http.Response, error) {
+//  @return ListIntegrations200Response
+func (a *IntegrationsAPIService) ListgcpIntegrationsExecute(r ApiListgcpIntegrationsRequest) (*ListIntegrations200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ListakamaiIntegrations200Response
+		localVarReturnValue  *ListIntegrations200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.ListgcpIntegrations")
@@ -7004,6 +7081,9 @@ func (a *IntegrationsAPIService) ListgcpIntegrationsExecute(r ApiListgcpIntegrat
 	}
 	if r.ids != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "ids", r.ids, "form", "")
+	}
+	if r.locationId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "locationId", r.locationId, "form", "")
 	}
 	if r.search != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")
@@ -7095,6 +7175,7 @@ type ApiListgithubIntegrationsRequest struct {
 	sortDirection *string
 	projectIds *[]string
 	ids *string
+	locationId *string
 	search *string
 }
 
@@ -7134,13 +7215,19 @@ func (r ApiListgithubIntegrationsRequest) Ids(ids string) ApiListgithubIntegrati
 	return r
 }
 
+// Filter by location ID
+func (r ApiListgithubIntegrationsRequest) LocationId(locationId string) ApiListgithubIntegrationsRequest {
+	r.locationId = &locationId
+	return r
+}
+
 // Search term to filter integrations by name or description
 func (r ApiListgithubIntegrationsRequest) Search(search string) ApiListgithubIntegrationsRequest {
 	r.search = &search
 	return r
 }
 
-func (r ApiListgithubIntegrationsRequest) Execute() (*ListakamaiIntegrations200Response, *http.Response, error) {
+func (r ApiListgithubIntegrationsRequest) Execute() (*ListIntegrations200Response, *http.Response, error) {
 	return r.ApiService.ListgithubIntegrationsExecute(r)
 }
 
@@ -7160,13 +7247,13 @@ func (a *IntegrationsAPIService) ListgithubIntegrations(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return ListakamaiIntegrations200Response
-func (a *IntegrationsAPIService) ListgithubIntegrationsExecute(r ApiListgithubIntegrationsRequest) (*ListakamaiIntegrations200Response, *http.Response, error) {
+//  @return ListIntegrations200Response
+func (a *IntegrationsAPIService) ListgithubIntegrationsExecute(r ApiListgithubIntegrationsRequest) (*ListIntegrations200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ListakamaiIntegrations200Response
+		localVarReturnValue  *ListIntegrations200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.ListgithubIntegrations")
@@ -7213,6 +7300,9 @@ func (a *IntegrationsAPIService) ListgithubIntegrationsExecute(r ApiListgithubIn
 	}
 	if r.ids != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "ids", r.ids, "form", "")
+	}
+	if r.locationId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "locationId", r.locationId, "form", "")
 	}
 	if r.search != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")
@@ -7304,6 +7394,7 @@ type ApiListgitlabIntegrationsRequest struct {
 	sortDirection *string
 	projectIds *[]string
 	ids *string
+	locationId *string
 	search *string
 }
 
@@ -7343,13 +7434,19 @@ func (r ApiListgitlabIntegrationsRequest) Ids(ids string) ApiListgitlabIntegrati
 	return r
 }
 
+// Filter by location ID
+func (r ApiListgitlabIntegrationsRequest) LocationId(locationId string) ApiListgitlabIntegrationsRequest {
+	r.locationId = &locationId
+	return r
+}
+
 // Search term to filter integrations by name or description
 func (r ApiListgitlabIntegrationsRequest) Search(search string) ApiListgitlabIntegrationsRequest {
 	r.search = &search
 	return r
 }
 
-func (r ApiListgitlabIntegrationsRequest) Execute() (*ListakamaiIntegrations200Response, *http.Response, error) {
+func (r ApiListgitlabIntegrationsRequest) Execute() (*ListIntegrations200Response, *http.Response, error) {
 	return r.ApiService.ListgitlabIntegrationsExecute(r)
 }
 
@@ -7369,13 +7466,13 @@ func (a *IntegrationsAPIService) ListgitlabIntegrations(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return ListakamaiIntegrations200Response
-func (a *IntegrationsAPIService) ListgitlabIntegrationsExecute(r ApiListgitlabIntegrationsRequest) (*ListakamaiIntegrations200Response, *http.Response, error) {
+//  @return ListIntegrations200Response
+func (a *IntegrationsAPIService) ListgitlabIntegrationsExecute(r ApiListgitlabIntegrationsRequest) (*ListIntegrations200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ListakamaiIntegrations200Response
+		localVarReturnValue  *ListIntegrations200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.ListgitlabIntegrations")
@@ -7422,6 +7519,9 @@ func (a *IntegrationsAPIService) ListgitlabIntegrationsExecute(r ApiListgitlabIn
 	}
 	if r.ids != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "ids", r.ids, "form", "")
+	}
+	if r.locationId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "locationId", r.locationId, "form", "")
 	}
 	if r.search != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")
@@ -7513,6 +7613,7 @@ type ApiListjiraIntegrationsRequest struct {
 	sortDirection *string
 	projectIds *[]string
 	ids *string
+	locationId *string
 	search *string
 }
 
@@ -7552,13 +7653,19 @@ func (r ApiListjiraIntegrationsRequest) Ids(ids string) ApiListjiraIntegrationsR
 	return r
 }
 
+// Filter by location ID
+func (r ApiListjiraIntegrationsRequest) LocationId(locationId string) ApiListjiraIntegrationsRequest {
+	r.locationId = &locationId
+	return r
+}
+
 // Search term to filter integrations by name or description
 func (r ApiListjiraIntegrationsRequest) Search(search string) ApiListjiraIntegrationsRequest {
 	r.search = &search
 	return r
 }
 
-func (r ApiListjiraIntegrationsRequest) Execute() (*ListakamaiIntegrations200Response, *http.Response, error) {
+func (r ApiListjiraIntegrationsRequest) Execute() (*ListIntegrations200Response, *http.Response, error) {
 	return r.ApiService.ListjiraIntegrationsExecute(r)
 }
 
@@ -7578,13 +7685,13 @@ func (a *IntegrationsAPIService) ListjiraIntegrations(ctx context.Context) ApiLi
 }
 
 // Execute executes the request
-//  @return ListakamaiIntegrations200Response
-func (a *IntegrationsAPIService) ListjiraIntegrationsExecute(r ApiListjiraIntegrationsRequest) (*ListakamaiIntegrations200Response, *http.Response, error) {
+//  @return ListIntegrations200Response
+func (a *IntegrationsAPIService) ListjiraIntegrationsExecute(r ApiListjiraIntegrationsRequest) (*ListIntegrations200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ListakamaiIntegrations200Response
+		localVarReturnValue  *ListIntegrations200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.ListjiraIntegrations")
@@ -7631,6 +7738,9 @@ func (a *IntegrationsAPIService) ListjiraIntegrationsExecute(r ApiListjiraIntegr
 	}
 	if r.ids != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "ids", r.ids, "form", "")
+	}
+	if r.locationId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "locationId", r.locationId, "form", "")
 	}
 	if r.search != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")
@@ -7722,6 +7832,7 @@ type ApiListkubernetesIntegrationsRequest struct {
 	sortDirection *string
 	projectIds *[]string
 	ids *string
+	locationId *string
 	search *string
 }
 
@@ -7761,13 +7872,19 @@ func (r ApiListkubernetesIntegrationsRequest) Ids(ids string) ApiListkubernetesI
 	return r
 }
 
+// Filter by location ID
+func (r ApiListkubernetesIntegrationsRequest) LocationId(locationId string) ApiListkubernetesIntegrationsRequest {
+	r.locationId = &locationId
+	return r
+}
+
 // Search term to filter integrations by name or description
 func (r ApiListkubernetesIntegrationsRequest) Search(search string) ApiListkubernetesIntegrationsRequest {
 	r.search = &search
 	return r
 }
 
-func (r ApiListkubernetesIntegrationsRequest) Execute() (*ListakamaiIntegrations200Response, *http.Response, error) {
+func (r ApiListkubernetesIntegrationsRequest) Execute() (*ListIntegrations200Response, *http.Response, error) {
 	return r.ApiService.ListkubernetesIntegrationsExecute(r)
 }
 
@@ -7787,13 +7904,13 @@ func (a *IntegrationsAPIService) ListkubernetesIntegrations(ctx context.Context)
 }
 
 // Execute executes the request
-//  @return ListakamaiIntegrations200Response
-func (a *IntegrationsAPIService) ListkubernetesIntegrationsExecute(r ApiListkubernetesIntegrationsRequest) (*ListakamaiIntegrations200Response, *http.Response, error) {
+//  @return ListIntegrations200Response
+func (a *IntegrationsAPIService) ListkubernetesIntegrationsExecute(r ApiListkubernetesIntegrationsRequest) (*ListIntegrations200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ListakamaiIntegrations200Response
+		localVarReturnValue  *ListIntegrations200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.ListkubernetesIntegrations")
@@ -7840,6 +7957,9 @@ func (a *IntegrationsAPIService) ListkubernetesIntegrationsExecute(r ApiListkube
 	}
 	if r.ids != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "ids", r.ids, "form", "")
+	}
+	if r.locationId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "locationId", r.locationId, "form", "")
 	}
 	if r.search != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")
@@ -7931,6 +8051,7 @@ type ApiListpostmanIntegrationsRequest struct {
 	sortDirection *string
 	projectIds *[]string
 	ids *string
+	locationId *string
 	search *string
 }
 
@@ -7970,13 +8091,19 @@ func (r ApiListpostmanIntegrationsRequest) Ids(ids string) ApiListpostmanIntegra
 	return r
 }
 
+// Filter by location ID
+func (r ApiListpostmanIntegrationsRequest) LocationId(locationId string) ApiListpostmanIntegrationsRequest {
+	r.locationId = &locationId
+	return r
+}
+
 // Search term to filter integrations by name or description
 func (r ApiListpostmanIntegrationsRequest) Search(search string) ApiListpostmanIntegrationsRequest {
 	r.search = &search
 	return r
 }
 
-func (r ApiListpostmanIntegrationsRequest) Execute() (*ListakamaiIntegrations200Response, *http.Response, error) {
+func (r ApiListpostmanIntegrationsRequest) Execute() (*ListIntegrations200Response, *http.Response, error) {
 	return r.ApiService.ListpostmanIntegrationsExecute(r)
 }
 
@@ -7996,13 +8123,13 @@ func (a *IntegrationsAPIService) ListpostmanIntegrations(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//  @return ListakamaiIntegrations200Response
-func (a *IntegrationsAPIService) ListpostmanIntegrationsExecute(r ApiListpostmanIntegrationsRequest) (*ListakamaiIntegrations200Response, *http.Response, error) {
+//  @return ListIntegrations200Response
+func (a *IntegrationsAPIService) ListpostmanIntegrationsExecute(r ApiListpostmanIntegrationsRequest) (*ListIntegrations200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ListakamaiIntegrations200Response
+		localVarReturnValue  *ListIntegrations200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.ListpostmanIntegrations")
@@ -8049,6 +8176,9 @@ func (a *IntegrationsAPIService) ListpostmanIntegrationsExecute(r ApiListpostman
 	}
 	if r.ids != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "ids", r.ids, "form", "")
+	}
+	if r.locationId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "locationId", r.locationId, "form", "")
 	}
 	if r.search != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")
@@ -8140,6 +8270,7 @@ type ApiListwizIntegrationsRequest struct {
 	sortDirection *string
 	projectIds *[]string
 	ids *string
+	locationId *string
 	search *string
 }
 
@@ -8179,13 +8310,19 @@ func (r ApiListwizIntegrationsRequest) Ids(ids string) ApiListwizIntegrationsReq
 	return r
 }
 
+// Filter by location ID
+func (r ApiListwizIntegrationsRequest) LocationId(locationId string) ApiListwizIntegrationsRequest {
+	r.locationId = &locationId
+	return r
+}
+
 // Search term to filter integrations by name or description
 func (r ApiListwizIntegrationsRequest) Search(search string) ApiListwizIntegrationsRequest {
 	r.search = &search
 	return r
 }
 
-func (r ApiListwizIntegrationsRequest) Execute() (*ListakamaiIntegrations200Response, *http.Response, error) {
+func (r ApiListwizIntegrationsRequest) Execute() (*ListIntegrations200Response, *http.Response, error) {
 	return r.ApiService.ListwizIntegrationsExecute(r)
 }
 
@@ -8205,13 +8342,13 @@ func (a *IntegrationsAPIService) ListwizIntegrations(ctx context.Context) ApiLis
 }
 
 // Execute executes the request
-//  @return ListakamaiIntegrations200Response
-func (a *IntegrationsAPIService) ListwizIntegrationsExecute(r ApiListwizIntegrationsRequest) (*ListakamaiIntegrations200Response, *http.Response, error) {
+//  @return ListIntegrations200Response
+func (a *IntegrationsAPIService) ListwizIntegrationsExecute(r ApiListwizIntegrationsRequest) (*ListIntegrations200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ListakamaiIntegrations200Response
+		localVarReturnValue  *ListIntegrations200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.ListwizIntegrations")
@@ -8258,6 +8395,9 @@ func (a *IntegrationsAPIService) ListwizIntegrationsExecute(r ApiListwizIntegrat
 	}
 	if r.ids != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "ids", r.ids, "form", "")
+	}
+	if r.locationId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "locationId", r.locationId, "form", "")
 	}
 	if r.search != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")

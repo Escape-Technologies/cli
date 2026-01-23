@@ -9,7 +9,7 @@ import (
 
 // ListTags lists all tags
 func ListTags(ctx context.Context) ([]v3.TagDetail, error) {
-	client, err := NewAPIV3Client()
+	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
@@ -23,13 +23,13 @@ func ListTags(ctx context.Context) ([]v3.TagDetail, error) {
 
 // CreateTag creates a tag
 func CreateTag(ctx context.Context, name string, color string) (*v3.TagDetail, error) {
-	client, err := NewAPIV3Client()
+	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
 	req := client.TagsAPI.CreateTag(ctx)
 	data, _, err := req.CreateTagRequest(v3.CreateTagRequest{
-		Name: name,
+		Name:  name,
 		Color: color,
 	}).Execute()
 	if err != nil {
@@ -40,7 +40,7 @@ func CreateTag(ctx context.Context, name string, color string) (*v3.TagDetail, e
 
 // DeleteTag deletes a tag
 func DeleteTag(ctx context.Context, id string) error {
-	client, err := NewAPIV3Client()
+	client, err := newAPIV3Client()
 	if err != nil {
 		return fmt.Errorf("unable to init client: %w", err)
 	}

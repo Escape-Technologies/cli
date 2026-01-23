@@ -16,7 +16,7 @@ const (
 
 // WatchScan watches scans status and logs
 func WatchScan(ctx context.Context, scanID string) (chan *v3.ScanDetailed1, error) {
-	client, err := NewAPIV3Client()
+	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
