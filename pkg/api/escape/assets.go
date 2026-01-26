@@ -16,9 +16,9 @@ import (
 
 // ListAssetsFilters holds optional filters for listing assets
 type ListAssetsFilters struct {
-	AssetTypes []string
-	AssetStatuses []string
-	Search string
+	AssetTypes      []string
+	AssetStatuses   []string
+	Search          string
 	ManuallyCreated bool
 }
 
@@ -135,9 +135,9 @@ func UpdateAsset(
 // normalizeAssetType normalizes asset type tokens to match generated method names
 // e.g. KUBERNETES_CLUSTER -> KUBERNETESCLUSTER, http-endpoint -> httpendpoint
 func normalizeAssetType(s string) string {
-    s = strings.ReplaceAll(s, "_", "")
-    s = strings.ReplaceAll(s, "-", "")
-    return s
+	s = strings.ReplaceAll(s, "_", "")
+	s = strings.ReplaceAll(s, "-", "")
+	return s
 }
 
 // CreateAsset creates an asset
@@ -168,7 +168,7 @@ func CreateAsset(ctx context.Context, data []byte, assetType string) (interface{
 				// unmarshal raw JSON to typed payload
 				payloadType := setter.Type().In(0)
 				payloadPtr := reflect.New(payloadType)
-				
+
 				err = json.Unmarshal(data, payloadPtr.Interface())
 				if err != nil {
 					return nil, fmt.Errorf("invalid JSON for %s: %w", payloadType.Name(), err)
@@ -182,7 +182,7 @@ func CreateAsset(ctx context.Context, data []byte, assetType string) (interface{
 					return nil, errors.New("failed to find Execute method")
 				}
 				results := executeMethod.Call(nil)
-				
+
 				return results[0].Interface(), nil
 			}
 		}

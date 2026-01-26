@@ -12,8 +12,8 @@ import (
 
 // ListLocationsFilters holds optional filters for listing locations
 type ListLocationsFilters struct {
-	Search string
-	Enabled bool
+	Search        string
+	Enabled       bool
 	LocationTypes []string
 }
 

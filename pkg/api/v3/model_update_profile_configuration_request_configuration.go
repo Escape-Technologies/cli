@@ -21,6 +21,7 @@ var _ MappedNullable = &UpdateProfileConfigurationRequestConfiguration{}
 type UpdateProfileConfigurationRequestConfiguration struct {
 	PublicLocationIds []string `json:"public_location_ids,omitempty"`
 	PrivateLocationIds []string `json:"private_location_ids,omitempty"`
+	Scope *ProfileDetailedConfigurationScope `json:"scope,omitempty"`
 	ExplorationScope []string `json:"exploration_scope,omitempty"`
 	ApiCustomRuleIds []string `json:"api_custom_rule_ids,omitempty"`
 	FrontendCustomRuleIds []string `json:"frontend_custom_rule_ids,omitempty"`
@@ -120,6 +121,38 @@ func (o *UpdateProfileConfigurationRequestConfiguration) HasPrivateLocationIds()
 // SetPrivateLocationIds gets a reference to the given []string and assigns it to the PrivateLocationIds field.
 func (o *UpdateProfileConfigurationRequestConfiguration) SetPrivateLocationIds(v []string) {
 	o.PrivateLocationIds = v
+}
+
+// GetScope returns the Scope field value if set, zero value otherwise.
+func (o *UpdateProfileConfigurationRequestConfiguration) GetScope() ProfileDetailedConfigurationScope {
+	if o == nil || IsNil(o.Scope) {
+		var ret ProfileDetailedConfigurationScope
+		return ret
+	}
+	return *o.Scope
+}
+
+// GetScopeOk returns a tuple with the Scope field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateProfileConfigurationRequestConfiguration) GetScopeOk() (*ProfileDetailedConfigurationScope, bool) {
+	if o == nil || IsNil(o.Scope) {
+		return nil, false
+	}
+	return o.Scope, true
+}
+
+// HasScope returns a boolean if a field has been set.
+func (o *UpdateProfileConfigurationRequestConfiguration) HasScope() bool {
+	if o != nil && !IsNil(o.Scope) {
+		return true
+	}
+
+	return false
+}
+
+// SetScope gets a reference to the given ProfileDetailedConfigurationScope and assigns it to the Scope field.
+func (o *UpdateProfileConfigurationRequestConfiguration) SetScope(v ProfileDetailedConfigurationScope) {
+	o.Scope = &v
 }
 
 // GetExplorationScope returns the ExplorationScope field value if set, zero value otherwise.
@@ -618,6 +651,9 @@ func (o UpdateProfileConfigurationRequestConfiguration) ToMap() (map[string]inte
 	if !IsNil(o.PrivateLocationIds) {
 		toSerialize["private_location_ids"] = o.PrivateLocationIds
 	}
+	if !IsNil(o.Scope) {
+		toSerialize["scope"] = o.Scope
+	}
 	if !IsNil(o.ExplorationScope) {
 		toSerialize["exploration_scope"] = o.ExplorationScope
 	}
@@ -687,6 +723,7 @@ func (o *UpdateProfileConfigurationRequestConfiguration) UnmarshalJSON(data []by
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "public_location_ids")
 		delete(additionalProperties, "private_location_ids")
+		delete(additionalProperties, "scope")
 		delete(additionalProperties, "exploration_scope")
 		delete(additionalProperties, "api_custom_rule_ids")
 		delete(additionalProperties, "frontend_custom_rule_ids")

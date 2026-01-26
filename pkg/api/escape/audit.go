@@ -9,11 +9,11 @@ import (
 
 // ListAuditLogsFilters holds optional filters for listing audit logs
 type ListAuditLogsFilters struct {
-	DateFrom string
-	DateTo string
+	DateFrom   string
+	DateTo     string
 	ActionType string
-	Actor string
-	Search string
+	Actor      string
+	Search     string
 }
 
 // ListAuditLogs lists audit logs

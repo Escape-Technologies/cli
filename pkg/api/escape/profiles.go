@@ -11,14 +11,14 @@ import (
 
 // ListProfilesFilters holds optional filters for listing profiles
 type ListProfilesFilters struct {
-	AssetIDs []string
-	Domains []string
-	IssueIDs []string
-	TagsIDs []string
-	Search string
+	AssetIDs   []string
+	Domains    []string
+	IssueIDs   []string
+	TagsIDs    []string
+	Search     string
 	Initiators []string
-	Kinds []string
-	Risks []string
+	Kinds      []string
+	Risks      []string
 }
 
 // ListProfiles lists all profiles
@@ -126,13 +126,13 @@ func CreateProfileGraphql(ctx context.Context, data []byte) (interface{}, error)
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
 
-    var payload v3.CreateDastGraphqlProfileRequest
+	var payload v3.CreateDastGraphqlProfileRequest
 	if err := json.Unmarshal(data, &payload); err != nil {
 		return nil, fmt.Errorf("invalid JSON: %w", err)
 	}
 
 	req := client.ProfilesAPI.CreateDastGraphqlProfile(ctx)
-    profile, _, err := req.CreateDastGraphqlProfileRequest(payload).Execute()
+	profile, _, err := req.CreateDastGraphqlProfileRequest(payload).Execute()
 	if err != nil {
 		return nil, fmt.Errorf("api error: %w", err)
 	}
@@ -156,14 +156,14 @@ func DeleteProfile(ctx context.Context, profileID string) error {
 
 // ListProblemsFilters holds optional filters for listing problems
 type ListProblemsFilters struct {
-	AssetIDs []string
-	Domains []string
-	IssueIDs []string
-	TagsIDs []string
-	Search string
+	AssetIDs   []string
+	Domains    []string
+	IssueIDs   []string
+	TagsIDs    []string
+	Search     string
 	Initiators []string
-	Kinds []string
-	Risks []string
+	Kinds      []string
+	Risks      []string
 }
 
 // ListProblems lists all scan problems

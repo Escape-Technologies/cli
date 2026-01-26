@@ -29,7 +29,7 @@ func CreateTag(ctx context.Context, name string, color string) (*v3.TagDetail, e
 	}
 	req := client.TagsAPI.CreateTag(ctx)
 	data, _, err := req.CreateTagRequest(v3.CreateTagRequest{
-		Name: name,
+		Name:  name,
 		Color: color,
 	}).Execute()
 	if err != nil {

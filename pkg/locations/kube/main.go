@@ -77,18 +77,12 @@ func connectAndRun(ctx context.Context, cfg *rest.Config, isConnected *atomic.Bo
 		}
 		log.Info("Connected to K8s API")
 		log.Trace("Upserting K8s integration")
-		asset := v3.NewCreateAssetKUBERNETESCLUSTERRequest(
-			v3.ENUMCLOUDHOSTING_CLOUD_HOSTING,
-			v3.ENUMKUBERNETESCLUSTER_KUBERNETES_CLUSTER,
-			locationID,
+		req := v3.NewCreatekubernetesIntegrationRequest(
+			locationName,
+			*v3.NewCreatekubernetesIntegrationRequestParameters(),
 		)
-		asset.Name = &locationName
-		data, err := asset.MarshalJSON()
-		if err != nil {
-			log.Error("Failed to marshal Kubernetes integration: %s", err)
-			return
-		}
-		_, err = escape.CreateAsset(ctx, data, "KUBERNETES_CLUSTER")
+		req.ProxyId = &locationID
+		_, err := escape.UpsertKubernetesIntegration(ctx, *req)
 		if err != nil {
 			errMsg := fmt.Sprintf("%s", err)
 			log.Error("Failed to register Kubernetes integration: %s", errMsg)

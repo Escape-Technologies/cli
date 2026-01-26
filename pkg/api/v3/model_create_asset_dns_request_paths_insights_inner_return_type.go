@@ -12,7 +12,6 @@ package v3
 
 import (
 	"encoding/json"
-	"fmt"
 )
 
 // checks if the CreateAssetDNSRequestPathsInsightsInnerReturnType type satisfies the MappedNullable interface at compile time
@@ -20,7 +19,7 @@ var _ MappedNullable = &CreateAssetDNSRequestPathsInsightsInnerReturnType{}
 
 // CreateAssetDNSRequestPathsInsightsInnerReturnType struct for CreateAssetDNSRequestPathsInsightsInnerReturnType
 type CreateAssetDNSRequestPathsInsightsInnerReturnType struct {
-	Responses map[string]CreateAssetDNSRequestPathsInsightsInnerReturnTypeResponsesValue `json:"responses"`
+	Responses map[string]CreateAssetDNSRequestPathsInsightsInnerReturnTypeResponsesValue `json:"responses,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -30,9 +29,8 @@ type _CreateAssetDNSRequestPathsInsightsInnerReturnType CreateAssetDNSRequestPat
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetDNSRequestPathsInsightsInnerReturnType(responses map[string]CreateAssetDNSRequestPathsInsightsInnerReturnTypeResponsesValue) *CreateAssetDNSRequestPathsInsightsInnerReturnType {
+func NewCreateAssetDNSRequestPathsInsightsInnerReturnType() *CreateAssetDNSRequestPathsInsightsInnerReturnType {
 	this := CreateAssetDNSRequestPathsInsightsInnerReturnType{}
-	this.Responses = responses
 	return &this
 }
 
@@ -44,26 +42,34 @@ func NewCreateAssetDNSRequestPathsInsightsInnerReturnTypeWithDefaults() *CreateA
 	return &this
 }
 
-// GetResponses returns the Responses field value
+// GetResponses returns the Responses field value if set, zero value otherwise.
 func (o *CreateAssetDNSRequestPathsInsightsInnerReturnType) GetResponses() map[string]CreateAssetDNSRequestPathsInsightsInnerReturnTypeResponsesValue {
-	if o == nil {
+	if o == nil || IsNil(o.Responses) {
 		var ret map[string]CreateAssetDNSRequestPathsInsightsInnerReturnTypeResponsesValue
 		return ret
 	}
-
 	return o.Responses
 }
 
-// GetResponsesOk returns a tuple with the Responses field value
+// GetResponsesOk returns a tuple with the Responses field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CreateAssetDNSRequestPathsInsightsInnerReturnType) GetResponsesOk() (map[string]CreateAssetDNSRequestPathsInsightsInnerReturnTypeResponsesValue, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Responses) {
 		return map[string]CreateAssetDNSRequestPathsInsightsInnerReturnTypeResponsesValue{}, false
 	}
 	return o.Responses, true
 }
 
-// SetResponses sets field value
+// HasResponses returns a boolean if a field has been set.
+func (o *CreateAssetDNSRequestPathsInsightsInnerReturnType) HasResponses() bool {
+	if o != nil && !IsNil(o.Responses) {
+		return true
+	}
+
+	return false
+}
+
+// SetResponses gets a reference to the given map[string]CreateAssetDNSRequestPathsInsightsInnerReturnTypeResponsesValue and assigns it to the Responses field.
 func (o *CreateAssetDNSRequestPathsInsightsInnerReturnType) SetResponses(v map[string]CreateAssetDNSRequestPathsInsightsInnerReturnTypeResponsesValue) {
 	o.Responses = v
 }
@@ -78,7 +84,9 @@ func (o CreateAssetDNSRequestPathsInsightsInnerReturnType) MarshalJSON() ([]byte
 
 func (o CreateAssetDNSRequestPathsInsightsInnerReturnType) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["responses"] = o.Responses
+	if !IsNil(o.Responses) {
+		toSerialize["responses"] = o.Responses
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -88,27 +96,6 @@ func (o CreateAssetDNSRequestPathsInsightsInnerReturnType) ToMap() (map[string]i
 }
 
 func (o *CreateAssetDNSRequestPathsInsightsInnerReturnType) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"responses",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
 	varCreateAssetDNSRequestPathsInsightsInnerReturnType := _CreateAssetDNSRequestPathsInsightsInnerReturnType{}
 
 	err = json.Unmarshal(data, &varCreateAssetDNSRequestPathsInsightsInnerReturnType)
