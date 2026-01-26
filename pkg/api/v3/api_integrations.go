@@ -5423,7 +5423,7 @@ type ApiListakamaiIntegrationsRequest struct {
 	sortDirection *string
 	projectIds *[]string
 	ids *string
-	locationId *string
+	locationIds *[]string
 	search *string
 }
 
@@ -5463,9 +5463,9 @@ func (r ApiListakamaiIntegrationsRequest) Ids(ids string) ApiListakamaiIntegrati
 	return r
 }
 
-// Filter by location ID
-func (r ApiListakamaiIntegrationsRequest) LocationId(locationId string) ApiListakamaiIntegrationsRequest {
-	r.locationId = &locationId
+// Filter by location IDs
+func (r ApiListakamaiIntegrationsRequest) LocationIds(locationIds []string) ApiListakamaiIntegrationsRequest {
+	r.locationIds = &locationIds
 	return r
 }
 
@@ -5549,8 +5549,16 @@ func (a *IntegrationsAPIService) ListakamaiIntegrationsExecute(r ApiListakamaiIn
 	if r.ids != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "ids", r.ids, "form", "")
 	}
-	if r.locationId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "locationId", r.locationId, "form", "")
+	if r.locationIds != nil {
+		t := *r.locationIds
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "locationIds", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "locationIds", t, "form", "multi")
+		}
 	}
 	if r.search != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")
@@ -5642,7 +5650,7 @@ type ApiListapigeeIntegrationsRequest struct {
 	sortDirection *string
 	projectIds *[]string
 	ids *string
-	locationId *string
+	locationIds *[]string
 	search *string
 }
 
@@ -5682,9 +5690,9 @@ func (r ApiListapigeeIntegrationsRequest) Ids(ids string) ApiListapigeeIntegrati
 	return r
 }
 
-// Filter by location ID
-func (r ApiListapigeeIntegrationsRequest) LocationId(locationId string) ApiListapigeeIntegrationsRequest {
-	r.locationId = &locationId
+// Filter by location IDs
+func (r ApiListapigeeIntegrationsRequest) LocationIds(locationIds []string) ApiListapigeeIntegrationsRequest {
+	r.locationIds = &locationIds
 	return r
 }
 
@@ -5768,8 +5776,16 @@ func (a *IntegrationsAPIService) ListapigeeIntegrationsExecute(r ApiListapigeeIn
 	if r.ids != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "ids", r.ids, "form", "")
 	}
-	if r.locationId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "locationId", r.locationId, "form", "")
+	if r.locationIds != nil {
+		t := *r.locationIds
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "locationIds", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "locationIds", t, "form", "multi")
+		}
 	}
 	if r.search != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")
@@ -5861,7 +5877,7 @@ type ApiListawsIntegrationsRequest struct {
 	sortDirection *string
 	projectIds *[]string
 	ids *string
-	locationId *string
+	locationIds *[]string
 	search *string
 }
 
@@ -5901,9 +5917,9 @@ func (r ApiListawsIntegrationsRequest) Ids(ids string) ApiListawsIntegrationsReq
 	return r
 }
 
-// Filter by location ID
-func (r ApiListawsIntegrationsRequest) LocationId(locationId string) ApiListawsIntegrationsRequest {
-	r.locationId = &locationId
+// Filter by location IDs
+func (r ApiListawsIntegrationsRequest) LocationIds(locationIds []string) ApiListawsIntegrationsRequest {
+	r.locationIds = &locationIds
 	return r
 }
 
@@ -5987,8 +6003,16 @@ func (a *IntegrationsAPIService) ListawsIntegrationsExecute(r ApiListawsIntegrat
 	if r.ids != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "ids", r.ids, "form", "")
 	}
-	if r.locationId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "locationId", r.locationId, "form", "")
+	if r.locationIds != nil {
+		t := *r.locationIds
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "locationIds", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "locationIds", t, "form", "multi")
+		}
 	}
 	if r.search != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")
@@ -6080,7 +6104,7 @@ type ApiListazureIntegrationsRequest struct {
 	sortDirection *string
 	projectIds *[]string
 	ids *string
-	locationId *string
+	locationIds *[]string
 	search *string
 }
 
@@ -6120,9 +6144,9 @@ func (r ApiListazureIntegrationsRequest) Ids(ids string) ApiListazureIntegration
 	return r
 }
 
-// Filter by location ID
-func (r ApiListazureIntegrationsRequest) LocationId(locationId string) ApiListazureIntegrationsRequest {
-	r.locationId = &locationId
+// Filter by location IDs
+func (r ApiListazureIntegrationsRequest) LocationIds(locationIds []string) ApiListazureIntegrationsRequest {
+	r.locationIds = &locationIds
 	return r
 }
 
@@ -6206,8 +6230,16 @@ func (a *IntegrationsAPIService) ListazureIntegrationsExecute(r ApiListazureInte
 	if r.ids != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "ids", r.ids, "form", "")
 	}
-	if r.locationId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "locationId", r.locationId, "form", "")
+	if r.locationIds != nil {
+		t := *r.locationIds
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "locationIds", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "locationIds", t, "form", "multi")
+		}
 	}
 	if r.search != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")
@@ -6299,7 +6331,7 @@ type ApiListbitbucketRepoIntegrationsRequest struct {
 	sortDirection *string
 	projectIds *[]string
 	ids *string
-	locationId *string
+	locationIds *[]string
 	search *string
 }
 
@@ -6339,9 +6371,9 @@ func (r ApiListbitbucketRepoIntegrationsRequest) Ids(ids string) ApiListbitbucke
 	return r
 }
 
-// Filter by location ID
-func (r ApiListbitbucketRepoIntegrationsRequest) LocationId(locationId string) ApiListbitbucketRepoIntegrationsRequest {
-	r.locationId = &locationId
+// Filter by location IDs
+func (r ApiListbitbucketRepoIntegrationsRequest) LocationIds(locationIds []string) ApiListbitbucketRepoIntegrationsRequest {
+	r.locationIds = &locationIds
 	return r
 }
 
@@ -6425,8 +6457,16 @@ func (a *IntegrationsAPIService) ListbitbucketRepoIntegrationsExecute(r ApiListb
 	if r.ids != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "ids", r.ids, "form", "")
 	}
-	if r.locationId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "locationId", r.locationId, "form", "")
+	if r.locationIds != nil {
+		t := *r.locationIds
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "locationIds", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "locationIds", t, "form", "multi")
+		}
 	}
 	if r.search != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")
@@ -6518,7 +6558,7 @@ type ApiListcloudflareIntegrationsRequest struct {
 	sortDirection *string
 	projectIds *[]string
 	ids *string
-	locationId *string
+	locationIds *[]string
 	search *string
 }
 
@@ -6558,9 +6598,9 @@ func (r ApiListcloudflareIntegrationsRequest) Ids(ids string) ApiListcloudflareI
 	return r
 }
 
-// Filter by location ID
-func (r ApiListcloudflareIntegrationsRequest) LocationId(locationId string) ApiListcloudflareIntegrationsRequest {
-	r.locationId = &locationId
+// Filter by location IDs
+func (r ApiListcloudflareIntegrationsRequest) LocationIds(locationIds []string) ApiListcloudflareIntegrationsRequest {
+	r.locationIds = &locationIds
 	return r
 }
 
@@ -6644,8 +6684,16 @@ func (a *IntegrationsAPIService) ListcloudflareIntegrationsExecute(r ApiListclou
 	if r.ids != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "ids", r.ids, "form", "")
 	}
-	if r.locationId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "locationId", r.locationId, "form", "")
+	if r.locationIds != nil {
+		t := *r.locationIds
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "locationIds", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "locationIds", t, "form", "multi")
+		}
 	}
 	if r.search != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")
@@ -6737,7 +6785,7 @@ type ApiListcustomIntegrationsRequest struct {
 	sortDirection *string
 	projectIds *[]string
 	ids *string
-	locationId *string
+	locationIds *[]string
 	search *string
 }
 
@@ -6777,9 +6825,9 @@ func (r ApiListcustomIntegrationsRequest) Ids(ids string) ApiListcustomIntegrati
 	return r
 }
 
-// Filter by location ID
-func (r ApiListcustomIntegrationsRequest) LocationId(locationId string) ApiListcustomIntegrationsRequest {
-	r.locationId = &locationId
+// Filter by location IDs
+func (r ApiListcustomIntegrationsRequest) LocationIds(locationIds []string) ApiListcustomIntegrationsRequest {
+	r.locationIds = &locationIds
 	return r
 }
 
@@ -6863,8 +6911,16 @@ func (a *IntegrationsAPIService) ListcustomIntegrationsExecute(r ApiListcustomIn
 	if r.ids != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "ids", r.ids, "form", "")
 	}
-	if r.locationId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "locationId", r.locationId, "form", "")
+	if r.locationIds != nil {
+		t := *r.locationIds
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "locationIds", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "locationIds", t, "form", "multi")
+		}
 	}
 	if r.search != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")
@@ -6956,7 +7012,7 @@ type ApiListgcpIntegrationsRequest struct {
 	sortDirection *string
 	projectIds *[]string
 	ids *string
-	locationId *string
+	locationIds *[]string
 	search *string
 }
 
@@ -6996,9 +7052,9 @@ func (r ApiListgcpIntegrationsRequest) Ids(ids string) ApiListgcpIntegrationsReq
 	return r
 }
 
-// Filter by location ID
-func (r ApiListgcpIntegrationsRequest) LocationId(locationId string) ApiListgcpIntegrationsRequest {
-	r.locationId = &locationId
+// Filter by location IDs
+func (r ApiListgcpIntegrationsRequest) LocationIds(locationIds []string) ApiListgcpIntegrationsRequest {
+	r.locationIds = &locationIds
 	return r
 }
 
@@ -7082,8 +7138,16 @@ func (a *IntegrationsAPIService) ListgcpIntegrationsExecute(r ApiListgcpIntegrat
 	if r.ids != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "ids", r.ids, "form", "")
 	}
-	if r.locationId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "locationId", r.locationId, "form", "")
+	if r.locationIds != nil {
+		t := *r.locationIds
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "locationIds", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "locationIds", t, "form", "multi")
+		}
 	}
 	if r.search != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")
@@ -7175,7 +7239,7 @@ type ApiListgithubIntegrationsRequest struct {
 	sortDirection *string
 	projectIds *[]string
 	ids *string
-	locationId *string
+	locationIds *[]string
 	search *string
 }
 
@@ -7215,9 +7279,9 @@ func (r ApiListgithubIntegrationsRequest) Ids(ids string) ApiListgithubIntegrati
 	return r
 }
 
-// Filter by location ID
-func (r ApiListgithubIntegrationsRequest) LocationId(locationId string) ApiListgithubIntegrationsRequest {
-	r.locationId = &locationId
+// Filter by location IDs
+func (r ApiListgithubIntegrationsRequest) LocationIds(locationIds []string) ApiListgithubIntegrationsRequest {
+	r.locationIds = &locationIds
 	return r
 }
 
@@ -7301,8 +7365,16 @@ func (a *IntegrationsAPIService) ListgithubIntegrationsExecute(r ApiListgithubIn
 	if r.ids != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "ids", r.ids, "form", "")
 	}
-	if r.locationId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "locationId", r.locationId, "form", "")
+	if r.locationIds != nil {
+		t := *r.locationIds
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "locationIds", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "locationIds", t, "form", "multi")
+		}
 	}
 	if r.search != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")
@@ -7394,7 +7466,7 @@ type ApiListgitlabIntegrationsRequest struct {
 	sortDirection *string
 	projectIds *[]string
 	ids *string
-	locationId *string
+	locationIds *[]string
 	search *string
 }
 
@@ -7434,9 +7506,9 @@ func (r ApiListgitlabIntegrationsRequest) Ids(ids string) ApiListgitlabIntegrati
 	return r
 }
 
-// Filter by location ID
-func (r ApiListgitlabIntegrationsRequest) LocationId(locationId string) ApiListgitlabIntegrationsRequest {
-	r.locationId = &locationId
+// Filter by location IDs
+func (r ApiListgitlabIntegrationsRequest) LocationIds(locationIds []string) ApiListgitlabIntegrationsRequest {
+	r.locationIds = &locationIds
 	return r
 }
 
@@ -7520,8 +7592,16 @@ func (a *IntegrationsAPIService) ListgitlabIntegrationsExecute(r ApiListgitlabIn
 	if r.ids != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "ids", r.ids, "form", "")
 	}
-	if r.locationId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "locationId", r.locationId, "form", "")
+	if r.locationIds != nil {
+		t := *r.locationIds
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "locationIds", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "locationIds", t, "form", "multi")
+		}
 	}
 	if r.search != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")
@@ -7613,7 +7693,7 @@ type ApiListjiraIntegrationsRequest struct {
 	sortDirection *string
 	projectIds *[]string
 	ids *string
-	locationId *string
+	locationIds *[]string
 	search *string
 }
 
@@ -7653,9 +7733,9 @@ func (r ApiListjiraIntegrationsRequest) Ids(ids string) ApiListjiraIntegrationsR
 	return r
 }
 
-// Filter by location ID
-func (r ApiListjiraIntegrationsRequest) LocationId(locationId string) ApiListjiraIntegrationsRequest {
-	r.locationId = &locationId
+// Filter by location IDs
+func (r ApiListjiraIntegrationsRequest) LocationIds(locationIds []string) ApiListjiraIntegrationsRequest {
+	r.locationIds = &locationIds
 	return r
 }
 
@@ -7739,8 +7819,16 @@ func (a *IntegrationsAPIService) ListjiraIntegrationsExecute(r ApiListjiraIntegr
 	if r.ids != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "ids", r.ids, "form", "")
 	}
-	if r.locationId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "locationId", r.locationId, "form", "")
+	if r.locationIds != nil {
+		t := *r.locationIds
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "locationIds", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "locationIds", t, "form", "multi")
+		}
 	}
 	if r.search != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")
@@ -7832,7 +7920,7 @@ type ApiListkubernetesIntegrationsRequest struct {
 	sortDirection *string
 	projectIds *[]string
 	ids *string
-	locationId *string
+	locationIds *[]string
 	search *string
 }
 
@@ -7872,9 +7960,9 @@ func (r ApiListkubernetesIntegrationsRequest) Ids(ids string) ApiListkubernetesI
 	return r
 }
 
-// Filter by location ID
-func (r ApiListkubernetesIntegrationsRequest) LocationId(locationId string) ApiListkubernetesIntegrationsRequest {
-	r.locationId = &locationId
+// Filter by location IDs
+func (r ApiListkubernetesIntegrationsRequest) LocationIds(locationIds []string) ApiListkubernetesIntegrationsRequest {
+	r.locationIds = &locationIds
 	return r
 }
 
@@ -7958,8 +8046,16 @@ func (a *IntegrationsAPIService) ListkubernetesIntegrationsExecute(r ApiListkube
 	if r.ids != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "ids", r.ids, "form", "")
 	}
-	if r.locationId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "locationId", r.locationId, "form", "")
+	if r.locationIds != nil {
+		t := *r.locationIds
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "locationIds", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "locationIds", t, "form", "multi")
+		}
 	}
 	if r.search != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")
@@ -8051,7 +8147,7 @@ type ApiListpostmanIntegrationsRequest struct {
 	sortDirection *string
 	projectIds *[]string
 	ids *string
-	locationId *string
+	locationIds *[]string
 	search *string
 }
 
@@ -8091,9 +8187,9 @@ func (r ApiListpostmanIntegrationsRequest) Ids(ids string) ApiListpostmanIntegra
 	return r
 }
 
-// Filter by location ID
-func (r ApiListpostmanIntegrationsRequest) LocationId(locationId string) ApiListpostmanIntegrationsRequest {
-	r.locationId = &locationId
+// Filter by location IDs
+func (r ApiListpostmanIntegrationsRequest) LocationIds(locationIds []string) ApiListpostmanIntegrationsRequest {
+	r.locationIds = &locationIds
 	return r
 }
 
@@ -8177,8 +8273,16 @@ func (a *IntegrationsAPIService) ListpostmanIntegrationsExecute(r ApiListpostman
 	if r.ids != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "ids", r.ids, "form", "")
 	}
-	if r.locationId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "locationId", r.locationId, "form", "")
+	if r.locationIds != nil {
+		t := *r.locationIds
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "locationIds", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "locationIds", t, "form", "multi")
+		}
 	}
 	if r.search != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")
@@ -8270,7 +8374,7 @@ type ApiListwizIntegrationsRequest struct {
 	sortDirection *string
 	projectIds *[]string
 	ids *string
-	locationId *string
+	locationIds *[]string
 	search *string
 }
 
@@ -8310,9 +8414,9 @@ func (r ApiListwizIntegrationsRequest) Ids(ids string) ApiListwizIntegrationsReq
 	return r
 }
 
-// Filter by location ID
-func (r ApiListwizIntegrationsRequest) LocationId(locationId string) ApiListwizIntegrationsRequest {
-	r.locationId = &locationId
+// Filter by location IDs
+func (r ApiListwizIntegrationsRequest) LocationIds(locationIds []string) ApiListwizIntegrationsRequest {
+	r.locationIds = &locationIds
 	return r
 }
 
@@ -8396,8 +8500,16 @@ func (a *IntegrationsAPIService) ListwizIntegrationsExecute(r ApiListwizIntegrat
 	if r.ids != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "ids", r.ids, "form", "")
 	}
-	if r.locationId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "locationId", r.locationId, "form", "")
+	if r.locationIds != nil {
+		t := *r.locationIds
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "locationIds", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "locationIds", t, "form", "multi")
+		}
 	}
 	if r.search != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")

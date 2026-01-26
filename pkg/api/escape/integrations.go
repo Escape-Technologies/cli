@@ -3,6 +3,7 @@ package escape
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
 	"github.com/Escape-Technologies/cli/pkg/log"
@@ -10,15 +11,15 @@ import (
 
 // ListKubernetesIntegrationsFilters holds optional filters for listing Kubernetes integrations
 type ListKubernetesIntegrationsFilters struct {
-	ProjectIDs []string
-	LocationID string
-	Search     string
+	ProjectIDs  []string
+	LocationIDs string
+	Search      string
 }
 
 // UpsertKubernetesIntegration creates a Kubernetes integration if it doesn't exist
 func UpsertKubernetesIntegration(ctx context.Context, req v3.CreatekubernetesIntegrationRequest) (*v3.CreatekubernetesIntegration200Response, error) {
 	list, _, err := listKubernetesIntegrations(ctx, "", &ListKubernetesIntegrationsFilters{
-		LocationID: *req.ProxyId,
+		LocationIDs: strings.Join([]string{*req.ProxyId}, ","),
 	})
 	if err != nil {
 		return nil, fmt.Errorf("api error: %w", err)
@@ -69,8 +70,8 @@ func listKubernetesIntegrations(ctx context.Context, next string, filters *ListK
 		if len(filters.ProjectIDs) > 0 {
 			req = req.ProjectIds(filters.ProjectIDs)
 		}
-		if len(filters.LocationID) > 0 {
-			req = req.LocationId(filters.LocationID)
+		if len(filters.LocationIDs) > 0 {
+			req = req.LocationIds([]string{filters.LocationIDs})
 		}
 		if filters.Search != "" {
 			req = req.Search(filters.Search)
