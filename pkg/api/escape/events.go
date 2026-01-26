@@ -11,14 +11,14 @@ import (
 
 // ListEventsFilters holds optional filters for listing events
 type ListEventsFilters struct {
-	Search string
-	ScanIDs []string
-	AssetIDs []string
-	IssueIDs []string
-	Levels []string
-	Stages []string
+	Search         string
+	ScanIDs        []string
+	AssetIDs       []string
+	IssueIDs       []string
+	Levels         []string
+	Stages         []string
 	HasAttachments bool
-	Attachments []string
+	Attachments    []string
 }
 
 // ListEvents lists events

@@ -26,8 +26,7 @@ type ProfileDetailedConfigurationRestApiDast struct {
 	MaxDuration *float32 `json:"max_duration,omitempty"`
 	Hotstart []string `json:"hotstart,omitempty"`
 	HotstartOnly *bool `json:"hotstart_only,omitempty"`
-	Blocklist []ProfileDetailedConfigurationRestApiDastBlocklistInner `json:"blocklist,omitempty"`
-	Scope *ProfileDetailedConfigurationRestApiDastScope `json:"scope,omitempty"`
+	Scope *ProfileDetailedConfigurationGraphqlApiDastScope `json:"scope,omitempty"`
 	AdditionalSchemaS3Keys []string `json:"additional_schema_s3_keys,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -275,42 +274,10 @@ func (o *ProfileDetailedConfigurationRestApiDast) SetHotstartOnly(v bool) {
 	o.HotstartOnly = &v
 }
 
-// GetBlocklist returns the Blocklist field value if set, zero value otherwise.
-func (o *ProfileDetailedConfigurationRestApiDast) GetBlocklist() []ProfileDetailedConfigurationRestApiDastBlocklistInner {
-	if o == nil || IsNil(o.Blocklist) {
-		var ret []ProfileDetailedConfigurationRestApiDastBlocklistInner
-		return ret
-	}
-	return o.Blocklist
-}
-
-// GetBlocklistOk returns a tuple with the Blocklist field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationRestApiDast) GetBlocklistOk() ([]ProfileDetailedConfigurationRestApiDastBlocklistInner, bool) {
-	if o == nil || IsNil(o.Blocklist) {
-		return nil, false
-	}
-	return o.Blocklist, true
-}
-
-// HasBlocklist returns a boolean if a field has been set.
-func (o *ProfileDetailedConfigurationRestApiDast) HasBlocklist() bool {
-	if o != nil && !IsNil(o.Blocklist) {
-		return true
-	}
-
-	return false
-}
-
-// SetBlocklist gets a reference to the given []ProfileDetailedConfigurationRestApiDastBlocklistInner and assigns it to the Blocklist field.
-func (o *ProfileDetailedConfigurationRestApiDast) SetBlocklist(v []ProfileDetailedConfigurationRestApiDastBlocklistInner) {
-	o.Blocklist = v
-}
-
 // GetScope returns the Scope field value if set, zero value otherwise.
-func (o *ProfileDetailedConfigurationRestApiDast) GetScope() ProfileDetailedConfigurationRestApiDastScope {
+func (o *ProfileDetailedConfigurationRestApiDast) GetScope() ProfileDetailedConfigurationGraphqlApiDastScope {
 	if o == nil || IsNil(o.Scope) {
-		var ret ProfileDetailedConfigurationRestApiDastScope
+		var ret ProfileDetailedConfigurationGraphqlApiDastScope
 		return ret
 	}
 	return *o.Scope
@@ -318,7 +285,7 @@ func (o *ProfileDetailedConfigurationRestApiDast) GetScope() ProfileDetailedConf
 
 // GetScopeOk returns a tuple with the Scope field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationRestApiDast) GetScopeOk() (*ProfileDetailedConfigurationRestApiDastScope, bool) {
+func (o *ProfileDetailedConfigurationRestApiDast) GetScopeOk() (*ProfileDetailedConfigurationGraphqlApiDastScope, bool) {
 	if o == nil || IsNil(o.Scope) {
 		return nil, false
 	}
@@ -334,8 +301,8 @@ func (o *ProfileDetailedConfigurationRestApiDast) HasScope() bool {
 	return false
 }
 
-// SetScope gets a reference to the given ProfileDetailedConfigurationRestApiDastScope and assigns it to the Scope field.
-func (o *ProfileDetailedConfigurationRestApiDast) SetScope(v ProfileDetailedConfigurationRestApiDastScope) {
+// SetScope gets a reference to the given ProfileDetailedConfigurationGraphqlApiDastScope and assigns it to the Scope field.
+func (o *ProfileDetailedConfigurationRestApiDast) SetScope(v ProfileDetailedConfigurationGraphqlApiDastScope) {
 	o.Scope = &v
 }
 
@@ -402,9 +369,6 @@ func (o ProfileDetailedConfigurationRestApiDast) ToMap() (map[string]interface{}
 	if !IsNil(o.HotstartOnly) {
 		toSerialize["hotstart_only"] = o.HotstartOnly
 	}
-	if !IsNil(o.Blocklist) {
-		toSerialize["blocklist"] = o.Blocklist
-	}
 	if !IsNil(o.Scope) {
 		toSerialize["scope"] = o.Scope
 	}
@@ -440,7 +404,6 @@ func (o *ProfileDetailedConfigurationRestApiDast) UnmarshalJSON(data []byte) (er
 		delete(additionalProperties, "max_duration")
 		delete(additionalProperties, "hotstart")
 		delete(additionalProperties, "hotstart_only")
-		delete(additionalProperties, "blocklist")
 		delete(additionalProperties, "scope")
 		delete(additionalProperties, "additional_schema_s3_keys")
 		o.AdditionalProperties = additionalProperties

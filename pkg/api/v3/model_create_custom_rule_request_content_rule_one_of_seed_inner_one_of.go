@@ -23,7 +23,7 @@ type CreateCustomRuleRequestContentRuleOneOfSeedInnerOneOf struct {
 	Protocol ENUMREST `json:"protocol"`
 	User *string `json:"user,omitempty"`
 	Path *string `json:"path,omitempty"`
-	Method *ENUMPROPERTIESCONFIGURATIONPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS0PROPERTIESPARAMETERSPROPERTIESMETHOD `json:"method,omitempty"`
+	Method *ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD `json:"method,omitempty"`
 	Headers map[string]string `json:"headers,omitempty"`
 	Body *string `json:"body,omitempty"`
 	Params map[string]string `json:"params,omitempty"`
@@ -139,9 +139,9 @@ func (o *CreateCustomRuleRequestContentRuleOneOfSeedInnerOneOf) SetPath(v string
 }
 
 // GetMethod returns the Method field value if set, zero value otherwise.
-func (o *CreateCustomRuleRequestContentRuleOneOfSeedInnerOneOf) GetMethod() ENUMPROPERTIESCONFIGURATIONPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS0PROPERTIESPARAMETERSPROPERTIESMETHOD {
+func (o *CreateCustomRuleRequestContentRuleOneOfSeedInnerOneOf) GetMethod() ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD {
 	if o == nil || IsNil(o.Method) {
-		var ret ENUMPROPERTIESCONFIGURATIONPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS0PROPERTIESPARAMETERSPROPERTIESMETHOD
+		var ret ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD
 		return ret
 	}
 	return *o.Method
@@ -149,7 +149,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOfSeedInnerOneOf) GetMethod() ENUM
 
 // GetMethodOk returns a tuple with the Method field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateCustomRuleRequestContentRuleOneOfSeedInnerOneOf) GetMethodOk() (*ENUMPROPERTIESCONFIGURATIONPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS0PROPERTIESPARAMETERSPROPERTIESMETHOD, bool) {
+func (o *CreateCustomRuleRequestContentRuleOneOfSeedInnerOneOf) GetMethodOk() (*ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD, bool) {
 	if o == nil || IsNil(o.Method) {
 		return nil, false
 	}
@@ -165,8 +165,8 @@ func (o *CreateCustomRuleRequestContentRuleOneOfSeedInnerOneOf) HasMethod() bool
 	return false
 }
 
-// SetMethod gets a reference to the given ENUMPROPERTIESCONFIGURATIONPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS0PROPERTIESPARAMETERSPROPERTIESMETHOD and assigns it to the Method field.
-func (o *CreateCustomRuleRequestContentRuleOneOfSeedInnerOneOf) SetMethod(v ENUMPROPERTIESCONFIGURATIONPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS0PROPERTIESPARAMETERSPROPERTIESMETHOD) {
+// SetMethod gets a reference to the given ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD and assigns it to the Method field.
+func (o *CreateCustomRuleRequestContentRuleOneOfSeedInnerOneOf) SetMethod(v ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD) {
 	o.Method = &v
 }
 

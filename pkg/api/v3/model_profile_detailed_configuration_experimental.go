@@ -19,13 +19,11 @@ var _ MappedNullable = &ProfileDetailedConfigurationExperimental{}
 
 // ProfileDetailedConfigurationExperimental struct for ProfileDetailedConfigurationExperimental
 type ProfileDetailedConfigurationExperimental struct {
-	EnableWebappSurfaceScan *bool `json:"enable_webapp_surface_scan,omitempty"`
-	EnableWebappExtractor *bool `json:"enable_webapp_extractor,omitempty"`
-	EnableAsmNucleiChecks *bool `json:"enable_asm_nuclei_checks,omitempty"`
 	AgenticPentesting *bool `json:"agentic_pentesting,omitempty"`
-	BlstEnabled *bool `json:"blst_enabled,omitempty"`
 	BlstExplorationOnly *bool `json:"blst_exploration_only,omitempty"`
-	DisableOracle *bool `json:"disable_oracle,omitempty"`
+	AgenticIdor *bool `json:"agentic_idor,omitempty"`
+	AgenticXss *ProfileDetailedConfigurationExperimentalAgenticXss `json:"agentic_xss,omitempty"`
+	BlstExplorationNext *bool `json:"blst_exploration_next,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -46,102 +44,6 @@ func NewProfileDetailedConfigurationExperimental() *ProfileDetailedConfiguration
 func NewProfileDetailedConfigurationExperimentalWithDefaults() *ProfileDetailedConfigurationExperimental {
 	this := ProfileDetailedConfigurationExperimental{}
 	return &this
-}
-
-// GetEnableWebappSurfaceScan returns the EnableWebappSurfaceScan field value if set, zero value otherwise.
-func (o *ProfileDetailedConfigurationExperimental) GetEnableWebappSurfaceScan() bool {
-	if o == nil || IsNil(o.EnableWebappSurfaceScan) {
-		var ret bool
-		return ret
-	}
-	return *o.EnableWebappSurfaceScan
-}
-
-// GetEnableWebappSurfaceScanOk returns a tuple with the EnableWebappSurfaceScan field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationExperimental) GetEnableWebappSurfaceScanOk() (*bool, bool) {
-	if o == nil || IsNil(o.EnableWebappSurfaceScan) {
-		return nil, false
-	}
-	return o.EnableWebappSurfaceScan, true
-}
-
-// HasEnableWebappSurfaceScan returns a boolean if a field has been set.
-func (o *ProfileDetailedConfigurationExperimental) HasEnableWebappSurfaceScan() bool {
-	if o != nil && !IsNil(o.EnableWebappSurfaceScan) {
-		return true
-	}
-
-	return false
-}
-
-// SetEnableWebappSurfaceScan gets a reference to the given bool and assigns it to the EnableWebappSurfaceScan field.
-func (o *ProfileDetailedConfigurationExperimental) SetEnableWebappSurfaceScan(v bool) {
-	o.EnableWebappSurfaceScan = &v
-}
-
-// GetEnableWebappExtractor returns the EnableWebappExtractor field value if set, zero value otherwise.
-func (o *ProfileDetailedConfigurationExperimental) GetEnableWebappExtractor() bool {
-	if o == nil || IsNil(o.EnableWebappExtractor) {
-		var ret bool
-		return ret
-	}
-	return *o.EnableWebappExtractor
-}
-
-// GetEnableWebappExtractorOk returns a tuple with the EnableWebappExtractor field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationExperimental) GetEnableWebappExtractorOk() (*bool, bool) {
-	if o == nil || IsNil(o.EnableWebappExtractor) {
-		return nil, false
-	}
-	return o.EnableWebappExtractor, true
-}
-
-// HasEnableWebappExtractor returns a boolean if a field has been set.
-func (o *ProfileDetailedConfigurationExperimental) HasEnableWebappExtractor() bool {
-	if o != nil && !IsNil(o.EnableWebappExtractor) {
-		return true
-	}
-
-	return false
-}
-
-// SetEnableWebappExtractor gets a reference to the given bool and assigns it to the EnableWebappExtractor field.
-func (o *ProfileDetailedConfigurationExperimental) SetEnableWebappExtractor(v bool) {
-	o.EnableWebappExtractor = &v
-}
-
-// GetEnableAsmNucleiChecks returns the EnableAsmNucleiChecks field value if set, zero value otherwise.
-func (o *ProfileDetailedConfigurationExperimental) GetEnableAsmNucleiChecks() bool {
-	if o == nil || IsNil(o.EnableAsmNucleiChecks) {
-		var ret bool
-		return ret
-	}
-	return *o.EnableAsmNucleiChecks
-}
-
-// GetEnableAsmNucleiChecksOk returns a tuple with the EnableAsmNucleiChecks field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationExperimental) GetEnableAsmNucleiChecksOk() (*bool, bool) {
-	if o == nil || IsNil(o.EnableAsmNucleiChecks) {
-		return nil, false
-	}
-	return o.EnableAsmNucleiChecks, true
-}
-
-// HasEnableAsmNucleiChecks returns a boolean if a field has been set.
-func (o *ProfileDetailedConfigurationExperimental) HasEnableAsmNucleiChecks() bool {
-	if o != nil && !IsNil(o.EnableAsmNucleiChecks) {
-		return true
-	}
-
-	return false
-}
-
-// SetEnableAsmNucleiChecks gets a reference to the given bool and assigns it to the EnableAsmNucleiChecks field.
-func (o *ProfileDetailedConfigurationExperimental) SetEnableAsmNucleiChecks(v bool) {
-	o.EnableAsmNucleiChecks = &v
 }
 
 // GetAgenticPentesting returns the AgenticPentesting field value if set, zero value otherwise.
@@ -176,38 +78,6 @@ func (o *ProfileDetailedConfigurationExperimental) SetAgenticPentesting(v bool) 
 	o.AgenticPentesting = &v
 }
 
-// GetBlstEnabled returns the BlstEnabled field value if set, zero value otherwise.
-func (o *ProfileDetailedConfigurationExperimental) GetBlstEnabled() bool {
-	if o == nil || IsNil(o.BlstEnabled) {
-		var ret bool
-		return ret
-	}
-	return *o.BlstEnabled
-}
-
-// GetBlstEnabledOk returns a tuple with the BlstEnabled field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationExperimental) GetBlstEnabledOk() (*bool, bool) {
-	if o == nil || IsNil(o.BlstEnabled) {
-		return nil, false
-	}
-	return o.BlstEnabled, true
-}
-
-// HasBlstEnabled returns a boolean if a field has been set.
-func (o *ProfileDetailedConfigurationExperimental) HasBlstEnabled() bool {
-	if o != nil && !IsNil(o.BlstEnabled) {
-		return true
-	}
-
-	return false
-}
-
-// SetBlstEnabled gets a reference to the given bool and assigns it to the BlstEnabled field.
-func (o *ProfileDetailedConfigurationExperimental) SetBlstEnabled(v bool) {
-	o.BlstEnabled = &v
-}
-
 // GetBlstExplorationOnly returns the BlstExplorationOnly field value if set, zero value otherwise.
 func (o *ProfileDetailedConfigurationExperimental) GetBlstExplorationOnly() bool {
 	if o == nil || IsNil(o.BlstExplorationOnly) {
@@ -240,36 +110,100 @@ func (o *ProfileDetailedConfigurationExperimental) SetBlstExplorationOnly(v bool
 	o.BlstExplorationOnly = &v
 }
 
-// GetDisableOracle returns the DisableOracle field value if set, zero value otherwise.
-func (o *ProfileDetailedConfigurationExperimental) GetDisableOracle() bool {
-	if o == nil || IsNil(o.DisableOracle) {
+// GetAgenticIdor returns the AgenticIdor field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationExperimental) GetAgenticIdor() bool {
+	if o == nil || IsNil(o.AgenticIdor) {
 		var ret bool
 		return ret
 	}
-	return *o.DisableOracle
+	return *o.AgenticIdor
 }
 
-// GetDisableOracleOk returns a tuple with the DisableOracle field value if set, nil otherwise
+// GetAgenticIdorOk returns a tuple with the AgenticIdor field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ProfileDetailedConfigurationExperimental) GetDisableOracleOk() (*bool, bool) {
-	if o == nil || IsNil(o.DisableOracle) {
+func (o *ProfileDetailedConfigurationExperimental) GetAgenticIdorOk() (*bool, bool) {
+	if o == nil || IsNil(o.AgenticIdor) {
 		return nil, false
 	}
-	return o.DisableOracle, true
+	return o.AgenticIdor, true
 }
 
-// HasDisableOracle returns a boolean if a field has been set.
-func (o *ProfileDetailedConfigurationExperimental) HasDisableOracle() bool {
-	if o != nil && !IsNil(o.DisableOracle) {
+// HasAgenticIdor returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationExperimental) HasAgenticIdor() bool {
+	if o != nil && !IsNil(o.AgenticIdor) {
 		return true
 	}
 
 	return false
 }
 
-// SetDisableOracle gets a reference to the given bool and assigns it to the DisableOracle field.
-func (o *ProfileDetailedConfigurationExperimental) SetDisableOracle(v bool) {
-	o.DisableOracle = &v
+// SetAgenticIdor gets a reference to the given bool and assigns it to the AgenticIdor field.
+func (o *ProfileDetailedConfigurationExperimental) SetAgenticIdor(v bool) {
+	o.AgenticIdor = &v
+}
+
+// GetAgenticXss returns the AgenticXss field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationExperimental) GetAgenticXss() ProfileDetailedConfigurationExperimentalAgenticXss {
+	if o == nil || IsNil(o.AgenticXss) {
+		var ret ProfileDetailedConfigurationExperimentalAgenticXss
+		return ret
+	}
+	return *o.AgenticXss
+}
+
+// GetAgenticXssOk returns a tuple with the AgenticXss field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationExperimental) GetAgenticXssOk() (*ProfileDetailedConfigurationExperimentalAgenticXss, bool) {
+	if o == nil || IsNil(o.AgenticXss) {
+		return nil, false
+	}
+	return o.AgenticXss, true
+}
+
+// HasAgenticXss returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationExperimental) HasAgenticXss() bool {
+	if o != nil && !IsNil(o.AgenticXss) {
+		return true
+	}
+
+	return false
+}
+
+// SetAgenticXss gets a reference to the given ProfileDetailedConfigurationExperimentalAgenticXss and assigns it to the AgenticXss field.
+func (o *ProfileDetailedConfigurationExperimental) SetAgenticXss(v ProfileDetailedConfigurationExperimentalAgenticXss) {
+	o.AgenticXss = &v
+}
+
+// GetBlstExplorationNext returns the BlstExplorationNext field value if set, zero value otherwise.
+func (o *ProfileDetailedConfigurationExperimental) GetBlstExplorationNext() bool {
+	if o == nil || IsNil(o.BlstExplorationNext) {
+		var ret bool
+		return ret
+	}
+	return *o.BlstExplorationNext
+}
+
+// GetBlstExplorationNextOk returns a tuple with the BlstExplorationNext field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileDetailedConfigurationExperimental) GetBlstExplorationNextOk() (*bool, bool) {
+	if o == nil || IsNil(o.BlstExplorationNext) {
+		return nil, false
+	}
+	return o.BlstExplorationNext, true
+}
+
+// HasBlstExplorationNext returns a boolean if a field has been set.
+func (o *ProfileDetailedConfigurationExperimental) HasBlstExplorationNext() bool {
+	if o != nil && !IsNil(o.BlstExplorationNext) {
+		return true
+	}
+
+	return false
+}
+
+// SetBlstExplorationNext gets a reference to the given bool and assigns it to the BlstExplorationNext field.
+func (o *ProfileDetailedConfigurationExperimental) SetBlstExplorationNext(v bool) {
+	o.BlstExplorationNext = &v
 }
 
 func (o ProfileDetailedConfigurationExperimental) MarshalJSON() ([]byte, error) {
@@ -282,26 +216,20 @@ func (o ProfileDetailedConfigurationExperimental) MarshalJSON() ([]byte, error) 
 
 func (o ProfileDetailedConfigurationExperimental) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.EnableWebappSurfaceScan) {
-		toSerialize["enable_webapp_surface_scan"] = o.EnableWebappSurfaceScan
-	}
-	if !IsNil(o.EnableWebappExtractor) {
-		toSerialize["enable_webapp_extractor"] = o.EnableWebappExtractor
-	}
-	if !IsNil(o.EnableAsmNucleiChecks) {
-		toSerialize["enable_asm_nuclei_checks"] = o.EnableAsmNucleiChecks
-	}
 	if !IsNil(o.AgenticPentesting) {
 		toSerialize["agentic_pentesting"] = o.AgenticPentesting
-	}
-	if !IsNil(o.BlstEnabled) {
-		toSerialize["blst_enabled"] = o.BlstEnabled
 	}
 	if !IsNil(o.BlstExplorationOnly) {
 		toSerialize["blst_exploration_only"] = o.BlstExplorationOnly
 	}
-	if !IsNil(o.DisableOracle) {
-		toSerialize["disable_oracle"] = o.DisableOracle
+	if !IsNil(o.AgenticIdor) {
+		toSerialize["agentic_idor"] = o.AgenticIdor
+	}
+	if !IsNil(o.AgenticXss) {
+		toSerialize["agentic_xss"] = o.AgenticXss
+	}
+	if !IsNil(o.BlstExplorationNext) {
+		toSerialize["blst_exploration_next"] = o.BlstExplorationNext
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -325,13 +253,11 @@ func (o *ProfileDetailedConfigurationExperimental) UnmarshalJSON(data []byte) (e
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "enable_webapp_surface_scan")
-		delete(additionalProperties, "enable_webapp_extractor")
-		delete(additionalProperties, "enable_asm_nuclei_checks")
 		delete(additionalProperties, "agentic_pentesting")
-		delete(additionalProperties, "blst_enabled")
 		delete(additionalProperties, "blst_exploration_only")
-		delete(additionalProperties, "disable_oracle")
+		delete(additionalProperties, "agentic_idor")
+		delete(additionalProperties, "agentic_xss")
+		delete(additionalProperties, "blst_exploration_next")
 		o.AdditionalProperties = additionalProperties
 	}
 

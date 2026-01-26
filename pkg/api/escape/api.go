@@ -13,6 +13,7 @@ import (
 // Debug is a flag to enable debug mode for the API client
 var Debug = false
 
+// newAPIV3Client creates a new API v3 client
 func newAPIV3Client() (*v3.APIClient, error) {
 	log.Trace("Initializing v3 client")
 	url, err := env.GetAPIURL()

@@ -78,7 +78,7 @@ func ListIssues(ctx context.Context, next string, filters *ListIssuesFilters) ([
 			req = req.ScanIds(strings.Join(filters.ScanIDs, ","))
 		}
 		if len(filters.TagsIDs) > 0 {
-			req = req.TagsIds(strings.Join(filters.TagsIDs, ","))
+			req = req.TagIds(strings.Join(filters.TagsIDs, ","))
 		}
 		if filters.Search != "" {
 			req = req.Search(filters.Search)

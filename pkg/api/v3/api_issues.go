@@ -291,7 +291,7 @@ type ApiListIssuesRequest struct {
 	ids *string
 	names *ListIssuesNamesParameter
 	scanIds *string
-	tagsIds *string
+	tagIds *string
 	search *string
 	jiraTicket *string
 	risks *[]string
@@ -362,8 +362,8 @@ func (r ApiListIssuesRequest) ScanIds(scanIds string) ApiListIssuesRequest {
 }
 
 // Filter by tag IDs
-func (r ApiListIssuesRequest) TagsIds(tagsIds string) ApiListIssuesRequest {
-	r.tagsIds = &tagsIds
+func (r ApiListIssuesRequest) TagIds(tagIds string) ApiListIssuesRequest {
+	r.tagIds = &tagIds
 	return r
 }
 
@@ -455,9 +455,9 @@ func (a *IssuesAPIService) ListIssuesExecute(r ApiListIssuesRequest) (*ListIssue
 	if r.size != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
-        var defaultValue int = 50
-        parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
-        r.size = &defaultValue
+		var defaultValue int = 50
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
+		r.size = &defaultValue
 	}
 	if r.sortType != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortType", r.sortType, "form", "")
@@ -465,9 +465,9 @@ func (a *IssuesAPIService) ListIssuesExecute(r ApiListIssuesRequest) (*ListIssue
 	if r.sortDirection != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
-        var defaultValue string = "asc"
-        parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
-        r.sortDirection = &defaultValue
+		var defaultValue string = "asc"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
+		r.sortDirection = &defaultValue
 	}
 	if r.profileIds != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "profileIds", r.profileIds, "form", "")
@@ -487,8 +487,8 @@ func (a *IssuesAPIService) ListIssuesExecute(r ApiListIssuesRequest) (*ListIssue
 	if r.scanIds != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "scanIds", r.scanIds, "form", "")
 	}
-	if r.tagsIds != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "tagsIds", r.tagsIds, "form", "")
+	if r.tagIds != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tagIds", r.tagIds, "form", "")
 	}
 	if r.search != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")

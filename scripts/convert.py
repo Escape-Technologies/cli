@@ -177,6 +177,13 @@ for path, path_data in data["paths"].items():
             "trace",
         ]:
             continue
+
+        # Remove "Beta" tag from operations that have other tags to avoid duplicate type declarations
+        # The generator creates request types per tag, causing redeclarations when the same operation
+        # appears under multiple tags (e.g., both "Beta" and "Integrations")
+        tags = operation_object.get("tags", [])
+        if len(tags) > 1 and "Beta" in tags:
+            operation_object["tags"] = [t for t in tags if t != "Beta"]
         
         list_params = [
             "profileIds",
@@ -203,17 +210,18 @@ for path, path_data in data["paths"].items():
             "initiator",
             "initiators",
             "kinds",
+            "locationIds",
         ]
 
         # Normalize list-like query params
-        # - For params backed by arrayOrSingle on the server (initiators, kinds, risks),
+        # - For params backed by arrayOrSingle on the server (initiators, kinds, risks, locationIds),
         #   expose them as arrays so the client sends repeated query params (form+explode)
         # - Keep others as strings (server accepts CSV via commaSeparatedString)
         if "parameters" in operation_object:
             for param in operation_object["parameters"]:
                 name = param.get("name")
                 if name in list_params:
-                    if name in ["initiators", "kinds", "risks"]:
+                    if name in ["initiators", "kinds", "risks", "locationIds"]:
                         param["schema"] = {"type": "array", "items": {"type": "string"}}
                         param["style"] = "form"
                         param["explode"] = True
@@ -266,6 +274,56 @@ for path, path_data in data["paths"].items():
                     else:
                         data["components"]["schemas"][name] = enum_schema
                 data["paths"][path][method]["responses"][status_code]["content"]["application/json"]["schema"] = schema
+
+# Unify all integration list endpoints to return ListIntegrations200Response
+# This ensures all integration types (akamai, kubernetes, aws, etc.) use the same response type
+unified_integration_response_schema = None
+for path, path_data in data["paths"].items():
+    # Match GET endpoints under /integrations/{type} pattern (but not /integrations/{type}/{id})
+    if path.startswith("/integrations/") and not path.endswith("/{id}") and "get" in path_data:
+        operation = path_data["get"]
+        responses = operation.get("responses", {})
+        if "200" in responses:
+            response_200 = responses["200"]
+            content = response_200.get("content", {})
+            if "application/json" in content:
+                json_schema = content["application/json"].get("schema", {})
+                if json_schema and "$ref" not in json_schema:
+                    # Use the first integration response schema as the template
+                    if unified_integration_response_schema is None:
+                        # Deep copy the schema
+                        unified_integration_response_schema = json.loads(json.dumps(json_schema))
+                        # Process it to extract enums
+                        processed_schema, enums = _rec_extract_enums(unified_integration_response_schema, [])
+                        # Store extracted enums in components
+                        for enum_name, enum_schema in enums.items():
+                            if enum_name in data["components"]["schemas"] and 'enum' in enum_schema:
+                                existing_schema = data["components"]["schemas"][enum_name]
+                                if 'enum' in existing_schema:
+                                    merged = sorted(set(existing_schema['enum']).union(set(enum_schema['enum'])))
+                                    existing_schema['enum'] = merged
+                                    data["components"]["schemas"][enum_name] = existing_schema
+                                else:
+                                    data["components"]["schemas"][enum_name] = enum_schema
+                            else:
+                                data["components"]["schemas"][enum_name] = enum_schema
+                        unified_integration_response_schema = processed_schema
+                    break
+
+# If we found a unified schema, create the component and replace all integration list responses
+if unified_integration_response_schema:
+    data["components"]["schemas"]["ListIntegrations200Response"] = unified_integration_response_schema
+    
+    # Replace all integration list GET endpoints with the unified response
+    for path, path_data in data["paths"].items():
+        if path.startswith("/integrations/") and not path.endswith("/{id}") and "get" in path_data:
+            operation = path_data["get"]
+            responses = operation.get("responses", {})
+            if "200" in responses:
+                response_200 = responses["200"]
+                content = response_200.get("content", {})
+                if "application/json" in content:
+                    content["application/json"]["schema"] = {"$ref": "#/components/schemas/ListIntegrations200Response"}
 
 with open(output_file, "w") as f:
     json.dump(data, f, indent=2)

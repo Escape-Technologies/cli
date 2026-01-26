@@ -404,7 +404,7 @@ type ApiDeleteRoleBindingRequest struct {
 	bindingId string
 }
 
-func (r ApiDeleteRoleBindingRequest) Execute() (*CreateRoleBindings200ResponseInner, *http.Response, error) {
+func (r ApiDeleteRoleBindingRequest) Execute() (*DeleteCustomRule200Response, *http.Response, error) {
 	return r.ApiService.DeleteRoleBindingExecute(r)
 }
 
@@ -426,13 +426,13 @@ func (a *BetaAPIService) DeleteRoleBinding(ctx context.Context, bindingId string
 }
 
 // Execute executes the request
-//  @return CreateRoleBindings200ResponseInner
-func (a *BetaAPIService) DeleteRoleBindingExecute(r ApiDeleteRoleBindingRequest) (*CreateRoleBindings200ResponseInner, *http.Response, error) {
+//  @return DeleteCustomRule200Response
+func (a *BetaAPIService) DeleteRoleBindingExecute(r ApiDeleteRoleBindingRequest) (*DeleteCustomRule200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateRoleBindings200ResponseInner
+		localVarReturnValue  *DeleteCustomRule200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BetaAPIService.DeleteRoleBinding")
@@ -1087,9 +1087,9 @@ func (a *BetaAPIService) ListProjectsExecute(r ApiListProjectsRequest) (*ListPro
 	if r.size != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
-        var defaultValue int = 50
-        parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
-        r.size = &defaultValue
+		var defaultValue int = 50
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
+		r.size = &defaultValue
 	}
 	if r.sortType != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortType", r.sortType, "form", "")
@@ -1097,9 +1097,9 @@ func (a *BetaAPIService) ListProjectsExecute(r ApiListProjectsRequest) (*ListPro
 	if r.sortDirection != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
-        var defaultValue string = "asc"
-        parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
-        r.sortDirection = &defaultValue
+		var defaultValue string = "asc"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
+		r.sortDirection = &defaultValue
 	}
 	if r.search != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")
