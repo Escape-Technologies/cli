@@ -60,7 +60,7 @@ capabilities.
      $ escape-cli issues list --severity HIGH,CRITICAL
 
 💡 PRO TIPS:
-  • Use -v for verbose logging (-vv for debug, -vvv for trace)
+  • Use -v for debug, -vv for trace, -vvv for http/raw debug
   • Output in JSON or YAML with -o json or -o yaml
   • Most list commands support powerful filtering options
   • Use --watch flag when starting scans for real-time updates
@@ -78,16 +78,15 @@ capabilities.
 			verbosityFrom = "environment variable ESCAPE_VERBOSITY"
 		}
 
+		// Verbosity levels per Health Monitoring for Private Locations docs:
+		// 0 = default (minimal), 1 = debug, 2 = trace, 3 = trace + http/raw
 		if rootCmdVerbose > 0 { //nolint:mnd
-			log.SetLevel(logrus.InfoLevel)
-		}
-		if rootCmdVerbose > 1 { //nolint:mnd
 			log.SetLevel(logrus.DebugLevel)
 		}
-		if rootCmdVerbose > 2 { //nolint:mnd
+		if rootCmdVerbose > 1 { //nolint:mnd
 			log.SetLevel(logrus.TraceLevel)
 		}
-		if rootCmdVerbose > 3 { //nolint:mnd
+		if rootCmdVerbose > 2 { //nolint:mnd
 			escape.Debug = true
 		}
 		log.Info("Verbose mode: %d from %s", rootCmdVerbose, verbosityFrom)
@@ -107,7 +106,7 @@ capabilities.
 }
 
 func init() {
-	rootCmd.PersistentFlags().CountVarP(&rootCmdVerbose, "verbose", "v", "verbose output: -v (info), -vv (debug), -vvv (trace), -vvvv (http debug)")
+	rootCmd.PersistentFlags().CountVarP(&rootCmdVerbose, "verbose", "v", "verbose output: -v (debug), -vv (trace), -vvv (http/raw debug)")
 	rootCmd.PersistentFlags().StringVarP(&rootCmdOutputStr, "output", "o", "pretty", "output format: pretty (human-readable tables), json (machine-readable), yaml (configuration files)")
 	rootCmd.SetUsageTemplate(rootCmd.UsageTemplate() + `
 COMMAND CATEGORIES:
