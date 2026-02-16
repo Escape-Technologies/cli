@@ -1,5 +1,5 @@
 // Package version contains the version information for the CLI
-package version
+package version //nolint:revive
 
 import "fmt"
 
