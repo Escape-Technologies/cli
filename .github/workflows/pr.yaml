@@ -33,17 +33,27 @@ jobs:
         uses: golangci/golangci-lint-action@v7.0.0
         with:
           version: latest
+
   go-fmt:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+
       - uses: actions/setup-go@v5
         with:
           go-version: ${{ env.GO_VERSION }}
-      - name: Check formatting
-        run: |
-          go fmt ./...
-          git diff --exit-code
+
+      - name: Format Go code
+        run: go fmt ./...
+
+      - name: Commit and push changes
+        uses: stefanzweifel/git-auto-commit-action@v7
+        with:
+          commit_message: "style: auto-format go code"
 
   tests:
     strategy:
