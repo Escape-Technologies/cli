@@ -19,7 +19,7 @@ var _ MappedNullable = &ProfileDetailedConfigurationExperimentalAgenticXss{}
 
 // ProfileDetailedConfigurationExperimentalAgenticXss struct for ProfileDetailedConfigurationExperimentalAgenticXss
 type ProfileDetailedConfigurationExperimentalAgenticXss struct {
-	Enabled *bool `json:"enabled,omitempty"`
+	Enabled              *bool `json:"enabled,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -75,7 +75,7 @@ func (o *ProfileDetailedConfigurationExperimentalAgenticXss) SetEnabled(v bool) 
 }
 
 func (o ProfileDetailedConfigurationExperimentalAgenticXss) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -151,5 +151,3 @@ func (v *NullableProfileDetailedConfigurationExperimentalAgenticXss) UnmarshalJS
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

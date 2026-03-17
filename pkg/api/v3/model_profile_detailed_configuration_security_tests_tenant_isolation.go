@@ -19,14 +19,14 @@ var _ MappedNullable = &ProfileDetailedConfigurationSecurityTestsTenantIsolation
 
 // ProfileDetailedConfigurationSecurityTestsTenantIsolation struct for ProfileDetailedConfigurationSecurityTestsTenantIsolation
 type ProfileDetailedConfigurationSecurityTestsTenantIsolation struct {
-	Skip *bool `json:"skip,omitempty"`
-	AssetsAllowed []ENUMPROPERTIESCONFIGURATIONPROPERTIESSECURITYTESTSPROPERTIESHIGHNUMBEROFCUSTOMSCALARSPROPERTIESASSETSALLOWEDITEMS `json:"assets_allowed,omitempty"`
-	MainUser *string `json:"main_user,omitempty"`
-	NaturalLanguageRule *string `json:"natural_language_rule,omitempty"`
-	OtherUsers *ProfileDetailedConfigurationSecurityTestsTenantIsolationOtherUsers `json:"other_users,omitempty"`
-	SpecificUsers map[string]ProfileDetailedConfigurationSecurityTestsTenantIsolationSpecificUsersValue `json:"specific_users,omitempty"`
-	Paths []string `json:"paths,omitempty"`
-	KeysMatching []string `json:"keys_matching,omitempty"`
+	Skip                 *bool                                                                                                               `json:"skip,omitempty"`
+	AssetsAllowed        []ENUMPROPERTIESCONFIGURATIONPROPERTIESSECURITYTESTSPROPERTIESHIGHNUMBEROFCUSTOMSCALARSPROPERTIESASSETSALLOWEDITEMS `json:"assets_allowed,omitempty"`
+	MainUser             *string                                                                                                             `json:"main_user,omitempty"`
+	NaturalLanguageRule  *string                                                                                                             `json:"natural_language_rule,omitempty"`
+	OtherUsers           *ProfileDetailedConfigurationSecurityTestsTenantIsolationOtherUsers                                                 `json:"other_users,omitempty"`
+	SpecificUsers        map[string]ProfileDetailedConfigurationSecurityTestsTenantIsolationSpecificUsersValue                               `json:"specific_users,omitempty"`
+	Paths                []string                                                                                                            `json:"paths,omitempty"`
+	KeysMatching         []string                                                                                                            `json:"keys_matching,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -306,7 +306,7 @@ func (o *ProfileDetailedConfigurationSecurityTestsTenantIsolation) SetKeysMatchi
 }
 
 func (o ProfileDetailedConfigurationSecurityTestsTenantIsolation) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -410,5 +410,3 @@ func (v *NullableProfileDetailedConfigurationSecurityTestsTenantIsolation) Unmar
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

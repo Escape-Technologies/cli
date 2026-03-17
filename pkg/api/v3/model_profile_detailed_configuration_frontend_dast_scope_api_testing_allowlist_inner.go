@@ -18,7 +18,7 @@ import (
 
 // ProfileDetailedConfigurationFrontendDastScopeApiTestingAllowlistInner - struct for ProfileDetailedConfigurationFrontendDastScopeApiTestingAllowlistInner
 type ProfileDetailedConfigurationFrontendDastScopeApiTestingAllowlistInner struct {
-	ProfileDetailedConfigurationScopeAllowlistInnerOneOf *ProfileDetailedConfigurationScopeAllowlistInnerOneOf
+	ProfileDetailedConfigurationScopeAllowlistInnerOneOf  *ProfileDetailedConfigurationScopeAllowlistInnerOneOf
 	ProfileDetailedConfigurationScopeAllowlistInnerOneOf1 *ProfileDetailedConfigurationScopeAllowlistInnerOneOf1
 	ProfileDetailedConfigurationScopeAllowlistInnerOneOf3 *ProfileDetailedConfigurationScopeAllowlistInnerOneOf3
 	ProfileDetailedConfigurationScopeAllowlistInnerOneOf4 *ProfileDetailedConfigurationScopeAllowlistInnerOneOf4
@@ -59,7 +59,6 @@ func ProfileDetailedConfigurationScopeAllowlistInnerOneOf5AsProfileDetailedConfi
 		ProfileDetailedConfigurationScopeAllowlistInnerOneOf5: v,
 	}
 }
-
 
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *ProfileDetailedConfigurationFrontendDastScopeApiTestingAllowlistInner) UnmarshalJSON(data []byte) error {
@@ -192,7 +191,7 @@ func (src ProfileDetailedConfigurationFrontendDastScopeApiTestingAllowlistInner)
 }
 
 // Get the actual instance
-func (obj *ProfileDetailedConfigurationFrontendDastScopeApiTestingAllowlistInner) GetActualInstance() (interface{}) {
+func (obj *ProfileDetailedConfigurationFrontendDastScopeApiTestingAllowlistInner) GetActualInstance() interface{} {
 	if obj == nil {
 		return nil
 	}
@@ -221,7 +220,7 @@ func (obj *ProfileDetailedConfigurationFrontendDastScopeApiTestingAllowlistInner
 }
 
 // Get the actual instance value
-func (obj ProfileDetailedConfigurationFrontendDastScopeApiTestingAllowlistInner) GetActualInstanceValue() (interface{}) {
+func (obj ProfileDetailedConfigurationFrontendDastScopeApiTestingAllowlistInner) GetActualInstanceValue() interface{} {
 	if obj.ProfileDetailedConfigurationScopeAllowlistInnerOneOf != nil {
 		return *obj.ProfileDetailedConfigurationScopeAllowlistInnerOneOf
 	}
@@ -281,5 +280,3 @@ func (v *NullableProfileDetailedConfigurationFrontendDastScopeApiTestingAllowlis
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

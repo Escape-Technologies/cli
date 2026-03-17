@@ -9,8 +9,8 @@ import (
 )
 
 const (
-	maxLogLevel     = 4
-	logChannelSize  = 100
+	maxLogLevel    = 4
+	logChannelSize = 100
 )
 
 type logPayload struct {
@@ -21,7 +21,7 @@ type logPayload struct {
 func sendLogs(ctx context.Context, ch ssh.Channel) {
 	logChan := make(chan log.Entry, logChannelSize)
 	ready := make(chan struct{})
-	
+
 	go func() {
 		close(ready)
 		for {
@@ -47,9 +47,9 @@ func sendLogs(ctx context.Context, ch ssh.Channel) {
 			}
 		}
 	}()
-	
+
 	<-ready
-	
+
 	log.AddHook("monitor", func(entry log.Entry) {
 		// Log levels: trace: 6, debug: 5, info: 4, warn: 3, error: 2, fatal: 1, panic: 0
 		if entry.Level <= maxLogLevel {

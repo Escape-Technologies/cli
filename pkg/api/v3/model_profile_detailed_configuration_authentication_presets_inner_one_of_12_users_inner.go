@@ -20,14 +20,14 @@ var _ MappedNullable = &ProfileDetailedConfigurationAuthenticationPresetsInnerOn
 
 // ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInner struct for ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInner
 type ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInner struct {
-	Username string `json:"username"`
-	Headers map[string]string `json:"headers,omitempty"`
-	Cookies map[string]string `json:"cookies,omitempty"`
-	QueryParameters map[string]string `json:"query_parameters,omitempty"`
-	MainUser *bool `json:"main_user,omitempty"`
-	Basic *string `json:"basic,omitempty"`
-	Digest *string `json:"digest,omitempty"`
-	Actions []ProfileDetailedConfigurationAuthenticationUsersInnerCredentialsActionsInner `json:"actions"`
+	Username             string                                                                        `json:"username"`
+	Headers              map[string]string                                                             `json:"headers,omitempty"`
+	Cookies              map[string]string                                                             `json:"cookies,omitempty"`
+	QueryParameters      map[string]string                                                             `json:"query_parameters,omitempty"`
+	MainUser             *bool                                                                         `json:"main_user,omitempty"`
+	Basic                *string                                                                       `json:"basic,omitempty"`
+	Digest               *string                                                                       `json:"digest,omitempty"`
+	Actions              []ProfileDetailedConfigurationAuthenticationUsersInnerCredentialsActionsInner `json:"actions"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -293,7 +293,7 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInner
 }
 
 func (o ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInner) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -344,10 +344,10 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12UsersInner
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -415,5 +415,3 @@ func (v *NullableProfileDetailedConfigurationAuthenticationPresetsInnerOneOf12Us
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

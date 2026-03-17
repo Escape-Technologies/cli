@@ -19,9 +19,9 @@ var _ MappedNullable = &ProfileDetailedConfigurationGraphqlApiDastScope{}
 
 // ProfileDetailedConfigurationGraphqlApiDastScope struct for ProfileDetailedConfigurationGraphqlApiDastScope
 type ProfileDetailedConfigurationGraphqlApiDastScope struct {
-	ExtendGlobalScope *bool `json:"extend_global_scope,omitempty"`
-	Allowlist []ProfileDetailedConfigurationScopeAllowlistInner `json:"allowlist,omitempty"`
-	Blocklist []ProfileDetailedConfigurationScopeAllowlistInner `json:"blocklist,omitempty"`
+	ExtendGlobalScope    *bool                                             `json:"extend_global_scope,omitempty"`
+	Allowlist            []ProfileDetailedConfigurationScopeAllowlistInner `json:"allowlist,omitempty"`
+	Blocklist            []ProfileDetailedConfigurationScopeAllowlistInner `json:"blocklist,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -141,7 +141,7 @@ func (o *ProfileDetailedConfigurationGraphqlApiDastScope) SetBlocklist(v []Profi
 }
 
 func (o ProfileDetailedConfigurationGraphqlApiDastScope) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -225,5 +225,3 @@ func (v *NullableProfileDetailedConfigurationGraphqlApiDastScope) UnmarshalJSON(
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -99,7 +99,7 @@ var tagsDeleteCmd = &cobra.Command{
 	Aliases: []string{"del", "rm", "remove"},
 	Args:    cobra.ExactArgs(1),
 	Short:   "Delete a tag",
-	Long:    `Delete Tag - Remove tag from organization
+	Long: `Delete Tag - Remove tag from organization
 
 Permanently delete a tag from your organization`,
 	Example: `  # Delete a tag

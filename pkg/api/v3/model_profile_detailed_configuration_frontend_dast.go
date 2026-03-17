@@ -19,25 +19,25 @@ var _ MappedNullable = &ProfileDetailedConfigurationFrontendDast{}
 
 // ProfileDetailedConfigurationFrontendDast struct for ProfileDetailedConfigurationFrontendDast
 type ProfileDetailedConfigurationFrontendDast struct {
-	LocationId *string `json:"location_id,omitempty"`
-	Mode *ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE `json:"mode,omitempty"`
-	MaxDuration *float32 `json:"max_duration,omitempty"`
-	Hotstart []string `json:"hotstart,omitempty"`
+	LocationId            *string                                                                                 `json:"location_id,omitempty"`
+	Mode                  *ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE                        `json:"mode,omitempty"`
+	MaxDuration           *float32                                                                                `json:"max_duration,omitempty"`
+	Hotstart              []string                                                                                `json:"hotstart,omitempty"`
 	SecurityChecksEnabled []ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSECURITYCHECKSENABLEDITEMS `json:"security_checks_enabled,omitempty"`
-	ApiChecksDuringAuth *bool `json:"api_checks_during_auth,omitempty"`
-	SinglePageWorker *bool `json:"single_page_worker,omitempty"`
-	ParallelWorkers *float32 `json:"parallel_workers,omitempty"`
-	RelaxCorsSecurity *bool `json:"relax_cors_security,omitempty"`
-	UserAgent *string `json:"user_agent,omitempty"`
-	UsePersistence *bool `json:"use_persistence,omitempty"`
-	EscapeUserHeader *bool `json:"escape_user_header,omitempty"`
-	PrefetchSitemap *bool `json:"prefetch_sitemap,omitempty"`
-	CrawlingTuning *ProfileDetailedConfigurationFrontendDastCrawlingTuning `json:"crawling_tuning,omitempty"`
-	StaticCrawling *ProfileDetailedConfigurationFrontendDastStaticCrawling `json:"static_crawling,omitempty"`
-	LogoutDetection *ProfileDetailedConfigurationFrontendDastLogoutDetection `json:"logout_detection,omitempty"`
-	Scope *ProfileDetailedConfigurationFrontendDastScope `json:"scope,omitempty"`
-	AgenticCrawling *ProfileDetailedConfigurationFrontendDastAgenticCrawling `json:"agentic_crawling,omitempty"`
-	AdditionalProperties map[string]interface{}
+	ApiChecksDuringAuth   *bool                                                                                   `json:"api_checks_during_auth,omitempty"`
+	SinglePageWorker      *bool                                                                                   `json:"single_page_worker,omitempty"`
+	ParallelWorkers       *float32                                                                                `json:"parallel_workers,omitempty"`
+	RelaxCorsSecurity     *bool                                                                                   `json:"relax_cors_security,omitempty"`
+	UserAgent             *string                                                                                 `json:"user_agent,omitempty"`
+	UsePersistence        *bool                                                                                   `json:"use_persistence,omitempty"`
+	EscapeUserHeader      *bool                                                                                   `json:"escape_user_header,omitempty"`
+	PrefetchSitemap       *bool                                                                                   `json:"prefetch_sitemap,omitempty"`
+	CrawlingTuning        *ProfileDetailedConfigurationFrontendDastCrawlingTuning                                 `json:"crawling_tuning,omitempty"`
+	StaticCrawling        *ProfileDetailedConfigurationFrontendDastStaticCrawling                                 `json:"static_crawling,omitempty"`
+	LogoutDetection       *ProfileDetailedConfigurationFrontendDastLogoutDetection                                `json:"logout_detection,omitempty"`
+	Scope                 *ProfileDetailedConfigurationFrontendDastScope                                          `json:"scope,omitempty"`
+	AgenticCrawling       *ProfileDetailedConfigurationFrontendDastAgenticCrawling                                `json:"agentic_crawling,omitempty"`
+	AdditionalProperties  map[string]interface{}
 }
 
 type _ProfileDetailedConfigurationFrontendDast ProfileDetailedConfigurationFrontendDast
@@ -636,7 +636,7 @@ func (o *ProfileDetailedConfigurationFrontendDast) SetAgenticCrawling(v ProfileD
 }
 
 func (o ProfileDetailedConfigurationFrontendDast) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -780,5 +780,3 @@ func (v *NullableProfileDetailedConfigurationFrontendDast) UnmarshalJSON(src []b
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -21,25 +21,25 @@ var _ MappedNullable = &CreateAssetGRPCRequest{}
 // CreateAssetGRPCRequest struct for CreateAssetGRPCRequest
 type CreateAssetGRPCRequest struct {
 	// The list of project IDs bind the asset on.
-	ProjectIds []string `json:"projectIds,omitempty"`
-	AssetClass ENUMAPISERVICE `json:"asset_class"`
-	WizProviderId *string `json:"wiz_provider_id,omitempty"`
-	WizCloudPlatform *string `json:"wiz_cloud_platform,omitempty"`
-	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
-	AssetType ENUMGRPC `json:"asset_type"`
-	Url string `json:"url"`
-	Favicon *string `json:"favicon,omitempty"`
-	ReachableVia []string `json:"reachable_via,omitempty"`
-	ReachableViaExternalProxy *bool `json:"reachable_via_external_proxy,omitempty"`
-	Private *bool `json:"private,omitempty"`
-	PrivateLocationId *string `json:"private_location_id,omitempty"`
-	Environment *ENUMPROPERTIESENVIRONMENT `json:"environment,omitempty"`
-	CloudProvider *ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER `json:"cloud_provider,omitempty"`
-	WafProvider *ENUMPROPERTIESWAFPROVIDER `json:"waf_provider,omitempty"`
-	ThirdParty *ENUMPROPERTIESTHIRDPARTY `json:"third_party,omitempty"`
-	Ips []string `json:"ips,omitempty"`
-	RegionCountryCodes []string `json:"region_country_codes,omitempty"`
-	AdditionalProperties map[string]interface{}
+	ProjectIds                []string                                                                        `json:"projectIds,omitempty"`
+	AssetClass                ENUMAPISERVICE                                                                  `json:"asset_class"`
+	WizProviderId             *string                                                                         `json:"wiz_provider_id,omitempty"`
+	WizCloudPlatform          *string                                                                         `json:"wiz_cloud_platform,omitempty"`
+	ExtraMetadata             map[string]interface{}                                                          `json:"extra_metadata,omitempty"`
+	AssetType                 ENUMGRPC                                                                        `json:"asset_type"`
+	Url                       string                                                                          `json:"url"`
+	Favicon                   *string                                                                         `json:"favicon,omitempty"`
+	ReachableVia              []string                                                                        `json:"reachable_via,omitempty"`
+	ReachableViaExternalProxy *bool                                                                           `json:"reachable_via_external_proxy,omitempty"`
+	Private                   *bool                                                                           `json:"private,omitempty"`
+	PrivateLocationId         *string                                                                         `json:"private_location_id,omitempty"`
+	Environment               *ENUMPROPERTIESENVIRONMENT                                                      `json:"environment,omitempty"`
+	CloudProvider             *ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER `json:"cloud_provider,omitempty"`
+	WafProvider               *ENUMPROPERTIESWAFPROVIDER                                                      `json:"waf_provider,omitempty"`
+	ThirdParty                *ENUMPROPERTIESTHIRDPARTY                                                       `json:"third_party,omitempty"`
+	Ips                       []string                                                                        `json:"ips,omitempty"`
+	RegionCountryCodes        []string                                                                        `json:"region_country_codes,omitempty"`
+	AdditionalProperties      map[string]interface{}
 }
 
 type _CreateAssetGRPCRequest CreateAssetGRPCRequest
@@ -617,7 +617,7 @@ func (o *CreateAssetGRPCRequest) SetRegionCountryCodes(v []string) {
 }
 
 func (o CreateAssetGRPCRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -697,10 +697,10 @@ func (o *CreateAssetGRPCRequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -778,5 +778,3 @@ func (v *NullableCreateAssetGRPCRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -20,10 +20,10 @@ var _ MappedNullable = &WorkflowDetailedFiltersInner{}
 
 // WorkflowDetailedFiltersInner struct for WorkflowDetailedFiltersInner
 type WorkflowDetailedFiltersInner struct {
-	Id string `json:"id"`
-	Type ENUMPROPERTIESFILTERSITEMSPROPERTIESTYPE `json:"type"`
-	Filter interface{} `json:"filter,omitempty"`
-	View *WorkflowDetailedFiltersInnerView `json:"view,omitempty"`
+	Id                   string                                   `json:"id"`
+	Type                 ENUMPROPERTIESFILTERSITEMSPROPERTIESTYPE `json:"type"`
+	Filter               interface{}                              `json:"filter,omitempty"`
+	View                 *WorkflowDetailedFiltersInnerView        `json:"view,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -162,7 +162,7 @@ func (o *WorkflowDetailedFiltersInner) SetView(v WorkflowDetailedFiltersInnerVie
 }
 
 func (o WorkflowDetailedFiltersInner) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -201,10 +201,10 @@ func (o *WorkflowDetailedFiltersInner) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -268,5 +268,3 @@ func (v *NullableWorkflowDetailedFiltersInner) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

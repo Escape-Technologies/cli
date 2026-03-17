@@ -19,13 +19,12 @@ import (
 	"strings"
 )
 
-
 // BetaAPIService BetaAPI service
 type BetaAPIService service
 
 type ApiCreateProjectRequest struct {
-	ctx context.Context
-	ApiService *BetaAPIService
+	ctx                  context.Context
+	ApiService           *BetaAPIService
 	createProjectRequest *CreateProjectRequest
 }
 
@@ -44,24 +43,25 @@ CreateProject Create a project
 
 Create a project for the organization.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateProjectRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateProjectRequest
 */
 func (a *BetaAPIService) CreateProject(ctx context.Context) ApiCreateProjectRequest {
 	return ApiCreateProjectRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return CreateProject200Response
+//
+//	@return CreateProject200Response
 func (a *BetaAPIService) CreateProjectExecute(r ApiCreateProjectRequest) (*CreateProject200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CreateProject200Response
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CreateProject200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BetaAPIService.CreateProject")
@@ -149,8 +149,8 @@ func (a *BetaAPIService) CreateProjectExecute(r ApiCreateProjectRequest) (*Creat
 }
 
 type ApiCreateRoleRequest struct {
-	ctx context.Context
-	ApiService *BetaAPIService
+	ctx               context.Context
+	ApiService        *BetaAPIService
 	createRoleRequest *CreateRoleRequest
 }
 
@@ -169,24 +169,25 @@ CreateRole Create a role
 
 Create a role for the organization.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateRoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateRoleRequest
 */
 func (a *BetaAPIService) CreateRole(ctx context.Context) ApiCreateRoleRequest {
 	return ApiCreateRoleRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return CreateRole200Response
+//
+//	@return CreateRole200Response
 func (a *BetaAPIService) CreateRoleExecute(r ApiCreateRoleRequest) (*CreateRole200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CreateRole200Response
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CreateRole200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BetaAPIService.CreateRole")
@@ -274,8 +275,8 @@ func (a *BetaAPIService) CreateRoleExecute(r ApiCreateRoleRequest) (*CreateRole2
 }
 
 type ApiCreateRoleBindingsRequest struct {
-	ctx context.Context
-	ApiService *BetaAPIService
+	ctx                       context.Context
+	ApiService                *BetaAPIService
 	createRoleBindingsRequest *CreateRoleBindingsRequest
 }
 
@@ -294,24 +295,25 @@ CreateRoleBindings Create role bindings
 
 Create role bindings.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateRoleBindingsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateRoleBindingsRequest
 */
 func (a *BetaAPIService) CreateRoleBindings(ctx context.Context) ApiCreateRoleBindingsRequest {
 	return ApiCreateRoleBindingsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return []CreateRoleBindings200ResponseInner
+//
+//	@return []CreateRoleBindings200ResponseInner
 func (a *BetaAPIService) CreateRoleBindingsExecute(r ApiCreateRoleBindingsRequest) ([]CreateRoleBindings200ResponseInner, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []CreateRoleBindings200ResponseInner
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []CreateRoleBindings200ResponseInner
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BetaAPIService.CreateRoleBindings")
@@ -399,9 +401,9 @@ func (a *BetaAPIService) CreateRoleBindingsExecute(r ApiCreateRoleBindingsReques
 }
 
 type ApiDeleteRoleBindingRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *BetaAPIService
-	bindingId string
+	bindingId  string
 }
 
 func (r ApiDeleteRoleBindingRequest) Execute() (*DeleteCustomRule200Response, *http.Response, error) {
@@ -413,26 +415,27 @@ DeleteRoleBinding Delete a role binding
 
 Delete a role binding.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param bindingId The role binding ID
- @return ApiDeleteRoleBindingRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param bindingId The role binding ID
+	@return ApiDeleteRoleBindingRequest
 */
 func (a *BetaAPIService) DeleteRoleBinding(ctx context.Context, bindingId string) ApiDeleteRoleBindingRequest {
 	return ApiDeleteRoleBindingRequest{
 		ApiService: a,
-		ctx: ctx,
-		bindingId: bindingId,
+		ctx:        ctx,
+		bindingId:  bindingId,
 	}
 }
 
 // Execute executes the request
-//  @return DeleteCustomRule200Response
+//
+//	@return DeleteCustomRule200Response
 func (a *BetaAPIService) DeleteRoleBindingExecute(r ApiDeleteRoleBindingRequest) (*DeleteCustomRule200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DeleteCustomRule200Response
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DeleteCustomRule200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BetaAPIService.DeleteRoleBinding")
@@ -507,8 +510,8 @@ func (a *BetaAPIService) DeleteRoleBindingExecute(r ApiDeleteRoleBindingRequest)
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -526,9 +529,9 @@ func (a *BetaAPIService) DeleteRoleBindingExecute(r ApiDeleteRoleBindingRequest)
 }
 
 type ApiGetProjectRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *BetaAPIService
-	projectId string
+	projectId  string
 }
 
 func (r ApiGetProjectRequest) Execute() (*CreateProject200Response, *http.Response, error) {
@@ -540,26 +543,27 @@ GetProject Get a project
 
 Get a project by ID.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId The project ID
- @return ApiGetProjectRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param projectId The project ID
+	@return ApiGetProjectRequest
 */
 func (a *BetaAPIService) GetProject(ctx context.Context, projectId string) ApiGetProjectRequest {
 	return ApiGetProjectRequest{
 		ApiService: a,
-		ctx: ctx,
-		projectId: projectId,
+		ctx:        ctx,
+		projectId:  projectId,
 	}
 }
 
 // Execute executes the request
-//  @return CreateProject200Response
+//
+//	@return CreateProject200Response
 func (a *BetaAPIService) GetProjectExecute(r ApiGetProjectRequest) (*CreateProject200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CreateProject200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CreateProject200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BetaAPIService.GetProject")
@@ -643,9 +647,9 @@ func (a *BetaAPIService) GetProjectExecute(r ApiGetProjectRequest) (*CreateProje
 }
 
 type ApiGetRoleRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *BetaAPIService
-	roleId string
+	roleId     string
 }
 
 func (r ApiGetRoleRequest) Execute() (*CreateRole200Response, *http.Response, error) {
@@ -657,26 +661,27 @@ GetRole Get a role
 
 Get a role by ID.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param roleId The role ID
- @return ApiGetRoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param roleId The role ID
+	@return ApiGetRoleRequest
 */
 func (a *BetaAPIService) GetRole(ctx context.Context, roleId string) ApiGetRoleRequest {
 	return ApiGetRoleRequest{
 		ApiService: a,
-		ctx: ctx,
-		roleId: roleId,
+		ctx:        ctx,
+		roleId:     roleId,
 	}
 }
 
 // Execute executes the request
-//  @return CreateRole200Response
+//
+//	@return CreateRole200Response
 func (a *BetaAPIService) GetRoleExecute(r ApiGetRoleRequest) (*CreateRole200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CreateRole200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CreateRole200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BetaAPIService.GetRole")
@@ -760,9 +765,9 @@ func (a *BetaAPIService) GetRoleExecute(r ApiGetRoleRequest) (*CreateRole200Resp
 }
 
 type ApiGetUserRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *BetaAPIService
-	userId string
+	userId     string
 }
 
 func (r ApiGetUserRequest) Execute() (*GetUser200Response, *http.Response, error) {
@@ -774,26 +779,27 @@ GetUser Get a user
 
 Get a user by ID.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param userId The user ID
- @return ApiGetUserRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param userId The user ID
+	@return ApiGetUserRequest
 */
 func (a *BetaAPIService) GetUser(ctx context.Context, userId string) ApiGetUserRequest {
 	return ApiGetUserRequest{
 		ApiService: a,
-		ctx: ctx,
-		userId: userId,
+		ctx:        ctx,
+		userId:     userId,
 	}
 }
 
 // Execute executes the request
-//  @return GetUser200Response
+//
+//	@return GetUser200Response
 func (a *BetaAPIService) GetUserExecute(r ApiGetUserRequest) (*GetUser200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetUser200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetUser200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BetaAPIService.GetUser")
@@ -877,8 +883,8 @@ func (a *BetaAPIService) GetUserExecute(r ApiGetUserRequest) (*GetUser200Respons
 }
 
 type ApiInviteUserRequest struct {
-	ctx context.Context
-	ApiService *BetaAPIService
+	ctx               context.Context
+	ApiService        *BetaAPIService
 	inviteUserRequest *InviteUserRequest
 }
 
@@ -897,24 +903,25 @@ InviteUser Invite users
 
 Invite users to the organization, and give them roles.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiInviteUserRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiInviteUserRequest
 */
 func (a *BetaAPIService) InviteUser(ctx context.Context) ApiInviteUserRequest {
 	return ApiInviteUserRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return []ListUsers200Response
+//
+//	@return []ListUsers200Response
 func (a *BetaAPIService) InviteUserExecute(r ApiInviteUserRequest) ([]ListUsers200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []ListUsers200Response
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []ListUsers200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BetaAPIService.InviteUser")
@@ -1002,13 +1009,13 @@ func (a *BetaAPIService) InviteUserExecute(r ApiInviteUserRequest) ([]ListUsers2
 }
 
 type ApiListProjectsRequest struct {
-	ctx context.Context
-	ApiService *BetaAPIService
-	cursor *string
-	size *int
-	sortType *string
+	ctx           context.Context
+	ApiService    *BetaAPIService
+	cursor        *string
+	size          *int
+	sortType      *string
 	sortDirection *string
-	search *string
+	search        *string
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
@@ -1050,24 +1057,25 @@ ListProjects List projects
 
 List and search projects of the organization.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListProjectsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListProjectsRequest
 */
 func (a *BetaAPIService) ListProjects(ctx context.Context) ApiListProjectsRequest {
 	return ApiListProjectsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ListProjects200Response
+//
+//	@return ListProjects200Response
 func (a *BetaAPIService) ListProjectsExecute(r ApiListProjectsRequest) (*ListProjects200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ListProjects200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ListProjects200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BetaAPIService.ListProjects")
@@ -1164,8 +1172,8 @@ func (a *BetaAPIService) ListProjectsExecute(r ApiListProjectsRequest) (*ListPro
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1183,7 +1191,7 @@ func (a *BetaAPIService) ListProjectsExecute(r ApiListProjectsRequest) (*ListPro
 }
 
 type ApiListRolesRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *BetaAPIService
 }
 
@@ -1196,24 +1204,25 @@ ListRoles List roles
 
 List and search roles of the organization.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListRolesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListRolesRequest
 */
 func (a *BetaAPIService) ListRoles(ctx context.Context) ApiListRolesRequest {
 	return ApiListRolesRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ListRoles200Response
+//
+//	@return ListRoles200Response
 func (a *BetaAPIService) ListRolesExecute(r ApiListRolesRequest) (*ListRoles200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ListRoles200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ListRoles200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BetaAPIService.ListRoles")
@@ -1296,7 +1305,7 @@ func (a *BetaAPIService) ListRolesExecute(r ApiListRolesRequest) (*ListRoles200R
 }
 
 type ApiListUsersRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *BetaAPIService
 }
 
@@ -1309,24 +1318,25 @@ ListUsers List users
 
 List and search projects of the organization.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListUsersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListUsersRequest
 */
 func (a *BetaAPIService) ListUsers(ctx context.Context) ApiListUsersRequest {
 	return ApiListUsersRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ListUsers200Response
+//
+//	@return ListUsers200Response
 func (a *BetaAPIService) ListUsersExecute(r ApiListUsersRequest) (*ListUsers200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ListUsers200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ListUsers200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BetaAPIService.ListUsers")
@@ -1409,9 +1419,9 @@ func (a *BetaAPIService) ListUsersExecute(r ApiListUsersRequest) (*ListUsers200R
 }
 
 type ApiUpdateProjectRequest struct {
-	ctx context.Context
-	ApiService *BetaAPIService
-	projectId string
+	ctx                  context.Context
+	ApiService           *BetaAPIService
+	projectId            string
 	updateProjectRequest *UpdateProjectRequest
 }
 
@@ -1430,26 +1440,27 @@ UpdateProject Update a project
 
 Update a project.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId The project ID
- @return ApiUpdateProjectRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param projectId The project ID
+	@return ApiUpdateProjectRequest
 */
 func (a *BetaAPIService) UpdateProject(ctx context.Context, projectId string) ApiUpdateProjectRequest {
 	return ApiUpdateProjectRequest{
 		ApiService: a,
-		ctx: ctx,
-		projectId: projectId,
+		ctx:        ctx,
+		projectId:  projectId,
 	}
 }
 
 // Execute executes the request
-//  @return CreateProject200Response
+//
+//	@return CreateProject200Response
 func (a *BetaAPIService) UpdateProjectExecute(r ApiUpdateProjectRequest) (*CreateProject200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CreateProject200Response
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CreateProject200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BetaAPIService.UpdateProject")
@@ -1538,9 +1549,9 @@ func (a *BetaAPIService) UpdateProjectExecute(r ApiUpdateProjectRequest) (*Creat
 }
 
 type ApiUpdateRoleRequest struct {
-	ctx context.Context
-	ApiService *BetaAPIService
-	roleId string
+	ctx               context.Context
+	ApiService        *BetaAPIService
+	roleId            string
 	updateRoleRequest *UpdateRoleRequest
 }
 
@@ -1559,26 +1570,27 @@ UpdateRole Update a role
 
 Update a role.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param roleId The role ID
- @return ApiUpdateRoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param roleId The role ID
+	@return ApiUpdateRoleRequest
 */
 func (a *BetaAPIService) UpdateRole(ctx context.Context, roleId string) ApiUpdateRoleRequest {
 	return ApiUpdateRoleRequest{
 		ApiService: a,
-		ctx: ctx,
-		roleId: roleId,
+		ctx:        ctx,
+		roleId:     roleId,
 	}
 }
 
 // Execute executes the request
-//  @return CreateRole200Response
+//
+//	@return CreateRole200Response
 func (a *BetaAPIService) UpdateRoleExecute(r ApiUpdateRoleRequest) (*CreateRole200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CreateRole200Response
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CreateRole200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BetaAPIService.UpdateRole")

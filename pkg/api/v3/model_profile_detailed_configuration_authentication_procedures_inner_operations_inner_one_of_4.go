@@ -20,9 +20,9 @@ var _ MappedNullable = &ProfileDetailedConfigurationAuthenticationProceduresInne
 
 // ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInnerOneOf4 struct for ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInnerOneOf4
 type ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInnerOneOf4 struct {
-	Tech ENUMBROWSERUSE `json:"tech"`
-	Parameters ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInnerOneOf4Parameters `json:"parameters"`
-	Extractions ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1Extractions `json:"extractions"`
+	Tech                 ENUMBROWSERUSE                                                                            `json:"tech"`
+	Parameters           ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInnerOneOf4Parameters  `json:"parameters"`
+	Extractions          ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1Extractions `json:"extractions"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -121,7 +121,7 @@ func (o *ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInne
 }
 
 func (o ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInnerOneOf4) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -156,10 +156,10 @@ func (o *ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInne
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -222,5 +222,3 @@ func (v *NullableProfileDetailedConfigurationAuthenticationProceduresInnerOperat
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

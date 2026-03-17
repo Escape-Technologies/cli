@@ -19,20 +19,20 @@ var _ MappedNullable = &ProfileDetailedConfigurationAuthenticationUsersInnerCred
 
 // ProfileDetailedConfigurationAuthenticationUsersInnerCredentials struct for ProfileDetailedConfigurationAuthenticationUsersInnerCredentials
 type ProfileDetailedConfigurationAuthenticationUsersInnerCredentials struct {
-	Username *string `json:"username,omitempty"`
-	Password *string `json:"password,omitempty"`
-	Headers []ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner `json:"headers,omitempty"`
-	Cookies []ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner `json:"cookies,omitempty"`
-	QueryParameters []ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner `json:"query_parameters,omitempty"`
-	Body interface{} `json:"body,omitempty"`
-	LocalStorage map[string]map[string]string `json:"local_storage,omitempty"`
-	SessionStorage map[string]map[string]string `json:"session_storage,omitempty"`
-	Actions []ProfileDetailedConfigurationAuthenticationUsersInnerCredentialsActionsInner `json:"actions,omitempty"`
-	PreLoginActions []ProfileDetailedConfigurationAuthenticationUsersInnerCredentialsActionsInner `json:"pre_login_actions,omitempty"`
-	PostLoginActions []ProfileDetailedConfigurationAuthenticationUsersInnerCredentialsActionsInner `json:"post_login_actions,omitempty"`
-	ExtraInstructions *string `json:"extra_instructions,omitempty"`
-	Digest *string `json:"digest,omitempty"`
-	Basic *string `json:"basic,omitempty"`
+	Username             *string                                                                                               `json:"username,omitempty"`
+	Password             *string                                                                                               `json:"password,omitempty"`
+	Headers              []ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner `json:"headers,omitempty"`
+	Cookies              []ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner `json:"cookies,omitempty"`
+	QueryParameters      []ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner `json:"query_parameters,omitempty"`
+	Body                 interface{}                                                                                           `json:"body,omitempty"`
+	LocalStorage         map[string]map[string]string                                                                          `json:"local_storage,omitempty"`
+	SessionStorage       map[string]map[string]string                                                                          `json:"session_storage,omitempty"`
+	Actions              []ProfileDetailedConfigurationAuthenticationUsersInnerCredentialsActionsInner                         `json:"actions,omitempty"`
+	PreLoginActions      []ProfileDetailedConfigurationAuthenticationUsersInnerCredentialsActionsInner                         `json:"pre_login_actions,omitempty"`
+	PostLoginActions     []ProfileDetailedConfigurationAuthenticationUsersInnerCredentialsActionsInner                         `json:"post_login_actions,omitempty"`
+	ExtraInstructions    *string                                                                                               `json:"extra_instructions,omitempty"`
+	Digest               *string                                                                                               `json:"digest,omitempty"`
+	Basic                *string                                                                                               `json:"basic,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -505,7 +505,7 @@ func (o *ProfileDetailedConfigurationAuthenticationUsersInnerCredentials) SetBas
 }
 
 func (o ProfileDetailedConfigurationAuthenticationUsersInnerCredentials) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -633,5 +633,3 @@ func (v *NullableProfileDetailedConfigurationAuthenticationUsersInnerCredentials
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

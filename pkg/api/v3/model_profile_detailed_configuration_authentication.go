@@ -19,14 +19,14 @@ var _ MappedNullable = &ProfileDetailedConfigurationAuthentication{}
 
 // ProfileDetailedConfigurationAuthentication struct for ProfileDetailedConfigurationAuthentication
 type ProfileDetailedConfigurationAuthentication struct {
-	Schema *string `json:"$schema,omitempty"`
-	Lifetime *float32 `json:"lifetime,omitempty"`
-	Procedures []ProfileDetailedConfigurationAuthenticationProceduresInner `json:"procedures,omitempty"`
-	Users []ProfileDetailedConfigurationAuthenticationUsersInner `json:"users,omitempty"`
-	Validation *bool `json:"validation,omitempty"`
-	Proxy *string `json:"proxy,omitempty"`
-	Presets []ProfileDetailedConfigurationAuthenticationPresetsInner `json:"presets,omitempty"`
-	MultiUserIsFallback *bool `json:"multi_user_is_fallback,omitempty"`
+	Schema               *string                                                     `json:"$schema,omitempty"`
+	Lifetime             *float32                                                    `json:"lifetime,omitempty"`
+	Procedures           []ProfileDetailedConfigurationAuthenticationProceduresInner `json:"procedures,omitempty"`
+	Users                []ProfileDetailedConfigurationAuthenticationUsersInner      `json:"users,omitempty"`
+	Validation           *bool                                                       `json:"validation,omitempty"`
+	Proxy                *string                                                     `json:"proxy,omitempty"`
+	Presets              []ProfileDetailedConfigurationAuthenticationPresetsInner    `json:"presets,omitempty"`
+	MultiUserIsFallback  *bool                                                       `json:"multi_user_is_fallback,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -306,7 +306,7 @@ func (o *ProfileDetailedConfigurationAuthentication) SetMultiUserIsFallback(v bo
 }
 
 func (o ProfileDetailedConfigurationAuthentication) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -410,5 +410,3 @@ func (v *NullableProfileDetailedConfigurationAuthentication) UnmarshalJSON(src [
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -19,9 +19,9 @@ var _ MappedNullable = &ProfileDetailedConfigurationSecurityTestsPrivateData{}
 
 // ProfileDetailedConfigurationSecurityTestsPrivateData struct for ProfileDetailedConfigurationSecurityTestsPrivateData
 type ProfileDetailedConfigurationSecurityTestsPrivateData struct {
-	Skip *bool `json:"skip,omitempty"`
-	AssetsAllowed []ENUMPROPERTIESCONFIGURATIONPROPERTIESSECURITYTESTSPROPERTIESHIGHNUMBEROFCUSTOMSCALARSPROPERTIESASSETSALLOWEDITEMS `json:"assets_allowed,omitempty"`
-	Users map[string][]string `json:"users,omitempty"`
+	Skip                 *bool                                                                                                               `json:"skip,omitempty"`
+	AssetsAllowed        []ENUMPROPERTIESCONFIGURATIONPROPERTIESSECURITYTESTSPROPERTIESHIGHNUMBEROFCUSTOMSCALARSPROPERTIESASSETSALLOWEDITEMS `json:"assets_allowed,omitempty"`
+	Users                map[string][]string                                                                                                 `json:"users,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -141,7 +141,7 @@ func (o *ProfileDetailedConfigurationSecurityTestsPrivateData) SetUsers(v map[st
 }
 
 func (o ProfileDetailedConfigurationSecurityTestsPrivateData) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -225,5 +225,3 @@ func (v *NullableProfileDetailedConfigurationSecurityTestsPrivateData) Unmarshal
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

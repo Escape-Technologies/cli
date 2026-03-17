@@ -19,9 +19,9 @@ var _ MappedNullable = &ProfileDetailedConfigurationFrontendDastScopeApiTesting{
 
 // ProfileDetailedConfigurationFrontendDastScopeApiTesting struct for ProfileDetailedConfigurationFrontendDastScopeApiTesting
 type ProfileDetailedConfigurationFrontendDastScopeApiTesting struct {
-	ExtendGlobalScope *bool `json:"extend_global_scope,omitempty"`
-	Allowlist []ProfileDetailedConfigurationFrontendDastScopeApiTestingAllowlistInner `json:"allowlist,omitempty"`
-	Blocklist []ProfileDetailedConfigurationFrontendDastScopeApiTestingAllowlistInner `json:"blocklist,omitempty"`
+	ExtendGlobalScope    *bool                                                                   `json:"extend_global_scope,omitempty"`
+	Allowlist            []ProfileDetailedConfigurationFrontendDastScopeApiTestingAllowlistInner `json:"allowlist,omitempty"`
+	Blocklist            []ProfileDetailedConfigurationFrontendDastScopeApiTestingAllowlistInner `json:"blocklist,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -141,7 +141,7 @@ func (o *ProfileDetailedConfigurationFrontendDastScopeApiTesting) SetBlocklist(v
 }
 
 func (o ProfileDetailedConfigurationFrontendDastScopeApiTesting) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -225,5 +225,3 @@ func (v *NullableProfileDetailedConfigurationFrontendDastScopeApiTesting) Unmars
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

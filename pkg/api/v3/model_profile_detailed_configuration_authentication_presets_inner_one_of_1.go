@@ -20,11 +20,11 @@ var _ MappedNullable = &ProfileDetailedConfigurationAuthenticationPresetsInnerOn
 
 // ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf1 struct for ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf1
 type ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf1 struct {
-	Type ENUMOAUTHROPC `json:"type"`
-	Users []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf1UsersInner `json:"users"`
-	Url string `json:"url"`
-	ClientId string `json:"client_id"`
-	ClientSecret string `json:"client_secret"`
+	Type                 ENUMOAUTHROPC                                                            `json:"type"`
+	Users                []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf1UsersInner `json:"users"`
+	Url                  string                                                                   `json:"url"`
+	ClientId             string                                                                   `json:"client_id"`
+	ClientSecret         string                                                                   `json:"client_secret"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -173,7 +173,7 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf1) SetClient
 }
 
 func (o ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf1) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -212,10 +212,10 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf1) Unmarshal
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -280,5 +280,3 @@ func (v *NullableProfileDetailedConfigurationAuthenticationPresetsInnerOneOf1) U
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
