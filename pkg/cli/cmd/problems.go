@@ -10,15 +10,15 @@ import (
 )
 
 var (
-	problemsDetailed bool
-	problemsAssetIDs []string
-	problemsDomains  []string
-	problemsIssueIDs []string
-	problemsTagIDs   []string
-	problemsSearch   string
+	problemsDetailed   bool
+	problemsAssetIDs   []string
+	problemsDomains    []string
+	problemsIssueIDs   []string
+	problemsTagIDs     []string
+	problemsSearch     string
 	problemsInitiators []string
-	problemsKinds    []string
-	problemsRisks    []string
+	problemsKinds      []string
+	problemsRisks      []string
 )
 
 var problemsCmd = &cobra.Command{
