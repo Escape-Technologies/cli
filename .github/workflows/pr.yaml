@@ -33,6 +33,17 @@ jobs:
         uses: golangci/golangci-lint-action@v7.0.0
         with:
           version: latest
+  go-fmt:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: ${{ env.GO_VERSION }}
+      - name: Check formatting
+        run: |
+          go fmt ./...
+          git diff --exit-code
 
   tests:
     strategy:
