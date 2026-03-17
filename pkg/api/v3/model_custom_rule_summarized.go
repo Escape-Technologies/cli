@@ -29,7 +29,7 @@ type CustomRuleSummarized struct {
 	// The creation date of the rule
 	CreatedAt string `json:"createdAt"`
 	// The last update date of the rule
-	UpdatedAt string `json:"updatedAt"`
+	UpdatedAt            string `json:"updatedAt"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -178,7 +178,7 @@ func (o *CustomRuleSummarized) SetUpdatedAt(v string) {
 }
 
 func (o CustomRuleSummarized) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -217,10 +217,10 @@ func (o *CustomRuleSummarized) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -285,5 +285,3 @@ func (v *NullableCustomRuleSummarized) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -15,10 +15,9 @@ import (
 	"fmt"
 )
 
-
 // ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11Injections struct for ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11Injections
 type ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11Injections struct {
-	ArrayOfProfileDetailedConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner *[]ProfileDetailedConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner
+	ArrayOfProfileDetailedConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner  *[]ProfileDetailedConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner
 	ArrayOfProfileDetailedConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner1 *[]ProfileDetailedConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner1
 }
 
@@ -31,7 +30,7 @@ func (dst *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11Injectio
 	}
 
 	// try to unmarshal JSON data into ArrayOfProfileDetailedConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner
-	err = json.Unmarshal(data, &dst.ArrayOfProfileDetailedConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner);
+	err = json.Unmarshal(data, &dst.ArrayOfProfileDetailedConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner)
 	if err == nil {
 		jsonArrayOfProfileDetailedConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner, _ := json.Marshal(dst.ArrayOfProfileDetailedConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner)
 		if string(jsonArrayOfProfileDetailedConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner) == "{}" { // empty struct
@@ -44,7 +43,7 @@ func (dst *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11Injectio
 	}
 
 	// try to unmarshal JSON data into ArrayOfProfileDetailedConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner1
-	err = json.Unmarshal(data, &dst.ArrayOfProfileDetailedConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner1);
+	err = json.Unmarshal(data, &dst.ArrayOfProfileDetailedConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner1)
 	if err == nil {
 		jsonArrayOfProfileDetailedConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner1, _ := json.Marshal(dst.ArrayOfProfileDetailedConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner1)
 		if string(jsonArrayOfProfileDetailedConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner1) == "{}" { // empty struct
@@ -71,7 +70,6 @@ func (src ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11Injection
 
 	return nil, nil // no data in anyOf schemas
 }
-
 
 type NullableProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11Injections struct {
 	value *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11Injections
@@ -108,5 +106,3 @@ func (v *NullableProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11In
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

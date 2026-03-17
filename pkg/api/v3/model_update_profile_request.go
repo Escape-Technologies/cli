@@ -22,7 +22,7 @@ type UpdateProfileRequest struct {
 	// The name of the profile
 	Name *string `json:"name,omitempty"`
 	// The cron of the profile
-	Cron *string `json:"cron,omitempty"`
+	Cron                 *string `json:"cron,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -110,7 +110,7 @@ func (o *UpdateProfileRequest) SetCron(v string) {
 }
 
 func (o UpdateProfileRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -190,5 +190,3 @@ func (v *NullableUpdateProfileRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

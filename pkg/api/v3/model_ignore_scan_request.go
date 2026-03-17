@@ -21,7 +21,7 @@ var _ MappedNullable = &IgnoreScanRequest{}
 // IgnoreScanRequest struct for IgnoreScanRequest
 type IgnoreScanRequest struct {
 	// Whether to ignore the scan
-	Ignored bool `json:"ignored"`
+	Ignored              bool `json:"ignored"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -70,7 +70,7 @@ func (o *IgnoreScanRequest) SetIgnored(v bool) {
 }
 
 func (o IgnoreScanRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -101,10 +101,10 @@ func (o *IgnoreScanRequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -165,5 +165,3 @@ func (v *NullableIgnoreScanRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

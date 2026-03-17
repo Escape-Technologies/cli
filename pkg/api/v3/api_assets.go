@@ -19,13 +19,12 @@ import (
 	"strings"
 )
 
-
 // AssetsAPIService AssetsAPI service
 type AssetsAPIService service
 
 type ApiCreateAssetAKAMAIACCOUNTRequest struct {
-	ctx context.Context
-	ApiService *AssetsAPIService
+	ctx                             context.Context
+	ApiService                      *AssetsAPIService
 	createAssetAKAMAIACCOUNTRequest *CreateAssetAKAMAIACCOUNTRequest
 }
 
@@ -44,24 +43,25 @@ CreateAssetAKAMAIACCOUNT Create asset akamai-account
 
 Create a akamai-account
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateAssetAKAMAIACCOUNTRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateAssetAKAMAIACCOUNTRequest
 */
 func (a *AssetsAPIService) CreateAssetAKAMAIACCOUNT(ctx context.Context) ApiCreateAssetAKAMAIACCOUNTRequest {
 	return ApiCreateAssetAKAMAIACCOUNTRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return AssetDetailed
+//
+//	@return AssetDetailed
 func (a *AssetsAPIService) CreateAssetAKAMAIACCOUNTExecute(r ApiCreateAssetAKAMAIACCOUNTRequest) (*AssetDetailed, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AssetDetailed
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetAKAMAIACCOUNT")
@@ -137,8 +137,8 @@ func (a *AssetsAPIService) CreateAssetAKAMAIACCOUNTExecute(r ApiCreateAssetAKAMA
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -156,8 +156,8 @@ func (a *AssetsAPIService) CreateAssetAKAMAIACCOUNTExecute(r ApiCreateAssetAKAMA
 }
 
 type ApiCreateAssetAWSACCOUNTRequest struct {
-	ctx context.Context
-	ApiService *AssetsAPIService
+	ctx                          context.Context
+	ApiService                   *AssetsAPIService
 	createAssetAWSACCOUNTRequest *CreateAssetAWSACCOUNTRequest
 }
 
@@ -176,24 +176,25 @@ CreateAssetAWSACCOUNT Create asset aws-account
 
 Create a aws-account
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateAssetAWSACCOUNTRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateAssetAWSACCOUNTRequest
 */
 func (a *AssetsAPIService) CreateAssetAWSACCOUNT(ctx context.Context) ApiCreateAssetAWSACCOUNTRequest {
 	return ApiCreateAssetAWSACCOUNTRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return AssetDetailed
+//
+//	@return AssetDetailed
 func (a *AssetsAPIService) CreateAssetAWSACCOUNTExecute(r ApiCreateAssetAWSACCOUNTRequest) (*AssetDetailed, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AssetDetailed
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetAWSACCOUNT")
@@ -269,8 +270,8 @@ func (a *AssetsAPIService) CreateAssetAWSACCOUNTExecute(r ApiCreateAssetAWSACCOU
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -288,8 +289,8 @@ func (a *AssetsAPIService) CreateAssetAWSACCOUNTExecute(r ApiCreateAssetAWSACCOU
 }
 
 type ApiCreateAssetAZURETENANTRequest struct {
-	ctx context.Context
-	ApiService *AssetsAPIService
+	ctx                           context.Context
+	ApiService                    *AssetsAPIService
 	createAssetAZURETENANTRequest *CreateAssetAZURETENANTRequest
 }
 
@@ -308,24 +309,25 @@ CreateAssetAZURETENANT Create asset azure-tenant
 
 Create a azure-tenant
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateAssetAZURETENANTRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateAssetAZURETENANTRequest
 */
 func (a *AssetsAPIService) CreateAssetAZURETENANT(ctx context.Context) ApiCreateAssetAZURETENANTRequest {
 	return ApiCreateAssetAZURETENANTRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return AssetDetailed
+//
+//	@return AssetDetailed
 func (a *AssetsAPIService) CreateAssetAZURETENANTExecute(r ApiCreateAssetAZURETENANTRequest) (*AssetDetailed, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AssetDetailed
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetAZURETENANT")
@@ -401,8 +403,8 @@ func (a *AssetsAPIService) CreateAssetAZURETENANTExecute(r ApiCreateAssetAZURETE
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -420,8 +422,8 @@ func (a *AssetsAPIService) CreateAssetAZURETENANTExecute(r ApiCreateAssetAZURETE
 }
 
 type ApiCreateAssetCLOUDFLAREACCOUNTRequest struct {
-	ctx context.Context
-	ApiService *AssetsAPIService
+	ctx                                 context.Context
+	ApiService                          *AssetsAPIService
 	createAssetCLOUDFLAREACCOUNTRequest *CreateAssetCLOUDFLAREACCOUNTRequest
 }
 
@@ -440,24 +442,25 @@ CreateAssetCLOUDFLAREACCOUNT Create asset cloudflare-account
 
 Create a cloudflare-account
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateAssetCLOUDFLAREACCOUNTRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateAssetCLOUDFLAREACCOUNTRequest
 */
 func (a *AssetsAPIService) CreateAssetCLOUDFLAREACCOUNT(ctx context.Context) ApiCreateAssetCLOUDFLAREACCOUNTRequest {
 	return ApiCreateAssetCLOUDFLAREACCOUNTRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return AssetDetailed
+//
+//	@return AssetDetailed
 func (a *AssetsAPIService) CreateAssetCLOUDFLAREACCOUNTExecute(r ApiCreateAssetCLOUDFLAREACCOUNTRequest) (*AssetDetailed, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AssetDetailed
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetCLOUDFLAREACCOUNT")
@@ -533,8 +536,8 @@ func (a *AssetsAPIService) CreateAssetCLOUDFLAREACCOUNTExecute(r ApiCreateAssetC
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -552,8 +555,8 @@ func (a *AssetsAPIService) CreateAssetCLOUDFLAREACCOUNTExecute(r ApiCreateAssetC
 }
 
 type ApiCreateAssetCODEPROJECTRequest struct {
-	ctx context.Context
-	ApiService *AssetsAPIService
+	ctx                           context.Context
+	ApiService                    *AssetsAPIService
 	createAssetCODEPROJECTRequest *CreateAssetCODEPROJECTRequest
 }
 
@@ -572,24 +575,25 @@ CreateAssetCODEPROJECT Create asset code-project
 
 Create a code-project
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateAssetCODEPROJECTRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateAssetCODEPROJECTRequest
 */
 func (a *AssetsAPIService) CreateAssetCODEPROJECT(ctx context.Context) ApiCreateAssetCODEPROJECTRequest {
 	return ApiCreateAssetCODEPROJECTRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return AssetDetailed
+//
+//	@return AssetDetailed
 func (a *AssetsAPIService) CreateAssetCODEPROJECTExecute(r ApiCreateAssetCODEPROJECTRequest) (*AssetDetailed, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AssetDetailed
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetCODEPROJECT")
@@ -665,8 +669,8 @@ func (a *AssetsAPIService) CreateAssetCODEPROJECTExecute(r ApiCreateAssetCODEPRO
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -684,8 +688,8 @@ func (a *AssetsAPIService) CreateAssetCODEPROJECTExecute(r ApiCreateAssetCODEPRO
 }
 
 type ApiCreateAssetDNSRequest struct {
-	ctx context.Context
-	ApiService *AssetsAPIService
+	ctx                   context.Context
+	ApiService            *AssetsAPIService
 	createAssetDNSRequest *CreateAssetDNSRequest
 }
 
@@ -704,24 +708,25 @@ CreateAssetDNS Create asset dns
 
 Create a dns
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateAssetDNSRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateAssetDNSRequest
 */
 func (a *AssetsAPIService) CreateAssetDNS(ctx context.Context) ApiCreateAssetDNSRequest {
 	return ApiCreateAssetDNSRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return AssetDetailed
+//
+//	@return AssetDetailed
 func (a *AssetsAPIService) CreateAssetDNSExecute(r ApiCreateAssetDNSRequest) (*AssetDetailed, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AssetDetailed
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetDNS")
@@ -797,8 +802,8 @@ func (a *AssetsAPIService) CreateAssetDNSExecute(r ApiCreateAssetDNSRequest) (*A
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -816,8 +821,8 @@ func (a *AssetsAPIService) CreateAssetDNSExecute(r ApiCreateAssetDNSRequest) (*A
 }
 
 type ApiCreateAssetGCPPROJECTRequest struct {
-	ctx context.Context
-	ApiService *AssetsAPIService
+	ctx                          context.Context
+	ApiService                   *AssetsAPIService
 	createAssetGCPPROJECTRequest *CreateAssetGCPPROJECTRequest
 }
 
@@ -836,24 +841,25 @@ CreateAssetGCPPROJECT Create asset gcp-project
 
 Create a gcp-project
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateAssetGCPPROJECTRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateAssetGCPPROJECTRequest
 */
 func (a *AssetsAPIService) CreateAssetGCPPROJECT(ctx context.Context) ApiCreateAssetGCPPROJECTRequest {
 	return ApiCreateAssetGCPPROJECTRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return AssetDetailed
+//
+//	@return AssetDetailed
 func (a *AssetsAPIService) CreateAssetGCPPROJECTExecute(r ApiCreateAssetGCPPROJECTRequest) (*AssetDetailed, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AssetDetailed
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetGCPPROJECT")
@@ -929,8 +935,8 @@ func (a *AssetsAPIService) CreateAssetGCPPROJECTExecute(r ApiCreateAssetGCPPROJE
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -948,8 +954,8 @@ func (a *AssetsAPIService) CreateAssetGCPPROJECTExecute(r ApiCreateAssetGCPPROJE
 }
 
 type ApiCreateAssetGITHUBORGANIZATIONRequest struct {
-	ctx context.Context
-	ApiService *AssetsAPIService
+	ctx                                  context.Context
+	ApiService                           *AssetsAPIService
 	createAssetGITHUBORGANIZATIONRequest *CreateAssetGITHUBORGANIZATIONRequest
 }
 
@@ -968,24 +974,25 @@ CreateAssetGITHUBORGANIZATION Create asset github-organization
 
 Create a github-organization
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateAssetGITHUBORGANIZATIONRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateAssetGITHUBORGANIZATIONRequest
 */
 func (a *AssetsAPIService) CreateAssetGITHUBORGANIZATION(ctx context.Context) ApiCreateAssetGITHUBORGANIZATIONRequest {
 	return ApiCreateAssetGITHUBORGANIZATIONRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return AssetDetailed
+//
+//	@return AssetDetailed
 func (a *AssetsAPIService) CreateAssetGITHUBORGANIZATIONExecute(r ApiCreateAssetGITHUBORGANIZATIONRequest) (*AssetDetailed, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AssetDetailed
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetGITHUBORGANIZATION")
@@ -1061,8 +1068,8 @@ func (a *AssetsAPIService) CreateAssetGITHUBORGANIZATIONExecute(r ApiCreateAsset
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1080,8 +1087,8 @@ func (a *AssetsAPIService) CreateAssetGITHUBORGANIZATIONExecute(r ApiCreateAsset
 }
 
 type ApiCreateAssetGITHUBREPOSITORYRequest struct {
-	ctx context.Context
-	ApiService *AssetsAPIService
+	ctx                                context.Context
+	ApiService                         *AssetsAPIService
 	createAssetGITHUBREPOSITORYRequest *CreateAssetGITHUBREPOSITORYRequest
 }
 
@@ -1100,24 +1107,25 @@ CreateAssetGITHUBREPOSITORY Create asset github-repository
 
 Create a github-repository
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateAssetGITHUBREPOSITORYRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateAssetGITHUBREPOSITORYRequest
 */
 func (a *AssetsAPIService) CreateAssetGITHUBREPOSITORY(ctx context.Context) ApiCreateAssetGITHUBREPOSITORYRequest {
 	return ApiCreateAssetGITHUBREPOSITORYRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return AssetDetailed
+//
+//	@return AssetDetailed
 func (a *AssetsAPIService) CreateAssetGITHUBREPOSITORYExecute(r ApiCreateAssetGITHUBREPOSITORYRequest) (*AssetDetailed, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AssetDetailed
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetGITHUBREPOSITORY")
@@ -1193,8 +1201,8 @@ func (a *AssetsAPIService) CreateAssetGITHUBREPOSITORYExecute(r ApiCreateAssetGI
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1212,8 +1220,8 @@ func (a *AssetsAPIService) CreateAssetGITHUBREPOSITORYExecute(r ApiCreateAssetGI
 }
 
 type ApiCreateAssetGITLABGROUPRequest struct {
-	ctx context.Context
-	ApiService *AssetsAPIService
+	ctx                           context.Context
+	ApiService                    *AssetsAPIService
 	createAssetGITLABGROUPRequest *CreateAssetGITLABGROUPRequest
 }
 
@@ -1232,24 +1240,25 @@ CreateAssetGITLABGROUP Create asset gitlab-group
 
 Create a gitlab-group
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateAssetGITLABGROUPRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateAssetGITLABGROUPRequest
 */
 func (a *AssetsAPIService) CreateAssetGITLABGROUP(ctx context.Context) ApiCreateAssetGITLABGROUPRequest {
 	return ApiCreateAssetGITLABGROUPRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return AssetDetailed
+//
+//	@return AssetDetailed
 func (a *AssetsAPIService) CreateAssetGITLABGROUPExecute(r ApiCreateAssetGITLABGROUPRequest) (*AssetDetailed, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AssetDetailed
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetGITLABGROUP")
@@ -1325,8 +1334,8 @@ func (a *AssetsAPIService) CreateAssetGITLABGROUPExecute(r ApiCreateAssetGITLABG
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1344,8 +1353,8 @@ func (a *AssetsAPIService) CreateAssetGITLABGROUPExecute(r ApiCreateAssetGITLABG
 }
 
 type ApiCreateAssetGITLABREPOSITORYRequest struct {
-	ctx context.Context
-	ApiService *AssetsAPIService
+	ctx                                context.Context
+	ApiService                         *AssetsAPIService
 	createAssetGITLABREPOSITORYRequest *CreateAssetGITLABREPOSITORYRequest
 }
 
@@ -1364,24 +1373,25 @@ CreateAssetGITLABREPOSITORY Create asset gitlab-repository
 
 Create a gitlab-repository
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateAssetGITLABREPOSITORYRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateAssetGITLABREPOSITORYRequest
 */
 func (a *AssetsAPIService) CreateAssetGITLABREPOSITORY(ctx context.Context) ApiCreateAssetGITLABREPOSITORYRequest {
 	return ApiCreateAssetGITLABREPOSITORYRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return AssetDetailed
+//
+//	@return AssetDetailed
 func (a *AssetsAPIService) CreateAssetGITLABREPOSITORYExecute(r ApiCreateAssetGITLABREPOSITORYRequest) (*AssetDetailed, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AssetDetailed
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetGITLABREPOSITORY")
@@ -1457,8 +1467,8 @@ func (a *AssetsAPIService) CreateAssetGITLABREPOSITORYExecute(r ApiCreateAssetGI
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1476,8 +1486,8 @@ func (a *AssetsAPIService) CreateAssetGITLABREPOSITORYExecute(r ApiCreateAssetGI
 }
 
 type ApiCreateAssetGRAPHQLRequest struct {
-	ctx context.Context
-	ApiService *AssetsAPIService
+	ctx                       context.Context
+	ApiService                *AssetsAPIService
 	createAssetGRAPHQLRequest *CreateAssetGRAPHQLRequest
 }
 
@@ -1496,24 +1506,25 @@ CreateAssetGRAPHQL Create asset graphql
 
 Create a graphql
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateAssetGRAPHQLRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateAssetGRAPHQLRequest
 */
 func (a *AssetsAPIService) CreateAssetGRAPHQL(ctx context.Context) ApiCreateAssetGRAPHQLRequest {
 	return ApiCreateAssetGRAPHQLRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return AssetDetailed
+//
+//	@return AssetDetailed
 func (a *AssetsAPIService) CreateAssetGRAPHQLExecute(r ApiCreateAssetGRAPHQLRequest) (*AssetDetailed, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AssetDetailed
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetGRAPHQL")
@@ -1589,8 +1600,8 @@ func (a *AssetsAPIService) CreateAssetGRAPHQLExecute(r ApiCreateAssetGRAPHQLRequ
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1608,8 +1619,8 @@ func (a *AssetsAPIService) CreateAssetGRAPHQLExecute(r ApiCreateAssetGRAPHQLRequ
 }
 
 type ApiCreateAssetGRPCRequest struct {
-	ctx context.Context
-	ApiService *AssetsAPIService
+	ctx                    context.Context
+	ApiService             *AssetsAPIService
 	createAssetGRPCRequest *CreateAssetGRPCRequest
 }
 
@@ -1628,24 +1639,25 @@ CreateAssetGRPC Create asset grpc
 
 Create a grpc
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateAssetGRPCRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateAssetGRPCRequest
 */
 func (a *AssetsAPIService) CreateAssetGRPC(ctx context.Context) ApiCreateAssetGRPCRequest {
 	return ApiCreateAssetGRPCRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return AssetDetailed
+//
+//	@return AssetDetailed
 func (a *AssetsAPIService) CreateAssetGRPCExecute(r ApiCreateAssetGRPCRequest) (*AssetDetailed, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AssetDetailed
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetGRPC")
@@ -1721,8 +1733,8 @@ func (a *AssetsAPIService) CreateAssetGRPCExecute(r ApiCreateAssetGRPCRequest) (
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1740,8 +1752,8 @@ func (a *AssetsAPIService) CreateAssetGRPCExecute(r ApiCreateAssetGRPCRequest) (
 }
 
 type ApiCreateAssetIPV4Request struct {
-	ctx context.Context
-	ApiService *AssetsAPIService
+	ctx                    context.Context
+	ApiService             *AssetsAPIService
 	createAssetIPV4Request *CreateAssetIPV4Request
 }
 
@@ -1760,24 +1772,25 @@ CreateAssetIPV4 Create asset ipv4
 
 Create a ipv4
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateAssetIPV4Request
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateAssetIPV4Request
 */
 func (a *AssetsAPIService) CreateAssetIPV4(ctx context.Context) ApiCreateAssetIPV4Request {
 	return ApiCreateAssetIPV4Request{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return AssetDetailed
+//
+//	@return AssetDetailed
 func (a *AssetsAPIService) CreateAssetIPV4Execute(r ApiCreateAssetIPV4Request) (*AssetDetailed, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AssetDetailed
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetIPV4")
@@ -1853,8 +1866,8 @@ func (a *AssetsAPIService) CreateAssetIPV4Execute(r ApiCreateAssetIPV4Request) (
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1872,8 +1885,8 @@ func (a *AssetsAPIService) CreateAssetIPV4Execute(r ApiCreateAssetIPV4Request) (
 }
 
 type ApiCreateAssetIPV4RANGERequest struct {
-	ctx context.Context
-	ApiService *AssetsAPIService
+	ctx                         context.Context
+	ApiService                  *AssetsAPIService
 	createAssetIPV4RANGERequest *CreateAssetIPV4RANGERequest
 }
 
@@ -1892,24 +1905,25 @@ CreateAssetIPV4RANGE Create asset ipv4-range
 
 Create a ipv4-range
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateAssetIPV4RANGERequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateAssetIPV4RANGERequest
 */
 func (a *AssetsAPIService) CreateAssetIPV4RANGE(ctx context.Context) ApiCreateAssetIPV4RANGERequest {
 	return ApiCreateAssetIPV4RANGERequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return AssetDetailed
+//
+//	@return AssetDetailed
 func (a *AssetsAPIService) CreateAssetIPV4RANGEExecute(r ApiCreateAssetIPV4RANGERequest) (*AssetDetailed, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AssetDetailed
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetIPV4RANGE")
@@ -1985,8 +1999,8 @@ func (a *AssetsAPIService) CreateAssetIPV4RANGEExecute(r ApiCreateAssetIPV4RANGE
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2004,8 +2018,8 @@ func (a *AssetsAPIService) CreateAssetIPV4RANGEExecute(r ApiCreateAssetIPV4RANGE
 }
 
 type ApiCreateAssetIPV6Request struct {
-	ctx context.Context
-	ApiService *AssetsAPIService
+	ctx                    context.Context
+	ApiService             *AssetsAPIService
 	createAssetIPV6Request *CreateAssetIPV6Request
 }
 
@@ -2024,24 +2038,25 @@ CreateAssetIPV6 Create asset ipv6
 
 Create a ipv6
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateAssetIPV6Request
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateAssetIPV6Request
 */
 func (a *AssetsAPIService) CreateAssetIPV6(ctx context.Context) ApiCreateAssetIPV6Request {
 	return ApiCreateAssetIPV6Request{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return AssetDetailed
+//
+//	@return AssetDetailed
 func (a *AssetsAPIService) CreateAssetIPV6Execute(r ApiCreateAssetIPV6Request) (*AssetDetailed, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AssetDetailed
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetIPV6")
@@ -2117,8 +2132,8 @@ func (a *AssetsAPIService) CreateAssetIPV6Execute(r ApiCreateAssetIPV6Request) (
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2136,8 +2151,8 @@ func (a *AssetsAPIService) CreateAssetIPV6Execute(r ApiCreateAssetIPV6Request) (
 }
 
 type ApiCreateAssetKUBERNETESCLUSTERRequest struct {
-	ctx context.Context
-	ApiService *AssetsAPIService
+	ctx                                 context.Context
+	ApiService                          *AssetsAPIService
 	createAssetKUBERNETESCLUSTERRequest *CreateAssetKUBERNETESCLUSTERRequest
 }
 
@@ -2156,24 +2171,25 @@ CreateAssetKUBERNETESCLUSTER Create asset kubernetes-cluster
 
 Create a kubernetes-cluster
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateAssetKUBERNETESCLUSTERRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateAssetKUBERNETESCLUSTERRequest
 */
 func (a *AssetsAPIService) CreateAssetKUBERNETESCLUSTER(ctx context.Context) ApiCreateAssetKUBERNETESCLUSTERRequest {
 	return ApiCreateAssetKUBERNETESCLUSTERRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return AssetDetailed
+//
+//	@return AssetDetailed
 func (a *AssetsAPIService) CreateAssetKUBERNETESCLUSTERExecute(r ApiCreateAssetKUBERNETESCLUSTERRequest) (*AssetDetailed, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AssetDetailed
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetKUBERNETESCLUSTER")
@@ -2249,8 +2265,8 @@ func (a *AssetsAPIService) CreateAssetKUBERNETESCLUSTERExecute(r ApiCreateAssetK
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2268,8 +2284,8 @@ func (a *AssetsAPIService) CreateAssetKUBERNETESCLUSTERExecute(r ApiCreateAssetK
 }
 
 type ApiCreateAssetMCPRequest struct {
-	ctx context.Context
-	ApiService *AssetsAPIService
+	ctx                   context.Context
+	ApiService            *AssetsAPIService
 	createAssetMCPRequest *CreateAssetMCPRequest
 }
 
@@ -2288,24 +2304,25 @@ CreateAssetMCP Create asset mcp
 
 Create a mcp
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateAssetMCPRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateAssetMCPRequest
 */
 func (a *AssetsAPIService) CreateAssetMCP(ctx context.Context) ApiCreateAssetMCPRequest {
 	return ApiCreateAssetMCPRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return AssetDetailed
+//
+//	@return AssetDetailed
 func (a *AssetsAPIService) CreateAssetMCPExecute(r ApiCreateAssetMCPRequest) (*AssetDetailed, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AssetDetailed
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetMCP")
@@ -2381,8 +2398,8 @@ func (a *AssetsAPIService) CreateAssetMCPExecute(r ApiCreateAssetMCPRequest) (*A
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2400,8 +2417,8 @@ func (a *AssetsAPIService) CreateAssetMCPExecute(r ApiCreateAssetMCPRequest) (*A
 }
 
 type ApiCreateAssetPOSTMANORGANIZATIONRequest struct {
-	ctx context.Context
-	ApiService *AssetsAPIService
+	ctx                                   context.Context
+	ApiService                            *AssetsAPIService
 	createAssetPOSTMANORGANIZATIONRequest *CreateAssetPOSTMANORGANIZATIONRequest
 }
 
@@ -2420,24 +2437,25 @@ CreateAssetPOSTMANORGANIZATION Create asset postman-organization
 
 Create a postman-organization
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateAssetPOSTMANORGANIZATIONRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateAssetPOSTMANORGANIZATIONRequest
 */
 func (a *AssetsAPIService) CreateAssetPOSTMANORGANIZATION(ctx context.Context) ApiCreateAssetPOSTMANORGANIZATIONRequest {
 	return ApiCreateAssetPOSTMANORGANIZATIONRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return AssetDetailed
+//
+//	@return AssetDetailed
 func (a *AssetsAPIService) CreateAssetPOSTMANORGANIZATIONExecute(r ApiCreateAssetPOSTMANORGANIZATIONRequest) (*AssetDetailed, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AssetDetailed
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetPOSTMANORGANIZATION")
@@ -2513,8 +2531,8 @@ func (a *AssetsAPIService) CreateAssetPOSTMANORGANIZATIONExecute(r ApiCreateAsse
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2532,8 +2550,8 @@ func (a *AssetsAPIService) CreateAssetPOSTMANORGANIZATIONExecute(r ApiCreateAsse
 }
 
 type ApiCreateAssetRESTRequest struct {
-	ctx context.Context
-	ApiService *AssetsAPIService
+	ctx                    context.Context
+	ApiService             *AssetsAPIService
 	createAssetRESTRequest *CreateAssetRESTRequest
 }
 
@@ -2552,24 +2570,25 @@ CreateAssetREST Create asset rest
 
 Create a rest
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateAssetRESTRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateAssetRESTRequest
 */
 func (a *AssetsAPIService) CreateAssetREST(ctx context.Context) ApiCreateAssetRESTRequest {
 	return ApiCreateAssetRESTRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return AssetDetailed
+//
+//	@return AssetDetailed
 func (a *AssetsAPIService) CreateAssetRESTExecute(r ApiCreateAssetRESTRequest) (*AssetDetailed, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AssetDetailed
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetREST")
@@ -2645,8 +2664,8 @@ func (a *AssetsAPIService) CreateAssetRESTExecute(r ApiCreateAssetRESTRequest) (
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2664,8 +2683,8 @@ func (a *AssetsAPIService) CreateAssetRESTExecute(r ApiCreateAssetRESTRequest) (
 }
 
 type ApiCreateAssetSchemaRequest struct {
-	ctx context.Context
-	ApiService *AssetsAPIService
+	ctx                      context.Context
+	ApiService               *AssetsAPIService
 	createAssetSchemaRequest *CreateAssetSchemaRequest
 }
 
@@ -2688,14 +2707,15 @@ The schema data can either be fetched from a URL or uploaded from a file.
 
 **Fetch example:**
 ```json
-{
-  "asset_type": "SCHEMA",
-  "fetch": {
-    "url": "https://api.example.com/v1"
-  }
-}
-```
 
+	{
+	  "asset_type": "SCHEMA",
+	  "fetch": {
+	    "url": "https://api.example.com/v1"
+	  }
+	}
+
+```
 
 **Upload example:**
 
@@ -2704,33 +2724,35 @@ The file should first be uploaded to the Escape Platform using the [upload endpo
 The upload endpoint returns an `id` that should be used in the `temporaryObjectKey` field.
 
 ```json
-{
-  "asset_type": "SCHEMA",
-  "upload": {
-    "temporaryObjectKey": "00000000-0000-0000-0000-000000000000"
-  }
-}
+
+	{
+	  "asset_type": "SCHEMA",
+	  "upload": {
+	    "temporaryObjectKey": "00000000-0000-0000-0000-000000000000"
+	  }
+	}
+
 ```
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateAssetSchemaRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateAssetSchemaRequest
 */
 func (a *AssetsAPIService) CreateAssetSchema(ctx context.Context) ApiCreateAssetSchemaRequest {
 	return ApiCreateAssetSchemaRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return AssetDetailed
+//
+//	@return AssetDetailed
 func (a *AssetsAPIService) CreateAssetSchemaExecute(r ApiCreateAssetSchemaRequest) (*AssetDetailed, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AssetDetailed
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetSchema")
@@ -2806,8 +2828,8 @@ func (a *AssetsAPIService) CreateAssetSchemaExecute(r ApiCreateAssetSchemaReques
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2825,8 +2847,8 @@ func (a *AssetsAPIService) CreateAssetSchemaExecute(r ApiCreateAssetSchemaReques
 }
 
 type ApiCreateAssetWEBAPPRequest struct {
-	ctx context.Context
-	ApiService *AssetsAPIService
+	ctx                      context.Context
+	ApiService               *AssetsAPIService
 	createAssetWEBAPPRequest *CreateAssetWEBAPPRequest
 }
 
@@ -2845,24 +2867,25 @@ CreateAssetWEBAPP Create asset webapp
 
 Create a webapp
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateAssetWEBAPPRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateAssetWEBAPPRequest
 */
 func (a *AssetsAPIService) CreateAssetWEBAPP(ctx context.Context) ApiCreateAssetWEBAPPRequest {
 	return ApiCreateAssetWEBAPPRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return AssetDetailed
+//
+//	@return AssetDetailed
 func (a *AssetsAPIService) CreateAssetWEBAPPExecute(r ApiCreateAssetWEBAPPRequest) (*AssetDetailed, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AssetDetailed
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetWEBAPP")
@@ -2938,8 +2961,8 @@ func (a *AssetsAPIService) CreateAssetWEBAPPExecute(r ApiCreateAssetWEBAPPReques
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2957,8 +2980,8 @@ func (a *AssetsAPIService) CreateAssetWEBAPPExecute(r ApiCreateAssetWEBAPPReques
 }
 
 type ApiCreateAssetWEBSOCKETRequest struct {
-	ctx context.Context
-	ApiService *AssetsAPIService
+	ctx                         context.Context
+	ApiService                  *AssetsAPIService
 	createAssetWEBSOCKETRequest *CreateAssetWEBSOCKETRequest
 }
 
@@ -2977,24 +3000,25 @@ CreateAssetWEBSOCKET Create asset websocket
 
 Create a websocket
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateAssetWEBSOCKETRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateAssetWEBSOCKETRequest
 */
 func (a *AssetsAPIService) CreateAssetWEBSOCKET(ctx context.Context) ApiCreateAssetWEBSOCKETRequest {
 	return ApiCreateAssetWEBSOCKETRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return AssetDetailed
+//
+//	@return AssetDetailed
 func (a *AssetsAPIService) CreateAssetWEBSOCKETExecute(r ApiCreateAssetWEBSOCKETRequest) (*AssetDetailed, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AssetDetailed
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetWEBSOCKET")
@@ -3070,8 +3094,8 @@ func (a *AssetsAPIService) CreateAssetWEBSOCKETExecute(r ApiCreateAssetWEBSOCKET
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -3089,8 +3113,8 @@ func (a *AssetsAPIService) CreateAssetWEBSOCKETExecute(r ApiCreateAssetWEBSOCKET
 }
 
 type ApiCreateAssetWIZACCOUNTRequest struct {
-	ctx context.Context
-	ApiService *AssetsAPIService
+	ctx                          context.Context
+	ApiService                   *AssetsAPIService
 	createAssetWIZACCOUNTRequest *CreateAssetWIZACCOUNTRequest
 }
 
@@ -3109,24 +3133,25 @@ CreateAssetWIZACCOUNT Create asset wiz-account
 
 Create a wiz-account
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateAssetWIZACCOUNTRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateAssetWIZACCOUNTRequest
 */
 func (a *AssetsAPIService) CreateAssetWIZACCOUNT(ctx context.Context) ApiCreateAssetWIZACCOUNTRequest {
 	return ApiCreateAssetWIZACCOUNTRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return AssetDetailed
+//
+//	@return AssetDetailed
 func (a *AssetsAPIService) CreateAssetWIZACCOUNTExecute(r ApiCreateAssetWIZACCOUNTRequest) (*AssetDetailed, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AssetDetailed
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.CreateAssetWIZACCOUNT")
@@ -3202,8 +3227,8 @@ func (a *AssetsAPIService) CreateAssetWIZACCOUNTExecute(r ApiCreateAssetWIZACCOU
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -3221,9 +3246,9 @@ func (a *AssetsAPIService) CreateAssetWIZACCOUNTExecute(r ApiCreateAssetWIZACCOU
 }
 
 type ApiDeleteAssetRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *AssetsAPIService
-	assetId string
+	assetId    string
 }
 
 func (r ApiDeleteAssetRequest) Execute() (*DeleteProfile200Response, *http.Response, error) {
@@ -3235,26 +3260,27 @@ DeleteAsset Delete an asset
 
 Delete an asset by ID
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param assetId The asset ID
- @return ApiDeleteAssetRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param assetId The asset ID
+	@return ApiDeleteAssetRequest
 */
 func (a *AssetsAPIService) DeleteAsset(ctx context.Context, assetId string) ApiDeleteAssetRequest {
 	return ApiDeleteAssetRequest{
 		ApiService: a,
-		ctx: ctx,
-		assetId: assetId,
+		ctx:        ctx,
+		assetId:    assetId,
 	}
 }
 
 // Execute executes the request
-//  @return DeleteProfile200Response
+//
+//	@return DeleteProfile200Response
 func (a *AssetsAPIService) DeleteAssetExecute(r ApiDeleteAssetRequest) (*DeleteProfile200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DeleteProfile200Response
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DeleteProfile200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.DeleteAsset")
@@ -3329,8 +3355,8 @@ func (a *AssetsAPIService) DeleteAssetExecute(r ApiDeleteAssetRequest) (*DeleteP
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -3348,9 +3374,9 @@ func (a *AssetsAPIService) DeleteAssetExecute(r ApiDeleteAssetRequest) (*DeleteP
 }
 
 type ApiGetAssetRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *AssetsAPIService
-	assetId string
+	assetId    string
 }
 
 func (r ApiGetAssetRequest) Execute() (*AssetDetailed, *http.Response, error) {
@@ -3362,26 +3388,27 @@ GetAsset Get an asset
 
 Get an asset by ID
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param assetId The asset ID
- @return ApiGetAssetRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param assetId The asset ID
+	@return ApiGetAssetRequest
 */
 func (a *AssetsAPIService) GetAsset(ctx context.Context, assetId string) ApiGetAssetRequest {
 	return ApiGetAssetRequest{
 		ApiService: a,
-		ctx: ctx,
-		assetId: assetId,
+		ctx:        ctx,
+		assetId:    assetId,
 	}
 }
 
 // Execute executes the request
-//  @return AssetDetailed
+//
+//	@return AssetDetailed
 func (a *AssetsAPIService) GetAssetExecute(r ApiGetAssetRequest) (*AssetDetailed, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AssetDetailed
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.GetAsset")
@@ -3456,8 +3483,8 @@ func (a *AssetsAPIService) GetAssetExecute(r ApiGetAssetRequest) (*AssetDetailed
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -3475,15 +3502,15 @@ func (a *AssetsAPIService) GetAssetExecute(r ApiGetAssetRequest) (*AssetDetailed
 }
 
 type ApiListAssetsRequest struct {
-	ctx context.Context
-	ApiService *AssetsAPIService
-	cursor *string
-	size *int
-	sortType *string
-	sortDirection *string
-	search *string
-	types *string
-	statuses *string
+	ctx             context.Context
+	ApiService      *AssetsAPIService
+	cursor          *string
+	size            *int
+	sortType        *string
+	sortDirection   *string
+	search          *string
+	types           *string
+	statuses        *string
 	manuallyCreated *string
 }
 
@@ -3544,24 +3571,25 @@ ListAssets List assets
 
 List and search assets of the organization.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListAssetsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListAssetsRequest
 */
 func (a *AssetsAPIService) ListAssets(ctx context.Context) ApiListAssetsRequest {
 	return ApiListAssetsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ListAssets200Response
+//
+//	@return ListAssets200Response
 func (a *AssetsAPIService) ListAssetsExecute(r ApiListAssetsRequest) (*ListAssets200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ListAssets200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ListAssets200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.ListAssets")
@@ -3667,8 +3695,8 @@ func (a *AssetsAPIService) ListAssetsExecute(r ApiListAssetsRequest) (*ListAsset
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -3686,9 +3714,9 @@ func (a *AssetsAPIService) ListAssetsExecute(r ApiListAssetsRequest) (*ListAsset
 }
 
 type ApiUpdateAssetRequest struct {
-	ctx context.Context
-	ApiService *AssetsAPIService
-	assetId string
+	ctx                context.Context
+	ApiService         *AssetsAPIService
+	assetId            string
 	updateAssetRequest *UpdateAssetRequest
 }
 
@@ -3707,26 +3735,27 @@ UpdateAsset Update an asset
 
 Update an asset by ID
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param assetId The asset ID
- @return ApiUpdateAssetRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param assetId The asset ID
+	@return ApiUpdateAssetRequest
 */
 func (a *AssetsAPIService) UpdateAsset(ctx context.Context, assetId string) ApiUpdateAssetRequest {
 	return ApiUpdateAssetRequest{
 		ApiService: a,
-		ctx: ctx,
-		assetId: assetId,
+		ctx:        ctx,
+		assetId:    assetId,
 	}
 }
 
 // Execute executes the request
-//  @return AssetDetailed
+//
+//	@return AssetDetailed
 func (a *AssetsAPIService) UpdateAssetExecute(r ApiUpdateAssetRequest) (*AssetDetailed, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AssetDetailed
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.UpdateAsset")
@@ -3803,8 +3832,8 @@ func (a *AssetsAPIService) UpdateAssetExecute(r ApiUpdateAssetRequest) (*AssetDe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

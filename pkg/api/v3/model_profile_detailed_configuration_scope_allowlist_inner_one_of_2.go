@@ -20,9 +20,9 @@ var _ MappedNullable = &ProfileDetailedConfigurationScopeAllowlistInnerOneOf2{}
 
 // ProfileDetailedConfigurationScopeAllowlistInnerOneOf2 struct for ProfileDetailedConfigurationScopeAllowlistInnerOneOf2
 type ProfileDetailedConfigurationScopeAllowlistInnerOneOf2 struct {
-	Type ENUMWEBPAGEURL `json:"type"`
-	Value string `json:"value"`
-	Operation *ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS0PROPERTIESOPERATION `json:"operation,omitempty"`
+	Type                 ENUMWEBPAGEURL                                                                          `json:"type"`
+	Value                string                                                                                  `json:"value"`
+	Operation            *ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS0PROPERTIESOPERATION `json:"operation,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -128,7 +128,7 @@ func (o *ProfileDetailedConfigurationScopeAllowlistInnerOneOf2) SetOperation(v E
 }
 
 func (o ProfileDetailedConfigurationScopeAllowlistInnerOneOf2) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -164,10 +164,10 @@ func (o *ProfileDetailedConfigurationScopeAllowlistInnerOneOf2) UnmarshalJSON(da
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -230,5 +230,3 @@ func (v *NullableProfileDetailedConfigurationScopeAllowlistInnerOneOf2) Unmarsha
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

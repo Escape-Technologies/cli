@@ -19,9 +19,9 @@ var _ MappedNullable = &ProfileDetailedConfigurationScope{}
 
 // ProfileDetailedConfigurationScope struct for ProfileDetailedConfigurationScope
 type ProfileDetailedConfigurationScope struct {
-	UseDefaults *bool `json:"use_defaults,omitempty"`
-	Allowlist []ProfileDetailedConfigurationScopeAllowlistInner `json:"allowlist,omitempty"`
-	Blocklist []ProfileDetailedConfigurationScopeAllowlistInner `json:"blocklist,omitempty"`
+	UseDefaults          *bool                                             `json:"use_defaults,omitempty"`
+	Allowlist            []ProfileDetailedConfigurationScopeAllowlistInner `json:"allowlist,omitempty"`
+	Blocklist            []ProfileDetailedConfigurationScopeAllowlistInner `json:"blocklist,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -141,7 +141,7 @@ func (o *ProfileDetailedConfigurationScope) SetBlocklist(v []ProfileDetailedConf
 }
 
 func (o ProfileDetailedConfigurationScope) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -225,5 +225,3 @@ func (v *NullableProfileDetailedConfigurationScope) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

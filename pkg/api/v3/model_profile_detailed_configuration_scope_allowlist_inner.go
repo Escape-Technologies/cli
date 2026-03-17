@@ -18,7 +18,7 @@ import (
 
 // ProfileDetailedConfigurationScopeAllowlistInner - struct for ProfileDetailedConfigurationScopeAllowlistInner
 type ProfileDetailedConfigurationScopeAllowlistInner struct {
-	ProfileDetailedConfigurationScopeAllowlistInnerOneOf *ProfileDetailedConfigurationScopeAllowlistInnerOneOf
+	ProfileDetailedConfigurationScopeAllowlistInnerOneOf  *ProfileDetailedConfigurationScopeAllowlistInnerOneOf
 	ProfileDetailedConfigurationScopeAllowlistInnerOneOf1 *ProfileDetailedConfigurationScopeAllowlistInnerOneOf1
 	ProfileDetailedConfigurationScopeAllowlistInnerOneOf2 *ProfileDetailedConfigurationScopeAllowlistInnerOneOf2
 	ProfileDetailedConfigurationScopeAllowlistInnerOneOf3 *ProfileDetailedConfigurationScopeAllowlistInnerOneOf3
@@ -75,7 +75,6 @@ func ProfileDetailedConfigurationScopeAllowlistInnerOneOf6AsProfileDetailedConfi
 		ProfileDetailedConfigurationScopeAllowlistInnerOneOf6: v,
 	}
 }
-
 
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *ProfileDetailedConfigurationScopeAllowlistInner) UnmarshalJSON(data []byte) error {
@@ -252,7 +251,7 @@ func (src ProfileDetailedConfigurationScopeAllowlistInner) MarshalJSON() ([]byte
 }
 
 // Get the actual instance
-func (obj *ProfileDetailedConfigurationScopeAllowlistInner) GetActualInstance() (interface{}) {
+func (obj *ProfileDetailedConfigurationScopeAllowlistInner) GetActualInstance() interface{} {
 	if obj == nil {
 		return nil
 	}
@@ -289,7 +288,7 @@ func (obj *ProfileDetailedConfigurationScopeAllowlistInner) GetActualInstance() 
 }
 
 // Get the actual instance value
-func (obj ProfileDetailedConfigurationScopeAllowlistInner) GetActualInstanceValue() (interface{}) {
+func (obj ProfileDetailedConfigurationScopeAllowlistInner) GetActualInstanceValue() interface{} {
 	if obj.ProfileDetailedConfigurationScopeAllowlistInnerOneOf != nil {
 		return *obj.ProfileDetailedConfigurationScopeAllowlistInnerOneOf
 	}
@@ -357,5 +356,3 @@ func (v *NullableProfileDetailedConfigurationScopeAllowlistInner) UnmarshalJSON(
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

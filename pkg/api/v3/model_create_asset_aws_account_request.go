@@ -21,16 +21,16 @@ var _ MappedNullable = &CreateAssetAWSACCOUNTRequest{}
 // CreateAssetAWSACCOUNTRequest struct for CreateAssetAWSACCOUNTRequest
 type CreateAssetAWSACCOUNTRequest struct {
 	// The list of project IDs bind the asset on.
-	ProjectIds []string `json:"projectIds,omitempty"`
-	AssetClass ENUMCLOUDHOSTING `json:"asset_class"`
-	WizProviderId *string `json:"wiz_provider_id,omitempty"`
-	WizCloudPlatform *string `json:"wiz_cloud_platform,omitempty"`
-	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
-	AssetType ENUMAWSACCOUNT `json:"asset_type"`
-	Name *string `json:"name,omitempty"`
-	ImmutableKey string `json:"immutable_key"`
-	PublicKey string `json:"public_key"`
-	PrivateKey string `json:"private_key"`
+	ProjectIds           []string               `json:"projectIds,omitempty"`
+	AssetClass           ENUMCLOUDHOSTING       `json:"asset_class"`
+	WizProviderId        *string                `json:"wiz_provider_id,omitempty"`
+	WizCloudPlatform     *string                `json:"wiz_cloud_platform,omitempty"`
+	ExtraMetadata        map[string]interface{} `json:"extra_metadata,omitempty"`
+	AssetType            ENUMAWSACCOUNT         `json:"asset_type"`
+	Name                 *string                `json:"name,omitempty"`
+	ImmutableKey         string                 `json:"immutable_key"`
+	PublicKey            string                 `json:"public_key"`
+	PrivateKey           string                 `json:"private_key"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -339,7 +339,7 @@ func (o *CreateAssetAWSACCOUNTRequest) SetPrivateKey(v string) {
 }
 
 func (o CreateAssetAWSACCOUNTRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -393,10 +393,10 @@ func (o *CreateAssetAWSACCOUNTRequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -466,5 +466,3 @@ func (v *NullableCreateAssetAWSACCOUNTRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

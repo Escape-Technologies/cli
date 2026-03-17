@@ -19,12 +19,12 @@ var _ MappedNullable = &ProfileDetailedConfigurationServiceDiscovery{}
 
 // ProfileDetailedConfigurationServiceDiscovery struct for ProfileDetailedConfigurationServiceDiscovery
 type ProfileDetailedConfigurationServiceDiscovery struct {
-	BlocklistedDomains []string `json:"blocklisted_domains,omitempty"`
-	BaseUrlsDelimiters []string `json:"base_urls_delimiters,omitempty"`
-	BaseUrlsWordlist []string `json:"base_urls_wordlist,omitempty"`
-	EndpointsWordlist []string `json:"endpoints_wordlist,omitempty"`
+	BlocklistedDomains       []string `json:"blocklisted_domains,omitempty"`
+	BaseUrlsDelimiters       []string `json:"base_urls_delimiters,omitempty"`
+	BaseUrlsWordlist         []string `json:"base_urls_wordlist,omitempty"`
+	EndpointsWordlist        []string `json:"endpoints_wordlist,omitempty"`
 	GraphqlEndpointsWordlist []string `json:"graphql_endpoints_wordlist,omitempty"`
-	AdditionalProperties map[string]interface{}
+	AdditionalProperties     map[string]interface{}
 }
 
 type _ProfileDetailedConfigurationServiceDiscovery ProfileDetailedConfigurationServiceDiscovery
@@ -207,7 +207,7 @@ func (o *ProfileDetailedConfigurationServiceDiscovery) SetGraphqlEndpointsWordli
 }
 
 func (o ProfileDetailedConfigurationServiceDiscovery) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -299,5 +299,3 @@ func (v *NullableProfileDetailedConfigurationServiceDiscovery) UnmarshalJSON(src
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

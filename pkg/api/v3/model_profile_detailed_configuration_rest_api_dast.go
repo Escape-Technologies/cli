@@ -19,16 +19,16 @@ var _ MappedNullable = &ProfileDetailedConfigurationRestApiDast{}
 
 // ProfileDetailedConfigurationRestApiDast struct for ProfileDetailedConfigurationRestApiDast
 type ProfileDetailedConfigurationRestApiDast struct {
-	SchemaS3Key *string `json:"schema_s3_key,omitempty"`
-	LocationId *string `json:"location_id,omitempty"`
-	Profile *ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESPROFILE `json:"profile,omitempty"`
-	Mode *ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE `json:"mode,omitempty"`
-	MaxDuration *float32 `json:"max_duration,omitempty"`
-	Hotstart []string `json:"hotstart,omitempty"`
-	HotstartOnly *bool `json:"hotstart_only,omitempty"`
-	Scope *ProfileDetailedConfigurationGraphqlApiDastScope `json:"scope,omitempty"`
-	AdditionalSchemaS3Keys []string `json:"additional_schema_s3_keys,omitempty"`
-	AdditionalProperties map[string]interface{}
+	SchemaS3Key            *string                                                               `json:"schema_s3_key,omitempty"`
+	LocationId             *string                                                               `json:"location_id,omitempty"`
+	Profile                *ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESPROFILE `json:"profile,omitempty"`
+	Mode                   *ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE      `json:"mode,omitempty"`
+	MaxDuration            *float32                                                              `json:"max_duration,omitempty"`
+	Hotstart               []string                                                              `json:"hotstart,omitempty"`
+	HotstartOnly           *bool                                                                 `json:"hotstart_only,omitempty"`
+	Scope                  *ProfileDetailedConfigurationGraphqlApiDastScope                      `json:"scope,omitempty"`
+	AdditionalSchemaS3Keys []string                                                              `json:"additional_schema_s3_keys,omitempty"`
+	AdditionalProperties   map[string]interface{}
 }
 
 type _ProfileDetailedConfigurationRestApiDast ProfileDetailedConfigurationRestApiDast
@@ -339,7 +339,7 @@ func (o *ProfileDetailedConfigurationRestApiDast) SetAdditionalSchemaS3Keys(v []
 }
 
 func (o ProfileDetailedConfigurationRestApiDast) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -447,5 +447,3 @@ func (v *NullableProfileDetailedConfigurationRestApiDast) UnmarshalJSON(src []by
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

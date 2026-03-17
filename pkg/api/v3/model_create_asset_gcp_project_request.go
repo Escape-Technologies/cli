@@ -21,25 +21,25 @@ var _ MappedNullable = &CreateAssetGCPPROJECTRequest{}
 // CreateAssetGCPPROJECTRequest struct for CreateAssetGCPPROJECTRequest
 type CreateAssetGCPPROJECTRequest struct {
 	// The list of project IDs bind the asset on.
-	ProjectIds []string `json:"projectIds,omitempty"`
-	AssetClass ENUMCLOUDHOSTING `json:"asset_class"`
-	WizProviderId *string `json:"wiz_provider_id,omitempty"`
-	WizCloudPlatform *string `json:"wiz_cloud_platform,omitempty"`
-	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
-	AssetType ENUMGCPPROJECT `json:"asset_type"`
-	Name *string `json:"name,omitempty"`
-	ImmutableKey string `json:"immutable_key"`
-	AuthProviderX509CertUrl string `json:"auth_provider_x509_cert_url"`
-	AuthUri string `json:"auth_uri"`
-	ClientEmail string `json:"client_email"`
-	ClientId string `json:"client_id"`
-	ClientX509CertUrl string `json:"client_x509_cert_url"`
-	PrivateKey string `json:"private_key"`
-	PrivateKeyId string `json:"private_key_id"`
-	TokenUri string `json:"token_uri"`
-	UniverseDomain string `json:"universe_domain"`
-	ProjectId string `json:"project_id"`
-	AdditionalProperties map[string]interface{}
+	ProjectIds              []string               `json:"projectIds,omitempty"`
+	AssetClass              ENUMCLOUDHOSTING       `json:"asset_class"`
+	WizProviderId           *string                `json:"wiz_provider_id,omitempty"`
+	WizCloudPlatform        *string                `json:"wiz_cloud_platform,omitempty"`
+	ExtraMetadata           map[string]interface{} `json:"extra_metadata,omitempty"`
+	AssetType               ENUMGCPPROJECT         `json:"asset_type"`
+	Name                    *string                `json:"name,omitempty"`
+	ImmutableKey            string                 `json:"immutable_key"`
+	AuthProviderX509CertUrl string                 `json:"auth_provider_x509_cert_url"`
+	AuthUri                 string                 `json:"auth_uri"`
+	ClientEmail             string                 `json:"client_email"`
+	ClientId                string                 `json:"client_id"`
+	ClientX509CertUrl       string                 `json:"client_x509_cert_url"`
+	PrivateKey              string                 `json:"private_key"`
+	PrivateKeyId            string                 `json:"private_key_id"`
+	TokenUri                string                 `json:"token_uri"`
+	UniverseDomain          string                 `json:"universe_domain"`
+	ProjectId               string                 `json:"project_id"`
+	AdditionalProperties    map[string]interface{}
 }
 
 type _CreateAssetGCPPROJECTRequest CreateAssetGCPPROJECTRequest
@@ -547,7 +547,7 @@ func (o *CreateAssetGCPPROJECTRequest) SetProjectId(v string) {
 }
 
 func (o CreateAssetGCPPROJECTRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -617,10 +617,10 @@ func (o *CreateAssetGCPPROJECTRequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -698,5 +698,3 @@ func (v *NullableCreateAssetGCPPROJECTRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

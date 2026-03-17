@@ -12,8 +12,8 @@ package v3
 
 import (
 	"encoding/json"
-	"time"
 	"fmt"
+	"time"
 )
 
 // checks if the CreatecustomIntegration200Response type satisfies the MappedNullable interface at compile time
@@ -32,8 +32,8 @@ type CreatecustomIntegration200Response struct {
 	// The date and time the integration is scheduled for deletion
 	ScheduledForDeletionAt *time.Time `json:"scheduledForDeletionAt,omitempty"`
 	// The date and time the last pull workflow was executed
-	LastPullWorkflowAt *time.Time `json:"lastPullWorkflowAt,omitempty"`
-	Kind ENUMPROPERTIESDATAITEMSPROPERTIESKIND `json:"kind"`
+	LastPullWorkflowAt *time.Time                            `json:"lastPullWorkflowAt,omitempty"`
+	Kind               ENUMPROPERTIESDATAITEMSPROPERTIESKIND `json:"kind"`
 	// Whether the integration is valid
 	Valid bool `json:"valid"`
 	// The validation errors of the integration
@@ -41,9 +41,9 @@ type CreatecustomIntegration200Response struct {
 	// The id of the organization the integration belongs to
 	OrganizationId string `json:"organizationId"`
 	// The projects of the integration
-	Projects []ListProjects200ResponseDataInner `json:"projects"`
-	Parameters CreatecustomIntegrationRequestParameters `json:"parameters"`
-	Location *LocationDetailed1 `json:"location,omitempty"`
+	Projects             []ListProjects200ResponseDataInner       `json:"projects"`
+	Parameters           CreatecustomIntegrationRequestParameters `json:"parameters"`
+	Location             *LocationDetailed1                       `json:"location,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -413,7 +413,7 @@ func (o *CreatecustomIntegration200Response) SetLocation(v LocationDetailed1) {
 }
 
 func (o CreatecustomIntegration200Response) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -471,10 +471,10 @@ func (o *CreatecustomIntegration200Response) UnmarshalJSON(data []byte) (err err
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -547,5 +547,3 @@ func (v *NullableCreatecustomIntegration200Response) UnmarshalJSON(src []byte) e
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

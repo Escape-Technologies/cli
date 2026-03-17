@@ -22,11 +22,11 @@ type UpdateAssetRequest struct {
 	TagIds *UpdateAssetRequestTagIds `json:"tagIds,omitempty"`
 	Owners *UpdateAssetRequestOwners `json:"owners,omitempty"`
 	// The project IDs of the asset
-	ProjectIds []string `json:"projectIds,omitempty"`
-	Framework *ENUMPROPERTIESFRAMEWORK `json:"framework,omitempty"`
-	Status *ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS `json:"status,omitempty"`
+	ProjectIds []string                                                `json:"projectIds,omitempty"`
+	Framework  *ENUMPROPERTIESFRAMEWORK                                `json:"framework,omitempty"`
+	Status     *ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS `json:"status,omitempty"`
 	// The description of the asset
-	Description *string `json:"description,omitempty"`
+	Description          *string `json:"description,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -242,7 +242,7 @@ func (o *UpdateAssetRequest) SetDescription(v string) {
 }
 
 func (o UpdateAssetRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -338,5 +338,3 @@ func (v *NullableUpdateAssetRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

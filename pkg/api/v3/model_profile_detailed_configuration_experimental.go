@@ -19,11 +19,11 @@ var _ MappedNullable = &ProfileDetailedConfigurationExperimental{}
 
 // ProfileDetailedConfigurationExperimental struct for ProfileDetailedConfigurationExperimental
 type ProfileDetailedConfigurationExperimental struct {
-	AgenticPentesting *bool `json:"agentic_pentesting,omitempty"`
-	BlstExplorationOnly *bool `json:"blst_exploration_only,omitempty"`
-	AgenticIdor *bool `json:"agentic_idor,omitempty"`
-	AgenticXss *ProfileDetailedConfigurationExperimentalAgenticXss `json:"agentic_xss,omitempty"`
-	BlstExplorationNext *bool `json:"blst_exploration_next,omitempty"`
+	AgenticPentesting    *bool                                               `json:"agentic_pentesting,omitempty"`
+	BlstExplorationOnly  *bool                                               `json:"blst_exploration_only,omitempty"`
+	AgenticIdor          *bool                                               `json:"agentic_idor,omitempty"`
+	AgenticXss           *ProfileDetailedConfigurationExperimentalAgenticXss `json:"agentic_xss,omitempty"`
+	BlstExplorationNext  *bool                                               `json:"blst_exploration_next,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -207,7 +207,7 @@ func (o *ProfileDetailedConfigurationExperimental) SetBlstExplorationNext(v bool
 }
 
 func (o ProfileDetailedConfigurationExperimental) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -299,5 +299,3 @@ func (v *NullableProfileDetailedConfigurationExperimental) UnmarshalJSON(src []b
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

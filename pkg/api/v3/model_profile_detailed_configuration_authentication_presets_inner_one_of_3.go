@@ -20,16 +20,16 @@ var _ MappedNullable = &ProfileDetailedConfigurationAuthenticationPresetsInnerOn
 
 // ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3 struct for ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3
 type ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3 struct {
-	Type ENUMOAUTHAUTHZCODEBROWSER `json:"type"`
-	Users []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3UsersInner `json:"users"`
-	AuthorizationUrl string `json:"authorization_url"`
-	TokenUrl string `json:"token_url"`
-	ClientId string `json:"client_id"`
-	ClientSecret string `json:"client_secret"`
-	RedirectUri string `json:"redirect_uri"`
-	Scopes []string `json:"scopes,omitempty"`
-	UsePkce bool `json:"use_pkce"`
-	LoginTimeout *float32 `json:"login_timeout,omitempty"`
+	Type                 ENUMOAUTHAUTHZCODEBROWSER                                                `json:"type"`
+	Users                []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3UsersInner `json:"users"`
+	AuthorizationUrl     string                                                                   `json:"authorization_url"`
+	TokenUrl             string                                                                   `json:"token_url"`
+	ClientId             string                                                                   `json:"client_id"`
+	ClientSecret         string                                                                   `json:"client_secret"`
+	RedirectUri          string                                                                   `json:"redirect_uri"`
+	Scopes               []string                                                                 `json:"scopes,omitempty"`
+	UsePkce              bool                                                                     `json:"use_pkce"`
+	LoginTimeout         *float32                                                                 `json:"login_timeout,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -317,7 +317,7 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3) SetLoginT
 }
 
 func (o ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -368,10 +368,10 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3) Unmarshal
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -441,5 +441,3 @@ func (v *NullableProfileDetailedConfigurationAuthenticationPresetsInnerOneOf3) U
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

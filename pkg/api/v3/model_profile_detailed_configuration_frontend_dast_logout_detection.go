@@ -19,13 +19,13 @@ var _ MappedNullable = &ProfileDetailedConfigurationFrontendDastLogoutDetection{
 
 // ProfileDetailedConfigurationFrontendDastLogoutDetection struct for ProfileDetailedConfigurationFrontendDastLogoutDetection
 type ProfileDetailedConfigurationFrontendDastLogoutDetection struct {
-	Enabled *bool `json:"enabled,omitempty"`
+	Enabled                        *bool    `json:"enabled,omitempty"`
 	LoggedInIndicatorRegexPatterns []string `json:"logged_in_indicator_regex_patterns,omitempty"`
-	LogoutRedirectionUrlPatterns []string `json:"logout_redirection_url_patterns,omitempty"`
-	SessionCookieRegexPatterns []string `json:"session_cookie_regex_patterns,omitempty"`
-	AutoReauthenticate *bool `json:"auto_reauthenticate,omitempty"`
-	AgenticDetectionEnabled *bool `json:"agentic_detection_enabled,omitempty"`
-	AdditionalProperties map[string]interface{}
+	LogoutRedirectionUrlPatterns   []string `json:"logout_redirection_url_patterns,omitempty"`
+	SessionCookieRegexPatterns     []string `json:"session_cookie_regex_patterns,omitempty"`
+	AutoReauthenticate             *bool    `json:"auto_reauthenticate,omitempty"`
+	AgenticDetectionEnabled        *bool    `json:"agentic_detection_enabled,omitempty"`
+	AdditionalProperties           map[string]interface{}
 }
 
 type _ProfileDetailedConfigurationFrontendDastLogoutDetection ProfileDetailedConfigurationFrontendDastLogoutDetection
@@ -240,7 +240,7 @@ func (o *ProfileDetailedConfigurationFrontendDastLogoutDetection) SetAgenticDete
 }
 
 func (o ProfileDetailedConfigurationFrontendDastLogoutDetection) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -336,5 +336,3 @@ func (v *NullableProfileDetailedConfigurationFrontendDastLogoutDetection) Unmars
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

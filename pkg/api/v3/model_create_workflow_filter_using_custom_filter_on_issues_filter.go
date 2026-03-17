@@ -19,30 +19,30 @@ var _ MappedNullable = &CreateWorkflowFilterUsingCustomFilterOnIssuesFilter{}
 
 // CreateWorkflowFilterUsingCustomFilterOnIssuesFilter struct for CreateWorkflowFilterUsingCustomFilterOnIssuesFilter
 type CreateWorkflowFilterUsingCustomFilterOnIssuesFilter struct {
-	Severities []ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY `json:"severities,omitempty"`
-	Risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS `json:"risks,omitempty"`
-	ProjectIds []string `json:"projectIds,omitempty"`
-	ApplicationIds []string `json:"applicationIds,omitempty"`
-	AssetIds []string `json:"assetIds,omitempty"`
-	JiraTicket *bool `json:"jiraTicket,omitempty"`
-	Search *string `json:"search,omitempty"`
-	Categories []ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY `json:"categories,omitempty"`
-	ScannerKinds []ENUMPROPERTIESFILTERSITEMS1PROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS `json:"scannerKinds,omitempty"`
-	AssetClasses []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS `json:"assetClasses,omitempty"`
-	TagIds []string `json:"tagIds,omitempty"`
-	ScanIds []string `json:"scanIds,omitempty"`
-	Status []ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS `json:"status,omitempty"`
-	Ids []string `json:"ids,omitempty"`
-	BlacklistedIds []string `json:"blacklistedIds,omitempty"`
-	FullNames []string `json:"fullNames,omitempty"`
-	BlacklistedNames []string `json:"blacklistedNames,omitempty"`
-	AssetStatuses []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS `json:"assetStatuses,omitempty"`
-	AiFalsePositive *bool `json:"aiFalsePositive,omitempty"`
-	Agentic *bool `json:"agentic,omitempty"`
-	TargetIds []string `json:"targetIds,omitempty"`
-	Domains []string `json:"domains,omitempty"`
-	IgnoreInventory *bool `json:"ignoreInventory,omitempty"`
-	Ignored *bool `json:"ignored,omitempty"`
+	Severities           []ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY                              `json:"severities,omitempty"`
+	Risks                []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS             `json:"risks,omitempty"`
+	ProjectIds           []string                                                                 `json:"projectIds,omitempty"`
+	ApplicationIds       []string                                                                 `json:"applicationIds,omitempty"`
+	AssetIds             []string                                                                 `json:"assetIds,omitempty"`
+	JiraTicket           *bool                                                                    `json:"jiraTicket,omitempty"`
+	Search               *string                                                                  `json:"search,omitempty"`
+	Categories           []ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY                              `json:"categories,omitempty"`
+	ScannerKinds         []ENUMPROPERTIESFILTERSITEMS1PROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS `json:"scannerKinds,omitempty"`
+	AssetClasses         []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS                  `json:"assetClasses,omitempty"`
+	TagIds               []string                                                                 `json:"tagIds,omitempty"`
+	ScanIds              []string                                                                 `json:"scanIds,omitempty"`
+	Status               []ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS                                `json:"status,omitempty"`
+	Ids                  []string                                                                 `json:"ids,omitempty"`
+	BlacklistedIds       []string                                                                 `json:"blacklistedIds,omitempty"`
+	FullNames            []string                                                                 `json:"fullNames,omitempty"`
+	BlacklistedNames     []string                                                                 `json:"blacklistedNames,omitempty"`
+	AssetStatuses        []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS                 `json:"assetStatuses,omitempty"`
+	AiFalsePositive      *bool                                                                    `json:"aiFalsePositive,omitempty"`
+	Agentic              *bool                                                                    `json:"agentic,omitempty"`
+	TargetIds            []string                                                                 `json:"targetIds,omitempty"`
+	Domains              []string                                                                 `json:"domains,omitempty"`
+	IgnoreInventory      *bool                                                                    `json:"ignoreInventory,omitempty"`
+	Ignored              *bool                                                                    `json:"ignored,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -834,7 +834,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) SetIgnored(v bool)
 }
 
 func (o CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -1002,5 +1002,3 @@ func (v *NullableCreateWorkflowFilterUsingCustomFilterOnIssuesFilter) UnmarshalJ
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
