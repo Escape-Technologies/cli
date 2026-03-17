@@ -20,17 +20,17 @@ var _ MappedNullable = &ProfileDetailedConfigurationAuthenticationPresetsInnerOn
 
 // ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13 struct for ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13
 type ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13 struct {
-	Type ENUMBROWSERUSE `json:"type"`
-	Users []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13UsersInner `json:"users"`
-	LoginUrl string `json:"login_url"`
-	StealthMode *bool `json:"stealth_mode,omitempty"`
-	Extractions []ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner `json:"extractions,omitempty"`
-	Injections NullableProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11Injections `json:"injections,omitempty"`
-	AutoExtractionUrls []string `json:"auto_extraction_urls,omitempty"`
-	LoggedInDetectorText *string `json:"logged_in_detector_text,omitempty"`
-	LoggedInDetectorTimeout *float32 `json:"logged_in_detector_timeout,omitempty"`
-	AutoSignup *bool `json:"auto_signup,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Type                    ENUMBROWSERUSE                                                                                        `json:"type"`
+	Users                   []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13UsersInner                             `json:"users"`
+	LoginUrl                string                                                                                                `json:"login_url"`
+	StealthMode             *bool                                                                                                 `json:"stealth_mode,omitempty"`
+	Extractions             []ProfileDetailedConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner `json:"extractions,omitempty"`
+	Injections              NullableProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11Injections                       `json:"injections,omitempty"`
+	AutoExtractionUrls      []string                                                                                              `json:"auto_extraction_urls,omitempty"`
+	LoggedInDetectorText    *string                                                                                               `json:"logged_in_detector_text,omitempty"`
+	LoggedInDetectorTimeout *float32                                                                                              `json:"logged_in_detector_timeout,omitempty"`
+	AutoSignup              *bool                                                                                                 `json:"auto_signup,omitempty"`
+	AdditionalProperties    map[string]interface{}
 }
 
 type _ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13 ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13
@@ -223,6 +223,7 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13) HasInjec
 func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13) SetInjections(v ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf11Injections) {
 	o.Injections.Set(&v)
 }
+
 // SetInjectionsNil sets the value for Injections to be an explicit nil
 func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13) SetInjectionsNil() {
 	o.Injections.Set(nil)
@@ -362,7 +363,7 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13) SetAutoS
 }
 
 func (o ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -418,10 +419,10 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13) Unmarsha
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -491,5 +492,3 @@ func (v *NullableProfileDetailedConfigurationAuthenticationPresetsInnerOneOf13) 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

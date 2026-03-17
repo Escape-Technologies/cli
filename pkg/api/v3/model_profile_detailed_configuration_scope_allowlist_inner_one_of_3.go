@@ -20,11 +20,11 @@ var _ MappedNullable = &ProfileDetailedConfigurationScopeAllowlistInnerOneOf3{}
 
 // ProfileDetailedConfigurationScopeAllowlistInnerOneOf3 struct for ProfileDetailedConfigurationScopeAllowlistInnerOneOf3
 type ProfileDetailedConfigurationScopeAllowlistInnerOneOf3 struct {
-	Type ENUMRESTAPIPATH `json:"type"`
-	Value string `json:"value"`
-	Operation *ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS0PROPERTIESOPERATION `json:"operation,omitempty"`
-	Method *ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD `json:"method,omitempty"`
-	Domain *string `json:"domain,omitempty"`
+	Type                 ENUMRESTAPIPATH                                                                         `json:"type"`
+	Value                string                                                                                  `json:"value"`
+	Operation            *ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS0PROPERTIESOPERATION `json:"operation,omitempty"`
+	Method               *ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD    `json:"method,omitempty"`
+	Domain               *string                                                                                 `json:"domain,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -194,7 +194,7 @@ func (o *ProfileDetailedConfigurationScopeAllowlistInnerOneOf3) SetDomain(v stri
 }
 
 func (o ProfileDetailedConfigurationScopeAllowlistInnerOneOf3) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -236,10 +236,10 @@ func (o *ProfileDetailedConfigurationScopeAllowlistInnerOneOf3) UnmarshalJSON(da
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -304,5 +304,3 @@ func (v *NullableProfileDetailedConfigurationScopeAllowlistInnerOneOf3) Unmarsha
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

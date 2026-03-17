@@ -19,14 +19,14 @@ var _ MappedNullable = &ProfileDetailedConfigurationNetwork{}
 
 // ProfileDetailedConfigurationNetwork struct for ProfileDetailedConfigurationNetwork
 type ProfileDetailedConfigurationNetwork struct {
-	RequestTimeoutS *float32 `json:"request_timeout_s,omitempty"`
-	RequestsPerSecond *float32 `json:"requests_per_second,omitempty"`
-	CustomHeaders map[string][]string `json:"custom_headers,omitempty"`
-	CancelUnhealthyScanAfter *float32 `json:"cancel_unhealthy_scan_after,omitempty"`
-	EscapeUser *bool `json:"escape_user,omitempty"`
-	SecEscapeUser *bool `json:"sec_escape_user,omitempty"`
-	ParallelRequests *float32 `json:"parallel_requests,omitempty"`
-	AdditionalProperties map[string]interface{}
+	RequestTimeoutS          *float32            `json:"request_timeout_s,omitempty"`
+	RequestsPerSecond        *float32            `json:"requests_per_second,omitempty"`
+	CustomHeaders            map[string][]string `json:"custom_headers,omitempty"`
+	CancelUnhealthyScanAfter *float32            `json:"cancel_unhealthy_scan_after,omitempty"`
+	EscapeUser               *bool               `json:"escape_user,omitempty"`
+	SecEscapeUser            *bool               `json:"sec_escape_user,omitempty"`
+	ParallelRequests         *float32            `json:"parallel_requests,omitempty"`
+	AdditionalProperties     map[string]interface{}
 }
 
 type _ProfileDetailedConfigurationNetwork ProfileDetailedConfigurationNetwork
@@ -273,7 +273,7 @@ func (o *ProfileDetailedConfigurationNetwork) SetParallelRequests(v float32) {
 }
 
 func (o ProfileDetailedConfigurationNetwork) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -373,5 +373,3 @@ func (v *NullableProfileDetailedConfigurationNetwork) UnmarshalJSON(src []byte) 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

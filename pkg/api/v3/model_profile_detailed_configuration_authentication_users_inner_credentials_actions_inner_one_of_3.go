@@ -20,11 +20,11 @@ var _ MappedNullable = &ProfileDetailedConfigurationAuthenticationUsersInnerCred
 
 // ProfileDetailedConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf3 struct for ProfileDetailedConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf3
 type ProfileDetailedConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf3 struct {
-	Action ENUMGOTO `json:"action"`
-	AllowFailure *bool `json:"allow_failure,omitempty"`
-	NewPage *bool `json:"new_page,omitempty"`
-	Url string `json:"url"`
-	Timeout *float32 `json:"timeout,omitempty"`
+	Action               ENUMGOTO `json:"action"`
+	AllowFailure         *bool    `json:"allow_failure,omitempty"`
+	NewPage              *bool    `json:"new_page,omitempty"`
+	Url                  string   `json:"url"`
+	Timeout              *float32 `json:"timeout,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -194,7 +194,7 @@ func (o *ProfileDetailedConfigurationAuthenticationUsersInnerCredentialsActionsI
 }
 
 func (o ProfileDetailedConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf3) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -236,10 +236,10 @@ func (o *ProfileDetailedConfigurationAuthenticationUsersInnerCredentialsActionsI
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -304,5 +304,3 @@ func (v *NullableProfileDetailedConfigurationAuthenticationUsersInnerCredentials
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

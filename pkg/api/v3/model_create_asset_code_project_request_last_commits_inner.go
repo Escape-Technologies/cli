@@ -20,13 +20,13 @@ var _ MappedNullable = &CreateAssetCODEPROJECTRequestLastCommitsInner{}
 
 // CreateAssetCODEPROJECTRequestLastCommitsInner struct for CreateAssetCODEPROJECTRequestLastCommitsInner
 type CreateAssetCODEPROJECTRequestLastCommitsInner struct {
-	Sha string `json:"sha"`
-	TimestampIso string `json:"timestamp_iso"`
-	Message string `json:"message"`
-	AuthorName string `json:"author_name"`
-	AuthorEmail string `json:"author_email"`
-	CommitterName string `json:"committer_name"`
-	CommitterEmail string `json:"committer_email"`
+	Sha                  string `json:"sha"`
+	TimestampIso         string `json:"timestamp_iso"`
+	Message              string `json:"message"`
+	AuthorName           string `json:"author_name"`
+	AuthorEmail          string `json:"author_email"`
+	CommitterName        string `json:"committer_name"`
+	CommitterEmail       string `json:"committer_email"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -225,7 +225,7 @@ func (o *CreateAssetCODEPROJECTRequestLastCommitsInner) SetCommitterEmail(v stri
 }
 
 func (o CreateAssetCODEPROJECTRequestLastCommitsInner) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -268,10 +268,10 @@ func (o *CreateAssetCODEPROJECTRequestLastCommitsInner) UnmarshalJSON(data []byt
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -338,5 +338,3 @@ func (v *NullableCreateAssetCODEPROJECTRequestLastCommitsInner) UnmarshalJSON(sr
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

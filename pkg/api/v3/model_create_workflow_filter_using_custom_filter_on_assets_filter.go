@@ -19,36 +19,36 @@ var _ MappedNullable = &CreateWorkflowFilterUsingCustomFilterOnAssetsFilter{}
 
 // CreateWorkflowFilterUsingCustomFilterOnAssetsFilter struct for CreateWorkflowFilterUsingCustomFilterOnAssetsFilter
 type CreateWorkflowFilterUsingCustomFilterOnAssetsFilter struct {
-	Search *string `json:"search,omitempty"`
-	Risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS `json:"risks,omitempty"`
-	TagIds []string `json:"tagIds,omitempty"`
-	IntegrationIds []string `json:"integrationIds,omitempty"`
-	Types []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE `json:"types,omitempty"`
-	Classes []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS `json:"classes,omitempty"`
-	ProjectIds []string `json:"projectIds,omitempty"`
-	NoProjects *bool `json:"noProjects,omitempty"`
-	ApplicationIds []string `json:"applicationIds,omitempty"`
-	FoundByProfileIds []string `json:"foundByProfileIds,omitempty"`
-	ScanIds []string `json:"scanIds,omitempty"`
-	ScannerKinds []ENUMPROPERTIESFILTERSITEMS1PROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS `json:"scannerKinds,omitempty"`
-	Domains []string `json:"domains,omitempty"`
-	Environments []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESENVIRONMENT `json:"environments,omitempty"`
-	CloudProviders []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER `json:"cloudProviders,omitempty"`
-	WafProviders []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESWAFPROVIDER `json:"wafProviders,omitempty"`
-	Statuses []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS `json:"statuses,omitempty"`
-	Severities []ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY `json:"severities,omitempty"`
-	SourceAssetIds []string `json:"sourceAssetIds,omitempty"`
-	SourceAssets *bool `json:"sourceAssets,omitempty"`
-	ParentAssetIds []string `json:"parentAssetIds,omitempty"`
-	SchemaIds []string `json:"schemaIds,omitempty"`
-	AssetIds []string `json:"assetIds,omitempty"`
-	BlacklistAssetIds []string `json:"blacklistAssetIds,omitempty"`
-	ManuallyCreated *bool `json:"manuallyCreated,omitempty"`
-	Visibility []ENUMPROPERTIESVISIBILITY `json:"visibility,omitempty"`
-	Ports []float32 `json:"ports,omitempty"`
-	Frameworks []ENUMPROPERTIESFILTERSITEMS3PROPERTIESFILTERPROPERTIESFRAMEWORKSITEMS `json:"frameworks,omitempty"`
-	PrioritizeFavorites *bool `json:"prioritizeFavorites,omitempty"`
-	NoTags *bool `json:"noTags,omitempty"`
+	Search               *string                                                                          `json:"search,omitempty"`
+	Risks                []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS                     `json:"risks,omitempty"`
+	TagIds               []string                                                                         `json:"tagIds,omitempty"`
+	IntegrationIds       []string                                                                         `json:"integrationIds,omitempty"`
+	Types                []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE                           `json:"types,omitempty"`
+	Classes              []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS                          `json:"classes,omitempty"`
+	ProjectIds           []string                                                                         `json:"projectIds,omitempty"`
+	NoProjects           *bool                                                                            `json:"noProjects,omitempty"`
+	ApplicationIds       []string                                                                         `json:"applicationIds,omitempty"`
+	FoundByProfileIds    []string                                                                         `json:"foundByProfileIds,omitempty"`
+	ScanIds              []string                                                                         `json:"scanIds,omitempty"`
+	ScannerKinds         []ENUMPROPERTIESFILTERSITEMS1PROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS         `json:"scannerKinds,omitempty"`
+	Domains              []string                                                                         `json:"domains,omitempty"`
+	Environments         []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESENVIRONMENT   `json:"environments,omitempty"`
+	CloudProviders       []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER `json:"cloudProviders,omitempty"`
+	WafProviders         []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESWAFPROVIDER   `json:"wafProviders,omitempty"`
+	Statuses             []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS                         `json:"statuses,omitempty"`
+	Severities           []ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY                                      `json:"severities,omitempty"`
+	SourceAssetIds       []string                                                                         `json:"sourceAssetIds,omitempty"`
+	SourceAssets         *bool                                                                            `json:"sourceAssets,omitempty"`
+	ParentAssetIds       []string                                                                         `json:"parentAssetIds,omitempty"`
+	SchemaIds            []string                                                                         `json:"schemaIds,omitempty"`
+	AssetIds             []string                                                                         `json:"assetIds,omitempty"`
+	BlacklistAssetIds    []string                                                                         `json:"blacklistAssetIds,omitempty"`
+	ManuallyCreated      *bool                                                                            `json:"manuallyCreated,omitempty"`
+	Visibility           []ENUMPROPERTIESVISIBILITY                                                       `json:"visibility,omitempty"`
+	Ports                []float32                                                                        `json:"ports,omitempty"`
+	Frameworks           []ENUMPROPERTIESFILTERSITEMS3PROPERTIESFILTERPROPERTIESFRAMEWORKSITEMS           `json:"frameworks,omitempty"`
+	PrioritizeFavorites  *bool                                                                            `json:"prioritizeFavorites,omitempty"`
+	NoTags               *bool                                                                            `json:"noTags,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -1032,7 +1032,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilter) SetNoTags(v bool) 
 }
 
 func (o CreateWorkflowFilterUsingCustomFilterOnAssetsFilter) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -1224,5 +1224,3 @@ func (v *NullableCreateWorkflowFilterUsingCustomFilterOnAssetsFilter) UnmarshalJ
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -20,8 +20,8 @@ var _ MappedNullable = &ProfileDetailedConfigurationAuthenticationPresetsInnerOn
 
 // ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf4 struct for ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf4
 type ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf4 struct {
-	Type ENUMBASIC `json:"type"`
-	Users []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf4UsersInner `json:"users"`
+	Type                 ENUMBASIC                                                                `json:"type"`
+	Users                []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf4UsersInner `json:"users"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -95,7 +95,7 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf4) SetUsers(
 }
 
 func (o ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf4) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -128,10 +128,10 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf4) Unmarshal
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -193,5 +193,3 @@ func (v *NullableProfileDetailedConfigurationAuthenticationPresetsInnerOneOf4) U
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

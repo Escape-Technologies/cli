@@ -6,7 +6,7 @@ import (
 
 // GetColorPreference returns the color preference
 // Default to true if not set
-func GetColorPreference() (bool) {
+func GetColorPreference() bool {
 	isColorDisabled := os.Getenv("ESCAPE_COLOR_DISABLED")
 	return isColorDisabled == "true"
 }

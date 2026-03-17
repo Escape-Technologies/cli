@@ -19,9 +19,9 @@ var _ MappedNullable = &ProfileDetailedConfigurationInference{}
 
 // ProfileDetailedConfigurationInference struct for ProfileDetailedConfigurationInference
 type ProfileDetailedConfigurationInference struct {
-	Scalars map[string]ProfileDetailedConfigurationInferenceScalarsValue `json:"scalars,omitempty"`
-	NullIsUnauthenticated *bool `json:"null_is_unauthenticated,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Scalars               map[string]ProfileDetailedConfigurationInferenceScalarsValue `json:"scalars,omitempty"`
+	NullIsUnauthenticated *bool                                                        `json:"null_is_unauthenticated,omitempty"`
+	AdditionalProperties  map[string]interface{}
 }
 
 type _ProfileDetailedConfigurationInference ProfileDetailedConfigurationInference
@@ -108,7 +108,7 @@ func (o *ProfileDetailedConfigurationInference) SetNullIsUnauthenticated(v bool)
 }
 
 func (o ProfileDetailedConfigurationInference) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -188,5 +188,3 @@ func (v *NullableProfileDetailedConfigurationInference) UnmarshalJSON(src []byte
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

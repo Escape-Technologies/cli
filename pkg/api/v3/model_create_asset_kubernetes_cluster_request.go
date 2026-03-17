@@ -21,14 +21,14 @@ var _ MappedNullable = &CreateAssetKUBERNETESCLUSTERRequest{}
 // CreateAssetKUBERNETESCLUSTERRequest struct for CreateAssetKUBERNETESCLUSTERRequest
 type CreateAssetKUBERNETESCLUSTERRequest struct {
 	// The list of project IDs bind the asset on.
-	ProjectIds []string `json:"projectIds,omitempty"`
-	AssetClass ENUMCLOUDHOSTING `json:"asset_class"`
-	WizProviderId *string `json:"wiz_provider_id,omitempty"`
-	WizCloudPlatform *string `json:"wiz_cloud_platform,omitempty"`
-	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
-	AssetType ENUMKUBERNETESCLUSTER `json:"asset_type"`
-	Name *string `json:"name,omitempty"`
-	PrivateLocationId *string `json:"private_location_id,omitempty"`
+	ProjectIds           []string               `json:"projectIds,omitempty"`
+	AssetClass           ENUMCLOUDHOSTING       `json:"asset_class"`
+	WizProviderId        *string                `json:"wiz_provider_id,omitempty"`
+	WizCloudPlatform     *string                `json:"wiz_cloud_platform,omitempty"`
+	ExtraMetadata        map[string]interface{} `json:"extra_metadata,omitempty"`
+	AssetType            ENUMKUBERNETESCLUSTER  `json:"asset_type"`
+	Name                 *string                `json:"name,omitempty"`
+	PrivateLocationId    *string                `json:"private_location_id,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -294,7 +294,7 @@ func (o *CreateAssetKUBERNETESCLUSTERRequest) SetPrivateLocationId(v string) {
 }
 
 func (o CreateAssetKUBERNETESCLUSTERRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -345,10 +345,10 @@ func (o *CreateAssetKUBERNETESCLUSTERRequest) UnmarshalJSON(data []byte) (err er
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -416,5 +416,3 @@ func (v *NullableCreateAssetKUBERNETESCLUSTERRequest) UnmarshalJSON(src []byte) 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

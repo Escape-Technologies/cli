@@ -19,21 +19,21 @@ var _ MappedNullable = &CreateWorkflowFilterUsingCustomFilterOnProfilesFilter{}
 
 // CreateWorkflowFilterUsingCustomFilterOnProfilesFilter struct for CreateWorkflowFilterUsingCustomFilterOnProfilesFilter
 type CreateWorkflowFilterUsingCustomFilterOnProfilesFilter struct {
-	Ids []string `json:"ids,omitempty"`
-	Search *string `json:"search,omitempty"`
-	Risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS `json:"risks,omitempty"`
-	TagIds []string `json:"tagIds,omitempty"`
-	ProjectIds []string `json:"projectIds,omitempty"`
-	NoProjects *bool `json:"noProjects,omitempty"`
-	AssetIds []string `json:"assetIds,omitempty"`
-	AssetSchemaIds []string `json:"assetSchemaIds,omitempty"`
-	IssueIds []string `json:"issueIds,omitempty"`
-	Kinds []ENUMPROPERTIESFILTERSITEMS1PROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS `json:"kinds,omitempty"`
-	Domains []string `json:"domains,omitempty"`
-	Initiators []ENUMPROPERTIESDATAITEMSPROPERTIESINITIATORSITEMS `json:"initiators,omitempty"`
-	LastScanStatuses []ENUMPROPERTIESFILTERSITEMS2PROPERTIESFILTERPROPERTIESLASTSCANSTATUSESITEMS `json:"lastScanStatuses,omitempty"`
-	AssetClasses []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS `json:"assetClasses,omitempty"`
-	AssetStatuses []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS `json:"assetStatuses,omitempty"`
+	Ids                  []string                                                                     `json:"ids,omitempty"`
+	Search               *string                                                                      `json:"search,omitempty"`
+	Risks                []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS                 `json:"risks,omitempty"`
+	TagIds               []string                                                                     `json:"tagIds,omitempty"`
+	ProjectIds           []string                                                                     `json:"projectIds,omitempty"`
+	NoProjects           *bool                                                                        `json:"noProjects,omitempty"`
+	AssetIds             []string                                                                     `json:"assetIds,omitempty"`
+	AssetSchemaIds       []string                                                                     `json:"assetSchemaIds,omitempty"`
+	IssueIds             []string                                                                     `json:"issueIds,omitempty"`
+	Kinds                []ENUMPROPERTIESFILTERSITEMS1PROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS     `json:"kinds,omitempty"`
+	Domains              []string                                                                     `json:"domains,omitempty"`
+	Initiators           []ENUMPROPERTIESDATAITEMSPROPERTIESINITIATORSITEMS                           `json:"initiators,omitempty"`
+	LastScanStatuses     []ENUMPROPERTIESFILTERSITEMS2PROPERTIESFILTERPROPERTIESLASTSCANSTATUSESITEMS `json:"lastScanStatuses,omitempty"`
+	AssetClasses         []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS                      `json:"assetClasses,omitempty"`
+	AssetStatuses        []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS                     `json:"assetStatuses,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -537,7 +537,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) SetAssetStatuses
 }
 
 func (o CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -669,5 +669,3 @@ func (v *NullableCreateWorkflowFilterUsingCustomFilterOnProfilesFilter) Unmarsha
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

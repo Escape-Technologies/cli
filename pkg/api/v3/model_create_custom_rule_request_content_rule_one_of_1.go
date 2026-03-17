@@ -20,11 +20,11 @@ var _ MappedNullable = &CreateCustomRuleRequestContentRuleOneOf1{}
 
 // CreateCustomRuleRequestContentRuleOneOf1 struct for CreateCustomRuleRequestContentRuleOneOf1
 type CreateCustomRuleRequestContentRuleOneOf1 struct {
-	Alert CreateCustomRuleRequestContentRuleOneOfAlert `json:"alert"`
-	Type ENUMWEBAPP `json:"type"`
-	Seed []ProfileDetailedConfigurationAuthenticationUsersInnerCredentialsActionsInner `json:"seed"`
-	Detect []CreateCustomRuleRequestContentRuleOneOf1DetectInner `json:"detect"`
-	Extractors []interface{} `json:"extractors,omitempty"`
+	Alert                CreateCustomRuleRequestContentRuleOneOfAlert                                  `json:"alert"`
+	Type                 ENUMWEBAPP                                                                    `json:"type"`
+	Seed                 []ProfileDetailedConfigurationAuthenticationUsersInnerCredentialsActionsInner `json:"seed"`
+	Detect               []CreateCustomRuleRequestContentRuleOneOf1DetectInner                         `json:"detect"`
+	Extractors           []interface{}                                                                 `json:"extractors,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -180,7 +180,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOf1) SetExtractors(v []interface{}
 }
 
 func (o CreateCustomRuleRequestContentRuleOneOf1) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -220,10 +220,10 @@ func (o *CreateCustomRuleRequestContentRuleOneOf1) UnmarshalJSON(data []byte) (e
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -288,5 +288,3 @@ func (v *NullableCreateCustomRuleRequestContentRuleOneOf1) UnmarshalJSON(src []b
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
