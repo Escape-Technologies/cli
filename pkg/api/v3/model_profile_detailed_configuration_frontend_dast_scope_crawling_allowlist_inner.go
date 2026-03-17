@@ -18,7 +18,7 @@ import (
 
 // ProfileDetailedConfigurationFrontendDastScopeCrawlingAllowlistInner - struct for ProfileDetailedConfigurationFrontendDastScopeCrawlingAllowlistInner
 type ProfileDetailedConfigurationFrontendDastScopeCrawlingAllowlistInner struct {
-	ProfileDetailedConfigurationScopeAllowlistInnerOneOf *ProfileDetailedConfigurationScopeAllowlistInnerOneOf
+	ProfileDetailedConfigurationScopeAllowlistInnerOneOf  *ProfileDetailedConfigurationScopeAllowlistInnerOneOf
 	ProfileDetailedConfigurationScopeAllowlistInnerOneOf1 *ProfileDetailedConfigurationScopeAllowlistInnerOneOf1
 	ProfileDetailedConfigurationScopeAllowlistInnerOneOf2 *ProfileDetailedConfigurationScopeAllowlistInnerOneOf2
 	ProfileDetailedConfigurationScopeAllowlistInnerOneOf6 *ProfileDetailedConfigurationScopeAllowlistInnerOneOf6
@@ -51,7 +51,6 @@ func ProfileDetailedConfigurationScopeAllowlistInnerOneOf6AsProfileDetailedConfi
 		ProfileDetailedConfigurationScopeAllowlistInnerOneOf6: v,
 	}
 }
-
 
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *ProfileDetailedConfigurationFrontendDastScopeCrawlingAllowlistInner) UnmarshalJSON(data []byte) error {
@@ -162,7 +161,7 @@ func (src ProfileDetailedConfigurationFrontendDastScopeCrawlingAllowlistInner) M
 }
 
 // Get the actual instance
-func (obj *ProfileDetailedConfigurationFrontendDastScopeCrawlingAllowlistInner) GetActualInstance() (interface{}) {
+func (obj *ProfileDetailedConfigurationFrontendDastScopeCrawlingAllowlistInner) GetActualInstance() interface{} {
 	if obj == nil {
 		return nil
 	}
@@ -187,7 +186,7 @@ func (obj *ProfileDetailedConfigurationFrontendDastScopeCrawlingAllowlistInner) 
 }
 
 // Get the actual instance value
-func (obj ProfileDetailedConfigurationFrontendDastScopeCrawlingAllowlistInner) GetActualInstanceValue() (interface{}) {
+func (obj ProfileDetailedConfigurationFrontendDastScopeCrawlingAllowlistInner) GetActualInstanceValue() interface{} {
 	if obj.ProfileDetailedConfigurationScopeAllowlistInnerOneOf != nil {
 		return *obj.ProfileDetailedConfigurationScopeAllowlistInnerOneOf
 	}
@@ -243,5 +242,3 @@ func (v *NullableProfileDetailedConfigurationFrontendDastScopeCrawlingAllowlistI
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

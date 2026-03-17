@@ -20,14 +20,14 @@ var _ MappedNullable = &ProfileDetailedConfigurationAuthenticationPresetsInnerOn
 
 // ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10UsersInner struct for ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10UsersInner
 type ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10UsersInner struct {
-	Username string `json:"username"`
-	Headers map[string]string `json:"headers,omitempty"`
-	Cookies map[string]string `json:"cookies,omitempty"`
-	QueryParameters map[string]string `json:"query_parameters,omitempty"`
-	MainUser *bool `json:"main_user,omitempty"`
-	Basic *string `json:"basic,omitempty"`
-	Digest *string `json:"digest,omitempty"`
-	Variables map[string]string `json:"variables,omitempty"`
+	Username             string            `json:"username"`
+	Headers              map[string]string `json:"headers,omitempty"`
+	Cookies              map[string]string `json:"cookies,omitempty"`
+	QueryParameters      map[string]string `json:"query_parameters,omitempty"`
+	MainUser             *bool             `json:"main_user,omitempty"`
+	Basic                *string           `json:"basic,omitempty"`
+	Digest               *string           `json:"digest,omitempty"`
+	Variables            map[string]string `json:"variables,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -300,7 +300,7 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10UsersInner
 }
 
 func (o ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10UsersInner) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -352,10 +352,10 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10UsersInner
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -423,5 +423,3 @@ func (v *NullableProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10Us
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

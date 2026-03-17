@@ -19,9 +19,9 @@ var _ MappedNullable = &ProfileDetailedConfigurationSecurityTestsBola{}
 
 // ProfileDetailedConfigurationSecurityTestsBola struct for ProfileDetailedConfigurationSecurityTestsBola
 type ProfileDetailedConfigurationSecurityTestsBola struct {
-	Skip *bool `json:"skip,omitempty"`
-	AssetsAllowed []ENUMPROPERTIESCONFIGURATIONPROPERTIESSECURITYTESTSPROPERTIESHIGHNUMBEROFCUSTOMSCALARSPROPERTIESASSETSALLOWEDITEMS `json:"assets_allowed,omitempty"`
-	DoNotFuzz []string `json:"do_not_fuzz,omitempty"`
+	Skip                 *bool                                                                                                               `json:"skip,omitempty"`
+	AssetsAllowed        []ENUMPROPERTIESCONFIGURATIONPROPERTIESSECURITYTESTSPROPERTIESHIGHNUMBEROFCUSTOMSCALARSPROPERTIESASSETSALLOWEDITEMS `json:"assets_allowed,omitempty"`
+	DoNotFuzz            []string                                                                                                            `json:"do_not_fuzz,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -141,7 +141,7 @@ func (o *ProfileDetailedConfigurationSecurityTestsBola) SetDoNotFuzz(v []string)
 }
 
 func (o ProfileDetailedConfigurationSecurityTestsBola) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -225,5 +225,3 @@ func (v *NullableProfileDetailedConfigurationSecurityTestsBola) UnmarshalJSON(sr
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

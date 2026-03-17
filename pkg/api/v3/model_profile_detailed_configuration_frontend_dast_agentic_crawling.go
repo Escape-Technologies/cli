@@ -19,8 +19,8 @@ var _ MappedNullable = &ProfileDetailedConfigurationFrontendDastAgenticCrawling{
 
 // ProfileDetailedConfigurationFrontendDastAgenticCrawling struct for ProfileDetailedConfigurationFrontendDastAgenticCrawling
 type ProfileDetailedConfigurationFrontendDastAgenticCrawling struct {
-	Enabled *bool `json:"enabled,omitempty"`
-	Instructions *string `json:"instructions,omitempty"`
+	Enabled              *bool   `json:"enabled,omitempty"`
+	Instructions         *string `json:"instructions,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -108,7 +108,7 @@ func (o *ProfileDetailedConfigurationFrontendDastAgenticCrawling) SetInstruction
 }
 
 func (o ProfileDetailedConfigurationFrontendDastAgenticCrawling) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -188,5 +188,3 @@ func (v *NullableProfileDetailedConfigurationFrontendDastAgenticCrawling) Unmars
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

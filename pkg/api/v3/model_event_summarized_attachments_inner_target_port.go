@@ -25,7 +25,7 @@ type EventSummarizedAttachmentsInnerTargetPort struct {
 	// The port number
 	Port float32 `json:"port"`
 	// The protocol
-	Protocol string `json:"protocol"`
+	Protocol             string `json:"protocol"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -124,7 +124,7 @@ func (o *EventSummarizedAttachmentsInnerTargetPort) SetProtocol(v string) {
 }
 
 func (o EventSummarizedAttachmentsInnerTargetPort) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -159,10 +159,10 @@ func (o *EventSummarizedAttachmentsInnerTargetPort) UnmarshalJSON(data []byte) (
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -225,5 +225,3 @@ func (v *NullableEventSummarizedAttachmentsInnerTargetPort) UnmarshalJSON(src []
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

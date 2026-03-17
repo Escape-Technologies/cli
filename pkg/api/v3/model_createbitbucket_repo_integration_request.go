@@ -23,12 +23,12 @@ type CreatebitbucketRepoIntegrationRequest struct {
 	// The organization ID to create the integration for
 	OrganizationId *string `json:"organizationId,omitempty"`
 	// The name of the integration
-	Name string `json:"name"`
+	Name       string                                          `json:"name"`
 	Parameters CreatebitbucketRepoIntegrationRequestParameters `json:"parameters"`
 	// Optional proxy ID to create the integration for
 	ProxyId *string `json:"proxyId,omitempty"`
 	// Optional list of project IDs to create the integration for
-	ProjectIds []string `json:"projectIds,omitempty"`
+	ProjectIds           []string `json:"projectIds,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -198,7 +198,7 @@ func (o *CreatebitbucketRepoIntegrationRequest) SetProjectIds(v []string) {
 }
 
 func (o CreatebitbucketRepoIntegrationRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -240,10 +240,10 @@ func (o *CreatebitbucketRepoIntegrationRequest) UnmarshalJSON(data []byte) (err 
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -308,5 +308,3 @@ func (v *NullableCreatebitbucketRepoIntegrationRequest) UnmarshalJSON(src []byte
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

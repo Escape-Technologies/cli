@@ -19,25 +19,25 @@ var _ MappedNullable = &UpdateProfileConfigurationRequestConfiguration{}
 
 // UpdateProfileConfigurationRequestConfiguration The configuration to update
 type UpdateProfileConfigurationRequestConfiguration struct {
-	PublicLocationIds []string `json:"public_location_ids,omitempty"`
-	PrivateLocationIds []string `json:"private_location_ids,omitempty"`
-	Scope *ProfileDetailedConfigurationScope `json:"scope,omitempty"`
-	ExplorationScope []string `json:"exploration_scope,omitempty"`
-	ApiCustomRuleIds []string `json:"api_custom_rule_ids,omitempty"`
-	FrontendCustomRuleIds []string `json:"frontend_custom_rule_ids,omitempty"`
-	Authentication *ProfileDetailedConfigurationAuthentication `json:"authentication,omitempty"`
-	SecurityTests *ProfileDetailedConfigurationSecurityTests `json:"security_tests,omitempty"`
-	Inference *ProfileDetailedConfigurationInference `json:"inference,omitempty"`
-	Network *ProfileDetailedConfigurationNetwork `json:"network,omitempty"`
-	ArgumentGeneration *ProfileDetailedConfigurationArgumentGeneration `json:"argument_generation,omitempty"`
-	SubdomainEnumeration *ProfileDetailedConfigurationSubdomainEnumeration `json:"subdomain_enumeration,omitempty"`
-	PortScanning *ProfileDetailedConfigurationPortScanning `json:"port_scanning,omitempty"`
-	ServiceDiscovery *ProfileDetailedConfigurationServiceDiscovery `json:"service_discovery,omitempty"`
-	FrontendDast *ProfileDetailedConfigurationFrontendDast `json:"frontend_dast,omitempty"`
-	GraphqlApiDast *ProfileDetailedConfigurationGraphqlApiDast `json:"graphql_api_dast,omitempty"`
-	RestApiDast *ProfileDetailedConfigurationRestApiDast `json:"rest_api_dast,omitempty"`
-	Experimental *ProfileDetailedConfigurationExperimental `json:"experimental,omitempty"`
-	AdditionalProperties map[string]interface{}
+	PublicLocationIds     []string                                          `json:"public_location_ids,omitempty"`
+	PrivateLocationIds    []string                                          `json:"private_location_ids,omitempty"`
+	Scope                 *ProfileDetailedConfigurationScope                `json:"scope,omitempty"`
+	ExplorationScope      []string                                          `json:"exploration_scope,omitempty"`
+	ApiCustomRuleIds      []string                                          `json:"api_custom_rule_ids,omitempty"`
+	FrontendCustomRuleIds []string                                          `json:"frontend_custom_rule_ids,omitempty"`
+	Authentication        *ProfileDetailedConfigurationAuthentication       `json:"authentication,omitempty"`
+	SecurityTests         *ProfileDetailedConfigurationSecurityTests        `json:"security_tests,omitempty"`
+	Inference             *ProfileDetailedConfigurationInference            `json:"inference,omitempty"`
+	Network               *ProfileDetailedConfigurationNetwork              `json:"network,omitempty"`
+	ArgumentGeneration    *ProfileDetailedConfigurationArgumentGeneration   `json:"argument_generation,omitempty"`
+	SubdomainEnumeration  *ProfileDetailedConfigurationSubdomainEnumeration `json:"subdomain_enumeration,omitempty"`
+	PortScanning          *ProfileDetailedConfigurationPortScanning         `json:"port_scanning,omitempty"`
+	ServiceDiscovery      *ProfileDetailedConfigurationServiceDiscovery     `json:"service_discovery,omitempty"`
+	FrontendDast          *ProfileDetailedConfigurationFrontendDast         `json:"frontend_dast,omitempty"`
+	GraphqlApiDast        *ProfileDetailedConfigurationGraphqlApiDast       `json:"graphql_api_dast,omitempty"`
+	RestApiDast           *ProfileDetailedConfigurationRestApiDast          `json:"rest_api_dast,omitempty"`
+	Experimental          *ProfileDetailedConfigurationExperimental         `json:"experimental,omitempty"`
+	AdditionalProperties  map[string]interface{}
 }
 
 type _UpdateProfileConfigurationRequestConfiguration UpdateProfileConfigurationRequestConfiguration
@@ -636,7 +636,7 @@ func (o *UpdateProfileConfigurationRequestConfiguration) SetExperimental(v Profi
 }
 
 func (o UpdateProfileConfigurationRequestConfiguration) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -780,5 +780,3 @@ func (v *NullableUpdateProfileConfigurationRequestConfiguration) UnmarshalJSON(s
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

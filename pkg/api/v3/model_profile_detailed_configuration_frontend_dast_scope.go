@@ -19,8 +19,8 @@ var _ MappedNullable = &ProfileDetailedConfigurationFrontendDastScope{}
 
 // ProfileDetailedConfigurationFrontendDastScope struct for ProfileDetailedConfigurationFrontendDastScope
 type ProfileDetailedConfigurationFrontendDastScope struct {
-	ApiTesting *ProfileDetailedConfigurationFrontendDastScopeApiTesting `json:"api_testing,omitempty"`
-	Crawling *ProfileDetailedConfigurationFrontendDastScopeCrawling `json:"crawling,omitempty"`
+	ApiTesting           *ProfileDetailedConfigurationFrontendDastScopeApiTesting `json:"api_testing,omitempty"`
+	Crawling             *ProfileDetailedConfigurationFrontendDastScopeCrawling   `json:"crawling,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -108,7 +108,7 @@ func (o *ProfileDetailedConfigurationFrontendDastScope) SetCrawling(v ProfileDet
 }
 
 func (o ProfileDetailedConfigurationFrontendDastScope) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -188,5 +188,3 @@ func (v *NullableProfileDetailedConfigurationFrontendDastScope) UnmarshalJSON(sr
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

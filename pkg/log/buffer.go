@@ -9,9 +9,9 @@ import (
 
 // Entry is a log line
 type Entry struct {
-	Level   logrus.Level `json:"level"`
-	Message string       `json:"message"`
-	Timestamp int64       `json:"timestamp_ms,omitempty"`
+	Level     logrus.Level `json:"level"`
+	Message   string       `json:"message"`
+	Timestamp int64        `json:"timestamp_ms,omitempty"`
 }
 
 type logBuffer struct {

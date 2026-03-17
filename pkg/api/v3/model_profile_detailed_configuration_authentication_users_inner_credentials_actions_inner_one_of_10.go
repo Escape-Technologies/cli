@@ -20,10 +20,10 @@ var _ MappedNullable = &ProfileDetailedConfigurationAuthenticationUsersInnerCred
 
 // ProfileDetailedConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10 struct for ProfileDetailedConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10
 type ProfileDetailedConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10 struct {
-	Action ENUMSOLVECAPTCHA `json:"action"`
-	AllowFailure *bool `json:"allow_failure,omitempty"`
-	Locator string `json:"locator"`
-	AutoSubmit *bool `json:"auto_submit,omitempty"`
+	Action               ENUMSOLVECAPTCHA `json:"action"`
+	AllowFailure         *bool            `json:"allow_failure,omitempty"`
+	Locator              string           `json:"locator"`
+	AutoSubmit           *bool            `json:"auto_submit,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -161,7 +161,7 @@ func (o *ProfileDetailedConfigurationAuthenticationUsersInnerCredentialsActionsI
 }
 
 func (o ProfileDetailedConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -200,10 +200,10 @@ func (o *ProfileDetailedConfigurationAuthenticationUsersInnerCredentialsActionsI
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -267,5 +267,3 @@ func (v *NullableProfileDetailedConfigurationAuthenticationUsersInnerCredentials
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

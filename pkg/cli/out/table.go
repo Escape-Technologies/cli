@@ -11,8 +11,8 @@ import (
 )
 
 const (
-	ansiReset       = "\x1b[0m"
-	ansiFgDefault   = "\x1b[39m"
+	ansiReset      = "\x1b[0m"
+	ansiFgDefault  = "\x1b[39m"
 	targetOverhead = 29
 )
 
@@ -51,9 +51,11 @@ func redText(value string) string    { return makeColored(value, "\x1b[31m") }
 func grayText(value string) string   { return makeColored(value, "\x1b[90m") }
 func boldText(value string) string   { return makeColored(value, "\x1b[1m") }
 func idText(value string) string     { return makeColored(value, "\x1b[95m") }
-func escapeText(value string) string {return makeColored(value, "\x1b[38;2;6;226;183m")}
-func shortEscapeLink(value string) string { return fmt.Sprintf("\x1b]8;;%s\x1b\\%s\x1b]8;;\x1b\\", value, linkText("Link")) }
-func noColor(value string) string    { return makeColored(value, "") }
+func escapeText(value string) string { return makeColored(value, "\x1b[38;2;6;226;183m") }
+func shortEscapeLink(value string) string {
+	return fmt.Sprintf("\x1b]8;;%s\x1b\\%s\x1b]8;;\x1b\\", value, linkText("Link"))
+}
+func noColor(value string) string { return makeColored(value, "") }
 
 func colorizeBool(value string) string {
 	if isColorDisabled {
@@ -86,7 +88,6 @@ func colorizeSeverity(value string) string {
 		return noColor(value)
 	}
 }
-
 
 func colorizeProgress(value string) string {
 	if isColorDisabled {
@@ -202,29 +203,28 @@ func colorizeActor(value string) string {
 	return idText(value)
 }
 
-
 // colorizeWithHex applies an ANSI 24-bit foreground color to text using a hex RGB string (e.g. "6a63f0").
 func colorizeWithHex(text string, hexRGB string) string {
 	if isColorDisabled {
 		return text
 	}
-    const expectedHexRGBLen = 6
-    if len(hexRGB) == expectedHexRGBLen {
-        if r, errR := strconv.ParseInt(hexRGB[0:2], 16, 0); errR == nil {
-            if g, errG := strconv.ParseInt(hexRGB[2:4], 16, 0); errG == nil {
-                if b, errB := strconv.ParseInt(hexRGB[4:6], 16, 0); errB == nil {
-                    seq := fmt.Sprintf("\x1b[38;2;%d;%d;%dm", r, g, b)
-                    return makeColored(text, seq)
-                }
-            }
-        }
-    }
-    return grayText(text)
+	const expectedHexRGBLen = 6
+	if len(hexRGB) == expectedHexRGBLen {
+		if r, errR := strconv.ParseInt(hexRGB[0:2], 16, 0); errR == nil {
+			if g, errG := strconv.ParseInt(hexRGB[2:4], 16, 0); errG == nil {
+				if b, errB := strconv.ParseInt(hexRGB[4:6], 16, 0); errB == nil {
+					seq := fmt.Sprintf("\x1b[38;2;%d;%d;%dm", r, g, b)
+					return makeColored(text, seq)
+				}
+			}
+		}
+	}
+	return grayText(text)
 }
 
 // TagText is a helper function to colorize a tag name based on its hexRGB color
 func TagText(name string, hexRGB string) string {
-    return colorizeWithHex(name, hexRGB)
+	return colorizeWithHex(name, hexRGB)
 }
 
 func colorizeValue(value string, columnName string, isLastColumn bool) string {
@@ -332,5 +332,3 @@ func Table(data any, tableMaker func() []string) {
 
 	w.Flush() //nolint:errcheck
 }
-
-

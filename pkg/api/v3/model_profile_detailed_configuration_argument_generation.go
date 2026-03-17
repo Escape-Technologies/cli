@@ -19,12 +19,12 @@ var _ MappedNullable = &ProfileDetailedConfigurationArgumentGeneration{}
 
 // ProfileDetailedConfigurationArgumentGeneration struct for ProfileDetailedConfigurationArgumentGeneration
 type ProfileDetailedConfigurationArgumentGeneration struct {
-	MaxGeneratedDepth *float32 `json:"max_generated_depth,omitempty"`
-	SkipGeneratingUnspecifiedEnumValues *bool `json:"skip_generating_unspecified_enum_values,omitempty"`
-	ValidationErrorsAgenticAutofix *bool `json:"validation_errors_agentic_autofix,omitempty"`
-	MaxAgenticAutofixes *float32 `json:"max_agentic_autofixes,omitempty"`
-	AgenticAutofixPreprompt *string `json:"agentic_autofix_preprompt,omitempty"`
-	AdditionalProperties map[string]interface{}
+	MaxGeneratedDepth                   *float32 `json:"max_generated_depth,omitempty"`
+	SkipGeneratingUnspecifiedEnumValues *bool    `json:"skip_generating_unspecified_enum_values,omitempty"`
+	ValidationErrorsAgenticAutofix      *bool    `json:"validation_errors_agentic_autofix,omitempty"`
+	MaxAgenticAutofixes                 *float32 `json:"max_agentic_autofixes,omitempty"`
+	AgenticAutofixPreprompt             *string  `json:"agentic_autofix_preprompt,omitempty"`
+	AdditionalProperties                map[string]interface{}
 }
 
 type _ProfileDetailedConfigurationArgumentGeneration ProfileDetailedConfigurationArgumentGeneration
@@ -207,7 +207,7 @@ func (o *ProfileDetailedConfigurationArgumentGeneration) SetAgenticAutofixPrepro
 }
 
 func (o ProfileDetailedConfigurationArgumentGeneration) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -299,5 +299,3 @@ func (v *NullableProfileDetailedConfigurationArgumentGeneration) UnmarshalJSON(s
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

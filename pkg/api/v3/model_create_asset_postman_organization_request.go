@@ -21,15 +21,15 @@ var _ MappedNullable = &CreateAssetPOSTMANORGANIZATIONRequest{}
 // CreateAssetPOSTMANORGANIZATIONRequest struct for CreateAssetPOSTMANORGANIZATIONRequest
 type CreateAssetPOSTMANORGANIZATIONRequest struct {
 	// The list of project IDs bind the asset on.
-	ProjectIds []string `json:"projectIds,omitempty"`
-	AssetClass ENUMDEVTOOLS `json:"asset_class"`
-	WizProviderId *string `json:"wiz_provider_id,omitempty"`
-	WizCloudPlatform *string `json:"wiz_cloud_platform,omitempty"`
-	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
-	AssetType ENUMPOSTMANORGANIZATION `json:"asset_type"`
-	Name *string `json:"name,omitempty"`
-	ImmutableKey string `json:"immutable_key"`
-	ApiKey string `json:"api_key"`
+	ProjectIds           []string                `json:"projectIds,omitempty"`
+	AssetClass           ENUMDEVTOOLS            `json:"asset_class"`
+	WizProviderId        *string                 `json:"wiz_provider_id,omitempty"`
+	WizCloudPlatform     *string                 `json:"wiz_cloud_platform,omitempty"`
+	ExtraMetadata        map[string]interface{}  `json:"extra_metadata,omitempty"`
+	AssetType            ENUMPOSTMANORGANIZATION `json:"asset_type"`
+	Name                 *string                 `json:"name,omitempty"`
+	ImmutableKey         string                  `json:"immutable_key"`
+	ApiKey               string                  `json:"api_key"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -313,7 +313,7 @@ func (o *CreateAssetPOSTMANORGANIZATIONRequest) SetApiKey(v string) {
 }
 
 func (o CreateAssetPOSTMANORGANIZATIONRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -365,10 +365,10 @@ func (o *CreateAssetPOSTMANORGANIZATIONRequest) UnmarshalJSON(data []byte) (err 
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -437,5 +437,3 @@ func (v *NullableCreateAssetPOSTMANORGANIZATIONRequest) UnmarshalJSON(src []byte
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

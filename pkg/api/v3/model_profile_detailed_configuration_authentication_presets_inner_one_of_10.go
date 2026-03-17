@@ -20,10 +20,10 @@ var _ MappedNullable = &ProfileDetailedConfigurationAuthenticationPresetsInnerOn
 
 // ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10 struct for ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10
 type ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10 struct {
-	Type ENUMCURLSEQUENCE `json:"type"`
-	Users []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10UsersInner `json:"users"`
-	Requests []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10RequestsInner `json:"requests"`
-	Injections []ProfileDetailedConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner `json:"injections,omitempty"`
+	Type                 ENUMCURLSEQUENCE                                                                `json:"type"`
+	Users                []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10UsersInner       `json:"users"`
+	Requests             []ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10RequestsInner    `json:"requests"`
+	Injections           []ProfileDetailedConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner `json:"injections,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -154,7 +154,7 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10) SetInjec
 }
 
 func (o ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -192,10 +192,10 @@ func (o *ProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10) Unmarsha
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -259,5 +259,3 @@ func (v *NullableProfileDetailedConfigurationAuthenticationPresetsInnerOneOf10) 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

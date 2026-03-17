@@ -23,14 +23,14 @@ type CreateWorkflowRequest struct {
 	// The organization ID to create the workflow for
 	OrganizationId string `json:"organizationId"`
 	// The name of the workflow
-	Name string `json:"name"`
+	Name    string                `json:"name"`
 	Trigger ENUMPROPERTIESTRIGGER `json:"trigger"`
 	// The throttle in milliseconds for the workflow.
-	ThrottleMs *float32 `json:"throttleMs,omitempty"`
-	Filters []UpdateWorkflowRequestFiltersInner `json:"filters"`
-	Actions []UpdateWorkflowRequestActionsInner `json:"actions"`
+	ThrottleMs *float32                            `json:"throttleMs,omitempty"`
+	Filters    []UpdateWorkflowRequestFiltersInner `json:"filters"`
+	Actions    []UpdateWorkflowRequestActionsInner `json:"actions"`
 	// Optional list of project IDs to create the integration for
-	ProjectIds []string `json:"projectIds,omitempty"`
+	ProjectIds           []string `json:"projectIds,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -243,7 +243,7 @@ func (o *CreateWorkflowRequest) SetProjectIds(v []string) {
 }
 
 func (o CreateWorkflowRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -288,10 +288,10 @@ func (o *CreateWorkflowRequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -358,5 +358,3 @@ func (v *NullableCreateWorkflowRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
