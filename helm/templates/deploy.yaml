@@ -45,7 +45,14 @@ spec:
             - name: HEALTH_CHECK_PORT
               value: '8080'
             - name: ESCAPE_API_KEY
+              {{- if .Values.existingSecret.name }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.existingSecret.name }}
+                  key: {{ .Values.existingSecret.key }}
+              {{- else }}
               value: {{ .Values.ESCAPE_API_KEY | default "" | quote }}
+              {{- end }}
             - name: ESCAPE_K8S_INTEGRATION
               value: {{ .Values.ESCAPE_K8S_INTEGRATION | quote }}
             - name: ESCAPE_ENABLE_LOGS_ENDPOINT
