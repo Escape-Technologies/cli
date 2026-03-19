@@ -15,8 +15,12 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
+        if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
         with:
           ref: ${{ github.head_ref || github.ref }}
+
+      - uses: actions/checkout@v4
+        if: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository }}
 
       - uses: actions/setup-go@v5
         with:
@@ -25,7 +29,16 @@ jobs:
       - name: Format Go code
         run: go fmt ./...
 
+      - name: Fail on formatting changes from external PRs
+        if: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository }}
+        run: |
+          git diff --exit-code || {
+            echo "Go formatting changes were required. Please run 'go fmt ./...' locally and push the result."
+            exit 1
+          }
+
       - name: Commit and push changes
+        if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
         uses: stefanzweifel/git-auto-commit-action@v7
         with:
           commit_message: "style: auto-format go code"
@@ -35,8 +48,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
         with:
           ref: ${{ github.head_ref || github.ref }}
+      - uses: actions/checkout@v4
+        if: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository }}
       - uses: actions/setup-go@v5
         with:
           go-version: ${{ env.GO_VERSION }}
@@ -51,8 +67,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
         with:
           ref: ${{ github.head_ref || github.ref }}
+      - uses: actions/checkout@v4
+        if: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository }}
       - uses: actions/setup-go@v5
         with:
           go-version: ${{ env.GO_VERSION }}
@@ -77,8 +96,11 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
+        if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
         with:
           ref: ${{ github.head_ref || github.ref }}
+      - uses: actions/checkout@v4
+        if: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository }}
       - uses: actions/setup-go@v5
         with:
           go-version: ${{ matrix.golang }}
