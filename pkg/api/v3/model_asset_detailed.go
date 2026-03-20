@@ -18,7 +18,7 @@ import (
 // checks if the AssetDetailed type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AssetDetailed{}
 
-// AssetDetailed Detailed information about an asset
+// AssetDetailed The asset of the profile
 type AssetDetailed struct {
 	// The id of the asset
 	Id    string                                                `json:"id"`
@@ -44,7 +44,7 @@ type AssetDetailed struct {
 	// The risks of the asset
 	Risks                []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS `json:"risks"`
 	FirstSeenScan        *ScanSummarized                                              `json:"firstSeenScan,omitempty"`
-	LastSeenScan         *ScanSummarized                                              `json:"lastSeenScan,omitempty"`
+	LastSeenScan         *ScanSummarized1                                             `json:"lastSeenScan,omitempty"`
 	Service              *AssetServiceDetailed                                        `json:"service,omitempty"`
 	Frontend             *AssetFrontendDetailed                                       `json:"frontend,omitempty"`
 	Host                 *AssetHostDetailed                                           `json:"host,omitempty"`
@@ -458,9 +458,9 @@ func (o *AssetDetailed) SetFirstSeenScan(v ScanSummarized) {
 }
 
 // GetLastSeenScan returns the LastSeenScan field value if set, zero value otherwise.
-func (o *AssetDetailed) GetLastSeenScan() ScanSummarized {
+func (o *AssetDetailed) GetLastSeenScan() ScanSummarized1 {
 	if o == nil || IsNil(o.LastSeenScan) {
-		var ret ScanSummarized
+		var ret ScanSummarized1
 		return ret
 	}
 	return *o.LastSeenScan
@@ -468,7 +468,7 @@ func (o *AssetDetailed) GetLastSeenScan() ScanSummarized {
 
 // GetLastSeenScanOk returns a tuple with the LastSeenScan field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AssetDetailed) GetLastSeenScanOk() (*ScanSummarized, bool) {
+func (o *AssetDetailed) GetLastSeenScanOk() (*ScanSummarized1, bool) {
 	if o == nil || IsNil(o.LastSeenScan) {
 		return nil, false
 	}
@@ -484,8 +484,8 @@ func (o *AssetDetailed) HasLastSeenScan() bool {
 	return false
 }
 
-// SetLastSeenScan gets a reference to the given ScanSummarized and assigns it to the LastSeenScan field.
-func (o *AssetDetailed) SetLastSeenScan(v ScanSummarized) {
+// SetLastSeenScan gets a reference to the given ScanSummarized1 and assigns it to the LastSeenScan field.
+func (o *AssetDetailed) SetLastSeenScan(v ScanSummarized1) {
 	o.LastSeenScan = &v
 }
 

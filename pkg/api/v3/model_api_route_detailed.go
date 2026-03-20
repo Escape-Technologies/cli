@@ -18,7 +18,7 @@ import (
 // checks if the ApiRouteDetailed type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ApiRouteDetailed{}
 
-// ApiRouteDetailed Detailed information about an api route
+// ApiRouteDetailed The api route of the target
 type ApiRouteDetailed struct {
 	// Whether the api route is blacklisted
 	Blacklisted bool `json:"blacklisted"`

@@ -29,8 +29,11 @@ type CreateWorkflowFilterUsingCustomFilterOnIssuesFilter struct {
 	Categories           []ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY                              `json:"categories,omitempty"`
 	ScannerKinds         []ENUMPROPERTIESFILTERSITEMS1PROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS `json:"scannerKinds,omitempty"`
 	AssetClasses         []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS                  `json:"assetClasses,omitempty"`
+	AssetTypes           []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE                   `json:"assetTypes,omitempty"`
 	TagIds               []string                                                                 `json:"tagIds,omitempty"`
+	NoTags               *bool                                                                    `json:"noTags,omitempty"`
 	ScanIds              []string                                                                 `json:"scanIds,omitempty"`
+	SecurityTestUids     []string                                                                 `json:"securityTestUids,omitempty"`
 	Status               []ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS                                `json:"status,omitempty"`
 	Ids                  []string                                                                 `json:"ids,omitempty"`
 	BlacklistedIds       []string                                                                 `json:"blacklistedIds,omitempty"`
@@ -385,6 +388,38 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) SetAssetClasses(v 
 	o.AssetClasses = v
 }
 
+// GetAssetTypes returns the AssetTypes field value if set, zero value otherwise.
+func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetAssetTypes() []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE {
+	if o == nil || IsNil(o.AssetTypes) {
+		var ret []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE
+		return ret
+	}
+	return o.AssetTypes
+}
+
+// GetAssetTypesOk returns a tuple with the AssetTypes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetAssetTypesOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE, bool) {
+	if o == nil || IsNil(o.AssetTypes) {
+		return nil, false
+	}
+	return o.AssetTypes, true
+}
+
+// HasAssetTypes returns a boolean if a field has been set.
+func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasAssetTypes() bool {
+	if o != nil && !IsNil(o.AssetTypes) {
+		return true
+	}
+
+	return false
+}
+
+// SetAssetTypes gets a reference to the given []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE and assigns it to the AssetTypes field.
+func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) SetAssetTypes(v []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE) {
+	o.AssetTypes = v
+}
+
 // GetTagIds returns the TagIds field value if set, zero value otherwise.
 func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetTagIds() []string {
 	if o == nil || IsNil(o.TagIds) {
@@ -417,6 +452,38 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) SetTagIds(v []stri
 	o.TagIds = v
 }
 
+// GetNoTags returns the NoTags field value if set, zero value otherwise.
+func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetNoTags() bool {
+	if o == nil || IsNil(o.NoTags) {
+		var ret bool
+		return ret
+	}
+	return *o.NoTags
+}
+
+// GetNoTagsOk returns a tuple with the NoTags field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetNoTagsOk() (*bool, bool) {
+	if o == nil || IsNil(o.NoTags) {
+		return nil, false
+	}
+	return o.NoTags, true
+}
+
+// HasNoTags returns a boolean if a field has been set.
+func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasNoTags() bool {
+	if o != nil && !IsNil(o.NoTags) {
+		return true
+	}
+
+	return false
+}
+
+// SetNoTags gets a reference to the given bool and assigns it to the NoTags field.
+func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) SetNoTags(v bool) {
+	o.NoTags = &v
+}
+
 // GetScanIds returns the ScanIds field value if set, zero value otherwise.
 func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetScanIds() []string {
 	if o == nil || IsNil(o.ScanIds) {
@@ -447,6 +514,38 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasScanIds() bool 
 // SetScanIds gets a reference to the given []string and assigns it to the ScanIds field.
 func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) SetScanIds(v []string) {
 	o.ScanIds = v
+}
+
+// GetSecurityTestUids returns the SecurityTestUids field value if set, zero value otherwise.
+func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetSecurityTestUids() []string {
+	if o == nil || IsNil(o.SecurityTestUids) {
+		var ret []string
+		return ret
+	}
+	return o.SecurityTestUids
+}
+
+// GetSecurityTestUidsOk returns a tuple with the SecurityTestUids field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetSecurityTestUidsOk() ([]string, bool) {
+	if o == nil || IsNil(o.SecurityTestUids) {
+		return nil, false
+	}
+	return o.SecurityTestUids, true
+}
+
+// HasSecurityTestUids returns a boolean if a field has been set.
+func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasSecurityTestUids() bool {
+	if o != nil && !IsNil(o.SecurityTestUids) {
+		return true
+	}
+
+	return false
+}
+
+// SetSecurityTestUids gets a reference to the given []string and assigns it to the SecurityTestUids field.
+func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) SetSecurityTestUids(v []string) {
+	o.SecurityTestUids = v
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
@@ -873,11 +972,20 @@ func (o CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) ToMap() (map[string
 	if !IsNil(o.AssetClasses) {
 		toSerialize["assetClasses"] = o.AssetClasses
 	}
+	if !IsNil(o.AssetTypes) {
+		toSerialize["assetTypes"] = o.AssetTypes
+	}
 	if !IsNil(o.TagIds) {
 		toSerialize["tagIds"] = o.TagIds
 	}
+	if !IsNil(o.NoTags) {
+		toSerialize["noTags"] = o.NoTags
+	}
 	if !IsNil(o.ScanIds) {
 		toSerialize["scanIds"] = o.ScanIds
+	}
+	if !IsNil(o.SecurityTestUids) {
+		toSerialize["securityTestUids"] = o.SecurityTestUids
 	}
 	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
@@ -947,8 +1055,11 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) UnmarshalJSON(data
 		delete(additionalProperties, "categories")
 		delete(additionalProperties, "scannerKinds")
 		delete(additionalProperties, "assetClasses")
+		delete(additionalProperties, "assetTypes")
 		delete(additionalProperties, "tagIds")
+		delete(additionalProperties, "noTags")
 		delete(additionalProperties, "scanIds")
+		delete(additionalProperties, "securityTestUids")
 		delete(additionalProperties, "status")
 		delete(additionalProperties, "ids")
 		delete(additionalProperties, "blacklistedIds")

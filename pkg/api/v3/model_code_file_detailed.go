@@ -18,7 +18,7 @@ import (
 // checks if the CodeFileDetailed type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CodeFileDetailed{}
 
-// CodeFileDetailed Detailed information about a code file
+// CodeFileDetailed The code file of the target
 type CodeFileDetailed struct {
 	// The id of the code file
 	Id string `json:"id"`

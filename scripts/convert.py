@@ -29,6 +29,18 @@ UNIFY_ENUMS_BY_PROPERTY: dict[str, str] = {
     "framework": "ENUMPROPERTIESFRAMEWORK",
 }
 
+
+def _enum_sort_key(value: Any) -> str:
+    return json.dumps(value, sort_keys=True)
+
+
+def _sorted_enum_values(values: list[Any]) -> list[Any]:
+    return sorted(values, key=_enum_sort_key)
+
+
+def _enum_cache_key(values: list[Any]) -> str:
+    return "-".join(_enum_sort_key(value) for value in _sorted_enum_values(values))
+
 def md5(s: str) -> str:
     return hashlib.md5(s.encode()).hexdigest()
 
@@ -45,7 +57,7 @@ def _enum_name(path: list[str], value: dict) -> str:
     except Exception:
         pass
 
-    cache_key = '-'.join(sorted(value["enum"]))
+    cache_key = _enum_cache_key(value["enum"])
     if cache_key in cache:
         return cache[cache_key]
 
@@ -56,7 +68,7 @@ def _enum_name(path: list[str], value: dict) -> str:
         raw += "_".join(path)
     final = re.sub(r"[^a-zA-Z0-9_]", "_", raw).upper()
     if len(final) > 200:
-        final =  "Enum_" + md5("-".join(sorted(value["enum"])))
+        final =  "Enum_" + md5(cache_key)
     cache[cache_key] = final
     return final
 
@@ -77,7 +89,7 @@ def _rec_extract_enums(schema: dict, path: list[str]) -> tuple[dict, dict[str, d
         if target in enums and 'enum' in enums[target]:
             existing = set(enums[target]['enum'])
             incoming = set(schema['enum'])
-            merged = sorted(existing.union(incoming))
+            merged = _sorted_enum_values(list(existing.union(incoming)))
             schema = dict(schema)
             schema['enum'] = merged
         enums[target] = schema
@@ -126,7 +138,7 @@ def _rec_extract_enums(schema: dict, path: list[str]) -> tuple[dict, dict[str, d
                     if target in enums and 'enum' in enums[target]:
                         existing = set(enums[target]['enum'])
                         incoming = set(value['enum'])
-                        merged = sorted(existing.union(incoming))
+                        merged = _sorted_enum_values(list(existing.union(incoming)))
                         value = dict(value)
                         value['enum'] = merged
                     enums[target] = value
@@ -155,6 +167,7 @@ with open(input_file, "r") as f:
         json.dumps(json.loads(f.read()))
         .replace("#/$defs/", "#/components/schemas/")
         .replace('"examples": [],', '')
+        .replace('"stability":', '"x-stability":')
     )
     consts = re.findall(r'"const": "([^"]+)",', raw)
     for const in consts:
@@ -244,7 +257,7 @@ for path, path_data in data["paths"].items():
                     if name in data["components"]["schemas"] and 'enum' in enum_schema:
                         existing_schema = data["components"]["schemas"][name]
                         if 'enum' in existing_schema:
-                            merged = sorted(set(existing_schema['enum']).union(set(enum_schema['enum'])))
+                            merged = _sorted_enum_values(list(set(existing_schema['enum']).union(set(enum_schema['enum']))))
                             existing_schema['enum'] = merged
                             data["components"]["schemas"][name] = existing_schema
                         else:
@@ -266,7 +279,7 @@ for path, path_data in data["paths"].items():
                     if name in data["components"]["schemas"] and 'enum' in enum_schema:
                         existing_schema = data["components"]["schemas"][name]
                         if 'enum' in existing_schema:
-                            merged = sorted(set(existing_schema['enum']).union(set(enum_schema['enum'])))
+                            merged = _sorted_enum_values(list(set(existing_schema['enum']).union(set(enum_schema['enum']))))
                             existing_schema['enum'] = merged
                             data["components"]["schemas"][name] = existing_schema
                         else:
@@ -300,7 +313,7 @@ for path, path_data in data["paths"].items():
                             if enum_name in data["components"]["schemas"] and 'enum' in enum_schema:
                                 existing_schema = data["components"]["schemas"][enum_name]
                                 if 'enum' in existing_schema:
-                                    merged = sorted(set(existing_schema['enum']).union(set(enum_schema['enum'])))
+                                    merged = _sorted_enum_values(list(set(existing_schema['enum']).union(set(enum_schema['enum']))))
                                     existing_schema['enum'] = merged
                                     data["components"]["schemas"][enum_name] = existing_schema
                                 else:

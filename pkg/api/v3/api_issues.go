@@ -29,7 +29,7 @@ type ApiGetIssueRequest struct {
 	issueId    string
 }
 
-func (r ApiGetIssueRequest) Execute() (*IssueDetailed, *http.Response, error) {
+func (r ApiGetIssueRequest) Execute() (*GetIssue200Response, *http.Response, error) {
 	return r.ApiService.GetIssueExecute(r)
 }
 
@@ -52,13 +52,13 @@ func (a *IssuesAPIService) GetIssue(ctx context.Context, issueId string) ApiGetI
 
 // Execute executes the request
 //
-//	@return IssueDetailed
-func (a *IssuesAPIService) GetIssueExecute(r ApiGetIssueRequest) (*IssueDetailed, *http.Response, error) {
+//	@return GetIssue200Response
+func (a *IssuesAPIService) GetIssueExecute(r ApiGetIssueRequest) (*GetIssue200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *IssueDetailed
+		localVarReturnValue *GetIssue200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IssuesAPIService.GetIssue")
