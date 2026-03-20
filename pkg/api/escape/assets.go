@@ -55,7 +55,7 @@ func ListAssets(ctx context.Context, next string, filters *ListAssetsFilters) ([
 }
 
 // GetAsset gets an asset by ID
-func GetAsset(ctx context.Context, id string) (*v3.AssetDetailed, error) {
+func GetAsset(ctx context.Context, id string) (*v3.GetAsset200Response, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)

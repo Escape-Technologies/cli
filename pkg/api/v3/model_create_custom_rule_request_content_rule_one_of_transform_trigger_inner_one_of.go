@@ -20,10 +20,10 @@ var _ MappedNullable = &CreateCustomRuleRequestContentRuleOneOfTransformTriggerI
 
 // CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf struct for CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf
 type CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf struct {
-	Is                   *ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS0PROPERTIESIS  `json:"is,omitempty"`
-	IsNot                *ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS0PROPERTIESIS  `json:"is_not,omitempty"`
-	In                   []ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS0PROPERTIESIS `json:"in,omitempty"`
-	If                   ENUMSCANTYPE                                                                                 `json:"if"`
+	Is                   *ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS0PROPERTIESIS       `json:"is,omitempty"`
+	IsNot                *ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS0PROPERTIESIS       `json:"is_not,omitempty"`
+	In                   []ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS0PROPERTIESINITEMS `json:"in,omitempty"`
+	If                   ENUMSCANTYPE                                                                                      `json:"if"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -112,9 +112,9 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf) SetI
 }
 
 // GetIn returns the In field value if set, zero value otherwise.
-func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf) GetIn() []ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS0PROPERTIESIS {
+func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf) GetIn() []ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS0PROPERTIESINITEMS {
 	if o == nil || IsNil(o.In) {
-		var ret []ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS0PROPERTIESIS
+		var ret []ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS0PROPERTIESINITEMS
 		return ret
 	}
 	return o.In
@@ -122,7 +122,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf) GetI
 
 // GetInOk returns a tuple with the In field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf) GetInOk() ([]ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS0PROPERTIESIS, bool) {
+func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf) GetInOk() ([]ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS0PROPERTIESINITEMS, bool) {
 	if o == nil || IsNil(o.In) {
 		return nil, false
 	}
@@ -138,8 +138,8 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf) HasI
 	return false
 }
 
-// SetIn gets a reference to the given []ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS0PROPERTIESIS and assigns it to the In field.
-func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf) SetIn(v []ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS0PROPERTIESIS) {
+// SetIn gets a reference to the given []ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS0PROPERTIESINITEMS and assigns it to the In field.
+func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf) SetIn(v []ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS0PROPERTIESINITEMS) {
 	o.In = v
 }
 

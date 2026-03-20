@@ -20,6 +20,7 @@ import (
 type CreateAssetCODEPROJECTRequestRepository struct {
 	CreateAssetCODEPROJECTRequestRepositoryOneOf  *CreateAssetCODEPROJECTRequestRepositoryOneOf
 	CreateAssetCODEPROJECTRequestRepositoryOneOf1 *CreateAssetCODEPROJECTRequestRepositoryOneOf1
+	CreateAssetCODEPROJECTRequestRepositoryOneOf2 *CreateAssetCODEPROJECTRequestRepositoryOneOf2
 }
 
 // CreateAssetCODEPROJECTRequestRepositoryOneOfAsCreateAssetCODEPROJECTRequestRepository is a convenience function that returns CreateAssetCODEPROJECTRequestRepositoryOneOf wrapped in CreateAssetCODEPROJECTRequestRepository
@@ -33,6 +34,13 @@ func CreateAssetCODEPROJECTRequestRepositoryOneOfAsCreateAssetCODEPROJECTRequest
 func CreateAssetCODEPROJECTRequestRepositoryOneOf1AsCreateAssetCODEPROJECTRequestRepository(v *CreateAssetCODEPROJECTRequestRepositoryOneOf1) CreateAssetCODEPROJECTRequestRepository {
 	return CreateAssetCODEPROJECTRequestRepository{
 		CreateAssetCODEPROJECTRequestRepositoryOneOf1: v,
+	}
+}
+
+// CreateAssetCODEPROJECTRequestRepositoryOneOf2AsCreateAssetCODEPROJECTRequestRepository is a convenience function that returns CreateAssetCODEPROJECTRequestRepositoryOneOf2 wrapped in CreateAssetCODEPROJECTRequestRepository
+func CreateAssetCODEPROJECTRequestRepositoryOneOf2AsCreateAssetCODEPROJECTRequestRepository(v *CreateAssetCODEPROJECTRequestRepositoryOneOf2) CreateAssetCODEPROJECTRequestRepository {
+	return CreateAssetCODEPROJECTRequestRepository{
+		CreateAssetCODEPROJECTRequestRepositoryOneOf2: v,
 	}
 }
 
@@ -74,10 +82,28 @@ func (dst *CreateAssetCODEPROJECTRequestRepository) UnmarshalJSON(data []byte) e
 		dst.CreateAssetCODEPROJECTRequestRepositoryOneOf1 = nil
 	}
 
+	// try to unmarshal data into CreateAssetCODEPROJECTRequestRepositoryOneOf2
+	err = newStrictDecoder(data).Decode(&dst.CreateAssetCODEPROJECTRequestRepositoryOneOf2)
+	if err == nil {
+		jsonCreateAssetCODEPROJECTRequestRepositoryOneOf2, _ := json.Marshal(dst.CreateAssetCODEPROJECTRequestRepositoryOneOf2)
+		if string(jsonCreateAssetCODEPROJECTRequestRepositoryOneOf2) == "{}" { // empty struct
+			dst.CreateAssetCODEPROJECTRequestRepositoryOneOf2 = nil
+		} else {
+			if err = validator.Validate(dst.CreateAssetCODEPROJECTRequestRepositoryOneOf2); err != nil {
+				dst.CreateAssetCODEPROJECTRequestRepositoryOneOf2 = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.CreateAssetCODEPROJECTRequestRepositoryOneOf2 = nil
+	}
+
 	if match > 1 { // more than 1 match
 		// reset to nil
 		dst.CreateAssetCODEPROJECTRequestRepositoryOneOf = nil
 		dst.CreateAssetCODEPROJECTRequestRepositoryOneOf1 = nil
+		dst.CreateAssetCODEPROJECTRequestRepositoryOneOf2 = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(CreateAssetCODEPROJECTRequestRepository)")
 	} else if match == 1 {
@@ -97,6 +123,10 @@ func (src CreateAssetCODEPROJECTRequestRepository) MarshalJSON() ([]byte, error)
 		return json.Marshal(&src.CreateAssetCODEPROJECTRequestRepositoryOneOf1)
 	}
 
+	if src.CreateAssetCODEPROJECTRequestRepositoryOneOf2 != nil {
+		return json.Marshal(&src.CreateAssetCODEPROJECTRequestRepositoryOneOf2)
+	}
+
 	return nil, nil // no data in oneOf schemas
 }
 
@@ -113,6 +143,10 @@ func (obj *CreateAssetCODEPROJECTRequestRepository) GetActualInstance() interfac
 		return obj.CreateAssetCODEPROJECTRequestRepositoryOneOf1
 	}
 
+	if obj.CreateAssetCODEPROJECTRequestRepositoryOneOf2 != nil {
+		return obj.CreateAssetCODEPROJECTRequestRepositoryOneOf2
+	}
+
 	// all schemas are nil
 	return nil
 }
@@ -125,6 +159,10 @@ func (obj CreateAssetCODEPROJECTRequestRepository) GetActualInstanceValue() inte
 
 	if obj.CreateAssetCODEPROJECTRequestRepositoryOneOf1 != nil {
 		return *obj.CreateAssetCODEPROJECTRequestRepositoryOneOf1
+	}
+
+	if obj.CreateAssetCODEPROJECTRequestRepositoryOneOf2 != nil {
+		return *obj.CreateAssetCODEPROJECTRequestRepositoryOneOf2
 	}
 
 	// all schemas are nil

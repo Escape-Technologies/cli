@@ -18,7 +18,7 @@ import (
 // checks if the AssetFrontendDetailed type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AssetFrontendDetailed{}
 
-// AssetFrontendDetailed Detailed information about an asset frontend
+// AssetFrontendDetailed The frontend of the asset
 type AssetFrontendDetailed struct {
 	Type                 ENUMWEBAPP                                                                       `json:"type"`
 	Url                  string                                                                           `json:"url"`

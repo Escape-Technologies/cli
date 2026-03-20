@@ -19,7 +19,7 @@ var _ MappedNullable = &CreateExportWorkflowActionUsingWizParameters{}
 
 // CreateExportWorkflowActionUsingWizParameters struct for CreateExportWorkflowActionUsingWizParameters
 type CreateExportWorkflowActionUsingWizParameters struct {
-	MinSeverity          *ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY `json:"minSeverity,omitempty"`
+	MinSeverity          *ENUMPROPERTIESACTIONSITEMS2PROPERTIESPARAMETERSPROPERTIESMINSEVERITY `json:"minSeverity,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -43,9 +43,9 @@ func NewCreateExportWorkflowActionUsingWizParametersWithDefaults() *CreateExport
 }
 
 // GetMinSeverity returns the MinSeverity field value if set, zero value otherwise.
-func (o *CreateExportWorkflowActionUsingWizParameters) GetMinSeverity() ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY {
+func (o *CreateExportWorkflowActionUsingWizParameters) GetMinSeverity() ENUMPROPERTIESACTIONSITEMS2PROPERTIESPARAMETERSPROPERTIESMINSEVERITY {
 	if o == nil || IsNil(o.MinSeverity) {
-		var ret ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY
+		var ret ENUMPROPERTIESACTIONSITEMS2PROPERTIESPARAMETERSPROPERTIESMINSEVERITY
 		return ret
 	}
 	return *o.MinSeverity
@@ -53,7 +53,7 @@ func (o *CreateExportWorkflowActionUsingWizParameters) GetMinSeverity() ENUMPROP
 
 // GetMinSeverityOk returns a tuple with the MinSeverity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateExportWorkflowActionUsingWizParameters) GetMinSeverityOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY, bool) {
+func (o *CreateExportWorkflowActionUsingWizParameters) GetMinSeverityOk() (*ENUMPROPERTIESACTIONSITEMS2PROPERTIESPARAMETERSPROPERTIESMINSEVERITY, bool) {
 	if o == nil || IsNil(o.MinSeverity) {
 		return nil, false
 	}
@@ -69,8 +69,8 @@ func (o *CreateExportWorkflowActionUsingWizParameters) HasMinSeverity() bool {
 	return false
 }
 
-// SetMinSeverity gets a reference to the given ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY and assigns it to the MinSeverity field.
-func (o *CreateExportWorkflowActionUsingWizParameters) SetMinSeverity(v ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY) {
+// SetMinSeverity gets a reference to the given ENUMPROPERTIESACTIONSITEMS2PROPERTIESPARAMETERSPROPERTIESMINSEVERITY and assigns it to the MinSeverity field.
+func (o *CreateExportWorkflowActionUsingWizParameters) SetMinSeverity(v ENUMPROPERTIESACTIONSITEMS2PROPERTIESPARAMETERSPROPERTIESMINSEVERITY) {
 	o.MinSeverity = &v
 }
 
