@@ -21,18 +21,18 @@ var _ MappedNullable = &CreateAssetCODEPROJECTRequest{}
 // CreateAssetCODEPROJECTRequest struct for CreateAssetCODEPROJECTRequest
 type CreateAssetCODEPROJECTRequest struct {
 	// The list of project IDs bind the asset on.
-	ProjectIds           []string                                      `json:"projectIds,omitempty"`
-	Name                 *string                                       `json:"name,omitempty"`
-	AssetClass           ENUMCODEPROJECT                               `json:"asset_class"`
-	ExtraMetadata        map[string]interface{}                        `json:"extra_metadata,omitempty"`
-	ScreenshotS3Key      *string                                       `json:"screenshot_s3_key,omitempty"`
-	AssetType            ENUMCODEPROJECT                               `json:"asset_type"`
-	Repository           CreateAssetCODEPROJECTRequestRepository       `json:"repository"`
-	Path                 string                                        `json:"path"`
-	Language             ENUMPROPERTIESLANGUAGE                        `json:"language"`
-	HttpUrlToProject     *string                                       `json:"http_url_to_project,omitempty"`
-	Owners               []CreateAssetCODEPROJECTRequestOwnersInner    `json:"owners,omitempty"`
-	LastCommit           *CreateAssetGITLABREPOSITORYRequestLastCommit `json:"last_commit,omitempty"`
+	ProjectIds []string `json:"projectIds,omitempty"`
+	Name *string `json:"name,omitempty"`
+	AssetClass ENUMCODEPROJECT `json:"asset_class"`
+	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
+	ScreenshotS3Key *string `json:"screenshot_s3_key,omitempty"`
+	AssetType ENUMCODEPROJECT `json:"asset_type"`
+	Repository CreateAssetCODEPROJECTRequestRepository `json:"repository"`
+	Path string `json:"path"`
+	Language ENUMPROPERTIESLANGUAGE `json:"language"`
+	HttpUrlToProject *string `json:"http_url_to_project,omitempty"`
+	Owners []CreateAssetCODEPROJECTRequestOwnersInner `json:"owners,omitempty"`
+	LastCommit *CreateAssetGITLABREPOSITORYRequestLastCommit `json:"last_commit,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -405,7 +405,7 @@ func (o *CreateAssetCODEPROJECTRequest) SetLastCommit(v CreateAssetGITLABREPOSIT
 }
 
 func (o CreateAssetCODEPROJECTRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -465,10 +465,10 @@ func (o *CreateAssetCODEPROJECTRequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -540,3 +540,5 @@ func (v *NullableCreateAssetCODEPROJECTRequest) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

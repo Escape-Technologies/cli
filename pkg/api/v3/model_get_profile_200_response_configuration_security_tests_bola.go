@@ -19,8 +19,8 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationSecurityTestsBola{}
 
 // GetProfile200ResponseConfigurationSecurityTestsBola struct for GetProfile200ResponseConfigurationSecurityTestsBola
 type GetProfile200ResponseConfigurationSecurityTestsBola struct {
-	Skip                 *bool    `json:"skip,omitempty"`
-	DoNotFuzz            []string `json:"do_not_fuzz,omitempty"`
+	Skip *bool `json:"skip,omitempty"`
+	DoNotFuzz []string `json:"do_not_fuzz,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -108,7 +108,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTestsBola) SetDoNotFuzz(v []s
 }
 
 func (o GetProfile200ResponseConfigurationSecurityTestsBola) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -188,3 +188,5 @@ func (v *NullableGetProfile200ResponseConfigurationSecurityTestsBola) UnmarshalJ
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

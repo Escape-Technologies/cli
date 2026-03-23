@@ -19,7 +19,7 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationSubdomainEnumeration{}
 
 // GetProfile200ResponseConfigurationSubdomainEnumeration struct for GetProfile200ResponseConfigurationSubdomainEnumeration
 type GetProfile200ResponseConfigurationSubdomainEnumeration struct {
-	Blocklist            []GetProfile200ResponseConfigurationSubdomainEnumerationBlocklistInner `json:"blocklist,omitempty"`
+	Blocklist []GetProfile200ResponseConfigurationSubdomainEnumerationBlocklistInner `json:"blocklist,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -75,7 +75,7 @@ func (o *GetProfile200ResponseConfigurationSubdomainEnumeration) SetBlocklist(v 
 }
 
 func (o GetProfile200ResponseConfigurationSubdomainEnumeration) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -151,3 +151,5 @@ func (v *NullableGetProfile200ResponseConfigurationSubdomainEnumeration) Unmarsh
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

@@ -20,13 +20,13 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationAuthenticationUsersInn
 
 // GetProfile200ResponseConfigurationAuthenticationUsersInner struct for GetProfile200ResponseConfigurationAuthenticationUsersInner
 type GetProfile200ResponseConfigurationAuthenticationUsersInner struct {
-	Name                 string                                                                     `json:"name"`
-	Role                 *string                                                                    `json:"role,omitempty"`
-	Credentials          *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentials     `json:"credentials,omitempty"`
-	Procedure            *string                                                                    `json:"procedure,omitempty"`
-	Variables            []GetProfile200ResponseConfigurationAuthenticationUsersInnerVariablesInner `json:"variables,omitempty"`
-	MainUser             *bool                                                                      `json:"main_user,omitempty"`
-	AllowFailure         *bool                                                                      `json:"allow_failure,omitempty"`
+	Name string `json:"name"`
+	Role *string `json:"role,omitempty"`
+	Credentials *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentials `json:"credentials,omitempty"`
+	Procedure *string `json:"procedure,omitempty"`
+	Variables []GetProfile200ResponseConfigurationAuthenticationUsersInnerVariablesInner `json:"variables,omitempty"`
+	MainUser *bool `json:"main_user,omitempty"`
+	AllowFailure *bool `json:"allow_failure,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -267,7 +267,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationUsersInner) SetAllowFai
 }
 
 func (o GetProfile200ResponseConfigurationAuthenticationUsersInner) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -316,10 +316,10 @@ func (o *GetProfile200ResponseConfigurationAuthenticationUsersInner) UnmarshalJS
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -386,3 +386,5 @@ func (v *NullableGetProfile200ResponseConfigurationAuthenticationUsersInner) Unm
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

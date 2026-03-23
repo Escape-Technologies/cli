@@ -25,11 +25,11 @@ type EventSummarized struct {
 	// The date and time the event was created
 	CreatedAt string `json:"createdAt"`
 	// The title of the event
-	Title string                                 `json:"title"`
+	Title string `json:"title"`
 	Level ENUMPROPERTIESDATAITEMSPROPERTIESLEVEL `json:"level"`
 	Stage ENUMPROPERTIESDATAITEMSPROPERTIESSTAGE `json:"stage"`
 	// The attachments of the event
-	Attachments          []EventSummarizedAttachmentsInner `json:"attachments,omitempty"`
+	Attachments []EventSummarizedAttachmentsInner `json:"attachments,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -210,7 +210,7 @@ func (o *EventSummarized) SetAttachments(v []EventSummarizedAttachmentsInner) {
 }
 
 func (o EventSummarized) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -252,10 +252,10 @@ func (o *EventSummarized) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -321,3 +321,5 @@ func (v *NullableEventSummarized) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

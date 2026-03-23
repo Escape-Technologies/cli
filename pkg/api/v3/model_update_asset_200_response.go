@@ -15,15 +15,15 @@ import (
 	"fmt"
 )
 
-// checks if the GetAsset200Response type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &GetAsset200Response{}
+// checks if the UpdateAsset200Response type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &UpdateAsset200Response{}
 
-// GetAsset200Response struct for GetAsset200Response
-type GetAsset200Response struct {
+// UpdateAsset200Response struct for UpdateAsset200Response
+type UpdateAsset200Response struct {
 	// The id of the asset
-	Id    string                                                `json:"id"`
+	Id string `json:"id"`
 	Class ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS `json:"class"`
-	Type  ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE  `json:"type"`
+	Type ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE `json:"type"`
 	// The name of the asset
 	Name string `json:"name"`
 	// The external url of the asset
@@ -37,29 +37,29 @@ type GetAsset200Response struct {
 	// The date and time the asset was last seen
 	LastSeenAt string `json:"lastSeenAt"`
 	// The date and time the asset is scheduled for deletion
-	ScheduledForDeletionAt *string                                                `json:"scheduledForDeletionAt,omitempty"`
-	Status                 ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS `json:"status"`
+	ScheduledForDeletionAt *string `json:"scheduledForDeletionAt,omitempty"`
+	Status ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS `json:"status"`
 	// The tags of the asset
 	Tags []Tag `json:"tags"`
 	// The risks of the asset
-	Risks                []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS `json:"risks"`
-	FirstSeenScan        *ScanSummarized                                              `json:"firstSeenScan,omitempty"`
-	LastSeenScan         *ScanSummarized1                                             `json:"lastSeenScan,omitempty"`
-	Service              *AssetServiceDetailed                                        `json:"service,omitempty"`
-	Frontend             *AssetFrontendDetailed                                       `json:"frontend,omitempty"`
-	Host                 *AssetHostDetailed                                           `json:"host,omitempty"`
-	Links                AssetDetailedLinks                                           `json:"links"`
+	Risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS `json:"risks"`
+	FirstSeenScan *ScanSummarized `json:"firstSeenScan,omitempty"`
+	LastSeenScan *ScanSummarized1 `json:"lastSeenScan,omitempty"`
+	Service *AssetServiceDetailed `json:"service,omitempty"`
+	Frontend *AssetFrontendDetailed `json:"frontend,omitempty"`
+	Host *AssetHostDetailed `json:"host,omitempty"`
+	Links AssetDetailedLinks `json:"links"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _GetAsset200Response GetAsset200Response
+type _UpdateAsset200Response UpdateAsset200Response
 
-// NewGetAsset200Response instantiates a new GetAsset200Response object
+// NewUpdateAsset200Response instantiates a new UpdateAsset200Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetAsset200Response(id string, class ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS, type_ ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE, name string, createdAt string, lastSeenAt string, status ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS, tags []Tag, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, links AssetDetailedLinks) *GetAsset200Response {
-	this := GetAsset200Response{}
+func NewUpdateAsset200Response(id string, class ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS, type_ ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE, name string, createdAt string, lastSeenAt string, status ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS, tags []Tag, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, links AssetDetailedLinks) *UpdateAsset200Response {
+	this := UpdateAsset200Response{}
 	this.Id = id
 	this.Class = class
 	this.Type = type_
@@ -73,16 +73,16 @@ func NewGetAsset200Response(id string, class ENUMPROPERTIESDATAITEMSPROPERTIESAS
 	return &this
 }
 
-// NewGetAsset200ResponseWithDefaults instantiates a new GetAsset200Response object
+// NewUpdateAsset200ResponseWithDefaults instantiates a new UpdateAsset200Response object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewGetAsset200ResponseWithDefaults() *GetAsset200Response {
-	this := GetAsset200Response{}
+func NewUpdateAsset200ResponseWithDefaults() *UpdateAsset200Response {
+	this := UpdateAsset200Response{}
 	return &this
 }
 
 // GetId returns the Id field value
-func (o *GetAsset200Response) GetId() string {
+func (o *UpdateAsset200Response) GetId() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -93,7 +93,7 @@ func (o *GetAsset200Response) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *GetAsset200Response) GetIdOk() (*string, bool) {
+func (o *UpdateAsset200Response) GetIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -101,12 +101,12 @@ func (o *GetAsset200Response) GetIdOk() (*string, bool) {
 }
 
 // SetId sets field value
-func (o *GetAsset200Response) SetId(v string) {
+func (o *UpdateAsset200Response) SetId(v string) {
 	o.Id = v
 }
 
 // GetClass returns the Class field value
-func (o *GetAsset200Response) GetClass() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS {
+func (o *UpdateAsset200Response) GetClass() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS {
 	if o == nil {
 		var ret ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS
 		return ret
@@ -117,7 +117,7 @@ func (o *GetAsset200Response) GetClass() ENUMPROPERTIESDATAITEMSPROPERTIESASSETP
 
 // GetClassOk returns a tuple with the Class field value
 // and a boolean to check if the value has been set.
-func (o *GetAsset200Response) GetClassOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS, bool) {
+func (o *UpdateAsset200Response) GetClassOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -125,12 +125,12 @@ func (o *GetAsset200Response) GetClassOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESAS
 }
 
 // SetClass sets field value
-func (o *GetAsset200Response) SetClass(v ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS) {
+func (o *UpdateAsset200Response) SetClass(v ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS) {
 	o.Class = v
 }
 
 // GetType returns the Type field value
-func (o *GetAsset200Response) GetType() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE {
+func (o *UpdateAsset200Response) GetType() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE {
 	if o == nil {
 		var ret ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE
 		return ret
@@ -141,7 +141,7 @@ func (o *GetAsset200Response) GetType() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPR
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *GetAsset200Response) GetTypeOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE, bool) {
+func (o *UpdateAsset200Response) GetTypeOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -149,12 +149,12 @@ func (o *GetAsset200Response) GetTypeOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASS
 }
 
 // SetType sets field value
-func (o *GetAsset200Response) SetType(v ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE) {
+func (o *UpdateAsset200Response) SetType(v ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE) {
 	o.Type = v
 }
 
 // GetName returns the Name field value
-func (o *GetAsset200Response) GetName() string {
+func (o *UpdateAsset200Response) GetName() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -165,7 +165,7 @@ func (o *GetAsset200Response) GetName() string {
 
 // GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
-func (o *GetAsset200Response) GetNameOk() (*string, bool) {
+func (o *UpdateAsset200Response) GetNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -173,12 +173,12 @@ func (o *GetAsset200Response) GetNameOk() (*string, bool) {
 }
 
 // SetName sets field value
-func (o *GetAsset200Response) SetName(v string) {
+func (o *UpdateAsset200Response) SetName(v string) {
 	o.Name = v
 }
 
 // GetExternalUrl returns the ExternalUrl field value if set, zero value otherwise.
-func (o *GetAsset200Response) GetExternalUrl() string {
+func (o *UpdateAsset200Response) GetExternalUrl() string {
 	if o == nil || IsNil(o.ExternalUrl) {
 		var ret string
 		return ret
@@ -188,7 +188,7 @@ func (o *GetAsset200Response) GetExternalUrl() string {
 
 // GetExternalUrlOk returns a tuple with the ExternalUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetAsset200Response) GetExternalUrlOk() (*string, bool) {
+func (o *UpdateAsset200Response) GetExternalUrlOk() (*string, bool) {
 	if o == nil || IsNil(o.ExternalUrl) {
 		return nil, false
 	}
@@ -196,7 +196,7 @@ func (o *GetAsset200Response) GetExternalUrlOk() (*string, bool) {
 }
 
 // HasExternalUrl returns a boolean if a field has been set.
-func (o *GetAsset200Response) HasExternalUrl() bool {
+func (o *UpdateAsset200Response) HasExternalUrl() bool {
 	if o != nil && !IsNil(o.ExternalUrl) {
 		return true
 	}
@@ -205,12 +205,12 @@ func (o *GetAsset200Response) HasExternalUrl() bool {
 }
 
 // SetExternalUrl gets a reference to the given string and assigns it to the ExternalUrl field.
-func (o *GetAsset200Response) SetExternalUrl(v string) {
+func (o *UpdateAsset200Response) SetExternalUrl(v string) {
 	o.ExternalUrl = &v
 }
 
 // GetFaviconUrl returns the FaviconUrl field value if set, zero value otherwise.
-func (o *GetAsset200Response) GetFaviconUrl() string {
+func (o *UpdateAsset200Response) GetFaviconUrl() string {
 	if o == nil || IsNil(o.FaviconUrl) {
 		var ret string
 		return ret
@@ -220,7 +220,7 @@ func (o *GetAsset200Response) GetFaviconUrl() string {
 
 // GetFaviconUrlOk returns a tuple with the FaviconUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetAsset200Response) GetFaviconUrlOk() (*string, bool) {
+func (o *UpdateAsset200Response) GetFaviconUrlOk() (*string, bool) {
 	if o == nil || IsNil(o.FaviconUrl) {
 		return nil, false
 	}
@@ -228,7 +228,7 @@ func (o *GetAsset200Response) GetFaviconUrlOk() (*string, bool) {
 }
 
 // HasFaviconUrl returns a boolean if a field has been set.
-func (o *GetAsset200Response) HasFaviconUrl() bool {
+func (o *UpdateAsset200Response) HasFaviconUrl() bool {
 	if o != nil && !IsNil(o.FaviconUrl) {
 		return true
 	}
@@ -237,12 +237,12 @@ func (o *GetAsset200Response) HasFaviconUrl() bool {
 }
 
 // SetFaviconUrl gets a reference to the given string and assigns it to the FaviconUrl field.
-func (o *GetAsset200Response) SetFaviconUrl(v string) {
+func (o *UpdateAsset200Response) SetFaviconUrl(v string) {
 	o.FaviconUrl = &v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
-func (o *GetAsset200Response) GetDescription() string {
+func (o *UpdateAsset200Response) GetDescription() string {
 	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
@@ -252,7 +252,7 @@ func (o *GetAsset200Response) GetDescription() string {
 
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetAsset200Response) GetDescriptionOk() (*string, bool) {
+func (o *UpdateAsset200Response) GetDescriptionOk() (*string, bool) {
 	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
@@ -260,7 +260,7 @@ func (o *GetAsset200Response) GetDescriptionOk() (*string, bool) {
 }
 
 // HasDescription returns a boolean if a field has been set.
-func (o *GetAsset200Response) HasDescription() bool {
+func (o *UpdateAsset200Response) HasDescription() bool {
 	if o != nil && !IsNil(o.Description) {
 		return true
 	}
@@ -269,12 +269,12 @@ func (o *GetAsset200Response) HasDescription() bool {
 }
 
 // SetDescription gets a reference to the given string and assigns it to the Description field.
-func (o *GetAsset200Response) SetDescription(v string) {
+func (o *UpdateAsset200Response) SetDescription(v string) {
 	o.Description = &v
 }
 
 // GetCreatedAt returns the CreatedAt field value
-func (o *GetAsset200Response) GetCreatedAt() string {
+func (o *UpdateAsset200Response) GetCreatedAt() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -285,7 +285,7 @@ func (o *GetAsset200Response) GetCreatedAt() string {
 
 // GetCreatedAtOk returns a tuple with the CreatedAt field value
 // and a boolean to check if the value has been set.
-func (o *GetAsset200Response) GetCreatedAtOk() (*string, bool) {
+func (o *UpdateAsset200Response) GetCreatedAtOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -293,12 +293,12 @@ func (o *GetAsset200Response) GetCreatedAtOk() (*string, bool) {
 }
 
 // SetCreatedAt sets field value
-func (o *GetAsset200Response) SetCreatedAt(v string) {
+func (o *UpdateAsset200Response) SetCreatedAt(v string) {
 	o.CreatedAt = v
 }
 
 // GetLastSeenAt returns the LastSeenAt field value
-func (o *GetAsset200Response) GetLastSeenAt() string {
+func (o *UpdateAsset200Response) GetLastSeenAt() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -309,7 +309,7 @@ func (o *GetAsset200Response) GetLastSeenAt() string {
 
 // GetLastSeenAtOk returns a tuple with the LastSeenAt field value
 // and a boolean to check if the value has been set.
-func (o *GetAsset200Response) GetLastSeenAtOk() (*string, bool) {
+func (o *UpdateAsset200Response) GetLastSeenAtOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -317,12 +317,12 @@ func (o *GetAsset200Response) GetLastSeenAtOk() (*string, bool) {
 }
 
 // SetLastSeenAt sets field value
-func (o *GetAsset200Response) SetLastSeenAt(v string) {
+func (o *UpdateAsset200Response) SetLastSeenAt(v string) {
 	o.LastSeenAt = v
 }
 
 // GetScheduledForDeletionAt returns the ScheduledForDeletionAt field value if set, zero value otherwise.
-func (o *GetAsset200Response) GetScheduledForDeletionAt() string {
+func (o *UpdateAsset200Response) GetScheduledForDeletionAt() string {
 	if o == nil || IsNil(o.ScheduledForDeletionAt) {
 		var ret string
 		return ret
@@ -332,7 +332,7 @@ func (o *GetAsset200Response) GetScheduledForDeletionAt() string {
 
 // GetScheduledForDeletionAtOk returns a tuple with the ScheduledForDeletionAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetAsset200Response) GetScheduledForDeletionAtOk() (*string, bool) {
+func (o *UpdateAsset200Response) GetScheduledForDeletionAtOk() (*string, bool) {
 	if o == nil || IsNil(o.ScheduledForDeletionAt) {
 		return nil, false
 	}
@@ -340,7 +340,7 @@ func (o *GetAsset200Response) GetScheduledForDeletionAtOk() (*string, bool) {
 }
 
 // HasScheduledForDeletionAt returns a boolean if a field has been set.
-func (o *GetAsset200Response) HasScheduledForDeletionAt() bool {
+func (o *UpdateAsset200Response) HasScheduledForDeletionAt() bool {
 	if o != nil && !IsNil(o.ScheduledForDeletionAt) {
 		return true
 	}
@@ -349,12 +349,12 @@ func (o *GetAsset200Response) HasScheduledForDeletionAt() bool {
 }
 
 // SetScheduledForDeletionAt gets a reference to the given string and assigns it to the ScheduledForDeletionAt field.
-func (o *GetAsset200Response) SetScheduledForDeletionAt(v string) {
+func (o *UpdateAsset200Response) SetScheduledForDeletionAt(v string) {
 	o.ScheduledForDeletionAt = &v
 }
 
 // GetStatus returns the Status field value
-func (o *GetAsset200Response) GetStatus() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS {
+func (o *UpdateAsset200Response) GetStatus() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS {
 	if o == nil {
 		var ret ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS
 		return ret
@@ -365,7 +365,7 @@ func (o *GetAsset200Response) GetStatus() ENUMPROPERTIESDATAITEMSPROPERTIESASSET
 
 // GetStatusOk returns a tuple with the Status field value
 // and a boolean to check if the value has been set.
-func (o *GetAsset200Response) GetStatusOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS, bool) {
+func (o *UpdateAsset200Response) GetStatusOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -373,12 +373,12 @@ func (o *GetAsset200Response) GetStatusOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESA
 }
 
 // SetStatus sets field value
-func (o *GetAsset200Response) SetStatus(v ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS) {
+func (o *UpdateAsset200Response) SetStatus(v ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS) {
 	o.Status = v
 }
 
 // GetTags returns the Tags field value
-func (o *GetAsset200Response) GetTags() []Tag {
+func (o *UpdateAsset200Response) GetTags() []Tag {
 	if o == nil {
 		var ret []Tag
 		return ret
@@ -389,7 +389,7 @@ func (o *GetAsset200Response) GetTags() []Tag {
 
 // GetTagsOk returns a tuple with the Tags field value
 // and a boolean to check if the value has been set.
-func (o *GetAsset200Response) GetTagsOk() ([]Tag, bool) {
+func (o *UpdateAsset200Response) GetTagsOk() ([]Tag, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -397,12 +397,12 @@ func (o *GetAsset200Response) GetTagsOk() ([]Tag, bool) {
 }
 
 // SetTags sets field value
-func (o *GetAsset200Response) SetTags(v []Tag) {
+func (o *UpdateAsset200Response) SetTags(v []Tag) {
 	o.Tags = v
 }
 
 // GetRisks returns the Risks field value
-func (o *GetAsset200Response) GetRisks() []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS {
+func (o *UpdateAsset200Response) GetRisks() []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS {
 	if o == nil {
 		var ret []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS
 		return ret
@@ -413,7 +413,7 @@ func (o *GetAsset200Response) GetRisks() []ENUMPROPERTIESDATAITEMSPROPERTIESASSE
 
 // GetRisksOk returns a tuple with the Risks field value
 // and a boolean to check if the value has been set.
-func (o *GetAsset200Response) GetRisksOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, bool) {
+func (o *UpdateAsset200Response) GetRisksOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -421,12 +421,12 @@ func (o *GetAsset200Response) GetRisksOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESA
 }
 
 // SetRisks sets field value
-func (o *GetAsset200Response) SetRisks(v []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS) {
+func (o *UpdateAsset200Response) SetRisks(v []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS) {
 	o.Risks = v
 }
 
 // GetFirstSeenScan returns the FirstSeenScan field value if set, zero value otherwise.
-func (o *GetAsset200Response) GetFirstSeenScan() ScanSummarized {
+func (o *UpdateAsset200Response) GetFirstSeenScan() ScanSummarized {
 	if o == nil || IsNil(o.FirstSeenScan) {
 		var ret ScanSummarized
 		return ret
@@ -436,7 +436,7 @@ func (o *GetAsset200Response) GetFirstSeenScan() ScanSummarized {
 
 // GetFirstSeenScanOk returns a tuple with the FirstSeenScan field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetAsset200Response) GetFirstSeenScanOk() (*ScanSummarized, bool) {
+func (o *UpdateAsset200Response) GetFirstSeenScanOk() (*ScanSummarized, bool) {
 	if o == nil || IsNil(o.FirstSeenScan) {
 		return nil, false
 	}
@@ -444,7 +444,7 @@ func (o *GetAsset200Response) GetFirstSeenScanOk() (*ScanSummarized, bool) {
 }
 
 // HasFirstSeenScan returns a boolean if a field has been set.
-func (o *GetAsset200Response) HasFirstSeenScan() bool {
+func (o *UpdateAsset200Response) HasFirstSeenScan() bool {
 	if o != nil && !IsNil(o.FirstSeenScan) {
 		return true
 	}
@@ -453,12 +453,12 @@ func (o *GetAsset200Response) HasFirstSeenScan() bool {
 }
 
 // SetFirstSeenScan gets a reference to the given ScanSummarized and assigns it to the FirstSeenScan field.
-func (o *GetAsset200Response) SetFirstSeenScan(v ScanSummarized) {
+func (o *UpdateAsset200Response) SetFirstSeenScan(v ScanSummarized) {
 	o.FirstSeenScan = &v
 }
 
 // GetLastSeenScan returns the LastSeenScan field value if set, zero value otherwise.
-func (o *GetAsset200Response) GetLastSeenScan() ScanSummarized1 {
+func (o *UpdateAsset200Response) GetLastSeenScan() ScanSummarized1 {
 	if o == nil || IsNil(o.LastSeenScan) {
 		var ret ScanSummarized1
 		return ret
@@ -468,7 +468,7 @@ func (o *GetAsset200Response) GetLastSeenScan() ScanSummarized1 {
 
 // GetLastSeenScanOk returns a tuple with the LastSeenScan field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetAsset200Response) GetLastSeenScanOk() (*ScanSummarized1, bool) {
+func (o *UpdateAsset200Response) GetLastSeenScanOk() (*ScanSummarized1, bool) {
 	if o == nil || IsNil(o.LastSeenScan) {
 		return nil, false
 	}
@@ -476,7 +476,7 @@ func (o *GetAsset200Response) GetLastSeenScanOk() (*ScanSummarized1, bool) {
 }
 
 // HasLastSeenScan returns a boolean if a field has been set.
-func (o *GetAsset200Response) HasLastSeenScan() bool {
+func (o *UpdateAsset200Response) HasLastSeenScan() bool {
 	if o != nil && !IsNil(o.LastSeenScan) {
 		return true
 	}
@@ -485,12 +485,12 @@ func (o *GetAsset200Response) HasLastSeenScan() bool {
 }
 
 // SetLastSeenScan gets a reference to the given ScanSummarized1 and assigns it to the LastSeenScan field.
-func (o *GetAsset200Response) SetLastSeenScan(v ScanSummarized1) {
+func (o *UpdateAsset200Response) SetLastSeenScan(v ScanSummarized1) {
 	o.LastSeenScan = &v
 }
 
 // GetService returns the Service field value if set, zero value otherwise.
-func (o *GetAsset200Response) GetService() AssetServiceDetailed {
+func (o *UpdateAsset200Response) GetService() AssetServiceDetailed {
 	if o == nil || IsNil(o.Service) {
 		var ret AssetServiceDetailed
 		return ret
@@ -500,7 +500,7 @@ func (o *GetAsset200Response) GetService() AssetServiceDetailed {
 
 // GetServiceOk returns a tuple with the Service field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetAsset200Response) GetServiceOk() (*AssetServiceDetailed, bool) {
+func (o *UpdateAsset200Response) GetServiceOk() (*AssetServiceDetailed, bool) {
 	if o == nil || IsNil(o.Service) {
 		return nil, false
 	}
@@ -508,7 +508,7 @@ func (o *GetAsset200Response) GetServiceOk() (*AssetServiceDetailed, bool) {
 }
 
 // HasService returns a boolean if a field has been set.
-func (o *GetAsset200Response) HasService() bool {
+func (o *UpdateAsset200Response) HasService() bool {
 	if o != nil && !IsNil(o.Service) {
 		return true
 	}
@@ -517,12 +517,12 @@ func (o *GetAsset200Response) HasService() bool {
 }
 
 // SetService gets a reference to the given AssetServiceDetailed and assigns it to the Service field.
-func (o *GetAsset200Response) SetService(v AssetServiceDetailed) {
+func (o *UpdateAsset200Response) SetService(v AssetServiceDetailed) {
 	o.Service = &v
 }
 
 // GetFrontend returns the Frontend field value if set, zero value otherwise.
-func (o *GetAsset200Response) GetFrontend() AssetFrontendDetailed {
+func (o *UpdateAsset200Response) GetFrontend() AssetFrontendDetailed {
 	if o == nil || IsNil(o.Frontend) {
 		var ret AssetFrontendDetailed
 		return ret
@@ -532,7 +532,7 @@ func (o *GetAsset200Response) GetFrontend() AssetFrontendDetailed {
 
 // GetFrontendOk returns a tuple with the Frontend field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetAsset200Response) GetFrontendOk() (*AssetFrontendDetailed, bool) {
+func (o *UpdateAsset200Response) GetFrontendOk() (*AssetFrontendDetailed, bool) {
 	if o == nil || IsNil(o.Frontend) {
 		return nil, false
 	}
@@ -540,7 +540,7 @@ func (o *GetAsset200Response) GetFrontendOk() (*AssetFrontendDetailed, bool) {
 }
 
 // HasFrontend returns a boolean if a field has been set.
-func (o *GetAsset200Response) HasFrontend() bool {
+func (o *UpdateAsset200Response) HasFrontend() bool {
 	if o != nil && !IsNil(o.Frontend) {
 		return true
 	}
@@ -549,12 +549,12 @@ func (o *GetAsset200Response) HasFrontend() bool {
 }
 
 // SetFrontend gets a reference to the given AssetFrontendDetailed and assigns it to the Frontend field.
-func (o *GetAsset200Response) SetFrontend(v AssetFrontendDetailed) {
+func (o *UpdateAsset200Response) SetFrontend(v AssetFrontendDetailed) {
 	o.Frontend = &v
 }
 
 // GetHost returns the Host field value if set, zero value otherwise.
-func (o *GetAsset200Response) GetHost() AssetHostDetailed {
+func (o *UpdateAsset200Response) GetHost() AssetHostDetailed {
 	if o == nil || IsNil(o.Host) {
 		var ret AssetHostDetailed
 		return ret
@@ -564,7 +564,7 @@ func (o *GetAsset200Response) GetHost() AssetHostDetailed {
 
 // GetHostOk returns a tuple with the Host field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetAsset200Response) GetHostOk() (*AssetHostDetailed, bool) {
+func (o *UpdateAsset200Response) GetHostOk() (*AssetHostDetailed, bool) {
 	if o == nil || IsNil(o.Host) {
 		return nil, false
 	}
@@ -572,7 +572,7 @@ func (o *GetAsset200Response) GetHostOk() (*AssetHostDetailed, bool) {
 }
 
 // HasHost returns a boolean if a field has been set.
-func (o *GetAsset200Response) HasHost() bool {
+func (o *UpdateAsset200Response) HasHost() bool {
 	if o != nil && !IsNil(o.Host) {
 		return true
 	}
@@ -581,12 +581,12 @@ func (o *GetAsset200Response) HasHost() bool {
 }
 
 // SetHost gets a reference to the given AssetHostDetailed and assigns it to the Host field.
-func (o *GetAsset200Response) SetHost(v AssetHostDetailed) {
+func (o *UpdateAsset200Response) SetHost(v AssetHostDetailed) {
 	o.Host = &v
 }
 
 // GetLinks returns the Links field value
-func (o *GetAsset200Response) GetLinks() AssetDetailedLinks {
+func (o *UpdateAsset200Response) GetLinks() AssetDetailedLinks {
 	if o == nil {
 		var ret AssetDetailedLinks
 		return ret
@@ -597,7 +597,7 @@ func (o *GetAsset200Response) GetLinks() AssetDetailedLinks {
 
 // GetLinksOk returns a tuple with the Links field value
 // and a boolean to check if the value has been set.
-func (o *GetAsset200Response) GetLinksOk() (*AssetDetailedLinks, bool) {
+func (o *UpdateAsset200Response) GetLinksOk() (*AssetDetailedLinks, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -605,19 +605,19 @@ func (o *GetAsset200Response) GetLinksOk() (*AssetDetailedLinks, bool) {
 }
 
 // SetLinks sets field value
-func (o *GetAsset200Response) SetLinks(v AssetDetailedLinks) {
+func (o *UpdateAsset200Response) SetLinks(v AssetDetailedLinks) {
 	o.Links = v
 }
 
-func (o GetAsset200Response) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+func (o UpdateAsset200Response) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
 }
 
-func (o GetAsset200Response) ToMap() (map[string]interface{}, error) {
+func (o UpdateAsset200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["class"] = o.Class
@@ -664,7 +664,7 @@ func (o GetAsset200Response) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *GetAsset200Response) UnmarshalJSON(data []byte) (err error) {
+func (o *UpdateAsset200Response) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -686,24 +686,24 @@ func (o *GetAsset200Response) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
 	}
 
-	varGetAsset200Response := _GetAsset200Response{}
+	varUpdateAsset200Response := _UpdateAsset200Response{}
 
-	err = json.Unmarshal(data, &varGetAsset200Response)
+	err = json.Unmarshal(data, &varUpdateAsset200Response)
 
 	if err != nil {
 		return err
 	}
 
-	*o = GetAsset200Response(varGetAsset200Response)
+	*o = UpdateAsset200Response(varUpdateAsset200Response)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -733,38 +733,40 @@ func (o *GetAsset200Response) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableGetAsset200Response struct {
-	value *GetAsset200Response
+type NullableUpdateAsset200Response struct {
+	value *UpdateAsset200Response
 	isSet bool
 }
 
-func (v NullableGetAsset200Response) Get() *GetAsset200Response {
+func (v NullableUpdateAsset200Response) Get() *UpdateAsset200Response {
 	return v.value
 }
 
-func (v *NullableGetAsset200Response) Set(val *GetAsset200Response) {
+func (v *NullableUpdateAsset200Response) Set(val *UpdateAsset200Response) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableGetAsset200Response) IsSet() bool {
+func (v NullableUpdateAsset200Response) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableGetAsset200Response) Unset() {
+func (v *NullableUpdateAsset200Response) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableGetAsset200Response(val *GetAsset200Response) *NullableGetAsset200Response {
-	return &NullableGetAsset200Response{value: val, isSet: true}
+func NewNullableUpdateAsset200Response(val *UpdateAsset200Response) *NullableUpdateAsset200Response {
+	return &NullableUpdateAsset200Response{value: val, isSet: true}
 }
 
-func (v NullableGetAsset200Response) MarshalJSON() ([]byte, error) {
+func (v NullableUpdateAsset200Response) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableGetAsset200Response) UnmarshalJSON(src []byte) error {
+func (v *NullableUpdateAsset200Response) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

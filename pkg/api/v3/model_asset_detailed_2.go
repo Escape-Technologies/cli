@@ -15,11 +15,11 @@ import (
 	"fmt"
 )
 
-// checks if the AssetSummarized1 type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &AssetSummarized1{}
+// checks if the AssetDetailed2 type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AssetDetailed2{}
 
-// AssetSummarized1 The asset of the issue
-type AssetSummarized1 struct {
+// AssetDetailed2 The asset of the issue
+type AssetDetailed2 struct {
 	// The id of the asset
 	Id string `json:"id"`
 	Class ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS `json:"class"`
@@ -30,6 +30,8 @@ type AssetSummarized1 struct {
 	ExternalUrl *string `json:"externalUrl,omitempty"`
 	// The favicon url of the asset
 	FaviconUrl *string `json:"faviconUrl,omitempty"`
+	// The description of the asset
+	Description *string `json:"description,omitempty"`
 	// The date and time the asset was created
 	CreatedAt string `json:"createdAt"`
 	// The date and time the asset was last seen
@@ -41,21 +43,23 @@ type AssetSummarized1 struct {
 	Tags []Tag `json:"tags"`
 	// The risks of the asset
 	Risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS `json:"risks"`
-	Service *AssetServiceSummarized `json:"service,omitempty"`
-	Frontend *AssetFrontendSummarized `json:"frontend,omitempty"`
-	Host *AssetHostSummarized `json:"host,omitempty"`
+	FirstSeenScan *ScanSummarized `json:"firstSeenScan,omitempty"`
+	LastSeenScan *ScanSummarized1 `json:"lastSeenScan,omitempty"`
+	Service *AssetServiceDetailed `json:"service,omitempty"`
+	Frontend *AssetFrontendDetailed `json:"frontend,omitempty"`
+	Host *AssetHostDetailed `json:"host,omitempty"`
 	Links AssetDetailedLinks `json:"links"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _AssetSummarized1 AssetSummarized1
+type _AssetDetailed2 AssetDetailed2
 
-// NewAssetSummarized1 instantiates a new AssetSummarized1 object
+// NewAssetDetailed2 instantiates a new AssetDetailed2 object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAssetSummarized1(id string, class ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS, type_ ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE, name string, createdAt string, lastSeenAt string, status ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS, tags []Tag, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, links AssetDetailedLinks) *AssetSummarized1 {
-	this := AssetSummarized1{}
+func NewAssetDetailed2(id string, class ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS, type_ ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE, name string, createdAt string, lastSeenAt string, status ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS, tags []Tag, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, links AssetDetailedLinks) *AssetDetailed2 {
+	this := AssetDetailed2{}
 	this.Id = id
 	this.Class = class
 	this.Type = type_
@@ -69,16 +73,16 @@ func NewAssetSummarized1(id string, class ENUMPROPERTIESDATAITEMSPROPERTIESASSET
 	return &this
 }
 
-// NewAssetSummarized1WithDefaults instantiates a new AssetSummarized1 object
+// NewAssetDetailed2WithDefaults instantiates a new AssetDetailed2 object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewAssetSummarized1WithDefaults() *AssetSummarized1 {
-	this := AssetSummarized1{}
+func NewAssetDetailed2WithDefaults() *AssetDetailed2 {
+	this := AssetDetailed2{}
 	return &this
 }
 
 // GetId returns the Id field value
-func (o *AssetSummarized1) GetId() string {
+func (o *AssetDetailed2) GetId() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -89,7 +93,7 @@ func (o *AssetSummarized1) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *AssetSummarized1) GetIdOk() (*string, bool) {
+func (o *AssetDetailed2) GetIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -97,12 +101,12 @@ func (o *AssetSummarized1) GetIdOk() (*string, bool) {
 }
 
 // SetId sets field value
-func (o *AssetSummarized1) SetId(v string) {
+func (o *AssetDetailed2) SetId(v string) {
 	o.Id = v
 }
 
 // GetClass returns the Class field value
-func (o *AssetSummarized1) GetClass() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS {
+func (o *AssetDetailed2) GetClass() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS {
 	if o == nil {
 		var ret ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS
 		return ret
@@ -113,7 +117,7 @@ func (o *AssetSummarized1) GetClass() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROP
 
 // GetClassOk returns a tuple with the Class field value
 // and a boolean to check if the value has been set.
-func (o *AssetSummarized1) GetClassOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS, bool) {
+func (o *AssetDetailed2) GetClassOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -121,12 +125,12 @@ func (o *AssetSummarized1) GetClassOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSET
 }
 
 // SetClass sets field value
-func (o *AssetSummarized1) SetClass(v ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS) {
+func (o *AssetDetailed2) SetClass(v ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS) {
 	o.Class = v
 }
 
 // GetType returns the Type field value
-func (o *AssetSummarized1) GetType() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE {
+func (o *AssetDetailed2) GetType() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE {
 	if o == nil {
 		var ret ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE
 		return ret
@@ -137,7 +141,7 @@ func (o *AssetSummarized1) GetType() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPE
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *AssetSummarized1) GetTypeOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE, bool) {
+func (o *AssetDetailed2) GetTypeOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -145,12 +149,12 @@ func (o *AssetSummarized1) GetTypeOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSETP
 }
 
 // SetType sets field value
-func (o *AssetSummarized1) SetType(v ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE) {
+func (o *AssetDetailed2) SetType(v ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE) {
 	o.Type = v
 }
 
 // GetName returns the Name field value
-func (o *AssetSummarized1) GetName() string {
+func (o *AssetDetailed2) GetName() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -161,7 +165,7 @@ func (o *AssetSummarized1) GetName() string {
 
 // GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
-func (o *AssetSummarized1) GetNameOk() (*string, bool) {
+func (o *AssetDetailed2) GetNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -169,12 +173,12 @@ func (o *AssetSummarized1) GetNameOk() (*string, bool) {
 }
 
 // SetName sets field value
-func (o *AssetSummarized1) SetName(v string) {
+func (o *AssetDetailed2) SetName(v string) {
 	o.Name = v
 }
 
 // GetExternalUrl returns the ExternalUrl field value if set, zero value otherwise.
-func (o *AssetSummarized1) GetExternalUrl() string {
+func (o *AssetDetailed2) GetExternalUrl() string {
 	if o == nil || IsNil(o.ExternalUrl) {
 		var ret string
 		return ret
@@ -184,7 +188,7 @@ func (o *AssetSummarized1) GetExternalUrl() string {
 
 // GetExternalUrlOk returns a tuple with the ExternalUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AssetSummarized1) GetExternalUrlOk() (*string, bool) {
+func (o *AssetDetailed2) GetExternalUrlOk() (*string, bool) {
 	if o == nil || IsNil(o.ExternalUrl) {
 		return nil, false
 	}
@@ -192,7 +196,7 @@ func (o *AssetSummarized1) GetExternalUrlOk() (*string, bool) {
 }
 
 // HasExternalUrl returns a boolean if a field has been set.
-func (o *AssetSummarized1) HasExternalUrl() bool {
+func (o *AssetDetailed2) HasExternalUrl() bool {
 	if o != nil && !IsNil(o.ExternalUrl) {
 		return true
 	}
@@ -201,12 +205,12 @@ func (o *AssetSummarized1) HasExternalUrl() bool {
 }
 
 // SetExternalUrl gets a reference to the given string and assigns it to the ExternalUrl field.
-func (o *AssetSummarized1) SetExternalUrl(v string) {
+func (o *AssetDetailed2) SetExternalUrl(v string) {
 	o.ExternalUrl = &v
 }
 
 // GetFaviconUrl returns the FaviconUrl field value if set, zero value otherwise.
-func (o *AssetSummarized1) GetFaviconUrl() string {
+func (o *AssetDetailed2) GetFaviconUrl() string {
 	if o == nil || IsNil(o.FaviconUrl) {
 		var ret string
 		return ret
@@ -216,7 +220,7 @@ func (o *AssetSummarized1) GetFaviconUrl() string {
 
 // GetFaviconUrlOk returns a tuple with the FaviconUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AssetSummarized1) GetFaviconUrlOk() (*string, bool) {
+func (o *AssetDetailed2) GetFaviconUrlOk() (*string, bool) {
 	if o == nil || IsNil(o.FaviconUrl) {
 		return nil, false
 	}
@@ -224,7 +228,7 @@ func (o *AssetSummarized1) GetFaviconUrlOk() (*string, bool) {
 }
 
 // HasFaviconUrl returns a boolean if a field has been set.
-func (o *AssetSummarized1) HasFaviconUrl() bool {
+func (o *AssetDetailed2) HasFaviconUrl() bool {
 	if o != nil && !IsNil(o.FaviconUrl) {
 		return true
 	}
@@ -233,12 +237,44 @@ func (o *AssetSummarized1) HasFaviconUrl() bool {
 }
 
 // SetFaviconUrl gets a reference to the given string and assigns it to the FaviconUrl field.
-func (o *AssetSummarized1) SetFaviconUrl(v string) {
+func (o *AssetDetailed2) SetFaviconUrl(v string) {
 	o.FaviconUrl = &v
 }
 
+// GetDescription returns the Description field value if set, zero value otherwise.
+func (o *AssetDetailed2) GetDescription() string {
+	if o == nil || IsNil(o.Description) {
+		var ret string
+		return ret
+	}
+	return *o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AssetDetailed2) GetDescriptionOk() (*string, bool) {
+	if o == nil || IsNil(o.Description) {
+		return nil, false
+	}
+	return o.Description, true
+}
+
+// HasDescription returns a boolean if a field has been set.
+func (o *AssetDetailed2) HasDescription() bool {
+	if o != nil && !IsNil(o.Description) {
+		return true
+	}
+
+	return false
+}
+
+// SetDescription gets a reference to the given string and assigns it to the Description field.
+func (o *AssetDetailed2) SetDescription(v string) {
+	o.Description = &v
+}
+
 // GetCreatedAt returns the CreatedAt field value
-func (o *AssetSummarized1) GetCreatedAt() string {
+func (o *AssetDetailed2) GetCreatedAt() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -249,7 +285,7 @@ func (o *AssetSummarized1) GetCreatedAt() string {
 
 // GetCreatedAtOk returns a tuple with the CreatedAt field value
 // and a boolean to check if the value has been set.
-func (o *AssetSummarized1) GetCreatedAtOk() (*string, bool) {
+func (o *AssetDetailed2) GetCreatedAtOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -257,12 +293,12 @@ func (o *AssetSummarized1) GetCreatedAtOk() (*string, bool) {
 }
 
 // SetCreatedAt sets field value
-func (o *AssetSummarized1) SetCreatedAt(v string) {
+func (o *AssetDetailed2) SetCreatedAt(v string) {
 	o.CreatedAt = v
 }
 
 // GetLastSeenAt returns the LastSeenAt field value
-func (o *AssetSummarized1) GetLastSeenAt() string {
+func (o *AssetDetailed2) GetLastSeenAt() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -273,7 +309,7 @@ func (o *AssetSummarized1) GetLastSeenAt() string {
 
 // GetLastSeenAtOk returns a tuple with the LastSeenAt field value
 // and a boolean to check if the value has been set.
-func (o *AssetSummarized1) GetLastSeenAtOk() (*string, bool) {
+func (o *AssetDetailed2) GetLastSeenAtOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -281,12 +317,12 @@ func (o *AssetSummarized1) GetLastSeenAtOk() (*string, bool) {
 }
 
 // SetLastSeenAt sets field value
-func (o *AssetSummarized1) SetLastSeenAt(v string) {
+func (o *AssetDetailed2) SetLastSeenAt(v string) {
 	o.LastSeenAt = v
 }
 
 // GetScheduledForDeletionAt returns the ScheduledForDeletionAt field value if set, zero value otherwise.
-func (o *AssetSummarized1) GetScheduledForDeletionAt() string {
+func (o *AssetDetailed2) GetScheduledForDeletionAt() string {
 	if o == nil || IsNil(o.ScheduledForDeletionAt) {
 		var ret string
 		return ret
@@ -296,7 +332,7 @@ func (o *AssetSummarized1) GetScheduledForDeletionAt() string {
 
 // GetScheduledForDeletionAtOk returns a tuple with the ScheduledForDeletionAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AssetSummarized1) GetScheduledForDeletionAtOk() (*string, bool) {
+func (o *AssetDetailed2) GetScheduledForDeletionAtOk() (*string, bool) {
 	if o == nil || IsNil(o.ScheduledForDeletionAt) {
 		return nil, false
 	}
@@ -304,7 +340,7 @@ func (o *AssetSummarized1) GetScheduledForDeletionAtOk() (*string, bool) {
 }
 
 // HasScheduledForDeletionAt returns a boolean if a field has been set.
-func (o *AssetSummarized1) HasScheduledForDeletionAt() bool {
+func (o *AssetDetailed2) HasScheduledForDeletionAt() bool {
 	if o != nil && !IsNil(o.ScheduledForDeletionAt) {
 		return true
 	}
@@ -313,12 +349,12 @@ func (o *AssetSummarized1) HasScheduledForDeletionAt() bool {
 }
 
 // SetScheduledForDeletionAt gets a reference to the given string and assigns it to the ScheduledForDeletionAt field.
-func (o *AssetSummarized1) SetScheduledForDeletionAt(v string) {
+func (o *AssetDetailed2) SetScheduledForDeletionAt(v string) {
 	o.ScheduledForDeletionAt = &v
 }
 
 // GetStatus returns the Status field value
-func (o *AssetSummarized1) GetStatus() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS {
+func (o *AssetDetailed2) GetStatus() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS {
 	if o == nil {
 		var ret ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS
 		return ret
@@ -329,7 +365,7 @@ func (o *AssetSummarized1) GetStatus() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPRO
 
 // GetStatusOk returns a tuple with the Status field value
 // and a boolean to check if the value has been set.
-func (o *AssetSummarized1) GetStatusOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS, bool) {
+func (o *AssetDetailed2) GetStatusOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -337,12 +373,12 @@ func (o *AssetSummarized1) GetStatusOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSE
 }
 
 // SetStatus sets field value
-func (o *AssetSummarized1) SetStatus(v ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS) {
+func (o *AssetDetailed2) SetStatus(v ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS) {
 	o.Status = v
 }
 
 // GetTags returns the Tags field value
-func (o *AssetSummarized1) GetTags() []Tag {
+func (o *AssetDetailed2) GetTags() []Tag {
 	if o == nil {
 		var ret []Tag
 		return ret
@@ -353,7 +389,7 @@ func (o *AssetSummarized1) GetTags() []Tag {
 
 // GetTagsOk returns a tuple with the Tags field value
 // and a boolean to check if the value has been set.
-func (o *AssetSummarized1) GetTagsOk() ([]Tag, bool) {
+func (o *AssetDetailed2) GetTagsOk() ([]Tag, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -361,12 +397,12 @@ func (o *AssetSummarized1) GetTagsOk() ([]Tag, bool) {
 }
 
 // SetTags sets field value
-func (o *AssetSummarized1) SetTags(v []Tag) {
+func (o *AssetDetailed2) SetTags(v []Tag) {
 	o.Tags = v
 }
 
 // GetRisks returns the Risks field value
-func (o *AssetSummarized1) GetRisks() []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS {
+func (o *AssetDetailed2) GetRisks() []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS {
 	if o == nil {
 		var ret []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS
 		return ret
@@ -377,7 +413,7 @@ func (o *AssetSummarized1) GetRisks() []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPR
 
 // GetRisksOk returns a tuple with the Risks field value
 // and a boolean to check if the value has been set.
-func (o *AssetSummarized1) GetRisksOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, bool) {
+func (o *AssetDetailed2) GetRisksOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -385,14 +421,78 @@ func (o *AssetSummarized1) GetRisksOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESASSE
 }
 
 // SetRisks sets field value
-func (o *AssetSummarized1) SetRisks(v []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS) {
+func (o *AssetDetailed2) SetRisks(v []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS) {
 	o.Risks = v
 }
 
+// GetFirstSeenScan returns the FirstSeenScan field value if set, zero value otherwise.
+func (o *AssetDetailed2) GetFirstSeenScan() ScanSummarized {
+	if o == nil || IsNil(o.FirstSeenScan) {
+		var ret ScanSummarized
+		return ret
+	}
+	return *o.FirstSeenScan
+}
+
+// GetFirstSeenScanOk returns a tuple with the FirstSeenScan field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AssetDetailed2) GetFirstSeenScanOk() (*ScanSummarized, bool) {
+	if o == nil || IsNil(o.FirstSeenScan) {
+		return nil, false
+	}
+	return o.FirstSeenScan, true
+}
+
+// HasFirstSeenScan returns a boolean if a field has been set.
+func (o *AssetDetailed2) HasFirstSeenScan() bool {
+	if o != nil && !IsNil(o.FirstSeenScan) {
+		return true
+	}
+
+	return false
+}
+
+// SetFirstSeenScan gets a reference to the given ScanSummarized and assigns it to the FirstSeenScan field.
+func (o *AssetDetailed2) SetFirstSeenScan(v ScanSummarized) {
+	o.FirstSeenScan = &v
+}
+
+// GetLastSeenScan returns the LastSeenScan field value if set, zero value otherwise.
+func (o *AssetDetailed2) GetLastSeenScan() ScanSummarized1 {
+	if o == nil || IsNil(o.LastSeenScan) {
+		var ret ScanSummarized1
+		return ret
+	}
+	return *o.LastSeenScan
+}
+
+// GetLastSeenScanOk returns a tuple with the LastSeenScan field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AssetDetailed2) GetLastSeenScanOk() (*ScanSummarized1, bool) {
+	if o == nil || IsNil(o.LastSeenScan) {
+		return nil, false
+	}
+	return o.LastSeenScan, true
+}
+
+// HasLastSeenScan returns a boolean if a field has been set.
+func (o *AssetDetailed2) HasLastSeenScan() bool {
+	if o != nil && !IsNil(o.LastSeenScan) {
+		return true
+	}
+
+	return false
+}
+
+// SetLastSeenScan gets a reference to the given ScanSummarized1 and assigns it to the LastSeenScan field.
+func (o *AssetDetailed2) SetLastSeenScan(v ScanSummarized1) {
+	o.LastSeenScan = &v
+}
+
 // GetService returns the Service field value if set, zero value otherwise.
-func (o *AssetSummarized1) GetService() AssetServiceSummarized {
+func (o *AssetDetailed2) GetService() AssetServiceDetailed {
 	if o == nil || IsNil(o.Service) {
-		var ret AssetServiceSummarized
+		var ret AssetServiceDetailed
 		return ret
 	}
 	return *o.Service
@@ -400,7 +500,7 @@ func (o *AssetSummarized1) GetService() AssetServiceSummarized {
 
 // GetServiceOk returns a tuple with the Service field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AssetSummarized1) GetServiceOk() (*AssetServiceSummarized, bool) {
+func (o *AssetDetailed2) GetServiceOk() (*AssetServiceDetailed, bool) {
 	if o == nil || IsNil(o.Service) {
 		return nil, false
 	}
@@ -408,7 +508,7 @@ func (o *AssetSummarized1) GetServiceOk() (*AssetServiceSummarized, bool) {
 }
 
 // HasService returns a boolean if a field has been set.
-func (o *AssetSummarized1) HasService() bool {
+func (o *AssetDetailed2) HasService() bool {
 	if o != nil && !IsNil(o.Service) {
 		return true
 	}
@@ -416,15 +516,15 @@ func (o *AssetSummarized1) HasService() bool {
 	return false
 }
 
-// SetService gets a reference to the given AssetServiceSummarized and assigns it to the Service field.
-func (o *AssetSummarized1) SetService(v AssetServiceSummarized) {
+// SetService gets a reference to the given AssetServiceDetailed and assigns it to the Service field.
+func (o *AssetDetailed2) SetService(v AssetServiceDetailed) {
 	o.Service = &v
 }
 
 // GetFrontend returns the Frontend field value if set, zero value otherwise.
-func (o *AssetSummarized1) GetFrontend() AssetFrontendSummarized {
+func (o *AssetDetailed2) GetFrontend() AssetFrontendDetailed {
 	if o == nil || IsNil(o.Frontend) {
-		var ret AssetFrontendSummarized
+		var ret AssetFrontendDetailed
 		return ret
 	}
 	return *o.Frontend
@@ -432,7 +532,7 @@ func (o *AssetSummarized1) GetFrontend() AssetFrontendSummarized {
 
 // GetFrontendOk returns a tuple with the Frontend field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AssetSummarized1) GetFrontendOk() (*AssetFrontendSummarized, bool) {
+func (o *AssetDetailed2) GetFrontendOk() (*AssetFrontendDetailed, bool) {
 	if o == nil || IsNil(o.Frontend) {
 		return nil, false
 	}
@@ -440,7 +540,7 @@ func (o *AssetSummarized1) GetFrontendOk() (*AssetFrontendSummarized, bool) {
 }
 
 // HasFrontend returns a boolean if a field has been set.
-func (o *AssetSummarized1) HasFrontend() bool {
+func (o *AssetDetailed2) HasFrontend() bool {
 	if o != nil && !IsNil(o.Frontend) {
 		return true
 	}
@@ -448,15 +548,15 @@ func (o *AssetSummarized1) HasFrontend() bool {
 	return false
 }
 
-// SetFrontend gets a reference to the given AssetFrontendSummarized and assigns it to the Frontend field.
-func (o *AssetSummarized1) SetFrontend(v AssetFrontendSummarized) {
+// SetFrontend gets a reference to the given AssetFrontendDetailed and assigns it to the Frontend field.
+func (o *AssetDetailed2) SetFrontend(v AssetFrontendDetailed) {
 	o.Frontend = &v
 }
 
 // GetHost returns the Host field value if set, zero value otherwise.
-func (o *AssetSummarized1) GetHost() AssetHostSummarized {
+func (o *AssetDetailed2) GetHost() AssetHostDetailed {
 	if o == nil || IsNil(o.Host) {
-		var ret AssetHostSummarized
+		var ret AssetHostDetailed
 		return ret
 	}
 	return *o.Host
@@ -464,7 +564,7 @@ func (o *AssetSummarized1) GetHost() AssetHostSummarized {
 
 // GetHostOk returns a tuple with the Host field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AssetSummarized1) GetHostOk() (*AssetHostSummarized, bool) {
+func (o *AssetDetailed2) GetHostOk() (*AssetHostDetailed, bool) {
 	if o == nil || IsNil(o.Host) {
 		return nil, false
 	}
@@ -472,7 +572,7 @@ func (o *AssetSummarized1) GetHostOk() (*AssetHostSummarized, bool) {
 }
 
 // HasHost returns a boolean if a field has been set.
-func (o *AssetSummarized1) HasHost() bool {
+func (o *AssetDetailed2) HasHost() bool {
 	if o != nil && !IsNil(o.Host) {
 		return true
 	}
@@ -480,13 +580,13 @@ func (o *AssetSummarized1) HasHost() bool {
 	return false
 }
 
-// SetHost gets a reference to the given AssetHostSummarized and assigns it to the Host field.
-func (o *AssetSummarized1) SetHost(v AssetHostSummarized) {
+// SetHost gets a reference to the given AssetHostDetailed and assigns it to the Host field.
+func (o *AssetDetailed2) SetHost(v AssetHostDetailed) {
 	o.Host = &v
 }
 
 // GetLinks returns the Links field value
-func (o *AssetSummarized1) GetLinks() AssetDetailedLinks {
+func (o *AssetDetailed2) GetLinks() AssetDetailedLinks {
 	if o == nil {
 		var ret AssetDetailedLinks
 		return ret
@@ -497,7 +597,7 @@ func (o *AssetSummarized1) GetLinks() AssetDetailedLinks {
 
 // GetLinksOk returns a tuple with the Links field value
 // and a boolean to check if the value has been set.
-func (o *AssetSummarized1) GetLinksOk() (*AssetDetailedLinks, bool) {
+func (o *AssetDetailed2) GetLinksOk() (*AssetDetailedLinks, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -505,11 +605,11 @@ func (o *AssetSummarized1) GetLinksOk() (*AssetDetailedLinks, bool) {
 }
 
 // SetLinks sets field value
-func (o *AssetSummarized1) SetLinks(v AssetDetailedLinks) {
+func (o *AssetDetailed2) SetLinks(v AssetDetailedLinks) {
 	o.Links = v
 }
 
-func (o AssetSummarized1) MarshalJSON() ([]byte, error) {
+func (o AssetDetailed2) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -517,7 +617,7 @@ func (o AssetSummarized1) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AssetSummarized1) ToMap() (map[string]interface{}, error) {
+func (o AssetDetailed2) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["class"] = o.Class
@@ -529,6 +629,9 @@ func (o AssetSummarized1) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.FaviconUrl) {
 		toSerialize["faviconUrl"] = o.FaviconUrl
 	}
+	if !IsNil(o.Description) {
+		toSerialize["description"] = o.Description
+	}
 	toSerialize["createdAt"] = o.CreatedAt
 	toSerialize["lastSeenAt"] = o.LastSeenAt
 	if !IsNil(o.ScheduledForDeletionAt) {
@@ -537,6 +640,12 @@ func (o AssetSummarized1) ToMap() (map[string]interface{}, error) {
 	toSerialize["status"] = o.Status
 	toSerialize["tags"] = o.Tags
 	toSerialize["risks"] = o.Risks
+	if !IsNil(o.FirstSeenScan) {
+		toSerialize["firstSeenScan"] = o.FirstSeenScan
+	}
+	if !IsNil(o.LastSeenScan) {
+		toSerialize["lastSeenScan"] = o.LastSeenScan
+	}
 	if !IsNil(o.Service) {
 		toSerialize["service"] = o.Service
 	}
@@ -555,7 +664,7 @@ func (o AssetSummarized1) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *AssetSummarized1) UnmarshalJSON(data []byte) (err error) {
+func (o *AssetDetailed2) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -586,15 +695,15 @@ func (o *AssetSummarized1) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varAssetSummarized1 := _AssetSummarized1{}
+	varAssetDetailed2 := _AssetDetailed2{}
 
-	err = json.Unmarshal(data, &varAssetSummarized1)
+	err = json.Unmarshal(data, &varAssetDetailed2)
 
 	if err != nil {
 		return err
 	}
 
-	*o = AssetSummarized1(varAssetSummarized1)
+	*o = AssetDetailed2(varAssetDetailed2)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -605,12 +714,15 @@ func (o *AssetSummarized1) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "externalUrl")
 		delete(additionalProperties, "faviconUrl")
+		delete(additionalProperties, "description")
 		delete(additionalProperties, "createdAt")
 		delete(additionalProperties, "lastSeenAt")
 		delete(additionalProperties, "scheduledForDeletionAt")
 		delete(additionalProperties, "status")
 		delete(additionalProperties, "tags")
 		delete(additionalProperties, "risks")
+		delete(additionalProperties, "firstSeenScan")
+		delete(additionalProperties, "lastSeenScan")
 		delete(additionalProperties, "service")
 		delete(additionalProperties, "frontend")
 		delete(additionalProperties, "host")
@@ -621,38 +733,38 @@ func (o *AssetSummarized1) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableAssetSummarized1 struct {
-	value *AssetSummarized1
+type NullableAssetDetailed2 struct {
+	value *AssetDetailed2
 	isSet bool
 }
 
-func (v NullableAssetSummarized1) Get() *AssetSummarized1 {
+func (v NullableAssetDetailed2) Get() *AssetDetailed2 {
 	return v.value
 }
 
-func (v *NullableAssetSummarized1) Set(val *AssetSummarized1) {
+func (v *NullableAssetDetailed2) Set(val *AssetDetailed2) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableAssetSummarized1) IsSet() bool {
+func (v NullableAssetDetailed2) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableAssetSummarized1) Unset() {
+func (v *NullableAssetDetailed2) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableAssetSummarized1(val *AssetSummarized1) *NullableAssetSummarized1 {
-	return &NullableAssetSummarized1{value: val, isSet: true}
+func NewNullableAssetDetailed2(val *AssetDetailed2) *NullableAssetDetailed2 {
+	return &NullableAssetDetailed2{value: val, isSet: true}
 }
 
-func (v NullableAssetSummarized1) MarshalJSON() ([]byte, error) {
+func (v NullableAssetDetailed2) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableAssetSummarized1) UnmarshalJSON(src []byte) error {
+func (v *NullableAssetDetailed2) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

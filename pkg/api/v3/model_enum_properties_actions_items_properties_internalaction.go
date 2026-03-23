@@ -108,3 +108,4 @@ func (v *NullableENUMPROPERTIESACTIONSITEMSPROPERTIESINTERNALACTION) UnmarshalJS
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

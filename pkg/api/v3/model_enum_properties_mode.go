@@ -20,7 +20,7 @@ type ENUMPROPERTIESMODE string
 
 // List of ENUM_PROPERTIES_MODE
 const (
-	ENUMPROPERTIESMODE_READ_ONLY  ENUMPROPERTIESMODE = "read_only"
+	ENUMPROPERTIESMODE_READ_ONLY ENUMPROPERTIESMODE = "read_only"
 	ENUMPROPERTIESMODE_READ_WRITE ENUMPROPERTIESMODE = "read_write"
 )
 
@@ -108,3 +108,4 @@ func (v *NullableENUMPROPERTIESMODE) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

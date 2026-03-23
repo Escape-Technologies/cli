@@ -20,12 +20,12 @@ var _ MappedNullable = &UpdatecloudflareIntegrationRequest{}
 // UpdatecloudflareIntegrationRequest struct for UpdatecloudflareIntegrationRequest
 type UpdatecloudflareIntegrationRequest struct {
 	// The new name of the integration
-	Name       *string                                       `json:"name,omitempty"`
+	Name *string `json:"name,omitempty"`
 	Parameters *UpdatecloudflareIntegrationRequestParameters `json:"parameters,omitempty"`
 	// Optional proxy ID to attach to the integration
 	ProxyId *string `json:"proxyId,omitempty"`
 	// Optional list of project IDs to attach to the integration
-	ProjectIds           []string `json:"projectIds,omitempty"`
+	ProjectIds []string `json:"projectIds,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -177,7 +177,7 @@ func (o *UpdatecloudflareIntegrationRequest) SetProjectIds(v []string) {
 }
 
 func (o UpdatecloudflareIntegrationRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -265,3 +265,5 @@ func (v *NullableUpdatecloudflareIntegrationRequest) UnmarshalJSON(src []byte) e
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

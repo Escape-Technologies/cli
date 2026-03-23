@@ -25,10 +25,10 @@ type IssueDetailed struct {
 	// The name of the issue
 	Name string `json:"name"`
 	// The full name of the issue
-	FullName string                                    `json:"fullName"`
+	FullName string `json:"fullName"`
 	Category ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY `json:"category"`
 	Severity ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY `json:"severity"`
-	Status   ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS   `json:"status"`
+	Status ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS `json:"status"`
 	// AI-generated contextual overview for the issue
 	Context *string `json:"context,omitempty"`
 	// Array of risk types associated with the issue
@@ -36,8 +36,8 @@ type IssueDetailed struct {
 	// Unique identifier for the alert
 	AlertUid string `json:"alertUid"`
 	// When the issue was first created
-	CreatedAt string         `json:"createdAt"`
-	Asset     AssetDetailed1 `json:"asset"`
+	CreatedAt string `json:"createdAt"`
+	Asset AssetDetailed2 `json:"asset"`
 	// ID of the last scan where this issue was seen
 	LastSeenScanId *string `json:"lastSeenScanId,omitempty"`
 	// ID of the first scan where this issue was seen
@@ -47,11 +47,11 @@ type IssueDetailed struct {
 	// Framework used for AI remediation
 	AiRemediationFramework string `json:"aiRemediationFramework"`
 	// AI-generated remediation for the issue
-	Remediation *string                  `json:"remediation,omitempty"`
-	Cvss        *GetIssue200ResponseCvss `json:"cvss,omitempty"`
+	Remediation *string `json:"remediation,omitempty"`
+	Cvss *GetIssue200ResponseCvss `json:"cvss,omitempty"`
 	// Compliances associated with the issue
-	Compliances          []GetIssue200ResponseCompliancesInner `json:"compliances,omitempty"`
-	Links                IssueSummarizedLinks                  `json:"links"`
+	Compliances []GetIssue200ResponseCompliancesInner `json:"compliances,omitempty"`
+	Links IssueSummarizedLinks `json:"links"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -61,7 +61,7 @@ type _IssueDetailed IssueDetailed
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIssueDetailed(id string, name string, fullName string, category ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY, severity ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY, status ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, alertUid string, createdAt string, asset AssetDetailed1, aiRemediationFramework string, links IssueSummarizedLinks) *IssueDetailed {
+func NewIssueDetailed(id string, name string, fullName string, category ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY, severity ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY, status ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, alertUid string, createdAt string, asset AssetDetailed2, aiRemediationFramework string, links IssueSummarizedLinks) *IssueDetailed {
 	this := IssueDetailed{}
 	this.Id = id
 	this.Name = name
@@ -335,9 +335,9 @@ func (o *IssueDetailed) SetCreatedAt(v string) {
 }
 
 // GetAsset returns the Asset field value
-func (o *IssueDetailed) GetAsset() AssetDetailed1 {
+func (o *IssueDetailed) GetAsset() AssetDetailed2 {
 	if o == nil {
-		var ret AssetDetailed1
+		var ret AssetDetailed2
 		return ret
 	}
 
@@ -346,7 +346,7 @@ func (o *IssueDetailed) GetAsset() AssetDetailed1 {
 
 // GetAssetOk returns a tuple with the Asset field value
 // and a boolean to check if the value has been set.
-func (o *IssueDetailed) GetAssetOk() (*AssetDetailed1, bool) {
+func (o *IssueDetailed) GetAssetOk() (*AssetDetailed2, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -354,7 +354,7 @@ func (o *IssueDetailed) GetAssetOk() (*AssetDetailed1, bool) {
 }
 
 // SetAsset sets field value
-func (o *IssueDetailed) SetAsset(v AssetDetailed1) {
+func (o *IssueDetailed) SetAsset(v AssetDetailed2) {
 	o.Asset = v
 }
 
@@ -599,7 +599,7 @@ func (o *IssueDetailed) SetLinks(v IssueSummarizedLinks) {
 }
 
 func (o IssueDetailed) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -673,10 +673,10 @@ func (o *IssueDetailed) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -755,3 +755,5 @@ func (v *NullableIssueDetailed) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

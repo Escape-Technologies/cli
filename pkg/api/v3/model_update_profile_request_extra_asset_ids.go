@@ -15,17 +15,18 @@ import (
 	"fmt"
 )
 
+
 // UpdateProfileRequestExtraAssetIds The extra asset ID for the profile
 type UpdateProfileRequestExtraAssetIds struct {
 	ArrayOfString *[]string
-	String        *string
+	String *string
 }
 
 // Unmarshal JSON data into any of the pointers in the struct
 func (dst *UpdateProfileRequestExtraAssetIds) UnmarshalJSON(data []byte) error {
 	var err error
 	// try to unmarshal JSON data into ArrayOfString
-	err = json.Unmarshal(data, &dst.ArrayOfString)
+	err = json.Unmarshal(data, &dst.ArrayOfString);
 	if err == nil {
 		jsonArrayOfString, _ := json.Marshal(dst.ArrayOfString)
 		if string(jsonArrayOfString) == "{}" { // empty struct
@@ -38,7 +39,7 @@ func (dst *UpdateProfileRequestExtraAssetIds) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal JSON data into String
-	err = json.Unmarshal(data, &dst.String)
+	err = json.Unmarshal(data, &dst.String);
 	if err == nil {
 		jsonString, _ := json.Marshal(dst.String)
 		if string(jsonString) == "{}" { // empty struct
@@ -65,6 +66,7 @@ func (src UpdateProfileRequestExtraAssetIds) MarshalJSON() ([]byte, error) {
 
 	return nil, nil // no data in anyOf schemas
 }
+
 
 type NullableUpdateProfileRequestExtraAssetIds struct {
 	value *UpdateProfileRequestExtraAssetIds
@@ -101,3 +103,5 @@ func (v *NullableUpdateProfileRequestExtraAssetIds) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

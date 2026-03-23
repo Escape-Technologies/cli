@@ -33,7 +33,7 @@ type GraphqlResolverDetailed struct {
 	// The parameters of the graphql resolver
 	Parameters map[string]string `json:"parameters,omitempty"`
 	// The return type of the graphql resolver
-	ReturnType           *string `json:"returnType,omitempty"`
+	ReturnType *string `json:"returnType,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -246,7 +246,7 @@ func (o *GraphqlResolverDetailed) SetReturnType(v string) {
 }
 
 func (o GraphqlResolverDetailed) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -291,10 +291,10 @@ func (o *GraphqlResolverDetailed) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -361,3 +361,5 @@ func (v *NullableGraphqlResolverDetailed) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

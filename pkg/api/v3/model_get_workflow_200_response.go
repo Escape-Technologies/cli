@@ -23,12 +23,12 @@ type GetWorkflow200Response struct {
 	// The workflow ID.
 	Id *string `json:"id,omitempty"`
 	// The name of the workflow.
-	Name    *string               `json:"name,omitempty"`
+	Name *string `json:"name,omitempty"`
 	Trigger ENUMPROPERTIESTRIGGER `json:"trigger"`
 	// The throttle in milliseconds for the workflow.
-	ThrottleMs           *float32                             `json:"throttleMs,omitempty"`
-	Filters              []GetWorkflow200ResponseFiltersInner `json:"filters"`
-	Actions              []GetWorkflow200ResponseActionsInner `json:"actions"`
+	ThrottleMs *float32 `json:"throttleMs,omitempty"`
+	Filters []GetWorkflow200ResponseFiltersInner `json:"filters"`
+	Actions []GetWorkflow200ResponseActionsInner `json:"actions"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -231,7 +231,7 @@ func (o *GetWorkflow200Response) SetActions(v []GetWorkflow200ResponseActionsInn
 }
 
 func (o GetWorkflow200Response) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -275,10 +275,10 @@ func (o *GetWorkflow200Response) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -344,3 +344,5 @@ func (v *NullableGetWorkflow200Response) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

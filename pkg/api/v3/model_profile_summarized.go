@@ -31,9 +31,9 @@ type ProfileSummarized struct {
 	// The initiators of the profile
 	Initiators []ENUMPROPERTIESDATAITEMSPROPERTIESINITIATORSITEMS `json:"initiators"`
 	// The cron of the profile
-	Cron                 *string                `json:"cron,omitempty"`
-	Asset                AssetDetailed          `json:"asset"`
-	Links                ProfileSummarizedLinks `json:"links"`
+	Cron *string `json:"cron,omitempty"`
+	Asset AssetDetailed `json:"asset"`
+	Links ProfileSummarizedLinks `json:"links"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -264,7 +264,7 @@ func (o *ProfileSummarized) SetLinks(v ProfileSummarizedLinks) {
 }
 
 func (o ProfileSummarized) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -310,10 +310,10 @@ func (o *ProfileSummarized) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -381,3 +381,5 @@ func (v *NullableProfileSummarized) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
