@@ -13,7 +13,6 @@ jobs:
   go-fmt:
     runs-on: ubuntu-latest
     permissions:
-      actions: write
       contents: write
     outputs:
       reformatted: ${{ steps.auto-commit.outputs.changes_detected || 'false' }}
@@ -22,6 +21,7 @@ jobs:
         if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
         with:
           ref: ${{ github.head_ref || github.ref }}
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
       - uses: actions/checkout@v4
         if: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository }}
@@ -47,18 +47,6 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v7
         with:
           commit_message: "style: auto-format go code"
-
-      - name: Trigger checks on formatted head
-        if: ${{ github.event_name != 'workflow_dispatch' && steps.auto-commit.outputs.changes_detected == 'true' }}
-        uses: actions/github-script@v7
-        with:
-          script: |
-            await github.rest.actions.createWorkflowDispatch({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              workflow_id: "pr.yaml",
-              ref: "${{ github.head_ref || github.ref_name }}",
-            })
 
   go-mod:
     needs: go-fmt
