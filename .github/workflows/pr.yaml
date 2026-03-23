@@ -4,6 +4,7 @@ on:
     branches:
       - main
   pull_request:
+  workflow_dispatch:
 
 env:
   GO_VERSION: "1.23.0"
@@ -13,11 +14,14 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    outputs:
+      reformatted: ${{ steps.auto-commit.outputs.changes_detected || 'false' }}
     steps:
       - uses: actions/checkout@v4
         if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
         with:
           ref: ${{ github.head_ref || github.ref }}
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
       - uses: actions/checkout@v4
         if: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository }}
@@ -38,6 +42,7 @@ jobs:
           }
 
       - name: Commit and push changes
+        id: auto-commit
         if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
         uses: stefanzweifel/git-auto-commit-action@v7
         with:
@@ -45,6 +50,7 @@ jobs:
 
   go-mod:
     needs: go-fmt
+    if: ${{ needs.go-fmt.outputs.reformatted != 'true' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -64,6 +70,7 @@ jobs:
 
   golangci-lint:
     needs: go-fmt
+    if: ${{ needs.go-fmt.outputs.reformatted != 'true' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -82,6 +89,7 @@ jobs:
 
   tests:
     needs: go-fmt
+    if: ${{ needs.go-fmt.outputs.reformatted != 'true' }}
     strategy:
       matrix:
         os:
