@@ -114,4 +114,3 @@ func (v *NullableENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESCO
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
