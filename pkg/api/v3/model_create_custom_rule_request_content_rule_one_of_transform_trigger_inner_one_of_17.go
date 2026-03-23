@@ -20,13 +20,13 @@ var _ MappedNullable = &CreateCustomRuleRequestContentRuleOneOfTransformTriggerI
 
 // CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf17 struct for CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf17
 type CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf17 struct {
-	UseExtraction *bool `json:"use_extraction,omitempty"`
-	Is *string `json:"is,omitempty"`
-	IsNot *string `json:"is_not,omitempty"`
-	In []string `json:"in,omitempty"`
-	Contains *string `json:"contains,omitempty"`
-	Regex *string `json:"regex,omitempty"`
-	If ENUMRESPONSEBODYTEXT `json:"if"`
+	UseExtraction        *bool                `json:"use_extraction,omitempty"`
+	Is                   *string              `json:"is,omitempty"`
+	IsNot                *string              `json:"is_not,omitempty"`
+	In                   []string             `json:"in,omitempty"`
+	Contains             *string              `json:"contains,omitempty"`
+	Regex                *string              `json:"regex,omitempty"`
+	If                   ENUMRESPONSEBODYTEXT `json:"if"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -267,7 +267,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf17) Se
 }
 
 func (o CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf17) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -316,10 +316,10 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf17) Un
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -386,5 +386,3 @@ func (v *NullableCreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOne
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

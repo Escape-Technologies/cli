@@ -19,12 +19,12 @@ var _ MappedNullable = &CreateCustomRuleRequestContentRuleOneOfTransformTriggerI
 
 // CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf7Name struct for CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf7Name
 type CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf7Name struct {
-	UseExtraction *bool `json:"use_extraction,omitempty"`
-	Is *string `json:"is,omitempty"`
-	IsNot *string `json:"is_not,omitempty"`
-	In []string `json:"in,omitempty"`
-	Contains *string `json:"contains,omitempty"`
-	Regex *string `json:"regex,omitempty"`
+	UseExtraction        *bool    `json:"use_extraction,omitempty"`
+	Is                   *string  `json:"is,omitempty"`
+	IsNot                *string  `json:"is_not,omitempty"`
+	In                   []string `json:"in,omitempty"`
+	Contains             *string  `json:"contains,omitempty"`
+	Regex                *string  `json:"regex,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -240,7 +240,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf7Name)
 }
 
 func (o CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf7Name) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -336,5 +336,3 @@ func (v *NullableCreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOne
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
