@@ -20,8 +20,9 @@ var _ MappedNullable = &CreateExportWorkflowActionUsingJiraParametersStaticPrope
 
 // CreateExportWorkflowActionUsingJiraParametersStaticPropertiesMappingInner struct for CreateExportWorkflowActionUsingJiraParametersStaticPropertiesMappingInner
 type CreateExportWorkflowActionUsingJiraParametersStaticPropertiesMappingInner struct {
-	JiraPropertyId       string  `json:"jiraPropertyId"`
-	Value                *string `json:"value,omitempty"`
+	JiraPropertyId string `json:"jiraPropertyId"`
+	Value NullableCreateExportWorkflowActionUsingJiraParametersStaticPropertiesMappingInnerValue `json:"value"`
+	Append *bool `json:"append,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -31,9 +32,12 @@ type _CreateExportWorkflowActionUsingJiraParametersStaticPropertiesMappingInner 
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateExportWorkflowActionUsingJiraParametersStaticPropertiesMappingInner(jiraPropertyId string) *CreateExportWorkflowActionUsingJiraParametersStaticPropertiesMappingInner {
+func NewCreateExportWorkflowActionUsingJiraParametersStaticPropertiesMappingInner(jiraPropertyId string, value NullableCreateExportWorkflowActionUsingJiraParametersStaticPropertiesMappingInnerValue) *CreateExportWorkflowActionUsingJiraParametersStaticPropertiesMappingInner {
 	this := CreateExportWorkflowActionUsingJiraParametersStaticPropertiesMappingInner{}
 	this.JiraPropertyId = jiraPropertyId
+	this.Value = value
+	var append bool = false
+	this.Append = &append
 	return &this
 }
 
@@ -42,6 +46,8 @@ func NewCreateExportWorkflowActionUsingJiraParametersStaticPropertiesMappingInne
 // but it doesn't guarantee that properties required by API are set
 func NewCreateExportWorkflowActionUsingJiraParametersStaticPropertiesMappingInnerWithDefaults() *CreateExportWorkflowActionUsingJiraParametersStaticPropertiesMappingInner {
 	this := CreateExportWorkflowActionUsingJiraParametersStaticPropertiesMappingInner{}
+	var append bool = false
+	this.Append = &append
 	return &this
 }
 
@@ -69,40 +75,66 @@ func (o *CreateExportWorkflowActionUsingJiraParametersStaticPropertiesMappingInn
 	o.JiraPropertyId = v
 }
 
-// GetValue returns the Value field value if set, zero value otherwise.
-func (o *CreateExportWorkflowActionUsingJiraParametersStaticPropertiesMappingInner) GetValue() string {
-	if o == nil || IsNil(o.Value) {
-		var ret string
+// GetValue returns the Value field value
+// If the value is explicit nil, the zero value for CreateExportWorkflowActionUsingJiraParametersStaticPropertiesMappingInnerValue will be returned
+func (o *CreateExportWorkflowActionUsingJiraParametersStaticPropertiesMappingInner) GetValue() CreateExportWorkflowActionUsingJiraParametersStaticPropertiesMappingInnerValue {
+	if o == nil || o.Value.Get() == nil {
+		var ret CreateExportWorkflowActionUsingJiraParametersStaticPropertiesMappingInnerValue
 		return ret
 	}
-	return *o.Value
+
+	return *o.Value.Get()
 }
 
-// GetValueOk returns a tuple with the Value field value if set, nil otherwise
+// GetValueOk returns a tuple with the Value field value
 // and a boolean to check if the value has been set.
-func (o *CreateExportWorkflowActionUsingJiraParametersStaticPropertiesMappingInner) GetValueOk() (*string, bool) {
-	if o == nil || IsNil(o.Value) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CreateExportWorkflowActionUsingJiraParametersStaticPropertiesMappingInner) GetValueOk() (*CreateExportWorkflowActionUsingJiraParametersStaticPropertiesMappingInnerValue, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Value, true
+	return o.Value.Get(), o.Value.IsSet()
 }
 
-// HasValue returns a boolean if a field has been set.
-func (o *CreateExportWorkflowActionUsingJiraParametersStaticPropertiesMappingInner) HasValue() bool {
-	if o != nil && !IsNil(o.Value) {
+// SetValue sets field value
+func (o *CreateExportWorkflowActionUsingJiraParametersStaticPropertiesMappingInner) SetValue(v CreateExportWorkflowActionUsingJiraParametersStaticPropertiesMappingInnerValue) {
+	o.Value.Set(&v)
+}
+
+// GetAppend returns the Append field value if set, zero value otherwise.
+func (o *CreateExportWorkflowActionUsingJiraParametersStaticPropertiesMappingInner) GetAppend() bool {
+	if o == nil || IsNil(o.Append) {
+		var ret bool
+		return ret
+	}
+	return *o.Append
+}
+
+// GetAppendOk returns a tuple with the Append field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateExportWorkflowActionUsingJiraParametersStaticPropertiesMappingInner) GetAppendOk() (*bool, bool) {
+	if o == nil || IsNil(o.Append) {
+		return nil, false
+	}
+	return o.Append, true
+}
+
+// HasAppend returns a boolean if a field has been set.
+func (o *CreateExportWorkflowActionUsingJiraParametersStaticPropertiesMappingInner) HasAppend() bool {
+	if o != nil && !IsNil(o.Append) {
 		return true
 	}
 
 	return false
 }
 
-// SetValue gets a reference to the given string and assigns it to the Value field.
-func (o *CreateExportWorkflowActionUsingJiraParametersStaticPropertiesMappingInner) SetValue(v string) {
-	o.Value = &v
+// SetAppend gets a reference to the given bool and assigns it to the Append field.
+func (o *CreateExportWorkflowActionUsingJiraParametersStaticPropertiesMappingInner) SetAppend(v bool) {
+	o.Append = &v
 }
 
 func (o CreateExportWorkflowActionUsingJiraParametersStaticPropertiesMappingInner) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -112,8 +144,9 @@ func (o CreateExportWorkflowActionUsingJiraParametersStaticPropertiesMappingInne
 func (o CreateExportWorkflowActionUsingJiraParametersStaticPropertiesMappingInner) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["jiraPropertyId"] = o.JiraPropertyId
-	if !IsNil(o.Value) {
-		toSerialize["value"] = o.Value
+	toSerialize["value"] = o.Value.Get()
+	if !IsNil(o.Append) {
+		toSerialize["append"] = o.Append
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -129,6 +162,7 @@ func (o *CreateExportWorkflowActionUsingJiraParametersStaticPropertiesMappingInn
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"jiraPropertyId",
+		"value",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -136,10 +170,10 @@ func (o *CreateExportWorkflowActionUsingJiraParametersStaticPropertiesMappingInn
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -160,6 +194,7 @@ func (o *CreateExportWorkflowActionUsingJiraParametersStaticPropertiesMappingInn
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "jiraPropertyId")
 		delete(additionalProperties, "value")
+		delete(additionalProperties, "append")
 		o.AdditionalProperties = additionalProperties
 	}
 
@@ -201,3 +236,5 @@ func (v *NullableCreateExportWorkflowActionUsingJiraParametersStaticPropertiesMa
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

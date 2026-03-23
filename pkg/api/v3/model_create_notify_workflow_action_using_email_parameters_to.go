@@ -18,10 +18,11 @@ import (
 
 // CreateNotifyWorkflowActionUsingEmailParametersTo - struct for CreateNotifyWorkflowActionUsingEmailParametersTo
 type CreateNotifyWorkflowActionUsingEmailParametersTo struct {
-	CreateNotifyWorkflowActionUsingEmailParametersToOneOf  *CreateNotifyWorkflowActionUsingEmailParametersToOneOf
+	CreateNotifyWorkflowActionUsingEmailParametersToOneOf *CreateNotifyWorkflowActionUsingEmailParametersToOneOf
 	CreateNotifyWorkflowActionUsingEmailParametersToOneOf1 *CreateNotifyWorkflowActionUsingEmailParametersToOneOf1
 	CreateNotifyWorkflowActionUsingEmailParametersToOneOf2 *CreateNotifyWorkflowActionUsingEmailParametersToOneOf2
 	CreateNotifyWorkflowActionUsingEmailParametersToOneOf3 *CreateNotifyWorkflowActionUsingEmailParametersToOneOf3
+	CreateNotifyWorkflowActionUsingEmailParametersToOneOf4 *CreateNotifyWorkflowActionUsingEmailParametersToOneOf4
 }
 
 // CreateNotifyWorkflowActionUsingEmailParametersToOneOfAsCreateNotifyWorkflowActionUsingEmailParametersTo is a convenience function that returns CreateNotifyWorkflowActionUsingEmailParametersToOneOf wrapped in CreateNotifyWorkflowActionUsingEmailParametersTo
@@ -51,6 +52,14 @@ func CreateNotifyWorkflowActionUsingEmailParametersToOneOf3AsCreateNotifyWorkflo
 		CreateNotifyWorkflowActionUsingEmailParametersToOneOf3: v,
 	}
 }
+
+// CreateNotifyWorkflowActionUsingEmailParametersToOneOf4AsCreateNotifyWorkflowActionUsingEmailParametersTo is a convenience function that returns CreateNotifyWorkflowActionUsingEmailParametersToOneOf4 wrapped in CreateNotifyWorkflowActionUsingEmailParametersTo
+func CreateNotifyWorkflowActionUsingEmailParametersToOneOf4AsCreateNotifyWorkflowActionUsingEmailParametersTo(v *CreateNotifyWorkflowActionUsingEmailParametersToOneOf4) CreateNotifyWorkflowActionUsingEmailParametersTo {
+	return CreateNotifyWorkflowActionUsingEmailParametersTo{
+		CreateNotifyWorkflowActionUsingEmailParametersToOneOf4: v,
+	}
+}
+
 
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *CreateNotifyWorkflowActionUsingEmailParametersTo) UnmarshalJSON(data []byte) error {
@@ -124,12 +133,30 @@ func (dst *CreateNotifyWorkflowActionUsingEmailParametersTo) UnmarshalJSON(data 
 		dst.CreateNotifyWorkflowActionUsingEmailParametersToOneOf3 = nil
 	}
 
+	// try to unmarshal data into CreateNotifyWorkflowActionUsingEmailParametersToOneOf4
+	err = newStrictDecoder(data).Decode(&dst.CreateNotifyWorkflowActionUsingEmailParametersToOneOf4)
+	if err == nil {
+		jsonCreateNotifyWorkflowActionUsingEmailParametersToOneOf4, _ := json.Marshal(dst.CreateNotifyWorkflowActionUsingEmailParametersToOneOf4)
+		if string(jsonCreateNotifyWorkflowActionUsingEmailParametersToOneOf4) == "{}" { // empty struct
+			dst.CreateNotifyWorkflowActionUsingEmailParametersToOneOf4 = nil
+		} else {
+			if err = validator.Validate(dst.CreateNotifyWorkflowActionUsingEmailParametersToOneOf4); err != nil {
+				dst.CreateNotifyWorkflowActionUsingEmailParametersToOneOf4 = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.CreateNotifyWorkflowActionUsingEmailParametersToOneOf4 = nil
+	}
+
 	if match > 1 { // more than 1 match
 		// reset to nil
 		dst.CreateNotifyWorkflowActionUsingEmailParametersToOneOf = nil
 		dst.CreateNotifyWorkflowActionUsingEmailParametersToOneOf1 = nil
 		dst.CreateNotifyWorkflowActionUsingEmailParametersToOneOf2 = nil
 		dst.CreateNotifyWorkflowActionUsingEmailParametersToOneOf3 = nil
+		dst.CreateNotifyWorkflowActionUsingEmailParametersToOneOf4 = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(CreateNotifyWorkflowActionUsingEmailParametersTo)")
 	} else if match == 1 {
@@ -157,11 +184,15 @@ func (src CreateNotifyWorkflowActionUsingEmailParametersTo) MarshalJSON() ([]byt
 		return json.Marshal(&src.CreateNotifyWorkflowActionUsingEmailParametersToOneOf3)
 	}
 
+	if src.CreateNotifyWorkflowActionUsingEmailParametersToOneOf4 != nil {
+		return json.Marshal(&src.CreateNotifyWorkflowActionUsingEmailParametersToOneOf4)
+	}
+
 	return nil, nil // no data in oneOf schemas
 }
 
 // Get the actual instance
-func (obj *CreateNotifyWorkflowActionUsingEmailParametersTo) GetActualInstance() interface{} {
+func (obj *CreateNotifyWorkflowActionUsingEmailParametersTo) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
@@ -181,12 +212,16 @@ func (obj *CreateNotifyWorkflowActionUsingEmailParametersTo) GetActualInstance()
 		return obj.CreateNotifyWorkflowActionUsingEmailParametersToOneOf3
 	}
 
+	if obj.CreateNotifyWorkflowActionUsingEmailParametersToOneOf4 != nil {
+		return obj.CreateNotifyWorkflowActionUsingEmailParametersToOneOf4
+	}
+
 	// all schemas are nil
 	return nil
 }
 
 // Get the actual instance value
-func (obj CreateNotifyWorkflowActionUsingEmailParametersTo) GetActualInstanceValue() interface{} {
+func (obj CreateNotifyWorkflowActionUsingEmailParametersTo) GetActualInstanceValue() (interface{}) {
 	if obj.CreateNotifyWorkflowActionUsingEmailParametersToOneOf != nil {
 		return *obj.CreateNotifyWorkflowActionUsingEmailParametersToOneOf
 	}
@@ -201,6 +236,10 @@ func (obj CreateNotifyWorkflowActionUsingEmailParametersTo) GetActualInstanceVal
 
 	if obj.CreateNotifyWorkflowActionUsingEmailParametersToOneOf3 != nil {
 		return *obj.CreateNotifyWorkflowActionUsingEmailParametersToOneOf3
+	}
+
+	if obj.CreateNotifyWorkflowActionUsingEmailParametersToOneOf4 != nil {
+		return *obj.CreateNotifyWorkflowActionUsingEmailParametersToOneOf4
 	}
 
 	// all schemas are nil
@@ -242,3 +281,5 @@ func (v *NullableCreateNotifyWorkflowActionUsingEmailParametersTo) UnmarshalJSON
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

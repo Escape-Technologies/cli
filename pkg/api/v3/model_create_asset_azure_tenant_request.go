@@ -21,17 +21,16 @@ var _ MappedNullable = &CreateAssetAZURETENANTRequest{}
 // CreateAssetAZURETENANTRequest struct for CreateAssetAZURETENANTRequest
 type CreateAssetAZURETENANTRequest struct {
 	// The list of project IDs bind the asset on.
-	ProjectIds           []string               `json:"projectIds,omitempty"`
-	AssetClass           ENUMCLOUDHOSTING       `json:"asset_class"`
-	WizProviderId        *string                `json:"wiz_provider_id,omitempty"`
-	WizCloudPlatform     *string                `json:"wiz_cloud_platform,omitempty"`
-	ExtraMetadata        map[string]interface{} `json:"extra_metadata,omitempty"`
-	AssetType            ENUMAZURETENANT        `json:"asset_type"`
-	Name                 *string                `json:"name,omitempty"`
-	ImmutableKey         string                 `json:"immutable_key"`
-	ClientId             string                 `json:"client_id"`
-	ClientSecret         string                 `json:"client_secret"`
-	TenantId             string                 `json:"tenant_id"`
+	ProjectIds []string `json:"projectIds,omitempty"`
+	Name *string `json:"name,omitempty"`
+	AssetClass ENUMCLOUDHOSTING `json:"asset_class"`
+	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
+	ScreenshotS3Key *string `json:"screenshot_s3_key,omitempty"`
+	AssetType ENUMAZURETENANT `json:"asset_type"`
+	ImmutableKey string `json:"immutable_key"`
+	ClientId string `json:"client_id"`
+	ClientSecret string `json:"client_secret"`
+	TenantId string `json:"tenant_id"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -92,6 +91,38 @@ func (o *CreateAssetAZURETENANTRequest) SetProjectIds(v []string) {
 	o.ProjectIds = v
 }
 
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *CreateAssetAZURETENANTRequest) GetName() string {
+	if o == nil || IsNil(o.Name) {
+		var ret string
+		return ret
+	}
+	return *o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetAZURETENANTRequest) GetNameOk() (*string, bool) {
+	if o == nil || IsNil(o.Name) {
+		return nil, false
+	}
+	return o.Name, true
+}
+
+// HasName returns a boolean if a field has been set.
+func (o *CreateAssetAZURETENANTRequest) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *CreateAssetAZURETENANTRequest) SetName(v string) {
+	o.Name = &v
+}
+
 // GetAssetClass returns the AssetClass field value
 func (o *CreateAssetAZURETENANTRequest) GetAssetClass() ENUMCLOUDHOSTING {
 	if o == nil {
@@ -114,70 +145,6 @@ func (o *CreateAssetAZURETENANTRequest) GetAssetClassOk() (*ENUMCLOUDHOSTING, bo
 // SetAssetClass sets field value
 func (o *CreateAssetAZURETENANTRequest) SetAssetClass(v ENUMCLOUDHOSTING) {
 	o.AssetClass = v
-}
-
-// GetWizProviderId returns the WizProviderId field value if set, zero value otherwise.
-func (o *CreateAssetAZURETENANTRequest) GetWizProviderId() string {
-	if o == nil || IsNil(o.WizProviderId) {
-		var ret string
-		return ret
-	}
-	return *o.WizProviderId
-}
-
-// GetWizProviderIdOk returns a tuple with the WizProviderId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateAssetAZURETENANTRequest) GetWizProviderIdOk() (*string, bool) {
-	if o == nil || IsNil(o.WizProviderId) {
-		return nil, false
-	}
-	return o.WizProviderId, true
-}
-
-// HasWizProviderId returns a boolean if a field has been set.
-func (o *CreateAssetAZURETENANTRequest) HasWizProviderId() bool {
-	if o != nil && !IsNil(o.WizProviderId) {
-		return true
-	}
-
-	return false
-}
-
-// SetWizProviderId gets a reference to the given string and assigns it to the WizProviderId field.
-func (o *CreateAssetAZURETENANTRequest) SetWizProviderId(v string) {
-	o.WizProviderId = &v
-}
-
-// GetWizCloudPlatform returns the WizCloudPlatform field value if set, zero value otherwise.
-func (o *CreateAssetAZURETENANTRequest) GetWizCloudPlatform() string {
-	if o == nil || IsNil(o.WizCloudPlatform) {
-		var ret string
-		return ret
-	}
-	return *o.WizCloudPlatform
-}
-
-// GetWizCloudPlatformOk returns a tuple with the WizCloudPlatform field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateAssetAZURETENANTRequest) GetWizCloudPlatformOk() (*string, bool) {
-	if o == nil || IsNil(o.WizCloudPlatform) {
-		return nil, false
-	}
-	return o.WizCloudPlatform, true
-}
-
-// HasWizCloudPlatform returns a boolean if a field has been set.
-func (o *CreateAssetAZURETENANTRequest) HasWizCloudPlatform() bool {
-	if o != nil && !IsNil(o.WizCloudPlatform) {
-		return true
-	}
-
-	return false
-}
-
-// SetWizCloudPlatform gets a reference to the given string and assigns it to the WizCloudPlatform field.
-func (o *CreateAssetAZURETENANTRequest) SetWizCloudPlatform(v string) {
-	o.WizCloudPlatform = &v
 }
 
 // GetExtraMetadata returns the ExtraMetadata field value if set, zero value otherwise.
@@ -212,6 +179,38 @@ func (o *CreateAssetAZURETENANTRequest) SetExtraMetadata(v map[string]interface{
 	o.ExtraMetadata = v
 }
 
+// GetScreenshotS3Key returns the ScreenshotS3Key field value if set, zero value otherwise.
+func (o *CreateAssetAZURETENANTRequest) GetScreenshotS3Key() string {
+	if o == nil || IsNil(o.ScreenshotS3Key) {
+		var ret string
+		return ret
+	}
+	return *o.ScreenshotS3Key
+}
+
+// GetScreenshotS3KeyOk returns a tuple with the ScreenshotS3Key field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetAZURETENANTRequest) GetScreenshotS3KeyOk() (*string, bool) {
+	if o == nil || IsNil(o.ScreenshotS3Key) {
+		return nil, false
+	}
+	return o.ScreenshotS3Key, true
+}
+
+// HasScreenshotS3Key returns a boolean if a field has been set.
+func (o *CreateAssetAZURETENANTRequest) HasScreenshotS3Key() bool {
+	if o != nil && !IsNil(o.ScreenshotS3Key) {
+		return true
+	}
+
+	return false
+}
+
+// SetScreenshotS3Key gets a reference to the given string and assigns it to the ScreenshotS3Key field.
+func (o *CreateAssetAZURETENANTRequest) SetScreenshotS3Key(v string) {
+	o.ScreenshotS3Key = &v
+}
+
 // GetAssetType returns the AssetType field value
 func (o *CreateAssetAZURETENANTRequest) GetAssetType() ENUMAZURETENANT {
 	if o == nil {
@@ -234,38 +233,6 @@ func (o *CreateAssetAZURETENANTRequest) GetAssetTypeOk() (*ENUMAZURETENANT, bool
 // SetAssetType sets field value
 func (o *CreateAssetAZURETENANTRequest) SetAssetType(v ENUMAZURETENANT) {
 	o.AssetType = v
-}
-
-// GetName returns the Name field value if set, zero value otherwise.
-func (o *CreateAssetAZURETENANTRequest) GetName() string {
-	if o == nil || IsNil(o.Name) {
-		var ret string
-		return ret
-	}
-	return *o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateAssetAZURETENANTRequest) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
-		return nil, false
-	}
-	return o.Name, true
-}
-
-// HasName returns a boolean if a field has been set.
-func (o *CreateAssetAZURETENANTRequest) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given string and assigns it to the Name field.
-func (o *CreateAssetAZURETENANTRequest) SetName(v string) {
-	o.Name = &v
 }
 
 // GetImmutableKey returns the ImmutableKey field value
@@ -365,7 +332,7 @@ func (o *CreateAssetAZURETENANTRequest) SetTenantId(v string) {
 }
 
 func (o CreateAssetAZURETENANTRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -377,20 +344,17 @@ func (o CreateAssetAZURETENANTRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ProjectIds) {
 		toSerialize["projectIds"] = o.ProjectIds
 	}
-	toSerialize["asset_class"] = o.AssetClass
-	if !IsNil(o.WizProviderId) {
-		toSerialize["wiz_provider_id"] = o.WizProviderId
-	}
-	if !IsNil(o.WizCloudPlatform) {
-		toSerialize["wiz_cloud_platform"] = o.WizCloudPlatform
-	}
-	if !IsNil(o.ExtraMetadata) {
-		toSerialize["extra_metadata"] = o.ExtraMetadata
-	}
-	toSerialize["asset_type"] = o.AssetType
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
+	toSerialize["asset_class"] = o.AssetClass
+	if !IsNil(o.ExtraMetadata) {
+		toSerialize["extra_metadata"] = o.ExtraMetadata
+	}
+	if !IsNil(o.ScreenshotS3Key) {
+		toSerialize["screenshot_s3_key"] = o.ScreenshotS3Key
+	}
+	toSerialize["asset_type"] = o.AssetType
 	toSerialize["immutable_key"] = o.ImmutableKey
 	toSerialize["client_id"] = o.ClientId
 	toSerialize["client_secret"] = o.ClientSecret
@@ -421,10 +385,10 @@ func (o *CreateAssetAZURETENANTRequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -444,12 +408,11 @@ func (o *CreateAssetAZURETENANTRequest) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "projectIds")
-		delete(additionalProperties, "asset_class")
-		delete(additionalProperties, "wiz_provider_id")
-		delete(additionalProperties, "wiz_cloud_platform")
-		delete(additionalProperties, "extra_metadata")
-		delete(additionalProperties, "asset_type")
 		delete(additionalProperties, "name")
+		delete(additionalProperties, "asset_class")
+		delete(additionalProperties, "extra_metadata")
+		delete(additionalProperties, "screenshot_s3_key")
+		delete(additionalProperties, "asset_type")
 		delete(additionalProperties, "immutable_key")
 		delete(additionalProperties, "client_id")
 		delete(additionalProperties, "client_secret")
@@ -495,3 +458,5 @@ func (v *NullableCreateAssetAZURETENANTRequest) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

@@ -18,14 +18,14 @@ import (
 // checks if the GraphDetailed type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GraphDetailed{}
 
-// GraphDetailed Detailed information about a graph
+// GraphDetailed The graph of the attachment
 type GraphDetailed struct {
 	// The id of the graph
 	Id string `json:"id"`
 	// The date and time the graph was created
 	CreatedAt string `json:"createdAt"`
 	// The temporary signed url of the graph
-	TemporarySignedUrl   string `json:"temporarySignedUrl"`
+	TemporarySignedUrl string `json:"temporarySignedUrl"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -124,7 +124,7 @@ func (o *GraphDetailed) SetTemporarySignedUrl(v string) {
 }
 
 func (o GraphDetailed) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -159,10 +159,10 @@ func (o *GraphDetailed) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -225,3 +225,5 @@ func (v *NullableGraphDetailed) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

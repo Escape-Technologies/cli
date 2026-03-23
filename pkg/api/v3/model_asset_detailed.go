@@ -18,12 +18,12 @@ import (
 // checks if the AssetDetailed type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AssetDetailed{}
 
-// AssetDetailed Detailed information about an asset
+// AssetDetailed The asset of the profile
 type AssetDetailed struct {
 	// The id of the asset
-	Id    string                                                `json:"id"`
+	Id string `json:"id"`
 	Class ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS `json:"class"`
-	Type  ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE  `json:"type"`
+	Type ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE `json:"type"`
 	// The name of the asset
 	Name string `json:"name"`
 	// The external url of the asset
@@ -37,18 +37,18 @@ type AssetDetailed struct {
 	// The date and time the asset was last seen
 	LastSeenAt string `json:"lastSeenAt"`
 	// The date and time the asset is scheduled for deletion
-	ScheduledForDeletionAt *string                                                `json:"scheduledForDeletionAt,omitempty"`
-	Status                 ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS `json:"status"`
+	ScheduledForDeletionAt *string `json:"scheduledForDeletionAt,omitempty"`
+	Status ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS `json:"status"`
 	// The tags of the asset
 	Tags []Tag `json:"tags"`
 	// The risks of the asset
-	Risks                []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS `json:"risks"`
-	FirstSeenScan        *ScanSummarized                                              `json:"firstSeenScan,omitempty"`
-	LastSeenScan         *ScanSummarized                                              `json:"lastSeenScan,omitempty"`
-	Service              *AssetServiceDetailed                                        `json:"service,omitempty"`
-	Frontend             *AssetFrontendDetailed                                       `json:"frontend,omitempty"`
-	Host                 *AssetHostDetailed                                           `json:"host,omitempty"`
-	Links                AssetDetailedLinks                                           `json:"links"`
+	Risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS `json:"risks"`
+	FirstSeenScan *ScanSummarized `json:"firstSeenScan,omitempty"`
+	LastSeenScan *ScanSummarized1 `json:"lastSeenScan,omitempty"`
+	Service *AssetServiceDetailed `json:"service,omitempty"`
+	Frontend *AssetFrontendDetailed `json:"frontend,omitempty"`
+	Host *AssetHostDetailed `json:"host,omitempty"`
+	Links AssetDetailedLinks `json:"links"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -458,9 +458,9 @@ func (o *AssetDetailed) SetFirstSeenScan(v ScanSummarized) {
 }
 
 // GetLastSeenScan returns the LastSeenScan field value if set, zero value otherwise.
-func (o *AssetDetailed) GetLastSeenScan() ScanSummarized {
+func (o *AssetDetailed) GetLastSeenScan() ScanSummarized1 {
 	if o == nil || IsNil(o.LastSeenScan) {
-		var ret ScanSummarized
+		var ret ScanSummarized1
 		return ret
 	}
 	return *o.LastSeenScan
@@ -468,7 +468,7 @@ func (o *AssetDetailed) GetLastSeenScan() ScanSummarized {
 
 // GetLastSeenScanOk returns a tuple with the LastSeenScan field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AssetDetailed) GetLastSeenScanOk() (*ScanSummarized, bool) {
+func (o *AssetDetailed) GetLastSeenScanOk() (*ScanSummarized1, bool) {
 	if o == nil || IsNil(o.LastSeenScan) {
 		return nil, false
 	}
@@ -484,8 +484,8 @@ func (o *AssetDetailed) HasLastSeenScan() bool {
 	return false
 }
 
-// SetLastSeenScan gets a reference to the given ScanSummarized and assigns it to the LastSeenScan field.
-func (o *AssetDetailed) SetLastSeenScan(v ScanSummarized) {
+// SetLastSeenScan gets a reference to the given ScanSummarized1 and assigns it to the LastSeenScan field.
+func (o *AssetDetailed) SetLastSeenScan(v ScanSummarized1) {
 	o.LastSeenScan = &v
 }
 
@@ -610,7 +610,7 @@ func (o *AssetDetailed) SetLinks(v AssetDetailedLinks) {
 }
 
 func (o AssetDetailed) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -686,10 +686,10 @@ func (o *AssetDetailed) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -768,3 +768,5 @@ func (v *NullableAssetDetailed) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

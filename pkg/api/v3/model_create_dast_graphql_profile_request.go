@@ -28,14 +28,21 @@ type CreateDastGraphqlProfileRequest struct {
 	Cron *string `json:"cron,omitempty"`
 	// The name of the profile
 	Name string `json:"name"`
+	// The description of the profile
+	Description *string `json:"description,omitempty"`
 	// The proxy ID for the profile
 	ProxyId *string `json:"proxyId,omitempty"`
 	// The asset ID of the schema used to scan the profile
-	SchemaId string `json:"schemaId"`
+	SchemaId *string `json:"schemaId,omitempty"`
 	// The tags IDs for the profile
 	TagsIds []string `json:"tagsIds,omitempty"`
+	// The extra asset IDs for the profile
+	ExtraAssetIds []string `json:"extraAssetIds,omitempty"`
+	// Whether to use all available extra assets for the profile
+	UseAllAvailableExtraAssets *bool `json:"useAllAvailableExtraAssets,omitempty"`
+	Mode *ENUMPROPERTIESMODE `json:"mode,omitempty"`
 	// Whether to start the scan immediately
-	Start                *bool `json:"start,omitempty"`
+	Start *bool `json:"start,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -45,11 +52,10 @@ type _CreateDastGraphqlProfileRequest CreateDastGraphqlProfileRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateDastGraphqlProfileRequest(assetId string, name string, schemaId string) *CreateDastGraphqlProfileRequest {
+func NewCreateDastGraphqlProfileRequest(assetId string, name string) *CreateDastGraphqlProfileRequest {
 	this := CreateDastGraphqlProfileRequest{}
 	this.AssetId = assetId
 	this.Name = name
-	this.SchemaId = schemaId
 	var start bool = true
 	this.Start = &start
 	return &this
@@ -177,6 +183,38 @@ func (o *CreateDastGraphqlProfileRequest) SetName(v string) {
 	o.Name = v
 }
 
+// GetDescription returns the Description field value if set, zero value otherwise.
+func (o *CreateDastGraphqlProfileRequest) GetDescription() string {
+	if o == nil || IsNil(o.Description) {
+		var ret string
+		return ret
+	}
+	return *o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateDastGraphqlProfileRequest) GetDescriptionOk() (*string, bool) {
+	if o == nil || IsNil(o.Description) {
+		return nil, false
+	}
+	return o.Description, true
+}
+
+// HasDescription returns a boolean if a field has been set.
+func (o *CreateDastGraphqlProfileRequest) HasDescription() bool {
+	if o != nil && !IsNil(o.Description) {
+		return true
+	}
+
+	return false
+}
+
+// SetDescription gets a reference to the given string and assigns it to the Description field.
+func (o *CreateDastGraphqlProfileRequest) SetDescription(v string) {
+	o.Description = &v
+}
+
 // GetProxyId returns the ProxyId field value if set, zero value otherwise.
 func (o *CreateDastGraphqlProfileRequest) GetProxyId() string {
 	if o == nil || IsNil(o.ProxyId) {
@@ -209,28 +247,36 @@ func (o *CreateDastGraphqlProfileRequest) SetProxyId(v string) {
 	o.ProxyId = &v
 }
 
-// GetSchemaId returns the SchemaId field value
+// GetSchemaId returns the SchemaId field value if set, zero value otherwise.
 func (o *CreateDastGraphqlProfileRequest) GetSchemaId() string {
-	if o == nil {
+	if o == nil || IsNil(o.SchemaId) {
 		var ret string
 		return ret
 	}
-
-	return o.SchemaId
+	return *o.SchemaId
 }
 
-// GetSchemaIdOk returns a tuple with the SchemaId field value
+// GetSchemaIdOk returns a tuple with the SchemaId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CreateDastGraphqlProfileRequest) GetSchemaIdOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.SchemaId) {
 		return nil, false
 	}
-	return &o.SchemaId, true
+	return o.SchemaId, true
 }
 
-// SetSchemaId sets field value
+// HasSchemaId returns a boolean if a field has been set.
+func (o *CreateDastGraphqlProfileRequest) HasSchemaId() bool {
+	if o != nil && !IsNil(o.SchemaId) {
+		return true
+	}
+
+	return false
+}
+
+// SetSchemaId gets a reference to the given string and assigns it to the SchemaId field.
 func (o *CreateDastGraphqlProfileRequest) SetSchemaId(v string) {
-	o.SchemaId = v
+	o.SchemaId = &v
 }
 
 // GetTagsIds returns the TagsIds field value if set, zero value otherwise.
@@ -263,6 +309,102 @@ func (o *CreateDastGraphqlProfileRequest) HasTagsIds() bool {
 // SetTagsIds gets a reference to the given []string and assigns it to the TagsIds field.
 func (o *CreateDastGraphqlProfileRequest) SetTagsIds(v []string) {
 	o.TagsIds = v
+}
+
+// GetExtraAssetIds returns the ExtraAssetIds field value if set, zero value otherwise.
+func (o *CreateDastGraphqlProfileRequest) GetExtraAssetIds() []string {
+	if o == nil || IsNil(o.ExtraAssetIds) {
+		var ret []string
+		return ret
+	}
+	return o.ExtraAssetIds
+}
+
+// GetExtraAssetIdsOk returns a tuple with the ExtraAssetIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateDastGraphqlProfileRequest) GetExtraAssetIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.ExtraAssetIds) {
+		return nil, false
+	}
+	return o.ExtraAssetIds, true
+}
+
+// HasExtraAssetIds returns a boolean if a field has been set.
+func (o *CreateDastGraphqlProfileRequest) HasExtraAssetIds() bool {
+	if o != nil && !IsNil(o.ExtraAssetIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetExtraAssetIds gets a reference to the given []string and assigns it to the ExtraAssetIds field.
+func (o *CreateDastGraphqlProfileRequest) SetExtraAssetIds(v []string) {
+	o.ExtraAssetIds = v
+}
+
+// GetUseAllAvailableExtraAssets returns the UseAllAvailableExtraAssets field value if set, zero value otherwise.
+func (o *CreateDastGraphqlProfileRequest) GetUseAllAvailableExtraAssets() bool {
+	if o == nil || IsNil(o.UseAllAvailableExtraAssets) {
+		var ret bool
+		return ret
+	}
+	return *o.UseAllAvailableExtraAssets
+}
+
+// GetUseAllAvailableExtraAssetsOk returns a tuple with the UseAllAvailableExtraAssets field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateDastGraphqlProfileRequest) GetUseAllAvailableExtraAssetsOk() (*bool, bool) {
+	if o == nil || IsNil(o.UseAllAvailableExtraAssets) {
+		return nil, false
+	}
+	return o.UseAllAvailableExtraAssets, true
+}
+
+// HasUseAllAvailableExtraAssets returns a boolean if a field has been set.
+func (o *CreateDastGraphqlProfileRequest) HasUseAllAvailableExtraAssets() bool {
+	if o != nil && !IsNil(o.UseAllAvailableExtraAssets) {
+		return true
+	}
+
+	return false
+}
+
+// SetUseAllAvailableExtraAssets gets a reference to the given bool and assigns it to the UseAllAvailableExtraAssets field.
+func (o *CreateDastGraphqlProfileRequest) SetUseAllAvailableExtraAssets(v bool) {
+	o.UseAllAvailableExtraAssets = &v
+}
+
+// GetMode returns the Mode field value if set, zero value otherwise.
+func (o *CreateDastGraphqlProfileRequest) GetMode() ENUMPROPERTIESMODE {
+	if o == nil || IsNil(o.Mode) {
+		var ret ENUMPROPERTIESMODE
+		return ret
+	}
+	return *o.Mode
+}
+
+// GetModeOk returns a tuple with the Mode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateDastGraphqlProfileRequest) GetModeOk() (*ENUMPROPERTIESMODE, bool) {
+	if o == nil || IsNil(o.Mode) {
+		return nil, false
+	}
+	return o.Mode, true
+}
+
+// HasMode returns a boolean if a field has been set.
+func (o *CreateDastGraphqlProfileRequest) HasMode() bool {
+	if o != nil && !IsNil(o.Mode) {
+		return true
+	}
+
+	return false
+}
+
+// SetMode gets a reference to the given ENUMPROPERTIESMODE and assigns it to the Mode field.
+func (o *CreateDastGraphqlProfileRequest) SetMode(v ENUMPROPERTIESMODE) {
+	o.Mode = &v
 }
 
 // GetStart returns the Start field value if set, zero value otherwise.
@@ -298,7 +440,7 @@ func (o *CreateDastGraphqlProfileRequest) SetStart(v bool) {
 }
 
 func (o CreateDastGraphqlProfileRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -315,12 +457,26 @@ func (o CreateDastGraphqlProfileRequest) ToMap() (map[string]interface{}, error)
 		toSerialize["cron"] = o.Cron
 	}
 	toSerialize["name"] = o.Name
+	if !IsNil(o.Description) {
+		toSerialize["description"] = o.Description
+	}
 	if !IsNil(o.ProxyId) {
 		toSerialize["proxyId"] = o.ProxyId
 	}
-	toSerialize["schemaId"] = o.SchemaId
+	if !IsNil(o.SchemaId) {
+		toSerialize["schemaId"] = o.SchemaId
+	}
 	if !IsNil(o.TagsIds) {
 		toSerialize["tagsIds"] = o.TagsIds
+	}
+	if !IsNil(o.ExtraAssetIds) {
+		toSerialize["extraAssetIds"] = o.ExtraAssetIds
+	}
+	if !IsNil(o.UseAllAvailableExtraAssets) {
+		toSerialize["useAllAvailableExtraAssets"] = o.UseAllAvailableExtraAssets
+	}
+	if !IsNil(o.Mode) {
+		toSerialize["mode"] = o.Mode
 	}
 	if !IsNil(o.Start) {
 		toSerialize["start"] = o.Start
@@ -340,7 +496,6 @@ func (o *CreateDastGraphqlProfileRequest) UnmarshalJSON(data []byte) (err error)
 	requiredProperties := []string{
 		"assetId",
 		"name",
-		"schemaId",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -348,10 +503,10 @@ func (o *CreateDastGraphqlProfileRequest) UnmarshalJSON(data []byte) (err error)
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -374,9 +529,13 @@ func (o *CreateDastGraphqlProfileRequest) UnmarshalJSON(data []byte) (err error)
 		delete(additionalProperties, "configuration")
 		delete(additionalProperties, "cron")
 		delete(additionalProperties, "name")
+		delete(additionalProperties, "description")
 		delete(additionalProperties, "proxyId")
 		delete(additionalProperties, "schemaId")
 		delete(additionalProperties, "tagsIds")
+		delete(additionalProperties, "extraAssetIds")
+		delete(additionalProperties, "useAllAvailableExtraAssets")
+		delete(additionalProperties, "mode")
 		delete(additionalProperties, "start")
 		o.AdditionalProperties = additionalProperties
 	}
@@ -419,3 +578,5 @@ func (v *NullableCreateDastGraphqlProfileRequest) UnmarshalJSON(src []byte) erro
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
