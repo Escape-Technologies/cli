@@ -23,11 +23,11 @@ type ProfileExtraAsset struct {
 	// The id of the asset
 	Id string `json:"id"`
 	// The name of the asset
-	Name string `json:"name"`
-	Type ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE `json:"type"`
+	Name   string                                                 `json:"name"`
+	Type   ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE   `json:"type"`
 	Status ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS `json:"status"`
 	// The date and time the asset was created
-	CreatedAt string `json:"createdAt"`
+	CreatedAt            string `json:"createdAt"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -176,7 +176,7 @@ func (o *ProfileExtraAsset) SetCreatedAt(v string) {
 }
 
 func (o ProfileExtraAsset) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -215,10 +215,10 @@ func (o *ProfileExtraAsset) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -283,5 +283,3 @@ func (v *NullableProfileExtraAsset) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
