@@ -95,6 +95,11 @@ ID                                      CREATED AT                           KIN
   # Export scan list to JSON for processing
   escape-cli scans list -o json > scans.json`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
+		// Output JSON Schema if requested
+		if out.Schema([]v3.ScanSummarized{}) {
+			return nil
+		}
+
 		scans, next, err := escape.ListScans(cmd.Context(), "", &escape.ListScansFilters{
 			ProfileIDs: &scanProfileIDs,
 			After:      scanAfter,
@@ -174,6 +179,11 @@ ID                                      CREATED AT                           KIN
   # Get scan in JSON format for scripting
   escape-cli scans get 00000000-0000-0000-0000-000000000000 -o json`,
 	RunE: func(cmd *cobra.Command, args []string) error {
+		// Output JSON Schema if requested
+		if out.Schema(v3.ScanSummarized{}) {
+			return nil
+		}
+
 		scan, err := escape.GetScan(cmd.Context(), args[0])
 		if err != nil {
 			return fmt.Errorf("unable to get scan: %w", err)
@@ -316,6 +326,11 @@ CI/CD INTEGRATION:
   # Start and save scan ID for later use
   SCAN_ID=$(escape-cli scans start <profile-id> -o json | jq -r '.id')`,
 	RunE: func(cmd *cobra.Command, args []string) error {
+		// Output JSON Schema if requested
+		if out.Schema(v3.ScanDetailed1{}) {
+			return nil
+		}
+
 		configurationOverride := map[string]interface{}{}
 		if scanStartCmdConfigurationOverride != "" {
 			err := json.Unmarshal([]byte(scanStartCmdConfigurationOverride), &configurationOverride)
@@ -515,6 +530,11 @@ The watch will continue until the scan reaches a terminal state:
   # CI/CD example: Start, watch, and fail if scan fails
   escape-cli scans watch $(escape-cli scans start <profile-id> -o json | jq -r '.id')`,
 	RunE: func(cmd *cobra.Command, args []string) error {
+		// Output JSON Schema if requested
+		if out.Schema(v3.ScanDetailed1{}) {
+			return nil
+		}
+
 		return watchScan(cmd.Context(), args[0])
 	},
 }
@@ -588,6 +608,11 @@ ID                                      SEVERITY    CATEGORY                  NA
   # Count critical issues in a scan
   escape-cli scans issues <scan-id> -o json | jq '[.[] | select(.severity == "CRITICAL")] | length'`,
 	RunE: func(cmd *cobra.Command, args []string) error {
+		// Output JSON Schema if requested
+		if out.Schema([]v3.IssueSummarized{}) {
+			return nil
+		}
+
 		if len(args) != 1 {
 			_ = cmd.Help()
 			return errors.New("scan ID is required")

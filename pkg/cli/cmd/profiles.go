@@ -91,6 +91,11 @@ ID                                      CREATED AT              ASSET TYPE    IN
   # Search for profiles
   escape-cli profiles list --search "production"`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
+		// Output JSON Schema if requested
+		if out.Schema([]v3.ProfileSummarized{}) {
+			return nil
+		}
+
 		allFlag, _ := cmd.Flags().GetBool("all")
 		userKindsProvided := cmd.Flags().Changed("kind")
 		kindsToUse := profileKinds
@@ -164,6 +169,11 @@ schedule, risks, and configuration details.`,
   escape-cli profiles get <profile-id> -o json`,
 	Args: cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
+		// Output JSON Schema if requested
+		if out.Schema(v3.ProfileDetailed{}) {
+			return nil
+		}
+
 		profileID := args[0]
 		profile, err := escape.GetProfile(cmd.Context(), profileID)
 		if err != nil || profile == nil {
@@ -188,6 +198,11 @@ var profileCreateRestCmd = &cobra.Command{
 Create a new profile for testing REST APIs. Provide configuration via JSON through stdin.
 See https://public.escape.tech/v3/#tag/profiles for complete schema.`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
+		// Output JSON Schema if requested
+		if out.Schema(v3.ProfileDetailed{}) {
+			return nil
+		}
+
 		var data []byte
 		b, err := io.ReadAll(os.Stdin)
 		if err != nil {
@@ -224,6 +239,11 @@ var profileCreateWebappCmd = &cobra.Command{
 
 Create a new profile for testing web applications. Provide configuration via JSON through stdin.`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
+		// Output JSON Schema if requested
+		if out.Schema(v3.ProfileDetailed{}) {
+			return nil
+		}
+
 		var data []byte
 		b, err := io.ReadAll(os.Stdin)
 		if err != nil {
@@ -259,6 +279,11 @@ var profileCreateGraphqlCmd = &cobra.Command{
 
 Create a new profile for testing GraphQL APIs. Provide configuration via JSON through stdin.`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
+		// Output JSON Schema if requested
+		if out.Schema(v3.ProfileDetailed{}) {
+			return nil
+		}
+
 		var data []byte
 		b, err := io.ReadAll(os.Stdin)
 		if err != nil {
