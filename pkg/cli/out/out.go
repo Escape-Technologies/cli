@@ -100,3 +100,21 @@ func Schema(v any) bool {
 	_ = schema.Print(v)
 	return true
 }
+
+// inputSchemaRequested tracks if --input-schema was requested
+var inputSchemaRequested bool
+
+// SetInputSchema sets the input schema flag
+func SetInputSchema(v bool) {
+	inputSchemaRequested = v
+}
+
+// InputSchema prints the JSON Schema for the input type and returns true if input-schema was requested
+// Commands that accept stdin input should call this to show their expected input format
+func InputSchema(v any) bool {
+	if !inputSchemaRequested {
+		return false
+	}
+	_ = schema.Print(v)
+	return true
+}

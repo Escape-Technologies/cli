@@ -473,6 +473,10 @@ ID                                    TYPE    NAME                  STATUS
 		return nil
 	},
 	RunE: func(cmd *cobra.Command, _ []string) error {
+		// Output JSON Schema for input format if requested (REST as example, varies by asset_type)
+		if out.InputSchema(v3.CreateAssetRESTRequest{}) {
+			return nil
+		}
 		// Output JSON Schema if requested
 		if out.Schema(v3.AssetDetailed{}) {
 			return nil

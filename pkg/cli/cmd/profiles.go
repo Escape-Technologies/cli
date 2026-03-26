@@ -198,6 +198,10 @@ var profileCreateRestCmd = &cobra.Command{
 Create a new profile for testing REST APIs. Provide configuration via JSON through stdin.
 See https://public.escape.tech/v3/#tag/profiles for complete schema.`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
+		// Output JSON Schema for input format if requested
+		if out.InputSchema(v3.CreateDastRestProfileRequest{}) {
+			return nil
+		}
 		// Output JSON Schema if requested
 		if out.Schema(v3.ProfileDetailed{}) {
 			return nil
@@ -239,6 +243,10 @@ var profileCreateWebappCmd = &cobra.Command{
 
 Create a new profile for testing web applications. Provide configuration via JSON through stdin.`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
+		// Output JSON Schema for input format if requested
+		if out.InputSchema(v3.CreateDastWebAppProfileRequest{}) {
+			return nil
+		}
 		// Output JSON Schema if requested
 		if out.Schema(v3.ProfileDetailed{}) {
 			return nil
@@ -279,6 +287,10 @@ var profileCreateGraphqlCmd = &cobra.Command{
 
 Create a new profile for testing GraphQL APIs. Provide configuration via JSON through stdin.`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
+		// Output JSON Schema for input format if requested
+		if out.InputSchema(v3.CreateDastGraphqlProfileRequest{}) {
+			return nil
+		}
 		// Output JSON Schema if requested
 		if out.Schema(v3.ProfileDetailed{}) {
 			return nil
