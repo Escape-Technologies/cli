@@ -27,7 +27,7 @@ type LastScanStatusSummarizedLastResourceScan struct {
 	// The kind of the scan
 	Kind string `json:"kind"`
 	// The problems found in the scan
-	Problems []LastScanStatusSummarizedLastResourceScanProblemsInner `json:"problems"`
+	Problems             []LastScanStatusSummarizedLastResourceScanProblemsInner `json:"problems"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -151,7 +151,7 @@ func (o *LastScanStatusSummarizedLastResourceScan) SetProblems(v []LastScanStatu
 }
 
 func (o LastScanStatusSummarizedLastResourceScan) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -188,10 +188,10 @@ func (o *LastScanStatusSummarizedLastResourceScan) UnmarshalJSON(data []byte) (e
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -255,5 +255,3 @@ func (v *NullableLastScanStatusSummarizedLastResourceScan) UnmarshalJSON(src []b
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

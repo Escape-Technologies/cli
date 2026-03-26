@@ -20,16 +20,16 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationAuthenticationPresetsI
 
 // GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf12 struct for GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf12
 type GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf12 struct {
-	Type ENUMBROWSERACTIONS `json:"type"`
-	Users []GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf12UsersInner `json:"users"`
-	LoginUrl string `json:"login_url"`
-	StealthMode *bool `json:"stealth_mode,omitempty"`
-	Extractions []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner `json:"extractions,omitempty"`
-	Injections NullableGetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11Injections `json:"injections,omitempty"`
-	AutoExtractionUrls []string `json:"auto_extraction_urls,omitempty"`
-	LoggedInDetectorText *string `json:"logged_in_detector_text,omitempty"`
-	LoggedInDetectorTimeout *float32 `json:"logged_in_detector_timeout,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Type                    ENUMBROWSERACTIONS                                                                                          `json:"type"`
+	Users                   []GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf12UsersInner                             `json:"users"`
+	LoginUrl                string                                                                                                      `json:"login_url"`
+	StealthMode             *bool                                                                                                       `json:"stealth_mode,omitempty"`
+	Extractions             []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner `json:"extractions,omitempty"`
+	Injections              NullableGetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11Injections                       `json:"injections,omitempty"`
+	AutoExtractionUrls      []string                                                                                                    `json:"auto_extraction_urls,omitempty"`
+	LoggedInDetectorText    *string                                                                                                     `json:"logged_in_detector_text,omitempty"`
+	LoggedInDetectorTimeout *float32                                                                                                    `json:"logged_in_detector_timeout,omitempty"`
+	AdditionalProperties    map[string]interface{}
 }
 
 type _GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf12 GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf12
@@ -222,6 +222,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf12) Ha
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf12) SetInjections(v GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11Injections) {
 	o.Injections.Set(&v)
 }
+
 // SetInjectionsNil sets the value for Injections to be an explicit nil
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf12) SetInjectionsNil() {
 	o.Injections.Set(nil)
@@ -329,7 +330,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf12) Se
 }
 
 func (o GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf12) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -382,10 +383,10 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf12) Un
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -454,5 +455,3 @@ func (v *NullableGetProfile200ResponseConfigurationAuthenticationPresetsInnerOne
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

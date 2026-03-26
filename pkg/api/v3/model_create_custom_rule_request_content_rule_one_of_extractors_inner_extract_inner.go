@@ -18,7 +18,7 @@ import (
 
 // CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInner - struct for CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInner
 type CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInner struct {
-	CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf *CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf
+	CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf  *CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf
 	CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf1 *CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf1
 	CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf2 *CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf2
 	CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf3 *CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf3
@@ -83,7 +83,6 @@ func CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf7AsC
 		CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf7: v,
 	}
 }
-
 
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInner) UnmarshalJSON(data []byte) error {
@@ -282,7 +281,7 @@ func (src CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInner) Ma
 }
 
 // Get the actual instance
-func (obj *CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInner) GetActualInstance() (interface{}) {
+func (obj *CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInner) GetActualInstance() interface{} {
 	if obj == nil {
 		return nil
 	}
@@ -323,7 +322,7 @@ func (obj *CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInner) G
 }
 
 // Get the actual instance value
-func (obj CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInner) GetActualInstanceValue() (interface{}) {
+func (obj CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInner) GetActualInstanceValue() interface{} {
 	if obj.CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf != nil {
 		return *obj.CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf
 	}
@@ -395,5 +394,3 @@ func (v *NullableCreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractIn
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

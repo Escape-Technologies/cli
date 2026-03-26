@@ -17,19 +17,19 @@ type nestedStruct struct {
 }
 
 type pointerFieldStruct struct {
-	Name    string  `json:"name"`
-	Deleted *bool   `json:"deleted,omitempty"`
-	Count   *int    `json:"count"`
+	Name    string        `json:"name"`
+	Deleted *bool         `json:"deleted,omitempty"`
+	Count   *int          `json:"count"`
 	Inner   *simpleStruct `json:"inner,omitempty"`
 }
 
 type tagVariations struct {
-	Explicit    string `json:"explicit_name"`
-	Omitempty   string `json:"omit_field,omitempty"`
-	Skipped     string `json:"-"`
-	NoTag       string
-	Described   string `json:"described" description:"A helpful description"`
-	unexported  string //nolint:unused
+	Explicit   string `json:"explicit_name"`
+	Omitempty  string `json:"omit_field,omitempty"`
+	Skipped    string `json:"-"`
+	NoTag      string
+	Described  string `json:"described" description:"A helpful description"`
+	unexported string //nolint:unused
 }
 
 type withAdditionalProps struct {
@@ -38,7 +38,7 @@ type withAdditionalProps struct {
 }
 
 type withSlice struct {
-	Items []string       `json:"items"`
+	Items  []string       `json:"items"`
 	Nested []simpleStruct `json:"nested"`
 }
 

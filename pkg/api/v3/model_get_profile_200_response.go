@@ -39,17 +39,17 @@ type GetProfile200Response struct {
 	// The score of the profile
 	Score *float32 `json:"score,omitempty"`
 	// The coverage of the profile
-	Coverage *float32 `json:"coverage,omitempty"`
+	Coverage      *float32                           `json:"coverage,omitempty"`
 	Configuration GetProfile200ResponseConfiguration `json:"configuration"`
 	// The extra assets of the profile
-	ExtraAssets []ProfileExtraAsset `json:"extraAssets"`
-	Asset AssetDetailed `json:"asset"`
-	LastResourceScan *ScanDetailed `json:"lastResourceScan,omitempty"`
-	LastSuccessfulResourceScan *ScanDetailed1 `json:"lastSuccessfulResourceScan,omitempty"`
+	ExtraAssets                []ProfileExtraAsset `json:"extraAssets"`
+	Asset                      AssetDetailed       `json:"asset"`
+	LastResourceScan           *ScanDetailed       `json:"lastResourceScan,omitempty"`
+	LastSuccessfulResourceScan *ScanDetailed1      `json:"lastSuccessfulResourceScan,omitempty"`
 	// The risks of the profile
-	Risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS `json:"risks"`
-	Statistics StatisticsDetailed `json:"statistics"`
-	Links ProfileSummarizedLinks `json:"links"`
+	Risks                []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS `json:"risks"`
+	Statistics           StatisticsDetailed                                           `json:"statistics"`
+	Links                ProfileSummarizedLinks                                       `json:"links"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -565,7 +565,7 @@ func (o *GetProfile200Response) SetLinks(v ProfileSummarizedLinks) {
 }
 
 func (o GetProfile200Response) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -636,10 +636,10 @@ func (o *GetProfile200Response) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -717,5 +717,3 @@ func (v *NullableGetProfile200Response) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

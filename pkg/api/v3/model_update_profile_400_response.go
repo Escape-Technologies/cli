@@ -20,8 +20,8 @@ var _ MappedNullable = &UpdateProfile400Response{}
 
 // UpdateProfile400Response struct for UpdateProfile400Response
 type UpdateProfile400Response struct {
-	Message ENUMBADREQUEST `json:"message"`
-	Details string `json:"details"`
+	Message              ENUMBADREQUEST `json:"message"`
+	Details              string         `json:"details"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -95,7 +95,7 @@ func (o *UpdateProfile400Response) SetDetails(v string) {
 }
 
 func (o UpdateProfile400Response) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -128,10 +128,10 @@ func (o *UpdateProfile400Response) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -193,5 +193,3 @@ func (v *NullableUpdateProfile400Response) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

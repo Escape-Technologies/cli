@@ -21,9 +21,9 @@ var _ MappedNullable = &AssetSummarized1{}
 // AssetSummarized1 The asset of the issue
 type AssetSummarized1 struct {
 	// The id of the asset
-	Id string `json:"id"`
+	Id    string                                                `json:"id"`
 	Class ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS `json:"class"`
-	Type ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE `json:"type"`
+	Type  ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE  `json:"type"`
 	// The name of the asset
 	Name string `json:"name"`
 	// The external url of the asset
@@ -35,16 +35,16 @@ type AssetSummarized1 struct {
 	// The date and time the asset was last seen
 	LastSeenAt string `json:"lastSeenAt"`
 	// The date and time the asset is scheduled for deletion
-	ScheduledForDeletionAt *string `json:"scheduledForDeletionAt,omitempty"`
-	Status ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS `json:"status"`
+	ScheduledForDeletionAt *string                                                `json:"scheduledForDeletionAt,omitempty"`
+	Status                 ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS `json:"status"`
 	// The tags of the asset
 	Tags []Tag `json:"tags"`
 	// The risks of the asset
-	Risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS `json:"risks"`
-	Service *AssetServiceSummarized `json:"service,omitempty"`
-	Frontend *AssetFrontendSummarized `json:"frontend,omitempty"`
-	Host *AssetHostSummarized `json:"host,omitempty"`
-	Links AssetDetailedLinks `json:"links"`
+	Risks                []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS `json:"risks"`
+	Service              *AssetServiceSummarized                                      `json:"service,omitempty"`
+	Frontend             *AssetFrontendSummarized                                     `json:"frontend,omitempty"`
+	Host                 *AssetHostSummarized                                         `json:"host,omitempty"`
+	Links                AssetDetailedLinks                                           `json:"links"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -510,7 +510,7 @@ func (o *AssetSummarized1) SetLinks(v AssetDetailedLinks) {
 }
 
 func (o AssetSummarized1) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -577,10 +577,10 @@ func (o *AssetSummarized1) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -656,5 +656,3 @@ func (v *NullableAssetSummarized1) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

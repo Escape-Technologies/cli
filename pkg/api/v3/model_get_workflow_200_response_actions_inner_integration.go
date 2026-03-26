@@ -20,9 +20,9 @@ var _ MappedNullable = &GetWorkflow200ResponseActionsInnerIntegration{}
 
 // GetWorkflow200ResponseActionsInnerIntegration struct for GetWorkflow200ResponseActionsInnerIntegration
 type GetWorkflow200ResponseActionsInnerIntegration struct {
-	Id string `json:"id"`
-	Name string `json:"name"`
-	Kind ENUMPROPERTIESDATAITEMSPROPERTIESKIND `json:"kind"`
+	Id                   string                                `json:"id"`
+	Name                 string                                `json:"name"`
+	Kind                 ENUMPROPERTIESDATAITEMSPROPERTIESKIND `json:"kind"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -121,7 +121,7 @@ func (o *GetWorkflow200ResponseActionsInnerIntegration) SetKind(v ENUMPROPERTIES
 }
 
 func (o GetWorkflow200ResponseActionsInnerIntegration) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -156,10 +156,10 @@ func (o *GetWorkflow200ResponseActionsInnerIntegration) UnmarshalJSON(data []byt
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -222,5 +222,3 @@ func (v *NullableGetWorkflow200ResponseActionsInnerIntegration) UnmarshalJSON(sr
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -21,13 +21,13 @@ var _ MappedNullable = &TargetDetailed{}
 // TargetDetailed The target of the attachment
 type TargetDetailed struct {
 	// The date and time the target was created
-	CreatedAt string `json:"createdAt"`
-	ApiRoute *ApiRouteDetailed `json:"apiRoute,omitempty"`
-	CodeFile *CodeFileDetailed `json:"codeFile,omitempty"`
+	CreatedAt       string                   `json:"createdAt"`
+	ApiRoute        *ApiRouteDetailed        `json:"apiRoute,omitempty"`
+	CodeFile        *CodeFileDetailed        `json:"codeFile,omitempty"`
 	GraphqlResolver *GraphqlResolverDetailed `json:"graphqlResolver,omitempty"`
 	// The id of the target
-	Id string `json:"id"`
-	Port *PortDetailed `json:"port,omitempty"`
+	Id                   string        `json:"id"`
+	Port                 *PortDetailed `json:"port,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -229,7 +229,7 @@ func (o *TargetDetailed) SetPort(v PortDetailed) {
 }
 
 func (o TargetDetailed) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -274,10 +274,10 @@ func (o *TargetDetailed) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -343,5 +343,3 @@ func (v *NullableTargetDetailed) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

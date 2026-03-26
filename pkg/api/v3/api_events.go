@@ -19,14 +19,13 @@ import (
 	"strings"
 )
 
-
 // EventsAPIService EventsAPI service
 type EventsAPIService service
 
 type ApiGetEventRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *EventsAPIService
-	eventId string
+	eventId    string
 }
 
 func (r ApiGetEventRequest) Execute() (*GetEvent200Response, *http.Response, error) {
@@ -38,26 +37,27 @@ GetEvent Get an event
 
 Get an event by ID (including attachments)
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param eventId The event ID
- @return ApiGetEventRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param eventId The event ID
+	@return ApiGetEventRequest
 */
 func (a *EventsAPIService) GetEvent(ctx context.Context, eventId string) ApiGetEventRequest {
 	return ApiGetEventRequest{
 		ApiService: a,
-		ctx: ctx,
-		eventId: eventId,
+		ctx:        ctx,
+		eventId:    eventId,
 	}
 }
 
 // Execute executes the request
-//  @return GetEvent200Response
+//
+//	@return GetEvent200Response
 func (a *EventsAPIService) GetEventExecute(r ApiGetEventRequest) (*GetEvent200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetEvent200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetEvent200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EventsAPIService.GetEvent")
@@ -132,8 +132,8 @@ func (a *EventsAPIService) GetEventExecute(r ApiGetEventRequest) (*GetEvent200Re
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -151,20 +151,20 @@ func (a *EventsAPIService) GetEventExecute(r ApiGetEventRequest) (*GetEvent200Re
 }
 
 type ApiListEventsRequest struct {
-	ctx context.Context
-	ApiService *EventsAPIService
-	cursor *string
-	size *int
-	sortType *string
-	sortDirection *string
-	search *string
-	scanIds *string
-	assetIds *string
-	issueIds *string
-	levels *string
-	stages *string
+	ctx            context.Context
+	ApiService     *EventsAPIService
+	cursor         *string
+	size           *int
+	sortType       *string
+	sortDirection  *string
+	search         *string
+	scanIds        *string
+	assetIds       *string
+	issueIds       *string
+	levels         *string
+	stages         *string
 	hasAttachments *string
-	attachments *string
+	attachments    *string
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
@@ -248,24 +248,25 @@ ListEvents List events
 
 List and search events of the organization.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListEventsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListEventsRequest
 */
 func (a *EventsAPIService) ListEvents(ctx context.Context) ApiListEventsRequest {
 	return ApiListEventsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ListEvents200Response
+//
+//	@return ListEvents200Response
 func (a *EventsAPIService) ListEventsExecute(r ApiListEventsRequest) (*ListEvents200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ListEvents200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ListEvents200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EventsAPIService.ListEvents")
@@ -383,8 +384,8 @@ func (a *EventsAPIService) ListEventsExecute(r ApiListEventsRequest) (*ListEvent
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

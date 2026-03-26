@@ -21,23 +21,23 @@ var _ MappedNullable = &CreateAssetBITBUCKETREPOSITORYRequest{}
 // CreateAssetBITBUCKETREPOSITORYRequest struct for CreateAssetBITBUCKETREPOSITORYRequest
 type CreateAssetBITBUCKETREPOSITORYRequest struct {
 	// The list of project IDs bind the asset on.
-	ProjectIds []string `json:"projectIds,omitempty"`
-	Name *string `json:"name,omitempty"`
-	AssetClass ENUMREPOSITORY `json:"asset_class"`
-	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
-	ScreenshotS3Key *string `json:"screenshot_s3_key,omitempty"`
-	AssetType ENUMBITBUCKETREPOSITORY `json:"asset_type"`
-	Url string `json:"url"`
-	HttpUrlToRepo *string `json:"http_url_to_repo,omitempty"`
-	Description *string `json:"description,omitempty"`
-	LocationId *string `json:"location_id,omitempty"`
-	DefaultBranch *string `json:"default_branch,omitempty"`
-	BlobBaseUrl *string `json:"blob_base_url,omitempty"`
-	LastCommit *CreateAssetGITLABREPOSITORYRequestLastCommit `json:"last_commit,omitempty"`
-	WorkspaceName *string `json:"workspace_name,omitempty"`
-	RepositoryName *string `json:"repository_name,omitempty"`
-	IsPrivate *bool `json:"is_private,omitempty"`
-	Org *CreateAssetBITBUCKETREPOSITORYRequestOrg `json:"org,omitempty"`
+	ProjectIds           []string                                      `json:"projectIds,omitempty"`
+	Name                 *string                                       `json:"name,omitempty"`
+	AssetClass           ENUMREPOSITORY                                `json:"asset_class"`
+	ExtraMetadata        map[string]interface{}                        `json:"extra_metadata,omitempty"`
+	ScreenshotS3Key      *string                                       `json:"screenshot_s3_key,omitempty"`
+	AssetType            ENUMBITBUCKETREPOSITORY                       `json:"asset_type"`
+	Url                  string                                        `json:"url"`
+	HttpUrlToRepo        *string                                       `json:"http_url_to_repo,omitempty"`
+	Description          *string                                       `json:"description,omitempty"`
+	LocationId           *string                                       `json:"location_id,omitempty"`
+	DefaultBranch        *string                                       `json:"default_branch,omitempty"`
+	BlobBaseUrl          *string                                       `json:"blob_base_url,omitempty"`
+	LastCommit           *CreateAssetGITLABREPOSITORYRequestLastCommit `json:"last_commit,omitempty"`
+	WorkspaceName        *string                                       `json:"workspace_name,omitempty"`
+	RepositoryName       *string                                       `json:"repository_name,omitempty"`
+	IsPrivate            *bool                                         `json:"is_private,omitempty"`
+	Org                  *CreateAssetBITBUCKETREPOSITORYRequestOrg     `json:"org,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -584,7 +584,7 @@ func (o *CreateAssetBITBUCKETREPOSITORYRequest) SetOrg(v CreateAssetBITBUCKETREP
 }
 
 func (o CreateAssetBITBUCKETREPOSITORYRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -661,10 +661,10 @@ func (o *CreateAssetBITBUCKETREPOSITORYRequest) UnmarshalJSON(data []byte) (err 
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -741,5 +741,3 @@ func (v *NullableCreateAssetBITBUCKETREPOSITORYRequest) UnmarshalJSON(src []byte
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

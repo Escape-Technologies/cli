@@ -20,11 +20,11 @@ var _ MappedNullable = &GetWorkflow200ResponseActionsInner{}
 
 // GetWorkflow200ResponseActionsInner struct for GetWorkflow200ResponseActionsInner
 type GetWorkflow200ResponseActionsInner struct {
-	Id string `json:"id"`
-	Type ENUMPROPERTIESACTIONSITEMSPROPERTIESTYPE `json:"type"`
-	Parameters interface{} `json:"parameters,omitempty"`
-	InternalAction *ENUMPROPERTIESACTIONSITEMSPROPERTIESINTERNALACTION `json:"internalAction,omitempty"`
-	Integration *GetWorkflow200ResponseActionsInnerIntegration `json:"integration,omitempty"`
+	Id                   string                                              `json:"id"`
+	Type                 ENUMPROPERTIESACTIONSITEMSPROPERTIESTYPE            `json:"type"`
+	Parameters           interface{}                                         `json:"parameters,omitempty"`
+	InternalAction       *ENUMPROPERTIESACTIONSITEMSPROPERTIESINTERNALACTION `json:"internalAction,omitempty"`
+	Integration          *GetWorkflow200ResponseActionsInnerIntegration      `json:"integration,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -195,7 +195,7 @@ func (o *GetWorkflow200ResponseActionsInner) SetIntegration(v GetWorkflow200Resp
 }
 
 func (o GetWorkflow200ResponseActionsInner) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -237,10 +237,10 @@ func (o *GetWorkflow200ResponseActionsInner) UnmarshalJSON(data []byte) (err err
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -305,5 +305,3 @@ func (v *NullableGetWorkflow200ResponseActionsInner) UnmarshalJSON(src []byte) e
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

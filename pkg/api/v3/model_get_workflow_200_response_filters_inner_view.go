@@ -20,10 +20,10 @@ var _ MappedNullable = &GetWorkflow200ResponseFiltersInnerView{}
 
 // GetWorkflow200ResponseFiltersInnerView struct for GetWorkflow200ResponseFiltersInnerView
 type GetWorkflow200ResponseFiltersInnerView struct {
-	Id string `json:"id"`
-	Name string `json:"name"`
-	Target ENUMPROPERTIESFILTERSITEMSPROPERTIESTYPE `json:"target"`
-	Data interface{} `json:"data,omitempty"`
+	Id                   string                                   `json:"id"`
+	Name                 string                                   `json:"name"`
+	Target               ENUMPROPERTIESFILTERSITEMSPROPERTIESTYPE `json:"target"`
+	Data                 interface{}                              `json:"data,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -155,7 +155,7 @@ func (o *GetWorkflow200ResponseFiltersInnerView) SetData(v interface{}) {
 }
 
 func (o GetWorkflow200ResponseFiltersInnerView) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -193,10 +193,10 @@ func (o *GetWorkflow200ResponseFiltersInnerView) UnmarshalJSON(data []byte) (err
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -260,5 +260,3 @@ func (v *NullableGetWorkflow200ResponseFiltersInnerView) UnmarshalJSON(src []byt
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
