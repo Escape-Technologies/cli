@@ -119,6 +119,12 @@ func generateSchema(t reflect.Type, root bool) *JSONSchema {
 	case reflect.Interface:
 		// For interface{}, we can't determine the type
 		schema.Type = "object"
+	case reflect.Invalid, reflect.Uintptr, reflect.Complex64, reflect.Complex128,
+		reflect.Array, reflect.Chan, reflect.Func, reflect.Map,
+		reflect.Pointer, reflect.Slice, reflect.UnsafePointer:
+		// These cases are either handled above (Pointer/Slice/Array/Map)
+		// or are not typically used in JSON serialization
+		schema.Type = "object"
 	}
 
 	return schema
