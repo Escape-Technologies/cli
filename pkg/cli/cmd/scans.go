@@ -95,7 +95,7 @@ ID                                      CREATED AT                           KIN
   # Export scan list to JSON for processing
   escape-cli scans list -o json > scans.json`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
-		scans, next, err := escape.ListScans(cmd.Context(), "", &escape.ListScansFilters{
+		filters := &escape.ListScansFilters{
 			ProfileIDs: &scanProfileIDs,
 			After:      scanAfter,
 			Before:     scanBefore,
@@ -103,42 +103,26 @@ ID                                      CREATED AT                           KIN
 			Initiator:  &scanInitiator,
 			Kinds:      &scanKinds,
 			Status:     &scanStatus,
-		})
+		}
+		scans, next, err := escape.ListScans(cmd.Context(), "", filters)
 		if err != nil {
 			return fmt.Errorf("unable to list scans: %w", err)
 		}
-		out.Table(scans, func() []string {
+		allScans := scans
+		for next != nil && *next != "" {
+			scans, next, err = escape.ListScans(cmd.Context(), *next, filters)
+			if err != nil {
+				return fmt.Errorf("unable to list scans: %w", err)
+			}
+			allScans = append(allScans, scans...)
+		}
+		out.Table(allScans, func() []string {
 			res := []string{"ID\tCREATED AT\tKIND\tSTATUS\tPROGRESS\tLINK"}
-			for _, scan := range scans {
+			for _, scan := range allScans {
 				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%f\t%s", scan.GetId(), scan.GetCreatedAt(), scan.GetKind(), scan.GetStatus(), scan.GetProgressRatio(), scan.GetLinks().ScanIssues))
 			}
 			return res
 		})
-
-		for next != nil && *next != "" {
-			scans, next, err = escape.ListScans(cmd.Context(), *next, &escape.ListScansFilters{
-				ProfileIDs: &scanProfileIDs,
-				After:      scanAfter,
-				Before:     scanBefore,
-				Ignored:    scanIgnored,
-				Initiator:  &scanInitiator,
-				Kinds:      &scanKinds,
-				Status:     &scanStatus,
-			})
-
-			if err != nil {
-				return fmt.Errorf("unable to list scans: %w", err)
-			}
-			out.Table(scans, func() []string {
-				res := []string{
-					"ID\tCREATED AT\tKIND\tSTATUS\tPROGRESS\tLINK",
-				}
-				for _, scan := range scans {
-					res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%f\t%s", scan.GetId(), scan.GetCreatedAt(), scan.GetKind(), scan.GetStatus(), scan.GetProgressRatio(), scan.GetLinks().ScanIssues))
-				}
-				return res
-			})
-		}
 		return nil
 	},
 }

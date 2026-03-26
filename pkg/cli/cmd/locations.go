@@ -54,17 +54,26 @@ ID                                      NAME                       SSH PUBLIC KE
 00000000-0000-0000-0000-000000000002    example-location-2         ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAI... example2@email.com`,
 	Example: `escape-cli locations list`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
-		locations, next, err := escape.ListLocations(cmd.Context(), "", &escape.ListLocationsFilters{
+		filters := &escape.ListLocationsFilters{
 			Search:        locationsSearch,
 			Enabled:       locationsEnabled,
 			LocationTypes: locationsLocationTypes,
-		})
+		}
+		locations, next, err := escape.ListLocations(cmd.Context(), "", filters)
 		if err != nil {
 			return fmt.Errorf("failed to list locations: %w", err)
 		}
-		out.Table(locations, func() []string {
+		allLocations := locations
+		for next != nil && *next != "" {
+			locations, next, err = escape.ListLocations(cmd.Context(), *next, filters)
+			if err != nil {
+				return fmt.Errorf("failed to list locations: %w", err)
+			}
+			allLocations = append(allLocations, locations...)
+		}
+		out.Table(allLocations, func() []string {
 			res := []string{"ID\tNAME\tTYPE\tENABLED\tLINK"}
-			for _, location := range locations {
+			for _, location := range allLocations {
 				res = append(
 					res,
 					fmt.Sprintf(
@@ -79,23 +88,6 @@ ID                                      NAME                       SSH PUBLIC KE
 			}
 			return res
 		})
-		for next != nil && *next != "" {
-			locations, next, err = escape.ListLocations(cmd.Context(), *next, &escape.ListLocationsFilters{
-				Search:        locationsSearch,
-				Enabled:       locationsEnabled,
-				LocationTypes: locationsLocationTypes,
-			})
-			if err != nil {
-				return fmt.Errorf("failed to list locations: %w", err)
-			}
-			out.Table(locations, func() []string {
-				res := []string{}
-				for _, location := range locations {
-					res = append(res, fmt.Sprintf("%s\t%s\t%s\t%t", location.GetId(), location.GetName(), location.GetType(), location.GetEnabled()))
-				}
-				return res
-			})
-		}
 		return nil
 	},
 }
