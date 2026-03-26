@@ -173,6 +173,10 @@ var customRulesCreateCmd = &cobra.Command{
 		return nil
 	},
 	RunE: func(cmd *cobra.Command, _ []string) error {
+		// Output JSON Schema for input format if requested
+		if out.InputSchema(v3.CreateCustomRuleRequest{}) {
+			return nil
+		}
 		// Output JSON Schema if requested
 		if out.Schema(v3.CreateCustomRule200Response{}) {
 			return nil
@@ -229,6 +233,10 @@ var customRulesUpdateCmd = &cobra.Command{
 		return nil
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
+		// Output JSON Schema for input format if requested
+		if out.InputSchema(v3.UpdateCustomRuleRequest{}) {
+			return nil
+		}
 		// Output JSON Schema if requested
 		if out.Schema(v3.CreateCustomRule200Response{}) {
 			return nil
