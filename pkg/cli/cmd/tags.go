@@ -41,6 +41,11 @@ Use these tag IDs when filtering or updating assets, profiles, and issues.`,
 
   # Export tags to JSON
   escape-cli tags list -o json`, RunE: func(cmd *cobra.Command, _ []string) error {
+		// Output JSON Schema if requested
+		if out.Schema([]v3.TagDetail{}) {
+			return nil
+		}
+
 		tags, err := escape.ListTags(cmd.Context())
 		if err != nil {
 			return fmt.Errorf("unable to list tags: %w", err)
@@ -80,6 +85,11 @@ Create a new tag with a custom name and color. Use hex color codes without the #
   # Create a team tag (blue)
   escape-cli tags create --name backend-team --color 4a90e2`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
+		// Output JSON Schema if requested
+		if out.Schema(v3.TagDetail{}) {
+			return nil
+		}
+
 		name, _ := cmd.Flags().GetString("name")
 		color, _ := cmd.Flags().GetString("color")
 		if strings.TrimSpace(name) == "" || strings.TrimSpace(color) == "" {

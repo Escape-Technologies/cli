@@ -109,6 +109,11 @@ ID                                      CREATED AT  SEVERITY  STATUS  NAME      
   # List unresolved issues across all assets
   escape-cli issues list --status OPEN,MANUAL_REVIEW,IN_PROGRESS`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
+		// Output JSON Schema if requested
+		if out.Schema([]v3.IssueSummarized{}) {
+			return nil
+		}
+
 		filters := &escape.ListIssuesFilters{
 			Status:       issueStatus,
 			Severities:   issueSeverity,
@@ -187,6 +192,11 @@ ID                                      CREATED AT                SEVERITY  CATE
 		return nil
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
+		// Output JSON Schema if requested
+		if out.Schema(v3.IssueSummarized{}) {
+			return nil
+		}
+
 		issueID := args[0]
 		issue, err := escape.GetIssue(cmd.Context(), issueID)
 		if err != nil || issue == nil {
@@ -336,6 +346,11 @@ ID                                      CREATED AT                KIND          
 		return nil
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
+		// Output JSON Schema if requested
+		if out.Schema([]v3.ActivitySummarized{}) {
+			return nil
+		}
+
 		issueID := args[0]
 		activities, err := escape.ListIssueActivities(cmd.Context(), issueID)
 		if err != nil {
