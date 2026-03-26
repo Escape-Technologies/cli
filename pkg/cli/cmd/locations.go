@@ -5,6 +5,7 @@ import (
 	"strconv"
 
 	"github.com/Escape-Technologies/cli/pkg/api/escape"
+	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
 	"github.com/Escape-Technologies/cli/pkg/cli/out"
 	"github.com/Escape-Technologies/cli/pkg/locations"
 	"github.com/spf13/cobra"
@@ -54,6 +55,11 @@ ID                                      NAME                       SSH PUBLIC KE
 00000000-0000-0000-0000-000000000002    example-location-2         ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAI... example2@email.com`,
 	Example: `escape-cli locations list`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
+		// Output JSON Schema if requested
+		if out.Schema([]v3.LocationSummarized{}) {
+			return nil
+		}
+
 		filters := &escape.ListLocationsFilters{
 			Search:        locationsSearch,
 			Enabled:       locationsEnabled,
@@ -100,6 +106,11 @@ var locationsGetCmd = &cobra.Command{
 	Args:    cobra.ExactArgs(1),
 	Example: `escape-cli locations get 00000000-0000-0000-0000-000000000000`,
 	RunE: func(cmd *cobra.Command, args []string) error {
+		// Output JSON Schema if requested
+		if out.Schema(v3.CreateLocation200Response{}) {
+			return nil
+		}
+
 		location, err := escape.GetLocation(cmd.Context(), args[0])
 		if err != nil {
 			return fmt.Errorf("failed to get location: %w", err)

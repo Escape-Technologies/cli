@@ -116,6 +116,11 @@ ID                                      CREATED AT                TYPE          
   escape-cli assets list -o json > asset-inventory.json`,
 
 	RunE: func(cmd *cobra.Command, _ []string) error {
+		// Output JSON Schema if requested
+		if out.Schema([]v3.AssetSummarized{}) {
+			return nil
+		}
+
 		filters := &escape.ListAssetsFilters{
 			AssetTypes:      assetTypes,
 			AssetStatuses:   assetStatuses,
@@ -191,6 +196,11 @@ ID                                      CREATED AT                TYPE    NAME  
 		return nil
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
+		// Output JSON Schema if requested
+		if out.Schema(v3.AssetDetailed{}) {
+			return nil
+		}
+
 		asset, err := escape.GetAsset(cmd.Context(), args[0])
 		if err != nil {
 			return fmt.Errorf("unable to get asset: %w", err)
@@ -447,6 +457,15 @@ ID                                    TYPE    NAME                  STATUS
 		return nil
 	},
 	RunE: func(cmd *cobra.Command, _ []string) error {
+		// Output JSON Schema for input format if requested (REST as example, varies by asset_type)
+		if out.InputSchema(v3.CreateAssetRESTRequest{}) {
+			return nil
+		}
+		// Output JSON Schema if requested
+		if out.Schema(v3.AssetDetailed{}) {
+			return nil
+		}
+
 		var data []byte
 
 		b, err := io.ReadAll(os.Stdin)
