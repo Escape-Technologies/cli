@@ -116,47 +116,31 @@ ID                                      CREATED AT                TYPE          
   escape-cli assets list -o json > asset-inventory.json`,
 
 	RunE: func(cmd *cobra.Command, _ []string) error {
-		assets, next, err := escape.ListAssets(cmd.Context(), "", &escape.ListAssetsFilters{
+		filters := &escape.ListAssetsFilters{
 			AssetTypes:      assetTypes,
 			AssetStatuses:   assetStatuses,
 			Search:          search,
 			ManuallyCreated: manuallyCreated,
-		})
+		}
+		assets, next, err := escape.ListAssets(cmd.Context(), "", filters)
 		if err != nil {
 			return fmt.Errorf("unable to list assets: %w", err)
 		}
-
-		out.Table(assets, func() []string {
+		allAssets := assets
+		for next != nil && *next != "" {
+			assets, next, err = escape.ListAssets(cmd.Context(), *next, filters)
+			if err != nil {
+				return fmt.Errorf("unable to list assets: %w", err)
+			}
+			allAssets = append(allAssets, assets...)
+		}
+		out.Table(allAssets, func() []string {
 			res := []string{"ID\tCREATED AT\tTYPE\tSTATUS\tLAST SEEN\tRISKS\tNAME"}
-			for _, asset := range assets {
+			for _, asset := range allAssets {
 				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s", asset.GetId(), asset.GetCreatedAt(), asset.GetType(), asset.GetStatus(), asset.GetLastSeenAt(), asset.GetRisks(), asset.GetName()))
 			}
 			return res
 		})
-
-		for next != nil && *next != "" {
-			assets, next, err = escape.ListAssets(
-				cmd.Context(),
-				*next,
-				&escape.ListAssetsFilters{
-					AssetTypes:      assetTypes,
-					AssetStatuses:   assetStatuses,
-					Search:          search,
-					ManuallyCreated: manuallyCreated,
-				},
-			)
-			if err != nil {
-				return fmt.Errorf("unable to list assets: %w", err)
-			}
-			out.Table(assets, func() []string {
-				res := []string{"ID\tCREATED AT\tTYPE\tSTATUS\tLAST SEEN\tRISKS\tNAME"}
-				for _, asset := range assets {
-					res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s", asset.GetId(), asset.GetCreatedAt(), asset.GetType(), asset.GetStatus(), asset.GetLastSeenAt(), asset.GetRisks(), asset.GetName()))
-				}
-				return res
-			})
-		}
-
 		return nil
 	},
 }

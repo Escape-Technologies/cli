@@ -126,28 +126,21 @@ ID                                      CREATED AT  SEVERITY  STATUS  NAME      
 		if err != nil {
 			return fmt.Errorf("unable to list issues: %w", err)
 		}
-
-		out.Table(issues, func() []string {
+		allIssues := issues
+		for next != nil && *next != "" {
+			issues, next, err = escape.ListIssues(cmd.Context(), *next, filters)
+			if err != nil {
+				return fmt.Errorf("unable to list issues: %w", err)
+			}
+			allIssues = append(allIssues, issues...)
+		}
+		out.Table(allIssues, func() []string {
 			res := []string{"ID\tCREATED AT\tSEVERITY\tSTATUS\tNAME\tASSET\tLINK"}
-			for _, issue := range issues {
+			for _, issue := range allIssues {
 				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s", issue.GetId(), out.GetShortDate(issue.GetCreatedAt()), issue.GetSeverity(), issue.GetStatus(), issue.GetName(), issue.GetAsset().Name, issue.GetLinks().IssueOverview))
 			}
 			return res
 		})
-
-		for next != nil && *next != "" {
-			issues, next, err = escape.ListIssues(cmd.Context(), *next, filters)
-			if err != nil {
-				return fmt.Errorf("unable to list profiles: %w", err)
-			}
-			out.Table(issues, func() []string {
-				res := []string{"ID\tCREATED AT\tSEVERITY\tSTATUS\tNAME\tASSET\tLINK"}
-				for _, issue := range issues {
-					res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s", issue.GetId(), out.GetShortDate(issue.GetCreatedAt()), issue.GetSeverity(), issue.GetStatus(), issue.GetName(), issue.GetAsset().Name, issue.GetLinks().IssueOverview))
-				}
-				return res
-			})
-		}
 
 		return nil
 	},

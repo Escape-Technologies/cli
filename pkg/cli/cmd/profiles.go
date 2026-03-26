@@ -100,7 +100,7 @@ ID                                      CREATED AT              ASSET TYPE    IN
 			kindsToUse = []string{"BLST_REST", "BLST_GRAPHQL", "FRONTEND_DAST"}
 		}
 
-		profiles, next, err := escape.ListProfiles(cmd.Context(), "", &escape.ListProfilesFilters{
+		filters := &escape.ListProfilesFilters{
 			AssetIDs:   profileAssetIDs,
 			Domains:    profileDomains,
 			IssueIDs:   profileIssueIDs,
@@ -109,41 +109,26 @@ ID                                      CREATED AT              ASSET TYPE    IN
 			Initiators: profileInitiators,
 			Kinds:      kindsToUse,
 			Risks:      profileRisks,
-		})
+		}
+		profiles, next, err := escape.ListProfiles(cmd.Context(), "", filters)
 		if err != nil {
 			return fmt.Errorf("unable to list profiles: %w", err)
 		}
-
-		out.Table(profiles, func() []string {
+		allProfiles := profiles
+		for next != nil && *next != "" {
+			profiles, next, err = escape.ListProfiles(cmd.Context(), *next, filters)
+			if err != nil {
+				return fmt.Errorf("unable to list profiles: %w", err)
+			}
+			allProfiles = append(allProfiles, profiles...)
+		}
+		out.Table(allProfiles, func() []string {
 			result := []string{"ID\tCREATED AT\tASSET TYPE\tINITIATORS\tNAME"}
-			for _, profile := range profiles {
+			for _, profile := range allProfiles {
 				result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s\t%s", profile.GetId(), profile.GetCreatedAt(), profile.Asset.GetType(), profile.GetInitiators(), profile.GetName()))
 			}
 			return result
 		})
-
-		for next != nil && *next != "" {
-			profiles, next, err = escape.ListProfiles(cmd.Context(), *next, &escape.ListProfilesFilters{
-				AssetIDs:   profileAssetIDs,
-				Domains:    profileDomains,
-				IssueIDs:   profileIssueIDs,
-				TagsIDs:    profileTagsIDs,
-				Search:     profileSearch,
-				Initiators: profileInitiators,
-				Kinds:      kindsToUse,
-				Risks:      profileRisks,
-			})
-			if err != nil {
-				return fmt.Errorf("unable to list profiles: %w", err)
-			}
-			out.Table(profiles, func() []string {
-				result := []string{"ID\tCREATED AT\tASSET TYPE\tINITIATORS\tNAME"}
-				for _, profile := range profiles {
-					result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s\t%s", profile.GetId(), profile.GetCreatedAt(), profile.Asset.GetType(), profile.GetInitiators(), profile.GetName()))
-				}
-				return result
-			})
-		}
 
 		return nil
 	},
