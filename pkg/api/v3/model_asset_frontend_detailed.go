@@ -18,19 +18,19 @@ import (
 // checks if the AssetFrontendDetailed type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AssetFrontendDetailed{}
 
-// AssetFrontendDetailed Detailed information about an asset frontend
+// AssetFrontendDetailed The frontend of the asset
 type AssetFrontendDetailed struct {
-	Type                 ENUMWEBAPP                                                                       `json:"type"`
-	Url                  string                                                                           `json:"url"`
-	Framework            *string                                                                          `json:"framework,omitempty"`
-	APIFramework         *string                                                                          `json:"APIFramework,omitempty"`
-	AuthProtocol         *string                                                                          `json:"authProtocol,omitempty"`
-	AuthTechnology       *ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESAUTHTECHNOLOGY `json:"authTechnology,omitempty"`
-	CloudProvider        *ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER  `json:"cloudProvider,omitempty"`
-	WafProvider          *ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESWAFPROVIDER    `json:"wafProvider,omitempty"`
-	Environment          *ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESENVIRONMENT    `json:"environment,omitempty"`
-	Ips                  []string                                                                         `json:"ips"`
-	Tls                  bool                                                                             `json:"tls"`
+	Type ENUMWEBAPP `json:"type"`
+	Url string `json:"url"`
+	Framework *string `json:"framework,omitempty"`
+	APIFramework *string `json:"APIFramework,omitempty"`
+	AuthProtocol *string `json:"authProtocol,omitempty"`
+	AuthTechnology *ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESAUTHTECHNOLOGY `json:"authTechnology,omitempty"`
+	CloudProvider *ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER `json:"cloudProvider,omitempty"`
+	WafProvider *ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESWAFPROVIDER `json:"wafProvider,omitempty"`
+	Environment *ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESENVIRONMENT `json:"environment,omitempty"`
+	Ips []string `json:"ips"`
+	Tls bool `json:"tls"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -378,7 +378,7 @@ func (o *AssetFrontendDetailed) SetTls(v bool) {
 }
 
 func (o AssetFrontendDetailed) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -436,10 +436,10 @@ func (o *AssetFrontendDetailed) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -510,3 +510,5 @@ func (v *NullableAssetFrontendDetailed) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

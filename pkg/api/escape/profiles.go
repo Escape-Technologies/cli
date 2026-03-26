@@ -65,7 +65,7 @@ func ListProfiles(ctx context.Context, next string, filters *ListProfilesFilters
 }
 
 // GetProfile gets a profile by ID
-func GetProfile(ctx context.Context, profileID string) (*v3.ProfileDetailed, error) {
+func GetProfile(ctx context.Context, profileID string) (*v3.GetProfile200Response, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)

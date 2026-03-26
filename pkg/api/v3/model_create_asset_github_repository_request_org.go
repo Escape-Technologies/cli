@@ -20,15 +20,14 @@ var _ MappedNullable = &CreateAssetGITHUBREPOSITORYRequestOrg{}
 
 // CreateAssetGITHUBREPOSITORYRequestOrg struct for CreateAssetGITHUBREPOSITORYRequestOrg
 type CreateAssetGITHUBREPOSITORYRequestOrg struct {
-	AssetClass           ENUMSOURCECODEMANAGEMENT `json:"asset_class"`
-	WizProviderId        *string                  `json:"wiz_provider_id,omitempty"`
-	WizCloudPlatform     *string                  `json:"wiz_cloud_platform,omitempty"`
-	ExtraMetadata        map[string]interface{}   `json:"extra_metadata,omitempty"`
-	AssetType            ENUMGITHUBORGANIZATION   `json:"asset_type"`
-	Name                 *string                  `json:"name,omitempty"`
-	ImmutableKey         string                   `json:"immutable_key"`
-	ApiKey               string                   `json:"api_key"`
-	LocationId           *string                  `json:"location_id,omitempty"`
+	AssetClass ENUMSOURCECODEMANAGEMENT `json:"asset_class"`
+	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
+	ScreenshotS3Key *string `json:"screenshot_s3_key,omitempty"`
+	AssetType ENUMGITHUBORGANIZATION `json:"asset_type"`
+	Name *string `json:"name,omitempty"`
+	ImmutableKey string `json:"immutable_key"`
+	ApiKey string `json:"api_key"`
+	LocationId *string `json:"location_id,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -79,70 +78,6 @@ func (o *CreateAssetGITHUBREPOSITORYRequestOrg) SetAssetClass(v ENUMSOURCECODEMA
 	o.AssetClass = v
 }
 
-// GetWizProviderId returns the WizProviderId field value if set, zero value otherwise.
-func (o *CreateAssetGITHUBREPOSITORYRequestOrg) GetWizProviderId() string {
-	if o == nil || IsNil(o.WizProviderId) {
-		var ret string
-		return ret
-	}
-	return *o.WizProviderId
-}
-
-// GetWizProviderIdOk returns a tuple with the WizProviderId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateAssetGITHUBREPOSITORYRequestOrg) GetWizProviderIdOk() (*string, bool) {
-	if o == nil || IsNil(o.WizProviderId) {
-		return nil, false
-	}
-	return o.WizProviderId, true
-}
-
-// HasWizProviderId returns a boolean if a field has been set.
-func (o *CreateAssetGITHUBREPOSITORYRequestOrg) HasWizProviderId() bool {
-	if o != nil && !IsNil(o.WizProviderId) {
-		return true
-	}
-
-	return false
-}
-
-// SetWizProviderId gets a reference to the given string and assigns it to the WizProviderId field.
-func (o *CreateAssetGITHUBREPOSITORYRequestOrg) SetWizProviderId(v string) {
-	o.WizProviderId = &v
-}
-
-// GetWizCloudPlatform returns the WizCloudPlatform field value if set, zero value otherwise.
-func (o *CreateAssetGITHUBREPOSITORYRequestOrg) GetWizCloudPlatform() string {
-	if o == nil || IsNil(o.WizCloudPlatform) {
-		var ret string
-		return ret
-	}
-	return *o.WizCloudPlatform
-}
-
-// GetWizCloudPlatformOk returns a tuple with the WizCloudPlatform field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateAssetGITHUBREPOSITORYRequestOrg) GetWizCloudPlatformOk() (*string, bool) {
-	if o == nil || IsNil(o.WizCloudPlatform) {
-		return nil, false
-	}
-	return o.WizCloudPlatform, true
-}
-
-// HasWizCloudPlatform returns a boolean if a field has been set.
-func (o *CreateAssetGITHUBREPOSITORYRequestOrg) HasWizCloudPlatform() bool {
-	if o != nil && !IsNil(o.WizCloudPlatform) {
-		return true
-	}
-
-	return false
-}
-
-// SetWizCloudPlatform gets a reference to the given string and assigns it to the WizCloudPlatform field.
-func (o *CreateAssetGITHUBREPOSITORYRequestOrg) SetWizCloudPlatform(v string) {
-	o.WizCloudPlatform = &v
-}
-
 // GetExtraMetadata returns the ExtraMetadata field value if set, zero value otherwise.
 func (o *CreateAssetGITHUBREPOSITORYRequestOrg) GetExtraMetadata() map[string]interface{} {
 	if o == nil || IsNil(o.ExtraMetadata) {
@@ -173,6 +108,38 @@ func (o *CreateAssetGITHUBREPOSITORYRequestOrg) HasExtraMetadata() bool {
 // SetExtraMetadata gets a reference to the given map[string]interface{} and assigns it to the ExtraMetadata field.
 func (o *CreateAssetGITHUBREPOSITORYRequestOrg) SetExtraMetadata(v map[string]interface{}) {
 	o.ExtraMetadata = v
+}
+
+// GetScreenshotS3Key returns the ScreenshotS3Key field value if set, zero value otherwise.
+func (o *CreateAssetGITHUBREPOSITORYRequestOrg) GetScreenshotS3Key() string {
+	if o == nil || IsNil(o.ScreenshotS3Key) {
+		var ret string
+		return ret
+	}
+	return *o.ScreenshotS3Key
+}
+
+// GetScreenshotS3KeyOk returns a tuple with the ScreenshotS3Key field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetGITHUBREPOSITORYRequestOrg) GetScreenshotS3KeyOk() (*string, bool) {
+	if o == nil || IsNil(o.ScreenshotS3Key) {
+		return nil, false
+	}
+	return o.ScreenshotS3Key, true
+}
+
+// HasScreenshotS3Key returns a boolean if a field has been set.
+func (o *CreateAssetGITHUBREPOSITORYRequestOrg) HasScreenshotS3Key() bool {
+	if o != nil && !IsNil(o.ScreenshotS3Key) {
+		return true
+	}
+
+	return false
+}
+
+// SetScreenshotS3Key gets a reference to the given string and assigns it to the ScreenshotS3Key field.
+func (o *CreateAssetGITHUBREPOSITORYRequestOrg) SetScreenshotS3Key(v string) {
+	o.ScreenshotS3Key = &v
 }
 
 // GetAssetType returns the AssetType field value
@@ -312,7 +279,7 @@ func (o *CreateAssetGITHUBREPOSITORYRequestOrg) SetLocationId(v string) {
 }
 
 func (o CreateAssetGITHUBREPOSITORYRequestOrg) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -322,14 +289,11 @@ func (o CreateAssetGITHUBREPOSITORYRequestOrg) MarshalJSON() ([]byte, error) {
 func (o CreateAssetGITHUBREPOSITORYRequestOrg) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["asset_class"] = o.AssetClass
-	if !IsNil(o.WizProviderId) {
-		toSerialize["wiz_provider_id"] = o.WizProviderId
-	}
-	if !IsNil(o.WizCloudPlatform) {
-		toSerialize["wiz_cloud_platform"] = o.WizCloudPlatform
-	}
 	if !IsNil(o.ExtraMetadata) {
 		toSerialize["extra_metadata"] = o.ExtraMetadata
+	}
+	if !IsNil(o.ScreenshotS3Key) {
+		toSerialize["screenshot_s3_key"] = o.ScreenshotS3Key
 	}
 	toSerialize["asset_type"] = o.AssetType
 	if !IsNil(o.Name) {
@@ -364,10 +328,10 @@ func (o *CreateAssetGITHUBREPOSITORYRequestOrg) UnmarshalJSON(data []byte) (err 
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -387,9 +351,8 @@ func (o *CreateAssetGITHUBREPOSITORYRequestOrg) UnmarshalJSON(data []byte) (err 
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "asset_class")
-		delete(additionalProperties, "wiz_provider_id")
-		delete(additionalProperties, "wiz_cloud_platform")
 		delete(additionalProperties, "extra_metadata")
+		delete(additionalProperties, "screenshot_s3_key")
 		delete(additionalProperties, "asset_type")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "immutable_key")
@@ -436,3 +399,5 @@ func (v *NullableCreateAssetGITHUBREPOSITORYRequestOrg) UnmarshalJSON(src []byte
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

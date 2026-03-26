@@ -20,9 +20,9 @@ var _ MappedNullable = &ListScans200Response{}
 
 // ListScans200Response struct for ListScans200Response
 type ListScans200Response struct {
-	NextCursor           *string           `json:"nextCursor,omitempty"`
-	TotalCount           *int              `json:"totalCount,omitempty"`
-	Data                 []ScanSummarized1 `json:"data"`
+	NextCursor *string `json:"nextCursor,omitempty"`
+	TotalCount *int `json:"totalCount,omitempty"`
+	Data []ScanSummarized2 `json:"data"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -32,7 +32,7 @@ type _ListScans200Response ListScans200Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewListScans200Response(data []ScanSummarized1) *ListScans200Response {
+func NewListScans200Response(data []ScanSummarized2) *ListScans200Response {
 	this := ListScans200Response{}
 	var totalCount int = 100
 	this.TotalCount = &totalCount
@@ -115,9 +115,9 @@ func (o *ListScans200Response) SetTotalCount(v int) {
 }
 
 // GetData returns the Data field value
-func (o *ListScans200Response) GetData() []ScanSummarized1 {
+func (o *ListScans200Response) GetData() []ScanSummarized2 {
 	if o == nil {
-		var ret []ScanSummarized1
+		var ret []ScanSummarized2
 		return ret
 	}
 
@@ -126,7 +126,7 @@ func (o *ListScans200Response) GetData() []ScanSummarized1 {
 
 // GetDataOk returns a tuple with the Data field value
 // and a boolean to check if the value has been set.
-func (o *ListScans200Response) GetDataOk() ([]ScanSummarized1, bool) {
+func (o *ListScans200Response) GetDataOk() ([]ScanSummarized2, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -134,12 +134,12 @@ func (o *ListScans200Response) GetDataOk() ([]ScanSummarized1, bool) {
 }
 
 // SetData sets field value
-func (o *ListScans200Response) SetData(v []ScanSummarized1) {
+func (o *ListScans200Response) SetData(v []ScanSummarized2) {
 	o.Data = v
 }
 
 func (o ListScans200Response) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -176,10 +176,10 @@ func (o *ListScans200Response) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -242,3 +242,5 @@ func (v *NullableListScans200Response) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

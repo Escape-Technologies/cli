@@ -68,7 +68,7 @@ func ListEvents(ctx context.Context, next string, filters *ListEventsFilters) ([
 }
 
 // GetEvent gets an event
-func GetEvent(ctx context.Context, eventID string) (*v3.EventDetailed, error) {
+func GetEvent(ctx context.Context, eventID string) (*v3.GetEvent200Response, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)

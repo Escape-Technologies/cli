@@ -28,12 +28,14 @@ type CreateDastWebAppProfileRequest struct {
 	Cron *string `json:"cron,omitempty"`
 	// The name of the profile
 	Name string `json:"name"`
+	// The description of the profile
+	Description *string `json:"description,omitempty"`
 	// The proxy ID for the profile
 	ProxyId *string `json:"proxyId,omitempty"`
 	// The tags IDs for the profile
 	TagsIds []string `json:"tagsIds,omitempty"`
 	// Whether to start the scan immediately
-	Start                *bool `json:"start,omitempty"`
+	Start *bool `json:"start,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -174,6 +176,38 @@ func (o *CreateDastWebAppProfileRequest) SetName(v string) {
 	o.Name = v
 }
 
+// GetDescription returns the Description field value if set, zero value otherwise.
+func (o *CreateDastWebAppProfileRequest) GetDescription() string {
+	if o == nil || IsNil(o.Description) {
+		var ret string
+		return ret
+	}
+	return *o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateDastWebAppProfileRequest) GetDescriptionOk() (*string, bool) {
+	if o == nil || IsNil(o.Description) {
+		return nil, false
+	}
+	return o.Description, true
+}
+
+// HasDescription returns a boolean if a field has been set.
+func (o *CreateDastWebAppProfileRequest) HasDescription() bool {
+	if o != nil && !IsNil(o.Description) {
+		return true
+	}
+
+	return false
+}
+
+// SetDescription gets a reference to the given string and assigns it to the Description field.
+func (o *CreateDastWebAppProfileRequest) SetDescription(v string) {
+	o.Description = &v
+}
+
 // GetProxyId returns the ProxyId field value if set, zero value otherwise.
 func (o *CreateDastWebAppProfileRequest) GetProxyId() string {
 	if o == nil || IsNil(o.ProxyId) {
@@ -271,7 +305,7 @@ func (o *CreateDastWebAppProfileRequest) SetStart(v bool) {
 }
 
 func (o CreateDastWebAppProfileRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -288,6 +322,9 @@ func (o CreateDastWebAppProfileRequest) ToMap() (map[string]interface{}, error) 
 		toSerialize["cron"] = o.Cron
 	}
 	toSerialize["name"] = o.Name
+	if !IsNil(o.Description) {
+		toSerialize["description"] = o.Description
+	}
 	if !IsNil(o.ProxyId) {
 		toSerialize["proxyId"] = o.ProxyId
 	}
@@ -319,10 +356,10 @@ func (o *CreateDastWebAppProfileRequest) UnmarshalJSON(data []byte) (err error) 
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -345,6 +382,7 @@ func (o *CreateDastWebAppProfileRequest) UnmarshalJSON(data []byte) (err error) 
 		delete(additionalProperties, "configuration")
 		delete(additionalProperties, "cron")
 		delete(additionalProperties, "name")
+		delete(additionalProperties, "description")
 		delete(additionalProperties, "proxyId")
 		delete(additionalProperties, "tagsIds")
 		delete(additionalProperties, "start")
@@ -389,3 +427,5 @@ func (v *NullableCreateDastWebAppProfileRequest) UnmarshalJSON(src []byte) error
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

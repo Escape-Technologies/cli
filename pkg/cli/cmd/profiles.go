@@ -192,7 +192,7 @@ See https://public.escape.tech/v3/#tag/profiles for complete schema.`,
 
 		out.Table(response, func() []string {
 			result := []string{"ID\tCREATED AT\tNAME\tASSET TYPE"}
-			if profileResponse, ok := response.(*v3.ProfileDetailed); ok {
+			if profileResponse, ok := response.(*v3.GetProfile200Response); ok {
 				result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s", profileResponse.GetId(), profileResponse.GetCreatedAt(), profileResponse.GetName(), profileResponse.Asset.GetType()))
 			}
 			return result
@@ -228,7 +228,7 @@ Create a new profile for testing web applications. Provide configuration via JSO
 
 		out.Table(response, func() []string {
 			result := []string{"ID\tCREATED AT\tNAME\tASSET TYPE"}
-			if profileResponse, ok := response.(*v3.ProfileDetailed); ok {
+			if profileResponse, ok := response.(*v3.GetProfile200Response); ok {
 				result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s", profileResponse.GetId(), profileResponse.GetCreatedAt(), profileResponse.GetName(), profileResponse.Asset.GetType()))
 			}
 			return result
@@ -263,7 +263,7 @@ Create a new profile for testing GraphQL APIs. Provide configuration via JSON th
 
 		out.Table(response, func() []string {
 			result := []string{"ID\tCREATED AT\tNAME\tASSET TYPE"}
-			if profileResponse, ok := response.(*v3.ProfileDetailed); ok {
+			if profileResponse, ok := response.(*v3.GetProfile200Response); ok {
 				result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s", profileResponse.GetId(), profileResponse.GetCreatedAt(), profileResponse.GetName(), profileResponse.Asset.GetType()))
 			}
 			return result

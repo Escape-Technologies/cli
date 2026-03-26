@@ -21,26 +21,26 @@ var _ MappedNullable = &CreateAssetGITLABREPOSITORYRequest{}
 // CreateAssetGITLABREPOSITORYRequest struct for CreateAssetGITLABREPOSITORYRequest
 type CreateAssetGITLABREPOSITORYRequest struct {
 	// The list of project IDs bind the asset on.
-	ProjectIds           []string                                 `json:"projectIds,omitempty"`
-	AssetClass           ENUMREPOSITORY                           `json:"asset_class"`
-	WizProviderId        *string                                  `json:"wiz_provider_id,omitempty"`
-	WizCloudPlatform     *string                                  `json:"wiz_cloud_platform,omitempty"`
-	ExtraMetadata        map[string]interface{}                   `json:"extra_metadata,omitempty"`
-	AssetType            ENUMGITLABREPOSITORY                     `json:"asset_type"`
-	Url                  string                                   `json:"url"`
-	Name                 *string                                  `json:"name,omitempty"`
-	HttpUrlToRepo        *string                                  `json:"http_url_to_repo,omitempty"`
-	Description          *string                                  `json:"description,omitempty"`
-	LocationId           *string                                  `json:"location_id,omitempty"`
-	DefaultBranch        *string                                  `json:"default_branch,omitempty"`
-	BlobBaseUrl          *string                                  `json:"blob_base_url,omitempty"`
-	GroupId              *float32                                 `json:"group_id,omitempty"`
-	GroupFullPath        *string                                  `json:"group_full_path,omitempty"`
-	GroupWebUrl          *string                                  `json:"group_web_url,omitempty"`
-	ProjectId            *float32                                 `json:"project_id,omitempty"`
-	Archived             *bool                                    `json:"archived,omitempty"`
-	Visibility           *ENUMPROPERTIESVISIBILITY                `json:"visibility,omitempty"`
-	Group                *CreateAssetGITLABREPOSITORYRequestGroup `json:"group,omitempty"`
+	ProjectIds []string `json:"projectIds,omitempty"`
+	Name *string `json:"name,omitempty"`
+	AssetClass ENUMREPOSITORY `json:"asset_class"`
+	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
+	ScreenshotS3Key *string `json:"screenshot_s3_key,omitempty"`
+	AssetType ENUMGITLABREPOSITORY `json:"asset_type"`
+	Url string `json:"url"`
+	HttpUrlToRepo *string `json:"http_url_to_repo,omitempty"`
+	Description *string `json:"description,omitempty"`
+	LocationId *string `json:"location_id,omitempty"`
+	DefaultBranch *string `json:"default_branch,omitempty"`
+	BlobBaseUrl *string `json:"blob_base_url,omitempty"`
+	LastCommit *CreateAssetGITLABREPOSITORYRequestLastCommit `json:"last_commit,omitempty"`
+	GroupId *float32 `json:"group_id,omitempty"`
+	GroupFullPath *string `json:"group_full_path,omitempty"`
+	GroupWebUrl *string `json:"group_web_url,omitempty"`
+	ProjectId *float32 `json:"project_id,omitempty"`
+	Archived *bool `json:"archived,omitempty"`
+	Visibility *ENUMPROPERTIESVISIBILITY `json:"visibility,omitempty"`
+	Group *CreateAssetGITLABREPOSITORYRequestGroup `json:"group,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -98,6 +98,38 @@ func (o *CreateAssetGITLABREPOSITORYRequest) SetProjectIds(v []string) {
 	o.ProjectIds = v
 }
 
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *CreateAssetGITLABREPOSITORYRequest) GetName() string {
+	if o == nil || IsNil(o.Name) {
+		var ret string
+		return ret
+	}
+	return *o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetGITLABREPOSITORYRequest) GetNameOk() (*string, bool) {
+	if o == nil || IsNil(o.Name) {
+		return nil, false
+	}
+	return o.Name, true
+}
+
+// HasName returns a boolean if a field has been set.
+func (o *CreateAssetGITLABREPOSITORYRequest) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *CreateAssetGITLABREPOSITORYRequest) SetName(v string) {
+	o.Name = &v
+}
+
 // GetAssetClass returns the AssetClass field value
 func (o *CreateAssetGITLABREPOSITORYRequest) GetAssetClass() ENUMREPOSITORY {
 	if o == nil {
@@ -120,70 +152,6 @@ func (o *CreateAssetGITLABREPOSITORYRequest) GetAssetClassOk() (*ENUMREPOSITORY,
 // SetAssetClass sets field value
 func (o *CreateAssetGITLABREPOSITORYRequest) SetAssetClass(v ENUMREPOSITORY) {
 	o.AssetClass = v
-}
-
-// GetWizProviderId returns the WizProviderId field value if set, zero value otherwise.
-func (o *CreateAssetGITLABREPOSITORYRequest) GetWizProviderId() string {
-	if o == nil || IsNil(o.WizProviderId) {
-		var ret string
-		return ret
-	}
-	return *o.WizProviderId
-}
-
-// GetWizProviderIdOk returns a tuple with the WizProviderId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateAssetGITLABREPOSITORYRequest) GetWizProviderIdOk() (*string, bool) {
-	if o == nil || IsNil(o.WizProviderId) {
-		return nil, false
-	}
-	return o.WizProviderId, true
-}
-
-// HasWizProviderId returns a boolean if a field has been set.
-func (o *CreateAssetGITLABREPOSITORYRequest) HasWizProviderId() bool {
-	if o != nil && !IsNil(o.WizProviderId) {
-		return true
-	}
-
-	return false
-}
-
-// SetWizProviderId gets a reference to the given string and assigns it to the WizProviderId field.
-func (o *CreateAssetGITLABREPOSITORYRequest) SetWizProviderId(v string) {
-	o.WizProviderId = &v
-}
-
-// GetWizCloudPlatform returns the WizCloudPlatform field value if set, zero value otherwise.
-func (o *CreateAssetGITLABREPOSITORYRequest) GetWizCloudPlatform() string {
-	if o == nil || IsNil(o.WizCloudPlatform) {
-		var ret string
-		return ret
-	}
-	return *o.WizCloudPlatform
-}
-
-// GetWizCloudPlatformOk returns a tuple with the WizCloudPlatform field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateAssetGITLABREPOSITORYRequest) GetWizCloudPlatformOk() (*string, bool) {
-	if o == nil || IsNil(o.WizCloudPlatform) {
-		return nil, false
-	}
-	return o.WizCloudPlatform, true
-}
-
-// HasWizCloudPlatform returns a boolean if a field has been set.
-func (o *CreateAssetGITLABREPOSITORYRequest) HasWizCloudPlatform() bool {
-	if o != nil && !IsNil(o.WizCloudPlatform) {
-		return true
-	}
-
-	return false
-}
-
-// SetWizCloudPlatform gets a reference to the given string and assigns it to the WizCloudPlatform field.
-func (o *CreateAssetGITLABREPOSITORYRequest) SetWizCloudPlatform(v string) {
-	o.WizCloudPlatform = &v
 }
 
 // GetExtraMetadata returns the ExtraMetadata field value if set, zero value otherwise.
@@ -216,6 +184,38 @@ func (o *CreateAssetGITLABREPOSITORYRequest) HasExtraMetadata() bool {
 // SetExtraMetadata gets a reference to the given map[string]interface{} and assigns it to the ExtraMetadata field.
 func (o *CreateAssetGITLABREPOSITORYRequest) SetExtraMetadata(v map[string]interface{}) {
 	o.ExtraMetadata = v
+}
+
+// GetScreenshotS3Key returns the ScreenshotS3Key field value if set, zero value otherwise.
+func (o *CreateAssetGITLABREPOSITORYRequest) GetScreenshotS3Key() string {
+	if o == nil || IsNil(o.ScreenshotS3Key) {
+		var ret string
+		return ret
+	}
+	return *o.ScreenshotS3Key
+}
+
+// GetScreenshotS3KeyOk returns a tuple with the ScreenshotS3Key field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetGITLABREPOSITORYRequest) GetScreenshotS3KeyOk() (*string, bool) {
+	if o == nil || IsNil(o.ScreenshotS3Key) {
+		return nil, false
+	}
+	return o.ScreenshotS3Key, true
+}
+
+// HasScreenshotS3Key returns a boolean if a field has been set.
+func (o *CreateAssetGITLABREPOSITORYRequest) HasScreenshotS3Key() bool {
+	if o != nil && !IsNil(o.ScreenshotS3Key) {
+		return true
+	}
+
+	return false
+}
+
+// SetScreenshotS3Key gets a reference to the given string and assigns it to the ScreenshotS3Key field.
+func (o *CreateAssetGITLABREPOSITORYRequest) SetScreenshotS3Key(v string) {
+	o.ScreenshotS3Key = &v
 }
 
 // GetAssetType returns the AssetType field value
@@ -264,38 +264,6 @@ func (o *CreateAssetGITLABREPOSITORYRequest) GetUrlOk() (*string, bool) {
 // SetUrl sets field value
 func (o *CreateAssetGITLABREPOSITORYRequest) SetUrl(v string) {
 	o.Url = v
-}
-
-// GetName returns the Name field value if set, zero value otherwise.
-func (o *CreateAssetGITLABREPOSITORYRequest) GetName() string {
-	if o == nil || IsNil(o.Name) {
-		var ret string
-		return ret
-	}
-	return *o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateAssetGITLABREPOSITORYRequest) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
-		return nil, false
-	}
-	return o.Name, true
-}
-
-// HasName returns a boolean if a field has been set.
-func (o *CreateAssetGITLABREPOSITORYRequest) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given string and assigns it to the Name field.
-func (o *CreateAssetGITLABREPOSITORYRequest) SetName(v string) {
-	o.Name = &v
 }
 
 // GetHttpUrlToRepo returns the HttpUrlToRepo field value if set, zero value otherwise.
@@ -456,6 +424,38 @@ func (o *CreateAssetGITLABREPOSITORYRequest) HasBlobBaseUrl() bool {
 // SetBlobBaseUrl gets a reference to the given string and assigns it to the BlobBaseUrl field.
 func (o *CreateAssetGITLABREPOSITORYRequest) SetBlobBaseUrl(v string) {
 	o.BlobBaseUrl = &v
+}
+
+// GetLastCommit returns the LastCommit field value if set, zero value otherwise.
+func (o *CreateAssetGITLABREPOSITORYRequest) GetLastCommit() CreateAssetGITLABREPOSITORYRequestLastCommit {
+	if o == nil || IsNil(o.LastCommit) {
+		var ret CreateAssetGITLABREPOSITORYRequestLastCommit
+		return ret
+	}
+	return *o.LastCommit
+}
+
+// GetLastCommitOk returns a tuple with the LastCommit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetGITLABREPOSITORYRequest) GetLastCommitOk() (*CreateAssetGITLABREPOSITORYRequestLastCommit, bool) {
+	if o == nil || IsNil(o.LastCommit) {
+		return nil, false
+	}
+	return o.LastCommit, true
+}
+
+// HasLastCommit returns a boolean if a field has been set.
+func (o *CreateAssetGITLABREPOSITORYRequest) HasLastCommit() bool {
+	if o != nil && !IsNil(o.LastCommit) {
+		return true
+	}
+
+	return false
+}
+
+// SetLastCommit gets a reference to the given CreateAssetGITLABREPOSITORYRequestLastCommit and assigns it to the LastCommit field.
+func (o *CreateAssetGITLABREPOSITORYRequest) SetLastCommit(v CreateAssetGITLABREPOSITORYRequestLastCommit) {
+	o.LastCommit = &v
 }
 
 // GetGroupId returns the GroupId field value if set, zero value otherwise.
@@ -683,7 +683,7 @@ func (o *CreateAssetGITLABREPOSITORYRequest) SetGroup(v CreateAssetGITLABREPOSIT
 }
 
 func (o CreateAssetGITLABREPOSITORYRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -695,21 +695,18 @@ func (o CreateAssetGITLABREPOSITORYRequest) ToMap() (map[string]interface{}, err
 	if !IsNil(o.ProjectIds) {
 		toSerialize["projectIds"] = o.ProjectIds
 	}
-	toSerialize["asset_class"] = o.AssetClass
-	if !IsNil(o.WizProviderId) {
-		toSerialize["wiz_provider_id"] = o.WizProviderId
-	}
-	if !IsNil(o.WizCloudPlatform) {
-		toSerialize["wiz_cloud_platform"] = o.WizCloudPlatform
-	}
-	if !IsNil(o.ExtraMetadata) {
-		toSerialize["extra_metadata"] = o.ExtraMetadata
-	}
-	toSerialize["asset_type"] = o.AssetType
-	toSerialize["url"] = o.Url
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
+	toSerialize["asset_class"] = o.AssetClass
+	if !IsNil(o.ExtraMetadata) {
+		toSerialize["extra_metadata"] = o.ExtraMetadata
+	}
+	if !IsNil(o.ScreenshotS3Key) {
+		toSerialize["screenshot_s3_key"] = o.ScreenshotS3Key
+	}
+	toSerialize["asset_type"] = o.AssetType
+	toSerialize["url"] = o.Url
 	if !IsNil(o.HttpUrlToRepo) {
 		toSerialize["http_url_to_repo"] = o.HttpUrlToRepo
 	}
@@ -724,6 +721,9 @@ func (o CreateAssetGITLABREPOSITORYRequest) ToMap() (map[string]interface{}, err
 	}
 	if !IsNil(o.BlobBaseUrl) {
 		toSerialize["blob_base_url"] = o.BlobBaseUrl
+	}
+	if !IsNil(o.LastCommit) {
+		toSerialize["last_commit"] = o.LastCommit
 	}
 	if !IsNil(o.GroupId) {
 		toSerialize["group_id"] = o.GroupId
@@ -769,10 +769,10 @@ func (o *CreateAssetGITLABREPOSITORYRequest) UnmarshalJSON(data []byte) (err err
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -792,18 +792,18 @@ func (o *CreateAssetGITLABREPOSITORYRequest) UnmarshalJSON(data []byte) (err err
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "projectIds")
+		delete(additionalProperties, "name")
 		delete(additionalProperties, "asset_class")
-		delete(additionalProperties, "wiz_provider_id")
-		delete(additionalProperties, "wiz_cloud_platform")
 		delete(additionalProperties, "extra_metadata")
+		delete(additionalProperties, "screenshot_s3_key")
 		delete(additionalProperties, "asset_type")
 		delete(additionalProperties, "url")
-		delete(additionalProperties, "name")
 		delete(additionalProperties, "http_url_to_repo")
 		delete(additionalProperties, "description")
 		delete(additionalProperties, "location_id")
 		delete(additionalProperties, "default_branch")
 		delete(additionalProperties, "blob_base_url")
+		delete(additionalProperties, "last_commit")
 		delete(additionalProperties, "group_id")
 		delete(additionalProperties, "group_full_path")
 		delete(additionalProperties, "group_web_url")
@@ -852,3 +852,5 @@ func (v *NullableCreateAssetGITLABREPOSITORYRequest) UnmarshalJSON(src []byte) e
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

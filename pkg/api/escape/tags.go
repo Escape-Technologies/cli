@@ -22,7 +22,7 @@ func ListTags(ctx context.Context) ([]v3.TagDetail, error) {
 }
 
 // CreateTag creates a tag
-func CreateTag(ctx context.Context, name string, color string) (*v3.TagDetail, error) {
+func CreateTag(ctx context.Context, name string, color string) (*v3.CreateTag200Response, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)

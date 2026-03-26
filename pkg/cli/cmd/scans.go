@@ -429,7 +429,7 @@ func watchScan(ctx context.Context, scanID string) error {
 	if err != nil {
 		return fmt.Errorf("unable to watch scan: %w", err)
 	}
-	var status *v3.ScanDetailed1
+	var status *v3.StartScan200Response
 	for event := range ch {
 		if event == nil {
 			continue
