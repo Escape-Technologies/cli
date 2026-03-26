@@ -12,8 +12,8 @@ package v3
 
 import (
 	"encoding/json"
-	"fmt"
 	"time"
+	"fmt"
 )
 
 // checks if the CreatejiraIntegration200Response type satisfies the MappedNullable interface at compile time
@@ -32,8 +32,8 @@ type CreatejiraIntegration200Response struct {
 	// The date and time the integration is scheduled for deletion
 	ScheduledForDeletionAt *time.Time `json:"scheduledForDeletionAt,omitempty"`
 	// The date and time the last pull workflow was executed
-	LastPullWorkflowAt *time.Time                            `json:"lastPullWorkflowAt,omitempty"`
-	Kind               ENUMPROPERTIESDATAITEMSPROPERTIESKIND `json:"kind"`
+	LastPullWorkflowAt *time.Time `json:"lastPullWorkflowAt,omitempty"`
+	Kind ENUMPROPERTIESDATAITEMSPROPERTIESKIND `json:"kind"`
 	// Whether the integration is valid
 	Valid bool `json:"valid"`
 	// The validation errors of the integration
@@ -41,9 +41,9 @@ type CreatejiraIntegration200Response struct {
 	// The id of the organization the integration belongs to
 	OrganizationId string `json:"organizationId"`
 	// The projects of the integration
-	Projects             []ListProjects200ResponseDataInner     `json:"projects"`
-	Parameters           CreatejiraIntegrationRequestParameters `json:"parameters"`
-	Location             *LocationDetailed1                     `json:"location,omitempty"`
+	Projects []ListProjects200ResponseDataInner `json:"projects"`
+	Parameters CreatejiraIntegrationRequestParameters `json:"parameters"`
+	Location *LocationDetailed `json:"location,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -381,9 +381,9 @@ func (o *CreatejiraIntegration200Response) SetParameters(v CreatejiraIntegration
 }
 
 // GetLocation returns the Location field value if set, zero value otherwise.
-func (o *CreatejiraIntegration200Response) GetLocation() LocationDetailed1 {
+func (o *CreatejiraIntegration200Response) GetLocation() LocationDetailed {
 	if o == nil || IsNil(o.Location) {
-		var ret LocationDetailed1
+		var ret LocationDetailed
 		return ret
 	}
 	return *o.Location
@@ -391,7 +391,7 @@ func (o *CreatejiraIntegration200Response) GetLocation() LocationDetailed1 {
 
 // GetLocationOk returns a tuple with the Location field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreatejiraIntegration200Response) GetLocationOk() (*LocationDetailed1, bool) {
+func (o *CreatejiraIntegration200Response) GetLocationOk() (*LocationDetailed, bool) {
 	if o == nil || IsNil(o.Location) {
 		return nil, false
 	}
@@ -407,13 +407,13 @@ func (o *CreatejiraIntegration200Response) HasLocation() bool {
 	return false
 }
 
-// SetLocation gets a reference to the given LocationDetailed1 and assigns it to the Location field.
-func (o *CreatejiraIntegration200Response) SetLocation(v LocationDetailed1) {
+// SetLocation gets a reference to the given LocationDetailed and assigns it to the Location field.
+func (o *CreatejiraIntegration200Response) SetLocation(v LocationDetailed) {
 	o.Location = &v
 }
 
 func (o CreatejiraIntegration200Response) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -471,10 +471,10 @@ func (o *CreatejiraIntegration200Response) UnmarshalJSON(data []byte) (err error
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -547,3 +547,5 @@ func (v *NullableCreatejiraIntegration200Response) UnmarshalJSON(src []byte) err
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

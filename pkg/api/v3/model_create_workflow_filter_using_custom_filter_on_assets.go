@@ -20,8 +20,8 @@ var _ MappedNullable = &CreateWorkflowFilterUsingCustomFilterOnAssets{}
 
 // CreateWorkflowFilterUsingCustomFilterOnAssets struct for CreateWorkflowFilterUsingCustomFilterOnAssets
 type CreateWorkflowFilterUsingCustomFilterOnAssets struct {
-	Type                 ENUMASSETS                                          `json:"type"`
-	Filter               CreateWorkflowFilterUsingCustomFilterOnAssetsFilter `json:"filter"`
+	Type ENUMASSETS `json:"type"`
+	Filter interface{} `json:"filter"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -31,7 +31,7 @@ type _CreateWorkflowFilterUsingCustomFilterOnAssets CreateWorkflowFilterUsingCus
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateWorkflowFilterUsingCustomFilterOnAssets(type_ ENUMASSETS, filter CreateWorkflowFilterUsingCustomFilterOnAssetsFilter) *CreateWorkflowFilterUsingCustomFilterOnAssets {
+func NewCreateWorkflowFilterUsingCustomFilterOnAssets(type_ ENUMASSETS, filter interface{}) *CreateWorkflowFilterUsingCustomFilterOnAssets {
 	this := CreateWorkflowFilterUsingCustomFilterOnAssets{}
 	this.Type = type_
 	this.Filter = filter
@@ -71,9 +71,10 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnAssets) SetType(v ENUMASSETS) {
 }
 
 // GetFilter returns the Filter field value
-func (o *CreateWorkflowFilterUsingCustomFilterOnAssets) GetFilter() CreateWorkflowFilterUsingCustomFilterOnAssetsFilter {
+// If the value is explicit nil, the zero value for interface{} will be returned
+func (o *CreateWorkflowFilterUsingCustomFilterOnAssets) GetFilter() interface{} {
 	if o == nil {
-		var ret CreateWorkflowFilterUsingCustomFilterOnAssetsFilter
+		var ret interface{}
 		return ret
 	}
 
@@ -82,20 +83,21 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnAssets) GetFilter() CreateWorkfl
 
 // GetFilterOk returns a tuple with the Filter field value
 // and a boolean to check if the value has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnAssets) GetFilterOk() (*CreateWorkflowFilterUsingCustomFilterOnAssetsFilter, bool) {
-	if o == nil {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CreateWorkflowFilterUsingCustomFilterOnAssets) GetFilterOk() (*interface{}, bool) {
+	if o == nil || IsNil(o.Filter) {
 		return nil, false
 	}
 	return &o.Filter, true
 }
 
 // SetFilter sets field value
-func (o *CreateWorkflowFilterUsingCustomFilterOnAssets) SetFilter(v CreateWorkflowFilterUsingCustomFilterOnAssetsFilter) {
+func (o *CreateWorkflowFilterUsingCustomFilterOnAssets) SetFilter(v interface{}) {
 	o.Filter = v
 }
 
 func (o CreateWorkflowFilterUsingCustomFilterOnAssets) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -105,7 +107,9 @@ func (o CreateWorkflowFilterUsingCustomFilterOnAssets) MarshalJSON() ([]byte, er
 func (o CreateWorkflowFilterUsingCustomFilterOnAssets) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["type"] = o.Type
-	toSerialize["filter"] = o.Filter
+	if o.Filter != nil {
+		toSerialize["filter"] = o.Filter
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -128,10 +132,10 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnAssets) UnmarshalJSON(data []byt
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -193,3 +197,5 @@ func (v *NullableCreateWorkflowFilterUsingCustomFilterOnAssets) UnmarshalJSON(sr
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

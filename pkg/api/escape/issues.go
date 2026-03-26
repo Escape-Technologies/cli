@@ -27,7 +27,7 @@ type ListIssuesFilters struct {
 }
 
 // GetIssue gets an issue by ID
-func GetIssue(ctx context.Context, issueID string) (*v3.IssueDetailed, error) {
+func GetIssue(ctx context.Context, issueID string) (*v3.GetIssue200Response, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)

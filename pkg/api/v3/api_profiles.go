@@ -16,16 +16,17 @@ import (
 	"io"
 	"net/http"
 	"net/url"
-	"reflect"
 	"strings"
+	"reflect"
 )
+
 
 // ProfilesAPIService ProfilesAPI service
 type ProfilesAPIService service
 
 type ApiCreateDastGraphqlProfileRequest struct {
-	ctx                             context.Context
-	ApiService                      *ProfilesAPIService
+	ctx context.Context
+	ApiService *ProfilesAPIService
 	createDastGraphqlProfileRequest *CreateDastGraphqlProfileRequest
 }
 
@@ -35,7 +36,7 @@ func (r ApiCreateDastGraphqlProfileRequest) CreateDastGraphqlProfileRequest(crea
 	return r
 }
 
-func (r ApiCreateDastGraphqlProfileRequest) Execute() (*ProfileDetailed, *http.Response, error) {
+func (r ApiCreateDastGraphqlProfileRequest) Execute() (*GetProfile200Response, *http.Response, error) {
 	return r.ApiService.CreateDastGraphqlProfileExecute(r)
 }
 
@@ -44,25 +45,24 @@ CreateDastGraphqlProfile Create a DAST GraphQL profile
 
 Create a DAST GraphQL profile
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateDastGraphqlProfileRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateDastGraphqlProfileRequest
 */
 func (a *ProfilesAPIService) CreateDastGraphqlProfile(ctx context.Context) ApiCreateDastGraphqlProfileRequest {
 	return ApiCreateDastGraphqlProfileRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ProfileDetailed
-func (a *ProfilesAPIService) CreateDastGraphqlProfileExecute(r ApiCreateDastGraphqlProfileRequest) (*ProfileDetailed, *http.Response, error) {
+//  @return GetProfile200Response
+func (a *ProfilesAPIService) CreateDastGraphqlProfileExecute(r ApiCreateDastGraphqlProfileRequest) (*GetProfile200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ProfileDetailed
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetProfile200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProfilesAPIService.CreateDastGraphqlProfile")
@@ -138,8 +138,8 @@ func (a *ProfilesAPIService) CreateDastGraphqlProfileExecute(r ApiCreateDastGrap
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -157,8 +157,8 @@ func (a *ProfilesAPIService) CreateDastGraphqlProfileExecute(r ApiCreateDastGrap
 }
 
 type ApiCreateDastRestProfileRequest struct {
-	ctx                          context.Context
-	ApiService                   *ProfilesAPIService
+	ctx context.Context
+	ApiService *ProfilesAPIService
 	createDastRestProfileRequest *CreateDastRestProfileRequest
 }
 
@@ -168,7 +168,7 @@ func (r ApiCreateDastRestProfileRequest) CreateDastRestProfileRequest(createDast
 	return r
 }
 
-func (r ApiCreateDastRestProfileRequest) Execute() (*ProfileDetailed, *http.Response, error) {
+func (r ApiCreateDastRestProfileRequest) Execute() (*GetProfile200Response, *http.Response, error) {
 	return r.ApiService.CreateDastRestProfileExecute(r)
 }
 
@@ -177,25 +177,24 @@ CreateDastRestProfile Create a DAST REST profile
 
 Create a DAST REST profile
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateDastRestProfileRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateDastRestProfileRequest
 */
 func (a *ProfilesAPIService) CreateDastRestProfile(ctx context.Context) ApiCreateDastRestProfileRequest {
 	return ApiCreateDastRestProfileRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ProfileDetailed
-func (a *ProfilesAPIService) CreateDastRestProfileExecute(r ApiCreateDastRestProfileRequest) (*ProfileDetailed, *http.Response, error) {
+//  @return GetProfile200Response
+func (a *ProfilesAPIService) CreateDastRestProfileExecute(r ApiCreateDastRestProfileRequest) (*GetProfile200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ProfileDetailed
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetProfile200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProfilesAPIService.CreateDastRestProfile")
@@ -271,8 +270,8 @@ func (a *ProfilesAPIService) CreateDastRestProfileExecute(r ApiCreateDastRestPro
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -290,8 +289,8 @@ func (a *ProfilesAPIService) CreateDastRestProfileExecute(r ApiCreateDastRestPro
 }
 
 type ApiCreateDastWebAppProfileRequest struct {
-	ctx                            context.Context
-	ApiService                     *ProfilesAPIService
+	ctx context.Context
+	ApiService *ProfilesAPIService
 	createDastWebAppProfileRequest *CreateDastWebAppProfileRequest
 }
 
@@ -301,7 +300,7 @@ func (r ApiCreateDastWebAppProfileRequest) CreateDastWebAppProfileRequest(create
 	return r
 }
 
-func (r ApiCreateDastWebAppProfileRequest) Execute() (*ProfileDetailed, *http.Response, error) {
+func (r ApiCreateDastWebAppProfileRequest) Execute() (*GetProfile200Response, *http.Response, error) {
 	return r.ApiService.CreateDastWebAppProfileExecute(r)
 }
 
@@ -310,25 +309,24 @@ CreateDastWebAppProfile Create a DAST WebApp profile
 
 Create a DAST WebApp profile
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateDastWebAppProfileRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateDastWebAppProfileRequest
 */
 func (a *ProfilesAPIService) CreateDastWebAppProfile(ctx context.Context) ApiCreateDastWebAppProfileRequest {
 	return ApiCreateDastWebAppProfileRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ProfileDetailed
-func (a *ProfilesAPIService) CreateDastWebAppProfileExecute(r ApiCreateDastWebAppProfileRequest) (*ProfileDetailed, *http.Response, error) {
+//  @return GetProfile200Response
+func (a *ProfilesAPIService) CreateDastWebAppProfileExecute(r ApiCreateDastWebAppProfileRequest) (*GetProfile200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ProfileDetailed
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetProfile200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProfilesAPIService.CreateDastWebAppProfile")
@@ -404,8 +402,404 @@ func (a *ProfilesAPIService) CreateDastWebAppProfileExecute(r ApiCreateDastWebAp
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCreatePentestGraphqlProfileRequest struct {
+	ctx context.Context
+	ApiService *ProfilesAPIService
+	createPentestRestProfileRequest *CreatePentestRestProfileRequest
+}
+
+// Body of the request to create an asset
+func (r ApiCreatePentestGraphqlProfileRequest) CreatePentestRestProfileRequest(createPentestRestProfileRequest CreatePentestRestProfileRequest) ApiCreatePentestGraphqlProfileRequest {
+	r.createPentestRestProfileRequest = &createPentestRestProfileRequest
+	return r
+}
+
+func (r ApiCreatePentestGraphqlProfileRequest) Execute() (*GetProfile200Response, *http.Response, error) {
+	return r.ApiService.CreatePentestGraphqlProfileExecute(r)
+}
+
+/*
+CreatePentestGraphqlProfile Create an Automated Pentest GraphQL profile
+
+Create an Automated Pentest GraphQL profile
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreatePentestGraphqlProfileRequest
+*/
+func (a *ProfilesAPIService) CreatePentestGraphqlProfile(ctx context.Context) ApiCreatePentestGraphqlProfileRequest {
+	return ApiCreatePentestGraphqlProfileRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return GetProfile200Response
+func (a *ProfilesAPIService) CreatePentestGraphqlProfileExecute(r ApiCreatePentestGraphqlProfileRequest) (*GetProfile200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetProfile200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProfilesAPIService.CreatePentestGraphqlProfile")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/profiles/ai-pentesting/graphql"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.createPentestRestProfileRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v UpdateProfile400Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCreatePentestRestProfileRequest struct {
+	ctx context.Context
+	ApiService *ProfilesAPIService
+	createPentestRestProfileRequest *CreatePentestRestProfileRequest
+}
+
+// Body of the request to create an asset
+func (r ApiCreatePentestRestProfileRequest) CreatePentestRestProfileRequest(createPentestRestProfileRequest CreatePentestRestProfileRequest) ApiCreatePentestRestProfileRequest {
+	r.createPentestRestProfileRequest = &createPentestRestProfileRequest
+	return r
+}
+
+func (r ApiCreatePentestRestProfileRequest) Execute() (*GetProfile200Response, *http.Response, error) {
+	return r.ApiService.CreatePentestRestProfileExecute(r)
+}
+
+/*
+CreatePentestRestProfile Create an Automated Pentest REST profile
+
+Create an Automated Pentest REST profile
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreatePentestRestProfileRequest
+*/
+func (a *ProfilesAPIService) CreatePentestRestProfile(ctx context.Context) ApiCreatePentestRestProfileRequest {
+	return ApiCreatePentestRestProfileRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return GetProfile200Response
+func (a *ProfilesAPIService) CreatePentestRestProfileExecute(r ApiCreatePentestRestProfileRequest) (*GetProfile200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetProfile200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProfilesAPIService.CreatePentestRestProfile")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/profiles/ai-pentesting/rest"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.createPentestRestProfileRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v UpdateProfile400Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCreatePentestWebappProfileRequest struct {
+	ctx context.Context
+	ApiService *ProfilesAPIService
+	createDastWebAppProfileRequest *CreateDastWebAppProfileRequest
+}
+
+// Body of the request to create an asset
+func (r ApiCreatePentestWebappProfileRequest) CreateDastWebAppProfileRequest(createDastWebAppProfileRequest CreateDastWebAppProfileRequest) ApiCreatePentestWebappProfileRequest {
+	r.createDastWebAppProfileRequest = &createDastWebAppProfileRequest
+	return r
+}
+
+func (r ApiCreatePentestWebappProfileRequest) Execute() (*GetProfile200Response, *http.Response, error) {
+	return r.ApiService.CreatePentestWebappProfileExecute(r)
+}
+
+/*
+CreatePentestWebappProfile Create an Automated Pentest WebApp profile
+
+Create an Automated Pentest WebApp profile
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreatePentestWebappProfileRequest
+*/
+func (a *ProfilesAPIService) CreatePentestWebappProfile(ctx context.Context) ApiCreatePentestWebappProfileRequest {
+	return ApiCreatePentestWebappProfileRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return GetProfile200Response
+func (a *ProfilesAPIService) CreatePentestWebappProfileExecute(r ApiCreatePentestWebappProfileRequest) (*GetProfile200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetProfile200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProfilesAPIService.CreatePentestWebappProfile")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/profiles/ai-pentesting/webapp"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.createDastWebAppProfileRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v UpdateProfile400Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -423,9 +817,9 @@ func (a *ProfilesAPIService) CreateDastWebAppProfileExecute(r ApiCreateDastWebAp
 }
 
 type ApiDeleteProfileRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *ProfilesAPIService
-	profileId  string
+	profileId string
 }
 
 func (r ApiDeleteProfileRequest) Execute() (*DeleteProfile200Response, *http.Response, error) {
@@ -437,27 +831,26 @@ DeleteProfile Delete a profile
 
 Delete a profile by ID
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param profileId The profile ID
-	@return ApiDeleteProfileRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param profileId The profile ID
+ @return ApiDeleteProfileRequest
 */
 func (a *ProfilesAPIService) DeleteProfile(ctx context.Context, profileId string) ApiDeleteProfileRequest {
 	return ApiDeleteProfileRequest{
 		ApiService: a,
-		ctx:        ctx,
-		profileId:  profileId,
+		ctx: ctx,
+		profileId: profileId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return DeleteProfile200Response
+//  @return DeleteProfile200Response
 func (a *ProfilesAPIService) DeleteProfileExecute(r ApiDeleteProfileRequest) (*DeleteProfile200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodDelete
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *DeleteProfile200Response
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *DeleteProfile200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProfilesAPIService.DeleteProfile")
@@ -532,8 +925,8 @@ func (a *ProfilesAPIService) DeleteProfileExecute(r ApiDeleteProfileRequest) (*D
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -551,12 +944,12 @@ func (a *ProfilesAPIService) DeleteProfileExecute(r ApiDeleteProfileRequest) (*D
 }
 
 type ApiGetProfileRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *ProfilesAPIService
-	profileId  string
+	profileId string
 }
 
-func (r ApiGetProfileRequest) Execute() (*ProfileDetailed, *http.Response, error) {
+func (r ApiGetProfileRequest) Execute() (*GetProfile200Response, *http.Response, error) {
 	return r.ApiService.GetProfileExecute(r)
 }
 
@@ -565,27 +958,26 @@ GetProfile Get a profile
 
 Get a profile by ID
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param profileId The profile ID
-	@return ApiGetProfileRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param profileId The profile ID
+ @return ApiGetProfileRequest
 */
 func (a *ProfilesAPIService) GetProfile(ctx context.Context, profileId string) ApiGetProfileRequest {
 	return ApiGetProfileRequest{
 		ApiService: a,
-		ctx:        ctx,
-		profileId:  profileId,
+		ctx: ctx,
+		profileId: profileId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ProfileDetailed
-func (a *ProfilesAPIService) GetProfileExecute(r ApiGetProfileRequest) (*ProfileDetailed, *http.Response, error) {
+//  @return GetProfile200Response
+func (a *ProfilesAPIService) GetProfileExecute(r ApiGetProfileRequest) (*GetProfile200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ProfileDetailed
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetProfile200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProfilesAPIService.GetProfile")
@@ -660,8 +1052,8 @@ func (a *ProfilesAPIService) GetProfileExecute(r ApiGetProfileRequest) (*Profile
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -679,20 +1071,20 @@ func (a *ProfilesAPIService) GetProfileExecute(r ApiGetProfileRequest) (*Profile
 }
 
 type ApiListProfilesRequest struct {
-	ctx           context.Context
-	ApiService    *ProfilesAPIService
-	cursor        *string
-	size          *int
-	sortType      *string
+	ctx context.Context
+	ApiService *ProfilesAPIService
+	cursor *string
+	size *int
+	sortType *string
 	sortDirection *string
-	assetIds      *string
-	domains       *string
-	issueIds      *string
-	tagIds        *string
-	search        *string
-	initiators    *[]string
-	kinds         *[]string
-	risks         *[]string
+	assetIds *string
+	domains *string
+	issueIds *string
+	tagIds *string
+	search *string
+	initiators *[]string
+	kinds *[]string
+	risks *[]string
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
@@ -776,25 +1168,24 @@ ListProfiles List profiles
 
 List and search profiles of the organization.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiListProfilesRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiListProfilesRequest
 */
 func (a *ProfilesAPIService) ListProfiles(ctx context.Context) ApiListProfilesRequest {
 	return ApiListProfilesRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ListProfiles200Response
+//  @return ListProfiles200Response
 func (a *ProfilesAPIService) ListProfilesExecute(r ApiListProfilesRequest) (*ListProfiles200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ListProfiles200Response
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ListProfiles200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProfilesAPIService.ListProfiles")
@@ -936,8 +1327,8 @@ func (a *ProfilesAPIService) ListProfilesExecute(r ApiListProfilesRequest) (*Lis
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -955,20 +1346,20 @@ func (a *ProfilesAPIService) ListProfilesExecute(r ApiListProfilesRequest) (*Lis
 }
 
 type ApiProblemsRequest struct {
-	ctx           context.Context
-	ApiService    *ProfilesAPIService
-	cursor        *string
-	size          *int
-	sortType      *string
+	ctx context.Context
+	ApiService *ProfilesAPIService
+	cursor *string
+	size *int
+	sortType *string
 	sortDirection *string
-	assetIds      *string
-	domains       *string
-	issueIds      *string
-	tagIds        *string
-	search        *string
-	initiators    *[]string
-	kinds         *[]string
-	risks         *[]string
+	assetIds *string
+	domains *string
+	issueIds *string
+	tagIds *string
+	search *string
+	initiators *[]string
+	kinds *[]string
+	risks *[]string
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
@@ -1052,25 +1443,24 @@ Problems List all scan statuses and problems
 
 List all scan statuses and problems
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiProblemsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiProblemsRequest
 */
 func (a *ProfilesAPIService) Problems(ctx context.Context) ApiProblemsRequest {
 	return ApiProblemsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return Problems200Response
+//  @return Problems200Response
 func (a *ProfilesAPIService) ProblemsExecute(r ApiProblemsRequest) (*Problems200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *Problems200Response
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *Problems200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProfilesAPIService.Problems")
@@ -1212,8 +1602,8 @@ func (a *ProfilesAPIService) ProblemsExecute(r ApiProblemsRequest) (*Problems200
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1231,9 +1621,9 @@ func (a *ProfilesAPIService) ProblemsExecute(r ApiProblemsRequest) (*Problems200
 }
 
 type ApiUpdateProfileRequest struct {
-	ctx                  context.Context
-	ApiService           *ProfilesAPIService
-	profileId            string
+	ctx context.Context
+	ApiService *ProfilesAPIService
+	profileId string
 	updateProfileRequest *UpdateProfileRequest
 }
 
@@ -1243,7 +1633,7 @@ func (r ApiUpdateProfileRequest) UpdateProfileRequest(updateProfileRequest Updat
 	return r
 }
 
-func (r ApiUpdateProfileRequest) Execute() (*ProfileDetailed, *http.Response, error) {
+func (r ApiUpdateProfileRequest) Execute() (*GetProfile200Response, *http.Response, error) {
 	return r.ApiService.UpdateProfileExecute(r)
 }
 
@@ -1252,27 +1642,26 @@ UpdateProfile Update a profile
 
 Update a profile of a given scanner kind
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param profileId The profile ID
-	@return ApiUpdateProfileRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param profileId The profile ID
+ @return ApiUpdateProfileRequest
 */
 func (a *ProfilesAPIService) UpdateProfile(ctx context.Context, profileId string) ApiUpdateProfileRequest {
 	return ApiUpdateProfileRequest{
 		ApiService: a,
-		ctx:        ctx,
-		profileId:  profileId,
+		ctx: ctx,
+		profileId: profileId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ProfileDetailed
-func (a *ProfilesAPIService) UpdateProfileExecute(r ApiUpdateProfileRequest) (*ProfileDetailed, *http.Response, error) {
+//  @return GetProfile200Response
+func (a *ProfilesAPIService) UpdateProfileExecute(r ApiUpdateProfileRequest) (*GetProfile200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPut
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ProfileDetailed
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetProfile200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProfilesAPIService.UpdateProfile")
@@ -1349,8 +1738,8 @@ func (a *ProfilesAPIService) UpdateProfileExecute(r ApiUpdateProfileRequest) (*P
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -1360,8 +1749,8 @@ func (a *ProfilesAPIService) UpdateProfileExecute(r ApiUpdateProfileRequest) (*P
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1379,9 +1768,9 @@ func (a *ProfilesAPIService) UpdateProfileExecute(r ApiUpdateProfileRequest) (*P
 }
 
 type ApiUpdateProfileConfigurationRequest struct {
-	ctx                               context.Context
-	ApiService                        *ProfilesAPIService
-	profileId                         string
+	ctx context.Context
+	ApiService *ProfilesAPIService
+	profileId string
 	updateProfileConfigurationRequest *UpdateProfileConfigurationRequest
 }
 
@@ -1400,27 +1789,26 @@ UpdateProfileConfiguration Update profile configuration
 
 Update the configuration of a profile
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param profileId The profile ID
-	@return ApiUpdateProfileConfigurationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param profileId The profile ID
+ @return ApiUpdateProfileConfigurationRequest
 */
 func (a *ProfilesAPIService) UpdateProfileConfiguration(ctx context.Context, profileId string) ApiUpdateProfileConfigurationRequest {
 	return ApiUpdateProfileConfigurationRequest{
 		ApiService: a,
-		ctx:        ctx,
-		profileId:  profileId,
+		ctx: ctx,
+		profileId: profileId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return map[string]interface{}
+//  @return map[string]interface{}
 func (a *ProfilesAPIService) UpdateProfileConfigurationExecute(r ApiUpdateProfileConfigurationRequest) (map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPut
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue map[string]interface{}
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProfilesAPIService.UpdateProfileConfiguration")
@@ -1497,8 +1885,8 @@ func (a *ProfilesAPIService) UpdateProfileConfigurationExecute(r ApiUpdateProfil
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -1508,8 +1896,8 @@ func (a *ProfilesAPIService) UpdateProfileConfigurationExecute(r ApiUpdateProfil
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1527,9 +1915,9 @@ func (a *ProfilesAPIService) UpdateProfileConfigurationExecute(r ApiUpdateProfil
 }
 
 type ApiUpdateProfileSchemaRequest struct {
-	ctx                        context.Context
-	ApiService                 *ProfilesAPIService
-	profileId                  string
+	ctx context.Context
+	ApiService *ProfilesAPIService
+	profileId string
 	updateProfileSchemaRequest *UpdateProfileSchemaRequest
 }
 
@@ -1539,38 +1927,44 @@ func (r ApiUpdateProfileSchemaRequest) UpdateProfileSchemaRequest(updateProfileS
 	return r
 }
 
-func (r ApiUpdateProfileSchemaRequest) Execute() (*ProfileDetailed, *http.Response, error) {
+func (r ApiUpdateProfileSchemaRequest) Execute() (*GetProfile200Response, *http.Response, error) {
 	return r.ApiService.UpdateProfileSchemaExecute(r)
 }
 
 /*
 UpdateProfileSchema Update profile schema
 
-Update the schema used to scan this profile.
 
+*This route is deprecated, use the [PUT /profiles/:profileId](#tag/profiles/PUT/profiles/:profileId) endpoint instead.*
+
+Update the schema used to scan this profile.
 The schema ID is the ID of a schema uploaded to the Escape Platform using the [POST /assets/schema](#tag/assets/POST/assets/schema) endpoint.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param profileId The profile ID
-	@return ApiUpdateProfileSchemaRequest
+
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param profileId The profile ID
+ @return ApiUpdateProfileSchemaRequest
+
+Deprecated
 */
 func (a *ProfilesAPIService) UpdateProfileSchema(ctx context.Context, profileId string) ApiUpdateProfileSchemaRequest {
 	return ApiUpdateProfileSchemaRequest{
 		ApiService: a,
-		ctx:        ctx,
-		profileId:  profileId,
+		ctx: ctx,
+		profileId: profileId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ProfileDetailed
-func (a *ProfilesAPIService) UpdateProfileSchemaExecute(r ApiUpdateProfileSchemaRequest) (*ProfileDetailed, *http.Response, error) {
+//  @return GetProfile200Response
+// Deprecated
+func (a *ProfilesAPIService) UpdateProfileSchemaExecute(r ApiUpdateProfileSchemaRequest) (*GetProfile200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPut
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ProfileDetailed
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetProfile200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProfilesAPIService.UpdateProfileSchema")
@@ -1647,8 +2041,8 @@ func (a *ProfilesAPIService) UpdateProfileSchemaExecute(r ApiUpdateProfileSchema
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -1658,8 +2052,8 @@ func (a *ProfilesAPIService) UpdateProfileSchemaExecute(r ApiUpdateProfileSchema
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

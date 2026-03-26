@@ -18,7 +18,7 @@ import (
 
 // CreateCustomRuleRequestContentRule - struct for CreateCustomRuleRequestContentRule
 type CreateCustomRuleRequestContentRule struct {
-	CreateCustomRuleRequestContentRuleOneOf  *CreateCustomRuleRequestContentRuleOneOf
+	CreateCustomRuleRequestContentRuleOneOf *CreateCustomRuleRequestContentRuleOneOf
 	CreateCustomRuleRequestContentRuleOneOf1 *CreateCustomRuleRequestContentRuleOneOf1
 }
 
@@ -35,6 +35,7 @@ func CreateCustomRuleRequestContentRuleOneOf1AsCreateCustomRuleRequestContentRul
 		CreateCustomRuleRequestContentRuleOneOf1: v,
 	}
 }
+
 
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *CreateCustomRuleRequestContentRule) UnmarshalJSON(data []byte) error {
@@ -101,7 +102,7 @@ func (src CreateCustomRuleRequestContentRule) MarshalJSON() ([]byte, error) {
 }
 
 // Get the actual instance
-func (obj *CreateCustomRuleRequestContentRule) GetActualInstance() interface{} {
+func (obj *CreateCustomRuleRequestContentRule) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
@@ -118,7 +119,7 @@ func (obj *CreateCustomRuleRequestContentRule) GetActualInstance() interface{} {
 }
 
 // Get the actual instance value
-func (obj CreateCustomRuleRequestContentRule) GetActualInstanceValue() interface{} {
+func (obj CreateCustomRuleRequestContentRule) GetActualInstanceValue() (interface{}) {
 	if obj.CreateCustomRuleRequestContentRuleOneOf != nil {
 		return *obj.CreateCustomRuleRequestContentRuleOneOf
 	}
@@ -166,3 +167,5 @@ func (v *NullableCreateCustomRuleRequestContentRule) UnmarshalJSON(src []byte) e
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

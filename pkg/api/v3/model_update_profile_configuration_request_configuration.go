@@ -19,25 +19,26 @@ var _ MappedNullable = &UpdateProfileConfigurationRequestConfiguration{}
 
 // UpdateProfileConfigurationRequestConfiguration The configuration to update
 type UpdateProfileConfigurationRequestConfiguration struct {
-	PublicLocationIds     []string                                          `json:"public_location_ids,omitempty"`
-	PrivateLocationIds    []string                                          `json:"private_location_ids,omitempty"`
-	Scope                 *ProfileDetailedConfigurationScope                `json:"scope,omitempty"`
-	ExplorationScope      []string                                          `json:"exploration_scope,omitempty"`
-	ApiCustomRuleIds      []string                                          `json:"api_custom_rule_ids,omitempty"`
-	FrontendCustomRuleIds []string                                          `json:"frontend_custom_rule_ids,omitempty"`
-	Authentication        *ProfileDetailedConfigurationAuthentication       `json:"authentication,omitempty"`
-	SecurityTests         *ProfileDetailedConfigurationSecurityTests        `json:"security_tests,omitempty"`
-	Inference             *ProfileDetailedConfigurationInference            `json:"inference,omitempty"`
-	Network               *ProfileDetailedConfigurationNetwork              `json:"network,omitempty"`
-	ArgumentGeneration    *ProfileDetailedConfigurationArgumentGeneration   `json:"argument_generation,omitempty"`
-	SubdomainEnumeration  *ProfileDetailedConfigurationSubdomainEnumeration `json:"subdomain_enumeration,omitempty"`
-	PortScanning          *ProfileDetailedConfigurationPortScanning         `json:"port_scanning,omitempty"`
-	ServiceDiscovery      *ProfileDetailedConfigurationServiceDiscovery     `json:"service_discovery,omitempty"`
-	FrontendDast          *ProfileDetailedConfigurationFrontendDast         `json:"frontend_dast,omitempty"`
-	GraphqlApiDast        *ProfileDetailedConfigurationGraphqlApiDast       `json:"graphql_api_dast,omitempty"`
-	RestApiDast           *ProfileDetailedConfigurationRestApiDast          `json:"rest_api_dast,omitempty"`
-	Experimental          *ProfileDetailedConfigurationExperimental         `json:"experimental,omitempty"`
-	AdditionalProperties  map[string]interface{}
+	PublicLocationIds []string `json:"public_location_ids,omitempty"`
+	PrivateLocationIds []string `json:"private_location_ids,omitempty"`
+	Scope *GetProfile200ResponseConfigurationScope `json:"scope,omitempty"`
+	ExplorationScope []string `json:"exploration_scope,omitempty"`
+	ApiCustomRuleIds []string `json:"api_custom_rule_ids,omitempty"`
+	FrontendCustomRuleIds []string `json:"frontend_custom_rule_ids,omitempty"`
+	Authentication *GetProfile200ResponseConfigurationAuthentication `json:"authentication,omitempty"`
+	SecurityTests *GetProfile200ResponseConfigurationSecurityTests `json:"security_tests,omitempty"`
+	Inference *GetProfile200ResponseConfigurationInference `json:"inference,omitempty"`
+	Network *GetProfile200ResponseConfigurationNetwork `json:"network,omitempty"`
+	ArgumentGeneration *GetProfile200ResponseConfigurationArgumentGeneration `json:"argument_generation,omitempty"`
+	SubdomainEnumeration *GetProfile200ResponseConfigurationSubdomainEnumeration `json:"subdomain_enumeration,omitempty"`
+	PortScanning *GetProfile200ResponseConfigurationPortScanning `json:"port_scanning,omitempty"`
+	ServiceDiscovery *GetProfile200ResponseConfigurationServiceDiscovery `json:"service_discovery,omitempty"`
+	FrontendDast *GetProfile200ResponseConfigurationFrontendDast `json:"frontend_dast,omitempty"`
+	GraphqlApiDast *GetProfile200ResponseConfigurationGraphqlApiDast `json:"graphql_api_dast,omitempty"`
+	RestApiDast *GetProfile200ResponseConfigurationRestApiDast `json:"rest_api_dast,omitempty"`
+	AutomatedPentesting *GetProfile200ResponseConfigurationAutomatedPentesting `json:"automated_pentesting,omitempty"`
+	Experimental *GetProfile200ResponseConfigurationExperimental `json:"experimental,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpdateProfileConfigurationRequestConfiguration UpdateProfileConfigurationRequestConfiguration
@@ -124,9 +125,9 @@ func (o *UpdateProfileConfigurationRequestConfiguration) SetPrivateLocationIds(v
 }
 
 // GetScope returns the Scope field value if set, zero value otherwise.
-func (o *UpdateProfileConfigurationRequestConfiguration) GetScope() ProfileDetailedConfigurationScope {
+func (o *UpdateProfileConfigurationRequestConfiguration) GetScope() GetProfile200ResponseConfigurationScope {
 	if o == nil || IsNil(o.Scope) {
-		var ret ProfileDetailedConfigurationScope
+		var ret GetProfile200ResponseConfigurationScope
 		return ret
 	}
 	return *o.Scope
@@ -134,7 +135,7 @@ func (o *UpdateProfileConfigurationRequestConfiguration) GetScope() ProfileDetai
 
 // GetScopeOk returns a tuple with the Scope field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateProfileConfigurationRequestConfiguration) GetScopeOk() (*ProfileDetailedConfigurationScope, bool) {
+func (o *UpdateProfileConfigurationRequestConfiguration) GetScopeOk() (*GetProfile200ResponseConfigurationScope, bool) {
 	if o == nil || IsNil(o.Scope) {
 		return nil, false
 	}
@@ -150,8 +151,8 @@ func (o *UpdateProfileConfigurationRequestConfiguration) HasScope() bool {
 	return false
 }
 
-// SetScope gets a reference to the given ProfileDetailedConfigurationScope and assigns it to the Scope field.
-func (o *UpdateProfileConfigurationRequestConfiguration) SetScope(v ProfileDetailedConfigurationScope) {
+// SetScope gets a reference to the given GetProfile200ResponseConfigurationScope and assigns it to the Scope field.
+func (o *UpdateProfileConfigurationRequestConfiguration) SetScope(v GetProfile200ResponseConfigurationScope) {
 	o.Scope = &v
 }
 
@@ -252,9 +253,9 @@ func (o *UpdateProfileConfigurationRequestConfiguration) SetFrontendCustomRuleId
 }
 
 // GetAuthentication returns the Authentication field value if set, zero value otherwise.
-func (o *UpdateProfileConfigurationRequestConfiguration) GetAuthentication() ProfileDetailedConfigurationAuthentication {
+func (o *UpdateProfileConfigurationRequestConfiguration) GetAuthentication() GetProfile200ResponseConfigurationAuthentication {
 	if o == nil || IsNil(o.Authentication) {
-		var ret ProfileDetailedConfigurationAuthentication
+		var ret GetProfile200ResponseConfigurationAuthentication
 		return ret
 	}
 	return *o.Authentication
@@ -262,7 +263,7 @@ func (o *UpdateProfileConfigurationRequestConfiguration) GetAuthentication() Pro
 
 // GetAuthenticationOk returns a tuple with the Authentication field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateProfileConfigurationRequestConfiguration) GetAuthenticationOk() (*ProfileDetailedConfigurationAuthentication, bool) {
+func (o *UpdateProfileConfigurationRequestConfiguration) GetAuthenticationOk() (*GetProfile200ResponseConfigurationAuthentication, bool) {
 	if o == nil || IsNil(o.Authentication) {
 		return nil, false
 	}
@@ -278,15 +279,15 @@ func (o *UpdateProfileConfigurationRequestConfiguration) HasAuthentication() boo
 	return false
 }
 
-// SetAuthentication gets a reference to the given ProfileDetailedConfigurationAuthentication and assigns it to the Authentication field.
-func (o *UpdateProfileConfigurationRequestConfiguration) SetAuthentication(v ProfileDetailedConfigurationAuthentication) {
+// SetAuthentication gets a reference to the given GetProfile200ResponseConfigurationAuthentication and assigns it to the Authentication field.
+func (o *UpdateProfileConfigurationRequestConfiguration) SetAuthentication(v GetProfile200ResponseConfigurationAuthentication) {
 	o.Authentication = &v
 }
 
 // GetSecurityTests returns the SecurityTests field value if set, zero value otherwise.
-func (o *UpdateProfileConfigurationRequestConfiguration) GetSecurityTests() ProfileDetailedConfigurationSecurityTests {
+func (o *UpdateProfileConfigurationRequestConfiguration) GetSecurityTests() GetProfile200ResponseConfigurationSecurityTests {
 	if o == nil || IsNil(o.SecurityTests) {
-		var ret ProfileDetailedConfigurationSecurityTests
+		var ret GetProfile200ResponseConfigurationSecurityTests
 		return ret
 	}
 	return *o.SecurityTests
@@ -294,7 +295,7 @@ func (o *UpdateProfileConfigurationRequestConfiguration) GetSecurityTests() Prof
 
 // GetSecurityTestsOk returns a tuple with the SecurityTests field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateProfileConfigurationRequestConfiguration) GetSecurityTestsOk() (*ProfileDetailedConfigurationSecurityTests, bool) {
+func (o *UpdateProfileConfigurationRequestConfiguration) GetSecurityTestsOk() (*GetProfile200ResponseConfigurationSecurityTests, bool) {
 	if o == nil || IsNil(o.SecurityTests) {
 		return nil, false
 	}
@@ -310,15 +311,15 @@ func (o *UpdateProfileConfigurationRequestConfiguration) HasSecurityTests() bool
 	return false
 }
 
-// SetSecurityTests gets a reference to the given ProfileDetailedConfigurationSecurityTests and assigns it to the SecurityTests field.
-func (o *UpdateProfileConfigurationRequestConfiguration) SetSecurityTests(v ProfileDetailedConfigurationSecurityTests) {
+// SetSecurityTests gets a reference to the given GetProfile200ResponseConfigurationSecurityTests and assigns it to the SecurityTests field.
+func (o *UpdateProfileConfigurationRequestConfiguration) SetSecurityTests(v GetProfile200ResponseConfigurationSecurityTests) {
 	o.SecurityTests = &v
 }
 
 // GetInference returns the Inference field value if set, zero value otherwise.
-func (o *UpdateProfileConfigurationRequestConfiguration) GetInference() ProfileDetailedConfigurationInference {
+func (o *UpdateProfileConfigurationRequestConfiguration) GetInference() GetProfile200ResponseConfigurationInference {
 	if o == nil || IsNil(o.Inference) {
-		var ret ProfileDetailedConfigurationInference
+		var ret GetProfile200ResponseConfigurationInference
 		return ret
 	}
 	return *o.Inference
@@ -326,7 +327,7 @@ func (o *UpdateProfileConfigurationRequestConfiguration) GetInference() ProfileD
 
 // GetInferenceOk returns a tuple with the Inference field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateProfileConfigurationRequestConfiguration) GetInferenceOk() (*ProfileDetailedConfigurationInference, bool) {
+func (o *UpdateProfileConfigurationRequestConfiguration) GetInferenceOk() (*GetProfile200ResponseConfigurationInference, bool) {
 	if o == nil || IsNil(o.Inference) {
 		return nil, false
 	}
@@ -342,15 +343,15 @@ func (o *UpdateProfileConfigurationRequestConfiguration) HasInference() bool {
 	return false
 }
 
-// SetInference gets a reference to the given ProfileDetailedConfigurationInference and assigns it to the Inference field.
-func (o *UpdateProfileConfigurationRequestConfiguration) SetInference(v ProfileDetailedConfigurationInference) {
+// SetInference gets a reference to the given GetProfile200ResponseConfigurationInference and assigns it to the Inference field.
+func (o *UpdateProfileConfigurationRequestConfiguration) SetInference(v GetProfile200ResponseConfigurationInference) {
 	o.Inference = &v
 }
 
 // GetNetwork returns the Network field value if set, zero value otherwise.
-func (o *UpdateProfileConfigurationRequestConfiguration) GetNetwork() ProfileDetailedConfigurationNetwork {
+func (o *UpdateProfileConfigurationRequestConfiguration) GetNetwork() GetProfile200ResponseConfigurationNetwork {
 	if o == nil || IsNil(o.Network) {
-		var ret ProfileDetailedConfigurationNetwork
+		var ret GetProfile200ResponseConfigurationNetwork
 		return ret
 	}
 	return *o.Network
@@ -358,7 +359,7 @@ func (o *UpdateProfileConfigurationRequestConfiguration) GetNetwork() ProfileDet
 
 // GetNetworkOk returns a tuple with the Network field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateProfileConfigurationRequestConfiguration) GetNetworkOk() (*ProfileDetailedConfigurationNetwork, bool) {
+func (o *UpdateProfileConfigurationRequestConfiguration) GetNetworkOk() (*GetProfile200ResponseConfigurationNetwork, bool) {
 	if o == nil || IsNil(o.Network) {
 		return nil, false
 	}
@@ -374,15 +375,15 @@ func (o *UpdateProfileConfigurationRequestConfiguration) HasNetwork() bool {
 	return false
 }
 
-// SetNetwork gets a reference to the given ProfileDetailedConfigurationNetwork and assigns it to the Network field.
-func (o *UpdateProfileConfigurationRequestConfiguration) SetNetwork(v ProfileDetailedConfigurationNetwork) {
+// SetNetwork gets a reference to the given GetProfile200ResponseConfigurationNetwork and assigns it to the Network field.
+func (o *UpdateProfileConfigurationRequestConfiguration) SetNetwork(v GetProfile200ResponseConfigurationNetwork) {
 	o.Network = &v
 }
 
 // GetArgumentGeneration returns the ArgumentGeneration field value if set, zero value otherwise.
-func (o *UpdateProfileConfigurationRequestConfiguration) GetArgumentGeneration() ProfileDetailedConfigurationArgumentGeneration {
+func (o *UpdateProfileConfigurationRequestConfiguration) GetArgumentGeneration() GetProfile200ResponseConfigurationArgumentGeneration {
 	if o == nil || IsNil(o.ArgumentGeneration) {
-		var ret ProfileDetailedConfigurationArgumentGeneration
+		var ret GetProfile200ResponseConfigurationArgumentGeneration
 		return ret
 	}
 	return *o.ArgumentGeneration
@@ -390,7 +391,7 @@ func (o *UpdateProfileConfigurationRequestConfiguration) GetArgumentGeneration()
 
 // GetArgumentGenerationOk returns a tuple with the ArgumentGeneration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateProfileConfigurationRequestConfiguration) GetArgumentGenerationOk() (*ProfileDetailedConfigurationArgumentGeneration, bool) {
+func (o *UpdateProfileConfigurationRequestConfiguration) GetArgumentGenerationOk() (*GetProfile200ResponseConfigurationArgumentGeneration, bool) {
 	if o == nil || IsNil(o.ArgumentGeneration) {
 		return nil, false
 	}
@@ -406,15 +407,15 @@ func (o *UpdateProfileConfigurationRequestConfiguration) HasArgumentGeneration()
 	return false
 }
 
-// SetArgumentGeneration gets a reference to the given ProfileDetailedConfigurationArgumentGeneration and assigns it to the ArgumentGeneration field.
-func (o *UpdateProfileConfigurationRequestConfiguration) SetArgumentGeneration(v ProfileDetailedConfigurationArgumentGeneration) {
+// SetArgumentGeneration gets a reference to the given GetProfile200ResponseConfigurationArgumentGeneration and assigns it to the ArgumentGeneration field.
+func (o *UpdateProfileConfigurationRequestConfiguration) SetArgumentGeneration(v GetProfile200ResponseConfigurationArgumentGeneration) {
 	o.ArgumentGeneration = &v
 }
 
 // GetSubdomainEnumeration returns the SubdomainEnumeration field value if set, zero value otherwise.
-func (o *UpdateProfileConfigurationRequestConfiguration) GetSubdomainEnumeration() ProfileDetailedConfigurationSubdomainEnumeration {
+func (o *UpdateProfileConfigurationRequestConfiguration) GetSubdomainEnumeration() GetProfile200ResponseConfigurationSubdomainEnumeration {
 	if o == nil || IsNil(o.SubdomainEnumeration) {
-		var ret ProfileDetailedConfigurationSubdomainEnumeration
+		var ret GetProfile200ResponseConfigurationSubdomainEnumeration
 		return ret
 	}
 	return *o.SubdomainEnumeration
@@ -422,7 +423,7 @@ func (o *UpdateProfileConfigurationRequestConfiguration) GetSubdomainEnumeration
 
 // GetSubdomainEnumerationOk returns a tuple with the SubdomainEnumeration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateProfileConfigurationRequestConfiguration) GetSubdomainEnumerationOk() (*ProfileDetailedConfigurationSubdomainEnumeration, bool) {
+func (o *UpdateProfileConfigurationRequestConfiguration) GetSubdomainEnumerationOk() (*GetProfile200ResponseConfigurationSubdomainEnumeration, bool) {
 	if o == nil || IsNil(o.SubdomainEnumeration) {
 		return nil, false
 	}
@@ -438,15 +439,15 @@ func (o *UpdateProfileConfigurationRequestConfiguration) HasSubdomainEnumeration
 	return false
 }
 
-// SetSubdomainEnumeration gets a reference to the given ProfileDetailedConfigurationSubdomainEnumeration and assigns it to the SubdomainEnumeration field.
-func (o *UpdateProfileConfigurationRequestConfiguration) SetSubdomainEnumeration(v ProfileDetailedConfigurationSubdomainEnumeration) {
+// SetSubdomainEnumeration gets a reference to the given GetProfile200ResponseConfigurationSubdomainEnumeration and assigns it to the SubdomainEnumeration field.
+func (o *UpdateProfileConfigurationRequestConfiguration) SetSubdomainEnumeration(v GetProfile200ResponseConfigurationSubdomainEnumeration) {
 	o.SubdomainEnumeration = &v
 }
 
 // GetPortScanning returns the PortScanning field value if set, zero value otherwise.
-func (o *UpdateProfileConfigurationRequestConfiguration) GetPortScanning() ProfileDetailedConfigurationPortScanning {
+func (o *UpdateProfileConfigurationRequestConfiguration) GetPortScanning() GetProfile200ResponseConfigurationPortScanning {
 	if o == nil || IsNil(o.PortScanning) {
-		var ret ProfileDetailedConfigurationPortScanning
+		var ret GetProfile200ResponseConfigurationPortScanning
 		return ret
 	}
 	return *o.PortScanning
@@ -454,7 +455,7 @@ func (o *UpdateProfileConfigurationRequestConfiguration) GetPortScanning() Profi
 
 // GetPortScanningOk returns a tuple with the PortScanning field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateProfileConfigurationRequestConfiguration) GetPortScanningOk() (*ProfileDetailedConfigurationPortScanning, bool) {
+func (o *UpdateProfileConfigurationRequestConfiguration) GetPortScanningOk() (*GetProfile200ResponseConfigurationPortScanning, bool) {
 	if o == nil || IsNil(o.PortScanning) {
 		return nil, false
 	}
@@ -470,15 +471,15 @@ func (o *UpdateProfileConfigurationRequestConfiguration) HasPortScanning() bool 
 	return false
 }
 
-// SetPortScanning gets a reference to the given ProfileDetailedConfigurationPortScanning and assigns it to the PortScanning field.
-func (o *UpdateProfileConfigurationRequestConfiguration) SetPortScanning(v ProfileDetailedConfigurationPortScanning) {
+// SetPortScanning gets a reference to the given GetProfile200ResponseConfigurationPortScanning and assigns it to the PortScanning field.
+func (o *UpdateProfileConfigurationRequestConfiguration) SetPortScanning(v GetProfile200ResponseConfigurationPortScanning) {
 	o.PortScanning = &v
 }
 
 // GetServiceDiscovery returns the ServiceDiscovery field value if set, zero value otherwise.
-func (o *UpdateProfileConfigurationRequestConfiguration) GetServiceDiscovery() ProfileDetailedConfigurationServiceDiscovery {
+func (o *UpdateProfileConfigurationRequestConfiguration) GetServiceDiscovery() GetProfile200ResponseConfigurationServiceDiscovery {
 	if o == nil || IsNil(o.ServiceDiscovery) {
-		var ret ProfileDetailedConfigurationServiceDiscovery
+		var ret GetProfile200ResponseConfigurationServiceDiscovery
 		return ret
 	}
 	return *o.ServiceDiscovery
@@ -486,7 +487,7 @@ func (o *UpdateProfileConfigurationRequestConfiguration) GetServiceDiscovery() P
 
 // GetServiceDiscoveryOk returns a tuple with the ServiceDiscovery field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateProfileConfigurationRequestConfiguration) GetServiceDiscoveryOk() (*ProfileDetailedConfigurationServiceDiscovery, bool) {
+func (o *UpdateProfileConfigurationRequestConfiguration) GetServiceDiscoveryOk() (*GetProfile200ResponseConfigurationServiceDiscovery, bool) {
 	if o == nil || IsNil(o.ServiceDiscovery) {
 		return nil, false
 	}
@@ -502,15 +503,15 @@ func (o *UpdateProfileConfigurationRequestConfiguration) HasServiceDiscovery() b
 	return false
 }
 
-// SetServiceDiscovery gets a reference to the given ProfileDetailedConfigurationServiceDiscovery and assigns it to the ServiceDiscovery field.
-func (o *UpdateProfileConfigurationRequestConfiguration) SetServiceDiscovery(v ProfileDetailedConfigurationServiceDiscovery) {
+// SetServiceDiscovery gets a reference to the given GetProfile200ResponseConfigurationServiceDiscovery and assigns it to the ServiceDiscovery field.
+func (o *UpdateProfileConfigurationRequestConfiguration) SetServiceDiscovery(v GetProfile200ResponseConfigurationServiceDiscovery) {
 	o.ServiceDiscovery = &v
 }
 
 // GetFrontendDast returns the FrontendDast field value if set, zero value otherwise.
-func (o *UpdateProfileConfigurationRequestConfiguration) GetFrontendDast() ProfileDetailedConfigurationFrontendDast {
+func (o *UpdateProfileConfigurationRequestConfiguration) GetFrontendDast() GetProfile200ResponseConfigurationFrontendDast {
 	if o == nil || IsNil(o.FrontendDast) {
-		var ret ProfileDetailedConfigurationFrontendDast
+		var ret GetProfile200ResponseConfigurationFrontendDast
 		return ret
 	}
 	return *o.FrontendDast
@@ -518,7 +519,7 @@ func (o *UpdateProfileConfigurationRequestConfiguration) GetFrontendDast() Profi
 
 // GetFrontendDastOk returns a tuple with the FrontendDast field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateProfileConfigurationRequestConfiguration) GetFrontendDastOk() (*ProfileDetailedConfigurationFrontendDast, bool) {
+func (o *UpdateProfileConfigurationRequestConfiguration) GetFrontendDastOk() (*GetProfile200ResponseConfigurationFrontendDast, bool) {
 	if o == nil || IsNil(o.FrontendDast) {
 		return nil, false
 	}
@@ -534,15 +535,15 @@ func (o *UpdateProfileConfigurationRequestConfiguration) HasFrontendDast() bool 
 	return false
 }
 
-// SetFrontendDast gets a reference to the given ProfileDetailedConfigurationFrontendDast and assigns it to the FrontendDast field.
-func (o *UpdateProfileConfigurationRequestConfiguration) SetFrontendDast(v ProfileDetailedConfigurationFrontendDast) {
+// SetFrontendDast gets a reference to the given GetProfile200ResponseConfigurationFrontendDast and assigns it to the FrontendDast field.
+func (o *UpdateProfileConfigurationRequestConfiguration) SetFrontendDast(v GetProfile200ResponseConfigurationFrontendDast) {
 	o.FrontendDast = &v
 }
 
 // GetGraphqlApiDast returns the GraphqlApiDast field value if set, zero value otherwise.
-func (o *UpdateProfileConfigurationRequestConfiguration) GetGraphqlApiDast() ProfileDetailedConfigurationGraphqlApiDast {
+func (o *UpdateProfileConfigurationRequestConfiguration) GetGraphqlApiDast() GetProfile200ResponseConfigurationGraphqlApiDast {
 	if o == nil || IsNil(o.GraphqlApiDast) {
-		var ret ProfileDetailedConfigurationGraphqlApiDast
+		var ret GetProfile200ResponseConfigurationGraphqlApiDast
 		return ret
 	}
 	return *o.GraphqlApiDast
@@ -550,7 +551,7 @@ func (o *UpdateProfileConfigurationRequestConfiguration) GetGraphqlApiDast() Pro
 
 // GetGraphqlApiDastOk returns a tuple with the GraphqlApiDast field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateProfileConfigurationRequestConfiguration) GetGraphqlApiDastOk() (*ProfileDetailedConfigurationGraphqlApiDast, bool) {
+func (o *UpdateProfileConfigurationRequestConfiguration) GetGraphqlApiDastOk() (*GetProfile200ResponseConfigurationGraphqlApiDast, bool) {
 	if o == nil || IsNil(o.GraphqlApiDast) {
 		return nil, false
 	}
@@ -566,15 +567,15 @@ func (o *UpdateProfileConfigurationRequestConfiguration) HasGraphqlApiDast() boo
 	return false
 }
 
-// SetGraphqlApiDast gets a reference to the given ProfileDetailedConfigurationGraphqlApiDast and assigns it to the GraphqlApiDast field.
-func (o *UpdateProfileConfigurationRequestConfiguration) SetGraphqlApiDast(v ProfileDetailedConfigurationGraphqlApiDast) {
+// SetGraphqlApiDast gets a reference to the given GetProfile200ResponseConfigurationGraphqlApiDast and assigns it to the GraphqlApiDast field.
+func (o *UpdateProfileConfigurationRequestConfiguration) SetGraphqlApiDast(v GetProfile200ResponseConfigurationGraphqlApiDast) {
 	o.GraphqlApiDast = &v
 }
 
 // GetRestApiDast returns the RestApiDast field value if set, zero value otherwise.
-func (o *UpdateProfileConfigurationRequestConfiguration) GetRestApiDast() ProfileDetailedConfigurationRestApiDast {
+func (o *UpdateProfileConfigurationRequestConfiguration) GetRestApiDast() GetProfile200ResponseConfigurationRestApiDast {
 	if o == nil || IsNil(o.RestApiDast) {
-		var ret ProfileDetailedConfigurationRestApiDast
+		var ret GetProfile200ResponseConfigurationRestApiDast
 		return ret
 	}
 	return *o.RestApiDast
@@ -582,7 +583,7 @@ func (o *UpdateProfileConfigurationRequestConfiguration) GetRestApiDast() Profil
 
 // GetRestApiDastOk returns a tuple with the RestApiDast field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateProfileConfigurationRequestConfiguration) GetRestApiDastOk() (*ProfileDetailedConfigurationRestApiDast, bool) {
+func (o *UpdateProfileConfigurationRequestConfiguration) GetRestApiDastOk() (*GetProfile200ResponseConfigurationRestApiDast, bool) {
 	if o == nil || IsNil(o.RestApiDast) {
 		return nil, false
 	}
@@ -598,15 +599,47 @@ func (o *UpdateProfileConfigurationRequestConfiguration) HasRestApiDast() bool {
 	return false
 }
 
-// SetRestApiDast gets a reference to the given ProfileDetailedConfigurationRestApiDast and assigns it to the RestApiDast field.
-func (o *UpdateProfileConfigurationRequestConfiguration) SetRestApiDast(v ProfileDetailedConfigurationRestApiDast) {
+// SetRestApiDast gets a reference to the given GetProfile200ResponseConfigurationRestApiDast and assigns it to the RestApiDast field.
+func (o *UpdateProfileConfigurationRequestConfiguration) SetRestApiDast(v GetProfile200ResponseConfigurationRestApiDast) {
 	o.RestApiDast = &v
 }
 
+// GetAutomatedPentesting returns the AutomatedPentesting field value if set, zero value otherwise.
+func (o *UpdateProfileConfigurationRequestConfiguration) GetAutomatedPentesting() GetProfile200ResponseConfigurationAutomatedPentesting {
+	if o == nil || IsNil(o.AutomatedPentesting) {
+		var ret GetProfile200ResponseConfigurationAutomatedPentesting
+		return ret
+	}
+	return *o.AutomatedPentesting
+}
+
+// GetAutomatedPentestingOk returns a tuple with the AutomatedPentesting field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateProfileConfigurationRequestConfiguration) GetAutomatedPentestingOk() (*GetProfile200ResponseConfigurationAutomatedPentesting, bool) {
+	if o == nil || IsNil(o.AutomatedPentesting) {
+		return nil, false
+	}
+	return o.AutomatedPentesting, true
+}
+
+// HasAutomatedPentesting returns a boolean if a field has been set.
+func (o *UpdateProfileConfigurationRequestConfiguration) HasAutomatedPentesting() bool {
+	if o != nil && !IsNil(o.AutomatedPentesting) {
+		return true
+	}
+
+	return false
+}
+
+// SetAutomatedPentesting gets a reference to the given GetProfile200ResponseConfigurationAutomatedPentesting and assigns it to the AutomatedPentesting field.
+func (o *UpdateProfileConfigurationRequestConfiguration) SetAutomatedPentesting(v GetProfile200ResponseConfigurationAutomatedPentesting) {
+	o.AutomatedPentesting = &v
+}
+
 // GetExperimental returns the Experimental field value if set, zero value otherwise.
-func (o *UpdateProfileConfigurationRequestConfiguration) GetExperimental() ProfileDetailedConfigurationExperimental {
+func (o *UpdateProfileConfigurationRequestConfiguration) GetExperimental() GetProfile200ResponseConfigurationExperimental {
 	if o == nil || IsNil(o.Experimental) {
-		var ret ProfileDetailedConfigurationExperimental
+		var ret GetProfile200ResponseConfigurationExperimental
 		return ret
 	}
 	return *o.Experimental
@@ -614,7 +647,7 @@ func (o *UpdateProfileConfigurationRequestConfiguration) GetExperimental() Profi
 
 // GetExperimentalOk returns a tuple with the Experimental field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateProfileConfigurationRequestConfiguration) GetExperimentalOk() (*ProfileDetailedConfigurationExperimental, bool) {
+func (o *UpdateProfileConfigurationRequestConfiguration) GetExperimentalOk() (*GetProfile200ResponseConfigurationExperimental, bool) {
 	if o == nil || IsNil(o.Experimental) {
 		return nil, false
 	}
@@ -630,13 +663,13 @@ func (o *UpdateProfileConfigurationRequestConfiguration) HasExperimental() bool 
 	return false
 }
 
-// SetExperimental gets a reference to the given ProfileDetailedConfigurationExperimental and assigns it to the Experimental field.
-func (o *UpdateProfileConfigurationRequestConfiguration) SetExperimental(v ProfileDetailedConfigurationExperimental) {
+// SetExperimental gets a reference to the given GetProfile200ResponseConfigurationExperimental and assigns it to the Experimental field.
+func (o *UpdateProfileConfigurationRequestConfiguration) SetExperimental(v GetProfile200ResponseConfigurationExperimental) {
 	o.Experimental = &v
 }
 
 func (o UpdateProfileConfigurationRequestConfiguration) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -696,6 +729,9 @@ func (o UpdateProfileConfigurationRequestConfiguration) ToMap() (map[string]inte
 	if !IsNil(o.RestApiDast) {
 		toSerialize["rest_api_dast"] = o.RestApiDast
 	}
+	if !IsNil(o.AutomatedPentesting) {
+		toSerialize["automated_pentesting"] = o.AutomatedPentesting
+	}
 	if !IsNil(o.Experimental) {
 		toSerialize["experimental"] = o.Experimental
 	}
@@ -738,6 +774,7 @@ func (o *UpdateProfileConfigurationRequestConfiguration) UnmarshalJSON(data []by
 		delete(additionalProperties, "frontend_dast")
 		delete(additionalProperties, "graphql_api_dast")
 		delete(additionalProperties, "rest_api_dast")
+		delete(additionalProperties, "automated_pentesting")
 		delete(additionalProperties, "experimental")
 		o.AdditionalProperties = additionalProperties
 	}
@@ -780,3 +817,5 @@ func (v *NullableUpdateProfileConfigurationRequestConfiguration) UnmarshalJSON(s
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

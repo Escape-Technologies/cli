@@ -25,7 +25,7 @@ type LastScanStatusSummarizedLastResourceScanProblemsInner struct {
 	// The problem message
 	Message string `json:"message"`
 	// The problem severity
-	Severity             string `json:"severity"`
+	Severity string `json:"severity"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -124,7 +124,7 @@ func (o *LastScanStatusSummarizedLastResourceScanProblemsInner) SetSeverity(v st
 }
 
 func (o LastScanStatusSummarizedLastResourceScanProblemsInner) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -159,10 +159,10 @@ func (o *LastScanStatusSummarizedLastResourceScanProblemsInner) UnmarshalJSON(da
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -225,3 +225,5 @@ func (v *NullableLastScanStatusSummarizedLastResourceScanProblemsInner) Unmarsha
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

@@ -18,13 +18,13 @@ import (
 // checks if the AssetHostDetailed type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AssetHostDetailed{}
 
-// AssetHostDetailed Detailed information about an asset host
+// AssetHostDetailed The host of the asset
 type AssetHostDetailed struct {
-	Type                 ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESHOSTPROPERTIESTYPE `json:"type"`
-	Address              string                                                             `json:"address"`
-	Ips                  []string                                                           `json:"ips"`
-	Ports                []AssetHostDetailedPortsInner                                      `json:"ports"`
-	Records              []AssetHostDetailedRecordsInner                                    `json:"records"`
+	Type ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESHOSTPROPERTIESTYPE `json:"type"`
+	Address string `json:"address"`
+	Ips []string `json:"ips"`
+	Ports []AssetHostDetailedPortsInner `json:"ports"`
+	Records []AssetHostDetailedRecordsInner `json:"records"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -173,7 +173,7 @@ func (o *AssetHostDetailed) SetRecords(v []AssetHostDetailedRecordsInner) {
 }
 
 func (o AssetHostDetailed) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -212,10 +212,10 @@ func (o *AssetHostDetailed) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -280,3 +280,5 @@ func (v *NullableAssetHostDetailed) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

@@ -46,7 +46,7 @@ func ListLocations(ctx context.Context, next string, filters *ListLocationsFilte
 }
 
 // GetLocation gets a location by ID
-func GetLocation(ctx context.Context, id string) (*v3.LocationDetailed, error) {
+func GetLocation(ctx context.Context, id string) (*v3.CreateLocation200Response, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
