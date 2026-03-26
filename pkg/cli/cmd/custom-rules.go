@@ -49,6 +49,11 @@ ID                                      NAME                       SSH PUBLIC KE
 00000000-0000-0000-0000-000000000002    example-custom-rule-2         ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAI... example2@email.com`,
 	Example: `escape-cli custom-rules list`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
+		// Output JSON Schema if requested
+		if out.Schema([]v3.CustomRuleSummarized{}) {
+			return nil
+		}
+
 		customRules, err := escape.ListCustomRules(cmd.Context())
 		if err != nil {
 			return fmt.Errorf("failed to list custom rules: %w", err)
@@ -88,6 +93,11 @@ var customRulesGetCmd = &cobra.Command{
 	},
 	Example: `escape-cli custom-rules get 00000000-0000-0000-0000-000000000000`,
 	RunE: func(cmd *cobra.Command, args []string) error {
+		// Output JSON Schema if requested
+		if out.Schema(v3.CreateCustomRule200Response{}) {
+			return nil
+		}
+
 		customRule, err := escape.GetCustomRule(cmd.Context(), args[0])
 		if err != nil {
 			return fmt.Errorf("failed to get custom rule: %w", err)
@@ -163,6 +173,11 @@ var customRulesCreateCmd = &cobra.Command{
 		return nil
 	},
 	RunE: func(cmd *cobra.Command, _ []string) error {
+		// Output JSON Schema if requested
+		if out.Schema(v3.CreateCustomRule200Response{}) {
+			return nil
+		}
+
 		b, err := io.ReadAll(os.Stdin)
 		if err != nil {
 			return fmt.Errorf("failed to read stdin: %w", err)
@@ -214,6 +229,11 @@ var customRulesUpdateCmd = &cobra.Command{
 		return nil
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
+		// Output JSON Schema if requested
+		if out.Schema(v3.CreateCustomRule200Response{}) {
+			return nil
+		}
+
 		id := args[0]
 		b, err := io.ReadAll(os.Stdin)
 		if err != nil {

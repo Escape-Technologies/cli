@@ -107,7 +107,7 @@ capabilities.
 
 func init() {
 	rootCmd.PersistentFlags().CountVarP(&rootCmdVerbose, "verbose", "v", "verbose output: -v (debug), -vv (trace), -vvv (http/raw debug)")
-	rootCmd.PersistentFlags().StringVarP(&rootCmdOutputStr, "output", "o", "pretty", "output format: pretty (human-readable tables), json (machine-readable), yaml (configuration files)")
+	rootCmd.PersistentFlags().StringVarP(&rootCmdOutputStr, "output", "o", "pretty", "output format: pretty (human-readable tables), json (machine-readable), yaml (configuration files), schema (JSON Schema for AI agents)")
 	rootCmd.SetUsageTemplate(rootCmd.UsageTemplate() + `
 COMMAND CATEGORIES:
   Scanning:       scans     - Run security scans and view results

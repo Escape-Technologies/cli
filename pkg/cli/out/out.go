@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/Escape-Technologies/cli/pkg/cli/schema"
 	"github.com/Escape-Technologies/cli/pkg/log"
 	"gopkg.in/yaml.v2"
 )
@@ -17,9 +18,15 @@ const (
 	outputPretty outputT = "pretty"
 	outputJSON   outputT = "json"
 	outputYAML   outputT = "yaml"
+	outputSchema outputT = "schema"
 )
 
 var output = outputPretty
+
+// IsSchemaMode returns true if the output mode is schema
+func IsSchemaMode() bool {
+	return output == outputSchema
+}
 
 func pprint(o outputT, data any, pretty string) {
 	toPrint := pretty
@@ -58,6 +65,8 @@ func getOutput(o string) *outputT {
 		res = outputJSON
 	case "yaml", "yml":
 		res = outputYAML
+	case "schema":
+		res = outputSchema
 	}
 	return &res
 }
@@ -80,4 +89,14 @@ func GetShortDate(date string) string {
 		return date
 	}
 	return parsed.Format("2006-01-02")
+}
+
+// Schema prints the JSON Schema for the given type and returns true if in schema mode
+// Commands should call this at the start and return early if it returns true
+func Schema(v any) bool {
+	if output != outputSchema {
+		return false
+	}
+	_ = schema.Print(v)
+	return true
 }

@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/Escape-Technologies/cli/pkg/api/escape"
+	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
 	"github.com/Escape-Technologies/cli/pkg/cli/out"
 	"github.com/spf13/cobra"
 )
@@ -68,6 +69,11 @@ FILTER OPTIONS:
   # Export for compliance reporting
   escape-cli audit list --date-from 2025-01-01T00:00:00Z -o json > audit-report-jan2025.json`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
+		// Output JSON Schema if requested
+		if out.Schema([]v3.AuditLogSummarized{}) {
+			return nil
+		}
+
 		logs, next, err := escape.ListAuditLogs(
 			cmd.Context(),
 			"",
