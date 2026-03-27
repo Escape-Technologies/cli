@@ -19,17 +19,17 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationExperimental{}
 
 // GetProfile200ResponseConfigurationExperimental struct for GetProfile200ResponseConfigurationExperimental
 type GetProfile200ResponseConfigurationExperimental struct {
-	BlstExplorationOnly *bool `json:"blst_exploration_only,omitempty"`
-	AgenticIdor *bool `json:"agentic_idor,omitempty"`
-	BusinessLogicAgent *bool `json:"business_logic_agent,omitempty"`
-	PostmanNext *bool `json:"postman_next,omitempty"`
-	HappyPathsRegressionTesting []string `json:"happy_paths_regression_testing,omitempty"`
+	BlstExplorationOnly            *bool    `json:"blst_exploration_only,omitempty"`
+	AgenticIdor                    *bool    `json:"agentic_idor,omitempty"`
+	BusinessLogicAgent             *bool    `json:"business_logic_agent,omitempty"`
+	PostmanNext                    *bool    `json:"postman_next,omitempty"`
+	HappyPathsRegressionTesting    []string `json:"happy_paths_regression_testing,omitempty"`
 	RegressionTestingFileUploadIds []string `json:"regression_testing_file_upload_ids,omitempty"`
-	AsmTechnologies *bool `json:"asm_technologies,omitempty"`
-	AsmCodeProjects *bool `json:"asm_code_projects,omitempty"`
-	LocationsNext *bool `json:"locations_next,omitempty"`
-	ExternalCrawlingTask *bool `json:"external_crawling_task,omitempty"`
-	AdditionalProperties map[string]interface{}
+	AsmTechnologies                *bool    `json:"asm_technologies,omitempty"`
+	AsmCodeProjects                *bool    `json:"asm_code_projects,omitempty"`
+	LocationsNext                  *bool    `json:"locations_next,omitempty"`
+	ExternalCrawlingTask           *bool    `json:"external_crawling_task,omitempty"`
+	AdditionalProperties           map[string]interface{}
 }
 
 type _GetProfile200ResponseConfigurationExperimental GetProfile200ResponseConfigurationExperimental
@@ -372,7 +372,7 @@ func (o *GetProfile200ResponseConfigurationExperimental) SetExternalCrawlingTask
 }
 
 func (o GetProfile200ResponseConfigurationExperimental) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -484,5 +484,3 @@ func (v *NullableGetProfile200ResponseConfigurationExperimental) UnmarshalJSON(s
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
