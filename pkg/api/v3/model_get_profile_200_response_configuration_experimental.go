@@ -19,16 +19,17 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationExperimental{}
 
 // GetProfile200ResponseConfigurationExperimental struct for GetProfile200ResponseConfigurationExperimental
 type GetProfile200ResponseConfigurationExperimental struct {
-	BlstExplorationOnly            *bool    `json:"blst_exploration_only,omitempty"`
-	AgenticIdor                    *bool    `json:"agentic_idor,omitempty"`
-	BlstSkipSeedExamples           *bool    `json:"blst_skip_seed_examples,omitempty"`
-	PostmanNext                    *bool    `json:"postman_next,omitempty"`
-	HappyPathsRegressionTesting    []string `json:"happy_paths_regression_testing,omitempty"`
+	BlstExplorationOnly *bool `json:"blst_exploration_only,omitempty"`
+	AgenticIdor *bool `json:"agentic_idor,omitempty"`
+	BusinessLogicAgent *bool `json:"business_logic_agent,omitempty"`
+	PostmanNext *bool `json:"postman_next,omitempty"`
+	HappyPathsRegressionTesting []string `json:"happy_paths_regression_testing,omitempty"`
 	RegressionTestingFileUploadIds []string `json:"regression_testing_file_upload_ids,omitempty"`
-	AsmTechnologies                *bool    `json:"asm_technologies,omitempty"`
-	LocationsNext                  *bool    `json:"locations_next,omitempty"`
-	ExternalCrawlingTask           *bool    `json:"external_crawling_task,omitempty"`
-	AdditionalProperties           map[string]interface{}
+	AsmTechnologies *bool `json:"asm_technologies,omitempty"`
+	AsmCodeProjects *bool `json:"asm_code_projects,omitempty"`
+	LocationsNext *bool `json:"locations_next,omitempty"`
+	ExternalCrawlingTask *bool `json:"external_crawling_task,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetProfile200ResponseConfigurationExperimental GetProfile200ResponseConfigurationExperimental
@@ -114,36 +115,36 @@ func (o *GetProfile200ResponseConfigurationExperimental) SetAgenticIdor(v bool) 
 	o.AgenticIdor = &v
 }
 
-// GetBlstSkipSeedExamples returns the BlstSkipSeedExamples field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationExperimental) GetBlstSkipSeedExamples() bool {
-	if o == nil || IsNil(o.BlstSkipSeedExamples) {
+// GetBusinessLogicAgent returns the BusinessLogicAgent field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationExperimental) GetBusinessLogicAgent() bool {
+	if o == nil || IsNil(o.BusinessLogicAgent) {
 		var ret bool
 		return ret
 	}
-	return *o.BlstSkipSeedExamples
+	return *o.BusinessLogicAgent
 }
 
-// GetBlstSkipSeedExamplesOk returns a tuple with the BlstSkipSeedExamples field value if set, nil otherwise
+// GetBusinessLogicAgentOk returns a tuple with the BusinessLogicAgent field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationExperimental) GetBlstSkipSeedExamplesOk() (*bool, bool) {
-	if o == nil || IsNil(o.BlstSkipSeedExamples) {
+func (o *GetProfile200ResponseConfigurationExperimental) GetBusinessLogicAgentOk() (*bool, bool) {
+	if o == nil || IsNil(o.BusinessLogicAgent) {
 		return nil, false
 	}
-	return o.BlstSkipSeedExamples, true
+	return o.BusinessLogicAgent, true
 }
 
-// HasBlstSkipSeedExamples returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationExperimental) HasBlstSkipSeedExamples() bool {
-	if o != nil && !IsNil(o.BlstSkipSeedExamples) {
+// HasBusinessLogicAgent returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationExperimental) HasBusinessLogicAgent() bool {
+	if o != nil && !IsNil(o.BusinessLogicAgent) {
 		return true
 	}
 
 	return false
 }
 
-// SetBlstSkipSeedExamples gets a reference to the given bool and assigns it to the BlstSkipSeedExamples field.
-func (o *GetProfile200ResponseConfigurationExperimental) SetBlstSkipSeedExamples(v bool) {
-	o.BlstSkipSeedExamples = &v
+// SetBusinessLogicAgent gets a reference to the given bool and assigns it to the BusinessLogicAgent field.
+func (o *GetProfile200ResponseConfigurationExperimental) SetBusinessLogicAgent(v bool) {
+	o.BusinessLogicAgent = &v
 }
 
 // GetPostmanNext returns the PostmanNext field value if set, zero value otherwise.
@@ -274,6 +275,38 @@ func (o *GetProfile200ResponseConfigurationExperimental) SetAsmTechnologies(v bo
 	o.AsmTechnologies = &v
 }
 
+// GetAsmCodeProjects returns the AsmCodeProjects field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationExperimental) GetAsmCodeProjects() bool {
+	if o == nil || IsNil(o.AsmCodeProjects) {
+		var ret bool
+		return ret
+	}
+	return *o.AsmCodeProjects
+}
+
+// GetAsmCodeProjectsOk returns a tuple with the AsmCodeProjects field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationExperimental) GetAsmCodeProjectsOk() (*bool, bool) {
+	if o == nil || IsNil(o.AsmCodeProjects) {
+		return nil, false
+	}
+	return o.AsmCodeProjects, true
+}
+
+// HasAsmCodeProjects returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationExperimental) HasAsmCodeProjects() bool {
+	if o != nil && !IsNil(o.AsmCodeProjects) {
+		return true
+	}
+
+	return false
+}
+
+// SetAsmCodeProjects gets a reference to the given bool and assigns it to the AsmCodeProjects field.
+func (o *GetProfile200ResponseConfigurationExperimental) SetAsmCodeProjects(v bool) {
+	o.AsmCodeProjects = &v
+}
+
 // GetLocationsNext returns the LocationsNext field value if set, zero value otherwise.
 func (o *GetProfile200ResponseConfigurationExperimental) GetLocationsNext() bool {
 	if o == nil || IsNil(o.LocationsNext) {
@@ -339,7 +372,7 @@ func (o *GetProfile200ResponseConfigurationExperimental) SetExternalCrawlingTask
 }
 
 func (o GetProfile200ResponseConfigurationExperimental) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -354,8 +387,8 @@ func (o GetProfile200ResponseConfigurationExperimental) ToMap() (map[string]inte
 	if !IsNil(o.AgenticIdor) {
 		toSerialize["agentic_idor"] = o.AgenticIdor
 	}
-	if !IsNil(o.BlstSkipSeedExamples) {
-		toSerialize["blst_skip_seed_examples"] = o.BlstSkipSeedExamples
+	if !IsNil(o.BusinessLogicAgent) {
+		toSerialize["business_logic_agent"] = o.BusinessLogicAgent
 	}
 	if !IsNil(o.PostmanNext) {
 		toSerialize["postman_next"] = o.PostmanNext
@@ -368,6 +401,9 @@ func (o GetProfile200ResponseConfigurationExperimental) ToMap() (map[string]inte
 	}
 	if !IsNil(o.AsmTechnologies) {
 		toSerialize["asm_technologies"] = o.AsmTechnologies
+	}
+	if !IsNil(o.AsmCodeProjects) {
+		toSerialize["asm_code_projects"] = o.AsmCodeProjects
 	}
 	if !IsNil(o.LocationsNext) {
 		toSerialize["locations_next"] = o.LocationsNext
@@ -399,11 +435,12 @@ func (o *GetProfile200ResponseConfigurationExperimental) UnmarshalJSON(data []by
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "blst_exploration_only")
 		delete(additionalProperties, "agentic_idor")
-		delete(additionalProperties, "blst_skip_seed_examples")
+		delete(additionalProperties, "business_logic_agent")
 		delete(additionalProperties, "postman_next")
 		delete(additionalProperties, "happy_paths_regression_testing")
 		delete(additionalProperties, "regression_testing_file_upload_ids")
 		delete(additionalProperties, "asm_technologies")
+		delete(additionalProperties, "asm_code_projects")
 		delete(additionalProperties, "locations_next")
 		delete(additionalProperties, "external_crawling_task")
 		o.AdditionalProperties = additionalProperties
@@ -447,3 +484,5 @@ func (v *NullableGetProfile200ResponseConfigurationExperimental) UnmarshalJSON(s
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

@@ -20,13 +20,14 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationAuthenticationUsersInn
 
 // GetProfile200ResponseConfigurationAuthenticationUsersInner struct for GetProfile200ResponseConfigurationAuthenticationUsersInner
 type GetProfile200ResponseConfigurationAuthenticationUsersInner struct {
-	Name                 string                                                                     `json:"name"`
-	Role                 *string                                                                    `json:"role,omitempty"`
-	Credentials          *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentials     `json:"credentials,omitempty"`
-	Procedure            *string                                                                    `json:"procedure,omitempty"`
-	Variables            []GetProfile200ResponseConfigurationAuthenticationUsersInnerVariablesInner `json:"variables,omitempty"`
-	MainUser             *bool                                                                      `json:"main_user,omitempty"`
-	AllowFailure         *bool                                                                      `json:"allow_failure,omitempty"`
+	Name string `json:"name"`
+	Role *string `json:"role,omitempty"`
+	Credentials *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentials `json:"credentials,omitempty"`
+	Procedure *string `json:"procedure,omitempty"`
+	Variables []GetProfile200ResponseConfigurationAuthenticationUsersInnerVariablesInner `json:"variables,omitempty"`
+	MainUser *bool `json:"main_user,omitempty"`
+	AllowFailure *bool `json:"allow_failure,omitempty"`
+	UserInstructions *string `json:"user_instructions,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -266,8 +267,40 @@ func (o *GetProfile200ResponseConfigurationAuthenticationUsersInner) SetAllowFai
 	o.AllowFailure = &v
 }
 
+// GetUserInstructions returns the UserInstructions field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationAuthenticationUsersInner) GetUserInstructions() string {
+	if o == nil || IsNil(o.UserInstructions) {
+		var ret string
+		return ret
+	}
+	return *o.UserInstructions
+}
+
+// GetUserInstructionsOk returns a tuple with the UserInstructions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationAuthenticationUsersInner) GetUserInstructionsOk() (*string, bool) {
+	if o == nil || IsNil(o.UserInstructions) {
+		return nil, false
+	}
+	return o.UserInstructions, true
+}
+
+// HasUserInstructions returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationAuthenticationUsersInner) HasUserInstructions() bool {
+	if o != nil && !IsNil(o.UserInstructions) {
+		return true
+	}
+
+	return false
+}
+
+// SetUserInstructions gets a reference to the given string and assigns it to the UserInstructions field.
+func (o *GetProfile200ResponseConfigurationAuthenticationUsersInner) SetUserInstructions(v string) {
+	o.UserInstructions = &v
+}
+
 func (o GetProfile200ResponseConfigurationAuthenticationUsersInner) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -295,6 +328,9 @@ func (o GetProfile200ResponseConfigurationAuthenticationUsersInner) ToMap() (map
 	if !IsNil(o.AllowFailure) {
 		toSerialize["allow_failure"] = o.AllowFailure
 	}
+	if !IsNil(o.UserInstructions) {
+		toSerialize["user_instructions"] = o.UserInstructions
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -316,10 +352,10 @@ func (o *GetProfile200ResponseConfigurationAuthenticationUsersInner) UnmarshalJS
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -345,6 +381,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationUsersInner) UnmarshalJS
 		delete(additionalProperties, "variables")
 		delete(additionalProperties, "main_user")
 		delete(additionalProperties, "allow_failure")
+		delete(additionalProperties, "user_instructions")
 		o.AdditionalProperties = additionalProperties
 	}
 
@@ -386,3 +423,5 @@ func (v *NullableGetProfile200ResponseConfigurationAuthenticationUsersInner) Unm
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

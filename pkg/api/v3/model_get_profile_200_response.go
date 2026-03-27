@@ -39,15 +39,17 @@ type GetProfile200Response struct {
 	// The score of the profile
 	Score *float32 `json:"score,omitempty"`
 	// The coverage of the profile
-	Coverage                   *float32                           `json:"coverage,omitempty"`
-	Configuration              GetProfile200ResponseConfiguration `json:"configuration"`
-	Asset                      AssetDetailed                      `json:"asset"`
-	LastResourceScan           *ScanDetailed                      `json:"lastResourceScan,omitempty"`
-	LastSuccessfulResourceScan *ScanDetailed1                     `json:"lastSuccessfulResourceScan,omitempty"`
+	Coverage *float32 `json:"coverage,omitempty"`
+	Configuration GetProfile200ResponseConfiguration `json:"configuration"`
+	// The extra assets of the profile
+	ExtraAssets []ProfileExtraAsset `json:"extraAssets"`
+	Asset AssetDetailed `json:"asset"`
+	LastResourceScan *ScanDetailed `json:"lastResourceScan,omitempty"`
+	LastSuccessfulResourceScan *ScanDetailed1 `json:"lastSuccessfulResourceScan,omitempty"`
 	// The risks of the profile
-	Risks                []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS `json:"risks"`
-	Statistics           StatisticsDetailed                                           `json:"statistics"`
-	Links                ProfileSummarizedLinks                                       `json:"links"`
+	Risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS `json:"risks"`
+	Statistics StatisticsDetailed `json:"statistics"`
+	Links ProfileSummarizedLinks `json:"links"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -57,7 +59,7 @@ type _GetProfile200Response GetProfile200Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetProfile200Response(id string, name string, description string, scannerKind string, createdAt string, updatedAt string, configuration GetProfile200ResponseConfiguration, asset AssetDetailed, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, statistics StatisticsDetailed, links ProfileSummarizedLinks) *GetProfile200Response {
+func NewGetProfile200Response(id string, name string, description string, scannerKind string, createdAt string, updatedAt string, configuration GetProfile200ResponseConfiguration, extraAssets []ProfileExtraAsset, asset AssetDetailed, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, statistics StatisticsDetailed, links ProfileSummarizedLinks) *GetProfile200Response {
 	this := GetProfile200Response{}
 	this.Id = id
 	this.Name = name
@@ -66,6 +68,7 @@ func NewGetProfile200Response(id string, name string, description string, scanne
 	this.CreatedAt = createdAt
 	this.UpdatedAt = updatedAt
 	this.Configuration = configuration
+	this.ExtraAssets = extraAssets
 	this.Asset = asset
 	this.Risks = risks
 	this.Statistics = statistics
@@ -377,6 +380,30 @@ func (o *GetProfile200Response) SetConfiguration(v GetProfile200ResponseConfigur
 	o.Configuration = v
 }
 
+// GetExtraAssets returns the ExtraAssets field value
+func (o *GetProfile200Response) GetExtraAssets() []ProfileExtraAsset {
+	if o == nil {
+		var ret []ProfileExtraAsset
+		return ret
+	}
+
+	return o.ExtraAssets
+}
+
+// GetExtraAssetsOk returns a tuple with the ExtraAssets field value
+// and a boolean to check if the value has been set.
+func (o *GetProfile200Response) GetExtraAssetsOk() ([]ProfileExtraAsset, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ExtraAssets, true
+}
+
+// SetExtraAssets sets field value
+func (o *GetProfile200Response) SetExtraAssets(v []ProfileExtraAsset) {
+	o.ExtraAssets = v
+}
+
 // GetAsset returns the Asset field value
 func (o *GetProfile200Response) GetAsset() AssetDetailed {
 	if o == nil {
@@ -538,7 +565,7 @@ func (o *GetProfile200Response) SetLinks(v ProfileSummarizedLinks) {
 }
 
 func (o GetProfile200Response) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -566,6 +593,7 @@ func (o GetProfile200Response) ToMap() (map[string]interface{}, error) {
 		toSerialize["coverage"] = o.Coverage
 	}
 	toSerialize["configuration"] = o.Configuration
+	toSerialize["extraAssets"] = o.ExtraAssets
 	toSerialize["asset"] = o.Asset
 	if !IsNil(o.LastResourceScan) {
 		toSerialize["lastResourceScan"] = o.LastResourceScan
@@ -596,6 +624,7 @@ func (o *GetProfile200Response) UnmarshalJSON(data []byte) (err error) {
 		"createdAt",
 		"updatedAt",
 		"configuration",
+		"extraAssets",
 		"asset",
 		"risks",
 		"statistics",
@@ -607,10 +636,10 @@ func (o *GetProfile200Response) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -640,6 +669,7 @@ func (o *GetProfile200Response) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "score")
 		delete(additionalProperties, "coverage")
 		delete(additionalProperties, "configuration")
+		delete(additionalProperties, "extraAssets")
 		delete(additionalProperties, "asset")
 		delete(additionalProperties, "lastResourceScan")
 		delete(additionalProperties, "lastSuccessfulResourceScan")
@@ -687,3 +717,5 @@ func (v *NullableGetProfile200Response) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

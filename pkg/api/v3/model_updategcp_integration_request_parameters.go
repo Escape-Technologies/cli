@@ -21,17 +21,18 @@ var _ MappedNullable = &UpdategcpIntegrationRequestParameters{}
 // UpdategcpIntegrationRequestParameters The new parameters of the integration
 type UpdategcpIntegrationRequestParameters struct {
 	AuthProviderX509CertUrl string `json:"auth_provider_x509_cert_url"`
-	AuthUri                 string `json:"auth_uri"`
-	ClientEmail             string `json:"client_email"`
-	ClientId                string `json:"client_id"`
-	ClientX509CertUrl       string `json:"client_x509_cert_url"`
-	PrivateKey              string `json:"private_key"`
-	PrivateKeyId            string `json:"private_key_id"`
-	ProjectId               string `json:"project_id"`
-	TokenUri                string `json:"token_uri"`
-	Type                    string `json:"type"`
-	UniverseDomain          string `json:"universe_domain"`
-	AdditionalProperties    map[string]interface{}
+	AuthUri string `json:"auth_uri"`
+	ClientEmail string `json:"client_email"`
+	ClientId string `json:"client_id"`
+	ClientX509CertUrl string `json:"client_x509_cert_url"`
+	PrivateKey string `json:"private_key"`
+	PrivateKeyId string `json:"private_key_id"`
+	ProjectId string `json:"project_id"`
+	Projects *string `json:"projects,omitempty"`
+	TokenUri string `json:"token_uri"`
+	Type string `json:"type"`
+	UniverseDomain string `json:"universe_domain"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpdategcpIntegrationRequestParameters UpdategcpIntegrationRequestParameters
@@ -256,6 +257,38 @@ func (o *UpdategcpIntegrationRequestParameters) SetProjectId(v string) {
 	o.ProjectId = v
 }
 
+// GetProjects returns the Projects field value if set, zero value otherwise.
+func (o *UpdategcpIntegrationRequestParameters) GetProjects() string {
+	if o == nil || IsNil(o.Projects) {
+		var ret string
+		return ret
+	}
+	return *o.Projects
+}
+
+// GetProjectsOk returns a tuple with the Projects field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdategcpIntegrationRequestParameters) GetProjectsOk() (*string, bool) {
+	if o == nil || IsNil(o.Projects) {
+		return nil, false
+	}
+	return o.Projects, true
+}
+
+// HasProjects returns a boolean if a field has been set.
+func (o *UpdategcpIntegrationRequestParameters) HasProjects() bool {
+	if o != nil && !IsNil(o.Projects) {
+		return true
+	}
+
+	return false
+}
+
+// SetProjects gets a reference to the given string and assigns it to the Projects field.
+func (o *UpdategcpIntegrationRequestParameters) SetProjects(v string) {
+	o.Projects = &v
+}
+
 // GetTokenUri returns the TokenUri field value
 func (o *UpdategcpIntegrationRequestParameters) GetTokenUri() string {
 	if o == nil {
@@ -329,7 +362,7 @@ func (o *UpdategcpIntegrationRequestParameters) SetUniverseDomain(v string) {
 }
 
 func (o UpdategcpIntegrationRequestParameters) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -346,6 +379,9 @@ func (o UpdategcpIntegrationRequestParameters) ToMap() (map[string]interface{}, 
 	toSerialize["private_key"] = o.PrivateKey
 	toSerialize["private_key_id"] = o.PrivateKeyId
 	toSerialize["project_id"] = o.ProjectId
+	if !IsNil(o.Projects) {
+		toSerialize["projects"] = o.Projects
+	}
 	toSerialize["token_uri"] = o.TokenUri
 	toSerialize["type"] = o.Type
 	toSerialize["universe_domain"] = o.UniverseDomain
@@ -380,10 +416,10 @@ func (o *UpdategcpIntegrationRequestParameters) UnmarshalJSON(data []byte) (err 
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -410,6 +446,7 @@ func (o *UpdategcpIntegrationRequestParameters) UnmarshalJSON(data []byte) (err 
 		delete(additionalProperties, "private_key")
 		delete(additionalProperties, "private_key_id")
 		delete(additionalProperties, "project_id")
+		delete(additionalProperties, "projects")
 		delete(additionalProperties, "token_uri")
 		delete(additionalProperties, "type")
 		delete(additionalProperties, "universe_domain")
@@ -454,3 +491,5 @@ func (v *NullableUpdategcpIntegrationRequestParameters) UnmarshalJSON(src []byte
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

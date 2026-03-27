@@ -18,7 +18,7 @@ import (
 
 // GetProfile200ResponseConfigurationFrontendDastScopeCrawlingAllowlistInner - struct for GetProfile200ResponseConfigurationFrontendDastScopeCrawlingAllowlistInner
 type GetProfile200ResponseConfigurationFrontendDastScopeCrawlingAllowlistInner struct {
-	GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf  *GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf
+	GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf *GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf
 	GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf1 *GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf1
 	GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf2 *GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf2
 	GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf6 *GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf6
@@ -51,6 +51,7 @@ func GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf6AsGetProfile200R
 		GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf6: v,
 	}
 }
+
 
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *GetProfile200ResponseConfigurationFrontendDastScopeCrawlingAllowlistInner) UnmarshalJSON(data []byte) error {
@@ -161,7 +162,7 @@ func (src GetProfile200ResponseConfigurationFrontendDastScopeCrawlingAllowlistIn
 }
 
 // Get the actual instance
-func (obj *GetProfile200ResponseConfigurationFrontendDastScopeCrawlingAllowlistInner) GetActualInstance() interface{} {
+func (obj *GetProfile200ResponseConfigurationFrontendDastScopeCrawlingAllowlistInner) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
@@ -186,7 +187,7 @@ func (obj *GetProfile200ResponseConfigurationFrontendDastScopeCrawlingAllowlistI
 }
 
 // Get the actual instance value
-func (obj GetProfile200ResponseConfigurationFrontendDastScopeCrawlingAllowlistInner) GetActualInstanceValue() interface{} {
+func (obj GetProfile200ResponseConfigurationFrontendDastScopeCrawlingAllowlistInner) GetActualInstanceValue() (interface{}) {
 	if obj.GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf != nil {
 		return *obj.GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf
 	}
@@ -242,3 +243,5 @@ func (v *NullableGetProfile200ResponseConfigurationFrontendDastScopeCrawlingAllo
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

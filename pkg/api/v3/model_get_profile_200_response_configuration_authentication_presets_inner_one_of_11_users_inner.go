@@ -20,19 +20,20 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationAuthenticationPresetsI
 
 // GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11UsersInner struct for GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11UsersInner
 type GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11UsersInner struct {
-	Username             string                                                                                               `json:"username"`
-	Headers              map[string]string                                                                                    `json:"headers,omitempty"`
-	Cookies              map[string]string                                                                                    `json:"cookies,omitempty"`
-	QueryParameters      map[string]string                                                                                    `json:"query_parameters,omitempty"`
-	MainUser             *bool                                                                                                `json:"main_user,omitempty"`
-	AllowFailure         *bool                                                                                                `json:"allow_failure,omitempty"`
-	Basic                *string                                                                                              `json:"basic,omitempty"`
-	Digest               *string                                                                                              `json:"digest,omitempty"`
-	Role                 *string                                                                                              `json:"role,omitempty"`
-	Password             string                                                                                               `json:"password"`
-	AdditionalFields     []GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11UsersInnerAdditionalFieldsInner `json:"additional_fields,omitempty"`
-	PreLoginActions      []GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInner                  `json:"pre_login_actions,omitempty"`
-	PostLoginActions     []GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInner                  `json:"post_login_actions,omitempty"`
+	Username string `json:"username"`
+	Headers map[string]string `json:"headers,omitempty"`
+	Cookies map[string]string `json:"cookies,omitempty"`
+	QueryParameters map[string]string `json:"query_parameters,omitempty"`
+	MainUser *bool `json:"main_user,omitempty"`
+	AllowFailure *bool `json:"allow_failure,omitempty"`
+	Basic *string `json:"basic,omitempty"`
+	Digest *string `json:"digest,omitempty"`
+	Role *string `json:"role,omitempty"`
+	Password string `json:"password"`
+	AdditionalFields []GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11UsersInnerAdditionalFieldsInner `json:"additional_fields,omitempty"`
+	PreLoginActions []GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInner `json:"pre_login_actions,omitempty"`
+	PostLoginActions []GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInner `json:"post_login_actions,omitempty"`
+	Instructions *string `json:"instructions,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -457,8 +458,40 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11User
 	o.PostLoginActions = v
 }
 
+// GetInstructions returns the Instructions field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11UsersInner) GetInstructions() string {
+	if o == nil || IsNil(o.Instructions) {
+		var ret string
+		return ret
+	}
+	return *o.Instructions
+}
+
+// GetInstructionsOk returns a tuple with the Instructions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11UsersInner) GetInstructionsOk() (*string, bool) {
+	if o == nil || IsNil(o.Instructions) {
+		return nil, false
+	}
+	return o.Instructions, true
+}
+
+// HasInstructions returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11UsersInner) HasInstructions() bool {
+	if o != nil && !IsNil(o.Instructions) {
+		return true
+	}
+
+	return false
+}
+
+// SetInstructions gets a reference to the given string and assigns it to the Instructions field.
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11UsersInner) SetInstructions(v string) {
+	o.Instructions = &v
+}
+
 func (o GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11UsersInner) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -502,6 +535,9 @@ func (o GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11Users
 	if !IsNil(o.PostLoginActions) {
 		toSerialize["post_login_actions"] = o.PostLoginActions
 	}
+	if !IsNil(o.Instructions) {
+		toSerialize["instructions"] = o.Instructions
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -524,10 +560,10 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11User
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -559,6 +595,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11User
 		delete(additionalProperties, "additional_fields")
 		delete(additionalProperties, "pre_login_actions")
 		delete(additionalProperties, "post_login_actions")
+		delete(additionalProperties, "instructions")
 		o.AdditionalProperties = additionalProperties
 	}
 
@@ -600,3 +637,5 @@ func (v *NullableGetProfile200ResponseConfigurationAuthenticationPresetsInnerOne
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

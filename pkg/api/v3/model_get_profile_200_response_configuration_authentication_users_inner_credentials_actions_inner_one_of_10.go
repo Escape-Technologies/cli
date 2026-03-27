@@ -20,10 +20,14 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationAuthenticationUsersInn
 
 // GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10 struct for GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10
 type GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10 struct {
-	Action               ENUMSOLVECAPTCHA `json:"action"`
-	AllowFailure         *bool            `json:"allow_failure,omitempty"`
-	Locator              string           `json:"locator"`
-	AutoSubmit           *bool            `json:"auto_submit,omitempty"`
+	Action ENUMFILLMAILTOTP `json:"action"`
+	AllowFailure *bool `json:"allow_failure,omitempty"`
+	EmailAddress string `json:"email_address"`
+	Locator string `json:"locator"`
+	OneByOne *bool `json:"one_by_one,omitempty"`
+	AutoSubmit *bool `json:"auto_submit,omitempty"`
+	Timeout *float32 `json:"timeout,omitempty"`
+	SelectFirstIfMultiple *bool `json:"select_first_if_multiple,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -33,9 +37,10 @@ type _GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActio
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10(action ENUMSOLVECAPTCHA, locator string) *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10 {
+func NewGetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10(action ENUMFILLMAILTOTP, emailAddress string, locator string) *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10 {
 	this := GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10{}
 	this.Action = action
+	this.EmailAddress = emailAddress
 	this.Locator = locator
 	return &this
 }
@@ -49,9 +54,9 @@ func NewGetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsAct
 }
 
 // GetAction returns the Action field value
-func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) GetAction() ENUMSOLVECAPTCHA {
+func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) GetAction() ENUMFILLMAILTOTP {
 	if o == nil {
-		var ret ENUMSOLVECAPTCHA
+		var ret ENUMFILLMAILTOTP
 		return ret
 	}
 
@@ -60,7 +65,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsAc
 
 // GetActionOk returns a tuple with the Action field value
 // and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) GetActionOk() (*ENUMSOLVECAPTCHA, bool) {
+func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) GetActionOk() (*ENUMFILLMAILTOTP, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -68,7 +73,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsAc
 }
 
 // SetAction sets field value
-func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) SetAction(v ENUMSOLVECAPTCHA) {
+func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) SetAction(v ENUMFILLMAILTOTP) {
 	o.Action = v
 }
 
@@ -104,6 +109,30 @@ func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsAc
 	o.AllowFailure = &v
 }
 
+// GetEmailAddress returns the EmailAddress field value
+func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) GetEmailAddress() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.EmailAddress
+}
+
+// GetEmailAddressOk returns a tuple with the EmailAddress field value
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) GetEmailAddressOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.EmailAddress, true
+}
+
+// SetEmailAddress sets field value
+func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) SetEmailAddress(v string) {
+	o.EmailAddress = v
+}
+
 // GetLocator returns the Locator field value
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) GetLocator() string {
 	if o == nil {
@@ -126,6 +155,38 @@ func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsAc
 // SetLocator sets field value
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) SetLocator(v string) {
 	o.Locator = v
+}
+
+// GetOneByOne returns the OneByOne field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) GetOneByOne() bool {
+	if o == nil || IsNil(o.OneByOne) {
+		var ret bool
+		return ret
+	}
+	return *o.OneByOne
+}
+
+// GetOneByOneOk returns a tuple with the OneByOne field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) GetOneByOneOk() (*bool, bool) {
+	if o == nil || IsNil(o.OneByOne) {
+		return nil, false
+	}
+	return o.OneByOne, true
+}
+
+// HasOneByOne returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) HasOneByOne() bool {
+	if o != nil && !IsNil(o.OneByOne) {
+		return true
+	}
+
+	return false
+}
+
+// SetOneByOne gets a reference to the given bool and assigns it to the OneByOne field.
+func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) SetOneByOne(v bool) {
+	o.OneByOne = &v
 }
 
 // GetAutoSubmit returns the AutoSubmit field value if set, zero value otherwise.
@@ -160,8 +221,72 @@ func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsAc
 	o.AutoSubmit = &v
 }
 
+// GetTimeout returns the Timeout field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) GetTimeout() float32 {
+	if o == nil || IsNil(o.Timeout) {
+		var ret float32
+		return ret
+	}
+	return *o.Timeout
+}
+
+// GetTimeoutOk returns a tuple with the Timeout field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) GetTimeoutOk() (*float32, bool) {
+	if o == nil || IsNil(o.Timeout) {
+		return nil, false
+	}
+	return o.Timeout, true
+}
+
+// HasTimeout returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) HasTimeout() bool {
+	if o != nil && !IsNil(o.Timeout) {
+		return true
+	}
+
+	return false
+}
+
+// SetTimeout gets a reference to the given float32 and assigns it to the Timeout field.
+func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) SetTimeout(v float32) {
+	o.Timeout = &v
+}
+
+// GetSelectFirstIfMultiple returns the SelectFirstIfMultiple field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) GetSelectFirstIfMultiple() bool {
+	if o == nil || IsNil(o.SelectFirstIfMultiple) {
+		var ret bool
+		return ret
+	}
+	return *o.SelectFirstIfMultiple
+}
+
+// GetSelectFirstIfMultipleOk returns a tuple with the SelectFirstIfMultiple field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) GetSelectFirstIfMultipleOk() (*bool, bool) {
+	if o == nil || IsNil(o.SelectFirstIfMultiple) {
+		return nil, false
+	}
+	return o.SelectFirstIfMultiple, true
+}
+
+// HasSelectFirstIfMultiple returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) HasSelectFirstIfMultiple() bool {
+	if o != nil && !IsNil(o.SelectFirstIfMultiple) {
+		return true
+	}
+
+	return false
+}
+
+// SetSelectFirstIfMultiple gets a reference to the given bool and assigns it to the SelectFirstIfMultiple field.
+func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) SetSelectFirstIfMultiple(v bool) {
+	o.SelectFirstIfMultiple = &v
+}
+
 func (o GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -174,9 +299,19 @@ func (o GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsAct
 	if !IsNil(o.AllowFailure) {
 		toSerialize["allow_failure"] = o.AllowFailure
 	}
+	toSerialize["email_address"] = o.EmailAddress
 	toSerialize["locator"] = o.Locator
+	if !IsNil(o.OneByOne) {
+		toSerialize["one_by_one"] = o.OneByOne
+	}
 	if !IsNil(o.AutoSubmit) {
 		toSerialize["auto_submit"] = o.AutoSubmit
+	}
+	if !IsNil(o.Timeout) {
+		toSerialize["timeout"] = o.Timeout
+	}
+	if !IsNil(o.SelectFirstIfMultiple) {
+		toSerialize["select_first_if_multiple"] = o.SelectFirstIfMultiple
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -192,6 +327,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsAc
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"action",
+		"email_address",
 		"locator",
 	}
 
@@ -200,10 +336,10 @@ func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsAc
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -224,8 +360,12 @@ func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsAc
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "action")
 		delete(additionalProperties, "allow_failure")
+		delete(additionalProperties, "email_address")
 		delete(additionalProperties, "locator")
+		delete(additionalProperties, "one_by_one")
 		delete(additionalProperties, "auto_submit")
+		delete(additionalProperties, "timeout")
+		delete(additionalProperties, "select_first_if_multiple")
 		o.AdditionalProperties = additionalProperties
 	}
 
@@ -267,3 +407,5 @@ func (v *NullableGetProfile200ResponseConfigurationAuthenticationUsersInnerCrede
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
