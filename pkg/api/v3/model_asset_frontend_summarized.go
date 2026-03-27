@@ -18,7 +18,7 @@ import (
 // checks if the AssetFrontendSummarized type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AssetFrontendSummarized{}
 
-// AssetFrontendSummarized Summarized information about an asset frontend
+// AssetFrontendSummarized The frontend of the asset
 type AssetFrontendSummarized struct {
 	// The url of the asset frontend
 	Url                  string     `json:"url"`

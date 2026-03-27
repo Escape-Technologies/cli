@@ -20,25 +20,25 @@ var _ MappedNullable = &CreateAssetCODEPROJECTRequestRepositoryOneOf{}
 
 // CreateAssetCODEPROJECTRequestRepositoryOneOf struct for CreateAssetCODEPROJECTRequestRepositoryOneOf
 type CreateAssetCODEPROJECTRequestRepositoryOneOf struct {
-	AssetClass           ENUMREPOSITORY                           `json:"asset_class"`
-	WizProviderId        *string                                  `json:"wiz_provider_id,omitempty"`
-	WizCloudPlatform     *string                                  `json:"wiz_cloud_platform,omitempty"`
-	ExtraMetadata        map[string]interface{}                   `json:"extra_metadata,omitempty"`
-	AssetType            ENUMGITLABREPOSITORY                     `json:"asset_type"`
-	Url                  string                                   `json:"url"`
-	Name                 *string                                  `json:"name,omitempty"`
-	HttpUrlToRepo        *string                                  `json:"http_url_to_repo,omitempty"`
-	Description          *string                                  `json:"description,omitempty"`
-	LocationId           *string                                  `json:"location_id,omitempty"`
-	DefaultBranch        *string                                  `json:"default_branch,omitempty"`
-	BlobBaseUrl          *string                                  `json:"blob_base_url,omitempty"`
-	GroupId              *float32                                 `json:"group_id,omitempty"`
-	GroupFullPath        *string                                  `json:"group_full_path,omitempty"`
-	GroupWebUrl          *string                                  `json:"group_web_url,omitempty"`
-	ProjectId            *float32                                 `json:"project_id,omitempty"`
-	Archived             *bool                                    `json:"archived,omitempty"`
-	Visibility           *ENUMPROPERTIESVISIBILITY                `json:"visibility,omitempty"`
-	Group                *CreateAssetGITLABREPOSITORYRequestGroup `json:"group,omitempty"`
+	AssetClass           ENUMREPOSITORY                                `json:"asset_class"`
+	ExtraMetadata        map[string]interface{}                        `json:"extra_metadata,omitempty"`
+	ScreenshotS3Key      *string                                       `json:"screenshot_s3_key,omitempty"`
+	AssetType            ENUMGITLABREPOSITORY                          `json:"asset_type"`
+	Url                  string                                        `json:"url"`
+	Name                 *string                                       `json:"name,omitempty"`
+	HttpUrlToRepo        *string                                       `json:"http_url_to_repo,omitempty"`
+	Description          *string                                       `json:"description,omitempty"`
+	LocationId           *string                                       `json:"location_id,omitempty"`
+	DefaultBranch        *string                                       `json:"default_branch,omitempty"`
+	BlobBaseUrl          *string                                       `json:"blob_base_url,omitempty"`
+	LastCommit           *CreateAssetGITLABREPOSITORYRequestLastCommit `json:"last_commit,omitempty"`
+	GroupId              *float32                                      `json:"group_id,omitempty"`
+	GroupFullPath        *string                                       `json:"group_full_path,omitempty"`
+	GroupWebUrl          *string                                       `json:"group_web_url,omitempty"`
+	ProjectId            *float32                                      `json:"project_id,omitempty"`
+	Archived             *bool                                         `json:"archived,omitempty"`
+	Visibility           *ENUMPROPERTIESVISIBILITY                     `json:"visibility,omitempty"`
+	Group                *CreateAssetGITLABREPOSITORYRequestGroup      `json:"group,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -88,70 +88,6 @@ func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) SetAssetClass(v ENUMREPOS
 	o.AssetClass = v
 }
 
-// GetWizProviderId returns the WizProviderId field value if set, zero value otherwise.
-func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) GetWizProviderId() string {
-	if o == nil || IsNil(o.WizProviderId) {
-		var ret string
-		return ret
-	}
-	return *o.WizProviderId
-}
-
-// GetWizProviderIdOk returns a tuple with the WizProviderId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) GetWizProviderIdOk() (*string, bool) {
-	if o == nil || IsNil(o.WizProviderId) {
-		return nil, false
-	}
-	return o.WizProviderId, true
-}
-
-// HasWizProviderId returns a boolean if a field has been set.
-func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) HasWizProviderId() bool {
-	if o != nil && !IsNil(o.WizProviderId) {
-		return true
-	}
-
-	return false
-}
-
-// SetWizProviderId gets a reference to the given string and assigns it to the WizProviderId field.
-func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) SetWizProviderId(v string) {
-	o.WizProviderId = &v
-}
-
-// GetWizCloudPlatform returns the WizCloudPlatform field value if set, zero value otherwise.
-func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) GetWizCloudPlatform() string {
-	if o == nil || IsNil(o.WizCloudPlatform) {
-		var ret string
-		return ret
-	}
-	return *o.WizCloudPlatform
-}
-
-// GetWizCloudPlatformOk returns a tuple with the WizCloudPlatform field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) GetWizCloudPlatformOk() (*string, bool) {
-	if o == nil || IsNil(o.WizCloudPlatform) {
-		return nil, false
-	}
-	return o.WizCloudPlatform, true
-}
-
-// HasWizCloudPlatform returns a boolean if a field has been set.
-func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) HasWizCloudPlatform() bool {
-	if o != nil && !IsNil(o.WizCloudPlatform) {
-		return true
-	}
-
-	return false
-}
-
-// SetWizCloudPlatform gets a reference to the given string and assigns it to the WizCloudPlatform field.
-func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) SetWizCloudPlatform(v string) {
-	o.WizCloudPlatform = &v
-}
-
 // GetExtraMetadata returns the ExtraMetadata field value if set, zero value otherwise.
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) GetExtraMetadata() map[string]interface{} {
 	if o == nil || IsNil(o.ExtraMetadata) {
@@ -182,6 +118,38 @@ func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) HasExtraMetadata() bool {
 // SetExtraMetadata gets a reference to the given map[string]interface{} and assigns it to the ExtraMetadata field.
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) SetExtraMetadata(v map[string]interface{}) {
 	o.ExtraMetadata = v
+}
+
+// GetScreenshotS3Key returns the ScreenshotS3Key field value if set, zero value otherwise.
+func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) GetScreenshotS3Key() string {
+	if o == nil || IsNil(o.ScreenshotS3Key) {
+		var ret string
+		return ret
+	}
+	return *o.ScreenshotS3Key
+}
+
+// GetScreenshotS3KeyOk returns a tuple with the ScreenshotS3Key field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) GetScreenshotS3KeyOk() (*string, bool) {
+	if o == nil || IsNil(o.ScreenshotS3Key) {
+		return nil, false
+	}
+	return o.ScreenshotS3Key, true
+}
+
+// HasScreenshotS3Key returns a boolean if a field has been set.
+func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) HasScreenshotS3Key() bool {
+	if o != nil && !IsNil(o.ScreenshotS3Key) {
+		return true
+	}
+
+	return false
+}
+
+// SetScreenshotS3Key gets a reference to the given string and assigns it to the ScreenshotS3Key field.
+func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) SetScreenshotS3Key(v string) {
+	o.ScreenshotS3Key = &v
 }
 
 // GetAssetType returns the AssetType field value
@@ -424,6 +392,38 @@ func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) SetBlobBaseUrl(v string) 
 	o.BlobBaseUrl = &v
 }
 
+// GetLastCommit returns the LastCommit field value if set, zero value otherwise.
+func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) GetLastCommit() CreateAssetGITLABREPOSITORYRequestLastCommit {
+	if o == nil || IsNil(o.LastCommit) {
+		var ret CreateAssetGITLABREPOSITORYRequestLastCommit
+		return ret
+	}
+	return *o.LastCommit
+}
+
+// GetLastCommitOk returns a tuple with the LastCommit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) GetLastCommitOk() (*CreateAssetGITLABREPOSITORYRequestLastCommit, bool) {
+	if o == nil || IsNil(o.LastCommit) {
+		return nil, false
+	}
+	return o.LastCommit, true
+}
+
+// HasLastCommit returns a boolean if a field has been set.
+func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) HasLastCommit() bool {
+	if o != nil && !IsNil(o.LastCommit) {
+		return true
+	}
+
+	return false
+}
+
+// SetLastCommit gets a reference to the given CreateAssetGITLABREPOSITORYRequestLastCommit and assigns it to the LastCommit field.
+func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) SetLastCommit(v CreateAssetGITLABREPOSITORYRequestLastCommit) {
+	o.LastCommit = &v
+}
+
 // GetGroupId returns the GroupId field value if set, zero value otherwise.
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) GetGroupId() float32 {
 	if o == nil || IsNil(o.GroupId) {
@@ -659,14 +659,11 @@ func (o CreateAssetCODEPROJECTRequestRepositoryOneOf) MarshalJSON() ([]byte, err
 func (o CreateAssetCODEPROJECTRequestRepositoryOneOf) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["asset_class"] = o.AssetClass
-	if !IsNil(o.WizProviderId) {
-		toSerialize["wiz_provider_id"] = o.WizProviderId
-	}
-	if !IsNil(o.WizCloudPlatform) {
-		toSerialize["wiz_cloud_platform"] = o.WizCloudPlatform
-	}
 	if !IsNil(o.ExtraMetadata) {
 		toSerialize["extra_metadata"] = o.ExtraMetadata
+	}
+	if !IsNil(o.ScreenshotS3Key) {
+		toSerialize["screenshot_s3_key"] = o.ScreenshotS3Key
 	}
 	toSerialize["asset_type"] = o.AssetType
 	toSerialize["url"] = o.Url
@@ -687,6 +684,9 @@ func (o CreateAssetCODEPROJECTRequestRepositoryOneOf) ToMap() (map[string]interf
 	}
 	if !IsNil(o.BlobBaseUrl) {
 		toSerialize["blob_base_url"] = o.BlobBaseUrl
+	}
+	if !IsNil(o.LastCommit) {
+		toSerialize["last_commit"] = o.LastCommit
 	}
 	if !IsNil(o.GroupId) {
 		toSerialize["group_id"] = o.GroupId
@@ -755,9 +755,8 @@ func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) UnmarshalJSON(data []byte
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "asset_class")
-		delete(additionalProperties, "wiz_provider_id")
-		delete(additionalProperties, "wiz_cloud_platform")
 		delete(additionalProperties, "extra_metadata")
+		delete(additionalProperties, "screenshot_s3_key")
 		delete(additionalProperties, "asset_type")
 		delete(additionalProperties, "url")
 		delete(additionalProperties, "name")
@@ -766,6 +765,7 @@ func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) UnmarshalJSON(data []byte
 		delete(additionalProperties, "location_id")
 		delete(additionalProperties, "default_branch")
 		delete(additionalProperties, "blob_base_url")
+		delete(additionalProperties, "last_commit")
 		delete(additionalProperties, "group_id")
 		delete(additionalProperties, "group_full_path")
 		delete(additionalProperties, "group_web_url")

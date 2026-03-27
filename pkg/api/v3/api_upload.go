@@ -26,7 +26,7 @@ type ApiCreateUploadSignedUrlRequest struct {
 	ApiService *UploadAPIService
 }
 
-func (r ApiCreateUploadSignedUrlRequest) Execute() (*UploadSummary, *http.Response, error) {
+func (r ApiCreateUploadSignedUrlRequest) Execute() (*CreateUploadSignedUrl200Response, *http.Response, error) {
 	return r.ApiService.CreateUploadSignedUrlExecute(r)
 }
 
@@ -67,13 +67,13 @@ func (a *UploadAPIService) CreateUploadSignedUrl(ctx context.Context) ApiCreateU
 
 // Execute executes the request
 //
-//	@return UploadSummary
-func (a *UploadAPIService) CreateUploadSignedUrlExecute(r ApiCreateUploadSignedUrlRequest) (*UploadSummary, *http.Response, error) {
+//	@return CreateUploadSignedUrl200Response
+func (a *UploadAPIService) CreateUploadSignedUrlExecute(r ApiCreateUploadSignedUrlRequest) (*CreateUploadSignedUrl200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *UploadSummary
+		localVarReturnValue *CreateUploadSignedUrl200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UploadAPIService.CreateUploadSignedUrl")

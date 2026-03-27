@@ -155,138 +155,6 @@ func (a *IntegrationsAPIService) CreateakamaiIntegrationExecute(r ApiCreateakama
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiCreateapigeeIntegrationRequest struct {
-	ctx                            context.Context
-	ApiService                     *IntegrationsAPIService
-	createapigeeIntegrationRequest *CreateapigeeIntegrationRequest
-}
-
-func (r ApiCreateapigeeIntegrationRequest) CreateapigeeIntegrationRequest(createapigeeIntegrationRequest CreateapigeeIntegrationRequest) ApiCreateapigeeIntegrationRequest {
-	r.createapigeeIntegrationRequest = &createapigeeIntegrationRequest
-	return r
-}
-
-func (r ApiCreateapigeeIntegrationRequest) Execute() (*CreateapigeeIntegration200Response, *http.Response, error) {
-	return r.ApiService.CreateapigeeIntegrationExecute(r)
-}
-
-/*
-CreateapigeeIntegration Create Apigee integrations.
-
-Create a Apigee integration.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateapigeeIntegrationRequest
-*/
-func (a *IntegrationsAPIService) CreateapigeeIntegration(ctx context.Context) ApiCreateapigeeIntegrationRequest {
-	return ApiCreateapigeeIntegrationRequest{
-		ApiService: a,
-		ctx:        ctx,
-	}
-}
-
-// Execute executes the request
-//
-//	@return CreateapigeeIntegration200Response
-func (a *IntegrationsAPIService) CreateapigeeIntegrationExecute(r ApiCreateapigeeIntegrationRequest) (*CreateapigeeIntegration200Response, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreateapigeeIntegration200Response
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.CreateapigeeIntegration")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/integrations/apigee"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	localVarPostBody = r.createapigeeIntegrationRequest
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["apiKey"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v UpdateProfile400Response
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
 type ApiCreateawsIntegrationRequest struct {
 	ctx                         context.Context
 	ApiService                  *IntegrationsAPIService
@@ -551,31 +419,31 @@ func (a *IntegrationsAPIService) CreateazureIntegrationExecute(r ApiCreateazureI
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiCreatebitbucketRepoIntegrationRequest struct {
-	ctx                                   context.Context
-	ApiService                            *IntegrationsAPIService
-	createbitbucketRepoIntegrationRequest *CreatebitbucketRepoIntegrationRequest
+type ApiCreatebitbucketIntegrationRequest struct {
+	ctx                               context.Context
+	ApiService                        *IntegrationsAPIService
+	createbitbucketIntegrationRequest *CreatebitbucketIntegrationRequest
 }
 
-func (r ApiCreatebitbucketRepoIntegrationRequest) CreatebitbucketRepoIntegrationRequest(createbitbucketRepoIntegrationRequest CreatebitbucketRepoIntegrationRequest) ApiCreatebitbucketRepoIntegrationRequest {
-	r.createbitbucketRepoIntegrationRequest = &createbitbucketRepoIntegrationRequest
+func (r ApiCreatebitbucketIntegrationRequest) CreatebitbucketIntegrationRequest(createbitbucketIntegrationRequest CreatebitbucketIntegrationRequest) ApiCreatebitbucketIntegrationRequest {
+	r.createbitbucketIntegrationRequest = &createbitbucketIntegrationRequest
 	return r
 }
 
-func (r ApiCreatebitbucketRepoIntegrationRequest) Execute() (*CreatebitbucketRepoIntegration200Response, *http.Response, error) {
-	return r.ApiService.CreatebitbucketRepoIntegrationExecute(r)
+func (r ApiCreatebitbucketIntegrationRequest) Execute() (*CreatebitbucketIntegration200Response, *http.Response, error) {
+	return r.ApiService.CreatebitbucketIntegrationExecute(r)
 }
 
 /*
-CreatebitbucketRepoIntegration Create Bitbucket Repo integrations.
+CreatebitbucketIntegration Create Bitbucket integrations.
 
-Create a Bitbucket Repo integration.
+Create a Bitbucket integration.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreatebitbucketRepoIntegrationRequest
+	@return ApiCreatebitbucketIntegrationRequest
 */
-func (a *IntegrationsAPIService) CreatebitbucketRepoIntegration(ctx context.Context) ApiCreatebitbucketRepoIntegrationRequest {
-	return ApiCreatebitbucketRepoIntegrationRequest{
+func (a *IntegrationsAPIService) CreatebitbucketIntegration(ctx context.Context) ApiCreatebitbucketIntegrationRequest {
+	return ApiCreatebitbucketIntegrationRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
@@ -583,21 +451,21 @@ func (a *IntegrationsAPIService) CreatebitbucketRepoIntegration(ctx context.Cont
 
 // Execute executes the request
 //
-//	@return CreatebitbucketRepoIntegration200Response
-func (a *IntegrationsAPIService) CreatebitbucketRepoIntegrationExecute(r ApiCreatebitbucketRepoIntegrationRequest) (*CreatebitbucketRepoIntegration200Response, *http.Response, error) {
+//	@return CreatebitbucketIntegration200Response
+func (a *IntegrationsAPIService) CreatebitbucketIntegrationExecute(r ApiCreatebitbucketIntegrationRequest) (*CreatebitbucketIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreatebitbucketRepoIntegration200Response
+		localVarReturnValue *CreatebitbucketIntegration200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.CreatebitbucketRepoIntegration")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.CreatebitbucketIntegration")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/integrations/bitbucket-repo"
+	localVarPath := localBasePath + "/integrations/bitbucket"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -621,7 +489,7 @@ func (a *IntegrationsAPIService) CreatebitbucketRepoIntegrationExecute(r ApiCrea
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.createbitbucketRepoIntegrationRequest
+	localVarPostBody = r.createbitbucketIntegrationRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -948,17 +816,17 @@ func (a *IntegrationsAPIService) CreatecustomIntegrationExecute(r ApiCreatecusto
 }
 
 type ApiCreategcpIntegrationRequest struct {
-	ctx                            context.Context
-	ApiService                     *IntegrationsAPIService
-	createapigeeIntegrationRequest *CreateapigeeIntegrationRequest
+	ctx                         context.Context
+	ApiService                  *IntegrationsAPIService
+	creategcpIntegrationRequest *CreategcpIntegrationRequest
 }
 
-func (r ApiCreategcpIntegrationRequest) CreateapigeeIntegrationRequest(createapigeeIntegrationRequest CreateapigeeIntegrationRequest) ApiCreategcpIntegrationRequest {
-	r.createapigeeIntegrationRequest = &createapigeeIntegrationRequest
+func (r ApiCreategcpIntegrationRequest) CreategcpIntegrationRequest(creategcpIntegrationRequest CreategcpIntegrationRequest) ApiCreategcpIntegrationRequest {
+	r.creategcpIntegrationRequest = &creategcpIntegrationRequest
 	return r
 }
 
-func (r ApiCreategcpIntegrationRequest) Execute() (*CreateapigeeIntegration200Response, *http.Response, error) {
+func (r ApiCreategcpIntegrationRequest) Execute() (*CreategcpIntegration200Response, *http.Response, error) {
 	return r.ApiService.CreategcpIntegrationExecute(r)
 }
 
@@ -979,13 +847,13 @@ func (a *IntegrationsAPIService) CreategcpIntegration(ctx context.Context) ApiCr
 
 // Execute executes the request
 //
-//	@return CreateapigeeIntegration200Response
-func (a *IntegrationsAPIService) CreategcpIntegrationExecute(r ApiCreategcpIntegrationRequest) (*CreateapigeeIntegration200Response, *http.Response, error) {
+//	@return CreategcpIntegration200Response
+func (a *IntegrationsAPIService) CreategcpIntegrationExecute(r ApiCreategcpIntegrationRequest) (*CreategcpIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreateapigeeIntegration200Response
+		localVarReturnValue *CreategcpIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.CreategcpIntegration")
@@ -1017,7 +885,7 @@ func (a *IntegrationsAPIService) CreategcpIntegrationExecute(r ApiCreategcpInteg
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.createapigeeIntegrationRequest
+	localVarPostBody = r.creategcpIntegrationRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1999,134 +1867,6 @@ func (a *IntegrationsAPIService) DeleteakamaiIntegrationExecute(r ApiDeleteakama
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiDeleteapigeeIntegrationRequest struct {
-	ctx        context.Context
-	ApiService *IntegrationsAPIService
-	id         string
-}
-
-func (r ApiDeleteapigeeIntegrationRequest) Execute() (*CreateapigeeIntegration200Response, *http.Response, error) {
-	return r.ApiService.DeleteapigeeIntegrationExecute(r)
-}
-
-/*
-DeleteapigeeIntegration Delete Apigee integration.
-
-Update a Apigee integration.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The workflow ID
-	@return ApiDeleteapigeeIntegrationRequest
-*/
-func (a *IntegrationsAPIService) DeleteapigeeIntegration(ctx context.Context, id string) ApiDeleteapigeeIntegrationRequest {
-	return ApiDeleteapigeeIntegrationRequest{
-		ApiService: a,
-		ctx:        ctx,
-		id:         id,
-	}
-}
-
-// Execute executes the request
-//
-//	@return CreateapigeeIntegration200Response
-func (a *IntegrationsAPIService) DeleteapigeeIntegrationExecute(r ApiDeleteapigeeIntegrationRequest) (*CreateapigeeIntegration200Response, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodDelete
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreateapigeeIntegration200Response
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.DeleteapigeeIntegration")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/integrations/apigee/{id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["apiKey"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v UpdateProfile400Response
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
 type ApiDeleteawsIntegrationRequest struct {
 	ctx        context.Context
 	ApiService *IntegrationsAPIService
@@ -2383,27 +2123,27 @@ func (a *IntegrationsAPIService) DeleteazureIntegrationExecute(r ApiDeleteazureI
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiDeletebitbucketRepoIntegrationRequest struct {
+type ApiDeletebitbucketIntegrationRequest struct {
 	ctx        context.Context
 	ApiService *IntegrationsAPIService
 	id         string
 }
 
-func (r ApiDeletebitbucketRepoIntegrationRequest) Execute() (*CreatebitbucketRepoIntegration200Response, *http.Response, error) {
-	return r.ApiService.DeletebitbucketRepoIntegrationExecute(r)
+func (r ApiDeletebitbucketIntegrationRequest) Execute() (*CreatebitbucketIntegration200Response, *http.Response, error) {
+	return r.ApiService.DeletebitbucketIntegrationExecute(r)
 }
 
 /*
-DeletebitbucketRepoIntegration Delete Bitbucket Repo integration.
+DeletebitbucketIntegration Delete Bitbucket integration.
 
-Update a Bitbucket Repo integration.
+Update a Bitbucket integration.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The workflow ID
-	@return ApiDeletebitbucketRepoIntegrationRequest
+	@return ApiDeletebitbucketIntegrationRequest
 */
-func (a *IntegrationsAPIService) DeletebitbucketRepoIntegration(ctx context.Context, id string) ApiDeletebitbucketRepoIntegrationRequest {
-	return ApiDeletebitbucketRepoIntegrationRequest{
+func (a *IntegrationsAPIService) DeletebitbucketIntegration(ctx context.Context, id string) ApiDeletebitbucketIntegrationRequest {
+	return ApiDeletebitbucketIntegrationRequest{
 		ApiService: a,
 		ctx:        ctx,
 		id:         id,
@@ -2412,21 +2152,21 @@ func (a *IntegrationsAPIService) DeletebitbucketRepoIntegration(ctx context.Cont
 
 // Execute executes the request
 //
-//	@return CreatebitbucketRepoIntegration200Response
-func (a *IntegrationsAPIService) DeletebitbucketRepoIntegrationExecute(r ApiDeletebitbucketRepoIntegrationRequest) (*CreatebitbucketRepoIntegration200Response, *http.Response, error) {
+//	@return CreatebitbucketIntegration200Response
+func (a *IntegrationsAPIService) DeletebitbucketIntegrationExecute(r ApiDeletebitbucketIntegrationRequest) (*CreatebitbucketIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodDelete
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreatebitbucketRepoIntegration200Response
+		localVarReturnValue *CreatebitbucketIntegration200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.DeletebitbucketRepoIntegration")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.DeletebitbucketIntegration")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/integrations/bitbucket-repo/{id}"
+	localVarPath := localBasePath + "/integrations/bitbucket/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -2773,7 +2513,7 @@ type ApiDeletegcpIntegrationRequest struct {
 	id         string
 }
 
-func (r ApiDeletegcpIntegrationRequest) Execute() (*CreateapigeeIntegration200Response, *http.Response, error) {
+func (r ApiDeletegcpIntegrationRequest) Execute() (*CreategcpIntegration200Response, *http.Response, error) {
 	return r.ApiService.DeletegcpIntegrationExecute(r)
 }
 
@@ -2796,13 +2536,13 @@ func (a *IntegrationsAPIService) DeletegcpIntegration(ctx context.Context, id st
 
 // Execute executes the request
 //
-//	@return CreateapigeeIntegration200Response
-func (a *IntegrationsAPIService) DeletegcpIntegrationExecute(r ApiDeletegcpIntegrationRequest) (*CreateapigeeIntegration200Response, *http.Response, error) {
+//	@return CreategcpIntegration200Response
+func (a *IntegrationsAPIService) DeletegcpIntegrationExecute(r ApiDeletegcpIntegrationRequest) (*CreategcpIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodDelete
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreateapigeeIntegration200Response
+		localVarReturnValue *CreategcpIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.DeletegcpIntegration")
@@ -3791,134 +3531,6 @@ func (a *IntegrationsAPIService) GetakamaiIntegrationExecute(r ApiGetakamaiInteg
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetapigeeIntegrationRequest struct {
-	ctx        context.Context
-	ApiService *IntegrationsAPIService
-	id         string
-}
-
-func (r ApiGetapigeeIntegrationRequest) Execute() (*CreateapigeeIntegration200Response, *http.Response, error) {
-	return r.ApiService.GetapigeeIntegrationExecute(r)
-}
-
-/*
-GetapigeeIntegration Get Apigee integration.
-
-Get a Apigee integration.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The workflow ID
-	@return ApiGetapigeeIntegrationRequest
-*/
-func (a *IntegrationsAPIService) GetapigeeIntegration(ctx context.Context, id string) ApiGetapigeeIntegrationRequest {
-	return ApiGetapigeeIntegrationRequest{
-		ApiService: a,
-		ctx:        ctx,
-		id:         id,
-	}
-}
-
-// Execute executes the request
-//
-//	@return CreateapigeeIntegration200Response
-func (a *IntegrationsAPIService) GetapigeeIntegrationExecute(r ApiGetapigeeIntegrationRequest) (*CreateapigeeIntegration200Response, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreateapigeeIntegration200Response
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.GetapigeeIntegration")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/integrations/apigee/{id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["apiKey"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v UpdateProfile400Response
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
 type ApiGetawsIntegrationRequest struct {
 	ctx        context.Context
 	ApiService *IntegrationsAPIService
@@ -4175,27 +3787,27 @@ func (a *IntegrationsAPIService) GetazureIntegrationExecute(r ApiGetazureIntegra
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetbitbucketRepoIntegrationRequest struct {
+type ApiGetbitbucketIntegrationRequest struct {
 	ctx        context.Context
 	ApiService *IntegrationsAPIService
 	id         string
 }
 
-func (r ApiGetbitbucketRepoIntegrationRequest) Execute() (*CreatebitbucketRepoIntegration200Response, *http.Response, error) {
-	return r.ApiService.GetbitbucketRepoIntegrationExecute(r)
+func (r ApiGetbitbucketIntegrationRequest) Execute() (*CreatebitbucketIntegration200Response, *http.Response, error) {
+	return r.ApiService.GetbitbucketIntegrationExecute(r)
 }
 
 /*
-GetbitbucketRepoIntegration Get Bitbucket Repo integration.
+GetbitbucketIntegration Get Bitbucket integration.
 
-Get a Bitbucket Repo integration.
+Get a Bitbucket integration.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The workflow ID
-	@return ApiGetbitbucketRepoIntegrationRequest
+	@return ApiGetbitbucketIntegrationRequest
 */
-func (a *IntegrationsAPIService) GetbitbucketRepoIntegration(ctx context.Context, id string) ApiGetbitbucketRepoIntegrationRequest {
-	return ApiGetbitbucketRepoIntegrationRequest{
+func (a *IntegrationsAPIService) GetbitbucketIntegration(ctx context.Context, id string) ApiGetbitbucketIntegrationRequest {
+	return ApiGetbitbucketIntegrationRequest{
 		ApiService: a,
 		ctx:        ctx,
 		id:         id,
@@ -4204,21 +3816,21 @@ func (a *IntegrationsAPIService) GetbitbucketRepoIntegration(ctx context.Context
 
 // Execute executes the request
 //
-//	@return CreatebitbucketRepoIntegration200Response
-func (a *IntegrationsAPIService) GetbitbucketRepoIntegrationExecute(r ApiGetbitbucketRepoIntegrationRequest) (*CreatebitbucketRepoIntegration200Response, *http.Response, error) {
+//	@return CreatebitbucketIntegration200Response
+func (a *IntegrationsAPIService) GetbitbucketIntegrationExecute(r ApiGetbitbucketIntegrationRequest) (*CreatebitbucketIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreatebitbucketRepoIntegration200Response
+		localVarReturnValue *CreatebitbucketIntegration200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.GetbitbucketRepoIntegration")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.GetbitbucketIntegration")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/integrations/bitbucket-repo/{id}"
+	localVarPath := localBasePath + "/integrations/bitbucket/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -4565,7 +4177,7 @@ type ApiGetgcpIntegrationRequest struct {
 	id         string
 }
 
-func (r ApiGetgcpIntegrationRequest) Execute() (*CreateapigeeIntegration200Response, *http.Response, error) {
+func (r ApiGetgcpIntegrationRequest) Execute() (*CreategcpIntegration200Response, *http.Response, error) {
 	return r.ApiService.GetgcpIntegrationExecute(r)
 }
 
@@ -4588,13 +4200,13 @@ func (a *IntegrationsAPIService) GetgcpIntegration(ctx context.Context, id strin
 
 // Execute executes the request
 //
-//	@return CreateapigeeIntegration200Response
-func (a *IntegrationsAPIService) GetgcpIntegrationExecute(r ApiGetgcpIntegrationRequest) (*CreateapigeeIntegration200Response, *http.Response, error) {
+//	@return CreategcpIntegration200Response
+func (a *IntegrationsAPIService) GetgcpIntegrationExecute(r ApiGetgcpIntegrationRequest) (*CreategcpIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreateapigeeIntegration200Response
+		localVarReturnValue *CreategcpIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.GetgcpIntegration")
@@ -5683,234 +5295,6 @@ func (a *IntegrationsAPIService) ListakamaiIntegrationsExecute(r ApiListakamaiIn
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiListapigeeIntegrationsRequest struct {
-	ctx           context.Context
-	ApiService    *IntegrationsAPIService
-	cursor        *string
-	size          *int
-	sortType      *string
-	sortDirection *string
-	projectIds    *[]string
-	ids           *string
-	locationIds   *[]string
-	search        *string
-}
-
-// The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
-func (r ApiListapigeeIntegrationsRequest) Cursor(cursor string) ApiListapigeeIntegrationsRequest {
-	r.cursor = &cursor
-	return r
-}
-
-// The number of items to return per page
-func (r ApiListapigeeIntegrationsRequest) Size(size int) ApiListapigeeIntegrationsRequest {
-	r.size = &size
-	return r
-}
-
-// The type to sort by
-func (r ApiListapigeeIntegrationsRequest) SortType(sortType string) ApiListapigeeIntegrationsRequest {
-	r.sortType = &sortType
-	return r
-}
-
-// The direction to sort by
-func (r ApiListapigeeIntegrationsRequest) SortDirection(sortDirection string) ApiListapigeeIntegrationsRequest {
-	r.sortDirection = &sortDirection
-	return r
-}
-
-// Filter by project IDs
-func (r ApiListapigeeIntegrationsRequest) ProjectIds(projectIds []string) ApiListapigeeIntegrationsRequest {
-	r.projectIds = &projectIds
-	return r
-}
-
-// Filter by integration IDs
-func (r ApiListapigeeIntegrationsRequest) Ids(ids string) ApiListapigeeIntegrationsRequest {
-	r.ids = &ids
-	return r
-}
-
-// Filter by location IDs
-func (r ApiListapigeeIntegrationsRequest) LocationIds(locationIds []string) ApiListapigeeIntegrationsRequest {
-	r.locationIds = &locationIds
-	return r
-}
-
-// Search term to filter integrations by name or description
-func (r ApiListapigeeIntegrationsRequest) Search(search string) ApiListapigeeIntegrationsRequest {
-	r.search = &search
-	return r
-}
-
-func (r ApiListapigeeIntegrationsRequest) Execute() (*ListIntegrations200Response, *http.Response, error) {
-	return r.ApiService.ListapigeeIntegrationsExecute(r)
-}
-
-/*
-ListapigeeIntegrations List Apigee integrations.
-
-List and search Apigee integrations of the organization.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiListapigeeIntegrationsRequest
-*/
-func (a *IntegrationsAPIService) ListapigeeIntegrations(ctx context.Context) ApiListapigeeIntegrationsRequest {
-	return ApiListapigeeIntegrationsRequest{
-		ApiService: a,
-		ctx:        ctx,
-	}
-}
-
-// Execute executes the request
-//
-//	@return ListIntegrations200Response
-func (a *IntegrationsAPIService) ListapigeeIntegrationsExecute(r ApiListapigeeIntegrationsRequest) (*ListIntegrations200Response, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ListIntegrations200Response
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.ListapigeeIntegrations")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/integrations/apigee"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	if r.cursor != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
-	}
-	if r.size != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
-	} else {
-		var defaultValue int = 50
-		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
-		r.size = &defaultValue
-	}
-	if r.sortType != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "sortType", r.sortType, "form", "")
-	}
-	if r.sortDirection != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
-	} else {
-		var defaultValue string = "asc"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
-		r.sortDirection = &defaultValue
-	}
-	if r.projectIds != nil {
-		t := *r.projectIds
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "projectIds", s.Index(i).Interface(), "form", "multi")
-			}
-		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "projectIds", t, "form", "multi")
-		}
-	}
-	if r.ids != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "ids", r.ids, "form", "")
-	}
-	if r.locationIds != nil {
-		t := *r.locationIds
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "locationIds", s.Index(i).Interface(), "form", "multi")
-			}
-		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "locationIds", t, "form", "multi")
-		}
-	}
-	if r.search != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")
-	}
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["apiKey"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400Response
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
 type ApiListawsIntegrationsRequest struct {
 	ctx           context.Context
 	ApiService    *IntegrationsAPIService
@@ -6367,7 +5751,7 @@ func (a *IntegrationsAPIService) ListazureIntegrationsExecute(r ApiListazureInte
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiListbitbucketRepoIntegrationsRequest struct {
+type ApiListbitbucketIntegrationsRequest struct {
 	ctx           context.Context
 	ApiService    *IntegrationsAPIService
 	cursor        *string
@@ -6381,67 +5765,67 @@ type ApiListbitbucketRepoIntegrationsRequest struct {
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
-func (r ApiListbitbucketRepoIntegrationsRequest) Cursor(cursor string) ApiListbitbucketRepoIntegrationsRequest {
+func (r ApiListbitbucketIntegrationsRequest) Cursor(cursor string) ApiListbitbucketIntegrationsRequest {
 	r.cursor = &cursor
 	return r
 }
 
 // The number of items to return per page
-func (r ApiListbitbucketRepoIntegrationsRequest) Size(size int) ApiListbitbucketRepoIntegrationsRequest {
+func (r ApiListbitbucketIntegrationsRequest) Size(size int) ApiListbitbucketIntegrationsRequest {
 	r.size = &size
 	return r
 }
 
 // The type to sort by
-func (r ApiListbitbucketRepoIntegrationsRequest) SortType(sortType string) ApiListbitbucketRepoIntegrationsRequest {
+func (r ApiListbitbucketIntegrationsRequest) SortType(sortType string) ApiListbitbucketIntegrationsRequest {
 	r.sortType = &sortType
 	return r
 }
 
 // The direction to sort by
-func (r ApiListbitbucketRepoIntegrationsRequest) SortDirection(sortDirection string) ApiListbitbucketRepoIntegrationsRequest {
+func (r ApiListbitbucketIntegrationsRequest) SortDirection(sortDirection string) ApiListbitbucketIntegrationsRequest {
 	r.sortDirection = &sortDirection
 	return r
 }
 
 // Filter by project IDs
-func (r ApiListbitbucketRepoIntegrationsRequest) ProjectIds(projectIds []string) ApiListbitbucketRepoIntegrationsRequest {
+func (r ApiListbitbucketIntegrationsRequest) ProjectIds(projectIds []string) ApiListbitbucketIntegrationsRequest {
 	r.projectIds = &projectIds
 	return r
 }
 
 // Filter by integration IDs
-func (r ApiListbitbucketRepoIntegrationsRequest) Ids(ids string) ApiListbitbucketRepoIntegrationsRequest {
+func (r ApiListbitbucketIntegrationsRequest) Ids(ids string) ApiListbitbucketIntegrationsRequest {
 	r.ids = &ids
 	return r
 }
 
 // Filter by location IDs
-func (r ApiListbitbucketRepoIntegrationsRequest) LocationIds(locationIds []string) ApiListbitbucketRepoIntegrationsRequest {
+func (r ApiListbitbucketIntegrationsRequest) LocationIds(locationIds []string) ApiListbitbucketIntegrationsRequest {
 	r.locationIds = &locationIds
 	return r
 }
 
 // Search term to filter integrations by name or description
-func (r ApiListbitbucketRepoIntegrationsRequest) Search(search string) ApiListbitbucketRepoIntegrationsRequest {
+func (r ApiListbitbucketIntegrationsRequest) Search(search string) ApiListbitbucketIntegrationsRequest {
 	r.search = &search
 	return r
 }
 
-func (r ApiListbitbucketRepoIntegrationsRequest) Execute() (*ListIntegrations200Response, *http.Response, error) {
-	return r.ApiService.ListbitbucketRepoIntegrationsExecute(r)
+func (r ApiListbitbucketIntegrationsRequest) Execute() (*ListIntegrations200Response, *http.Response, error) {
+	return r.ApiService.ListbitbucketIntegrationsExecute(r)
 }
 
 /*
-ListbitbucketRepoIntegrations List Bitbucket Repo integrations.
+ListbitbucketIntegrations List Bitbucket integrations.
 
-List and search Bitbucket Repo integrations of the organization.
+List and search Bitbucket integrations of the organization.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiListbitbucketRepoIntegrationsRequest
+	@return ApiListbitbucketIntegrationsRequest
 */
-func (a *IntegrationsAPIService) ListbitbucketRepoIntegrations(ctx context.Context) ApiListbitbucketRepoIntegrationsRequest {
-	return ApiListbitbucketRepoIntegrationsRequest{
+func (a *IntegrationsAPIService) ListbitbucketIntegrations(ctx context.Context) ApiListbitbucketIntegrationsRequest {
+	return ApiListbitbucketIntegrationsRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
@@ -6450,7 +5834,7 @@ func (a *IntegrationsAPIService) ListbitbucketRepoIntegrations(ctx context.Conte
 // Execute executes the request
 //
 //	@return ListIntegrations200Response
-func (a *IntegrationsAPIService) ListbitbucketRepoIntegrationsExecute(r ApiListbitbucketRepoIntegrationsRequest) (*ListIntegrations200Response, *http.Response, error) {
+func (a *IntegrationsAPIService) ListbitbucketIntegrationsExecute(r ApiListbitbucketIntegrationsRequest) (*ListIntegrations200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -6458,12 +5842,12 @@ func (a *IntegrationsAPIService) ListbitbucketRepoIntegrationsExecute(r ApiListb
 		localVarReturnValue *ListIntegrations200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.ListbitbucketRepoIntegrations")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.ListbitbucketIntegrations")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/integrations/bitbucket-repo"
+	localVarPath := localBasePath + "/integrations/bitbucket"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -8783,142 +8167,6 @@ func (a *IntegrationsAPIService) UpdateakamaiIntegrationExecute(r ApiUpdateakama
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateapigeeIntegrationRequest struct {
-	ctx                            context.Context
-	ApiService                     *IntegrationsAPIService
-	id                             string
-	updateapigeeIntegrationRequest *UpdateapigeeIntegrationRequest
-}
-
-func (r ApiUpdateapigeeIntegrationRequest) UpdateapigeeIntegrationRequest(updateapigeeIntegrationRequest UpdateapigeeIntegrationRequest) ApiUpdateapigeeIntegrationRequest {
-	r.updateapigeeIntegrationRequest = &updateapigeeIntegrationRequest
-	return r
-}
-
-func (r ApiUpdateapigeeIntegrationRequest) Execute() (*CreateapigeeIntegration200Response, *http.Response, error) {
-	return r.ApiService.UpdateapigeeIntegrationExecute(r)
-}
-
-/*
-UpdateapigeeIntegration Update Apigee integration.
-
-Update a Apigee integration.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The workflow ID
-	@return ApiUpdateapigeeIntegrationRequest
-*/
-func (a *IntegrationsAPIService) UpdateapigeeIntegration(ctx context.Context, id string) ApiUpdateapigeeIntegrationRequest {
-	return ApiUpdateapigeeIntegrationRequest{
-		ApiService: a,
-		ctx:        ctx,
-		id:         id,
-	}
-}
-
-// Execute executes the request
-//
-//	@return CreateapigeeIntegration200Response
-func (a *IntegrationsAPIService) UpdateapigeeIntegrationExecute(r ApiUpdateapigeeIntegrationRequest) (*CreateapigeeIntegration200Response, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPut
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreateapigeeIntegration200Response
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.UpdateapigeeIntegration")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/integrations/apigee/{id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	localVarPostBody = r.updateapigeeIntegrationRequest
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["apiKey"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v UpdateProfile400Response
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
 type ApiUpdateawsIntegrationRequest struct {
 	ctx                         context.Context
 	ApiService                  *IntegrationsAPIService
@@ -9191,33 +8439,33 @@ func (a *IntegrationsAPIService) UpdateazureIntegrationExecute(r ApiUpdateazureI
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdatebitbucketRepoIntegrationRequest struct {
-	ctx                                   context.Context
-	ApiService                            *IntegrationsAPIService
-	id                                    string
-	updatebitbucketRepoIntegrationRequest *UpdatebitbucketRepoIntegrationRequest
+type ApiUpdatebitbucketIntegrationRequest struct {
+	ctx                               context.Context
+	ApiService                        *IntegrationsAPIService
+	id                                string
+	updatebitbucketIntegrationRequest *UpdatebitbucketIntegrationRequest
 }
 
-func (r ApiUpdatebitbucketRepoIntegrationRequest) UpdatebitbucketRepoIntegrationRequest(updatebitbucketRepoIntegrationRequest UpdatebitbucketRepoIntegrationRequest) ApiUpdatebitbucketRepoIntegrationRequest {
-	r.updatebitbucketRepoIntegrationRequest = &updatebitbucketRepoIntegrationRequest
+func (r ApiUpdatebitbucketIntegrationRequest) UpdatebitbucketIntegrationRequest(updatebitbucketIntegrationRequest UpdatebitbucketIntegrationRequest) ApiUpdatebitbucketIntegrationRequest {
+	r.updatebitbucketIntegrationRequest = &updatebitbucketIntegrationRequest
 	return r
 }
 
-func (r ApiUpdatebitbucketRepoIntegrationRequest) Execute() (*CreatebitbucketRepoIntegration200Response, *http.Response, error) {
-	return r.ApiService.UpdatebitbucketRepoIntegrationExecute(r)
+func (r ApiUpdatebitbucketIntegrationRequest) Execute() (*CreatebitbucketIntegration200Response, *http.Response, error) {
+	return r.ApiService.UpdatebitbucketIntegrationExecute(r)
 }
 
 /*
-UpdatebitbucketRepoIntegration Update Bitbucket Repo integration.
+UpdatebitbucketIntegration Update Bitbucket integration.
 
-Update a Bitbucket Repo integration.
+Update a Bitbucket integration.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The workflow ID
-	@return ApiUpdatebitbucketRepoIntegrationRequest
+	@return ApiUpdatebitbucketIntegrationRequest
 */
-func (a *IntegrationsAPIService) UpdatebitbucketRepoIntegration(ctx context.Context, id string) ApiUpdatebitbucketRepoIntegrationRequest {
-	return ApiUpdatebitbucketRepoIntegrationRequest{
+func (a *IntegrationsAPIService) UpdatebitbucketIntegration(ctx context.Context, id string) ApiUpdatebitbucketIntegrationRequest {
+	return ApiUpdatebitbucketIntegrationRequest{
 		ApiService: a,
 		ctx:        ctx,
 		id:         id,
@@ -9226,21 +8474,21 @@ func (a *IntegrationsAPIService) UpdatebitbucketRepoIntegration(ctx context.Cont
 
 // Execute executes the request
 //
-//	@return CreatebitbucketRepoIntegration200Response
-func (a *IntegrationsAPIService) UpdatebitbucketRepoIntegrationExecute(r ApiUpdatebitbucketRepoIntegrationRequest) (*CreatebitbucketRepoIntegration200Response, *http.Response, error) {
+//	@return CreatebitbucketIntegration200Response
+func (a *IntegrationsAPIService) UpdatebitbucketIntegrationExecute(r ApiUpdatebitbucketIntegrationRequest) (*CreatebitbucketIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreatebitbucketRepoIntegration200Response
+		localVarReturnValue *CreatebitbucketIntegration200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.UpdatebitbucketRepoIntegration")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.UpdatebitbucketIntegration")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/integrations/bitbucket-repo/{id}"
+	localVarPath := localBasePath + "/integrations/bitbucket/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -9265,7 +8513,7 @@ func (a *IntegrationsAPIService) UpdatebitbucketRepoIntegrationExecute(r ApiUpda
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.updatebitbucketRepoIntegrationRequest
+	localVarPostBody = r.updatebitbucketIntegrationRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -9600,18 +8848,18 @@ func (a *IntegrationsAPIService) UpdatecustomIntegrationExecute(r ApiUpdatecusto
 }
 
 type ApiUpdategcpIntegrationRequest struct {
-	ctx                            context.Context
-	ApiService                     *IntegrationsAPIService
-	id                             string
-	updateapigeeIntegrationRequest *UpdateapigeeIntegrationRequest
+	ctx                         context.Context
+	ApiService                  *IntegrationsAPIService
+	id                          string
+	updategcpIntegrationRequest *UpdategcpIntegrationRequest
 }
 
-func (r ApiUpdategcpIntegrationRequest) UpdateapigeeIntegrationRequest(updateapigeeIntegrationRequest UpdateapigeeIntegrationRequest) ApiUpdategcpIntegrationRequest {
-	r.updateapigeeIntegrationRequest = &updateapigeeIntegrationRequest
+func (r ApiUpdategcpIntegrationRequest) UpdategcpIntegrationRequest(updategcpIntegrationRequest UpdategcpIntegrationRequest) ApiUpdategcpIntegrationRequest {
+	r.updategcpIntegrationRequest = &updategcpIntegrationRequest
 	return r
 }
 
-func (r ApiUpdategcpIntegrationRequest) Execute() (*CreateapigeeIntegration200Response, *http.Response, error) {
+func (r ApiUpdategcpIntegrationRequest) Execute() (*CreategcpIntegration200Response, *http.Response, error) {
 	return r.ApiService.UpdategcpIntegrationExecute(r)
 }
 
@@ -9634,13 +8882,13 @@ func (a *IntegrationsAPIService) UpdategcpIntegration(ctx context.Context, id st
 
 // Execute executes the request
 //
-//	@return CreateapigeeIntegration200Response
-func (a *IntegrationsAPIService) UpdategcpIntegrationExecute(r ApiUpdategcpIntegrationRequest) (*CreateapigeeIntegration200Response, *http.Response, error) {
+//	@return CreategcpIntegration200Response
+func (a *IntegrationsAPIService) UpdategcpIntegrationExecute(r ApiUpdategcpIntegrationRequest) (*CreategcpIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreateapigeeIntegration200Response
+		localVarReturnValue *CreategcpIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.UpdategcpIntegration")
@@ -9673,7 +8921,7 @@ func (a *IntegrationsAPIService) UpdategcpIntegrationExecute(r ApiUpdategcpInteg
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.updateapigeeIntegrationRequest
+	localVarPostBody = r.updategcpIntegrationRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

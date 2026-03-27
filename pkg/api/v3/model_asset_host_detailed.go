@@ -18,7 +18,7 @@ import (
 // checks if the AssetHostDetailed type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AssetHostDetailed{}
 
-// AssetHostDetailed Detailed information about an asset host
+// AssetHostDetailed The host of the asset
 type AssetHostDetailed struct {
 	Type                 ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESHOSTPROPERTIESTYPE `json:"type"`
 	Address              string                                                             `json:"address"`

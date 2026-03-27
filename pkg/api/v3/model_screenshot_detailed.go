@@ -18,7 +18,7 @@ import (
 // checks if the ScreenshotDetailed type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ScreenshotDetailed{}
 
-// ScreenshotDetailed Detailed information about a screenshot
+// ScreenshotDetailed The screenshot of the attachment
 type ScreenshotDetailed struct {
 	// The alt of the screenshot
 	Alt *string `json:"alt,omitempty"`
