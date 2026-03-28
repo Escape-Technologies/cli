@@ -413,14 +413,17 @@ var profileUpdateConfigurationCmd = &cobra.Command{
 Update a profile's scan configuration via JSON through stdin. The JSON must
 contain a "configuration" object with the fields to update.
 
+IMPORTANT: This is a full replace, not a merge. Any configuration section not
+included in the JSON will be reset to defaults. Always send the complete
+configuration. Use "profiles get <id> -o json" to retrieve the current
+configuration before updating.
+
 CONFIGURABLE SECTIONS:
   authentication    - Users, credentials, browser login procedures
   frontend_dast     - Crawling mode, agentic instructions, hotstart URLs, scope
   scope             - Domain allowlist/blocklist, URL filtering
   security_tests    - Enable/disable specific security checks
-  network           - Proxy and network settings
-
-Only provided fields are updated; omitted fields remain unchanged.`,
+  network           - Proxy and network settings`,
 	Example: `  # Update agentic crawling instructions
   cat <<'EOF' | escape-cli profiles update-configuration <profile-id>
   {
