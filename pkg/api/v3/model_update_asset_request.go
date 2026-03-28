@@ -26,7 +26,9 @@ type UpdateAssetRequest struct {
 	Framework  *ENUMPROPERTIESFRAMEWORK                                `json:"framework,omitempty"`
 	Status     *ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS `json:"status,omitempty"`
 	// The description of the asset
-	Description          *string `json:"description,omitempty"`
+	Description *string `json:"description,omitempty"`
+	// The custom name of the asset. If not provided, the default name will be used.
+	Name                 *string `json:"name,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -241,6 +243,38 @@ func (o *UpdateAssetRequest) SetDescription(v string) {
 	o.Description = &v
 }
 
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *UpdateAssetRequest) GetName() string {
+	if o == nil || IsNil(o.Name) {
+		var ret string
+		return ret
+	}
+	return *o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateAssetRequest) GetNameOk() (*string, bool) {
+	if o == nil || IsNil(o.Name) {
+		return nil, false
+	}
+	return o.Name, true
+}
+
+// HasName returns a boolean if a field has been set.
+func (o *UpdateAssetRequest) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *UpdateAssetRequest) SetName(v string) {
+	o.Name = &v
+}
+
 func (o UpdateAssetRequest) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -268,6 +302,9 @@ func (o UpdateAssetRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
+	}
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -297,6 +334,7 @@ func (o *UpdateAssetRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "framework")
 		delete(additionalProperties, "status")
 		delete(additionalProperties, "description")
+		delete(additionalProperties, "name")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -18,7 +18,7 @@ import (
 // checks if the ExchangeDetailed type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ExchangeDetailed{}
 
-// ExchangeDetailed Detailed information about an exchange
+// ExchangeDetailed The exchange of the attachment
 type ExchangeDetailed struct {
 	// The date and time the exchange was created
 	CreatedAt string `json:"createdAt"`

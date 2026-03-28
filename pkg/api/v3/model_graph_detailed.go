@@ -18,7 +18,7 @@ import (
 // checks if the GraphDetailed type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GraphDetailed{}
 
-// GraphDetailed Detailed information about a graph
+// GraphDetailed The graph of the attachment
 type GraphDetailed struct {
 	// The id of the graph
 	Id string `json:"id"`

@@ -18,7 +18,7 @@ import (
 // checks if the GraphqlResolverDetailed type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GraphqlResolverDetailed{}
 
-// GraphqlResolverDetailed Detailed information about a graphql resolver
+// GraphqlResolverDetailed The graphql resolver of the target
 type GraphqlResolverDetailed struct {
 	// Whether the graphql resolver is blacklisted
 	Blacklisted bool `json:"blacklisted"`

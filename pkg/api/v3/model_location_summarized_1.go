@@ -18,7 +18,7 @@ import (
 // checks if the LocationSummarized1 type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LocationSummarized1{}
 
-// LocationSummarized1 Summarized information about a location
+// LocationSummarized1 The location of the integration
 type LocationSummarized1 struct {
 	// The location ID.
 	Id string `json:"id"`

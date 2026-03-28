@@ -16,6 +16,7 @@ import (
 
 var rootCmdVerbose int
 var rootCmdOutputStr string
+var rootCmdInputSchema bool
 
 var asciiLogo = `
  ██████████  █████████    █████████    █████████   ███████████  ██████████      █████████  █████       █████
@@ -65,6 +66,11 @@ capabilities.
   • Most list commands support powerful filtering options
   • Use --watch flag when starting scans for real-time updates
 
+🤖 AI AGENT INTEGRATION:
+  • Get output JSON Schema: escape-cli <command> -o schema
+  • Get input JSON Schema:  escape-cli <command> --input-schema
+  • Machine-readable output: escape-cli <command> -o json
+
 🔗 RESOURCES:
   • Documentation: https://docs.escape.tech/documentation/tooling/cli
   • API Reference: https://public.escape.tech/v3
@@ -95,6 +101,7 @@ capabilities.
 		if err != nil {
 			return fmt.Errorf("failed to set output format: %w", err)
 		}
+		out.SetInputSchema(rootCmdInputSchema)
 		return nil
 	},
 	PostRun: func(_ *cobra.Command, _ []string) {
@@ -107,7 +114,8 @@ capabilities.
 
 func init() {
 	rootCmd.PersistentFlags().CountVarP(&rootCmdVerbose, "verbose", "v", "verbose output: -v (debug), -vv (trace), -vvv (http/raw debug)")
-	rootCmd.PersistentFlags().StringVarP(&rootCmdOutputStr, "output", "o", "pretty", "output format: pretty (human-readable tables), json (machine-readable), yaml (configuration files)")
+	rootCmd.PersistentFlags().StringVarP(&rootCmdOutputStr, "output", "o", "pretty", "output format: pretty (human-readable tables), json (machine-readable), yaml (configuration files), schema (JSON Schema for AI agents)")
+	rootCmd.PersistentFlags().BoolVar(&rootCmdInputSchema, "input-schema", false, "print JSON Schema for stdin input format (for create/update commands)")
 	rootCmd.SetUsageTemplate(rootCmd.UsageTemplate() + `
 COMMAND CATEGORIES:
   Scanning:       scans     - Run security scans and view results

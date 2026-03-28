@@ -18,7 +18,7 @@ import (
 // checks if the ScanDetailed type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ScanDetailed{}
 
-// ScanDetailed Detailed information about a scan
+// ScanDetailed The last resource scan of the profile
 type ScanDetailed struct {
 	// The id of the scan
 	Id string `json:"id"`

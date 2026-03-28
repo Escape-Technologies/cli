@@ -18,7 +18,7 @@ import (
 // checks if the SnippetDetailed type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SnippetDetailed{}
 
-// SnippetDetailed Detailed information about a snippet
+// SnippetDetailed The snippet of the attachment
 type SnippetDetailed struct {
 	// The date and time the snippet was created
 	CreatedAt string `json:"createdAt"`

@@ -24,6 +24,8 @@ type ProfileSummarized struct {
 	Id string `json:"id"`
 	// The name of the profile
 	Name string `json:"name"`
+	// The description of the profile
+	Description string `json:"description"`
 	// The date and time the profile was created
 	CreatedAt string `json:"createdAt"`
 	// The initiators of the profile
@@ -41,10 +43,11 @@ type _ProfileSummarized ProfileSummarized
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProfileSummarized(id string, name string, createdAt string, initiators []ENUMPROPERTIESDATAITEMSPROPERTIESINITIATORSITEMS, asset AssetDetailed, links ProfileSummarizedLinks) *ProfileSummarized {
+func NewProfileSummarized(id string, name string, description string, createdAt string, initiators []ENUMPROPERTIESDATAITEMSPROPERTIESINITIATORSITEMS, asset AssetDetailed, links ProfileSummarizedLinks) *ProfileSummarized {
 	this := ProfileSummarized{}
 	this.Id = id
 	this.Name = name
+	this.Description = description
 	this.CreatedAt = createdAt
 	this.Initiators = initiators
 	this.Asset = asset
@@ -106,6 +109,30 @@ func (o *ProfileSummarized) GetNameOk() (*string, bool) {
 // SetName sets field value
 func (o *ProfileSummarized) SetName(v string) {
 	o.Name = v
+}
+
+// GetDescription returns the Description field value
+func (o *ProfileSummarized) GetDescription() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value
+// and a boolean to check if the value has been set.
+func (o *ProfileSummarized) GetDescriptionOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Description, true
+}
+
+// SetDescription sets field value
+func (o *ProfileSummarized) SetDescription(v string) {
+	o.Description = v
 }
 
 // GetCreatedAt returns the CreatedAt field value
@@ -248,6 +275,7 @@ func (o ProfileSummarized) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["name"] = o.Name
+	toSerialize["description"] = o.Description
 	toSerialize["createdAt"] = o.CreatedAt
 	toSerialize["initiators"] = o.Initiators
 	if !IsNil(o.Cron) {
@@ -270,6 +298,7 @@ func (o *ProfileSummarized) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"id",
 		"name",
+		"description",
 		"createdAt",
 		"initiators",
 		"asset",
@@ -305,6 +334,7 @@ func (o *ProfileSummarized) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "name")
+		delete(additionalProperties, "description")
 		delete(additionalProperties, "createdAt")
 		delete(additionalProperties, "initiators")
 		delete(additionalProperties, "cron")

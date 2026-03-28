@@ -54,9 +54,7 @@ func ListEvents(ctx context.Context, next string, filters *ListEventsFilters) ([
 		if len(filters.Attachments) > 0 {
 			req = req.Attachments(strings.Join(filters.Attachments, ","))
 		}
-		if len(filters.Levels) == 0 {
-			req = req.Levels(string(v3.ENUMPROPERTIESDATAITEMSPROPERTIESLEVEL_ERROR))
-		} else {
+		if len(filters.Levels) > 0 {
 			req = req.Levels(strings.Join(filters.Levels, ","))
 		}
 	}
@@ -68,7 +66,7 @@ func ListEvents(ctx context.Context, next string, filters *ListEventsFilters) ([
 }
 
 // GetEvent gets an event
-func GetEvent(ctx context.Context, eventID string) (*v3.EventDetailed, error) {
+func GetEvent(ctx context.Context, eventID string) (*v3.GetEvent200Response, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)

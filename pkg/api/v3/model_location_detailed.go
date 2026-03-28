@@ -18,7 +18,7 @@ import (
 // checks if the LocationDetailed type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LocationDetailed{}
 
-// LocationDetailed Detailed information about a location
+// LocationDetailed The location of the integration
 type LocationDetailed struct {
 	// The location ID.
 	Id *string `json:"id,omitempty"`

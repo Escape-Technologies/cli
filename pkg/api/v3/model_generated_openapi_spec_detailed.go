@@ -18,7 +18,7 @@ import (
 // checks if the GeneratedOpenapiSpecDetailed type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GeneratedOpenapiSpecDetailed{}
 
-// GeneratedOpenapiSpecDetailed Detailed information about a generated openapi spec
+// GeneratedOpenapiSpecDetailed The generated openapi spec of the attachment
 type GeneratedOpenapiSpecDetailed struct {
 	// The id of the generated openapi spec
 	Id string `json:"id"`

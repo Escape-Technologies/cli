@@ -21,11 +21,12 @@ var _ MappedNullable = &CreateAssetGRAPHQLRequest{}
 // CreateAssetGRAPHQLRequest struct for CreateAssetGRAPHQLRequest
 type CreateAssetGRAPHQLRequest struct {
 	// The list of project IDs bind the asset on.
-	ProjectIds                []string                                                                        `json:"projectIds,omitempty"`
+	ProjectIds []string `json:"projectIds,omitempty"`
+	// The custom name of the asset. If not provided, the default name will be used.
+	Name                      *string                                                                         `json:"name,omitempty"`
 	AssetClass                ENUMAPISERVICE                                                                  `json:"asset_class"`
-	WizProviderId             *string                                                                         `json:"wiz_provider_id,omitempty"`
-	WizCloudPlatform          *string                                                                         `json:"wiz_cloud_platform,omitempty"`
 	ExtraMetadata             map[string]interface{}                                                          `json:"extra_metadata,omitempty"`
+	ScreenshotS3Key           *string                                                                         `json:"screenshot_s3_key,omitempty"`
 	AssetType                 ENUMGRAPHQL                                                                     `json:"asset_type"`
 	Url                       string                                                                          `json:"url"`
 	Favicon                   *string                                                                         `json:"favicon,omitempty"`
@@ -98,6 +99,38 @@ func (o *CreateAssetGRAPHQLRequest) SetProjectIds(v []string) {
 	o.ProjectIds = v
 }
 
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *CreateAssetGRAPHQLRequest) GetName() string {
+	if o == nil || IsNil(o.Name) {
+		var ret string
+		return ret
+	}
+	return *o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetGRAPHQLRequest) GetNameOk() (*string, bool) {
+	if o == nil || IsNil(o.Name) {
+		return nil, false
+	}
+	return o.Name, true
+}
+
+// HasName returns a boolean if a field has been set.
+func (o *CreateAssetGRAPHQLRequest) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *CreateAssetGRAPHQLRequest) SetName(v string) {
+	o.Name = &v
+}
+
 // GetAssetClass returns the AssetClass field value
 func (o *CreateAssetGRAPHQLRequest) GetAssetClass() ENUMAPISERVICE {
 	if o == nil {
@@ -120,70 +153,6 @@ func (o *CreateAssetGRAPHQLRequest) GetAssetClassOk() (*ENUMAPISERVICE, bool) {
 // SetAssetClass sets field value
 func (o *CreateAssetGRAPHQLRequest) SetAssetClass(v ENUMAPISERVICE) {
 	o.AssetClass = v
-}
-
-// GetWizProviderId returns the WizProviderId field value if set, zero value otherwise.
-func (o *CreateAssetGRAPHQLRequest) GetWizProviderId() string {
-	if o == nil || IsNil(o.WizProviderId) {
-		var ret string
-		return ret
-	}
-	return *o.WizProviderId
-}
-
-// GetWizProviderIdOk returns a tuple with the WizProviderId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateAssetGRAPHQLRequest) GetWizProviderIdOk() (*string, bool) {
-	if o == nil || IsNil(o.WizProviderId) {
-		return nil, false
-	}
-	return o.WizProviderId, true
-}
-
-// HasWizProviderId returns a boolean if a field has been set.
-func (o *CreateAssetGRAPHQLRequest) HasWizProviderId() bool {
-	if o != nil && !IsNil(o.WizProviderId) {
-		return true
-	}
-
-	return false
-}
-
-// SetWizProviderId gets a reference to the given string and assigns it to the WizProviderId field.
-func (o *CreateAssetGRAPHQLRequest) SetWizProviderId(v string) {
-	o.WizProviderId = &v
-}
-
-// GetWizCloudPlatform returns the WizCloudPlatform field value if set, zero value otherwise.
-func (o *CreateAssetGRAPHQLRequest) GetWizCloudPlatform() string {
-	if o == nil || IsNil(o.WizCloudPlatform) {
-		var ret string
-		return ret
-	}
-	return *o.WizCloudPlatform
-}
-
-// GetWizCloudPlatformOk returns a tuple with the WizCloudPlatform field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateAssetGRAPHQLRequest) GetWizCloudPlatformOk() (*string, bool) {
-	if o == nil || IsNil(o.WizCloudPlatform) {
-		return nil, false
-	}
-	return o.WizCloudPlatform, true
-}
-
-// HasWizCloudPlatform returns a boolean if a field has been set.
-func (o *CreateAssetGRAPHQLRequest) HasWizCloudPlatform() bool {
-	if o != nil && !IsNil(o.WizCloudPlatform) {
-		return true
-	}
-
-	return false
-}
-
-// SetWizCloudPlatform gets a reference to the given string and assigns it to the WizCloudPlatform field.
-func (o *CreateAssetGRAPHQLRequest) SetWizCloudPlatform(v string) {
-	o.WizCloudPlatform = &v
 }
 
 // GetExtraMetadata returns the ExtraMetadata field value if set, zero value otherwise.
@@ -216,6 +185,38 @@ func (o *CreateAssetGRAPHQLRequest) HasExtraMetadata() bool {
 // SetExtraMetadata gets a reference to the given map[string]interface{} and assigns it to the ExtraMetadata field.
 func (o *CreateAssetGRAPHQLRequest) SetExtraMetadata(v map[string]interface{}) {
 	o.ExtraMetadata = v
+}
+
+// GetScreenshotS3Key returns the ScreenshotS3Key field value if set, zero value otherwise.
+func (o *CreateAssetGRAPHQLRequest) GetScreenshotS3Key() string {
+	if o == nil || IsNil(o.ScreenshotS3Key) {
+		var ret string
+		return ret
+	}
+	return *o.ScreenshotS3Key
+}
+
+// GetScreenshotS3KeyOk returns a tuple with the ScreenshotS3Key field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetGRAPHQLRequest) GetScreenshotS3KeyOk() (*string, bool) {
+	if o == nil || IsNil(o.ScreenshotS3Key) {
+		return nil, false
+	}
+	return o.ScreenshotS3Key, true
+}
+
+// HasScreenshotS3Key returns a boolean if a field has been set.
+func (o *CreateAssetGRAPHQLRequest) HasScreenshotS3Key() bool {
+	if o != nil && !IsNil(o.ScreenshotS3Key) {
+		return true
+	}
+
+	return false
+}
+
+// SetScreenshotS3Key gets a reference to the given string and assigns it to the ScreenshotS3Key field.
+func (o *CreateAssetGRAPHQLRequest) SetScreenshotS3Key(v string) {
+	o.ScreenshotS3Key = &v
 }
 
 // GetAssetType returns the AssetType field value
@@ -695,15 +696,15 @@ func (o CreateAssetGRAPHQLRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ProjectIds) {
 		toSerialize["projectIds"] = o.ProjectIds
 	}
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
 	toSerialize["asset_class"] = o.AssetClass
-	if !IsNil(o.WizProviderId) {
-		toSerialize["wiz_provider_id"] = o.WizProviderId
-	}
-	if !IsNil(o.WizCloudPlatform) {
-		toSerialize["wiz_cloud_platform"] = o.WizCloudPlatform
-	}
 	if !IsNil(o.ExtraMetadata) {
 		toSerialize["extra_metadata"] = o.ExtraMetadata
+	}
+	if !IsNil(o.ScreenshotS3Key) {
+		toSerialize["screenshot_s3_key"] = o.ScreenshotS3Key
 	}
 	toSerialize["asset_type"] = o.AssetType
 	toSerialize["url"] = o.Url
@@ -792,10 +793,10 @@ func (o *CreateAssetGRAPHQLRequest) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "projectIds")
+		delete(additionalProperties, "name")
 		delete(additionalProperties, "asset_class")
-		delete(additionalProperties, "wiz_provider_id")
-		delete(additionalProperties, "wiz_cloud_platform")
 		delete(additionalProperties, "extra_metadata")
+		delete(additionalProperties, "screenshot_s3_key")
 		delete(additionalProperties, "asset_type")
 		delete(additionalProperties, "url")
 		delete(additionalProperties, "favicon")

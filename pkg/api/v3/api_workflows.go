@@ -33,7 +33,7 @@ func (r ApiCreateWorkflowRequest) CreateWorkflowRequest(createWorkflowRequest Cr
 	return r
 }
 
-func (r ApiCreateWorkflowRequest) Execute() (*WorkflowDetailed, *http.Response, error) {
+func (r ApiCreateWorkflowRequest) Execute() (*GetWorkflow200Response, *http.Response, error) {
 	return r.ApiService.CreateWorkflowExecute(r)
 }
 
@@ -54,13 +54,13 @@ func (a *WorkflowsAPIService) CreateWorkflow(ctx context.Context) ApiCreateWorkf
 
 // Execute executes the request
 //
-//	@return WorkflowDetailed
-func (a *WorkflowsAPIService) CreateWorkflowExecute(r ApiCreateWorkflowRequest) (*WorkflowDetailed, *http.Response, error) {
+//	@return GetWorkflow200Response
+func (a *WorkflowsAPIService) CreateWorkflowExecute(r ApiCreateWorkflowRequest) (*GetWorkflow200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *WorkflowDetailed
+		localVarReturnValue *GetWorkflow200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowsAPIService.CreateWorkflow")
@@ -160,7 +160,7 @@ type ApiDeleteWorkflowRequest struct {
 	id         string
 }
 
-func (r ApiDeleteWorkflowRequest) Execute() (*WorkflowDetailed, *http.Response, error) {
+func (r ApiDeleteWorkflowRequest) Execute() (*GetWorkflow200Response, *http.Response, error) {
 	return r.ApiService.DeleteWorkflowExecute(r)
 }
 
@@ -183,13 +183,13 @@ func (a *WorkflowsAPIService) DeleteWorkflow(ctx context.Context, id string) Api
 
 // Execute executes the request
 //
-//	@return WorkflowDetailed
-func (a *WorkflowsAPIService) DeleteWorkflowExecute(r ApiDeleteWorkflowRequest) (*WorkflowDetailed, *http.Response, error) {
+//	@return GetWorkflow200Response
+func (a *WorkflowsAPIService) DeleteWorkflowExecute(r ApiDeleteWorkflowRequest) (*GetWorkflow200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodDelete
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *WorkflowDetailed
+		localVarReturnValue *GetWorkflow200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowsAPIService.DeleteWorkflow")
@@ -288,7 +288,7 @@ type ApiGetWorkflowRequest struct {
 	id         string
 }
 
-func (r ApiGetWorkflowRequest) Execute() (*WorkflowDetailed, *http.Response, error) {
+func (r ApiGetWorkflowRequest) Execute() (*GetWorkflow200Response, *http.Response, error) {
 	return r.ApiService.GetWorkflowExecute(r)
 }
 
@@ -311,13 +311,13 @@ func (a *WorkflowsAPIService) GetWorkflow(ctx context.Context, id string) ApiGet
 
 // Execute executes the request
 //
-//	@return WorkflowDetailed
-func (a *WorkflowsAPIService) GetWorkflowExecute(r ApiGetWorkflowRequest) (*WorkflowDetailed, *http.Response, error) {
+//	@return GetWorkflow200Response
+func (a *WorkflowsAPIService) GetWorkflowExecute(r ApiGetWorkflowRequest) (*GetWorkflow200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *WorkflowDetailed
+		localVarReturnValue *GetWorkflow200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowsAPIService.GetWorkflow")
@@ -422,7 +422,7 @@ func (r ApiUpdateWorkflowRequest) UpdateWorkflowRequest(updateWorkflowRequest Up
 	return r
 }
 
-func (r ApiUpdateWorkflowRequest) Execute() (*WorkflowDetailed, *http.Response, error) {
+func (r ApiUpdateWorkflowRequest) Execute() (*GetWorkflow200Response, *http.Response, error) {
 	return r.ApiService.UpdateWorkflowExecute(r)
 }
 
@@ -445,13 +445,13 @@ func (a *WorkflowsAPIService) UpdateWorkflow(ctx context.Context, id string) Api
 
 // Execute executes the request
 //
-//	@return WorkflowDetailed
-func (a *WorkflowsAPIService) UpdateWorkflowExecute(r ApiUpdateWorkflowRequest) (*WorkflowDetailed, *http.Response, error) {
+//	@return GetWorkflow200Response
+func (a *WorkflowsAPIService) UpdateWorkflowExecute(r ApiUpdateWorkflowRequest) (*GetWorkflow200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *WorkflowDetailed
+		localVarReturnValue *GetWorkflow200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowsAPIService.UpdateWorkflow")

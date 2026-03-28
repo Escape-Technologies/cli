@@ -21,19 +21,18 @@ var _ MappedNullable = &CreateAssetCODEPROJECTRequest{}
 // CreateAssetCODEPROJECTRequest struct for CreateAssetCODEPROJECTRequest
 type CreateAssetCODEPROJECTRequest struct {
 	// The list of project IDs bind the asset on.
-	ProjectIds           []string                                        `json:"projectIds,omitempty"`
-	AssetClass           ENUMCODEPROJECT                                 `json:"asset_class"`
-	WizProviderId        *string                                         `json:"wiz_provider_id,omitempty"`
-	WizCloudPlatform     *string                                         `json:"wiz_cloud_platform,omitempty"`
-	ExtraMetadata        map[string]interface{}                          `json:"extra_metadata,omitempty"`
-	AssetType            ENUMCODEPROJECT                                 `json:"asset_type"`
-	Repository           CreateAssetCODEPROJECTRequestRepository         `json:"repository"`
-	Path                 string                                          `json:"path"`
-	Language             ENUMPROPERTIESLANGUAGE                          `json:"language"`
-	HttpUrlToProject     *string                                         `json:"http_url_to_project,omitempty"`
-	Name                 *string                                         `json:"name,omitempty"`
-	LastCommits          []CreateAssetCODEPROJECTRequestLastCommitsInner `json:"last_commits,omitempty"`
-	Owners               []CreateAssetCODEPROJECTRequestOwnersInner      `json:"owners,omitempty"`
+	ProjectIds           []string                                      `json:"projectIds,omitempty"`
+	Name                 *string                                       `json:"name,omitempty"`
+	AssetClass           ENUMCODEPROJECT                               `json:"asset_class"`
+	ExtraMetadata        map[string]interface{}                        `json:"extra_metadata,omitempty"`
+	ScreenshotS3Key      *string                                       `json:"screenshot_s3_key,omitempty"`
+	AssetType            ENUMCODEPROJECT                               `json:"asset_type"`
+	Repository           CreateAssetCODEPROJECTRequestRepository       `json:"repository"`
+	Path                 string                                        `json:"path"`
+	Language             ENUMPROPERTIESLANGUAGE                        `json:"language"`
+	HttpUrlToProject     *string                                       `json:"http_url_to_project,omitempty"`
+	Owners               []CreateAssetCODEPROJECTRequestOwnersInner    `json:"owners,omitempty"`
+	LastCommit           *CreateAssetGITLABREPOSITORYRequestLastCommit `json:"last_commit,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -93,6 +92,38 @@ func (o *CreateAssetCODEPROJECTRequest) SetProjectIds(v []string) {
 	o.ProjectIds = v
 }
 
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *CreateAssetCODEPROJECTRequest) GetName() string {
+	if o == nil || IsNil(o.Name) {
+		var ret string
+		return ret
+	}
+	return *o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetCODEPROJECTRequest) GetNameOk() (*string, bool) {
+	if o == nil || IsNil(o.Name) {
+		return nil, false
+	}
+	return o.Name, true
+}
+
+// HasName returns a boolean if a field has been set.
+func (o *CreateAssetCODEPROJECTRequest) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *CreateAssetCODEPROJECTRequest) SetName(v string) {
+	o.Name = &v
+}
+
 // GetAssetClass returns the AssetClass field value
 func (o *CreateAssetCODEPROJECTRequest) GetAssetClass() ENUMCODEPROJECT {
 	if o == nil {
@@ -115,70 +146,6 @@ func (o *CreateAssetCODEPROJECTRequest) GetAssetClassOk() (*ENUMCODEPROJECT, boo
 // SetAssetClass sets field value
 func (o *CreateAssetCODEPROJECTRequest) SetAssetClass(v ENUMCODEPROJECT) {
 	o.AssetClass = v
-}
-
-// GetWizProviderId returns the WizProviderId field value if set, zero value otherwise.
-func (o *CreateAssetCODEPROJECTRequest) GetWizProviderId() string {
-	if o == nil || IsNil(o.WizProviderId) {
-		var ret string
-		return ret
-	}
-	return *o.WizProviderId
-}
-
-// GetWizProviderIdOk returns a tuple with the WizProviderId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateAssetCODEPROJECTRequest) GetWizProviderIdOk() (*string, bool) {
-	if o == nil || IsNil(o.WizProviderId) {
-		return nil, false
-	}
-	return o.WizProviderId, true
-}
-
-// HasWizProviderId returns a boolean if a field has been set.
-func (o *CreateAssetCODEPROJECTRequest) HasWizProviderId() bool {
-	if o != nil && !IsNil(o.WizProviderId) {
-		return true
-	}
-
-	return false
-}
-
-// SetWizProviderId gets a reference to the given string and assigns it to the WizProviderId field.
-func (o *CreateAssetCODEPROJECTRequest) SetWizProviderId(v string) {
-	o.WizProviderId = &v
-}
-
-// GetWizCloudPlatform returns the WizCloudPlatform field value if set, zero value otherwise.
-func (o *CreateAssetCODEPROJECTRequest) GetWizCloudPlatform() string {
-	if o == nil || IsNil(o.WizCloudPlatform) {
-		var ret string
-		return ret
-	}
-	return *o.WizCloudPlatform
-}
-
-// GetWizCloudPlatformOk returns a tuple with the WizCloudPlatform field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateAssetCODEPROJECTRequest) GetWizCloudPlatformOk() (*string, bool) {
-	if o == nil || IsNil(o.WizCloudPlatform) {
-		return nil, false
-	}
-	return o.WizCloudPlatform, true
-}
-
-// HasWizCloudPlatform returns a boolean if a field has been set.
-func (o *CreateAssetCODEPROJECTRequest) HasWizCloudPlatform() bool {
-	if o != nil && !IsNil(o.WizCloudPlatform) {
-		return true
-	}
-
-	return false
-}
-
-// SetWizCloudPlatform gets a reference to the given string and assigns it to the WizCloudPlatform field.
-func (o *CreateAssetCODEPROJECTRequest) SetWizCloudPlatform(v string) {
-	o.WizCloudPlatform = &v
 }
 
 // GetExtraMetadata returns the ExtraMetadata field value if set, zero value otherwise.
@@ -211,6 +178,38 @@ func (o *CreateAssetCODEPROJECTRequest) HasExtraMetadata() bool {
 // SetExtraMetadata gets a reference to the given map[string]interface{} and assigns it to the ExtraMetadata field.
 func (o *CreateAssetCODEPROJECTRequest) SetExtraMetadata(v map[string]interface{}) {
 	o.ExtraMetadata = v
+}
+
+// GetScreenshotS3Key returns the ScreenshotS3Key field value if set, zero value otherwise.
+func (o *CreateAssetCODEPROJECTRequest) GetScreenshotS3Key() string {
+	if o == nil || IsNil(o.ScreenshotS3Key) {
+		var ret string
+		return ret
+	}
+	return *o.ScreenshotS3Key
+}
+
+// GetScreenshotS3KeyOk returns a tuple with the ScreenshotS3Key field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetCODEPROJECTRequest) GetScreenshotS3KeyOk() (*string, bool) {
+	if o == nil || IsNil(o.ScreenshotS3Key) {
+		return nil, false
+	}
+	return o.ScreenshotS3Key, true
+}
+
+// HasScreenshotS3Key returns a boolean if a field has been set.
+func (o *CreateAssetCODEPROJECTRequest) HasScreenshotS3Key() bool {
+	if o != nil && !IsNil(o.ScreenshotS3Key) {
+		return true
+	}
+
+	return false
+}
+
+// SetScreenshotS3Key gets a reference to the given string and assigns it to the ScreenshotS3Key field.
+func (o *CreateAssetCODEPROJECTRequest) SetScreenshotS3Key(v string) {
+	o.ScreenshotS3Key = &v
 }
 
 // GetAssetType returns the AssetType field value
@@ -341,70 +340,6 @@ func (o *CreateAssetCODEPROJECTRequest) SetHttpUrlToProject(v string) {
 	o.HttpUrlToProject = &v
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
-func (o *CreateAssetCODEPROJECTRequest) GetName() string {
-	if o == nil || IsNil(o.Name) {
-		var ret string
-		return ret
-	}
-	return *o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateAssetCODEPROJECTRequest) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
-		return nil, false
-	}
-	return o.Name, true
-}
-
-// HasName returns a boolean if a field has been set.
-func (o *CreateAssetCODEPROJECTRequest) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given string and assigns it to the Name field.
-func (o *CreateAssetCODEPROJECTRequest) SetName(v string) {
-	o.Name = &v
-}
-
-// GetLastCommits returns the LastCommits field value if set, zero value otherwise.
-func (o *CreateAssetCODEPROJECTRequest) GetLastCommits() []CreateAssetCODEPROJECTRequestLastCommitsInner {
-	if o == nil || IsNil(o.LastCommits) {
-		var ret []CreateAssetCODEPROJECTRequestLastCommitsInner
-		return ret
-	}
-	return o.LastCommits
-}
-
-// GetLastCommitsOk returns a tuple with the LastCommits field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateAssetCODEPROJECTRequest) GetLastCommitsOk() ([]CreateAssetCODEPROJECTRequestLastCommitsInner, bool) {
-	if o == nil || IsNil(o.LastCommits) {
-		return nil, false
-	}
-	return o.LastCommits, true
-}
-
-// HasLastCommits returns a boolean if a field has been set.
-func (o *CreateAssetCODEPROJECTRequest) HasLastCommits() bool {
-	if o != nil && !IsNil(o.LastCommits) {
-		return true
-	}
-
-	return false
-}
-
-// SetLastCommits gets a reference to the given []CreateAssetCODEPROJECTRequestLastCommitsInner and assigns it to the LastCommits field.
-func (o *CreateAssetCODEPROJECTRequest) SetLastCommits(v []CreateAssetCODEPROJECTRequestLastCommitsInner) {
-	o.LastCommits = v
-}
-
 // GetOwners returns the Owners field value if set, zero value otherwise.
 func (o *CreateAssetCODEPROJECTRequest) GetOwners() []CreateAssetCODEPROJECTRequestOwnersInner {
 	if o == nil || IsNil(o.Owners) {
@@ -437,6 +372,38 @@ func (o *CreateAssetCODEPROJECTRequest) SetOwners(v []CreateAssetCODEPROJECTRequ
 	o.Owners = v
 }
 
+// GetLastCommit returns the LastCommit field value if set, zero value otherwise.
+func (o *CreateAssetCODEPROJECTRequest) GetLastCommit() CreateAssetGITLABREPOSITORYRequestLastCommit {
+	if o == nil || IsNil(o.LastCommit) {
+		var ret CreateAssetGITLABREPOSITORYRequestLastCommit
+		return ret
+	}
+	return *o.LastCommit
+}
+
+// GetLastCommitOk returns a tuple with the LastCommit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetCODEPROJECTRequest) GetLastCommitOk() (*CreateAssetGITLABREPOSITORYRequestLastCommit, bool) {
+	if o == nil || IsNil(o.LastCommit) {
+		return nil, false
+	}
+	return o.LastCommit, true
+}
+
+// HasLastCommit returns a boolean if a field has been set.
+func (o *CreateAssetCODEPROJECTRequest) HasLastCommit() bool {
+	if o != nil && !IsNil(o.LastCommit) {
+		return true
+	}
+
+	return false
+}
+
+// SetLastCommit gets a reference to the given CreateAssetGITLABREPOSITORYRequestLastCommit and assigns it to the LastCommit field.
+func (o *CreateAssetCODEPROJECTRequest) SetLastCommit(v CreateAssetGITLABREPOSITORYRequestLastCommit) {
+	o.LastCommit = &v
+}
+
 func (o CreateAssetCODEPROJECTRequest) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -450,15 +417,15 @@ func (o CreateAssetCODEPROJECTRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ProjectIds) {
 		toSerialize["projectIds"] = o.ProjectIds
 	}
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
 	toSerialize["asset_class"] = o.AssetClass
-	if !IsNil(o.WizProviderId) {
-		toSerialize["wiz_provider_id"] = o.WizProviderId
-	}
-	if !IsNil(o.WizCloudPlatform) {
-		toSerialize["wiz_cloud_platform"] = o.WizCloudPlatform
-	}
 	if !IsNil(o.ExtraMetadata) {
 		toSerialize["extra_metadata"] = o.ExtraMetadata
+	}
+	if !IsNil(o.ScreenshotS3Key) {
+		toSerialize["screenshot_s3_key"] = o.ScreenshotS3Key
 	}
 	toSerialize["asset_type"] = o.AssetType
 	toSerialize["repository"] = o.Repository
@@ -467,14 +434,11 @@ func (o CreateAssetCODEPROJECTRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.HttpUrlToProject) {
 		toSerialize["http_url_to_project"] = o.HttpUrlToProject
 	}
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
-	}
-	if !IsNil(o.LastCommits) {
-		toSerialize["last_commits"] = o.LastCommits
-	}
 	if !IsNil(o.Owners) {
 		toSerialize["owners"] = o.Owners
+	}
+	if !IsNil(o.LastCommit) {
+		toSerialize["last_commit"] = o.LastCommit
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -524,18 +488,17 @@ func (o *CreateAssetCODEPROJECTRequest) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "projectIds")
+		delete(additionalProperties, "name")
 		delete(additionalProperties, "asset_class")
-		delete(additionalProperties, "wiz_provider_id")
-		delete(additionalProperties, "wiz_cloud_platform")
 		delete(additionalProperties, "extra_metadata")
+		delete(additionalProperties, "screenshot_s3_key")
 		delete(additionalProperties, "asset_type")
 		delete(additionalProperties, "repository")
 		delete(additionalProperties, "path")
 		delete(additionalProperties, "language")
 		delete(additionalProperties, "http_url_to_project")
-		delete(additionalProperties, "name")
-		delete(additionalProperties, "last_commits")
 		delete(additionalProperties, "owners")
+		delete(additionalProperties, "last_commit")
 		o.AdditionalProperties = additionalProperties
 	}
 

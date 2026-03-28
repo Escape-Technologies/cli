@@ -18,7 +18,7 @@ import (
 // checks if the AssetServiceSummarized type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AssetServiceSummarized{}
 
-// AssetServiceSummarized Summarized information about an asset service
+// AssetServiceSummarized The service of the asset
 type AssetServiceSummarized struct {
 	// The url of the asset service
 	Url                  string                                                                `json:"url"`

@@ -95,7 +95,12 @@ ID                                      CREATED AT                           KIN
   # Export scan list to JSON for processing
   escape-cli scans list -o json > scans.json`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
-		scans, next, err := escape.ListScans(cmd.Context(), "", &escape.ListScansFilters{
+		// Output JSON Schema if requested
+		if out.Schema([]v3.ScanSummarized{}) {
+			return nil
+		}
+
+		filters := &escape.ListScansFilters{
 			ProfileIDs: &scanProfileIDs,
 			After:      scanAfter,
 			Before:     scanBefore,
@@ -103,42 +108,26 @@ ID                                      CREATED AT                           KIN
 			Initiator:  &scanInitiator,
 			Kinds:      &scanKinds,
 			Status:     &scanStatus,
-		})
+		}
+		scans, next, err := escape.ListScans(cmd.Context(), "", filters)
 		if err != nil {
 			return fmt.Errorf("unable to list scans: %w", err)
 		}
-		out.Table(scans, func() []string {
+		allScans := scans
+		for next != nil && *next != "" {
+			scans, next, err = escape.ListScans(cmd.Context(), *next, filters)
+			if err != nil {
+				return fmt.Errorf("unable to list scans: %w", err)
+			}
+			allScans = append(allScans, scans...)
+		}
+		out.Table(allScans, func() []string {
 			res := []string{"ID\tCREATED AT\tKIND\tSTATUS\tPROGRESS\tLINK"}
-			for _, scan := range scans {
+			for _, scan := range allScans {
 				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%f\t%s", scan.GetId(), scan.GetCreatedAt(), scan.GetKind(), scan.GetStatus(), scan.GetProgressRatio(), scan.GetLinks().ScanIssues))
 			}
 			return res
 		})
-
-		for next != nil && *next != "" {
-			scans, next, err = escape.ListScans(cmd.Context(), *next, &escape.ListScansFilters{
-				ProfileIDs: &scanProfileIDs,
-				After:      scanAfter,
-				Before:     scanBefore,
-				Ignored:    scanIgnored,
-				Initiator:  &scanInitiator,
-				Kinds:      &scanKinds,
-				Status:     &scanStatus,
-			})
-
-			if err != nil {
-				return fmt.Errorf("unable to list scans: %w", err)
-			}
-			out.Table(scans, func() []string {
-				res := []string{
-					"ID\tCREATED AT\tKIND\tSTATUS\tPROGRESS\tLINK",
-				}
-				for _, scan := range scans {
-					res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%f\t%s", scan.GetId(), scan.GetCreatedAt(), scan.GetKind(), scan.GetStatus(), scan.GetProgressRatio(), scan.GetLinks().ScanIssues))
-				}
-				return res
-			})
-		}
 		return nil
 	},
 }
@@ -174,6 +163,11 @@ ID                                      CREATED AT                           KIN
   # Get scan in JSON format for scripting
   escape-cli scans get 00000000-0000-0000-0000-000000000000 -o json`,
 	RunE: func(cmd *cobra.Command, args []string) error {
+		// Output JSON Schema if requested
+		if out.Schema(v3.ScanSummarized{}) {
+			return nil
+		}
+
 		scan, err := escape.GetScan(cmd.Context(), args[0])
 		if err != nil {
 			return fmt.Errorf("unable to get scan: %w", err)
@@ -316,6 +310,11 @@ CI/CD INTEGRATION:
   # Start and save scan ID for later use
   SCAN_ID=$(escape-cli scans start <profile-id> -o json | jq -r '.id')`,
 	RunE: func(cmd *cobra.Command, args []string) error {
+		// Output JSON Schema if requested
+		if out.Schema(v3.ScanDetailed1{}) {
+			return nil
+		}
+
 		configurationOverride := map[string]interface{}{}
 		if scanStartCmdConfigurationOverride != "" {
 			err := json.Unmarshal([]byte(scanStartCmdConfigurationOverride), &configurationOverride)
@@ -445,7 +444,7 @@ func watchScan(ctx context.Context, scanID string) error {
 	if err != nil {
 		return fmt.Errorf("unable to watch scan: %w", err)
 	}
-	var status *v3.ScanDetailed1
+	var status *v3.StartScan200Response
 	for event := range ch {
 		if event == nil {
 			continue
@@ -515,6 +514,11 @@ The watch will continue until the scan reaches a terminal state:
   # CI/CD example: Start, watch, and fail if scan fails
   escape-cli scans watch $(escape-cli scans start <profile-id> -o json | jq -r '.id')`,
 	RunE: func(cmd *cobra.Command, args []string) error {
+		// Output JSON Schema if requested
+		if out.Schema(v3.ScanDetailed1{}) {
+			return nil
+		}
+
 		return watchScan(cmd.Context(), args[0])
 	},
 }
@@ -588,6 +592,11 @@ ID                                      SEVERITY    CATEGORY                  NA
   # Count critical issues in a scan
   escape-cli scans issues <scan-id> -o json | jq '[.[] | select(.severity == "CRITICAL")] | length'`,
 	RunE: func(cmd *cobra.Command, args []string) error {
+		// Output JSON Schema if requested
+		if out.Schema([]v3.IssueSummarized{}) {
+			return nil
+		}
+
 		if len(args) != 1 {
 			_ = cmd.Help()
 			return errors.New("scan ID is required")

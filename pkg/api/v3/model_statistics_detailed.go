@@ -18,7 +18,7 @@ import (
 // checks if the StatisticsDetailed type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &StatisticsDetailed{}
 
-// StatisticsDetailed Detailed information about a statistics
+// StatisticsDetailed The statistics of the profile
 type StatisticsDetailed struct {
 	Issues               StatisticsDetailedIssues `json:"issues"`
 	AdditionalProperties map[string]interface{}

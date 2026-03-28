@@ -34,7 +34,7 @@ func (r ApiCreateTagRequest) CreateTagRequest(createTagRequest CreateTagRequest)
 	return r
 }
 
-func (r ApiCreateTagRequest) Execute() (*TagDetail, *http.Response, error) {
+func (r ApiCreateTagRequest) Execute() (*CreateTag200Response, *http.Response, error) {
 	return r.ApiService.CreateTagExecute(r)
 }
 
@@ -55,13 +55,13 @@ func (a *TagsAPIService) CreateTag(ctx context.Context) ApiCreateTagRequest {
 
 // Execute executes the request
 //
-//	@return TagDetail
-func (a *TagsAPIService) CreateTagExecute(r ApiCreateTagRequest) (*TagDetail, *http.Response, error) {
+//	@return CreateTag200Response
+func (a *TagsAPIService) CreateTagExecute(r ApiCreateTagRequest) (*CreateTag200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *TagDetail
+		localVarReturnValue *CreateTag200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TagsAPIService.CreateTag")

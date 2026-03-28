@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/Escape-Technologies/cli/pkg/api/escape"
+	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
 	"github.com/Escape-Technologies/cli/pkg/cli/out"
 	"github.com/spf13/cobra"
 )
@@ -68,24 +69,33 @@ FILTER OPTIONS:
   # Export for compliance reporting
   escape-cli audit list --date-from 2025-01-01T00:00:00Z -o json > audit-report-jan2025.json`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
-		logs, next, err := escape.ListAuditLogs(
-			cmd.Context(),
-			"",
-			&escape.ListAuditLogsFilters{
-				DateFrom:   auditCmdDateFrom,
-				DateTo:     auditCmdDateTo,
-				ActionType: auditCmdEventType,
-				Actor:      auditCmdActor,
-				Search:     auditCmdSearch,
-			},
-		)
+		// Output JSON Schema if requested
+		if out.Schema([]v3.AuditLogSummarized{}) {
+			return nil
+		}
+
+		filters := &escape.ListAuditLogsFilters{
+			DateFrom:   auditCmdDateFrom,
+			DateTo:     auditCmdDateTo,
+			ActionType: auditCmdEventType,
+			Actor:      auditCmdActor,
+			Search:     auditCmdSearch,
+		}
+		logs, next, err := escape.ListAuditLogs(cmd.Context(), "", filters)
 		if err != nil {
 			return fmt.Errorf("unable to list audits: %w", err)
 		}
-
-		out.Table(logs, func() []string {
+		allLogs := logs
+		for next != nil && *next != "" {
+			logs, next, err = escape.ListAuditLogs(cmd.Context(), *next, filters)
+			if err != nil {
+				return fmt.Errorf("unable to list audits: %w", err)
+			}
+			allLogs = append(allLogs, logs...)
+		}
+		out.Table(allLogs, func() []string {
 			fields := []string{"DATE\tACTION\tACTOR\tACTOR EMAIL\tTITLE"}
-			for _, log := range logs {
+			for _, log := range allLogs {
 				fields = append(fields, fmt.Sprintf(
 					"%s\t%s\t%s\t%s\t%s",
 					log.GetDate(),
@@ -97,35 +107,6 @@ FILTER OPTIONS:
 			}
 			return fields
 		})
-
-		for next != nil && *next != "" {
-			logs, next, err = escape.ListAuditLogs(
-				cmd.Context(),
-				*next,
-				&escape.ListAuditLogsFilters{
-					DateFrom:   auditCmdDateFrom,
-					DateTo:     auditCmdDateTo,
-					ActionType: auditCmdEventType,
-				},
-			)
-			if err != nil {
-				return fmt.Errorf("unable to list audits: %w", err)
-			}
-			out.Table(logs, func() []string {
-				fields := []string{"DATE\tACTION\tACTOR\tACTOR EMAIL\tTITLE"}
-				for _, log := range logs {
-					fields = append(fields, fmt.Sprintf(
-						"%s\t%s\t%s\t%s\t%s",
-						log.GetDate(),
-						log.GetAction(),
-						log.GetActor(),
-						log.GetActorEmail(),
-						log.GetTitle(),
-					))
-				}
-				return fields
-			})
-		}
 		return nil
 	},
 }

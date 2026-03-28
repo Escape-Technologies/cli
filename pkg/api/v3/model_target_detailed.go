@@ -18,7 +18,7 @@ import (
 // checks if the TargetDetailed type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TargetDetailed{}
 
-// TargetDetailed Detailed information about a target
+// TargetDetailed The target of the attachment
 type TargetDetailed struct {
 	// The date and time the target was created
 	CreatedAt       string                   `json:"createdAt"`

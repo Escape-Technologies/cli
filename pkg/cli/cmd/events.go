@@ -83,28 +83,21 @@ FILTER OPTIONS:
 		if err != nil {
 			return fmt.Errorf("unable to list events: %w", err)
 		}
-		out.Table(events, func() []string {
+		allEvents := events
+		for next != nil && *next != "" {
+			events, next, err = escape.ListEvents(cmd.Context(), *next, filters)
+			if err != nil {
+				return fmt.Errorf("unable to list events: %w", err)
+			}
+			allEvents = append(allEvents, events...)
+		}
+		out.Table(allEvents, func() []string {
 			res := []string{"ID\tCREATED AT\tLEVEL\tSTAGE\tTITLE"}
-			for _, event := range events {
+			for _, event := range allEvents {
 				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s", event.GetId(), event.GetCreatedAt(), event.GetLevel(), event.GetStage(), event.GetTitle()))
 			}
 			return res
 		})
-
-		for next != nil && *next != "" {
-			events, next, err = escape.ListEvents(cmd.Context(), *next, filters)
-
-			if err != nil {
-				return fmt.Errorf("unable to list profiles: %w", err)
-			}
-			out.Table(events, func() []string {
-				res := []string{"ID\tCREATED AT\tLEVEL\tSTAGE\tTITLE"}
-				for _, event := range events {
-					res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s", event.GetId(), event.GetCreatedAt(), event.GetLevel(), event.GetStage(), event.GetTitle()))
-				}
-				return res
-			})
-		}
 
 		return nil
 	},

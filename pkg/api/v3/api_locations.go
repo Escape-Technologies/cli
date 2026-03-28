@@ -33,7 +33,7 @@ func (r ApiCreateLocationRequest) CreateLocationRequest(createLocationRequest Cr
 	return r
 }
 
-func (r ApiCreateLocationRequest) Execute() (*LocationDetailed, *http.Response, error) {
+func (r ApiCreateLocationRequest) Execute() (*CreateLocation200Response, *http.Response, error) {
 	return r.ApiService.CreateLocationExecute(r)
 }
 
@@ -54,13 +54,13 @@ func (a *LocationsAPIService) CreateLocation(ctx context.Context) ApiCreateLocat
 
 // Execute executes the request
 //
-//	@return LocationDetailed
-func (a *LocationsAPIService) CreateLocationExecute(r ApiCreateLocationRequest) (*LocationDetailed, *http.Response, error) {
+//	@return CreateLocation200Response
+func (a *LocationsAPIService) CreateLocationExecute(r ApiCreateLocationRequest) (*CreateLocation200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *LocationDetailed
+		localVarReturnValue *CreateLocation200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LocationsAPIService.CreateLocation")
@@ -299,7 +299,7 @@ type ApiGetLocationRequest struct {
 	locationId string
 }
 
-func (r ApiGetLocationRequest) Execute() (*LocationDetailed, *http.Response, error) {
+func (r ApiGetLocationRequest) Execute() (*CreateLocation200Response, *http.Response, error) {
 	return r.ApiService.GetLocationExecute(r)
 }
 
@@ -322,13 +322,13 @@ func (a *LocationsAPIService) GetLocation(ctx context.Context, locationId string
 
 // Execute executes the request
 //
-//	@return LocationDetailed
-func (a *LocationsAPIService) GetLocationExecute(r ApiGetLocationRequest) (*LocationDetailed, *http.Response, error) {
+//	@return CreateLocation200Response
+func (a *LocationsAPIService) GetLocationExecute(r ApiGetLocationRequest) (*CreateLocation200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *LocationDetailed
+		localVarReturnValue *CreateLocation200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LocationsAPIService.GetLocation")
@@ -632,7 +632,7 @@ func (r ApiUpdateLocationRequest) UpdateLocationRequest(updateLocationRequest Up
 	return r
 }
 
-func (r ApiUpdateLocationRequest) Execute() (*LocationDetailed, *http.Response, error) {
+func (r ApiUpdateLocationRequest) Execute() (*CreateLocation200Response, *http.Response, error) {
 	return r.ApiService.UpdateLocationExecute(r)
 }
 
@@ -655,13 +655,13 @@ func (a *LocationsAPIService) UpdateLocation(ctx context.Context, locationId str
 
 // Execute executes the request
 //
-//	@return LocationDetailed
-func (a *LocationsAPIService) UpdateLocationExecute(r ApiUpdateLocationRequest) (*LocationDetailed, *http.Response, error) {
+//	@return CreateLocation200Response
+func (a *LocationsAPIService) UpdateLocationExecute(r ApiUpdateLocationRequest) (*CreateLocation200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *LocationDetailed
+		localVarReturnValue *CreateLocation200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LocationsAPIService.UpdateLocation")

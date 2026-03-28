@@ -36,16 +36,14 @@ type IssueSummarized struct {
 	// Unique identifier for the alert
 	AlertUid string `json:"alertUid"`
 	// When the issue was first created
-	CreatedAt string          `json:"createdAt"`
-	Asset     AssetSummarized `json:"asset"`
+	CreatedAt string           `json:"createdAt"`
+	Asset     AssetSummarized1 `json:"asset"`
 	// ID of the last scan where this issue was seen
 	LastSeenScanId *string `json:"lastSeenScanId,omitempty"`
 	// ID of the first scan where this issue was seen
 	FirstSeenScanId *string `json:"firstSeenScanId,omitempty"`
 	// ID of the custom rule if this is a custom issue
-	CustomRuleId *string `json:"customRuleId,omitempty"`
-	// URL to the associated Jira ticket if exists
-	TicketUrl            *string              `json:"ticketUrl,omitempty"`
+	CustomRuleId         *string              `json:"customRuleId,omitempty"`
 	Links                IssueSummarizedLinks `json:"links"`
 	AdditionalProperties map[string]interface{}
 }
@@ -56,7 +54,7 @@ type _IssueSummarized IssueSummarized
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIssueSummarized(id string, name string, fullName string, category ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY, severity ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY, status ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS, context string, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, alertUid string, createdAt string, asset AssetSummarized, links IssueSummarizedLinks) *IssueSummarized {
+func NewIssueSummarized(id string, name string, fullName string, category ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY, severity ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY, status ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS, context string, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, alertUid string, createdAt string, asset AssetSummarized1, links IssueSummarizedLinks) *IssueSummarized {
 	this := IssueSummarized{}
 	this.Id = id
 	this.Name = name
@@ -322,9 +320,9 @@ func (o *IssueSummarized) SetCreatedAt(v string) {
 }
 
 // GetAsset returns the Asset field value
-func (o *IssueSummarized) GetAsset() AssetSummarized {
+func (o *IssueSummarized) GetAsset() AssetSummarized1 {
 	if o == nil {
-		var ret AssetSummarized
+		var ret AssetSummarized1
 		return ret
 	}
 
@@ -333,7 +331,7 @@ func (o *IssueSummarized) GetAsset() AssetSummarized {
 
 // GetAssetOk returns a tuple with the Asset field value
 // and a boolean to check if the value has been set.
-func (o *IssueSummarized) GetAssetOk() (*AssetSummarized, bool) {
+func (o *IssueSummarized) GetAssetOk() (*AssetSummarized1, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -341,7 +339,7 @@ func (o *IssueSummarized) GetAssetOk() (*AssetSummarized, bool) {
 }
 
 // SetAsset sets field value
-func (o *IssueSummarized) SetAsset(v AssetSummarized) {
+func (o *IssueSummarized) SetAsset(v AssetSummarized1) {
 	o.Asset = v
 }
 
@@ -441,38 +439,6 @@ func (o *IssueSummarized) SetCustomRuleId(v string) {
 	o.CustomRuleId = &v
 }
 
-// GetTicketUrl returns the TicketUrl field value if set, zero value otherwise.
-func (o *IssueSummarized) GetTicketUrl() string {
-	if o == nil || IsNil(o.TicketUrl) {
-		var ret string
-		return ret
-	}
-	return *o.TicketUrl
-}
-
-// GetTicketUrlOk returns a tuple with the TicketUrl field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *IssueSummarized) GetTicketUrlOk() (*string, bool) {
-	if o == nil || IsNil(o.TicketUrl) {
-		return nil, false
-	}
-	return o.TicketUrl, true
-}
-
-// HasTicketUrl returns a boolean if a field has been set.
-func (o *IssueSummarized) HasTicketUrl() bool {
-	if o != nil && !IsNil(o.TicketUrl) {
-		return true
-	}
-
-	return false
-}
-
-// SetTicketUrl gets a reference to the given string and assigns it to the TicketUrl field.
-func (o *IssueSummarized) SetTicketUrl(v string) {
-	o.TicketUrl = &v
-}
-
 // GetLinks returns the Links field value
 func (o *IssueSummarized) GetLinks() IssueSummarizedLinks {
 	if o == nil {
@@ -526,9 +492,6 @@ func (o IssueSummarized) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.CustomRuleId) {
 		toSerialize["customRuleId"] = o.CustomRuleId
-	}
-	if !IsNil(o.TicketUrl) {
-		toSerialize["ticketUrl"] = o.TicketUrl
 	}
 	toSerialize["links"] = o.Links
 
@@ -599,7 +562,6 @@ func (o *IssueSummarized) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "lastSeenScanId")
 		delete(additionalProperties, "firstSeenScanId")
 		delete(additionalProperties, "customRuleId")
-		delete(additionalProperties, "ticketUrl")
 		delete(additionalProperties, "links")
 		o.AdditionalProperties = additionalProperties
 	}

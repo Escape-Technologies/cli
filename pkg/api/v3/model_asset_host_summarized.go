@@ -18,7 +18,7 @@ import (
 // checks if the AssetHostSummarized type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AssetHostSummarized{}
 
-// AssetHostSummarized Summarized information about an asset host
+// AssetHostSummarized The host of the asset
 type AssetHostSummarized struct {
 	// The address of the asset host
 	Address              string                                                             `json:"address"`

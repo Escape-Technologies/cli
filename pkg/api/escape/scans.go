@@ -22,7 +22,7 @@ type ListScansFilters struct {
 }
 
 // ListScans lists all scans for an application
-func ListScans(ctx context.Context, next string, filters *ListScansFilters) ([]v3.ScanSummarized1, *string, error) {
+func ListScans(ctx context.Context, next string, filters *ListScansFilters) ([]v3.ScanSummarized2, *string, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, nil, fmt.Errorf("unable to init client: %w", err)
@@ -66,7 +66,7 @@ func ListScans(ctx context.Context, next string, filters *ListScansFilters) ([]v
 }
 
 // GetScan returns a scan by its ID
-func GetScan(ctx context.Context, scanID string) (*v3.ScanDetailed1, error) {
+func GetScan(ctx context.Context, scanID string) (*v3.StartScan200Response, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
@@ -110,7 +110,7 @@ func StartScan(
 	configurationOverride map[string]interface{},
 	additionalProperties map[string]interface{},
 	initiator v3.ENUMPROPERTIESDATAITEMSPROPERTIESINITIATORSITEMS,
-) (*v3.ScanDetailed1, error) {
+) (*v3.StartScan200Response, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)

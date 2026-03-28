@@ -21,8 +21,11 @@ var _ MappedNullable = &UpdateProfileRequest{}
 type UpdateProfileRequest struct {
 	// The name of the profile
 	Name *string `json:"name,omitempty"`
+	// The description of the profile
+	Description *string `json:"description,omitempty"`
 	// The cron of the profile
-	Cron                 *string `json:"cron,omitempty"`
+	Cron                 *string                            `json:"cron,omitempty"`
+	ExtraAssetIds        *UpdateProfileRequestExtraAssetIds `json:"extraAssetIds,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -77,6 +80,38 @@ func (o *UpdateProfileRequest) SetName(v string) {
 	o.Name = &v
 }
 
+// GetDescription returns the Description field value if set, zero value otherwise.
+func (o *UpdateProfileRequest) GetDescription() string {
+	if o == nil || IsNil(o.Description) {
+		var ret string
+		return ret
+	}
+	return *o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateProfileRequest) GetDescriptionOk() (*string, bool) {
+	if o == nil || IsNil(o.Description) {
+		return nil, false
+	}
+	return o.Description, true
+}
+
+// HasDescription returns a boolean if a field has been set.
+func (o *UpdateProfileRequest) HasDescription() bool {
+	if o != nil && !IsNil(o.Description) {
+		return true
+	}
+
+	return false
+}
+
+// SetDescription gets a reference to the given string and assigns it to the Description field.
+func (o *UpdateProfileRequest) SetDescription(v string) {
+	o.Description = &v
+}
+
 // GetCron returns the Cron field value if set, zero value otherwise.
 func (o *UpdateProfileRequest) GetCron() string {
 	if o == nil || IsNil(o.Cron) {
@@ -109,6 +144,38 @@ func (o *UpdateProfileRequest) SetCron(v string) {
 	o.Cron = &v
 }
 
+// GetExtraAssetIds returns the ExtraAssetIds field value if set, zero value otherwise.
+func (o *UpdateProfileRequest) GetExtraAssetIds() UpdateProfileRequestExtraAssetIds {
+	if o == nil || IsNil(o.ExtraAssetIds) {
+		var ret UpdateProfileRequestExtraAssetIds
+		return ret
+	}
+	return *o.ExtraAssetIds
+}
+
+// GetExtraAssetIdsOk returns a tuple with the ExtraAssetIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateProfileRequest) GetExtraAssetIdsOk() (*UpdateProfileRequestExtraAssetIds, bool) {
+	if o == nil || IsNil(o.ExtraAssetIds) {
+		return nil, false
+	}
+	return o.ExtraAssetIds, true
+}
+
+// HasExtraAssetIds returns a boolean if a field has been set.
+func (o *UpdateProfileRequest) HasExtraAssetIds() bool {
+	if o != nil && !IsNil(o.ExtraAssetIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetExtraAssetIds gets a reference to the given UpdateProfileRequestExtraAssetIds and assigns it to the ExtraAssetIds field.
+func (o *UpdateProfileRequest) SetExtraAssetIds(v UpdateProfileRequestExtraAssetIds) {
+	o.ExtraAssetIds = &v
+}
+
 func (o UpdateProfileRequest) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -122,8 +189,14 @@ func (o UpdateProfileRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
+	if !IsNil(o.Description) {
+		toSerialize["description"] = o.Description
+	}
 	if !IsNil(o.Cron) {
 		toSerialize["cron"] = o.Cron
+	}
+	if !IsNil(o.ExtraAssetIds) {
+		toSerialize["extraAssetIds"] = o.ExtraAssetIds
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -148,7 +221,9 @@ func (o *UpdateProfileRequest) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "name")
+		delete(additionalProperties, "description")
 		delete(additionalProperties, "cron")
+		delete(additionalProperties, "extraAssetIds")
 		o.AdditionalProperties = additionalProperties
 	}
 

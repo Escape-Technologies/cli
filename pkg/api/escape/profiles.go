@@ -65,7 +65,7 @@ func ListProfiles(ctx context.Context, next string, filters *ListProfilesFilters
 }
 
 // GetProfile gets a profile by ID
-func GetProfile(ctx context.Context, profileID string) (*v3.ProfileDetailed, error) {
+func GetProfile(ctx context.Context, profileID string) (*v3.GetProfile200Response, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
@@ -133,6 +133,62 @@ func CreateProfileGraphql(ctx context.Context, data []byte) (interface{}, error)
 
 	req := client.ProfilesAPI.CreateDastGraphqlProfile(ctx)
 	profile, _, err := req.CreateDastGraphqlProfileRequest(payload).Execute()
+	if err != nil {
+		return nil, fmt.Errorf("api error: %w", err)
+	}
+	return profile, nil
+}
+
+// UpdateProfile updates profile metadata (name, description, cron, extra assets)
+func UpdateProfile(ctx context.Context, profileID string, data []byte) (*v3.GetProfile200Response, error) {
+	client, err := newAPIV3Client()
+	if err != nil {
+		return nil, fmt.Errorf("unable to init client: %w", err)
+	}
+
+	var payload v3.UpdateProfileRequest
+	if err := json.Unmarshal(data, &payload); err != nil {
+		return nil, fmt.Errorf("invalid JSON for UpdateProfileRequest: %w", err)
+	}
+
+	profile, _, err := client.ProfilesAPI.UpdateProfile(ctx, profileID).UpdateProfileRequest(payload).Execute()
+	if err != nil {
+		return nil, fmt.Errorf("api error: %w", err)
+	}
+	return profile, nil
+}
+
+// UpdateProfileConfiguration updates profile configuration (auth, scope, frontend_dast, etc.)
+func UpdateProfileConfiguration(ctx context.Context, profileID string, data []byte) (map[string]interface{}, error) {
+	client, err := newAPIV3Client()
+	if err != nil {
+		return nil, fmt.Errorf("unable to init client: %w", err)
+	}
+
+	var payload v3.UpdateProfileConfigurationRequest
+	if err := json.Unmarshal(data, &payload); err != nil {
+		return nil, fmt.Errorf("invalid JSON for UpdateProfileConfigurationRequest: %w", err)
+	}
+
+	result, _, err := client.ProfilesAPI.UpdateProfileConfiguration(ctx, profileID).UpdateProfileConfigurationRequest(payload).Execute()
+	if err != nil {
+		return nil, fmt.Errorf("api error: %w", err)
+	}
+	return result, nil
+}
+
+// UpdateProfileSchema updates the schema attached to a profile
+func UpdateProfileSchema(ctx context.Context, profileID string, schemaID string) (*v3.GetProfile200Response, error) {
+	client, err := newAPIV3Client()
+	if err != nil {
+		return nil, fmt.Errorf("unable to init client: %w", err)
+	}
+
+	payload := v3.UpdateProfileSchemaRequest{
+		SchemaId: schemaID,
+	}
+
+	profile, _, err := client.ProfilesAPI.UpdateProfileSchema(ctx, profileID).UpdateProfileSchemaRequest(payload).Execute()
 	if err != nil {
 		return nil, fmt.Errorf("api error: %w", err)
 	}

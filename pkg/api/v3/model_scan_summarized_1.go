@@ -18,7 +18,7 @@ import (
 // checks if the ScanSummarized1 type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ScanSummarized1{}
 
-// ScanSummarized1 Summarized information about a scan
+// ScanSummarized1 The last seen scan of the asset
 type ScanSummarized1 struct {
 	// The id of the scan
 	Id string `json:"id"`

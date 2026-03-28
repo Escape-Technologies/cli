@@ -45,7 +45,7 @@ def _enum_name(path: list[str], value: dict) -> str:
     except Exception:
         pass
 
-    cache_key = '-'.join(sorted(value["enum"]))
+    cache_key = '-'.join(sorted(str(v) for v in value["enum"] if v is not None))
     if cache_key in cache:
         return cache[cache_key]
 
@@ -56,7 +56,7 @@ def _enum_name(path: list[str], value: dict) -> str:
         raw += "_".join(path)
     final = re.sub(r"[^a-zA-Z0-9_]", "_", raw).upper()
     if len(final) > 200:
-        final =  "Enum_" + md5("-".join(sorted(value["enum"])))
+        final =  "Enum_" + md5("-".join(sorted(str(v) for v in value["enum"] if v is not None)))
     cache[cache_key] = final
     return final
 
@@ -72,6 +72,8 @@ def _rec_extract_enums(schema: dict, path: list[str]) -> tuple[dict, dict[str, d
 
     # If the current schema node itself is an enum, extract it immediately
     if isinstance(schema, dict) and 'enum' in schema:
+        schema = dict(schema)
+        schema['enum'] = [v for v in schema['enum'] if v is not None]
         target = _enum_name(path, schema)
         # Merge enum values if the target already exists
         if target in enums and 'enum' in enums[target]:
