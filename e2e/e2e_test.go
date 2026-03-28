@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"context"
 	"os/exec"
 	"path/filepath"
 	"strconv"
@@ -31,7 +32,7 @@ func TestMain(m *testing.M) {
 		os.Exit(1)
 	}
 	binaryPath = filepath.Join(tmp, "escape")
-	cmd := exec.Command("go", "build", "-o", binaryPath, "../cmd")
+	cmd := exec.CommandContext(context.Background(), "go", "build", "-o", binaryPath, "../cmd")
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	if err := cmd.Run(); err != nil {
@@ -40,7 +41,7 @@ func TestMain(m *testing.M) {
 	}
 
 	code := m.Run()
-	os.RemoveAll(tmp)
+	_ = os.RemoveAll(tmp)
 	os.Exit(code)
 }
 
@@ -111,7 +112,7 @@ func TestE2E(t *testing.T) {
 
 // --- Custom commands ---
 
-func cmdJSONExtract(ts *testscript.TestScript, neg bool, args []string) {
+func cmdJSONExtract(ts *testscript.TestScript, _ bool, args []string) {
 	if len(args) != 2 {
 		ts.Fatalf("usage: json-extract <json-path> <env-var>")
 	}
@@ -160,7 +161,7 @@ func cmdJSONContains(ts *testscript.TestScript, neg bool, args []string) {
 	}
 }
 
-func cmdJSONValid(ts *testscript.TestScript, neg bool, args []string) {
+func cmdJSONValid(ts *testscript.TestScript, neg bool, _ []string) {
 	stdout := ts.ReadFile("stdout")
 	valid := json.Valid([]byte(stdout))
 	if neg {
@@ -243,7 +244,7 @@ func cmdJSONArrayAll(ts *testscript.TestScript, neg bool, args []string) {
 	}
 }
 
-func cmdYAMLValid(ts *testscript.TestScript, neg bool, args []string) {
+func cmdYAMLValid(ts *testscript.TestScript, neg bool, _ []string) {
 	stdout := ts.ReadFile("stdout")
 	if neg {
 		if strings.TrimSpace(stdout) == "" {
@@ -259,7 +260,7 @@ func cmdYAMLValid(ts *testscript.TestScript, neg bool, args []string) {
 	// will at least have non-empty content and no bare control characters
 }
 
-func cmdNoANSI(ts *testscript.TestScript, neg bool, args []string) {
+func cmdNoANSI(ts *testscript.TestScript, neg bool, _ []string) {
 	stdout := ts.ReadFile("stdout")
 	hasANSI := strings.Contains(stdout, "\x1b[")
 	if neg {
@@ -273,7 +274,7 @@ func cmdNoANSI(ts *testscript.TestScript, neg bool, args []string) {
 	}
 }
 
-func cmdEnvSubst(ts *testscript.TestScript, neg bool, args []string) {
+func cmdEnvSubst(ts *testscript.TestScript, _ bool, args []string) {
 	if len(args) != 2 {
 		ts.Fatalf("usage: env-subst <input-file> <output-file>")
 	}
