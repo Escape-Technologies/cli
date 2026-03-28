@@ -1,0 +1,51 @@
+# Test: Scans lifecycle (start, get, cancel)
+# Creates an asset + profile, starts a scan, verifies it's running, then cancels it.
+
+# Setup: create asset
+stdin asset.json
+exec escape assets create -o json
+json-extract id ASSET_ID
+
+# Setup: create profile (start=false)
+env-subst profile.json.tmpl profile.json
+stdin profile.json
+exec escape profiles create-webapp -o json
+json-extract id PROFILE_ID
+
+# 5.1 List scans (may be empty for new org)
+exec escape scans list -o json
+json-valid
+
+# 5.7 Start scan
+exec escape scans start ${PROFILE_ID} -o json
+json-valid
+json-extract id SCAN_ID
+
+# 5.8 Get running scan
+exec escape scans get ${SCAN_ID} -o json
+json-valid
+
+# 5.9 Cancel scan
+exec escape scans cancel ${SCAN_ID}
+
+# 5.10 Verify cancelled
+exec escape scans get ${SCAN_ID} -o json
+json-valid
+json-equal status CANCELED
+
+# 5.12 Start with commit metadata
+exec escape scans start ${PROFILE_ID} --commit-hash abc123def --commit-branch e2e-test -o json
+json-valid
+json-extract id SCAN_ID_2
+
+# 5.13 Cancel the second scan
+exec escape scans cancel ${SCAN_ID_2}
+
+# Cleanup
+exec escape profiles delete ${PROFILE_ID}
+exec escape assets delete ${ASSET_ID}
+
+-- asset.json --
+{"asset_class": "FRONTEND", "asset_type": "WEBAPP", "url": "https://e2e-test-scans.example.com"}
+-- profile.json.tmpl --
+{"assetId": "${ASSET_ID}", "name": "e2e-test-scan-profile", "start": false}
