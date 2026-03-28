@@ -28,7 +28,7 @@ type CreateWorkflowRequest struct {
 	// The throttle in milliseconds for the workflow.
 	ThrottleMs *float32                            `json:"throttleMs,omitempty"`
 	Filters    []UpdateWorkflowRequestFiltersInner `json:"filters"`
-	Actions    []UpdateWorkflowRequestActionsInner `json:"actions"`
+	Actions    []CreateWorkflowRequestActionsInner `json:"actions"`
 	// Optional list of project IDs to create the integration for
 	ProjectIds           []string `json:"projectIds,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -40,7 +40,7 @@ type _CreateWorkflowRequest CreateWorkflowRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateWorkflowRequest(organizationId string, name string, trigger ENUMPROPERTIESTRIGGER, filters []UpdateWorkflowRequestFiltersInner, actions []UpdateWorkflowRequestActionsInner) *CreateWorkflowRequest {
+func NewCreateWorkflowRequest(organizationId string, name string, trigger ENUMPROPERTIESTRIGGER, filters []UpdateWorkflowRequestFiltersInner, actions []CreateWorkflowRequestActionsInner) *CreateWorkflowRequest {
 	this := CreateWorkflowRequest{}
 	this.OrganizationId = organizationId
 	this.Name = name
@@ -187,9 +187,9 @@ func (o *CreateWorkflowRequest) SetFilters(v []UpdateWorkflowRequestFiltersInner
 }
 
 // GetActions returns the Actions field value
-func (o *CreateWorkflowRequest) GetActions() []UpdateWorkflowRequestActionsInner {
+func (o *CreateWorkflowRequest) GetActions() []CreateWorkflowRequestActionsInner {
 	if o == nil {
-		var ret []UpdateWorkflowRequestActionsInner
+		var ret []CreateWorkflowRequestActionsInner
 		return ret
 	}
 
@@ -198,7 +198,7 @@ func (o *CreateWorkflowRequest) GetActions() []UpdateWorkflowRequestActionsInner
 
 // GetActionsOk returns a tuple with the Actions field value
 // and a boolean to check if the value has been set.
-func (o *CreateWorkflowRequest) GetActionsOk() ([]UpdateWorkflowRequestActionsInner, bool) {
+func (o *CreateWorkflowRequest) GetActionsOk() ([]CreateWorkflowRequestActionsInner, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -206,7 +206,7 @@ func (o *CreateWorkflowRequest) GetActionsOk() ([]UpdateWorkflowRequestActionsIn
 }
 
 // SetActions sets field value
-func (o *CreateWorkflowRequest) SetActions(v []UpdateWorkflowRequestActionsInner) {
+func (o *CreateWorkflowRequest) SetActions(v []CreateWorkflowRequestActionsInner) {
 	o.Actions = v
 }
 

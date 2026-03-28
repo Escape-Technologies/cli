@@ -83,7 +83,7 @@ ID                                      NAME                    SCAN STATUS    P
   escape-cli problems --initiators "scheduled,manual"`,
 
 	RunE: func(cmd *cobra.Command, _ []string) error {
-		problems, next, err := escape.ListProblems(cmd.Context(), "", &escape.ListProblemsFilters{
+		filters := &escape.ListProblemsFilters{
 			AssetIDs:   problemsAssetIDs,
 			Domains:    problemsDomains,
 			IssueIDs:   problemsIssueIDs,
@@ -92,14 +92,23 @@ ID                                      NAME                    SCAN STATUS    P
 			Initiators: problemsInitiators,
 			Kinds:      problemsKinds,
 			Risks:      problemsRisks,
-		})
+		}
+		problems, next, err := escape.ListProblems(cmd.Context(), "", filters)
 		if err != nil {
 			return fmt.Errorf("unable to list problems: %w", err)
+		}
+		allRaw := problems
+		for next != nil && *next != "" {
+			problems, next, err = escape.ListProblems(cmd.Context(), *next, filters)
+			if err != nil {
+				return fmt.Errorf("unable to list problems: %w", err)
+			}
+			allRaw = append(allRaw, problems...)
 		}
 
 		// Filter out applications without problems
 		appsWithProblems := []v3.LastScanStatusSummarized{}
-		for _, app := range problems {
+		for _, app := range allRaw {
 			if app.HasLastResourceScan() {
 				scan := app.GetLastResourceScan()
 				if len(scan.GetProblems()) > 0 {
@@ -109,7 +118,6 @@ ID                                      NAME                    SCAN STATUS    P
 		}
 
 		if problemsDetailed {
-			// Show detailed problem information
 			allProblems := []ProblemDetail{}
 			for _, app := range appsWithProblems {
 				scan := app.GetLastResourceScan()
@@ -140,7 +148,6 @@ ID                                      NAME                    SCAN STATUS    P
 				return res
 			})
 		} else {
-			// Show basic problem summary
 			problemSummaries := []ProblemSummary{}
 			for _, app := range appsWithProblems {
 				scan := app.GetLastResourceScan()
@@ -165,97 +172,6 @@ ID                                      NAME                    SCAN STATUS    P
 				}
 				return res
 			})
-		}
-
-		// Handle pagination
-		for next != nil && *next != "" {
-			problems, next, err = escape.ListProblems(
-				cmd.Context(),
-				*next,
-				&escape.ListProblemsFilters{
-					AssetIDs:   problemsAssetIDs,
-					Domains:    problemsDomains,
-					IssueIDs:   problemsIssueIDs,
-					TagsIDs:    problemsTagIDs,
-					Search:     problemsSearch,
-					Initiators: problemsInitiators,
-					Kinds:      problemsKinds,
-					Risks:      problemsRisks,
-				},
-			)
-			if err != nil {
-				return fmt.Errorf("unable to list problems: %w", err)
-			}
-
-			// Filter out applications without problems
-			appsWithProblems = []v3.LastScanStatusSummarized{}
-			for _, app := range problems {
-				if app.HasLastResourceScan() {
-					scan := app.GetLastResourceScan()
-					if len(scan.GetProblems()) > 0 {
-						appsWithProblems = append(appsWithProblems, app)
-					}
-				}
-			}
-
-			if problemsDetailed {
-				// Show detailed problem information
-				allProblems := []ProblemDetail{}
-				for _, app := range appsWithProblems {
-					scan := app.GetLastResourceScan()
-					for _, problem := range scan.GetProblems() {
-						allProblems = append(allProblems, ProblemDetail{
-							AppID:      app.GetId(),
-							AppName:    app.GetName(),
-							ScanStatus: scan.GetStatus(),
-							Code:       problem.GetCode(),
-							Severity:   problem.GetSeverity(),
-							Message:    problem.GetMessage(),
-						})
-					}
-				}
-
-				out.Table(allProblems, func() []string {
-					res := []string{"ID\tNAME\tSCAN STATUS\tPROBLEM CODE\tSEVERITY\tMESSAGE"}
-					for _, problem := range allProblems {
-						res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s",
-							problem.AppID,
-							problem.AppName,
-							problem.ScanStatus,
-							problem.Code,
-							problem.Severity,
-							problem.Message,
-						))
-					}
-					return res
-				})
-			} else {
-				// Show basic problem summary
-				problemSummaries := []ProblemSummary{}
-				for _, app := range appsWithProblems {
-					scan := app.GetLastResourceScan()
-					problemCount := len(scan.GetProblems())
-					problemSummaries = append(problemSummaries, ProblemSummary{
-						AppID:        app.GetId(),
-						AppName:      app.GetName(),
-						ScanStatus:   scan.GetStatus(),
-						ProblemCount: problemCount,
-					})
-				}
-
-				out.Table(problemSummaries, func() []string {
-					res := []string{"ID\tNAME\tSCAN STATUS\tPROBLEMS"}
-					for _, summary := range problemSummaries {
-						res = append(res, fmt.Sprintf("%s\t%s\t%s\t%d",
-							summary.AppID,
-							summary.AppName,
-							summary.ScanStatus,
-							summary.ProblemCount,
-						))
-					}
-					return res
-				})
-			}
 		}
 
 		return nil

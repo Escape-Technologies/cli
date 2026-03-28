@@ -1,0 +1,14 @@
+# Test: Audit logs and events (read-only)
+# These are read-only endpoints. For a new org some may return empty arrays.
+
+# 9.1 Audit list
+exec escape audit list -o json
+json-valid
+
+# 9.4 Events list
+exec escape events list -o json
+json-valid
+
+# 9.8 Problems list
+exec escape problems list -o json
+json-valid

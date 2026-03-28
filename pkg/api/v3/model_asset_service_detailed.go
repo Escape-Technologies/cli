@@ -18,7 +18,7 @@ import (
 // checks if the AssetServiceDetailed type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AssetServiceDetailed{}
 
-// AssetServiceDetailed Detailed information about an asset service
+// AssetServiceDetailed The service of the asset
 type AssetServiceDetailed struct {
 	Type                 ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESTYPE            `json:"type"`
 	Url                  string                                                                           `json:"url"`

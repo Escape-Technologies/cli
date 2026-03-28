@@ -43,7 +43,7 @@ type CreateakamaiIntegration200Response struct {
 	// The projects of the integration
 	Projects             []ListProjects200ResponseDataInner       `json:"projects"`
 	Parameters           CreateakamaiIntegrationRequestParameters `json:"parameters"`
-	Location             *LocationDetailed1                       `json:"location,omitempty"`
+	Location             *LocationDetailed                        `json:"location,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -381,9 +381,9 @@ func (o *CreateakamaiIntegration200Response) SetParameters(v CreateakamaiIntegra
 }
 
 // GetLocation returns the Location field value if set, zero value otherwise.
-func (o *CreateakamaiIntegration200Response) GetLocation() LocationDetailed1 {
+func (o *CreateakamaiIntegration200Response) GetLocation() LocationDetailed {
 	if o == nil || IsNil(o.Location) {
-		var ret LocationDetailed1
+		var ret LocationDetailed
 		return ret
 	}
 	return *o.Location
@@ -391,7 +391,7 @@ func (o *CreateakamaiIntegration200Response) GetLocation() LocationDetailed1 {
 
 // GetLocationOk returns a tuple with the Location field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateakamaiIntegration200Response) GetLocationOk() (*LocationDetailed1, bool) {
+func (o *CreateakamaiIntegration200Response) GetLocationOk() (*LocationDetailed, bool) {
 	if o == nil || IsNil(o.Location) {
 		return nil, false
 	}
@@ -407,8 +407,8 @@ func (o *CreateakamaiIntegration200Response) HasLocation() bool {
 	return false
 }
 
-// SetLocation gets a reference to the given LocationDetailed1 and assigns it to the Location field.
-func (o *CreateakamaiIntegration200Response) SetLocation(v LocationDetailed1) {
+// SetLocation gets a reference to the given LocationDetailed and assigns it to the Location field.
+func (o *CreateakamaiIntegration200Response) SetLocation(v LocationDetailed) {
 	o.Location = &v
 }
 

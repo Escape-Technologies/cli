@@ -28,7 +28,7 @@ type ApiGetEventRequest struct {
 	eventId    string
 }
 
-func (r ApiGetEventRequest) Execute() (*EventDetailed, *http.Response, error) {
+func (r ApiGetEventRequest) Execute() (*GetEvent200Response, *http.Response, error) {
 	return r.ApiService.GetEventExecute(r)
 }
 
@@ -51,13 +51,13 @@ func (a *EventsAPIService) GetEvent(ctx context.Context, eventId string) ApiGetE
 
 // Execute executes the request
 //
-//	@return EventDetailed
-func (a *EventsAPIService) GetEventExecute(r ApiGetEventRequest) (*EventDetailed, *http.Response, error) {
+//	@return GetEvent200Response
+func (a *EventsAPIService) GetEventExecute(r ApiGetEventRequest) (*GetEvent200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *EventDetailed
+		localVarReturnValue *GetEvent200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EventsAPIService.GetEvent")

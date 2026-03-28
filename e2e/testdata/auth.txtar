@@ -1,0 +1,21 @@
+# Test: Authentication and connectivity
+# Verifies that valid auth works, and invalid/missing keys fail properly.
+
+# 0.1 Valid auth - should succeed and return valid JSON
+exec escape tags list -o json
+json-valid
+
+# 0.2 Missing key - should fail
+env ESCAPE_API_KEY=
+! exec escape tags list -o json
+stdout 'API key'
+
+# 0.3 Invalid key format (not a UUID)
+env ESCAPE_API_KEY=not-a-uuid
+! exec escape tags list -o json
+stdout 'invalid UUID format'
+
+# 0.4 Invalid key value (valid UUID format, but not authorized)
+env ESCAPE_API_KEY=00000000-0000-0000-0000-000000000000
+! exec escape tags list -o json
+stdout 'Error'

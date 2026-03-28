@@ -109,6 +109,11 @@ ID                                      CREATED AT  SEVERITY  STATUS  NAME      
   # List unresolved issues across all assets
   escape-cli issues list --status OPEN,MANUAL_REVIEW,IN_PROGRESS`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
+		// Output JSON Schema if requested
+		if out.Schema([]v3.IssueSummarized{}) {
+			return nil
+		}
+
 		filters := &escape.ListIssuesFilters{
 			Status:       issueStatus,
 			Severities:   issueSeverity,
@@ -126,28 +131,21 @@ ID                                      CREATED AT  SEVERITY  STATUS  NAME      
 		if err != nil {
 			return fmt.Errorf("unable to list issues: %w", err)
 		}
-
-		out.Table(issues, func() []string {
+		allIssues := issues
+		for next != nil && *next != "" {
+			issues, next, err = escape.ListIssues(cmd.Context(), *next, filters)
+			if err != nil {
+				return fmt.Errorf("unable to list issues: %w", err)
+			}
+			allIssues = append(allIssues, issues...)
+		}
+		out.Table(allIssues, func() []string {
 			res := []string{"ID\tCREATED AT\tSEVERITY\tSTATUS\tNAME\tASSET\tLINK"}
-			for _, issue := range issues {
+			for _, issue := range allIssues {
 				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s", issue.GetId(), out.GetShortDate(issue.GetCreatedAt()), issue.GetSeverity(), issue.GetStatus(), issue.GetName(), issue.GetAsset().Name, issue.GetLinks().IssueOverview))
 			}
 			return res
 		})
-
-		for next != nil && *next != "" {
-			issues, next, err = escape.ListIssues(cmd.Context(), *next, filters)
-			if err != nil {
-				return fmt.Errorf("unable to list profiles: %w", err)
-			}
-			out.Table(issues, func() []string {
-				res := []string{"ID\tCREATED AT\tSEVERITY\tSTATUS\tNAME\tASSET\tLINK"}
-				for _, issue := range issues {
-					res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s", issue.GetId(), out.GetShortDate(issue.GetCreatedAt()), issue.GetSeverity(), issue.GetStatus(), issue.GetName(), issue.GetAsset().Name, issue.GetLinks().IssueOverview))
-				}
-				return res
-			})
-		}
 
 		return nil
 	},
@@ -194,6 +192,11 @@ ID                                      CREATED AT                SEVERITY  CATE
 		return nil
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
+		// Output JSON Schema if requested
+		if out.Schema(v3.IssueSummarized{}) {
+			return nil
+		}
+
 		issueID := args[0]
 		issue, err := escape.GetIssue(cmd.Context(), issueID)
 		if err != nil || issue == nil {
@@ -343,6 +346,11 @@ ID                                      CREATED AT                KIND          
 		return nil
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
+		// Output JSON Schema if requested
+		if out.Schema([]v3.ActivitySummarized{}) {
+			return nil
+		}
+
 		issueID := args[0]
 		activities, err := escape.ListIssueActivities(cmd.Context(), issueID)
 		if err != nil {

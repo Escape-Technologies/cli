@@ -18,7 +18,7 @@ import (
 // checks if the PortDetailed type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PortDetailed{}
 
-// PortDetailed Detailed information about a port
+// PortDetailed The port of the target
 type PortDetailed struct {
 	// The id of the port
 	Id string `json:"id"`
