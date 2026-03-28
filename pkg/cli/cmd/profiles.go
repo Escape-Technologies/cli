@@ -474,6 +474,51 @@ CONFIGURABLE SECTIONS:
 	},
 }
 
+var profileUpdateSchemaCmd = &cobra.Command{
+	Use:     "update-schema profile-id schema-id",
+	Aliases: []string{"us"},
+	Short:   "Update the schema attached to a profile",
+	Long: `Update Profile Schema - Replace the API Schema
+
+Replace the API schema (OpenAPI, Postman, GraphQL) attached to a profile.
+First upload the schema file using "upload schema", then pass the returned
+upload ID as the schema-id argument.
+
+WORKFLOW:
+  1. Upload the schema:    SCHEMA_ID=$(escape-cli upload schema < spec.json -o json | jq -r '.id')
+  2. Attach to profile:    escape-cli profiles update-schema <profile-id> $SCHEMA_ID`,
+	Example: `  # Upload and attach in one pipeline
+  SCHEMA_ID=$(escape-cli upload schema < openapi.json -o json | jq -r '.id')
+  escape-cli profiles update-schema <profile-id> $SCHEMA_ID
+
+  # Or step by step
+  escape-cli upload schema < openapi.json -o json
+  # Copy the returned ID
+  escape-cli profiles update-schema <profile-id> <schema-id>`,
+	Args: cobra.ExactArgs(2),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		if out.Schema(v3.GetProfile200Response{}) {
+			return nil
+		}
+
+		profileID := args[0]
+		schemaID := args[1]
+
+		profile, err := escape.UpdateProfileSchema(cmd.Context(), profileID, schemaID)
+		if err != nil {
+			return fmt.Errorf("failed to update schema: %w", err)
+		}
+
+		out.Table(profile, func() []string {
+			return []string{
+				"ID\tNAME\tCREATED AT\tASSET TYPE",
+				fmt.Sprintf("%s\t%s\t%s\t%s", profile.GetId(), profile.GetName(), profile.GetCreatedAt(), profile.Asset.GetType()),
+			}
+		})
+		return nil
+	},
+}
+
 var profileDeleteCmd = &cobra.Command{
 	Use:     "delete profile-id",
 	Aliases: []string{"del", "rm"},
@@ -503,6 +548,7 @@ func init() {
 		profileCreateGraphqlCmd,
 		profileUpdateCmd,
 		profileUpdateConfigurationCmd,
+		profileUpdateSchemaCmd,
 		profileDeleteCmd,
 	)
 	profileUpdateCmd.Flags().StringVar(&profileUpdateName, "name", "", "profile name")
