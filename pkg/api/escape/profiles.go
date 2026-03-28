@@ -177,6 +177,24 @@ func UpdateProfileConfiguration(ctx context.Context, profileID string, data []by
 	return result, nil
 }
 
+// UpdateProfileSchema updates the schema attached to a profile
+func UpdateProfileSchema(ctx context.Context, profileID string, schemaID string) (*v3.GetProfile200Response, error) {
+	client, err := newAPIV3Client()
+	if err != nil {
+		return nil, fmt.Errorf("unable to init client: %w", err)
+	}
+
+	payload := v3.UpdateProfileSchemaRequest{
+		SchemaId: schemaID,
+	}
+
+	profile, _, err := client.ProfilesAPI.UpdateProfileSchema(ctx, profileID).UpdateProfileSchemaRequest(payload).Execute()
+	if err != nil {
+		return nil, fmt.Errorf("api error: %w", err)
+	}
+	return profile, nil
+}
+
 // DeleteProfile deletes a profile by ID
 func DeleteProfile(ctx context.Context, profileID string) error {
 	client, err := newAPIV3Client()
