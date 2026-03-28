@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"os"
@@ -375,7 +376,7 @@ Alternatively, provide a JSON object via stdin with any combination of fields.`,
 		}
 
 		if len(payload) == 0 {
-			return fmt.Errorf("no updates provided: use flags or pipe JSON via stdin")
+			return errors.New("no updates provided: use flags or pipe JSON via stdin")
 		}
 
 		data, err := json.Marshal(payload)
@@ -456,7 +457,7 @@ CONFIGURABLE SECTIONS:
 			return fmt.Errorf("failed to read stdin: %w", err)
 		}
 		if len(b) == 0 {
-			return fmt.Errorf("no input provided: pipe JSON configuration via stdin")
+			return errors.New("no input provided: pipe JSON configuration via stdin")
 		}
 
 		var tmp map[string]interface{}
@@ -495,7 +496,7 @@ WORKFLOW:
   escape-cli upload schema < openapi.json -o json
   # Copy the returned ID
   escape-cli profiles update-schema <profile-id> <schema-id>`,
-	Args: cobra.ExactArgs(2),
+	Args: cobra.ExactArgs(2), //nolint:mnd
 	RunE: func(cmd *cobra.Command, args []string) error {
 		if out.Schema(v3.GetProfile200Response{}) {
 			return nil
