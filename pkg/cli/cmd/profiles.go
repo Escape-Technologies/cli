@@ -309,6 +309,168 @@ Create a new profile for testing GraphQL APIs. Provide configuration via JSON th
 	},
 }
 
+var profileUpdateCmd = &cobra.Command{
+	Use:     "update profile-id",
+	Aliases: []string{"u", "edit"},
+	Short:   "Update profile metadata",
+	Long: `Update Profile - Modify Name, Description, Cron Schedule
+
+Update a profile's metadata fields. Provide updates via JSON through stdin
+or use flags for individual fields.
+
+UPDATABLE FIELDS:
+  --name          Profile name
+  --description   Profile description
+  --cron          Cron schedule (e.g., "0 22 * * *")
+
+Alternatively, provide a JSON object via stdin with any combination of fields.`,
+	Example: `  # Update name via flag
+  escape-cli profiles update <profile-id> --name "New Profile Name"
+
+  # Update cron schedule
+  escape-cli profiles update <profile-id> --cron "0 6 * * 1"
+
+  # Update via JSON stdin
+  echo '{"name": "Updated Name", "cron": "0 22 * * *"}' | escape-cli profiles update <profile-id>`,
+	Args: cobra.ExactArgs(1),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		if out.Schema(v3.GetProfile200Response{}) {
+			return nil
+		}
+		if out.InputSchema(v3.UpdateProfileRequest{}) {
+			return nil
+		}
+
+		profileID := args[0]
+
+		var payload map[string]interface{}
+
+		// Check if stdin has data
+		stat, _ := os.Stdin.Stat()
+		if (stat.Mode() & os.ModeCharDevice) == 0 {
+			b, err := io.ReadAll(os.Stdin)
+			if err != nil {
+				return fmt.Errorf("failed to read stdin: %w", err)
+			}
+			if len(b) > 0 {
+				if err := json.Unmarshal(b, &payload); err != nil {
+					return fmt.Errorf("invalid JSON: %w", err)
+				}
+			}
+		}
+
+		if payload == nil {
+			payload = make(map[string]interface{})
+		}
+
+		// Flags override stdin values
+		if cmd.Flags().Changed("name") {
+			payload["name"] = profileUpdateName
+		}
+		if cmd.Flags().Changed("description") {
+			payload["description"] = profileUpdateDescription
+		}
+		if cmd.Flags().Changed("cron") {
+			payload["cron"] = profileUpdateCron
+		}
+
+		if len(payload) == 0 {
+			return fmt.Errorf("no updates provided: use flags or pipe JSON via stdin")
+		}
+
+		data, err := json.Marshal(payload)
+		if err != nil {
+			return fmt.Errorf("failed to marshal payload: %w", err)
+		}
+
+		profile, err := escape.UpdateProfile(cmd.Context(), profileID, data)
+		if err != nil {
+			return fmt.Errorf("failed to update profile: %w", err)
+		}
+
+		out.Table(profile, func() []string {
+			return []string{
+				"ID\tNAME\tCREATED AT\tASSET TYPE",
+				fmt.Sprintf("%s\t%s\t%s\t%s", profile.GetId(), profile.GetName(), profile.GetCreatedAt(), profile.Asset.GetType()),
+			}
+		})
+		return nil
+	},
+}
+
+var (
+	profileUpdateName        string
+	profileUpdateDescription string
+	profileUpdateCron        string
+)
+
+var profileUpdateConfigurationCmd = &cobra.Command{
+	Use:     "update-configuration profile-id",
+	Aliases: []string{"uc", "update-config"},
+	Short:   "Update profile configuration",
+	Long: `Update Profile Configuration - Modify Auth, Scope, and Scanner Settings
+
+Update a profile's scan configuration via JSON through stdin. The JSON must
+contain a "configuration" object with the fields to update.
+
+CONFIGURABLE SECTIONS:
+  authentication    - Users, credentials, browser login procedures
+  frontend_dast     - Crawling mode, agentic instructions, hotstart URLs, scope
+  scope             - Domain allowlist/blocklist, URL filtering
+  security_tests    - Enable/disable specific security checks
+  network           - Proxy and network settings
+
+Only provided fields are updated; omitted fields remain unchanged.`,
+	Example: `  # Update agentic crawling instructions
+  cat <<'EOF' | escape-cli profiles update-configuration <profile-id>
+  {
+    "configuration": {
+      "frontend_dast": {
+        "agentic_crawling": {
+          "enabled": true,
+          "instructions": "Navigate to Accounts, Policies, Claims, Billing sections."
+        }
+      }
+    }
+  }
+  EOF
+
+  # Update authentication
+  cat auth.json | escape-cli profiles update-configuration <profile-id>
+
+  # Update hotstart URLs
+  echo '{"configuration":{"frontend_dast":{"hotstart":["https://app.example.com/#/accounts"]}}}' | escape-cli profiles update-configuration <profile-id>`,
+	Args: cobra.ExactArgs(1),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		if out.InputSchema(v3.UpdateProfileConfigurationRequest{}) {
+			return nil
+		}
+
+		profileID := args[0]
+
+		b, err := io.ReadAll(os.Stdin)
+		if err != nil {
+			return fmt.Errorf("failed to read stdin: %w", err)
+		}
+		if len(b) == 0 {
+			return fmt.Errorf("no input provided: pipe JSON configuration via stdin")
+		}
+
+		var tmp map[string]interface{}
+		if err := json.Unmarshal(b, &tmp); err != nil {
+			return fmt.Errorf("invalid JSON: %w", err)
+		}
+
+		result, err := escape.UpdateProfileConfiguration(cmd.Context(), profileID, b)
+		if err != nil {
+			return fmt.Errorf("failed to update configuration: %w", err)
+		}
+
+		out.Print(result, "Configuration updated successfully")
+		return nil
+	},
+}
+
 var profileDeleteCmd = &cobra.Command{
 	Use:     "delete profile-id",
 	Aliases: []string{"del", "rm"},
@@ -336,8 +498,13 @@ func init() {
 		profileCreateRestCmd,
 		profileCreateWebappCmd,
 		profileCreateGraphqlCmd,
+		profileUpdateCmd,
+		profileUpdateConfigurationCmd,
 		profileDeleteCmd,
 	)
+	profileUpdateCmd.Flags().StringVar(&profileUpdateName, "name", "", "profile name")
+	profileUpdateCmd.Flags().StringVar(&profileUpdateDescription, "description", "", "profile description")
+	profileUpdateCmd.Flags().StringVar(&profileUpdateCron, "cron", "", "cron schedule (e.g., \"0 22 * * *\")")
 	profilesListCmd.Flags().Bool("all", false, "Show profiles for all asset types")
 	profilesListCmd.Flags().StringSliceVarP(&profileAssetIDs, "asset-id", "a", []string{}, "asset ID")
 	profilesListCmd.Flags().StringSliceVarP(&profileDomains, "domain", "d", []string{}, "domain")
