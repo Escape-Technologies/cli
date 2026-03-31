@@ -204,13 +204,14 @@ jobs:
       - name: Check secrets availability
         id: secrets
         run: |
-          if [ -n "${{ secrets.ESCAPE_API_KEY }}" ]; then
+          if [ -n "${{ secrets.E2E_API_KEY }}" ] && [ -n "${{ secrets.E2E_PROFILE_ID }}" ]; then
             echo "available=true" >> "$GITHUB_OUTPUT"
+          else
+            exit 1
           fi
 
       - name: Run Escape DAST scan
-        if: steps.secrets.outputs.available == 'true'
         uses: ./
         with:
-          profile_id: ${{ secrets.ESCAPE_PROFILE_ID }}
-          api_key: ${{ secrets.ESCAPE_API_KEY }}
+          profile_id: ${{ secrets.E2E_PROFILE_ID }}
+          api_key: ${{ secrets.E2E_API_KEY }}
