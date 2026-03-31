@@ -1,0 +1,28 @@
+name: E2E Tests
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+env:
+  GO_VERSION: "1.23.0"
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
+        with:
+          ref: ${{ github.head_ref || github.ref }}
+      - uses: actions/checkout@v6
+        if: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository }}
+      - uses: actions/setup-go@v5
+        with:
+          go-version: ${{ env.GO_VERSION }}
+      - name: Run E2E tests
+        env:
+          E2E_API_KEY: ${{ secrets.E2E_API_KEY }}
+        run: go test -tags e2e -timeout 10m -v ./e2e/...
