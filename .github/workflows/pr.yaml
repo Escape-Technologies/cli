@@ -133,3 +133,84 @@ jobs:
         env:
           E2E_API_KEY: ${{ secrets.E2E_API_KEY }}
         run: go test -tags e2e -timeout 10m -v ./e2e/...
+
+  # Action tests (actions.yml)
+  validate-action-definition:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify action.yml structure
+        run: |
+          python3 -c "
+          import yaml
+          with open('action.yml') as f:
+              data = yaml.safe_load(f)
+          for key in ['name', 'description', 'inputs', 'runs']:
+              assert key in data, f'Missing required key: {key}'
+          inputs = data['inputs']
+          for name in ['profile_id', 'api_key']:
+              assert name in inputs, f'Missing required input: {name}'
+              assert inputs[name].get('required') is True, f'Input {name} should be required'
+          assert inputs['watch']['default'] == 'false'
+          assert inputs['watch']['required'] is False
+          assert inputs['configuration_override']['required'] is False
+          assert inputs['schema']['required'] is False
+          print('action.yml is valid')
+          "
+
+  test-missing-profile-id:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run action without profile_id
+        id: run
+        continue-on-error: true
+        uses: ./
+        with:
+          api_key: "fake-key-for-testing"
+
+      - name: Assert failure
+        if: steps.run.outcome == 'success'
+        run: |
+          echo "Expected action to fail when profile_id is missing"
+          exit 1
+
+  test-missing-api-key:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run action without api_key
+        id: run
+        continue-on-error: true
+        uses: ./
+        with:
+          profile_id: "fake-profile-id"
+
+      - name: Assert failure
+        if: steps.run.outcome == 'success'
+        run: |
+          echo "Expected action to fail when api_key is missing"
+          exit 1
+
+  test-scan:
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check secrets availability
+        id: secrets
+        run: |
+          if [ -n "${{ secrets.ESCAPE_API_KEY }}" ]; then
+            echo "available=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Run Escape DAST scan
+        if: steps.secrets.outputs.available == 'true'
+        uses: ./
+        with:
+          profile_id: ${{ secrets.ESCAPE_PROFILE_ID }}
+          api_key: ${{ secrets.ESCAPE_API_KEY }}

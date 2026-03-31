@@ -1,0 +1,88 @@
+---
+name: "Escape - DAST"
+author: "Escape-Technologies"
+description: "Secure your application using Escape.tech"
+
+inputs:
+  profile_id:
+    description: "The id of the profile to scan"
+    required: true
+  api_key:
+    description: "Your escape api key"
+    required: true
+  configuration_override:
+    description: "Partial JSON configuration for the scan"
+    required: false
+  schema:
+    description: "The schema local path or publicly accessible URL. If provided, it will update the schema for the application"
+    required: false
+  watch:
+    description: "Wait until the scan ends and print the results"
+    required: false
+    default: "false"
+
+  # Deprecated
+  timeout:
+    description: "Maximum blocking time for a CI/CD run"
+    required: false
+    deprecationMessage: "Deprecated"
+  configuration_override_path:
+    description: "Path to JSON file containing a partial configuration for the scan"
+    required: false
+    deprecationMessage: "Deprecated, use configuration_override instead"
+  introspection_file:
+    description: "Path to the introspection response file"
+    required: false
+    deprecationMessage: "Deprecated, use schema instead"
+  schema_file:
+    description: "Path to the schema file"
+    required: false
+    deprecationMessage: "Deprecated, use schema instead"
+  fail_on_severities:
+    description: "A csv-delimited list of severities to fail on, can be HIGH, MEDIUM, LOW, INFO"
+    default: "HIGH"
+    required: false
+    deprecationMessage: "Deprecated"
+runs:
+  using: composite
+  steps:
+    - name: Escape scan
+      shell: bash
+      env:
+        ESCAPE_API_KEY: ${{ inputs.api_key }}
+        INPUT_PROFILE_ID: ${{ inputs.profile_id }}
+        ESCAPE_WATCH: ${{ inputs.watch }}
+        ESCAPE_CONFIGURATION_OVERRIDE: ${{ inputs.configuration_override }}
+        ESCAPE_SCHEMA: ${{ inputs.schema }}
+      run: |
+        set -euo pipefail
+        ESCAPE_CLI_IMAGE="docker.io/escapetech/cli:$(cat "$GITHUB_ACTION_PATH/version.txt")"
+        PROFILE_ID="${INPUT_PROFILE_ID:-}"
+        if [ -z "${PROFILE_ID}" ]; then
+          echo "profile_id is not set"
+          exit 1
+        fi
+        if [ -z "${ESCAPE_API_KEY}" ]; then
+          echo "api_key input is not set"
+          exit 1
+        fi
+        run_cli() {
+          docker run --rm -e ESCAPE_API_KEY "${ESCAPE_CLI_IMAGE}" "$@"
+        }
+        if [ -n "${ESCAPE_SCHEMA}" ]; then
+          echo "Updating schema"
+          run_cli profiles update-schema "${PROFILE_ID}" "${ESCAPE_SCHEMA}"
+        fi
+        args=(scans start "${PROFILE_ID}")
+        if [ "${ESCAPE_WATCH}" = "true" ]; then
+          args+=(--watch)
+        fi
+        if [ -n "${ESCAPE_CONFIGURATION_OVERRIDE}" ]; then
+          args+=(--override "${ESCAPE_CONFIGURATION_OVERRIDE}")
+        fi
+        echo "Running scan:"
+        printf 'escape-cli %q ' "${args[@]}"; echo
+        run_cli "${args[@]}"
+branding:
+  icon: "shield"
+  color: "white"
