@@ -39,5 +39,4 @@ jobs:
         with:
           profile_id: ${{ secrets.ESCAPE_PROFILE_ID }}
           api_key: ${{ secrets.ESCAPE_API_KEY }}
-          watch: "true"
 ```

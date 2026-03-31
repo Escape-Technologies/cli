@@ -20,6 +20,9 @@ inputs:
     description: "Wait until the scan ends and print the results"
     required: false
     default: "false"
+  cli_image:
+    description: "Override the CLI Docker image. Defaults to the released version."
+    required: false
 
   # Deprecated
   timeout:
@@ -54,9 +57,10 @@ runs:
         ESCAPE_WATCH: ${{ inputs.watch }}
         ESCAPE_CONFIGURATION_OVERRIDE: ${{ inputs.configuration_override }}
         ESCAPE_SCHEMA: ${{ inputs.schema }}
+        ESCAPE_CLI_IMAGE_OVERRIDE: ${{ inputs.cli_image }}
       run: |
         set -euo pipefail
-        ESCAPE_CLI_IMAGE="docker.io/escapetech/cli:$(cat "$GITHUB_ACTION_PATH/version.txt")"
+        ESCAPE_CLI_IMAGE="${ESCAPE_CLI_IMAGE_OVERRIDE:-docker.io/escapetech/cli:$(cat "$GITHUB_ACTION_PATH/version.txt")}"
         PROFILE_ID="${INPUT_PROFILE_ID:-}"
         if [ -z "${PROFILE_ID}" ]; then
           echo "profile_id is not set"
