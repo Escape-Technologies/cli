@@ -1,0 +1,95 @@
+name: GitHub Action Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+env:
+  GO_VERSION: "1.25.0"
+  CLI_IMAGE: escape-cli:pr-${{ github.sha }}
+
+jobs:
+  github-action-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: ${{ env.GO_VERSION }}
+
+      - uses: goreleaser/goreleaser-action@v6
+        with:
+          install-only: true
+
+      - name: Build CLI image
+        run: goreleaser release --snapshot --clean --skip=archive
+
+      - name: Tag image for action
+        run: docker tag goreleaser.ko.local:latest "${CLI_IMAGE}"
+
+      - name: Verify action.yml structure
+        run: |
+          python3 -c "
+          import yaml
+          with open('action.yml') as f:
+              data = yaml.safe_load(f)
+          for key in ['name', 'description', 'inputs', 'runs']:
+              assert key in data, f'Missing required key: {key}'
+          inputs = data['inputs']
+          for name in ['profile_id', 'api_key']:
+              assert name in inputs, f'Missing required input: {name}'
+              assert inputs[name].get('required') is True, f'Input {name} should be required'
+          assert inputs['watch']['default'] == 'false'
+          assert inputs['watch']['required'] is False
+          assert inputs['configuration_override']['required'] is False
+          assert inputs['schema']['required'] is False
+          print('action.yml is valid')
+          "
+
+      - name: Run action without profile_id
+        id: missing_profile
+        continue-on-error: true
+        uses: ./
+        with:
+          api_key: "fake-key-for-testing"
+          cli_image: ${{ env.CLI_IMAGE }}
+
+      - name: Assert failure when profile_id is missing
+        if: steps.missing_profile.outcome == 'success'
+        run: |
+          echo "Expected action to fail when profile_id is missing"
+          exit 1
+
+      - name: Run action without api_key
+        id: missing_api_key
+        continue-on-error: true
+        uses: ./
+        with:
+          profile_id: "fake-profile-id"
+          cli_image: ${{ env.CLI_IMAGE }}
+
+      - name: Assert failure when api_key is missing
+        if: steps.missing_api_key.outcome == 'success'
+        run: |
+          echo "Expected action to fail when api_key is missing"
+          exit 1
+
+      - name: Require E2E secrets
+        if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
+        run: |
+          if [ -z "${{ secrets.E2E_API_KEY }}" ] || [ -z "${{ secrets.E2E_PROFILE_ID }}" ]; then
+            echo "::error::Configure repository secrets E2E_API_KEY and E2E_PROFILE_ID for the Escape DAST scan."
+            exit 1
+          fi
+
+      - name: Run Escape DAST scan
+        if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
+        uses: ./
+        with:
+          profile_id: ${{ secrets.E2E_PROFILE_ID }}
+          api_key: ${{ secrets.E2E_API_KEY }}
+          cli_image: ${{ env.CLI_IMAGE }}

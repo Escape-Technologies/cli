@@ -5,10 +5,15 @@
 exec escape audit list -o json
 json-valid
 
-# 9.4 Events list
-exec escape events list -o json
+# 9.4 Events list (warning only)
+exec escape events list --levels WARNING -o json
 json-valid
 
 # 9.8 Problems list
 exec escape problems list -o json
 json-valid
+
+-- asset.json --
+{"asset_class": "FRONTEND", "asset_type": "WEBAPP", "url": "https://e2e-test-audit-events.example.com"}
+-- profile.json.tmpl --
+{"assetId": "${ASSET_ID}", "name": "e2e-test-audit-events-profile", "start": false}
