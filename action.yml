@@ -1,7 +1,7 @@
 ---
-name: "Escape - DAST"
-author: "Escape-Technologies"
-description: "Secure your application using Escape.tech"
+name: "Escape CLI"
+author: "Escape Technologies"
+description: "Run the Escape CLI in GitHub Actions."
 
 inputs:
   profile_id:
