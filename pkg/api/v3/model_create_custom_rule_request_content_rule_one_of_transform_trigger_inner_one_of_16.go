@@ -20,12 +20,12 @@ var _ MappedNullable = &CreateCustomRuleRequestContentRuleOneOfTransformTriggerI
 
 // CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf16 struct for CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf16
 type CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf16 struct {
-	UseExtraction        *bool                `json:"use_extraction,omitempty"`
-	Is                   interface{}          `json:"is,omitempty"`
-	IsNot                interface{}          `json:"is_not,omitempty"`
-	In                   []interface{}        `json:"in,omitempty"`
-	Jq                   *string              `json:"jq,omitempty"`
-	If                   ENUMRESPONSEBODYJSON `json:"if"`
+	UseExtraction NullableBool `json:"use_extraction,omitempty"`
+	Is interface{} `json:"is,omitempty"`
+	IsNot interface{} `json:"is_not,omitempty"`
+	In []interface{} `json:"in,omitempty"`
+	Jq NullableString `json:"jq,omitempty"`
+	If ENUMRESPONSEBODYJSON `json:"if"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -49,36 +49,46 @@ func NewCreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf16WithD
 	return &this
 }
 
-// GetUseExtraction returns the UseExtraction field value if set, zero value otherwise.
+// GetUseExtraction returns the UseExtraction field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf16) GetUseExtraction() bool {
-	if o == nil || IsNil(o.UseExtraction) {
+	if o == nil || IsNil(o.UseExtraction.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.UseExtraction
+	return *o.UseExtraction.Get()
 }
 
 // GetUseExtractionOk returns a tuple with the UseExtraction field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf16) GetUseExtractionOk() (*bool, bool) {
-	if o == nil || IsNil(o.UseExtraction) {
+	if o == nil {
 		return nil, false
 	}
-	return o.UseExtraction, true
+	return o.UseExtraction.Get(), o.UseExtraction.IsSet()
 }
 
 // HasUseExtraction returns a boolean if a field has been set.
 func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf16) HasUseExtraction() bool {
-	if o != nil && !IsNil(o.UseExtraction) {
+	if o != nil && o.UseExtraction.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetUseExtraction gets a reference to the given bool and assigns it to the UseExtraction field.
+// SetUseExtraction gets a reference to the given NullableBool and assigns it to the UseExtraction field.
 func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf16) SetUseExtraction(v bool) {
-	o.UseExtraction = &v
+	o.UseExtraction.Set(&v)
+}
+// SetUseExtractionNil sets the value for UseExtraction to be an explicit nil
+func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf16) SetUseExtractionNil() {
+	o.UseExtraction.Set(nil)
+}
+
+// UnsetUseExtraction ensures that no value is present for UseExtraction, not even an explicit nil
+func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf16) UnsetUseExtraction() {
+	o.UseExtraction.Unset()
 }
 
 // GetIs returns the Is field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -147,9 +157,9 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf16) Se
 	o.IsNot = v
 }
 
-// GetIn returns the In field value if set, zero value otherwise.
+// GetIn returns the In field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf16) GetIn() []interface{} {
-	if o == nil || IsNil(o.In) {
+	if o == nil {
 		var ret []interface{}
 		return ret
 	}
@@ -158,6 +168,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf16) Ge
 
 // GetInOk returns a tuple with the In field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf16) GetInOk() ([]interface{}, bool) {
 	if o == nil || IsNil(o.In) {
 		return nil, false
@@ -179,36 +190,46 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf16) Se
 	o.In = v
 }
 
-// GetJq returns the Jq field value if set, zero value otherwise.
+// GetJq returns the Jq field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf16) GetJq() string {
-	if o == nil || IsNil(o.Jq) {
+	if o == nil || IsNil(o.Jq.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Jq
+	return *o.Jq.Get()
 }
 
 // GetJqOk returns a tuple with the Jq field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf16) GetJqOk() (*string, bool) {
-	if o == nil || IsNil(o.Jq) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Jq, true
+	return o.Jq.Get(), o.Jq.IsSet()
 }
 
 // HasJq returns a boolean if a field has been set.
 func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf16) HasJq() bool {
-	if o != nil && !IsNil(o.Jq) {
+	if o != nil && o.Jq.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetJq gets a reference to the given string and assigns it to the Jq field.
+// SetJq gets a reference to the given NullableString and assigns it to the Jq field.
 func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf16) SetJq(v string) {
-	o.Jq = &v
+	o.Jq.Set(&v)
+}
+// SetJqNil sets the value for Jq to be an explicit nil
+func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf16) SetJqNil() {
+	o.Jq.Set(nil)
+}
+
+// UnsetJq ensures that no value is present for Jq, not even an explicit nil
+func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf16) UnsetJq() {
+	o.Jq.Unset()
 }
 
 // GetIf returns the If field value
@@ -236,7 +257,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf16) Se
 }
 
 func (o CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf16) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -245,8 +266,8 @@ func (o CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf16) Mar
 
 func (o CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf16) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.UseExtraction) {
-		toSerialize["use_extraction"] = o.UseExtraction
+	if o.UseExtraction.IsSet() {
+		toSerialize["use_extraction"] = o.UseExtraction.Get()
 	}
 	if o.Is != nil {
 		toSerialize["is"] = o.Is
@@ -254,11 +275,11 @@ func (o CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf16) ToM
 	if o.IsNot != nil {
 		toSerialize["is_not"] = o.IsNot
 	}
-	if !IsNil(o.In) {
+	if o.In != nil {
 		toSerialize["in"] = o.In
 	}
-	if !IsNil(o.Jq) {
-		toSerialize["jq"] = o.Jq
+	if o.Jq.IsSet() {
+		toSerialize["jq"] = o.Jq.Get()
 	}
 	toSerialize["if"] = o.If
 
@@ -282,10 +303,10 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf16) Un
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -351,3 +372,5 @@ func (v *NullableCreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOne
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

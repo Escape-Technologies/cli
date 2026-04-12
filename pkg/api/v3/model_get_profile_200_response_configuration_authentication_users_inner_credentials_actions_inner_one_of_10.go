@@ -20,15 +20,15 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationAuthenticationUsersInn
 
 // GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10 struct for GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10
 type GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10 struct {
-	Action                ENUMFILLMAILTOTP `json:"action"`
-	AllowFailure          *bool            `json:"allow_failure,omitempty"`
-	EmailAddress          string           `json:"email_address"`
-	Locator               string           `json:"locator"`
-	OneByOne              *bool            `json:"one_by_one,omitempty"`
-	AutoSubmit            *bool            `json:"auto_submit,omitempty"`
-	Timeout               *float32         `json:"timeout,omitempty"`
-	SelectFirstIfMultiple *bool            `json:"select_first_if_multiple,omitempty"`
-	AdditionalProperties  map[string]interface{}
+	Action ENUMFILLMAILTOTP `json:"action"`
+	AllowFailure NullableBool `json:"allow_failure,omitempty"`
+	EmailAddress string `json:"email_address"`
+	Locator string `json:"locator"`
+	OneByOne NullableBool `json:"one_by_one,omitempty"`
+	AutoSubmit NullableBool `json:"auto_submit,omitempty"`
+	Timeout NullableFloat32 `json:"timeout,omitempty"`
+	SelectFirstIfMultiple NullableBool `json:"select_first_if_multiple,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10 GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10
@@ -77,36 +77,46 @@ func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsAc
 	o.Action = v
 }
 
-// GetAllowFailure returns the AllowFailure field value if set, zero value otherwise.
+// GetAllowFailure returns the AllowFailure field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) GetAllowFailure() bool {
-	if o == nil || IsNil(o.AllowFailure) {
+	if o == nil || IsNil(o.AllowFailure.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.AllowFailure
+	return *o.AllowFailure.Get()
 }
 
 // GetAllowFailureOk returns a tuple with the AllowFailure field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) GetAllowFailureOk() (*bool, bool) {
-	if o == nil || IsNil(o.AllowFailure) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AllowFailure, true
+	return o.AllowFailure.Get(), o.AllowFailure.IsSet()
 }
 
 // HasAllowFailure returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) HasAllowFailure() bool {
-	if o != nil && !IsNil(o.AllowFailure) {
+	if o != nil && o.AllowFailure.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAllowFailure gets a reference to the given bool and assigns it to the AllowFailure field.
+// SetAllowFailure gets a reference to the given NullableBool and assigns it to the AllowFailure field.
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) SetAllowFailure(v bool) {
-	o.AllowFailure = &v
+	o.AllowFailure.Set(&v)
+}
+// SetAllowFailureNil sets the value for AllowFailure to be an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) SetAllowFailureNil() {
+	o.AllowFailure.Set(nil)
+}
+
+// UnsetAllowFailure ensures that no value is present for AllowFailure, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) UnsetAllowFailure() {
+	o.AllowFailure.Unset()
 }
 
 // GetEmailAddress returns the EmailAddress field value
@@ -157,136 +167,176 @@ func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsAc
 	o.Locator = v
 }
 
-// GetOneByOne returns the OneByOne field value if set, zero value otherwise.
+// GetOneByOne returns the OneByOne field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) GetOneByOne() bool {
-	if o == nil || IsNil(o.OneByOne) {
+	if o == nil || IsNil(o.OneByOne.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.OneByOne
+	return *o.OneByOne.Get()
 }
 
 // GetOneByOneOk returns a tuple with the OneByOne field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) GetOneByOneOk() (*bool, bool) {
-	if o == nil || IsNil(o.OneByOne) {
+	if o == nil {
 		return nil, false
 	}
-	return o.OneByOne, true
+	return o.OneByOne.Get(), o.OneByOne.IsSet()
 }
 
 // HasOneByOne returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) HasOneByOne() bool {
-	if o != nil && !IsNil(o.OneByOne) {
+	if o != nil && o.OneByOne.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOneByOne gets a reference to the given bool and assigns it to the OneByOne field.
+// SetOneByOne gets a reference to the given NullableBool and assigns it to the OneByOne field.
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) SetOneByOne(v bool) {
-	o.OneByOne = &v
+	o.OneByOne.Set(&v)
+}
+// SetOneByOneNil sets the value for OneByOne to be an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) SetOneByOneNil() {
+	o.OneByOne.Set(nil)
 }
 
-// GetAutoSubmit returns the AutoSubmit field value if set, zero value otherwise.
+// UnsetOneByOne ensures that no value is present for OneByOne, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) UnsetOneByOne() {
+	o.OneByOne.Unset()
+}
+
+// GetAutoSubmit returns the AutoSubmit field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) GetAutoSubmit() bool {
-	if o == nil || IsNil(o.AutoSubmit) {
+	if o == nil || IsNil(o.AutoSubmit.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.AutoSubmit
+	return *o.AutoSubmit.Get()
 }
 
 // GetAutoSubmitOk returns a tuple with the AutoSubmit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) GetAutoSubmitOk() (*bool, bool) {
-	if o == nil || IsNil(o.AutoSubmit) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AutoSubmit, true
+	return o.AutoSubmit.Get(), o.AutoSubmit.IsSet()
 }
 
 // HasAutoSubmit returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) HasAutoSubmit() bool {
-	if o != nil && !IsNil(o.AutoSubmit) {
+	if o != nil && o.AutoSubmit.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAutoSubmit gets a reference to the given bool and assigns it to the AutoSubmit field.
+// SetAutoSubmit gets a reference to the given NullableBool and assigns it to the AutoSubmit field.
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) SetAutoSubmit(v bool) {
-	o.AutoSubmit = &v
+	o.AutoSubmit.Set(&v)
+}
+// SetAutoSubmitNil sets the value for AutoSubmit to be an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) SetAutoSubmitNil() {
+	o.AutoSubmit.Set(nil)
 }
 
-// GetTimeout returns the Timeout field value if set, zero value otherwise.
+// UnsetAutoSubmit ensures that no value is present for AutoSubmit, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) UnsetAutoSubmit() {
+	o.AutoSubmit.Unset()
+}
+
+// GetTimeout returns the Timeout field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) GetTimeout() float32 {
-	if o == nil || IsNil(o.Timeout) {
+	if o == nil || IsNil(o.Timeout.Get()) {
 		var ret float32
 		return ret
 	}
-	return *o.Timeout
+	return *o.Timeout.Get()
 }
 
 // GetTimeoutOk returns a tuple with the Timeout field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) GetTimeoutOk() (*float32, bool) {
-	if o == nil || IsNil(o.Timeout) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Timeout, true
+	return o.Timeout.Get(), o.Timeout.IsSet()
 }
 
 // HasTimeout returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) HasTimeout() bool {
-	if o != nil && !IsNil(o.Timeout) {
+	if o != nil && o.Timeout.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetTimeout gets a reference to the given float32 and assigns it to the Timeout field.
+// SetTimeout gets a reference to the given NullableFloat32 and assigns it to the Timeout field.
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) SetTimeout(v float32) {
-	o.Timeout = &v
+	o.Timeout.Set(&v)
+}
+// SetTimeoutNil sets the value for Timeout to be an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) SetTimeoutNil() {
+	o.Timeout.Set(nil)
 }
 
-// GetSelectFirstIfMultiple returns the SelectFirstIfMultiple field value if set, zero value otherwise.
+// UnsetTimeout ensures that no value is present for Timeout, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) UnsetTimeout() {
+	o.Timeout.Unset()
+}
+
+// GetSelectFirstIfMultiple returns the SelectFirstIfMultiple field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) GetSelectFirstIfMultiple() bool {
-	if o == nil || IsNil(o.SelectFirstIfMultiple) {
+	if o == nil || IsNil(o.SelectFirstIfMultiple.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.SelectFirstIfMultiple
+	return *o.SelectFirstIfMultiple.Get()
 }
 
 // GetSelectFirstIfMultipleOk returns a tuple with the SelectFirstIfMultiple field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) GetSelectFirstIfMultipleOk() (*bool, bool) {
-	if o == nil || IsNil(o.SelectFirstIfMultiple) {
+	if o == nil {
 		return nil, false
 	}
-	return o.SelectFirstIfMultiple, true
+	return o.SelectFirstIfMultiple.Get(), o.SelectFirstIfMultiple.IsSet()
 }
 
 // HasSelectFirstIfMultiple returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) HasSelectFirstIfMultiple() bool {
-	if o != nil && !IsNil(o.SelectFirstIfMultiple) {
+	if o != nil && o.SelectFirstIfMultiple.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSelectFirstIfMultiple gets a reference to the given bool and assigns it to the SelectFirstIfMultiple field.
+// SetSelectFirstIfMultiple gets a reference to the given NullableBool and assigns it to the SelectFirstIfMultiple field.
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) SetSelectFirstIfMultiple(v bool) {
-	o.SelectFirstIfMultiple = &v
+	o.SelectFirstIfMultiple.Set(&v)
+}
+// SetSelectFirstIfMultipleNil sets the value for SelectFirstIfMultiple to be an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) SetSelectFirstIfMultipleNil() {
+	o.SelectFirstIfMultiple.Set(nil)
+}
+
+// UnsetSelectFirstIfMultiple ensures that no value is present for SelectFirstIfMultiple, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) UnsetSelectFirstIfMultiple() {
+	o.SelectFirstIfMultiple.Unset()
 }
 
 func (o GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -296,22 +346,22 @@ func (o GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsAct
 func (o GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["action"] = o.Action
-	if !IsNil(o.AllowFailure) {
-		toSerialize["allow_failure"] = o.AllowFailure
+	if o.AllowFailure.IsSet() {
+		toSerialize["allow_failure"] = o.AllowFailure.Get()
 	}
 	toSerialize["email_address"] = o.EmailAddress
 	toSerialize["locator"] = o.Locator
-	if !IsNil(o.OneByOne) {
-		toSerialize["one_by_one"] = o.OneByOne
+	if o.OneByOne.IsSet() {
+		toSerialize["one_by_one"] = o.OneByOne.Get()
 	}
-	if !IsNil(o.AutoSubmit) {
-		toSerialize["auto_submit"] = o.AutoSubmit
+	if o.AutoSubmit.IsSet() {
+		toSerialize["auto_submit"] = o.AutoSubmit.Get()
 	}
-	if !IsNil(o.Timeout) {
-		toSerialize["timeout"] = o.Timeout
+	if o.Timeout.IsSet() {
+		toSerialize["timeout"] = o.Timeout.Get()
 	}
-	if !IsNil(o.SelectFirstIfMultiple) {
-		toSerialize["select_first_if_multiple"] = o.SelectFirstIfMultiple
+	if o.SelectFirstIfMultiple.IsSet() {
+		toSerialize["select_first_if_multiple"] = o.SelectFirstIfMultiple.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -336,10 +386,10 @@ func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsAc
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -407,3 +457,5 @@ func (v *NullableGetProfile200ResponseConfigurationAuthenticationUsersInnerCrede
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

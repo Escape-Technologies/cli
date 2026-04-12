@@ -12,8 +12,8 @@ package v3
 
 import (
 	"encoding/json"
-	"fmt"
 	"time"
+	"fmt"
 )
 
 // checks if the CreateRole200Response type satisfies the MappedNullable interface at compile time
@@ -26,11 +26,11 @@ type CreateRole200Response struct {
 	// The name of the role
 	Name string `json:"name"`
 	// The permissions of the role
-	Permissions []ENUMPROPERTIESPERMISSIONSITEMS `json:"permissions"`
+	Permissions []ENUMITEMSPROPERTIESPERMISSIONSITEMS `json:"permissions"`
 	// The date and time the role was created
 	CreatedAt time.Time `json:"createdAt"`
 	// The bindings of the role
-	Bindings             []CreateProject200ResponseBindingsInner `json:"bindings"`
+	Bindings []CreateProject200ResponseBindingsInner `json:"bindings"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -40,7 +40,7 @@ type _CreateRole200Response CreateRole200Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateRole200Response(id string, name string, permissions []ENUMPROPERTIESPERMISSIONSITEMS, createdAt time.Time, bindings []CreateProject200ResponseBindingsInner) *CreateRole200Response {
+func NewCreateRole200Response(id string, name string, permissions []ENUMITEMSPROPERTIESPERMISSIONSITEMS, createdAt time.Time, bindings []CreateProject200ResponseBindingsInner) *CreateRole200Response {
 	this := CreateRole200Response{}
 	this.Id = id
 	this.Name = name
@@ -107,9 +107,9 @@ func (o *CreateRole200Response) SetName(v string) {
 }
 
 // GetPermissions returns the Permissions field value
-func (o *CreateRole200Response) GetPermissions() []ENUMPROPERTIESPERMISSIONSITEMS {
+func (o *CreateRole200Response) GetPermissions() []ENUMITEMSPROPERTIESPERMISSIONSITEMS {
 	if o == nil {
-		var ret []ENUMPROPERTIESPERMISSIONSITEMS
+		var ret []ENUMITEMSPROPERTIESPERMISSIONSITEMS
 		return ret
 	}
 
@@ -118,7 +118,7 @@ func (o *CreateRole200Response) GetPermissions() []ENUMPROPERTIESPERMISSIONSITEM
 
 // GetPermissionsOk returns a tuple with the Permissions field value
 // and a boolean to check if the value has been set.
-func (o *CreateRole200Response) GetPermissionsOk() ([]ENUMPROPERTIESPERMISSIONSITEMS, bool) {
+func (o *CreateRole200Response) GetPermissionsOk() ([]ENUMITEMSPROPERTIESPERMISSIONSITEMS, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -126,7 +126,7 @@ func (o *CreateRole200Response) GetPermissionsOk() ([]ENUMPROPERTIESPERMISSIONSI
 }
 
 // SetPermissions sets field value
-func (o *CreateRole200Response) SetPermissions(v []ENUMPROPERTIESPERMISSIONSITEMS) {
+func (o *CreateRole200Response) SetPermissions(v []ENUMITEMSPROPERTIESPERMISSIONSITEMS) {
 	o.Permissions = v
 }
 
@@ -179,7 +179,7 @@ func (o *CreateRole200Response) SetBindings(v []CreateProject200ResponseBindings
 }
 
 func (o CreateRole200Response) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -218,10 +218,10 @@ func (o *CreateRole200Response) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -286,3 +286,5 @@ func (v *NullableCreateRole200Response) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

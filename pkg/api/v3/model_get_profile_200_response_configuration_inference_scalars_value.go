@@ -19,18 +19,18 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationInferenceScalarsValue{
 
 // GetProfile200ResponseConfigurationInferenceScalarsValue struct for GetProfile200ResponseConfigurationInferenceScalarsValue
 type GetProfile200ResponseConfigurationInferenceScalarsValue struct {
-	Names                []string                                                                                                    `json:"names,omitempty"`
-	IgnoredNames         []string                                                                                                    `json:"ignored_names,omitempty"`
-	Description          *string                                                                                                     `json:"description,omitempty"`
-	Pattern              *string                                                                                                     `json:"pattern,omitempty"`
-	IgnoredPattern       *string                                                                                                     `json:"ignored_pattern,omitempty"`
-	Examples             []string                                                                                                    `json:"examples,omitempty"`
-	Parents              []ENUMPROPERTIESCONFIGURATIONPROPERTIESINFERENCEPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESPARENTSITEMS `json:"parents,omitempty"`
-	Sensitivity          *ENUMPROPERTIESCONFIGURATIONPROPERTIESINFERENCEPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESSENSITIVITY   `json:"sensitivity,omitempty"`
-	Strategy             *ENUMPROPERTIESCONFIGURATIONPROPERTIESINFERENCEPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESSTRATEGY      `json:"strategy,omitempty"`
-	RaiseOnCommit        *bool                                                                                                       `json:"raise_on_commit,omitempty"`
-	RaiseOnExposure      *bool                                                                                                       `json:"raise_on_exposure,omitempty"`
-	IsSourceable         *bool                                                                                                       `json:"is_sourceable,omitempty"`
+	Names []string `json:"names,omitempty"`
+	IgnoredNames []string `json:"ignored_names,omitempty"`
+	Description NullableString `json:"description,omitempty"`
+	Pattern NullableString `json:"pattern,omitempty"`
+	IgnoredPattern NullableString `json:"ignored_pattern,omitempty"`
+	Examples []string `json:"examples,omitempty"`
+	Parents []ENUMPROPERTIESCONFIGURATIONPROPERTIESINFERENCEPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESPARENTSITEMS `json:"parents,omitempty"`
+	Sensitivity NullableENUMPROPERTIESCONFIGURATIONPROPERTIESINFERENCEPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESSENSITIVITY `json:"sensitivity,omitempty"`
+	Strategy NullableENUMPROPERTIESCONFIGURATIONPROPERTIESINFERENCEPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESSTRATEGY `json:"strategy,omitempty"`
+	RaiseOnCommit NullableBool `json:"raise_on_commit,omitempty"`
+	RaiseOnExposure NullableBool `json:"raise_on_exposure,omitempty"`
+	IsSourceable NullableBool `json:"is_sourceable,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -53,9 +53,9 @@ func NewGetProfile200ResponseConfigurationInferenceScalarsValueWithDefaults() *G
 	return &this
 }
 
-// GetNames returns the Names field value if set, zero value otherwise.
+// GetNames returns the Names field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) GetNames() []string {
-	if o == nil || IsNil(o.Names) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -64,6 +64,7 @@ func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) GetNames() []s
 
 // GetNamesOk returns a tuple with the Names field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) GetNamesOk() ([]string, bool) {
 	if o == nil || IsNil(o.Names) {
 		return nil, false
@@ -85,9 +86,9 @@ func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) SetNames(v []s
 	o.Names = v
 }
 
-// GetIgnoredNames returns the IgnoredNames field value if set, zero value otherwise.
+// GetIgnoredNames returns the IgnoredNames field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) GetIgnoredNames() []string {
-	if o == nil || IsNil(o.IgnoredNames) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -96,6 +97,7 @@ func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) GetIgnoredName
 
 // GetIgnoredNamesOk returns a tuple with the IgnoredNames field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) GetIgnoredNamesOk() ([]string, bool) {
 	if o == nil || IsNil(o.IgnoredNames) {
 		return nil, false
@@ -117,105 +119,135 @@ func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) SetIgnoredName
 	o.IgnoredNames = v
 }
 
-// GetDescription returns the Description field value if set, zero value otherwise.
+// GetDescription returns the Description field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) GetDescription() string {
-	if o == nil || IsNil(o.Description) {
+	if o == nil || IsNil(o.Description.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Description
+	return *o.Description.Get()
 }
 
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) GetDescriptionOk() (*string, bool) {
-	if o == nil || IsNil(o.Description) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Description, true
+	return o.Description.Get(), o.Description.IsSet()
 }
 
 // HasDescription returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) HasDescription() bool {
-	if o != nil && !IsNil(o.Description) {
+	if o != nil && o.Description.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetDescription gets a reference to the given string and assigns it to the Description field.
+// SetDescription gets a reference to the given NullableString and assigns it to the Description field.
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) SetDescription(v string) {
-	o.Description = &v
+	o.Description.Set(&v)
+}
+// SetDescriptionNil sets the value for Description to be an explicit nil
+func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) SetDescriptionNil() {
+	o.Description.Set(nil)
 }
 
-// GetPattern returns the Pattern field value if set, zero value otherwise.
+// UnsetDescription ensures that no value is present for Description, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) UnsetDescription() {
+	o.Description.Unset()
+}
+
+// GetPattern returns the Pattern field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) GetPattern() string {
-	if o == nil || IsNil(o.Pattern) {
+	if o == nil || IsNil(o.Pattern.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Pattern
+	return *o.Pattern.Get()
 }
 
 // GetPatternOk returns a tuple with the Pattern field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) GetPatternOk() (*string, bool) {
-	if o == nil || IsNil(o.Pattern) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Pattern, true
+	return o.Pattern.Get(), o.Pattern.IsSet()
 }
 
 // HasPattern returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) HasPattern() bool {
-	if o != nil && !IsNil(o.Pattern) {
+	if o != nil && o.Pattern.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPattern gets a reference to the given string and assigns it to the Pattern field.
+// SetPattern gets a reference to the given NullableString and assigns it to the Pattern field.
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) SetPattern(v string) {
-	o.Pattern = &v
+	o.Pattern.Set(&v)
+}
+// SetPatternNil sets the value for Pattern to be an explicit nil
+func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) SetPatternNil() {
+	o.Pattern.Set(nil)
 }
 
-// GetIgnoredPattern returns the IgnoredPattern field value if set, zero value otherwise.
+// UnsetPattern ensures that no value is present for Pattern, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) UnsetPattern() {
+	o.Pattern.Unset()
+}
+
+// GetIgnoredPattern returns the IgnoredPattern field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) GetIgnoredPattern() string {
-	if o == nil || IsNil(o.IgnoredPattern) {
+	if o == nil || IsNil(o.IgnoredPattern.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.IgnoredPattern
+	return *o.IgnoredPattern.Get()
 }
 
 // GetIgnoredPatternOk returns a tuple with the IgnoredPattern field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) GetIgnoredPatternOk() (*string, bool) {
-	if o == nil || IsNil(o.IgnoredPattern) {
+	if o == nil {
 		return nil, false
 	}
-	return o.IgnoredPattern, true
+	return o.IgnoredPattern.Get(), o.IgnoredPattern.IsSet()
 }
 
 // HasIgnoredPattern returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) HasIgnoredPattern() bool {
-	if o != nil && !IsNil(o.IgnoredPattern) {
+	if o != nil && o.IgnoredPattern.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetIgnoredPattern gets a reference to the given string and assigns it to the IgnoredPattern field.
+// SetIgnoredPattern gets a reference to the given NullableString and assigns it to the IgnoredPattern field.
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) SetIgnoredPattern(v string) {
-	o.IgnoredPattern = &v
+	o.IgnoredPattern.Set(&v)
+}
+// SetIgnoredPatternNil sets the value for IgnoredPattern to be an explicit nil
+func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) SetIgnoredPatternNil() {
+	o.IgnoredPattern.Set(nil)
 }
 
-// GetExamples returns the Examples field value if set, zero value otherwise.
+// UnsetIgnoredPattern ensures that no value is present for IgnoredPattern, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) UnsetIgnoredPattern() {
+	o.IgnoredPattern.Unset()
+}
+
+// GetExamples returns the Examples field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) GetExamples() []string {
-	if o == nil || IsNil(o.Examples) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -224,6 +256,7 @@ func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) GetExamples() 
 
 // GetExamplesOk returns a tuple with the Examples field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) GetExamplesOk() ([]string, bool) {
 	if o == nil || IsNil(o.Examples) {
 		return nil, false
@@ -245,9 +278,9 @@ func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) SetExamples(v 
 	o.Examples = v
 }
 
-// GetParents returns the Parents field value if set, zero value otherwise.
+// GetParents returns the Parents field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) GetParents() []ENUMPROPERTIESCONFIGURATIONPROPERTIESINFERENCEPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESPARENTSITEMS {
-	if o == nil || IsNil(o.Parents) {
+	if o == nil {
 		var ret []ENUMPROPERTIESCONFIGURATIONPROPERTIESINFERENCEPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESPARENTSITEMS
 		return ret
 	}
@@ -256,6 +289,7 @@ func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) GetParents() [
 
 // GetParentsOk returns a tuple with the Parents field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) GetParentsOk() ([]ENUMPROPERTIESCONFIGURATIONPROPERTIESINFERENCEPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESPARENTSITEMS, bool) {
 	if o == nil || IsNil(o.Parents) {
 		return nil, false
@@ -277,168 +311,218 @@ func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) SetParents(v [
 	o.Parents = v
 }
 
-// GetSensitivity returns the Sensitivity field value if set, zero value otherwise.
+// GetSensitivity returns the Sensitivity field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) GetSensitivity() ENUMPROPERTIESCONFIGURATIONPROPERTIESINFERENCEPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESSENSITIVITY {
-	if o == nil || IsNil(o.Sensitivity) {
+	if o == nil || IsNil(o.Sensitivity.Get()) {
 		var ret ENUMPROPERTIESCONFIGURATIONPROPERTIESINFERENCEPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESSENSITIVITY
 		return ret
 	}
-	return *o.Sensitivity
+	return *o.Sensitivity.Get()
 }
 
 // GetSensitivityOk returns a tuple with the Sensitivity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) GetSensitivityOk() (*ENUMPROPERTIESCONFIGURATIONPROPERTIESINFERENCEPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESSENSITIVITY, bool) {
-	if o == nil || IsNil(o.Sensitivity) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Sensitivity, true
+	return o.Sensitivity.Get(), o.Sensitivity.IsSet()
 }
 
 // HasSensitivity returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) HasSensitivity() bool {
-	if o != nil && !IsNil(o.Sensitivity) {
+	if o != nil && o.Sensitivity.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSensitivity gets a reference to the given ENUMPROPERTIESCONFIGURATIONPROPERTIESINFERENCEPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESSENSITIVITY and assigns it to the Sensitivity field.
+// SetSensitivity gets a reference to the given NullableENUMPROPERTIESCONFIGURATIONPROPERTIESINFERENCEPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESSENSITIVITY and assigns it to the Sensitivity field.
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) SetSensitivity(v ENUMPROPERTIESCONFIGURATIONPROPERTIESINFERENCEPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESSENSITIVITY) {
-	o.Sensitivity = &v
+	o.Sensitivity.Set(&v)
+}
+// SetSensitivityNil sets the value for Sensitivity to be an explicit nil
+func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) SetSensitivityNil() {
+	o.Sensitivity.Set(nil)
 }
 
-// GetStrategy returns the Strategy field value if set, zero value otherwise.
+// UnsetSensitivity ensures that no value is present for Sensitivity, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) UnsetSensitivity() {
+	o.Sensitivity.Unset()
+}
+
+// GetStrategy returns the Strategy field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) GetStrategy() ENUMPROPERTIESCONFIGURATIONPROPERTIESINFERENCEPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESSTRATEGY {
-	if o == nil || IsNil(o.Strategy) {
+	if o == nil || IsNil(o.Strategy.Get()) {
 		var ret ENUMPROPERTIESCONFIGURATIONPROPERTIESINFERENCEPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESSTRATEGY
 		return ret
 	}
-	return *o.Strategy
+	return *o.Strategy.Get()
 }
 
 // GetStrategyOk returns a tuple with the Strategy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) GetStrategyOk() (*ENUMPROPERTIESCONFIGURATIONPROPERTIESINFERENCEPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESSTRATEGY, bool) {
-	if o == nil || IsNil(o.Strategy) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Strategy, true
+	return o.Strategy.Get(), o.Strategy.IsSet()
 }
 
 // HasStrategy returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) HasStrategy() bool {
-	if o != nil && !IsNil(o.Strategy) {
+	if o != nil && o.Strategy.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetStrategy gets a reference to the given ENUMPROPERTIESCONFIGURATIONPROPERTIESINFERENCEPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESSTRATEGY and assigns it to the Strategy field.
+// SetStrategy gets a reference to the given NullableENUMPROPERTIESCONFIGURATIONPROPERTIESINFERENCEPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESSTRATEGY and assigns it to the Strategy field.
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) SetStrategy(v ENUMPROPERTIESCONFIGURATIONPROPERTIESINFERENCEPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESSTRATEGY) {
-	o.Strategy = &v
+	o.Strategy.Set(&v)
+}
+// SetStrategyNil sets the value for Strategy to be an explicit nil
+func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) SetStrategyNil() {
+	o.Strategy.Set(nil)
 }
 
-// GetRaiseOnCommit returns the RaiseOnCommit field value if set, zero value otherwise.
+// UnsetStrategy ensures that no value is present for Strategy, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) UnsetStrategy() {
+	o.Strategy.Unset()
+}
+
+// GetRaiseOnCommit returns the RaiseOnCommit field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) GetRaiseOnCommit() bool {
-	if o == nil || IsNil(o.RaiseOnCommit) {
+	if o == nil || IsNil(o.RaiseOnCommit.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.RaiseOnCommit
+	return *o.RaiseOnCommit.Get()
 }
 
 // GetRaiseOnCommitOk returns a tuple with the RaiseOnCommit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) GetRaiseOnCommitOk() (*bool, bool) {
-	if o == nil || IsNil(o.RaiseOnCommit) {
+	if o == nil {
 		return nil, false
 	}
-	return o.RaiseOnCommit, true
+	return o.RaiseOnCommit.Get(), o.RaiseOnCommit.IsSet()
 }
 
 // HasRaiseOnCommit returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) HasRaiseOnCommit() bool {
-	if o != nil && !IsNil(o.RaiseOnCommit) {
+	if o != nil && o.RaiseOnCommit.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRaiseOnCommit gets a reference to the given bool and assigns it to the RaiseOnCommit field.
+// SetRaiseOnCommit gets a reference to the given NullableBool and assigns it to the RaiseOnCommit field.
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) SetRaiseOnCommit(v bool) {
-	o.RaiseOnCommit = &v
+	o.RaiseOnCommit.Set(&v)
+}
+// SetRaiseOnCommitNil sets the value for RaiseOnCommit to be an explicit nil
+func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) SetRaiseOnCommitNil() {
+	o.RaiseOnCommit.Set(nil)
 }
 
-// GetRaiseOnExposure returns the RaiseOnExposure field value if set, zero value otherwise.
+// UnsetRaiseOnCommit ensures that no value is present for RaiseOnCommit, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) UnsetRaiseOnCommit() {
+	o.RaiseOnCommit.Unset()
+}
+
+// GetRaiseOnExposure returns the RaiseOnExposure field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) GetRaiseOnExposure() bool {
-	if o == nil || IsNil(o.RaiseOnExposure) {
+	if o == nil || IsNil(o.RaiseOnExposure.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.RaiseOnExposure
+	return *o.RaiseOnExposure.Get()
 }
 
 // GetRaiseOnExposureOk returns a tuple with the RaiseOnExposure field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) GetRaiseOnExposureOk() (*bool, bool) {
-	if o == nil || IsNil(o.RaiseOnExposure) {
+	if o == nil {
 		return nil, false
 	}
-	return o.RaiseOnExposure, true
+	return o.RaiseOnExposure.Get(), o.RaiseOnExposure.IsSet()
 }
 
 // HasRaiseOnExposure returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) HasRaiseOnExposure() bool {
-	if o != nil && !IsNil(o.RaiseOnExposure) {
+	if o != nil && o.RaiseOnExposure.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRaiseOnExposure gets a reference to the given bool and assigns it to the RaiseOnExposure field.
+// SetRaiseOnExposure gets a reference to the given NullableBool and assigns it to the RaiseOnExposure field.
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) SetRaiseOnExposure(v bool) {
-	o.RaiseOnExposure = &v
+	o.RaiseOnExposure.Set(&v)
+}
+// SetRaiseOnExposureNil sets the value for RaiseOnExposure to be an explicit nil
+func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) SetRaiseOnExposureNil() {
+	o.RaiseOnExposure.Set(nil)
 }
 
-// GetIsSourceable returns the IsSourceable field value if set, zero value otherwise.
+// UnsetRaiseOnExposure ensures that no value is present for RaiseOnExposure, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) UnsetRaiseOnExposure() {
+	o.RaiseOnExposure.Unset()
+}
+
+// GetIsSourceable returns the IsSourceable field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) GetIsSourceable() bool {
-	if o == nil || IsNil(o.IsSourceable) {
+	if o == nil || IsNil(o.IsSourceable.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.IsSourceable
+	return *o.IsSourceable.Get()
 }
 
 // GetIsSourceableOk returns a tuple with the IsSourceable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) GetIsSourceableOk() (*bool, bool) {
-	if o == nil || IsNil(o.IsSourceable) {
+	if o == nil {
 		return nil, false
 	}
-	return o.IsSourceable, true
+	return o.IsSourceable.Get(), o.IsSourceable.IsSet()
 }
 
 // HasIsSourceable returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) HasIsSourceable() bool {
-	if o != nil && !IsNil(o.IsSourceable) {
+	if o != nil && o.IsSourceable.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetIsSourceable gets a reference to the given bool and assigns it to the IsSourceable field.
+// SetIsSourceable gets a reference to the given NullableBool and assigns it to the IsSourceable field.
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) SetIsSourceable(v bool) {
-	o.IsSourceable = &v
+	o.IsSourceable.Set(&v)
+}
+// SetIsSourceableNil sets the value for IsSourceable to be an explicit nil
+func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) SetIsSourceableNil() {
+	o.IsSourceable.Set(nil)
+}
+
+// UnsetIsSourceable ensures that no value is present for IsSourceable, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) UnsetIsSourceable() {
+	o.IsSourceable.Unset()
 }
 
 func (o GetProfile200ResponseConfigurationInferenceScalarsValue) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -447,41 +531,41 @@ func (o GetProfile200ResponseConfigurationInferenceScalarsValue) MarshalJSON() (
 
 func (o GetProfile200ResponseConfigurationInferenceScalarsValue) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Names) {
+	if o.Names != nil {
 		toSerialize["names"] = o.Names
 	}
-	if !IsNil(o.IgnoredNames) {
+	if o.IgnoredNames != nil {
 		toSerialize["ignored_names"] = o.IgnoredNames
 	}
-	if !IsNil(o.Description) {
-		toSerialize["description"] = o.Description
+	if o.Description.IsSet() {
+		toSerialize["description"] = o.Description.Get()
 	}
-	if !IsNil(o.Pattern) {
-		toSerialize["pattern"] = o.Pattern
+	if o.Pattern.IsSet() {
+		toSerialize["pattern"] = o.Pattern.Get()
 	}
-	if !IsNil(o.IgnoredPattern) {
-		toSerialize["ignored_pattern"] = o.IgnoredPattern
+	if o.IgnoredPattern.IsSet() {
+		toSerialize["ignored_pattern"] = o.IgnoredPattern.Get()
 	}
-	if !IsNil(o.Examples) {
+	if o.Examples != nil {
 		toSerialize["examples"] = o.Examples
 	}
-	if !IsNil(o.Parents) {
+	if o.Parents != nil {
 		toSerialize["parents"] = o.Parents
 	}
-	if !IsNil(o.Sensitivity) {
-		toSerialize["sensitivity"] = o.Sensitivity
+	if o.Sensitivity.IsSet() {
+		toSerialize["sensitivity"] = o.Sensitivity.Get()
 	}
-	if !IsNil(o.Strategy) {
-		toSerialize["strategy"] = o.Strategy
+	if o.Strategy.IsSet() {
+		toSerialize["strategy"] = o.Strategy.Get()
 	}
-	if !IsNil(o.RaiseOnCommit) {
-		toSerialize["raise_on_commit"] = o.RaiseOnCommit
+	if o.RaiseOnCommit.IsSet() {
+		toSerialize["raise_on_commit"] = o.RaiseOnCommit.Get()
 	}
-	if !IsNil(o.RaiseOnExposure) {
-		toSerialize["raise_on_exposure"] = o.RaiseOnExposure
+	if o.RaiseOnExposure.IsSet() {
+		toSerialize["raise_on_exposure"] = o.RaiseOnExposure.Get()
 	}
-	if !IsNil(o.IsSourceable) {
-		toSerialize["is_sourceable"] = o.IsSourceable
+	if o.IsSourceable.IsSet() {
+		toSerialize["is_sourceable"] = o.IsSourceable.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -558,3 +642,5 @@ func (v *NullableGetProfile200ResponseConfigurationInferenceScalarsValue) Unmars
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

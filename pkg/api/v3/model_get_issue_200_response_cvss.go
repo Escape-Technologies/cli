@@ -12,6 +12,7 @@ package v3
 
 import (
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the GetIssue200ResponseCvss type satisfies the MappedNullable interface at compile time
@@ -20,9 +21,9 @@ var _ MappedNullable = &GetIssue200ResponseCvss{}
 // GetIssue200ResponseCvss CVSS information for the issue
 type GetIssue200ResponseCvss struct {
 	// CVSS score of the issue
-	Score *float32 `json:"score,omitempty"`
+	Score NullableFloat32 `json:"score"`
 	// CVSS vector of the issue
-	Vector               *string `json:"vector,omitempty"`
+	Vector NullableString `json:"vector"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -32,8 +33,10 @@ type _GetIssue200ResponseCvss GetIssue200ResponseCvss
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetIssue200ResponseCvss() *GetIssue200ResponseCvss {
+func NewGetIssue200ResponseCvss(score NullableFloat32, vector NullableString) *GetIssue200ResponseCvss {
 	this := GetIssue200ResponseCvss{}
+	this.Score = score
+	this.Vector = vector
 	return &this
 }
 
@@ -45,72 +48,60 @@ func NewGetIssue200ResponseCvssWithDefaults() *GetIssue200ResponseCvss {
 	return &this
 }
 
-// GetScore returns the Score field value if set, zero value otherwise.
+// GetScore returns the Score field value
+// If the value is explicit nil, the zero value for float32 will be returned
 func (o *GetIssue200ResponseCvss) GetScore() float32 {
-	if o == nil || IsNil(o.Score) {
+	if o == nil || o.Score.Get() == nil {
 		var ret float32
 		return ret
 	}
-	return *o.Score
+
+	return *o.Score.Get()
 }
 
-// GetScoreOk returns a tuple with the Score field value if set, nil otherwise
+// GetScoreOk returns a tuple with the Score field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetIssue200ResponseCvss) GetScoreOk() (*float32, bool) {
-	if o == nil || IsNil(o.Score) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Score, true
+	return o.Score.Get(), o.Score.IsSet()
 }
 
-// HasScore returns a boolean if a field has been set.
-func (o *GetIssue200ResponseCvss) HasScore() bool {
-	if o != nil && !IsNil(o.Score) {
-		return true
-	}
-
-	return false
-}
-
-// SetScore gets a reference to the given float32 and assigns it to the Score field.
+// SetScore sets field value
 func (o *GetIssue200ResponseCvss) SetScore(v float32) {
-	o.Score = &v
+	o.Score.Set(&v)
 }
 
-// GetVector returns the Vector field value if set, zero value otherwise.
+// GetVector returns the Vector field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *GetIssue200ResponseCvss) GetVector() string {
-	if o == nil || IsNil(o.Vector) {
+	if o == nil || o.Vector.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.Vector
+
+	return *o.Vector.Get()
 }
 
-// GetVectorOk returns a tuple with the Vector field value if set, nil otherwise
+// GetVectorOk returns a tuple with the Vector field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetIssue200ResponseCvss) GetVectorOk() (*string, bool) {
-	if o == nil || IsNil(o.Vector) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Vector, true
+	return o.Vector.Get(), o.Vector.IsSet()
 }
 
-// HasVector returns a boolean if a field has been set.
-func (o *GetIssue200ResponseCvss) HasVector() bool {
-	if o != nil && !IsNil(o.Vector) {
-		return true
-	}
-
-	return false
-}
-
-// SetVector gets a reference to the given string and assigns it to the Vector field.
+// SetVector sets field value
 func (o *GetIssue200ResponseCvss) SetVector(v string) {
-	o.Vector = &v
+	o.Vector.Set(&v)
 }
 
 func (o GetIssue200ResponseCvss) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -119,12 +110,8 @@ func (o GetIssue200ResponseCvss) MarshalJSON() ([]byte, error) {
 
 func (o GetIssue200ResponseCvss) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Score) {
-		toSerialize["score"] = o.Score
-	}
-	if !IsNil(o.Vector) {
-		toSerialize["vector"] = o.Vector
-	}
+	toSerialize["score"] = o.Score.Get()
+	toSerialize["vector"] = o.Vector.Get()
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -134,6 +121,28 @@ func (o GetIssue200ResponseCvss) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *GetIssue200ResponseCvss) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"score",
+		"vector",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varGetIssue200ResponseCvss := _GetIssue200ResponseCvss{}
 
 	err = json.Unmarshal(data, &varGetIssue200ResponseCvss)
@@ -190,3 +199,5 @@ func (v *NullableGetIssue200ResponseCvss) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

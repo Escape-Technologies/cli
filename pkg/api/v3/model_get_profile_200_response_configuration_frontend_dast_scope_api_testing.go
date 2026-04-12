@@ -19,9 +19,9 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationFrontendDastScopeApiTe
 
 // GetProfile200ResponseConfigurationFrontendDastScopeApiTesting struct for GetProfile200ResponseConfigurationFrontendDastScopeApiTesting
 type GetProfile200ResponseConfigurationFrontendDastScopeApiTesting struct {
-	ExtendGlobalScope    *bool                                                                         `json:"extend_global_scope,omitempty"`
-	Allowlist            []GetProfile200ResponseConfigurationFrontendDastScopeApiTestingAllowlistInner `json:"allowlist,omitempty"`
-	Blocklist            []GetProfile200ResponseConfigurationFrontendDastScopeApiTestingAllowlistInner `json:"blocklist,omitempty"`
+	ExtendGlobalScope NullableBool `json:"extend_global_scope,omitempty"`
+	Allowlist []GetProfile200ResponseConfigurationFrontendDastScopeApiTestingAllowlistInner `json:"allowlist,omitempty"`
+	Blocklist []GetProfile200ResponseConfigurationFrontendDastScopeApiTestingAllowlistInner `json:"blocklist,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -44,41 +44,51 @@ func NewGetProfile200ResponseConfigurationFrontendDastScopeApiTestingWithDefault
 	return &this
 }
 
-// GetExtendGlobalScope returns the ExtendGlobalScope field value if set, zero value otherwise.
+// GetExtendGlobalScope returns the ExtendGlobalScope field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationFrontendDastScopeApiTesting) GetExtendGlobalScope() bool {
-	if o == nil || IsNil(o.ExtendGlobalScope) {
+	if o == nil || IsNil(o.ExtendGlobalScope.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.ExtendGlobalScope
+	return *o.ExtendGlobalScope.Get()
 }
 
 // GetExtendGlobalScopeOk returns a tuple with the ExtendGlobalScope field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationFrontendDastScopeApiTesting) GetExtendGlobalScopeOk() (*bool, bool) {
-	if o == nil || IsNil(o.ExtendGlobalScope) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ExtendGlobalScope, true
+	return o.ExtendGlobalScope.Get(), o.ExtendGlobalScope.IsSet()
 }
 
 // HasExtendGlobalScope returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationFrontendDastScopeApiTesting) HasExtendGlobalScope() bool {
-	if o != nil && !IsNil(o.ExtendGlobalScope) {
+	if o != nil && o.ExtendGlobalScope.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetExtendGlobalScope gets a reference to the given bool and assigns it to the ExtendGlobalScope field.
+// SetExtendGlobalScope gets a reference to the given NullableBool and assigns it to the ExtendGlobalScope field.
 func (o *GetProfile200ResponseConfigurationFrontendDastScopeApiTesting) SetExtendGlobalScope(v bool) {
-	o.ExtendGlobalScope = &v
+	o.ExtendGlobalScope.Set(&v)
+}
+// SetExtendGlobalScopeNil sets the value for ExtendGlobalScope to be an explicit nil
+func (o *GetProfile200ResponseConfigurationFrontendDastScopeApiTesting) SetExtendGlobalScopeNil() {
+	o.ExtendGlobalScope.Set(nil)
 }
 
-// GetAllowlist returns the Allowlist field value if set, zero value otherwise.
+// UnsetExtendGlobalScope ensures that no value is present for ExtendGlobalScope, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationFrontendDastScopeApiTesting) UnsetExtendGlobalScope() {
+	o.ExtendGlobalScope.Unset()
+}
+
+// GetAllowlist returns the Allowlist field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationFrontendDastScopeApiTesting) GetAllowlist() []GetProfile200ResponseConfigurationFrontendDastScopeApiTestingAllowlistInner {
-	if o == nil || IsNil(o.Allowlist) {
+	if o == nil {
 		var ret []GetProfile200ResponseConfigurationFrontendDastScopeApiTestingAllowlistInner
 		return ret
 	}
@@ -87,6 +97,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDastScopeApiTesting) GetAllow
 
 // GetAllowlistOk returns a tuple with the Allowlist field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationFrontendDastScopeApiTesting) GetAllowlistOk() ([]GetProfile200ResponseConfigurationFrontendDastScopeApiTestingAllowlistInner, bool) {
 	if o == nil || IsNil(o.Allowlist) {
 		return nil, false
@@ -108,9 +119,9 @@ func (o *GetProfile200ResponseConfigurationFrontendDastScopeApiTesting) SetAllow
 	o.Allowlist = v
 }
 
-// GetBlocklist returns the Blocklist field value if set, zero value otherwise.
+// GetBlocklist returns the Blocklist field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationFrontendDastScopeApiTesting) GetBlocklist() []GetProfile200ResponseConfigurationFrontendDastScopeApiTestingAllowlistInner {
-	if o == nil || IsNil(o.Blocklist) {
+	if o == nil {
 		var ret []GetProfile200ResponseConfigurationFrontendDastScopeApiTestingAllowlistInner
 		return ret
 	}
@@ -119,6 +130,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDastScopeApiTesting) GetBlock
 
 // GetBlocklistOk returns a tuple with the Blocklist field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationFrontendDastScopeApiTesting) GetBlocklistOk() ([]GetProfile200ResponseConfigurationFrontendDastScopeApiTestingAllowlistInner, bool) {
 	if o == nil || IsNil(o.Blocklist) {
 		return nil, false
@@ -141,7 +153,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDastScopeApiTesting) SetBlock
 }
 
 func (o GetProfile200ResponseConfigurationFrontendDastScopeApiTesting) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -150,13 +162,13 @@ func (o GetProfile200ResponseConfigurationFrontendDastScopeApiTesting) MarshalJS
 
 func (o GetProfile200ResponseConfigurationFrontendDastScopeApiTesting) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ExtendGlobalScope) {
-		toSerialize["extend_global_scope"] = o.ExtendGlobalScope
+	if o.ExtendGlobalScope.IsSet() {
+		toSerialize["extend_global_scope"] = o.ExtendGlobalScope.Get()
 	}
-	if !IsNil(o.Allowlist) {
+	if o.Allowlist != nil {
 		toSerialize["allowlist"] = o.Allowlist
 	}
-	if !IsNil(o.Blocklist) {
+	if o.Blocklist != nil {
 		toSerialize["blocklist"] = o.Blocklist
 	}
 
@@ -225,3 +237,5 @@ func (v *NullableGetProfile200ResponseConfigurationFrontendDastScopeApiTesting) 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

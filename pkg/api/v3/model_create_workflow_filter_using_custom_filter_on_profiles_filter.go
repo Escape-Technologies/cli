@@ -19,26 +19,26 @@ var _ MappedNullable = &CreateWorkflowFilterUsingCustomFilterOnProfilesFilter{}
 
 // CreateWorkflowFilterUsingCustomFilterOnProfilesFilter struct for CreateWorkflowFilterUsingCustomFilterOnProfilesFilter
 type CreateWorkflowFilterUsingCustomFilterOnProfilesFilter struct {
-	Ids                  []string                                                                      `json:"ids,omitempty"`
-	Search               *string                                                                       `json:"search,omitempty"`
-	Risks                []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS                  `json:"risks,omitempty"`
-	TagIds               []string                                                                      `json:"tagIds,omitempty"`
-	NoTags               *bool                                                                         `json:"noTags,omitempty"`
-	ProjectIds           []string                                                                      `json:"projectIds,omitempty"`
-	NoProjects           *bool                                                                         `json:"noProjects,omitempty"`
-	AssetIds             []string                                                                      `json:"assetIds,omitempty"`
-	AssetSchemaIds       []string                                                                      `json:"assetSchemaIds,omitempty"`
-	IssueIds             []string                                                                      `json:"issueIds,omitempty"`
-	Kinds                []ENUMPROPERTIESFILTERSITEMS1PROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS      `json:"kinds,omitempty"`
-	Domains              []string                                                                      `json:"domains,omitempty"`
-	Initiators           []ENUMPROPERTIESDATAITEMSPROPERTIESINITIATORSITEMS                            `json:"initiators,omitempty"`
-	LastScanStatuses     []ENUMPROPERTIESFILTERSITEMS2PROPERTIESFILTERPROPERTIESLASTSCANSTATUSESITEMS  `json:"lastScanStatuses,omitempty"`
-	ProblemSeverities    []ENUMPROPERTIESFILTERSITEMS2PROPERTIESFILTERPROPERTIESPROBLEMSEVERITIESITEMS `json:"problemSeverities,omitempty"`
-	ProblemCodes         []ENUMPROPERTIESFILTERSITEMS2PROPERTIESFILTERPROPERTIESPROBLEMCODESITEMS      `json:"problemCodes,omitempty"`
-	AssetClasses         []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS                       `json:"assetClasses,omitempty"`
-	AssetStatuses        []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS                      `json:"assetStatuses,omitempty"`
-	AssetTypes           []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE                        `json:"assetTypes,omitempty"`
-	ScanIds              []string                                                                      `json:"scanIds,omitempty"`
+	Ids []string `json:"ids,omitempty"`
+	Search NullableString `json:"search,omitempty"`
+	Risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS `json:"risks,omitempty"`
+	TagIds []string `json:"tagIds,omitempty"`
+	NoTags NullableBool `json:"noTags,omitempty"`
+	ProjectIds []string `json:"projectIds,omitempty"`
+	NoProjects NullableBool `json:"noProjects,omitempty"`
+	AssetIds []string `json:"assetIds,omitempty"`
+	AssetSchemaIds []string `json:"assetSchemaIds,omitempty"`
+	IssueIds []string `json:"issueIds,omitempty"`
+	Kinds []ENUMPROPERTIESFILTERSITEMS1PROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS `json:"kinds,omitempty"`
+	Domains []string `json:"domains,omitempty"`
+	Initiators []ENUMPROPERTIESDATAITEMSPROPERTIESINITIATORSITEMS `json:"initiators,omitempty"`
+	LastScanStatuses []ENUMPROPERTIESSTATUS `json:"lastScanStatuses,omitempty"`
+	ProblemSeverities []ENUMPROPERTIESFILTERSITEMS2PROPERTIESFILTERPROPERTIESPROBLEMSEVERITIESITEMS `json:"problemSeverities,omitempty"`
+	ProblemCodes []ENUMPROPERTIESFILTERSITEMS2PROPERTIESFILTERPROPERTIESPROBLEMCODESITEMS `json:"problemCodes,omitempty"`
+	AssetClasses []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS `json:"assetClasses,omitempty"`
+	AssetStatuses []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS `json:"assetStatuses,omitempty"`
+	AssetTypes []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE `json:"assetTypes,omitempty"`
+	ScanIds []string `json:"scanIds,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -61,9 +61,9 @@ func NewCreateWorkflowFilterUsingCustomFilterOnProfilesFilterWithDefaults() *Cre
 	return &this
 }
 
-// GetIds returns the Ids field value if set, zero value otherwise.
+// GetIds returns the Ids field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetIds() []string {
-	if o == nil || IsNil(o.Ids) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -72,6 +72,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetIds() []strin
 
 // GetIdsOk returns a tuple with the Ids field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetIdsOk() ([]string, bool) {
 	if o == nil || IsNil(o.Ids) {
 		return nil, false
@@ -93,41 +94,51 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) SetIds(v []strin
 	o.Ids = v
 }
 
-// GetSearch returns the Search field value if set, zero value otherwise.
+// GetSearch returns the Search field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetSearch() string {
-	if o == nil || IsNil(o.Search) {
+	if o == nil || IsNil(o.Search.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Search
+	return *o.Search.Get()
 }
 
 // GetSearchOk returns a tuple with the Search field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetSearchOk() (*string, bool) {
-	if o == nil || IsNil(o.Search) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Search, true
+	return o.Search.Get(), o.Search.IsSet()
 }
 
 // HasSearch returns a boolean if a field has been set.
 func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) HasSearch() bool {
-	if o != nil && !IsNil(o.Search) {
+	if o != nil && o.Search.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSearch gets a reference to the given string and assigns it to the Search field.
+// SetSearch gets a reference to the given NullableString and assigns it to the Search field.
 func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) SetSearch(v string) {
-	o.Search = &v
+	o.Search.Set(&v)
+}
+// SetSearchNil sets the value for Search to be an explicit nil
+func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) SetSearchNil() {
+	o.Search.Set(nil)
 }
 
-// GetRisks returns the Risks field value if set, zero value otherwise.
+// UnsetSearch ensures that no value is present for Search, not even an explicit nil
+func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) UnsetSearch() {
+	o.Search.Unset()
+}
+
+// GetRisks returns the Risks field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetRisks() []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS {
-	if o == nil || IsNil(o.Risks) {
+	if o == nil {
 		var ret []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS
 		return ret
 	}
@@ -136,6 +147,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetRisks() []ENU
 
 // GetRisksOk returns a tuple with the Risks field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetRisksOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, bool) {
 	if o == nil || IsNil(o.Risks) {
 		return nil, false
@@ -157,9 +169,9 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) SetRisks(v []ENU
 	o.Risks = v
 }
 
-// GetTagIds returns the TagIds field value if set, zero value otherwise.
+// GetTagIds returns the TagIds field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetTagIds() []string {
-	if o == nil || IsNil(o.TagIds) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -168,6 +180,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetTagIds() []st
 
 // GetTagIdsOk returns a tuple with the TagIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetTagIdsOk() ([]string, bool) {
 	if o == nil || IsNil(o.TagIds) {
 		return nil, false
@@ -189,41 +202,51 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) SetTagIds(v []st
 	o.TagIds = v
 }
 
-// GetNoTags returns the NoTags field value if set, zero value otherwise.
+// GetNoTags returns the NoTags field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetNoTags() bool {
-	if o == nil || IsNil(o.NoTags) {
+	if o == nil || IsNil(o.NoTags.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.NoTags
+	return *o.NoTags.Get()
 }
 
 // GetNoTagsOk returns a tuple with the NoTags field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetNoTagsOk() (*bool, bool) {
-	if o == nil || IsNil(o.NoTags) {
+	if o == nil {
 		return nil, false
 	}
-	return o.NoTags, true
+	return o.NoTags.Get(), o.NoTags.IsSet()
 }
 
 // HasNoTags returns a boolean if a field has been set.
 func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) HasNoTags() bool {
-	if o != nil && !IsNil(o.NoTags) {
+	if o != nil && o.NoTags.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetNoTags gets a reference to the given bool and assigns it to the NoTags field.
+// SetNoTags gets a reference to the given NullableBool and assigns it to the NoTags field.
 func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) SetNoTags(v bool) {
-	o.NoTags = &v
+	o.NoTags.Set(&v)
+}
+// SetNoTagsNil sets the value for NoTags to be an explicit nil
+func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) SetNoTagsNil() {
+	o.NoTags.Set(nil)
 }
 
-// GetProjectIds returns the ProjectIds field value if set, zero value otherwise.
+// UnsetNoTags ensures that no value is present for NoTags, not even an explicit nil
+func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) UnsetNoTags() {
+	o.NoTags.Unset()
+}
+
+// GetProjectIds returns the ProjectIds field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetProjectIds() []string {
-	if o == nil || IsNil(o.ProjectIds) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -232,6 +255,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetProjectIds() 
 
 // GetProjectIdsOk returns a tuple with the ProjectIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetProjectIdsOk() ([]string, bool) {
 	if o == nil || IsNil(o.ProjectIds) {
 		return nil, false
@@ -253,41 +277,51 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) SetProjectIds(v 
 	o.ProjectIds = v
 }
 
-// GetNoProjects returns the NoProjects field value if set, zero value otherwise.
+// GetNoProjects returns the NoProjects field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetNoProjects() bool {
-	if o == nil || IsNil(o.NoProjects) {
+	if o == nil || IsNil(o.NoProjects.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.NoProjects
+	return *o.NoProjects.Get()
 }
 
 // GetNoProjectsOk returns a tuple with the NoProjects field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetNoProjectsOk() (*bool, bool) {
-	if o == nil || IsNil(o.NoProjects) {
+	if o == nil {
 		return nil, false
 	}
-	return o.NoProjects, true
+	return o.NoProjects.Get(), o.NoProjects.IsSet()
 }
 
 // HasNoProjects returns a boolean if a field has been set.
 func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) HasNoProjects() bool {
-	if o != nil && !IsNil(o.NoProjects) {
+	if o != nil && o.NoProjects.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetNoProjects gets a reference to the given bool and assigns it to the NoProjects field.
+// SetNoProjects gets a reference to the given NullableBool and assigns it to the NoProjects field.
 func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) SetNoProjects(v bool) {
-	o.NoProjects = &v
+	o.NoProjects.Set(&v)
+}
+// SetNoProjectsNil sets the value for NoProjects to be an explicit nil
+func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) SetNoProjectsNil() {
+	o.NoProjects.Set(nil)
 }
 
-// GetAssetIds returns the AssetIds field value if set, zero value otherwise.
+// UnsetNoProjects ensures that no value is present for NoProjects, not even an explicit nil
+func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) UnsetNoProjects() {
+	o.NoProjects.Unset()
+}
+
+// GetAssetIds returns the AssetIds field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetAssetIds() []string {
-	if o == nil || IsNil(o.AssetIds) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -296,6 +330,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetAssetIds() []
 
 // GetAssetIdsOk returns a tuple with the AssetIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetAssetIdsOk() ([]string, bool) {
 	if o == nil || IsNil(o.AssetIds) {
 		return nil, false
@@ -317,9 +352,9 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) SetAssetIds(v []
 	o.AssetIds = v
 }
 
-// GetAssetSchemaIds returns the AssetSchemaIds field value if set, zero value otherwise.
+// GetAssetSchemaIds returns the AssetSchemaIds field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetAssetSchemaIds() []string {
-	if o == nil || IsNil(o.AssetSchemaIds) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -328,6 +363,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetAssetSchemaId
 
 // GetAssetSchemaIdsOk returns a tuple with the AssetSchemaIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetAssetSchemaIdsOk() ([]string, bool) {
 	if o == nil || IsNil(o.AssetSchemaIds) {
 		return nil, false
@@ -349,9 +385,9 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) SetAssetSchemaId
 	o.AssetSchemaIds = v
 }
 
-// GetIssueIds returns the IssueIds field value if set, zero value otherwise.
+// GetIssueIds returns the IssueIds field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetIssueIds() []string {
-	if o == nil || IsNil(o.IssueIds) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -360,6 +396,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetIssueIds() []
 
 // GetIssueIdsOk returns a tuple with the IssueIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetIssueIdsOk() ([]string, bool) {
 	if o == nil || IsNil(o.IssueIds) {
 		return nil, false
@@ -381,9 +418,9 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) SetIssueIds(v []
 	o.IssueIds = v
 }
 
-// GetKinds returns the Kinds field value if set, zero value otherwise.
+// GetKinds returns the Kinds field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetKinds() []ENUMPROPERTIESFILTERSITEMS1PROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS {
-	if o == nil || IsNil(o.Kinds) {
+	if o == nil {
 		var ret []ENUMPROPERTIESFILTERSITEMS1PROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS
 		return ret
 	}
@@ -392,6 +429,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetKinds() []ENU
 
 // GetKindsOk returns a tuple with the Kinds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetKindsOk() ([]ENUMPROPERTIESFILTERSITEMS1PROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS, bool) {
 	if o == nil || IsNil(o.Kinds) {
 		return nil, false
@@ -413,9 +451,9 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) SetKinds(v []ENU
 	o.Kinds = v
 }
 
-// GetDomains returns the Domains field value if set, zero value otherwise.
+// GetDomains returns the Domains field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetDomains() []string {
-	if o == nil || IsNil(o.Domains) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -424,6 +462,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetDomains() []s
 
 // GetDomainsOk returns a tuple with the Domains field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetDomainsOk() ([]string, bool) {
 	if o == nil || IsNil(o.Domains) {
 		return nil, false
@@ -445,9 +484,9 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) SetDomains(v []s
 	o.Domains = v
 }
 
-// GetInitiators returns the Initiators field value if set, zero value otherwise.
+// GetInitiators returns the Initiators field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetInitiators() []ENUMPROPERTIESDATAITEMSPROPERTIESINITIATORSITEMS {
-	if o == nil || IsNil(o.Initiators) {
+	if o == nil {
 		var ret []ENUMPROPERTIESDATAITEMSPROPERTIESINITIATORSITEMS
 		return ret
 	}
@@ -456,6 +495,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetInitiators() 
 
 // GetInitiatorsOk returns a tuple with the Initiators field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetInitiatorsOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESINITIATORSITEMS, bool) {
 	if o == nil || IsNil(o.Initiators) {
 		return nil, false
@@ -477,10 +517,10 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) SetInitiators(v 
 	o.Initiators = v
 }
 
-// GetLastScanStatuses returns the LastScanStatuses field value if set, zero value otherwise.
-func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetLastScanStatuses() []ENUMPROPERTIESFILTERSITEMS2PROPERTIESFILTERPROPERTIESLASTSCANSTATUSESITEMS {
-	if o == nil || IsNil(o.LastScanStatuses) {
-		var ret []ENUMPROPERTIESFILTERSITEMS2PROPERTIESFILTERPROPERTIESLASTSCANSTATUSESITEMS
+// GetLastScanStatuses returns the LastScanStatuses field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetLastScanStatuses() []ENUMPROPERTIESSTATUS {
+	if o == nil {
+		var ret []ENUMPROPERTIESSTATUS
 		return ret
 	}
 	return o.LastScanStatuses
@@ -488,7 +528,8 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetLastScanStatu
 
 // GetLastScanStatusesOk returns a tuple with the LastScanStatuses field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetLastScanStatusesOk() ([]ENUMPROPERTIESFILTERSITEMS2PROPERTIESFILTERPROPERTIESLASTSCANSTATUSESITEMS, bool) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetLastScanStatusesOk() ([]ENUMPROPERTIESSTATUS, bool) {
 	if o == nil || IsNil(o.LastScanStatuses) {
 		return nil, false
 	}
@@ -504,14 +545,14 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) HasLastScanStatu
 	return false
 }
 
-// SetLastScanStatuses gets a reference to the given []ENUMPROPERTIESFILTERSITEMS2PROPERTIESFILTERPROPERTIESLASTSCANSTATUSESITEMS and assigns it to the LastScanStatuses field.
-func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) SetLastScanStatuses(v []ENUMPROPERTIESFILTERSITEMS2PROPERTIESFILTERPROPERTIESLASTSCANSTATUSESITEMS) {
+// SetLastScanStatuses gets a reference to the given []ENUMPROPERTIESSTATUS and assigns it to the LastScanStatuses field.
+func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) SetLastScanStatuses(v []ENUMPROPERTIESSTATUS) {
 	o.LastScanStatuses = v
 }
 
-// GetProblemSeverities returns the ProblemSeverities field value if set, zero value otherwise.
+// GetProblemSeverities returns the ProblemSeverities field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetProblemSeverities() []ENUMPROPERTIESFILTERSITEMS2PROPERTIESFILTERPROPERTIESPROBLEMSEVERITIESITEMS {
-	if o == nil || IsNil(o.ProblemSeverities) {
+	if o == nil {
 		var ret []ENUMPROPERTIESFILTERSITEMS2PROPERTIESFILTERPROPERTIESPROBLEMSEVERITIESITEMS
 		return ret
 	}
@@ -520,6 +561,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetProblemSeveri
 
 // GetProblemSeveritiesOk returns a tuple with the ProblemSeverities field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetProblemSeveritiesOk() ([]ENUMPROPERTIESFILTERSITEMS2PROPERTIESFILTERPROPERTIESPROBLEMSEVERITIESITEMS, bool) {
 	if o == nil || IsNil(o.ProblemSeverities) {
 		return nil, false
@@ -541,9 +583,9 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) SetProblemSeveri
 	o.ProblemSeverities = v
 }
 
-// GetProblemCodes returns the ProblemCodes field value if set, zero value otherwise.
+// GetProblemCodes returns the ProblemCodes field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetProblemCodes() []ENUMPROPERTIESFILTERSITEMS2PROPERTIESFILTERPROPERTIESPROBLEMCODESITEMS {
-	if o == nil || IsNil(o.ProblemCodes) {
+	if o == nil {
 		var ret []ENUMPROPERTIESFILTERSITEMS2PROPERTIESFILTERPROPERTIESPROBLEMCODESITEMS
 		return ret
 	}
@@ -552,6 +594,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetProblemCodes(
 
 // GetProblemCodesOk returns a tuple with the ProblemCodes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetProblemCodesOk() ([]ENUMPROPERTIESFILTERSITEMS2PROPERTIESFILTERPROPERTIESPROBLEMCODESITEMS, bool) {
 	if o == nil || IsNil(o.ProblemCodes) {
 		return nil, false
@@ -573,10 +616,10 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) SetProblemCodes(
 	o.ProblemCodes = v
 }
 
-// GetAssetClasses returns the AssetClasses field value if set, zero value otherwise.
-func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetAssetClasses() []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS {
-	if o == nil || IsNil(o.AssetClasses) {
-		var ret []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS
+// GetAssetClasses returns the AssetClasses field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetAssetClasses() []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS {
+	if o == nil {
+		var ret []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS
 		return ret
 	}
 	return o.AssetClasses
@@ -584,7 +627,8 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetAssetClasses(
 
 // GetAssetClassesOk returns a tuple with the AssetClasses field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetAssetClassesOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS, bool) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetAssetClassesOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS, bool) {
 	if o == nil || IsNil(o.AssetClasses) {
 		return nil, false
 	}
@@ -600,15 +644,15 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) HasAssetClasses(
 	return false
 }
 
-// SetAssetClasses gets a reference to the given []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS and assigns it to the AssetClasses field.
-func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) SetAssetClasses(v []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS) {
+// SetAssetClasses gets a reference to the given []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS and assigns it to the AssetClasses field.
+func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) SetAssetClasses(v []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS) {
 	o.AssetClasses = v
 }
 
-// GetAssetStatuses returns the AssetStatuses field value if set, zero value otherwise.
-func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetAssetStatuses() []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS {
-	if o == nil || IsNil(o.AssetStatuses) {
-		var ret []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS
+// GetAssetStatuses returns the AssetStatuses field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetAssetStatuses() []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS {
+	if o == nil {
+		var ret []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS
 		return ret
 	}
 	return o.AssetStatuses
@@ -616,7 +660,8 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetAssetStatuses
 
 // GetAssetStatusesOk returns a tuple with the AssetStatuses field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetAssetStatusesOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS, bool) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetAssetStatusesOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS, bool) {
 	if o == nil || IsNil(o.AssetStatuses) {
 		return nil, false
 	}
@@ -632,15 +677,15 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) HasAssetStatuses
 	return false
 }
 
-// SetAssetStatuses gets a reference to the given []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS and assigns it to the AssetStatuses field.
-func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) SetAssetStatuses(v []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS) {
+// SetAssetStatuses gets a reference to the given []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS and assigns it to the AssetStatuses field.
+func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) SetAssetStatuses(v []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS) {
 	o.AssetStatuses = v
 }
 
-// GetAssetTypes returns the AssetTypes field value if set, zero value otherwise.
-func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetAssetTypes() []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE {
-	if o == nil || IsNil(o.AssetTypes) {
-		var ret []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE
+// GetAssetTypes returns the AssetTypes field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetAssetTypes() []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE {
+	if o == nil {
+		var ret []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE
 		return ret
 	}
 	return o.AssetTypes
@@ -648,7 +693,8 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetAssetTypes() 
 
 // GetAssetTypesOk returns a tuple with the AssetTypes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetAssetTypesOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE, bool) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetAssetTypesOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE, bool) {
 	if o == nil || IsNil(o.AssetTypes) {
 		return nil, false
 	}
@@ -664,14 +710,14 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) HasAssetTypes() 
 	return false
 }
 
-// SetAssetTypes gets a reference to the given []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE and assigns it to the AssetTypes field.
-func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) SetAssetTypes(v []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE) {
+// SetAssetTypes gets a reference to the given []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE and assigns it to the AssetTypes field.
+func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) SetAssetTypes(v []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE) {
 	o.AssetTypes = v
 }
 
-// GetScanIds returns the ScanIds field value if set, zero value otherwise.
+// GetScanIds returns the ScanIds field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetScanIds() []string {
-	if o == nil || IsNil(o.ScanIds) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -680,6 +726,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetScanIds() []s
 
 // GetScanIdsOk returns a tuple with the ScanIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetScanIdsOk() ([]string, bool) {
 	if o == nil || IsNil(o.ScanIds) {
 		return nil, false
@@ -702,7 +749,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) SetScanIds(v []s
 }
 
 func (o CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -711,64 +758,64 @@ func (o CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) MarshalJSON() ([]
 
 func (o CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Ids) {
+	if o.Ids != nil {
 		toSerialize["ids"] = o.Ids
 	}
-	if !IsNil(o.Search) {
-		toSerialize["search"] = o.Search
+	if o.Search.IsSet() {
+		toSerialize["search"] = o.Search.Get()
 	}
-	if !IsNil(o.Risks) {
+	if o.Risks != nil {
 		toSerialize["risks"] = o.Risks
 	}
-	if !IsNil(o.TagIds) {
+	if o.TagIds != nil {
 		toSerialize["tagIds"] = o.TagIds
 	}
-	if !IsNil(o.NoTags) {
-		toSerialize["noTags"] = o.NoTags
+	if o.NoTags.IsSet() {
+		toSerialize["noTags"] = o.NoTags.Get()
 	}
-	if !IsNil(o.ProjectIds) {
+	if o.ProjectIds != nil {
 		toSerialize["projectIds"] = o.ProjectIds
 	}
-	if !IsNil(o.NoProjects) {
-		toSerialize["noProjects"] = o.NoProjects
+	if o.NoProjects.IsSet() {
+		toSerialize["noProjects"] = o.NoProjects.Get()
 	}
-	if !IsNil(o.AssetIds) {
+	if o.AssetIds != nil {
 		toSerialize["assetIds"] = o.AssetIds
 	}
-	if !IsNil(o.AssetSchemaIds) {
+	if o.AssetSchemaIds != nil {
 		toSerialize["assetSchemaIds"] = o.AssetSchemaIds
 	}
-	if !IsNil(o.IssueIds) {
+	if o.IssueIds != nil {
 		toSerialize["issueIds"] = o.IssueIds
 	}
-	if !IsNil(o.Kinds) {
+	if o.Kinds != nil {
 		toSerialize["kinds"] = o.Kinds
 	}
-	if !IsNil(o.Domains) {
+	if o.Domains != nil {
 		toSerialize["domains"] = o.Domains
 	}
-	if !IsNil(o.Initiators) {
+	if o.Initiators != nil {
 		toSerialize["initiators"] = o.Initiators
 	}
-	if !IsNil(o.LastScanStatuses) {
+	if o.LastScanStatuses != nil {
 		toSerialize["lastScanStatuses"] = o.LastScanStatuses
 	}
-	if !IsNil(o.ProblemSeverities) {
+	if o.ProblemSeverities != nil {
 		toSerialize["problemSeverities"] = o.ProblemSeverities
 	}
-	if !IsNil(o.ProblemCodes) {
+	if o.ProblemCodes != nil {
 		toSerialize["problemCodes"] = o.ProblemCodes
 	}
-	if !IsNil(o.AssetClasses) {
+	if o.AssetClasses != nil {
 		toSerialize["assetClasses"] = o.AssetClasses
 	}
-	if !IsNil(o.AssetStatuses) {
+	if o.AssetStatuses != nil {
 		toSerialize["assetStatuses"] = o.AssetStatuses
 	}
-	if !IsNil(o.AssetTypes) {
+	if o.AssetTypes != nil {
 		toSerialize["assetTypes"] = o.AssetTypes
 	}
-	if !IsNil(o.ScanIds) {
+	if o.ScanIds != nil {
 		toSerialize["scanIds"] = o.ScanIds
 	}
 
@@ -854,3 +901,5 @@ func (v *NullableCreateWorkflowFilterUsingCustomFilterOnProfilesFilter) Unmarsha
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

@@ -12,8 +12,8 @@ package v3
 
 import (
 	"encoding/json"
-	"fmt"
 	"time"
+	"fmt"
 )
 
 // checks if the ListIntegrations200ResponseDataInner type satisfies the MappedNullable interface at compile time
@@ -30,17 +30,17 @@ type ListIntegrations200ResponseDataInner struct {
 	// The date and time the integration was last updated
 	UpdatedAt time.Time `json:"updatedAt"`
 	// The date and time the integration is scheduled for deletion
-	ScheduledForDeletionAt *time.Time `json:"scheduledForDeletionAt,omitempty"`
+	ScheduledForDeletionAt NullableTime `json:"scheduledForDeletionAt"`
 	// The date and time the last pull workflow was executed
-	LastPullWorkflowAt *time.Time `json:"lastPullWorkflowAt,omitempty"`
+	LastPullWorkflowAt NullableTime `json:"lastPullWorkflowAt"`
 	// The projects of the integration
-	Projects []ListProjects200ResponseDataInner    `json:"projects"`
-	Location *LocationSummarized1                  `json:"location,omitempty"`
-	Kind     ENUMPROPERTIESDATAITEMSPROPERTIESKIND `json:"kind"`
+	Projects []ListProjects200ResponseDataInner `json:"projects"`
+	Location LocationSummarized1 `json:"location"`
+	Kind ENUMPROPERTIESDATAITEMSPROPERTIESKIND `json:"kind"`
 	// Whether the integration is valid
 	Valid bool `json:"valid"`
 	// The validation errors of the integration
-	ValidationErrors     []string `json:"validationErrors"`
+	ValidationErrors []string `json:"validationErrors"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -50,13 +50,16 @@ type _ListIntegrations200ResponseDataInner ListIntegrations200ResponseDataInner
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewListIntegrations200ResponseDataInner(id string, name string, createdAt time.Time, updatedAt time.Time, projects []ListProjects200ResponseDataInner, kind ENUMPROPERTIESDATAITEMSPROPERTIESKIND, valid bool, validationErrors []string) *ListIntegrations200ResponseDataInner {
+func NewListIntegrations200ResponseDataInner(id string, name string, createdAt time.Time, updatedAt time.Time, scheduledForDeletionAt NullableTime, lastPullWorkflowAt NullableTime, projects []ListProjects200ResponseDataInner, location LocationSummarized1, kind ENUMPROPERTIESDATAITEMSPROPERTIESKIND, valid bool, validationErrors []string) *ListIntegrations200ResponseDataInner {
 	this := ListIntegrations200ResponseDataInner{}
 	this.Id = id
 	this.Name = name
 	this.CreatedAt = createdAt
 	this.UpdatedAt = updatedAt
+	this.ScheduledForDeletionAt = scheduledForDeletionAt
+	this.LastPullWorkflowAt = lastPullWorkflowAt
 	this.Projects = projects
+	this.Location = location
 	this.Kind = kind
 	this.Valid = valid
 	this.ValidationErrors = validationErrors
@@ -167,68 +170,56 @@ func (o *ListIntegrations200ResponseDataInner) SetUpdatedAt(v time.Time) {
 	o.UpdatedAt = v
 }
 
-// GetScheduledForDeletionAt returns the ScheduledForDeletionAt field value if set, zero value otherwise.
+// GetScheduledForDeletionAt returns the ScheduledForDeletionAt field value
+// If the value is explicit nil, the zero value for time.Time will be returned
 func (o *ListIntegrations200ResponseDataInner) GetScheduledForDeletionAt() time.Time {
-	if o == nil || IsNil(o.ScheduledForDeletionAt) {
+	if o == nil || o.ScheduledForDeletionAt.Get() == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.ScheduledForDeletionAt
+
+	return *o.ScheduledForDeletionAt.Get()
 }
 
-// GetScheduledForDeletionAtOk returns a tuple with the ScheduledForDeletionAt field value if set, nil otherwise
+// GetScheduledForDeletionAtOk returns a tuple with the ScheduledForDeletionAt field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ListIntegrations200ResponseDataInner) GetScheduledForDeletionAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.ScheduledForDeletionAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ScheduledForDeletionAt, true
+	return o.ScheduledForDeletionAt.Get(), o.ScheduledForDeletionAt.IsSet()
 }
 
-// HasScheduledForDeletionAt returns a boolean if a field has been set.
-func (o *ListIntegrations200ResponseDataInner) HasScheduledForDeletionAt() bool {
-	if o != nil && !IsNil(o.ScheduledForDeletionAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetScheduledForDeletionAt gets a reference to the given time.Time and assigns it to the ScheduledForDeletionAt field.
+// SetScheduledForDeletionAt sets field value
 func (o *ListIntegrations200ResponseDataInner) SetScheduledForDeletionAt(v time.Time) {
-	o.ScheduledForDeletionAt = &v
+	o.ScheduledForDeletionAt.Set(&v)
 }
 
-// GetLastPullWorkflowAt returns the LastPullWorkflowAt field value if set, zero value otherwise.
+// GetLastPullWorkflowAt returns the LastPullWorkflowAt field value
+// If the value is explicit nil, the zero value for time.Time will be returned
 func (o *ListIntegrations200ResponseDataInner) GetLastPullWorkflowAt() time.Time {
-	if o == nil || IsNil(o.LastPullWorkflowAt) {
+	if o == nil || o.LastPullWorkflowAt.Get() == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.LastPullWorkflowAt
+
+	return *o.LastPullWorkflowAt.Get()
 }
 
-// GetLastPullWorkflowAtOk returns a tuple with the LastPullWorkflowAt field value if set, nil otherwise
+// GetLastPullWorkflowAtOk returns a tuple with the LastPullWorkflowAt field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ListIntegrations200ResponseDataInner) GetLastPullWorkflowAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.LastPullWorkflowAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.LastPullWorkflowAt, true
+	return o.LastPullWorkflowAt.Get(), o.LastPullWorkflowAt.IsSet()
 }
 
-// HasLastPullWorkflowAt returns a boolean if a field has been set.
-func (o *ListIntegrations200ResponseDataInner) HasLastPullWorkflowAt() bool {
-	if o != nil && !IsNil(o.LastPullWorkflowAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetLastPullWorkflowAt gets a reference to the given time.Time and assigns it to the LastPullWorkflowAt field.
+// SetLastPullWorkflowAt sets field value
 func (o *ListIntegrations200ResponseDataInner) SetLastPullWorkflowAt(v time.Time) {
-	o.LastPullWorkflowAt = &v
+	o.LastPullWorkflowAt.Set(&v)
 }
 
 // GetProjects returns the Projects field value
@@ -255,36 +246,28 @@ func (o *ListIntegrations200ResponseDataInner) SetProjects(v []ListProjects200Re
 	o.Projects = v
 }
 
-// GetLocation returns the Location field value if set, zero value otherwise.
+// GetLocation returns the Location field value
 func (o *ListIntegrations200ResponseDataInner) GetLocation() LocationSummarized1 {
-	if o == nil || IsNil(o.Location) {
+	if o == nil {
 		var ret LocationSummarized1
 		return ret
 	}
-	return *o.Location
+
+	return o.Location
 }
 
-// GetLocationOk returns a tuple with the Location field value if set, nil otherwise
+// GetLocationOk returns a tuple with the Location field value
 // and a boolean to check if the value has been set.
 func (o *ListIntegrations200ResponseDataInner) GetLocationOk() (*LocationSummarized1, bool) {
-	if o == nil || IsNil(o.Location) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Location, true
+	return &o.Location, true
 }
 
-// HasLocation returns a boolean if a field has been set.
-func (o *ListIntegrations200ResponseDataInner) HasLocation() bool {
-	if o != nil && !IsNil(o.Location) {
-		return true
-	}
-
-	return false
-}
-
-// SetLocation gets a reference to the given LocationSummarized1 and assigns it to the Location field.
+// SetLocation sets field value
 func (o *ListIntegrations200ResponseDataInner) SetLocation(v LocationSummarized1) {
-	o.Location = &v
+	o.Location = v
 }
 
 // GetKind returns the Kind field value
@@ -360,7 +343,7 @@ func (o *ListIntegrations200ResponseDataInner) SetValidationErrors(v []string) {
 }
 
 func (o ListIntegrations200ResponseDataInner) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -373,16 +356,10 @@ func (o ListIntegrations200ResponseDataInner) ToMap() (map[string]interface{}, e
 	toSerialize["name"] = o.Name
 	toSerialize["createdAt"] = o.CreatedAt
 	toSerialize["updatedAt"] = o.UpdatedAt
-	if !IsNil(o.ScheduledForDeletionAt) {
-		toSerialize["scheduledForDeletionAt"] = o.ScheduledForDeletionAt
-	}
-	if !IsNil(o.LastPullWorkflowAt) {
-		toSerialize["lastPullWorkflowAt"] = o.LastPullWorkflowAt
-	}
+	toSerialize["scheduledForDeletionAt"] = o.ScheduledForDeletionAt.Get()
+	toSerialize["lastPullWorkflowAt"] = o.LastPullWorkflowAt.Get()
 	toSerialize["projects"] = o.Projects
-	if !IsNil(o.Location) {
-		toSerialize["location"] = o.Location
-	}
+	toSerialize["location"] = o.Location
 	toSerialize["kind"] = o.Kind
 	toSerialize["valid"] = o.Valid
 	toSerialize["validationErrors"] = o.ValidationErrors
@@ -403,7 +380,10 @@ func (o *ListIntegrations200ResponseDataInner) UnmarshalJSON(data []byte) (err e
 		"name",
 		"createdAt",
 		"updatedAt",
+		"scheduledForDeletionAt",
+		"lastPullWorkflowAt",
 		"projects",
+		"location",
 		"kind",
 		"valid",
 		"validationErrors",
@@ -414,10 +394,10 @@ func (o *ListIntegrations200ResponseDataInner) UnmarshalJSON(data []byte) (err e
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -488,3 +468,5 @@ func (v *NullableListIntegrations200ResponseDataInner) UnmarshalJSON(src []byte)
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

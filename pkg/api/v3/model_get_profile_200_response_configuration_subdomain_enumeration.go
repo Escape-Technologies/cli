@@ -19,7 +19,7 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationSubdomainEnumeration{}
 
 // GetProfile200ResponseConfigurationSubdomainEnumeration struct for GetProfile200ResponseConfigurationSubdomainEnumeration
 type GetProfile200ResponseConfigurationSubdomainEnumeration struct {
-	Blocklist            []GetProfile200ResponseConfigurationSubdomainEnumerationBlocklistInner `json:"blocklist,omitempty"`
+	Blocklist []GetProfile200ResponseConfigurationSubdomainEnumerationBlocklistInner `json:"blocklist,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -42,9 +42,9 @@ func NewGetProfile200ResponseConfigurationSubdomainEnumerationWithDefaults() *Ge
 	return &this
 }
 
-// GetBlocklist returns the Blocklist field value if set, zero value otherwise.
+// GetBlocklist returns the Blocklist field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationSubdomainEnumeration) GetBlocklist() []GetProfile200ResponseConfigurationSubdomainEnumerationBlocklistInner {
-	if o == nil || IsNil(o.Blocklist) {
+	if o == nil {
 		var ret []GetProfile200ResponseConfigurationSubdomainEnumerationBlocklistInner
 		return ret
 	}
@@ -53,6 +53,7 @@ func (o *GetProfile200ResponseConfigurationSubdomainEnumeration) GetBlocklist() 
 
 // GetBlocklistOk returns a tuple with the Blocklist field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationSubdomainEnumeration) GetBlocklistOk() ([]GetProfile200ResponseConfigurationSubdomainEnumerationBlocklistInner, bool) {
 	if o == nil || IsNil(o.Blocklist) {
 		return nil, false
@@ -75,7 +76,7 @@ func (o *GetProfile200ResponseConfigurationSubdomainEnumeration) SetBlocklist(v 
 }
 
 func (o GetProfile200ResponseConfigurationSubdomainEnumeration) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -84,7 +85,7 @@ func (o GetProfile200ResponseConfigurationSubdomainEnumeration) MarshalJSON() ([
 
 func (o GetProfile200ResponseConfigurationSubdomainEnumeration) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Blocklist) {
+	if o.Blocklist != nil {
 		toSerialize["blocklist"] = o.Blocklist
 	}
 
@@ -151,3 +152,5 @@ func (v *NullableGetProfile200ResponseConfigurationSubdomainEnumeration) Unmarsh
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

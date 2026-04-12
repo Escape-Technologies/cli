@@ -20,13 +20,13 @@ var _ MappedNullable = &CreateExportWorkflowActionUsingJira1Parameters{}
 
 // CreateExportWorkflowActionUsingJira1Parameters struct for CreateExportWorkflowActionUsingJira1Parameters
 type CreateExportWorkflowActionUsingJira1Parameters struct {
-	ProjectId               string                                                                      `json:"projectId"`
-	IssueType               string                                                                      `json:"issueType"`
-	PropertiesMapping       []CreateExportWorkflowActionUsingJiraParametersPropertiesMappingInner       `json:"propertiesMapping"`
+	ProjectId string `json:"projectId"`
+	IssueType string `json:"issueType"`
+	PropertiesMapping []CreateExportWorkflowActionUsingJiraParametersPropertiesMappingInner `json:"propertiesMapping"`
 	StaticPropertiesMapping []CreateExportWorkflowActionUsingJiraParametersStaticPropertiesMappingInner `json:"staticPropertiesMapping,omitempty"`
-	ParentKey               *string                                                                     `json:"parentKey,omitempty"`
-	DisableDefaultMappings  *bool                                                                       `json:"disableDefaultMappings,omitempty"`
-	AdditionalProperties    map[string]interface{}
+	ParentKey NullableString `json:"parentKey,omitempty"`
+	DisableDefaultMappings NullableBool `json:"disableDefaultMappings,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateExportWorkflowActionUsingJira1Parameters CreateExportWorkflowActionUsingJira1Parameters
@@ -155,72 +155,92 @@ func (o *CreateExportWorkflowActionUsingJira1Parameters) SetStaticPropertiesMapp
 	o.StaticPropertiesMapping = v
 }
 
-// GetParentKey returns the ParentKey field value if set, zero value otherwise.
+// GetParentKey returns the ParentKey field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateExportWorkflowActionUsingJira1Parameters) GetParentKey() string {
-	if o == nil || IsNil(o.ParentKey) {
+	if o == nil || IsNil(o.ParentKey.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.ParentKey
+	return *o.ParentKey.Get()
 }
 
 // GetParentKeyOk returns a tuple with the ParentKey field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateExportWorkflowActionUsingJira1Parameters) GetParentKeyOk() (*string, bool) {
-	if o == nil || IsNil(o.ParentKey) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ParentKey, true
+	return o.ParentKey.Get(), o.ParentKey.IsSet()
 }
 
 // HasParentKey returns a boolean if a field has been set.
 func (o *CreateExportWorkflowActionUsingJira1Parameters) HasParentKey() bool {
-	if o != nil && !IsNil(o.ParentKey) {
+	if o != nil && o.ParentKey.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetParentKey gets a reference to the given string and assigns it to the ParentKey field.
+// SetParentKey gets a reference to the given NullableString and assigns it to the ParentKey field.
 func (o *CreateExportWorkflowActionUsingJira1Parameters) SetParentKey(v string) {
-	o.ParentKey = &v
+	o.ParentKey.Set(&v)
+}
+// SetParentKeyNil sets the value for ParentKey to be an explicit nil
+func (o *CreateExportWorkflowActionUsingJira1Parameters) SetParentKeyNil() {
+	o.ParentKey.Set(nil)
 }
 
-// GetDisableDefaultMappings returns the DisableDefaultMappings field value if set, zero value otherwise.
+// UnsetParentKey ensures that no value is present for ParentKey, not even an explicit nil
+func (o *CreateExportWorkflowActionUsingJira1Parameters) UnsetParentKey() {
+	o.ParentKey.Unset()
+}
+
+// GetDisableDefaultMappings returns the DisableDefaultMappings field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateExportWorkflowActionUsingJira1Parameters) GetDisableDefaultMappings() bool {
-	if o == nil || IsNil(o.DisableDefaultMappings) {
+	if o == nil || IsNil(o.DisableDefaultMappings.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.DisableDefaultMappings
+	return *o.DisableDefaultMappings.Get()
 }
 
 // GetDisableDefaultMappingsOk returns a tuple with the DisableDefaultMappings field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateExportWorkflowActionUsingJira1Parameters) GetDisableDefaultMappingsOk() (*bool, bool) {
-	if o == nil || IsNil(o.DisableDefaultMappings) {
+	if o == nil {
 		return nil, false
 	}
-	return o.DisableDefaultMappings, true
+	return o.DisableDefaultMappings.Get(), o.DisableDefaultMappings.IsSet()
 }
 
 // HasDisableDefaultMappings returns a boolean if a field has been set.
 func (o *CreateExportWorkflowActionUsingJira1Parameters) HasDisableDefaultMappings() bool {
-	if o != nil && !IsNil(o.DisableDefaultMappings) {
+	if o != nil && o.DisableDefaultMappings.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetDisableDefaultMappings gets a reference to the given bool and assigns it to the DisableDefaultMappings field.
+// SetDisableDefaultMappings gets a reference to the given NullableBool and assigns it to the DisableDefaultMappings field.
 func (o *CreateExportWorkflowActionUsingJira1Parameters) SetDisableDefaultMappings(v bool) {
-	o.DisableDefaultMappings = &v
+	o.DisableDefaultMappings.Set(&v)
+}
+// SetDisableDefaultMappingsNil sets the value for DisableDefaultMappings to be an explicit nil
+func (o *CreateExportWorkflowActionUsingJira1Parameters) SetDisableDefaultMappingsNil() {
+	o.DisableDefaultMappings.Set(nil)
+}
+
+// UnsetDisableDefaultMappings ensures that no value is present for DisableDefaultMappings, not even an explicit nil
+func (o *CreateExportWorkflowActionUsingJira1Parameters) UnsetDisableDefaultMappings() {
+	o.DisableDefaultMappings.Unset()
 }
 
 func (o CreateExportWorkflowActionUsingJira1Parameters) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -235,11 +255,11 @@ func (o CreateExportWorkflowActionUsingJira1Parameters) ToMap() (map[string]inte
 	if !IsNil(o.StaticPropertiesMapping) {
 		toSerialize["staticPropertiesMapping"] = o.StaticPropertiesMapping
 	}
-	if !IsNil(o.ParentKey) {
-		toSerialize["parentKey"] = o.ParentKey
+	if o.ParentKey.IsSet() {
+		toSerialize["parentKey"] = o.ParentKey.Get()
 	}
-	if !IsNil(o.DisableDefaultMappings) {
-		toSerialize["disableDefaultMappings"] = o.DisableDefaultMappings
+	if o.DisableDefaultMappings.IsSet() {
+		toSerialize["disableDefaultMappings"] = o.DisableDefaultMappings.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -264,10 +284,10 @@ func (o *CreateExportWorkflowActionUsingJira1Parameters) UnmarshalJSON(data []by
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -333,3 +353,5 @@ func (v *NullableCreateExportWorkflowActionUsingJira1Parameters) UnmarshalJSON(s
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

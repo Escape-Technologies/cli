@@ -19,8 +19,8 @@ var _ MappedNullable = &CreateAssetDNSRequestPathsInsightsInnerParameters{}
 
 // CreateAssetDNSRequestPathsInsightsInnerParameters struct for CreateAssetDNSRequestPathsInsightsInnerParameters
 type CreateAssetDNSRequestPathsInsightsInnerParameters struct {
-	Parameters           []CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner `json:"parameters,omitempty"`
-	RequestBody          *CreateAssetDNSRequestPathsInsightsInnerParametersRequestBody      `json:"requestBody,omitempty"`
+	Parameters []CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner `json:"parameters,omitempty"`
+	RequestBody *CreateAssetDNSRequestPathsInsightsInnerParametersRequestBody `json:"requestBody,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -43,9 +43,9 @@ func NewCreateAssetDNSRequestPathsInsightsInnerParametersWithDefaults() *CreateA
 	return &this
 }
 
-// GetParameters returns the Parameters field value if set, zero value otherwise.
+// GetParameters returns the Parameters field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetDNSRequestPathsInsightsInnerParameters) GetParameters() []CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner {
-	if o == nil || IsNil(o.Parameters) {
+	if o == nil {
 		var ret []CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner
 		return ret
 	}
@@ -54,6 +54,7 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerParameters) GetParameters() []Cr
 
 // GetParametersOk returns a tuple with the Parameters field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetDNSRequestPathsInsightsInnerParameters) GetParametersOk() ([]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner, bool) {
 	if o == nil || IsNil(o.Parameters) {
 		return nil, false
@@ -108,7 +109,7 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerParameters) SetRequestBody(v Cre
 }
 
 func (o CreateAssetDNSRequestPathsInsightsInnerParameters) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -117,7 +118,7 @@ func (o CreateAssetDNSRequestPathsInsightsInnerParameters) MarshalJSON() ([]byte
 
 func (o CreateAssetDNSRequestPathsInsightsInnerParameters) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Parameters) {
+	if o.Parameters != nil {
 		toSerialize["parameters"] = o.Parameters
 	}
 	if !IsNil(o.RequestBody) {
@@ -188,3 +189,5 @@ func (v *NullableCreateAssetDNSRequestPathsInsightsInnerParameters) UnmarshalJSO
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

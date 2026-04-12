@@ -20,9 +20,9 @@ var _ MappedNullable = &CreateAssetDNSRequestOpenPortsInner{}
 
 // CreateAssetDNSRequestOpenPortsInner struct for CreateAssetDNSRequestOpenPortsInner
 type CreateAssetDNSRequestOpenPortsInner struct {
-	Port                 float32                                                `json:"port"`
-	Protocols            []ENUMPROPERTIESOPENPORTSITEMSPROPERTIESPROTOCOLSITEMS `json:"protocols"`
-	LocationIds          []string                                               `json:"location_ids,omitempty"`
+	Port float32 `json:"port"`
+	Protocols []ENUMPROPERTIESOPENPORTSITEMSPROPERTIESPROTOCOLSITEMS `json:"protocols"`
+	LocationIds []string `json:"location_ids,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -95,9 +95,9 @@ func (o *CreateAssetDNSRequestOpenPortsInner) SetProtocols(v []ENUMPROPERTIESOPE
 	o.Protocols = v
 }
 
-// GetLocationIds returns the LocationIds field value if set, zero value otherwise.
+// GetLocationIds returns the LocationIds field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetDNSRequestOpenPortsInner) GetLocationIds() []string {
-	if o == nil || IsNil(o.LocationIds) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -106,6 +106,7 @@ func (o *CreateAssetDNSRequestOpenPortsInner) GetLocationIds() []string {
 
 // GetLocationIdsOk returns a tuple with the LocationIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetDNSRequestOpenPortsInner) GetLocationIdsOk() ([]string, bool) {
 	if o == nil || IsNil(o.LocationIds) {
 		return nil, false
@@ -128,7 +129,7 @@ func (o *CreateAssetDNSRequestOpenPortsInner) SetLocationIds(v []string) {
 }
 
 func (o CreateAssetDNSRequestOpenPortsInner) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -139,7 +140,7 @@ func (o CreateAssetDNSRequestOpenPortsInner) ToMap() (map[string]interface{}, er
 	toSerialize := map[string]interface{}{}
 	toSerialize["port"] = o.Port
 	toSerialize["protocols"] = o.Protocols
-	if !IsNil(o.LocationIds) {
+	if o.LocationIds != nil {
 		toSerialize["location_ids"] = o.LocationIds
 	}
 
@@ -164,10 +165,10 @@ func (o *CreateAssetDNSRequestOpenPortsInner) UnmarshalJSON(data []byte) (err er
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -230,3 +231,5 @@ func (v *NullableCreateAssetDNSRequestOpenPortsInner) UnmarshalJSON(src []byte) 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

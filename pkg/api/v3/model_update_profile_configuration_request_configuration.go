@@ -19,26 +19,25 @@ var _ MappedNullable = &UpdateProfileConfigurationRequestConfiguration{}
 
 // UpdateProfileConfigurationRequestConfiguration The configuration to update
 type UpdateProfileConfigurationRequestConfiguration struct {
-	PublicLocationIds     []string                                                `json:"public_location_ids,omitempty"`
-	PrivateLocationIds    []string                                                `json:"private_location_ids,omitempty"`
-	Scope                 *GetProfile200ResponseConfigurationScope                `json:"scope,omitempty"`
-	ExplorationScope      []string                                                `json:"exploration_scope,omitempty"`
-	ApiCustomRuleIds      []string                                                `json:"api_custom_rule_ids,omitempty"`
-	FrontendCustomRuleIds []string                                                `json:"frontend_custom_rule_ids,omitempty"`
-	Authentication        *GetProfile200ResponseConfigurationAuthentication       `json:"authentication,omitempty"`
-	SecurityTests         *GetProfile200ResponseConfigurationSecurityTests        `json:"security_tests,omitempty"`
-	Inference             *GetProfile200ResponseConfigurationInference            `json:"inference,omitempty"`
-	Network               *GetProfile200ResponseConfigurationNetwork              `json:"network,omitempty"`
-	ArgumentGeneration    *GetProfile200ResponseConfigurationArgumentGeneration   `json:"argument_generation,omitempty"`
-	SubdomainEnumeration  *GetProfile200ResponseConfigurationSubdomainEnumeration `json:"subdomain_enumeration,omitempty"`
-	PortScanning          *GetProfile200ResponseConfigurationPortScanning         `json:"port_scanning,omitempty"`
-	ServiceDiscovery      *GetProfile200ResponseConfigurationServiceDiscovery     `json:"service_discovery,omitempty"`
-	FrontendDast          *GetProfile200ResponseConfigurationFrontendDast         `json:"frontend_dast,omitempty"`
-	GraphqlApiDast        *GetProfile200ResponseConfigurationGraphqlApiDast       `json:"graphql_api_dast,omitempty"`
-	RestApiDast           *GetProfile200ResponseConfigurationRestApiDast          `json:"rest_api_dast,omitempty"`
-	AutomatedPentesting   *GetProfile200ResponseConfigurationAutomatedPentesting  `json:"automated_pentesting,omitempty"`
-	Experimental          *GetProfile200ResponseConfigurationExperimental         `json:"experimental,omitempty"`
-	AdditionalProperties  map[string]interface{}
+	PublicLocationIds []string `json:"public_location_ids,omitempty"`
+	PrivateLocationIds []string `json:"private_location_ids,omitempty"`
+	Scope *GetProfile200ResponseConfigurationScope `json:"scope,omitempty"`
+	ExplorationScope []string `json:"exploration_scope,omitempty"`
+	ApiCustomRuleIds []string `json:"api_custom_rule_ids,omitempty"`
+	FrontendCustomRuleIds []string `json:"frontend_custom_rule_ids,omitempty"`
+	Authentication *GetProfile200ResponseConfigurationAuthentication `json:"authentication,omitempty"`
+	SecurityTests *GetProfile200ResponseConfigurationSecurityTests `json:"security_tests,omitempty"`
+	Inference *GetProfile200ResponseConfigurationInference `json:"inference,omitempty"`
+	Network *GetProfile200ResponseConfigurationNetwork `json:"network,omitempty"`
+	SubdomainEnumeration *GetProfile200ResponseConfigurationSubdomainEnumeration `json:"subdomain_enumeration,omitempty"`
+	PortScanning *GetProfile200ResponseConfigurationPortScanning `json:"port_scanning,omitempty"`
+	ServiceDiscovery *GetProfile200ResponseConfigurationServiceDiscovery `json:"service_discovery,omitempty"`
+	FrontendDast *GetProfile200ResponseConfigurationFrontendDast `json:"frontend_dast,omitempty"`
+	GraphqlApiDast *GetProfile200ResponseConfigurationGraphqlApiDast `json:"graphql_api_dast,omitempty"`
+	RestApiDast *GetProfile200ResponseConfigurationRestApiDast `json:"rest_api_dast,omitempty"`
+	AutomatedPentesting *GetProfile200ResponseConfigurationAutomatedPentesting `json:"automated_pentesting,omitempty"`
+	Experimental *GetProfile200ResponseConfigurationExperimental `json:"experimental,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpdateProfileConfigurationRequestConfiguration UpdateProfileConfigurationRequestConfiguration
@@ -60,9 +59,9 @@ func NewUpdateProfileConfigurationRequestConfigurationWithDefaults() *UpdateProf
 	return &this
 }
 
-// GetPublicLocationIds returns the PublicLocationIds field value if set, zero value otherwise.
+// GetPublicLocationIds returns the PublicLocationIds field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *UpdateProfileConfigurationRequestConfiguration) GetPublicLocationIds() []string {
-	if o == nil || IsNil(o.PublicLocationIds) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -71,6 +70,7 @@ func (o *UpdateProfileConfigurationRequestConfiguration) GetPublicLocationIds() 
 
 // GetPublicLocationIdsOk returns a tuple with the PublicLocationIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *UpdateProfileConfigurationRequestConfiguration) GetPublicLocationIdsOk() ([]string, bool) {
 	if o == nil || IsNil(o.PublicLocationIds) {
 		return nil, false
@@ -92,9 +92,9 @@ func (o *UpdateProfileConfigurationRequestConfiguration) SetPublicLocationIds(v 
 	o.PublicLocationIds = v
 }
 
-// GetPrivateLocationIds returns the PrivateLocationIds field value if set, zero value otherwise.
+// GetPrivateLocationIds returns the PrivateLocationIds field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *UpdateProfileConfigurationRequestConfiguration) GetPrivateLocationIds() []string {
-	if o == nil || IsNil(o.PrivateLocationIds) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -103,6 +103,7 @@ func (o *UpdateProfileConfigurationRequestConfiguration) GetPrivateLocationIds()
 
 // GetPrivateLocationIdsOk returns a tuple with the PrivateLocationIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *UpdateProfileConfigurationRequestConfiguration) GetPrivateLocationIdsOk() ([]string, bool) {
 	if o == nil || IsNil(o.PrivateLocationIds) {
 		return nil, false
@@ -156,9 +157,9 @@ func (o *UpdateProfileConfigurationRequestConfiguration) SetScope(v GetProfile20
 	o.Scope = &v
 }
 
-// GetExplorationScope returns the ExplorationScope field value if set, zero value otherwise.
+// GetExplorationScope returns the ExplorationScope field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *UpdateProfileConfigurationRequestConfiguration) GetExplorationScope() []string {
-	if o == nil || IsNil(o.ExplorationScope) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -167,6 +168,7 @@ func (o *UpdateProfileConfigurationRequestConfiguration) GetExplorationScope() [
 
 // GetExplorationScopeOk returns a tuple with the ExplorationScope field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *UpdateProfileConfigurationRequestConfiguration) GetExplorationScopeOk() ([]string, bool) {
 	if o == nil || IsNil(o.ExplorationScope) {
 		return nil, false
@@ -188,9 +190,9 @@ func (o *UpdateProfileConfigurationRequestConfiguration) SetExplorationScope(v [
 	o.ExplorationScope = v
 }
 
-// GetApiCustomRuleIds returns the ApiCustomRuleIds field value if set, zero value otherwise.
+// GetApiCustomRuleIds returns the ApiCustomRuleIds field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *UpdateProfileConfigurationRequestConfiguration) GetApiCustomRuleIds() []string {
-	if o == nil || IsNil(o.ApiCustomRuleIds) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -199,6 +201,7 @@ func (o *UpdateProfileConfigurationRequestConfiguration) GetApiCustomRuleIds() [
 
 // GetApiCustomRuleIdsOk returns a tuple with the ApiCustomRuleIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *UpdateProfileConfigurationRequestConfiguration) GetApiCustomRuleIdsOk() ([]string, bool) {
 	if o == nil || IsNil(o.ApiCustomRuleIds) {
 		return nil, false
@@ -220,9 +223,9 @@ func (o *UpdateProfileConfigurationRequestConfiguration) SetApiCustomRuleIds(v [
 	o.ApiCustomRuleIds = v
 }
 
-// GetFrontendCustomRuleIds returns the FrontendCustomRuleIds field value if set, zero value otherwise.
+// GetFrontendCustomRuleIds returns the FrontendCustomRuleIds field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *UpdateProfileConfigurationRequestConfiguration) GetFrontendCustomRuleIds() []string {
-	if o == nil || IsNil(o.FrontendCustomRuleIds) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -231,6 +234,7 @@ func (o *UpdateProfileConfigurationRequestConfiguration) GetFrontendCustomRuleId
 
 // GetFrontendCustomRuleIdsOk returns a tuple with the FrontendCustomRuleIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *UpdateProfileConfigurationRequestConfiguration) GetFrontendCustomRuleIdsOk() ([]string, bool) {
 	if o == nil || IsNil(o.FrontendCustomRuleIds) {
 		return nil, false
@@ -378,38 +382,6 @@ func (o *UpdateProfileConfigurationRequestConfiguration) HasNetwork() bool {
 // SetNetwork gets a reference to the given GetProfile200ResponseConfigurationNetwork and assigns it to the Network field.
 func (o *UpdateProfileConfigurationRequestConfiguration) SetNetwork(v GetProfile200ResponseConfigurationNetwork) {
 	o.Network = &v
-}
-
-// GetArgumentGeneration returns the ArgumentGeneration field value if set, zero value otherwise.
-func (o *UpdateProfileConfigurationRequestConfiguration) GetArgumentGeneration() GetProfile200ResponseConfigurationArgumentGeneration {
-	if o == nil || IsNil(o.ArgumentGeneration) {
-		var ret GetProfile200ResponseConfigurationArgumentGeneration
-		return ret
-	}
-	return *o.ArgumentGeneration
-}
-
-// GetArgumentGenerationOk returns a tuple with the ArgumentGeneration field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UpdateProfileConfigurationRequestConfiguration) GetArgumentGenerationOk() (*GetProfile200ResponseConfigurationArgumentGeneration, bool) {
-	if o == nil || IsNil(o.ArgumentGeneration) {
-		return nil, false
-	}
-	return o.ArgumentGeneration, true
-}
-
-// HasArgumentGeneration returns a boolean if a field has been set.
-func (o *UpdateProfileConfigurationRequestConfiguration) HasArgumentGeneration() bool {
-	if o != nil && !IsNil(o.ArgumentGeneration) {
-		return true
-	}
-
-	return false
-}
-
-// SetArgumentGeneration gets a reference to the given GetProfile200ResponseConfigurationArgumentGeneration and assigns it to the ArgumentGeneration field.
-func (o *UpdateProfileConfigurationRequestConfiguration) SetArgumentGeneration(v GetProfile200ResponseConfigurationArgumentGeneration) {
-	o.ArgumentGeneration = &v
 }
 
 // GetSubdomainEnumeration returns the SubdomainEnumeration field value if set, zero value otherwise.
@@ -669,7 +641,7 @@ func (o *UpdateProfileConfigurationRequestConfiguration) SetExperimental(v GetPr
 }
 
 func (o UpdateProfileConfigurationRequestConfiguration) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -678,22 +650,22 @@ func (o UpdateProfileConfigurationRequestConfiguration) MarshalJSON() ([]byte, e
 
 func (o UpdateProfileConfigurationRequestConfiguration) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.PublicLocationIds) {
+	if o.PublicLocationIds != nil {
 		toSerialize["public_location_ids"] = o.PublicLocationIds
 	}
-	if !IsNil(o.PrivateLocationIds) {
+	if o.PrivateLocationIds != nil {
 		toSerialize["private_location_ids"] = o.PrivateLocationIds
 	}
 	if !IsNil(o.Scope) {
 		toSerialize["scope"] = o.Scope
 	}
-	if !IsNil(o.ExplorationScope) {
+	if o.ExplorationScope != nil {
 		toSerialize["exploration_scope"] = o.ExplorationScope
 	}
-	if !IsNil(o.ApiCustomRuleIds) {
+	if o.ApiCustomRuleIds != nil {
 		toSerialize["api_custom_rule_ids"] = o.ApiCustomRuleIds
 	}
-	if !IsNil(o.FrontendCustomRuleIds) {
+	if o.FrontendCustomRuleIds != nil {
 		toSerialize["frontend_custom_rule_ids"] = o.FrontendCustomRuleIds
 	}
 	if !IsNil(o.Authentication) {
@@ -707,9 +679,6 @@ func (o UpdateProfileConfigurationRequestConfiguration) ToMap() (map[string]inte
 	}
 	if !IsNil(o.Network) {
 		toSerialize["network"] = o.Network
-	}
-	if !IsNil(o.ArgumentGeneration) {
-		toSerialize["argument_generation"] = o.ArgumentGeneration
 	}
 	if !IsNil(o.SubdomainEnumeration) {
 		toSerialize["subdomain_enumeration"] = o.SubdomainEnumeration
@@ -767,7 +736,6 @@ func (o *UpdateProfileConfigurationRequestConfiguration) UnmarshalJSON(data []by
 		delete(additionalProperties, "security_tests")
 		delete(additionalProperties, "inference")
 		delete(additionalProperties, "network")
-		delete(additionalProperties, "argument_generation")
 		delete(additionalProperties, "subdomain_enumeration")
 		delete(additionalProperties, "port_scanning")
 		delete(additionalProperties, "service_discovery")
@@ -817,3 +785,5 @@ func (v *NullableUpdateProfileConfigurationRequestConfiguration) UnmarshalJSON(s
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

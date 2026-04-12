@@ -20,17 +20,18 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationAuthenticationPresetsI
 
 // GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11 struct for GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11
 type GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11 struct {
-	Type                    ENUMBROWSERAGENT                                                                                            `json:"type"`
-	Users                   []GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11UsersInner                             `json:"users"`
-	LoginUrl                string                                                                                                      `json:"login_url"`
-	StealthMode             *bool                                                                                                       `json:"stealth_mode,omitempty"`
-	Extractions             []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner `json:"extractions,omitempty"`
-	Injections              NullableGetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11Injections                       `json:"injections,omitempty"`
-	AutoExtractionUrls      []string                                                                                                    `json:"auto_extraction_urls,omitempty"`
-	LoggedInDetectorText    *string                                                                                                     `json:"logged_in_detector_text,omitempty"`
-	LoggedInDetectorTimeout *float32                                                                                                    `json:"logged_in_detector_timeout,omitempty"`
-	Agentic                 *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf2ParametersAgentic      `json:"agentic,omitempty"`
-	AdditionalProperties    map[string]interface{}
+	Type ENUMBROWSERAGENT `json:"type"`
+	Users []GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11UsersInner `json:"users"`
+	LoginUrl string `json:"login_url"`
+	StealthMode NullableBool `json:"stealth_mode,omitempty"`
+	LogoutDetection *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersLogoutDetection `json:"logout_detection,omitempty"`
+	Extractions []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner `json:"extractions,omitempty"`
+	Injections NullableGetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11Injections `json:"injections,omitempty"`
+	AutoExtractionUrls []string `json:"auto_extraction_urls,omitempty"`
+	LoggedInDetectorText NullableString `json:"logged_in_detector_text,omitempty"`
+	LoggedInDetectorTimeout NullableFloat32 `json:"logged_in_detector_timeout,omitempty"`
+	Agentic *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf2ParametersAgentic `json:"agentic,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11 GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11
@@ -127,41 +128,83 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11) Se
 	o.LoginUrl = v
 }
 
-// GetStealthMode returns the StealthMode field value if set, zero value otherwise.
+// GetStealthMode returns the StealthMode field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11) GetStealthMode() bool {
-	if o == nil || IsNil(o.StealthMode) {
+	if o == nil || IsNil(o.StealthMode.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.StealthMode
+	return *o.StealthMode.Get()
 }
 
 // GetStealthModeOk returns a tuple with the StealthMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11) GetStealthModeOk() (*bool, bool) {
-	if o == nil || IsNil(o.StealthMode) {
+	if o == nil {
 		return nil, false
 	}
-	return o.StealthMode, true
+	return o.StealthMode.Get(), o.StealthMode.IsSet()
 }
 
 // HasStealthMode returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11) HasStealthMode() bool {
-	if o != nil && !IsNil(o.StealthMode) {
+	if o != nil && o.StealthMode.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetStealthMode gets a reference to the given bool and assigns it to the StealthMode field.
+// SetStealthMode gets a reference to the given NullableBool and assigns it to the StealthMode field.
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11) SetStealthMode(v bool) {
-	o.StealthMode = &v
+	o.StealthMode.Set(&v)
+}
+// SetStealthModeNil sets the value for StealthMode to be an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11) SetStealthModeNil() {
+	o.StealthMode.Set(nil)
 }
 
-// GetExtractions returns the Extractions field value if set, zero value otherwise.
+// UnsetStealthMode ensures that no value is present for StealthMode, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11) UnsetStealthMode() {
+	o.StealthMode.Unset()
+}
+
+// GetLogoutDetection returns the LogoutDetection field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11) GetLogoutDetection() GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersLogoutDetection {
+	if o == nil || IsNil(o.LogoutDetection) {
+		var ret GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersLogoutDetection
+		return ret
+	}
+	return *o.LogoutDetection
+}
+
+// GetLogoutDetectionOk returns a tuple with the LogoutDetection field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11) GetLogoutDetectionOk() (*GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersLogoutDetection, bool) {
+	if o == nil || IsNil(o.LogoutDetection) {
+		return nil, false
+	}
+	return o.LogoutDetection, true
+}
+
+// HasLogoutDetection returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11) HasLogoutDetection() bool {
+	if o != nil && !IsNil(o.LogoutDetection) {
+		return true
+	}
+
+	return false
+}
+
+// SetLogoutDetection gets a reference to the given GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersLogoutDetection and assigns it to the LogoutDetection field.
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11) SetLogoutDetection(v GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersLogoutDetection) {
+	o.LogoutDetection = &v
+}
+
+// GetExtractions returns the Extractions field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11) GetExtractions() []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner {
-	if o == nil || IsNil(o.Extractions) {
+	if o == nil {
 		var ret []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner
 		return ret
 	}
@@ -170,6 +213,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11) Ge
 
 // GetExtractionsOk returns a tuple with the Extractions field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11) GetExtractionsOk() ([]GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner, bool) {
 	if o == nil || IsNil(o.Extractions) {
 		return nil, false
@@ -223,7 +267,6 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11) Ha
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11) SetInjections(v GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11Injections) {
 	o.Injections.Set(&v)
 }
-
 // SetInjectionsNil sets the value for Injections to be an explicit nil
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11) SetInjectionsNil() {
 	o.Injections.Set(nil)
@@ -234,9 +277,9 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11) Un
 	o.Injections.Unset()
 }
 
-// GetAutoExtractionUrls returns the AutoExtractionUrls field value if set, zero value otherwise.
+// GetAutoExtractionUrls returns the AutoExtractionUrls field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11) GetAutoExtractionUrls() []string {
-	if o == nil || IsNil(o.AutoExtractionUrls) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -245,6 +288,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11) Ge
 
 // GetAutoExtractionUrlsOk returns a tuple with the AutoExtractionUrls field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11) GetAutoExtractionUrlsOk() ([]string, bool) {
 	if o == nil || IsNil(o.AutoExtractionUrls) {
 		return nil, false
@@ -266,68 +310,88 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11) Se
 	o.AutoExtractionUrls = v
 }
 
-// GetLoggedInDetectorText returns the LoggedInDetectorText field value if set, zero value otherwise.
+// GetLoggedInDetectorText returns the LoggedInDetectorText field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11) GetLoggedInDetectorText() string {
-	if o == nil || IsNil(o.LoggedInDetectorText) {
+	if o == nil || IsNil(o.LoggedInDetectorText.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.LoggedInDetectorText
+	return *o.LoggedInDetectorText.Get()
 }
 
 // GetLoggedInDetectorTextOk returns a tuple with the LoggedInDetectorText field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11) GetLoggedInDetectorTextOk() (*string, bool) {
-	if o == nil || IsNil(o.LoggedInDetectorText) {
+	if o == nil {
 		return nil, false
 	}
-	return o.LoggedInDetectorText, true
+	return o.LoggedInDetectorText.Get(), o.LoggedInDetectorText.IsSet()
 }
 
 // HasLoggedInDetectorText returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11) HasLoggedInDetectorText() bool {
-	if o != nil && !IsNil(o.LoggedInDetectorText) {
+	if o != nil && o.LoggedInDetectorText.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetLoggedInDetectorText gets a reference to the given string and assigns it to the LoggedInDetectorText field.
+// SetLoggedInDetectorText gets a reference to the given NullableString and assigns it to the LoggedInDetectorText field.
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11) SetLoggedInDetectorText(v string) {
-	o.LoggedInDetectorText = &v
+	o.LoggedInDetectorText.Set(&v)
+}
+// SetLoggedInDetectorTextNil sets the value for LoggedInDetectorText to be an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11) SetLoggedInDetectorTextNil() {
+	o.LoggedInDetectorText.Set(nil)
 }
 
-// GetLoggedInDetectorTimeout returns the LoggedInDetectorTimeout field value if set, zero value otherwise.
+// UnsetLoggedInDetectorText ensures that no value is present for LoggedInDetectorText, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11) UnsetLoggedInDetectorText() {
+	o.LoggedInDetectorText.Unset()
+}
+
+// GetLoggedInDetectorTimeout returns the LoggedInDetectorTimeout field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11) GetLoggedInDetectorTimeout() float32 {
-	if o == nil || IsNil(o.LoggedInDetectorTimeout) {
+	if o == nil || IsNil(o.LoggedInDetectorTimeout.Get()) {
 		var ret float32
 		return ret
 	}
-	return *o.LoggedInDetectorTimeout
+	return *o.LoggedInDetectorTimeout.Get()
 }
 
 // GetLoggedInDetectorTimeoutOk returns a tuple with the LoggedInDetectorTimeout field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11) GetLoggedInDetectorTimeoutOk() (*float32, bool) {
-	if o == nil || IsNil(o.LoggedInDetectorTimeout) {
+	if o == nil {
 		return nil, false
 	}
-	return o.LoggedInDetectorTimeout, true
+	return o.LoggedInDetectorTimeout.Get(), o.LoggedInDetectorTimeout.IsSet()
 }
 
 // HasLoggedInDetectorTimeout returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11) HasLoggedInDetectorTimeout() bool {
-	if o != nil && !IsNil(o.LoggedInDetectorTimeout) {
+	if o != nil && o.LoggedInDetectorTimeout.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetLoggedInDetectorTimeout gets a reference to the given float32 and assigns it to the LoggedInDetectorTimeout field.
+// SetLoggedInDetectorTimeout gets a reference to the given NullableFloat32 and assigns it to the LoggedInDetectorTimeout field.
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11) SetLoggedInDetectorTimeout(v float32) {
-	o.LoggedInDetectorTimeout = &v
+	o.LoggedInDetectorTimeout.Set(&v)
+}
+// SetLoggedInDetectorTimeoutNil sets the value for LoggedInDetectorTimeout to be an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11) SetLoggedInDetectorTimeoutNil() {
+	o.LoggedInDetectorTimeout.Set(nil)
+}
+
+// UnsetLoggedInDetectorTimeout ensures that no value is present for LoggedInDetectorTimeout, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11) UnsetLoggedInDetectorTimeout() {
+	o.LoggedInDetectorTimeout.Unset()
 }
 
 // GetAgentic returns the Agentic field value if set, zero value otherwise.
@@ -363,7 +427,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11) Se
 }
 
 func (o GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -375,23 +439,26 @@ func (o GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11) ToM
 	toSerialize["type"] = o.Type
 	toSerialize["users"] = o.Users
 	toSerialize["login_url"] = o.LoginUrl
-	if !IsNil(o.StealthMode) {
-		toSerialize["stealth_mode"] = o.StealthMode
+	if o.StealthMode.IsSet() {
+		toSerialize["stealth_mode"] = o.StealthMode.Get()
 	}
-	if !IsNil(o.Extractions) {
+	if !IsNil(o.LogoutDetection) {
+		toSerialize["logout_detection"] = o.LogoutDetection
+	}
+	if o.Extractions != nil {
 		toSerialize["extractions"] = o.Extractions
 	}
 	if o.Injections.IsSet() {
 		toSerialize["injections"] = o.Injections.Get()
 	}
-	if !IsNil(o.AutoExtractionUrls) {
+	if o.AutoExtractionUrls != nil {
 		toSerialize["auto_extraction_urls"] = o.AutoExtractionUrls
 	}
-	if !IsNil(o.LoggedInDetectorText) {
-		toSerialize["logged_in_detector_text"] = o.LoggedInDetectorText
+	if o.LoggedInDetectorText.IsSet() {
+		toSerialize["logged_in_detector_text"] = o.LoggedInDetectorText.Get()
 	}
-	if !IsNil(o.LoggedInDetectorTimeout) {
-		toSerialize["logged_in_detector_timeout"] = o.LoggedInDetectorTimeout
+	if o.LoggedInDetectorTimeout.IsSet() {
+		toSerialize["logged_in_detector_timeout"] = o.LoggedInDetectorTimeout.Get()
 	}
 	if !IsNil(o.Agentic) {
 		toSerialize["agentic"] = o.Agentic
@@ -419,10 +486,10 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11) Un
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -445,6 +512,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11) Un
 		delete(additionalProperties, "users")
 		delete(additionalProperties, "login_url")
 		delete(additionalProperties, "stealth_mode")
+		delete(additionalProperties, "logout_detection")
 		delete(additionalProperties, "extractions")
 		delete(additionalProperties, "injections")
 		delete(additionalProperties, "auto_extraction_urls")
@@ -492,3 +560,5 @@ func (v *NullableGetProfile200ResponseConfigurationAuthenticationPresetsInnerOne
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

@@ -21,30 +21,30 @@ var _ MappedNullable = &AssetSummarized1{}
 // AssetSummarized1 The asset of the issue
 type AssetSummarized1 struct {
 	// The id of the asset
-	Id    string                                                `json:"id"`
-	Class ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS `json:"class"`
-	Type  ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE  `json:"type"`
+	Id string `json:"id"`
+	Class ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS `json:"class"`
+	Type ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE `json:"type"`
 	// The name of the asset
 	Name string `json:"name"`
 	// The external url of the asset
-	ExternalUrl *string `json:"externalUrl,omitempty"`
+	ExternalUrl NullableString `json:"externalUrl"`
 	// The favicon url of the asset
-	FaviconUrl *string `json:"faviconUrl,omitempty"`
+	FaviconUrl NullableString `json:"faviconUrl"`
 	// The date and time the asset was created
 	CreatedAt string `json:"createdAt"`
 	// The date and time the asset was last seen
 	LastSeenAt string `json:"lastSeenAt"`
 	// The date and time the asset is scheduled for deletion
-	ScheduledForDeletionAt *string                                                `json:"scheduledForDeletionAt,omitempty"`
-	Status                 ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS `json:"status"`
+	ScheduledForDeletionAt NullableString `json:"scheduledForDeletionAt"`
+	Status ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS `json:"status"`
 	// The tags of the asset
 	Tags []Tag `json:"tags"`
 	// The risks of the asset
-	Risks                []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS `json:"risks"`
-	Service              *AssetServiceSummarized                                      `json:"service,omitempty"`
-	Frontend             *AssetFrontendSummarized                                     `json:"frontend,omitempty"`
-	Host                 *AssetHostSummarized                                         `json:"host,omitempty"`
-	Links                AssetDetailedLinks                                           `json:"links"`
+	Risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS `json:"risks"`
+	Service AssetServiceSummarized `json:"service"`
+	Frontend AssetFrontendSummarized `json:"frontend"`
+	Host AssetHostSummarized `json:"host"`
+	Links AssetDetailedLinks `json:"links"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -54,17 +54,23 @@ type _AssetSummarized1 AssetSummarized1
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAssetSummarized1(id string, class ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS, type_ ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE, name string, createdAt string, lastSeenAt string, status ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS, tags []Tag, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, links AssetDetailedLinks) *AssetSummarized1 {
+func NewAssetSummarized1(id string, class ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS, type_ ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE, name string, externalUrl NullableString, faviconUrl NullableString, createdAt string, lastSeenAt string, scheduledForDeletionAt NullableString, status ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS, tags []Tag, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, service AssetServiceSummarized, frontend AssetFrontendSummarized, host AssetHostSummarized, links AssetDetailedLinks) *AssetSummarized1 {
 	this := AssetSummarized1{}
 	this.Id = id
 	this.Class = class
 	this.Type = type_
 	this.Name = name
+	this.ExternalUrl = externalUrl
+	this.FaviconUrl = faviconUrl
 	this.CreatedAt = createdAt
 	this.LastSeenAt = lastSeenAt
+	this.ScheduledForDeletionAt = scheduledForDeletionAt
 	this.Status = status
 	this.Tags = tags
 	this.Risks = risks
+	this.Service = service
+	this.Frontend = frontend
+	this.Host = host
 	this.Links = links
 	return &this
 }
@@ -102,9 +108,9 @@ func (o *AssetSummarized1) SetId(v string) {
 }
 
 // GetClass returns the Class field value
-func (o *AssetSummarized1) GetClass() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS {
+func (o *AssetSummarized1) GetClass() ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS {
 	if o == nil {
-		var ret ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS
+		var ret ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS
 		return ret
 	}
 
@@ -113,7 +119,7 @@ func (o *AssetSummarized1) GetClass() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROP
 
 // GetClassOk returns a tuple with the Class field value
 // and a boolean to check if the value has been set.
-func (o *AssetSummarized1) GetClassOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS, bool) {
+func (o *AssetSummarized1) GetClassOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -121,14 +127,14 @@ func (o *AssetSummarized1) GetClassOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSET
 }
 
 // SetClass sets field value
-func (o *AssetSummarized1) SetClass(v ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS) {
+func (o *AssetSummarized1) SetClass(v ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS) {
 	o.Class = v
 }
 
 // GetType returns the Type field value
-func (o *AssetSummarized1) GetType() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE {
+func (o *AssetSummarized1) GetType() ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE {
 	if o == nil {
-		var ret ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE
+		var ret ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE
 		return ret
 	}
 
@@ -137,7 +143,7 @@ func (o *AssetSummarized1) GetType() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPE
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *AssetSummarized1) GetTypeOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE, bool) {
+func (o *AssetSummarized1) GetTypeOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -145,7 +151,7 @@ func (o *AssetSummarized1) GetTypeOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSETP
 }
 
 // SetType sets field value
-func (o *AssetSummarized1) SetType(v ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE) {
+func (o *AssetSummarized1) SetType(v ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE) {
 	o.Type = v
 }
 
@@ -173,68 +179,56 @@ func (o *AssetSummarized1) SetName(v string) {
 	o.Name = v
 }
 
-// GetExternalUrl returns the ExternalUrl field value if set, zero value otherwise.
+// GetExternalUrl returns the ExternalUrl field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *AssetSummarized1) GetExternalUrl() string {
-	if o == nil || IsNil(o.ExternalUrl) {
+	if o == nil || o.ExternalUrl.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.ExternalUrl
+
+	return *o.ExternalUrl.Get()
 }
 
-// GetExternalUrlOk returns a tuple with the ExternalUrl field value if set, nil otherwise
+// GetExternalUrlOk returns a tuple with the ExternalUrl field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AssetSummarized1) GetExternalUrlOk() (*string, bool) {
-	if o == nil || IsNil(o.ExternalUrl) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ExternalUrl, true
+	return o.ExternalUrl.Get(), o.ExternalUrl.IsSet()
 }
 
-// HasExternalUrl returns a boolean if a field has been set.
-func (o *AssetSummarized1) HasExternalUrl() bool {
-	if o != nil && !IsNil(o.ExternalUrl) {
-		return true
-	}
-
-	return false
-}
-
-// SetExternalUrl gets a reference to the given string and assigns it to the ExternalUrl field.
+// SetExternalUrl sets field value
 func (o *AssetSummarized1) SetExternalUrl(v string) {
-	o.ExternalUrl = &v
+	o.ExternalUrl.Set(&v)
 }
 
-// GetFaviconUrl returns the FaviconUrl field value if set, zero value otherwise.
+// GetFaviconUrl returns the FaviconUrl field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *AssetSummarized1) GetFaviconUrl() string {
-	if o == nil || IsNil(o.FaviconUrl) {
+	if o == nil || o.FaviconUrl.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.FaviconUrl
+
+	return *o.FaviconUrl.Get()
 }
 
-// GetFaviconUrlOk returns a tuple with the FaviconUrl field value if set, nil otherwise
+// GetFaviconUrlOk returns a tuple with the FaviconUrl field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AssetSummarized1) GetFaviconUrlOk() (*string, bool) {
-	if o == nil || IsNil(o.FaviconUrl) {
+	if o == nil {
 		return nil, false
 	}
-	return o.FaviconUrl, true
+	return o.FaviconUrl.Get(), o.FaviconUrl.IsSet()
 }
 
-// HasFaviconUrl returns a boolean if a field has been set.
-func (o *AssetSummarized1) HasFaviconUrl() bool {
-	if o != nil && !IsNil(o.FaviconUrl) {
-		return true
-	}
-
-	return false
-}
-
-// SetFaviconUrl gets a reference to the given string and assigns it to the FaviconUrl field.
+// SetFaviconUrl sets field value
 func (o *AssetSummarized1) SetFaviconUrl(v string) {
-	o.FaviconUrl = &v
+	o.FaviconUrl.Set(&v)
 }
 
 // GetCreatedAt returns the CreatedAt field value
@@ -285,42 +279,36 @@ func (o *AssetSummarized1) SetLastSeenAt(v string) {
 	o.LastSeenAt = v
 }
 
-// GetScheduledForDeletionAt returns the ScheduledForDeletionAt field value if set, zero value otherwise.
+// GetScheduledForDeletionAt returns the ScheduledForDeletionAt field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *AssetSummarized1) GetScheduledForDeletionAt() string {
-	if o == nil || IsNil(o.ScheduledForDeletionAt) {
+	if o == nil || o.ScheduledForDeletionAt.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.ScheduledForDeletionAt
+
+	return *o.ScheduledForDeletionAt.Get()
 }
 
-// GetScheduledForDeletionAtOk returns a tuple with the ScheduledForDeletionAt field value if set, nil otherwise
+// GetScheduledForDeletionAtOk returns a tuple with the ScheduledForDeletionAt field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AssetSummarized1) GetScheduledForDeletionAtOk() (*string, bool) {
-	if o == nil || IsNil(o.ScheduledForDeletionAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ScheduledForDeletionAt, true
+	return o.ScheduledForDeletionAt.Get(), o.ScheduledForDeletionAt.IsSet()
 }
 
-// HasScheduledForDeletionAt returns a boolean if a field has been set.
-func (o *AssetSummarized1) HasScheduledForDeletionAt() bool {
-	if o != nil && !IsNil(o.ScheduledForDeletionAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetScheduledForDeletionAt gets a reference to the given string and assigns it to the ScheduledForDeletionAt field.
+// SetScheduledForDeletionAt sets field value
 func (o *AssetSummarized1) SetScheduledForDeletionAt(v string) {
-	o.ScheduledForDeletionAt = &v
+	o.ScheduledForDeletionAt.Set(&v)
 }
 
 // GetStatus returns the Status field value
-func (o *AssetSummarized1) GetStatus() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS {
+func (o *AssetSummarized1) GetStatus() ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS {
 	if o == nil {
-		var ret ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS
+		var ret ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS
 		return ret
 	}
 
@@ -329,7 +317,7 @@ func (o *AssetSummarized1) GetStatus() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPRO
 
 // GetStatusOk returns a tuple with the Status field value
 // and a boolean to check if the value has been set.
-func (o *AssetSummarized1) GetStatusOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS, bool) {
+func (o *AssetSummarized1) GetStatusOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -337,7 +325,7 @@ func (o *AssetSummarized1) GetStatusOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSE
 }
 
 // SetStatus sets field value
-func (o *AssetSummarized1) SetStatus(v ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS) {
+func (o *AssetSummarized1) SetStatus(v ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS) {
 	o.Status = v
 }
 
@@ -389,100 +377,76 @@ func (o *AssetSummarized1) SetRisks(v []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPR
 	o.Risks = v
 }
 
-// GetService returns the Service field value if set, zero value otherwise.
+// GetService returns the Service field value
 func (o *AssetSummarized1) GetService() AssetServiceSummarized {
-	if o == nil || IsNil(o.Service) {
+	if o == nil {
 		var ret AssetServiceSummarized
 		return ret
 	}
-	return *o.Service
+
+	return o.Service
 }
 
-// GetServiceOk returns a tuple with the Service field value if set, nil otherwise
+// GetServiceOk returns a tuple with the Service field value
 // and a boolean to check if the value has been set.
 func (o *AssetSummarized1) GetServiceOk() (*AssetServiceSummarized, bool) {
-	if o == nil || IsNil(o.Service) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Service, true
+	return &o.Service, true
 }
 
-// HasService returns a boolean if a field has been set.
-func (o *AssetSummarized1) HasService() bool {
-	if o != nil && !IsNil(o.Service) {
-		return true
-	}
-
-	return false
-}
-
-// SetService gets a reference to the given AssetServiceSummarized and assigns it to the Service field.
+// SetService sets field value
 func (o *AssetSummarized1) SetService(v AssetServiceSummarized) {
-	o.Service = &v
+	o.Service = v
 }
 
-// GetFrontend returns the Frontend field value if set, zero value otherwise.
+// GetFrontend returns the Frontend field value
 func (o *AssetSummarized1) GetFrontend() AssetFrontendSummarized {
-	if o == nil || IsNil(o.Frontend) {
+	if o == nil {
 		var ret AssetFrontendSummarized
 		return ret
 	}
-	return *o.Frontend
+
+	return o.Frontend
 }
 
-// GetFrontendOk returns a tuple with the Frontend field value if set, nil otherwise
+// GetFrontendOk returns a tuple with the Frontend field value
 // and a boolean to check if the value has been set.
 func (o *AssetSummarized1) GetFrontendOk() (*AssetFrontendSummarized, bool) {
-	if o == nil || IsNil(o.Frontend) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Frontend, true
+	return &o.Frontend, true
 }
 
-// HasFrontend returns a boolean if a field has been set.
-func (o *AssetSummarized1) HasFrontend() bool {
-	if o != nil && !IsNil(o.Frontend) {
-		return true
-	}
-
-	return false
-}
-
-// SetFrontend gets a reference to the given AssetFrontendSummarized and assigns it to the Frontend field.
+// SetFrontend sets field value
 func (o *AssetSummarized1) SetFrontend(v AssetFrontendSummarized) {
-	o.Frontend = &v
+	o.Frontend = v
 }
 
-// GetHost returns the Host field value if set, zero value otherwise.
+// GetHost returns the Host field value
 func (o *AssetSummarized1) GetHost() AssetHostSummarized {
-	if o == nil || IsNil(o.Host) {
+	if o == nil {
 		var ret AssetHostSummarized
 		return ret
 	}
-	return *o.Host
+
+	return o.Host
 }
 
-// GetHostOk returns a tuple with the Host field value if set, nil otherwise
+// GetHostOk returns a tuple with the Host field value
 // and a boolean to check if the value has been set.
 func (o *AssetSummarized1) GetHostOk() (*AssetHostSummarized, bool) {
-	if o == nil || IsNil(o.Host) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Host, true
+	return &o.Host, true
 }
 
-// HasHost returns a boolean if a field has been set.
-func (o *AssetSummarized1) HasHost() bool {
-	if o != nil && !IsNil(o.Host) {
-		return true
-	}
-
-	return false
-}
-
-// SetHost gets a reference to the given AssetHostSummarized and assigns it to the Host field.
+// SetHost sets field value
 func (o *AssetSummarized1) SetHost(v AssetHostSummarized) {
-	o.Host = &v
+	o.Host = v
 }
 
 // GetLinks returns the Links field value
@@ -510,7 +474,7 @@ func (o *AssetSummarized1) SetLinks(v AssetDetailedLinks) {
 }
 
 func (o AssetSummarized1) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -523,29 +487,17 @@ func (o AssetSummarized1) ToMap() (map[string]interface{}, error) {
 	toSerialize["class"] = o.Class
 	toSerialize["type"] = o.Type
 	toSerialize["name"] = o.Name
-	if !IsNil(o.ExternalUrl) {
-		toSerialize["externalUrl"] = o.ExternalUrl
-	}
-	if !IsNil(o.FaviconUrl) {
-		toSerialize["faviconUrl"] = o.FaviconUrl
-	}
+	toSerialize["externalUrl"] = o.ExternalUrl.Get()
+	toSerialize["faviconUrl"] = o.FaviconUrl.Get()
 	toSerialize["createdAt"] = o.CreatedAt
 	toSerialize["lastSeenAt"] = o.LastSeenAt
-	if !IsNil(o.ScheduledForDeletionAt) {
-		toSerialize["scheduledForDeletionAt"] = o.ScheduledForDeletionAt
-	}
+	toSerialize["scheduledForDeletionAt"] = o.ScheduledForDeletionAt.Get()
 	toSerialize["status"] = o.Status
 	toSerialize["tags"] = o.Tags
 	toSerialize["risks"] = o.Risks
-	if !IsNil(o.Service) {
-		toSerialize["service"] = o.Service
-	}
-	if !IsNil(o.Frontend) {
-		toSerialize["frontend"] = o.Frontend
-	}
-	if !IsNil(o.Host) {
-		toSerialize["host"] = o.Host
-	}
+	toSerialize["service"] = o.Service
+	toSerialize["frontend"] = o.Frontend
+	toSerialize["host"] = o.Host
 	toSerialize["links"] = o.Links
 
 	for key, value := range o.AdditionalProperties {
@@ -564,11 +516,17 @@ func (o *AssetSummarized1) UnmarshalJSON(data []byte) (err error) {
 		"class",
 		"type",
 		"name",
+		"externalUrl",
+		"faviconUrl",
 		"createdAt",
 		"lastSeenAt",
+		"scheduledForDeletionAt",
 		"status",
 		"tags",
 		"risks",
+		"service",
+		"frontend",
+		"host",
 		"links",
 	}
 
@@ -577,10 +535,10 @@ func (o *AssetSummarized1) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -656,3 +614,5 @@ func (v *NullableAssetSummarized1) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

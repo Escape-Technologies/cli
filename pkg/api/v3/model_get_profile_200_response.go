@@ -33,23 +33,33 @@ type GetProfile200Response struct {
 	// The date and time the profile was updated
 	UpdatedAt string `json:"updatedAt"`
 	// The cron of the profile
-	Cron *string `json:"cron,omitempty"`
+	Cron NullableString `json:"cron"`
 	// The date and time the profile is scheduled for deletion
-	ScheduledForDeletionAt *string `json:"scheduledForDeletionAt,omitempty"`
+	ScheduledForDeletionAt NullableString `json:"scheduledForDeletionAt"`
 	// The score of the profile
-	Score *float32 `json:"score,omitempty"`
+	Score NullableFloat32 `json:"score"`
 	// The coverage of the profile
-	Coverage      *float32                           `json:"coverage,omitempty"`
+	Coverage NullableFloat32 `json:"coverage"`
 	Configuration GetProfile200ResponseConfiguration `json:"configuration"`
+	// Schema asset id derived from the first `extraAssets` entry with class SCHEMA, a request hint when the link is not yet visible in `extraAssets` (e.g. immediately after a mutation), or the legacy `assetSchemaId` while migration/backfill is incomplete.
+	SchemaAssetId NullableString `json:"schemaAssetId"`
 	// The extra assets of the profile
-	ExtraAssets                []ProfileExtraAsset `json:"extraAssets"`
-	Asset                      AssetDetailed       `json:"asset"`
-	LastResourceScan           *ScanDetailed       `json:"lastResourceScan,omitempty"`
-	LastSuccessfulResourceScan *ScanDetailed1      `json:"lastSuccessfulResourceScan,omitempty"`
+	ExtraAssets []ProfileExtraAsset `json:"extraAssets"`
+	Asset AssetDetailed `json:"asset"`
+	// The ID of the last scan of the profile
+	LastScanId NullableString `json:"lastScanId"`
+	// The ID of the last successful scan of the profile
+	LastSuccessfulScanId NullableString `json:"lastSuccessfulScanId"`
+	LastScan ScanDetailed `json:"lastScan"`
+	LastSuccessfulScan ScanDetailed1 `json:"lastSuccessfulScan"`
+	// Deprecated
+	LastResourceScan ScanDetailed2 `json:"lastResourceScan"`
+	// Deprecated
+	LastSuccessfulResourceScan ScanDetailed3 `json:"lastSuccessfulResourceScan"`
 	// The risks of the profile
-	Risks                []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS `json:"risks"`
-	Statistics           StatisticsDetailed                                           `json:"statistics"`
-	Links                ProfileSummarizedLinks                                       `json:"links"`
+	Risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS `json:"risks"`
+	Statistics StatisticsDetailed `json:"statistics"`
+	Links ProfileSummarizedLinks `json:"links"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -59,7 +69,7 @@ type _GetProfile200Response GetProfile200Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetProfile200Response(id string, name string, description string, scannerKind string, createdAt string, updatedAt string, configuration GetProfile200ResponseConfiguration, extraAssets []ProfileExtraAsset, asset AssetDetailed, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, statistics StatisticsDetailed, links ProfileSummarizedLinks) *GetProfile200Response {
+func NewGetProfile200Response(id string, name string, description string, scannerKind string, createdAt string, updatedAt string, cron NullableString, scheduledForDeletionAt NullableString, score NullableFloat32, coverage NullableFloat32, configuration GetProfile200ResponseConfiguration, schemaAssetId NullableString, extraAssets []ProfileExtraAsset, asset AssetDetailed, lastScanId NullableString, lastSuccessfulScanId NullableString, lastScan ScanDetailed, lastSuccessfulScan ScanDetailed1, lastResourceScan ScanDetailed2, lastSuccessfulResourceScan ScanDetailed3, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, statistics StatisticsDetailed, links ProfileSummarizedLinks) *GetProfile200Response {
 	this := GetProfile200Response{}
 	this.Id = id
 	this.Name = name
@@ -67,9 +77,20 @@ func NewGetProfile200Response(id string, name string, description string, scanne
 	this.ScannerKind = scannerKind
 	this.CreatedAt = createdAt
 	this.UpdatedAt = updatedAt
+	this.Cron = cron
+	this.ScheduledForDeletionAt = scheduledForDeletionAt
+	this.Score = score
+	this.Coverage = coverage
 	this.Configuration = configuration
+	this.SchemaAssetId = schemaAssetId
 	this.ExtraAssets = extraAssets
 	this.Asset = asset
+	this.LastScanId = lastScanId
+	this.LastSuccessfulScanId = lastSuccessfulScanId
+	this.LastScan = lastScan
+	this.LastSuccessfulScan = lastSuccessfulScan
+	this.LastResourceScan = lastResourceScan
+	this.LastSuccessfulResourceScan = lastSuccessfulResourceScan
 	this.Risks = risks
 	this.Statistics = statistics
 	this.Links = links
@@ -228,132 +249,108 @@ func (o *GetProfile200Response) SetUpdatedAt(v string) {
 	o.UpdatedAt = v
 }
 
-// GetCron returns the Cron field value if set, zero value otherwise.
+// GetCron returns the Cron field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *GetProfile200Response) GetCron() string {
-	if o == nil || IsNil(o.Cron) {
+	if o == nil || o.Cron.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.Cron
+
+	return *o.Cron.Get()
 }
 
-// GetCronOk returns a tuple with the Cron field value if set, nil otherwise
+// GetCronOk returns a tuple with the Cron field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200Response) GetCronOk() (*string, bool) {
-	if o == nil || IsNil(o.Cron) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Cron, true
+	return o.Cron.Get(), o.Cron.IsSet()
 }
 
-// HasCron returns a boolean if a field has been set.
-func (o *GetProfile200Response) HasCron() bool {
-	if o != nil && !IsNil(o.Cron) {
-		return true
-	}
-
-	return false
-}
-
-// SetCron gets a reference to the given string and assigns it to the Cron field.
+// SetCron sets field value
 func (o *GetProfile200Response) SetCron(v string) {
-	o.Cron = &v
+	o.Cron.Set(&v)
 }
 
-// GetScheduledForDeletionAt returns the ScheduledForDeletionAt field value if set, zero value otherwise.
+// GetScheduledForDeletionAt returns the ScheduledForDeletionAt field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *GetProfile200Response) GetScheduledForDeletionAt() string {
-	if o == nil || IsNil(o.ScheduledForDeletionAt) {
+	if o == nil || o.ScheduledForDeletionAt.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.ScheduledForDeletionAt
+
+	return *o.ScheduledForDeletionAt.Get()
 }
 
-// GetScheduledForDeletionAtOk returns a tuple with the ScheduledForDeletionAt field value if set, nil otherwise
+// GetScheduledForDeletionAtOk returns a tuple with the ScheduledForDeletionAt field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200Response) GetScheduledForDeletionAtOk() (*string, bool) {
-	if o == nil || IsNil(o.ScheduledForDeletionAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ScheduledForDeletionAt, true
+	return o.ScheduledForDeletionAt.Get(), o.ScheduledForDeletionAt.IsSet()
 }
 
-// HasScheduledForDeletionAt returns a boolean if a field has been set.
-func (o *GetProfile200Response) HasScheduledForDeletionAt() bool {
-	if o != nil && !IsNil(o.ScheduledForDeletionAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetScheduledForDeletionAt gets a reference to the given string and assigns it to the ScheduledForDeletionAt field.
+// SetScheduledForDeletionAt sets field value
 func (o *GetProfile200Response) SetScheduledForDeletionAt(v string) {
-	o.ScheduledForDeletionAt = &v
+	o.ScheduledForDeletionAt.Set(&v)
 }
 
-// GetScore returns the Score field value if set, zero value otherwise.
+// GetScore returns the Score field value
+// If the value is explicit nil, the zero value for float32 will be returned
 func (o *GetProfile200Response) GetScore() float32 {
-	if o == nil || IsNil(o.Score) {
+	if o == nil || o.Score.Get() == nil {
 		var ret float32
 		return ret
 	}
-	return *o.Score
+
+	return *o.Score.Get()
 }
 
-// GetScoreOk returns a tuple with the Score field value if set, nil otherwise
+// GetScoreOk returns a tuple with the Score field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200Response) GetScoreOk() (*float32, bool) {
-	if o == nil || IsNil(o.Score) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Score, true
+	return o.Score.Get(), o.Score.IsSet()
 }
 
-// HasScore returns a boolean if a field has been set.
-func (o *GetProfile200Response) HasScore() bool {
-	if o != nil && !IsNil(o.Score) {
-		return true
-	}
-
-	return false
-}
-
-// SetScore gets a reference to the given float32 and assigns it to the Score field.
+// SetScore sets field value
 func (o *GetProfile200Response) SetScore(v float32) {
-	o.Score = &v
+	o.Score.Set(&v)
 }
 
-// GetCoverage returns the Coverage field value if set, zero value otherwise.
+// GetCoverage returns the Coverage field value
+// If the value is explicit nil, the zero value for float32 will be returned
 func (o *GetProfile200Response) GetCoverage() float32 {
-	if o == nil || IsNil(o.Coverage) {
+	if o == nil || o.Coverage.Get() == nil {
 		var ret float32
 		return ret
 	}
-	return *o.Coverage
+
+	return *o.Coverage.Get()
 }
 
-// GetCoverageOk returns a tuple with the Coverage field value if set, nil otherwise
+// GetCoverageOk returns a tuple with the Coverage field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200Response) GetCoverageOk() (*float32, bool) {
-	if o == nil || IsNil(o.Coverage) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Coverage, true
+	return o.Coverage.Get(), o.Coverage.IsSet()
 }
 
-// HasCoverage returns a boolean if a field has been set.
-func (o *GetProfile200Response) HasCoverage() bool {
-	if o != nil && !IsNil(o.Coverage) {
-		return true
-	}
-
-	return false
-}
-
-// SetCoverage gets a reference to the given float32 and assigns it to the Coverage field.
+// SetCoverage sets field value
 func (o *GetProfile200Response) SetCoverage(v float32) {
-	o.Coverage = &v
+	o.Coverage.Set(&v)
 }
 
 // GetConfiguration returns the Configuration field value
@@ -378,6 +375,32 @@ func (o *GetProfile200Response) GetConfigurationOk() (*GetProfile200ResponseConf
 // SetConfiguration sets field value
 func (o *GetProfile200Response) SetConfiguration(v GetProfile200ResponseConfiguration) {
 	o.Configuration = v
+}
+
+// GetSchemaAssetId returns the SchemaAssetId field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *GetProfile200Response) GetSchemaAssetId() string {
+	if o == nil || o.SchemaAssetId.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.SchemaAssetId.Get()
+}
+
+// GetSchemaAssetIdOk returns a tuple with the SchemaAssetId field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *GetProfile200Response) GetSchemaAssetIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.SchemaAssetId.Get(), o.SchemaAssetId.IsSet()
+}
+
+// SetSchemaAssetId sets field value
+func (o *GetProfile200Response) SetSchemaAssetId(v string) {
+	o.SchemaAssetId.Set(&v)
 }
 
 // GetExtraAssets returns the ExtraAssets field value
@@ -428,68 +451,158 @@ func (o *GetProfile200Response) SetAsset(v AssetDetailed) {
 	o.Asset = v
 }
 
-// GetLastResourceScan returns the LastResourceScan field value if set, zero value otherwise.
-func (o *GetProfile200Response) GetLastResourceScan() ScanDetailed {
-	if o == nil || IsNil(o.LastResourceScan) {
+// GetLastScanId returns the LastScanId field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *GetProfile200Response) GetLastScanId() string {
+	if o == nil || o.LastScanId.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.LastScanId.Get()
+}
+
+// GetLastScanIdOk returns a tuple with the LastScanId field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *GetProfile200Response) GetLastScanIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.LastScanId.Get(), o.LastScanId.IsSet()
+}
+
+// SetLastScanId sets field value
+func (o *GetProfile200Response) SetLastScanId(v string) {
+	o.LastScanId.Set(&v)
+}
+
+// GetLastSuccessfulScanId returns the LastSuccessfulScanId field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *GetProfile200Response) GetLastSuccessfulScanId() string {
+	if o == nil || o.LastSuccessfulScanId.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.LastSuccessfulScanId.Get()
+}
+
+// GetLastSuccessfulScanIdOk returns a tuple with the LastSuccessfulScanId field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *GetProfile200Response) GetLastSuccessfulScanIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.LastSuccessfulScanId.Get(), o.LastSuccessfulScanId.IsSet()
+}
+
+// SetLastSuccessfulScanId sets field value
+func (o *GetProfile200Response) SetLastSuccessfulScanId(v string) {
+	o.LastSuccessfulScanId.Set(&v)
+}
+
+// GetLastScan returns the LastScan field value
+func (o *GetProfile200Response) GetLastScan() ScanDetailed {
+	if o == nil {
 		var ret ScanDetailed
 		return ret
 	}
-	return *o.LastResourceScan
+
+	return o.LastScan
 }
 
-// GetLastResourceScanOk returns a tuple with the LastResourceScan field value if set, nil otherwise
+// GetLastScanOk returns a tuple with the LastScan field value
 // and a boolean to check if the value has been set.
-func (o *GetProfile200Response) GetLastResourceScanOk() (*ScanDetailed, bool) {
-	if o == nil || IsNil(o.LastResourceScan) {
+func (o *GetProfile200Response) GetLastScanOk() (*ScanDetailed, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.LastResourceScan, true
+	return &o.LastScan, true
 }
 
-// HasLastResourceScan returns a boolean if a field has been set.
-func (o *GetProfile200Response) HasLastResourceScan() bool {
-	if o != nil && !IsNil(o.LastResourceScan) {
-		return true
-	}
-
-	return false
+// SetLastScan sets field value
+func (o *GetProfile200Response) SetLastScan(v ScanDetailed) {
+	o.LastScan = v
 }
 
-// SetLastResourceScan gets a reference to the given ScanDetailed and assigns it to the LastResourceScan field.
-func (o *GetProfile200Response) SetLastResourceScan(v ScanDetailed) {
-	o.LastResourceScan = &v
-}
-
-// GetLastSuccessfulResourceScan returns the LastSuccessfulResourceScan field value if set, zero value otherwise.
-func (o *GetProfile200Response) GetLastSuccessfulResourceScan() ScanDetailed1 {
-	if o == nil || IsNil(o.LastSuccessfulResourceScan) {
+// GetLastSuccessfulScan returns the LastSuccessfulScan field value
+func (o *GetProfile200Response) GetLastSuccessfulScan() ScanDetailed1 {
+	if o == nil {
 		var ret ScanDetailed1
 		return ret
 	}
-	return *o.LastSuccessfulResourceScan
+
+	return o.LastSuccessfulScan
 }
 
-// GetLastSuccessfulResourceScanOk returns a tuple with the LastSuccessfulResourceScan field value if set, nil otherwise
+// GetLastSuccessfulScanOk returns a tuple with the LastSuccessfulScan field value
 // and a boolean to check if the value has been set.
-func (o *GetProfile200Response) GetLastSuccessfulResourceScanOk() (*ScanDetailed1, bool) {
-	if o == nil || IsNil(o.LastSuccessfulResourceScan) {
+func (o *GetProfile200Response) GetLastSuccessfulScanOk() (*ScanDetailed1, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.LastSuccessfulResourceScan, true
+	return &o.LastSuccessfulScan, true
 }
 
-// HasLastSuccessfulResourceScan returns a boolean if a field has been set.
-func (o *GetProfile200Response) HasLastSuccessfulResourceScan() bool {
-	if o != nil && !IsNil(o.LastSuccessfulResourceScan) {
-		return true
+// SetLastSuccessfulScan sets field value
+func (o *GetProfile200Response) SetLastSuccessfulScan(v ScanDetailed1) {
+	o.LastSuccessfulScan = v
+}
+
+// GetLastResourceScan returns the LastResourceScan field value
+// Deprecated
+func (o *GetProfile200Response) GetLastResourceScan() ScanDetailed2 {
+	if o == nil {
+		var ret ScanDetailed2
+		return ret
 	}
 
-	return false
+	return o.LastResourceScan
 }
 
-// SetLastSuccessfulResourceScan gets a reference to the given ScanDetailed1 and assigns it to the LastSuccessfulResourceScan field.
-func (o *GetProfile200Response) SetLastSuccessfulResourceScan(v ScanDetailed1) {
-	o.LastSuccessfulResourceScan = &v
+// GetLastResourceScanOk returns a tuple with the LastResourceScan field value
+// and a boolean to check if the value has been set.
+// Deprecated
+func (o *GetProfile200Response) GetLastResourceScanOk() (*ScanDetailed2, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.LastResourceScan, true
+}
+
+// SetLastResourceScan sets field value
+// Deprecated
+func (o *GetProfile200Response) SetLastResourceScan(v ScanDetailed2) {
+	o.LastResourceScan = v
+}
+
+// GetLastSuccessfulResourceScan returns the LastSuccessfulResourceScan field value
+// Deprecated
+func (o *GetProfile200Response) GetLastSuccessfulResourceScan() ScanDetailed3 {
+	if o == nil {
+		var ret ScanDetailed3
+		return ret
+	}
+
+	return o.LastSuccessfulResourceScan
+}
+
+// GetLastSuccessfulResourceScanOk returns a tuple with the LastSuccessfulResourceScan field value
+// and a boolean to check if the value has been set.
+// Deprecated
+func (o *GetProfile200Response) GetLastSuccessfulResourceScanOk() (*ScanDetailed3, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.LastSuccessfulResourceScan, true
+}
+
+// SetLastSuccessfulResourceScan sets field value
+// Deprecated
+func (o *GetProfile200Response) SetLastSuccessfulResourceScan(v ScanDetailed3) {
+	o.LastSuccessfulResourceScan = v
 }
 
 // GetRisks returns the Risks field value
@@ -565,7 +678,7 @@ func (o *GetProfile200Response) SetLinks(v ProfileSummarizedLinks) {
 }
 
 func (o GetProfile200Response) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -580,27 +693,20 @@ func (o GetProfile200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize["scannerKind"] = o.ScannerKind
 	toSerialize["createdAt"] = o.CreatedAt
 	toSerialize["updatedAt"] = o.UpdatedAt
-	if !IsNil(o.Cron) {
-		toSerialize["cron"] = o.Cron
-	}
-	if !IsNil(o.ScheduledForDeletionAt) {
-		toSerialize["scheduledForDeletionAt"] = o.ScheduledForDeletionAt
-	}
-	if !IsNil(o.Score) {
-		toSerialize["score"] = o.Score
-	}
-	if !IsNil(o.Coverage) {
-		toSerialize["coverage"] = o.Coverage
-	}
+	toSerialize["cron"] = o.Cron.Get()
+	toSerialize["scheduledForDeletionAt"] = o.ScheduledForDeletionAt.Get()
+	toSerialize["score"] = o.Score.Get()
+	toSerialize["coverage"] = o.Coverage.Get()
 	toSerialize["configuration"] = o.Configuration
+	toSerialize["schemaAssetId"] = o.SchemaAssetId.Get()
 	toSerialize["extraAssets"] = o.ExtraAssets
 	toSerialize["asset"] = o.Asset
-	if !IsNil(o.LastResourceScan) {
-		toSerialize["lastResourceScan"] = o.LastResourceScan
-	}
-	if !IsNil(o.LastSuccessfulResourceScan) {
-		toSerialize["lastSuccessfulResourceScan"] = o.LastSuccessfulResourceScan
-	}
+	toSerialize["lastScanId"] = o.LastScanId.Get()
+	toSerialize["lastSuccessfulScanId"] = o.LastSuccessfulScanId.Get()
+	toSerialize["lastScan"] = o.LastScan
+	toSerialize["lastSuccessfulScan"] = o.LastSuccessfulScan
+	toSerialize["lastResourceScan"] = o.LastResourceScan
+	toSerialize["lastSuccessfulResourceScan"] = o.LastSuccessfulResourceScan
 	toSerialize["risks"] = o.Risks
 	toSerialize["statistics"] = o.Statistics
 	toSerialize["links"] = o.Links
@@ -623,9 +729,20 @@ func (o *GetProfile200Response) UnmarshalJSON(data []byte) (err error) {
 		"scannerKind",
 		"createdAt",
 		"updatedAt",
+		"cron",
+		"scheduledForDeletionAt",
+		"score",
+		"coverage",
 		"configuration",
+		"schemaAssetId",
 		"extraAssets",
 		"asset",
+		"lastScanId",
+		"lastSuccessfulScanId",
+		"lastScan",
+		"lastSuccessfulScan",
+		"lastResourceScan",
+		"lastSuccessfulResourceScan",
 		"risks",
 		"statistics",
 		"links",
@@ -636,10 +753,10 @@ func (o *GetProfile200Response) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -669,8 +786,13 @@ func (o *GetProfile200Response) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "score")
 		delete(additionalProperties, "coverage")
 		delete(additionalProperties, "configuration")
+		delete(additionalProperties, "schemaAssetId")
 		delete(additionalProperties, "extraAssets")
 		delete(additionalProperties, "asset")
+		delete(additionalProperties, "lastScanId")
+		delete(additionalProperties, "lastSuccessfulScanId")
+		delete(additionalProperties, "lastScan")
+		delete(additionalProperties, "lastSuccessfulScan")
 		delete(additionalProperties, "lastResourceScan")
 		delete(additionalProperties, "lastSuccessfulResourceScan")
 		delete(additionalProperties, "risks")
@@ -717,3 +839,5 @@ func (v *NullableGetProfile200Response) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

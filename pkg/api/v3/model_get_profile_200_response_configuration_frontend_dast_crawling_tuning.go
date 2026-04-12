@@ -19,11 +19,11 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationFrontendDastCrawlingTu
 
 // GetProfile200ResponseConfigurationFrontendDastCrawlingTuning struct for GetProfile200ResponseConfigurationFrontendDastCrawlingTuning
 type GetProfile200ResponseConfigurationFrontendDastCrawlingTuning struct {
-	MaxUniqueValuesPerQueryParam  *float32 `json:"max_unique_values_per_query_param,omitempty"`
-	MaxUniqueFragmentsPerPage     *float32 `json:"max_unique_fragments_per_page,omitempty"`
-	MaxParameterizedUrlVariations *float32 `json:"max_parameterized_url_variations,omitempty"`
-	OnlyInscopeCrawlingLogs       *bool    `json:"only_inscope_crawling_logs,omitempty"`
-	AdditionalProperties          map[string]interface{}
+	MaxUniqueValuesPerQueryParam NullableFloat32 `json:"max_unique_values_per_query_param,omitempty"`
+	MaxUniqueFragmentsPerPage NullableFloat32 `json:"max_unique_fragments_per_page,omitempty"`
+	MaxParameterizedUrlVariations NullableFloat32 `json:"max_parameterized_url_variations,omitempty"`
+	OnlyInscopeCrawlingLogs NullableBool `json:"only_inscope_crawling_logs,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetProfile200ResponseConfigurationFrontendDastCrawlingTuning GetProfile200ResponseConfigurationFrontendDastCrawlingTuning
@@ -45,136 +45,176 @@ func NewGetProfile200ResponseConfigurationFrontendDastCrawlingTuningWithDefaults
 	return &this
 }
 
-// GetMaxUniqueValuesPerQueryParam returns the MaxUniqueValuesPerQueryParam field value if set, zero value otherwise.
+// GetMaxUniqueValuesPerQueryParam returns the MaxUniqueValuesPerQueryParam field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) GetMaxUniqueValuesPerQueryParam() float32 {
-	if o == nil || IsNil(o.MaxUniqueValuesPerQueryParam) {
+	if o == nil || IsNil(o.MaxUniqueValuesPerQueryParam.Get()) {
 		var ret float32
 		return ret
 	}
-	return *o.MaxUniqueValuesPerQueryParam
+	return *o.MaxUniqueValuesPerQueryParam.Get()
 }
 
 // GetMaxUniqueValuesPerQueryParamOk returns a tuple with the MaxUniqueValuesPerQueryParam field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) GetMaxUniqueValuesPerQueryParamOk() (*float32, bool) {
-	if o == nil || IsNil(o.MaxUniqueValuesPerQueryParam) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MaxUniqueValuesPerQueryParam, true
+	return o.MaxUniqueValuesPerQueryParam.Get(), o.MaxUniqueValuesPerQueryParam.IsSet()
 }
 
 // HasMaxUniqueValuesPerQueryParam returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) HasMaxUniqueValuesPerQueryParam() bool {
-	if o != nil && !IsNil(o.MaxUniqueValuesPerQueryParam) {
+	if o != nil && o.MaxUniqueValuesPerQueryParam.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetMaxUniqueValuesPerQueryParam gets a reference to the given float32 and assigns it to the MaxUniqueValuesPerQueryParam field.
+// SetMaxUniqueValuesPerQueryParam gets a reference to the given NullableFloat32 and assigns it to the MaxUniqueValuesPerQueryParam field.
 func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) SetMaxUniqueValuesPerQueryParam(v float32) {
-	o.MaxUniqueValuesPerQueryParam = &v
+	o.MaxUniqueValuesPerQueryParam.Set(&v)
+}
+// SetMaxUniqueValuesPerQueryParamNil sets the value for MaxUniqueValuesPerQueryParam to be an explicit nil
+func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) SetMaxUniqueValuesPerQueryParamNil() {
+	o.MaxUniqueValuesPerQueryParam.Set(nil)
 }
 
-// GetMaxUniqueFragmentsPerPage returns the MaxUniqueFragmentsPerPage field value if set, zero value otherwise.
+// UnsetMaxUniqueValuesPerQueryParam ensures that no value is present for MaxUniqueValuesPerQueryParam, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) UnsetMaxUniqueValuesPerQueryParam() {
+	o.MaxUniqueValuesPerQueryParam.Unset()
+}
+
+// GetMaxUniqueFragmentsPerPage returns the MaxUniqueFragmentsPerPage field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) GetMaxUniqueFragmentsPerPage() float32 {
-	if o == nil || IsNil(o.MaxUniqueFragmentsPerPage) {
+	if o == nil || IsNil(o.MaxUniqueFragmentsPerPage.Get()) {
 		var ret float32
 		return ret
 	}
-	return *o.MaxUniqueFragmentsPerPage
+	return *o.MaxUniqueFragmentsPerPage.Get()
 }
 
 // GetMaxUniqueFragmentsPerPageOk returns a tuple with the MaxUniqueFragmentsPerPage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) GetMaxUniqueFragmentsPerPageOk() (*float32, bool) {
-	if o == nil || IsNil(o.MaxUniqueFragmentsPerPage) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MaxUniqueFragmentsPerPage, true
+	return o.MaxUniqueFragmentsPerPage.Get(), o.MaxUniqueFragmentsPerPage.IsSet()
 }
 
 // HasMaxUniqueFragmentsPerPage returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) HasMaxUniqueFragmentsPerPage() bool {
-	if o != nil && !IsNil(o.MaxUniqueFragmentsPerPage) {
+	if o != nil && o.MaxUniqueFragmentsPerPage.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetMaxUniqueFragmentsPerPage gets a reference to the given float32 and assigns it to the MaxUniqueFragmentsPerPage field.
+// SetMaxUniqueFragmentsPerPage gets a reference to the given NullableFloat32 and assigns it to the MaxUniqueFragmentsPerPage field.
 func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) SetMaxUniqueFragmentsPerPage(v float32) {
-	o.MaxUniqueFragmentsPerPage = &v
+	o.MaxUniqueFragmentsPerPage.Set(&v)
+}
+// SetMaxUniqueFragmentsPerPageNil sets the value for MaxUniqueFragmentsPerPage to be an explicit nil
+func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) SetMaxUniqueFragmentsPerPageNil() {
+	o.MaxUniqueFragmentsPerPage.Set(nil)
 }
 
-// GetMaxParameterizedUrlVariations returns the MaxParameterizedUrlVariations field value if set, zero value otherwise.
+// UnsetMaxUniqueFragmentsPerPage ensures that no value is present for MaxUniqueFragmentsPerPage, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) UnsetMaxUniqueFragmentsPerPage() {
+	o.MaxUniqueFragmentsPerPage.Unset()
+}
+
+// GetMaxParameterizedUrlVariations returns the MaxParameterizedUrlVariations field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) GetMaxParameterizedUrlVariations() float32 {
-	if o == nil || IsNil(o.MaxParameterizedUrlVariations) {
+	if o == nil || IsNil(o.MaxParameterizedUrlVariations.Get()) {
 		var ret float32
 		return ret
 	}
-	return *o.MaxParameterizedUrlVariations
+	return *o.MaxParameterizedUrlVariations.Get()
 }
 
 // GetMaxParameterizedUrlVariationsOk returns a tuple with the MaxParameterizedUrlVariations field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) GetMaxParameterizedUrlVariationsOk() (*float32, bool) {
-	if o == nil || IsNil(o.MaxParameterizedUrlVariations) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MaxParameterizedUrlVariations, true
+	return o.MaxParameterizedUrlVariations.Get(), o.MaxParameterizedUrlVariations.IsSet()
 }
 
 // HasMaxParameterizedUrlVariations returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) HasMaxParameterizedUrlVariations() bool {
-	if o != nil && !IsNil(o.MaxParameterizedUrlVariations) {
+	if o != nil && o.MaxParameterizedUrlVariations.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetMaxParameterizedUrlVariations gets a reference to the given float32 and assigns it to the MaxParameterizedUrlVariations field.
+// SetMaxParameterizedUrlVariations gets a reference to the given NullableFloat32 and assigns it to the MaxParameterizedUrlVariations field.
 func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) SetMaxParameterizedUrlVariations(v float32) {
-	o.MaxParameterizedUrlVariations = &v
+	o.MaxParameterizedUrlVariations.Set(&v)
+}
+// SetMaxParameterizedUrlVariationsNil sets the value for MaxParameterizedUrlVariations to be an explicit nil
+func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) SetMaxParameterizedUrlVariationsNil() {
+	o.MaxParameterizedUrlVariations.Set(nil)
 }
 
-// GetOnlyInscopeCrawlingLogs returns the OnlyInscopeCrawlingLogs field value if set, zero value otherwise.
+// UnsetMaxParameterizedUrlVariations ensures that no value is present for MaxParameterizedUrlVariations, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) UnsetMaxParameterizedUrlVariations() {
+	o.MaxParameterizedUrlVariations.Unset()
+}
+
+// GetOnlyInscopeCrawlingLogs returns the OnlyInscopeCrawlingLogs field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) GetOnlyInscopeCrawlingLogs() bool {
-	if o == nil || IsNil(o.OnlyInscopeCrawlingLogs) {
+	if o == nil || IsNil(o.OnlyInscopeCrawlingLogs.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.OnlyInscopeCrawlingLogs
+	return *o.OnlyInscopeCrawlingLogs.Get()
 }
 
 // GetOnlyInscopeCrawlingLogsOk returns a tuple with the OnlyInscopeCrawlingLogs field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) GetOnlyInscopeCrawlingLogsOk() (*bool, bool) {
-	if o == nil || IsNil(o.OnlyInscopeCrawlingLogs) {
+	if o == nil {
 		return nil, false
 	}
-	return o.OnlyInscopeCrawlingLogs, true
+	return o.OnlyInscopeCrawlingLogs.Get(), o.OnlyInscopeCrawlingLogs.IsSet()
 }
 
 // HasOnlyInscopeCrawlingLogs returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) HasOnlyInscopeCrawlingLogs() bool {
-	if o != nil && !IsNil(o.OnlyInscopeCrawlingLogs) {
+	if o != nil && o.OnlyInscopeCrawlingLogs.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOnlyInscopeCrawlingLogs gets a reference to the given bool and assigns it to the OnlyInscopeCrawlingLogs field.
+// SetOnlyInscopeCrawlingLogs gets a reference to the given NullableBool and assigns it to the OnlyInscopeCrawlingLogs field.
 func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) SetOnlyInscopeCrawlingLogs(v bool) {
-	o.OnlyInscopeCrawlingLogs = &v
+	o.OnlyInscopeCrawlingLogs.Set(&v)
+}
+// SetOnlyInscopeCrawlingLogsNil sets the value for OnlyInscopeCrawlingLogs to be an explicit nil
+func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) SetOnlyInscopeCrawlingLogsNil() {
+	o.OnlyInscopeCrawlingLogs.Set(nil)
+}
+
+// UnsetOnlyInscopeCrawlingLogs ensures that no value is present for OnlyInscopeCrawlingLogs, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) UnsetOnlyInscopeCrawlingLogs() {
+	o.OnlyInscopeCrawlingLogs.Unset()
 }
 
 func (o GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -183,17 +223,17 @@ func (o GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) MarshalJSO
 
 func (o GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.MaxUniqueValuesPerQueryParam) {
-		toSerialize["max_unique_values_per_query_param"] = o.MaxUniqueValuesPerQueryParam
+	if o.MaxUniqueValuesPerQueryParam.IsSet() {
+		toSerialize["max_unique_values_per_query_param"] = o.MaxUniqueValuesPerQueryParam.Get()
 	}
-	if !IsNil(o.MaxUniqueFragmentsPerPage) {
-		toSerialize["max_unique_fragments_per_page"] = o.MaxUniqueFragmentsPerPage
+	if o.MaxUniqueFragmentsPerPage.IsSet() {
+		toSerialize["max_unique_fragments_per_page"] = o.MaxUniqueFragmentsPerPage.Get()
 	}
-	if !IsNil(o.MaxParameterizedUrlVariations) {
-		toSerialize["max_parameterized_url_variations"] = o.MaxParameterizedUrlVariations
+	if o.MaxParameterizedUrlVariations.IsSet() {
+		toSerialize["max_parameterized_url_variations"] = o.MaxParameterizedUrlVariations.Get()
 	}
-	if !IsNil(o.OnlyInscopeCrawlingLogs) {
-		toSerialize["only_inscope_crawling_logs"] = o.OnlyInscopeCrawlingLogs
+	if o.OnlyInscopeCrawlingLogs.IsSet() {
+		toSerialize["only_inscope_crawling_logs"] = o.OnlyInscopeCrawlingLogs.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -262,3 +302,5 @@ func (v *NullableGetProfile200ResponseConfigurationFrontendDastCrawlingTuning) U
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

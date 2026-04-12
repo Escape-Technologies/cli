@@ -23,24 +23,26 @@ type CreateAssetSOAPRequest struct {
 	// The list of project IDs bind the asset on.
 	ProjectIds []string `json:"projectIds,omitempty"`
 	// The custom name of the asset. If not provided, the default name will be used.
-	Name                      *string                                                                         `json:"name,omitempty"`
-	AssetClass                ENUMAPISERVICE                                                                  `json:"asset_class"`
-	ExtraMetadata             map[string]interface{}                                                          `json:"extra_metadata,omitempty"`
-	ScreenshotS3Key           *string                                                                         `json:"screenshot_s3_key,omitempty"`
-	AssetType                 ENUMSOAP                                                                        `json:"asset_type"`
-	Url                       string                                                                          `json:"url"`
-	Favicon                   *string                                                                         `json:"favicon,omitempty"`
-	ReachableVia              []string                                                                        `json:"reachable_via,omitempty"`
-	ReachableViaExternalProxy *bool                                                                           `json:"reachable_via_external_proxy,omitempty"`
-	Private                   *bool                                                                           `json:"private,omitempty"`
-	PrivateLocationId         *string                                                                         `json:"private_location_id,omitempty"`
-	Environment               *ENUMPROPERTIESENVIRONMENT                                                      `json:"environment,omitempty"`
-	CloudProvider             *ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER `json:"cloud_provider,omitempty"`
-	WafProvider               *ENUMPROPERTIESWAFPROVIDER                                                      `json:"waf_provider,omitempty"`
-	ThirdParty                *ENUMPROPERTIESTHIRDPARTY                                                       `json:"third_party,omitempty"`
-	Ips                       []string                                                                        `json:"ips,omitempty"`
-	RegionCountryCodes        []string                                                                        `json:"region_country_codes,omitempty"`
-	AdditionalProperties      map[string]interface{}
+	Name NullableString `json:"name,omitempty"`
+	AssetClass ENUMAPISERVICE `json:"asset_class"`
+	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
+	ScreenshotS3Key NullableString `json:"screenshot_s3_key,omitempty"`
+	AssetType ENUMSOAP `json:"asset_type"`
+	Url string `json:"url"`
+	Favicon NullableString `json:"favicon,omitempty"`
+	ReachableVia []string `json:"reachable_via,omitempty"`
+	ReachableViaExternalProxy NullableBool `json:"reachable_via_external_proxy,omitempty"`
+	Private NullableBool `json:"private,omitempty"`
+	PrivateLocationId NullableString `json:"private_location_id,omitempty"`
+	Environment NullableENUMPROPERTIESENVIRONMENT `json:"environment,omitempty"`
+	CloudProvider NullableENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER `json:"cloud_provider,omitempty"`
+	WafProvider NullableENUMPROPERTIESWAFPROVIDER `json:"waf_provider,omitempty"`
+	AuthProtocol NullableENUMPROPERTIESAUTHPROTOCOL `json:"auth_protocol,omitempty"`
+	AuthTechnology NullableENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESAUTHTECHNOLOGY `json:"auth_technology,omitempty"`
+	ThirdParty NullableENUMPROPERTIESTHIRDPARTY `json:"third_party,omitempty"`
+	Ips []string `json:"ips,omitempty"`
+	RegionCountryCodes []string `json:"region_country_codes,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateAssetSOAPRequest CreateAssetSOAPRequest
@@ -65,9 +67,9 @@ func NewCreateAssetSOAPRequestWithDefaults() *CreateAssetSOAPRequest {
 	return &this
 }
 
-// GetProjectIds returns the ProjectIds field value if set, zero value otherwise.
+// GetProjectIds returns the ProjectIds field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetSOAPRequest) GetProjectIds() []string {
-	if o == nil || IsNil(o.ProjectIds) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -76,6 +78,7 @@ func (o *CreateAssetSOAPRequest) GetProjectIds() []string {
 
 // GetProjectIdsOk returns a tuple with the ProjectIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetSOAPRequest) GetProjectIdsOk() ([]string, bool) {
 	if o == nil || IsNil(o.ProjectIds) {
 		return nil, false
@@ -97,36 +100,46 @@ func (o *CreateAssetSOAPRequest) SetProjectIds(v []string) {
 	o.ProjectIds = v
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
+// GetName returns the Name field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetSOAPRequest) GetName() string {
-	if o == nil || IsNil(o.Name) {
+	if o == nil || IsNil(o.Name.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Name
+	return *o.Name.Get()
 }
 
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetSOAPRequest) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Name, true
+	return o.Name.Get(), o.Name.IsSet()
 }
 
 // HasName returns a boolean if a field has been set.
 func (o *CreateAssetSOAPRequest) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
+	if o != nil && o.Name.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetName gets a reference to the given string and assigns it to the Name field.
+// SetName gets a reference to the given NullableString and assigns it to the Name field.
 func (o *CreateAssetSOAPRequest) SetName(v string) {
-	o.Name = &v
+	o.Name.Set(&v)
+}
+// SetNameNil sets the value for Name to be an explicit nil
+func (o *CreateAssetSOAPRequest) SetNameNil() {
+	o.Name.Set(nil)
+}
+
+// UnsetName ensures that no value is present for Name, not even an explicit nil
+func (o *CreateAssetSOAPRequest) UnsetName() {
+	o.Name.Unset()
 }
 
 // GetAssetClass returns the AssetClass field value
@@ -185,36 +198,46 @@ func (o *CreateAssetSOAPRequest) SetExtraMetadata(v map[string]interface{}) {
 	o.ExtraMetadata = v
 }
 
-// GetScreenshotS3Key returns the ScreenshotS3Key field value if set, zero value otherwise.
+// GetScreenshotS3Key returns the ScreenshotS3Key field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetSOAPRequest) GetScreenshotS3Key() string {
-	if o == nil || IsNil(o.ScreenshotS3Key) {
+	if o == nil || IsNil(o.ScreenshotS3Key.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.ScreenshotS3Key
+	return *o.ScreenshotS3Key.Get()
 }
 
 // GetScreenshotS3KeyOk returns a tuple with the ScreenshotS3Key field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetSOAPRequest) GetScreenshotS3KeyOk() (*string, bool) {
-	if o == nil || IsNil(o.ScreenshotS3Key) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ScreenshotS3Key, true
+	return o.ScreenshotS3Key.Get(), o.ScreenshotS3Key.IsSet()
 }
 
 // HasScreenshotS3Key returns a boolean if a field has been set.
 func (o *CreateAssetSOAPRequest) HasScreenshotS3Key() bool {
-	if o != nil && !IsNil(o.ScreenshotS3Key) {
+	if o != nil && o.ScreenshotS3Key.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetScreenshotS3Key gets a reference to the given string and assigns it to the ScreenshotS3Key field.
+// SetScreenshotS3Key gets a reference to the given NullableString and assigns it to the ScreenshotS3Key field.
 func (o *CreateAssetSOAPRequest) SetScreenshotS3Key(v string) {
-	o.ScreenshotS3Key = &v
+	o.ScreenshotS3Key.Set(&v)
+}
+// SetScreenshotS3KeyNil sets the value for ScreenshotS3Key to be an explicit nil
+func (o *CreateAssetSOAPRequest) SetScreenshotS3KeyNil() {
+	o.ScreenshotS3Key.Set(nil)
+}
+
+// UnsetScreenshotS3Key ensures that no value is present for ScreenshotS3Key, not even an explicit nil
+func (o *CreateAssetSOAPRequest) UnsetScreenshotS3Key() {
+	o.ScreenshotS3Key.Unset()
 }
 
 // GetAssetType returns the AssetType field value
@@ -265,41 +288,51 @@ func (o *CreateAssetSOAPRequest) SetUrl(v string) {
 	o.Url = v
 }
 
-// GetFavicon returns the Favicon field value if set, zero value otherwise.
+// GetFavicon returns the Favicon field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetSOAPRequest) GetFavicon() string {
-	if o == nil || IsNil(o.Favicon) {
+	if o == nil || IsNil(o.Favicon.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Favicon
+	return *o.Favicon.Get()
 }
 
 // GetFaviconOk returns a tuple with the Favicon field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetSOAPRequest) GetFaviconOk() (*string, bool) {
-	if o == nil || IsNil(o.Favicon) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Favicon, true
+	return o.Favicon.Get(), o.Favicon.IsSet()
 }
 
 // HasFavicon returns a boolean if a field has been set.
 func (o *CreateAssetSOAPRequest) HasFavicon() bool {
-	if o != nil && !IsNil(o.Favicon) {
+	if o != nil && o.Favicon.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetFavicon gets a reference to the given string and assigns it to the Favicon field.
+// SetFavicon gets a reference to the given NullableString and assigns it to the Favicon field.
 func (o *CreateAssetSOAPRequest) SetFavicon(v string) {
-	o.Favicon = &v
+	o.Favicon.Set(&v)
+}
+// SetFaviconNil sets the value for Favicon to be an explicit nil
+func (o *CreateAssetSOAPRequest) SetFaviconNil() {
+	o.Favicon.Set(nil)
 }
 
-// GetReachableVia returns the ReachableVia field value if set, zero value otherwise.
+// UnsetFavicon ensures that no value is present for Favicon, not even an explicit nil
+func (o *CreateAssetSOAPRequest) UnsetFavicon() {
+	o.Favicon.Unset()
+}
+
+// GetReachableVia returns the ReachableVia field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetSOAPRequest) GetReachableVia() []string {
-	if o == nil || IsNil(o.ReachableVia) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -308,6 +341,7 @@ func (o *CreateAssetSOAPRequest) GetReachableVia() []string {
 
 // GetReachableViaOk returns a tuple with the ReachableVia field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetSOAPRequest) GetReachableViaOk() ([]string, bool) {
 	if o == nil || IsNil(o.ReachableVia) {
 		return nil, false
@@ -329,233 +363,387 @@ func (o *CreateAssetSOAPRequest) SetReachableVia(v []string) {
 	o.ReachableVia = v
 }
 
-// GetReachableViaExternalProxy returns the ReachableViaExternalProxy field value if set, zero value otherwise.
+// GetReachableViaExternalProxy returns the ReachableViaExternalProxy field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetSOAPRequest) GetReachableViaExternalProxy() bool {
-	if o == nil || IsNil(o.ReachableViaExternalProxy) {
+	if o == nil || IsNil(o.ReachableViaExternalProxy.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.ReachableViaExternalProxy
+	return *o.ReachableViaExternalProxy.Get()
 }
 
 // GetReachableViaExternalProxyOk returns a tuple with the ReachableViaExternalProxy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetSOAPRequest) GetReachableViaExternalProxyOk() (*bool, bool) {
-	if o == nil || IsNil(o.ReachableViaExternalProxy) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ReachableViaExternalProxy, true
+	return o.ReachableViaExternalProxy.Get(), o.ReachableViaExternalProxy.IsSet()
 }
 
 // HasReachableViaExternalProxy returns a boolean if a field has been set.
 func (o *CreateAssetSOAPRequest) HasReachableViaExternalProxy() bool {
-	if o != nil && !IsNil(o.ReachableViaExternalProxy) {
+	if o != nil && o.ReachableViaExternalProxy.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetReachableViaExternalProxy gets a reference to the given bool and assigns it to the ReachableViaExternalProxy field.
+// SetReachableViaExternalProxy gets a reference to the given NullableBool and assigns it to the ReachableViaExternalProxy field.
 func (o *CreateAssetSOAPRequest) SetReachableViaExternalProxy(v bool) {
-	o.ReachableViaExternalProxy = &v
+	o.ReachableViaExternalProxy.Set(&v)
+}
+// SetReachableViaExternalProxyNil sets the value for ReachableViaExternalProxy to be an explicit nil
+func (o *CreateAssetSOAPRequest) SetReachableViaExternalProxyNil() {
+	o.ReachableViaExternalProxy.Set(nil)
 }
 
-// GetPrivate returns the Private field value if set, zero value otherwise.
+// UnsetReachableViaExternalProxy ensures that no value is present for ReachableViaExternalProxy, not even an explicit nil
+func (o *CreateAssetSOAPRequest) UnsetReachableViaExternalProxy() {
+	o.ReachableViaExternalProxy.Unset()
+}
+
+// GetPrivate returns the Private field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetSOAPRequest) GetPrivate() bool {
-	if o == nil || IsNil(o.Private) {
+	if o == nil || IsNil(o.Private.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.Private
+	return *o.Private.Get()
 }
 
 // GetPrivateOk returns a tuple with the Private field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetSOAPRequest) GetPrivateOk() (*bool, bool) {
-	if o == nil || IsNil(o.Private) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Private, true
+	return o.Private.Get(), o.Private.IsSet()
 }
 
 // HasPrivate returns a boolean if a field has been set.
 func (o *CreateAssetSOAPRequest) HasPrivate() bool {
-	if o != nil && !IsNil(o.Private) {
+	if o != nil && o.Private.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPrivate gets a reference to the given bool and assigns it to the Private field.
+// SetPrivate gets a reference to the given NullableBool and assigns it to the Private field.
 func (o *CreateAssetSOAPRequest) SetPrivate(v bool) {
-	o.Private = &v
+	o.Private.Set(&v)
+}
+// SetPrivateNil sets the value for Private to be an explicit nil
+func (o *CreateAssetSOAPRequest) SetPrivateNil() {
+	o.Private.Set(nil)
 }
 
-// GetPrivateLocationId returns the PrivateLocationId field value if set, zero value otherwise.
+// UnsetPrivate ensures that no value is present for Private, not even an explicit nil
+func (o *CreateAssetSOAPRequest) UnsetPrivate() {
+	o.Private.Unset()
+}
+
+// GetPrivateLocationId returns the PrivateLocationId field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetSOAPRequest) GetPrivateLocationId() string {
-	if o == nil || IsNil(o.PrivateLocationId) {
+	if o == nil || IsNil(o.PrivateLocationId.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.PrivateLocationId
+	return *o.PrivateLocationId.Get()
 }
 
 // GetPrivateLocationIdOk returns a tuple with the PrivateLocationId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetSOAPRequest) GetPrivateLocationIdOk() (*string, bool) {
-	if o == nil || IsNil(o.PrivateLocationId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.PrivateLocationId, true
+	return o.PrivateLocationId.Get(), o.PrivateLocationId.IsSet()
 }
 
 // HasPrivateLocationId returns a boolean if a field has been set.
 func (o *CreateAssetSOAPRequest) HasPrivateLocationId() bool {
-	if o != nil && !IsNil(o.PrivateLocationId) {
+	if o != nil && o.PrivateLocationId.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPrivateLocationId gets a reference to the given string and assigns it to the PrivateLocationId field.
+// SetPrivateLocationId gets a reference to the given NullableString and assigns it to the PrivateLocationId field.
 func (o *CreateAssetSOAPRequest) SetPrivateLocationId(v string) {
-	o.PrivateLocationId = &v
+	o.PrivateLocationId.Set(&v)
+}
+// SetPrivateLocationIdNil sets the value for PrivateLocationId to be an explicit nil
+func (o *CreateAssetSOAPRequest) SetPrivateLocationIdNil() {
+	o.PrivateLocationId.Set(nil)
 }
 
-// GetEnvironment returns the Environment field value if set, zero value otherwise.
+// UnsetPrivateLocationId ensures that no value is present for PrivateLocationId, not even an explicit nil
+func (o *CreateAssetSOAPRequest) UnsetPrivateLocationId() {
+	o.PrivateLocationId.Unset()
+}
+
+// GetEnvironment returns the Environment field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetSOAPRequest) GetEnvironment() ENUMPROPERTIESENVIRONMENT {
-	if o == nil || IsNil(o.Environment) {
+	if o == nil || IsNil(o.Environment.Get()) {
 		var ret ENUMPROPERTIESENVIRONMENT
 		return ret
 	}
-	return *o.Environment
+	return *o.Environment.Get()
 }
 
 // GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetSOAPRequest) GetEnvironmentOk() (*ENUMPROPERTIESENVIRONMENT, bool) {
-	if o == nil || IsNil(o.Environment) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Environment, true
+	return o.Environment.Get(), o.Environment.IsSet()
 }
 
 // HasEnvironment returns a boolean if a field has been set.
 func (o *CreateAssetSOAPRequest) HasEnvironment() bool {
-	if o != nil && !IsNil(o.Environment) {
+	if o != nil && o.Environment.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetEnvironment gets a reference to the given ENUMPROPERTIESENVIRONMENT and assigns it to the Environment field.
+// SetEnvironment gets a reference to the given NullableENUMPROPERTIESENVIRONMENT and assigns it to the Environment field.
 func (o *CreateAssetSOAPRequest) SetEnvironment(v ENUMPROPERTIESENVIRONMENT) {
-	o.Environment = &v
+	o.Environment.Set(&v)
+}
+// SetEnvironmentNil sets the value for Environment to be an explicit nil
+func (o *CreateAssetSOAPRequest) SetEnvironmentNil() {
+	o.Environment.Set(nil)
 }
 
-// GetCloudProvider returns the CloudProvider field value if set, zero value otherwise.
+// UnsetEnvironment ensures that no value is present for Environment, not even an explicit nil
+func (o *CreateAssetSOAPRequest) UnsetEnvironment() {
+	o.Environment.Unset()
+}
+
+// GetCloudProvider returns the CloudProvider field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetSOAPRequest) GetCloudProvider() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER {
-	if o == nil || IsNil(o.CloudProvider) {
+	if o == nil || IsNil(o.CloudProvider.Get()) {
 		var ret ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER
 		return ret
 	}
-	return *o.CloudProvider
+	return *o.CloudProvider.Get()
 }
 
 // GetCloudProviderOk returns a tuple with the CloudProvider field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetSOAPRequest) GetCloudProviderOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER, bool) {
-	if o == nil || IsNil(o.CloudProvider) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CloudProvider, true
+	return o.CloudProvider.Get(), o.CloudProvider.IsSet()
 }
 
 // HasCloudProvider returns a boolean if a field has been set.
 func (o *CreateAssetSOAPRequest) HasCloudProvider() bool {
-	if o != nil && !IsNil(o.CloudProvider) {
+	if o != nil && o.CloudProvider.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCloudProvider gets a reference to the given ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER and assigns it to the CloudProvider field.
+// SetCloudProvider gets a reference to the given NullableENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER and assigns it to the CloudProvider field.
 func (o *CreateAssetSOAPRequest) SetCloudProvider(v ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER) {
-	o.CloudProvider = &v
+	o.CloudProvider.Set(&v)
+}
+// SetCloudProviderNil sets the value for CloudProvider to be an explicit nil
+func (o *CreateAssetSOAPRequest) SetCloudProviderNil() {
+	o.CloudProvider.Set(nil)
 }
 
-// GetWafProvider returns the WafProvider field value if set, zero value otherwise.
+// UnsetCloudProvider ensures that no value is present for CloudProvider, not even an explicit nil
+func (o *CreateAssetSOAPRequest) UnsetCloudProvider() {
+	o.CloudProvider.Unset()
+}
+
+// GetWafProvider returns the WafProvider field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetSOAPRequest) GetWafProvider() ENUMPROPERTIESWAFPROVIDER {
-	if o == nil || IsNil(o.WafProvider) {
+	if o == nil || IsNil(o.WafProvider.Get()) {
 		var ret ENUMPROPERTIESWAFPROVIDER
 		return ret
 	}
-	return *o.WafProvider
+	return *o.WafProvider.Get()
 }
 
 // GetWafProviderOk returns a tuple with the WafProvider field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetSOAPRequest) GetWafProviderOk() (*ENUMPROPERTIESWAFPROVIDER, bool) {
-	if o == nil || IsNil(o.WafProvider) {
+	if o == nil {
 		return nil, false
 	}
-	return o.WafProvider, true
+	return o.WafProvider.Get(), o.WafProvider.IsSet()
 }
 
 // HasWafProvider returns a boolean if a field has been set.
 func (o *CreateAssetSOAPRequest) HasWafProvider() bool {
-	if o != nil && !IsNil(o.WafProvider) {
+	if o != nil && o.WafProvider.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetWafProvider gets a reference to the given ENUMPROPERTIESWAFPROVIDER and assigns it to the WafProvider field.
+// SetWafProvider gets a reference to the given NullableENUMPROPERTIESWAFPROVIDER and assigns it to the WafProvider field.
 func (o *CreateAssetSOAPRequest) SetWafProvider(v ENUMPROPERTIESWAFPROVIDER) {
-	o.WafProvider = &v
+	o.WafProvider.Set(&v)
+}
+// SetWafProviderNil sets the value for WafProvider to be an explicit nil
+func (o *CreateAssetSOAPRequest) SetWafProviderNil() {
+	o.WafProvider.Set(nil)
 }
 
-// GetThirdParty returns the ThirdParty field value if set, zero value otherwise.
+// UnsetWafProvider ensures that no value is present for WafProvider, not even an explicit nil
+func (o *CreateAssetSOAPRequest) UnsetWafProvider() {
+	o.WafProvider.Unset()
+}
+
+// GetAuthProtocol returns the AuthProtocol field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CreateAssetSOAPRequest) GetAuthProtocol() ENUMPROPERTIESAUTHPROTOCOL {
+	if o == nil || IsNil(o.AuthProtocol.Get()) {
+		var ret ENUMPROPERTIESAUTHPROTOCOL
+		return ret
+	}
+	return *o.AuthProtocol.Get()
+}
+
+// GetAuthProtocolOk returns a tuple with the AuthProtocol field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CreateAssetSOAPRequest) GetAuthProtocolOk() (*ENUMPROPERTIESAUTHPROTOCOL, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.AuthProtocol.Get(), o.AuthProtocol.IsSet()
+}
+
+// HasAuthProtocol returns a boolean if a field has been set.
+func (o *CreateAssetSOAPRequest) HasAuthProtocol() bool {
+	if o != nil && o.AuthProtocol.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAuthProtocol gets a reference to the given NullableENUMPROPERTIESAUTHPROTOCOL and assigns it to the AuthProtocol field.
+func (o *CreateAssetSOAPRequest) SetAuthProtocol(v ENUMPROPERTIESAUTHPROTOCOL) {
+	o.AuthProtocol.Set(&v)
+}
+// SetAuthProtocolNil sets the value for AuthProtocol to be an explicit nil
+func (o *CreateAssetSOAPRequest) SetAuthProtocolNil() {
+	o.AuthProtocol.Set(nil)
+}
+
+// UnsetAuthProtocol ensures that no value is present for AuthProtocol, not even an explicit nil
+func (o *CreateAssetSOAPRequest) UnsetAuthProtocol() {
+	o.AuthProtocol.Unset()
+}
+
+// GetAuthTechnology returns the AuthTechnology field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CreateAssetSOAPRequest) GetAuthTechnology() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESAUTHTECHNOLOGY {
+	if o == nil || IsNil(o.AuthTechnology.Get()) {
+		var ret ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESAUTHTECHNOLOGY
+		return ret
+	}
+	return *o.AuthTechnology.Get()
+}
+
+// GetAuthTechnologyOk returns a tuple with the AuthTechnology field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CreateAssetSOAPRequest) GetAuthTechnologyOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESAUTHTECHNOLOGY, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.AuthTechnology.Get(), o.AuthTechnology.IsSet()
+}
+
+// HasAuthTechnology returns a boolean if a field has been set.
+func (o *CreateAssetSOAPRequest) HasAuthTechnology() bool {
+	if o != nil && o.AuthTechnology.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAuthTechnology gets a reference to the given NullableENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESAUTHTECHNOLOGY and assigns it to the AuthTechnology field.
+func (o *CreateAssetSOAPRequest) SetAuthTechnology(v ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESAUTHTECHNOLOGY) {
+	o.AuthTechnology.Set(&v)
+}
+// SetAuthTechnologyNil sets the value for AuthTechnology to be an explicit nil
+func (o *CreateAssetSOAPRequest) SetAuthTechnologyNil() {
+	o.AuthTechnology.Set(nil)
+}
+
+// UnsetAuthTechnology ensures that no value is present for AuthTechnology, not even an explicit nil
+func (o *CreateAssetSOAPRequest) UnsetAuthTechnology() {
+	o.AuthTechnology.Unset()
+}
+
+// GetThirdParty returns the ThirdParty field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetSOAPRequest) GetThirdParty() ENUMPROPERTIESTHIRDPARTY {
-	if o == nil || IsNil(o.ThirdParty) {
+	if o == nil || IsNil(o.ThirdParty.Get()) {
 		var ret ENUMPROPERTIESTHIRDPARTY
 		return ret
 	}
-	return *o.ThirdParty
+	return *o.ThirdParty.Get()
 }
 
 // GetThirdPartyOk returns a tuple with the ThirdParty field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetSOAPRequest) GetThirdPartyOk() (*ENUMPROPERTIESTHIRDPARTY, bool) {
-	if o == nil || IsNil(o.ThirdParty) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ThirdParty, true
+	return o.ThirdParty.Get(), o.ThirdParty.IsSet()
 }
 
 // HasThirdParty returns a boolean if a field has been set.
 func (o *CreateAssetSOAPRequest) HasThirdParty() bool {
-	if o != nil && !IsNil(o.ThirdParty) {
+	if o != nil && o.ThirdParty.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetThirdParty gets a reference to the given ENUMPROPERTIESTHIRDPARTY and assigns it to the ThirdParty field.
+// SetThirdParty gets a reference to the given NullableENUMPROPERTIESTHIRDPARTY and assigns it to the ThirdParty field.
 func (o *CreateAssetSOAPRequest) SetThirdParty(v ENUMPROPERTIESTHIRDPARTY) {
-	o.ThirdParty = &v
+	o.ThirdParty.Set(&v)
+}
+// SetThirdPartyNil sets the value for ThirdParty to be an explicit nil
+func (o *CreateAssetSOAPRequest) SetThirdPartyNil() {
+	o.ThirdParty.Set(nil)
 }
 
-// GetIps returns the Ips field value if set, zero value otherwise.
+// UnsetThirdParty ensures that no value is present for ThirdParty, not even an explicit nil
+func (o *CreateAssetSOAPRequest) UnsetThirdParty() {
+	o.ThirdParty.Unset()
+}
+
+// GetIps returns the Ips field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetSOAPRequest) GetIps() []string {
-	if o == nil || IsNil(o.Ips) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -564,6 +752,7 @@ func (o *CreateAssetSOAPRequest) GetIps() []string {
 
 // GetIpsOk returns a tuple with the Ips field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetSOAPRequest) GetIpsOk() ([]string, bool) {
 	if o == nil || IsNil(o.Ips) {
 		return nil, false
@@ -585,9 +774,9 @@ func (o *CreateAssetSOAPRequest) SetIps(v []string) {
 	o.Ips = v
 }
 
-// GetRegionCountryCodes returns the RegionCountryCodes field value if set, zero value otherwise.
+// GetRegionCountryCodes returns the RegionCountryCodes field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetSOAPRequest) GetRegionCountryCodes() []string {
-	if o == nil || IsNil(o.RegionCountryCodes) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -596,6 +785,7 @@ func (o *CreateAssetSOAPRequest) GetRegionCountryCodes() []string {
 
 // GetRegionCountryCodesOk returns a tuple with the RegionCountryCodes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetSOAPRequest) GetRegionCountryCodesOk() ([]string, bool) {
 	if o == nil || IsNil(o.RegionCountryCodes) {
 		return nil, false
@@ -618,7 +808,7 @@ func (o *CreateAssetSOAPRequest) SetRegionCountryCodes(v []string) {
 }
 
 func (o CreateAssetSOAPRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -627,52 +817,58 @@ func (o CreateAssetSOAPRequest) MarshalJSON() ([]byte, error) {
 
 func (o CreateAssetSOAPRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ProjectIds) {
+	if o.ProjectIds != nil {
 		toSerialize["projectIds"] = o.ProjectIds
 	}
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
+	if o.Name.IsSet() {
+		toSerialize["name"] = o.Name.Get()
 	}
 	toSerialize["asset_class"] = o.AssetClass
 	if !IsNil(o.ExtraMetadata) {
 		toSerialize["extra_metadata"] = o.ExtraMetadata
 	}
-	if !IsNil(o.ScreenshotS3Key) {
-		toSerialize["screenshot_s3_key"] = o.ScreenshotS3Key
+	if o.ScreenshotS3Key.IsSet() {
+		toSerialize["screenshot_s3_key"] = o.ScreenshotS3Key.Get()
 	}
 	toSerialize["asset_type"] = o.AssetType
 	toSerialize["url"] = o.Url
-	if !IsNil(o.Favicon) {
-		toSerialize["favicon"] = o.Favicon
+	if o.Favicon.IsSet() {
+		toSerialize["favicon"] = o.Favicon.Get()
 	}
-	if !IsNil(o.ReachableVia) {
+	if o.ReachableVia != nil {
 		toSerialize["reachable_via"] = o.ReachableVia
 	}
-	if !IsNil(o.ReachableViaExternalProxy) {
-		toSerialize["reachable_via_external_proxy"] = o.ReachableViaExternalProxy
+	if o.ReachableViaExternalProxy.IsSet() {
+		toSerialize["reachable_via_external_proxy"] = o.ReachableViaExternalProxy.Get()
 	}
-	if !IsNil(o.Private) {
-		toSerialize["private"] = o.Private
+	if o.Private.IsSet() {
+		toSerialize["private"] = o.Private.Get()
 	}
-	if !IsNil(o.PrivateLocationId) {
-		toSerialize["private_location_id"] = o.PrivateLocationId
+	if o.PrivateLocationId.IsSet() {
+		toSerialize["private_location_id"] = o.PrivateLocationId.Get()
 	}
-	if !IsNil(o.Environment) {
-		toSerialize["environment"] = o.Environment
+	if o.Environment.IsSet() {
+		toSerialize["environment"] = o.Environment.Get()
 	}
-	if !IsNil(o.CloudProvider) {
-		toSerialize["cloud_provider"] = o.CloudProvider
+	if o.CloudProvider.IsSet() {
+		toSerialize["cloud_provider"] = o.CloudProvider.Get()
 	}
-	if !IsNil(o.WafProvider) {
-		toSerialize["waf_provider"] = o.WafProvider
+	if o.WafProvider.IsSet() {
+		toSerialize["waf_provider"] = o.WafProvider.Get()
 	}
-	if !IsNil(o.ThirdParty) {
-		toSerialize["third_party"] = o.ThirdParty
+	if o.AuthProtocol.IsSet() {
+		toSerialize["auth_protocol"] = o.AuthProtocol.Get()
 	}
-	if !IsNil(o.Ips) {
+	if o.AuthTechnology.IsSet() {
+		toSerialize["auth_technology"] = o.AuthTechnology.Get()
+	}
+	if o.ThirdParty.IsSet() {
+		toSerialize["third_party"] = o.ThirdParty.Get()
+	}
+	if o.Ips != nil {
 		toSerialize["ips"] = o.Ips
 	}
-	if !IsNil(o.RegionCountryCodes) {
+	if o.RegionCountryCodes != nil {
 		toSerialize["region_country_codes"] = o.RegionCountryCodes
 	}
 
@@ -698,10 +894,10 @@ func (o *CreateAssetSOAPRequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -735,6 +931,8 @@ func (o *CreateAssetSOAPRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "environment")
 		delete(additionalProperties, "cloud_provider")
 		delete(additionalProperties, "waf_provider")
+		delete(additionalProperties, "auth_protocol")
+		delete(additionalProperties, "auth_technology")
 		delete(additionalProperties, "third_party")
 		delete(additionalProperties, "ips")
 		delete(additionalProperties, "region_country_codes")
@@ -779,3 +977,5 @@ func (v *NullableCreateAssetSOAPRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

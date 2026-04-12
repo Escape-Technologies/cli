@@ -20,22 +20,24 @@ var _ MappedNullable = &CreateAssetCODEPROJECTRequestRepositoryOneOf2{}
 
 // CreateAssetCODEPROJECTRequestRepositoryOneOf2 struct for CreateAssetCODEPROJECTRequestRepositoryOneOf2
 type CreateAssetCODEPROJECTRequestRepositoryOneOf2 struct {
-	AssetClass           ENUMREPOSITORY                                `json:"asset_class"`
-	ExtraMetadata        map[string]interface{}                        `json:"extra_metadata,omitempty"`
-	ScreenshotS3Key      *string                                       `json:"screenshot_s3_key,omitempty"`
-	AssetType            ENUMBITBUCKETREPOSITORY                       `json:"asset_type"`
-	Url                  string                                        `json:"url"`
-	Name                 *string                                       `json:"name,omitempty"`
-	HttpUrlToRepo        *string                                       `json:"http_url_to_repo,omitempty"`
-	Description          *string                                       `json:"description,omitempty"`
-	LocationId           *string                                       `json:"location_id,omitempty"`
-	DefaultBranch        *string                                       `json:"default_branch,omitempty"`
-	BlobBaseUrl          *string                                       `json:"blob_base_url,omitempty"`
-	LastCommit           *CreateAssetGITLABREPOSITORYRequestLastCommit `json:"last_commit,omitempty"`
-	WorkspaceName        *string                                       `json:"workspace_name,omitempty"`
-	RepositoryName       *string                                       `json:"repository_name,omitempty"`
-	IsPrivate            *bool                                         `json:"is_private,omitempty"`
-	Org                  *CreateAssetBITBUCKETREPOSITORYRequestOrg     `json:"org,omitempty"`
+	AssetClass ENUMREPOSITORY `json:"asset_class"`
+	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
+	ScreenshotS3Key NullableString `json:"screenshot_s3_key,omitempty"`
+	AssetType ENUMBITBUCKETREPOSITORY `json:"asset_type"`
+	Url string `json:"url"`
+	Name NullableString `json:"name,omitempty"`
+	HttpUrlToRepo NullableString `json:"http_url_to_repo,omitempty"`
+	Description NullableString `json:"description,omitempty"`
+	LocationId NullableString `json:"location_id,omitempty"`
+	DefaultBranch NullableString `json:"default_branch,omitempty"`
+	BlobBaseUrl NullableString `json:"blob_base_url,omitempty"`
+	LastCommit *CreateAssetGITLABREPOSITORYRequestLastCommit `json:"last_commit,omitempty"`
+	Owners []CreateAssetGITLABREPOSITORYRequestOwnersInner `json:"owners,omitempty"`
+	Languages []ENUMPROPERTIESLANGUAGESITEMS `json:"languages,omitempty"`
+	WorkspaceName NullableString `json:"workspace_name,omitempty"`
+	RepositoryName NullableString `json:"repository_name,omitempty"`
+	IsPrivate NullableBool `json:"is_private,omitempty"`
+	Org *CreateAssetBITBUCKETREPOSITORYRequestOrg `json:"org,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -117,36 +119,46 @@ func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) SetExtraMetadata(v map[s
 	o.ExtraMetadata = v
 }
 
-// GetScreenshotS3Key returns the ScreenshotS3Key field value if set, zero value otherwise.
+// GetScreenshotS3Key returns the ScreenshotS3Key field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) GetScreenshotS3Key() string {
-	if o == nil || IsNil(o.ScreenshotS3Key) {
+	if o == nil || IsNil(o.ScreenshotS3Key.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.ScreenshotS3Key
+	return *o.ScreenshotS3Key.Get()
 }
 
 // GetScreenshotS3KeyOk returns a tuple with the ScreenshotS3Key field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) GetScreenshotS3KeyOk() (*string, bool) {
-	if o == nil || IsNil(o.ScreenshotS3Key) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ScreenshotS3Key, true
+	return o.ScreenshotS3Key.Get(), o.ScreenshotS3Key.IsSet()
 }
 
 // HasScreenshotS3Key returns a boolean if a field has been set.
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) HasScreenshotS3Key() bool {
-	if o != nil && !IsNil(o.ScreenshotS3Key) {
+	if o != nil && o.ScreenshotS3Key.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetScreenshotS3Key gets a reference to the given string and assigns it to the ScreenshotS3Key field.
+// SetScreenshotS3Key gets a reference to the given NullableString and assigns it to the ScreenshotS3Key field.
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) SetScreenshotS3Key(v string) {
-	o.ScreenshotS3Key = &v
+	o.ScreenshotS3Key.Set(&v)
+}
+// SetScreenshotS3KeyNil sets the value for ScreenshotS3Key to be an explicit nil
+func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) SetScreenshotS3KeyNil() {
+	o.ScreenshotS3Key.Set(nil)
+}
+
+// UnsetScreenshotS3Key ensures that no value is present for ScreenshotS3Key, not even an explicit nil
+func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) UnsetScreenshotS3Key() {
+	o.ScreenshotS3Key.Unset()
 }
 
 // GetAssetType returns the AssetType field value
@@ -197,196 +209,256 @@ func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) SetUrl(v string) {
 	o.Url = v
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
+// GetName returns the Name field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) GetName() string {
-	if o == nil || IsNil(o.Name) {
+	if o == nil || IsNil(o.Name.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Name
+	return *o.Name.Get()
 }
 
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Name, true
+	return o.Name.Get(), o.Name.IsSet()
 }
 
 // HasName returns a boolean if a field has been set.
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
+	if o != nil && o.Name.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetName gets a reference to the given string and assigns it to the Name field.
+// SetName gets a reference to the given NullableString and assigns it to the Name field.
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) SetName(v string) {
-	o.Name = &v
+	o.Name.Set(&v)
+}
+// SetNameNil sets the value for Name to be an explicit nil
+func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) SetNameNil() {
+	o.Name.Set(nil)
 }
 
-// GetHttpUrlToRepo returns the HttpUrlToRepo field value if set, zero value otherwise.
+// UnsetName ensures that no value is present for Name, not even an explicit nil
+func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) UnsetName() {
+	o.Name.Unset()
+}
+
+// GetHttpUrlToRepo returns the HttpUrlToRepo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) GetHttpUrlToRepo() string {
-	if o == nil || IsNil(o.HttpUrlToRepo) {
+	if o == nil || IsNil(o.HttpUrlToRepo.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.HttpUrlToRepo
+	return *o.HttpUrlToRepo.Get()
 }
 
 // GetHttpUrlToRepoOk returns a tuple with the HttpUrlToRepo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) GetHttpUrlToRepoOk() (*string, bool) {
-	if o == nil || IsNil(o.HttpUrlToRepo) {
+	if o == nil {
 		return nil, false
 	}
-	return o.HttpUrlToRepo, true
+	return o.HttpUrlToRepo.Get(), o.HttpUrlToRepo.IsSet()
 }
 
 // HasHttpUrlToRepo returns a boolean if a field has been set.
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) HasHttpUrlToRepo() bool {
-	if o != nil && !IsNil(o.HttpUrlToRepo) {
+	if o != nil && o.HttpUrlToRepo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetHttpUrlToRepo gets a reference to the given string and assigns it to the HttpUrlToRepo field.
+// SetHttpUrlToRepo gets a reference to the given NullableString and assigns it to the HttpUrlToRepo field.
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) SetHttpUrlToRepo(v string) {
-	o.HttpUrlToRepo = &v
+	o.HttpUrlToRepo.Set(&v)
+}
+// SetHttpUrlToRepoNil sets the value for HttpUrlToRepo to be an explicit nil
+func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) SetHttpUrlToRepoNil() {
+	o.HttpUrlToRepo.Set(nil)
 }
 
-// GetDescription returns the Description field value if set, zero value otherwise.
+// UnsetHttpUrlToRepo ensures that no value is present for HttpUrlToRepo, not even an explicit nil
+func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) UnsetHttpUrlToRepo() {
+	o.HttpUrlToRepo.Unset()
+}
+
+// GetDescription returns the Description field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) GetDescription() string {
-	if o == nil || IsNil(o.Description) {
+	if o == nil || IsNil(o.Description.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Description
+	return *o.Description.Get()
 }
 
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) GetDescriptionOk() (*string, bool) {
-	if o == nil || IsNil(o.Description) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Description, true
+	return o.Description.Get(), o.Description.IsSet()
 }
 
 // HasDescription returns a boolean if a field has been set.
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) HasDescription() bool {
-	if o != nil && !IsNil(o.Description) {
+	if o != nil && o.Description.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetDescription gets a reference to the given string and assigns it to the Description field.
+// SetDescription gets a reference to the given NullableString and assigns it to the Description field.
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) SetDescription(v string) {
-	o.Description = &v
+	o.Description.Set(&v)
+}
+// SetDescriptionNil sets the value for Description to be an explicit nil
+func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) SetDescriptionNil() {
+	o.Description.Set(nil)
 }
 
-// GetLocationId returns the LocationId field value if set, zero value otherwise.
+// UnsetDescription ensures that no value is present for Description, not even an explicit nil
+func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) UnsetDescription() {
+	o.Description.Unset()
+}
+
+// GetLocationId returns the LocationId field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) GetLocationId() string {
-	if o == nil || IsNil(o.LocationId) {
+	if o == nil || IsNil(o.LocationId.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.LocationId
+	return *o.LocationId.Get()
 }
 
 // GetLocationIdOk returns a tuple with the LocationId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) GetLocationIdOk() (*string, bool) {
-	if o == nil || IsNil(o.LocationId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.LocationId, true
+	return o.LocationId.Get(), o.LocationId.IsSet()
 }
 
 // HasLocationId returns a boolean if a field has been set.
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) HasLocationId() bool {
-	if o != nil && !IsNil(o.LocationId) {
+	if o != nil && o.LocationId.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetLocationId gets a reference to the given string and assigns it to the LocationId field.
+// SetLocationId gets a reference to the given NullableString and assigns it to the LocationId field.
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) SetLocationId(v string) {
-	o.LocationId = &v
+	o.LocationId.Set(&v)
+}
+// SetLocationIdNil sets the value for LocationId to be an explicit nil
+func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) SetLocationIdNil() {
+	o.LocationId.Set(nil)
 }
 
-// GetDefaultBranch returns the DefaultBranch field value if set, zero value otherwise.
+// UnsetLocationId ensures that no value is present for LocationId, not even an explicit nil
+func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) UnsetLocationId() {
+	o.LocationId.Unset()
+}
+
+// GetDefaultBranch returns the DefaultBranch field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) GetDefaultBranch() string {
-	if o == nil || IsNil(o.DefaultBranch) {
+	if o == nil || IsNil(o.DefaultBranch.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.DefaultBranch
+	return *o.DefaultBranch.Get()
 }
 
 // GetDefaultBranchOk returns a tuple with the DefaultBranch field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) GetDefaultBranchOk() (*string, bool) {
-	if o == nil || IsNil(o.DefaultBranch) {
+	if o == nil {
 		return nil, false
 	}
-	return o.DefaultBranch, true
+	return o.DefaultBranch.Get(), o.DefaultBranch.IsSet()
 }
 
 // HasDefaultBranch returns a boolean if a field has been set.
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) HasDefaultBranch() bool {
-	if o != nil && !IsNil(o.DefaultBranch) {
+	if o != nil && o.DefaultBranch.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetDefaultBranch gets a reference to the given string and assigns it to the DefaultBranch field.
+// SetDefaultBranch gets a reference to the given NullableString and assigns it to the DefaultBranch field.
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) SetDefaultBranch(v string) {
-	o.DefaultBranch = &v
+	o.DefaultBranch.Set(&v)
+}
+// SetDefaultBranchNil sets the value for DefaultBranch to be an explicit nil
+func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) SetDefaultBranchNil() {
+	o.DefaultBranch.Set(nil)
 }
 
-// GetBlobBaseUrl returns the BlobBaseUrl field value if set, zero value otherwise.
+// UnsetDefaultBranch ensures that no value is present for DefaultBranch, not even an explicit nil
+func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) UnsetDefaultBranch() {
+	o.DefaultBranch.Unset()
+}
+
+// GetBlobBaseUrl returns the BlobBaseUrl field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) GetBlobBaseUrl() string {
-	if o == nil || IsNil(o.BlobBaseUrl) {
+	if o == nil || IsNil(o.BlobBaseUrl.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.BlobBaseUrl
+	return *o.BlobBaseUrl.Get()
 }
 
 // GetBlobBaseUrlOk returns a tuple with the BlobBaseUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) GetBlobBaseUrlOk() (*string, bool) {
-	if o == nil || IsNil(o.BlobBaseUrl) {
+	if o == nil {
 		return nil, false
 	}
-	return o.BlobBaseUrl, true
+	return o.BlobBaseUrl.Get(), o.BlobBaseUrl.IsSet()
 }
 
 // HasBlobBaseUrl returns a boolean if a field has been set.
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) HasBlobBaseUrl() bool {
-	if o != nil && !IsNil(o.BlobBaseUrl) {
+	if o != nil && o.BlobBaseUrl.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetBlobBaseUrl gets a reference to the given string and assigns it to the BlobBaseUrl field.
+// SetBlobBaseUrl gets a reference to the given NullableString and assigns it to the BlobBaseUrl field.
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) SetBlobBaseUrl(v string) {
-	o.BlobBaseUrl = &v
+	o.BlobBaseUrl.Set(&v)
+}
+// SetBlobBaseUrlNil sets the value for BlobBaseUrl to be an explicit nil
+func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) SetBlobBaseUrlNil() {
+	o.BlobBaseUrl.Set(nil)
+}
+
+// UnsetBlobBaseUrl ensures that no value is present for BlobBaseUrl, not even an explicit nil
+func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) UnsetBlobBaseUrl() {
+	o.BlobBaseUrl.Unset()
 }
 
 // GetLastCommit returns the LastCommit field value if set, zero value otherwise.
@@ -421,100 +493,196 @@ func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) SetLastCommit(v CreateAs
 	o.LastCommit = &v
 }
 
-// GetWorkspaceName returns the WorkspaceName field value if set, zero value otherwise.
+// GetOwners returns the Owners field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) GetOwners() []CreateAssetGITLABREPOSITORYRequestOwnersInner {
+	if o == nil {
+		var ret []CreateAssetGITLABREPOSITORYRequestOwnersInner
+		return ret
+	}
+	return o.Owners
+}
+
+// GetOwnersOk returns a tuple with the Owners field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) GetOwnersOk() ([]CreateAssetGITLABREPOSITORYRequestOwnersInner, bool) {
+	if o == nil || IsNil(o.Owners) {
+		return nil, false
+	}
+	return o.Owners, true
+}
+
+// HasOwners returns a boolean if a field has been set.
+func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) HasOwners() bool {
+	if o != nil && !IsNil(o.Owners) {
+		return true
+	}
+
+	return false
+}
+
+// SetOwners gets a reference to the given []CreateAssetGITLABREPOSITORYRequestOwnersInner and assigns it to the Owners field.
+func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) SetOwners(v []CreateAssetGITLABREPOSITORYRequestOwnersInner) {
+	o.Owners = v
+}
+
+// GetLanguages returns the Languages field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) GetLanguages() []ENUMPROPERTIESLANGUAGESITEMS {
+	if o == nil {
+		var ret []ENUMPROPERTIESLANGUAGESITEMS
+		return ret
+	}
+	return o.Languages
+}
+
+// GetLanguagesOk returns a tuple with the Languages field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) GetLanguagesOk() ([]ENUMPROPERTIESLANGUAGESITEMS, bool) {
+	if o == nil || IsNil(o.Languages) {
+		return nil, false
+	}
+	return o.Languages, true
+}
+
+// HasLanguages returns a boolean if a field has been set.
+func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) HasLanguages() bool {
+	if o != nil && !IsNil(o.Languages) {
+		return true
+	}
+
+	return false
+}
+
+// SetLanguages gets a reference to the given []ENUMPROPERTIESLANGUAGESITEMS and assigns it to the Languages field.
+func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) SetLanguages(v []ENUMPROPERTIESLANGUAGESITEMS) {
+	o.Languages = v
+}
+
+// GetWorkspaceName returns the WorkspaceName field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) GetWorkspaceName() string {
-	if o == nil || IsNil(o.WorkspaceName) {
+	if o == nil || IsNil(o.WorkspaceName.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.WorkspaceName
+	return *o.WorkspaceName.Get()
 }
 
 // GetWorkspaceNameOk returns a tuple with the WorkspaceName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) GetWorkspaceNameOk() (*string, bool) {
-	if o == nil || IsNil(o.WorkspaceName) {
+	if o == nil {
 		return nil, false
 	}
-	return o.WorkspaceName, true
+	return o.WorkspaceName.Get(), o.WorkspaceName.IsSet()
 }
 
 // HasWorkspaceName returns a boolean if a field has been set.
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) HasWorkspaceName() bool {
-	if o != nil && !IsNil(o.WorkspaceName) {
+	if o != nil && o.WorkspaceName.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetWorkspaceName gets a reference to the given string and assigns it to the WorkspaceName field.
+// SetWorkspaceName gets a reference to the given NullableString and assigns it to the WorkspaceName field.
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) SetWorkspaceName(v string) {
-	o.WorkspaceName = &v
+	o.WorkspaceName.Set(&v)
+}
+// SetWorkspaceNameNil sets the value for WorkspaceName to be an explicit nil
+func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) SetWorkspaceNameNil() {
+	o.WorkspaceName.Set(nil)
 }
 
-// GetRepositoryName returns the RepositoryName field value if set, zero value otherwise.
+// UnsetWorkspaceName ensures that no value is present for WorkspaceName, not even an explicit nil
+func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) UnsetWorkspaceName() {
+	o.WorkspaceName.Unset()
+}
+
+// GetRepositoryName returns the RepositoryName field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) GetRepositoryName() string {
-	if o == nil || IsNil(o.RepositoryName) {
+	if o == nil || IsNil(o.RepositoryName.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.RepositoryName
+	return *o.RepositoryName.Get()
 }
 
 // GetRepositoryNameOk returns a tuple with the RepositoryName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) GetRepositoryNameOk() (*string, bool) {
-	if o == nil || IsNil(o.RepositoryName) {
+	if o == nil {
 		return nil, false
 	}
-	return o.RepositoryName, true
+	return o.RepositoryName.Get(), o.RepositoryName.IsSet()
 }
 
 // HasRepositoryName returns a boolean if a field has been set.
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) HasRepositoryName() bool {
-	if o != nil && !IsNil(o.RepositoryName) {
+	if o != nil && o.RepositoryName.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRepositoryName gets a reference to the given string and assigns it to the RepositoryName field.
+// SetRepositoryName gets a reference to the given NullableString and assigns it to the RepositoryName field.
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) SetRepositoryName(v string) {
-	o.RepositoryName = &v
+	o.RepositoryName.Set(&v)
+}
+// SetRepositoryNameNil sets the value for RepositoryName to be an explicit nil
+func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) SetRepositoryNameNil() {
+	o.RepositoryName.Set(nil)
 }
 
-// GetIsPrivate returns the IsPrivate field value if set, zero value otherwise.
+// UnsetRepositoryName ensures that no value is present for RepositoryName, not even an explicit nil
+func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) UnsetRepositoryName() {
+	o.RepositoryName.Unset()
+}
+
+// GetIsPrivate returns the IsPrivate field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) GetIsPrivate() bool {
-	if o == nil || IsNil(o.IsPrivate) {
+	if o == nil || IsNil(o.IsPrivate.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.IsPrivate
+	return *o.IsPrivate.Get()
 }
 
 // GetIsPrivateOk returns a tuple with the IsPrivate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) GetIsPrivateOk() (*bool, bool) {
-	if o == nil || IsNil(o.IsPrivate) {
+	if o == nil {
 		return nil, false
 	}
-	return o.IsPrivate, true
+	return o.IsPrivate.Get(), o.IsPrivate.IsSet()
 }
 
 // HasIsPrivate returns a boolean if a field has been set.
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) HasIsPrivate() bool {
-	if o != nil && !IsNil(o.IsPrivate) {
+	if o != nil && o.IsPrivate.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetIsPrivate gets a reference to the given bool and assigns it to the IsPrivate field.
+// SetIsPrivate gets a reference to the given NullableBool and assigns it to the IsPrivate field.
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) SetIsPrivate(v bool) {
-	o.IsPrivate = &v
+	o.IsPrivate.Set(&v)
+}
+// SetIsPrivateNil sets the value for IsPrivate to be an explicit nil
+func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) SetIsPrivateNil() {
+	o.IsPrivate.Set(nil)
+}
+
+// UnsetIsPrivate ensures that no value is present for IsPrivate, not even an explicit nil
+func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) UnsetIsPrivate() {
+	o.IsPrivate.Unset()
 }
 
 // GetOrg returns the Org field value if set, zero value otherwise.
@@ -550,7 +718,7 @@ func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) SetOrg(v CreateAssetBITB
 }
 
 func (o CreateAssetCODEPROJECTRequestRepositoryOneOf2) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -563,40 +731,46 @@ func (o CreateAssetCODEPROJECTRequestRepositoryOneOf2) ToMap() (map[string]inter
 	if !IsNil(o.ExtraMetadata) {
 		toSerialize["extra_metadata"] = o.ExtraMetadata
 	}
-	if !IsNil(o.ScreenshotS3Key) {
-		toSerialize["screenshot_s3_key"] = o.ScreenshotS3Key
+	if o.ScreenshotS3Key.IsSet() {
+		toSerialize["screenshot_s3_key"] = o.ScreenshotS3Key.Get()
 	}
 	toSerialize["asset_type"] = o.AssetType
 	toSerialize["url"] = o.Url
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
+	if o.Name.IsSet() {
+		toSerialize["name"] = o.Name.Get()
 	}
-	if !IsNil(o.HttpUrlToRepo) {
-		toSerialize["http_url_to_repo"] = o.HttpUrlToRepo
+	if o.HttpUrlToRepo.IsSet() {
+		toSerialize["http_url_to_repo"] = o.HttpUrlToRepo.Get()
 	}
-	if !IsNil(o.Description) {
-		toSerialize["description"] = o.Description
+	if o.Description.IsSet() {
+		toSerialize["description"] = o.Description.Get()
 	}
-	if !IsNil(o.LocationId) {
-		toSerialize["location_id"] = o.LocationId
+	if o.LocationId.IsSet() {
+		toSerialize["location_id"] = o.LocationId.Get()
 	}
-	if !IsNil(o.DefaultBranch) {
-		toSerialize["default_branch"] = o.DefaultBranch
+	if o.DefaultBranch.IsSet() {
+		toSerialize["default_branch"] = o.DefaultBranch.Get()
 	}
-	if !IsNil(o.BlobBaseUrl) {
-		toSerialize["blob_base_url"] = o.BlobBaseUrl
+	if o.BlobBaseUrl.IsSet() {
+		toSerialize["blob_base_url"] = o.BlobBaseUrl.Get()
 	}
 	if !IsNil(o.LastCommit) {
 		toSerialize["last_commit"] = o.LastCommit
 	}
-	if !IsNil(o.WorkspaceName) {
-		toSerialize["workspace_name"] = o.WorkspaceName
+	if o.Owners != nil {
+		toSerialize["owners"] = o.Owners
 	}
-	if !IsNil(o.RepositoryName) {
-		toSerialize["repository_name"] = o.RepositoryName
+	if o.Languages != nil {
+		toSerialize["languages"] = o.Languages
 	}
-	if !IsNil(o.IsPrivate) {
-		toSerialize["is_private"] = o.IsPrivate
+	if o.WorkspaceName.IsSet() {
+		toSerialize["workspace_name"] = o.WorkspaceName.Get()
+	}
+	if o.RepositoryName.IsSet() {
+		toSerialize["repository_name"] = o.RepositoryName.Get()
+	}
+	if o.IsPrivate.IsSet() {
+		toSerialize["is_private"] = o.IsPrivate.Get()
 	}
 	if !IsNil(o.Org) {
 		toSerialize["org"] = o.Org
@@ -624,10 +798,10 @@ func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) UnmarshalJSON(data []byt
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -658,6 +832,8 @@ func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) UnmarshalJSON(data []byt
 		delete(additionalProperties, "default_branch")
 		delete(additionalProperties, "blob_base_url")
 		delete(additionalProperties, "last_commit")
+		delete(additionalProperties, "owners")
+		delete(additionalProperties, "languages")
 		delete(additionalProperties, "workspace_name")
 		delete(additionalProperties, "repository_name")
 		delete(additionalProperties, "is_private")
@@ -703,3 +879,5 @@ func (v *NullableCreateAssetCODEPROJECTRequestRepositoryOneOf2) UnmarshalJSON(sr
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

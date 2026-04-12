@@ -20,9 +20,9 @@ var _ MappedNullable = &ListProfiles200Response{}
 
 // ListProfiles200Response struct for ListProfiles200Response
 type ListProfiles200Response struct {
-	NextCursor           *string             `json:"nextCursor,omitempty"`
-	TotalCount           *int                `json:"totalCount,omitempty"`
-	Data                 []ProfileSummarized `json:"data"`
+	NextCursor NullableString `json:"nextCursor"`
+	TotalCount *int `json:"totalCount,omitempty"`
+	Data []ProfileSummarized `json:"data"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -32,8 +32,9 @@ type _ListProfiles200Response ListProfiles200Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewListProfiles200Response(data []ProfileSummarized) *ListProfiles200Response {
+func NewListProfiles200Response(nextCursor NullableString, data []ProfileSummarized) *ListProfiles200Response {
 	this := ListProfiles200Response{}
+	this.NextCursor = nextCursor
 	var totalCount int = 100
 	this.TotalCount = &totalCount
 	this.Data = data
@@ -50,36 +51,30 @@ func NewListProfiles200ResponseWithDefaults() *ListProfiles200Response {
 	return &this
 }
 
-// GetNextCursor returns the NextCursor field value if set, zero value otherwise.
+// GetNextCursor returns the NextCursor field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *ListProfiles200Response) GetNextCursor() string {
-	if o == nil || IsNil(o.NextCursor) {
+	if o == nil || o.NextCursor.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.NextCursor
+
+	return *o.NextCursor.Get()
 }
 
-// GetNextCursorOk returns a tuple with the NextCursor field value if set, nil otherwise
+// GetNextCursorOk returns a tuple with the NextCursor field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ListProfiles200Response) GetNextCursorOk() (*string, bool) {
-	if o == nil || IsNil(o.NextCursor) {
+	if o == nil {
 		return nil, false
 	}
-	return o.NextCursor, true
+	return o.NextCursor.Get(), o.NextCursor.IsSet()
 }
 
-// HasNextCursor returns a boolean if a field has been set.
-func (o *ListProfiles200Response) HasNextCursor() bool {
-	if o != nil && !IsNil(o.NextCursor) {
-		return true
-	}
-
-	return false
-}
-
-// SetNextCursor gets a reference to the given string and assigns it to the NextCursor field.
+// SetNextCursor sets field value
 func (o *ListProfiles200Response) SetNextCursor(v string) {
-	o.NextCursor = &v
+	o.NextCursor.Set(&v)
 }
 
 // GetTotalCount returns the TotalCount field value if set, zero value otherwise.
@@ -139,7 +134,7 @@ func (o *ListProfiles200Response) SetData(v []ProfileSummarized) {
 }
 
 func (o ListProfiles200Response) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -148,9 +143,7 @@ func (o ListProfiles200Response) MarshalJSON() ([]byte, error) {
 
 func (o ListProfiles200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.NextCursor) {
-		toSerialize["nextCursor"] = o.NextCursor
-	}
+	toSerialize["nextCursor"] = o.NextCursor.Get()
 	if !IsNil(o.TotalCount) {
 		toSerialize["totalCount"] = o.TotalCount
 	}
@@ -168,6 +161,7 @@ func (o *ListProfiles200Response) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"nextCursor",
 		"data",
 	}
 
@@ -176,10 +170,10 @@ func (o *ListProfiles200Response) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -242,3 +236,5 @@ func (v *NullableListProfiles200Response) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

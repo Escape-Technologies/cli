@@ -20,12 +20,12 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationAuthenticationProcedur
 
 // GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner struct for GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner
 type GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner struct {
-	Location             ENUMPROPERTIESCONFIGURATIONPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS1PROPERTIESEXTRACTIONS1ITEMSPROPERTIESLOCATION `json:"location"`
-	Origin               string                                                                                                                                              `json:"origin"`
-	Key                  string                                                                                                                                              `json:"key"`
-	Name                 string                                                                                                                                              `json:"name"`
-	Regex                *string                                                                                                                                             `json:"regex,omitempty"`
-	Jq                   *string                                                                                                                                             `json:"jq,omitempty"`
+	Location ENUMPROPERTIESCONFIGURATIONPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS1PROPERTIESEXTRACTIONS1ITEMSPROPERTIESLOCATION `json:"location"`
+	Origin string `json:"origin"`
+	Key string `json:"key"`
+	Name string `json:"name"`
+	Regex NullableString `json:"regex,omitempty"`
+	Jq NullableString `json:"jq,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -148,72 +148,92 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 	o.Name = v
 }
 
-// GetRegex returns the Regex field value if set, zero value otherwise.
+// GetRegex returns the Regex field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner) GetRegex() string {
-	if o == nil || IsNil(o.Regex) {
+	if o == nil || IsNil(o.Regex.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Regex
+	return *o.Regex.Get()
 }
 
 // GetRegexOk returns a tuple with the Regex field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner) GetRegexOk() (*string, bool) {
-	if o == nil || IsNil(o.Regex) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Regex, true
+	return o.Regex.Get(), o.Regex.IsSet()
 }
 
 // HasRegex returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner) HasRegex() bool {
-	if o != nil && !IsNil(o.Regex) {
+	if o != nil && o.Regex.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegex gets a reference to the given string and assigns it to the Regex field.
+// SetRegex gets a reference to the given NullableString and assigns it to the Regex field.
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner) SetRegex(v string) {
-	o.Regex = &v
+	o.Regex.Set(&v)
+}
+// SetRegexNil sets the value for Regex to be an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner) SetRegexNil() {
+	o.Regex.Set(nil)
 }
 
-// GetJq returns the Jq field value if set, zero value otherwise.
+// UnsetRegex ensures that no value is present for Regex, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner) UnsetRegex() {
+	o.Regex.Unset()
+}
+
+// GetJq returns the Jq field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner) GetJq() string {
-	if o == nil || IsNil(o.Jq) {
+	if o == nil || IsNil(o.Jq.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Jq
+	return *o.Jq.Get()
 }
 
 // GetJqOk returns a tuple with the Jq field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner) GetJqOk() (*string, bool) {
-	if o == nil || IsNil(o.Jq) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Jq, true
+	return o.Jq.Get(), o.Jq.IsSet()
 }
 
 // HasJq returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner) HasJq() bool {
-	if o != nil && !IsNil(o.Jq) {
+	if o != nil && o.Jq.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetJq gets a reference to the given string and assigns it to the Jq field.
+// SetJq gets a reference to the given NullableString and assigns it to the Jq field.
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner) SetJq(v string) {
-	o.Jq = &v
+	o.Jq.Set(&v)
+}
+// SetJqNil sets the value for Jq to be an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner) SetJqNil() {
+	o.Jq.Set(nil)
+}
+
+// UnsetJq ensures that no value is present for Jq, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner) UnsetJq() {
+	o.Jq.Unset()
 }
 
 func (o GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -226,11 +246,11 @@ func (o GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperation
 	toSerialize["origin"] = o.Origin
 	toSerialize["key"] = o.Key
 	toSerialize["name"] = o.Name
-	if !IsNil(o.Regex) {
-		toSerialize["regex"] = o.Regex
+	if o.Regex.IsSet() {
+		toSerialize["regex"] = o.Regex.Get()
 	}
-	if !IsNil(o.Jq) {
-		toSerialize["jq"] = o.Jq
+	if o.Jq.IsSet() {
+		toSerialize["jq"] = o.Jq.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -256,10 +276,10 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -325,3 +345,5 @@ func (v *NullableGetProfile200ResponseConfigurationAuthenticationProceduresInner
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

@@ -31,7 +31,7 @@ type SnippetDetailed struct {
 	// The snippet of the snippet
 	Snippet string `json:"snippet"`
 	// The url of the snippet
-	Url                  *string `json:"url,omitempty"`
+	Url NullableString `json:"url"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -41,13 +41,14 @@ type _SnippetDetailed SnippetDetailed
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSnippetDetailed(createdAt string, id string, language string, name string, snippet string) *SnippetDetailed {
+func NewSnippetDetailed(createdAt string, id string, language string, name string, snippet string, url NullableString) *SnippetDetailed {
 	this := SnippetDetailed{}
 	this.CreatedAt = createdAt
 	this.Id = id
 	this.Language = language
 	this.Name = name
 	this.Snippet = snippet
+	this.Url = url
 	return &this
 }
 
@@ -179,40 +180,34 @@ func (o *SnippetDetailed) SetSnippet(v string) {
 	o.Snippet = v
 }
 
-// GetUrl returns the Url field value if set, zero value otherwise.
+// GetUrl returns the Url field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *SnippetDetailed) GetUrl() string {
-	if o == nil || IsNil(o.Url) {
+	if o == nil || o.Url.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.Url
+
+	return *o.Url.Get()
 }
 
-// GetUrlOk returns a tuple with the Url field value if set, nil otherwise
+// GetUrlOk returns a tuple with the Url field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SnippetDetailed) GetUrlOk() (*string, bool) {
-	if o == nil || IsNil(o.Url) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Url, true
+	return o.Url.Get(), o.Url.IsSet()
 }
 
-// HasUrl returns a boolean if a field has been set.
-func (o *SnippetDetailed) HasUrl() bool {
-	if o != nil && !IsNil(o.Url) {
-		return true
-	}
-
-	return false
-}
-
-// SetUrl gets a reference to the given string and assigns it to the Url field.
+// SetUrl sets field value
 func (o *SnippetDetailed) SetUrl(v string) {
-	o.Url = &v
+	o.Url.Set(&v)
 }
 
 func (o SnippetDetailed) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -226,9 +221,7 @@ func (o SnippetDetailed) ToMap() (map[string]interface{}, error) {
 	toSerialize["language"] = o.Language
 	toSerialize["name"] = o.Name
 	toSerialize["snippet"] = o.Snippet
-	if !IsNil(o.Url) {
-		toSerialize["url"] = o.Url
-	}
+	toSerialize["url"] = o.Url.Get()
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -247,6 +240,7 @@ func (o *SnippetDetailed) UnmarshalJSON(data []byte) (err error) {
 		"language",
 		"name",
 		"snippet",
+		"url",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -254,10 +248,10 @@ func (o *SnippetDetailed) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -323,3 +317,5 @@ func (v *NullableSnippetDetailed) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

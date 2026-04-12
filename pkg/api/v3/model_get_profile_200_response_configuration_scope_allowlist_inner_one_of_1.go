@@ -20,9 +20,9 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationScopeAllowlistInnerOne
 
 // GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf1 struct for GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf1
 type GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf1 struct {
-	Type                 ENUMIP                                                                                  `json:"type"`
-	Value                string                                                                                  `json:"value"`
-	Operation            *ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS0PROPERTIESOPERATION `json:"operation,omitempty"`
+	Type ENUMIP `json:"type"`
+	Value string `json:"value"`
+	Operation NullableENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS0PROPERTIESOPERATION `json:"operation,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -95,40 +95,50 @@ func (o *GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf1) SetValue(v
 	o.Value = v
 }
 
-// GetOperation returns the Operation field value if set, zero value otherwise.
+// GetOperation returns the Operation field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf1) GetOperation() ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS0PROPERTIESOPERATION {
-	if o == nil || IsNil(o.Operation) {
+	if o == nil || IsNil(o.Operation.Get()) {
 		var ret ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS0PROPERTIESOPERATION
 		return ret
 	}
-	return *o.Operation
+	return *o.Operation.Get()
 }
 
 // GetOperationOk returns a tuple with the Operation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf1) GetOperationOk() (*ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS0PROPERTIESOPERATION, bool) {
-	if o == nil || IsNil(o.Operation) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Operation, true
+	return o.Operation.Get(), o.Operation.IsSet()
 }
 
 // HasOperation returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf1) HasOperation() bool {
-	if o != nil && !IsNil(o.Operation) {
+	if o != nil && o.Operation.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOperation gets a reference to the given ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS0PROPERTIESOPERATION and assigns it to the Operation field.
+// SetOperation gets a reference to the given NullableENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS0PROPERTIESOPERATION and assigns it to the Operation field.
 func (o *GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf1) SetOperation(v ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS0PROPERTIESOPERATION) {
-	o.Operation = &v
+	o.Operation.Set(&v)
+}
+// SetOperationNil sets the value for Operation to be an explicit nil
+func (o *GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf1) SetOperationNil() {
+	o.Operation.Set(nil)
+}
+
+// UnsetOperation ensures that no value is present for Operation, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf1) UnsetOperation() {
+	o.Operation.Unset()
 }
 
 func (o GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf1) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -139,8 +149,8 @@ func (o GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf1) ToMap() (ma
 	toSerialize := map[string]interface{}{}
 	toSerialize["type"] = o.Type
 	toSerialize["value"] = o.Value
-	if !IsNil(o.Operation) {
-		toSerialize["operation"] = o.Operation
+	if o.Operation.IsSet() {
+		toSerialize["operation"] = o.Operation.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -164,10 +174,10 @@ func (o *GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf1) UnmarshalJ
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -230,3 +240,5 @@ func (v *NullableGetProfile200ResponseConfigurationScopeAllowlistInnerOneOf1) Un
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

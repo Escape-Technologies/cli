@@ -20,12 +20,12 @@ var _ MappedNullable = &CustomRuleRuleOneOf1{}
 
 // CustomRuleRuleOneOf1 struct for CustomRuleRuleOneOf1
 type CustomRuleRuleOneOf1 struct {
-	Id                   string                                                                              `json:"id"`
-	Alert                CreateCustomRuleRequestContentRuleOneOfAlert                                        `json:"alert"`
-	Type                 ENUMWEBAPP                                                                          `json:"type"`
-	Seed                 []GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInner `json:"seed"`
-	Detect               []CreateCustomRuleRequestContentRuleOneOf1DetectInner                               `json:"detect"`
-	Extractors           []interface{}                                                                       `json:"extractors,omitempty"`
+	Id string `json:"id"`
+	Alert CreateCustomRuleRequestContentRuleOneOfAlert `json:"alert"`
+	Type ENUMWEBAPP `json:"type"`
+	Seed []GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInner `json:"seed"`
+	Detect []CreateCustomRuleRequestContentRuleOneOf1DetectInner `json:"detect"`
+	Extractors []interface{} `json:"extractors,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -173,9 +173,9 @@ func (o *CustomRuleRuleOneOf1) SetDetect(v []CreateCustomRuleRequestContentRuleO
 	o.Detect = v
 }
 
-// GetExtractors returns the Extractors field value if set, zero value otherwise.
+// GetExtractors returns the Extractors field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CustomRuleRuleOneOf1) GetExtractors() []interface{} {
-	if o == nil || IsNil(o.Extractors) {
+	if o == nil {
 		var ret []interface{}
 		return ret
 	}
@@ -184,6 +184,7 @@ func (o *CustomRuleRuleOneOf1) GetExtractors() []interface{} {
 
 // GetExtractorsOk returns a tuple with the Extractors field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CustomRuleRuleOneOf1) GetExtractorsOk() ([]interface{}, bool) {
 	if o == nil || IsNil(o.Extractors) {
 		return nil, false
@@ -206,7 +207,7 @@ func (o *CustomRuleRuleOneOf1) SetExtractors(v []interface{}) {
 }
 
 func (o CustomRuleRuleOneOf1) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -220,7 +221,7 @@ func (o CustomRuleRuleOneOf1) ToMap() (map[string]interface{}, error) {
 	toSerialize["type"] = o.Type
 	toSerialize["seed"] = o.Seed
 	toSerialize["detect"] = o.Detect
-	if !IsNil(o.Extractors) {
+	if o.Extractors != nil {
 		toSerialize["extractors"] = o.Extractors
 	}
 
@@ -248,10 +249,10 @@ func (o *CustomRuleRuleOneOf1) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -317,3 +318,5 @@ func (v *NullableCustomRuleRuleOneOf1) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

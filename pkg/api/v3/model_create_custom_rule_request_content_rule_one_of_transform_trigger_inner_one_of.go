@@ -20,10 +20,10 @@ var _ MappedNullable = &CreateCustomRuleRequestContentRuleOneOfTransformTriggerI
 
 // CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf struct for CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf
 type CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf struct {
-	Is                   *ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS0PROPERTIESIS  `json:"is,omitempty"`
-	IsNot                *ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS0PROPERTIESIS  `json:"is_not,omitempty"`
-	In                   []ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS0PROPERTIESIS `json:"in,omitempty"`
-	If                   ENUMSCANTYPE                                                                                 `json:"if"`
+	Is *ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS0PROPERTIESIS `json:"is,omitempty"`
+	IsNot *ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS0PROPERTIESIS `json:"is_not,omitempty"`
+	In []ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS0PROPERTIESIS `json:"in,omitempty"`
+	If ENUMSCANTYPE `json:"if"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -111,9 +111,9 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf) SetI
 	o.IsNot = &v
 }
 
-// GetIn returns the In field value if set, zero value otherwise.
+// GetIn returns the In field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf) GetIn() []ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS0PROPERTIESIS {
-	if o == nil || IsNil(o.In) {
+	if o == nil {
 		var ret []ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS0PROPERTIESIS
 		return ret
 	}
@@ -122,6 +122,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf) GetI
 
 // GetInOk returns a tuple with the In field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf) GetInOk() ([]ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESTRANSFORMPROPERTIESTRIGGERITEMS0PROPERTIESIS, bool) {
 	if o == nil || IsNil(o.In) {
 		return nil, false
@@ -168,7 +169,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf) SetI
 }
 
 func (o CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -183,7 +184,7 @@ func (o CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf) ToMap
 	if !IsNil(o.IsNot) {
 		toSerialize["is_not"] = o.IsNot
 	}
-	if !IsNil(o.In) {
+	if o.In != nil {
 		toSerialize["in"] = o.In
 	}
 	toSerialize["if"] = o.If
@@ -208,10 +209,10 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf) Unma
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -275,3 +276,5 @@ func (v *NullableCreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOne
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

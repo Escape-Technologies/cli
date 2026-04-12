@@ -29,9 +29,9 @@ type AuditLogSummarized struct {
 	// The action of the audit log
 	Action string `json:"action"`
 	// The actor of the audit log
-	Actor *string `json:"actor,omitempty"`
+	Actor NullableString `json:"actor"`
 	// The email of the actor
-	ActorEmail           *string `json:"actorEmail,omitempty"`
+	ActorEmail NullableString `json:"actorEmail"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -41,12 +41,14 @@ type _AuditLogSummarized AuditLogSummarized
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAuditLogSummarized(id string, date string, title string, action string) *AuditLogSummarized {
+func NewAuditLogSummarized(id string, date string, title string, action string, actor NullableString, actorEmail NullableString) *AuditLogSummarized {
 	this := AuditLogSummarized{}
 	this.Id = id
 	this.Date = date
 	this.Title = title
 	this.Action = action
+	this.Actor = actor
+	this.ActorEmail = actorEmail
 	return &this
 }
 
@@ -154,72 +156,60 @@ func (o *AuditLogSummarized) SetAction(v string) {
 	o.Action = v
 }
 
-// GetActor returns the Actor field value if set, zero value otherwise.
+// GetActor returns the Actor field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *AuditLogSummarized) GetActor() string {
-	if o == nil || IsNil(o.Actor) {
+	if o == nil || o.Actor.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.Actor
+
+	return *o.Actor.Get()
 }
 
-// GetActorOk returns a tuple with the Actor field value if set, nil otherwise
+// GetActorOk returns a tuple with the Actor field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AuditLogSummarized) GetActorOk() (*string, bool) {
-	if o == nil || IsNil(o.Actor) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Actor, true
+	return o.Actor.Get(), o.Actor.IsSet()
 }
 
-// HasActor returns a boolean if a field has been set.
-func (o *AuditLogSummarized) HasActor() bool {
-	if o != nil && !IsNil(o.Actor) {
-		return true
-	}
-
-	return false
-}
-
-// SetActor gets a reference to the given string and assigns it to the Actor field.
+// SetActor sets field value
 func (o *AuditLogSummarized) SetActor(v string) {
-	o.Actor = &v
+	o.Actor.Set(&v)
 }
 
-// GetActorEmail returns the ActorEmail field value if set, zero value otherwise.
+// GetActorEmail returns the ActorEmail field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *AuditLogSummarized) GetActorEmail() string {
-	if o == nil || IsNil(o.ActorEmail) {
+	if o == nil || o.ActorEmail.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.ActorEmail
+
+	return *o.ActorEmail.Get()
 }
 
-// GetActorEmailOk returns a tuple with the ActorEmail field value if set, nil otherwise
+// GetActorEmailOk returns a tuple with the ActorEmail field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AuditLogSummarized) GetActorEmailOk() (*string, bool) {
-	if o == nil || IsNil(o.ActorEmail) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ActorEmail, true
+	return o.ActorEmail.Get(), o.ActorEmail.IsSet()
 }
 
-// HasActorEmail returns a boolean if a field has been set.
-func (o *AuditLogSummarized) HasActorEmail() bool {
-	if o != nil && !IsNil(o.ActorEmail) {
-		return true
-	}
-
-	return false
-}
-
-// SetActorEmail gets a reference to the given string and assigns it to the ActorEmail field.
+// SetActorEmail sets field value
 func (o *AuditLogSummarized) SetActorEmail(v string) {
-	o.ActorEmail = &v
+	o.ActorEmail.Set(&v)
 }
 
 func (o AuditLogSummarized) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -232,12 +222,8 @@ func (o AuditLogSummarized) ToMap() (map[string]interface{}, error) {
 	toSerialize["date"] = o.Date
 	toSerialize["title"] = o.Title
 	toSerialize["action"] = o.Action
-	if !IsNil(o.Actor) {
-		toSerialize["actor"] = o.Actor
-	}
-	if !IsNil(o.ActorEmail) {
-		toSerialize["actorEmail"] = o.ActorEmail
-	}
+	toSerialize["actor"] = o.Actor.Get()
+	toSerialize["actorEmail"] = o.ActorEmail.Get()
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -255,6 +241,8 @@ func (o *AuditLogSummarized) UnmarshalJSON(data []byte) (err error) {
 		"date",
 		"title",
 		"action",
+		"actor",
+		"actorEmail",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -262,10 +250,10 @@ func (o *AuditLogSummarized) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -331,3 +319,5 @@ func (v *NullableAuditLogSummarized) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

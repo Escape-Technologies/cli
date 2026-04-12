@@ -23,14 +23,14 @@ type CreateAssetIPV4RANGERequest struct {
 	// The list of project IDs bind the asset on.
 	ProjectIds []string `json:"projectIds,omitempty"`
 	// The custom name of the asset. If not provided, the default name will be used.
-	Name                 *string                `json:"name,omitempty"`
-	AssetClass           ENUMNETWORK            `json:"asset_class"`
-	ExtraMetadata        map[string]interface{} `json:"extra_metadata,omitempty"`
-	ScreenshotS3Key      *string                `json:"screenshot_s3_key,omitempty"`
-	AssetType            ENUMIPV4RANGE          `json:"asset_type"`
-	Cidr                 string                 `json:"cidr"`
-	Private              *bool                  `json:"private,omitempty"`
-	PrivateLocationId    *string                `json:"private_location_id,omitempty"`
+	Name NullableString `json:"name,omitempty"`
+	AssetClass ENUMNETWORK `json:"asset_class"`
+	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
+	ScreenshotS3Key NullableString `json:"screenshot_s3_key,omitempty"`
+	AssetType ENUMIPV4RANGE `json:"asset_type"`
+	Cidr string `json:"cidr"`
+	Private NullableBool `json:"private,omitempty"`
+	PrivateLocationId NullableString `json:"private_location_id,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -56,9 +56,9 @@ func NewCreateAssetIPV4RANGERequestWithDefaults() *CreateAssetIPV4RANGERequest {
 	return &this
 }
 
-// GetProjectIds returns the ProjectIds field value if set, zero value otherwise.
+// GetProjectIds returns the ProjectIds field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetIPV4RANGERequest) GetProjectIds() []string {
-	if o == nil || IsNil(o.ProjectIds) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -67,6 +67,7 @@ func (o *CreateAssetIPV4RANGERequest) GetProjectIds() []string {
 
 // GetProjectIdsOk returns a tuple with the ProjectIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetIPV4RANGERequest) GetProjectIdsOk() ([]string, bool) {
 	if o == nil || IsNil(o.ProjectIds) {
 		return nil, false
@@ -88,36 +89,46 @@ func (o *CreateAssetIPV4RANGERequest) SetProjectIds(v []string) {
 	o.ProjectIds = v
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
+// GetName returns the Name field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetIPV4RANGERequest) GetName() string {
-	if o == nil || IsNil(o.Name) {
+	if o == nil || IsNil(o.Name.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Name
+	return *o.Name.Get()
 }
 
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetIPV4RANGERequest) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Name, true
+	return o.Name.Get(), o.Name.IsSet()
 }
 
 // HasName returns a boolean if a field has been set.
 func (o *CreateAssetIPV4RANGERequest) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
+	if o != nil && o.Name.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetName gets a reference to the given string and assigns it to the Name field.
+// SetName gets a reference to the given NullableString and assigns it to the Name field.
 func (o *CreateAssetIPV4RANGERequest) SetName(v string) {
-	o.Name = &v
+	o.Name.Set(&v)
+}
+// SetNameNil sets the value for Name to be an explicit nil
+func (o *CreateAssetIPV4RANGERequest) SetNameNil() {
+	o.Name.Set(nil)
+}
+
+// UnsetName ensures that no value is present for Name, not even an explicit nil
+func (o *CreateAssetIPV4RANGERequest) UnsetName() {
+	o.Name.Unset()
 }
 
 // GetAssetClass returns the AssetClass field value
@@ -176,36 +187,46 @@ func (o *CreateAssetIPV4RANGERequest) SetExtraMetadata(v map[string]interface{})
 	o.ExtraMetadata = v
 }
 
-// GetScreenshotS3Key returns the ScreenshotS3Key field value if set, zero value otherwise.
+// GetScreenshotS3Key returns the ScreenshotS3Key field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetIPV4RANGERequest) GetScreenshotS3Key() string {
-	if o == nil || IsNil(o.ScreenshotS3Key) {
+	if o == nil || IsNil(o.ScreenshotS3Key.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.ScreenshotS3Key
+	return *o.ScreenshotS3Key.Get()
 }
 
 // GetScreenshotS3KeyOk returns a tuple with the ScreenshotS3Key field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetIPV4RANGERequest) GetScreenshotS3KeyOk() (*string, bool) {
-	if o == nil || IsNil(o.ScreenshotS3Key) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ScreenshotS3Key, true
+	return o.ScreenshotS3Key.Get(), o.ScreenshotS3Key.IsSet()
 }
 
 // HasScreenshotS3Key returns a boolean if a field has been set.
 func (o *CreateAssetIPV4RANGERequest) HasScreenshotS3Key() bool {
-	if o != nil && !IsNil(o.ScreenshotS3Key) {
+	if o != nil && o.ScreenshotS3Key.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetScreenshotS3Key gets a reference to the given string and assigns it to the ScreenshotS3Key field.
+// SetScreenshotS3Key gets a reference to the given NullableString and assigns it to the ScreenshotS3Key field.
 func (o *CreateAssetIPV4RANGERequest) SetScreenshotS3Key(v string) {
-	o.ScreenshotS3Key = &v
+	o.ScreenshotS3Key.Set(&v)
+}
+// SetScreenshotS3KeyNil sets the value for ScreenshotS3Key to be an explicit nil
+func (o *CreateAssetIPV4RANGERequest) SetScreenshotS3KeyNil() {
+	o.ScreenshotS3Key.Set(nil)
+}
+
+// UnsetScreenshotS3Key ensures that no value is present for ScreenshotS3Key, not even an explicit nil
+func (o *CreateAssetIPV4RANGERequest) UnsetScreenshotS3Key() {
+	o.ScreenshotS3Key.Unset()
 }
 
 // GetAssetType returns the AssetType field value
@@ -256,72 +277,92 @@ func (o *CreateAssetIPV4RANGERequest) SetCidr(v string) {
 	o.Cidr = v
 }
 
-// GetPrivate returns the Private field value if set, zero value otherwise.
+// GetPrivate returns the Private field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetIPV4RANGERequest) GetPrivate() bool {
-	if o == nil || IsNil(o.Private) {
+	if o == nil || IsNil(o.Private.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.Private
+	return *o.Private.Get()
 }
 
 // GetPrivateOk returns a tuple with the Private field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetIPV4RANGERequest) GetPrivateOk() (*bool, bool) {
-	if o == nil || IsNil(o.Private) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Private, true
+	return o.Private.Get(), o.Private.IsSet()
 }
 
 // HasPrivate returns a boolean if a field has been set.
 func (o *CreateAssetIPV4RANGERequest) HasPrivate() bool {
-	if o != nil && !IsNil(o.Private) {
+	if o != nil && o.Private.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPrivate gets a reference to the given bool and assigns it to the Private field.
+// SetPrivate gets a reference to the given NullableBool and assigns it to the Private field.
 func (o *CreateAssetIPV4RANGERequest) SetPrivate(v bool) {
-	o.Private = &v
+	o.Private.Set(&v)
+}
+// SetPrivateNil sets the value for Private to be an explicit nil
+func (o *CreateAssetIPV4RANGERequest) SetPrivateNil() {
+	o.Private.Set(nil)
 }
 
-// GetPrivateLocationId returns the PrivateLocationId field value if set, zero value otherwise.
+// UnsetPrivate ensures that no value is present for Private, not even an explicit nil
+func (o *CreateAssetIPV4RANGERequest) UnsetPrivate() {
+	o.Private.Unset()
+}
+
+// GetPrivateLocationId returns the PrivateLocationId field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetIPV4RANGERequest) GetPrivateLocationId() string {
-	if o == nil || IsNil(o.PrivateLocationId) {
+	if o == nil || IsNil(o.PrivateLocationId.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.PrivateLocationId
+	return *o.PrivateLocationId.Get()
 }
 
 // GetPrivateLocationIdOk returns a tuple with the PrivateLocationId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetIPV4RANGERequest) GetPrivateLocationIdOk() (*string, bool) {
-	if o == nil || IsNil(o.PrivateLocationId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.PrivateLocationId, true
+	return o.PrivateLocationId.Get(), o.PrivateLocationId.IsSet()
 }
 
 // HasPrivateLocationId returns a boolean if a field has been set.
 func (o *CreateAssetIPV4RANGERequest) HasPrivateLocationId() bool {
-	if o != nil && !IsNil(o.PrivateLocationId) {
+	if o != nil && o.PrivateLocationId.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPrivateLocationId gets a reference to the given string and assigns it to the PrivateLocationId field.
+// SetPrivateLocationId gets a reference to the given NullableString and assigns it to the PrivateLocationId field.
 func (o *CreateAssetIPV4RANGERequest) SetPrivateLocationId(v string) {
-	o.PrivateLocationId = &v
+	o.PrivateLocationId.Set(&v)
+}
+// SetPrivateLocationIdNil sets the value for PrivateLocationId to be an explicit nil
+func (o *CreateAssetIPV4RANGERequest) SetPrivateLocationIdNil() {
+	o.PrivateLocationId.Set(nil)
+}
+
+// UnsetPrivateLocationId ensures that no value is present for PrivateLocationId, not even an explicit nil
+func (o *CreateAssetIPV4RANGERequest) UnsetPrivateLocationId() {
+	o.PrivateLocationId.Unset()
 }
 
 func (o CreateAssetIPV4RANGERequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -330,26 +371,26 @@ func (o CreateAssetIPV4RANGERequest) MarshalJSON() ([]byte, error) {
 
 func (o CreateAssetIPV4RANGERequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ProjectIds) {
+	if o.ProjectIds != nil {
 		toSerialize["projectIds"] = o.ProjectIds
 	}
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
+	if o.Name.IsSet() {
+		toSerialize["name"] = o.Name.Get()
 	}
 	toSerialize["asset_class"] = o.AssetClass
 	if !IsNil(o.ExtraMetadata) {
 		toSerialize["extra_metadata"] = o.ExtraMetadata
 	}
-	if !IsNil(o.ScreenshotS3Key) {
-		toSerialize["screenshot_s3_key"] = o.ScreenshotS3Key
+	if o.ScreenshotS3Key.IsSet() {
+		toSerialize["screenshot_s3_key"] = o.ScreenshotS3Key.Get()
 	}
 	toSerialize["asset_type"] = o.AssetType
 	toSerialize["cidr"] = o.Cidr
-	if !IsNil(o.Private) {
-		toSerialize["private"] = o.Private
+	if o.Private.IsSet() {
+		toSerialize["private"] = o.Private.Get()
 	}
-	if !IsNil(o.PrivateLocationId) {
-		toSerialize["private_location_id"] = o.PrivateLocationId
+	if o.PrivateLocationId.IsSet() {
+		toSerialize["private_location_id"] = o.PrivateLocationId.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -374,10 +415,10 @@ func (o *CreateAssetIPV4RANGERequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -446,3 +487,5 @@ func (v *NullableCreateAssetIPV4RANGERequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

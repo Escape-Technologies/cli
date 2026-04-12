@@ -25,33 +25,34 @@ type IssueDetailed struct {
 	// The name of the issue
 	Name string `json:"name"`
 	// The full name of the issue
-	FullName string                                    `json:"fullName"`
+	FullName string `json:"fullName"`
 	Category ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY `json:"category"`
 	Severity ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY `json:"severity"`
-	Status   ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS   `json:"status"`
+	Status ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS `json:"status"`
 	// AI-generated contextual overview for the issue
-	Context *string `json:"context,omitempty"`
+	Context NullableString `json:"context"`
 	// Array of risk types associated with the issue
 	Risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS `json:"risks"`
 	// Unique identifier for the alert
 	AlertUid string `json:"alertUid"`
 	// When the issue was first created
-	CreatedAt string         `json:"createdAt"`
-	Asset     AssetDetailed2 `json:"asset"`
+	CreatedAt string `json:"createdAt"`
+	Asset AssetDetailed2 `json:"asset"`
 	// ID of the last scan where this issue was seen
-	LastSeenScanId *string `json:"lastSeenScanId,omitempty"`
+	LastSeenScanId NullableString `json:"lastSeenScanId"`
+	LastSeenScan ScanSummarized3 `json:"lastSeenScan"`
 	// ID of the first scan where this issue was seen
-	FirstSeenScanId *string `json:"firstSeenScanId,omitempty"`
+	FirstSeenScanId NullableString `json:"firstSeenScanId"`
 	// ID of the custom rule if this is a custom issue
-	CustomRuleId *string `json:"customRuleId,omitempty"`
+	CustomRuleId NullableString `json:"customRuleId"`
 	// Framework used for AI remediation
 	AiRemediationFramework string `json:"aiRemediationFramework"`
 	// AI-generated remediation for the issue
-	Remediation *string                  `json:"remediation,omitempty"`
-	Cvss        *GetIssue200ResponseCvss `json:"cvss,omitempty"`
+	Remediation NullableString `json:"remediation"`
+	Cvss GetIssue200ResponseCvss `json:"cvss"`
 	// Compliances associated with the issue
-	Compliances          []GetIssue200ResponseCompliancesInner `json:"compliances,omitempty"`
-	Links                IssueSummarizedLinks                  `json:"links"`
+	Compliances []GetIssue200ResponseCompliancesInner `json:"compliances,omitempty"`
+	Links IssueSummarizedLinks `json:"links"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -61,7 +62,7 @@ type _IssueDetailed IssueDetailed
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIssueDetailed(id string, name string, fullName string, category ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY, severity ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY, status ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, alertUid string, createdAt string, asset AssetDetailed2, aiRemediationFramework string, links IssueSummarizedLinks) *IssueDetailed {
+func NewIssueDetailed(id string, name string, fullName string, category ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY, severity ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY, status ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS, context NullableString, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, alertUid string, createdAt string, asset AssetDetailed2, lastSeenScanId NullableString, lastSeenScan ScanSummarized3, firstSeenScanId NullableString, customRuleId NullableString, aiRemediationFramework string, remediation NullableString, cvss GetIssue200ResponseCvss, links IssueSummarizedLinks) *IssueDetailed {
 	this := IssueDetailed{}
 	this.Id = id
 	this.Name = name
@@ -69,11 +70,18 @@ func NewIssueDetailed(id string, name string, fullName string, category ENUMPROP
 	this.Category = category
 	this.Severity = severity
 	this.Status = status
+	this.Context = context
 	this.Risks = risks
 	this.AlertUid = alertUid
 	this.CreatedAt = createdAt
 	this.Asset = asset
+	this.LastSeenScanId = lastSeenScanId
+	this.LastSeenScan = lastSeenScan
+	this.FirstSeenScanId = firstSeenScanId
+	this.CustomRuleId = customRuleId
 	this.AiRemediationFramework = aiRemediationFramework
+	this.Remediation = remediation
+	this.Cvss = cvss
 	this.Links = links
 	return &this
 }
@@ -230,36 +238,30 @@ func (o *IssueDetailed) SetStatus(v ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS) {
 	o.Status = v
 }
 
-// GetContext returns the Context field value if set, zero value otherwise.
+// GetContext returns the Context field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *IssueDetailed) GetContext() string {
-	if o == nil || IsNil(o.Context) {
+	if o == nil || o.Context.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.Context
+
+	return *o.Context.Get()
 }
 
-// GetContextOk returns a tuple with the Context field value if set, nil otherwise
+// GetContextOk returns a tuple with the Context field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IssueDetailed) GetContextOk() (*string, bool) {
-	if o == nil || IsNil(o.Context) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Context, true
+	return o.Context.Get(), o.Context.IsSet()
 }
 
-// HasContext returns a boolean if a field has been set.
-func (o *IssueDetailed) HasContext() bool {
-	if o != nil && !IsNil(o.Context) {
-		return true
-	}
-
-	return false
-}
-
-// SetContext gets a reference to the given string and assigns it to the Context field.
+// SetContext sets field value
 func (o *IssueDetailed) SetContext(v string) {
-	o.Context = &v
+	o.Context.Set(&v)
 }
 
 // GetRisks returns the Risks field value
@@ -358,100 +360,106 @@ func (o *IssueDetailed) SetAsset(v AssetDetailed2) {
 	o.Asset = v
 }
 
-// GetLastSeenScanId returns the LastSeenScanId field value if set, zero value otherwise.
+// GetLastSeenScanId returns the LastSeenScanId field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *IssueDetailed) GetLastSeenScanId() string {
-	if o == nil || IsNil(o.LastSeenScanId) {
+	if o == nil || o.LastSeenScanId.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.LastSeenScanId
+
+	return *o.LastSeenScanId.Get()
 }
 
-// GetLastSeenScanIdOk returns a tuple with the LastSeenScanId field value if set, nil otherwise
+// GetLastSeenScanIdOk returns a tuple with the LastSeenScanId field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IssueDetailed) GetLastSeenScanIdOk() (*string, bool) {
-	if o == nil || IsNil(o.LastSeenScanId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.LastSeenScanId, true
+	return o.LastSeenScanId.Get(), o.LastSeenScanId.IsSet()
 }
 
-// HasLastSeenScanId returns a boolean if a field has been set.
-func (o *IssueDetailed) HasLastSeenScanId() bool {
-	if o != nil && !IsNil(o.LastSeenScanId) {
-		return true
-	}
-
-	return false
-}
-
-// SetLastSeenScanId gets a reference to the given string and assigns it to the LastSeenScanId field.
+// SetLastSeenScanId sets field value
 func (o *IssueDetailed) SetLastSeenScanId(v string) {
-	o.LastSeenScanId = &v
+	o.LastSeenScanId.Set(&v)
 }
 
-// GetFirstSeenScanId returns the FirstSeenScanId field value if set, zero value otherwise.
+// GetLastSeenScan returns the LastSeenScan field value
+func (o *IssueDetailed) GetLastSeenScan() ScanSummarized3 {
+	if o == nil {
+		var ret ScanSummarized3
+		return ret
+	}
+
+	return o.LastSeenScan
+}
+
+// GetLastSeenScanOk returns a tuple with the LastSeenScan field value
+// and a boolean to check if the value has been set.
+func (o *IssueDetailed) GetLastSeenScanOk() (*ScanSummarized3, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.LastSeenScan, true
+}
+
+// SetLastSeenScan sets field value
+func (o *IssueDetailed) SetLastSeenScan(v ScanSummarized3) {
+	o.LastSeenScan = v
+}
+
+// GetFirstSeenScanId returns the FirstSeenScanId field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *IssueDetailed) GetFirstSeenScanId() string {
-	if o == nil || IsNil(o.FirstSeenScanId) {
+	if o == nil || o.FirstSeenScanId.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.FirstSeenScanId
+
+	return *o.FirstSeenScanId.Get()
 }
 
-// GetFirstSeenScanIdOk returns a tuple with the FirstSeenScanId field value if set, nil otherwise
+// GetFirstSeenScanIdOk returns a tuple with the FirstSeenScanId field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IssueDetailed) GetFirstSeenScanIdOk() (*string, bool) {
-	if o == nil || IsNil(o.FirstSeenScanId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.FirstSeenScanId, true
+	return o.FirstSeenScanId.Get(), o.FirstSeenScanId.IsSet()
 }
 
-// HasFirstSeenScanId returns a boolean if a field has been set.
-func (o *IssueDetailed) HasFirstSeenScanId() bool {
-	if o != nil && !IsNil(o.FirstSeenScanId) {
-		return true
-	}
-
-	return false
-}
-
-// SetFirstSeenScanId gets a reference to the given string and assigns it to the FirstSeenScanId field.
+// SetFirstSeenScanId sets field value
 func (o *IssueDetailed) SetFirstSeenScanId(v string) {
-	o.FirstSeenScanId = &v
+	o.FirstSeenScanId.Set(&v)
 }
 
-// GetCustomRuleId returns the CustomRuleId field value if set, zero value otherwise.
+// GetCustomRuleId returns the CustomRuleId field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *IssueDetailed) GetCustomRuleId() string {
-	if o == nil || IsNil(o.CustomRuleId) {
+	if o == nil || o.CustomRuleId.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.CustomRuleId
+
+	return *o.CustomRuleId.Get()
 }
 
-// GetCustomRuleIdOk returns a tuple with the CustomRuleId field value if set, nil otherwise
+// GetCustomRuleIdOk returns a tuple with the CustomRuleId field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IssueDetailed) GetCustomRuleIdOk() (*string, bool) {
-	if o == nil || IsNil(o.CustomRuleId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CustomRuleId, true
+	return o.CustomRuleId.Get(), o.CustomRuleId.IsSet()
 }
 
-// HasCustomRuleId returns a boolean if a field has been set.
-func (o *IssueDetailed) HasCustomRuleId() bool {
-	if o != nil && !IsNil(o.CustomRuleId) {
-		return true
-	}
-
-	return false
-}
-
-// SetCustomRuleId gets a reference to the given string and assigns it to the CustomRuleId field.
+// SetCustomRuleId sets field value
 func (o *IssueDetailed) SetCustomRuleId(v string) {
-	o.CustomRuleId = &v
+	o.CustomRuleId.Set(&v)
 }
 
 // GetAiRemediationFramework returns the AiRemediationFramework field value
@@ -478,68 +486,54 @@ func (o *IssueDetailed) SetAiRemediationFramework(v string) {
 	o.AiRemediationFramework = v
 }
 
-// GetRemediation returns the Remediation field value if set, zero value otherwise.
+// GetRemediation returns the Remediation field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *IssueDetailed) GetRemediation() string {
-	if o == nil || IsNil(o.Remediation) {
+	if o == nil || o.Remediation.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.Remediation
+
+	return *o.Remediation.Get()
 }
 
-// GetRemediationOk returns a tuple with the Remediation field value if set, nil otherwise
+// GetRemediationOk returns a tuple with the Remediation field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IssueDetailed) GetRemediationOk() (*string, bool) {
-	if o == nil || IsNil(o.Remediation) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Remediation, true
+	return o.Remediation.Get(), o.Remediation.IsSet()
 }
 
-// HasRemediation returns a boolean if a field has been set.
-func (o *IssueDetailed) HasRemediation() bool {
-	if o != nil && !IsNil(o.Remediation) {
-		return true
-	}
-
-	return false
-}
-
-// SetRemediation gets a reference to the given string and assigns it to the Remediation field.
+// SetRemediation sets field value
 func (o *IssueDetailed) SetRemediation(v string) {
-	o.Remediation = &v
+	o.Remediation.Set(&v)
 }
 
-// GetCvss returns the Cvss field value if set, zero value otherwise.
+// GetCvss returns the Cvss field value
 func (o *IssueDetailed) GetCvss() GetIssue200ResponseCvss {
-	if o == nil || IsNil(o.Cvss) {
+	if o == nil {
 		var ret GetIssue200ResponseCvss
 		return ret
 	}
-	return *o.Cvss
+
+	return o.Cvss
 }
 
-// GetCvssOk returns a tuple with the Cvss field value if set, nil otherwise
+// GetCvssOk returns a tuple with the Cvss field value
 // and a boolean to check if the value has been set.
 func (o *IssueDetailed) GetCvssOk() (*GetIssue200ResponseCvss, bool) {
-	if o == nil || IsNil(o.Cvss) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Cvss, true
+	return &o.Cvss, true
 }
 
-// HasCvss returns a boolean if a field has been set.
-func (o *IssueDetailed) HasCvss() bool {
-	if o != nil && !IsNil(o.Cvss) {
-		return true
-	}
-
-	return false
-}
-
-// SetCvss gets a reference to the given GetIssue200ResponseCvss and assigns it to the Cvss field.
+// SetCvss sets field value
 func (o *IssueDetailed) SetCvss(v GetIssue200ResponseCvss) {
-	o.Cvss = &v
+	o.Cvss = v
 }
 
 // GetCompliances returns the Compliances field value if set, zero value otherwise.
@@ -599,7 +593,7 @@ func (o *IssueDetailed) SetLinks(v IssueSummarizedLinks) {
 }
 
 func (o IssueDetailed) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -614,29 +608,18 @@ func (o IssueDetailed) ToMap() (map[string]interface{}, error) {
 	toSerialize["category"] = o.Category
 	toSerialize["severity"] = o.Severity
 	toSerialize["status"] = o.Status
-	if !IsNil(o.Context) {
-		toSerialize["context"] = o.Context
-	}
+	toSerialize["context"] = o.Context.Get()
 	toSerialize["risks"] = o.Risks
 	toSerialize["alertUid"] = o.AlertUid
 	toSerialize["createdAt"] = o.CreatedAt
 	toSerialize["asset"] = o.Asset
-	if !IsNil(o.LastSeenScanId) {
-		toSerialize["lastSeenScanId"] = o.LastSeenScanId
-	}
-	if !IsNil(o.FirstSeenScanId) {
-		toSerialize["firstSeenScanId"] = o.FirstSeenScanId
-	}
-	if !IsNil(o.CustomRuleId) {
-		toSerialize["customRuleId"] = o.CustomRuleId
-	}
+	toSerialize["lastSeenScanId"] = o.LastSeenScanId.Get()
+	toSerialize["lastSeenScan"] = o.LastSeenScan
+	toSerialize["firstSeenScanId"] = o.FirstSeenScanId.Get()
+	toSerialize["customRuleId"] = o.CustomRuleId.Get()
 	toSerialize["aiRemediationFramework"] = o.AiRemediationFramework
-	if !IsNil(o.Remediation) {
-		toSerialize["remediation"] = o.Remediation
-	}
-	if !IsNil(o.Cvss) {
-		toSerialize["cvss"] = o.Cvss
-	}
+	toSerialize["remediation"] = o.Remediation.Get()
+	toSerialize["cvss"] = o.Cvss
 	if !IsNil(o.Compliances) {
 		toSerialize["compliances"] = o.Compliances
 	}
@@ -660,11 +643,18 @@ func (o *IssueDetailed) UnmarshalJSON(data []byte) (err error) {
 		"category",
 		"severity",
 		"status",
+		"context",
 		"risks",
 		"alertUid",
 		"createdAt",
 		"asset",
+		"lastSeenScanId",
+		"lastSeenScan",
+		"firstSeenScanId",
+		"customRuleId",
 		"aiRemediationFramework",
+		"remediation",
+		"cvss",
 		"links",
 	}
 
@@ -673,10 +663,10 @@ func (o *IssueDetailed) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -707,6 +697,7 @@ func (o *IssueDetailed) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "createdAt")
 		delete(additionalProperties, "asset")
 		delete(additionalProperties, "lastSeenScanId")
+		delete(additionalProperties, "lastSeenScan")
 		delete(additionalProperties, "firstSeenScanId")
 		delete(additionalProperties, "customRuleId")
 		delete(additionalProperties, "aiRemediationFramework")
@@ -755,3 +746,5 @@ func (v *NullableIssueDetailed) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

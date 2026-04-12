@@ -31,8 +31,8 @@ type CreateLocation200Response struct {
 	// The date and time the location was created.
 	CreatedAt *string `json:"createdAt,omitempty"`
 	// The date and time the location was last seen.
-	LastSeenAt           *string                 `json:"lastSeenAt,omitempty"`
-	Links                LocationSummarizedLinks `json:"links"`
+	LastSeenAt NullableString `json:"lastSeenAt,omitempty"`
+	Links LocationSummarizedLinks `json:"links"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -55,7 +55,7 @@ func NewCreateLocation200Response(links LocationSummarizedLinks) *CreateLocation
 	var createdAt string = "2021-01-01T00:00:00Z"
 	this.CreatedAt = &createdAt
 	var lastSeenAt string = "2021-01-01T00:00:00Z"
-	this.LastSeenAt = &lastSeenAt
+	this.LastSeenAt = *NewNullableString(&lastSeenAt)
 	this.Links = links
 	return &this
 }
@@ -76,7 +76,7 @@ func NewCreateLocation200ResponseWithDefaults() *CreateLocation200Response {
 	var createdAt string = "2021-01-01T00:00:00Z"
 	this.CreatedAt = &createdAt
 	var lastSeenAt string = "2021-01-01T00:00:00Z"
-	this.LastSeenAt = &lastSeenAt
+	this.LastSeenAt = *NewNullableString(&lastSeenAt)
 	return &this
 }
 
@@ -240,36 +240,46 @@ func (o *CreateLocation200Response) SetCreatedAt(v string) {
 	o.CreatedAt = &v
 }
 
-// GetLastSeenAt returns the LastSeenAt field value if set, zero value otherwise.
+// GetLastSeenAt returns the LastSeenAt field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateLocation200Response) GetLastSeenAt() string {
-	if o == nil || IsNil(o.LastSeenAt) {
+	if o == nil || IsNil(o.LastSeenAt.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.LastSeenAt
+	return *o.LastSeenAt.Get()
 }
 
 // GetLastSeenAtOk returns a tuple with the LastSeenAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateLocation200Response) GetLastSeenAtOk() (*string, bool) {
-	if o == nil || IsNil(o.LastSeenAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.LastSeenAt, true
+	return o.LastSeenAt.Get(), o.LastSeenAt.IsSet()
 }
 
 // HasLastSeenAt returns a boolean if a field has been set.
 func (o *CreateLocation200Response) HasLastSeenAt() bool {
-	if o != nil && !IsNil(o.LastSeenAt) {
+	if o != nil && o.LastSeenAt.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetLastSeenAt gets a reference to the given string and assigns it to the LastSeenAt field.
+// SetLastSeenAt gets a reference to the given NullableString and assigns it to the LastSeenAt field.
 func (o *CreateLocation200Response) SetLastSeenAt(v string) {
-	o.LastSeenAt = &v
+	o.LastSeenAt.Set(&v)
+}
+// SetLastSeenAtNil sets the value for LastSeenAt to be an explicit nil
+func (o *CreateLocation200Response) SetLastSeenAtNil() {
+	o.LastSeenAt.Set(nil)
+}
+
+// UnsetLastSeenAt ensures that no value is present for LastSeenAt, not even an explicit nil
+func (o *CreateLocation200Response) UnsetLastSeenAt() {
+	o.LastSeenAt.Unset()
 }
 
 // GetLinks returns the Links field value
@@ -297,7 +307,7 @@ func (o *CreateLocation200Response) SetLinks(v LocationSummarizedLinks) {
 }
 
 func (o CreateLocation200Response) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -321,8 +331,8 @@ func (o CreateLocation200Response) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CreatedAt) {
 		toSerialize["createdAt"] = o.CreatedAt
 	}
-	if !IsNil(o.LastSeenAt) {
-		toSerialize["lastSeenAt"] = o.LastSeenAt
+	if o.LastSeenAt.IsSet() {
+		toSerialize["lastSeenAt"] = o.LastSeenAt.Get()
 	}
 	toSerialize["links"] = o.Links
 
@@ -346,10 +356,10 @@ func (o *CreateLocation200Response) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -416,3 +426,5 @@ func (v *NullableCreateLocation200Response) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

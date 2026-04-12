@@ -21,13 +21,13 @@ var _ MappedNullable = &ScreenshotDetailed{}
 // ScreenshotDetailed The screenshot of the attachment
 type ScreenshotDetailed struct {
 	// The alt of the screenshot
-	Alt *string `json:"alt,omitempty"`
+	Alt NullableString `json:"alt"`
 	// The date and time the screenshot was created
 	CreatedAt string `json:"createdAt"`
 	// The id of the screenshot
 	Id string `json:"id"`
 	// The temporary signed url of the screenshot
-	TemporarySignedUrl   string `json:"temporarySignedUrl"`
+	TemporarySignedUrl string `json:"temporarySignedUrl"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -37,8 +37,9 @@ type _ScreenshotDetailed ScreenshotDetailed
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewScreenshotDetailed(createdAt string, id string, temporarySignedUrl string) *ScreenshotDetailed {
+func NewScreenshotDetailed(alt NullableString, createdAt string, id string, temporarySignedUrl string) *ScreenshotDetailed {
 	this := ScreenshotDetailed{}
+	this.Alt = alt
 	this.CreatedAt = createdAt
 	this.Id = id
 	this.TemporarySignedUrl = temporarySignedUrl
@@ -53,36 +54,30 @@ func NewScreenshotDetailedWithDefaults() *ScreenshotDetailed {
 	return &this
 }
 
-// GetAlt returns the Alt field value if set, zero value otherwise.
+// GetAlt returns the Alt field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *ScreenshotDetailed) GetAlt() string {
-	if o == nil || IsNil(o.Alt) {
+	if o == nil || o.Alt.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.Alt
+
+	return *o.Alt.Get()
 }
 
-// GetAltOk returns a tuple with the Alt field value if set, nil otherwise
+// GetAltOk returns a tuple with the Alt field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ScreenshotDetailed) GetAltOk() (*string, bool) {
-	if o == nil || IsNil(o.Alt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Alt, true
+	return o.Alt.Get(), o.Alt.IsSet()
 }
 
-// HasAlt returns a boolean if a field has been set.
-func (o *ScreenshotDetailed) HasAlt() bool {
-	if o != nil && !IsNil(o.Alt) {
-		return true
-	}
-
-	return false
-}
-
-// SetAlt gets a reference to the given string and assigns it to the Alt field.
+// SetAlt sets field value
 func (o *ScreenshotDetailed) SetAlt(v string) {
-	o.Alt = &v
+	o.Alt.Set(&v)
 }
 
 // GetCreatedAt returns the CreatedAt field value
@@ -158,7 +153,7 @@ func (o *ScreenshotDetailed) SetTemporarySignedUrl(v string) {
 }
 
 func (o ScreenshotDetailed) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -167,9 +162,7 @@ func (o ScreenshotDetailed) MarshalJSON() ([]byte, error) {
 
 func (o ScreenshotDetailed) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Alt) {
-		toSerialize["alt"] = o.Alt
-	}
+	toSerialize["alt"] = o.Alt.Get()
 	toSerialize["createdAt"] = o.CreatedAt
 	toSerialize["id"] = o.Id
 	toSerialize["temporarySignedUrl"] = o.TemporarySignedUrl
@@ -186,6 +179,7 @@ func (o *ScreenshotDetailed) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"alt",
 		"createdAt",
 		"id",
 		"temporarySignedUrl",
@@ -196,10 +190,10 @@ func (o *ScreenshotDetailed) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -263,3 +257,5 @@ func (v *NullableScreenshotDetailed) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

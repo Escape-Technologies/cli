@@ -23,20 +23,20 @@ type CreateAssetIPV6Request struct {
 	// The list of project IDs bind the asset on.
 	ProjectIds []string `json:"projectIds,omitempty"`
 	// The custom name of the asset. If not provided, the default name will be used.
-	Name                 *string                                   `json:"name,omitempty"`
-	AssetClass           ENUMHOST                                  `json:"asset_class"`
-	ExtraMetadata        map[string]interface{}                    `json:"extra_metadata,omitempty"`
-	ScreenshotS3Key      *string                                   `json:"screenshot_s3_key,omitempty"`
-	AssetType            ENUMIPV6                                  `json:"asset_type"`
-	Address              string                                    `json:"address"`
-	Favicon              *string                                   `json:"favicon,omitempty"`
-	OpenPorts            []CreateAssetDNSRequestOpenPortsInner     `json:"open_ports,omitempty"`
-	PortsInsights        []float32                                 `json:"ports_insights,omitempty"`
-	PathsInsights        []CreateAssetDNSRequestPathsInsightsInner `json:"paths_insights,omitempty"`
-	Private              *bool                                     `json:"private,omitempty"`
-	ThirdParty           *ENUMPROPERTIESTHIRDPARTY                 `json:"third_party,omitempty"`
-	Organization         *string                                   `json:"organization,omitempty"`
-	Country              *string                                   `json:"country,omitempty"`
+	Name NullableString `json:"name,omitempty"`
+	AssetClass ENUMHOST `json:"asset_class"`
+	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
+	ScreenshotS3Key NullableString `json:"screenshot_s3_key,omitempty"`
+	AssetType ENUMIPV6 `json:"asset_type"`
+	Address string `json:"address"`
+	Favicon NullableString `json:"favicon,omitempty"`
+	OpenPorts []CreateAssetDNSRequestOpenPortsInner `json:"open_ports,omitempty"`
+	PortsInsights []float32 `json:"ports_insights,omitempty"`
+	PathsInsights []CreateAssetDNSRequestPathsInsightsInner `json:"paths_insights,omitempty"`
+	Private NullableBool `json:"private,omitempty"`
+	ThirdParty NullableENUMPROPERTIESTHIRDPARTY `json:"third_party,omitempty"`
+	Organization NullableString `json:"organization,omitempty"`
+	Country NullableString `json:"country,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -62,9 +62,9 @@ func NewCreateAssetIPV6RequestWithDefaults() *CreateAssetIPV6Request {
 	return &this
 }
 
-// GetProjectIds returns the ProjectIds field value if set, zero value otherwise.
+// GetProjectIds returns the ProjectIds field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetIPV6Request) GetProjectIds() []string {
-	if o == nil || IsNil(o.ProjectIds) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -73,6 +73,7 @@ func (o *CreateAssetIPV6Request) GetProjectIds() []string {
 
 // GetProjectIdsOk returns a tuple with the ProjectIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetIPV6Request) GetProjectIdsOk() ([]string, bool) {
 	if o == nil || IsNil(o.ProjectIds) {
 		return nil, false
@@ -94,36 +95,46 @@ func (o *CreateAssetIPV6Request) SetProjectIds(v []string) {
 	o.ProjectIds = v
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
+// GetName returns the Name field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetIPV6Request) GetName() string {
-	if o == nil || IsNil(o.Name) {
+	if o == nil || IsNil(o.Name.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Name
+	return *o.Name.Get()
 }
 
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetIPV6Request) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Name, true
+	return o.Name.Get(), o.Name.IsSet()
 }
 
 // HasName returns a boolean if a field has been set.
 func (o *CreateAssetIPV6Request) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
+	if o != nil && o.Name.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetName gets a reference to the given string and assigns it to the Name field.
+// SetName gets a reference to the given NullableString and assigns it to the Name field.
 func (o *CreateAssetIPV6Request) SetName(v string) {
-	o.Name = &v
+	o.Name.Set(&v)
+}
+// SetNameNil sets the value for Name to be an explicit nil
+func (o *CreateAssetIPV6Request) SetNameNil() {
+	o.Name.Set(nil)
+}
+
+// UnsetName ensures that no value is present for Name, not even an explicit nil
+func (o *CreateAssetIPV6Request) UnsetName() {
+	o.Name.Unset()
 }
 
 // GetAssetClass returns the AssetClass field value
@@ -182,36 +193,46 @@ func (o *CreateAssetIPV6Request) SetExtraMetadata(v map[string]interface{}) {
 	o.ExtraMetadata = v
 }
 
-// GetScreenshotS3Key returns the ScreenshotS3Key field value if set, zero value otherwise.
+// GetScreenshotS3Key returns the ScreenshotS3Key field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetIPV6Request) GetScreenshotS3Key() string {
-	if o == nil || IsNil(o.ScreenshotS3Key) {
+	if o == nil || IsNil(o.ScreenshotS3Key.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.ScreenshotS3Key
+	return *o.ScreenshotS3Key.Get()
 }
 
 // GetScreenshotS3KeyOk returns a tuple with the ScreenshotS3Key field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetIPV6Request) GetScreenshotS3KeyOk() (*string, bool) {
-	if o == nil || IsNil(o.ScreenshotS3Key) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ScreenshotS3Key, true
+	return o.ScreenshotS3Key.Get(), o.ScreenshotS3Key.IsSet()
 }
 
 // HasScreenshotS3Key returns a boolean if a field has been set.
 func (o *CreateAssetIPV6Request) HasScreenshotS3Key() bool {
-	if o != nil && !IsNil(o.ScreenshotS3Key) {
+	if o != nil && o.ScreenshotS3Key.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetScreenshotS3Key gets a reference to the given string and assigns it to the ScreenshotS3Key field.
+// SetScreenshotS3Key gets a reference to the given NullableString and assigns it to the ScreenshotS3Key field.
 func (o *CreateAssetIPV6Request) SetScreenshotS3Key(v string) {
-	o.ScreenshotS3Key = &v
+	o.ScreenshotS3Key.Set(&v)
+}
+// SetScreenshotS3KeyNil sets the value for ScreenshotS3Key to be an explicit nil
+func (o *CreateAssetIPV6Request) SetScreenshotS3KeyNil() {
+	o.ScreenshotS3Key.Set(nil)
+}
+
+// UnsetScreenshotS3Key ensures that no value is present for ScreenshotS3Key, not even an explicit nil
+func (o *CreateAssetIPV6Request) UnsetScreenshotS3Key() {
+	o.ScreenshotS3Key.Unset()
 }
 
 // GetAssetType returns the AssetType field value
@@ -262,41 +283,51 @@ func (o *CreateAssetIPV6Request) SetAddress(v string) {
 	o.Address = v
 }
 
-// GetFavicon returns the Favicon field value if set, zero value otherwise.
+// GetFavicon returns the Favicon field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetIPV6Request) GetFavicon() string {
-	if o == nil || IsNil(o.Favicon) {
+	if o == nil || IsNil(o.Favicon.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Favicon
+	return *o.Favicon.Get()
 }
 
 // GetFaviconOk returns a tuple with the Favicon field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetIPV6Request) GetFaviconOk() (*string, bool) {
-	if o == nil || IsNil(o.Favicon) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Favicon, true
+	return o.Favicon.Get(), o.Favicon.IsSet()
 }
 
 // HasFavicon returns a boolean if a field has been set.
 func (o *CreateAssetIPV6Request) HasFavicon() bool {
-	if o != nil && !IsNil(o.Favicon) {
+	if o != nil && o.Favicon.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetFavicon gets a reference to the given string and assigns it to the Favicon field.
+// SetFavicon gets a reference to the given NullableString and assigns it to the Favicon field.
 func (o *CreateAssetIPV6Request) SetFavicon(v string) {
-	o.Favicon = &v
+	o.Favicon.Set(&v)
+}
+// SetFaviconNil sets the value for Favicon to be an explicit nil
+func (o *CreateAssetIPV6Request) SetFaviconNil() {
+	o.Favicon.Set(nil)
 }
 
-// GetOpenPorts returns the OpenPorts field value if set, zero value otherwise.
+// UnsetFavicon ensures that no value is present for Favicon, not even an explicit nil
+func (o *CreateAssetIPV6Request) UnsetFavicon() {
+	o.Favicon.Unset()
+}
+
+// GetOpenPorts returns the OpenPorts field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetIPV6Request) GetOpenPorts() []CreateAssetDNSRequestOpenPortsInner {
-	if o == nil || IsNil(o.OpenPorts) {
+	if o == nil {
 		var ret []CreateAssetDNSRequestOpenPortsInner
 		return ret
 	}
@@ -305,6 +336,7 @@ func (o *CreateAssetIPV6Request) GetOpenPorts() []CreateAssetDNSRequestOpenPorts
 
 // GetOpenPortsOk returns a tuple with the OpenPorts field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetIPV6Request) GetOpenPortsOk() ([]CreateAssetDNSRequestOpenPortsInner, bool) {
 	if o == nil || IsNil(o.OpenPorts) {
 		return nil, false
@@ -326,9 +358,9 @@ func (o *CreateAssetIPV6Request) SetOpenPorts(v []CreateAssetDNSRequestOpenPorts
 	o.OpenPorts = v
 }
 
-// GetPortsInsights returns the PortsInsights field value if set, zero value otherwise.
+// GetPortsInsights returns the PortsInsights field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetIPV6Request) GetPortsInsights() []float32 {
-	if o == nil || IsNil(o.PortsInsights) {
+	if o == nil {
 		var ret []float32
 		return ret
 	}
@@ -337,6 +369,7 @@ func (o *CreateAssetIPV6Request) GetPortsInsights() []float32 {
 
 // GetPortsInsightsOk returns a tuple with the PortsInsights field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetIPV6Request) GetPortsInsightsOk() ([]float32, bool) {
 	if o == nil || IsNil(o.PortsInsights) {
 		return nil, false
@@ -358,9 +391,9 @@ func (o *CreateAssetIPV6Request) SetPortsInsights(v []float32) {
 	o.PortsInsights = v
 }
 
-// GetPathsInsights returns the PathsInsights field value if set, zero value otherwise.
+// GetPathsInsights returns the PathsInsights field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetIPV6Request) GetPathsInsights() []CreateAssetDNSRequestPathsInsightsInner {
-	if o == nil || IsNil(o.PathsInsights) {
+	if o == nil {
 		var ret []CreateAssetDNSRequestPathsInsightsInner
 		return ret
 	}
@@ -369,6 +402,7 @@ func (o *CreateAssetIPV6Request) GetPathsInsights() []CreateAssetDNSRequestPaths
 
 // GetPathsInsightsOk returns a tuple with the PathsInsights field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetIPV6Request) GetPathsInsightsOk() ([]CreateAssetDNSRequestPathsInsightsInner, bool) {
 	if o == nil || IsNil(o.PathsInsights) {
 		return nil, false
@@ -390,136 +424,176 @@ func (o *CreateAssetIPV6Request) SetPathsInsights(v []CreateAssetDNSRequestPaths
 	o.PathsInsights = v
 }
 
-// GetPrivate returns the Private field value if set, zero value otherwise.
+// GetPrivate returns the Private field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetIPV6Request) GetPrivate() bool {
-	if o == nil || IsNil(o.Private) {
+	if o == nil || IsNil(o.Private.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.Private
+	return *o.Private.Get()
 }
 
 // GetPrivateOk returns a tuple with the Private field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetIPV6Request) GetPrivateOk() (*bool, bool) {
-	if o == nil || IsNil(o.Private) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Private, true
+	return o.Private.Get(), o.Private.IsSet()
 }
 
 // HasPrivate returns a boolean if a field has been set.
 func (o *CreateAssetIPV6Request) HasPrivate() bool {
-	if o != nil && !IsNil(o.Private) {
+	if o != nil && o.Private.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPrivate gets a reference to the given bool and assigns it to the Private field.
+// SetPrivate gets a reference to the given NullableBool and assigns it to the Private field.
 func (o *CreateAssetIPV6Request) SetPrivate(v bool) {
-	o.Private = &v
+	o.Private.Set(&v)
+}
+// SetPrivateNil sets the value for Private to be an explicit nil
+func (o *CreateAssetIPV6Request) SetPrivateNil() {
+	o.Private.Set(nil)
 }
 
-// GetThirdParty returns the ThirdParty field value if set, zero value otherwise.
+// UnsetPrivate ensures that no value is present for Private, not even an explicit nil
+func (o *CreateAssetIPV6Request) UnsetPrivate() {
+	o.Private.Unset()
+}
+
+// GetThirdParty returns the ThirdParty field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetIPV6Request) GetThirdParty() ENUMPROPERTIESTHIRDPARTY {
-	if o == nil || IsNil(o.ThirdParty) {
+	if o == nil || IsNil(o.ThirdParty.Get()) {
 		var ret ENUMPROPERTIESTHIRDPARTY
 		return ret
 	}
-	return *o.ThirdParty
+	return *o.ThirdParty.Get()
 }
 
 // GetThirdPartyOk returns a tuple with the ThirdParty field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetIPV6Request) GetThirdPartyOk() (*ENUMPROPERTIESTHIRDPARTY, bool) {
-	if o == nil || IsNil(o.ThirdParty) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ThirdParty, true
+	return o.ThirdParty.Get(), o.ThirdParty.IsSet()
 }
 
 // HasThirdParty returns a boolean if a field has been set.
 func (o *CreateAssetIPV6Request) HasThirdParty() bool {
-	if o != nil && !IsNil(o.ThirdParty) {
+	if o != nil && o.ThirdParty.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetThirdParty gets a reference to the given ENUMPROPERTIESTHIRDPARTY and assigns it to the ThirdParty field.
+// SetThirdParty gets a reference to the given NullableENUMPROPERTIESTHIRDPARTY and assigns it to the ThirdParty field.
 func (o *CreateAssetIPV6Request) SetThirdParty(v ENUMPROPERTIESTHIRDPARTY) {
-	o.ThirdParty = &v
+	o.ThirdParty.Set(&v)
+}
+// SetThirdPartyNil sets the value for ThirdParty to be an explicit nil
+func (o *CreateAssetIPV6Request) SetThirdPartyNil() {
+	o.ThirdParty.Set(nil)
 }
 
-// GetOrganization returns the Organization field value if set, zero value otherwise.
+// UnsetThirdParty ensures that no value is present for ThirdParty, not even an explicit nil
+func (o *CreateAssetIPV6Request) UnsetThirdParty() {
+	o.ThirdParty.Unset()
+}
+
+// GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetIPV6Request) GetOrganization() string {
-	if o == nil || IsNil(o.Organization) {
+	if o == nil || IsNil(o.Organization.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Organization
+	return *o.Organization.Get()
 }
 
 // GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetIPV6Request) GetOrganizationOk() (*string, bool) {
-	if o == nil || IsNil(o.Organization) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Organization, true
+	return o.Organization.Get(), o.Organization.IsSet()
 }
 
 // HasOrganization returns a boolean if a field has been set.
 func (o *CreateAssetIPV6Request) HasOrganization() bool {
-	if o != nil && !IsNil(o.Organization) {
+	if o != nil && o.Organization.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganization gets a reference to the given string and assigns it to the Organization field.
+// SetOrganization gets a reference to the given NullableString and assigns it to the Organization field.
 func (o *CreateAssetIPV6Request) SetOrganization(v string) {
-	o.Organization = &v
+	o.Organization.Set(&v)
+}
+// SetOrganizationNil sets the value for Organization to be an explicit nil
+func (o *CreateAssetIPV6Request) SetOrganizationNil() {
+	o.Organization.Set(nil)
 }
 
-// GetCountry returns the Country field value if set, zero value otherwise.
+// UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
+func (o *CreateAssetIPV6Request) UnsetOrganization() {
+	o.Organization.Unset()
+}
+
+// GetCountry returns the Country field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetIPV6Request) GetCountry() string {
-	if o == nil || IsNil(o.Country) {
+	if o == nil || IsNil(o.Country.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Country
+	return *o.Country.Get()
 }
 
 // GetCountryOk returns a tuple with the Country field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetIPV6Request) GetCountryOk() (*string, bool) {
-	if o == nil || IsNil(o.Country) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Country, true
+	return o.Country.Get(), o.Country.IsSet()
 }
 
 // HasCountry returns a boolean if a field has been set.
 func (o *CreateAssetIPV6Request) HasCountry() bool {
-	if o != nil && !IsNil(o.Country) {
+	if o != nil && o.Country.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCountry gets a reference to the given string and assigns it to the Country field.
+// SetCountry gets a reference to the given NullableString and assigns it to the Country field.
 func (o *CreateAssetIPV6Request) SetCountry(v string) {
-	o.Country = &v
+	o.Country.Set(&v)
+}
+// SetCountryNil sets the value for Country to be an explicit nil
+func (o *CreateAssetIPV6Request) SetCountryNil() {
+	o.Country.Set(nil)
+}
+
+// UnsetCountry ensures that no value is present for Country, not even an explicit nil
+func (o *CreateAssetIPV6Request) UnsetCountry() {
+	o.Country.Unset()
 }
 
 func (o CreateAssetIPV6Request) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -528,44 +602,44 @@ func (o CreateAssetIPV6Request) MarshalJSON() ([]byte, error) {
 
 func (o CreateAssetIPV6Request) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ProjectIds) {
+	if o.ProjectIds != nil {
 		toSerialize["projectIds"] = o.ProjectIds
 	}
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
+	if o.Name.IsSet() {
+		toSerialize["name"] = o.Name.Get()
 	}
 	toSerialize["asset_class"] = o.AssetClass
 	if !IsNil(o.ExtraMetadata) {
 		toSerialize["extra_metadata"] = o.ExtraMetadata
 	}
-	if !IsNil(o.ScreenshotS3Key) {
-		toSerialize["screenshot_s3_key"] = o.ScreenshotS3Key
+	if o.ScreenshotS3Key.IsSet() {
+		toSerialize["screenshot_s3_key"] = o.ScreenshotS3Key.Get()
 	}
 	toSerialize["asset_type"] = o.AssetType
 	toSerialize["address"] = o.Address
-	if !IsNil(o.Favicon) {
-		toSerialize["favicon"] = o.Favicon
+	if o.Favicon.IsSet() {
+		toSerialize["favicon"] = o.Favicon.Get()
 	}
-	if !IsNil(o.OpenPorts) {
+	if o.OpenPorts != nil {
 		toSerialize["open_ports"] = o.OpenPorts
 	}
-	if !IsNil(o.PortsInsights) {
+	if o.PortsInsights != nil {
 		toSerialize["ports_insights"] = o.PortsInsights
 	}
-	if !IsNil(o.PathsInsights) {
+	if o.PathsInsights != nil {
 		toSerialize["paths_insights"] = o.PathsInsights
 	}
-	if !IsNil(o.Private) {
-		toSerialize["private"] = o.Private
+	if o.Private.IsSet() {
+		toSerialize["private"] = o.Private.Get()
 	}
-	if !IsNil(o.ThirdParty) {
-		toSerialize["third_party"] = o.ThirdParty
+	if o.ThirdParty.IsSet() {
+		toSerialize["third_party"] = o.ThirdParty.Get()
 	}
-	if !IsNil(o.Organization) {
-		toSerialize["organization"] = o.Organization
+	if o.Organization.IsSet() {
+		toSerialize["organization"] = o.Organization.Get()
 	}
-	if !IsNil(o.Country) {
-		toSerialize["country"] = o.Country
+	if o.Country.IsSet() {
+		toSerialize["country"] = o.Country.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -590,10 +664,10 @@ func (o *CreateAssetIPV6Request) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -668,3 +742,5 @@ func (v *NullableCreateAssetIPV6Request) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

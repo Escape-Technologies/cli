@@ -19,7 +19,7 @@ var _ MappedNullable = &CreateAssetDNSRequestPathsInsightsInnerReturnType{}
 
 // CreateAssetDNSRequestPathsInsightsInnerReturnType struct for CreateAssetDNSRequestPathsInsightsInnerReturnType
 type CreateAssetDNSRequestPathsInsightsInnerReturnType struct {
-	Responses            map[string]CreateAssetDNSRequestPathsInsightsInnerReturnTypeResponsesValue `json:"responses,omitempty"`
+	Responses *map[string]CreateAssetDNSRequestPathsInsightsInnerReturnTypeResponsesValue `json:"responses,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -48,14 +48,14 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerReturnType) GetResponses() map[s
 		var ret map[string]CreateAssetDNSRequestPathsInsightsInnerReturnTypeResponsesValue
 		return ret
 	}
-	return o.Responses
+	return *o.Responses
 }
 
 // GetResponsesOk returns a tuple with the Responses field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetDNSRequestPathsInsightsInnerReturnType) GetResponsesOk() (map[string]CreateAssetDNSRequestPathsInsightsInnerReturnTypeResponsesValue, bool) {
+func (o *CreateAssetDNSRequestPathsInsightsInnerReturnType) GetResponsesOk() (*map[string]CreateAssetDNSRequestPathsInsightsInnerReturnTypeResponsesValue, bool) {
 	if o == nil || IsNil(o.Responses) {
-		return map[string]CreateAssetDNSRequestPathsInsightsInnerReturnTypeResponsesValue{}, false
+		return nil, false
 	}
 	return o.Responses, true
 }
@@ -71,11 +71,11 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerReturnType) HasResponses() bool 
 
 // SetResponses gets a reference to the given map[string]CreateAssetDNSRequestPathsInsightsInnerReturnTypeResponsesValue and assigns it to the Responses field.
 func (o *CreateAssetDNSRequestPathsInsightsInnerReturnType) SetResponses(v map[string]CreateAssetDNSRequestPathsInsightsInnerReturnTypeResponsesValue) {
-	o.Responses = v
+	o.Responses = &v
 }
 
 func (o CreateAssetDNSRequestPathsInsightsInnerReturnType) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -151,3 +151,5 @@ func (v *NullableCreateAssetDNSRequestPathsInsightsInnerReturnType) UnmarshalJSO
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

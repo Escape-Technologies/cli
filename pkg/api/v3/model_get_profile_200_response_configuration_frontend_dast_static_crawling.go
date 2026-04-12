@@ -19,8 +19,8 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationFrontendDastStaticCraw
 
 // GetProfile200ResponseConfigurationFrontendDastStaticCrawling struct for GetProfile200ResponseConfigurationFrontendDastStaticCrawling
 type GetProfile200ResponseConfigurationFrontendDastStaticCrawling struct {
-	Enabled              *bool    `json:"enabled,omitempty"`
-	TimeLimitSeconds     *float32 `json:"time_limit_seconds,omitempty"`
+	Enabled NullableBool `json:"enabled,omitempty"`
+	TimeLimitSeconds NullableFloat32 `json:"time_limit_seconds,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -43,72 +43,92 @@ func NewGetProfile200ResponseConfigurationFrontendDastStaticCrawlingWithDefaults
 	return &this
 }
 
-// GetEnabled returns the Enabled field value if set, zero value otherwise.
+// GetEnabled returns the Enabled field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationFrontendDastStaticCrawling) GetEnabled() bool {
-	if o == nil || IsNil(o.Enabled) {
+	if o == nil || IsNil(o.Enabled.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.Enabled
+	return *o.Enabled.Get()
 }
 
 // GetEnabledOk returns a tuple with the Enabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationFrontendDastStaticCrawling) GetEnabledOk() (*bool, bool) {
-	if o == nil || IsNil(o.Enabled) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Enabled, true
+	return o.Enabled.Get(), o.Enabled.IsSet()
 }
 
 // HasEnabled returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationFrontendDastStaticCrawling) HasEnabled() bool {
-	if o != nil && !IsNil(o.Enabled) {
+	if o != nil && o.Enabled.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetEnabled gets a reference to the given bool and assigns it to the Enabled field.
+// SetEnabled gets a reference to the given NullableBool and assigns it to the Enabled field.
 func (o *GetProfile200ResponseConfigurationFrontendDastStaticCrawling) SetEnabled(v bool) {
-	o.Enabled = &v
+	o.Enabled.Set(&v)
+}
+// SetEnabledNil sets the value for Enabled to be an explicit nil
+func (o *GetProfile200ResponseConfigurationFrontendDastStaticCrawling) SetEnabledNil() {
+	o.Enabled.Set(nil)
 }
 
-// GetTimeLimitSeconds returns the TimeLimitSeconds field value if set, zero value otherwise.
+// UnsetEnabled ensures that no value is present for Enabled, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationFrontendDastStaticCrawling) UnsetEnabled() {
+	o.Enabled.Unset()
+}
+
+// GetTimeLimitSeconds returns the TimeLimitSeconds field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationFrontendDastStaticCrawling) GetTimeLimitSeconds() float32 {
-	if o == nil || IsNil(o.TimeLimitSeconds) {
+	if o == nil || IsNil(o.TimeLimitSeconds.Get()) {
 		var ret float32
 		return ret
 	}
-	return *o.TimeLimitSeconds
+	return *o.TimeLimitSeconds.Get()
 }
 
 // GetTimeLimitSecondsOk returns a tuple with the TimeLimitSeconds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationFrontendDastStaticCrawling) GetTimeLimitSecondsOk() (*float32, bool) {
-	if o == nil || IsNil(o.TimeLimitSeconds) {
+	if o == nil {
 		return nil, false
 	}
-	return o.TimeLimitSeconds, true
+	return o.TimeLimitSeconds.Get(), o.TimeLimitSeconds.IsSet()
 }
 
 // HasTimeLimitSeconds returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationFrontendDastStaticCrawling) HasTimeLimitSeconds() bool {
-	if o != nil && !IsNil(o.TimeLimitSeconds) {
+	if o != nil && o.TimeLimitSeconds.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetTimeLimitSeconds gets a reference to the given float32 and assigns it to the TimeLimitSeconds field.
+// SetTimeLimitSeconds gets a reference to the given NullableFloat32 and assigns it to the TimeLimitSeconds field.
 func (o *GetProfile200ResponseConfigurationFrontendDastStaticCrawling) SetTimeLimitSeconds(v float32) {
-	o.TimeLimitSeconds = &v
+	o.TimeLimitSeconds.Set(&v)
+}
+// SetTimeLimitSecondsNil sets the value for TimeLimitSeconds to be an explicit nil
+func (o *GetProfile200ResponseConfigurationFrontendDastStaticCrawling) SetTimeLimitSecondsNil() {
+	o.TimeLimitSeconds.Set(nil)
+}
+
+// UnsetTimeLimitSeconds ensures that no value is present for TimeLimitSeconds, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationFrontendDastStaticCrawling) UnsetTimeLimitSeconds() {
+	o.TimeLimitSeconds.Unset()
 }
 
 func (o GetProfile200ResponseConfigurationFrontendDastStaticCrawling) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -117,11 +137,11 @@ func (o GetProfile200ResponseConfigurationFrontendDastStaticCrawling) MarshalJSO
 
 func (o GetProfile200ResponseConfigurationFrontendDastStaticCrawling) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Enabled) {
-		toSerialize["enabled"] = o.Enabled
+	if o.Enabled.IsSet() {
+		toSerialize["enabled"] = o.Enabled.Get()
 	}
-	if !IsNil(o.TimeLimitSeconds) {
-		toSerialize["time_limit_seconds"] = o.TimeLimitSeconds
+	if o.TimeLimitSeconds.IsSet() {
+		toSerialize["time_limit_seconds"] = o.TimeLimitSeconds.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -188,3 +208,5 @@ func (v *NullableGetProfile200ResponseConfigurationFrontendDastStaticCrawling) U
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

@@ -19,8 +19,8 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationSecurityTestsExposedSo
 
 // GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap struct for GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap
 type GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap struct {
-	Skip                 *bool    `json:"skip,omitempty"`
-	IssuesCountLimit     *float32 `json:"issues_count_limit,omitempty"`
+	Skip NullableBool `json:"skip,omitempty"`
+	IssuesCountLimit NullableFloat32 `json:"issues_count_limit,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -43,72 +43,92 @@ func NewGetProfile200ResponseConfigurationSecurityTestsExposedSourcemapWithDefau
 	return &this
 }
 
-// GetSkip returns the Skip field value if set, zero value otherwise.
+// GetSkip returns the Skip field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap) GetSkip() bool {
-	if o == nil || IsNil(o.Skip) {
+	if o == nil || IsNil(o.Skip.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.Skip
+	return *o.Skip.Get()
 }
 
 // GetSkipOk returns a tuple with the Skip field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap) GetSkipOk() (*bool, bool) {
-	if o == nil || IsNil(o.Skip) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Skip, true
+	return o.Skip.Get(), o.Skip.IsSet()
 }
 
 // HasSkip returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap) HasSkip() bool {
-	if o != nil && !IsNil(o.Skip) {
+	if o != nil && o.Skip.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSkip gets a reference to the given bool and assigns it to the Skip field.
+// SetSkip gets a reference to the given NullableBool and assigns it to the Skip field.
 func (o *GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap) SetSkip(v bool) {
-	o.Skip = &v
+	o.Skip.Set(&v)
+}
+// SetSkipNil sets the value for Skip to be an explicit nil
+func (o *GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap) SetSkipNil() {
+	o.Skip.Set(nil)
 }
 
-// GetIssuesCountLimit returns the IssuesCountLimit field value if set, zero value otherwise.
+// UnsetSkip ensures that no value is present for Skip, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap) UnsetSkip() {
+	o.Skip.Unset()
+}
+
+// GetIssuesCountLimit returns the IssuesCountLimit field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap) GetIssuesCountLimit() float32 {
-	if o == nil || IsNil(o.IssuesCountLimit) {
+	if o == nil || IsNil(o.IssuesCountLimit.Get()) {
 		var ret float32
 		return ret
 	}
-	return *o.IssuesCountLimit
+	return *o.IssuesCountLimit.Get()
 }
 
 // GetIssuesCountLimitOk returns a tuple with the IssuesCountLimit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap) GetIssuesCountLimitOk() (*float32, bool) {
-	if o == nil || IsNil(o.IssuesCountLimit) {
+	if o == nil {
 		return nil, false
 	}
-	return o.IssuesCountLimit, true
+	return o.IssuesCountLimit.Get(), o.IssuesCountLimit.IsSet()
 }
 
 // HasIssuesCountLimit returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap) HasIssuesCountLimit() bool {
-	if o != nil && !IsNil(o.IssuesCountLimit) {
+	if o != nil && o.IssuesCountLimit.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetIssuesCountLimit gets a reference to the given float32 and assigns it to the IssuesCountLimit field.
+// SetIssuesCountLimit gets a reference to the given NullableFloat32 and assigns it to the IssuesCountLimit field.
 func (o *GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap) SetIssuesCountLimit(v float32) {
-	o.IssuesCountLimit = &v
+	o.IssuesCountLimit.Set(&v)
+}
+// SetIssuesCountLimitNil sets the value for IssuesCountLimit to be an explicit nil
+func (o *GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap) SetIssuesCountLimitNil() {
+	o.IssuesCountLimit.Set(nil)
+}
+
+// UnsetIssuesCountLimit ensures that no value is present for IssuesCountLimit, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap) UnsetIssuesCountLimit() {
+	o.IssuesCountLimit.Unset()
 }
 
 func (o GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -117,11 +137,11 @@ func (o GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap) Marshal
 
 func (o GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Skip) {
-		toSerialize["skip"] = o.Skip
+	if o.Skip.IsSet() {
+		toSerialize["skip"] = o.Skip.Get()
 	}
-	if !IsNil(o.IssuesCountLimit) {
-		toSerialize["issues_count_limit"] = o.IssuesCountLimit
+	if o.IssuesCountLimit.IsSet() {
+		toSerialize["issues_count_limit"] = o.IssuesCountLimit.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -188,3 +208,5 @@ func (v *NullableGetProfile200ResponseConfigurationSecurityTestsExposedSourcemap
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

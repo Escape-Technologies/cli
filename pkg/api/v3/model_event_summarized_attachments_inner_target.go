@@ -23,11 +23,11 @@ type EventSummarizedAttachmentsInnerTarget struct {
 	// The id of the target
 	Id string `json:"id"`
 	// The date and time the target was created
-	CreatedAt            string                                                `json:"createdAt"`
-	ApiRoute             *EventSummarizedAttachmentsInnerTargetApiRoute        `json:"apiRoute,omitempty"`
-	CodeFile             *EventSummarizedAttachmentsInnerTargetCodeFile        `json:"codeFile,omitempty"`
-	GraphqlResolver      *EventSummarizedAttachmentsInnerTargetGraphqlResolver `json:"graphqlResolver,omitempty"`
-	Port                 *EventSummarizedAttachmentsInnerTargetPort            `json:"port,omitempty"`
+	CreatedAt string `json:"createdAt"`
+	ApiRoute EventSummarizedAttachmentsInnerTargetApiRoute `json:"apiRoute"`
+	CodeFile EventSummarizedAttachmentsInnerTargetCodeFile `json:"codeFile"`
+	GraphqlResolver EventSummarizedAttachmentsInnerTargetGraphqlResolver `json:"graphqlResolver"`
+	Port EventSummarizedAttachmentsInnerTargetPort `json:"port"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -37,10 +37,14 @@ type _EventSummarizedAttachmentsInnerTarget EventSummarizedAttachmentsInnerTarge
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewEventSummarizedAttachmentsInnerTarget(id string, createdAt string) *EventSummarizedAttachmentsInnerTarget {
+func NewEventSummarizedAttachmentsInnerTarget(id string, createdAt string, apiRoute EventSummarizedAttachmentsInnerTargetApiRoute, codeFile EventSummarizedAttachmentsInnerTargetCodeFile, graphqlResolver EventSummarizedAttachmentsInnerTargetGraphqlResolver, port EventSummarizedAttachmentsInnerTargetPort) *EventSummarizedAttachmentsInnerTarget {
 	this := EventSummarizedAttachmentsInnerTarget{}
 	this.Id = id
 	this.CreatedAt = createdAt
+	this.ApiRoute = apiRoute
+	this.CodeFile = codeFile
+	this.GraphqlResolver = graphqlResolver
+	this.Port = port
 	return &this
 }
 
@@ -100,136 +104,104 @@ func (o *EventSummarizedAttachmentsInnerTarget) SetCreatedAt(v string) {
 	o.CreatedAt = v
 }
 
-// GetApiRoute returns the ApiRoute field value if set, zero value otherwise.
+// GetApiRoute returns the ApiRoute field value
 func (o *EventSummarizedAttachmentsInnerTarget) GetApiRoute() EventSummarizedAttachmentsInnerTargetApiRoute {
-	if o == nil || IsNil(o.ApiRoute) {
+	if o == nil {
 		var ret EventSummarizedAttachmentsInnerTargetApiRoute
 		return ret
 	}
-	return *o.ApiRoute
+
+	return o.ApiRoute
 }
 
-// GetApiRouteOk returns a tuple with the ApiRoute field value if set, nil otherwise
+// GetApiRouteOk returns a tuple with the ApiRoute field value
 // and a boolean to check if the value has been set.
 func (o *EventSummarizedAttachmentsInnerTarget) GetApiRouteOk() (*EventSummarizedAttachmentsInnerTargetApiRoute, bool) {
-	if o == nil || IsNil(o.ApiRoute) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ApiRoute, true
+	return &o.ApiRoute, true
 }
 
-// HasApiRoute returns a boolean if a field has been set.
-func (o *EventSummarizedAttachmentsInnerTarget) HasApiRoute() bool {
-	if o != nil && !IsNil(o.ApiRoute) {
-		return true
-	}
-
-	return false
-}
-
-// SetApiRoute gets a reference to the given EventSummarizedAttachmentsInnerTargetApiRoute and assigns it to the ApiRoute field.
+// SetApiRoute sets field value
 func (o *EventSummarizedAttachmentsInnerTarget) SetApiRoute(v EventSummarizedAttachmentsInnerTargetApiRoute) {
-	o.ApiRoute = &v
+	o.ApiRoute = v
 }
 
-// GetCodeFile returns the CodeFile field value if set, zero value otherwise.
+// GetCodeFile returns the CodeFile field value
 func (o *EventSummarizedAttachmentsInnerTarget) GetCodeFile() EventSummarizedAttachmentsInnerTargetCodeFile {
-	if o == nil || IsNil(o.CodeFile) {
+	if o == nil {
 		var ret EventSummarizedAttachmentsInnerTargetCodeFile
 		return ret
 	}
-	return *o.CodeFile
+
+	return o.CodeFile
 }
 
-// GetCodeFileOk returns a tuple with the CodeFile field value if set, nil otherwise
+// GetCodeFileOk returns a tuple with the CodeFile field value
 // and a boolean to check if the value has been set.
 func (o *EventSummarizedAttachmentsInnerTarget) GetCodeFileOk() (*EventSummarizedAttachmentsInnerTargetCodeFile, bool) {
-	if o == nil || IsNil(o.CodeFile) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CodeFile, true
+	return &o.CodeFile, true
 }
 
-// HasCodeFile returns a boolean if a field has been set.
-func (o *EventSummarizedAttachmentsInnerTarget) HasCodeFile() bool {
-	if o != nil && !IsNil(o.CodeFile) {
-		return true
-	}
-
-	return false
-}
-
-// SetCodeFile gets a reference to the given EventSummarizedAttachmentsInnerTargetCodeFile and assigns it to the CodeFile field.
+// SetCodeFile sets field value
 func (o *EventSummarizedAttachmentsInnerTarget) SetCodeFile(v EventSummarizedAttachmentsInnerTargetCodeFile) {
-	o.CodeFile = &v
+	o.CodeFile = v
 }
 
-// GetGraphqlResolver returns the GraphqlResolver field value if set, zero value otherwise.
+// GetGraphqlResolver returns the GraphqlResolver field value
 func (o *EventSummarizedAttachmentsInnerTarget) GetGraphqlResolver() EventSummarizedAttachmentsInnerTargetGraphqlResolver {
-	if o == nil || IsNil(o.GraphqlResolver) {
+	if o == nil {
 		var ret EventSummarizedAttachmentsInnerTargetGraphqlResolver
 		return ret
 	}
-	return *o.GraphqlResolver
+
+	return o.GraphqlResolver
 }
 
-// GetGraphqlResolverOk returns a tuple with the GraphqlResolver field value if set, nil otherwise
+// GetGraphqlResolverOk returns a tuple with the GraphqlResolver field value
 // and a boolean to check if the value has been set.
 func (o *EventSummarizedAttachmentsInnerTarget) GetGraphqlResolverOk() (*EventSummarizedAttachmentsInnerTargetGraphqlResolver, bool) {
-	if o == nil || IsNil(o.GraphqlResolver) {
+	if o == nil {
 		return nil, false
 	}
-	return o.GraphqlResolver, true
+	return &o.GraphqlResolver, true
 }
 
-// HasGraphqlResolver returns a boolean if a field has been set.
-func (o *EventSummarizedAttachmentsInnerTarget) HasGraphqlResolver() bool {
-	if o != nil && !IsNil(o.GraphqlResolver) {
-		return true
-	}
-
-	return false
-}
-
-// SetGraphqlResolver gets a reference to the given EventSummarizedAttachmentsInnerTargetGraphqlResolver and assigns it to the GraphqlResolver field.
+// SetGraphqlResolver sets field value
 func (o *EventSummarizedAttachmentsInnerTarget) SetGraphqlResolver(v EventSummarizedAttachmentsInnerTargetGraphqlResolver) {
-	o.GraphqlResolver = &v
+	o.GraphqlResolver = v
 }
 
-// GetPort returns the Port field value if set, zero value otherwise.
+// GetPort returns the Port field value
 func (o *EventSummarizedAttachmentsInnerTarget) GetPort() EventSummarizedAttachmentsInnerTargetPort {
-	if o == nil || IsNil(o.Port) {
+	if o == nil {
 		var ret EventSummarizedAttachmentsInnerTargetPort
 		return ret
 	}
-	return *o.Port
+
+	return o.Port
 }
 
-// GetPortOk returns a tuple with the Port field value if set, nil otherwise
+// GetPortOk returns a tuple with the Port field value
 // and a boolean to check if the value has been set.
 func (o *EventSummarizedAttachmentsInnerTarget) GetPortOk() (*EventSummarizedAttachmentsInnerTargetPort, bool) {
-	if o == nil || IsNil(o.Port) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Port, true
+	return &o.Port, true
 }
 
-// HasPort returns a boolean if a field has been set.
-func (o *EventSummarizedAttachmentsInnerTarget) HasPort() bool {
-	if o != nil && !IsNil(o.Port) {
-		return true
-	}
-
-	return false
-}
-
-// SetPort gets a reference to the given EventSummarizedAttachmentsInnerTargetPort and assigns it to the Port field.
+// SetPort sets field value
 func (o *EventSummarizedAttachmentsInnerTarget) SetPort(v EventSummarizedAttachmentsInnerTargetPort) {
-	o.Port = &v
+	o.Port = v
 }
 
 func (o EventSummarizedAttachmentsInnerTarget) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -240,18 +212,10 @@ func (o EventSummarizedAttachmentsInnerTarget) ToMap() (map[string]interface{}, 
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["createdAt"] = o.CreatedAt
-	if !IsNil(o.ApiRoute) {
-		toSerialize["apiRoute"] = o.ApiRoute
-	}
-	if !IsNil(o.CodeFile) {
-		toSerialize["codeFile"] = o.CodeFile
-	}
-	if !IsNil(o.GraphqlResolver) {
-		toSerialize["graphqlResolver"] = o.GraphqlResolver
-	}
-	if !IsNil(o.Port) {
-		toSerialize["port"] = o.Port
-	}
+	toSerialize["apiRoute"] = o.ApiRoute
+	toSerialize["codeFile"] = o.CodeFile
+	toSerialize["graphqlResolver"] = o.GraphqlResolver
+	toSerialize["port"] = o.Port
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -267,6 +231,10 @@ func (o *EventSummarizedAttachmentsInnerTarget) UnmarshalJSON(data []byte) (err 
 	requiredProperties := []string{
 		"id",
 		"createdAt",
+		"apiRoute",
+		"codeFile",
+		"graphqlResolver",
+		"port",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -274,10 +242,10 @@ func (o *EventSummarizedAttachmentsInnerTarget) UnmarshalJSON(data []byte) (err 
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -343,3 +311,5 @@ func (v *NullableEventSummarizedAttachmentsInnerTarget) UnmarshalJSON(src []byte
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

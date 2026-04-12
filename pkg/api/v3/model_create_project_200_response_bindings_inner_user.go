@@ -12,8 +12,8 @@ package v3
 
 import (
 	"encoding/json"
-	"fmt"
 	"time"
+	"fmt"
 )
 
 // checks if the CreateProject200ResponseBindingsInnerUser type satisfies the MappedNullable interface at compile time
@@ -28,7 +28,7 @@ type CreateProject200ResponseBindingsInnerUser struct {
 	// The date and time the user was created
 	CreatedAt time.Time `json:"createdAt"`
 	// The date and time the user was activated
-	ActivatedAt          *time.Time `json:"activatedAt,omitempty"`
+	ActivatedAt NullableTime `json:"activatedAt"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -38,11 +38,12 @@ type _CreateProject200ResponseBindingsInnerUser CreateProject200ResponseBindings
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateProject200ResponseBindingsInnerUser(id string, email string, createdAt time.Time) *CreateProject200ResponseBindingsInnerUser {
+func NewCreateProject200ResponseBindingsInnerUser(id string, email string, createdAt time.Time, activatedAt NullableTime) *CreateProject200ResponseBindingsInnerUser {
 	this := CreateProject200ResponseBindingsInnerUser{}
 	this.Id = id
 	this.Email = email
 	this.CreatedAt = createdAt
+	this.ActivatedAt = activatedAt
 	return &this
 }
 
@@ -126,40 +127,34 @@ func (o *CreateProject200ResponseBindingsInnerUser) SetCreatedAt(v time.Time) {
 	o.CreatedAt = v
 }
 
-// GetActivatedAt returns the ActivatedAt field value if set, zero value otherwise.
+// GetActivatedAt returns the ActivatedAt field value
+// If the value is explicit nil, the zero value for time.Time will be returned
 func (o *CreateProject200ResponseBindingsInnerUser) GetActivatedAt() time.Time {
-	if o == nil || IsNil(o.ActivatedAt) {
+	if o == nil || o.ActivatedAt.Get() == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.ActivatedAt
+
+	return *o.ActivatedAt.Get()
 }
 
-// GetActivatedAtOk returns a tuple with the ActivatedAt field value if set, nil otherwise
+// GetActivatedAtOk returns a tuple with the ActivatedAt field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateProject200ResponseBindingsInnerUser) GetActivatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.ActivatedAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ActivatedAt, true
+	return o.ActivatedAt.Get(), o.ActivatedAt.IsSet()
 }
 
-// HasActivatedAt returns a boolean if a field has been set.
-func (o *CreateProject200ResponseBindingsInnerUser) HasActivatedAt() bool {
-	if o != nil && !IsNil(o.ActivatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetActivatedAt gets a reference to the given time.Time and assigns it to the ActivatedAt field.
+// SetActivatedAt sets field value
 func (o *CreateProject200ResponseBindingsInnerUser) SetActivatedAt(v time.Time) {
-	o.ActivatedAt = &v
+	o.ActivatedAt.Set(&v)
 }
 
 func (o CreateProject200ResponseBindingsInnerUser) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -171,9 +166,7 @@ func (o CreateProject200ResponseBindingsInnerUser) ToMap() (map[string]interface
 	toSerialize["id"] = o.Id
 	toSerialize["email"] = o.Email
 	toSerialize["createdAt"] = o.CreatedAt
-	if !IsNil(o.ActivatedAt) {
-		toSerialize["activatedAt"] = o.ActivatedAt
-	}
+	toSerialize["activatedAt"] = o.ActivatedAt.Get()
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -190,6 +183,7 @@ func (o *CreateProject200ResponseBindingsInnerUser) UnmarshalJSON(data []byte) (
 		"id",
 		"email",
 		"createdAt",
+		"activatedAt",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -197,10 +191,10 @@ func (o *CreateProject200ResponseBindingsInnerUser) UnmarshalJSON(data []byte) (
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -264,3 +258,5 @@ func (v *NullableCreateProject200ResponseBindingsInnerUser) UnmarshalJSON(src []
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

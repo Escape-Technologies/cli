@@ -23,16 +23,17 @@ type CreateAssetSOFTWARERequest struct {
 	// The list of project IDs bind the asset on.
 	ProjectIds []string `json:"projectIds,omitempty"`
 	// The custom name of the asset. If not provided, the default name will be used.
-	Name                 *string                            `json:"name,omitempty"`
-	AssetClass           ENUMTECHNOLOGY                     `json:"asset_class"`
-	ExtraMetadata        map[string]interface{}             `json:"extra_metadata,omitempty"`
-	ScreenshotS3Key      *string                            `json:"screenshot_s3_key,omitempty"`
-	AssetType            ENUMSOFTWARE                       `json:"asset_type"`
-	TechnologyKey        string                             `json:"technology_key"`
-	Version              *string                            `json:"version,omitempty"`
-	ReferenceUrl         *string                            `json:"reference_url,omitempty"`
-	Cpe                  *string                            `json:"cpe,omitempty"`
-	WellKnownTechnology  *ENUMPROPERTIESWELLKNOWNTECHNOLOGY `json:"well_known_technology,omitempty"`
+	Name NullableString `json:"name,omitempty"`
+	AssetClass ENUMTECHNOLOGY `json:"asset_class"`
+	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
+	ScreenshotS3Key NullableString `json:"screenshot_s3_key,omitempty"`
+	AssetType ENUMSOFTWARE `json:"asset_type"`
+	TechnologyKey string `json:"technology_key"`
+	Version NullableString `json:"version,omitempty"`
+	ReferenceUrl NullableString `json:"reference_url,omitempty"`
+	Cpe NullableString `json:"cpe,omitempty"`
+	WellKnownTechnology NullableENUMPROPERTIESWELLKNOWNTECHNOLOGY `json:"well_known_technology,omitempty"`
+	Description NullableString `json:"description,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -58,9 +59,9 @@ func NewCreateAssetSOFTWARERequestWithDefaults() *CreateAssetSOFTWARERequest {
 	return &this
 }
 
-// GetProjectIds returns the ProjectIds field value if set, zero value otherwise.
+// GetProjectIds returns the ProjectIds field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetSOFTWARERequest) GetProjectIds() []string {
-	if o == nil || IsNil(o.ProjectIds) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -69,6 +70,7 @@ func (o *CreateAssetSOFTWARERequest) GetProjectIds() []string {
 
 // GetProjectIdsOk returns a tuple with the ProjectIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetSOFTWARERequest) GetProjectIdsOk() ([]string, bool) {
 	if o == nil || IsNil(o.ProjectIds) {
 		return nil, false
@@ -90,36 +92,46 @@ func (o *CreateAssetSOFTWARERequest) SetProjectIds(v []string) {
 	o.ProjectIds = v
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
+// GetName returns the Name field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetSOFTWARERequest) GetName() string {
-	if o == nil || IsNil(o.Name) {
+	if o == nil || IsNil(o.Name.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Name
+	return *o.Name.Get()
 }
 
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetSOFTWARERequest) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Name, true
+	return o.Name.Get(), o.Name.IsSet()
 }
 
 // HasName returns a boolean if a field has been set.
 func (o *CreateAssetSOFTWARERequest) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
+	if o != nil && o.Name.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetName gets a reference to the given string and assigns it to the Name field.
+// SetName gets a reference to the given NullableString and assigns it to the Name field.
 func (o *CreateAssetSOFTWARERequest) SetName(v string) {
-	o.Name = &v
+	o.Name.Set(&v)
+}
+// SetNameNil sets the value for Name to be an explicit nil
+func (o *CreateAssetSOFTWARERequest) SetNameNil() {
+	o.Name.Set(nil)
+}
+
+// UnsetName ensures that no value is present for Name, not even an explicit nil
+func (o *CreateAssetSOFTWARERequest) UnsetName() {
+	o.Name.Unset()
 }
 
 // GetAssetClass returns the AssetClass field value
@@ -178,36 +190,46 @@ func (o *CreateAssetSOFTWARERequest) SetExtraMetadata(v map[string]interface{}) 
 	o.ExtraMetadata = v
 }
 
-// GetScreenshotS3Key returns the ScreenshotS3Key field value if set, zero value otherwise.
+// GetScreenshotS3Key returns the ScreenshotS3Key field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetSOFTWARERequest) GetScreenshotS3Key() string {
-	if o == nil || IsNil(o.ScreenshotS3Key) {
+	if o == nil || IsNil(o.ScreenshotS3Key.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.ScreenshotS3Key
+	return *o.ScreenshotS3Key.Get()
 }
 
 // GetScreenshotS3KeyOk returns a tuple with the ScreenshotS3Key field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetSOFTWARERequest) GetScreenshotS3KeyOk() (*string, bool) {
-	if o == nil || IsNil(o.ScreenshotS3Key) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ScreenshotS3Key, true
+	return o.ScreenshotS3Key.Get(), o.ScreenshotS3Key.IsSet()
 }
 
 // HasScreenshotS3Key returns a boolean if a field has been set.
 func (o *CreateAssetSOFTWARERequest) HasScreenshotS3Key() bool {
-	if o != nil && !IsNil(o.ScreenshotS3Key) {
+	if o != nil && o.ScreenshotS3Key.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetScreenshotS3Key gets a reference to the given string and assigns it to the ScreenshotS3Key field.
+// SetScreenshotS3Key gets a reference to the given NullableString and assigns it to the ScreenshotS3Key field.
 func (o *CreateAssetSOFTWARERequest) SetScreenshotS3Key(v string) {
-	o.ScreenshotS3Key = &v
+	o.ScreenshotS3Key.Set(&v)
+}
+// SetScreenshotS3KeyNil sets the value for ScreenshotS3Key to be an explicit nil
+func (o *CreateAssetSOFTWARERequest) SetScreenshotS3KeyNil() {
+	o.ScreenshotS3Key.Set(nil)
+}
+
+// UnsetScreenshotS3Key ensures that no value is present for ScreenshotS3Key, not even an explicit nil
+func (o *CreateAssetSOFTWARERequest) UnsetScreenshotS3Key() {
+	o.ScreenshotS3Key.Unset()
 }
 
 // GetAssetType returns the AssetType field value
@@ -258,136 +280,218 @@ func (o *CreateAssetSOFTWARERequest) SetTechnologyKey(v string) {
 	o.TechnologyKey = v
 }
 
-// GetVersion returns the Version field value if set, zero value otherwise.
+// GetVersion returns the Version field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetSOFTWARERequest) GetVersion() string {
-	if o == nil || IsNil(o.Version) {
+	if o == nil || IsNil(o.Version.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Version
+	return *o.Version.Get()
 }
 
 // GetVersionOk returns a tuple with the Version field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetSOFTWARERequest) GetVersionOk() (*string, bool) {
-	if o == nil || IsNil(o.Version) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Version, true
+	return o.Version.Get(), o.Version.IsSet()
 }
 
 // HasVersion returns a boolean if a field has been set.
 func (o *CreateAssetSOFTWARERequest) HasVersion() bool {
-	if o != nil && !IsNil(o.Version) {
+	if o != nil && o.Version.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetVersion gets a reference to the given string and assigns it to the Version field.
+// SetVersion gets a reference to the given NullableString and assigns it to the Version field.
 func (o *CreateAssetSOFTWARERequest) SetVersion(v string) {
-	o.Version = &v
+	o.Version.Set(&v)
+}
+// SetVersionNil sets the value for Version to be an explicit nil
+func (o *CreateAssetSOFTWARERequest) SetVersionNil() {
+	o.Version.Set(nil)
 }
 
-// GetReferenceUrl returns the ReferenceUrl field value if set, zero value otherwise.
+// UnsetVersion ensures that no value is present for Version, not even an explicit nil
+func (o *CreateAssetSOFTWARERequest) UnsetVersion() {
+	o.Version.Unset()
+}
+
+// GetReferenceUrl returns the ReferenceUrl field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetSOFTWARERequest) GetReferenceUrl() string {
-	if o == nil || IsNil(o.ReferenceUrl) {
+	if o == nil || IsNil(o.ReferenceUrl.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.ReferenceUrl
+	return *o.ReferenceUrl.Get()
 }
 
 // GetReferenceUrlOk returns a tuple with the ReferenceUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetSOFTWARERequest) GetReferenceUrlOk() (*string, bool) {
-	if o == nil || IsNil(o.ReferenceUrl) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ReferenceUrl, true
+	return o.ReferenceUrl.Get(), o.ReferenceUrl.IsSet()
 }
 
 // HasReferenceUrl returns a boolean if a field has been set.
 func (o *CreateAssetSOFTWARERequest) HasReferenceUrl() bool {
-	if o != nil && !IsNil(o.ReferenceUrl) {
+	if o != nil && o.ReferenceUrl.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetReferenceUrl gets a reference to the given string and assigns it to the ReferenceUrl field.
+// SetReferenceUrl gets a reference to the given NullableString and assigns it to the ReferenceUrl field.
 func (o *CreateAssetSOFTWARERequest) SetReferenceUrl(v string) {
-	o.ReferenceUrl = &v
+	o.ReferenceUrl.Set(&v)
+}
+// SetReferenceUrlNil sets the value for ReferenceUrl to be an explicit nil
+func (o *CreateAssetSOFTWARERequest) SetReferenceUrlNil() {
+	o.ReferenceUrl.Set(nil)
 }
 
-// GetCpe returns the Cpe field value if set, zero value otherwise.
+// UnsetReferenceUrl ensures that no value is present for ReferenceUrl, not even an explicit nil
+func (o *CreateAssetSOFTWARERequest) UnsetReferenceUrl() {
+	o.ReferenceUrl.Unset()
+}
+
+// GetCpe returns the Cpe field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetSOFTWARERequest) GetCpe() string {
-	if o == nil || IsNil(o.Cpe) {
+	if o == nil || IsNil(o.Cpe.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Cpe
+	return *o.Cpe.Get()
 }
 
 // GetCpeOk returns a tuple with the Cpe field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetSOFTWARERequest) GetCpeOk() (*string, bool) {
-	if o == nil || IsNil(o.Cpe) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Cpe, true
+	return o.Cpe.Get(), o.Cpe.IsSet()
 }
 
 // HasCpe returns a boolean if a field has been set.
 func (o *CreateAssetSOFTWARERequest) HasCpe() bool {
-	if o != nil && !IsNil(o.Cpe) {
+	if o != nil && o.Cpe.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCpe gets a reference to the given string and assigns it to the Cpe field.
+// SetCpe gets a reference to the given NullableString and assigns it to the Cpe field.
 func (o *CreateAssetSOFTWARERequest) SetCpe(v string) {
-	o.Cpe = &v
+	o.Cpe.Set(&v)
+}
+// SetCpeNil sets the value for Cpe to be an explicit nil
+func (o *CreateAssetSOFTWARERequest) SetCpeNil() {
+	o.Cpe.Set(nil)
 }
 
-// GetWellKnownTechnology returns the WellKnownTechnology field value if set, zero value otherwise.
+// UnsetCpe ensures that no value is present for Cpe, not even an explicit nil
+func (o *CreateAssetSOFTWARERequest) UnsetCpe() {
+	o.Cpe.Unset()
+}
+
+// GetWellKnownTechnology returns the WellKnownTechnology field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetSOFTWARERequest) GetWellKnownTechnology() ENUMPROPERTIESWELLKNOWNTECHNOLOGY {
-	if o == nil || IsNil(o.WellKnownTechnology) {
+	if o == nil || IsNil(o.WellKnownTechnology.Get()) {
 		var ret ENUMPROPERTIESWELLKNOWNTECHNOLOGY
 		return ret
 	}
-	return *o.WellKnownTechnology
+	return *o.WellKnownTechnology.Get()
 }
 
 // GetWellKnownTechnologyOk returns a tuple with the WellKnownTechnology field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetSOFTWARERequest) GetWellKnownTechnologyOk() (*ENUMPROPERTIESWELLKNOWNTECHNOLOGY, bool) {
-	if o == nil || IsNil(o.WellKnownTechnology) {
+	if o == nil {
 		return nil, false
 	}
-	return o.WellKnownTechnology, true
+	return o.WellKnownTechnology.Get(), o.WellKnownTechnology.IsSet()
 }
 
 // HasWellKnownTechnology returns a boolean if a field has been set.
 func (o *CreateAssetSOFTWARERequest) HasWellKnownTechnology() bool {
-	if o != nil && !IsNil(o.WellKnownTechnology) {
+	if o != nil && o.WellKnownTechnology.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetWellKnownTechnology gets a reference to the given ENUMPROPERTIESWELLKNOWNTECHNOLOGY and assigns it to the WellKnownTechnology field.
+// SetWellKnownTechnology gets a reference to the given NullableENUMPROPERTIESWELLKNOWNTECHNOLOGY and assigns it to the WellKnownTechnology field.
 func (o *CreateAssetSOFTWARERequest) SetWellKnownTechnology(v ENUMPROPERTIESWELLKNOWNTECHNOLOGY) {
-	o.WellKnownTechnology = &v
+	o.WellKnownTechnology.Set(&v)
+}
+// SetWellKnownTechnologyNil sets the value for WellKnownTechnology to be an explicit nil
+func (o *CreateAssetSOFTWARERequest) SetWellKnownTechnologyNil() {
+	o.WellKnownTechnology.Set(nil)
+}
+
+// UnsetWellKnownTechnology ensures that no value is present for WellKnownTechnology, not even an explicit nil
+func (o *CreateAssetSOFTWARERequest) UnsetWellKnownTechnology() {
+	o.WellKnownTechnology.Unset()
+}
+
+// GetDescription returns the Description field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CreateAssetSOFTWARERequest) GetDescription() string {
+	if o == nil || IsNil(o.Description.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.Description.Get()
+}
+
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CreateAssetSOFTWARERequest) GetDescriptionOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Description.Get(), o.Description.IsSet()
+}
+
+// HasDescription returns a boolean if a field has been set.
+func (o *CreateAssetSOFTWARERequest) HasDescription() bool {
+	if o != nil && o.Description.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetDescription gets a reference to the given NullableString and assigns it to the Description field.
+func (o *CreateAssetSOFTWARERequest) SetDescription(v string) {
+	o.Description.Set(&v)
+}
+// SetDescriptionNil sets the value for Description to be an explicit nil
+func (o *CreateAssetSOFTWARERequest) SetDescriptionNil() {
+	o.Description.Set(nil)
+}
+
+// UnsetDescription ensures that no value is present for Description, not even an explicit nil
+func (o *CreateAssetSOFTWARERequest) UnsetDescription() {
+	o.Description.Unset()
 }
 
 func (o CreateAssetSOFTWARERequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -396,32 +500,35 @@ func (o CreateAssetSOFTWARERequest) MarshalJSON() ([]byte, error) {
 
 func (o CreateAssetSOFTWARERequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ProjectIds) {
+	if o.ProjectIds != nil {
 		toSerialize["projectIds"] = o.ProjectIds
 	}
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
+	if o.Name.IsSet() {
+		toSerialize["name"] = o.Name.Get()
 	}
 	toSerialize["asset_class"] = o.AssetClass
 	if !IsNil(o.ExtraMetadata) {
 		toSerialize["extra_metadata"] = o.ExtraMetadata
 	}
-	if !IsNil(o.ScreenshotS3Key) {
-		toSerialize["screenshot_s3_key"] = o.ScreenshotS3Key
+	if o.ScreenshotS3Key.IsSet() {
+		toSerialize["screenshot_s3_key"] = o.ScreenshotS3Key.Get()
 	}
 	toSerialize["asset_type"] = o.AssetType
 	toSerialize["technology_key"] = o.TechnologyKey
-	if !IsNil(o.Version) {
-		toSerialize["version"] = o.Version
+	if o.Version.IsSet() {
+		toSerialize["version"] = o.Version.Get()
 	}
-	if !IsNil(o.ReferenceUrl) {
-		toSerialize["reference_url"] = o.ReferenceUrl
+	if o.ReferenceUrl.IsSet() {
+		toSerialize["reference_url"] = o.ReferenceUrl.Get()
 	}
-	if !IsNil(o.Cpe) {
-		toSerialize["cpe"] = o.Cpe
+	if o.Cpe.IsSet() {
+		toSerialize["cpe"] = o.Cpe.Get()
 	}
-	if !IsNil(o.WellKnownTechnology) {
-		toSerialize["well_known_technology"] = o.WellKnownTechnology
+	if o.WellKnownTechnology.IsSet() {
+		toSerialize["well_known_technology"] = o.WellKnownTechnology.Get()
+	}
+	if o.Description.IsSet() {
+		toSerialize["description"] = o.Description.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -446,10 +553,10 @@ func (o *CreateAssetSOFTWARERequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -479,6 +586,7 @@ func (o *CreateAssetSOFTWARERequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "reference_url")
 		delete(additionalProperties, "cpe")
 		delete(additionalProperties, "well_known_technology")
+		delete(additionalProperties, "description")
 		o.AdditionalProperties = additionalProperties
 	}
 
@@ -520,3 +628,5 @@ func (v *NullableCreateAssetSOFTWARERequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

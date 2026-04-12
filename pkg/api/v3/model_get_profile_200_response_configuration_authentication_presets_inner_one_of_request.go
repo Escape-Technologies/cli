@@ -20,12 +20,12 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationAuthenticationPresetsI
 
 // GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOfRequest struct for GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOfRequest
 type GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOfRequest struct {
-	Url                  string                                                                              `json:"url"`
-	Method               ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD `json:"method"`
-	Headers              map[string]string                                                                   `json:"headers,omitempty"`
-	Cookies              map[string]string                                                                   `json:"cookies,omitempty"`
-	QueryParameters      map[string]string                                                                   `json:"query_parameters,omitempty"`
-	Body                 interface{}                                                                         `json:"body,omitempty"`
+	Url string `json:"url"`
+	Method NullableENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD `json:"method"`
+	Headers map[string]string `json:"headers,omitempty"`
+	Cookies map[string]string `json:"cookies,omitempty"`
+	QueryParameters map[string]string `json:"query_parameters,omitempty"`
+	Body interface{} `json:"body,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -35,7 +35,7 @@ type _GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOfRequest G
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOfRequest(url string, method ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD) *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOfRequest {
+func NewGetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOfRequest(url string, method NullableENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD) *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOfRequest {
 	this := GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOfRequest{}
 	this.Url = url
 	this.Method = method
@@ -75,27 +75,29 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOfReques
 }
 
 // GetMethod returns the Method field value
+// If the value is explicit nil, the zero value for ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD will be returned
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOfRequest) GetMethod() ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD {
-	if o == nil {
+	if o == nil || o.Method.Get() == nil {
 		var ret ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD
 		return ret
 	}
 
-	return o.Method
+	return *o.Method.Get()
 }
 
 // GetMethodOk returns a tuple with the Method field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOfRequest) GetMethodOk() (*ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Method, true
+	return o.Method.Get(), o.Method.IsSet()
 }
 
 // SetMethod sets field value
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOfRequest) SetMethod(v ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD) {
-	o.Method = v
+	o.Method.Set(&v)
 }
 
 // GetHeaders returns the Headers field value if set, zero value otherwise.
@@ -228,7 +230,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOfReques
 }
 
 func (o GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOfRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -238,7 +240,7 @@ func (o GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOfRequest
 func (o GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOfRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["url"] = o.Url
-	toSerialize["method"] = o.Method
+	toSerialize["method"] = o.Method.Get()
 	if !IsNil(o.Headers) {
 		toSerialize["headers"] = o.Headers
 	}
@@ -273,10 +275,10 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOfReques
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -342,3 +344,5 @@ func (v *NullableGetProfile200ResponseConfigurationAuthenticationPresetsInnerOne
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

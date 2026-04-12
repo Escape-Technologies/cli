@@ -19,13 +19,13 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationSecurityTestsMultiUser
 
 // GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControl struct for GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControl
 type GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControl struct {
-	Skip                 *bool                                                                                              `json:"skip,omitempty"`
-	MainUser             *string                                                                                            `json:"main_user,omitempty"`
-	NaturalLanguageRule  *string                                                                                            `json:"natural_language_rule,omitempty"`
-	OtherUsers           *GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControlOtherUsers                   `json:"other_users,omitempty"`
-	SpecificUsers        map[string]GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControlSpecificUsersValue `json:"specific_users,omitempty"`
-	Paths                []string                                                                                           `json:"paths,omitempty"`
-	KeysMatching         []string                                                                                           `json:"keys_matching,omitempty"`
+	Skip NullableBool `json:"skip,omitempty"`
+	MainUser NullableString `json:"main_user,omitempty"`
+	NaturalLanguageRule NullableString `json:"natural_language_rule,omitempty"`
+	OtherUsers *GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControlOtherUsers `json:"other_users,omitempty"`
+	SpecificUsers *map[string]GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControlOtherUsers `json:"specific_users,omitempty"`
+	Paths []string `json:"paths,omitempty"`
+	KeysMatching []string `json:"keys_matching,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -48,100 +48,130 @@ func NewGetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControlWit
 	return &this
 }
 
-// GetSkip returns the Skip field value if set, zero value otherwise.
+// GetSkip returns the Skip field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControl) GetSkip() bool {
-	if o == nil || IsNil(o.Skip) {
+	if o == nil || IsNil(o.Skip.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.Skip
+	return *o.Skip.Get()
 }
 
 // GetSkipOk returns a tuple with the Skip field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControl) GetSkipOk() (*bool, bool) {
-	if o == nil || IsNil(o.Skip) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Skip, true
+	return o.Skip.Get(), o.Skip.IsSet()
 }
 
 // HasSkip returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControl) HasSkip() bool {
-	if o != nil && !IsNil(o.Skip) {
+	if o != nil && o.Skip.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSkip gets a reference to the given bool and assigns it to the Skip field.
+// SetSkip gets a reference to the given NullableBool and assigns it to the Skip field.
 func (o *GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControl) SetSkip(v bool) {
-	o.Skip = &v
+	o.Skip.Set(&v)
+}
+// SetSkipNil sets the value for Skip to be an explicit nil
+func (o *GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControl) SetSkipNil() {
+	o.Skip.Set(nil)
 }
 
-// GetMainUser returns the MainUser field value if set, zero value otherwise.
+// UnsetSkip ensures that no value is present for Skip, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControl) UnsetSkip() {
+	o.Skip.Unset()
+}
+
+// GetMainUser returns the MainUser field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControl) GetMainUser() string {
-	if o == nil || IsNil(o.MainUser) {
+	if o == nil || IsNil(o.MainUser.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.MainUser
+	return *o.MainUser.Get()
 }
 
 // GetMainUserOk returns a tuple with the MainUser field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControl) GetMainUserOk() (*string, bool) {
-	if o == nil || IsNil(o.MainUser) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MainUser, true
+	return o.MainUser.Get(), o.MainUser.IsSet()
 }
 
 // HasMainUser returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControl) HasMainUser() bool {
-	if o != nil && !IsNil(o.MainUser) {
+	if o != nil && o.MainUser.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetMainUser gets a reference to the given string and assigns it to the MainUser field.
+// SetMainUser gets a reference to the given NullableString and assigns it to the MainUser field.
 func (o *GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControl) SetMainUser(v string) {
-	o.MainUser = &v
+	o.MainUser.Set(&v)
+}
+// SetMainUserNil sets the value for MainUser to be an explicit nil
+func (o *GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControl) SetMainUserNil() {
+	o.MainUser.Set(nil)
 }
 
-// GetNaturalLanguageRule returns the NaturalLanguageRule field value if set, zero value otherwise.
+// UnsetMainUser ensures that no value is present for MainUser, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControl) UnsetMainUser() {
+	o.MainUser.Unset()
+}
+
+// GetNaturalLanguageRule returns the NaturalLanguageRule field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControl) GetNaturalLanguageRule() string {
-	if o == nil || IsNil(o.NaturalLanguageRule) {
+	if o == nil || IsNil(o.NaturalLanguageRule.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.NaturalLanguageRule
+	return *o.NaturalLanguageRule.Get()
 }
 
 // GetNaturalLanguageRuleOk returns a tuple with the NaturalLanguageRule field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControl) GetNaturalLanguageRuleOk() (*string, bool) {
-	if o == nil || IsNil(o.NaturalLanguageRule) {
+	if o == nil {
 		return nil, false
 	}
-	return o.NaturalLanguageRule, true
+	return o.NaturalLanguageRule.Get(), o.NaturalLanguageRule.IsSet()
 }
 
 // HasNaturalLanguageRule returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControl) HasNaturalLanguageRule() bool {
-	if o != nil && !IsNil(o.NaturalLanguageRule) {
+	if o != nil && o.NaturalLanguageRule.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetNaturalLanguageRule gets a reference to the given string and assigns it to the NaturalLanguageRule field.
+// SetNaturalLanguageRule gets a reference to the given NullableString and assigns it to the NaturalLanguageRule field.
 func (o *GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControl) SetNaturalLanguageRule(v string) {
-	o.NaturalLanguageRule = &v
+	o.NaturalLanguageRule.Set(&v)
+}
+// SetNaturalLanguageRuleNil sets the value for NaturalLanguageRule to be an explicit nil
+func (o *GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControl) SetNaturalLanguageRuleNil() {
+	o.NaturalLanguageRule.Set(nil)
+}
+
+// UnsetNaturalLanguageRule ensures that no value is present for NaturalLanguageRule, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControl) UnsetNaturalLanguageRule() {
+	o.NaturalLanguageRule.Unset()
 }
 
 // GetOtherUsers returns the OtherUsers field value if set, zero value otherwise.
@@ -177,19 +207,19 @@ func (o *GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControl) 
 }
 
 // GetSpecificUsers returns the SpecificUsers field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControl) GetSpecificUsers() map[string]GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControlSpecificUsersValue {
+func (o *GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControl) GetSpecificUsers() map[string]GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControlOtherUsers {
 	if o == nil || IsNil(o.SpecificUsers) {
-		var ret map[string]GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControlSpecificUsersValue
+		var ret map[string]GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControlOtherUsers
 		return ret
 	}
-	return o.SpecificUsers
+	return *o.SpecificUsers
 }
 
 // GetSpecificUsersOk returns a tuple with the SpecificUsers field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControl) GetSpecificUsersOk() (map[string]GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControlSpecificUsersValue, bool) {
+func (o *GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControl) GetSpecificUsersOk() (*map[string]GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControlOtherUsers, bool) {
 	if o == nil || IsNil(o.SpecificUsers) {
-		return map[string]GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControlSpecificUsersValue{}, false
+		return nil, false
 	}
 	return o.SpecificUsers, true
 }
@@ -203,14 +233,14 @@ func (o *GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControl) 
 	return false
 }
 
-// SetSpecificUsers gets a reference to the given map[string]GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControlSpecificUsersValue and assigns it to the SpecificUsers field.
-func (o *GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControl) SetSpecificUsers(v map[string]GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControlSpecificUsersValue) {
-	o.SpecificUsers = v
+// SetSpecificUsers gets a reference to the given map[string]GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControlOtherUsers and assigns it to the SpecificUsers field.
+func (o *GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControl) SetSpecificUsers(v map[string]GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControlOtherUsers) {
+	o.SpecificUsers = &v
 }
 
-// GetPaths returns the Paths field value if set, zero value otherwise.
+// GetPaths returns the Paths field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControl) GetPaths() []string {
-	if o == nil || IsNil(o.Paths) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -219,6 +249,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControl) 
 
 // GetPathsOk returns a tuple with the Paths field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControl) GetPathsOk() ([]string, bool) {
 	if o == nil || IsNil(o.Paths) {
 		return nil, false
@@ -240,9 +271,9 @@ func (o *GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControl) 
 	o.Paths = v
 }
 
-// GetKeysMatching returns the KeysMatching field value if set, zero value otherwise.
+// GetKeysMatching returns the KeysMatching field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControl) GetKeysMatching() []string {
-	if o == nil || IsNil(o.KeysMatching) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -251,6 +282,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControl) 
 
 // GetKeysMatchingOk returns a tuple with the KeysMatching field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControl) GetKeysMatchingOk() ([]string, bool) {
 	if o == nil || IsNil(o.KeysMatching) {
 		return nil, false
@@ -273,7 +305,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControl) 
 }
 
 func (o GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControl) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -282,14 +314,14 @@ func (o GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControl) M
 
 func (o GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControl) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Skip) {
-		toSerialize["skip"] = o.Skip
+	if o.Skip.IsSet() {
+		toSerialize["skip"] = o.Skip.Get()
 	}
-	if !IsNil(o.MainUser) {
-		toSerialize["main_user"] = o.MainUser
+	if o.MainUser.IsSet() {
+		toSerialize["main_user"] = o.MainUser.Get()
 	}
-	if !IsNil(o.NaturalLanguageRule) {
-		toSerialize["natural_language_rule"] = o.NaturalLanguageRule
+	if o.NaturalLanguageRule.IsSet() {
+		toSerialize["natural_language_rule"] = o.NaturalLanguageRule.Get()
 	}
 	if !IsNil(o.OtherUsers) {
 		toSerialize["other_users"] = o.OtherUsers
@@ -297,10 +329,10 @@ func (o GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControl) T
 	if !IsNil(o.SpecificUsers) {
 		toSerialize["specific_users"] = o.SpecificUsers
 	}
-	if !IsNil(o.Paths) {
+	if o.Paths != nil {
 		toSerialize["paths"] = o.Paths
 	}
-	if !IsNil(o.KeysMatching) {
+	if o.KeysMatching != nil {
 		toSerialize["keys_matching"] = o.KeysMatching
 	}
 
@@ -373,3 +405,5 @@ func (v *NullableGetProfile200ResponseConfigurationSecurityTestsMultiUserAccessC
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

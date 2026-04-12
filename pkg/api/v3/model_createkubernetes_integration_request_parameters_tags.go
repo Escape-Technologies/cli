@@ -19,8 +19,8 @@ var _ MappedNullable = &CreatekubernetesIntegrationRequestParametersTags{}
 
 // CreatekubernetesIntegrationRequestParametersTags struct for CreatekubernetesIntegrationRequestParametersTags
 type CreatekubernetesIntegrationRequestParametersTags struct {
-	Labels               []string `json:"labels,omitempty"`
-	Namespaces           *bool    `json:"namespaces,omitempty"`
+	Labels []string `json:"labels,omitempty"`
+	Namespaces NullableBool `json:"namespaces,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -43,9 +43,9 @@ func NewCreatekubernetesIntegrationRequestParametersTagsWithDefaults() *Createku
 	return &this
 }
 
-// GetLabels returns the Labels field value if set, zero value otherwise.
+// GetLabels returns the Labels field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreatekubernetesIntegrationRequestParametersTags) GetLabels() []string {
-	if o == nil || IsNil(o.Labels) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -54,6 +54,7 @@ func (o *CreatekubernetesIntegrationRequestParametersTags) GetLabels() []string 
 
 // GetLabelsOk returns a tuple with the Labels field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreatekubernetesIntegrationRequestParametersTags) GetLabelsOk() ([]string, bool) {
 	if o == nil || IsNil(o.Labels) {
 		return nil, false
@@ -75,40 +76,50 @@ func (o *CreatekubernetesIntegrationRequestParametersTags) SetLabels(v []string)
 	o.Labels = v
 }
 
-// GetNamespaces returns the Namespaces field value if set, zero value otherwise.
+// GetNamespaces returns the Namespaces field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreatekubernetesIntegrationRequestParametersTags) GetNamespaces() bool {
-	if o == nil || IsNil(o.Namespaces) {
+	if o == nil || IsNil(o.Namespaces.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.Namespaces
+	return *o.Namespaces.Get()
 }
 
 // GetNamespacesOk returns a tuple with the Namespaces field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreatekubernetesIntegrationRequestParametersTags) GetNamespacesOk() (*bool, bool) {
-	if o == nil || IsNil(o.Namespaces) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Namespaces, true
+	return o.Namespaces.Get(), o.Namespaces.IsSet()
 }
 
 // HasNamespaces returns a boolean if a field has been set.
 func (o *CreatekubernetesIntegrationRequestParametersTags) HasNamespaces() bool {
-	if o != nil && !IsNil(o.Namespaces) {
+	if o != nil && o.Namespaces.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetNamespaces gets a reference to the given bool and assigns it to the Namespaces field.
+// SetNamespaces gets a reference to the given NullableBool and assigns it to the Namespaces field.
 func (o *CreatekubernetesIntegrationRequestParametersTags) SetNamespaces(v bool) {
-	o.Namespaces = &v
+	o.Namespaces.Set(&v)
+}
+// SetNamespacesNil sets the value for Namespaces to be an explicit nil
+func (o *CreatekubernetesIntegrationRequestParametersTags) SetNamespacesNil() {
+	o.Namespaces.Set(nil)
+}
+
+// UnsetNamespaces ensures that no value is present for Namespaces, not even an explicit nil
+func (o *CreatekubernetesIntegrationRequestParametersTags) UnsetNamespaces() {
+	o.Namespaces.Unset()
 }
 
 func (o CreatekubernetesIntegrationRequestParametersTags) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -117,11 +128,11 @@ func (o CreatekubernetesIntegrationRequestParametersTags) MarshalJSON() ([]byte,
 
 func (o CreatekubernetesIntegrationRequestParametersTags) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Labels) {
+	if o.Labels != nil {
 		toSerialize["labels"] = o.Labels
 	}
-	if !IsNil(o.Namespaces) {
-		toSerialize["namespaces"] = o.Namespaces
+	if o.Namespaces.IsSet() {
+		toSerialize["namespaces"] = o.Namespaces.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -188,3 +199,5 @@ func (v *NullableCreatekubernetesIntegrationRequestParametersTags) UnmarshalJSON
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

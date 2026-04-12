@@ -19,12 +19,12 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationServiceDiscovery{}
 
 // GetProfile200ResponseConfigurationServiceDiscovery struct for GetProfile200ResponseConfigurationServiceDiscovery
 type GetProfile200ResponseConfigurationServiceDiscovery struct {
-	Blocklist                []GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf `json:"blocklist,omitempty"`
-	BaseUrlsDelimiters       []string                                                     `json:"base_urls_delimiters,omitempty"`
-	BaseUrlsWordlist         []string                                                     `json:"base_urls_wordlist,omitempty"`
-	EndpointsWordlist        []string                                                     `json:"endpoints_wordlist,omitempty"`
-	GraphqlEndpointsWordlist []string                                                     `json:"graphql_endpoints_wordlist,omitempty"`
-	AdditionalProperties     map[string]interface{}
+	Blocklist []GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf `json:"blocklist,omitempty"`
+	BaseUrlsDelimiters []string `json:"base_urls_delimiters,omitempty"`
+	BaseUrlsWordlist []string `json:"base_urls_wordlist,omitempty"`
+	EndpointsWordlist []string `json:"endpoints_wordlist,omitempty"`
+	GraphqlEndpointsWordlist []string `json:"graphql_endpoints_wordlist,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetProfile200ResponseConfigurationServiceDiscovery GetProfile200ResponseConfigurationServiceDiscovery
@@ -46,9 +46,9 @@ func NewGetProfile200ResponseConfigurationServiceDiscoveryWithDefaults() *GetPro
 	return &this
 }
 
-// GetBlocklist returns the Blocklist field value if set, zero value otherwise.
+// GetBlocklist returns the Blocklist field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationServiceDiscovery) GetBlocklist() []GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf {
-	if o == nil || IsNil(o.Blocklist) {
+	if o == nil {
 		var ret []GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf
 		return ret
 	}
@@ -57,6 +57,7 @@ func (o *GetProfile200ResponseConfigurationServiceDiscovery) GetBlocklist() []Ge
 
 // GetBlocklistOk returns a tuple with the Blocklist field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationServiceDiscovery) GetBlocklistOk() ([]GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf, bool) {
 	if o == nil || IsNil(o.Blocklist) {
 		return nil, false
@@ -78,9 +79,9 @@ func (o *GetProfile200ResponseConfigurationServiceDiscovery) SetBlocklist(v []Ge
 	o.Blocklist = v
 }
 
-// GetBaseUrlsDelimiters returns the BaseUrlsDelimiters field value if set, zero value otherwise.
+// GetBaseUrlsDelimiters returns the BaseUrlsDelimiters field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationServiceDiscovery) GetBaseUrlsDelimiters() []string {
-	if o == nil || IsNil(o.BaseUrlsDelimiters) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -89,6 +90,7 @@ func (o *GetProfile200ResponseConfigurationServiceDiscovery) GetBaseUrlsDelimite
 
 // GetBaseUrlsDelimitersOk returns a tuple with the BaseUrlsDelimiters field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationServiceDiscovery) GetBaseUrlsDelimitersOk() ([]string, bool) {
 	if o == nil || IsNil(o.BaseUrlsDelimiters) {
 		return nil, false
@@ -110,9 +112,9 @@ func (o *GetProfile200ResponseConfigurationServiceDiscovery) SetBaseUrlsDelimite
 	o.BaseUrlsDelimiters = v
 }
 
-// GetBaseUrlsWordlist returns the BaseUrlsWordlist field value if set, zero value otherwise.
+// GetBaseUrlsWordlist returns the BaseUrlsWordlist field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationServiceDiscovery) GetBaseUrlsWordlist() []string {
-	if o == nil || IsNil(o.BaseUrlsWordlist) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -121,6 +123,7 @@ func (o *GetProfile200ResponseConfigurationServiceDiscovery) GetBaseUrlsWordlist
 
 // GetBaseUrlsWordlistOk returns a tuple with the BaseUrlsWordlist field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationServiceDiscovery) GetBaseUrlsWordlistOk() ([]string, bool) {
 	if o == nil || IsNil(o.BaseUrlsWordlist) {
 		return nil, false
@@ -142,9 +145,9 @@ func (o *GetProfile200ResponseConfigurationServiceDiscovery) SetBaseUrlsWordlist
 	o.BaseUrlsWordlist = v
 }
 
-// GetEndpointsWordlist returns the EndpointsWordlist field value if set, zero value otherwise.
+// GetEndpointsWordlist returns the EndpointsWordlist field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationServiceDiscovery) GetEndpointsWordlist() []string {
-	if o == nil || IsNil(o.EndpointsWordlist) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -153,6 +156,7 @@ func (o *GetProfile200ResponseConfigurationServiceDiscovery) GetEndpointsWordlis
 
 // GetEndpointsWordlistOk returns a tuple with the EndpointsWordlist field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationServiceDiscovery) GetEndpointsWordlistOk() ([]string, bool) {
 	if o == nil || IsNil(o.EndpointsWordlist) {
 		return nil, false
@@ -174,9 +178,9 @@ func (o *GetProfile200ResponseConfigurationServiceDiscovery) SetEndpointsWordlis
 	o.EndpointsWordlist = v
 }
 
-// GetGraphqlEndpointsWordlist returns the GraphqlEndpointsWordlist field value if set, zero value otherwise.
+// GetGraphqlEndpointsWordlist returns the GraphqlEndpointsWordlist field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationServiceDiscovery) GetGraphqlEndpointsWordlist() []string {
-	if o == nil || IsNil(o.GraphqlEndpointsWordlist) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -185,6 +189,7 @@ func (o *GetProfile200ResponseConfigurationServiceDiscovery) GetGraphqlEndpoints
 
 // GetGraphqlEndpointsWordlistOk returns a tuple with the GraphqlEndpointsWordlist field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationServiceDiscovery) GetGraphqlEndpointsWordlistOk() ([]string, bool) {
 	if o == nil || IsNil(o.GraphqlEndpointsWordlist) {
 		return nil, false
@@ -207,7 +212,7 @@ func (o *GetProfile200ResponseConfigurationServiceDiscovery) SetGraphqlEndpoints
 }
 
 func (o GetProfile200ResponseConfigurationServiceDiscovery) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -216,19 +221,19 @@ func (o GetProfile200ResponseConfigurationServiceDiscovery) MarshalJSON() ([]byt
 
 func (o GetProfile200ResponseConfigurationServiceDiscovery) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Blocklist) {
+	if o.Blocklist != nil {
 		toSerialize["blocklist"] = o.Blocklist
 	}
-	if !IsNil(o.BaseUrlsDelimiters) {
+	if o.BaseUrlsDelimiters != nil {
 		toSerialize["base_urls_delimiters"] = o.BaseUrlsDelimiters
 	}
-	if !IsNil(o.BaseUrlsWordlist) {
+	if o.BaseUrlsWordlist != nil {
 		toSerialize["base_urls_wordlist"] = o.BaseUrlsWordlist
 	}
-	if !IsNil(o.EndpointsWordlist) {
+	if o.EndpointsWordlist != nil {
 		toSerialize["endpoints_wordlist"] = o.EndpointsWordlist
 	}
-	if !IsNil(o.GraphqlEndpointsWordlist) {
+	if o.GraphqlEndpointsWordlist != nil {
 		toSerialize["graphql_endpoints_wordlist"] = o.GraphqlEndpointsWordlist
 	}
 
@@ -299,3 +304,5 @@ func (v *NullableGetProfile200ResponseConfigurationServiceDiscovery) UnmarshalJS
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

@@ -20,10 +20,10 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationAuthenticationPresetsI
 
 // GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11UsersInnerAdditionalFieldsInner struct for GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11UsersInnerAdditionalFieldsInner
 type GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11UsersInnerAdditionalFieldsInner struct {
-	Locator              string `json:"locator"`
-	Value                string `json:"value"`
-	OneByOne             *bool  `json:"one_by_one,omitempty"`
-	AutoSubmit           *bool  `json:"auto_submit,omitempty"`
+	Locator string `json:"locator"`
+	Value string `json:"value"`
+	OneByOne NullableBool `json:"one_by_one,omitempty"`
+	AutoSubmit NullableBool `json:"auto_submit,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -96,72 +96,92 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11User
 	o.Value = v
 }
 
-// GetOneByOne returns the OneByOne field value if set, zero value otherwise.
+// GetOneByOne returns the OneByOne field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11UsersInnerAdditionalFieldsInner) GetOneByOne() bool {
-	if o == nil || IsNil(o.OneByOne) {
+	if o == nil || IsNil(o.OneByOne.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.OneByOne
+	return *o.OneByOne.Get()
 }
 
 // GetOneByOneOk returns a tuple with the OneByOne field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11UsersInnerAdditionalFieldsInner) GetOneByOneOk() (*bool, bool) {
-	if o == nil || IsNil(o.OneByOne) {
+	if o == nil {
 		return nil, false
 	}
-	return o.OneByOne, true
+	return o.OneByOne.Get(), o.OneByOne.IsSet()
 }
 
 // HasOneByOne returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11UsersInnerAdditionalFieldsInner) HasOneByOne() bool {
-	if o != nil && !IsNil(o.OneByOne) {
+	if o != nil && o.OneByOne.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOneByOne gets a reference to the given bool and assigns it to the OneByOne field.
+// SetOneByOne gets a reference to the given NullableBool and assigns it to the OneByOne field.
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11UsersInnerAdditionalFieldsInner) SetOneByOne(v bool) {
-	o.OneByOne = &v
+	o.OneByOne.Set(&v)
+}
+// SetOneByOneNil sets the value for OneByOne to be an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11UsersInnerAdditionalFieldsInner) SetOneByOneNil() {
+	o.OneByOne.Set(nil)
 }
 
-// GetAutoSubmit returns the AutoSubmit field value if set, zero value otherwise.
+// UnsetOneByOne ensures that no value is present for OneByOne, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11UsersInnerAdditionalFieldsInner) UnsetOneByOne() {
+	o.OneByOne.Unset()
+}
+
+// GetAutoSubmit returns the AutoSubmit field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11UsersInnerAdditionalFieldsInner) GetAutoSubmit() bool {
-	if o == nil || IsNil(o.AutoSubmit) {
+	if o == nil || IsNil(o.AutoSubmit.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.AutoSubmit
+	return *o.AutoSubmit.Get()
 }
 
 // GetAutoSubmitOk returns a tuple with the AutoSubmit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11UsersInnerAdditionalFieldsInner) GetAutoSubmitOk() (*bool, bool) {
-	if o == nil || IsNil(o.AutoSubmit) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AutoSubmit, true
+	return o.AutoSubmit.Get(), o.AutoSubmit.IsSet()
 }
 
 // HasAutoSubmit returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11UsersInnerAdditionalFieldsInner) HasAutoSubmit() bool {
-	if o != nil && !IsNil(o.AutoSubmit) {
+	if o != nil && o.AutoSubmit.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAutoSubmit gets a reference to the given bool and assigns it to the AutoSubmit field.
+// SetAutoSubmit gets a reference to the given NullableBool and assigns it to the AutoSubmit field.
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11UsersInnerAdditionalFieldsInner) SetAutoSubmit(v bool) {
-	o.AutoSubmit = &v
+	o.AutoSubmit.Set(&v)
+}
+// SetAutoSubmitNil sets the value for AutoSubmit to be an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11UsersInnerAdditionalFieldsInner) SetAutoSubmitNil() {
+	o.AutoSubmit.Set(nil)
+}
+
+// UnsetAutoSubmit ensures that no value is present for AutoSubmit, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11UsersInnerAdditionalFieldsInner) UnsetAutoSubmit() {
+	o.AutoSubmit.Unset()
 }
 
 func (o GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11UsersInnerAdditionalFieldsInner) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -172,11 +192,11 @@ func (o GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11Users
 	toSerialize := map[string]interface{}{}
 	toSerialize["locator"] = o.Locator
 	toSerialize["value"] = o.Value
-	if !IsNil(o.OneByOne) {
-		toSerialize["one_by_one"] = o.OneByOne
+	if o.OneByOne.IsSet() {
+		toSerialize["one_by_one"] = o.OneByOne.Get()
 	}
-	if !IsNil(o.AutoSubmit) {
-		toSerialize["auto_submit"] = o.AutoSubmit
+	if o.AutoSubmit.IsSet() {
+		toSerialize["auto_submit"] = o.AutoSubmit.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -200,10 +220,10 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11User
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -267,3 +287,5 @@ func (v *NullableGetProfile200ResponseConfigurationAuthenticationPresetsInnerOne
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

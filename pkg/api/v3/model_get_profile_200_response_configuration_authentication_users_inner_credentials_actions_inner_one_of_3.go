@@ -20,11 +20,11 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationAuthenticationUsersInn
 
 // GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf3 struct for GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf3
 type GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf3 struct {
-	Action               ENUMGOTO `json:"action"`
-	AllowFailure         *bool    `json:"allow_failure,omitempty"`
-	NewPage              *bool    `json:"new_page,omitempty"`
-	Url                  string   `json:"url"`
-	Timeout              *float32 `json:"timeout,omitempty"`
+	Action ENUMGOTO `json:"action"`
+	AllowFailure NullableBool `json:"allow_failure,omitempty"`
+	NewPage NullableBool `json:"new_page,omitempty"`
+	Url string `json:"url"`
+	Timeout NullableFloat32 `json:"timeout,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -73,68 +73,88 @@ func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsAc
 	o.Action = v
 }
 
-// GetAllowFailure returns the AllowFailure field value if set, zero value otherwise.
+// GetAllowFailure returns the AllowFailure field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf3) GetAllowFailure() bool {
-	if o == nil || IsNil(o.AllowFailure) {
+	if o == nil || IsNil(o.AllowFailure.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.AllowFailure
+	return *o.AllowFailure.Get()
 }
 
 // GetAllowFailureOk returns a tuple with the AllowFailure field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf3) GetAllowFailureOk() (*bool, bool) {
-	if o == nil || IsNil(o.AllowFailure) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AllowFailure, true
+	return o.AllowFailure.Get(), o.AllowFailure.IsSet()
 }
 
 // HasAllowFailure returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf3) HasAllowFailure() bool {
-	if o != nil && !IsNil(o.AllowFailure) {
+	if o != nil && o.AllowFailure.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAllowFailure gets a reference to the given bool and assigns it to the AllowFailure field.
+// SetAllowFailure gets a reference to the given NullableBool and assigns it to the AllowFailure field.
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf3) SetAllowFailure(v bool) {
-	o.AllowFailure = &v
+	o.AllowFailure.Set(&v)
+}
+// SetAllowFailureNil sets the value for AllowFailure to be an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf3) SetAllowFailureNil() {
+	o.AllowFailure.Set(nil)
 }
 
-// GetNewPage returns the NewPage field value if set, zero value otherwise.
+// UnsetAllowFailure ensures that no value is present for AllowFailure, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf3) UnsetAllowFailure() {
+	o.AllowFailure.Unset()
+}
+
+// GetNewPage returns the NewPage field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf3) GetNewPage() bool {
-	if o == nil || IsNil(o.NewPage) {
+	if o == nil || IsNil(o.NewPage.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.NewPage
+	return *o.NewPage.Get()
 }
 
 // GetNewPageOk returns a tuple with the NewPage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf3) GetNewPageOk() (*bool, bool) {
-	if o == nil || IsNil(o.NewPage) {
+	if o == nil {
 		return nil, false
 	}
-	return o.NewPage, true
+	return o.NewPage.Get(), o.NewPage.IsSet()
 }
 
 // HasNewPage returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf3) HasNewPage() bool {
-	if o != nil && !IsNil(o.NewPage) {
+	if o != nil && o.NewPage.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetNewPage gets a reference to the given bool and assigns it to the NewPage field.
+// SetNewPage gets a reference to the given NullableBool and assigns it to the NewPage field.
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf3) SetNewPage(v bool) {
-	o.NewPage = &v
+	o.NewPage.Set(&v)
+}
+// SetNewPageNil sets the value for NewPage to be an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf3) SetNewPageNil() {
+	o.NewPage.Set(nil)
+}
+
+// UnsetNewPage ensures that no value is present for NewPage, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf3) UnsetNewPage() {
+	o.NewPage.Unset()
 }
 
 // GetUrl returns the Url field value
@@ -161,40 +181,50 @@ func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsAc
 	o.Url = v
 }
 
-// GetTimeout returns the Timeout field value if set, zero value otherwise.
+// GetTimeout returns the Timeout field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf3) GetTimeout() float32 {
-	if o == nil || IsNil(o.Timeout) {
+	if o == nil || IsNil(o.Timeout.Get()) {
 		var ret float32
 		return ret
 	}
-	return *o.Timeout
+	return *o.Timeout.Get()
 }
 
 // GetTimeoutOk returns a tuple with the Timeout field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf3) GetTimeoutOk() (*float32, bool) {
-	if o == nil || IsNil(o.Timeout) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Timeout, true
+	return o.Timeout.Get(), o.Timeout.IsSet()
 }
 
 // HasTimeout returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf3) HasTimeout() bool {
-	if o != nil && !IsNil(o.Timeout) {
+	if o != nil && o.Timeout.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetTimeout gets a reference to the given float32 and assigns it to the Timeout field.
+// SetTimeout gets a reference to the given NullableFloat32 and assigns it to the Timeout field.
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf3) SetTimeout(v float32) {
-	o.Timeout = &v
+	o.Timeout.Set(&v)
+}
+// SetTimeoutNil sets the value for Timeout to be an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf3) SetTimeoutNil() {
+	o.Timeout.Set(nil)
+}
+
+// UnsetTimeout ensures that no value is present for Timeout, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf3) UnsetTimeout() {
+	o.Timeout.Unset()
 }
 
 func (o GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf3) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -204,15 +234,15 @@ func (o GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsAct
 func (o GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf3) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["action"] = o.Action
-	if !IsNil(o.AllowFailure) {
-		toSerialize["allow_failure"] = o.AllowFailure
+	if o.AllowFailure.IsSet() {
+		toSerialize["allow_failure"] = o.AllowFailure.Get()
 	}
-	if !IsNil(o.NewPage) {
-		toSerialize["new_page"] = o.NewPage
+	if o.NewPage.IsSet() {
+		toSerialize["new_page"] = o.NewPage.Get()
 	}
 	toSerialize["url"] = o.Url
-	if !IsNil(o.Timeout) {
-		toSerialize["timeout"] = o.Timeout
+	if o.Timeout.IsSet() {
+		toSerialize["timeout"] = o.Timeout.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -236,10 +266,10 @@ func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsAc
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -304,3 +334,5 @@ func (v *NullableGetProfile200ResponseConfigurationAuthenticationUsersInnerCrede
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

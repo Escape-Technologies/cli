@@ -19,13 +19,13 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationFrontendDastLogoutDete
 
 // GetProfile200ResponseConfigurationFrontendDastLogoutDetection struct for GetProfile200ResponseConfigurationFrontendDastLogoutDetection
 type GetProfile200ResponseConfigurationFrontendDastLogoutDetection struct {
-	Enabled                        *bool    `json:"enabled,omitempty"`
+	Enabled NullableBool `json:"enabled,omitempty"`
 	LoggedInIndicatorRegexPatterns []string `json:"logged_in_indicator_regex_patterns,omitempty"`
-	LogoutRedirectionUrlPatterns   []string `json:"logout_redirection_url_patterns,omitempty"`
-	SessionCookieRegexPatterns     []string `json:"session_cookie_regex_patterns,omitempty"`
-	AutoReauthenticate             *bool    `json:"auto_reauthenticate,omitempty"`
-	AgenticDetectionEnabled        *bool    `json:"agentic_detection_enabled,omitempty"`
-	AdditionalProperties           map[string]interface{}
+	LogoutRedirectionUrlPatterns []string `json:"logout_redirection_url_patterns,omitempty"`
+	SessionCookieRegexPatterns []string `json:"session_cookie_regex_patterns,omitempty"`
+	AutoReauthenticate NullableBool `json:"auto_reauthenticate,omitempty"`
+	AgenticDetectionEnabled NullableBool `json:"agentic_detection_enabled,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetProfile200ResponseConfigurationFrontendDastLogoutDetection GetProfile200ResponseConfigurationFrontendDastLogoutDetection
@@ -47,41 +47,51 @@ func NewGetProfile200ResponseConfigurationFrontendDastLogoutDetectionWithDefault
 	return &this
 }
 
-// GetEnabled returns the Enabled field value if set, zero value otherwise.
+// GetEnabled returns the Enabled field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationFrontendDastLogoutDetection) GetEnabled() bool {
-	if o == nil || IsNil(o.Enabled) {
+	if o == nil || IsNil(o.Enabled.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.Enabled
+	return *o.Enabled.Get()
 }
 
 // GetEnabledOk returns a tuple with the Enabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationFrontendDastLogoutDetection) GetEnabledOk() (*bool, bool) {
-	if o == nil || IsNil(o.Enabled) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Enabled, true
+	return o.Enabled.Get(), o.Enabled.IsSet()
 }
 
 // HasEnabled returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationFrontendDastLogoutDetection) HasEnabled() bool {
-	if o != nil && !IsNil(o.Enabled) {
+	if o != nil && o.Enabled.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetEnabled gets a reference to the given bool and assigns it to the Enabled field.
+// SetEnabled gets a reference to the given NullableBool and assigns it to the Enabled field.
 func (o *GetProfile200ResponseConfigurationFrontendDastLogoutDetection) SetEnabled(v bool) {
-	o.Enabled = &v
+	o.Enabled.Set(&v)
+}
+// SetEnabledNil sets the value for Enabled to be an explicit nil
+func (o *GetProfile200ResponseConfigurationFrontendDastLogoutDetection) SetEnabledNil() {
+	o.Enabled.Set(nil)
 }
 
-// GetLoggedInIndicatorRegexPatterns returns the LoggedInIndicatorRegexPatterns field value if set, zero value otherwise.
+// UnsetEnabled ensures that no value is present for Enabled, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationFrontendDastLogoutDetection) UnsetEnabled() {
+	o.Enabled.Unset()
+}
+
+// GetLoggedInIndicatorRegexPatterns returns the LoggedInIndicatorRegexPatterns field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationFrontendDastLogoutDetection) GetLoggedInIndicatorRegexPatterns() []string {
-	if o == nil || IsNil(o.LoggedInIndicatorRegexPatterns) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -90,6 +100,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDastLogoutDetection) GetLogge
 
 // GetLoggedInIndicatorRegexPatternsOk returns a tuple with the LoggedInIndicatorRegexPatterns field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationFrontendDastLogoutDetection) GetLoggedInIndicatorRegexPatternsOk() ([]string, bool) {
 	if o == nil || IsNil(o.LoggedInIndicatorRegexPatterns) {
 		return nil, false
@@ -111,9 +122,9 @@ func (o *GetProfile200ResponseConfigurationFrontendDastLogoutDetection) SetLogge
 	o.LoggedInIndicatorRegexPatterns = v
 }
 
-// GetLogoutRedirectionUrlPatterns returns the LogoutRedirectionUrlPatterns field value if set, zero value otherwise.
+// GetLogoutRedirectionUrlPatterns returns the LogoutRedirectionUrlPatterns field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationFrontendDastLogoutDetection) GetLogoutRedirectionUrlPatterns() []string {
-	if o == nil || IsNil(o.LogoutRedirectionUrlPatterns) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -122,6 +133,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDastLogoutDetection) GetLogou
 
 // GetLogoutRedirectionUrlPatternsOk returns a tuple with the LogoutRedirectionUrlPatterns field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationFrontendDastLogoutDetection) GetLogoutRedirectionUrlPatternsOk() ([]string, bool) {
 	if o == nil || IsNil(o.LogoutRedirectionUrlPatterns) {
 		return nil, false
@@ -143,9 +155,9 @@ func (o *GetProfile200ResponseConfigurationFrontendDastLogoutDetection) SetLogou
 	o.LogoutRedirectionUrlPatterns = v
 }
 
-// GetSessionCookieRegexPatterns returns the SessionCookieRegexPatterns field value if set, zero value otherwise.
+// GetSessionCookieRegexPatterns returns the SessionCookieRegexPatterns field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationFrontendDastLogoutDetection) GetSessionCookieRegexPatterns() []string {
-	if o == nil || IsNil(o.SessionCookieRegexPatterns) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -154,6 +166,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDastLogoutDetection) GetSessi
 
 // GetSessionCookieRegexPatternsOk returns a tuple with the SessionCookieRegexPatterns field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationFrontendDastLogoutDetection) GetSessionCookieRegexPatternsOk() ([]string, bool) {
 	if o == nil || IsNil(o.SessionCookieRegexPatterns) {
 		return nil, false
@@ -175,72 +188,92 @@ func (o *GetProfile200ResponseConfigurationFrontendDastLogoutDetection) SetSessi
 	o.SessionCookieRegexPatterns = v
 }
 
-// GetAutoReauthenticate returns the AutoReauthenticate field value if set, zero value otherwise.
+// GetAutoReauthenticate returns the AutoReauthenticate field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationFrontendDastLogoutDetection) GetAutoReauthenticate() bool {
-	if o == nil || IsNil(o.AutoReauthenticate) {
+	if o == nil || IsNil(o.AutoReauthenticate.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.AutoReauthenticate
+	return *o.AutoReauthenticate.Get()
 }
 
 // GetAutoReauthenticateOk returns a tuple with the AutoReauthenticate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationFrontendDastLogoutDetection) GetAutoReauthenticateOk() (*bool, bool) {
-	if o == nil || IsNil(o.AutoReauthenticate) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AutoReauthenticate, true
+	return o.AutoReauthenticate.Get(), o.AutoReauthenticate.IsSet()
 }
 
 // HasAutoReauthenticate returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationFrontendDastLogoutDetection) HasAutoReauthenticate() bool {
-	if o != nil && !IsNil(o.AutoReauthenticate) {
+	if o != nil && o.AutoReauthenticate.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAutoReauthenticate gets a reference to the given bool and assigns it to the AutoReauthenticate field.
+// SetAutoReauthenticate gets a reference to the given NullableBool and assigns it to the AutoReauthenticate field.
 func (o *GetProfile200ResponseConfigurationFrontendDastLogoutDetection) SetAutoReauthenticate(v bool) {
-	o.AutoReauthenticate = &v
+	o.AutoReauthenticate.Set(&v)
+}
+// SetAutoReauthenticateNil sets the value for AutoReauthenticate to be an explicit nil
+func (o *GetProfile200ResponseConfigurationFrontendDastLogoutDetection) SetAutoReauthenticateNil() {
+	o.AutoReauthenticate.Set(nil)
 }
 
-// GetAgenticDetectionEnabled returns the AgenticDetectionEnabled field value if set, zero value otherwise.
+// UnsetAutoReauthenticate ensures that no value is present for AutoReauthenticate, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationFrontendDastLogoutDetection) UnsetAutoReauthenticate() {
+	o.AutoReauthenticate.Unset()
+}
+
+// GetAgenticDetectionEnabled returns the AgenticDetectionEnabled field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationFrontendDastLogoutDetection) GetAgenticDetectionEnabled() bool {
-	if o == nil || IsNil(o.AgenticDetectionEnabled) {
+	if o == nil || IsNil(o.AgenticDetectionEnabled.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.AgenticDetectionEnabled
+	return *o.AgenticDetectionEnabled.Get()
 }
 
 // GetAgenticDetectionEnabledOk returns a tuple with the AgenticDetectionEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationFrontendDastLogoutDetection) GetAgenticDetectionEnabledOk() (*bool, bool) {
-	if o == nil || IsNil(o.AgenticDetectionEnabled) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AgenticDetectionEnabled, true
+	return o.AgenticDetectionEnabled.Get(), o.AgenticDetectionEnabled.IsSet()
 }
 
 // HasAgenticDetectionEnabled returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationFrontendDastLogoutDetection) HasAgenticDetectionEnabled() bool {
-	if o != nil && !IsNil(o.AgenticDetectionEnabled) {
+	if o != nil && o.AgenticDetectionEnabled.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAgenticDetectionEnabled gets a reference to the given bool and assigns it to the AgenticDetectionEnabled field.
+// SetAgenticDetectionEnabled gets a reference to the given NullableBool and assigns it to the AgenticDetectionEnabled field.
 func (o *GetProfile200ResponseConfigurationFrontendDastLogoutDetection) SetAgenticDetectionEnabled(v bool) {
-	o.AgenticDetectionEnabled = &v
+	o.AgenticDetectionEnabled.Set(&v)
+}
+// SetAgenticDetectionEnabledNil sets the value for AgenticDetectionEnabled to be an explicit nil
+func (o *GetProfile200ResponseConfigurationFrontendDastLogoutDetection) SetAgenticDetectionEnabledNil() {
+	o.AgenticDetectionEnabled.Set(nil)
+}
+
+// UnsetAgenticDetectionEnabled ensures that no value is present for AgenticDetectionEnabled, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationFrontendDastLogoutDetection) UnsetAgenticDetectionEnabled() {
+	o.AgenticDetectionEnabled.Unset()
 }
 
 func (o GetProfile200ResponseConfigurationFrontendDastLogoutDetection) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -249,23 +282,23 @@ func (o GetProfile200ResponseConfigurationFrontendDastLogoutDetection) MarshalJS
 
 func (o GetProfile200ResponseConfigurationFrontendDastLogoutDetection) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Enabled) {
-		toSerialize["enabled"] = o.Enabled
+	if o.Enabled.IsSet() {
+		toSerialize["enabled"] = o.Enabled.Get()
 	}
-	if !IsNil(o.LoggedInIndicatorRegexPatterns) {
+	if o.LoggedInIndicatorRegexPatterns != nil {
 		toSerialize["logged_in_indicator_regex_patterns"] = o.LoggedInIndicatorRegexPatterns
 	}
-	if !IsNil(o.LogoutRedirectionUrlPatterns) {
+	if o.LogoutRedirectionUrlPatterns != nil {
 		toSerialize["logout_redirection_url_patterns"] = o.LogoutRedirectionUrlPatterns
 	}
-	if !IsNil(o.SessionCookieRegexPatterns) {
+	if o.SessionCookieRegexPatterns != nil {
 		toSerialize["session_cookie_regex_patterns"] = o.SessionCookieRegexPatterns
 	}
-	if !IsNil(o.AutoReauthenticate) {
-		toSerialize["auto_reauthenticate"] = o.AutoReauthenticate
+	if o.AutoReauthenticate.IsSet() {
+		toSerialize["auto_reauthenticate"] = o.AutoReauthenticate.Get()
 	}
-	if !IsNil(o.AgenticDetectionEnabled) {
-		toSerialize["agentic_detection_enabled"] = o.AgenticDetectionEnabled
+	if o.AgenticDetectionEnabled.IsSet() {
+		toSerialize["agentic_detection_enabled"] = o.AgenticDetectionEnabled.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -336,3 +369,5 @@ func (v *NullableGetProfile200ResponseConfigurationFrontendDastLogoutDetection) 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

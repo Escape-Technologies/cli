@@ -21,16 +21,16 @@ var _ MappedNullable = &CreateAssetAZURETENANTRequest{}
 // CreateAssetAZURETENANTRequest struct for CreateAssetAZURETENANTRequest
 type CreateAssetAZURETENANTRequest struct {
 	// The list of project IDs bind the asset on.
-	ProjectIds           []string               `json:"projectIds,omitempty"`
-	Name                 *string                `json:"name,omitempty"`
-	AssetClass           ENUMCLOUDHOSTING       `json:"asset_class"`
-	ExtraMetadata        map[string]interface{} `json:"extra_metadata,omitempty"`
-	ScreenshotS3Key      *string                `json:"screenshot_s3_key,omitempty"`
-	AssetType            ENUMAZURETENANT        `json:"asset_type"`
-	ImmutableKey         string                 `json:"immutable_key"`
-	ClientId             string                 `json:"client_id"`
-	ClientSecret         string                 `json:"client_secret"`
-	TenantId             string                 `json:"tenant_id"`
+	ProjectIds []string `json:"projectIds,omitempty"`
+	Name NullableString `json:"name,omitempty"`
+	AssetClass ENUMCLOUDHOSTING `json:"asset_class"`
+	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
+	ScreenshotS3Key NullableString `json:"screenshot_s3_key,omitempty"`
+	AssetType ENUMAZURETENANT `json:"asset_type"`
+	ImmutableKey string `json:"immutable_key"`
+	ClientId string `json:"client_id"`
+	ClientSecret string `json:"client_secret"`
+	TenantId string `json:"tenant_id"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -59,9 +59,9 @@ func NewCreateAssetAZURETENANTRequestWithDefaults() *CreateAssetAZURETENANTReque
 	return &this
 }
 
-// GetProjectIds returns the ProjectIds field value if set, zero value otherwise.
+// GetProjectIds returns the ProjectIds field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetAZURETENANTRequest) GetProjectIds() []string {
-	if o == nil || IsNil(o.ProjectIds) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -70,6 +70,7 @@ func (o *CreateAssetAZURETENANTRequest) GetProjectIds() []string {
 
 // GetProjectIdsOk returns a tuple with the ProjectIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetAZURETENANTRequest) GetProjectIdsOk() ([]string, bool) {
 	if o == nil || IsNil(o.ProjectIds) {
 		return nil, false
@@ -91,36 +92,46 @@ func (o *CreateAssetAZURETENANTRequest) SetProjectIds(v []string) {
 	o.ProjectIds = v
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
+// GetName returns the Name field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetAZURETENANTRequest) GetName() string {
-	if o == nil || IsNil(o.Name) {
+	if o == nil || IsNil(o.Name.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Name
+	return *o.Name.Get()
 }
 
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetAZURETENANTRequest) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Name, true
+	return o.Name.Get(), o.Name.IsSet()
 }
 
 // HasName returns a boolean if a field has been set.
 func (o *CreateAssetAZURETENANTRequest) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
+	if o != nil && o.Name.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetName gets a reference to the given string and assigns it to the Name field.
+// SetName gets a reference to the given NullableString and assigns it to the Name field.
 func (o *CreateAssetAZURETENANTRequest) SetName(v string) {
-	o.Name = &v
+	o.Name.Set(&v)
+}
+// SetNameNil sets the value for Name to be an explicit nil
+func (o *CreateAssetAZURETENANTRequest) SetNameNil() {
+	o.Name.Set(nil)
+}
+
+// UnsetName ensures that no value is present for Name, not even an explicit nil
+func (o *CreateAssetAZURETENANTRequest) UnsetName() {
+	o.Name.Unset()
 }
 
 // GetAssetClass returns the AssetClass field value
@@ -179,36 +190,46 @@ func (o *CreateAssetAZURETENANTRequest) SetExtraMetadata(v map[string]interface{
 	o.ExtraMetadata = v
 }
 
-// GetScreenshotS3Key returns the ScreenshotS3Key field value if set, zero value otherwise.
+// GetScreenshotS3Key returns the ScreenshotS3Key field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetAZURETENANTRequest) GetScreenshotS3Key() string {
-	if o == nil || IsNil(o.ScreenshotS3Key) {
+	if o == nil || IsNil(o.ScreenshotS3Key.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.ScreenshotS3Key
+	return *o.ScreenshotS3Key.Get()
 }
 
 // GetScreenshotS3KeyOk returns a tuple with the ScreenshotS3Key field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetAZURETENANTRequest) GetScreenshotS3KeyOk() (*string, bool) {
-	if o == nil || IsNil(o.ScreenshotS3Key) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ScreenshotS3Key, true
+	return o.ScreenshotS3Key.Get(), o.ScreenshotS3Key.IsSet()
 }
 
 // HasScreenshotS3Key returns a boolean if a field has been set.
 func (o *CreateAssetAZURETENANTRequest) HasScreenshotS3Key() bool {
-	if o != nil && !IsNil(o.ScreenshotS3Key) {
+	if o != nil && o.ScreenshotS3Key.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetScreenshotS3Key gets a reference to the given string and assigns it to the ScreenshotS3Key field.
+// SetScreenshotS3Key gets a reference to the given NullableString and assigns it to the ScreenshotS3Key field.
 func (o *CreateAssetAZURETENANTRequest) SetScreenshotS3Key(v string) {
-	o.ScreenshotS3Key = &v
+	o.ScreenshotS3Key.Set(&v)
+}
+// SetScreenshotS3KeyNil sets the value for ScreenshotS3Key to be an explicit nil
+func (o *CreateAssetAZURETENANTRequest) SetScreenshotS3KeyNil() {
+	o.ScreenshotS3Key.Set(nil)
+}
+
+// UnsetScreenshotS3Key ensures that no value is present for ScreenshotS3Key, not even an explicit nil
+func (o *CreateAssetAZURETENANTRequest) UnsetScreenshotS3Key() {
+	o.ScreenshotS3Key.Unset()
 }
 
 // GetAssetType returns the AssetType field value
@@ -332,7 +353,7 @@ func (o *CreateAssetAZURETENANTRequest) SetTenantId(v string) {
 }
 
 func (o CreateAssetAZURETENANTRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -341,18 +362,18 @@ func (o CreateAssetAZURETENANTRequest) MarshalJSON() ([]byte, error) {
 
 func (o CreateAssetAZURETENANTRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ProjectIds) {
+	if o.ProjectIds != nil {
 		toSerialize["projectIds"] = o.ProjectIds
 	}
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
+	if o.Name.IsSet() {
+		toSerialize["name"] = o.Name.Get()
 	}
 	toSerialize["asset_class"] = o.AssetClass
 	if !IsNil(o.ExtraMetadata) {
 		toSerialize["extra_metadata"] = o.ExtraMetadata
 	}
-	if !IsNil(o.ScreenshotS3Key) {
-		toSerialize["screenshot_s3_key"] = o.ScreenshotS3Key
+	if o.ScreenshotS3Key.IsSet() {
+		toSerialize["screenshot_s3_key"] = o.ScreenshotS3Key.Get()
 	}
 	toSerialize["asset_type"] = o.AssetType
 	toSerialize["immutable_key"] = o.ImmutableKey
@@ -385,10 +406,10 @@ func (o *CreateAssetAZURETENANTRequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -458,3 +479,5 @@ func (v *NullableCreateAssetAZURETENANTRequest) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

@@ -21,16 +21,16 @@ var _ MappedNullable = &UpdateWorkflowRequest{}
 // UpdateWorkflowRequest struct for UpdateWorkflowRequest
 type UpdateWorkflowRequest struct {
 	// The new name of the integration
-	Name    *string               `json:"name,omitempty"`
-	Trigger ENUMPROPERTIESTRIGGER `json:"trigger"`
+	Name *string `json:"name,omitempty"`
+	Trigger ENUMPROPERTIESDATAITEMSPROPERTIESTRIGGER `json:"trigger"`
 	// The throttle in milliseconds for the workflow.
-	ThrottleMs *float32 `json:"throttleMs,omitempty"`
+	ThrottleMs NullableFloat32 `json:"throttleMs,omitempty"`
 	// The filters to update the workflow with, this will replace the existing filters
-	Filters []UpdateWorkflowRequestFiltersInner `json:"filters,omitempty"`
+	Filters []CreateWorkflowRequestFiltersInner `json:"filters,omitempty"`
 	// The actions to update the workflow with, this will replace the existing actions
 	Actions []UpdateWorkflowRequestActionsInner `json:"actions,omitempty"`
 	// Optional list of project IDs to attach to the integration
-	ProjectIds           []string `json:"projectIds,omitempty"`
+	ProjectIds []string `json:"projectIds,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -40,7 +40,7 @@ type _UpdateWorkflowRequest UpdateWorkflowRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateWorkflowRequest(trigger ENUMPROPERTIESTRIGGER) *UpdateWorkflowRequest {
+func NewUpdateWorkflowRequest(trigger ENUMPROPERTIESDATAITEMSPROPERTIESTRIGGER) *UpdateWorkflowRequest {
 	this := UpdateWorkflowRequest{}
 	this.Trigger = trigger
 	return &this
@@ -87,9 +87,9 @@ func (o *UpdateWorkflowRequest) SetName(v string) {
 }
 
 // GetTrigger returns the Trigger field value
-func (o *UpdateWorkflowRequest) GetTrigger() ENUMPROPERTIESTRIGGER {
+func (o *UpdateWorkflowRequest) GetTrigger() ENUMPROPERTIESDATAITEMSPROPERTIESTRIGGER {
 	if o == nil {
-		var ret ENUMPROPERTIESTRIGGER
+		var ret ENUMPROPERTIESDATAITEMSPROPERTIESTRIGGER
 		return ret
 	}
 
@@ -98,7 +98,7 @@ func (o *UpdateWorkflowRequest) GetTrigger() ENUMPROPERTIESTRIGGER {
 
 // GetTriggerOk returns a tuple with the Trigger field value
 // and a boolean to check if the value has been set.
-func (o *UpdateWorkflowRequest) GetTriggerOk() (*ENUMPROPERTIESTRIGGER, bool) {
+func (o *UpdateWorkflowRequest) GetTriggerOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESTRIGGER, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -106,46 +106,56 @@ func (o *UpdateWorkflowRequest) GetTriggerOk() (*ENUMPROPERTIESTRIGGER, bool) {
 }
 
 // SetTrigger sets field value
-func (o *UpdateWorkflowRequest) SetTrigger(v ENUMPROPERTIESTRIGGER) {
+func (o *UpdateWorkflowRequest) SetTrigger(v ENUMPROPERTIESDATAITEMSPROPERTIESTRIGGER) {
 	o.Trigger = v
 }
 
-// GetThrottleMs returns the ThrottleMs field value if set, zero value otherwise.
+// GetThrottleMs returns the ThrottleMs field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *UpdateWorkflowRequest) GetThrottleMs() float32 {
-	if o == nil || IsNil(o.ThrottleMs) {
+	if o == nil || IsNil(o.ThrottleMs.Get()) {
 		var ret float32
 		return ret
 	}
-	return *o.ThrottleMs
+	return *o.ThrottleMs.Get()
 }
 
 // GetThrottleMsOk returns a tuple with the ThrottleMs field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *UpdateWorkflowRequest) GetThrottleMsOk() (*float32, bool) {
-	if o == nil || IsNil(o.ThrottleMs) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ThrottleMs, true
+	return o.ThrottleMs.Get(), o.ThrottleMs.IsSet()
 }
 
 // HasThrottleMs returns a boolean if a field has been set.
 func (o *UpdateWorkflowRequest) HasThrottleMs() bool {
-	if o != nil && !IsNil(o.ThrottleMs) {
+	if o != nil && o.ThrottleMs.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetThrottleMs gets a reference to the given float32 and assigns it to the ThrottleMs field.
+// SetThrottleMs gets a reference to the given NullableFloat32 and assigns it to the ThrottleMs field.
 func (o *UpdateWorkflowRequest) SetThrottleMs(v float32) {
-	o.ThrottleMs = &v
+	o.ThrottleMs.Set(&v)
+}
+// SetThrottleMsNil sets the value for ThrottleMs to be an explicit nil
+func (o *UpdateWorkflowRequest) SetThrottleMsNil() {
+	o.ThrottleMs.Set(nil)
+}
+
+// UnsetThrottleMs ensures that no value is present for ThrottleMs, not even an explicit nil
+func (o *UpdateWorkflowRequest) UnsetThrottleMs() {
+	o.ThrottleMs.Unset()
 }
 
 // GetFilters returns the Filters field value if set, zero value otherwise.
-func (o *UpdateWorkflowRequest) GetFilters() []UpdateWorkflowRequestFiltersInner {
+func (o *UpdateWorkflowRequest) GetFilters() []CreateWorkflowRequestFiltersInner {
 	if o == nil || IsNil(o.Filters) {
-		var ret []UpdateWorkflowRequestFiltersInner
+		var ret []CreateWorkflowRequestFiltersInner
 		return ret
 	}
 	return o.Filters
@@ -153,7 +163,7 @@ func (o *UpdateWorkflowRequest) GetFilters() []UpdateWorkflowRequestFiltersInner
 
 // GetFiltersOk returns a tuple with the Filters field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateWorkflowRequest) GetFiltersOk() ([]UpdateWorkflowRequestFiltersInner, bool) {
+func (o *UpdateWorkflowRequest) GetFiltersOk() ([]CreateWorkflowRequestFiltersInner, bool) {
 	if o == nil || IsNil(o.Filters) {
 		return nil, false
 	}
@@ -169,8 +179,8 @@ func (o *UpdateWorkflowRequest) HasFilters() bool {
 	return false
 }
 
-// SetFilters gets a reference to the given []UpdateWorkflowRequestFiltersInner and assigns it to the Filters field.
-func (o *UpdateWorkflowRequest) SetFilters(v []UpdateWorkflowRequestFiltersInner) {
+// SetFilters gets a reference to the given []CreateWorkflowRequestFiltersInner and assigns it to the Filters field.
+func (o *UpdateWorkflowRequest) SetFilters(v []CreateWorkflowRequestFiltersInner) {
 	o.Filters = v
 }
 
@@ -239,7 +249,7 @@ func (o *UpdateWorkflowRequest) SetProjectIds(v []string) {
 }
 
 func (o UpdateWorkflowRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -252,8 +262,8 @@ func (o UpdateWorkflowRequest) ToMap() (map[string]interface{}, error) {
 		toSerialize["name"] = o.Name
 	}
 	toSerialize["trigger"] = o.Trigger
-	if !IsNil(o.ThrottleMs) {
-		toSerialize["throttleMs"] = o.ThrottleMs
+	if o.ThrottleMs.IsSet() {
+		toSerialize["throttleMs"] = o.ThrottleMs.Get()
 	}
 	if !IsNil(o.Filters) {
 		toSerialize["filters"] = o.Filters
@@ -285,10 +295,10 @@ func (o *UpdateWorkflowRequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -354,3 +364,5 @@ func (v *NullableUpdateWorkflowRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

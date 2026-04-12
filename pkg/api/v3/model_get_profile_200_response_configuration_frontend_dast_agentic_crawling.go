@@ -19,9 +19,9 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationFrontendDastAgenticCra
 
 // GetProfile200ResponseConfigurationFrontendDastAgenticCrawling struct for GetProfile200ResponseConfigurationFrontendDastAgenticCrawling
 type GetProfile200ResponseConfigurationFrontendDastAgenticCrawling struct {
-	Enabled              *bool   `json:"enabled,omitempty"`
-	SpaCrawling          *bool   `json:"spa_crawling,omitempty"`
-	Instructions         *string `json:"instructions,omitempty"`
+	Enabled NullableBool `json:"enabled,omitempty"`
+	SpaCrawling NullableBool `json:"spa_crawling,omitempty"`
+	Instructions NullableString `json:"instructions,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -44,104 +44,134 @@ func NewGetProfile200ResponseConfigurationFrontendDastAgenticCrawlingWithDefault
 	return &this
 }
 
-// GetEnabled returns the Enabled field value if set, zero value otherwise.
+// GetEnabled returns the Enabled field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationFrontendDastAgenticCrawling) GetEnabled() bool {
-	if o == nil || IsNil(o.Enabled) {
+	if o == nil || IsNil(o.Enabled.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.Enabled
+	return *o.Enabled.Get()
 }
 
 // GetEnabledOk returns a tuple with the Enabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationFrontendDastAgenticCrawling) GetEnabledOk() (*bool, bool) {
-	if o == nil || IsNil(o.Enabled) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Enabled, true
+	return o.Enabled.Get(), o.Enabled.IsSet()
 }
 
 // HasEnabled returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationFrontendDastAgenticCrawling) HasEnabled() bool {
-	if o != nil && !IsNil(o.Enabled) {
+	if o != nil && o.Enabled.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetEnabled gets a reference to the given bool and assigns it to the Enabled field.
+// SetEnabled gets a reference to the given NullableBool and assigns it to the Enabled field.
 func (o *GetProfile200ResponseConfigurationFrontendDastAgenticCrawling) SetEnabled(v bool) {
-	o.Enabled = &v
+	o.Enabled.Set(&v)
+}
+// SetEnabledNil sets the value for Enabled to be an explicit nil
+func (o *GetProfile200ResponseConfigurationFrontendDastAgenticCrawling) SetEnabledNil() {
+	o.Enabled.Set(nil)
 }
 
-// GetSpaCrawling returns the SpaCrawling field value if set, zero value otherwise.
+// UnsetEnabled ensures that no value is present for Enabled, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationFrontendDastAgenticCrawling) UnsetEnabled() {
+	o.Enabled.Unset()
+}
+
+// GetSpaCrawling returns the SpaCrawling field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationFrontendDastAgenticCrawling) GetSpaCrawling() bool {
-	if o == nil || IsNil(o.SpaCrawling) {
+	if o == nil || IsNil(o.SpaCrawling.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.SpaCrawling
+	return *o.SpaCrawling.Get()
 }
 
 // GetSpaCrawlingOk returns a tuple with the SpaCrawling field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationFrontendDastAgenticCrawling) GetSpaCrawlingOk() (*bool, bool) {
-	if o == nil || IsNil(o.SpaCrawling) {
+	if o == nil {
 		return nil, false
 	}
-	return o.SpaCrawling, true
+	return o.SpaCrawling.Get(), o.SpaCrawling.IsSet()
 }
 
 // HasSpaCrawling returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationFrontendDastAgenticCrawling) HasSpaCrawling() bool {
-	if o != nil && !IsNil(o.SpaCrawling) {
+	if o != nil && o.SpaCrawling.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSpaCrawling gets a reference to the given bool and assigns it to the SpaCrawling field.
+// SetSpaCrawling gets a reference to the given NullableBool and assigns it to the SpaCrawling field.
 func (o *GetProfile200ResponseConfigurationFrontendDastAgenticCrawling) SetSpaCrawling(v bool) {
-	o.SpaCrawling = &v
+	o.SpaCrawling.Set(&v)
+}
+// SetSpaCrawlingNil sets the value for SpaCrawling to be an explicit nil
+func (o *GetProfile200ResponseConfigurationFrontendDastAgenticCrawling) SetSpaCrawlingNil() {
+	o.SpaCrawling.Set(nil)
 }
 
-// GetInstructions returns the Instructions field value if set, zero value otherwise.
+// UnsetSpaCrawling ensures that no value is present for SpaCrawling, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationFrontendDastAgenticCrawling) UnsetSpaCrawling() {
+	o.SpaCrawling.Unset()
+}
+
+// GetInstructions returns the Instructions field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationFrontendDastAgenticCrawling) GetInstructions() string {
-	if o == nil || IsNil(o.Instructions) {
+	if o == nil || IsNil(o.Instructions.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Instructions
+	return *o.Instructions.Get()
 }
 
 // GetInstructionsOk returns a tuple with the Instructions field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationFrontendDastAgenticCrawling) GetInstructionsOk() (*string, bool) {
-	if o == nil || IsNil(o.Instructions) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Instructions, true
+	return o.Instructions.Get(), o.Instructions.IsSet()
 }
 
 // HasInstructions returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationFrontendDastAgenticCrawling) HasInstructions() bool {
-	if o != nil && !IsNil(o.Instructions) {
+	if o != nil && o.Instructions.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInstructions gets a reference to the given string and assigns it to the Instructions field.
+// SetInstructions gets a reference to the given NullableString and assigns it to the Instructions field.
 func (o *GetProfile200ResponseConfigurationFrontendDastAgenticCrawling) SetInstructions(v string) {
-	o.Instructions = &v
+	o.Instructions.Set(&v)
+}
+// SetInstructionsNil sets the value for Instructions to be an explicit nil
+func (o *GetProfile200ResponseConfigurationFrontendDastAgenticCrawling) SetInstructionsNil() {
+	o.Instructions.Set(nil)
+}
+
+// UnsetInstructions ensures that no value is present for Instructions, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationFrontendDastAgenticCrawling) UnsetInstructions() {
+	o.Instructions.Unset()
 }
 
 func (o GetProfile200ResponseConfigurationFrontendDastAgenticCrawling) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -150,14 +180,14 @@ func (o GetProfile200ResponseConfigurationFrontendDastAgenticCrawling) MarshalJS
 
 func (o GetProfile200ResponseConfigurationFrontendDastAgenticCrawling) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Enabled) {
-		toSerialize["enabled"] = o.Enabled
+	if o.Enabled.IsSet() {
+		toSerialize["enabled"] = o.Enabled.Get()
 	}
-	if !IsNil(o.SpaCrawling) {
-		toSerialize["spa_crawling"] = o.SpaCrawling
+	if o.SpaCrawling.IsSet() {
+		toSerialize["spa_crawling"] = o.SpaCrawling.Get()
 	}
-	if !IsNil(o.Instructions) {
-		toSerialize["instructions"] = o.Instructions
+	if o.Instructions.IsSet() {
+		toSerialize["instructions"] = o.Instructions.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -225,3 +255,5 @@ func (v *NullableGetProfile200ResponseConfigurationFrontendDastAgenticCrawling) 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

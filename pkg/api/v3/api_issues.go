@@ -16,17 +16,176 @@ import (
 	"io"
 	"net/http"
 	"net/url"
-	"reflect"
 	"strings"
+	"reflect"
 )
+
 
 // IssuesAPIService IssuesAPI service
 type IssuesAPIService service
 
-type ApiGetIssueRequest struct {
-	ctx        context.Context
+type ApiCreateIssueCommentRequest struct {
+	ctx context.Context
 	ApiService *IssuesAPIService
-	issueId    string
+	issueId string
+	createIssueCommentRequest *CreateIssueCommentRequest
+}
+
+// Body of the request to add a comment
+func (r ApiCreateIssueCommentRequest) CreateIssueCommentRequest(createIssueCommentRequest CreateIssueCommentRequest) ApiCreateIssueCommentRequest {
+	r.createIssueCommentRequest = &createIssueCommentRequest
+	return r
+}
+
+func (r ApiCreateIssueCommentRequest) Execute() (*CreateIssueComment200Response, *http.Response, error) {
+	return r.ApiService.CreateIssueCommentExecute(r)
+}
+
+/*
+CreateIssueComment Comment on an issue
+
+Add a comment to an issue.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param issueId The issue ID
+ @return ApiCreateIssueCommentRequest
+*/
+func (a *IssuesAPIService) CreateIssueComment(ctx context.Context, issueId string) ApiCreateIssueCommentRequest {
+	return ApiCreateIssueCommentRequest{
+		ApiService: a,
+		ctx: ctx,
+		issueId: issueId,
+	}
+}
+
+// Execute executes the request
+//  @return CreateIssueComment200Response
+func (a *IssuesAPIService) CreateIssueCommentExecute(r ApiCreateIssueCommentRequest) (*CreateIssueComment200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreateIssueComment200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IssuesAPIService.CreateIssueComment")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/issues/{issueId}/activities"
+	localVarPath = strings.Replace(localVarPath, "{"+"issueId"+"}", url.PathEscape(parameterValueToString(r.issueId, "issueId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.createIssueCommentRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v UpdateProfile400Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v GetProfile404Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v CreateIssueComment500Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetIssueRequest struct {
+	ctx context.Context
+	ApiService *IssuesAPIService
+	issueId string
 }
 
 func (r ApiGetIssueRequest) Execute() (*GetIssue200Response, *http.Response, error) {
@@ -38,27 +197,26 @@ GetIssue Get an issue
 
 Get an issue by ID
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param issueId The issue ID
-	@return ApiGetIssueRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param issueId The issue ID
+ @return ApiGetIssueRequest
 */
 func (a *IssuesAPIService) GetIssue(ctx context.Context, issueId string) ApiGetIssueRequest {
 	return ApiGetIssueRequest{
 		ApiService: a,
-		ctx:        ctx,
-		issueId:    issueId,
+		ctx: ctx,
+		issueId: issueId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetIssue200Response
+//  @return GetIssue200Response
 func (a *IssuesAPIService) GetIssueExecute(r ApiGetIssueRequest) (*GetIssue200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *GetIssue200Response
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetIssue200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IssuesAPIService.GetIssue")
@@ -133,8 +291,8 @@ func (a *IssuesAPIService) GetIssueExecute(r ApiGetIssueRequest) (*GetIssue200Re
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -152,9 +310,9 @@ func (a *IssuesAPIService) GetIssueExecute(r ApiGetIssueRequest) (*GetIssue200Re
 }
 
 type ApiListIssueActivitiesRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *IssuesAPIService
-	issueId    string
+	issueId string
 }
 
 func (r ApiListIssueActivitiesRequest) Execute() ([]ActivitySummarized, *http.Response, error) {
@@ -166,27 +324,26 @@ ListIssueActivities List activities of an issue
 
 List activities related to a specific issue.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param issueId The issue ID
-	@return ApiListIssueActivitiesRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param issueId The issue ID
+ @return ApiListIssueActivitiesRequest
 */
 func (a *IssuesAPIService) ListIssueActivities(ctx context.Context, issueId string) ApiListIssueActivitiesRequest {
 	return ApiListIssueActivitiesRequest{
 		ApiService: a,
-		ctx:        ctx,
-		issueId:    issueId,
+		ctx: ctx,
+		issueId: issueId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return []ActivitySummarized
+//  @return []ActivitySummarized
 func (a *IssuesAPIService) ListIssueActivitiesExecute(r ApiListIssueActivitiesRequest) ([]ActivitySummarized, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue []ActivitySummarized
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  []ActivitySummarized
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IssuesAPIService.ListIssueActivities")
@@ -261,8 +418,8 @@ func (a *IssuesAPIService) ListIssueActivitiesExecute(r ApiListIssueActivitiesRe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -280,26 +437,26 @@ func (a *IssuesAPIService) ListIssueActivitiesExecute(r ApiListIssueActivitiesRe
 }
 
 type ApiListIssuesRequest struct {
-	ctx           context.Context
-	ApiService    *IssuesAPIService
-	cursor        *string
-	size          *int
-	sortType      *string
+	ctx context.Context
+	ApiService *IssuesAPIService
+	cursor *string
+	size *int
+	sortType *string
 	sortDirection *string
-	profileIds    *string
-	assetIds      *string
-	domains       *string
-	ids           *string
-	names         *ListIssuesNamesParameter
-	scanIds       *string
-	tagIds        *string
-	search        *string
-	jiraTicket    *string
-	risks         *[]string
-	assetClasses  *string
-	scannerKinds  *string
-	severities    *string
-	status        *string
+	profileIds *string
+	assetIds *string
+	domains *string
+	ids *string
+	names *ListIssuesNamesParameter
+	scanIds *string
+	tagIds *string
+	search *string
+	jiraTicket *string
+	risks *[]string
+	assetClasses *string
+	scannerKinds *string
+	severities *string
+	status *string
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
@@ -419,25 +576,24 @@ ListIssues List issues
 
 List and search issues of the organization.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiListIssuesRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiListIssuesRequest
 */
 func (a *IssuesAPIService) ListIssues(ctx context.Context) ApiListIssuesRequest {
 	return ApiListIssuesRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ListIssues200Response
+//  @return ListIssues200Response
 func (a *IssuesAPIService) ListIssuesExecute(r ApiListIssuesRequest) (*ListIssues200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ListIssues200Response
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ListIssues200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IssuesAPIService.ListIssues")
@@ -581,8 +737,8 @@ func (a *IssuesAPIService) ListIssuesExecute(r ApiListIssuesRequest) (*ListIssue
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -600,9 +756,9 @@ func (a *IssuesAPIService) ListIssuesExecute(r ApiListIssuesRequest) (*ListIssue
 }
 
 type ApiUpdateIssueRequest struct {
-	ctx                context.Context
-	ApiService         *IssuesAPIService
-	issueId            string
+	ctx context.Context
+	ApiService *IssuesAPIService
+	issueId string
 	updateIssueRequest *UpdateIssueRequest
 }
 
@@ -621,27 +777,26 @@ UpdateIssue Update an issue
 
 Update an issue by ID
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param issueId The issue ID
-	@return ApiUpdateIssueRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param issueId The issue ID
+ @return ApiUpdateIssueRequest
 */
 func (a *IssuesAPIService) UpdateIssue(ctx context.Context, issueId string) ApiUpdateIssueRequest {
 	return ApiUpdateIssueRequest{
 		ApiService: a,
-		ctx:        ctx,
-		issueId:    issueId,
+		ctx: ctx,
+		issueId: issueId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return UpdateIssue200Response
+//  @return UpdateIssue200Response
 func (a *IssuesAPIService) UpdateIssueExecute(r ApiUpdateIssueRequest) (*UpdateIssue200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPut
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *UpdateIssue200Response
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *UpdateIssue200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IssuesAPIService.UpdateIssue")
@@ -718,8 +873,8 @@ func (a *IssuesAPIService) UpdateIssueExecute(r ApiUpdateIssueRequest) (*UpdateI
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -729,8 +884,8 @@ func (a *IssuesAPIService) UpdateIssueExecute(r ApiUpdateIssueRequest) (*UpdateI
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

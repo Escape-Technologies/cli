@@ -31,7 +31,7 @@ type CreateDastRestProfileRequest struct {
 	// The description of the profile
 	Description *string `json:"description,omitempty"`
 	// The proxy ID for the profile
-	ProxyId *string `json:"proxyId,omitempty"`
+	ProxyId NullableString `json:"proxyId,omitempty"`
 	// The ID of the asset schema for the profile
 	SchemaId *string `json:"schemaId,omitempty"`
 	// The tags IDs for the profile
@@ -39,10 +39,10 @@ type CreateDastRestProfileRequest struct {
 	// The extra asset IDs for the profile
 	ExtraAssetIds []string `json:"extraAssetIds,omitempty"`
 	// Whether to use all available extra assets for the profile
-	UseAllAvailableExtraAssets *bool                                                            `json:"useAllAvailableExtraAssets,omitempty"`
-	Mode                       *ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE `json:"mode,omitempty"`
+	UseAllAvailableExtraAssets *bool `json:"useAllAvailableExtraAssets,omitempty"`
+	Mode NullableENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE `json:"mode,omitempty"`
 	// Whether to start the scan immediately
-	Start                *bool `json:"start,omitempty"`
+	Start *bool `json:"start,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -215,36 +215,46 @@ func (o *CreateDastRestProfileRequest) SetDescription(v string) {
 	o.Description = &v
 }
 
-// GetProxyId returns the ProxyId field value if set, zero value otherwise.
+// GetProxyId returns the ProxyId field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateDastRestProfileRequest) GetProxyId() string {
-	if o == nil || IsNil(o.ProxyId) {
+	if o == nil || IsNil(o.ProxyId.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.ProxyId
+	return *o.ProxyId.Get()
 }
 
 // GetProxyIdOk returns a tuple with the ProxyId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateDastRestProfileRequest) GetProxyIdOk() (*string, bool) {
-	if o == nil || IsNil(o.ProxyId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ProxyId, true
+	return o.ProxyId.Get(), o.ProxyId.IsSet()
 }
 
 // HasProxyId returns a boolean if a field has been set.
 func (o *CreateDastRestProfileRequest) HasProxyId() bool {
-	if o != nil && !IsNil(o.ProxyId) {
+	if o != nil && o.ProxyId.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetProxyId gets a reference to the given string and assigns it to the ProxyId field.
+// SetProxyId gets a reference to the given NullableString and assigns it to the ProxyId field.
 func (o *CreateDastRestProfileRequest) SetProxyId(v string) {
-	o.ProxyId = &v
+	o.ProxyId.Set(&v)
+}
+// SetProxyIdNil sets the value for ProxyId to be an explicit nil
+func (o *CreateDastRestProfileRequest) SetProxyIdNil() {
+	o.ProxyId.Set(nil)
+}
+
+// UnsetProxyId ensures that no value is present for ProxyId, not even an explicit nil
+func (o *CreateDastRestProfileRequest) UnsetProxyId() {
+	o.ProxyId.Unset()
 }
 
 // GetSchemaId returns the SchemaId field value if set, zero value otherwise.
@@ -279,9 +289,9 @@ func (o *CreateDastRestProfileRequest) SetSchemaId(v string) {
 	o.SchemaId = &v
 }
 
-// GetTagsIds returns the TagsIds field value if set, zero value otherwise.
+// GetTagsIds returns the TagsIds field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateDastRestProfileRequest) GetTagsIds() []string {
-	if o == nil || IsNil(o.TagsIds) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -290,6 +300,7 @@ func (o *CreateDastRestProfileRequest) GetTagsIds() []string {
 
 // GetTagsIdsOk returns a tuple with the TagsIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateDastRestProfileRequest) GetTagsIdsOk() ([]string, bool) {
 	if o == nil || IsNil(o.TagsIds) {
 		return nil, false
@@ -311,9 +322,9 @@ func (o *CreateDastRestProfileRequest) SetTagsIds(v []string) {
 	o.TagsIds = v
 }
 
-// GetExtraAssetIds returns the ExtraAssetIds field value if set, zero value otherwise.
+// GetExtraAssetIds returns the ExtraAssetIds field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateDastRestProfileRequest) GetExtraAssetIds() []string {
-	if o == nil || IsNil(o.ExtraAssetIds) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -322,6 +333,7 @@ func (o *CreateDastRestProfileRequest) GetExtraAssetIds() []string {
 
 // GetExtraAssetIdsOk returns a tuple with the ExtraAssetIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateDastRestProfileRequest) GetExtraAssetIdsOk() ([]string, bool) {
 	if o == nil || IsNil(o.ExtraAssetIds) {
 		return nil, false
@@ -375,36 +387,46 @@ func (o *CreateDastRestProfileRequest) SetUseAllAvailableExtraAssets(v bool) {
 	o.UseAllAvailableExtraAssets = &v
 }
 
-// GetMode returns the Mode field value if set, zero value otherwise.
+// GetMode returns the Mode field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateDastRestProfileRequest) GetMode() ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE {
-	if o == nil || IsNil(o.Mode) {
+	if o == nil || IsNil(o.Mode.Get()) {
 		var ret ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE
 		return ret
 	}
-	return *o.Mode
+	return *o.Mode.Get()
 }
 
 // GetModeOk returns a tuple with the Mode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateDastRestProfileRequest) GetModeOk() (*ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE, bool) {
-	if o == nil || IsNil(o.Mode) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Mode, true
+	return o.Mode.Get(), o.Mode.IsSet()
 }
 
 // HasMode returns a boolean if a field has been set.
 func (o *CreateDastRestProfileRequest) HasMode() bool {
-	if o != nil && !IsNil(o.Mode) {
+	if o != nil && o.Mode.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetMode gets a reference to the given ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE and assigns it to the Mode field.
+// SetMode gets a reference to the given NullableENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE and assigns it to the Mode field.
 func (o *CreateDastRestProfileRequest) SetMode(v ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE) {
-	o.Mode = &v
+	o.Mode.Set(&v)
+}
+// SetModeNil sets the value for Mode to be an explicit nil
+func (o *CreateDastRestProfileRequest) SetModeNil() {
+	o.Mode.Set(nil)
+}
+
+// UnsetMode ensures that no value is present for Mode, not even an explicit nil
+func (o *CreateDastRestProfileRequest) UnsetMode() {
+	o.Mode.Unset()
 }
 
 // GetStart returns the Start field value if set, zero value otherwise.
@@ -440,7 +462,7 @@ func (o *CreateDastRestProfileRequest) SetStart(v bool) {
 }
 
 func (o CreateDastRestProfileRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -460,23 +482,23 @@ func (o CreateDastRestProfileRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	if !IsNil(o.ProxyId) {
-		toSerialize["proxyId"] = o.ProxyId
+	if o.ProxyId.IsSet() {
+		toSerialize["proxyId"] = o.ProxyId.Get()
 	}
 	if !IsNil(o.SchemaId) {
 		toSerialize["schemaId"] = o.SchemaId
 	}
-	if !IsNil(o.TagsIds) {
+	if o.TagsIds != nil {
 		toSerialize["tagsIds"] = o.TagsIds
 	}
-	if !IsNil(o.ExtraAssetIds) {
+	if o.ExtraAssetIds != nil {
 		toSerialize["extraAssetIds"] = o.ExtraAssetIds
 	}
 	if !IsNil(o.UseAllAvailableExtraAssets) {
 		toSerialize["useAllAvailableExtraAssets"] = o.UseAllAvailableExtraAssets
 	}
-	if !IsNil(o.Mode) {
-		toSerialize["mode"] = o.Mode
+	if o.Mode.IsSet() {
+		toSerialize["mode"] = o.Mode.Get()
 	}
 	if !IsNil(o.Start) {
 		toSerialize["start"] = o.Start
@@ -503,10 +525,10 @@ func (o *CreateDastRestProfileRequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -578,3 +600,5 @@ func (v *NullableCreateDastRestProfileRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

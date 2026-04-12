@@ -20,12 +20,12 @@ var _ MappedNullable = &CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf
 
 // CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4 struct for CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4
 type CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4 struct {
-	Is                   *float32           `json:"is,omitempty"`
-	IsNot                *float32           `json:"is_not,omitempty"`
-	In                   []float32          `json:"in,omitempty"`
-	Gt                   *float32           `json:"gt,omitempty"`
-	Lt                   *float32           `json:"lt,omitempty"`
-	If                   ENUMPAGESTATUSCODE `json:"if"`
+	Is NullableFloat32 `json:"is,omitempty"`
+	IsNot NullableFloat32 `json:"is_not,omitempty"`
+	In []float32 `json:"in,omitempty"`
+	Gt NullableFloat32 `json:"gt,omitempty"`
+	Lt NullableFloat32 `json:"lt,omitempty"`
+	If ENUMPAGESTATUSCODE `json:"if"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -49,73 +49,93 @@ func NewCreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4WithDefaults() 
 	return &this
 }
 
-// GetIs returns the Is field value if set, zero value otherwise.
+// GetIs returns the Is field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) GetIs() float32 {
-	if o == nil || IsNil(o.Is) {
+	if o == nil || IsNil(o.Is.Get()) {
 		var ret float32
 		return ret
 	}
-	return *o.Is
+	return *o.Is.Get()
 }
 
 // GetIsOk returns a tuple with the Is field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) GetIsOk() (*float32, bool) {
-	if o == nil || IsNil(o.Is) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Is, true
+	return o.Is.Get(), o.Is.IsSet()
 }
 
 // HasIs returns a boolean if a field has been set.
 func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) HasIs() bool {
-	if o != nil && !IsNil(o.Is) {
+	if o != nil && o.Is.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetIs gets a reference to the given float32 and assigns it to the Is field.
+// SetIs gets a reference to the given NullableFloat32 and assigns it to the Is field.
 func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) SetIs(v float32) {
-	o.Is = &v
+	o.Is.Set(&v)
+}
+// SetIsNil sets the value for Is to be an explicit nil
+func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) SetIsNil() {
+	o.Is.Set(nil)
 }
 
-// GetIsNot returns the IsNot field value if set, zero value otherwise.
+// UnsetIs ensures that no value is present for Is, not even an explicit nil
+func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) UnsetIs() {
+	o.Is.Unset()
+}
+
+// GetIsNot returns the IsNot field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) GetIsNot() float32 {
-	if o == nil || IsNil(o.IsNot) {
+	if o == nil || IsNil(o.IsNot.Get()) {
 		var ret float32
 		return ret
 	}
-	return *o.IsNot
+	return *o.IsNot.Get()
 }
 
 // GetIsNotOk returns a tuple with the IsNot field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) GetIsNotOk() (*float32, bool) {
-	if o == nil || IsNil(o.IsNot) {
+	if o == nil {
 		return nil, false
 	}
-	return o.IsNot, true
+	return o.IsNot.Get(), o.IsNot.IsSet()
 }
 
 // HasIsNot returns a boolean if a field has been set.
 func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) HasIsNot() bool {
-	if o != nil && !IsNil(o.IsNot) {
+	if o != nil && o.IsNot.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetIsNot gets a reference to the given float32 and assigns it to the IsNot field.
+// SetIsNot gets a reference to the given NullableFloat32 and assigns it to the IsNot field.
 func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) SetIsNot(v float32) {
-	o.IsNot = &v
+	o.IsNot.Set(&v)
+}
+// SetIsNotNil sets the value for IsNot to be an explicit nil
+func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) SetIsNotNil() {
+	o.IsNot.Set(nil)
 }
 
-// GetIn returns the In field value if set, zero value otherwise.
+// UnsetIsNot ensures that no value is present for IsNot, not even an explicit nil
+func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) UnsetIsNot() {
+	o.IsNot.Unset()
+}
+
+// GetIn returns the In field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) GetIn() []float32 {
-	if o == nil || IsNil(o.In) {
+	if o == nil {
 		var ret []float32
 		return ret
 	}
@@ -124,6 +144,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) GetIn() []fl
 
 // GetInOk returns a tuple with the In field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) GetInOk() ([]float32, bool) {
 	if o == nil || IsNil(o.In) {
 		return nil, false
@@ -145,68 +166,88 @@ func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) SetIn(v []fl
 	o.In = v
 }
 
-// GetGt returns the Gt field value if set, zero value otherwise.
+// GetGt returns the Gt field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) GetGt() float32 {
-	if o == nil || IsNil(o.Gt) {
+	if o == nil || IsNil(o.Gt.Get()) {
 		var ret float32
 		return ret
 	}
-	return *o.Gt
+	return *o.Gt.Get()
 }
 
 // GetGtOk returns a tuple with the Gt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) GetGtOk() (*float32, bool) {
-	if o == nil || IsNil(o.Gt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Gt, true
+	return o.Gt.Get(), o.Gt.IsSet()
 }
 
 // HasGt returns a boolean if a field has been set.
 func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) HasGt() bool {
-	if o != nil && !IsNil(o.Gt) {
+	if o != nil && o.Gt.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetGt gets a reference to the given float32 and assigns it to the Gt field.
+// SetGt gets a reference to the given NullableFloat32 and assigns it to the Gt field.
 func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) SetGt(v float32) {
-	o.Gt = &v
+	o.Gt.Set(&v)
+}
+// SetGtNil sets the value for Gt to be an explicit nil
+func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) SetGtNil() {
+	o.Gt.Set(nil)
 }
 
-// GetLt returns the Lt field value if set, zero value otherwise.
+// UnsetGt ensures that no value is present for Gt, not even an explicit nil
+func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) UnsetGt() {
+	o.Gt.Unset()
+}
+
+// GetLt returns the Lt field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) GetLt() float32 {
-	if o == nil || IsNil(o.Lt) {
+	if o == nil || IsNil(o.Lt.Get()) {
 		var ret float32
 		return ret
 	}
-	return *o.Lt
+	return *o.Lt.Get()
 }
 
 // GetLtOk returns a tuple with the Lt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) GetLtOk() (*float32, bool) {
-	if o == nil || IsNil(o.Lt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Lt, true
+	return o.Lt.Get(), o.Lt.IsSet()
 }
 
 // HasLt returns a boolean if a field has been set.
 func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) HasLt() bool {
-	if o != nil && !IsNil(o.Lt) {
+	if o != nil && o.Lt.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetLt gets a reference to the given float32 and assigns it to the Lt field.
+// SetLt gets a reference to the given NullableFloat32 and assigns it to the Lt field.
 func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) SetLt(v float32) {
-	o.Lt = &v
+	o.Lt.Set(&v)
+}
+// SetLtNil sets the value for Lt to be an explicit nil
+func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) SetLtNil() {
+	o.Lt.Set(nil)
+}
+
+// UnsetLt ensures that no value is present for Lt, not even an explicit nil
+func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) UnsetLt() {
+	o.Lt.Unset()
 }
 
 // GetIf returns the If field value
@@ -234,7 +275,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) SetIf(v ENUM
 }
 
 func (o CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -243,20 +284,20 @@ func (o CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) MarshalJSON()
 
 func (o CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Is) {
-		toSerialize["is"] = o.Is
+	if o.Is.IsSet() {
+		toSerialize["is"] = o.Is.Get()
 	}
-	if !IsNil(o.IsNot) {
-		toSerialize["is_not"] = o.IsNot
+	if o.IsNot.IsSet() {
+		toSerialize["is_not"] = o.IsNot.Get()
 	}
-	if !IsNil(o.In) {
+	if o.In != nil {
 		toSerialize["in"] = o.In
 	}
-	if !IsNil(o.Gt) {
-		toSerialize["gt"] = o.Gt
+	if o.Gt.IsSet() {
+		toSerialize["gt"] = o.Gt.Get()
 	}
-	if !IsNil(o.Lt) {
-		toSerialize["lt"] = o.Lt
+	if o.Lt.IsSet() {
+		toSerialize["lt"] = o.Lt.Get()
 	}
 	toSerialize["if"] = o.If
 
@@ -280,10 +321,10 @@ func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) UnmarshalJSO
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -349,3 +390,5 @@ func (v *NullableCreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) Unma
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

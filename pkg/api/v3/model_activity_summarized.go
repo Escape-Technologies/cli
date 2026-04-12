@@ -20,12 +20,12 @@ var _ MappedNullable = &ActivitySummarized{}
 
 // ActivitySummarized Summarized information about an activity
 type ActivitySummarized struct {
-	Author *AuthorSummarized `json:"author,omitempty"`
+	Author AuthorSummarized `json:"author"`
 	// The id of the activity
 	Id string `json:"id"`
 	// The date and time the activity was created
-	CreatedAt            string                  `json:"createdAt"`
-	Kind                 ENUMITEMSPROPERTIESKIND `json:"kind"`
+	CreatedAt string `json:"createdAt"`
+	Kind ENUMITEMSPROPERTIESKIND `json:"kind"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -35,8 +35,9 @@ type _ActivitySummarized ActivitySummarized
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewActivitySummarized(id string, createdAt string, kind ENUMITEMSPROPERTIESKIND) *ActivitySummarized {
+func NewActivitySummarized(author AuthorSummarized, id string, createdAt string, kind ENUMITEMSPROPERTIESKIND) *ActivitySummarized {
 	this := ActivitySummarized{}
+	this.Author = author
 	this.Id = id
 	this.CreatedAt = createdAt
 	this.Kind = kind
@@ -51,36 +52,28 @@ func NewActivitySummarizedWithDefaults() *ActivitySummarized {
 	return &this
 }
 
-// GetAuthor returns the Author field value if set, zero value otherwise.
+// GetAuthor returns the Author field value
 func (o *ActivitySummarized) GetAuthor() AuthorSummarized {
-	if o == nil || IsNil(o.Author) {
+	if o == nil {
 		var ret AuthorSummarized
 		return ret
 	}
-	return *o.Author
+
+	return o.Author
 }
 
-// GetAuthorOk returns a tuple with the Author field value if set, nil otherwise
+// GetAuthorOk returns a tuple with the Author field value
 // and a boolean to check if the value has been set.
 func (o *ActivitySummarized) GetAuthorOk() (*AuthorSummarized, bool) {
-	if o == nil || IsNil(o.Author) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Author, true
+	return &o.Author, true
 }
 
-// HasAuthor returns a boolean if a field has been set.
-func (o *ActivitySummarized) HasAuthor() bool {
-	if o != nil && !IsNil(o.Author) {
-		return true
-	}
-
-	return false
-}
-
-// SetAuthor gets a reference to the given AuthorSummarized and assigns it to the Author field.
+// SetAuthor sets field value
 func (o *ActivitySummarized) SetAuthor(v AuthorSummarized) {
-	o.Author = &v
+	o.Author = v
 }
 
 // GetId returns the Id field value
@@ -156,7 +149,7 @@ func (o *ActivitySummarized) SetKind(v ENUMITEMSPROPERTIESKIND) {
 }
 
 func (o ActivitySummarized) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -165,9 +158,7 @@ func (o ActivitySummarized) MarshalJSON() ([]byte, error) {
 
 func (o ActivitySummarized) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Author) {
-		toSerialize["author"] = o.Author
-	}
+	toSerialize["author"] = o.Author
 	toSerialize["id"] = o.Id
 	toSerialize["createdAt"] = o.CreatedAt
 	toSerialize["kind"] = o.Kind
@@ -184,6 +175,7 @@ func (o *ActivitySummarized) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"author",
 		"id",
 		"createdAt",
 		"kind",
@@ -194,10 +186,10 @@ func (o *ActivitySummarized) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -261,3 +253,5 @@ func (v *NullableActivitySummarized) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

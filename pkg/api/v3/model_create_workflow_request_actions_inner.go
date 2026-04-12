@@ -15,35 +15,36 @@ import (
 	"fmt"
 )
 
+
 // CreateWorkflowRequestActionsInner struct for CreateWorkflowRequestActionsInner
 type CreateWorkflowRequestActionsInner struct {
-	CreateExportWorkflowActionUsingJira1   *CreateExportWorkflowActionUsingJira1
+	CreateExportWorkflowActionUsingJira *CreateExportWorkflowActionUsingJira
 	CreateExportWorkflowActionUsingWebhook *CreateExportWorkflowActionUsingWebhook
-	CreateExportWorkflowActionUsingWiz     *CreateExportWorkflowActionUsingWiz
+	CreateExportWorkflowActionUsingWiz *CreateExportWorkflowActionUsingWiz
 	CreateNotifyWorkflowActionUsingDiscord *CreateNotifyWorkflowActionUsingDiscord
-	CreateNotifyWorkflowActionUsingEmail   *CreateNotifyWorkflowActionUsingEmail
-	CreateNotifyWorkflowActionUsingSlack   *CreateNotifyWorkflowActionUsingSlack
-	CreateNotifyWorkflowActionUsingTeams   *CreateNotifyWorkflowActionUsingTeams
+	CreateNotifyWorkflowActionUsingEmail *CreateNotifyWorkflowActionUsingEmail
+	CreateNotifyWorkflowActionUsingSlack *CreateNotifyWorkflowActionUsingSlack
+	CreateNotifyWorkflowActionUsingTeams *CreateNotifyWorkflowActionUsingTeams
 }
 
 // Unmarshal JSON data into any of the pointers in the struct
 func (dst *CreateWorkflowRequestActionsInner) UnmarshalJSON(data []byte) error {
 	var err error
-	// try to unmarshal JSON data into CreateExportWorkflowActionUsingJira1
-	err = json.Unmarshal(data, &dst.CreateExportWorkflowActionUsingJira1)
+	// try to unmarshal JSON data into CreateExportWorkflowActionUsingJira
+	err = json.Unmarshal(data, &dst.CreateExportWorkflowActionUsingJira);
 	if err == nil {
-		jsonCreateExportWorkflowActionUsingJira1, _ := json.Marshal(dst.CreateExportWorkflowActionUsingJira1)
-		if string(jsonCreateExportWorkflowActionUsingJira1) == "{}" { // empty struct
-			dst.CreateExportWorkflowActionUsingJira1 = nil
+		jsonCreateExportWorkflowActionUsingJira, _ := json.Marshal(dst.CreateExportWorkflowActionUsingJira)
+		if string(jsonCreateExportWorkflowActionUsingJira) == "{}" { // empty struct
+			dst.CreateExportWorkflowActionUsingJira = nil
 		} else {
-			return nil // data stored in dst.CreateExportWorkflowActionUsingJira1, return on the first match
+			return nil // data stored in dst.CreateExportWorkflowActionUsingJira, return on the first match
 		}
 	} else {
-		dst.CreateExportWorkflowActionUsingJira1 = nil
+		dst.CreateExportWorkflowActionUsingJira = nil
 	}
 
 	// try to unmarshal JSON data into CreateExportWorkflowActionUsingWebhook
-	err = json.Unmarshal(data, &dst.CreateExportWorkflowActionUsingWebhook)
+	err = json.Unmarshal(data, &dst.CreateExportWorkflowActionUsingWebhook);
 	if err == nil {
 		jsonCreateExportWorkflowActionUsingWebhook, _ := json.Marshal(dst.CreateExportWorkflowActionUsingWebhook)
 		if string(jsonCreateExportWorkflowActionUsingWebhook) == "{}" { // empty struct
@@ -56,7 +57,7 @@ func (dst *CreateWorkflowRequestActionsInner) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal JSON data into CreateExportWorkflowActionUsingWiz
-	err = json.Unmarshal(data, &dst.CreateExportWorkflowActionUsingWiz)
+	err = json.Unmarshal(data, &dst.CreateExportWorkflowActionUsingWiz);
 	if err == nil {
 		jsonCreateExportWorkflowActionUsingWiz, _ := json.Marshal(dst.CreateExportWorkflowActionUsingWiz)
 		if string(jsonCreateExportWorkflowActionUsingWiz) == "{}" { // empty struct
@@ -69,7 +70,7 @@ func (dst *CreateWorkflowRequestActionsInner) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal JSON data into CreateNotifyWorkflowActionUsingDiscord
-	err = json.Unmarshal(data, &dst.CreateNotifyWorkflowActionUsingDiscord)
+	err = json.Unmarshal(data, &dst.CreateNotifyWorkflowActionUsingDiscord);
 	if err == nil {
 		jsonCreateNotifyWorkflowActionUsingDiscord, _ := json.Marshal(dst.CreateNotifyWorkflowActionUsingDiscord)
 		if string(jsonCreateNotifyWorkflowActionUsingDiscord) == "{}" { // empty struct
@@ -82,7 +83,7 @@ func (dst *CreateWorkflowRequestActionsInner) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal JSON data into CreateNotifyWorkflowActionUsingEmail
-	err = json.Unmarshal(data, &dst.CreateNotifyWorkflowActionUsingEmail)
+	err = json.Unmarshal(data, &dst.CreateNotifyWorkflowActionUsingEmail);
 	if err == nil {
 		jsonCreateNotifyWorkflowActionUsingEmail, _ := json.Marshal(dst.CreateNotifyWorkflowActionUsingEmail)
 		if string(jsonCreateNotifyWorkflowActionUsingEmail) == "{}" { // empty struct
@@ -95,7 +96,7 @@ func (dst *CreateWorkflowRequestActionsInner) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal JSON data into CreateNotifyWorkflowActionUsingSlack
-	err = json.Unmarshal(data, &dst.CreateNotifyWorkflowActionUsingSlack)
+	err = json.Unmarshal(data, &dst.CreateNotifyWorkflowActionUsingSlack);
 	if err == nil {
 		jsonCreateNotifyWorkflowActionUsingSlack, _ := json.Marshal(dst.CreateNotifyWorkflowActionUsingSlack)
 		if string(jsonCreateNotifyWorkflowActionUsingSlack) == "{}" { // empty struct
@@ -108,7 +109,7 @@ func (dst *CreateWorkflowRequestActionsInner) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal JSON data into CreateNotifyWorkflowActionUsingTeams
-	err = json.Unmarshal(data, &dst.CreateNotifyWorkflowActionUsingTeams)
+	err = json.Unmarshal(data, &dst.CreateNotifyWorkflowActionUsingTeams);
 	if err == nil {
 		jsonCreateNotifyWorkflowActionUsingTeams, _ := json.Marshal(dst.CreateNotifyWorkflowActionUsingTeams)
 		if string(jsonCreateNotifyWorkflowActionUsingTeams) == "{}" { // empty struct
@@ -125,8 +126,8 @@ func (dst *CreateWorkflowRequestActionsInner) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src CreateWorkflowRequestActionsInner) MarshalJSON() ([]byte, error) {
-	if src.CreateExportWorkflowActionUsingJira1 != nil {
-		return json.Marshal(&src.CreateExportWorkflowActionUsingJira1)
+	if src.CreateExportWorkflowActionUsingJira != nil {
+		return json.Marshal(&src.CreateExportWorkflowActionUsingJira)
 	}
 
 	if src.CreateExportWorkflowActionUsingWebhook != nil {
@@ -155,6 +156,7 @@ func (src CreateWorkflowRequestActionsInner) MarshalJSON() ([]byte, error) {
 
 	return nil, nil // no data in anyOf schemas
 }
+
 
 type NullableCreateWorkflowRequestActionsInner struct {
 	value *CreateWorkflowRequestActionsInner
@@ -191,3 +193,5 @@ func (v *NullableCreateWorkflowRequestActionsInner) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

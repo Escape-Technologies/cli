@@ -12,8 +12,8 @@ package v3
 
 import (
 	"encoding/json"
-	"fmt"
 	"time"
+	"fmt"
 )
 
 // checks if the GetUser200Response type satisfies the MappedNullable interface at compile time
@@ -28,11 +28,9 @@ type GetUser200Response struct {
 	// The date and time the user was created
 	CreatedAt time.Time `json:"createdAt"`
 	// The date and time the user was activated
-	ActivatedAt *time.Time `json:"activatedAt,omitempty"`
-	// The profile picture link of the user
-	ProfilePictureLink *string `json:"profilePictureLink,omitempty"`
+	ActivatedAt NullableTime `json:"activatedAt"`
 	// The bindings of the user
-	RoleBindings         []CreateProject200ResponseBindingsInner `json:"roleBindings"`
+	RoleBindings []CreateProject200ResponseBindingsInner `json:"roleBindings"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -42,11 +40,12 @@ type _GetUser200Response GetUser200Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetUser200Response(id string, email string, createdAt time.Time, roleBindings []CreateProject200ResponseBindingsInner) *GetUser200Response {
+func NewGetUser200Response(id string, email string, createdAt time.Time, activatedAt NullableTime, roleBindings []CreateProject200ResponseBindingsInner) *GetUser200Response {
 	this := GetUser200Response{}
 	this.Id = id
 	this.Email = email
 	this.CreatedAt = createdAt
+	this.ActivatedAt = activatedAt
 	this.RoleBindings = roleBindings
 	return &this
 }
@@ -131,68 +130,30 @@ func (o *GetUser200Response) SetCreatedAt(v time.Time) {
 	o.CreatedAt = v
 }
 
-// GetActivatedAt returns the ActivatedAt field value if set, zero value otherwise.
+// GetActivatedAt returns the ActivatedAt field value
+// If the value is explicit nil, the zero value for time.Time will be returned
 func (o *GetUser200Response) GetActivatedAt() time.Time {
-	if o == nil || IsNil(o.ActivatedAt) {
+	if o == nil || o.ActivatedAt.Get() == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.ActivatedAt
+
+	return *o.ActivatedAt.Get()
 }
 
-// GetActivatedAtOk returns a tuple with the ActivatedAt field value if set, nil otherwise
+// GetActivatedAtOk returns a tuple with the ActivatedAt field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetUser200Response) GetActivatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.ActivatedAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ActivatedAt, true
+	return o.ActivatedAt.Get(), o.ActivatedAt.IsSet()
 }
 
-// HasActivatedAt returns a boolean if a field has been set.
-func (o *GetUser200Response) HasActivatedAt() bool {
-	if o != nil && !IsNil(o.ActivatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetActivatedAt gets a reference to the given time.Time and assigns it to the ActivatedAt field.
+// SetActivatedAt sets field value
 func (o *GetUser200Response) SetActivatedAt(v time.Time) {
-	o.ActivatedAt = &v
-}
-
-// GetProfilePictureLink returns the ProfilePictureLink field value if set, zero value otherwise.
-func (o *GetUser200Response) GetProfilePictureLink() string {
-	if o == nil || IsNil(o.ProfilePictureLink) {
-		var ret string
-		return ret
-	}
-	return *o.ProfilePictureLink
-}
-
-// GetProfilePictureLinkOk returns a tuple with the ProfilePictureLink field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetUser200Response) GetProfilePictureLinkOk() (*string, bool) {
-	if o == nil || IsNil(o.ProfilePictureLink) {
-		return nil, false
-	}
-	return o.ProfilePictureLink, true
-}
-
-// HasProfilePictureLink returns a boolean if a field has been set.
-func (o *GetUser200Response) HasProfilePictureLink() bool {
-	if o != nil && !IsNil(o.ProfilePictureLink) {
-		return true
-	}
-
-	return false
-}
-
-// SetProfilePictureLink gets a reference to the given string and assigns it to the ProfilePictureLink field.
-func (o *GetUser200Response) SetProfilePictureLink(v string) {
-	o.ProfilePictureLink = &v
+	o.ActivatedAt.Set(&v)
 }
 
 // GetRoleBindings returns the RoleBindings field value
@@ -220,7 +181,7 @@ func (o *GetUser200Response) SetRoleBindings(v []CreateProject200ResponseBinding
 }
 
 func (o GetUser200Response) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -232,12 +193,7 @@ func (o GetUser200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize["id"] = o.Id
 	toSerialize["email"] = o.Email
 	toSerialize["createdAt"] = o.CreatedAt
-	if !IsNil(o.ActivatedAt) {
-		toSerialize["activatedAt"] = o.ActivatedAt
-	}
-	if !IsNil(o.ProfilePictureLink) {
-		toSerialize["profilePictureLink"] = o.ProfilePictureLink
-	}
+	toSerialize["activatedAt"] = o.ActivatedAt.Get()
 	toSerialize["roleBindings"] = o.RoleBindings
 
 	for key, value := range o.AdditionalProperties {
@@ -255,6 +211,7 @@ func (o *GetUser200Response) UnmarshalJSON(data []byte) (err error) {
 		"id",
 		"email",
 		"createdAt",
+		"activatedAt",
 		"roleBindings",
 	}
 
@@ -263,10 +220,10 @@ func (o *GetUser200Response) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -289,7 +246,6 @@ func (o *GetUser200Response) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "email")
 		delete(additionalProperties, "createdAt")
 		delete(additionalProperties, "activatedAt")
-		delete(additionalProperties, "profilePictureLink")
 		delete(additionalProperties, "roleBindings")
 		o.AdditionalProperties = additionalProperties
 	}
@@ -332,3 +288,5 @@ func (v *NullableGetUser200Response) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

@@ -20,14 +20,14 @@ var _ MappedNullable = &CreateAssetGITHUBREPOSITORYRequestOrg{}
 
 // CreateAssetGITHUBREPOSITORYRequestOrg struct for CreateAssetGITHUBREPOSITORYRequestOrg
 type CreateAssetGITHUBREPOSITORYRequestOrg struct {
-	AssetClass           ENUMSOURCECODEMANAGEMENT `json:"asset_class"`
-	ExtraMetadata        map[string]interface{}   `json:"extra_metadata,omitempty"`
-	ScreenshotS3Key      *string                  `json:"screenshot_s3_key,omitempty"`
-	AssetType            ENUMGITHUBORGANIZATION   `json:"asset_type"`
-	Name                 *string                  `json:"name,omitempty"`
-	ImmutableKey         string                   `json:"immutable_key"`
-	ApiKey               string                   `json:"api_key"`
-	LocationId           *string                  `json:"location_id,omitempty"`
+	AssetClass ENUMSOURCECODEMANAGEMENT `json:"asset_class"`
+	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
+	ScreenshotS3Key NullableString `json:"screenshot_s3_key,omitempty"`
+	AssetType ENUMGITHUBORGANIZATION `json:"asset_type"`
+	Name NullableString `json:"name,omitempty"`
+	ImmutableKey string `json:"immutable_key"`
+	ApiKey string `json:"api_key"`
+	LocationId NullableString `json:"location_id,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -110,36 +110,46 @@ func (o *CreateAssetGITHUBREPOSITORYRequestOrg) SetExtraMetadata(v map[string]in
 	o.ExtraMetadata = v
 }
 
-// GetScreenshotS3Key returns the ScreenshotS3Key field value if set, zero value otherwise.
+// GetScreenshotS3Key returns the ScreenshotS3Key field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetGITHUBREPOSITORYRequestOrg) GetScreenshotS3Key() string {
-	if o == nil || IsNil(o.ScreenshotS3Key) {
+	if o == nil || IsNil(o.ScreenshotS3Key.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.ScreenshotS3Key
+	return *o.ScreenshotS3Key.Get()
 }
 
 // GetScreenshotS3KeyOk returns a tuple with the ScreenshotS3Key field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetGITHUBREPOSITORYRequestOrg) GetScreenshotS3KeyOk() (*string, bool) {
-	if o == nil || IsNil(o.ScreenshotS3Key) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ScreenshotS3Key, true
+	return o.ScreenshotS3Key.Get(), o.ScreenshotS3Key.IsSet()
 }
 
 // HasScreenshotS3Key returns a boolean if a field has been set.
 func (o *CreateAssetGITHUBREPOSITORYRequestOrg) HasScreenshotS3Key() bool {
-	if o != nil && !IsNil(o.ScreenshotS3Key) {
+	if o != nil && o.ScreenshotS3Key.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetScreenshotS3Key gets a reference to the given string and assigns it to the ScreenshotS3Key field.
+// SetScreenshotS3Key gets a reference to the given NullableString and assigns it to the ScreenshotS3Key field.
 func (o *CreateAssetGITHUBREPOSITORYRequestOrg) SetScreenshotS3Key(v string) {
-	o.ScreenshotS3Key = &v
+	o.ScreenshotS3Key.Set(&v)
+}
+// SetScreenshotS3KeyNil sets the value for ScreenshotS3Key to be an explicit nil
+func (o *CreateAssetGITHUBREPOSITORYRequestOrg) SetScreenshotS3KeyNil() {
+	o.ScreenshotS3Key.Set(nil)
+}
+
+// UnsetScreenshotS3Key ensures that no value is present for ScreenshotS3Key, not even an explicit nil
+func (o *CreateAssetGITHUBREPOSITORYRequestOrg) UnsetScreenshotS3Key() {
+	o.ScreenshotS3Key.Unset()
 }
 
 // GetAssetType returns the AssetType field value
@@ -166,36 +176,46 @@ func (o *CreateAssetGITHUBREPOSITORYRequestOrg) SetAssetType(v ENUMGITHUBORGANIZ
 	o.AssetType = v
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
+// GetName returns the Name field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetGITHUBREPOSITORYRequestOrg) GetName() string {
-	if o == nil || IsNil(o.Name) {
+	if o == nil || IsNil(o.Name.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Name
+	return *o.Name.Get()
 }
 
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetGITHUBREPOSITORYRequestOrg) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Name, true
+	return o.Name.Get(), o.Name.IsSet()
 }
 
 // HasName returns a boolean if a field has been set.
 func (o *CreateAssetGITHUBREPOSITORYRequestOrg) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
+	if o != nil && o.Name.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetName gets a reference to the given string and assigns it to the Name field.
+// SetName gets a reference to the given NullableString and assigns it to the Name field.
 func (o *CreateAssetGITHUBREPOSITORYRequestOrg) SetName(v string) {
-	o.Name = &v
+	o.Name.Set(&v)
+}
+// SetNameNil sets the value for Name to be an explicit nil
+func (o *CreateAssetGITHUBREPOSITORYRequestOrg) SetNameNil() {
+	o.Name.Set(nil)
+}
+
+// UnsetName ensures that no value is present for Name, not even an explicit nil
+func (o *CreateAssetGITHUBREPOSITORYRequestOrg) UnsetName() {
+	o.Name.Unset()
 }
 
 // GetImmutableKey returns the ImmutableKey field value
@@ -246,40 +266,50 @@ func (o *CreateAssetGITHUBREPOSITORYRequestOrg) SetApiKey(v string) {
 	o.ApiKey = v
 }
 
-// GetLocationId returns the LocationId field value if set, zero value otherwise.
+// GetLocationId returns the LocationId field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetGITHUBREPOSITORYRequestOrg) GetLocationId() string {
-	if o == nil || IsNil(o.LocationId) {
+	if o == nil || IsNil(o.LocationId.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.LocationId
+	return *o.LocationId.Get()
 }
 
 // GetLocationIdOk returns a tuple with the LocationId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetGITHUBREPOSITORYRequestOrg) GetLocationIdOk() (*string, bool) {
-	if o == nil || IsNil(o.LocationId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.LocationId, true
+	return o.LocationId.Get(), o.LocationId.IsSet()
 }
 
 // HasLocationId returns a boolean if a field has been set.
 func (o *CreateAssetGITHUBREPOSITORYRequestOrg) HasLocationId() bool {
-	if o != nil && !IsNil(o.LocationId) {
+	if o != nil && o.LocationId.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetLocationId gets a reference to the given string and assigns it to the LocationId field.
+// SetLocationId gets a reference to the given NullableString and assigns it to the LocationId field.
 func (o *CreateAssetGITHUBREPOSITORYRequestOrg) SetLocationId(v string) {
-	o.LocationId = &v
+	o.LocationId.Set(&v)
+}
+// SetLocationIdNil sets the value for LocationId to be an explicit nil
+func (o *CreateAssetGITHUBREPOSITORYRequestOrg) SetLocationIdNil() {
+	o.LocationId.Set(nil)
+}
+
+// UnsetLocationId ensures that no value is present for LocationId, not even an explicit nil
+func (o *CreateAssetGITHUBREPOSITORYRequestOrg) UnsetLocationId() {
+	o.LocationId.Unset()
 }
 
 func (o CreateAssetGITHUBREPOSITORYRequestOrg) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -292,17 +322,17 @@ func (o CreateAssetGITHUBREPOSITORYRequestOrg) ToMap() (map[string]interface{}, 
 	if !IsNil(o.ExtraMetadata) {
 		toSerialize["extra_metadata"] = o.ExtraMetadata
 	}
-	if !IsNil(o.ScreenshotS3Key) {
-		toSerialize["screenshot_s3_key"] = o.ScreenshotS3Key
+	if o.ScreenshotS3Key.IsSet() {
+		toSerialize["screenshot_s3_key"] = o.ScreenshotS3Key.Get()
 	}
 	toSerialize["asset_type"] = o.AssetType
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
+	if o.Name.IsSet() {
+		toSerialize["name"] = o.Name.Get()
 	}
 	toSerialize["immutable_key"] = o.ImmutableKey
 	toSerialize["api_key"] = o.ApiKey
-	if !IsNil(o.LocationId) {
-		toSerialize["location_id"] = o.LocationId
+	if o.LocationId.IsSet() {
+		toSerialize["location_id"] = o.LocationId.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -328,10 +358,10 @@ func (o *CreateAssetGITHUBREPOSITORYRequestOrg) UnmarshalJSON(data []byte) (err 
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -399,3 +429,5 @@ func (v *NullableCreateAssetGITHUBREPOSITORYRequestOrg) UnmarshalJSON(src []byte
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

@@ -21,8 +21,8 @@ var _ MappedNullable = &CreateExportWorkflowActionUsingJiraParametersPropertiesM
 // CreateExportWorkflowActionUsingJiraParametersPropertiesMappingInnerOneOfMapInner struct for CreateExportWorkflowActionUsingJiraParametersPropertiesMappingInnerOneOfMapInner
 type CreateExportWorkflowActionUsingJiraParametersPropertiesMappingInnerOneOfMapInner struct {
 	// The value of the Escape field, stored as a json value to be parsed into a specific format depending on the Escape field type.
-	EscapeValue          *string                                                                                           `json:"escapeValue,omitempty"`
-	JiraValue            NullableCreateExportWorkflowActionUsingJiraParametersPropertiesMappingInnerOneOfMapInnerJiraValue `json:"jiraValue"`
+	EscapeValue NullableString `json:"escapeValue"`
+	JiraValue NullableCreateExportWorkflowActionUsingJiraParametersPropertiesMappingInnerOneOfMapInnerJiraValue `json:"jiraValue"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -32,8 +32,9 @@ type _CreateExportWorkflowActionUsingJiraParametersPropertiesMappingInnerOneOfMa
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateExportWorkflowActionUsingJiraParametersPropertiesMappingInnerOneOfMapInner(jiraValue NullableCreateExportWorkflowActionUsingJiraParametersPropertiesMappingInnerOneOfMapInnerJiraValue) *CreateExportWorkflowActionUsingJiraParametersPropertiesMappingInnerOneOfMapInner {
+func NewCreateExportWorkflowActionUsingJiraParametersPropertiesMappingInnerOneOfMapInner(escapeValue NullableString, jiraValue NullableCreateExportWorkflowActionUsingJiraParametersPropertiesMappingInnerOneOfMapInnerJiraValue) *CreateExportWorkflowActionUsingJiraParametersPropertiesMappingInnerOneOfMapInner {
 	this := CreateExportWorkflowActionUsingJiraParametersPropertiesMappingInnerOneOfMapInner{}
+	this.EscapeValue = escapeValue
 	this.JiraValue = jiraValue
 	return &this
 }
@@ -46,36 +47,30 @@ func NewCreateExportWorkflowActionUsingJiraParametersPropertiesMappingInnerOneOf
 	return &this
 }
 
-// GetEscapeValue returns the EscapeValue field value if set, zero value otherwise.
+// GetEscapeValue returns the EscapeValue field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *CreateExportWorkflowActionUsingJiraParametersPropertiesMappingInnerOneOfMapInner) GetEscapeValue() string {
-	if o == nil || IsNil(o.EscapeValue) {
+	if o == nil || o.EscapeValue.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.EscapeValue
+
+	return *o.EscapeValue.Get()
 }
 
-// GetEscapeValueOk returns a tuple with the EscapeValue field value if set, nil otherwise
+// GetEscapeValueOk returns a tuple with the EscapeValue field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateExportWorkflowActionUsingJiraParametersPropertiesMappingInnerOneOfMapInner) GetEscapeValueOk() (*string, bool) {
-	if o == nil || IsNil(o.EscapeValue) {
+	if o == nil {
 		return nil, false
 	}
-	return o.EscapeValue, true
+	return o.EscapeValue.Get(), o.EscapeValue.IsSet()
 }
 
-// HasEscapeValue returns a boolean if a field has been set.
-func (o *CreateExportWorkflowActionUsingJiraParametersPropertiesMappingInnerOneOfMapInner) HasEscapeValue() bool {
-	if o != nil && !IsNil(o.EscapeValue) {
-		return true
-	}
-
-	return false
-}
-
-// SetEscapeValue gets a reference to the given string and assigns it to the EscapeValue field.
+// SetEscapeValue sets field value
 func (o *CreateExportWorkflowActionUsingJiraParametersPropertiesMappingInnerOneOfMapInner) SetEscapeValue(v string) {
-	o.EscapeValue = &v
+	o.EscapeValue.Set(&v)
 }
 
 // GetJiraValue returns the JiraValue field value
@@ -105,7 +100,7 @@ func (o *CreateExportWorkflowActionUsingJiraParametersPropertiesMappingInnerOneO
 }
 
 func (o CreateExportWorkflowActionUsingJiraParametersPropertiesMappingInnerOneOfMapInner) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -114,9 +109,7 @@ func (o CreateExportWorkflowActionUsingJiraParametersPropertiesMappingInnerOneOf
 
 func (o CreateExportWorkflowActionUsingJiraParametersPropertiesMappingInnerOneOfMapInner) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.EscapeValue) {
-		toSerialize["escapeValue"] = o.EscapeValue
-	}
+	toSerialize["escapeValue"] = o.EscapeValue.Get()
 	toSerialize["jiraValue"] = o.JiraValue.Get()
 
 	for key, value := range o.AdditionalProperties {
@@ -131,6 +124,7 @@ func (o *CreateExportWorkflowActionUsingJiraParametersPropertiesMappingInnerOneO
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"escapeValue",
 		"jiraValue",
 	}
 
@@ -139,10 +133,10 @@ func (o *CreateExportWorkflowActionUsingJiraParametersPropertiesMappingInnerOneO
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -204,3 +198,5 @@ func (v *NullableCreateExportWorkflowActionUsingJiraParametersPropertiesMappingI
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

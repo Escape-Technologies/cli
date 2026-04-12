@@ -20,11 +20,11 @@ var _ MappedNullable = &UpdatebitbucketIntegrationRequestParameters{}
 
 // UpdatebitbucketIntegrationRequestParameters The new parameters of the integration
 type UpdatebitbucketIntegrationRequestParameters struct {
-	Email                string  `json:"email"`
-	ApiKey               string  `json:"api_key"`
-	WorkspaceSlug        string  `json:"workspace_slug"`
-	InstanceUrl          *string `json:"instance_url,omitempty"`
-	LocationId           *string `json:"location_id,omitempty"`
+	Email string `json:"email"`
+	ApiKey string `json:"api_key"`
+	WorkspaceSlug string `json:"workspace_slug"`
+	InstanceUrl NullableString `json:"instance_url,omitempty"`
+	LocationId NullableString `json:"location_id,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -122,72 +122,92 @@ func (o *UpdatebitbucketIntegrationRequestParameters) SetWorkspaceSlug(v string)
 	o.WorkspaceSlug = v
 }
 
-// GetInstanceUrl returns the InstanceUrl field value if set, zero value otherwise.
+// GetInstanceUrl returns the InstanceUrl field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *UpdatebitbucketIntegrationRequestParameters) GetInstanceUrl() string {
-	if o == nil || IsNil(o.InstanceUrl) {
+	if o == nil || IsNil(o.InstanceUrl.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.InstanceUrl
+	return *o.InstanceUrl.Get()
 }
 
 // GetInstanceUrlOk returns a tuple with the InstanceUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *UpdatebitbucketIntegrationRequestParameters) GetInstanceUrlOk() (*string, bool) {
-	if o == nil || IsNil(o.InstanceUrl) {
+	if o == nil {
 		return nil, false
 	}
-	return o.InstanceUrl, true
+	return o.InstanceUrl.Get(), o.InstanceUrl.IsSet()
 }
 
 // HasInstanceUrl returns a boolean if a field has been set.
 func (o *UpdatebitbucketIntegrationRequestParameters) HasInstanceUrl() bool {
-	if o != nil && !IsNil(o.InstanceUrl) {
+	if o != nil && o.InstanceUrl.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInstanceUrl gets a reference to the given string and assigns it to the InstanceUrl field.
+// SetInstanceUrl gets a reference to the given NullableString and assigns it to the InstanceUrl field.
 func (o *UpdatebitbucketIntegrationRequestParameters) SetInstanceUrl(v string) {
-	o.InstanceUrl = &v
+	o.InstanceUrl.Set(&v)
+}
+// SetInstanceUrlNil sets the value for InstanceUrl to be an explicit nil
+func (o *UpdatebitbucketIntegrationRequestParameters) SetInstanceUrlNil() {
+	o.InstanceUrl.Set(nil)
 }
 
-// GetLocationId returns the LocationId field value if set, zero value otherwise.
+// UnsetInstanceUrl ensures that no value is present for InstanceUrl, not even an explicit nil
+func (o *UpdatebitbucketIntegrationRequestParameters) UnsetInstanceUrl() {
+	o.InstanceUrl.Unset()
+}
+
+// GetLocationId returns the LocationId field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *UpdatebitbucketIntegrationRequestParameters) GetLocationId() string {
-	if o == nil || IsNil(o.LocationId) {
+	if o == nil || IsNil(o.LocationId.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.LocationId
+	return *o.LocationId.Get()
 }
 
 // GetLocationIdOk returns a tuple with the LocationId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *UpdatebitbucketIntegrationRequestParameters) GetLocationIdOk() (*string, bool) {
-	if o == nil || IsNil(o.LocationId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.LocationId, true
+	return o.LocationId.Get(), o.LocationId.IsSet()
 }
 
 // HasLocationId returns a boolean if a field has been set.
 func (o *UpdatebitbucketIntegrationRequestParameters) HasLocationId() bool {
-	if o != nil && !IsNil(o.LocationId) {
+	if o != nil && o.LocationId.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetLocationId gets a reference to the given string and assigns it to the LocationId field.
+// SetLocationId gets a reference to the given NullableString and assigns it to the LocationId field.
 func (o *UpdatebitbucketIntegrationRequestParameters) SetLocationId(v string) {
-	o.LocationId = &v
+	o.LocationId.Set(&v)
+}
+// SetLocationIdNil sets the value for LocationId to be an explicit nil
+func (o *UpdatebitbucketIntegrationRequestParameters) SetLocationIdNil() {
+	o.LocationId.Set(nil)
+}
+
+// UnsetLocationId ensures that no value is present for LocationId, not even an explicit nil
+func (o *UpdatebitbucketIntegrationRequestParameters) UnsetLocationId() {
+	o.LocationId.Unset()
 }
 
 func (o UpdatebitbucketIntegrationRequestParameters) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -199,11 +219,11 @@ func (o UpdatebitbucketIntegrationRequestParameters) ToMap() (map[string]interfa
 	toSerialize["email"] = o.Email
 	toSerialize["api_key"] = o.ApiKey
 	toSerialize["workspace_slug"] = o.WorkspaceSlug
-	if !IsNil(o.InstanceUrl) {
-		toSerialize["instance_url"] = o.InstanceUrl
+	if o.InstanceUrl.IsSet() {
+		toSerialize["instance_url"] = o.InstanceUrl.Get()
 	}
-	if !IsNil(o.LocationId) {
-		toSerialize["location_id"] = o.LocationId
+	if o.LocationId.IsSet() {
+		toSerialize["location_id"] = o.LocationId.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -228,10 +248,10 @@ func (o *UpdatebitbucketIntegrationRequestParameters) UnmarshalJSON(data []byte)
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -296,3 +316,5 @@ func (v *NullableUpdatebitbucketIntegrationRequestParameters) UnmarshalJSON(src 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

@@ -19,9 +19,9 @@ var _ MappedNullable = &CreateAssetDNSRequestPathsInsightsInnerParametersRequest
 
 // CreateAssetDNSRequestPathsInsightsInnerParametersRequestBody struct for CreateAssetDNSRequestPathsInsightsInnerParametersRequestBody
 type CreateAssetDNSRequestPathsInsightsInnerParametersRequestBody struct {
-	Required             *bool                                                                                   `json:"required,omitempty"`
-	Description          *string                                                                                 `json:"description,omitempty"`
-	Content              map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValue `json:"content,omitempty"`
+	Required NullableBool `json:"required,omitempty"`
+	Description NullableString `json:"description,omitempty"`
+	Content *map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValue `json:"content,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -44,68 +44,88 @@ func NewCreateAssetDNSRequestPathsInsightsInnerParametersRequestBodyWithDefaults
 	return &this
 }
 
-// GetRequired returns the Required field value if set, zero value otherwise.
+// GetRequired returns the Required field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersRequestBody) GetRequired() bool {
-	if o == nil || IsNil(o.Required) {
+	if o == nil || IsNil(o.Required.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.Required
+	return *o.Required.Get()
 }
 
 // GetRequiredOk returns a tuple with the Required field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersRequestBody) GetRequiredOk() (*bool, bool) {
-	if o == nil || IsNil(o.Required) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Required, true
+	return o.Required.Get(), o.Required.IsSet()
 }
 
 // HasRequired returns a boolean if a field has been set.
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersRequestBody) HasRequired() bool {
-	if o != nil && !IsNil(o.Required) {
+	if o != nil && o.Required.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRequired gets a reference to the given bool and assigns it to the Required field.
+// SetRequired gets a reference to the given NullableBool and assigns it to the Required field.
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersRequestBody) SetRequired(v bool) {
-	o.Required = &v
+	o.Required.Set(&v)
+}
+// SetRequiredNil sets the value for Required to be an explicit nil
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersRequestBody) SetRequiredNil() {
+	o.Required.Set(nil)
 }
 
-// GetDescription returns the Description field value if set, zero value otherwise.
+// UnsetRequired ensures that no value is present for Required, not even an explicit nil
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersRequestBody) UnsetRequired() {
+	o.Required.Unset()
+}
+
+// GetDescription returns the Description field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersRequestBody) GetDescription() string {
-	if o == nil || IsNil(o.Description) {
+	if o == nil || IsNil(o.Description.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Description
+	return *o.Description.Get()
 }
 
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersRequestBody) GetDescriptionOk() (*string, bool) {
-	if o == nil || IsNil(o.Description) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Description, true
+	return o.Description.Get(), o.Description.IsSet()
 }
 
 // HasDescription returns a boolean if a field has been set.
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersRequestBody) HasDescription() bool {
-	if o != nil && !IsNil(o.Description) {
+	if o != nil && o.Description.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetDescription gets a reference to the given string and assigns it to the Description field.
+// SetDescription gets a reference to the given NullableString and assigns it to the Description field.
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersRequestBody) SetDescription(v string) {
-	o.Description = &v
+	o.Description.Set(&v)
+}
+// SetDescriptionNil sets the value for Description to be an explicit nil
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersRequestBody) SetDescriptionNil() {
+	o.Description.Set(nil)
+}
+
+// UnsetDescription ensures that no value is present for Description, not even an explicit nil
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersRequestBody) UnsetDescription() {
+	o.Description.Unset()
 }
 
 // GetContent returns the Content field value if set, zero value otherwise.
@@ -114,14 +134,14 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerParametersRequestBody) GetConten
 		var ret map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValue
 		return ret
 	}
-	return o.Content
+	return *o.Content
 }
 
 // GetContentOk returns a tuple with the Content field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetDNSRequestPathsInsightsInnerParametersRequestBody) GetContentOk() (map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValue, bool) {
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersRequestBody) GetContentOk() (*map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValue, bool) {
 	if o == nil || IsNil(o.Content) {
-		return map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValue{}, false
+		return nil, false
 	}
 	return o.Content, true
 }
@@ -137,11 +157,11 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerParametersRequestBody) HasConten
 
 // SetContent gets a reference to the given map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValue and assigns it to the Content field.
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersRequestBody) SetContent(v map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValue) {
-	o.Content = v
+	o.Content = &v
 }
 
 func (o CreateAssetDNSRequestPathsInsightsInnerParametersRequestBody) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -150,11 +170,11 @@ func (o CreateAssetDNSRequestPathsInsightsInnerParametersRequestBody) MarshalJSO
 
 func (o CreateAssetDNSRequestPathsInsightsInnerParametersRequestBody) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Required) {
-		toSerialize["required"] = o.Required
+	if o.Required.IsSet() {
+		toSerialize["required"] = o.Required.Get()
 	}
-	if !IsNil(o.Description) {
-		toSerialize["description"] = o.Description
+	if o.Description.IsSet() {
+		toSerialize["description"] = o.Description.Get()
 	}
 	if !IsNil(o.Content) {
 		toSerialize["content"] = o.Content
@@ -225,3 +245,5 @@ func (v *NullableCreateAssetDNSRequestPathsInsightsInnerParametersRequestBody) U
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

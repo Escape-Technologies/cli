@@ -19,14 +19,14 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationAuthentication{}
 
 // GetProfile200ResponseConfigurationAuthentication struct for GetProfile200ResponseConfigurationAuthentication
 type GetProfile200ResponseConfigurationAuthentication struct {
-	Schema               *string                                                           `json:"$schema,omitempty"`
-	Lifetime             *float32                                                          `json:"lifetime,omitempty"`
-	Procedures           []GetProfile200ResponseConfigurationAuthenticationProceduresInner `json:"procedures,omitempty"`
-	Users                []GetProfile200ResponseConfigurationAuthenticationUsersInner      `json:"users,omitempty"`
-	Validation           *bool                                                             `json:"validation,omitempty"`
-	Proxy                *string                                                           `json:"proxy,omitempty"`
-	Presets              []GetProfile200ResponseConfigurationAuthenticationPresetsInner    `json:"presets,omitempty"`
-	MultiUserIsFallback  *bool                                                             `json:"multi_user_is_fallback,omitempty"`
+	Schema *string `json:"$schema,omitempty"`
+	Lifetime NullableFloat32 `json:"lifetime,omitempty"`
+	Procedures []GetProfile200ResponseConfigurationAuthenticationProceduresInner `json:"procedures,omitempty"`
+	Users []GetProfile200ResponseConfigurationAuthenticationUsersInner `json:"users,omitempty"`
+	Validation *bool `json:"validation,omitempty"`
+	Proxy *string `json:"proxy,omitempty"`
+	Presets []GetProfile200ResponseConfigurationAuthenticationPresetsInner `json:"presets,omitempty"`
+	MultiUserIsFallback NullableBool `json:"multi_user_is_fallback,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -81,36 +81,46 @@ func (o *GetProfile200ResponseConfigurationAuthentication) SetSchema(v string) {
 	o.Schema = &v
 }
 
-// GetLifetime returns the Lifetime field value if set, zero value otherwise.
+// GetLifetime returns the Lifetime field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationAuthentication) GetLifetime() float32 {
-	if o == nil || IsNil(o.Lifetime) {
+	if o == nil || IsNil(o.Lifetime.Get()) {
 		var ret float32
 		return ret
 	}
-	return *o.Lifetime
+	return *o.Lifetime.Get()
 }
 
 // GetLifetimeOk returns a tuple with the Lifetime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationAuthentication) GetLifetimeOk() (*float32, bool) {
-	if o == nil || IsNil(o.Lifetime) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Lifetime, true
+	return o.Lifetime.Get(), o.Lifetime.IsSet()
 }
 
 // HasLifetime returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationAuthentication) HasLifetime() bool {
-	if o != nil && !IsNil(o.Lifetime) {
+	if o != nil && o.Lifetime.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetLifetime gets a reference to the given float32 and assigns it to the Lifetime field.
+// SetLifetime gets a reference to the given NullableFloat32 and assigns it to the Lifetime field.
 func (o *GetProfile200ResponseConfigurationAuthentication) SetLifetime(v float32) {
-	o.Lifetime = &v
+	o.Lifetime.Set(&v)
+}
+// SetLifetimeNil sets the value for Lifetime to be an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthentication) SetLifetimeNil() {
+	o.Lifetime.Set(nil)
+}
+
+// UnsetLifetime ensures that no value is present for Lifetime, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthentication) UnsetLifetime() {
+	o.Lifetime.Unset()
 }
 
 // GetProcedures returns the Procedures field value if set, zero value otherwise.
@@ -273,40 +283,50 @@ func (o *GetProfile200ResponseConfigurationAuthentication) SetPresets(v []GetPro
 	o.Presets = v
 }
 
-// GetMultiUserIsFallback returns the MultiUserIsFallback field value if set, zero value otherwise.
+// GetMultiUserIsFallback returns the MultiUserIsFallback field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationAuthentication) GetMultiUserIsFallback() bool {
-	if o == nil || IsNil(o.MultiUserIsFallback) {
+	if o == nil || IsNil(o.MultiUserIsFallback.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.MultiUserIsFallback
+	return *o.MultiUserIsFallback.Get()
 }
 
 // GetMultiUserIsFallbackOk returns a tuple with the MultiUserIsFallback field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationAuthentication) GetMultiUserIsFallbackOk() (*bool, bool) {
-	if o == nil || IsNil(o.MultiUserIsFallback) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MultiUserIsFallback, true
+	return o.MultiUserIsFallback.Get(), o.MultiUserIsFallback.IsSet()
 }
 
 // HasMultiUserIsFallback returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationAuthentication) HasMultiUserIsFallback() bool {
-	if o != nil && !IsNil(o.MultiUserIsFallback) {
+	if o != nil && o.MultiUserIsFallback.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetMultiUserIsFallback gets a reference to the given bool and assigns it to the MultiUserIsFallback field.
+// SetMultiUserIsFallback gets a reference to the given NullableBool and assigns it to the MultiUserIsFallback field.
 func (o *GetProfile200ResponseConfigurationAuthentication) SetMultiUserIsFallback(v bool) {
-	o.MultiUserIsFallback = &v
+	o.MultiUserIsFallback.Set(&v)
+}
+// SetMultiUserIsFallbackNil sets the value for MultiUserIsFallback to be an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthentication) SetMultiUserIsFallbackNil() {
+	o.MultiUserIsFallback.Set(nil)
+}
+
+// UnsetMultiUserIsFallback ensures that no value is present for MultiUserIsFallback, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthentication) UnsetMultiUserIsFallback() {
+	o.MultiUserIsFallback.Unset()
 }
 
 func (o GetProfile200ResponseConfigurationAuthentication) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -318,8 +338,8 @@ func (o GetProfile200ResponseConfigurationAuthentication) ToMap() (map[string]in
 	if !IsNil(o.Schema) {
 		toSerialize["$schema"] = o.Schema
 	}
-	if !IsNil(o.Lifetime) {
-		toSerialize["lifetime"] = o.Lifetime
+	if o.Lifetime.IsSet() {
+		toSerialize["lifetime"] = o.Lifetime.Get()
 	}
 	if !IsNil(o.Procedures) {
 		toSerialize["procedures"] = o.Procedures
@@ -336,8 +356,8 @@ func (o GetProfile200ResponseConfigurationAuthentication) ToMap() (map[string]in
 	if !IsNil(o.Presets) {
 		toSerialize["presets"] = o.Presets
 	}
-	if !IsNil(o.MultiUserIsFallback) {
-		toSerialize["multi_user_is_fallback"] = o.MultiUserIsFallback
+	if o.MultiUserIsFallback.IsSet() {
+		toSerialize["multi_user_is_fallback"] = o.MultiUserIsFallback.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -410,3 +430,5 @@ func (v *NullableGetProfile200ResponseConfigurationAuthentication) UnmarshalJSON
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

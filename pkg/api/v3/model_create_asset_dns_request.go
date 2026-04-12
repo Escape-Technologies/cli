@@ -23,22 +23,22 @@ type CreateAssetDNSRequest struct {
 	// The list of project IDs bind the asset on.
 	ProjectIds []string `json:"projectIds,omitempty"`
 	// The custom name of the asset. If not provided, the default name will be used.
-	Name                 *string                                   `json:"name,omitempty"`
-	AssetClass           ENUMHOST                                  `json:"asset_class"`
-	ExtraMetadata        map[string]interface{}                    `json:"extra_metadata,omitempty"`
-	ScreenshotS3Key      *string                                   `json:"screenshot_s3_key,omitempty"`
-	AssetType            ENUMDNS                                   `json:"asset_type"`
-	Address              string                                    `json:"address"`
-	Favicon              *string                                   `json:"favicon,omitempty"`
-	OpenPorts            []CreateAssetDNSRequestOpenPortsInner     `json:"open_ports,omitempty"`
-	PortsInsights        []float32                                 `json:"ports_insights,omitempty"`
-	PathsInsights        []CreateAssetDNSRequestPathsInsightsInner `json:"paths_insights,omitempty"`
-	Private              *bool                                     `json:"private,omitempty"`
-	ThirdParty           *ENUMPROPERTIESTHIRDPARTY                 `json:"third_party,omitempty"`
-	DnsRecords           []CreateAssetDNSRequestDnsRecordsInner    `json:"dns_records,omitempty"`
-	Ips                  []string                                  `json:"ips,omitempty"`
-	RegionCountryCodes   []string                                  `json:"region_country_codes,omitempty"`
-	Registrar            *string                                   `json:"registrar,omitempty"`
+	Name NullableString `json:"name,omitempty"`
+	AssetClass ENUMHOST `json:"asset_class"`
+	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
+	ScreenshotS3Key NullableString `json:"screenshot_s3_key,omitempty"`
+	AssetType ENUMDNS `json:"asset_type"`
+	Address string `json:"address"`
+	Favicon NullableString `json:"favicon,omitempty"`
+	OpenPorts []CreateAssetDNSRequestOpenPortsInner `json:"open_ports,omitempty"`
+	PortsInsights []float32 `json:"ports_insights,omitempty"`
+	PathsInsights []CreateAssetDNSRequestPathsInsightsInner `json:"paths_insights,omitempty"`
+	Private NullableBool `json:"private,omitempty"`
+	ThirdParty NullableENUMPROPERTIESTHIRDPARTY `json:"third_party,omitempty"`
+	DnsRecords []CreateAssetDNSRequestDnsRecordsInner `json:"dns_records,omitempty"`
+	Ips []string `json:"ips,omitempty"`
+	RegionCountryCodes []string `json:"region_country_codes,omitempty"`
+	Registrar NullableString `json:"registrar,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -64,9 +64,9 @@ func NewCreateAssetDNSRequestWithDefaults() *CreateAssetDNSRequest {
 	return &this
 }
 
-// GetProjectIds returns the ProjectIds field value if set, zero value otherwise.
+// GetProjectIds returns the ProjectIds field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetDNSRequest) GetProjectIds() []string {
-	if o == nil || IsNil(o.ProjectIds) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -75,6 +75,7 @@ func (o *CreateAssetDNSRequest) GetProjectIds() []string {
 
 // GetProjectIdsOk returns a tuple with the ProjectIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetDNSRequest) GetProjectIdsOk() ([]string, bool) {
 	if o == nil || IsNil(o.ProjectIds) {
 		return nil, false
@@ -96,36 +97,46 @@ func (o *CreateAssetDNSRequest) SetProjectIds(v []string) {
 	o.ProjectIds = v
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
+// GetName returns the Name field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetDNSRequest) GetName() string {
-	if o == nil || IsNil(o.Name) {
+	if o == nil || IsNil(o.Name.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Name
+	return *o.Name.Get()
 }
 
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetDNSRequest) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Name, true
+	return o.Name.Get(), o.Name.IsSet()
 }
 
 // HasName returns a boolean if a field has been set.
 func (o *CreateAssetDNSRequest) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
+	if o != nil && o.Name.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetName gets a reference to the given string and assigns it to the Name field.
+// SetName gets a reference to the given NullableString and assigns it to the Name field.
 func (o *CreateAssetDNSRequest) SetName(v string) {
-	o.Name = &v
+	o.Name.Set(&v)
+}
+// SetNameNil sets the value for Name to be an explicit nil
+func (o *CreateAssetDNSRequest) SetNameNil() {
+	o.Name.Set(nil)
+}
+
+// UnsetName ensures that no value is present for Name, not even an explicit nil
+func (o *CreateAssetDNSRequest) UnsetName() {
+	o.Name.Unset()
 }
 
 // GetAssetClass returns the AssetClass field value
@@ -184,36 +195,46 @@ func (o *CreateAssetDNSRequest) SetExtraMetadata(v map[string]interface{}) {
 	o.ExtraMetadata = v
 }
 
-// GetScreenshotS3Key returns the ScreenshotS3Key field value if set, zero value otherwise.
+// GetScreenshotS3Key returns the ScreenshotS3Key field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetDNSRequest) GetScreenshotS3Key() string {
-	if o == nil || IsNil(o.ScreenshotS3Key) {
+	if o == nil || IsNil(o.ScreenshotS3Key.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.ScreenshotS3Key
+	return *o.ScreenshotS3Key.Get()
 }
 
 // GetScreenshotS3KeyOk returns a tuple with the ScreenshotS3Key field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetDNSRequest) GetScreenshotS3KeyOk() (*string, bool) {
-	if o == nil || IsNil(o.ScreenshotS3Key) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ScreenshotS3Key, true
+	return o.ScreenshotS3Key.Get(), o.ScreenshotS3Key.IsSet()
 }
 
 // HasScreenshotS3Key returns a boolean if a field has been set.
 func (o *CreateAssetDNSRequest) HasScreenshotS3Key() bool {
-	if o != nil && !IsNil(o.ScreenshotS3Key) {
+	if o != nil && o.ScreenshotS3Key.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetScreenshotS3Key gets a reference to the given string and assigns it to the ScreenshotS3Key field.
+// SetScreenshotS3Key gets a reference to the given NullableString and assigns it to the ScreenshotS3Key field.
 func (o *CreateAssetDNSRequest) SetScreenshotS3Key(v string) {
-	o.ScreenshotS3Key = &v
+	o.ScreenshotS3Key.Set(&v)
+}
+// SetScreenshotS3KeyNil sets the value for ScreenshotS3Key to be an explicit nil
+func (o *CreateAssetDNSRequest) SetScreenshotS3KeyNil() {
+	o.ScreenshotS3Key.Set(nil)
+}
+
+// UnsetScreenshotS3Key ensures that no value is present for ScreenshotS3Key, not even an explicit nil
+func (o *CreateAssetDNSRequest) UnsetScreenshotS3Key() {
+	o.ScreenshotS3Key.Unset()
 }
 
 // GetAssetType returns the AssetType field value
@@ -264,41 +285,51 @@ func (o *CreateAssetDNSRequest) SetAddress(v string) {
 	o.Address = v
 }
 
-// GetFavicon returns the Favicon field value if set, zero value otherwise.
+// GetFavicon returns the Favicon field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetDNSRequest) GetFavicon() string {
-	if o == nil || IsNil(o.Favicon) {
+	if o == nil || IsNil(o.Favicon.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Favicon
+	return *o.Favicon.Get()
 }
 
 // GetFaviconOk returns a tuple with the Favicon field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetDNSRequest) GetFaviconOk() (*string, bool) {
-	if o == nil || IsNil(o.Favicon) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Favicon, true
+	return o.Favicon.Get(), o.Favicon.IsSet()
 }
 
 // HasFavicon returns a boolean if a field has been set.
 func (o *CreateAssetDNSRequest) HasFavicon() bool {
-	if o != nil && !IsNil(o.Favicon) {
+	if o != nil && o.Favicon.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetFavicon gets a reference to the given string and assigns it to the Favicon field.
+// SetFavicon gets a reference to the given NullableString and assigns it to the Favicon field.
 func (o *CreateAssetDNSRequest) SetFavicon(v string) {
-	o.Favicon = &v
+	o.Favicon.Set(&v)
+}
+// SetFaviconNil sets the value for Favicon to be an explicit nil
+func (o *CreateAssetDNSRequest) SetFaviconNil() {
+	o.Favicon.Set(nil)
 }
 
-// GetOpenPorts returns the OpenPorts field value if set, zero value otherwise.
+// UnsetFavicon ensures that no value is present for Favicon, not even an explicit nil
+func (o *CreateAssetDNSRequest) UnsetFavicon() {
+	o.Favicon.Unset()
+}
+
+// GetOpenPorts returns the OpenPorts field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetDNSRequest) GetOpenPorts() []CreateAssetDNSRequestOpenPortsInner {
-	if o == nil || IsNil(o.OpenPorts) {
+	if o == nil {
 		var ret []CreateAssetDNSRequestOpenPortsInner
 		return ret
 	}
@@ -307,6 +338,7 @@ func (o *CreateAssetDNSRequest) GetOpenPorts() []CreateAssetDNSRequestOpenPortsI
 
 // GetOpenPortsOk returns a tuple with the OpenPorts field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetDNSRequest) GetOpenPortsOk() ([]CreateAssetDNSRequestOpenPortsInner, bool) {
 	if o == nil || IsNil(o.OpenPorts) {
 		return nil, false
@@ -328,9 +360,9 @@ func (o *CreateAssetDNSRequest) SetOpenPorts(v []CreateAssetDNSRequestOpenPortsI
 	o.OpenPorts = v
 }
 
-// GetPortsInsights returns the PortsInsights field value if set, zero value otherwise.
+// GetPortsInsights returns the PortsInsights field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetDNSRequest) GetPortsInsights() []float32 {
-	if o == nil || IsNil(o.PortsInsights) {
+	if o == nil {
 		var ret []float32
 		return ret
 	}
@@ -339,6 +371,7 @@ func (o *CreateAssetDNSRequest) GetPortsInsights() []float32 {
 
 // GetPortsInsightsOk returns a tuple with the PortsInsights field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetDNSRequest) GetPortsInsightsOk() ([]float32, bool) {
 	if o == nil || IsNil(o.PortsInsights) {
 		return nil, false
@@ -360,9 +393,9 @@ func (o *CreateAssetDNSRequest) SetPortsInsights(v []float32) {
 	o.PortsInsights = v
 }
 
-// GetPathsInsights returns the PathsInsights field value if set, zero value otherwise.
+// GetPathsInsights returns the PathsInsights field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetDNSRequest) GetPathsInsights() []CreateAssetDNSRequestPathsInsightsInner {
-	if o == nil || IsNil(o.PathsInsights) {
+	if o == nil {
 		var ret []CreateAssetDNSRequestPathsInsightsInner
 		return ret
 	}
@@ -371,6 +404,7 @@ func (o *CreateAssetDNSRequest) GetPathsInsights() []CreateAssetDNSRequestPathsI
 
 // GetPathsInsightsOk returns a tuple with the PathsInsights field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetDNSRequest) GetPathsInsightsOk() ([]CreateAssetDNSRequestPathsInsightsInner, bool) {
 	if o == nil || IsNil(o.PathsInsights) {
 		return nil, false
@@ -392,73 +426,93 @@ func (o *CreateAssetDNSRequest) SetPathsInsights(v []CreateAssetDNSRequestPathsI
 	o.PathsInsights = v
 }
 
-// GetPrivate returns the Private field value if set, zero value otherwise.
+// GetPrivate returns the Private field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetDNSRequest) GetPrivate() bool {
-	if o == nil || IsNil(o.Private) {
+	if o == nil || IsNil(o.Private.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.Private
+	return *o.Private.Get()
 }
 
 // GetPrivateOk returns a tuple with the Private field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetDNSRequest) GetPrivateOk() (*bool, bool) {
-	if o == nil || IsNil(o.Private) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Private, true
+	return o.Private.Get(), o.Private.IsSet()
 }
 
 // HasPrivate returns a boolean if a field has been set.
 func (o *CreateAssetDNSRequest) HasPrivate() bool {
-	if o != nil && !IsNil(o.Private) {
+	if o != nil && o.Private.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPrivate gets a reference to the given bool and assigns it to the Private field.
+// SetPrivate gets a reference to the given NullableBool and assigns it to the Private field.
 func (o *CreateAssetDNSRequest) SetPrivate(v bool) {
-	o.Private = &v
+	o.Private.Set(&v)
+}
+// SetPrivateNil sets the value for Private to be an explicit nil
+func (o *CreateAssetDNSRequest) SetPrivateNil() {
+	o.Private.Set(nil)
 }
 
-// GetThirdParty returns the ThirdParty field value if set, zero value otherwise.
+// UnsetPrivate ensures that no value is present for Private, not even an explicit nil
+func (o *CreateAssetDNSRequest) UnsetPrivate() {
+	o.Private.Unset()
+}
+
+// GetThirdParty returns the ThirdParty field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetDNSRequest) GetThirdParty() ENUMPROPERTIESTHIRDPARTY {
-	if o == nil || IsNil(o.ThirdParty) {
+	if o == nil || IsNil(o.ThirdParty.Get()) {
 		var ret ENUMPROPERTIESTHIRDPARTY
 		return ret
 	}
-	return *o.ThirdParty
+	return *o.ThirdParty.Get()
 }
 
 // GetThirdPartyOk returns a tuple with the ThirdParty field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetDNSRequest) GetThirdPartyOk() (*ENUMPROPERTIESTHIRDPARTY, bool) {
-	if o == nil || IsNil(o.ThirdParty) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ThirdParty, true
+	return o.ThirdParty.Get(), o.ThirdParty.IsSet()
 }
 
 // HasThirdParty returns a boolean if a field has been set.
 func (o *CreateAssetDNSRequest) HasThirdParty() bool {
-	if o != nil && !IsNil(o.ThirdParty) {
+	if o != nil && o.ThirdParty.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetThirdParty gets a reference to the given ENUMPROPERTIESTHIRDPARTY and assigns it to the ThirdParty field.
+// SetThirdParty gets a reference to the given NullableENUMPROPERTIESTHIRDPARTY and assigns it to the ThirdParty field.
 func (o *CreateAssetDNSRequest) SetThirdParty(v ENUMPROPERTIESTHIRDPARTY) {
-	o.ThirdParty = &v
+	o.ThirdParty.Set(&v)
+}
+// SetThirdPartyNil sets the value for ThirdParty to be an explicit nil
+func (o *CreateAssetDNSRequest) SetThirdPartyNil() {
+	o.ThirdParty.Set(nil)
 }
 
-// GetDnsRecords returns the DnsRecords field value if set, zero value otherwise.
+// UnsetThirdParty ensures that no value is present for ThirdParty, not even an explicit nil
+func (o *CreateAssetDNSRequest) UnsetThirdParty() {
+	o.ThirdParty.Unset()
+}
+
+// GetDnsRecords returns the DnsRecords field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetDNSRequest) GetDnsRecords() []CreateAssetDNSRequestDnsRecordsInner {
-	if o == nil || IsNil(o.DnsRecords) {
+	if o == nil {
 		var ret []CreateAssetDNSRequestDnsRecordsInner
 		return ret
 	}
@@ -467,6 +521,7 @@ func (o *CreateAssetDNSRequest) GetDnsRecords() []CreateAssetDNSRequestDnsRecord
 
 // GetDnsRecordsOk returns a tuple with the DnsRecords field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetDNSRequest) GetDnsRecordsOk() ([]CreateAssetDNSRequestDnsRecordsInner, bool) {
 	if o == nil || IsNil(o.DnsRecords) {
 		return nil, false
@@ -488,9 +543,9 @@ func (o *CreateAssetDNSRequest) SetDnsRecords(v []CreateAssetDNSRequestDnsRecord
 	o.DnsRecords = v
 }
 
-// GetIps returns the Ips field value if set, zero value otherwise.
+// GetIps returns the Ips field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetDNSRequest) GetIps() []string {
-	if o == nil || IsNil(o.Ips) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -499,6 +554,7 @@ func (o *CreateAssetDNSRequest) GetIps() []string {
 
 // GetIpsOk returns a tuple with the Ips field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetDNSRequest) GetIpsOk() ([]string, bool) {
 	if o == nil || IsNil(o.Ips) {
 		return nil, false
@@ -520,9 +576,9 @@ func (o *CreateAssetDNSRequest) SetIps(v []string) {
 	o.Ips = v
 }
 
-// GetRegionCountryCodes returns the RegionCountryCodes field value if set, zero value otherwise.
+// GetRegionCountryCodes returns the RegionCountryCodes field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetDNSRequest) GetRegionCountryCodes() []string {
-	if o == nil || IsNil(o.RegionCountryCodes) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -531,6 +587,7 @@ func (o *CreateAssetDNSRequest) GetRegionCountryCodes() []string {
 
 // GetRegionCountryCodesOk returns a tuple with the RegionCountryCodes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetDNSRequest) GetRegionCountryCodesOk() ([]string, bool) {
 	if o == nil || IsNil(o.RegionCountryCodes) {
 		return nil, false
@@ -552,40 +609,50 @@ func (o *CreateAssetDNSRequest) SetRegionCountryCodes(v []string) {
 	o.RegionCountryCodes = v
 }
 
-// GetRegistrar returns the Registrar field value if set, zero value otherwise.
+// GetRegistrar returns the Registrar field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetDNSRequest) GetRegistrar() string {
-	if o == nil || IsNil(o.Registrar) {
+	if o == nil || IsNil(o.Registrar.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Registrar
+	return *o.Registrar.Get()
 }
 
 // GetRegistrarOk returns a tuple with the Registrar field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetDNSRequest) GetRegistrarOk() (*string, bool) {
-	if o == nil || IsNil(o.Registrar) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Registrar, true
+	return o.Registrar.Get(), o.Registrar.IsSet()
 }
 
 // HasRegistrar returns a boolean if a field has been set.
 func (o *CreateAssetDNSRequest) HasRegistrar() bool {
-	if o != nil && !IsNil(o.Registrar) {
+	if o != nil && o.Registrar.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegistrar gets a reference to the given string and assigns it to the Registrar field.
+// SetRegistrar gets a reference to the given NullableString and assigns it to the Registrar field.
 func (o *CreateAssetDNSRequest) SetRegistrar(v string) {
-	o.Registrar = &v
+	o.Registrar.Set(&v)
+}
+// SetRegistrarNil sets the value for Registrar to be an explicit nil
+func (o *CreateAssetDNSRequest) SetRegistrarNil() {
+	o.Registrar.Set(nil)
+}
+
+// UnsetRegistrar ensures that no value is present for Registrar, not even an explicit nil
+func (o *CreateAssetDNSRequest) UnsetRegistrar() {
+	o.Registrar.Unset()
 }
 
 func (o CreateAssetDNSRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -594,50 +661,50 @@ func (o CreateAssetDNSRequest) MarshalJSON() ([]byte, error) {
 
 func (o CreateAssetDNSRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ProjectIds) {
+	if o.ProjectIds != nil {
 		toSerialize["projectIds"] = o.ProjectIds
 	}
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
+	if o.Name.IsSet() {
+		toSerialize["name"] = o.Name.Get()
 	}
 	toSerialize["asset_class"] = o.AssetClass
 	if !IsNil(o.ExtraMetadata) {
 		toSerialize["extra_metadata"] = o.ExtraMetadata
 	}
-	if !IsNil(o.ScreenshotS3Key) {
-		toSerialize["screenshot_s3_key"] = o.ScreenshotS3Key
+	if o.ScreenshotS3Key.IsSet() {
+		toSerialize["screenshot_s3_key"] = o.ScreenshotS3Key.Get()
 	}
 	toSerialize["asset_type"] = o.AssetType
 	toSerialize["address"] = o.Address
-	if !IsNil(o.Favicon) {
-		toSerialize["favicon"] = o.Favicon
+	if o.Favicon.IsSet() {
+		toSerialize["favicon"] = o.Favicon.Get()
 	}
-	if !IsNil(o.OpenPorts) {
+	if o.OpenPorts != nil {
 		toSerialize["open_ports"] = o.OpenPorts
 	}
-	if !IsNil(o.PortsInsights) {
+	if o.PortsInsights != nil {
 		toSerialize["ports_insights"] = o.PortsInsights
 	}
-	if !IsNil(o.PathsInsights) {
+	if o.PathsInsights != nil {
 		toSerialize["paths_insights"] = o.PathsInsights
 	}
-	if !IsNil(o.Private) {
-		toSerialize["private"] = o.Private
+	if o.Private.IsSet() {
+		toSerialize["private"] = o.Private.Get()
 	}
-	if !IsNil(o.ThirdParty) {
-		toSerialize["third_party"] = o.ThirdParty
+	if o.ThirdParty.IsSet() {
+		toSerialize["third_party"] = o.ThirdParty.Get()
 	}
-	if !IsNil(o.DnsRecords) {
+	if o.DnsRecords != nil {
 		toSerialize["dns_records"] = o.DnsRecords
 	}
-	if !IsNil(o.Ips) {
+	if o.Ips != nil {
 		toSerialize["ips"] = o.Ips
 	}
-	if !IsNil(o.RegionCountryCodes) {
+	if o.RegionCountryCodes != nil {
 		toSerialize["region_country_codes"] = o.RegionCountryCodes
 	}
-	if !IsNil(o.Registrar) {
-		toSerialize["registrar"] = o.Registrar
+	if o.Registrar.IsSet() {
+		toSerialize["registrar"] = o.Registrar.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -662,10 +729,10 @@ func (o *CreateAssetDNSRequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -742,3 +809,5 @@ func (v *NullableCreateAssetDNSRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

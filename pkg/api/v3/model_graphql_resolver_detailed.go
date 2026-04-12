@@ -32,8 +32,18 @@ type GraphqlResolverDetailed struct {
 	Name string `json:"name"`
 	// The parameters of the graphql resolver
 	Parameters map[string]string `json:"parameters,omitempty"`
+	// The request count for this resolver
+	RequestCount float32 `json:"requestCount"`
+	// Mean duration for this resolver in milliseconds, when available
+	MeanDuration NullableFloat32 `json:"meanDuration,omitempty"`
+	Coverage ENUMPROPERTIESDATAITEMSPROPERTIESAPIROUTEPROPERTIESCOVERAGE `json:"coverage"`
+	// Per-user or per-session coverage breakdown when available
+	CoverageByUser []CoverageByUserEntry `json:"coverageByUser,omitempty"`
+	// GraphQL parent type (query, mutation, or subscription)
+	Parent string `json:"parent"`
 	// The return type of the graphql resolver
-	ReturnType           *string `json:"returnType,omitempty"`
+	ReturnType NullableString `json:"returnType,omitempty"`
+	Source ENUMPROPERTIESDATAITEMSPROPERTIESAPIROUTEPROPERTIESSOURCE `json:"source"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -43,13 +53,17 @@ type _GraphqlResolverDetailed GraphqlResolverDetailed
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGraphqlResolverDetailed(blacklisted bool, createdAt string, displayName string, id string, name string) *GraphqlResolverDetailed {
+func NewGraphqlResolverDetailed(blacklisted bool, createdAt string, displayName string, id string, name string, requestCount float32, coverage ENUMPROPERTIESDATAITEMSPROPERTIESAPIROUTEPROPERTIESCOVERAGE, parent string, source ENUMPROPERTIESDATAITEMSPROPERTIESAPIROUTEPROPERTIESSOURCE) *GraphqlResolverDetailed {
 	this := GraphqlResolverDetailed{}
 	this.Blacklisted = blacklisted
 	this.CreatedAt = createdAt
 	this.DisplayName = displayName
 	this.Id = id
 	this.Name = name
+	this.RequestCount = requestCount
+	this.Coverage = coverage
+	this.Parent = parent
+	this.Source = source
 	return &this
 }
 
@@ -213,40 +227,221 @@ func (o *GraphqlResolverDetailed) SetParameters(v map[string]string) {
 	o.Parameters = v
 }
 
-// GetReturnType returns the ReturnType field value if set, zero value otherwise.
-func (o *GraphqlResolverDetailed) GetReturnType() string {
-	if o == nil || IsNil(o.ReturnType) {
-		var ret string
+// GetRequestCount returns the RequestCount field value
+func (o *GraphqlResolverDetailed) GetRequestCount() float32 {
+	if o == nil {
+		var ret float32
 		return ret
 	}
-	return *o.ReturnType
+
+	return o.RequestCount
 }
 
-// GetReturnTypeOk returns a tuple with the ReturnType field value if set, nil otherwise
+// GetRequestCountOk returns a tuple with the RequestCount field value
 // and a boolean to check if the value has been set.
-func (o *GraphqlResolverDetailed) GetReturnTypeOk() (*string, bool) {
-	if o == nil || IsNil(o.ReturnType) {
+func (o *GraphqlResolverDetailed) GetRequestCountOk() (*float32, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ReturnType, true
+	return &o.RequestCount, true
 }
 
-// HasReturnType returns a boolean if a field has been set.
-func (o *GraphqlResolverDetailed) HasReturnType() bool {
-	if o != nil && !IsNil(o.ReturnType) {
+// SetRequestCount sets field value
+func (o *GraphqlResolverDetailed) SetRequestCount(v float32) {
+	o.RequestCount = v
+}
+
+// GetMeanDuration returns the MeanDuration field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *GraphqlResolverDetailed) GetMeanDuration() float32 {
+	if o == nil || IsNil(o.MeanDuration.Get()) {
+		var ret float32
+		return ret
+	}
+	return *o.MeanDuration.Get()
+}
+
+// GetMeanDurationOk returns a tuple with the MeanDuration field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *GraphqlResolverDetailed) GetMeanDurationOk() (*float32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.MeanDuration.Get(), o.MeanDuration.IsSet()
+}
+
+// HasMeanDuration returns a boolean if a field has been set.
+func (o *GraphqlResolverDetailed) HasMeanDuration() bool {
+	if o != nil && o.MeanDuration.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetReturnType gets a reference to the given string and assigns it to the ReturnType field.
+// SetMeanDuration gets a reference to the given NullableFloat32 and assigns it to the MeanDuration field.
+func (o *GraphqlResolverDetailed) SetMeanDuration(v float32) {
+	o.MeanDuration.Set(&v)
+}
+// SetMeanDurationNil sets the value for MeanDuration to be an explicit nil
+func (o *GraphqlResolverDetailed) SetMeanDurationNil() {
+	o.MeanDuration.Set(nil)
+}
+
+// UnsetMeanDuration ensures that no value is present for MeanDuration, not even an explicit nil
+func (o *GraphqlResolverDetailed) UnsetMeanDuration() {
+	o.MeanDuration.Unset()
+}
+
+// GetCoverage returns the Coverage field value
+func (o *GraphqlResolverDetailed) GetCoverage() ENUMPROPERTIESDATAITEMSPROPERTIESAPIROUTEPROPERTIESCOVERAGE {
+	if o == nil {
+		var ret ENUMPROPERTIESDATAITEMSPROPERTIESAPIROUTEPROPERTIESCOVERAGE
+		return ret
+	}
+
+	return o.Coverage
+}
+
+// GetCoverageOk returns a tuple with the Coverage field value
+// and a boolean to check if the value has been set.
+func (o *GraphqlResolverDetailed) GetCoverageOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESAPIROUTEPROPERTIESCOVERAGE, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Coverage, true
+}
+
+// SetCoverage sets field value
+func (o *GraphqlResolverDetailed) SetCoverage(v ENUMPROPERTIESDATAITEMSPROPERTIESAPIROUTEPROPERTIESCOVERAGE) {
+	o.Coverage = v
+}
+
+// GetCoverageByUser returns the CoverageByUser field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *GraphqlResolverDetailed) GetCoverageByUser() []CoverageByUserEntry {
+	if o == nil {
+		var ret []CoverageByUserEntry
+		return ret
+	}
+	return o.CoverageByUser
+}
+
+// GetCoverageByUserOk returns a tuple with the CoverageByUser field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *GraphqlResolverDetailed) GetCoverageByUserOk() ([]CoverageByUserEntry, bool) {
+	if o == nil || IsNil(o.CoverageByUser) {
+		return nil, false
+	}
+	return o.CoverageByUser, true
+}
+
+// HasCoverageByUser returns a boolean if a field has been set.
+func (o *GraphqlResolverDetailed) HasCoverageByUser() bool {
+	if o != nil && !IsNil(o.CoverageByUser) {
+		return true
+	}
+
+	return false
+}
+
+// SetCoverageByUser gets a reference to the given []CoverageByUserEntry and assigns it to the CoverageByUser field.
+func (o *GraphqlResolverDetailed) SetCoverageByUser(v []CoverageByUserEntry) {
+	o.CoverageByUser = v
+}
+
+// GetParent returns the Parent field value
+func (o *GraphqlResolverDetailed) GetParent() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Parent
+}
+
+// GetParentOk returns a tuple with the Parent field value
+// and a boolean to check if the value has been set.
+func (o *GraphqlResolverDetailed) GetParentOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Parent, true
+}
+
+// SetParent sets field value
+func (o *GraphqlResolverDetailed) SetParent(v string) {
+	o.Parent = v
+}
+
+// GetReturnType returns the ReturnType field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *GraphqlResolverDetailed) GetReturnType() string {
+	if o == nil || IsNil(o.ReturnType.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.ReturnType.Get()
+}
+
+// GetReturnTypeOk returns a tuple with the ReturnType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *GraphqlResolverDetailed) GetReturnTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ReturnType.Get(), o.ReturnType.IsSet()
+}
+
+// HasReturnType returns a boolean if a field has been set.
+func (o *GraphqlResolverDetailed) HasReturnType() bool {
+	if o != nil && o.ReturnType.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetReturnType gets a reference to the given NullableString and assigns it to the ReturnType field.
 func (o *GraphqlResolverDetailed) SetReturnType(v string) {
-	o.ReturnType = &v
+	o.ReturnType.Set(&v)
+}
+// SetReturnTypeNil sets the value for ReturnType to be an explicit nil
+func (o *GraphqlResolverDetailed) SetReturnTypeNil() {
+	o.ReturnType.Set(nil)
+}
+
+// UnsetReturnType ensures that no value is present for ReturnType, not even an explicit nil
+func (o *GraphqlResolverDetailed) UnsetReturnType() {
+	o.ReturnType.Unset()
+}
+
+// GetSource returns the Source field value
+func (o *GraphqlResolverDetailed) GetSource() ENUMPROPERTIESDATAITEMSPROPERTIESAPIROUTEPROPERTIESSOURCE {
+	if o == nil {
+		var ret ENUMPROPERTIESDATAITEMSPROPERTIESAPIROUTEPROPERTIESSOURCE
+		return ret
+	}
+
+	return o.Source
+}
+
+// GetSourceOk returns a tuple with the Source field value
+// and a boolean to check if the value has been set.
+func (o *GraphqlResolverDetailed) GetSourceOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESAPIROUTEPROPERTIESSOURCE, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Source, true
+}
+
+// SetSource sets field value
+func (o *GraphqlResolverDetailed) SetSource(v ENUMPROPERTIESDATAITEMSPROPERTIESAPIROUTEPROPERTIESSOURCE) {
+	o.Source = v
 }
 
 func (o GraphqlResolverDetailed) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -263,9 +458,19 @@ func (o GraphqlResolverDetailed) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Parameters) {
 		toSerialize["parameters"] = o.Parameters
 	}
-	if !IsNil(o.ReturnType) {
-		toSerialize["returnType"] = o.ReturnType
+	toSerialize["requestCount"] = o.RequestCount
+	if o.MeanDuration.IsSet() {
+		toSerialize["meanDuration"] = o.MeanDuration.Get()
 	}
+	toSerialize["coverage"] = o.Coverage
+	if o.CoverageByUser != nil {
+		toSerialize["coverageByUser"] = o.CoverageByUser
+	}
+	toSerialize["parent"] = o.Parent
+	if o.ReturnType.IsSet() {
+		toSerialize["returnType"] = o.ReturnType.Get()
+	}
+	toSerialize["source"] = o.Source
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -284,6 +489,10 @@ func (o *GraphqlResolverDetailed) UnmarshalJSON(data []byte) (err error) {
 		"displayName",
 		"id",
 		"name",
+		"requestCount",
+		"coverage",
+		"parent",
+		"source",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -291,10 +500,10 @@ func (o *GraphqlResolverDetailed) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -319,7 +528,13 @@ func (o *GraphqlResolverDetailed) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "parameters")
+		delete(additionalProperties, "requestCount")
+		delete(additionalProperties, "meanDuration")
+		delete(additionalProperties, "coverage")
+		delete(additionalProperties, "coverageByUser")
+		delete(additionalProperties, "parent")
 		delete(additionalProperties, "returnType")
+		delete(additionalProperties, "source")
 		o.AdditionalProperties = additionalProperties
 	}
 
@@ -361,3 +576,5 @@ func (v *NullableGraphqlResolverDetailed) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

@@ -19,16 +19,21 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationExperimental{}
 
 // GetProfile200ResponseConfigurationExperimental struct for GetProfile200ResponseConfigurationExperimental
 type GetProfile200ResponseConfigurationExperimental struct {
-	BlstExplorationOnly            *bool    `json:"blst_exploration_only,omitempty"`
-	AgenticIdor                    *bool    `json:"agentic_idor,omitempty"`
-	PostmanNext                    *bool    `json:"postman_next,omitempty"`
-	HappyPathsRegressionTesting    []string `json:"happy_paths_regression_testing,omitempty"`
+	BlstExplorationOnly NullableBool `json:"blst_exploration_only,omitempty"`
+	AgenticIdor NullableBool `json:"agentic_idor,omitempty"`
+	BusinessLogicAgent NullableBool `json:"business_logic_agent,omitempty"`
+	HappyPathsRegressionTesting []string `json:"happy_paths_regression_testing,omitempty"`
 	RegressionTestingFileUploadIds []string `json:"regression_testing_file_upload_ids,omitempty"`
-	AsmTechnologies                *bool    `json:"asm_technologies,omitempty"`
-	AsmCodeProjects                *bool    `json:"asm_code_projects,omitempty"`
-	LocationsNext                  *bool    `json:"locations_next,omitempty"`
-	ExternalCrawlingTask           *bool    `json:"external_crawling_task,omitempty"`
-	AdditionalProperties           map[string]interface{}
+	AsmTechnologies NullableBool `json:"asm_technologies,omitempty"`
+	AsmCodeProjects NullableBool `json:"asm_code_projects,omitempty"`
+	AsmEnumerateCodeProjects NullableBool `json:"asm_enumerate_code_projects,omitempty"`
+	LocationsNext NullableBool `json:"locations_next,omitempty"`
+	ExternalCrawlingTask NullableBool `json:"external_crawling_task,omitempty"`
+	XssAgentModelAlias NullableENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS `json:"xss_agent_model_alias,omitempty"`
+	SqliAgentModelAlias NullableENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS `json:"sqli_agent_model_alias,omitempty"`
+	AsmCveAgent NullableBool `json:"asm_cve_agent,omitempty"`
+	LoginPageAgent NullableBool `json:"login_page_agent,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetProfile200ResponseConfigurationExperimental GetProfile200ResponseConfigurationExperimental
@@ -50,105 +55,135 @@ func NewGetProfile200ResponseConfigurationExperimentalWithDefaults() *GetProfile
 	return &this
 }
 
-// GetBlstExplorationOnly returns the BlstExplorationOnly field value if set, zero value otherwise.
+// GetBlstExplorationOnly returns the BlstExplorationOnly field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationExperimental) GetBlstExplorationOnly() bool {
-	if o == nil || IsNil(o.BlstExplorationOnly) {
+	if o == nil || IsNil(o.BlstExplorationOnly.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.BlstExplorationOnly
+	return *o.BlstExplorationOnly.Get()
 }
 
 // GetBlstExplorationOnlyOk returns a tuple with the BlstExplorationOnly field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationExperimental) GetBlstExplorationOnlyOk() (*bool, bool) {
-	if o == nil || IsNil(o.BlstExplorationOnly) {
+	if o == nil {
 		return nil, false
 	}
-	return o.BlstExplorationOnly, true
+	return o.BlstExplorationOnly.Get(), o.BlstExplorationOnly.IsSet()
 }
 
 // HasBlstExplorationOnly returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationExperimental) HasBlstExplorationOnly() bool {
-	if o != nil && !IsNil(o.BlstExplorationOnly) {
+	if o != nil && o.BlstExplorationOnly.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetBlstExplorationOnly gets a reference to the given bool and assigns it to the BlstExplorationOnly field.
+// SetBlstExplorationOnly gets a reference to the given NullableBool and assigns it to the BlstExplorationOnly field.
 func (o *GetProfile200ResponseConfigurationExperimental) SetBlstExplorationOnly(v bool) {
-	o.BlstExplorationOnly = &v
+	o.BlstExplorationOnly.Set(&v)
+}
+// SetBlstExplorationOnlyNil sets the value for BlstExplorationOnly to be an explicit nil
+func (o *GetProfile200ResponseConfigurationExperimental) SetBlstExplorationOnlyNil() {
+	o.BlstExplorationOnly.Set(nil)
 }
 
-// GetAgenticIdor returns the AgenticIdor field value if set, zero value otherwise.
+// UnsetBlstExplorationOnly ensures that no value is present for BlstExplorationOnly, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationExperimental) UnsetBlstExplorationOnly() {
+	o.BlstExplorationOnly.Unset()
+}
+
+// GetAgenticIdor returns the AgenticIdor field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationExperimental) GetAgenticIdor() bool {
-	if o == nil || IsNil(o.AgenticIdor) {
+	if o == nil || IsNil(o.AgenticIdor.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.AgenticIdor
+	return *o.AgenticIdor.Get()
 }
 
 // GetAgenticIdorOk returns a tuple with the AgenticIdor field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationExperimental) GetAgenticIdorOk() (*bool, bool) {
-	if o == nil || IsNil(o.AgenticIdor) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AgenticIdor, true
+	return o.AgenticIdor.Get(), o.AgenticIdor.IsSet()
 }
 
 // HasAgenticIdor returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationExperimental) HasAgenticIdor() bool {
-	if o != nil && !IsNil(o.AgenticIdor) {
+	if o != nil && o.AgenticIdor.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAgenticIdor gets a reference to the given bool and assigns it to the AgenticIdor field.
+// SetAgenticIdor gets a reference to the given NullableBool and assigns it to the AgenticIdor field.
 func (o *GetProfile200ResponseConfigurationExperimental) SetAgenticIdor(v bool) {
-	o.AgenticIdor = &v
+	o.AgenticIdor.Set(&v)
+}
+// SetAgenticIdorNil sets the value for AgenticIdor to be an explicit nil
+func (o *GetProfile200ResponseConfigurationExperimental) SetAgenticIdorNil() {
+	o.AgenticIdor.Set(nil)
 }
 
-// GetPostmanNext returns the PostmanNext field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationExperimental) GetPostmanNext() bool {
-	if o == nil || IsNil(o.PostmanNext) {
+// UnsetAgenticIdor ensures that no value is present for AgenticIdor, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationExperimental) UnsetAgenticIdor() {
+	o.AgenticIdor.Unset()
+}
+
+// GetBusinessLogicAgent returns the BusinessLogicAgent field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *GetProfile200ResponseConfigurationExperimental) GetBusinessLogicAgent() bool {
+	if o == nil || IsNil(o.BusinessLogicAgent.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.PostmanNext
+	return *o.BusinessLogicAgent.Get()
 }
 
-// GetPostmanNextOk returns a tuple with the PostmanNext field value if set, nil otherwise
+// GetBusinessLogicAgentOk returns a tuple with the BusinessLogicAgent field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationExperimental) GetPostmanNextOk() (*bool, bool) {
-	if o == nil || IsNil(o.PostmanNext) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *GetProfile200ResponseConfigurationExperimental) GetBusinessLogicAgentOk() (*bool, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.PostmanNext, true
+	return o.BusinessLogicAgent.Get(), o.BusinessLogicAgent.IsSet()
 }
 
-// HasPostmanNext returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationExperimental) HasPostmanNext() bool {
-	if o != nil && !IsNil(o.PostmanNext) {
+// HasBusinessLogicAgent returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationExperimental) HasBusinessLogicAgent() bool {
+	if o != nil && o.BusinessLogicAgent.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPostmanNext gets a reference to the given bool and assigns it to the PostmanNext field.
-func (o *GetProfile200ResponseConfigurationExperimental) SetPostmanNext(v bool) {
-	o.PostmanNext = &v
+// SetBusinessLogicAgent gets a reference to the given NullableBool and assigns it to the BusinessLogicAgent field.
+func (o *GetProfile200ResponseConfigurationExperimental) SetBusinessLogicAgent(v bool) {
+	o.BusinessLogicAgent.Set(&v)
+}
+// SetBusinessLogicAgentNil sets the value for BusinessLogicAgent to be an explicit nil
+func (o *GetProfile200ResponseConfigurationExperimental) SetBusinessLogicAgentNil() {
+	o.BusinessLogicAgent.Set(nil)
 }
 
-// GetHappyPathsRegressionTesting returns the HappyPathsRegressionTesting field value if set, zero value otherwise.
+// UnsetBusinessLogicAgent ensures that no value is present for BusinessLogicAgent, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationExperimental) UnsetBusinessLogicAgent() {
+	o.BusinessLogicAgent.Unset()
+}
+
+// GetHappyPathsRegressionTesting returns the HappyPathsRegressionTesting field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationExperimental) GetHappyPathsRegressionTesting() []string {
-	if o == nil || IsNil(o.HappyPathsRegressionTesting) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -157,6 +192,7 @@ func (o *GetProfile200ResponseConfigurationExperimental) GetHappyPathsRegression
 
 // GetHappyPathsRegressionTestingOk returns a tuple with the HappyPathsRegressionTesting field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationExperimental) GetHappyPathsRegressionTestingOk() ([]string, bool) {
 	if o == nil || IsNil(o.HappyPathsRegressionTesting) {
 		return nil, false
@@ -178,9 +214,9 @@ func (o *GetProfile200ResponseConfigurationExperimental) SetHappyPathsRegression
 	o.HappyPathsRegressionTesting = v
 }
 
-// GetRegressionTestingFileUploadIds returns the RegressionTestingFileUploadIds field value if set, zero value otherwise.
+// GetRegressionTestingFileUploadIds returns the RegressionTestingFileUploadIds field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationExperimental) GetRegressionTestingFileUploadIds() []string {
-	if o == nil || IsNil(o.RegressionTestingFileUploadIds) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -189,6 +225,7 @@ func (o *GetProfile200ResponseConfigurationExperimental) GetRegressionTestingFil
 
 // GetRegressionTestingFileUploadIdsOk returns a tuple with the RegressionTestingFileUploadIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationExperimental) GetRegressionTestingFileUploadIdsOk() ([]string, bool) {
 	if o == nil || IsNil(o.RegressionTestingFileUploadIds) {
 		return nil, false
@@ -210,136 +247,386 @@ func (o *GetProfile200ResponseConfigurationExperimental) SetRegressionTestingFil
 	o.RegressionTestingFileUploadIds = v
 }
 
-// GetAsmTechnologies returns the AsmTechnologies field value if set, zero value otherwise.
+// GetAsmTechnologies returns the AsmTechnologies field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationExperimental) GetAsmTechnologies() bool {
-	if o == nil || IsNil(o.AsmTechnologies) {
+	if o == nil || IsNil(o.AsmTechnologies.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.AsmTechnologies
+	return *o.AsmTechnologies.Get()
 }
 
 // GetAsmTechnologiesOk returns a tuple with the AsmTechnologies field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationExperimental) GetAsmTechnologiesOk() (*bool, bool) {
-	if o == nil || IsNil(o.AsmTechnologies) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AsmTechnologies, true
+	return o.AsmTechnologies.Get(), o.AsmTechnologies.IsSet()
 }
 
 // HasAsmTechnologies returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationExperimental) HasAsmTechnologies() bool {
-	if o != nil && !IsNil(o.AsmTechnologies) {
+	if o != nil && o.AsmTechnologies.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAsmTechnologies gets a reference to the given bool and assigns it to the AsmTechnologies field.
+// SetAsmTechnologies gets a reference to the given NullableBool and assigns it to the AsmTechnologies field.
 func (o *GetProfile200ResponseConfigurationExperimental) SetAsmTechnologies(v bool) {
-	o.AsmTechnologies = &v
+	o.AsmTechnologies.Set(&v)
+}
+// SetAsmTechnologiesNil sets the value for AsmTechnologies to be an explicit nil
+func (o *GetProfile200ResponseConfigurationExperimental) SetAsmTechnologiesNil() {
+	o.AsmTechnologies.Set(nil)
 }
 
-// GetAsmCodeProjects returns the AsmCodeProjects field value if set, zero value otherwise.
+// UnsetAsmTechnologies ensures that no value is present for AsmTechnologies, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationExperimental) UnsetAsmTechnologies() {
+	o.AsmTechnologies.Unset()
+}
+
+// GetAsmCodeProjects returns the AsmCodeProjects field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationExperimental) GetAsmCodeProjects() bool {
-	if o == nil || IsNil(o.AsmCodeProjects) {
+	if o == nil || IsNil(o.AsmCodeProjects.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.AsmCodeProjects
+	return *o.AsmCodeProjects.Get()
 }
 
 // GetAsmCodeProjectsOk returns a tuple with the AsmCodeProjects field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationExperimental) GetAsmCodeProjectsOk() (*bool, bool) {
-	if o == nil || IsNil(o.AsmCodeProjects) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AsmCodeProjects, true
+	return o.AsmCodeProjects.Get(), o.AsmCodeProjects.IsSet()
 }
 
 // HasAsmCodeProjects returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationExperimental) HasAsmCodeProjects() bool {
-	if o != nil && !IsNil(o.AsmCodeProjects) {
+	if o != nil && o.AsmCodeProjects.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAsmCodeProjects gets a reference to the given bool and assigns it to the AsmCodeProjects field.
+// SetAsmCodeProjects gets a reference to the given NullableBool and assigns it to the AsmCodeProjects field.
 func (o *GetProfile200ResponseConfigurationExperimental) SetAsmCodeProjects(v bool) {
-	o.AsmCodeProjects = &v
+	o.AsmCodeProjects.Set(&v)
+}
+// SetAsmCodeProjectsNil sets the value for AsmCodeProjects to be an explicit nil
+func (o *GetProfile200ResponseConfigurationExperimental) SetAsmCodeProjectsNil() {
+	o.AsmCodeProjects.Set(nil)
 }
 
-// GetLocationsNext returns the LocationsNext field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationExperimental) GetLocationsNext() bool {
-	if o == nil || IsNil(o.LocationsNext) {
+// UnsetAsmCodeProjects ensures that no value is present for AsmCodeProjects, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationExperimental) UnsetAsmCodeProjects() {
+	o.AsmCodeProjects.Unset()
+}
+
+// GetAsmEnumerateCodeProjects returns the AsmEnumerateCodeProjects field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *GetProfile200ResponseConfigurationExperimental) GetAsmEnumerateCodeProjects() bool {
+	if o == nil || IsNil(o.AsmEnumerateCodeProjects.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.LocationsNext
+	return *o.AsmEnumerateCodeProjects.Get()
+}
+
+// GetAsmEnumerateCodeProjectsOk returns a tuple with the AsmEnumerateCodeProjects field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *GetProfile200ResponseConfigurationExperimental) GetAsmEnumerateCodeProjectsOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.AsmEnumerateCodeProjects.Get(), o.AsmEnumerateCodeProjects.IsSet()
+}
+
+// HasAsmEnumerateCodeProjects returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationExperimental) HasAsmEnumerateCodeProjects() bool {
+	if o != nil && o.AsmEnumerateCodeProjects.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAsmEnumerateCodeProjects gets a reference to the given NullableBool and assigns it to the AsmEnumerateCodeProjects field.
+func (o *GetProfile200ResponseConfigurationExperimental) SetAsmEnumerateCodeProjects(v bool) {
+	o.AsmEnumerateCodeProjects.Set(&v)
+}
+// SetAsmEnumerateCodeProjectsNil sets the value for AsmEnumerateCodeProjects to be an explicit nil
+func (o *GetProfile200ResponseConfigurationExperimental) SetAsmEnumerateCodeProjectsNil() {
+	o.AsmEnumerateCodeProjects.Set(nil)
+}
+
+// UnsetAsmEnumerateCodeProjects ensures that no value is present for AsmEnumerateCodeProjects, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationExperimental) UnsetAsmEnumerateCodeProjects() {
+	o.AsmEnumerateCodeProjects.Unset()
+}
+
+// GetLocationsNext returns the LocationsNext field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *GetProfile200ResponseConfigurationExperimental) GetLocationsNext() bool {
+	if o == nil || IsNil(o.LocationsNext.Get()) {
+		var ret bool
+		return ret
+	}
+	return *o.LocationsNext.Get()
 }
 
 // GetLocationsNextOk returns a tuple with the LocationsNext field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationExperimental) GetLocationsNextOk() (*bool, bool) {
-	if o == nil || IsNil(o.LocationsNext) {
+	if o == nil {
 		return nil, false
 	}
-	return o.LocationsNext, true
+	return o.LocationsNext.Get(), o.LocationsNext.IsSet()
 }
 
 // HasLocationsNext returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationExperimental) HasLocationsNext() bool {
-	if o != nil && !IsNil(o.LocationsNext) {
+	if o != nil && o.LocationsNext.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetLocationsNext gets a reference to the given bool and assigns it to the LocationsNext field.
+// SetLocationsNext gets a reference to the given NullableBool and assigns it to the LocationsNext field.
 func (o *GetProfile200ResponseConfigurationExperimental) SetLocationsNext(v bool) {
-	o.LocationsNext = &v
+	o.LocationsNext.Set(&v)
+}
+// SetLocationsNextNil sets the value for LocationsNext to be an explicit nil
+func (o *GetProfile200ResponseConfigurationExperimental) SetLocationsNextNil() {
+	o.LocationsNext.Set(nil)
 }
 
-// GetExternalCrawlingTask returns the ExternalCrawlingTask field value if set, zero value otherwise.
+// UnsetLocationsNext ensures that no value is present for LocationsNext, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationExperimental) UnsetLocationsNext() {
+	o.LocationsNext.Unset()
+}
+
+// GetExternalCrawlingTask returns the ExternalCrawlingTask field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationExperimental) GetExternalCrawlingTask() bool {
-	if o == nil || IsNil(o.ExternalCrawlingTask) {
+	if o == nil || IsNil(o.ExternalCrawlingTask.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.ExternalCrawlingTask
+	return *o.ExternalCrawlingTask.Get()
 }
 
 // GetExternalCrawlingTaskOk returns a tuple with the ExternalCrawlingTask field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationExperimental) GetExternalCrawlingTaskOk() (*bool, bool) {
-	if o == nil || IsNil(o.ExternalCrawlingTask) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ExternalCrawlingTask, true
+	return o.ExternalCrawlingTask.Get(), o.ExternalCrawlingTask.IsSet()
 }
 
 // HasExternalCrawlingTask returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationExperimental) HasExternalCrawlingTask() bool {
-	if o != nil && !IsNil(o.ExternalCrawlingTask) {
+	if o != nil && o.ExternalCrawlingTask.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetExternalCrawlingTask gets a reference to the given bool and assigns it to the ExternalCrawlingTask field.
+// SetExternalCrawlingTask gets a reference to the given NullableBool and assigns it to the ExternalCrawlingTask field.
 func (o *GetProfile200ResponseConfigurationExperimental) SetExternalCrawlingTask(v bool) {
-	o.ExternalCrawlingTask = &v
+	o.ExternalCrawlingTask.Set(&v)
+}
+// SetExternalCrawlingTaskNil sets the value for ExternalCrawlingTask to be an explicit nil
+func (o *GetProfile200ResponseConfigurationExperimental) SetExternalCrawlingTaskNil() {
+	o.ExternalCrawlingTask.Set(nil)
+}
+
+// UnsetExternalCrawlingTask ensures that no value is present for ExternalCrawlingTask, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationExperimental) UnsetExternalCrawlingTask() {
+	o.ExternalCrawlingTask.Unset()
+}
+
+// GetXssAgentModelAlias returns the XssAgentModelAlias field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *GetProfile200ResponseConfigurationExperimental) GetXssAgentModelAlias() ENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS {
+	if o == nil || IsNil(o.XssAgentModelAlias.Get()) {
+		var ret ENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS
+		return ret
+	}
+	return *o.XssAgentModelAlias.Get()
+}
+
+// GetXssAgentModelAliasOk returns a tuple with the XssAgentModelAlias field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *GetProfile200ResponseConfigurationExperimental) GetXssAgentModelAliasOk() (*ENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.XssAgentModelAlias.Get(), o.XssAgentModelAlias.IsSet()
+}
+
+// HasXssAgentModelAlias returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationExperimental) HasXssAgentModelAlias() bool {
+	if o != nil && o.XssAgentModelAlias.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetXssAgentModelAlias gets a reference to the given NullableENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS and assigns it to the XssAgentModelAlias field.
+func (o *GetProfile200ResponseConfigurationExperimental) SetXssAgentModelAlias(v ENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS) {
+	o.XssAgentModelAlias.Set(&v)
+}
+// SetXssAgentModelAliasNil sets the value for XssAgentModelAlias to be an explicit nil
+func (o *GetProfile200ResponseConfigurationExperimental) SetXssAgentModelAliasNil() {
+	o.XssAgentModelAlias.Set(nil)
+}
+
+// UnsetXssAgentModelAlias ensures that no value is present for XssAgentModelAlias, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationExperimental) UnsetXssAgentModelAlias() {
+	o.XssAgentModelAlias.Unset()
+}
+
+// GetSqliAgentModelAlias returns the SqliAgentModelAlias field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *GetProfile200ResponseConfigurationExperimental) GetSqliAgentModelAlias() ENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS {
+	if o == nil || IsNil(o.SqliAgentModelAlias.Get()) {
+		var ret ENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS
+		return ret
+	}
+	return *o.SqliAgentModelAlias.Get()
+}
+
+// GetSqliAgentModelAliasOk returns a tuple with the SqliAgentModelAlias field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *GetProfile200ResponseConfigurationExperimental) GetSqliAgentModelAliasOk() (*ENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.SqliAgentModelAlias.Get(), o.SqliAgentModelAlias.IsSet()
+}
+
+// HasSqliAgentModelAlias returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationExperimental) HasSqliAgentModelAlias() bool {
+	if o != nil && o.SqliAgentModelAlias.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetSqliAgentModelAlias gets a reference to the given NullableENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS and assigns it to the SqliAgentModelAlias field.
+func (o *GetProfile200ResponseConfigurationExperimental) SetSqliAgentModelAlias(v ENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS) {
+	o.SqliAgentModelAlias.Set(&v)
+}
+// SetSqliAgentModelAliasNil sets the value for SqliAgentModelAlias to be an explicit nil
+func (o *GetProfile200ResponseConfigurationExperimental) SetSqliAgentModelAliasNil() {
+	o.SqliAgentModelAlias.Set(nil)
+}
+
+// UnsetSqliAgentModelAlias ensures that no value is present for SqliAgentModelAlias, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationExperimental) UnsetSqliAgentModelAlias() {
+	o.SqliAgentModelAlias.Unset()
+}
+
+// GetAsmCveAgent returns the AsmCveAgent field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *GetProfile200ResponseConfigurationExperimental) GetAsmCveAgent() bool {
+	if o == nil || IsNil(o.AsmCveAgent.Get()) {
+		var ret bool
+		return ret
+	}
+	return *o.AsmCveAgent.Get()
+}
+
+// GetAsmCveAgentOk returns a tuple with the AsmCveAgent field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *GetProfile200ResponseConfigurationExperimental) GetAsmCveAgentOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.AsmCveAgent.Get(), o.AsmCveAgent.IsSet()
+}
+
+// HasAsmCveAgent returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationExperimental) HasAsmCveAgent() bool {
+	if o != nil && o.AsmCveAgent.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAsmCveAgent gets a reference to the given NullableBool and assigns it to the AsmCveAgent field.
+func (o *GetProfile200ResponseConfigurationExperimental) SetAsmCveAgent(v bool) {
+	o.AsmCveAgent.Set(&v)
+}
+// SetAsmCveAgentNil sets the value for AsmCveAgent to be an explicit nil
+func (o *GetProfile200ResponseConfigurationExperimental) SetAsmCveAgentNil() {
+	o.AsmCveAgent.Set(nil)
+}
+
+// UnsetAsmCveAgent ensures that no value is present for AsmCveAgent, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationExperimental) UnsetAsmCveAgent() {
+	o.AsmCveAgent.Unset()
+}
+
+// GetLoginPageAgent returns the LoginPageAgent field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *GetProfile200ResponseConfigurationExperimental) GetLoginPageAgent() bool {
+	if o == nil || IsNil(o.LoginPageAgent.Get()) {
+		var ret bool
+		return ret
+	}
+	return *o.LoginPageAgent.Get()
+}
+
+// GetLoginPageAgentOk returns a tuple with the LoginPageAgent field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *GetProfile200ResponseConfigurationExperimental) GetLoginPageAgentOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.LoginPageAgent.Get(), o.LoginPageAgent.IsSet()
+}
+
+// HasLoginPageAgent returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationExperimental) HasLoginPageAgent() bool {
+	if o != nil && o.LoginPageAgent.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetLoginPageAgent gets a reference to the given NullableBool and assigns it to the LoginPageAgent field.
+func (o *GetProfile200ResponseConfigurationExperimental) SetLoginPageAgent(v bool) {
+	o.LoginPageAgent.Set(&v)
+}
+// SetLoginPageAgentNil sets the value for LoginPageAgent to be an explicit nil
+func (o *GetProfile200ResponseConfigurationExperimental) SetLoginPageAgentNil() {
+	o.LoginPageAgent.Set(nil)
+}
+
+// UnsetLoginPageAgent ensures that no value is present for LoginPageAgent, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationExperimental) UnsetLoginPageAgent() {
+	o.LoginPageAgent.Unset()
 }
 
 func (o GetProfile200ResponseConfigurationExperimental) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -348,32 +635,47 @@ func (o GetProfile200ResponseConfigurationExperimental) MarshalJSON() ([]byte, e
 
 func (o GetProfile200ResponseConfigurationExperimental) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.BlstExplorationOnly) {
-		toSerialize["blst_exploration_only"] = o.BlstExplorationOnly
+	if o.BlstExplorationOnly.IsSet() {
+		toSerialize["blst_exploration_only"] = o.BlstExplorationOnly.Get()
 	}
-	if !IsNil(o.AgenticIdor) {
-		toSerialize["agentic_idor"] = o.AgenticIdor
+	if o.AgenticIdor.IsSet() {
+		toSerialize["agentic_idor"] = o.AgenticIdor.Get()
 	}
-	if !IsNil(o.PostmanNext) {
-		toSerialize["postman_next"] = o.PostmanNext
+	if o.BusinessLogicAgent.IsSet() {
+		toSerialize["business_logic_agent"] = o.BusinessLogicAgent.Get()
 	}
-	if !IsNil(o.HappyPathsRegressionTesting) {
+	if o.HappyPathsRegressionTesting != nil {
 		toSerialize["happy_paths_regression_testing"] = o.HappyPathsRegressionTesting
 	}
-	if !IsNil(o.RegressionTestingFileUploadIds) {
+	if o.RegressionTestingFileUploadIds != nil {
 		toSerialize["regression_testing_file_upload_ids"] = o.RegressionTestingFileUploadIds
 	}
-	if !IsNil(o.AsmTechnologies) {
-		toSerialize["asm_technologies"] = o.AsmTechnologies
+	if o.AsmTechnologies.IsSet() {
+		toSerialize["asm_technologies"] = o.AsmTechnologies.Get()
 	}
-	if !IsNil(o.AsmCodeProjects) {
-		toSerialize["asm_code_projects"] = o.AsmCodeProjects
+	if o.AsmCodeProjects.IsSet() {
+		toSerialize["asm_code_projects"] = o.AsmCodeProjects.Get()
 	}
-	if !IsNil(o.LocationsNext) {
-		toSerialize["locations_next"] = o.LocationsNext
+	if o.AsmEnumerateCodeProjects.IsSet() {
+		toSerialize["asm_enumerate_code_projects"] = o.AsmEnumerateCodeProjects.Get()
 	}
-	if !IsNil(o.ExternalCrawlingTask) {
-		toSerialize["external_crawling_task"] = o.ExternalCrawlingTask
+	if o.LocationsNext.IsSet() {
+		toSerialize["locations_next"] = o.LocationsNext.Get()
+	}
+	if o.ExternalCrawlingTask.IsSet() {
+		toSerialize["external_crawling_task"] = o.ExternalCrawlingTask.Get()
+	}
+	if o.XssAgentModelAlias.IsSet() {
+		toSerialize["xss_agent_model_alias"] = o.XssAgentModelAlias.Get()
+	}
+	if o.SqliAgentModelAlias.IsSet() {
+		toSerialize["sqli_agent_model_alias"] = o.SqliAgentModelAlias.Get()
+	}
+	if o.AsmCveAgent.IsSet() {
+		toSerialize["asm_cve_agent"] = o.AsmCveAgent.Get()
+	}
+	if o.LoginPageAgent.IsSet() {
+		toSerialize["login_page_agent"] = o.LoginPageAgent.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -399,13 +701,18 @@ func (o *GetProfile200ResponseConfigurationExperimental) UnmarshalJSON(data []by
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "blst_exploration_only")
 		delete(additionalProperties, "agentic_idor")
-		delete(additionalProperties, "postman_next")
+		delete(additionalProperties, "business_logic_agent")
 		delete(additionalProperties, "happy_paths_regression_testing")
 		delete(additionalProperties, "regression_testing_file_upload_ids")
 		delete(additionalProperties, "asm_technologies")
 		delete(additionalProperties, "asm_code_projects")
+		delete(additionalProperties, "asm_enumerate_code_projects")
 		delete(additionalProperties, "locations_next")
 		delete(additionalProperties, "external_crawling_task")
+		delete(additionalProperties, "xss_agent_model_alias")
+		delete(additionalProperties, "sqli_agent_model_alias")
+		delete(additionalProperties, "asm_cve_agent")
+		delete(additionalProperties, "login_page_agent")
 		o.AdditionalProperties = additionalProperties
 	}
 
@@ -447,3 +754,5 @@ func (v *NullableGetProfile200ResponseConfigurationExperimental) UnmarshalJSON(s
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

@@ -20,9 +20,9 @@ var _ MappedNullable = &CreateCustomRuleRequestContentRuleOneOfTransformMutateIn
 
 // CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf7 struct for CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf7
 type CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf7 struct {
-	Key                  ENUMREQUESTMETHOD                                                                     `json:"key"`
-	Value                *ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD  `json:"value,omitempty"`
-	Values               []ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD `json:"values,omitempty"`
+	Key ENUMREQUESTMETHOD `json:"key"`
+	Value NullableENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD `json:"value,omitempty"`
+	Values []ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD `json:"values,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -70,36 +70,46 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf7) SetK
 	o.Key = v
 }
 
-// GetValue returns the Value field value if set, zero value otherwise.
+// GetValue returns the Value field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf7) GetValue() ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD {
-	if o == nil || IsNil(o.Value) {
+	if o == nil || IsNil(o.Value.Get()) {
 		var ret ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD
 		return ret
 	}
-	return *o.Value
+	return *o.Value.Get()
 }
 
 // GetValueOk returns a tuple with the Value field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf7) GetValueOk() (*ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD, bool) {
-	if o == nil || IsNil(o.Value) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Value, true
+	return o.Value.Get(), o.Value.IsSet()
 }
 
 // HasValue returns a boolean if a field has been set.
 func (o *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf7) HasValue() bool {
-	if o != nil && !IsNil(o.Value) {
+	if o != nil && o.Value.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetValue gets a reference to the given ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD and assigns it to the Value field.
+// SetValue gets a reference to the given NullableENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD and assigns it to the Value field.
 func (o *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf7) SetValue(v ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD) {
-	o.Value = &v
+	o.Value.Set(&v)
+}
+// SetValueNil sets the value for Value to be an explicit nil
+func (o *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf7) SetValueNil() {
+	o.Value.Set(nil)
+}
+
+// UnsetValue ensures that no value is present for Value, not even an explicit nil
+func (o *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf7) UnsetValue() {
+	o.Value.Unset()
 }
 
 // GetValues returns the Values field value if set, zero value otherwise.
@@ -135,7 +145,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf7) SetV
 }
 
 func (o CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf7) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -145,8 +155,8 @@ func (o CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf7) Marsh
 func (o CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf7) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["key"] = o.Key
-	if !IsNil(o.Value) {
-		toSerialize["value"] = o.Value
+	if o.Value.IsSet() {
+		toSerialize["value"] = o.Value.Get()
 	}
 	if !IsNil(o.Values) {
 		toSerialize["values"] = o.Values
@@ -172,10 +182,10 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf7) Unma
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -238,3 +248,5 @@ func (v *NullableCreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneO
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

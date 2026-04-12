@@ -20,8 +20,8 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationAuthenticationProcedur
 
 // GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf4Parameters struct for GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf4Parameters
 type GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf4Parameters struct {
-	ProxyOverride        *string                                                                                                                                         `json:"proxy_override,omitempty"`
-	Environment          ENUMPROPERTIESCONFIGURATIONPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS4PROPERTIESPARAMETERSPROPERTIESENVIRONMENT `json:"environment"`
+	ProxyOverride NullableString `json:"proxy_override,omitempty"`
+	Environment ENUMPROPERTIESCONFIGURATIONPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS4PROPERTIESPARAMETERSPROPERTIESENVIRONMENT `json:"environment"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -45,36 +45,46 @@ func NewGetProfile200ResponseConfigurationAuthenticationProceduresInnerOperation
 	return &this
 }
 
-// GetProxyOverride returns the ProxyOverride field value if set, zero value otherwise.
+// GetProxyOverride returns the ProxyOverride field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf4Parameters) GetProxyOverride() string {
-	if o == nil || IsNil(o.ProxyOverride) {
+	if o == nil || IsNil(o.ProxyOverride.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.ProxyOverride
+	return *o.ProxyOverride.Get()
 }
 
 // GetProxyOverrideOk returns a tuple with the ProxyOverride field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf4Parameters) GetProxyOverrideOk() (*string, bool) {
-	if o == nil || IsNil(o.ProxyOverride) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ProxyOverride, true
+	return o.ProxyOverride.Get(), o.ProxyOverride.IsSet()
 }
 
 // HasProxyOverride returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf4Parameters) HasProxyOverride() bool {
-	if o != nil && !IsNil(o.ProxyOverride) {
+	if o != nil && o.ProxyOverride.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetProxyOverride gets a reference to the given string and assigns it to the ProxyOverride field.
+// SetProxyOverride gets a reference to the given NullableString and assigns it to the ProxyOverride field.
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf4Parameters) SetProxyOverride(v string) {
-	o.ProxyOverride = &v
+	o.ProxyOverride.Set(&v)
+}
+// SetProxyOverrideNil sets the value for ProxyOverride to be an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf4Parameters) SetProxyOverrideNil() {
+	o.ProxyOverride.Set(nil)
+}
+
+// UnsetProxyOverride ensures that no value is present for ProxyOverride, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf4Parameters) UnsetProxyOverride() {
+	o.ProxyOverride.Unset()
 }
 
 // GetEnvironment returns the Environment field value
@@ -102,7 +112,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 }
 
 func (o GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf4Parameters) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -111,8 +121,8 @@ func (o GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperation
 
 func (o GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf4Parameters) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ProxyOverride) {
-		toSerialize["proxy_override"] = o.ProxyOverride
+	if o.ProxyOverride.IsSet() {
+		toSerialize["proxy_override"] = o.ProxyOverride.Get()
 	}
 	toSerialize["environment"] = o.Environment
 
@@ -136,10 +146,10 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -201,3 +211,5 @@ func (v *NullableGetProfile200ResponseConfigurationAuthenticationProceduresInner
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

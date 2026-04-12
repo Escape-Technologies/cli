@@ -20,12 +20,12 @@ var _ MappedNullable = &CreateCustomRuleRequestContentRuleOneOf{}
 
 // CreateCustomRuleRequestContentRuleOneOf struct for CreateCustomRuleRequestContentRuleOneOf
 type CreateCustomRuleRequestContentRuleOneOf struct {
-	Alert                CreateCustomRuleRequestContentRuleOneOfAlert                   `json:"alert"`
-	Type                 ENUMAPI                                                        `json:"type"`
-	Seed                 []CreateCustomRuleRequestContentRuleOneOfSeedInner             `json:"seed,omitempty"`
-	Transform            *CreateCustomRuleRequestContentRuleOneOfTransform              `json:"transform,omitempty"`
-	Detect               []CreateCustomRuleRequestContentRuleOneOfTransformTriggerInner `json:"detect"`
-	Extractors           []CreateCustomRuleRequestContentRuleOneOfExtractorsInner       `json:"extractors,omitempty"`
+	Alert CreateCustomRuleRequestContentRuleOneOfAlert `json:"alert"`
+	Type ENUMAPI `json:"type"`
+	Seed []CreateCustomRuleRequestContentRuleOneOfSeedInner `json:"seed,omitempty"`
+	Transform *CreateCustomRuleRequestContentRuleOneOfTransform `json:"transform,omitempty"`
+	Detect []CreateCustomRuleRequestContentRuleOneOfTransformTriggerInner `json:"detect"`
+	Extractors []CreateCustomRuleRequestContentRuleOneOfExtractorsInner `json:"extractors,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -187,9 +187,9 @@ func (o *CreateCustomRuleRequestContentRuleOneOf) SetDetect(v []CreateCustomRule
 	o.Detect = v
 }
 
-// GetExtractors returns the Extractors field value if set, zero value otherwise.
+// GetExtractors returns the Extractors field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateCustomRuleRequestContentRuleOneOf) GetExtractors() []CreateCustomRuleRequestContentRuleOneOfExtractorsInner {
-	if o == nil || IsNil(o.Extractors) {
+	if o == nil {
 		var ret []CreateCustomRuleRequestContentRuleOneOfExtractorsInner
 		return ret
 	}
@@ -198,6 +198,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOf) GetExtractors() []CreateCustom
 
 // GetExtractorsOk returns a tuple with the Extractors field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateCustomRuleRequestContentRuleOneOf) GetExtractorsOk() ([]CreateCustomRuleRequestContentRuleOneOfExtractorsInner, bool) {
 	if o == nil || IsNil(o.Extractors) {
 		return nil, false
@@ -220,7 +221,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOf) SetExtractors(v []CreateCustom
 }
 
 func (o CreateCustomRuleRequestContentRuleOneOf) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -238,7 +239,7 @@ func (o CreateCustomRuleRequestContentRuleOneOf) ToMap() (map[string]interface{}
 		toSerialize["transform"] = o.Transform
 	}
 	toSerialize["detect"] = o.Detect
-	if !IsNil(o.Extractors) {
+	if o.Extractors != nil {
 		toSerialize["extractors"] = o.Extractors
 	}
 
@@ -264,10 +265,10 @@ func (o *CreateCustomRuleRequestContentRuleOneOf) UnmarshalJSON(data []byte) (er
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -333,3 +334,5 @@ func (v *NullableCreateCustomRuleRequestContentRuleOneOf) UnmarshalJSON(src []by
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

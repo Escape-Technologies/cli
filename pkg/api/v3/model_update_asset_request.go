@@ -22,13 +22,13 @@ type UpdateAssetRequest struct {
 	TagIds *UpdateAssetRequestTagIds `json:"tagIds,omitempty"`
 	Owners *UpdateAssetRequestOwners `json:"owners,omitempty"`
 	// The project IDs of the asset
-	ProjectIds []string                                                `json:"projectIds,omitempty"`
-	Framework  *ENUMPROPERTIESFRAMEWORK                                `json:"framework,omitempty"`
-	Status     *ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS `json:"status,omitempty"`
+	ProjectIds []string `json:"projectIds,omitempty"`
+	Framework *ENUMPROPERTIESFRAMEWORK `json:"framework,omitempty"`
+	Status *ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS `json:"status,omitempty"`
 	// The description of the asset
 	Description *string `json:"description,omitempty"`
 	// The custom name of the asset. If not provided, the default name will be used.
-	Name                 *string `json:"name,omitempty"`
+	Name NullableString `json:"name,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -180,9 +180,9 @@ func (o *UpdateAssetRequest) SetFramework(v ENUMPROPERTIESFRAMEWORK) {
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
-func (o *UpdateAssetRequest) GetStatus() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS {
+func (o *UpdateAssetRequest) GetStatus() ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS {
 	if o == nil || IsNil(o.Status) {
-		var ret ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS
+		var ret ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS
 		return ret
 	}
 	return *o.Status
@@ -190,7 +190,7 @@ func (o *UpdateAssetRequest) GetStatus() ENUMPROPERTIESDATAITEMSPROPERTIESASSETP
 
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateAssetRequest) GetStatusOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS, bool) {
+func (o *UpdateAssetRequest) GetStatusOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS, bool) {
 	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
@@ -206,8 +206,8 @@ func (o *UpdateAssetRequest) HasStatus() bool {
 	return false
 }
 
-// SetStatus gets a reference to the given ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS and assigns it to the Status field.
-func (o *UpdateAssetRequest) SetStatus(v ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS) {
+// SetStatus gets a reference to the given ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS and assigns it to the Status field.
+func (o *UpdateAssetRequest) SetStatus(v ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS) {
 	o.Status = &v
 }
 
@@ -243,40 +243,50 @@ func (o *UpdateAssetRequest) SetDescription(v string) {
 	o.Description = &v
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
+// GetName returns the Name field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *UpdateAssetRequest) GetName() string {
-	if o == nil || IsNil(o.Name) {
+	if o == nil || IsNil(o.Name.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Name
+	return *o.Name.Get()
 }
 
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *UpdateAssetRequest) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Name, true
+	return o.Name.Get(), o.Name.IsSet()
 }
 
 // HasName returns a boolean if a field has been set.
 func (o *UpdateAssetRequest) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
+	if o != nil && o.Name.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetName gets a reference to the given string and assigns it to the Name field.
+// SetName gets a reference to the given NullableString and assigns it to the Name field.
 func (o *UpdateAssetRequest) SetName(v string) {
-	o.Name = &v
+	o.Name.Set(&v)
+}
+// SetNameNil sets the value for Name to be an explicit nil
+func (o *UpdateAssetRequest) SetNameNil() {
+	o.Name.Set(nil)
+}
+
+// UnsetName ensures that no value is present for Name, not even an explicit nil
+func (o *UpdateAssetRequest) UnsetName() {
+	o.Name.Unset()
 }
 
 func (o UpdateAssetRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -303,8 +313,8 @@ func (o UpdateAssetRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
+	if o.Name.IsSet() {
+		toSerialize["name"] = o.Name.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -376,3 +386,5 @@ func (v *NullableUpdateAssetRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

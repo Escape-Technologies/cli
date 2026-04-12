@@ -20,17 +20,17 @@ var _ MappedNullable = &CreateAssetBITBUCKETREPOSITORYRequestOrg{}
 
 // CreateAssetBITBUCKETREPOSITORYRequestOrg struct for CreateAssetBITBUCKETREPOSITORYRequestOrg
 type CreateAssetBITBUCKETREPOSITORYRequestOrg struct {
-	AssetClass           ENUMSOURCECODEMANAGEMENT  `json:"asset_class"`
-	ExtraMetadata        map[string]interface{}    `json:"extra_metadata,omitempty"`
-	ScreenshotS3Key      *string                   `json:"screenshot_s3_key,omitempty"`
-	AssetType            ENUMBITBUCKETORGANIZATION `json:"asset_type"`
-	Name                 *string                   `json:"name,omitempty"`
-	ImmutableKey         string                    `json:"immutable_key"`
-	Email                string                    `json:"email"`
-	ApiKey               string                    `json:"api_key"`
-	WorkspaceSlug        string                    `json:"workspace_slug"`
-	InstanceUrl          *string                   `json:"instance_url,omitempty"`
-	LocationId           *string                   `json:"location_id,omitempty"`
+	AssetClass ENUMSOURCECODEMANAGEMENT `json:"asset_class"`
+	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
+	ScreenshotS3Key NullableString `json:"screenshot_s3_key,omitempty"`
+	AssetType ENUMBITBUCKETORGANIZATION `json:"asset_type"`
+	Name NullableString `json:"name,omitempty"`
+	ImmutableKey string `json:"immutable_key"`
+	Email string `json:"email"`
+	ApiKey string `json:"api_key"`
+	WorkspaceSlug string `json:"workspace_slug"`
+	InstanceUrl NullableString `json:"instance_url,omitempty"`
+	LocationId NullableString `json:"location_id,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -115,36 +115,46 @@ func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) SetExtraMetadata(v map[string
 	o.ExtraMetadata = v
 }
 
-// GetScreenshotS3Key returns the ScreenshotS3Key field value if set, zero value otherwise.
+// GetScreenshotS3Key returns the ScreenshotS3Key field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) GetScreenshotS3Key() string {
-	if o == nil || IsNil(o.ScreenshotS3Key) {
+	if o == nil || IsNil(o.ScreenshotS3Key.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.ScreenshotS3Key
+	return *o.ScreenshotS3Key.Get()
 }
 
 // GetScreenshotS3KeyOk returns a tuple with the ScreenshotS3Key field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) GetScreenshotS3KeyOk() (*string, bool) {
-	if o == nil || IsNil(o.ScreenshotS3Key) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ScreenshotS3Key, true
+	return o.ScreenshotS3Key.Get(), o.ScreenshotS3Key.IsSet()
 }
 
 // HasScreenshotS3Key returns a boolean if a field has been set.
 func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) HasScreenshotS3Key() bool {
-	if o != nil && !IsNil(o.ScreenshotS3Key) {
+	if o != nil && o.ScreenshotS3Key.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetScreenshotS3Key gets a reference to the given string and assigns it to the ScreenshotS3Key field.
+// SetScreenshotS3Key gets a reference to the given NullableString and assigns it to the ScreenshotS3Key field.
 func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) SetScreenshotS3Key(v string) {
-	o.ScreenshotS3Key = &v
+	o.ScreenshotS3Key.Set(&v)
+}
+// SetScreenshotS3KeyNil sets the value for ScreenshotS3Key to be an explicit nil
+func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) SetScreenshotS3KeyNil() {
+	o.ScreenshotS3Key.Set(nil)
+}
+
+// UnsetScreenshotS3Key ensures that no value is present for ScreenshotS3Key, not even an explicit nil
+func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) UnsetScreenshotS3Key() {
+	o.ScreenshotS3Key.Unset()
 }
 
 // GetAssetType returns the AssetType field value
@@ -171,36 +181,46 @@ func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) SetAssetType(v ENUMBITBUCKETO
 	o.AssetType = v
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
+// GetName returns the Name field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) GetName() string {
-	if o == nil || IsNil(o.Name) {
+	if o == nil || IsNil(o.Name.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Name
+	return *o.Name.Get()
 }
 
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Name, true
+	return o.Name.Get(), o.Name.IsSet()
 }
 
 // HasName returns a boolean if a field has been set.
 func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
+	if o != nil && o.Name.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetName gets a reference to the given string and assigns it to the Name field.
+// SetName gets a reference to the given NullableString and assigns it to the Name field.
 func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) SetName(v string) {
-	o.Name = &v
+	o.Name.Set(&v)
+}
+// SetNameNil sets the value for Name to be an explicit nil
+func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) SetNameNil() {
+	o.Name.Set(nil)
+}
+
+// UnsetName ensures that no value is present for Name, not even an explicit nil
+func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) UnsetName() {
+	o.Name.Unset()
 }
 
 // GetImmutableKey returns the ImmutableKey field value
@@ -299,72 +319,92 @@ func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) SetWorkspaceSlug(v string) {
 	o.WorkspaceSlug = v
 }
 
-// GetInstanceUrl returns the InstanceUrl field value if set, zero value otherwise.
+// GetInstanceUrl returns the InstanceUrl field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) GetInstanceUrl() string {
-	if o == nil || IsNil(o.InstanceUrl) {
+	if o == nil || IsNil(o.InstanceUrl.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.InstanceUrl
+	return *o.InstanceUrl.Get()
 }
 
 // GetInstanceUrlOk returns a tuple with the InstanceUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) GetInstanceUrlOk() (*string, bool) {
-	if o == nil || IsNil(o.InstanceUrl) {
+	if o == nil {
 		return nil, false
 	}
-	return o.InstanceUrl, true
+	return o.InstanceUrl.Get(), o.InstanceUrl.IsSet()
 }
 
 // HasInstanceUrl returns a boolean if a field has been set.
 func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) HasInstanceUrl() bool {
-	if o != nil && !IsNil(o.InstanceUrl) {
+	if o != nil && o.InstanceUrl.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInstanceUrl gets a reference to the given string and assigns it to the InstanceUrl field.
+// SetInstanceUrl gets a reference to the given NullableString and assigns it to the InstanceUrl field.
 func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) SetInstanceUrl(v string) {
-	o.InstanceUrl = &v
+	o.InstanceUrl.Set(&v)
+}
+// SetInstanceUrlNil sets the value for InstanceUrl to be an explicit nil
+func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) SetInstanceUrlNil() {
+	o.InstanceUrl.Set(nil)
 }
 
-// GetLocationId returns the LocationId field value if set, zero value otherwise.
+// UnsetInstanceUrl ensures that no value is present for InstanceUrl, not even an explicit nil
+func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) UnsetInstanceUrl() {
+	o.InstanceUrl.Unset()
+}
+
+// GetLocationId returns the LocationId field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) GetLocationId() string {
-	if o == nil || IsNil(o.LocationId) {
+	if o == nil || IsNil(o.LocationId.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.LocationId
+	return *o.LocationId.Get()
 }
 
 // GetLocationIdOk returns a tuple with the LocationId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) GetLocationIdOk() (*string, bool) {
-	if o == nil || IsNil(o.LocationId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.LocationId, true
+	return o.LocationId.Get(), o.LocationId.IsSet()
 }
 
 // HasLocationId returns a boolean if a field has been set.
 func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) HasLocationId() bool {
-	if o != nil && !IsNil(o.LocationId) {
+	if o != nil && o.LocationId.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetLocationId gets a reference to the given string and assigns it to the LocationId field.
+// SetLocationId gets a reference to the given NullableString and assigns it to the LocationId field.
 func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) SetLocationId(v string) {
-	o.LocationId = &v
+	o.LocationId.Set(&v)
+}
+// SetLocationIdNil sets the value for LocationId to be an explicit nil
+func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) SetLocationIdNil() {
+	o.LocationId.Set(nil)
+}
+
+// UnsetLocationId ensures that no value is present for LocationId, not even an explicit nil
+func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) UnsetLocationId() {
+	o.LocationId.Unset()
 }
 
 func (o CreateAssetBITBUCKETREPOSITORYRequestOrg) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -377,22 +417,22 @@ func (o CreateAssetBITBUCKETREPOSITORYRequestOrg) ToMap() (map[string]interface{
 	if !IsNil(o.ExtraMetadata) {
 		toSerialize["extra_metadata"] = o.ExtraMetadata
 	}
-	if !IsNil(o.ScreenshotS3Key) {
-		toSerialize["screenshot_s3_key"] = o.ScreenshotS3Key
+	if o.ScreenshotS3Key.IsSet() {
+		toSerialize["screenshot_s3_key"] = o.ScreenshotS3Key.Get()
 	}
 	toSerialize["asset_type"] = o.AssetType
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
+	if o.Name.IsSet() {
+		toSerialize["name"] = o.Name.Get()
 	}
 	toSerialize["immutable_key"] = o.ImmutableKey
 	toSerialize["email"] = o.Email
 	toSerialize["api_key"] = o.ApiKey
 	toSerialize["workspace_slug"] = o.WorkspaceSlug
-	if !IsNil(o.InstanceUrl) {
-		toSerialize["instance_url"] = o.InstanceUrl
+	if o.InstanceUrl.IsSet() {
+		toSerialize["instance_url"] = o.InstanceUrl.Get()
 	}
-	if !IsNil(o.LocationId) {
-		toSerialize["location_id"] = o.LocationId
+	if o.LocationId.IsSet() {
+		toSerialize["location_id"] = o.LocationId.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -420,10 +460,10 @@ func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) UnmarshalJSON(data []byte) (e
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -494,3 +534,5 @@ func (v *NullableCreateAssetBITBUCKETREPOSITORYRequestOrg) UnmarshalJSON(src []b
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

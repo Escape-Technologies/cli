@@ -19,14 +19,14 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationNetwork{}
 
 // GetProfile200ResponseConfigurationNetwork struct for GetProfile200ResponseConfigurationNetwork
 type GetProfile200ResponseConfigurationNetwork struct {
-	RequestTimeoutS          *float32            `json:"request_timeout_s,omitempty"`
-	RequestsPerSecond        *float32            `json:"requests_per_second,omitempty"`
-	CustomHeaders            map[string][]string `json:"custom_headers,omitempty"`
-	CancelUnhealthyScanAfter *float32            `json:"cancel_unhealthy_scan_after,omitempty"`
-	EscapeUser               *bool               `json:"escape_user,omitempty"`
-	SecEscapeUser            *bool               `json:"sec_escape_user,omitempty"`
-	ParallelRequests         *float32            `json:"parallel_requests,omitempty"`
-	AdditionalProperties     map[string]interface{}
+	RequestTimeoutS NullableFloat32 `json:"request_timeout_s,omitempty"`
+	RequestsPerSecond NullableFloat32 `json:"requests_per_second,omitempty"`
+	CustomHeaders map[string][]string `json:"custom_headers,omitempty"`
+	CancelUnhealthyScanAfter NullableFloat32 `json:"cancel_unhealthy_scan_after,omitempty"`
+	EscapeUser NullableBool `json:"escape_user,omitempty"`
+	SecEscapeUser NullableBool `json:"sec_escape_user,omitempty"`
+	ParallelRequests NullableFloat32 `json:"parallel_requests,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetProfile200ResponseConfigurationNetwork GetProfile200ResponseConfigurationNetwork
@@ -48,68 +48,88 @@ func NewGetProfile200ResponseConfigurationNetworkWithDefaults() *GetProfile200Re
 	return &this
 }
 
-// GetRequestTimeoutS returns the RequestTimeoutS field value if set, zero value otherwise.
+// GetRequestTimeoutS returns the RequestTimeoutS field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationNetwork) GetRequestTimeoutS() float32 {
-	if o == nil || IsNil(o.RequestTimeoutS) {
+	if o == nil || IsNil(o.RequestTimeoutS.Get()) {
 		var ret float32
 		return ret
 	}
-	return *o.RequestTimeoutS
+	return *o.RequestTimeoutS.Get()
 }
 
 // GetRequestTimeoutSOk returns a tuple with the RequestTimeoutS field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationNetwork) GetRequestTimeoutSOk() (*float32, bool) {
-	if o == nil || IsNil(o.RequestTimeoutS) {
+	if o == nil {
 		return nil, false
 	}
-	return o.RequestTimeoutS, true
+	return o.RequestTimeoutS.Get(), o.RequestTimeoutS.IsSet()
 }
 
 // HasRequestTimeoutS returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationNetwork) HasRequestTimeoutS() bool {
-	if o != nil && !IsNil(o.RequestTimeoutS) {
+	if o != nil && o.RequestTimeoutS.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRequestTimeoutS gets a reference to the given float32 and assigns it to the RequestTimeoutS field.
+// SetRequestTimeoutS gets a reference to the given NullableFloat32 and assigns it to the RequestTimeoutS field.
 func (o *GetProfile200ResponseConfigurationNetwork) SetRequestTimeoutS(v float32) {
-	o.RequestTimeoutS = &v
+	o.RequestTimeoutS.Set(&v)
+}
+// SetRequestTimeoutSNil sets the value for RequestTimeoutS to be an explicit nil
+func (o *GetProfile200ResponseConfigurationNetwork) SetRequestTimeoutSNil() {
+	o.RequestTimeoutS.Set(nil)
 }
 
-// GetRequestsPerSecond returns the RequestsPerSecond field value if set, zero value otherwise.
+// UnsetRequestTimeoutS ensures that no value is present for RequestTimeoutS, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationNetwork) UnsetRequestTimeoutS() {
+	o.RequestTimeoutS.Unset()
+}
+
+// GetRequestsPerSecond returns the RequestsPerSecond field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationNetwork) GetRequestsPerSecond() float32 {
-	if o == nil || IsNil(o.RequestsPerSecond) {
+	if o == nil || IsNil(o.RequestsPerSecond.Get()) {
 		var ret float32
 		return ret
 	}
-	return *o.RequestsPerSecond
+	return *o.RequestsPerSecond.Get()
 }
 
 // GetRequestsPerSecondOk returns a tuple with the RequestsPerSecond field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationNetwork) GetRequestsPerSecondOk() (*float32, bool) {
-	if o == nil || IsNil(o.RequestsPerSecond) {
+	if o == nil {
 		return nil, false
 	}
-	return o.RequestsPerSecond, true
+	return o.RequestsPerSecond.Get(), o.RequestsPerSecond.IsSet()
 }
 
 // HasRequestsPerSecond returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationNetwork) HasRequestsPerSecond() bool {
-	if o != nil && !IsNil(o.RequestsPerSecond) {
+	if o != nil && o.RequestsPerSecond.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRequestsPerSecond gets a reference to the given float32 and assigns it to the RequestsPerSecond field.
+// SetRequestsPerSecond gets a reference to the given NullableFloat32 and assigns it to the RequestsPerSecond field.
 func (o *GetProfile200ResponseConfigurationNetwork) SetRequestsPerSecond(v float32) {
-	o.RequestsPerSecond = &v
+	o.RequestsPerSecond.Set(&v)
+}
+// SetRequestsPerSecondNil sets the value for RequestsPerSecond to be an explicit nil
+func (o *GetProfile200ResponseConfigurationNetwork) SetRequestsPerSecondNil() {
+	o.RequestsPerSecond.Set(nil)
+}
+
+// UnsetRequestsPerSecond ensures that no value is present for RequestsPerSecond, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationNetwork) UnsetRequestsPerSecond() {
+	o.RequestsPerSecond.Unset()
 }
 
 // GetCustomHeaders returns the CustomHeaders field value if set, zero value otherwise.
@@ -144,136 +164,176 @@ func (o *GetProfile200ResponseConfigurationNetwork) SetCustomHeaders(v map[strin
 	o.CustomHeaders = v
 }
 
-// GetCancelUnhealthyScanAfter returns the CancelUnhealthyScanAfter field value if set, zero value otherwise.
+// GetCancelUnhealthyScanAfter returns the CancelUnhealthyScanAfter field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationNetwork) GetCancelUnhealthyScanAfter() float32 {
-	if o == nil || IsNil(o.CancelUnhealthyScanAfter) {
+	if o == nil || IsNil(o.CancelUnhealthyScanAfter.Get()) {
 		var ret float32
 		return ret
 	}
-	return *o.CancelUnhealthyScanAfter
+	return *o.CancelUnhealthyScanAfter.Get()
 }
 
 // GetCancelUnhealthyScanAfterOk returns a tuple with the CancelUnhealthyScanAfter field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationNetwork) GetCancelUnhealthyScanAfterOk() (*float32, bool) {
-	if o == nil || IsNil(o.CancelUnhealthyScanAfter) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CancelUnhealthyScanAfter, true
+	return o.CancelUnhealthyScanAfter.Get(), o.CancelUnhealthyScanAfter.IsSet()
 }
 
 // HasCancelUnhealthyScanAfter returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationNetwork) HasCancelUnhealthyScanAfter() bool {
-	if o != nil && !IsNil(o.CancelUnhealthyScanAfter) {
+	if o != nil && o.CancelUnhealthyScanAfter.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCancelUnhealthyScanAfter gets a reference to the given float32 and assigns it to the CancelUnhealthyScanAfter field.
+// SetCancelUnhealthyScanAfter gets a reference to the given NullableFloat32 and assigns it to the CancelUnhealthyScanAfter field.
 func (o *GetProfile200ResponseConfigurationNetwork) SetCancelUnhealthyScanAfter(v float32) {
-	o.CancelUnhealthyScanAfter = &v
+	o.CancelUnhealthyScanAfter.Set(&v)
+}
+// SetCancelUnhealthyScanAfterNil sets the value for CancelUnhealthyScanAfter to be an explicit nil
+func (o *GetProfile200ResponseConfigurationNetwork) SetCancelUnhealthyScanAfterNil() {
+	o.CancelUnhealthyScanAfter.Set(nil)
 }
 
-// GetEscapeUser returns the EscapeUser field value if set, zero value otherwise.
+// UnsetCancelUnhealthyScanAfter ensures that no value is present for CancelUnhealthyScanAfter, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationNetwork) UnsetCancelUnhealthyScanAfter() {
+	o.CancelUnhealthyScanAfter.Unset()
+}
+
+// GetEscapeUser returns the EscapeUser field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationNetwork) GetEscapeUser() bool {
-	if o == nil || IsNil(o.EscapeUser) {
+	if o == nil || IsNil(o.EscapeUser.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.EscapeUser
+	return *o.EscapeUser.Get()
 }
 
 // GetEscapeUserOk returns a tuple with the EscapeUser field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationNetwork) GetEscapeUserOk() (*bool, bool) {
-	if o == nil || IsNil(o.EscapeUser) {
+	if o == nil {
 		return nil, false
 	}
-	return o.EscapeUser, true
+	return o.EscapeUser.Get(), o.EscapeUser.IsSet()
 }
 
 // HasEscapeUser returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationNetwork) HasEscapeUser() bool {
-	if o != nil && !IsNil(o.EscapeUser) {
+	if o != nil && o.EscapeUser.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetEscapeUser gets a reference to the given bool and assigns it to the EscapeUser field.
+// SetEscapeUser gets a reference to the given NullableBool and assigns it to the EscapeUser field.
 func (o *GetProfile200ResponseConfigurationNetwork) SetEscapeUser(v bool) {
-	o.EscapeUser = &v
+	o.EscapeUser.Set(&v)
+}
+// SetEscapeUserNil sets the value for EscapeUser to be an explicit nil
+func (o *GetProfile200ResponseConfigurationNetwork) SetEscapeUserNil() {
+	o.EscapeUser.Set(nil)
 }
 
-// GetSecEscapeUser returns the SecEscapeUser field value if set, zero value otherwise.
+// UnsetEscapeUser ensures that no value is present for EscapeUser, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationNetwork) UnsetEscapeUser() {
+	o.EscapeUser.Unset()
+}
+
+// GetSecEscapeUser returns the SecEscapeUser field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationNetwork) GetSecEscapeUser() bool {
-	if o == nil || IsNil(o.SecEscapeUser) {
+	if o == nil || IsNil(o.SecEscapeUser.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.SecEscapeUser
+	return *o.SecEscapeUser.Get()
 }
 
 // GetSecEscapeUserOk returns a tuple with the SecEscapeUser field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationNetwork) GetSecEscapeUserOk() (*bool, bool) {
-	if o == nil || IsNil(o.SecEscapeUser) {
+	if o == nil {
 		return nil, false
 	}
-	return o.SecEscapeUser, true
+	return o.SecEscapeUser.Get(), o.SecEscapeUser.IsSet()
 }
 
 // HasSecEscapeUser returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationNetwork) HasSecEscapeUser() bool {
-	if o != nil && !IsNil(o.SecEscapeUser) {
+	if o != nil && o.SecEscapeUser.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSecEscapeUser gets a reference to the given bool and assigns it to the SecEscapeUser field.
+// SetSecEscapeUser gets a reference to the given NullableBool and assigns it to the SecEscapeUser field.
 func (o *GetProfile200ResponseConfigurationNetwork) SetSecEscapeUser(v bool) {
-	o.SecEscapeUser = &v
+	o.SecEscapeUser.Set(&v)
+}
+// SetSecEscapeUserNil sets the value for SecEscapeUser to be an explicit nil
+func (o *GetProfile200ResponseConfigurationNetwork) SetSecEscapeUserNil() {
+	o.SecEscapeUser.Set(nil)
 }
 
-// GetParallelRequests returns the ParallelRequests field value if set, zero value otherwise.
+// UnsetSecEscapeUser ensures that no value is present for SecEscapeUser, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationNetwork) UnsetSecEscapeUser() {
+	o.SecEscapeUser.Unset()
+}
+
+// GetParallelRequests returns the ParallelRequests field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationNetwork) GetParallelRequests() float32 {
-	if o == nil || IsNil(o.ParallelRequests) {
+	if o == nil || IsNil(o.ParallelRequests.Get()) {
 		var ret float32
 		return ret
 	}
-	return *o.ParallelRequests
+	return *o.ParallelRequests.Get()
 }
 
 // GetParallelRequestsOk returns a tuple with the ParallelRequests field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationNetwork) GetParallelRequestsOk() (*float32, bool) {
-	if o == nil || IsNil(o.ParallelRequests) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ParallelRequests, true
+	return o.ParallelRequests.Get(), o.ParallelRequests.IsSet()
 }
 
 // HasParallelRequests returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationNetwork) HasParallelRequests() bool {
-	if o != nil && !IsNil(o.ParallelRequests) {
+	if o != nil && o.ParallelRequests.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetParallelRequests gets a reference to the given float32 and assigns it to the ParallelRequests field.
+// SetParallelRequests gets a reference to the given NullableFloat32 and assigns it to the ParallelRequests field.
 func (o *GetProfile200ResponseConfigurationNetwork) SetParallelRequests(v float32) {
-	o.ParallelRequests = &v
+	o.ParallelRequests.Set(&v)
+}
+// SetParallelRequestsNil sets the value for ParallelRequests to be an explicit nil
+func (o *GetProfile200ResponseConfigurationNetwork) SetParallelRequestsNil() {
+	o.ParallelRequests.Set(nil)
+}
+
+// UnsetParallelRequests ensures that no value is present for ParallelRequests, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationNetwork) UnsetParallelRequests() {
+	o.ParallelRequests.Unset()
 }
 
 func (o GetProfile200ResponseConfigurationNetwork) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -282,26 +342,26 @@ func (o GetProfile200ResponseConfigurationNetwork) MarshalJSON() ([]byte, error)
 
 func (o GetProfile200ResponseConfigurationNetwork) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.RequestTimeoutS) {
-		toSerialize["request_timeout_s"] = o.RequestTimeoutS
+	if o.RequestTimeoutS.IsSet() {
+		toSerialize["request_timeout_s"] = o.RequestTimeoutS.Get()
 	}
-	if !IsNil(o.RequestsPerSecond) {
-		toSerialize["requests_per_second"] = o.RequestsPerSecond
+	if o.RequestsPerSecond.IsSet() {
+		toSerialize["requests_per_second"] = o.RequestsPerSecond.Get()
 	}
 	if !IsNil(o.CustomHeaders) {
 		toSerialize["custom_headers"] = o.CustomHeaders
 	}
-	if !IsNil(o.CancelUnhealthyScanAfter) {
-		toSerialize["cancel_unhealthy_scan_after"] = o.CancelUnhealthyScanAfter
+	if o.CancelUnhealthyScanAfter.IsSet() {
+		toSerialize["cancel_unhealthy_scan_after"] = o.CancelUnhealthyScanAfter.Get()
 	}
-	if !IsNil(o.EscapeUser) {
-		toSerialize["escape_user"] = o.EscapeUser
+	if o.EscapeUser.IsSet() {
+		toSerialize["escape_user"] = o.EscapeUser.Get()
 	}
-	if !IsNil(o.SecEscapeUser) {
-		toSerialize["sec_escape_user"] = o.SecEscapeUser
+	if o.SecEscapeUser.IsSet() {
+		toSerialize["sec_escape_user"] = o.SecEscapeUser.Get()
 	}
-	if !IsNil(o.ParallelRequests) {
-		toSerialize["parallel_requests"] = o.ParallelRequests
+	if o.ParallelRequests.IsSet() {
+		toSerialize["parallel_requests"] = o.ParallelRequests.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -373,3 +433,5 @@ func (v *NullableGetProfile200ResponseConfigurationNetwork) UnmarshalJSON(src []
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

@@ -18,11 +18,12 @@ import (
 
 // GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInner - struct for GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInner
 type GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInner struct {
-	GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf  *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf
+	GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf
 	GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1 *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1
 	GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf2 *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf2
 	GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf3 *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf3
 	GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf4 *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf4
+	GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf5 *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf5
 }
 
 // GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfAsGetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInner is a convenience function that returns GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf wrapped in GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInner
@@ -59,6 +60,14 @@ func GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsIn
 		GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf4: v,
 	}
 }
+
+// GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf5AsGetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInner is a convenience function that returns GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf5 wrapped in GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInner
+func GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf5AsGetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInner(v *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf5) GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInner {
+	return GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInner{
+		GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf5: v,
+	}
+}
+
 
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInner) UnmarshalJSON(data []byte) error {
@@ -149,6 +158,23 @@ func (dst *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperat
 		dst.GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf4 = nil
 	}
 
+	// try to unmarshal data into GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf5
+	err = newStrictDecoder(data).Decode(&dst.GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf5)
+	if err == nil {
+		jsonGetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf5, _ := json.Marshal(dst.GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf5)
+		if string(jsonGetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf5) == "{}" { // empty struct
+			dst.GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf5 = nil
+		} else {
+			if err = validator.Validate(dst.GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf5); err != nil {
+				dst.GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf5 = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf5 = nil
+	}
+
 	if match > 1 { // more than 1 match
 		// reset to nil
 		dst.GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf = nil
@@ -156,6 +182,7 @@ func (dst *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperat
 		dst.GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf2 = nil
 		dst.GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf3 = nil
 		dst.GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf4 = nil
+		dst.GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf5 = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInner)")
 	} else if match == 1 {
@@ -187,11 +214,15 @@ func (src GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperati
 		return json.Marshal(&src.GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf4)
 	}
 
+	if src.GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf5 != nil {
+		return json.Marshal(&src.GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf5)
+	}
+
 	return nil, nil // no data in oneOf schemas
 }
 
 // Get the actual instance
-func (obj *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInner) GetActualInstance() interface{} {
+func (obj *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInner) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
@@ -215,12 +246,16 @@ func (obj *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperat
 		return obj.GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf4
 	}
 
+	if obj.GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf5 != nil {
+		return obj.GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf5
+	}
+
 	// all schemas are nil
 	return nil
 }
 
 // Get the actual instance value
-func (obj GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInner) GetActualInstanceValue() interface{} {
+func (obj GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInner) GetActualInstanceValue() (interface{}) {
 	if obj.GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf != nil {
 		return *obj.GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf
 	}
@@ -239,6 +274,10 @@ func (obj GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperati
 
 	if obj.GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf4 != nil {
 		return *obj.GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf4
+	}
+
+	if obj.GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf5 != nil {
+		return *obj.GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf5
 	}
 
 	// all schemas are nil
@@ -280,3 +319,5 @@ func (v *NullableGetProfile200ResponseConfigurationAuthenticationProceduresInner
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

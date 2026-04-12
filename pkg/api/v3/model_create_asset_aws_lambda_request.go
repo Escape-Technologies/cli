@@ -21,16 +21,16 @@ var _ MappedNullable = &CreateAssetAWSLAMBDARequest{}
 // CreateAssetAWSLAMBDARequest struct for CreateAssetAWSLAMBDARequest
 type CreateAssetAWSLAMBDARequest struct {
 	// The list of project IDs bind the asset on.
-	ProjectIds           []string               `json:"projectIds,omitempty"`
-	Name                 string                 `json:"name"`
-	AssetClass           ENUMCLOUDCOMPONENT     `json:"asset_class"`
-	ExtraMetadata        map[string]interface{} `json:"extra_metadata,omitempty"`
-	ScreenshotS3Key      *string                `json:"screenshot_s3_key,omitempty"`
-	AssetType            ENUMAWSLAMBDA          `json:"asset_type"`
-	FunctionArn          string                 `json:"function_arn"`
-	Runtime              *string                `json:"runtime,omitempty"`
-	Description          *string                `json:"description,omitempty"`
-	FunctionUrl          *string                `json:"function_url,omitempty"`
+	ProjectIds []string `json:"projectIds,omitempty"`
+	Name string `json:"name"`
+	AssetClass ENUMCLOUDCOMPONENT `json:"asset_class"`
+	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
+	ScreenshotS3Key NullableString `json:"screenshot_s3_key,omitempty"`
+	AssetType ENUMAWSLAMBDA `json:"asset_type"`
+	FunctionArn string `json:"function_arn"`
+	Runtime NullableString `json:"runtime,omitempty"`
+	Description NullableString `json:"description,omitempty"`
+	FunctionUrl NullableString `json:"function_url,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -57,9 +57,9 @@ func NewCreateAssetAWSLAMBDARequestWithDefaults() *CreateAssetAWSLAMBDARequest {
 	return &this
 }
 
-// GetProjectIds returns the ProjectIds field value if set, zero value otherwise.
+// GetProjectIds returns the ProjectIds field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetAWSLAMBDARequest) GetProjectIds() []string {
-	if o == nil || IsNil(o.ProjectIds) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -68,6 +68,7 @@ func (o *CreateAssetAWSLAMBDARequest) GetProjectIds() []string {
 
 // GetProjectIdsOk returns a tuple with the ProjectIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetAWSLAMBDARequest) GetProjectIdsOk() ([]string, bool) {
 	if o == nil || IsNil(o.ProjectIds) {
 		return nil, false
@@ -169,36 +170,46 @@ func (o *CreateAssetAWSLAMBDARequest) SetExtraMetadata(v map[string]interface{})
 	o.ExtraMetadata = v
 }
 
-// GetScreenshotS3Key returns the ScreenshotS3Key field value if set, zero value otherwise.
+// GetScreenshotS3Key returns the ScreenshotS3Key field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetAWSLAMBDARequest) GetScreenshotS3Key() string {
-	if o == nil || IsNil(o.ScreenshotS3Key) {
+	if o == nil || IsNil(o.ScreenshotS3Key.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.ScreenshotS3Key
+	return *o.ScreenshotS3Key.Get()
 }
 
 // GetScreenshotS3KeyOk returns a tuple with the ScreenshotS3Key field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetAWSLAMBDARequest) GetScreenshotS3KeyOk() (*string, bool) {
-	if o == nil || IsNil(o.ScreenshotS3Key) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ScreenshotS3Key, true
+	return o.ScreenshotS3Key.Get(), o.ScreenshotS3Key.IsSet()
 }
 
 // HasScreenshotS3Key returns a boolean if a field has been set.
 func (o *CreateAssetAWSLAMBDARequest) HasScreenshotS3Key() bool {
-	if o != nil && !IsNil(o.ScreenshotS3Key) {
+	if o != nil && o.ScreenshotS3Key.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetScreenshotS3Key gets a reference to the given string and assigns it to the ScreenshotS3Key field.
+// SetScreenshotS3Key gets a reference to the given NullableString and assigns it to the ScreenshotS3Key field.
 func (o *CreateAssetAWSLAMBDARequest) SetScreenshotS3Key(v string) {
-	o.ScreenshotS3Key = &v
+	o.ScreenshotS3Key.Set(&v)
+}
+// SetScreenshotS3KeyNil sets the value for ScreenshotS3Key to be an explicit nil
+func (o *CreateAssetAWSLAMBDARequest) SetScreenshotS3KeyNil() {
+	o.ScreenshotS3Key.Set(nil)
+}
+
+// UnsetScreenshotS3Key ensures that no value is present for ScreenshotS3Key, not even an explicit nil
+func (o *CreateAssetAWSLAMBDARequest) UnsetScreenshotS3Key() {
+	o.ScreenshotS3Key.Unset()
 }
 
 // GetAssetType returns the AssetType field value
@@ -249,104 +260,134 @@ func (o *CreateAssetAWSLAMBDARequest) SetFunctionArn(v string) {
 	o.FunctionArn = v
 }
 
-// GetRuntime returns the Runtime field value if set, zero value otherwise.
+// GetRuntime returns the Runtime field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetAWSLAMBDARequest) GetRuntime() string {
-	if o == nil || IsNil(o.Runtime) {
+	if o == nil || IsNil(o.Runtime.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Runtime
+	return *o.Runtime.Get()
 }
 
 // GetRuntimeOk returns a tuple with the Runtime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetAWSLAMBDARequest) GetRuntimeOk() (*string, bool) {
-	if o == nil || IsNil(o.Runtime) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Runtime, true
+	return o.Runtime.Get(), o.Runtime.IsSet()
 }
 
 // HasRuntime returns a boolean if a field has been set.
 func (o *CreateAssetAWSLAMBDARequest) HasRuntime() bool {
-	if o != nil && !IsNil(o.Runtime) {
+	if o != nil && o.Runtime.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRuntime gets a reference to the given string and assigns it to the Runtime field.
+// SetRuntime gets a reference to the given NullableString and assigns it to the Runtime field.
 func (o *CreateAssetAWSLAMBDARequest) SetRuntime(v string) {
-	o.Runtime = &v
+	o.Runtime.Set(&v)
+}
+// SetRuntimeNil sets the value for Runtime to be an explicit nil
+func (o *CreateAssetAWSLAMBDARequest) SetRuntimeNil() {
+	o.Runtime.Set(nil)
 }
 
-// GetDescription returns the Description field value if set, zero value otherwise.
+// UnsetRuntime ensures that no value is present for Runtime, not even an explicit nil
+func (o *CreateAssetAWSLAMBDARequest) UnsetRuntime() {
+	o.Runtime.Unset()
+}
+
+// GetDescription returns the Description field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetAWSLAMBDARequest) GetDescription() string {
-	if o == nil || IsNil(o.Description) {
+	if o == nil || IsNil(o.Description.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Description
+	return *o.Description.Get()
 }
 
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetAWSLAMBDARequest) GetDescriptionOk() (*string, bool) {
-	if o == nil || IsNil(o.Description) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Description, true
+	return o.Description.Get(), o.Description.IsSet()
 }
 
 // HasDescription returns a boolean if a field has been set.
 func (o *CreateAssetAWSLAMBDARequest) HasDescription() bool {
-	if o != nil && !IsNil(o.Description) {
+	if o != nil && o.Description.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetDescription gets a reference to the given string and assigns it to the Description field.
+// SetDescription gets a reference to the given NullableString and assigns it to the Description field.
 func (o *CreateAssetAWSLAMBDARequest) SetDescription(v string) {
-	o.Description = &v
+	o.Description.Set(&v)
+}
+// SetDescriptionNil sets the value for Description to be an explicit nil
+func (o *CreateAssetAWSLAMBDARequest) SetDescriptionNil() {
+	o.Description.Set(nil)
 }
 
-// GetFunctionUrl returns the FunctionUrl field value if set, zero value otherwise.
+// UnsetDescription ensures that no value is present for Description, not even an explicit nil
+func (o *CreateAssetAWSLAMBDARequest) UnsetDescription() {
+	o.Description.Unset()
+}
+
+// GetFunctionUrl returns the FunctionUrl field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetAWSLAMBDARequest) GetFunctionUrl() string {
-	if o == nil || IsNil(o.FunctionUrl) {
+	if o == nil || IsNil(o.FunctionUrl.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.FunctionUrl
+	return *o.FunctionUrl.Get()
 }
 
 // GetFunctionUrlOk returns a tuple with the FunctionUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetAWSLAMBDARequest) GetFunctionUrlOk() (*string, bool) {
-	if o == nil || IsNil(o.FunctionUrl) {
+	if o == nil {
 		return nil, false
 	}
-	return o.FunctionUrl, true
+	return o.FunctionUrl.Get(), o.FunctionUrl.IsSet()
 }
 
 // HasFunctionUrl returns a boolean if a field has been set.
 func (o *CreateAssetAWSLAMBDARequest) HasFunctionUrl() bool {
-	if o != nil && !IsNil(o.FunctionUrl) {
+	if o != nil && o.FunctionUrl.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetFunctionUrl gets a reference to the given string and assigns it to the FunctionUrl field.
+// SetFunctionUrl gets a reference to the given NullableString and assigns it to the FunctionUrl field.
 func (o *CreateAssetAWSLAMBDARequest) SetFunctionUrl(v string) {
-	o.FunctionUrl = &v
+	o.FunctionUrl.Set(&v)
+}
+// SetFunctionUrlNil sets the value for FunctionUrl to be an explicit nil
+func (o *CreateAssetAWSLAMBDARequest) SetFunctionUrlNil() {
+	o.FunctionUrl.Set(nil)
+}
+
+// UnsetFunctionUrl ensures that no value is present for FunctionUrl, not even an explicit nil
+func (o *CreateAssetAWSLAMBDARequest) UnsetFunctionUrl() {
+	o.FunctionUrl.Unset()
 }
 
 func (o CreateAssetAWSLAMBDARequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -355,7 +396,7 @@ func (o CreateAssetAWSLAMBDARequest) MarshalJSON() ([]byte, error) {
 
 func (o CreateAssetAWSLAMBDARequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ProjectIds) {
+	if o.ProjectIds != nil {
 		toSerialize["projectIds"] = o.ProjectIds
 	}
 	toSerialize["name"] = o.Name
@@ -363,19 +404,19 @@ func (o CreateAssetAWSLAMBDARequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ExtraMetadata) {
 		toSerialize["extra_metadata"] = o.ExtraMetadata
 	}
-	if !IsNil(o.ScreenshotS3Key) {
-		toSerialize["screenshot_s3_key"] = o.ScreenshotS3Key
+	if o.ScreenshotS3Key.IsSet() {
+		toSerialize["screenshot_s3_key"] = o.ScreenshotS3Key.Get()
 	}
 	toSerialize["asset_type"] = o.AssetType
 	toSerialize["function_arn"] = o.FunctionArn
-	if !IsNil(o.Runtime) {
-		toSerialize["runtime"] = o.Runtime
+	if o.Runtime.IsSet() {
+		toSerialize["runtime"] = o.Runtime.Get()
 	}
-	if !IsNil(o.Description) {
-		toSerialize["description"] = o.Description
+	if o.Description.IsSet() {
+		toSerialize["description"] = o.Description.Get()
 	}
-	if !IsNil(o.FunctionUrl) {
-		toSerialize["function_url"] = o.FunctionUrl
+	if o.FunctionUrl.IsSet() {
+		toSerialize["function_url"] = o.FunctionUrl.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -401,10 +442,10 @@ func (o *CreateAssetAWSLAMBDARequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -474,3 +515,5 @@ func (v *NullableCreateAssetAWSLAMBDARequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

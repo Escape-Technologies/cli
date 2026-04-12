@@ -23,13 +23,13 @@ type AttachmentDetailed struct {
 	// The id of the attachment
 	Id string `json:"id"`
 	// The date and time the attachment was created
-	CreatedAt            string                        `json:"createdAt"`
-	Exchange             *ExchangeDetailed             `json:"exchange,omitempty"`
+	CreatedAt string `json:"createdAt"`
+	Exchange *ExchangeDetailed `json:"exchange,omitempty"`
 	GeneratedOpenapiSpec *GeneratedOpenapiSpecDetailed `json:"generatedOpenapiSpec,omitempty"`
-	Graph                *GraphDetailed                `json:"graph,omitempty"`
-	Screenshot           *ScreenshotDetailed           `json:"screenshot,omitempty"`
-	Snippet              *SnippetDetailed              `json:"snippet,omitempty"`
-	Target               *TargetDetailed               `json:"target,omitempty"`
+	Graph *GraphDetailed `json:"graph,omitempty"`
+	Screenshot *ScreenshotDetailed `json:"screenshot,omitempty"`
+	Snippet *SnippetDetailed `json:"snippet,omitempty"`
+	Target *TargetDetailed1 `json:"target,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -263,9 +263,9 @@ func (o *AttachmentDetailed) SetSnippet(v SnippetDetailed) {
 }
 
 // GetTarget returns the Target field value if set, zero value otherwise.
-func (o *AttachmentDetailed) GetTarget() TargetDetailed {
+func (o *AttachmentDetailed) GetTarget() TargetDetailed1 {
 	if o == nil || IsNil(o.Target) {
-		var ret TargetDetailed
+		var ret TargetDetailed1
 		return ret
 	}
 	return *o.Target
@@ -273,7 +273,7 @@ func (o *AttachmentDetailed) GetTarget() TargetDetailed {
 
 // GetTargetOk returns a tuple with the Target field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AttachmentDetailed) GetTargetOk() (*TargetDetailed, bool) {
+func (o *AttachmentDetailed) GetTargetOk() (*TargetDetailed1, bool) {
 	if o == nil || IsNil(o.Target) {
 		return nil, false
 	}
@@ -289,13 +289,13 @@ func (o *AttachmentDetailed) HasTarget() bool {
 	return false
 }
 
-// SetTarget gets a reference to the given TargetDetailed and assigns it to the Target field.
-func (o *AttachmentDetailed) SetTarget(v TargetDetailed) {
+// SetTarget gets a reference to the given TargetDetailed1 and assigns it to the Target field.
+func (o *AttachmentDetailed) SetTarget(v TargetDetailed1) {
 	o.Target = &v
 }
 
 func (o AttachmentDetailed) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -346,10 +346,10 @@ func (o *AttachmentDetailed) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -417,3 +417,5 @@ func (v *NullableAttachmentDetailed) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

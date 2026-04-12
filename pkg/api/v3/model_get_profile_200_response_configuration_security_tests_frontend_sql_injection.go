@@ -19,9 +19,9 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationSecurityTestsFrontendS
 
 // GetProfile200ResponseConfigurationSecurityTestsFrontendSqlInjection struct for GetProfile200ResponseConfigurationSecurityTestsFrontendSqlInjection
 type GetProfile200ResponseConfigurationSecurityTestsFrontendSqlInjection struct {
-	Skip                    *bool `json:"skip,omitempty"`
-	DedupeQueryParamsByName *bool `json:"dedupe_query_params_by_name,omitempty"`
-	AdditionalProperties    map[string]interface{}
+	Skip NullableBool `json:"skip,omitempty"`
+	DedupeQueryParamsByName NullableBool `json:"dedupe_query_params_by_name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetProfile200ResponseConfigurationSecurityTestsFrontendSqlInjection GetProfile200ResponseConfigurationSecurityTestsFrontendSqlInjection
@@ -43,72 +43,92 @@ func NewGetProfile200ResponseConfigurationSecurityTestsFrontendSqlInjectionWithD
 	return &this
 }
 
-// GetSkip returns the Skip field value if set, zero value otherwise.
+// GetSkip returns the Skip field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationSecurityTestsFrontendSqlInjection) GetSkip() bool {
-	if o == nil || IsNil(o.Skip) {
+	if o == nil || IsNil(o.Skip.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.Skip
+	return *o.Skip.Get()
 }
 
 // GetSkipOk returns a tuple with the Skip field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationSecurityTestsFrontendSqlInjection) GetSkipOk() (*bool, bool) {
-	if o == nil || IsNil(o.Skip) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Skip, true
+	return o.Skip.Get(), o.Skip.IsSet()
 }
 
 // HasSkip returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationSecurityTestsFrontendSqlInjection) HasSkip() bool {
-	if o != nil && !IsNil(o.Skip) {
+	if o != nil && o.Skip.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSkip gets a reference to the given bool and assigns it to the Skip field.
+// SetSkip gets a reference to the given NullableBool and assigns it to the Skip field.
 func (o *GetProfile200ResponseConfigurationSecurityTestsFrontendSqlInjection) SetSkip(v bool) {
-	o.Skip = &v
+	o.Skip.Set(&v)
+}
+// SetSkipNil sets the value for Skip to be an explicit nil
+func (o *GetProfile200ResponseConfigurationSecurityTestsFrontendSqlInjection) SetSkipNil() {
+	o.Skip.Set(nil)
 }
 
-// GetDedupeQueryParamsByName returns the DedupeQueryParamsByName field value if set, zero value otherwise.
+// UnsetSkip ensures that no value is present for Skip, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationSecurityTestsFrontendSqlInjection) UnsetSkip() {
+	o.Skip.Unset()
+}
+
+// GetDedupeQueryParamsByName returns the DedupeQueryParamsByName field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationSecurityTestsFrontendSqlInjection) GetDedupeQueryParamsByName() bool {
-	if o == nil || IsNil(o.DedupeQueryParamsByName) {
+	if o == nil || IsNil(o.DedupeQueryParamsByName.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.DedupeQueryParamsByName
+	return *o.DedupeQueryParamsByName.Get()
 }
 
 // GetDedupeQueryParamsByNameOk returns a tuple with the DedupeQueryParamsByName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationSecurityTestsFrontendSqlInjection) GetDedupeQueryParamsByNameOk() (*bool, bool) {
-	if o == nil || IsNil(o.DedupeQueryParamsByName) {
+	if o == nil {
 		return nil, false
 	}
-	return o.DedupeQueryParamsByName, true
+	return o.DedupeQueryParamsByName.Get(), o.DedupeQueryParamsByName.IsSet()
 }
 
 // HasDedupeQueryParamsByName returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationSecurityTestsFrontendSqlInjection) HasDedupeQueryParamsByName() bool {
-	if o != nil && !IsNil(o.DedupeQueryParamsByName) {
+	if o != nil && o.DedupeQueryParamsByName.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetDedupeQueryParamsByName gets a reference to the given bool and assigns it to the DedupeQueryParamsByName field.
+// SetDedupeQueryParamsByName gets a reference to the given NullableBool and assigns it to the DedupeQueryParamsByName field.
 func (o *GetProfile200ResponseConfigurationSecurityTestsFrontendSqlInjection) SetDedupeQueryParamsByName(v bool) {
-	o.DedupeQueryParamsByName = &v
+	o.DedupeQueryParamsByName.Set(&v)
+}
+// SetDedupeQueryParamsByNameNil sets the value for DedupeQueryParamsByName to be an explicit nil
+func (o *GetProfile200ResponseConfigurationSecurityTestsFrontendSqlInjection) SetDedupeQueryParamsByNameNil() {
+	o.DedupeQueryParamsByName.Set(nil)
+}
+
+// UnsetDedupeQueryParamsByName ensures that no value is present for DedupeQueryParamsByName, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationSecurityTestsFrontendSqlInjection) UnsetDedupeQueryParamsByName() {
+	o.DedupeQueryParamsByName.Unset()
 }
 
 func (o GetProfile200ResponseConfigurationSecurityTestsFrontendSqlInjection) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -117,11 +137,11 @@ func (o GetProfile200ResponseConfigurationSecurityTestsFrontendSqlInjection) Mar
 
 func (o GetProfile200ResponseConfigurationSecurityTestsFrontendSqlInjection) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Skip) {
-		toSerialize["skip"] = o.Skip
+	if o.Skip.IsSet() {
+		toSerialize["skip"] = o.Skip.Get()
 	}
-	if !IsNil(o.DedupeQueryParamsByName) {
-		toSerialize["dedupe_query_params_by_name"] = o.DedupeQueryParamsByName
+	if o.DedupeQueryParamsByName.IsSet() {
+		toSerialize["dedupe_query_params_by_name"] = o.DedupeQueryParamsByName.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -188,3 +208,5 @@ func (v *NullableGetProfile200ResponseConfigurationSecurityTestsFrontendSqlInjec
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

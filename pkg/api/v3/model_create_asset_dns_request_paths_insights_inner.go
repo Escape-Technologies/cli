@@ -20,10 +20,10 @@ var _ MappedNullable = &CreateAssetDNSRequestPathsInsightsInner{}
 
 // CreateAssetDNSRequestPathsInsightsInner struct for CreateAssetDNSRequestPathsInsightsInner
 type CreateAssetDNSRequestPathsInsightsInner struct {
-	Path                 string                                                                              `json:"path"`
-	Method               ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD `json:"method"`
-	Parameters           *CreateAssetDNSRequestPathsInsightsInnerParameters                                  `json:"parameters,omitempty"`
-	ReturnType           *CreateAssetDNSRequestPathsInsightsInnerReturnType                                  `json:"returnType,omitempty"`
+	Path string `json:"path"`
+	Method NullableENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD `json:"method"`
+	Parameters *CreateAssetDNSRequestPathsInsightsInnerParameters `json:"parameters,omitempty"`
+	ReturnType *CreateAssetDNSRequestPathsInsightsInnerReturnType `json:"returnType,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -33,7 +33,7 @@ type _CreateAssetDNSRequestPathsInsightsInner CreateAssetDNSRequestPathsInsights
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetDNSRequestPathsInsightsInner(path string, method ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD) *CreateAssetDNSRequestPathsInsightsInner {
+func NewCreateAssetDNSRequestPathsInsightsInner(path string, method NullableENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD) *CreateAssetDNSRequestPathsInsightsInner {
 	this := CreateAssetDNSRequestPathsInsightsInner{}
 	this.Path = path
 	this.Method = method
@@ -73,27 +73,29 @@ func (o *CreateAssetDNSRequestPathsInsightsInner) SetPath(v string) {
 }
 
 // GetMethod returns the Method field value
+// If the value is explicit nil, the zero value for ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD will be returned
 func (o *CreateAssetDNSRequestPathsInsightsInner) GetMethod() ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD {
-	if o == nil {
+	if o == nil || o.Method.Get() == nil {
 		var ret ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD
 		return ret
 	}
 
-	return o.Method
+	return *o.Method.Get()
 }
 
 // GetMethodOk returns a tuple with the Method field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetDNSRequestPathsInsightsInner) GetMethodOk() (*ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Method, true
+	return o.Method.Get(), o.Method.IsSet()
 }
 
 // SetMethod sets field value
 func (o *CreateAssetDNSRequestPathsInsightsInner) SetMethod(v ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD) {
-	o.Method = v
+	o.Method.Set(&v)
 }
 
 // GetParameters returns the Parameters field value if set, zero value otherwise.
@@ -161,7 +163,7 @@ func (o *CreateAssetDNSRequestPathsInsightsInner) SetReturnType(v CreateAssetDNS
 }
 
 func (o CreateAssetDNSRequestPathsInsightsInner) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -171,7 +173,7 @@ func (o CreateAssetDNSRequestPathsInsightsInner) MarshalJSON() ([]byte, error) {
 func (o CreateAssetDNSRequestPathsInsightsInner) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["path"] = o.Path
-	toSerialize["method"] = o.Method
+	toSerialize["method"] = o.Method.Get()
 	if !IsNil(o.Parameters) {
 		toSerialize["parameters"] = o.Parameters
 	}
@@ -200,10 +202,10 @@ func (o *CreateAssetDNSRequestPathsInsightsInner) UnmarshalJSON(data []byte) (er
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -267,3 +269,5 @@ func (v *NullableCreateAssetDNSRequestPathsInsightsInner) UnmarshalJSON(src []by
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

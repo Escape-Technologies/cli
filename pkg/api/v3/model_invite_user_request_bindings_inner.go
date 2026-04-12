@@ -23,7 +23,7 @@ type InviteUserRequestBindingsInner struct {
 	// The role ID
 	RoleId string `json:"roleId"`
 	// An optional project ID
-	ProjectId            *string `json:"projectId,omitempty"`
+	ProjectId NullableString `json:"projectId,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -71,40 +71,50 @@ func (o *InviteUserRequestBindingsInner) SetRoleId(v string) {
 	o.RoleId = v
 }
 
-// GetProjectId returns the ProjectId field value if set, zero value otherwise.
+// GetProjectId returns the ProjectId field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *InviteUserRequestBindingsInner) GetProjectId() string {
-	if o == nil || IsNil(o.ProjectId) {
+	if o == nil || IsNil(o.ProjectId.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.ProjectId
+	return *o.ProjectId.Get()
 }
 
 // GetProjectIdOk returns a tuple with the ProjectId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *InviteUserRequestBindingsInner) GetProjectIdOk() (*string, bool) {
-	if o == nil || IsNil(o.ProjectId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ProjectId, true
+	return o.ProjectId.Get(), o.ProjectId.IsSet()
 }
 
 // HasProjectId returns a boolean if a field has been set.
 func (o *InviteUserRequestBindingsInner) HasProjectId() bool {
-	if o != nil && !IsNil(o.ProjectId) {
+	if o != nil && o.ProjectId.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetProjectId gets a reference to the given string and assigns it to the ProjectId field.
+// SetProjectId gets a reference to the given NullableString and assigns it to the ProjectId field.
 func (o *InviteUserRequestBindingsInner) SetProjectId(v string) {
-	o.ProjectId = &v
+	o.ProjectId.Set(&v)
+}
+// SetProjectIdNil sets the value for ProjectId to be an explicit nil
+func (o *InviteUserRequestBindingsInner) SetProjectIdNil() {
+	o.ProjectId.Set(nil)
+}
+
+// UnsetProjectId ensures that no value is present for ProjectId, not even an explicit nil
+func (o *InviteUserRequestBindingsInner) UnsetProjectId() {
+	o.ProjectId.Unset()
 }
 
 func (o InviteUserRequestBindingsInner) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -114,8 +124,8 @@ func (o InviteUserRequestBindingsInner) MarshalJSON() ([]byte, error) {
 func (o InviteUserRequestBindingsInner) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["roleId"] = o.RoleId
-	if !IsNil(o.ProjectId) {
-		toSerialize["projectId"] = o.ProjectId
+	if o.ProjectId.IsSet() {
+		toSerialize["projectId"] = o.ProjectId.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -138,10 +148,10 @@ func (o *InviteUserRequestBindingsInner) UnmarshalJSON(data []byte) (err error) 
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -203,3 +213,5 @@ func (v *NullableInviteUserRequestBindingsInner) UnmarshalJSON(src []byte) error
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

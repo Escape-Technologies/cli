@@ -20,9 +20,9 @@ var _ MappedNullable = &CreateCustomRuleRequestContentRuleOneOfTransformMutateIn
 
 // CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOfRegexReplace struct for CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOfRegexReplace
 type CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOfRegexReplace struct {
-	UseExtraction        *bool  `json:"use_extraction,omitempty"`
-	Pattern              string `json:"pattern"`
-	Replacement          string `json:"replacement"`
+	UseExtraction NullableBool `json:"use_extraction,omitempty"`
+	Pattern string `json:"pattern"`
+	Replacement string `json:"replacement"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -47,36 +47,46 @@ func NewCreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOfRegexRep
 	return &this
 }
 
-// GetUseExtraction returns the UseExtraction field value if set, zero value otherwise.
+// GetUseExtraction returns the UseExtraction field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOfRegexReplace) GetUseExtraction() bool {
-	if o == nil || IsNil(o.UseExtraction) {
+	if o == nil || IsNil(o.UseExtraction.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.UseExtraction
+	return *o.UseExtraction.Get()
 }
 
 // GetUseExtractionOk returns a tuple with the UseExtraction field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOfRegexReplace) GetUseExtractionOk() (*bool, bool) {
-	if o == nil || IsNil(o.UseExtraction) {
+	if o == nil {
 		return nil, false
 	}
-	return o.UseExtraction, true
+	return o.UseExtraction.Get(), o.UseExtraction.IsSet()
 }
 
 // HasUseExtraction returns a boolean if a field has been set.
 func (o *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOfRegexReplace) HasUseExtraction() bool {
-	if o != nil && !IsNil(o.UseExtraction) {
+	if o != nil && o.UseExtraction.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetUseExtraction gets a reference to the given bool and assigns it to the UseExtraction field.
+// SetUseExtraction gets a reference to the given NullableBool and assigns it to the UseExtraction field.
 func (o *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOfRegexReplace) SetUseExtraction(v bool) {
-	o.UseExtraction = &v
+	o.UseExtraction.Set(&v)
+}
+// SetUseExtractionNil sets the value for UseExtraction to be an explicit nil
+func (o *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOfRegexReplace) SetUseExtractionNil() {
+	o.UseExtraction.Set(nil)
+}
+
+// UnsetUseExtraction ensures that no value is present for UseExtraction, not even an explicit nil
+func (o *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOfRegexReplace) UnsetUseExtraction() {
+	o.UseExtraction.Unset()
 }
 
 // GetPattern returns the Pattern field value
@@ -128,7 +138,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOfRegexRe
 }
 
 func (o CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOfRegexReplace) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -137,8 +147,8 @@ func (o CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOfRegexRep
 
 func (o CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOfRegexReplace) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.UseExtraction) {
-		toSerialize["use_extraction"] = o.UseExtraction
+	if o.UseExtraction.IsSet() {
+		toSerialize["use_extraction"] = o.UseExtraction.Get()
 	}
 	toSerialize["pattern"] = o.Pattern
 	toSerialize["replacement"] = o.Replacement
@@ -164,10 +174,10 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOfRegexRe
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -230,3 +240,5 @@ func (v *NullableCreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneO
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

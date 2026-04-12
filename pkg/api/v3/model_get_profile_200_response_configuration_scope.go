@@ -19,9 +19,9 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationScope{}
 
 // GetProfile200ResponseConfigurationScope struct for GetProfile200ResponseConfigurationScope
 type GetProfile200ResponseConfigurationScope struct {
-	UseDefaults          *bool                                                   `json:"use_defaults,omitempty"`
-	Allowlist            []GetProfile200ResponseConfigurationScopeAllowlistInner `json:"allowlist,omitempty"`
-	Blocklist            []GetProfile200ResponseConfigurationScopeAllowlistInner `json:"blocklist,omitempty"`
+	UseDefaults NullableBool `json:"use_defaults,omitempty"`
+	Allowlist []GetProfile200ResponseConfigurationScopeAllowlistInner `json:"allowlist,omitempty"`
+	Blocklist []GetProfile200ResponseConfigurationScopeAllowlistInner `json:"blocklist,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -44,41 +44,51 @@ func NewGetProfile200ResponseConfigurationScopeWithDefaults() *GetProfile200Resp
 	return &this
 }
 
-// GetUseDefaults returns the UseDefaults field value if set, zero value otherwise.
+// GetUseDefaults returns the UseDefaults field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationScope) GetUseDefaults() bool {
-	if o == nil || IsNil(o.UseDefaults) {
+	if o == nil || IsNil(o.UseDefaults.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.UseDefaults
+	return *o.UseDefaults.Get()
 }
 
 // GetUseDefaultsOk returns a tuple with the UseDefaults field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationScope) GetUseDefaultsOk() (*bool, bool) {
-	if o == nil || IsNil(o.UseDefaults) {
+	if o == nil {
 		return nil, false
 	}
-	return o.UseDefaults, true
+	return o.UseDefaults.Get(), o.UseDefaults.IsSet()
 }
 
 // HasUseDefaults returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationScope) HasUseDefaults() bool {
-	if o != nil && !IsNil(o.UseDefaults) {
+	if o != nil && o.UseDefaults.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetUseDefaults gets a reference to the given bool and assigns it to the UseDefaults field.
+// SetUseDefaults gets a reference to the given NullableBool and assigns it to the UseDefaults field.
 func (o *GetProfile200ResponseConfigurationScope) SetUseDefaults(v bool) {
-	o.UseDefaults = &v
+	o.UseDefaults.Set(&v)
+}
+// SetUseDefaultsNil sets the value for UseDefaults to be an explicit nil
+func (o *GetProfile200ResponseConfigurationScope) SetUseDefaultsNil() {
+	o.UseDefaults.Set(nil)
 }
 
-// GetAllowlist returns the Allowlist field value if set, zero value otherwise.
+// UnsetUseDefaults ensures that no value is present for UseDefaults, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationScope) UnsetUseDefaults() {
+	o.UseDefaults.Unset()
+}
+
+// GetAllowlist returns the Allowlist field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationScope) GetAllowlist() []GetProfile200ResponseConfigurationScopeAllowlistInner {
-	if o == nil || IsNil(o.Allowlist) {
+	if o == nil {
 		var ret []GetProfile200ResponseConfigurationScopeAllowlistInner
 		return ret
 	}
@@ -87,6 +97,7 @@ func (o *GetProfile200ResponseConfigurationScope) GetAllowlist() []GetProfile200
 
 // GetAllowlistOk returns a tuple with the Allowlist field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationScope) GetAllowlistOk() ([]GetProfile200ResponseConfigurationScopeAllowlistInner, bool) {
 	if o == nil || IsNil(o.Allowlist) {
 		return nil, false
@@ -108,9 +119,9 @@ func (o *GetProfile200ResponseConfigurationScope) SetAllowlist(v []GetProfile200
 	o.Allowlist = v
 }
 
-// GetBlocklist returns the Blocklist field value if set, zero value otherwise.
+// GetBlocklist returns the Blocklist field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationScope) GetBlocklist() []GetProfile200ResponseConfigurationScopeAllowlistInner {
-	if o == nil || IsNil(o.Blocklist) {
+	if o == nil {
 		var ret []GetProfile200ResponseConfigurationScopeAllowlistInner
 		return ret
 	}
@@ -119,6 +130,7 @@ func (o *GetProfile200ResponseConfigurationScope) GetBlocklist() []GetProfile200
 
 // GetBlocklistOk returns a tuple with the Blocklist field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationScope) GetBlocklistOk() ([]GetProfile200ResponseConfigurationScopeAllowlistInner, bool) {
 	if o == nil || IsNil(o.Blocklist) {
 		return nil, false
@@ -141,7 +153,7 @@ func (o *GetProfile200ResponseConfigurationScope) SetBlocklist(v []GetProfile200
 }
 
 func (o GetProfile200ResponseConfigurationScope) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -150,13 +162,13 @@ func (o GetProfile200ResponseConfigurationScope) MarshalJSON() ([]byte, error) {
 
 func (o GetProfile200ResponseConfigurationScope) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.UseDefaults) {
-		toSerialize["use_defaults"] = o.UseDefaults
+	if o.UseDefaults.IsSet() {
+		toSerialize["use_defaults"] = o.UseDefaults.Get()
 	}
-	if !IsNil(o.Allowlist) {
+	if o.Allowlist != nil {
 		toSerialize["allowlist"] = o.Allowlist
 	}
-	if !IsNil(o.Blocklist) {
+	if o.Blocklist != nil {
 		toSerialize["blocklist"] = o.Blocklist
 	}
 
@@ -225,3 +237,5 @@ func (v *NullableGetProfile200ResponseConfigurationScope) UnmarshalJSON(src []by
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

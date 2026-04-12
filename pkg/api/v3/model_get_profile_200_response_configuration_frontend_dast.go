@@ -19,26 +19,26 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationFrontendDast{}
 
 // GetProfile200ResponseConfigurationFrontendDast struct for GetProfile200ResponseConfigurationFrontendDast
 type GetProfile200ResponseConfigurationFrontendDast struct {
-	CustomData            map[string]string                                                                       `json:"custom_data,omitempty"`
-	LocationId            *string                                                                                 `json:"location_id,omitempty"`
-	Mode                  *ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE                        `json:"mode,omitempty"`
-	MaxDuration           *float32                                                                                `json:"max_duration,omitempty"`
-	Hotstart              []string                                                                                `json:"hotstart,omitempty"`
+	CustomData map[string]string `json:"custom_data,omitempty"`
+	LocationId NullableString `json:"location_id,omitempty"`
+	Mode NullableENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE `json:"mode,omitempty"`
+	MaxDuration NullableFloat32 `json:"max_duration,omitempty"`
+	Hotstart []string `json:"hotstart,omitempty"`
 	SecurityChecksEnabled []ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSECURITYCHECKSENABLEDITEMS `json:"security_checks_enabled,omitempty"`
-	ApiChecksDuringAuth   *bool                                                                                   `json:"api_checks_during_auth,omitempty"`
-	SinglePageWorker      *bool                                                                                   `json:"single_page_worker,omitempty"`
-	ParallelWorkers       *float32                                                                                `json:"parallel_workers,omitempty"`
-	RelaxCorsSecurity     *bool                                                                                   `json:"relax_cors_security,omitempty"`
-	UserAgent             *string                                                                                 `json:"user_agent,omitempty"`
-	EscapeUserHeader      *bool                                                                                   `json:"escape_user_header,omitempty"`
-	PrefetchSitemap       *bool                                                                                   `json:"prefetch_sitemap,omitempty"`
-	CrawlingTuning        *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning                           `json:"crawling_tuning,omitempty"`
-	StaticCrawling        *GetProfile200ResponseConfigurationFrontendDastStaticCrawling                           `json:"static_crawling,omitempty"`
-	LogoutDetection       *GetProfile200ResponseConfigurationFrontendDastLogoutDetection                          `json:"logout_detection,omitempty"`
-	Scope                 *GetProfile200ResponseConfigurationFrontendDastScope                                    `json:"scope,omitempty"`
-	InScopeOnly           *bool                                                                                   `json:"in_scope_only,omitempty"`
-	AgenticCrawling       *GetProfile200ResponseConfigurationFrontendDastAgenticCrawling                          `json:"agentic_crawling,omitempty"`
-	AdditionalProperties  map[string]interface{}
+	ApiChecksDuringAuth NullableBool `json:"api_checks_during_auth,omitempty"`
+	SinglePageWorker NullableBool `json:"single_page_worker,omitempty"`
+	ParallelWorkers NullableFloat32 `json:"parallel_workers,omitempty"`
+	RelaxCorsSecurity NullableBool `json:"relax_cors_security,omitempty"`
+	UserAgent NullableString `json:"user_agent,omitempty"`
+	EscapeUserHeader NullableBool `json:"escape_user_header,omitempty"`
+	PrefetchSitemap NullableBool `json:"prefetch_sitemap,omitempty"`
+	CrawlingTuning *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning `json:"crawling_tuning,omitempty"`
+	StaticCrawling *GetProfile200ResponseConfigurationFrontendDastStaticCrawling `json:"static_crawling,omitempty"`
+	LogoutDetection *GetProfile200ResponseConfigurationFrontendDastLogoutDetection `json:"logout_detection,omitempty"`
+	Scope *GetProfile200ResponseConfigurationFrontendDastScope `json:"scope,omitempty"`
+	InScopeOnly NullableBool `json:"in_scope_only,omitempty"`
+	AgenticCrawling *GetProfile200ResponseConfigurationFrontendDastAgenticCrawling `json:"agentic_crawling,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetProfile200ResponseConfigurationFrontendDast GetProfile200ResponseConfigurationFrontendDast
@@ -92,105 +92,135 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) SetCustomData(v map[str
 	o.CustomData = v
 }
 
-// GetLocationId returns the LocationId field value if set, zero value otherwise.
+// GetLocationId returns the LocationId field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationFrontendDast) GetLocationId() string {
-	if o == nil || IsNil(o.LocationId) {
+	if o == nil || IsNil(o.LocationId.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.LocationId
+	return *o.LocationId.Get()
 }
 
 // GetLocationIdOk returns a tuple with the LocationId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationFrontendDast) GetLocationIdOk() (*string, bool) {
-	if o == nil || IsNil(o.LocationId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.LocationId, true
+	return o.LocationId.Get(), o.LocationId.IsSet()
 }
 
 // HasLocationId returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationFrontendDast) HasLocationId() bool {
-	if o != nil && !IsNil(o.LocationId) {
+	if o != nil && o.LocationId.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetLocationId gets a reference to the given string and assigns it to the LocationId field.
+// SetLocationId gets a reference to the given NullableString and assigns it to the LocationId field.
 func (o *GetProfile200ResponseConfigurationFrontendDast) SetLocationId(v string) {
-	o.LocationId = &v
+	o.LocationId.Set(&v)
+}
+// SetLocationIdNil sets the value for LocationId to be an explicit nil
+func (o *GetProfile200ResponseConfigurationFrontendDast) SetLocationIdNil() {
+	o.LocationId.Set(nil)
 }
 
-// GetMode returns the Mode field value if set, zero value otherwise.
+// UnsetLocationId ensures that no value is present for LocationId, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationFrontendDast) UnsetLocationId() {
+	o.LocationId.Unset()
+}
+
+// GetMode returns the Mode field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationFrontendDast) GetMode() ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE {
-	if o == nil || IsNil(o.Mode) {
+	if o == nil || IsNil(o.Mode.Get()) {
 		var ret ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE
 		return ret
 	}
-	return *o.Mode
+	return *o.Mode.Get()
 }
 
 // GetModeOk returns a tuple with the Mode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationFrontendDast) GetModeOk() (*ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE, bool) {
-	if o == nil || IsNil(o.Mode) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Mode, true
+	return o.Mode.Get(), o.Mode.IsSet()
 }
 
 // HasMode returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationFrontendDast) HasMode() bool {
-	if o != nil && !IsNil(o.Mode) {
+	if o != nil && o.Mode.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetMode gets a reference to the given ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE and assigns it to the Mode field.
+// SetMode gets a reference to the given NullableENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE and assigns it to the Mode field.
 func (o *GetProfile200ResponseConfigurationFrontendDast) SetMode(v ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE) {
-	o.Mode = &v
+	o.Mode.Set(&v)
+}
+// SetModeNil sets the value for Mode to be an explicit nil
+func (o *GetProfile200ResponseConfigurationFrontendDast) SetModeNil() {
+	o.Mode.Set(nil)
 }
 
-// GetMaxDuration returns the MaxDuration field value if set, zero value otherwise.
+// UnsetMode ensures that no value is present for Mode, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationFrontendDast) UnsetMode() {
+	o.Mode.Unset()
+}
+
+// GetMaxDuration returns the MaxDuration field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationFrontendDast) GetMaxDuration() float32 {
-	if o == nil || IsNil(o.MaxDuration) {
+	if o == nil || IsNil(o.MaxDuration.Get()) {
 		var ret float32
 		return ret
 	}
-	return *o.MaxDuration
+	return *o.MaxDuration.Get()
 }
 
 // GetMaxDurationOk returns a tuple with the MaxDuration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationFrontendDast) GetMaxDurationOk() (*float32, bool) {
-	if o == nil || IsNil(o.MaxDuration) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MaxDuration, true
+	return o.MaxDuration.Get(), o.MaxDuration.IsSet()
 }
 
 // HasMaxDuration returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationFrontendDast) HasMaxDuration() bool {
-	if o != nil && !IsNil(o.MaxDuration) {
+	if o != nil && o.MaxDuration.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetMaxDuration gets a reference to the given float32 and assigns it to the MaxDuration field.
+// SetMaxDuration gets a reference to the given NullableFloat32 and assigns it to the MaxDuration field.
 func (o *GetProfile200ResponseConfigurationFrontendDast) SetMaxDuration(v float32) {
-	o.MaxDuration = &v
+	o.MaxDuration.Set(&v)
+}
+// SetMaxDurationNil sets the value for MaxDuration to be an explicit nil
+func (o *GetProfile200ResponseConfigurationFrontendDast) SetMaxDurationNil() {
+	o.MaxDuration.Set(nil)
 }
 
-// GetHotstart returns the Hotstart field value if set, zero value otherwise.
+// UnsetMaxDuration ensures that no value is present for MaxDuration, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationFrontendDast) UnsetMaxDuration() {
+	o.MaxDuration.Unset()
+}
+
+// GetHotstart returns the Hotstart field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationFrontendDast) GetHotstart() []string {
-	if o == nil || IsNil(o.Hotstart) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -199,6 +229,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) GetHotstart() []string 
 
 // GetHotstartOk returns a tuple with the Hotstart field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationFrontendDast) GetHotstartOk() ([]string, bool) {
 	if o == nil || IsNil(o.Hotstart) {
 		return nil, false
@@ -220,9 +251,9 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) SetHotstart(v []string)
 	o.Hotstart = v
 }
 
-// GetSecurityChecksEnabled returns the SecurityChecksEnabled field value if set, zero value otherwise.
+// GetSecurityChecksEnabled returns the SecurityChecksEnabled field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationFrontendDast) GetSecurityChecksEnabled() []ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSECURITYCHECKSENABLEDITEMS {
-	if o == nil || IsNil(o.SecurityChecksEnabled) {
+	if o == nil {
 		var ret []ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSECURITYCHECKSENABLEDITEMS
 		return ret
 	}
@@ -231,6 +262,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) GetSecurityChecksEnable
 
 // GetSecurityChecksEnabledOk returns a tuple with the SecurityChecksEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationFrontendDast) GetSecurityChecksEnabledOk() ([]ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSECURITYCHECKSENABLEDITEMS, bool) {
 	if o == nil || IsNil(o.SecurityChecksEnabled) {
 		return nil, false
@@ -252,228 +284,298 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) SetSecurityChecksEnable
 	o.SecurityChecksEnabled = v
 }
 
-// GetApiChecksDuringAuth returns the ApiChecksDuringAuth field value if set, zero value otherwise.
+// GetApiChecksDuringAuth returns the ApiChecksDuringAuth field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationFrontendDast) GetApiChecksDuringAuth() bool {
-	if o == nil || IsNil(o.ApiChecksDuringAuth) {
+	if o == nil || IsNil(o.ApiChecksDuringAuth.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.ApiChecksDuringAuth
+	return *o.ApiChecksDuringAuth.Get()
 }
 
 // GetApiChecksDuringAuthOk returns a tuple with the ApiChecksDuringAuth field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationFrontendDast) GetApiChecksDuringAuthOk() (*bool, bool) {
-	if o == nil || IsNil(o.ApiChecksDuringAuth) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ApiChecksDuringAuth, true
+	return o.ApiChecksDuringAuth.Get(), o.ApiChecksDuringAuth.IsSet()
 }
 
 // HasApiChecksDuringAuth returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationFrontendDast) HasApiChecksDuringAuth() bool {
-	if o != nil && !IsNil(o.ApiChecksDuringAuth) {
+	if o != nil && o.ApiChecksDuringAuth.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetApiChecksDuringAuth gets a reference to the given bool and assigns it to the ApiChecksDuringAuth field.
+// SetApiChecksDuringAuth gets a reference to the given NullableBool and assigns it to the ApiChecksDuringAuth field.
 func (o *GetProfile200ResponseConfigurationFrontendDast) SetApiChecksDuringAuth(v bool) {
-	o.ApiChecksDuringAuth = &v
+	o.ApiChecksDuringAuth.Set(&v)
+}
+// SetApiChecksDuringAuthNil sets the value for ApiChecksDuringAuth to be an explicit nil
+func (o *GetProfile200ResponseConfigurationFrontendDast) SetApiChecksDuringAuthNil() {
+	o.ApiChecksDuringAuth.Set(nil)
 }
 
-// GetSinglePageWorker returns the SinglePageWorker field value if set, zero value otherwise.
+// UnsetApiChecksDuringAuth ensures that no value is present for ApiChecksDuringAuth, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationFrontendDast) UnsetApiChecksDuringAuth() {
+	o.ApiChecksDuringAuth.Unset()
+}
+
+// GetSinglePageWorker returns the SinglePageWorker field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationFrontendDast) GetSinglePageWorker() bool {
-	if o == nil || IsNil(o.SinglePageWorker) {
+	if o == nil || IsNil(o.SinglePageWorker.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.SinglePageWorker
+	return *o.SinglePageWorker.Get()
 }
 
 // GetSinglePageWorkerOk returns a tuple with the SinglePageWorker field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationFrontendDast) GetSinglePageWorkerOk() (*bool, bool) {
-	if o == nil || IsNil(o.SinglePageWorker) {
+	if o == nil {
 		return nil, false
 	}
-	return o.SinglePageWorker, true
+	return o.SinglePageWorker.Get(), o.SinglePageWorker.IsSet()
 }
 
 // HasSinglePageWorker returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationFrontendDast) HasSinglePageWorker() bool {
-	if o != nil && !IsNil(o.SinglePageWorker) {
+	if o != nil && o.SinglePageWorker.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSinglePageWorker gets a reference to the given bool and assigns it to the SinglePageWorker field.
+// SetSinglePageWorker gets a reference to the given NullableBool and assigns it to the SinglePageWorker field.
 func (o *GetProfile200ResponseConfigurationFrontendDast) SetSinglePageWorker(v bool) {
-	o.SinglePageWorker = &v
+	o.SinglePageWorker.Set(&v)
+}
+// SetSinglePageWorkerNil sets the value for SinglePageWorker to be an explicit nil
+func (o *GetProfile200ResponseConfigurationFrontendDast) SetSinglePageWorkerNil() {
+	o.SinglePageWorker.Set(nil)
 }
 
-// GetParallelWorkers returns the ParallelWorkers field value if set, zero value otherwise.
+// UnsetSinglePageWorker ensures that no value is present for SinglePageWorker, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationFrontendDast) UnsetSinglePageWorker() {
+	o.SinglePageWorker.Unset()
+}
+
+// GetParallelWorkers returns the ParallelWorkers field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationFrontendDast) GetParallelWorkers() float32 {
-	if o == nil || IsNil(o.ParallelWorkers) {
+	if o == nil || IsNil(o.ParallelWorkers.Get()) {
 		var ret float32
 		return ret
 	}
-	return *o.ParallelWorkers
+	return *o.ParallelWorkers.Get()
 }
 
 // GetParallelWorkersOk returns a tuple with the ParallelWorkers field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationFrontendDast) GetParallelWorkersOk() (*float32, bool) {
-	if o == nil || IsNil(o.ParallelWorkers) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ParallelWorkers, true
+	return o.ParallelWorkers.Get(), o.ParallelWorkers.IsSet()
 }
 
 // HasParallelWorkers returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationFrontendDast) HasParallelWorkers() bool {
-	if o != nil && !IsNil(o.ParallelWorkers) {
+	if o != nil && o.ParallelWorkers.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetParallelWorkers gets a reference to the given float32 and assigns it to the ParallelWorkers field.
+// SetParallelWorkers gets a reference to the given NullableFloat32 and assigns it to the ParallelWorkers field.
 func (o *GetProfile200ResponseConfigurationFrontendDast) SetParallelWorkers(v float32) {
-	o.ParallelWorkers = &v
+	o.ParallelWorkers.Set(&v)
+}
+// SetParallelWorkersNil sets the value for ParallelWorkers to be an explicit nil
+func (o *GetProfile200ResponseConfigurationFrontendDast) SetParallelWorkersNil() {
+	o.ParallelWorkers.Set(nil)
 }
 
-// GetRelaxCorsSecurity returns the RelaxCorsSecurity field value if set, zero value otherwise.
+// UnsetParallelWorkers ensures that no value is present for ParallelWorkers, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationFrontendDast) UnsetParallelWorkers() {
+	o.ParallelWorkers.Unset()
+}
+
+// GetRelaxCorsSecurity returns the RelaxCorsSecurity field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationFrontendDast) GetRelaxCorsSecurity() bool {
-	if o == nil || IsNil(o.RelaxCorsSecurity) {
+	if o == nil || IsNil(o.RelaxCorsSecurity.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.RelaxCorsSecurity
+	return *o.RelaxCorsSecurity.Get()
 }
 
 // GetRelaxCorsSecurityOk returns a tuple with the RelaxCorsSecurity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationFrontendDast) GetRelaxCorsSecurityOk() (*bool, bool) {
-	if o == nil || IsNil(o.RelaxCorsSecurity) {
+	if o == nil {
 		return nil, false
 	}
-	return o.RelaxCorsSecurity, true
+	return o.RelaxCorsSecurity.Get(), o.RelaxCorsSecurity.IsSet()
 }
 
 // HasRelaxCorsSecurity returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationFrontendDast) HasRelaxCorsSecurity() bool {
-	if o != nil && !IsNil(o.RelaxCorsSecurity) {
+	if o != nil && o.RelaxCorsSecurity.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRelaxCorsSecurity gets a reference to the given bool and assigns it to the RelaxCorsSecurity field.
+// SetRelaxCorsSecurity gets a reference to the given NullableBool and assigns it to the RelaxCorsSecurity field.
 func (o *GetProfile200ResponseConfigurationFrontendDast) SetRelaxCorsSecurity(v bool) {
-	o.RelaxCorsSecurity = &v
+	o.RelaxCorsSecurity.Set(&v)
+}
+// SetRelaxCorsSecurityNil sets the value for RelaxCorsSecurity to be an explicit nil
+func (o *GetProfile200ResponseConfigurationFrontendDast) SetRelaxCorsSecurityNil() {
+	o.RelaxCorsSecurity.Set(nil)
 }
 
-// GetUserAgent returns the UserAgent field value if set, zero value otherwise.
+// UnsetRelaxCorsSecurity ensures that no value is present for RelaxCorsSecurity, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationFrontendDast) UnsetRelaxCorsSecurity() {
+	o.RelaxCorsSecurity.Unset()
+}
+
+// GetUserAgent returns the UserAgent field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationFrontendDast) GetUserAgent() string {
-	if o == nil || IsNil(o.UserAgent) {
+	if o == nil || IsNil(o.UserAgent.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.UserAgent
+	return *o.UserAgent.Get()
 }
 
 // GetUserAgentOk returns a tuple with the UserAgent field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationFrontendDast) GetUserAgentOk() (*string, bool) {
-	if o == nil || IsNil(o.UserAgent) {
+	if o == nil {
 		return nil, false
 	}
-	return o.UserAgent, true
+	return o.UserAgent.Get(), o.UserAgent.IsSet()
 }
 
 // HasUserAgent returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationFrontendDast) HasUserAgent() bool {
-	if o != nil && !IsNil(o.UserAgent) {
+	if o != nil && o.UserAgent.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetUserAgent gets a reference to the given string and assigns it to the UserAgent field.
+// SetUserAgent gets a reference to the given NullableString and assigns it to the UserAgent field.
 func (o *GetProfile200ResponseConfigurationFrontendDast) SetUserAgent(v string) {
-	o.UserAgent = &v
+	o.UserAgent.Set(&v)
+}
+// SetUserAgentNil sets the value for UserAgent to be an explicit nil
+func (o *GetProfile200ResponseConfigurationFrontendDast) SetUserAgentNil() {
+	o.UserAgent.Set(nil)
 }
 
-// GetEscapeUserHeader returns the EscapeUserHeader field value if set, zero value otherwise.
+// UnsetUserAgent ensures that no value is present for UserAgent, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationFrontendDast) UnsetUserAgent() {
+	o.UserAgent.Unset()
+}
+
+// GetEscapeUserHeader returns the EscapeUserHeader field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationFrontendDast) GetEscapeUserHeader() bool {
-	if o == nil || IsNil(o.EscapeUserHeader) {
+	if o == nil || IsNil(o.EscapeUserHeader.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.EscapeUserHeader
+	return *o.EscapeUserHeader.Get()
 }
 
 // GetEscapeUserHeaderOk returns a tuple with the EscapeUserHeader field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationFrontendDast) GetEscapeUserHeaderOk() (*bool, bool) {
-	if o == nil || IsNil(o.EscapeUserHeader) {
+	if o == nil {
 		return nil, false
 	}
-	return o.EscapeUserHeader, true
+	return o.EscapeUserHeader.Get(), o.EscapeUserHeader.IsSet()
 }
 
 // HasEscapeUserHeader returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationFrontendDast) HasEscapeUserHeader() bool {
-	if o != nil && !IsNil(o.EscapeUserHeader) {
+	if o != nil && o.EscapeUserHeader.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetEscapeUserHeader gets a reference to the given bool and assigns it to the EscapeUserHeader field.
+// SetEscapeUserHeader gets a reference to the given NullableBool and assigns it to the EscapeUserHeader field.
 func (o *GetProfile200ResponseConfigurationFrontendDast) SetEscapeUserHeader(v bool) {
-	o.EscapeUserHeader = &v
+	o.EscapeUserHeader.Set(&v)
+}
+// SetEscapeUserHeaderNil sets the value for EscapeUserHeader to be an explicit nil
+func (o *GetProfile200ResponseConfigurationFrontendDast) SetEscapeUserHeaderNil() {
+	o.EscapeUserHeader.Set(nil)
 }
 
-// GetPrefetchSitemap returns the PrefetchSitemap field value if set, zero value otherwise.
+// UnsetEscapeUserHeader ensures that no value is present for EscapeUserHeader, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationFrontendDast) UnsetEscapeUserHeader() {
+	o.EscapeUserHeader.Unset()
+}
+
+// GetPrefetchSitemap returns the PrefetchSitemap field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationFrontendDast) GetPrefetchSitemap() bool {
-	if o == nil || IsNil(o.PrefetchSitemap) {
+	if o == nil || IsNil(o.PrefetchSitemap.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.PrefetchSitemap
+	return *o.PrefetchSitemap.Get()
 }
 
 // GetPrefetchSitemapOk returns a tuple with the PrefetchSitemap field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationFrontendDast) GetPrefetchSitemapOk() (*bool, bool) {
-	if o == nil || IsNil(o.PrefetchSitemap) {
+	if o == nil {
 		return nil, false
 	}
-	return o.PrefetchSitemap, true
+	return o.PrefetchSitemap.Get(), o.PrefetchSitemap.IsSet()
 }
 
 // HasPrefetchSitemap returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationFrontendDast) HasPrefetchSitemap() bool {
-	if o != nil && !IsNil(o.PrefetchSitemap) {
+	if o != nil && o.PrefetchSitemap.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPrefetchSitemap gets a reference to the given bool and assigns it to the PrefetchSitemap field.
+// SetPrefetchSitemap gets a reference to the given NullableBool and assigns it to the PrefetchSitemap field.
 func (o *GetProfile200ResponseConfigurationFrontendDast) SetPrefetchSitemap(v bool) {
-	o.PrefetchSitemap = &v
+	o.PrefetchSitemap.Set(&v)
+}
+// SetPrefetchSitemapNil sets the value for PrefetchSitemap to be an explicit nil
+func (o *GetProfile200ResponseConfigurationFrontendDast) SetPrefetchSitemapNil() {
+	o.PrefetchSitemap.Set(nil)
+}
+
+// UnsetPrefetchSitemap ensures that no value is present for PrefetchSitemap, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationFrontendDast) UnsetPrefetchSitemap() {
+	o.PrefetchSitemap.Unset()
 }
 
 // GetCrawlingTuning returns the CrawlingTuning field value if set, zero value otherwise.
@@ -604,36 +706,46 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) SetScope(v GetProfile20
 	o.Scope = &v
 }
 
-// GetInScopeOnly returns the InScopeOnly field value if set, zero value otherwise.
+// GetInScopeOnly returns the InScopeOnly field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationFrontendDast) GetInScopeOnly() bool {
-	if o == nil || IsNil(o.InScopeOnly) {
+	if o == nil || IsNil(o.InScopeOnly.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.InScopeOnly
+	return *o.InScopeOnly.Get()
 }
 
 // GetInScopeOnlyOk returns a tuple with the InScopeOnly field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationFrontendDast) GetInScopeOnlyOk() (*bool, bool) {
-	if o == nil || IsNil(o.InScopeOnly) {
+	if o == nil {
 		return nil, false
 	}
-	return o.InScopeOnly, true
+	return o.InScopeOnly.Get(), o.InScopeOnly.IsSet()
 }
 
 // HasInScopeOnly returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationFrontendDast) HasInScopeOnly() bool {
-	if o != nil && !IsNil(o.InScopeOnly) {
+	if o != nil && o.InScopeOnly.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInScopeOnly gets a reference to the given bool and assigns it to the InScopeOnly field.
+// SetInScopeOnly gets a reference to the given NullableBool and assigns it to the InScopeOnly field.
 func (o *GetProfile200ResponseConfigurationFrontendDast) SetInScopeOnly(v bool) {
-	o.InScopeOnly = &v
+	o.InScopeOnly.Set(&v)
+}
+// SetInScopeOnlyNil sets the value for InScopeOnly to be an explicit nil
+func (o *GetProfile200ResponseConfigurationFrontendDast) SetInScopeOnlyNil() {
+	o.InScopeOnly.Set(nil)
+}
+
+// UnsetInScopeOnly ensures that no value is present for InScopeOnly, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationFrontendDast) UnsetInScopeOnly() {
+	o.InScopeOnly.Unset()
 }
 
 // GetAgenticCrawling returns the AgenticCrawling field value if set, zero value otherwise.
@@ -669,7 +781,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) SetAgenticCrawling(v Ge
 }
 
 func (o GetProfile200ResponseConfigurationFrontendDast) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -681,41 +793,41 @@ func (o GetProfile200ResponseConfigurationFrontendDast) ToMap() (map[string]inte
 	if !IsNil(o.CustomData) {
 		toSerialize["custom_data"] = o.CustomData
 	}
-	if !IsNil(o.LocationId) {
-		toSerialize["location_id"] = o.LocationId
+	if o.LocationId.IsSet() {
+		toSerialize["location_id"] = o.LocationId.Get()
 	}
-	if !IsNil(o.Mode) {
-		toSerialize["mode"] = o.Mode
+	if o.Mode.IsSet() {
+		toSerialize["mode"] = o.Mode.Get()
 	}
-	if !IsNil(o.MaxDuration) {
-		toSerialize["max_duration"] = o.MaxDuration
+	if o.MaxDuration.IsSet() {
+		toSerialize["max_duration"] = o.MaxDuration.Get()
 	}
-	if !IsNil(o.Hotstart) {
+	if o.Hotstart != nil {
 		toSerialize["hotstart"] = o.Hotstart
 	}
-	if !IsNil(o.SecurityChecksEnabled) {
+	if o.SecurityChecksEnabled != nil {
 		toSerialize["security_checks_enabled"] = o.SecurityChecksEnabled
 	}
-	if !IsNil(o.ApiChecksDuringAuth) {
-		toSerialize["api_checks_during_auth"] = o.ApiChecksDuringAuth
+	if o.ApiChecksDuringAuth.IsSet() {
+		toSerialize["api_checks_during_auth"] = o.ApiChecksDuringAuth.Get()
 	}
-	if !IsNil(o.SinglePageWorker) {
-		toSerialize["single_page_worker"] = o.SinglePageWorker
+	if o.SinglePageWorker.IsSet() {
+		toSerialize["single_page_worker"] = o.SinglePageWorker.Get()
 	}
-	if !IsNil(o.ParallelWorkers) {
-		toSerialize["parallel_workers"] = o.ParallelWorkers
+	if o.ParallelWorkers.IsSet() {
+		toSerialize["parallel_workers"] = o.ParallelWorkers.Get()
 	}
-	if !IsNil(o.RelaxCorsSecurity) {
-		toSerialize["relax_cors_security"] = o.RelaxCorsSecurity
+	if o.RelaxCorsSecurity.IsSet() {
+		toSerialize["relax_cors_security"] = o.RelaxCorsSecurity.Get()
 	}
-	if !IsNil(o.UserAgent) {
-		toSerialize["user_agent"] = o.UserAgent
+	if o.UserAgent.IsSet() {
+		toSerialize["user_agent"] = o.UserAgent.Get()
 	}
-	if !IsNil(o.EscapeUserHeader) {
-		toSerialize["escape_user_header"] = o.EscapeUserHeader
+	if o.EscapeUserHeader.IsSet() {
+		toSerialize["escape_user_header"] = o.EscapeUserHeader.Get()
 	}
-	if !IsNil(o.PrefetchSitemap) {
-		toSerialize["prefetch_sitemap"] = o.PrefetchSitemap
+	if o.PrefetchSitemap.IsSet() {
+		toSerialize["prefetch_sitemap"] = o.PrefetchSitemap.Get()
 	}
 	if !IsNil(o.CrawlingTuning) {
 		toSerialize["crawling_tuning"] = o.CrawlingTuning
@@ -729,8 +841,8 @@ func (o GetProfile200ResponseConfigurationFrontendDast) ToMap() (map[string]inte
 	if !IsNil(o.Scope) {
 		toSerialize["scope"] = o.Scope
 	}
-	if !IsNil(o.InScopeOnly) {
-		toSerialize["in_scope_only"] = o.InScopeOnly
+	if o.InScopeOnly.IsSet() {
+		toSerialize["in_scope_only"] = o.InScopeOnly.Get()
 	}
 	if !IsNil(o.AgenticCrawling) {
 		toSerialize["agentic_crawling"] = o.AgenticCrawling
@@ -817,3 +929,5 @@ func (v *NullableGetProfile200ResponseConfigurationFrontendDast) UnmarshalJSON(s
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

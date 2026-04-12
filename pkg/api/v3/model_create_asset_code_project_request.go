@@ -21,18 +21,18 @@ var _ MappedNullable = &CreateAssetCODEPROJECTRequest{}
 // CreateAssetCODEPROJECTRequest struct for CreateAssetCODEPROJECTRequest
 type CreateAssetCODEPROJECTRequest struct {
 	// The list of project IDs bind the asset on.
-	ProjectIds           []string                                      `json:"projectIds,omitempty"`
-	Name                 *string                                       `json:"name,omitempty"`
-	AssetClass           ENUMCODEPROJECT                               `json:"asset_class"`
-	ExtraMetadata        map[string]interface{}                        `json:"extra_metadata,omitempty"`
-	ScreenshotS3Key      *string                                       `json:"screenshot_s3_key,omitempty"`
-	AssetType            ENUMCODEPROJECT                               `json:"asset_type"`
-	Repository           CreateAssetCODEPROJECTRequestRepository       `json:"repository"`
-	Path                 string                                        `json:"path"`
-	Language             ENUMPROPERTIESLANGUAGE                        `json:"language"`
-	HttpUrlToProject     *string                                       `json:"http_url_to_project,omitempty"`
-	Owners               []CreateAssetCODEPROJECTRequestOwnersInner    `json:"owners,omitempty"`
-	LastCommit           *CreateAssetGITLABREPOSITORYRequestLastCommit `json:"last_commit,omitempty"`
+	ProjectIds []string `json:"projectIds,omitempty"`
+	Name NullableString `json:"name,omitempty"`
+	AssetClass ENUMCODEPROJECT `json:"asset_class"`
+	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
+	ScreenshotS3Key NullableString `json:"screenshot_s3_key,omitempty"`
+	AssetType ENUMCODEPROJECT `json:"asset_type"`
+	Repository CreateAssetCODEPROJECTRequestRepository `json:"repository"`
+	Path string `json:"path"`
+	Language ENUMPROPERTIESLANGUAGESITEMS `json:"language"`
+	HttpUrlToProject NullableString `json:"http_url_to_project,omitempty"`
+	Owners []CreateAssetGITLABREPOSITORYRequestOwnersInner `json:"owners,omitempty"`
+	LastCommit *CreateAssetGITLABREPOSITORYRequestLastCommit `json:"last_commit,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -42,7 +42,7 @@ type _CreateAssetCODEPROJECTRequest CreateAssetCODEPROJECTRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetCODEPROJECTRequest(assetClass ENUMCODEPROJECT, assetType ENUMCODEPROJECT, repository CreateAssetCODEPROJECTRequestRepository, path string, language ENUMPROPERTIESLANGUAGE) *CreateAssetCODEPROJECTRequest {
+func NewCreateAssetCODEPROJECTRequest(assetClass ENUMCODEPROJECT, assetType ENUMCODEPROJECT, repository CreateAssetCODEPROJECTRequestRepository, path string, language ENUMPROPERTIESLANGUAGESITEMS) *CreateAssetCODEPROJECTRequest {
 	this := CreateAssetCODEPROJECTRequest{}
 	this.AssetClass = assetClass
 	this.AssetType = assetType
@@ -60,9 +60,9 @@ func NewCreateAssetCODEPROJECTRequestWithDefaults() *CreateAssetCODEPROJECTReque
 	return &this
 }
 
-// GetProjectIds returns the ProjectIds field value if set, zero value otherwise.
+// GetProjectIds returns the ProjectIds field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetCODEPROJECTRequest) GetProjectIds() []string {
-	if o == nil || IsNil(o.ProjectIds) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -71,6 +71,7 @@ func (o *CreateAssetCODEPROJECTRequest) GetProjectIds() []string {
 
 // GetProjectIdsOk returns a tuple with the ProjectIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetCODEPROJECTRequest) GetProjectIdsOk() ([]string, bool) {
 	if o == nil || IsNil(o.ProjectIds) {
 		return nil, false
@@ -92,36 +93,46 @@ func (o *CreateAssetCODEPROJECTRequest) SetProjectIds(v []string) {
 	o.ProjectIds = v
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
+// GetName returns the Name field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetCODEPROJECTRequest) GetName() string {
-	if o == nil || IsNil(o.Name) {
+	if o == nil || IsNil(o.Name.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Name
+	return *o.Name.Get()
 }
 
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetCODEPROJECTRequest) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Name, true
+	return o.Name.Get(), o.Name.IsSet()
 }
 
 // HasName returns a boolean if a field has been set.
 func (o *CreateAssetCODEPROJECTRequest) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
+	if o != nil && o.Name.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetName gets a reference to the given string and assigns it to the Name field.
+// SetName gets a reference to the given NullableString and assigns it to the Name field.
 func (o *CreateAssetCODEPROJECTRequest) SetName(v string) {
-	o.Name = &v
+	o.Name.Set(&v)
+}
+// SetNameNil sets the value for Name to be an explicit nil
+func (o *CreateAssetCODEPROJECTRequest) SetNameNil() {
+	o.Name.Set(nil)
+}
+
+// UnsetName ensures that no value is present for Name, not even an explicit nil
+func (o *CreateAssetCODEPROJECTRequest) UnsetName() {
+	o.Name.Unset()
 }
 
 // GetAssetClass returns the AssetClass field value
@@ -180,36 +191,46 @@ func (o *CreateAssetCODEPROJECTRequest) SetExtraMetadata(v map[string]interface{
 	o.ExtraMetadata = v
 }
 
-// GetScreenshotS3Key returns the ScreenshotS3Key field value if set, zero value otherwise.
+// GetScreenshotS3Key returns the ScreenshotS3Key field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetCODEPROJECTRequest) GetScreenshotS3Key() string {
-	if o == nil || IsNil(o.ScreenshotS3Key) {
+	if o == nil || IsNil(o.ScreenshotS3Key.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.ScreenshotS3Key
+	return *o.ScreenshotS3Key.Get()
 }
 
 // GetScreenshotS3KeyOk returns a tuple with the ScreenshotS3Key field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetCODEPROJECTRequest) GetScreenshotS3KeyOk() (*string, bool) {
-	if o == nil || IsNil(o.ScreenshotS3Key) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ScreenshotS3Key, true
+	return o.ScreenshotS3Key.Get(), o.ScreenshotS3Key.IsSet()
 }
 
 // HasScreenshotS3Key returns a boolean if a field has been set.
 func (o *CreateAssetCODEPROJECTRequest) HasScreenshotS3Key() bool {
-	if o != nil && !IsNil(o.ScreenshotS3Key) {
+	if o != nil && o.ScreenshotS3Key.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetScreenshotS3Key gets a reference to the given string and assigns it to the ScreenshotS3Key field.
+// SetScreenshotS3Key gets a reference to the given NullableString and assigns it to the ScreenshotS3Key field.
 func (o *CreateAssetCODEPROJECTRequest) SetScreenshotS3Key(v string) {
-	o.ScreenshotS3Key = &v
+	o.ScreenshotS3Key.Set(&v)
+}
+// SetScreenshotS3KeyNil sets the value for ScreenshotS3Key to be an explicit nil
+func (o *CreateAssetCODEPROJECTRequest) SetScreenshotS3KeyNil() {
+	o.ScreenshotS3Key.Set(nil)
+}
+
+// UnsetScreenshotS3Key ensures that no value is present for ScreenshotS3Key, not even an explicit nil
+func (o *CreateAssetCODEPROJECTRequest) UnsetScreenshotS3Key() {
+	o.ScreenshotS3Key.Unset()
 }
 
 // GetAssetType returns the AssetType field value
@@ -285,9 +306,9 @@ func (o *CreateAssetCODEPROJECTRequest) SetPath(v string) {
 }
 
 // GetLanguage returns the Language field value
-func (o *CreateAssetCODEPROJECTRequest) GetLanguage() ENUMPROPERTIESLANGUAGE {
+func (o *CreateAssetCODEPROJECTRequest) GetLanguage() ENUMPROPERTIESLANGUAGESITEMS {
 	if o == nil {
-		var ret ENUMPROPERTIESLANGUAGE
+		var ret ENUMPROPERTIESLANGUAGESITEMS
 		return ret
 	}
 
@@ -296,7 +317,7 @@ func (o *CreateAssetCODEPROJECTRequest) GetLanguage() ENUMPROPERTIESLANGUAGE {
 
 // GetLanguageOk returns a tuple with the Language field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetCODEPROJECTRequest) GetLanguageOk() (*ENUMPROPERTIESLANGUAGE, bool) {
+func (o *CreateAssetCODEPROJECTRequest) GetLanguageOk() (*ENUMPROPERTIESLANGUAGESITEMS, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -304,46 +325,56 @@ func (o *CreateAssetCODEPROJECTRequest) GetLanguageOk() (*ENUMPROPERTIESLANGUAGE
 }
 
 // SetLanguage sets field value
-func (o *CreateAssetCODEPROJECTRequest) SetLanguage(v ENUMPROPERTIESLANGUAGE) {
+func (o *CreateAssetCODEPROJECTRequest) SetLanguage(v ENUMPROPERTIESLANGUAGESITEMS) {
 	o.Language = v
 }
 
-// GetHttpUrlToProject returns the HttpUrlToProject field value if set, zero value otherwise.
+// GetHttpUrlToProject returns the HttpUrlToProject field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetCODEPROJECTRequest) GetHttpUrlToProject() string {
-	if o == nil || IsNil(o.HttpUrlToProject) {
+	if o == nil || IsNil(o.HttpUrlToProject.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.HttpUrlToProject
+	return *o.HttpUrlToProject.Get()
 }
 
 // GetHttpUrlToProjectOk returns a tuple with the HttpUrlToProject field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetCODEPROJECTRequest) GetHttpUrlToProjectOk() (*string, bool) {
-	if o == nil || IsNil(o.HttpUrlToProject) {
+	if o == nil {
 		return nil, false
 	}
-	return o.HttpUrlToProject, true
+	return o.HttpUrlToProject.Get(), o.HttpUrlToProject.IsSet()
 }
 
 // HasHttpUrlToProject returns a boolean if a field has been set.
 func (o *CreateAssetCODEPROJECTRequest) HasHttpUrlToProject() bool {
-	if o != nil && !IsNil(o.HttpUrlToProject) {
+	if o != nil && o.HttpUrlToProject.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetHttpUrlToProject gets a reference to the given string and assigns it to the HttpUrlToProject field.
+// SetHttpUrlToProject gets a reference to the given NullableString and assigns it to the HttpUrlToProject field.
 func (o *CreateAssetCODEPROJECTRequest) SetHttpUrlToProject(v string) {
-	o.HttpUrlToProject = &v
+	o.HttpUrlToProject.Set(&v)
+}
+// SetHttpUrlToProjectNil sets the value for HttpUrlToProject to be an explicit nil
+func (o *CreateAssetCODEPROJECTRequest) SetHttpUrlToProjectNil() {
+	o.HttpUrlToProject.Set(nil)
 }
 
-// GetOwners returns the Owners field value if set, zero value otherwise.
-func (o *CreateAssetCODEPROJECTRequest) GetOwners() []CreateAssetCODEPROJECTRequestOwnersInner {
-	if o == nil || IsNil(o.Owners) {
-		var ret []CreateAssetCODEPROJECTRequestOwnersInner
+// UnsetHttpUrlToProject ensures that no value is present for HttpUrlToProject, not even an explicit nil
+func (o *CreateAssetCODEPROJECTRequest) UnsetHttpUrlToProject() {
+	o.HttpUrlToProject.Unset()
+}
+
+// GetOwners returns the Owners field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CreateAssetCODEPROJECTRequest) GetOwners() []CreateAssetGITLABREPOSITORYRequestOwnersInner {
+	if o == nil {
+		var ret []CreateAssetGITLABREPOSITORYRequestOwnersInner
 		return ret
 	}
 	return o.Owners
@@ -351,7 +382,8 @@ func (o *CreateAssetCODEPROJECTRequest) GetOwners() []CreateAssetCODEPROJECTRequ
 
 // GetOwnersOk returns a tuple with the Owners field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetCODEPROJECTRequest) GetOwnersOk() ([]CreateAssetCODEPROJECTRequestOwnersInner, bool) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CreateAssetCODEPROJECTRequest) GetOwnersOk() ([]CreateAssetGITLABREPOSITORYRequestOwnersInner, bool) {
 	if o == nil || IsNil(o.Owners) {
 		return nil, false
 	}
@@ -367,8 +399,8 @@ func (o *CreateAssetCODEPROJECTRequest) HasOwners() bool {
 	return false
 }
 
-// SetOwners gets a reference to the given []CreateAssetCODEPROJECTRequestOwnersInner and assigns it to the Owners field.
-func (o *CreateAssetCODEPROJECTRequest) SetOwners(v []CreateAssetCODEPROJECTRequestOwnersInner) {
+// SetOwners gets a reference to the given []CreateAssetGITLABREPOSITORYRequestOwnersInner and assigns it to the Owners field.
+func (o *CreateAssetCODEPROJECTRequest) SetOwners(v []CreateAssetGITLABREPOSITORYRequestOwnersInner) {
 	o.Owners = v
 }
 
@@ -405,7 +437,7 @@ func (o *CreateAssetCODEPROJECTRequest) SetLastCommit(v CreateAssetGITLABREPOSIT
 }
 
 func (o CreateAssetCODEPROJECTRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -414,27 +446,27 @@ func (o CreateAssetCODEPROJECTRequest) MarshalJSON() ([]byte, error) {
 
 func (o CreateAssetCODEPROJECTRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ProjectIds) {
+	if o.ProjectIds != nil {
 		toSerialize["projectIds"] = o.ProjectIds
 	}
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
+	if o.Name.IsSet() {
+		toSerialize["name"] = o.Name.Get()
 	}
 	toSerialize["asset_class"] = o.AssetClass
 	if !IsNil(o.ExtraMetadata) {
 		toSerialize["extra_metadata"] = o.ExtraMetadata
 	}
-	if !IsNil(o.ScreenshotS3Key) {
-		toSerialize["screenshot_s3_key"] = o.ScreenshotS3Key
+	if o.ScreenshotS3Key.IsSet() {
+		toSerialize["screenshot_s3_key"] = o.ScreenshotS3Key.Get()
 	}
 	toSerialize["asset_type"] = o.AssetType
 	toSerialize["repository"] = o.Repository
 	toSerialize["path"] = o.Path
 	toSerialize["language"] = o.Language
-	if !IsNil(o.HttpUrlToProject) {
-		toSerialize["http_url_to_project"] = o.HttpUrlToProject
+	if o.HttpUrlToProject.IsSet() {
+		toSerialize["http_url_to_project"] = o.HttpUrlToProject.Get()
 	}
-	if !IsNil(o.Owners) {
+	if o.Owners != nil {
 		toSerialize["owners"] = o.Owners
 	}
 	if !IsNil(o.LastCommit) {
@@ -465,10 +497,10 @@ func (o *CreateAssetCODEPROJECTRequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -540,3 +572,5 @@ func (v *NullableCreateAssetCODEPROJECTRequest) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

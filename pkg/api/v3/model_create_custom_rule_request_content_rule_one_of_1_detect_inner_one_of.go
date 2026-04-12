@@ -20,8 +20,8 @@ var _ MappedNullable = &CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf
 
 // CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf struct for CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf
 type CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf struct {
-	Command              *string         `json:"command,omitempty"`
-	If                   ENUMJSASSERTION `json:"if"`
+	Command NullableString `json:"command,omitempty"`
+	If ENUMJSASSERTION `json:"if"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -45,36 +45,46 @@ func NewCreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOfWithDefaults() *
 	return &this
 }
 
-// GetCommand returns the Command field value if set, zero value otherwise.
+// GetCommand returns the Command field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf) GetCommand() string {
-	if o == nil || IsNil(o.Command) {
+	if o == nil || IsNil(o.Command.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Command
+	return *o.Command.Get()
 }
 
 // GetCommandOk returns a tuple with the Command field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf) GetCommandOk() (*string, bool) {
-	if o == nil || IsNil(o.Command) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Command, true
+	return o.Command.Get(), o.Command.IsSet()
 }
 
 // HasCommand returns a boolean if a field has been set.
 func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf) HasCommand() bool {
-	if o != nil && !IsNil(o.Command) {
+	if o != nil && o.Command.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCommand gets a reference to the given string and assigns it to the Command field.
+// SetCommand gets a reference to the given NullableString and assigns it to the Command field.
 func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf) SetCommand(v string) {
-	o.Command = &v
+	o.Command.Set(&v)
+}
+// SetCommandNil sets the value for Command to be an explicit nil
+func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf) SetCommandNil() {
+	o.Command.Set(nil)
+}
+
+// UnsetCommand ensures that no value is present for Command, not even an explicit nil
+func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf) UnsetCommand() {
+	o.Command.Unset()
 }
 
 // GetIf returns the If field value
@@ -102,7 +112,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf) SetIf(v ENUMJ
 }
 
 func (o CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -111,8 +121,8 @@ func (o CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf) MarshalJSON() 
 
 func (o CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Command) {
-		toSerialize["command"] = o.Command
+	if o.Command.IsSet() {
+		toSerialize["command"] = o.Command.Get()
 	}
 	toSerialize["if"] = o.If
 
@@ -136,10 +146,10 @@ func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf) UnmarshalJSON
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -201,3 +211,5 @@ func (v *NullableCreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf) Unmar
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

@@ -20,11 +20,11 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationScopeAllowlistInnerOne
 
 // GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf3 struct for GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf3
 type GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf3 struct {
-	Type                 ENUMRESTAPIPATH                                                                         `json:"type"`
-	Value                string                                                                                  `json:"value"`
-	Operation            *ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS0PROPERTIESOPERATION `json:"operation,omitempty"`
-	Method               *ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD    `json:"method,omitempty"`
-	Domain               *string                                                                                 `json:"domain,omitempty"`
+	Type ENUMRESTAPIPATH `json:"type"`
+	Value string `json:"value"`
+	Operation NullableENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS0PROPERTIESOPERATION `json:"operation,omitempty"`
+	Method NullableENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD `json:"method,omitempty"`
+	Domain NullableString `json:"domain,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -97,104 +97,134 @@ func (o *GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf3) SetValue(v
 	o.Value = v
 }
 
-// GetOperation returns the Operation field value if set, zero value otherwise.
+// GetOperation returns the Operation field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf3) GetOperation() ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS0PROPERTIESOPERATION {
-	if o == nil || IsNil(o.Operation) {
+	if o == nil || IsNil(o.Operation.Get()) {
 		var ret ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS0PROPERTIESOPERATION
 		return ret
 	}
-	return *o.Operation
+	return *o.Operation.Get()
 }
 
 // GetOperationOk returns a tuple with the Operation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf3) GetOperationOk() (*ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS0PROPERTIESOPERATION, bool) {
-	if o == nil || IsNil(o.Operation) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Operation, true
+	return o.Operation.Get(), o.Operation.IsSet()
 }
 
 // HasOperation returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf3) HasOperation() bool {
-	if o != nil && !IsNil(o.Operation) {
+	if o != nil && o.Operation.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOperation gets a reference to the given ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS0PROPERTIESOPERATION and assigns it to the Operation field.
+// SetOperation gets a reference to the given NullableENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS0PROPERTIESOPERATION and assigns it to the Operation field.
 func (o *GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf3) SetOperation(v ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS0PROPERTIESOPERATION) {
-	o.Operation = &v
+	o.Operation.Set(&v)
+}
+// SetOperationNil sets the value for Operation to be an explicit nil
+func (o *GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf3) SetOperationNil() {
+	o.Operation.Set(nil)
 }
 
-// GetMethod returns the Method field value if set, zero value otherwise.
+// UnsetOperation ensures that no value is present for Operation, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf3) UnsetOperation() {
+	o.Operation.Unset()
+}
+
+// GetMethod returns the Method field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf3) GetMethod() ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD {
-	if o == nil || IsNil(o.Method) {
+	if o == nil || IsNil(o.Method.Get()) {
 		var ret ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD
 		return ret
 	}
-	return *o.Method
+	return *o.Method.Get()
 }
 
 // GetMethodOk returns a tuple with the Method field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf3) GetMethodOk() (*ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD, bool) {
-	if o == nil || IsNil(o.Method) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Method, true
+	return o.Method.Get(), o.Method.IsSet()
 }
 
 // HasMethod returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf3) HasMethod() bool {
-	if o != nil && !IsNil(o.Method) {
+	if o != nil && o.Method.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetMethod gets a reference to the given ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD and assigns it to the Method field.
+// SetMethod gets a reference to the given NullableENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD and assigns it to the Method field.
 func (o *GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf3) SetMethod(v ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD) {
-	o.Method = &v
+	o.Method.Set(&v)
+}
+// SetMethodNil sets the value for Method to be an explicit nil
+func (o *GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf3) SetMethodNil() {
+	o.Method.Set(nil)
 }
 
-// GetDomain returns the Domain field value if set, zero value otherwise.
+// UnsetMethod ensures that no value is present for Method, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf3) UnsetMethod() {
+	o.Method.Unset()
+}
+
+// GetDomain returns the Domain field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf3) GetDomain() string {
-	if o == nil || IsNil(o.Domain) {
+	if o == nil || IsNil(o.Domain.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Domain
+	return *o.Domain.Get()
 }
 
 // GetDomainOk returns a tuple with the Domain field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf3) GetDomainOk() (*string, bool) {
-	if o == nil || IsNil(o.Domain) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Domain, true
+	return o.Domain.Get(), o.Domain.IsSet()
 }
 
 // HasDomain returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf3) HasDomain() bool {
-	if o != nil && !IsNil(o.Domain) {
+	if o != nil && o.Domain.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetDomain gets a reference to the given string and assigns it to the Domain field.
+// SetDomain gets a reference to the given NullableString and assigns it to the Domain field.
 func (o *GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf3) SetDomain(v string) {
-	o.Domain = &v
+	o.Domain.Set(&v)
+}
+// SetDomainNil sets the value for Domain to be an explicit nil
+func (o *GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf3) SetDomainNil() {
+	o.Domain.Set(nil)
+}
+
+// UnsetDomain ensures that no value is present for Domain, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf3) UnsetDomain() {
+	o.Domain.Unset()
 }
 
 func (o GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf3) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -205,14 +235,14 @@ func (o GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf3) ToMap() (ma
 	toSerialize := map[string]interface{}{}
 	toSerialize["type"] = o.Type
 	toSerialize["value"] = o.Value
-	if !IsNil(o.Operation) {
-		toSerialize["operation"] = o.Operation
+	if o.Operation.IsSet() {
+		toSerialize["operation"] = o.Operation.Get()
 	}
-	if !IsNil(o.Method) {
-		toSerialize["method"] = o.Method
+	if o.Method.IsSet() {
+		toSerialize["method"] = o.Method.Get()
 	}
-	if !IsNil(o.Domain) {
-		toSerialize["domain"] = o.Domain
+	if o.Domain.IsSet() {
+		toSerialize["domain"] = o.Domain.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -236,10 +266,10 @@ func (o *GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf3) UnmarshalJ
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -304,3 +334,5 @@ func (v *NullableGetProfile200ResponseConfigurationScopeAllowlistInnerOneOf3) Un
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

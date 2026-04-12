@@ -19,7 +19,7 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationPortScanning{}
 
 // GetProfile200ResponseConfigurationPortScanning struct for GetProfile200ResponseConfigurationPortScanning
 type GetProfile200ResponseConfigurationPortScanning struct {
-	Ports                []float32 `json:"ports,omitempty"`
+	Ports []float32 `json:"ports,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -42,9 +42,9 @@ func NewGetProfile200ResponseConfigurationPortScanningWithDefaults() *GetProfile
 	return &this
 }
 
-// GetPorts returns the Ports field value if set, zero value otherwise.
+// GetPorts returns the Ports field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationPortScanning) GetPorts() []float32 {
-	if o == nil || IsNil(o.Ports) {
+	if o == nil {
 		var ret []float32
 		return ret
 	}
@@ -53,6 +53,7 @@ func (o *GetProfile200ResponseConfigurationPortScanning) GetPorts() []float32 {
 
 // GetPortsOk returns a tuple with the Ports field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationPortScanning) GetPortsOk() ([]float32, bool) {
 	if o == nil || IsNil(o.Ports) {
 		return nil, false
@@ -75,7 +76,7 @@ func (o *GetProfile200ResponseConfigurationPortScanning) SetPorts(v []float32) {
 }
 
 func (o GetProfile200ResponseConfigurationPortScanning) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -84,7 +85,7 @@ func (o GetProfile200ResponseConfigurationPortScanning) MarshalJSON() ([]byte, e
 
 func (o GetProfile200ResponseConfigurationPortScanning) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Ports) {
+	if o.Ports != nil {
 		toSerialize["ports"] = o.Ports
 	}
 
@@ -151,3 +152,5 @@ func (v *NullableGetProfile200ResponseConfigurationPortScanning) UnmarshalJSON(s
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

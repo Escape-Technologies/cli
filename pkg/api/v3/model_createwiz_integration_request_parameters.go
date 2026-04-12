@@ -20,10 +20,10 @@ var _ MappedNullable = &CreatewizIntegrationRequestParameters{}
 
 // CreatewizIntegrationRequestParameters The parameters of the integration
 type CreatewizIntegrationRequestParameters struct {
-	ClientId             string                                                        `json:"client_id"`
-	ClientSecret         string                                                        `json:"client_secret"`
-	TokenUri             string                                                        `json:"token_uri"`
-	ApiEndpoint          string                                                        `json:"api_endpoint"`
+	ClientId string `json:"client_id"`
+	ClientSecret string `json:"client_secret"`
+	TokenUri string `json:"token_uri"`
+	ApiEndpoint string `json:"api_endpoint"`
 	UploadSeverityLevels []ENUMPROPERTIESPARAMETERSPROPERTIESUPLOADSEVERITYLEVELSITEMS `json:"upload_severity_levels,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -147,9 +147,9 @@ func (o *CreatewizIntegrationRequestParameters) SetApiEndpoint(v string) {
 	o.ApiEndpoint = v
 }
 
-// GetUploadSeverityLevels returns the UploadSeverityLevels field value if set, zero value otherwise.
+// GetUploadSeverityLevels returns the UploadSeverityLevels field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreatewizIntegrationRequestParameters) GetUploadSeverityLevels() []ENUMPROPERTIESPARAMETERSPROPERTIESUPLOADSEVERITYLEVELSITEMS {
-	if o == nil || IsNil(o.UploadSeverityLevels) {
+	if o == nil {
 		var ret []ENUMPROPERTIESPARAMETERSPROPERTIESUPLOADSEVERITYLEVELSITEMS
 		return ret
 	}
@@ -158,6 +158,7 @@ func (o *CreatewizIntegrationRequestParameters) GetUploadSeverityLevels() []ENUM
 
 // GetUploadSeverityLevelsOk returns a tuple with the UploadSeverityLevels field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreatewizIntegrationRequestParameters) GetUploadSeverityLevelsOk() ([]ENUMPROPERTIESPARAMETERSPROPERTIESUPLOADSEVERITYLEVELSITEMS, bool) {
 	if o == nil || IsNil(o.UploadSeverityLevels) {
 		return nil, false
@@ -180,7 +181,7 @@ func (o *CreatewizIntegrationRequestParameters) SetUploadSeverityLevels(v []ENUM
 }
 
 func (o CreatewizIntegrationRequestParameters) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -193,7 +194,7 @@ func (o CreatewizIntegrationRequestParameters) ToMap() (map[string]interface{}, 
 	toSerialize["client_secret"] = o.ClientSecret
 	toSerialize["token_uri"] = o.TokenUri
 	toSerialize["api_endpoint"] = o.ApiEndpoint
-	if !IsNil(o.UploadSeverityLevels) {
+	if o.UploadSeverityLevels != nil {
 		toSerialize["upload_severity_levels"] = o.UploadSeverityLevels
 	}
 
@@ -220,10 +221,10 @@ func (o *CreatewizIntegrationRequestParameters) UnmarshalJSON(data []byte) (err 
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -288,3 +289,5 @@ func (v *NullableCreatewizIntegrationRequestParameters) UnmarshalJSON(src []byte
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

@@ -19,24 +19,24 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationGraphqlApiDast{}
 
 // GetProfile200ResponseConfigurationGraphqlApiDast struct for GetProfile200ResponseConfigurationGraphqlApiDast
 type GetProfile200ResponseConfigurationGraphqlApiDast struct {
-	CustomData               map[string]string                                                              `json:"custom_data,omitempty"`
-	SchemaS3Key              *string                                                                        `json:"schema_s3_key,omitempty"`
-	AdditionalSchemaS3Keys   []string                                                                       `json:"additional_schema_s3_keys,omitempty"`
-	Url                      *string                                                                        `json:"url,omitempty"`
-	LocationId               *string                                                                        `json:"location_id,omitempty"`
-	Profile                  *ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESPROFILE          `json:"profile,omitempty"`
-	ExplorationDepth         *ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESEXPLORATIONDEPTH `json:"exploration_depth,omitempty"`
-	ExploreWithAllUsers      *bool                                                                          `json:"explore_with_all_users,omitempty"`
-	CrossUserMemoryAllowlist []string                                                                       `json:"cross_user_memory_allowlist,omitempty"`
-	Mode                     *ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE               `json:"mode,omitempty"`
-	MaxDuration              *float32                                                                       `json:"max_duration,omitempty"`
-	MaxGeneratedDepth        *float32                                                                       `json:"max_generated_depth,omitempty"`
-	NoOperationName          *bool                                                                          `json:"no_operation_name,omitempty"`
-	Hotstart                 []string                                                                       `json:"hotstart,omitempty"`
-	HotstartOnly             *bool                                                                          `json:"hotstart_only,omitempty"`
-	Scope                    *GetProfile200ResponseConfigurationGraphqlApiDastScope                         `json:"scope,omitempty"`
-	InScopeOnly              *bool                                                                          `json:"in_scope_only,omitempty"`
-	AdditionalProperties     map[string]interface{}
+	CustomData map[string]string `json:"custom_data,omitempty"`
+	SchemaS3Key NullableString `json:"schema_s3_key,omitempty"`
+	AdditionalSchemaS3Keys []string `json:"additional_schema_s3_keys,omitempty"`
+	Url NullableString `json:"url,omitempty"`
+	LocationId NullableString `json:"location_id,omitempty"`
+	Profile NullableENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESPROFILE `json:"profile,omitempty"`
+	ExplorationDepth NullableENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESEXPLORATIONDEPTH `json:"exploration_depth,omitempty"`
+	ExploreWithAllUsers NullableBool `json:"explore_with_all_users,omitempty"`
+	CrossUserMemoryAllowlist []string `json:"cross_user_memory_allowlist,omitempty"`
+	Mode NullableENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE `json:"mode,omitempty"`
+	MaxDuration NullableFloat32 `json:"max_duration,omitempty"`
+	MaxGeneratedDepth NullableFloat32 `json:"max_generated_depth,omitempty"`
+	NoOperationName NullableBool `json:"no_operation_name,omitempty"`
+	Hotstart []string `json:"hotstart,omitempty"`
+	HotstartOnly NullableBool `json:"hotstart_only,omitempty"`
+	Scope *GetProfile200ResponseConfigurationGraphqlApiDastScope `json:"scope,omitempty"`
+	InScopeOnly NullableBool `json:"in_scope_only,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetProfile200ResponseConfigurationGraphqlApiDast GetProfile200ResponseConfigurationGraphqlApiDast
@@ -90,41 +90,51 @@ func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetCustomData(v map[s
 	o.CustomData = v
 }
 
-// GetSchemaS3Key returns the SchemaS3Key field value if set, zero value otherwise.
+// GetSchemaS3Key returns the SchemaS3Key field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) GetSchemaS3Key() string {
-	if o == nil || IsNil(o.SchemaS3Key) {
+	if o == nil || IsNil(o.SchemaS3Key.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.SchemaS3Key
+	return *o.SchemaS3Key.Get()
 }
 
 // GetSchemaS3KeyOk returns a tuple with the SchemaS3Key field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) GetSchemaS3KeyOk() (*string, bool) {
-	if o == nil || IsNil(o.SchemaS3Key) {
+	if o == nil {
 		return nil, false
 	}
-	return o.SchemaS3Key, true
+	return o.SchemaS3Key.Get(), o.SchemaS3Key.IsSet()
 }
 
 // HasSchemaS3Key returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) HasSchemaS3Key() bool {
-	if o != nil && !IsNil(o.SchemaS3Key) {
+	if o != nil && o.SchemaS3Key.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSchemaS3Key gets a reference to the given string and assigns it to the SchemaS3Key field.
+// SetSchemaS3Key gets a reference to the given NullableString and assigns it to the SchemaS3Key field.
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetSchemaS3Key(v string) {
-	o.SchemaS3Key = &v
+	o.SchemaS3Key.Set(&v)
+}
+// SetSchemaS3KeyNil sets the value for SchemaS3Key to be an explicit nil
+func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetSchemaS3KeyNil() {
+	o.SchemaS3Key.Set(nil)
 }
 
-// GetAdditionalSchemaS3Keys returns the AdditionalSchemaS3Keys field value if set, zero value otherwise.
+// UnsetSchemaS3Key ensures that no value is present for SchemaS3Key, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationGraphqlApiDast) UnsetSchemaS3Key() {
+	o.SchemaS3Key.Unset()
+}
+
+// GetAdditionalSchemaS3Keys returns the AdditionalSchemaS3Keys field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) GetAdditionalSchemaS3Keys() []string {
-	if o == nil || IsNil(o.AdditionalSchemaS3Keys) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -133,6 +143,7 @@ func (o *GetProfile200ResponseConfigurationGraphqlApiDast) GetAdditionalSchemaS3
 
 // GetAdditionalSchemaS3KeysOk returns a tuple with the AdditionalSchemaS3Keys field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) GetAdditionalSchemaS3KeysOk() ([]string, bool) {
 	if o == nil || IsNil(o.AdditionalSchemaS3Keys) {
 		return nil, false
@@ -154,169 +165,219 @@ func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetAdditionalSchemaS3
 	o.AdditionalSchemaS3Keys = v
 }
 
-// GetUrl returns the Url field value if set, zero value otherwise.
+// GetUrl returns the Url field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) GetUrl() string {
-	if o == nil || IsNil(o.Url) {
+	if o == nil || IsNil(o.Url.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Url
+	return *o.Url.Get()
 }
 
 // GetUrlOk returns a tuple with the Url field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) GetUrlOk() (*string, bool) {
-	if o == nil || IsNil(o.Url) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Url, true
+	return o.Url.Get(), o.Url.IsSet()
 }
 
 // HasUrl returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) HasUrl() bool {
-	if o != nil && !IsNil(o.Url) {
+	if o != nil && o.Url.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetUrl gets a reference to the given string and assigns it to the Url field.
+// SetUrl gets a reference to the given NullableString and assigns it to the Url field.
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetUrl(v string) {
-	o.Url = &v
+	o.Url.Set(&v)
+}
+// SetUrlNil sets the value for Url to be an explicit nil
+func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetUrlNil() {
+	o.Url.Set(nil)
 }
 
-// GetLocationId returns the LocationId field value if set, zero value otherwise.
+// UnsetUrl ensures that no value is present for Url, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationGraphqlApiDast) UnsetUrl() {
+	o.Url.Unset()
+}
+
+// GetLocationId returns the LocationId field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) GetLocationId() string {
-	if o == nil || IsNil(o.LocationId) {
+	if o == nil || IsNil(o.LocationId.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.LocationId
+	return *o.LocationId.Get()
 }
 
 // GetLocationIdOk returns a tuple with the LocationId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) GetLocationIdOk() (*string, bool) {
-	if o == nil || IsNil(o.LocationId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.LocationId, true
+	return o.LocationId.Get(), o.LocationId.IsSet()
 }
 
 // HasLocationId returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) HasLocationId() bool {
-	if o != nil && !IsNil(o.LocationId) {
+	if o != nil && o.LocationId.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetLocationId gets a reference to the given string and assigns it to the LocationId field.
+// SetLocationId gets a reference to the given NullableString and assigns it to the LocationId field.
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetLocationId(v string) {
-	o.LocationId = &v
+	o.LocationId.Set(&v)
+}
+// SetLocationIdNil sets the value for LocationId to be an explicit nil
+func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetLocationIdNil() {
+	o.LocationId.Set(nil)
 }
 
-// GetProfile returns the Profile field value if set, zero value otherwise.
+// UnsetLocationId ensures that no value is present for LocationId, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationGraphqlApiDast) UnsetLocationId() {
+	o.LocationId.Unset()
+}
+
+// GetProfile returns the Profile field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) GetProfile() ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESPROFILE {
-	if o == nil || IsNil(o.Profile) {
+	if o == nil || IsNil(o.Profile.Get()) {
 		var ret ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESPROFILE
 		return ret
 	}
-	return *o.Profile
+	return *o.Profile.Get()
 }
 
 // GetProfileOk returns a tuple with the Profile field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) GetProfileOk() (*ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESPROFILE, bool) {
-	if o == nil || IsNil(o.Profile) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Profile, true
+	return o.Profile.Get(), o.Profile.IsSet()
 }
 
 // HasProfile returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) HasProfile() bool {
-	if o != nil && !IsNil(o.Profile) {
+	if o != nil && o.Profile.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetProfile gets a reference to the given ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESPROFILE and assigns it to the Profile field.
+// SetProfile gets a reference to the given NullableENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESPROFILE and assigns it to the Profile field.
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetProfile(v ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESPROFILE) {
-	o.Profile = &v
+	o.Profile.Set(&v)
+}
+// SetProfileNil sets the value for Profile to be an explicit nil
+func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetProfileNil() {
+	o.Profile.Set(nil)
 }
 
-// GetExplorationDepth returns the ExplorationDepth field value if set, zero value otherwise.
+// UnsetProfile ensures that no value is present for Profile, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationGraphqlApiDast) UnsetProfile() {
+	o.Profile.Unset()
+}
+
+// GetExplorationDepth returns the ExplorationDepth field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) GetExplorationDepth() ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESEXPLORATIONDEPTH {
-	if o == nil || IsNil(o.ExplorationDepth) {
+	if o == nil || IsNil(o.ExplorationDepth.Get()) {
 		var ret ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESEXPLORATIONDEPTH
 		return ret
 	}
-	return *o.ExplorationDepth
+	return *o.ExplorationDepth.Get()
 }
 
 // GetExplorationDepthOk returns a tuple with the ExplorationDepth field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) GetExplorationDepthOk() (*ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESEXPLORATIONDEPTH, bool) {
-	if o == nil || IsNil(o.ExplorationDepth) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ExplorationDepth, true
+	return o.ExplorationDepth.Get(), o.ExplorationDepth.IsSet()
 }
 
 // HasExplorationDepth returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) HasExplorationDepth() bool {
-	if o != nil && !IsNil(o.ExplorationDepth) {
+	if o != nil && o.ExplorationDepth.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetExplorationDepth gets a reference to the given ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESEXPLORATIONDEPTH and assigns it to the ExplorationDepth field.
+// SetExplorationDepth gets a reference to the given NullableENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESEXPLORATIONDEPTH and assigns it to the ExplorationDepth field.
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetExplorationDepth(v ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESEXPLORATIONDEPTH) {
-	o.ExplorationDepth = &v
+	o.ExplorationDepth.Set(&v)
+}
+// SetExplorationDepthNil sets the value for ExplorationDepth to be an explicit nil
+func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetExplorationDepthNil() {
+	o.ExplorationDepth.Set(nil)
 }
 
-// GetExploreWithAllUsers returns the ExploreWithAllUsers field value if set, zero value otherwise.
+// UnsetExplorationDepth ensures that no value is present for ExplorationDepth, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationGraphqlApiDast) UnsetExplorationDepth() {
+	o.ExplorationDepth.Unset()
+}
+
+// GetExploreWithAllUsers returns the ExploreWithAllUsers field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) GetExploreWithAllUsers() bool {
-	if o == nil || IsNil(o.ExploreWithAllUsers) {
+	if o == nil || IsNil(o.ExploreWithAllUsers.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.ExploreWithAllUsers
+	return *o.ExploreWithAllUsers.Get()
 }
 
 // GetExploreWithAllUsersOk returns a tuple with the ExploreWithAllUsers field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) GetExploreWithAllUsersOk() (*bool, bool) {
-	if o == nil || IsNil(o.ExploreWithAllUsers) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ExploreWithAllUsers, true
+	return o.ExploreWithAllUsers.Get(), o.ExploreWithAllUsers.IsSet()
 }
 
 // HasExploreWithAllUsers returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) HasExploreWithAllUsers() bool {
-	if o != nil && !IsNil(o.ExploreWithAllUsers) {
+	if o != nil && o.ExploreWithAllUsers.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetExploreWithAllUsers gets a reference to the given bool and assigns it to the ExploreWithAllUsers field.
+// SetExploreWithAllUsers gets a reference to the given NullableBool and assigns it to the ExploreWithAllUsers field.
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetExploreWithAllUsers(v bool) {
-	o.ExploreWithAllUsers = &v
+	o.ExploreWithAllUsers.Set(&v)
+}
+// SetExploreWithAllUsersNil sets the value for ExploreWithAllUsers to be an explicit nil
+func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetExploreWithAllUsersNil() {
+	o.ExploreWithAllUsers.Set(nil)
 }
 
-// GetCrossUserMemoryAllowlist returns the CrossUserMemoryAllowlist field value if set, zero value otherwise.
+// UnsetExploreWithAllUsers ensures that no value is present for ExploreWithAllUsers, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationGraphqlApiDast) UnsetExploreWithAllUsers() {
+	o.ExploreWithAllUsers.Unset()
+}
+
+// GetCrossUserMemoryAllowlist returns the CrossUserMemoryAllowlist field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) GetCrossUserMemoryAllowlist() []string {
-	if o == nil || IsNil(o.CrossUserMemoryAllowlist) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -325,6 +386,7 @@ func (o *GetProfile200ResponseConfigurationGraphqlApiDast) GetCrossUserMemoryAll
 
 // GetCrossUserMemoryAllowlistOk returns a tuple with the CrossUserMemoryAllowlist field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) GetCrossUserMemoryAllowlistOk() ([]string, bool) {
 	if o == nil || IsNil(o.CrossUserMemoryAllowlist) {
 		return nil, false
@@ -346,137 +408,177 @@ func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetCrossUserMemoryAll
 	o.CrossUserMemoryAllowlist = v
 }
 
-// GetMode returns the Mode field value if set, zero value otherwise.
+// GetMode returns the Mode field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) GetMode() ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE {
-	if o == nil || IsNil(o.Mode) {
+	if o == nil || IsNil(o.Mode.Get()) {
 		var ret ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE
 		return ret
 	}
-	return *o.Mode
+	return *o.Mode.Get()
 }
 
 // GetModeOk returns a tuple with the Mode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) GetModeOk() (*ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE, bool) {
-	if o == nil || IsNil(o.Mode) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Mode, true
+	return o.Mode.Get(), o.Mode.IsSet()
 }
 
 // HasMode returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) HasMode() bool {
-	if o != nil && !IsNil(o.Mode) {
+	if o != nil && o.Mode.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetMode gets a reference to the given ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE and assigns it to the Mode field.
+// SetMode gets a reference to the given NullableENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE and assigns it to the Mode field.
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetMode(v ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE) {
-	o.Mode = &v
+	o.Mode.Set(&v)
+}
+// SetModeNil sets the value for Mode to be an explicit nil
+func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetModeNil() {
+	o.Mode.Set(nil)
 }
 
-// GetMaxDuration returns the MaxDuration field value if set, zero value otherwise.
+// UnsetMode ensures that no value is present for Mode, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationGraphqlApiDast) UnsetMode() {
+	o.Mode.Unset()
+}
+
+// GetMaxDuration returns the MaxDuration field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) GetMaxDuration() float32 {
-	if o == nil || IsNil(o.MaxDuration) {
+	if o == nil || IsNil(o.MaxDuration.Get()) {
 		var ret float32
 		return ret
 	}
-	return *o.MaxDuration
+	return *o.MaxDuration.Get()
 }
 
 // GetMaxDurationOk returns a tuple with the MaxDuration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) GetMaxDurationOk() (*float32, bool) {
-	if o == nil || IsNil(o.MaxDuration) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MaxDuration, true
+	return o.MaxDuration.Get(), o.MaxDuration.IsSet()
 }
 
 // HasMaxDuration returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) HasMaxDuration() bool {
-	if o != nil && !IsNil(o.MaxDuration) {
+	if o != nil && o.MaxDuration.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetMaxDuration gets a reference to the given float32 and assigns it to the MaxDuration field.
+// SetMaxDuration gets a reference to the given NullableFloat32 and assigns it to the MaxDuration field.
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetMaxDuration(v float32) {
-	o.MaxDuration = &v
+	o.MaxDuration.Set(&v)
+}
+// SetMaxDurationNil sets the value for MaxDuration to be an explicit nil
+func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetMaxDurationNil() {
+	o.MaxDuration.Set(nil)
 }
 
-// GetMaxGeneratedDepth returns the MaxGeneratedDepth field value if set, zero value otherwise.
+// UnsetMaxDuration ensures that no value is present for MaxDuration, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationGraphqlApiDast) UnsetMaxDuration() {
+	o.MaxDuration.Unset()
+}
+
+// GetMaxGeneratedDepth returns the MaxGeneratedDepth field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) GetMaxGeneratedDepth() float32 {
-	if o == nil || IsNil(o.MaxGeneratedDepth) {
+	if o == nil || IsNil(o.MaxGeneratedDepth.Get()) {
 		var ret float32
 		return ret
 	}
-	return *o.MaxGeneratedDepth
+	return *o.MaxGeneratedDepth.Get()
 }
 
 // GetMaxGeneratedDepthOk returns a tuple with the MaxGeneratedDepth field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) GetMaxGeneratedDepthOk() (*float32, bool) {
-	if o == nil || IsNil(o.MaxGeneratedDepth) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MaxGeneratedDepth, true
+	return o.MaxGeneratedDepth.Get(), o.MaxGeneratedDepth.IsSet()
 }
 
 // HasMaxGeneratedDepth returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) HasMaxGeneratedDepth() bool {
-	if o != nil && !IsNil(o.MaxGeneratedDepth) {
+	if o != nil && o.MaxGeneratedDepth.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetMaxGeneratedDepth gets a reference to the given float32 and assigns it to the MaxGeneratedDepth field.
+// SetMaxGeneratedDepth gets a reference to the given NullableFloat32 and assigns it to the MaxGeneratedDepth field.
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetMaxGeneratedDepth(v float32) {
-	o.MaxGeneratedDepth = &v
+	o.MaxGeneratedDepth.Set(&v)
+}
+// SetMaxGeneratedDepthNil sets the value for MaxGeneratedDepth to be an explicit nil
+func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetMaxGeneratedDepthNil() {
+	o.MaxGeneratedDepth.Set(nil)
 }
 
-// GetNoOperationName returns the NoOperationName field value if set, zero value otherwise.
+// UnsetMaxGeneratedDepth ensures that no value is present for MaxGeneratedDepth, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationGraphqlApiDast) UnsetMaxGeneratedDepth() {
+	o.MaxGeneratedDepth.Unset()
+}
+
+// GetNoOperationName returns the NoOperationName field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) GetNoOperationName() bool {
-	if o == nil || IsNil(o.NoOperationName) {
+	if o == nil || IsNil(o.NoOperationName.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.NoOperationName
+	return *o.NoOperationName.Get()
 }
 
 // GetNoOperationNameOk returns a tuple with the NoOperationName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) GetNoOperationNameOk() (*bool, bool) {
-	if o == nil || IsNil(o.NoOperationName) {
+	if o == nil {
 		return nil, false
 	}
-	return o.NoOperationName, true
+	return o.NoOperationName.Get(), o.NoOperationName.IsSet()
 }
 
 // HasNoOperationName returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) HasNoOperationName() bool {
-	if o != nil && !IsNil(o.NoOperationName) {
+	if o != nil && o.NoOperationName.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetNoOperationName gets a reference to the given bool and assigns it to the NoOperationName field.
+// SetNoOperationName gets a reference to the given NullableBool and assigns it to the NoOperationName field.
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetNoOperationName(v bool) {
-	o.NoOperationName = &v
+	o.NoOperationName.Set(&v)
+}
+// SetNoOperationNameNil sets the value for NoOperationName to be an explicit nil
+func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetNoOperationNameNil() {
+	o.NoOperationName.Set(nil)
 }
 
-// GetHotstart returns the Hotstart field value if set, zero value otherwise.
+// UnsetNoOperationName ensures that no value is present for NoOperationName, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationGraphqlApiDast) UnsetNoOperationName() {
+	o.NoOperationName.Unset()
+}
+
+// GetHotstart returns the Hotstart field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) GetHotstart() []string {
-	if o == nil || IsNil(o.Hotstart) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -485,6 +587,7 @@ func (o *GetProfile200ResponseConfigurationGraphqlApiDast) GetHotstart() []strin
 
 // GetHotstartOk returns a tuple with the Hotstart field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) GetHotstartOk() ([]string, bool) {
 	if o == nil || IsNil(o.Hotstart) {
 		return nil, false
@@ -506,36 +609,46 @@ func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetHotstart(v []strin
 	o.Hotstart = v
 }
 
-// GetHotstartOnly returns the HotstartOnly field value if set, zero value otherwise.
+// GetHotstartOnly returns the HotstartOnly field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) GetHotstartOnly() bool {
-	if o == nil || IsNil(o.HotstartOnly) {
+	if o == nil || IsNil(o.HotstartOnly.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.HotstartOnly
+	return *o.HotstartOnly.Get()
 }
 
 // GetHotstartOnlyOk returns a tuple with the HotstartOnly field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) GetHotstartOnlyOk() (*bool, bool) {
-	if o == nil || IsNil(o.HotstartOnly) {
+	if o == nil {
 		return nil, false
 	}
-	return o.HotstartOnly, true
+	return o.HotstartOnly.Get(), o.HotstartOnly.IsSet()
 }
 
 // HasHotstartOnly returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) HasHotstartOnly() bool {
-	if o != nil && !IsNil(o.HotstartOnly) {
+	if o != nil && o.HotstartOnly.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetHotstartOnly gets a reference to the given bool and assigns it to the HotstartOnly field.
+// SetHotstartOnly gets a reference to the given NullableBool and assigns it to the HotstartOnly field.
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetHotstartOnly(v bool) {
-	o.HotstartOnly = &v
+	o.HotstartOnly.Set(&v)
+}
+// SetHotstartOnlyNil sets the value for HotstartOnly to be an explicit nil
+func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetHotstartOnlyNil() {
+	o.HotstartOnly.Set(nil)
+}
+
+// UnsetHotstartOnly ensures that no value is present for HotstartOnly, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationGraphqlApiDast) UnsetHotstartOnly() {
+	o.HotstartOnly.Unset()
 }
 
 // GetScope returns the Scope field value if set, zero value otherwise.
@@ -570,40 +683,50 @@ func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetScope(v GetProfile
 	o.Scope = &v
 }
 
-// GetInScopeOnly returns the InScopeOnly field value if set, zero value otherwise.
+// GetInScopeOnly returns the InScopeOnly field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) GetInScopeOnly() bool {
-	if o == nil || IsNil(o.InScopeOnly) {
+	if o == nil || IsNil(o.InScopeOnly.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.InScopeOnly
+	return *o.InScopeOnly.Get()
 }
 
 // GetInScopeOnlyOk returns a tuple with the InScopeOnly field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) GetInScopeOnlyOk() (*bool, bool) {
-	if o == nil || IsNil(o.InScopeOnly) {
+	if o == nil {
 		return nil, false
 	}
-	return o.InScopeOnly, true
+	return o.InScopeOnly.Get(), o.InScopeOnly.IsSet()
 }
 
 // HasInScopeOnly returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) HasInScopeOnly() bool {
-	if o != nil && !IsNil(o.InScopeOnly) {
+	if o != nil && o.InScopeOnly.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInScopeOnly gets a reference to the given bool and assigns it to the InScopeOnly field.
+// SetInScopeOnly gets a reference to the given NullableBool and assigns it to the InScopeOnly field.
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetInScopeOnly(v bool) {
-	o.InScopeOnly = &v
+	o.InScopeOnly.Set(&v)
+}
+// SetInScopeOnlyNil sets the value for InScopeOnly to be an explicit nil
+func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetInScopeOnlyNil() {
+	o.InScopeOnly.Set(nil)
+}
+
+// UnsetInScopeOnly ensures that no value is present for InScopeOnly, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationGraphqlApiDast) UnsetInScopeOnly() {
+	o.InScopeOnly.Unset()
 }
 
 func (o GetProfile200ResponseConfigurationGraphqlApiDast) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -615,53 +738,53 @@ func (o GetProfile200ResponseConfigurationGraphqlApiDast) ToMap() (map[string]in
 	if !IsNil(o.CustomData) {
 		toSerialize["custom_data"] = o.CustomData
 	}
-	if !IsNil(o.SchemaS3Key) {
-		toSerialize["schema_s3_key"] = o.SchemaS3Key
+	if o.SchemaS3Key.IsSet() {
+		toSerialize["schema_s3_key"] = o.SchemaS3Key.Get()
 	}
-	if !IsNil(o.AdditionalSchemaS3Keys) {
+	if o.AdditionalSchemaS3Keys != nil {
 		toSerialize["additional_schema_s3_keys"] = o.AdditionalSchemaS3Keys
 	}
-	if !IsNil(o.Url) {
-		toSerialize["url"] = o.Url
+	if o.Url.IsSet() {
+		toSerialize["url"] = o.Url.Get()
 	}
-	if !IsNil(o.LocationId) {
-		toSerialize["location_id"] = o.LocationId
+	if o.LocationId.IsSet() {
+		toSerialize["location_id"] = o.LocationId.Get()
 	}
-	if !IsNil(o.Profile) {
-		toSerialize["profile"] = o.Profile
+	if o.Profile.IsSet() {
+		toSerialize["profile"] = o.Profile.Get()
 	}
-	if !IsNil(o.ExplorationDepth) {
-		toSerialize["exploration_depth"] = o.ExplorationDepth
+	if o.ExplorationDepth.IsSet() {
+		toSerialize["exploration_depth"] = o.ExplorationDepth.Get()
 	}
-	if !IsNil(o.ExploreWithAllUsers) {
-		toSerialize["explore_with_all_users"] = o.ExploreWithAllUsers
+	if o.ExploreWithAllUsers.IsSet() {
+		toSerialize["explore_with_all_users"] = o.ExploreWithAllUsers.Get()
 	}
-	if !IsNil(o.CrossUserMemoryAllowlist) {
+	if o.CrossUserMemoryAllowlist != nil {
 		toSerialize["cross_user_memory_allowlist"] = o.CrossUserMemoryAllowlist
 	}
-	if !IsNil(o.Mode) {
-		toSerialize["mode"] = o.Mode
+	if o.Mode.IsSet() {
+		toSerialize["mode"] = o.Mode.Get()
 	}
-	if !IsNil(o.MaxDuration) {
-		toSerialize["max_duration"] = o.MaxDuration
+	if o.MaxDuration.IsSet() {
+		toSerialize["max_duration"] = o.MaxDuration.Get()
 	}
-	if !IsNil(o.MaxGeneratedDepth) {
-		toSerialize["max_generated_depth"] = o.MaxGeneratedDepth
+	if o.MaxGeneratedDepth.IsSet() {
+		toSerialize["max_generated_depth"] = o.MaxGeneratedDepth.Get()
 	}
-	if !IsNil(o.NoOperationName) {
-		toSerialize["no_operation_name"] = o.NoOperationName
+	if o.NoOperationName.IsSet() {
+		toSerialize["no_operation_name"] = o.NoOperationName.Get()
 	}
-	if !IsNil(o.Hotstart) {
+	if o.Hotstart != nil {
 		toSerialize["hotstart"] = o.Hotstart
 	}
-	if !IsNil(o.HotstartOnly) {
-		toSerialize["hotstart_only"] = o.HotstartOnly
+	if o.HotstartOnly.IsSet() {
+		toSerialize["hotstart_only"] = o.HotstartOnly.Get()
 	}
 	if !IsNil(o.Scope) {
 		toSerialize["scope"] = o.Scope
 	}
-	if !IsNil(o.InScopeOnly) {
-		toSerialize["in_scope_only"] = o.InScopeOnly
+	if o.InScopeOnly.IsSet() {
+		toSerialize["in_scope_only"] = o.InScopeOnly.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -743,3 +866,5 @@ func (v *NullableGetProfile200ResponseConfigurationGraphqlApiDast) UnmarshalJSON
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

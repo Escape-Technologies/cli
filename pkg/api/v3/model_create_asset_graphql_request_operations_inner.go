@@ -20,10 +20,10 @@ var _ MappedNullable = &CreateAssetGRAPHQLRequestOperationsInner{}
 
 // CreateAssetGRAPHQLRequestOperationsInner struct for CreateAssetGRAPHQLRequestOperationsInner
 type CreateAssetGRAPHQLRequestOperationsInner struct {
-	Name                 string                                                    `json:"name"`
-	Type                 string                                                    `json:"type"`
-	Parameters           []CreateAssetGRAPHQLRequestOperationsInnerParametersInner `json:"parameters,omitempty"`
-	ReturnType           *string                                                   `json:"returnType,omitempty"`
+	Name string `json:"name"`
+	Type string `json:"type"`
+	Parameters []CreateAssetGRAPHQLRequestOperationsInnerParametersInner `json:"parameters,omitempty"`
+	ReturnType NullableString `json:"returnType,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -96,9 +96,9 @@ func (o *CreateAssetGRAPHQLRequestOperationsInner) SetType(v string) {
 	o.Type = v
 }
 
-// GetParameters returns the Parameters field value if set, zero value otherwise.
+// GetParameters returns the Parameters field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetGRAPHQLRequestOperationsInner) GetParameters() []CreateAssetGRAPHQLRequestOperationsInnerParametersInner {
-	if o == nil || IsNil(o.Parameters) {
+	if o == nil {
 		var ret []CreateAssetGRAPHQLRequestOperationsInnerParametersInner
 		return ret
 	}
@@ -107,6 +107,7 @@ func (o *CreateAssetGRAPHQLRequestOperationsInner) GetParameters() []CreateAsset
 
 // GetParametersOk returns a tuple with the Parameters field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetGRAPHQLRequestOperationsInner) GetParametersOk() ([]CreateAssetGRAPHQLRequestOperationsInnerParametersInner, bool) {
 	if o == nil || IsNil(o.Parameters) {
 		return nil, false
@@ -128,40 +129,50 @@ func (o *CreateAssetGRAPHQLRequestOperationsInner) SetParameters(v []CreateAsset
 	o.Parameters = v
 }
 
-// GetReturnType returns the ReturnType field value if set, zero value otherwise.
+// GetReturnType returns the ReturnType field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetGRAPHQLRequestOperationsInner) GetReturnType() string {
-	if o == nil || IsNil(o.ReturnType) {
+	if o == nil || IsNil(o.ReturnType.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.ReturnType
+	return *o.ReturnType.Get()
 }
 
 // GetReturnTypeOk returns a tuple with the ReturnType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetGRAPHQLRequestOperationsInner) GetReturnTypeOk() (*string, bool) {
-	if o == nil || IsNil(o.ReturnType) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ReturnType, true
+	return o.ReturnType.Get(), o.ReturnType.IsSet()
 }
 
 // HasReturnType returns a boolean if a field has been set.
 func (o *CreateAssetGRAPHQLRequestOperationsInner) HasReturnType() bool {
-	if o != nil && !IsNil(o.ReturnType) {
+	if o != nil && o.ReturnType.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetReturnType gets a reference to the given string and assigns it to the ReturnType field.
+// SetReturnType gets a reference to the given NullableString and assigns it to the ReturnType field.
 func (o *CreateAssetGRAPHQLRequestOperationsInner) SetReturnType(v string) {
-	o.ReturnType = &v
+	o.ReturnType.Set(&v)
+}
+// SetReturnTypeNil sets the value for ReturnType to be an explicit nil
+func (o *CreateAssetGRAPHQLRequestOperationsInner) SetReturnTypeNil() {
+	o.ReturnType.Set(nil)
+}
+
+// UnsetReturnType ensures that no value is present for ReturnType, not even an explicit nil
+func (o *CreateAssetGRAPHQLRequestOperationsInner) UnsetReturnType() {
+	o.ReturnType.Unset()
 }
 
 func (o CreateAssetGRAPHQLRequestOperationsInner) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -172,11 +183,11 @@ func (o CreateAssetGRAPHQLRequestOperationsInner) ToMap() (map[string]interface{
 	toSerialize := map[string]interface{}{}
 	toSerialize["name"] = o.Name
 	toSerialize["type"] = o.Type
-	if !IsNil(o.Parameters) {
+	if o.Parameters != nil {
 		toSerialize["parameters"] = o.Parameters
 	}
-	if !IsNil(o.ReturnType) {
-		toSerialize["returnType"] = o.ReturnType
+	if o.ReturnType.IsSet() {
+		toSerialize["returnType"] = o.ReturnType.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -200,10 +211,10 @@ func (o *CreateAssetGRAPHQLRequestOperationsInner) UnmarshalJSON(data []byte) (e
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -267,3 +278,5 @@ func (v *NullableCreateAssetGRAPHQLRequestOperationsInner) UnmarshalJSON(src []b
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

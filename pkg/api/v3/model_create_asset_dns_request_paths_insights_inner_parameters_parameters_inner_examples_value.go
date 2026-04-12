@@ -19,10 +19,10 @@ var _ MappedNullable = &CreateAssetDNSRequestPathsInsightsInnerParametersParamet
 
 // CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue struct for CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue
 type CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue struct {
-	Summary              *string                                                                         `json:"summary,omitempty"`
-	Description          *string                                                                         `json:"description,omitempty"`
-	Value                NullableCreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample `json:"value,omitempty"`
-	ExternalValue        *string                                                                         `json:"externalValue,omitempty"`
+	Summary NullableString `json:"summary,omitempty"`
+	Description NullableString `json:"description,omitempty"`
+	Value NullableCreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample `json:"value,omitempty"`
+	ExternalValue NullableString `json:"externalValue,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -45,68 +45,88 @@ func NewCreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamples
 	return &this
 }
 
-// GetSummary returns the Summary field value if set, zero value otherwise.
+// GetSummary returns the Summary field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue) GetSummary() string {
-	if o == nil || IsNil(o.Summary) {
+	if o == nil || IsNil(o.Summary.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Summary
+	return *o.Summary.Get()
 }
 
 // GetSummaryOk returns a tuple with the Summary field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue) GetSummaryOk() (*string, bool) {
-	if o == nil || IsNil(o.Summary) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Summary, true
+	return o.Summary.Get(), o.Summary.IsSet()
 }
 
 // HasSummary returns a boolean if a field has been set.
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue) HasSummary() bool {
-	if o != nil && !IsNil(o.Summary) {
+	if o != nil && o.Summary.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSummary gets a reference to the given string and assigns it to the Summary field.
+// SetSummary gets a reference to the given NullableString and assigns it to the Summary field.
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue) SetSummary(v string) {
-	o.Summary = &v
+	o.Summary.Set(&v)
+}
+// SetSummaryNil sets the value for Summary to be an explicit nil
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue) SetSummaryNil() {
+	o.Summary.Set(nil)
 }
 
-// GetDescription returns the Description field value if set, zero value otherwise.
+// UnsetSummary ensures that no value is present for Summary, not even an explicit nil
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue) UnsetSummary() {
+	o.Summary.Unset()
+}
+
+// GetDescription returns the Description field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue) GetDescription() string {
-	if o == nil || IsNil(o.Description) {
+	if o == nil || IsNil(o.Description.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Description
+	return *o.Description.Get()
 }
 
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue) GetDescriptionOk() (*string, bool) {
-	if o == nil || IsNil(o.Description) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Description, true
+	return o.Description.Get(), o.Description.IsSet()
 }
 
 // HasDescription returns a boolean if a field has been set.
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue) HasDescription() bool {
-	if o != nil && !IsNil(o.Description) {
+	if o != nil && o.Description.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetDescription gets a reference to the given string and assigns it to the Description field.
+// SetDescription gets a reference to the given NullableString and assigns it to the Description field.
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue) SetDescription(v string) {
-	o.Description = &v
+	o.Description.Set(&v)
+}
+// SetDescriptionNil sets the value for Description to be an explicit nil
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue) SetDescriptionNil() {
+	o.Description.Set(nil)
+}
+
+// UnsetDescription ensures that no value is present for Description, not even an explicit nil
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue) UnsetDescription() {
+	o.Description.Unset()
 }
 
 // GetValue returns the Value field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -141,7 +161,6 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue) SetValue(v CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample) {
 	o.Value.Set(&v)
 }
-
 // SetValueNil sets the value for Value to be an explicit nil
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue) SetValueNil() {
 	o.Value.Set(nil)
@@ -152,40 +171,50 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample
 	o.Value.Unset()
 }
 
-// GetExternalValue returns the ExternalValue field value if set, zero value otherwise.
+// GetExternalValue returns the ExternalValue field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue) GetExternalValue() string {
-	if o == nil || IsNil(o.ExternalValue) {
+	if o == nil || IsNil(o.ExternalValue.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.ExternalValue
+	return *o.ExternalValue.Get()
 }
 
 // GetExternalValueOk returns a tuple with the ExternalValue field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue) GetExternalValueOk() (*string, bool) {
-	if o == nil || IsNil(o.ExternalValue) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ExternalValue, true
+	return o.ExternalValue.Get(), o.ExternalValue.IsSet()
 }
 
 // HasExternalValue returns a boolean if a field has been set.
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue) HasExternalValue() bool {
-	if o != nil && !IsNil(o.ExternalValue) {
+	if o != nil && o.ExternalValue.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetExternalValue gets a reference to the given string and assigns it to the ExternalValue field.
+// SetExternalValue gets a reference to the given NullableString and assigns it to the ExternalValue field.
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue) SetExternalValue(v string) {
-	o.ExternalValue = &v
+	o.ExternalValue.Set(&v)
+}
+// SetExternalValueNil sets the value for ExternalValue to be an explicit nil
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue) SetExternalValueNil() {
+	o.ExternalValue.Set(nil)
+}
+
+// UnsetExternalValue ensures that no value is present for ExternalValue, not even an explicit nil
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue) UnsetExternalValue() {
+	o.ExternalValue.Unset()
 }
 
 func (o CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -194,17 +223,17 @@ func (o CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamples
 
 func (o CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Summary) {
-		toSerialize["summary"] = o.Summary
+	if o.Summary.IsSet() {
+		toSerialize["summary"] = o.Summary.Get()
 	}
-	if !IsNil(o.Description) {
-		toSerialize["description"] = o.Description
+	if o.Description.IsSet() {
+		toSerialize["description"] = o.Description.Get()
 	}
 	if o.Value.IsSet() {
 		toSerialize["value"] = o.Value.Get()
 	}
-	if !IsNil(o.ExternalValue) {
-		toSerialize["externalValue"] = o.ExternalValue
+	if o.ExternalValue.IsSet() {
+		toSerialize["externalValue"] = o.ExternalValue.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -273,3 +302,5 @@ func (v *NullableCreateAssetDNSRequestPathsInsightsInnerParametersParametersInne
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

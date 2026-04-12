@@ -18,7 +18,7 @@ import (
 // checks if the ScanDetailed1 type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ScanDetailed1{}
 
-// ScanDetailed1 The last successful resource scan of the profile
+// ScanDetailed1 The most recent successful scan for this profile
 type ScanDetailed1 struct {
 	// The id of the scan
 	Id string `json:"id"`
@@ -29,9 +29,11 @@ type ScanDetailed1 struct {
 	// The date and time the scan was updated
 	UpdatedAt string `json:"updatedAt"`
 	// The date and time the scan was finished
-	FinishedAt *string `json:"finishedAt,omitempty"`
+	FinishedAt NullableString `json:"finishedAt"`
 	// The score of the scan
-	Score *float32 `json:"score,omitempty"`
+	Score NullableFloat32 `json:"score"`
+	// Aggregate API coverage ratio for this scan (0–1), when the scan has finished with coverage data
+	Coverage NullableFloat32 `json:"coverage"`
 	// The duration of the scan
 	Duration float32 `json:"duration"`
 	// The progress ratio of the scan
@@ -43,14 +45,14 @@ type ScanDetailed1 struct {
 	// The id of the profile of the scan
 	ProfileId string `json:"profileId"`
 	// The id of the organization of the scan
-	OrganizationId                 string            `json:"organizationId"`
-	CommitHash                     *string           `json:"commitHash,omitempty"`
-	CommitBranch                   *string           `json:"commitBranch,omitempty"`
-	CommitAuthor                   *string           `json:"commitAuthor,omitempty"`
-	CommitLink                     *string           `json:"commitLink,omitempty"`
-	CommitAuthorProfilePictureLink *string           `json:"commitAuthorProfilePictureLink,omitempty"`
-	Links                          ScanDetailedLinks `json:"links"`
-	AdditionalProperties           map[string]interface{}
+	OrganizationId string `json:"organizationId"`
+	CommitHash NullableString `json:"commitHash"`
+	CommitBranch NullableString `json:"commitBranch"`
+	CommitAuthor NullableString `json:"commitAuthor"`
+	CommitLink NullableString `json:"commitLink"`
+	CommitAuthorProfilePictureLink NullableString `json:"commitAuthorProfilePictureLink"`
+	Links ScanDetailedLinks `json:"links"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ScanDetailed1 ScanDetailed1
@@ -59,18 +61,26 @@ type _ScanDetailed1 ScanDetailed1
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewScanDetailed1(id string, status string, createdAt string, updatedAt string, duration float32, progressRatio float32, initiator string, kind string, profileId string, organizationId string, links ScanDetailedLinks) *ScanDetailed1 {
+func NewScanDetailed1(id string, status string, createdAt string, updatedAt string, finishedAt NullableString, score NullableFloat32, coverage NullableFloat32, duration float32, progressRatio float32, initiator string, kind string, profileId string, organizationId string, commitHash NullableString, commitBranch NullableString, commitAuthor NullableString, commitLink NullableString, commitAuthorProfilePictureLink NullableString, links ScanDetailedLinks) *ScanDetailed1 {
 	this := ScanDetailed1{}
 	this.Id = id
 	this.Status = status
 	this.CreatedAt = createdAt
 	this.UpdatedAt = updatedAt
+	this.FinishedAt = finishedAt
+	this.Score = score
+	this.Coverage = coverage
 	this.Duration = duration
 	this.ProgressRatio = progressRatio
 	this.Initiator = initiator
 	this.Kind = kind
 	this.ProfileId = profileId
 	this.OrganizationId = organizationId
+	this.CommitHash = commitHash
+	this.CommitBranch = commitBranch
+	this.CommitAuthor = commitAuthor
+	this.CommitLink = commitLink
+	this.CommitAuthorProfilePictureLink = commitAuthorProfilePictureLink
 	this.Links = links
 	return &this
 }
@@ -179,68 +189,82 @@ func (o *ScanDetailed1) SetUpdatedAt(v string) {
 	o.UpdatedAt = v
 }
 
-// GetFinishedAt returns the FinishedAt field value if set, zero value otherwise.
+// GetFinishedAt returns the FinishedAt field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *ScanDetailed1) GetFinishedAt() string {
-	if o == nil || IsNil(o.FinishedAt) {
+	if o == nil || o.FinishedAt.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.FinishedAt
+
+	return *o.FinishedAt.Get()
 }
 
-// GetFinishedAtOk returns a tuple with the FinishedAt field value if set, nil otherwise
+// GetFinishedAtOk returns a tuple with the FinishedAt field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ScanDetailed1) GetFinishedAtOk() (*string, bool) {
-	if o == nil || IsNil(o.FinishedAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.FinishedAt, true
+	return o.FinishedAt.Get(), o.FinishedAt.IsSet()
 }
 
-// HasFinishedAt returns a boolean if a field has been set.
-func (o *ScanDetailed1) HasFinishedAt() bool {
-	if o != nil && !IsNil(o.FinishedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetFinishedAt gets a reference to the given string and assigns it to the FinishedAt field.
+// SetFinishedAt sets field value
 func (o *ScanDetailed1) SetFinishedAt(v string) {
-	o.FinishedAt = &v
+	o.FinishedAt.Set(&v)
 }
 
-// GetScore returns the Score field value if set, zero value otherwise.
+// GetScore returns the Score field value
+// If the value is explicit nil, the zero value for float32 will be returned
 func (o *ScanDetailed1) GetScore() float32 {
-	if o == nil || IsNil(o.Score) {
+	if o == nil || o.Score.Get() == nil {
 		var ret float32
 		return ret
 	}
-	return *o.Score
+
+	return *o.Score.Get()
 }
 
-// GetScoreOk returns a tuple with the Score field value if set, nil otherwise
+// GetScoreOk returns a tuple with the Score field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ScanDetailed1) GetScoreOk() (*float32, bool) {
-	if o == nil || IsNil(o.Score) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Score, true
+	return o.Score.Get(), o.Score.IsSet()
 }
 
-// HasScore returns a boolean if a field has been set.
-func (o *ScanDetailed1) HasScore() bool {
-	if o != nil && !IsNil(o.Score) {
-		return true
+// SetScore sets field value
+func (o *ScanDetailed1) SetScore(v float32) {
+	o.Score.Set(&v)
+}
+
+// GetCoverage returns the Coverage field value
+// If the value is explicit nil, the zero value for float32 will be returned
+func (o *ScanDetailed1) GetCoverage() float32 {
+	if o == nil || o.Coverage.Get() == nil {
+		var ret float32
+		return ret
 	}
 
-	return false
+	return *o.Coverage.Get()
 }
 
-// SetScore gets a reference to the given float32 and assigns it to the Score field.
-func (o *ScanDetailed1) SetScore(v float32) {
-	o.Score = &v
+// GetCoverageOk returns a tuple with the Coverage field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ScanDetailed1) GetCoverageOk() (*float32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Coverage.Get(), o.Coverage.IsSet()
+}
+
+// SetCoverage sets field value
+func (o *ScanDetailed1) SetCoverage(v float32) {
+	o.Coverage.Set(&v)
 }
 
 // GetDuration returns the Duration field value
@@ -387,164 +411,134 @@ func (o *ScanDetailed1) SetOrganizationId(v string) {
 	o.OrganizationId = v
 }
 
-// GetCommitHash returns the CommitHash field value if set, zero value otherwise.
+// GetCommitHash returns the CommitHash field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *ScanDetailed1) GetCommitHash() string {
-	if o == nil || IsNil(o.CommitHash) {
+	if o == nil || o.CommitHash.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.CommitHash
+
+	return *o.CommitHash.Get()
 }
 
-// GetCommitHashOk returns a tuple with the CommitHash field value if set, nil otherwise
+// GetCommitHashOk returns a tuple with the CommitHash field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ScanDetailed1) GetCommitHashOk() (*string, bool) {
-	if o == nil || IsNil(o.CommitHash) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CommitHash, true
+	return o.CommitHash.Get(), o.CommitHash.IsSet()
 }
 
-// HasCommitHash returns a boolean if a field has been set.
-func (o *ScanDetailed1) HasCommitHash() bool {
-	if o != nil && !IsNil(o.CommitHash) {
-		return true
-	}
-
-	return false
-}
-
-// SetCommitHash gets a reference to the given string and assigns it to the CommitHash field.
+// SetCommitHash sets field value
 func (o *ScanDetailed1) SetCommitHash(v string) {
-	o.CommitHash = &v
+	o.CommitHash.Set(&v)
 }
 
-// GetCommitBranch returns the CommitBranch field value if set, zero value otherwise.
+// GetCommitBranch returns the CommitBranch field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *ScanDetailed1) GetCommitBranch() string {
-	if o == nil || IsNil(o.CommitBranch) {
+	if o == nil || o.CommitBranch.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.CommitBranch
+
+	return *o.CommitBranch.Get()
 }
 
-// GetCommitBranchOk returns a tuple with the CommitBranch field value if set, nil otherwise
+// GetCommitBranchOk returns a tuple with the CommitBranch field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ScanDetailed1) GetCommitBranchOk() (*string, bool) {
-	if o == nil || IsNil(o.CommitBranch) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CommitBranch, true
+	return o.CommitBranch.Get(), o.CommitBranch.IsSet()
 }
 
-// HasCommitBranch returns a boolean if a field has been set.
-func (o *ScanDetailed1) HasCommitBranch() bool {
-	if o != nil && !IsNil(o.CommitBranch) {
-		return true
-	}
-
-	return false
-}
-
-// SetCommitBranch gets a reference to the given string and assigns it to the CommitBranch field.
+// SetCommitBranch sets field value
 func (o *ScanDetailed1) SetCommitBranch(v string) {
-	o.CommitBranch = &v
+	o.CommitBranch.Set(&v)
 }
 
-// GetCommitAuthor returns the CommitAuthor field value if set, zero value otherwise.
+// GetCommitAuthor returns the CommitAuthor field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *ScanDetailed1) GetCommitAuthor() string {
-	if o == nil || IsNil(o.CommitAuthor) {
+	if o == nil || o.CommitAuthor.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.CommitAuthor
+
+	return *o.CommitAuthor.Get()
 }
 
-// GetCommitAuthorOk returns a tuple with the CommitAuthor field value if set, nil otherwise
+// GetCommitAuthorOk returns a tuple with the CommitAuthor field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ScanDetailed1) GetCommitAuthorOk() (*string, bool) {
-	if o == nil || IsNil(o.CommitAuthor) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CommitAuthor, true
+	return o.CommitAuthor.Get(), o.CommitAuthor.IsSet()
 }
 
-// HasCommitAuthor returns a boolean if a field has been set.
-func (o *ScanDetailed1) HasCommitAuthor() bool {
-	if o != nil && !IsNil(o.CommitAuthor) {
-		return true
-	}
-
-	return false
-}
-
-// SetCommitAuthor gets a reference to the given string and assigns it to the CommitAuthor field.
+// SetCommitAuthor sets field value
 func (o *ScanDetailed1) SetCommitAuthor(v string) {
-	o.CommitAuthor = &v
+	o.CommitAuthor.Set(&v)
 }
 
-// GetCommitLink returns the CommitLink field value if set, zero value otherwise.
+// GetCommitLink returns the CommitLink field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *ScanDetailed1) GetCommitLink() string {
-	if o == nil || IsNil(o.CommitLink) {
+	if o == nil || o.CommitLink.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.CommitLink
+
+	return *o.CommitLink.Get()
 }
 
-// GetCommitLinkOk returns a tuple with the CommitLink field value if set, nil otherwise
+// GetCommitLinkOk returns a tuple with the CommitLink field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ScanDetailed1) GetCommitLinkOk() (*string, bool) {
-	if o == nil || IsNil(o.CommitLink) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CommitLink, true
+	return o.CommitLink.Get(), o.CommitLink.IsSet()
 }
 
-// HasCommitLink returns a boolean if a field has been set.
-func (o *ScanDetailed1) HasCommitLink() bool {
-	if o != nil && !IsNil(o.CommitLink) {
-		return true
-	}
-
-	return false
-}
-
-// SetCommitLink gets a reference to the given string and assigns it to the CommitLink field.
+// SetCommitLink sets field value
 func (o *ScanDetailed1) SetCommitLink(v string) {
-	o.CommitLink = &v
+	o.CommitLink.Set(&v)
 }
 
-// GetCommitAuthorProfilePictureLink returns the CommitAuthorProfilePictureLink field value if set, zero value otherwise.
+// GetCommitAuthorProfilePictureLink returns the CommitAuthorProfilePictureLink field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *ScanDetailed1) GetCommitAuthorProfilePictureLink() string {
-	if o == nil || IsNil(o.CommitAuthorProfilePictureLink) {
+	if o == nil || o.CommitAuthorProfilePictureLink.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.CommitAuthorProfilePictureLink
+
+	return *o.CommitAuthorProfilePictureLink.Get()
 }
 
-// GetCommitAuthorProfilePictureLinkOk returns a tuple with the CommitAuthorProfilePictureLink field value if set, nil otherwise
+// GetCommitAuthorProfilePictureLinkOk returns a tuple with the CommitAuthorProfilePictureLink field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ScanDetailed1) GetCommitAuthorProfilePictureLinkOk() (*string, bool) {
-	if o == nil || IsNil(o.CommitAuthorProfilePictureLink) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CommitAuthorProfilePictureLink, true
+	return o.CommitAuthorProfilePictureLink.Get(), o.CommitAuthorProfilePictureLink.IsSet()
 }
 
-// HasCommitAuthorProfilePictureLink returns a boolean if a field has been set.
-func (o *ScanDetailed1) HasCommitAuthorProfilePictureLink() bool {
-	if o != nil && !IsNil(o.CommitAuthorProfilePictureLink) {
-		return true
-	}
-
-	return false
-}
-
-// SetCommitAuthorProfilePictureLink gets a reference to the given string and assigns it to the CommitAuthorProfilePictureLink field.
+// SetCommitAuthorProfilePictureLink sets field value
 func (o *ScanDetailed1) SetCommitAuthorProfilePictureLink(v string) {
-	o.CommitAuthorProfilePictureLink = &v
+	o.CommitAuthorProfilePictureLink.Set(&v)
 }
 
 // GetLinks returns the Links field value
@@ -572,7 +566,7 @@ func (o *ScanDetailed1) SetLinks(v ScanDetailedLinks) {
 }
 
 func (o ScanDetailed1) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -585,33 +579,20 @@ func (o ScanDetailed1) ToMap() (map[string]interface{}, error) {
 	toSerialize["status"] = o.Status
 	toSerialize["createdAt"] = o.CreatedAt
 	toSerialize["updatedAt"] = o.UpdatedAt
-	if !IsNil(o.FinishedAt) {
-		toSerialize["finishedAt"] = o.FinishedAt
-	}
-	if !IsNil(o.Score) {
-		toSerialize["score"] = o.Score
-	}
+	toSerialize["finishedAt"] = o.FinishedAt.Get()
+	toSerialize["score"] = o.Score.Get()
+	toSerialize["coverage"] = o.Coverage.Get()
 	toSerialize["duration"] = o.Duration
 	toSerialize["progressRatio"] = o.ProgressRatio
 	toSerialize["initiator"] = o.Initiator
 	toSerialize["kind"] = o.Kind
 	toSerialize["profileId"] = o.ProfileId
 	toSerialize["organizationId"] = o.OrganizationId
-	if !IsNil(o.CommitHash) {
-		toSerialize["commitHash"] = o.CommitHash
-	}
-	if !IsNil(o.CommitBranch) {
-		toSerialize["commitBranch"] = o.CommitBranch
-	}
-	if !IsNil(o.CommitAuthor) {
-		toSerialize["commitAuthor"] = o.CommitAuthor
-	}
-	if !IsNil(o.CommitLink) {
-		toSerialize["commitLink"] = o.CommitLink
-	}
-	if !IsNil(o.CommitAuthorProfilePictureLink) {
-		toSerialize["commitAuthorProfilePictureLink"] = o.CommitAuthorProfilePictureLink
-	}
+	toSerialize["commitHash"] = o.CommitHash.Get()
+	toSerialize["commitBranch"] = o.CommitBranch.Get()
+	toSerialize["commitAuthor"] = o.CommitAuthor.Get()
+	toSerialize["commitLink"] = o.CommitLink.Get()
+	toSerialize["commitAuthorProfilePictureLink"] = o.CommitAuthorProfilePictureLink.Get()
 	toSerialize["links"] = o.Links
 
 	for key, value := range o.AdditionalProperties {
@@ -630,12 +611,20 @@ func (o *ScanDetailed1) UnmarshalJSON(data []byte) (err error) {
 		"status",
 		"createdAt",
 		"updatedAt",
+		"finishedAt",
+		"score",
+		"coverage",
 		"duration",
 		"progressRatio",
 		"initiator",
 		"kind",
 		"profileId",
 		"organizationId",
+		"commitHash",
+		"commitBranch",
+		"commitAuthor",
+		"commitLink",
+		"commitAuthorProfilePictureLink",
 		"links",
 	}
 
@@ -644,10 +633,10 @@ func (o *ScanDetailed1) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -672,6 +661,7 @@ func (o *ScanDetailed1) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "updatedAt")
 		delete(additionalProperties, "finishedAt")
 		delete(additionalProperties, "score")
+		delete(additionalProperties, "coverage")
 		delete(additionalProperties, "duration")
 		delete(additionalProperties, "progressRatio")
 		delete(additionalProperties, "initiator")
@@ -725,3 +715,5 @@ func (v *NullableScanDetailed1) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

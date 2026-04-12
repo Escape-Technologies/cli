@@ -21,10 +21,10 @@ var _ MappedNullable = &CreateSchemaViaUpload{}
 // CreateSchemaViaUpload struct for CreateSchemaViaUpload
 type CreateSchemaViaUpload struct {
 	AssetType ENUMSCHEMA `json:"asset_type"`
-	Name      *string    `json:"name,omitempty"`
+	Name NullableString `json:"name,omitempty"`
 	// The list of project IDs bind the asset on.
-	ProjectIds           []string                    `json:"projectIds,omitempty"`
-	Upload               CreateSchemaViaUploadUpload `json:"upload"`
+	ProjectIds []string `json:"projectIds,omitempty"`
+	Upload CreateSchemaViaUploadUpload `json:"upload"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -73,41 +73,51 @@ func (o *CreateSchemaViaUpload) SetAssetType(v ENUMSCHEMA) {
 	o.AssetType = v
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
+// GetName returns the Name field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateSchemaViaUpload) GetName() string {
-	if o == nil || IsNil(o.Name) {
+	if o == nil || IsNil(o.Name.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Name
+	return *o.Name.Get()
 }
 
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateSchemaViaUpload) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Name, true
+	return o.Name.Get(), o.Name.IsSet()
 }
 
 // HasName returns a boolean if a field has been set.
 func (o *CreateSchemaViaUpload) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
+	if o != nil && o.Name.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetName gets a reference to the given string and assigns it to the Name field.
+// SetName gets a reference to the given NullableString and assigns it to the Name field.
 func (o *CreateSchemaViaUpload) SetName(v string) {
-	o.Name = &v
+	o.Name.Set(&v)
+}
+// SetNameNil sets the value for Name to be an explicit nil
+func (o *CreateSchemaViaUpload) SetNameNil() {
+	o.Name.Set(nil)
 }
 
-// GetProjectIds returns the ProjectIds field value if set, zero value otherwise.
+// UnsetName ensures that no value is present for Name, not even an explicit nil
+func (o *CreateSchemaViaUpload) UnsetName() {
+	o.Name.Unset()
+}
+
+// GetProjectIds returns the ProjectIds field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateSchemaViaUpload) GetProjectIds() []string {
-	if o == nil || IsNil(o.ProjectIds) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -116,6 +126,7 @@ func (o *CreateSchemaViaUpload) GetProjectIds() []string {
 
 // GetProjectIdsOk returns a tuple with the ProjectIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateSchemaViaUpload) GetProjectIdsOk() ([]string, bool) {
 	if o == nil || IsNil(o.ProjectIds) {
 		return nil, false
@@ -162,7 +173,7 @@ func (o *CreateSchemaViaUpload) SetUpload(v CreateSchemaViaUploadUpload) {
 }
 
 func (o CreateSchemaViaUpload) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -172,10 +183,10 @@ func (o CreateSchemaViaUpload) MarshalJSON() ([]byte, error) {
 func (o CreateSchemaViaUpload) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["asset_type"] = o.AssetType
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
+	if o.Name.IsSet() {
+		toSerialize["name"] = o.Name.Get()
 	}
-	if !IsNil(o.ProjectIds) {
+	if o.ProjectIds != nil {
 		toSerialize["projectIds"] = o.ProjectIds
 	}
 	toSerialize["upload"] = o.Upload
@@ -201,10 +212,10 @@ func (o *CreateSchemaViaUpload) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -268,3 +279,5 @@ func (v *NullableCreateSchemaViaUpload) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

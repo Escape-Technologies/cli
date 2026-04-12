@@ -19,7 +19,7 @@ var _ MappedNullable = &CreatekubernetesIntegrationRequestParametersBlacklist{}
 
 // CreatekubernetesIntegrationRequestParametersBlacklist struct for CreatekubernetesIntegrationRequestParametersBlacklist
 type CreatekubernetesIntegrationRequestParametersBlacklist struct {
-	Namespaces           []string `json:"namespaces,omitempty"`
+	Namespaces []string `json:"namespaces,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -42,9 +42,9 @@ func NewCreatekubernetesIntegrationRequestParametersBlacklistWithDefaults() *Cre
 	return &this
 }
 
-// GetNamespaces returns the Namespaces field value if set, zero value otherwise.
+// GetNamespaces returns the Namespaces field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreatekubernetesIntegrationRequestParametersBlacklist) GetNamespaces() []string {
-	if o == nil || IsNil(o.Namespaces) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -53,6 +53,7 @@ func (o *CreatekubernetesIntegrationRequestParametersBlacklist) GetNamespaces() 
 
 // GetNamespacesOk returns a tuple with the Namespaces field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreatekubernetesIntegrationRequestParametersBlacklist) GetNamespacesOk() ([]string, bool) {
 	if o == nil || IsNil(o.Namespaces) {
 		return nil, false
@@ -75,7 +76,7 @@ func (o *CreatekubernetesIntegrationRequestParametersBlacklist) SetNamespaces(v 
 }
 
 func (o CreatekubernetesIntegrationRequestParametersBlacklist) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -84,7 +85,7 @@ func (o CreatekubernetesIntegrationRequestParametersBlacklist) MarshalJSON() ([]
 
 func (o CreatekubernetesIntegrationRequestParametersBlacklist) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Namespaces) {
+	if o.Namespaces != nil {
 		toSerialize["namespaces"] = o.Namespaces
 	}
 
@@ -151,3 +152,5 @@ func (v *NullableCreatekubernetesIntegrationRequestParametersBlacklist) Unmarsha
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

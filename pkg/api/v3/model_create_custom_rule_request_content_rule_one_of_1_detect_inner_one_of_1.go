@@ -20,8 +20,8 @@ var _ MappedNullable = &CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf
 
 // CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf1 struct for CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf1
 type CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf1 struct {
-	Contains             *string          `json:"contains,omitempty"`
-	If                   ENUMPAGESELECTOR `json:"if"`
+	Contains NullableString `json:"contains,omitempty"`
+	If ENUMPAGESELECTOR `json:"if"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -45,36 +45,46 @@ func NewCreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf1WithDefaults() 
 	return &this
 }
 
-// GetContains returns the Contains field value if set, zero value otherwise.
+// GetContains returns the Contains field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf1) GetContains() string {
-	if o == nil || IsNil(o.Contains) {
+	if o == nil || IsNil(o.Contains.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Contains
+	return *o.Contains.Get()
 }
 
 // GetContainsOk returns a tuple with the Contains field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf1) GetContainsOk() (*string, bool) {
-	if o == nil || IsNil(o.Contains) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Contains, true
+	return o.Contains.Get(), o.Contains.IsSet()
 }
 
 // HasContains returns a boolean if a field has been set.
 func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf1) HasContains() bool {
-	if o != nil && !IsNil(o.Contains) {
+	if o != nil && o.Contains.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetContains gets a reference to the given string and assigns it to the Contains field.
+// SetContains gets a reference to the given NullableString and assigns it to the Contains field.
 func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf1) SetContains(v string) {
-	o.Contains = &v
+	o.Contains.Set(&v)
+}
+// SetContainsNil sets the value for Contains to be an explicit nil
+func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf1) SetContainsNil() {
+	o.Contains.Set(nil)
+}
+
+// UnsetContains ensures that no value is present for Contains, not even an explicit nil
+func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf1) UnsetContains() {
+	o.Contains.Unset()
 }
 
 // GetIf returns the If field value
@@ -102,7 +112,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf1) SetIf(v ENUM
 }
 
 func (o CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf1) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -111,8 +121,8 @@ func (o CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf1) MarshalJSON()
 
 func (o CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf1) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Contains) {
-		toSerialize["contains"] = o.Contains
+	if o.Contains.IsSet() {
+		toSerialize["contains"] = o.Contains.Get()
 	}
 	toSerialize["if"] = o.If
 
@@ -136,10 +146,10 @@ func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf1) UnmarshalJSO
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -201,3 +211,5 @@ func (v *NullableCreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf1) Unma
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

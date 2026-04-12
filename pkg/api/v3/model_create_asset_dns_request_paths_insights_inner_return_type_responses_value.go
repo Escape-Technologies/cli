@@ -20,9 +20,9 @@ var _ MappedNullable = &CreateAssetDNSRequestPathsInsightsInnerReturnTypeRespons
 
 // CreateAssetDNSRequestPathsInsightsInnerReturnTypeResponsesValue struct for CreateAssetDNSRequestPathsInsightsInnerReturnTypeResponsesValue
 type CreateAssetDNSRequestPathsInsightsInnerReturnTypeResponsesValue struct {
-	Description          string                                                                                                           `json:"description"`
-	Headers              map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValueEncodingValueHeadersValue `json:"headers,omitempty"`
-	Content              map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValue                          `json:"content,omitempty"`
+	Description string `json:"description"`
+	Headers *map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValueEncodingValueHeadersValue `json:"headers,omitempty"`
+	Content *map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValue `json:"content,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -76,14 +76,14 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerReturnTypeResponsesValue) GetHea
 		var ret map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValueEncodingValueHeadersValue
 		return ret
 	}
-	return o.Headers
+	return *o.Headers
 }
 
 // GetHeadersOk returns a tuple with the Headers field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetDNSRequestPathsInsightsInnerReturnTypeResponsesValue) GetHeadersOk() (map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValueEncodingValueHeadersValue, bool) {
+func (o *CreateAssetDNSRequestPathsInsightsInnerReturnTypeResponsesValue) GetHeadersOk() (*map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValueEncodingValueHeadersValue, bool) {
 	if o == nil || IsNil(o.Headers) {
-		return map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValueEncodingValueHeadersValue{}, false
+		return nil, false
 	}
 	return o.Headers, true
 }
@@ -99,7 +99,7 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerReturnTypeResponsesValue) HasHea
 
 // SetHeaders gets a reference to the given map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValueEncodingValueHeadersValue and assigns it to the Headers field.
 func (o *CreateAssetDNSRequestPathsInsightsInnerReturnTypeResponsesValue) SetHeaders(v map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValueEncodingValueHeadersValue) {
-	o.Headers = v
+	o.Headers = &v
 }
 
 // GetContent returns the Content field value if set, zero value otherwise.
@@ -108,14 +108,14 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerReturnTypeResponsesValue) GetCon
 		var ret map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValue
 		return ret
 	}
-	return o.Content
+	return *o.Content
 }
 
 // GetContentOk returns a tuple with the Content field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetDNSRequestPathsInsightsInnerReturnTypeResponsesValue) GetContentOk() (map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValue, bool) {
+func (o *CreateAssetDNSRequestPathsInsightsInnerReturnTypeResponsesValue) GetContentOk() (*map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValue, bool) {
 	if o == nil || IsNil(o.Content) {
-		return map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValue{}, false
+		return nil, false
 	}
 	return o.Content, true
 }
@@ -131,11 +131,11 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerReturnTypeResponsesValue) HasCon
 
 // SetContent gets a reference to the given map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValue and assigns it to the Content field.
 func (o *CreateAssetDNSRequestPathsInsightsInnerReturnTypeResponsesValue) SetContent(v map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValue) {
-	o.Content = v
+	o.Content = &v
 }
 
 func (o CreateAssetDNSRequestPathsInsightsInnerReturnTypeResponsesValue) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -172,10 +172,10 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerReturnTypeResponsesValue) Unmars
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -238,3 +238,5 @@ func (v *NullableCreateAssetDNSRequestPathsInsightsInnerReturnTypeResponsesValue
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

@@ -25,10 +25,10 @@ type IssueSummarized struct {
 	// The name of the issue
 	Name string `json:"name"`
 	// The full name of the issue
-	FullName string                                    `json:"fullName"`
+	FullName string `json:"fullName"`
 	Category ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY `json:"category"`
 	Severity ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY `json:"severity"`
-	Status   ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS   `json:"status"`
+	Status ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS `json:"status"`
 	// The context of the issue
 	Context string `json:"context"`
 	// Array of risk types associated with the issue
@@ -36,15 +36,16 @@ type IssueSummarized struct {
 	// Unique identifier for the alert
 	AlertUid string `json:"alertUid"`
 	// When the issue was first created
-	CreatedAt string           `json:"createdAt"`
-	Asset     AssetSummarized1 `json:"asset"`
+	CreatedAt string `json:"createdAt"`
+	Asset AssetSummarized1 `json:"asset"`
 	// ID of the last scan where this issue was seen
-	LastSeenScanId *string `json:"lastSeenScanId,omitempty"`
+	LastSeenScanId NullableString `json:"lastSeenScanId"`
+	LastSeenScan ScanSummarized3 `json:"lastSeenScan"`
 	// ID of the first scan where this issue was seen
-	FirstSeenScanId *string `json:"firstSeenScanId,omitempty"`
+	FirstSeenScanId NullableString `json:"firstSeenScanId"`
 	// ID of the custom rule if this is a custom issue
-	CustomRuleId         *string              `json:"customRuleId,omitempty"`
-	Links                IssueSummarizedLinks `json:"links"`
+	CustomRuleId NullableString `json:"customRuleId"`
+	Links IssueSummarizedLinks `json:"links"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -54,7 +55,7 @@ type _IssueSummarized IssueSummarized
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIssueSummarized(id string, name string, fullName string, category ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY, severity ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY, status ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS, context string, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, alertUid string, createdAt string, asset AssetSummarized1, links IssueSummarizedLinks) *IssueSummarized {
+func NewIssueSummarized(id string, name string, fullName string, category ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY, severity ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY, status ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS, context string, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, alertUid string, createdAt string, asset AssetSummarized1, lastSeenScanId NullableString, lastSeenScan ScanSummarized3, firstSeenScanId NullableString, customRuleId NullableString, links IssueSummarizedLinks) *IssueSummarized {
 	this := IssueSummarized{}
 	this.Id = id
 	this.Name = name
@@ -67,6 +68,10 @@ func NewIssueSummarized(id string, name string, fullName string, category ENUMPR
 	this.AlertUid = alertUid
 	this.CreatedAt = createdAt
 	this.Asset = asset
+	this.LastSeenScanId = lastSeenScanId
+	this.LastSeenScan = lastSeenScan
+	this.FirstSeenScanId = firstSeenScanId
+	this.CustomRuleId = customRuleId
 	this.Links = links
 	return &this
 }
@@ -343,100 +348,106 @@ func (o *IssueSummarized) SetAsset(v AssetSummarized1) {
 	o.Asset = v
 }
 
-// GetLastSeenScanId returns the LastSeenScanId field value if set, zero value otherwise.
+// GetLastSeenScanId returns the LastSeenScanId field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *IssueSummarized) GetLastSeenScanId() string {
-	if o == nil || IsNil(o.LastSeenScanId) {
+	if o == nil || o.LastSeenScanId.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.LastSeenScanId
+
+	return *o.LastSeenScanId.Get()
 }
 
-// GetLastSeenScanIdOk returns a tuple with the LastSeenScanId field value if set, nil otherwise
+// GetLastSeenScanIdOk returns a tuple with the LastSeenScanId field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IssueSummarized) GetLastSeenScanIdOk() (*string, bool) {
-	if o == nil || IsNil(o.LastSeenScanId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.LastSeenScanId, true
+	return o.LastSeenScanId.Get(), o.LastSeenScanId.IsSet()
 }
 
-// HasLastSeenScanId returns a boolean if a field has been set.
-func (o *IssueSummarized) HasLastSeenScanId() bool {
-	if o != nil && !IsNil(o.LastSeenScanId) {
-		return true
-	}
-
-	return false
-}
-
-// SetLastSeenScanId gets a reference to the given string and assigns it to the LastSeenScanId field.
+// SetLastSeenScanId sets field value
 func (o *IssueSummarized) SetLastSeenScanId(v string) {
-	o.LastSeenScanId = &v
+	o.LastSeenScanId.Set(&v)
 }
 
-// GetFirstSeenScanId returns the FirstSeenScanId field value if set, zero value otherwise.
+// GetLastSeenScan returns the LastSeenScan field value
+func (o *IssueSummarized) GetLastSeenScan() ScanSummarized3 {
+	if o == nil {
+		var ret ScanSummarized3
+		return ret
+	}
+
+	return o.LastSeenScan
+}
+
+// GetLastSeenScanOk returns a tuple with the LastSeenScan field value
+// and a boolean to check if the value has been set.
+func (o *IssueSummarized) GetLastSeenScanOk() (*ScanSummarized3, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.LastSeenScan, true
+}
+
+// SetLastSeenScan sets field value
+func (o *IssueSummarized) SetLastSeenScan(v ScanSummarized3) {
+	o.LastSeenScan = v
+}
+
+// GetFirstSeenScanId returns the FirstSeenScanId field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *IssueSummarized) GetFirstSeenScanId() string {
-	if o == nil || IsNil(o.FirstSeenScanId) {
+	if o == nil || o.FirstSeenScanId.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.FirstSeenScanId
+
+	return *o.FirstSeenScanId.Get()
 }
 
-// GetFirstSeenScanIdOk returns a tuple with the FirstSeenScanId field value if set, nil otherwise
+// GetFirstSeenScanIdOk returns a tuple with the FirstSeenScanId field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IssueSummarized) GetFirstSeenScanIdOk() (*string, bool) {
-	if o == nil || IsNil(o.FirstSeenScanId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.FirstSeenScanId, true
+	return o.FirstSeenScanId.Get(), o.FirstSeenScanId.IsSet()
 }
 
-// HasFirstSeenScanId returns a boolean if a field has been set.
-func (o *IssueSummarized) HasFirstSeenScanId() bool {
-	if o != nil && !IsNil(o.FirstSeenScanId) {
-		return true
-	}
-
-	return false
-}
-
-// SetFirstSeenScanId gets a reference to the given string and assigns it to the FirstSeenScanId field.
+// SetFirstSeenScanId sets field value
 func (o *IssueSummarized) SetFirstSeenScanId(v string) {
-	o.FirstSeenScanId = &v
+	o.FirstSeenScanId.Set(&v)
 }
 
-// GetCustomRuleId returns the CustomRuleId field value if set, zero value otherwise.
+// GetCustomRuleId returns the CustomRuleId field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *IssueSummarized) GetCustomRuleId() string {
-	if o == nil || IsNil(o.CustomRuleId) {
+	if o == nil || o.CustomRuleId.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.CustomRuleId
+
+	return *o.CustomRuleId.Get()
 }
 
-// GetCustomRuleIdOk returns a tuple with the CustomRuleId field value if set, nil otherwise
+// GetCustomRuleIdOk returns a tuple with the CustomRuleId field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IssueSummarized) GetCustomRuleIdOk() (*string, bool) {
-	if o == nil || IsNil(o.CustomRuleId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CustomRuleId, true
+	return o.CustomRuleId.Get(), o.CustomRuleId.IsSet()
 }
 
-// HasCustomRuleId returns a boolean if a field has been set.
-func (o *IssueSummarized) HasCustomRuleId() bool {
-	if o != nil && !IsNil(o.CustomRuleId) {
-		return true
-	}
-
-	return false
-}
-
-// SetCustomRuleId gets a reference to the given string and assigns it to the CustomRuleId field.
+// SetCustomRuleId sets field value
 func (o *IssueSummarized) SetCustomRuleId(v string) {
-	o.CustomRuleId = &v
+	o.CustomRuleId.Set(&v)
 }
 
 // GetLinks returns the Links field value
@@ -464,7 +475,7 @@ func (o *IssueSummarized) SetLinks(v IssueSummarizedLinks) {
 }
 
 func (o IssueSummarized) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -484,15 +495,10 @@ func (o IssueSummarized) ToMap() (map[string]interface{}, error) {
 	toSerialize["alertUid"] = o.AlertUid
 	toSerialize["createdAt"] = o.CreatedAt
 	toSerialize["asset"] = o.Asset
-	if !IsNil(o.LastSeenScanId) {
-		toSerialize["lastSeenScanId"] = o.LastSeenScanId
-	}
-	if !IsNil(o.FirstSeenScanId) {
-		toSerialize["firstSeenScanId"] = o.FirstSeenScanId
-	}
-	if !IsNil(o.CustomRuleId) {
-		toSerialize["customRuleId"] = o.CustomRuleId
-	}
+	toSerialize["lastSeenScanId"] = o.LastSeenScanId.Get()
+	toSerialize["lastSeenScan"] = o.LastSeenScan
+	toSerialize["firstSeenScanId"] = o.FirstSeenScanId.Get()
+	toSerialize["customRuleId"] = o.CustomRuleId.Get()
 	toSerialize["links"] = o.Links
 
 	for key, value := range o.AdditionalProperties {
@@ -518,6 +524,10 @@ func (o *IssueSummarized) UnmarshalJSON(data []byte) (err error) {
 		"alertUid",
 		"createdAt",
 		"asset",
+		"lastSeenScanId",
+		"lastSeenScan",
+		"firstSeenScanId",
+		"customRuleId",
 		"links",
 	}
 
@@ -526,10 +536,10 @@ func (o *IssueSummarized) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -560,6 +570,7 @@ func (o *IssueSummarized) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "createdAt")
 		delete(additionalProperties, "asset")
 		delete(additionalProperties, "lastSeenScanId")
+		delete(additionalProperties, "lastSeenScan")
 		delete(additionalProperties, "firstSeenScanId")
 		delete(additionalProperties, "customRuleId")
 		delete(additionalProperties, "links")
@@ -604,3 +615,5 @@ func (v *NullableIssueSummarized) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

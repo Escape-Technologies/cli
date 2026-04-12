@@ -19,8 +19,8 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationSecurityTestsResponseS
 
 // GetProfile200ResponseConfigurationSecurityTestsResponseSize struct for GetProfile200ResponseConfigurationSecurityTestsResponseSize
 type GetProfile200ResponseConfigurationSecurityTestsResponseSize struct {
-	Skip                 *bool    `json:"skip,omitempty"`
-	MaxLength            *float32 `json:"max_length,omitempty"`
+	Skip NullableBool `json:"skip,omitempty"`
+	MaxLength NullableFloat32 `json:"max_length,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -43,72 +43,92 @@ func NewGetProfile200ResponseConfigurationSecurityTestsResponseSizeWithDefaults(
 	return &this
 }
 
-// GetSkip returns the Skip field value if set, zero value otherwise.
+// GetSkip returns the Skip field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationSecurityTestsResponseSize) GetSkip() bool {
-	if o == nil || IsNil(o.Skip) {
+	if o == nil || IsNil(o.Skip.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.Skip
+	return *o.Skip.Get()
 }
 
 // GetSkipOk returns a tuple with the Skip field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationSecurityTestsResponseSize) GetSkipOk() (*bool, bool) {
-	if o == nil || IsNil(o.Skip) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Skip, true
+	return o.Skip.Get(), o.Skip.IsSet()
 }
 
 // HasSkip returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationSecurityTestsResponseSize) HasSkip() bool {
-	if o != nil && !IsNil(o.Skip) {
+	if o != nil && o.Skip.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSkip gets a reference to the given bool and assigns it to the Skip field.
+// SetSkip gets a reference to the given NullableBool and assigns it to the Skip field.
 func (o *GetProfile200ResponseConfigurationSecurityTestsResponseSize) SetSkip(v bool) {
-	o.Skip = &v
+	o.Skip.Set(&v)
+}
+// SetSkipNil sets the value for Skip to be an explicit nil
+func (o *GetProfile200ResponseConfigurationSecurityTestsResponseSize) SetSkipNil() {
+	o.Skip.Set(nil)
 }
 
-// GetMaxLength returns the MaxLength field value if set, zero value otherwise.
+// UnsetSkip ensures that no value is present for Skip, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationSecurityTestsResponseSize) UnsetSkip() {
+	o.Skip.Unset()
+}
+
+// GetMaxLength returns the MaxLength field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationSecurityTestsResponseSize) GetMaxLength() float32 {
-	if o == nil || IsNil(o.MaxLength) {
+	if o == nil || IsNil(o.MaxLength.Get()) {
 		var ret float32
 		return ret
 	}
-	return *o.MaxLength
+	return *o.MaxLength.Get()
 }
 
 // GetMaxLengthOk returns a tuple with the MaxLength field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationSecurityTestsResponseSize) GetMaxLengthOk() (*float32, bool) {
-	if o == nil || IsNil(o.MaxLength) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MaxLength, true
+	return o.MaxLength.Get(), o.MaxLength.IsSet()
 }
 
 // HasMaxLength returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationSecurityTestsResponseSize) HasMaxLength() bool {
-	if o != nil && !IsNil(o.MaxLength) {
+	if o != nil && o.MaxLength.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetMaxLength gets a reference to the given float32 and assigns it to the MaxLength field.
+// SetMaxLength gets a reference to the given NullableFloat32 and assigns it to the MaxLength field.
 func (o *GetProfile200ResponseConfigurationSecurityTestsResponseSize) SetMaxLength(v float32) {
-	o.MaxLength = &v
+	o.MaxLength.Set(&v)
+}
+// SetMaxLengthNil sets the value for MaxLength to be an explicit nil
+func (o *GetProfile200ResponseConfigurationSecurityTestsResponseSize) SetMaxLengthNil() {
+	o.MaxLength.Set(nil)
+}
+
+// UnsetMaxLength ensures that no value is present for MaxLength, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationSecurityTestsResponseSize) UnsetMaxLength() {
+	o.MaxLength.Unset()
 }
 
 func (o GetProfile200ResponseConfigurationSecurityTestsResponseSize) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -117,11 +137,11 @@ func (o GetProfile200ResponseConfigurationSecurityTestsResponseSize) MarshalJSON
 
 func (o GetProfile200ResponseConfigurationSecurityTestsResponseSize) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Skip) {
-		toSerialize["skip"] = o.Skip
+	if o.Skip.IsSet() {
+		toSerialize["skip"] = o.Skip.Get()
 	}
-	if !IsNil(o.MaxLength) {
-		toSerialize["max_length"] = o.MaxLength
+	if o.MaxLength.IsSet() {
+		toSerialize["max_length"] = o.MaxLength.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -188,3 +208,5 @@ func (v *NullableGetProfile200ResponseConfigurationSecurityTestsResponseSize) Un
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

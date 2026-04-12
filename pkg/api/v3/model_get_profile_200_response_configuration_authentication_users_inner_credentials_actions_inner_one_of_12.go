@@ -20,10 +20,10 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationAuthenticationUsersInn
 
 // GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf12 struct for GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf12
 type GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf12 struct {
-	Action               ENUMSOLVECAPTCHA `json:"action"`
-	AllowFailure         *bool            `json:"allow_failure,omitempty"`
-	Locator              string           `json:"locator"`
-	AutoSubmit           *bool            `json:"auto_submit,omitempty"`
+	Action ENUMSOLVECAPTCHA `json:"action"`
+	AllowFailure NullableBool `json:"allow_failure,omitempty"`
+	Locator string `json:"locator"`
+	AutoSubmit NullableBool `json:"auto_submit,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -72,36 +72,46 @@ func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsAc
 	o.Action = v
 }
 
-// GetAllowFailure returns the AllowFailure field value if set, zero value otherwise.
+// GetAllowFailure returns the AllowFailure field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf12) GetAllowFailure() bool {
-	if o == nil || IsNil(o.AllowFailure) {
+	if o == nil || IsNil(o.AllowFailure.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.AllowFailure
+	return *o.AllowFailure.Get()
 }
 
 // GetAllowFailureOk returns a tuple with the AllowFailure field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf12) GetAllowFailureOk() (*bool, bool) {
-	if o == nil || IsNil(o.AllowFailure) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AllowFailure, true
+	return o.AllowFailure.Get(), o.AllowFailure.IsSet()
 }
 
 // HasAllowFailure returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf12) HasAllowFailure() bool {
-	if o != nil && !IsNil(o.AllowFailure) {
+	if o != nil && o.AllowFailure.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAllowFailure gets a reference to the given bool and assigns it to the AllowFailure field.
+// SetAllowFailure gets a reference to the given NullableBool and assigns it to the AllowFailure field.
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf12) SetAllowFailure(v bool) {
-	o.AllowFailure = &v
+	o.AllowFailure.Set(&v)
+}
+// SetAllowFailureNil sets the value for AllowFailure to be an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf12) SetAllowFailureNil() {
+	o.AllowFailure.Set(nil)
+}
+
+// UnsetAllowFailure ensures that no value is present for AllowFailure, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf12) UnsetAllowFailure() {
+	o.AllowFailure.Unset()
 }
 
 // GetLocator returns the Locator field value
@@ -128,40 +138,50 @@ func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsAc
 	o.Locator = v
 }
 
-// GetAutoSubmit returns the AutoSubmit field value if set, zero value otherwise.
+// GetAutoSubmit returns the AutoSubmit field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf12) GetAutoSubmit() bool {
-	if o == nil || IsNil(o.AutoSubmit) {
+	if o == nil || IsNil(o.AutoSubmit.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.AutoSubmit
+	return *o.AutoSubmit.Get()
 }
 
 // GetAutoSubmitOk returns a tuple with the AutoSubmit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf12) GetAutoSubmitOk() (*bool, bool) {
-	if o == nil || IsNil(o.AutoSubmit) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AutoSubmit, true
+	return o.AutoSubmit.Get(), o.AutoSubmit.IsSet()
 }
 
 // HasAutoSubmit returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf12) HasAutoSubmit() bool {
-	if o != nil && !IsNil(o.AutoSubmit) {
+	if o != nil && o.AutoSubmit.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAutoSubmit gets a reference to the given bool and assigns it to the AutoSubmit field.
+// SetAutoSubmit gets a reference to the given NullableBool and assigns it to the AutoSubmit field.
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf12) SetAutoSubmit(v bool) {
-	o.AutoSubmit = &v
+	o.AutoSubmit.Set(&v)
+}
+// SetAutoSubmitNil sets the value for AutoSubmit to be an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf12) SetAutoSubmitNil() {
+	o.AutoSubmit.Set(nil)
+}
+
+// UnsetAutoSubmit ensures that no value is present for AutoSubmit, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf12) UnsetAutoSubmit() {
+	o.AutoSubmit.Unset()
 }
 
 func (o GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf12) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -171,12 +191,12 @@ func (o GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsAct
 func (o GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf12) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["action"] = o.Action
-	if !IsNil(o.AllowFailure) {
-		toSerialize["allow_failure"] = o.AllowFailure
+	if o.AllowFailure.IsSet() {
+		toSerialize["allow_failure"] = o.AllowFailure.Get()
 	}
 	toSerialize["locator"] = o.Locator
-	if !IsNil(o.AutoSubmit) {
-		toSerialize["auto_submit"] = o.AutoSubmit
+	if o.AutoSubmit.IsSet() {
+		toSerialize["auto_submit"] = o.AutoSubmit.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -200,10 +220,10 @@ func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsAc
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -267,3 +287,5 @@ func (v *NullableGetProfile200ResponseConfigurationAuthenticationUsersInnerCrede
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

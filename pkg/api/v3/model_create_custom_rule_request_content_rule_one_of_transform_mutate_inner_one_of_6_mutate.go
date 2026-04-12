@@ -19,10 +19,10 @@ var _ MappedNullable = &CreateCustomRuleRequestContentRuleOneOfTransformMutateIn
 
 // CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf6Mutate struct for CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf6Mutate
 type CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf6Mutate struct {
-	UseExtraction        *bool                                                                         `json:"use_extraction,omitempty"`
-	Value                *string                                                                       `json:"value,omitempty"`
-	Values               []string                                                                      `json:"values,omitempty"`
-	RegexReplace         *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOfRegexReplace `json:"regex_replace,omitempty"`
+	UseExtraction NullableBool `json:"use_extraction,omitempty"`
+	Value *string `json:"value,omitempty"`
+	Values []string `json:"values,omitempty"`
+	RegexReplace *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOfRegexReplace `json:"regex_replace,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -45,36 +45,46 @@ func NewCreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf6MutateW
 	return &this
 }
 
-// GetUseExtraction returns the UseExtraction field value if set, zero value otherwise.
+// GetUseExtraction returns the UseExtraction field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf6Mutate) GetUseExtraction() bool {
-	if o == nil || IsNil(o.UseExtraction) {
+	if o == nil || IsNil(o.UseExtraction.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.UseExtraction
+	return *o.UseExtraction.Get()
 }
 
 // GetUseExtractionOk returns a tuple with the UseExtraction field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf6Mutate) GetUseExtractionOk() (*bool, bool) {
-	if o == nil || IsNil(o.UseExtraction) {
+	if o == nil {
 		return nil, false
 	}
-	return o.UseExtraction, true
+	return o.UseExtraction.Get(), o.UseExtraction.IsSet()
 }
 
 // HasUseExtraction returns a boolean if a field has been set.
 func (o *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf6Mutate) HasUseExtraction() bool {
-	if o != nil && !IsNil(o.UseExtraction) {
+	if o != nil && o.UseExtraction.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetUseExtraction gets a reference to the given bool and assigns it to the UseExtraction field.
+// SetUseExtraction gets a reference to the given NullableBool and assigns it to the UseExtraction field.
 func (o *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf6Mutate) SetUseExtraction(v bool) {
-	o.UseExtraction = &v
+	o.UseExtraction.Set(&v)
+}
+// SetUseExtractionNil sets the value for UseExtraction to be an explicit nil
+func (o *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf6Mutate) SetUseExtractionNil() {
+	o.UseExtraction.Set(nil)
+}
+
+// UnsetUseExtraction ensures that no value is present for UseExtraction, not even an explicit nil
+func (o *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf6Mutate) UnsetUseExtraction() {
+	o.UseExtraction.Unset()
 }
 
 // GetValue returns the Value field value if set, zero value otherwise.
@@ -174,7 +184,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf6Mutate
 }
 
 func (o CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf6Mutate) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -183,8 +193,8 @@ func (o CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf6Mutate)
 
 func (o CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf6Mutate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.UseExtraction) {
-		toSerialize["use_extraction"] = o.UseExtraction
+	if o.UseExtraction.IsSet() {
+		toSerialize["use_extraction"] = o.UseExtraction.Get()
 	}
 	if !IsNil(o.Value) {
 		toSerialize["value"] = o.Value
@@ -262,3 +272,5 @@ func (v *NullableCreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneO
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

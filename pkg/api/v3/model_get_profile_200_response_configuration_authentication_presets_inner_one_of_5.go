@@ -20,12 +20,12 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationAuthenticationPresetsI
 
 // GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf5 struct for GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf5
 type GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf5 struct {
-	Type                 ENUMGRAPHQL                                                                                           `json:"type"`
-	Users                []GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf5UsersInner                        `json:"users"`
-	Url                  string                                                                                                `json:"url"`
-	Query                string                                                                                                `json:"query"`
-	Extractions          []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfExtractionsInner `json:"extractions,omitempty"`
-	Injections           []GetProfile200ResponseConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner                 `json:"injections,omitempty"`
+	Type ENUMGRAPHQL `json:"type"`
+	Users []GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf5UsersInner `json:"users"`
+	Url string `json:"url"`
+	Query string `json:"query"`
+	Extractions []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfExtractionsInner `json:"extractions,omitempty"`
+	Injections []GetProfile200ResponseConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner `json:"injections,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -148,9 +148,9 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf5) Set
 	o.Query = v
 }
 
-// GetExtractions returns the Extractions field value if set, zero value otherwise.
+// GetExtractions returns the Extractions field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf5) GetExtractions() []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfExtractionsInner {
-	if o == nil || IsNil(o.Extractions) {
+	if o == nil {
 		var ret []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfExtractionsInner
 		return ret
 	}
@@ -159,6 +159,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf5) Get
 
 // GetExtractionsOk returns a tuple with the Extractions field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf5) GetExtractionsOk() ([]GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfExtractionsInner, bool) {
 	if o == nil || IsNil(o.Extractions) {
 		return nil, false
@@ -180,9 +181,9 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf5) Set
 	o.Extractions = v
 }
 
-// GetInjections returns the Injections field value if set, zero value otherwise.
+// GetInjections returns the Injections field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf5) GetInjections() []GetProfile200ResponseConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner {
-	if o == nil || IsNil(o.Injections) {
+	if o == nil {
 		var ret []GetProfile200ResponseConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner
 		return ret
 	}
@@ -191,6 +192,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf5) Get
 
 // GetInjectionsOk returns a tuple with the Injections field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf5) GetInjectionsOk() ([]GetProfile200ResponseConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner, bool) {
 	if o == nil || IsNil(o.Injections) {
 		return nil, false
@@ -213,7 +215,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf5) Set
 }
 
 func (o GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf5) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -226,10 +228,10 @@ func (o GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf5) ToMa
 	toSerialize["users"] = o.Users
 	toSerialize["url"] = o.Url
 	toSerialize["query"] = o.Query
-	if !IsNil(o.Extractions) {
+	if o.Extractions != nil {
 		toSerialize["extractions"] = o.Extractions
 	}
-	if !IsNil(o.Injections) {
+	if o.Injections != nil {
 		toSerialize["injections"] = o.Injections
 	}
 
@@ -256,10 +258,10 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf5) Unm
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -325,3 +327,5 @@ func (v *NullableGetProfile200ResponseConfigurationAuthenticationPresetsInnerOne
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

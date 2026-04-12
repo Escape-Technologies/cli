@@ -20,10 +20,10 @@ var _ MappedNullable = &CreateCustomRuleRequestContentRuleOneOfTransformTriggerI
 
 // CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf25 struct for CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf25
 type CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf25 struct {
-	Is                   *bool                     `json:"is,omitempty"`
-	IsNot                *bool                     `json:"is_not,omitempty"`
-	If                   ENUMHELPERSJSONMATCHESALL `json:"if"`
-	Jq                   string                    `json:"jq"`
+	Is NullableBool `json:"is,omitempty"`
+	IsNot NullableBool `json:"is_not,omitempty"`
+	If ENUMHELPERSJSONMATCHESALL `json:"if"`
+	Jq string `json:"jq"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -48,68 +48,88 @@ func NewCreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf25WithD
 	return &this
 }
 
-// GetIs returns the Is field value if set, zero value otherwise.
+// GetIs returns the Is field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf25) GetIs() bool {
-	if o == nil || IsNil(o.Is) {
+	if o == nil || IsNil(o.Is.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.Is
+	return *o.Is.Get()
 }
 
 // GetIsOk returns a tuple with the Is field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf25) GetIsOk() (*bool, bool) {
-	if o == nil || IsNil(o.Is) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Is, true
+	return o.Is.Get(), o.Is.IsSet()
 }
 
 // HasIs returns a boolean if a field has been set.
 func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf25) HasIs() bool {
-	if o != nil && !IsNil(o.Is) {
+	if o != nil && o.Is.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetIs gets a reference to the given bool and assigns it to the Is field.
+// SetIs gets a reference to the given NullableBool and assigns it to the Is field.
 func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf25) SetIs(v bool) {
-	o.Is = &v
+	o.Is.Set(&v)
+}
+// SetIsNil sets the value for Is to be an explicit nil
+func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf25) SetIsNil() {
+	o.Is.Set(nil)
 }
 
-// GetIsNot returns the IsNot field value if set, zero value otherwise.
+// UnsetIs ensures that no value is present for Is, not even an explicit nil
+func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf25) UnsetIs() {
+	o.Is.Unset()
+}
+
+// GetIsNot returns the IsNot field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf25) GetIsNot() bool {
-	if o == nil || IsNil(o.IsNot) {
+	if o == nil || IsNil(o.IsNot.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.IsNot
+	return *o.IsNot.Get()
 }
 
 // GetIsNotOk returns a tuple with the IsNot field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf25) GetIsNotOk() (*bool, bool) {
-	if o == nil || IsNil(o.IsNot) {
+	if o == nil {
 		return nil, false
 	}
-	return o.IsNot, true
+	return o.IsNot.Get(), o.IsNot.IsSet()
 }
 
 // HasIsNot returns a boolean if a field has been set.
 func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf25) HasIsNot() bool {
-	if o != nil && !IsNil(o.IsNot) {
+	if o != nil && o.IsNot.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetIsNot gets a reference to the given bool and assigns it to the IsNot field.
+// SetIsNot gets a reference to the given NullableBool and assigns it to the IsNot field.
 func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf25) SetIsNot(v bool) {
-	o.IsNot = &v
+	o.IsNot.Set(&v)
+}
+// SetIsNotNil sets the value for IsNot to be an explicit nil
+func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf25) SetIsNotNil() {
+	o.IsNot.Set(nil)
+}
+
+// UnsetIsNot ensures that no value is present for IsNot, not even an explicit nil
+func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf25) UnsetIsNot() {
+	o.IsNot.Unset()
 }
 
 // GetIf returns the If field value
@@ -161,7 +181,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf25) Se
 }
 
 func (o CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf25) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -170,11 +190,11 @@ func (o CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf25) Mar
 
 func (o CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf25) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Is) {
-		toSerialize["is"] = o.Is
+	if o.Is.IsSet() {
+		toSerialize["is"] = o.Is.Get()
 	}
-	if !IsNil(o.IsNot) {
-		toSerialize["is_not"] = o.IsNot
+	if o.IsNot.IsSet() {
+		toSerialize["is_not"] = o.IsNot.Get()
 	}
 	toSerialize["if"] = o.If
 	toSerialize["jq"] = o.Jq
@@ -200,10 +220,10 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf25) Un
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -267,3 +287,5 @@ func (v *NullableCreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOne
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

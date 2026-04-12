@@ -20,13 +20,13 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationAuthenticationProcedur
 
 // GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner struct for GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner
 type GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner struct {
-	Name                 string                                                                                                                                                              `json:"name"`
-	Domain               *string                                                                                                                                                             `json:"domain,omitempty"`
-	Path                 *string                                                                                                                                                             `json:"path,omitempty"`
-	HttpOnly             *bool                                                                                                                                                               `json:"http_only,omitempty"`
-	Secure               *bool                                                                                                                                                               `json:"secure,omitempty"`
-	SameSite             *ENUMPROPERTIESCONFIGURATIONPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS0PROPERTIESPARAMETERSPROPERTIESCOOKIESITEMSPROPERTIESSAMESITE `json:"same_site,omitempty"`
-	Values               []string                                                                                                                                                            `json:"values"`
+	Name string `json:"name"`
+	Domain NullableString `json:"domain,omitempty"`
+	Path NullableString `json:"path,omitempty"`
+	HttpOnly NullableBool `json:"http_only,omitempty"`
+	Secure NullableBool `json:"secure,omitempty"`
+	SameSite NullableENUMPROPERTIESCONFIGURATIONPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS0PROPERTIESPARAMETERSPROPERTIESCOOKIESITEMSPROPERTIESSAMESITE `json:"same_site,omitempty"`
+	Values []string `json:"values"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -75,164 +75,214 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 	o.Name = v
 }
 
-// GetDomain returns the Domain field value if set, zero value otherwise.
+// GetDomain returns the Domain field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) GetDomain() string {
-	if o == nil || IsNil(o.Domain) {
+	if o == nil || IsNil(o.Domain.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Domain
+	return *o.Domain.Get()
 }
 
 // GetDomainOk returns a tuple with the Domain field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) GetDomainOk() (*string, bool) {
-	if o == nil || IsNil(o.Domain) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Domain, true
+	return o.Domain.Get(), o.Domain.IsSet()
 }
 
 // HasDomain returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) HasDomain() bool {
-	if o != nil && !IsNil(o.Domain) {
+	if o != nil && o.Domain.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetDomain gets a reference to the given string and assigns it to the Domain field.
+// SetDomain gets a reference to the given NullableString and assigns it to the Domain field.
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) SetDomain(v string) {
-	o.Domain = &v
+	o.Domain.Set(&v)
+}
+// SetDomainNil sets the value for Domain to be an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) SetDomainNil() {
+	o.Domain.Set(nil)
 }
 
-// GetPath returns the Path field value if set, zero value otherwise.
+// UnsetDomain ensures that no value is present for Domain, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) UnsetDomain() {
+	o.Domain.Unset()
+}
+
+// GetPath returns the Path field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) GetPath() string {
-	if o == nil || IsNil(o.Path) {
+	if o == nil || IsNil(o.Path.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Path
+	return *o.Path.Get()
 }
 
 // GetPathOk returns a tuple with the Path field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) GetPathOk() (*string, bool) {
-	if o == nil || IsNil(o.Path) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Path, true
+	return o.Path.Get(), o.Path.IsSet()
 }
 
 // HasPath returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) HasPath() bool {
-	if o != nil && !IsNil(o.Path) {
+	if o != nil && o.Path.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPath gets a reference to the given string and assigns it to the Path field.
+// SetPath gets a reference to the given NullableString and assigns it to the Path field.
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) SetPath(v string) {
-	o.Path = &v
+	o.Path.Set(&v)
+}
+// SetPathNil sets the value for Path to be an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) SetPathNil() {
+	o.Path.Set(nil)
 }
 
-// GetHttpOnly returns the HttpOnly field value if set, zero value otherwise.
+// UnsetPath ensures that no value is present for Path, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) UnsetPath() {
+	o.Path.Unset()
+}
+
+// GetHttpOnly returns the HttpOnly field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) GetHttpOnly() bool {
-	if o == nil || IsNil(o.HttpOnly) {
+	if o == nil || IsNil(o.HttpOnly.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.HttpOnly
+	return *o.HttpOnly.Get()
 }
 
 // GetHttpOnlyOk returns a tuple with the HttpOnly field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) GetHttpOnlyOk() (*bool, bool) {
-	if o == nil || IsNil(o.HttpOnly) {
+	if o == nil {
 		return nil, false
 	}
-	return o.HttpOnly, true
+	return o.HttpOnly.Get(), o.HttpOnly.IsSet()
 }
 
 // HasHttpOnly returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) HasHttpOnly() bool {
-	if o != nil && !IsNil(o.HttpOnly) {
+	if o != nil && o.HttpOnly.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetHttpOnly gets a reference to the given bool and assigns it to the HttpOnly field.
+// SetHttpOnly gets a reference to the given NullableBool and assigns it to the HttpOnly field.
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) SetHttpOnly(v bool) {
-	o.HttpOnly = &v
+	o.HttpOnly.Set(&v)
+}
+// SetHttpOnlyNil sets the value for HttpOnly to be an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) SetHttpOnlyNil() {
+	o.HttpOnly.Set(nil)
 }
 
-// GetSecure returns the Secure field value if set, zero value otherwise.
+// UnsetHttpOnly ensures that no value is present for HttpOnly, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) UnsetHttpOnly() {
+	o.HttpOnly.Unset()
+}
+
+// GetSecure returns the Secure field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) GetSecure() bool {
-	if o == nil || IsNil(o.Secure) {
+	if o == nil || IsNil(o.Secure.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.Secure
+	return *o.Secure.Get()
 }
 
 // GetSecureOk returns a tuple with the Secure field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) GetSecureOk() (*bool, bool) {
-	if o == nil || IsNil(o.Secure) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Secure, true
+	return o.Secure.Get(), o.Secure.IsSet()
 }
 
 // HasSecure returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) HasSecure() bool {
-	if o != nil && !IsNil(o.Secure) {
+	if o != nil && o.Secure.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSecure gets a reference to the given bool and assigns it to the Secure field.
+// SetSecure gets a reference to the given NullableBool and assigns it to the Secure field.
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) SetSecure(v bool) {
-	o.Secure = &v
+	o.Secure.Set(&v)
+}
+// SetSecureNil sets the value for Secure to be an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) SetSecureNil() {
+	o.Secure.Set(nil)
 }
 
-// GetSameSite returns the SameSite field value if set, zero value otherwise.
+// UnsetSecure ensures that no value is present for Secure, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) UnsetSecure() {
+	o.Secure.Unset()
+}
+
+// GetSameSite returns the SameSite field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) GetSameSite() ENUMPROPERTIESCONFIGURATIONPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS0PROPERTIESPARAMETERSPROPERTIESCOOKIESITEMSPROPERTIESSAMESITE {
-	if o == nil || IsNil(o.SameSite) {
+	if o == nil || IsNil(o.SameSite.Get()) {
 		var ret ENUMPROPERTIESCONFIGURATIONPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS0PROPERTIESPARAMETERSPROPERTIESCOOKIESITEMSPROPERTIESSAMESITE
 		return ret
 	}
-	return *o.SameSite
+	return *o.SameSite.Get()
 }
 
 // GetSameSiteOk returns a tuple with the SameSite field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) GetSameSiteOk() (*ENUMPROPERTIESCONFIGURATIONPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS0PROPERTIESPARAMETERSPROPERTIESCOOKIESITEMSPROPERTIESSAMESITE, bool) {
-	if o == nil || IsNil(o.SameSite) {
+	if o == nil {
 		return nil, false
 	}
-	return o.SameSite, true
+	return o.SameSite.Get(), o.SameSite.IsSet()
 }
 
 // HasSameSite returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) HasSameSite() bool {
-	if o != nil && !IsNil(o.SameSite) {
+	if o != nil && o.SameSite.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSameSite gets a reference to the given ENUMPROPERTIESCONFIGURATIONPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS0PROPERTIESPARAMETERSPROPERTIESCOOKIESITEMSPROPERTIESSAMESITE and assigns it to the SameSite field.
+// SetSameSite gets a reference to the given NullableENUMPROPERTIESCONFIGURATIONPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS0PROPERTIESPARAMETERSPROPERTIESCOOKIESITEMSPROPERTIESSAMESITE and assigns it to the SameSite field.
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) SetSameSite(v ENUMPROPERTIESCONFIGURATIONPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS0PROPERTIESPARAMETERSPROPERTIESCOOKIESITEMSPROPERTIESSAMESITE) {
-	o.SameSite = &v
+	o.SameSite.Set(&v)
+}
+// SetSameSiteNil sets the value for SameSite to be an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) SetSameSiteNil() {
+	o.SameSite.Set(nil)
+}
+
+// UnsetSameSite ensures that no value is present for SameSite, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) UnsetSameSite() {
+	o.SameSite.Unset()
 }
 
 // GetValues returns the Values field value
@@ -260,7 +310,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 }
 
 func (o GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -270,20 +320,20 @@ func (o GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperation
 func (o GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["name"] = o.Name
-	if !IsNil(o.Domain) {
-		toSerialize["domain"] = o.Domain
+	if o.Domain.IsSet() {
+		toSerialize["domain"] = o.Domain.Get()
 	}
-	if !IsNil(o.Path) {
-		toSerialize["path"] = o.Path
+	if o.Path.IsSet() {
+		toSerialize["path"] = o.Path.Get()
 	}
-	if !IsNil(o.HttpOnly) {
-		toSerialize["http_only"] = o.HttpOnly
+	if o.HttpOnly.IsSet() {
+		toSerialize["http_only"] = o.HttpOnly.Get()
 	}
-	if !IsNil(o.Secure) {
-		toSerialize["secure"] = o.Secure
+	if o.Secure.IsSet() {
+		toSerialize["secure"] = o.Secure.Get()
 	}
-	if !IsNil(o.SameSite) {
-		toSerialize["same_site"] = o.SameSite
+	if o.SameSite.IsSet() {
+		toSerialize["same_site"] = o.SameSite.Get()
 	}
 	toSerialize["values"] = o.Values
 
@@ -308,10 +358,10 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -378,3 +428,5 @@ func (v *NullableGetProfile200ResponseConfigurationAuthenticationProceduresInner
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

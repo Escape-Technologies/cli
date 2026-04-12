@@ -20,16 +20,16 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationAuthenticationProcedur
 
 // GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters struct for GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters
 type GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters struct {
-	ProxyOverride        *string                                                                                                     `json:"proxy_override,omitempty"`
-	Url                  string                                                                                                      `json:"url"`
-	Method               ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD                         `json:"method"`
-	Headers              []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner `json:"headers"`
-	Cookies              []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner `json:"cookies"`
-	QueryParameters      []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner `json:"queryParameters"`
-	Body                 interface{}                                                                                                 `json:"body,omitempty"`
-	Timeout              *float32                                                                                                    `json:"timeout,omitempty"`
-	Insecure             *bool                                                                                                       `json:"insecure,omitempty"`
-	FollowRedirects      *float32                                                                                                    `json:"follow_redirects,omitempty"`
+	ProxyOverride NullableString `json:"proxy_override,omitempty"`
+	Url string `json:"url"`
+	Method NullableENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD `json:"method"`
+	Headers []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner `json:"headers"`
+	Cookies []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner `json:"cookies"`
+	QueryParameters []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner `json:"queryParameters"`
+	Body interface{} `json:"body,omitempty"`
+	Timeout *float32 `json:"timeout,omitempty"`
+	Insecure *bool `json:"insecure,omitempty"`
+	FollowRedirects *float32 `json:"follow_redirects,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -39,7 +39,7 @@ type _GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsI
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters(url string, method ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD, headers []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner, cookies []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner, queryParameters []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner) *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters {
+func NewGetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters(url string, method NullableENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD, headers []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner, cookies []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner, queryParameters []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner) *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters {
 	this := GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters{}
 	this.Url = url
 	this.Method = method
@@ -57,36 +57,46 @@ func NewGetProfile200ResponseConfigurationAuthenticationProceduresInnerOperation
 	return &this
 }
 
-// GetProxyOverride returns the ProxyOverride field value if set, zero value otherwise.
+// GetProxyOverride returns the ProxyOverride field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters) GetProxyOverride() string {
-	if o == nil || IsNil(o.ProxyOverride) {
+	if o == nil || IsNil(o.ProxyOverride.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.ProxyOverride
+	return *o.ProxyOverride.Get()
 }
 
 // GetProxyOverrideOk returns a tuple with the ProxyOverride field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters) GetProxyOverrideOk() (*string, bool) {
-	if o == nil || IsNil(o.ProxyOverride) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ProxyOverride, true
+	return o.ProxyOverride.Get(), o.ProxyOverride.IsSet()
 }
 
 // HasProxyOverride returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters) HasProxyOverride() bool {
-	if o != nil && !IsNil(o.ProxyOverride) {
+	if o != nil && o.ProxyOverride.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetProxyOverride gets a reference to the given string and assigns it to the ProxyOverride field.
+// SetProxyOverride gets a reference to the given NullableString and assigns it to the ProxyOverride field.
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters) SetProxyOverride(v string) {
-	o.ProxyOverride = &v
+	o.ProxyOverride.Set(&v)
+}
+// SetProxyOverrideNil sets the value for ProxyOverride to be an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters) SetProxyOverrideNil() {
+	o.ProxyOverride.Set(nil)
+}
+
+// UnsetProxyOverride ensures that no value is present for ProxyOverride, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters) UnsetProxyOverride() {
+	o.ProxyOverride.Unset()
 }
 
 // GetUrl returns the Url field value
@@ -114,27 +124,29 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 }
 
 // GetMethod returns the Method field value
+// If the value is explicit nil, the zero value for ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD will be returned
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters) GetMethod() ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD {
-	if o == nil {
+	if o == nil || o.Method.Get() == nil {
 		var ret ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD
 		return ret
 	}
 
-	return o.Method
+	return *o.Method.Get()
 }
 
 // GetMethodOk returns a tuple with the Method field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters) GetMethodOk() (*ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Method, true
+	return o.Method.Get(), o.Method.IsSet()
 }
 
 // SetMethod sets field value
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters) SetMethod(v ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD) {
-	o.Method = v
+	o.Method.Set(&v)
 }
 
 // GetHeaders returns the Headers field value
@@ -339,7 +351,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 }
 
 func (o GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -348,11 +360,11 @@ func (o GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperation
 
 func (o GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ProxyOverride) {
-		toSerialize["proxy_override"] = o.ProxyOverride
+	if o.ProxyOverride.IsSet() {
+		toSerialize["proxy_override"] = o.ProxyOverride.Get()
 	}
 	toSerialize["url"] = o.Url
-	toSerialize["method"] = o.Method
+	toSerialize["method"] = o.Method.Get()
 	toSerialize["headers"] = o.Headers
 	toSerialize["cookies"] = o.Cookies
 	toSerialize["queryParameters"] = o.QueryParameters
@@ -393,10 +405,10 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -466,3 +478,5 @@ func (v *NullableGetProfile200ResponseConfigurationAuthenticationProceduresInner
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

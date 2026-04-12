@@ -23,8 +23,8 @@ type EventSummarizedAttachmentsInner struct {
 	// The id of the attachment
 	Id string `json:"id"`
 	// The date and time the attachment was created
-	CreatedAt            string                                 `json:"createdAt"`
-	Target               *EventSummarizedAttachmentsInnerTarget `json:"target,omitempty"`
+	CreatedAt string `json:"createdAt"`
+	Target EventSummarizedAttachmentsInnerTarget `json:"target"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -34,10 +34,11 @@ type _EventSummarizedAttachmentsInner EventSummarizedAttachmentsInner
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewEventSummarizedAttachmentsInner(id string, createdAt string) *EventSummarizedAttachmentsInner {
+func NewEventSummarizedAttachmentsInner(id string, createdAt string, target EventSummarizedAttachmentsInnerTarget) *EventSummarizedAttachmentsInner {
 	this := EventSummarizedAttachmentsInner{}
 	this.Id = id
 	this.CreatedAt = createdAt
+	this.Target = target
 	return &this
 }
 
@@ -97,40 +98,32 @@ func (o *EventSummarizedAttachmentsInner) SetCreatedAt(v string) {
 	o.CreatedAt = v
 }
 
-// GetTarget returns the Target field value if set, zero value otherwise.
+// GetTarget returns the Target field value
 func (o *EventSummarizedAttachmentsInner) GetTarget() EventSummarizedAttachmentsInnerTarget {
-	if o == nil || IsNil(o.Target) {
+	if o == nil {
 		var ret EventSummarizedAttachmentsInnerTarget
 		return ret
 	}
-	return *o.Target
+
+	return o.Target
 }
 
-// GetTargetOk returns a tuple with the Target field value if set, nil otherwise
+// GetTargetOk returns a tuple with the Target field value
 // and a boolean to check if the value has been set.
 func (o *EventSummarizedAttachmentsInner) GetTargetOk() (*EventSummarizedAttachmentsInnerTarget, bool) {
-	if o == nil || IsNil(o.Target) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Target, true
+	return &o.Target, true
 }
 
-// HasTarget returns a boolean if a field has been set.
-func (o *EventSummarizedAttachmentsInner) HasTarget() bool {
-	if o != nil && !IsNil(o.Target) {
-		return true
-	}
-
-	return false
-}
-
-// SetTarget gets a reference to the given EventSummarizedAttachmentsInnerTarget and assigns it to the Target field.
+// SetTarget sets field value
 func (o *EventSummarizedAttachmentsInner) SetTarget(v EventSummarizedAttachmentsInnerTarget) {
-	o.Target = &v
+	o.Target = v
 }
 
 func (o EventSummarizedAttachmentsInner) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -141,9 +134,7 @@ func (o EventSummarizedAttachmentsInner) ToMap() (map[string]interface{}, error)
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["createdAt"] = o.CreatedAt
-	if !IsNil(o.Target) {
-		toSerialize["target"] = o.Target
-	}
+	toSerialize["target"] = o.Target
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -159,6 +150,7 @@ func (o *EventSummarizedAttachmentsInner) UnmarshalJSON(data []byte) (err error)
 	requiredProperties := []string{
 		"id",
 		"createdAt",
+		"target",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -166,10 +158,10 @@ func (o *EventSummarizedAttachmentsInner) UnmarshalJSON(data []byte) (err error)
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -232,3 +224,5 @@ func (v *NullableEventSummarizedAttachmentsInner) UnmarshalJSON(src []byte) erro
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

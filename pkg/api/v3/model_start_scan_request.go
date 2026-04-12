@@ -31,10 +31,10 @@ type StartScanRequest struct {
 	// The commit author to scan
 	CommitAuthor *string `json:"commitAuthor,omitempty"`
 	// The commit author profile picture link to scan
-	CommitAuthorProfilePictureLink *string                  `json:"commitAuthorProfilePictureLink,omitempty"`
-	ConfigurationOverride          interface{}              `json:"configurationOverride,omitempty"`
-	Initiator                      *ENUMPROPERTIESINITIATOR `json:"initiator,omitempty"`
-	AdditionalProperties           map[string]interface{}
+	CommitAuthorProfilePictureLink *string `json:"commitAuthorProfilePictureLink,omitempty"`
+	ConfigurationOverride interface{} `json:"configurationOverride,omitempty"`
+	Initiator NullableENUMPROPERTIESINITIATOR `json:"initiator,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _StartScanRequest StartScanRequest
@@ -46,6 +46,8 @@ type _StartScanRequest StartScanRequest
 func NewStartScanRequest(profileId string) *StartScanRequest {
 	this := StartScanRequest{}
 	this.ProfileId = profileId
+	var initiator ENUMPROPERTIESINITIATOR = ENUMPROPERTIESINITIATOR_CI
+	this.Initiator = *NewNullableENUMPROPERTIESINITIATOR(&initiator)
 	return &this
 }
 
@@ -54,6 +56,8 @@ func NewStartScanRequest(profileId string) *StartScanRequest {
 // but it doesn't guarantee that properties required by API are set
 func NewStartScanRequestWithDefaults() *StartScanRequest {
 	this := StartScanRequest{}
+	var initiator ENUMPROPERTIESINITIATOR = ENUMPROPERTIESINITIATOR_CI
+	this.Initiator = *NewNullableENUMPROPERTIESINITIATOR(&initiator)
 	return &this
 }
 
@@ -274,40 +278,50 @@ func (o *StartScanRequest) SetConfigurationOverride(v interface{}) {
 	o.ConfigurationOverride = v
 }
 
-// GetInitiator returns the Initiator field value if set, zero value otherwise.
+// GetInitiator returns the Initiator field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StartScanRequest) GetInitiator() ENUMPROPERTIESINITIATOR {
-	if o == nil || IsNil(o.Initiator) {
+	if o == nil || IsNil(o.Initiator.Get()) {
 		var ret ENUMPROPERTIESINITIATOR
 		return ret
 	}
-	return *o.Initiator
+	return *o.Initiator.Get()
 }
 
 // GetInitiatorOk returns a tuple with the Initiator field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StartScanRequest) GetInitiatorOk() (*ENUMPROPERTIESINITIATOR, bool) {
-	if o == nil || IsNil(o.Initiator) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Initiator, true
+	return o.Initiator.Get(), o.Initiator.IsSet()
 }
 
 // HasInitiator returns a boolean if a field has been set.
 func (o *StartScanRequest) HasInitiator() bool {
-	if o != nil && !IsNil(o.Initiator) {
+	if o != nil && o.Initiator.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInitiator gets a reference to the given ENUMPROPERTIESINITIATOR and assigns it to the Initiator field.
+// SetInitiator gets a reference to the given NullableENUMPROPERTIESINITIATOR and assigns it to the Initiator field.
 func (o *StartScanRequest) SetInitiator(v ENUMPROPERTIESINITIATOR) {
-	o.Initiator = &v
+	o.Initiator.Set(&v)
+}
+// SetInitiatorNil sets the value for Initiator to be an explicit nil
+func (o *StartScanRequest) SetInitiatorNil() {
+	o.Initiator.Set(nil)
+}
+
+// UnsetInitiator ensures that no value is present for Initiator, not even an explicit nil
+func (o *StartScanRequest) UnsetInitiator() {
+	o.Initiator.Unset()
 }
 
 func (o StartScanRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -335,8 +349,8 @@ func (o StartScanRequest) ToMap() (map[string]interface{}, error) {
 	if o.ConfigurationOverride != nil {
 		toSerialize["configurationOverride"] = o.ConfigurationOverride
 	}
-	if !IsNil(o.Initiator) {
-		toSerialize["initiator"] = o.Initiator
+	if o.Initiator.IsSet() {
+		toSerialize["initiator"] = o.Initiator.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -359,10 +373,10 @@ func (o *StartScanRequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -430,3 +444,5 @@ func (v *NullableStartScanRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

@@ -12,6 +12,7 @@ package v3
 
 import (
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the CreateExportWorkflowActionUsingWizParameters type satisfies the MappedNullable interface at compile time
@@ -19,7 +20,7 @@ var _ MappedNullable = &CreateExportWorkflowActionUsingWizParameters{}
 
 // CreateExportWorkflowActionUsingWizParameters struct for CreateExportWorkflowActionUsingWizParameters
 type CreateExportWorkflowActionUsingWizParameters struct {
-	MinSeverity          *ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY `json:"minSeverity,omitempty"`
+	MinSeverity ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY `json:"minSeverity"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -29,8 +30,9 @@ type _CreateExportWorkflowActionUsingWizParameters CreateExportWorkflowActionUsi
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateExportWorkflowActionUsingWizParameters() *CreateExportWorkflowActionUsingWizParameters {
+func NewCreateExportWorkflowActionUsingWizParameters(minSeverity ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY) *CreateExportWorkflowActionUsingWizParameters {
 	this := CreateExportWorkflowActionUsingWizParameters{}
+	this.MinSeverity = minSeverity
 	return &this
 }
 
@@ -42,40 +44,32 @@ func NewCreateExportWorkflowActionUsingWizParametersWithDefaults() *CreateExport
 	return &this
 }
 
-// GetMinSeverity returns the MinSeverity field value if set, zero value otherwise.
+// GetMinSeverity returns the MinSeverity field value
 func (o *CreateExportWorkflowActionUsingWizParameters) GetMinSeverity() ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY {
-	if o == nil || IsNil(o.MinSeverity) {
+	if o == nil {
 		var ret ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY
 		return ret
 	}
-	return *o.MinSeverity
+
+	return o.MinSeverity
 }
 
-// GetMinSeverityOk returns a tuple with the MinSeverity field value if set, nil otherwise
+// GetMinSeverityOk returns a tuple with the MinSeverity field value
 // and a boolean to check if the value has been set.
 func (o *CreateExportWorkflowActionUsingWizParameters) GetMinSeverityOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY, bool) {
-	if o == nil || IsNil(o.MinSeverity) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MinSeverity, true
+	return &o.MinSeverity, true
 }
 
-// HasMinSeverity returns a boolean if a field has been set.
-func (o *CreateExportWorkflowActionUsingWizParameters) HasMinSeverity() bool {
-	if o != nil && !IsNil(o.MinSeverity) {
-		return true
-	}
-
-	return false
-}
-
-// SetMinSeverity gets a reference to the given ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY and assigns it to the MinSeverity field.
+// SetMinSeverity sets field value
 func (o *CreateExportWorkflowActionUsingWizParameters) SetMinSeverity(v ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY) {
-	o.MinSeverity = &v
+	o.MinSeverity = v
 }
 
 func (o CreateExportWorkflowActionUsingWizParameters) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -84,9 +78,7 @@ func (o CreateExportWorkflowActionUsingWizParameters) MarshalJSON() ([]byte, err
 
 func (o CreateExportWorkflowActionUsingWizParameters) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.MinSeverity) {
-		toSerialize["minSeverity"] = o.MinSeverity
-	}
+	toSerialize["minSeverity"] = o.MinSeverity
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -96,6 +88,27 @@ func (o CreateExportWorkflowActionUsingWizParameters) ToMap() (map[string]interf
 }
 
 func (o *CreateExportWorkflowActionUsingWizParameters) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"minSeverity",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varCreateExportWorkflowActionUsingWizParameters := _CreateExportWorkflowActionUsingWizParameters{}
 
 	err = json.Unmarshal(data, &varCreateExportWorkflowActionUsingWizParameters)
@@ -151,3 +164,5 @@ func (v *NullableCreateExportWorkflowActionUsingWizParameters) UnmarshalJSON(src
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

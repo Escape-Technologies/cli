@@ -20,10 +20,10 @@ var _ MappedNullable = &CreateCustomRuleRequestContentRuleOneOfExtractorsInnerEx
 
 // CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf4 struct for CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf4
 type CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf4 struct {
-	Key                  ENUMRESPONSESTATUSCODE `json:"key"`
-	Variable             string                 `json:"variable"`
-	CanOverwrite         *bool                  `json:"can_overwrite,omitempty"`
-	AcceptNull           *bool                  `json:"accept_null,omitempty"`
+	Key ENUMRESPONSESTATUSCODE `json:"key"`
+	Variable string `json:"variable"`
+	CanOverwrite NullableBool `json:"can_overwrite,omitempty"`
+	AcceptNull NullableBool `json:"accept_null,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -96,72 +96,92 @@ func (o *CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf
 	o.Variable = v
 }
 
-// GetCanOverwrite returns the CanOverwrite field value if set, zero value otherwise.
+// GetCanOverwrite returns the CanOverwrite field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf4) GetCanOverwrite() bool {
-	if o == nil || IsNil(o.CanOverwrite) {
+	if o == nil || IsNil(o.CanOverwrite.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.CanOverwrite
+	return *o.CanOverwrite.Get()
 }
 
 // GetCanOverwriteOk returns a tuple with the CanOverwrite field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf4) GetCanOverwriteOk() (*bool, bool) {
-	if o == nil || IsNil(o.CanOverwrite) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CanOverwrite, true
+	return o.CanOverwrite.Get(), o.CanOverwrite.IsSet()
 }
 
 // HasCanOverwrite returns a boolean if a field has been set.
 func (o *CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf4) HasCanOverwrite() bool {
-	if o != nil && !IsNil(o.CanOverwrite) {
+	if o != nil && o.CanOverwrite.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCanOverwrite gets a reference to the given bool and assigns it to the CanOverwrite field.
+// SetCanOverwrite gets a reference to the given NullableBool and assigns it to the CanOverwrite field.
 func (o *CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf4) SetCanOverwrite(v bool) {
-	o.CanOverwrite = &v
+	o.CanOverwrite.Set(&v)
+}
+// SetCanOverwriteNil sets the value for CanOverwrite to be an explicit nil
+func (o *CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf4) SetCanOverwriteNil() {
+	o.CanOverwrite.Set(nil)
 }
 
-// GetAcceptNull returns the AcceptNull field value if set, zero value otherwise.
+// UnsetCanOverwrite ensures that no value is present for CanOverwrite, not even an explicit nil
+func (o *CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf4) UnsetCanOverwrite() {
+	o.CanOverwrite.Unset()
+}
+
+// GetAcceptNull returns the AcceptNull field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf4) GetAcceptNull() bool {
-	if o == nil || IsNil(o.AcceptNull) {
+	if o == nil || IsNil(o.AcceptNull.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.AcceptNull
+	return *o.AcceptNull.Get()
 }
 
 // GetAcceptNullOk returns a tuple with the AcceptNull field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf4) GetAcceptNullOk() (*bool, bool) {
-	if o == nil || IsNil(o.AcceptNull) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AcceptNull, true
+	return o.AcceptNull.Get(), o.AcceptNull.IsSet()
 }
 
 // HasAcceptNull returns a boolean if a field has been set.
 func (o *CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf4) HasAcceptNull() bool {
-	if o != nil && !IsNil(o.AcceptNull) {
+	if o != nil && o.AcceptNull.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAcceptNull gets a reference to the given bool and assigns it to the AcceptNull field.
+// SetAcceptNull gets a reference to the given NullableBool and assigns it to the AcceptNull field.
 func (o *CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf4) SetAcceptNull(v bool) {
-	o.AcceptNull = &v
+	o.AcceptNull.Set(&v)
+}
+// SetAcceptNullNil sets the value for AcceptNull to be an explicit nil
+func (o *CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf4) SetAcceptNullNil() {
+	o.AcceptNull.Set(nil)
+}
+
+// UnsetAcceptNull ensures that no value is present for AcceptNull, not even an explicit nil
+func (o *CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf4) UnsetAcceptNull() {
+	o.AcceptNull.Unset()
 }
 
 func (o CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf4) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -172,11 +192,11 @@ func (o CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf4
 	toSerialize := map[string]interface{}{}
 	toSerialize["key"] = o.Key
 	toSerialize["variable"] = o.Variable
-	if !IsNil(o.CanOverwrite) {
-		toSerialize["can_overwrite"] = o.CanOverwrite
+	if o.CanOverwrite.IsSet() {
+		toSerialize["can_overwrite"] = o.CanOverwrite.Get()
 	}
-	if !IsNil(o.AcceptNull) {
-		toSerialize["accept_null"] = o.AcceptNull
+	if o.AcceptNull.IsSet() {
+		toSerialize["accept_null"] = o.AcceptNull.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -200,10 +220,10 @@ func (o *CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -267,3 +287,5 @@ func (v *NullableCreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractIn
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

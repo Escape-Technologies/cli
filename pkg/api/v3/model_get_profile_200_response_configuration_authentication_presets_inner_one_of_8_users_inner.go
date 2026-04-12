@@ -20,15 +20,15 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationAuthenticationPresetsI
 
 // GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf8UsersInner struct for GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf8UsersInner
 type GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf8UsersInner struct {
-	Username             string            `json:"username"`
-	Headers              map[string]string `json:"headers"`
-	Cookies              map[string]string `json:"cookies,omitempty"`
-	QueryParameters      map[string]string `json:"query_parameters,omitempty"`
-	MainUser             *bool             `json:"main_user,omitempty"`
-	AllowFailure         *bool             `json:"allow_failure,omitempty"`
-	Basic                *string           `json:"basic,omitempty"`
-	Digest               *string           `json:"digest,omitempty"`
-	Role                 *string           `json:"role,omitempty"`
+	Username string `json:"username"`
+	Headers map[string]string `json:"headers"`
+	Cookies map[string]string `json:"cookies,omitempty"`
+	QueryParameters map[string]string `json:"query_parameters,omitempty"`
+	MainUser NullableBool `json:"main_user,omitempty"`
+	AllowFailure NullableBool `json:"allow_failure,omitempty"`
+	Basic NullableString `json:"basic,omitempty"`
+	Digest NullableString `json:"digest,omitempty"`
+	Role NullableString `json:"role,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -165,168 +165,218 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf8Users
 	o.QueryParameters = v
 }
 
-// GetMainUser returns the MainUser field value if set, zero value otherwise.
+// GetMainUser returns the MainUser field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf8UsersInner) GetMainUser() bool {
-	if o == nil || IsNil(o.MainUser) {
+	if o == nil || IsNil(o.MainUser.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.MainUser
+	return *o.MainUser.Get()
 }
 
 // GetMainUserOk returns a tuple with the MainUser field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf8UsersInner) GetMainUserOk() (*bool, bool) {
-	if o == nil || IsNil(o.MainUser) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MainUser, true
+	return o.MainUser.Get(), o.MainUser.IsSet()
 }
 
 // HasMainUser returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf8UsersInner) HasMainUser() bool {
-	if o != nil && !IsNil(o.MainUser) {
+	if o != nil && o.MainUser.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetMainUser gets a reference to the given bool and assigns it to the MainUser field.
+// SetMainUser gets a reference to the given NullableBool and assigns it to the MainUser field.
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf8UsersInner) SetMainUser(v bool) {
-	o.MainUser = &v
+	o.MainUser.Set(&v)
+}
+// SetMainUserNil sets the value for MainUser to be an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf8UsersInner) SetMainUserNil() {
+	o.MainUser.Set(nil)
 }
 
-// GetAllowFailure returns the AllowFailure field value if set, zero value otherwise.
+// UnsetMainUser ensures that no value is present for MainUser, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf8UsersInner) UnsetMainUser() {
+	o.MainUser.Unset()
+}
+
+// GetAllowFailure returns the AllowFailure field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf8UsersInner) GetAllowFailure() bool {
-	if o == nil || IsNil(o.AllowFailure) {
+	if o == nil || IsNil(o.AllowFailure.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.AllowFailure
+	return *o.AllowFailure.Get()
 }
 
 // GetAllowFailureOk returns a tuple with the AllowFailure field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf8UsersInner) GetAllowFailureOk() (*bool, bool) {
-	if o == nil || IsNil(o.AllowFailure) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AllowFailure, true
+	return o.AllowFailure.Get(), o.AllowFailure.IsSet()
 }
 
 // HasAllowFailure returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf8UsersInner) HasAllowFailure() bool {
-	if o != nil && !IsNil(o.AllowFailure) {
+	if o != nil && o.AllowFailure.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAllowFailure gets a reference to the given bool and assigns it to the AllowFailure field.
+// SetAllowFailure gets a reference to the given NullableBool and assigns it to the AllowFailure field.
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf8UsersInner) SetAllowFailure(v bool) {
-	o.AllowFailure = &v
+	o.AllowFailure.Set(&v)
+}
+// SetAllowFailureNil sets the value for AllowFailure to be an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf8UsersInner) SetAllowFailureNil() {
+	o.AllowFailure.Set(nil)
 }
 
-// GetBasic returns the Basic field value if set, zero value otherwise.
+// UnsetAllowFailure ensures that no value is present for AllowFailure, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf8UsersInner) UnsetAllowFailure() {
+	o.AllowFailure.Unset()
+}
+
+// GetBasic returns the Basic field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf8UsersInner) GetBasic() string {
-	if o == nil || IsNil(o.Basic) {
+	if o == nil || IsNil(o.Basic.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Basic
+	return *o.Basic.Get()
 }
 
 // GetBasicOk returns a tuple with the Basic field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf8UsersInner) GetBasicOk() (*string, bool) {
-	if o == nil || IsNil(o.Basic) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Basic, true
+	return o.Basic.Get(), o.Basic.IsSet()
 }
 
 // HasBasic returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf8UsersInner) HasBasic() bool {
-	if o != nil && !IsNil(o.Basic) {
+	if o != nil && o.Basic.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetBasic gets a reference to the given string and assigns it to the Basic field.
+// SetBasic gets a reference to the given NullableString and assigns it to the Basic field.
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf8UsersInner) SetBasic(v string) {
-	o.Basic = &v
+	o.Basic.Set(&v)
+}
+// SetBasicNil sets the value for Basic to be an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf8UsersInner) SetBasicNil() {
+	o.Basic.Set(nil)
 }
 
-// GetDigest returns the Digest field value if set, zero value otherwise.
+// UnsetBasic ensures that no value is present for Basic, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf8UsersInner) UnsetBasic() {
+	o.Basic.Unset()
+}
+
+// GetDigest returns the Digest field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf8UsersInner) GetDigest() string {
-	if o == nil || IsNil(o.Digest) {
+	if o == nil || IsNil(o.Digest.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Digest
+	return *o.Digest.Get()
 }
 
 // GetDigestOk returns a tuple with the Digest field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf8UsersInner) GetDigestOk() (*string, bool) {
-	if o == nil || IsNil(o.Digest) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Digest, true
+	return o.Digest.Get(), o.Digest.IsSet()
 }
 
 // HasDigest returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf8UsersInner) HasDigest() bool {
-	if o != nil && !IsNil(o.Digest) {
+	if o != nil && o.Digest.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetDigest gets a reference to the given string and assigns it to the Digest field.
+// SetDigest gets a reference to the given NullableString and assigns it to the Digest field.
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf8UsersInner) SetDigest(v string) {
-	o.Digest = &v
+	o.Digest.Set(&v)
+}
+// SetDigestNil sets the value for Digest to be an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf8UsersInner) SetDigestNil() {
+	o.Digest.Set(nil)
 }
 
-// GetRole returns the Role field value if set, zero value otherwise.
+// UnsetDigest ensures that no value is present for Digest, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf8UsersInner) UnsetDigest() {
+	o.Digest.Unset()
+}
+
+// GetRole returns the Role field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf8UsersInner) GetRole() string {
-	if o == nil || IsNil(o.Role) {
+	if o == nil || IsNil(o.Role.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Role
+	return *o.Role.Get()
 }
 
 // GetRoleOk returns a tuple with the Role field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf8UsersInner) GetRoleOk() (*string, bool) {
-	if o == nil || IsNil(o.Role) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Role, true
+	return o.Role.Get(), o.Role.IsSet()
 }
 
 // HasRole returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf8UsersInner) HasRole() bool {
-	if o != nil && !IsNil(o.Role) {
+	if o != nil && o.Role.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRole gets a reference to the given string and assigns it to the Role field.
+// SetRole gets a reference to the given NullableString and assigns it to the Role field.
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf8UsersInner) SetRole(v string) {
-	o.Role = &v
+	o.Role.Set(&v)
+}
+// SetRoleNil sets the value for Role to be an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf8UsersInner) SetRoleNil() {
+	o.Role.Set(nil)
+}
+
+// UnsetRole ensures that no value is present for Role, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf8UsersInner) UnsetRole() {
+	o.Role.Unset()
 }
 
 func (o GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf8UsersInner) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -343,20 +393,20 @@ func (o GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf8UsersI
 	if !IsNil(o.QueryParameters) {
 		toSerialize["query_parameters"] = o.QueryParameters
 	}
-	if !IsNil(o.MainUser) {
-		toSerialize["main_user"] = o.MainUser
+	if o.MainUser.IsSet() {
+		toSerialize["main_user"] = o.MainUser.Get()
 	}
-	if !IsNil(o.AllowFailure) {
-		toSerialize["allow_failure"] = o.AllowFailure
+	if o.AllowFailure.IsSet() {
+		toSerialize["allow_failure"] = o.AllowFailure.Get()
 	}
-	if !IsNil(o.Basic) {
-		toSerialize["basic"] = o.Basic
+	if o.Basic.IsSet() {
+		toSerialize["basic"] = o.Basic.Get()
 	}
-	if !IsNil(o.Digest) {
-		toSerialize["digest"] = o.Digest
+	if o.Digest.IsSet() {
+		toSerialize["digest"] = o.Digest.Get()
 	}
-	if !IsNil(o.Role) {
-		toSerialize["role"] = o.Role
+	if o.Role.IsSet() {
+		toSerialize["role"] = o.Role.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -380,10 +430,10 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf8Users
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -452,3 +502,5 @@ func (v *NullableGetProfile200ResponseConfigurationAuthenticationPresetsInnerOne
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

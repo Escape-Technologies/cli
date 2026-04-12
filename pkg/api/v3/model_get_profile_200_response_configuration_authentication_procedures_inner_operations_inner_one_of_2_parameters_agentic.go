@@ -20,8 +20,8 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationAuthenticationProcedur
 
 // GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf2ParametersAgentic struct for GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf2ParametersAgentic
 type GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf2ParametersAgentic struct {
-	Enabled              bool    `json:"enabled"`
-	Instructions         *string `json:"instructions,omitempty"`
+	Enabled bool `json:"enabled"`
+	Instructions NullableString `json:"instructions,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -69,40 +69,50 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 	o.Enabled = v
 }
 
-// GetInstructions returns the Instructions field value if set, zero value otherwise.
+// GetInstructions returns the Instructions field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf2ParametersAgentic) GetInstructions() string {
-	if o == nil || IsNil(o.Instructions) {
+	if o == nil || IsNil(o.Instructions.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Instructions
+	return *o.Instructions.Get()
 }
 
 // GetInstructionsOk returns a tuple with the Instructions field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf2ParametersAgentic) GetInstructionsOk() (*string, bool) {
-	if o == nil || IsNil(o.Instructions) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Instructions, true
+	return o.Instructions.Get(), o.Instructions.IsSet()
 }
 
 // HasInstructions returns a boolean if a field has been set.
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf2ParametersAgentic) HasInstructions() bool {
-	if o != nil && !IsNil(o.Instructions) {
+	if o != nil && o.Instructions.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInstructions gets a reference to the given string and assigns it to the Instructions field.
+// SetInstructions gets a reference to the given NullableString and assigns it to the Instructions field.
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf2ParametersAgentic) SetInstructions(v string) {
-	o.Instructions = &v
+	o.Instructions.Set(&v)
+}
+// SetInstructionsNil sets the value for Instructions to be an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf2ParametersAgentic) SetInstructionsNil() {
+	o.Instructions.Set(nil)
+}
+
+// UnsetInstructions ensures that no value is present for Instructions, not even an explicit nil
+func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf2ParametersAgentic) UnsetInstructions() {
+	o.Instructions.Unset()
 }
 
 func (o GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf2ParametersAgentic) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -112,8 +122,8 @@ func (o GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperation
 func (o GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf2ParametersAgentic) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["enabled"] = o.Enabled
-	if !IsNil(o.Instructions) {
-		toSerialize["instructions"] = o.Instructions
+	if o.Instructions.IsSet() {
+		toSerialize["instructions"] = o.Instructions.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -136,10 +146,10 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -201,3 +211,5 @@ func (v *NullableGetProfile200ResponseConfigurationAuthenticationProceduresInner
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
