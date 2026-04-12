@@ -24,6 +24,7 @@ type GetProfile200ResponseConfigurationAuthenticationPresetsInner struct {
 	GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11 *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11
 	GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf12 *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf12
 	GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf13 *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf13
+	GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf14 *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf14
 	GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf2  *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf2
 	GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf3  *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf3
 	GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf4  *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf4
@@ -73,6 +74,13 @@ func GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf12AsGetPro
 func GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf13AsGetProfile200ResponseConfigurationAuthenticationPresetsInner(v *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf13) GetProfile200ResponseConfigurationAuthenticationPresetsInner {
 	return GetProfile200ResponseConfigurationAuthenticationPresetsInner{
 		GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf13: v,
+	}
+}
+
+// GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf14AsGetProfile200ResponseConfigurationAuthenticationPresetsInner is a convenience function that returns GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf14 wrapped in GetProfile200ResponseConfigurationAuthenticationPresetsInner
+func GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf14AsGetProfile200ResponseConfigurationAuthenticationPresetsInner(v *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf14) GetProfile200ResponseConfigurationAuthenticationPresetsInner {
+	return GetProfile200ResponseConfigurationAuthenticationPresetsInner{
+		GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf14: v,
 	}
 }
 
@@ -238,6 +246,23 @@ func (dst *GetProfile200ResponseConfigurationAuthenticationPresetsInner) Unmarsh
 		dst.GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf13 = nil
 	}
 
+	// try to unmarshal data into GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf14
+	err = newStrictDecoder(data).Decode(&dst.GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf14)
+	if err == nil {
+		jsonGetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf14, _ := json.Marshal(dst.GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf14)
+		if string(jsonGetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf14) == "{}" { // empty struct
+			dst.GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf14 = nil
+		} else {
+			if err = validator.Validate(dst.GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf14); err != nil {
+				dst.GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf14 = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf14 = nil
+	}
+
 	// try to unmarshal data into GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf2
 	err = newStrictDecoder(data).Decode(&dst.GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf2)
 	if err == nil {
@@ -382,6 +407,7 @@ func (dst *GetProfile200ResponseConfigurationAuthenticationPresetsInner) Unmarsh
 		dst.GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11 = nil
 		dst.GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf12 = nil
 		dst.GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf13 = nil
+		dst.GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf14 = nil
 		dst.GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf2 = nil
 		dst.GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf3 = nil
 		dst.GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf4 = nil
@@ -423,6 +449,10 @@ func (src GetProfile200ResponseConfigurationAuthenticationPresetsInner) MarshalJ
 
 	if src.GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf13 != nil {
 		return json.Marshal(&src.GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf13)
+	}
+
+	if src.GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf14 != nil {
+		return json.Marshal(&src.GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf14)
 	}
 
 	if src.GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf2 != nil {
@@ -489,6 +519,10 @@ func (obj *GetProfile200ResponseConfigurationAuthenticationPresetsInner) GetActu
 		return obj.GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf13
 	}
 
+	if obj.GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf14 != nil {
+		return obj.GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf14
+	}
+
 	if obj.GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf2 != nil {
 		return obj.GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf2
 	}
@@ -549,6 +583,10 @@ func (obj GetProfile200ResponseConfigurationAuthenticationPresetsInner) GetActua
 
 	if obj.GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf13 != nil {
 		return *obj.GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf13
+	}
+
+	if obj.GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf14 != nil {
+		return *obj.GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf14
 	}
 
 	if obj.GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf2 != nil {

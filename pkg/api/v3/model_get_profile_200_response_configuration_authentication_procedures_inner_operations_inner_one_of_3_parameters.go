@@ -20,12 +20,13 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationAuthenticationProcedur
 
 // GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf3Parameters struct for GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf3Parameters
 type GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf3Parameters struct {
-	ProxyOverride           *string  `json:"proxy_override,omitempty"`
-	LoginUrl                string   `json:"login_url"`
-	AutoExtractionUrls      []string `json:"auto_extraction_urls,omitempty"`
-	LoggedInDetectorText    *string  `json:"logged_in_detector_text,omitempty"`
-	LoggedInDetectorTimeout *float32 `json:"logged_in_detector_timeout,omitempty"`
-	StealthMode             *bool    `json:"stealth_mode,omitempty"`
+	ProxyOverride           *string                                                                                                        `json:"proxy_override,omitempty"`
+	LoginUrl                string                                                                                                         `json:"login_url"`
+	AutoExtractionUrls      []string                                                                                                       `json:"auto_extraction_urls,omitempty"`
+	LoggedInDetectorText    *string                                                                                                        `json:"logged_in_detector_text,omitempty"`
+	LoggedInDetectorTimeout *float32                                                                                                       `json:"logged_in_detector_timeout,omitempty"`
+	StealthMode             *bool                                                                                                          `json:"stealth_mode,omitempty"`
+	LogoutDetection         *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersLogoutDetection `json:"logout_detection,omitempty"`
 	AdditionalProperties    map[string]interface{}
 }
 
@@ -233,6 +234,38 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 	o.StealthMode = &v
 }
 
+// GetLogoutDetection returns the LogoutDetection field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf3Parameters) GetLogoutDetection() GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersLogoutDetection {
+	if o == nil || IsNil(o.LogoutDetection) {
+		var ret GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersLogoutDetection
+		return ret
+	}
+	return *o.LogoutDetection
+}
+
+// GetLogoutDetectionOk returns a tuple with the LogoutDetection field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf3Parameters) GetLogoutDetectionOk() (*GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersLogoutDetection, bool) {
+	if o == nil || IsNil(o.LogoutDetection) {
+		return nil, false
+	}
+	return o.LogoutDetection, true
+}
+
+// HasLogoutDetection returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf3Parameters) HasLogoutDetection() bool {
+	if o != nil && !IsNil(o.LogoutDetection) {
+		return true
+	}
+
+	return false
+}
+
+// SetLogoutDetection gets a reference to the given GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersLogoutDetection and assigns it to the LogoutDetection field.
+func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf3Parameters) SetLogoutDetection(v GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersLogoutDetection) {
+	o.LogoutDetection = &v
+}
+
 func (o GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf3Parameters) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -258,6 +291,9 @@ func (o GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperation
 	}
 	if !IsNil(o.StealthMode) {
 		toSerialize["stealth_mode"] = o.StealthMode
+	}
+	if !IsNil(o.LogoutDetection) {
+		toSerialize["logout_detection"] = o.LogoutDetection
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -308,6 +344,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 		delete(additionalProperties, "logged_in_detector_text")
 		delete(additionalProperties, "logged_in_detector_timeout")
 		delete(additionalProperties, "stealth_mode")
+		delete(additionalProperties, "logout_detection")
 		o.AdditionalProperties = additionalProperties
 	}
 

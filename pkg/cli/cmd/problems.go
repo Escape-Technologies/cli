@@ -107,7 +107,7 @@ ID                                      NAME                    SCAN STATUS    P
 		}
 
 		// Filter out applications without problems
-		appsWithProblems := []v3.LastScanStatusSummarized{}
+		appsWithProblems := []v3.ProfileScanProblemsRow{}
 		for _, app := range allRaw {
 			if app.HasLastResourceScan() {
 				scan := app.GetLastResourceScan()

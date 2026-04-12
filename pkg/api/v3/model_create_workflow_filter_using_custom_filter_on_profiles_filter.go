@@ -32,12 +32,12 @@ type CreateWorkflowFilterUsingCustomFilterOnProfilesFilter struct {
 	Kinds                []ENUMPROPERTIESFILTERSITEMS1PROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS      `json:"kinds,omitempty"`
 	Domains              []string                                                                      `json:"domains,omitempty"`
 	Initiators           []ENUMPROPERTIESDATAITEMSPROPERTIESINITIATORSITEMS                            `json:"initiators,omitempty"`
-	LastScanStatuses     []ENUMPROPERTIESFILTERSITEMS2PROPERTIESFILTERPROPERTIESLASTSCANSTATUSESITEMS  `json:"lastScanStatuses,omitempty"`
+	LastScanStatuses     []ENUMPROPERTIESSTATUS                                                        `json:"lastScanStatuses,omitempty"`
 	ProblemSeverities    []ENUMPROPERTIESFILTERSITEMS2PROPERTIESFILTERPROPERTIESPROBLEMSEVERITIESITEMS `json:"problemSeverities,omitempty"`
 	ProblemCodes         []ENUMPROPERTIESFILTERSITEMS2PROPERTIESFILTERPROPERTIESPROBLEMCODESITEMS      `json:"problemCodes,omitempty"`
-	AssetClasses         []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS                       `json:"assetClasses,omitempty"`
-	AssetStatuses        []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS                      `json:"assetStatuses,omitempty"`
-	AssetTypes           []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE                        `json:"assetTypes,omitempty"`
+	AssetClasses         []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS            `json:"assetClasses,omitempty"`
+	AssetStatuses        []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS           `json:"assetStatuses,omitempty"`
+	AssetTypes           []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE             `json:"assetTypes,omitempty"`
 	ScanIds              []string                                                                      `json:"scanIds,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -478,9 +478,9 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) SetInitiators(v 
 }
 
 // GetLastScanStatuses returns the LastScanStatuses field value if set, zero value otherwise.
-func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetLastScanStatuses() []ENUMPROPERTIESFILTERSITEMS2PROPERTIESFILTERPROPERTIESLASTSCANSTATUSESITEMS {
+func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetLastScanStatuses() []ENUMPROPERTIESSTATUS {
 	if o == nil || IsNil(o.LastScanStatuses) {
-		var ret []ENUMPROPERTIESFILTERSITEMS2PROPERTIESFILTERPROPERTIESLASTSCANSTATUSESITEMS
+		var ret []ENUMPROPERTIESSTATUS
 		return ret
 	}
 	return o.LastScanStatuses
@@ -488,7 +488,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetLastScanStatu
 
 // GetLastScanStatusesOk returns a tuple with the LastScanStatuses field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetLastScanStatusesOk() ([]ENUMPROPERTIESFILTERSITEMS2PROPERTIESFILTERPROPERTIESLASTSCANSTATUSESITEMS, bool) {
+func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetLastScanStatusesOk() ([]ENUMPROPERTIESSTATUS, bool) {
 	if o == nil || IsNil(o.LastScanStatuses) {
 		return nil, false
 	}
@@ -504,8 +504,8 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) HasLastScanStatu
 	return false
 }
 
-// SetLastScanStatuses gets a reference to the given []ENUMPROPERTIESFILTERSITEMS2PROPERTIESFILTERPROPERTIESLASTSCANSTATUSESITEMS and assigns it to the LastScanStatuses field.
-func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) SetLastScanStatuses(v []ENUMPROPERTIESFILTERSITEMS2PROPERTIESFILTERPROPERTIESLASTSCANSTATUSESITEMS) {
+// SetLastScanStatuses gets a reference to the given []ENUMPROPERTIESSTATUS and assigns it to the LastScanStatuses field.
+func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) SetLastScanStatuses(v []ENUMPROPERTIESSTATUS) {
 	o.LastScanStatuses = v
 }
 
@@ -574,9 +574,9 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) SetProblemCodes(
 }
 
 // GetAssetClasses returns the AssetClasses field value if set, zero value otherwise.
-func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetAssetClasses() []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS {
+func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetAssetClasses() []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS {
 	if o == nil || IsNil(o.AssetClasses) {
-		var ret []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS
+		var ret []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS
 		return ret
 	}
 	return o.AssetClasses
@@ -584,7 +584,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetAssetClasses(
 
 // GetAssetClassesOk returns a tuple with the AssetClasses field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetAssetClassesOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS, bool) {
+func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetAssetClassesOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS, bool) {
 	if o == nil || IsNil(o.AssetClasses) {
 		return nil, false
 	}
@@ -600,15 +600,15 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) HasAssetClasses(
 	return false
 }
 
-// SetAssetClasses gets a reference to the given []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS and assigns it to the AssetClasses field.
-func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) SetAssetClasses(v []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS) {
+// SetAssetClasses gets a reference to the given []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS and assigns it to the AssetClasses field.
+func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) SetAssetClasses(v []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS) {
 	o.AssetClasses = v
 }
 
 // GetAssetStatuses returns the AssetStatuses field value if set, zero value otherwise.
-func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetAssetStatuses() []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS {
+func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetAssetStatuses() []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS {
 	if o == nil || IsNil(o.AssetStatuses) {
-		var ret []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS
+		var ret []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS
 		return ret
 	}
 	return o.AssetStatuses
@@ -616,7 +616,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetAssetStatuses
 
 // GetAssetStatusesOk returns a tuple with the AssetStatuses field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetAssetStatusesOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS, bool) {
+func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetAssetStatusesOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS, bool) {
 	if o == nil || IsNil(o.AssetStatuses) {
 		return nil, false
 	}
@@ -632,15 +632,15 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) HasAssetStatuses
 	return false
 }
 
-// SetAssetStatuses gets a reference to the given []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS and assigns it to the AssetStatuses field.
-func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) SetAssetStatuses(v []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS) {
+// SetAssetStatuses gets a reference to the given []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS and assigns it to the AssetStatuses field.
+func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) SetAssetStatuses(v []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS) {
 	o.AssetStatuses = v
 }
 
 // GetAssetTypes returns the AssetTypes field value if set, zero value otherwise.
-func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetAssetTypes() []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE {
+func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetAssetTypes() []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE {
 	if o == nil || IsNil(o.AssetTypes) {
-		var ret []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE
+		var ret []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE
 		return ret
 	}
 	return o.AssetTypes
@@ -648,7 +648,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetAssetTypes() 
 
 // GetAssetTypesOk returns a tuple with the AssetTypes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetAssetTypesOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE, bool) {
+func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetAssetTypesOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE, bool) {
 	if o == nil || IsNil(o.AssetTypes) {
 		return nil, false
 	}
@@ -664,8 +664,8 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) HasAssetTypes() 
 	return false
 }
 
-// SetAssetTypes gets a reference to the given []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE and assigns it to the AssetTypes field.
-func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) SetAssetTypes(v []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE) {
+// SetAssetTypes gets a reference to the given []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE and assigns it to the AssetTypes field.
+func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) SetAssetTypes(v []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE) {
 	o.AssetTypes = v
 }
 

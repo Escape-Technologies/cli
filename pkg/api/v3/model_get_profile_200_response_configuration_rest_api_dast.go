@@ -34,7 +34,6 @@ type GetProfile200ResponseConfigurationRestApiDast struct {
 	AdditionalSchemaS3Keys   []string                                                                       `json:"additional_schema_s3_keys,omitempty"`
 	QueryParamsAreRequired   *bool                                                                          `json:"query_params_are_required,omitempty"`
 	InScopeOnly              *bool                                                                          `json:"in_scope_only,omitempty"`
-	AllowMissingEnvPostman   *bool                                                                          `json:"allow_missing_env_postman,omitempty"`
 	AdditionalProperties     map[string]interface{}
 }
 
@@ -537,38 +536,6 @@ func (o *GetProfile200ResponseConfigurationRestApiDast) SetInScopeOnly(v bool) {
 	o.InScopeOnly = &v
 }
 
-// GetAllowMissingEnvPostman returns the AllowMissingEnvPostman field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationRestApiDast) GetAllowMissingEnvPostman() bool {
-	if o == nil || IsNil(o.AllowMissingEnvPostman) {
-		var ret bool
-		return ret
-	}
-	return *o.AllowMissingEnvPostman
-}
-
-// GetAllowMissingEnvPostmanOk returns a tuple with the AllowMissingEnvPostman field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationRestApiDast) GetAllowMissingEnvPostmanOk() (*bool, bool) {
-	if o == nil || IsNil(o.AllowMissingEnvPostman) {
-		return nil, false
-	}
-	return o.AllowMissingEnvPostman, true
-}
-
-// HasAllowMissingEnvPostman returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationRestApiDast) HasAllowMissingEnvPostman() bool {
-	if o != nil && !IsNil(o.AllowMissingEnvPostman) {
-		return true
-	}
-
-	return false
-}
-
-// SetAllowMissingEnvPostman gets a reference to the given bool and assigns it to the AllowMissingEnvPostman field.
-func (o *GetProfile200ResponseConfigurationRestApiDast) SetAllowMissingEnvPostman(v bool) {
-	o.AllowMissingEnvPostman = &v
-}
-
 func (o GetProfile200ResponseConfigurationRestApiDast) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -624,9 +591,6 @@ func (o GetProfile200ResponseConfigurationRestApiDast) ToMap() (map[string]inter
 	if !IsNil(o.InScopeOnly) {
 		toSerialize["in_scope_only"] = o.InScopeOnly
 	}
-	if !IsNil(o.AllowMissingEnvPostman) {
-		toSerialize["allow_missing_env_postman"] = o.AllowMissingEnvPostman
-	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -664,7 +628,6 @@ func (o *GetProfile200ResponseConfigurationRestApiDast) UnmarshalJSON(data []byt
 		delete(additionalProperties, "additional_schema_s3_keys")
 		delete(additionalProperties, "query_params_are_required")
 		delete(additionalProperties, "in_scope_only")
-		delete(additionalProperties, "allow_missing_env_postman")
 		o.AdditionalProperties = additionalProperties
 	}
 

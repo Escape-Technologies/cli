@@ -31,12 +31,12 @@ type GetEvent200Response struct {
 	// The issues of the event
 	Issues []IssueDetailed `json:"issues,omitempty"`
 	// The number of issues of the event
-	IssuesCount float32                                `json:"issuesCount"`
-	Level       ENUMPROPERTIESDATAITEMSPROPERTIESLEVEL `json:"level"`
-	Scan        *ScanDetailed2                         `json:"scan,omitempty"`
+	IssuesCount float32                                  `json:"issuesCount"`
+	Level       ENUMPROPERTIESEVENTSITEMSPROPERTIESLEVEL `json:"level"`
+	Scan        *ScanDetailed4                           `json:"scan,omitempty"`
 	// The id of the scan of the event
-	ScanId *string                                `json:"scanId,omitempty"`
-	Stage  ENUMPROPERTIESDATAITEMSPROPERTIESSTAGE `json:"stage"`
+	ScanId *string                                  `json:"scanId,omitempty"`
+	Stage  ENUMPROPERTIESEVENTSITEMSPROPERTIESSTAGE `json:"stage"`
 	// The title of the event
 	Title                string `json:"title"`
 	AdditionalProperties map[string]interface{}
@@ -48,7 +48,7 @@ type _GetEvent200Response GetEvent200Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetEvent200Response(id string, createdAt string, description string, issuesCount float32, level ENUMPROPERTIESDATAITEMSPROPERTIESLEVEL, stage ENUMPROPERTIESDATAITEMSPROPERTIESSTAGE, title string) *GetEvent200Response {
+func NewGetEvent200Response(id string, createdAt string, description string, issuesCount float32, level ENUMPROPERTIESEVENTSITEMSPROPERTIESLEVEL, stage ENUMPROPERTIESEVENTSITEMSPROPERTIESSTAGE, title string) *GetEvent200Response {
 	this := GetEvent200Response{}
 	this.Id = id
 	this.CreatedAt = createdAt
@@ -229,9 +229,9 @@ func (o *GetEvent200Response) SetIssuesCount(v float32) {
 }
 
 // GetLevel returns the Level field value
-func (o *GetEvent200Response) GetLevel() ENUMPROPERTIESDATAITEMSPROPERTIESLEVEL {
+func (o *GetEvent200Response) GetLevel() ENUMPROPERTIESEVENTSITEMSPROPERTIESLEVEL {
 	if o == nil {
-		var ret ENUMPROPERTIESDATAITEMSPROPERTIESLEVEL
+		var ret ENUMPROPERTIESEVENTSITEMSPROPERTIESLEVEL
 		return ret
 	}
 
@@ -240,7 +240,7 @@ func (o *GetEvent200Response) GetLevel() ENUMPROPERTIESDATAITEMSPROPERTIESLEVEL 
 
 // GetLevelOk returns a tuple with the Level field value
 // and a boolean to check if the value has been set.
-func (o *GetEvent200Response) GetLevelOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESLEVEL, bool) {
+func (o *GetEvent200Response) GetLevelOk() (*ENUMPROPERTIESEVENTSITEMSPROPERTIESLEVEL, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -248,14 +248,14 @@ func (o *GetEvent200Response) GetLevelOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESLE
 }
 
 // SetLevel sets field value
-func (o *GetEvent200Response) SetLevel(v ENUMPROPERTIESDATAITEMSPROPERTIESLEVEL) {
+func (o *GetEvent200Response) SetLevel(v ENUMPROPERTIESEVENTSITEMSPROPERTIESLEVEL) {
 	o.Level = v
 }
 
 // GetScan returns the Scan field value if set, zero value otherwise.
-func (o *GetEvent200Response) GetScan() ScanDetailed2 {
+func (o *GetEvent200Response) GetScan() ScanDetailed4 {
 	if o == nil || IsNil(o.Scan) {
-		var ret ScanDetailed2
+		var ret ScanDetailed4
 		return ret
 	}
 	return *o.Scan
@@ -263,7 +263,7 @@ func (o *GetEvent200Response) GetScan() ScanDetailed2 {
 
 // GetScanOk returns a tuple with the Scan field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetEvent200Response) GetScanOk() (*ScanDetailed2, bool) {
+func (o *GetEvent200Response) GetScanOk() (*ScanDetailed4, bool) {
 	if o == nil || IsNil(o.Scan) {
 		return nil, false
 	}
@@ -279,8 +279,8 @@ func (o *GetEvent200Response) HasScan() bool {
 	return false
 }
 
-// SetScan gets a reference to the given ScanDetailed2 and assigns it to the Scan field.
-func (o *GetEvent200Response) SetScan(v ScanDetailed2) {
+// SetScan gets a reference to the given ScanDetailed4 and assigns it to the Scan field.
+func (o *GetEvent200Response) SetScan(v ScanDetailed4) {
 	o.Scan = &v
 }
 
@@ -317,9 +317,9 @@ func (o *GetEvent200Response) SetScanId(v string) {
 }
 
 // GetStage returns the Stage field value
-func (o *GetEvent200Response) GetStage() ENUMPROPERTIESDATAITEMSPROPERTIESSTAGE {
+func (o *GetEvent200Response) GetStage() ENUMPROPERTIESEVENTSITEMSPROPERTIESSTAGE {
 	if o == nil {
-		var ret ENUMPROPERTIESDATAITEMSPROPERTIESSTAGE
+		var ret ENUMPROPERTIESEVENTSITEMSPROPERTIESSTAGE
 		return ret
 	}
 
@@ -328,7 +328,7 @@ func (o *GetEvent200Response) GetStage() ENUMPROPERTIESDATAITEMSPROPERTIESSTAGE 
 
 // GetStageOk returns a tuple with the Stage field value
 // and a boolean to check if the value has been set.
-func (o *GetEvent200Response) GetStageOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESSTAGE, bool) {
+func (o *GetEvent200Response) GetStageOk() (*ENUMPROPERTIESEVENTSITEMSPROPERTIESSTAGE, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -336,7 +336,7 @@ func (o *GetEvent200Response) GetStageOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESST
 }
 
 // SetStage sets field value
-func (o *GetEvent200Response) SetStage(v ENUMPROPERTIESDATAITEMSPROPERTIESSTAGE) {
+func (o *GetEvent200Response) SetStage(v ENUMPROPERTIESEVENTSITEMSPROPERTIESSTAGE) {
 	o.Stage = v
 }
 

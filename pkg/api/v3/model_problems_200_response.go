@@ -20,9 +20,9 @@ var _ MappedNullable = &Problems200Response{}
 
 // Problems200Response struct for Problems200Response
 type Problems200Response struct {
-	NextCursor           *string                    `json:"nextCursor,omitempty"`
-	TotalCount           *int                       `json:"totalCount,omitempty"`
-	Data                 []LastScanStatusSummarized `json:"data"`
+	NextCursor           *string                  `json:"nextCursor,omitempty"`
+	TotalCount           *int                     `json:"totalCount,omitempty"`
+	Data                 []ProfileScanProblemsRow `json:"data"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -32,7 +32,7 @@ type _Problems200Response Problems200Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProblems200Response(data []LastScanStatusSummarized) *Problems200Response {
+func NewProblems200Response(data []ProfileScanProblemsRow) *Problems200Response {
 	this := Problems200Response{}
 	var totalCount int = 100
 	this.TotalCount = &totalCount
@@ -115,9 +115,9 @@ func (o *Problems200Response) SetTotalCount(v int) {
 }
 
 // GetData returns the Data field value
-func (o *Problems200Response) GetData() []LastScanStatusSummarized {
+func (o *Problems200Response) GetData() []ProfileScanProblemsRow {
 	if o == nil {
-		var ret []LastScanStatusSummarized
+		var ret []ProfileScanProblemsRow
 		return ret
 	}
 
@@ -126,7 +126,7 @@ func (o *Problems200Response) GetData() []LastScanStatusSummarized {
 
 // GetDataOk returns a tuple with the Data field value
 // and a boolean to check if the value has been set.
-func (o *Problems200Response) GetDataOk() ([]LastScanStatusSummarized, bool) {
+func (o *Problems200Response) GetDataOk() ([]ProfileScanProblemsRow, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -134,7 +134,7 @@ func (o *Problems200Response) GetDataOk() ([]LastScanStatusSummarized, bool) {
 }
 
 // SetData sets field value
-func (o *Problems200Response) SetData(v []LastScanStatusSummarized) {
+func (o *Problems200Response) SetData(v []ProfileScanProblemsRow) {
 	o.Data = v
 }
 
