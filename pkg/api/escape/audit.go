@@ -47,5 +47,5 @@ func ListAuditLogs(ctx context.Context, next string, filters *ListAuditLogsFilte
 	if err != nil {
 		return nil, nil, fmt.Errorf("api error: %w", err)
 	}
-	return data.Data, data.NextCursor, nil
+	return data.Data, nullableStringPtr(data.NextCursor), nil
 }

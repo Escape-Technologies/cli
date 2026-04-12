@@ -42,7 +42,7 @@ func ListLocations(ctx context.Context, next string, filters *ListLocationsFilte
 	if err != nil {
 		return nil, nil, fmt.Errorf("unable to get locations: %w", err)
 	}
-	return data.Data, data.NextCursor, nil
+	return data.Data, nullableStringPtr(data.NextCursor), nil
 }
 
 // GetLocation gets a location by ID

@@ -51,7 +51,7 @@ func ListAssets(ctx context.Context, next string, filters *ListAssetsFilters) ([
 	if err != nil {
 		return nil, nil, fmt.Errorf("api error: %w", err)
 	}
-	return data.Data, data.NextCursor, nil
+	return data.Data, nullableStringPtr(data.NextCursor), nil
 }
 
 // GetAsset gets an asset by ID
@@ -87,7 +87,7 @@ func UpdateAsset(
 	assetDescription *string,
 	assetFramework *v3.ENUMPROPERTIESFRAMEWORK,
 	assetOwners *[]string,
-	assetStatus *v3.ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS,
+	assetStatus *v3.ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS,
 	assetTagIDs *[]string,
 ) error {
 	client, err := newAPIV3Client()

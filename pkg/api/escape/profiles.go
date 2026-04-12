@@ -61,7 +61,7 @@ func ListProfiles(ctx context.Context, next string, filters *ListProfilesFilters
 	if err != nil {
 		return nil, nil, fmt.Errorf("api error: %w", err)
 	}
-	return data.Data, data.NextCursor, nil
+	return data.Data, nullableStringPtr(data.NextCursor), nil
 }
 
 // GetProfile gets a profile by ID
@@ -106,13 +106,13 @@ func CreateProfileWebapp(ctx context.Context, data []byte) (interface{}, error) 
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
 
-	var payload v3.CreateDastWebAppProfileRequest
+	var payload v3.CreateDastRestProfileRequest
 	if err := json.Unmarshal(data, &payload); err != nil {
 		return nil, fmt.Errorf("invalid JSON: %w", err)
 	}
 
 	req := client.ProfilesAPI.CreateDastWebAppProfile(ctx)
-	profile, _, err := req.CreateDastWebAppProfileRequest(payload).Execute()
+	profile, _, err := req.CreateDastRestProfileRequest(payload).Execute()
 	if err != nil {
 		return nil, fmt.Errorf("api error: %w", err)
 	}
@@ -126,13 +126,13 @@ func CreateProfileGraphql(ctx context.Context, data []byte) (interface{}, error)
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
 
-	var payload v3.CreateDastGraphqlProfileRequest
+	var payload v3.CreateDastRestProfileRequest
 	if err := json.Unmarshal(data, &payload); err != nil {
 		return nil, fmt.Errorf("invalid JSON: %w", err)
 	}
 
 	req := client.ProfilesAPI.CreateDastGraphqlProfile(ctx)
-	profile, _, err := req.CreateDastGraphqlProfileRequest(payload).Execute()
+	profile, _, err := req.CreateDastRestProfileRequest(payload).Execute()
 	if err != nil {
 		return nil, fmt.Errorf("api error: %w", err)
 	}
@@ -223,7 +223,7 @@ type ListProblemsFilters struct {
 }
 
 // ListProblems lists all scan problems
-func ListProblems(ctx context.Context, next string, filters *ListProblemsFilters) ([]v3.LastScanStatusSummarized, *string, error) {
+func ListProblems(ctx context.Context, next string, filters *ListProblemsFilters) ([]v3.ProfileScanProblemsRow, *string, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, nil, fmt.Errorf("unable to init client: %w", err)
@@ -262,5 +262,5 @@ func ListProblems(ctx context.Context, next string, filters *ListProblemsFilters
 	if err != nil {
 		return nil, nil, fmt.Errorf("api error: %w", err)
 	}
-	return data.Data, data.NextCursor, nil
+	return data.Data, nullableStringPtr(data.NextCursor), nil
 }

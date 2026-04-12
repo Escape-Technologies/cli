@@ -62,7 +62,7 @@ func ListScans(ctx context.Context, next string, filters *ListScansFilters) ([]v
 	if err != nil {
 		return nil, nil, fmt.Errorf("unable to list scans: %w", err)
 	}
-	return data.Data, data.NextCursor, nil
+	return data.Data, nullableStringPtr(data.NextCursor), nil
 }
 
 // GetScan returns a scan by its ID
@@ -122,10 +122,10 @@ func StartScan(
 		CommitBranch:                   &commitBranch,
 		CommitAuthor:                   &commitAuthor,
 		CommitAuthorProfilePictureLink: &commitAuthorProfilePictureLink,
-		Initiator:                      (*v3.ENUMPROPERTIESINITIATOR)(&initiator),
 		ConfigurationOverride:          configurationOverride,
 		AdditionalProperties:           additionalProperties,
 	}
+	req.SetInitiator(v3.ENUMPROPERTIESINITIATOR(initiator))
 
 	data, _, err := client.ScansAPI.StartScan(ctx).StartScanRequest(req).Execute()
 	if err != nil {

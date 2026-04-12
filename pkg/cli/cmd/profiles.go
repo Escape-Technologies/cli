@@ -230,7 +230,7 @@ var profileCreateWebappCmd = &cobra.Command{
 Create a new profile for testing web applications. Provide configuration via JSON through stdin.`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
 		// Output JSON Schema for input format if requested
-		if out.InputSchema(v3.CreateDastWebAppProfileRequest{}) {
+		if out.InputSchema(v3.CreateDastRestProfileRequest{}) {
 			return nil
 		}
 		// Output JSON Schema if requested
@@ -274,7 +274,7 @@ var profileCreateGraphqlCmd = &cobra.Command{
 Create a new profile for testing GraphQL APIs. Provide configuration via JSON through stdin.`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
 		// Output JSON Schema for input format if requested
-		if out.InputSchema(v3.CreateDastGraphqlProfileRequest{}) {
+		if out.InputSchema(v3.CreateDastRestProfileRequest{}) {
 			return nil
 		}
 		// Output JSON Schema if requested

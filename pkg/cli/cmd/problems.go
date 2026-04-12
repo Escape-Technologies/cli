@@ -107,20 +107,18 @@ ID                                      NAME                    SCAN STATUS    P
 		}
 
 		// Filter out applications without problems
-		appsWithProblems := []v3.LastScanStatusSummarized{}
+		appsWithProblems := []v3.ProfileScanProblemsRow{}
 		for _, app := range allRaw {
-			if app.HasLastResourceScan() {
-				scan := app.GetLastResourceScan()
-				if len(scan.GetProblems()) > 0 {
-					appsWithProblems = append(appsWithProblems, app)
-				}
+			scan := app.GetLastScan()
+			if len(scan.GetProblems()) > 0 {
+				appsWithProblems = append(appsWithProblems, app)
 			}
 		}
 
 		if problemsDetailed {
 			allProblems := []ProblemDetail{}
 			for _, app := range appsWithProblems {
-				scan := app.GetLastResourceScan()
+				scan := app.GetLastScan()
 				for _, problem := range scan.GetProblems() {
 					allProblems = append(allProblems, ProblemDetail{
 						AppID:      app.GetId(),
@@ -150,7 +148,7 @@ ID                                      NAME                    SCAN STATUS    P
 		} else {
 			problemSummaries := []ProblemSummary{}
 			for _, app := range appsWithProblems {
-				scan := app.GetLastResourceScan()
+				scan := app.GetLastScan()
 				problemCount := len(scan.GetProblems())
 				problemSummaries = append(problemSummaries, ProblemSummary{
 					AppID:        app.GetId(),

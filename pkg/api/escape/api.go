@@ -43,3 +43,7 @@ func newAPIV3Client() (*v3.APIClient, error) {
 
 	return v3.NewAPIClient(&cfg), nil
 }
+
+func nullableStringPtr(s v3.NullableString) *string {
+	return s.Get()
+}

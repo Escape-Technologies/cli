@@ -143,10 +143,10 @@ func init() {
 	eventsListCmd.Flags().StringSliceVarP(&scanIDs, "scan-id", "", []string{}, "Scan ID to filter events by")
 	eventsListCmd.Flags().StringSliceVarP(&assetIDs, "asset-id", "a", assetIDs, "Asset ID to filter events by")
 	eventsListCmd.Flags().StringSliceVarP(&issueIDs, "issue-id", "i", []string{}, "Issue ID to filter events by")
-	eventsListCmd.Flags().StringSliceVarP(&stages, "stage", "", stages, fmt.Sprintf("Stages of events: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESSTAGEEnumValues))
+	eventsListCmd.Flags().StringSliceVarP(&stages, "stage", "", stages, fmt.Sprintf("Stages of events: %v", v3.AllowedENUMPROPERTIESEVENTSITEMSPROPERTIESSTAGEEnumValues))
 	eventsListCmd.Flags().BoolVarP(&hasAttachments, "has-attachments", "", hasAttachments, "Has attachments")
 	eventsListCmd.Flags().StringSliceVarP(&attachments, "attachments", "t", attachments, "Attachments to filter events by")
-	eventsListCmd.Flags().StringSliceVarP(&eventLevels, "levels", "l", eventLevels, fmt.Sprintf("levels of events: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESLEVELEnumValues))
+	eventsListCmd.Flags().StringSliceVarP(&eventLevels, "levels", "l", eventLevels, fmt.Sprintf("levels of events: %v", v3.AllowedENUMPROPERTIESEVENTSITEMSPROPERTIESLEVELEnumValues))
 
 	eventsCmd.AddCommand(eventGetCmd)
 
