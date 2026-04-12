@@ -26,6 +26,7 @@ type CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInner struct {
 	CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf5 *CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf5
 	CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf6 *CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf6
 	CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf7 *CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf7
+	CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf8 *CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf8
 }
 
 // CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOfAsCreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInner is a convenience function that returns CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf wrapped in CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInner
@@ -81,6 +82,13 @@ func CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf6AsC
 func CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf7AsCreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInner(v *CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf7) CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInner {
 	return CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInner{
 		CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf7: v,
+	}
+}
+
+// CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf8AsCreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInner is a convenience function that returns CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf8 wrapped in CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInner
+func CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf8AsCreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInner(v *CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf8) CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInner {
+	return CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInner{
+		CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf8: v,
 	}
 }
 
@@ -224,6 +232,23 @@ func (dst *CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInner) U
 		dst.CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf7 = nil
 	}
 
+	// try to unmarshal data into CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf8
+	err = newStrictDecoder(data).Decode(&dst.CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf8)
+	if err == nil {
+		jsonCreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf8, _ := json.Marshal(dst.CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf8)
+		if string(jsonCreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf8) == "{}" { // empty struct
+			dst.CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf8 = nil
+		} else {
+			if err = validator.Validate(dst.CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf8); err != nil {
+				dst.CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf8 = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf8 = nil
+	}
+
 	if match > 1 { // more than 1 match
 		// reset to nil
 		dst.CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf = nil
@@ -234,6 +259,7 @@ func (dst *CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInner) U
 		dst.CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf5 = nil
 		dst.CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf6 = nil
 		dst.CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf7 = nil
+		dst.CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf8 = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInner)")
 	} else if match == 1 {
@@ -277,6 +303,10 @@ func (src CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInner) Ma
 		return json.Marshal(&src.CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf7)
 	}
 
+	if src.CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf8 != nil {
+		return json.Marshal(&src.CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf8)
+	}
+
 	return nil, nil // no data in oneOf schemas
 }
 
@@ -317,6 +347,10 @@ func (obj *CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInner) G
 		return obj.CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf7
 	}
 
+	if obj.CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf8 != nil {
+		return obj.CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf8
+	}
+
 	// all schemas are nil
 	return nil
 }
@@ -353,6 +387,10 @@ func (obj CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInner) Ge
 
 	if obj.CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf7 != nil {
 		return *obj.CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf7
+	}
+
+	if obj.CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf8 != nil {
+		return *obj.CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf8
 	}
 
 	// all schemas are nil

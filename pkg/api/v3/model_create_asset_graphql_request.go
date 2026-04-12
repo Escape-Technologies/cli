@@ -23,25 +23,27 @@ type CreateAssetGRAPHQLRequest struct {
 	// The list of project IDs bind the asset on.
 	ProjectIds []string `json:"projectIds,omitempty"`
 	// The custom name of the asset. If not provided, the default name will be used.
-	Name                      *string                                                                         `json:"name,omitempty"`
-	AssetClass                ENUMAPISERVICE                                                                  `json:"asset_class"`
-	ExtraMetadata             map[string]interface{}                                                          `json:"extra_metadata,omitempty"`
-	ScreenshotS3Key           *string                                                                         `json:"screenshot_s3_key,omitempty"`
-	AssetType                 ENUMGRAPHQL                                                                     `json:"asset_type"`
-	Url                       string                                                                          `json:"url"`
-	Favicon                   *string                                                                         `json:"favicon,omitempty"`
-	ReachableVia              []string                                                                        `json:"reachable_via,omitempty"`
-	ReachableViaExternalProxy *bool                                                                           `json:"reachable_via_external_proxy,omitempty"`
-	Private                   *bool                                                                           `json:"private,omitempty"`
-	PrivateLocationId         *string                                                                         `json:"private_location_id,omitempty"`
-	Environment               *ENUMPROPERTIESENVIRONMENT                                                      `json:"environment,omitempty"`
-	CloudProvider             *ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER `json:"cloud_provider,omitempty"`
-	WafProvider               *ENUMPROPERTIESWAFPROVIDER                                                      `json:"waf_provider,omitempty"`
-	ThirdParty                *ENUMPROPERTIESTHIRDPARTY                                                       `json:"third_party,omitempty"`
-	Ips                       []string                                                                        `json:"ips,omitempty"`
-	RegionCountryCodes        []string                                                                        `json:"region_country_codes,omitempty"`
-	Framework                 *ENUMPROPERTIESFRAMEWORK                                                        `json:"framework,omitempty"`
-	Operations                []CreateAssetGRAPHQLRequestOperationsInner                                      `json:"operations,omitempty"`
+	Name                      *string                                                                          `json:"name,omitempty"`
+	AssetClass                ENUMAPISERVICE                                                                   `json:"asset_class"`
+	ExtraMetadata             map[string]interface{}                                                           `json:"extra_metadata,omitempty"`
+	ScreenshotS3Key           *string                                                                          `json:"screenshot_s3_key,omitempty"`
+	AssetType                 ENUMGRAPHQL                                                                      `json:"asset_type"`
+	Url                       string                                                                           `json:"url"`
+	Favicon                   *string                                                                          `json:"favicon,omitempty"`
+	ReachableVia              []string                                                                         `json:"reachable_via,omitempty"`
+	ReachableViaExternalProxy *bool                                                                            `json:"reachable_via_external_proxy,omitempty"`
+	Private                   *bool                                                                            `json:"private,omitempty"`
+	PrivateLocationId         *string                                                                          `json:"private_location_id,omitempty"`
+	Environment               *ENUMPROPERTIESENVIRONMENT                                                       `json:"environment,omitempty"`
+	CloudProvider             *ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER  `json:"cloud_provider,omitempty"`
+	WafProvider               *ENUMPROPERTIESWAFPROVIDER                                                       `json:"waf_provider,omitempty"`
+	AuthProtocol              *ENUMPROPERTIESAUTHPROTOCOL                                                      `json:"auth_protocol,omitempty"`
+	AuthTechnology            *ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESAUTHTECHNOLOGY `json:"auth_technology,omitempty"`
+	ThirdParty                *ENUMPROPERTIESTHIRDPARTY                                                        `json:"third_party,omitempty"`
+	Ips                       []string                                                                         `json:"ips,omitempty"`
+	RegionCountryCodes        []string                                                                         `json:"region_country_codes,omitempty"`
+	Framework                 *ENUMPROPERTIESFRAMEWORK                                                         `json:"framework,omitempty"`
+	Operations                []CreateAssetGRAPHQLRequestOperationsInner                                       `json:"operations,omitempty"`
 	AdditionalProperties      map[string]interface{}
 }
 
@@ -523,6 +525,70 @@ func (o *CreateAssetGRAPHQLRequest) SetWafProvider(v ENUMPROPERTIESWAFPROVIDER) 
 	o.WafProvider = &v
 }
 
+// GetAuthProtocol returns the AuthProtocol field value if set, zero value otherwise.
+func (o *CreateAssetGRAPHQLRequest) GetAuthProtocol() ENUMPROPERTIESAUTHPROTOCOL {
+	if o == nil || IsNil(o.AuthProtocol) {
+		var ret ENUMPROPERTIESAUTHPROTOCOL
+		return ret
+	}
+	return *o.AuthProtocol
+}
+
+// GetAuthProtocolOk returns a tuple with the AuthProtocol field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetGRAPHQLRequest) GetAuthProtocolOk() (*ENUMPROPERTIESAUTHPROTOCOL, bool) {
+	if o == nil || IsNil(o.AuthProtocol) {
+		return nil, false
+	}
+	return o.AuthProtocol, true
+}
+
+// HasAuthProtocol returns a boolean if a field has been set.
+func (o *CreateAssetGRAPHQLRequest) HasAuthProtocol() bool {
+	if o != nil && !IsNil(o.AuthProtocol) {
+		return true
+	}
+
+	return false
+}
+
+// SetAuthProtocol gets a reference to the given ENUMPROPERTIESAUTHPROTOCOL and assigns it to the AuthProtocol field.
+func (o *CreateAssetGRAPHQLRequest) SetAuthProtocol(v ENUMPROPERTIESAUTHPROTOCOL) {
+	o.AuthProtocol = &v
+}
+
+// GetAuthTechnology returns the AuthTechnology field value if set, zero value otherwise.
+func (o *CreateAssetGRAPHQLRequest) GetAuthTechnology() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESAUTHTECHNOLOGY {
+	if o == nil || IsNil(o.AuthTechnology) {
+		var ret ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESAUTHTECHNOLOGY
+		return ret
+	}
+	return *o.AuthTechnology
+}
+
+// GetAuthTechnologyOk returns a tuple with the AuthTechnology field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetGRAPHQLRequest) GetAuthTechnologyOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESAUTHTECHNOLOGY, bool) {
+	if o == nil || IsNil(o.AuthTechnology) {
+		return nil, false
+	}
+	return o.AuthTechnology, true
+}
+
+// HasAuthTechnology returns a boolean if a field has been set.
+func (o *CreateAssetGRAPHQLRequest) HasAuthTechnology() bool {
+	if o != nil && !IsNil(o.AuthTechnology) {
+		return true
+	}
+
+	return false
+}
+
+// SetAuthTechnology gets a reference to the given ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESAUTHTECHNOLOGY and assigns it to the AuthTechnology field.
+func (o *CreateAssetGRAPHQLRequest) SetAuthTechnology(v ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESAUTHTECHNOLOGY) {
+	o.AuthTechnology = &v
+}
+
 // GetThirdParty returns the ThirdParty field value if set, zero value otherwise.
 func (o *CreateAssetGRAPHQLRequest) GetThirdParty() ENUMPROPERTIESTHIRDPARTY {
 	if o == nil || IsNil(o.ThirdParty) {
@@ -732,6 +798,12 @@ func (o CreateAssetGRAPHQLRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.WafProvider) {
 		toSerialize["waf_provider"] = o.WafProvider
 	}
+	if !IsNil(o.AuthProtocol) {
+		toSerialize["auth_protocol"] = o.AuthProtocol
+	}
+	if !IsNil(o.AuthTechnology) {
+		toSerialize["auth_technology"] = o.AuthTechnology
+	}
 	if !IsNil(o.ThirdParty) {
 		toSerialize["third_party"] = o.ThirdParty
 	}
@@ -807,6 +879,8 @@ func (o *CreateAssetGRAPHQLRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "environment")
 		delete(additionalProperties, "cloud_provider")
 		delete(additionalProperties, "waf_provider")
+		delete(additionalProperties, "auth_protocol")
+		delete(additionalProperties, "auth_technology")
 		delete(additionalProperties, "third_party")
 		delete(additionalProperties, "ips")
 		delete(additionalProperties, "region_country_codes")

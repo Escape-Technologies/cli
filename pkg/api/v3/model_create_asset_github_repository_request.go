@@ -21,28 +21,30 @@ var _ MappedNullable = &CreateAssetGITHUBREPOSITORYRequest{}
 // CreateAssetGITHUBREPOSITORYRequest struct for CreateAssetGITHUBREPOSITORYRequest
 type CreateAssetGITHUBREPOSITORYRequest struct {
 	// The list of project IDs bind the asset on.
-	ProjectIds           []string                                      `json:"projectIds,omitempty"`
-	Name                 *string                                       `json:"name,omitempty"`
-	AssetClass           ENUMREPOSITORY                                `json:"asset_class"`
-	ExtraMetadata        map[string]interface{}                        `json:"extra_metadata,omitempty"`
-	ScreenshotS3Key      *string                                       `json:"screenshot_s3_key,omitempty"`
-	AssetType            ENUMGITHUBREPOSITORY                          `json:"asset_type"`
-	Url                  string                                        `json:"url"`
-	HttpUrlToRepo        *string                                       `json:"http_url_to_repo,omitempty"`
-	Description          *string                                       `json:"description,omitempty"`
-	LocationId           *string                                       `json:"location_id,omitempty"`
-	DefaultBranch        *string                                       `json:"default_branch,omitempty"`
-	BlobBaseUrl          *string                                       `json:"blob_base_url,omitempty"`
-	LastCommit           *CreateAssetGITLABREPOSITORYRequestLastCommit `json:"last_commit,omitempty"`
-	OwnerId              *float32                                      `json:"owner_id,omitempty"`
-	OwnerLogin           *string                                       `json:"owner_login,omitempty"`
-	OwnerHtmlUrl         *string                                       `json:"owner_html_url,omitempty"`
-	Fork                 *bool                                         `json:"fork,omitempty"`
-	Archived             *bool                                         `json:"archived,omitempty"`
-	Disabled             *bool                                         `json:"disabled,omitempty"`
-	Clonable             *bool                                         `json:"clonable,omitempty"`
-	Private              *bool                                         `json:"private,omitempty"`
-	Org                  *CreateAssetGITHUBREPOSITORYRequestOrg        `json:"org,omitempty"`
+	ProjectIds           []string                                        `json:"projectIds,omitempty"`
+	Name                 *string                                         `json:"name,omitempty"`
+	AssetClass           ENUMREPOSITORY                                  `json:"asset_class"`
+	ExtraMetadata        map[string]interface{}                          `json:"extra_metadata,omitempty"`
+	ScreenshotS3Key      *string                                         `json:"screenshot_s3_key,omitempty"`
+	AssetType            ENUMGITHUBREPOSITORY                            `json:"asset_type"`
+	Url                  string                                          `json:"url"`
+	HttpUrlToRepo        *string                                         `json:"http_url_to_repo,omitempty"`
+	Description          *string                                         `json:"description,omitempty"`
+	LocationId           *string                                         `json:"location_id,omitempty"`
+	DefaultBranch        *string                                         `json:"default_branch,omitempty"`
+	BlobBaseUrl          *string                                         `json:"blob_base_url,omitempty"`
+	LastCommit           *CreateAssetGITLABREPOSITORYRequestLastCommit   `json:"last_commit,omitempty"`
+	Owners               []CreateAssetGITLABREPOSITORYRequestOwnersInner `json:"owners,omitempty"`
+	Languages            []ENUMPROPERTIESLANGUAGESITEMS                  `json:"languages,omitempty"`
+	OwnerId              *float32                                        `json:"owner_id,omitempty"`
+	OwnerLogin           *string                                         `json:"owner_login,omitempty"`
+	OwnerHtmlUrl         *string                                         `json:"owner_html_url,omitempty"`
+	Fork                 *bool                                           `json:"fork,omitempty"`
+	Archived             *bool                                           `json:"archived,omitempty"`
+	Disabled             *bool                                           `json:"disabled,omitempty"`
+	Clonable             *bool                                           `json:"clonable,omitempty"`
+	Private              *bool                                           `json:"private,omitempty"`
+	Org                  *CreateAssetGITHUBREPOSITORYRequestOrg          `json:"org,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -460,6 +462,70 @@ func (o *CreateAssetGITHUBREPOSITORYRequest) SetLastCommit(v CreateAssetGITLABRE
 	o.LastCommit = &v
 }
 
+// GetOwners returns the Owners field value if set, zero value otherwise.
+func (o *CreateAssetGITHUBREPOSITORYRequest) GetOwners() []CreateAssetGITLABREPOSITORYRequestOwnersInner {
+	if o == nil || IsNil(o.Owners) {
+		var ret []CreateAssetGITLABREPOSITORYRequestOwnersInner
+		return ret
+	}
+	return o.Owners
+}
+
+// GetOwnersOk returns a tuple with the Owners field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetGITHUBREPOSITORYRequest) GetOwnersOk() ([]CreateAssetGITLABREPOSITORYRequestOwnersInner, bool) {
+	if o == nil || IsNil(o.Owners) {
+		return nil, false
+	}
+	return o.Owners, true
+}
+
+// HasOwners returns a boolean if a field has been set.
+func (o *CreateAssetGITHUBREPOSITORYRequest) HasOwners() bool {
+	if o != nil && !IsNil(o.Owners) {
+		return true
+	}
+
+	return false
+}
+
+// SetOwners gets a reference to the given []CreateAssetGITLABREPOSITORYRequestOwnersInner and assigns it to the Owners field.
+func (o *CreateAssetGITHUBREPOSITORYRequest) SetOwners(v []CreateAssetGITLABREPOSITORYRequestOwnersInner) {
+	o.Owners = v
+}
+
+// GetLanguages returns the Languages field value if set, zero value otherwise.
+func (o *CreateAssetGITHUBREPOSITORYRequest) GetLanguages() []ENUMPROPERTIESLANGUAGESITEMS {
+	if o == nil || IsNil(o.Languages) {
+		var ret []ENUMPROPERTIESLANGUAGESITEMS
+		return ret
+	}
+	return o.Languages
+}
+
+// GetLanguagesOk returns a tuple with the Languages field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetGITHUBREPOSITORYRequest) GetLanguagesOk() ([]ENUMPROPERTIESLANGUAGESITEMS, bool) {
+	if o == nil || IsNil(o.Languages) {
+		return nil, false
+	}
+	return o.Languages, true
+}
+
+// HasLanguages returns a boolean if a field has been set.
+func (o *CreateAssetGITHUBREPOSITORYRequest) HasLanguages() bool {
+	if o != nil && !IsNil(o.Languages) {
+		return true
+	}
+
+	return false
+}
+
+// SetLanguages gets a reference to the given []ENUMPROPERTIESLANGUAGESITEMS and assigns it to the Languages field.
+func (o *CreateAssetGITHUBREPOSITORYRequest) SetLanguages(v []ENUMPROPERTIESLANGUAGESITEMS) {
+	o.Languages = v
+}
+
 // GetOwnerId returns the OwnerId field value if set, zero value otherwise.
 func (o *CreateAssetGITHUBREPOSITORYRequest) GetOwnerId() float32 {
 	if o == nil || IsNil(o.OwnerId) {
@@ -791,6 +857,12 @@ func (o CreateAssetGITHUBREPOSITORYRequest) ToMap() (map[string]interface{}, err
 	if !IsNil(o.LastCommit) {
 		toSerialize["last_commit"] = o.LastCommit
 	}
+	if !IsNil(o.Owners) {
+		toSerialize["owners"] = o.Owners
+	}
+	if !IsNil(o.Languages) {
+		toSerialize["languages"] = o.Languages
+	}
 	if !IsNil(o.OwnerId) {
 		toSerialize["owner_id"] = o.OwnerId
 	}
@@ -876,6 +948,8 @@ func (o *CreateAssetGITHUBREPOSITORYRequest) UnmarshalJSON(data []byte) (err err
 		delete(additionalProperties, "default_branch")
 		delete(additionalProperties, "blob_base_url")
 		delete(additionalProperties, "last_commit")
+		delete(additionalProperties, "owners")
+		delete(additionalProperties, "languages")
 		delete(additionalProperties, "owner_id")
 		delete(additionalProperties, "owner_login")
 		delete(additionalProperties, "owner_html_url")

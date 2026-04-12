@@ -87,7 +87,7 @@ func UpdateAsset(
 	assetDescription *string,
 	assetFramework *v3.ENUMPROPERTIESFRAMEWORK,
 	assetOwners *[]string,
-	assetStatus *v3.ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS,
+	assetStatus *v3.ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS,
 	assetTagIDs *[]string,
 ) error {
 	client, err := newAPIV3Client()

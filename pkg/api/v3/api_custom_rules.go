@@ -168,7 +168,7 @@ func (r ApiDeleteCustomRuleRequest) Execute() (*DeleteCustomRule200Response, *ht
 /*
 DeleteCustomRule Delete a custom rule
 
-Update a custom rule for the organization.
+Delete a custom rule for the organization.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param customRuleId The ID of the custom rule to delete

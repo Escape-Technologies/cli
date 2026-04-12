@@ -36,9 +36,14 @@ type ApiRouteDetailed struct {
 	Parameters map[string]string `json:"parameters,omitempty"`
 	// The request count of the api route
 	RequestCount float32 `json:"requestCount"`
+	// Mean HTTP duration for this route in milliseconds, when available
+	MeanDuration *float32                                                     `json:"meanDuration,omitempty"`
+	Coverage     *ENUMPROPERTIESDATAITEMSPROPERTIESAPIROUTEPROPERTIESCOVERAGE `json:"coverage,omitempty"`
+	// Per-user or per-session coverage breakdown when available
+	CoverageByUser []CoverageByUserEntry `json:"coverageByUser,omitempty"`
 	// The return type of the api route
-	ReturnType           *string                                                                          `json:"returnType,omitempty"`
-	Source               ENUMPROPERTIESATTACHMENTSITEMSPROPERTIESTARGETPROPERTIESAPIROUTEPROPERTIESSOURCE `json:"source"`
+	ReturnType           *string                                                   `json:"returnType,omitempty"`
+	Source               ENUMPROPERTIESDATAITEMSPROPERTIESAPIROUTEPROPERTIESSOURCE `json:"source"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -48,7 +53,7 @@ type _ApiRouteDetailed ApiRouteDetailed
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewApiRouteDetailed(blacklisted bool, createdAt string, displayName string, id string, name string, operation string, requestCount float32, source ENUMPROPERTIESATTACHMENTSITEMSPROPERTIESTARGETPROPERTIESAPIROUTEPROPERTIESSOURCE) *ApiRouteDetailed {
+func NewApiRouteDetailed(blacklisted bool, createdAt string, displayName string, id string, name string, operation string, requestCount float32, source ENUMPROPERTIESDATAITEMSPROPERTIESAPIROUTEPROPERTIESSOURCE) *ApiRouteDetailed {
 	this := ApiRouteDetailed{}
 	this.Blacklisted = blacklisted
 	this.CreatedAt = createdAt
@@ -269,6 +274,102 @@ func (o *ApiRouteDetailed) SetRequestCount(v float32) {
 	o.RequestCount = v
 }
 
+// GetMeanDuration returns the MeanDuration field value if set, zero value otherwise.
+func (o *ApiRouteDetailed) GetMeanDuration() float32 {
+	if o == nil || IsNil(o.MeanDuration) {
+		var ret float32
+		return ret
+	}
+	return *o.MeanDuration
+}
+
+// GetMeanDurationOk returns a tuple with the MeanDuration field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApiRouteDetailed) GetMeanDurationOk() (*float32, bool) {
+	if o == nil || IsNil(o.MeanDuration) {
+		return nil, false
+	}
+	return o.MeanDuration, true
+}
+
+// HasMeanDuration returns a boolean if a field has been set.
+func (o *ApiRouteDetailed) HasMeanDuration() bool {
+	if o != nil && !IsNil(o.MeanDuration) {
+		return true
+	}
+
+	return false
+}
+
+// SetMeanDuration gets a reference to the given float32 and assigns it to the MeanDuration field.
+func (o *ApiRouteDetailed) SetMeanDuration(v float32) {
+	o.MeanDuration = &v
+}
+
+// GetCoverage returns the Coverage field value if set, zero value otherwise.
+func (o *ApiRouteDetailed) GetCoverage() ENUMPROPERTIESDATAITEMSPROPERTIESAPIROUTEPROPERTIESCOVERAGE {
+	if o == nil || IsNil(o.Coverage) {
+		var ret ENUMPROPERTIESDATAITEMSPROPERTIESAPIROUTEPROPERTIESCOVERAGE
+		return ret
+	}
+	return *o.Coverage
+}
+
+// GetCoverageOk returns a tuple with the Coverage field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApiRouteDetailed) GetCoverageOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESAPIROUTEPROPERTIESCOVERAGE, bool) {
+	if o == nil || IsNil(o.Coverage) {
+		return nil, false
+	}
+	return o.Coverage, true
+}
+
+// HasCoverage returns a boolean if a field has been set.
+func (o *ApiRouteDetailed) HasCoverage() bool {
+	if o != nil && !IsNil(o.Coverage) {
+		return true
+	}
+
+	return false
+}
+
+// SetCoverage gets a reference to the given ENUMPROPERTIESDATAITEMSPROPERTIESAPIROUTEPROPERTIESCOVERAGE and assigns it to the Coverage field.
+func (o *ApiRouteDetailed) SetCoverage(v ENUMPROPERTIESDATAITEMSPROPERTIESAPIROUTEPROPERTIESCOVERAGE) {
+	o.Coverage = &v
+}
+
+// GetCoverageByUser returns the CoverageByUser field value if set, zero value otherwise.
+func (o *ApiRouteDetailed) GetCoverageByUser() []CoverageByUserEntry {
+	if o == nil || IsNil(o.CoverageByUser) {
+		var ret []CoverageByUserEntry
+		return ret
+	}
+	return o.CoverageByUser
+}
+
+// GetCoverageByUserOk returns a tuple with the CoverageByUser field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApiRouteDetailed) GetCoverageByUserOk() ([]CoverageByUserEntry, bool) {
+	if o == nil || IsNil(o.CoverageByUser) {
+		return nil, false
+	}
+	return o.CoverageByUser, true
+}
+
+// HasCoverageByUser returns a boolean if a field has been set.
+func (o *ApiRouteDetailed) HasCoverageByUser() bool {
+	if o != nil && !IsNil(o.CoverageByUser) {
+		return true
+	}
+
+	return false
+}
+
+// SetCoverageByUser gets a reference to the given []CoverageByUserEntry and assigns it to the CoverageByUser field.
+func (o *ApiRouteDetailed) SetCoverageByUser(v []CoverageByUserEntry) {
+	o.CoverageByUser = v
+}
+
 // GetReturnType returns the ReturnType field value if set, zero value otherwise.
 func (o *ApiRouteDetailed) GetReturnType() string {
 	if o == nil || IsNil(o.ReturnType) {
@@ -302,9 +403,9 @@ func (o *ApiRouteDetailed) SetReturnType(v string) {
 }
 
 // GetSource returns the Source field value
-func (o *ApiRouteDetailed) GetSource() ENUMPROPERTIESATTACHMENTSITEMSPROPERTIESTARGETPROPERTIESAPIROUTEPROPERTIESSOURCE {
+func (o *ApiRouteDetailed) GetSource() ENUMPROPERTIESDATAITEMSPROPERTIESAPIROUTEPROPERTIESSOURCE {
 	if o == nil {
-		var ret ENUMPROPERTIESATTACHMENTSITEMSPROPERTIESTARGETPROPERTIESAPIROUTEPROPERTIESSOURCE
+		var ret ENUMPROPERTIESDATAITEMSPROPERTIESAPIROUTEPROPERTIESSOURCE
 		return ret
 	}
 
@@ -313,7 +414,7 @@ func (o *ApiRouteDetailed) GetSource() ENUMPROPERTIESATTACHMENTSITEMSPROPERTIEST
 
 // GetSourceOk returns a tuple with the Source field value
 // and a boolean to check if the value has been set.
-func (o *ApiRouteDetailed) GetSourceOk() (*ENUMPROPERTIESATTACHMENTSITEMSPROPERTIESTARGETPROPERTIESAPIROUTEPROPERTIESSOURCE, bool) {
+func (o *ApiRouteDetailed) GetSourceOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESAPIROUTEPROPERTIESSOURCE, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -321,7 +422,7 @@ func (o *ApiRouteDetailed) GetSourceOk() (*ENUMPROPERTIESATTACHMENTSITEMSPROPERT
 }
 
 // SetSource sets field value
-func (o *ApiRouteDetailed) SetSource(v ENUMPROPERTIESATTACHMENTSITEMSPROPERTIESTARGETPROPERTIESAPIROUTEPROPERTIESSOURCE) {
+func (o *ApiRouteDetailed) SetSource(v ENUMPROPERTIESDATAITEMSPROPERTIESAPIROUTEPROPERTIESSOURCE) {
 	o.Source = v
 }
 
@@ -345,6 +446,15 @@ func (o ApiRouteDetailed) ToMap() (map[string]interface{}, error) {
 		toSerialize["parameters"] = o.Parameters
 	}
 	toSerialize["requestCount"] = o.RequestCount
+	if !IsNil(o.MeanDuration) {
+		toSerialize["meanDuration"] = o.MeanDuration
+	}
+	if !IsNil(o.Coverage) {
+		toSerialize["coverage"] = o.Coverage
+	}
+	if !IsNil(o.CoverageByUser) {
+		toSerialize["coverageByUser"] = o.CoverageByUser
+	}
 	if !IsNil(o.ReturnType) {
 		toSerialize["returnType"] = o.ReturnType
 	}
@@ -407,6 +517,9 @@ func (o *ApiRouteDetailed) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "operation")
 		delete(additionalProperties, "parameters")
 		delete(additionalProperties, "requestCount")
+		delete(additionalProperties, "meanDuration")
+		delete(additionalProperties, "coverage")
+		delete(additionalProperties, "coverageByUser")
 		delete(additionalProperties, "returnType")
 		delete(additionalProperties, "source")
 		o.AdditionalProperties = additionalProperties

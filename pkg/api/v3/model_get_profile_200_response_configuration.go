@@ -29,7 +29,6 @@ type GetProfile200ResponseConfiguration struct {
 	SecurityTests         *GetProfile200ResponseConfigurationSecurityTests        `json:"security_tests,omitempty"`
 	Inference             *GetProfile200ResponseConfigurationInference            `json:"inference,omitempty"`
 	Network               *GetProfile200ResponseConfigurationNetwork              `json:"network,omitempty"`
-	ArgumentGeneration    *GetProfile200ResponseConfigurationArgumentGeneration   `json:"argument_generation,omitempty"`
 	SubdomainEnumeration  *GetProfile200ResponseConfigurationSubdomainEnumeration `json:"subdomain_enumeration,omitempty"`
 	PortScanning          *GetProfile200ResponseConfigurationPortScanning         `json:"port_scanning,omitempty"`
 	ServiceDiscovery      *GetProfile200ResponseConfigurationServiceDiscovery     `json:"service_discovery,omitempty"`
@@ -380,38 +379,6 @@ func (o *GetProfile200ResponseConfiguration) SetNetwork(v GetProfile200ResponseC
 	o.Network = &v
 }
 
-// GetArgumentGeneration returns the ArgumentGeneration field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfiguration) GetArgumentGeneration() GetProfile200ResponseConfigurationArgumentGeneration {
-	if o == nil || IsNil(o.ArgumentGeneration) {
-		var ret GetProfile200ResponseConfigurationArgumentGeneration
-		return ret
-	}
-	return *o.ArgumentGeneration
-}
-
-// GetArgumentGenerationOk returns a tuple with the ArgumentGeneration field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfiguration) GetArgumentGenerationOk() (*GetProfile200ResponseConfigurationArgumentGeneration, bool) {
-	if o == nil || IsNil(o.ArgumentGeneration) {
-		return nil, false
-	}
-	return o.ArgumentGeneration, true
-}
-
-// HasArgumentGeneration returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfiguration) HasArgumentGeneration() bool {
-	if o != nil && !IsNil(o.ArgumentGeneration) {
-		return true
-	}
-
-	return false
-}
-
-// SetArgumentGeneration gets a reference to the given GetProfile200ResponseConfigurationArgumentGeneration and assigns it to the ArgumentGeneration field.
-func (o *GetProfile200ResponseConfiguration) SetArgumentGeneration(v GetProfile200ResponseConfigurationArgumentGeneration) {
-	o.ArgumentGeneration = &v
-}
-
 // GetSubdomainEnumeration returns the SubdomainEnumeration field value if set, zero value otherwise.
 func (o *GetProfile200ResponseConfiguration) GetSubdomainEnumeration() GetProfile200ResponseConfigurationSubdomainEnumeration {
 	if o == nil || IsNil(o.SubdomainEnumeration) {
@@ -708,9 +675,6 @@ func (o GetProfile200ResponseConfiguration) ToMap() (map[string]interface{}, err
 	if !IsNil(o.Network) {
 		toSerialize["network"] = o.Network
 	}
-	if !IsNil(o.ArgumentGeneration) {
-		toSerialize["argument_generation"] = o.ArgumentGeneration
-	}
 	if !IsNil(o.SubdomainEnumeration) {
 		toSerialize["subdomain_enumeration"] = o.SubdomainEnumeration
 	}
@@ -767,7 +731,6 @@ func (o *GetProfile200ResponseConfiguration) UnmarshalJSON(data []byte) (err err
 		delete(additionalProperties, "security_tests")
 		delete(additionalProperties, "inference")
 		delete(additionalProperties, "network")
-		delete(additionalProperties, "argument_generation")
 		delete(additionalProperties, "subdomain_enumeration")
 		delete(additionalProperties, "port_scanning")
 		delete(additionalProperties, "service_discovery")

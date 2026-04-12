@@ -17,7 +17,7 @@ import (
 
 // UpdateWorkflowRequestActionsInner struct for UpdateWorkflowRequestActionsInner
 type UpdateWorkflowRequestActionsInner struct {
-	CreateExportWorkflowActionUsingJira    *CreateExportWorkflowActionUsingJira
+	CreateExportWorkflowActionUsingJira1   *CreateExportWorkflowActionUsingJira1
 	CreateExportWorkflowActionUsingWebhook *CreateExportWorkflowActionUsingWebhook
 	CreateExportWorkflowActionUsingWiz     *CreateExportWorkflowActionUsingWiz
 	CreateNotifyWorkflowActionUsingDiscord *CreateNotifyWorkflowActionUsingDiscord
@@ -29,17 +29,17 @@ type UpdateWorkflowRequestActionsInner struct {
 // Unmarshal JSON data into any of the pointers in the struct
 func (dst *UpdateWorkflowRequestActionsInner) UnmarshalJSON(data []byte) error {
 	var err error
-	// try to unmarshal JSON data into CreateExportWorkflowActionUsingJira
-	err = json.Unmarshal(data, &dst.CreateExportWorkflowActionUsingJira)
+	// try to unmarshal JSON data into CreateExportWorkflowActionUsingJira1
+	err = json.Unmarshal(data, &dst.CreateExportWorkflowActionUsingJira1)
 	if err == nil {
-		jsonCreateExportWorkflowActionUsingJira, _ := json.Marshal(dst.CreateExportWorkflowActionUsingJira)
-		if string(jsonCreateExportWorkflowActionUsingJira) == "{}" { // empty struct
-			dst.CreateExportWorkflowActionUsingJira = nil
+		jsonCreateExportWorkflowActionUsingJira1, _ := json.Marshal(dst.CreateExportWorkflowActionUsingJira1)
+		if string(jsonCreateExportWorkflowActionUsingJira1) == "{}" { // empty struct
+			dst.CreateExportWorkflowActionUsingJira1 = nil
 		} else {
-			return nil // data stored in dst.CreateExportWorkflowActionUsingJira, return on the first match
+			return nil // data stored in dst.CreateExportWorkflowActionUsingJira1, return on the first match
 		}
 	} else {
-		dst.CreateExportWorkflowActionUsingJira = nil
+		dst.CreateExportWorkflowActionUsingJira1 = nil
 	}
 
 	// try to unmarshal JSON data into CreateExportWorkflowActionUsingWebhook
@@ -125,8 +125,8 @@ func (dst *UpdateWorkflowRequestActionsInner) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src UpdateWorkflowRequestActionsInner) MarshalJSON() ([]byte, error) {
-	if src.CreateExportWorkflowActionUsingJira != nil {
-		return json.Marshal(&src.CreateExportWorkflowActionUsingJira)
+	if src.CreateExportWorkflowActionUsingJira1 != nil {
+		return json.Marshal(&src.CreateExportWorkflowActionUsingJira1)
 	}
 
 	if src.CreateExportWorkflowActionUsingWebhook != nil {

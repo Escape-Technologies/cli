@@ -23,23 +23,25 @@ type CreateAssetSOAPRequest struct {
 	// The list of project IDs bind the asset on.
 	ProjectIds []string `json:"projectIds,omitempty"`
 	// The custom name of the asset. If not provided, the default name will be used.
-	Name                      *string                                                                         `json:"name,omitempty"`
-	AssetClass                ENUMAPISERVICE                                                                  `json:"asset_class"`
-	ExtraMetadata             map[string]interface{}                                                          `json:"extra_metadata,omitempty"`
-	ScreenshotS3Key           *string                                                                         `json:"screenshot_s3_key,omitempty"`
-	AssetType                 ENUMSOAP                                                                        `json:"asset_type"`
-	Url                       string                                                                          `json:"url"`
-	Favicon                   *string                                                                         `json:"favicon,omitempty"`
-	ReachableVia              []string                                                                        `json:"reachable_via,omitempty"`
-	ReachableViaExternalProxy *bool                                                                           `json:"reachable_via_external_proxy,omitempty"`
-	Private                   *bool                                                                           `json:"private,omitempty"`
-	PrivateLocationId         *string                                                                         `json:"private_location_id,omitempty"`
-	Environment               *ENUMPROPERTIESENVIRONMENT                                                      `json:"environment,omitempty"`
-	CloudProvider             *ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER `json:"cloud_provider,omitempty"`
-	WafProvider               *ENUMPROPERTIESWAFPROVIDER                                                      `json:"waf_provider,omitempty"`
-	ThirdParty                *ENUMPROPERTIESTHIRDPARTY                                                       `json:"third_party,omitempty"`
-	Ips                       []string                                                                        `json:"ips,omitempty"`
-	RegionCountryCodes        []string                                                                        `json:"region_country_codes,omitempty"`
+	Name                      *string                                                                          `json:"name,omitempty"`
+	AssetClass                ENUMAPISERVICE                                                                   `json:"asset_class"`
+	ExtraMetadata             map[string]interface{}                                                           `json:"extra_metadata,omitempty"`
+	ScreenshotS3Key           *string                                                                          `json:"screenshot_s3_key,omitempty"`
+	AssetType                 ENUMSOAP                                                                         `json:"asset_type"`
+	Url                       string                                                                           `json:"url"`
+	Favicon                   *string                                                                          `json:"favicon,omitempty"`
+	ReachableVia              []string                                                                         `json:"reachable_via,omitempty"`
+	ReachableViaExternalProxy *bool                                                                            `json:"reachable_via_external_proxy,omitempty"`
+	Private                   *bool                                                                            `json:"private,omitempty"`
+	PrivateLocationId         *string                                                                          `json:"private_location_id,omitempty"`
+	Environment               *ENUMPROPERTIESENVIRONMENT                                                       `json:"environment,omitempty"`
+	CloudProvider             *ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER  `json:"cloud_provider,omitempty"`
+	WafProvider               *ENUMPROPERTIESWAFPROVIDER                                                       `json:"waf_provider,omitempty"`
+	AuthProtocol              *ENUMPROPERTIESAUTHPROTOCOL                                                      `json:"auth_protocol,omitempty"`
+	AuthTechnology            *ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESAUTHTECHNOLOGY `json:"auth_technology,omitempty"`
+	ThirdParty                *ENUMPROPERTIESTHIRDPARTY                                                        `json:"third_party,omitempty"`
+	Ips                       []string                                                                         `json:"ips,omitempty"`
+	RegionCountryCodes        []string                                                                         `json:"region_country_codes,omitempty"`
 	AdditionalProperties      map[string]interface{}
 }
 
@@ -521,6 +523,70 @@ func (o *CreateAssetSOAPRequest) SetWafProvider(v ENUMPROPERTIESWAFPROVIDER) {
 	o.WafProvider = &v
 }
 
+// GetAuthProtocol returns the AuthProtocol field value if set, zero value otherwise.
+func (o *CreateAssetSOAPRequest) GetAuthProtocol() ENUMPROPERTIESAUTHPROTOCOL {
+	if o == nil || IsNil(o.AuthProtocol) {
+		var ret ENUMPROPERTIESAUTHPROTOCOL
+		return ret
+	}
+	return *o.AuthProtocol
+}
+
+// GetAuthProtocolOk returns a tuple with the AuthProtocol field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetSOAPRequest) GetAuthProtocolOk() (*ENUMPROPERTIESAUTHPROTOCOL, bool) {
+	if o == nil || IsNil(o.AuthProtocol) {
+		return nil, false
+	}
+	return o.AuthProtocol, true
+}
+
+// HasAuthProtocol returns a boolean if a field has been set.
+func (o *CreateAssetSOAPRequest) HasAuthProtocol() bool {
+	if o != nil && !IsNil(o.AuthProtocol) {
+		return true
+	}
+
+	return false
+}
+
+// SetAuthProtocol gets a reference to the given ENUMPROPERTIESAUTHPROTOCOL and assigns it to the AuthProtocol field.
+func (o *CreateAssetSOAPRequest) SetAuthProtocol(v ENUMPROPERTIESAUTHPROTOCOL) {
+	o.AuthProtocol = &v
+}
+
+// GetAuthTechnology returns the AuthTechnology field value if set, zero value otherwise.
+func (o *CreateAssetSOAPRequest) GetAuthTechnology() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESAUTHTECHNOLOGY {
+	if o == nil || IsNil(o.AuthTechnology) {
+		var ret ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESAUTHTECHNOLOGY
+		return ret
+	}
+	return *o.AuthTechnology
+}
+
+// GetAuthTechnologyOk returns a tuple with the AuthTechnology field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetSOAPRequest) GetAuthTechnologyOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESAUTHTECHNOLOGY, bool) {
+	if o == nil || IsNil(o.AuthTechnology) {
+		return nil, false
+	}
+	return o.AuthTechnology, true
+}
+
+// HasAuthTechnology returns a boolean if a field has been set.
+func (o *CreateAssetSOAPRequest) HasAuthTechnology() bool {
+	if o != nil && !IsNil(o.AuthTechnology) {
+		return true
+	}
+
+	return false
+}
+
+// SetAuthTechnology gets a reference to the given ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESAUTHTECHNOLOGY and assigns it to the AuthTechnology field.
+func (o *CreateAssetSOAPRequest) SetAuthTechnology(v ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESAUTHTECHNOLOGY) {
+	o.AuthTechnology = &v
+}
+
 // GetThirdParty returns the ThirdParty field value if set, zero value otherwise.
 func (o *CreateAssetSOAPRequest) GetThirdParty() ENUMPROPERTIESTHIRDPARTY {
 	if o == nil || IsNil(o.ThirdParty) {
@@ -666,6 +732,12 @@ func (o CreateAssetSOAPRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.WafProvider) {
 		toSerialize["waf_provider"] = o.WafProvider
 	}
+	if !IsNil(o.AuthProtocol) {
+		toSerialize["auth_protocol"] = o.AuthProtocol
+	}
+	if !IsNil(o.AuthTechnology) {
+		toSerialize["auth_technology"] = o.AuthTechnology
+	}
 	if !IsNil(o.ThirdParty) {
 		toSerialize["third_party"] = o.ThirdParty
 	}
@@ -735,6 +807,8 @@ func (o *CreateAssetSOAPRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "environment")
 		delete(additionalProperties, "cloud_provider")
 		delete(additionalProperties, "waf_provider")
+		delete(additionalProperties, "auth_protocol")
+		delete(additionalProperties, "auth_technology")
 		delete(additionalProperties, "third_party")
 		delete(additionalProperties, "ips")
 		delete(additionalProperties, "region_country_codes")

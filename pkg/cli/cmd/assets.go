@@ -360,9 +360,9 @@ USE CASES:
 			framework = &f
 		}
 
-		var status *v3.ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS
+		var status *v3.ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS
 		if assetStatus != "" {
-			s := v3.ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS(assetStatus)
+			s := v3.ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS(assetStatus)
 			status = &s
 		}
 
@@ -509,7 +509,7 @@ func init() {
 	rootCmd.AddCommand(assetsCmd)
 	assetsCmd.AddCommand(assetsListCmd)
 	assetsListCmd.Flags().StringSliceVarP(&assetTypes, "types", "t", []string{}, fmt.Sprintf("filter by asset types (comma-separated): %v", v3.AllowedENUMPROPERTIESFRAMEWORKEnumValues))
-	assetsListCmd.Flags().StringSliceVarP(&assetStatuses, "statuses", "", []string{}, fmt.Sprintf("filter by monitoring status: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUSEnumValues))
+	assetsListCmd.Flags().StringSliceVarP(&assetStatuses, "statuses", "", []string{}, fmt.Sprintf("filter by monitoring status: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUSEnumValues))
 	assetsListCmd.Flags().StringVarP(&search, "search", "s", "", "free-text search across asset names and URLs")
 	assetsListCmd.Flags().BoolVarP(&manuallyCreated, "manually-created", "m", false, "show only manually created assets (exclude auto-discovered)")
 
@@ -521,7 +521,7 @@ func init() {
 	assetUpdateCmd.Flags().StringVarP(&assetDescription, "description", "d", "", "human-readable description of the asset")
 	assetUpdateCmd.Flags().StringVarP(&assetFramework, "framework", "f", "", fmt.Sprintf("asset framework/type classification: %v", v3.AllowedENUMPROPERTIESFRAMEWORKEnumValues))
 	assetUpdateCmd.Flags().StringSliceVarP(&assetOwners, "owners", "", []string{}, "comma-separated list of owner email addresses")
-	assetUpdateCmd.Flags().StringVarP(&assetStatus, "status", "s", "", fmt.Sprintf("monitoring status: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUSEnumValues))
+	assetUpdateCmd.Flags().StringVarP(&assetStatus, "status", "s", "", fmt.Sprintf("monitoring status: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUSEnumValues))
 	assetUpdateCmd.Flags().StringSliceVarP(&assetTagIDs, "tag-ids", "t", []string{}, "comma-separated list of tag IDs for organization")
 
 	assetsCmd.AddCommand(createAssetCmd)

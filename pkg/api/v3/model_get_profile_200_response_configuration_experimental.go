@@ -19,15 +19,20 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationExperimental{}
 
 // GetProfile200ResponseConfigurationExperimental struct for GetProfile200ResponseConfigurationExperimental
 type GetProfile200ResponseConfigurationExperimental struct {
-	BlstExplorationOnly            *bool    `json:"blst_exploration_only,omitempty"`
-	AgenticIdor                    *bool    `json:"agentic_idor,omitempty"`
-	PostmanNext                    *bool    `json:"postman_next,omitempty"`
-	HappyPathsRegressionTesting    []string `json:"happy_paths_regression_testing,omitempty"`
-	RegressionTestingFileUploadIds []string `json:"regression_testing_file_upload_ids,omitempty"`
-	AsmTechnologies                *bool    `json:"asm_technologies,omitempty"`
-	AsmCodeProjects                *bool    `json:"asm_code_projects,omitempty"`
-	LocationsNext                  *bool    `json:"locations_next,omitempty"`
-	ExternalCrawlingTask           *bool    `json:"external_crawling_task,omitempty"`
+	BlstExplorationOnly            *bool                                                                          `json:"blst_exploration_only,omitempty"`
+	AgenticIdor                    *bool                                                                          `json:"agentic_idor,omitempty"`
+	BusinessLogicAgent             *bool                                                                          `json:"business_logic_agent,omitempty"`
+	HappyPathsRegressionTesting    []string                                                                       `json:"happy_paths_regression_testing,omitempty"`
+	RegressionTestingFileUploadIds []string                                                                       `json:"regression_testing_file_upload_ids,omitempty"`
+	AsmTechnologies                *bool                                                                          `json:"asm_technologies,omitempty"`
+	AsmCodeProjects                *bool                                                                          `json:"asm_code_projects,omitempty"`
+	AsmEnumerateCodeProjects       *bool                                                                          `json:"asm_enumerate_code_projects,omitempty"`
+	LocationsNext                  *bool                                                                          `json:"locations_next,omitempty"`
+	ExternalCrawlingTask           *bool                                                                          `json:"external_crawling_task,omitempty"`
+	XssAgentModelAlias             *ENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS `json:"xss_agent_model_alias,omitempty"`
+	SqliAgentModelAlias            *ENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS `json:"sqli_agent_model_alias,omitempty"`
+	AsmCveAgent                    *bool                                                                          `json:"asm_cve_agent,omitempty"`
+	LoginPageAgent                 *bool                                                                          `json:"login_page_agent,omitempty"`
 	AdditionalProperties           map[string]interface{}
 }
 
@@ -114,36 +119,36 @@ func (o *GetProfile200ResponseConfigurationExperimental) SetAgenticIdor(v bool) 
 	o.AgenticIdor = &v
 }
 
-// GetPostmanNext returns the PostmanNext field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationExperimental) GetPostmanNext() bool {
-	if o == nil || IsNil(o.PostmanNext) {
+// GetBusinessLogicAgent returns the BusinessLogicAgent field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationExperimental) GetBusinessLogicAgent() bool {
+	if o == nil || IsNil(o.BusinessLogicAgent) {
 		var ret bool
 		return ret
 	}
-	return *o.PostmanNext
+	return *o.BusinessLogicAgent
 }
 
-// GetPostmanNextOk returns a tuple with the PostmanNext field value if set, nil otherwise
+// GetBusinessLogicAgentOk returns a tuple with the BusinessLogicAgent field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationExperimental) GetPostmanNextOk() (*bool, bool) {
-	if o == nil || IsNil(o.PostmanNext) {
+func (o *GetProfile200ResponseConfigurationExperimental) GetBusinessLogicAgentOk() (*bool, bool) {
+	if o == nil || IsNil(o.BusinessLogicAgent) {
 		return nil, false
 	}
-	return o.PostmanNext, true
+	return o.BusinessLogicAgent, true
 }
 
-// HasPostmanNext returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationExperimental) HasPostmanNext() bool {
-	if o != nil && !IsNil(o.PostmanNext) {
+// HasBusinessLogicAgent returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationExperimental) HasBusinessLogicAgent() bool {
+	if o != nil && !IsNil(o.BusinessLogicAgent) {
 		return true
 	}
 
 	return false
 }
 
-// SetPostmanNext gets a reference to the given bool and assigns it to the PostmanNext field.
-func (o *GetProfile200ResponseConfigurationExperimental) SetPostmanNext(v bool) {
-	o.PostmanNext = &v
+// SetBusinessLogicAgent gets a reference to the given bool and assigns it to the BusinessLogicAgent field.
+func (o *GetProfile200ResponseConfigurationExperimental) SetBusinessLogicAgent(v bool) {
+	o.BusinessLogicAgent = &v
 }
 
 // GetHappyPathsRegressionTesting returns the HappyPathsRegressionTesting field value if set, zero value otherwise.
@@ -274,6 +279,38 @@ func (o *GetProfile200ResponseConfigurationExperimental) SetAsmCodeProjects(v bo
 	o.AsmCodeProjects = &v
 }
 
+// GetAsmEnumerateCodeProjects returns the AsmEnumerateCodeProjects field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationExperimental) GetAsmEnumerateCodeProjects() bool {
+	if o == nil || IsNil(o.AsmEnumerateCodeProjects) {
+		var ret bool
+		return ret
+	}
+	return *o.AsmEnumerateCodeProjects
+}
+
+// GetAsmEnumerateCodeProjectsOk returns a tuple with the AsmEnumerateCodeProjects field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationExperimental) GetAsmEnumerateCodeProjectsOk() (*bool, bool) {
+	if o == nil || IsNil(o.AsmEnumerateCodeProjects) {
+		return nil, false
+	}
+	return o.AsmEnumerateCodeProjects, true
+}
+
+// HasAsmEnumerateCodeProjects returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationExperimental) HasAsmEnumerateCodeProjects() bool {
+	if o != nil && !IsNil(o.AsmEnumerateCodeProjects) {
+		return true
+	}
+
+	return false
+}
+
+// SetAsmEnumerateCodeProjects gets a reference to the given bool and assigns it to the AsmEnumerateCodeProjects field.
+func (o *GetProfile200ResponseConfigurationExperimental) SetAsmEnumerateCodeProjects(v bool) {
+	o.AsmEnumerateCodeProjects = &v
+}
+
 // GetLocationsNext returns the LocationsNext field value if set, zero value otherwise.
 func (o *GetProfile200ResponseConfigurationExperimental) GetLocationsNext() bool {
 	if o == nil || IsNil(o.LocationsNext) {
@@ -338,6 +375,134 @@ func (o *GetProfile200ResponseConfigurationExperimental) SetExternalCrawlingTask
 	o.ExternalCrawlingTask = &v
 }
 
+// GetXssAgentModelAlias returns the XssAgentModelAlias field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationExperimental) GetXssAgentModelAlias() ENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS {
+	if o == nil || IsNil(o.XssAgentModelAlias) {
+		var ret ENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS
+		return ret
+	}
+	return *o.XssAgentModelAlias
+}
+
+// GetXssAgentModelAliasOk returns a tuple with the XssAgentModelAlias field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationExperimental) GetXssAgentModelAliasOk() (*ENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS, bool) {
+	if o == nil || IsNil(o.XssAgentModelAlias) {
+		return nil, false
+	}
+	return o.XssAgentModelAlias, true
+}
+
+// HasXssAgentModelAlias returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationExperimental) HasXssAgentModelAlias() bool {
+	if o != nil && !IsNil(o.XssAgentModelAlias) {
+		return true
+	}
+
+	return false
+}
+
+// SetXssAgentModelAlias gets a reference to the given ENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS and assigns it to the XssAgentModelAlias field.
+func (o *GetProfile200ResponseConfigurationExperimental) SetXssAgentModelAlias(v ENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS) {
+	o.XssAgentModelAlias = &v
+}
+
+// GetSqliAgentModelAlias returns the SqliAgentModelAlias field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationExperimental) GetSqliAgentModelAlias() ENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS {
+	if o == nil || IsNil(o.SqliAgentModelAlias) {
+		var ret ENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS
+		return ret
+	}
+	return *o.SqliAgentModelAlias
+}
+
+// GetSqliAgentModelAliasOk returns a tuple with the SqliAgentModelAlias field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationExperimental) GetSqliAgentModelAliasOk() (*ENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS, bool) {
+	if o == nil || IsNil(o.SqliAgentModelAlias) {
+		return nil, false
+	}
+	return o.SqliAgentModelAlias, true
+}
+
+// HasSqliAgentModelAlias returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationExperimental) HasSqliAgentModelAlias() bool {
+	if o != nil && !IsNil(o.SqliAgentModelAlias) {
+		return true
+	}
+
+	return false
+}
+
+// SetSqliAgentModelAlias gets a reference to the given ENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS and assigns it to the SqliAgentModelAlias field.
+func (o *GetProfile200ResponseConfigurationExperimental) SetSqliAgentModelAlias(v ENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS) {
+	o.SqliAgentModelAlias = &v
+}
+
+// GetAsmCveAgent returns the AsmCveAgent field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationExperimental) GetAsmCveAgent() bool {
+	if o == nil || IsNil(o.AsmCveAgent) {
+		var ret bool
+		return ret
+	}
+	return *o.AsmCveAgent
+}
+
+// GetAsmCveAgentOk returns a tuple with the AsmCveAgent field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationExperimental) GetAsmCveAgentOk() (*bool, bool) {
+	if o == nil || IsNil(o.AsmCveAgent) {
+		return nil, false
+	}
+	return o.AsmCveAgent, true
+}
+
+// HasAsmCveAgent returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationExperimental) HasAsmCveAgent() bool {
+	if o != nil && !IsNil(o.AsmCveAgent) {
+		return true
+	}
+
+	return false
+}
+
+// SetAsmCveAgent gets a reference to the given bool and assigns it to the AsmCveAgent field.
+func (o *GetProfile200ResponseConfigurationExperimental) SetAsmCveAgent(v bool) {
+	o.AsmCveAgent = &v
+}
+
+// GetLoginPageAgent returns the LoginPageAgent field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationExperimental) GetLoginPageAgent() bool {
+	if o == nil || IsNil(o.LoginPageAgent) {
+		var ret bool
+		return ret
+	}
+	return *o.LoginPageAgent
+}
+
+// GetLoginPageAgentOk returns a tuple with the LoginPageAgent field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationExperimental) GetLoginPageAgentOk() (*bool, bool) {
+	if o == nil || IsNil(o.LoginPageAgent) {
+		return nil, false
+	}
+	return o.LoginPageAgent, true
+}
+
+// HasLoginPageAgent returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationExperimental) HasLoginPageAgent() bool {
+	if o != nil && !IsNil(o.LoginPageAgent) {
+		return true
+	}
+
+	return false
+}
+
+// SetLoginPageAgent gets a reference to the given bool and assigns it to the LoginPageAgent field.
+func (o *GetProfile200ResponseConfigurationExperimental) SetLoginPageAgent(v bool) {
+	o.LoginPageAgent = &v
+}
+
 func (o GetProfile200ResponseConfigurationExperimental) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -354,8 +519,8 @@ func (o GetProfile200ResponseConfigurationExperimental) ToMap() (map[string]inte
 	if !IsNil(o.AgenticIdor) {
 		toSerialize["agentic_idor"] = o.AgenticIdor
 	}
-	if !IsNil(o.PostmanNext) {
-		toSerialize["postman_next"] = o.PostmanNext
+	if !IsNil(o.BusinessLogicAgent) {
+		toSerialize["business_logic_agent"] = o.BusinessLogicAgent
 	}
 	if !IsNil(o.HappyPathsRegressionTesting) {
 		toSerialize["happy_paths_regression_testing"] = o.HappyPathsRegressionTesting
@@ -369,11 +534,26 @@ func (o GetProfile200ResponseConfigurationExperimental) ToMap() (map[string]inte
 	if !IsNil(o.AsmCodeProjects) {
 		toSerialize["asm_code_projects"] = o.AsmCodeProjects
 	}
+	if !IsNil(o.AsmEnumerateCodeProjects) {
+		toSerialize["asm_enumerate_code_projects"] = o.AsmEnumerateCodeProjects
+	}
 	if !IsNil(o.LocationsNext) {
 		toSerialize["locations_next"] = o.LocationsNext
 	}
 	if !IsNil(o.ExternalCrawlingTask) {
 		toSerialize["external_crawling_task"] = o.ExternalCrawlingTask
+	}
+	if !IsNil(o.XssAgentModelAlias) {
+		toSerialize["xss_agent_model_alias"] = o.XssAgentModelAlias
+	}
+	if !IsNil(o.SqliAgentModelAlias) {
+		toSerialize["sqli_agent_model_alias"] = o.SqliAgentModelAlias
+	}
+	if !IsNil(o.AsmCveAgent) {
+		toSerialize["asm_cve_agent"] = o.AsmCveAgent
+	}
+	if !IsNil(o.LoginPageAgent) {
+		toSerialize["login_page_agent"] = o.LoginPageAgent
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -399,13 +579,18 @@ func (o *GetProfile200ResponseConfigurationExperimental) UnmarshalJSON(data []by
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "blst_exploration_only")
 		delete(additionalProperties, "agentic_idor")
-		delete(additionalProperties, "postman_next")
+		delete(additionalProperties, "business_logic_agent")
 		delete(additionalProperties, "happy_paths_regression_testing")
 		delete(additionalProperties, "regression_testing_file_upload_ids")
 		delete(additionalProperties, "asm_technologies")
 		delete(additionalProperties, "asm_code_projects")
+		delete(additionalProperties, "asm_enumerate_code_projects")
 		delete(additionalProperties, "locations_next")
 		delete(additionalProperties, "external_crawling_task")
+		delete(additionalProperties, "xss_agent_model_alias")
+		delete(additionalProperties, "sqli_agent_model_alias")
+		delete(additionalProperties, "asm_cve_agent")
+		delete(additionalProperties, "login_page_agent")
 		o.AdditionalProperties = additionalProperties
 	}
 

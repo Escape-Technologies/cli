@@ -31,7 +31,11 @@ type ProfileSummarized struct {
 	// The initiators of the profile
 	Initiators []ENUMPROPERTIESDATAITEMSPROPERTIESINITIATORSITEMS `json:"initiators"`
 	// The cron of the profile
-	Cron                 *string                `json:"cron,omitempty"`
+	Cron *string `json:"cron,omitempty"`
+	// Schema asset id derived from the first `extraAssets` entry with class SCHEMA, or the legacy `assetSchemaId` when the link is not yet visible in `extraAssets`.
+	SchemaAssetId *string `json:"schemaAssetId,omitempty"`
+	// Extra assets linked to the profile
+	ExtraAssets          []ProfileExtraAsset    `json:"extraAssets"`
 	Asset                AssetDetailed          `json:"asset"`
 	Links                ProfileSummarizedLinks `json:"links"`
 	AdditionalProperties map[string]interface{}
@@ -43,13 +47,14 @@ type _ProfileSummarized ProfileSummarized
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProfileSummarized(id string, name string, description string, createdAt string, initiators []ENUMPROPERTIESDATAITEMSPROPERTIESINITIATORSITEMS, asset AssetDetailed, links ProfileSummarizedLinks) *ProfileSummarized {
+func NewProfileSummarized(id string, name string, description string, createdAt string, initiators []ENUMPROPERTIESDATAITEMSPROPERTIESINITIATORSITEMS, extraAssets []ProfileExtraAsset, asset AssetDetailed, links ProfileSummarizedLinks) *ProfileSummarized {
 	this := ProfileSummarized{}
 	this.Id = id
 	this.Name = name
 	this.Description = description
 	this.CreatedAt = createdAt
 	this.Initiators = initiators
+	this.ExtraAssets = extraAssets
 	this.Asset = asset
 	this.Links = links
 	return &this
@@ -215,6 +220,62 @@ func (o *ProfileSummarized) SetCron(v string) {
 	o.Cron = &v
 }
 
+// GetSchemaAssetId returns the SchemaAssetId field value if set, zero value otherwise.
+func (o *ProfileSummarized) GetSchemaAssetId() string {
+	if o == nil || IsNil(o.SchemaAssetId) {
+		var ret string
+		return ret
+	}
+	return *o.SchemaAssetId
+}
+
+// GetSchemaAssetIdOk returns a tuple with the SchemaAssetId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileSummarized) GetSchemaAssetIdOk() (*string, bool) {
+	if o == nil || IsNil(o.SchemaAssetId) {
+		return nil, false
+	}
+	return o.SchemaAssetId, true
+}
+
+// HasSchemaAssetId returns a boolean if a field has been set.
+func (o *ProfileSummarized) HasSchemaAssetId() bool {
+	if o != nil && !IsNil(o.SchemaAssetId) {
+		return true
+	}
+
+	return false
+}
+
+// SetSchemaAssetId gets a reference to the given string and assigns it to the SchemaAssetId field.
+func (o *ProfileSummarized) SetSchemaAssetId(v string) {
+	o.SchemaAssetId = &v
+}
+
+// GetExtraAssets returns the ExtraAssets field value
+func (o *ProfileSummarized) GetExtraAssets() []ProfileExtraAsset {
+	if o == nil {
+		var ret []ProfileExtraAsset
+		return ret
+	}
+
+	return o.ExtraAssets
+}
+
+// GetExtraAssetsOk returns a tuple with the ExtraAssets field value
+// and a boolean to check if the value has been set.
+func (o *ProfileSummarized) GetExtraAssetsOk() ([]ProfileExtraAsset, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ExtraAssets, true
+}
+
+// SetExtraAssets sets field value
+func (o *ProfileSummarized) SetExtraAssets(v []ProfileExtraAsset) {
+	o.ExtraAssets = v
+}
+
 // GetAsset returns the Asset field value
 func (o *ProfileSummarized) GetAsset() AssetDetailed {
 	if o == nil {
@@ -281,6 +342,10 @@ func (o ProfileSummarized) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Cron) {
 		toSerialize["cron"] = o.Cron
 	}
+	if !IsNil(o.SchemaAssetId) {
+		toSerialize["schemaAssetId"] = o.SchemaAssetId
+	}
+	toSerialize["extraAssets"] = o.ExtraAssets
 	toSerialize["asset"] = o.Asset
 	toSerialize["links"] = o.Links
 
@@ -301,6 +366,7 @@ func (o *ProfileSummarized) UnmarshalJSON(data []byte) (err error) {
 		"description",
 		"createdAt",
 		"initiators",
+		"extraAssets",
 		"asset",
 		"links",
 	}
@@ -338,6 +404,8 @@ func (o *ProfileSummarized) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "createdAt")
 		delete(additionalProperties, "initiators")
 		delete(additionalProperties, "cron")
+		delete(additionalProperties, "schemaAssetId")
+		delete(additionalProperties, "extraAssets")
 		delete(additionalProperties, "asset")
 		delete(additionalProperties, "links")
 		o.AdditionalProperties = additionalProperties
