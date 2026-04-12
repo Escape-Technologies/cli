@@ -19,35 +19,35 @@ var _ MappedNullable = &CreateWorkflowFilterUsingCustomFilterOnIssuesFilter{}
 
 // CreateWorkflowFilterUsingCustomFilterOnIssuesFilter struct for CreateWorkflowFilterUsingCustomFilterOnIssuesFilter
 type CreateWorkflowFilterUsingCustomFilterOnIssuesFilter struct {
-	Severities []ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY `json:"severities,omitempty"`
-	Risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS `json:"risks,omitempty"`
-	ProjectIds []string `json:"projectIds,omitempty"`
+	Severities []ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY                  `json:"severities,omitempty"`
+	Risks      []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS `json:"risks,omitempty"`
+	ProjectIds []string                                                     `json:"projectIds,omitempty"`
 	// Deprecated, use profileIds instead
-	ApplicationIds []string `json:"applicationIds,omitempty"`
-	ProfileIds []string `json:"profileIds,omitempty"`
-	AssetIds []string `json:"assetIds,omitempty"`
-	JiraTicket NullableBool `json:"jiraTicket,omitempty"`
-	Search NullableString `json:"search,omitempty"`
-	Categories []ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY `json:"categories,omitempty"`
-	ScannerKinds []ENUMPROPERTIESFILTERSITEMS1PROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS `json:"scannerKinds,omitempty"`
-	AssetClasses []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS `json:"assetClasses,omitempty"`
-	AssetTypes []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE `json:"assetTypes,omitempty"`
-	TagIds []string `json:"tagIds,omitempty"`
-	NoTags NullableBool `json:"noTags,omitempty"`
-	ScanIds []string `json:"scanIds,omitempty"`
-	SecurityTestUids []string `json:"securityTestUids,omitempty"`
-	Status []ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS `json:"status,omitempty"`
-	Ids []string `json:"ids,omitempty"`
-	BlacklistedIds []string `json:"blacklistedIds,omitempty"`
-	FullNames []string `json:"fullNames,omitempty"`
-	BlacklistedNames []string `json:"blacklistedNames,omitempty"`
-	AssetStatuses []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS `json:"assetStatuses,omitempty"`
-	AiFalsePositive NullableBool `json:"aiFalsePositive,omitempty"`
-	Agentic NullableBool `json:"agentic,omitempty"`
-	TargetIds []string `json:"targetIds,omitempty"`
-	Domains []string `json:"domains,omitempty"`
-	IgnoreInventory NullableBool `json:"ignoreInventory,omitempty"`
-	Ignored NullableBool `json:"ignored,omitempty"`
+	ApplicationIds       []string                                                                 `json:"applicationIds,omitempty"`
+	ProfileIds           []string                                                                 `json:"profileIds,omitempty"`
+	AssetIds             []string                                                                 `json:"assetIds,omitempty"`
+	JiraTicket           NullableBool                                                             `json:"jiraTicket,omitempty"`
+	Search               NullableString                                                           `json:"search,omitempty"`
+	Categories           []ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY                              `json:"categories,omitempty"`
+	ScannerKinds         []ENUMPROPERTIESFILTERSITEMS1PROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS `json:"scannerKinds,omitempty"`
+	AssetClasses         []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS       `json:"assetClasses,omitempty"`
+	AssetTypes           []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE        `json:"assetTypes,omitempty"`
+	TagIds               []string                                                                 `json:"tagIds,omitempty"`
+	NoTags               NullableBool                                                             `json:"noTags,omitempty"`
+	ScanIds              []string                                                                 `json:"scanIds,omitempty"`
+	SecurityTestUids     []string                                                                 `json:"securityTestUids,omitempty"`
+	Status               []ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS                                `json:"status,omitempty"`
+	Ids                  []string                                                                 `json:"ids,omitempty"`
+	BlacklistedIds       []string                                                                 `json:"blacklistedIds,omitempty"`
+	FullNames            []string                                                                 `json:"fullNames,omitempty"`
+	BlacklistedNames     []string                                                                 `json:"blacklistedNames,omitempty"`
+	AssetStatuses        []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS      `json:"assetStatuses,omitempty"`
+	AiFalsePositive      NullableBool                                                             `json:"aiFalsePositive,omitempty"`
+	Agentic              NullableBool                                                             `json:"agentic,omitempty"`
+	TargetIds            []string                                                                 `json:"targetIds,omitempty"`
+	Domains              []string                                                                 `json:"domains,omitempty"`
+	IgnoreInventory      NullableBool                                                             `json:"ignoreInventory,omitempty"`
+	Ignored              NullableBool                                                             `json:"ignored,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -300,6 +300,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasJiraTicket() bo
 func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) SetJiraTicket(v bool) {
 	o.JiraTicket.Set(&v)
 }
+
 // SetJiraTicketNil sets the value for JiraTicket to be an explicit nil
 func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) SetJiraTicketNil() {
 	o.JiraTicket.Set(nil)
@@ -342,6 +343,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasSearch() bool {
 func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) SetSearch(v string) {
 	o.Search.Set(&v)
 }
+
 // SetSearchNil sets the value for Search to be an explicit nil
 func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) SetSearchNil() {
 	o.Search.Set(nil)
@@ -549,6 +551,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasNoTags() bool {
 func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) SetNoTags(v bool) {
 	o.NoTags.Set(&v)
 }
+
 // SetNoTagsNil sets the value for NoTags to be an explicit nil
 func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) SetNoTagsNil() {
 	o.NoTags.Set(nil)
@@ -855,6 +858,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasAiFalsePositive
 func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) SetAiFalsePositive(v bool) {
 	o.AiFalsePositive.Set(&v)
 }
+
 // SetAiFalsePositiveNil sets the value for AiFalsePositive to be an explicit nil
 func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) SetAiFalsePositiveNil() {
 	o.AiFalsePositive.Set(nil)
@@ -897,6 +901,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasAgentic() bool 
 func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) SetAgentic(v bool) {
 	o.Agentic.Set(&v)
 }
+
 // SetAgenticNil sets the value for Agentic to be an explicit nil
 func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) SetAgenticNil() {
 	o.Agentic.Set(nil)
@@ -1005,6 +1010,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasIgnoreInventory
 func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) SetIgnoreInventory(v bool) {
 	o.IgnoreInventory.Set(&v)
 }
+
 // SetIgnoreInventoryNil sets the value for IgnoreInventory to be an explicit nil
 func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) SetIgnoreInventoryNil() {
 	o.IgnoreInventory.Set(nil)
@@ -1047,6 +1053,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasIgnored() bool 
 func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) SetIgnored(v bool) {
 	o.Ignored.Set(&v)
 }
+
 // SetIgnoredNil sets the value for Ignored to be an explicit nil
 func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) SetIgnoredNil() {
 	o.Ignored.Set(nil)
@@ -1058,7 +1065,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) UnsetIgnored() {
 }
 
 func (o CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -1242,5 +1249,3 @@ func (v *NullableCreateWorkflowFilterUsingCustomFilterOnIssuesFilter) UnmarshalJ
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

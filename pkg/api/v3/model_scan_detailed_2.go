@@ -45,14 +45,14 @@ type ScanDetailed2 struct {
 	// The id of the profile of the scan
 	ProfileId string `json:"profileId"`
 	// The id of the organization of the scan
-	OrganizationId string `json:"organizationId"`
-	CommitHash NullableString `json:"commitHash"`
-	CommitBranch NullableString `json:"commitBranch"`
-	CommitAuthor NullableString `json:"commitAuthor"`
-	CommitLink NullableString `json:"commitLink"`
-	CommitAuthorProfilePictureLink NullableString `json:"commitAuthorProfilePictureLink"`
-	Links ScanDetailedLinks `json:"links"`
-	AdditionalProperties map[string]interface{}
+	OrganizationId                 string            `json:"organizationId"`
+	CommitHash                     NullableString    `json:"commitHash"`
+	CommitBranch                   NullableString    `json:"commitBranch"`
+	CommitAuthor                   NullableString    `json:"commitAuthor"`
+	CommitLink                     NullableString    `json:"commitLink"`
+	CommitAuthorProfilePictureLink NullableString    `json:"commitAuthorProfilePictureLink"`
+	Links                          ScanDetailedLinks `json:"links"`
+	AdditionalProperties           map[string]interface{}
 }
 
 type _ScanDetailed2 ScanDetailed2
@@ -566,7 +566,7 @@ func (o *ScanDetailed2) SetLinks(v ScanDetailedLinks) {
 }
 
 func (o ScanDetailed2) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -633,10 +633,10 @@ func (o *ScanDetailed2) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -715,5 +715,3 @@ func (v *NullableScanDetailed2) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

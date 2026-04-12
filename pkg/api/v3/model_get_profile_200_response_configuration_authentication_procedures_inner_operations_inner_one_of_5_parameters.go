@@ -20,14 +20,14 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationAuthenticationProcedur
 
 // GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf5Parameters struct for GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf5Parameters
 type GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf5Parameters struct {
-	ProxyOverride NullableString `json:"proxy_override,omitempty"`
-	TenantId string `json:"tenant_id"`
-	ClientId string `json:"client_id"`
-	ResourceAppId string `json:"resource_app_id"`
-	CertificatePfxBase64 string `json:"certificate_pfx_base64"`
-	CertificatePassword NullableString `json:"certificate_password,omitempty"`
-	Scope NullableString `json:"scope,omitempty"`
-	TokenUrl NullableString `json:"token_url,omitempty"`
+	ProxyOverride        NullableString `json:"proxy_override,omitempty"`
+	TenantId             string         `json:"tenant_id"`
+	ClientId             string         `json:"client_id"`
+	ResourceAppId        string         `json:"resource_app_id"`
+	CertificatePfxBase64 string         `json:"certificate_pfx_base64"`
+	CertificatePassword  NullableString `json:"certificate_password,omitempty"`
+	Scope                NullableString `json:"scope,omitempty"`
+	TokenUrl             NullableString `json:"token_url,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -86,6 +86,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf5Parameters) SetProxyOverride(v string) {
 	o.ProxyOverride.Set(&v)
 }
+
 // SetProxyOverrideNil sets the value for ProxyOverride to be an explicit nil
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf5Parameters) SetProxyOverrideNil() {
 	o.ProxyOverride.Set(nil)
@@ -224,6 +225,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf5Parameters) SetCertificatePassword(v string) {
 	o.CertificatePassword.Set(&v)
 }
+
 // SetCertificatePasswordNil sets the value for CertificatePassword to be an explicit nil
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf5Parameters) SetCertificatePasswordNil() {
 	o.CertificatePassword.Set(nil)
@@ -266,6 +268,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf5Parameters) SetScope(v string) {
 	o.Scope.Set(&v)
 }
+
 // SetScopeNil sets the value for Scope to be an explicit nil
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf5Parameters) SetScopeNil() {
 	o.Scope.Set(nil)
@@ -308,6 +311,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf5Parameters) SetTokenUrl(v string) {
 	o.TokenUrl.Set(&v)
 }
+
 // SetTokenUrlNil sets the value for TokenUrl to be an explicit nil
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf5Parameters) SetTokenUrlNil() {
 	o.TokenUrl.Set(nil)
@@ -319,7 +323,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 }
 
 func (o GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf5Parameters) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -368,10 +372,10 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -439,5 +443,3 @@ func (v *NullableGetProfile200ResponseConfigurationAuthenticationProceduresInner
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

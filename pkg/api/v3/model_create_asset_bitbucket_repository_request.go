@@ -21,25 +21,25 @@ var _ MappedNullable = &CreateAssetBITBUCKETREPOSITORYRequest{}
 // CreateAssetBITBUCKETREPOSITORYRequest struct for CreateAssetBITBUCKETREPOSITORYRequest
 type CreateAssetBITBUCKETREPOSITORYRequest struct {
 	// The list of project IDs bind the asset on.
-	ProjectIds []string `json:"projectIds,omitempty"`
-	Name NullableString `json:"name,omitempty"`
-	AssetClass ENUMREPOSITORY `json:"asset_class"`
-	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
-	ScreenshotS3Key NullableString `json:"screenshot_s3_key,omitempty"`
-	AssetType ENUMBITBUCKETREPOSITORY `json:"asset_type"`
-	Url string `json:"url"`
-	HttpUrlToRepo NullableString `json:"http_url_to_repo,omitempty"`
-	Description NullableString `json:"description,omitempty"`
-	LocationId NullableString `json:"location_id,omitempty"`
-	DefaultBranch NullableString `json:"default_branch,omitempty"`
-	BlobBaseUrl NullableString `json:"blob_base_url,omitempty"`
-	LastCommit *CreateAssetGITLABREPOSITORYRequestLastCommit `json:"last_commit,omitempty"`
-	Owners []CreateAssetGITLABREPOSITORYRequestOwnersInner `json:"owners,omitempty"`
-	Languages []ENUMPROPERTIESLANGUAGESITEMS `json:"languages,omitempty"`
-	WorkspaceName NullableString `json:"workspace_name,omitempty"`
-	RepositoryName NullableString `json:"repository_name,omitempty"`
-	IsPrivate NullableBool `json:"is_private,omitempty"`
-	Org *CreateAssetBITBUCKETREPOSITORYRequestOrg `json:"org,omitempty"`
+	ProjectIds           []string                                        `json:"projectIds,omitempty"`
+	Name                 NullableString                                  `json:"name,omitempty"`
+	AssetClass           ENUMREPOSITORY                                  `json:"asset_class"`
+	ExtraMetadata        map[string]interface{}                          `json:"extra_metadata,omitempty"`
+	ScreenshotS3Key      NullableString                                  `json:"screenshot_s3_key,omitempty"`
+	AssetType            ENUMBITBUCKETREPOSITORY                         `json:"asset_type"`
+	Url                  string                                          `json:"url"`
+	HttpUrlToRepo        NullableString                                  `json:"http_url_to_repo,omitempty"`
+	Description          NullableString                                  `json:"description,omitempty"`
+	LocationId           NullableString                                  `json:"location_id,omitempty"`
+	DefaultBranch        NullableString                                  `json:"default_branch,omitempty"`
+	BlobBaseUrl          NullableString                                  `json:"blob_base_url,omitempty"`
+	LastCommit           *CreateAssetGITLABREPOSITORYRequestLastCommit   `json:"last_commit,omitempty"`
+	Owners               []CreateAssetGITLABREPOSITORYRequestOwnersInner `json:"owners,omitempty"`
+	Languages            []ENUMPROPERTIESLANGUAGESITEMS                  `json:"languages,omitempty"`
+	WorkspaceName        NullableString                                  `json:"workspace_name,omitempty"`
+	RepositoryName       NullableString                                  `json:"repository_name,omitempty"`
+	IsPrivate            NullableBool                                    `json:"is_private,omitempty"`
+	Org                  *CreateAssetBITBUCKETREPOSITORYRequestOrg       `json:"org,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -130,6 +130,7 @@ func (o *CreateAssetBITBUCKETREPOSITORYRequest) HasName() bool {
 func (o *CreateAssetBITBUCKETREPOSITORYRequest) SetName(v string) {
 	o.Name.Set(&v)
 }
+
 // SetNameNil sets the value for Name to be an explicit nil
 func (o *CreateAssetBITBUCKETREPOSITORYRequest) SetNameNil() {
 	o.Name.Set(nil)
@@ -228,6 +229,7 @@ func (o *CreateAssetBITBUCKETREPOSITORYRequest) HasScreenshotS3Key() bool {
 func (o *CreateAssetBITBUCKETREPOSITORYRequest) SetScreenshotS3Key(v string) {
 	o.ScreenshotS3Key.Set(&v)
 }
+
 // SetScreenshotS3KeyNil sets the value for ScreenshotS3Key to be an explicit nil
 func (o *CreateAssetBITBUCKETREPOSITORYRequest) SetScreenshotS3KeyNil() {
 	o.ScreenshotS3Key.Set(nil)
@@ -318,6 +320,7 @@ func (o *CreateAssetBITBUCKETREPOSITORYRequest) HasHttpUrlToRepo() bool {
 func (o *CreateAssetBITBUCKETREPOSITORYRequest) SetHttpUrlToRepo(v string) {
 	o.HttpUrlToRepo.Set(&v)
 }
+
 // SetHttpUrlToRepoNil sets the value for HttpUrlToRepo to be an explicit nil
 func (o *CreateAssetBITBUCKETREPOSITORYRequest) SetHttpUrlToRepoNil() {
 	o.HttpUrlToRepo.Set(nil)
@@ -360,6 +363,7 @@ func (o *CreateAssetBITBUCKETREPOSITORYRequest) HasDescription() bool {
 func (o *CreateAssetBITBUCKETREPOSITORYRequest) SetDescription(v string) {
 	o.Description.Set(&v)
 }
+
 // SetDescriptionNil sets the value for Description to be an explicit nil
 func (o *CreateAssetBITBUCKETREPOSITORYRequest) SetDescriptionNil() {
 	o.Description.Set(nil)
@@ -402,6 +406,7 @@ func (o *CreateAssetBITBUCKETREPOSITORYRequest) HasLocationId() bool {
 func (o *CreateAssetBITBUCKETREPOSITORYRequest) SetLocationId(v string) {
 	o.LocationId.Set(&v)
 }
+
 // SetLocationIdNil sets the value for LocationId to be an explicit nil
 func (o *CreateAssetBITBUCKETREPOSITORYRequest) SetLocationIdNil() {
 	o.LocationId.Set(nil)
@@ -444,6 +449,7 @@ func (o *CreateAssetBITBUCKETREPOSITORYRequest) HasDefaultBranch() bool {
 func (o *CreateAssetBITBUCKETREPOSITORYRequest) SetDefaultBranch(v string) {
 	o.DefaultBranch.Set(&v)
 }
+
 // SetDefaultBranchNil sets the value for DefaultBranch to be an explicit nil
 func (o *CreateAssetBITBUCKETREPOSITORYRequest) SetDefaultBranchNil() {
 	o.DefaultBranch.Set(nil)
@@ -486,6 +492,7 @@ func (o *CreateAssetBITBUCKETREPOSITORYRequest) HasBlobBaseUrl() bool {
 func (o *CreateAssetBITBUCKETREPOSITORYRequest) SetBlobBaseUrl(v string) {
 	o.BlobBaseUrl.Set(&v)
 }
+
 // SetBlobBaseUrlNil sets the value for BlobBaseUrl to be an explicit nil
 func (o *CreateAssetBITBUCKETREPOSITORYRequest) SetBlobBaseUrlNil() {
 	o.BlobBaseUrl.Set(nil)
@@ -626,6 +633,7 @@ func (o *CreateAssetBITBUCKETREPOSITORYRequest) HasWorkspaceName() bool {
 func (o *CreateAssetBITBUCKETREPOSITORYRequest) SetWorkspaceName(v string) {
 	o.WorkspaceName.Set(&v)
 }
+
 // SetWorkspaceNameNil sets the value for WorkspaceName to be an explicit nil
 func (o *CreateAssetBITBUCKETREPOSITORYRequest) SetWorkspaceNameNil() {
 	o.WorkspaceName.Set(nil)
@@ -668,6 +676,7 @@ func (o *CreateAssetBITBUCKETREPOSITORYRequest) HasRepositoryName() bool {
 func (o *CreateAssetBITBUCKETREPOSITORYRequest) SetRepositoryName(v string) {
 	o.RepositoryName.Set(&v)
 }
+
 // SetRepositoryNameNil sets the value for RepositoryName to be an explicit nil
 func (o *CreateAssetBITBUCKETREPOSITORYRequest) SetRepositoryNameNil() {
 	o.RepositoryName.Set(nil)
@@ -710,6 +719,7 @@ func (o *CreateAssetBITBUCKETREPOSITORYRequest) HasIsPrivate() bool {
 func (o *CreateAssetBITBUCKETREPOSITORYRequest) SetIsPrivate(v bool) {
 	o.IsPrivate.Set(&v)
 }
+
 // SetIsPrivateNil sets the value for IsPrivate to be an explicit nil
 func (o *CreateAssetBITBUCKETREPOSITORYRequest) SetIsPrivateNil() {
 	o.IsPrivate.Set(nil)
@@ -753,7 +763,7 @@ func (o *CreateAssetBITBUCKETREPOSITORYRequest) SetOrg(v CreateAssetBITBUCKETREP
 }
 
 func (o CreateAssetBITBUCKETREPOSITORYRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -836,10 +846,10 @@ func (o *CreateAssetBITBUCKETREPOSITORYRequest) UnmarshalJSON(data []byte) (err 
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -918,5 +928,3 @@ func (v *NullableCreateAssetBITBUCKETREPOSITORYRequest) UnmarshalJSON(src []byte
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

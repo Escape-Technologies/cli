@@ -19,19 +19,19 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationAuthenticationUsersInn
 
 // GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentials struct for GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentials
 type GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentials struct {
-	Username *string `json:"username,omitempty"`
-	Password *string `json:"password,omitempty"`
-	Headers []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner `json:"headers,omitempty"`
-	Cookies []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner `json:"cookies,omitempty"`
-	QueryParameters []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner `json:"query_parameters,omitempty"`
-	Body interface{} `json:"body,omitempty"`
-	LocalStorage map[string]map[string]string `json:"local_storage,omitempty"`
-	SessionStorage map[string]map[string]string `json:"session_storage,omitempty"`
-	Actions []GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInner `json:"actions,omitempty"`
-	PreLoginActions []GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInner `json:"pre_login_actions,omitempty"`
-	PostLoginActions []GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInner `json:"post_login_actions,omitempty"`
-	Digest NullableString `json:"digest,omitempty"`
-	Basic NullableString `json:"basic,omitempty"`
+	Username             *string                                                                                                     `json:"username,omitempty"`
+	Password             *string                                                                                                     `json:"password,omitempty"`
+	Headers              []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner `json:"headers,omitempty"`
+	Cookies              []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner `json:"cookies,omitempty"`
+	QueryParameters      []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner `json:"query_parameters,omitempty"`
+	Body                 interface{}                                                                                                 `json:"body,omitempty"`
+	LocalStorage         map[string]map[string]string                                                                                `json:"local_storage,omitempty"`
+	SessionStorage       map[string]map[string]string                                                                                `json:"session_storage,omitempty"`
+	Actions              []GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInner                         `json:"actions,omitempty"`
+	PreLoginActions      []GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInner                         `json:"pre_login_actions,omitempty"`
+	PostLoginActions     []GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInner                         `json:"post_login_actions,omitempty"`
+	Digest               NullableString                                                                                              `json:"digest,omitempty"`
+	Basic                NullableString                                                                                              `json:"basic,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -445,6 +445,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentials) 
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentials) SetDigest(v string) {
 	o.Digest.Set(&v)
 }
+
 // SetDigestNil sets the value for Digest to be an explicit nil
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentials) SetDigestNil() {
 	o.Digest.Set(nil)
@@ -487,6 +488,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentials) 
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentials) SetBasic(v string) {
 	o.Basic.Set(&v)
 }
+
 // SetBasicNil sets the value for Basic to be an explicit nil
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentials) SetBasicNil() {
 	o.Basic.Set(nil)
@@ -498,7 +500,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentials) 
 }
 
 func (o GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentials) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -622,5 +624,3 @@ func (v *NullableGetProfile200ResponseConfigurationAuthenticationUsersInnerCrede
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

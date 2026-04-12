@@ -20,29 +20,29 @@ var _ MappedNullable = &CreateAssetCODEPROJECTRequestRepositoryOneOf1{}
 
 // CreateAssetCODEPROJECTRequestRepositoryOneOf1 struct for CreateAssetCODEPROJECTRequestRepositoryOneOf1
 type CreateAssetCODEPROJECTRequestRepositoryOneOf1 struct {
-	AssetClass ENUMREPOSITORY `json:"asset_class"`
-	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
-	ScreenshotS3Key NullableString `json:"screenshot_s3_key,omitempty"`
-	AssetType ENUMGITHUBREPOSITORY `json:"asset_type"`
-	Url string `json:"url"`
-	Name NullableString `json:"name,omitempty"`
-	HttpUrlToRepo NullableString `json:"http_url_to_repo,omitempty"`
-	Description NullableString `json:"description,omitempty"`
-	LocationId NullableString `json:"location_id,omitempty"`
-	DefaultBranch NullableString `json:"default_branch,omitempty"`
-	BlobBaseUrl NullableString `json:"blob_base_url,omitempty"`
-	LastCommit *CreateAssetGITLABREPOSITORYRequestLastCommit `json:"last_commit,omitempty"`
-	Owners []CreateAssetGITLABREPOSITORYRequestOwnersInner `json:"owners,omitempty"`
-	Languages []ENUMPROPERTIESLANGUAGESITEMS `json:"languages,omitempty"`
-	OwnerId NullableFloat32 `json:"owner_id,omitempty"`
-	OwnerLogin NullableString `json:"owner_login,omitempty"`
-	OwnerHtmlUrl NullableString `json:"owner_html_url,omitempty"`
-	Fork NullableBool `json:"fork,omitempty"`
-	Archived NullableBool `json:"archived,omitempty"`
-	Disabled NullableBool `json:"disabled,omitempty"`
-	Clonable NullableBool `json:"clonable,omitempty"`
-	Private NullableBool `json:"private,omitempty"`
-	Org *CreateAssetGITHUBREPOSITORYRequestOrg `json:"org,omitempty"`
+	AssetClass           ENUMREPOSITORY                                  `json:"asset_class"`
+	ExtraMetadata        map[string]interface{}                          `json:"extra_metadata,omitempty"`
+	ScreenshotS3Key      NullableString                                  `json:"screenshot_s3_key,omitempty"`
+	AssetType            ENUMGITHUBREPOSITORY                            `json:"asset_type"`
+	Url                  string                                          `json:"url"`
+	Name                 NullableString                                  `json:"name,omitempty"`
+	HttpUrlToRepo        NullableString                                  `json:"http_url_to_repo,omitempty"`
+	Description          NullableString                                  `json:"description,omitempty"`
+	LocationId           NullableString                                  `json:"location_id,omitempty"`
+	DefaultBranch        NullableString                                  `json:"default_branch,omitempty"`
+	BlobBaseUrl          NullableString                                  `json:"blob_base_url,omitempty"`
+	LastCommit           *CreateAssetGITLABREPOSITORYRequestLastCommit   `json:"last_commit,omitempty"`
+	Owners               []CreateAssetGITLABREPOSITORYRequestOwnersInner `json:"owners,omitempty"`
+	Languages            []ENUMPROPERTIESLANGUAGESITEMS                  `json:"languages,omitempty"`
+	OwnerId              NullableFloat32                                 `json:"owner_id,omitempty"`
+	OwnerLogin           NullableString                                  `json:"owner_login,omitempty"`
+	OwnerHtmlUrl         NullableString                                  `json:"owner_html_url,omitempty"`
+	Fork                 NullableBool                                    `json:"fork,omitempty"`
+	Archived             NullableBool                                    `json:"archived,omitempty"`
+	Disabled             NullableBool                                    `json:"disabled,omitempty"`
+	Clonable             NullableBool                                    `json:"clonable,omitempty"`
+	Private              NullableBool                                    `json:"private,omitempty"`
+	Org                  *CreateAssetGITHUBREPOSITORYRequestOrg          `json:"org,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -156,6 +156,7 @@ func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf1) HasScreenshotS3Key() boo
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf1) SetScreenshotS3Key(v string) {
 	o.ScreenshotS3Key.Set(&v)
 }
+
 // SetScreenshotS3KeyNil sets the value for ScreenshotS3Key to be an explicit nil
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf1) SetScreenshotS3KeyNil() {
 	o.ScreenshotS3Key.Set(nil)
@@ -246,6 +247,7 @@ func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf1) HasName() bool {
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf1) SetName(v string) {
 	o.Name.Set(&v)
 }
+
 // SetNameNil sets the value for Name to be an explicit nil
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf1) SetNameNil() {
 	o.Name.Set(nil)
@@ -288,6 +290,7 @@ func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf1) HasHttpUrlToRepo() bool 
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf1) SetHttpUrlToRepo(v string) {
 	o.HttpUrlToRepo.Set(&v)
 }
+
 // SetHttpUrlToRepoNil sets the value for HttpUrlToRepo to be an explicit nil
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf1) SetHttpUrlToRepoNil() {
 	o.HttpUrlToRepo.Set(nil)
@@ -330,6 +333,7 @@ func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf1) HasDescription() bool {
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf1) SetDescription(v string) {
 	o.Description.Set(&v)
 }
+
 // SetDescriptionNil sets the value for Description to be an explicit nil
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf1) SetDescriptionNil() {
 	o.Description.Set(nil)
@@ -372,6 +376,7 @@ func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf1) HasLocationId() bool {
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf1) SetLocationId(v string) {
 	o.LocationId.Set(&v)
 }
+
 // SetLocationIdNil sets the value for LocationId to be an explicit nil
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf1) SetLocationIdNil() {
 	o.LocationId.Set(nil)
@@ -414,6 +419,7 @@ func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf1) HasDefaultBranch() bool 
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf1) SetDefaultBranch(v string) {
 	o.DefaultBranch.Set(&v)
 }
+
 // SetDefaultBranchNil sets the value for DefaultBranch to be an explicit nil
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf1) SetDefaultBranchNil() {
 	o.DefaultBranch.Set(nil)
@@ -456,6 +462,7 @@ func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf1) HasBlobBaseUrl() bool {
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf1) SetBlobBaseUrl(v string) {
 	o.BlobBaseUrl.Set(&v)
 }
+
 // SetBlobBaseUrlNil sets the value for BlobBaseUrl to be an explicit nil
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf1) SetBlobBaseUrlNil() {
 	o.BlobBaseUrl.Set(nil)
@@ -596,6 +603,7 @@ func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf1) HasOwnerId() bool {
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf1) SetOwnerId(v float32) {
 	o.OwnerId.Set(&v)
 }
+
 // SetOwnerIdNil sets the value for OwnerId to be an explicit nil
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf1) SetOwnerIdNil() {
 	o.OwnerId.Set(nil)
@@ -638,6 +646,7 @@ func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf1) HasOwnerLogin() bool {
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf1) SetOwnerLogin(v string) {
 	o.OwnerLogin.Set(&v)
 }
+
 // SetOwnerLoginNil sets the value for OwnerLogin to be an explicit nil
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf1) SetOwnerLoginNil() {
 	o.OwnerLogin.Set(nil)
@@ -680,6 +689,7 @@ func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf1) HasOwnerHtmlUrl() bool {
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf1) SetOwnerHtmlUrl(v string) {
 	o.OwnerHtmlUrl.Set(&v)
 }
+
 // SetOwnerHtmlUrlNil sets the value for OwnerHtmlUrl to be an explicit nil
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf1) SetOwnerHtmlUrlNil() {
 	o.OwnerHtmlUrl.Set(nil)
@@ -722,6 +732,7 @@ func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf1) HasFork() bool {
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf1) SetFork(v bool) {
 	o.Fork.Set(&v)
 }
+
 // SetForkNil sets the value for Fork to be an explicit nil
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf1) SetForkNil() {
 	o.Fork.Set(nil)
@@ -764,6 +775,7 @@ func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf1) HasArchived() bool {
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf1) SetArchived(v bool) {
 	o.Archived.Set(&v)
 }
+
 // SetArchivedNil sets the value for Archived to be an explicit nil
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf1) SetArchivedNil() {
 	o.Archived.Set(nil)
@@ -806,6 +818,7 @@ func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf1) HasDisabled() bool {
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf1) SetDisabled(v bool) {
 	o.Disabled.Set(&v)
 }
+
 // SetDisabledNil sets the value for Disabled to be an explicit nil
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf1) SetDisabledNil() {
 	o.Disabled.Set(nil)
@@ -848,6 +861,7 @@ func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf1) HasClonable() bool {
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf1) SetClonable(v bool) {
 	o.Clonable.Set(&v)
 }
+
 // SetClonableNil sets the value for Clonable to be an explicit nil
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf1) SetClonableNil() {
 	o.Clonable.Set(nil)
@@ -890,6 +904,7 @@ func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf1) HasPrivate() bool {
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf1) SetPrivate(v bool) {
 	o.Private.Set(&v)
 }
+
 // SetPrivateNil sets the value for Private to be an explicit nil
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf1) SetPrivateNil() {
 	o.Private.Set(nil)
@@ -933,7 +948,7 @@ func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf1) SetOrg(v CreateAssetGITH
 }
 
 func (o CreateAssetCODEPROJECTRequestRepositoryOneOf1) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -1028,10 +1043,10 @@ func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf1) UnmarshalJSON(data []byt
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -1114,5 +1129,3 @@ func (v *NullableCreateAssetCODEPROJECTRequestRepositoryOneOf1) UnmarshalJSON(sr
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

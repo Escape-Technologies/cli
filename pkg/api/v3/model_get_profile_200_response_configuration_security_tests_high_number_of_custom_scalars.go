@@ -19,8 +19,8 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationSecurityTestsHighNumbe
 
 // GetProfile200ResponseConfigurationSecurityTestsHighNumberOfCustomScalars struct for GetProfile200ResponseConfigurationSecurityTestsHighNumberOfCustomScalars
 type GetProfile200ResponseConfigurationSecurityTestsHighNumberOfCustomScalars struct {
-	Skip NullableBool `json:"skip,omitempty"`
-	DetectionThreshold NullableFloat32 `json:"detection_threshold,omitempty"`
+	Skip                 NullableBool    `json:"skip,omitempty"`
+	DetectionThreshold   NullableFloat32 `json:"detection_threshold,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -75,6 +75,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTestsHighNumberOfCustomScalar
 func (o *GetProfile200ResponseConfigurationSecurityTestsHighNumberOfCustomScalars) SetSkip(v bool) {
 	o.Skip.Set(&v)
 }
+
 // SetSkipNil sets the value for Skip to be an explicit nil
 func (o *GetProfile200ResponseConfigurationSecurityTestsHighNumberOfCustomScalars) SetSkipNil() {
 	o.Skip.Set(nil)
@@ -117,6 +118,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTestsHighNumberOfCustomScalar
 func (o *GetProfile200ResponseConfigurationSecurityTestsHighNumberOfCustomScalars) SetDetectionThreshold(v float32) {
 	o.DetectionThreshold.Set(&v)
 }
+
 // SetDetectionThresholdNil sets the value for DetectionThreshold to be an explicit nil
 func (o *GetProfile200ResponseConfigurationSecurityTestsHighNumberOfCustomScalars) SetDetectionThresholdNil() {
 	o.DetectionThreshold.Set(nil)
@@ -128,7 +130,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTestsHighNumberOfCustomScalar
 }
 
 func (o GetProfile200ResponseConfigurationSecurityTestsHighNumberOfCustomScalars) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -208,5 +210,3 @@ func (v *NullableGetProfile200ResponseConfigurationSecurityTestsHighNumberOfCust
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

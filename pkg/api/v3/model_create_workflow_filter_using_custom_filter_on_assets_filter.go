@@ -19,48 +19,48 @@ var _ MappedNullable = &CreateWorkflowFilterUsingCustomFilterOnAssetsFilter{}
 
 // CreateWorkflowFilterUsingCustomFilterOnAssetsFilter struct for CreateWorkflowFilterUsingCustomFilterOnAssetsFilter
 type CreateWorkflowFilterUsingCustomFilterOnAssetsFilter struct {
-	Search NullableString `json:"search,omitempty"`
-	Risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS `json:"risks,omitempty"`
-	TagIds []string `json:"tagIds,omitempty"`
-	ExactTagIds []string `json:"exactTagIds,omitempty"`
-	NoTags NullableBool `json:"noTags,omitempty"`
-	IntegrationIds []string `json:"integrationIds,omitempty"`
-	Types []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE `json:"types,omitempty"`
-	ExcludeTypes []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE `json:"excludeTypes,omitempty"`
-	Classes []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS `json:"classes,omitempty"`
-	ExcludeClasses []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS `json:"excludeClasses,omitempty"`
-	ProjectIds []string `json:"projectIds,omitempty"`
-	ExactProjectIds []string `json:"exactProjectIds,omitempty"`
-	NoProjects NullableBool `json:"noProjects,omitempty"`
-	ApplicationIds []string `json:"applicationIds,omitempty"`
-	FoundByProfileIds []string `json:"foundByProfileIds,omitempty"`
-	FoundByIntegrationIds []string `json:"foundByIntegrationIds,omitempty"`
-	ScanIds []string `json:"scanIds,omitempty"`
-	ScannerKinds []ENUMPROPERTIESFILTERSITEMS1PROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS `json:"scannerKinds,omitempty"`
-	WorkflowIds []string `json:"workflowIds,omitempty"`
-	Domains []string `json:"domains,omitempty"`
-	Environments []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESENVIRONMENT `json:"environments,omitempty"`
-	CloudProviders []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER `json:"cloudProviders,omitempty"`
-	WafProviders []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESWAFPROVIDER `json:"wafProviders,omitempty"`
-	Statuses []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS `json:"statuses,omitempty"`
-	Severities []ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY `json:"severities,omitempty"`
-	ParentLinks []CreateWorkflowFilterUsingCustomFilterOnAssetsFilterParentLinksInner `json:"parentLinks,omitempty"`
-	ChildrenLinks []CreateWorkflowFilterUsingCustomFilterOnAssetsFilterChildrenLinksInner `json:"childrenLinks,omitempty"`
-	SchemaIds []string `json:"schemaIds,omitempty"`
-	AssetIds []string `json:"assetIds,omitempty"`
-	BlacklistAssetIds []string `json:"blacklistAssetIds,omitempty"`
-	ManuallyCreated NullableBool `json:"manuallyCreated,omitempty"`
-	Sources []CreateWorkflowFilterUsingCustomFilterOnAssetsFilterSourcesInner `json:"sources,omitempty"`
-	Visibility []ENUMPROPERTIESVISIBILITY `json:"visibility,omitempty"`
-	Ports []float32 `json:"ports,omitempty"`
-	Frameworks []ENUMPROPERTIESFILTERSITEMS3PROPERTIESFILTERPROPERTIESFRAMEWORKSITEMS `json:"frameworks,omitempty"`
-	PrioritizeFavorites NullableBool `json:"prioritizeFavorites,omitempty"`
-	Languages []string `json:"languages,omitempty"`
-	OwnerEmails []string `json:"ownerEmails,omitempty"`
-	Uris []string `json:"uris,omitempty"`
-	TechnologyKeys []string `json:"technologyKeys,omitempty"`
-	OwnTechnologyKeys []string `json:"ownTechnologyKeys,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Search                NullableString                                                                   `json:"search,omitempty"`
+	Risks                 []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS                     `json:"risks,omitempty"`
+	TagIds                []string                                                                         `json:"tagIds,omitempty"`
+	ExactTagIds           []string                                                                         `json:"exactTagIds,omitempty"`
+	NoTags                NullableBool                                                                     `json:"noTags,omitempty"`
+	IntegrationIds        []string                                                                         `json:"integrationIds,omitempty"`
+	Types                 []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE                `json:"types,omitempty"`
+	ExcludeTypes          []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE                `json:"excludeTypes,omitempty"`
+	Classes               []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS               `json:"classes,omitempty"`
+	ExcludeClasses        []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS               `json:"excludeClasses,omitempty"`
+	ProjectIds            []string                                                                         `json:"projectIds,omitempty"`
+	ExactProjectIds       []string                                                                         `json:"exactProjectIds,omitempty"`
+	NoProjects            NullableBool                                                                     `json:"noProjects,omitempty"`
+	ApplicationIds        []string                                                                         `json:"applicationIds,omitempty"`
+	FoundByProfileIds     []string                                                                         `json:"foundByProfileIds,omitempty"`
+	FoundByIntegrationIds []string                                                                         `json:"foundByIntegrationIds,omitempty"`
+	ScanIds               []string                                                                         `json:"scanIds,omitempty"`
+	ScannerKinds          []ENUMPROPERTIESFILTERSITEMS1PROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS         `json:"scannerKinds,omitempty"`
+	WorkflowIds           []string                                                                         `json:"workflowIds,omitempty"`
+	Domains               []string                                                                         `json:"domains,omitempty"`
+	Environments          []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESENVIRONMENT   `json:"environments,omitempty"`
+	CloudProviders        []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER `json:"cloudProviders,omitempty"`
+	WafProviders          []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESWAFPROVIDER   `json:"wafProviders,omitempty"`
+	Statuses              []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS              `json:"statuses,omitempty"`
+	Severities            []ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY                                      `json:"severities,omitempty"`
+	ParentLinks           []CreateWorkflowFilterUsingCustomFilterOnAssetsFilterParentLinksInner            `json:"parentLinks,omitempty"`
+	ChildrenLinks         []CreateWorkflowFilterUsingCustomFilterOnAssetsFilterChildrenLinksInner          `json:"childrenLinks,omitempty"`
+	SchemaIds             []string                                                                         `json:"schemaIds,omitempty"`
+	AssetIds              []string                                                                         `json:"assetIds,omitempty"`
+	BlacklistAssetIds     []string                                                                         `json:"blacklistAssetIds,omitempty"`
+	ManuallyCreated       NullableBool                                                                     `json:"manuallyCreated,omitempty"`
+	Sources               []CreateWorkflowFilterUsingCustomFilterOnAssetsFilterSourcesInner                `json:"sources,omitempty"`
+	Visibility            []ENUMPROPERTIESVISIBILITY                                                       `json:"visibility,omitempty"`
+	Ports                 []float32                                                                        `json:"ports,omitempty"`
+	Frameworks            []ENUMPROPERTIESFILTERSITEMS3PROPERTIESFILTERPROPERTIESFRAMEWORKSITEMS           `json:"frameworks,omitempty"`
+	PrioritizeFavorites   NullableBool                                                                     `json:"prioritizeFavorites,omitempty"`
+	Languages             []string                                                                         `json:"languages,omitempty"`
+	OwnerEmails           []string                                                                         `json:"ownerEmails,omitempty"`
+	Uris                  []string                                                                         `json:"uris,omitempty"`
+	TechnologyKeys        []string                                                                         `json:"technologyKeys,omitempty"`
+	OwnTechnologyKeys     []string                                                                         `json:"ownTechnologyKeys,omitempty"`
+	AdditionalProperties  map[string]interface{}
 }
 
 type _CreateWorkflowFilterUsingCustomFilterOnAssetsFilter CreateWorkflowFilterUsingCustomFilterOnAssetsFilter
@@ -114,6 +114,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilter) HasSearch() bool {
 func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilter) SetSearch(v string) {
 	o.Search.Set(&v)
 }
+
 // SetSearchNil sets the value for Search to be an explicit nil
 func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilter) SetSearchNil() {
 	o.Search.Set(nil)
@@ -255,6 +256,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilter) HasNoTags() bool {
 func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilter) SetNoTags(v bool) {
 	o.NoTags.Set(&v)
 }
+
 // SetNoTagsNil sets the value for NoTags to be an explicit nil
 func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilter) SetNoTagsNil() {
 	o.NoTags.Set(nil)
@@ -528,6 +530,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilter) HasNoProjects() bo
 func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilter) SetNoProjects(v bool) {
 	o.NoProjects.Set(&v)
 }
+
 // SetNoProjectsNil sets the value for NoProjects to be an explicit nil
 func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilter) SetNoProjectsNil() {
 	o.NoProjects.Set(nil)
@@ -1131,6 +1134,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilter) HasManuallyCreated
 func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilter) SetManuallyCreated(v bool) {
 	o.ManuallyCreated.Set(&v)
 }
+
 // SetManuallyCreatedNil sets the value for ManuallyCreated to be an explicit nil
 func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilter) SetManuallyCreatedNil() {
 	o.ManuallyCreated.Set(nil)
@@ -1305,6 +1309,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilter) HasPrioritizeFavor
 func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilter) SetPrioritizeFavorites(v bool) {
 	o.PrioritizeFavorites.Set(&v)
 }
+
 // SetPrioritizeFavoritesNil sets the value for PrioritizeFavorites to be an explicit nil
 func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilter) SetPrioritizeFavoritesNil() {
 	o.PrioritizeFavorites.Set(nil)
@@ -1481,7 +1486,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilter) SetOwnTechnologyKe
 }
 
 func (o CreateWorkflowFilterUsingCustomFilterOnAssetsFilter) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -1717,5 +1722,3 @@ func (v *NullableCreateWorkflowFilterUsingCustomFilterOnAssetsFilter) UnmarshalJ
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

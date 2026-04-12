@@ -20,8 +20,8 @@ var _ MappedNullable = &CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf
 
 // CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf1 struct for CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf1
 type CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf1 struct {
-	Contains NullableString `json:"contains,omitempty"`
-	If ENUMPAGESELECTOR `json:"if"`
+	Contains             NullableString   `json:"contains,omitempty"`
+	If                   ENUMPAGESELECTOR `json:"if"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -77,6 +77,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf1) HasContains(
 func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf1) SetContains(v string) {
 	o.Contains.Set(&v)
 }
+
 // SetContainsNil sets the value for Contains to be an explicit nil
 func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf1) SetContainsNil() {
 	o.Contains.Set(nil)
@@ -112,7 +113,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf1) SetIf(v ENUM
 }
 
 func (o CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf1) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -146,10 +147,10 @@ func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf1) UnmarshalJSO
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -211,5 +212,3 @@ func (v *NullableCreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf1) Unma
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

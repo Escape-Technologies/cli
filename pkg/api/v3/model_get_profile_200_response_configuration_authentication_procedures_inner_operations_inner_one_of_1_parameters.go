@@ -20,21 +20,21 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationAuthenticationProcedur
 
 // GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1Parameters struct for GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1Parameters
 type GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1Parameters struct {
-	ProxyOverride NullableString `json:"proxy_override,omitempty"`
-	LoginUrl string `json:"login_url"`
-	AutoExtractionUrls []string `json:"auto_extraction_urls,omitempty"`
-	LoggedInDetectorText NullableString `json:"logged_in_detector_text,omitempty"`
-	LoggedInDetectorTimeout NullableFloat32 `json:"logged_in_detector_timeout,omitempty"`
-	StealthMode NullableBool `json:"stealth_mode,omitempty"`
-	LogoutDetection *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersLogoutDetection `json:"logout_detection,omitempty"`
-	AuthorizationUrl string `json:"authorization_url"`
-	TokenUrl string `json:"token_url"`
-	RedirectUri string `json:"redirect_uri"`
-	ClientId string `json:"client_id"`
-	ClientSecret string `json:"client_secret"`
-	UsePkce bool `json:"use_pkce"`
-	LoginTimeout float32 `json:"login_timeout"`
-	AdditionalProperties map[string]interface{}
+	ProxyOverride           NullableString                                                                                                 `json:"proxy_override,omitempty"`
+	LoginUrl                string                                                                                                         `json:"login_url"`
+	AutoExtractionUrls      []string                                                                                                       `json:"auto_extraction_urls,omitempty"`
+	LoggedInDetectorText    NullableString                                                                                                 `json:"logged_in_detector_text,omitempty"`
+	LoggedInDetectorTimeout NullableFloat32                                                                                                `json:"logged_in_detector_timeout,omitempty"`
+	StealthMode             NullableBool                                                                                                   `json:"stealth_mode,omitempty"`
+	LogoutDetection         *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersLogoutDetection `json:"logout_detection,omitempty"`
+	AuthorizationUrl        string                                                                                                         `json:"authorization_url"`
+	TokenUrl                string                                                                                                         `json:"token_url"`
+	RedirectUri             string                                                                                                         `json:"redirect_uri"`
+	ClientId                string                                                                                                         `json:"client_id"`
+	ClientSecret            string                                                                                                         `json:"client_secret"`
+	UsePkce                 bool                                                                                                           `json:"use_pkce"`
+	LoginTimeout            float32                                                                                                        `json:"login_timeout"`
+	AdditionalProperties    map[string]interface{}
 }
 
 type _GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1Parameters GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1Parameters
@@ -96,6 +96,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1Parameters) SetProxyOverride(v string) {
 	o.ProxyOverride.Set(&v)
 }
+
 // SetProxyOverrideNil sets the value for ProxyOverride to be an explicit nil
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1Parameters) SetProxyOverrideNil() {
 	o.ProxyOverride.Set(nil)
@@ -195,6 +196,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1Parameters) SetLoggedInDetectorText(v string) {
 	o.LoggedInDetectorText.Set(&v)
 }
+
 // SetLoggedInDetectorTextNil sets the value for LoggedInDetectorText to be an explicit nil
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1Parameters) SetLoggedInDetectorTextNil() {
 	o.LoggedInDetectorText.Set(nil)
@@ -237,6 +239,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1Parameters) SetLoggedInDetectorTimeout(v float32) {
 	o.LoggedInDetectorTimeout.Set(&v)
 }
+
 // SetLoggedInDetectorTimeoutNil sets the value for LoggedInDetectorTimeout to be an explicit nil
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1Parameters) SetLoggedInDetectorTimeoutNil() {
 	o.LoggedInDetectorTimeout.Set(nil)
@@ -279,6 +282,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1Parameters) SetStealthMode(v bool) {
 	o.StealthMode.Set(&v)
 }
+
 // SetStealthModeNil sets the value for StealthMode to be an explicit nil
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1Parameters) SetStealthModeNil() {
 	o.StealthMode.Set(nil)
@@ -490,7 +494,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 }
 
 func (o GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1Parameters) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -553,10 +557,10 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -630,5 +634,3 @@ func (v *NullableGetProfile200ResponseConfigurationAuthenticationProceduresInner
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

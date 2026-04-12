@@ -23,22 +23,22 @@ type CreateAssetDNSRequest struct {
 	// The list of project IDs bind the asset on.
 	ProjectIds []string `json:"projectIds,omitempty"`
 	// The custom name of the asset. If not provided, the default name will be used.
-	Name NullableString `json:"name,omitempty"`
-	AssetClass ENUMHOST `json:"asset_class"`
-	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
-	ScreenshotS3Key NullableString `json:"screenshot_s3_key,omitempty"`
-	AssetType ENUMDNS `json:"asset_type"`
-	Address string `json:"address"`
-	Favicon NullableString `json:"favicon,omitempty"`
-	OpenPorts []CreateAssetDNSRequestOpenPortsInner `json:"open_ports,omitempty"`
-	PortsInsights []float32 `json:"ports_insights,omitempty"`
-	PathsInsights []CreateAssetDNSRequestPathsInsightsInner `json:"paths_insights,omitempty"`
-	Private NullableBool `json:"private,omitempty"`
-	ThirdParty NullableENUMPROPERTIESTHIRDPARTY `json:"third_party,omitempty"`
-	DnsRecords []CreateAssetDNSRequestDnsRecordsInner `json:"dns_records,omitempty"`
-	Ips []string `json:"ips,omitempty"`
-	RegionCountryCodes []string `json:"region_country_codes,omitempty"`
-	Registrar NullableString `json:"registrar,omitempty"`
+	Name                 NullableString                            `json:"name,omitempty"`
+	AssetClass           ENUMHOST                                  `json:"asset_class"`
+	ExtraMetadata        map[string]interface{}                    `json:"extra_metadata,omitempty"`
+	ScreenshotS3Key      NullableString                            `json:"screenshot_s3_key,omitempty"`
+	AssetType            ENUMDNS                                   `json:"asset_type"`
+	Address              string                                    `json:"address"`
+	Favicon              NullableString                            `json:"favicon,omitempty"`
+	OpenPorts            []CreateAssetDNSRequestOpenPortsInner     `json:"open_ports,omitempty"`
+	PortsInsights        []float32                                 `json:"ports_insights,omitempty"`
+	PathsInsights        []CreateAssetDNSRequestPathsInsightsInner `json:"paths_insights,omitempty"`
+	Private              NullableBool                              `json:"private,omitempty"`
+	ThirdParty           NullableENUMPROPERTIESTHIRDPARTY          `json:"third_party,omitempty"`
+	DnsRecords           []CreateAssetDNSRequestDnsRecordsInner    `json:"dns_records,omitempty"`
+	Ips                  []string                                  `json:"ips,omitempty"`
+	RegionCountryCodes   []string                                  `json:"region_country_codes,omitempty"`
+	Registrar            NullableString                            `json:"registrar,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -129,6 +129,7 @@ func (o *CreateAssetDNSRequest) HasName() bool {
 func (o *CreateAssetDNSRequest) SetName(v string) {
 	o.Name.Set(&v)
 }
+
 // SetNameNil sets the value for Name to be an explicit nil
 func (o *CreateAssetDNSRequest) SetNameNil() {
 	o.Name.Set(nil)
@@ -227,6 +228,7 @@ func (o *CreateAssetDNSRequest) HasScreenshotS3Key() bool {
 func (o *CreateAssetDNSRequest) SetScreenshotS3Key(v string) {
 	o.ScreenshotS3Key.Set(&v)
 }
+
 // SetScreenshotS3KeyNil sets the value for ScreenshotS3Key to be an explicit nil
 func (o *CreateAssetDNSRequest) SetScreenshotS3KeyNil() {
 	o.ScreenshotS3Key.Set(nil)
@@ -317,6 +319,7 @@ func (o *CreateAssetDNSRequest) HasFavicon() bool {
 func (o *CreateAssetDNSRequest) SetFavicon(v string) {
 	o.Favicon.Set(&v)
 }
+
 // SetFaviconNil sets the value for Favicon to be an explicit nil
 func (o *CreateAssetDNSRequest) SetFaviconNil() {
 	o.Favicon.Set(nil)
@@ -458,6 +461,7 @@ func (o *CreateAssetDNSRequest) HasPrivate() bool {
 func (o *CreateAssetDNSRequest) SetPrivate(v bool) {
 	o.Private.Set(&v)
 }
+
 // SetPrivateNil sets the value for Private to be an explicit nil
 func (o *CreateAssetDNSRequest) SetPrivateNil() {
 	o.Private.Set(nil)
@@ -500,6 +504,7 @@ func (o *CreateAssetDNSRequest) HasThirdParty() bool {
 func (o *CreateAssetDNSRequest) SetThirdParty(v ENUMPROPERTIESTHIRDPARTY) {
 	o.ThirdParty.Set(&v)
 }
+
 // SetThirdPartyNil sets the value for ThirdParty to be an explicit nil
 func (o *CreateAssetDNSRequest) SetThirdPartyNil() {
 	o.ThirdParty.Set(nil)
@@ -641,6 +646,7 @@ func (o *CreateAssetDNSRequest) HasRegistrar() bool {
 func (o *CreateAssetDNSRequest) SetRegistrar(v string) {
 	o.Registrar.Set(&v)
 }
+
 // SetRegistrarNil sets the value for Registrar to be an explicit nil
 func (o *CreateAssetDNSRequest) SetRegistrarNil() {
 	o.Registrar.Set(nil)
@@ -652,7 +658,7 @@ func (o *CreateAssetDNSRequest) UnsetRegistrar() {
 }
 
 func (o CreateAssetDNSRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -729,10 +735,10 @@ func (o *CreateAssetDNSRequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -809,5 +815,3 @@ func (v *NullableCreateAssetDNSRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

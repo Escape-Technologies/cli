@@ -19,9 +19,9 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationSecurityTestsFrontendS
 
 // GetProfile200ResponseConfigurationSecurityTestsFrontendSqlInjection struct for GetProfile200ResponseConfigurationSecurityTestsFrontendSqlInjection
 type GetProfile200ResponseConfigurationSecurityTestsFrontendSqlInjection struct {
-	Skip NullableBool `json:"skip,omitempty"`
+	Skip                    NullableBool `json:"skip,omitempty"`
 	DedupeQueryParamsByName NullableBool `json:"dedupe_query_params_by_name,omitempty"`
-	AdditionalProperties map[string]interface{}
+	AdditionalProperties    map[string]interface{}
 }
 
 type _GetProfile200ResponseConfigurationSecurityTestsFrontendSqlInjection GetProfile200ResponseConfigurationSecurityTestsFrontendSqlInjection
@@ -75,6 +75,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTestsFrontendSqlInjection) Ha
 func (o *GetProfile200ResponseConfigurationSecurityTestsFrontendSqlInjection) SetSkip(v bool) {
 	o.Skip.Set(&v)
 }
+
 // SetSkipNil sets the value for Skip to be an explicit nil
 func (o *GetProfile200ResponseConfigurationSecurityTestsFrontendSqlInjection) SetSkipNil() {
 	o.Skip.Set(nil)
@@ -117,6 +118,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTestsFrontendSqlInjection) Ha
 func (o *GetProfile200ResponseConfigurationSecurityTestsFrontendSqlInjection) SetDedupeQueryParamsByName(v bool) {
 	o.DedupeQueryParamsByName.Set(&v)
 }
+
 // SetDedupeQueryParamsByNameNil sets the value for DedupeQueryParamsByName to be an explicit nil
 func (o *GetProfile200ResponseConfigurationSecurityTestsFrontendSqlInjection) SetDedupeQueryParamsByNameNil() {
 	o.DedupeQueryParamsByName.Set(nil)
@@ -128,7 +130,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTestsFrontendSqlInjection) Un
 }
 
 func (o GetProfile200ResponseConfigurationSecurityTestsFrontendSqlInjection) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -208,5 +210,3 @@ func (v *NullableGetProfile200ResponseConfigurationSecurityTestsFrontendSqlInjec
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

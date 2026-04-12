@@ -19,9 +19,9 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationFrontendDastScopeApiTe
 
 // GetProfile200ResponseConfigurationFrontendDastScopeApiTesting struct for GetProfile200ResponseConfigurationFrontendDastScopeApiTesting
 type GetProfile200ResponseConfigurationFrontendDastScopeApiTesting struct {
-	ExtendGlobalScope NullableBool `json:"extend_global_scope,omitempty"`
-	Allowlist []GetProfile200ResponseConfigurationFrontendDastScopeApiTestingAllowlistInner `json:"allowlist,omitempty"`
-	Blocklist []GetProfile200ResponseConfigurationFrontendDastScopeApiTestingAllowlistInner `json:"blocklist,omitempty"`
+	ExtendGlobalScope    NullableBool                                                                  `json:"extend_global_scope,omitempty"`
+	Allowlist            []GetProfile200ResponseConfigurationFrontendDastScopeApiTestingAllowlistInner `json:"allowlist,omitempty"`
+	Blocklist            []GetProfile200ResponseConfigurationFrontendDastScopeApiTestingAllowlistInner `json:"blocklist,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -76,6 +76,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDastScopeApiTesting) HasExten
 func (o *GetProfile200ResponseConfigurationFrontendDastScopeApiTesting) SetExtendGlobalScope(v bool) {
 	o.ExtendGlobalScope.Set(&v)
 }
+
 // SetExtendGlobalScopeNil sets the value for ExtendGlobalScope to be an explicit nil
 func (o *GetProfile200ResponseConfigurationFrontendDastScopeApiTesting) SetExtendGlobalScopeNil() {
 	o.ExtendGlobalScope.Set(nil)
@@ -153,7 +154,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDastScopeApiTesting) SetBlock
 }
 
 func (o GetProfile200ResponseConfigurationFrontendDastScopeApiTesting) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -237,5 +238,3 @@ func (v *NullableGetProfile200ResponseConfigurationFrontendDastScopeApiTesting) 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

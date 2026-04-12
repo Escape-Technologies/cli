@@ -19,11 +19,11 @@ var _ MappedNullable = &CreateAssetDNSRequestPathsInsightsInnerParametersParamet
 
 // CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValueEncodingValue struct for CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValueEncodingValue
 type CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValueEncodingValue struct {
-	ContentType NullableString `json:"contentType,omitempty"`
-	Style NullableString `json:"style,omitempty"`
-	Headers *map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValueEncodingValueHeadersValue `json:"headers,omitempty"`
-	Explode NullableBool `json:"explode,omitempty"`
-	AllowReserved NullableBool `json:"allowReserved,omitempty"`
+	ContentType          NullableString                                                                                                    `json:"contentType,omitempty"`
+	Style                NullableString                                                                                                    `json:"style,omitempty"`
+	Headers              *map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValueEncodingValueHeadersValue `json:"headers,omitempty"`
+	Explode              NullableBool                                                                                                      `json:"explode,omitempty"`
+	AllowReserved        NullableBool                                                                                                      `json:"allowReserved,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -78,6 +78,7 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContent
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValueEncodingValue) SetContentType(v string) {
 	o.ContentType.Set(&v)
 }
+
 // SetContentTypeNil sets the value for ContentType to be an explicit nil
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValueEncodingValue) SetContentTypeNil() {
 	o.ContentType.Set(nil)
@@ -120,6 +121,7 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContent
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValueEncodingValue) SetStyle(v string) {
 	o.Style.Set(&v)
 }
+
 // SetStyleNil sets the value for Style to be an explicit nil
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValueEncodingValue) SetStyleNil() {
 	o.Style.Set(nil)
@@ -194,6 +196,7 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContent
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValueEncodingValue) SetExplode(v bool) {
 	o.Explode.Set(&v)
 }
+
 // SetExplodeNil sets the value for Explode to be an explicit nil
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValueEncodingValue) SetExplodeNil() {
 	o.Explode.Set(nil)
@@ -236,6 +239,7 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContent
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValueEncodingValue) SetAllowReserved(v bool) {
 	o.AllowReserved.Set(&v)
 }
+
 // SetAllowReservedNil sets the value for AllowReserved to be an explicit nil
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValueEncodingValue) SetAllowReservedNil() {
 	o.AllowReserved.Set(nil)
@@ -247,7 +251,7 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContent
 }
 
 func (o CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValueEncodingValue) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -339,5 +343,3 @@ func (v *NullableCreateAssetDNSRequestPathsInsightsInnerParametersParametersInne
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

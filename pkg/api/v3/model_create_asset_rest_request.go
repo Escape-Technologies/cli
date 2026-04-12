@@ -23,29 +23,29 @@ type CreateAssetRESTRequest struct {
 	// The list of project IDs bind the asset on.
 	ProjectIds []string `json:"projectIds,omitempty"`
 	// The custom name of the asset. If not provided, the default name will be used.
-	Name NullableString `json:"name,omitempty"`
-	AssetClass ENUMAPISERVICE `json:"asset_class"`
-	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
-	ScreenshotS3Key NullableString `json:"screenshot_s3_key,omitempty"`
-	AssetType ENUMREST `json:"asset_type"`
-	Url string `json:"url"`
-	Favicon NullableString `json:"favicon,omitempty"`
-	ReachableVia []string `json:"reachable_via,omitempty"`
-	ReachableViaExternalProxy NullableBool `json:"reachable_via_external_proxy,omitempty"`
-	Private NullableBool `json:"private,omitempty"`
-	PrivateLocationId NullableString `json:"private_location_id,omitempty"`
-	Environment NullableENUMPROPERTIESENVIRONMENT `json:"environment,omitempty"`
-	CloudProvider NullableENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER `json:"cloud_provider,omitempty"`
-	WafProvider NullableENUMPROPERTIESWAFPROVIDER `json:"waf_provider,omitempty"`
-	AuthProtocol NullableENUMPROPERTIESAUTHPROTOCOL `json:"auth_protocol,omitempty"`
-	AuthTechnology NullableENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESAUTHTECHNOLOGY `json:"auth_technology,omitempty"`
-	ThirdParty NullableENUMPROPERTIESTHIRDPARTY `json:"third_party,omitempty"`
-	Ips []string `json:"ips,omitempty"`
-	RegionCountryCodes []string `json:"region_country_codes,omitempty"`
-	Framework *ENUMPROPERTIESFRAMEWORK `json:"framework,omitempty"`
-	Endpoints []CreateAssetDNSRequestPathsInsightsInner `json:"endpoints,omitempty"`
-	OpenapiUrl NullableString `json:"openapi_url,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Name                      NullableString                                                                          `json:"name,omitempty"`
+	AssetClass                ENUMAPISERVICE                                                                          `json:"asset_class"`
+	ExtraMetadata             map[string]interface{}                                                                  `json:"extra_metadata,omitempty"`
+	ScreenshotS3Key           NullableString                                                                          `json:"screenshot_s3_key,omitempty"`
+	AssetType                 ENUMREST                                                                                `json:"asset_type"`
+	Url                       string                                                                                  `json:"url"`
+	Favicon                   NullableString                                                                          `json:"favicon,omitempty"`
+	ReachableVia              []string                                                                                `json:"reachable_via,omitempty"`
+	ReachableViaExternalProxy NullableBool                                                                            `json:"reachable_via_external_proxy,omitempty"`
+	Private                   NullableBool                                                                            `json:"private,omitempty"`
+	PrivateLocationId         NullableString                                                                          `json:"private_location_id,omitempty"`
+	Environment               NullableENUMPROPERTIESENVIRONMENT                                                       `json:"environment,omitempty"`
+	CloudProvider             NullableENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER  `json:"cloud_provider,omitempty"`
+	WafProvider               NullableENUMPROPERTIESWAFPROVIDER                                                       `json:"waf_provider,omitempty"`
+	AuthProtocol              NullableENUMPROPERTIESAUTHPROTOCOL                                                      `json:"auth_protocol,omitempty"`
+	AuthTechnology            NullableENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESAUTHTECHNOLOGY `json:"auth_technology,omitempty"`
+	ThirdParty                NullableENUMPROPERTIESTHIRDPARTY                                                        `json:"third_party,omitempty"`
+	Ips                       []string                                                                                `json:"ips,omitempty"`
+	RegionCountryCodes        []string                                                                                `json:"region_country_codes,omitempty"`
+	Framework                 *ENUMPROPERTIESFRAMEWORK                                                                `json:"framework,omitempty"`
+	Endpoints                 []CreateAssetDNSRequestPathsInsightsInner                                               `json:"endpoints,omitempty"`
+	OpenapiUrl                NullableString                                                                          `json:"openapi_url,omitempty"`
+	AdditionalProperties      map[string]interface{}
 }
 
 type _CreateAssetRESTRequest CreateAssetRESTRequest
@@ -135,6 +135,7 @@ func (o *CreateAssetRESTRequest) HasName() bool {
 func (o *CreateAssetRESTRequest) SetName(v string) {
 	o.Name.Set(&v)
 }
+
 // SetNameNil sets the value for Name to be an explicit nil
 func (o *CreateAssetRESTRequest) SetNameNil() {
 	o.Name.Set(nil)
@@ -233,6 +234,7 @@ func (o *CreateAssetRESTRequest) HasScreenshotS3Key() bool {
 func (o *CreateAssetRESTRequest) SetScreenshotS3Key(v string) {
 	o.ScreenshotS3Key.Set(&v)
 }
+
 // SetScreenshotS3KeyNil sets the value for ScreenshotS3Key to be an explicit nil
 func (o *CreateAssetRESTRequest) SetScreenshotS3KeyNil() {
 	o.ScreenshotS3Key.Set(nil)
@@ -323,6 +325,7 @@ func (o *CreateAssetRESTRequest) HasFavicon() bool {
 func (o *CreateAssetRESTRequest) SetFavicon(v string) {
 	o.Favicon.Set(&v)
 }
+
 // SetFaviconNil sets the value for Favicon to be an explicit nil
 func (o *CreateAssetRESTRequest) SetFaviconNil() {
 	o.Favicon.Set(nil)
@@ -398,6 +401,7 @@ func (o *CreateAssetRESTRequest) HasReachableViaExternalProxy() bool {
 func (o *CreateAssetRESTRequest) SetReachableViaExternalProxy(v bool) {
 	o.ReachableViaExternalProxy.Set(&v)
 }
+
 // SetReachableViaExternalProxyNil sets the value for ReachableViaExternalProxy to be an explicit nil
 func (o *CreateAssetRESTRequest) SetReachableViaExternalProxyNil() {
 	o.ReachableViaExternalProxy.Set(nil)
@@ -440,6 +444,7 @@ func (o *CreateAssetRESTRequest) HasPrivate() bool {
 func (o *CreateAssetRESTRequest) SetPrivate(v bool) {
 	o.Private.Set(&v)
 }
+
 // SetPrivateNil sets the value for Private to be an explicit nil
 func (o *CreateAssetRESTRequest) SetPrivateNil() {
 	o.Private.Set(nil)
@@ -482,6 +487,7 @@ func (o *CreateAssetRESTRequest) HasPrivateLocationId() bool {
 func (o *CreateAssetRESTRequest) SetPrivateLocationId(v string) {
 	o.PrivateLocationId.Set(&v)
 }
+
 // SetPrivateLocationIdNil sets the value for PrivateLocationId to be an explicit nil
 func (o *CreateAssetRESTRequest) SetPrivateLocationIdNil() {
 	o.PrivateLocationId.Set(nil)
@@ -524,6 +530,7 @@ func (o *CreateAssetRESTRequest) HasEnvironment() bool {
 func (o *CreateAssetRESTRequest) SetEnvironment(v ENUMPROPERTIESENVIRONMENT) {
 	o.Environment.Set(&v)
 }
+
 // SetEnvironmentNil sets the value for Environment to be an explicit nil
 func (o *CreateAssetRESTRequest) SetEnvironmentNil() {
 	o.Environment.Set(nil)
@@ -566,6 +573,7 @@ func (o *CreateAssetRESTRequest) HasCloudProvider() bool {
 func (o *CreateAssetRESTRequest) SetCloudProvider(v ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER) {
 	o.CloudProvider.Set(&v)
 }
+
 // SetCloudProviderNil sets the value for CloudProvider to be an explicit nil
 func (o *CreateAssetRESTRequest) SetCloudProviderNil() {
 	o.CloudProvider.Set(nil)
@@ -608,6 +616,7 @@ func (o *CreateAssetRESTRequest) HasWafProvider() bool {
 func (o *CreateAssetRESTRequest) SetWafProvider(v ENUMPROPERTIESWAFPROVIDER) {
 	o.WafProvider.Set(&v)
 }
+
 // SetWafProviderNil sets the value for WafProvider to be an explicit nil
 func (o *CreateAssetRESTRequest) SetWafProviderNil() {
 	o.WafProvider.Set(nil)
@@ -650,6 +659,7 @@ func (o *CreateAssetRESTRequest) HasAuthProtocol() bool {
 func (o *CreateAssetRESTRequest) SetAuthProtocol(v ENUMPROPERTIESAUTHPROTOCOL) {
 	o.AuthProtocol.Set(&v)
 }
+
 // SetAuthProtocolNil sets the value for AuthProtocol to be an explicit nil
 func (o *CreateAssetRESTRequest) SetAuthProtocolNil() {
 	o.AuthProtocol.Set(nil)
@@ -692,6 +702,7 @@ func (o *CreateAssetRESTRequest) HasAuthTechnology() bool {
 func (o *CreateAssetRESTRequest) SetAuthTechnology(v ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESAUTHTECHNOLOGY) {
 	o.AuthTechnology.Set(&v)
 }
+
 // SetAuthTechnologyNil sets the value for AuthTechnology to be an explicit nil
 func (o *CreateAssetRESTRequest) SetAuthTechnologyNil() {
 	o.AuthTechnology.Set(nil)
@@ -734,6 +745,7 @@ func (o *CreateAssetRESTRequest) HasThirdParty() bool {
 func (o *CreateAssetRESTRequest) SetThirdParty(v ENUMPROPERTIESTHIRDPARTY) {
 	o.ThirdParty.Set(&v)
 }
+
 // SetThirdPartyNil sets the value for ThirdParty to be an explicit nil
 func (o *CreateAssetRESTRequest) SetThirdPartyNil() {
 	o.ThirdParty.Set(nil)
@@ -907,6 +919,7 @@ func (o *CreateAssetRESTRequest) HasOpenapiUrl() bool {
 func (o *CreateAssetRESTRequest) SetOpenapiUrl(v string) {
 	o.OpenapiUrl.Set(&v)
 }
+
 // SetOpenapiUrlNil sets the value for OpenapiUrl to be an explicit nil
 func (o *CreateAssetRESTRequest) SetOpenapiUrlNil() {
 	o.OpenapiUrl.Set(nil)
@@ -918,7 +931,7 @@ func (o *CreateAssetRESTRequest) UnsetOpenapiUrl() {
 }
 
 func (o CreateAssetRESTRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -1013,10 +1026,10 @@ func (o *CreateAssetRESTRequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -1099,5 +1112,3 @@ func (v *NullableCreateAssetRESTRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

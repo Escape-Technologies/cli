@@ -20,13 +20,13 @@ var _ MappedNullable = &CreateExportWorkflowActionUsingJiraParameters{}
 
 // CreateExportWorkflowActionUsingJiraParameters struct for CreateExportWorkflowActionUsingJiraParameters
 type CreateExportWorkflowActionUsingJiraParameters struct {
-	ProjectId string `json:"projectId"`
-	IssueType string `json:"issueType"`
-	PropertiesMapping []CreateExportWorkflowActionUsingJiraParametersPropertiesMappingInner `json:"propertiesMapping"`
+	ProjectId               string                                                                      `json:"projectId"`
+	IssueType               string                                                                      `json:"issueType"`
+	PropertiesMapping       []CreateExportWorkflowActionUsingJiraParametersPropertiesMappingInner       `json:"propertiesMapping"`
 	StaticPropertiesMapping []CreateExportWorkflowActionUsingJiraParametersStaticPropertiesMappingInner `json:"staticPropertiesMapping,omitempty"`
-	ParentKey NullableString `json:"parentKey,omitempty"`
-	DisableDefaultMappings NullableBool `json:"disableDefaultMappings,omitempty"`
-	AdditionalProperties map[string]interface{}
+	ParentKey               NullableString                                                              `json:"parentKey,omitempty"`
+	DisableDefaultMappings  NullableBool                                                                `json:"disableDefaultMappings,omitempty"`
+	AdditionalProperties    map[string]interface{}
 }
 
 type _CreateExportWorkflowActionUsingJiraParameters CreateExportWorkflowActionUsingJiraParameters
@@ -191,6 +191,7 @@ func (o *CreateExportWorkflowActionUsingJiraParameters) HasParentKey() bool {
 func (o *CreateExportWorkflowActionUsingJiraParameters) SetParentKey(v string) {
 	o.ParentKey.Set(&v)
 }
+
 // SetParentKeyNil sets the value for ParentKey to be an explicit nil
 func (o *CreateExportWorkflowActionUsingJiraParameters) SetParentKeyNil() {
 	o.ParentKey.Set(nil)
@@ -233,6 +234,7 @@ func (o *CreateExportWorkflowActionUsingJiraParameters) HasDisableDefaultMapping
 func (o *CreateExportWorkflowActionUsingJiraParameters) SetDisableDefaultMappings(v bool) {
 	o.DisableDefaultMappings.Set(&v)
 }
+
 // SetDisableDefaultMappingsNil sets the value for DisableDefaultMappings to be an explicit nil
 func (o *CreateExportWorkflowActionUsingJiraParameters) SetDisableDefaultMappingsNil() {
 	o.DisableDefaultMappings.Set(nil)
@@ -244,7 +246,7 @@ func (o *CreateExportWorkflowActionUsingJiraParameters) UnsetDisableDefaultMappi
 }
 
 func (o CreateExportWorkflowActionUsingJiraParameters) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -288,10 +290,10 @@ func (o *CreateExportWorkflowActionUsingJiraParameters) UnmarshalJSON(data []byt
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -357,5 +359,3 @@ func (v *NullableCreateExportWorkflowActionUsingJiraParameters) UnmarshalJSON(sr
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

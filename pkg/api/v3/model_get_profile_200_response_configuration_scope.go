@@ -19,9 +19,9 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationScope{}
 
 // GetProfile200ResponseConfigurationScope struct for GetProfile200ResponseConfigurationScope
 type GetProfile200ResponseConfigurationScope struct {
-	UseDefaults NullableBool `json:"use_defaults,omitempty"`
-	Allowlist []GetProfile200ResponseConfigurationScopeAllowlistInner `json:"allowlist,omitempty"`
-	Blocklist []GetProfile200ResponseConfigurationScopeAllowlistInner `json:"blocklist,omitempty"`
+	UseDefaults          NullableBool                                            `json:"use_defaults,omitempty"`
+	Allowlist            []GetProfile200ResponseConfigurationScopeAllowlistInner `json:"allowlist,omitempty"`
+	Blocklist            []GetProfile200ResponseConfigurationScopeAllowlistInner `json:"blocklist,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -76,6 +76,7 @@ func (o *GetProfile200ResponseConfigurationScope) HasUseDefaults() bool {
 func (o *GetProfile200ResponseConfigurationScope) SetUseDefaults(v bool) {
 	o.UseDefaults.Set(&v)
 }
+
 // SetUseDefaultsNil sets the value for UseDefaults to be an explicit nil
 func (o *GetProfile200ResponseConfigurationScope) SetUseDefaultsNil() {
 	o.UseDefaults.Set(nil)
@@ -153,7 +154,7 @@ func (o *GetProfile200ResponseConfigurationScope) SetBlocklist(v []GetProfile200
 }
 
 func (o GetProfile200ResponseConfigurationScope) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -237,5 +238,3 @@ func (v *NullableGetProfile200ResponseConfigurationScope) UnmarshalJSON(src []by
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

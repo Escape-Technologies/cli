@@ -19,24 +19,24 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationGraphqlApiDast{}
 
 // GetProfile200ResponseConfigurationGraphqlApiDast struct for GetProfile200ResponseConfigurationGraphqlApiDast
 type GetProfile200ResponseConfigurationGraphqlApiDast struct {
-	CustomData map[string]string `json:"custom_data,omitempty"`
-	SchemaS3Key NullableString `json:"schema_s3_key,omitempty"`
-	AdditionalSchemaS3Keys []string `json:"additional_schema_s3_keys,omitempty"`
-	Url NullableString `json:"url,omitempty"`
-	LocationId NullableString `json:"location_id,omitempty"`
-	Profile NullableENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESPROFILE `json:"profile,omitempty"`
-	ExplorationDepth NullableENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESEXPLORATIONDEPTH `json:"exploration_depth,omitempty"`
-	ExploreWithAllUsers NullableBool `json:"explore_with_all_users,omitempty"`
-	CrossUserMemoryAllowlist []string `json:"cross_user_memory_allowlist,omitempty"`
-	Mode NullableENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE `json:"mode,omitempty"`
-	MaxDuration NullableFloat32 `json:"max_duration,omitempty"`
-	MaxGeneratedDepth NullableFloat32 `json:"max_generated_depth,omitempty"`
-	NoOperationName NullableBool `json:"no_operation_name,omitempty"`
-	Hotstart []string `json:"hotstart,omitempty"`
-	HotstartOnly NullableBool `json:"hotstart_only,omitempty"`
-	Scope *GetProfile200ResponseConfigurationGraphqlApiDastScope `json:"scope,omitempty"`
-	InScopeOnly NullableBool `json:"in_scope_only,omitempty"`
-	AdditionalProperties map[string]interface{}
+	CustomData               map[string]string                                                                     `json:"custom_data,omitempty"`
+	SchemaS3Key              NullableString                                                                        `json:"schema_s3_key,omitempty"`
+	AdditionalSchemaS3Keys   []string                                                                              `json:"additional_schema_s3_keys,omitempty"`
+	Url                      NullableString                                                                        `json:"url,omitempty"`
+	LocationId               NullableString                                                                        `json:"location_id,omitempty"`
+	Profile                  NullableENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESPROFILE          `json:"profile,omitempty"`
+	ExplorationDepth         NullableENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESEXPLORATIONDEPTH `json:"exploration_depth,omitempty"`
+	ExploreWithAllUsers      NullableBool                                                                          `json:"explore_with_all_users,omitempty"`
+	CrossUserMemoryAllowlist []string                                                                              `json:"cross_user_memory_allowlist,omitempty"`
+	Mode                     NullableENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE               `json:"mode,omitempty"`
+	MaxDuration              NullableFloat32                                                                       `json:"max_duration,omitempty"`
+	MaxGeneratedDepth        NullableFloat32                                                                       `json:"max_generated_depth,omitempty"`
+	NoOperationName          NullableBool                                                                          `json:"no_operation_name,omitempty"`
+	Hotstart                 []string                                                                              `json:"hotstart,omitempty"`
+	HotstartOnly             NullableBool                                                                          `json:"hotstart_only,omitempty"`
+	Scope                    *GetProfile200ResponseConfigurationGraphqlApiDastScope                                `json:"scope,omitempty"`
+	InScopeOnly              NullableBool                                                                          `json:"in_scope_only,omitempty"`
+	AdditionalProperties     map[string]interface{}
 }
 
 type _GetProfile200ResponseConfigurationGraphqlApiDast GetProfile200ResponseConfigurationGraphqlApiDast
@@ -122,6 +122,7 @@ func (o *GetProfile200ResponseConfigurationGraphqlApiDast) HasSchemaS3Key() bool
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetSchemaS3Key(v string) {
 	o.SchemaS3Key.Set(&v)
 }
+
 // SetSchemaS3KeyNil sets the value for SchemaS3Key to be an explicit nil
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetSchemaS3KeyNil() {
 	o.SchemaS3Key.Set(nil)
@@ -197,6 +198,7 @@ func (o *GetProfile200ResponseConfigurationGraphqlApiDast) HasUrl() bool {
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetUrl(v string) {
 	o.Url.Set(&v)
 }
+
 // SetUrlNil sets the value for Url to be an explicit nil
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetUrlNil() {
 	o.Url.Set(nil)
@@ -239,6 +241,7 @@ func (o *GetProfile200ResponseConfigurationGraphqlApiDast) HasLocationId() bool 
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetLocationId(v string) {
 	o.LocationId.Set(&v)
 }
+
 // SetLocationIdNil sets the value for LocationId to be an explicit nil
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetLocationIdNil() {
 	o.LocationId.Set(nil)
@@ -281,6 +284,7 @@ func (o *GetProfile200ResponseConfigurationGraphqlApiDast) HasProfile() bool {
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetProfile(v ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESPROFILE) {
 	o.Profile.Set(&v)
 }
+
 // SetProfileNil sets the value for Profile to be an explicit nil
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetProfileNil() {
 	o.Profile.Set(nil)
@@ -323,6 +327,7 @@ func (o *GetProfile200ResponseConfigurationGraphqlApiDast) HasExplorationDepth()
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetExplorationDepth(v ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESEXPLORATIONDEPTH) {
 	o.ExplorationDepth.Set(&v)
 }
+
 // SetExplorationDepthNil sets the value for ExplorationDepth to be an explicit nil
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetExplorationDepthNil() {
 	o.ExplorationDepth.Set(nil)
@@ -365,6 +370,7 @@ func (o *GetProfile200ResponseConfigurationGraphqlApiDast) HasExploreWithAllUser
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetExploreWithAllUsers(v bool) {
 	o.ExploreWithAllUsers.Set(&v)
 }
+
 // SetExploreWithAllUsersNil sets the value for ExploreWithAllUsers to be an explicit nil
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetExploreWithAllUsersNil() {
 	o.ExploreWithAllUsers.Set(nil)
@@ -440,6 +446,7 @@ func (o *GetProfile200ResponseConfigurationGraphqlApiDast) HasMode() bool {
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetMode(v ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE) {
 	o.Mode.Set(&v)
 }
+
 // SetModeNil sets the value for Mode to be an explicit nil
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetModeNil() {
 	o.Mode.Set(nil)
@@ -482,6 +489,7 @@ func (o *GetProfile200ResponseConfigurationGraphqlApiDast) HasMaxDuration() bool
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetMaxDuration(v float32) {
 	o.MaxDuration.Set(&v)
 }
+
 // SetMaxDurationNil sets the value for MaxDuration to be an explicit nil
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetMaxDurationNil() {
 	o.MaxDuration.Set(nil)
@@ -524,6 +532,7 @@ func (o *GetProfile200ResponseConfigurationGraphqlApiDast) HasMaxGeneratedDepth(
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetMaxGeneratedDepth(v float32) {
 	o.MaxGeneratedDepth.Set(&v)
 }
+
 // SetMaxGeneratedDepthNil sets the value for MaxGeneratedDepth to be an explicit nil
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetMaxGeneratedDepthNil() {
 	o.MaxGeneratedDepth.Set(nil)
@@ -566,6 +575,7 @@ func (o *GetProfile200ResponseConfigurationGraphqlApiDast) HasNoOperationName() 
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetNoOperationName(v bool) {
 	o.NoOperationName.Set(&v)
 }
+
 // SetNoOperationNameNil sets the value for NoOperationName to be an explicit nil
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetNoOperationNameNil() {
 	o.NoOperationName.Set(nil)
@@ -641,6 +651,7 @@ func (o *GetProfile200ResponseConfigurationGraphqlApiDast) HasHotstartOnly() boo
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetHotstartOnly(v bool) {
 	o.HotstartOnly.Set(&v)
 }
+
 // SetHotstartOnlyNil sets the value for HotstartOnly to be an explicit nil
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetHotstartOnlyNil() {
 	o.HotstartOnly.Set(nil)
@@ -715,6 +726,7 @@ func (o *GetProfile200ResponseConfigurationGraphqlApiDast) HasInScopeOnly() bool
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetInScopeOnly(v bool) {
 	o.InScopeOnly.Set(&v)
 }
+
 // SetInScopeOnlyNil sets the value for InScopeOnly to be an explicit nil
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetInScopeOnlyNil() {
 	o.InScopeOnly.Set(nil)
@@ -726,7 +738,7 @@ func (o *GetProfile200ResponseConfigurationGraphqlApiDast) UnsetInScopeOnly() {
 }
 
 func (o GetProfile200ResponseConfigurationGraphqlApiDast) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -866,5 +878,3 @@ func (v *NullableGetProfile200ResponseConfigurationGraphqlApiDast) UnmarshalJSON
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

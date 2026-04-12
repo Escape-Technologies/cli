@@ -39,27 +39,27 @@ type GetProfile200Response struct {
 	// The score of the profile
 	Score NullableFloat32 `json:"score"`
 	// The coverage of the profile
-	Coverage NullableFloat32 `json:"coverage"`
+	Coverage      NullableFloat32                    `json:"coverage"`
 	Configuration GetProfile200ResponseConfiguration `json:"configuration"`
 	// Schema asset id derived from the first `extraAssets` entry with class SCHEMA, a request hint when the link is not yet visible in `extraAssets` (e.g. immediately after a mutation), or the legacy `assetSchemaId` while migration/backfill is incomplete.
 	SchemaAssetId NullableString `json:"schemaAssetId"`
 	// The extra assets of the profile
 	ExtraAssets []ProfileExtraAsset `json:"extraAssets"`
-	Asset AssetDetailed `json:"asset"`
+	Asset       AssetDetailed       `json:"asset"`
 	// The ID of the last scan of the profile
 	LastScanId NullableString `json:"lastScanId"`
 	// The ID of the last successful scan of the profile
 	LastSuccessfulScanId NullableString `json:"lastSuccessfulScanId"`
-	LastScan ScanDetailed `json:"lastScan"`
-	LastSuccessfulScan ScanDetailed1 `json:"lastSuccessfulScan"`
+	LastScan             ScanDetailed   `json:"lastScan"`
+	LastSuccessfulScan   ScanDetailed1  `json:"lastSuccessfulScan"`
 	// Deprecated
 	LastResourceScan ScanDetailed2 `json:"lastResourceScan"`
 	// Deprecated
 	LastSuccessfulResourceScan ScanDetailed3 `json:"lastSuccessfulResourceScan"`
 	// The risks of the profile
-	Risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS `json:"risks"`
-	Statistics StatisticsDetailed `json:"statistics"`
-	Links ProfileSummarizedLinks `json:"links"`
+	Risks                []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS `json:"risks"`
+	Statistics           StatisticsDetailed                                           `json:"statistics"`
+	Links                ProfileSummarizedLinks                                       `json:"links"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -678,7 +678,7 @@ func (o *GetProfile200Response) SetLinks(v ProfileSummarizedLinks) {
 }
 
 func (o GetProfile200Response) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -753,10 +753,10 @@ func (o *GetProfile200Response) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -839,5 +839,3 @@ func (v *NullableGetProfile200Response) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

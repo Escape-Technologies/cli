@@ -20,16 +20,16 @@ var _ MappedNullable = &AssetServiceDetailed{}
 
 // AssetServiceDetailed The service of the asset
 type AssetServiceDetailed struct {
-	Type ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESTYPE `json:"type"`
-	Url string `json:"url"`
-	Framework NullableString `json:"framework"`
-	AuthProtocol NullableString `json:"authProtocol"`
-	AuthTechnology NullableENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESAUTHTECHNOLOGY `json:"authTechnology"`
-	CloudProvider NullableENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER `json:"cloudProvider"`
-	WafProvider NullableENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESWAFPROVIDER `json:"wafProvider"`
-	Environment NullableENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESENVIRONMENT `json:"environment"`
-	Tls bool `json:"tls"`
-	Ips []string `json:"ips"`
+	Type                 ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESTYPE                   `json:"type"`
+	Url                  string                                                                                  `json:"url"`
+	Framework            NullableString                                                                          `json:"framework"`
+	AuthProtocol         NullableString                                                                          `json:"authProtocol"`
+	AuthTechnology       NullableENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESAUTHTECHNOLOGY `json:"authTechnology"`
+	CloudProvider        NullableENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER  `json:"cloudProvider"`
+	WafProvider          NullableENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESWAFPROVIDER    `json:"wafProvider"`
+	Environment          NullableENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESENVIRONMENT    `json:"environment"`
+	Tls                  bool                                                                                    `json:"tls"`
+	Ips                  []string                                                                                `json:"ips"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -315,7 +315,7 @@ func (o *AssetServiceDetailed) SetIps(v []string) {
 }
 
 func (o AssetServiceDetailed) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -364,10 +364,10 @@ func (o *AssetServiceDetailed) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -437,5 +437,3 @@ func (v *NullableAssetServiceDetailed) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

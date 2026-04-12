@@ -19,14 +19,14 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationNetwork{}
 
 // GetProfile200ResponseConfigurationNetwork struct for GetProfile200ResponseConfigurationNetwork
 type GetProfile200ResponseConfigurationNetwork struct {
-	RequestTimeoutS NullableFloat32 `json:"request_timeout_s,omitempty"`
-	RequestsPerSecond NullableFloat32 `json:"requests_per_second,omitempty"`
-	CustomHeaders map[string][]string `json:"custom_headers,omitempty"`
-	CancelUnhealthyScanAfter NullableFloat32 `json:"cancel_unhealthy_scan_after,omitempty"`
-	EscapeUser NullableBool `json:"escape_user,omitempty"`
-	SecEscapeUser NullableBool `json:"sec_escape_user,omitempty"`
-	ParallelRequests NullableFloat32 `json:"parallel_requests,omitempty"`
-	AdditionalProperties map[string]interface{}
+	RequestTimeoutS          NullableFloat32     `json:"request_timeout_s,omitempty"`
+	RequestsPerSecond        NullableFloat32     `json:"requests_per_second,omitempty"`
+	CustomHeaders            map[string][]string `json:"custom_headers,omitempty"`
+	CancelUnhealthyScanAfter NullableFloat32     `json:"cancel_unhealthy_scan_after,omitempty"`
+	EscapeUser               NullableBool        `json:"escape_user,omitempty"`
+	SecEscapeUser            NullableBool        `json:"sec_escape_user,omitempty"`
+	ParallelRequests         NullableFloat32     `json:"parallel_requests,omitempty"`
+	AdditionalProperties     map[string]interface{}
 }
 
 type _GetProfile200ResponseConfigurationNetwork GetProfile200ResponseConfigurationNetwork
@@ -80,6 +80,7 @@ func (o *GetProfile200ResponseConfigurationNetwork) HasRequestTimeoutS() bool {
 func (o *GetProfile200ResponseConfigurationNetwork) SetRequestTimeoutS(v float32) {
 	o.RequestTimeoutS.Set(&v)
 }
+
 // SetRequestTimeoutSNil sets the value for RequestTimeoutS to be an explicit nil
 func (o *GetProfile200ResponseConfigurationNetwork) SetRequestTimeoutSNil() {
 	o.RequestTimeoutS.Set(nil)
@@ -122,6 +123,7 @@ func (o *GetProfile200ResponseConfigurationNetwork) HasRequestsPerSecond() bool 
 func (o *GetProfile200ResponseConfigurationNetwork) SetRequestsPerSecond(v float32) {
 	o.RequestsPerSecond.Set(&v)
 }
+
 // SetRequestsPerSecondNil sets the value for RequestsPerSecond to be an explicit nil
 func (o *GetProfile200ResponseConfigurationNetwork) SetRequestsPerSecondNil() {
 	o.RequestsPerSecond.Set(nil)
@@ -196,6 +198,7 @@ func (o *GetProfile200ResponseConfigurationNetwork) HasCancelUnhealthyScanAfter(
 func (o *GetProfile200ResponseConfigurationNetwork) SetCancelUnhealthyScanAfter(v float32) {
 	o.CancelUnhealthyScanAfter.Set(&v)
 }
+
 // SetCancelUnhealthyScanAfterNil sets the value for CancelUnhealthyScanAfter to be an explicit nil
 func (o *GetProfile200ResponseConfigurationNetwork) SetCancelUnhealthyScanAfterNil() {
 	o.CancelUnhealthyScanAfter.Set(nil)
@@ -238,6 +241,7 @@ func (o *GetProfile200ResponseConfigurationNetwork) HasEscapeUser() bool {
 func (o *GetProfile200ResponseConfigurationNetwork) SetEscapeUser(v bool) {
 	o.EscapeUser.Set(&v)
 }
+
 // SetEscapeUserNil sets the value for EscapeUser to be an explicit nil
 func (o *GetProfile200ResponseConfigurationNetwork) SetEscapeUserNil() {
 	o.EscapeUser.Set(nil)
@@ -280,6 +284,7 @@ func (o *GetProfile200ResponseConfigurationNetwork) HasSecEscapeUser() bool {
 func (o *GetProfile200ResponseConfigurationNetwork) SetSecEscapeUser(v bool) {
 	o.SecEscapeUser.Set(&v)
 }
+
 // SetSecEscapeUserNil sets the value for SecEscapeUser to be an explicit nil
 func (o *GetProfile200ResponseConfigurationNetwork) SetSecEscapeUserNil() {
 	o.SecEscapeUser.Set(nil)
@@ -322,6 +327,7 @@ func (o *GetProfile200ResponseConfigurationNetwork) HasParallelRequests() bool {
 func (o *GetProfile200ResponseConfigurationNetwork) SetParallelRequests(v float32) {
 	o.ParallelRequests.Set(&v)
 }
+
 // SetParallelRequestsNil sets the value for ParallelRequests to be an explicit nil
 func (o *GetProfile200ResponseConfigurationNetwork) SetParallelRequestsNil() {
 	o.ParallelRequests.Set(nil)
@@ -333,7 +339,7 @@ func (o *GetProfile200ResponseConfigurationNetwork) UnsetParallelRequests() {
 }
 
 func (o GetProfile200ResponseConfigurationNetwork) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -433,5 +439,3 @@ func (v *NullableGetProfile200ResponseConfigurationNetwork) UnmarshalJSON(src []
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

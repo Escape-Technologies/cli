@@ -21,9 +21,9 @@ var _ MappedNullable = &AssetDetailed1{}
 // AssetDetailed1 Detailed information about an asset
 type AssetDetailed1 struct {
 	// The id of the asset
-	Id string `json:"id"`
+	Id    string                                                           `json:"id"`
 	Class ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS `json:"class"`
-	Type ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE `json:"type"`
+	Type  ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE  `json:"type"`
 	// The name of the asset
 	Name string `json:"name"`
 	// The external url of the asset
@@ -37,20 +37,20 @@ type AssetDetailed1 struct {
 	// The date and time the asset was last seen
 	LastSeenAt string `json:"lastSeenAt"`
 	// The date and time the asset is scheduled for deletion
-	ScheduledForDeletionAt NullableString `json:"scheduledForDeletionAt"`
-	Status ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS `json:"status"`
+	ScheduledForDeletionAt NullableString                                                    `json:"scheduledForDeletionAt"`
+	Status                 ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS `json:"status"`
 	// The tags of the asset
 	Tags []Tag `json:"tags"`
 	// The risks of the asset
-	Risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS `json:"risks"`
-	FirstSeenScan ScanSummarized `json:"firstSeenScan"`
-	LastSeenScan ScanSummarized1 `json:"lastSeenScan"`
-	Service AssetServiceDetailed `json:"service"`
-	Frontend AssetFrontendDetailed `json:"frontend"`
-	Host AssetHostDetailed `json:"host"`
+	Risks         []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS `json:"risks"`
+	FirstSeenScan ScanSummarized                                               `json:"firstSeenScan"`
+	LastSeenScan  ScanSummarized1                                              `json:"lastSeenScan"`
+	Service       AssetServiceDetailed                                         `json:"service"`
+	Frontend      AssetFrontendDetailed                                        `json:"frontend"`
+	Host          AssetHostDetailed                                            `json:"host"`
 	// Time-limited HTTPS URL for schema-class assets; null for other asset classes
-	SchemaUrl NullableString `json:"schemaUrl"`
-	Links AssetDetailedLinks `json:"links"`
+	SchemaUrl            NullableString     `json:"schemaUrl"`
+	Links                AssetDetailedLinks `json:"links"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -584,7 +584,7 @@ func (o *AssetDetailed1) SetLinks(v AssetDetailedLinks) {
 }
 
 func (o AssetDetailed1) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -653,10 +653,10 @@ func (o *AssetDetailed1) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -736,5 +736,3 @@ func (v *NullableAssetDetailed1) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

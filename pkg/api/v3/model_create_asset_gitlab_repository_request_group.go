@@ -20,15 +20,15 @@ var _ MappedNullable = &CreateAssetGITLABREPOSITORYRequestGroup{}
 
 // CreateAssetGITLABREPOSITORYRequestGroup struct for CreateAssetGITLABREPOSITORYRequestGroup
 type CreateAssetGITLABREPOSITORYRequestGroup struct {
-	AssetClass ENUMSOURCECODEMANAGEMENT `json:"asset_class"`
-	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
-	ScreenshotS3Key NullableString `json:"screenshot_s3_key,omitempty"`
-	AssetType ENUMGITLABGROUP `json:"asset_type"`
-	Name NullableString `json:"name,omitempty"`
-	ImmutableKey string `json:"immutable_key"`
-	ApiKey string `json:"api_key"`
-	InstanceUrl NullableString `json:"instance_url,omitempty"`
-	LocationId NullableString `json:"location_id,omitempty"`
+	AssetClass           ENUMSOURCECODEMANAGEMENT `json:"asset_class"`
+	ExtraMetadata        map[string]interface{}   `json:"extra_metadata,omitempty"`
+	ScreenshotS3Key      NullableString           `json:"screenshot_s3_key,omitempty"`
+	AssetType            ENUMGITLABGROUP          `json:"asset_type"`
+	Name                 NullableString           `json:"name,omitempty"`
+	ImmutableKey         string                   `json:"immutable_key"`
+	ApiKey               string                   `json:"api_key"`
+	InstanceUrl          NullableString           `json:"instance_url,omitempty"`
+	LocationId           NullableString           `json:"location_id,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -143,6 +143,7 @@ func (o *CreateAssetGITLABREPOSITORYRequestGroup) HasScreenshotS3Key() bool {
 func (o *CreateAssetGITLABREPOSITORYRequestGroup) SetScreenshotS3Key(v string) {
 	o.ScreenshotS3Key.Set(&v)
 }
+
 // SetScreenshotS3KeyNil sets the value for ScreenshotS3Key to be an explicit nil
 func (o *CreateAssetGITLABREPOSITORYRequestGroup) SetScreenshotS3KeyNil() {
 	o.ScreenshotS3Key.Set(nil)
@@ -209,6 +210,7 @@ func (o *CreateAssetGITLABREPOSITORYRequestGroup) HasName() bool {
 func (o *CreateAssetGITLABREPOSITORYRequestGroup) SetName(v string) {
 	o.Name.Set(&v)
 }
+
 // SetNameNil sets the value for Name to be an explicit nil
 func (o *CreateAssetGITLABREPOSITORYRequestGroup) SetNameNil() {
 	o.Name.Set(nil)
@@ -299,6 +301,7 @@ func (o *CreateAssetGITLABREPOSITORYRequestGroup) HasInstanceUrl() bool {
 func (o *CreateAssetGITLABREPOSITORYRequestGroup) SetInstanceUrl(v string) {
 	o.InstanceUrl.Set(&v)
 }
+
 // SetInstanceUrlNil sets the value for InstanceUrl to be an explicit nil
 func (o *CreateAssetGITLABREPOSITORYRequestGroup) SetInstanceUrlNil() {
 	o.InstanceUrl.Set(nil)
@@ -341,6 +344,7 @@ func (o *CreateAssetGITLABREPOSITORYRequestGroup) HasLocationId() bool {
 func (o *CreateAssetGITLABREPOSITORYRequestGroup) SetLocationId(v string) {
 	o.LocationId.Set(&v)
 }
+
 // SetLocationIdNil sets the value for LocationId to be an explicit nil
 func (o *CreateAssetGITLABREPOSITORYRequestGroup) SetLocationIdNil() {
 	o.LocationId.Set(nil)
@@ -352,7 +356,7 @@ func (o *CreateAssetGITLABREPOSITORYRequestGroup) UnsetLocationId() {
 }
 
 func (o CreateAssetGITLABREPOSITORYRequestGroup) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -404,10 +408,10 @@ func (o *CreateAssetGITLABREPOSITORYRequestGroup) UnmarshalJSON(data []byte) (er
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -476,5 +480,3 @@ func (v *NullableCreateAssetGITLABREPOSITORYRequestGroup) UnmarshalJSON(src []by
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

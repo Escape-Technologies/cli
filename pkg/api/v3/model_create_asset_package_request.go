@@ -23,19 +23,19 @@ type CreateAssetPACKAGERequest struct {
 	// The list of project IDs bind the asset on.
 	ProjectIds []string `json:"projectIds,omitempty"`
 	// The custom name of the asset. If not provided, the default name will be used.
-	Name NullableString `json:"name,omitempty"`
-	AssetClass ENUMTECHNOLOGY `json:"asset_class"`
-	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
-	ScreenshotS3Key NullableString `json:"screenshot_s3_key,omitempty"`
-	AssetType ENUMPACKAGE `json:"asset_type"`
-	TechnologyKey string `json:"technology_key"`
-	Version NullableString `json:"version,omitempty"`
-	ReferenceUrl NullableString `json:"reference_url,omitempty"`
-	Cpe NullableString `json:"cpe,omitempty"`
-	WellKnownTechnology NullableENUMPROPERTIESWELLKNOWNTECHNOLOGY `json:"well_known_technology,omitempty"`
-	Description NullableString `json:"description,omitempty"`
-	Purl string `json:"purl"`
-	PackageType ENUMPROPERTIESPACKAGETYPE `json:"package_type"`
+	Name                 NullableString                            `json:"name,omitempty"`
+	AssetClass           ENUMTECHNOLOGY                            `json:"asset_class"`
+	ExtraMetadata        map[string]interface{}                    `json:"extra_metadata,omitempty"`
+	ScreenshotS3Key      NullableString                            `json:"screenshot_s3_key,omitempty"`
+	AssetType            ENUMPACKAGE                               `json:"asset_type"`
+	TechnologyKey        string                                    `json:"technology_key"`
+	Version              NullableString                            `json:"version,omitempty"`
+	ReferenceUrl         NullableString                            `json:"reference_url,omitempty"`
+	Cpe                  NullableString                            `json:"cpe,omitempty"`
+	WellKnownTechnology  NullableENUMPROPERTIESWELLKNOWNTECHNOLOGY `json:"well_known_technology,omitempty"`
+	Description          NullableString                            `json:"description,omitempty"`
+	Purl                 string                                    `json:"purl"`
+	PackageType          ENUMPROPERTIESPACKAGETYPE                 `json:"package_type"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -128,6 +128,7 @@ func (o *CreateAssetPACKAGERequest) HasName() bool {
 func (o *CreateAssetPACKAGERequest) SetName(v string) {
 	o.Name.Set(&v)
 }
+
 // SetNameNil sets the value for Name to be an explicit nil
 func (o *CreateAssetPACKAGERequest) SetNameNil() {
 	o.Name.Set(nil)
@@ -226,6 +227,7 @@ func (o *CreateAssetPACKAGERequest) HasScreenshotS3Key() bool {
 func (o *CreateAssetPACKAGERequest) SetScreenshotS3Key(v string) {
 	o.ScreenshotS3Key.Set(&v)
 }
+
 // SetScreenshotS3KeyNil sets the value for ScreenshotS3Key to be an explicit nil
 func (o *CreateAssetPACKAGERequest) SetScreenshotS3KeyNil() {
 	o.ScreenshotS3Key.Set(nil)
@@ -316,6 +318,7 @@ func (o *CreateAssetPACKAGERequest) HasVersion() bool {
 func (o *CreateAssetPACKAGERequest) SetVersion(v string) {
 	o.Version.Set(&v)
 }
+
 // SetVersionNil sets the value for Version to be an explicit nil
 func (o *CreateAssetPACKAGERequest) SetVersionNil() {
 	o.Version.Set(nil)
@@ -358,6 +361,7 @@ func (o *CreateAssetPACKAGERequest) HasReferenceUrl() bool {
 func (o *CreateAssetPACKAGERequest) SetReferenceUrl(v string) {
 	o.ReferenceUrl.Set(&v)
 }
+
 // SetReferenceUrlNil sets the value for ReferenceUrl to be an explicit nil
 func (o *CreateAssetPACKAGERequest) SetReferenceUrlNil() {
 	o.ReferenceUrl.Set(nil)
@@ -400,6 +404,7 @@ func (o *CreateAssetPACKAGERequest) HasCpe() bool {
 func (o *CreateAssetPACKAGERequest) SetCpe(v string) {
 	o.Cpe.Set(&v)
 }
+
 // SetCpeNil sets the value for Cpe to be an explicit nil
 func (o *CreateAssetPACKAGERequest) SetCpeNil() {
 	o.Cpe.Set(nil)
@@ -442,6 +447,7 @@ func (o *CreateAssetPACKAGERequest) HasWellKnownTechnology() bool {
 func (o *CreateAssetPACKAGERequest) SetWellKnownTechnology(v ENUMPROPERTIESWELLKNOWNTECHNOLOGY) {
 	o.WellKnownTechnology.Set(&v)
 }
+
 // SetWellKnownTechnologyNil sets the value for WellKnownTechnology to be an explicit nil
 func (o *CreateAssetPACKAGERequest) SetWellKnownTechnologyNil() {
 	o.WellKnownTechnology.Set(nil)
@@ -484,6 +490,7 @@ func (o *CreateAssetPACKAGERequest) HasDescription() bool {
 func (o *CreateAssetPACKAGERequest) SetDescription(v string) {
 	o.Description.Set(&v)
 }
+
 // SetDescriptionNil sets the value for Description to be an explicit nil
 func (o *CreateAssetPACKAGERequest) SetDescriptionNil() {
 	o.Description.Set(nil)
@@ -543,7 +550,7 @@ func (o *CreateAssetPACKAGERequest) SetPackageType(v ENUMPROPERTIESPACKAGETYPE) 
 }
 
 func (o CreateAssetPACKAGERequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -609,10 +616,10 @@ func (o *CreateAssetPACKAGERequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -686,5 +693,3 @@ func (v *NullableCreateAssetPACKAGERequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

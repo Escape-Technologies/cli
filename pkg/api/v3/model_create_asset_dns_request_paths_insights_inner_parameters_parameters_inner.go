@@ -20,18 +20,18 @@ var _ MappedNullable = &CreateAssetDNSRequestPathsInsightsInnerParametersParamet
 
 // CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner struct for CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner
 type CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner struct {
-	Name string `json:"name"`
-	In ENUMPROPERTIESPATHSINSIGHTSITEMSPROPERTIESPARAMETERSPROPERTIESPARAMETERSITEMSPROPERTIESIN `json:"in"`
-	Required NullableBool `json:"required,omitempty"`
-	Deprecated NullableBool `json:"deprecated,omitempty"`
-	Description NullableString `json:"description,omitempty"`
-	Style NullableString `json:"style,omitempty"`
-	Explode NullableBool `json:"explode,omitempty"`
-	AllowedReserved NullableBool `json:"allowedReserved,omitempty"`
-	Schema map[string]interface{} `json:"schema,omitempty"`
-	Example NullableCreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample `json:"example,omitempty"`
-	Examples *map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue `json:"examples,omitempty"`
-	Content *map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValue `json:"content,omitempty"`
+	Name                 string                                                                                    `json:"name"`
+	In                   ENUMPROPERTIESPATHSINSIGHTSITEMSPROPERTIESPARAMETERSPROPERTIESPARAMETERSITEMSPROPERTIESIN `json:"in"`
+	Required             NullableBool                                                                              `json:"required,omitempty"`
+	Deprecated           NullableBool                                                                              `json:"deprecated,omitempty"`
+	Description          NullableString                                                                            `json:"description,omitempty"`
+	Style                NullableString                                                                            `json:"style,omitempty"`
+	Explode              NullableBool                                                                              `json:"explode,omitempty"`
+	AllowedReserved      NullableBool                                                                              `json:"allowedReserved,omitempty"`
+	Schema               map[string]interface{}                                                                    `json:"schema,omitempty"`
+	Example              NullableCreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample           `json:"example,omitempty"`
+	Examples             *map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue `json:"examples,omitempty"`
+	Content              *map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValue  `json:"content,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -136,6 +136,7 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) HasRe
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) SetRequired(v bool) {
 	o.Required.Set(&v)
 }
+
 // SetRequiredNil sets the value for Required to be an explicit nil
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) SetRequiredNil() {
 	o.Required.Set(nil)
@@ -178,6 +179,7 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) HasDe
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) SetDeprecated(v bool) {
 	o.Deprecated.Set(&v)
 }
+
 // SetDeprecatedNil sets the value for Deprecated to be an explicit nil
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) SetDeprecatedNil() {
 	o.Deprecated.Set(nil)
@@ -220,6 +222,7 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) HasDe
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) SetDescription(v string) {
 	o.Description.Set(&v)
 }
+
 // SetDescriptionNil sets the value for Description to be an explicit nil
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) SetDescriptionNil() {
 	o.Description.Set(nil)
@@ -262,6 +265,7 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) HasSt
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) SetStyle(v string) {
 	o.Style.Set(&v)
 }
+
 // SetStyleNil sets the value for Style to be an explicit nil
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) SetStyleNil() {
 	o.Style.Set(nil)
@@ -304,6 +308,7 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) HasEx
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) SetExplode(v bool) {
 	o.Explode.Set(&v)
 }
+
 // SetExplodeNil sets the value for Explode to be an explicit nil
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) SetExplodeNil() {
 	o.Explode.Set(nil)
@@ -346,6 +351,7 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) HasAl
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) SetAllowedReserved(v bool) {
 	o.AllowedReserved.Set(&v)
 }
+
 // SetAllowedReservedNil sets the value for AllowedReserved to be an explicit nil
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) SetAllowedReservedNil() {
 	o.AllowedReserved.Set(nil)
@@ -420,6 +426,7 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) HasEx
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) SetExample(v CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample) {
 	o.Example.Set(&v)
 }
+
 // SetExampleNil sets the value for Example to be an explicit nil
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) SetExampleNil() {
 	o.Example.Set(nil)
@@ -495,7 +502,7 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) SetCo
 }
 
 func (o CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -558,10 +565,10 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) Unmar
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -633,5 +640,3 @@ func (v *NullableCreateAssetDNSRequestPathsInsightsInnerParametersParametersInne
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

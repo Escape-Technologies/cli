@@ -20,8 +20,8 @@ var _ MappedNullable = &CreateWorkflowFilterUsingCustomFilterOnAssetsFilterParen
 
 // CreateWorkflowFilterUsingCustomFilterOnAssetsFilterParentLinksInner struct for CreateWorkflowFilterUsingCustomFilterOnAssetsFilterParentLinksInner
 type CreateWorkflowFilterUsingCustomFilterOnAssetsFilterParentLinksInner struct {
-	ParentId NullableString `json:"parentId,omitempty"`
-	Verb ENUMPROPERTIESFILTERSITEMS3PROPERTIESFILTERPROPERTIESPARENTLINKSITEMSPROPERTIESVERB `json:"verb"`
+	ParentId             NullableString                                                                      `json:"parentId,omitempty"`
+	Verb                 ENUMPROPERTIESFILTERSITEMS3PROPERTIESFILTERPROPERTIESPARENTLINKSITEMSPROPERTIESVERB `json:"verb"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -77,6 +77,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilterParentLinksInner) Ha
 func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilterParentLinksInner) SetParentId(v string) {
 	o.ParentId.Set(&v)
 }
+
 // SetParentIdNil sets the value for ParentId to be an explicit nil
 func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilterParentLinksInner) SetParentIdNil() {
 	o.ParentId.Set(nil)
@@ -112,7 +113,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilterParentLinksInner) Se
 }
 
 func (o CreateWorkflowFilterUsingCustomFilterOnAssetsFilterParentLinksInner) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -146,10 +147,10 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilterParentLinksInner) Un
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -211,5 +212,3 @@ func (v *NullableCreateWorkflowFilterUsingCustomFilterOnAssetsFilterParentLinksI
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

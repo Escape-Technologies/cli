@@ -23,26 +23,26 @@ type CreateAssetGRPCRequest struct {
 	// The list of project IDs bind the asset on.
 	ProjectIds []string `json:"projectIds,omitempty"`
 	// The custom name of the asset. If not provided, the default name will be used.
-	Name NullableString `json:"name,omitempty"`
-	AssetClass ENUMAPISERVICE `json:"asset_class"`
-	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
-	ScreenshotS3Key NullableString `json:"screenshot_s3_key,omitempty"`
-	AssetType ENUMGRPC `json:"asset_type"`
-	Url string `json:"url"`
-	Favicon NullableString `json:"favicon,omitempty"`
-	ReachableVia []string `json:"reachable_via,omitempty"`
-	ReachableViaExternalProxy NullableBool `json:"reachable_via_external_proxy,omitempty"`
-	Private NullableBool `json:"private,omitempty"`
-	PrivateLocationId NullableString `json:"private_location_id,omitempty"`
-	Environment NullableENUMPROPERTIESENVIRONMENT `json:"environment,omitempty"`
-	CloudProvider NullableENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER `json:"cloud_provider,omitempty"`
-	WafProvider NullableENUMPROPERTIESWAFPROVIDER `json:"waf_provider,omitempty"`
-	AuthProtocol NullableENUMPROPERTIESAUTHPROTOCOL `json:"auth_protocol,omitempty"`
-	AuthTechnology NullableENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESAUTHTECHNOLOGY `json:"auth_technology,omitempty"`
-	ThirdParty NullableENUMPROPERTIESTHIRDPARTY `json:"third_party,omitempty"`
-	Ips []string `json:"ips,omitempty"`
-	RegionCountryCodes []string `json:"region_country_codes,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Name                      NullableString                                                                          `json:"name,omitempty"`
+	AssetClass                ENUMAPISERVICE                                                                          `json:"asset_class"`
+	ExtraMetadata             map[string]interface{}                                                                  `json:"extra_metadata,omitempty"`
+	ScreenshotS3Key           NullableString                                                                          `json:"screenshot_s3_key,omitempty"`
+	AssetType                 ENUMGRPC                                                                                `json:"asset_type"`
+	Url                       string                                                                                  `json:"url"`
+	Favicon                   NullableString                                                                          `json:"favicon,omitempty"`
+	ReachableVia              []string                                                                                `json:"reachable_via,omitempty"`
+	ReachableViaExternalProxy NullableBool                                                                            `json:"reachable_via_external_proxy,omitempty"`
+	Private                   NullableBool                                                                            `json:"private,omitempty"`
+	PrivateLocationId         NullableString                                                                          `json:"private_location_id,omitempty"`
+	Environment               NullableENUMPROPERTIESENVIRONMENT                                                       `json:"environment,omitempty"`
+	CloudProvider             NullableENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER  `json:"cloud_provider,omitempty"`
+	WafProvider               NullableENUMPROPERTIESWAFPROVIDER                                                       `json:"waf_provider,omitempty"`
+	AuthProtocol              NullableENUMPROPERTIESAUTHPROTOCOL                                                      `json:"auth_protocol,omitempty"`
+	AuthTechnology            NullableENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESAUTHTECHNOLOGY `json:"auth_technology,omitempty"`
+	ThirdParty                NullableENUMPROPERTIESTHIRDPARTY                                                        `json:"third_party,omitempty"`
+	Ips                       []string                                                                                `json:"ips,omitempty"`
+	RegionCountryCodes        []string                                                                                `json:"region_country_codes,omitempty"`
+	AdditionalProperties      map[string]interface{}
 }
 
 type _CreateAssetGRPCRequest CreateAssetGRPCRequest
@@ -132,6 +132,7 @@ func (o *CreateAssetGRPCRequest) HasName() bool {
 func (o *CreateAssetGRPCRequest) SetName(v string) {
 	o.Name.Set(&v)
 }
+
 // SetNameNil sets the value for Name to be an explicit nil
 func (o *CreateAssetGRPCRequest) SetNameNil() {
 	o.Name.Set(nil)
@@ -230,6 +231,7 @@ func (o *CreateAssetGRPCRequest) HasScreenshotS3Key() bool {
 func (o *CreateAssetGRPCRequest) SetScreenshotS3Key(v string) {
 	o.ScreenshotS3Key.Set(&v)
 }
+
 // SetScreenshotS3KeyNil sets the value for ScreenshotS3Key to be an explicit nil
 func (o *CreateAssetGRPCRequest) SetScreenshotS3KeyNil() {
 	o.ScreenshotS3Key.Set(nil)
@@ -320,6 +322,7 @@ func (o *CreateAssetGRPCRequest) HasFavicon() bool {
 func (o *CreateAssetGRPCRequest) SetFavicon(v string) {
 	o.Favicon.Set(&v)
 }
+
 // SetFaviconNil sets the value for Favicon to be an explicit nil
 func (o *CreateAssetGRPCRequest) SetFaviconNil() {
 	o.Favicon.Set(nil)
@@ -395,6 +398,7 @@ func (o *CreateAssetGRPCRequest) HasReachableViaExternalProxy() bool {
 func (o *CreateAssetGRPCRequest) SetReachableViaExternalProxy(v bool) {
 	o.ReachableViaExternalProxy.Set(&v)
 }
+
 // SetReachableViaExternalProxyNil sets the value for ReachableViaExternalProxy to be an explicit nil
 func (o *CreateAssetGRPCRequest) SetReachableViaExternalProxyNil() {
 	o.ReachableViaExternalProxy.Set(nil)
@@ -437,6 +441,7 @@ func (o *CreateAssetGRPCRequest) HasPrivate() bool {
 func (o *CreateAssetGRPCRequest) SetPrivate(v bool) {
 	o.Private.Set(&v)
 }
+
 // SetPrivateNil sets the value for Private to be an explicit nil
 func (o *CreateAssetGRPCRequest) SetPrivateNil() {
 	o.Private.Set(nil)
@@ -479,6 +484,7 @@ func (o *CreateAssetGRPCRequest) HasPrivateLocationId() bool {
 func (o *CreateAssetGRPCRequest) SetPrivateLocationId(v string) {
 	o.PrivateLocationId.Set(&v)
 }
+
 // SetPrivateLocationIdNil sets the value for PrivateLocationId to be an explicit nil
 func (o *CreateAssetGRPCRequest) SetPrivateLocationIdNil() {
 	o.PrivateLocationId.Set(nil)
@@ -521,6 +527,7 @@ func (o *CreateAssetGRPCRequest) HasEnvironment() bool {
 func (o *CreateAssetGRPCRequest) SetEnvironment(v ENUMPROPERTIESENVIRONMENT) {
 	o.Environment.Set(&v)
 }
+
 // SetEnvironmentNil sets the value for Environment to be an explicit nil
 func (o *CreateAssetGRPCRequest) SetEnvironmentNil() {
 	o.Environment.Set(nil)
@@ -563,6 +570,7 @@ func (o *CreateAssetGRPCRequest) HasCloudProvider() bool {
 func (o *CreateAssetGRPCRequest) SetCloudProvider(v ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER) {
 	o.CloudProvider.Set(&v)
 }
+
 // SetCloudProviderNil sets the value for CloudProvider to be an explicit nil
 func (o *CreateAssetGRPCRequest) SetCloudProviderNil() {
 	o.CloudProvider.Set(nil)
@@ -605,6 +613,7 @@ func (o *CreateAssetGRPCRequest) HasWafProvider() bool {
 func (o *CreateAssetGRPCRequest) SetWafProvider(v ENUMPROPERTIESWAFPROVIDER) {
 	o.WafProvider.Set(&v)
 }
+
 // SetWafProviderNil sets the value for WafProvider to be an explicit nil
 func (o *CreateAssetGRPCRequest) SetWafProviderNil() {
 	o.WafProvider.Set(nil)
@@ -647,6 +656,7 @@ func (o *CreateAssetGRPCRequest) HasAuthProtocol() bool {
 func (o *CreateAssetGRPCRequest) SetAuthProtocol(v ENUMPROPERTIESAUTHPROTOCOL) {
 	o.AuthProtocol.Set(&v)
 }
+
 // SetAuthProtocolNil sets the value for AuthProtocol to be an explicit nil
 func (o *CreateAssetGRPCRequest) SetAuthProtocolNil() {
 	o.AuthProtocol.Set(nil)
@@ -689,6 +699,7 @@ func (o *CreateAssetGRPCRequest) HasAuthTechnology() bool {
 func (o *CreateAssetGRPCRequest) SetAuthTechnology(v ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESAUTHTECHNOLOGY) {
 	o.AuthTechnology.Set(&v)
 }
+
 // SetAuthTechnologyNil sets the value for AuthTechnology to be an explicit nil
 func (o *CreateAssetGRPCRequest) SetAuthTechnologyNil() {
 	o.AuthTechnology.Set(nil)
@@ -731,6 +742,7 @@ func (o *CreateAssetGRPCRequest) HasThirdParty() bool {
 func (o *CreateAssetGRPCRequest) SetThirdParty(v ENUMPROPERTIESTHIRDPARTY) {
 	o.ThirdParty.Set(&v)
 }
+
 // SetThirdPartyNil sets the value for ThirdParty to be an explicit nil
 func (o *CreateAssetGRPCRequest) SetThirdPartyNil() {
 	o.ThirdParty.Set(nil)
@@ -808,7 +820,7 @@ func (o *CreateAssetGRPCRequest) SetRegionCountryCodes(v []string) {
 }
 
 func (o CreateAssetGRPCRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -894,10 +906,10 @@ func (o *CreateAssetGRPCRequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -977,5 +989,3 @@ func (v *NullableCreateAssetGRPCRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

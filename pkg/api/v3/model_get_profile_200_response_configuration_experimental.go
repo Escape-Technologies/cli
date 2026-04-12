@@ -19,21 +19,21 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationExperimental{}
 
 // GetProfile200ResponseConfigurationExperimental struct for GetProfile200ResponseConfigurationExperimental
 type GetProfile200ResponseConfigurationExperimental struct {
-	BlstExplorationOnly NullableBool `json:"blst_exploration_only,omitempty"`
-	AgenticIdor NullableBool `json:"agentic_idor,omitempty"`
-	BusinessLogicAgent NullableBool `json:"business_logic_agent,omitempty"`
-	HappyPathsRegressionTesting []string `json:"happy_paths_regression_testing,omitempty"`
-	RegressionTestingFileUploadIds []string `json:"regression_testing_file_upload_ids,omitempty"`
-	AsmTechnologies NullableBool `json:"asm_technologies,omitempty"`
-	AsmCodeProjects NullableBool `json:"asm_code_projects,omitempty"`
-	AsmEnumerateCodeProjects NullableBool `json:"asm_enumerate_code_projects,omitempty"`
-	LocationsNext NullableBool `json:"locations_next,omitempty"`
-	ExternalCrawlingTask NullableBool `json:"external_crawling_task,omitempty"`
-	XssAgentModelAlias NullableENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS `json:"xss_agent_model_alias,omitempty"`
-	SqliAgentModelAlias NullableENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS `json:"sqli_agent_model_alias,omitempty"`
-	AsmCveAgent NullableBool `json:"asm_cve_agent,omitempty"`
-	LoginPageAgent NullableBool `json:"login_page_agent,omitempty"`
-	AdditionalProperties map[string]interface{}
+	BlstExplorationOnly            NullableBool                                                                          `json:"blst_exploration_only,omitempty"`
+	AgenticIdor                    NullableBool                                                                          `json:"agentic_idor,omitempty"`
+	BusinessLogicAgent             NullableBool                                                                          `json:"business_logic_agent,omitempty"`
+	HappyPathsRegressionTesting    []string                                                                              `json:"happy_paths_regression_testing,omitempty"`
+	RegressionTestingFileUploadIds []string                                                                              `json:"regression_testing_file_upload_ids,omitempty"`
+	AsmTechnologies                NullableBool                                                                          `json:"asm_technologies,omitempty"`
+	AsmCodeProjects                NullableBool                                                                          `json:"asm_code_projects,omitempty"`
+	AsmEnumerateCodeProjects       NullableBool                                                                          `json:"asm_enumerate_code_projects,omitempty"`
+	LocationsNext                  NullableBool                                                                          `json:"locations_next,omitempty"`
+	ExternalCrawlingTask           NullableBool                                                                          `json:"external_crawling_task,omitempty"`
+	XssAgentModelAlias             NullableENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS `json:"xss_agent_model_alias,omitempty"`
+	SqliAgentModelAlias            NullableENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS `json:"sqli_agent_model_alias,omitempty"`
+	AsmCveAgent                    NullableBool                                                                          `json:"asm_cve_agent,omitempty"`
+	LoginPageAgent                 NullableBool                                                                          `json:"login_page_agent,omitempty"`
+	AdditionalProperties           map[string]interface{}
 }
 
 type _GetProfile200ResponseConfigurationExperimental GetProfile200ResponseConfigurationExperimental
@@ -87,6 +87,7 @@ func (o *GetProfile200ResponseConfigurationExperimental) HasBlstExplorationOnly(
 func (o *GetProfile200ResponseConfigurationExperimental) SetBlstExplorationOnly(v bool) {
 	o.BlstExplorationOnly.Set(&v)
 }
+
 // SetBlstExplorationOnlyNil sets the value for BlstExplorationOnly to be an explicit nil
 func (o *GetProfile200ResponseConfigurationExperimental) SetBlstExplorationOnlyNil() {
 	o.BlstExplorationOnly.Set(nil)
@@ -129,6 +130,7 @@ func (o *GetProfile200ResponseConfigurationExperimental) HasAgenticIdor() bool {
 func (o *GetProfile200ResponseConfigurationExperimental) SetAgenticIdor(v bool) {
 	o.AgenticIdor.Set(&v)
 }
+
 // SetAgenticIdorNil sets the value for AgenticIdor to be an explicit nil
 func (o *GetProfile200ResponseConfigurationExperimental) SetAgenticIdorNil() {
 	o.AgenticIdor.Set(nil)
@@ -171,6 +173,7 @@ func (o *GetProfile200ResponseConfigurationExperimental) HasBusinessLogicAgent()
 func (o *GetProfile200ResponseConfigurationExperimental) SetBusinessLogicAgent(v bool) {
 	o.BusinessLogicAgent.Set(&v)
 }
+
 // SetBusinessLogicAgentNil sets the value for BusinessLogicAgent to be an explicit nil
 func (o *GetProfile200ResponseConfigurationExperimental) SetBusinessLogicAgentNil() {
 	o.BusinessLogicAgent.Set(nil)
@@ -279,6 +282,7 @@ func (o *GetProfile200ResponseConfigurationExperimental) HasAsmTechnologies() bo
 func (o *GetProfile200ResponseConfigurationExperimental) SetAsmTechnologies(v bool) {
 	o.AsmTechnologies.Set(&v)
 }
+
 // SetAsmTechnologiesNil sets the value for AsmTechnologies to be an explicit nil
 func (o *GetProfile200ResponseConfigurationExperimental) SetAsmTechnologiesNil() {
 	o.AsmTechnologies.Set(nil)
@@ -321,6 +325,7 @@ func (o *GetProfile200ResponseConfigurationExperimental) HasAsmCodeProjects() bo
 func (o *GetProfile200ResponseConfigurationExperimental) SetAsmCodeProjects(v bool) {
 	o.AsmCodeProjects.Set(&v)
 }
+
 // SetAsmCodeProjectsNil sets the value for AsmCodeProjects to be an explicit nil
 func (o *GetProfile200ResponseConfigurationExperimental) SetAsmCodeProjectsNil() {
 	o.AsmCodeProjects.Set(nil)
@@ -363,6 +368,7 @@ func (o *GetProfile200ResponseConfigurationExperimental) HasAsmEnumerateCodeProj
 func (o *GetProfile200ResponseConfigurationExperimental) SetAsmEnumerateCodeProjects(v bool) {
 	o.AsmEnumerateCodeProjects.Set(&v)
 }
+
 // SetAsmEnumerateCodeProjectsNil sets the value for AsmEnumerateCodeProjects to be an explicit nil
 func (o *GetProfile200ResponseConfigurationExperimental) SetAsmEnumerateCodeProjectsNil() {
 	o.AsmEnumerateCodeProjects.Set(nil)
@@ -405,6 +411,7 @@ func (o *GetProfile200ResponseConfigurationExperimental) HasLocationsNext() bool
 func (o *GetProfile200ResponseConfigurationExperimental) SetLocationsNext(v bool) {
 	o.LocationsNext.Set(&v)
 }
+
 // SetLocationsNextNil sets the value for LocationsNext to be an explicit nil
 func (o *GetProfile200ResponseConfigurationExperimental) SetLocationsNextNil() {
 	o.LocationsNext.Set(nil)
@@ -447,6 +454,7 @@ func (o *GetProfile200ResponseConfigurationExperimental) HasExternalCrawlingTask
 func (o *GetProfile200ResponseConfigurationExperimental) SetExternalCrawlingTask(v bool) {
 	o.ExternalCrawlingTask.Set(&v)
 }
+
 // SetExternalCrawlingTaskNil sets the value for ExternalCrawlingTask to be an explicit nil
 func (o *GetProfile200ResponseConfigurationExperimental) SetExternalCrawlingTaskNil() {
 	o.ExternalCrawlingTask.Set(nil)
@@ -489,6 +497,7 @@ func (o *GetProfile200ResponseConfigurationExperimental) HasXssAgentModelAlias()
 func (o *GetProfile200ResponseConfigurationExperimental) SetXssAgentModelAlias(v ENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS) {
 	o.XssAgentModelAlias.Set(&v)
 }
+
 // SetXssAgentModelAliasNil sets the value for XssAgentModelAlias to be an explicit nil
 func (o *GetProfile200ResponseConfigurationExperimental) SetXssAgentModelAliasNil() {
 	o.XssAgentModelAlias.Set(nil)
@@ -531,6 +540,7 @@ func (o *GetProfile200ResponseConfigurationExperimental) HasSqliAgentModelAlias(
 func (o *GetProfile200ResponseConfigurationExperimental) SetSqliAgentModelAlias(v ENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS) {
 	o.SqliAgentModelAlias.Set(&v)
 }
+
 // SetSqliAgentModelAliasNil sets the value for SqliAgentModelAlias to be an explicit nil
 func (o *GetProfile200ResponseConfigurationExperimental) SetSqliAgentModelAliasNil() {
 	o.SqliAgentModelAlias.Set(nil)
@@ -573,6 +583,7 @@ func (o *GetProfile200ResponseConfigurationExperimental) HasAsmCveAgent() bool {
 func (o *GetProfile200ResponseConfigurationExperimental) SetAsmCveAgent(v bool) {
 	o.AsmCveAgent.Set(&v)
 }
+
 // SetAsmCveAgentNil sets the value for AsmCveAgent to be an explicit nil
 func (o *GetProfile200ResponseConfigurationExperimental) SetAsmCveAgentNil() {
 	o.AsmCveAgent.Set(nil)
@@ -615,6 +626,7 @@ func (o *GetProfile200ResponseConfigurationExperimental) HasLoginPageAgent() boo
 func (o *GetProfile200ResponseConfigurationExperimental) SetLoginPageAgent(v bool) {
 	o.LoginPageAgent.Set(&v)
 }
+
 // SetLoginPageAgentNil sets the value for LoginPageAgent to be an explicit nil
 func (o *GetProfile200ResponseConfigurationExperimental) SetLoginPageAgentNil() {
 	o.LoginPageAgent.Set(nil)
@@ -626,7 +638,7 @@ func (o *GetProfile200ResponseConfigurationExperimental) UnsetLoginPageAgent() {
 }
 
 func (o GetProfile200ResponseConfigurationExperimental) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -754,5 +766,3 @@ func (v *NullableGetProfile200ResponseConfigurationExperimental) UnmarshalJSON(s
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

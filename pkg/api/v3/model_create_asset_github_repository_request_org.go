@@ -20,14 +20,14 @@ var _ MappedNullable = &CreateAssetGITHUBREPOSITORYRequestOrg{}
 
 // CreateAssetGITHUBREPOSITORYRequestOrg struct for CreateAssetGITHUBREPOSITORYRequestOrg
 type CreateAssetGITHUBREPOSITORYRequestOrg struct {
-	AssetClass ENUMSOURCECODEMANAGEMENT `json:"asset_class"`
-	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
-	ScreenshotS3Key NullableString `json:"screenshot_s3_key,omitempty"`
-	AssetType ENUMGITHUBORGANIZATION `json:"asset_type"`
-	Name NullableString `json:"name,omitempty"`
-	ImmutableKey string `json:"immutable_key"`
-	ApiKey string `json:"api_key"`
-	LocationId NullableString `json:"location_id,omitempty"`
+	AssetClass           ENUMSOURCECODEMANAGEMENT `json:"asset_class"`
+	ExtraMetadata        map[string]interface{}   `json:"extra_metadata,omitempty"`
+	ScreenshotS3Key      NullableString           `json:"screenshot_s3_key,omitempty"`
+	AssetType            ENUMGITHUBORGANIZATION   `json:"asset_type"`
+	Name                 NullableString           `json:"name,omitempty"`
+	ImmutableKey         string                   `json:"immutable_key"`
+	ApiKey               string                   `json:"api_key"`
+	LocationId           NullableString           `json:"location_id,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -142,6 +142,7 @@ func (o *CreateAssetGITHUBREPOSITORYRequestOrg) HasScreenshotS3Key() bool {
 func (o *CreateAssetGITHUBREPOSITORYRequestOrg) SetScreenshotS3Key(v string) {
 	o.ScreenshotS3Key.Set(&v)
 }
+
 // SetScreenshotS3KeyNil sets the value for ScreenshotS3Key to be an explicit nil
 func (o *CreateAssetGITHUBREPOSITORYRequestOrg) SetScreenshotS3KeyNil() {
 	o.ScreenshotS3Key.Set(nil)
@@ -208,6 +209,7 @@ func (o *CreateAssetGITHUBREPOSITORYRequestOrg) HasName() bool {
 func (o *CreateAssetGITHUBREPOSITORYRequestOrg) SetName(v string) {
 	o.Name.Set(&v)
 }
+
 // SetNameNil sets the value for Name to be an explicit nil
 func (o *CreateAssetGITHUBREPOSITORYRequestOrg) SetNameNil() {
 	o.Name.Set(nil)
@@ -298,6 +300,7 @@ func (o *CreateAssetGITHUBREPOSITORYRequestOrg) HasLocationId() bool {
 func (o *CreateAssetGITHUBREPOSITORYRequestOrg) SetLocationId(v string) {
 	o.LocationId.Set(&v)
 }
+
 // SetLocationIdNil sets the value for LocationId to be an explicit nil
 func (o *CreateAssetGITHUBREPOSITORYRequestOrg) SetLocationIdNil() {
 	o.LocationId.Set(nil)
@@ -309,7 +312,7 @@ func (o *CreateAssetGITHUBREPOSITORYRequestOrg) UnsetLocationId() {
 }
 
 func (o CreateAssetGITHUBREPOSITORYRequestOrg) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -358,10 +361,10 @@ func (o *CreateAssetGITHUBREPOSITORYRequestOrg) UnmarshalJSON(data []byte) (err 
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -429,5 +432,3 @@ func (v *NullableCreateAssetGITHUBREPOSITORYRequestOrg) UnmarshalJSON(src []byte
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

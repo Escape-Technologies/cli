@@ -19,7 +19,7 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationPortScanning{}
 
 // GetProfile200ResponseConfigurationPortScanning struct for GetProfile200ResponseConfigurationPortScanning
 type GetProfile200ResponseConfigurationPortScanning struct {
-	Ports []float32 `json:"ports,omitempty"`
+	Ports                []float32 `json:"ports,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -76,7 +76,7 @@ func (o *GetProfile200ResponseConfigurationPortScanning) SetPorts(v []float32) {
 }
 
 func (o GetProfile200ResponseConfigurationPortScanning) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -152,5 +152,3 @@ func (v *NullableGetProfile200ResponseConfigurationPortScanning) UnmarshalJSON(s
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

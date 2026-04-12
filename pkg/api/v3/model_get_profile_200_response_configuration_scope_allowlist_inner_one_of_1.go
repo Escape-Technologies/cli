@@ -20,9 +20,9 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationScopeAllowlistInnerOne
 
 // GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf1 struct for GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf1
 type GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf1 struct {
-	Type ENUMIP `json:"type"`
-	Value string `json:"value"`
-	Operation NullableENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS0PROPERTIESOPERATION `json:"operation,omitempty"`
+	Type                 ENUMIP                                                                                         `json:"type"`
+	Value                string                                                                                         `json:"value"`
+	Operation            NullableENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS0PROPERTIESOPERATION `json:"operation,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -127,6 +127,7 @@ func (o *GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf1) HasOperati
 func (o *GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf1) SetOperation(v ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS0PROPERTIESOPERATION) {
 	o.Operation.Set(&v)
 }
+
 // SetOperationNil sets the value for Operation to be an explicit nil
 func (o *GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf1) SetOperationNil() {
 	o.Operation.Set(nil)
@@ -138,7 +139,7 @@ func (o *GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf1) UnsetOpera
 }
 
 func (o GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf1) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -174,10 +175,10 @@ func (o *GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf1) UnmarshalJ
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -240,5 +241,3 @@ func (v *NullableGetProfile200ResponseConfigurationScopeAllowlistInnerOneOf1) Un
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

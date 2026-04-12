@@ -21,30 +21,30 @@ var _ MappedNullable = &CreateAssetGITHUBREPOSITORYRequest{}
 // CreateAssetGITHUBREPOSITORYRequest struct for CreateAssetGITHUBREPOSITORYRequest
 type CreateAssetGITHUBREPOSITORYRequest struct {
 	// The list of project IDs bind the asset on.
-	ProjectIds []string `json:"projectIds,omitempty"`
-	Name NullableString `json:"name,omitempty"`
-	AssetClass ENUMREPOSITORY `json:"asset_class"`
-	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
-	ScreenshotS3Key NullableString `json:"screenshot_s3_key,omitempty"`
-	AssetType ENUMGITHUBREPOSITORY `json:"asset_type"`
-	Url string `json:"url"`
-	HttpUrlToRepo NullableString `json:"http_url_to_repo,omitempty"`
-	Description NullableString `json:"description,omitempty"`
-	LocationId NullableString `json:"location_id,omitempty"`
-	DefaultBranch NullableString `json:"default_branch,omitempty"`
-	BlobBaseUrl NullableString `json:"blob_base_url,omitempty"`
-	LastCommit *CreateAssetGITLABREPOSITORYRequestLastCommit `json:"last_commit,omitempty"`
-	Owners []CreateAssetGITLABREPOSITORYRequestOwnersInner `json:"owners,omitempty"`
-	Languages []ENUMPROPERTIESLANGUAGESITEMS `json:"languages,omitempty"`
-	OwnerId NullableFloat32 `json:"owner_id,omitempty"`
-	OwnerLogin NullableString `json:"owner_login,omitempty"`
-	OwnerHtmlUrl NullableString `json:"owner_html_url,omitempty"`
-	Fork NullableBool `json:"fork,omitempty"`
-	Archived NullableBool `json:"archived,omitempty"`
-	Disabled NullableBool `json:"disabled,omitempty"`
-	Clonable NullableBool `json:"clonable,omitempty"`
-	Private NullableBool `json:"private,omitempty"`
-	Org *CreateAssetGITHUBREPOSITORYRequestOrg `json:"org,omitempty"`
+	ProjectIds           []string                                        `json:"projectIds,omitempty"`
+	Name                 NullableString                                  `json:"name,omitempty"`
+	AssetClass           ENUMREPOSITORY                                  `json:"asset_class"`
+	ExtraMetadata        map[string]interface{}                          `json:"extra_metadata,omitempty"`
+	ScreenshotS3Key      NullableString                                  `json:"screenshot_s3_key,omitempty"`
+	AssetType            ENUMGITHUBREPOSITORY                            `json:"asset_type"`
+	Url                  string                                          `json:"url"`
+	HttpUrlToRepo        NullableString                                  `json:"http_url_to_repo,omitempty"`
+	Description          NullableString                                  `json:"description,omitempty"`
+	LocationId           NullableString                                  `json:"location_id,omitempty"`
+	DefaultBranch        NullableString                                  `json:"default_branch,omitempty"`
+	BlobBaseUrl          NullableString                                  `json:"blob_base_url,omitempty"`
+	LastCommit           *CreateAssetGITLABREPOSITORYRequestLastCommit   `json:"last_commit,omitempty"`
+	Owners               []CreateAssetGITLABREPOSITORYRequestOwnersInner `json:"owners,omitempty"`
+	Languages            []ENUMPROPERTIESLANGUAGESITEMS                  `json:"languages,omitempty"`
+	OwnerId              NullableFloat32                                 `json:"owner_id,omitempty"`
+	OwnerLogin           NullableString                                  `json:"owner_login,omitempty"`
+	OwnerHtmlUrl         NullableString                                  `json:"owner_html_url,omitempty"`
+	Fork                 NullableBool                                    `json:"fork,omitempty"`
+	Archived             NullableBool                                    `json:"archived,omitempty"`
+	Disabled             NullableBool                                    `json:"disabled,omitempty"`
+	Clonable             NullableBool                                    `json:"clonable,omitempty"`
+	Private              NullableBool                                    `json:"private,omitempty"`
+	Org                  *CreateAssetGITHUBREPOSITORYRequestOrg          `json:"org,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -135,6 +135,7 @@ func (o *CreateAssetGITHUBREPOSITORYRequest) HasName() bool {
 func (o *CreateAssetGITHUBREPOSITORYRequest) SetName(v string) {
 	o.Name.Set(&v)
 }
+
 // SetNameNil sets the value for Name to be an explicit nil
 func (o *CreateAssetGITHUBREPOSITORYRequest) SetNameNil() {
 	o.Name.Set(nil)
@@ -233,6 +234,7 @@ func (o *CreateAssetGITHUBREPOSITORYRequest) HasScreenshotS3Key() bool {
 func (o *CreateAssetGITHUBREPOSITORYRequest) SetScreenshotS3Key(v string) {
 	o.ScreenshotS3Key.Set(&v)
 }
+
 // SetScreenshotS3KeyNil sets the value for ScreenshotS3Key to be an explicit nil
 func (o *CreateAssetGITHUBREPOSITORYRequest) SetScreenshotS3KeyNil() {
 	o.ScreenshotS3Key.Set(nil)
@@ -323,6 +325,7 @@ func (o *CreateAssetGITHUBREPOSITORYRequest) HasHttpUrlToRepo() bool {
 func (o *CreateAssetGITHUBREPOSITORYRequest) SetHttpUrlToRepo(v string) {
 	o.HttpUrlToRepo.Set(&v)
 }
+
 // SetHttpUrlToRepoNil sets the value for HttpUrlToRepo to be an explicit nil
 func (o *CreateAssetGITHUBREPOSITORYRequest) SetHttpUrlToRepoNil() {
 	o.HttpUrlToRepo.Set(nil)
@@ -365,6 +368,7 @@ func (o *CreateAssetGITHUBREPOSITORYRequest) HasDescription() bool {
 func (o *CreateAssetGITHUBREPOSITORYRequest) SetDescription(v string) {
 	o.Description.Set(&v)
 }
+
 // SetDescriptionNil sets the value for Description to be an explicit nil
 func (o *CreateAssetGITHUBREPOSITORYRequest) SetDescriptionNil() {
 	o.Description.Set(nil)
@@ -407,6 +411,7 @@ func (o *CreateAssetGITHUBREPOSITORYRequest) HasLocationId() bool {
 func (o *CreateAssetGITHUBREPOSITORYRequest) SetLocationId(v string) {
 	o.LocationId.Set(&v)
 }
+
 // SetLocationIdNil sets the value for LocationId to be an explicit nil
 func (o *CreateAssetGITHUBREPOSITORYRequest) SetLocationIdNil() {
 	o.LocationId.Set(nil)
@@ -449,6 +454,7 @@ func (o *CreateAssetGITHUBREPOSITORYRequest) HasDefaultBranch() bool {
 func (o *CreateAssetGITHUBREPOSITORYRequest) SetDefaultBranch(v string) {
 	o.DefaultBranch.Set(&v)
 }
+
 // SetDefaultBranchNil sets the value for DefaultBranch to be an explicit nil
 func (o *CreateAssetGITHUBREPOSITORYRequest) SetDefaultBranchNil() {
 	o.DefaultBranch.Set(nil)
@@ -491,6 +497,7 @@ func (o *CreateAssetGITHUBREPOSITORYRequest) HasBlobBaseUrl() bool {
 func (o *CreateAssetGITHUBREPOSITORYRequest) SetBlobBaseUrl(v string) {
 	o.BlobBaseUrl.Set(&v)
 }
+
 // SetBlobBaseUrlNil sets the value for BlobBaseUrl to be an explicit nil
 func (o *CreateAssetGITHUBREPOSITORYRequest) SetBlobBaseUrlNil() {
 	o.BlobBaseUrl.Set(nil)
@@ -631,6 +638,7 @@ func (o *CreateAssetGITHUBREPOSITORYRequest) HasOwnerId() bool {
 func (o *CreateAssetGITHUBREPOSITORYRequest) SetOwnerId(v float32) {
 	o.OwnerId.Set(&v)
 }
+
 // SetOwnerIdNil sets the value for OwnerId to be an explicit nil
 func (o *CreateAssetGITHUBREPOSITORYRequest) SetOwnerIdNil() {
 	o.OwnerId.Set(nil)
@@ -673,6 +681,7 @@ func (o *CreateAssetGITHUBREPOSITORYRequest) HasOwnerLogin() bool {
 func (o *CreateAssetGITHUBREPOSITORYRequest) SetOwnerLogin(v string) {
 	o.OwnerLogin.Set(&v)
 }
+
 // SetOwnerLoginNil sets the value for OwnerLogin to be an explicit nil
 func (o *CreateAssetGITHUBREPOSITORYRequest) SetOwnerLoginNil() {
 	o.OwnerLogin.Set(nil)
@@ -715,6 +724,7 @@ func (o *CreateAssetGITHUBREPOSITORYRequest) HasOwnerHtmlUrl() bool {
 func (o *CreateAssetGITHUBREPOSITORYRequest) SetOwnerHtmlUrl(v string) {
 	o.OwnerHtmlUrl.Set(&v)
 }
+
 // SetOwnerHtmlUrlNil sets the value for OwnerHtmlUrl to be an explicit nil
 func (o *CreateAssetGITHUBREPOSITORYRequest) SetOwnerHtmlUrlNil() {
 	o.OwnerHtmlUrl.Set(nil)
@@ -757,6 +767,7 @@ func (o *CreateAssetGITHUBREPOSITORYRequest) HasFork() bool {
 func (o *CreateAssetGITHUBREPOSITORYRequest) SetFork(v bool) {
 	o.Fork.Set(&v)
 }
+
 // SetForkNil sets the value for Fork to be an explicit nil
 func (o *CreateAssetGITHUBREPOSITORYRequest) SetForkNil() {
 	o.Fork.Set(nil)
@@ -799,6 +810,7 @@ func (o *CreateAssetGITHUBREPOSITORYRequest) HasArchived() bool {
 func (o *CreateAssetGITHUBREPOSITORYRequest) SetArchived(v bool) {
 	o.Archived.Set(&v)
 }
+
 // SetArchivedNil sets the value for Archived to be an explicit nil
 func (o *CreateAssetGITHUBREPOSITORYRequest) SetArchivedNil() {
 	o.Archived.Set(nil)
@@ -841,6 +853,7 @@ func (o *CreateAssetGITHUBREPOSITORYRequest) HasDisabled() bool {
 func (o *CreateAssetGITHUBREPOSITORYRequest) SetDisabled(v bool) {
 	o.Disabled.Set(&v)
 }
+
 // SetDisabledNil sets the value for Disabled to be an explicit nil
 func (o *CreateAssetGITHUBREPOSITORYRequest) SetDisabledNil() {
 	o.Disabled.Set(nil)
@@ -883,6 +896,7 @@ func (o *CreateAssetGITHUBREPOSITORYRequest) HasClonable() bool {
 func (o *CreateAssetGITHUBREPOSITORYRequest) SetClonable(v bool) {
 	o.Clonable.Set(&v)
 }
+
 // SetClonableNil sets the value for Clonable to be an explicit nil
 func (o *CreateAssetGITHUBREPOSITORYRequest) SetClonableNil() {
 	o.Clonable.Set(nil)
@@ -925,6 +939,7 @@ func (o *CreateAssetGITHUBREPOSITORYRequest) HasPrivate() bool {
 func (o *CreateAssetGITHUBREPOSITORYRequest) SetPrivate(v bool) {
 	o.Private.Set(&v)
 }
+
 // SetPrivateNil sets the value for Private to be an explicit nil
 func (o *CreateAssetGITHUBREPOSITORYRequest) SetPrivateNil() {
 	o.Private.Set(nil)
@@ -968,7 +983,7 @@ func (o *CreateAssetGITHUBREPOSITORYRequest) SetOrg(v CreateAssetGITHUBREPOSITOR
 }
 
 func (o CreateAssetGITHUBREPOSITORYRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -1066,10 +1081,10 @@ func (o *CreateAssetGITHUBREPOSITORYRequest) UnmarshalJSON(data []byte) (err err
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -1153,5 +1168,3 @@ func (v *NullableCreateAssetGITHUBREPOSITORYRequest) UnmarshalJSON(src []byte) e
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

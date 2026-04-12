@@ -19,8 +19,8 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationSecurityTestsPrivateDa
 
 // GetProfile200ResponseConfigurationSecurityTestsPrivateData struct for GetProfile200ResponseConfigurationSecurityTestsPrivateData
 type GetProfile200ResponseConfigurationSecurityTestsPrivateData struct {
-	Skip NullableBool `json:"skip,omitempty"`
-	Users map[string][]string `json:"users,omitempty"`
+	Skip                 NullableBool        `json:"skip,omitempty"`
+	Users                map[string][]string `json:"users,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -75,6 +75,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTestsPrivateData) HasSkip() b
 func (o *GetProfile200ResponseConfigurationSecurityTestsPrivateData) SetSkip(v bool) {
 	o.Skip.Set(&v)
 }
+
 // SetSkipNil sets the value for Skip to be an explicit nil
 func (o *GetProfile200ResponseConfigurationSecurityTestsPrivateData) SetSkipNil() {
 	o.Skip.Set(nil)
@@ -118,7 +119,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTestsPrivateData) SetUsers(v 
 }
 
 func (o GetProfile200ResponseConfigurationSecurityTestsPrivateData) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -198,5 +199,3 @@ func (v *NullableGetProfile200ResponseConfigurationSecurityTestsPrivateData) Unm
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

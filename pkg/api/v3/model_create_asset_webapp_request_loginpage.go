@@ -20,12 +20,12 @@ var _ MappedNullable = &CreateAssetWEBAPPRequestLoginpage{}
 
 // CreateAssetWEBAPPRequestLoginpage struct for CreateAssetWEBAPPRequestLoginpage
 type CreateAssetWEBAPPRequestLoginpage struct {
-	Login ENUMPROPERTIESLOGINPAGEPROPERTIESLOGIN `json:"login"`
-	Logintype []ENUMPROPERTIESLOGINPAGEPROPERTIESLOGINTYPEITEMS `json:"logintype"`
-	LoginpageUrl NullableString `json:"loginpage_url,omitempty"`
-	CanRegister bool `json:"can_register"`
-	RegisterPageUrl NullableString `json:"register_page_url,omitempty"`
-	SsoProviders []string `json:"sso_providers"`
+	Login                ENUMPROPERTIESLOGINPAGEPROPERTIESLOGIN            `json:"login"`
+	Logintype            []ENUMPROPERTIESLOGINPAGEPROPERTIESLOGINTYPEITEMS `json:"logintype"`
+	LoginpageUrl         NullableString                                    `json:"loginpage_url,omitempty"`
+	CanRegister          bool                                              `json:"can_register"`
+	RegisterPageUrl      NullableString                                    `json:"register_page_url,omitempty"`
+	SsoProviders         []string                                          `json:"sso_providers"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -132,6 +132,7 @@ func (o *CreateAssetWEBAPPRequestLoginpage) HasLoginpageUrl() bool {
 func (o *CreateAssetWEBAPPRequestLoginpage) SetLoginpageUrl(v string) {
 	o.LoginpageUrl.Set(&v)
 }
+
 // SetLoginpageUrlNil sets the value for LoginpageUrl to be an explicit nil
 func (o *CreateAssetWEBAPPRequestLoginpage) SetLoginpageUrlNil() {
 	o.LoginpageUrl.Set(nil)
@@ -198,6 +199,7 @@ func (o *CreateAssetWEBAPPRequestLoginpage) HasRegisterPageUrl() bool {
 func (o *CreateAssetWEBAPPRequestLoginpage) SetRegisterPageUrl(v string) {
 	o.RegisterPageUrl.Set(&v)
 }
+
 // SetRegisterPageUrlNil sets the value for RegisterPageUrl to be an explicit nil
 func (o *CreateAssetWEBAPPRequestLoginpage) SetRegisterPageUrlNil() {
 	o.RegisterPageUrl.Set(nil)
@@ -233,7 +235,7 @@ func (o *CreateAssetWEBAPPRequestLoginpage) SetSsoProviders(v []string) {
 }
 
 func (o CreateAssetWEBAPPRequestLoginpage) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -276,10 +278,10 @@ func (o *CreateAssetWEBAPPRequestLoginpage) UnmarshalJSON(data []byte) (err erro
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -345,5 +347,3 @@ func (v *NullableCreateAssetWEBAPPRequestLoginpage) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

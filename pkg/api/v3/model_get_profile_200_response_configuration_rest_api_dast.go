@@ -19,22 +19,22 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationRestApiDast{}
 
 // GetProfile200ResponseConfigurationRestApiDast struct for GetProfile200ResponseConfigurationRestApiDast
 type GetProfile200ResponseConfigurationRestApiDast struct {
-	CustomData map[string]string `json:"custom_data,omitempty"`
-	SchemaS3Key NullableString `json:"schema_s3_key,omitempty"`
-	LocationId NullableString `json:"location_id,omitempty"`
-	Profile NullableENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESPROFILE `json:"profile,omitempty"`
-	ExplorationDepth NullableENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESEXPLORATIONDEPTH `json:"exploration_depth,omitempty"`
-	ExploreWithAllUsers NullableBool `json:"explore_with_all_users,omitempty"`
-	CrossUserMemoryAllowlist []string `json:"cross_user_memory_allowlist,omitempty"`
-	Mode NullableENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE `json:"mode,omitempty"`
-	MaxDuration NullableFloat32 `json:"max_duration,omitempty"`
-	Hotstart []string `json:"hotstart,omitempty"`
-	HotstartOnly NullableBool `json:"hotstart_only,omitempty"`
-	Scope *GetProfile200ResponseConfigurationGraphqlApiDastScope `json:"scope,omitempty"`
-	AdditionalSchemaS3Keys []string `json:"additional_schema_s3_keys,omitempty"`
-	QueryParamsAreRequired NullableBool `json:"query_params_are_required,omitempty"`
-	InScopeOnly NullableBool `json:"in_scope_only,omitempty"`
-	AdditionalProperties map[string]interface{}
+	CustomData               map[string]string                                                                     `json:"custom_data,omitempty"`
+	SchemaS3Key              NullableString                                                                        `json:"schema_s3_key,omitempty"`
+	LocationId               NullableString                                                                        `json:"location_id,omitempty"`
+	Profile                  NullableENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESPROFILE          `json:"profile,omitempty"`
+	ExplorationDepth         NullableENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESEXPLORATIONDEPTH `json:"exploration_depth,omitempty"`
+	ExploreWithAllUsers      NullableBool                                                                          `json:"explore_with_all_users,omitempty"`
+	CrossUserMemoryAllowlist []string                                                                              `json:"cross_user_memory_allowlist,omitempty"`
+	Mode                     NullableENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE               `json:"mode,omitempty"`
+	MaxDuration              NullableFloat32                                                                       `json:"max_duration,omitempty"`
+	Hotstart                 []string                                                                              `json:"hotstart,omitempty"`
+	HotstartOnly             NullableBool                                                                          `json:"hotstart_only,omitempty"`
+	Scope                    *GetProfile200ResponseConfigurationGraphqlApiDastScope                                `json:"scope,omitempty"`
+	AdditionalSchemaS3Keys   []string                                                                              `json:"additional_schema_s3_keys,omitempty"`
+	QueryParamsAreRequired   NullableBool                                                                          `json:"query_params_are_required,omitempty"`
+	InScopeOnly              NullableBool                                                                          `json:"in_scope_only,omitempty"`
+	AdditionalProperties     map[string]interface{}
 }
 
 type _GetProfile200ResponseConfigurationRestApiDast GetProfile200ResponseConfigurationRestApiDast
@@ -120,6 +120,7 @@ func (o *GetProfile200ResponseConfigurationRestApiDast) HasSchemaS3Key() bool {
 func (o *GetProfile200ResponseConfigurationRestApiDast) SetSchemaS3Key(v string) {
 	o.SchemaS3Key.Set(&v)
 }
+
 // SetSchemaS3KeyNil sets the value for SchemaS3Key to be an explicit nil
 func (o *GetProfile200ResponseConfigurationRestApiDast) SetSchemaS3KeyNil() {
 	o.SchemaS3Key.Set(nil)
@@ -162,6 +163,7 @@ func (o *GetProfile200ResponseConfigurationRestApiDast) HasLocationId() bool {
 func (o *GetProfile200ResponseConfigurationRestApiDast) SetLocationId(v string) {
 	o.LocationId.Set(&v)
 }
+
 // SetLocationIdNil sets the value for LocationId to be an explicit nil
 func (o *GetProfile200ResponseConfigurationRestApiDast) SetLocationIdNil() {
 	o.LocationId.Set(nil)
@@ -204,6 +206,7 @@ func (o *GetProfile200ResponseConfigurationRestApiDast) HasProfile() bool {
 func (o *GetProfile200ResponseConfigurationRestApiDast) SetProfile(v ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESPROFILE) {
 	o.Profile.Set(&v)
 }
+
 // SetProfileNil sets the value for Profile to be an explicit nil
 func (o *GetProfile200ResponseConfigurationRestApiDast) SetProfileNil() {
 	o.Profile.Set(nil)
@@ -246,6 +249,7 @@ func (o *GetProfile200ResponseConfigurationRestApiDast) HasExplorationDepth() bo
 func (o *GetProfile200ResponseConfigurationRestApiDast) SetExplorationDepth(v ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESEXPLORATIONDEPTH) {
 	o.ExplorationDepth.Set(&v)
 }
+
 // SetExplorationDepthNil sets the value for ExplorationDepth to be an explicit nil
 func (o *GetProfile200ResponseConfigurationRestApiDast) SetExplorationDepthNil() {
 	o.ExplorationDepth.Set(nil)
@@ -288,6 +292,7 @@ func (o *GetProfile200ResponseConfigurationRestApiDast) HasExploreWithAllUsers()
 func (o *GetProfile200ResponseConfigurationRestApiDast) SetExploreWithAllUsers(v bool) {
 	o.ExploreWithAllUsers.Set(&v)
 }
+
 // SetExploreWithAllUsersNil sets the value for ExploreWithAllUsers to be an explicit nil
 func (o *GetProfile200ResponseConfigurationRestApiDast) SetExploreWithAllUsersNil() {
 	o.ExploreWithAllUsers.Set(nil)
@@ -363,6 +368,7 @@ func (o *GetProfile200ResponseConfigurationRestApiDast) HasMode() bool {
 func (o *GetProfile200ResponseConfigurationRestApiDast) SetMode(v ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE) {
 	o.Mode.Set(&v)
 }
+
 // SetModeNil sets the value for Mode to be an explicit nil
 func (o *GetProfile200ResponseConfigurationRestApiDast) SetModeNil() {
 	o.Mode.Set(nil)
@@ -405,6 +411,7 @@ func (o *GetProfile200ResponseConfigurationRestApiDast) HasMaxDuration() bool {
 func (o *GetProfile200ResponseConfigurationRestApiDast) SetMaxDuration(v float32) {
 	o.MaxDuration.Set(&v)
 }
+
 // SetMaxDurationNil sets the value for MaxDuration to be an explicit nil
 func (o *GetProfile200ResponseConfigurationRestApiDast) SetMaxDurationNil() {
 	o.MaxDuration.Set(nil)
@@ -480,6 +487,7 @@ func (o *GetProfile200ResponseConfigurationRestApiDast) HasHotstartOnly() bool {
 func (o *GetProfile200ResponseConfigurationRestApiDast) SetHotstartOnly(v bool) {
 	o.HotstartOnly.Set(&v)
 }
+
 // SetHotstartOnlyNil sets the value for HotstartOnly to be an explicit nil
 func (o *GetProfile200ResponseConfigurationRestApiDast) SetHotstartOnlyNil() {
 	o.HotstartOnly.Set(nil)
@@ -587,6 +595,7 @@ func (o *GetProfile200ResponseConfigurationRestApiDast) HasQueryParamsAreRequire
 func (o *GetProfile200ResponseConfigurationRestApiDast) SetQueryParamsAreRequired(v bool) {
 	o.QueryParamsAreRequired.Set(&v)
 }
+
 // SetQueryParamsAreRequiredNil sets the value for QueryParamsAreRequired to be an explicit nil
 func (o *GetProfile200ResponseConfigurationRestApiDast) SetQueryParamsAreRequiredNil() {
 	o.QueryParamsAreRequired.Set(nil)
@@ -629,6 +638,7 @@ func (o *GetProfile200ResponseConfigurationRestApiDast) HasInScopeOnly() bool {
 func (o *GetProfile200ResponseConfigurationRestApiDast) SetInScopeOnly(v bool) {
 	o.InScopeOnly.Set(&v)
 }
+
 // SetInScopeOnlyNil sets the value for InScopeOnly to be an explicit nil
 func (o *GetProfile200ResponseConfigurationRestApiDast) SetInScopeOnlyNil() {
 	o.InScopeOnly.Set(nil)
@@ -640,7 +650,7 @@ func (o *GetProfile200ResponseConfigurationRestApiDast) UnsetInScopeOnly() {
 }
 
 func (o GetProfile200ResponseConfigurationRestApiDast) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -772,5 +782,3 @@ func (v *NullableGetProfile200ResponseConfigurationRestApiDast) UnmarshalJSON(sr
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -20,10 +20,10 @@ var _ MappedNullable = &UpdatewizIntegrationRequestParameters{}
 
 // UpdatewizIntegrationRequestParameters The new parameters of the integration
 type UpdatewizIntegrationRequestParameters struct {
-	ClientId string `json:"client_id"`
-	ClientSecret string `json:"client_secret"`
-	TokenUri string `json:"token_uri"`
-	ApiEndpoint string `json:"api_endpoint"`
+	ClientId             string                                                        `json:"client_id"`
+	ClientSecret         string                                                        `json:"client_secret"`
+	TokenUri             string                                                        `json:"token_uri"`
+	ApiEndpoint          string                                                        `json:"api_endpoint"`
 	UploadSeverityLevels []ENUMPROPERTIESPARAMETERSPROPERTIESUPLOADSEVERITYLEVELSITEMS `json:"upload_severity_levels,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -181,7 +181,7 @@ func (o *UpdatewizIntegrationRequestParameters) SetUploadSeverityLevels(v []ENUM
 }
 
 func (o UpdatewizIntegrationRequestParameters) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -221,10 +221,10 @@ func (o *UpdatewizIntegrationRequestParameters) UnmarshalJSON(data []byte) (err 
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -289,5 +289,3 @@ func (v *NullableUpdatewizIntegrationRequestParameters) UnmarshalJSON(src []byte
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

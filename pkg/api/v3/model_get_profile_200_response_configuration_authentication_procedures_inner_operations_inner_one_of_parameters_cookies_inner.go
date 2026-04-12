@@ -20,13 +20,13 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationAuthenticationProcedur
 
 // GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner struct for GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner
 type GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner struct {
-	Name string `json:"name"`
-	Domain NullableString `json:"domain,omitempty"`
-	Path NullableString `json:"path,omitempty"`
-	HttpOnly NullableBool `json:"http_only,omitempty"`
-	Secure NullableBool `json:"secure,omitempty"`
-	SameSite NullableENUMPROPERTIESCONFIGURATIONPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS0PROPERTIESPARAMETERSPROPERTIESCOOKIESITEMSPROPERTIESSAMESITE `json:"same_site,omitempty"`
-	Values []string `json:"values"`
+	Name                 string                                                                                                                                                                     `json:"name"`
+	Domain               NullableString                                                                                                                                                             `json:"domain,omitempty"`
+	Path                 NullableString                                                                                                                                                             `json:"path,omitempty"`
+	HttpOnly             NullableBool                                                                                                                                                               `json:"http_only,omitempty"`
+	Secure               NullableBool                                                                                                                                                               `json:"secure,omitempty"`
+	SameSite             NullableENUMPROPERTIESCONFIGURATIONPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS0PROPERTIESPARAMETERSPROPERTIESCOOKIESITEMSPROPERTIESSAMESITE `json:"same_site,omitempty"`
+	Values               []string                                                                                                                                                                   `json:"values"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -107,6 +107,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) SetDomain(v string) {
 	o.Domain.Set(&v)
 }
+
 // SetDomainNil sets the value for Domain to be an explicit nil
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) SetDomainNil() {
 	o.Domain.Set(nil)
@@ -149,6 +150,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) SetPath(v string) {
 	o.Path.Set(&v)
 }
+
 // SetPathNil sets the value for Path to be an explicit nil
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) SetPathNil() {
 	o.Path.Set(nil)
@@ -191,6 +193,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) SetHttpOnly(v bool) {
 	o.HttpOnly.Set(&v)
 }
+
 // SetHttpOnlyNil sets the value for HttpOnly to be an explicit nil
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) SetHttpOnlyNil() {
 	o.HttpOnly.Set(nil)
@@ -233,6 +236,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) SetSecure(v bool) {
 	o.Secure.Set(&v)
 }
+
 // SetSecureNil sets the value for Secure to be an explicit nil
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) SetSecureNil() {
 	o.Secure.Set(nil)
@@ -275,6 +279,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) SetSameSite(v ENUMPROPERTIESCONFIGURATIONPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS0PROPERTIESPARAMETERSPROPERTIESCOOKIESITEMSPROPERTIESSAMESITE) {
 	o.SameSite.Set(&v)
 }
+
 // SetSameSiteNil sets the value for SameSite to be an explicit nil
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) SetSameSiteNil() {
 	o.SameSite.Set(nil)
@@ -310,7 +315,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 }
 
 func (o GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -358,10 +363,10 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -428,5 +433,3 @@ func (v *NullableGetProfile200ResponseConfigurationAuthenticationProceduresInner
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

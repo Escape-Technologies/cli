@@ -21,18 +21,18 @@ var _ MappedNullable = &CreateAssetCODEPROJECTRequest{}
 // CreateAssetCODEPROJECTRequest struct for CreateAssetCODEPROJECTRequest
 type CreateAssetCODEPROJECTRequest struct {
 	// The list of project IDs bind the asset on.
-	ProjectIds []string `json:"projectIds,omitempty"`
-	Name NullableString `json:"name,omitempty"`
-	AssetClass ENUMCODEPROJECT `json:"asset_class"`
-	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
-	ScreenshotS3Key NullableString `json:"screenshot_s3_key,omitempty"`
-	AssetType ENUMCODEPROJECT `json:"asset_type"`
-	Repository CreateAssetCODEPROJECTRequestRepository `json:"repository"`
-	Path string `json:"path"`
-	Language ENUMPROPERTIESLANGUAGESITEMS `json:"language"`
-	HttpUrlToProject NullableString `json:"http_url_to_project,omitempty"`
-	Owners []CreateAssetGITLABREPOSITORYRequestOwnersInner `json:"owners,omitempty"`
-	LastCommit *CreateAssetGITLABREPOSITORYRequestLastCommit `json:"last_commit,omitempty"`
+	ProjectIds           []string                                        `json:"projectIds,omitempty"`
+	Name                 NullableString                                  `json:"name,omitempty"`
+	AssetClass           ENUMCODEPROJECT                                 `json:"asset_class"`
+	ExtraMetadata        map[string]interface{}                          `json:"extra_metadata,omitempty"`
+	ScreenshotS3Key      NullableString                                  `json:"screenshot_s3_key,omitempty"`
+	AssetType            ENUMCODEPROJECT                                 `json:"asset_type"`
+	Repository           CreateAssetCODEPROJECTRequestRepository         `json:"repository"`
+	Path                 string                                          `json:"path"`
+	Language             ENUMPROPERTIESLANGUAGESITEMS                    `json:"language"`
+	HttpUrlToProject     NullableString                                  `json:"http_url_to_project,omitempty"`
+	Owners               []CreateAssetGITLABREPOSITORYRequestOwnersInner `json:"owners,omitempty"`
+	LastCommit           *CreateAssetGITLABREPOSITORYRequestLastCommit   `json:"last_commit,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -125,6 +125,7 @@ func (o *CreateAssetCODEPROJECTRequest) HasName() bool {
 func (o *CreateAssetCODEPROJECTRequest) SetName(v string) {
 	o.Name.Set(&v)
 }
+
 // SetNameNil sets the value for Name to be an explicit nil
 func (o *CreateAssetCODEPROJECTRequest) SetNameNil() {
 	o.Name.Set(nil)
@@ -223,6 +224,7 @@ func (o *CreateAssetCODEPROJECTRequest) HasScreenshotS3Key() bool {
 func (o *CreateAssetCODEPROJECTRequest) SetScreenshotS3Key(v string) {
 	o.ScreenshotS3Key.Set(&v)
 }
+
 // SetScreenshotS3KeyNil sets the value for ScreenshotS3Key to be an explicit nil
 func (o *CreateAssetCODEPROJECTRequest) SetScreenshotS3KeyNil() {
 	o.ScreenshotS3Key.Set(nil)
@@ -361,6 +363,7 @@ func (o *CreateAssetCODEPROJECTRequest) HasHttpUrlToProject() bool {
 func (o *CreateAssetCODEPROJECTRequest) SetHttpUrlToProject(v string) {
 	o.HttpUrlToProject.Set(&v)
 }
+
 // SetHttpUrlToProjectNil sets the value for HttpUrlToProject to be an explicit nil
 func (o *CreateAssetCODEPROJECTRequest) SetHttpUrlToProjectNil() {
 	o.HttpUrlToProject.Set(nil)
@@ -437,7 +440,7 @@ func (o *CreateAssetCODEPROJECTRequest) SetLastCommit(v CreateAssetGITLABREPOSIT
 }
 
 func (o CreateAssetCODEPROJECTRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -497,10 +500,10 @@ func (o *CreateAssetCODEPROJECTRequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -572,5 +575,3 @@ func (v *NullableCreateAssetCODEPROJECTRequest) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

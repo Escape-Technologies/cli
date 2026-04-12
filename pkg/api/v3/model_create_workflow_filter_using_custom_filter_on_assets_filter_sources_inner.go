@@ -19,9 +19,9 @@ var _ MappedNullable = &CreateWorkflowFilterUsingCustomFilterOnAssetsFilterSourc
 
 // CreateWorkflowFilterUsingCustomFilterOnAssetsFilterSourcesInner struct for CreateWorkflowFilterUsingCustomFilterOnAssetsFilterSourcesInner
 type CreateWorkflowFilterUsingCustomFilterOnAssetsFilterSourcesInner struct {
-	ManuallyCreated NullableBool `json:"manuallyCreated,omitempty"`
-	IntegrationId NullableString `json:"integrationId,omitempty"`
-	AssetId NullableString `json:"assetId,omitempty"`
+	ManuallyCreated      NullableBool   `json:"manuallyCreated,omitempty"`
+	IntegrationId        NullableString `json:"integrationId,omitempty"`
+	AssetId              NullableString `json:"assetId,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -76,6 +76,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilterSourcesInner) HasMan
 func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilterSourcesInner) SetManuallyCreated(v bool) {
 	o.ManuallyCreated.Set(&v)
 }
+
 // SetManuallyCreatedNil sets the value for ManuallyCreated to be an explicit nil
 func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilterSourcesInner) SetManuallyCreatedNil() {
 	o.ManuallyCreated.Set(nil)
@@ -118,6 +119,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilterSourcesInner) HasInt
 func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilterSourcesInner) SetIntegrationId(v string) {
 	o.IntegrationId.Set(&v)
 }
+
 // SetIntegrationIdNil sets the value for IntegrationId to be an explicit nil
 func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilterSourcesInner) SetIntegrationIdNil() {
 	o.IntegrationId.Set(nil)
@@ -160,6 +162,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilterSourcesInner) HasAss
 func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilterSourcesInner) SetAssetId(v string) {
 	o.AssetId.Set(&v)
 }
+
 // SetAssetIdNil sets the value for AssetId to be an explicit nil
 func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilterSourcesInner) SetAssetIdNil() {
 	o.AssetId.Set(nil)
@@ -171,7 +174,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilterSourcesInner) UnsetA
 }
 
 func (o CreateWorkflowFilterUsingCustomFilterOnAssetsFilterSourcesInner) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -255,5 +258,3 @@ func (v *NullableCreateWorkflowFilterUsingCustomFilterOnAssetsFilterSourcesInner
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -19,26 +19,26 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationFrontendDast{}
 
 // GetProfile200ResponseConfigurationFrontendDast struct for GetProfile200ResponseConfigurationFrontendDast
 type GetProfile200ResponseConfigurationFrontendDast struct {
-	CustomData map[string]string `json:"custom_data,omitempty"`
-	LocationId NullableString `json:"location_id,omitempty"`
-	Mode NullableENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE `json:"mode,omitempty"`
-	MaxDuration NullableFloat32 `json:"max_duration,omitempty"`
-	Hotstart []string `json:"hotstart,omitempty"`
+	CustomData            map[string]string                                                                       `json:"custom_data,omitempty"`
+	LocationId            NullableString                                                                          `json:"location_id,omitempty"`
+	Mode                  NullableENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE                 `json:"mode,omitempty"`
+	MaxDuration           NullableFloat32                                                                         `json:"max_duration,omitempty"`
+	Hotstart              []string                                                                                `json:"hotstart,omitempty"`
 	SecurityChecksEnabled []ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSECURITYCHECKSENABLEDITEMS `json:"security_checks_enabled,omitempty"`
-	ApiChecksDuringAuth NullableBool `json:"api_checks_during_auth,omitempty"`
-	SinglePageWorker NullableBool `json:"single_page_worker,omitempty"`
-	ParallelWorkers NullableFloat32 `json:"parallel_workers,omitempty"`
-	RelaxCorsSecurity NullableBool `json:"relax_cors_security,omitempty"`
-	UserAgent NullableString `json:"user_agent,omitempty"`
-	EscapeUserHeader NullableBool `json:"escape_user_header,omitempty"`
-	PrefetchSitemap NullableBool `json:"prefetch_sitemap,omitempty"`
-	CrawlingTuning *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning `json:"crawling_tuning,omitempty"`
-	StaticCrawling *GetProfile200ResponseConfigurationFrontendDastStaticCrawling `json:"static_crawling,omitempty"`
-	LogoutDetection *GetProfile200ResponseConfigurationFrontendDastLogoutDetection `json:"logout_detection,omitempty"`
-	Scope *GetProfile200ResponseConfigurationFrontendDastScope `json:"scope,omitempty"`
-	InScopeOnly NullableBool `json:"in_scope_only,omitempty"`
-	AgenticCrawling *GetProfile200ResponseConfigurationFrontendDastAgenticCrawling `json:"agentic_crawling,omitempty"`
-	AdditionalProperties map[string]interface{}
+	ApiChecksDuringAuth   NullableBool                                                                            `json:"api_checks_during_auth,omitempty"`
+	SinglePageWorker      NullableBool                                                                            `json:"single_page_worker,omitempty"`
+	ParallelWorkers       NullableFloat32                                                                         `json:"parallel_workers,omitempty"`
+	RelaxCorsSecurity     NullableBool                                                                            `json:"relax_cors_security,omitempty"`
+	UserAgent             NullableString                                                                          `json:"user_agent,omitempty"`
+	EscapeUserHeader      NullableBool                                                                            `json:"escape_user_header,omitempty"`
+	PrefetchSitemap       NullableBool                                                                            `json:"prefetch_sitemap,omitempty"`
+	CrawlingTuning        *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning                           `json:"crawling_tuning,omitempty"`
+	StaticCrawling        *GetProfile200ResponseConfigurationFrontendDastStaticCrawling                           `json:"static_crawling,omitempty"`
+	LogoutDetection       *GetProfile200ResponseConfigurationFrontendDastLogoutDetection                          `json:"logout_detection,omitempty"`
+	Scope                 *GetProfile200ResponseConfigurationFrontendDastScope                                    `json:"scope,omitempty"`
+	InScopeOnly           NullableBool                                                                            `json:"in_scope_only,omitempty"`
+	AgenticCrawling       *GetProfile200ResponseConfigurationFrontendDastAgenticCrawling                          `json:"agentic_crawling,omitempty"`
+	AdditionalProperties  map[string]interface{}
 }
 
 type _GetProfile200ResponseConfigurationFrontendDast GetProfile200ResponseConfigurationFrontendDast
@@ -124,6 +124,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) HasLocationId() bool {
 func (o *GetProfile200ResponseConfigurationFrontendDast) SetLocationId(v string) {
 	o.LocationId.Set(&v)
 }
+
 // SetLocationIdNil sets the value for LocationId to be an explicit nil
 func (o *GetProfile200ResponseConfigurationFrontendDast) SetLocationIdNil() {
 	o.LocationId.Set(nil)
@@ -166,6 +167,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) HasMode() bool {
 func (o *GetProfile200ResponseConfigurationFrontendDast) SetMode(v ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE) {
 	o.Mode.Set(&v)
 }
+
 // SetModeNil sets the value for Mode to be an explicit nil
 func (o *GetProfile200ResponseConfigurationFrontendDast) SetModeNil() {
 	o.Mode.Set(nil)
@@ -208,6 +210,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) HasMaxDuration() bool {
 func (o *GetProfile200ResponseConfigurationFrontendDast) SetMaxDuration(v float32) {
 	o.MaxDuration.Set(&v)
 }
+
 // SetMaxDurationNil sets the value for MaxDuration to be an explicit nil
 func (o *GetProfile200ResponseConfigurationFrontendDast) SetMaxDurationNil() {
 	o.MaxDuration.Set(nil)
@@ -316,6 +319,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) HasApiChecksDuringAuth(
 func (o *GetProfile200ResponseConfigurationFrontendDast) SetApiChecksDuringAuth(v bool) {
 	o.ApiChecksDuringAuth.Set(&v)
 }
+
 // SetApiChecksDuringAuthNil sets the value for ApiChecksDuringAuth to be an explicit nil
 func (o *GetProfile200ResponseConfigurationFrontendDast) SetApiChecksDuringAuthNil() {
 	o.ApiChecksDuringAuth.Set(nil)
@@ -358,6 +362,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) HasSinglePageWorker() b
 func (o *GetProfile200ResponseConfigurationFrontendDast) SetSinglePageWorker(v bool) {
 	o.SinglePageWorker.Set(&v)
 }
+
 // SetSinglePageWorkerNil sets the value for SinglePageWorker to be an explicit nil
 func (o *GetProfile200ResponseConfigurationFrontendDast) SetSinglePageWorkerNil() {
 	o.SinglePageWorker.Set(nil)
@@ -400,6 +405,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) HasParallelWorkers() bo
 func (o *GetProfile200ResponseConfigurationFrontendDast) SetParallelWorkers(v float32) {
 	o.ParallelWorkers.Set(&v)
 }
+
 // SetParallelWorkersNil sets the value for ParallelWorkers to be an explicit nil
 func (o *GetProfile200ResponseConfigurationFrontendDast) SetParallelWorkersNil() {
 	o.ParallelWorkers.Set(nil)
@@ -442,6 +448,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) HasRelaxCorsSecurity() 
 func (o *GetProfile200ResponseConfigurationFrontendDast) SetRelaxCorsSecurity(v bool) {
 	o.RelaxCorsSecurity.Set(&v)
 }
+
 // SetRelaxCorsSecurityNil sets the value for RelaxCorsSecurity to be an explicit nil
 func (o *GetProfile200ResponseConfigurationFrontendDast) SetRelaxCorsSecurityNil() {
 	o.RelaxCorsSecurity.Set(nil)
@@ -484,6 +491,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) HasUserAgent() bool {
 func (o *GetProfile200ResponseConfigurationFrontendDast) SetUserAgent(v string) {
 	o.UserAgent.Set(&v)
 }
+
 // SetUserAgentNil sets the value for UserAgent to be an explicit nil
 func (o *GetProfile200ResponseConfigurationFrontendDast) SetUserAgentNil() {
 	o.UserAgent.Set(nil)
@@ -526,6 +534,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) HasEscapeUserHeader() b
 func (o *GetProfile200ResponseConfigurationFrontendDast) SetEscapeUserHeader(v bool) {
 	o.EscapeUserHeader.Set(&v)
 }
+
 // SetEscapeUserHeaderNil sets the value for EscapeUserHeader to be an explicit nil
 func (o *GetProfile200ResponseConfigurationFrontendDast) SetEscapeUserHeaderNil() {
 	o.EscapeUserHeader.Set(nil)
@@ -568,6 +577,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) HasPrefetchSitemap() bo
 func (o *GetProfile200ResponseConfigurationFrontendDast) SetPrefetchSitemap(v bool) {
 	o.PrefetchSitemap.Set(&v)
 }
+
 // SetPrefetchSitemapNil sets the value for PrefetchSitemap to be an explicit nil
 func (o *GetProfile200ResponseConfigurationFrontendDast) SetPrefetchSitemapNil() {
 	o.PrefetchSitemap.Set(nil)
@@ -738,6 +748,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) HasInScopeOnly() bool {
 func (o *GetProfile200ResponseConfigurationFrontendDast) SetInScopeOnly(v bool) {
 	o.InScopeOnly.Set(&v)
 }
+
 // SetInScopeOnlyNil sets the value for InScopeOnly to be an explicit nil
 func (o *GetProfile200ResponseConfigurationFrontendDast) SetInScopeOnlyNil() {
 	o.InScopeOnly.Set(nil)
@@ -781,7 +792,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) SetAgenticCrawling(v Ge
 }
 
 func (o GetProfile200ResponseConfigurationFrontendDast) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -929,5 +940,3 @@ func (v *NullableGetProfile200ResponseConfigurationFrontendDast) UnmarshalJSON(s
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

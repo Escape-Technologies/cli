@@ -35,15 +35,15 @@ type GraphqlResolverDetailed struct {
 	// The request count for this resolver
 	RequestCount float32 `json:"requestCount"`
 	// Mean duration for this resolver in milliseconds, when available
-	MeanDuration NullableFloat32 `json:"meanDuration,omitempty"`
-	Coverage ENUMPROPERTIESDATAITEMSPROPERTIESAPIROUTEPROPERTIESCOVERAGE `json:"coverage"`
+	MeanDuration NullableFloat32                                             `json:"meanDuration,omitempty"`
+	Coverage     ENUMPROPERTIESDATAITEMSPROPERTIESAPIROUTEPROPERTIESCOVERAGE `json:"coverage"`
 	// Per-user or per-session coverage breakdown when available
 	CoverageByUser []CoverageByUserEntry `json:"coverageByUser,omitempty"`
 	// GraphQL parent type (query, mutation, or subscription)
 	Parent string `json:"parent"`
 	// The return type of the graphql resolver
-	ReturnType NullableString `json:"returnType,omitempty"`
-	Source ENUMPROPERTIESDATAITEMSPROPERTIESAPIROUTEPROPERTIESSOURCE `json:"source"`
+	ReturnType           NullableString                                            `json:"returnType,omitempty"`
+	Source               ENUMPROPERTIESDATAITEMSPROPERTIESAPIROUTEPROPERTIESSOURCE `json:"source"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -283,6 +283,7 @@ func (o *GraphqlResolverDetailed) HasMeanDuration() bool {
 func (o *GraphqlResolverDetailed) SetMeanDuration(v float32) {
 	o.MeanDuration.Set(&v)
 }
+
 // SetMeanDurationNil sets the value for MeanDuration to be an explicit nil
 func (o *GraphqlResolverDetailed) SetMeanDurationNil() {
 	o.MeanDuration.Set(nil)
@@ -406,6 +407,7 @@ func (o *GraphqlResolverDetailed) HasReturnType() bool {
 func (o *GraphqlResolverDetailed) SetReturnType(v string) {
 	o.ReturnType.Set(&v)
 }
+
 // SetReturnTypeNil sets the value for ReturnType to be an explicit nil
 func (o *GraphqlResolverDetailed) SetReturnTypeNil() {
 	o.ReturnType.Set(nil)
@@ -441,7 +443,7 @@ func (o *GraphqlResolverDetailed) SetSource(v ENUMPROPERTIESDATAITEMSPROPERTIESA
 }
 
 func (o GraphqlResolverDetailed) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -500,10 +502,10 @@ func (o *GraphqlResolverDetailed) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -576,5 +578,3 @@ func (v *NullableGraphqlResolverDetailed) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -19,8 +19,8 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationSecurityTestsExposedSo
 
 // GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap struct for GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap
 type GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap struct {
-	Skip NullableBool `json:"skip,omitempty"`
-	IssuesCountLimit NullableFloat32 `json:"issues_count_limit,omitempty"`
+	Skip                 NullableBool    `json:"skip,omitempty"`
+	IssuesCountLimit     NullableFloat32 `json:"issues_count_limit,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -75,6 +75,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap) HasSki
 func (o *GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap) SetSkip(v bool) {
 	o.Skip.Set(&v)
 }
+
 // SetSkipNil sets the value for Skip to be an explicit nil
 func (o *GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap) SetSkipNil() {
 	o.Skip.Set(nil)
@@ -117,6 +118,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap) HasIss
 func (o *GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap) SetIssuesCountLimit(v float32) {
 	o.IssuesCountLimit.Set(&v)
 }
+
 // SetIssuesCountLimitNil sets the value for IssuesCountLimit to be an explicit nil
 func (o *GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap) SetIssuesCountLimitNil() {
 	o.IssuesCountLimit.Set(nil)
@@ -128,7 +130,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap) UnsetI
 }
 
 func (o GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -208,5 +210,3 @@ func (v *NullableGetProfile200ResponseConfigurationSecurityTestsExposedSourcemap
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

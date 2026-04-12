@@ -23,17 +23,17 @@ type CreateAssetSOFTWARERequest struct {
 	// The list of project IDs bind the asset on.
 	ProjectIds []string `json:"projectIds,omitempty"`
 	// The custom name of the asset. If not provided, the default name will be used.
-	Name NullableString `json:"name,omitempty"`
-	AssetClass ENUMTECHNOLOGY `json:"asset_class"`
-	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
-	ScreenshotS3Key NullableString `json:"screenshot_s3_key,omitempty"`
-	AssetType ENUMSOFTWARE `json:"asset_type"`
-	TechnologyKey string `json:"technology_key"`
-	Version NullableString `json:"version,omitempty"`
-	ReferenceUrl NullableString `json:"reference_url,omitempty"`
-	Cpe NullableString `json:"cpe,omitempty"`
-	WellKnownTechnology NullableENUMPROPERTIESWELLKNOWNTECHNOLOGY `json:"well_known_technology,omitempty"`
-	Description NullableString `json:"description,omitempty"`
+	Name                 NullableString                            `json:"name,omitempty"`
+	AssetClass           ENUMTECHNOLOGY                            `json:"asset_class"`
+	ExtraMetadata        map[string]interface{}                    `json:"extra_metadata,omitempty"`
+	ScreenshotS3Key      NullableString                            `json:"screenshot_s3_key,omitempty"`
+	AssetType            ENUMSOFTWARE                              `json:"asset_type"`
+	TechnologyKey        string                                    `json:"technology_key"`
+	Version              NullableString                            `json:"version,omitempty"`
+	ReferenceUrl         NullableString                            `json:"reference_url,omitempty"`
+	Cpe                  NullableString                            `json:"cpe,omitempty"`
+	WellKnownTechnology  NullableENUMPROPERTIESWELLKNOWNTECHNOLOGY `json:"well_known_technology,omitempty"`
+	Description          NullableString                            `json:"description,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -124,6 +124,7 @@ func (o *CreateAssetSOFTWARERequest) HasName() bool {
 func (o *CreateAssetSOFTWARERequest) SetName(v string) {
 	o.Name.Set(&v)
 }
+
 // SetNameNil sets the value for Name to be an explicit nil
 func (o *CreateAssetSOFTWARERequest) SetNameNil() {
 	o.Name.Set(nil)
@@ -222,6 +223,7 @@ func (o *CreateAssetSOFTWARERequest) HasScreenshotS3Key() bool {
 func (o *CreateAssetSOFTWARERequest) SetScreenshotS3Key(v string) {
 	o.ScreenshotS3Key.Set(&v)
 }
+
 // SetScreenshotS3KeyNil sets the value for ScreenshotS3Key to be an explicit nil
 func (o *CreateAssetSOFTWARERequest) SetScreenshotS3KeyNil() {
 	o.ScreenshotS3Key.Set(nil)
@@ -312,6 +314,7 @@ func (o *CreateAssetSOFTWARERequest) HasVersion() bool {
 func (o *CreateAssetSOFTWARERequest) SetVersion(v string) {
 	o.Version.Set(&v)
 }
+
 // SetVersionNil sets the value for Version to be an explicit nil
 func (o *CreateAssetSOFTWARERequest) SetVersionNil() {
 	o.Version.Set(nil)
@@ -354,6 +357,7 @@ func (o *CreateAssetSOFTWARERequest) HasReferenceUrl() bool {
 func (o *CreateAssetSOFTWARERequest) SetReferenceUrl(v string) {
 	o.ReferenceUrl.Set(&v)
 }
+
 // SetReferenceUrlNil sets the value for ReferenceUrl to be an explicit nil
 func (o *CreateAssetSOFTWARERequest) SetReferenceUrlNil() {
 	o.ReferenceUrl.Set(nil)
@@ -396,6 +400,7 @@ func (o *CreateAssetSOFTWARERequest) HasCpe() bool {
 func (o *CreateAssetSOFTWARERequest) SetCpe(v string) {
 	o.Cpe.Set(&v)
 }
+
 // SetCpeNil sets the value for Cpe to be an explicit nil
 func (o *CreateAssetSOFTWARERequest) SetCpeNil() {
 	o.Cpe.Set(nil)
@@ -438,6 +443,7 @@ func (o *CreateAssetSOFTWARERequest) HasWellKnownTechnology() bool {
 func (o *CreateAssetSOFTWARERequest) SetWellKnownTechnology(v ENUMPROPERTIESWELLKNOWNTECHNOLOGY) {
 	o.WellKnownTechnology.Set(&v)
 }
+
 // SetWellKnownTechnologyNil sets the value for WellKnownTechnology to be an explicit nil
 func (o *CreateAssetSOFTWARERequest) SetWellKnownTechnologyNil() {
 	o.WellKnownTechnology.Set(nil)
@@ -480,6 +486,7 @@ func (o *CreateAssetSOFTWARERequest) HasDescription() bool {
 func (o *CreateAssetSOFTWARERequest) SetDescription(v string) {
 	o.Description.Set(&v)
 }
+
 // SetDescriptionNil sets the value for Description to be an explicit nil
 func (o *CreateAssetSOFTWARERequest) SetDescriptionNil() {
 	o.Description.Set(nil)
@@ -491,7 +498,7 @@ func (o *CreateAssetSOFTWARERequest) UnsetDescription() {
 }
 
 func (o CreateAssetSOFTWARERequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -553,10 +560,10 @@ func (o *CreateAssetSOFTWARERequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -628,5 +635,3 @@ func (v *NullableCreateAssetSOFTWARERequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -19,8 +19,8 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationFrontendDastStaticCraw
 
 // GetProfile200ResponseConfigurationFrontendDastStaticCrawling struct for GetProfile200ResponseConfigurationFrontendDastStaticCrawling
 type GetProfile200ResponseConfigurationFrontendDastStaticCrawling struct {
-	Enabled NullableBool `json:"enabled,omitempty"`
-	TimeLimitSeconds NullableFloat32 `json:"time_limit_seconds,omitempty"`
+	Enabled              NullableBool    `json:"enabled,omitempty"`
+	TimeLimitSeconds     NullableFloat32 `json:"time_limit_seconds,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -75,6 +75,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDastStaticCrawling) HasEnable
 func (o *GetProfile200ResponseConfigurationFrontendDastStaticCrawling) SetEnabled(v bool) {
 	o.Enabled.Set(&v)
 }
+
 // SetEnabledNil sets the value for Enabled to be an explicit nil
 func (o *GetProfile200ResponseConfigurationFrontendDastStaticCrawling) SetEnabledNil() {
 	o.Enabled.Set(nil)
@@ -117,6 +118,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDastStaticCrawling) HasTimeLi
 func (o *GetProfile200ResponseConfigurationFrontendDastStaticCrawling) SetTimeLimitSeconds(v float32) {
 	o.TimeLimitSeconds.Set(&v)
 }
+
 // SetTimeLimitSecondsNil sets the value for TimeLimitSeconds to be an explicit nil
 func (o *GetProfile200ResponseConfigurationFrontendDastStaticCrawling) SetTimeLimitSecondsNil() {
 	o.TimeLimitSeconds.Set(nil)
@@ -128,7 +130,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDastStaticCrawling) UnsetTime
 }
 
 func (o GetProfile200ResponseConfigurationFrontendDastStaticCrawling) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -208,5 +210,3 @@ func (v *NullableGetProfile200ResponseConfigurationFrontendDastStaticCrawling) U
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

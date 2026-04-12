@@ -20,13 +20,13 @@ var _ MappedNullable = &CreateCustomRuleRequestContentRuleOneOfSeedInnerOneOf{}
 
 // CreateCustomRuleRequestContentRuleOneOfSeedInnerOneOf struct for CreateCustomRuleRequestContentRuleOneOfSeedInnerOneOf
 type CreateCustomRuleRequestContentRuleOneOfSeedInnerOneOf struct {
-	Protocol ENUMREST `json:"protocol"`
-	User *string `json:"user,omitempty"`
-	Path *string `json:"path,omitempty"`
-	Method NullableENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD `json:"method,omitempty"`
-	Headers map[string]string `json:"headers,omitempty"`
-	Body *string `json:"body,omitempty"`
-	Params map[string]string `json:"params,omitempty"`
+	Protocol             ENUMREST                                                                                    `json:"protocol"`
+	User                 *string                                                                                     `json:"user,omitempty"`
+	Path                 *string                                                                                     `json:"path,omitempty"`
+	Method               NullableENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD `json:"method,omitempty"`
+	Headers              map[string]string                                                                           `json:"headers,omitempty"`
+	Body                 *string                                                                                     `json:"body,omitempty"`
+	Params               map[string]string                                                                           `json:"params,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -170,6 +170,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOfSeedInnerOneOf) HasMethod() bool
 func (o *CreateCustomRuleRequestContentRuleOneOfSeedInnerOneOf) SetMethod(v ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD) {
 	o.Method.Set(&v)
 }
+
 // SetMethodNil sets the value for Method to be an explicit nil
 func (o *CreateCustomRuleRequestContentRuleOneOfSeedInnerOneOf) SetMethodNil() {
 	o.Method.Set(nil)
@@ -277,7 +278,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOfSeedInnerOneOf) SetParams(v map[
 }
 
 func (o CreateCustomRuleRequestContentRuleOneOfSeedInnerOneOf) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -326,10 +327,10 @@ func (o *CreateCustomRuleRequestContentRuleOneOfSeedInnerOneOf) UnmarshalJSON(da
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -396,5 +397,3 @@ func (v *NullableCreateCustomRuleRequestContentRuleOneOfSeedInnerOneOf) Unmarsha
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

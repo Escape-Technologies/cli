@@ -39,10 +39,10 @@ type CreateDastRestProfileRequest struct {
 	// The extra asset IDs for the profile
 	ExtraAssetIds []string `json:"extraAssetIds,omitempty"`
 	// Whether to use all available extra assets for the profile
-	UseAllAvailableExtraAssets *bool `json:"useAllAvailableExtraAssets,omitempty"`
-	Mode NullableENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE `json:"mode,omitempty"`
+	UseAllAvailableExtraAssets *bool                                                                   `json:"useAllAvailableExtraAssets,omitempty"`
+	Mode                       NullableENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE `json:"mode,omitempty"`
 	// Whether to start the scan immediately
-	Start *bool `json:"start,omitempty"`
+	Start                *bool `json:"start,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -247,6 +247,7 @@ func (o *CreateDastRestProfileRequest) HasProxyId() bool {
 func (o *CreateDastRestProfileRequest) SetProxyId(v string) {
 	o.ProxyId.Set(&v)
 }
+
 // SetProxyIdNil sets the value for ProxyId to be an explicit nil
 func (o *CreateDastRestProfileRequest) SetProxyIdNil() {
 	o.ProxyId.Set(nil)
@@ -419,6 +420,7 @@ func (o *CreateDastRestProfileRequest) HasMode() bool {
 func (o *CreateDastRestProfileRequest) SetMode(v ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE) {
 	o.Mode.Set(&v)
 }
+
 // SetModeNil sets the value for Mode to be an explicit nil
 func (o *CreateDastRestProfileRequest) SetModeNil() {
 	o.Mode.Set(nil)
@@ -462,7 +464,7 @@ func (o *CreateDastRestProfileRequest) SetStart(v bool) {
 }
 
 func (o CreateDastRestProfileRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -525,10 +527,10 @@ func (o *CreateDastRestProfileRequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -600,5 +602,3 @@ func (v *NullableCreateDastRestProfileRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

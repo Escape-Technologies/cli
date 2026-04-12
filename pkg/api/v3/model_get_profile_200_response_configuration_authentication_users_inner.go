@@ -20,14 +20,14 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationAuthenticationUsersInn
 
 // GetProfile200ResponseConfigurationAuthenticationUsersInner struct for GetProfile200ResponseConfigurationAuthenticationUsersInner
 type GetProfile200ResponseConfigurationAuthenticationUsersInner struct {
-	Name string `json:"name"`
-	Role NullableString `json:"role,omitempty"`
-	Credentials *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentials `json:"credentials,omitempty"`
-	Procedure *string `json:"procedure,omitempty"`
-	Variables []GetProfile200ResponseConfigurationAuthenticationUsersInnerVariablesInner `json:"variables,omitempty"`
-	MainUser NullableBool `json:"main_user,omitempty"`
-	AllowFailure NullableBool `json:"allow_failure,omitempty"`
-	UserInstructions NullableString `json:"user_instructions,omitempty"`
+	Name                 string                                                                     `json:"name"`
+	Role                 NullableString                                                             `json:"role,omitempty"`
+	Credentials          *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentials     `json:"credentials,omitempty"`
+	Procedure            *string                                                                    `json:"procedure,omitempty"`
+	Variables            []GetProfile200ResponseConfigurationAuthenticationUsersInnerVariablesInner `json:"variables,omitempty"`
+	MainUser             NullableBool                                                               `json:"main_user,omitempty"`
+	AllowFailure         NullableBool                                                               `json:"allow_failure,omitempty"`
+	UserInstructions     NullableString                                                             `json:"user_instructions,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -107,6 +107,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationUsersInner) HasRole() b
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInner) SetRole(v string) {
 	o.Role.Set(&v)
 }
+
 // SetRoleNil sets the value for Role to be an explicit nil
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInner) SetRoleNil() {
 	o.Role.Set(nil)
@@ -246,6 +247,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationUsersInner) HasMainUser
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInner) SetMainUser(v bool) {
 	o.MainUser.Set(&v)
 }
+
 // SetMainUserNil sets the value for MainUser to be an explicit nil
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInner) SetMainUserNil() {
 	o.MainUser.Set(nil)
@@ -288,6 +290,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationUsersInner) HasAllowFai
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInner) SetAllowFailure(v bool) {
 	o.AllowFailure.Set(&v)
 }
+
 // SetAllowFailureNil sets the value for AllowFailure to be an explicit nil
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInner) SetAllowFailureNil() {
 	o.AllowFailure.Set(nil)
@@ -330,6 +333,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationUsersInner) HasUserInst
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInner) SetUserInstructions(v string) {
 	o.UserInstructions.Set(&v)
 }
+
 // SetUserInstructionsNil sets the value for UserInstructions to be an explicit nil
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInner) SetUserInstructionsNil() {
 	o.UserInstructions.Set(nil)
@@ -341,7 +345,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationUsersInner) UnsetUserIn
 }
 
 func (o GetProfile200ResponseConfigurationAuthenticationUsersInner) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -393,10 +397,10 @@ func (o *GetProfile200ResponseConfigurationAuthenticationUsersInner) UnmarshalJS
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -464,5 +468,3 @@ func (v *NullableGetProfile200ResponseConfigurationAuthenticationUsersInner) Unm
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -19,8 +19,8 @@ var _ MappedNullable = &CreatekubernetesIntegrationRequestParametersTags{}
 
 // CreatekubernetesIntegrationRequestParametersTags struct for CreatekubernetesIntegrationRequestParametersTags
 type CreatekubernetesIntegrationRequestParametersTags struct {
-	Labels []string `json:"labels,omitempty"`
-	Namespaces NullableBool `json:"namespaces,omitempty"`
+	Labels               []string     `json:"labels,omitempty"`
+	Namespaces           NullableBool `json:"namespaces,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -108,6 +108,7 @@ func (o *CreatekubernetesIntegrationRequestParametersTags) HasNamespaces() bool 
 func (o *CreatekubernetesIntegrationRequestParametersTags) SetNamespaces(v bool) {
 	o.Namespaces.Set(&v)
 }
+
 // SetNamespacesNil sets the value for Namespaces to be an explicit nil
 func (o *CreatekubernetesIntegrationRequestParametersTags) SetNamespacesNil() {
 	o.Namespaces.Set(nil)
@@ -119,7 +120,7 @@ func (o *CreatekubernetesIntegrationRequestParametersTags) UnsetNamespaces() {
 }
 
 func (o CreatekubernetesIntegrationRequestParametersTags) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -199,5 +200,3 @@ func (v *NullableCreatekubernetesIntegrationRequestParametersTags) UnmarshalJSON
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

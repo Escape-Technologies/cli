@@ -19,13 +19,13 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationFrontendDastLogoutDete
 
 // GetProfile200ResponseConfigurationFrontendDastLogoutDetection struct for GetProfile200ResponseConfigurationFrontendDastLogoutDetection
 type GetProfile200ResponseConfigurationFrontendDastLogoutDetection struct {
-	Enabled NullableBool `json:"enabled,omitempty"`
-	LoggedInIndicatorRegexPatterns []string `json:"logged_in_indicator_regex_patterns,omitempty"`
-	LogoutRedirectionUrlPatterns []string `json:"logout_redirection_url_patterns,omitempty"`
-	SessionCookieRegexPatterns []string `json:"session_cookie_regex_patterns,omitempty"`
-	AutoReauthenticate NullableBool `json:"auto_reauthenticate,omitempty"`
-	AgenticDetectionEnabled NullableBool `json:"agentic_detection_enabled,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Enabled                        NullableBool `json:"enabled,omitempty"`
+	LoggedInIndicatorRegexPatterns []string     `json:"logged_in_indicator_regex_patterns,omitempty"`
+	LogoutRedirectionUrlPatterns   []string     `json:"logout_redirection_url_patterns,omitempty"`
+	SessionCookieRegexPatterns     []string     `json:"session_cookie_regex_patterns,omitempty"`
+	AutoReauthenticate             NullableBool `json:"auto_reauthenticate,omitempty"`
+	AgenticDetectionEnabled        NullableBool `json:"agentic_detection_enabled,omitempty"`
+	AdditionalProperties           map[string]interface{}
 }
 
 type _GetProfile200ResponseConfigurationFrontendDastLogoutDetection GetProfile200ResponseConfigurationFrontendDastLogoutDetection
@@ -79,6 +79,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDastLogoutDetection) HasEnabl
 func (o *GetProfile200ResponseConfigurationFrontendDastLogoutDetection) SetEnabled(v bool) {
 	o.Enabled.Set(&v)
 }
+
 // SetEnabledNil sets the value for Enabled to be an explicit nil
 func (o *GetProfile200ResponseConfigurationFrontendDastLogoutDetection) SetEnabledNil() {
 	o.Enabled.Set(nil)
@@ -220,6 +221,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDastLogoutDetection) HasAutoR
 func (o *GetProfile200ResponseConfigurationFrontendDastLogoutDetection) SetAutoReauthenticate(v bool) {
 	o.AutoReauthenticate.Set(&v)
 }
+
 // SetAutoReauthenticateNil sets the value for AutoReauthenticate to be an explicit nil
 func (o *GetProfile200ResponseConfigurationFrontendDastLogoutDetection) SetAutoReauthenticateNil() {
 	o.AutoReauthenticate.Set(nil)
@@ -262,6 +264,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDastLogoutDetection) HasAgent
 func (o *GetProfile200ResponseConfigurationFrontendDastLogoutDetection) SetAgenticDetectionEnabled(v bool) {
 	o.AgenticDetectionEnabled.Set(&v)
 }
+
 // SetAgenticDetectionEnabledNil sets the value for AgenticDetectionEnabled to be an explicit nil
 func (o *GetProfile200ResponseConfigurationFrontendDastLogoutDetection) SetAgenticDetectionEnabledNil() {
 	o.AgenticDetectionEnabled.Set(nil)
@@ -273,7 +276,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDastLogoutDetection) UnsetAge
 }
 
 func (o GetProfile200ResponseConfigurationFrontendDastLogoutDetection) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -369,5 +372,3 @@ func (v *NullableGetProfile200ResponseConfigurationFrontendDastLogoutDetection) 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

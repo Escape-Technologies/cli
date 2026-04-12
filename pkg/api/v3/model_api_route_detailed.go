@@ -37,13 +37,13 @@ type ApiRouteDetailed struct {
 	// The request count of the api route
 	RequestCount float32 `json:"requestCount"`
 	// Mean HTTP duration for this route in milliseconds, when available
-	MeanDuration NullableFloat32 `json:"meanDuration,omitempty"`
-	Coverage ENUMPROPERTIESDATAITEMSPROPERTIESAPIROUTEPROPERTIESCOVERAGE `json:"coverage"`
+	MeanDuration NullableFloat32                                             `json:"meanDuration,omitempty"`
+	Coverage     ENUMPROPERTIESDATAITEMSPROPERTIESAPIROUTEPROPERTIESCOVERAGE `json:"coverage"`
 	// Per-user or per-session coverage breakdown when available
 	CoverageByUser []CoverageByUserEntry `json:"coverageByUser,omitempty"`
 	// The return type of the api route
-	ReturnType NullableString `json:"returnType,omitempty"`
-	Source ENUMPROPERTIESDATAITEMSPROPERTIESAPIROUTEPROPERTIESSOURCE `json:"source"`
+	ReturnType           NullableString                                            `json:"returnType,omitempty"`
+	Source               ENUMPROPERTIESDATAITEMSPROPERTIESAPIROUTEPROPERTIESSOURCE `json:"source"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -307,6 +307,7 @@ func (o *ApiRouteDetailed) HasMeanDuration() bool {
 func (o *ApiRouteDetailed) SetMeanDuration(v float32) {
 	o.MeanDuration.Set(&v)
 }
+
 // SetMeanDurationNil sets the value for MeanDuration to be an explicit nil
 func (o *ApiRouteDetailed) SetMeanDurationNil() {
 	o.MeanDuration.Set(nil)
@@ -406,6 +407,7 @@ func (o *ApiRouteDetailed) HasReturnType() bool {
 func (o *ApiRouteDetailed) SetReturnType(v string) {
 	o.ReturnType.Set(&v)
 }
+
 // SetReturnTypeNil sets the value for ReturnType to be an explicit nil
 func (o *ApiRouteDetailed) SetReturnTypeNil() {
 	o.ReturnType.Set(nil)
@@ -441,7 +443,7 @@ func (o *ApiRouteDetailed) SetSource(v ENUMPROPERTIESDATAITEMSPROPERTIESAPIROUTE
 }
 
 func (o ApiRouteDetailed) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -500,10 +502,10 @@ func (o *ApiRouteDetailed) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -576,5 +578,3 @@ func (v *NullableApiRouteDetailed) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

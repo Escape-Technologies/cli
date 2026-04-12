@@ -23,20 +23,20 @@ type CreateAssetIPV6Request struct {
 	// The list of project IDs bind the asset on.
 	ProjectIds []string `json:"projectIds,omitempty"`
 	// The custom name of the asset. If not provided, the default name will be used.
-	Name NullableString `json:"name,omitempty"`
-	AssetClass ENUMHOST `json:"asset_class"`
-	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
-	ScreenshotS3Key NullableString `json:"screenshot_s3_key,omitempty"`
-	AssetType ENUMIPV6 `json:"asset_type"`
-	Address string `json:"address"`
-	Favicon NullableString `json:"favicon,omitempty"`
-	OpenPorts []CreateAssetDNSRequestOpenPortsInner `json:"open_ports,omitempty"`
-	PortsInsights []float32 `json:"ports_insights,omitempty"`
-	PathsInsights []CreateAssetDNSRequestPathsInsightsInner `json:"paths_insights,omitempty"`
-	Private NullableBool `json:"private,omitempty"`
-	ThirdParty NullableENUMPROPERTIESTHIRDPARTY `json:"third_party,omitempty"`
-	Organization NullableString `json:"organization,omitempty"`
-	Country NullableString `json:"country,omitempty"`
+	Name                 NullableString                            `json:"name,omitempty"`
+	AssetClass           ENUMHOST                                  `json:"asset_class"`
+	ExtraMetadata        map[string]interface{}                    `json:"extra_metadata,omitempty"`
+	ScreenshotS3Key      NullableString                            `json:"screenshot_s3_key,omitempty"`
+	AssetType            ENUMIPV6                                  `json:"asset_type"`
+	Address              string                                    `json:"address"`
+	Favicon              NullableString                            `json:"favicon,omitempty"`
+	OpenPorts            []CreateAssetDNSRequestOpenPortsInner     `json:"open_ports,omitempty"`
+	PortsInsights        []float32                                 `json:"ports_insights,omitempty"`
+	PathsInsights        []CreateAssetDNSRequestPathsInsightsInner `json:"paths_insights,omitempty"`
+	Private              NullableBool                              `json:"private,omitempty"`
+	ThirdParty           NullableENUMPROPERTIESTHIRDPARTY          `json:"third_party,omitempty"`
+	Organization         NullableString                            `json:"organization,omitempty"`
+	Country              NullableString                            `json:"country,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -127,6 +127,7 @@ func (o *CreateAssetIPV6Request) HasName() bool {
 func (o *CreateAssetIPV6Request) SetName(v string) {
 	o.Name.Set(&v)
 }
+
 // SetNameNil sets the value for Name to be an explicit nil
 func (o *CreateAssetIPV6Request) SetNameNil() {
 	o.Name.Set(nil)
@@ -225,6 +226,7 @@ func (o *CreateAssetIPV6Request) HasScreenshotS3Key() bool {
 func (o *CreateAssetIPV6Request) SetScreenshotS3Key(v string) {
 	o.ScreenshotS3Key.Set(&v)
 }
+
 // SetScreenshotS3KeyNil sets the value for ScreenshotS3Key to be an explicit nil
 func (o *CreateAssetIPV6Request) SetScreenshotS3KeyNil() {
 	o.ScreenshotS3Key.Set(nil)
@@ -315,6 +317,7 @@ func (o *CreateAssetIPV6Request) HasFavicon() bool {
 func (o *CreateAssetIPV6Request) SetFavicon(v string) {
 	o.Favicon.Set(&v)
 }
+
 // SetFaviconNil sets the value for Favicon to be an explicit nil
 func (o *CreateAssetIPV6Request) SetFaviconNil() {
 	o.Favicon.Set(nil)
@@ -456,6 +459,7 @@ func (o *CreateAssetIPV6Request) HasPrivate() bool {
 func (o *CreateAssetIPV6Request) SetPrivate(v bool) {
 	o.Private.Set(&v)
 }
+
 // SetPrivateNil sets the value for Private to be an explicit nil
 func (o *CreateAssetIPV6Request) SetPrivateNil() {
 	o.Private.Set(nil)
@@ -498,6 +502,7 @@ func (o *CreateAssetIPV6Request) HasThirdParty() bool {
 func (o *CreateAssetIPV6Request) SetThirdParty(v ENUMPROPERTIESTHIRDPARTY) {
 	o.ThirdParty.Set(&v)
 }
+
 // SetThirdPartyNil sets the value for ThirdParty to be an explicit nil
 func (o *CreateAssetIPV6Request) SetThirdPartyNil() {
 	o.ThirdParty.Set(nil)
@@ -540,6 +545,7 @@ func (o *CreateAssetIPV6Request) HasOrganization() bool {
 func (o *CreateAssetIPV6Request) SetOrganization(v string) {
 	o.Organization.Set(&v)
 }
+
 // SetOrganizationNil sets the value for Organization to be an explicit nil
 func (o *CreateAssetIPV6Request) SetOrganizationNil() {
 	o.Organization.Set(nil)
@@ -582,6 +588,7 @@ func (o *CreateAssetIPV6Request) HasCountry() bool {
 func (o *CreateAssetIPV6Request) SetCountry(v string) {
 	o.Country.Set(&v)
 }
+
 // SetCountryNil sets the value for Country to be an explicit nil
 func (o *CreateAssetIPV6Request) SetCountryNil() {
 	o.Country.Set(nil)
@@ -593,7 +600,7 @@ func (o *CreateAssetIPV6Request) UnsetCountry() {
 }
 
 func (o CreateAssetIPV6Request) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -664,10 +671,10 @@ func (o *CreateAssetIPV6Request) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -742,5 +749,3 @@ func (v *NullableCreateAssetIPV6Request) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

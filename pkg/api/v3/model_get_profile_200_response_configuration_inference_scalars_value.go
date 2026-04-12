@@ -19,18 +19,18 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationInferenceScalarsValue{
 
 // GetProfile200ResponseConfigurationInferenceScalarsValue struct for GetProfile200ResponseConfigurationInferenceScalarsValue
 type GetProfile200ResponseConfigurationInferenceScalarsValue struct {
-	Names []string `json:"names,omitempty"`
-	IgnoredNames []string `json:"ignored_names,omitempty"`
-	Description NullableString `json:"description,omitempty"`
-	Pattern NullableString `json:"pattern,omitempty"`
-	IgnoredPattern NullableString `json:"ignored_pattern,omitempty"`
-	Examples []string `json:"examples,omitempty"`
-	Parents []ENUMPROPERTIESCONFIGURATIONPROPERTIESINFERENCEPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESPARENTSITEMS `json:"parents,omitempty"`
-	Sensitivity NullableENUMPROPERTIESCONFIGURATIONPROPERTIESINFERENCEPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESSENSITIVITY `json:"sensitivity,omitempty"`
-	Strategy NullableENUMPROPERTIESCONFIGURATIONPROPERTIESINFERENCEPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESSTRATEGY `json:"strategy,omitempty"`
-	RaiseOnCommit NullableBool `json:"raise_on_commit,omitempty"`
-	RaiseOnExposure NullableBool `json:"raise_on_exposure,omitempty"`
-	IsSourceable NullableBool `json:"is_sourceable,omitempty"`
+	Names                []string                                                                                                         `json:"names,omitempty"`
+	IgnoredNames         []string                                                                                                         `json:"ignored_names,omitempty"`
+	Description          NullableString                                                                                                   `json:"description,omitempty"`
+	Pattern              NullableString                                                                                                   `json:"pattern,omitempty"`
+	IgnoredPattern       NullableString                                                                                                   `json:"ignored_pattern,omitempty"`
+	Examples             []string                                                                                                         `json:"examples,omitempty"`
+	Parents              []ENUMPROPERTIESCONFIGURATIONPROPERTIESINFERENCEPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESPARENTSITEMS      `json:"parents,omitempty"`
+	Sensitivity          NullableENUMPROPERTIESCONFIGURATIONPROPERTIESINFERENCEPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESSENSITIVITY `json:"sensitivity,omitempty"`
+	Strategy             NullableENUMPROPERTIESCONFIGURATIONPROPERTIESINFERENCEPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESSTRATEGY    `json:"strategy,omitempty"`
+	RaiseOnCommit        NullableBool                                                                                                     `json:"raise_on_commit,omitempty"`
+	RaiseOnExposure      NullableBool                                                                                                     `json:"raise_on_exposure,omitempty"`
+	IsSourceable         NullableBool                                                                                                     `json:"is_sourceable,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -151,6 +151,7 @@ func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) HasDescription
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) SetDescription(v string) {
 	o.Description.Set(&v)
 }
+
 // SetDescriptionNil sets the value for Description to be an explicit nil
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) SetDescriptionNil() {
 	o.Description.Set(nil)
@@ -193,6 +194,7 @@ func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) HasPattern() b
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) SetPattern(v string) {
 	o.Pattern.Set(&v)
 }
+
 // SetPatternNil sets the value for Pattern to be an explicit nil
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) SetPatternNil() {
 	o.Pattern.Set(nil)
@@ -235,6 +237,7 @@ func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) HasIgnoredPatt
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) SetIgnoredPattern(v string) {
 	o.IgnoredPattern.Set(&v)
 }
+
 // SetIgnoredPatternNil sets the value for IgnoredPattern to be an explicit nil
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) SetIgnoredPatternNil() {
 	o.IgnoredPattern.Set(nil)
@@ -343,6 +346,7 @@ func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) HasSensitivity
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) SetSensitivity(v ENUMPROPERTIESCONFIGURATIONPROPERTIESINFERENCEPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESSENSITIVITY) {
 	o.Sensitivity.Set(&v)
 }
+
 // SetSensitivityNil sets the value for Sensitivity to be an explicit nil
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) SetSensitivityNil() {
 	o.Sensitivity.Set(nil)
@@ -385,6 +389,7 @@ func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) HasStrategy() 
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) SetStrategy(v ENUMPROPERTIESCONFIGURATIONPROPERTIESINFERENCEPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESSTRATEGY) {
 	o.Strategy.Set(&v)
 }
+
 // SetStrategyNil sets the value for Strategy to be an explicit nil
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) SetStrategyNil() {
 	o.Strategy.Set(nil)
@@ -427,6 +432,7 @@ func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) HasRaiseOnComm
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) SetRaiseOnCommit(v bool) {
 	o.RaiseOnCommit.Set(&v)
 }
+
 // SetRaiseOnCommitNil sets the value for RaiseOnCommit to be an explicit nil
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) SetRaiseOnCommitNil() {
 	o.RaiseOnCommit.Set(nil)
@@ -469,6 +475,7 @@ func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) HasRaiseOnExpo
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) SetRaiseOnExposure(v bool) {
 	o.RaiseOnExposure.Set(&v)
 }
+
 // SetRaiseOnExposureNil sets the value for RaiseOnExposure to be an explicit nil
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) SetRaiseOnExposureNil() {
 	o.RaiseOnExposure.Set(nil)
@@ -511,6 +518,7 @@ func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) HasIsSourceabl
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) SetIsSourceable(v bool) {
 	o.IsSourceable.Set(&v)
 }
+
 // SetIsSourceableNil sets the value for IsSourceable to be an explicit nil
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) SetIsSourceableNil() {
 	o.IsSourceable.Set(nil)
@@ -522,7 +530,7 @@ func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) UnsetIsSourcea
 }
 
 func (o GetProfile200ResponseConfigurationInferenceScalarsValue) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -642,5 +650,3 @@ func (v *NullableGetProfile200ResponseConfigurationInferenceScalarsValue) Unmars
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

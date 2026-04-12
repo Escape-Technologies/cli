@@ -20,27 +20,27 @@ var _ MappedNullable = &CreateAssetCODEPROJECTRequestRepositoryOneOf{}
 
 // CreateAssetCODEPROJECTRequestRepositoryOneOf struct for CreateAssetCODEPROJECTRequestRepositoryOneOf
 type CreateAssetCODEPROJECTRequestRepositoryOneOf struct {
-	AssetClass ENUMREPOSITORY `json:"asset_class"`
-	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
-	ScreenshotS3Key NullableString `json:"screenshot_s3_key,omitempty"`
-	AssetType ENUMGITLABREPOSITORY `json:"asset_type"`
-	Url string `json:"url"`
-	Name NullableString `json:"name,omitempty"`
-	HttpUrlToRepo NullableString `json:"http_url_to_repo,omitempty"`
-	Description NullableString `json:"description,omitempty"`
-	LocationId NullableString `json:"location_id,omitempty"`
-	DefaultBranch NullableString `json:"default_branch,omitempty"`
-	BlobBaseUrl NullableString `json:"blob_base_url,omitempty"`
-	LastCommit *CreateAssetGITLABREPOSITORYRequestLastCommit `json:"last_commit,omitempty"`
-	Owners []CreateAssetGITLABREPOSITORYRequestOwnersInner `json:"owners,omitempty"`
-	Languages []ENUMPROPERTIESLANGUAGESITEMS `json:"languages,omitempty"`
-	GroupId NullableFloat32 `json:"group_id,omitempty"`
-	GroupFullPath NullableString `json:"group_full_path,omitempty"`
-	GroupWebUrl NullableString `json:"group_web_url,omitempty"`
-	ProjectId NullableFloat32 `json:"project_id,omitempty"`
-	Archived NullableBool `json:"archived,omitempty"`
-	Visibility NullableENUMPROPERTIESVISIBILITY `json:"visibility,omitempty"`
-	Group *CreateAssetGITLABREPOSITORYRequestGroup `json:"group,omitempty"`
+	AssetClass           ENUMREPOSITORY                                  `json:"asset_class"`
+	ExtraMetadata        map[string]interface{}                          `json:"extra_metadata,omitempty"`
+	ScreenshotS3Key      NullableString                                  `json:"screenshot_s3_key,omitempty"`
+	AssetType            ENUMGITLABREPOSITORY                            `json:"asset_type"`
+	Url                  string                                          `json:"url"`
+	Name                 NullableString                                  `json:"name,omitempty"`
+	HttpUrlToRepo        NullableString                                  `json:"http_url_to_repo,omitempty"`
+	Description          NullableString                                  `json:"description,omitempty"`
+	LocationId           NullableString                                  `json:"location_id,omitempty"`
+	DefaultBranch        NullableString                                  `json:"default_branch,omitempty"`
+	BlobBaseUrl          NullableString                                  `json:"blob_base_url,omitempty"`
+	LastCommit           *CreateAssetGITLABREPOSITORYRequestLastCommit   `json:"last_commit,omitempty"`
+	Owners               []CreateAssetGITLABREPOSITORYRequestOwnersInner `json:"owners,omitempty"`
+	Languages            []ENUMPROPERTIESLANGUAGESITEMS                  `json:"languages,omitempty"`
+	GroupId              NullableFloat32                                 `json:"group_id,omitempty"`
+	GroupFullPath        NullableString                                  `json:"group_full_path,omitempty"`
+	GroupWebUrl          NullableString                                  `json:"group_web_url,omitempty"`
+	ProjectId            NullableFloat32                                 `json:"project_id,omitempty"`
+	Archived             NullableBool                                    `json:"archived,omitempty"`
+	Visibility           NullableENUMPROPERTIESVISIBILITY                `json:"visibility,omitempty"`
+	Group                *CreateAssetGITLABREPOSITORYRequestGroup        `json:"group,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -154,6 +154,7 @@ func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) HasScreenshotS3Key() bool
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) SetScreenshotS3Key(v string) {
 	o.ScreenshotS3Key.Set(&v)
 }
+
 // SetScreenshotS3KeyNil sets the value for ScreenshotS3Key to be an explicit nil
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) SetScreenshotS3KeyNil() {
 	o.ScreenshotS3Key.Set(nil)
@@ -244,6 +245,7 @@ func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) HasName() bool {
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) SetName(v string) {
 	o.Name.Set(&v)
 }
+
 // SetNameNil sets the value for Name to be an explicit nil
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) SetNameNil() {
 	o.Name.Set(nil)
@@ -286,6 +288,7 @@ func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) HasHttpUrlToRepo() bool {
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) SetHttpUrlToRepo(v string) {
 	o.HttpUrlToRepo.Set(&v)
 }
+
 // SetHttpUrlToRepoNil sets the value for HttpUrlToRepo to be an explicit nil
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) SetHttpUrlToRepoNil() {
 	o.HttpUrlToRepo.Set(nil)
@@ -328,6 +331,7 @@ func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) HasDescription() bool {
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) SetDescription(v string) {
 	o.Description.Set(&v)
 }
+
 // SetDescriptionNil sets the value for Description to be an explicit nil
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) SetDescriptionNil() {
 	o.Description.Set(nil)
@@ -370,6 +374,7 @@ func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) HasLocationId() bool {
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) SetLocationId(v string) {
 	o.LocationId.Set(&v)
 }
+
 // SetLocationIdNil sets the value for LocationId to be an explicit nil
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) SetLocationIdNil() {
 	o.LocationId.Set(nil)
@@ -412,6 +417,7 @@ func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) HasDefaultBranch() bool {
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) SetDefaultBranch(v string) {
 	o.DefaultBranch.Set(&v)
 }
+
 // SetDefaultBranchNil sets the value for DefaultBranch to be an explicit nil
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) SetDefaultBranchNil() {
 	o.DefaultBranch.Set(nil)
@@ -454,6 +460,7 @@ func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) HasBlobBaseUrl() bool {
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) SetBlobBaseUrl(v string) {
 	o.BlobBaseUrl.Set(&v)
 }
+
 // SetBlobBaseUrlNil sets the value for BlobBaseUrl to be an explicit nil
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) SetBlobBaseUrlNil() {
 	o.BlobBaseUrl.Set(nil)
@@ -594,6 +601,7 @@ func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) HasGroupId() bool {
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) SetGroupId(v float32) {
 	o.GroupId.Set(&v)
 }
+
 // SetGroupIdNil sets the value for GroupId to be an explicit nil
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) SetGroupIdNil() {
 	o.GroupId.Set(nil)
@@ -636,6 +644,7 @@ func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) HasGroupFullPath() bool {
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) SetGroupFullPath(v string) {
 	o.GroupFullPath.Set(&v)
 }
+
 // SetGroupFullPathNil sets the value for GroupFullPath to be an explicit nil
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) SetGroupFullPathNil() {
 	o.GroupFullPath.Set(nil)
@@ -678,6 +687,7 @@ func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) HasGroupWebUrl() bool {
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) SetGroupWebUrl(v string) {
 	o.GroupWebUrl.Set(&v)
 }
+
 // SetGroupWebUrlNil sets the value for GroupWebUrl to be an explicit nil
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) SetGroupWebUrlNil() {
 	o.GroupWebUrl.Set(nil)
@@ -720,6 +730,7 @@ func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) HasProjectId() bool {
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) SetProjectId(v float32) {
 	o.ProjectId.Set(&v)
 }
+
 // SetProjectIdNil sets the value for ProjectId to be an explicit nil
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) SetProjectIdNil() {
 	o.ProjectId.Set(nil)
@@ -762,6 +773,7 @@ func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) HasArchived() bool {
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) SetArchived(v bool) {
 	o.Archived.Set(&v)
 }
+
 // SetArchivedNil sets the value for Archived to be an explicit nil
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) SetArchivedNil() {
 	o.Archived.Set(nil)
@@ -804,6 +816,7 @@ func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) HasVisibility() bool {
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) SetVisibility(v ENUMPROPERTIESVISIBILITY) {
 	o.Visibility.Set(&v)
 }
+
 // SetVisibilityNil sets the value for Visibility to be an explicit nil
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) SetVisibilityNil() {
 	o.Visibility.Set(nil)
@@ -847,7 +860,7 @@ func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) SetGroup(v CreateAssetGIT
 }
 
 func (o CreateAssetCODEPROJECTRequestRepositoryOneOf) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -936,10 +949,10 @@ func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) UnmarshalJSON(data []byte
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -1020,5 +1033,3 @@ func (v *NullableCreateAssetCODEPROJECTRequestRepositoryOneOf) UnmarshalJSON(src
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -19,7 +19,7 @@ var _ MappedNullable = &CreateAssetDNSRequestPathsInsightsInnerReturnType{}
 
 // CreateAssetDNSRequestPathsInsightsInnerReturnType struct for CreateAssetDNSRequestPathsInsightsInnerReturnType
 type CreateAssetDNSRequestPathsInsightsInnerReturnType struct {
-	Responses *map[string]CreateAssetDNSRequestPathsInsightsInnerReturnTypeResponsesValue `json:"responses,omitempty"`
+	Responses            *map[string]CreateAssetDNSRequestPathsInsightsInnerReturnTypeResponsesValue `json:"responses,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -75,7 +75,7 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerReturnType) SetResponses(v map[s
 }
 
 func (o CreateAssetDNSRequestPathsInsightsInnerReturnType) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -151,5 +151,3 @@ func (v *NullableCreateAssetDNSRequestPathsInsightsInnerReturnType) UnmarshalJSO
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

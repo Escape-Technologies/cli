@@ -20,12 +20,12 @@ var _ MappedNullable = &CreateCustomRuleRequestContentRuleOneOf{}
 
 // CreateCustomRuleRequestContentRuleOneOf struct for CreateCustomRuleRequestContentRuleOneOf
 type CreateCustomRuleRequestContentRuleOneOf struct {
-	Alert CreateCustomRuleRequestContentRuleOneOfAlert `json:"alert"`
-	Type ENUMAPI `json:"type"`
-	Seed []CreateCustomRuleRequestContentRuleOneOfSeedInner `json:"seed,omitempty"`
-	Transform *CreateCustomRuleRequestContentRuleOneOfTransform `json:"transform,omitempty"`
-	Detect []CreateCustomRuleRequestContentRuleOneOfTransformTriggerInner `json:"detect"`
-	Extractors []CreateCustomRuleRequestContentRuleOneOfExtractorsInner `json:"extractors,omitempty"`
+	Alert                CreateCustomRuleRequestContentRuleOneOfAlert                   `json:"alert"`
+	Type                 ENUMAPI                                                        `json:"type"`
+	Seed                 []CreateCustomRuleRequestContentRuleOneOfSeedInner             `json:"seed,omitempty"`
+	Transform            *CreateCustomRuleRequestContentRuleOneOfTransform              `json:"transform,omitempty"`
+	Detect               []CreateCustomRuleRequestContentRuleOneOfTransformTriggerInner `json:"detect"`
+	Extractors           []CreateCustomRuleRequestContentRuleOneOfExtractorsInner       `json:"extractors,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -221,7 +221,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOf) SetExtractors(v []CreateCustom
 }
 
 func (o CreateCustomRuleRequestContentRuleOneOf) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -265,10 +265,10 @@ func (o *CreateCustomRuleRequestContentRuleOneOf) UnmarshalJSON(data []byte) (er
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -334,5 +334,3 @@ func (v *NullableCreateCustomRuleRequestContentRuleOneOf) UnmarshalJSON(src []by
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

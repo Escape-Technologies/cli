@@ -19,11 +19,11 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationFrontendDastCrawlingTu
 
 // GetProfile200ResponseConfigurationFrontendDastCrawlingTuning struct for GetProfile200ResponseConfigurationFrontendDastCrawlingTuning
 type GetProfile200ResponseConfigurationFrontendDastCrawlingTuning struct {
-	MaxUniqueValuesPerQueryParam NullableFloat32 `json:"max_unique_values_per_query_param,omitempty"`
-	MaxUniqueFragmentsPerPage NullableFloat32 `json:"max_unique_fragments_per_page,omitempty"`
+	MaxUniqueValuesPerQueryParam  NullableFloat32 `json:"max_unique_values_per_query_param,omitempty"`
+	MaxUniqueFragmentsPerPage     NullableFloat32 `json:"max_unique_fragments_per_page,omitempty"`
 	MaxParameterizedUrlVariations NullableFloat32 `json:"max_parameterized_url_variations,omitempty"`
-	OnlyInscopeCrawlingLogs NullableBool `json:"only_inscope_crawling_logs,omitempty"`
-	AdditionalProperties map[string]interface{}
+	OnlyInscopeCrawlingLogs       NullableBool    `json:"only_inscope_crawling_logs,omitempty"`
+	AdditionalProperties          map[string]interface{}
 }
 
 type _GetProfile200ResponseConfigurationFrontendDastCrawlingTuning GetProfile200ResponseConfigurationFrontendDastCrawlingTuning
@@ -77,6 +77,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) HasMaxUni
 func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) SetMaxUniqueValuesPerQueryParam(v float32) {
 	o.MaxUniqueValuesPerQueryParam.Set(&v)
 }
+
 // SetMaxUniqueValuesPerQueryParamNil sets the value for MaxUniqueValuesPerQueryParam to be an explicit nil
 func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) SetMaxUniqueValuesPerQueryParamNil() {
 	o.MaxUniqueValuesPerQueryParam.Set(nil)
@@ -119,6 +120,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) HasMaxUni
 func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) SetMaxUniqueFragmentsPerPage(v float32) {
 	o.MaxUniqueFragmentsPerPage.Set(&v)
 }
+
 // SetMaxUniqueFragmentsPerPageNil sets the value for MaxUniqueFragmentsPerPage to be an explicit nil
 func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) SetMaxUniqueFragmentsPerPageNil() {
 	o.MaxUniqueFragmentsPerPage.Set(nil)
@@ -161,6 +163,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) HasMaxPar
 func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) SetMaxParameterizedUrlVariations(v float32) {
 	o.MaxParameterizedUrlVariations.Set(&v)
 }
+
 // SetMaxParameterizedUrlVariationsNil sets the value for MaxParameterizedUrlVariations to be an explicit nil
 func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) SetMaxParameterizedUrlVariationsNil() {
 	o.MaxParameterizedUrlVariations.Set(nil)
@@ -203,6 +206,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) HasOnlyIn
 func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) SetOnlyInscopeCrawlingLogs(v bool) {
 	o.OnlyInscopeCrawlingLogs.Set(&v)
 }
+
 // SetOnlyInscopeCrawlingLogsNil sets the value for OnlyInscopeCrawlingLogs to be an explicit nil
 func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) SetOnlyInscopeCrawlingLogsNil() {
 	o.OnlyInscopeCrawlingLogs.Set(nil)
@@ -214,7 +218,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) UnsetOnly
 }
 
 func (o GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -302,5 +306,3 @@ func (v *NullableGetProfile200ResponseConfigurationFrontendDastCrawlingTuning) U
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

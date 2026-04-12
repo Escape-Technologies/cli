@@ -12,8 +12,8 @@ package v3
 
 import (
 	"encoding/json"
-	"time"
 	"fmt"
+	"time"
 )
 
 // checks if the ListProjects200ResponseDataInnerBindingsInner type satisfies the MappedNullable interface at compile time
@@ -30,7 +30,7 @@ type ListProjects200ResponseDataInnerBindingsInner struct {
 	// The id of the project bound by the role binding
 	ProjectId NullableString `json:"projectId,omitempty"`
 	// The id of the user bound by the role binding
-	UserId string `json:"userId"`
+	UserId               string `json:"userId"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -161,6 +161,7 @@ func (o *ListProjects200ResponseDataInnerBindingsInner) HasProjectId() bool {
 func (o *ListProjects200ResponseDataInnerBindingsInner) SetProjectId(v string) {
 	o.ProjectId.Set(&v)
 }
+
 // SetProjectIdNil sets the value for ProjectId to be an explicit nil
 func (o *ListProjects200ResponseDataInnerBindingsInner) SetProjectIdNil() {
 	o.ProjectId.Set(nil)
@@ -196,7 +197,7 @@ func (o *ListProjects200ResponseDataInnerBindingsInner) SetUserId(v string) {
 }
 
 func (o ListProjects200ResponseDataInnerBindingsInner) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -236,10 +237,10 @@ func (o *ListProjects200ResponseDataInnerBindingsInner) UnmarshalJSON(data []byt
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -304,5 +305,3 @@ func (v *NullableListProjects200ResponseDataInnerBindingsInner) UnmarshalJSON(sr
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

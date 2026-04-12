@@ -20,15 +20,15 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationAuthenticationUsersInn
 
 // GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf1 struct for GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf1
 type GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf1 struct {
-	Action ENUMFILL `json:"action"`
-	AllowFailure NullableBool `json:"allow_failure,omitempty"`
-	Locator string `json:"locator"`
-	OneByOne NullableBool `json:"one_by_one,omitempty"`
-	Value string `json:"value"`
-	AutoSubmit NullableBool `json:"auto_submit,omitempty"`
-	Timeout NullableFloat32 `json:"timeout,omitempty"`
-	SelectFirstIfMultiple NullableBool `json:"select_first_if_multiple,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Action                ENUMFILL        `json:"action"`
+	AllowFailure          NullableBool    `json:"allow_failure,omitempty"`
+	Locator               string          `json:"locator"`
+	OneByOne              NullableBool    `json:"one_by_one,omitempty"`
+	Value                 string          `json:"value"`
+	AutoSubmit            NullableBool    `json:"auto_submit,omitempty"`
+	Timeout               NullableFloat32 `json:"timeout,omitempty"`
+	SelectFirstIfMultiple NullableBool    `json:"select_first_if_multiple,omitempty"`
+	AdditionalProperties  map[string]interface{}
 }
 
 type _GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf1 GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf1
@@ -109,6 +109,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsAc
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf1) SetAllowFailure(v bool) {
 	o.AllowFailure.Set(&v)
 }
+
 // SetAllowFailureNil sets the value for AllowFailure to be an explicit nil
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf1) SetAllowFailureNil() {
 	o.AllowFailure.Set(nil)
@@ -175,6 +176,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsAc
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf1) SetOneByOne(v bool) {
 	o.OneByOne.Set(&v)
 }
+
 // SetOneByOneNil sets the value for OneByOne to be an explicit nil
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf1) SetOneByOneNil() {
 	o.OneByOne.Set(nil)
@@ -241,6 +243,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsAc
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf1) SetAutoSubmit(v bool) {
 	o.AutoSubmit.Set(&v)
 }
+
 // SetAutoSubmitNil sets the value for AutoSubmit to be an explicit nil
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf1) SetAutoSubmitNil() {
 	o.AutoSubmit.Set(nil)
@@ -283,6 +286,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsAc
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf1) SetTimeout(v float32) {
 	o.Timeout.Set(&v)
 }
+
 // SetTimeoutNil sets the value for Timeout to be an explicit nil
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf1) SetTimeoutNil() {
 	o.Timeout.Set(nil)
@@ -325,6 +329,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsAc
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf1) SetSelectFirstIfMultiple(v bool) {
 	o.SelectFirstIfMultiple.Set(&v)
 }
+
 // SetSelectFirstIfMultipleNil sets the value for SelectFirstIfMultiple to be an explicit nil
 func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf1) SetSelectFirstIfMultipleNil() {
 	o.SelectFirstIfMultiple.Set(nil)
@@ -336,7 +341,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsAc
 }
 
 func (o GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf1) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -386,10 +391,10 @@ func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsAc
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -457,5 +462,3 @@ func (v *NullableGetProfile200ResponseConfigurationAuthenticationUsersInnerCrede
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

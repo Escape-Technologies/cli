@@ -19,13 +19,13 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationSecurityTestsMultiUser
 
 // GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControl struct for GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControl
 type GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControl struct {
-	Skip NullableBool `json:"skip,omitempty"`
-	MainUser NullableString `json:"main_user,omitempty"`
-	NaturalLanguageRule NullableString `json:"natural_language_rule,omitempty"`
-	OtherUsers *GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControlOtherUsers `json:"other_users,omitempty"`
-	SpecificUsers *map[string]GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControlOtherUsers `json:"specific_users,omitempty"`
-	Paths []string `json:"paths,omitempty"`
-	KeysMatching []string `json:"keys_matching,omitempty"`
+	Skip                 NullableBool                                                                                `json:"skip,omitempty"`
+	MainUser             NullableString                                                                              `json:"main_user,omitempty"`
+	NaturalLanguageRule  NullableString                                                                              `json:"natural_language_rule,omitempty"`
+	OtherUsers           *GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControlOtherUsers            `json:"other_users,omitempty"`
+	SpecificUsers        *map[string]GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControlOtherUsers `json:"specific_users,omitempty"`
+	Paths                []string                                                                                    `json:"paths,omitempty"`
+	KeysMatching         []string                                                                                    `json:"keys_matching,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -80,6 +80,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControl) 
 func (o *GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControl) SetSkip(v bool) {
 	o.Skip.Set(&v)
 }
+
 // SetSkipNil sets the value for Skip to be an explicit nil
 func (o *GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControl) SetSkipNil() {
 	o.Skip.Set(nil)
@@ -122,6 +123,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControl) 
 func (o *GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControl) SetMainUser(v string) {
 	o.MainUser.Set(&v)
 }
+
 // SetMainUserNil sets the value for MainUser to be an explicit nil
 func (o *GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControl) SetMainUserNil() {
 	o.MainUser.Set(nil)
@@ -164,6 +166,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControl) 
 func (o *GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControl) SetNaturalLanguageRule(v string) {
 	o.NaturalLanguageRule.Set(&v)
 }
+
 // SetNaturalLanguageRuleNil sets the value for NaturalLanguageRule to be an explicit nil
 func (o *GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControl) SetNaturalLanguageRuleNil() {
 	o.NaturalLanguageRule.Set(nil)
@@ -305,7 +308,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControl) 
 }
 
 func (o GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControl) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -405,5 +408,3 @@ func (v *NullableGetProfile200ResponseConfigurationSecurityTestsMultiUserAccessC
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

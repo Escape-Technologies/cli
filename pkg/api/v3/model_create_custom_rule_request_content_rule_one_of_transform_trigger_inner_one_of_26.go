@@ -20,10 +20,10 @@ var _ MappedNullable = &CreateCustomRuleRequestContentRuleOneOfTransformTriggerI
 
 // CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf26 struct for CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf26
 type CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf26 struct {
-	Is NullableBool `json:"is,omitempty"`
-	IsNot NullableBool `json:"is_not,omitempty"`
-	If ENUMHELPERSREGEXMATCHESALL `json:"if"`
-	Regex string `json:"regex"`
+	Is                   NullableBool               `json:"is,omitempty"`
+	IsNot                NullableBool               `json:"is_not,omitempty"`
+	If                   ENUMHELPERSREGEXMATCHESALL `json:"if"`
+	Regex                string                     `json:"regex"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -80,6 +80,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf26) Ha
 func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf26) SetIs(v bool) {
 	o.Is.Set(&v)
 }
+
 // SetIsNil sets the value for Is to be an explicit nil
 func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf26) SetIsNil() {
 	o.Is.Set(nil)
@@ -122,6 +123,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf26) Ha
 func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf26) SetIsNot(v bool) {
 	o.IsNot.Set(&v)
 }
+
 // SetIsNotNil sets the value for IsNot to be an explicit nil
 func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf26) SetIsNotNil() {
 	o.IsNot.Set(nil)
@@ -181,7 +183,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf26) Se
 }
 
 func (o CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf26) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -220,10 +222,10 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf26) Un
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -287,5 +289,3 @@ func (v *NullableCreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOne
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

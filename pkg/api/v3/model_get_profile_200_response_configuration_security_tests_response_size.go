@@ -19,8 +19,8 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationSecurityTestsResponseS
 
 // GetProfile200ResponseConfigurationSecurityTestsResponseSize struct for GetProfile200ResponseConfigurationSecurityTestsResponseSize
 type GetProfile200ResponseConfigurationSecurityTestsResponseSize struct {
-	Skip NullableBool `json:"skip,omitempty"`
-	MaxLength NullableFloat32 `json:"max_length,omitempty"`
+	Skip                 NullableBool    `json:"skip,omitempty"`
+	MaxLength            NullableFloat32 `json:"max_length,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -75,6 +75,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTestsResponseSize) HasSkip() 
 func (o *GetProfile200ResponseConfigurationSecurityTestsResponseSize) SetSkip(v bool) {
 	o.Skip.Set(&v)
 }
+
 // SetSkipNil sets the value for Skip to be an explicit nil
 func (o *GetProfile200ResponseConfigurationSecurityTestsResponseSize) SetSkipNil() {
 	o.Skip.Set(nil)
@@ -117,6 +118,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTestsResponseSize) HasMaxLeng
 func (o *GetProfile200ResponseConfigurationSecurityTestsResponseSize) SetMaxLength(v float32) {
 	o.MaxLength.Set(&v)
 }
+
 // SetMaxLengthNil sets the value for MaxLength to be an explicit nil
 func (o *GetProfile200ResponseConfigurationSecurityTestsResponseSize) SetMaxLengthNil() {
 	o.MaxLength.Set(nil)
@@ -128,7 +130,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTestsResponseSize) UnsetMaxLe
 }
 
 func (o GetProfile200ResponseConfigurationSecurityTestsResponseSize) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -208,5 +210,3 @@ func (v *NullableGetProfile200ResponseConfigurationSecurityTestsResponseSize) Un
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

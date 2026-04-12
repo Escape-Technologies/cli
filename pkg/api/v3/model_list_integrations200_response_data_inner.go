@@ -12,8 +12,8 @@ package v3
 
 import (
 	"encoding/json"
-	"time"
 	"fmt"
+	"time"
 )
 
 // checks if the ListIntegrations200ResponseDataInner type satisfies the MappedNullable interface at compile time
@@ -34,13 +34,13 @@ type ListIntegrations200ResponseDataInner struct {
 	// The date and time the last pull workflow was executed
 	LastPullWorkflowAt NullableTime `json:"lastPullWorkflowAt"`
 	// The projects of the integration
-	Projects []ListProjects200ResponseDataInner `json:"projects"`
-	Location LocationSummarized1 `json:"location"`
-	Kind ENUMPROPERTIESDATAITEMSPROPERTIESKIND `json:"kind"`
+	Projects []ListProjects200ResponseDataInner    `json:"projects"`
+	Location LocationSummarized1                   `json:"location"`
+	Kind     ENUMPROPERTIESDATAITEMSPROPERTIESKIND `json:"kind"`
 	// Whether the integration is valid
 	Valid bool `json:"valid"`
 	// The validation errors of the integration
-	ValidationErrors []string `json:"validationErrors"`
+	ValidationErrors     []string `json:"validationErrors"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -343,7 +343,7 @@ func (o *ListIntegrations200ResponseDataInner) SetValidationErrors(v []string) {
 }
 
 func (o ListIntegrations200ResponseDataInner) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -394,10 +394,10 @@ func (o *ListIntegrations200ResponseDataInner) UnmarshalJSON(data []byte) (err e
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -468,5 +468,3 @@ func (v *NullableListIntegrations200ResponseDataInner) UnmarshalJSON(src []byte)
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

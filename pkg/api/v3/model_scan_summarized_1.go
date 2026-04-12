@@ -43,8 +43,8 @@ type ScanSummarized1 struct {
 	// The commit hash of the scan
 	CommitHash NullableString `json:"commitHash"`
 	// The commit branch of the scan
-	CommitBranch NullableString `json:"commitBranch"`
-	Links ScanSummarizedLinks `json:"links"`
+	CommitBranch         NullableString      `json:"commitBranch"`
+	Links                ScanSummarizedLinks `json:"links"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -403,7 +403,7 @@ func (o *ScanSummarized1) SetLinks(v ScanSummarizedLinks) {
 }
 
 func (o ScanSummarized1) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -458,10 +458,10 @@ func (o *ScanSummarized1) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -534,5 +534,3 @@ func (v *NullableScanSummarized1) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -20,17 +20,17 @@ var _ MappedNullable = &AssetFrontendDetailed{}
 
 // AssetFrontendDetailed The frontend of the asset
 type AssetFrontendDetailed struct {
-	Type ENUMWEBAPP `json:"type"`
-	Url string `json:"url"`
-	Framework NullableString `json:"framework"`
-	APIFramework NullableString `json:"APIFramework"`
-	AuthProtocol NullableString `json:"authProtocol"`
-	AuthTechnology NullableENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESAUTHTECHNOLOGY `json:"authTechnology"`
-	CloudProvider NullableENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER `json:"cloudProvider"`
-	WafProvider NullableENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESWAFPROVIDER `json:"wafProvider"`
-	Environment NullableENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESENVIRONMENT `json:"environment"`
-	Ips []string `json:"ips"`
-	Tls bool `json:"tls"`
+	Type                 ENUMWEBAPP                                                                              `json:"type"`
+	Url                  string                                                                                  `json:"url"`
+	Framework            NullableString                                                                          `json:"framework"`
+	APIFramework         NullableString                                                                          `json:"APIFramework"`
+	AuthProtocol         NullableString                                                                          `json:"authProtocol"`
+	AuthTechnology       NullableENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESAUTHTECHNOLOGY `json:"authTechnology"`
+	CloudProvider        NullableENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER  `json:"cloudProvider"`
+	WafProvider          NullableENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESWAFPROVIDER    `json:"wafProvider"`
+	Environment          NullableENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESENVIRONMENT    `json:"environment"`
+	Ips                  []string                                                                                `json:"ips"`
+	Tls                  bool                                                                                    `json:"tls"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -343,7 +343,7 @@ func (o *AssetFrontendDetailed) SetTls(v bool) {
 }
 
 func (o AssetFrontendDetailed) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -394,10 +394,10 @@ func (o *AssetFrontendDetailed) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -468,5 +468,3 @@ func (v *NullableAssetFrontendDetailed) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

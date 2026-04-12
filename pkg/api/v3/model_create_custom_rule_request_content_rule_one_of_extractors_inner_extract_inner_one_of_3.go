@@ -20,11 +20,11 @@ var _ MappedNullable = &CreateCustomRuleRequestContentRuleOneOfExtractorsInnerEx
 
 // CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf3 struct for CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf3
 type CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf3 struct {
-	Key ENUMRESPONSECOOKIES `json:"key"`
-	Variable string `json:"variable"`
-	CanOverwrite NullableBool `json:"can_overwrite,omitempty"`
-	AcceptNull NullableBool `json:"accept_null,omitempty"`
-	Name string `json:"name"`
+	Key                  ENUMRESPONSECOOKIES `json:"key"`
+	Variable             string              `json:"variable"`
+	CanOverwrite         NullableBool        `json:"can_overwrite,omitempty"`
+	AcceptNull           NullableBool        `json:"accept_null,omitempty"`
+	Name                 string              `json:"name"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -130,6 +130,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf
 func (o *CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf3) SetCanOverwrite(v bool) {
 	o.CanOverwrite.Set(&v)
 }
+
 // SetCanOverwriteNil sets the value for CanOverwrite to be an explicit nil
 func (o *CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf3) SetCanOverwriteNil() {
 	o.CanOverwrite.Set(nil)
@@ -172,6 +173,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf
 func (o *CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf3) SetAcceptNull(v bool) {
 	o.AcceptNull.Set(&v)
 }
+
 // SetAcceptNullNil sets the value for AcceptNull to be an explicit nil
 func (o *CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf3) SetAcceptNullNil() {
 	o.AcceptNull.Set(nil)
@@ -207,7 +209,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf
 }
 
 func (o CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf3) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -248,10 +250,10 @@ func (o *CreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractInnerOneOf
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -316,5 +318,3 @@ func (v *NullableCreateCustomRuleRequestContentRuleOneOfExtractorsInnerExtractIn
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

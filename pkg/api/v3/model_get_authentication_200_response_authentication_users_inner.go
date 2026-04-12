@@ -20,11 +20,11 @@ var _ MappedNullable = &GetAuthentication200ResponseAuthenticationUsersInner{}
 
 // GetAuthentication200ResponseAuthenticationUsersInner struct for GetAuthentication200ResponseAuthenticationUsersInner
 type GetAuthentication200ResponseAuthenticationUsersInner struct {
-	Username string `json:"username"`
-	Authentication GetAuthentication200ResponseAuthenticationUsersInnerAuthentication `json:"authentication"`
-	FailureMessage NullableString `json:"failure_message,omitempty"`
-	IsValid bool `json:"is_valid"`
-	IsoExpirationDate string `json:"iso_expiration_date"`
+	Username             string                                                             `json:"username"`
+	Authentication       GetAuthentication200ResponseAuthenticationUsersInnerAuthentication `json:"authentication"`
+	FailureMessage       NullableString                                                     `json:"failure_message,omitempty"`
+	IsValid              bool                                                               `json:"is_valid"`
+	IsoExpirationDate    string                                                             `json:"iso_expiration_date"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -131,6 +131,7 @@ func (o *GetAuthentication200ResponseAuthenticationUsersInner) HasFailureMessage
 func (o *GetAuthentication200ResponseAuthenticationUsersInner) SetFailureMessage(v string) {
 	o.FailureMessage.Set(&v)
 }
+
 // SetFailureMessageNil sets the value for FailureMessage to be an explicit nil
 func (o *GetAuthentication200ResponseAuthenticationUsersInner) SetFailureMessageNil() {
 	o.FailureMessage.Set(nil)
@@ -190,7 +191,7 @@ func (o *GetAuthentication200ResponseAuthenticationUsersInner) SetIsoExpirationD
 }
 
 func (o GetAuthentication200ResponseAuthenticationUsersInner) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -230,10 +231,10 @@ func (o *GetAuthentication200ResponseAuthenticationUsersInner) UnmarshalJSON(dat
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -298,5 +299,3 @@ func (v *NullableGetAuthentication200ResponseAuthenticationUsersInner) Unmarshal
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

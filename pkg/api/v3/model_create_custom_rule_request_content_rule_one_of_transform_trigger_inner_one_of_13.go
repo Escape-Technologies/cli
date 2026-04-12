@@ -20,12 +20,12 @@ var _ MappedNullable = &CreateCustomRuleRequestContentRuleOneOfTransformTriggerI
 
 // CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13 struct for CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13
 type CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13 struct {
-	Is NullableFloat32 `json:"is,omitempty"`
-	IsNot NullableFloat32 `json:"is_not,omitempty"`
-	In []float32 `json:"in,omitempty"`
-	Gt NullableFloat32 `json:"gt,omitempty"`
-	Lt NullableFloat32 `json:"lt,omitempty"`
-	If ENUMRESPONSESTATUSCODE `json:"if"`
+	Is                   NullableFloat32        `json:"is,omitempty"`
+	IsNot                NullableFloat32        `json:"is_not,omitempty"`
+	In                   []float32              `json:"in,omitempty"`
+	Gt                   NullableFloat32        `json:"gt,omitempty"`
+	Lt                   NullableFloat32        `json:"lt,omitempty"`
+	If                   ENUMRESPONSESTATUSCODE `json:"if"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -81,6 +81,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13) Ha
 func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13) SetIs(v float32) {
 	o.Is.Set(&v)
 }
+
 // SetIsNil sets the value for Is to be an explicit nil
 func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13) SetIsNil() {
 	o.Is.Set(nil)
@@ -123,6 +124,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13) Ha
 func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13) SetIsNot(v float32) {
 	o.IsNot.Set(&v)
 }
+
 // SetIsNotNil sets the value for IsNot to be an explicit nil
 func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13) SetIsNotNil() {
 	o.IsNot.Set(nil)
@@ -198,6 +200,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13) Ha
 func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13) SetGt(v float32) {
 	o.Gt.Set(&v)
 }
+
 // SetGtNil sets the value for Gt to be an explicit nil
 func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13) SetGtNil() {
 	o.Gt.Set(nil)
@@ -240,6 +243,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13) Ha
 func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13) SetLt(v float32) {
 	o.Lt.Set(&v)
 }
+
 // SetLtNil sets the value for Lt to be an explicit nil
 func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13) SetLtNil() {
 	o.Lt.Set(nil)
@@ -275,7 +279,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13) Se
 }
 
 func (o CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -321,10 +325,10 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13) Un
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -390,5 +394,3 @@ func (v *NullableCreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOne
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

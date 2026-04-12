@@ -20,17 +20,17 @@ var _ MappedNullable = &CreateAssetBITBUCKETREPOSITORYRequestOrg{}
 
 // CreateAssetBITBUCKETREPOSITORYRequestOrg struct for CreateAssetBITBUCKETREPOSITORYRequestOrg
 type CreateAssetBITBUCKETREPOSITORYRequestOrg struct {
-	AssetClass ENUMSOURCECODEMANAGEMENT `json:"asset_class"`
-	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
-	ScreenshotS3Key NullableString `json:"screenshot_s3_key,omitempty"`
-	AssetType ENUMBITBUCKETORGANIZATION `json:"asset_type"`
-	Name NullableString `json:"name,omitempty"`
-	ImmutableKey string `json:"immutable_key"`
-	Email string `json:"email"`
-	ApiKey string `json:"api_key"`
-	WorkspaceSlug string `json:"workspace_slug"`
-	InstanceUrl NullableString `json:"instance_url,omitempty"`
-	LocationId NullableString `json:"location_id,omitempty"`
+	AssetClass           ENUMSOURCECODEMANAGEMENT  `json:"asset_class"`
+	ExtraMetadata        map[string]interface{}    `json:"extra_metadata,omitempty"`
+	ScreenshotS3Key      NullableString            `json:"screenshot_s3_key,omitempty"`
+	AssetType            ENUMBITBUCKETORGANIZATION `json:"asset_type"`
+	Name                 NullableString            `json:"name,omitempty"`
+	ImmutableKey         string                    `json:"immutable_key"`
+	Email                string                    `json:"email"`
+	ApiKey               string                    `json:"api_key"`
+	WorkspaceSlug        string                    `json:"workspace_slug"`
+	InstanceUrl          NullableString            `json:"instance_url,omitempty"`
+	LocationId           NullableString            `json:"location_id,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -147,6 +147,7 @@ func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) HasScreenshotS3Key() bool {
 func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) SetScreenshotS3Key(v string) {
 	o.ScreenshotS3Key.Set(&v)
 }
+
 // SetScreenshotS3KeyNil sets the value for ScreenshotS3Key to be an explicit nil
 func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) SetScreenshotS3KeyNil() {
 	o.ScreenshotS3Key.Set(nil)
@@ -213,6 +214,7 @@ func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) HasName() bool {
 func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) SetName(v string) {
 	o.Name.Set(&v)
 }
+
 // SetNameNil sets the value for Name to be an explicit nil
 func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) SetNameNil() {
 	o.Name.Set(nil)
@@ -351,6 +353,7 @@ func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) HasInstanceUrl() bool {
 func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) SetInstanceUrl(v string) {
 	o.InstanceUrl.Set(&v)
 }
+
 // SetInstanceUrlNil sets the value for InstanceUrl to be an explicit nil
 func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) SetInstanceUrlNil() {
 	o.InstanceUrl.Set(nil)
@@ -393,6 +396,7 @@ func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) HasLocationId() bool {
 func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) SetLocationId(v string) {
 	o.LocationId.Set(&v)
 }
+
 // SetLocationIdNil sets the value for LocationId to be an explicit nil
 func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) SetLocationIdNil() {
 	o.LocationId.Set(nil)
@@ -404,7 +408,7 @@ func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) UnsetLocationId() {
 }
 
 func (o CreateAssetBITBUCKETREPOSITORYRequestOrg) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -460,10 +464,10 @@ func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) UnmarshalJSON(data []byte) (e
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -534,5 +538,3 @@ func (v *NullableCreateAssetBITBUCKETREPOSITORYRequestOrg) UnmarshalJSON(src []b
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

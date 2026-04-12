@@ -20,13 +20,13 @@ var _ MappedNullable = &CreateCustomRuleRequestContentRuleOneOfTransformMutateIn
 
 // CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf3 struct for CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf3
 type CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf3 struct {
-	Key ENUMREQUESTHEADERS `json:"key"`
-	UseExtraction NullableBool `json:"use_extraction,omitempty"`
-	Value *string `json:"value,omitempty"`
-	Values []string `json:"values,omitempty"`
-	RegexReplace *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOfRegexReplace `json:"regex_replace,omitempty"`
-	Name string `json:"name"`
-	Delete *bool `json:"delete,omitempty"`
+	Key                  ENUMREQUESTHEADERS                                                            `json:"key"`
+	UseExtraction        NullableBool                                                                  `json:"use_extraction,omitempty"`
+	Value                *string                                                                       `json:"value,omitempty"`
+	Values               []string                                                                      `json:"values,omitempty"`
+	RegexReplace         *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOfRegexReplace `json:"regex_replace,omitempty"`
+	Name                 string                                                                        `json:"name"`
+	Delete               *bool                                                                         `json:"delete,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -107,6 +107,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf3) HasU
 func (o *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf3) SetUseExtraction(v bool) {
 	o.UseExtraction.Set(&v)
 }
+
 // SetUseExtractionNil sets the value for UseExtraction to be an explicit nil
 func (o *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf3) SetUseExtractionNil() {
 	o.UseExtraction.Set(nil)
@@ -270,7 +271,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf3) SetD
 }
 
 func (o CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf3) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -318,10 +319,10 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf3) Unma
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -388,5 +389,3 @@ func (v *NullableCreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneO
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -20,17 +20,17 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationAuthenticationPresetsI
 
 // GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf3 struct for GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf3
 type GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf3 struct {
-	Type ENUMOAUTHAUTHZCODEBROWSER `json:"type"`
-	Users []GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf3UsersInner `json:"users"`
-	AuthorizationUrl string `json:"authorization_url"`
-	TokenUrl string `json:"token_url"`
-	ClientId string `json:"client_id"`
-	ClientSecret string `json:"client_secret"`
-	RedirectUri string `json:"redirect_uri"`
-	Scopes []string `json:"scopes,omitempty"`
-	UsePkce bool `json:"use_pkce"`
-	LoginTimeout NullableFloat32 `json:"login_timeout,omitempty"`
-	LogoutDetection *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersLogoutDetection `json:"logout_detection,omitempty"`
+	Type                 ENUMOAUTHAUTHZCODEBROWSER                                                                                      `json:"type"`
+	Users                []GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf3UsersInner                                 `json:"users"`
+	AuthorizationUrl     string                                                                                                         `json:"authorization_url"`
+	TokenUrl             string                                                                                                         `json:"token_url"`
+	ClientId             string                                                                                                         `json:"client_id"`
+	ClientSecret         string                                                                                                         `json:"client_secret"`
+	RedirectUri          string                                                                                                         `json:"redirect_uri"`
+	Scopes               []string                                                                                                       `json:"scopes,omitempty"`
+	UsePkce              bool                                                                                                           `json:"use_pkce"`
+	LoginTimeout         NullableFloat32                                                                                                `json:"login_timeout,omitempty"`
+	LogoutDetection      *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersLogoutDetection `json:"logout_detection,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -317,6 +317,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf3) Has
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf3) SetLoginTimeout(v float32) {
 	o.LoginTimeout.Set(&v)
 }
+
 // SetLoginTimeoutNil sets the value for LoginTimeout to be an explicit nil
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf3) SetLoginTimeoutNil() {
 	o.LoginTimeout.Set(nil)
@@ -360,7 +361,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf3) Set
 }
 
 func (o GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf3) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -414,10 +415,10 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf3) Unm
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -488,5 +489,3 @@ func (v *NullableGetProfile200ResponseConfigurationAuthenticationPresetsInnerOne
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -19,9 +19,9 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationFrontendDastAgenticCra
 
 // GetProfile200ResponseConfigurationFrontendDastAgenticCrawling struct for GetProfile200ResponseConfigurationFrontendDastAgenticCrawling
 type GetProfile200ResponseConfigurationFrontendDastAgenticCrawling struct {
-	Enabled NullableBool `json:"enabled,omitempty"`
-	SpaCrawling NullableBool `json:"spa_crawling,omitempty"`
-	Instructions NullableString `json:"instructions,omitempty"`
+	Enabled              NullableBool   `json:"enabled,omitempty"`
+	SpaCrawling          NullableBool   `json:"spa_crawling,omitempty"`
+	Instructions         NullableString `json:"instructions,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -76,6 +76,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDastAgenticCrawling) HasEnabl
 func (o *GetProfile200ResponseConfigurationFrontendDastAgenticCrawling) SetEnabled(v bool) {
 	o.Enabled.Set(&v)
 }
+
 // SetEnabledNil sets the value for Enabled to be an explicit nil
 func (o *GetProfile200ResponseConfigurationFrontendDastAgenticCrawling) SetEnabledNil() {
 	o.Enabled.Set(nil)
@@ -118,6 +119,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDastAgenticCrawling) HasSpaCr
 func (o *GetProfile200ResponseConfigurationFrontendDastAgenticCrawling) SetSpaCrawling(v bool) {
 	o.SpaCrawling.Set(&v)
 }
+
 // SetSpaCrawlingNil sets the value for SpaCrawling to be an explicit nil
 func (o *GetProfile200ResponseConfigurationFrontendDastAgenticCrawling) SetSpaCrawlingNil() {
 	o.SpaCrawling.Set(nil)
@@ -160,6 +162,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDastAgenticCrawling) HasInstr
 func (o *GetProfile200ResponseConfigurationFrontendDastAgenticCrawling) SetInstructions(v string) {
 	o.Instructions.Set(&v)
 }
+
 // SetInstructionsNil sets the value for Instructions to be an explicit nil
 func (o *GetProfile200ResponseConfigurationFrontendDastAgenticCrawling) SetInstructionsNil() {
 	o.Instructions.Set(nil)
@@ -171,7 +174,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDastAgenticCrawling) UnsetIns
 }
 
 func (o GetProfile200ResponseConfigurationFrontendDastAgenticCrawling) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -255,5 +258,3 @@ func (v *NullableGetProfile200ResponseConfigurationFrontendDastAgenticCrawling) 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

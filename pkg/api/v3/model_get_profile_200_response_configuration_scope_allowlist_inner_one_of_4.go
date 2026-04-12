@@ -20,10 +20,10 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationScopeAllowlistInnerOne
 
 // GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf4 struct for GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf4
 type GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf4 struct {
-	Type ENUMRESTAPIURL `json:"type"`
-	Value string `json:"value"`
-	Operation NullableENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS0PROPERTIESOPERATION `json:"operation,omitempty"`
-	Method NullableENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD `json:"method,omitempty"`
+	Type                 ENUMRESTAPIURL                                                                                 `json:"type"`
+	Value                string                                                                                         `json:"value"`
+	Operation            NullableENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS0PROPERTIESOPERATION `json:"operation,omitempty"`
+	Method               NullableENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD    `json:"method,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -128,6 +128,7 @@ func (o *GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf4) HasOperati
 func (o *GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf4) SetOperation(v ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS0PROPERTIESOPERATION) {
 	o.Operation.Set(&v)
 }
+
 // SetOperationNil sets the value for Operation to be an explicit nil
 func (o *GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf4) SetOperationNil() {
 	o.Operation.Set(nil)
@@ -170,6 +171,7 @@ func (o *GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf4) HasMethod(
 func (o *GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf4) SetMethod(v ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD) {
 	o.Method.Set(&v)
 }
+
 // SetMethodNil sets the value for Method to be an explicit nil
 func (o *GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf4) SetMethodNil() {
 	o.Method.Set(nil)
@@ -181,7 +183,7 @@ func (o *GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf4) UnsetMetho
 }
 
 func (o GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf4) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -220,10 +222,10 @@ func (o *GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf4) UnmarshalJ
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -287,5 +289,3 @@ func (v *NullableGetProfile200ResponseConfigurationScopeAllowlistInnerOneOf4) Un
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

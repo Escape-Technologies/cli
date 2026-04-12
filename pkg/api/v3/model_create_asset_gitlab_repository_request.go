@@ -21,28 +21,28 @@ var _ MappedNullable = &CreateAssetGITLABREPOSITORYRequest{}
 // CreateAssetGITLABREPOSITORYRequest struct for CreateAssetGITLABREPOSITORYRequest
 type CreateAssetGITLABREPOSITORYRequest struct {
 	// The list of project IDs bind the asset on.
-	ProjectIds []string `json:"projectIds,omitempty"`
-	Name NullableString `json:"name,omitempty"`
-	AssetClass ENUMREPOSITORY `json:"asset_class"`
-	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
-	ScreenshotS3Key NullableString `json:"screenshot_s3_key,omitempty"`
-	AssetType ENUMGITLABREPOSITORY `json:"asset_type"`
-	Url string `json:"url"`
-	HttpUrlToRepo NullableString `json:"http_url_to_repo,omitempty"`
-	Description NullableString `json:"description,omitempty"`
-	LocationId NullableString `json:"location_id,omitempty"`
-	DefaultBranch NullableString `json:"default_branch,omitempty"`
-	BlobBaseUrl NullableString `json:"blob_base_url,omitempty"`
-	LastCommit *CreateAssetGITLABREPOSITORYRequestLastCommit `json:"last_commit,omitempty"`
-	Owners []CreateAssetGITLABREPOSITORYRequestOwnersInner `json:"owners,omitempty"`
-	Languages []ENUMPROPERTIESLANGUAGESITEMS `json:"languages,omitempty"`
-	GroupId NullableFloat32 `json:"group_id,omitempty"`
-	GroupFullPath NullableString `json:"group_full_path,omitempty"`
-	GroupWebUrl NullableString `json:"group_web_url,omitempty"`
-	ProjectId NullableFloat32 `json:"project_id,omitempty"`
-	Archived NullableBool `json:"archived,omitempty"`
-	Visibility NullableENUMPROPERTIESVISIBILITY `json:"visibility,omitempty"`
-	Group *CreateAssetGITLABREPOSITORYRequestGroup `json:"group,omitempty"`
+	ProjectIds           []string                                        `json:"projectIds,omitempty"`
+	Name                 NullableString                                  `json:"name,omitempty"`
+	AssetClass           ENUMREPOSITORY                                  `json:"asset_class"`
+	ExtraMetadata        map[string]interface{}                          `json:"extra_metadata,omitempty"`
+	ScreenshotS3Key      NullableString                                  `json:"screenshot_s3_key,omitempty"`
+	AssetType            ENUMGITLABREPOSITORY                            `json:"asset_type"`
+	Url                  string                                          `json:"url"`
+	HttpUrlToRepo        NullableString                                  `json:"http_url_to_repo,omitempty"`
+	Description          NullableString                                  `json:"description,omitempty"`
+	LocationId           NullableString                                  `json:"location_id,omitempty"`
+	DefaultBranch        NullableString                                  `json:"default_branch,omitempty"`
+	BlobBaseUrl          NullableString                                  `json:"blob_base_url,omitempty"`
+	LastCommit           *CreateAssetGITLABREPOSITORYRequestLastCommit   `json:"last_commit,omitempty"`
+	Owners               []CreateAssetGITLABREPOSITORYRequestOwnersInner `json:"owners,omitempty"`
+	Languages            []ENUMPROPERTIESLANGUAGESITEMS                  `json:"languages,omitempty"`
+	GroupId              NullableFloat32                                 `json:"group_id,omitempty"`
+	GroupFullPath        NullableString                                  `json:"group_full_path,omitempty"`
+	GroupWebUrl          NullableString                                  `json:"group_web_url,omitempty"`
+	ProjectId            NullableFloat32                                 `json:"project_id,omitempty"`
+	Archived             NullableBool                                    `json:"archived,omitempty"`
+	Visibility           NullableENUMPROPERTIESVISIBILITY                `json:"visibility,omitempty"`
+	Group                *CreateAssetGITLABREPOSITORYRequestGroup        `json:"group,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -133,6 +133,7 @@ func (o *CreateAssetGITLABREPOSITORYRequest) HasName() bool {
 func (o *CreateAssetGITLABREPOSITORYRequest) SetName(v string) {
 	o.Name.Set(&v)
 }
+
 // SetNameNil sets the value for Name to be an explicit nil
 func (o *CreateAssetGITLABREPOSITORYRequest) SetNameNil() {
 	o.Name.Set(nil)
@@ -231,6 +232,7 @@ func (o *CreateAssetGITLABREPOSITORYRequest) HasScreenshotS3Key() bool {
 func (o *CreateAssetGITLABREPOSITORYRequest) SetScreenshotS3Key(v string) {
 	o.ScreenshotS3Key.Set(&v)
 }
+
 // SetScreenshotS3KeyNil sets the value for ScreenshotS3Key to be an explicit nil
 func (o *CreateAssetGITLABREPOSITORYRequest) SetScreenshotS3KeyNil() {
 	o.ScreenshotS3Key.Set(nil)
@@ -321,6 +323,7 @@ func (o *CreateAssetGITLABREPOSITORYRequest) HasHttpUrlToRepo() bool {
 func (o *CreateAssetGITLABREPOSITORYRequest) SetHttpUrlToRepo(v string) {
 	o.HttpUrlToRepo.Set(&v)
 }
+
 // SetHttpUrlToRepoNil sets the value for HttpUrlToRepo to be an explicit nil
 func (o *CreateAssetGITLABREPOSITORYRequest) SetHttpUrlToRepoNil() {
 	o.HttpUrlToRepo.Set(nil)
@@ -363,6 +366,7 @@ func (o *CreateAssetGITLABREPOSITORYRequest) HasDescription() bool {
 func (o *CreateAssetGITLABREPOSITORYRequest) SetDescription(v string) {
 	o.Description.Set(&v)
 }
+
 // SetDescriptionNil sets the value for Description to be an explicit nil
 func (o *CreateAssetGITLABREPOSITORYRequest) SetDescriptionNil() {
 	o.Description.Set(nil)
@@ -405,6 +409,7 @@ func (o *CreateAssetGITLABREPOSITORYRequest) HasLocationId() bool {
 func (o *CreateAssetGITLABREPOSITORYRequest) SetLocationId(v string) {
 	o.LocationId.Set(&v)
 }
+
 // SetLocationIdNil sets the value for LocationId to be an explicit nil
 func (o *CreateAssetGITLABREPOSITORYRequest) SetLocationIdNil() {
 	o.LocationId.Set(nil)
@@ -447,6 +452,7 @@ func (o *CreateAssetGITLABREPOSITORYRequest) HasDefaultBranch() bool {
 func (o *CreateAssetGITLABREPOSITORYRequest) SetDefaultBranch(v string) {
 	o.DefaultBranch.Set(&v)
 }
+
 // SetDefaultBranchNil sets the value for DefaultBranch to be an explicit nil
 func (o *CreateAssetGITLABREPOSITORYRequest) SetDefaultBranchNil() {
 	o.DefaultBranch.Set(nil)
@@ -489,6 +495,7 @@ func (o *CreateAssetGITLABREPOSITORYRequest) HasBlobBaseUrl() bool {
 func (o *CreateAssetGITLABREPOSITORYRequest) SetBlobBaseUrl(v string) {
 	o.BlobBaseUrl.Set(&v)
 }
+
 // SetBlobBaseUrlNil sets the value for BlobBaseUrl to be an explicit nil
 func (o *CreateAssetGITLABREPOSITORYRequest) SetBlobBaseUrlNil() {
 	o.BlobBaseUrl.Set(nil)
@@ -629,6 +636,7 @@ func (o *CreateAssetGITLABREPOSITORYRequest) HasGroupId() bool {
 func (o *CreateAssetGITLABREPOSITORYRequest) SetGroupId(v float32) {
 	o.GroupId.Set(&v)
 }
+
 // SetGroupIdNil sets the value for GroupId to be an explicit nil
 func (o *CreateAssetGITLABREPOSITORYRequest) SetGroupIdNil() {
 	o.GroupId.Set(nil)
@@ -671,6 +679,7 @@ func (o *CreateAssetGITLABREPOSITORYRequest) HasGroupFullPath() bool {
 func (o *CreateAssetGITLABREPOSITORYRequest) SetGroupFullPath(v string) {
 	o.GroupFullPath.Set(&v)
 }
+
 // SetGroupFullPathNil sets the value for GroupFullPath to be an explicit nil
 func (o *CreateAssetGITLABREPOSITORYRequest) SetGroupFullPathNil() {
 	o.GroupFullPath.Set(nil)
@@ -713,6 +722,7 @@ func (o *CreateAssetGITLABREPOSITORYRequest) HasGroupWebUrl() bool {
 func (o *CreateAssetGITLABREPOSITORYRequest) SetGroupWebUrl(v string) {
 	o.GroupWebUrl.Set(&v)
 }
+
 // SetGroupWebUrlNil sets the value for GroupWebUrl to be an explicit nil
 func (o *CreateAssetGITLABREPOSITORYRequest) SetGroupWebUrlNil() {
 	o.GroupWebUrl.Set(nil)
@@ -755,6 +765,7 @@ func (o *CreateAssetGITLABREPOSITORYRequest) HasProjectId() bool {
 func (o *CreateAssetGITLABREPOSITORYRequest) SetProjectId(v float32) {
 	o.ProjectId.Set(&v)
 }
+
 // SetProjectIdNil sets the value for ProjectId to be an explicit nil
 func (o *CreateAssetGITLABREPOSITORYRequest) SetProjectIdNil() {
 	o.ProjectId.Set(nil)
@@ -797,6 +808,7 @@ func (o *CreateAssetGITLABREPOSITORYRequest) HasArchived() bool {
 func (o *CreateAssetGITLABREPOSITORYRequest) SetArchived(v bool) {
 	o.Archived.Set(&v)
 }
+
 // SetArchivedNil sets the value for Archived to be an explicit nil
 func (o *CreateAssetGITLABREPOSITORYRequest) SetArchivedNil() {
 	o.Archived.Set(nil)
@@ -839,6 +851,7 @@ func (o *CreateAssetGITLABREPOSITORYRequest) HasVisibility() bool {
 func (o *CreateAssetGITLABREPOSITORYRequest) SetVisibility(v ENUMPROPERTIESVISIBILITY) {
 	o.Visibility.Set(&v)
 }
+
 // SetVisibilityNil sets the value for Visibility to be an explicit nil
 func (o *CreateAssetGITLABREPOSITORYRequest) SetVisibilityNil() {
 	o.Visibility.Set(nil)
@@ -882,7 +895,7 @@ func (o *CreateAssetGITLABREPOSITORYRequest) SetGroup(v CreateAssetGITLABREPOSIT
 }
 
 func (o CreateAssetGITLABREPOSITORYRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -974,10 +987,10 @@ func (o *CreateAssetGITLABREPOSITORYRequest) UnmarshalJSON(data []byte) (err err
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -1059,5 +1072,3 @@ func (v *NullableCreateAssetGITLABREPOSITORYRequest) UnmarshalJSON(src []byte) e
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -19,9 +19,9 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationInference{}
 
 // GetProfile200ResponseConfigurationInference struct for GetProfile200ResponseConfigurationInference
 type GetProfile200ResponseConfigurationInference struct {
-	Scalars *map[string]GetProfile200ResponseConfigurationInferenceScalarsValue `json:"scalars,omitempty"`
-	NullIsUnauthenticated NullableBool `json:"null_is_unauthenticated,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Scalars               *map[string]GetProfile200ResponseConfigurationInferenceScalarsValue `json:"scalars,omitempty"`
+	NullIsUnauthenticated NullableBool                                                        `json:"null_is_unauthenticated,omitempty"`
+	AdditionalProperties  map[string]interface{}
 }
 
 type _GetProfile200ResponseConfigurationInference GetProfile200ResponseConfigurationInference
@@ -107,6 +107,7 @@ func (o *GetProfile200ResponseConfigurationInference) HasNullIsUnauthenticated()
 func (o *GetProfile200ResponseConfigurationInference) SetNullIsUnauthenticated(v bool) {
 	o.NullIsUnauthenticated.Set(&v)
 }
+
 // SetNullIsUnauthenticatedNil sets the value for NullIsUnauthenticated to be an explicit nil
 func (o *GetProfile200ResponseConfigurationInference) SetNullIsUnauthenticatedNil() {
 	o.NullIsUnauthenticated.Set(nil)
@@ -118,7 +119,7 @@ func (o *GetProfile200ResponseConfigurationInference) UnsetNullIsUnauthenticated
 }
 
 func (o GetProfile200ResponseConfigurationInference) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -198,5 +199,3 @@ func (v *NullableGetProfile200ResponseConfigurationInference) UnmarshalJSON(src 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

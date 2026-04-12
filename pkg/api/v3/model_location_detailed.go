@@ -31,8 +31,8 @@ type LocationDetailed struct {
 	// The date and time the location was created.
 	CreatedAt *string `json:"createdAt,omitempty"`
 	// The date and time the location was last seen.
-	LastSeenAt NullableString `json:"lastSeenAt,omitempty"`
-	Links LocationSummarizedLinks `json:"links"`
+	LastSeenAt           NullableString          `json:"lastSeenAt,omitempty"`
+	Links                LocationSummarizedLinks `json:"links"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -272,6 +272,7 @@ func (o *LocationDetailed) HasLastSeenAt() bool {
 func (o *LocationDetailed) SetLastSeenAt(v string) {
 	o.LastSeenAt.Set(&v)
 }
+
 // SetLastSeenAtNil sets the value for LastSeenAt to be an explicit nil
 func (o *LocationDetailed) SetLastSeenAtNil() {
 	o.LastSeenAt.Set(nil)
@@ -307,7 +308,7 @@ func (o *LocationDetailed) SetLinks(v LocationSummarizedLinks) {
 }
 
 func (o LocationDetailed) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -356,10 +357,10 @@ func (o *LocationDetailed) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -426,5 +427,3 @@ func (v *NullableLocationDetailed) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

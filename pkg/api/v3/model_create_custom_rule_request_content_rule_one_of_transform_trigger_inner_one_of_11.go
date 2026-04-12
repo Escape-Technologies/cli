@@ -20,12 +20,12 @@ var _ MappedNullable = &CreateCustomRuleRequestContentRuleOneOfTransformTriggerI
 
 // CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf11 struct for CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf11
 type CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf11 struct {
-	UseExtraction NullableBool `json:"use_extraction,omitempty"`
-	Is interface{} `json:"is,omitempty"`
-	IsNot interface{} `json:"is_not,omitempty"`
-	In []interface{} `json:"in,omitempty"`
-	Jq NullableString `json:"jq,omitempty"`
-	If ENUMREQUESTBODYJSON `json:"if"`
+	UseExtraction        NullableBool        `json:"use_extraction,omitempty"`
+	Is                   interface{}         `json:"is,omitempty"`
+	IsNot                interface{}         `json:"is_not,omitempty"`
+	In                   []interface{}       `json:"in,omitempty"`
+	Jq                   NullableString      `json:"jq,omitempty"`
+	If                   ENUMREQUESTBODYJSON `json:"if"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -81,6 +81,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf11) Ha
 func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf11) SetUseExtraction(v bool) {
 	o.UseExtraction.Set(&v)
 }
+
 // SetUseExtractionNil sets the value for UseExtraction to be an explicit nil
 func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf11) SetUseExtractionNil() {
 	o.UseExtraction.Set(nil)
@@ -222,6 +223,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf11) Ha
 func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf11) SetJq(v string) {
 	o.Jq.Set(&v)
 }
+
 // SetJqNil sets the value for Jq to be an explicit nil
 func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf11) SetJqNil() {
 	o.Jq.Set(nil)
@@ -257,7 +259,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf11) Se
 }
 
 func (o CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf11) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -303,10 +305,10 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf11) Un
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -372,5 +374,3 @@ func (v *NullableCreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOne
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

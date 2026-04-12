@@ -20,11 +20,11 @@ var _ MappedNullable = &CreatebitbucketIntegrationRequestParameters{}
 
 // CreatebitbucketIntegrationRequestParameters The parameters of the integration
 type CreatebitbucketIntegrationRequestParameters struct {
-	Email string `json:"email"`
-	ApiKey string `json:"api_key"`
-	WorkspaceSlug string `json:"workspace_slug"`
-	InstanceUrl NullableString `json:"instance_url,omitempty"`
-	LocationId NullableString `json:"location_id,omitempty"`
+	Email                string         `json:"email"`
+	ApiKey               string         `json:"api_key"`
+	WorkspaceSlug        string         `json:"workspace_slug"`
+	InstanceUrl          NullableString `json:"instance_url,omitempty"`
+	LocationId           NullableString `json:"location_id,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -154,6 +154,7 @@ func (o *CreatebitbucketIntegrationRequestParameters) HasInstanceUrl() bool {
 func (o *CreatebitbucketIntegrationRequestParameters) SetInstanceUrl(v string) {
 	o.InstanceUrl.Set(&v)
 }
+
 // SetInstanceUrlNil sets the value for InstanceUrl to be an explicit nil
 func (o *CreatebitbucketIntegrationRequestParameters) SetInstanceUrlNil() {
 	o.InstanceUrl.Set(nil)
@@ -196,6 +197,7 @@ func (o *CreatebitbucketIntegrationRequestParameters) HasLocationId() bool {
 func (o *CreatebitbucketIntegrationRequestParameters) SetLocationId(v string) {
 	o.LocationId.Set(&v)
 }
+
 // SetLocationIdNil sets the value for LocationId to be an explicit nil
 func (o *CreatebitbucketIntegrationRequestParameters) SetLocationIdNil() {
 	o.LocationId.Set(nil)
@@ -207,7 +209,7 @@ func (o *CreatebitbucketIntegrationRequestParameters) UnsetLocationId() {
 }
 
 func (o CreatebitbucketIntegrationRequestParameters) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -248,10 +250,10 @@ func (o *CreatebitbucketIntegrationRequestParameters) UnmarshalJSON(data []byte)
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -316,5 +318,3 @@ func (v *NullableCreatebitbucketIntegrationRequestParameters) UnmarshalJSON(src 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

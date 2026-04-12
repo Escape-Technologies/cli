@@ -23,8 +23,8 @@ type EventSummarizedAttachmentsInner struct {
 	// The id of the attachment
 	Id string `json:"id"`
 	// The date and time the attachment was created
-	CreatedAt string `json:"createdAt"`
-	Target EventSummarizedAttachmentsInnerTarget `json:"target"`
+	CreatedAt            string                                `json:"createdAt"`
+	Target               EventSummarizedAttachmentsInnerTarget `json:"target"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -123,7 +123,7 @@ func (o *EventSummarizedAttachmentsInner) SetTarget(v EventSummarizedAttachments
 }
 
 func (o EventSummarizedAttachmentsInner) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,10 +158,10 @@ func (o *EventSummarizedAttachmentsInner) UnmarshalJSON(data []byte) (err error)
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -224,5 +224,3 @@ func (v *NullableEventSummarizedAttachmentsInner) UnmarshalJSON(src []byte) erro
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

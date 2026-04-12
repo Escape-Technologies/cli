@@ -20,17 +20,17 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationAuthenticationPresetsI
 
 // GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf1UsersInner struct for GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf1UsersInner
 type GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf1UsersInner struct {
-	Username string `json:"username"`
-	Headers map[string]string `json:"headers,omitempty"`
-	Cookies map[string]string `json:"cookies,omitempty"`
-	QueryParameters map[string]string `json:"query_parameters,omitempty"`
-	MainUser NullableBool `json:"main_user,omitempty"`
-	AllowFailure NullableBool `json:"allow_failure,omitempty"`
-	Basic NullableString `json:"basic,omitempty"`
-	Digest NullableString `json:"digest,omitempty"`
-	Role NullableString `json:"role,omitempty"`
-	Password string `json:"password"`
-	Scopes []string `json:"scopes,omitempty"`
+	Username             string            `json:"username"`
+	Headers              map[string]string `json:"headers,omitempty"`
+	Cookies              map[string]string `json:"cookies,omitempty"`
+	QueryParameters      map[string]string `json:"query_parameters,omitempty"`
+	MainUser             NullableBool      `json:"main_user,omitempty"`
+	AllowFailure         NullableBool      `json:"allow_failure,omitempty"`
+	Basic                NullableString    `json:"basic,omitempty"`
+	Digest               NullableString    `json:"digest,omitempty"`
+	Role                 NullableString    `json:"role,omitempty"`
+	Password             string            `json:"password"`
+	Scopes               []string          `json:"scopes,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -207,6 +207,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf1Users
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf1UsersInner) SetMainUser(v bool) {
 	o.MainUser.Set(&v)
 }
+
 // SetMainUserNil sets the value for MainUser to be an explicit nil
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf1UsersInner) SetMainUserNil() {
 	o.MainUser.Set(nil)
@@ -249,6 +250,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf1Users
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf1UsersInner) SetAllowFailure(v bool) {
 	o.AllowFailure.Set(&v)
 }
+
 // SetAllowFailureNil sets the value for AllowFailure to be an explicit nil
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf1UsersInner) SetAllowFailureNil() {
 	o.AllowFailure.Set(nil)
@@ -291,6 +293,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf1Users
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf1UsersInner) SetBasic(v string) {
 	o.Basic.Set(&v)
 }
+
 // SetBasicNil sets the value for Basic to be an explicit nil
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf1UsersInner) SetBasicNil() {
 	o.Basic.Set(nil)
@@ -333,6 +336,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf1Users
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf1UsersInner) SetDigest(v string) {
 	o.Digest.Set(&v)
 }
+
 // SetDigestNil sets the value for Digest to be an explicit nil
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf1UsersInner) SetDigestNil() {
 	o.Digest.Set(nil)
@@ -375,6 +379,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf1Users
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf1UsersInner) SetRole(v string) {
 	o.Role.Set(&v)
 }
+
 // SetRoleNil sets the value for Role to be an explicit nil
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf1UsersInner) SetRoleNil() {
 	o.Role.Set(nil)
@@ -442,7 +447,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf1Users
 }
 
 func (o GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf1UsersInner) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -502,10 +507,10 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf1Users
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -576,5 +581,3 @@ func (v *NullableGetProfile200ResponseConfigurationAuthenticationPresetsInnerOne
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

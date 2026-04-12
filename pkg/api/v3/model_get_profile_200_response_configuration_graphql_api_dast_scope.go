@@ -19,9 +19,9 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationGraphqlApiDastScope{}
 
 // GetProfile200ResponseConfigurationGraphqlApiDastScope struct for GetProfile200ResponseConfigurationGraphqlApiDastScope
 type GetProfile200ResponseConfigurationGraphqlApiDastScope struct {
-	ExtendGlobalScope NullableBool `json:"extend_global_scope,omitempty"`
-	Allowlist []GetProfile200ResponseConfigurationScopeAllowlistInner `json:"allowlist,omitempty"`
-	Blocklist []GetProfile200ResponseConfigurationScopeAllowlistInner `json:"blocklist,omitempty"`
+	ExtendGlobalScope    NullableBool                                            `json:"extend_global_scope,omitempty"`
+	Allowlist            []GetProfile200ResponseConfigurationScopeAllowlistInner `json:"allowlist,omitempty"`
+	Blocklist            []GetProfile200ResponseConfigurationScopeAllowlistInner `json:"blocklist,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -76,6 +76,7 @@ func (o *GetProfile200ResponseConfigurationGraphqlApiDastScope) HasExtendGlobalS
 func (o *GetProfile200ResponseConfigurationGraphqlApiDastScope) SetExtendGlobalScope(v bool) {
 	o.ExtendGlobalScope.Set(&v)
 }
+
 // SetExtendGlobalScopeNil sets the value for ExtendGlobalScope to be an explicit nil
 func (o *GetProfile200ResponseConfigurationGraphqlApiDastScope) SetExtendGlobalScopeNil() {
 	o.ExtendGlobalScope.Set(nil)
@@ -153,7 +154,7 @@ func (o *GetProfile200ResponseConfigurationGraphqlApiDastScope) SetBlocklist(v [
 }
 
 func (o GetProfile200ResponseConfigurationGraphqlApiDastScope) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -237,5 +238,3 @@ func (v *NullableGetProfile200ResponseConfigurationGraphqlApiDastScope) Unmarsha
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
