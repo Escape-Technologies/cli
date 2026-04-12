@@ -20,15 +20,16 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationAuthenticationPresetsI
 
 // GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf12 struct for GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf12
 type GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf12 struct {
-	Type                    ENUMBROWSERACTIONS                                                                                          `json:"type"`
-	Users                   []GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf12UsersInner                             `json:"users"`
-	LoginUrl                string                                                                                                      `json:"login_url"`
-	StealthMode             *bool                                                                                                       `json:"stealth_mode,omitempty"`
-	Extractions             []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner `json:"extractions,omitempty"`
-	Injections              NullableGetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11Injections                       `json:"injections,omitempty"`
-	AutoExtractionUrls      []string                                                                                                    `json:"auto_extraction_urls,omitempty"`
-	LoggedInDetectorText    *string                                                                                                     `json:"logged_in_detector_text,omitempty"`
-	LoggedInDetectorTimeout *float32                                                                                                    `json:"logged_in_detector_timeout,omitempty"`
+	Type                    ENUMBROWSERACTIONS                                                                                             `json:"type"`
+	Users                   []GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf12UsersInner                                `json:"users"`
+	LoginUrl                string                                                                                                         `json:"login_url"`
+	StealthMode             *bool                                                                                                          `json:"stealth_mode,omitempty"`
+	LogoutDetection         *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersLogoutDetection `json:"logout_detection,omitempty"`
+	Extractions             []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner    `json:"extractions,omitempty"`
+	Injections              NullableGetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11Injections                          `json:"injections,omitempty"`
+	AutoExtractionUrls      []string                                                                                                       `json:"auto_extraction_urls,omitempty"`
+	LoggedInDetectorText    *string                                                                                                        `json:"logged_in_detector_text,omitempty"`
+	LoggedInDetectorTimeout *float32                                                                                                       `json:"logged_in_detector_timeout,omitempty"`
 	AdditionalProperties    map[string]interface{}
 }
 
@@ -156,6 +157,38 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf12) Ha
 // SetStealthMode gets a reference to the given bool and assigns it to the StealthMode field.
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf12) SetStealthMode(v bool) {
 	o.StealthMode = &v
+}
+
+// GetLogoutDetection returns the LogoutDetection field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf12) GetLogoutDetection() GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersLogoutDetection {
+	if o == nil || IsNil(o.LogoutDetection) {
+		var ret GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersLogoutDetection
+		return ret
+	}
+	return *o.LogoutDetection
+}
+
+// GetLogoutDetectionOk returns a tuple with the LogoutDetection field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf12) GetLogoutDetectionOk() (*GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersLogoutDetection, bool) {
+	if o == nil || IsNil(o.LogoutDetection) {
+		return nil, false
+	}
+	return o.LogoutDetection, true
+}
+
+// HasLogoutDetection returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf12) HasLogoutDetection() bool {
+	if o != nil && !IsNil(o.LogoutDetection) {
+		return true
+	}
+
+	return false
+}
+
+// SetLogoutDetection gets a reference to the given GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersLogoutDetection and assigns it to the LogoutDetection field.
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf12) SetLogoutDetection(v GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersLogoutDetection) {
+	o.LogoutDetection = &v
 }
 
 // GetExtractions returns the Extractions field value if set, zero value otherwise.
@@ -345,6 +378,9 @@ func (o GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf12) ToM
 	if !IsNil(o.StealthMode) {
 		toSerialize["stealth_mode"] = o.StealthMode
 	}
+	if !IsNil(o.LogoutDetection) {
+		toSerialize["logout_detection"] = o.LogoutDetection
+	}
 	if !IsNil(o.Extractions) {
 		toSerialize["extractions"] = o.Extractions
 	}
@@ -409,6 +445,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf12) Un
 		delete(additionalProperties, "users")
 		delete(additionalProperties, "login_url")
 		delete(additionalProperties, "stealth_mode")
+		delete(additionalProperties, "logout_detection")
 		delete(additionalProperties, "extractions")
 		delete(additionalProperties, "injections")
 		delete(additionalProperties, "auto_extraction_urls")

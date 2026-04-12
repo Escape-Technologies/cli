@@ -26,7 +26,11 @@ type GetProfile200ResponseConfigurationSecurityTests struct {
 	HighNumberOfSecrets                    *GetProfile200ResponseConfigurationSecurityTestsHighNumberOfCustomScalars `json:"high_number_of_secrets,omitempty"`
 	AdminerDefaultLogin                    *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"adminer_default_login,omitempty"`
 	XssAgent                               *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"xss_agent,omitempty"`
+	SqlInjectionAgent                      *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"sql_injection_agent,omitempty"`
 	ReplayAgent                            *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"replay_agent,omitempty"`
+	SsrfAgent                              *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"ssrf_agent,omitempty"`
+	CommandInjectionAgent                  *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"command_injection_agent,omitempty"`
+	AccessControlAgent                     *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"access_control_agent,omitempty"`
 	AirflowConfigExposure                  *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"airflow_config_exposure,omitempty"`
 	AirflowDefaultLogin                    *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"airflow_default_login,omitempty"`
 	AirflowV3DefaultLogin                  *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"airflow_v3_default_login,omitempty"`
@@ -541,6 +545,38 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) SetXssAgent(v GetProfi
 	o.XssAgent = &v
 }
 
+// GetSqlInjectionAgent returns the SqlInjectionAgent field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetSqlInjectionAgent() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.SqlInjectionAgent) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.SqlInjectionAgent
+}
+
+// GetSqlInjectionAgentOk returns a tuple with the SqlInjectionAgent field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetSqlInjectionAgentOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.SqlInjectionAgent) {
+		return nil, false
+	}
+	return o.SqlInjectionAgent, true
+}
+
+// HasSqlInjectionAgent returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasSqlInjectionAgent() bool {
+	if o != nil && !IsNil(o.SqlInjectionAgent) {
+		return true
+	}
+
+	return false
+}
+
+// SetSqlInjectionAgent gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the SqlInjectionAgent field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetSqlInjectionAgent(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.SqlInjectionAgent = &v
+}
+
 // GetReplayAgent returns the ReplayAgent field value if set, zero value otherwise.
 func (o *GetProfile200ResponseConfigurationSecurityTests) GetReplayAgent() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
 	if o == nil || IsNil(o.ReplayAgent) {
@@ -571,6 +607,102 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) HasReplayAgent() bool 
 // SetReplayAgent gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the ReplayAgent field.
 func (o *GetProfile200ResponseConfigurationSecurityTests) SetReplayAgent(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
 	o.ReplayAgent = &v
+}
+
+// GetSsrfAgent returns the SsrfAgent field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetSsrfAgent() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.SsrfAgent) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.SsrfAgent
+}
+
+// GetSsrfAgentOk returns a tuple with the SsrfAgent field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetSsrfAgentOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.SsrfAgent) {
+		return nil, false
+	}
+	return o.SsrfAgent, true
+}
+
+// HasSsrfAgent returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasSsrfAgent() bool {
+	if o != nil && !IsNil(o.SsrfAgent) {
+		return true
+	}
+
+	return false
+}
+
+// SetSsrfAgent gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the SsrfAgent field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetSsrfAgent(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.SsrfAgent = &v
+}
+
+// GetCommandInjectionAgent returns the CommandInjectionAgent field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetCommandInjectionAgent() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.CommandInjectionAgent) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.CommandInjectionAgent
+}
+
+// GetCommandInjectionAgentOk returns a tuple with the CommandInjectionAgent field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetCommandInjectionAgentOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.CommandInjectionAgent) {
+		return nil, false
+	}
+	return o.CommandInjectionAgent, true
+}
+
+// HasCommandInjectionAgent returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasCommandInjectionAgent() bool {
+	if o != nil && !IsNil(o.CommandInjectionAgent) {
+		return true
+	}
+
+	return false
+}
+
+// SetCommandInjectionAgent gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the CommandInjectionAgent field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetCommandInjectionAgent(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.CommandInjectionAgent = &v
+}
+
+// GetAccessControlAgent returns the AccessControlAgent field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetAccessControlAgent() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.AccessControlAgent) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.AccessControlAgent
+}
+
+// GetAccessControlAgentOk returns a tuple with the AccessControlAgent field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetAccessControlAgentOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.AccessControlAgent) {
+		return nil, false
+	}
+	return o.AccessControlAgent, true
+}
+
+// HasAccessControlAgent returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasAccessControlAgent() bool {
+	if o != nil && !IsNil(o.AccessControlAgent) {
+		return true
+	}
+
+	return false
+}
+
+// SetAccessControlAgent gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the AccessControlAgent field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetAccessControlAgent(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.AccessControlAgent = &v
 }
 
 // GetAirflowConfigExposure returns the AirflowConfigExposure field value if set, zero value otherwise.
@@ -9180,8 +9312,20 @@ func (o GetProfile200ResponseConfigurationSecurityTests) ToMap() (map[string]int
 	if !IsNil(o.XssAgent) {
 		toSerialize["xss_agent"] = o.XssAgent
 	}
+	if !IsNil(o.SqlInjectionAgent) {
+		toSerialize["sql_injection_agent"] = o.SqlInjectionAgent
+	}
 	if !IsNil(o.ReplayAgent) {
 		toSerialize["replay_agent"] = o.ReplayAgent
+	}
+	if !IsNil(o.SsrfAgent) {
+		toSerialize["ssrf_agent"] = o.SsrfAgent
+	}
+	if !IsNil(o.CommandInjectionAgent) {
+		toSerialize["command_injection_agent"] = o.CommandInjectionAgent
+	}
+	if !IsNil(o.AccessControlAgent) {
+		toSerialize["access_control_agent"] = o.AccessControlAgent
 	}
 	if !IsNil(o.AirflowConfigExposure) {
 		toSerialize["airflow_config_exposure"] = o.AirflowConfigExposure
@@ -10016,7 +10160,11 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) UnmarshalJSON(data []b
 		delete(additionalProperties, "high_number_of_secrets")
 		delete(additionalProperties, "adminer_default_login")
 		delete(additionalProperties, "xss_agent")
+		delete(additionalProperties, "sql_injection_agent")
 		delete(additionalProperties, "replay_agent")
+		delete(additionalProperties, "ssrf_agent")
+		delete(additionalProperties, "command_injection_agent")
+		delete(additionalProperties, "access_control_agent")
 		delete(additionalProperties, "airflow_config_exposure")
 		delete(additionalProperties, "airflow_default_login")
 		delete(additionalProperties, "airflow_v3_default_login")

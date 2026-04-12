@@ -162,6 +162,11 @@ with open(input_file, "r") as f:
     for const in consts:
         raw = raw.replace(f'"const": "{const}",', f'"enum": ["{const}"],')
 
+    # OpenAPI 3.1: convert nullable array types to 3.0 nullable format
+    # "type": ["T", "null"] -> "type": "T", "nullable": true
+    raw = re.compile(r'"type": \["([^"]+)", "null"\]').sub(r'"type": "\1", "nullable": true', raw)
+    raw = re.compile(r'"type": \["null", "([^"]+)"\]').sub(r'"type": "\1", "nullable": true', raw)
+
     raw = re.compile(r'"anyOf": \[[^"]*"type": "([^"]+)"[^"]*\]', re.MULTILINE).sub(r'"type": "\1"', raw)
     raw = re.compile(r'"anyOf": \[[^"]*"\$ref": "([^"]+)"[^"]*\]', re.MULTILINE).sub(r'"$ref": "\1"', raw)
     data = json.loads(raw)

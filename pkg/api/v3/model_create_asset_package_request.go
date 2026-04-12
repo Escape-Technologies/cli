@@ -33,6 +33,7 @@ type CreateAssetPACKAGERequest struct {
 	ReferenceUrl         *string                            `json:"reference_url,omitempty"`
 	Cpe                  *string                            `json:"cpe,omitempty"`
 	WellKnownTechnology  *ENUMPROPERTIESWELLKNOWNTECHNOLOGY `json:"well_known_technology,omitempty"`
+	Description          *string                            `json:"description,omitempty"`
 	Purl                 string                             `json:"purl"`
 	PackageType          ENUMPROPERTIESPACKAGETYPE          `json:"package_type"`
 	AdditionalProperties map[string]interface{}
@@ -390,6 +391,38 @@ func (o *CreateAssetPACKAGERequest) SetWellKnownTechnology(v ENUMPROPERTIESWELLK
 	o.WellKnownTechnology = &v
 }
 
+// GetDescription returns the Description field value if set, zero value otherwise.
+func (o *CreateAssetPACKAGERequest) GetDescription() string {
+	if o == nil || IsNil(o.Description) {
+		var ret string
+		return ret
+	}
+	return *o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetPACKAGERequest) GetDescriptionOk() (*string, bool) {
+	if o == nil || IsNil(o.Description) {
+		return nil, false
+	}
+	return o.Description, true
+}
+
+// HasDescription returns a boolean if a field has been set.
+func (o *CreateAssetPACKAGERequest) HasDescription() bool {
+	if o != nil && !IsNil(o.Description) {
+		return true
+	}
+
+	return false
+}
+
+// SetDescription gets a reference to the given string and assigns it to the Description field.
+func (o *CreateAssetPACKAGERequest) SetDescription(v string) {
+	o.Description = &v
+}
+
 // GetPurl returns the Purl field value
 func (o *CreateAssetPACKAGERequest) GetPurl() string {
 	if o == nil {
@@ -475,6 +508,9 @@ func (o CreateAssetPACKAGERequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.WellKnownTechnology) {
 		toSerialize["well_known_technology"] = o.WellKnownTechnology
 	}
+	if !IsNil(o.Description) {
+		toSerialize["description"] = o.Description
+	}
 	toSerialize["purl"] = o.Purl
 	toSerialize["package_type"] = o.PackageType
 
@@ -535,6 +571,7 @@ func (o *CreateAssetPACKAGERequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "reference_url")
 		delete(additionalProperties, "cpe")
 		delete(additionalProperties, "well_known_technology")
+		delete(additionalProperties, "description")
 		delete(additionalProperties, "purl")
 		delete(additionalProperties, "package_type")
 		o.AdditionalProperties = additionalProperties

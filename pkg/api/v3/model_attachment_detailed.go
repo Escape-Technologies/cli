@@ -29,7 +29,7 @@ type AttachmentDetailed struct {
 	Graph                *GraphDetailed                `json:"graph,omitempty"`
 	Screenshot           *ScreenshotDetailed           `json:"screenshot,omitempty"`
 	Snippet              *SnippetDetailed              `json:"snippet,omitempty"`
-	Target               *TargetDetailed               `json:"target,omitempty"`
+	Target               *TargetDetailed1              `json:"target,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -263,9 +263,9 @@ func (o *AttachmentDetailed) SetSnippet(v SnippetDetailed) {
 }
 
 // GetTarget returns the Target field value if set, zero value otherwise.
-func (o *AttachmentDetailed) GetTarget() TargetDetailed {
+func (o *AttachmentDetailed) GetTarget() TargetDetailed1 {
 	if o == nil || IsNil(o.Target) {
-		var ret TargetDetailed
+		var ret TargetDetailed1
 		return ret
 	}
 	return *o.Target
@@ -273,7 +273,7 @@ func (o *AttachmentDetailed) GetTarget() TargetDetailed {
 
 // GetTargetOk returns a tuple with the Target field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AttachmentDetailed) GetTargetOk() (*TargetDetailed, bool) {
+func (o *AttachmentDetailed) GetTargetOk() (*TargetDetailed1, bool) {
 	if o == nil || IsNil(o.Target) {
 		return nil, false
 	}
@@ -289,8 +289,8 @@ func (o *AttachmentDetailed) HasTarget() bool {
 	return false
 }
 
-// SetTarget gets a reference to the given TargetDetailed and assigns it to the Target field.
-func (o *AttachmentDetailed) SetTarget(v TargetDetailed) {
+// SetTarget gets a reference to the given TargetDetailed1 and assigns it to the Target field.
+func (o *AttachmentDetailed) SetTarget(v TargetDetailed1) {
 	o.Target = &v
 }
 

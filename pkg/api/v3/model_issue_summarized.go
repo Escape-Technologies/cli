@@ -39,7 +39,8 @@ type IssueSummarized struct {
 	CreatedAt string           `json:"createdAt"`
 	Asset     AssetSummarized1 `json:"asset"`
 	// ID of the last scan where this issue was seen
-	LastSeenScanId *string `json:"lastSeenScanId,omitempty"`
+	LastSeenScanId *string          `json:"lastSeenScanId,omitempty"`
+	LastSeenScan   *ScanSummarized3 `json:"lastSeenScan,omitempty"`
 	// ID of the first scan where this issue was seen
 	FirstSeenScanId *string `json:"firstSeenScanId,omitempty"`
 	// ID of the custom rule if this is a custom issue
@@ -375,6 +376,38 @@ func (o *IssueSummarized) SetLastSeenScanId(v string) {
 	o.LastSeenScanId = &v
 }
 
+// GetLastSeenScan returns the LastSeenScan field value if set, zero value otherwise.
+func (o *IssueSummarized) GetLastSeenScan() ScanSummarized3 {
+	if o == nil || IsNil(o.LastSeenScan) {
+		var ret ScanSummarized3
+		return ret
+	}
+	return *o.LastSeenScan
+}
+
+// GetLastSeenScanOk returns a tuple with the LastSeenScan field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IssueSummarized) GetLastSeenScanOk() (*ScanSummarized3, bool) {
+	if o == nil || IsNil(o.LastSeenScan) {
+		return nil, false
+	}
+	return o.LastSeenScan, true
+}
+
+// HasLastSeenScan returns a boolean if a field has been set.
+func (o *IssueSummarized) HasLastSeenScan() bool {
+	if o != nil && !IsNil(o.LastSeenScan) {
+		return true
+	}
+
+	return false
+}
+
+// SetLastSeenScan gets a reference to the given ScanSummarized3 and assigns it to the LastSeenScan field.
+func (o *IssueSummarized) SetLastSeenScan(v ScanSummarized3) {
+	o.LastSeenScan = &v
+}
+
 // GetFirstSeenScanId returns the FirstSeenScanId field value if set, zero value otherwise.
 func (o *IssueSummarized) GetFirstSeenScanId() string {
 	if o == nil || IsNil(o.FirstSeenScanId) {
@@ -487,6 +520,9 @@ func (o IssueSummarized) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.LastSeenScanId) {
 		toSerialize["lastSeenScanId"] = o.LastSeenScanId
 	}
+	if !IsNil(o.LastSeenScan) {
+		toSerialize["lastSeenScan"] = o.LastSeenScan
+	}
 	if !IsNil(o.FirstSeenScanId) {
 		toSerialize["firstSeenScanId"] = o.FirstSeenScanId
 	}
@@ -560,6 +596,7 @@ func (o *IssueSummarized) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "createdAt")
 		delete(additionalProperties, "asset")
 		delete(additionalProperties, "lastSeenScanId")
+		delete(additionalProperties, "lastSeenScan")
 		delete(additionalProperties, "firstSeenScanId")
 		delete(additionalProperties, "customRuleId")
 		delete(additionalProperties, "links")

@@ -20,22 +20,24 @@ var _ MappedNullable = &CreateAssetCODEPROJECTRequestRepositoryOneOf2{}
 
 // CreateAssetCODEPROJECTRequestRepositoryOneOf2 struct for CreateAssetCODEPROJECTRequestRepositoryOneOf2
 type CreateAssetCODEPROJECTRequestRepositoryOneOf2 struct {
-	AssetClass           ENUMREPOSITORY                                `json:"asset_class"`
-	ExtraMetadata        map[string]interface{}                        `json:"extra_metadata,omitempty"`
-	ScreenshotS3Key      *string                                       `json:"screenshot_s3_key,omitempty"`
-	AssetType            ENUMBITBUCKETREPOSITORY                       `json:"asset_type"`
-	Url                  string                                        `json:"url"`
-	Name                 *string                                       `json:"name,omitempty"`
-	HttpUrlToRepo        *string                                       `json:"http_url_to_repo,omitempty"`
-	Description          *string                                       `json:"description,omitempty"`
-	LocationId           *string                                       `json:"location_id,omitempty"`
-	DefaultBranch        *string                                       `json:"default_branch,omitempty"`
-	BlobBaseUrl          *string                                       `json:"blob_base_url,omitempty"`
-	LastCommit           *CreateAssetGITLABREPOSITORYRequestLastCommit `json:"last_commit,omitempty"`
-	WorkspaceName        *string                                       `json:"workspace_name,omitempty"`
-	RepositoryName       *string                                       `json:"repository_name,omitempty"`
-	IsPrivate            *bool                                         `json:"is_private,omitempty"`
-	Org                  *CreateAssetBITBUCKETREPOSITORYRequestOrg     `json:"org,omitempty"`
+	AssetClass           ENUMREPOSITORY                                  `json:"asset_class"`
+	ExtraMetadata        map[string]interface{}                          `json:"extra_metadata,omitempty"`
+	ScreenshotS3Key      *string                                         `json:"screenshot_s3_key,omitempty"`
+	AssetType            ENUMBITBUCKETREPOSITORY                         `json:"asset_type"`
+	Url                  string                                          `json:"url"`
+	Name                 *string                                         `json:"name,omitempty"`
+	HttpUrlToRepo        *string                                         `json:"http_url_to_repo,omitempty"`
+	Description          *string                                         `json:"description,omitempty"`
+	LocationId           *string                                         `json:"location_id,omitempty"`
+	DefaultBranch        *string                                         `json:"default_branch,omitempty"`
+	BlobBaseUrl          *string                                         `json:"blob_base_url,omitempty"`
+	LastCommit           *CreateAssetGITLABREPOSITORYRequestLastCommit   `json:"last_commit,omitempty"`
+	Owners               []CreateAssetGITLABREPOSITORYRequestOwnersInner `json:"owners,omitempty"`
+	Languages            []ENUMPROPERTIESLANGUAGESITEMS                  `json:"languages,omitempty"`
+	WorkspaceName        *string                                         `json:"workspace_name,omitempty"`
+	RepositoryName       *string                                         `json:"repository_name,omitempty"`
+	IsPrivate            *bool                                           `json:"is_private,omitempty"`
+	Org                  *CreateAssetBITBUCKETREPOSITORYRequestOrg       `json:"org,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -421,6 +423,70 @@ func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) SetLastCommit(v CreateAs
 	o.LastCommit = &v
 }
 
+// GetOwners returns the Owners field value if set, zero value otherwise.
+func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) GetOwners() []CreateAssetGITLABREPOSITORYRequestOwnersInner {
+	if o == nil || IsNil(o.Owners) {
+		var ret []CreateAssetGITLABREPOSITORYRequestOwnersInner
+		return ret
+	}
+	return o.Owners
+}
+
+// GetOwnersOk returns a tuple with the Owners field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) GetOwnersOk() ([]CreateAssetGITLABREPOSITORYRequestOwnersInner, bool) {
+	if o == nil || IsNil(o.Owners) {
+		return nil, false
+	}
+	return o.Owners, true
+}
+
+// HasOwners returns a boolean if a field has been set.
+func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) HasOwners() bool {
+	if o != nil && !IsNil(o.Owners) {
+		return true
+	}
+
+	return false
+}
+
+// SetOwners gets a reference to the given []CreateAssetGITLABREPOSITORYRequestOwnersInner and assigns it to the Owners field.
+func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) SetOwners(v []CreateAssetGITLABREPOSITORYRequestOwnersInner) {
+	o.Owners = v
+}
+
+// GetLanguages returns the Languages field value if set, zero value otherwise.
+func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) GetLanguages() []ENUMPROPERTIESLANGUAGESITEMS {
+	if o == nil || IsNil(o.Languages) {
+		var ret []ENUMPROPERTIESLANGUAGESITEMS
+		return ret
+	}
+	return o.Languages
+}
+
+// GetLanguagesOk returns a tuple with the Languages field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) GetLanguagesOk() ([]ENUMPROPERTIESLANGUAGESITEMS, bool) {
+	if o == nil || IsNil(o.Languages) {
+		return nil, false
+	}
+	return o.Languages, true
+}
+
+// HasLanguages returns a boolean if a field has been set.
+func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) HasLanguages() bool {
+	if o != nil && !IsNil(o.Languages) {
+		return true
+	}
+
+	return false
+}
+
+// SetLanguages gets a reference to the given []ENUMPROPERTIESLANGUAGESITEMS and assigns it to the Languages field.
+func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) SetLanguages(v []ENUMPROPERTIESLANGUAGESITEMS) {
+	o.Languages = v
+}
+
 // GetWorkspaceName returns the WorkspaceName field value if set, zero value otherwise.
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) GetWorkspaceName() string {
 	if o == nil || IsNil(o.WorkspaceName) {
@@ -589,6 +655,12 @@ func (o CreateAssetCODEPROJECTRequestRepositoryOneOf2) ToMap() (map[string]inter
 	if !IsNil(o.LastCommit) {
 		toSerialize["last_commit"] = o.LastCommit
 	}
+	if !IsNil(o.Owners) {
+		toSerialize["owners"] = o.Owners
+	}
+	if !IsNil(o.Languages) {
+		toSerialize["languages"] = o.Languages
+	}
 	if !IsNil(o.WorkspaceName) {
 		toSerialize["workspace_name"] = o.WorkspaceName
 	}
@@ -658,6 +730,8 @@ func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) UnmarshalJSON(data []byt
 		delete(additionalProperties, "default_branch")
 		delete(additionalProperties, "blob_base_url")
 		delete(additionalProperties, "last_commit")
+		delete(additionalProperties, "owners")
+		delete(additionalProperties, "languages")
 		delete(additionalProperties, "workspace_name")
 		delete(additionalProperties, "repository_name")
 		delete(additionalProperties, "is_private")

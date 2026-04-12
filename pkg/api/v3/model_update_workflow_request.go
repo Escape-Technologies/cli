@@ -21,12 +21,12 @@ var _ MappedNullable = &UpdateWorkflowRequest{}
 // UpdateWorkflowRequest struct for UpdateWorkflowRequest
 type UpdateWorkflowRequest struct {
 	// The new name of the integration
-	Name    *string               `json:"name,omitempty"`
-	Trigger ENUMPROPERTIESTRIGGER `json:"trigger"`
+	Name    *string                                  `json:"name,omitempty"`
+	Trigger ENUMPROPERTIESDATAITEMSPROPERTIESTRIGGER `json:"trigger"`
 	// The throttle in milliseconds for the workflow.
 	ThrottleMs *float32 `json:"throttleMs,omitempty"`
 	// The filters to update the workflow with, this will replace the existing filters
-	Filters []UpdateWorkflowRequestFiltersInner `json:"filters,omitempty"`
+	Filters []CreateWorkflowRequestFiltersInner `json:"filters,omitempty"`
 	// The actions to update the workflow with, this will replace the existing actions
 	Actions []UpdateWorkflowRequestActionsInner `json:"actions,omitempty"`
 	// Optional list of project IDs to attach to the integration
@@ -40,7 +40,7 @@ type _UpdateWorkflowRequest UpdateWorkflowRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateWorkflowRequest(trigger ENUMPROPERTIESTRIGGER) *UpdateWorkflowRequest {
+func NewUpdateWorkflowRequest(trigger ENUMPROPERTIESDATAITEMSPROPERTIESTRIGGER) *UpdateWorkflowRequest {
 	this := UpdateWorkflowRequest{}
 	this.Trigger = trigger
 	return &this
@@ -87,9 +87,9 @@ func (o *UpdateWorkflowRequest) SetName(v string) {
 }
 
 // GetTrigger returns the Trigger field value
-func (o *UpdateWorkflowRequest) GetTrigger() ENUMPROPERTIESTRIGGER {
+func (o *UpdateWorkflowRequest) GetTrigger() ENUMPROPERTIESDATAITEMSPROPERTIESTRIGGER {
 	if o == nil {
-		var ret ENUMPROPERTIESTRIGGER
+		var ret ENUMPROPERTIESDATAITEMSPROPERTIESTRIGGER
 		return ret
 	}
 
@@ -98,7 +98,7 @@ func (o *UpdateWorkflowRequest) GetTrigger() ENUMPROPERTIESTRIGGER {
 
 // GetTriggerOk returns a tuple with the Trigger field value
 // and a boolean to check if the value has been set.
-func (o *UpdateWorkflowRequest) GetTriggerOk() (*ENUMPROPERTIESTRIGGER, bool) {
+func (o *UpdateWorkflowRequest) GetTriggerOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESTRIGGER, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -106,7 +106,7 @@ func (o *UpdateWorkflowRequest) GetTriggerOk() (*ENUMPROPERTIESTRIGGER, bool) {
 }
 
 // SetTrigger sets field value
-func (o *UpdateWorkflowRequest) SetTrigger(v ENUMPROPERTIESTRIGGER) {
+func (o *UpdateWorkflowRequest) SetTrigger(v ENUMPROPERTIESDATAITEMSPROPERTIESTRIGGER) {
 	o.Trigger = v
 }
 
@@ -143,9 +143,9 @@ func (o *UpdateWorkflowRequest) SetThrottleMs(v float32) {
 }
 
 // GetFilters returns the Filters field value if set, zero value otherwise.
-func (o *UpdateWorkflowRequest) GetFilters() []UpdateWorkflowRequestFiltersInner {
+func (o *UpdateWorkflowRequest) GetFilters() []CreateWorkflowRequestFiltersInner {
 	if o == nil || IsNil(o.Filters) {
-		var ret []UpdateWorkflowRequestFiltersInner
+		var ret []CreateWorkflowRequestFiltersInner
 		return ret
 	}
 	return o.Filters
@@ -153,7 +153,7 @@ func (o *UpdateWorkflowRequest) GetFilters() []UpdateWorkflowRequestFiltersInner
 
 // GetFiltersOk returns a tuple with the Filters field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateWorkflowRequest) GetFiltersOk() ([]UpdateWorkflowRequestFiltersInner, bool) {
+func (o *UpdateWorkflowRequest) GetFiltersOk() ([]CreateWorkflowRequestFiltersInner, bool) {
 	if o == nil || IsNil(o.Filters) {
 		return nil, false
 	}
@@ -169,8 +169,8 @@ func (o *UpdateWorkflowRequest) HasFilters() bool {
 	return false
 }
 
-// SetFilters gets a reference to the given []UpdateWorkflowRequestFiltersInner and assigns it to the Filters field.
-func (o *UpdateWorkflowRequest) SetFilters(v []UpdateWorkflowRequestFiltersInner) {
+// SetFilters gets a reference to the given []CreateWorkflowRequestFiltersInner and assigns it to the Filters field.
+func (o *UpdateWorkflowRequest) SetFilters(v []CreateWorkflowRequestFiltersInner) {
 	o.Filters = v
 }
 

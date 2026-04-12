@@ -33,6 +33,7 @@ type CreateAssetSOFTWARERequest struct {
 	ReferenceUrl         *string                            `json:"reference_url,omitempty"`
 	Cpe                  *string                            `json:"cpe,omitempty"`
 	WellKnownTechnology  *ENUMPROPERTIESWELLKNOWNTECHNOLOGY `json:"well_known_technology,omitempty"`
+	Description          *string                            `json:"description,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -386,6 +387,38 @@ func (o *CreateAssetSOFTWARERequest) SetWellKnownTechnology(v ENUMPROPERTIESWELL
 	o.WellKnownTechnology = &v
 }
 
+// GetDescription returns the Description field value if set, zero value otherwise.
+func (o *CreateAssetSOFTWARERequest) GetDescription() string {
+	if o == nil || IsNil(o.Description) {
+		var ret string
+		return ret
+	}
+	return *o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetSOFTWARERequest) GetDescriptionOk() (*string, bool) {
+	if o == nil || IsNil(o.Description) {
+		return nil, false
+	}
+	return o.Description, true
+}
+
+// HasDescription returns a boolean if a field has been set.
+func (o *CreateAssetSOFTWARERequest) HasDescription() bool {
+	if o != nil && !IsNil(o.Description) {
+		return true
+	}
+
+	return false
+}
+
+// SetDescription gets a reference to the given string and assigns it to the Description field.
+func (o *CreateAssetSOFTWARERequest) SetDescription(v string) {
+	o.Description = &v
+}
+
 func (o CreateAssetSOFTWARERequest) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -422,6 +455,9 @@ func (o CreateAssetSOFTWARERequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.WellKnownTechnology) {
 		toSerialize["well_known_technology"] = o.WellKnownTechnology
+	}
+	if !IsNil(o.Description) {
+		toSerialize["description"] = o.Description
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -479,6 +515,7 @@ func (o *CreateAssetSOFTWARERequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "reference_url")
 		delete(additionalProperties, "cpe")
 		delete(additionalProperties, "well_known_technology")
+		delete(additionalProperties, "description")
 		o.AdditionalProperties = additionalProperties
 	}
 

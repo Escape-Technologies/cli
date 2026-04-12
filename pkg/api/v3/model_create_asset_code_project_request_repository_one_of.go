@@ -20,25 +20,27 @@ var _ MappedNullable = &CreateAssetCODEPROJECTRequestRepositoryOneOf{}
 
 // CreateAssetCODEPROJECTRequestRepositoryOneOf struct for CreateAssetCODEPROJECTRequestRepositoryOneOf
 type CreateAssetCODEPROJECTRequestRepositoryOneOf struct {
-	AssetClass           ENUMREPOSITORY                                `json:"asset_class"`
-	ExtraMetadata        map[string]interface{}                        `json:"extra_metadata,omitempty"`
-	ScreenshotS3Key      *string                                       `json:"screenshot_s3_key,omitempty"`
-	AssetType            ENUMGITLABREPOSITORY                          `json:"asset_type"`
-	Url                  string                                        `json:"url"`
-	Name                 *string                                       `json:"name,omitempty"`
-	HttpUrlToRepo        *string                                       `json:"http_url_to_repo,omitempty"`
-	Description          *string                                       `json:"description,omitempty"`
-	LocationId           *string                                       `json:"location_id,omitempty"`
-	DefaultBranch        *string                                       `json:"default_branch,omitempty"`
-	BlobBaseUrl          *string                                       `json:"blob_base_url,omitempty"`
-	LastCommit           *CreateAssetGITLABREPOSITORYRequestLastCommit `json:"last_commit,omitempty"`
-	GroupId              *float32                                      `json:"group_id,omitempty"`
-	GroupFullPath        *string                                       `json:"group_full_path,omitempty"`
-	GroupWebUrl          *string                                       `json:"group_web_url,omitempty"`
-	ProjectId            *float32                                      `json:"project_id,omitempty"`
-	Archived             *bool                                         `json:"archived,omitempty"`
-	Visibility           *ENUMPROPERTIESVISIBILITY                     `json:"visibility,omitempty"`
-	Group                *CreateAssetGITLABREPOSITORYRequestGroup      `json:"group,omitempty"`
+	AssetClass           ENUMREPOSITORY                                  `json:"asset_class"`
+	ExtraMetadata        map[string]interface{}                          `json:"extra_metadata,omitempty"`
+	ScreenshotS3Key      *string                                         `json:"screenshot_s3_key,omitempty"`
+	AssetType            ENUMGITLABREPOSITORY                            `json:"asset_type"`
+	Url                  string                                          `json:"url"`
+	Name                 *string                                         `json:"name,omitempty"`
+	HttpUrlToRepo        *string                                         `json:"http_url_to_repo,omitempty"`
+	Description          *string                                         `json:"description,omitempty"`
+	LocationId           *string                                         `json:"location_id,omitempty"`
+	DefaultBranch        *string                                         `json:"default_branch,omitempty"`
+	BlobBaseUrl          *string                                         `json:"blob_base_url,omitempty"`
+	LastCommit           *CreateAssetGITLABREPOSITORYRequestLastCommit   `json:"last_commit,omitempty"`
+	Owners               []CreateAssetGITLABREPOSITORYRequestOwnersInner `json:"owners,omitempty"`
+	Languages            []ENUMPROPERTIESLANGUAGESITEMS                  `json:"languages,omitempty"`
+	GroupId              *float32                                        `json:"group_id,omitempty"`
+	GroupFullPath        *string                                         `json:"group_full_path,omitempty"`
+	GroupWebUrl          *string                                         `json:"group_web_url,omitempty"`
+	ProjectId            *float32                                        `json:"project_id,omitempty"`
+	Archived             *bool                                           `json:"archived,omitempty"`
+	Visibility           *ENUMPROPERTIESVISIBILITY                       `json:"visibility,omitempty"`
+	Group                *CreateAssetGITLABREPOSITORYRequestGroup        `json:"group,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -424,6 +426,70 @@ func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) SetLastCommit(v CreateAss
 	o.LastCommit = &v
 }
 
+// GetOwners returns the Owners field value if set, zero value otherwise.
+func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) GetOwners() []CreateAssetGITLABREPOSITORYRequestOwnersInner {
+	if o == nil || IsNil(o.Owners) {
+		var ret []CreateAssetGITLABREPOSITORYRequestOwnersInner
+		return ret
+	}
+	return o.Owners
+}
+
+// GetOwnersOk returns a tuple with the Owners field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) GetOwnersOk() ([]CreateAssetGITLABREPOSITORYRequestOwnersInner, bool) {
+	if o == nil || IsNil(o.Owners) {
+		return nil, false
+	}
+	return o.Owners, true
+}
+
+// HasOwners returns a boolean if a field has been set.
+func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) HasOwners() bool {
+	if o != nil && !IsNil(o.Owners) {
+		return true
+	}
+
+	return false
+}
+
+// SetOwners gets a reference to the given []CreateAssetGITLABREPOSITORYRequestOwnersInner and assigns it to the Owners field.
+func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) SetOwners(v []CreateAssetGITLABREPOSITORYRequestOwnersInner) {
+	o.Owners = v
+}
+
+// GetLanguages returns the Languages field value if set, zero value otherwise.
+func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) GetLanguages() []ENUMPROPERTIESLANGUAGESITEMS {
+	if o == nil || IsNil(o.Languages) {
+		var ret []ENUMPROPERTIESLANGUAGESITEMS
+		return ret
+	}
+	return o.Languages
+}
+
+// GetLanguagesOk returns a tuple with the Languages field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) GetLanguagesOk() ([]ENUMPROPERTIESLANGUAGESITEMS, bool) {
+	if o == nil || IsNil(o.Languages) {
+		return nil, false
+	}
+	return o.Languages, true
+}
+
+// HasLanguages returns a boolean if a field has been set.
+func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) HasLanguages() bool {
+	if o != nil && !IsNil(o.Languages) {
+		return true
+	}
+
+	return false
+}
+
+// SetLanguages gets a reference to the given []ENUMPROPERTIESLANGUAGESITEMS and assigns it to the Languages field.
+func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) SetLanguages(v []ENUMPROPERTIESLANGUAGESITEMS) {
+	o.Languages = v
+}
+
 // GetGroupId returns the GroupId field value if set, zero value otherwise.
 func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) GetGroupId() float32 {
 	if o == nil || IsNil(o.GroupId) {
@@ -688,6 +754,12 @@ func (o CreateAssetCODEPROJECTRequestRepositoryOneOf) ToMap() (map[string]interf
 	if !IsNil(o.LastCommit) {
 		toSerialize["last_commit"] = o.LastCommit
 	}
+	if !IsNil(o.Owners) {
+		toSerialize["owners"] = o.Owners
+	}
+	if !IsNil(o.Languages) {
+		toSerialize["languages"] = o.Languages
+	}
 	if !IsNil(o.GroupId) {
 		toSerialize["group_id"] = o.GroupId
 	}
@@ -766,6 +838,8 @@ func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) UnmarshalJSON(data []byte
 		delete(additionalProperties, "default_branch")
 		delete(additionalProperties, "blob_base_url")
 		delete(additionalProperties, "last_commit")
+		delete(additionalProperties, "owners")
+		delete(additionalProperties, "languages")
 		delete(additionalProperties, "group_id")
 		delete(additionalProperties, "group_full_path")
 		delete(additionalProperties, "group_web_url")

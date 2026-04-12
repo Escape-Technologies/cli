@@ -23,9 +23,10 @@ type ProfileExtraAsset struct {
 	// The id of the asset
 	Id string `json:"id"`
 	// The name of the asset
-	Name   string                                                 `json:"name"`
-	Type   ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE   `json:"type"`
-	Status ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS `json:"status"`
+	Name   string                                                            `json:"name"`
+	Class  ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS  `json:"class"`
+	Type   ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE   `json:"type"`
+	Status ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS `json:"status"`
 	// The date and time the asset was created
 	CreatedAt            string `json:"createdAt"`
 	AdditionalProperties map[string]interface{}
@@ -37,10 +38,11 @@ type _ProfileExtraAsset ProfileExtraAsset
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProfileExtraAsset(id string, name string, type_ ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE, status ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS, createdAt string) *ProfileExtraAsset {
+func NewProfileExtraAsset(id string, name string, class ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS, type_ ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE, status ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS, createdAt string) *ProfileExtraAsset {
 	this := ProfileExtraAsset{}
 	this.Id = id
 	this.Name = name
+	this.Class = class
 	this.Type = type_
 	this.Status = status
 	this.CreatedAt = createdAt
@@ -103,10 +105,34 @@ func (o *ProfileExtraAsset) SetName(v string) {
 	o.Name = v
 }
 
-// GetType returns the Type field value
-func (o *ProfileExtraAsset) GetType() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE {
+// GetClass returns the Class field value
+func (o *ProfileExtraAsset) GetClass() ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS {
 	if o == nil {
-		var ret ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE
+		var ret ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS
+		return ret
+	}
+
+	return o.Class
+}
+
+// GetClassOk returns a tuple with the Class field value
+// and a boolean to check if the value has been set.
+func (o *ProfileExtraAsset) GetClassOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Class, true
+}
+
+// SetClass sets field value
+func (o *ProfileExtraAsset) SetClass(v ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS) {
+	o.Class = v
+}
+
+// GetType returns the Type field value
+func (o *ProfileExtraAsset) GetType() ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE {
+	if o == nil {
+		var ret ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE
 		return ret
 	}
 
@@ -115,7 +141,7 @@ func (o *ProfileExtraAsset) GetType() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROP
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *ProfileExtraAsset) GetTypeOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE, bool) {
+func (o *ProfileExtraAsset) GetTypeOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -123,14 +149,14 @@ func (o *ProfileExtraAsset) GetTypeOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSET
 }
 
 // SetType sets field value
-func (o *ProfileExtraAsset) SetType(v ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE) {
+func (o *ProfileExtraAsset) SetType(v ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE) {
 	o.Type = v
 }
 
 // GetStatus returns the Status field value
-func (o *ProfileExtraAsset) GetStatus() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS {
+func (o *ProfileExtraAsset) GetStatus() ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS {
 	if o == nil {
-		var ret ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS
+		var ret ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS
 		return ret
 	}
 
@@ -139,7 +165,7 @@ func (o *ProfileExtraAsset) GetStatus() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPR
 
 // GetStatusOk returns a tuple with the Status field value
 // and a boolean to check if the value has been set.
-func (o *ProfileExtraAsset) GetStatusOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS, bool) {
+func (o *ProfileExtraAsset) GetStatusOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -147,7 +173,7 @@ func (o *ProfileExtraAsset) GetStatusOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASS
 }
 
 // SetStatus sets field value
-func (o *ProfileExtraAsset) SetStatus(v ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS) {
+func (o *ProfileExtraAsset) SetStatus(v ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS) {
 	o.Status = v
 }
 
@@ -187,6 +213,7 @@ func (o ProfileExtraAsset) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["name"] = o.Name
+	toSerialize["class"] = o.Class
 	toSerialize["type"] = o.Type
 	toSerialize["status"] = o.Status
 	toSerialize["createdAt"] = o.CreatedAt
@@ -205,6 +232,7 @@ func (o *ProfileExtraAsset) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"id",
 		"name",
+		"class",
 		"type",
 		"status",
 		"createdAt",
@@ -239,6 +267,7 @@ func (o *ProfileExtraAsset) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "name")
+		delete(additionalProperties, "class")
 		delete(additionalProperties, "type")
 		delete(additionalProperties, "status")
 		delete(additionalProperties, "createdAt")
