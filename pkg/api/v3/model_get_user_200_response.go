@@ -29,8 +29,6 @@ type GetUser200Response struct {
 	CreatedAt time.Time `json:"createdAt"`
 	// The date and time the user was activated
 	ActivatedAt *time.Time `json:"activatedAt,omitempty"`
-	// The profile picture link of the user
-	ProfilePictureLink *string `json:"profilePictureLink,omitempty"`
 	// The bindings of the user
 	RoleBindings         []CreateProject200ResponseBindingsInner `json:"roleBindings"`
 	AdditionalProperties map[string]interface{}
@@ -163,38 +161,6 @@ func (o *GetUser200Response) SetActivatedAt(v time.Time) {
 	o.ActivatedAt = &v
 }
 
-// GetProfilePictureLink returns the ProfilePictureLink field value if set, zero value otherwise.
-func (o *GetUser200Response) GetProfilePictureLink() string {
-	if o == nil || IsNil(o.ProfilePictureLink) {
-		var ret string
-		return ret
-	}
-	return *o.ProfilePictureLink
-}
-
-// GetProfilePictureLinkOk returns a tuple with the ProfilePictureLink field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetUser200Response) GetProfilePictureLinkOk() (*string, bool) {
-	if o == nil || IsNil(o.ProfilePictureLink) {
-		return nil, false
-	}
-	return o.ProfilePictureLink, true
-}
-
-// HasProfilePictureLink returns a boolean if a field has been set.
-func (o *GetUser200Response) HasProfilePictureLink() bool {
-	if o != nil && !IsNil(o.ProfilePictureLink) {
-		return true
-	}
-
-	return false
-}
-
-// SetProfilePictureLink gets a reference to the given string and assigns it to the ProfilePictureLink field.
-func (o *GetUser200Response) SetProfilePictureLink(v string) {
-	o.ProfilePictureLink = &v
-}
-
 // GetRoleBindings returns the RoleBindings field value
 func (o *GetUser200Response) GetRoleBindings() []CreateProject200ResponseBindingsInner {
 	if o == nil {
@@ -234,9 +200,6 @@ func (o GetUser200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize["createdAt"] = o.CreatedAt
 	if !IsNil(o.ActivatedAt) {
 		toSerialize["activatedAt"] = o.ActivatedAt
-	}
-	if !IsNil(o.ProfilePictureLink) {
-		toSerialize["profilePictureLink"] = o.ProfilePictureLink
 	}
 	toSerialize["roleBindings"] = o.RoleBindings
 
@@ -289,7 +252,6 @@ func (o *GetUser200Response) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "email")
 		delete(additionalProperties, "createdAt")
 		delete(additionalProperties, "activatedAt")
-		delete(additionalProperties, "profilePictureLink")
 		delete(additionalProperties, "roleBindings")
 		o.AdditionalProperties = additionalProperties
 	}

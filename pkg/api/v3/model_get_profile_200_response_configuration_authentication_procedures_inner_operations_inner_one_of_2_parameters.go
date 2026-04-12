@@ -20,13 +20,14 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationAuthenticationProcedur
 
 // GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf2Parameters struct for GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf2Parameters
 type GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf2Parameters struct {
-	ProxyOverride           *string                                                                                                `json:"proxy_override,omitempty"`
-	LoginUrl                string                                                                                                 `json:"login_url"`
-	AutoExtractionUrls      []string                                                                                               `json:"auto_extraction_urls,omitempty"`
-	LoggedInDetectorText    *string                                                                                                `json:"logged_in_detector_text,omitempty"`
-	LoggedInDetectorTimeout *float32                                                                                               `json:"logged_in_detector_timeout,omitempty"`
-	StealthMode             *bool                                                                                                  `json:"stealth_mode,omitempty"`
-	Agentic                 *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf2ParametersAgentic `json:"agentic,omitempty"`
+	ProxyOverride           *string                                                                                                        `json:"proxy_override,omitempty"`
+	LoginUrl                string                                                                                                         `json:"login_url"`
+	AutoExtractionUrls      []string                                                                                                       `json:"auto_extraction_urls,omitempty"`
+	LoggedInDetectorText    *string                                                                                                        `json:"logged_in_detector_text,omitempty"`
+	LoggedInDetectorTimeout *float32                                                                                                       `json:"logged_in_detector_timeout,omitempty"`
+	StealthMode             *bool                                                                                                          `json:"stealth_mode,omitempty"`
+	LogoutDetection         *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersLogoutDetection `json:"logout_detection,omitempty"`
+	Agentic                 *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf2ParametersAgentic         `json:"agentic,omitempty"`
 	AdditionalProperties    map[string]interface{}
 }
 
@@ -234,6 +235,38 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 	o.StealthMode = &v
 }
 
+// GetLogoutDetection returns the LogoutDetection field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf2Parameters) GetLogoutDetection() GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersLogoutDetection {
+	if o == nil || IsNil(o.LogoutDetection) {
+		var ret GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersLogoutDetection
+		return ret
+	}
+	return *o.LogoutDetection
+}
+
+// GetLogoutDetectionOk returns a tuple with the LogoutDetection field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf2Parameters) GetLogoutDetectionOk() (*GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersLogoutDetection, bool) {
+	if o == nil || IsNil(o.LogoutDetection) {
+		return nil, false
+	}
+	return o.LogoutDetection, true
+}
+
+// HasLogoutDetection returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf2Parameters) HasLogoutDetection() bool {
+	if o != nil && !IsNil(o.LogoutDetection) {
+		return true
+	}
+
+	return false
+}
+
+// SetLogoutDetection gets a reference to the given GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersLogoutDetection and assigns it to the LogoutDetection field.
+func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf2Parameters) SetLogoutDetection(v GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersLogoutDetection) {
+	o.LogoutDetection = &v
+}
+
 // GetAgentic returns the Agentic field value if set, zero value otherwise.
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf2Parameters) GetAgentic() GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf2ParametersAgentic {
 	if o == nil || IsNil(o.Agentic) {
@@ -292,6 +325,9 @@ func (o GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperation
 	if !IsNil(o.StealthMode) {
 		toSerialize["stealth_mode"] = o.StealthMode
 	}
+	if !IsNil(o.LogoutDetection) {
+		toSerialize["logout_detection"] = o.LogoutDetection
+	}
 	if !IsNil(o.Agentic) {
 		toSerialize["agentic"] = o.Agentic
 	}
@@ -344,6 +380,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 		delete(additionalProperties, "logged_in_detector_text")
 		delete(additionalProperties, "logged_in_detector_timeout")
 		delete(additionalProperties, "stealth_mode")
+		delete(additionalProperties, "logout_detection")
 		delete(additionalProperties, "agentic")
 		o.AdditionalProperties = additionalProperties
 	}

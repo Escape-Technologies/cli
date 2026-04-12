@@ -21,18 +21,18 @@ var _ MappedNullable = &CreateAssetCODEPROJECTRequest{}
 // CreateAssetCODEPROJECTRequest struct for CreateAssetCODEPROJECTRequest
 type CreateAssetCODEPROJECTRequest struct {
 	// The list of project IDs bind the asset on.
-	ProjectIds           []string                                      `json:"projectIds,omitempty"`
-	Name                 *string                                       `json:"name,omitempty"`
-	AssetClass           ENUMCODEPROJECT                               `json:"asset_class"`
-	ExtraMetadata        map[string]interface{}                        `json:"extra_metadata,omitempty"`
-	ScreenshotS3Key      *string                                       `json:"screenshot_s3_key,omitempty"`
-	AssetType            ENUMCODEPROJECT                               `json:"asset_type"`
-	Repository           CreateAssetCODEPROJECTRequestRepository       `json:"repository"`
-	Path                 string                                        `json:"path"`
-	Language             ENUMPROPERTIESLANGUAGE                        `json:"language"`
-	HttpUrlToProject     *string                                       `json:"http_url_to_project,omitempty"`
-	Owners               []CreateAssetCODEPROJECTRequestOwnersInner    `json:"owners,omitempty"`
-	LastCommit           *CreateAssetGITLABREPOSITORYRequestLastCommit `json:"last_commit,omitempty"`
+	ProjectIds           []string                                        `json:"projectIds,omitempty"`
+	Name                 *string                                         `json:"name,omitempty"`
+	AssetClass           ENUMCODEPROJECT                                 `json:"asset_class"`
+	ExtraMetadata        map[string]interface{}                          `json:"extra_metadata,omitempty"`
+	ScreenshotS3Key      *string                                         `json:"screenshot_s3_key,omitempty"`
+	AssetType            ENUMCODEPROJECT                                 `json:"asset_type"`
+	Repository           CreateAssetCODEPROJECTRequestRepository         `json:"repository"`
+	Path                 string                                          `json:"path"`
+	Language             ENUMPROPERTIESLANGUAGESITEMS                    `json:"language"`
+	HttpUrlToProject     *string                                         `json:"http_url_to_project,omitempty"`
+	Owners               []CreateAssetGITLABREPOSITORYRequestOwnersInner `json:"owners,omitempty"`
+	LastCommit           *CreateAssetGITLABREPOSITORYRequestLastCommit   `json:"last_commit,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -42,7 +42,7 @@ type _CreateAssetCODEPROJECTRequest CreateAssetCODEPROJECTRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetCODEPROJECTRequest(assetClass ENUMCODEPROJECT, assetType ENUMCODEPROJECT, repository CreateAssetCODEPROJECTRequestRepository, path string, language ENUMPROPERTIESLANGUAGE) *CreateAssetCODEPROJECTRequest {
+func NewCreateAssetCODEPROJECTRequest(assetClass ENUMCODEPROJECT, assetType ENUMCODEPROJECT, repository CreateAssetCODEPROJECTRequestRepository, path string, language ENUMPROPERTIESLANGUAGESITEMS) *CreateAssetCODEPROJECTRequest {
 	this := CreateAssetCODEPROJECTRequest{}
 	this.AssetClass = assetClass
 	this.AssetType = assetType
@@ -285,9 +285,9 @@ func (o *CreateAssetCODEPROJECTRequest) SetPath(v string) {
 }
 
 // GetLanguage returns the Language field value
-func (o *CreateAssetCODEPROJECTRequest) GetLanguage() ENUMPROPERTIESLANGUAGE {
+func (o *CreateAssetCODEPROJECTRequest) GetLanguage() ENUMPROPERTIESLANGUAGESITEMS {
 	if o == nil {
-		var ret ENUMPROPERTIESLANGUAGE
+		var ret ENUMPROPERTIESLANGUAGESITEMS
 		return ret
 	}
 
@@ -296,7 +296,7 @@ func (o *CreateAssetCODEPROJECTRequest) GetLanguage() ENUMPROPERTIESLANGUAGE {
 
 // GetLanguageOk returns a tuple with the Language field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetCODEPROJECTRequest) GetLanguageOk() (*ENUMPROPERTIESLANGUAGE, bool) {
+func (o *CreateAssetCODEPROJECTRequest) GetLanguageOk() (*ENUMPROPERTIESLANGUAGESITEMS, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -304,7 +304,7 @@ func (o *CreateAssetCODEPROJECTRequest) GetLanguageOk() (*ENUMPROPERTIESLANGUAGE
 }
 
 // SetLanguage sets field value
-func (o *CreateAssetCODEPROJECTRequest) SetLanguage(v ENUMPROPERTIESLANGUAGE) {
+func (o *CreateAssetCODEPROJECTRequest) SetLanguage(v ENUMPROPERTIESLANGUAGESITEMS) {
 	o.Language = v
 }
 
@@ -341,9 +341,9 @@ func (o *CreateAssetCODEPROJECTRequest) SetHttpUrlToProject(v string) {
 }
 
 // GetOwners returns the Owners field value if set, zero value otherwise.
-func (o *CreateAssetCODEPROJECTRequest) GetOwners() []CreateAssetCODEPROJECTRequestOwnersInner {
+func (o *CreateAssetCODEPROJECTRequest) GetOwners() []CreateAssetGITLABREPOSITORYRequestOwnersInner {
 	if o == nil || IsNil(o.Owners) {
-		var ret []CreateAssetCODEPROJECTRequestOwnersInner
+		var ret []CreateAssetGITLABREPOSITORYRequestOwnersInner
 		return ret
 	}
 	return o.Owners
@@ -351,7 +351,7 @@ func (o *CreateAssetCODEPROJECTRequest) GetOwners() []CreateAssetCODEPROJECTRequ
 
 // GetOwnersOk returns a tuple with the Owners field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetCODEPROJECTRequest) GetOwnersOk() ([]CreateAssetCODEPROJECTRequestOwnersInner, bool) {
+func (o *CreateAssetCODEPROJECTRequest) GetOwnersOk() ([]CreateAssetGITLABREPOSITORYRequestOwnersInner, bool) {
 	if o == nil || IsNil(o.Owners) {
 		return nil, false
 	}
@@ -367,8 +367,8 @@ func (o *CreateAssetCODEPROJECTRequest) HasOwners() bool {
 	return false
 }
 
-// SetOwners gets a reference to the given []CreateAssetCODEPROJECTRequestOwnersInner and assigns it to the Owners field.
-func (o *CreateAssetCODEPROJECTRequest) SetOwners(v []CreateAssetCODEPROJECTRequestOwnersInner) {
+// SetOwners gets a reference to the given []CreateAssetGITLABREPOSITORYRequestOwnersInner and assigns it to the Owners field.
+func (o *CreateAssetCODEPROJECTRequest) SetOwners(v []CreateAssetGITLABREPOSITORYRequestOwnersInner) {
 	o.Owners = v
 }
 

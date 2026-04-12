@@ -21,9 +21,9 @@ var _ MappedNullable = &AssetDetailed2{}
 // AssetDetailed2 The asset of the issue
 type AssetDetailed2 struct {
 	// The id of the asset
-	Id    string                                                `json:"id"`
-	Class ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS `json:"class"`
-	Type  ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE  `json:"type"`
+	Id    string                                                           `json:"id"`
+	Class ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS `json:"class"`
+	Type  ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE  `json:"type"`
 	// The name of the asset
 	Name string `json:"name"`
 	// The external url of the asset
@@ -37,18 +37,20 @@ type AssetDetailed2 struct {
 	// The date and time the asset was last seen
 	LastSeenAt string `json:"lastSeenAt"`
 	// The date and time the asset is scheduled for deletion
-	ScheduledForDeletionAt *string                                                `json:"scheduledForDeletionAt,omitempty"`
-	Status                 ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS `json:"status"`
+	ScheduledForDeletionAt *string                                                           `json:"scheduledForDeletionAt,omitempty"`
+	Status                 ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS `json:"status"`
 	// The tags of the asset
 	Tags []Tag `json:"tags"`
 	// The risks of the asset
-	Risks                []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS `json:"risks"`
-	FirstSeenScan        *ScanSummarized                                              `json:"firstSeenScan,omitempty"`
-	LastSeenScan         *ScanSummarized1                                             `json:"lastSeenScan,omitempty"`
-	Service              *AssetServiceDetailed                                        `json:"service,omitempty"`
-	Frontend             *AssetFrontendDetailed                                       `json:"frontend,omitempty"`
-	Host                 *AssetHostDetailed                                           `json:"host,omitempty"`
-	Links                AssetDetailedLinks                                           `json:"links"`
+	Risks         []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS `json:"risks"`
+	FirstSeenScan *ScanSummarized                                              `json:"firstSeenScan,omitempty"`
+	LastSeenScan  *ScanSummarized1                                             `json:"lastSeenScan,omitempty"`
+	Service       *AssetServiceDetailed                                        `json:"service,omitempty"`
+	Frontend      *AssetFrontendDetailed                                       `json:"frontend,omitempty"`
+	Host          *AssetHostDetailed                                           `json:"host,omitempty"`
+	// Time-limited HTTPS URL for schema-class assets; null for other asset classes
+	SchemaUrl            *string            `json:"schemaUrl,omitempty"`
+	Links                AssetDetailedLinks `json:"links"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -58,7 +60,7 @@ type _AssetDetailed2 AssetDetailed2
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAssetDetailed2(id string, class ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS, type_ ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE, name string, createdAt string, lastSeenAt string, status ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS, tags []Tag, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, links AssetDetailedLinks) *AssetDetailed2 {
+func NewAssetDetailed2(id string, class ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS, type_ ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE, name string, createdAt string, lastSeenAt string, status ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS, tags []Tag, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, links AssetDetailedLinks) *AssetDetailed2 {
 	this := AssetDetailed2{}
 	this.Id = id
 	this.Class = class
@@ -106,9 +108,9 @@ func (o *AssetDetailed2) SetId(v string) {
 }
 
 // GetClass returns the Class field value
-func (o *AssetDetailed2) GetClass() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS {
+func (o *AssetDetailed2) GetClass() ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS {
 	if o == nil {
-		var ret ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS
+		var ret ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS
 		return ret
 	}
 
@@ -117,7 +119,7 @@ func (o *AssetDetailed2) GetClass() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPER
 
 // GetClassOk returns a tuple with the Class field value
 // and a boolean to check if the value has been set.
-func (o *AssetDetailed2) GetClassOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS, bool) {
+func (o *AssetDetailed2) GetClassOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -125,14 +127,14 @@ func (o *AssetDetailed2) GetClassOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSETPR
 }
 
 // SetClass sets field value
-func (o *AssetDetailed2) SetClass(v ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESCLASS) {
+func (o *AssetDetailed2) SetClass(v ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS) {
 	o.Class = v
 }
 
 // GetType returns the Type field value
-func (o *AssetDetailed2) GetType() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE {
+func (o *AssetDetailed2) GetType() ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE {
 	if o == nil {
-		var ret ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE
+		var ret ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE
 		return ret
 	}
 
@@ -141,7 +143,7 @@ func (o *AssetDetailed2) GetType() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERT
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *AssetDetailed2) GetTypeOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE, bool) {
+func (o *AssetDetailed2) GetTypeOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -149,7 +151,7 @@ func (o *AssetDetailed2) GetTypeOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSETPRO
 }
 
 // SetType sets field value
-func (o *AssetDetailed2) SetType(v ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTYPE) {
+func (o *AssetDetailed2) SetType(v ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE) {
 	o.Type = v
 }
 
@@ -354,9 +356,9 @@ func (o *AssetDetailed2) SetScheduledForDeletionAt(v string) {
 }
 
 // GetStatus returns the Status field value
-func (o *AssetDetailed2) GetStatus() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS {
+func (o *AssetDetailed2) GetStatus() ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS {
 	if o == nil {
-		var ret ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS
+		var ret ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS
 		return ret
 	}
 
@@ -365,7 +367,7 @@ func (o *AssetDetailed2) GetStatus() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPE
 
 // GetStatusOk returns a tuple with the Status field value
 // and a boolean to check if the value has been set.
-func (o *AssetDetailed2) GetStatusOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS, bool) {
+func (o *AssetDetailed2) GetStatusOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -373,7 +375,7 @@ func (o *AssetDetailed2) GetStatusOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSETP
 }
 
 // SetStatus sets field value
-func (o *AssetDetailed2) SetStatus(v ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATUS) {
+func (o *AssetDetailed2) SetStatus(v ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS) {
 	o.Status = v
 }
 
@@ -585,6 +587,38 @@ func (o *AssetDetailed2) SetHost(v AssetHostDetailed) {
 	o.Host = &v
 }
 
+// GetSchemaUrl returns the SchemaUrl field value if set, zero value otherwise.
+func (o *AssetDetailed2) GetSchemaUrl() string {
+	if o == nil || IsNil(o.SchemaUrl) {
+		var ret string
+		return ret
+	}
+	return *o.SchemaUrl
+}
+
+// GetSchemaUrlOk returns a tuple with the SchemaUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AssetDetailed2) GetSchemaUrlOk() (*string, bool) {
+	if o == nil || IsNil(o.SchemaUrl) {
+		return nil, false
+	}
+	return o.SchemaUrl, true
+}
+
+// HasSchemaUrl returns a boolean if a field has been set.
+func (o *AssetDetailed2) HasSchemaUrl() bool {
+	if o != nil && !IsNil(o.SchemaUrl) {
+		return true
+	}
+
+	return false
+}
+
+// SetSchemaUrl gets a reference to the given string and assigns it to the SchemaUrl field.
+func (o *AssetDetailed2) SetSchemaUrl(v string) {
+	o.SchemaUrl = &v
+}
+
 // GetLinks returns the Links field value
 func (o *AssetDetailed2) GetLinks() AssetDetailedLinks {
 	if o == nil {
@@ -654,6 +688,9 @@ func (o AssetDetailed2) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Host) {
 		toSerialize["host"] = o.Host
+	}
+	if !IsNil(o.SchemaUrl) {
+		toSerialize["schemaUrl"] = o.SchemaUrl
 	}
 	toSerialize["links"] = o.Links
 
@@ -726,6 +763,7 @@ func (o *AssetDetailed2) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "service")
 		delete(additionalProperties, "frontend")
 		delete(additionalProperties, "host")
+		delete(additionalProperties, "schemaUrl")
 		delete(additionalProperties, "links")
 		o.AdditionalProperties = additionalProperties
 	}

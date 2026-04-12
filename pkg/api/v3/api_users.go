@@ -266,7 +266,7 @@ func (r ApiInviteUserRequest) InviteUserRequest(inviteUserRequest InviteUserRequ
 	return r
 }
 
-func (r ApiInviteUserRequest) Execute() ([]ListUsers200Response, *http.Response, error) {
+func (r ApiInviteUserRequest) Execute() ([]ListUsers200ResponseInner, *http.Response, error) {
 	return r.ApiService.InviteUserExecute(r)
 }
 
@@ -287,13 +287,13 @@ func (a *UsersAPIService) InviteUser(ctx context.Context) ApiInviteUserRequest {
 
 // Execute executes the request
 //
-//	@return []ListUsers200Response
-func (a *UsersAPIService) InviteUserExecute(r ApiInviteUserRequest) ([]ListUsers200Response, *http.Response, error) {
+//	@return []ListUsers200ResponseInner
+func (a *UsersAPIService) InviteUserExecute(r ApiInviteUserRequest) ([]ListUsers200ResponseInner, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue []ListUsers200Response
+		localVarReturnValue []ListUsers200ResponseInner
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersAPIService.InviteUser")
@@ -365,6 +365,16 @@ func (a *UsersAPIService) InviteUserExecute(r ApiInviteUserRequest) ([]ListUsers
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v UpdateProfile400Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -385,14 +395,14 @@ type ApiListUsersRequest struct {
 	ApiService *UsersAPIService
 }
 
-func (r ApiListUsersRequest) Execute() (*ListUsers200Response, *http.Response, error) {
+func (r ApiListUsersRequest) Execute() ([]ListUsers200ResponseInner, *http.Response, error) {
 	return r.ApiService.ListUsersExecute(r)
 }
 
 /*
 ListUsers List users
 
-List and search projects of the organization.
+List users of the organization.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiListUsersRequest
@@ -406,13 +416,13 @@ func (a *UsersAPIService) ListUsers(ctx context.Context) ApiListUsersRequest {
 
 // Execute executes the request
 //
-//	@return ListUsers200Response
-func (a *UsersAPIService) ListUsersExecute(r ApiListUsersRequest) (*ListUsers200Response, *http.Response, error) {
+//	@return []ListUsers200ResponseInner
+func (a *UsersAPIService) ListUsersExecute(r ApiListUsersRequest) ([]ListUsers200ResponseInner, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *ListUsers200Response
+		localVarReturnValue []ListUsers200ResponseInner
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersAPIService.ListUsers")

@@ -1752,7 +1752,7 @@ func (r ApiDeleteakamaiIntegrationRequest) Execute() (*CreateakamaiIntegration20
 /*
 DeleteakamaiIntegration Delete Akamai integration.
 
-Update a Akamai integration.
+Delete a Akamai integration.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The workflow ID
@@ -1851,6 +1851,17 @@ func (a *IntegrationsAPIService) DeleteakamaiIntegrationExecute(r ApiDeleteakama
 			}
 			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v CreateIssueComment500Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1880,7 +1891,7 @@ func (r ApiDeleteawsIntegrationRequest) Execute() (*CreateawsIntegration200Respo
 /*
 DeleteawsIntegration Delete AWS integration.
 
-Update a AWS integration.
+Delete a AWS integration.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The workflow ID
@@ -1979,6 +1990,17 @@ func (a *IntegrationsAPIService) DeleteawsIntegrationExecute(r ApiDeleteawsInteg
 			}
 			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v CreateIssueComment500Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2008,7 +2030,7 @@ func (r ApiDeleteazureIntegrationRequest) Execute() (*CreateazureIntegration200R
 /*
 DeleteazureIntegration Delete Azure integration.
 
-Update a Azure integration.
+Delete a Azure integration.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The workflow ID
@@ -2107,6 +2129,17 @@ func (a *IntegrationsAPIService) DeleteazureIntegrationExecute(r ApiDeleteazureI
 			}
 			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v CreateIssueComment500Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2136,7 +2169,7 @@ func (r ApiDeletebitbucketIntegrationRequest) Execute() (*CreatebitbucketIntegra
 /*
 DeletebitbucketIntegration Delete Bitbucket integration.
 
-Update a Bitbucket integration.
+Delete a Bitbucket integration.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The workflow ID
@@ -2235,6 +2268,17 @@ func (a *IntegrationsAPIService) DeletebitbucketIntegrationExecute(r ApiDeletebi
 			}
 			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v CreateIssueComment500Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2264,7 +2308,7 @@ func (r ApiDeletecloudflareIntegrationRequest) Execute() (*CreatecloudflareInteg
 /*
 DeletecloudflareIntegration Delete Cloudflare integration.
 
-Update a Cloudflare integration.
+Delete a Cloudflare integration.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The workflow ID
@@ -2363,6 +2407,17 @@ func (a *IntegrationsAPIService) DeletecloudflareIntegrationExecute(r ApiDeletec
 			}
 			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v CreateIssueComment500Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2392,7 +2447,7 @@ func (r ApiDeletecustomIntegrationRequest) Execute() (*CreatecustomIntegration20
 /*
 DeletecustomIntegration Delete Custom Integration integration.
 
-Update a Custom Integration integration.
+Delete a Custom Integration integration.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The workflow ID
@@ -2491,6 +2546,17 @@ func (a *IntegrationsAPIService) DeletecustomIntegrationExecute(r ApiDeletecusto
 			}
 			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v CreateIssueComment500Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2520,7 +2586,7 @@ func (r ApiDeletegcpIntegrationRequest) Execute() (*CreategcpIntegration200Respo
 /*
 DeletegcpIntegration Delete GCP integration.
 
-Update a GCP integration.
+Delete a GCP integration.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The workflow ID
@@ -2619,6 +2685,17 @@ func (a *IntegrationsAPIService) DeletegcpIntegrationExecute(r ApiDeletegcpInteg
 			}
 			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v CreateIssueComment500Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2648,7 +2725,7 @@ func (r ApiDeletegithubIntegrationRequest) Execute() (*CreatecloudflareIntegrati
 /*
 DeletegithubIntegration Delete GitHub integration.
 
-Update a GitHub integration.
+Delete a GitHub integration.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The workflow ID
@@ -2747,6 +2824,17 @@ func (a *IntegrationsAPIService) DeletegithubIntegrationExecute(r ApiDeletegithu
 			}
 			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v CreateIssueComment500Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2776,7 +2864,7 @@ func (r ApiDeletegitlabIntegrationRequest) Execute() (*CreategitlabIntegration20
 /*
 DeletegitlabIntegration Delete GitLab integration.
 
-Update a GitLab integration.
+Delete a GitLab integration.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The workflow ID
@@ -2875,6 +2963,17 @@ func (a *IntegrationsAPIService) DeletegitlabIntegrationExecute(r ApiDeletegitla
 			}
 			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v CreateIssueComment500Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2904,7 +3003,7 @@ func (r ApiDeletejiraIntegrationRequest) Execute() (*CreatejiraIntegration200Res
 /*
 DeletejiraIntegration Delete Jira integration.
 
-Update a Jira integration.
+Delete a Jira integration.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The workflow ID
@@ -3003,6 +3102,17 @@ func (a *IntegrationsAPIService) DeletejiraIntegrationExecute(r ApiDeletejiraInt
 			}
 			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v CreateIssueComment500Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -3032,7 +3142,7 @@ func (r ApiDeletekubernetesIntegrationRequest) Execute() (*CreatekubernetesInteg
 /*
 DeletekubernetesIntegration Delete Kubernetes integration.
 
-Update a Kubernetes integration.
+Delete a Kubernetes integration.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The workflow ID
@@ -3131,6 +3241,17 @@ func (a *IntegrationsAPIService) DeletekubernetesIntegrationExecute(r ApiDeletek
 			}
 			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v CreateIssueComment500Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -3160,7 +3281,7 @@ func (r ApiDeletepostmanIntegrationRequest) Execute() (*CreatecloudflareIntegrat
 /*
 DeletepostmanIntegration Delete Postman integration.
 
-Update a Postman integration.
+Delete a Postman integration.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The workflow ID
@@ -3259,6 +3380,17 @@ func (a *IntegrationsAPIService) DeletepostmanIntegrationExecute(r ApiDeletepost
 			}
 			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v CreateIssueComment500Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -3288,7 +3420,7 @@ func (r ApiDeletewizIntegrationRequest) Execute() (*CreatewizIntegration200Respo
 /*
 DeletewizIntegration Delete Wiz integration.
 
-Update a Wiz integration.
+Delete a Wiz integration.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The workflow ID
@@ -3380,6 +3512,17 @@ func (a *IntegrationsAPIService) DeletewizIntegrationExecute(r ApiDeletewizInteg
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
 			var v UpdateProfile400Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v CreateIssueComment500Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

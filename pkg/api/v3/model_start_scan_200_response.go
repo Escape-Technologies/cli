@@ -32,6 +32,8 @@ type StartScan200Response struct {
 	FinishedAt *string `json:"finishedAt,omitempty"`
 	// The score of the scan
 	Score *float32 `json:"score,omitempty"`
+	// Aggregate API coverage ratio for this scan (0–1), when the scan has finished with coverage data
+	Coverage *float32 `json:"coverage,omitempty"`
 	// The duration of the scan
 	Duration float32 `json:"duration"`
 	// The progress ratio of the scan
@@ -241,6 +243,38 @@ func (o *StartScan200Response) HasScore() bool {
 // SetScore gets a reference to the given float32 and assigns it to the Score field.
 func (o *StartScan200Response) SetScore(v float32) {
 	o.Score = &v
+}
+
+// GetCoverage returns the Coverage field value if set, zero value otherwise.
+func (o *StartScan200Response) GetCoverage() float32 {
+	if o == nil || IsNil(o.Coverage) {
+		var ret float32
+		return ret
+	}
+	return *o.Coverage
+}
+
+// GetCoverageOk returns a tuple with the Coverage field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StartScan200Response) GetCoverageOk() (*float32, bool) {
+	if o == nil || IsNil(o.Coverage) {
+		return nil, false
+	}
+	return o.Coverage, true
+}
+
+// HasCoverage returns a boolean if a field has been set.
+func (o *StartScan200Response) HasCoverage() bool {
+	if o != nil && !IsNil(o.Coverage) {
+		return true
+	}
+
+	return false
+}
+
+// SetCoverage gets a reference to the given float32 and assigns it to the Coverage field.
+func (o *StartScan200Response) SetCoverage(v float32) {
+	o.Coverage = &v
 }
 
 // GetDuration returns the Duration field value
@@ -591,6 +625,9 @@ func (o StartScan200Response) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Score) {
 		toSerialize["score"] = o.Score
 	}
+	if !IsNil(o.Coverage) {
+		toSerialize["coverage"] = o.Coverage
+	}
 	toSerialize["duration"] = o.Duration
 	toSerialize["progressRatio"] = o.ProgressRatio
 	toSerialize["initiator"] = o.Initiator
@@ -672,6 +709,7 @@ func (o *StartScan200Response) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "updatedAt")
 		delete(additionalProperties, "finishedAt")
 		delete(additionalProperties, "score")
+		delete(additionalProperties, "coverage")
 		delete(additionalProperties, "duration")
 		delete(additionalProperties, "progressRatio")
 		delete(additionalProperties, "initiator")

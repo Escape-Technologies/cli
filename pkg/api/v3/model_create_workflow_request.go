@@ -23,11 +23,11 @@ type CreateWorkflowRequest struct {
 	// The organization ID to create the workflow for
 	OrganizationId string `json:"organizationId"`
 	// The name of the workflow
-	Name    string                `json:"name"`
-	Trigger ENUMPROPERTIESTRIGGER `json:"trigger"`
+	Name    string                                   `json:"name"`
+	Trigger ENUMPROPERTIESDATAITEMSPROPERTIESTRIGGER `json:"trigger"`
 	// The throttle in milliseconds for the workflow.
 	ThrottleMs *float32                            `json:"throttleMs,omitempty"`
-	Filters    []UpdateWorkflowRequestFiltersInner `json:"filters"`
+	Filters    []CreateWorkflowRequestFiltersInner `json:"filters"`
 	Actions    []CreateWorkflowRequestActionsInner `json:"actions"`
 	// Optional list of project IDs to create the integration for
 	ProjectIds           []string `json:"projectIds,omitempty"`
@@ -40,7 +40,7 @@ type _CreateWorkflowRequest CreateWorkflowRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateWorkflowRequest(organizationId string, name string, trigger ENUMPROPERTIESTRIGGER, filters []UpdateWorkflowRequestFiltersInner, actions []CreateWorkflowRequestActionsInner) *CreateWorkflowRequest {
+func NewCreateWorkflowRequest(organizationId string, name string, trigger ENUMPROPERTIESDATAITEMSPROPERTIESTRIGGER, filters []CreateWorkflowRequestFiltersInner, actions []CreateWorkflowRequestActionsInner) *CreateWorkflowRequest {
 	this := CreateWorkflowRequest{}
 	this.OrganizationId = organizationId
 	this.Name = name
@@ -107,9 +107,9 @@ func (o *CreateWorkflowRequest) SetName(v string) {
 }
 
 // GetTrigger returns the Trigger field value
-func (o *CreateWorkflowRequest) GetTrigger() ENUMPROPERTIESTRIGGER {
+func (o *CreateWorkflowRequest) GetTrigger() ENUMPROPERTIESDATAITEMSPROPERTIESTRIGGER {
 	if o == nil {
-		var ret ENUMPROPERTIESTRIGGER
+		var ret ENUMPROPERTIESDATAITEMSPROPERTIESTRIGGER
 		return ret
 	}
 
@@ -118,7 +118,7 @@ func (o *CreateWorkflowRequest) GetTrigger() ENUMPROPERTIESTRIGGER {
 
 // GetTriggerOk returns a tuple with the Trigger field value
 // and a boolean to check if the value has been set.
-func (o *CreateWorkflowRequest) GetTriggerOk() (*ENUMPROPERTIESTRIGGER, bool) {
+func (o *CreateWorkflowRequest) GetTriggerOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESTRIGGER, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -126,7 +126,7 @@ func (o *CreateWorkflowRequest) GetTriggerOk() (*ENUMPROPERTIESTRIGGER, bool) {
 }
 
 // SetTrigger sets field value
-func (o *CreateWorkflowRequest) SetTrigger(v ENUMPROPERTIESTRIGGER) {
+func (o *CreateWorkflowRequest) SetTrigger(v ENUMPROPERTIESDATAITEMSPROPERTIESTRIGGER) {
 	o.Trigger = v
 }
 
@@ -163,9 +163,9 @@ func (o *CreateWorkflowRequest) SetThrottleMs(v float32) {
 }
 
 // GetFilters returns the Filters field value
-func (o *CreateWorkflowRequest) GetFilters() []UpdateWorkflowRequestFiltersInner {
+func (o *CreateWorkflowRequest) GetFilters() []CreateWorkflowRequestFiltersInner {
 	if o == nil {
-		var ret []UpdateWorkflowRequestFiltersInner
+		var ret []CreateWorkflowRequestFiltersInner
 		return ret
 	}
 
@@ -174,7 +174,7 @@ func (o *CreateWorkflowRequest) GetFilters() []UpdateWorkflowRequestFiltersInner
 
 // GetFiltersOk returns a tuple with the Filters field value
 // and a boolean to check if the value has been set.
-func (o *CreateWorkflowRequest) GetFiltersOk() ([]UpdateWorkflowRequestFiltersInner, bool) {
+func (o *CreateWorkflowRequest) GetFiltersOk() ([]CreateWorkflowRequestFiltersInner, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -182,7 +182,7 @@ func (o *CreateWorkflowRequest) GetFiltersOk() ([]UpdateWorkflowRequestFiltersIn
 }
 
 // SetFilters sets field value
-func (o *CreateWorkflowRequest) SetFilters(v []UpdateWorkflowRequestFiltersInner) {
+func (o *CreateWorkflowRequest) SetFilters(v []CreateWorkflowRequestFiltersInner) {
 	o.Filters = v
 }
 

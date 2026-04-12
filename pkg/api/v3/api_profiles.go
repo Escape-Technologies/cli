@@ -24,14 +24,14 @@ import (
 type ProfilesAPIService service
 
 type ApiCreateDastGraphqlProfileRequest struct {
-	ctx                             context.Context
-	ApiService                      *ProfilesAPIService
-	createDastGraphqlProfileRequest *CreateDastGraphqlProfileRequest
+	ctx                          context.Context
+	ApiService                   *ProfilesAPIService
+	createDastRestProfileRequest *CreateDastRestProfileRequest
 }
 
 // Body of the request to create an asset
-func (r ApiCreateDastGraphqlProfileRequest) CreateDastGraphqlProfileRequest(createDastGraphqlProfileRequest CreateDastGraphqlProfileRequest) ApiCreateDastGraphqlProfileRequest {
-	r.createDastGraphqlProfileRequest = &createDastGraphqlProfileRequest
+func (r ApiCreateDastGraphqlProfileRequest) CreateDastRestProfileRequest(createDastRestProfileRequest CreateDastRestProfileRequest) ApiCreateDastGraphqlProfileRequest {
+	r.createDastRestProfileRequest = &createDastRestProfileRequest
 	return r
 }
 
@@ -42,7 +42,7 @@ func (r ApiCreateDastGraphqlProfileRequest) Execute() (*GetProfile200Response, *
 /*
 CreateDastGraphqlProfile Create a DAST GraphQL profile
 
-Create a DAST GraphQL profile
+Create a DAST GraphQL profile.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCreateDastGraphqlProfileRequest
@@ -94,7 +94,7 @@ func (a *ProfilesAPIService) CreateDastGraphqlProfileExecute(r ApiCreateDastGrap
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.createDastGraphqlProfileRequest
+	localVarPostBody = r.createDastRestProfileRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -175,7 +175,7 @@ func (r ApiCreateDastRestProfileRequest) Execute() (*GetProfile200Response, *htt
 /*
 CreateDastRestProfile Create a DAST REST profile
 
-Create a DAST REST profile
+Create a DAST REST profile.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCreateDastRestProfileRequest
@@ -290,14 +290,14 @@ func (a *ProfilesAPIService) CreateDastRestProfileExecute(r ApiCreateDastRestPro
 }
 
 type ApiCreateDastWebAppProfileRequest struct {
-	ctx                            context.Context
-	ApiService                     *ProfilesAPIService
-	createDastWebAppProfileRequest *CreateDastWebAppProfileRequest
+	ctx                          context.Context
+	ApiService                   *ProfilesAPIService
+	createDastRestProfileRequest *CreateDastRestProfileRequest
 }
 
-// Body of the request to create an asset
-func (r ApiCreateDastWebAppProfileRequest) CreateDastWebAppProfileRequest(createDastWebAppProfileRequest CreateDastWebAppProfileRequest) ApiCreateDastWebAppProfileRequest {
-	r.createDastWebAppProfileRequest = &createDastWebAppProfileRequest
+// Body of the request to create a DAST WebApp profile
+func (r ApiCreateDastWebAppProfileRequest) CreateDastRestProfileRequest(createDastRestProfileRequest CreateDastRestProfileRequest) ApiCreateDastWebAppProfileRequest {
+	r.createDastRestProfileRequest = &createDastRestProfileRequest
 	return r
 }
 
@@ -308,7 +308,7 @@ func (r ApiCreateDastWebAppProfileRequest) Execute() (*GetProfile200Response, *h
 /*
 CreateDastWebAppProfile Create a DAST WebApp profile
 
-Create a DAST WebApp profile
+Create a DAST WebApp profile.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCreateDastWebAppProfileRequest
@@ -360,7 +360,7 @@ func (a *ProfilesAPIService) CreateDastWebAppProfileExecute(r ApiCreateDastWebAp
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.createDastWebAppProfileRequest
+	localVarPostBody = r.createDastRestProfileRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -423,14 +423,14 @@ func (a *ProfilesAPIService) CreateDastWebAppProfileExecute(r ApiCreateDastWebAp
 }
 
 type ApiCreatePentestGraphqlProfileRequest struct {
-	ctx                             context.Context
-	ApiService                      *ProfilesAPIService
-	createPentestRestProfileRequest *CreatePentestRestProfileRequest
+	ctx                          context.Context
+	ApiService                   *ProfilesAPIService
+	createDastRestProfileRequest *CreateDastRestProfileRequest
 }
 
 // Body of the request to create an asset
-func (r ApiCreatePentestGraphqlProfileRequest) CreatePentestRestProfileRequest(createPentestRestProfileRequest CreatePentestRestProfileRequest) ApiCreatePentestGraphqlProfileRequest {
-	r.createPentestRestProfileRequest = &createPentestRestProfileRequest
+func (r ApiCreatePentestGraphqlProfileRequest) CreateDastRestProfileRequest(createDastRestProfileRequest CreateDastRestProfileRequest) ApiCreatePentestGraphqlProfileRequest {
+	r.createDastRestProfileRequest = &createDastRestProfileRequest
 	return r
 }
 
@@ -441,7 +441,7 @@ func (r ApiCreatePentestGraphqlProfileRequest) Execute() (*GetProfile200Response
 /*
 CreatePentestGraphqlProfile Create an Automated Pentest GraphQL profile
 
-Create an Automated Pentest GraphQL profile
+Create an Automated Pentest GraphQL profile.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCreatePentestGraphqlProfileRequest
@@ -493,7 +493,7 @@ func (a *ProfilesAPIService) CreatePentestGraphqlProfileExecute(r ApiCreatePente
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.createPentestRestProfileRequest
+	localVarPostBody = r.createDastRestProfileRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -556,14 +556,14 @@ func (a *ProfilesAPIService) CreatePentestGraphqlProfileExecute(r ApiCreatePente
 }
 
 type ApiCreatePentestRestProfileRequest struct {
-	ctx                             context.Context
-	ApiService                      *ProfilesAPIService
-	createPentestRestProfileRequest *CreatePentestRestProfileRequest
+	ctx                          context.Context
+	ApiService                   *ProfilesAPIService
+	createDastRestProfileRequest *CreateDastRestProfileRequest
 }
 
 // Body of the request to create an asset
-func (r ApiCreatePentestRestProfileRequest) CreatePentestRestProfileRequest(createPentestRestProfileRequest CreatePentestRestProfileRequest) ApiCreatePentestRestProfileRequest {
-	r.createPentestRestProfileRequest = &createPentestRestProfileRequest
+func (r ApiCreatePentestRestProfileRequest) CreateDastRestProfileRequest(createDastRestProfileRequest CreateDastRestProfileRequest) ApiCreatePentestRestProfileRequest {
+	r.createDastRestProfileRequest = &createDastRestProfileRequest
 	return r
 }
 
@@ -574,7 +574,7 @@ func (r ApiCreatePentestRestProfileRequest) Execute() (*GetProfile200Response, *
 /*
 CreatePentestRestProfile Create an Automated Pentest REST profile
 
-Create an Automated Pentest REST profile
+Create an Automated Pentest REST profile.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCreatePentestRestProfileRequest
@@ -626,7 +626,7 @@ func (a *ProfilesAPIService) CreatePentestRestProfileExecute(r ApiCreatePentestR
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.createPentestRestProfileRequest
+	localVarPostBody = r.createDastRestProfileRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -689,14 +689,14 @@ func (a *ProfilesAPIService) CreatePentestRestProfileExecute(r ApiCreatePentestR
 }
 
 type ApiCreatePentestWebappProfileRequest struct {
-	ctx                            context.Context
-	ApiService                     *ProfilesAPIService
-	createDastWebAppProfileRequest *CreateDastWebAppProfileRequest
+	ctx                          context.Context
+	ApiService                   *ProfilesAPIService
+	createDastRestProfileRequest *CreateDastRestProfileRequest
 }
 
 // Body of the request to create an asset
-func (r ApiCreatePentestWebappProfileRequest) CreateDastWebAppProfileRequest(createDastWebAppProfileRequest CreateDastWebAppProfileRequest) ApiCreatePentestWebappProfileRequest {
-	r.createDastWebAppProfileRequest = &createDastWebAppProfileRequest
+func (r ApiCreatePentestWebappProfileRequest) CreateDastRestProfileRequest(createDastRestProfileRequest CreateDastRestProfileRequest) ApiCreatePentestWebappProfileRequest {
+	r.createDastRestProfileRequest = &createDastRestProfileRequest
 	return r
 }
 
@@ -707,7 +707,7 @@ func (r ApiCreatePentestWebappProfileRequest) Execute() (*GetProfile200Response,
 /*
 CreatePentestWebappProfile Create an Automated Pentest WebApp profile
 
-Create an Automated Pentest WebApp profile
+Create an Automated Pentest WebApp profile.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCreatePentestWebappProfileRequest
@@ -759,7 +759,7 @@ func (a *ProfilesAPIService) CreatePentestWebappProfileExecute(r ApiCreatePentes
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.createDastWebAppProfileRequest
+	localVarPostBody = r.createDastRestProfileRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -866,6 +866,145 @@ func (a *ProfilesAPIService) DeleteProfileExecute(r ApiDeleteProfileRequest) (*D
 
 	localVarPath := localBasePath + "/profiles/{profileId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"profileId"+"}", url.PathEscape(parameterValueToString(r.profileId, "profileId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v UpdateProfile400Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v GetProfile404Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetAuthenticationRequest struct {
+	ctx              context.Context
+	ApiService       *ProfilesAPIService
+	authenticationId string
+}
+
+func (r ApiGetAuthenticationRequest) Execute() (*GetAuthentication200Response, *http.Response, error) {
+	return r.ApiService.GetAuthenticationExecute(r)
+}
+
+/*
+GetAuthentication Get authentication configuration check status
+
+Returns the current status, chronological log messages, and (when finished) structured authentication results for a check started via `POST /authentications`.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param authenticationId Identifier returned by the start endpoint
+	@return ApiGetAuthenticationRequest
+*/
+func (a *ProfilesAPIService) GetAuthentication(ctx context.Context, authenticationId string) ApiGetAuthenticationRequest {
+	return ApiGetAuthenticationRequest{
+		ApiService:       a,
+		ctx:              ctx,
+		authenticationId: authenticationId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return GetAuthentication200Response
+func (a *ProfilesAPIService) GetAuthenticationExecute(r ApiGetAuthenticationRequest) (*GetAuthentication200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetAuthentication200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProfilesAPIService.GetAuthentication")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/authentications/{authenticationId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"authenticationId"+"}", url.PathEscape(parameterValueToString(r.authenticationId, "authenticationId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1606,6 +1745,138 @@ func (a *ProfilesAPIService) ProblemsExecute(r ApiProblemsRequest) (*Problems200
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
 			var v ListProfiles400Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiStartAuthenticationRequest struct {
+	ctx                        context.Context
+	ApiService                 *ProfilesAPIService
+	startAuthenticationRequest *StartAuthenticationRequest
+}
+
+func (r ApiStartAuthenticationRequest) StartAuthenticationRequest(startAuthenticationRequest StartAuthenticationRequest) ApiStartAuthenticationRequest {
+	r.startAuthenticationRequest = &startAuthenticationRequest
+	return r
+}
+
+func (r ApiStartAuthenticationRequest) Execute() (*StartAuthentication200Response, *http.Response, error) {
+	return r.ApiService.StartAuthenticationExecute(r)
+}
+
+/*
+StartAuthentication Start an authentication configuration check
+
+Validates authentication credentials without running a full scan. Provide `authentication` directly, or pass a `profileId` to reuse its saved authentication (optionally overriding it). Poll `GET /authentications/{id}` until `status` is FINISHED, FAILED, or CANCELED.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiStartAuthenticationRequest
+*/
+func (a *ProfilesAPIService) StartAuthentication(ctx context.Context) ApiStartAuthenticationRequest {
+	return ApiStartAuthenticationRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return StartAuthentication200Response
+func (a *ProfilesAPIService) StartAuthenticationExecute(r ApiStartAuthenticationRequest) (*StartAuthentication200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *StartAuthentication200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProfilesAPIService.StartAuthentication")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/authentications"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.startAuthenticationRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
