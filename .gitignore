@@ -15,3 +15,12 @@ main
 # Env
 .env
 ._*
+
+# OS X
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+.Spotlight-V100
+.Trashes
+__MACOSX
