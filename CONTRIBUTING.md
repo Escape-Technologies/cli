@@ -33,10 +33,13 @@ just cli-build
 ### Releasing a new version
 
 ```bash
-# 1. Bump version and commit (patch or minor)
-just cli-release patch
+# 1. Bump version and commit
+just cli-release patch   # bug fixes, small improvements → x.y.Z
+just cli-release minor   # new commands or features → x.Y.0
 
 # 2. Open MR, get review, merge to prod
 ```
 
 That's it. CI automatically mirrors the code to GitHub and pushes the version tag — goreleaser fires and publishes the GitHub Release, Docker image, and binaries.
+
+> For a major version bump (`X.0.0`, breaking changes), update `packages/cli/version.txt` manually and commit.
