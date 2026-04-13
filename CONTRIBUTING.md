@@ -37,10 +37,6 @@ just cli-build
 just cli-release patch
 
 # 2. Open MR, get review, merge to prod
-#    → CI automatically mirrors the code to GitHub
-
-# 3. Push the version tag to GitHub to trigger goreleaser
-just cli-ci-mirror-tag v<new-version>
 ```
 
-goreleaser will then publish the GitHub Release, Docker image, and binaries automatically.
+That's it. CI automatically mirrors the code to GitHub and pushes the version tag — goreleaser fires and publishes the GitHub Release, Docker image, and binaries.
