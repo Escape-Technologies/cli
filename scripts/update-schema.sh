@@ -11,6 +11,7 @@ TMP_DIR="${PROJECT_ROOT}/._openapi-generator/"
 # Local spec paths to check (relative to PROJECT_ROOT), in order of preference.
 # Falls back to fetching from public URL if none found.
 LOCAL_SPEC_CANDIDATES=(
+    "../../services/public-api/v3.openapi.json"
     "../product/services/public-api/v3.openapi.json"
     "../../product/services/public-api/v3.openapi.json"
 )
