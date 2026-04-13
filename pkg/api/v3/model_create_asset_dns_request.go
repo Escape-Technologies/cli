@@ -23,6 +23,7 @@ type CreateAssetDNSRequest struct {
 	// The list of project IDs bind the asset on.
 	ProjectIds []string `json:"projectIds,omitempty"`
 	// The custom name of the asset. If not provided, the default name will be used.
+<<<<<<< HEAD
 	Name                 *string                                   `json:"name,omitempty"`
 	AssetClass           ENUMHOST                                  `json:"asset_class"`
 	ExtraMetadata        map[string]interface{}                    `json:"extra_metadata,omitempty"`
@@ -39,6 +40,24 @@ type CreateAssetDNSRequest struct {
 	Ips                  []string                                  `json:"ips,omitempty"`
 	RegionCountryCodes   []string                                  `json:"region_country_codes,omitempty"`
 	Registrar            *string                                   `json:"registrar,omitempty"`
+=======
+	Name *string `json:"name,omitempty"`
+	AssetClass ENUMHOST `json:"asset_class"`
+	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
+	ScreenshotS3Key *string `json:"screenshot_s3_key,omitempty"`
+	AssetType ENUMDNS `json:"asset_type"`
+	Address string `json:"address"`
+	Favicon *string `json:"favicon,omitempty"`
+	OpenPorts []CreateAssetDNSRequestOpenPortsInner `json:"open_ports,omitempty"`
+	PortsInsights []int `json:"ports_insights,omitempty"`
+	PathsInsights []CreateAssetDNSRequestPathsInsightsInner `json:"paths_insights,omitempty"`
+	Private *bool `json:"private,omitempty"`
+	ThirdParty *ENUMPROPERTIESTHIRDPARTY `json:"third_party,omitempty"`
+	DnsRecords []CreateAssetDNSRequestDnsRecordsInner `json:"dns_records,omitempty"`
+	Ips []string `json:"ips,omitempty"`
+	RegionCountryCodes []string `json:"region_country_codes,omitempty"`
+	Registrar *string `json:"registrar,omitempty"`
+>>>>>>> 68777fe48b (fix(auto): cli update models)
 	AdditionalProperties map[string]interface{}
 }
 
@@ -329,9 +348,9 @@ func (o *CreateAssetDNSRequest) SetOpenPorts(v []CreateAssetDNSRequestOpenPortsI
 }
 
 // GetPortsInsights returns the PortsInsights field value if set, zero value otherwise.
-func (o *CreateAssetDNSRequest) GetPortsInsights() []float32 {
+func (o *CreateAssetDNSRequest) GetPortsInsights() []int {
 	if o == nil || IsNil(o.PortsInsights) {
-		var ret []float32
+		var ret []int
 		return ret
 	}
 	return o.PortsInsights
@@ -339,7 +358,7 @@ func (o *CreateAssetDNSRequest) GetPortsInsights() []float32 {
 
 // GetPortsInsightsOk returns a tuple with the PortsInsights field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetDNSRequest) GetPortsInsightsOk() ([]float32, bool) {
+func (o *CreateAssetDNSRequest) GetPortsInsightsOk() ([]int, bool) {
 	if o == nil || IsNil(o.PortsInsights) {
 		return nil, false
 	}
@@ -355,8 +374,8 @@ func (o *CreateAssetDNSRequest) HasPortsInsights() bool {
 	return false
 }
 
-// SetPortsInsights gets a reference to the given []float32 and assigns it to the PortsInsights field.
-func (o *CreateAssetDNSRequest) SetPortsInsights(v []float32) {
+// SetPortsInsights gets a reference to the given []int and assigns it to the PortsInsights field.
+func (o *CreateAssetDNSRequest) SetPortsInsights(v []int) {
 	o.PortsInsights = v
 }
 

@@ -23,7 +23,7 @@ type CustomRuleRuleOneOf1 struct {
 	Id string `json:"id"`
 	Alert CreateCustomRuleRequestContentRuleOneOfAlert `json:"alert"`
 	Type ENUMWEBAPP `json:"type"`
-	Seed []CreateCustomRuleRequestContentRuleOneOf1SeedInner `json:"seed"`
+	Seed []GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInner `json:"seed"`
 	Detect []CreateCustomRuleRequestContentRuleOneOf1DetectInner `json:"detect"`
 	Extractors []interface{} `json:"extractors,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -35,7 +35,7 @@ type _CustomRuleRuleOneOf1 CustomRuleRuleOneOf1
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCustomRuleRuleOneOf1(id string, alert CreateCustomRuleRequestContentRuleOneOfAlert, type_ ENUMWEBAPP, seed []CreateCustomRuleRequestContentRuleOneOf1SeedInner, detect []CreateCustomRuleRequestContentRuleOneOf1DetectInner) *CustomRuleRuleOneOf1 {
+func NewCustomRuleRuleOneOf1(id string, alert CreateCustomRuleRequestContentRuleOneOfAlert, type_ ENUMWEBAPP, seed []GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInner, detect []CreateCustomRuleRequestContentRuleOneOf1DetectInner) *CustomRuleRuleOneOf1 {
 	this := CustomRuleRuleOneOf1{}
 	this.Id = id
 	this.Alert = alert
@@ -126,9 +126,9 @@ func (o *CustomRuleRuleOneOf1) SetType(v ENUMWEBAPP) {
 }
 
 // GetSeed returns the Seed field value
-func (o *CustomRuleRuleOneOf1) GetSeed() []CreateCustomRuleRequestContentRuleOneOf1SeedInner {
+func (o *CustomRuleRuleOneOf1) GetSeed() []GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInner {
 	if o == nil {
-		var ret []CreateCustomRuleRequestContentRuleOneOf1SeedInner
+		var ret []GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInner
 		return ret
 	}
 
@@ -137,7 +137,7 @@ func (o *CustomRuleRuleOneOf1) GetSeed() []CreateCustomRuleRequestContentRuleOne
 
 // GetSeedOk returns a tuple with the Seed field value
 // and a boolean to check if the value has been set.
-func (o *CustomRuleRuleOneOf1) GetSeedOk() ([]CreateCustomRuleRequestContentRuleOneOf1SeedInner, bool) {
+func (o *CustomRuleRuleOneOf1) GetSeedOk() ([]GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInner, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -145,7 +145,7 @@ func (o *CustomRuleRuleOneOf1) GetSeedOk() ([]CreateCustomRuleRequestContentRule
 }
 
 // SetSeed sets field value
-func (o *CustomRuleRuleOneOf1) SetSeed(v []CreateCustomRuleRequestContentRuleOneOf1SeedInner) {
+func (o *CustomRuleRuleOneOf1) SetSeed(v []GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInner) {
 	o.Seed = v
 }
 

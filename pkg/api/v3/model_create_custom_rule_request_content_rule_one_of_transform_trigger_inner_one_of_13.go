@@ -20,12 +20,21 @@ var _ MappedNullable = &CreateCustomRuleRequestContentRuleOneOfTransformTriggerI
 
 // CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13 struct for CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13
 type CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13 struct {
+<<<<<<< HEAD
 	Is                   *float32               `json:"is,omitempty"`
 	IsNot                *float32               `json:"is_not,omitempty"`
 	In                   []float32              `json:"in,omitempty"`
 	Gt                   *float32               `json:"gt,omitempty"`
 	Lt                   *float32               `json:"lt,omitempty"`
 	If                   ENUMRESPONSESTATUSCODE `json:"if"`
+=======
+	Is *int `json:"is,omitempty"`
+	IsNot *int `json:"is_not,omitempty"`
+	In []int `json:"in,omitempty"`
+	Gt *int `json:"gt,omitempty"`
+	Lt *int `json:"lt,omitempty"`
+	If ENUMRESPONSESTATUSCODE `json:"if"`
+>>>>>>> 68777fe48b (fix(auto): cli update models)
 	AdditionalProperties map[string]interface{}
 }
 
@@ -50,9 +59,9 @@ func NewCreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13WithD
 }
 
 // GetIs returns the Is field value if set, zero value otherwise.
-func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13) GetIs() float32 {
+func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13) GetIs() int {
 	if o == nil || IsNil(o.Is) {
-		var ret float32
+		var ret int
 		return ret
 	}
 	return *o.Is
@@ -60,7 +69,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13) Ge
 
 // GetIsOk returns a tuple with the Is field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13) GetIsOk() (*float32, bool) {
+func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13) GetIsOk() (*int, bool) {
 	if o == nil || IsNil(o.Is) {
 		return nil, false
 	}
@@ -76,15 +85,15 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13) Ha
 	return false
 }
 
-// SetIs gets a reference to the given float32 and assigns it to the Is field.
-func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13) SetIs(v float32) {
+// SetIs gets a reference to the given int and assigns it to the Is field.
+func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13) SetIs(v int) {
 	o.Is = &v
 }
 
 // GetIsNot returns the IsNot field value if set, zero value otherwise.
-func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13) GetIsNot() float32 {
+func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13) GetIsNot() int {
 	if o == nil || IsNil(o.IsNot) {
-		var ret float32
+		var ret int
 		return ret
 	}
 	return *o.IsNot
@@ -92,7 +101,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13) Ge
 
 // GetIsNotOk returns a tuple with the IsNot field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13) GetIsNotOk() (*float32, bool) {
+func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13) GetIsNotOk() (*int, bool) {
 	if o == nil || IsNil(o.IsNot) {
 		return nil, false
 	}
@@ -108,15 +117,15 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13) Ha
 	return false
 }
 
-// SetIsNot gets a reference to the given float32 and assigns it to the IsNot field.
-func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13) SetIsNot(v float32) {
+// SetIsNot gets a reference to the given int and assigns it to the IsNot field.
+func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13) SetIsNot(v int) {
 	o.IsNot = &v
 }
 
 // GetIn returns the In field value if set, zero value otherwise.
-func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13) GetIn() []float32 {
+func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13) GetIn() []int {
 	if o == nil || IsNil(o.In) {
-		var ret []float32
+		var ret []int
 		return ret
 	}
 	return o.In
@@ -124,7 +133,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13) Ge
 
 // GetInOk returns a tuple with the In field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13) GetInOk() ([]float32, bool) {
+func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13) GetInOk() ([]int, bool) {
 	if o == nil || IsNil(o.In) {
 		return nil, false
 	}
@@ -140,15 +149,15 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13) Ha
 	return false
 }
 
-// SetIn gets a reference to the given []float32 and assigns it to the In field.
-func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13) SetIn(v []float32) {
+// SetIn gets a reference to the given []int and assigns it to the In field.
+func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13) SetIn(v []int) {
 	o.In = v
 }
 
 // GetGt returns the Gt field value if set, zero value otherwise.
-func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13) GetGt() float32 {
+func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13) GetGt() int {
 	if o == nil || IsNil(o.Gt) {
-		var ret float32
+		var ret int
 		return ret
 	}
 	return *o.Gt
@@ -156,7 +165,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13) Ge
 
 // GetGtOk returns a tuple with the Gt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13) GetGtOk() (*float32, bool) {
+func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13) GetGtOk() (*int, bool) {
 	if o == nil || IsNil(o.Gt) {
 		return nil, false
 	}
@@ -172,15 +181,15 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13) Ha
 	return false
 }
 
-// SetGt gets a reference to the given float32 and assigns it to the Gt field.
-func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13) SetGt(v float32) {
+// SetGt gets a reference to the given int and assigns it to the Gt field.
+func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13) SetGt(v int) {
 	o.Gt = &v
 }
 
 // GetLt returns the Lt field value if set, zero value otherwise.
-func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13) GetLt() float32 {
+func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13) GetLt() int {
 	if o == nil || IsNil(o.Lt) {
-		var ret float32
+		var ret int
 		return ret
 	}
 	return *o.Lt
@@ -188,7 +197,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13) Ge
 
 // GetLtOk returns a tuple with the Lt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13) GetLtOk() (*float32, bool) {
+func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13) GetLtOk() (*int, bool) {
 	if o == nil || IsNil(o.Lt) {
 		return nil, false
 	}
@@ -204,8 +213,8 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13) Ha
 	return false
 }
 
-// SetLt gets a reference to the given float32 and assigns it to the Lt field.
-func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13) SetLt(v float32) {
+// SetLt gets a reference to the given int and assigns it to the Lt field.
+func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf13) SetLt(v int) {
 	o.Lt = &v
 }
 

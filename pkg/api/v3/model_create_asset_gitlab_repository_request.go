@@ -21,6 +21,7 @@ var _ MappedNullable = &CreateAssetGITLABREPOSITORYRequest{}
 // CreateAssetGITLABREPOSITORYRequest struct for CreateAssetGITLABREPOSITORYRequest
 type CreateAssetGITLABREPOSITORYRequest struct {
 	// The list of project IDs bind the asset on.
+<<<<<<< HEAD
 	ProjectIds           []string                                        `json:"projectIds,omitempty"`
 	Name                 *string                                         `json:"name,omitempty"`
 	AssetClass           ENUMREPOSITORY                                  `json:"asset_class"`
@@ -43,6 +44,30 @@ type CreateAssetGITLABREPOSITORYRequest struct {
 	Archived             *bool                                           `json:"archived,omitempty"`
 	Visibility           *ENUMPROPERTIESVISIBILITY                       `json:"visibility,omitempty"`
 	Group                *CreateAssetGITLABREPOSITORYRequestGroup        `json:"group,omitempty"`
+=======
+	ProjectIds []string `json:"projectIds,omitempty"`
+	Name *string `json:"name,omitempty"`
+	AssetClass ENUMREPOSITORY `json:"asset_class"`
+	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
+	ScreenshotS3Key *string `json:"screenshot_s3_key,omitempty"`
+	AssetType ENUMGITLABREPOSITORY `json:"asset_type"`
+	Url string `json:"url"`
+	HttpUrlToRepo *string `json:"http_url_to_repo,omitempty"`
+	Description *string `json:"description,omitempty"`
+	LocationId *string `json:"location_id,omitempty"`
+	DefaultBranch *string `json:"default_branch,omitempty"`
+	BlobBaseUrl *string `json:"blob_base_url,omitempty"`
+	LastCommit *CreateAssetGITLABREPOSITORYRequestLastCommit `json:"last_commit,omitempty"`
+	Owners []CreateAssetGITLABREPOSITORYRequestOwnersInner `json:"owners,omitempty"`
+	Languages []ENUMPROPERTIESLANGUAGESITEMS `json:"languages,omitempty"`
+	GroupId *int `json:"group_id,omitempty"`
+	GroupFullPath *string `json:"group_full_path,omitempty"`
+	GroupWebUrl *string `json:"group_web_url,omitempty"`
+	ProjectId *int `json:"project_id,omitempty"`
+	Archived *bool `json:"archived,omitempty"`
+	Visibility *ENUMPROPERTIESVISIBILITY `json:"visibility,omitempty"`
+	Group *CreateAssetGITLABREPOSITORYRequestGroup `json:"group,omitempty"`
+>>>>>>> 68777fe48b (fix(auto): cli update models)
 	AdditionalProperties map[string]interface{}
 }
 
@@ -525,9 +550,9 @@ func (o *CreateAssetGITLABREPOSITORYRequest) SetLanguages(v []ENUMPROPERTIESLANG
 }
 
 // GetGroupId returns the GroupId field value if set, zero value otherwise.
-func (o *CreateAssetGITLABREPOSITORYRequest) GetGroupId() float32 {
+func (o *CreateAssetGITLABREPOSITORYRequest) GetGroupId() int {
 	if o == nil || IsNil(o.GroupId) {
-		var ret float32
+		var ret int
 		return ret
 	}
 	return *o.GroupId
@@ -535,7 +560,7 @@ func (o *CreateAssetGITLABREPOSITORYRequest) GetGroupId() float32 {
 
 // GetGroupIdOk returns a tuple with the GroupId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGITLABREPOSITORYRequest) GetGroupIdOk() (*float32, bool) {
+func (o *CreateAssetGITLABREPOSITORYRequest) GetGroupIdOk() (*int, bool) {
 	if o == nil || IsNil(o.GroupId) {
 		return nil, false
 	}
@@ -551,8 +576,8 @@ func (o *CreateAssetGITLABREPOSITORYRequest) HasGroupId() bool {
 	return false
 }
 
-// SetGroupId gets a reference to the given float32 and assigns it to the GroupId field.
-func (o *CreateAssetGITLABREPOSITORYRequest) SetGroupId(v float32) {
+// SetGroupId gets a reference to the given int and assigns it to the GroupId field.
+func (o *CreateAssetGITLABREPOSITORYRequest) SetGroupId(v int) {
 	o.GroupId = &v
 }
 
@@ -621,9 +646,9 @@ func (o *CreateAssetGITLABREPOSITORYRequest) SetGroupWebUrl(v string) {
 }
 
 // GetProjectId returns the ProjectId field value if set, zero value otherwise.
-func (o *CreateAssetGITLABREPOSITORYRequest) GetProjectId() float32 {
+func (o *CreateAssetGITLABREPOSITORYRequest) GetProjectId() int {
 	if o == nil || IsNil(o.ProjectId) {
-		var ret float32
+		var ret int
 		return ret
 	}
 	return *o.ProjectId
@@ -631,7 +656,7 @@ func (o *CreateAssetGITLABREPOSITORYRequest) GetProjectId() float32 {
 
 // GetProjectIdOk returns a tuple with the ProjectId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetGITLABREPOSITORYRequest) GetProjectIdOk() (*float32, bool) {
+func (o *CreateAssetGITLABREPOSITORYRequest) GetProjectIdOk() (*int, bool) {
 	if o == nil || IsNil(o.ProjectId) {
 		return nil, false
 	}
@@ -647,8 +672,8 @@ func (o *CreateAssetGITLABREPOSITORYRequest) HasProjectId() bool {
 	return false
 }
 
-// SetProjectId gets a reference to the given float32 and assigns it to the ProjectId field.
-func (o *CreateAssetGITLABREPOSITORYRequest) SetProjectId(v float32) {
+// SetProjectId gets a reference to the given int and assigns it to the ProjectId field.
+func (o *CreateAssetGITLABREPOSITORYRequest) SetProjectId(v int) {
 	o.ProjectId = &v
 }
 
