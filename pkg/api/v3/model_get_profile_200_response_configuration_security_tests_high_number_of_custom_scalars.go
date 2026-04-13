@@ -19,8 +19,8 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationSecurityTestsHighNumbe
 
 // GetProfile200ResponseConfigurationSecurityTestsHighNumberOfCustomScalars struct for GetProfile200ResponseConfigurationSecurityTestsHighNumberOfCustomScalars
 type GetProfile200ResponseConfigurationSecurityTestsHighNumberOfCustomScalars struct {
-	Skip                 *bool    `json:"skip,omitempty"`
-	DetectionThreshold   *float32 `json:"detection_threshold,omitempty"`
+	Skip *bool `json:"skip,omitempty"`
+	DetectionThreshold *int `json:"detection_threshold,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -76,9 +76,9 @@ func (o *GetProfile200ResponseConfigurationSecurityTestsHighNumberOfCustomScalar
 }
 
 // GetDetectionThreshold returns the DetectionThreshold field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationSecurityTestsHighNumberOfCustomScalars) GetDetectionThreshold() float32 {
+func (o *GetProfile200ResponseConfigurationSecurityTestsHighNumberOfCustomScalars) GetDetectionThreshold() int {
 	if o == nil || IsNil(o.DetectionThreshold) {
-		var ret float32
+		var ret int
 		return ret
 	}
 	return *o.DetectionThreshold
@@ -86,7 +86,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTestsHighNumberOfCustomScalar
 
 // GetDetectionThresholdOk returns a tuple with the DetectionThreshold field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationSecurityTestsHighNumberOfCustomScalars) GetDetectionThresholdOk() (*float32, bool) {
+func (o *GetProfile200ResponseConfigurationSecurityTestsHighNumberOfCustomScalars) GetDetectionThresholdOk() (*int, bool) {
 	if o == nil || IsNil(o.DetectionThreshold) {
 		return nil, false
 	}
@@ -102,13 +102,13 @@ func (o *GetProfile200ResponseConfigurationSecurityTestsHighNumberOfCustomScalar
 	return false
 }
 
-// SetDetectionThreshold gets a reference to the given float32 and assigns it to the DetectionThreshold field.
-func (o *GetProfile200ResponseConfigurationSecurityTestsHighNumberOfCustomScalars) SetDetectionThreshold(v float32) {
+// SetDetectionThreshold gets a reference to the given int and assigns it to the DetectionThreshold field.
+func (o *GetProfile200ResponseConfigurationSecurityTestsHighNumberOfCustomScalars) SetDetectionThreshold(v int) {
 	o.DetectionThreshold = &v
 }
 
 func (o GetProfile200ResponseConfigurationSecurityTestsHighNumberOfCustomScalars) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -188,3 +188,5 @@ func (v *NullableGetProfile200ResponseConfigurationSecurityTestsHighNumberOfCust
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

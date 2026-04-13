@@ -19,8 +19,8 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationSecurityTestsResponseS
 
 // GetProfile200ResponseConfigurationSecurityTestsResponseSize struct for GetProfile200ResponseConfigurationSecurityTestsResponseSize
 type GetProfile200ResponseConfigurationSecurityTestsResponseSize struct {
-	Skip                 *bool    `json:"skip,omitempty"`
-	MaxLength            *float32 `json:"max_length,omitempty"`
+	Skip *bool `json:"skip,omitempty"`
+	MaxLength *int `json:"max_length,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -76,9 +76,9 @@ func (o *GetProfile200ResponseConfigurationSecurityTestsResponseSize) SetSkip(v 
 }
 
 // GetMaxLength returns the MaxLength field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationSecurityTestsResponseSize) GetMaxLength() float32 {
+func (o *GetProfile200ResponseConfigurationSecurityTestsResponseSize) GetMaxLength() int {
 	if o == nil || IsNil(o.MaxLength) {
-		var ret float32
+		var ret int
 		return ret
 	}
 	return *o.MaxLength
@@ -86,7 +86,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTestsResponseSize) GetMaxLeng
 
 // GetMaxLengthOk returns a tuple with the MaxLength field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationSecurityTestsResponseSize) GetMaxLengthOk() (*float32, bool) {
+func (o *GetProfile200ResponseConfigurationSecurityTestsResponseSize) GetMaxLengthOk() (*int, bool) {
 	if o == nil || IsNil(o.MaxLength) {
 		return nil, false
 	}
@@ -102,13 +102,13 @@ func (o *GetProfile200ResponseConfigurationSecurityTestsResponseSize) HasMaxLeng
 	return false
 }
 
-// SetMaxLength gets a reference to the given float32 and assigns it to the MaxLength field.
-func (o *GetProfile200ResponseConfigurationSecurityTestsResponseSize) SetMaxLength(v float32) {
+// SetMaxLength gets a reference to the given int and assigns it to the MaxLength field.
+func (o *GetProfile200ResponseConfigurationSecurityTestsResponseSize) SetMaxLength(v int) {
 	o.MaxLength = &v
 }
 
 func (o GetProfile200ResponseConfigurationSecurityTestsResponseSize) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -188,3 +188,5 @@ func (v *NullableGetProfile200ResponseConfigurationSecurityTestsResponseSize) Un
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

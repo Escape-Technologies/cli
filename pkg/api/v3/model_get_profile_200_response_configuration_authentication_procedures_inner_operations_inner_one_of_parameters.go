@@ -20,16 +20,16 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationAuthenticationProcedur
 
 // GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters struct for GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters
 type GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters struct {
-	ProxyOverride        *string                                                                                                     `json:"proxy_override,omitempty"`
-	Url                  string                                                                                                      `json:"url"`
-	Method               ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD                         `json:"method"`
-	Headers              []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner `json:"headers"`
-	Cookies              []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner `json:"cookies"`
-	QueryParameters      []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner `json:"queryParameters"`
-	Body                 interface{}                                                                                                 `json:"body,omitempty"`
-	Timeout              *float32                                                                                                    `json:"timeout,omitempty"`
-	Insecure             *bool                                                                                                       `json:"insecure,omitempty"`
-	FollowRedirects      *float32                                                                                                    `json:"follow_redirects,omitempty"`
+	ProxyOverride *string `json:"proxy_override,omitempty"`
+	Url string `json:"url"`
+	Method ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD `json:"method"`
+	Headers []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner `json:"headers"`
+	Cookies []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner `json:"cookies"`
+	QueryParameters []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner `json:"queryParameters"`
+	Body interface{} `json:"body,omitempty"`
+	Timeout *int `json:"timeout,omitempty"`
+	Insecure *bool `json:"insecure,omitempty"`
+	FollowRedirects *int `json:"follow_redirects,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -243,9 +243,9 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 }
 
 // GetTimeout returns the Timeout field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters) GetTimeout() float32 {
+func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters) GetTimeout() int {
 	if o == nil || IsNil(o.Timeout) {
-		var ret float32
+		var ret int
 		return ret
 	}
 	return *o.Timeout
@@ -253,7 +253,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 
 // GetTimeoutOk returns a tuple with the Timeout field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters) GetTimeoutOk() (*float32, bool) {
+func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters) GetTimeoutOk() (*int, bool) {
 	if o == nil || IsNil(o.Timeout) {
 		return nil, false
 	}
@@ -269,8 +269,8 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 	return false
 }
 
-// SetTimeout gets a reference to the given float32 and assigns it to the Timeout field.
-func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters) SetTimeout(v float32) {
+// SetTimeout gets a reference to the given int and assigns it to the Timeout field.
+func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters) SetTimeout(v int) {
 	o.Timeout = &v
 }
 
@@ -307,9 +307,9 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 }
 
 // GetFollowRedirects returns the FollowRedirects field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters) GetFollowRedirects() float32 {
+func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters) GetFollowRedirects() int {
 	if o == nil || IsNil(o.FollowRedirects) {
-		var ret float32
+		var ret int
 		return ret
 	}
 	return *o.FollowRedirects
@@ -317,7 +317,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 
 // GetFollowRedirectsOk returns a tuple with the FollowRedirects field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters) GetFollowRedirectsOk() (*float32, bool) {
+func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters) GetFollowRedirectsOk() (*int, bool) {
 	if o == nil || IsNil(o.FollowRedirects) {
 		return nil, false
 	}
@@ -333,13 +333,13 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 	return false
 }
 
-// SetFollowRedirects gets a reference to the given float32 and assigns it to the FollowRedirects field.
-func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters) SetFollowRedirects(v float32) {
+// SetFollowRedirects gets a reference to the given int and assigns it to the FollowRedirects field.
+func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters) SetFollowRedirects(v int) {
 	o.FollowRedirects = &v
 }
 
 func (o GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -393,10 +393,10 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -466,3 +466,5 @@ func (v *NullableGetProfile200ResponseConfigurationAuthenticationProceduresInner
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

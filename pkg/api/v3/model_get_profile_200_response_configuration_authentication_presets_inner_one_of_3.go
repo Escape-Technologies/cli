@@ -20,17 +20,17 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationAuthenticationPresetsI
 
 // GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf3 struct for GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf3
 type GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf3 struct {
-	Type                 ENUMOAUTHAUTHZCODEBROWSER                                                                                      `json:"type"`
-	Users                []GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf3UsersInner                                 `json:"users"`
-	AuthorizationUrl     string                                                                                                         `json:"authorization_url"`
-	TokenUrl             string                                                                                                         `json:"token_url"`
-	ClientId             string                                                                                                         `json:"client_id"`
-	ClientSecret         string                                                                                                         `json:"client_secret"`
-	RedirectUri          string                                                                                                         `json:"redirect_uri"`
-	Scopes               []string                                                                                                       `json:"scopes,omitempty"`
-	UsePkce              bool                                                                                                           `json:"use_pkce"`
-	LoginTimeout         *float32                                                                                                       `json:"login_timeout,omitempty"`
-	LogoutDetection      *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersLogoutDetection `json:"logout_detection,omitempty"`
+	Type ENUMOAUTHAUTHZCODEBROWSER `json:"type"`
+	Users []GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf3UsersInner `json:"users"`
+	AuthorizationUrl string `json:"authorization_url"`
+	TokenUrl string `json:"token_url"`
+	ClientId string `json:"client_id"`
+	ClientSecret string `json:"client_secret"`
+	RedirectUri string `json:"redirect_uri"`
+	Scopes []string `json:"scopes,omitempty"`
+	UsePkce bool `json:"use_pkce"`
+	LoginTimeout *int `json:"login_timeout,omitempty"`
+	LogoutDetection *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersLogoutDetection `json:"logout_detection,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -286,9 +286,9 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf3) Set
 }
 
 // GetLoginTimeout returns the LoginTimeout field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf3) GetLoginTimeout() float32 {
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf3) GetLoginTimeout() int {
 	if o == nil || IsNil(o.LoginTimeout) {
-		var ret float32
+		var ret int
 		return ret
 	}
 	return *o.LoginTimeout
@@ -296,7 +296,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf3) Get
 
 // GetLoginTimeoutOk returns a tuple with the LoginTimeout field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf3) GetLoginTimeoutOk() (*float32, bool) {
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf3) GetLoginTimeoutOk() (*int, bool) {
 	if o == nil || IsNil(o.LoginTimeout) {
 		return nil, false
 	}
@@ -312,8 +312,8 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf3) Has
 	return false
 }
 
-// SetLoginTimeout gets a reference to the given float32 and assigns it to the LoginTimeout field.
-func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf3) SetLoginTimeout(v float32) {
+// SetLoginTimeout gets a reference to the given int and assigns it to the LoginTimeout field.
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf3) SetLoginTimeout(v int) {
 	o.LoginTimeout = &v
 }
 
@@ -350,7 +350,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf3) Set
 }
 
 func (o GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf3) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -404,10 +404,10 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf3) Unm
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -478,3 +478,5 @@ func (v *NullableGetProfile200ResponseConfigurationAuthenticationPresetsInnerOne
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
