@@ -19,11 +19,11 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationFrontendDastCrawlingTu
 
 // GetProfile200ResponseConfigurationFrontendDastCrawlingTuning struct for GetProfile200ResponseConfigurationFrontendDastCrawlingTuning
 type GetProfile200ResponseConfigurationFrontendDastCrawlingTuning struct {
-	MaxUniqueValuesPerQueryParam  *float32 `json:"max_unique_values_per_query_param,omitempty"`
-	MaxUniqueFragmentsPerPage     *float32 `json:"max_unique_fragments_per_page,omitempty"`
-	MaxParameterizedUrlVariations *float32 `json:"max_parameterized_url_variations,omitempty"`
-	OnlyInscopeCrawlingLogs       *bool    `json:"only_inscope_crawling_logs,omitempty"`
-	AdditionalProperties          map[string]interface{}
+	MaxUniqueValuesPerQueryParam *int `json:"max_unique_values_per_query_param,omitempty"`
+	MaxUniqueFragmentsPerPage *int `json:"max_unique_fragments_per_page,omitempty"`
+	MaxParameterizedUrlVariations *int `json:"max_parameterized_url_variations,omitempty"`
+	OnlyInscopeCrawlingLogs *bool `json:"only_inscope_crawling_logs,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetProfile200ResponseConfigurationFrontendDastCrawlingTuning GetProfile200ResponseConfigurationFrontendDastCrawlingTuning
@@ -46,9 +46,9 @@ func NewGetProfile200ResponseConfigurationFrontendDastCrawlingTuningWithDefaults
 }
 
 // GetMaxUniqueValuesPerQueryParam returns the MaxUniqueValuesPerQueryParam field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) GetMaxUniqueValuesPerQueryParam() float32 {
+func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) GetMaxUniqueValuesPerQueryParam() int {
 	if o == nil || IsNil(o.MaxUniqueValuesPerQueryParam) {
-		var ret float32
+		var ret int
 		return ret
 	}
 	return *o.MaxUniqueValuesPerQueryParam
@@ -56,7 +56,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) GetMaxUni
 
 // GetMaxUniqueValuesPerQueryParamOk returns a tuple with the MaxUniqueValuesPerQueryParam field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) GetMaxUniqueValuesPerQueryParamOk() (*float32, bool) {
+func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) GetMaxUniqueValuesPerQueryParamOk() (*int, bool) {
 	if o == nil || IsNil(o.MaxUniqueValuesPerQueryParam) {
 		return nil, false
 	}
@@ -72,15 +72,15 @@ func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) HasMaxUni
 	return false
 }
 
-// SetMaxUniqueValuesPerQueryParam gets a reference to the given float32 and assigns it to the MaxUniqueValuesPerQueryParam field.
-func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) SetMaxUniqueValuesPerQueryParam(v float32) {
+// SetMaxUniqueValuesPerQueryParam gets a reference to the given int and assigns it to the MaxUniqueValuesPerQueryParam field.
+func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) SetMaxUniqueValuesPerQueryParam(v int) {
 	o.MaxUniqueValuesPerQueryParam = &v
 }
 
 // GetMaxUniqueFragmentsPerPage returns the MaxUniqueFragmentsPerPage field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) GetMaxUniqueFragmentsPerPage() float32 {
+func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) GetMaxUniqueFragmentsPerPage() int {
 	if o == nil || IsNil(o.MaxUniqueFragmentsPerPage) {
-		var ret float32
+		var ret int
 		return ret
 	}
 	return *o.MaxUniqueFragmentsPerPage
@@ -88,7 +88,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) GetMaxUni
 
 // GetMaxUniqueFragmentsPerPageOk returns a tuple with the MaxUniqueFragmentsPerPage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) GetMaxUniqueFragmentsPerPageOk() (*float32, bool) {
+func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) GetMaxUniqueFragmentsPerPageOk() (*int, bool) {
 	if o == nil || IsNil(o.MaxUniqueFragmentsPerPage) {
 		return nil, false
 	}
@@ -104,15 +104,15 @@ func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) HasMaxUni
 	return false
 }
 
-// SetMaxUniqueFragmentsPerPage gets a reference to the given float32 and assigns it to the MaxUniqueFragmentsPerPage field.
-func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) SetMaxUniqueFragmentsPerPage(v float32) {
+// SetMaxUniqueFragmentsPerPage gets a reference to the given int and assigns it to the MaxUniqueFragmentsPerPage field.
+func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) SetMaxUniqueFragmentsPerPage(v int) {
 	o.MaxUniqueFragmentsPerPage = &v
 }
 
 // GetMaxParameterizedUrlVariations returns the MaxParameterizedUrlVariations field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) GetMaxParameterizedUrlVariations() float32 {
+func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) GetMaxParameterizedUrlVariations() int {
 	if o == nil || IsNil(o.MaxParameterizedUrlVariations) {
-		var ret float32
+		var ret int
 		return ret
 	}
 	return *o.MaxParameterizedUrlVariations
@@ -120,7 +120,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) GetMaxPar
 
 // GetMaxParameterizedUrlVariationsOk returns a tuple with the MaxParameterizedUrlVariations field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) GetMaxParameterizedUrlVariationsOk() (*float32, bool) {
+func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) GetMaxParameterizedUrlVariationsOk() (*int, bool) {
 	if o == nil || IsNil(o.MaxParameterizedUrlVariations) {
 		return nil, false
 	}
@@ -136,8 +136,8 @@ func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) HasMaxPar
 	return false
 }
 
-// SetMaxParameterizedUrlVariations gets a reference to the given float32 and assigns it to the MaxParameterizedUrlVariations field.
-func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) SetMaxParameterizedUrlVariations(v float32) {
+// SetMaxParameterizedUrlVariations gets a reference to the given int and assigns it to the MaxParameterizedUrlVariations field.
+func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) SetMaxParameterizedUrlVariations(v int) {
 	o.MaxParameterizedUrlVariations = &v
 }
 
@@ -174,7 +174,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) SetOnlyIn
 }
 
 func (o GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -262,3 +262,5 @@ func (v *NullableGetProfile200ResponseConfigurationFrontendDastCrawlingTuning) U
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

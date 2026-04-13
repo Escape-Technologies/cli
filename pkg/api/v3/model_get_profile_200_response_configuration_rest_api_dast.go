@@ -19,22 +19,22 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationRestApiDast{}
 
 // GetProfile200ResponseConfigurationRestApiDast struct for GetProfile200ResponseConfigurationRestApiDast
 type GetProfile200ResponseConfigurationRestApiDast struct {
-	CustomData               map[string]string                                                              `json:"custom_data,omitempty"`
-	SchemaS3Key              *string                                                                        `json:"schema_s3_key,omitempty"`
-	LocationId               *string                                                                        `json:"location_id,omitempty"`
-	Profile                  *ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESPROFILE          `json:"profile,omitempty"`
-	ExplorationDepth         *ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESEXPLORATIONDEPTH `json:"exploration_depth,omitempty"`
-	ExploreWithAllUsers      *bool                                                                          `json:"explore_with_all_users,omitempty"`
-	CrossUserMemoryAllowlist []string                                                                       `json:"cross_user_memory_allowlist,omitempty"`
-	Mode                     *ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE               `json:"mode,omitempty"`
-	MaxDuration              *float32                                                                       `json:"max_duration,omitempty"`
-	Hotstart                 []string                                                                       `json:"hotstart,omitempty"`
-	HotstartOnly             *bool                                                                          `json:"hotstart_only,omitempty"`
-	Scope                    *GetProfile200ResponseConfigurationGraphqlApiDastScope                         `json:"scope,omitempty"`
-	AdditionalSchemaS3Keys   []string                                                                       `json:"additional_schema_s3_keys,omitempty"`
-	QueryParamsAreRequired   *bool                                                                          `json:"query_params_are_required,omitempty"`
-	InScopeOnly              *bool                                                                          `json:"in_scope_only,omitempty"`
-	AdditionalProperties     map[string]interface{}
+	CustomData map[string]string `json:"custom_data,omitempty"`
+	SchemaS3Key *string `json:"schema_s3_key,omitempty"`
+	LocationId *string `json:"location_id,omitempty"`
+	Profile *ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESPROFILE `json:"profile,omitempty"`
+	ExplorationDepth *ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESEXPLORATIONDEPTH `json:"exploration_depth,omitempty"`
+	ExploreWithAllUsers *bool `json:"explore_with_all_users,omitempty"`
+	CrossUserMemoryAllowlist []string `json:"cross_user_memory_allowlist,omitempty"`
+	Mode *ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE `json:"mode,omitempty"`
+	MaxDuration *int `json:"max_duration,omitempty"`
+	Hotstart []string `json:"hotstart,omitempty"`
+	HotstartOnly *bool `json:"hotstart_only,omitempty"`
+	Scope *GetProfile200ResponseConfigurationGraphqlApiDastScope `json:"scope,omitempty"`
+	AdditionalSchemaS3Keys []string `json:"additional_schema_s3_keys,omitempty"`
+	QueryParamsAreRequired *bool `json:"query_params_are_required,omitempty"`
+	InScopeOnly *bool `json:"in_scope_only,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetProfile200ResponseConfigurationRestApiDast GetProfile200ResponseConfigurationRestApiDast
@@ -313,9 +313,9 @@ func (o *GetProfile200ResponseConfigurationRestApiDast) SetMode(v ENUMPROPERTIES
 }
 
 // GetMaxDuration returns the MaxDuration field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationRestApiDast) GetMaxDuration() float32 {
+func (o *GetProfile200ResponseConfigurationRestApiDast) GetMaxDuration() int {
 	if o == nil || IsNil(o.MaxDuration) {
-		var ret float32
+		var ret int
 		return ret
 	}
 	return *o.MaxDuration
@@ -323,7 +323,7 @@ func (o *GetProfile200ResponseConfigurationRestApiDast) GetMaxDuration() float32
 
 // GetMaxDurationOk returns a tuple with the MaxDuration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationRestApiDast) GetMaxDurationOk() (*float32, bool) {
+func (o *GetProfile200ResponseConfigurationRestApiDast) GetMaxDurationOk() (*int, bool) {
 	if o == nil || IsNil(o.MaxDuration) {
 		return nil, false
 	}
@@ -339,8 +339,8 @@ func (o *GetProfile200ResponseConfigurationRestApiDast) HasMaxDuration() bool {
 	return false
 }
 
-// SetMaxDuration gets a reference to the given float32 and assigns it to the MaxDuration field.
-func (o *GetProfile200ResponseConfigurationRestApiDast) SetMaxDuration(v float32) {
+// SetMaxDuration gets a reference to the given int and assigns it to the MaxDuration field.
+func (o *GetProfile200ResponseConfigurationRestApiDast) SetMaxDuration(v int) {
 	o.MaxDuration = &v
 }
 
@@ -537,7 +537,7 @@ func (o *GetProfile200ResponseConfigurationRestApiDast) SetInScopeOnly(v bool) {
 }
 
 func (o GetProfile200ResponseConfigurationRestApiDast) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -669,3 +669,5 @@ func (v *NullableGetProfile200ResponseConfigurationRestApiDast) UnmarshalJSON(sr
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

@@ -20,12 +20,12 @@ var _ MappedNullable = &CustomRuleRuleOneOf1{}
 
 // CustomRuleRuleOneOf1 struct for CustomRuleRuleOneOf1
 type CustomRuleRuleOneOf1 struct {
-	Id                   string                                                                              `json:"id"`
-	Alert                CreateCustomRuleRequestContentRuleOneOfAlert                                        `json:"alert"`
-	Type                 ENUMWEBAPP                                                                          `json:"type"`
-	Seed                 []GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInner `json:"seed"`
-	Detect               []CreateCustomRuleRequestContentRuleOneOf1DetectInner                               `json:"detect"`
-	Extractors           []interface{}                                                                       `json:"extractors,omitempty"`
+	Id string `json:"id"`
+	Alert CreateCustomRuleRequestContentRuleOneOfAlert `json:"alert"`
+	Type ENUMWEBAPP `json:"type"`
+	Seed []CreateCustomRuleRequestContentRuleOneOf1SeedInner `json:"seed"`
+	Detect []CreateCustomRuleRequestContentRuleOneOf1DetectInner `json:"detect"`
+	Extractors []interface{} `json:"extractors,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -35,7 +35,7 @@ type _CustomRuleRuleOneOf1 CustomRuleRuleOneOf1
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCustomRuleRuleOneOf1(id string, alert CreateCustomRuleRequestContentRuleOneOfAlert, type_ ENUMWEBAPP, seed []GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInner, detect []CreateCustomRuleRequestContentRuleOneOf1DetectInner) *CustomRuleRuleOneOf1 {
+func NewCustomRuleRuleOneOf1(id string, alert CreateCustomRuleRequestContentRuleOneOfAlert, type_ ENUMWEBAPP, seed []CreateCustomRuleRequestContentRuleOneOf1SeedInner, detect []CreateCustomRuleRequestContentRuleOneOf1DetectInner) *CustomRuleRuleOneOf1 {
 	this := CustomRuleRuleOneOf1{}
 	this.Id = id
 	this.Alert = alert
@@ -126,9 +126,9 @@ func (o *CustomRuleRuleOneOf1) SetType(v ENUMWEBAPP) {
 }
 
 // GetSeed returns the Seed field value
-func (o *CustomRuleRuleOneOf1) GetSeed() []GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInner {
+func (o *CustomRuleRuleOneOf1) GetSeed() []CreateCustomRuleRequestContentRuleOneOf1SeedInner {
 	if o == nil {
-		var ret []GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInner
+		var ret []CreateCustomRuleRequestContentRuleOneOf1SeedInner
 		return ret
 	}
 
@@ -137,7 +137,7 @@ func (o *CustomRuleRuleOneOf1) GetSeed() []GetProfile200ResponseConfigurationAut
 
 // GetSeedOk returns a tuple with the Seed field value
 // and a boolean to check if the value has been set.
-func (o *CustomRuleRuleOneOf1) GetSeedOk() ([]GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInner, bool) {
+func (o *CustomRuleRuleOneOf1) GetSeedOk() ([]CreateCustomRuleRequestContentRuleOneOf1SeedInner, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -145,7 +145,7 @@ func (o *CustomRuleRuleOneOf1) GetSeedOk() ([]GetProfile200ResponseConfiguration
 }
 
 // SetSeed sets field value
-func (o *CustomRuleRuleOneOf1) SetSeed(v []GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInner) {
+func (o *CustomRuleRuleOneOf1) SetSeed(v []CreateCustomRuleRequestContentRuleOneOf1SeedInner) {
 	o.Seed = v
 }
 
@@ -206,7 +206,7 @@ func (o *CustomRuleRuleOneOf1) SetExtractors(v []interface{}) {
 }
 
 func (o CustomRuleRuleOneOf1) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -248,10 +248,10 @@ func (o *CustomRuleRuleOneOf1) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -317,3 +317,5 @@ func (v *NullableCustomRuleRuleOneOf1) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

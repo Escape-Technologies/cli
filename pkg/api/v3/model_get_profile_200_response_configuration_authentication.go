@@ -19,14 +19,14 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationAuthentication{}
 
 // GetProfile200ResponseConfigurationAuthentication struct for GetProfile200ResponseConfigurationAuthentication
 type GetProfile200ResponseConfigurationAuthentication struct {
-	Schema               *string                                                           `json:"$schema,omitempty"`
-	Lifetime             *float32                                                          `json:"lifetime,omitempty"`
-	Procedures           []GetProfile200ResponseConfigurationAuthenticationProceduresInner `json:"procedures,omitempty"`
-	Users                []GetProfile200ResponseConfigurationAuthenticationUsersInner      `json:"users,omitempty"`
-	Validation           *bool                                                             `json:"validation,omitempty"`
-	Proxy                *string                                                           `json:"proxy,omitempty"`
-	Presets              []GetProfile200ResponseConfigurationAuthenticationPresetsInner    `json:"presets,omitempty"`
-	MultiUserIsFallback  *bool                                                             `json:"multi_user_is_fallback,omitempty"`
+	Schema *string `json:"$schema,omitempty"`
+	Lifetime *int `json:"lifetime,omitempty"`
+	Procedures []GetProfile200ResponseConfigurationAuthenticationProceduresInner `json:"procedures,omitempty"`
+	Users []GetProfile200ResponseConfigurationAuthenticationUsersInner `json:"users,omitempty"`
+	Validation *bool `json:"validation,omitempty"`
+	Proxy *string `json:"proxy,omitempty"`
+	Presets []GetProfile200ResponseConfigurationAuthenticationPresetsInner `json:"presets,omitempty"`
+	MultiUserIsFallback *bool `json:"multi_user_is_fallback,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -82,9 +82,9 @@ func (o *GetProfile200ResponseConfigurationAuthentication) SetSchema(v string) {
 }
 
 // GetLifetime returns the Lifetime field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationAuthentication) GetLifetime() float32 {
+func (o *GetProfile200ResponseConfigurationAuthentication) GetLifetime() int {
 	if o == nil || IsNil(o.Lifetime) {
-		var ret float32
+		var ret int
 		return ret
 	}
 	return *o.Lifetime
@@ -92,7 +92,7 @@ func (o *GetProfile200ResponseConfigurationAuthentication) GetLifetime() float32
 
 // GetLifetimeOk returns a tuple with the Lifetime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationAuthentication) GetLifetimeOk() (*float32, bool) {
+func (o *GetProfile200ResponseConfigurationAuthentication) GetLifetimeOk() (*int, bool) {
 	if o == nil || IsNil(o.Lifetime) {
 		return nil, false
 	}
@@ -108,8 +108,8 @@ func (o *GetProfile200ResponseConfigurationAuthentication) HasLifetime() bool {
 	return false
 }
 
-// SetLifetime gets a reference to the given float32 and assigns it to the Lifetime field.
-func (o *GetProfile200ResponseConfigurationAuthentication) SetLifetime(v float32) {
+// SetLifetime gets a reference to the given int and assigns it to the Lifetime field.
+func (o *GetProfile200ResponseConfigurationAuthentication) SetLifetime(v int) {
 	o.Lifetime = &v
 }
 
@@ -306,7 +306,7 @@ func (o *GetProfile200ResponseConfigurationAuthentication) SetMultiUserIsFallbac
 }
 
 func (o GetProfile200ResponseConfigurationAuthentication) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -410,3 +410,5 @@ func (v *NullableGetProfile200ResponseConfigurationAuthentication) UnmarshalJSON
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

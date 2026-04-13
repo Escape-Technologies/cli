@@ -19,7 +19,7 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationPortScanning{}
 
 // GetProfile200ResponseConfigurationPortScanning struct for GetProfile200ResponseConfigurationPortScanning
 type GetProfile200ResponseConfigurationPortScanning struct {
-	Ports                []float32 `json:"ports,omitempty"`
+	Ports []int `json:"ports,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -43,9 +43,9 @@ func NewGetProfile200ResponseConfigurationPortScanningWithDefaults() *GetProfile
 }
 
 // GetPorts returns the Ports field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationPortScanning) GetPorts() []float32 {
+func (o *GetProfile200ResponseConfigurationPortScanning) GetPorts() []int {
 	if o == nil || IsNil(o.Ports) {
-		var ret []float32
+		var ret []int
 		return ret
 	}
 	return o.Ports
@@ -53,7 +53,7 @@ func (o *GetProfile200ResponseConfigurationPortScanning) GetPorts() []float32 {
 
 // GetPortsOk returns a tuple with the Ports field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationPortScanning) GetPortsOk() ([]float32, bool) {
+func (o *GetProfile200ResponseConfigurationPortScanning) GetPortsOk() ([]int, bool) {
 	if o == nil || IsNil(o.Ports) {
 		return nil, false
 	}
@@ -69,13 +69,13 @@ func (o *GetProfile200ResponseConfigurationPortScanning) HasPorts() bool {
 	return false
 }
 
-// SetPorts gets a reference to the given []float32 and assigns it to the Ports field.
-func (o *GetProfile200ResponseConfigurationPortScanning) SetPorts(v []float32) {
+// SetPorts gets a reference to the given []int and assigns it to the Ports field.
+func (o *GetProfile200ResponseConfigurationPortScanning) SetPorts(v []int) {
 	o.Ports = v
 }
 
 func (o GetProfile200ResponseConfigurationPortScanning) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -151,3 +151,5 @@ func (v *NullableGetProfile200ResponseConfigurationPortScanning) UnmarshalJSON(s
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

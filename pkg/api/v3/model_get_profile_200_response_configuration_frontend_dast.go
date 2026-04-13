@@ -19,26 +19,26 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationFrontendDast{}
 
 // GetProfile200ResponseConfigurationFrontendDast struct for GetProfile200ResponseConfigurationFrontendDast
 type GetProfile200ResponseConfigurationFrontendDast struct {
-	CustomData            map[string]string                                                                       `json:"custom_data,omitempty"`
-	LocationId            *string                                                                                 `json:"location_id,omitempty"`
-	Mode                  *ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE                        `json:"mode,omitempty"`
-	MaxDuration           *float32                                                                                `json:"max_duration,omitempty"`
-	Hotstart              []string                                                                                `json:"hotstart,omitempty"`
+	CustomData map[string]string `json:"custom_data,omitempty"`
+	LocationId *string `json:"location_id,omitempty"`
+	Mode *ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE `json:"mode,omitempty"`
+	MaxDuration *int `json:"max_duration,omitempty"`
+	Hotstart []string `json:"hotstart,omitempty"`
 	SecurityChecksEnabled []ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSECURITYCHECKSENABLEDITEMS `json:"security_checks_enabled,omitempty"`
-	ApiChecksDuringAuth   *bool                                                                                   `json:"api_checks_during_auth,omitempty"`
-	SinglePageWorker      *bool                                                                                   `json:"single_page_worker,omitempty"`
-	ParallelWorkers       *float32                                                                                `json:"parallel_workers,omitempty"`
-	RelaxCorsSecurity     *bool                                                                                   `json:"relax_cors_security,omitempty"`
-	UserAgent             *string                                                                                 `json:"user_agent,omitempty"`
-	EscapeUserHeader      *bool                                                                                   `json:"escape_user_header,omitempty"`
-	PrefetchSitemap       *bool                                                                                   `json:"prefetch_sitemap,omitempty"`
-	CrawlingTuning        *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning                           `json:"crawling_tuning,omitempty"`
-	StaticCrawling        *GetProfile200ResponseConfigurationFrontendDastStaticCrawling                           `json:"static_crawling,omitempty"`
-	LogoutDetection       *GetProfile200ResponseConfigurationFrontendDastLogoutDetection                          `json:"logout_detection,omitempty"`
-	Scope                 *GetProfile200ResponseConfigurationFrontendDastScope                                    `json:"scope,omitempty"`
-	InScopeOnly           *bool                                                                                   `json:"in_scope_only,omitempty"`
-	AgenticCrawling       *GetProfile200ResponseConfigurationFrontendDastAgenticCrawling                          `json:"agentic_crawling,omitempty"`
-	AdditionalProperties  map[string]interface{}
+	ApiChecksDuringAuth *bool `json:"api_checks_during_auth,omitempty"`
+	SinglePageWorker *bool `json:"single_page_worker,omitempty"`
+	ParallelWorkers *int `json:"parallel_workers,omitempty"`
+	RelaxCorsSecurity *bool `json:"relax_cors_security,omitempty"`
+	UserAgent *string `json:"user_agent,omitempty"`
+	EscapeUserHeader *bool `json:"escape_user_header,omitempty"`
+	PrefetchSitemap *bool `json:"prefetch_sitemap,omitempty"`
+	CrawlingTuning *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning `json:"crawling_tuning,omitempty"`
+	StaticCrawling *GetProfile200ResponseConfigurationFrontendDastStaticCrawling `json:"static_crawling,omitempty"`
+	LogoutDetection *GetProfile200ResponseConfigurationFrontendDastLogoutDetection `json:"logout_detection,omitempty"`
+	Scope *GetProfile200ResponseConfigurationFrontendDastScope `json:"scope,omitempty"`
+	InScopeOnly *bool `json:"in_scope_only,omitempty"`
+	AgenticCrawling *GetProfile200ResponseConfigurationFrontendDastAgenticCrawling `json:"agentic_crawling,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetProfile200ResponseConfigurationFrontendDast GetProfile200ResponseConfigurationFrontendDast
@@ -157,9 +157,9 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) SetMode(v ENUMPROPERTIE
 }
 
 // GetMaxDuration returns the MaxDuration field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationFrontendDast) GetMaxDuration() float32 {
+func (o *GetProfile200ResponseConfigurationFrontendDast) GetMaxDuration() int {
 	if o == nil || IsNil(o.MaxDuration) {
-		var ret float32
+		var ret int
 		return ret
 	}
 	return *o.MaxDuration
@@ -167,7 +167,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) GetMaxDuration() float3
 
 // GetMaxDurationOk returns a tuple with the MaxDuration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationFrontendDast) GetMaxDurationOk() (*float32, bool) {
+func (o *GetProfile200ResponseConfigurationFrontendDast) GetMaxDurationOk() (*int, bool) {
 	if o == nil || IsNil(o.MaxDuration) {
 		return nil, false
 	}
@@ -183,8 +183,8 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) HasMaxDuration() bool {
 	return false
 }
 
-// SetMaxDuration gets a reference to the given float32 and assigns it to the MaxDuration field.
-func (o *GetProfile200ResponseConfigurationFrontendDast) SetMaxDuration(v float32) {
+// SetMaxDuration gets a reference to the given int and assigns it to the MaxDuration field.
+func (o *GetProfile200ResponseConfigurationFrontendDast) SetMaxDuration(v int) {
 	o.MaxDuration = &v
 }
 
@@ -317,9 +317,9 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) SetSinglePageWorker(v b
 }
 
 // GetParallelWorkers returns the ParallelWorkers field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationFrontendDast) GetParallelWorkers() float32 {
+func (o *GetProfile200ResponseConfigurationFrontendDast) GetParallelWorkers() int {
 	if o == nil || IsNil(o.ParallelWorkers) {
-		var ret float32
+		var ret int
 		return ret
 	}
 	return *o.ParallelWorkers
@@ -327,7 +327,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) GetParallelWorkers() fl
 
 // GetParallelWorkersOk returns a tuple with the ParallelWorkers field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationFrontendDast) GetParallelWorkersOk() (*float32, bool) {
+func (o *GetProfile200ResponseConfigurationFrontendDast) GetParallelWorkersOk() (*int, bool) {
 	if o == nil || IsNil(o.ParallelWorkers) {
 		return nil, false
 	}
@@ -343,8 +343,8 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) HasParallelWorkers() bo
 	return false
 }
 
-// SetParallelWorkers gets a reference to the given float32 and assigns it to the ParallelWorkers field.
-func (o *GetProfile200ResponseConfigurationFrontendDast) SetParallelWorkers(v float32) {
+// SetParallelWorkers gets a reference to the given int and assigns it to the ParallelWorkers field.
+func (o *GetProfile200ResponseConfigurationFrontendDast) SetParallelWorkers(v int) {
 	o.ParallelWorkers = &v
 }
 
@@ -669,7 +669,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) SetAgenticCrawling(v Ge
 }
 
 func (o GetProfile200ResponseConfigurationFrontendDast) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -817,3 +817,5 @@ func (v *NullableGetProfile200ResponseConfigurationFrontendDast) UnmarshalJSON(s
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
