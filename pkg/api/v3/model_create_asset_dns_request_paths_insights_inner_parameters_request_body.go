@@ -19,9 +19,9 @@ var _ MappedNullable = &CreateAssetDNSRequestPathsInsightsInnerParametersRequest
 
 // CreateAssetDNSRequestPathsInsightsInnerParametersRequestBody struct for CreateAssetDNSRequestPathsInsightsInnerParametersRequestBody
 type CreateAssetDNSRequestPathsInsightsInnerParametersRequestBody struct {
-	Required             *bool                                                                                   `json:"required,omitempty"`
-	Description          *string                                                                                 `json:"description,omitempty"`
-	Content              map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValue `json:"content,omitempty"`
+	Required *bool `json:"required,omitempty"`
+	Description *string `json:"description,omitempty"`
+	Content map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValue `json:"content,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -141,7 +141,7 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerParametersRequestBody) SetConten
 }
 
 func (o CreateAssetDNSRequestPathsInsightsInnerParametersRequestBody) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -225,3 +225,5 @@ func (v *NullableCreateAssetDNSRequestPathsInsightsInnerParametersRequestBody) U
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

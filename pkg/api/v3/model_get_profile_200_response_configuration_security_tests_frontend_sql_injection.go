@@ -19,9 +19,9 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationSecurityTestsFrontendS
 
 // GetProfile200ResponseConfigurationSecurityTestsFrontendSqlInjection struct for GetProfile200ResponseConfigurationSecurityTestsFrontendSqlInjection
 type GetProfile200ResponseConfigurationSecurityTestsFrontendSqlInjection struct {
-	Skip                    *bool `json:"skip,omitempty"`
+	Skip *bool `json:"skip,omitempty"`
 	DedupeQueryParamsByName *bool `json:"dedupe_query_params_by_name,omitempty"`
-	AdditionalProperties    map[string]interface{}
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetProfile200ResponseConfigurationSecurityTestsFrontendSqlInjection GetProfile200ResponseConfigurationSecurityTestsFrontendSqlInjection
@@ -108,7 +108,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTestsFrontendSqlInjection) Se
 }
 
 func (o GetProfile200ResponseConfigurationSecurityTestsFrontendSqlInjection) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -188,3 +188,5 @@ func (v *NullableGetProfile200ResponseConfigurationSecurityTestsFrontendSqlInjec
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

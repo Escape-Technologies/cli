@@ -20,10 +20,10 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationAuthenticationPresetsI
 
 // GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11UsersInnerAdditionalFieldsInner struct for GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11UsersInnerAdditionalFieldsInner
 type GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11UsersInnerAdditionalFieldsInner struct {
-	Locator              string `json:"locator"`
-	Value                string `json:"value"`
-	OneByOne             *bool  `json:"one_by_one,omitempty"`
-	AutoSubmit           *bool  `json:"auto_submit,omitempty"`
+	Locator string `json:"locator"`
+	Value string `json:"value"`
+	OneByOne *bool `json:"one_by_one,omitempty"`
+	AutoSubmit *bool `json:"auto_submit,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -161,7 +161,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11User
 }
 
 func (o GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11UsersInnerAdditionalFieldsInner) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -200,10 +200,10 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11User
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -267,3 +267,5 @@ func (v *NullableGetProfile200ResponseConfigurationAuthenticationPresetsInnerOne
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
