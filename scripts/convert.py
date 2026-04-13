@@ -1,4 +1,4 @@
-# ruff: noqa
+# ruff: noqa: C901, I001, PLW2901, Q000, RUF005, S110, S324
 """
 Simple script to extract all enums to a specific component.
 
@@ -29,6 +29,7 @@ UNIFY_ENUMS_BY_PROPERTY: dict[str, str] = {
     "framework": "ENUMPROPERTIESFRAMEWORK",
 }
 
+
 def md5(s: str) -> str:
     return hashlib.md5(s.encode()).hexdigest()
 
@@ -56,7 +57,7 @@ def _enum_name(path: list[str], value: dict) -> str:
         raw += "_".join(path)
     final = re.sub(r"[^a-zA-Z0-9_]", "_", raw).upper()
     if len(final) > 200:
-        final =  "Enum_" + md5("-".join(sorted(str(v) for v in value["enum"] if v is not None)))
+        final = "Enum_" + md5("-".join(sorted(str(v) for v in value["enum"] if v is not None)))
     cache[cache_key] = final
     return final
 
@@ -67,7 +68,7 @@ def _rec_extract_enums(schema: dict, path: list[str]) -> tuple[dict, dict[str, d
     - Filter object.required to drop fields that are marked optional (nullable: true)
     - Enforce custom required additions when needed
     """
-    
+
     enums: dict[str, dict] = {}
 
     # If the current schema node itself is an enum, extract it immediately
@@ -103,7 +104,8 @@ def _rec_extract_enums(schema: dict, path: list[str]) -> tuple[dict, dict[str, d
             # Filter required: drop any property marked nullable
             if isinstance(schema.get('required'), list):
                 filtered_required = [
-                    r for r in schema['required']
+                    r
+                    for r in schema['required']
                     if r in new_props and not bool(new_props.get(r, {}).get('nullable', False))
                 ]
                 schema['required'] = filtered_required
@@ -152,12 +154,9 @@ def _rec_extract_enums(schema: dict, path: list[str]) -> tuple[dict, dict[str, d
 
     return schema, enums
 
+
 with open(input_file, "r") as f:
-    raw = (
-        json.dumps(json.loads(f.read()))
-        .replace("#/$defs/", "#/components/schemas/")
-        .replace('"examples": [],', '')
-    )
+    raw = json.dumps(json.loads(f.read())).replace("#/$defs/", "#/components/schemas/").replace('"examples": [],', '')
     consts = re.findall(r'"const": "([^"]+)",', raw)
     for const in consts:
         raw = raw.replace(f'"const": "{const}",', f'"enum": ["{const}"],')
@@ -191,7 +190,7 @@ for path, path_data in data["paths"].items():
         tags = operation_object.get("tags", [])
         if len(tags) > 1 and "Beta" in tags:
             operation_object["tags"] = [t for t in tags if t != "Beta"]
-        
+
         list_params = [
             "profileIds",
             "assetIds",
@@ -234,7 +233,7 @@ for path, path_data in data["paths"].items():
                         param["explode"] = True
                     else:
                         param["schema"] = {"type": "string"}
-                    
+
         responses: dict[str, dict] = operation_object.get("responses", {})
         if not responses:
             continue
@@ -320,7 +319,7 @@ for path, path_data in data["paths"].items():
 # If we found a unified schema, create the component and replace all integration list responses
 if unified_integration_response_schema:
     data["components"]["schemas"]["ListIntegrations200Response"] = unified_integration_response_schema
-    
+
     # Replace all integration list GET endpoints with the unified response
     for path, path_data in data["paths"].items():
         if path.startswith("/integrations/") and not path.endswith("/{id}") and "get" in path_data:
