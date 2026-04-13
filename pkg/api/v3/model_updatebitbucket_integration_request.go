@@ -20,12 +20,12 @@ var _ MappedNullable = &UpdatebitbucketIntegrationRequest{}
 // UpdatebitbucketIntegrationRequest struct for UpdatebitbucketIntegrationRequest
 type UpdatebitbucketIntegrationRequest struct {
 	// The new name of the integration
-	Name       *string                                      `json:"name,omitempty"`
+	Name *string `json:"name,omitempty"`
 	Parameters *UpdatebitbucketIntegrationRequestParameters `json:"parameters,omitempty"`
 	// Optional proxy ID to attach to the integration
 	ProxyId *string `json:"proxyId,omitempty"`
 	// Optional list of project IDs to attach to the integration
-	ProjectIds           []string `json:"projectIds,omitempty"`
+	ProjectIds []string `json:"projectIds,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -177,7 +177,7 @@ func (o *UpdatebitbucketIntegrationRequest) SetProjectIds(v []string) {
 }
 
 func (o UpdatebitbucketIntegrationRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -265,3 +265,5 @@ func (v *NullableUpdatebitbucketIntegrationRequest) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

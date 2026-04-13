@@ -20,11 +20,11 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationAuthenticationPresetsI
 
 // GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf7 struct for GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf7
 type GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf7 struct {
-	Type                 ENUMCOGNITOUSERPASS                                                                        `json:"type"`
-	Users                []GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf1UsersInner             `json:"users"`
-	Region               ENUMPROPERTIESCONFIGURATIONPROPERTIESAUTHENTICATIONPROPERTIESPRESETSITEMS7PROPERTIESREGION `json:"region"`
-	ClientId             string                                                                                     `json:"client_id"`
-	ClientSecret         string                                                                                     `json:"client_secret"`
+	Type ENUMCOGNITOUSERPASS `json:"type"`
+	Users []GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf1UsersInner `json:"users"`
+	Region ENUMPROPERTIESCONFIGURATIONPROPERTIESAUTHENTICATIONPROPERTIESPRESETSITEMS7PROPERTIESREGION `json:"region"`
+	ClientId string `json:"client_id"`
+	ClientSecret string `json:"client_secret"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -173,7 +173,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf7) Set
 }
 
 func (o GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf7) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -212,10 +212,10 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf7) Unm
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -280,3 +280,5 @@ func (v *NullableGetProfile200ResponseConfigurationAuthenticationPresetsInnerOne
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

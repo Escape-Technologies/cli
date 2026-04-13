@@ -20,9 +20,9 @@ var _ MappedNullable = &CreateExportWorkflowActionUsingWiz{}
 
 // CreateExportWorkflowActionUsingWiz struct for CreateExportWorkflowActionUsingWiz
 type CreateExportWorkflowActionUsingWiz struct {
-	Type                 ENUMEXPORT                                   `json:"type"`
-	Parameters           CreateExportWorkflowActionUsingWizParameters `json:"parameters"`
-	IntegrationKind      ENUMWIZ                                      `json:"integrationKind"`
+	Type ENUMEXPORT `json:"type"`
+	Parameters CreateExportWorkflowActionUsingWizParameters `json:"parameters"`
+	IntegrationKind ENUMWIZ `json:"integrationKind"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -121,7 +121,7 @@ func (o *CreateExportWorkflowActionUsingWiz) SetIntegrationKind(v ENUMWIZ) {
 }
 
 func (o CreateExportWorkflowActionUsingWiz) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -156,10 +156,10 @@ func (o *CreateExportWorkflowActionUsingWiz) UnmarshalJSON(data []byte) (err err
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -222,3 +222,5 @@ func (v *NullableCreateExportWorkflowActionUsingWiz) UnmarshalJSON(src []byte) e
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
