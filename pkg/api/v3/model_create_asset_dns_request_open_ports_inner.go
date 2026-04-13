@@ -20,9 +20,15 @@ var _ MappedNullable = &CreateAssetDNSRequestOpenPortsInner{}
 
 // CreateAssetDNSRequestOpenPortsInner struct for CreateAssetDNSRequestOpenPortsInner
 type CreateAssetDNSRequestOpenPortsInner struct {
+<<<<<<< HEAD
 	Port                 float32                                                `json:"port"`
 	Protocols            []ENUMPROPERTIESOPENPORTSITEMSPROPERTIESPROTOCOLSITEMS `json:"protocols"`
 	LocationIds          []string                                               `json:"location_ids,omitempty"`
+=======
+	Port int `json:"port"`
+	Protocols []ENUMPROPERTIESOPENPORTSITEMSPROPERTIESPROTOCOLSITEMS `json:"protocols"`
+	LocationIds []string `json:"location_ids,omitempty"`
+>>>>>>> 68777fe48b (fix(auto): cli update models)
 	AdditionalProperties map[string]interface{}
 }
 
@@ -32,7 +38,7 @@ type _CreateAssetDNSRequestOpenPortsInner CreateAssetDNSRequestOpenPortsInner
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetDNSRequestOpenPortsInner(port float32, protocols []ENUMPROPERTIESOPENPORTSITEMSPROPERTIESPROTOCOLSITEMS) *CreateAssetDNSRequestOpenPortsInner {
+func NewCreateAssetDNSRequestOpenPortsInner(port int, protocols []ENUMPROPERTIESOPENPORTSITEMSPROPERTIESPROTOCOLSITEMS) *CreateAssetDNSRequestOpenPortsInner {
 	this := CreateAssetDNSRequestOpenPortsInner{}
 	this.Port = port
 	this.Protocols = protocols
@@ -48,9 +54,9 @@ func NewCreateAssetDNSRequestOpenPortsInnerWithDefaults() *CreateAssetDNSRequest
 }
 
 // GetPort returns the Port field value
-func (o *CreateAssetDNSRequestOpenPortsInner) GetPort() float32 {
+func (o *CreateAssetDNSRequestOpenPortsInner) GetPort() int {
 	if o == nil {
-		var ret float32
+		var ret int
 		return ret
 	}
 
@@ -59,7 +65,7 @@ func (o *CreateAssetDNSRequestOpenPortsInner) GetPort() float32 {
 
 // GetPortOk returns a tuple with the Port field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetDNSRequestOpenPortsInner) GetPortOk() (*float32, bool) {
+func (o *CreateAssetDNSRequestOpenPortsInner) GetPortOk() (*int, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -67,7 +73,7 @@ func (o *CreateAssetDNSRequestOpenPortsInner) GetPortOk() (*float32, bool) {
 }
 
 // SetPort sets field value
-func (o *CreateAssetDNSRequestOpenPortsInner) SetPort(v float32) {
+func (o *CreateAssetDNSRequestOpenPortsInner) SetPort(v int) {
 	o.Port = v
 }
 

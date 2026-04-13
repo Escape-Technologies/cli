@@ -20,10 +20,17 @@ var _ MappedNullable = &CreateAssetDNSRequestDnsRecordsInner{}
 
 // CreateAssetDNSRequestDnsRecordsInner struct for CreateAssetDNSRequestDnsRecordsInner
 type CreateAssetDNSRequestDnsRecordsInner struct {
+<<<<<<< HEAD
 	Name                 string  `json:"name"`
 	Type                 string  `json:"type"`
 	Ttl                  float32 `json:"ttl"`
 	Data                 string  `json:"data"`
+=======
+	Name string `json:"name"`
+	Type string `json:"type"`
+	Ttl int `json:"ttl"`
+	Data string `json:"data"`
+>>>>>>> 68777fe48b (fix(auto): cli update models)
 	AdditionalProperties map[string]interface{}
 }
 
@@ -33,7 +40,7 @@ type _CreateAssetDNSRequestDnsRecordsInner CreateAssetDNSRequestDnsRecordsInner
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetDNSRequestDnsRecordsInner(name string, type_ string, ttl float32, data string) *CreateAssetDNSRequestDnsRecordsInner {
+func NewCreateAssetDNSRequestDnsRecordsInner(name string, type_ string, ttl int, data string) *CreateAssetDNSRequestDnsRecordsInner {
 	this := CreateAssetDNSRequestDnsRecordsInner{}
 	this.Name = name
 	this.Type = type_
@@ -99,9 +106,9 @@ func (o *CreateAssetDNSRequestDnsRecordsInner) SetType(v string) {
 }
 
 // GetTtl returns the Ttl field value
-func (o *CreateAssetDNSRequestDnsRecordsInner) GetTtl() float32 {
+func (o *CreateAssetDNSRequestDnsRecordsInner) GetTtl() int {
 	if o == nil {
-		var ret float32
+		var ret int
 		return ret
 	}
 
@@ -110,7 +117,7 @@ func (o *CreateAssetDNSRequestDnsRecordsInner) GetTtl() float32 {
 
 // GetTtlOk returns a tuple with the Ttl field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetDNSRequestDnsRecordsInner) GetTtlOk() (*float32, bool) {
+func (o *CreateAssetDNSRequestDnsRecordsInner) GetTtlOk() (*int, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -118,7 +125,7 @@ func (o *CreateAssetDNSRequestDnsRecordsInner) GetTtlOk() (*float32, bool) {
 }
 
 // SetTtl sets field value
-func (o *CreateAssetDNSRequestDnsRecordsInner) SetTtl(v float32) {
+func (o *CreateAssetDNSRequestDnsRecordsInner) SetTtl(v int) {
 	o.Ttl = v
 }
 

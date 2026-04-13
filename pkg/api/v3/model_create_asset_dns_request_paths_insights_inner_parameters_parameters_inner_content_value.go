@@ -19,10 +19,17 @@ var _ MappedNullable = &CreateAssetDNSRequestPathsInsightsInnerParametersParamet
 
 // CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValue struct for CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValue
 type CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValue struct {
+<<<<<<< HEAD
 	Schema               map[string]interface{}                                                                               `json:"schema,omitempty"`
 	Example              NullableCreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample                      `json:"example,omitempty"`
 	Examples             map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue             `json:"examples,omitempty"`
 	Encoding             map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValueEncodingValue `json:"encoding,omitempty"`
+=======
+	Schema map[string]interface{} `json:"schema,omitempty"`
+	Example interface{} `json:"example,omitempty"`
+	Examples map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue `json:"examples,omitempty"`
+	Encoding map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValueEncodingValue `json:"encoding,omitempty"`
+>>>>>>> 68777fe48b (fix(auto): cli update models)
 	AdditionalProperties map[string]interface{}
 }
 
@@ -78,33 +85,34 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContent
 }
 
 // GetExample returns the Example field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValue) GetExample() CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample {
-	if o == nil || IsNil(o.Example.Get()) {
-		var ret CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValue) GetExample() interface{} {
+	if o == nil {
+		var ret interface{}
 		return ret
 	}
-	return *o.Example.Get()
+	return o.Example
 }
 
 // GetExampleOk returns a tuple with the Example field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValue) GetExampleOk() (*CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample, bool) {
-	if o == nil {
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValue) GetExampleOk() (*interface{}, bool) {
+	if o == nil || IsNil(o.Example) {
 		return nil, false
 	}
-	return o.Example.Get(), o.Example.IsSet()
+	return &o.Example, true
 }
 
 // HasExample returns a boolean if a field has been set.
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValue) HasExample() bool {
-	if o != nil && o.Example.IsSet() {
+	if o != nil && !IsNil(o.Example) {
 		return true
 	}
 
 	return false
 }
 
+<<<<<<< HEAD
 // SetExample gets a reference to the given NullableCreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample and assigns it to the Example field.
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValue) SetExample(v CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample) {
 	o.Example.Set(&v)
@@ -118,6 +126,11 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContent
 // UnsetExample ensures that no value is present for Example, not even an explicit nil
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValue) UnsetExample() {
 	o.Example.Unset()
+=======
+// SetExample gets a reference to the given interface{} and assigns it to the Example field.
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValue) SetExample(v interface{}) {
+	o.Example = v
+>>>>>>> 68777fe48b (fix(auto): cli update models)
 }
 
 // GetExamples returns the Examples field value if set, zero value otherwise.
@@ -197,8 +210,8 @@ func (o CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentV
 	if !IsNil(o.Schema) {
 		toSerialize["schema"] = o.Schema
 	}
-	if o.Example.IsSet() {
-		toSerialize["example"] = o.Example.Get()
+	if o.Example != nil {
+		toSerialize["example"] = o.Example
 	}
 	if !IsNil(o.Examples) {
 		toSerialize["examples"] = o.Examples
