@@ -11,22 +11,22 @@ import (
 )
 
 var (
-	issueUpdateStatusStr  string
-	issueUpdateComment    string
-	issueSortType         string
-	issueSortDirection    string
-	issueSeverity         []string
-	issueStatus           []string
-	profileIDs            []string
-	assetIDs              []string
-	domains               []string
-	issueIDs              []string
-	scanIDs               []string
-	tagsIDs               []string
-	search                string
-	jiraTicket            string
-	risks                 []string
-	assetClasses          []string
+	issueUpdateStatusStr string
+	issueUpdateComment   string
+	issueSortType        string
+	issueSortDirection   string
+	issueSeverity        []string
+	issueStatus          []string
+	profileIDs           []string
+	assetIDs             []string
+	domains              []string
+	issueIDs             []string
+	scanIDs              []string
+	tagsIDs              []string
+	search               string
+	jiraTicket           string
+	risks                []string
+	assetClasses         []string
 )
 
 var issuesCmd = &cobra.Command{
@@ -400,7 +400,7 @@ var issueCommentCmd = &cobra.Command{
 		if err := escape.CommentIssue(cmd.Context(), issueID, msg); err != nil {
 			return fmt.Errorf("unable to add comment: %w", err)
 		}
-		out.Log(fmt.Sprintf("Comment added to issue %s", issueID))
+		out.Log("Comment added to issue " + issueID)
 		return nil
 	},
 }

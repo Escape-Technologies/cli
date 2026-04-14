@@ -70,7 +70,7 @@ AVAILABLE BLOCKS:
 			return fmt.Errorf("failed to trigger export: %w", err)
 		}
 
-		out.Print(job, fmt.Sprintf("Export job started: %s", job.GetId()))
+		out.Print(job, "Export job started: "+job.GetId())
 
 		if jobsWatch {
 			return watchJob(cmd, job.GetId())
