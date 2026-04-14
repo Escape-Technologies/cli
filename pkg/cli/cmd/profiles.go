@@ -310,6 +310,117 @@ Create a new profile for testing GraphQL APIs. Provide configuration via JSON th
 	},
 }
 
+var profileCreatePentestRestCmd = &cobra.Command{
+	Use:     "create-pentest-rest",
+	Aliases: []string{"cpr"},
+	Short:   "Create an AI Pentest REST API profile",
+	Long: `Create AI Pentest REST Profile - Configure Automated Penetration Testing
+
+Create a new AI-powered penetration testing profile for REST APIs.
+Provide configuration via JSON through stdin.`,
+	RunE: func(cmd *cobra.Command, _ []string) error {
+		if out.InputSchema(v3.CreateDastRestProfileRequest{}) {
+			return nil
+		}
+		if out.Schema(v3.GetProfile200Response{}) {
+			return nil
+		}
+
+		b, err := io.ReadAll(os.Stdin)
+		if err != nil {
+			return fmt.Errorf("failed to read stdin: %w", err)
+		}
+
+		response, err := escape.CreateProfilePentestRest(cmd.Context(), b)
+		if err != nil {
+			return fmt.Errorf("failed to create pentest REST profile: %w", err)
+		}
+
+		out.Table(response, func() []string {
+			result := []string{"ID\tCREATED AT\tNAME\tASSET TYPE"}
+			if profileResponse, ok := response.(*v3.GetProfile200Response); ok {
+				result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s", profileResponse.GetId(), profileResponse.GetCreatedAt(), profileResponse.GetName(), profileResponse.Asset.GetType()))
+			}
+			return result
+		})
+		return nil
+	},
+}
+
+var profileCreatePentestGraphqlCmd = &cobra.Command{
+	Use:     "create-pentest-graphql",
+	Aliases: []string{"cpg"},
+	Short:   "Create an AI Pentest GraphQL profile",
+	Long: `Create AI Pentest GraphQL Profile - Configure Automated Penetration Testing
+
+Create a new AI-powered penetration testing profile for GraphQL APIs.
+Provide configuration via JSON through stdin.`,
+	RunE: func(cmd *cobra.Command, _ []string) error {
+		if out.InputSchema(v3.CreateDastRestProfileRequest{}) {
+			return nil
+		}
+		if out.Schema(v3.GetProfile200Response{}) {
+			return nil
+		}
+
+		b, err := io.ReadAll(os.Stdin)
+		if err != nil {
+			return fmt.Errorf("failed to read stdin: %w", err)
+		}
+
+		response, err := escape.CreateProfilePentestGraphql(cmd.Context(), b)
+		if err != nil {
+			return fmt.Errorf("failed to create pentest GraphQL profile: %w", err)
+		}
+
+		out.Table(response, func() []string {
+			result := []string{"ID\tCREATED AT\tNAME\tASSET TYPE"}
+			if profileResponse, ok := response.(*v3.GetProfile200Response); ok {
+				result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s", profileResponse.GetId(), profileResponse.GetCreatedAt(), profileResponse.GetName(), profileResponse.Asset.GetType()))
+			}
+			return result
+		})
+		return nil
+	},
+}
+
+var profileCreatePentestWebappCmd = &cobra.Command{
+	Use:     "create-pentest-webapp",
+	Aliases: []string{"cpw"},
+	Short:   "Create an AI Pentest WebApp profile",
+	Long: `Create AI Pentest WebApp Profile - Configure Automated Penetration Testing
+
+Create a new AI-powered penetration testing profile for web applications.
+Provide configuration via JSON through stdin.`,
+	RunE: func(cmd *cobra.Command, _ []string) error {
+		if out.InputSchema(v3.CreateDastRestProfileRequest{}) {
+			return nil
+		}
+		if out.Schema(v3.GetProfile200Response{}) {
+			return nil
+		}
+
+		b, err := io.ReadAll(os.Stdin)
+		if err != nil {
+			return fmt.Errorf("failed to read stdin: %w", err)
+		}
+
+		response, err := escape.CreateProfilePentestWebapp(cmd.Context(), b)
+		if err != nil {
+			return fmt.Errorf("failed to create pentest WebApp profile: %w", err)
+		}
+
+		out.Table(response, func() []string {
+			result := []string{"ID\tCREATED AT\tNAME\tASSET TYPE"}
+			if profileResponse, ok := response.(*v3.GetProfile200Response); ok {
+				result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s", profileResponse.GetId(), profileResponse.GetCreatedAt(), profileResponse.GetName(), profileResponse.Asset.GetType()))
+			}
+			return result
+		})
+		return nil
+	},
+}
+
 var profileUpdateCmd = &cobra.Command{
 	Use:     "update profile-id",
 	Aliases: []string{"u", "edit"},
@@ -547,6 +658,9 @@ func init() {
 		profileCreateRestCmd,
 		profileCreateWebappCmd,
 		profileCreateGraphqlCmd,
+		profileCreatePentestRestCmd,
+		profileCreatePentestGraphqlCmd,
+		profileCreatePentestWebappCmd,
 		profileUpdateCmd,
 		profileUpdateConfigurationCmd,
 		profileUpdateSchemaCmd,

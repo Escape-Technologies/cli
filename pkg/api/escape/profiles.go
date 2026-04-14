@@ -195,6 +195,63 @@ func UpdateProfileSchema(ctx context.Context, profileID string, schemaID string)
 	return profile, nil
 }
 
+// CreateProfilePentestRest creates an AI Pentest profile for a REST application
+func CreateProfilePentestRest(ctx context.Context, data []byte) (interface{}, error) {
+	client, err := newAPIV3Client()
+	if err != nil {
+		return nil, fmt.Errorf("unable to init client: %w", err)
+	}
+
+	var payload v3.CreateDastRestProfileRequest
+	if err := json.Unmarshal(data, &payload); err != nil {
+		return nil, fmt.Errorf("invalid JSON: %w", err)
+	}
+
+	profile, _, err := client.ProfilesAPI.CreatePentestRestProfile(ctx).CreateDastRestProfileRequest(payload).Execute()
+	if err != nil {
+		return nil, fmt.Errorf("api error: %w", err)
+	}
+	return profile, nil
+}
+
+// CreateProfilePentestGraphql creates an AI Pentest profile for a GraphQL application
+func CreateProfilePentestGraphql(ctx context.Context, data []byte) (interface{}, error) {
+	client, err := newAPIV3Client()
+	if err != nil {
+		return nil, fmt.Errorf("unable to init client: %w", err)
+	}
+
+	var payload v3.CreateDastRestProfileRequest
+	if err := json.Unmarshal(data, &payload); err != nil {
+		return nil, fmt.Errorf("invalid JSON: %w", err)
+	}
+
+	profile, _, err := client.ProfilesAPI.CreatePentestGraphqlProfile(ctx).CreateDastRestProfileRequest(payload).Execute()
+	if err != nil {
+		return nil, fmt.Errorf("api error: %w", err)
+	}
+	return profile, nil
+}
+
+// CreateProfilePentestWebapp creates an AI Pentest profile for a web application
+func CreateProfilePentestWebapp(ctx context.Context, data []byte) (interface{}, error) {
+	client, err := newAPIV3Client()
+	if err != nil {
+		return nil, fmt.Errorf("unable to init client: %w", err)
+	}
+
+	var payload v3.CreateDastRestProfileRequest
+	if err := json.Unmarshal(data, &payload); err != nil {
+		return nil, fmt.Errorf("invalid JSON: %w", err)
+	}
+
+	profile, _, err := client.ProfilesAPI.CreatePentestWebappProfile(ctx).CreateDastRestProfileRequest(payload).Execute()
+	if err != nil {
+		return nil, fmt.Errorf("api error: %w", err)
+	}
+	return profile, nil
+}
+
 // DeleteProfile deletes a profile by ID
 func DeleteProfile(ctx context.Context, profileID string) error {
 	client, err := newAPIV3Client()

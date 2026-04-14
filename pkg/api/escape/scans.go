@@ -15,6 +15,7 @@ type ListScansFilters struct {
 	After      string
 	Before     string
 	ProfileIDs *[]string
+	ProjectIDs *[]string
 	Ignored    string
 	Initiator  *[]string
 	Kinds      *[]string
@@ -43,6 +44,9 @@ func ListScans(ctx context.Context, next string, filters *ListScansFilters) ([]v
 		}
 		if filters.ProfileIDs != nil && len(*filters.ProfileIDs) > 0 {
 			req = req.ProfileIds(strings.Join(*filters.ProfileIDs, ","))
+		}
+		if filters.ProjectIDs != nil && len(*filters.ProjectIDs) > 0 {
+			req = req.ProjectIds(v3.ListScansProjectIdsParameter{ArrayOfString: filters.ProjectIDs})
 		}
 		if filters.Ignored != "" {
 			req = req.Ignored(filters.Ignored)
@@ -149,6 +153,29 @@ func CancelScan(ctx context.Context, scanID string) error {
 		return fmt.Errorf("unable to cancel scan: %w", err)
 	}
 	return nil
+}
+
+// ListScanTargets lists all targets discovered during a scan
+func ListScanTargets(ctx context.Context, scanID string, next string, targetTypes string, size int) ([]v3.TargetDetailed, *string, error) {
+	client, err := newAPIV3Client()
+	if err != nil {
+		return nil, nil, fmt.Errorf("unable to init client: %w", err)
+	}
+	req := client.ScansAPI.ListScanTargets(ctx, scanID)
+	if next != "" {
+		req = req.Cursor(next)
+	}
+	if targetTypes != "" {
+		req = req.Types(targetTypes)
+	}
+	if size > 0 {
+		req = req.Size(size)
+	}
+	data, _, err := req.Execute()
+	if err != nil {
+		return nil, nil, fmt.Errorf("unable to list scan targets: %w", err)
+	}
+	return data.Data, data.NextCursor, nil
 }
 
 // IgnoreScan ignore a scan

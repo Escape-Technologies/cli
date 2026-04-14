@@ -11,19 +11,22 @@ import (
 )
 
 var (
-	issueUpdateStatusStr string
-	issueSeverity        []string
-	issueStatus          []string
-	profileIDs           []string
-	assetIDs             []string
-	domains              []string
-	issueIDs             []string
-	scanIDs              []string
-	tagsIDs              []string
-	search               string
-	jiraTicket           string
-	risks                []string
-	assetClasses         []string
+	issueUpdateStatusStr  string
+	issueUpdateComment    string
+	issueSortType         string
+	issueSortDirection    string
+	issueSeverity         []string
+	issueStatus           []string
+	profileIDs            []string
+	assetIDs              []string
+	domains               []string
+	issueIDs              []string
+	scanIDs               []string
+	tagsIDs               []string
+	search                string
+	jiraTicket            string
+	risks                 []string
+	assetClasses          []string
 )
 
 var issuesCmd = &cobra.Command{
@@ -127,13 +130,13 @@ ID                                      CREATED AT  SEVERITY  STATUS  NAME      
 			Search:       search,
 			AssetClasses: assetClasses,
 		}
-		issues, next, err := escape.ListIssues(cmd.Context(), "", filters)
+		issues, next, err := escape.ListIssues(cmd.Context(), "", filters, issueSortType, issueSortDirection)
 		if err != nil {
 			return fmt.Errorf("unable to list issues: %w", err)
 		}
 		allIssues := issues
 		for next != nil && *next != "" {
-			issues, next, err = escape.ListIssues(cmd.Context(), *next, filters)
+			issues, next, err = escape.ListIssues(cmd.Context(), *next, filters, issueSortType, issueSortDirection)
 			if err != nil {
 				return fmt.Errorf("unable to list issues: %w", err)
 			}
@@ -282,7 +285,7 @@ TRACKING:
 			return fmt.Errorf("unable to get issue %s: %w", issueID, err)
 		}
 
-		isUpdated, err := escape.UpdateIssue(cmd.Context(), issueID, newStatus)
+		isUpdated, err := escape.UpdateIssue(cmd.Context(), issueID, newStatus, issueUpdateComment)
 		if err != nil || !isUpdated {
 			return fmt.Errorf("unable to update issue %s: %w", issueID, err)
 		}
@@ -377,12 +380,40 @@ ID                                      CREATED AT                KIND          
 	},
 }
 
+var issueCommentCmd = &cobra.Command{
+	Use:     "comment issue-id",
+	Aliases: []string{"add-comment"},
+	Short:   "Add a comment to an issue",
+	Args: func(cmd *cobra.Command, args []string) error {
+		if len(args) != 1 {
+			_ = cmd.Help()
+			return errors.New("issue ID is required")
+		}
+		return nil
+	},
+	RunE: func(cmd *cobra.Command, args []string) error {
+		issueID := args[0]
+		msg, _ := cmd.Flags().GetString("message")
+		if msg == "" {
+			return errors.New("--message is required")
+		}
+		if err := escape.CommentIssue(cmd.Context(), issueID, msg); err != nil {
+			return fmt.Errorf("unable to add comment: %w", err)
+		}
+		out.Log(fmt.Sprintf("Comment added to issue %s", issueID))
+		return nil
+	},
+}
+
 func init() {
 	issuesCmd.AddCommand(issueGetCmd)
 	issuesCmd.AddCommand(issueListActivitiesCmd)
+	issuesCmd.AddCommand(issueCommentCmd)
+	issueCommentCmd.Flags().String("message", "", "comment message to add to the issue")
 
 	issuesCmd.AddCommand(issueUpdateStatusCmd)
 	issueUpdateStatusCmd.Flags().StringVarP(&issueUpdateStatusStr, "status", "s", issueUpdateStatusStr, fmt.Sprintf("new status for the issue: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESSTATUSEnumValues))
+	issueUpdateStatusCmd.Flags().StringVar(&issueUpdateComment, "comment", "", "optional comment explaining the status change")
 
 	issuesCmd.AddCommand(issueListCmd)
 
@@ -398,6 +429,8 @@ func init() {
 	issueListCmd.Flags().StringVarP(&jiraTicket, "jira-ticket", "j", "", "filter by associated Jira ticket ID")
 	issueListCmd.Flags().StringSliceVarP(&risks, "risk", "r", []string{}, fmt.Sprintf("filter by asset risk level: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMSEnumValues))
 	issueListCmd.Flags().StringSliceVarP(&assetClasses, "asset-class", "", []string{}, fmt.Sprintf("filter by asset classification: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASSEnumValues))
+	issueListCmd.Flags().StringVar(&issueSortType, "sort-by", "", "sort field: LAST_SEEN, FIRST_SEEN, SEVERITY, STATUS")
+	issueListCmd.Flags().StringVar(&issueSortDirection, "sort-direction", "", "sort direction: asc, desc")
 
 	rootCmd.AddCommand(issuesCmd)
 }

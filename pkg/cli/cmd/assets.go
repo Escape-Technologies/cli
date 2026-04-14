@@ -209,7 +209,7 @@ ID                                      CREATED AT                TYPE    NAME  
 		if assetActivities {
 			issues, _, err := escape.ListIssues(cmd.Context(), "", &escape.ListIssuesFilters{
 				AssetIDs: []string{args[0]},
-			})
+			}, "", "")
 			if err != nil {
 				return fmt.Errorf("unable to list issues: %w", err)
 			}
