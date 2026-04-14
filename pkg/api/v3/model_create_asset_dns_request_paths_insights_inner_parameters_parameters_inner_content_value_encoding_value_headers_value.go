@@ -19,7 +19,6 @@ var _ MappedNullable = &CreateAssetDNSRequestPathsInsightsInnerParametersParamet
 
 // CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValueEncodingValueHeadersValue struct for CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValueEncodingValueHeadersValue
 type CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValueEncodingValueHeadersValue struct {
-<<<<<<< HEAD
 	Required             *bool                                                                                    `json:"required,omitempty"`
 	Deprecated           *bool                                                                                    `json:"deprecated,omitempty"`
 	Description          *string                                                                                  `json:"description,omitempty"`
@@ -27,19 +26,8 @@ type CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValu
 	Explode              *bool                                                                                    `json:"explode,omitempty"`
 	AllowReserved        *bool                                                                                    `json:"allowReserved,omitempty"`
 	Schema               map[string]interface{}                                                                   `json:"schema,omitempty"`
-	Example              NullableCreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample          `json:"example,omitempty"`
+	Example              interface{}                                                                              `json:"example,omitempty"`
 	Examples             map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue `json:"examples,omitempty"`
-=======
-	Required *bool `json:"required,omitempty"`
-	Deprecated *bool `json:"deprecated,omitempty"`
-	Description *string `json:"description,omitempty"`
-	Style *string `json:"style,omitempty"`
-	Explode *bool `json:"explode,omitempty"`
-	AllowReserved *bool `json:"allowReserved,omitempty"`
-	Schema map[string]interface{} `json:"schema,omitempty"`
-	Example interface{} `json:"example,omitempty"`
-	Examples map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue `json:"examples,omitempty"`
->>>>>>> 68777fe48b (fix(auto): cli update models)
 	AdditionalProperties map[string]interface{}
 }
 
@@ -314,25 +302,9 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContent
 	return false
 }
 
-<<<<<<< HEAD
-// SetExample gets a reference to the given NullableCreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample and assigns it to the Example field.
-func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValueEncodingValueHeadersValue) SetExample(v CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample) {
-	o.Example.Set(&v)
-}
-
-// SetExampleNil sets the value for Example to be an explicit nil
-func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValueEncodingValueHeadersValue) SetExampleNil() {
-	o.Example.Set(nil)
-}
-
-// UnsetExample ensures that no value is present for Example, not even an explicit nil
-func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValueEncodingValueHeadersValue) UnsetExample() {
-	o.Example.Unset()
-=======
 // SetExample gets a reference to the given interface{} and assigns it to the Example field.
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValueEncodingValueHeadersValue) SetExample(v interface{}) {
 	o.Example = v
->>>>>>> 68777fe48b (fix(auto): cli update models)
 }
 
 // GetExamples returns the Examples field value if set, zero value otherwise.

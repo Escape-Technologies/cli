@@ -19,17 +19,10 @@ var _ MappedNullable = &CreateAssetDNSRequestPathsInsightsInnerParametersParamet
 
 // CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValue struct for CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValue
 type CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValue struct {
-<<<<<<< HEAD
 	Schema               map[string]interface{}                                                                               `json:"schema,omitempty"`
-	Example              NullableCreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample                      `json:"example,omitempty"`
+	Example              interface{}                                                                                          `json:"example,omitempty"`
 	Examples             map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue             `json:"examples,omitempty"`
 	Encoding             map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValueEncodingValue `json:"encoding,omitempty"`
-=======
-	Schema map[string]interface{} `json:"schema,omitempty"`
-	Example interface{} `json:"example,omitempty"`
-	Examples map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue `json:"examples,omitempty"`
-	Encoding map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValueEncodingValue `json:"encoding,omitempty"`
->>>>>>> 68777fe48b (fix(auto): cli update models)
 	AdditionalProperties map[string]interface{}
 }
 
@@ -112,25 +105,9 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContent
 	return false
 }
 
-<<<<<<< HEAD
-// SetExample gets a reference to the given NullableCreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample and assigns it to the Example field.
-func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValue) SetExample(v CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample) {
-	o.Example.Set(&v)
-}
-
-// SetExampleNil sets the value for Example to be an explicit nil
-func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValue) SetExampleNil() {
-	o.Example.Set(nil)
-}
-
-// UnsetExample ensures that no value is present for Example, not even an explicit nil
-func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValue) UnsetExample() {
-	o.Example.Unset()
-=======
 // SetExample gets a reference to the given interface{} and assigns it to the Example field.
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValue) SetExample(v interface{}) {
 	o.Example = v
->>>>>>> 68777fe48b (fix(auto): cli update models)
 }
 
 // GetExamples returns the Examples field value if set, zero value otherwise.

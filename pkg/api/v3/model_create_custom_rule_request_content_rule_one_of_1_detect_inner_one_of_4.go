@@ -20,21 +20,12 @@ var _ MappedNullable = &CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf
 
 // CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4 struct for CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4
 type CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4 struct {
-<<<<<<< HEAD
-	Is                   *float32           `json:"is,omitempty"`
-	IsNot                *float32           `json:"is_not,omitempty"`
-	In                   []float32          `json:"in,omitempty"`
-	Gt                   *float32           `json:"gt,omitempty"`
-	Lt                   *float32           `json:"lt,omitempty"`
+	Is                   *int               `json:"is,omitempty"`
+	IsNot                *int               `json:"is_not,omitempty"`
+	In                   []int              `json:"in,omitempty"`
+	Gt                   *int               `json:"gt,omitempty"`
+	Lt                   *int               `json:"lt,omitempty"`
 	If                   ENUMPAGESTATUSCODE `json:"if"`
-=======
-	Is *int `json:"is,omitempty"`
-	IsNot *int `json:"is_not,omitempty"`
-	In []int `json:"in,omitempty"`
-	Gt *int `json:"gt,omitempty"`
-	Lt *int `json:"lt,omitempty"`
-	If ENUMPAGESTATUSCODE `json:"if"`
->>>>>>> 68777fe48b (fix(auto): cli update models)
 	AdditionalProperties map[string]interface{}
 }
 

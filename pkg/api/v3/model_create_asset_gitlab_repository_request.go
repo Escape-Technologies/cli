@@ -21,7 +21,6 @@ var _ MappedNullable = &CreateAssetGITLABREPOSITORYRequest{}
 // CreateAssetGITLABREPOSITORYRequest struct for CreateAssetGITLABREPOSITORYRequest
 type CreateAssetGITLABREPOSITORYRequest struct {
 	// The list of project IDs bind the asset on.
-<<<<<<< HEAD
 	ProjectIds           []string                                        `json:"projectIds,omitempty"`
 	Name                 *string                                         `json:"name,omitempty"`
 	AssetClass           ENUMREPOSITORY                                  `json:"asset_class"`
@@ -37,37 +36,13 @@ type CreateAssetGITLABREPOSITORYRequest struct {
 	LastCommit           *CreateAssetGITLABREPOSITORYRequestLastCommit   `json:"last_commit,omitempty"`
 	Owners               []CreateAssetGITLABREPOSITORYRequestOwnersInner `json:"owners,omitempty"`
 	Languages            []ENUMPROPERTIESLANGUAGESITEMS                  `json:"languages,omitempty"`
-	GroupId              *float32                                        `json:"group_id,omitempty"`
+	GroupId              *int                                            `json:"group_id,omitempty"`
 	GroupFullPath        *string                                         `json:"group_full_path,omitempty"`
 	GroupWebUrl          *string                                         `json:"group_web_url,omitempty"`
-	ProjectId            *float32                                        `json:"project_id,omitempty"`
+	ProjectId            *int                                            `json:"project_id,omitempty"`
 	Archived             *bool                                           `json:"archived,omitempty"`
 	Visibility           *ENUMPROPERTIESVISIBILITY                       `json:"visibility,omitempty"`
 	Group                *CreateAssetGITLABREPOSITORYRequestGroup        `json:"group,omitempty"`
-=======
-	ProjectIds []string `json:"projectIds,omitempty"`
-	Name *string `json:"name,omitempty"`
-	AssetClass ENUMREPOSITORY `json:"asset_class"`
-	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
-	ScreenshotS3Key *string `json:"screenshot_s3_key,omitempty"`
-	AssetType ENUMGITLABREPOSITORY `json:"asset_type"`
-	Url string `json:"url"`
-	HttpUrlToRepo *string `json:"http_url_to_repo,omitempty"`
-	Description *string `json:"description,omitempty"`
-	LocationId *string `json:"location_id,omitempty"`
-	DefaultBranch *string `json:"default_branch,omitempty"`
-	BlobBaseUrl *string `json:"blob_base_url,omitempty"`
-	LastCommit *CreateAssetGITLABREPOSITORYRequestLastCommit `json:"last_commit,omitempty"`
-	Owners []CreateAssetGITLABREPOSITORYRequestOwnersInner `json:"owners,omitempty"`
-	Languages []ENUMPROPERTIESLANGUAGESITEMS `json:"languages,omitempty"`
-	GroupId *int `json:"group_id,omitempty"`
-	GroupFullPath *string `json:"group_full_path,omitempty"`
-	GroupWebUrl *string `json:"group_web_url,omitempty"`
-	ProjectId *int `json:"project_id,omitempty"`
-	Archived *bool `json:"archived,omitempty"`
-	Visibility *ENUMPROPERTIESVISIBILITY `json:"visibility,omitempty"`
-	Group *CreateAssetGITLABREPOSITORYRequestGroup `json:"group,omitempty"`
->>>>>>> 68777fe48b (fix(auto): cli update models)
 	AdditionalProperties map[string]interface{}
 }
 

@@ -20,23 +20,13 @@ var _ MappedNullable = &CreateCustomRuleRequestContentRuleOneOfTransformTriggerI
 
 // CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf23 struct for CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf23
 type CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf23 struct {
-<<<<<<< HEAD
-	Is                   *float32                     `json:"is,omitempty"`
-	IsNot                *float32                     `json:"is_not,omitempty"`
-	In                   []float32                    `json:"in,omitempty"`
-	Gt                   *float32                     `json:"gt,omitempty"`
-	Lt                   *float32                     `json:"lt,omitempty"`
+	Is                   *int                         `json:"is,omitempty"`
+	IsNot                *int                         `json:"is_not,omitempty"`
+	In                   []int                        `json:"in,omitempty"`
+	Gt                   *int                         `json:"gt,omitempty"`
+	Lt                   *int                         `json:"lt,omitempty"`
 	If                   ENUMHELPERSREGEXMATCHESCOUNT `json:"if"`
 	Regex                string                       `json:"regex"`
-=======
-	Is *int `json:"is,omitempty"`
-	IsNot *int `json:"is_not,omitempty"`
-	In []int `json:"in,omitempty"`
-	Gt *int `json:"gt,omitempty"`
-	Lt *int `json:"lt,omitempty"`
-	If ENUMHELPERSREGEXMATCHESCOUNT `json:"if"`
-	Regex string `json:"regex"`
->>>>>>> 68777fe48b (fix(auto): cli update models)
 	AdditionalProperties map[string]interface{}
 }
 

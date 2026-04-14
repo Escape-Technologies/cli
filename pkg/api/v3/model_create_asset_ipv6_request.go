@@ -23,7 +23,6 @@ type CreateAssetIPV6Request struct {
 	// The list of project IDs bind the asset on.
 	ProjectIds []string `json:"projectIds,omitempty"`
 	// The custom name of the asset. If not provided, the default name will be used.
-<<<<<<< HEAD
 	Name                 *string                                   `json:"name,omitempty"`
 	AssetClass           ENUMHOST                                  `json:"asset_class"`
 	ExtraMetadata        map[string]interface{}                    `json:"extra_metadata,omitempty"`
@@ -32,28 +31,12 @@ type CreateAssetIPV6Request struct {
 	Address              string                                    `json:"address"`
 	Favicon              *string                                   `json:"favicon,omitempty"`
 	OpenPorts            []CreateAssetDNSRequestOpenPortsInner     `json:"open_ports,omitempty"`
-	PortsInsights        []float32                                 `json:"ports_insights,omitempty"`
+	PortsInsights        []int                                     `json:"ports_insights,omitempty"`
 	PathsInsights        []CreateAssetDNSRequestPathsInsightsInner `json:"paths_insights,omitempty"`
 	Private              *bool                                     `json:"private,omitempty"`
 	ThirdParty           *ENUMPROPERTIESTHIRDPARTY                 `json:"third_party,omitempty"`
 	Organization         *string                                   `json:"organization,omitempty"`
 	Country              *string                                   `json:"country,omitempty"`
-=======
-	Name *string `json:"name,omitempty"`
-	AssetClass ENUMHOST `json:"asset_class"`
-	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
-	ScreenshotS3Key *string `json:"screenshot_s3_key,omitempty"`
-	AssetType ENUMIPV6 `json:"asset_type"`
-	Address string `json:"address"`
-	Favicon *string `json:"favicon,omitempty"`
-	OpenPorts []CreateAssetDNSRequestOpenPortsInner `json:"open_ports,omitempty"`
-	PortsInsights []int `json:"ports_insights,omitempty"`
-	PathsInsights []CreateAssetDNSRequestPathsInsightsInner `json:"paths_insights,omitempty"`
-	Private *bool `json:"private,omitempty"`
-	ThirdParty *ENUMPROPERTIESTHIRDPARTY `json:"third_party,omitempty"`
-	Organization *string `json:"organization,omitempty"`
-	Country *string `json:"country,omitempty"`
->>>>>>> 68777fe48b (fix(auto): cli update models)
 	AdditionalProperties map[string]interface{}
 }
 

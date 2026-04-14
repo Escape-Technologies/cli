@@ -20,17 +20,10 @@ var _ MappedNullable = &CreateAssetDNSRequestDnsRecordsInner{}
 
 // CreateAssetDNSRequestDnsRecordsInner struct for CreateAssetDNSRequestDnsRecordsInner
 type CreateAssetDNSRequestDnsRecordsInner struct {
-<<<<<<< HEAD
-	Name                 string  `json:"name"`
-	Type                 string  `json:"type"`
-	Ttl                  float32 `json:"ttl"`
-	Data                 string  `json:"data"`
-=======
-	Name string `json:"name"`
-	Type string `json:"type"`
-	Ttl int `json:"ttl"`
-	Data string `json:"data"`
->>>>>>> 68777fe48b (fix(auto): cli update models)
+	Name                 string `json:"name"`
+	Type                 string `json:"type"`
+	Ttl                  int    `json:"ttl"`
+	Data                 string `json:"data"`
 	AdditionalProperties map[string]interface{}
 }
 

@@ -19,17 +19,10 @@ var _ MappedNullable = &CreateAssetDNSRequestPathsInsightsInnerParametersParamet
 
 // CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue struct for CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue
 type CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue struct {
-<<<<<<< HEAD
-	Summary              *string                                                                         `json:"summary,omitempty"`
-	Description          *string                                                                         `json:"description,omitempty"`
-	Value                NullableCreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample `json:"value,omitempty"`
-	ExternalValue        *string                                                                         `json:"externalValue,omitempty"`
-=======
-	Summary *string `json:"summary,omitempty"`
-	Description *string `json:"description,omitempty"`
-	Value interface{} `json:"value,omitempty"`
-	ExternalValue *string `json:"externalValue,omitempty"`
->>>>>>> 68777fe48b (fix(auto): cli update models)
+	Summary              *string     `json:"summary,omitempty"`
+	Description          *string     `json:"description,omitempty"`
+	Value                interface{} `json:"value,omitempty"`
+	ExternalValue        *string     `json:"externalValue,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -144,25 +137,9 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample
 	return false
 }
 
-<<<<<<< HEAD
-// SetValue gets a reference to the given NullableCreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample and assigns it to the Value field.
-func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue) SetValue(v CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample) {
-	o.Value.Set(&v)
-}
-
-// SetValueNil sets the value for Value to be an explicit nil
-func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue) SetValueNil() {
-	o.Value.Set(nil)
-}
-
-// UnsetValue ensures that no value is present for Value, not even an explicit nil
-func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue) UnsetValue() {
-	o.Value.Unset()
-=======
 // SetValue gets a reference to the given interface{} and assigns it to the Value field.
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue) SetValue(v interface{}) {
 	o.Value = v
->>>>>>> 68777fe48b (fix(auto): cli update models)
 }
 
 // GetExternalValue returns the ExternalValue field value if set, zero value otherwise.

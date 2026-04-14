@@ -20,15 +20,9 @@ var _ MappedNullable = &CreateAssetDNSRequestOpenPortsInner{}
 
 // CreateAssetDNSRequestOpenPortsInner struct for CreateAssetDNSRequestOpenPortsInner
 type CreateAssetDNSRequestOpenPortsInner struct {
-<<<<<<< HEAD
-	Port                 float32                                                `json:"port"`
+	Port                 int                                                    `json:"port"`
 	Protocols            []ENUMPROPERTIESOPENPORTSITEMSPROPERTIESPROTOCOLSITEMS `json:"protocols"`
 	LocationIds          []string                                               `json:"location_ids,omitempty"`
-=======
-	Port int `json:"port"`
-	Protocols []ENUMPROPERTIESOPENPORTSITEMSPROPERTIESPROTOCOLSITEMS `json:"protocols"`
-	LocationIds []string `json:"location_ids,omitempty"`
->>>>>>> 68777fe48b (fix(auto): cli update models)
 	AdditionalProperties map[string]interface{}
 }
 
