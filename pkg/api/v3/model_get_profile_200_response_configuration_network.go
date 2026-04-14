@@ -19,13 +19,13 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationNetwork{}
 
 // GetProfile200ResponseConfigurationNetwork struct for GetProfile200ResponseConfigurationNetwork
 type GetProfile200ResponseConfigurationNetwork struct {
-	RequestTimeoutS          *int                `json:"request_timeout_s,omitempty"`
-	RequestsPerSecond        *int                `json:"requests_per_second,omitempty"`
+	RequestTimeoutS          *float32            `json:"request_timeout_s,omitempty"`
+	RequestsPerSecond        *float32            `json:"requests_per_second,omitempty"`
 	CustomHeaders            map[string][]string `json:"custom_headers,omitempty"`
-	CancelUnhealthyScanAfter *int                `json:"cancel_unhealthy_scan_after,omitempty"`
+	CancelUnhealthyScanAfter *float32            `json:"cancel_unhealthy_scan_after,omitempty"`
 	EscapeUser               *bool               `json:"escape_user,omitempty"`
 	SecEscapeUser            *bool               `json:"sec_escape_user,omitempty"`
-	ParallelRequests         *int                `json:"parallel_requests,omitempty"`
+	ParallelRequests         *float32            `json:"parallel_requests,omitempty"`
 	AdditionalProperties     map[string]interface{}
 }
 
@@ -49,9 +49,9 @@ func NewGetProfile200ResponseConfigurationNetworkWithDefaults() *GetProfile200Re
 }
 
 // GetRequestTimeoutS returns the RequestTimeoutS field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationNetwork) GetRequestTimeoutS() int {
+func (o *GetProfile200ResponseConfigurationNetwork) GetRequestTimeoutS() float32 {
 	if o == nil || IsNil(o.RequestTimeoutS) {
-		var ret int
+		var ret float32
 		return ret
 	}
 	return *o.RequestTimeoutS
@@ -59,7 +59,7 @@ func (o *GetProfile200ResponseConfigurationNetwork) GetRequestTimeoutS() int {
 
 // GetRequestTimeoutSOk returns a tuple with the RequestTimeoutS field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationNetwork) GetRequestTimeoutSOk() (*int, bool) {
+func (o *GetProfile200ResponseConfigurationNetwork) GetRequestTimeoutSOk() (*float32, bool) {
 	if o == nil || IsNil(o.RequestTimeoutS) {
 		return nil, false
 	}
@@ -75,15 +75,15 @@ func (o *GetProfile200ResponseConfigurationNetwork) HasRequestTimeoutS() bool {
 	return false
 }
 
-// SetRequestTimeoutS gets a reference to the given int and assigns it to the RequestTimeoutS field.
-func (o *GetProfile200ResponseConfigurationNetwork) SetRequestTimeoutS(v int) {
+// SetRequestTimeoutS gets a reference to the given float32 and assigns it to the RequestTimeoutS field.
+func (o *GetProfile200ResponseConfigurationNetwork) SetRequestTimeoutS(v float32) {
 	o.RequestTimeoutS = &v
 }
 
 // GetRequestsPerSecond returns the RequestsPerSecond field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationNetwork) GetRequestsPerSecond() int {
+func (o *GetProfile200ResponseConfigurationNetwork) GetRequestsPerSecond() float32 {
 	if o == nil || IsNil(o.RequestsPerSecond) {
-		var ret int
+		var ret float32
 		return ret
 	}
 	return *o.RequestsPerSecond
@@ -91,7 +91,7 @@ func (o *GetProfile200ResponseConfigurationNetwork) GetRequestsPerSecond() int {
 
 // GetRequestsPerSecondOk returns a tuple with the RequestsPerSecond field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationNetwork) GetRequestsPerSecondOk() (*int, bool) {
+func (o *GetProfile200ResponseConfigurationNetwork) GetRequestsPerSecondOk() (*float32, bool) {
 	if o == nil || IsNil(o.RequestsPerSecond) {
 		return nil, false
 	}
@@ -107,8 +107,8 @@ func (o *GetProfile200ResponseConfigurationNetwork) HasRequestsPerSecond() bool 
 	return false
 }
 
-// SetRequestsPerSecond gets a reference to the given int and assigns it to the RequestsPerSecond field.
-func (o *GetProfile200ResponseConfigurationNetwork) SetRequestsPerSecond(v int) {
+// SetRequestsPerSecond gets a reference to the given float32 and assigns it to the RequestsPerSecond field.
+func (o *GetProfile200ResponseConfigurationNetwork) SetRequestsPerSecond(v float32) {
 	o.RequestsPerSecond = &v
 }
 
@@ -145,9 +145,9 @@ func (o *GetProfile200ResponseConfigurationNetwork) SetCustomHeaders(v map[strin
 }
 
 // GetCancelUnhealthyScanAfter returns the CancelUnhealthyScanAfter field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationNetwork) GetCancelUnhealthyScanAfter() int {
+func (o *GetProfile200ResponseConfigurationNetwork) GetCancelUnhealthyScanAfter() float32 {
 	if o == nil || IsNil(o.CancelUnhealthyScanAfter) {
-		var ret int
+		var ret float32
 		return ret
 	}
 	return *o.CancelUnhealthyScanAfter
@@ -155,7 +155,7 @@ func (o *GetProfile200ResponseConfigurationNetwork) GetCancelUnhealthyScanAfter(
 
 // GetCancelUnhealthyScanAfterOk returns a tuple with the CancelUnhealthyScanAfter field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationNetwork) GetCancelUnhealthyScanAfterOk() (*int, bool) {
+func (o *GetProfile200ResponseConfigurationNetwork) GetCancelUnhealthyScanAfterOk() (*float32, bool) {
 	if o == nil || IsNil(o.CancelUnhealthyScanAfter) {
 		return nil, false
 	}
@@ -171,8 +171,8 @@ func (o *GetProfile200ResponseConfigurationNetwork) HasCancelUnhealthyScanAfter(
 	return false
 }
 
-// SetCancelUnhealthyScanAfter gets a reference to the given int and assigns it to the CancelUnhealthyScanAfter field.
-func (o *GetProfile200ResponseConfigurationNetwork) SetCancelUnhealthyScanAfter(v int) {
+// SetCancelUnhealthyScanAfter gets a reference to the given float32 and assigns it to the CancelUnhealthyScanAfter field.
+func (o *GetProfile200ResponseConfigurationNetwork) SetCancelUnhealthyScanAfter(v float32) {
 	o.CancelUnhealthyScanAfter = &v
 }
 
@@ -241,9 +241,9 @@ func (o *GetProfile200ResponseConfigurationNetwork) SetSecEscapeUser(v bool) {
 }
 
 // GetParallelRequests returns the ParallelRequests field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationNetwork) GetParallelRequests() int {
+func (o *GetProfile200ResponseConfigurationNetwork) GetParallelRequests() float32 {
 	if o == nil || IsNil(o.ParallelRequests) {
-		var ret int
+		var ret float32
 		return ret
 	}
 	return *o.ParallelRequests
@@ -251,7 +251,7 @@ func (o *GetProfile200ResponseConfigurationNetwork) GetParallelRequests() int {
 
 // GetParallelRequestsOk returns a tuple with the ParallelRequests field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationNetwork) GetParallelRequestsOk() (*int, bool) {
+func (o *GetProfile200ResponseConfigurationNetwork) GetParallelRequestsOk() (*float32, bool) {
 	if o == nil || IsNil(o.ParallelRequests) {
 		return nil, false
 	}
@@ -267,8 +267,8 @@ func (o *GetProfile200ResponseConfigurationNetwork) HasParallelRequests() bool {
 	return false
 }
 
-// SetParallelRequests gets a reference to the given int and assigns it to the ParallelRequests field.
-func (o *GetProfile200ResponseConfigurationNetwork) SetParallelRequests(v int) {
+// SetParallelRequests gets a reference to the given float32 and assigns it to the ParallelRequests field.
+func (o *GetProfile200ResponseConfigurationNetwork) SetParallelRequests(v float32) {
 	o.ParallelRequests = &v
 }
 

@@ -23,7 +23,7 @@ type GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsAction
 	Action                ENUMCLICK `json:"action"`
 	AllowFailure          *bool     `json:"allow_failure,omitempty"`
 	Locator               string    `json:"locator"`
-	Timeout               *int      `json:"timeout,omitempty"`
+	Timeout               *float32  `json:"timeout,omitempty"`
 	SelectFirstIfMultiple *bool     `json:"select_first_if_multiple,omitempty"`
 	AdditionalProperties  map[string]interface{}
 }
@@ -130,9 +130,9 @@ func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsAc
 }
 
 // GetTimeout returns the Timeout field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf) GetTimeout() int {
+func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf) GetTimeout() float32 {
 	if o == nil || IsNil(o.Timeout) {
-		var ret int
+		var ret float32
 		return ret
 	}
 	return *o.Timeout
@@ -140,7 +140,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsAc
 
 // GetTimeoutOk returns a tuple with the Timeout field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf) GetTimeoutOk() (*int, bool) {
+func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf) GetTimeoutOk() (*float32, bool) {
 	if o == nil || IsNil(o.Timeout) {
 		return nil, false
 	}
@@ -156,8 +156,8 @@ func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsAc
 	return false
 }
 
-// SetTimeout gets a reference to the given int and assigns it to the Timeout field.
-func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf) SetTimeout(v int) {
+// SetTimeout gets a reference to the given float32 and assigns it to the Timeout field.
+func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf) SetTimeout(v float32) {
 	o.Timeout = &v
 }
 
