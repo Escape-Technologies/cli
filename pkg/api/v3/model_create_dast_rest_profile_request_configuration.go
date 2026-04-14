@@ -28,12 +28,7 @@ func (dst *CreateDastRestProfileRequestConfiguration) UnmarshalJSON(data []byte)
 	// try to unmarshal JSON data into CreateDastRestProfileRequestConfigurationAnyOf
 	err = json.Unmarshal(data, &dst.CreateDastRestProfileRequestConfigurationAnyOf);
 	if err == nil {
-		jsonCreateDastRestProfileRequestConfigurationAnyOf, _ := json.Marshal(dst.CreateDastRestProfileRequestConfigurationAnyOf)
-		if string(jsonCreateDastRestProfileRequestConfigurationAnyOf) == "{}" { // empty struct
-			dst.CreateDastRestProfileRequestConfigurationAnyOf = nil
-		} else {
-			return nil // data stored in dst.CreateDastRestProfileRequestConfigurationAnyOf, return on the first match
-		}
+		return nil // first match
 	} else {
 		dst.CreateDastRestProfileRequestConfigurationAnyOf = nil
 	}
