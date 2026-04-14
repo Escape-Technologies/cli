@@ -15,6 +15,7 @@ import (
 )
 
 var scanProfileIDs []string
+var scanProjectIDs []string
 var scanAfter string
 var scanBefore string
 var scanIgnored string
@@ -102,6 +103,7 @@ ID                                      CREATED AT                           KIN
 
 		filters := &escape.ListScansFilters{
 			ProfileIDs: &scanProfileIDs,
+			ProjectIDs: &scanProjectIDs,
 			After:      scanAfter,
 			Before:     scanBefore,
 			Ignored:    scanIgnored,
@@ -173,8 +175,19 @@ ID                                      CREATED AT                           KIN
 			return fmt.Errorf("unable to get scan: %w", err)
 		}
 		out.Table(scan, func() []string {
-			res := []string{"ID\tCREATED AT\tKIND\tSTATUS\tPROGRESS\tLINK"}
-			res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%f\t%s", scan.GetId(), scan.GetCreatedAt(), scan.GetKind(), scan.GetStatus(), scan.GetProgressRatio(), scan.GetLinks().ScanIssues))
+			res := []string{"ID\tCREATED AT\tKIND\tSTATUS\tPROGRESS\tSCORE\tCOVERAGE\tCOMMIT BRANCH\tCOMMIT HASH\tLINK"}
+			res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%d%%\t%.0f\t%.0f%%\t%s\t%s\t%s",
+				scan.GetId(),
+				scan.GetCreatedAt(),
+				scan.GetKind(),
+				scan.GetStatus(),
+				int(scan.GetProgressRatio()*100), //nolint:mnd
+				scan.GetScore(),
+				scan.GetCoverage()*100, //nolint:mnd
+				scan.GetCommitBranch(),
+				scan.GetCommitHash(),
+				scan.GetLinks().ScanIssues,
+			))
 			return res
 		})
 		return nil
@@ -609,9 +622,90 @@ ID                                      SEVERITY    CATEGORY                  NA
 	},
 }
 
+var (
+	scanTargetsType string
+	scanTargetsSize int
+)
+
+var scanTargetsCmd = &cobra.Command{
+	Use:     "targets scan-id",
+	Aliases: []string{"target"},
+	Short:   "List API targets discovered during a scan",
+	Long: `List Scan Targets - View Discovered Endpoints
+
+Display all API endpoints and GraphQL resolvers discovered and tested
+during a scan. Useful for coverage analysis and CI/CD quality gates.
+
+FILTER OPTIONS:
+  --type    Filter by target type: API_ROUTE, GRAPHQL_RESOLVER
+  --size    Limit number of results`,
+	Example: `  # List all targets for a scan
+  escape-cli scans targets <scan-id>
+
+  # List only REST endpoints
+  escape-cli scans targets <scan-id> --type API_ROUTE
+
+  # Export to JSON for coverage reporting
+  escape-cli scans targets <scan-id> -o json`,
+	Args: func(cmd *cobra.Command, args []string) error {
+		if len(args) != 1 {
+			_ = cmd.Help()
+			return errors.New("scan ID is required")
+		}
+		return nil
+	},
+	RunE: func(cmd *cobra.Command, args []string) error {
+		if out.Schema([]v3.TargetDetailed{}) {
+			return nil
+		}
+
+		targets, next, err := escape.ListScanTargets(cmd.Context(), args[0], "", scanTargetsType, scanTargetsSize)
+		if err != nil {
+			return fmt.Errorf("unable to list targets: %w", err)
+		}
+		all := targets
+		for next != nil && *next != "" {
+			targets, next, err = escape.ListScanTargets(cmd.Context(), args[0], *next, scanTargetsType, scanTargetsSize)
+			if err != nil {
+				return fmt.Errorf("unable to list targets: %w", err)
+			}
+			all = append(all, targets...)
+		}
+
+		out.Table(all, func() []string {
+			res := []string{"ID\tTYPE\tNAME\tREQUESTS\tCOVERAGE"}
+			for _, t := range all {
+				targetType := "UNKNOWN"
+				name := ""
+				var requestCount float32
+				coverage := "-"
+				if ar := t.GetApiRoute(); ar.Id != "" {
+					targetType = "API_ROUTE"
+					name = fmt.Sprintf("%s %s", ar.GetOperation(), ar.GetName())
+					requestCount = ar.GetRequestCount()
+					if ar.Coverage != nil {
+						coverage = string(*ar.Coverage)
+					}
+				} else if gr := t.GetGraphqlResolver(); gr.Id != "" {
+					targetType = "GRAPHQL_RESOLVER"
+					name = fmt.Sprintf("%s.%s", gr.GetParent(), gr.GetName())
+					requestCount = gr.GetRequestCount()
+					if gr.Coverage != nil {
+						coverage = string(*gr.Coverage)
+					}
+				}
+				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%.0f\t%s", t.GetId(), targetType, name, requestCount, coverage))
+			}
+			return res
+		})
+		return nil
+	},
+}
+
 func init() {
 	scansCmd.AddCommand(scansListCmd)
 	scansListCmd.PersistentFlags().StringSliceVarP(&scanProfileIDs, "profile-id", "p", []string{}, "filter by profile ID(s) - comma-separated for multiple")
+	scansListCmd.PersistentFlags().StringSliceVar(&scanProjectIDs, "project-id", []string{}, "filter by project ID(s)")
 	scansListCmd.PersistentFlags().StringVar(&scanAfter, "after", "", "show scans created after this date (RFC3339 format, e.g., 2025-01-01T00:00:00Z)")
 	scansListCmd.PersistentFlags().StringVar(&scanBefore, "before", "", "show scans created before this date (RFC3339 format)")
 	scansListCmd.PersistentFlags().StringVar(&scanIgnored, "ignored", "", "filter by ignored status (true/false)")
@@ -625,11 +719,15 @@ func init() {
 	scanStartCmd.PersistentFlags().StringVar(&scanStartCmdCommitAuthor, "commit-author", "", "commit author name or email")
 	scanStartCmd.PersistentFlags().StringVar(&scanStartCmdCommitAuthorProfilePictureLink, "profile-picture", "", "URL to author's profile picture")
 	scanStartCmd.PersistentFlags().StringVarP(&scanStartCmdConfigurationOverride, "override", "c", "", "JSON configuration override for this scan")
+	scanStartCmd.PersistentFlags().StringVar(&scanStartCmdAdditionalProperties, "additional-properties", "", "JSON additional properties for the scan request")
 	scansCmd.AddCommand(scanStartCmd)
 	scansCmd.AddCommand(scanGetCmd)
 	scansCmd.AddCommand(scanIssuesCmd)
 	scansCmd.AddCommand(scanWatchCmd)
 	scansCmd.AddCommand(scanCancelCmd)
 	scansCmd.AddCommand(scanIgnoreCmd)
+	scansCmd.AddCommand(scanTargetsCmd)
+	scanTargetsCmd.Flags().StringVar(&scanTargetsType, "type", "", "filter by target type: API_ROUTE, GRAPHQL_RESOLVER")
+	scanTargetsCmd.Flags().IntVar(&scanTargetsSize, "size", 0, "limit number of targets returned")
 	rootCmd.AddCommand(scansCmd)
 }

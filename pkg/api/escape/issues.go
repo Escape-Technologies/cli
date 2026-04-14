@@ -42,7 +42,7 @@ func GetIssue(ctx context.Context, issueID string) (*v3.GetIssue200Response, err
 }
 
 // ListIssues lists all issues.
-func ListIssues(ctx context.Context, next string, filters *ListIssuesFilters) ([]v3.IssueSummarized, *string, error) {
+func ListIssues(ctx context.Context, next string, filters *ListIssuesFilters, sortType string, sortDirection string) ([]v3.IssueSummarized, *string, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, nil, fmt.Errorf("unable to init client: %w", err)
@@ -53,7 +53,13 @@ func ListIssues(ctx context.Context, next string, filters *ListIssuesFilters) ([
 		req = req.Cursor(next)
 	}
 
-	req = req.SortType("LAST_SEEN")
+	if sortType == "" {
+		sortType = "LAST_SEEN"
+	}
+	req = req.SortType(sortType)
+	if sortDirection != "" {
+		req = req.SortDirection(sortDirection)
+	}
 
 	if filters != nil {
 		if len(filters.Status) > 0 {
@@ -104,17 +110,20 @@ func ListIssues(ctx context.Context, next string, filters *ListIssuesFilters) ([
 	return data.Data, data.NextCursor, nil
 }
 
-// UpdateIssue updates an issue
-func UpdateIssue(ctx context.Context, issueID string, status v3.ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS) (bool, error) {
+// UpdateIssue updates an issue status with an optional comment
+func UpdateIssue(ctx context.Context, issueID string, status v3.ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS, comment string) (bool, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
 		return false, fmt.Errorf("unable to init client: %w", err)
 	}
 
+	if comment == "" {
+		comment = "Updated via CLI"
+	}
 	req := client.IssuesAPI.UpdateIssue(ctx, issueID).UpdateIssueRequest(v3.UpdateIssueRequest{
 		Status: &status,
 		AdditionalProperties: map[string]interface{}{
-			"comment": "Updated via CLI",
+			"comment": comment,
 		},
 	})
 
@@ -124,6 +133,21 @@ func UpdateIssue(ctx context.Context, issueID string, status v3.ENUMPROPERTIESDA
 	}
 
 	return true, nil
+}
+
+// CommentIssue adds a comment to an issue
+func CommentIssue(ctx context.Context, issueID string, comment string) error {
+	client, err := newAPIV3Client()
+	if err != nil {
+		return fmt.Errorf("unable to init client: %w", err)
+	}
+	_, _, err = client.IssuesAPI.CreateIssueComment(ctx, issueID).CreateIssueCommentRequest(v3.CreateIssueCommentRequest{
+		Comment: comment,
+	}).Execute()
+	if err != nil {
+		return fmt.Errorf("api error: %w", err)
+	}
+	return nil
 }
 
 // ListIssueActivities lists the activities of an issue

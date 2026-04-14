@@ -184,13 +184,67 @@ Location deleted`,
 	},
 }
 
+var (
+	locationCreateName         string
+	locationCreateSSHPublicKey string
+	locationUpdateName         string
+	locationUpdateSSHPublicKey string
+)
+
+var locationsCreateCmd = &cobra.Command{
+	Use:   "create",
+	Short: "Create a new private location",
+	Long: `Create Private Location - Register a New Scanning Agent
+
+Register a new private location in the Escape platform. After creation,
+deploy the agent using 'escape-cli locations start <name>'.`,
+	Example: `  # Create a new location
+  escape-cli locations create --name "prod-vpc" --ssh-public-key "ssh-ed25519 AAAA..."`,
+	Args: cobra.NoArgs,
+	RunE: func(cmd *cobra.Command, _ []string) error {
+		if locationCreateName == "" {
+			return fmt.Errorf("--name is required")
+		}
+
+		id, err := escape.CreateLocation(cmd.Context(), locationCreateName, locationCreateSSHPublicKey)
+		if err != nil {
+			return fmt.Errorf("failed to create location: %w", err)
+		}
+		out.Log(fmt.Sprintf("Location created: %s", id))
+		return nil
+	},
+}
+
+var locationsUpdateCmd = &cobra.Command{
+	Use:   "update location-id",
+	Short: "Update an existing location",
+	Long:  `Update Location - Modify Name or SSH Public Key`,
+	Example: `  # Update location name
+  escape-cli locations update <location-id> --name "new-name"`,
+	Args: cobra.ExactArgs(1),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		err := escape.UpdateLocation(cmd.Context(), args[0], locationUpdateName, locationUpdateSSHPublicKey)
+		if err != nil {
+			return fmt.Errorf("failed to update location: %w", err)
+		}
+		out.Log(fmt.Sprintf("Location %s updated", args[0]))
+		return nil
+	},
+}
+
 func init() {
 	locationsCmd.AddCommand(locationsListCmd)
 	locationsCmd.AddCommand(locationsGetCmd)
 	locationsCmd.AddCommand(locationsStartCmd)
 	locationsCmd.AddCommand(locationsDeleteCmd)
+	locationsCmd.AddCommand(locationsCreateCmd)
+	locationsCmd.AddCommand(locationsUpdateCmd)
 	rootCmd.AddCommand(locationsCmd)
 	locationsListCmd.Flags().StringVarP(&locationsSearch, "search", "s", "", "Search term to filter locations by")
 	locationsListCmd.Flags().BoolVarP(&locationsEnabled, "enabled", "e", false, "Filter by enabled locations")
 	locationsListCmd.Flags().StringSliceVarP(&locationsLocationTypes, "type", "t", []string{}, "Filter by location type (private, escape, repeater)")
+	locationsCreateCmd.Flags().StringVar(&locationCreateName, "name", "", "location name")
+	locationsCreateCmd.Flags().StringVar(&locationCreateSSHPublicKey, "ssh-public-key", "", "SSH public key for the location")
+	locationsUpdateCmd.Flags().StringVar(&locationUpdateName, "name", "", "new location name")
+	locationsUpdateCmd.Flags().StringVar(&locationUpdateSSHPublicKey, "ssh-public-key", "", "new SSH public key")
 }
