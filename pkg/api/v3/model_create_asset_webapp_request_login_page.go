@@ -15,45 +15,45 @@ import (
 	"fmt"
 )
 
-// checks if the CreateAssetWEBAPPRequestLoginpage type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &CreateAssetWEBAPPRequestLoginpage{}
+// checks if the CreateAssetWEBAPPRequestLoginPage type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CreateAssetWEBAPPRequestLoginPage{}
 
-// CreateAssetWEBAPPRequestLoginpage struct for CreateAssetWEBAPPRequestLoginpage
-type CreateAssetWEBAPPRequestLoginpage struct {
+// CreateAssetWEBAPPRequestLoginPage struct for CreateAssetWEBAPPRequestLoginPage
+type CreateAssetWEBAPPRequestLoginPage struct {
 	Login ENUMPROPERTIESLOGINPAGEPROPERTIESLOGIN `json:"login"`
-	Logintype []ENUMPROPERTIESLOGINPAGEPROPERTIESLOGINTYPEITEMS `json:"logintype"`
-	LoginpageUrl *string `json:"loginpage_url,omitempty"`
+	LoginType []ENUMPROPERTIESLOGINPAGEPROPERTIESLOGINTYPEITEMS `json:"login_type"`
+	LoginPageUrl *string `json:"login_page_url,omitempty"`
 	CanRegister bool `json:"can_register"`
 	RegisterPageUrl *string `json:"register_page_url,omitempty"`
 	SsoProviders []string `json:"sso_providers"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _CreateAssetWEBAPPRequestLoginpage CreateAssetWEBAPPRequestLoginpage
+type _CreateAssetWEBAPPRequestLoginPage CreateAssetWEBAPPRequestLoginPage
 
-// NewCreateAssetWEBAPPRequestLoginpage instantiates a new CreateAssetWEBAPPRequestLoginpage object
+// NewCreateAssetWEBAPPRequestLoginPage instantiates a new CreateAssetWEBAPPRequestLoginPage object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetWEBAPPRequestLoginpage(login ENUMPROPERTIESLOGINPAGEPROPERTIESLOGIN, logintype []ENUMPROPERTIESLOGINPAGEPROPERTIESLOGINTYPEITEMS, canRegister bool, ssoProviders []string) *CreateAssetWEBAPPRequestLoginpage {
-	this := CreateAssetWEBAPPRequestLoginpage{}
+func NewCreateAssetWEBAPPRequestLoginPage(login ENUMPROPERTIESLOGINPAGEPROPERTIESLOGIN, loginType []ENUMPROPERTIESLOGINPAGEPROPERTIESLOGINTYPEITEMS, canRegister bool, ssoProviders []string) *CreateAssetWEBAPPRequestLoginPage {
+	this := CreateAssetWEBAPPRequestLoginPage{}
 	this.Login = login
-	this.Logintype = logintype
+	this.LoginType = loginType
 	this.CanRegister = canRegister
 	this.SsoProviders = ssoProviders
 	return &this
 }
 
-// NewCreateAssetWEBAPPRequestLoginpageWithDefaults instantiates a new CreateAssetWEBAPPRequestLoginpage object
+// NewCreateAssetWEBAPPRequestLoginPageWithDefaults instantiates a new CreateAssetWEBAPPRequestLoginPage object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCreateAssetWEBAPPRequestLoginpageWithDefaults() *CreateAssetWEBAPPRequestLoginpage {
-	this := CreateAssetWEBAPPRequestLoginpage{}
+func NewCreateAssetWEBAPPRequestLoginPageWithDefaults() *CreateAssetWEBAPPRequestLoginPage {
+	this := CreateAssetWEBAPPRequestLoginPage{}
 	return &this
 }
 
 // GetLogin returns the Login field value
-func (o *CreateAssetWEBAPPRequestLoginpage) GetLogin() ENUMPROPERTIESLOGINPAGEPROPERTIESLOGIN {
+func (o *CreateAssetWEBAPPRequestLoginPage) GetLogin() ENUMPROPERTIESLOGINPAGEPROPERTIESLOGIN {
 	if o == nil {
 		var ret ENUMPROPERTIESLOGINPAGEPROPERTIESLOGIN
 		return ret
@@ -64,7 +64,7 @@ func (o *CreateAssetWEBAPPRequestLoginpage) GetLogin() ENUMPROPERTIESLOGINPAGEPR
 
 // GetLoginOk returns a tuple with the Login field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetWEBAPPRequestLoginpage) GetLoginOk() (*ENUMPROPERTIESLOGINPAGEPROPERTIESLOGIN, bool) {
+func (o *CreateAssetWEBAPPRequestLoginPage) GetLoginOk() (*ENUMPROPERTIESLOGINPAGEPROPERTIESLOGIN, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -72,68 +72,68 @@ func (o *CreateAssetWEBAPPRequestLoginpage) GetLoginOk() (*ENUMPROPERTIESLOGINPA
 }
 
 // SetLogin sets field value
-func (o *CreateAssetWEBAPPRequestLoginpage) SetLogin(v ENUMPROPERTIESLOGINPAGEPROPERTIESLOGIN) {
+func (o *CreateAssetWEBAPPRequestLoginPage) SetLogin(v ENUMPROPERTIESLOGINPAGEPROPERTIESLOGIN) {
 	o.Login = v
 }
 
-// GetLogintype returns the Logintype field value
-func (o *CreateAssetWEBAPPRequestLoginpage) GetLogintype() []ENUMPROPERTIESLOGINPAGEPROPERTIESLOGINTYPEITEMS {
+// GetLoginType returns the LoginType field value
+func (o *CreateAssetWEBAPPRequestLoginPage) GetLoginType() []ENUMPROPERTIESLOGINPAGEPROPERTIESLOGINTYPEITEMS {
 	if o == nil {
 		var ret []ENUMPROPERTIESLOGINPAGEPROPERTIESLOGINTYPEITEMS
 		return ret
 	}
 
-	return o.Logintype
+	return o.LoginType
 }
 
-// GetLogintypeOk returns a tuple with the Logintype field value
+// GetLoginTypeOk returns a tuple with the LoginType field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetWEBAPPRequestLoginpage) GetLogintypeOk() ([]ENUMPROPERTIESLOGINPAGEPROPERTIESLOGINTYPEITEMS, bool) {
+func (o *CreateAssetWEBAPPRequestLoginPage) GetLoginTypeOk() ([]ENUMPROPERTIESLOGINPAGEPROPERTIESLOGINTYPEITEMS, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Logintype, true
+	return o.LoginType, true
 }
 
-// SetLogintype sets field value
-func (o *CreateAssetWEBAPPRequestLoginpage) SetLogintype(v []ENUMPROPERTIESLOGINPAGEPROPERTIESLOGINTYPEITEMS) {
-	o.Logintype = v
+// SetLoginType sets field value
+func (o *CreateAssetWEBAPPRequestLoginPage) SetLoginType(v []ENUMPROPERTIESLOGINPAGEPROPERTIESLOGINTYPEITEMS) {
+	o.LoginType = v
 }
 
-// GetLoginpageUrl returns the LoginpageUrl field value if set, zero value otherwise.
-func (o *CreateAssetWEBAPPRequestLoginpage) GetLoginpageUrl() string {
-	if o == nil || IsNil(o.LoginpageUrl) {
+// GetLoginPageUrl returns the LoginPageUrl field value if set, zero value otherwise.
+func (o *CreateAssetWEBAPPRequestLoginPage) GetLoginPageUrl() string {
+	if o == nil || IsNil(o.LoginPageUrl) {
 		var ret string
 		return ret
 	}
-	return *o.LoginpageUrl
+	return *o.LoginPageUrl
 }
 
-// GetLoginpageUrlOk returns a tuple with the LoginpageUrl field value if set, nil otherwise
+// GetLoginPageUrlOk returns a tuple with the LoginPageUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetWEBAPPRequestLoginpage) GetLoginpageUrlOk() (*string, bool) {
-	if o == nil || IsNil(o.LoginpageUrl) {
+func (o *CreateAssetWEBAPPRequestLoginPage) GetLoginPageUrlOk() (*string, bool) {
+	if o == nil || IsNil(o.LoginPageUrl) {
 		return nil, false
 	}
-	return o.LoginpageUrl, true
+	return o.LoginPageUrl, true
 }
 
-// HasLoginpageUrl returns a boolean if a field has been set.
-func (o *CreateAssetWEBAPPRequestLoginpage) HasLoginpageUrl() bool {
-	if o != nil && !IsNil(o.LoginpageUrl) {
+// HasLoginPageUrl returns a boolean if a field has been set.
+func (o *CreateAssetWEBAPPRequestLoginPage) HasLoginPageUrl() bool {
+	if o != nil && !IsNil(o.LoginPageUrl) {
 		return true
 	}
 
 	return false
 }
 
-// SetLoginpageUrl gets a reference to the given string and assigns it to the LoginpageUrl field.
-func (o *CreateAssetWEBAPPRequestLoginpage) SetLoginpageUrl(v string) {
-	o.LoginpageUrl = &v
+// SetLoginPageUrl gets a reference to the given string and assigns it to the LoginPageUrl field.
+func (o *CreateAssetWEBAPPRequestLoginPage) SetLoginPageUrl(v string) {
+	o.LoginPageUrl = &v
 }
 
 // GetCanRegister returns the CanRegister field value
-func (o *CreateAssetWEBAPPRequestLoginpage) GetCanRegister() bool {
+func (o *CreateAssetWEBAPPRequestLoginPage) GetCanRegister() bool {
 	if o == nil {
 		var ret bool
 		return ret
@@ -144,7 +144,7 @@ func (o *CreateAssetWEBAPPRequestLoginpage) GetCanRegister() bool {
 
 // GetCanRegisterOk returns a tuple with the CanRegister field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetWEBAPPRequestLoginpage) GetCanRegisterOk() (*bool, bool) {
+func (o *CreateAssetWEBAPPRequestLoginPage) GetCanRegisterOk() (*bool, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -152,12 +152,12 @@ func (o *CreateAssetWEBAPPRequestLoginpage) GetCanRegisterOk() (*bool, bool) {
 }
 
 // SetCanRegister sets field value
-func (o *CreateAssetWEBAPPRequestLoginpage) SetCanRegister(v bool) {
+func (o *CreateAssetWEBAPPRequestLoginPage) SetCanRegister(v bool) {
 	o.CanRegister = v
 }
 
 // GetRegisterPageUrl returns the RegisterPageUrl field value if set, zero value otherwise.
-func (o *CreateAssetWEBAPPRequestLoginpage) GetRegisterPageUrl() string {
+func (o *CreateAssetWEBAPPRequestLoginPage) GetRegisterPageUrl() string {
 	if o == nil || IsNil(o.RegisterPageUrl) {
 		var ret string
 		return ret
@@ -167,7 +167,7 @@ func (o *CreateAssetWEBAPPRequestLoginpage) GetRegisterPageUrl() string {
 
 // GetRegisterPageUrlOk returns a tuple with the RegisterPageUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetWEBAPPRequestLoginpage) GetRegisterPageUrlOk() (*string, bool) {
+func (o *CreateAssetWEBAPPRequestLoginPage) GetRegisterPageUrlOk() (*string, bool) {
 	if o == nil || IsNil(o.RegisterPageUrl) {
 		return nil, false
 	}
@@ -175,7 +175,7 @@ func (o *CreateAssetWEBAPPRequestLoginpage) GetRegisterPageUrlOk() (*string, boo
 }
 
 // HasRegisterPageUrl returns a boolean if a field has been set.
-func (o *CreateAssetWEBAPPRequestLoginpage) HasRegisterPageUrl() bool {
+func (o *CreateAssetWEBAPPRequestLoginPage) HasRegisterPageUrl() bool {
 	if o != nil && !IsNil(o.RegisterPageUrl) {
 		return true
 	}
@@ -184,12 +184,12 @@ func (o *CreateAssetWEBAPPRequestLoginpage) HasRegisterPageUrl() bool {
 }
 
 // SetRegisterPageUrl gets a reference to the given string and assigns it to the RegisterPageUrl field.
-func (o *CreateAssetWEBAPPRequestLoginpage) SetRegisterPageUrl(v string) {
+func (o *CreateAssetWEBAPPRequestLoginPage) SetRegisterPageUrl(v string) {
 	o.RegisterPageUrl = &v
 }
 
 // GetSsoProviders returns the SsoProviders field value
-func (o *CreateAssetWEBAPPRequestLoginpage) GetSsoProviders() []string {
+func (o *CreateAssetWEBAPPRequestLoginPage) GetSsoProviders() []string {
 	if o == nil {
 		var ret []string
 		return ret
@@ -200,7 +200,7 @@ func (o *CreateAssetWEBAPPRequestLoginpage) GetSsoProviders() []string {
 
 // GetSsoProvidersOk returns a tuple with the SsoProviders field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetWEBAPPRequestLoginpage) GetSsoProvidersOk() ([]string, bool) {
+func (o *CreateAssetWEBAPPRequestLoginPage) GetSsoProvidersOk() ([]string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -208,11 +208,11 @@ func (o *CreateAssetWEBAPPRequestLoginpage) GetSsoProvidersOk() ([]string, bool)
 }
 
 // SetSsoProviders sets field value
-func (o *CreateAssetWEBAPPRequestLoginpage) SetSsoProviders(v []string) {
+func (o *CreateAssetWEBAPPRequestLoginPage) SetSsoProviders(v []string) {
 	o.SsoProviders = v
 }
 
-func (o CreateAssetWEBAPPRequestLoginpage) MarshalJSON() ([]byte, error) {
+func (o CreateAssetWEBAPPRequestLoginPage) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -220,12 +220,12 @@ func (o CreateAssetWEBAPPRequestLoginpage) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CreateAssetWEBAPPRequestLoginpage) ToMap() (map[string]interface{}, error) {
+func (o CreateAssetWEBAPPRequestLoginPage) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["login"] = o.Login
-	toSerialize["logintype"] = o.Logintype
-	if !IsNil(o.LoginpageUrl) {
-		toSerialize["loginpage_url"] = o.LoginpageUrl
+	toSerialize["login_type"] = o.LoginType
+	if !IsNil(o.LoginPageUrl) {
+		toSerialize["login_page_url"] = o.LoginPageUrl
 	}
 	toSerialize["can_register"] = o.CanRegister
 	if !IsNil(o.RegisterPageUrl) {
@@ -240,13 +240,13 @@ func (o CreateAssetWEBAPPRequestLoginpage) ToMap() (map[string]interface{}, erro
 	return toSerialize, nil
 }
 
-func (o *CreateAssetWEBAPPRequestLoginpage) UnmarshalJSON(data []byte) (err error) {
+func (o *CreateAssetWEBAPPRequestLoginPage) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"login",
-		"logintype",
+		"login_type",
 		"can_register",
 		"sso_providers",
 	}
@@ -265,22 +265,22 @@ func (o *CreateAssetWEBAPPRequestLoginpage) UnmarshalJSON(data []byte) (err erro
 		}
 	}
 
-	varCreateAssetWEBAPPRequestLoginpage := _CreateAssetWEBAPPRequestLoginpage{}
+	varCreateAssetWEBAPPRequestLoginPage := _CreateAssetWEBAPPRequestLoginPage{}
 
-	err = json.Unmarshal(data, &varCreateAssetWEBAPPRequestLoginpage)
+	err = json.Unmarshal(data, &varCreateAssetWEBAPPRequestLoginPage)
 
 	if err != nil {
 		return err
 	}
 
-	*o = CreateAssetWEBAPPRequestLoginpage(varCreateAssetWEBAPPRequestLoginpage)
+	*o = CreateAssetWEBAPPRequestLoginPage(varCreateAssetWEBAPPRequestLoginPage)
 
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "login")
-		delete(additionalProperties, "logintype")
-		delete(additionalProperties, "loginpage_url")
+		delete(additionalProperties, "login_type")
+		delete(additionalProperties, "login_page_url")
 		delete(additionalProperties, "can_register")
 		delete(additionalProperties, "register_page_url")
 		delete(additionalProperties, "sso_providers")
@@ -290,38 +290,38 @@ func (o *CreateAssetWEBAPPRequestLoginpage) UnmarshalJSON(data []byte) (err erro
 	return err
 }
 
-type NullableCreateAssetWEBAPPRequestLoginpage struct {
-	value *CreateAssetWEBAPPRequestLoginpage
+type NullableCreateAssetWEBAPPRequestLoginPage struct {
+	value *CreateAssetWEBAPPRequestLoginPage
 	isSet bool
 }
 
-func (v NullableCreateAssetWEBAPPRequestLoginpage) Get() *CreateAssetWEBAPPRequestLoginpage {
+func (v NullableCreateAssetWEBAPPRequestLoginPage) Get() *CreateAssetWEBAPPRequestLoginPage {
 	return v.value
 }
 
-func (v *NullableCreateAssetWEBAPPRequestLoginpage) Set(val *CreateAssetWEBAPPRequestLoginpage) {
+func (v *NullableCreateAssetWEBAPPRequestLoginPage) Set(val *CreateAssetWEBAPPRequestLoginPage) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCreateAssetWEBAPPRequestLoginpage) IsSet() bool {
+func (v NullableCreateAssetWEBAPPRequestLoginPage) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCreateAssetWEBAPPRequestLoginpage) Unset() {
+func (v *NullableCreateAssetWEBAPPRequestLoginPage) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCreateAssetWEBAPPRequestLoginpage(val *CreateAssetWEBAPPRequestLoginpage) *NullableCreateAssetWEBAPPRequestLoginpage {
-	return &NullableCreateAssetWEBAPPRequestLoginpage{value: val, isSet: true}
+func NewNullableCreateAssetWEBAPPRequestLoginPage(val *CreateAssetWEBAPPRequestLoginPage) *NullableCreateAssetWEBAPPRequestLoginPage {
+	return &NullableCreateAssetWEBAPPRequestLoginPage{value: val, isSet: true}
 }
 
-func (v NullableCreateAssetWEBAPPRequestLoginpage) MarshalJSON() ([]byte, error) {
+func (v NullableCreateAssetWEBAPPRequestLoginPage) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCreateAssetWEBAPPRequestLoginpage) UnmarshalJSON(src []byte) error {
+func (v *NullableCreateAssetWEBAPPRequestLoginPage) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

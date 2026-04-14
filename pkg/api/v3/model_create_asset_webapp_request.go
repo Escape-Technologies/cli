@@ -44,7 +44,7 @@ type CreateAssetWEBAPPRequest struct {
 	ThirdParty *ENUMPROPERTIESTHIRDPARTY `json:"third_party,omitempty"`
 	Ips []string `json:"ips,omitempty"`
 	RegionCountryCodes []string `json:"region_country_codes,omitempty"`
-	Loginpage *CreateAssetWEBAPPRequestLoginpage `json:"loginpage,omitempty"`
+	LoginPage *CreateAssetWEBAPPRequestLoginPage `json:"login_page,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -750,36 +750,36 @@ func (o *CreateAssetWEBAPPRequest) SetRegionCountryCodes(v []string) {
 	o.RegionCountryCodes = v
 }
 
-// GetLoginpage returns the Loginpage field value if set, zero value otherwise.
-func (o *CreateAssetWEBAPPRequest) GetLoginpage() CreateAssetWEBAPPRequestLoginpage {
-	if o == nil || IsNil(o.Loginpage) {
-		var ret CreateAssetWEBAPPRequestLoginpage
+// GetLoginPage returns the LoginPage field value if set, zero value otherwise.
+func (o *CreateAssetWEBAPPRequest) GetLoginPage() CreateAssetWEBAPPRequestLoginPage {
+	if o == nil || IsNil(o.LoginPage) {
+		var ret CreateAssetWEBAPPRequestLoginPage
 		return ret
 	}
-	return *o.Loginpage
+	return *o.LoginPage
 }
 
-// GetLoginpageOk returns a tuple with the Loginpage field value if set, nil otherwise
+// GetLoginPageOk returns a tuple with the LoginPage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetWEBAPPRequest) GetLoginpageOk() (*CreateAssetWEBAPPRequestLoginpage, bool) {
-	if o == nil || IsNil(o.Loginpage) {
+func (o *CreateAssetWEBAPPRequest) GetLoginPageOk() (*CreateAssetWEBAPPRequestLoginPage, bool) {
+	if o == nil || IsNil(o.LoginPage) {
 		return nil, false
 	}
-	return o.Loginpage, true
+	return o.LoginPage, true
 }
 
-// HasLoginpage returns a boolean if a field has been set.
-func (o *CreateAssetWEBAPPRequest) HasLoginpage() bool {
-	if o != nil && !IsNil(o.Loginpage) {
+// HasLoginPage returns a boolean if a field has been set.
+func (o *CreateAssetWEBAPPRequest) HasLoginPage() bool {
+	if o != nil && !IsNil(o.LoginPage) {
 		return true
 	}
 
 	return false
 }
 
-// SetLoginpage gets a reference to the given CreateAssetWEBAPPRequestLoginpage and assigns it to the Loginpage field.
-func (o *CreateAssetWEBAPPRequest) SetLoginpage(v CreateAssetWEBAPPRequestLoginpage) {
-	o.Loginpage = &v
+// SetLoginPage gets a reference to the given CreateAssetWEBAPPRequestLoginPage and assigns it to the LoginPage field.
+func (o *CreateAssetWEBAPPRequest) SetLoginPage(v CreateAssetWEBAPPRequestLoginPage) {
+	o.LoginPage = &v
 }
 
 func (o CreateAssetWEBAPPRequest) MarshalJSON() ([]byte, error) {
@@ -852,8 +852,8 @@ func (o CreateAssetWEBAPPRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.RegionCountryCodes) {
 		toSerialize["region_country_codes"] = o.RegionCountryCodes
 	}
-	if !IsNil(o.Loginpage) {
-		toSerialize["loginpage"] = o.Loginpage
+	if !IsNil(o.LoginPage) {
+		toSerialize["login_page"] = o.LoginPage
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -922,7 +922,7 @@ func (o *CreateAssetWEBAPPRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "third_party")
 		delete(additionalProperties, "ips")
 		delete(additionalProperties, "region_country_codes")
-		delete(additionalProperties, "loginpage")
+		delete(additionalProperties, "login_page")
 		o.AdditionalProperties = additionalProperties
 	}
 
