@@ -1,42 +1,81 @@
 # Escape CLI
 
-[Escape](https://escape.tech) is a comprehensive API security platform with powerful API security testing capabilities.
-This repository holds the code for the `escape-cli` tool to interact with the Escape API.
+The official CLI for [Escape](https://escape.tech) — an AI-powered offensive security platform for APIs and web applications.
 
-## GitHub Action
+Two main use cases:
+- **Security scanning** — trigger scans, manage vulnerabilities, and integrate Escape into CI/CD pipelines
+- **Private Location** — run a self-hosted tunnel to reach APIs inside private networks
 
-Run Escape directly in GitHub Actions. The action pulls the [`escapetech/cli`](https://hub.docker.com/r/escapetech/cli) image and runs it via `docker` on the runner (supported on GitHub-hosted `ubuntu-latest` and other environments where Docker is available). Pin a version tag of this repository (for example `v1`) in `uses:`.
+Full documentation: [docs.escape.tech/documentation/tooling/cli](https://docs.escape.tech/documentation/tooling/cli)
 
-We recommend providing these values as [encrypted secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets).
+## Installation
 
-### Required inputs
+**Binary** (Linux, macOS, Windows): download from [GitHub Releases](https://github.com/Escape-Technologies/cli/releases/latest).
 
-- `profile_id`: The Escape profile to scan
-- `api_key`: Your Escape API key
+**Docker:**
+```bash
+docker pull escapetech/cli:latest
+```
 
-### Optional inputs
+**Helm** (for Private Location on Kubernetes):
+```bash
+helm install escape-location ./helm \
+  --set ESCAPE_API_KEY=<your-api-key> \
+  --set ESCAPE_PRIVATE_LOCATION=<location-name>
+```
 
-- `watch`: Wait for scan completion (`"true"` / `"false"`)
-- `configuration_override`: JSON override of the scan configuration
-- `schema`: Local path or public URL to update the application schema before the scan
+## Authentication
 
-### Example workflow
+```bash
+export ESCAPE_API_KEY=your_api_key_here
+```
+
+## Quick Start
+
+```bash
+# Start a scan and wait for results
+escape-cli scans start <profile-id> --watch
+
+# Review discovered issues
+escape-cli issues list --severity CRITICAL,HIGH --status OPEN
+```
+
+## Private Location
+
+Private Location is a self-hosted tunnel that lets Escape reach APIs that are not publicly accessible — behind firewalls, in private VPCs, or in Kubernetes clusters.
+
+```bash
+# Start a Private Location
+escape-cli locations start <location-name>
+```
+
+For Kubernetes, use the provided Helm chart. See [`helm/values.yaml`](./helm/values.yaml) for configuration options including existing secrets and K8s integration.
+
+## GitHub Actions
 
 ```yaml
-name: Escape
-
-on:
-  push:
-    branches:
-      - main
-
-jobs:
-  escape:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Escape scan
-        uses: Escape-Technologies/cli@v1
-        with:
-          profile_id: ${{ secrets.ESCAPE_PROFILE_ID }}
-          api_key: ${{ secrets.ESCAPE_API_KEY }}
+- name: Escape scan
+  uses: Escape-Technologies/cli@v1
+  with:
+    profile_id: ${{ secrets.ESCAPE_PROFILE_ID }}
+    api_key: ${{ secrets.ESCAPE_API_KEY }}
+    watch: "true"
 ```
+
+Optional inputs: `schema` (path or URL to update the API schema before the scan), `configuration_override` (partial JSON config).
+
+## Commands
+
+```
+scans       Run and manage security scans
+issues      Manage and track security vulnerabilities
+profiles    Configure security testing profiles
+assets      Manage your API inventory
+locations   Manage Private Locations
+tags        Organize resources with tags
+upload      Upload schema files (OpenAPI, GraphQL, Postman)
+audit       View audit logs
+version     Display CLI version
+```
+
+Global flags: `-o json|yaml|schema` for machine-readable output, `-v/-vv/-vvv` for verbosity.
