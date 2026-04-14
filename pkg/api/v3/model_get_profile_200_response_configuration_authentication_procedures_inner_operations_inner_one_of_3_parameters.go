@@ -24,7 +24,7 @@ type GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsIn
 	LoginUrl                string                                                                                                         `json:"login_url"`
 	AutoExtractionUrls      []string                                                                                                       `json:"auto_extraction_urls,omitempty"`
 	LoggedInDetectorText    *string                                                                                                        `json:"logged_in_detector_text,omitempty"`
-	LoggedInDetectorTimeout *int                                                                                                           `json:"logged_in_detector_timeout,omitempty"`
+	LoggedInDetectorTimeout *float32                                                                                                       `json:"logged_in_detector_timeout,omitempty"`
 	StealthMode             *bool                                                                                                          `json:"stealth_mode,omitempty"`
 	LogoutDetection         *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersLogoutDetection `json:"logout_detection,omitempty"`
 	AdditionalProperties    map[string]interface{}
@@ -171,9 +171,9 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 }
 
 // GetLoggedInDetectorTimeout returns the LoggedInDetectorTimeout field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf3Parameters) GetLoggedInDetectorTimeout() int {
+func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf3Parameters) GetLoggedInDetectorTimeout() float32 {
 	if o == nil || IsNil(o.LoggedInDetectorTimeout) {
-		var ret int
+		var ret float32
 		return ret
 	}
 	return *o.LoggedInDetectorTimeout
@@ -181,7 +181,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 
 // GetLoggedInDetectorTimeoutOk returns a tuple with the LoggedInDetectorTimeout field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf3Parameters) GetLoggedInDetectorTimeoutOk() (*int, bool) {
+func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf3Parameters) GetLoggedInDetectorTimeoutOk() (*float32, bool) {
 	if o == nil || IsNil(o.LoggedInDetectorTimeout) {
 		return nil, false
 	}
@@ -197,8 +197,8 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 	return false
 }
 
-// SetLoggedInDetectorTimeout gets a reference to the given int and assigns it to the LoggedInDetectorTimeout field.
-func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf3Parameters) SetLoggedInDetectorTimeout(v int) {
+// SetLoggedInDetectorTimeout gets a reference to the given float32 and assigns it to the LoggedInDetectorTimeout field.
+func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf3Parameters) SetLoggedInDetectorTimeout(v float32) {
 	o.LoggedInDetectorTimeout = &v
 }
 

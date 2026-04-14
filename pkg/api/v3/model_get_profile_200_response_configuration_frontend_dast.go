@@ -22,12 +22,12 @@ type GetProfile200ResponseConfigurationFrontendDast struct {
 	CustomData            map[string]string                                                                       `json:"custom_data,omitempty"`
 	LocationId            *string                                                                                 `json:"location_id,omitempty"`
 	Mode                  *ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE                        `json:"mode,omitempty"`
-	MaxDuration           *int                                                                                    `json:"max_duration,omitempty"`
+	MaxDuration           *float32                                                                                `json:"max_duration,omitempty"`
 	Hotstart              []string                                                                                `json:"hotstart,omitempty"`
 	SecurityChecksEnabled []ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSECURITYCHECKSENABLEDITEMS `json:"security_checks_enabled,omitempty"`
 	ApiChecksDuringAuth   *bool                                                                                   `json:"api_checks_during_auth,omitempty"`
 	SinglePageWorker      *bool                                                                                   `json:"single_page_worker,omitempty"`
-	ParallelWorkers       *int                                                                                    `json:"parallel_workers,omitempty"`
+	ParallelWorkers       *float32                                                                                `json:"parallel_workers,omitempty"`
 	RelaxCorsSecurity     *bool                                                                                   `json:"relax_cors_security,omitempty"`
 	UserAgent             *string                                                                                 `json:"user_agent,omitempty"`
 	EscapeUserHeader      *bool                                                                                   `json:"escape_user_header,omitempty"`
@@ -157,9 +157,9 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) SetMode(v ENUMPROPERTIE
 }
 
 // GetMaxDuration returns the MaxDuration field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationFrontendDast) GetMaxDuration() int {
+func (o *GetProfile200ResponseConfigurationFrontendDast) GetMaxDuration() float32 {
 	if o == nil || IsNil(o.MaxDuration) {
-		var ret int
+		var ret float32
 		return ret
 	}
 	return *o.MaxDuration
@@ -167,7 +167,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) GetMaxDuration() int {
 
 // GetMaxDurationOk returns a tuple with the MaxDuration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationFrontendDast) GetMaxDurationOk() (*int, bool) {
+func (o *GetProfile200ResponseConfigurationFrontendDast) GetMaxDurationOk() (*float32, bool) {
 	if o == nil || IsNil(o.MaxDuration) {
 		return nil, false
 	}
@@ -183,8 +183,8 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) HasMaxDuration() bool {
 	return false
 }
 
-// SetMaxDuration gets a reference to the given int and assigns it to the MaxDuration field.
-func (o *GetProfile200ResponseConfigurationFrontendDast) SetMaxDuration(v int) {
+// SetMaxDuration gets a reference to the given float32 and assigns it to the MaxDuration field.
+func (o *GetProfile200ResponseConfigurationFrontendDast) SetMaxDuration(v float32) {
 	o.MaxDuration = &v
 }
 
@@ -317,9 +317,9 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) SetSinglePageWorker(v b
 }
 
 // GetParallelWorkers returns the ParallelWorkers field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationFrontendDast) GetParallelWorkers() int {
+func (o *GetProfile200ResponseConfigurationFrontendDast) GetParallelWorkers() float32 {
 	if o == nil || IsNil(o.ParallelWorkers) {
-		var ret int
+		var ret float32
 		return ret
 	}
 	return *o.ParallelWorkers
@@ -327,7 +327,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) GetParallelWorkers() in
 
 // GetParallelWorkersOk returns a tuple with the ParallelWorkers field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationFrontendDast) GetParallelWorkersOk() (*int, bool) {
+func (o *GetProfile200ResponseConfigurationFrontendDast) GetParallelWorkersOk() (*float32, bool) {
 	if o == nil || IsNil(o.ParallelWorkers) {
 		return nil, false
 	}
@@ -343,8 +343,8 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) HasParallelWorkers() bo
 	return false
 }
 
-// SetParallelWorkers gets a reference to the given int and assigns it to the ParallelWorkers field.
-func (o *GetProfile200ResponseConfigurationFrontendDast) SetParallelWorkers(v int) {
+// SetParallelWorkers gets a reference to the given float32 and assigns it to the ParallelWorkers field.
+func (o *GetProfile200ResponseConfigurationFrontendDast) SetParallelWorkers(v float32) {
 	o.ParallelWorkers = &v
 }
 

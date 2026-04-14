@@ -19,8 +19,8 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationFrontendDastStaticCraw
 
 // GetProfile200ResponseConfigurationFrontendDastStaticCrawling struct for GetProfile200ResponseConfigurationFrontendDastStaticCrawling
 type GetProfile200ResponseConfigurationFrontendDastStaticCrawling struct {
-	Enabled              *bool `json:"enabled,omitempty"`
-	TimeLimitSeconds     *int  `json:"time_limit_seconds,omitempty"`
+	Enabled              *bool    `json:"enabled,omitempty"`
+	TimeLimitSeconds     *float32 `json:"time_limit_seconds,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -76,9 +76,9 @@ func (o *GetProfile200ResponseConfigurationFrontendDastStaticCrawling) SetEnable
 }
 
 // GetTimeLimitSeconds returns the TimeLimitSeconds field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationFrontendDastStaticCrawling) GetTimeLimitSeconds() int {
+func (o *GetProfile200ResponseConfigurationFrontendDastStaticCrawling) GetTimeLimitSeconds() float32 {
 	if o == nil || IsNil(o.TimeLimitSeconds) {
-		var ret int
+		var ret float32
 		return ret
 	}
 	return *o.TimeLimitSeconds
@@ -86,7 +86,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDastStaticCrawling) GetTimeLi
 
 // GetTimeLimitSecondsOk returns a tuple with the TimeLimitSeconds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationFrontendDastStaticCrawling) GetTimeLimitSecondsOk() (*int, bool) {
+func (o *GetProfile200ResponseConfigurationFrontendDastStaticCrawling) GetTimeLimitSecondsOk() (*float32, bool) {
 	if o == nil || IsNil(o.TimeLimitSeconds) {
 		return nil, false
 	}
@@ -102,8 +102,8 @@ func (o *GetProfile200ResponseConfigurationFrontendDastStaticCrawling) HasTimeLi
 	return false
 }
 
-// SetTimeLimitSeconds gets a reference to the given int and assigns it to the TimeLimitSeconds field.
-func (o *GetProfile200ResponseConfigurationFrontendDastStaticCrawling) SetTimeLimitSeconds(v int) {
+// SetTimeLimitSeconds gets a reference to the given float32 and assigns it to the TimeLimitSeconds field.
+func (o *GetProfile200ResponseConfigurationFrontendDastStaticCrawling) SetTimeLimitSeconds(v float32) {
 	o.TimeLimitSeconds = &v
 }
 

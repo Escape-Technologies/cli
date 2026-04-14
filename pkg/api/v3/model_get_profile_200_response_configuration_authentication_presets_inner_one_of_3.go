@@ -29,7 +29,7 @@ type GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf3 struct {
 	RedirectUri          string                                                                                                         `json:"redirect_uri"`
 	Scopes               []string                                                                                                       `json:"scopes,omitempty"`
 	UsePkce              bool                                                                                                           `json:"use_pkce"`
-	LoginTimeout         *int                                                                                                           `json:"login_timeout,omitempty"`
+	LoginTimeout         *float32                                                                                                       `json:"login_timeout,omitempty"`
 	LogoutDetection      *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersLogoutDetection `json:"logout_detection,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -286,9 +286,9 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf3) Set
 }
 
 // GetLoginTimeout returns the LoginTimeout field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf3) GetLoginTimeout() int {
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf3) GetLoginTimeout() float32 {
 	if o == nil || IsNil(o.LoginTimeout) {
-		var ret int
+		var ret float32
 		return ret
 	}
 	return *o.LoginTimeout
@@ -296,7 +296,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf3) Get
 
 // GetLoginTimeoutOk returns a tuple with the LoginTimeout field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf3) GetLoginTimeoutOk() (*int, bool) {
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf3) GetLoginTimeoutOk() (*float32, bool) {
 	if o == nil || IsNil(o.LoginTimeout) {
 		return nil, false
 	}
@@ -312,8 +312,8 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf3) Has
 	return false
 }
 
-// SetLoginTimeout gets a reference to the given int and assigns it to the LoginTimeout field.
-func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf3) SetLoginTimeout(v int) {
+// SetLoginTimeout gets a reference to the given float32 and assigns it to the LoginTimeout field.
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf3) SetLoginTimeout(v float32) {
 	o.LoginTimeout = &v
 }
 

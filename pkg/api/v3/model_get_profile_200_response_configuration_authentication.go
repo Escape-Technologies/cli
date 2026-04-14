@@ -20,7 +20,7 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationAuthentication{}
 // GetProfile200ResponseConfigurationAuthentication struct for GetProfile200ResponseConfigurationAuthentication
 type GetProfile200ResponseConfigurationAuthentication struct {
 	Schema               *string                                                           `json:"$schema,omitempty"`
-	Lifetime             *int                                                              `json:"lifetime,omitempty"`
+	Lifetime             *float32                                                          `json:"lifetime,omitempty"`
 	Procedures           []GetProfile200ResponseConfigurationAuthenticationProceduresInner `json:"procedures,omitempty"`
 	Users                []GetProfile200ResponseConfigurationAuthenticationUsersInner      `json:"users,omitempty"`
 	Validation           *bool                                                             `json:"validation,omitempty"`
@@ -82,9 +82,9 @@ func (o *GetProfile200ResponseConfigurationAuthentication) SetSchema(v string) {
 }
 
 // GetLifetime returns the Lifetime field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationAuthentication) GetLifetime() int {
+func (o *GetProfile200ResponseConfigurationAuthentication) GetLifetime() float32 {
 	if o == nil || IsNil(o.Lifetime) {
-		var ret int
+		var ret float32
 		return ret
 	}
 	return *o.Lifetime
@@ -92,7 +92,7 @@ func (o *GetProfile200ResponseConfigurationAuthentication) GetLifetime() int {
 
 // GetLifetimeOk returns a tuple with the Lifetime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationAuthentication) GetLifetimeOk() (*int, bool) {
+func (o *GetProfile200ResponseConfigurationAuthentication) GetLifetimeOk() (*float32, bool) {
 	if o == nil || IsNil(o.Lifetime) {
 		return nil, false
 	}
@@ -108,8 +108,8 @@ func (o *GetProfile200ResponseConfigurationAuthentication) HasLifetime() bool {
 	return false
 }
 
-// SetLifetime gets a reference to the given int and assigns it to the Lifetime field.
-func (o *GetProfile200ResponseConfigurationAuthentication) SetLifetime(v int) {
+// SetLifetime gets a reference to the given float32 and assigns it to the Lifetime field.
+func (o *GetProfile200ResponseConfigurationAuthentication) SetLifetime(v float32) {
 	o.Lifetime = &v
 }
 
