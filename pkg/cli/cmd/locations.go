@@ -203,14 +203,14 @@ deploy the agent using 'escape-cli locations start <name>'.`,
 	Args: cobra.NoArgs,
 	RunE: func(cmd *cobra.Command, _ []string) error {
 		if locationCreateName == "" {
-			return fmt.Errorf("--name is required")
+			return errors.New("--name is required")
 		}
 
 		id, err := escape.CreateLocation(cmd.Context(), locationCreateName, locationCreateSSHPublicKey)
 		if err != nil {
 			return fmt.Errorf("failed to create location: %w", err)
 		}
-		out.Log(fmt.Sprintf("Location created: %s", id))
+		out.Log("Location created: " + id)
 		return nil
 	},
 }
