@@ -34,7 +34,7 @@ type CreateAssetCODEPROJECTRequestRepositoryOneOf1 struct {
 	LastCommit           *CreateAssetGITLABREPOSITORYRequestLastCommit   `json:"last_commit,omitempty"`
 	Owners               []CreateAssetGITLABREPOSITORYRequestOwnersInner `json:"owners,omitempty"`
 	Languages            []ENUMPROPERTIESLANGUAGESITEMS                  `json:"languages,omitempty"`
-	OwnerId              *int                                            `json:"owner_id,omitempty"`
+	OwnerId              *float32                                        `json:"owner_id,omitempty"`
 	OwnerLogin           *string                                         `json:"owner_login,omitempty"`
 	OwnerHtmlUrl         *string                                         `json:"owner_html_url,omitempty"`
 	Fork                 *bool                                           `json:"fork,omitempty"`
@@ -493,9 +493,9 @@ func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf1) SetLanguages(v []ENUMPRO
 }
 
 // GetOwnerId returns the OwnerId field value if set, zero value otherwise.
-func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf1) GetOwnerId() int {
+func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf1) GetOwnerId() float32 {
 	if o == nil || IsNil(o.OwnerId) {
-		var ret int
+		var ret float32
 		return ret
 	}
 	return *o.OwnerId
@@ -503,7 +503,7 @@ func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf1) GetOwnerId() int {
 
 // GetOwnerIdOk returns a tuple with the OwnerId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf1) GetOwnerIdOk() (*int, bool) {
+func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf1) GetOwnerIdOk() (*float32, bool) {
 	if o == nil || IsNil(o.OwnerId) {
 		return nil, false
 	}
@@ -519,8 +519,8 @@ func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf1) HasOwnerId() bool {
 	return false
 }
 
-// SetOwnerId gets a reference to the given int and assigns it to the OwnerId field.
-func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf1) SetOwnerId(v int) {
+// SetOwnerId gets a reference to the given float32 and assigns it to the OwnerId field.
+func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf1) SetOwnerId(v float32) {
 	o.OwnerId = &v
 }
 
