@@ -24,6 +24,9 @@ type CreateDastRestProfileRequest struct {
 	AssetId string `json:"assetId"`
 	// The configuration as JSON string
 	Configuration *string `json:"configuration,omitempty"`
+	// Deprecated. Use `configuration` object instead. JSON-encoded scan configuration kept for backward compatibility.
+	// Deprecated
+	ConfigurationStr *string `json:"configurationStr,omitempty"`
 	// The cron string
 	Cron *string `json:"cron,omitempty"`
 	// The name of the profile
@@ -125,6 +128,41 @@ func (o *CreateDastRestProfileRequest) HasConfiguration() bool {
 // SetConfiguration gets a reference to the given string and assigns it to the Configuration field.
 func (o *CreateDastRestProfileRequest) SetConfiguration(v string) {
 	o.Configuration = &v
+}
+
+// GetConfigurationStr returns the ConfigurationStr field value if set, zero value otherwise.
+// Deprecated
+func (o *CreateDastRestProfileRequest) GetConfigurationStr() string {
+	if o == nil || IsNil(o.ConfigurationStr) {
+		var ret string
+		return ret
+	}
+	return *o.ConfigurationStr
+}
+
+// GetConfigurationStrOk returns a tuple with the ConfigurationStr field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// Deprecated
+func (o *CreateDastRestProfileRequest) GetConfigurationStrOk() (*string, bool) {
+	if o == nil || IsNil(o.ConfigurationStr) {
+		return nil, false
+	}
+	return o.ConfigurationStr, true
+}
+
+// HasConfigurationStr returns a boolean if a field has been set.
+func (o *CreateDastRestProfileRequest) HasConfigurationStr() bool {
+	if o != nil && !IsNil(o.ConfigurationStr) {
+		return true
+	}
+
+	return false
+}
+
+// SetConfigurationStr gets a reference to the given string and assigns it to the ConfigurationStr field.
+// Deprecated
+func (o *CreateDastRestProfileRequest) SetConfigurationStr(v string) {
+	o.ConfigurationStr = &v
 }
 
 // GetCron returns the Cron field value if set, zero value otherwise.
@@ -453,6 +491,9 @@ func (o CreateDastRestProfileRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Configuration) {
 		toSerialize["configuration"] = o.Configuration
 	}
+	if !IsNil(o.ConfigurationStr) {
+		toSerialize["configurationStr"] = o.ConfigurationStr
+	}
 	if !IsNil(o.Cron) {
 		toSerialize["cron"] = o.Cron
 	}
@@ -527,6 +568,7 @@ func (o *CreateDastRestProfileRequest) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "assetId")
 		delete(additionalProperties, "configuration")
+		delete(additionalProperties, "configurationStr")
 		delete(additionalProperties, "cron")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "description")
