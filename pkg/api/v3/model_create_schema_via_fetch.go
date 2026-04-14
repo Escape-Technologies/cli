@@ -23,9 +23,11 @@ type CreateSchemaViaFetch struct {
 	AssetType ENUMSCHEMA `json:"asset_type"`
 	Name      *string    `json:"name,omitempty"`
 	// The list of project IDs bind the asset on.
-	ProjectIds []string                  `json:"projectIds,omitempty"`
-	Fetch      CreateSchemaViaFetchFetch `json:"fetch"`
-	// The authentication string of the asset
+	ProjectIds     []string                            `json:"projectIds,omitempty"`
+	Fetch          CreateSchemaViaFetchFetch           `json:"fetch"`
+	Authentication *CreateSchemaViaFetchAuthentication `json:"authentication,omitempty"`
+	// Deprecated. Use `authentication` object instead. JSON-encoded authentication object.
+	// Deprecated
 	AuthenticationStr    *string `json:"authenticationStr,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -163,7 +165,40 @@ func (o *CreateSchemaViaFetch) SetFetch(v CreateSchemaViaFetchFetch) {
 	o.Fetch = v
 }
 
+// GetAuthentication returns the Authentication field value if set, zero value otherwise.
+func (o *CreateSchemaViaFetch) GetAuthentication() CreateSchemaViaFetchAuthentication {
+	if o == nil || IsNil(o.Authentication) {
+		var ret CreateSchemaViaFetchAuthentication
+		return ret
+	}
+	return *o.Authentication
+}
+
+// GetAuthenticationOk returns a tuple with the Authentication field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateSchemaViaFetch) GetAuthenticationOk() (*CreateSchemaViaFetchAuthentication, bool) {
+	if o == nil || IsNil(o.Authentication) {
+		return nil, false
+	}
+	return o.Authentication, true
+}
+
+// HasAuthentication returns a boolean if a field has been set.
+func (o *CreateSchemaViaFetch) HasAuthentication() bool {
+	if o != nil && !IsNil(o.Authentication) {
+		return true
+	}
+
+	return false
+}
+
+// SetAuthentication gets a reference to the given CreateSchemaViaFetchAuthentication and assigns it to the Authentication field.
+func (o *CreateSchemaViaFetch) SetAuthentication(v CreateSchemaViaFetchAuthentication) {
+	o.Authentication = &v
+}
+
 // GetAuthenticationStr returns the AuthenticationStr field value if set, zero value otherwise.
+// Deprecated
 func (o *CreateSchemaViaFetch) GetAuthenticationStr() string {
 	if o == nil || IsNil(o.AuthenticationStr) {
 		var ret string
@@ -174,6 +209,7 @@ func (o *CreateSchemaViaFetch) GetAuthenticationStr() string {
 
 // GetAuthenticationStrOk returns a tuple with the AuthenticationStr field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *CreateSchemaViaFetch) GetAuthenticationStrOk() (*string, bool) {
 	if o == nil || IsNil(o.AuthenticationStr) {
 		return nil, false
@@ -191,6 +227,7 @@ func (o *CreateSchemaViaFetch) HasAuthenticationStr() bool {
 }
 
 // SetAuthenticationStr gets a reference to the given string and assigns it to the AuthenticationStr field.
+// Deprecated
 func (o *CreateSchemaViaFetch) SetAuthenticationStr(v string) {
 	o.AuthenticationStr = &v
 }
@@ -213,6 +250,9 @@ func (o CreateSchemaViaFetch) ToMap() (map[string]interface{}, error) {
 		toSerialize["projectIds"] = o.ProjectIds
 	}
 	toSerialize["fetch"] = o.Fetch
+	if !IsNil(o.Authentication) {
+		toSerialize["authentication"] = o.Authentication
+	}
 	if !IsNil(o.AuthenticationStr) {
 		toSerialize["authenticationStr"] = o.AuthenticationStr
 	}
@@ -264,6 +304,7 @@ func (o *CreateSchemaViaFetch) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "projectIds")
 		delete(additionalProperties, "fetch")
+		delete(additionalProperties, "authentication")
 		delete(additionalProperties, "authenticationStr")
 		o.AdditionalProperties = additionalProperties
 	}
