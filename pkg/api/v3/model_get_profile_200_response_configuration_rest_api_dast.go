@@ -19,22 +19,22 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationRestApiDast{}
 
 // GetProfile200ResponseConfigurationRestApiDast struct for GetProfile200ResponseConfigurationRestApiDast
 type GetProfile200ResponseConfigurationRestApiDast struct {
-	CustomData map[string]string `json:"custom_data,omitempty"`
-	SchemaS3Key *string `json:"schema_s3_key,omitempty"`
-	LocationId *string `json:"location_id,omitempty"`
-	Profile *ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESPROFILE `json:"profile,omitempty"`
-	ExplorationDepth *ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESEXPLORATIONDEPTH `json:"exploration_depth,omitempty"`
-	ExploreWithAllUsers *bool `json:"explore_with_all_users,omitempty"`
-	CrossUserMemoryAllowlist []string `json:"cross_user_memory_allowlist,omitempty"`
-	Mode *ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE `json:"mode,omitempty"`
-	MaxDuration *int `json:"max_duration,omitempty"`
-	Hotstart []string `json:"hotstart,omitempty"`
-	HotstartOnly *bool `json:"hotstart_only,omitempty"`
-	Scope *GetProfile200ResponseConfigurationGraphqlApiDastScope `json:"scope,omitempty"`
-	AdditionalSchemaS3Keys []string `json:"additional_schema_s3_keys,omitempty"`
-	QueryParamsAreRequired *bool `json:"query_params_are_required,omitempty"`
-	InScopeOnly *bool `json:"in_scope_only,omitempty"`
-	AdditionalProperties map[string]interface{}
+	CustomData               map[string]string                                                              `json:"custom_data,omitempty"`
+	SchemaS3Key              *string                                                                        `json:"schema_s3_key,omitempty"`
+	LocationId               *string                                                                        `json:"location_id,omitempty"`
+	Profile                  *ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESPROFILE          `json:"profile,omitempty"`
+	ExplorationDepth         *ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESEXPLORATIONDEPTH `json:"exploration_depth,omitempty"`
+	ExploreWithAllUsers      *bool                                                                          `json:"explore_with_all_users,omitempty"`
+	CrossUserMemoryAllowlist []string                                                                       `json:"cross_user_memory_allowlist,omitempty"`
+	Mode                     *ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE               `json:"mode,omitempty"`
+	MaxDuration              *int                                                                           `json:"max_duration,omitempty"`
+	Hotstart                 []string                                                                       `json:"hotstart,omitempty"`
+	HotstartOnly             *bool                                                                          `json:"hotstart_only,omitempty"`
+	Scope                    *GetProfile200ResponseConfigurationGraphqlApiDastScope                         `json:"scope,omitempty"`
+	AdditionalSchemaS3Keys   []string                                                                       `json:"additional_schema_s3_keys,omitempty"`
+	QueryParamsAreRequired   *bool                                                                          `json:"query_params_are_required,omitempty"`
+	InScopeOnly              *bool                                                                          `json:"in_scope_only,omitempty"`
+	AdditionalProperties     map[string]interface{}
 }
 
 type _GetProfile200ResponseConfigurationRestApiDast GetProfile200ResponseConfigurationRestApiDast
@@ -537,7 +537,7 @@ func (o *GetProfile200ResponseConfigurationRestApiDast) SetInScopeOnly(v bool) {
 }
 
 func (o GetProfile200ResponseConfigurationRestApiDast) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -669,5 +669,3 @@ func (v *NullableGetProfile200ResponseConfigurationRestApiDast) UnmarshalJSON(sr
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

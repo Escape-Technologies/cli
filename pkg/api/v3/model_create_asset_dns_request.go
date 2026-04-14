@@ -23,7 +23,6 @@ type CreateAssetDNSRequest struct {
 	// The list of project IDs bind the asset on.
 	ProjectIds []string `json:"projectIds,omitempty"`
 	// The custom name of the asset. If not provided, the default name will be used.
-<<<<<<< HEAD
 	Name                 *string                                   `json:"name,omitempty"`
 	AssetClass           ENUMHOST                                  `json:"asset_class"`
 	ExtraMetadata        map[string]interface{}                    `json:"extra_metadata,omitempty"`
@@ -32,7 +31,7 @@ type CreateAssetDNSRequest struct {
 	Address              string                                    `json:"address"`
 	Favicon              *string                                   `json:"favicon,omitempty"`
 	OpenPorts            []CreateAssetDNSRequestOpenPortsInner     `json:"open_ports,omitempty"`
-	PortsInsights        []float32                                 `json:"ports_insights,omitempty"`
+	PortsInsights        []int                                     `json:"ports_insights,omitempty"`
 	PathsInsights        []CreateAssetDNSRequestPathsInsightsInner `json:"paths_insights,omitempty"`
 	Private              *bool                                     `json:"private,omitempty"`
 	ThirdParty           *ENUMPROPERTIESTHIRDPARTY                 `json:"third_party,omitempty"`
@@ -40,24 +39,6 @@ type CreateAssetDNSRequest struct {
 	Ips                  []string                                  `json:"ips,omitempty"`
 	RegionCountryCodes   []string                                  `json:"region_country_codes,omitempty"`
 	Registrar            *string                                   `json:"registrar,omitempty"`
-=======
-	Name *string `json:"name,omitempty"`
-	AssetClass ENUMHOST `json:"asset_class"`
-	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
-	ScreenshotS3Key *string `json:"screenshot_s3_key,omitempty"`
-	AssetType ENUMDNS `json:"asset_type"`
-	Address string `json:"address"`
-	Favicon *string `json:"favicon,omitempty"`
-	OpenPorts []CreateAssetDNSRequestOpenPortsInner `json:"open_ports,omitempty"`
-	PortsInsights []int `json:"ports_insights,omitempty"`
-	PathsInsights []CreateAssetDNSRequestPathsInsightsInner `json:"paths_insights,omitempty"`
-	Private *bool `json:"private,omitempty"`
-	ThirdParty *ENUMPROPERTIESTHIRDPARTY `json:"third_party,omitempty"`
-	DnsRecords []CreateAssetDNSRequestDnsRecordsInner `json:"dns_records,omitempty"`
-	Ips []string `json:"ips,omitempty"`
-	RegionCountryCodes []string `json:"region_country_codes,omitempty"`
-	Registrar *string `json:"registrar,omitempty"`
->>>>>>> 68777fe48b (fix(auto): cli update models)
 	AdditionalProperties map[string]interface{}
 }
 
