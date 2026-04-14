@@ -18,7 +18,7 @@ import (
 
 // GetProfile200ResponseConfigurationFrontendDastScopeApiTestingAllowlistInner - struct for GetProfile200ResponseConfigurationFrontendDastScopeApiTestingAllowlistInner
 type GetProfile200ResponseConfigurationFrontendDastScopeApiTestingAllowlistInner struct {
-	GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf *GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf
+	GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf  *GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf
 	GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf1 *GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf1
 	GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf3 *GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf3
 	GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf4 *GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf4
@@ -59,7 +59,6 @@ func GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf5AsGetProfile200R
 		GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf5: v,
 	}
 }
-
 
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *GetProfile200ResponseConfigurationFrontendDastScopeApiTestingAllowlistInner) UnmarshalJSON(data []byte) error {
@@ -192,7 +191,7 @@ func (src GetProfile200ResponseConfigurationFrontendDastScopeApiTestingAllowlist
 }
 
 // Get the actual instance
-func (obj *GetProfile200ResponseConfigurationFrontendDastScopeApiTestingAllowlistInner) GetActualInstance() (interface{}) {
+func (obj *GetProfile200ResponseConfigurationFrontendDastScopeApiTestingAllowlistInner) GetActualInstance() interface{} {
 	if obj == nil {
 		return nil
 	}
@@ -221,7 +220,7 @@ func (obj *GetProfile200ResponseConfigurationFrontendDastScopeApiTestingAllowlis
 }
 
 // Get the actual instance value
-func (obj GetProfile200ResponseConfigurationFrontendDastScopeApiTestingAllowlistInner) GetActualInstanceValue() (interface{}) {
+func (obj GetProfile200ResponseConfigurationFrontendDastScopeApiTestingAllowlistInner) GetActualInstanceValue() interface{} {
 	if obj.GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf != nil {
 		return *obj.GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf
 	}
@@ -281,5 +280,3 @@ func (v *NullableGetProfile200ResponseConfigurationFrontendDastScopeApiTestingAl
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

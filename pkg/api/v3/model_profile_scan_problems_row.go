@@ -23,10 +23,10 @@ type ProfileScanProblemsRow struct {
 	// The id of the profile
 	Id string `json:"id"`
 	// The name of the profile
-	Name string `json:"name"`
+	Name     string                      `json:"name"`
 	LastScan *ScanSummarizedWithProblems `json:"lastScan,omitempty"`
 	// Deprecated
-	LastResourceScan *ScanSummarizedWithProblems1 `json:"lastResourceScan,omitempty"`
+	LastResourceScan     *ScanSummarizedWithProblems1 `json:"lastResourceScan,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -167,7 +167,7 @@ func (o *ProfileScanProblemsRow) SetLastResourceScan(v ScanSummarizedWithProblem
 }
 
 func (o ProfileScanProblemsRow) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -206,10 +206,10 @@ func (o *ProfileScanProblemsRow) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -273,5 +273,3 @@ func (v *NullableProfileScanProblemsRow) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
