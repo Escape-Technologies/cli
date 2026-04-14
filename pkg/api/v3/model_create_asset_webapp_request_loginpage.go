@@ -20,12 +20,12 @@ var _ MappedNullable = &CreateAssetWEBAPPRequestLoginpage{}
 
 // CreateAssetWEBAPPRequestLoginpage struct for CreateAssetWEBAPPRequestLoginpage
 type CreateAssetWEBAPPRequestLoginpage struct {
-	Login ENUMPROPERTIESLOGINPAGEPROPERTIESLOGIN `json:"login"`
-	Logintype []ENUMPROPERTIESLOGINPAGEPROPERTIESLOGINTYPEITEMS `json:"logintype"`
-	LoginpageUrl *string `json:"loginpage_url,omitempty"`
-	CanRegister bool `json:"can_register"`
-	RegisterPageUrl *string `json:"register_page_url,omitempty"`
-	SsoProviders []string `json:"sso_providers"`
+	Login                ENUMPROPERTIESLOGINPAGEPROPERTIESLOGIN            `json:"login"`
+	Logintype            []ENUMPROPERTIESLOGINPAGEPROPERTIESLOGINTYPEITEMS `json:"logintype"`
+	LoginpageUrl         *string                                           `json:"loginpage_url,omitempty"`
+	CanRegister          bool                                              `json:"can_register"`
+	RegisterPageUrl      *string                                           `json:"register_page_url,omitempty"`
+	SsoProviders         []string                                          `json:"sso_providers"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -213,7 +213,7 @@ func (o *CreateAssetWEBAPPRequestLoginpage) SetSsoProviders(v []string) {
 }
 
 func (o CreateAssetWEBAPPRequestLoginpage) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -256,10 +256,10 @@ func (o *CreateAssetWEBAPPRequestLoginpage) UnmarshalJSON(data []byte) (err erro
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -325,5 +325,3 @@ func (v *NullableCreateAssetWEBAPPRequestLoginpage) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

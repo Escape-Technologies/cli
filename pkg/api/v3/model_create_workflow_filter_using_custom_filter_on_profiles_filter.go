@@ -19,26 +19,26 @@ var _ MappedNullable = &CreateWorkflowFilterUsingCustomFilterOnProfilesFilter{}
 
 // CreateWorkflowFilterUsingCustomFilterOnProfilesFilter struct for CreateWorkflowFilterUsingCustomFilterOnProfilesFilter
 type CreateWorkflowFilterUsingCustomFilterOnProfilesFilter struct {
-	Ids []string `json:"ids,omitempty"`
-	Search *string `json:"search,omitempty"`
-	Risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS `json:"risks,omitempty"`
-	TagIds []string `json:"tagIds,omitempty"`
-	NoTags *bool `json:"noTags,omitempty"`
-	ProjectIds []string `json:"projectIds,omitempty"`
-	NoProjects *bool `json:"noProjects,omitempty"`
-	AssetIds []string `json:"assetIds,omitempty"`
-	AssetSchemaIds []string `json:"assetSchemaIds,omitempty"`
-	IssueIds []string `json:"issueIds,omitempty"`
-	Kinds []ENUMPROPERTIESFILTERSITEMS1PROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS `json:"kinds,omitempty"`
-	Domains []string `json:"domains,omitempty"`
-	Initiators []ENUMPROPERTIESDATAITEMSPROPERTIESINITIATORSITEMS `json:"initiators,omitempty"`
-	LastScanStatuses []ENUMPROPERTIESSTATUS `json:"lastScanStatuses,omitempty"`
-	ProblemSeverities []ENUMPROPERTIESFILTERSITEMS2PROPERTIESFILTERPROPERTIESPROBLEMSEVERITIESITEMS `json:"problemSeverities,omitempty"`
-	ProblemCodes []ENUMPROPERTIESFILTERSITEMS2PROPERTIESFILTERPROPERTIESPROBLEMCODESITEMS `json:"problemCodes,omitempty"`
-	AssetClasses []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS `json:"assetClasses,omitempty"`
-	AssetStatuses []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS `json:"assetStatuses,omitempty"`
-	AssetTypes []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE `json:"assetTypes,omitempty"`
-	ScanIds []string `json:"scanIds,omitempty"`
+	Ids                  []string                                                                      `json:"ids,omitempty"`
+	Search               *string                                                                       `json:"search,omitempty"`
+	Risks                []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS                  `json:"risks,omitempty"`
+	TagIds               []string                                                                      `json:"tagIds,omitempty"`
+	NoTags               *bool                                                                         `json:"noTags,omitempty"`
+	ProjectIds           []string                                                                      `json:"projectIds,omitempty"`
+	NoProjects           *bool                                                                         `json:"noProjects,omitempty"`
+	AssetIds             []string                                                                      `json:"assetIds,omitempty"`
+	AssetSchemaIds       []string                                                                      `json:"assetSchemaIds,omitempty"`
+	IssueIds             []string                                                                      `json:"issueIds,omitempty"`
+	Kinds                []ENUMPROPERTIESFILTERSITEMS1PROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS      `json:"kinds,omitempty"`
+	Domains              []string                                                                      `json:"domains,omitempty"`
+	Initiators           []ENUMPROPERTIESDATAITEMSPROPERTIESINITIATORSITEMS                            `json:"initiators,omitempty"`
+	LastScanStatuses     []ENUMPROPERTIESSTATUS                                                        `json:"lastScanStatuses,omitempty"`
+	ProblemSeverities    []ENUMPROPERTIESFILTERSITEMS2PROPERTIESFILTERPROPERTIESPROBLEMSEVERITIESITEMS `json:"problemSeverities,omitempty"`
+	ProblemCodes         []ENUMPROPERTIESFILTERSITEMS2PROPERTIESFILTERPROPERTIESPROBLEMCODESITEMS      `json:"problemCodes,omitempty"`
+	AssetClasses         []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS            `json:"assetClasses,omitempty"`
+	AssetStatuses        []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS           `json:"assetStatuses,omitempty"`
+	AssetTypes           []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE             `json:"assetTypes,omitempty"`
+	ScanIds              []string                                                                      `json:"scanIds,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -702,7 +702,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) SetScanIds(v []s
 }
 
 func (o CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -854,5 +854,3 @@ func (v *NullableCreateWorkflowFilterUsingCustomFilterOnProfilesFilter) Unmarsha
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
