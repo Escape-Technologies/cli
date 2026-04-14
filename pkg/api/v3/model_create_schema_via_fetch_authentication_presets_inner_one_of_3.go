@@ -407,8 +407,9 @@ func (o *CreateSchemaViaFetchAuthenticationPresetsInnerOneOf3) UnmarshalJSON(dat
 		return err;
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
+	for _, requiredProperty := range requiredProperties {
+		value, exists := allProperties[requiredProperty]
+		if !exists || value == nil {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
 	}
