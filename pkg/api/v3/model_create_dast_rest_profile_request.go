@@ -22,8 +22,7 @@ var _ MappedNullable = &CreateDastRestProfileRequest{}
 type CreateDastRestProfileRequest struct {
 	// The asset ID for the profile
 	AssetId string `json:"assetId"`
-	// The configuration as JSON string
-	Configuration *string `json:"configuration,omitempty"`
+	Configuration *CreateDastRestProfileRequestConfiguration `json:"configuration,omitempty"`
 	// Deprecated. Use `configuration` object instead. JSON-encoded scan configuration kept for backward compatibility.
 	// Deprecated
 	ConfigurationStr *string `json:"configurationStr,omitempty"`
@@ -99,9 +98,9 @@ func (o *CreateDastRestProfileRequest) SetAssetId(v string) {
 }
 
 // GetConfiguration returns the Configuration field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequest) GetConfiguration() string {
+func (o *CreateDastRestProfileRequest) GetConfiguration() CreateDastRestProfileRequestConfiguration {
 	if o == nil || IsNil(o.Configuration) {
-		var ret string
+		var ret CreateDastRestProfileRequestConfiguration
 		return ret
 	}
 	return *o.Configuration
@@ -109,7 +108,7 @@ func (o *CreateDastRestProfileRequest) GetConfiguration() string {
 
 // GetConfigurationOk returns a tuple with the Configuration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequest) GetConfigurationOk() (*string, bool) {
+func (o *CreateDastRestProfileRequest) GetConfigurationOk() (*CreateDastRestProfileRequestConfiguration, bool) {
 	if o == nil || IsNil(o.Configuration) {
 		return nil, false
 	}
@@ -125,8 +124,8 @@ func (o *CreateDastRestProfileRequest) HasConfiguration() bool {
 	return false
 }
 
-// SetConfiguration gets a reference to the given string and assigns it to the Configuration field.
-func (o *CreateDastRestProfileRequest) SetConfiguration(v string) {
+// SetConfiguration gets a reference to the given CreateDastRestProfileRequestConfiguration and assigns it to the Configuration field.
+func (o *CreateDastRestProfileRequest) SetConfiguration(v CreateDastRestProfileRequestConfiguration) {
 	o.Configuration = &v
 }
 
