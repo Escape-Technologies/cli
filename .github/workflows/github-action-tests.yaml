@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 env:
-  GO_VERSION: "1.25.0"
+  GO_VERSION: '1.26.2'
   CLI_IMAGE: escape-cli:pr-${{ github.sha }}
 
 jobs:
@@ -55,7 +55,7 @@ jobs:
         continue-on-error: true
         uses: ./
         with:
-          api_key: "fake-key-for-testing"
+          api_key: 'fake-key-for-testing'
           cli_image: ${{ env.CLI_IMAGE }}
 
       - name: Assert failure when profile_id is missing
@@ -69,7 +69,7 @@ jobs:
         continue-on-error: true
         uses: ./
         with:
-          profile_id: "fake-profile-id"
+          profile_id: 'fake-profile-id'
           cli_image: ${{ env.CLI_IMAGE }}
 
       - name: Assert failure when api_key is missing
