@@ -29,7 +29,6 @@ type GetJob200Response struct {
 	CompletedAt          *string              `json:"completedAt,omitempty"`
 	Parameters           interface{}          `json:"parameters,omitempty"`
 	Artefacts            []JobArtefact        `json:"artefacts"`
-	Test                 *string              `json:"test,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -306,38 +305,6 @@ func (o *GetJob200Response) SetArtefacts(v []JobArtefact) {
 	o.Artefacts = v
 }
 
-// GetTest returns the Test field value if set, zero value otherwise.
-func (o *GetJob200Response) GetTest() string {
-	if o == nil || IsNil(o.Test) {
-		var ret string
-		return ret
-	}
-	return *o.Test
-}
-
-// GetTestOk returns a tuple with the Test field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetJob200Response) GetTestOk() (*string, bool) {
-	if o == nil || IsNil(o.Test) {
-		return nil, false
-	}
-	return o.Test, true
-}
-
-// HasTest returns a boolean if a field has been set.
-func (o *GetJob200Response) HasTest() bool {
-	if o != nil && !IsNil(o.Test) {
-		return true
-	}
-
-	return false
-}
-
-// SetTest gets a reference to the given string and assigns it to the Test field.
-func (o *GetJob200Response) SetTest(v string) {
-	o.Test = &v
-}
-
 func (o GetJob200Response) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -365,9 +332,6 @@ func (o GetJob200Response) ToMap() (map[string]interface{}, error) {
 		toSerialize["parameters"] = o.Parameters
 	}
 	toSerialize["artefacts"] = o.Artefacts
-	if !IsNil(o.Test) {
-		toSerialize["test"] = o.Test
-	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -424,7 +388,6 @@ func (o *GetJob200Response) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "completedAt")
 		delete(additionalProperties, "parameters")
 		delete(additionalProperties, "artefacts")
-		delete(additionalProperties, "test")
 		o.AdditionalProperties = additionalProperties
 	}
 
