@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 env:
-  GO_VERSION: '1.26.2'
+  GO_VERSION: '1.25.9'
 
 jobs:
   go-fmt:
@@ -98,7 +98,7 @@ jobs:
           - macos-latest
         golang:
           - '1.26'
-          - '1.26.2'
+          - '1.25.9'
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v6
