@@ -33,6 +33,7 @@ type GetProfile200ResponseConfigurationExperimental struct {
 	SqliAgentModelAlias            *ENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS `json:"sqli_agent_model_alias,omitempty"`
 	AsmCveAgent                    *bool                                                                          `json:"asm_cve_agent,omitempty"`
 	LoginPageAgent                 *bool                                                                          `json:"login_page_agent,omitempty"`
+	JsAnalysis                     *bool                                                                          `json:"js_analysis,omitempty"`
 	AdditionalProperties           map[string]interface{}
 }
 
@@ -503,6 +504,38 @@ func (o *GetProfile200ResponseConfigurationExperimental) SetLoginPageAgent(v boo
 	o.LoginPageAgent = &v
 }
 
+// GetJsAnalysis returns the JsAnalysis field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationExperimental) GetJsAnalysis() bool {
+	if o == nil || IsNil(o.JsAnalysis) {
+		var ret bool
+		return ret
+	}
+	return *o.JsAnalysis
+}
+
+// GetJsAnalysisOk returns a tuple with the JsAnalysis field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationExperimental) GetJsAnalysisOk() (*bool, bool) {
+	if o == nil || IsNil(o.JsAnalysis) {
+		return nil, false
+	}
+	return o.JsAnalysis, true
+}
+
+// HasJsAnalysis returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationExperimental) HasJsAnalysis() bool {
+	if o != nil && !IsNil(o.JsAnalysis) {
+		return true
+	}
+
+	return false
+}
+
+// SetJsAnalysis gets a reference to the given bool and assigns it to the JsAnalysis field.
+func (o *GetProfile200ResponseConfigurationExperimental) SetJsAnalysis(v bool) {
+	o.JsAnalysis = &v
+}
+
 func (o GetProfile200ResponseConfigurationExperimental) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -555,6 +588,9 @@ func (o GetProfile200ResponseConfigurationExperimental) ToMap() (map[string]inte
 	if !IsNil(o.LoginPageAgent) {
 		toSerialize["login_page_agent"] = o.LoginPageAgent
 	}
+	if !IsNil(o.JsAnalysis) {
+		toSerialize["js_analysis"] = o.JsAnalysis
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -591,6 +627,7 @@ func (o *GetProfile200ResponseConfigurationExperimental) UnmarshalJSON(data []by
 		delete(additionalProperties, "sqli_agent_model_alias")
 		delete(additionalProperties, "asm_cve_agent")
 		delete(additionalProperties, "login_page_agent")
+		delete(additionalProperties, "js_analysis")
 		o.AdditionalProperties = additionalProperties
 	}
 

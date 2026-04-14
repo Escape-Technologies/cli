@@ -20,11 +20,11 @@ var _ MappedNullable = &CreateCustomRuleRequestContentRuleOneOf1{}
 
 // CreateCustomRuleRequestContentRuleOneOf1 struct for CreateCustomRuleRequestContentRuleOneOf1
 type CreateCustomRuleRequestContentRuleOneOf1 struct {
-	Alert                CreateCustomRuleRequestContentRuleOneOfAlert          `json:"alert"`
-	Type                 ENUMWEBAPP                                            `json:"type"`
-	Seed                 []CreateCustomRuleRequestContentRuleOneOf1SeedInner   `json:"seed"`
-	Detect               []CreateCustomRuleRequestContentRuleOneOf1DetectInner `json:"detect"`
-	Extractors           []interface{}                                         `json:"extractors,omitempty"`
+	Alert                CreateCustomRuleRequestContentRuleOneOfAlert                                        `json:"alert"`
+	Type                 ENUMWEBAPP                                                                          `json:"type"`
+	Seed                 []GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInner `json:"seed"`
+	Detect               []CreateCustomRuleRequestContentRuleOneOf1DetectInner                               `json:"detect"`
+	Extractors           []interface{}                                                                       `json:"extractors,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -34,7 +34,7 @@ type _CreateCustomRuleRequestContentRuleOneOf1 CreateCustomRuleRequestContentRul
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateCustomRuleRequestContentRuleOneOf1(alert CreateCustomRuleRequestContentRuleOneOfAlert, type_ ENUMWEBAPP, seed []CreateCustomRuleRequestContentRuleOneOf1SeedInner, detect []CreateCustomRuleRequestContentRuleOneOf1DetectInner) *CreateCustomRuleRequestContentRuleOneOf1 {
+func NewCreateCustomRuleRequestContentRuleOneOf1(alert CreateCustomRuleRequestContentRuleOneOfAlert, type_ ENUMWEBAPP, seed []GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInner, detect []CreateCustomRuleRequestContentRuleOneOf1DetectInner) *CreateCustomRuleRequestContentRuleOneOf1 {
 	this := CreateCustomRuleRequestContentRuleOneOf1{}
 	this.Alert = alert
 	this.Type = type_
@@ -100,9 +100,9 @@ func (o *CreateCustomRuleRequestContentRuleOneOf1) SetType(v ENUMWEBAPP) {
 }
 
 // GetSeed returns the Seed field value
-func (o *CreateCustomRuleRequestContentRuleOneOf1) GetSeed() []CreateCustomRuleRequestContentRuleOneOf1SeedInner {
+func (o *CreateCustomRuleRequestContentRuleOneOf1) GetSeed() []GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInner {
 	if o == nil {
-		var ret []CreateCustomRuleRequestContentRuleOneOf1SeedInner
+		var ret []GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInner
 		return ret
 	}
 
@@ -111,7 +111,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOf1) GetSeed() []CreateCustomRuleR
 
 // GetSeedOk returns a tuple with the Seed field value
 // and a boolean to check if the value has been set.
-func (o *CreateCustomRuleRequestContentRuleOneOf1) GetSeedOk() ([]CreateCustomRuleRequestContentRuleOneOf1SeedInner, bool) {
+func (o *CreateCustomRuleRequestContentRuleOneOf1) GetSeedOk() ([]GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInner, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -119,7 +119,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOf1) GetSeedOk() ([]CreateCustomRu
 }
 
 // SetSeed sets field value
-func (o *CreateCustomRuleRequestContentRuleOneOf1) SetSeed(v []CreateCustomRuleRequestContentRuleOneOf1SeedInner) {
+func (o *CreateCustomRuleRequestContentRuleOneOf1) SetSeed(v []GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInner) {
 	o.Seed = v
 }
 
