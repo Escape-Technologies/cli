@@ -118,16 +118,13 @@ var usersGetCmd = &cobra.Command{
 	Use:     "get user-id",
 	Aliases: []string{"describe", "show"},
 	Short:   "Get a specific user by ID",
-	Args: func(cmd *cobra.Command, args []string) error {
-		if len(args) != 1 {
-			_ = cmd.Help()
-			return errors.New("user ID is required")
-		}
-		return nil
-	},
 	RunE: func(cmd *cobra.Command, args []string) error {
 		if out.Schema(v3.GetUser200Response{}) {
 			return nil
+		}
+		if len(args) != 1 {
+			_ = cmd.Help()
+			return errors.New("user ID is required")
 		}
 
 		user, err := escape.GetUser(cmd.Context(), args[0])
@@ -185,12 +182,11 @@ They will receive an invitation to set up their account.`,
   escape-cli users invite --email alice@example.com --email bob@example.com`,
 	Args: cobra.NoArgs,
 	RunE: func(cmd *cobra.Command, _ []string) error {
-		if len(usersInviteEmails) == 0 {
-			return errors.New("at least one --email is required")
-		}
-
 		if out.Schema([]v3.ListUsers200ResponseInner{}) {
 			return nil
+		}
+		if len(usersInviteEmails) == 0 {
+			return errors.New("at least one --email is required")
 		}
 
 		users, err := escape.InviteUsers(cmd.Context(), usersInviteEmails, usersInviteRoleID)

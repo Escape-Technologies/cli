@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"time"
 
 	"github.com/Escape-Technologies/cli/pkg/env"
 )
@@ -38,7 +39,11 @@ func rawRequest(ctx context.Context, method, path string, body []byte, out any) 
 		req.Header.Set("Content-Type", "application/json")
 	}
 
-	resp, err := env.GetHTTPClient().Do(req)
+	client := env.GetHTTPClient()
+	if _, hasDeadline := ctx.Deadline(); !hasDeadline && client.Timeout == 0 {
+		client.Timeout = 60 * time.Second
+	}
+	resp, err := client.Do(req)
 	if err != nil {
 		return fmt.Errorf("request failed: %w", err)
 	}

@@ -437,17 +437,21 @@ var issueCommentCmd = &cobra.Command{
 	Use:     "comment issue-id",
 	Aliases: []string{"add-comment"},
 	Short:   "Add a comment to an issue",
-	Args: func(cmd *cobra.Command, args []string) error {
+	RunE: func(cmd *cobra.Command, args []string) error {
+		if out.InputSchema(v3.CreateAssetCommentRequest{}) {
+			return nil
+		}
+		if out.Schema(v3.CreateAssetComment200Response{}) {
+			return nil
+		}
 		if len(args) != 1 {
 			_ = cmd.Help()
 			return errors.New("issue ID is required")
 		}
-		return nil
-	},
-	RunE: func(cmd *cobra.Command, args []string) error {
+
 		issueID := args[0]
 		msg, _ := cmd.Flags().GetString("message")
-		if msg == "" {
+		if strings.TrimSpace(msg) == "" {
 			return errors.New("--message is required")
 		}
 		if err := escape.CommentIssue(cmd.Context(), issueID, msg); err != nil {
@@ -467,12 +471,12 @@ var (
 	trendApplicationIDs []string
 	trendProjectIDs     []string
 
-	bulkIssueStatus      string
-	bulkIssueIDs         []string
-	bulkIssueAssetIDs    []string
-	bulkIssueSeverities  []string
-	bulkIssueProfileIDs  []string
-	bulkIssueTagIDs      []string
+	bulkIssueStatus       string
+	bulkIssueIDs          []string
+	bulkIssueAssetIDs     []string
+	bulkIssueSeverities   []string
+	bulkIssueProfileIDs   []string
+	bulkIssueTagIDs       []string
 	bulkIssueScannerKinds []string
 
 	notifyScanID string
