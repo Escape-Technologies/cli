@@ -643,7 +643,7 @@ during a scan. Useful for coverage analysis and CI/CD quality gates.
 
 FILTER OPTIONS:
   --type    Filter by target type: API_ROUTE, GRAPHQL_RESOLVER
-  --size    Limit number of results`,
+  --size    Limit total number of results`,
 	Example: `  # List all targets for a scan
   escape-cli scans targets <scan-id>
 
@@ -669,12 +669,20 @@ FILTER OPTIONS:
 			return fmt.Errorf("unable to list targets: %w", err)
 		}
 		all := targets
+		if scanTargetsSize > 0 && len(all) >= scanTargetsSize {
+			all = all[:scanTargetsSize]
+			next = nil
+		}
 		for next != nil && *next != "" {
 			targets, next, err = escape.ListScanTargets(cmd.Context(), args[0], *next, scanTargetsType, scanTargetsSize)
 			if err != nil {
 				return fmt.Errorf("unable to list targets: %w", err)
 			}
 			all = append(all, targets...)
+			if scanTargetsSize > 0 && len(all) >= scanTargetsSize {
+				all = all[:scanTargetsSize]
+				break
+			}
 		}
 
 		out.Table(all, func() []string {
@@ -738,6 +746,6 @@ func init() {
 	scansCmd.AddCommand(scanIgnoreCmd)
 	scansCmd.AddCommand(scanTargetsCmd)
 	scanTargetsCmd.Flags().StringVar(&scanTargetsType, "type", "", "filter by target type: API_ROUTE, GRAPHQL_RESOLVER")
-	scanTargetsCmd.Flags().IntVar(&scanTargetsSize, "size", 0, "limit number of targets returned")
+	scanTargetsCmd.Flags().IntVar(&scanTargetsSize, "size", 0, "limit total number of targets returned")
 	rootCmd.AddCommand(scansCmd)
 }

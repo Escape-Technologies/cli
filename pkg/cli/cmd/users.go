@@ -137,7 +137,7 @@ var usersGetCmd = &cobra.Command{
 
 		out.Table(user, func() []string {
 			res := []string{"ID\tEMAIL\tNAME\tROLES\tCREATED AT"}
-			res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s", user.GetId(), user.GetEmail(), stringValue(user.AdditionalProperties["name"]), strings.Join(roleNames(user.GetRoleBindings()), ","), user.GetCreatedAt()))
+			res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s", user.GetId(), user.GetEmail(), stringValue(user.AdditionalProperties["name"]), strings.Join(roleNames(user.GetRoleBindings()), ","), out.GetShortDate(user.GetCreatedAt().String())))
 			return res
 		})
 		return nil

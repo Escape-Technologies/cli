@@ -51,9 +51,9 @@ var locationsListCmd = &cobra.Command{
 	Long: `List all locations.
 
 Example output:
-ID                                      NAME                       SSH PUBLIC KEY
-00000000-0000-0000-0000-000000000001    example-location-1         ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAI... example1@email.com
-00000000-0000-0000-0000-000000000002    example-location-2         ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAI... example2@email.com`,
+ID                                      NAME                 TYPE     ENABLED  LAST SEEN              LINK
+00000000-0000-0000-0000-000000000001    example-location-1   PRIVATE  true     2025-07-24T10:00:00Z  https://app.escape.tech/...
+00000000-0000-0000-0000-000000000002    example-location-2   ESCAPE   false                           https://app.escape.tech/...`,
 	Example: `escape-cli locations list`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
 		// Output JSON Schema if requested

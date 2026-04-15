@@ -13,6 +13,11 @@ import (
 	"github.com/spf13/cobra"
 )
 
+const (
+	authenticationProgressPercent = 100
+	authenticationPollInterval    = 2 * time.Second
+)
+
 var authenticationsWatch bool
 
 var authenticationsCmd = &cobra.Command{
@@ -77,7 +82,7 @@ var authenticationsGetCmd = &cobra.Command{
 		out.Table(auth, func() []string {
 			return []string{
 				"ID\tSTATUS\tPROGRESS\tCREATED AT\tEVENTS",
-				fmt.Sprintf("%s\t%s\t%d%%\t%s\t%d", auth.GetId(), auth.GetStatus(), int(auth.GetProgressRatio()*100), auth.GetCreatedAt(), len(auth.GetEvents())),
+				fmt.Sprintf("%s\t%s\t%d%%\t%s\t%d", auth.GetId(), auth.GetStatus(), int(auth.GetProgressRatio()*authenticationProgressPercent), auth.GetCreatedAt(), len(auth.GetEvents())),
 			}
 		})
 		return nil
@@ -94,19 +99,22 @@ func watchAuthentication(cmd *cobra.Command, authenticationID string) error {
 		out.Table(auth, func() []string {
 			return []string{
 				"ID\tSTATUS\tPROGRESS\tCREATED AT\tEVENTS",
-				fmt.Sprintf("%s\t%s\t%d%%\t%s\t%d", auth.GetId(), auth.GetStatus(), int(auth.GetProgressRatio()*100), auth.GetCreatedAt(), len(auth.GetEvents())),
+				fmt.Sprintf("%s\t%s\t%d%%\t%s\t%d", auth.GetId(), auth.GetStatus(), int(auth.GetProgressRatio()*authenticationProgressPercent), auth.GetCreatedAt(), len(auth.GetEvents())),
 			}
 		})
 
 		switch auth.GetStatus() {
-		case v3.ENUMPROPERTIESSTATUS_FINISHED, v3.ENUMPROPERTIESSTATUS_FAILED, v3.ENUMPROPERTIESSTATUS_CANCELED:
+		case v3.ENUMPROPERTIESSTATUS_FINISHED, v3.ENUMPROPERTIESSTATUS_COMPLETED:
 			return nil
+		case v3.ENUMPROPERTIESSTATUS_FAILED, v3.ENUMPROPERTIESSTATUS_CANCELED:
+			return fmt.Errorf("authentication check ended with status %s", auth.GetStatus())
+		case v3.ENUMPROPERTIESSTATUS_PENDING, v3.ENUMPROPERTIESSTATUS_RUNNING, v3.ENUMPROPERTIESSTATUS_STARTING:
 		}
 
 		select {
 		case <-cmd.Context().Done():
-			return cmd.Context().Err()
-		case <-time.After(2 * time.Second):
+			return fmt.Errorf("authentication watch canceled: %w", cmd.Context().Err())
+		case <-time.After(authenticationPollInterval):
 		}
 	}
 }

@@ -83,7 +83,7 @@ func UpdateProject(ctx context.Context, projectID string, body []byte) (*v3.Crea
 
 // DeleteProject deletes a project by ID.
 func DeleteProject(ctx context.Context, projectID string) error {
-	if err := rawRequest(ctx, http.MethodDelete, "/projects/"+projectID, nil, nil); err != nil {
+	if err := rawRequest(ctx, http.MethodDelete, rawPath("projects", projectID), nil, nil); err != nil {
 		return fmt.Errorf("api error: %w", err)
 	}
 	return nil

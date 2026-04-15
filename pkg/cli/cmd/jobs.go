@@ -12,6 +12,14 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var validJobsExportBlocks = func() []string {
+	blocks := make([]string, 0, len(v3.AllowedENUMPROPERTIESBLOCKSITEMSPROPERTIESKINDEnumValues))
+	for _, block := range v3.AllowedENUMPROPERTIESBLOCKSITEMSPROPERTIESKINDEnumValues {
+		blocks = append(blocks, string(block))
+	}
+	return blocks
+}()
+
 var jobsCmd = &cobra.Command{
 	Use:   "jobs",
 	Short: "Manage async jobs (reports, exports)",
@@ -22,7 +30,7 @@ and PDF exports. Use trigger-export to start an export, then poll with get.
 
 COMMON WORKFLOWS:
   • Trigger a report export:
-    $ escape-cli jobs trigger-export --block EXECUTIVE_SUMMARY --block VULNERABILITIES
+    $ escape-cli jobs trigger-export --block SCAN_SUMMARY --block ISSUE_SUMMARY
 
   • Get job status:
     $ escape-cli jobs get <job-id> [--watch]`,
@@ -43,18 +51,15 @@ Start an async job to generate a PDF or structured security report.
 The job runs in the background; use 'jobs get <id> --watch' to poll until complete.
 
 AVAILABLE BLOCKS:
-  EXECUTIVE_SUMMARY    - High-level overview for management
-  VULNERABILITIES      - Detailed vulnerability listing
-  COMPLIANCE           - Compliance status report
-  METHODOLOGY          - Testing methodology description`,
+  ` + strings.Join(validJobsExportBlocks, "\n  "),
 	Example: `  # Export full report for latest scan
-  escape-cli jobs trigger-export --block EXECUTIVE_SUMMARY --block VULNERABILITIES
+  escape-cli jobs trigger-export --block SCAN_SUMMARY --block ISSUE_SUMMARY
 
   # Export for a specific scan
-  escape-cli jobs trigger-export --block VULNERABILITIES --scan-id <scan-id>
+  escape-cli jobs trigger-export --block ISSUE_DETAIL --scan-id <scan-id>
 
   # Trigger and watch until complete
-  escape-cli jobs trigger-export --block EXECUTIVE_SUMMARY --watch`,
+  escape-cli jobs trigger-export --block SCAN_SUMMARY --watch`,
 	Args: cobra.NoArgs,
 	RunE: func(cmd *cobra.Command, _ []string) error {
 		if out.Schema(v3.TriggerExport200Response{}) {
@@ -63,6 +68,11 @@ AVAILABLE BLOCKS:
 
 		if len(jobsExportBlocks) == 0 {
 			return errors.New("at least one --block is required")
+		}
+		for _, block := range jobsExportBlocks {
+			if !v3.ENUMPROPERTIESBLOCKSITEMSPROPERTIESKIND(block).IsValid() {
+				return fmt.Errorf("invalid block %q; valid values: %s", block, strings.Join(validJobsExportBlocks, ", "))
+			}
 		}
 
 		job, err := escape.TriggerExport(cmd.Context(), jobsExportBlocks, jobsExportScanID)

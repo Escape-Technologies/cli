@@ -8,6 +8,7 @@ import (
 	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
 )
 
+// StartAuthentication starts a profile authentication check from raw JSON bytes.
 func StartAuthentication(ctx context.Context, body []byte) (*v3.StartAuthentication200Response, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
@@ -26,6 +27,7 @@ func StartAuthentication(ctx context.Context, body []byte) (*v3.StartAuthenticat
 	return data, nil
 }
 
+// GetAuthentication gets a profile authentication check by ID.
 func GetAuthentication(ctx context.Context, authenticationID string) (*v3.GetAuthentication200Response, error) {
 	client, err := newAPIV3Client()
 	if err != nil {

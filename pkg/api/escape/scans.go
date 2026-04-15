@@ -44,7 +44,7 @@ func ListScans(ctx context.Context, next string, filters *ListScansFilters) ([]v
 			req = req.Before(filters.Before)
 		}
 		if filters.AssetIDs != nil && len(*filters.AssetIDs) > 0 {
-			return nil, nil, fmt.Errorf("assetIds filter is not supported by the generated client yet")
+			return nil, nil, errors.New("assetIds filter is not supported by the generated client yet")
 		}
 		if filters.ProfileIDs != nil && len(*filters.ProfileIDs) > 0 {
 			req = req.ProfileIds(strings.Join(*filters.ProfileIDs, ","))
@@ -161,6 +161,10 @@ func CancelScan(ctx context.Context, scanID string) error {
 
 // ListScanTargets lists all targets discovered during a scan
 func ListScanTargets(ctx context.Context, scanID string, next string, targetTypes string, size int) ([]v3.TargetDetailed, *string, error) {
+	if strings.TrimSpace(scanID) == "" {
+		return nil, nil, errors.New("scanID is required")
+	}
+
 	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, nil, fmt.Errorf("unable to init client: %w", err)
