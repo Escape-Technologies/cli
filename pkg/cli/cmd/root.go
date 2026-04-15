@@ -4,6 +4,8 @@ package cmd
 import (
 	"context"
 	"fmt"
+	"os"
+	"strings"
 
 	"github.com/Escape-Technologies/cli/pkg/api/escape"
 	"github.com/Escape-Technologies/cli/pkg/cli/out"
@@ -18,23 +20,16 @@ var rootCmdVerbose int
 var rootCmdOutputStr string
 var rootCmdInputSchema bool
 
-var asciiLogo = `
- ██████████  █████████    █████████    █████████   ███████████  ██████████      █████████  █████       █████
-░░███░░░░░█ ███░░░░░███  ███░░░░░███  ███░░░░░███ ░░███░░░░░███░░███░░░░░█     ███░░░░░███░░███       ░░███ 
- ░███  █ ░ ░███    ░░░  ███     ░░░  ░███    ░███  ░███    ░███ ░███  █ ░     ███     ░░░  ░███        ░███ 
- ░██████   ░░█████████ ░███          ░███████████  ░██████████  ░██████      ░███          ░███        ░███ 
- ░███░░█    ░░░░░░░░███░███          ░███░░░░░███  ░███░░░░░░   ░███░░█      ░███          ░███        ░███ 
- ░███ ░   █ ███    ░███░░███     ███ ░███    ░███  ░███         ░███ ░   █   ░░███     ███ ░███      █ ░███ 
- ██████████░░█████████  ░░█████████  █████   █████ █████        ██████████    ░░█████████  ███████████ █████
-░░░░░░░░░░  ░░░░░░░░░    ░░░░░░░░░  ░░░░░   ░░░░░ ░░░░░        ░░░░░░░░░░      ░░░░░░░░░  ░░░░░░░░░░░ ░░░░░                                                                                                        
-`
-
-var asciiHeader = "Escape CLI V3"
+const escapeBrandColor = "\x1b[38;2;6;226;183m"
+const dimColor = "\x1b[90m"
+const resetColor = "\x1b[0m"
 
 var rootCmd = &cobra.Command{
 	Use:   "escape-cli",
-	Short: asciiLogo + "\n" + asciiHeader,
-	Long: `Escape CLI - Your Gateway to Comprehensive API Security Testing
+	Short: buildHelpHeader(),
+	Long: buildHelpHeader() + `
+
+Escape CLI - Your Gateway to Comprehensive API Security Testing
 
 Escape is the most advanced API security platform, helping you discover, test,
 and secure your APIs with cutting-edge DAST (Dynamic Application Security Testing)
@@ -76,8 +71,6 @@ capabilities.
   • API Reference: https://public.escape.tech/v3
   • Support: https://escape.tech/contact`,
 	PersistentPreRunE: func(c *cobra.Command, _ []string) error {
-		version.WarnIfNotLatestVersion(c.Context())
-
 		verbosityFrom := "command line argument"
 		if envVerbosity := env.GetVerbosity(); envVerbosity > rootCmdVerbose {
 			rootCmdVerbose = envVerbosity
@@ -96,12 +89,13 @@ capabilities.
 			escape.Debug = true
 		}
 		log.Info("Verbose mode: %d from %s", rootCmdVerbose, verbosityFrom)
-		log.Info("escape-cli version: %s", version.GetVersion().String())
+		log.Info("escape-cli version: %s", version.GetVersion().LogString())
 		err := out.SetOutput(rootCmdOutputStr)
 		if err != nil {
 			return fmt.Errorf("failed to set output format: %w", err)
 		}
 		out.SetInputSchema(rootCmdInputSchema)
+		printStartupHeader(c.Context())
 		return nil
 	},
 	PostRun: func(_ *cobra.Command, _ []string) {
@@ -142,11 +136,6 @@ ENVIRONMENT VARIABLES:
 For additional information, see the documentation: 
 https://docs.escape.tech/documentation/tooling/cli
 `)
-
-	isColorDisabled := env.GetColorPreference()
-	if !isColorDisabled {
-		rootCmd.Short = "\x1b[38;2;6;226;183m" + asciiLogo + "\x1b[0m" + "\n" + "\x1b[38;2;6;226;183m" + asciiHeader + "\x1b[0m"
-	}
 }
 
 // Execute the CLI
@@ -161,4 +150,46 @@ func Execute(ctx context.Context) error {
 		return fmt.Errorf("command %s failed: %w", cmd.Name(), err)
 	}
 	return nil
+}
+
+func buildHelpHeader() string {
+	v := version.GetVersion()
+	return brandText("Escape CLI "+v.DisplayVersion()) + "\n" + dimText("AI-native API security workflows")
+}
+
+func printStartupHeader(ctx context.Context) {
+	if !isPrettyOutput() {
+		return
+	}
+
+	v := version.GetDetailedVersion(ctx)
+	fmt.Fprintf(os.Stderr, "%s %s\n", brandText("Escape CLI"), dimText(v.DisplayVersion()))
+
+	if v.UpgradeCommand == "" || strings.TrimSpace(v.LatestVersion) == "" {
+		return
+	}
+
+	fmt.Fprintf(os.Stderr, "%s %s\n", dimText("Update available:"), brandText("v"+v.LatestVersion))
+	fmt.Fprintf(os.Stderr, "%s %s\n\n", dimText("Run:"), v.UpgradeCommand)
+}
+
+func isPrettyOutput() bool {
+	output := strings.ToLower(strings.TrimSpace(rootCmdOutputStr))
+	return output == "" || output == "pretty"
+}
+
+func brandText(value string) string {
+	return styleText(value, escapeBrandColor)
+}
+
+func dimText(value string) string {
+	return styleText(value, dimColor)
+}
+
+func styleText(value string, color string) string {
+	if env.GetColorPreference() {
+		return value
+	}
+
+	return color + value + resetColor
 }
