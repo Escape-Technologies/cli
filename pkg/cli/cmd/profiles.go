@@ -147,7 +147,23 @@ ID                                      CREATED AT              ASSET TYPE    IN
 		out.Table(allProfiles, func() []string {
 			result := []string{"ID\tCREATED AT\tASSET TYPE\tINITIATORS\tSCORE\tCOVERAGE\tOPEN ISSUES\tLAST SCAN STATUS\tNAME"}
 			for _, profile := range allProfiles {
-				result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s", profile.GetId(), profile.GetCreatedAt(), profile.Asset.GetType(), profile.GetInitiators(), stringValue(profile.AdditionalProperties["score"]), stringValue(profile.AdditionalProperties["coverage"]), stringValue(profile.AdditionalProperties["openIssueCount"]), stringValue(profile.AdditionalProperties["lastScanStatus"]), profile.GetName()))
+				score := ""
+				if value, ok := profile.GetScoreOk(); ok {
+					score = fmt.Sprintf("%.2f", *value)
+				}
+				coverage := ""
+				if value, ok := profile.GetCoverageOk(); ok {
+					coverage = fmt.Sprintf("%.2f", *value)
+				}
+				openIssueCount := ""
+				if value, ok := profile.GetOpenIssueCountOk(); ok {
+					openIssueCount = fmt.Sprintf("%d", *value)
+				}
+				lastScanStatus := ""
+				if value, ok := profile.GetLastScanStatusOk(); ok {
+					lastScanStatus = *value
+				}
+				result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s", profile.GetId(), profile.GetCreatedAt(), profile.Asset.GetType(), profile.GetInitiators(), score, coverage, openIssueCount, lastScanStatus, profile.GetName()))
 			}
 			return result
 		})

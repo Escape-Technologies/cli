@@ -209,6 +209,12 @@ deploy the agent using 'escape-cli locations start <name>'.`,
   escape-cli locations create --name "prod-vpc" --ssh-public-key "ssh-ed25519 AAAA..."`,
 	Args: cobra.NoArgs,
 	RunE: func(cmd *cobra.Command, _ []string) error {
+		if out.InputSchema(v3.CreateLocationRequest{}) {
+			return nil
+		}
+		if out.Schema(v3.CreateLocation200Response{}) {
+			return nil
+		}
 		if locationCreateName == "" {
 			return errors.New("--name is required")
 		}
@@ -228,8 +234,18 @@ var locationsUpdateCmd = &cobra.Command{
 	Long:  `Update Location - Modify Name or SSH Public Key`,
 	Example: `  # Update location name
   escape-cli locations update <location-id> --name "new-name"`,
-	Args: cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
+		if out.InputSchema(v3.UpdateLocationRequest{}) {
+			return nil
+		}
+		if out.Schema(v3.CreateLocation200Response{}) {
+			return nil
+		}
+		if len(args) != 1 {
+			_ = cmd.Help()
+			return errors.New("location ID is required")
+		}
+
 		var name *string
 		var sshPublicKey *string
 		var enabled *bool

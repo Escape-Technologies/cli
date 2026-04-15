@@ -109,6 +109,8 @@ func watchAuthentication(cmd *cobra.Command, authenticationID string) error {
 		case v3.ENUMPROPERTIESSTATUS_FAILED, v3.ENUMPROPERTIESSTATUS_CANCELED:
 			return fmt.Errorf("authentication check ended with status %s", auth.GetStatus())
 		case v3.ENUMPROPERTIESSTATUS_PENDING, v3.ENUMPROPERTIESSTATUS_RUNNING, v3.ENUMPROPERTIESSTATUS_STARTING:
+		default:
+			return fmt.Errorf("authentication check returned unknown status %q", auth.GetStatus())
 		}
 
 		select {

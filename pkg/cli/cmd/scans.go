@@ -669,6 +669,9 @@ FILTER OPTIONS:
 		if out.Schema([]v3.TargetDetailed{}) {
 			return nil
 		}
+		if scanTargetsSize < 0 {
+			return errors.New("--size must be greater than or equal to 0")
+		}
 
 		targets, next, err := escape.ListScanTargets(cmd.Context(), args[0], "", scanTargetsType, scanTargetsSize)
 		if err != nil {
@@ -717,6 +720,14 @@ FILTER OPTIONS:
 						coverage = string(*gr.Coverage)
 					}
 					meanDuration = gr.GetMeanDuration()
+				} else if cf := t.GetCodeFile(); cf.Id != "" {
+					targetType = "CODE_FILE"
+					method = cf.GetLanguage()
+					name = cf.GetPath()
+				} else if port := t.GetPort(); port.Id != "" {
+					targetType = "PORT"
+					method = port.GetProtocol()
+					name = fmt.Sprintf("%.0f", port.GetPort())
 				}
 				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%.0f\t%.0f", t.GetId(), targetType, method, name, coverage, requestCount, meanDuration))
 			}
