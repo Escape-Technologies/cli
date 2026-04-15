@@ -14,6 +14,8 @@ import (
 	"github.com/Escape-Technologies/cli/pkg/env"
 )
 
+const defaultRawRequestTimeout = 60 * time.Second
+
 func rawRequest(ctx context.Context, method, path string, body []byte, out any) error {
 	baseURL, err := env.GetAPIURL()
 	if err != nil {
@@ -41,7 +43,7 @@ func rawRequest(ctx context.Context, method, path string, body []byte, out any) 
 
 	client := env.GetHTTPClient()
 	if _, hasDeadline := ctx.Deadline(); !hasDeadline && client.Timeout == 0 {
-		client.Timeout = 60 * time.Second
+		client.Timeout = defaultRawRequestTimeout
 	}
 	resp, err := client.Do(req)
 	if err != nil {

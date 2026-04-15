@@ -157,7 +157,7 @@ ID                                      CREATED AT              ASSET TYPE    IN
 				}
 				openIssueCount := ""
 				if value, ok := profile.GetOpenIssueCountOk(); ok {
-					openIssueCount = fmt.Sprintf("%d", *value)
+					openIssueCount = strconv.Itoa(*value)
 				}
 				lastScanStatus := ""
 				if value, ok := profile.GetLastScanStatusOk(); ok {
