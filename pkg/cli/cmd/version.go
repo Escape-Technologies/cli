@@ -18,8 +18,8 @@ and build date. Use this to verify your installation and check for updates.`,
 
   # Check version in JSON format
   escape-cli version -o json`,
-	Run: func(_ *cobra.Command, _ []string) {
-		v := version.GetVersion()
+	Run: func(c *cobra.Command, _ []string) {
+		v := version.GetDetailedVersion(c.Context())
 		out.Print(v, v.String())
 	},
 }

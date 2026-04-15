@@ -5,8 +5,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"os"
 	"strings"
+	"sync"
 	"time"
 
 	"github.com/Escape-Technologies/cli/pkg/env"
@@ -17,6 +17,17 @@ const updateCheckTimeout = 1000 * time.Millisecond
 type githubRelease struct {
 	TagName string `json:"tag_name"`
 }
+
+type UpdateInfo struct {
+	Current   string `json:"current,omitempty"`
+	Latest    string `json:"latest,omitempty"`
+	Available bool   `json:"available,omitempty"`
+}
+
+var (
+	updateInfoOnce sync.Once
+	updateInfo     *UpdateInfo
+)
 
 func normalizeVersion(v string) string {
 	v = strings.TrimSpace(v)
@@ -46,29 +57,38 @@ func getLatestReleaseTag(ctx context.Context) (string, error) {
 	return strings.TrimSpace(release.TagName), nil
 }
 
-// WarnIfNotLatestVersion checks the latest GitHub release and prints if the current version is not the latest.
-func WarnIfNotLatestVersion(parentCtx context.Context) {
+// CheckForUpdate checks the latest GitHub release and caches the result for the current process.
+func CheckForUpdate(parentCtx context.Context) *UpdateInfo {
 	v := GetVersion()
-	if strings.TrimSpace(v.Version) == "" || v.Version == "local" {
-		return
-	}
-
-	ctx, cancel := context.WithTimeout(parentCtx, updateCheckTimeout)
-	defer cancel()
-
-	latest, err := getLatestReleaseTag(ctx)
-	if err != nil || latest == "" {
-		return
-	}
-
 	current := normalizeVersion(v.Version)
-	latestNorm := normalizeVersion(latest)
-	if current == latestNorm {
-		return
+	if current == "" {
+		return &UpdateInfo{}
 	}
 
-	yellow := "\x1b[33m"
-	reset := "\x1b[0m"
-	msg := fmt.Sprintf("A new version of escape-cli is available: %s (you have %s). Update: https://docs.escape.tech/documentation/tooling/cli/?h=cli", latest, v.Version)
-	fmt.Fprintf(os.Stderr, "%s%s%s\n", yellow, msg, reset)
+	if current == "local" {
+		return &UpdateInfo{Current: current}
+	}
+
+	updateInfoOnce.Do(func() {
+		info := &UpdateInfo{Current: current}
+
+		ctx, cancel := context.WithTimeout(parentCtx, updateCheckTimeout)
+		defer cancel()
+
+		latest, err := getLatestReleaseTag(ctx)
+		if err != nil || latest == "" {
+			updateInfo = info
+			return
+		}
+
+		info.Latest = normalizeVersion(latest)
+		info.Available = info.Current != "" && info.Current != info.Latest
+		updateInfo = info
+	})
+
+	if updateInfo == nil {
+		return &UpdateInfo{Current: current}
+	}
+
+	return updateInfo
 }
