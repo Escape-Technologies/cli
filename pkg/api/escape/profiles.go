@@ -11,14 +11,16 @@ import (
 
 // ListProfilesFilters holds optional filters for listing profiles
 type ListProfilesFilters struct {
-	AssetIDs   []string
-	Domains    []string
-	IssueIDs   []string
-	TagsIDs    []string
-	Search     string
-	Initiators []string
-	Kinds      []string
-	Risks      []string
+	AssetIDs      []string
+	Domains       []string
+	IssueIDs      []string
+	TagsIDs       []string
+	Search        string
+	Initiators    []string
+	Kinds         []string
+	Risks         []string
+	SortType      string
+	SortDirection string
 }
 
 // ListProfiles lists all profiles
@@ -32,6 +34,12 @@ func ListProfiles(ctx context.Context, next string, filters *ListProfilesFilters
 		req = req.Cursor(next)
 	}
 	if filters != nil {
+		if filters.SortType != "" {
+			req = req.SortType(filters.SortType)
+		}
+		if filters.SortDirection != "" {
+			req = req.SortDirection(filters.SortDirection)
+		}
 		if len(filters.AssetIDs) > 0 {
 			req = req.AssetIds(strings.Join(filters.AssetIDs, ","))
 		}
@@ -189,6 +197,63 @@ func UpdateProfileSchema(ctx context.Context, profileID string, schemaID string)
 	}
 
 	profile, _, err := client.ProfilesAPI.UpdateProfileSchema(ctx, profileID).UpdateProfileSchemaRequest(payload).Execute()
+	if err != nil {
+		return nil, fmt.Errorf("api error: %w", err)
+	}
+	return profile, nil
+}
+
+// CreateProfilePentestRest creates an AI Pentest profile for a REST application
+func CreateProfilePentestRest(ctx context.Context, data []byte) (interface{}, error) {
+	client, err := newAPIV3Client()
+	if err != nil {
+		return nil, fmt.Errorf("unable to init client: %w", err)
+	}
+
+	var payload v3.CreateDastRestProfileRequest
+	if err := json.Unmarshal(data, &payload); err != nil {
+		return nil, fmt.Errorf("invalid JSON: %w", err)
+	}
+
+	profile, _, err := client.ProfilesAPI.CreatePentestRestProfile(ctx).CreateDastRestProfileRequest(payload).Execute()
+	if err != nil {
+		return nil, fmt.Errorf("api error: %w", err)
+	}
+	return profile, nil
+}
+
+// CreateProfilePentestGraphql creates an AI Pentest profile for a GraphQL application
+func CreateProfilePentestGraphql(ctx context.Context, data []byte) (interface{}, error) {
+	client, err := newAPIV3Client()
+	if err != nil {
+		return nil, fmt.Errorf("unable to init client: %w", err)
+	}
+
+	var payload v3.CreateDastRestProfileRequest
+	if err := json.Unmarshal(data, &payload); err != nil {
+		return nil, fmt.Errorf("invalid JSON: %w", err)
+	}
+
+	profile, _, err := client.ProfilesAPI.CreatePentestGraphqlProfile(ctx).CreateDastRestProfileRequest(payload).Execute()
+	if err != nil {
+		return nil, fmt.Errorf("api error: %w", err)
+	}
+	return profile, nil
+}
+
+// CreateProfilePentestWebapp creates an AI Pentest profile for a web application
+func CreateProfilePentestWebapp(ctx context.Context, data []byte) (interface{}, error) {
+	client, err := newAPIV3Client()
+	if err != nil {
+		return nil, fmt.Errorf("unable to init client: %w", err)
+	}
+
+	var payload v3.CreateDastRestProfileRequest
+	if err := json.Unmarshal(data, &payload); err != nil {
+		return nil, fmt.Errorf("invalid JSON: %w", err)
+	}
+
+	profile, _, err := client.ProfilesAPI.CreatePentestWebappProfile(ctx).CreateDastRestProfileRequest(payload).Execute()
 	if err != nil {
 		return nil, fmt.Errorf("api error: %w", err)
 	}

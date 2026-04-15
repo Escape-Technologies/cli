@@ -36,7 +36,7 @@ type CreateWorkflowFilterUsingCustomFilterOnAssetsFilter struct {
 	FoundByProfileIds     []string                                                                         `json:"foundByProfileIds,omitempty"`
 	FoundByIntegrationIds []string                                                                         `json:"foundByIntegrationIds,omitempty"`
 	ScanIds               []string                                                                         `json:"scanIds,omitempty"`
-	ScannerKinds          []ENUMPROPERTIESFILTERSITEMS1PROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS         `json:"scannerKinds,omitempty"`
+	ScannerKinds          []ENUMPROPERTIESWHEREPROPERTIESSCANNERKINDSITEMS                                 `json:"scannerKinds,omitempty"`
 	WorkflowIds           []string                                                                         `json:"workflowIds,omitempty"`
 	Domains               []string                                                                         `json:"domains,omitempty"`
 	Environments          []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESENVIRONMENT   `json:"environments,omitempty"`
@@ -627,9 +627,9 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilter) SetScanIds(v []str
 }
 
 // GetScannerKinds returns the ScannerKinds field value if set, zero value otherwise.
-func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilter) GetScannerKinds() []ENUMPROPERTIESFILTERSITEMS1PROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS {
+func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilter) GetScannerKinds() []ENUMPROPERTIESWHEREPROPERTIESSCANNERKINDSITEMS {
 	if o == nil || IsNil(o.ScannerKinds) {
-		var ret []ENUMPROPERTIESFILTERSITEMS1PROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS
+		var ret []ENUMPROPERTIESWHEREPROPERTIESSCANNERKINDSITEMS
 		return ret
 	}
 	return o.ScannerKinds
@@ -637,7 +637,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilter) GetScannerKinds() 
 
 // GetScannerKindsOk returns a tuple with the ScannerKinds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilter) GetScannerKindsOk() ([]ENUMPROPERTIESFILTERSITEMS1PROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS, bool) {
+func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilter) GetScannerKindsOk() ([]ENUMPROPERTIESWHEREPROPERTIESSCANNERKINDSITEMS, bool) {
 	if o == nil || IsNil(o.ScannerKinds) {
 		return nil, false
 	}
@@ -653,8 +653,8 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilter) HasScannerKinds() 
 	return false
 }
 
-// SetScannerKinds gets a reference to the given []ENUMPROPERTIESFILTERSITEMS1PROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS and assigns it to the ScannerKinds field.
-func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilter) SetScannerKinds(v []ENUMPROPERTIESFILTERSITEMS1PROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS) {
+// SetScannerKinds gets a reference to the given []ENUMPROPERTIESWHEREPROPERTIESSCANNERKINDSITEMS and assigns it to the ScannerKinds field.
+func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilter) SetScannerKinds(v []ENUMPROPERTIESWHEREPROPERTIESSCANNERKINDSITEMS) {
 	o.ScannerKinds = v
 }
 

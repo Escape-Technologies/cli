@@ -6,11 +6,24 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"strconv"
 
 	"github.com/Escape-Technologies/cli/pkg/api/escape"
 	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
 	"github.com/Escape-Technologies/cli/pkg/cli/out"
 	"github.com/spf13/cobra"
+)
+
+// The generated API client reuses CreateDastRestProfileRequest for every
+// profile-creation endpoint, so these aliases keep each command's input schema
+// semantically aligned with the profile it creates.
+type (
+	createRestProfileInput           = v3.CreateDastRestProfileRequest
+	createWebappProfileInput         = v3.CreateDastRestProfileRequest
+	createGraphqlProfileInput        = v3.CreateDastRestProfileRequest
+	createPentestRestProfileInput    = v3.CreateDastRestProfileRequest
+	createPentestGraphqlProfileInput = v3.CreateDastRestProfileRequest
+	createPentestWebappProfileInput  = v3.CreateDastRestProfileRequest
 )
 
 var profileKinds = []string{
@@ -26,6 +39,8 @@ var profileTagsIDs []string
 var profileSearch string
 var profileInitiators []string
 var profileRisks []string
+var profileSortType string
+var profileSortDirection string
 
 var profilesCmd = &cobra.Command{
 	Use:     "profiles",
@@ -107,14 +122,16 @@ ID                                      CREATED AT              ASSET TYPE    IN
 		}
 
 		filters := &escape.ListProfilesFilters{
-			AssetIDs:   profileAssetIDs,
-			Domains:    profileDomains,
-			IssueIDs:   profileIssueIDs,
-			TagsIDs:    profileTagsIDs,
-			Search:     profileSearch,
-			Initiators: profileInitiators,
-			Kinds:      kindsToUse,
-			Risks:      profileRisks,
+			AssetIDs:      profileAssetIDs,
+			Domains:       profileDomains,
+			IssueIDs:      profileIssueIDs,
+			TagsIDs:       profileTagsIDs,
+			Search:        profileSearch,
+			Initiators:    profileInitiators,
+			Kinds:         kindsToUse,
+			Risks:         profileRisks,
+			SortType:      profileSortType,
+			SortDirection: profileSortDirection,
 		}
 		profiles, next, err := escape.ListProfiles(cmd.Context(), "", filters)
 		if err != nil {
@@ -129,9 +146,25 @@ ID                                      CREATED AT              ASSET TYPE    IN
 			allProfiles = append(allProfiles, profiles...)
 		}
 		out.Table(allProfiles, func() []string {
-			result := []string{"ID\tCREATED AT\tASSET TYPE\tINITIATORS\tNAME"}
+			result := []string{"ID\tCREATED AT\tASSET TYPE\tINITIATORS\tSCORE\tCOVERAGE\tOPEN ISSUES\tLAST SCAN STATUS\tNAME"}
 			for _, profile := range allProfiles {
-				result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s\t%s", profile.GetId(), profile.GetCreatedAt(), profile.Asset.GetType(), profile.GetInitiators(), profile.GetName()))
+				score := ""
+				if value, ok := profile.GetScoreOk(); ok {
+					score = fmt.Sprintf("%.2f", *value)
+				}
+				coverage := ""
+				if value, ok := profile.GetCoverageOk(); ok {
+					coverage = fmt.Sprintf("%.2f", *value)
+				}
+				openIssueCount := ""
+				if value, ok := profile.GetOpenIssueCountOk(); ok {
+					openIssueCount = strconv.Itoa(*value)
+				}
+				lastScanStatus := ""
+				if value, ok := profile.GetLastScanStatusOk(); ok {
+					lastScanStatus = *value
+				}
+				result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s", profile.GetId(), profile.GetCreatedAt(), profile.Asset.GetType(), profile.GetInitiators(), score, coverage, openIssueCount, lastScanStatus, profile.GetName()))
 			}
 			return result
 		})
@@ -185,7 +218,7 @@ Create a new profile for testing REST APIs. Provide configuration via JSON throu
 See https://public.escape.tech/v3/#tag/profiles for complete schema.`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
 		// Output JSON Schema for input format if requested
-		if out.InputSchema(v3.CreateDastRestProfileRequest{}) {
+		if out.InputSchema(createRestProfileInput{}) {
 			return nil
 		}
 		// Output JSON Schema if requested
@@ -230,7 +263,7 @@ var profileCreateWebappCmd = &cobra.Command{
 Create a new profile for testing web applications. Provide configuration via JSON through stdin.`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
 		// Output JSON Schema for input format if requested
-		if out.InputSchema(v3.CreateDastRestProfileRequest{}) {
+		if out.InputSchema(createWebappProfileInput{}) {
 			return nil
 		}
 		// Output JSON Schema if requested
@@ -274,7 +307,7 @@ var profileCreateGraphqlCmd = &cobra.Command{
 Create a new profile for testing GraphQL APIs. Provide configuration via JSON through stdin.`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
 		// Output JSON Schema for input format if requested
-		if out.InputSchema(v3.CreateDastRestProfileRequest{}) {
+		if out.InputSchema(createGraphqlProfileInput{}) {
 			return nil
 		}
 		// Output JSON Schema if requested
@@ -305,6 +338,180 @@ Create a new profile for testing GraphQL APIs. Provide configuration via JSON th
 				result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s", profileResponse.GetId(), profileResponse.GetCreatedAt(), profileResponse.GetName(), profileResponse.Asset.GetType()))
 			}
 			return result
+		})
+		return nil
+	},
+}
+
+var profileCreatePentestRestCmd = &cobra.Command{
+	Use:     "create-pentest-rest",
+	Aliases: []string{"cpr"},
+	Short:   "Create an AI Pentest REST API profile",
+	Long: `Create AI Pentest REST Profile - Configure Automated Penetration Testing
+
+Create a new AI-powered penetration testing profile for REST APIs.
+Provide configuration via JSON through stdin.`,
+	RunE: func(cmd *cobra.Command, _ []string) error {
+		if out.InputSchema(createPentestRestProfileInput{}) {
+			return nil
+		}
+		if out.Schema(v3.GetProfile200Response{}) {
+			return nil
+		}
+
+		b, err := io.ReadAll(os.Stdin)
+		if err != nil {
+			return fmt.Errorf("failed to read stdin: %w", err)
+		}
+
+		response, err := escape.CreateProfilePentestRest(cmd.Context(), b)
+		if err != nil {
+			return fmt.Errorf("failed to create pentest REST profile: %w", err)
+		}
+
+		out.Table(response, func() []string {
+			result := []string{"ID\tCREATED AT\tNAME\tASSET TYPE"}
+			if profileResponse, ok := response.(*v3.GetProfile200Response); ok {
+				result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s", profileResponse.GetId(), profileResponse.GetCreatedAt(), profileResponse.GetName(), profileResponse.Asset.GetType()))
+			}
+			return result
+		})
+		return nil
+	},
+}
+
+var profileCreatePentestGraphqlCmd = &cobra.Command{
+	Use:     "create-pentest-graphql",
+	Aliases: []string{"cpg"},
+	Short:   "Create an AI Pentest GraphQL profile",
+	Long: `Create AI Pentest GraphQL Profile - Configure Automated Penetration Testing
+
+Create a new AI-powered penetration testing profile for GraphQL APIs.
+Provide configuration via JSON through stdin.`,
+	RunE: func(cmd *cobra.Command, _ []string) error {
+		if out.InputSchema(createPentestGraphqlProfileInput{}) {
+			return nil
+		}
+		if out.Schema(v3.GetProfile200Response{}) {
+			return nil
+		}
+
+		b, err := io.ReadAll(os.Stdin)
+		if err != nil {
+			return fmt.Errorf("failed to read stdin: %w", err)
+		}
+
+		response, err := escape.CreateProfilePentestGraphql(cmd.Context(), b)
+		if err != nil {
+			return fmt.Errorf("failed to create pentest GraphQL profile: %w", err)
+		}
+
+		out.Table(response, func() []string {
+			result := []string{"ID\tCREATED AT\tNAME\tASSET TYPE"}
+			if profileResponse, ok := response.(*v3.GetProfile200Response); ok {
+				result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s", profileResponse.GetId(), profileResponse.GetCreatedAt(), profileResponse.GetName(), profileResponse.Asset.GetType()))
+			}
+			return result
+		})
+		return nil
+	},
+}
+
+var profileCreatePentestWebappCmd = &cobra.Command{
+	Use:     "create-pentest-webapp",
+	Aliases: []string{"cpw"},
+	Short:   "Create an AI Pentest WebApp profile",
+	Long: `Create AI Pentest WebApp Profile - Configure Automated Penetration Testing
+
+Create a new AI-powered penetration testing profile for web applications.
+Provide configuration via JSON through stdin.`,
+	RunE: func(cmd *cobra.Command, _ []string) error {
+		if out.InputSchema(createPentestWebappProfileInput{}) {
+			return nil
+		}
+		if out.Schema(v3.GetProfile200Response{}) {
+			return nil
+		}
+
+		b, err := io.ReadAll(os.Stdin)
+		if err != nil {
+			return fmt.Errorf("failed to read stdin: %w", err)
+		}
+
+		response, err := escape.CreateProfilePentestWebapp(cmd.Context(), b)
+		if err != nil {
+			return fmt.Errorf("failed to create pentest WebApp profile: %w", err)
+		}
+
+		out.Table(response, func() []string {
+			result := []string{"ID\tCREATED AT\tNAME\tASSET TYPE"}
+			if profileResponse, ok := response.(*v3.GetProfile200Response); ok {
+				result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s", profileResponse.GetId(), profileResponse.GetCreatedAt(), profileResponse.GetName(), profileResponse.Asset.GetType()))
+			}
+			return result
+		})
+		return nil
+	},
+}
+
+var profileProblemsCmd = &cobra.Command{
+	Use:     "problems",
+	Aliases: []string{"pb"},
+	Short:   "List profiles with scan problems",
+	Long: `List Profiles with Scan Problems - Identify Failing Configurations
+
+Display profiles whose latest scan encountered errors or failures. Useful for
+identifying configuration issues, broken authentication, or unreachable targets.`,
+	Example: `  # List all profiles with problems
+  escape-cli profiles problems
+
+  # Filter by asset
+  escape-cli profiles problems --asset-id <asset-id>
+
+  # Export to JSON
+  escape-cli profiles problems -o json`,
+	RunE: func(cmd *cobra.Command, _ []string) error {
+		if out.Schema([]v3.ProfileScanProblemsRow{}) {
+			return nil
+		}
+
+		filters := &escape.ListProblemsFilters{
+			AssetIDs:   profileAssetIDs,
+			Domains:    profileDomains,
+			IssueIDs:   profileIssueIDs,
+			TagsIDs:    profileTagsIDs,
+			Search:     profileSearch,
+			Initiators: profileInitiators,
+			Kinds:      profileKinds,
+			Risks:      profileRisks,
+		}
+		problems, next, err := escape.ListProblems(cmd.Context(), "", filters)
+		if err != nil {
+			return fmt.Errorf("unable to list problems: %w", err)
+		}
+		all := problems
+		for next != nil && *next != "" {
+			problems, next, err = escape.ListProblems(cmd.Context(), *next, filters)
+			if err != nil {
+				return fmt.Errorf("unable to list problems: %w", err)
+			}
+			all = append(all, problems...)
+		}
+		out.Table(all, func() []string {
+			res := []string{"PROFILE ID\tNAME\tLAST SCAN ID\tSTATUS\tSCORE\tCREATED AT"}
+			for _, row := range all {
+				scanID, status, score, createdAt := "-", "-", "-", "-"
+				if row.LastScan != nil {
+					scanID = row.LastScan.GetId()
+					status = row.LastScan.GetStatus()
+					if s := row.LastScan.GetScore(); s != 0 {
+						score = fmt.Sprintf("%.0f", s)
+					}
+					createdAt = row.LastScan.GetCreatedAt()
+				}
+				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s", row.GetId(), row.GetName(), scanID, status, score, createdAt))
+			}
+			return res
 		})
 		return nil
 	},
@@ -544,9 +751,13 @@ func init() {
 	profilesCmd.AddCommand(
 		profilesListCmd,
 		profileGetCmd,
+		profileProblemsCmd,
 		profileCreateRestCmd,
 		profileCreateWebappCmd,
 		profileCreateGraphqlCmd,
+		profileCreatePentestRestCmd,
+		profileCreatePentestGraphqlCmd,
+		profileCreatePentestWebappCmd,
 		profileUpdateCmd,
 		profileUpdateConfigurationCmd,
 		profileUpdateSchemaCmd,
@@ -564,5 +775,7 @@ func init() {
 	profilesListCmd.Flags().StringSliceVarP(&profileInitiators, "initiator", "n", []string{}, "initiator")
 	profilesListCmd.Flags().StringSliceVarP(&profileKinds, "kind", "k", []string{}, "kind")
 	profilesListCmd.Flags().StringSliceVarP(&profileRisks, "risk", "r", []string{}, "risk")
+	profilesListCmd.Flags().StringVar(&profileSortType, "sort-by", "", "sort field")
+	profilesListCmd.Flags().StringVar(&profileSortDirection, "sort-direction", "", "sort direction: asc, desc")
 	rootCmd.AddCommand(profilesCmd)
 }

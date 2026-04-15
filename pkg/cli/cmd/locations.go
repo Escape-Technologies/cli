@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"errors"
 	"fmt"
 	"strconv"
 
@@ -14,6 +15,8 @@ import (
 var locationsSearch = ""
 var locationsEnabled = false
 var locationsLocationTypes = []string{}
+var locationsSortType string
+var locationsSortDirection string
 
 var locationsCmd = &cobra.Command{
 	Use:     "locations",
@@ -50,9 +53,9 @@ var locationsListCmd = &cobra.Command{
 	Long: `List all locations.
 
 Example output:
-ID                                      NAME                       SSH PUBLIC KEY
-00000000-0000-0000-0000-000000000001    example-location-1         ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAI... example1@email.com
-00000000-0000-0000-0000-000000000002    example-location-2         ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAI... example2@email.com`,
+ID                                      NAME                 TYPE     ENABLED  LAST SEEN              LINK
+00000000-0000-0000-0000-000000000001    example-location-1   PRIVATE  true     2025-07-24T10:00:00Z  https://app.escape.tech/...
+00000000-0000-0000-0000-000000000002    example-location-2   ESCAPE   false                           https://app.escape.tech/...`,
 	Example: `escape-cli locations list`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
 		// Output JSON Schema if requested
@@ -64,6 +67,8 @@ ID                                      NAME                       SSH PUBLIC KE
 			Search:        locationsSearch,
 			Enabled:       locationsEnabled,
 			LocationTypes: locationsLocationTypes,
+			SortType:      locationsSortType,
+			SortDirection: locationsSortDirection,
 		}
 		locations, next, err := escape.ListLocations(cmd.Context(), "", filters)
 		if err != nil {
@@ -78,16 +83,17 @@ ID                                      NAME                       SSH PUBLIC KE
 			allLocations = append(allLocations, locations...)
 		}
 		out.Table(allLocations, func() []string {
-			res := []string{"ID\tNAME\tTYPE\tENABLED\tLINK"}
+			res := []string{"ID\tNAME\tTYPE\tENABLED\tLAST SEEN\tLINK"}
 			for _, location := range allLocations {
 				res = append(
 					res,
 					fmt.Sprintf(
-						"%s\t%s\t%s\t%t\t%s",
+						"%s\t%s\t%s\t%t\t%s\t%s",
 						location.GetId(),
 						location.GetName(),
 						location.GetType(),
 						location.GetEnabled(),
+						stringValue(location.AdditionalProperties["lastSeenAt"]),
 						location.GetLinks().LocationOverview,
 					),
 				)
@@ -184,13 +190,102 @@ Location deleted`,
 	},
 }
 
+var (
+	locationCreateName         string
+	locationCreateSSHPublicKey string
+	locationUpdateName         string
+	locationUpdateSSHPublicKey string
+	locationUpdateEnabled      bool
+)
+
+var locationsCreateCmd = &cobra.Command{
+	Use:   "create",
+	Short: "Create a new private location",
+	Long: `Create Private Location - Register a New Scanning Agent
+
+Register a new private location in the Escape platform. After creation,
+deploy the agent using 'escape-cli locations start <name>'.`,
+	Example: `  # Create a new location
+  escape-cli locations create --name "prod-vpc" --ssh-public-key "ssh-ed25519 AAAA..."`,
+	Args: cobra.NoArgs,
+	RunE: func(cmd *cobra.Command, _ []string) error {
+		if out.InputSchema(v3.CreateLocationRequest{}) {
+			return nil
+		}
+		if out.Schema(v3.CreateLocation200Response{}) {
+			return nil
+		}
+		if locationCreateName == "" {
+			return errors.New("--name is required")
+		}
+
+		id, err := escape.CreateLocation(cmd.Context(), locationCreateName, locationCreateSSHPublicKey)
+		if err != nil {
+			return fmt.Errorf("failed to create location: %w", err)
+		}
+		out.Log("Location created: " + id)
+		return nil
+	},
+}
+
+var locationsUpdateCmd = &cobra.Command{
+	Use:   "update location-id",
+	Short: "Update an existing location",
+	Long:  `Update Location - Modify Name or SSH Public Key`,
+	Example: `  # Update location name
+  escape-cli locations update <location-id> --name "new-name"`,
+	RunE: func(cmd *cobra.Command, args []string) error {
+		if out.InputSchema(v3.UpdateLocationRequest{}) {
+			return nil
+		}
+		if out.Schema(v3.CreateLocation200Response{}) {
+			return nil
+		}
+		if len(args) != 1 {
+			_ = cmd.Help()
+			return errors.New("location ID is required")
+		}
+
+		var name *string
+		var sshPublicKey *string
+		var enabled *bool
+		if cmd.Flags().Changed("name") {
+			name = &locationUpdateName
+		}
+		if cmd.Flags().Changed("ssh-public-key") {
+			sshPublicKey = &locationUpdateSSHPublicKey
+		}
+		if cmd.Flags().Changed("enabled") {
+			enabled = &locationUpdateEnabled
+		}
+		if name == nil && sshPublicKey == nil && enabled == nil {
+			return errors.New("at least one of --name, --ssh-public-key, or --enabled is required")
+		}
+		err := escape.UpdateLocation(cmd.Context(), args[0], name, sshPublicKey, enabled)
+		if err != nil {
+			return fmt.Errorf("failed to update location: %w", err)
+		}
+		out.Log(fmt.Sprintf("Location %s updated", args[0]))
+		return nil
+	},
+}
+
 func init() {
 	locationsCmd.AddCommand(locationsListCmd)
 	locationsCmd.AddCommand(locationsGetCmd)
 	locationsCmd.AddCommand(locationsStartCmd)
 	locationsCmd.AddCommand(locationsDeleteCmd)
+	locationsCmd.AddCommand(locationsCreateCmd)
+	locationsCmd.AddCommand(locationsUpdateCmd)
 	rootCmd.AddCommand(locationsCmd)
 	locationsListCmd.Flags().StringVarP(&locationsSearch, "search", "s", "", "Search term to filter locations by")
 	locationsListCmd.Flags().BoolVarP(&locationsEnabled, "enabled", "e", false, "Filter by enabled locations")
 	locationsListCmd.Flags().StringSliceVarP(&locationsLocationTypes, "type", "t", []string{}, "Filter by location type (private, escape, repeater)")
+	locationsListCmd.Flags().StringVar(&locationsSortType, "sort-by", "", "sort field")
+	locationsListCmd.Flags().StringVar(&locationsSortDirection, "sort-direction", "", "sort direction: asc, desc")
+	locationsCreateCmd.Flags().StringVar(&locationCreateName, "name", "", "location name")
+	locationsCreateCmd.Flags().StringVar(&locationCreateSSHPublicKey, "ssh-public-key", "", "SSH public key for the location")
+	locationsUpdateCmd.Flags().StringVar(&locationUpdateName, "name", "", "new location name")
+	locationsUpdateCmd.Flags().StringVar(&locationUpdateSSHPublicKey, "ssh-public-key", "", "new SSH public key")
+	locationsUpdateCmd.Flags().BoolVar(&locationUpdateEnabled, "enabled", false, "enable or disable the location")
 }

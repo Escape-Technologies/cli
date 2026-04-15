@@ -48,6 +48,8 @@ type APIClient struct {
 
 	// API Services
 
+	AsmAPI *AsmAPIService
+
 	AssetsAPI *AssetsAPIService
 
 	AuditAPI *AuditAPIService
@@ -71,6 +73,8 @@ type APIClient struct {
 	RolesAPI *RolesAPIService
 
 	ScansAPI *ScansAPIService
+
+	StatisticsAPI *StatisticsAPIService
 
 	TagsAPI *TagsAPIService
 
@@ -97,6 +101,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.common.client = c
 
 	// API Services
+	c.AsmAPI = (*AsmAPIService)(&c.common)
 	c.AssetsAPI = (*AssetsAPIService)(&c.common)
 	c.AuditAPI = (*AuditAPIService)(&c.common)
 	c.CustomRulesAPI = (*CustomRulesAPIService)(&c.common)
@@ -109,6 +114,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.ProjectsAPI = (*ProjectsAPIService)(&c.common)
 	c.RolesAPI = (*RolesAPIService)(&c.common)
 	c.ScansAPI = (*ScansAPIService)(&c.common)
+	c.StatisticsAPI = (*StatisticsAPIService)(&c.common)
 	c.TagsAPI = (*TagsAPIService)(&c.common)
 	c.UploadAPI = (*UploadAPIService)(&c.common)
 	c.UsersAPI = (*UsersAPIService)(&c.common)

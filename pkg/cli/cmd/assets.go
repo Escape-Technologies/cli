@@ -15,10 +15,12 @@ import (
 )
 
 var (
-	assetTypes      = []string{}
-	assetStatuses   = []string{}
-	assetActivities = false
-	manuallyCreated = false
+	assetTypes         = []string{}
+	assetStatuses      = []string{}
+	assetActivities    = false
+	manuallyCreated    = false
+	assetSortType      string
+	assetSortDirection string
 )
 
 var (
@@ -126,6 +128,8 @@ ID                                      CREATED AT                TYPE          
 			AssetStatuses:   assetStatuses,
 			Search:          search,
 			ManuallyCreated: manuallyCreated,
+			SortType:        assetSortType,
+			SortDirection:   assetSortDirection,
 		}
 		assets, next, err := escape.ListAssets(cmd.Context(), "", filters)
 		if err != nil {
@@ -140,9 +144,9 @@ ID                                      CREATED AT                TYPE          
 			allAssets = append(allAssets, assets...)
 		}
 		out.Table(allAssets, func() []string {
-			res := []string{"ID\tCREATED AT\tTYPE\tSTATUS\tLAST SEEN\tRISKS\tNAME"}
+			res := []string{"ID\tCREATED AT\tTYPE\tSTATUS\tLAST SEEN\tRISKS\tTAGS\tOWNERS\tNAME"}
 			for _, asset := range allAssets {
-				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s", asset.GetId(), asset.GetCreatedAt(), asset.GetType(), asset.GetStatus(), asset.GetLastSeenAt(), asset.GetRisks(), asset.GetName()))
+				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s", asset.GetId(), asset.GetCreatedAt(), asset.GetType(), asset.GetStatus(), asset.GetLastSeenAt(), asset.GetRisks(), joinTags(asset.GetTags()), ownersColumn(asset.AdditionalProperties), asset.GetName()))
 			}
 			return res
 		})
@@ -209,7 +213,7 @@ ID                                      CREATED AT                TYPE    NAME  
 		if assetActivities {
 			issues, _, err := escape.ListIssues(cmd.Context(), "", &escape.ListIssuesFilters{
 				AssetIDs: []string{args[0]},
-			})
+			}, "", "")
 			if err != nil {
 				return fmt.Errorf("unable to list issues: %w", err)
 			}
@@ -233,14 +237,40 @@ ID                                      CREATED AT                TYPE    NAME  
 		} else {
 
 			out.Table(asset, func() []string {
-				res := []string{"ID\tCREATED AT\tTYPE\tSTATUS\tLAST SEEN\tRISKS\tNAME"}
-				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s", asset.GetId(), asset.GetCreatedAt(), asset.GetType(), asset.GetStatus(), asset.GetLastSeenAt(), asset.GetRisks(), asset.GetName()))
+				res := []string{"ID\tCREATED AT\tTYPE\tSTATUS\tLAST SEEN\tRISKS\tTAGS\tOWNERS\tNAME"}
+				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s", asset.GetId(), asset.GetCreatedAt(), asset.GetType(), asset.GetStatus(), asset.GetLastSeenAt(), asset.GetRisks(), joinTags(asset.GetTags()), ownersColumn(asset.AdditionalProperties), asset.GetName()))
 				return res
 			})
 		}
 
 		return nil
 	},
+}
+
+func joinTags(tags []v3.Tag) string {
+	names := make([]string, 0, len(tags))
+	for _, tag := range tags {
+		if tag.GetName() != "" {
+			names = append(names, tag.GetName())
+		}
+	}
+	return strings.Join(names, ",")
+}
+
+func ownersColumn(additionalProperties map[string]interface{}) string {
+	value, ok := additionalProperties["owners"]
+	if !ok {
+		return ""
+	}
+	items, ok := value.([]interface{})
+	if !ok {
+		return stringValue(value)
+	}
+	owners := make([]string, 0, len(items))
+	for _, item := range items {
+		owners = append(owners, stringValue(item))
+	}
+	return strings.Join(owners, ",")
 }
 
 var assetDeleteCmd = &cobra.Command{
@@ -505,6 +535,139 @@ ID                                    TYPE    NAME                  STATUS
 	},
 }
 
+var (
+	bulkAssetIDs      []string
+	bulkAssetTypes    []string
+	bulkAssetStatuses []string
+	bulkAssetTagIDs   []string
+	bulkAssetProjIDs  []string
+	bulkAssetStatus   string
+	assetCommentMsg   string
+)
+
+var assetCommentCmd = &cobra.Command{
+	Use:   "comment asset-id",
+	Short: "Add a comment to an asset",
+	Args: func(cmd *cobra.Command, args []string) error {
+		if len(args) != 1 {
+			_ = cmd.Help()
+			return errors.New("asset ID is required")
+		}
+		return nil
+	},
+	RunE: func(cmd *cobra.Command, args []string) error {
+		if assetCommentMsg == "" {
+			return errors.New("--message is required")
+		}
+		if err := escape.CommentAsset(cmd.Context(), args[0], assetCommentMsg); err != nil {
+			return fmt.Errorf("unable to add comment: %w", err)
+		}
+		out.Log("Comment added to asset " + args[0])
+		return nil
+	},
+}
+
+var assetListActivitiesCmd = &cobra.Command{
+	Use:     "list-activities asset-id",
+	Aliases: []string{"activities"},
+	Short:   "List activities for an asset",
+	Args: func(cmd *cobra.Command, args []string) error {
+		if len(args) != 1 {
+			_ = cmd.Help()
+			return errors.New("asset ID is required")
+		}
+		return nil
+	},
+	RunE: func(cmd *cobra.Command, args []string) error {
+		if out.Schema([]v3.ActivitySummarized{}) {
+			return nil
+		}
+		activities, err := escape.ListAssetActivities(cmd.Context(), args[0])
+		if err != nil {
+			return fmt.Errorf("unable to list activities: %w", err)
+		}
+		out.Table(activities, func() []string {
+			res := []string{"ID\tCREATED AT\tKIND\tAUTHOR EMAIL"}
+			for _, a := range activities {
+				email := ""
+				if a.Author != nil {
+					email = a.Author.Email
+				}
+				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s", a.GetId(), a.GetCreatedAt(), a.GetKind(), email))
+			}
+			return res
+		})
+		return nil
+	},
+}
+
+var assetBulkUpdateCmd = &cobra.Command{
+	Use:   "bulk-update",
+	Short: "Update multiple assets matching a filter",
+	Long:  `Bulk update tags, projects, or status of assets matching a filter predicate.`,
+	RunE: func(cmd *cobra.Command, _ []string) error {
+		where := v3.BulkUpdateAssetsRequestWhere{}
+		if len(bulkAssetIDs) > 0 {
+			where.AssetIds = bulkAssetIDs
+		}
+		if len(bulkAssetTypes) > 0 {
+			types := make([]v3.ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE, len(bulkAssetTypes))
+			for i, t := range bulkAssetTypes {
+				types[i] = v3.ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE(t)
+			}
+			where.Types = types
+		}
+		if len(bulkAssetStatuses) > 0 {
+			statuses := make([]v3.ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS, len(bulkAssetStatuses))
+			for i, s := range bulkAssetStatuses {
+				statuses[i] = v3.ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS(s)
+			}
+			where.Statuses = statuses
+		}
+		var status *v3.ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS
+		if bulkAssetStatus != "" {
+			s := v3.ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS(bulkAssetStatus)
+			status = &s
+		}
+		if err := escape.BulkUpdateAssets(cmd.Context(), where, bulkAssetTagIDs, bulkAssetProjIDs, status); err != nil {
+			return fmt.Errorf("unable to bulk update assets: %w", err)
+		}
+		out.Log("Bulk update completed")
+		return nil
+	},
+}
+
+var assetBulkDeleteCmd = &cobra.Command{
+	Use:   "bulk-delete",
+	Short: "Delete multiple assets matching a filter",
+	Long:  `Schedule multiple assets matching a filter predicate for deletion.`,
+	RunE: func(cmd *cobra.Command, _ []string) error {
+		where := v3.BulkUpdateAssetsRequestWhere{}
+		if len(bulkAssetIDs) > 0 {
+			where.AssetIds = bulkAssetIDs
+		}
+		if len(bulkAssetTypes) > 0 {
+			types := make([]v3.ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE, len(bulkAssetTypes))
+			for i, t := range bulkAssetTypes {
+				types[i] = v3.ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE(t)
+			}
+			where.Types = types
+		}
+		if len(bulkAssetStatuses) > 0 {
+			statuses := make([]v3.ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS, len(bulkAssetStatuses))
+			for i, s := range bulkAssetStatuses {
+				statuses[i] = v3.ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS(s)
+			}
+			where.Statuses = statuses
+		}
+		if err := escape.BulkDeleteAssets(cmd.Context(), where); err != nil {
+			return fmt.Errorf("unable to bulk delete assets: %w", err)
+		}
+		out.Log("Bulk delete scheduled")
+		return nil
+	},
+}
+
 func init() {
 	rootCmd.AddCommand(assetsCmd)
 	assetsCmd.AddCommand(assetsListCmd)
@@ -512,6 +675,8 @@ func init() {
 	assetsListCmd.Flags().StringSliceVarP(&assetStatuses, "statuses", "", []string{}, fmt.Sprintf("filter by monitoring status: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUSEnumValues))
 	assetsListCmd.Flags().StringVarP(&search, "search", "s", "", "free-text search across asset names and URLs")
 	assetsListCmd.Flags().BoolVarP(&manuallyCreated, "manually-created", "m", false, "show only manually created assets (exclude auto-discovered)")
+	assetsListCmd.Flags().StringVar(&assetSortType, "sort-by", "", "sort field (e.g., LAST_SEEN, CREATED_AT)")
+	assetsListCmd.Flags().StringVar(&assetSortDirection, "sort-direction", "", "sort direction: asc, desc")
 
 	assetsCmd.AddCommand(assetGetCmd)
 	assetGetCmd.Flags().BoolVarP(&assetActivities, "activities", "a", false, "include issue activity timeline for this asset")
@@ -525,4 +690,22 @@ func init() {
 	assetUpdateCmd.Flags().StringSliceVarP(&assetTagIDs, "tag-ids", "t", []string{}, "comma-separated list of tag IDs for organization")
 
 	assetsCmd.AddCommand(createAssetCmd)
+
+	assetsCmd.AddCommand(assetCommentCmd)
+	assetCommentCmd.Flags().StringVar(&assetCommentMsg, "message", "", "comment text (max 512 characters)")
+
+	assetsCmd.AddCommand(assetListActivitiesCmd)
+
+	assetsCmd.AddCommand(assetBulkUpdateCmd)
+	assetBulkUpdateCmd.Flags().StringSliceVar(&bulkAssetIDs, "asset-id", nil, "filter by asset ID(s)")
+	assetBulkUpdateCmd.Flags().StringSliceVar(&bulkAssetTypes, "type", nil, "filter by asset type(s)")
+	assetBulkUpdateCmd.Flags().StringSliceVar(&bulkAssetStatuses, "asset-status", nil, "filter by current status")
+	assetBulkUpdateCmd.Flags().StringSliceVar(&bulkAssetTagIDs, "tag-id", nil, "tag IDs to assign")
+	assetBulkUpdateCmd.Flags().StringSliceVar(&bulkAssetProjIDs, "project-id", nil, "project IDs to assign")
+	assetBulkUpdateCmd.Flags().StringVar(&bulkAssetStatus, "status", "", "new status to apply")
+
+	assetsCmd.AddCommand(assetBulkDeleteCmd)
+	assetBulkDeleteCmd.Flags().StringSliceVar(&bulkAssetIDs, "asset-id", nil, "filter by asset ID(s)")
+	assetBulkDeleteCmd.Flags().StringSliceVar(&bulkAssetTypes, "type", nil, "filter by asset type(s)")
+	assetBulkDeleteCmd.Flags().StringSliceVar(&bulkAssetStatuses, "asset-status", nil, "filter by current status")
 }

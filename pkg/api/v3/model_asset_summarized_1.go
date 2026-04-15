@@ -40,11 +40,13 @@ type AssetSummarized1 struct {
 	// The tags of the asset
 	Tags []Tag `json:"tags"`
 	// The risks of the asset
-	Risks                []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS `json:"risks"`
-	Service              *AssetServiceSummarized                                      `json:"service,omitempty"`
-	Frontend             *AssetFrontendSummarized                                     `json:"frontend,omitempty"`
-	Host                 *AssetHostSummarized                                         `json:"host,omitempty"`
-	Links                AssetDetailedLinks                                           `json:"links"`
+	Risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS `json:"risks"`
+	// Email addresses of the owners of this asset.
+	Owners               []string                 `json:"owners,omitempty"`
+	Service              *AssetServiceSummarized  `json:"service,omitempty"`
+	Frontend             *AssetFrontendSummarized `json:"frontend,omitempty"`
+	Host                 *AssetHostSummarized     `json:"host,omitempty"`
+	Links                AssetDetailedLinks       `json:"links"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -389,6 +391,38 @@ func (o *AssetSummarized1) SetRisks(v []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPR
 	o.Risks = v
 }
 
+// GetOwners returns the Owners field value if set, zero value otherwise.
+func (o *AssetSummarized1) GetOwners() []string {
+	if o == nil || IsNil(o.Owners) {
+		var ret []string
+		return ret
+	}
+	return o.Owners
+}
+
+// GetOwnersOk returns a tuple with the Owners field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AssetSummarized1) GetOwnersOk() ([]string, bool) {
+	if o == nil || IsNil(o.Owners) {
+		return nil, false
+	}
+	return o.Owners, true
+}
+
+// HasOwners returns a boolean if a field has been set.
+func (o *AssetSummarized1) HasOwners() bool {
+	if o != nil && !IsNil(o.Owners) {
+		return true
+	}
+
+	return false
+}
+
+// SetOwners gets a reference to the given []string and assigns it to the Owners field.
+func (o *AssetSummarized1) SetOwners(v []string) {
+	o.Owners = v
+}
+
 // GetService returns the Service field value if set, zero value otherwise.
 func (o *AssetSummarized1) GetService() AssetServiceSummarized {
 	if o == nil || IsNil(o.Service) {
@@ -537,6 +571,9 @@ func (o AssetSummarized1) ToMap() (map[string]interface{}, error) {
 	toSerialize["status"] = o.Status
 	toSerialize["tags"] = o.Tags
 	toSerialize["risks"] = o.Risks
+	if !IsNil(o.Owners) {
+		toSerialize["owners"] = o.Owners
+	}
 	if !IsNil(o.Service) {
 		toSerialize["service"] = o.Service
 	}
@@ -611,6 +648,7 @@ func (o *AssetSummarized1) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "status")
 		delete(additionalProperties, "tags")
 		delete(additionalProperties, "risks")
+		delete(additionalProperties, "owners")
 		delete(additionalProperties, "service")
 		delete(additionalProperties, "frontend")
 		delete(additionalProperties, "host")
