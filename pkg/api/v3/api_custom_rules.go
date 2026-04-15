@@ -425,6 +425,13 @@ func (a *CustomRulesAPIService) GetCustomRuleExecute(r ApiGetCustomRuleRequest) 
 type ApiListCustomRulesRequest struct {
 	ctx        context.Context
 	ApiService *CustomRulesAPIService
+	context    *string
+}
+
+// Filter by custom rule context
+func (r ApiListCustomRulesRequest) Context(context string) ApiListCustomRulesRequest {
+	r.context = &context
+	return r
 }
 
 func (r ApiListCustomRulesRequest) Execute() ([]CustomRuleSummarized, *http.Response, error) {
@@ -468,6 +475,9 @@ func (a *CustomRulesAPIService) ListCustomRulesExecute(r ApiListCustomRulesReque
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.context != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "context", r.context, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
