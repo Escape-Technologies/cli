@@ -10,6 +10,7 @@ import (
 	"time"
 
 	"github.com/Escape-Technologies/cli/pkg/env"
+	"golang.org/x/mod/semver"
 )
 
 const updateCheckTimeout = 1000 * time.Millisecond
@@ -18,6 +19,7 @@ type githubRelease struct {
 	TagName string `json:"tag_name"`
 }
 
+// UpdateInfo stores the cached result of the latest release lookup.
 type UpdateInfo struct {
 	Current   string `json:"current,omitempty"`
 	Latest    string `json:"latest,omitempty"`
@@ -33,6 +35,29 @@ func normalizeVersion(v string) string {
 	v = strings.TrimSpace(v)
 	v = strings.TrimPrefix(v, "v")
 	return v
+}
+
+func canonicalVersion(v string) string {
+	normalized := normalizeVersion(v)
+	if normalized == "" {
+		return ""
+	}
+
+	return "v" + normalized
+}
+
+func compareVersions(current string, latest string) int {
+	currentSemver := canonicalVersion(current)
+	latestSemver := canonicalVersion(latest)
+	if !semver.IsValid(currentSemver) || !semver.IsValid(latestSemver) {
+		return 0
+	}
+
+	return semver.Compare(currentSemver, latestSemver)
+}
+
+func hasUpdate(current string, latest string) bool {
+	return compareVersions(current, latest) < 0
 }
 
 func getLatestReleaseTag(ctx context.Context) (string, error) {
@@ -82,7 +107,7 @@ func CheckForUpdate(parentCtx context.Context) *UpdateInfo {
 		}
 
 		info.Latest = normalizeVersion(latest)
-		info.Available = info.Current != "" && info.Current != info.Latest
+		info.Available = hasUpdate(info.Current, info.Latest)
 		updateInfo = info
 	})
 

@@ -70,7 +70,7 @@ capabilities.
   • Documentation: https://docs.escape.tech/documentation/tooling/cli
   • API Reference: https://public.escape.tech/v3
   • Support: https://escape.tech/contact`,
-	PersistentPreRunE: func(c *cobra.Command, _ []string) error {
+	PersistentPreRunE: func(_ *cobra.Command, _ []string) error {
 		verbosityFrom := "command line argument"
 		if envVerbosity := env.GetVerbosity(); envVerbosity > rootCmdVerbose {
 			rootCmdVerbose = envVerbosity
@@ -95,7 +95,7 @@ capabilities.
 			return fmt.Errorf("failed to set output format: %w", err)
 		}
 		out.SetInputSchema(rootCmdInputSchema)
-		printStartupHeader(c.Context())
+		printStartupHeader()
 		return nil
 	},
 	PostRun: func(_ *cobra.Command, _ []string) {
@@ -157,20 +157,13 @@ func buildHelpHeader() string {
 	return brandText("Escape CLI "+v.DisplayVersion()) + "\n" + dimText("AI-native API security workflows")
 }
 
-func printStartupHeader(ctx context.Context) {
+func printStartupHeader() {
 	if !isPrettyOutput() {
 		return
 	}
 
-	v := version.GetDetailedVersion(ctx)
+	v := version.GetVersion()
 	fmt.Fprintf(os.Stderr, "%s %s\n", brandText("Escape CLI"), dimText(v.DisplayVersion()))
-
-	if v.UpgradeCommand == "" || strings.TrimSpace(v.LatestVersion) == "" {
-		return
-	}
-
-	fmt.Fprintf(os.Stderr, "%s %s\n", dimText("Update available:"), brandText("v"+v.LatestVersion))
-	fmt.Fprintf(os.Stderr, "%s %s\n\n", dimText("Run:"), v.UpgradeCommand)
 }
 
 func isPrettyOutput() bool {
