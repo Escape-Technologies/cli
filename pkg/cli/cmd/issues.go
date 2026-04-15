@@ -574,9 +574,7 @@ var issueBulkUpdateCmd = &cobra.Command{
 		out.Log(fmt.Sprintf("Updated %d issues", len(result.GetIds())))
 		out.Table(result, func() []string {
 			res := []string{"UPDATED IDS"}
-			for _, id := range result.GetIds() {
-				res = append(res, id)
-			}
+			res = append(res, result.GetIds()...)
 			return res
 		})
 		return nil
