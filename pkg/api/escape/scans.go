@@ -12,15 +12,17 @@ import (
 
 // ListScansFilters holds optional filters for listing scans
 type ListScansFilters struct {
-	After      string
-	Before     string
-	AssetIDs   *[]string
-	ProfileIDs *[]string
-	ProjectIDs *[]string
-	Ignored    string
-	Initiator  *[]string
-	Kinds      *[]string
-	Status     *[]string
+	After         string
+	Before        string
+	AssetIDs      *[]string
+	ProfileIDs    *[]string
+	ProjectIDs    *[]string
+	Ignored       string
+	Initiator     *[]string
+	Kinds         *[]string
+	Status        *[]string
+	SortType      string
+	SortDirection string
 }
 
 // ListScans lists all scans for an application
@@ -32,7 +34,17 @@ func ListScans(ctx context.Context, next string, filters *ListScansFilters) ([]v
 	req := client.ScansAPI.ListScans(ctx)
 
 	batchSize := 100
-	req = req.SortType("createdAt").SortDirection("desc").Size(batchSize)
+	if filters != nil && filters.SortType != "" {
+		req = req.SortType(filters.SortType)
+	} else {
+		req = req.SortType("createdAt")
+	}
+	if filters != nil && filters.SortDirection != "" {
+		req = req.SortDirection(filters.SortDirection)
+	} else {
+		req = req.SortDirection("desc")
+	}
+	req = req.Size(batchSize)
 	if next != "" {
 		req = req.Cursor(next)
 	}
@@ -44,7 +56,7 @@ func ListScans(ctx context.Context, next string, filters *ListScansFilters) ([]v
 			req = req.Before(filters.Before)
 		}
 		if filters.AssetIDs != nil && len(*filters.AssetIDs) > 0 {
-			return nil, nil, errors.New("assetIds filter is not supported by the generated client yet")
+			req = req.AssetIds(strings.Join(*filters.AssetIDs, ","))
 		}
 		if filters.ProfileIDs != nil && len(*filters.ProfileIDs) > 0 {
 			req = req.ProfileIds(strings.Join(*filters.ProfileIDs, ","))

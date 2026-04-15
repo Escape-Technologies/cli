@@ -38,6 +38,8 @@ var profileTagsIDs []string
 var profileSearch string
 var profileInitiators []string
 var profileRisks []string
+var profileSortType string
+var profileSortDirection string
 
 var profilesCmd = &cobra.Command{
 	Use:     "profiles",
@@ -119,14 +121,16 @@ ID                                      CREATED AT              ASSET TYPE    IN
 		}
 
 		filters := &escape.ListProfilesFilters{
-			AssetIDs:   profileAssetIDs,
-			Domains:    profileDomains,
-			IssueIDs:   profileIssueIDs,
-			TagsIDs:    profileTagsIDs,
-			Search:     profileSearch,
-			Initiators: profileInitiators,
-			Kinds:      kindsToUse,
-			Risks:      profileRisks,
+			AssetIDs:      profileAssetIDs,
+			Domains:       profileDomains,
+			IssueIDs:      profileIssueIDs,
+			TagsIDs:       profileTagsIDs,
+			Search:        profileSearch,
+			Initiators:    profileInitiators,
+			Kinds:         kindsToUse,
+			Risks:         profileRisks,
+			SortType:      profileSortType,
+			SortDirection: profileSortDirection,
 		}
 		profiles, next, err := escape.ListProfiles(cmd.Context(), "", filters)
 		if err != nil {
@@ -433,6 +437,69 @@ Provide configuration via JSON through stdin.`,
 	},
 }
 
+var profileProblemsCmd = &cobra.Command{
+	Use:     "problems",
+	Aliases: []string{"pb"},
+	Short:   "List profiles with scan problems",
+	Long: `List Profiles with Scan Problems - Identify Failing Configurations
+
+Display profiles whose latest scan encountered errors or failures. Useful for
+identifying configuration issues, broken authentication, or unreachable targets.`,
+	Example: `  # List all profiles with problems
+  escape-cli profiles problems
+
+  # Filter by asset
+  escape-cli profiles problems --asset-id <asset-id>
+
+  # Export to JSON
+  escape-cli profiles problems -o json`,
+	RunE: func(cmd *cobra.Command, _ []string) error {
+		if out.Schema([]v3.ProfileScanProblemsRow{}) {
+			return nil
+		}
+
+		filters := &escape.ListProblemsFilters{
+			AssetIDs:   profileAssetIDs,
+			Domains:    profileDomains,
+			IssueIDs:   profileIssueIDs,
+			TagsIDs:    profileTagsIDs,
+			Search:     profileSearch,
+			Initiators: profileInitiators,
+			Kinds:      profileKinds,
+			Risks:      profileRisks,
+		}
+		problems, next, err := escape.ListProblems(cmd.Context(), "", filters)
+		if err != nil {
+			return fmt.Errorf("unable to list problems: %w", err)
+		}
+		all := problems
+		for next != nil && *next != "" {
+			problems, next, err = escape.ListProblems(cmd.Context(), *next, filters)
+			if err != nil {
+				return fmt.Errorf("unable to list problems: %w", err)
+			}
+			all = append(all, problems...)
+		}
+		out.Table(all, func() []string {
+			res := []string{"PROFILE ID\tNAME\tLAST SCAN ID\tSTATUS\tSCORE\tCREATED AT"}
+			for _, row := range all {
+				scanID, status, score, createdAt := "-", "-", "-", "-"
+				if row.LastScan != nil {
+					scanID = row.LastScan.GetId()
+					status = row.LastScan.GetStatus()
+					if s := row.LastScan.GetScore(); s != 0 {
+						score = fmt.Sprintf("%.0f", s)
+					}
+					createdAt = row.LastScan.GetCreatedAt()
+				}
+				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s", row.GetId(), row.GetName(), scanID, status, score, createdAt))
+			}
+			return res
+		})
+		return nil
+	},
+}
+
 var profileUpdateCmd = &cobra.Command{
 	Use:     "update profile-id",
 	Aliases: []string{"u", "edit"},
@@ -667,6 +734,7 @@ func init() {
 	profilesCmd.AddCommand(
 		profilesListCmd,
 		profileGetCmd,
+		profileProblemsCmd,
 		profileCreateRestCmd,
 		profileCreateWebappCmd,
 		profileCreateGraphqlCmd,
@@ -690,5 +758,7 @@ func init() {
 	profilesListCmd.Flags().StringSliceVarP(&profileInitiators, "initiator", "n", []string{}, "initiator")
 	profilesListCmd.Flags().StringSliceVarP(&profileKinds, "kind", "k", []string{}, "kind")
 	profilesListCmd.Flags().StringSliceVarP(&profileRisks, "risk", "r", []string{}, "risk")
+	profilesListCmd.Flags().StringVar(&profileSortType, "sort-by", "", "sort field")
+	profilesListCmd.Flags().StringVar(&profileSortDirection, "sort-direction", "", "sort direction: asc, desc")
 	rootCmd.AddCommand(profilesCmd)
 }

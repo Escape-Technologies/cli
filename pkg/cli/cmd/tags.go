@@ -104,6 +104,82 @@ Create a new tag with a custom name and color. Use hex color codes without the #
 	},
 }
 
+var tagsGetCmd = &cobra.Command{
+	Use:     "get tag-id",
+	Aliases: []string{"g", "show", "describe"},
+	Args:    cobra.ExactArgs(1),
+	Short:   "Get a tag by ID",
+	Long:    `Get a tag by its ID.`,
+	Example: `  # Get a tag
+  escape-cli tags get 00000000-0000-0000-0000-000000000000
+
+  # Get tag as JSON
+  escape-cli tags get <tag-id> -o json`,
+	RunE: func(cmd *cobra.Command, args []string) error {
+		if out.Schema(v3.CreateTag200Response{}) {
+			return nil
+		}
+
+		tag, err := escape.GetTag(cmd.Context(), args[0])
+		if err != nil {
+			return fmt.Errorf("unable to get tag: %w", err)
+		}
+
+		out.Table(tag, func() []string {
+			return []string{
+				"ID\tNAME\tCOLOR",
+				fmt.Sprintf("%s\t%s\t%s", tag.GetId(), tag.GetName(), tag.GetColor()),
+			}
+		})
+		return nil
+	},
+}
+
+var (
+	tagUpdateName  string
+	tagUpdateColor string
+)
+
+var tagsUpdateCmd = &cobra.Command{
+	Use:     "update tag-id",
+	Aliases: []string{"u", "edit"},
+	Args:    cobra.ExactArgs(1),
+	Short:   "Update a tag name or color",
+	Example: `  # Rename a tag
+  escape-cli tags update <tag-id> --name new-name
+
+  # Change color
+  escape-cli tags update <tag-id> --color ff0000`,
+	RunE: func(cmd *cobra.Command, args []string) error {
+		if out.Schema(v3.CreateTag200Response{}) {
+			return nil
+		}
+
+		var name, color *string
+		if cmd.Flags().Changed("name") {
+			name = &tagUpdateName
+		}
+		if cmd.Flags().Changed("color") {
+			color = &tagUpdateColor
+		}
+		if name == nil && color == nil {
+			return errors.New("at least one of --name or --color is required")
+		}
+
+		tag, err := escape.UpdateTag(cmd.Context(), args[0], name, color)
+		if err != nil {
+			return fmt.Errorf("unable to update tag: %w", err)
+		}
+		out.Table(tag, func() []string {
+			return []string{
+				"ID\tNAME\tCOLOR",
+				fmt.Sprintf("%s\t%s\t%s", tag.GetId(), tag.GetName(), tag.GetColor()),
+			}
+		})
+		return nil
+	},
+}
+
 var tagsDeleteCmd = &cobra.Command{
 	Use:     "delete tag-id",
 	Aliases: []string{"del", "rm", "remove"},
@@ -127,13 +203,18 @@ Permanently delete a tag from your organization`,
 
 func init() {
 	tagsCmd.AddCommand(tagsListCmd)
+	tagsCmd.AddCommand(tagsGetCmd)
 	tagsCmd.AddCommand(tagsCreateCmd)
+	tagsCmd.AddCommand(tagsUpdateCmd)
 	tagsCmd.AddCommand(tagsDeleteCmd)
 
 	tagsCreateCmd.Flags().StringP("name", "n", "", "Name of the tag")
 	tagsCreateCmd.Flags().StringP("color", "c", "", "Color of the tag")
 	_ = tagsCreateCmd.MarkFlagRequired("name")
 	_ = tagsCreateCmd.MarkFlagRequired("color")
+
+	tagsUpdateCmd.Flags().StringVarP(&tagUpdateName, "name", "n", "", "new tag name")
+	tagsUpdateCmd.Flags().StringVarP(&tagUpdateColor, "color", "c", "", "new tag color (hex without #)")
 
 	rootCmd.AddCommand(tagsCmd)
 }

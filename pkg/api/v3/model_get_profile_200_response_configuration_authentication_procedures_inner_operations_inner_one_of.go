@@ -20,9 +20,9 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationAuthenticationProcedur
 
 // GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf struct for GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf
 type GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf struct {
-	Tech                 ENUMHTTP                                                                                              `json:"tech"`
-	Parameters           GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters         `json:"parameters"`
-	Extractions          []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfExtractionsInner `json:"extractions"`
+	Tech ENUMHTTP `json:"tech"`
+	Parameters GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters `json:"parameters"`
+	Extractions []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfExtractionsInner `json:"extractions"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -121,7 +121,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 }
 
 func (o GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -156,10 +156,10 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -222,3 +222,5 @@ func (v *NullableGetProfile200ResponseConfigurationAuthenticationProceduresInner
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

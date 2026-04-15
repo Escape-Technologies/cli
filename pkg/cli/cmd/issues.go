@@ -53,6 +53,8 @@ var (
 	jiraTicket           string
 	risks                []string
 	assetClasses         []string
+	issueScannerKinds    []string
+	issueNames           []string
 )
 
 var issuesCmd = &cobra.Command{
@@ -172,6 +174,9 @@ ID                                      CREATED AT  SEVERITY  STATUS  NAME      
 			Risks:        risks,
 			Search:       search,
 			AssetClasses: assetClasses,
+			JiraTicket:   jiraTicket,
+			ScannerKinds: issueScannerKinds,
+			Names:        issueNames,
 		}
 		issues, next, err := escape.ListIssues(cmd.Context(), "", filters, issueSortType, issueSortDirection)
 		if err != nil {
@@ -453,6 +458,156 @@ var issueCommentCmd = &cobra.Command{
 	},
 }
 
+var (
+	funnelProjectIDs []string
+
+	trendAfter          string
+	trendBefore         string
+	trendInterval       string
+	trendApplicationIDs []string
+	trendProjectIDs     []string
+
+	bulkIssueStatus      string
+	bulkIssueIDs         []string
+	bulkIssueAssetIDs    []string
+	bulkIssueSeverities  []string
+	bulkIssueProfileIDs  []string
+	bulkIssueTagIDs      []string
+	bulkIssueScannerKinds []string
+
+	notifyScanID string
+)
+
+var issueFunnelCmd = &cobra.Command{
+	Use:   "funnel",
+	Short: "Show issue funnel breakdown",
+	Long:  `Display the issue funnel: ALL → OPEN_ISSUES → EXPOSED → UNAUTHENTICATED → HIGH_BUSINESS_IMPACT → CRITICAL with counts per category and step.`,
+	RunE: func(cmd *cobra.Command, _ []string) error {
+		if out.Schema([]v3.IssueFunnelInner{}) {
+			return nil
+		}
+		steps, err := escape.GetIssueFunnel(cmd.Context(), funnelProjectIDs)
+		if err != nil {
+			return fmt.Errorf("unable to get issue funnel: %w", err)
+		}
+		out.Table(steps, func() []string {
+			res := []string{"CATEGORY\tSTEP\tCOUNT"}
+			for _, s := range steps {
+				res = append(res, fmt.Sprintf("%s\t%s\t%.0f", s.GetCategory(), s.GetStep(), s.GetCount()))
+			}
+			return res
+		})
+		return nil
+	},
+}
+
+var issueTrendsCmd = &cobra.Command{
+	Use:   "trends",
+	Short: "Show issue severity trends over time",
+	Long:  `Display time-bucketed issue counts by severity. Track whether your security posture is improving or degrading.`,
+	RunE: func(cmd *cobra.Command, _ []string) error {
+		if out.Schema([]v3.IssueTrendsInner{}) {
+			return nil
+		}
+		if trendAfter == "" || trendBefore == "" {
+			return errors.New("--after and --before are required")
+		}
+		points, err := escape.GetIssueTrends(cmd.Context(), trendAfter, trendBefore, trendInterval, trendApplicationIDs, trendProjectIDs)
+		if err != nil {
+			return fmt.Errorf("unable to get issue trends: %w", err)
+		}
+		out.Table(points, func() []string {
+			res := []string{"DATE\tHIGH\tMEDIUM\tLOW\tINFO"}
+			for _, p := range points {
+				res = append(res, fmt.Sprintf("%s\t%.0f\t%.0f\t%.0f\t%.0f", p.GetDate(), p.GetHIGH(), p.GetMEDIUM(), p.GetLOW(), p.GetINFO()))
+			}
+			return res
+		})
+		return nil
+	},
+}
+
+var issueBulkUpdateCmd = &cobra.Command{
+	Use:   "bulk-update",
+	Short: "Update status of multiple issues matching a filter",
+	Long:  `Bulk update the status of issues. For example, mark all LOW severity issues on a given asset as IGNORED.`,
+	RunE: func(cmd *cobra.Command, _ []string) error {
+		if bulkIssueStatus == "" {
+			return errors.New("--status is required")
+		}
+		status := v3.ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS(bulkIssueStatus)
+		where := v3.BulkUpdateIssuesRequestWhere{}
+		if len(bulkIssueIDs) > 0 {
+			where.Ids = bulkIssueIDs
+		}
+		if len(bulkIssueAssetIDs) > 0 {
+			where.AssetIds = bulkIssueAssetIDs
+		}
+		if len(bulkIssueSeverities) > 0 {
+			severities := make([]v3.ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY, len(bulkIssueSeverities))
+			for i, s := range bulkIssueSeverities {
+				severities[i] = v3.ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY(s)
+			}
+			where.Severities = severities
+		}
+		if len(bulkIssueProfileIDs) > 0 {
+			where.ProfileIds = bulkIssueProfileIDs
+		}
+		if len(bulkIssueTagIDs) > 0 {
+			where.TagIds = bulkIssueTagIDs
+		}
+		if len(bulkIssueScannerKinds) > 0 {
+			kinds := make([]v3.ENUMPROPERTIESWHEREPROPERTIESSCANNERKINDSITEMS, len(bulkIssueScannerKinds))
+			for i, k := range bulkIssueScannerKinds {
+				kinds[i] = v3.ENUMPROPERTIESWHEREPROPERTIESSCANNERKINDSITEMS(k)
+			}
+			where.ScannerKinds = kinds
+		}
+		result, err := escape.BulkUpdateIssues(cmd.Context(), status, &where)
+		if err != nil {
+			return fmt.Errorf("unable to bulk update issues: %w", err)
+		}
+		out.Log(fmt.Sprintf("Updated %d issues", len(result.GetIds())))
+		out.Table(result, func() []string {
+			res := []string{"UPDATED IDS"}
+			for _, id := range result.GetIds() {
+				res = append(res, id)
+			}
+			return res
+		})
+		return nil
+	},
+}
+
+var issueNotifyCmd = &cobra.Command{
+	Use:   "notify issue-id",
+	Short: "Send notification to asset owners about an issue",
+	Long:  `Send an email notification to the owners of the asset associated with this issue.`,
+	Args: func(cmd *cobra.Command, args []string) error {
+		if len(args) != 1 {
+			_ = cmd.Help()
+			return errors.New("issue ID is required")
+		}
+		return nil
+	},
+	RunE: func(cmd *cobra.Command, args []string) error {
+		issueID := args[0]
+		if notifyScanID == "" {
+			return errors.New("--scan-id is required")
+		}
+		notified, err := escape.NotifyIssueOwners(cmd.Context(), issueID, notifyScanID)
+		if err != nil {
+			return fmt.Errorf("unable to notify owners: %w", err)
+		}
+		if notified {
+			out.Log("Notification sent to asset owners for issue " + issueID)
+		} else {
+			out.Log("No owners found to notify for issue " + issueID)
+		}
+		return nil
+	},
+}
+
 func init() {
 	issuesCmd.AddCommand(issueGetCmd)
 	issuesCmd.AddCommand(issueListActivitiesCmd)
@@ -462,6 +617,28 @@ func init() {
 	issuesCmd.AddCommand(issueUpdateStatusCmd)
 	issueUpdateStatusCmd.Flags().StringVarP(&issueUpdateStatusStr, "status", "s", issueUpdateStatusStr, fmt.Sprintf("new status for the issue: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESSTATUSEnumValues))
 	issueUpdateStatusCmd.Flags().StringVar(&issueUpdateComment, "comment", "", "optional comment explaining the status change")
+
+	issuesCmd.AddCommand(issueFunnelCmd)
+	issueFunnelCmd.Flags().StringSliceVar(&funnelProjectIDs, "project-id", nil, "filter by project ID(s)")
+
+	issuesCmd.AddCommand(issueTrendsCmd)
+	issueTrendsCmd.Flags().StringVar(&trendAfter, "after", "", "start date (ISO 8601, required)")
+	issueTrendsCmd.Flags().StringVar(&trendBefore, "before", "", "end date (ISO 8601, required)")
+	issueTrendsCmd.Flags().StringVar(&trendInterval, "interval", "1 day", "time bucket interval (e.g. '1 day', '1 week')")
+	issueTrendsCmd.Flags().StringSliceVar(&trendApplicationIDs, "application-id", nil, "filter by application ID(s)")
+	issueTrendsCmd.Flags().StringSliceVar(&trendProjectIDs, "project-id", nil, "filter by project ID(s)")
+
+	issuesCmd.AddCommand(issueBulkUpdateCmd)
+	issueBulkUpdateCmd.Flags().StringVar(&bulkIssueStatus, "status", "", "new status to apply (required)")
+	issueBulkUpdateCmd.Flags().StringSliceVar(&bulkIssueIDs, "issue-id", nil, "filter by issue ID(s)")
+	issueBulkUpdateCmd.Flags().StringSliceVar(&bulkIssueAssetIDs, "asset-id", nil, "filter by asset ID(s)")
+	issueBulkUpdateCmd.Flags().StringSliceVar(&bulkIssueSeverities, "severity", nil, "filter by severity")
+	issueBulkUpdateCmd.Flags().StringSliceVar(&bulkIssueProfileIDs, "profile-id", nil, "filter by profile ID(s)")
+	issueBulkUpdateCmd.Flags().StringSliceVar(&bulkIssueTagIDs, "tag-id", nil, "filter by tag ID(s)")
+	issueBulkUpdateCmd.Flags().StringSliceVar(&bulkIssueScannerKinds, "scanner-kind", nil, "filter by scanner kind")
+
+	issuesCmd.AddCommand(issueNotifyCmd)
+	issueNotifyCmd.Flags().StringVar(&notifyScanID, "scan-id", "", "scan ID to reference in the notification (required)")
 
 	issuesCmd.AddCommand(issueListCmd)
 
@@ -477,6 +654,8 @@ func init() {
 	issueListCmd.Flags().StringVarP(&jiraTicket, "jira-ticket", "j", "", "filter by associated Jira ticket ID")
 	issueListCmd.Flags().StringSliceVarP(&risks, "risk", "r", []string{}, fmt.Sprintf("filter by asset risk level: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMSEnumValues))
 	issueListCmd.Flags().StringSliceVarP(&assetClasses, "asset-class", "", []string{}, fmt.Sprintf("filter by asset classification: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASSEnumValues))
+	issueListCmd.Flags().StringSliceVar(&issueScannerKinds, "scanner-kind", []string{}, "filter by scanner kind (e.g., DAST, BLST_REST)")
+	issueListCmd.Flags().StringSliceVar(&issueNames, "name", []string{}, "filter by issue name(s)")
 	issueListCmd.Flags().StringVar(&issueSortType, "sort-by", "", "sort field: LAST_SEEN, FIRST_SEEN, SEVERITY, STATUS")
 	issueListCmd.Flags().StringVar(&issueSortDirection, "sort-direction", "", "sort direction: asc, desc")
 

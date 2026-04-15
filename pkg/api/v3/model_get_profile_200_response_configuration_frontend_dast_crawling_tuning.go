@@ -19,11 +19,11 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationFrontendDastCrawlingTu
 
 // GetProfile200ResponseConfigurationFrontendDastCrawlingTuning struct for GetProfile200ResponseConfigurationFrontendDastCrawlingTuning
 type GetProfile200ResponseConfigurationFrontendDastCrawlingTuning struct {
-	MaxUniqueValuesPerQueryParam  *float32 `json:"max_unique_values_per_query_param,omitempty"`
-	MaxUniqueFragmentsPerPage     *float32 `json:"max_unique_fragments_per_page,omitempty"`
+	MaxUniqueValuesPerQueryParam *float32 `json:"max_unique_values_per_query_param,omitempty"`
+	MaxUniqueFragmentsPerPage *float32 `json:"max_unique_fragments_per_page,omitempty"`
 	MaxParameterizedUrlVariations *float32 `json:"max_parameterized_url_variations,omitempty"`
-	OnlyInscopeCrawlingLogs       *bool    `json:"only_inscope_crawling_logs,omitempty"`
-	AdditionalProperties          map[string]interface{}
+	OnlyInscopeCrawlingLogs *bool `json:"only_inscope_crawling_logs,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetProfile200ResponseConfigurationFrontendDastCrawlingTuning GetProfile200ResponseConfigurationFrontendDastCrawlingTuning
@@ -174,7 +174,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) SetOnlyIn
 }
 
 func (o GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -262,3 +262,5 @@ func (v *NullableGetProfile200ResponseConfigurationFrontendDastCrawlingTuning) U
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

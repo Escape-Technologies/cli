@@ -11,14 +11,16 @@ import (
 
 // ListProfilesFilters holds optional filters for listing profiles
 type ListProfilesFilters struct {
-	AssetIDs   []string
-	Domains    []string
-	IssueIDs   []string
-	TagsIDs    []string
-	Search     string
-	Initiators []string
-	Kinds      []string
-	Risks      []string
+	AssetIDs      []string
+	Domains       []string
+	IssueIDs      []string
+	TagsIDs       []string
+	Search        string
+	Initiators    []string
+	Kinds         []string
+	Risks         []string
+	SortType      string
+	SortDirection string
 }
 
 // ListProfiles lists all profiles
@@ -32,6 +34,12 @@ func ListProfiles(ctx context.Context, next string, filters *ListProfilesFilters
 		req = req.Cursor(next)
 	}
 	if filters != nil {
+		if filters.SortType != "" {
+			req = req.SortType(filters.SortType)
+		}
+		if filters.SortDirection != "" {
+			req = req.SortDirection(filters.SortDirection)
+		}
 		if len(filters.AssetIDs) > 0 {
 			req = req.AssetIds(strings.Join(filters.AssetIDs, ","))
 		}

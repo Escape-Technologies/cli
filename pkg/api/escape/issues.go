@@ -24,6 +24,7 @@ type ListIssuesFilters struct {
 	Risks        []string
 	AssetClasses []string
 	ScannerKinds []string
+	Names        []string
 }
 
 // GetIssue gets an issue by ID
@@ -101,6 +102,9 @@ func ListIssues(ctx context.Context, next string, filters *ListIssuesFilters, so
 		if len(filters.ScannerKinds) > 0 {
 			req = req.ScannerKinds(strings.Join(filters.ScannerKinds, ","))
 		}
+		if len(filters.Names) > 0 {
+			req = req.Names(v3.ListIssuesNamesParameter{ArrayOfString: &filters.Names})
+		}
 	}
 
 	data, _, err := req.Execute()
@@ -141,7 +145,7 @@ func CommentIssue(ctx context.Context, issueID string, comment string) error {
 	if err != nil {
 		return fmt.Errorf("unable to init client: %w", err)
 	}
-	_, _, err = client.IssuesAPI.CreateIssueComment(ctx, issueID).CreateIssueCommentRequest(v3.CreateIssueCommentRequest{
+	_, _, err = client.IssuesAPI.CreateIssueComment(ctx, issueID).CreateAssetCommentRequest(v3.CreateAssetCommentRequest{
 		Comment: comment,
 	}).Execute()
 	if err != nil {
@@ -163,4 +167,75 @@ func ListIssueActivities(ctx context.Context, issueID string) ([]v3.ActivitySumm
 		return nil, fmt.Errorf("api error: %w", err)
 	}
 	return data, nil
+}
+
+// GetIssueFunnel returns the issue funnel breakdown
+func GetIssueFunnel(ctx context.Context, projectIDs []string) ([]v3.IssueFunnelInner, error) {
+	client, err := newAPIV3Client()
+	if err != nil {
+		return nil, fmt.Errorf("unable to init client: %w", err)
+	}
+	req := client.IssuesAPI.GetIssueFunnel(ctx)
+	if len(projectIDs) > 0 {
+		req = req.ProjectIds(v3.GetIssueFunnelProjectIdsParameter{ArrayOfString: &projectIDs})
+	}
+	data, _, err := req.Execute()
+	if err != nil {
+		return nil, fmt.Errorf("api error: %w", err)
+	}
+	return data, nil
+}
+
+// GetIssueTrends returns severity trends over time
+func GetIssueTrends(ctx context.Context, after, before, interval string, applicationIDs, projectIDs []string) ([]v3.IssueTrendsInner, error) {
+	client, err := newAPIV3Client()
+	if err != nil {
+		return nil, fmt.Errorf("unable to init client: %w", err)
+	}
+	req := client.IssuesAPI.GetIssueTrends(ctx).After(after).Before(before)
+	if interval != "" {
+		req = req.Interval(interval)
+	}
+	if len(applicationIDs) > 0 {
+		req = req.ApplicationIds(v3.GetIssueTrendsApplicationIdsParameter{ArrayOfString: &applicationIDs})
+	}
+	if len(projectIDs) > 0 {
+		req = req.ProjectIds(v3.GetIssueTrendsProjectIdsParameter{ArrayOfString: &projectIDs})
+	}
+	data, _, err := req.Execute()
+	if err != nil {
+		return nil, fmt.Errorf("api error: %w", err)
+	}
+	return data, nil
+}
+
+// BulkUpdateIssues updates multiple issues matching a filter
+func BulkUpdateIssues(ctx context.Context, status v3.ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS, where *v3.BulkUpdateIssuesRequestWhere) (*v3.BulkUpdateIssues200Response, error) {
+	client, err := newAPIV3Client()
+	if err != nil {
+		return nil, fmt.Errorf("unable to init client: %w", err)
+	}
+	body := v3.BulkUpdateIssuesRequest{Status: status}
+	if where != nil {
+		body.Where = where
+	}
+	data, _, err := client.IssuesAPI.BulkUpdateIssues(ctx).BulkUpdateIssuesRequest(body).Execute()
+	if err != nil {
+		return nil, fmt.Errorf("api error: %w", err)
+	}
+	return data, nil
+}
+
+// NotifyIssueOwners sends a notification to asset owners about an issue
+func NotifyIssueOwners(ctx context.Context, issueID, scanID string) (bool, error) {
+	client, err := newAPIV3Client()
+	if err != nil {
+		return false, fmt.Errorf("unable to init client: %w", err)
+	}
+	body := v3.NotifyIssueOwnersRequest{ScanId: scanID}
+	data, _, err := client.IssuesAPI.NotifyIssueOwners(ctx, issueID).NotifyIssueOwnersRequest(body).Execute()
+	if err != nil {
+		return false, fmt.Errorf("api error: %w", err)
+	}
+	return data.GetNotified(), nil
 }

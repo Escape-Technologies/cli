@@ -12,10 +12,12 @@ import (
 )
 
 var (
-	stages         []string
-	hasAttachments bool
-	attachments    []string
-	eventLevels    []string
+	stages             []string
+	hasAttachments     bool
+	attachments        []string
+	eventLevels        []string
+	eventSortType      string
+	eventSortDirection string
 )
 
 var eventsCmd = &cobra.Command{
@@ -78,6 +80,8 @@ FILTER OPTIONS:
 			HasAttachments: hasAttachments,
 			Attachments:    attachments,
 			Levels:         eventLevels,
+			SortType:       eventSortType,
+			SortDirection:  eventSortDirection,
 		}
 		events, next, err := escape.ListEvents(cmd.Context(), "", filters)
 		if err != nil {
@@ -121,15 +125,43 @@ ID                                      LEVEL    TITLE                          
 		return nil
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
+		if out.Schema(v3.GetEvent200Response{}) {
+			return nil
+		}
+
 		eventID := args[0]
 		event, err := escape.GetEvent(cmd.Context(), eventID)
 		if err != nil {
 			return fmt.Errorf("unable to get event: %w", err)
 		}
 
+		scanID := "-"
+		if event.ScanId != nil {
+			scanID = *event.ScanId
+		}
+		link := ""
+		if event.Scan != nil {
+			link = strings.Replace(event.Scan.GetLinks().ScanIssues, "/issues", "/logs", 1)
+		}
+		attachmentIDs := make([]string, 0, len(event.GetAttachments()))
+		for _, a := range event.GetAttachments() {
+			attachmentIDs = append(attachmentIDs, a.GetId())
+		}
+
 		out.Table(event, func() []string {
-			res := []string{"ID\tCREATED AT\tLEVEL\tSTAGE\tTITLE\tLINK"}
-			res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s", event.GetId(), event.GetCreatedAt(), event.GetLevel(), event.GetStage(), event.GetTitle(), strings.Replace(event.Scan.GetLinks().ScanIssues, "/issues", "/logs", 1)))
+			res := []string{"ID\tCREATED AT\tLEVEL\tSTAGE\tTITLE\tDESCRIPTION\tISSUES COUNT\tSCAN ID\tATTACHMENTS\tLINK"}
+			res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%.0f\t%s\t%s\t%s",
+				event.GetId(),
+				event.GetCreatedAt(),
+				event.GetLevel(),
+				event.GetStage(),
+				event.GetTitle(),
+				event.GetDescription(),
+				event.GetIssuesCount(),
+				scanID,
+				strings.Join(attachmentIDs, ", "),
+				link,
+			))
 			return res
 		})
 
@@ -147,6 +179,8 @@ func init() {
 	eventsListCmd.Flags().BoolVarP(&hasAttachments, "has-attachments", "", hasAttachments, "Has attachments")
 	eventsListCmd.Flags().StringSliceVarP(&attachments, "attachments", "t", attachments, "Attachments to filter events by")
 	eventsListCmd.Flags().StringSliceVarP(&eventLevels, "levels", "l", eventLevels, fmt.Sprintf("levels of events: %v", v3.AllowedENUMPROPERTIESEVENTSITEMSPROPERTIESLEVELEnumValues))
+	eventsListCmd.Flags().StringVar(&eventSortType, "sort-by", "", "sort field")
+	eventsListCmd.Flags().StringVar(&eventSortDirection, "sort-direction", "", "sort direction: asc, desc")
 
 	eventsCmd.AddCommand(eventGetCmd)
 

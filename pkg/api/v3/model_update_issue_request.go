@@ -19,7 +19,7 @@ var _ MappedNullable = &UpdateIssueRequest{}
 
 // UpdateIssueRequest struct for UpdateIssueRequest
 type UpdateIssueRequest struct {
-	Status               *ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS `json:"status,omitempty"`
+	Status *ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS `json:"status,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -75,7 +75,7 @@ func (o *UpdateIssueRequest) SetStatus(v ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS
 }
 
 func (o UpdateIssueRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -151,3 +151,5 @@ func (v *NullableUpdateIssueRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

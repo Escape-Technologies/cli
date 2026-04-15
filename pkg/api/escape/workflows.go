@@ -10,8 +10,11 @@ import (
 
 // ListWorkflowsFilters holds optional filters for listing workflows
 type ListWorkflowsFilters struct {
-	Triggers []string
-	Search   string
+	Triggers       []string
+	Search         string
+	ProjectIDs     []string
+	IntegrationIDs []string
+	WorkflowIDs    []string
 }
 
 // ListWorkflows lists all workflows with optional filters
@@ -30,6 +33,15 @@ func ListWorkflows(ctx context.Context, next string, filters *ListWorkflowsFilte
 		}
 		if filters.Search != "" {
 			req = req.Search(filters.Search)
+		}
+		if len(filters.ProjectIDs) > 0 {
+			req = req.ProjectIds(filters.ProjectIDs)
+		}
+		if len(filters.IntegrationIDs) > 0 {
+			req = req.IntegrationIds(filters.IntegrationIDs)
+		}
+		if len(filters.WorkflowIDs) > 0 {
+			req = req.WorkflowIds(filters.WorkflowIDs)
 		}
 	}
 	data, _, err := req.Execute()
