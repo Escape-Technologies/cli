@@ -102,7 +102,7 @@ func DeleteRoleBinding(ctx context.Context, bindingID string) error {
 
 // DeleteRole deletes a role by ID.
 func DeleteRole(ctx context.Context, roleID string) error {
-	if err := rawRequest(ctx, http.MethodDelete, "/roles/"+roleID, nil, nil); err != nil {
+	if err := rawRequest(ctx, http.MethodDelete, rawPath("roles", roleID), nil, nil); err != nil {
 		return fmt.Errorf("api error: %w", err)
 	}
 	return nil

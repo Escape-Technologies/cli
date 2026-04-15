@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"net/url"
 	"strings"
 
 	"github.com/Escape-Technologies/cli/pkg/env"
@@ -41,7 +42,9 @@ func rawRequest(ctx context.Context, method, path string, body []byte, out any) 
 	if err != nil {
 		return fmt.Errorf("request failed: %w", err)
 	}
-	defer resp.Body.Close()
+	defer func() {
+		_ = resp.Body.Close()
+	}()
 
 	if resp.StatusCode >= http.StatusBadRequest {
 		data, _ := io.ReadAll(resp.Body)
@@ -64,4 +67,12 @@ func rawRequest(ctx context.Context, method, path string, body []byte, out any) 
 		return fmt.Errorf("failed to decode response: %w", err)
 	}
 	return nil
+}
+
+func rawPath(segments ...string) string {
+	escaped := make([]string, 0, len(segments))
+	for _, segment := range segments {
+		escaped = append(escaped, url.PathEscape(segment))
+	}
+	return "/" + strings.Join(escaped, "/")
 }

@@ -3,12 +3,20 @@ package cmd
 import (
 	"errors"
 	"fmt"
+	"strings"
 
 	"github.com/Escape-Technologies/cli/pkg/api/escape"
 	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
 	"github.com/Escape-Technologies/cli/pkg/cli/out"
 	"github.com/spf13/cobra"
 )
+
+var validIssueSortFields = map[string]struct{}{
+	"LAST_SEEN":  {},
+	"FIRST_SEEN": {},
+	"SEVERITY":   {},
+	"STATUS":     {},
+}
 
 var (
 	issueUpdateStatusStr string
@@ -115,6 +123,23 @@ ID                                      CREATED AT  SEVERITY  STATUS  NAME      
 		// Output JSON Schema if requested
 		if out.Schema([]v3.IssueSummarized{}) {
 			return nil
+		}
+
+		if issueSortDirection != "" && issueSortType == "" {
+			return errors.New("--sort-direction requires --sort-by")
+		}
+		if issueSortType != "" {
+			issueSortType = strings.ToUpper(issueSortType)
+			if _, ok := validIssueSortFields[issueSortType]; !ok {
+				return fmt.Errorf("invalid --sort-by %q; valid values: LAST_SEEN, FIRST_SEEN, SEVERITY, STATUS", issueSortType)
+			}
+		}
+		switch normalizedDirection := strings.ToLower(issueSortDirection); normalizedDirection {
+		case "":
+		case "asc", "desc":
+			issueSortDirection = normalizedDirection
+		default:
+			return fmt.Errorf("invalid --sort-direction %q; valid values: asc, desc", issueSortDirection)
 		}
 
 		filters := &escape.ListIssuesFilters{

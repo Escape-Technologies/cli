@@ -2,6 +2,7 @@ package escape
 
 import (
 	"context"
+	"errors"
 	"fmt"
 
 	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
@@ -22,6 +23,10 @@ func GetJob(ctx context.Context, jobID string) (*v3.GetJob200Response, error) {
 
 // TriggerExport triggers an async PDF/report export job
 func TriggerExport(ctx context.Context, blocks []string, scanID string) (*v3.TriggerExport200Response, error) {
+	if len(blocks) == 0 {
+		return nil, errors.New("at least one export block is required")
+	}
+
 	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
