@@ -2,12 +2,29 @@ package escape
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"strings"
 
 	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
 )
+
+// IssueFunnelStep is a stable CLI DTO for the issue funnel endpoint.
+type IssueFunnelStep struct {
+	Category string  `json:"category"`
+	Step     string  `json:"step"`
+	Count    float32 `json:"count"`
+}
+
+// IssueTrendPoint is a stable CLI DTO for the issue trends endpoint.
+type IssueTrendPoint struct {
+	Date   string  `json:"date"`
+	HIGH   float32 `json:"HIGH"`
+	MEDIUM float32 `json:"MEDIUM"`
+	LOW    float32 `json:"LOW"`
+	INFO   float32 `json:"INFO"`
+}
 
 // ListIssuesFilters holds optional filters for listing issues
 type ListIssuesFilters struct {
@@ -169,8 +186,22 @@ func ListIssueActivities(ctx context.Context, issueID string) ([]v3.ActivitySumm
 	return data, nil
 }
 
+func decodeResponseSlice[T any](data any) ([]T, error) {
+	raw, err := json.Marshal(data)
+	if err != nil {
+		return nil, fmt.Errorf("unable to marshal response: %w", err)
+	}
+
+	var result []T
+	if err := json.Unmarshal(raw, &result); err != nil {
+		return nil, fmt.Errorf("unable to decode response: %w", err)
+	}
+
+	return result, nil
+}
+
 // GetIssueFunnel returns the issue funnel breakdown
-func GetIssueFunnel(ctx context.Context, projectIDs []string) ([]v3.IssueFunnelInner, error) {
+func GetIssueFunnel(ctx context.Context, projectIDs []string) ([]IssueFunnelStep, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
@@ -183,11 +214,12 @@ func GetIssueFunnel(ctx context.Context, projectIDs []string) ([]v3.IssueFunnelI
 	if err != nil {
 		return nil, fmt.Errorf("api error: %w", err)
 	}
-	return data, nil
+
+	return decodeResponseSlice[IssueFunnelStep](data)
 }
 
 // GetIssueTrends returns severity trends over time
-func GetIssueTrends(ctx context.Context, after, before, interval string, applicationIDs, projectIDs []string) ([]v3.IssueTrendsInner, error) {
+func GetIssueTrends(ctx context.Context, after, before, interval string, applicationIDs, projectIDs []string) ([]IssueTrendPoint, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
@@ -206,7 +238,8 @@ func GetIssueTrends(ctx context.Context, after, before, interval string, applica
 	if err != nil {
 		return nil, fmt.Errorf("api error: %w", err)
 	}
-	return data, nil
+
+	return decodeResponseSlice[IssueTrendPoint](data)
 }
 
 // BulkUpdateIssues updates multiple issues matching a filter

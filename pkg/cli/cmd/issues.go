@@ -487,7 +487,7 @@ var issueFunnelCmd = &cobra.Command{
 	Short: "Show issue funnel breakdown",
 	Long:  `Display the issue funnel: ALL → OPEN_ISSUES → EXPOSED → UNAUTHENTICATED → HIGH_BUSINESS_IMPACT → CRITICAL with counts per category and step.`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
-		if out.Schema([]v3.IssueFunnelInner{}) {
+		if out.Schema([]escape.IssueFunnelStep{}) {
 			return nil
 		}
 		steps, err := escape.GetIssueFunnel(cmd.Context(), funnelProjectIDs)
@@ -497,7 +497,7 @@ var issueFunnelCmd = &cobra.Command{
 		out.Table(steps, func() []string {
 			res := []string{"CATEGORY\tSTEP\tCOUNT"}
 			for _, s := range steps {
-				res = append(res, fmt.Sprintf("%s\t%s\t%.0f", s.GetCategory(), s.GetStep(), s.GetCount()))
+				res = append(res, fmt.Sprintf("%s\t%s\t%.0f", s.Category, s.Step, s.Count))
 			}
 			return res
 		})
@@ -510,7 +510,7 @@ var issueTrendsCmd = &cobra.Command{
 	Short: "Show issue severity trends over time",
 	Long:  `Display time-bucketed issue counts by severity. Track whether your security posture is improving or degrading.`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
-		if out.Schema([]v3.IssueTrendsInner{}) {
+		if out.Schema([]escape.IssueTrendPoint{}) {
 			return nil
 		}
 		if trendAfter == "" || trendBefore == "" {
@@ -523,7 +523,7 @@ var issueTrendsCmd = &cobra.Command{
 		out.Table(points, func() []string {
 			res := []string{"DATE\tHIGH\tMEDIUM\tLOW\tINFO"}
 			for _, p := range points {
-				res = append(res, fmt.Sprintf("%s\t%.0f\t%.0f\t%.0f\t%.0f", p.GetDate(), p.GetHIGH(), p.GetMEDIUM(), p.GetLOW(), p.GetINFO()))
+				res = append(res, fmt.Sprintf("%s\t%.0f\t%.0f\t%.0f\t%.0f", p.Date, p.HIGH, p.MEDIUM, p.LOW, p.INFO))
 			}
 			return res
 		})
