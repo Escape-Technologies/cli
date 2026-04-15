@@ -27,7 +27,9 @@ type LocationSummarized1 struct {
 	// The type of the location.
 	Type string `json:"type"`
 	// Whether the location is enabled.
-	Enabled              bool                    `json:"enabled"`
+	Enabled bool `json:"enabled"`
+	// The date and time the location agent last connected.
+	LastSeenAt           *string                 `json:"lastSeenAt,omitempty"`
 	Links                LocationSummarizedLinks `json:"links"`
 	AdditionalProperties map[string]interface{}
 }
@@ -152,6 +154,38 @@ func (o *LocationSummarized1) SetEnabled(v bool) {
 	o.Enabled = v
 }
 
+// GetLastSeenAt returns the LastSeenAt field value if set, zero value otherwise.
+func (o *LocationSummarized1) GetLastSeenAt() string {
+	if o == nil || IsNil(o.LastSeenAt) {
+		var ret string
+		return ret
+	}
+	return *o.LastSeenAt
+}
+
+// GetLastSeenAtOk returns a tuple with the LastSeenAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LocationSummarized1) GetLastSeenAtOk() (*string, bool) {
+	if o == nil || IsNil(o.LastSeenAt) {
+		return nil, false
+	}
+	return o.LastSeenAt, true
+}
+
+// HasLastSeenAt returns a boolean if a field has been set.
+func (o *LocationSummarized1) HasLastSeenAt() bool {
+	if o != nil && !IsNil(o.LastSeenAt) {
+		return true
+	}
+
+	return false
+}
+
+// SetLastSeenAt gets a reference to the given string and assigns it to the LastSeenAt field.
+func (o *LocationSummarized1) SetLastSeenAt(v string) {
+	o.LastSeenAt = &v
+}
+
 // GetLinks returns the Links field value
 func (o *LocationSummarized1) GetLinks() LocationSummarizedLinks {
 	if o == nil {
@@ -190,6 +224,9 @@ func (o LocationSummarized1) ToMap() (map[string]interface{}, error) {
 	toSerialize["name"] = o.Name
 	toSerialize["type"] = o.Type
 	toSerialize["enabled"] = o.Enabled
+	if !IsNil(o.LastSeenAt) {
+		toSerialize["lastSeenAt"] = o.LastSeenAt
+	}
 	toSerialize["links"] = o.Links
 
 	for key, value := range o.AdditionalProperties {
@@ -242,6 +279,7 @@ func (o *LocationSummarized1) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "type")
 		delete(additionalProperties, "enabled")
+		delete(additionalProperties, "lastSeenAt")
 		delete(additionalProperties, "links")
 		o.AdditionalProperties = additionalProperties
 	}

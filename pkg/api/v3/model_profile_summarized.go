@@ -35,8 +35,16 @@ type ProfileSummarized struct {
 	// Schema asset id derived from the first `extraAssets` entry with class SCHEMA, or the legacy `assetSchemaId` when the link is not yet visible in `extraAssets`.
 	SchemaAssetId *string `json:"schemaAssetId,omitempty"`
 	// Extra assets linked to the profile
-	ExtraAssets          []ProfileExtraAsset    `json:"extraAssets"`
-	Asset                AssetDetailed          `json:"asset"`
+	ExtraAssets []ProfileExtraAsset `json:"extraAssets"`
+	Asset       AssetDetailed       `json:"asset"`
+	// Security score of the last scan (0-100). Null if no scan has completed.
+	Score *float32 `json:"score,omitempty"`
+	// Coverage ratio of the last scan (0-1). Null if no scan has completed.
+	Coverage *float32 `json:"coverage,omitempty"`
+	// Number of open issues across all scans for this profile.
+	OpenIssueCount *int `json:"openIssueCount,omitempty"`
+	// Status of the most recent scan (e.g. FINISHED, RUNNING, FAILED).
+	LastScanStatus       *string                `json:"lastScanStatus,omitempty"`
 	Links                ProfileSummarizedLinks `json:"links"`
 	AdditionalProperties map[string]interface{}
 }
@@ -300,6 +308,134 @@ func (o *ProfileSummarized) SetAsset(v AssetDetailed) {
 	o.Asset = v
 }
 
+// GetScore returns the Score field value if set, zero value otherwise.
+func (o *ProfileSummarized) GetScore() float32 {
+	if o == nil || IsNil(o.Score) {
+		var ret float32
+		return ret
+	}
+	return *o.Score
+}
+
+// GetScoreOk returns a tuple with the Score field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileSummarized) GetScoreOk() (*float32, bool) {
+	if o == nil || IsNil(o.Score) {
+		return nil, false
+	}
+	return o.Score, true
+}
+
+// HasScore returns a boolean if a field has been set.
+func (o *ProfileSummarized) HasScore() bool {
+	if o != nil && !IsNil(o.Score) {
+		return true
+	}
+
+	return false
+}
+
+// SetScore gets a reference to the given float32 and assigns it to the Score field.
+func (o *ProfileSummarized) SetScore(v float32) {
+	o.Score = &v
+}
+
+// GetCoverage returns the Coverage field value if set, zero value otherwise.
+func (o *ProfileSummarized) GetCoverage() float32 {
+	if o == nil || IsNil(o.Coverage) {
+		var ret float32
+		return ret
+	}
+	return *o.Coverage
+}
+
+// GetCoverageOk returns a tuple with the Coverage field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileSummarized) GetCoverageOk() (*float32, bool) {
+	if o == nil || IsNil(o.Coverage) {
+		return nil, false
+	}
+	return o.Coverage, true
+}
+
+// HasCoverage returns a boolean if a field has been set.
+func (o *ProfileSummarized) HasCoverage() bool {
+	if o != nil && !IsNil(o.Coverage) {
+		return true
+	}
+
+	return false
+}
+
+// SetCoverage gets a reference to the given float32 and assigns it to the Coverage field.
+func (o *ProfileSummarized) SetCoverage(v float32) {
+	o.Coverage = &v
+}
+
+// GetOpenIssueCount returns the OpenIssueCount field value if set, zero value otherwise.
+func (o *ProfileSummarized) GetOpenIssueCount() int {
+	if o == nil || IsNil(o.OpenIssueCount) {
+		var ret int
+		return ret
+	}
+	return *o.OpenIssueCount
+}
+
+// GetOpenIssueCountOk returns a tuple with the OpenIssueCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileSummarized) GetOpenIssueCountOk() (*int, bool) {
+	if o == nil || IsNil(o.OpenIssueCount) {
+		return nil, false
+	}
+	return o.OpenIssueCount, true
+}
+
+// HasOpenIssueCount returns a boolean if a field has been set.
+func (o *ProfileSummarized) HasOpenIssueCount() bool {
+	if o != nil && !IsNil(o.OpenIssueCount) {
+		return true
+	}
+
+	return false
+}
+
+// SetOpenIssueCount gets a reference to the given int and assigns it to the OpenIssueCount field.
+func (o *ProfileSummarized) SetOpenIssueCount(v int) {
+	o.OpenIssueCount = &v
+}
+
+// GetLastScanStatus returns the LastScanStatus field value if set, zero value otherwise.
+func (o *ProfileSummarized) GetLastScanStatus() string {
+	if o == nil || IsNil(o.LastScanStatus) {
+		var ret string
+		return ret
+	}
+	return *o.LastScanStatus
+}
+
+// GetLastScanStatusOk returns a tuple with the LastScanStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileSummarized) GetLastScanStatusOk() (*string, bool) {
+	if o == nil || IsNil(o.LastScanStatus) {
+		return nil, false
+	}
+	return o.LastScanStatus, true
+}
+
+// HasLastScanStatus returns a boolean if a field has been set.
+func (o *ProfileSummarized) HasLastScanStatus() bool {
+	if o != nil && !IsNil(o.LastScanStatus) {
+		return true
+	}
+
+	return false
+}
+
+// SetLastScanStatus gets a reference to the given string and assigns it to the LastScanStatus field.
+func (o *ProfileSummarized) SetLastScanStatus(v string) {
+	o.LastScanStatus = &v
+}
+
 // GetLinks returns the Links field value
 func (o *ProfileSummarized) GetLinks() ProfileSummarizedLinks {
 	if o == nil {
@@ -347,6 +483,18 @@ func (o ProfileSummarized) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["extraAssets"] = o.ExtraAssets
 	toSerialize["asset"] = o.Asset
+	if !IsNil(o.Score) {
+		toSerialize["score"] = o.Score
+	}
+	if !IsNil(o.Coverage) {
+		toSerialize["coverage"] = o.Coverage
+	}
+	if !IsNil(o.OpenIssueCount) {
+		toSerialize["openIssueCount"] = o.OpenIssueCount
+	}
+	if !IsNil(o.LastScanStatus) {
+		toSerialize["lastScanStatus"] = o.LastScanStatus
+	}
 	toSerialize["links"] = o.Links
 
 	for key, value := range o.AdditionalProperties {
@@ -407,6 +555,10 @@ func (o *ProfileSummarized) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "schemaAssetId")
 		delete(additionalProperties, "extraAssets")
 		delete(additionalProperties, "asset")
+		delete(additionalProperties, "score")
+		delete(additionalProperties, "coverage")
+		delete(additionalProperties, "openIssueCount")
+		delete(additionalProperties, "lastScanStatus")
 		delete(additionalProperties, "links")
 		o.AdditionalProperties = additionalProperties
 	}

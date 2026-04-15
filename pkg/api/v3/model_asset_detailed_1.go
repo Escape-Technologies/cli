@@ -35,10 +35,12 @@ type AssetDetailed1 struct {
 	// The date and time the asset was created
 	CreatedAt string `json:"createdAt"`
 	// The date and time the asset was last seen
-	LastSeenAt string `json:"lastSeenAt"`
+	LastSeenAt *string `json:"lastSeenAt,omitempty"`
 	// The date and time the asset is scheduled for deletion
 	ScheduledForDeletionAt *string                                                           `json:"scheduledForDeletionAt,omitempty"`
 	Status                 ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS `json:"status"`
+	// The owners of the asset
+	Owners []string `json:"owners,omitempty"`
 	// The tags of the asset
 	Tags []Tag `json:"tags"`
 	// The risks of the asset
@@ -60,14 +62,13 @@ type _AssetDetailed1 AssetDetailed1
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAssetDetailed1(id string, class ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS, type_ ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE, name string, createdAt string, lastSeenAt string, status ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS, tags []Tag, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, links AssetDetailedLinks) *AssetDetailed1 {
+func NewAssetDetailed1(id string, class ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS, type_ ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE, name string, createdAt string, status ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS, tags []Tag, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, links AssetDetailedLinks) *AssetDetailed1 {
 	this := AssetDetailed1{}
 	this.Id = id
 	this.Class = class
 	this.Type = type_
 	this.Name = name
 	this.CreatedAt = createdAt
-	this.LastSeenAt = lastSeenAt
 	this.Status = status
 	this.Tags = tags
 	this.Risks = risks
@@ -299,28 +300,36 @@ func (o *AssetDetailed1) SetCreatedAt(v string) {
 	o.CreatedAt = v
 }
 
-// GetLastSeenAt returns the LastSeenAt field value
+// GetLastSeenAt returns the LastSeenAt field value if set, zero value otherwise.
 func (o *AssetDetailed1) GetLastSeenAt() string {
-	if o == nil {
+	if o == nil || IsNil(o.LastSeenAt) {
 		var ret string
 		return ret
 	}
-
-	return o.LastSeenAt
+	return *o.LastSeenAt
 }
 
-// GetLastSeenAtOk returns a tuple with the LastSeenAt field value
+// GetLastSeenAtOk returns a tuple with the LastSeenAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetDetailed1) GetLastSeenAtOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.LastSeenAt) {
 		return nil, false
 	}
-	return &o.LastSeenAt, true
+	return o.LastSeenAt, true
 }
 
-// SetLastSeenAt sets field value
+// HasLastSeenAt returns a boolean if a field has been set.
+func (o *AssetDetailed1) HasLastSeenAt() bool {
+	if o != nil && !IsNil(o.LastSeenAt) {
+		return true
+	}
+
+	return false
+}
+
+// SetLastSeenAt gets a reference to the given string and assigns it to the LastSeenAt field.
 func (o *AssetDetailed1) SetLastSeenAt(v string) {
-	o.LastSeenAt = v
+	o.LastSeenAt = &v
 }
 
 // GetScheduledForDeletionAt returns the ScheduledForDeletionAt field value if set, zero value otherwise.
@@ -377,6 +386,38 @@ func (o *AssetDetailed1) GetStatusOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAA
 // SetStatus sets field value
 func (o *AssetDetailed1) SetStatus(v ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS) {
 	o.Status = v
+}
+
+// GetOwners returns the Owners field value if set, zero value otherwise.
+func (o *AssetDetailed1) GetOwners() []string {
+	if o == nil || IsNil(o.Owners) {
+		var ret []string
+		return ret
+	}
+	return o.Owners
+}
+
+// GetOwnersOk returns a tuple with the Owners field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AssetDetailed1) GetOwnersOk() ([]string, bool) {
+	if o == nil || IsNil(o.Owners) {
+		return nil, false
+	}
+	return o.Owners, true
+}
+
+// HasOwners returns a boolean if a field has been set.
+func (o *AssetDetailed1) HasOwners() bool {
+	if o != nil && !IsNil(o.Owners) {
+		return true
+	}
+
+	return false
+}
+
+// SetOwners gets a reference to the given []string and assigns it to the Owners field.
+func (o *AssetDetailed1) SetOwners(v []string) {
+	o.Owners = v
 }
 
 // GetTags returns the Tags field value
@@ -667,11 +708,16 @@ func (o AssetDetailed1) ToMap() (map[string]interface{}, error) {
 		toSerialize["description"] = o.Description
 	}
 	toSerialize["createdAt"] = o.CreatedAt
-	toSerialize["lastSeenAt"] = o.LastSeenAt
+	if !IsNil(o.LastSeenAt) {
+		toSerialize["lastSeenAt"] = o.LastSeenAt
+	}
 	if !IsNil(o.ScheduledForDeletionAt) {
 		toSerialize["scheduledForDeletionAt"] = o.ScheduledForDeletionAt
 	}
 	toSerialize["status"] = o.Status
+	if !IsNil(o.Owners) {
+		toSerialize["owners"] = o.Owners
+	}
 	toSerialize["tags"] = o.Tags
 	toSerialize["risks"] = o.Risks
 	if !IsNil(o.FirstSeenScan) {
@@ -711,7 +757,6 @@ func (o *AssetDetailed1) UnmarshalJSON(data []byte) (err error) {
 		"type",
 		"name",
 		"createdAt",
-		"lastSeenAt",
 		"status",
 		"tags",
 		"risks",
@@ -756,6 +801,7 @@ func (o *AssetDetailed1) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "lastSeenAt")
 		delete(additionalProperties, "scheduledForDeletionAt")
 		delete(additionalProperties, "status")
+		delete(additionalProperties, "owners")
 		delete(additionalProperties, "tags")
 		delete(additionalProperties, "risks")
 		delete(additionalProperties, "firstSeenScan")
