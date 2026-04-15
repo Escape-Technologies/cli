@@ -80,7 +80,7 @@ func CreateLocation(ctx context.Context, name, sshPublicKey string) (string, err
 }
 
 // UpdateLocation updates a location. Only non-nil fields are sent.
-func UpdateLocation(ctx context.Context, id string, name, sshPublicKey *string) error {
+func UpdateLocation(ctx context.Context, id string, name, sshPublicKey *string, enabled *bool) error {
 	client, err := newAPIV3Client()
 	if err != nil {
 		return fmt.Errorf("unable to init client: %w", err)
@@ -91,6 +91,9 @@ func UpdateLocation(ctx context.Context, id string, name, sshPublicKey *string) 
 	}
 	if sshPublicKey != nil {
 		body.SshPublicKey = sshPublicKey
+	}
+	if enabled != nil {
+		body.Enabled = enabled
 	}
 	req := client.LocationsAPI.UpdateLocation(ctx, id).UpdateLocationRequest(body)
 	_, _, err = req.Execute()
@@ -124,5 +127,5 @@ func UpsertLocation(ctx context.Context, name, sshPublicKey string) (string, err
 	if err != nil {
 		return "", fmt.Errorf("unable to extract conflict: %w", err)
 	}
-	return id, UpdateLocation(ctx, id, &name, &sshPublicKey)
+	return id, UpdateLocation(ctx, id, &name, &sshPublicKey, nil)
 }

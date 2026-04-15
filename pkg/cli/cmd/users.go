@@ -98,7 +98,7 @@ email addresses, and role information.`,
 			return nil
 		}
 
-		users, err := escape.ListUsers(cmd.Context())
+		users, err := escape.ListUsers(cmd.Context(), usersSearch)
 		if err != nil {
 			return fmt.Errorf("unable to list users: %w", err)
 		}
@@ -144,7 +144,11 @@ var usersGetCmd = &cobra.Command{
 	},
 }
 
-var usersInviteEmails []string
+var (
+	usersInviteEmails []string
+	usersInviteRoleID string
+	usersSearch       string
+)
 
 func roleIDs(bindings []v3.ListProjects200ResponseDataInnerBindingsInner) []string {
 	ids := make([]string, 0, len(bindings))
@@ -189,7 +193,7 @@ They will receive an invitation to set up their account.`,
 			return nil
 		}
 
-		users, err := escape.InviteUsers(cmd.Context(), usersInviteEmails)
+		users, err := escape.InviteUsers(cmd.Context(), usersInviteEmails, usersInviteRoleID)
 		if err != nil {
 			return fmt.Errorf("unable to invite users: %w", err)
 		}
@@ -207,7 +211,9 @@ They will receive an invitation to set up their account.`,
 
 func init() {
 	usersCmd.AddCommand(usersMeCmd, usersListCmd, usersGetCmd, usersInviteCmd)
+	usersListCmd.Flags().StringVar(&usersSearch, "search", "", "search users by name or email")
 	usersInviteCmd.Flags().StringArrayVar(&usersInviteEmails, "email", []string{}, "email address to invite (can be specified multiple times)")
+	usersInviteCmd.Flags().StringVar(&usersInviteRoleID, "role-id", "", "role ID to bind to invited users")
 	rootCmd.AddCommand(meCmd)
 	rootCmd.AddCommand(usersCmd)
 }
