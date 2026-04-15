@@ -11,13 +11,13 @@ import (
 )
 
 var (
-	auditCmdDateFrom      = time.Now().Add(-12 * time.Hour).Format(time.RFC3339)
-	auditCmdDateTo        = time.Now().Format(time.RFC3339)
-	auditCmdEventType     = ""
-	auditCmdActor         = ""
-	auditCmdSearch        = ""
-	auditSortType         string
-	auditSortDirection    string
+	auditCmdDateFrom   = time.Now().Add(-12 * time.Hour).Format(time.RFC3339)
+	auditCmdDateTo     = time.Now().Format(time.RFC3339)
+	auditCmdEventType  = ""
+	auditCmdActor      = ""
+	auditCmdSearch     = ""
+	auditSortType      string
+	auditSortDirection string
 )
 
 var auditCmd = &cobra.Command{

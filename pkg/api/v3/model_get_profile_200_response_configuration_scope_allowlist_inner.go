@@ -18,7 +18,7 @@ import (
 
 // GetProfile200ResponseConfigurationScopeAllowlistInner - struct for GetProfile200ResponseConfigurationScopeAllowlistInner
 type GetProfile200ResponseConfigurationScopeAllowlistInner struct {
-	GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf *GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf
+	GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf  *GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf
 	GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf1 *GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf1
 	GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf2 *GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf2
 	GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf3 *GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf3
@@ -75,7 +75,6 @@ func GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf6AsGetProfile200R
 		GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf6: v,
 	}
 }
-
 
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *GetProfile200ResponseConfigurationScopeAllowlistInner) UnmarshalJSON(data []byte) error {
@@ -252,7 +251,7 @@ func (src GetProfile200ResponseConfigurationScopeAllowlistInner) MarshalJSON() (
 }
 
 // Get the actual instance
-func (obj *GetProfile200ResponseConfigurationScopeAllowlistInner) GetActualInstance() (interface{}) {
+func (obj *GetProfile200ResponseConfigurationScopeAllowlistInner) GetActualInstance() interface{} {
 	if obj == nil {
 		return nil
 	}
@@ -289,7 +288,7 @@ func (obj *GetProfile200ResponseConfigurationScopeAllowlistInner) GetActualInsta
 }
 
 // Get the actual instance value
-func (obj GetProfile200ResponseConfigurationScopeAllowlistInner) GetActualInstanceValue() (interface{}) {
+func (obj GetProfile200ResponseConfigurationScopeAllowlistInner) GetActualInstanceValue() interface{} {
 	if obj.GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf != nil {
 		return *obj.GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf
 	}
@@ -357,5 +356,3 @@ func (v *NullableGetProfile200ResponseConfigurationScopeAllowlistInner) Unmarsha
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

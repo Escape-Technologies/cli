@@ -20,17 +20,17 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationAuthenticationPresetsI
 
 // GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf14 struct for GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf14
 type GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf14 struct {
-	Type ENUMCUSTOMMSC `json:"type"`
-	Users []GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf14UsersInner `json:"users"`
-	TenantId string `json:"tenant_id"`
-	ClientId string `json:"client_id"`
-	ResourceAppId string `json:"resource_app_id"`
-	CertificatePfxBase64 string `json:"certificate_pfx_base64"`
-	CertificatePassword *string `json:"certificate_password,omitempty"`
-	Scope *string `json:"scope,omitempty"`
-	TokenUrl *string `json:"token_url,omitempty"`
-	Extractions []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfExtractionsInner `json:"extractions,omitempty"`
-	Injections []GetProfile200ResponseConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner `json:"injections,omitempty"`
+	Type                 ENUMCUSTOMMSC                                                                                         `json:"type"`
+	Users                []GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf14UsersInner                       `json:"users"`
+	TenantId             string                                                                                                `json:"tenant_id"`
+	ClientId             string                                                                                                `json:"client_id"`
+	ResourceAppId        string                                                                                                `json:"resource_app_id"`
+	CertificatePfxBase64 string                                                                                                `json:"certificate_pfx_base64"`
+	CertificatePassword  *string                                                                                               `json:"certificate_password,omitempty"`
+	Scope                *string                                                                                               `json:"scope,omitempty"`
+	TokenUrl             *string                                                                                               `json:"token_url,omitempty"`
+	Extractions          []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfExtractionsInner `json:"extractions,omitempty"`
+	Injections           []GetProfile200ResponseConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner                 `json:"injections,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -364,7 +364,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf14) Se
 }
 
 func (o GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf14) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -420,10 +420,10 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf14) Un
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -494,5 +494,3 @@ func (v *NullableGetProfile200ResponseConfigurationAuthenticationPresetsInnerOne
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
