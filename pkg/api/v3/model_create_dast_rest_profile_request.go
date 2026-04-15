@@ -22,10 +22,9 @@ var _ MappedNullable = &CreateDastRestProfileRequest{}
 type CreateDastRestProfileRequest struct {
 	// The asset ID for the profile
 	AssetId string `json:"assetId"`
-	Configuration *CreateDastRestProfileRequestConfiguration `json:"configuration,omitempty"`
-	// Deprecated. Use `configuration` object instead. JSON-encoded scan configuration kept for backward compatibility.
-	// Deprecated
-	ConfigurationStr *string `json:"configurationStr,omitempty"`
+	// The scan configuration encoded as a JSON string (legacy public API contract).
+	Configuration *string `json:"configuration,omitempty"`
+	ConfigurationObject *CreateDastRestProfileRequestConfigurationObject `json:"configurationObject,omitempty"`
 	// The cron string
 	Cron *string `json:"cron,omitempty"`
 	// The name of the profile
@@ -98,9 +97,9 @@ func (o *CreateDastRestProfileRequest) SetAssetId(v string) {
 }
 
 // GetConfiguration returns the Configuration field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequest) GetConfiguration() CreateDastRestProfileRequestConfiguration {
+func (o *CreateDastRestProfileRequest) GetConfiguration() string {
 	if o == nil || IsNil(o.Configuration) {
-		var ret CreateDastRestProfileRequestConfiguration
+		var ret string
 		return ret
 	}
 	return *o.Configuration
@@ -108,7 +107,7 @@ func (o *CreateDastRestProfileRequest) GetConfiguration() CreateDastRestProfileR
 
 // GetConfigurationOk returns a tuple with the Configuration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequest) GetConfigurationOk() (*CreateDastRestProfileRequestConfiguration, bool) {
+func (o *CreateDastRestProfileRequest) GetConfigurationOk() (*string, bool) {
 	if o == nil || IsNil(o.Configuration) {
 		return nil, false
 	}
@@ -124,44 +123,41 @@ func (o *CreateDastRestProfileRequest) HasConfiguration() bool {
 	return false
 }
 
-// SetConfiguration gets a reference to the given CreateDastRestProfileRequestConfiguration and assigns it to the Configuration field.
-func (o *CreateDastRestProfileRequest) SetConfiguration(v CreateDastRestProfileRequestConfiguration) {
+// SetConfiguration gets a reference to the given string and assigns it to the Configuration field.
+func (o *CreateDastRestProfileRequest) SetConfiguration(v string) {
 	o.Configuration = &v
 }
 
-// GetConfigurationStr returns the ConfigurationStr field value if set, zero value otherwise.
-// Deprecated
-func (o *CreateDastRestProfileRequest) GetConfigurationStr() string {
-	if o == nil || IsNil(o.ConfigurationStr) {
-		var ret string
+// GetConfigurationObject returns the ConfigurationObject field value if set, zero value otherwise.
+func (o *CreateDastRestProfileRequest) GetConfigurationObject() CreateDastRestProfileRequestConfigurationObject {
+	if o == nil || IsNil(o.ConfigurationObject) {
+		var ret CreateDastRestProfileRequestConfigurationObject
 		return ret
 	}
-	return *o.ConfigurationStr
+	return *o.ConfigurationObject
 }
 
-// GetConfigurationStrOk returns a tuple with the ConfigurationStr field value if set, nil otherwise
+// GetConfigurationObjectOk returns a tuple with the ConfigurationObject field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
-func (o *CreateDastRestProfileRequest) GetConfigurationStrOk() (*string, bool) {
-	if o == nil || IsNil(o.ConfigurationStr) {
+func (o *CreateDastRestProfileRequest) GetConfigurationObjectOk() (*CreateDastRestProfileRequestConfigurationObject, bool) {
+	if o == nil || IsNil(o.ConfigurationObject) {
 		return nil, false
 	}
-	return o.ConfigurationStr, true
+	return o.ConfigurationObject, true
 }
 
-// HasConfigurationStr returns a boolean if a field has been set.
-func (o *CreateDastRestProfileRequest) HasConfigurationStr() bool {
-	if o != nil && !IsNil(o.ConfigurationStr) {
+// HasConfigurationObject returns a boolean if a field has been set.
+func (o *CreateDastRestProfileRequest) HasConfigurationObject() bool {
+	if o != nil && !IsNil(o.ConfigurationObject) {
 		return true
 	}
 
 	return false
 }
 
-// SetConfigurationStr gets a reference to the given string and assigns it to the ConfigurationStr field.
-// Deprecated
-func (o *CreateDastRestProfileRequest) SetConfigurationStr(v string) {
-	o.ConfigurationStr = &v
+// SetConfigurationObject gets a reference to the given CreateDastRestProfileRequestConfigurationObject and assigns it to the ConfigurationObject field.
+func (o *CreateDastRestProfileRequest) SetConfigurationObject(v CreateDastRestProfileRequestConfigurationObject) {
+	o.ConfigurationObject = &v
 }
 
 // GetCron returns the Cron field value if set, zero value otherwise.
@@ -490,8 +486,8 @@ func (o CreateDastRestProfileRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Configuration) {
 		toSerialize["configuration"] = o.Configuration
 	}
-	if !IsNil(o.ConfigurationStr) {
-		toSerialize["configurationStr"] = o.ConfigurationStr
+	if !IsNil(o.ConfigurationObject) {
+		toSerialize["configurationObject"] = o.ConfigurationObject
 	}
 	if !IsNil(o.Cron) {
 		toSerialize["cron"] = o.Cron
@@ -567,7 +563,7 @@ func (o *CreateDastRestProfileRequest) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "assetId")
 		delete(additionalProperties, "configuration")
-		delete(additionalProperties, "configurationStr")
+		delete(additionalProperties, "configurationObject")
 		delete(additionalProperties, "cron")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "description")
