@@ -15,10 +15,9 @@ import (
 	"fmt"
 )
 
-
 // ListScanTargets400Response struct for ListScanTargets400Response
 type ListScanTargets400Response struct {
-	ListProfiles400Response *ListProfiles400Response
+	ListProfiles400Response  *ListProfiles400Response
 	UpdateProfile400Response *UpdateProfile400Response
 }
 
@@ -26,7 +25,7 @@ type ListScanTargets400Response struct {
 func (dst *ListScanTargets400Response) UnmarshalJSON(data []byte) error {
 	var err error
 	// try to unmarshal JSON data into ListProfiles400Response
-	err = json.Unmarshal(data, &dst.ListProfiles400Response);
+	err = json.Unmarshal(data, &dst.ListProfiles400Response)
 	if err == nil {
 		jsonListProfiles400Response, _ := json.Marshal(dst.ListProfiles400Response)
 		if string(jsonListProfiles400Response) == "{}" { // empty struct
@@ -39,7 +38,7 @@ func (dst *ListScanTargets400Response) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal JSON data into UpdateProfile400Response
-	err = json.Unmarshal(data, &dst.UpdateProfile400Response);
+	err = json.Unmarshal(data, &dst.UpdateProfile400Response)
 	if err == nil {
 		jsonUpdateProfile400Response, _ := json.Marshal(dst.UpdateProfile400Response)
 		if string(jsonUpdateProfile400Response) == "{}" { // empty struct
@@ -66,7 +65,6 @@ func (src ListScanTargets400Response) MarshalJSON() ([]byte, error) {
 
 	return nil, nil // no data in anyOf schemas
 }
-
 
 type NullableListScanTargets400Response struct {
 	value *ListScanTargets400Response
@@ -103,5 +101,3 @@ func (v *NullableListScanTargets400Response) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

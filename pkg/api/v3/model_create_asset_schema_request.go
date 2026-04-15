@@ -15,10 +15,9 @@ import (
 	"fmt"
 )
 
-
 // CreateAssetSchemaRequest struct for CreateAssetSchemaRequest
 type CreateAssetSchemaRequest struct {
-	CreateSchemaViaFetch *CreateSchemaViaFetch
+	CreateSchemaViaFetch  *CreateSchemaViaFetch
 	CreateSchemaViaUpload *CreateSchemaViaUpload
 }
 
@@ -26,7 +25,7 @@ type CreateAssetSchemaRequest struct {
 func (dst *CreateAssetSchemaRequest) UnmarshalJSON(data []byte) error {
 	var err error
 	// try to unmarshal JSON data into CreateSchemaViaFetch
-	err = json.Unmarshal(data, &dst.CreateSchemaViaFetch);
+	err = json.Unmarshal(data, &dst.CreateSchemaViaFetch)
 	if err == nil {
 		jsonCreateSchemaViaFetch, _ := json.Marshal(dst.CreateSchemaViaFetch)
 		if string(jsonCreateSchemaViaFetch) == "{}" { // empty struct
@@ -39,7 +38,7 @@ func (dst *CreateAssetSchemaRequest) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal JSON data into CreateSchemaViaUpload
-	err = json.Unmarshal(data, &dst.CreateSchemaViaUpload);
+	err = json.Unmarshal(data, &dst.CreateSchemaViaUpload)
 	if err == nil {
 		jsonCreateSchemaViaUpload, _ := json.Marshal(dst.CreateSchemaViaUpload)
 		if string(jsonCreateSchemaViaUpload) == "{}" { // empty struct
@@ -66,7 +65,6 @@ func (src CreateAssetSchemaRequest) MarshalJSON() ([]byte, error) {
 
 	return nil, nil // no data in anyOf schemas
 }
-
 
 type NullableCreateAssetSchemaRequest struct {
 	value *CreateAssetSchemaRequest
@@ -103,5 +101,3 @@ func (v *NullableCreateAssetSchemaRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
