@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"errors"
 	"fmt"
 	"strconv"
 
@@ -224,7 +225,18 @@ var locationsUpdateCmd = &cobra.Command{
   escape-cli locations update <location-id> --name "new-name"`,
 	Args: cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		err := escape.UpdateLocation(cmd.Context(), args[0], locationUpdateName, locationUpdateSSHPublicKey)
+		var name *string
+		var sshPublicKey *string
+		if cmd.Flags().Changed("name") {
+			name = &locationUpdateName
+		}
+		if cmd.Flags().Changed("ssh-public-key") {
+			sshPublicKey = &locationUpdateSSHPublicKey
+		}
+		if name == nil && sshPublicKey == nil {
+			return errors.New("at least one of --name or --ssh-public-key is required")
+		}
+		err := escape.UpdateLocation(cmd.Context(), args[0], name, sshPublicKey)
 		if err != nil {
 			return fmt.Errorf("failed to update location: %w", err)
 		}

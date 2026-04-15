@@ -76,7 +76,7 @@ var rolesGetCmd = &cobra.Command{
 
 		out.Table(role, func() []string {
 			res := []string{"ID\tNAME\tCREATED AT"}
-			res = append(res, fmt.Sprintf("%s\t%s\t%s", role.GetId(), role.GetName(), role.GetCreatedAt()))
+			res = append(res, fmt.Sprintf("%s\t%s\t%s", role.GetId(), role.GetName(), out.GetShortDate(role.GetCreatedAt().String())))
 			return res
 		})
 		return nil
@@ -120,7 +120,7 @@ Use --input-schema to see the expected JSON format.`,
 		out.Table(role, func() []string {
 			return []string{
 				"ID\tNAME\tCREATED AT",
-				fmt.Sprintf("%s\t%s\t%s", role.GetId(), role.GetName(), role.GetCreatedAt()),
+				fmt.Sprintf("%s\t%s\t%s", role.GetId(), role.GetName(), out.GetShortDate(role.GetCreatedAt().String())),
 			}
 		})
 		return nil
@@ -158,7 +158,7 @@ var rolesUpdateCmd = &cobra.Command{
 		out.Table(role, func() []string {
 			return []string{
 				"ID\tNAME\tCREATED AT",
-				fmt.Sprintf("%s\t%s\t%s", role.GetId(), role.GetName(), role.GetCreatedAt()),
+				fmt.Sprintf("%s\t%s\t%s", role.GetId(), role.GetName(), out.GetShortDate(role.GetCreatedAt().String())),
 			}
 		})
 		return nil

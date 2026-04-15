@@ -57,12 +57,12 @@ AVAILABLE BLOCKS:
   escape-cli jobs trigger-export --block EXECUTIVE_SUMMARY --watch`,
 	Args: cobra.NoArgs,
 	RunE: func(cmd *cobra.Command, _ []string) error {
-		if len(jobsExportBlocks) == 0 {
-			return errors.New("at least one --block is required")
-		}
-
 		if out.Schema(v3.TriggerExport200Response{}) {
 			return nil
+		}
+
+		if len(jobsExportBlocks) == 0 {
+			return errors.New("at least one --block is required")
 		}
 
 		job, err := escape.TriggerExport(cmd.Context(), jobsExportBlocks, jobsExportScanID)
@@ -91,16 +91,14 @@ Use --watch to poll until the job completes.`,
 
   # Watch until complete
   escape-cli jobs get <job-id> --watch`,
-	Args: func(cmd *cobra.Command, args []string) error {
-		if len(args) != 1 {
-			_ = cmd.Help()
-			return errors.New("job ID is required")
-		}
-		return nil
-	},
+	Args: cobra.ArbitraryArgs,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		if out.Schema(v3.GetJob200Response{}) {
 			return nil
+		}
+		if len(args) != 1 {
+			_ = cmd.Help()
+			return errors.New("job ID is required")
 		}
 
 		if jobsWatch {
@@ -138,8 +136,8 @@ func watchJob(cmd *cobra.Command, jobID string) error {
 		printJob(job)
 		status := strings.ToUpper(string(job.GetStatus()))
 		if terminalStatuses[status] {
-			if status == "FAILED" {
-				return errors.New("job failed")
+			if status == "FAILED" || status == "CANCELED" {
+				return fmt.Errorf("job ended with status %s", status)
 			}
 			return nil
 		}

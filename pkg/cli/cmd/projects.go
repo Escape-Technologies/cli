@@ -87,7 +87,7 @@ var projectsGetCmd = &cobra.Command{
 
 		out.Table(project, func() []string {
 			res := []string{"ID\tNAME\tCREATED AT"}
-			res = append(res, fmt.Sprintf("%s\t%s\t%s", project.GetId(), project.GetName(), project.GetCreatedAt()))
+			res = append(res, fmt.Sprintf("%s\t%s\t%s", project.GetId(), project.GetName(), out.GetShortDate(project.GetCreatedAt().String())))
 			return res
 		})
 		return nil
@@ -124,7 +124,7 @@ var projectsCreateCmd = &cobra.Command{
 		out.Table(project, func() []string {
 			return []string{
 				"ID\tNAME\tCREATED AT",
-				fmt.Sprintf("%s\t%s\t%s", project.GetId(), project.GetName(), project.GetCreatedAt()),
+				fmt.Sprintf("%s\t%s\t%s", project.GetId(), project.GetName(), out.GetShortDate(project.GetCreatedAt().String())),
 			}
 		})
 		return nil
@@ -162,7 +162,7 @@ var projectsUpdateCmd = &cobra.Command{
 		out.Table(project, func() []string {
 			return []string{
 				"ID\tNAME\tCREATED AT",
-				fmt.Sprintf("%s\t%s\t%s", project.GetId(), project.GetName(), project.GetCreatedAt()),
+				fmt.Sprintf("%s\t%s\t%s", project.GetId(), project.GetName(), out.GetShortDate(project.GetCreatedAt().String())),
 			}
 		})
 		return nil
