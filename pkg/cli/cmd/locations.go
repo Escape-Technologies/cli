@@ -191,6 +191,7 @@ var (
 	locationCreateSSHPublicKey string
 	locationUpdateName         string
 	locationUpdateSSHPublicKey string
+	locationUpdateEnabled      bool
 )
 
 var locationsCreateCmd = &cobra.Command{
@@ -227,16 +228,20 @@ var locationsUpdateCmd = &cobra.Command{
 	RunE: func(cmd *cobra.Command, args []string) error {
 		var name *string
 		var sshPublicKey *string
+		var enabled *bool
 		if cmd.Flags().Changed("name") {
 			name = &locationUpdateName
 		}
 		if cmd.Flags().Changed("ssh-public-key") {
 			sshPublicKey = &locationUpdateSSHPublicKey
 		}
-		if name == nil && sshPublicKey == nil {
-			return errors.New("at least one of --name or --ssh-public-key is required")
+		if cmd.Flags().Changed("enabled") {
+			enabled = &locationUpdateEnabled
 		}
-		err := escape.UpdateLocation(cmd.Context(), args[0], name, sshPublicKey)
+		if name == nil && sshPublicKey == nil && enabled == nil {
+			return errors.New("at least one of --name, --ssh-public-key, or --enabled is required")
+		}
+		err := escape.UpdateLocation(cmd.Context(), args[0], name, sshPublicKey, enabled)
 		if err != nil {
 			return fmt.Errorf("failed to update location: %w", err)
 		}
@@ -260,4 +265,5 @@ func init() {
 	locationsCreateCmd.Flags().StringVar(&locationCreateSSHPublicKey, "ssh-public-key", "", "SSH public key for the location")
 	locationsUpdateCmd.Flags().StringVar(&locationUpdateName, "name", "", "new location name")
 	locationsUpdateCmd.Flags().StringVar(&locationUpdateSSHPublicKey, "ssh-public-key", "", "new SSH public key")
+	locationsUpdateCmd.Flags().BoolVar(&locationUpdateEnabled, "enabled", false, "enable or disable the location")
 }

@@ -11,6 +11,24 @@ import (
 	"github.com/spf13/cobra"
 )
 
+func formatIssueCompliances(items []v3.GetIssue200ResponseCompliancesInner) string {
+	if len(items) == 0 {
+		return "-"
+	}
+
+	values := make([]string, 0, len(items))
+	for _, item := range items {
+		if item.GetFramework() == "" && item.GetItem() == "" {
+			continue
+		}
+		values = append(values, strings.Trim(strings.Join([]string{item.GetFramework(), item.GetItem()}, ":"), ":"))
+	}
+	if len(values) == 0 {
+		return "-"
+	}
+	return strings.Join(values, ", ")
+}
+
 var validIssueSortFields = map[string]struct{}{
 	"LAST_SEEN":  {},
 	"FIRST_SEEN": {},
@@ -238,7 +256,7 @@ ID                                      CREATED AT                SEVERITY  CATE
 				cvss = fmt.Sprintf("%.1f %s", cvssData.GetScore(), cvssData.GetVector())
 			}
 			res := []string{"ID\tCREATED AT\tSEVERITY\tCATEGORY\tSTATUS\tNAME\tASSET\tFIRST SEEN SCAN\tCVSS\tFRAMEWORK\tCOMPLIANCES\tREMEDIATION\tCONTEXT\tLINK"}
-			res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%d\t%s\t%s\t%s", issue.GetId(), issue.GetCreatedAt(), issue.GetSeverity(), issue.GetCategory(), issue.GetStatus(), issue.GetName(), issue.GetAsset().Name, issue.GetFirstSeenScanId(), cvss, issue.GetAiRemediationFramework(), len(issue.GetCompliances()), issue.GetRemediation(), issue.GetContext(), issue.GetLinks().IssueOverview))
+			res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s", issue.GetId(), issue.GetCreatedAt(), issue.GetSeverity(), issue.GetCategory(), issue.GetStatus(), issue.GetName(), issue.GetAsset().Name, issue.GetFirstSeenScanId(), cvss, issue.GetAiRemediationFramework(), formatIssueCompliances(issue.GetCompliances()), issue.GetRemediation(), issue.GetContext(), issue.GetLinks().IssueOverview))
 			return res
 		})
 
