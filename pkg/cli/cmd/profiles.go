@@ -13,6 +13,18 @@ import (
 	"github.com/spf13/cobra"
 )
 
+// The generated API client reuses CreateDastRestProfileRequest for every
+// profile-creation endpoint, so these aliases keep each command's input schema
+// semantically aligned with the profile it creates.
+type (
+	createRestProfileInput           = v3.CreateDastRestProfileRequest
+	createWebappProfileInput         = v3.CreateDastRestProfileRequest
+	createGraphqlProfileInput        = v3.CreateDastRestProfileRequest
+	createPentestRestProfileInput    = v3.CreateDastRestProfileRequest
+	createPentestGraphqlProfileInput = v3.CreateDastRestProfileRequest
+	createPentestWebappProfileInput  = v3.CreateDastRestProfileRequest
+)
+
 var profileKinds = []string{
 	"BLST_REST",
 	"BLST_GRAPHQL",
@@ -185,7 +197,7 @@ Create a new profile for testing REST APIs. Provide configuration via JSON throu
 See https://public.escape.tech/v3/#tag/profiles for complete schema.`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
 		// Output JSON Schema for input format if requested
-		if out.InputSchema(v3.CreateDastRestProfileRequest{}) {
+		if out.InputSchema(createRestProfileInput{}) {
 			return nil
 		}
 		// Output JSON Schema if requested
@@ -230,7 +242,7 @@ var profileCreateWebappCmd = &cobra.Command{
 Create a new profile for testing web applications. Provide configuration via JSON through stdin.`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
 		// Output JSON Schema for input format if requested
-		if out.InputSchema(v3.CreateDastRestProfileRequest{}) {
+		if out.InputSchema(createWebappProfileInput{}) {
 			return nil
 		}
 		// Output JSON Schema if requested
@@ -274,7 +286,7 @@ var profileCreateGraphqlCmd = &cobra.Command{
 Create a new profile for testing GraphQL APIs. Provide configuration via JSON through stdin.`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
 		// Output JSON Schema for input format if requested
-		if out.InputSchema(v3.CreateDastRestProfileRequest{}) {
+		if out.InputSchema(createGraphqlProfileInput{}) {
 			return nil
 		}
 		// Output JSON Schema if requested
@@ -319,7 +331,7 @@ var profileCreatePentestRestCmd = &cobra.Command{
 Create a new AI-powered penetration testing profile for REST APIs.
 Provide configuration via JSON through stdin.`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
-		if out.InputSchema(v3.CreateDastRestProfileRequest{}) {
+		if out.InputSchema(createPentestRestProfileInput{}) {
 			return nil
 		}
 		if out.Schema(v3.GetProfile200Response{}) {
@@ -356,7 +368,7 @@ var profileCreatePentestGraphqlCmd = &cobra.Command{
 Create a new AI-powered penetration testing profile for GraphQL APIs.
 Provide configuration via JSON through stdin.`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
-		if out.InputSchema(v3.CreateDastRestProfileRequest{}) {
+		if out.InputSchema(createPentestGraphqlProfileInput{}) {
 			return nil
 		}
 		if out.Schema(v3.GetProfile200Response{}) {
@@ -393,7 +405,7 @@ var profileCreatePentestWebappCmd = &cobra.Command{
 Create a new AI-powered penetration testing profile for web applications.
 Provide configuration via JSON through stdin.`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
-		if out.InputSchema(v3.CreateDastRestProfileRequest{}) {
+		if out.InputSchema(createPentestWebappProfileInput{}) {
 			return nil
 		}
 		if out.Schema(v3.GetProfile200Response{}) {
