@@ -140,9 +140,9 @@ ID                                      CREATED AT                TYPE          
 			allAssets = append(allAssets, assets...)
 		}
 		out.Table(allAssets, func() []string {
-			res := []string{"ID\tCREATED AT\tTYPE\tSTATUS\tLAST SEEN\tRISKS\tNAME"}
+			res := []string{"ID\tCREATED AT\tTYPE\tSTATUS\tLAST SEEN\tRISKS\tTAGS\tOWNERS\tNAME"}
 			for _, asset := range allAssets {
-				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s", asset.GetId(), asset.GetCreatedAt(), asset.GetType(), asset.GetStatus(), asset.GetLastSeenAt(), asset.GetRisks(), asset.GetName()))
+				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s", asset.GetId(), asset.GetCreatedAt(), asset.GetType(), asset.GetStatus(), asset.GetLastSeenAt(), asset.GetRisks(), joinTags(asset.GetTags()), ownersColumn(asset.AdditionalProperties), asset.GetName()))
 			}
 			return res
 		})
@@ -233,14 +233,40 @@ ID                                      CREATED AT                TYPE    NAME  
 		} else {
 
 			out.Table(asset, func() []string {
-				res := []string{"ID\tCREATED AT\tTYPE\tSTATUS\tLAST SEEN\tRISKS\tNAME"}
-				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s", asset.GetId(), asset.GetCreatedAt(), asset.GetType(), asset.GetStatus(), asset.GetLastSeenAt(), asset.GetRisks(), asset.GetName()))
+				res := []string{"ID\tCREATED AT\tTYPE\tSTATUS\tLAST SEEN\tRISKS\tTAGS\tOWNERS\tNAME"}
+				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s", asset.GetId(), asset.GetCreatedAt(), asset.GetType(), asset.GetStatus(), asset.GetLastSeenAt(), asset.GetRisks(), joinTags(asset.GetTags()), ownersColumn(asset.AdditionalProperties), asset.GetName()))
 				return res
 			})
 		}
 
 		return nil
 	},
+}
+
+func joinTags(tags []v3.Tag) string {
+	names := make([]string, 0, len(tags))
+	for _, tag := range tags {
+		if tag.GetName() != "" {
+			names = append(names, tag.GetName())
+		}
+	}
+	return strings.Join(names, ",")
+}
+
+func ownersColumn(additionalProperties map[string]interface{}) string {
+	value, ok := additionalProperties["owners"]
+	if !ok {
+		return ""
+	}
+	items, ok := value.([]interface{})
+	if !ok {
+		return stringValue(value)
+	}
+	owners := make([]string, 0, len(items))
+	for _, item := range items {
+		owners = append(owners, stringValue(item))
+	}
+	return strings.Join(owners, ",")
 }
 
 var assetDeleteCmd = &cobra.Command{

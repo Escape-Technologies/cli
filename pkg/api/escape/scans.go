@@ -14,6 +14,7 @@ import (
 type ListScansFilters struct {
 	After      string
 	Before     string
+	AssetIDs   *[]string
 	ProfileIDs *[]string
 	ProjectIDs *[]string
 	Ignored    string
@@ -41,6 +42,9 @@ func ListScans(ctx context.Context, next string, filters *ListScansFilters) ([]v
 		}
 		if filters.Before != "" {
 			req = req.Before(filters.Before)
+		}
+		if filters.AssetIDs != nil && len(*filters.AssetIDs) > 0 {
+			return nil, nil, fmt.Errorf("assetIds filter is not supported by the generated client yet")
 		}
 		if filters.ProfileIDs != nil && len(*filters.ProfileIDs) > 0 {
 			req = req.ProfileIds(strings.Join(*filters.ProfileIDs, ","))

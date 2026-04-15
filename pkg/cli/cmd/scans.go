@@ -166,7 +166,7 @@ ID                                      CREATED AT                           KIN
   escape-cli scans get 00000000-0000-0000-0000-000000000000 -o json`,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		// Output JSON Schema if requested
-		if out.Schema(v3.ScanSummarized{}) {
+		if out.Schema(v3.StartScan200Response{}) {
 			return nil
 		}
 
@@ -175,17 +175,22 @@ ID                                      CREATED AT                           KIN
 			return fmt.Errorf("unable to get scan: %w", err)
 		}
 		out.Table(scan, func() []string {
-			res := []string{"ID\tCREATED AT\tKIND\tSTATUS\tPROGRESS\tSCORE\tCOVERAGE\tCOMMIT BRANCH\tCOMMIT HASH\tLINK"}
-			res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%d%%\t%.0f\t%.0f%%\t%s\t%s\t%s",
+			res := []string{"ID\tCREATED AT\tFINISHED AT\tKIND\tSTATUS\tPROGRESS\tSCORE\tCOVERAGE\tDURATION\tPROFILE ID\tORG ID\tCOMMIT BRANCH\tCOMMIT HASH\tCOMMIT AUTHOR\tLINK"}
+			res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%d%%\t%.0f\t%.0f%%\t%.0fs\t%s\t%s\t%s\t%s\t%s\t%s",
 				scan.GetId(),
 				scan.GetCreatedAt(),
+				scan.GetFinishedAt(),
 				scan.GetKind(),
 				scan.GetStatus(),
 				int(scan.GetProgressRatio()*100), //nolint:mnd
 				scan.GetScore(),
 				scan.GetCoverage()*100, //nolint:mnd
+				scan.GetDuration(),
+				scan.GetProfileId(),
+				scan.GetOrganizationId(),
 				scan.GetCommitBranch(),
 				scan.GetCommitHash(),
+				scan.GetCommitAuthor(),
 				scan.GetLinks().ScanIssues,
 			))
 			return res
@@ -673,28 +678,33 @@ FILTER OPTIONS:
 		}
 
 		out.Table(all, func() []string {
-			res := []string{"ID\tTYPE\tNAME\tREQUESTS\tCOVERAGE"}
+			res := []string{"ID\tTYPE\tMETHOD\tPATH/RESOLVER\tCOVERAGE\tREQUEST COUNT\tMEAN DURATION MS"}
 			for _, t := range all {
 				targetType := "UNKNOWN"
+				method := ""
 				name := ""
 				var requestCount float32
 				coverage := "-"
+				var meanDuration float32
 				if ar := t.GetApiRoute(); ar.Id != "" {
 					targetType = "API_ROUTE"
-					name = fmt.Sprintf("%s %s", ar.GetOperation(), ar.GetName())
+					method = ar.GetOperation()
+					name = ar.GetDisplayName()
 					requestCount = ar.GetRequestCount()
 					if ar.Coverage != nil {
 						coverage = string(*ar.Coverage)
 					}
+					meanDuration = ar.GetMeanDuration()
 				} else if gr := t.GetGraphqlResolver(); gr.Id != "" {
 					targetType = "GRAPHQL_RESOLVER"
-					name = fmt.Sprintf("%s.%s", gr.GetParent(), gr.GetName())
+					name = gr.GetDisplayName()
 					requestCount = gr.GetRequestCount()
 					if gr.Coverage != nil {
 						coverage = string(*gr.Coverage)
 					}
+					meanDuration = gr.GetMeanDuration()
 				}
-				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%.0f\t%s", t.GetId(), targetType, name, requestCount, coverage))
+				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%.0f\t%.0f", t.GetId(), targetType, method, name, coverage, requestCount, meanDuration))
 			}
 			return res
 		})

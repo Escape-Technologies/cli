@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"net/http"
 
 	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
 )
@@ -94,6 +95,14 @@ func DeleteRoleBinding(ctx context.Context, bindingID string) error {
 	}
 	_, _, err = client.RolesAPI.DeleteRoleBinding(ctx, bindingID).Execute()
 	if err != nil {
+		return fmt.Errorf("api error: %w", err)
+	}
+	return nil
+}
+
+// DeleteRole deletes a role by ID.
+func DeleteRole(ctx context.Context, roleID string) error {
+	if err := rawRequest(ctx, http.MethodDelete, "/roles/"+roleID, nil, nil); err != nil {
 		return fmt.Errorf("api error: %w", err)
 	}
 	return nil

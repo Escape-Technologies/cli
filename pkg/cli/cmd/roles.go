@@ -216,8 +216,28 @@ var rolesUnbindCmd = &cobra.Command{
 	},
 }
 
+var rolesDeleteCmd = &cobra.Command{
+	Use:     "delete role-id",
+	Aliases: []string{"del", "remove"},
+	Short:   "Delete a role",
+	Args: func(cmd *cobra.Command, args []string) error {
+		if len(args) != 1 {
+			_ = cmd.Help()
+			return errors.New("role ID is required")
+		}
+		return nil
+	},
+	RunE: func(cmd *cobra.Command, args []string) error {
+		if err := escape.DeleteRole(cmd.Context(), args[0]); err != nil {
+			return fmt.Errorf("failed to delete role: %w", err)
+		}
+		out.Log(fmt.Sprintf("Role %s deleted", args[0]))
+		return nil
+	},
+}
+
 func init() {
-	rolesCmd.AddCommand(rolesListCmd, rolesGetCmd, rolesCreateCmd, rolesUpdateCmd, rolesBindCmd, rolesUnbindCmd)
+	rolesCmd.AddCommand(rolesListCmd, rolesGetCmd, rolesCreateCmd, rolesUpdateCmd, rolesDeleteCmd, rolesBindCmd, rolesUnbindCmd)
 	rolesBindCmd.Flags().StringVar(&rolesBindRoleID, "role-id", "", "role ID to bind")
 	rolesBindCmd.Flags().StringVar(&rolesBindUserID, "user-id", "", "user ID to bind the role to")
 	rootCmd.AddCommand(rolesCmd)

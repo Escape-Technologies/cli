@@ -129,9 +129,9 @@ ID                                      CREATED AT              ASSET TYPE    IN
 			allProfiles = append(allProfiles, profiles...)
 		}
 		out.Table(allProfiles, func() []string {
-			result := []string{"ID\tCREATED AT\tASSET TYPE\tINITIATORS\tNAME"}
+			result := []string{"ID\tCREATED AT\tASSET TYPE\tINITIATORS\tSCORE\tCOVERAGE\tOPEN ISSUES\tLAST SCAN STATUS\tNAME"}
 			for _, profile := range allProfiles {
-				result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s\t%s", profile.GetId(), profile.GetCreatedAt(), profile.Asset.GetType(), profile.GetInitiators(), profile.GetName()))
+				result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s", profile.GetId(), profile.GetCreatedAt(), profile.Asset.GetType(), profile.GetInitiators(), stringValue(profile.AdditionalProperties["score"]), stringValue(profile.AdditionalProperties["coverage"]), stringValue(profile.AdditionalProperties["openIssueCount"]), stringValue(profile.AdditionalProperties["lastScanStatus"]), profile.GetName()))
 			}
 			return result
 		})
