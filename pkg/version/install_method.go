@@ -9,16 +9,23 @@ import (
 	"sync"
 )
 
+// InstallMethod describes how the CLI binary was installed.
 type InstallMethod string
 
 const (
-	InstallMethodCurl          InstallMethod = "curl"
-	InstallMethodDocker        InstallMethod = "docker"
+	// InstallMethodCurl uses the Unix install script.
+	InstallMethodCurl InstallMethod = "curl"
+	// InstallMethodDocker uses the published Docker image.
+	InstallMethodDocker InstallMethod = "docker"
+	// InstallMethodGitHubActions runs through the GitHub Action.
 	InstallMethodGitHubActions InstallMethod = "github-actions"
+	// InstallMethodWindowsScript uses the PowerShell install script.
 	InstallMethodWindowsScript InstallMethod = "windows-script"
-	InstallMethodManual        InstallMethod = "manual"
+	// InstallMethodManual covers binaries installed without a known wrapper.
+	InstallMethodManual InstallMethod = "manual"
 )
 
+// InstallInfo stores the detected installation method and binary path.
 type InstallInfo struct {
 	Method InstallMethod
 	Path   string
@@ -29,6 +36,7 @@ var (
 	installInfo     InstallInfo
 )
 
+// GetInstallInfo returns the cached install details for the current process.
 func GetInstallInfo() InstallInfo {
 	installInfoOnce.Do(func() {
 		path := getExecutablePath()
@@ -91,6 +99,7 @@ func isRunningInDocker() bool {
 		strings.Contains(content, "kubepods")
 }
 
+// DisplayName returns a user-facing description of the installation method.
 func (i InstallInfo) DisplayName() string {
 	switch i.Method {
 	case InstallMethodCurl:
@@ -107,14 +116,17 @@ func (i InstallInfo) DisplayName() string {
 			return "PowerShell script"
 		}
 		return fmt.Sprintf("PowerShell script (%s)", i.Path)
-	default:
+	case InstallMethodManual:
 		if i.Path == "" {
 			return "manual install"
 		}
 		return fmt.Sprintf("manual install (%s)", i.Path)
+	default:
+		return "unknown install"
 	}
 }
 
+// UpgradeCommand returns an executable upgrade instruction for the install method.
 func UpgradeCommand(method InstallMethod, latestVersion string) string {
 	switch method {
 	case InstallMethodCurl:
@@ -125,10 +137,12 @@ func UpgradeCommand(method InstallMethod, latestVersion string) string {
 		if latestVersion == "" {
 			return "uses: Escape-Technologies/cli@latest"
 		}
-		return fmt.Sprintf("uses: Escape-Technologies/cli@v%s", normalizeVersion(latestVersion))
+		return "uses: Escape-Technologies/cli@v" + normalizeVersion(latestVersion)
 	case InstallMethodWindowsScript:
 		return `powershell -c "irm https://raw.githubusercontent.com/Escape-Technologies/cli/refs/heads/main/scripts/install.ps1 | iex"`
+	case InstallMethodManual:
+		return "curl -sf https://raw.githubusercontent.com/Escape-Technologies/cli/refs/heads/main/scripts/install.sh | sudo bash"
 	default:
-		return "https://github.com/Escape-Technologies/cli/releases/latest"
+		return ""
 	}
 }

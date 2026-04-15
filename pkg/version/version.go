@@ -35,6 +35,7 @@ func GetVersion() V {
 	}
 }
 
+// GetDetailedVersion returns version metadata plus update information.
 func GetDetailedVersion(ctx context.Context) V {
 	v := GetVersion()
 	installInfo := GetInstallInfo()
@@ -49,6 +50,7 @@ func GetDetailedVersion(ctx context.Context) V {
 	return v
 }
 
+// DisplayVersion returns a human-readable version string.
 func (v V) DisplayVersion() string {
 	if strings.TrimSpace(v.Version) == "" {
 		return "unknown"
@@ -61,37 +63,45 @@ func (v V) DisplayVersion() string {
 	return "v" + normalizeVersion(v.Version)
 }
 
+func updateStatus(v V) string {
+	switch {
+	case v.Version == "local":
+		return "Development build"
+	case strings.TrimSpace(v.LatestVersion) == "":
+		return "Unable to check"
+	}
+
+	switch compareVersions(v.Version, v.LatestVersion) {
+	case -1:
+		return fmt.Sprintf("Update available (%s)", "v"+normalizeVersion(v.LatestVersion))
+	case 1:
+		return "Ahead of latest release"
+	default:
+		return "Up to date"
+	}
+}
+
 // String returns the version information as a string
 func (v V) String() string {
 	installInfo := GetInstallInfo()
 	lines := []string{
 		"Escape CLI",
-		fmt.Sprintf("  Version:    %s", v.DisplayVersion()),
-		fmt.Sprintf("  Commit:     %s", v.Commit),
-		fmt.Sprintf("  Build date: %s", v.BuildDate),
-		fmt.Sprintf("  Install:    %s", installInfo.DisplayName()),
+		"  Version:    " + v.DisplayVersion(),
+		"  Commit:     " + v.Commit,
+		"  Build date: " + v.BuildDate,
+		"  Install:    " + installInfo.DisplayName(),
 	}
 
-	status := "Unknown"
-	switch {
-	case v.Version == "local":
-		status = "Development build"
-	case v.LatestVersion == "":
-		status = "Unable to check"
-	case normalizeVersion(v.LatestVersion) == normalizeVersion(v.Version):
-		status = "Up to date"
-	default:
-		status = fmt.Sprintf("Update available (%s)", "v"+normalizeVersion(v.LatestVersion))
-	}
-	lines = append(lines, fmt.Sprintf("  Status:     %s", status))
+	lines = append(lines, "  Status:     "+updateStatus(v))
 
 	if strings.TrimSpace(v.UpgradeCommand) != "" {
-		lines = append(lines, fmt.Sprintf("  Upgrade:    %s", v.UpgradeCommand))
+		lines = append(lines, "  Upgrade:    "+v.UpgradeCommand)
 	}
 
 	return strings.Join(lines, "\n")
 }
 
+// LogString returns the version metadata in logfmt-friendly form.
 func (v V) LogString() string {
 	return fmt.Sprintf("version=%s commit=%s buildDate=%s", normalizeVersion(v.Version), v.Commit, v.BuildDate)
 }
