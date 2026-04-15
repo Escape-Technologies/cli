@@ -196,7 +196,7 @@ ID                                      CREATED AT                SEVERITY  CATE
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
 		// Output JSON Schema if requested
-		if out.Schema(v3.IssueSummarized{}) {
+		if out.Schema(v3.GetIssue200Response{}) {
 			return nil
 		}
 
@@ -207,8 +207,13 @@ ID                                      CREATED AT                SEVERITY  CATE
 		}
 
 		out.Table(issue, func() []string {
-			res := []string{"ID\tCREATED AT\tSEVERITY\tCATEGORY\tSTATUS\tNAME\tASSET\tLINK"}
-			res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s", issue.GetId(), issue.GetCreatedAt(), issue.GetSeverity(), issue.GetCategory(), issue.GetStatus(), issue.GetName(), issue.GetAsset().Name, issue.GetLinks().IssueOverview))
+			cvssData := issue.GetCvss()
+			cvss := "-"
+			if cvssData.GetScore() != 0 || cvssData.GetVector() != "" {
+				cvss = fmt.Sprintf("%.1f %s", cvssData.GetScore(), cvssData.GetVector())
+			}
+			res := []string{"ID\tCREATED AT\tSEVERITY\tCATEGORY\tSTATUS\tNAME\tASSET\tFIRST SEEN SCAN\tCVSS\tFRAMEWORK\tCOMPLIANCES\tREMEDIATION\tCONTEXT\tLINK"}
+			res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%d\t%s\t%s\t%s", issue.GetId(), issue.GetCreatedAt(), issue.GetSeverity(), issue.GetCategory(), issue.GetStatus(), issue.GetName(), issue.GetAsset().Name, issue.GetFirstSeenScanId(), cvss, issue.GetAiRemediationFramework(), len(issue.GetCompliances()), issue.GetRemediation(), issue.GetContext(), issue.GetLinks().IssueOverview))
 			return res
 		})
 

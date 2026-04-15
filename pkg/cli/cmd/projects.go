@@ -169,8 +169,28 @@ var projectsUpdateCmd = &cobra.Command{
 	},
 }
 
+var projectsDeleteCmd = &cobra.Command{
+	Use:     "delete project-id",
+	Aliases: []string{"del", "remove"},
+	Short:   "Delete a project",
+	Args: func(cmd *cobra.Command, args []string) error {
+		if len(args) != 1 {
+			_ = cmd.Help()
+			return errors.New("project ID is required")
+		}
+		return nil
+	},
+	RunE: func(cmd *cobra.Command, args []string) error {
+		if err := escape.DeleteProject(cmd.Context(), args[0]); err != nil {
+			return fmt.Errorf("failed to delete project: %w", err)
+		}
+		out.Log(fmt.Sprintf("Project %s deleted", args[0]))
+		return nil
+	},
+}
+
 func init() {
-	projectsCmd.AddCommand(projectsListCmd, projectsGetCmd, projectsCreateCmd, projectsUpdateCmd)
+	projectsCmd.AddCommand(projectsListCmd, projectsGetCmd, projectsCreateCmd, projectsUpdateCmd, projectsDeleteCmd)
 	projectsListCmd.Flags().StringVarP(&projectsSearchFlag, "search", "s", "", "search projects by name")
 	rootCmd.AddCommand(projectsCmd)
 }

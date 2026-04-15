@@ -78,16 +78,17 @@ ID                                      NAME                       SSH PUBLIC KE
 			allLocations = append(allLocations, locations...)
 		}
 		out.Table(allLocations, func() []string {
-			res := []string{"ID\tNAME\tTYPE\tENABLED\tLINK"}
+			res := []string{"ID\tNAME\tTYPE\tENABLED\tLAST SEEN\tLINK"}
 			for _, location := range allLocations {
 				res = append(
 					res,
 					fmt.Sprintf(
-						"%s\t%s\t%s\t%t\t%s",
+						"%s\t%s\t%s\t%t\t%s\t%s",
 						location.GetId(),
 						location.GetName(),
 						location.GetType(),
 						location.GetEnabled(),
+						stringValue(location.AdditionalProperties["lastSeenAt"]),
 						location.GetLinks().LocationOverview,
 					),
 				)

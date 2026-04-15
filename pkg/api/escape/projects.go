@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"net/http"
 
 	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
 )
@@ -80,3 +81,10 @@ func UpdateProject(ctx context.Context, projectID string, body []byte) (*v3.Crea
 	return data, nil
 }
 
+// DeleteProject deletes a project by ID.
+func DeleteProject(ctx context.Context, projectID string) error {
+	if err := rawRequest(ctx, http.MethodDelete, "/projects/"+projectID, nil, nil); err != nil {
+		return fmt.Errorf("api error: %w", err)
+	}
+	return nil
+}
