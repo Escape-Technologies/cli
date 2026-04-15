@@ -15,39 +15,39 @@ import (
 	"fmt"
 )
 
-// checks if the CreateIssueComment500Response type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &CreateIssueComment500Response{}
+// checks if the CreateAssetComment500Response type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CreateAssetComment500Response{}
 
-// CreateIssueComment500Response struct for CreateIssueComment500Response
-type CreateIssueComment500Response struct {
-	Message              ENUMINTERNALSERVERERROR `json:"message"`
-	Details              string                  `json:"details"`
+// CreateAssetComment500Response struct for CreateAssetComment500Response
+type CreateAssetComment500Response struct {
+	Message ENUMINTERNALSERVERERROR `json:"message"`
+	Details string `json:"details"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _CreateIssueComment500Response CreateIssueComment500Response
+type _CreateAssetComment500Response CreateAssetComment500Response
 
-// NewCreateIssueComment500Response instantiates a new CreateIssueComment500Response object
+// NewCreateAssetComment500Response instantiates a new CreateAssetComment500Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateIssueComment500Response(message ENUMINTERNALSERVERERROR, details string) *CreateIssueComment500Response {
-	this := CreateIssueComment500Response{}
+func NewCreateAssetComment500Response(message ENUMINTERNALSERVERERROR, details string) *CreateAssetComment500Response {
+	this := CreateAssetComment500Response{}
 	this.Message = message
 	this.Details = details
 	return &this
 }
 
-// NewCreateIssueComment500ResponseWithDefaults instantiates a new CreateIssueComment500Response object
+// NewCreateAssetComment500ResponseWithDefaults instantiates a new CreateAssetComment500Response object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCreateIssueComment500ResponseWithDefaults() *CreateIssueComment500Response {
-	this := CreateIssueComment500Response{}
+func NewCreateAssetComment500ResponseWithDefaults() *CreateAssetComment500Response {
+	this := CreateAssetComment500Response{}
 	return &this
 }
 
 // GetMessage returns the Message field value
-func (o *CreateIssueComment500Response) GetMessage() ENUMINTERNALSERVERERROR {
+func (o *CreateAssetComment500Response) GetMessage() ENUMINTERNALSERVERERROR {
 	if o == nil {
 		var ret ENUMINTERNALSERVERERROR
 		return ret
@@ -58,7 +58,7 @@ func (o *CreateIssueComment500Response) GetMessage() ENUMINTERNALSERVERERROR {
 
 // GetMessageOk returns a tuple with the Message field value
 // and a boolean to check if the value has been set.
-func (o *CreateIssueComment500Response) GetMessageOk() (*ENUMINTERNALSERVERERROR, bool) {
+func (o *CreateAssetComment500Response) GetMessageOk() (*ENUMINTERNALSERVERERROR, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -66,12 +66,12 @@ func (o *CreateIssueComment500Response) GetMessageOk() (*ENUMINTERNALSERVERERROR
 }
 
 // SetMessage sets field value
-func (o *CreateIssueComment500Response) SetMessage(v ENUMINTERNALSERVERERROR) {
+func (o *CreateAssetComment500Response) SetMessage(v ENUMINTERNALSERVERERROR) {
 	o.Message = v
 }
 
 // GetDetails returns the Details field value
-func (o *CreateIssueComment500Response) GetDetails() string {
+func (o *CreateAssetComment500Response) GetDetails() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -82,7 +82,7 @@ func (o *CreateIssueComment500Response) GetDetails() string {
 
 // GetDetailsOk returns a tuple with the Details field value
 // and a boolean to check if the value has been set.
-func (o *CreateIssueComment500Response) GetDetailsOk() (*string, bool) {
+func (o *CreateAssetComment500Response) GetDetailsOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -90,19 +90,19 @@ func (o *CreateIssueComment500Response) GetDetailsOk() (*string, bool) {
 }
 
 // SetDetails sets field value
-func (o *CreateIssueComment500Response) SetDetails(v string) {
+func (o *CreateAssetComment500Response) SetDetails(v string) {
 	o.Details = v
 }
 
-func (o CreateIssueComment500Response) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+func (o CreateAssetComment500Response) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
 }
 
-func (o CreateIssueComment500Response) ToMap() (map[string]interface{}, error) {
+func (o CreateAssetComment500Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["message"] = o.Message
 	toSerialize["details"] = o.Details
@@ -114,7 +114,7 @@ func (o CreateIssueComment500Response) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *CreateIssueComment500Response) UnmarshalJSON(data []byte) (err error) {
+func (o *CreateAssetComment500Response) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -128,24 +128,24 @@ func (o *CreateIssueComment500Response) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
 	}
 
-	varCreateIssueComment500Response := _CreateIssueComment500Response{}
+	varCreateAssetComment500Response := _CreateAssetComment500Response{}
 
-	err = json.Unmarshal(data, &varCreateIssueComment500Response)
+	err = json.Unmarshal(data, &varCreateAssetComment500Response)
 
 	if err != nil {
 		return err
 	}
 
-	*o = CreateIssueComment500Response(varCreateIssueComment500Response)
+	*o = CreateAssetComment500Response(varCreateAssetComment500Response)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -158,38 +158,40 @@ func (o *CreateIssueComment500Response) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableCreateIssueComment500Response struct {
-	value *CreateIssueComment500Response
+type NullableCreateAssetComment500Response struct {
+	value *CreateAssetComment500Response
 	isSet bool
 }
 
-func (v NullableCreateIssueComment500Response) Get() *CreateIssueComment500Response {
+func (v NullableCreateAssetComment500Response) Get() *CreateAssetComment500Response {
 	return v.value
 }
 
-func (v *NullableCreateIssueComment500Response) Set(val *CreateIssueComment500Response) {
+func (v *NullableCreateAssetComment500Response) Set(val *CreateAssetComment500Response) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCreateIssueComment500Response) IsSet() bool {
+func (v NullableCreateAssetComment500Response) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCreateIssueComment500Response) Unset() {
+func (v *NullableCreateAssetComment500Response) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCreateIssueComment500Response(val *CreateIssueComment500Response) *NullableCreateIssueComment500Response {
-	return &NullableCreateIssueComment500Response{value: val, isSet: true}
+func NewNullableCreateAssetComment500Response(val *CreateAssetComment500Response) *NullableCreateAssetComment500Response {
+	return &NullableCreateAssetComment500Response{value: val, isSet: true}
 }
 
-func (v NullableCreateIssueComment500Response) MarshalJSON() ([]byte, error) {
+func (v NullableCreateAssetComment500Response) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCreateIssueComment500Response) UnmarshalJSON(src []byte) error {
+func (v *NullableCreateAssetComment500Response) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

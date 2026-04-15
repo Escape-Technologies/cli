@@ -19,6 +19,8 @@ type ListEventsFilters struct {
 	Stages         []string
 	HasAttachments bool
 	Attachments    []string
+	SortType       string
+	SortDirection  string
 }
 
 // ListEvents lists events
@@ -28,7 +30,15 @@ func ListEvents(ctx context.Context, next string, filters *ListEventsFilters) ([
 		return nil, nil, fmt.Errorf("unable to init client: %w", err)
 	}
 	maxSize := 100
-	req := client.EventsAPI.ListEvents(ctx).SortDirection("desc").Size(maxSize)
+	req := client.EventsAPI.ListEvents(ctx).Size(maxSize)
+	if filters != nil && filters.SortType != "" {
+		req = req.SortType(filters.SortType)
+	}
+	if filters != nil && filters.SortDirection != "" {
+		req = req.SortDirection(filters.SortDirection)
+	} else {
+		req = req.SortDirection("desc")
+	}
 	if next != "" {
 		req = req.Cursor(next)
 	}

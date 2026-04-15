@@ -15,6 +15,8 @@ type ListLocationsFilters struct {
 	Search        string
 	Enabled       bool
 	LocationTypes []string
+	SortType      string
+	SortDirection string
 }
 
 // ListLocations lists all locations
@@ -28,6 +30,12 @@ func ListLocations(ctx context.Context, next string, filters *ListLocationsFilte
 		req = req.Cursor(next)
 	}
 	if filters != nil {
+		if filters.SortType != "" {
+			req = req.SortType(filters.SortType)
+		}
+		if filters.SortDirection != "" {
+			req = req.SortDirection(filters.SortDirection)
+		}
 		if filters.Search != "" {
 			req = req.Search(filters.Search)
 		}

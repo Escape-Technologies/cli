@@ -20,10 +20,10 @@ var _ MappedNullable = &CreateAssetDNSRequestDnsRecordsInner{}
 
 // CreateAssetDNSRequestDnsRecordsInner struct for CreateAssetDNSRequestDnsRecordsInner
 type CreateAssetDNSRequestDnsRecordsInner struct {
-	Name                 string  `json:"name"`
-	Type                 string  `json:"type"`
-	Ttl                  float32 `json:"ttl"`
-	Data                 string  `json:"data"`
+	Name string `json:"name"`
+	Type string `json:"type"`
+	Ttl float32 `json:"ttl"`
+	Data string `json:"data"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -147,7 +147,7 @@ func (o *CreateAssetDNSRequestDnsRecordsInner) SetData(v string) {
 }
 
 func (o CreateAssetDNSRequestDnsRecordsInner) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -184,10 +184,10 @@ func (o *CreateAssetDNSRequestDnsRecordsInner) UnmarshalJSON(data []byte) (err e
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -251,3 +251,5 @@ func (v *NullableCreateAssetDNSRequestDnsRecordsInner) UnmarshalJSON(src []byte)
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

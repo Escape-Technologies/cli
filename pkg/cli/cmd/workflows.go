@@ -29,6 +29,9 @@ COMMON WORKFLOWS:
 
 var workflowsTriggersFlag []string
 var workflowsSearchFlag string
+var workflowsProjectIDs []string
+var workflowsIntegrationIDs []string
+var workflowsWorkflowIDs []string
 
 var workflowsListCmd = &cobra.Command{
 	Use:     "list",
@@ -41,8 +44,11 @@ var workflowsListCmd = &cobra.Command{
 		}
 
 		filters := &escape.ListWorkflowsFilters{
-			Triggers: workflowsTriggersFlag,
-			Search:   workflowsSearchFlag,
+			Triggers:       workflowsTriggersFlag,
+			Search:         workflowsSearchFlag,
+			ProjectIDs:     workflowsProjectIDs,
+			IntegrationIDs: workflowsIntegrationIDs,
+			WorkflowIDs:    workflowsWorkflowIDs,
 		}
 		workflows, next, err := escape.ListWorkflows(cmd.Context(), "", filters)
 		if err != nil {
@@ -197,5 +203,8 @@ func init() {
 	workflowsCmd.AddCommand(workflowsListCmd, workflowsGetCmd, workflowsCreateCmd, workflowsUpdateCmd, workflowsDeleteCmd)
 	workflowsListCmd.Flags().StringSliceVar(&workflowsTriggersFlag, "trigger", []string{}, "filter by trigger type (e.g. SCAN_FINISHED)")
 	workflowsListCmd.Flags().StringVarP(&workflowsSearchFlag, "search", "s", "", "search workflows by name")
+	workflowsListCmd.Flags().StringSliceVar(&workflowsProjectIDs, "project-id", []string{}, "filter by project ID(s)")
+	workflowsListCmd.Flags().StringSliceVar(&workflowsIntegrationIDs, "integration-id", []string{}, "filter by integration ID(s)")
+	workflowsListCmd.Flags().StringSliceVar(&workflowsWorkflowIDs, "workflow-id", []string{}, "filter by workflow ID(s)")
 	rootCmd.AddCommand(workflowsCmd)
 }

@@ -16,12 +16,15 @@ import (
 
 var scanProfileIDs []string
 var scanProjectIDs []string
+var scanAssetIDs []string
 var scanAfter string
 var scanBefore string
 var scanIgnored string
 var scanInitiator []string
 var scanKinds []string
 var scanStatus []string
+var scanSortType string
+var scanSortDirection string
 
 var scansCmd = &cobra.Command{
 	Use:     "scans",
@@ -102,14 +105,17 @@ ID                                      CREATED AT                           KIN
 		}
 
 		filters := &escape.ListScansFilters{
-			ProfileIDs: &scanProfileIDs,
-			ProjectIDs: &scanProjectIDs,
-			After:      scanAfter,
-			Before:     scanBefore,
-			Ignored:    scanIgnored,
-			Initiator:  &scanInitiator,
-			Kinds:      &scanKinds,
-			Status:     &scanStatus,
+			ProfileIDs:    &scanProfileIDs,
+			ProjectIDs:    &scanProjectIDs,
+			AssetIDs:      &scanAssetIDs,
+			After:         scanAfter,
+			Before:        scanBefore,
+			Ignored:       scanIgnored,
+			Initiator:     &scanInitiator,
+			Kinds:         &scanKinds,
+			Status:        &scanStatus,
+			SortType:      scanSortType,
+			SortDirection: scanSortDirection,
 		}
 		scans, next, err := escape.ListScans(cmd.Context(), "", filters)
 		if err != nil {
@@ -724,12 +730,15 @@ func init() {
 	scansCmd.AddCommand(scansListCmd)
 	scansListCmd.PersistentFlags().StringSliceVarP(&scanProfileIDs, "profile-id", "p", []string{}, "filter by profile ID(s) - comma-separated for multiple")
 	scansListCmd.PersistentFlags().StringSliceVar(&scanProjectIDs, "project-id", []string{}, "filter by project ID(s)")
+	scansListCmd.PersistentFlags().StringSliceVarP(&scanAssetIDs, "asset-id", "a", []string{}, "filter by asset ID(s) - comma-separated for multiple")
 	scansListCmd.PersistentFlags().StringVar(&scanAfter, "after", "", "show scans created after this date (RFC3339 format, e.g., 2025-01-01T00:00:00Z)")
 	scansListCmd.PersistentFlags().StringVar(&scanBefore, "before", "", "show scans created before this date (RFC3339 format)")
 	scansListCmd.PersistentFlags().StringVar(&scanIgnored, "ignored", "", "filter by ignored status (true/false)")
 	scansListCmd.PersistentFlags().StringSliceVarP(&scanInitiator, "initiator", "i", []string{}, "filter by initiator: MANUAL, API, SCHEDULED, CI")
 	scansListCmd.PersistentFlags().StringSliceVarP(&scanKinds, "kind", "k", []string{}, "filter by scanner type: BLST_REST, BLST_GRAPHQL, FRONTEND_DAST")
 	scansListCmd.PersistentFlags().StringSliceVarP(&scanStatus, "status", "s", []string{}, "filter by status: STARTING, RUNNING, FINISHED, FAILED, CANCELED")
+	scansListCmd.PersistentFlags().StringVar(&scanSortType, "sort-by", "", "sort field (e.g., createdAt)")
+	scansListCmd.PersistentFlags().StringVar(&scanSortDirection, "sort-direction", "", "sort direction: asc, desc")
 	scanStartCmd.PersistentFlags().BoolVarP(&scanStartCmdWatch, "watch", "w", false, "watch scan progress in real-time until completion")
 	scanStartCmd.PersistentFlags().StringVar(&scanStartCmdCommitHash, "commit-hash", "", "git commit SHA for traceability (auto-detected in CI/CD)")
 	scanStartCmd.PersistentFlags().StringVar(&scanStartCmdCommitLink, "commit-link", "", "URL to commit in your VCS")

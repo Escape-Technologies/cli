@@ -20,19 +20,19 @@ var _ MappedNullable = &UpdategcpIntegrationRequestParameters{}
 
 // UpdategcpIntegrationRequestParameters The new parameters of the integration
 type UpdategcpIntegrationRequestParameters struct {
-	AuthProviderX509CertUrl string  `json:"auth_provider_x509_cert_url"`
-	AuthUri                 string  `json:"auth_uri"`
-	ClientEmail             string  `json:"client_email"`
-	ClientId                string  `json:"client_id"`
-	ClientX509CertUrl       string  `json:"client_x509_cert_url"`
-	PrivateKey              string  `json:"private_key"`
-	PrivateKeyId            string  `json:"private_key_id"`
-	ProjectId               string  `json:"project_id"`
-	Projects                *string `json:"projects,omitempty"`
-	TokenUri                string  `json:"token_uri"`
-	Type                    string  `json:"type"`
-	UniverseDomain          string  `json:"universe_domain"`
-	AdditionalProperties    map[string]interface{}
+	AuthProviderX509CertUrl string `json:"auth_provider_x509_cert_url"`
+	AuthUri string `json:"auth_uri"`
+	ClientEmail string `json:"client_email"`
+	ClientId string `json:"client_id"`
+	ClientX509CertUrl string `json:"client_x509_cert_url"`
+	PrivateKey string `json:"private_key"`
+	PrivateKeyId string `json:"private_key_id"`
+	ProjectId string `json:"project_id"`
+	Projects *string `json:"projects,omitempty"`
+	TokenUri string `json:"token_uri"`
+	Type string `json:"type"`
+	UniverseDomain string `json:"universe_domain"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpdategcpIntegrationRequestParameters UpdategcpIntegrationRequestParameters
@@ -362,7 +362,7 @@ func (o *UpdategcpIntegrationRequestParameters) SetUniverseDomain(v string) {
 }
 
 func (o UpdategcpIntegrationRequestParameters) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -416,10 +416,10 @@ func (o *UpdategcpIntegrationRequestParameters) UnmarshalJSON(data []byte) (err 
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -491,3 +491,5 @@ func (v *NullableUpdategcpIntegrationRequestParameters) UnmarshalJSON(src []byte
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

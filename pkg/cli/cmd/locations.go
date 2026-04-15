@@ -15,6 +15,8 @@ import (
 var locationsSearch = ""
 var locationsEnabled = false
 var locationsLocationTypes = []string{}
+var locationsSortType string
+var locationsSortDirection string
 
 var locationsCmd = &cobra.Command{
 	Use:     "locations",
@@ -65,6 +67,8 @@ ID                                      NAME                 TYPE     ENABLED  L
 			Search:        locationsSearch,
 			Enabled:       locationsEnabled,
 			LocationTypes: locationsLocationTypes,
+			SortType:      locationsSortType,
+			SortDirection: locationsSortDirection,
 		}
 		locations, next, err := escape.ListLocations(cmd.Context(), "", filters)
 		if err != nil {
@@ -261,6 +265,8 @@ func init() {
 	locationsListCmd.Flags().StringVarP(&locationsSearch, "search", "s", "", "Search term to filter locations by")
 	locationsListCmd.Flags().BoolVarP(&locationsEnabled, "enabled", "e", false, "Filter by enabled locations")
 	locationsListCmd.Flags().StringSliceVarP(&locationsLocationTypes, "type", "t", []string{}, "Filter by location type (private, escape, repeater)")
+	locationsListCmd.Flags().StringVar(&locationsSortType, "sort-by", "", "sort field")
+	locationsListCmd.Flags().StringVar(&locationsSortDirection, "sort-direction", "", "sort direction: asc, desc")
 	locationsCreateCmd.Flags().StringVar(&locationCreateName, "name", "", "location name")
 	locationsCreateCmd.Flags().StringVar(&locationCreateSSHPublicKey, "ssh-public-key", "", "SSH public key for the location")
 	locationsUpdateCmd.Flags().StringVar(&locationUpdateName, "name", "", "new location name")

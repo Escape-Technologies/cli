@@ -19,26 +19,26 @@ var _ MappedNullable = &CreateWorkflowFilterUsingCustomFilterOnProfilesFilter{}
 
 // CreateWorkflowFilterUsingCustomFilterOnProfilesFilter struct for CreateWorkflowFilterUsingCustomFilterOnProfilesFilter
 type CreateWorkflowFilterUsingCustomFilterOnProfilesFilter struct {
-	Ids                  []string                                                                      `json:"ids,omitempty"`
-	Search               *string                                                                       `json:"search,omitempty"`
-	Risks                []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS                  `json:"risks,omitempty"`
-	TagIds               []string                                                                      `json:"tagIds,omitempty"`
-	NoTags               *bool                                                                         `json:"noTags,omitempty"`
-	ProjectIds           []string                                                                      `json:"projectIds,omitempty"`
-	NoProjects           *bool                                                                         `json:"noProjects,omitempty"`
-	AssetIds             []string                                                                      `json:"assetIds,omitempty"`
-	AssetSchemaIds       []string                                                                      `json:"assetSchemaIds,omitempty"`
-	IssueIds             []string                                                                      `json:"issueIds,omitempty"`
-	Kinds                []ENUMPROPERTIESFILTERSITEMS1PROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS      `json:"kinds,omitempty"`
-	Domains              []string                                                                      `json:"domains,omitempty"`
-	Initiators           []ENUMPROPERTIESDATAITEMSPROPERTIESINITIATORSITEMS                            `json:"initiators,omitempty"`
-	LastScanStatuses     []ENUMPROPERTIESSTATUS                                                        `json:"lastScanStatuses,omitempty"`
-	ProblemSeverities    []ENUMPROPERTIESFILTERSITEMS2PROPERTIESFILTERPROPERTIESPROBLEMSEVERITIESITEMS `json:"problemSeverities,omitempty"`
-	ProblemCodes         []ENUMPROPERTIESFILTERSITEMS2PROPERTIESFILTERPROPERTIESPROBLEMCODESITEMS      `json:"problemCodes,omitempty"`
-	AssetClasses         []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS            `json:"assetClasses,omitempty"`
-	AssetStatuses        []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS           `json:"assetStatuses,omitempty"`
-	AssetTypes           []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE             `json:"assetTypes,omitempty"`
-	ScanIds              []string                                                                      `json:"scanIds,omitempty"`
+	Ids []string `json:"ids,omitempty"`
+	Search *string `json:"search,omitempty"`
+	Risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS `json:"risks,omitempty"`
+	TagIds []string `json:"tagIds,omitempty"`
+	NoTags *bool `json:"noTags,omitempty"`
+	ProjectIds []string `json:"projectIds,omitempty"`
+	NoProjects *bool `json:"noProjects,omitempty"`
+	AssetIds []string `json:"assetIds,omitempty"`
+	AssetSchemaIds []string `json:"assetSchemaIds,omitempty"`
+	IssueIds []string `json:"issueIds,omitempty"`
+	Kinds []ENUMPROPERTIESWHEREPROPERTIESSCANNERKINDSITEMS `json:"kinds,omitempty"`
+	Domains []string `json:"domains,omitempty"`
+	Initiators []ENUMPROPERTIESDATAITEMSPROPERTIESINITIATORSITEMS `json:"initiators,omitempty"`
+	LastScanStatuses []ENUMPROPERTIESSTATUS `json:"lastScanStatuses,omitempty"`
+	ProblemSeverities []ENUMPROPERTIESFILTERSITEMS2PROPERTIESFILTERPROPERTIESPROBLEMSEVERITIESITEMS `json:"problemSeverities,omitempty"`
+	ProblemCodes []ENUMPROPERTIESFILTERSITEMS2PROPERTIESFILTERPROPERTIESPROBLEMCODESITEMS `json:"problemCodes,omitempty"`
+	AssetClasses []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS `json:"assetClasses,omitempty"`
+	AssetStatuses []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS `json:"assetStatuses,omitempty"`
+	AssetTypes []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE `json:"assetTypes,omitempty"`
+	ScanIds []string `json:"scanIds,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -382,9 +382,9 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) SetIssueIds(v []
 }
 
 // GetKinds returns the Kinds field value if set, zero value otherwise.
-func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetKinds() []ENUMPROPERTIESFILTERSITEMS1PROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS {
+func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetKinds() []ENUMPROPERTIESWHEREPROPERTIESSCANNERKINDSITEMS {
 	if o == nil || IsNil(o.Kinds) {
-		var ret []ENUMPROPERTIESFILTERSITEMS1PROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS
+		var ret []ENUMPROPERTIESWHEREPROPERTIESSCANNERKINDSITEMS
 		return ret
 	}
 	return o.Kinds
@@ -392,7 +392,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetKinds() []ENU
 
 // GetKindsOk returns a tuple with the Kinds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetKindsOk() ([]ENUMPROPERTIESFILTERSITEMS1PROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS, bool) {
+func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetKindsOk() ([]ENUMPROPERTIESWHEREPROPERTIESSCANNERKINDSITEMS, bool) {
 	if o == nil || IsNil(o.Kinds) {
 		return nil, false
 	}
@@ -408,8 +408,8 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) HasKinds() bool 
 	return false
 }
 
-// SetKinds gets a reference to the given []ENUMPROPERTIESFILTERSITEMS1PROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS and assigns it to the Kinds field.
-func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) SetKinds(v []ENUMPROPERTIESFILTERSITEMS1PROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS) {
+// SetKinds gets a reference to the given []ENUMPROPERTIESWHEREPROPERTIESSCANNERKINDSITEMS and assigns it to the Kinds field.
+func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) SetKinds(v []ENUMPROPERTIESWHEREPROPERTIESSCANNERKINDSITEMS) {
 	o.Kinds = v
 }
 
@@ -702,7 +702,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) SetScanIds(v []s
 }
 
 func (o CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -854,3 +854,5 @@ func (v *NullableCreateWorkflowFilterUsingCustomFilterOnProfilesFilter) Unmarsha
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

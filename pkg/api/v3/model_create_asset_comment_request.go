@@ -15,38 +15,38 @@ import (
 	"fmt"
 )
 
-// checks if the CreateIssueCommentRequest type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &CreateIssueCommentRequest{}
+// checks if the CreateAssetCommentRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CreateAssetCommentRequest{}
 
-// CreateIssueCommentRequest struct for CreateIssueCommentRequest
-type CreateIssueCommentRequest struct {
+// CreateAssetCommentRequest struct for CreateAssetCommentRequest
+type CreateAssetCommentRequest struct {
 	// Comment text; maximum 512 characters
-	Comment              string `json:"comment"`
+	Comment string `json:"comment"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _CreateIssueCommentRequest CreateIssueCommentRequest
+type _CreateAssetCommentRequest CreateAssetCommentRequest
 
-// NewCreateIssueCommentRequest instantiates a new CreateIssueCommentRequest object
+// NewCreateAssetCommentRequest instantiates a new CreateAssetCommentRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateIssueCommentRequest(comment string) *CreateIssueCommentRequest {
-	this := CreateIssueCommentRequest{}
+func NewCreateAssetCommentRequest(comment string) *CreateAssetCommentRequest {
+	this := CreateAssetCommentRequest{}
 	this.Comment = comment
 	return &this
 }
 
-// NewCreateIssueCommentRequestWithDefaults instantiates a new CreateIssueCommentRequest object
+// NewCreateAssetCommentRequestWithDefaults instantiates a new CreateAssetCommentRequest object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCreateIssueCommentRequestWithDefaults() *CreateIssueCommentRequest {
-	this := CreateIssueCommentRequest{}
+func NewCreateAssetCommentRequestWithDefaults() *CreateAssetCommentRequest {
+	this := CreateAssetCommentRequest{}
 	return &this
 }
 
 // GetComment returns the Comment field value
-func (o *CreateIssueCommentRequest) GetComment() string {
+func (o *CreateAssetCommentRequest) GetComment() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -57,7 +57,7 @@ func (o *CreateIssueCommentRequest) GetComment() string {
 
 // GetCommentOk returns a tuple with the Comment field value
 // and a boolean to check if the value has been set.
-func (o *CreateIssueCommentRequest) GetCommentOk() (*string, bool) {
+func (o *CreateAssetCommentRequest) GetCommentOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -65,19 +65,19 @@ func (o *CreateIssueCommentRequest) GetCommentOk() (*string, bool) {
 }
 
 // SetComment sets field value
-func (o *CreateIssueCommentRequest) SetComment(v string) {
+func (o *CreateAssetCommentRequest) SetComment(v string) {
 	o.Comment = v
 }
 
-func (o CreateIssueCommentRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+func (o CreateAssetCommentRequest) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
 }
 
-func (o CreateIssueCommentRequest) ToMap() (map[string]interface{}, error) {
+func (o CreateAssetCommentRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["comment"] = o.Comment
 
@@ -88,7 +88,7 @@ func (o CreateIssueCommentRequest) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *CreateIssueCommentRequest) UnmarshalJSON(data []byte) (err error) {
+func (o *CreateAssetCommentRequest) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -101,24 +101,24 @@ func (o *CreateIssueCommentRequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
 	}
 
-	varCreateIssueCommentRequest := _CreateIssueCommentRequest{}
+	varCreateAssetCommentRequest := _CreateAssetCommentRequest{}
 
-	err = json.Unmarshal(data, &varCreateIssueCommentRequest)
+	err = json.Unmarshal(data, &varCreateAssetCommentRequest)
 
 	if err != nil {
 		return err
 	}
 
-	*o = CreateIssueCommentRequest(varCreateIssueCommentRequest)
+	*o = CreateAssetCommentRequest(varCreateAssetCommentRequest)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -130,38 +130,40 @@ func (o *CreateIssueCommentRequest) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableCreateIssueCommentRequest struct {
-	value *CreateIssueCommentRequest
+type NullableCreateAssetCommentRequest struct {
+	value *CreateAssetCommentRequest
 	isSet bool
 }
 
-func (v NullableCreateIssueCommentRequest) Get() *CreateIssueCommentRequest {
+func (v NullableCreateAssetCommentRequest) Get() *CreateAssetCommentRequest {
 	return v.value
 }
 
-func (v *NullableCreateIssueCommentRequest) Set(val *CreateIssueCommentRequest) {
+func (v *NullableCreateAssetCommentRequest) Set(val *CreateAssetCommentRequest) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCreateIssueCommentRequest) IsSet() bool {
+func (v NullableCreateAssetCommentRequest) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCreateIssueCommentRequest) Unset() {
+func (v *NullableCreateAssetCommentRequest) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCreateIssueCommentRequest(val *CreateIssueCommentRequest) *NullableCreateIssueCommentRequest {
-	return &NullableCreateIssueCommentRequest{value: val, isSet: true}
+func NewNullableCreateAssetCommentRequest(val *CreateAssetCommentRequest) *NullableCreateAssetCommentRequest {
+	return &NullableCreateAssetCommentRequest{value: val, isSet: true}
 }
 
-func (v NullableCreateIssueCommentRequest) MarshalJSON() ([]byte, error) {
+func (v NullableCreateAssetCommentRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCreateIssueCommentRequest) UnmarshalJSON(src []byte) error {
+func (v *NullableCreateAssetCommentRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

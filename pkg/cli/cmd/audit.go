@@ -11,11 +11,13 @@ import (
 )
 
 var (
-	auditCmdDateFrom  = time.Now().Add(-12 * time.Hour).Format(time.RFC3339)
-	auditCmdDateTo    = time.Now().Format(time.RFC3339)
-	auditCmdEventType = ""
-	auditCmdActor     = ""
-	auditCmdSearch    = ""
+	auditCmdDateFrom      = time.Now().Add(-12 * time.Hour).Format(time.RFC3339)
+	auditCmdDateTo        = time.Now().Format(time.RFC3339)
+	auditCmdEventType     = ""
+	auditCmdActor         = ""
+	auditCmdSearch        = ""
+	auditSortType         string
+	auditSortDirection    string
 )
 
 var auditCmd = &cobra.Command{
@@ -75,11 +77,13 @@ FILTER OPTIONS:
 		}
 
 		filters := &escape.ListAuditLogsFilters{
-			DateFrom:   auditCmdDateFrom,
-			DateTo:     auditCmdDateTo,
-			ActionType: auditCmdEventType,
-			Actor:      auditCmdActor,
-			Search:     auditCmdSearch,
+			DateFrom:      auditCmdDateFrom,
+			DateTo:        auditCmdDateTo,
+			ActionType:    auditCmdEventType,
+			Actor:         auditCmdActor,
+			Search:        auditCmdSearch,
+			SortType:      auditSortType,
+			SortDirection: auditSortDirection,
 		}
 		logs, next, err := escape.ListAuditLogs(cmd.Context(), "", filters)
 		if err != nil {
@@ -121,4 +125,6 @@ func init() {
 	auditListCmd.Flags().StringVarP(&auditCmdEventType, "event-type", "e", "", "Filter by event type: (scan.scheduled, scan.started, scan.finished, user.authenticated)")
 	auditListCmd.Flags().StringVarP(&auditCmdActor, "actor", "a", "", "Filter by actor")
 	auditListCmd.Flags().StringVarP(&auditCmdSearch, "search", "s", "", "Search term to filter audit logs by")
+	auditListCmd.Flags().StringVar(&auditSortType, "sort-by", "", "sort field")
+	auditListCmd.Flags().StringVar(&auditSortDirection, "sort-direction", "", "sort direction: asc, desc")
 }

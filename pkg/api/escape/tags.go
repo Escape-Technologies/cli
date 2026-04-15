@@ -38,6 +38,33 @@ func CreateTag(ctx context.Context, name string, color string) (*v3.CreateTag200
 	return data, nil
 }
 
+// GetTag gets a tag by ID
+func GetTag(ctx context.Context, id string) (*v3.CreateTag200Response, error) {
+	client, err := newAPIV3Client()
+	if err != nil {
+		return nil, fmt.Errorf("unable to init client: %w", err)
+	}
+	data, _, err := client.TagsAPI.GetTag(ctx, id).Execute()
+	if err != nil {
+		return nil, fmt.Errorf("api error: %w", err)
+	}
+	return data, nil
+}
+
+// UpdateTag updates a tag name and/or color
+func UpdateTag(ctx context.Context, id string, name *string, color *string) (*v3.CreateTag200Response, error) {
+	client, err := newAPIV3Client()
+	if err != nil {
+		return nil, fmt.Errorf("unable to init client: %w", err)
+	}
+	body := v3.UpdateTagRequest{Name: name, Color: color}
+	data, _, err := client.TagsAPI.UpdateTag(ctx, id).UpdateTagRequest(body).Execute()
+	if err != nil {
+		return nil, fmt.Errorf("api error: %w", err)
+	}
+	return data, nil
+}
+
 // DeleteTag deletes a tag
 func DeleteTag(ctx context.Context, id string) error {
 	client, err := newAPIV3Client()
