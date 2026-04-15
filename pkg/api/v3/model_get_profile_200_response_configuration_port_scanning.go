@@ -20,7 +20,6 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationPortScanning{}
 // GetProfile200ResponseConfigurationPortScanning struct for GetProfile200ResponseConfigurationPortScanning
 type GetProfile200ResponseConfigurationPortScanning struct {
 	Ports                []float32 `json:"ports,omitempty"`
-	ExtendedScan         *bool     `json:"extended_scan,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -75,38 +74,6 @@ func (o *GetProfile200ResponseConfigurationPortScanning) SetPorts(v []float32) {
 	o.Ports = v
 }
 
-// GetExtendedScan returns the ExtendedScan field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationPortScanning) GetExtendedScan() bool {
-	if o == nil || IsNil(o.ExtendedScan) {
-		var ret bool
-		return ret
-	}
-	return *o.ExtendedScan
-}
-
-// GetExtendedScanOk returns a tuple with the ExtendedScan field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationPortScanning) GetExtendedScanOk() (*bool, bool) {
-	if o == nil || IsNil(o.ExtendedScan) {
-		return nil, false
-	}
-	return o.ExtendedScan, true
-}
-
-// HasExtendedScan returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationPortScanning) HasExtendedScan() bool {
-	if o != nil && !IsNil(o.ExtendedScan) {
-		return true
-	}
-
-	return false
-}
-
-// SetExtendedScan gets a reference to the given bool and assigns it to the ExtendedScan field.
-func (o *GetProfile200ResponseConfigurationPortScanning) SetExtendedScan(v bool) {
-	o.ExtendedScan = &v
-}
-
 func (o GetProfile200ResponseConfigurationPortScanning) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -119,9 +86,6 @@ func (o GetProfile200ResponseConfigurationPortScanning) ToMap() (map[string]inte
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Ports) {
 		toSerialize["ports"] = o.Ports
-	}
-	if !IsNil(o.ExtendedScan) {
-		toSerialize["extended_scan"] = o.ExtendedScan
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -146,7 +110,6 @@ func (o *GetProfile200ResponseConfigurationPortScanning) UnmarshalJSON(data []by
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ports")
-		delete(additionalProperties, "extended_scan")
 		o.AdditionalProperties = additionalProperties
 	}
 

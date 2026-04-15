@@ -34,6 +34,7 @@ type GetProfile200ResponseConfigurationExperimental struct {
 	AsmCveAgent                    *bool                                                                          `json:"asm_cve_agent,omitempty"`
 	LoginPageAgent                 *bool                                                                          `json:"login_page_agent,omitempty"`
 	JsAnalysis                     *bool                                                                          `json:"js_analysis,omitempty"`
+	ExtendedPortScan               *bool                                                                          `json:"extended_port_scan,omitempty"`
 	AdditionalProperties           map[string]interface{}
 }
 
@@ -536,6 +537,38 @@ func (o *GetProfile200ResponseConfigurationExperimental) SetJsAnalysis(v bool) {
 	o.JsAnalysis = &v
 }
 
+// GetExtendedPortScan returns the ExtendedPortScan field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationExperimental) GetExtendedPortScan() bool {
+	if o == nil || IsNil(o.ExtendedPortScan) {
+		var ret bool
+		return ret
+	}
+	return *o.ExtendedPortScan
+}
+
+// GetExtendedPortScanOk returns a tuple with the ExtendedPortScan field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationExperimental) GetExtendedPortScanOk() (*bool, bool) {
+	if o == nil || IsNil(o.ExtendedPortScan) {
+		return nil, false
+	}
+	return o.ExtendedPortScan, true
+}
+
+// HasExtendedPortScan returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationExperimental) HasExtendedPortScan() bool {
+	if o != nil && !IsNil(o.ExtendedPortScan) {
+		return true
+	}
+
+	return false
+}
+
+// SetExtendedPortScan gets a reference to the given bool and assigns it to the ExtendedPortScan field.
+func (o *GetProfile200ResponseConfigurationExperimental) SetExtendedPortScan(v bool) {
+	o.ExtendedPortScan = &v
+}
+
 func (o GetProfile200ResponseConfigurationExperimental) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -591,6 +624,9 @@ func (o GetProfile200ResponseConfigurationExperimental) ToMap() (map[string]inte
 	if !IsNil(o.JsAnalysis) {
 		toSerialize["js_analysis"] = o.JsAnalysis
 	}
+	if !IsNil(o.ExtendedPortScan) {
+		toSerialize["extended_port_scan"] = o.ExtendedPortScan
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -628,6 +664,7 @@ func (o *GetProfile200ResponseConfigurationExperimental) UnmarshalJSON(data []by
 		delete(additionalProperties, "asm_cve_agent")
 		delete(additionalProperties, "login_page_agent")
 		delete(additionalProperties, "js_analysis")
+		delete(additionalProperties, "extended_port_scan")
 		o.AdditionalProperties = additionalProperties
 	}
 
