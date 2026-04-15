@@ -23,7 +23,7 @@ type CreateDastRestProfileRequest struct {
 	// The asset ID for the profile
 	AssetId string `json:"assetId"`
 	// The scan configuration encoded as a JSON string (legacy public API contract).
-	Configuration *string `json:"configuration,omitempty"`
+	Configuration       *string                                          `json:"configuration,omitempty"`
 	ConfigurationObject *CreateDastRestProfileRequestConfigurationObject `json:"configurationObject,omitempty"`
 	// The cron string
 	Cron *string `json:"cron,omitempty"`
