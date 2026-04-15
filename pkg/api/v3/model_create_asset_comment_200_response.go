@@ -15,11 +15,11 @@ import (
 	"fmt"
 )
 
-// checks if the CreateIssueComment200Response type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &CreateIssueComment200Response{}
+// checks if the CreateAssetComment200Response type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CreateAssetComment200Response{}
 
-// CreateIssueComment200Response struct for CreateIssueComment200Response
-type CreateIssueComment200Response struct {
+// CreateAssetComment200Response struct for CreateAssetComment200Response
+type CreateAssetComment200Response struct {
 	Author *AuthorSummarized `json:"author,omitempty"`
 	// The id of the activity
 	Id string `json:"id"`
@@ -29,30 +29,30 @@ type CreateIssueComment200Response struct {
 	AdditionalProperties map[string]interface{}
 }
 
-type _CreateIssueComment200Response CreateIssueComment200Response
+type _CreateAssetComment200Response CreateAssetComment200Response
 
-// NewCreateIssueComment200Response instantiates a new CreateIssueComment200Response object
+// NewCreateAssetComment200Response instantiates a new CreateAssetComment200Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateIssueComment200Response(id string, createdAt string, kind ENUMITEMSPROPERTIESKIND) *CreateIssueComment200Response {
-	this := CreateIssueComment200Response{}
+func NewCreateAssetComment200Response(id string, createdAt string, kind ENUMITEMSPROPERTIESKIND) *CreateAssetComment200Response {
+	this := CreateAssetComment200Response{}
 	this.Id = id
 	this.CreatedAt = createdAt
 	this.Kind = kind
 	return &this
 }
 
-// NewCreateIssueComment200ResponseWithDefaults instantiates a new CreateIssueComment200Response object
+// NewCreateAssetComment200ResponseWithDefaults instantiates a new CreateAssetComment200Response object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCreateIssueComment200ResponseWithDefaults() *CreateIssueComment200Response {
-	this := CreateIssueComment200Response{}
+func NewCreateAssetComment200ResponseWithDefaults() *CreateAssetComment200Response {
+	this := CreateAssetComment200Response{}
 	return &this
 }
 
 // GetAuthor returns the Author field value if set, zero value otherwise.
-func (o *CreateIssueComment200Response) GetAuthor() AuthorSummarized {
+func (o *CreateAssetComment200Response) GetAuthor() AuthorSummarized {
 	if o == nil || IsNil(o.Author) {
 		var ret AuthorSummarized
 		return ret
@@ -62,7 +62,7 @@ func (o *CreateIssueComment200Response) GetAuthor() AuthorSummarized {
 
 // GetAuthorOk returns a tuple with the Author field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateIssueComment200Response) GetAuthorOk() (*AuthorSummarized, bool) {
+func (o *CreateAssetComment200Response) GetAuthorOk() (*AuthorSummarized, bool) {
 	if o == nil || IsNil(o.Author) {
 		return nil, false
 	}
@@ -70,7 +70,7 @@ func (o *CreateIssueComment200Response) GetAuthorOk() (*AuthorSummarized, bool) 
 }
 
 // HasAuthor returns a boolean if a field has been set.
-func (o *CreateIssueComment200Response) HasAuthor() bool {
+func (o *CreateAssetComment200Response) HasAuthor() bool {
 	if o != nil && !IsNil(o.Author) {
 		return true
 	}
@@ -79,12 +79,12 @@ func (o *CreateIssueComment200Response) HasAuthor() bool {
 }
 
 // SetAuthor gets a reference to the given AuthorSummarized and assigns it to the Author field.
-func (o *CreateIssueComment200Response) SetAuthor(v AuthorSummarized) {
+func (o *CreateAssetComment200Response) SetAuthor(v AuthorSummarized) {
 	o.Author = &v
 }
 
 // GetId returns the Id field value
-func (o *CreateIssueComment200Response) GetId() string {
+func (o *CreateAssetComment200Response) GetId() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -95,7 +95,7 @@ func (o *CreateIssueComment200Response) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *CreateIssueComment200Response) GetIdOk() (*string, bool) {
+func (o *CreateAssetComment200Response) GetIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -103,12 +103,12 @@ func (o *CreateIssueComment200Response) GetIdOk() (*string, bool) {
 }
 
 // SetId sets field value
-func (o *CreateIssueComment200Response) SetId(v string) {
+func (o *CreateAssetComment200Response) SetId(v string) {
 	o.Id = v
 }
 
 // GetCreatedAt returns the CreatedAt field value
-func (o *CreateIssueComment200Response) GetCreatedAt() string {
+func (o *CreateAssetComment200Response) GetCreatedAt() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -119,7 +119,7 @@ func (o *CreateIssueComment200Response) GetCreatedAt() string {
 
 // GetCreatedAtOk returns a tuple with the CreatedAt field value
 // and a boolean to check if the value has been set.
-func (o *CreateIssueComment200Response) GetCreatedAtOk() (*string, bool) {
+func (o *CreateAssetComment200Response) GetCreatedAtOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -127,12 +127,12 @@ func (o *CreateIssueComment200Response) GetCreatedAtOk() (*string, bool) {
 }
 
 // SetCreatedAt sets field value
-func (o *CreateIssueComment200Response) SetCreatedAt(v string) {
+func (o *CreateAssetComment200Response) SetCreatedAt(v string) {
 	o.CreatedAt = v
 }
 
 // GetKind returns the Kind field value
-func (o *CreateIssueComment200Response) GetKind() ENUMITEMSPROPERTIESKIND {
+func (o *CreateAssetComment200Response) GetKind() ENUMITEMSPROPERTIESKIND {
 	if o == nil {
 		var ret ENUMITEMSPROPERTIESKIND
 		return ret
@@ -143,7 +143,7 @@ func (o *CreateIssueComment200Response) GetKind() ENUMITEMSPROPERTIESKIND {
 
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
-func (o *CreateIssueComment200Response) GetKindOk() (*ENUMITEMSPROPERTIESKIND, bool) {
+func (o *CreateAssetComment200Response) GetKindOk() (*ENUMITEMSPROPERTIESKIND, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -151,11 +151,11 @@ func (o *CreateIssueComment200Response) GetKindOk() (*ENUMITEMSPROPERTIESKIND, b
 }
 
 // SetKind sets field value
-func (o *CreateIssueComment200Response) SetKind(v ENUMITEMSPROPERTIESKIND) {
+func (o *CreateAssetComment200Response) SetKind(v ENUMITEMSPROPERTIESKIND) {
 	o.Kind = v
 }
 
-func (o CreateIssueComment200Response) MarshalJSON() ([]byte, error) {
+func (o CreateAssetComment200Response) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -163,7 +163,7 @@ func (o CreateIssueComment200Response) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CreateIssueComment200Response) ToMap() (map[string]interface{}, error) {
+func (o CreateAssetComment200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Author) {
 		toSerialize["author"] = o.Author
@@ -179,7 +179,7 @@ func (o CreateIssueComment200Response) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *CreateIssueComment200Response) UnmarshalJSON(data []byte) (err error) {
+func (o *CreateAssetComment200Response) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -203,15 +203,15 @@ func (o *CreateIssueComment200Response) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varCreateIssueComment200Response := _CreateIssueComment200Response{}
+	varCreateAssetComment200Response := _CreateAssetComment200Response{}
 
-	err = json.Unmarshal(data, &varCreateIssueComment200Response)
+	err = json.Unmarshal(data, &varCreateAssetComment200Response)
 
 	if err != nil {
 		return err
 	}
 
-	*o = CreateIssueComment200Response(varCreateIssueComment200Response)
+	*o = CreateAssetComment200Response(varCreateAssetComment200Response)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -226,38 +226,38 @@ func (o *CreateIssueComment200Response) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableCreateIssueComment200Response struct {
-	value *CreateIssueComment200Response
+type NullableCreateAssetComment200Response struct {
+	value *CreateAssetComment200Response
 	isSet bool
 }
 
-func (v NullableCreateIssueComment200Response) Get() *CreateIssueComment200Response {
+func (v NullableCreateAssetComment200Response) Get() *CreateAssetComment200Response {
 	return v.value
 }
 
-func (v *NullableCreateIssueComment200Response) Set(val *CreateIssueComment200Response) {
+func (v *NullableCreateAssetComment200Response) Set(val *CreateAssetComment200Response) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCreateIssueComment200Response) IsSet() bool {
+func (v NullableCreateAssetComment200Response) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCreateIssueComment200Response) Unset() {
+func (v *NullableCreateAssetComment200Response) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCreateIssueComment200Response(val *CreateIssueComment200Response) *NullableCreateIssueComment200Response {
-	return &NullableCreateIssueComment200Response{value: val, isSet: true}
+func NewNullableCreateAssetComment200Response(val *CreateAssetComment200Response) *NullableCreateAssetComment200Response {
+	return &NullableCreateAssetComment200Response{value: val, isSet: true}
 }
 
-func (v NullableCreateIssueComment200Response) MarshalJSON() ([]byte, error) {
+func (v NullableCreateAssetComment200Response) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCreateIssueComment200Response) UnmarshalJSON(src []byte) error {
+func (v *NullableCreateAssetComment200Response) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

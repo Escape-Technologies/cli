@@ -39,6 +39,8 @@ type AssetDetailed1 struct {
 	// The date and time the asset is scheduled for deletion
 	ScheduledForDeletionAt *string                                                           `json:"scheduledForDeletionAt,omitempty"`
 	Status                 ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS `json:"status"`
+	// The owners of the asset
+	Owners []string `json:"owners,omitempty"`
 	// The tags of the asset
 	Tags []Tag `json:"tags"`
 	// The risks of the asset
@@ -379,6 +381,38 @@ func (o *AssetDetailed1) SetStatus(v ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSET
 	o.Status = v
 }
 
+// GetOwners returns the Owners field value if set, zero value otherwise.
+func (o *AssetDetailed1) GetOwners() []string {
+	if o == nil || IsNil(o.Owners) {
+		var ret []string
+		return ret
+	}
+	return o.Owners
+}
+
+// GetOwnersOk returns a tuple with the Owners field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AssetDetailed1) GetOwnersOk() ([]string, bool) {
+	if o == nil || IsNil(o.Owners) {
+		return nil, false
+	}
+	return o.Owners, true
+}
+
+// HasOwners returns a boolean if a field has been set.
+func (o *AssetDetailed1) HasOwners() bool {
+	if o != nil && !IsNil(o.Owners) {
+		return true
+	}
+
+	return false
+}
+
+// SetOwners gets a reference to the given []string and assigns it to the Owners field.
+func (o *AssetDetailed1) SetOwners(v []string) {
+	o.Owners = v
+}
+
 // GetTags returns the Tags field value
 func (o *AssetDetailed1) GetTags() []Tag {
 	if o == nil {
@@ -672,6 +706,9 @@ func (o AssetDetailed1) ToMap() (map[string]interface{}, error) {
 		toSerialize["scheduledForDeletionAt"] = o.ScheduledForDeletionAt
 	}
 	toSerialize["status"] = o.Status
+	if !IsNil(o.Owners) {
+		toSerialize["owners"] = o.Owners
+	}
 	toSerialize["tags"] = o.Tags
 	toSerialize["risks"] = o.Risks
 	if !IsNil(o.FirstSeenScan) {
@@ -756,6 +793,7 @@ func (o *AssetDetailed1) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "lastSeenAt")
 		delete(additionalProperties, "scheduledForDeletionAt")
 		delete(additionalProperties, "status")
+		delete(additionalProperties, "owners")
 		delete(additionalProperties, "tags")
 		delete(additionalProperties, "risks")
 		delete(additionalProperties, "firstSeenScan")

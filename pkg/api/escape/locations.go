@@ -15,6 +15,8 @@ type ListLocationsFilters struct {
 	Search        string
 	Enabled       bool
 	LocationTypes []string
+	SortType      string
+	SortDirection string
 }
 
 // ListLocations lists all locations
@@ -28,6 +30,12 @@ func ListLocations(ctx context.Context, next string, filters *ListLocationsFilte
 		req = req.Cursor(next)
 	}
 	if filters != nil {
+		if filters.SortType != "" {
+			req = req.SortType(filters.SortType)
+		}
+		if filters.SortDirection != "" {
+			req = req.SortDirection(filters.SortDirection)
+		}
 		if filters.Search != "" {
 			req = req.Search(filters.Search)
 		}
@@ -79,18 +87,23 @@ func CreateLocation(ctx context.Context, name, sshPublicKey string) (string, err
 	return *data.Id, nil
 }
 
-// UpdateLocation updates a location
-func UpdateLocation(ctx context.Context, id string, name, sshPublicKey string) error {
+// UpdateLocation updates a location. Only non-nil fields are sent.
+func UpdateLocation(ctx context.Context, id string, name, sshPublicKey *string, enabled *bool) error {
 	client, err := newAPIV3Client()
 	if err != nil {
 		return fmt.Errorf("unable to init client: %w", err)
 	}
-	enabled := true
-	req := client.LocationsAPI.UpdateLocation(ctx, id).UpdateLocationRequest(v3.UpdateLocationRequest{
-		Name:         &name,
-		SshPublicKey: &sshPublicKey,
-		Enabled:      &enabled,
-	})
+	body := v3.UpdateLocationRequest{}
+	if name != nil {
+		body.Name = name
+	}
+	if sshPublicKey != nil {
+		body.SshPublicKey = sshPublicKey
+	}
+	if enabled != nil {
+		body.Enabled = enabled
+	}
+	req := client.LocationsAPI.UpdateLocation(ctx, id).UpdateLocationRequest(body)
 	_, _, err = req.Execute()
 	if err != nil {
 		return fmt.Errorf("unable to update location: %w", err)
@@ -122,5 +135,5 @@ func UpsertLocation(ctx context.Context, name, sshPublicKey string) (string, err
 	if err != nil {
 		return "", fmt.Errorf("unable to extract conflict: %w", err)
 	}
-	return id, UpdateLocation(ctx, id, name, sshPublicKey)
+	return id, UpdateLocation(ctx, id, &name, &sshPublicKey, nil)
 }

@@ -20,6 +20,8 @@ type ListAssetsFilters struct {
 	AssetStatuses   []string
 	Search          string
 	ManuallyCreated bool
+	SortType        string
+	SortDirection   string
 }
 
 // ListAssets lists all assets
@@ -34,6 +36,12 @@ func ListAssets(ctx context.Context, next string, filters *ListAssetsFilters) ([
 		req = req.Cursor(next)
 	}
 	if filters != nil {
+		if filters.SortType != "" {
+			req = req.SortType(filters.SortType)
+		}
+		if filters.SortDirection != "" {
+			req = req.SortDirection(filters.SortDirection)
+		}
 		if len(filters.AssetTypes) > 0 {
 			req = req.Types(strings.Join(filters.AssetTypes, ","))
 		}
@@ -130,6 +138,70 @@ func UpdateAsset(
 		return fmt.Errorf("api error: %w", err)
 	}
 	return nil
+}
+
+// BulkUpdateAssets updates multiple assets matching a filter
+func BulkUpdateAssets(ctx context.Context, where v3.BulkUpdateAssetsRequestWhere, tagIDs, projectIDs []string, status *v3.ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS) error {
+	client, err := newAPIV3Client()
+	if err != nil {
+		return fmt.Errorf("unable to init client: %w", err)
+	}
+	body := v3.BulkUpdateAssetsRequest{Where: where}
+	if len(tagIDs) > 0 {
+		body.TagIds = tagIDs
+	}
+	if len(projectIDs) > 0 {
+		body.ProjectIds = projectIDs
+	}
+	if status != nil {
+		body.Status = status
+	}
+	_, _, err = client.AssetsAPI.BulkUpdateAssets(ctx).BulkUpdateAssetsRequest(body).Execute()
+	if err != nil {
+		return fmt.Errorf("api error: %w", err)
+	}
+	return nil
+}
+
+// BulkDeleteAssets deletes multiple assets matching a filter
+func BulkDeleteAssets(ctx context.Context, where v3.BulkUpdateAssetsRequestWhere) error {
+	client, err := newAPIV3Client()
+	if err != nil {
+		return fmt.Errorf("unable to init client: %w", err)
+	}
+	body := v3.BulkDeleteAssetsRequest{Where: where}
+	_, _, err = client.AssetsAPI.BulkDeleteAssets(ctx).BulkDeleteAssetsRequest(body).Execute()
+	if err != nil {
+		return fmt.Errorf("api error: %w", err)
+	}
+	return nil
+}
+
+// CommentAsset adds a comment to an asset
+func CommentAsset(ctx context.Context, assetID, comment string) error {
+	client, err := newAPIV3Client()
+	if err != nil {
+		return fmt.Errorf("unable to init client: %w", err)
+	}
+	body := v3.CreateAssetCommentRequest{Comment: comment}
+	_, _, err = client.AssetsAPI.CreateAssetComment(ctx, assetID).CreateAssetCommentRequest(body).Execute()
+	if err != nil {
+		return fmt.Errorf("api error: %w", err)
+	}
+	return nil
+}
+
+// ListAssetActivities lists activities for an asset
+func ListAssetActivities(ctx context.Context, assetID string) ([]v3.ActivitySummarized, error) {
+	client, err := newAPIV3Client()
+	if err != nil {
+		return nil, fmt.Errorf("unable to init client: %w", err)
+	}
+	data, _, err := client.AssetsAPI.ListAssetActivities(ctx, assetID).Execute()
+	if err != nil {
+		return nil, fmt.Errorf("api error: %w", err)
+	}
+	return data, nil
 }
 
 // normalizeAssetType normalizes asset type tokens to match generated method names

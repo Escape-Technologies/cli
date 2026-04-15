@@ -24,6 +24,8 @@ type CustomRuleSummarized struct {
 	Id string `json:"id"`
 	// The name of the rule
 	Name string `json:"name"`
+	// The context of the rule
+	Context string `json:"context"`
 	// The severity of the rule
 	Severity string `json:"severity"`
 	// The creation date of the rule
@@ -39,10 +41,11 @@ type _CustomRuleSummarized CustomRuleSummarized
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCustomRuleSummarized(id string, name string, severity string, createdAt string, updatedAt string) *CustomRuleSummarized {
+func NewCustomRuleSummarized(id string, name string, context string, severity string, createdAt string, updatedAt string) *CustomRuleSummarized {
 	this := CustomRuleSummarized{}
 	this.Id = id
 	this.Name = name
+	this.Context = context
 	this.Severity = severity
 	this.CreatedAt = createdAt
 	this.UpdatedAt = updatedAt
@@ -103,6 +106,30 @@ func (o *CustomRuleSummarized) GetNameOk() (*string, bool) {
 // SetName sets field value
 func (o *CustomRuleSummarized) SetName(v string) {
 	o.Name = v
+}
+
+// GetContext returns the Context field value
+func (o *CustomRuleSummarized) GetContext() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Context
+}
+
+// GetContextOk returns a tuple with the Context field value
+// and a boolean to check if the value has been set.
+func (o *CustomRuleSummarized) GetContextOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Context, true
+}
+
+// SetContext sets field value
+func (o *CustomRuleSummarized) SetContext(v string) {
+	o.Context = v
 }
 
 // GetSeverity returns the Severity field value
@@ -189,6 +216,7 @@ func (o CustomRuleSummarized) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["name"] = o.Name
+	toSerialize["context"] = o.Context
 	toSerialize["severity"] = o.Severity
 	toSerialize["createdAt"] = o.CreatedAt
 	toSerialize["updatedAt"] = o.UpdatedAt
@@ -207,6 +235,7 @@ func (o *CustomRuleSummarized) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"id",
 		"name",
+		"context",
 		"severity",
 		"createdAt",
 		"updatedAt",
@@ -241,6 +270,7 @@ func (o *CustomRuleSummarized) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "name")
+		delete(additionalProperties, "context")
 		delete(additionalProperties, "severity")
 		delete(additionalProperties, "createdAt")
 		delete(additionalProperties, "updatedAt")

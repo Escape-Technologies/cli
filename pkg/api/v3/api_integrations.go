@@ -1854,7 +1854,7 @@ func (a *IntegrationsAPIService) DeleteakamaiIntegrationExecute(r ApiDeleteakama
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v CreateIssueComment500Response
+			var v CreateAssetComment500Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1993,7 +1993,7 @@ func (a *IntegrationsAPIService) DeleteawsIntegrationExecute(r ApiDeleteawsInteg
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v CreateIssueComment500Response
+			var v CreateAssetComment500Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2132,7 +2132,7 @@ func (a *IntegrationsAPIService) DeleteazureIntegrationExecute(r ApiDeleteazureI
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v CreateIssueComment500Response
+			var v CreateAssetComment500Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2271,7 +2271,7 @@ func (a *IntegrationsAPIService) DeletebitbucketIntegrationExecute(r ApiDeletebi
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v CreateIssueComment500Response
+			var v CreateAssetComment500Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2410,7 +2410,7 @@ func (a *IntegrationsAPIService) DeletecloudflareIntegrationExecute(r ApiDeletec
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v CreateIssueComment500Response
+			var v CreateAssetComment500Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2549,7 +2549,7 @@ func (a *IntegrationsAPIService) DeletecustomIntegrationExecute(r ApiDeletecusto
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v CreateIssueComment500Response
+			var v CreateAssetComment500Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2688,7 +2688,7 @@ func (a *IntegrationsAPIService) DeletegcpIntegrationExecute(r ApiDeletegcpInteg
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v CreateIssueComment500Response
+			var v CreateAssetComment500Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2827,7 +2827,7 @@ func (a *IntegrationsAPIService) DeletegithubIntegrationExecute(r ApiDeletegithu
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v CreateIssueComment500Response
+			var v CreateAssetComment500Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2966,7 +2966,7 @@ func (a *IntegrationsAPIService) DeletegitlabIntegrationExecute(r ApiDeletegitla
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v CreateIssueComment500Response
+			var v CreateAssetComment500Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3105,7 +3105,7 @@ func (a *IntegrationsAPIService) DeletejiraIntegrationExecute(r ApiDeletejiraInt
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v CreateIssueComment500Response
+			var v CreateAssetComment500Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3244,7 +3244,7 @@ func (a *IntegrationsAPIService) DeletekubernetesIntegrationExecute(r ApiDeletek
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v CreateIssueComment500Response
+			var v CreateAssetComment500Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3383,7 +3383,7 @@ func (a *IntegrationsAPIService) DeletepostmanIntegrationExecute(r ApiDeletepost
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v CreateIssueComment500Response
+			var v CreateAssetComment500Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3522,7 +3522,7 @@ func (a *IntegrationsAPIService) DeletewizIntegrationExecute(r ApiDeletewizInteg
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v CreateIssueComment500Response
+			var v CreateAssetComment500Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

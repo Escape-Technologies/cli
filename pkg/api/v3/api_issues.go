@@ -23,20 +23,152 @@ import (
 // IssuesAPIService IssuesAPI service
 type IssuesAPIService service
 
+type ApiBulkUpdateIssuesRequest struct {
+	ctx                     context.Context
+	ApiService              *IssuesAPIService
+	bulkUpdateIssuesRequest *BulkUpdateIssuesRequest
+}
+
+func (r ApiBulkUpdateIssuesRequest) BulkUpdateIssuesRequest(bulkUpdateIssuesRequest BulkUpdateIssuesRequest) ApiBulkUpdateIssuesRequest {
+	r.bulkUpdateIssuesRequest = &bulkUpdateIssuesRequest
+	return r
+}
+
+func (r ApiBulkUpdateIssuesRequest) Execute() (*BulkUpdateIssues200Response, *http.Response, error) {
+	return r.ApiService.BulkUpdateIssuesExecute(r)
+}
+
+/*
+BulkUpdateIssues Bulk update issues
+
+Update the status of multiple issues matching a filter predicate. For example, mark all LOW severity issues on a given asset as IGNORED.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiBulkUpdateIssuesRequest
+*/
+func (a *IssuesAPIService) BulkUpdateIssues(ctx context.Context) ApiBulkUpdateIssuesRequest {
+	return ApiBulkUpdateIssuesRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return BulkUpdateIssues200Response
+func (a *IssuesAPIService) BulkUpdateIssuesExecute(r ApiBulkUpdateIssuesRequest) (*BulkUpdateIssues200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BulkUpdateIssues200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IssuesAPIService.BulkUpdateIssues")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/issues/bulk-update"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.bulkUpdateIssuesRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v UpdateProfile400Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiCreateIssueCommentRequest struct {
 	ctx                       context.Context
 	ApiService                *IssuesAPIService
 	issueId                   string
-	createIssueCommentRequest *CreateIssueCommentRequest
+	createAssetCommentRequest *CreateAssetCommentRequest
 }
 
 // Body of the request to add a comment
-func (r ApiCreateIssueCommentRequest) CreateIssueCommentRequest(createIssueCommentRequest CreateIssueCommentRequest) ApiCreateIssueCommentRequest {
-	r.createIssueCommentRequest = &createIssueCommentRequest
+func (r ApiCreateIssueCommentRequest) CreateAssetCommentRequest(createAssetCommentRequest CreateAssetCommentRequest) ApiCreateIssueCommentRequest {
+	r.createAssetCommentRequest = &createAssetCommentRequest
 	return r
 }
 
-func (r ApiCreateIssueCommentRequest) Execute() (*CreateIssueComment200Response, *http.Response, error) {
+func (r ApiCreateIssueCommentRequest) Execute() (*CreateAssetComment200Response, *http.Response, error) {
 	return r.ApiService.CreateIssueCommentExecute(r)
 }
 
@@ -59,13 +191,13 @@ func (a *IssuesAPIService) CreateIssueComment(ctx context.Context, issueId strin
 
 // Execute executes the request
 //
-//	@return CreateIssueComment200Response
-func (a *IssuesAPIService) CreateIssueCommentExecute(r ApiCreateIssueCommentRequest) (*CreateIssueComment200Response, *http.Response, error) {
+//	@return CreateAssetComment200Response
+func (a *IssuesAPIService) CreateIssueCommentExecute(r ApiCreateIssueCommentRequest) (*CreateAssetComment200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreateIssueComment200Response
+		localVarReturnValue *CreateAssetComment200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IssuesAPIService.CreateIssueComment")
@@ -98,7 +230,7 @@ func (a *IssuesAPIService) CreateIssueCommentExecute(r ApiCreateIssueCommentRequ
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.createIssueCommentRequest
+	localVarPostBody = r.createAssetCommentRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -158,7 +290,7 @@ func (a *IssuesAPIService) CreateIssueCommentExecute(r ApiCreateIssueCommentRequ
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v CreateIssueComment500Response
+			var v CreateAssetComment500Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -294,6 +426,299 @@ func (a *IssuesAPIService) GetIssueExecute(r ApiGetIssueRequest) (*GetIssue200Re
 			}
 			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetIssueFunnelRequest struct {
+	ctx        context.Context
+	ApiService *IssuesAPIService
+	projectIds *GetIssueFunnelProjectIdsParameter
+}
+
+// Filter by project IDs
+func (r ApiGetIssueFunnelRequest) ProjectIds(projectIds GetIssueFunnelProjectIdsParameter) ApiGetIssueFunnelRequest {
+	r.projectIds = &projectIds
+	return r
+}
+
+func (r ApiGetIssueFunnelRequest) Execute() ([]GetIssueFunnel200ResponseInner, *http.Response, error) {
+	return r.ApiService.GetIssueFunnelExecute(r)
+}
+
+/*
+GetIssueFunnel Get issue funnel
+
+Get issue funnel data showing how issues distribute across severity/exposure steps: ALL → OPEN_ISSUES → EXPOSED → UNAUTHENTICATED → HIGH_BUSINESS_IMPACT → CRITICAL.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIssueFunnelRequest
+*/
+func (a *IssuesAPIService) GetIssueFunnel(ctx context.Context) ApiGetIssueFunnelRequest {
+	return ApiGetIssueFunnelRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return []GetIssueFunnel200ResponseInner
+func (a *IssuesAPIService) GetIssueFunnelExecute(r ApiGetIssueFunnelRequest) ([]GetIssueFunnel200ResponseInner, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []GetIssueFunnel200ResponseInner
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IssuesAPIService.GetIssueFunnel")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/issues/funnel"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.projectIds != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "projectIds", r.projectIds, "form", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetIssueTrendsRequest struct {
+	ctx            context.Context
+	ApiService     *IssuesAPIService
+	after          *string
+	before         *string
+	interval       *string
+	applicationIds *GetIssueTrendsApplicationIdsParameter
+	projectIds     *GetIssueTrendsProjectIdsParameter
+}
+
+// Start date (ISO 8601)
+func (r ApiGetIssueTrendsRequest) After(after string) ApiGetIssueTrendsRequest {
+	r.after = &after
+	return r
+}
+
+// End date (ISO 8601)
+func (r ApiGetIssueTrendsRequest) Before(before string) ApiGetIssueTrendsRequest {
+	r.before = &before
+	return r
+}
+
+// Time bucket interval (e.g. \&quot;1 day\&quot;, \&quot;1 week\&quot;)
+func (r ApiGetIssueTrendsRequest) Interval(interval string) ApiGetIssueTrendsRequest {
+	r.interval = &interval
+	return r
+}
+
+// Filter by application IDs
+func (r ApiGetIssueTrendsRequest) ApplicationIds(applicationIds GetIssueTrendsApplicationIdsParameter) ApiGetIssueTrendsRequest {
+	r.applicationIds = &applicationIds
+	return r
+}
+
+// Filter by project IDs
+func (r ApiGetIssueTrendsRequest) ProjectIds(projectIds GetIssueTrendsProjectIdsParameter) ApiGetIssueTrendsRequest {
+	r.projectIds = &projectIds
+	return r
+}
+
+func (r ApiGetIssueTrendsRequest) Execute() ([]GetIssueTrends200ResponseInner, *http.Response, error) {
+	return r.ApiService.GetIssueTrendsExecute(r)
+}
+
+/*
+GetIssueTrends Get issue severity trends
+
+Get time-bucketed issue counts by severity. Useful for tracking security posture over time.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIssueTrendsRequest
+*/
+func (a *IssuesAPIService) GetIssueTrends(ctx context.Context) ApiGetIssueTrendsRequest {
+	return ApiGetIssueTrendsRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return []GetIssueTrends200ResponseInner
+func (a *IssuesAPIService) GetIssueTrendsExecute(r ApiGetIssueTrendsRequest) ([]GetIssueTrends200ResponseInner, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []GetIssueTrends200ResponseInner
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IssuesAPIService.GetIssueTrends")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/issues/trends"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.after == nil {
+		return localVarReturnValue, nil, reportError("after is required and must be specified")
+	}
+	if r.before == nil {
+		return localVarReturnValue, nil, reportError("before is required and must be specified")
+	}
+
+	parameterAddToHeaderOrQuery(localVarQueryParams, "after", r.after, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "before", r.before, "form", "")
+	if r.interval != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "interval", r.interval, "form", "")
+	} else {
+		var defaultValue string = "1 day"
+		r.interval = &defaultValue
+	}
+	if r.applicationIds != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "applicationIds", r.applicationIds, "form", "")
+	}
+	if r.projectIds != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "projectIds", r.projectIds, "form", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -733,6 +1158,142 @@ func (a *IssuesAPIService) ListIssuesExecute(r ApiListIssuesRequest) (*ListIssue
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
 			var v ListProfiles400Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiNotifyIssueOwnersRequest struct {
+	ctx                      context.Context
+	ApiService               *IssuesAPIService
+	issueId                  string
+	notifyIssueOwnersRequest *NotifyIssueOwnersRequest
+}
+
+func (r ApiNotifyIssueOwnersRequest) NotifyIssueOwnersRequest(notifyIssueOwnersRequest NotifyIssueOwnersRequest) ApiNotifyIssueOwnersRequest {
+	r.notifyIssueOwnersRequest = &notifyIssueOwnersRequest
+	return r
+}
+
+func (r ApiNotifyIssueOwnersRequest) Execute() (*NotifyIssueOwners200Response, *http.Response, error) {
+	return r.ApiService.NotifyIssueOwnersExecute(r)
+}
+
+/*
+NotifyIssueOwners Notify issue owners
+
+Send an email notification to the owners of the asset associated with this issue.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param issueId The issue ID
+	@return ApiNotifyIssueOwnersRequest
+*/
+func (a *IssuesAPIService) NotifyIssueOwners(ctx context.Context, issueId string) ApiNotifyIssueOwnersRequest {
+	return ApiNotifyIssueOwnersRequest{
+		ApiService: a,
+		ctx:        ctx,
+		issueId:    issueId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return NotifyIssueOwners200Response
+func (a *IssuesAPIService) NotifyIssueOwnersExecute(r ApiNotifyIssueOwnersRequest) (*NotifyIssueOwners200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NotifyIssueOwners200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IssuesAPIService.NotifyIssueOwners")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/issues/{issueId}/notify"
+	localVarPath = strings.Replace(localVarPath, "{"+"issueId"+"}", url.PathEscape(parameterValueToString(r.issueId, "issueId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.notifyIssueOwnersRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

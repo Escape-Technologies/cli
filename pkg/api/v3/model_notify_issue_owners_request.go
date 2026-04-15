@@ -15,61 +15,61 @@ import (
 	"fmt"
 )
 
-// checks if the CreateIssueCommentRequest type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &CreateIssueCommentRequest{}
+// checks if the NotifyIssueOwnersRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &NotifyIssueOwnersRequest{}
 
-// CreateIssueCommentRequest struct for CreateIssueCommentRequest
-type CreateIssueCommentRequest struct {
-	// Comment text; maximum 512 characters
-	Comment              string `json:"comment"`
+// NotifyIssueOwnersRequest struct for NotifyIssueOwnersRequest
+type NotifyIssueOwnersRequest struct {
+	// The scan ID to reference in the notification
+	ScanId               string `json:"scanId"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _CreateIssueCommentRequest CreateIssueCommentRequest
+type _NotifyIssueOwnersRequest NotifyIssueOwnersRequest
 
-// NewCreateIssueCommentRequest instantiates a new CreateIssueCommentRequest object
+// NewNotifyIssueOwnersRequest instantiates a new NotifyIssueOwnersRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateIssueCommentRequest(comment string) *CreateIssueCommentRequest {
-	this := CreateIssueCommentRequest{}
-	this.Comment = comment
+func NewNotifyIssueOwnersRequest(scanId string) *NotifyIssueOwnersRequest {
+	this := NotifyIssueOwnersRequest{}
+	this.ScanId = scanId
 	return &this
 }
 
-// NewCreateIssueCommentRequestWithDefaults instantiates a new CreateIssueCommentRequest object
+// NewNotifyIssueOwnersRequestWithDefaults instantiates a new NotifyIssueOwnersRequest object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCreateIssueCommentRequestWithDefaults() *CreateIssueCommentRequest {
-	this := CreateIssueCommentRequest{}
+func NewNotifyIssueOwnersRequestWithDefaults() *NotifyIssueOwnersRequest {
+	this := NotifyIssueOwnersRequest{}
 	return &this
 }
 
-// GetComment returns the Comment field value
-func (o *CreateIssueCommentRequest) GetComment() string {
+// GetScanId returns the ScanId field value
+func (o *NotifyIssueOwnersRequest) GetScanId() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Comment
+	return o.ScanId
 }
 
-// GetCommentOk returns a tuple with the Comment field value
+// GetScanIdOk returns a tuple with the ScanId field value
 // and a boolean to check if the value has been set.
-func (o *CreateIssueCommentRequest) GetCommentOk() (*string, bool) {
+func (o *NotifyIssueOwnersRequest) GetScanIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Comment, true
+	return &o.ScanId, true
 }
 
-// SetComment sets field value
-func (o *CreateIssueCommentRequest) SetComment(v string) {
-	o.Comment = v
+// SetScanId sets field value
+func (o *NotifyIssueOwnersRequest) SetScanId(v string) {
+	o.ScanId = v
 }
 
-func (o CreateIssueCommentRequest) MarshalJSON() ([]byte, error) {
+func (o NotifyIssueOwnersRequest) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -77,9 +77,9 @@ func (o CreateIssueCommentRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CreateIssueCommentRequest) ToMap() (map[string]interface{}, error) {
+func (o NotifyIssueOwnersRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["comment"] = o.Comment
+	toSerialize["scanId"] = o.ScanId
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -88,12 +88,12 @@ func (o CreateIssueCommentRequest) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *CreateIssueCommentRequest) UnmarshalJSON(data []byte) (err error) {
+func (o *NotifyIssueOwnersRequest) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"comment",
+		"scanId",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -110,58 +110,58 @@ func (o *CreateIssueCommentRequest) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varCreateIssueCommentRequest := _CreateIssueCommentRequest{}
+	varNotifyIssueOwnersRequest := _NotifyIssueOwnersRequest{}
 
-	err = json.Unmarshal(data, &varCreateIssueCommentRequest)
+	err = json.Unmarshal(data, &varNotifyIssueOwnersRequest)
 
 	if err != nil {
 		return err
 	}
 
-	*o = CreateIssueCommentRequest(varCreateIssueCommentRequest)
+	*o = NotifyIssueOwnersRequest(varNotifyIssueOwnersRequest)
 
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "comment")
+		delete(additionalProperties, "scanId")
 		o.AdditionalProperties = additionalProperties
 	}
 
 	return err
 }
 
-type NullableCreateIssueCommentRequest struct {
-	value *CreateIssueCommentRequest
+type NullableNotifyIssueOwnersRequest struct {
+	value *NotifyIssueOwnersRequest
 	isSet bool
 }
 
-func (v NullableCreateIssueCommentRequest) Get() *CreateIssueCommentRequest {
+func (v NullableNotifyIssueOwnersRequest) Get() *NotifyIssueOwnersRequest {
 	return v.value
 }
 
-func (v *NullableCreateIssueCommentRequest) Set(val *CreateIssueCommentRequest) {
+func (v *NullableNotifyIssueOwnersRequest) Set(val *NotifyIssueOwnersRequest) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCreateIssueCommentRequest) IsSet() bool {
+func (v NullableNotifyIssueOwnersRequest) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCreateIssueCommentRequest) Unset() {
+func (v *NullableNotifyIssueOwnersRequest) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCreateIssueCommentRequest(val *CreateIssueCommentRequest) *NullableCreateIssueCommentRequest {
-	return &NullableCreateIssueCommentRequest{value: val, isSet: true}
+func NewNullableNotifyIssueOwnersRequest(val *NotifyIssueOwnersRequest) *NullableNotifyIssueOwnersRequest {
+	return &NullableNotifyIssueOwnersRequest{value: val, isSet: true}
 }
 
-func (v NullableCreateIssueCommentRequest) MarshalJSON() ([]byte, error) {
+func (v NullableNotifyIssueOwnersRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCreateIssueCommentRequest) UnmarshalJSON(src []byte) error {
+func (v *NullableNotifyIssueOwnersRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

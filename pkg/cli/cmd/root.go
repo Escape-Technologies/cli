@@ -124,7 +124,8 @@ COMMAND CATEGORIES:
   Configuration:  profiles  - Configure scan targets and settings
   Assets:         assets    - Manage your API inventory
   Infrastructure: locations - Deploy private scanning locations
-  Organization:   audit     - Review activity logs and events
+  Organization:   users, roles, projects, audit - Users and access control
+  Automation:     workflows, jobs - Trigger and track automated actions
   Customization:  custom-rules, tags - Extend and organize
 
 ENVIRONMENT VARIABLES:

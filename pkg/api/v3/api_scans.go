@@ -653,6 +653,7 @@ type ApiListScansRequest struct {
 	sortDirection *string
 	after         *string
 	before        *string
+	assetIds      *string
 	profileIds    *string
 	ignored       *string
 	initiator     *string
@@ -694,6 +695,12 @@ func (r ApiListScansRequest) After(after string) ApiListScansRequest {
 // Filter by before date
 func (r ApiListScansRequest) Before(before string) ApiListScansRequest {
 	r.before = &before
+	return r
+}
+
+// Filter by asset IDs
+func (r ApiListScansRequest) AssetIds(assetIds string) ApiListScansRequest {
+	r.assetIds = &assetIds
 	return r
 }
 
@@ -797,6 +804,9 @@ func (a *ScansAPIService) ListScansExecute(r ApiListScansRequest) (*ListScans200
 	}
 	if r.before != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "before", r.before, "form", "")
+	}
+	if r.assetIds != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "assetIds", r.assetIds, "form", "")
 	}
 	if r.profileIds != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "profileIds", r.profileIds, "form", "")

@@ -9,11 +9,13 @@ import (
 
 // ListAuditLogsFilters holds optional filters for listing audit logs
 type ListAuditLogsFilters struct {
-	DateFrom   string
-	DateTo     string
-	ActionType string
-	Actor      string
-	Search     string
+	DateFrom      string
+	DateTo        string
+	ActionType    string
+	Actor         string
+	Search        string
+	SortType      string
+	SortDirection string
 }
 
 // ListAuditLogs lists audit logs
@@ -22,7 +24,15 @@ func ListAuditLogs(ctx context.Context, next string, filters *ListAuditLogsFilte
 	if err != nil {
 		return nil, nil, fmt.Errorf("unable to init client: %w", err)
 	}
-	req := client.AuditAPI.ListAuditLogs(ctx).SortDirection("desc")
+	req := client.AuditAPI.ListAuditLogs(ctx)
+	if filters != nil && filters.SortType != "" {
+		req = req.SortType(filters.SortType)
+	}
+	if filters != nil && filters.SortDirection != "" {
+		req = req.SortDirection(filters.SortDirection)
+	} else {
+		req = req.SortDirection("desc")
+	}
 	if next != "" {
 		req = req.Cursor(next)
 	}
