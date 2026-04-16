@@ -75,8 +75,21 @@ func ExecuteCLICommand(ctx context.Context, options ExecutionOptions) (*Executio
 	return result, fmt.Errorf("command %q failed: %w", strings.Join(commandArgs, " "), runErr)
 }
 
+// buildCommandEnv builds the subprocess env, stripping inherited auth/target
+// vars from the parent process so the child CLI only uses values from the
+// current request. Prevents stale server-scoped credentials from leaking when
+// a request omits one of them.
 func buildCommandEnv(options ExecutionOptions) []string {
-	env := append([]string{}, os.Environ()...)
+	parentEnv := os.Environ()
+	env := make([]string, 0, len(parentEnv)+4)
+	for _, entry := range parentEnv {
+		if strings.HasPrefix(entry, "ESCAPE_API_URL=") ||
+			strings.HasPrefix(entry, "ESCAPE_API_KEY=") ||
+			strings.HasPrefix(entry, "ESCAPE_AUTHORIZATION=") {
+			continue
+		}
+		env = append(env, entry)
+	}
 	env = append(env, "ESCAPE_COLOR_DISABLED=true")
 
 	if options.PublicAPIURL != "" {
