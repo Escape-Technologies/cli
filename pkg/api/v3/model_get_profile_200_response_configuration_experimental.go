@@ -35,6 +35,7 @@ type GetProfile200ResponseConfigurationExperimental struct {
 	LoginPageAgent                 *bool                                                                          `json:"login_page_agent,omitempty"`
 	JsAnalysis                     *bool                                                                          `json:"js_analysis,omitempty"`
 	ExtendedPortScan               *bool                                                                          `json:"extended_port_scan,omitempty"`
+	LoginPageBruteforceAgent       *bool                                                                          `json:"login_page_bruteforce_agent,omitempty"`
 	AdditionalProperties           map[string]interface{}
 }
 
@@ -569,6 +570,38 @@ func (o *GetProfile200ResponseConfigurationExperimental) SetExtendedPortScan(v b
 	o.ExtendedPortScan = &v
 }
 
+// GetLoginPageBruteforceAgent returns the LoginPageBruteforceAgent field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationExperimental) GetLoginPageBruteforceAgent() bool {
+	if o == nil || IsNil(o.LoginPageBruteforceAgent) {
+		var ret bool
+		return ret
+	}
+	return *o.LoginPageBruteforceAgent
+}
+
+// GetLoginPageBruteforceAgentOk returns a tuple with the LoginPageBruteforceAgent field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationExperimental) GetLoginPageBruteforceAgentOk() (*bool, bool) {
+	if o == nil || IsNil(o.LoginPageBruteforceAgent) {
+		return nil, false
+	}
+	return o.LoginPageBruteforceAgent, true
+}
+
+// HasLoginPageBruteforceAgent returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationExperimental) HasLoginPageBruteforceAgent() bool {
+	if o != nil && !IsNil(o.LoginPageBruteforceAgent) {
+		return true
+	}
+
+	return false
+}
+
+// SetLoginPageBruteforceAgent gets a reference to the given bool and assigns it to the LoginPageBruteforceAgent field.
+func (o *GetProfile200ResponseConfigurationExperimental) SetLoginPageBruteforceAgent(v bool) {
+	o.LoginPageBruteforceAgent = &v
+}
+
 func (o GetProfile200ResponseConfigurationExperimental) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -627,6 +660,9 @@ func (o GetProfile200ResponseConfigurationExperimental) ToMap() (map[string]inte
 	if !IsNil(o.ExtendedPortScan) {
 		toSerialize["extended_port_scan"] = o.ExtendedPortScan
 	}
+	if !IsNil(o.LoginPageBruteforceAgent) {
+		toSerialize["login_page_bruteforce_agent"] = o.LoginPageBruteforceAgent
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -665,6 +701,7 @@ func (o *GetProfile200ResponseConfigurationExperimental) UnmarshalJSON(data []by
 		delete(additionalProperties, "login_page_agent")
 		delete(additionalProperties, "js_analysis")
 		delete(additionalProperties, "extended_port_scan")
+		delete(additionalProperties, "login_page_bruteforce_agent")
 		o.AdditionalProperties = additionalProperties
 	}
 
