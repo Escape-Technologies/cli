@@ -12,7 +12,8 @@ func TestBuildCommandArgs(t *testing.T) {
 			{Property: "status", FlagName: "status", Kind: "stringSlice"},
 			{Property: "limit", FlagName: "limit", Kind: "int"},
 		},
-		BodyProperty: "body",
+		BodyProperty:   "body",
+		AllowExtraArgs: true,
 	}
 
 	args, body, err := buildCommandArgs(spec, map[string]any{
@@ -61,5 +62,25 @@ func TestBuildCommandArgsRequiresNamedPositionals(t *testing.T) {
 	_, _, err := buildCommandArgs(ToolSpec{PositionalArgs: []string{"scan_id"}}, map[string]any{})
 	if err == nil {
 		t.Fatal("expected missing positional arg error")
+	}
+}
+
+func TestBuildCommandArgsIgnoresExtraArgsByDefault(t *testing.T) {
+	t.Parallel()
+
+	args, _, err := buildCommandArgs(
+		ToolSpec{PositionalArgs: []string{"scan_id"}},
+		map[string]any{
+			"scan_id": "scan-1",
+			"args":    []any{"--injected"},
+		},
+	)
+	if err != nil {
+		t.Fatalf("expected command args, got error: %v", err)
+	}
+	for _, value := range args {
+		if value == "--injected" {
+			t.Fatalf("expected free-form args to be ignored without AllowExtraArgs, got %#v", args)
+		}
 	}
 }

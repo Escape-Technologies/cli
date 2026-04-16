@@ -26,6 +26,10 @@ type ToolSpec struct {
 	PositionalArgs []string
 	FlagBindings   []FlagBinding
 	BodyProperty   string
+	// AllowExtraArgs opts the tool into reading a free-form `args` string array
+	// from the request payload and forwarding it verbatim to the subprocess.
+	// Off by default so the Cobra-to-MCP mapping remains an explicit allowlist.
+	AllowExtraArgs bool
 }
 
 type CommandExecutionOptions struct {
@@ -92,12 +96,14 @@ func buildCommandArgs(spec ToolSpec, rawArgs map[string]any) ([]string, any, err
 		commandArgs = append(commandArgs, text)
 	}
 
-	if extraArgs, ok := rawArgs["args"]; ok {
-		args, err := stringifyCLIArray(extraArgs)
-		if err != nil {
-			return nil, nil, fmt.Errorf("invalid args value: %w", err)
+	if spec.AllowExtraArgs {
+		if extraArgs, ok := rawArgs["args"]; ok {
+			args, err := stringifyCLIArray(extraArgs)
+			if err != nil {
+				return nil, nil, fmt.Errorf("invalid args value: %w", err)
+			}
+			commandArgs = append(commandArgs, args...)
 		}
-		commandArgs = append(commandArgs, args...)
 	}
 
 	for _, binding := range spec.FlagBindings {
