@@ -69,6 +69,9 @@ func buildMCPToolSpecs(
 		if capability.HasSub || skipMCPCommand(capability.Path) {
 			continue
 		}
+		if _, allowed := registry[capability.Path]; !allowed {
+			continue
+		}
 
 		command := commands[capability.Path]
 		if command == nil {
@@ -111,14 +114,6 @@ func buildMCPTool(
 			"description": fmt.Sprintf("Positional argument %s.", name),
 		}
 		required = append(required, name)
-	}
-
-	properties["args"] = map[string]any{
-		"type":        "array",
-		"description": "Optional extra positional CLI arguments appended after the named ones.",
-		"items": map[string]any{
-			"type": "string",
-		},
 	}
 
 	command.Flags().VisitAll(func(flag *pflag.Flag) {
