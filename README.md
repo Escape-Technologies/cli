@@ -39,6 +39,9 @@ export ESCAPE_API_KEY=your_api_key_here
 # Start a scan and wait for results
 escape-cli scans start <profile-id> --watch
 
+# List emails received by a scan inbox
+escape-cli emails list --email test.00000000-0000-0000-0000-000000000000@scan.escape.tech
+
 # Review discovered issues
 escape-cli issues list --severity CRITICAL,HIGH --status OPEN
 ```
@@ -71,6 +74,7 @@ Optional inputs: `schema` (path or URL to update the API schema before the scan)
 
 ```text
 scans       Run and manage security scans
+emails      List and read scan inbox emails
 issues      Manage and track security vulnerabilities
 problems    View scan problems and failures
 profiles    Configure security testing profiles
