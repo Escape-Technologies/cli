@@ -48,27 +48,18 @@ var profilesCmd = &cobra.Command{
 	Short:   "Manage security testing profiles and configurations",
 	Long: `Manage Security Profiles - Configure API Testing
 
-Profiles define HOW your APIs are tested. Each profile configures test settings,
-authentication, and security checks for a specific asset. One asset can have
-multiple profiles for different testing scenarios.
+Profiles define HOW your APIs and web applications are tested. Each profile
+configures authentication, scope, and security checks for a specific asset.
 
-PROFILE TYPES:
-  • BLST_REST         - REST API security testing
-  • BLST_GRAPHQL      - GraphQL API security testing
-  • FRONTEND_DAST     - Web application security testing
+DAST PROFILES:
+  create-rest           REST API security testing
+  create-graphql        GraphQL API security testing
+  create-webapp         Web application security testing
 
-KEY FEATURES:
-  • Authentication configuration (API keys, OAuth, JWT, etc.)
-  • Test scope and endpoint selection
-  • Custom security rules and checks
-  • Scheduled scanning (cron expressions)
-  • CI/CD integration settings
-
-COMMON WORKFLOWS:
-  • List all profiles:       escape-cli profiles list
-  • Get profile details:     escape-cli profiles get <profile-id>
-  • Create REST profile:     escape-cli profiles create-rest < config.json
-  • Start scan on profile:   escape-cli scans start <profile-id>`,
+AI PENTEST PROFILES:
+  create-pentest-rest       AI-driven penetration testing for REST APIs
+  create-pentest-graphql    AI-driven penetration testing for GraphQL APIs
+  create-pentest-webapp     AI-driven penetration testing for web applications`,
 }
 
 var profilesListCmd = &cobra.Command{
@@ -78,23 +69,8 @@ var profilesListCmd = &cobra.Command{
 	Short:   "List security testing profiles",
 	Long: `List Security Profiles - View Test Configurations
 
-List all security testing profiles in your organization. By default, shows REST,
-GraphQL, and WEBAPP profiles. Use --all to include all profile types.
-
-FILTER OPTIONS:
-  -a, --asset-id     Filter by asset ID
-  -d, --domain       Filter by domain
-  -i, --issue-id     Filter by issues found
-  -t, --tag-id       Filter by tags
-  -s, --search       Free-text search
-  -k, --kind         Filter by profile type
-  -r, --risk         Filter by risk level
-  --all              Show all profile types (default: REST, GraphQL, WEBAPP only)
-
-Example output:
-ID                                      CREATED AT              ASSET TYPE    INITIATORS  NAME
-00000000-0000-0000-0000-000000000001    2025-02-21T11:15:07Z    WEBAPP        [API]       Example-App-1
-00000000-0000-0000-0000-000000000002    2025-03-12T19:19:08Z    REST_API      [CI]        Example-API-2`,
+List all security testing profiles in your organization. By default shows DAST
+profiles only (REST, GraphQL, WEBAPP). Use --all to include pentest profiles.`,
 	Example: `  # List all standard profiles
   escape-cli profiles list
 

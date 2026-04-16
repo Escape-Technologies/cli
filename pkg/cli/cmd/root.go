@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/Escape-Technologies/cli/pkg/api/escape"
 	"github.com/Escape-Technologies/cli/pkg/cli/out"
@@ -21,15 +22,16 @@ var rootCmdOutputStr string
 var rootCmdInputSchema bool
 
 const escapeBrandColor = "\x1b[38;2;6;226;183m"
+const boldYellowColor = "\x1b[1;33m"
 const dimColor = "\x1b[90m"
 const resetColor = "\x1b[0m"
+
+const startupUpdateTimeout = 200 * time.Millisecond
 
 var rootCmd = &cobra.Command{
 	Use:   "escape-cli",
 	Short: buildHelpHeader(),
-	Long: buildHelpHeader() + `
-
-Replace legacy scanners and manual offensive security processes with AI agents
+	Long: `Replace legacy scanners and manual offensive security processes with AI agents
 that discover, test, and remediate directly in your engineering workflows.
 
 QUICK START:
@@ -48,14 +50,13 @@ AGENT INTEGRATION:
 DOCUMENTATION:
 
   https://docs.escape.tech/documentation/tooling/cli`,
-	PersistentPreRunE: func(_ *cobra.Command, _ []string) error {
+	PersistentPreRunE: func(cmd *cobra.Command, _ []string) error {
 		verbosityFrom := "command line argument"
 		if envVerbosity := env.GetVerbosity(); envVerbosity > rootCmdVerbose {
 			rootCmdVerbose = envVerbosity
 			verbosityFrom = "environment variable ESCAPE_VERBOSITY"
 		}
 
-		// Verbosity levels per Health Monitoring for Private Locations docs:
 		// 0 = default (minimal), 1 = debug, 2 = trace, 3 = trace + http/raw
 		if rootCmdVerbose > 0 { //nolint:mnd
 			log.SetLevel(logrus.DebugLevel)
@@ -73,8 +74,11 @@ DOCUMENTATION:
 			return fmt.Errorf("failed to set output format: %w", err)
 		}
 		out.SetInputSchema(rootCmdInputSchema)
-		printStartupHeader()
+		printStartupHeader(cmd.Context())
 		return nil
+	},
+	RunE: func(cmd *cobra.Command, _ []string) error {
+		return cmd.Help()
 	},
 	PostRun: func(_ *cobra.Command, _ []string) {
 		log.Trace("Main cli done, exiting")
@@ -127,13 +131,67 @@ func buildHelpHeader() string {
 	return brandText("Escape CLI "+v.DisplayVersion()) + "\n" + dimText("Offensive Security Engineering Platform")
 }
 
-func printStartupHeader() {
+func printStartupHeader(ctx context.Context) {
 	if !isPrettyOutput() {
 		return
 	}
 
 	v := version.GetVersion()
-	fmt.Fprintf(os.Stderr, "%s %s\n", brandText("Escape CLI"), dimText(v.DisplayVersion()))
+
+	logo := [3]string{
+		" ▐▛██▜▌ ",
+		"▗█▛  ▜█▖",
+		" ▝▜██▛▘ ",
+	}
+
+	fmt.Fprintf(os.Stderr, "%s  %s\n",
+		brandText(logo[0]),
+		brandText("Escape CLI"),
+	)
+	fmt.Fprintf(os.Stderr, "%s  %s\n",
+		brandText(logo[1]),
+		dimText("Offensive Security Engineering Platform"),
+	)
+
+	versionLine := dimText(v.DisplayVersion())
+	if upgrade := resolveUpgrade(ctx); upgrade != "" {
+		versionLine += "  " + upgrade
+	}
+	fmt.Fprintf(os.Stderr, "%s  %s\n", brandText(logo[2]), versionLine)
+
+	fmt.Fprintln(os.Stderr)
+}
+
+func resolveUpgrade(ctx context.Context) string {
+	checkCtx, cancel := context.WithTimeout(ctx, startupUpdateTimeout)
+	defer cancel()
+
+	type result struct {
+		update *version.UpdateInfo
+		method version.InstallMethod
+	}
+
+	ch := make(chan result, 1)
+	go func() {
+		ch <- result{
+			update: version.CheckForUpdate(checkCtx),
+			method: version.GetInstallInfo().Method,
+		}
+	}()
+
+	select {
+	case r := <-ch:
+		if r.update == nil || !r.update.Available {
+			return ""
+		}
+		cmd := version.UpgradeCommand(r.method, r.update.Latest)
+		if cmd != "" {
+			return boldYellowText("Update v" + r.update.Latest + " · " + cmd)
+		}
+		return boldYellowText("Update available: v" + r.update.Latest)
+	case <-checkCtx.Done():
+		return ""
+	}
 }
 
 func isPrettyOutput() bool {
@@ -143,6 +201,10 @@ func isPrettyOutput() bool {
 
 func brandText(value string) string {
 	return styleText(value, escapeBrandColor)
+}
+
+func boldYellowText(value string) string {
+	return styleText(value, boldYellowColor)
 }
 
 func dimText(value string) string {
