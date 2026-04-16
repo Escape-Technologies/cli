@@ -37,6 +37,7 @@ type GetProfile200ResponseConfigurationExperimental struct {
 	ExtendedPortScan               *bool                                                                          `json:"extended_port_scan,omitempty"`
 	LoginPageBruteforceAgent       *bool                                                                          `json:"login_page_bruteforce_agent,omitempty"`
 	LlmSecurityTesting             *bool                                                                          `json:"llm_security_testing,omitempty"`
+	DastMultiAgentPentest          *bool                                                                          `json:"dast_multi_agent_pentest,omitempty"`
 	AdditionalProperties           map[string]interface{}
 }
 
@@ -571,36 +572,36 @@ func (o *GetProfile200ResponseConfigurationExperimental) SetExtendedPortScan(v b
 	o.ExtendedPortScan = &v
 }
 
-// GetLoginPageBruteforceAgent returns the LoginPageBruteforceAgent field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationExperimental) GetLoginPageBruteforceAgent() bool {
-	if o == nil || IsNil(o.LoginPageBruteforceAgent) {
+// GetDastMultiAgentPentest returns the DastMultiAgentPentest field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationExperimental) GetDastMultiAgentPentest() bool {
+	if o == nil || IsNil(o.DastMultiAgentPentest) {
 		var ret bool
 		return ret
 	}
-	return *o.LoginPageBruteforceAgent
+	return *o.DastMultiAgentPentest
 }
 
-// GetLoginPageBruteforceAgentOk returns a tuple with the LoginPageBruteforceAgent field value if set, nil otherwise
+// GetDastMultiAgentPentestOk returns a tuple with the DastMultiAgentPentest field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationExperimental) GetLoginPageBruteforceAgentOk() (*bool, bool) {
-	if o == nil || IsNil(o.LoginPageBruteforceAgent) {
+func (o *GetProfile200ResponseConfigurationExperimental) GetDastMultiAgentPentestOk() (*bool, bool) {
+	if o == nil || IsNil(o.DastMultiAgentPentest) {
 		return nil, false
 	}
-	return o.LoginPageBruteforceAgent, true
+	return o.DastMultiAgentPentest, true
 }
 
-// HasLoginPageBruteforceAgent returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationExperimental) HasLoginPageBruteforceAgent() bool {
-	if o != nil && !IsNil(o.LoginPageBruteforceAgent) {
+// HasDastMultiAgentPentest returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationExperimental) HasDastMultiAgentPentest() bool {
+	if o != nil && !IsNil(o.DastMultiAgentPentest) {
 		return true
 	}
 
 	return false
 }
 
-// SetLoginPageBruteforceAgent gets a reference to the given bool and assigns it to the LoginPageBruteforceAgent field.
-func (o *GetProfile200ResponseConfigurationExperimental) SetLoginPageBruteforceAgent(v bool) {
-	o.LoginPageBruteforceAgent = &v
+// SetDastMultiAgentPentest gets a reference to the given bool and assigns it to the DastMultiAgentPentest field.
+func (o *GetProfile200ResponseConfigurationExperimental) SetDastMultiAgentPentest(v bool) {
+	o.DastMultiAgentPentest = &v
 }
 
 // GetLlmSecurityTesting returns the LlmSecurityTesting field value if set, zero value otherwise.
@@ -693,8 +694,8 @@ func (o GetProfile200ResponseConfigurationExperimental) ToMap() (map[string]inte
 	if !IsNil(o.ExtendedPortScan) {
 		toSerialize["extended_port_scan"] = o.ExtendedPortScan
 	}
-	if !IsNil(o.LoginPageBruteforceAgent) {
-		toSerialize["login_page_bruteforce_agent"] = o.LoginPageBruteforceAgent
+	if !IsNil(o.DastMultiAgentPentest) {
+		toSerialize["dast_multi_agent_pentest"] = o.DastMultiAgentPentest
 	}
 	if !IsNil(o.LlmSecurityTesting) {
 		toSerialize["llm_security_testing"] = o.LlmSecurityTesting
@@ -739,6 +740,7 @@ func (o *GetProfile200ResponseConfigurationExperimental) UnmarshalJSON(data []by
 		delete(additionalProperties, "extended_port_scan")
 		delete(additionalProperties, "login_page_bruteforce_agent")
 		delete(additionalProperties, "llm_security_testing")
+		delete(additionalProperties, "dast_multi_agent_pentest")
 		o.AdditionalProperties = additionalProperties
 	}
 
