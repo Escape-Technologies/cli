@@ -24,7 +24,11 @@ func RegisterBuiltinTools(server *mcpserver.MCPServer, specs []ToolSpec) {
 		mcpgo.WithNumber("limit", mcpgo.Description("Maximum number of tools to return.")),
 	)
 
-	server.AddTool(tool, func(_ context.Context, request mcpgo.CallToolRequest) (*mcpgo.CallToolResult, error) {
+	server.AddTool(tool, func(ctx context.Context, request mcpgo.CallToolRequest) (*mcpgo.CallToolResult, error) {
+		if _, err := AuthFromContext(ctx); err != nil {
+			return mcpgo.NewToolResultError(err.Error()), nil
+		}
+
 		objective := strings.TrimSpace(strings.ToLower(request.GetString("objective", "")))
 		limit := int(request.GetFloat("limit", defaultCapabilitiesLimit))
 		if limit <= 0 {
