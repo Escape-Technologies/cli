@@ -19,14 +19,14 @@ var _ MappedNullable = &CreateSchemaViaFetchAuthentication{}
 
 // CreateSchemaViaFetchAuthentication The authentication object of the asset
 type CreateSchemaViaFetchAuthentication struct {
-	Schema               *string                                             `json:"$schema,omitempty"`
-	Lifetime             *float32                                            `json:"lifetime,omitempty"`
-	Procedures           []CreateSchemaViaFetchAuthenticationProceduresInner `json:"procedures,omitempty"`
-	Users                []CreateSchemaViaFetchAuthenticationUsersInner      `json:"users,omitempty"`
-	Validation           *bool                                               `json:"validation,omitempty"`
-	Proxy                *string                                             `json:"proxy,omitempty"`
-	Presets              []CreateSchemaViaFetchAuthenticationPresetsInner    `json:"presets,omitempty"`
-	MultiUserIsFallback  *bool                                               `json:"multi_user_is_fallback,omitempty"`
+	Schema               *string                                                           `json:"$schema,omitempty"`
+	Lifetime             *float32                                                          `json:"lifetime,omitempty"`
+	Procedures           []GetProfile200ResponseConfigurationAuthenticationProceduresInner `json:"procedures,omitempty"`
+	Users                []GetProfile200ResponseConfigurationAuthenticationUsersInner      `json:"users,omitempty"`
+	Validation           *bool                                                             `json:"validation,omitempty"`
+	Proxy                *string                                                           `json:"proxy,omitempty"`
+	Presets              []GetProfile200ResponseConfigurationAuthenticationPresetsInner    `json:"presets,omitempty"`
+	MultiUserIsFallback  *bool                                                             `json:"multi_user_is_fallback,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -114,9 +114,9 @@ func (o *CreateSchemaViaFetchAuthentication) SetLifetime(v float32) {
 }
 
 // GetProcedures returns the Procedures field value if set, zero value otherwise.
-func (o *CreateSchemaViaFetchAuthentication) GetProcedures() []CreateSchemaViaFetchAuthenticationProceduresInner {
+func (o *CreateSchemaViaFetchAuthentication) GetProcedures() []GetProfile200ResponseConfigurationAuthenticationProceduresInner {
 	if o == nil || IsNil(o.Procedures) {
-		var ret []CreateSchemaViaFetchAuthenticationProceduresInner
+		var ret []GetProfile200ResponseConfigurationAuthenticationProceduresInner
 		return ret
 	}
 	return o.Procedures
@@ -124,7 +124,7 @@ func (o *CreateSchemaViaFetchAuthentication) GetProcedures() []CreateSchemaViaFe
 
 // GetProceduresOk returns a tuple with the Procedures field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateSchemaViaFetchAuthentication) GetProceduresOk() ([]CreateSchemaViaFetchAuthenticationProceduresInner, bool) {
+func (o *CreateSchemaViaFetchAuthentication) GetProceduresOk() ([]GetProfile200ResponseConfigurationAuthenticationProceduresInner, bool) {
 	if o == nil || IsNil(o.Procedures) {
 		return nil, false
 	}
@@ -140,15 +140,15 @@ func (o *CreateSchemaViaFetchAuthentication) HasProcedures() bool {
 	return false
 }
 
-// SetProcedures gets a reference to the given []CreateSchemaViaFetchAuthenticationProceduresInner and assigns it to the Procedures field.
-func (o *CreateSchemaViaFetchAuthentication) SetProcedures(v []CreateSchemaViaFetchAuthenticationProceduresInner) {
+// SetProcedures gets a reference to the given []GetProfile200ResponseConfigurationAuthenticationProceduresInner and assigns it to the Procedures field.
+func (o *CreateSchemaViaFetchAuthentication) SetProcedures(v []GetProfile200ResponseConfigurationAuthenticationProceduresInner) {
 	o.Procedures = v
 }
 
 // GetUsers returns the Users field value if set, zero value otherwise.
-func (o *CreateSchemaViaFetchAuthentication) GetUsers() []CreateSchemaViaFetchAuthenticationUsersInner {
+func (o *CreateSchemaViaFetchAuthentication) GetUsers() []GetProfile200ResponseConfigurationAuthenticationUsersInner {
 	if o == nil || IsNil(o.Users) {
-		var ret []CreateSchemaViaFetchAuthenticationUsersInner
+		var ret []GetProfile200ResponseConfigurationAuthenticationUsersInner
 		return ret
 	}
 	return o.Users
@@ -156,7 +156,7 @@ func (o *CreateSchemaViaFetchAuthentication) GetUsers() []CreateSchemaViaFetchAu
 
 // GetUsersOk returns a tuple with the Users field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateSchemaViaFetchAuthentication) GetUsersOk() ([]CreateSchemaViaFetchAuthenticationUsersInner, bool) {
+func (o *CreateSchemaViaFetchAuthentication) GetUsersOk() ([]GetProfile200ResponseConfigurationAuthenticationUsersInner, bool) {
 	if o == nil || IsNil(o.Users) {
 		return nil, false
 	}
@@ -172,8 +172,8 @@ func (o *CreateSchemaViaFetchAuthentication) HasUsers() bool {
 	return false
 }
 
-// SetUsers gets a reference to the given []CreateSchemaViaFetchAuthenticationUsersInner and assigns it to the Users field.
-func (o *CreateSchemaViaFetchAuthentication) SetUsers(v []CreateSchemaViaFetchAuthenticationUsersInner) {
+// SetUsers gets a reference to the given []GetProfile200ResponseConfigurationAuthenticationUsersInner and assigns it to the Users field.
+func (o *CreateSchemaViaFetchAuthentication) SetUsers(v []GetProfile200ResponseConfigurationAuthenticationUsersInner) {
 	o.Users = v
 }
 
@@ -242,9 +242,9 @@ func (o *CreateSchemaViaFetchAuthentication) SetProxy(v string) {
 }
 
 // GetPresets returns the Presets field value if set, zero value otherwise.
-func (o *CreateSchemaViaFetchAuthentication) GetPresets() []CreateSchemaViaFetchAuthenticationPresetsInner {
+func (o *CreateSchemaViaFetchAuthentication) GetPresets() []GetProfile200ResponseConfigurationAuthenticationPresetsInner {
 	if o == nil || IsNil(o.Presets) {
-		var ret []CreateSchemaViaFetchAuthenticationPresetsInner
+		var ret []GetProfile200ResponseConfigurationAuthenticationPresetsInner
 		return ret
 	}
 	return o.Presets
@@ -252,7 +252,7 @@ func (o *CreateSchemaViaFetchAuthentication) GetPresets() []CreateSchemaViaFetch
 
 // GetPresetsOk returns a tuple with the Presets field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateSchemaViaFetchAuthentication) GetPresetsOk() ([]CreateSchemaViaFetchAuthenticationPresetsInner, bool) {
+func (o *CreateSchemaViaFetchAuthentication) GetPresetsOk() ([]GetProfile200ResponseConfigurationAuthenticationPresetsInner, bool) {
 	if o == nil || IsNil(o.Presets) {
 		return nil, false
 	}
@@ -268,8 +268,8 @@ func (o *CreateSchemaViaFetchAuthentication) HasPresets() bool {
 	return false
 }
 
-// SetPresets gets a reference to the given []CreateSchemaViaFetchAuthenticationPresetsInner and assigns it to the Presets field.
-func (o *CreateSchemaViaFetchAuthentication) SetPresets(v []CreateSchemaViaFetchAuthenticationPresetsInner) {
+// SetPresets gets a reference to the given []GetProfile200ResponseConfigurationAuthenticationPresetsInner and assigns it to the Presets field.
+func (o *CreateSchemaViaFetchAuthentication) SetPresets(v []GetProfile200ResponseConfigurationAuthenticationPresetsInner) {
 	o.Presets = v
 }
 
