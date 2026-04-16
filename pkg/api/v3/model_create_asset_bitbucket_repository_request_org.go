@@ -29,7 +29,6 @@ type CreateAssetBITBUCKETREPOSITORYRequestOrg struct {
 	Email                string                    `json:"email"`
 	ApiKey               string                    `json:"api_key"`
 	WorkspaceSlug        string                    `json:"workspace_slug"`
-	InstanceUrl          *string                   `json:"instance_url,omitempty"`
 	LocationId           *string                   `json:"location_id,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -299,38 +298,6 @@ func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) SetWorkspaceSlug(v string) {
 	o.WorkspaceSlug = v
 }
 
-// GetInstanceUrl returns the InstanceUrl field value if set, zero value otherwise.
-func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) GetInstanceUrl() string {
-	if o == nil || IsNil(o.InstanceUrl) {
-		var ret string
-		return ret
-	}
-	return *o.InstanceUrl
-}
-
-// GetInstanceUrlOk returns a tuple with the InstanceUrl field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) GetInstanceUrlOk() (*string, bool) {
-	if o == nil || IsNil(o.InstanceUrl) {
-		return nil, false
-	}
-	return o.InstanceUrl, true
-}
-
-// HasInstanceUrl returns a boolean if a field has been set.
-func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) HasInstanceUrl() bool {
-	if o != nil && !IsNil(o.InstanceUrl) {
-		return true
-	}
-
-	return false
-}
-
-// SetInstanceUrl gets a reference to the given string and assigns it to the InstanceUrl field.
-func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) SetInstanceUrl(v string) {
-	o.InstanceUrl = &v
-}
-
 // GetLocationId returns the LocationId field value if set, zero value otherwise.
 func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) GetLocationId() string {
 	if o == nil || IsNil(o.LocationId) {
@@ -388,9 +355,6 @@ func (o CreateAssetBITBUCKETREPOSITORYRequestOrg) ToMap() (map[string]interface{
 	toSerialize["email"] = o.Email
 	toSerialize["api_key"] = o.ApiKey
 	toSerialize["workspace_slug"] = o.WorkspaceSlug
-	if !IsNil(o.InstanceUrl) {
-		toSerialize["instance_url"] = o.InstanceUrl
-	}
 	if !IsNil(o.LocationId) {
 		toSerialize["location_id"] = o.LocationId
 	}
@@ -451,7 +415,6 @@ func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) UnmarshalJSON(data []byte) (e
 		delete(additionalProperties, "email")
 		delete(additionalProperties, "api_key")
 		delete(additionalProperties, "workspace_slug")
-		delete(additionalProperties, "instance_url")
 		delete(additionalProperties, "location_id")
 		o.AdditionalProperties = additionalProperties
 	}
