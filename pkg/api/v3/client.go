@@ -54,6 +54,8 @@ type APIClient struct {
 
 	CustomRulesAPI *CustomRulesAPIService
 
+	EmailsAPI *EmailsAPIService
+
 	EventsAPI *EventsAPIService
 
 	IntegrationsAPI *IntegrationsAPIService
@@ -100,6 +102,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.AssetsAPI = (*AssetsAPIService)(&c.common)
 	c.AuditAPI = (*AuditAPIService)(&c.common)
 	c.CustomRulesAPI = (*CustomRulesAPIService)(&c.common)
+	c.EmailsAPI = (*EmailsAPIService)(&c.common)
 	c.EventsAPI = (*EventsAPIService)(&c.common)
 	c.IntegrationsAPI = (*IntegrationsAPIService)(&c.common)
 	c.IssuesAPI = (*IssuesAPIService)(&c.common)
