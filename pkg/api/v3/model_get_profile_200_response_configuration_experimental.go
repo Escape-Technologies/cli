@@ -572,6 +572,38 @@ func (o *GetProfile200ResponseConfigurationExperimental) SetExtendedPortScan(v b
 	o.ExtendedPortScan = &v
 }
 
+// GetLoginPageBruteforceAgent returns the LoginPageBruteforceAgent field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationExperimental) GetLoginPageBruteforceAgent() bool {
+	if o == nil || IsNil(o.LoginPageBruteforceAgent) {
+		var ret bool
+		return ret
+	}
+	return *o.LoginPageBruteforceAgent
+}
+
+// GetLoginPageBruteforceAgentOk returns a tuple with the LoginPageBruteforceAgent field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationExperimental) GetLoginPageBruteforceAgentOk() (*bool, bool) {
+	if o == nil || IsNil(o.LoginPageBruteforceAgent) {
+		return nil, false
+	}
+	return o.LoginPageBruteforceAgent, true
+}
+
+// HasLoginPageBruteforceAgent returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationExperimental) HasLoginPageBruteforceAgent() bool {
+	if o != nil && !IsNil(o.LoginPageBruteforceAgent) {
+		return true
+	}
+
+	return false
+}
+
+// SetLoginPageBruteforceAgent gets a reference to the given bool and assigns it to the LoginPageBruteforceAgent field.
+func (o *GetProfile200ResponseConfigurationExperimental) SetLoginPageBruteforceAgent(v bool) {
+	o.LoginPageBruteforceAgent = &v
+}
+
 // GetDastMultiAgentPentest returns the DastMultiAgentPentest field value if set, zero value otherwise.
 func (o *GetProfile200ResponseConfigurationExperimental) GetDastMultiAgentPentest() bool {
 	if o == nil || IsNil(o.DastMultiAgentPentest) {
@@ -693,6 +725,9 @@ func (o GetProfile200ResponseConfigurationExperimental) ToMap() (map[string]inte
 	}
 	if !IsNil(o.ExtendedPortScan) {
 		toSerialize["extended_port_scan"] = o.ExtendedPortScan
+	}
+	if !IsNil(o.LoginPageBruteforceAgent) {
+		toSerialize["login_page_bruteforce_agent"] = o.LoginPageBruteforceAgent
 	}
 	if !IsNil(o.DastMultiAgentPentest) {
 		toSerialize["dast_multi_agent_pentest"] = o.DastMultiAgentPentest
