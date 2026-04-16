@@ -29,47 +29,25 @@ var rootCmd = &cobra.Command{
 	Short: buildHelpHeader(),
 	Long: buildHelpHeader() + `
 
-Escape CLI - Your Gateway to Comprehensive API Security Testing
+Replace legacy scanners and manual offensive security processes with AI agents
+that discover, test, and remediate directly in your engineering workflows.
 
-Escape is the most advanced API security platform, helping you discover, test,
-and secure your APIs with cutting-edge DAST (Dynamic Application Security Testing)
-capabilities.
+QUICK START:
 
-🎯 WHAT YOU CAN DO:
-  • Start security scans on your REST, GraphQL, and Web APIs
-  • Monitor and track security issues across your API ecosystem
-  • Manage security profiles, assets, and test configurations
-  • Review audit logs and security events
-  • Deploy private scanning locations for internal APIs
+  $ escape-cli profiles list                           List scan profiles
+  $ escape-cli scans start <profile-id> --watch        Launch a scan
+  $ escape-cli issues list --severity HIGH,CRITICAL    Review findings
+  $ escape-cli asm trigger                             Trigger attack surface discovery
 
-📚 GETTING STARTED:
-  1. First time? Check your version:
-     $ escape-cli version
-  
-  2. List your API profiles:
-     $ escape-cli profiles list
-  
-  3. Start a security scan:
-     $ escape-cli scans start <profile-id> --watch
-  
-  4. Review discovered issues:
-     $ escape-cli issues list --severity HIGH,CRITICAL
+AGENT INTEGRATION:
 
-💡 PRO TIPS:
-  • Use -v for debug, -vv for trace, -vvv for http/raw debug
-  • Output in JSON or YAML with -o json or -o yaml
-  • Most list commands support powerful filtering options
-  • Use --watch flag when starting scans for real-time updates
+  $ escape-cli <command> -o json            Machine-readable output
+  $ escape-cli <command> -o schema          Output JSON Schema
+  $ escape-cli <command> --input-schema     Input JSON Schema
 
-🤖 AI AGENT INTEGRATION:
-  • Get output JSON Schema: escape-cli <command> -o schema
-  • Get input JSON Schema:  escape-cli <command> --input-schema
-  • Machine-readable output: escape-cli <command> -o json
+DOCUMENTATION:
 
-🔗 RESOURCES:
-  • Documentation: https://docs.escape.tech/documentation/tooling/cli
-  • API Reference: https://public.escape.tech/v3
-  • Support: https://escape.tech/contact`,
+  https://docs.escape.tech/documentation/tooling/cli`,
 	PersistentPreRunE: func(_ *cobra.Command, _ []string) error {
 		verbosityFrom := "command line argument"
 		if envVerbosity := env.GetVerbosity(); envVerbosity > rootCmdVerbose {
@@ -112,29 +90,21 @@ func init() {
 	rootCmd.PersistentFlags().BoolVar(&rootCmdInputSchema, "input-schema", false, "print JSON Schema for stdin input format (for create/update commands)")
 	rootCmd.SetUsageTemplate(rootCmd.UsageTemplate() + `
 COMMAND CATEGORIES:
-  Scanning:       scans     - Run security scans and view results
-  Security:       issues    - Manage security vulnerabilities
-  Monitoring:     problems  - View scan problems and failures
-  Configuration:  profiles  - Configure scan targets and settings
-  Assets:         assets    - Manage your API inventory
-  Infrastructure: locations - Deploy private scanning locations
-  Organization:   users, roles, projects, audit - Users and access control
-  Automation:     workflows, jobs - Trigger and track automated actions
-  Customization:  custom-rules, tags - Extend and organize
+  Offensive Testing:    scans, profiles, authentications   Scan targets and configurations
+  Attack Surface:       asm, assets                        Discovery and inventory
+  Findings:             issues, problems, events           Vulnerabilities and diagnostics
+  Infrastructure:       locations                          Private scanning locations
+  Organization:         users, roles, projects, audit      Access control and audit trail
+  Automation:           workflows, jobs                    CI/CD triggers and exports
+  Customization:        custom-rules, tags, integrations   Rules, labels, and integrations
 
 ENVIRONMENT VARIABLES:
-  ESCAPE_APPLICATION_URL      - Escape platform URL (default: https://public.escape.tech)
-  ESCAPE_API_KEY              - Your API key for authentication
-  NO_COLOR                    - Disable colored output (set to any value)
-  HTTP_PROXY, HTTPS_PROXY     - Configure proxy settings
-  
-  CI/CD Auto-Detection (commit information):
-  - GitHub Actions: GITHUB_SHA, GITHUB_REF_NAME, GITHUB_ACTOR
-  - GitLab CI: CI_COMMIT_SHA, CI_COMMIT_REF_NAME, GITLAB_USER_EMAIL
-  - CircleCI: CIRCLE_SHA1, CIRCLE_BRANCH, CIRCLE_USERNAME
+  ESCAPE_API_KEY              API key for authentication
+  ESCAPE_APPLICATION_URL      Platform URL (default: https://public.escape.tech)
+  ESCAPE_COLOR_DISABLED       Set to "true" to disable colored output
+  HTTP_PROXY, HTTPS_PROXY     Proxy configuration
 
-For additional information, see the documentation: 
-https://docs.escape.tech/documentation/tooling/cli
+  CI/CD commit metadata is auto-detected from GitHub Actions, GitLab CI, and CircleCI.
 `)
 }
 
@@ -154,7 +124,7 @@ func Execute(ctx context.Context) error {
 
 func buildHelpHeader() string {
 	v := version.GetVersion()
-	return brandText("Escape CLI "+v.DisplayVersion()) + "\n" + dimText("AI-native API security workflows")
+	return brandText("Escape CLI "+v.DisplayVersion()) + "\n" + dimText("Offensive Security Engineering Platform")
 }
 
 func printStartupHeader() {
