@@ -34,6 +34,9 @@ type InstallInfo struct {
 var (
 	installInfoOnce sync.Once
 	installInfo     InstallInfo
+	// InstallMethodOverride is injected at build time for wrapped distributions
+	// like the published Docker image.
+	InstallMethodOverride = ""
 )
 
 // GetInstallInfo returns the cached install details for the current process.
@@ -64,12 +67,12 @@ func getExecutablePath() string {
 }
 
 func detectInstallMethod(path string) InstallMethod {
-	if os.Getenv("GITHUB_ACTIONS") == "true" {
-		return InstallMethodGitHubActions
+	if method, ok := parseInstallMethod(InstallMethodOverride); ok {
+		return method
 	}
 
-	if isRunningInDocker() {
-		return InstallMethodDocker
+	if os.Getenv("GITHUB_ACTIONS") == "true" {
+		return InstallMethodGitHubActions
 	}
 
 	if runtime.GOOS == "windows" {
@@ -83,20 +86,21 @@ func detectInstallMethod(path string) InstallMethod {
 	return InstallMethodManual
 }
 
-func isRunningInDocker() bool {
-	if _, err := os.Stat("/.dockerenv"); err == nil {
-		return true
+func parseInstallMethod(value string) (InstallMethod, bool) {
+	switch InstallMethod(strings.ToLower(strings.TrimSpace(value))) {
+	case InstallMethodCurl:
+		return InstallMethodCurl, true
+	case InstallMethodDocker:
+		return InstallMethodDocker, true
+	case InstallMethodGitHubActions:
+		return InstallMethodGitHubActions, true
+	case InstallMethodWindowsScript:
+		return InstallMethodWindowsScript, true
+	case InstallMethodManual:
+		return InstallMethodManual, true
+	default:
+		return "", false
 	}
-
-	cgroup, err := os.ReadFile("/proc/1/cgroup")
-	if err != nil {
-		return false
-	}
-
-	content := strings.ToLower(string(cgroup))
-	return strings.Contains(content, "docker") ||
-		strings.Contains(content, "containerd") ||
-		strings.Contains(content, "kubepods")
 }
 
 // DisplayName returns a user-facing description of the installation method.
