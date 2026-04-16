@@ -20,16 +20,16 @@ func newAPIV3Client() (*v3.APIClient, error) {
 	if err != nil {
 		return nil, fmt.Errorf("failed to get API URL: %w", err)
 	}
-	key, err := env.GetAPIKey()
+	authorization, err := env.GetAuthorizationHeader()
 	if err != nil {
-		return nil, fmt.Errorf("failed to get API key: %w", err)
+		return nil, fmt.Errorf("failed to get authorization header: %w", err)
 	}
 
 	cfg := v3.Configuration{
 		Host:   url.Host,
 		Scheme: url.Scheme,
 		DefaultHeader: map[string]string{
-			"Authorization": "Key " + key,
+			"Authorization": authorization,
 		},
 		UserAgent:  version.GetVersion().UserAgent(),
 		Debug:      Debug,

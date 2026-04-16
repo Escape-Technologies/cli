@@ -1,0 +1,76 @@
+package mcp
+
+import (
+	"context"
+	"fmt"
+	"slices"
+	"strings"
+
+	mcpgo "github.com/mark3labs/mcp-go/mcp"
+	mcpserver "github.com/mark3labs/mcp-go/server"
+)
+
+func RegisterBuiltinTools(server *mcpserver.MCPServer, specs []ToolSpec) {
+	tool := mcpgo.NewTool(
+		"list_capabilities",
+		mcpgo.WithDescription("List the available Escape CLI-backed MCP tools."),
+		mcpgo.WithString("objective", mcpgo.Description("Optional search intent used to rank relevant tools.")),
+		mcpgo.WithNumber("limit", mcpgo.Description("Maximum number of tools to return.")),
+	)
+
+	server.AddTool(tool, func(_ context.Context, request mcpgo.CallToolRequest) (*mcpgo.CallToolResult, error) {
+		objective := strings.TrimSpace(strings.ToLower(request.GetString("objective", "")))
+		limit := int(request.GetFloat("limit", 25))
+		if limit <= 0 {
+			limit = 25
+		}
+
+		items := make([]map[string]any, 0, len(specs))
+		for _, spec := range specs {
+			score := capabilityScore(spec, objective)
+			items = append(items, map[string]any{
+				"name":        spec.Name,
+				"path":        spec.Path,
+				"description": spec.Description,
+				"score":       score,
+			})
+		}
+
+		slices.SortFunc(items, func(left, right map[string]any) int {
+			leftScore := left["score"].(int)
+			rightScore := right["score"].(int)
+			if leftScore != rightScore {
+				return rightScore - leftScore
+			}
+			return strings.Compare(left["name"].(string), right["name"].(string))
+		})
+
+		if limit < len(items) {
+			items = items[:limit]
+		}
+
+		lines := make([]string, 0, len(items)+1)
+		lines = append(lines, fmt.Sprintf("Available tools: %d", len(items)))
+		for _, item := range items {
+			lines = append(lines, fmt.Sprintf("- %s: %s", item["name"], item["description"]))
+		}
+
+		return mcpgo.NewToolResultStructured(items, strings.Join(lines, "\n")), nil
+	})
+}
+
+func capabilityScore(spec ToolSpec, objective string) int {
+	if objective == "" {
+		return 0
+	}
+
+	corpus := strings.ToLower(spec.Name + " " + spec.Path + " " + spec.Description)
+	score := 0
+	for _, token := range strings.Fields(objective) {
+		if strings.Contains(corpus, token) {
+			score++
+		}
+	}
+
+	return score
+}
