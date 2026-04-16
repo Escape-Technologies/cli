@@ -21,7 +21,11 @@ type ListInboxEmailsFilters struct {
 
 // ListInboxEmails lists inbox emails for a target scan email address.
 func ListInboxEmails(ctx context.Context, cursor string, filters *ListInboxEmailsFilters) (*v3.ListInboxEmails200Response, error) {
-	if filters == nil || strings.TrimSpace(filters.Email) == "" {
+	if filters == nil {
+		return nil, errors.New("email is required")
+	}
+	email := strings.TrimSpace(filters.Email)
+	if email == "" {
 		return nil, errors.New("email is required")
 	}
 
@@ -30,7 +34,7 @@ func ListInboxEmails(ctx context.Context, cursor string, filters *ListInboxEmail
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
 
-	req := client.EmailsAPI.ListInboxEmails(ctx).Email(filters.Email)
+	req := client.EmailsAPI.ListInboxEmails(ctx).Email(email)
 	if cursor != "" {
 		req = req.Cursor(cursor)
 	}
