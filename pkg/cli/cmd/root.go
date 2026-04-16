@@ -96,7 +96,7 @@ func init() {
 	rootCmd.SetUsageTemplate(rootCmd.UsageTemplate() + `
 COMMAND CATEGORIES:
   Offensive Testing:    scans, profiles, authentications   Scan targets and configurations
-  Scan Inbox:           emails                              Inspect scan inbox messages
+  Scan Inbox:           emails                             Inspect scan inbox messages
   Attack Surface:       asm, assets                        Discovery and inventory
   Findings:             issues, problems, events           Vulnerabilities and diagnostics
   Infrastructure:       locations                          Private scanning locations
