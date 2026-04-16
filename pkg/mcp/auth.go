@@ -1,19 +1,25 @@
+// Package mcp implements the embedded MCP server that exposes the Escape CLI
+// commands as MCP tools over HTTP.
 package mcp
 
 import (
 	"context"
-	"fmt"
+	"errors"
 	"net/http"
 	"strings"
 )
 
 type authContextKey struct{}
 
+// Auth carries the credentials extracted from an incoming MCP request,
+// forwarded to the CLI subprocess through sanitized environment variables.
 type Auth struct {
 	APIKey        string
 	Authorization string
 }
 
+// InjectAuthContext derives a context that carries the credentials extracted
+// from the incoming HTTP request so downstream tool handlers can access them.
 func InjectAuthContext(ctx context.Context, req *http.Request) context.Context {
 	auth := Auth{
 		APIKey:        strings.TrimSpace(req.Header.Get("X-ESCAPE-API-KEY")),
@@ -25,13 +31,15 @@ func InjectAuthContext(ctx context.Context, req *http.Request) context.Context {
 	return context.WithValue(ctx, authContextKey{}, auth)
 }
 
+// AuthFromContext recovers the Auth value previously stored by
+// InjectAuthContext and reports an error if the request lacks credentials.
 func AuthFromContext(ctx context.Context) (Auth, error) {
 	auth, ok := ctx.Value(authContextKey{}).(Auth)
 	if !ok {
-		return Auth{}, fmt.Errorf("missing authentication context")
+		return Auth{}, errors.New("missing authentication context")
 	}
 	if auth.APIKey == "" && auth.Authorization == "" {
-		return Auth{}, fmt.Errorf("missing X-ESCAPE-API-KEY or Authorization header")
+		return Auth{}, errors.New("missing X-ESCAPE-API-KEY or Authorization header")
 	}
 	return auth, nil
 }

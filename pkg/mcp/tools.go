@@ -3,20 +3,36 @@ package mcp
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"strconv"
 	"strings"
+	"time"
 
 	mcpgo "github.com/mark3labs/mcp-go/mcp"
 	mcpserver "github.com/mark3labs/mcp-go/server"
 )
 
+// defaultToolExecutionTimeout bounds the lifetime of a single CLI subprocess
+// spawned to satisfy an MCP tool call. Hung children are killed when the
+// per-request context deadline elapses.
+const defaultToolExecutionTimeout = 30 * time.Second
+
+// stringSliceFlagArgsPerValue is the number of CLI args emitted per value for
+// a repeated string flag (flag name + value), e.g. `--status RUNNING`.
+const stringSliceFlagArgsPerValue = 2
+
+// FlagBinding maps an MCP tool property to a CLI flag on the underlying Cobra
+// command, including the type the value must be rendered as.
 type FlagBinding struct {
 	Property string
 	FlagName string
 	Kind     string
 }
 
+// ToolSpec fully describes one CLI-backed MCP tool: its MCP-level metadata
+// plus the subprocess invocation plan (command path, positional + flag
+// bindings, and optional stdin body property).
 type ToolSpec struct {
 	Name           string
 	Path           string
@@ -32,10 +48,14 @@ type ToolSpec struct {
 	AllowExtraArgs bool
 }
 
+// CommandExecutionOptions carries the shared runtime inputs the tool handlers
+// need that are not part of a specific tool spec.
 type CommandExecutionOptions struct {
 	PublicAPIURL string
 }
 
+// RegisterCommandTools walks the supplied specs and registers one MCP handler
+// per tool on the server. Each handler spawns a bounded CLI subprocess.
 func RegisterCommandTools(
 	server *mcpserver.MCPServer,
 	specs []ToolSpec,
@@ -61,7 +81,10 @@ func buildToolHandler(
 			return mcpgo.NewToolResultError(err.Error()), nil
 		}
 
-		result, err := ExecuteCLICommand(ctx, ExecutionOptions{
+		execCtx, cancel := context.WithTimeout(ctx, defaultToolExecutionTimeout)
+		defer cancel()
+
+		result, err := ExecuteCLICommand(execCtx, ExecutionOptions{
 			Command:      append(append([]string{}, spec.Command...), commandArgs...),
 			Body:         body,
 			Auth:         auth,
@@ -80,7 +103,7 @@ func buildToolHandler(
 }
 
 func buildCommandArgs(spec ToolSpec, rawArgs map[string]any) ([]string, any, error) {
-	commandArgs := make([]string, 0, len(spec.PositionalArgs)+len(spec.FlagBindings)*2)
+	commandArgs := make([]string, 0, len(spec.PositionalArgs)+len(spec.FlagBindings)*stringSliceFlagArgsPerValue)
 
 	for _, property := range spec.PositionalArgs {
 		value, ok := rawArgs[property]
@@ -132,7 +155,7 @@ func buildFlagArgs(binding FlagBinding, value any) ([]string, error) {
 	case "bool":
 		booleanValue, ok := value.(bool)
 		if !ok {
-			return nil, fmt.Errorf("expected boolean")
+			return nil, errors.New("expected boolean")
 		}
 		return []string{fmt.Sprintf("--%s=%t", binding.FlagName, booleanValue)}, nil
 	case "stringSlice":
@@ -141,7 +164,7 @@ func buildFlagArgs(binding FlagBinding, value any) ([]string, error) {
 			return nil, err
 		}
 
-		args := make([]string, 0, len(values)*2)
+		args := make([]string, 0, len(values)*stringSliceFlagArgsPerValue)
 		for _, item := range values {
 			args = append(args, "--"+binding.FlagName, item)
 		}

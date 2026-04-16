@@ -9,7 +9,7 @@ import (
 func TestInjectAuthContextWithAPIKey(t *testing.T) {
 	t.Parallel()
 
-	req, err := http.NewRequest(http.MethodPost, "/mcp", nil)
+	req, err := http.NewRequestWithContext(context.Background(), http.MethodPost, "/mcp", nil)
 	if err != nil {
 		t.Fatalf("failed to build request: %v", err)
 	}
@@ -31,7 +31,7 @@ func TestInjectAuthContextWithAPIKey(t *testing.T) {
 func TestInjectAuthContextWithAuthorizationHeader(t *testing.T) {
 	t.Parallel()
 
-	req, err := http.NewRequest(http.MethodPost, "/mcp", nil)
+	req, err := http.NewRequestWithContext(context.Background(), http.MethodPost, "/mcp", nil)
 	if err != nil {
 		t.Fatalf("failed to build request: %v", err)
 	}

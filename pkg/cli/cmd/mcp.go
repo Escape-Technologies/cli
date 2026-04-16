@@ -13,6 +13,8 @@ import (
 	"github.com/spf13/pflag"
 )
 
+const defaultMCPServePort = 8080
+
 var mcpServePort int
 var mcpServePublicAPIURL string
 
@@ -44,7 +46,7 @@ var mcpServeCmd = &cobra.Command{
 }
 
 func init() {
-	mcpServeCmd.Flags().IntVar(&mcpServePort, "port", 8080, "port to listen on")
+	mcpServeCmd.Flags().IntVar(&mcpServePort, "port", defaultMCPServePort, "port to listen on")
 	mcpServeCmd.Flags().StringVar(
 		&mcpServePublicAPIURL,
 		"public-api-url",

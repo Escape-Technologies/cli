@@ -10,6 +10,12 @@ import (
 	mcpserver "github.com/mark3labs/mcp-go/server"
 )
 
+// defaultCapabilitiesLimit caps the number of tools listed by the built-in
+// list_capabilities tool when the caller omits or passes a non-positive limit.
+const defaultCapabilitiesLimit = 25
+
+// RegisterBuiltinTools registers the MCP-native helper tools (e.g. the tool
+// discovery endpoint) that ship with the embedded server.
 func RegisterBuiltinTools(server *mcpserver.MCPServer, specs []ToolSpec) {
 	tool := mcpgo.NewTool(
 		"list_capabilities",
@@ -20,9 +26,9 @@ func RegisterBuiltinTools(server *mcpserver.MCPServer, specs []ToolSpec) {
 
 	server.AddTool(tool, func(_ context.Context, request mcpgo.CallToolRequest) (*mcpgo.CallToolResult, error) {
 		objective := strings.TrimSpace(strings.ToLower(request.GetString("objective", "")))
-		limit := int(request.GetFloat("limit", 25))
+		limit := int(request.GetFloat("limit", defaultCapabilitiesLimit))
 		if limit <= 0 {
-			limit = 25
+			limit = defaultCapabilitiesLimit
 		}
 
 		items := make([]map[string]any, 0, len(specs))

@@ -10,11 +10,17 @@ import (
 	"github.com/spf13/cobra"
 )
 
+// CommandSchemas captures optional runtime zero-values for a command's input
+// and output Go structs so JSON schemas can be generated and surfaced both in
+// `capabilities` output and by the embedded MCP server.
 type CommandSchemas struct {
 	Input  any
 	Output any
 }
 
+// CommandCapability is the JSON-friendly view of one CLI command used by the
+// `capabilities` command and consumed by the embedded MCP server to build its
+// tool catalog.
 type CommandCapability struct {
 	Path                string                `json:"path"`
 	Use                 string                `json:"use"`
@@ -52,6 +58,9 @@ func schemaFor(v any) *clischema.JSONSchema {
 	return clischema.Generate(v)
 }
 
+// CommandSchemaRegistry returns the explicit allowlist mapping Cobra command
+// paths to their input/output Go structs. New commands exposed to MCP must be
+// added here so the Cobra-to-MCP surface stays reviewed rather than derived.
 func CommandSchemaRegistry() map[string]CommandSchemas {
 	return map[string]CommandSchemas{
 		"escape-cli me":                      {Output: v3.GetMe200Response{}},
@@ -129,6 +138,10 @@ func CommandSchemaRegistry() map[string]CommandSchemas {
 	}
 }
 
+// BuildCommandCapabilities walks the Cobra command tree and returns the
+// materialized capability descriptors enriched with JSON schemas from the
+// supplied registry. Consumed by both the `capabilities` command and the MCP
+// server's tool catalog builder.
 func BuildCommandCapabilities(root *cobra.Command, registry map[string]CommandSchemas) []CommandCapability {
 	capabilities := make([]CommandCapability, 0)
 
