@@ -11,6 +11,18 @@ import (
 	"strings"
 )
 
+// strippedParentEnvPrefixes lists env var prefixes that must not leak from the
+// MCP server process into the child CLI subprocess. Request-scoped values are
+// appended by buildCommandEnv after the strip loop.
+var strippedParentEnvPrefixes = []string{
+	"ESCAPE_API_URL=",
+	"ESCAPE_API_KEY=",
+	"ESCAPE_AUTHORIZATION=",
+	"ESCAPE_COLOR_DISABLED=",
+}
+
+// ExecutionOptions carries the request-scoped inputs ExecuteCLICommand needs
+// to spawn one CLI subprocess.
 type ExecutionOptions struct {
 	Command      []string
 	Body         any
@@ -18,6 +30,8 @@ type ExecutionOptions struct {
 	PublicAPIURL string
 }
 
+// ExecutionResult is the captured stdout/stderr/exit-code plus the parsed
+// JSON payload (when the CLI produced valid JSON on stdout).
 type ExecutionResult struct {
 	Stdout   string
 	Stderr   string
@@ -25,6 +39,10 @@ type ExecutionResult struct {
 	Payload  any
 }
 
+// ExecuteCLICommand spawns the current escape-cli binary with the supplied
+// command + arguments, forwards authentication through a sanitized environment,
+// pipes the optional request body to stdin, and returns the structured result.
+// The caller is responsible for binding a timeout on ctx.
 func ExecuteCLICommand(ctx context.Context, options ExecutionOptions) (*ExecutionResult, error) {
 	executablePath, err := os.Executable()
 	if err != nil {
@@ -75,17 +93,15 @@ func ExecuteCLICommand(ctx context.Context, options ExecutionOptions) (*Executio
 	return result, fmt.Errorf("command %q failed: %w", strings.Join(commandArgs, " "), runErr)
 }
 
-// buildCommandEnv builds the subprocess env, stripping inherited auth/target
-// vars from the parent process so the child CLI only uses values from the
-// current request. Prevents stale server-scoped credentials from leaking when
-// a request omits one of them.
+// buildCommandEnv builds the subprocess env, stripping inherited auth and
+// color vars from the parent process so the child CLI only uses values from
+// the current request. Prevents stale server-scoped credentials or duplicate
+// keys from leaking when a request omits one of them.
 func buildCommandEnv(options ExecutionOptions) []string {
 	parentEnv := os.Environ()
-	env := make([]string, 0, len(parentEnv)+4)
+	env := make([]string, 0, len(parentEnv)+len(strippedParentEnvPrefixes))
 	for _, entry := range parentEnv {
-		if strings.HasPrefix(entry, "ESCAPE_API_URL=") ||
-			strings.HasPrefix(entry, "ESCAPE_API_KEY=") ||
-			strings.HasPrefix(entry, "ESCAPE_AUTHORIZATION=") {
+		if hasAnyPrefix(entry, strippedParentEnvPrefixes) {
 			continue
 		}
 		env = append(env, entry)
@@ -105,12 +121,25 @@ func buildCommandEnv(options ExecutionOptions) []string {
 	return env
 }
 
+func hasAnyPrefix(entry string, prefixes []string) bool {
+	for _, prefix := range prefixes {
+		if strings.HasPrefix(entry, prefix) {
+			return true
+		}
+	}
+	return false
+}
+
 func marshalBody(body any) ([]byte, error) {
 	if raw, ok := body.([]byte); ok {
 		return raw, nil
 	}
 
-	return json.Marshal(body)
+	encoded, err := json.Marshal(body)
+	if err != nil {
+		return nil, fmt.Errorf("marshal request body: %w", err)
+	}
+	return encoded, nil
 }
 
 func errorAs(err error, target any) bool {

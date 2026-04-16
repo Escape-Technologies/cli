@@ -12,6 +12,7 @@ import (
 
 const shutdownTimeout = 10 * time.Second
 
+// ServerOptions configures the embedded HTTP-based MCP server.
 type ServerOptions struct {
 	Version      string
 	Port         int
@@ -19,14 +20,19 @@ type ServerOptions struct {
 	Tools        []ToolSpec
 }
 
+// Server is the embedded MCP server that exposes CLI commands over HTTP.
 type Server struct {
 	options ServerOptions
 }
 
+// NewServer builds a non-started embedded MCP server from the supplied options.
 func NewServer(options ServerOptions) *Server {
 	return &Server{options: options}
 }
 
+// Serve starts the embedded MCP server and blocks until the supplied context
+// is cancelled. The shutdown path uses a detached context to give in-flight
+// handlers a bounded drain window.
 func (s *Server) Serve(ctx context.Context) error {
 	rootServer := mcpserver.NewMCPServer(
 		"Escape.tech-API-MCP",
@@ -61,7 +67,9 @@ func (s *Server) Serve(ctx context.Context) error {
 
 	go func() {
 		<-ctx.Done()
-		shutdownCtx, cancel := context.WithTimeout(context.Background(), shutdownTimeout)
+		// Detach from the just-cancelled parent context; graceful shutdown
+		// needs its own bounded window to drain in-flight tool executions.
+		shutdownCtx, cancel := context.WithTimeout(context.WithoutCancel(ctx), shutdownTimeout)
 		defer cancel()
 		_ = mcpHandler.Shutdown(shutdownCtx)
 		_ = httpServer.Shutdown(shutdownCtx)
@@ -72,5 +80,5 @@ func (s *Server) Serve(ctx context.Context) error {
 		return nil
 	}
 
-	return err
+	return fmt.Errorf("mcp http server: %w", err)
 }

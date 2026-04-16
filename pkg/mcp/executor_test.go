@@ -63,6 +63,26 @@ func TestBuildCommandEnvStripsInheritedAuthVars(t *testing.T) {
 	}
 }
 
+func TestBuildCommandEnvStripsInheritedColorDisabled(t *testing.T) {
+	t.Setenv("ESCAPE_COLOR_DISABLED", "false")
+
+	env := buildCommandEnv(ExecutionOptions{})
+
+	count := 0
+	for _, entry := range env {
+		if strings.HasPrefix(entry, "ESCAPE_COLOR_DISABLED=") {
+			count++
+			if entry != "ESCAPE_COLOR_DISABLED=true" {
+				t.Fatalf("expected ESCAPE_COLOR_DISABLED=true, got %q", entry)
+			}
+		}
+	}
+
+	if count != 1 {
+		t.Fatalf("expected exactly one ESCAPE_COLOR_DISABLED entry (the forced one), got %d", count)
+	}
+}
+
 func TestBuildCommandEnvWithoutRequestAuthDoesNotLeakParent(t *testing.T) {
 	t.Setenv("ESCAPE_API_URL", "https://parent.example.com")
 	t.Setenv("ESCAPE_API_KEY", "parent-key")
