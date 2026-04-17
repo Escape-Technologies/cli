@@ -189,7 +189,8 @@ func skipMCPCommand(path string) bool {
 		name == "help-all" ||
 		name == "completion" ||
 		name == "capabilities" ||
-		name == "version"
+		name == "version" ||
+		name == "mcp"
 }
 
 func skipMCPFlag(name string) bool {
