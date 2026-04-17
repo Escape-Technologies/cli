@@ -5,96 +5,137 @@ import (
 	"testing"
 )
 
-func TestBuildCommandEnvStripsInheritedAuthVars(t *testing.T) {
+func TestBuildCommandEnvUsesStrictAllowlist(t *testing.T) {
+	t.Setenv("TMPDIR", "/tmp/escape")
+	t.Setenv("PATH", "/bin")
+	t.Setenv("HOME", "/home/tester")
+	t.Setenv("LANG", "en_US.UTF-8")
+	t.Setenv("SSL_CERT_FILE", "/tmp/certs.pem")
+	t.Setenv("AWS_SECRET_ACCESS_KEY", "aws-secret")
+	t.Setenv("OPENAI_API_KEY", "openai-secret")
+	t.Setenv("UNRELATED_VAR", "keep-me")
 	t.Setenv("ESCAPE_API_URL", "https://parent.example.com")
 	t.Setenv("ESCAPE_API_KEY", "parent-key")
 	t.Setenv("ESCAPE_AUTHORIZATION", "Key parent")
-	t.Setenv("UNRELATED_VAR", "keep-me")
+	t.Setenv("ESCAPE_FOO", "bar")
 
-	env := buildCommandEnv(ExecutionOptions{
+	env := envMap(buildCommandEnv(ExecutionOptions{
 		PublicAPIURL: "https://request.example.com",
-		Auth:         Auth{APIKey: "request-key"},
-	})
+		Auth: Auth{
+			APIKey:        "request-key",
+			Authorization: "Bearer request-token",
+		},
+	}))
 
-	counts := map[string]int{
-		"ESCAPE_API_URL=":        0,
-		"ESCAPE_API_KEY=":        0,
-		"ESCAPE_AUTHORIZATION=":  0,
-		"ESCAPE_COLOR_DISABLED=": 0,
-		"UNRELATED_VAR=":         0,
+	if got := env["TMPDIR"]; got != "/tmp/escape" {
+		t.Fatalf("expected TMPDIR to be preserved, got %q", got)
 	}
-	for _, entry := range env {
-		for prefix := range counts {
-			if strings.HasPrefix(entry, prefix) {
-				counts[prefix]++
-			}
+
+	droppedKeys := []string{
+		"PATH",
+		"HOME",
+		"LANG",
+		"SSL_CERT_FILE",
+		"AWS_SECRET_ACCESS_KEY",
+		"OPENAI_API_KEY",
+		"UNRELATED_VAR",
+		"ESCAPE_FOO",
+	}
+	for _, key := range droppedKeys {
+		if _, ok := env[key]; ok {
+			t.Fatalf("expected %s to be stripped, got %#v", key, env)
 		}
 	}
 
-	if counts["ESCAPE_API_URL="] != 1 {
-		t.Fatalf("expected exactly one ESCAPE_API_URL entry, got %d", counts["ESCAPE_API_URL="])
+	if got := env["ESCAPE_COLOR_DISABLED"]; got != "true" {
+		t.Fatalf("expected ESCAPE_COLOR_DISABLED=true, got %q", got)
 	}
-	if counts["ESCAPE_API_KEY="] != 1 {
-		t.Fatalf("expected exactly one ESCAPE_API_KEY entry, got %d", counts["ESCAPE_API_KEY="])
+	if got := env["ESCAPE_API_URL"]; got != "https://request.example.com" {
+		t.Fatalf("expected request ESCAPE_API_URL, got %q", got)
 	}
-	if counts["ESCAPE_AUTHORIZATION="] != 0 {
-		t.Fatalf("expected ESCAPE_AUTHORIZATION to be stripped when not provided by request, got %d", counts["ESCAPE_AUTHORIZATION="])
+	if got := env["ESCAPE_API_KEY"]; got != "request-key" {
+		t.Fatalf("expected request ESCAPE_API_KEY, got %q", got)
 	}
-	if counts["UNRELATED_VAR="] != 1 {
-		t.Fatalf("expected unrelated parent vars to be preserved, got %d", counts["UNRELATED_VAR="])
-	}
-	if counts["ESCAPE_COLOR_DISABLED="] != 1 {
-		t.Fatalf("expected ESCAPE_COLOR_DISABLED to be set, got %d", counts["ESCAPE_COLOR_DISABLED="])
-	}
-
-	want := map[string]string{
-		"ESCAPE_API_URL=": "https://request.example.com",
-		"ESCAPE_API_KEY=": "request-key",
-	}
-	for _, entry := range env {
-		for prefix, expected := range want {
-			if strings.HasPrefix(entry, prefix) {
-				value := strings.TrimPrefix(entry, prefix)
-				if value != expected {
-					t.Fatalf("expected %s%q, got %s%q", prefix, expected, prefix, value)
-				}
-			}
-		}
-	}
-}
-
-func TestBuildCommandEnvStripsInheritedColorDisabled(t *testing.T) {
-	t.Setenv("ESCAPE_COLOR_DISABLED", "false")
-
-	env := buildCommandEnv(ExecutionOptions{})
-
-	count := 0
-	for _, entry := range env {
-		if strings.HasPrefix(entry, "ESCAPE_COLOR_DISABLED=") {
-			count++
-			if entry != "ESCAPE_COLOR_DISABLED=true" {
-				t.Fatalf("expected ESCAPE_COLOR_DISABLED=true, got %q", entry)
-			}
-		}
-	}
-
-	if count != 1 {
-		t.Fatalf("expected exactly one ESCAPE_COLOR_DISABLED entry (the forced one), got %d", count)
+	if got := env["ESCAPE_AUTHORIZATION"]; got != "Bearer request-token" {
+		t.Fatalf("expected request ESCAPE_AUTHORIZATION, got %q", got)
 	}
 }
 
 func TestBuildCommandEnvWithoutRequestAuthDoesNotLeakParent(t *testing.T) {
+	t.Setenv("TMPDIR", "/tmp/escape")
 	t.Setenv("ESCAPE_API_URL", "https://parent.example.com")
 	t.Setenv("ESCAPE_API_KEY", "parent-key")
 	t.Setenv("ESCAPE_AUTHORIZATION", "Key parent")
+	t.Setenv("ESCAPE_FOO", "bar")
 
-	env := buildCommandEnv(ExecutionOptions{})
+	env := envMap(buildCommandEnv(ExecutionOptions{}))
 
-	for _, entry := range env {
-		if strings.HasPrefix(entry, "ESCAPE_API_URL=") ||
-			strings.HasPrefix(entry, "ESCAPE_API_KEY=") ||
-			strings.HasPrefix(entry, "ESCAPE_AUTHORIZATION=") {
-			t.Fatalf("expected no inherited ESCAPE auth vars when request is empty, got %q", entry)
+	if got := env["TMPDIR"]; got != "/tmp/escape" {
+		t.Fatalf("expected TMPDIR to be preserved, got %q", got)
+	}
+
+	for _, key := range []string{
+		"ESCAPE_API_URL",
+		"ESCAPE_API_KEY",
+		"ESCAPE_AUTHORIZATION",
+		"ESCAPE_FOO",
+	} {
+		if _, ok := env[key]; ok {
+			t.Fatalf("expected %s to be stripped when request is empty, got %#v", key, env)
 		}
 	}
+}
+
+func TestCappedBufferTruncatesOutput(t *testing.T) {
+	t.Parallel()
+
+	buffer := newCappedBuffer(5)
+	written, err := buffer.Write([]byte("hello-world"))
+	if err != nil {
+		t.Fatalf("expected write to succeed, got %v", err)
+	}
+	if written != len("hello-world") {
+		t.Fatalf("expected write count %d, got %d", len("hello-world"), written)
+	}
+	if got := string(buffer.Bytes()); got != "hello" {
+		t.Fatalf("expected capped bytes, got %q", got)
+	}
+	if got := buffer.Text(); got != "hello"+truncatedOutputSuffix {
+		t.Fatalf("expected truncated text, got %q", got)
+	}
+	if !buffer.Truncated() {
+		t.Fatal("expected buffer to report truncation")
+	}
+}
+
+func TestExecuteCLICommandRedactsCallerControlledArgs(t *testing.T) {
+	_, err := ExecuteCLICommand(t.Context(), ExecutionOptions{
+		Command:        []string{"--definitely-not-a-real-cli-command", "secret-value"},
+		DisplayCommand: []string{"safe-command"},
+	})
+	if err == nil {
+		t.Fatal("expected command failure")
+	}
+
+	if !strings.Contains(err.Error(), `safe-command`) {
+		t.Fatalf("expected redacted command label, got %q", err.Error())
+	}
+	if strings.Contains(err.Error(), "secret-value") {
+		t.Fatalf("expected error to hide caller-controlled args, got %q", err.Error())
+	}
+	if strings.Contains(err.Error(), "--output") {
+		t.Fatalf("expected injected wrapper args to stay hidden, got %q", err.Error())
+	}
+}
+
+func envMap(entries []string) map[string]string {
+	env := make(map[string]string, len(entries))
+	for _, entry := range entries {
+		key, value, ok := strings.Cut(entry, "=")
+		if !ok {
+			continue
+		}
+		env[key] = value
+	}
+	return env
 }
