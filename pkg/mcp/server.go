@@ -5,12 +5,17 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
+	"os"
+	"strconv"
 	"time"
 
 	mcpserver "github.com/mark3labs/mcp-go/server"
 )
 
-const shutdownTimeout = 10 * time.Second
+const (
+	shutdownTimeout    = 10 * time.Second
+	healthCheckPortEnv = "HEALTH_CHECK_PORT"
+)
 
 // ServerOptions configures the embedded HTTP-based MCP server.
 type ServerOptions struct {
@@ -53,16 +58,29 @@ func (s *Server) Serve(ctx context.Context) error {
 		}),
 	)
 
-	mux := http.NewServeMux()
-	mux.Handle("/mcp", mcpHandler)
-	mux.HandleFunc("/health", func(writer http.ResponseWriter, _ *http.Request) {
+	healthHandler := func(writer http.ResponseWriter, _ *http.Request) {
 		writer.WriteHeader(http.StatusOK)
 		_, _ = writer.Write([]byte("ok"))
-	})
+	}
+
+	mainMux := http.NewServeMux()
+	mainMux.Handle("/mcp", mcpHandler)
+	mainMux.HandleFunc("/health", healthHandler)
 
 	httpServer := &http.Server{
 		Addr:    fmt.Sprintf(":%d", s.options.Port),
-		Handler: mux,
+		Handler: mainMux,
+	}
+
+	var healthServer *http.Server
+	healthPort := parseHealthCheckPort(s.options.Port)
+	if healthPort != 0 {
+		healthMux := http.NewServeMux()
+		healthMux.HandleFunc("/health", healthHandler)
+		healthServer = &http.Server{
+			Addr:    fmt.Sprintf(":%d", healthPort),
+			Handler: healthMux,
+		}
 	}
 
 	go func() {
@@ -73,12 +91,43 @@ func (s *Server) Serve(ctx context.Context) error {
 		defer cancel()
 		_ = mcpHandler.Shutdown(shutdownCtx)
 		_ = httpServer.Shutdown(shutdownCtx)
+		if healthServer != nil {
+			_ = healthServer.Shutdown(shutdownCtx)
+		}
 	}()
-
+	if healthServer != nil {
+		errCh := make(chan error, 1)
+		go func() {
+			err := healthServer.ListenAndServe()
+			if errors.Is(err, http.ErrServerClosed) {
+				errCh <- nil
+				return
+			}
+			errCh <- fmt.Errorf("health http server: %w", err)
+		}()
+		defer func() {
+			if err := <-errCh; err != nil {
+				// Health server failure shouldn't mask main server error; best-effort log via stderr.
+				fmt.Fprintln(os.Stderr, err.Error())
+			}
+		}()
+	}
 	err := httpServer.ListenAndServe()
 	if errors.Is(err, http.ErrServerClosed) {
 		return nil
 	}
 
 	return fmt.Errorf("mcp http server: %w", err)
+}
+
+func parseHealthCheckPort(mainPort int) int {
+	raw := os.Getenv(healthCheckPortEnv)
+	if raw == "" {
+		return 0
+	}
+	port, err := strconv.Atoi(raw)
+	if err != nil || port <= 0 || port == mainPort {
+		return 0
+	}
+	return port
 }
