@@ -37,6 +37,9 @@ func InjectAuthContext(ctx context.Context, req *http.Request) context.Context {
 // AuthFromContext recovers the Auth value previously stored by
 // InjectAuthContext and reports an error if the request lacks credentials.
 func AuthFromContext(ctx context.Context) (Auth, error) {
+	if ctx == nil {
+		return Auth{}, errors.New("missing authentication context")
+	}
 	auth, ok := ctx.Value(authContextKey{}).(Auth)
 	if !ok {
 		return Auth{}, errors.New("missing authentication context")
