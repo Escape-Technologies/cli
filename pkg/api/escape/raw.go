@@ -21,9 +21,9 @@ func rawRequest(ctx context.Context, method, path string, body []byte, out any) 
 	if err != nil {
 		return fmt.Errorf("failed to get API URL: %w", err)
 	}
-	key, err := env.GetAPIKey()
+	authorization, err := env.GetAuthorizationHeader()
 	if err != nil {
-		return fmt.Errorf("failed to get API key: %w", err)
+		return fmt.Errorf("failed to get authorization header: %w", err)
 	}
 
 	url := baseURL.String() + "/v3" + path
@@ -36,7 +36,7 @@ func rawRequest(ctx context.Context, method, path string, body []byte, out any) 
 	if err != nil {
 		return fmt.Errorf("failed to build request: %w", err)
 	}
-	req.Header.Set("Authorization", "Key "+key)
+	req.Header.Set("Authorization", authorization)
 	if len(body) > 0 {
 		req.Header.Set("Content-Type", "application/json")
 	}
