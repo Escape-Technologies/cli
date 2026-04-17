@@ -15,11 +15,11 @@ import (
 	"fmt"
 )
 
-// checks if the GetIssueTrends200ResponseInner type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &GetIssueTrends200ResponseInner{}
+// checks if the IssueTrendsInner type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &IssueTrendsInner{}
 
-// GetIssueTrends200ResponseInner struct for GetIssueTrends200ResponseInner
-type GetIssueTrends200ResponseInner struct {
+// IssueTrendsInner struct for IssueTrendsInner
+type IssueTrendsInner struct {
 	// Time bucket start date
 	Date string `json:"date"`
 	// Number of HIGH severity issues
@@ -33,14 +33,14 @@ type GetIssueTrends200ResponseInner struct {
 	AdditionalProperties map[string]interface{}
 }
 
-type _GetIssueTrends200ResponseInner GetIssueTrends200ResponseInner
+type _IssueTrendsInner IssueTrendsInner
 
-// NewGetIssueTrends200ResponseInner instantiates a new GetIssueTrends200ResponseInner object
+// NewIssueTrendsInner instantiates a new IssueTrendsInner object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetIssueTrends200ResponseInner(date string, hIGH float32, mEDIUM float32, lOW float32, iNFO float32) *GetIssueTrends200ResponseInner {
-	this := GetIssueTrends200ResponseInner{}
+func NewIssueTrendsInner(date string, hIGH float32, mEDIUM float32, lOW float32, iNFO float32) *IssueTrendsInner {
+	this := IssueTrendsInner{}
 	this.Date = date
 	this.HIGH = hIGH
 	this.MEDIUM = mEDIUM
@@ -49,16 +49,16 @@ func NewGetIssueTrends200ResponseInner(date string, hIGH float32, mEDIUM float32
 	return &this
 }
 
-// NewGetIssueTrends200ResponseInnerWithDefaults instantiates a new GetIssueTrends200ResponseInner object
+// NewIssueTrendsInnerWithDefaults instantiates a new IssueTrendsInner object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewGetIssueTrends200ResponseInnerWithDefaults() *GetIssueTrends200ResponseInner {
-	this := GetIssueTrends200ResponseInner{}
+func NewIssueTrendsInnerWithDefaults() *IssueTrendsInner {
+	this := IssueTrendsInner{}
 	return &this
 }
 
 // GetDate returns the Date field value
-func (o *GetIssueTrends200ResponseInner) GetDate() string {
+func (o *IssueTrendsInner) GetDate() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -69,7 +69,7 @@ func (o *GetIssueTrends200ResponseInner) GetDate() string {
 
 // GetDateOk returns a tuple with the Date field value
 // and a boolean to check if the value has been set.
-func (o *GetIssueTrends200ResponseInner) GetDateOk() (*string, bool) {
+func (o *IssueTrendsInner) GetDateOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -77,12 +77,12 @@ func (o *GetIssueTrends200ResponseInner) GetDateOk() (*string, bool) {
 }
 
 // SetDate sets field value
-func (o *GetIssueTrends200ResponseInner) SetDate(v string) {
+func (o *IssueTrendsInner) SetDate(v string) {
 	o.Date = v
 }
 
 // GetHIGH returns the HIGH field value
-func (o *GetIssueTrends200ResponseInner) GetHIGH() float32 {
+func (o *IssueTrendsInner) GetHIGH() float32 {
 	if o == nil {
 		var ret float32
 		return ret
@@ -93,7 +93,7 @@ func (o *GetIssueTrends200ResponseInner) GetHIGH() float32 {
 
 // GetHIGHOk returns a tuple with the HIGH field value
 // and a boolean to check if the value has been set.
-func (o *GetIssueTrends200ResponseInner) GetHIGHOk() (*float32, bool) {
+func (o *IssueTrendsInner) GetHIGHOk() (*float32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -101,12 +101,12 @@ func (o *GetIssueTrends200ResponseInner) GetHIGHOk() (*float32, bool) {
 }
 
 // SetHIGH sets field value
-func (o *GetIssueTrends200ResponseInner) SetHIGH(v float32) {
+func (o *IssueTrendsInner) SetHIGH(v float32) {
 	o.HIGH = v
 }
 
 // GetMEDIUM returns the MEDIUM field value
-func (o *GetIssueTrends200ResponseInner) GetMEDIUM() float32 {
+func (o *IssueTrendsInner) GetMEDIUM() float32 {
 	if o == nil {
 		var ret float32
 		return ret
@@ -117,7 +117,7 @@ func (o *GetIssueTrends200ResponseInner) GetMEDIUM() float32 {
 
 // GetMEDIUMOk returns a tuple with the MEDIUM field value
 // and a boolean to check if the value has been set.
-func (o *GetIssueTrends200ResponseInner) GetMEDIUMOk() (*float32, bool) {
+func (o *IssueTrendsInner) GetMEDIUMOk() (*float32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -125,12 +125,12 @@ func (o *GetIssueTrends200ResponseInner) GetMEDIUMOk() (*float32, bool) {
 }
 
 // SetMEDIUM sets field value
-func (o *GetIssueTrends200ResponseInner) SetMEDIUM(v float32) {
+func (o *IssueTrendsInner) SetMEDIUM(v float32) {
 	o.MEDIUM = v
 }
 
 // GetLOW returns the LOW field value
-func (o *GetIssueTrends200ResponseInner) GetLOW() float32 {
+func (o *IssueTrendsInner) GetLOW() float32 {
 	if o == nil {
 		var ret float32
 		return ret
@@ -141,7 +141,7 @@ func (o *GetIssueTrends200ResponseInner) GetLOW() float32 {
 
 // GetLOWOk returns a tuple with the LOW field value
 // and a boolean to check if the value has been set.
-func (o *GetIssueTrends200ResponseInner) GetLOWOk() (*float32, bool) {
+func (o *IssueTrendsInner) GetLOWOk() (*float32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -149,12 +149,12 @@ func (o *GetIssueTrends200ResponseInner) GetLOWOk() (*float32, bool) {
 }
 
 // SetLOW sets field value
-func (o *GetIssueTrends200ResponseInner) SetLOW(v float32) {
+func (o *IssueTrendsInner) SetLOW(v float32) {
 	o.LOW = v
 }
 
 // GetINFO returns the INFO field value
-func (o *GetIssueTrends200ResponseInner) GetINFO() float32 {
+func (o *IssueTrendsInner) GetINFO() float32 {
 	if o == nil {
 		var ret float32
 		return ret
@@ -165,7 +165,7 @@ func (o *GetIssueTrends200ResponseInner) GetINFO() float32 {
 
 // GetINFOOk returns a tuple with the INFO field value
 // and a boolean to check if the value has been set.
-func (o *GetIssueTrends200ResponseInner) GetINFOOk() (*float32, bool) {
+func (o *IssueTrendsInner) GetINFOOk() (*float32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -173,11 +173,11 @@ func (o *GetIssueTrends200ResponseInner) GetINFOOk() (*float32, bool) {
 }
 
 // SetINFO sets field value
-func (o *GetIssueTrends200ResponseInner) SetINFO(v float32) {
+func (o *IssueTrendsInner) SetINFO(v float32) {
 	o.INFO = v
 }
 
-func (o GetIssueTrends200ResponseInner) MarshalJSON() ([]byte, error) {
+func (o IssueTrendsInner) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -185,7 +185,7 @@ func (o GetIssueTrends200ResponseInner) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o GetIssueTrends200ResponseInner) ToMap() (map[string]interface{}, error) {
+func (o IssueTrendsInner) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["date"] = o.Date
 	toSerialize["HIGH"] = o.HIGH
@@ -200,7 +200,7 @@ func (o GetIssueTrends200ResponseInner) ToMap() (map[string]interface{}, error) 
 	return toSerialize, nil
 }
 
-func (o *GetIssueTrends200ResponseInner) UnmarshalJSON(data []byte) (err error) {
+func (o *IssueTrendsInner) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -226,15 +226,15 @@ func (o *GetIssueTrends200ResponseInner) UnmarshalJSON(data []byte) (err error) 
 		}
 	}
 
-	varGetIssueTrends200ResponseInner := _GetIssueTrends200ResponseInner{}
+	varIssueTrendsInner := _IssueTrendsInner{}
 
-	err = json.Unmarshal(data, &varGetIssueTrends200ResponseInner)
+	err = json.Unmarshal(data, &varIssueTrendsInner)
 
 	if err != nil {
 		return err
 	}
 
-	*o = GetIssueTrends200ResponseInner(varGetIssueTrends200ResponseInner)
+	*o = IssueTrendsInner(varIssueTrendsInner)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -250,38 +250,38 @@ func (o *GetIssueTrends200ResponseInner) UnmarshalJSON(data []byte) (err error) 
 	return err
 }
 
-type NullableGetIssueTrends200ResponseInner struct {
-	value *GetIssueTrends200ResponseInner
+type NullableIssueTrendsInner struct {
+	value *IssueTrendsInner
 	isSet bool
 }
 
-func (v NullableGetIssueTrends200ResponseInner) Get() *GetIssueTrends200ResponseInner {
+func (v NullableIssueTrendsInner) Get() *IssueTrendsInner {
 	return v.value
 }
 
-func (v *NullableGetIssueTrends200ResponseInner) Set(val *GetIssueTrends200ResponseInner) {
+func (v *NullableIssueTrendsInner) Set(val *IssueTrendsInner) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableGetIssueTrends200ResponseInner) IsSet() bool {
+func (v NullableIssueTrendsInner) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableGetIssueTrends200ResponseInner) Unset() {
+func (v *NullableIssueTrendsInner) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableGetIssueTrends200ResponseInner(val *GetIssueTrends200ResponseInner) *NullableGetIssueTrends200ResponseInner {
-	return &NullableGetIssueTrends200ResponseInner{value: val, isSet: true}
+func NewNullableIssueTrendsInner(val *IssueTrendsInner) *NullableIssueTrendsInner {
+	return &NullableIssueTrendsInner{value: val, isSet: true}
 }
 
-func (v NullableGetIssueTrends200ResponseInner) MarshalJSON() ([]byte, error) {
+func (v NullableIssueTrendsInner) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableGetIssueTrends200ResponseInner) UnmarshalJSON(src []byte) error {
+func (v *NullableIssueTrendsInner) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

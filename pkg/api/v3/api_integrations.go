@@ -5319,6 +5319,7 @@ func (a *IntegrationsAPIService) ListakamaiIntegrationsExecute(r ApiListakamaiIn
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.sortType != nil {
@@ -5328,6 +5329,7 @@ func (a *IntegrationsAPIService) ListakamaiIntegrationsExecute(r ApiListakamaiIn
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
 		var defaultValue string = "asc"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
 		r.sortDirection = &defaultValue
 	}
 	if r.projectIds != nil {
@@ -5545,6 +5547,7 @@ func (a *IntegrationsAPIService) ListawsIntegrationsExecute(r ApiListawsIntegrat
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.sortType != nil {
@@ -5554,6 +5557,7 @@ func (a *IntegrationsAPIService) ListawsIntegrationsExecute(r ApiListawsIntegrat
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
 		var defaultValue string = "asc"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
 		r.sortDirection = &defaultValue
 	}
 	if r.projectIds != nil {
@@ -5771,6 +5775,7 @@ func (a *IntegrationsAPIService) ListazureIntegrationsExecute(r ApiListazureInte
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.sortType != nil {
@@ -5780,6 +5785,7 @@ func (a *IntegrationsAPIService) ListazureIntegrationsExecute(r ApiListazureInte
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
 		var defaultValue string = "asc"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
 		r.sortDirection = &defaultValue
 	}
 	if r.projectIds != nil {
@@ -5997,6 +6003,7 @@ func (a *IntegrationsAPIService) ListbitbucketIntegrationsExecute(r ApiListbitbu
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.sortType != nil {
@@ -6006,6 +6013,7 @@ func (a *IntegrationsAPIService) ListbitbucketIntegrationsExecute(r ApiListbitbu
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
 		var defaultValue string = "asc"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
 		r.sortDirection = &defaultValue
 	}
 	if r.projectIds != nil {
@@ -6223,6 +6231,7 @@ func (a *IntegrationsAPIService) ListcloudflareIntegrationsExecute(r ApiListclou
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.sortType != nil {
@@ -6232,6 +6241,7 @@ func (a *IntegrationsAPIService) ListcloudflareIntegrationsExecute(r ApiListclou
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
 		var defaultValue string = "asc"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
 		r.sortDirection = &defaultValue
 	}
 	if r.projectIds != nil {
@@ -6449,6 +6459,7 @@ func (a *IntegrationsAPIService) ListcustomIntegrationsExecute(r ApiListcustomIn
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.sortType != nil {
@@ -6458,6 +6469,7 @@ func (a *IntegrationsAPIService) ListcustomIntegrationsExecute(r ApiListcustomIn
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
 		var defaultValue string = "asc"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
 		r.sortDirection = &defaultValue
 	}
 	if r.projectIds != nil {
@@ -6675,6 +6687,7 @@ func (a *IntegrationsAPIService) ListgcpIntegrationsExecute(r ApiListgcpIntegrat
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.sortType != nil {
@@ -6684,6 +6697,7 @@ func (a *IntegrationsAPIService) ListgcpIntegrationsExecute(r ApiListgcpIntegrat
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
 		var defaultValue string = "asc"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
 		r.sortDirection = &defaultValue
 	}
 	if r.projectIds != nil {
@@ -6901,6 +6915,7 @@ func (a *IntegrationsAPIService) ListgithubIntegrationsExecute(r ApiListgithubIn
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.sortType != nil {
@@ -6910,6 +6925,7 @@ func (a *IntegrationsAPIService) ListgithubIntegrationsExecute(r ApiListgithubIn
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
 		var defaultValue string = "asc"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
 		r.sortDirection = &defaultValue
 	}
 	if r.projectIds != nil {
@@ -7127,6 +7143,7 @@ func (a *IntegrationsAPIService) ListgitlabIntegrationsExecute(r ApiListgitlabIn
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.sortType != nil {
@@ -7136,6 +7153,7 @@ func (a *IntegrationsAPIService) ListgitlabIntegrationsExecute(r ApiListgitlabIn
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
 		var defaultValue string = "asc"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
 		r.sortDirection = &defaultValue
 	}
 	if r.projectIds != nil {
@@ -7353,6 +7371,7 @@ func (a *IntegrationsAPIService) ListjiraIntegrationsExecute(r ApiListjiraIntegr
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.sortType != nil {
@@ -7362,6 +7381,7 @@ func (a *IntegrationsAPIService) ListjiraIntegrationsExecute(r ApiListjiraIntegr
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
 		var defaultValue string = "asc"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
 		r.sortDirection = &defaultValue
 	}
 	if r.projectIds != nil {
@@ -7579,6 +7599,7 @@ func (a *IntegrationsAPIService) ListkubernetesIntegrationsExecute(r ApiListkube
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.sortType != nil {
@@ -7588,6 +7609,7 @@ func (a *IntegrationsAPIService) ListkubernetesIntegrationsExecute(r ApiListkube
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
 		var defaultValue string = "asc"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
 		r.sortDirection = &defaultValue
 	}
 	if r.projectIds != nil {
@@ -7805,6 +7827,7 @@ func (a *IntegrationsAPIService) ListpostmanIntegrationsExecute(r ApiListpostman
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.sortType != nil {
@@ -7814,6 +7837,7 @@ func (a *IntegrationsAPIService) ListpostmanIntegrationsExecute(r ApiListpostman
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
 		var defaultValue string = "asc"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
 		r.sortDirection = &defaultValue
 	}
 	if r.projectIds != nil {
@@ -8031,6 +8055,7 @@ func (a *IntegrationsAPIService) ListwizIntegrationsExecute(r ApiListwizIntegrat
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.sortType != nil {
@@ -8040,6 +8065,7 @@ func (a *IntegrationsAPIService) ListwizIntegrationsExecute(r ApiListwizIntegrat
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
 		var defaultValue string = "asc"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
 		r.sortDirection = &defaultValue
 	}
 	if r.projectIds != nil {
