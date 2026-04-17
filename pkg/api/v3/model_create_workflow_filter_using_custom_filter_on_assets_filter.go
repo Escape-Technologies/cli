@@ -42,6 +42,7 @@ type CreateWorkflowFilterUsingCustomFilterOnAssetsFilter struct {
 	Environments          []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESENVIRONMENT   `json:"environments,omitempty"`
 	CloudProviders        []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER `json:"cloudProviders,omitempty"`
 	WafProviders          []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESWAFPROVIDER   `json:"wafProviders,omitempty"`
+	CaptchaProviders      []ENUMPROPERTIESCAPTCHAPROVIDER                                                  `json:"captchaProviders,omitempty"`
 	Statuses              []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS              `json:"statuses,omitempty"`
 	Severities            []ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY                                      `json:"severities,omitempty"`
 	ParentLinks           []CreateWorkflowFilterUsingCustomFilterOnAssetsFilterParentLinksInner            `json:"parentLinks,omitempty"`
@@ -818,6 +819,38 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilter) SetWafProviders(v 
 	o.WafProviders = v
 }
 
+// GetCaptchaProviders returns the CaptchaProviders field value if set, zero value otherwise.
+func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilter) GetCaptchaProviders() []ENUMPROPERTIESCAPTCHAPROVIDER {
+	if o == nil || IsNil(o.CaptchaProviders) {
+		var ret []ENUMPROPERTIESCAPTCHAPROVIDER
+		return ret
+	}
+	return o.CaptchaProviders
+}
+
+// GetCaptchaProvidersOk returns a tuple with the CaptchaProviders field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilter) GetCaptchaProvidersOk() ([]ENUMPROPERTIESCAPTCHAPROVIDER, bool) {
+	if o == nil || IsNil(o.CaptchaProviders) {
+		return nil, false
+	}
+	return o.CaptchaProviders, true
+}
+
+// HasCaptchaProviders returns a boolean if a field has been set.
+func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilter) HasCaptchaProviders() bool {
+	if o != nil && !IsNil(o.CaptchaProviders) {
+		return true
+	}
+
+	return false
+}
+
+// SetCaptchaProviders gets a reference to the given []ENUMPROPERTIESCAPTCHAPROVIDER and assigns it to the CaptchaProviders field.
+func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilter) SetCaptchaProviders(v []ENUMPROPERTIESCAPTCHAPROVIDER) {
+	o.CaptchaProviders = v
+}
+
 // GetStatuses returns the Statuses field value if set, zero value otherwise.
 func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilter) GetStatuses() []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS {
 	if o == nil || IsNil(o.Statuses) {
@@ -1473,6 +1506,9 @@ func (o CreateWorkflowFilterUsingCustomFilterOnAssetsFilter) ToMap() (map[string
 	if !IsNil(o.WafProviders) {
 		toSerialize["wafProviders"] = o.WafProviders
 	}
+	if !IsNil(o.CaptchaProviders) {
+		toSerialize["captchaProviders"] = o.CaptchaProviders
+	}
 	if !IsNil(o.Statuses) {
 		toSerialize["statuses"] = o.Statuses
 	}
@@ -1572,6 +1608,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilter) UnmarshalJSON(data
 		delete(additionalProperties, "environments")
 		delete(additionalProperties, "cloudProviders")
 		delete(additionalProperties, "wafProviders")
+		delete(additionalProperties, "captchaProviders")
 		delete(additionalProperties, "statuses")
 		delete(additionalProperties, "severities")
 		delete(additionalProperties, "parentLinks")
