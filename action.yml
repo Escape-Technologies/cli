@@ -60,7 +60,7 @@ runs:
         ESCAPE_CLI_IMAGE_OVERRIDE: ${{ inputs.cli_image }}
       run: |
         set -euo pipefail
-        ESCAPE_CLI_IMAGE="${ESCAPE_CLI_IMAGE_OVERRIDE:-docker.io/escapetech/cli:$(cat "$GITHUB_ACTION_PATH/version.txt")}"
+        ESCAPE_CLI_IMAGE="${ESCAPE_CLI_IMAGE_OVERRIDE:-docker.io/escapetech/cli:${{ github.action_ref }}}"
         PROFILE_ID="${INPUT_PROFILE_ID:-}"
         if [ -z "${PROFILE_ID}" ]; then
           echo "profile_id is not set"
