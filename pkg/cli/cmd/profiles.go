@@ -7,6 +7,7 @@ import (
 	"io"
 	"os"
 	"strconv"
+	"strings"
 
 	"github.com/Escape-Technologies/cli/pkg/api/escape"
 	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
@@ -41,6 +42,7 @@ var profileInitiators []string
 var profileRisks []string
 var profileSortType string
 var profileSortDirection string
+var profileGetExtraAssets bool
 
 var profilesCmd = &cobra.Command{
 	Use:     "profiles",
@@ -161,11 +163,20 @@ schedule, risks, and configuration details.`,
   escape-cli profiles get 00000000-0000-0000-0000-000000000001
 
   # Export profile configuration
-  escape-cli profiles get <profile-id> -o json`,
+  escape-cli profiles get <profile-id> -o json
+
+  # List the extra assets attached to a profile (detailed table)
+  escape-cli profiles get <profile-id> --extra-assets
+
+  # List the extra assets attached to a profile as JSON
+  escape-cli profiles get <profile-id> -o json | jq '.extraAssets'`,
 	Args: cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		// Output JSON Schema if requested
-		if out.Schema(v3.GetProfile200Response{}) {
+		if profileGetExtraAssets {
+			if out.Schema([]v3.ProfileExtraAsset{}) {
+				return nil
+			}
+		} else if out.Schema(v3.GetProfile200Response{}) {
 			return nil
 		}
 
@@ -175,13 +186,52 @@ schedule, risks, and configuration details.`,
 			return fmt.Errorf("unable to get profile %s: %w", profileID, err)
 		}
 
+		if profileGetExtraAssets {
+			extraAssets := profile.GetExtraAssets()
+			out.Table(extraAssets, func() []string {
+				rows := []string{"ID\tCLASS\tTYPE\tSTATUS\tCREATED AT\tNAME"}
+				for _, asset := range extraAssets {
+					rows = append(rows, fmt.Sprintf(
+						"%s\t%s\t%s\t%s\t%s\t%s",
+						asset.GetId(),
+						asset.GetClass(),
+						asset.GetType(),
+						asset.GetStatus(),
+						asset.GetCreatedAt(),
+						asset.GetName(),
+					))
+				}
+				return rows
+			})
+			return nil
+		}
+
 		out.Table(profile, func() []string {
-			result := []string{"ID\tCREATED AT\tCRON\tRISKS\tNAME"}
-			result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s\t%s", profile.GetId(), profile.GetCreatedAt(), profile.GetCron(), profile.GetRisks(), profile.GetName()))
+			result := []string{"ID\tCREATED AT\tCRON\tRISKS\tNAME\tEXTRA ASSETS"}
+			result = append(result, fmt.Sprintf(
+				"%s\t%s\t%s\t%s\t%s\t%s",
+				profile.GetId(),
+				profile.GetCreatedAt(),
+				profile.GetCron(),
+				profile.GetRisks(),
+				profile.GetName(),
+				formatExtraAssets(profile.GetExtraAssets()),
+			))
 			return result
 		})
 		return nil
 	},
+}
+
+func formatExtraAssets(extraAssets []v3.ProfileExtraAsset) string {
+	if len(extraAssets) == 0 {
+		return ""
+	}
+	ids := make([]string, 0, len(extraAssets))
+	for _, asset := range extraAssets {
+		ids = append(ids, asset.GetId())
+	}
+	return strings.Join(ids, ", ")
 }
 
 var profileCreateRestCmd = &cobra.Command{
@@ -503,9 +553,12 @@ Update a profile's metadata fields. Provide updates via JSON through stdin
 or use flags for individual fields.
 
 UPDATABLE FIELDS:
-  --name          Profile name
-  --description   Profile description
-  --cron          Cron schedule (e.g., "0 22 * * *")
+  --name                 Profile name
+  --description          Profile description
+  --cron                 Cron schedule (e.g., "0 22 * * *")
+  --extra-asset-id       Extra asset IDs to attach, as a comma-separated list.
+                         Replaces the full list of extra assets on the profile.
+  --clear-extra-assets   Detach every extra asset from the profile.
 
 Alternatively, provide a JSON object via stdin with any combination of fields.`,
 	Example: `  # Update name via flag
@@ -514,8 +567,18 @@ Alternatively, provide a JSON object via stdin with any combination of fields.`,
   # Update cron schedule
   escape-cli profiles update <profile-id> --cron "0 6 * * 1"
 
+  # Attach extra assets (e.g. schemas) to a profile
+  escape-cli profiles update <profile-id> \
+    --extra-asset-id 11111111-1111-1111-1111-111111111111,22222222-2222-2222-2222-222222222222
+
+  # Detach every extra asset from a profile
+  escape-cli profiles update <profile-id> --clear-extra-assets
+
   # Update via JSON stdin
-  echo '{"name": "Updated Name", "cron": "0 22 * * *"}' | escape-cli profiles update <profile-id>`,
+  echo '{"name": "Updated Name", "cron": "0 22 * * *"}' | escape-cli profiles update <profile-id>
+
+  # Update extra assets via JSON stdin
+  echo '{"extraAssetIds": ["11111111-1111-1111-1111-111111111111"]}' | escape-cli profiles update <profile-id>`,
 	Args: cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		if out.Schema(v3.GetProfile200Response{}) {
@@ -557,6 +620,11 @@ Alternatively, provide a JSON object via stdin with any combination of fields.`,
 		if cmd.Flags().Changed("cron") {
 			payload["cron"] = profileUpdateCron
 		}
+		if cmd.Flags().Changed("clear-extra-assets") && profileUpdateClearExtraAssets {
+			payload["extraAssetIds"] = []string{}
+		} else if cmd.Flags().Changed("extra-asset-id") {
+			payload["extraAssetIds"] = parseExtraAssetIDs(profileUpdateExtraAssetIDs)
+		}
 
 		if len(payload) == 0 {
 			return errors.New("no updates provided: use flags or pipe JSON via stdin")
@@ -583,10 +651,28 @@ Alternatively, provide a JSON object via stdin with any combination of fields.`,
 }
 
 var (
-	profileUpdateName        string
-	profileUpdateDescription string
-	profileUpdateCron        string
+	profileUpdateName             string
+	profileUpdateDescription      string
+	profileUpdateCron             string
+	profileUpdateExtraAssetIDs    string
+	profileUpdateClearExtraAssets bool
 )
+
+// parseExtraAssetIDs splits the raw --extra-asset-id value on commas and
+// trims whitespace. Empty entries are dropped so the payload contains only
+// real asset IDs.
+func parseExtraAssetIDs(raw string) []string {
+	parts := strings.Split(raw, ",")
+	ids := make([]string, 0, len(parts))
+	for _, id := range parts {
+		id = strings.TrimSpace(id)
+		if id == "" {
+			continue
+		}
+		ids = append(ids, id)
+	}
+	return ids
+}
 
 var profileUpdateConfigurationCmd = &cobra.Command{
 	Use:     "update-configuration profile-id",
@@ -742,6 +828,10 @@ func init() {
 	profileUpdateCmd.Flags().StringVar(&profileUpdateName, "name", "", "profile name")
 	profileUpdateCmd.Flags().StringVar(&profileUpdateDescription, "description", "", "profile description")
 	profileUpdateCmd.Flags().StringVar(&profileUpdateCron, "cron", "", "cron schedule (e.g., \"0 22 * * *\")")
+	profileUpdateCmd.Flags().StringVar(&profileUpdateExtraAssetIDs, "extra-asset-id", "", "extra asset ID(s) to attach, as a comma-separated list; replaces the full list of extra assets on the profile")
+	profileUpdateCmd.Flags().BoolVar(&profileUpdateClearExtraAssets, "clear-extra-assets", false, "detach every extra asset from the profile")
+	profileUpdateCmd.MarkFlagsMutuallyExclusive("extra-asset-id", "clear-extra-assets")
+	profileGetCmd.Flags().BoolVar(&profileGetExtraAssets, "extra-assets", false, "list the extra assets attached to the profile (detailed table)")
 	profilesListCmd.Flags().Bool("all", false, "Show profiles for all asset types")
 	profilesListCmd.Flags().StringSliceVarP(&profileAssetIDs, "asset-id", "a", []string{}, "asset ID")
 	profilesListCmd.Flags().StringSliceVarP(&profileDomains, "domain", "d", []string{}, "domain")
