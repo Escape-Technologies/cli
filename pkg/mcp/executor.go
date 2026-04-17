@@ -105,7 +105,7 @@ func ExecuteCLICommand(ctx context.Context, options ExecutionOptions) (*Executio
 // the request-scoped Escape vars needed by the child CLI.
 func buildCommandEnv(options ExecutionOptions) []string {
 	parentEnv := os.Environ()
-	env := make([]string, 0, len(forwardedParentEnvPrefixes)+4)
+	env := make([]string, 0, len(forwardedParentEnvPrefixes)+4) //nolint:mnd
 	for _, entry := range parentEnv {
 		if hasAnyPrefix(entry, forwardedParentEnvPrefixes) {
 			env = append(env, entry)
@@ -188,7 +188,7 @@ func (buffer *cappedBuffer) Write(data []byte) (int, error) {
 
 	_, err := buffer.buf.Write(data)
 	if err != nil {
-		return 0, err
+		return 0, fmt.Errorf("write to buffer: %w", err)
 	}
 
 	return written, nil
