@@ -137,7 +137,6 @@ func (a *AuditAPIService) ListAuditLogsExecute(r ApiListAuditLogsRequest) (*List
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
-		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.sortType != nil {
@@ -147,7 +146,6 @@ func (a *AuditAPIService) ListAuditLogsExecute(r ApiListAuditLogsRequest) (*List
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
 		var defaultValue string = "asc"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
 		r.sortDirection = &defaultValue
 	}
 	if r.startTime != nil {

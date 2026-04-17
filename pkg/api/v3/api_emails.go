@@ -121,7 +121,6 @@ func (a *EmailsAPIService) ListInboxEmailsExecute(r ApiListInboxEmailsRequest) (
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
-		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.ids != nil {
