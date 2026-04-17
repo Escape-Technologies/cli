@@ -93,7 +93,7 @@ func ExecuteCLICommand(ctx context.Context, options ExecutionOptions) (*Executio
 
 	commandLabel := describeCommand(options)
 	var exitErr *exec.ExitError
-	if ok := errorAs(runErr, &exitErr); ok {
+	if errors.As(runErr, &exitErr) {
 		result.ExitCode = exitErr.ExitCode()
 		return result, fmt.Errorf("command %q failed with exit code %d", commandLabel, result.ExitCode)
 	}
@@ -208,8 +208,4 @@ func (buffer *cappedBuffer) Text() string {
 
 func (buffer *cappedBuffer) Truncated() bool {
 	return buffer.truncated
-}
-
-func errorAs(err error, target any) bool {
-	return err != nil && target != nil && errors.As(err, target)
 }
