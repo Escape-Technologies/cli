@@ -11,32 +11,37 @@ import (
 	"strings"
 )
 
-// strippedParentEnvPrefixes lists env var prefixes that must not leak from the
-// MCP server process into the child CLI subprocess. Request-scoped values are
-// appended by buildCommandEnv after the strip loop.
-var strippedParentEnvPrefixes = []string{
-	"ESCAPE_API_URL=",
-	"ESCAPE_API_KEY=",
-	"ESCAPE_AUTHORIZATION=",
-	"ESCAPE_COLOR_DISABLED=",
+const (
+	maxStdoutBytes        = 4 << 20
+	maxStderrBytes        = 1 << 20
+	truncatedOutputSuffix = "\n...[truncated]"
+)
+
+// forwardedParentEnvPrefixes lists the minimal parent env the child CLI keeps.
+// Request-scoped Escape auth/config values are appended explicitly below.
+var forwardedParentEnvPrefixes = []string{
+	"TMPDIR=",
 }
 
 // ExecutionOptions carries the request-scoped inputs ExecuteCLICommand needs
 // to spawn one CLI subprocess.
 type ExecutionOptions struct {
-	Command      []string
-	Body         any
-	Auth         Auth
-	PublicAPIURL string
+	Command        []string
+	DisplayCommand []string
+	Body           any
+	Auth           Auth
+	PublicAPIURL   string
 }
 
 // ExecutionResult is the captured stdout/stderr/exit-code plus the parsed
 // JSON payload (when the CLI produced valid JSON on stdout).
 type ExecutionResult struct {
-	Stdout   string
-	Stderr   string
-	ExitCode int
-	Payload  any
+	Stdout          string
+	Stderr          string
+	StdoutTruncated bool
+	StderrTruncated bool
+	ExitCode        int
+	Payload         any
 }
 
 // ExecuteCLICommand spawns the current escape-cli binary with the supplied
@@ -63,15 +68,17 @@ func ExecuteCLICommand(ctx context.Context, options ExecutionOptions) (*Executio
 		cmd.Stdin = bytes.NewReader(body)
 	}
 
-	var stdout bytes.Buffer
-	var stderr bytes.Buffer
-	cmd.Stdout = &stdout
-	cmd.Stderr = &stderr
+	stdout := newCappedBuffer(maxStdoutBytes)
+	stderr := newCappedBuffer(maxStderrBytes)
+	cmd.Stdout = stdout
+	cmd.Stderr = stderr
 
 	runErr := cmd.Run()
 	result := &ExecutionResult{
-		Stdout: strings.TrimSpace(stdout.String()),
-		Stderr: strings.TrimSpace(stderr.String()),
+		Stdout:          strings.TrimSpace(stdout.Text()),
+		Stderr:          strings.TrimSpace(stderr.Text()),
+		StdoutTruncated: stdout.Truncated(),
+		StderrTruncated: stderr.Truncated(),
 	}
 
 	if runErr == nil {
@@ -84,27 +91,25 @@ func ExecuteCLICommand(ctx context.Context, options ExecutionOptions) (*Executio
 		return result, nil
 	}
 
+	commandLabel := describeCommand(options)
 	var exitErr *exec.ExitError
 	if ok := errorAs(runErr, &exitErr); ok {
 		result.ExitCode = exitErr.ExitCode()
-		return result, fmt.Errorf("command %q failed with exit code %d", strings.Join(commandArgs, " "), result.ExitCode)
+		return result, fmt.Errorf("command %q failed with exit code %d", commandLabel, result.ExitCode)
 	}
 
-	return result, fmt.Errorf("command %q failed: %w", strings.Join(commandArgs, " "), runErr)
+	return result, fmt.Errorf("command %q failed: %w", commandLabel, runErr)
 }
 
-// buildCommandEnv builds the subprocess env, stripping inherited auth and
-// color vars from the parent process so the child CLI only uses values from
-// the current request. Prevents stale server-scoped credentials or duplicate
-// keys from leaking when a request omits one of them.
+// buildCommandEnv builds the subprocess env from a strict parent allowlist plus
+// the request-scoped Escape vars needed by the child CLI.
 func buildCommandEnv(options ExecutionOptions) []string {
 	parentEnv := os.Environ()
-	env := make([]string, 0, len(parentEnv)+len(strippedParentEnvPrefixes))
+	env := make([]string, 0, len(forwardedParentEnvPrefixes)+4)
 	for _, entry := range parentEnv {
-		if hasAnyPrefix(entry, strippedParentEnvPrefixes) {
-			continue
+		if hasAnyPrefix(entry, forwardedParentEnvPrefixes) {
+			env = append(env, entry)
 		}
-		env = append(env, entry)
 	}
 	env = append(env, "ESCAPE_COLOR_DISABLED=true")
 
@@ -140,6 +145,69 @@ func marshalBody(body any) ([]byte, error) {
 		return nil, fmt.Errorf("marshal request body: %w", err)
 	}
 	return encoded, nil
+}
+
+func describeCommand(options ExecutionOptions) string {
+	switch {
+	case len(options.DisplayCommand) > 0:
+		return strings.Join(options.DisplayCommand, " ")
+	case len(options.Command) > 0:
+		return options.Command[0]
+	default:
+		return "command"
+	}
+}
+
+type cappedBuffer struct {
+	buf       bytes.Buffer
+	limit     int
+	truncated bool
+}
+
+func newCappedBuffer(limit int) *cappedBuffer {
+	return &cappedBuffer{limit: limit}
+}
+
+func (buffer *cappedBuffer) Write(data []byte) (int, error) {
+	written := len(data)
+	if buffer.limit <= 0 {
+		buffer.truncated = buffer.truncated || written > 0
+		return written, nil
+	}
+
+	remaining := buffer.limit - buffer.buf.Len()
+	if remaining <= 0 {
+		buffer.truncated = buffer.truncated || written > 0
+		return written, nil
+	}
+
+	if written > remaining {
+		buffer.truncated = true
+		data = data[:remaining]
+	}
+
+	_, err := buffer.buf.Write(data)
+	if err != nil {
+		return 0, err
+	}
+
+	return written, nil
+}
+
+func (buffer *cappedBuffer) Bytes() []byte {
+	return buffer.buf.Bytes()
+}
+
+func (buffer *cappedBuffer) Text() string {
+	if !buffer.truncated {
+		return buffer.buf.String()
+	}
+
+	return buffer.buf.String() + truncatedOutputSuffix
+}
+
+func (buffer *cappedBuffer) Truncated() bool {
+	return buffer.truncated
 }
 
 func errorAs(err error, target any) bool {

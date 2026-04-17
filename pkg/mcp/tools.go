@@ -85,10 +85,11 @@ func buildToolHandler(
 		defer cancel()
 
 		result, err := ExecuteCLICommand(execCtx, ExecutionOptions{
-			Command:      append(append([]string{}, spec.Command...), commandArgs...),
-			Body:         body,
-			Auth:         auth,
-			PublicAPIURL: options.PublicAPIURL,
+			Command:        append(append([]string{}, spec.Command...), commandArgs...),
+			DisplayCommand: append([]string{}, spec.Command...),
+			Body:           body,
+			Auth:           auth,
+			PublicAPIURL:   options.PublicAPIURL,
 		})
 		if err != nil {
 			return mcpgo.NewToolResultError(commandFailureText(err, result)), nil
@@ -115,6 +116,9 @@ func buildCommandArgs(spec ToolSpec, rawArgs map[string]any) ([]string, any, err
 		if err != nil {
 			return nil, nil, fmt.Errorf("invalid value for %q: %w", property, err)
 		}
+		if strings.HasPrefix(text, "-") {
+			return nil, nil, fmt.Errorf("positional %q must not start with '-'", property)
+		}
 
 		commandArgs = append(commandArgs, text)
 	}
@@ -124,6 +128,11 @@ func buildCommandArgs(spec ToolSpec, rawArgs map[string]any) ([]string, any, err
 			args, err := stringifyCLIArray(extraArgs)
 			if err != nil {
 				return nil, nil, fmt.Errorf("invalid args value: %w", err)
+			}
+			for _, arg := range args {
+				if arg == "--output" || strings.HasPrefix(arg, "--output=") {
+					return nil, nil, errors.New(`args must not override the injected "--output" flag`)
+				}
 			}
 			commandArgs = append(commandArgs, args...)
 		}

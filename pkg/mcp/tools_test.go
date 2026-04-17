@@ -84,3 +84,33 @@ func TestBuildCommandArgsIgnoresExtraArgsByDefault(t *testing.T) {
 		}
 	}
 }
+
+func TestBuildCommandArgsRejectsDashPrefixedPositionals(t *testing.T) {
+	t.Parallel()
+
+	_, _, err := buildCommandArgs(
+		ToolSpec{PositionalArgs: []string{"scan_id"}},
+		map[string]any{"scan_id": "--watch=true"},
+	)
+	if err == nil {
+		t.Fatal("expected positional guard error")
+	}
+	if err.Error() != `positional "scan_id" must not start with '-'` {
+		t.Fatalf("unexpected error: %v", err)
+	}
+}
+
+func TestBuildCommandArgsRejectsOutputOverrideInExtraArgs(t *testing.T) {
+	t.Parallel()
+
+	_, _, err := buildCommandArgs(
+		ToolSpec{AllowExtraArgs: true},
+		map[string]any{"args": []any{"--output=json"}},
+	)
+	if err == nil {
+		t.Fatal("expected output override error")
+	}
+	if err.Error() != `args must not override the injected "--output" flag` {
+		t.Fatalf("unexpected error: %v", err)
+	}
+}
