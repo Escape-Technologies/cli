@@ -46,8 +46,6 @@ type _StartScanRequest StartScanRequest
 func NewStartScanRequest(profileId string) *StartScanRequest {
 	this := StartScanRequest{}
 	this.ProfileId = profileId
-	var initiator ENUMPROPERTIESINITIATOR = ENUMPROPERTIESINITIATOR_CI
-	this.Initiator = &initiator
 	return &this
 }
 
@@ -56,8 +54,6 @@ func NewStartScanRequest(profileId string) *StartScanRequest {
 // but it doesn't guarantee that properties required by API are set
 func NewStartScanRequestWithDefaults() *StartScanRequest {
 	this := StartScanRequest{}
-	var initiator ENUMPROPERTIESINITIATOR = ENUMPROPERTIESINITIATOR_CI
-	this.Initiator = &initiator
 	return &this
 }
 
