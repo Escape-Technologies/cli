@@ -21,6 +21,9 @@ type Auth struct {
 // InjectAuthContext derives a context that carries the credentials extracted
 // from the incoming HTTP request so downstream tool handlers can access them.
 func InjectAuthContext(ctx context.Context, req *http.Request) context.Context {
+	if req == nil {
+		return ctx
+	}
 	auth := Auth{
 		APIKey:        strings.TrimSpace(req.Header.Get("X-ESCAPE-API-KEY")),
 		Authorization: strings.TrimSpace(req.Header.Get("Authorization")),
