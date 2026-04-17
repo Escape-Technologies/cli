@@ -126,7 +126,7 @@ func parseHealthCheckPort(mainPort int) int {
 		return 0
 	}
 	port, err := strconv.Atoi(raw)
-	if err != nil || port <= 0 || port == mainPort {
+	if err != nil || port <= 0 || port > 65535 || port == mainPort {
 		return 0
 	}
 	return port
