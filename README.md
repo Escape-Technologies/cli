@@ -70,15 +70,6 @@ For Kubernetes, use the provided Helm chart. See [`helm/values.yaml`](./helm/val
 
 Optional inputs: `schema` (path or URL to update the API schema before the scan), `configuration_override` (partial JSON config).
 
-## Release Checklist
-
-Before cutting or validating a CLI release, make sure the GitHub Actions test secrets point to an org that can run the full e2e lifecycle.
-
-- `E2E_API_KEY` must be allowed to create assets, create DAST WebApp profiles, start scans, cancel scans, delete profiles and assets, and create/delete tags.
-- The target org must have DAST enabled. If the org has `DISABLE_DAST_SCANS`, the scan-start steps will fail.
-- Re-run the GitHub workflows manually with `gh run rerun <run-id> --repo Escape-Technologies/cli`.
-- If `scans start` fails with `400 Bad Request` and the `details` mention `FeatureUnavailableError`, `InvalidAuthenticationError`, or insufficient permissions, restore the missing org permission/feature flag instead of changing the CLI.
-
 ## Commands
 
 ```text
