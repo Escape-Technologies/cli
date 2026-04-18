@@ -23,7 +23,7 @@ type GetIssue200ResponseCompliancesInner struct {
 	// The compliance framework name
 	Framework string `json:"framework"`
 	// The compliance item identifier
-	Item string `json:"item"`
+	Item                 string `json:"item"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -97,7 +97,7 @@ func (o *GetIssue200ResponseCompliancesInner) SetItem(v string) {
 }
 
 func (o GetIssue200ResponseCompliancesInner) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -130,10 +130,10 @@ func (o *GetIssue200ResponseCompliancesInner) UnmarshalJSON(data []byte) (err er
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -195,5 +195,3 @@ func (v *NullableGetIssue200ResponseCompliancesInner) UnmarshalJSON(src []byte) 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

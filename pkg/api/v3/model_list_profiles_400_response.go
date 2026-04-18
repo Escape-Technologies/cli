@@ -15,10 +15,9 @@ import (
 	"fmt"
 )
 
-
 // ListProfiles400Response struct for ListProfiles400Response
 type ListProfiles400Response struct {
-	ListProfiles400ResponseAnyOf *ListProfiles400ResponseAnyOf
+	ListProfiles400ResponseAnyOf  *ListProfiles400ResponseAnyOf
 	ListProfiles400ResponseAnyOf1 *ListProfiles400ResponseAnyOf1
 }
 
@@ -26,7 +25,7 @@ type ListProfiles400Response struct {
 func (dst *ListProfiles400Response) UnmarshalJSON(data []byte) error {
 	var err error
 	// try to unmarshal JSON data into ListProfiles400ResponseAnyOf
-	err = json.Unmarshal(data, &dst.ListProfiles400ResponseAnyOf);
+	err = json.Unmarshal(data, &dst.ListProfiles400ResponseAnyOf)
 	if err == nil {
 		jsonListProfiles400ResponseAnyOf, _ := json.Marshal(dst.ListProfiles400ResponseAnyOf)
 		if string(jsonListProfiles400ResponseAnyOf) == "{}" { // empty struct
@@ -39,7 +38,7 @@ func (dst *ListProfiles400Response) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal JSON data into ListProfiles400ResponseAnyOf1
-	err = json.Unmarshal(data, &dst.ListProfiles400ResponseAnyOf1);
+	err = json.Unmarshal(data, &dst.ListProfiles400ResponseAnyOf1)
 	if err == nil {
 		jsonListProfiles400ResponseAnyOf1, _ := json.Marshal(dst.ListProfiles400ResponseAnyOf1)
 		if string(jsonListProfiles400ResponseAnyOf1) == "{}" { // empty struct
@@ -66,7 +65,6 @@ func (src ListProfiles400Response) MarshalJSON() ([]byte, error) {
 
 	return nil, nil // no data in anyOf schemas
 }
-
 
 type NullableListProfiles400Response struct {
 	value *ListProfiles400Response
@@ -103,5 +101,3 @@ func (v *NullableListProfiles400Response) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

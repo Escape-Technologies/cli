@@ -15,14 +15,13 @@ import (
 	"fmt"
 )
 
-
 // CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample struct for CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample
 type CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample struct {
-	ArrayOfAny *[]interface{}
-	Bool *bool
-	Float32 *float32
+	ArrayOfAny        *[]interface{}
+	Bool              *bool
+	Float32           *float32
 	MapmapOfStringAny *map[string]interface{}
-	String *string
+	String            *string
 }
 
 // Unmarshal JSON data into any of the pointers in the struct
@@ -34,7 +33,7 @@ func (dst *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamp
 	}
 
 	// try to unmarshal JSON data into ArrayOfAny
-	err = json.Unmarshal(data, &dst.ArrayOfAny);
+	err = json.Unmarshal(data, &dst.ArrayOfAny)
 	if err == nil {
 		jsonArrayOfAny, _ := json.Marshal(dst.ArrayOfAny)
 		if string(jsonArrayOfAny) == "{}" { // empty struct
@@ -47,7 +46,7 @@ func (dst *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamp
 	}
 
 	// try to unmarshal JSON data into Bool
-	err = json.Unmarshal(data, &dst.Bool);
+	err = json.Unmarshal(data, &dst.Bool)
 	if err == nil {
 		jsonBool, _ := json.Marshal(dst.Bool)
 		if string(jsonBool) == "{}" { // empty struct
@@ -60,7 +59,7 @@ func (dst *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamp
 	}
 
 	// try to unmarshal JSON data into Float32
-	err = json.Unmarshal(data, &dst.Float32);
+	err = json.Unmarshal(data, &dst.Float32)
 	if err == nil {
 		jsonFloat32, _ := json.Marshal(dst.Float32)
 		if string(jsonFloat32) == "{}" { // empty struct
@@ -73,7 +72,7 @@ func (dst *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamp
 	}
 
 	// try to unmarshal JSON data into MapmapOfStringAny
-	err = json.Unmarshal(data, &dst.MapmapOfStringAny);
+	err = json.Unmarshal(data, &dst.MapmapOfStringAny)
 	if err == nil {
 		jsonMapmapOfStringAny, _ := json.Marshal(dst.MapmapOfStringAny)
 		if string(jsonMapmapOfStringAny) == "{}" { // empty struct
@@ -86,7 +85,7 @@ func (dst *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamp
 	}
 
 	// try to unmarshal JSON data into String
-	err = json.Unmarshal(data, &dst.String);
+	err = json.Unmarshal(data, &dst.String)
 	if err == nil {
 		jsonString, _ := json.Marshal(dst.String)
 		if string(jsonString) == "{}" { // empty struct
@@ -126,7 +125,6 @@ func (src CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExampl
 	return nil, nil // no data in anyOf schemas
 }
 
-
 type NullableCreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample struct {
 	value *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample
 	isSet bool
@@ -162,5 +160,3 @@ func (v *NullableCreateAssetDNSRequestPathsInsightsInnerParametersParametersInne
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
