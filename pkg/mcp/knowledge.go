@@ -116,20 +116,27 @@ func buildKnowledgeHandler(
 			return matches
 		}
 
+		// Selector context: query + docs titles ONLY. Snippets contaminate the
+		// token bag with vocabulary from the docs body ("create", "deploy",
+		// "install", ...), which drags in irrelevant routes like /asm/create/
+		// for a "what is a private location" question.
+		platformContextFrom := func(matches []KnowledgeSearchResult) string {
+			ctx := query
+			for _, match := range matches {
+				ctx += " " + match.Title
+			}
+			return ctx
+		}
+
 		if intent.ExplicitLinkRequest && intent.Target != LinkTargetNone {
 			var docsMatches []KnowledgeSearchResult
 			if intent.Target == LinkTargetDocs || intent.Target == LinkTargetBoth {
 				docsMatches = loadDocs()
 			}
 
-			platformContext := query
-			for _, match := range docsMatches {
-				platformContext += " " + match.Title + " " + match.Snippet
-			}
-
 			var platformLinks []PlatformLink
 			if intent.Target == LinkTargetPlatform || intent.Target == LinkTargetBoth {
-				platformLinks = selector.Select(platformContext, 3)
+				platformLinks = selector.Select(platformContextFrom(docsMatches), 3)
 			}
 
 			return formatDirectedLinkResult(
@@ -144,11 +151,7 @@ func buildKnowledgeHandler(
 			), nil
 		}
 
-		platformContext := query
-		for _, match := range matches {
-			platformContext += " " + match.Title + " " + match.Snippet
-		}
-		platformLinks := selector.Select(platformContext, 3)
+		platformLinks := selector.Select(platformContextFrom(matches), 3)
 		return formatGeneralResult(question, platformLinks, matches), nil
 	}
 }
@@ -162,7 +165,7 @@ func formatDirectedLinkResult(
 	docsQuery string,
 	platformBase string,
 ) *mcpgo.CallToolResult {
-	lines := []string{fmt.Sprintf("Question: %s", question)}
+	lines := prependPrimaryPlatformCTA([]string{fmt.Sprintf("Question: %s", question)}, platformLinks)
 
 	if intent.Target == LinkTargetDocs || intent.Target == LinkTargetBoth {
 		appendDocumentationLinks(&lines, docsMatches, docsSite, docsQuery)
@@ -175,6 +178,12 @@ func formatDirectedLinkResult(
 		"question":      question,
 		"docsMatches":   docsMatches,
 		"platformLinks": platformLinks,
+		"primaryPlatformLink": func() any {
+			if len(platformLinks) == 0 {
+				return nil
+			}
+			return platformLinks[0]
+		}(),
 	}
 	return mcpgo.NewToolResultStructured(payload, strings.Join(lines, "\n"))
 }
@@ -212,11 +221,8 @@ func formatGeneralResult(
 	platformLinks []PlatformLink,
 	matches []KnowledgeSearchResult,
 ) *mcpgo.CallToolResult {
-	lines := []string{
-		fmt.Sprintf("Question: %s", question),
-		"",
-		fmt.Sprintf("Top documentation matches (%d):", len(matches)),
-	}
+	lines := prependPrimaryPlatformCTA([]string{fmt.Sprintf("Question: %s", question)}, platformLinks)
+	lines = append(lines, "", fmt.Sprintf("Top documentation matches (%d):", len(matches)))
 	for i, match := range matches {
 		lines = append(lines, fmt.Sprintf("%d. [%s](%s)", i+1, match.Title, match.URL))
 		lines = append(lines, "   "+match.Snippet)
@@ -233,8 +239,29 @@ func formatGeneralResult(
 		"question":      question,
 		"docsMatches":   matches,
 		"platformLinks": platformLinks,
+		"primaryPlatformLink": func() any {
+			if len(platformLinks) == 0 {
+				return nil
+			}
+			return platformLinks[0]
+		}(),
 	}
 	return mcpgo.NewToolResultStructured(payload, strings.Join(lines, "\n"))
+}
+
+// prependPrimaryPlatformCTA inserts an explicit "Open in Escape platform"
+// line immediately after the Question header so the LLM cannot miss the
+// primary actionable URL when it summarises the tool result. The Copilot
+// system prompt tells the LLM to render URLs as clickable markdown; giving
+// the link its own top-level heading dramatically raises the odds that it
+// makes it into the final answer.
+func prependPrimaryPlatformCTA(lines []string, platformLinks []PlatformLink) []string {
+	if len(platformLinks) == 0 {
+		return lines
+	}
+	primary := platformLinks[0]
+	cta := fmt.Sprintf("Open in Escape platform: [%s](%s)", primary.Label, primary.URL)
+	return append(lines, "", cta)
 }
 
 func appendDocumentationLinks(lines *[]string, matches []KnowledgeSearchResult, docsSite, docsQuery string) {
