@@ -96,10 +96,27 @@ func buildToolHandler(
 		}
 
 		if result.Payload != nil {
-			return mcpgo.NewToolResultStructured(result.Payload, result.Stdout), nil
+			return mcpgo.NewToolResultStructured(wrapStructuredPayload(result.Payload), result.Stdout), nil
 		}
 
 		return mcpgo.NewToolResultText(result.Stdout), nil
+	}
+}
+
+// wrapStructuredPayload guarantees the value handed to the MCP client as
+// structuredContent is a JSON object. The MCP TypeScript SDK validates
+// structuredContent with a Zod object schema, so returning a top-level array
+// (e.g. from `* list` commands) trips clients with "Expected object, received
+// array". Wrap arrays in {items: [...]} and primitives in {value: ...} while
+// passing real objects through untouched.
+func wrapStructuredPayload(payload any) any {
+	switch typed := payload.(type) {
+	case map[string]any:
+		return typed
+	case []any:
+		return map[string]any{"items": typed}
+	default:
+		return map[string]any{"value": typed}
 	}
 }
 
