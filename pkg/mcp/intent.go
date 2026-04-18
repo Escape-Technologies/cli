@@ -44,7 +44,7 @@ const (
 	// the classifier digest. Counted in runes so non-ASCII descriptions are
 	// not split mid-character. Tuned to keep the total digest under typical
 	// LLM context budgets when shipping ~50 tools.
-	maxToolDescriptionRunes = 160
+	maxToolDescriptionRunes       = 160
 	toolDescriptionEllipsisCutoff = 157
 )
 
