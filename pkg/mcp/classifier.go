@@ -25,6 +25,19 @@ const (
 	defaultClassifierTimeoutMS = 2000
 	defaultClassifierTopK      = 15
 
+	// httpClientGracePeriod is added to the request timeout so the underlying
+	// http.Client doesn't fire before the per-request context deadline does
+	// (the context-driven cancellation produces nicer wrapped errors).
+	httpClientGracePeriod = 500 * time.Millisecond
+
+	// classifierErrorBodyPeekBytes bounds how much of an HTTP error body we
+	// surface on a non-2xx classifier response.
+	classifierErrorBodyPeekBytes = 512
+
+	// classifierUnparseableSnippetChars limits how much of an unparseable
+	// classifier reply we echo back in the error string.
+	classifierUnparseableSnippetChars = 200
+
 	classifierSystemPrompt = `You rank CLI tools by relevance to a user's chat message and recent history.
 Return ONLY a JSON object of the form {"tools":["name1","name2",...]}. Names must be picked from the provided catalog. At most K items, sorted by relevance (most relevant first). No commentary.`
 )
@@ -98,7 +111,7 @@ func NewClassifierFromEnv() (Classifier, error) {
 		timeout:  time.Duration(timeout) * time.Millisecond,
 		topK:     topK,
 		http: &http.Client{
-			Timeout: time.Duration(timeout)*time.Millisecond + 500*time.Millisecond,
+			Timeout: time.Duration(timeout)*time.Millisecond + httpClientGracePeriod,
 		},
 	}, nil
 }
@@ -193,10 +206,10 @@ func (c *openAIClassifier) Rank(
 	if err != nil {
 		return nil, fmt.Errorf("classifier request: %w", err)
 	}
-	defer resp.Body.Close()
+	defer func() { _ = resp.Body.Close() }()
 
 	if resp.StatusCode != http.StatusOK {
-		body, _ := io.ReadAll(io.LimitReader(resp.Body, 512))
+		body, _ := io.ReadAll(io.LimitReader(resp.Body, classifierErrorBodyPeekBytes))
 		return nil, fmt.Errorf("classifier http %d: %s", resp.StatusCode, strings.TrimSpace(string(body)))
 	}
 
@@ -209,7 +222,17 @@ func (c *openAIClassifier) Rank(
 	}
 
 	content := strings.TrimSpace(parsed.Choices[0].Message.Content)
-	return parseClassifierResult(content)
+	tools, err := parseClassifierResult(content)
+	if err != nil {
+		return nil, err
+	}
+	// The system prompt asks for at most K items, but models occasionally
+	// overshoot. Hard-clamp here so intent mode can't accidentally re-expand
+	// more schemas than the size budget allows.
+	if c.topK > 0 && len(tools) > c.topK {
+		tools = tools[:c.topK]
+	}
+	return tools, nil
 }
 
 // parseClassifierResult pulls the tool-name list out of the model's reply.
@@ -220,19 +243,23 @@ func parseClassifierResult(content string) ([]string, error) {
 		return nil, errors.New("empty classifier response")
 	}
 
+	// Treat both `{"tools":[]}` and `[]` as valid "no relevant tool" outcomes
+	// rather than parser errors — these are legitimate classifier outputs.
+	// The strict shape `{"tools":[...]}` wins over the bare-array fallback so
+	// a model that drifts back to the documented format always parses cleanly.
 	var objectForm struct {
 		Tools []string `json:"tools"`
 	}
-	if err := json.Unmarshal([]byte(content), &objectForm); err == nil && len(objectForm.Tools) > 0 {
+	if err := json.Unmarshal([]byte(content), &objectForm); err == nil && objectForm.Tools != nil {
 		return trimAndDedupe(objectForm.Tools), nil
 	}
 
 	var arrayForm []string
-	if err := json.Unmarshal([]byte(content), &arrayForm); err == nil && len(arrayForm) > 0 {
+	if err := json.Unmarshal([]byte(content), &arrayForm); err == nil && arrayForm != nil {
 		return trimAndDedupe(arrayForm), nil
 	}
 
-	return nil, fmt.Errorf("unparseable classifier response: %s", truncate(content, 200))
+	return nil, fmt.Errorf("unparseable classifier response: %s", truncate(content, classifierUnparseableSnippetChars))
 }
 
 func trimAndDedupe(values []string) []string {
@@ -252,9 +279,9 @@ func trimAndDedupe(values []string) []string {
 	return result
 }
 
-func truncate(value string, max int) string {
-	if len(value) <= max {
+func truncate(value string, maxLen int) string {
+	if len(value) <= maxLen {
 		return value
 	}
-	return value[:max] + "..."
+	return value[:maxLen] + "..."
 }

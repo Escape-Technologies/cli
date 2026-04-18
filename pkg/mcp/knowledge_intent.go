@@ -7,6 +7,9 @@ import "strings"
 // services/mcp-server/src/lanes/knowledge/link-intent.ts.
 type LinkTarget string
 
+// LinkTarget* enumerate the surfaces the link-intent detector can route the
+// caller to. Mirrors the TS LinkTarget enum so behavior matches across both
+// MCP servers.
 const (
 	LinkTargetDocs     LinkTarget = "docs"
 	LinkTargetPlatform LinkTarget = "platform"

@@ -14,16 +14,29 @@ import (
 )
 
 const (
-	defaultDocsSiteURL       = "https://docs.escape.tech/"
+	defaultDocsSiteURL        = "https://docs.escape.tech/"
 	defaultDocsSearchIndexURL = "https://docs.escape.tech/search/search_index.json"
-	defaultDocsIndexTTL      = 5 * time.Minute
-	maxDocsSnippetChars      = 220
-	maxDocsResultsPerQuery   = 8
+	defaultDocsIndexTTL       = 5 * time.Minute
+	maxDocsSnippetChars       = 220
+	maxDocsResultsPerQuery    = 8
+
+	// docsHTTPTimeout caps both the index fetch and any single search call.
+	// Generous because the docs index is ~MB-sized JSON pulled cold once.
+	docsHTTPTimeout = 15 * time.Second
+
+	// docsErrorBodyPeekBytes bounds how much of an HTTP error body we surface
+	// in the wrapped error to avoid leaking large/sensitive payloads.
+	docsErrorBodyPeekBytes = 256
+
+	// termCoverageWeight is the multiplier applied to the
+	// (matched / total query terms) ratio. Tuned alongside the per-field
+	// weights below to stay parity with the TS reference implementation.
+	termCoverageWeight = 3
 )
 
-// docsSearchIndex is the Go port of
+// DocsSearchIndex is the Go port of
 // services/mcp-server/src/lanes/knowledge/search-index.ts.
-type docsSearchIndex struct {
+type DocsSearchIndex struct {
 	docsSiteURL    string
 	searchIndexURL string
 	ttl            time.Duration
@@ -62,15 +75,18 @@ type indexedDoc struct {
 
 // NewDocsSearchIndex builds a docs search index with sensible defaults. Any
 // option can be overridden by passing DocsSearchIndexOptions.
-func NewDocsSearchIndex(options DocsSearchIndexOptions) *docsSearchIndex {
-	index := &docsSearchIndex{
-		docsSiteURL:    strings.TrimRight(firstNonEmpty(options.DocsSiteURL, defaultDocsSiteURL), ""),
+func NewDocsSearchIndex(options DocsSearchIndexOptions) *DocsSearchIndex {
+	index := &DocsSearchIndex{
+		// Trailing slashes in the docs site URL break url.ResolveReference
+		// because the joined location ends up at the docs site root rather
+		// than the relative path. Strip them defensively.
+		docsSiteURL:    strings.TrimRight(firstNonEmpty(options.DocsSiteURL, defaultDocsSiteURL), "/"),
 		searchIndexURL: firstNonEmpty(options.SearchIndexURL, defaultDocsSearchIndexURL),
 		ttl:            firstNonZero(options.TTL, defaultDocsIndexTTL),
 		httpClient:     options.HTTPClient,
 	}
 	if index.httpClient == nil {
-		index.httpClient = &http.Client{Timeout: 15 * time.Second}
+		index.httpClient = &http.Client{Timeout: docsHTTPTimeout}
 	}
 	return index
 }
@@ -84,7 +100,7 @@ type DocsSearchIndexOptions struct {
 }
 
 // Search returns the top N documentation matches for the given query.
-func (d *docsSearchIndex) Search(ctx context.Context, queryInput string, limit int) ([]KnowledgeSearchResult, error) {
+func (d *DocsSearchIndex) Search(ctx context.Context, queryInput string, limit int) ([]KnowledgeSearchResult, error) {
 	if limit < 1 {
 		limit = 1
 	}
@@ -212,14 +228,14 @@ func scoreDoc(doc indexedDoc, query docsQuerySpec) float64 {
 			did = true
 		}
 		if strings.Contains(doc.normalizedText, term) {
-			score += 1
+			score++
 			did = true
 		}
 		if did {
 			matched++
 		}
 	}
-	score += (float64(matched) / float64(len(query.terms))) * 3
+	score += (float64(matched) / float64(len(query.terms))) * termCoverageWeight
 
 	if strings.Contains(doc.location, "#") {
 		score -= 0.35
@@ -234,7 +250,7 @@ func snippetFor(doc indexedDoc) string {
 	return truncateRunes(doc.title, maxDocsSnippetChars)
 }
 
-func (d *docsSearchIndex) loadDocs(ctx context.Context) ([]indexedDoc, error) {
+func (d *DocsSearchIndex) loadDocs(ctx context.Context) ([]indexedDoc, error) {
 	d.mu.Lock()
 	if len(d.cache) > 0 && time.Now().Before(d.cacheUntil) {
 		defer d.mu.Unlock()
@@ -252,7 +268,7 @@ func (d *docsSearchIndex) loadDocs(ctx context.Context) ([]indexedDoc, error) {
 			}
 			return d.inFlightRes, nil
 		case <-ctx.Done():
-			return nil, ctx.Err()
+			return nil, fmt.Errorf("docs index wait: %w", ctx.Err())
 		}
 	}
 
@@ -274,7 +290,7 @@ func (d *docsSearchIndex) loadDocs(ctx context.Context) ([]indexedDoc, error) {
 	return docs, err
 }
 
-func (d *docsSearchIndex) fetchDocs(ctx context.Context) ([]indexedDoc, error) {
+func (d *DocsSearchIndex) fetchDocs(ctx context.Context) ([]indexedDoc, error) {
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, d.searchIndexURL, nil)
 	if err != nil {
 		return nil, fmt.Errorf("new docs index request: %w", err)
@@ -285,10 +301,10 @@ func (d *docsSearchIndex) fetchDocs(ctx context.Context) ([]indexedDoc, error) {
 	if err != nil {
 		return nil, fmt.Errorf("docs index fetch: %w", err)
 	}
-	defer resp.Body.Close()
+	defer func() { _ = resp.Body.Close() }()
 
-	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
-		body, _ := io.ReadAll(io.LimitReader(resp.Body, 256))
+	if resp.StatusCode < http.StatusOK || resp.StatusCode >= http.StatusMultipleChoices {
+		body, _ := io.ReadAll(io.LimitReader(resp.Body, docsErrorBodyPeekBytes))
 		return nil, fmt.Errorf("docs index http %d: %s", resp.StatusCode, strings.TrimSpace(string(body)))
 	}
 

@@ -39,7 +39,11 @@ var mcpServeCmd = &cobra.Command{
 		if mode == climcp.IntentModeOn {
 			classifier, err = climcp.NewClassifierFromEnv()
 			if err != nil {
-				return fmt.Errorf("failed to configure MCP classifier: %w", err)
+				// Server documents IntentModeOn + nil Classifier as a valid
+				// fallback to compact-only behavior. Don't trade a recoverable
+				// config issue for downtime — log and continue.
+				_, _ = fmt.Fprintf(cmd.ErrOrStderr(), "warning: MCP classifier disabled: %v\n", err)
+				classifier = nil
 			}
 		}
 

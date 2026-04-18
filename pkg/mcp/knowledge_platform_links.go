@@ -3,6 +3,7 @@ package mcp
 import (
 	_ "embed"
 	"encoding/json"
+	"fmt"
 	"net/url"
 	"sort"
 	"strings"
@@ -11,6 +12,20 @@ import (
 
 //go:embed platform_routes.json
 var embeddedPlatformRoutesJSON []byte
+
+// Platform link selector tuning constants. These mirror the weights used by
+// the TS reference implementation and are extracted to constants so the
+// linter (mnd) can verify they are intentional rather than ad-hoc magic.
+const (
+	maxPlatformLinksPerSelect = 5
+	minPlatformLinkScore      = 1.5
+
+	platformTokenMatchWeight = 2
+	platformQuerySubstringBonus = 2
+
+	platformDeepRouteThreshold = 2
+	platformDeepRoutePenalty   = 0.15
+)
 
 // PlatformRoute is a single entry of the curated platform-URL catalog.
 // Ported from services/mcp-server/src/generated/platform-routes.generated.ts.
@@ -51,7 +66,7 @@ func NewPlatformLinkSelector(baseURL string) (*PlatformLinkSelector, error) {
 func NewPlatformLinkSelectorWithCatalog(baseURL string, catalog []PlatformRoute) (*PlatformLinkSelector, error) {
 	if len(catalog) == 0 {
 		if err := json.Unmarshal(embeddedPlatformRoutesJSON, &catalog); err != nil {
-			return nil, err
+			return nil, fmt.Errorf("decode embedded platform routes: %w", err)
 		}
 	}
 	return &PlatformLinkSelector{
@@ -70,8 +85,8 @@ func (s *PlatformLinkSelector) Select(queryContext string, limit int) []Platform
 	if limit < 1 {
 		limit = 1
 	}
-	if limit > 5 {
-		limit = 5
+	if limit > maxPlatformLinksPerSelect {
+		limit = maxPlatformLinksPerSelect
 	}
 	normalizedQuery := normalizeForSearch(queryContext)
 
@@ -82,7 +97,7 @@ func (s *PlatformLinkSelector) Select(queryContext string, limit int) []Platform
 	scored := make([]scoredRoute, 0, len(s.catalog))
 	for _, route := range s.catalog {
 		score := scoreRoute(route, tokens, normalizedQuery)
-		if score < 1.5 {
+		if score < minPlatformLinkScore {
 			continue
 		}
 		scored = append(scored, scoredRoute{route: route, score: score})
@@ -164,12 +179,12 @@ func scoreRoute(route PlatformRoute, queryTokens []string, normalizedQuery strin
 		return 0
 	}
 
-	score := float64(matched) * 2
+	score := float64(matched) * platformTokenMatchWeight
 	score += float64(matched) / float64(len(queryTokens))
 
 	normalizedRoutePath := normalizeForSearch(route.Path)
 	if normalizedQuery != "" && strings.Contains(normalizedRoutePath, normalizedQuery) {
-		score += 2
+		score += platformQuerySubstringBonus
 	}
 
 	depth := 0
@@ -178,8 +193,8 @@ func scoreRoute(route PlatformRoute, queryTokens []string, normalizedQuery strin
 			depth++
 		}
 	}
-	if depth > 2 {
-		score -= float64(depth-2) * 0.15
+	if depth > platformDeepRouteThreshold {
+		score -= float64(depth-platformDeepRouteThreshold) * platformDeepRoutePenalty
 	}
 	return score
 }

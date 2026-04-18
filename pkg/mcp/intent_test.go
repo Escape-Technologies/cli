@@ -90,7 +90,7 @@ func (m *mockClassifier) TopK() int { return 15 }
 func callToolsList(t *testing.T, handler http.Handler, header string) *httptest.ResponseRecorder {
 	t.Helper()
 	body := []byte(`{"jsonrpc":"2.0","id":1,"method":"tools/list"}`)
-	req := httptest.NewRequest(http.MethodPost, "/mcp", bytes.NewReader(body))
+	req := httptest.NewRequestWithContext(context.Background(), http.MethodPost, "/mcp", bytes.NewReader(body))
 	req.Header.Set("Content-Type", "application/json")
 	if header != "" {
 		req.Header.Set(chatContextHeader, header)
@@ -265,7 +265,7 @@ func TestIntentMiddleware_PassesThroughNonToolsList(t *testing.T) {
 	})
 
 	body := []byte(`{"jsonrpc":"2.0","id":1,"method":"initialize"}`)
-	req := httptest.NewRequest(http.MethodPost, "/mcp", bytes.NewReader(body))
+	req := httptest.NewRequestWithContext(context.Background(), http.MethodPost, "/mcp", bytes.NewReader(body))
 	resp := httptest.NewRecorder()
 	handler.ServeHTTP(resp, req)
 
