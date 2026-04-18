@@ -3,6 +3,7 @@ package mcp
 import (
 	"bytes"
 	"context"
+	"encoding/base64"
 	"encoding/json"
 	"errors"
 	"io"
@@ -292,6 +293,27 @@ func TestParseChatContext_RejectsInvalid(t *testing.T) {
 		if ok != tc.ok {
 			t.Errorf("parseChatContext(%q) = %v, want %v", tc.in, ok, tc.ok)
 		}
+	}
+}
+
+func TestParseChatContext_AcceptsBase64AndUnicode(t *testing.T) {
+	t.Parallel()
+
+	// Emoji and CJK characters in the user message — exactly the shape that
+	// breaks raw-JSON HTTP headers (code points > 0xFF are invalid in
+	// ByteString). The api base64-encodes before sending.
+	payload, err := json.Marshal(ChatContext{Current: "show me findings 🔍 日本語"})
+	if err != nil {
+		t.Fatalf("marshal: %v", err)
+	}
+	encoded := base64.StdEncoding.EncodeToString(payload)
+
+	parsed, ok := parseChatContext(encoded)
+	if !ok {
+		t.Fatalf("expected base64 payload to parse")
+	}
+	if parsed.Current != "show me findings 🔍 日本語" {
+		t.Fatalf("unexpected current: %q", parsed.Current)
 	}
 }
 
