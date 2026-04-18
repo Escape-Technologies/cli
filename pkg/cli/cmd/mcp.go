@@ -154,7 +154,11 @@ func buildMCPTool(
 	// is not set alongside RawInputSchema — the library refuses to marshal a tool
 	// that has both set (errToolSchemaConflict).
 	tool := mcpgo.NewToolWithRawSchema(buildMCPToolName(capability.Path), capability.Short, inputSchema)
-	if capability.OutputSchema != nil {
+	// MCP's tool outputSchema must have top-level type "object" (the client
+	// validates this via Zod). Several CLI commands (`* list`) return arrays,
+	// so skip declaring the schema in those cases — the payload is still
+	// returned via structuredContent/text, just without an advertised shape.
+	if capability.OutputSchema != nil && capability.OutputSchema.Type == "object" {
 		outputSchema, err := json.Marshal(capability.OutputSchema)
 		if err != nil {
 			return mcpgo.Tool{}, nil, nil, "", fmt.Errorf("failed to marshal output schema for %q: %w", capability.Path, err)
