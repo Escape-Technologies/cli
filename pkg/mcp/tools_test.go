@@ -1,6 +1,9 @@
 package mcp
 
-import "testing"
+import (
+	"reflect"
+	"testing"
+)
 
 func TestBuildCommandArgs(t *testing.T) {
 	t.Parallel()
@@ -97,6 +100,42 @@ func TestBuildCommandArgsRejectsDashPrefixedPositionals(t *testing.T) {
 	}
 	if err.Error() != `positional "scan_id" must not start with '-'` {
 		t.Fatalf("unexpected error: %v", err)
+	}
+}
+
+func TestWrapStructuredPayload(t *testing.T) {
+	t.Parallel()
+
+	tests := []struct {
+		name     string
+		input    any
+		expected any
+	}{
+		{
+			name:     "object passes through",
+			input:    map[string]any{"id": "abc"},
+			expected: map[string]any{"id": "abc"},
+		},
+		{
+			name:     "array wraps under items",
+			input:    []any{map[string]any{"id": "abc"}, map[string]any{"id": "def"}},
+			expected: map[string]any{"items": []any{map[string]any{"id": "abc"}, map[string]any{"id": "def"}}},
+		},
+		{
+			name:     "primitive wraps under value",
+			input:    "hello",
+			expected: map[string]any{"value": "hello"},
+		},
+	}
+
+	for _, testCase := range tests {
+		t.Run(testCase.name, func(t *testing.T) {
+			t.Parallel()
+			actual := wrapStructuredPayload(testCase.input)
+			if !reflect.DeepEqual(actual, testCase.expected) {
+				t.Fatalf("expected %#v, got %#v", testCase.expected, actual)
+			}
+		})
 	}
 }
 
