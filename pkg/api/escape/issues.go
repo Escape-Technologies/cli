@@ -54,7 +54,7 @@ func GetIssue(ctx context.Context, issueID string) (*v3.GetIssue200Response, err
 	req := client.IssuesAPI.GetIssue(ctx, issueID)
 	data, _, err := req.Execute()
 	if err != nil {
-		return nil, fmt.Errorf("api error: %w", err)
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return data, nil
 }
@@ -81,10 +81,10 @@ func ListIssues(ctx context.Context, next string, filters *ListIssuesFilters, so
 
 	if filters != nil {
 		if len(filters.Status) > 0 {
-			req = req.Status(strings.Join(filters.Status, ","))
+			req = req.Status(filters.Status)
 		}
 		if len(filters.Severities) > 0 {
-			req = req.Severities(strings.Join(filters.Severities, ","))
+			req = req.Severities(filters.Severities)
 		}
 		if len(filters.ProfileIDs) > 0 {
 			req = req.ProfileIds(strings.Join(filters.ProfileIDs, ","))
@@ -114,10 +114,10 @@ func ListIssues(ctx context.Context, next string, filters *ListIssuesFilters, so
 			req = req.Risks(filters.Risks)
 		}
 		if len(filters.AssetClasses) > 0 {
-			req = req.AssetClasses(strings.Join(filters.AssetClasses, ","))
+			req = req.AssetClasses(filters.AssetClasses)
 		}
 		if len(filters.ScannerKinds) > 0 {
-			req = req.ScannerKinds(strings.Join(filters.ScannerKinds, ","))
+			req = req.ScannerKinds(filters.ScannerKinds)
 		}
 		if len(filters.Names) > 0 {
 			req = req.Names(v3.ListIssuesNamesParameter{ArrayOfString: &filters.Names})
@@ -126,7 +126,7 @@ func ListIssues(ctx context.Context, next string, filters *ListIssuesFilters, so
 
 	data, _, err := req.Execute()
 	if err != nil {
-		return nil, nil, fmt.Errorf("api error: %w", err)
+		return nil, nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return data.Data, data.NextCursor, nil
 }
@@ -150,7 +150,7 @@ func UpdateIssue(ctx context.Context, issueID string, status v3.ENUMPROPERTIESDA
 
 	_, httpRes, err := req.Execute()
 	if err != nil && httpRes.StatusCode != http.StatusOK {
-		return false, fmt.Errorf("api error: %w", err)
+		return false, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 
 	return true, nil
@@ -166,7 +166,7 @@ func CommentIssue(ctx context.Context, issueID string, comment string) error {
 		Comment: comment,
 	}).Execute()
 	if err != nil {
-		return fmt.Errorf("api error: %w", err)
+		return fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return nil
 }
@@ -181,7 +181,7 @@ func ListIssueActivities(ctx context.Context, issueID string) ([]v3.ActivitySumm
 	req := client.IssuesAPI.ListIssueActivities(ctx, issueID)
 	data, _, err := req.Execute()
 	if err != nil {
-		return nil, fmt.Errorf("api error: %w", err)
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return data, nil
 }
@@ -212,7 +212,7 @@ func GetIssueFunnel(ctx context.Context, projectIDs []string) ([]IssueFunnelStep
 	}
 	data, _, err := req.Execute()
 	if err != nil {
-		return nil, fmt.Errorf("api error: %w", err)
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 
 	return decodeResponseSlice[IssueFunnelStep](data)
@@ -236,7 +236,7 @@ func GetIssueTrends(ctx context.Context, after, before, interval string, applica
 	}
 	data, _, err := req.Execute()
 	if err != nil {
-		return nil, fmt.Errorf("api error: %w", err)
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 
 	return decodeResponseSlice[IssueTrendPoint](data)
@@ -254,7 +254,7 @@ func BulkUpdateIssues(ctx context.Context, status v3.ENUMPROPERTIESDATAITEMSPROP
 	}
 	data, _, err := client.IssuesAPI.BulkUpdateIssues(ctx).BulkUpdateIssuesRequest(body).Execute()
 	if err != nil {
-		return nil, fmt.Errorf("api error: %w", err)
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return data, nil
 }
@@ -268,7 +268,7 @@ func NotifyIssueOwners(ctx context.Context, issueID, scanID string) (bool, error
 	body := v3.NotifyIssueOwnersRequest{ScanId: scanID}
 	data, _, err := client.IssuesAPI.NotifyIssueOwners(ctx, issueID).NotifyIssueOwnersRequest(body).Execute()
 	if err != nil {
-		return false, fmt.Errorf("api error: %w", err)
+		return false, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return data.GetNotified(), nil
 }

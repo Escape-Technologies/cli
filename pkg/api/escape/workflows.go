@@ -46,7 +46,7 @@ func ListWorkflows(ctx context.Context, next string, filters *ListWorkflowsFilte
 	}
 	data, _, err := req.Execute()
 	if err != nil {
-		return nil, nil, fmt.Errorf("api error: %w", err)
+		return nil, nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return data.Data, data.NextCursor, nil
 }
@@ -59,7 +59,7 @@ func GetWorkflow(ctx context.Context, workflowID string) (*v3.CreateWorkflow200R
 	}
 	data, _, err := client.WorkflowsAPI.GetWorkflow(ctx, workflowID).Execute()
 	if err != nil {
-		return nil, fmt.Errorf("api error: %w", err)
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return data, nil
 }
@@ -76,7 +76,7 @@ func CreateWorkflow(ctx context.Context, body []byte) (*v3.CreateWorkflow200Resp
 	}
 	data, _, err := client.WorkflowsAPI.CreateWorkflow(ctx).CreateWorkflowRequest(req).Execute()
 	if err != nil {
-		return nil, fmt.Errorf("api error: %w", err)
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return data, nil
 }
@@ -93,7 +93,7 @@ func UpdateWorkflow(ctx context.Context, workflowID string, body []byte) (*v3.Cr
 	}
 	data, _, err := client.WorkflowsAPI.UpdateWorkflow(ctx, workflowID).UpdateWorkflowRequest(req).Execute()
 	if err != nil {
-		return nil, fmt.Errorf("api error: %w", err)
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return data, nil
 }
@@ -106,7 +106,7 @@ func DeleteWorkflow(ctx context.Context, workflowID string) error {
 	}
 	_, _, err = client.WorkflowsAPI.DeleteWorkflow(ctx, workflowID).Execute()
 	if err != nil {
-		return fmt.Errorf("api error: %w", err)
+		return fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return nil
 }

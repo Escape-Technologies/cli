@@ -55,7 +55,7 @@ func ListAuditLogs(ctx context.Context, next string, filters *ListAuditLogsFilte
 	}
 	data, _, err := req.Execute()
 	if err != nil {
-		return nil, nil, fmt.Errorf("api error: %w", err)
+		return nil, nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return data.Data, data.NextCursor, nil
 }

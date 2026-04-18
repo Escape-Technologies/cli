@@ -56,21 +56,21 @@ func ListEvents(ctx context.Context, next string, filters *ListEventsFilters) ([
 			req = req.IssueIds(strings.Join(filters.IssueIDs, ","))
 		}
 		if len(filters.Stages) > 0 {
-			req = req.Stages(strings.Join(filters.Stages, ","))
+			req = req.Stages(filters.Stages)
 		}
 		if filters.HasAttachments {
 			req = req.HasAttachments(strconv.FormatBool(filters.HasAttachments))
 		}
 		if len(filters.Attachments) > 0 {
-			req = req.Attachments(strings.Join(filters.Attachments, ","))
+			req = req.Attachments(filters.Attachments)
 		}
 		if len(filters.Levels) > 0 {
-			req = req.Levels(strings.Join(filters.Levels, ","))
+			req = req.Levels(filters.Levels)
 		}
 	}
 	data, _, err := req.Execute()
 	if err != nil {
-		return nil, nil, fmt.Errorf("api error: %w", err)
+		return nil, nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return data.Data, data.NextCursor, nil
 }
@@ -83,7 +83,7 @@ func GetEvent(ctx context.Context, eventID string) (*v3.GetEvent200Response, err
 	}
 	data, _, err := client.EventsAPI.GetEvent(ctx, eventID).Execute()
 	if err != nil {
-		return nil, fmt.Errorf("api error: %w", err)
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return data, nil
 }

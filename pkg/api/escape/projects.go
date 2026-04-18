@@ -29,7 +29,7 @@ func ListProjects(ctx context.Context, next string, filters *ListProjectsFilters
 	}
 	data, _, err := req.Execute()
 	if err != nil {
-		return nil, nil, fmt.Errorf("api error: %w", err)
+		return nil, nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return data.Data, data.NextCursor, nil
 }
@@ -42,7 +42,7 @@ func GetProject(ctx context.Context, projectID string) (*v3.CreateProject200Resp
 	}
 	data, _, err := client.ProjectsAPI.GetProject(ctx, projectID).Execute()
 	if err != nil {
-		return nil, fmt.Errorf("api error: %w", err)
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return data, nil
 }
@@ -59,7 +59,7 @@ func CreateProject(ctx context.Context, body []byte) (*v3.CreateProject200Respon
 	}
 	data, _, err := client.ProjectsAPI.CreateProject(ctx).CreateProjectRequest(req).Execute()
 	if err != nil {
-		return nil, fmt.Errorf("api error: %w", err)
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return data, nil
 }
@@ -76,7 +76,7 @@ func UpdateProject(ctx context.Context, projectID string, body []byte) (*v3.Crea
 	}
 	data, _, err := client.ProjectsAPI.UpdateProject(ctx, projectID).UpdateProjectRequest(req).Execute()
 	if err != nil {
-		return nil, fmt.Errorf("api error: %w", err)
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return data, nil
 }
@@ -84,7 +84,7 @@ func UpdateProject(ctx context.Context, projectID string, body []byte) (*v3.Crea
 // DeleteProject deletes a project by ID.
 func DeleteProject(ctx context.Context, projectID string) error {
 	if err := rawRequest(ctx, http.MethodDelete, rawPath("projects", projectID), nil, nil); err != nil {
-		return fmt.Errorf("api error: %w", err)
+		return fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return nil
 }

@@ -18,7 +18,7 @@ func ListCustomRules(ctx context.Context) ([]v3.CustomRuleSummarized, error) {
 	req := client.CustomRulesAPI.ListCustomRules(ctx)
 	data, _, err := req.Execute()
 	if err != nil {
-		return nil, fmt.Errorf("api error: %w", err)
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return data, nil
 }
@@ -32,7 +32,7 @@ func GetCustomRule(ctx context.Context, id string) (*v3.CreateCustomRule200Respo
 	req := client.CustomRulesAPI.GetCustomRule(ctx, id)
 	data, _, err := req.Execute()
 	if err != nil {
-		return nil, fmt.Errorf("api error: %w", err)
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return data, nil
 }
@@ -50,7 +50,7 @@ func CreateCustomRule(ctx context.Context, data []byte) (*v3.CreateCustomRule200
 	req := client.CustomRulesAPI.CreateCustomRule(ctx)
 	res, _, err := req.CreateCustomRuleRequest(payload).Execute()
 	if err != nil {
-		return nil, fmt.Errorf("api error: %w", err)
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return res, nil
 }
@@ -72,7 +72,7 @@ func UpdateCustomRule(ctx context.Context, id string, data []byte) (*v3.CreateCu
 			body, _ := io.ReadAll(httpRes.Body)
 			return nil, fmt.Errorf("api error: %s", string(body))
 		}
-		return nil, fmt.Errorf("api error: %w", err)
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return res, nil
 }
@@ -86,7 +86,7 @@ func DeleteCustomRule(ctx context.Context, id string) (*v3.DeleteCustomRule200Re
 	req := client.CustomRulesAPI.DeleteCustomRule(ctx, id)
 	data, _, err := req.Execute()
 	if err != nil {
-		return nil, fmt.Errorf("api error: %w", err)
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return data, nil
 }

@@ -43,12 +43,22 @@ func ListLocations(ctx context.Context, next string, filters *ListLocationsFilte
 			req = req.Enabled(strconv.FormatBool(filters.Enabled))
 		}
 		if len(filters.LocationTypes) > 0 {
-			req = req.Type_(strings.Join(filters.LocationTypes, ","))
+			normalized := make([]string, 0, len(filters.LocationTypes))
+			for _, locationType := range filters.LocationTypes {
+				trimmed := strings.TrimSpace(locationType)
+				if trimmed == "" {
+					continue
+				}
+				normalized = append(normalized, strings.ToUpper(trimmed))
+			}
+			if len(normalized) > 0 {
+				req = req.Type_(normalized)
+			}
 		}
 	}
 	data, _, err := req.Execute()
 	if err != nil {
-		return nil, nil, fmt.Errorf("unable to get locations: %w", err)
+		return nil, nil, fmt.Errorf("unable to get locations: %w", humanizeAPIError(err))
 	}
 	return data.Data, data.NextCursor, nil
 }
@@ -62,7 +72,7 @@ func GetLocation(ctx context.Context, id string) (*v3.CreateLocation200Response,
 	req := client.LocationsAPI.GetLocation(ctx, id)
 	data, _, err := req.Execute()
 	if err != nil {
-		return nil, fmt.Errorf("unable to get location: %w", err)
+		return nil, fmt.Errorf("unable to get location: %w", humanizeAPIError(err))
 	}
 	return data, nil
 }
@@ -79,7 +89,7 @@ func CreateLocation(ctx context.Context, name, sshPublicKey string) (string, err
 	})
 	data, _, err := req.Execute()
 	if err != nil {
-		return "", fmt.Errorf("unable to create location: %w", err)
+		return "", fmt.Errorf("unable to create location: %w", humanizeAPIError(err))
 	}
 	if data == nil || data.Id == nil {
 		return "", errors.New("location created but unable to get location id")
@@ -106,7 +116,7 @@ func UpdateLocation(ctx context.Context, id string, name, sshPublicKey *string, 
 	req := client.LocationsAPI.UpdateLocation(ctx, id).UpdateLocationRequest(body)
 	_, _, err = req.Execute()
 	if err != nil {
-		return fmt.Errorf("unable to update location: %w", err)
+		return fmt.Errorf("unable to update location: %w", humanizeAPIError(err))
 	}
 	return nil
 }
@@ -120,7 +130,7 @@ func DeleteLocation(ctx context.Context, id string) error {
 	req := client.LocationsAPI.DeleteLocation(ctx, id)
 	_, _, err = req.Execute()
 	if err != nil {
-		return fmt.Errorf("unable to delete location: %w", err)
+		return fmt.Errorf("unable to delete location: %w", humanizeAPIError(err))
 	}
 	return nil
 }

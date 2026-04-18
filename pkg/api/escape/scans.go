@@ -68,19 +68,19 @@ func ListScans(ctx context.Context, next string, filters *ListScansFilters) ([]v
 			req = req.Ignored(filters.Ignored)
 		}
 		if filters.Initiator != nil && len(*filters.Initiator) > 0 {
-			req = req.Initiator(strings.Join(*filters.Initiator, ","))
+			req = req.Initiator(*filters.Initiator)
 		}
 		if filters.Kinds != nil && len(*filters.Kinds) > 0 {
 			req = req.Kinds(*filters.Kinds)
 		}
 		if filters.Status != nil && len(*filters.Status) > 0 {
-			req = req.Status(strings.Join(*filters.Status, ","))
+			req = req.Status(*filters.Status)
 		}
 	}
 	data, _, err := req.Execute()
 
 	if err != nil {
-		return nil, nil, fmt.Errorf("unable to list scans: %w", err)
+		return nil, nil, fmt.Errorf("unable to list scans: %w", humanizeAPIError(err))
 	}
 	return data.Data, data.NextCursor, nil
 }
@@ -93,7 +93,7 @@ func GetScan(ctx context.Context, scanID string) (*v3.StartScan200Response, erro
 	}
 	data, _, err := client.ScansAPI.GetScan(ctx, scanID).Execute()
 	if err != nil {
-		return nil, fmt.Errorf("unable to get scan: %w", err)
+		return nil, fmt.Errorf("unable to get scan: %w", humanizeAPIError(err))
 	}
 	return data, nil
 }
@@ -113,7 +113,7 @@ func GetScanIssues(ctx context.Context, scanID string) ([]v3.IssueSummarized, er
 
 	data, _, err := req.Execute()
 	if err != nil {
-		return nil, fmt.Errorf("unable to get scan issues: %w", err)
+		return nil, fmt.Errorf("unable to get scan issues: %w", humanizeAPIError(err))
 	}
 	return data.Data, nil
 }
@@ -149,7 +149,7 @@ func StartScan(
 
 	data, _, err := client.ScansAPI.StartScan(ctx).StartScanRequest(req).Execute()
 	if err != nil {
-		return nil, fmt.Errorf("unable to start scan: %w", err)
+		return nil, fmt.Errorf("unable to start scan: %w", humanizeAPIError(err))
 	}
 	return data, nil
 }
@@ -166,7 +166,7 @@ func CancelScan(ctx context.Context, scanID string) error {
 		if httpResp.StatusCode == http.StatusBadRequest {
 			return errors.New("scan is not running or already canceled")
 		}
-		return fmt.Errorf("unable to cancel scan: %w", err)
+		return fmt.Errorf("unable to cancel scan: %w", humanizeAPIError(err))
 	}
 	return nil
 }
@@ -186,14 +186,14 @@ func ListScanTargets(ctx context.Context, scanID string, next string, targetType
 		req = req.Cursor(next)
 	}
 	if targetTypes != "" {
-		req = req.Types(targetTypes)
+		req = req.Types(strings.Split(targetTypes, ","))
 	}
 	if size > 0 {
 		req = req.Size(size)
 	}
 	data, _, err := req.Execute()
 	if err != nil {
-		return nil, nil, fmt.Errorf("unable to list scan targets: %w", err)
+		return nil, nil, fmt.Errorf("unable to list scan targets: %w", humanizeAPIError(err))
 	}
 	return data.Data, data.NextCursor, nil
 }
@@ -211,7 +211,7 @@ func IgnoreScan(ctx context.Context, scanID string) error {
 
 	_, _, err = client.ScansAPI.IgnoreScan(ctx, scanID).IgnoreScanRequest(ignoreScanRequest).Execute()
 	if err != nil {
-		return fmt.Errorf("unable to ignore scan: %w", err)
+		return fmt.Errorf("unable to ignore scan: %w", humanizeAPIError(err))
 	}
 	return nil
 }

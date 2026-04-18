@@ -18,7 +18,7 @@ func GetUploadSignedURL(ctx context.Context) (*v3.CreateUploadSignedUrl200Respon
 	req := client.UploadAPI.CreateUploadSignedUrl(ctx)
 	data, _, err := req.Execute()
 	if err != nil {
-		return nil, fmt.Errorf("api error: %w", err)
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return data, nil
 }

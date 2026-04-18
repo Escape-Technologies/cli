@@ -280,7 +280,7 @@ func init() {
 	rootCmd.AddCommand(locationsCmd)
 	locationsListCmd.Flags().StringVarP(&locationsSearch, "search", "s", "", "Search term to filter locations by")
 	locationsListCmd.Flags().BoolVarP(&locationsEnabled, "enabled", "e", false, "Filter by enabled locations")
-	locationsListCmd.Flags().StringSliceVarP(&locationsLocationTypes, "type", "t", []string{}, "Filter by location type (private, escape, repeater)")
+	locationsListCmd.Flags().StringSliceVarP(&locationsLocationTypes, "type", "t", []string{}, "Filter by location type: PRIVATE or ESCAPE (case-insensitive)")
 	locationsListCmd.Flags().StringVar(&locationsSortType, "sort-by", "", "sort field")
 	locationsListCmd.Flags().StringVar(&locationsSortDirection, "sort-direction", "", "sort direction: asc, desc")
 	locationsCreateCmd.Flags().StringVar(&locationCreateName, "name", "", "location name")
