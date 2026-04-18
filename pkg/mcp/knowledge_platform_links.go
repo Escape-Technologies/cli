@@ -20,7 +20,7 @@ const (
 	maxPlatformLinksPerSelect = 5
 	minPlatformLinkScore      = 1.5
 
-	platformTokenMatchWeight = 2
+	platformTokenMatchWeight    = 2
 	platformQuerySubstringBonus = 2
 
 	platformDeepRouteThreshold = 2

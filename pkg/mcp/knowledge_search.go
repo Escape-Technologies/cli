@@ -42,10 +42,10 @@ type DocsSearchIndex struct {
 	ttl            time.Duration
 	httpClient     *http.Client
 
-	mu         sync.Mutex
-	cache      []indexedDoc
-	cacheUntil time.Time
-	inFlight   chan struct{}
+	mu          sync.Mutex
+	cache       []indexedDoc
+	cacheUntil  time.Time
+	inFlight    chan struct{}
 	inFlightErr error
 	inFlightRes []indexedDoc
 }
@@ -64,12 +64,12 @@ type rawSearchIndexDoc struct {
 }
 
 type indexedDoc struct {
-	location          string
-	url               string
-	title             string
-	text              string
-	normalizedTitle   string
-	normalizedText    string
+	location           string
+	url                string
+	title              string
+	text               string
+	normalizedTitle    string
+	normalizedText     string
 	normalizedLocation string
 }
 
