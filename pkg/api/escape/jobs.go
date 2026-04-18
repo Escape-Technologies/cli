@@ -16,7 +16,7 @@ func GetJob(ctx context.Context, jobID string) (*v3.GetJob200Response, error) {
 	}
 	data, _, err := client.JobsAPI.GetJob(ctx, jobID).Execute()
 	if err != nil {
-		return nil, fmt.Errorf("api error: %w", err)
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return data, nil
 }
@@ -42,7 +42,7 @@ func TriggerExport(ctx context.Context, blocks []string, scanID string) (*v3.Tri
 	}
 	data, _, err := client.JobsAPI.TriggerExport(ctx).TriggerExportRequest(req).Execute()
 	if err != nil {
-		return nil, fmt.Errorf("api error: %w", err)
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return data, nil
 }

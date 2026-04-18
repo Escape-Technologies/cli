@@ -43,10 +43,10 @@ func ListAssets(ctx context.Context, next string, filters *ListAssetsFilters) ([
 			req = req.SortDirection(filters.SortDirection)
 		}
 		if len(filters.AssetTypes) > 0 {
-			req = req.Types(strings.Join(filters.AssetTypes, ","))
+			req = req.Types(filters.AssetTypes)
 		}
 		if len(filters.AssetStatuses) > 0 {
-			req = req.Statuses(strings.Join(filters.AssetStatuses, ","))
+			req = req.Statuses(filters.AssetStatuses)
 		}
 		if filters.Search != "" {
 			req = req.Search(filters.Search)
@@ -57,7 +57,7 @@ func ListAssets(ctx context.Context, next string, filters *ListAssetsFilters) ([
 	}
 	data, _, err := req.Execute()
 	if err != nil {
-		return nil, nil, fmt.Errorf("api error: %w", err)
+		return nil, nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return data.Data, data.NextCursor, nil
 }
@@ -70,7 +70,7 @@ func GetAsset(ctx context.Context, id string) (*v3.AssetDetailed1, error) {
 	}
 	data, _, err := client.AssetsAPI.GetAsset(ctx, id).Execute()
 	if err != nil {
-		return nil, fmt.Errorf("api error: %w", err)
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return data, nil
 }
@@ -83,7 +83,7 @@ func DeleteAsset(ctx context.Context, id string) error {
 	}
 	_, httpRes, err := client.AssetsAPI.DeleteAsset(ctx, id).Execute()
 	if err != nil && httpRes.StatusCode != http.StatusOK {
-		return fmt.Errorf("api error: %w", err)
+		return fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return nil
 }
@@ -135,7 +135,7 @@ func UpdateAsset(
 			body, _ := io.ReadAll(apiRes.Body)
 			return fmt.Errorf("api error: %s", string(body))
 		}
-		return fmt.Errorf("api error: %w", err)
+		return fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return nil
 }
@@ -158,7 +158,7 @@ func BulkUpdateAssets(ctx context.Context, where v3.BulkUpdateAssetsRequestWhere
 	}
 	_, _, err = client.AssetsAPI.BulkUpdateAssets(ctx).BulkUpdateAssetsRequest(body).Execute()
 	if err != nil {
-		return fmt.Errorf("api error: %w", err)
+		return fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return nil
 }
@@ -172,7 +172,7 @@ func BulkDeleteAssets(ctx context.Context, where v3.BulkUpdateAssetsRequestWhere
 	body := v3.BulkDeleteAssetsRequest{Where: where}
 	_, _, err = client.AssetsAPI.BulkDeleteAssets(ctx).BulkDeleteAssetsRequest(body).Execute()
 	if err != nil {
-		return fmt.Errorf("api error: %w", err)
+		return fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return nil
 }
@@ -186,7 +186,7 @@ func CommentAsset(ctx context.Context, assetID, comment string) error {
 	body := v3.CreateAssetCommentRequest{Comment: comment}
 	_, _, err = client.AssetsAPI.CreateAssetComment(ctx, assetID).CreateAssetCommentRequest(body).Execute()
 	if err != nil {
-		return fmt.Errorf("api error: %w", err)
+		return fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return nil
 }
@@ -199,7 +199,7 @@ func ListAssetActivities(ctx context.Context, assetID string) ([]v3.ActivitySumm
 	}
 	data, _, err := client.AssetsAPI.ListAssetActivities(ctx, assetID).Execute()
 	if err != nil {
-		return nil, fmt.Errorf("api error: %w", err)
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return data, nil
 }

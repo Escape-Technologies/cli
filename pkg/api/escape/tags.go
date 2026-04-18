@@ -16,7 +16,7 @@ func ListTags(ctx context.Context) ([]v3.TagDetail, error) {
 	req := client.TagsAPI.ListTags(ctx)
 	data, _, err := req.Execute()
 	if err != nil {
-		return nil, fmt.Errorf("api error: %w", err)
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return data, nil
 }
@@ -33,7 +33,7 @@ func CreateTag(ctx context.Context, name string, color string) (*v3.CreateTag200
 		Color: color,
 	}).Execute()
 	if err != nil {
-		return nil, fmt.Errorf("api error: %w", err)
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return data, nil
 }
@@ -46,7 +46,7 @@ func GetTag(ctx context.Context, id string) (*v3.CreateTag200Response, error) {
 	}
 	data, _, err := client.TagsAPI.GetTag(ctx, id).Execute()
 	if err != nil {
-		return nil, fmt.Errorf("api error: %w", err)
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return data, nil
 }
@@ -60,7 +60,7 @@ func UpdateTag(ctx context.Context, id string, name *string, color *string) (*v3
 	body := v3.UpdateTagRequest{Name: name, Color: color}
 	data, _, err := client.TagsAPI.UpdateTag(ctx, id).UpdateTagRequest(body).Execute()
 	if err != nil {
-		return nil, fmt.Errorf("api error: %w", err)
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return data, nil
 }

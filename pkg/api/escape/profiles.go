@@ -67,7 +67,7 @@ func ListProfiles(ctx context.Context, next string, filters *ListProfilesFilters
 	}
 	data, _, err := req.Execute()
 	if err != nil {
-		return nil, nil, fmt.Errorf("api error: %w", err)
+		return nil, nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return data.Data, data.NextCursor, nil
 }
@@ -82,7 +82,7 @@ func GetProfile(ctx context.Context, profileID string) (*v3.GetProfile200Respons
 	req := client.ProfilesAPI.GetProfile(ctx, profileID)
 	data, _, err := req.Execute()
 	if err != nil {
-		return nil, fmt.Errorf("api error: %w", err)
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return data, nil
 }
@@ -102,7 +102,7 @@ func CreateProfileRest(ctx context.Context, data []byte) (interface{}, error) {
 	req := client.ProfilesAPI.CreateDastRestProfile(ctx)
 	profile, _, err := req.CreateDastRestProfileRequest(payload).Execute()
 	if err != nil {
-		return nil, fmt.Errorf("api error: %w", err)
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return profile, nil
 }
@@ -122,7 +122,7 @@ func CreateProfileWebapp(ctx context.Context, data []byte) (interface{}, error) 
 	req := client.ProfilesAPI.CreateDastWebAppProfile(ctx)
 	profile, _, err := req.CreateDastRestProfileRequest(payload).Execute()
 	if err != nil {
-		return nil, fmt.Errorf("api error: %w", err)
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return profile, nil
 }
@@ -142,7 +142,7 @@ func CreateProfileGraphql(ctx context.Context, data []byte) (interface{}, error)
 	req := client.ProfilesAPI.CreateDastGraphqlProfile(ctx)
 	profile, _, err := req.CreateDastRestProfileRequest(payload).Execute()
 	if err != nil {
-		return nil, fmt.Errorf("api error: %w", err)
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return profile, nil
 }
@@ -161,7 +161,7 @@ func UpdateProfile(ctx context.Context, profileID string, data []byte) (*v3.GetP
 
 	profile, _, err := client.ProfilesAPI.UpdateProfile(ctx, profileID).UpdateProfileRequest(payload).Execute()
 	if err != nil {
-		return nil, fmt.Errorf("api error: %w", err)
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return profile, nil
 }
@@ -180,7 +180,7 @@ func UpdateProfileConfiguration(ctx context.Context, profileID string, data []by
 
 	result, _, err := client.ProfilesAPI.UpdateProfileConfiguration(ctx, profileID).UpdateProfileConfigurationRequest(payload).Execute()
 	if err != nil {
-		return nil, fmt.Errorf("api error: %w", err)
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return result, nil
 }
@@ -198,7 +198,7 @@ func UpdateProfileSchema(ctx context.Context, profileID string, schemaID string)
 
 	profile, _, err := client.ProfilesAPI.UpdateProfileSchema(ctx, profileID).UpdateProfileSchemaRequest(payload).Execute()
 	if err != nil {
-		return nil, fmt.Errorf("api error: %w", err)
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return profile, nil
 }
@@ -217,7 +217,7 @@ func CreateProfilePentestRest(ctx context.Context, data []byte) (interface{}, er
 
 	profile, _, err := client.ProfilesAPI.CreatePentestRestProfile(ctx).CreateDastRestProfileRequest(payload).Execute()
 	if err != nil {
-		return nil, fmt.Errorf("api error: %w", err)
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return profile, nil
 }
@@ -236,7 +236,7 @@ func CreateProfilePentestGraphql(ctx context.Context, data []byte) (interface{},
 
 	profile, _, err := client.ProfilesAPI.CreatePentestGraphqlProfile(ctx).CreateDastRestProfileRequest(payload).Execute()
 	if err != nil {
-		return nil, fmt.Errorf("api error: %w", err)
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return profile, nil
 }
@@ -255,7 +255,7 @@ func CreateProfilePentestWebapp(ctx context.Context, data []byte) (interface{}, 
 
 	profile, _, err := client.ProfilesAPI.CreatePentestWebappProfile(ctx).CreateDastRestProfileRequest(payload).Execute()
 	if err != nil {
-		return nil, fmt.Errorf("api error: %w", err)
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return profile, nil
 }
@@ -270,7 +270,7 @@ func DeleteProfile(ctx context.Context, profileID string) error {
 	req := client.ProfilesAPI.DeleteProfile(ctx, profileID)
 	_, _, err = req.Execute()
 	if err != nil {
-		return fmt.Errorf("api error: %w", err)
+		return fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return nil
 }
@@ -325,7 +325,7 @@ func ListProblems(ctx context.Context, next string, filters *ListProblemsFilters
 	}
 	data, _, err := req.Execute()
 	if err != nil {
-		return nil, nil, fmt.Errorf("api error: %w", err)
+		return nil, nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return data.Data, data.NextCursor, nil
 }

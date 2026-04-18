@@ -22,7 +22,7 @@ func StartAuthentication(ctx context.Context, body []byte) (*v3.StartAuthenticat
 
 	data, _, err := client.ProfilesAPI.StartAuthentication(ctx).StartAuthenticationRequest(req).Execute()
 	if err != nil {
-		return nil, fmt.Errorf("api error: %w", err)
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return data, nil
 }
@@ -36,7 +36,7 @@ func GetAuthentication(ctx context.Context, authenticationID string) (*v3.GetAut
 
 	data, _, err := client.ProfilesAPI.GetAuthentication(ctx, authenticationID).Execute()
 	if err != nil {
-		return nil, fmt.Errorf("api error: %w", err)
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return data, nil
 }

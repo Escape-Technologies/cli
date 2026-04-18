@@ -15,7 +15,7 @@ func GetStatistics(ctx context.Context) (*v3.GetStatistics200Response, error) {
 	}
 	data, _, err := client.StatisticsAPI.GetStatistics(ctx).Execute()
 	if err != nil {
-		return nil, fmt.Errorf("api error: %w", err)
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return data, nil
 }
@@ -34,7 +34,7 @@ func TriggerAsmScans(ctx context.Context, where *v3.TriggerAsmScansRequestWhere)
 	req = req.TriggerAsmScansRequest(body)
 	_, _, err = req.Execute()
 	if err != nil {
-		return fmt.Errorf("api error: %w", err)
+		return fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return nil
 }

@@ -39,7 +39,7 @@ func UpsertKubernetesIntegration(ctx context.Context, req v3.CreatekubernetesInt
 		LocationIDs: strings.Join([]string{*req.ProxyId}, ","),
 	})
 	if err != nil {
-		return nil, fmt.Errorf("api error: %w", err)
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	if len(list) > 0 {
 		for _, integration := range list {
@@ -67,7 +67,7 @@ func createKubernetesIntegration(ctx context.Context, req v3.CreatekubernetesInt
 		CreatekubernetesIntegrationRequest(req).
 		Execute()
 	if err != nil {
-		return nil, fmt.Errorf("api error: %w", err)
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return resp, nil
 }
@@ -96,7 +96,7 @@ func listKubernetesIntegrations(ctx context.Context, next string, filters *ListK
 	}
 	data, _, err := req.Execute()
 	if err != nil {
-		return nil, nil, fmt.Errorf("api error: %w", err)
+		return nil, nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return data.Data, data.NextCursor, nil
 }
@@ -129,7 +129,7 @@ func ListIntegrations(ctx context.Context, kind, next string, filters *ListInteg
 
 	var resp listIntegrationsResponse
 	if err := rawRequest(ctx, http.MethodGet, path, nil, &resp); err != nil {
-		return nil, nil, fmt.Errorf("api error: %w", err)
+		return nil, nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return resp.Data, resp.NextCursor, nil
 }
@@ -138,7 +138,7 @@ func ListIntegrations(ctx context.Context, kind, next string, filters *ListInteg
 func GetIntegration(ctx context.Context, kind, integrationID string) (map[string]interface{}, error) {
 	var resp map[string]interface{}
 	if err := rawRequest(ctx, http.MethodGet, rawPath("integrations", kind, integrationID), nil, &resp); err != nil {
-		return nil, fmt.Errorf("api error: %w", err)
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return resp, nil
 }
@@ -151,7 +151,7 @@ func CreateIntegration(ctx context.Context, kind string, body []byte) (map[strin
 
 	var resp map[string]interface{}
 	if err := rawRequest(ctx, http.MethodPost, rawPath("integrations", kind), body, &resp); err != nil {
-		return nil, fmt.Errorf("api error: %w", err)
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return resp, nil
 }
@@ -164,7 +164,7 @@ func UpdateIntegration(ctx context.Context, kind, integrationID string, body []b
 
 	var resp map[string]interface{}
 	if err := rawRequest(ctx, http.MethodPut, rawPath("integrations", kind, integrationID), body, &resp); err != nil {
-		return nil, fmt.Errorf("api error: %w", err)
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return resp, nil
 }
@@ -172,7 +172,7 @@ func UpdateIntegration(ctx context.Context, kind, integrationID string, body []b
 // DeleteIntegration deletes an integration by kind and ID.
 func DeleteIntegration(ctx context.Context, kind, integrationID string) error {
 	if err := rawRequest(ctx, http.MethodDelete, rawPath("integrations", kind, integrationID), nil, nil); err != nil {
-		return fmt.Errorf("api error: %w", err)
+		return fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return nil
 }

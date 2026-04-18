@@ -53,7 +53,7 @@ func ListInboxEmails(ctx context.Context, cursor string, filters *ListInboxEmail
 
 	data, _, err := req.Execute()
 	if err != nil {
-		return nil, fmt.Errorf("unable to list inbox emails: %w", err)
+		return nil, fmt.Errorf("unable to list inbox emails: %w", humanizeAPIError(err))
 	}
 	return data, nil
 }
@@ -67,7 +67,7 @@ func ReadInboxEmail(ctx context.Context, id string) (*v3.ScanEmailDetails, error
 
 	data, _, err := client.EmailsAPI.ReadInboxEmail(ctx, id).Execute()
 	if err != nil {
-		return nil, fmt.Errorf("unable to read inbox email: %w", err)
+		return nil, fmt.Errorf("unable to read inbox email: %w", humanizeAPIError(err))
 	}
 	return data, nil
 }

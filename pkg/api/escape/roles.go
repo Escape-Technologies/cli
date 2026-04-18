@@ -17,7 +17,7 @@ func ListRoles(ctx context.Context) ([]v3.ListRoles200ResponseInner, error) {
 	}
 	data, _, err := client.RolesAPI.ListRoles(ctx).Execute()
 	if err != nil {
-		return nil, fmt.Errorf("api error: %w", err)
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return data, nil
 }
@@ -30,7 +30,7 @@ func GetRole(ctx context.Context, roleID string) (*v3.CreateRole200Response, err
 	}
 	data, _, err := client.RolesAPI.GetRole(ctx, roleID).Execute()
 	if err != nil {
-		return nil, fmt.Errorf("api error: %w", err)
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return data, nil
 }
@@ -47,7 +47,7 @@ func CreateRole(ctx context.Context, body []byte) (*v3.CreateRole200Response, er
 	}
 	data, _, err := client.RolesAPI.CreateRole(ctx).CreateRoleRequest(req).Execute()
 	if err != nil {
-		return nil, fmt.Errorf("api error: %w", err)
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return data, nil
 }
@@ -64,7 +64,7 @@ func UpdateRole(ctx context.Context, roleID string, body []byte) (*v3.CreateRole
 	}
 	data, _, err := client.RolesAPI.UpdateRole(ctx, roleID).UpdateRoleRequest(req).Execute()
 	if err != nil {
-		return nil, fmt.Errorf("api error: %w", err)
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return data, nil
 }
@@ -82,7 +82,7 @@ func CreateRoleBindings(ctx context.Context, roleID, userID string) ([]v3.Create
 	}
 	data, _, err := client.RolesAPI.CreateRoleBindings(ctx).CreateRoleBindingsRequest(req).Execute()
 	if err != nil {
-		return nil, fmt.Errorf("api error: %w", err)
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return data, nil
 }
@@ -95,7 +95,7 @@ func DeleteRoleBinding(ctx context.Context, bindingID string) error {
 	}
 	_, _, err = client.RolesAPI.DeleteRoleBinding(ctx, bindingID).Execute()
 	if err != nil {
-		return fmt.Errorf("api error: %w", err)
+		return fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return nil
 }
@@ -103,7 +103,7 @@ func DeleteRoleBinding(ctx context.Context, bindingID string) error {
 // DeleteRole deletes a role by ID.
 func DeleteRole(ctx context.Context, roleID string) error {
 	if err := rawRequest(ctx, http.MethodDelete, rawPath("roles", roleID), nil, nil); err != nil {
-		return fmt.Errorf("api error: %w", err)
+		return fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return nil
 }
