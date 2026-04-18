@@ -51,7 +51,8 @@ func RegisterKnowledgeTools(server *mcpserver.MCPServer, opts KnowledgeOptions) 
 	tool := mcpgo.NewTool(
 		knowledgeToolName,
 		mcpgo.WithDescription(
-			"Answer Escape product/documentation questions and return authoritative docs/platform links.",
+			"Answer Escape product/documentation questions and return authoritative docs/platform links. "+
+				"Call this for any conceptual, how-to, setup, troubleshooting, or link-request question before replying.",
 		),
 		mcpgo.WithString(
 			"question",
@@ -66,6 +67,13 @@ func RegisterKnowledgeTools(server *mcpserver.MCPServer, opts KnowledgeOptions) 
 			"limit",
 			mcpgo.Description("Maximum number of documentation matches to return."),
 		),
+		// Read-only lookup: the default annotations (destructive=true) discourage
+		// reasoning models (KIMIK2THINKING etc.) from calling the tool even when
+		// the system prompt explicitly asks them to.
+		mcpgo.WithReadOnlyHintAnnotation(true),
+		mcpgo.WithDestructiveHintAnnotation(false),
+		mcpgo.WithIdempotentHintAnnotation(true),
+		mcpgo.WithOpenWorldHintAnnotation(false),
 	)
 
 	server.AddTool(tool, buildKnowledgeHandler(index, selector, docsSite, platformBase))

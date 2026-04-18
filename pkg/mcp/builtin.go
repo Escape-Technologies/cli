@@ -30,6 +30,10 @@ func RegisterBuiltinTools(server *mcpserver.MCPServer, specs []ToolSpec) {
 		mcpgo.WithDescription("List the available Escape CLI-backed MCP tools."),
 		mcpgo.WithString("objective", mcpgo.Description("Optional search intent used to rank relevant tools.")),
 		mcpgo.WithNumber("limit", mcpgo.Description("Maximum number of tools to return.")),
+		mcpgo.WithReadOnlyHintAnnotation(true),
+		mcpgo.WithDestructiveHintAnnotation(false),
+		mcpgo.WithIdempotentHintAnnotation(true),
+		mcpgo.WithOpenWorldHintAnnotation(false),
 	)
 
 	server.AddTool(tool, func(ctx context.Context, request mcpgo.CallToolRequest) (*mcpgo.CallToolResult, error) {
@@ -84,6 +88,10 @@ func registerGetToolSpec(server *mcpserver.MCPServer, specs []ToolSpec) {
 			"Fetch the full input schema for a tool by name. Useful after tools/list returned a compact stub for the tool you want to call.",
 		),
 		mcpgo.WithString("name", mcpgo.Required(), mcpgo.Description("Exact tool name returned by tools/list.")),
+		mcpgo.WithReadOnlyHintAnnotation(true),
+		mcpgo.WithDestructiveHintAnnotation(false),
+		mcpgo.WithIdempotentHintAnnotation(true),
+		mcpgo.WithOpenWorldHintAnnotation(false),
 	)
 
 	byName := make(map[string]ToolSpec, len(specs))
