@@ -61,12 +61,7 @@ func BuildStubTool(spec ToolSpec) (mcpgo.Tool, error) {
 		stubDescription += " (compact stub — call escape_get_tool_spec for the full input schema)"
 	}
 
-	stub := mcpgo.NewToolWithRawSchema(spec.Name, stubDescription, rawSchema)
-	// Preserve safety annotations so the LLM trusts the stub the same way it
-	// would the full tool. Without this the stub serializes Annotations as
-	// `{}` and reasoning models become reluctant to call it.
-	stub.Annotations = spec.Tool.Annotations
-	return stub, nil
+	return mcpgo.NewToolWithRawSchema(spec.Name, stubDescription, rawSchema), nil
 }
 
 func flagStubSchema(kind string) map[string]any {
