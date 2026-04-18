@@ -21,9 +21,9 @@ var _ MappedNullable = &AssetDetailed{}
 // AssetDetailed The asset of the profile
 type AssetDetailed struct {
 	// The id of the asset
-	Id    string                                                           `json:"id"`
+	Id string `json:"id"`
 	Class ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS `json:"class"`
-	Type  ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE  `json:"type"`
+	Type ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE `json:"type"`
 	// The name of the asset
 	Name string `json:"name"`
 	// The external url of the asset
@@ -37,22 +37,22 @@ type AssetDetailed struct {
 	// The date and time the asset was last seen
 	LastSeenAt string `json:"lastSeenAt"`
 	// The date and time the asset is scheduled for deletion
-	ScheduledForDeletionAt *string                                                           `json:"scheduledForDeletionAt,omitempty"`
-	Status                 ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS `json:"status"`
+	ScheduledForDeletionAt *string `json:"scheduledForDeletionAt,omitempty"`
+	Status ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS `json:"status"`
 	// The owners of the asset
 	Owners []string `json:"owners,omitempty"`
 	// The tags of the asset
 	Tags []Tag `json:"tags"`
 	// The risks of the asset
-	Risks         []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS `json:"risks"`
-	FirstSeenScan *ScanSummarized                                              `json:"firstSeenScan,omitempty"`
-	LastSeenScan  *ScanSummarized1                                             `json:"lastSeenScan,omitempty"`
-	Service       *AssetServiceDetailed                                        `json:"service,omitempty"`
-	Frontend      *AssetFrontendDetailed                                       `json:"frontend,omitempty"`
-	Host          *AssetHostDetailed                                           `json:"host,omitempty"`
+	Risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS `json:"risks"`
+	FirstSeenScan *ScanSummarized `json:"firstSeenScan,omitempty"`
+	LastSeenScan *ScanSummarized1 `json:"lastSeenScan,omitempty"`
+	Service *AssetServiceDetailed `json:"service,omitempty"`
+	Frontend *AssetFrontendDetailed `json:"frontend,omitempty"`
+	Host *AssetHostDetailed `json:"host,omitempty"`
 	// Time-limited HTTPS URL for schema-class assets; null for other asset classes
-	SchemaUrl            *string            `json:"schemaUrl,omitempty"`
-	Links                AssetDetailedLinks `json:"links"`
+	SchemaUrl *string `json:"schemaUrl,omitempty"`
+	Links AssetDetailedLinks `json:"links"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -678,7 +678,7 @@ func (o *AssetDetailed) SetLinks(v AssetDetailedLinks) {
 }
 
 func (o AssetDetailed) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -760,10 +760,10 @@ func (o *AssetDetailed) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -844,3 +844,5 @@ func (v *NullableAssetDetailed) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

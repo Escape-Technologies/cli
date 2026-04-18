@@ -16,17 +16,18 @@ import (
 	"io"
 	"net/http"
 	"net/url"
-	"reflect"
 	"strings"
+	"reflect"
 )
+
 
 // ScansAPIService ScansAPI service
 type ScansAPIService service
 
 type ApiCancelScanRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *ScansAPIService
-	scanId     string
+	scanId string
 }
 
 func (r ApiCancelScanRequest) Execute() (*StartScan200Response, *http.Response, error) {
@@ -38,27 +39,26 @@ CancelScan Cancel a scan
 
 Cancel a scan by ID
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param scanId The scan ID
-	@return ApiCancelScanRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param scanId The scan ID
+ @return ApiCancelScanRequest
 */
 func (a *ScansAPIService) CancelScan(ctx context.Context, scanId string) ApiCancelScanRequest {
 	return ApiCancelScanRequest{
 		ApiService: a,
-		ctx:        ctx,
-		scanId:     scanId,
+		ctx: ctx,
+		scanId: scanId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return StartScan200Response
+//  @return StartScan200Response
 func (a *ScansAPIService) CancelScanExecute(r ApiCancelScanRequest) (*StartScan200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPut
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *StartScan200Response
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *StartScan200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ScansAPIService.CancelScan")
@@ -127,14 +127,14 @@ func (a *ScansAPIService) CancelScanExecute(r ApiCancelScanRequest) (*StartScan2
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v UpdateProfile400Response
+			var v ListProfiles400ResponseAnyOf
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -144,8 +144,8 @@ func (a *ScansAPIService) CancelScanExecute(r ApiCancelScanRequest) (*StartScan2
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -163,9 +163,9 @@ func (a *ScansAPIService) CancelScanExecute(r ApiCancelScanRequest) (*StartScan2
 }
 
 type ApiGetScanRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *ScansAPIService
-	scanId     string
+	scanId string
 }
 
 func (r ApiGetScanRequest) Execute() (*StartScan200Response, *http.Response, error) {
@@ -177,27 +177,26 @@ GetScan Get a scan
 
 Get a scan by ID
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param scanId The scan ID
-	@return ApiGetScanRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param scanId The scan ID
+ @return ApiGetScanRequest
 */
 func (a *ScansAPIService) GetScan(ctx context.Context, scanId string) ApiGetScanRequest {
 	return ApiGetScanRequest{
 		ApiService: a,
-		ctx:        ctx,
-		scanId:     scanId,
+		ctx: ctx,
+		scanId: scanId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return StartScan200Response
+//  @return StartScan200Response
 func (a *ScansAPIService) GetScanExecute(r ApiGetScanRequest) (*StartScan200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *StartScan200Response
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *StartScan200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ScansAPIService.GetScan")
@@ -272,8 +271,8 @@ func (a *ScansAPIService) GetScanExecute(r ApiGetScanRequest) (*StartScan200Resp
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -291,9 +290,9 @@ func (a *ScansAPIService) GetScanExecute(r ApiGetScanRequest) (*StartScan200Resp
 }
 
 type ApiIgnoreScanRequest struct {
-	ctx               context.Context
-	ApiService        *ScansAPIService
-	scanId            string
+	ctx context.Context
+	ApiService *ScansAPIService
+	scanId string
 	ignoreScanRequest *IgnoreScanRequest
 }
 
@@ -312,27 +311,26 @@ IgnoreScan Ignore a scan
 
 Ignore a scan by ID
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param scanId The scan ID
-	@return ApiIgnoreScanRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param scanId The scan ID
+ @return ApiIgnoreScanRequest
 */
 func (a *ScansAPIService) IgnoreScan(ctx context.Context, scanId string) ApiIgnoreScanRequest {
 	return ApiIgnoreScanRequest{
 		ApiService: a,
-		ctx:        ctx,
-		scanId:     scanId,
+		ctx: ctx,
+		scanId: scanId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return IgnoreScan200Response
+//  @return IgnoreScan200Response
 func (a *ScansAPIService) IgnoreScanExecute(r ApiIgnoreScanRequest) (*IgnoreScan200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPut
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *IgnoreScan200Response
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *IgnoreScan200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ScansAPIService.IgnoreScan")
@@ -403,14 +401,14 @@ func (a *ScansAPIService) IgnoreScanExecute(r ApiIgnoreScanRequest) (*IgnoreScan
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v UpdateProfile400Response
+			var v ListProfiles400ResponseAnyOf
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -420,8 +418,8 @@ func (a *ScansAPIService) IgnoreScanExecute(r ApiIgnoreScanRequest) (*IgnoreScan
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
@@ -431,8 +429,8 @@ func (a *ScansAPIService) IgnoreScanExecute(r ApiIgnoreScanRequest) (*IgnoreScan
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -450,14 +448,14 @@ func (a *ScansAPIService) IgnoreScanExecute(r ApiIgnoreScanRequest) (*IgnoreScan
 }
 
 type ApiListScanTargetsRequest struct {
-	ctx           context.Context
-	ApiService    *ScansAPIService
-	scanId        string
-	cursor        *string
-	size          *int
-	sortType      *string
+	ctx context.Context
+	ApiService *ScansAPIService
+	scanId string
+	cursor *string
+	size *int
+	sortType *string
 	sortDirection *string
-	types         *string
+	types *[]string
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
@@ -485,7 +483,7 @@ func (r ApiListScanTargetsRequest) SortDirection(sortDirection string) ApiListSc
 }
 
 // Optional filter by target kinds (comma-separated or repeated), e.g. API_ROUTE or GRAPHQL_RESOLVER
-func (r ApiListScanTargetsRequest) Types(types string) ApiListScanTargetsRequest {
+func (r ApiListScanTargetsRequest) Types(types []string) ApiListScanTargetsRequest {
 	r.types = &types
 	return r
 }
@@ -499,27 +497,26 @@ ListScanTargets List scan targets and API coverage
 
 Returns targets discovered during a scan, including REST and GraphQL operations with per-endpoint coverage. Filter by target type to focus on API routes and resolvers for CI/CD quality gates.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param scanId The scan ID
-	@return ApiListScanTargetsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param scanId The scan ID
+ @return ApiListScanTargetsRequest
 */
 func (a *ScansAPIService) ListScanTargets(ctx context.Context, scanId string) ApiListScanTargetsRequest {
 	return ApiListScanTargetsRequest{
 		ApiService: a,
-		ctx:        ctx,
-		scanId:     scanId,
+		ctx: ctx,
+		scanId: scanId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ListScanTargets200Response
+//  @return ListScanTargets200Response
 func (a *ScansAPIService) ListScanTargetsExecute(r ApiListScanTargetsRequest) (*ListScanTargets200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ListScanTargets200Response
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ListScanTargets200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ScansAPIService.ListScanTargets")
@@ -541,6 +538,7 @@ func (a *ScansAPIService) ListScanTargetsExecute(r ApiListScanTargetsRequest) (*
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.sortType != nil {
@@ -550,10 +548,19 @@ func (a *ScansAPIService) ListScanTargetsExecute(r ApiListScanTargetsRequest) (*
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
 		var defaultValue string = "asc"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
 		r.sortDirection = &defaultValue
 	}
 	if r.types != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "types", r.types, "form", "")
+		t := *r.types
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "types", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "types", t, "form", "multi")
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -609,14 +616,14 @@ func (a *ScansAPIService) ListScanTargetsExecute(r ApiListScanTargetsRequest) (*
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListScanTargets400Response
+			var v ListProfiles400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -626,8 +633,8 @@ func (a *ScansAPIService) ListScanTargetsExecute(r ApiListScanTargetsRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -645,21 +652,21 @@ func (a *ScansAPIService) ListScanTargetsExecute(r ApiListScanTargetsRequest) (*
 }
 
 type ApiListScansRequest struct {
-	ctx           context.Context
-	ApiService    *ScansAPIService
-	cursor        *string
-	size          *int
-	sortType      *string
+	ctx context.Context
+	ApiService *ScansAPIService
+	cursor *string
+	size *int
+	sortType *string
 	sortDirection *string
-	after         *string
-	before        *string
-	assetIds      *string
-	profileIds    *string
-	ignored       *string
-	initiator     *string
-	kinds         *[]string
-	status        *string
-	projectIds    *ListScansProjectIdsParameter
+	after *string
+	before *string
+	assetIds *string
+	profileIds *string
+	ignored *string
+	initiator *[]string
+	kinds *[]string
+	status *[]string
+	projectIds *ListScansProjectIdsParameter
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
@@ -717,7 +724,7 @@ func (r ApiListScansRequest) Ignored(ignored string) ApiListScansRequest {
 }
 
 // Filter by initiator
-func (r ApiListScansRequest) Initiator(initiator string) ApiListScansRequest {
+func (r ApiListScansRequest) Initiator(initiator []string) ApiListScansRequest {
 	r.initiator = &initiator
 	return r
 }
@@ -729,7 +736,7 @@ func (r ApiListScansRequest) Kinds(kinds []string) ApiListScansRequest {
 }
 
 // Filter by status
-func (r ApiListScansRequest) Status(status string) ApiListScansRequest {
+func (r ApiListScansRequest) Status(status []string) ApiListScansRequest {
 	r.status = &status
 	return r
 }
@@ -749,25 +756,24 @@ ListScans List scans
 
 List and search scans of the organization.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiListScansRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiListScansRequest
 */
 func (a *ScansAPIService) ListScans(ctx context.Context) ApiListScansRequest {
 	return ApiListScansRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ListScans200Response
+//  @return ListScans200Response
 func (a *ScansAPIService) ListScansExecute(r ApiListScansRequest) (*ListScans200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ListScans200Response
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ListScans200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ScansAPIService.ListScans")
@@ -788,6 +794,7 @@ func (a *ScansAPIService) ListScansExecute(r ApiListScansRequest) (*ListScans200
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.sortType != nil {
@@ -797,6 +804,7 @@ func (a *ScansAPIService) ListScansExecute(r ApiListScansRequest) (*ListScans200
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
 		var defaultValue string = "asc"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
 		r.sortDirection = &defaultValue
 	}
 	if r.after != nil {
@@ -815,7 +823,15 @@ func (a *ScansAPIService) ListScansExecute(r ApiListScansRequest) (*ListScans200
 		parameterAddToHeaderOrQuery(localVarQueryParams, "ignored", r.ignored, "form", "")
 	}
 	if r.initiator != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "initiator", r.initiator, "form", "")
+		t := *r.initiator
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "initiator", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "initiator", t, "form", "multi")
+		}
 	}
 	if r.kinds != nil {
 		t := *r.kinds
@@ -829,7 +845,15 @@ func (a *ScansAPIService) ListScansExecute(r ApiListScansRequest) (*ListScans200
 		}
 	}
 	if r.status != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "status", r.status, "form", "")
+		t := *r.status
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "status", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "status", t, "form", "multi")
+		}
 	}
 	if r.projectIds != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "projectIds", r.projectIds, "form", "")
@@ -894,8 +918,8 @@ func (a *ScansAPIService) ListScansExecute(r ApiListScansRequest) (*ListScans200
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -913,8 +937,8 @@ func (a *ScansAPIService) ListScansExecute(r ApiListScansRequest) (*ListScans200
 }
 
 type ApiStartScanRequest struct {
-	ctx              context.Context
-	ApiService       *ScansAPIService
+	ctx context.Context
+	ApiService *ScansAPIService
 	startScanRequest *StartScanRequest
 }
 
@@ -933,25 +957,24 @@ StartScan Start a new scan
 
 Start a new scan
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiStartScanRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiStartScanRequest
 */
 func (a *ScansAPIService) StartScan(ctx context.Context) ApiStartScanRequest {
 	return ApiStartScanRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return StartScan200Response
+//  @return StartScan200Response
 func (a *ScansAPIService) StartScanExecute(r ApiStartScanRequest) (*StartScan200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *StartScan200Response
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *StartScan200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ScansAPIService.StartScan")
@@ -1021,14 +1044,14 @@ func (a *ScansAPIService) StartScanExecute(r ApiStartScanRequest) (*StartScan200
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v UpdateProfile400Response
+			var v ListProfiles400ResponseAnyOf
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

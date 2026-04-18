@@ -15,41 +15,41 @@ import (
 	"fmt"
 )
 
-// checks if the UpdateProfile400Response type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &UpdateProfile400Response{}
+// checks if the ListProfiles400ResponseAnyOf1 type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ListProfiles400ResponseAnyOf1{}
 
-// UpdateProfile400Response struct for UpdateProfile400Response
-type UpdateProfile400Response struct {
-	Message              ENUMBADREQUEST `json:"message"`
-	Details              string         `json:"details"`
+// ListProfiles400ResponseAnyOf1 struct for ListProfiles400ResponseAnyOf1
+type ListProfiles400ResponseAnyOf1 struct {
+	Message ENUMINVALIDCURSOR `json:"message"`
+	Details string `json:"details"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _UpdateProfile400Response UpdateProfile400Response
+type _ListProfiles400ResponseAnyOf1 ListProfiles400ResponseAnyOf1
 
-// NewUpdateProfile400Response instantiates a new UpdateProfile400Response object
+// NewListProfiles400ResponseAnyOf1 instantiates a new ListProfiles400ResponseAnyOf1 object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateProfile400Response(message ENUMBADREQUEST, details string) *UpdateProfile400Response {
-	this := UpdateProfile400Response{}
+func NewListProfiles400ResponseAnyOf1(message ENUMINVALIDCURSOR, details string) *ListProfiles400ResponseAnyOf1 {
+	this := ListProfiles400ResponseAnyOf1{}
 	this.Message = message
 	this.Details = details
 	return &this
 }
 
-// NewUpdateProfile400ResponseWithDefaults instantiates a new UpdateProfile400Response object
+// NewListProfiles400ResponseAnyOf1WithDefaults instantiates a new ListProfiles400ResponseAnyOf1 object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewUpdateProfile400ResponseWithDefaults() *UpdateProfile400Response {
-	this := UpdateProfile400Response{}
+func NewListProfiles400ResponseAnyOf1WithDefaults() *ListProfiles400ResponseAnyOf1 {
+	this := ListProfiles400ResponseAnyOf1{}
 	return &this
 }
 
 // GetMessage returns the Message field value
-func (o *UpdateProfile400Response) GetMessage() ENUMBADREQUEST {
+func (o *ListProfiles400ResponseAnyOf1) GetMessage() ENUMINVALIDCURSOR {
 	if o == nil {
-		var ret ENUMBADREQUEST
+		var ret ENUMINVALIDCURSOR
 		return ret
 	}
 
@@ -58,7 +58,7 @@ func (o *UpdateProfile400Response) GetMessage() ENUMBADREQUEST {
 
 // GetMessageOk returns a tuple with the Message field value
 // and a boolean to check if the value has been set.
-func (o *UpdateProfile400Response) GetMessageOk() (*ENUMBADREQUEST, bool) {
+func (o *ListProfiles400ResponseAnyOf1) GetMessageOk() (*ENUMINVALIDCURSOR, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -66,12 +66,12 @@ func (o *UpdateProfile400Response) GetMessageOk() (*ENUMBADREQUEST, bool) {
 }
 
 // SetMessage sets field value
-func (o *UpdateProfile400Response) SetMessage(v ENUMBADREQUEST) {
+func (o *ListProfiles400ResponseAnyOf1) SetMessage(v ENUMINVALIDCURSOR) {
 	o.Message = v
 }
 
 // GetDetails returns the Details field value
-func (o *UpdateProfile400Response) GetDetails() string {
+func (o *ListProfiles400ResponseAnyOf1) GetDetails() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -82,7 +82,7 @@ func (o *UpdateProfile400Response) GetDetails() string {
 
 // GetDetailsOk returns a tuple with the Details field value
 // and a boolean to check if the value has been set.
-func (o *UpdateProfile400Response) GetDetailsOk() (*string, bool) {
+func (o *ListProfiles400ResponseAnyOf1) GetDetailsOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -90,19 +90,19 @@ func (o *UpdateProfile400Response) GetDetailsOk() (*string, bool) {
 }
 
 // SetDetails sets field value
-func (o *UpdateProfile400Response) SetDetails(v string) {
+func (o *ListProfiles400ResponseAnyOf1) SetDetails(v string) {
 	o.Details = v
 }
 
-func (o UpdateProfile400Response) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+func (o ListProfiles400ResponseAnyOf1) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
 }
 
-func (o UpdateProfile400Response) ToMap() (map[string]interface{}, error) {
+func (o ListProfiles400ResponseAnyOf1) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["message"] = o.Message
 	toSerialize["details"] = o.Details
@@ -114,7 +114,7 @@ func (o UpdateProfile400Response) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *UpdateProfile400Response) UnmarshalJSON(data []byte) (err error) {
+func (o *ListProfiles400ResponseAnyOf1) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -128,24 +128,24 @@ func (o *UpdateProfile400Response) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
 	}
 
-	varUpdateProfile400Response := _UpdateProfile400Response{}
+	varListProfiles400ResponseAnyOf1 := _ListProfiles400ResponseAnyOf1{}
 
-	err = json.Unmarshal(data, &varUpdateProfile400Response)
+	err = json.Unmarshal(data, &varListProfiles400ResponseAnyOf1)
 
 	if err != nil {
 		return err
 	}
 
-	*o = UpdateProfile400Response(varUpdateProfile400Response)
+	*o = ListProfiles400ResponseAnyOf1(varListProfiles400ResponseAnyOf1)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -158,38 +158,40 @@ func (o *UpdateProfile400Response) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableUpdateProfile400Response struct {
-	value *UpdateProfile400Response
+type NullableListProfiles400ResponseAnyOf1 struct {
+	value *ListProfiles400ResponseAnyOf1
 	isSet bool
 }
 
-func (v NullableUpdateProfile400Response) Get() *UpdateProfile400Response {
+func (v NullableListProfiles400ResponseAnyOf1) Get() *ListProfiles400ResponseAnyOf1 {
 	return v.value
 }
 
-func (v *NullableUpdateProfile400Response) Set(val *UpdateProfile400Response) {
+func (v *NullableListProfiles400ResponseAnyOf1) Set(val *ListProfiles400ResponseAnyOf1) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableUpdateProfile400Response) IsSet() bool {
+func (v NullableListProfiles400ResponseAnyOf1) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableUpdateProfile400Response) Unset() {
+func (v *NullableListProfiles400ResponseAnyOf1) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableUpdateProfile400Response(val *UpdateProfile400Response) *NullableUpdateProfile400Response {
-	return &NullableUpdateProfile400Response{value: val, isSet: true}
+func NewNullableListProfiles400ResponseAnyOf1(val *ListProfiles400ResponseAnyOf1) *NullableListProfiles400ResponseAnyOf1 {
+	return &NullableListProfiles400ResponseAnyOf1{value: val, isSet: true}
 }
 
-func (v NullableUpdateProfile400Response) MarshalJSON() ([]byte, error) {
+func (v NullableListProfiles400ResponseAnyOf1) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableUpdateProfile400Response) UnmarshalJSON(src []byte) error {
+func (v *NullableListProfiles400ResponseAnyOf1) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

@@ -17,15 +17,17 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"reflect"
 )
+
 
 // EventsAPIService EventsAPI service
 type EventsAPIService service
 
 type ApiGetEventRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *EventsAPIService
-	eventId    string
+	eventId string
 }
 
 func (r ApiGetEventRequest) Execute() (*GetEvent200Response, *http.Response, error) {
@@ -37,27 +39,26 @@ GetEvent Get an event
 
 Get an event by ID (including attachments)
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param eventId The event ID
-	@return ApiGetEventRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param eventId The event ID
+ @return ApiGetEventRequest
 */
 func (a *EventsAPIService) GetEvent(ctx context.Context, eventId string) ApiGetEventRequest {
 	return ApiGetEventRequest{
 		ApiService: a,
-		ctx:        ctx,
-		eventId:    eventId,
+		ctx: ctx,
+		eventId: eventId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetEvent200Response
+//  @return GetEvent200Response
 func (a *EventsAPIService) GetEventExecute(r ApiGetEventRequest) (*GetEvent200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *GetEvent200Response
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetEvent200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EventsAPIService.GetEvent")
@@ -132,8 +133,8 @@ func (a *EventsAPIService) GetEventExecute(r ApiGetEventRequest) (*GetEvent200Re
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -151,20 +152,20 @@ func (a *EventsAPIService) GetEventExecute(r ApiGetEventRequest) (*GetEvent200Re
 }
 
 type ApiListEventsRequest struct {
-	ctx            context.Context
-	ApiService     *EventsAPIService
-	cursor         *string
-	size           *int
-	sortType       *string
-	sortDirection  *string
-	search         *string
-	scanIds        *string
-	assetIds       *string
-	issueIds       *string
-	levels         *string
-	stages         *string
+	ctx context.Context
+	ApiService *EventsAPIService
+	cursor *string
+	size *int
+	sortType *string
+	sortDirection *string
+	search *string
+	scanIds *string
+	assetIds *string
+	issueIds *string
+	levels *[]string
+	stages *[]string
 	hasAttachments *string
-	attachments    *string
+	attachments *[]string
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
@@ -216,13 +217,13 @@ func (r ApiListEventsRequest) IssueIds(issueIds string) ApiListEventsRequest {
 }
 
 // Filter by level
-func (r ApiListEventsRequest) Levels(levels string) ApiListEventsRequest {
+func (r ApiListEventsRequest) Levels(levels []string) ApiListEventsRequest {
 	r.levels = &levels
 	return r
 }
 
 // Filter by stage
-func (r ApiListEventsRequest) Stages(stages string) ApiListEventsRequest {
+func (r ApiListEventsRequest) Stages(stages []string) ApiListEventsRequest {
 	r.stages = &stages
 	return r
 }
@@ -234,7 +235,7 @@ func (r ApiListEventsRequest) HasAttachments(hasAttachments string) ApiListEvent
 }
 
 // Filter by attachments
-func (r ApiListEventsRequest) Attachments(attachments string) ApiListEventsRequest {
+func (r ApiListEventsRequest) Attachments(attachments []string) ApiListEventsRequest {
 	r.attachments = &attachments
 	return r
 }
@@ -248,25 +249,24 @@ ListEvents List events
 
 List and search events of the organization.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiListEventsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiListEventsRequest
 */
 func (a *EventsAPIService) ListEvents(ctx context.Context) ApiListEventsRequest {
 	return ApiListEventsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ListEvents200Response
+//  @return ListEvents200Response
 func (a *EventsAPIService) ListEventsExecute(r ApiListEventsRequest) (*ListEvents200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ListEvents200Response
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ListEvents200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EventsAPIService.ListEvents")
@@ -287,6 +287,7 @@ func (a *EventsAPIService) ListEventsExecute(r ApiListEventsRequest) (*ListEvent
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.sortType != nil {
@@ -296,6 +297,7 @@ func (a *EventsAPIService) ListEventsExecute(r ApiListEventsRequest) (*ListEvent
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
 		var defaultValue string = "asc"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
 		r.sortDirection = &defaultValue
 	}
 	if r.search != nil {
@@ -311,16 +313,40 @@ func (a *EventsAPIService) ListEventsExecute(r ApiListEventsRequest) (*ListEvent
 		parameterAddToHeaderOrQuery(localVarQueryParams, "issueIds", r.issueIds, "form", "")
 	}
 	if r.levels != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "levels", r.levels, "form", "")
+		t := *r.levels
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "levels", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "levels", t, "form", "multi")
+		}
 	}
 	if r.stages != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "stages", r.stages, "form", "")
+		t := *r.stages
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "stages", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "stages", t, "form", "multi")
+		}
 	}
 	if r.hasAttachments != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "hasAttachments", r.hasAttachments, "form", "")
 	}
 	if r.attachments != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "attachments", r.attachments, "form", "")
+		t := *r.attachments
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "attachments", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "attachments", t, "form", "multi")
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -382,8 +408,8 @@ func (a *EventsAPIService) ListEventsExecute(r ApiListEventsRequest) (*ListEvent
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

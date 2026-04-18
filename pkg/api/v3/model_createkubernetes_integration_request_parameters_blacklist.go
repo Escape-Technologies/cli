@@ -19,7 +19,7 @@ var _ MappedNullable = &CreatekubernetesIntegrationRequestParametersBlacklist{}
 
 // CreatekubernetesIntegrationRequestParametersBlacklist struct for CreatekubernetesIntegrationRequestParametersBlacklist
 type CreatekubernetesIntegrationRequestParametersBlacklist struct {
-	Namespaces           []string `json:"namespaces,omitempty"`
+	Namespaces []string `json:"namespaces,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -75,7 +75,7 @@ func (o *CreatekubernetesIntegrationRequestParametersBlacklist) SetNamespaces(v 
 }
 
 func (o CreatekubernetesIntegrationRequestParametersBlacklist) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -151,3 +151,5 @@ func (v *NullableCreatekubernetesIntegrationRequestParametersBlacklist) Unmarsha
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

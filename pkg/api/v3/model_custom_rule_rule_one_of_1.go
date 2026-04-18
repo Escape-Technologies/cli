@@ -20,12 +20,12 @@ var _ MappedNullable = &CustomRuleRuleOneOf1{}
 
 // CustomRuleRuleOneOf1 struct for CustomRuleRuleOneOf1
 type CustomRuleRuleOneOf1 struct {
-	Id                   string                                                                              `json:"id"`
-	Alert                CreateCustomRuleRequestContentRuleOneOfAlert                                        `json:"alert"`
-	Type                 ENUMWEBAPP                                                                          `json:"type"`
-	Seed                 []GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInner `json:"seed"`
-	Detect               []CreateCustomRuleRequestContentRuleOneOf1DetectInner                               `json:"detect"`
-	Extractors           []interface{}                                                                       `json:"extractors,omitempty"`
+	Id string `json:"id"`
+	Alert CreateCustomRuleRequestContentRuleOneOfAlert `json:"alert"`
+	Type ENUMWEBAPP `json:"type"`
+	Seed []GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInner `json:"seed"`
+	Detect []CreateCustomRuleRequestContentRuleOneOf1DetectInner `json:"detect"`
+	Extractors []interface{} `json:"extractors,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -206,7 +206,7 @@ func (o *CustomRuleRuleOneOf1) SetExtractors(v []interface{}) {
 }
 
 func (o CustomRuleRuleOneOf1) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -248,10 +248,10 @@ func (o *CustomRuleRuleOneOf1) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -317,3 +317,5 @@ func (v *NullableCustomRuleRuleOneOf1) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

@@ -23,7 +23,7 @@ type CreateLocationRequest struct {
 	// The name of the location.
 	Name string `json:"name"`
 	// The SSH public key of the location.
-	SshPublicKey         string `json:"sshPublicKey"`
+	SshPublicKey string `json:"sshPublicKey"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -97,7 +97,7 @@ func (o *CreateLocationRequest) SetSshPublicKey(v string) {
 }
 
 func (o CreateLocationRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -130,10 +130,10 @@ func (o *CreateLocationRequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -195,3 +195,5 @@ func (v *NullableCreateLocationRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
