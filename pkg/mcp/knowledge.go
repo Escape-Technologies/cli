@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/url"
 	"os"
 	"strings"
@@ -20,6 +21,11 @@ const (
 	knowledgeDocsSiteEnv     = "DOCS_SITE_URL"
 	knowledgeDefaultLimit    = 5
 	knowledgeMaxLimit        = 8
+
+	// platformLinkLimit caps how many curated platform deep links the
+	// knowledge tool surfaces per answer. The selector returns these in
+	// score order; more than 3 dilutes the actionable CTA.
+	platformLinkLimit = 3
 )
 
 // KnowledgeOptions configures the answer_question tool. Zero-value fields
@@ -81,7 +87,7 @@ func RegisterKnowledgeTools(server *mcpserver.MCPServer, opts KnowledgeOptions) 
 }
 
 func buildKnowledgeHandler(
-	index *docsSearchIndex,
+	index *DocsSearchIndex,
 	selector *PlatformLinkSelector,
 	docsSite string,
 	platformBase string,
@@ -113,15 +119,21 @@ func buildKnowledgeHandler(
 		docsQuery := BuildDocsQuery(query)
 		intent := DetectLinkIntent(query)
 
-		loadDocs := func() []KnowledgeSearchResult {
+		// loadDocs returns (matches, indexUnavailable). indexUnavailable=true
+		// only when index.Search itself errored (network/decoding failure);
+		// "no matches found" returns (nil, false). The fallback formatter
+		// reads this signal so the user knows the difference between
+		// "we have no relevant docs" and "we couldn't reach the docs index".
+		loadDocs := func() ([]KnowledgeSearchResult, bool) {
 			if docsQuery == "" {
-				return nil
+				return nil, false
 			}
 			matches, err := index.Search(ctx, docsQuery, limit)
 			if err != nil {
-				return nil
+				log.Printf("WARN knowledge_answer_question: docs index search failed: %v", err)
+				return nil, true
 			}
-			return matches
+			return matches, false
 		}
 
 		// Selector context: query + docs titles ONLY. Snippets contaminate the
@@ -129,22 +141,23 @@ func buildKnowledgeHandler(
 		// "install", ...), which drags in irrelevant routes like /asm/create/
 		// for a "what is a private location" question.
 		platformContextFrom := func(matches []KnowledgeSearchResult) string {
-			ctx := query
+			parts := make([]string, 0, 1+len(matches))
+			parts = append(parts, query)
 			for _, match := range matches {
-				ctx += " " + match.Title
+				parts = append(parts, match.Title)
 			}
-			return ctx
+			return strings.Join(parts, " ")
 		}
 
 		if intent.ExplicitLinkRequest && intent.Target != LinkTargetNone {
 			var docsMatches []KnowledgeSearchResult
 			if intent.Target == LinkTargetDocs || intent.Target == LinkTargetBoth {
-				docsMatches = loadDocs()
+				docsMatches, _ = loadDocs()
 			}
 
 			var platformLinks []PlatformLink
 			if intent.Target == LinkTargetPlatform || intent.Target == LinkTargetBoth {
-				platformLinks = selector.Select(platformContextFrom(docsMatches), 3)
+				platformLinks = selector.Select(platformContextFrom(docsMatches), platformLinkLimit)
 			}
 
 			return formatDirectedLinkResult(
@@ -152,14 +165,14 @@ func buildKnowledgeHandler(
 			), nil
 		}
 
-		matches := loadDocs()
+		matches, indexUnavailable := loadDocs()
 		if len(matches) == 0 {
 			return formatFallbackResult(
-				question, selector.Select(query, 3), docsSite, docsQuery, platformBase,
+				question, selector.Select(query, platformLinkLimit), docsSite, docsQuery, platformBase, indexUnavailable,
 			), nil
 		}
 
-		platformLinks := selector.Select(platformContextFrom(matches), 3)
+		platformLinks := selector.Select(platformContextFrom(matches), platformLinkLimit)
 		return formatGeneralResult(question, platformLinks, matches), nil
 	}
 }
@@ -173,7 +186,7 @@ func formatDirectedLinkResult(
 	docsQuery string,
 	platformBase string,
 ) *mcpgo.CallToolResult {
-	lines := prependPrimaryPlatformCTA([]string{fmt.Sprintf("Question: %s", question)}, platformLinks)
+	lines := prependPrimaryPlatformCTA([]string{"Question: " + question}, platformLinks)
 
 	if intent.Target == LinkTargetDocs || intent.Target == LinkTargetBoth {
 		appendDocumentationLinks(&lines, docsMatches, docsSite, docsQuery)
@@ -202,11 +215,16 @@ func formatFallbackResult(
 	docsSite string,
 	docsQuery string,
 	platformBase string,
+	indexUnavailable bool,
 ) *mcpgo.CallToolResult {
+	lead := "I could not find strong documentation matches right now."
+	if indexUnavailable {
+		lead = "The documentation search index is temporarily unreachable; I am falling back to top-level links."
+	}
 	lines := []string{
-		fmt.Sprintf("Question: %s", question),
+		"Question: " + question,
 		"",
-		"I could not find strong documentation matches right now.",
+		lead,
 		"Try rephrasing with product terms (for example: scans, profiles, asm, api).",
 		fmt.Sprintf("Docs home: [Documentation home](%s)", docsHomeURL(docsSite)),
 	}
@@ -216,10 +234,11 @@ func formatFallbackResult(
 	appendPlatformLinks(&lines, platformLinks, platformBase)
 
 	payload := map[string]any{
-		"question":      question,
-		"docsMatches":   []KnowledgeSearchResult{},
-		"platformLinks": platformLinks,
-		"fallback":      true,
+		"question":         question,
+		"docsMatches":      []KnowledgeSearchResult{},
+		"platformLinks":    platformLinks,
+		"fallback":         true,
+		"indexUnavailable": indexUnavailable,
 	}
 	return mcpgo.NewToolResultStructured(payload, strings.Join(lines, "\n"))
 }
@@ -229,7 +248,7 @@ func formatGeneralResult(
 	platformLinks []PlatformLink,
 	matches []KnowledgeSearchResult,
 ) *mcpgo.CallToolResult {
-	lines := prependPrimaryPlatformCTA([]string{fmt.Sprintf("Question: %s", question)}, platformLinks)
+	lines := prependPrimaryPlatformCTA([]string{"Question: " + question}, platformLinks)
 	lines = append(lines, "", fmt.Sprintf("Top documentation matches (%d):", len(matches)))
 	for i, match := range matches {
 		lines = append(lines, fmt.Sprintf("%d. [%s](%s)", i+1, match.Title, match.URL))

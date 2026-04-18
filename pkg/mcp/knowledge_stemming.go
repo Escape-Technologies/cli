@@ -2,6 +2,10 @@ package mcp
 
 import "strings"
 
+// minStemmableLength matches the TS reference: tokens of three characters or
+// fewer skip stemming entirely (no morphology to strip cleanly).
+const minStemmableLength = 3
+
 // StemToken is a port of services/mcp-server/src/lanes/knowledge/stemming.ts.
 // Kept intentionally lightweight — NOT a full Porter stemmer — because this
 // matches what the docs search index expects.
@@ -15,7 +19,7 @@ func StemToken(value string) string {
 	}
 	out := clean.String()
 
-	if len(out) <= 3 {
+	if len(out) <= minStemmableLength {
 		return out
 	}
 

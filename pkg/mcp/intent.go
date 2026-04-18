@@ -10,6 +10,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -32,6 +33,19 @@ const (
 
 	chatContextHeader = "X-Escape-Chat-Context"
 	intentModeEnv     = "MCP_INTENT_FILTER"
+
+	// maxRequestBodyBytes is the soft limit applied to incoming MCP HTTP
+	// requests. 10 MiB is generous for a JSON-RPC envelope (largest expected
+	// payload is a tools/list reply we proxy back); anything beyond is
+	// rejected before we attempt to decode it.
+	maxRequestBodyBytes = 10 << 20
+
+	// maxToolDescriptionRunes bounds how long a tool description we ship to
+	// the classifier digest. Counted in runes so non-ASCII descriptions are
+	// not split mid-character. Tuned to keep the total digest under typical
+	// LLM context budgets when shipping ~50 tools.
+	maxToolDescriptionRunes = 160
+	toolDescriptionEllipsisCutoff = 157
 )
 
 // IntentOptions configures the HTTP interceptor.
@@ -60,7 +74,7 @@ func NewIntentMiddleware(next http.Handler, opts IntentOptions) http.Handler {
 			return
 		}
 
-		body, err := io.ReadAll(http.MaxBytesReader(w, r.Body, 10<<20))
+		body, err := io.ReadAll(http.MaxBytesReader(w, r.Body, maxRequestBodyBytes))
 		if err != nil {
 			// Restore body so the downstream handler can surface the real error.
 			r.Body = io.NopCloser(bytes.NewReader(nil))
@@ -126,7 +140,7 @@ func NewIntentMiddleware(next http.Handler, opts IntentOptions) http.Handler {
 				w.Header().Add(key, value)
 			}
 		}
-		w.Header().Set("Content-Length", fmt.Sprintf("%d", bytesOut))
+		w.Header().Set("Content-Length", strconv.Itoa(bytesOut))
 		w.WriteHeader(http.StatusOK)
 		_, _ = w.Write(rewritten)
 	})
@@ -173,8 +187,12 @@ func buildDigest(specs []ToolSpec) []ToolDigest {
 	digest := make([]ToolDigest, 0, len(specs))
 	for _, s := range specs {
 		desc := s.Description
-		if len(desc) > 160 {
-			desc = desc[:157] + "..."
+		// Truncate by runes — byte-slicing can split a multi-byte UTF-8
+		// codepoint mid-character and corrupt the description shipped to
+		// the classifier (descriptions can contain emoji or accented chars).
+		runes := []rune(desc)
+		if len(runes) > maxToolDescriptionRunes {
+			desc = string(runes[:toolDescriptionEllipsisCutoff]) + "..."
 		}
 		digest = append(digest, ToolDigest{Name: s.Name, Description: desc})
 	}
@@ -354,7 +372,11 @@ func (r *responseRecorder) Write(b []byte) (int, error) {
 	if r.status == 0 {
 		r.status = http.StatusOK
 	}
-	return r.buffer.Write(b)
+	n, err := r.buffer.Write(b)
+	if err != nil {
+		return n, fmt.Errorf("buffer response: %w", err)
+	}
+	return n, nil
 }
 
 func (r *responseRecorder) WriteHeader(status int) {
