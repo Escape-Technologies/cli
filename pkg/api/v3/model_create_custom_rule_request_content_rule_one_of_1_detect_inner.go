@@ -18,15 +18,15 @@ import (
 
 // CreateCustomRuleRequestContentRuleOneOf1DetectInner - struct for CreateCustomRuleRequestContentRuleOneOf1DetectInner
 type CreateCustomRuleRequestContentRuleOneOf1DetectInner struct {
-	CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf
-	CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf1 *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf1
-	CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf2 *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf2
-	CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf3 *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf3
-	CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4 *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4
-	CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf5 *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf5
-	CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf6 *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf6
-	CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf7 *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf7
-	CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf8 *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf8
+	CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf            *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf
+	CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf1           *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf1
+	CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf2           *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf2
+	CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf3           *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf3
+	CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4           *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4
+	CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf5           *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf5
+	CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf6           *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf6
+	CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf7           *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf7
+	CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf8           *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf8
 	CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf19 *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf19
 	CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf20 *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf20
 	CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf21 *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf21
@@ -115,7 +115,6 @@ func CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf21AsCreate
 		CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf21: v,
 	}
 }
-
 
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *CreateCustomRuleRequestContentRuleOneOf1DetectInner) UnmarshalJSON(data []byte) error {
@@ -402,7 +401,7 @@ func (src CreateCustomRuleRequestContentRuleOneOf1DetectInner) MarshalJSON() ([]
 }
 
 // Get the actual instance
-func (obj *CreateCustomRuleRequestContentRuleOneOf1DetectInner) GetActualInstance() (interface{}) {
+func (obj *CreateCustomRuleRequestContentRuleOneOf1DetectInner) GetActualInstance() interface{} {
 	if obj == nil {
 		return nil
 	}
@@ -459,7 +458,7 @@ func (obj *CreateCustomRuleRequestContentRuleOneOf1DetectInner) GetActualInstanc
 }
 
 // Get the actual instance value
-func (obj CreateCustomRuleRequestContentRuleOneOf1DetectInner) GetActualInstanceValue() (interface{}) {
+func (obj CreateCustomRuleRequestContentRuleOneOf1DetectInner) GetActualInstanceValue() interface{} {
 	if obj.CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf != nil {
 		return *obj.CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf
 	}
@@ -547,5 +546,3 @@ func (v *NullableCreateCustomRuleRequestContentRuleOneOf1DetectInner) UnmarshalJ
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

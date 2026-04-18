@@ -108,4 +108,3 @@ func (v *NullableENUMPROPERTIESCONFIGURATIONPROPERTIESAUTHENTICATIONPROPERTIESPR
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

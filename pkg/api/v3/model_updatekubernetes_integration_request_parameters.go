@@ -19,8 +19,8 @@ var _ MappedNullable = &UpdatekubernetesIntegrationRequestParameters{}
 
 // UpdatekubernetesIntegrationRequestParameters The new parameters of the integration
 type UpdatekubernetesIntegrationRequestParameters struct {
-	Blacklist *CreatekubernetesIntegrationRequestParametersBlacklist `json:"blacklist,omitempty"`
-	Tags *CreatekubernetesIntegrationRequestParametersTags `json:"tags,omitempty"`
+	Blacklist            *CreatekubernetesIntegrationRequestParametersBlacklist `json:"blacklist,omitempty"`
+	Tags                 *CreatekubernetesIntegrationRequestParametersTags      `json:"tags,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -108,7 +108,7 @@ func (o *UpdatekubernetesIntegrationRequestParameters) SetTags(v Createkubernete
 }
 
 func (o UpdatekubernetesIntegrationRequestParameters) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -188,5 +188,3 @@ func (v *NullableUpdatekubernetesIntegrationRequestParameters) UnmarshalJSON(src
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

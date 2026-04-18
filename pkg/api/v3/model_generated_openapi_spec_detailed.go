@@ -25,7 +25,7 @@ type GeneratedOpenapiSpecDetailed struct {
 	// The date and time the generated openapi spec was created
 	CreatedAt string `json:"createdAt"`
 	// The temporary signed url of the generated openapi spec
-	TemporarySignedUrl string `json:"temporarySignedUrl"`
+	TemporarySignedUrl   string `json:"temporarySignedUrl"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -124,7 +124,7 @@ func (o *GeneratedOpenapiSpecDetailed) SetTemporarySignedUrl(v string) {
 }
 
 func (o GeneratedOpenapiSpecDetailed) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -159,10 +159,10 @@ func (o *GeneratedOpenapiSpecDetailed) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -225,5 +225,3 @@ func (v *NullableGeneratedOpenapiSpecDetailed) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
