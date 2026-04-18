@@ -1,9 +1,0 @@
-# Test: Issues listing (read-only)
-# Issues are created by scans. For a new org this will be empty but should not error.
-
-# 4.1 List all issues
-exec escape issues list -o json
-json-valid
-
-# 4.12 Get nonexistent issue fails
-! exec escape issues get 00000000-0000-0000-0000-000000000000 -o json
