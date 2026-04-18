@@ -54,6 +54,9 @@ func (s *Server) Serve(ctx context.Context) error {
 		mcpserver.WithToolCapabilities(false),
 	)
 	RegisterBuiltinTools(rootServer, s.options.Tools)
+	if err := RegisterKnowledgeTools(rootServer, KnowledgeOptions{}); err != nil {
+		return fmt.Errorf("register knowledge tools: %w", err)
+	}
 	RegisterCommandTools(rootServer, s.options.Tools, CommandExecutionOptions{
 		PublicAPIURL: s.options.PublicAPIURL,
 	})
