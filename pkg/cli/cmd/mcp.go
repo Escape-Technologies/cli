@@ -34,11 +34,22 @@ var mcpServeCmd = &cobra.Command{
 			return fmt.Errorf("failed to build MCP tool catalog: %w", err)
 		}
 
+		mode := climcp.ModeFromEnv(climcp.IntentModeCompactOnly)
+		var classifier climcp.Classifier
+		if mode == climcp.IntentModeOn {
+			classifier, err = climcp.NewClassifierFromEnv()
+			if err != nil {
+				return fmt.Errorf("failed to configure MCP classifier: %w", err)
+			}
+		}
+
 		server := climcp.NewServer(climcp.ServerOptions{
 			Version:      version.GetVersion().DisplayVersion(),
 			Port:         mcpServePort,
 			PublicAPIURL: resolveMCPPublicAPIURL(),
 			Tools:        toolSpecs,
+			IntentMode:   mode,
+			Classifier:   classifier,
 		})
 
 		return server.Serve(cmd.Context())

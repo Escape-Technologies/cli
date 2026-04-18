@@ -23,6 +23,15 @@ type ServerOptions struct {
 	Port         int
 	PublicAPIURL string
 	Tools        []ToolSpec
+	// IntentMode controls the tools/list interceptor. When empty the server
+	// defaults to IntentModeCompactOnly, which serves compact stubs but never
+	// calls a classifier. Set to IntentModeOn to enable classifier-driven
+	// expansion (requires MCP_CLASSIFIER_* env vars). IntentModeOff disables
+	// the middleware entirely.
+	IntentMode IntentMode
+	// Classifier is an optional ranker used when IntentMode == IntentModeOn.
+	// If nil while IntentModeOn, the server behaves as IntentModeCompactOnly.
+	Classifier Classifier
 }
 
 // Server is the embedded MCP server that exposes CLI commands over HTTP.
@@ -63,8 +72,18 @@ func (s *Server) Serve(ctx context.Context) error {
 		_, _ = writer.Write([]byte("ok"))
 	}
 
+	mcpMode := s.options.IntentMode
+	if mcpMode == "" {
+		mcpMode = IntentModeCompactOnly
+	}
+	interceptedMCP := NewIntentMiddleware(mcpHandler, IntentOptions{
+		Mode:       mcpMode,
+		Classifier: s.options.Classifier,
+		Specs:      s.options.Tools,
+	})
+
 	mainMux := http.NewServeMux()
-	mainMux.Handle("/mcp", mcpHandler)
+	mainMux.Handle("/mcp", interceptedMCP)
 	mainMux.HandleFunc("/health", healthHandler)
 
 	httpServer := &http.Server{
