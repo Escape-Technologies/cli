@@ -2,6 +2,7 @@ package mcp
 
 import (
 	"bytes"
+	"encoding/base64"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -142,13 +143,24 @@ func ModeFromEnv(fallback IntentMode) IntentMode {
 	return fallback
 }
 
+// parseChatContext decodes the X-Escape-Chat-Context header. The api base64-
+// encodes the JSON payload because HTTP headers must be ISO-8859-1 and chat
+// messages routinely contain characters beyond 0xFF (emoji, CJK, etc.). We
+// accept a raw JSON value too so older api builds or manual curl tests don't
+// break.
 func parseChatContext(raw string) (ChatContext, bool) {
 	raw = strings.TrimSpace(raw)
 	if raw == "" {
 		return ChatContext{}, false
 	}
+
+	payload := []byte(raw)
+	if decoded, err := base64.StdEncoding.DecodeString(raw); err == nil && len(decoded) > 0 {
+		payload = decoded
+	}
+
 	var parsed ChatContext
-	if err := json.Unmarshal([]byte(raw), &parsed); err != nil {
+	if err := json.Unmarshal(payload, &parsed); err != nil {
 		return ChatContext{}, false
 	}
 	if strings.TrimSpace(parsed.Current) == "" && len(parsed.History) == 0 {
