@@ -17,14 +17,16 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"reflect"
 )
+
 
 // LocationsAPIService LocationsAPI service
 type LocationsAPIService service
 
 type ApiCreateLocationRequest struct {
-	ctx                   context.Context
-	ApiService            *LocationsAPIService
+	ctx context.Context
+	ApiService *LocationsAPIService
 	createLocationRequest *CreateLocationRequest
 }
 
@@ -42,25 +44,24 @@ CreateLocation Create a location
 
 Create a Private Location.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateLocationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateLocationRequest
 */
 func (a *LocationsAPIService) CreateLocation(ctx context.Context) ApiCreateLocationRequest {
 	return ApiCreateLocationRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreateLocation200Response
+//  @return CreateLocation200Response
 func (a *LocationsAPIService) CreateLocationExecute(r ApiCreateLocationRequest) (*CreateLocation200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreateLocation200Response
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreateLocation200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LocationsAPIService.CreateLocation")
@@ -130,14 +131,14 @@ func (a *LocationsAPIService) CreateLocationExecute(r ApiCreateLocationRequest) 
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v UpdateProfile400Response
+			var v ListProfiles400ResponseAnyOf
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
@@ -147,8 +148,8 @@ func (a *LocationsAPIService) CreateLocationExecute(r ApiCreateLocationRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -166,7 +167,7 @@ func (a *LocationsAPIService) CreateLocationExecute(r ApiCreateLocationRequest) 
 }
 
 type ApiDeleteLocationRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *LocationsAPIService
 	locationId string
 }
@@ -180,27 +181,26 @@ DeleteLocation Delete a location
 
 Delete a Private Location.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param locationId The ID of the location to delete
-	@return ApiDeleteLocationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param locationId The ID of the location to delete
+ @return ApiDeleteLocationRequest
 */
 func (a *LocationsAPIService) DeleteLocation(ctx context.Context, locationId string) ApiDeleteLocationRequest {
 	return ApiDeleteLocationRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 		locationId: locationId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return DeleteLocation200Response
+//  @return DeleteLocation200Response
 func (a *LocationsAPIService) DeleteLocationExecute(r ApiDeleteLocationRequest) (*DeleteLocation200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodDelete
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *DeleteLocation200Response
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *DeleteLocation200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LocationsAPIService.DeleteLocation")
@@ -269,14 +269,14 @@ func (a *LocationsAPIService) DeleteLocationExecute(r ApiDeleteLocationRequest) 
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v UpdateProfile400Response
+			var v ListProfiles400ResponseAnyOf
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -286,8 +286,8 @@ func (a *LocationsAPIService) DeleteLocationExecute(r ApiDeleteLocationRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -305,7 +305,7 @@ func (a *LocationsAPIService) DeleteLocationExecute(r ApiDeleteLocationRequest) 
 }
 
 type ApiGetLocationRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *LocationsAPIService
 	locationId string
 }
@@ -319,27 +319,26 @@ GetLocation Get a location
 
 Retrieve a Private Location details.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param locationId The ID of the location to get
-	@return ApiGetLocationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param locationId The ID of the location to get
+ @return ApiGetLocationRequest
 */
 func (a *LocationsAPIService) GetLocation(ctx context.Context, locationId string) ApiGetLocationRequest {
 	return ApiGetLocationRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 		locationId: locationId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreateLocation200Response
+//  @return CreateLocation200Response
 func (a *LocationsAPIService) GetLocationExecute(r ApiGetLocationRequest) (*CreateLocation200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreateLocation200Response
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreateLocation200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LocationsAPIService.GetLocation")
@@ -414,8 +413,8 @@ func (a *LocationsAPIService) GetLocationExecute(r ApiGetLocationRequest) (*Crea
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -433,15 +432,15 @@ func (a *LocationsAPIService) GetLocationExecute(r ApiGetLocationRequest) (*Crea
 }
 
 type ApiListLocationsRequest struct {
-	ctx           context.Context
-	ApiService    *LocationsAPIService
-	cursor        *string
-	size          *int
-	sortType      *string
+	ctx context.Context
+	ApiService *LocationsAPIService
+	cursor *string
+	size *int
+	sortType *string
 	sortDirection *string
-	search        *string
-	enabled       *string
-	type_         *string
+	search *string
+	enabled *string
+	type_ *[]string
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
@@ -478,7 +477,7 @@ func (r ApiListLocationsRequest) Enabled(enabled string) ApiListLocationsRequest
 	return r
 }
 
-func (r ApiListLocationsRequest) Type_(type_ string) ApiListLocationsRequest {
+func (r ApiListLocationsRequest) Type_(type_ []string) ApiListLocationsRequest {
 	r.type_ = &type_
 	return r
 }
@@ -492,25 +491,24 @@ ListLocations List locations
 
 List and search locations of the organization.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiListLocationsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiListLocationsRequest
 */
 func (a *LocationsAPIService) ListLocations(ctx context.Context) ApiListLocationsRequest {
 	return ApiListLocationsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ListLocations200Response
+//  @return ListLocations200Response
 func (a *LocationsAPIService) ListLocationsExecute(r ApiListLocationsRequest) (*ListLocations200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ListLocations200Response
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ListLocations200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LocationsAPIService.ListLocations")
@@ -531,6 +529,7 @@ func (a *LocationsAPIService) ListLocationsExecute(r ApiListLocationsRequest) (*
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.sortType != nil {
@@ -540,6 +539,7 @@ func (a *LocationsAPIService) ListLocationsExecute(r ApiListLocationsRequest) (*
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
 		var defaultValue string = "asc"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
 		r.sortDirection = &defaultValue
 	}
 	if r.search != nil {
@@ -549,7 +549,15 @@ func (a *LocationsAPIService) ListLocationsExecute(r ApiListLocationsRequest) (*
 		parameterAddToHeaderOrQuery(localVarQueryParams, "enabled", r.enabled, "form", "")
 	}
 	if r.type_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "type", r.type_, "form", "")
+		t := *r.type_
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "type", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "type", t, "form", "multi")
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -611,8 +619,8 @@ func (a *LocationsAPIService) ListLocationsExecute(r ApiListLocationsRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -630,9 +638,9 @@ func (a *LocationsAPIService) ListLocationsExecute(r ApiListLocationsRequest) (*
 }
 
 type ApiUpdateLocationRequest struct {
-	ctx                   context.Context
-	ApiService            *LocationsAPIService
-	locationId            string
+	ctx context.Context
+	ApiService *LocationsAPIService
+	locationId string
 	updateLocationRequest *UpdateLocationRequest
 }
 
@@ -650,27 +658,26 @@ UpdateLocation Update a location
 
 Update a Private Location details.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param locationId The ID of the location to update
-	@return ApiUpdateLocationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param locationId The ID of the location to update
+ @return ApiUpdateLocationRequest
 */
 func (a *LocationsAPIService) UpdateLocation(ctx context.Context, locationId string) ApiUpdateLocationRequest {
 	return ApiUpdateLocationRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 		locationId: locationId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreateLocation200Response
+//  @return CreateLocation200Response
 func (a *LocationsAPIService) UpdateLocationExecute(r ApiUpdateLocationRequest) (*CreateLocation200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPut
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreateLocation200Response
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreateLocation200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LocationsAPIService.UpdateLocation")
@@ -741,14 +748,14 @@ func (a *LocationsAPIService) UpdateLocationExecute(r ApiUpdateLocationRequest) 
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v UpdateProfile400Response
+			var v ListProfiles400ResponseAnyOf
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -758,8 +765,8 @@ func (a *LocationsAPIService) UpdateLocationExecute(r ApiUpdateLocationRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
@@ -769,8 +776,8 @@ func (a *LocationsAPIService) UpdateLocationExecute(r ApiUpdateLocationRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

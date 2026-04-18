@@ -21,14 +21,14 @@ var _ MappedNullable = &CreateSchemaViaFetch{}
 // CreateSchemaViaFetch struct for CreateSchemaViaFetch
 type CreateSchemaViaFetch struct {
 	AssetType ENUMSCHEMA `json:"asset_type"`
-	Name      *string    `json:"name,omitempty"`
+	Name *string `json:"name,omitempty"`
 	// The list of project IDs bind the asset on.
-	ProjectIds     []string                            `json:"projectIds,omitempty"`
-	Fetch          CreateSchemaViaFetchFetch           `json:"fetch"`
+	ProjectIds []string `json:"projectIds,omitempty"`
+	Fetch CreateSchemaViaFetchFetch `json:"fetch"`
 	Authentication *CreateSchemaViaFetchAuthentication `json:"authentication,omitempty"`
 	// Deprecated. Use `authentication` object instead. JSON-encoded authentication object.
 	// Deprecated
-	AuthenticationStr    *string `json:"authenticationStr,omitempty"`
+	AuthenticationStr *string `json:"authenticationStr,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -233,7 +233,7 @@ func (o *CreateSchemaViaFetch) SetAuthenticationStr(v string) {
 }
 
 func (o CreateSchemaViaFetch) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -278,10 +278,10 @@ func (o *CreateSchemaViaFetch) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -347,3 +347,5 @@ func (v *NullableCreateSchemaViaFetch) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

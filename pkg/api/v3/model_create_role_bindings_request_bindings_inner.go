@@ -25,7 +25,7 @@ type CreateRoleBindingsRequestBindingsInner struct {
 	// The project ID
 	ProjectId *string `json:"projectId,omitempty"`
 	// The user ID
-	UserId               string `json:"userId"`
+	UserId string `json:"userId"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -131,7 +131,7 @@ func (o *CreateRoleBindingsRequestBindingsInner) SetUserId(v string) {
 }
 
 func (o CreateRoleBindingsRequestBindingsInner) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -167,10 +167,10 @@ func (o *CreateRoleBindingsRequestBindingsInner) UnmarshalJSON(data []byte) (err
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -233,3 +233,5 @@ func (v *NullableCreateRoleBindingsRequestBindingsInner) UnmarshalJSON(src []byt
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

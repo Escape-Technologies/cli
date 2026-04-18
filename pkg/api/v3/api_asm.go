@@ -18,12 +18,13 @@ import (
 	"net/url"
 )
 
+
 // AsmAPIService AsmAPI service
 type AsmAPIService service
 
 type ApiTriggerAsmScansRequest struct {
-	ctx                    context.Context
-	ApiService             *AsmAPIService
+	ctx context.Context
+	ApiService *AsmAPIService
 	triggerAsmScansRequest *TriggerAsmScansRequest
 }
 
@@ -41,25 +42,24 @@ TriggerAsmScans Trigger ASM scans
 
 Trigger Attack Surface Management scans on assets matching the given filter. If no filter is provided, scans all monitored assets.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiTriggerAsmScansRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiTriggerAsmScansRequest
 */
 func (a *AsmAPIService) TriggerAsmScans(ctx context.Context) ApiTriggerAsmScansRequest {
 	return ApiTriggerAsmScansRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return TriggerAsmScans200Response
+//  @return TriggerAsmScans200Response
 func (a *AsmAPIService) TriggerAsmScansExecute(r ApiTriggerAsmScansRequest) (*TriggerAsmScans200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *TriggerAsmScans200Response
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *TriggerAsmScans200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AsmAPIService.TriggerAsmScans")
@@ -129,14 +129,14 @@ func (a *AsmAPIService) TriggerAsmScansExecute(r ApiTriggerAsmScansRequest) (*Tr
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v UpdateProfile400Response
+			var v ListProfiles400ResponseAnyOf
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

@@ -15,148 +15,58 @@ import (
 	"fmt"
 )
 
-// checks if the ListProfiles400Response type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &ListProfiles400Response{}
 
 // ListProfiles400Response struct for ListProfiles400Response
 type ListProfiles400Response struct {
-	Message              ENUMINVALIDCURSOR `json:"message"`
-	Details              string            `json:"details"`
-	AdditionalProperties map[string]interface{}
+	ListProfiles400ResponseAnyOf *ListProfiles400ResponseAnyOf
+	ListProfiles400ResponseAnyOf1 *ListProfiles400ResponseAnyOf1
 }
 
-type _ListProfiles400Response ListProfiles400Response
-
-// NewListProfiles400Response instantiates a new ListProfiles400Response object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
-func NewListProfiles400Response(message ENUMINVALIDCURSOR, details string) *ListProfiles400Response {
-	this := ListProfiles400Response{}
-	this.Message = message
-	this.Details = details
-	return &this
-}
-
-// NewListProfiles400ResponseWithDefaults instantiates a new ListProfiles400Response object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
-func NewListProfiles400ResponseWithDefaults() *ListProfiles400Response {
-	this := ListProfiles400Response{}
-	return &this
-}
-
-// GetMessage returns the Message field value
-func (o *ListProfiles400Response) GetMessage() ENUMINVALIDCURSOR {
-	if o == nil {
-		var ret ENUMINVALIDCURSOR
-		return ret
-	}
-
-	return o.Message
-}
-
-// GetMessageOk returns a tuple with the Message field value
-// and a boolean to check if the value has been set.
-func (o *ListProfiles400Response) GetMessageOk() (*ENUMINVALIDCURSOR, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Message, true
-}
-
-// SetMessage sets field value
-func (o *ListProfiles400Response) SetMessage(v ENUMINVALIDCURSOR) {
-	o.Message = v
-}
-
-// GetDetails returns the Details field value
-func (o *ListProfiles400Response) GetDetails() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Details
-}
-
-// GetDetailsOk returns a tuple with the Details field value
-// and a boolean to check if the value has been set.
-func (o *ListProfiles400Response) GetDetailsOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Details, true
-}
-
-// SetDetails sets field value
-func (o *ListProfiles400Response) SetDetails(v string) {
-	o.Details = v
-}
-
-func (o ListProfiles400Response) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o ListProfiles400Response) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
-	toSerialize["message"] = o.Message
-	toSerialize["details"] = o.Details
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
-	return toSerialize, nil
-}
-
-func (o *ListProfiles400Response) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"message",
-		"details",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err
-	}
-
-	for _, requiredProperty := range requiredProperties {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
+// Unmarshal JSON data into any of the pointers in the struct
+func (dst *ListProfiles400Response) UnmarshalJSON(data []byte) error {
+	var err error
+	// try to unmarshal JSON data into ListProfiles400ResponseAnyOf
+	err = json.Unmarshal(data, &dst.ListProfiles400ResponseAnyOf);
+	if err == nil {
+		jsonListProfiles400ResponseAnyOf, _ := json.Marshal(dst.ListProfiles400ResponseAnyOf)
+		if string(jsonListProfiles400ResponseAnyOf) == "{}" { // empty struct
+			dst.ListProfiles400ResponseAnyOf = nil
+		} else {
+			return nil // data stored in dst.ListProfiles400ResponseAnyOf, return on the first match
 		}
+	} else {
+		dst.ListProfiles400ResponseAnyOf = nil
 	}
 
-	varListProfiles400Response := _ListProfiles400Response{}
-
-	err = json.Unmarshal(data, &varListProfiles400Response)
-
-	if err != nil {
-		return err
+	// try to unmarshal JSON data into ListProfiles400ResponseAnyOf1
+	err = json.Unmarshal(data, &dst.ListProfiles400ResponseAnyOf1);
+	if err == nil {
+		jsonListProfiles400ResponseAnyOf1, _ := json.Marshal(dst.ListProfiles400ResponseAnyOf1)
+		if string(jsonListProfiles400ResponseAnyOf1) == "{}" { // empty struct
+			dst.ListProfiles400ResponseAnyOf1 = nil
+		} else {
+			return nil // data stored in dst.ListProfiles400ResponseAnyOf1, return on the first match
+		}
+	} else {
+		dst.ListProfiles400ResponseAnyOf1 = nil
 	}
 
-	*o = ListProfiles400Response(varListProfiles400Response)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "message")
-		delete(additionalProperties, "details")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
+	return fmt.Errorf("data failed to match schemas in anyOf(ListProfiles400Response)")
 }
+
+// Marshal data from the first non-nil pointers in the struct to JSON
+func (src ListProfiles400Response) MarshalJSON() ([]byte, error) {
+	if src.ListProfiles400ResponseAnyOf != nil {
+		return json.Marshal(&src.ListProfiles400ResponseAnyOf)
+	}
+
+	if src.ListProfiles400ResponseAnyOf1 != nil {
+		return json.Marshal(&src.ListProfiles400ResponseAnyOf1)
+	}
+
+	return nil, nil // no data in anyOf schemas
+}
+
 
 type NullableListProfiles400Response struct {
 	value *ListProfiles400Response
@@ -193,3 +103,5 @@ func (v *NullableListProfiles400Response) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

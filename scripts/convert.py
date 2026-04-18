@@ -220,14 +220,33 @@ for path, path_data in data["paths"].items():
         ]
 
         # Normalize list-like query params
-        # - For params backed by arrayOrSingle on the server (initiators, kinds, risks, locationIds),
-        #   expose them as arrays so the client sends repeated query params (form+explode)
+        # - For params backed by arrayOrSingle on the server, expose them as
+        #   arrays so the client sends repeated query params (form+explode).
+        #   The server's zod arrayOrSingle helper rejects comma-joined values
+        #   (it sees one element "A,B" instead of two ["A", "B"]).
         # - Keep others as strings (server accepts CSV via commaSeparatedString)
+        array_or_single_params = {
+            "initiator",
+            "initiators",
+            "kinds",
+            "risks",
+            "locationIds",
+            "severities",
+            "status",
+            "statuses",
+            "assetClasses",
+            "scannerKinds",
+            "type",
+            "types",
+            "levels",
+            "stages",
+            "attachments",
+        }
         if "parameters" in operation_object:
             for param in operation_object["parameters"]:
                 name = param.get("name")
                 if name in list_params:
-                    if name in ["initiators", "kinds", "risks", "locationIds"]:
+                    if name in array_or_single_params:
                         param["schema"] = {"type": "array", "items": {"type": "string"}}
                         param["style"] = "form"
                         param["explode"] = True

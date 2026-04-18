@@ -18,11 +18,12 @@ import (
 	"net/url"
 )
 
+
 // StatisticsAPIService StatisticsAPI service
 type StatisticsAPIService service
 
 type ApiGetStatisticsRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *StatisticsAPIService
 }
 
@@ -35,25 +36,24 @@ GetStatistics Get organization statistics
 
 Get a high-level overview of the organization security posture: application count, asset count, and open issue counts by severity.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetStatisticsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetStatisticsRequest
 */
 func (a *StatisticsAPIService) GetStatistics(ctx context.Context) ApiGetStatisticsRequest {
 	return ApiGetStatisticsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetStatistics200Response
+//  @return GetStatistics200Response
 func (a *StatisticsAPIService) GetStatisticsExecute(r ApiGetStatisticsRequest) (*GetStatistics200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *GetStatistics200Response
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetStatistics200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StatisticsAPIService.GetStatistics")
