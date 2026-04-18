@@ -165,6 +165,10 @@ func buildMCPTool(
 	// is not set alongside RawInputSchema — the library refuses to marshal a tool
 	// that has both set (errToolSchemaConflict).
 	tool := mcpgo.NewToolWithRawSchema(buildMCPToolName(capability.Path), capability.Short, inputSchema)
+	// Set explicit safety annotations so reasoning models (KIMIK2THINKING etc.)
+	// know which tools are safe to call without hesitation. Without explicit
+	// hints the LLM may decline to call CLI tools and produce empty answers.
+	tool.Annotations = annotationsForCapability(capability)
 	// MCP's tool outputSchema must have top-level type "object" (the client
 	// validates this via Zod). Several CLI commands (`* list`) return arrays,
 	// so skip declaring the schema in those cases — the payload is still
@@ -178,6 +182,53 @@ func buildMCPTool(
 	}
 
 	return tool, flagBindings, positionalArgs, bodyProperty, nil
+}
+
+// annotationsForCapability sets MCP per-tool hints based on the CLI command
+// name. mark3labs/mcp-go's NewToolWithRawSchema leaves Annotations as the zero
+// value, which serializes to `{}` — clients then assume "unknown" and some
+// reasoning models become reluctant to call. Be explicit instead.
+func annotationsForCapability(capability CommandCapability) mcpgo.ToolAnnotation {
+	leaf := lastSegment(capability.Path)
+	switch {
+	case strings.HasPrefix(leaf, "list") || leaf == "list" ||
+		strings.HasPrefix(leaf, "get") || leaf == "get" ||
+		strings.HasPrefix(leaf, "search") || strings.HasPrefix(leaf, "show") ||
+		strings.HasPrefix(leaf, "describe") || strings.HasPrefix(leaf, "fetch") ||
+		strings.HasPrefix(leaf, "test") || strings.HasPrefix(leaf, "view") ||
+		strings.HasPrefix(leaf, "tail") || strings.HasPrefix(leaf, "logs"):
+		return mcpgo.ToolAnnotation{
+			ReadOnlyHint:    mcpgo.ToBoolPtr(true),
+			DestructiveHint: mcpgo.ToBoolPtr(false),
+			IdempotentHint:  mcpgo.ToBoolPtr(true),
+			OpenWorldHint:   mcpgo.ToBoolPtr(true),
+		}
+	case strings.HasPrefix(leaf, "delete") || strings.HasPrefix(leaf, "remove") ||
+		strings.HasPrefix(leaf, "destroy") || strings.HasPrefix(leaf, "purge") ||
+		strings.HasPrefix(leaf, "cancel"):
+		return mcpgo.ToolAnnotation{
+			ReadOnlyHint:    mcpgo.ToBoolPtr(false),
+			DestructiveHint: mcpgo.ToBoolPtr(true),
+			IdempotentHint:  mcpgo.ToBoolPtr(true),
+			OpenWorldHint:   mcpgo.ToBoolPtr(true),
+		}
+	default:
+		// create / update / start / etc. — non-destructive but mutating.
+		return mcpgo.ToolAnnotation{
+			ReadOnlyHint:    mcpgo.ToBoolPtr(false),
+			DestructiveHint: mcpgo.ToBoolPtr(false),
+			IdempotentHint:  mcpgo.ToBoolPtr(false),
+			OpenWorldHint:   mcpgo.ToBoolPtr(true),
+		}
+	}
+}
+
+func lastSegment(commandPath string) string {
+	fields := strings.Fields(commandPath)
+	if len(fields) == 0 {
+		return ""
+	}
+	return fields[len(fields)-1]
 }
 
 func indexCommands(root *cobra.Command) map[string]*cobra.Command {
