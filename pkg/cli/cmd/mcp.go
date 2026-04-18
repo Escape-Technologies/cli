@@ -150,19 +150,19 @@ func buildMCPTool(
 		return mcpgo.Tool{}, nil, nil, "", fmt.Errorf("failed to marshal input schema for %q: %w", capability.Path, err)
 	}
 
-	options := []mcpgo.ToolOption{
-		mcpgo.WithDescription(capability.Short),
-		mcpgo.WithRawInputSchema(inputSchema),
-	}
+	// Use NewToolWithRawSchema so the default structured InputSchema (Type:"object")
+	// is not set alongside RawInputSchema — the library refuses to marshal a tool
+	// that has both set (errToolSchemaConflict).
+	tool := mcpgo.NewToolWithRawSchema(buildMCPToolName(capability.Path), capability.Short, inputSchema)
 	if capability.OutputSchema != nil {
 		outputSchema, err := json.Marshal(capability.OutputSchema)
 		if err != nil {
 			return mcpgo.Tool{}, nil, nil, "", fmt.Errorf("failed to marshal output schema for %q: %w", capability.Path, err)
 		}
-		options = append(options, mcpgo.WithRawOutputSchema(outputSchema))
+		tool.RawOutputSchema = outputSchema
 	}
 
-	return mcpgo.NewTool(buildMCPToolName(capability.Path), options...), flagBindings, positionalArgs, bodyProperty, nil
+	return tool, flagBindings, positionalArgs, bodyProperty, nil
 }
 
 func indexCommands(root *cobra.Command) map[string]*cobra.Command {
