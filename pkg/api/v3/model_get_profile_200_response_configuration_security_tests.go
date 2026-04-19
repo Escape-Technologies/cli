@@ -148,6 +148,13 @@ type GetProfile200ResponseConfigurationSecurityTests struct {
 	ExposedJwt                             *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"exposed_jwt,omitempty"`
 	JwtSignCheck                           *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"jwt_sign_check,omitempty"`
 	LeakingAuthentication                  *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"leaking_authentication,omitempty"`
+	LlmDetected                            *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"llm_detected,omitempty"`
+	LlmPromptInjection                     *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"llm_prompt_injection,omitempty"`
+	LlmSystemPromptLeak                    *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"llm_system_prompt_leak,omitempty"`
+	LlmInsecureOutputHandling              *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"llm_insecure_output_handling,omitempty"`
+	LlmCommandInjection                    *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"llm_command_injection,omitempty"`
+	LlmSsrf                                *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"llm_ssrf,omitempty"`
+	LlmToolExposure                        *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"llm_tool_exposure,omitempty"`
 	MassAssignment                         *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"mass_assignment,omitempty"`
 	McpUnauth                              *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"mcp_unauth,omitempty"`
 	Nosql                                  *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"nosql,omitempty"`
@@ -4449,6 +4456,230 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) HasLeakingAuthenticati
 // SetLeakingAuthentication gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the LeakingAuthentication field.
 func (o *GetProfile200ResponseConfigurationSecurityTests) SetLeakingAuthentication(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
 	o.LeakingAuthentication = &v
+}
+
+// GetLlmDetected returns the LlmDetected field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetLlmDetected() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.LlmDetected) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.LlmDetected
+}
+
+// GetLlmDetectedOk returns a tuple with the LlmDetected field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetLlmDetectedOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.LlmDetected) {
+		return nil, false
+	}
+	return o.LlmDetected, true
+}
+
+// HasLlmDetected returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasLlmDetected() bool {
+	if o != nil && !IsNil(o.LlmDetected) {
+		return true
+	}
+
+	return false
+}
+
+// SetLlmDetected gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the LlmDetected field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetLlmDetected(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.LlmDetected = &v
+}
+
+// GetLlmPromptInjection returns the LlmPromptInjection field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetLlmPromptInjection() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.LlmPromptInjection) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.LlmPromptInjection
+}
+
+// GetLlmPromptInjectionOk returns a tuple with the LlmPromptInjection field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetLlmPromptInjectionOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.LlmPromptInjection) {
+		return nil, false
+	}
+	return o.LlmPromptInjection, true
+}
+
+// HasLlmPromptInjection returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasLlmPromptInjection() bool {
+	if o != nil && !IsNil(o.LlmPromptInjection) {
+		return true
+	}
+
+	return false
+}
+
+// SetLlmPromptInjection gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the LlmPromptInjection field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetLlmPromptInjection(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.LlmPromptInjection = &v
+}
+
+// GetLlmSystemPromptLeak returns the LlmSystemPromptLeak field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetLlmSystemPromptLeak() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.LlmSystemPromptLeak) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.LlmSystemPromptLeak
+}
+
+// GetLlmSystemPromptLeakOk returns a tuple with the LlmSystemPromptLeak field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetLlmSystemPromptLeakOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.LlmSystemPromptLeak) {
+		return nil, false
+	}
+	return o.LlmSystemPromptLeak, true
+}
+
+// HasLlmSystemPromptLeak returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasLlmSystemPromptLeak() bool {
+	if o != nil && !IsNil(o.LlmSystemPromptLeak) {
+		return true
+	}
+
+	return false
+}
+
+// SetLlmSystemPromptLeak gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the LlmSystemPromptLeak field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetLlmSystemPromptLeak(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.LlmSystemPromptLeak = &v
+}
+
+// GetLlmInsecureOutputHandling returns the LlmInsecureOutputHandling field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetLlmInsecureOutputHandling() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.LlmInsecureOutputHandling) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.LlmInsecureOutputHandling
+}
+
+// GetLlmInsecureOutputHandlingOk returns a tuple with the LlmInsecureOutputHandling field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetLlmInsecureOutputHandlingOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.LlmInsecureOutputHandling) {
+		return nil, false
+	}
+	return o.LlmInsecureOutputHandling, true
+}
+
+// HasLlmInsecureOutputHandling returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasLlmInsecureOutputHandling() bool {
+	if o != nil && !IsNil(o.LlmInsecureOutputHandling) {
+		return true
+	}
+
+	return false
+}
+
+// SetLlmInsecureOutputHandling gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the LlmInsecureOutputHandling field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetLlmInsecureOutputHandling(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.LlmInsecureOutputHandling = &v
+}
+
+// GetLlmCommandInjection returns the LlmCommandInjection field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetLlmCommandInjection() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.LlmCommandInjection) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.LlmCommandInjection
+}
+
+// GetLlmCommandInjectionOk returns a tuple with the LlmCommandInjection field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetLlmCommandInjectionOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.LlmCommandInjection) {
+		return nil, false
+	}
+	return o.LlmCommandInjection, true
+}
+
+// HasLlmCommandInjection returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasLlmCommandInjection() bool {
+	if o != nil && !IsNil(o.LlmCommandInjection) {
+		return true
+	}
+
+	return false
+}
+
+// SetLlmCommandInjection gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the LlmCommandInjection field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetLlmCommandInjection(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.LlmCommandInjection = &v
+}
+
+// GetLlmSsrf returns the LlmSsrf field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetLlmSsrf() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.LlmSsrf) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.LlmSsrf
+}
+
+// GetLlmSsrfOk returns a tuple with the LlmSsrf field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetLlmSsrfOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.LlmSsrf) {
+		return nil, false
+	}
+	return o.LlmSsrf, true
+}
+
+// HasLlmSsrf returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasLlmSsrf() bool {
+	if o != nil && !IsNil(o.LlmSsrf) {
+		return true
+	}
+
+	return false
+}
+
+// SetLlmSsrf gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the LlmSsrf field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetLlmSsrf(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.LlmSsrf = &v
+}
+
+// GetLlmToolExposure returns the LlmToolExposure field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetLlmToolExposure() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.LlmToolExposure) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.LlmToolExposure
+}
+
+// GetLlmToolExposureOk returns a tuple with the LlmToolExposure field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetLlmToolExposureOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.LlmToolExposure) {
+		return nil, false
+	}
+	return o.LlmToolExposure, true
+}
+
+// HasLlmToolExposure returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasLlmToolExposure() bool {
+	if o != nil && !IsNil(o.LlmToolExposure) {
+		return true
+	}
+
+	return false
+}
+
+// SetLlmToolExposure gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the LlmToolExposure field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetLlmToolExposure(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.LlmToolExposure = &v
 }
 
 // GetMassAssignment returns the MassAssignment field value if set, zero value otherwise.
@@ -9744,6 +9975,27 @@ func (o GetProfile200ResponseConfigurationSecurityTests) ToMap() (map[string]int
 	if !IsNil(o.LeakingAuthentication) {
 		toSerialize["leaking_authentication"] = o.LeakingAuthentication
 	}
+	if !IsNil(o.LlmDetected) {
+		toSerialize["llm_detected"] = o.LlmDetected
+	}
+	if !IsNil(o.LlmPromptInjection) {
+		toSerialize["llm_prompt_injection"] = o.LlmPromptInjection
+	}
+	if !IsNil(o.LlmSystemPromptLeak) {
+		toSerialize["llm_system_prompt_leak"] = o.LlmSystemPromptLeak
+	}
+	if !IsNil(o.LlmInsecureOutputHandling) {
+		toSerialize["llm_insecure_output_handling"] = o.LlmInsecureOutputHandling
+	}
+	if !IsNil(o.LlmCommandInjection) {
+		toSerialize["llm_command_injection"] = o.LlmCommandInjection
+	}
+	if !IsNil(o.LlmSsrf) {
+		toSerialize["llm_ssrf"] = o.LlmSsrf
+	}
+	if !IsNil(o.LlmToolExposure) {
+		toSerialize["llm_tool_exposure"] = o.LlmToolExposure
+	}
 	if !IsNil(o.MassAssignment) {
 		toSerialize["mass_assignment"] = o.MassAssignment
 	}
@@ -10354,6 +10606,13 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) UnmarshalJSON(data []b
 		delete(additionalProperties, "exposed_jwt")
 		delete(additionalProperties, "jwt_sign_check")
 		delete(additionalProperties, "leaking_authentication")
+		delete(additionalProperties, "llm_detected")
+		delete(additionalProperties, "llm_prompt_injection")
+		delete(additionalProperties, "llm_system_prompt_leak")
+		delete(additionalProperties, "llm_insecure_output_handling")
+		delete(additionalProperties, "llm_command_injection")
+		delete(additionalProperties, "llm_ssrf")
+		delete(additionalProperties, "llm_tool_exposure")
 		delete(additionalProperties, "mass_assignment")
 		delete(additionalProperties, "mcp_unauth")
 		delete(additionalProperties, "nosql")
