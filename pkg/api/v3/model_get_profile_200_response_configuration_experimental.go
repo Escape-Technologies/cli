@@ -36,6 +36,7 @@ type GetProfile200ResponseConfigurationExperimental struct {
 	JsAnalysis                     *bool                                                                          `json:"js_analysis,omitempty"`
 	ExtendedPortScan               *bool                                                                          `json:"extended_port_scan,omitempty"`
 	LoginPageBruteforceAgent       *bool                                                                          `json:"login_page_bruteforce_agent,omitempty"`
+	LlmSecurityTesting             *bool                                                                          `json:"llm_security_testing,omitempty"`
 	AdditionalProperties           map[string]interface{}
 }
 
@@ -602,6 +603,38 @@ func (o *GetProfile200ResponseConfigurationExperimental) SetLoginPageBruteforceA
 	o.LoginPageBruteforceAgent = &v
 }
 
+// GetLlmSecurityTesting returns the LlmSecurityTesting field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationExperimental) GetLlmSecurityTesting() bool {
+	if o == nil || IsNil(o.LlmSecurityTesting) {
+		var ret bool
+		return ret
+	}
+	return *o.LlmSecurityTesting
+}
+
+// GetLlmSecurityTestingOk returns a tuple with the LlmSecurityTesting field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationExperimental) GetLlmSecurityTestingOk() (*bool, bool) {
+	if o == nil || IsNil(o.LlmSecurityTesting) {
+		return nil, false
+	}
+	return o.LlmSecurityTesting, true
+}
+
+// HasLlmSecurityTesting returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationExperimental) HasLlmSecurityTesting() bool {
+	if o != nil && !IsNil(o.LlmSecurityTesting) {
+		return true
+	}
+
+	return false
+}
+
+// SetLlmSecurityTesting gets a reference to the given bool and assigns it to the LlmSecurityTesting field.
+func (o *GetProfile200ResponseConfigurationExperimental) SetLlmSecurityTesting(v bool) {
+	o.LlmSecurityTesting = &v
+}
+
 func (o GetProfile200ResponseConfigurationExperimental) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -663,6 +696,9 @@ func (o GetProfile200ResponseConfigurationExperimental) ToMap() (map[string]inte
 	if !IsNil(o.LoginPageBruteforceAgent) {
 		toSerialize["login_page_bruteforce_agent"] = o.LoginPageBruteforceAgent
 	}
+	if !IsNil(o.LlmSecurityTesting) {
+		toSerialize["llm_security_testing"] = o.LlmSecurityTesting
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -702,6 +738,7 @@ func (o *GetProfile200ResponseConfigurationExperimental) UnmarshalJSON(data []by
 		delete(additionalProperties, "js_analysis")
 		delete(additionalProperties, "extended_port_scan")
 		delete(additionalProperties, "login_page_bruteforce_agent")
+		delete(additionalProperties, "llm_security_testing")
 		o.AdditionalProperties = additionalProperties
 	}
 
