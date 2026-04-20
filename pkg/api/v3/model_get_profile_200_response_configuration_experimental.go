@@ -36,8 +36,8 @@ type GetProfile200ResponseConfigurationExperimental struct {
 	JsAnalysis                     *bool                                                                          `json:"js_analysis,omitempty"`
 	ExtendedPortScan               *bool                                                                          `json:"extended_port_scan,omitempty"`
 	LoginPageBruteforceAgent       *bool                                                                          `json:"login_page_bruteforce_agent,omitempty"`
-	LlmSecurityTesting             *bool                                                                          `json:"llm_security_testing,omitempty"`
 	DastMultiAgentPentest          *bool                                                                          `json:"dast_multi_agent_pentest,omitempty"`
+	LlmSecurityTesting             *bool                                                                          `json:"llm_security_testing,omitempty"`
 	AdditionalProperties           map[string]interface{}
 }
 
@@ -774,8 +774,8 @@ func (o *GetProfile200ResponseConfigurationExperimental) UnmarshalJSON(data []by
 		delete(additionalProperties, "js_analysis")
 		delete(additionalProperties, "extended_port_scan")
 		delete(additionalProperties, "login_page_bruteforce_agent")
-		delete(additionalProperties, "llm_security_testing")
 		delete(additionalProperties, "dast_multi_agent_pentest")
+		delete(additionalProperties, "llm_security_testing")
 		o.AdditionalProperties = additionalProperties
 	}
 
