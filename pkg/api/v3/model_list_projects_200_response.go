@@ -20,9 +20,9 @@ var _ MappedNullable = &ListProjects200Response{}
 
 // ListProjects200Response struct for ListProjects200Response
 type ListProjects200Response struct {
-	NextCursor *string `json:"nextCursor,omitempty"`
-	TotalCount *int `json:"totalCount,omitempty"`
-	Data []ListProjects200ResponseDataInner `json:"data"`
+	NextCursor           *string                            `json:"nextCursor,omitempty"`
+	TotalCount           *int                               `json:"totalCount,omitempty"`
+	Data                 []ListProjects200ResponseDataInner `json:"data"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -139,7 +139,7 @@ func (o *ListProjects200Response) SetData(v []ListProjects200ResponseDataInner) 
 }
 
 func (o ListProjects200Response) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -176,10 +176,10 @@ func (o *ListProjects200Response) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -242,5 +242,3 @@ func (v *NullableListProjects200Response) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

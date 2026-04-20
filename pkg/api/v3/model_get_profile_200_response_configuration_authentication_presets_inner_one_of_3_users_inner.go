@@ -20,19 +20,19 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationAuthenticationPresetsI
 
 // GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf3UsersInner struct for GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf3UsersInner
 type GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf3UsersInner struct {
-	Username string `json:"username"`
-	Headers map[string]string `json:"headers,omitempty"`
-	Cookies map[string]string `json:"cookies,omitempty"`
-	QueryParameters map[string]string `json:"query_parameters,omitempty"`
-	MainUser *bool `json:"main_user,omitempty"`
-	AllowFailure *bool `json:"allow_failure,omitempty"`
-	Basic *string `json:"basic,omitempty"`
-	Digest *string `json:"digest,omitempty"`
-	Role *string `json:"role,omitempty"`
-	Password string `json:"password"`
-	Scopes []string `json:"scopes,omitempty"`
-	PreLoginActions []GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInner `json:"pre_login_actions,omitempty"`
-	PostLoginActions []GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInner `json:"post_login_actions,omitempty"`
+	Username             string                                                                              `json:"username"`
+	Headers              map[string]string                                                                   `json:"headers,omitempty"`
+	Cookies              map[string]string                                                                   `json:"cookies,omitempty"`
+	QueryParameters      map[string]string                                                                   `json:"query_parameters,omitempty"`
+	MainUser             *bool                                                                               `json:"main_user,omitempty"`
+	AllowFailure         *bool                                                                               `json:"allow_failure,omitempty"`
+	Basic                *string                                                                             `json:"basic,omitempty"`
+	Digest               *string                                                                             `json:"digest,omitempty"`
+	Role                 *string                                                                             `json:"role,omitempty"`
+	Password             string                                                                              `json:"password"`
+	Scopes               []string                                                                            `json:"scopes,omitempty"`
+	PreLoginActions      []GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInner `json:"pre_login_actions,omitempty"`
+	PostLoginActions     []GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInner `json:"post_login_actions,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -458,7 +458,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf3Users
 }
 
 func (o GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf3UsersInner) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -524,10 +524,10 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf3Users
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -600,5 +600,3 @@ func (v *NullableGetProfile200ResponseConfigurationAuthenticationPresetsInnerOne
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -19,25 +19,25 @@ var _ MappedNullable = &UpdateProfileConfigurationRequestConfiguration{}
 
 // UpdateProfileConfigurationRequestConfiguration The configuration to update
 type UpdateProfileConfigurationRequestConfiguration struct {
-	PublicLocationIds []string `json:"public_location_ids,omitempty"`
-	PrivateLocationIds []string `json:"private_location_ids,omitempty"`
-	Scope *GetProfile200ResponseConfigurationScope `json:"scope,omitempty"`
-	ExplorationScope []string `json:"exploration_scope,omitempty"`
-	ApiCustomRuleIds []string `json:"api_custom_rule_ids,omitempty"`
-	FrontendCustomRuleIds []string `json:"frontend_custom_rule_ids,omitempty"`
-	Authentication *GetProfile200ResponseConfigurationAuthentication `json:"authentication,omitempty"`
-	SecurityTests *GetProfile200ResponseConfigurationSecurityTests `json:"security_tests,omitempty"`
-	Inference *GetProfile200ResponseConfigurationInference `json:"inference,omitempty"`
-	Network *GetProfile200ResponseConfigurationNetwork `json:"network,omitempty"`
-	SubdomainEnumeration *GetProfile200ResponseConfigurationSubdomainEnumeration `json:"subdomain_enumeration,omitempty"`
-	PortScanning *GetProfile200ResponseConfigurationPortScanning `json:"port_scanning,omitempty"`
-	ServiceDiscovery *GetProfile200ResponseConfigurationServiceDiscovery `json:"service_discovery,omitempty"`
-	FrontendDast *GetProfile200ResponseConfigurationFrontendDast `json:"frontend_dast,omitempty"`
-	GraphqlApiDast *GetProfile200ResponseConfigurationGraphqlApiDast `json:"graphql_api_dast,omitempty"`
-	RestApiDast *GetProfile200ResponseConfigurationRestApiDast `json:"rest_api_dast,omitempty"`
-	AutomatedPentesting *GetProfile200ResponseConfigurationAutomatedPentesting `json:"automated_pentesting,omitempty"`
-	Experimental *GetProfile200ResponseConfigurationExperimental `json:"experimental,omitempty"`
-	AdditionalProperties map[string]interface{}
+	PublicLocationIds     []string                                                `json:"public_location_ids,omitempty"`
+	PrivateLocationIds    []string                                                `json:"private_location_ids,omitempty"`
+	Scope                 *GetProfile200ResponseConfigurationScope                `json:"scope,omitempty"`
+	ExplorationScope      []string                                                `json:"exploration_scope,omitempty"`
+	ApiCustomRuleIds      []string                                                `json:"api_custom_rule_ids,omitempty"`
+	FrontendCustomRuleIds []string                                                `json:"frontend_custom_rule_ids,omitempty"`
+	Authentication        *GetProfile200ResponseConfigurationAuthentication       `json:"authentication,omitempty"`
+	SecurityTests         *GetProfile200ResponseConfigurationSecurityTests        `json:"security_tests,omitempty"`
+	Inference             *GetProfile200ResponseConfigurationInference            `json:"inference,omitempty"`
+	Network               *GetProfile200ResponseConfigurationNetwork              `json:"network,omitempty"`
+	SubdomainEnumeration  *GetProfile200ResponseConfigurationSubdomainEnumeration `json:"subdomain_enumeration,omitempty"`
+	PortScanning          *GetProfile200ResponseConfigurationPortScanning         `json:"port_scanning,omitempty"`
+	ServiceDiscovery      *GetProfile200ResponseConfigurationServiceDiscovery     `json:"service_discovery,omitempty"`
+	FrontendDast          *GetProfile200ResponseConfigurationFrontendDast         `json:"frontend_dast,omitempty"`
+	GraphqlApiDast        *GetProfile200ResponseConfigurationGraphqlApiDast       `json:"graphql_api_dast,omitempty"`
+	RestApiDast           *GetProfile200ResponseConfigurationRestApiDast          `json:"rest_api_dast,omitempty"`
+	AutomatedPentesting   *GetProfile200ResponseConfigurationAutomatedPentesting  `json:"automated_pentesting,omitempty"`
+	Experimental          *GetProfile200ResponseConfigurationExperimental         `json:"experimental,omitempty"`
+	AdditionalProperties  map[string]interface{}
 }
 
 type _UpdateProfileConfigurationRequestConfiguration UpdateProfileConfigurationRequestConfiguration
@@ -636,7 +636,7 @@ func (o *UpdateProfileConfigurationRequestConfiguration) SetExperimental(v GetPr
 }
 
 func (o UpdateProfileConfigurationRequestConfiguration) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -780,5 +780,3 @@ func (v *NullableUpdateProfileConfigurationRequestConfiguration) UnmarshalJSON(s
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

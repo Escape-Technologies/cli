@@ -18,12 +18,11 @@ import (
 	"net/url"
 )
 
-
 // UploadAPIService UploadAPI service
 type UploadAPIService service
 
 type ApiCreateUploadSignedUrlRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *UploadAPIService
 }
 
@@ -39,10 +38,12 @@ Retrieve a signed URL link to upload a file to the Escape Platform.
 By running a query with this endpoint, you will receive a signed URL that you can use to upload a file to the Escape Platform.
 
 ```json
-{
-  "url": "[SIGNED URL]",
-  "id": "[SIGNED URL ID]"
-}
+
+	{
+	  "url": "[SIGNED URL]",
+	  "id": "[SIGNED URL ID]"
+	}
+
 ```
 
 With the url, you are able to upload one file:
@@ -54,25 +55,25 @@ curl -X PUT --data-binary '@./schema.json' "[SIGNED URL]"
 Now, you are able to use the previously received id in another query.
 For example to update a schema of your application.
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateUploadSignedUrlRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateUploadSignedUrlRequest
 */
 func (a *UploadAPIService) CreateUploadSignedUrl(ctx context.Context) ApiCreateUploadSignedUrlRequest {
 	return ApiCreateUploadSignedUrlRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return CreateUploadSignedUrl200Response
+//
+//	@return CreateUploadSignedUrl200Response
 func (a *UploadAPIService) CreateUploadSignedUrlExecute(r ApiCreateUploadSignedUrlRequest) (*CreateUploadSignedUrl200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CreateUploadSignedUrl200Response
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CreateUploadSignedUrl200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UploadAPIService.CreateUploadSignedUrl")

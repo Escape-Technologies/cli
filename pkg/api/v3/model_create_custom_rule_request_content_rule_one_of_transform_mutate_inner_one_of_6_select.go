@@ -19,9 +19,9 @@ var _ MappedNullable = &CreateCustomRuleRequestContentRuleOneOfTransformMutateIn
 
 // CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf6Select struct for CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf6Select
 type CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf6Select struct {
-	Type *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf7Type `json:"type,omitempty"`
-	Name *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf7Name `json:"name,omitempty"`
-	Value *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf7Name `json:"value,omitempty"`
+	Type                 *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf7Type `json:"type,omitempty"`
+	Name                 *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf7Name `json:"name,omitempty"`
+	Value                *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf7Name `json:"value,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -141,7 +141,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf6Select
 }
 
 func (o CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf6Select) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -225,5 +225,3 @@ func (v *NullableCreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneO
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
