@@ -18,7 +18,7 @@ import (
 
 // CreateAssetCODEPROJECTRequestRepository - struct for CreateAssetCODEPROJECTRequestRepository
 type CreateAssetCODEPROJECTRequestRepository struct {
-	CreateAssetCODEPROJECTRequestRepositoryOneOf  *CreateAssetCODEPROJECTRequestRepositoryOneOf
+	CreateAssetCODEPROJECTRequestRepositoryOneOf *CreateAssetCODEPROJECTRequestRepositoryOneOf
 	CreateAssetCODEPROJECTRequestRepositoryOneOf1 *CreateAssetCODEPROJECTRequestRepositoryOneOf1
 	CreateAssetCODEPROJECTRequestRepositoryOneOf2 *CreateAssetCODEPROJECTRequestRepositoryOneOf2
 }
@@ -43,6 +43,7 @@ func CreateAssetCODEPROJECTRequestRepositoryOneOf2AsCreateAssetCODEPROJECTReques
 		CreateAssetCODEPROJECTRequestRepositoryOneOf2: v,
 	}
 }
+
 
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *CreateAssetCODEPROJECTRequestRepository) UnmarshalJSON(data []byte) error {
@@ -131,7 +132,7 @@ func (src CreateAssetCODEPROJECTRequestRepository) MarshalJSON() ([]byte, error)
 }
 
 // Get the actual instance
-func (obj *CreateAssetCODEPROJECTRequestRepository) GetActualInstance() interface{} {
+func (obj *CreateAssetCODEPROJECTRequestRepository) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
@@ -152,7 +153,7 @@ func (obj *CreateAssetCODEPROJECTRequestRepository) GetActualInstance() interfac
 }
 
 // Get the actual instance value
-func (obj CreateAssetCODEPROJECTRequestRepository) GetActualInstanceValue() interface{} {
+func (obj CreateAssetCODEPROJECTRequestRepository) GetActualInstanceValue() (interface{}) {
 	if obj.CreateAssetCODEPROJECTRequestRepositoryOneOf != nil {
 		return *obj.CreateAssetCODEPROJECTRequestRepositoryOneOf
 	}
@@ -204,3 +205,5 @@ func (v *NullableCreateAssetCODEPROJECTRequestRepository) UnmarshalJSON(src []by
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

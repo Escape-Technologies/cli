@@ -19,8 +19,8 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationSecurityTestsResponseS
 
 // GetProfile200ResponseConfigurationSecurityTestsResponseSize struct for GetProfile200ResponseConfigurationSecurityTestsResponseSize
 type GetProfile200ResponseConfigurationSecurityTestsResponseSize struct {
-	Skip                 *bool    `json:"skip,omitempty"`
-	MaxLength            *float32 `json:"max_length,omitempty"`
+	Skip *bool `json:"skip,omitempty"`
+	MaxLength *float32 `json:"max_length,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -108,7 +108,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTestsResponseSize) SetMaxLeng
 }
 
 func (o GetProfile200ResponseConfigurationSecurityTestsResponseSize) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -188,3 +188,5 @@ func (v *NullableGetProfile200ResponseConfigurationSecurityTestsResponseSize) Un
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
