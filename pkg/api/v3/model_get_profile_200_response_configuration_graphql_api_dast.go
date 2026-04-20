@@ -31,7 +31,6 @@ type GetProfile200ResponseConfigurationGraphqlApiDast struct {
 	Mode                     *ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE               `json:"mode,omitempty"`
 	MaxDuration              *float32                                                                       `json:"max_duration,omitempty"`
 	MaxGeneratedDepth        *float32                                                                       `json:"max_generated_depth,omitempty"`
-	NoOperationName          *bool                                                                          `json:"no_operation_name,omitempty"`
 	Hotstart                 []string                                                                       `json:"hotstart,omitempty"`
 	HotstartOnly             *bool                                                                          `json:"hotstart_only,omitempty"`
 	Scope                    *GetProfile200ResponseConfigurationGraphqlApiDastScope                         `json:"scope,omitempty"`
@@ -442,38 +441,6 @@ func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetMaxGeneratedDepth(
 	o.MaxGeneratedDepth = &v
 }
 
-// GetNoOperationName returns the NoOperationName field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationGraphqlApiDast) GetNoOperationName() bool {
-	if o == nil || IsNil(o.NoOperationName) {
-		var ret bool
-		return ret
-	}
-	return *o.NoOperationName
-}
-
-// GetNoOperationNameOk returns a tuple with the NoOperationName field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationGraphqlApiDast) GetNoOperationNameOk() (*bool, bool) {
-	if o == nil || IsNil(o.NoOperationName) {
-		return nil, false
-	}
-	return o.NoOperationName, true
-}
-
-// HasNoOperationName returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationGraphqlApiDast) HasNoOperationName() bool {
-	if o != nil && !IsNil(o.NoOperationName) {
-		return true
-	}
-
-	return false
-}
-
-// SetNoOperationName gets a reference to the given bool and assigns it to the NoOperationName field.
-func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetNoOperationName(v bool) {
-	o.NoOperationName = &v
-}
-
 // GetHotstart returns the Hotstart field value if set, zero value otherwise.
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) GetHotstart() []string {
 	if o == nil || IsNil(o.Hotstart) {
@@ -648,9 +615,6 @@ func (o GetProfile200ResponseConfigurationGraphqlApiDast) ToMap() (map[string]in
 	if !IsNil(o.MaxGeneratedDepth) {
 		toSerialize["max_generated_depth"] = o.MaxGeneratedDepth
 	}
-	if !IsNil(o.NoOperationName) {
-		toSerialize["no_operation_name"] = o.NoOperationName
-	}
 	if !IsNil(o.Hotstart) {
 		toSerialize["hotstart"] = o.Hotstart
 	}
@@ -697,7 +661,6 @@ func (o *GetProfile200ResponseConfigurationGraphqlApiDast) UnmarshalJSON(data []
 		delete(additionalProperties, "mode")
 		delete(additionalProperties, "max_duration")
 		delete(additionalProperties, "max_generated_depth")
-		delete(additionalProperties, "no_operation_name")
 		delete(additionalProperties, "hotstart")
 		delete(additionalProperties, "hotstart_only")
 		delete(additionalProperties, "scope")
