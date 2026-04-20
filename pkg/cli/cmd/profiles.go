@@ -802,28 +802,50 @@ var (
 )
 
 // pickProfileSchema picks a SCHEMA-class entry from the profile's extraAssets.
-// With schemaID="" it returns the active schema (isActive=true); otherwise it
-// returns the entry whose id matches schemaID. Mirrors the server-side
-// pickProfileSchemaAssetId but on the already-enriched client payload.
+// With schemaID="" it returns the (single) active schema; otherwise it returns
+// the entry whose id matches schemaID. Mirrors the server-side
+// pickProfileSchemaAssetId on the already-enriched client payload.
+//
+// Error semantics (all non-zero exit, no silent fallbacks):
+//   - schemaID == "" and no SCHEMA entry is active → "no active schema".
+//   - schemaID != "" and no match → "no schema asset with id X".
+//   - schemaID == "" and more than one entry is marked isActive → fail fast
+//     instead of picking arbitrarily (this should never happen — server
+//     invariant is exactly one active SCHEMA — but we assert it rather than
+//     paper over a bug).
 func pickProfileSchema(profile *v3.GetProfile200Response, schemaID string) (*v3.ProfileExtraAsset, error) {
 	if profile == nil {
 		return nil, errors.New("profile is nil")
 	}
-	for i, asset := range profile.ExtraAssets {
-		if string(asset.Class) != "SCHEMA" {
-			continue
-		}
-		if schemaID == "" && asset.IsActive {
-			return &profile.ExtraAssets[i], nil
-		}
-		if schemaID != "" && asset.Id == schemaID {
-			return &profile.ExtraAssets[i], nil
-		}
-	}
+
 	if schemaID != "" {
+		for i, asset := range profile.ExtraAssets {
+			if string(asset.Class) == "SCHEMA" && asset.Id == schemaID {
+				return &profile.ExtraAssets[i], nil
+			}
+		}
 		return nil, fmt.Errorf("no schema asset with id %s attached to profile", schemaID)
 	}
-	return nil, errors.New("no active schema attached to this profile")
+
+	activeIdx := -1
+	activeCount := 0
+	for i, asset := range profile.ExtraAssets {
+		if string(asset.Class) == "SCHEMA" && asset.IsActive {
+			activeIdx = i
+			activeCount++
+		}
+	}
+	switch activeCount {
+	case 0:
+		return nil, errors.New("no active schema attached to this profile")
+	case 1:
+		return &profile.ExtraAssets[activeIdx], nil
+	default:
+		return nil, fmt.Errorf(
+			"profile has %d active schema entries; refusing to pick arbitrarily (pass --schema-id to disambiguate)",
+			activeCount,
+		)
+	}
 }
 
 var profileGetSchemaCmd = &cobra.Command{
