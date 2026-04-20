@@ -32,6 +32,7 @@ type CreateAssetSOFTWARERequest struct {
 	Version              *string                            `json:"version,omitempty"`
 	ReferenceUrl         *string                            `json:"reference_url,omitempty"`
 	Cpe                  *string                            `json:"cpe,omitempty"`
+	CpeGuessed           *bool                              `json:"cpe_guessed,omitempty"`
 	WellKnownTechnology  *ENUMPROPERTIESWELLKNOWNTECHNOLOGY `json:"well_known_technology,omitempty"`
 	Description          *string                            `json:"description,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -355,6 +356,38 @@ func (o *CreateAssetSOFTWARERequest) SetCpe(v string) {
 	o.Cpe = &v
 }
 
+// GetCpeGuessed returns the CpeGuessed field value if set, zero value otherwise.
+func (o *CreateAssetSOFTWARERequest) GetCpeGuessed() bool {
+	if o == nil || IsNil(o.CpeGuessed) {
+		var ret bool
+		return ret
+	}
+	return *o.CpeGuessed
+}
+
+// GetCpeGuessedOk returns a tuple with the CpeGuessed field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetSOFTWARERequest) GetCpeGuessedOk() (*bool, bool) {
+	if o == nil || IsNil(o.CpeGuessed) {
+		return nil, false
+	}
+	return o.CpeGuessed, true
+}
+
+// HasCpeGuessed returns a boolean if a field has been set.
+func (o *CreateAssetSOFTWARERequest) HasCpeGuessed() bool {
+	if o != nil && !IsNil(o.CpeGuessed) {
+		return true
+	}
+
+	return false
+}
+
+// SetCpeGuessed gets a reference to the given bool and assigns it to the CpeGuessed field.
+func (o *CreateAssetSOFTWARERequest) SetCpeGuessed(v bool) {
+	o.CpeGuessed = &v
+}
+
 // GetWellKnownTechnology returns the WellKnownTechnology field value if set, zero value otherwise.
 func (o *CreateAssetSOFTWARERequest) GetWellKnownTechnology() ENUMPROPERTIESWELLKNOWNTECHNOLOGY {
 	if o == nil || IsNil(o.WellKnownTechnology) {
@@ -453,6 +486,9 @@ func (o CreateAssetSOFTWARERequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Cpe) {
 		toSerialize["cpe"] = o.Cpe
 	}
+	if !IsNil(o.CpeGuessed) {
+		toSerialize["cpe_guessed"] = o.CpeGuessed
+	}
 	if !IsNil(o.WellKnownTechnology) {
 		toSerialize["well_known_technology"] = o.WellKnownTechnology
 	}
@@ -514,6 +550,7 @@ func (o *CreateAssetSOFTWARERequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "version")
 		delete(additionalProperties, "reference_url")
 		delete(additionalProperties, "cpe")
+		delete(additionalProperties, "cpe_guessed")
 		delete(additionalProperties, "well_known_technology")
 		delete(additionalProperties, "description")
 		o.AdditionalProperties = additionalProperties
