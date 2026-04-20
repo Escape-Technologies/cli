@@ -13,6 +13,11 @@ import (
 	"golang.org/x/sync/errgroup"
 )
 
+// maxLatestEventsHydrationConcurrency caps how many events we hydrate in
+// parallel from `issues get-with-events`. Matches the public API's hard cap of
+// 5 latest event IDs per issue, so this is also the worst-case fan-out.
+const maxLatestEventsHydrationConcurrency = 5
+
 func formatLatestEventIDs(ids []string, truncated bool) string {
 	if len(ids) == 0 {
 		return "-"
@@ -352,7 +357,7 @@ itself cannot be fetched.`,
 		eventOK := make([]bool, len(eventIDs))
 
 		g, gctx := errgroup.WithContext(cmd.Context())
-		g.SetLimit(5)
+		g.SetLimit(maxLatestEventsHydrationConcurrency)
 		var mu sync.Mutex
 		for i, eid := range eventIDs {
 			i, eid := i, eid
