@@ -26,8 +26,11 @@ func humanizeAPIError(err error) error {
 	if err == nil {
 		return nil
 	}
-	var apiErr v3.GenericOpenAPIError
-	if !errors.As(err, &apiErr) {
+	// The generated v3 client returns *v3.GenericOpenAPIError, so target the
+	// pointer type — targeting the value type silently fails to match and
+	// drops all humanization (see TestHumanizeAPIErrorHumanizesGeneratedAPIError).
+	var apiErr *v3.GenericOpenAPIError
+	if !errors.As(err, &apiErr) || apiErr == nil {
 		return err
 	}
 	if humanized := humanizeAPIErrorBody(apiErr.Body()); humanized != nil {

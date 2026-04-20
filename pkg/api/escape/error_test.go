@@ -1,6 +1,12 @@
 package escape
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+	"unsafe"
+
+	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
+)
 
 func TestHumanizeAPIErrorBodyExtractsBadRequest(t *testing.T) {
 	t.Parallel()
@@ -81,6 +87,85 @@ func TestHumanizeAPIErrorPassesThroughNil(t *testing.T) {
 	}
 }
 
+// TestHumanizeAPIErrorHumanizesGeneratedAPIError exercises the full
+// errors.As + Body() path against the generated v3.GenericOpenAPIError type
+// that the CLI actually receives from the public API client. The body is
+// poked in via unsafe because the generated struct's fields are unexported
+// and there is no exported constructor.
+func TestHumanizeAPIErrorHumanizesGeneratedAPIError(t *testing.T) {
+	t.Parallel()
+	apiErr := newTestGenericOpenAPIError(
+		[]byte(`{"message":"Bad Request","details":"severities.0: Invalid enum value"}`),
+	)
+	got := humanizeAPIError(apiErr)
+	if got == nil {
+		t.Fatal("expected humanized error, got nil")
+	}
+	const want = "Bad Request: severities.0: Invalid enum value"
+	if got.Error() != want {
+		t.Fatalf("expected %q, got %q", want, got.Error())
+	}
+}
+
+// TestHumanizeAPIErrorUnwrapsWrappedGeneratedAPIError verifies that when the
+// generated pointer error is wrapped (as callers typically do with fmt.Errorf
+// + %w), errors.As still reaches it and Body() is parsed.
+func TestHumanizeAPIErrorUnwrapsWrappedGeneratedAPIError(t *testing.T) {
+	t.Parallel()
+	apiErr := newTestGenericOpenAPIError([]byte(`{"message":"Invalid cursor","details":"cursor expired"}`))
+	wrapped := fmt.Errorf("api error: %w", apiErr)
+	got := humanizeAPIError(wrapped)
+	if got == nil {
+		t.Fatal("expected humanized error, got nil")
+	}
+	const want = "Invalid cursor: cursor expired"
+	if got.Error() != want {
+		t.Fatalf("expected %q, got %q", want, got.Error())
+	}
+}
+
+// TestHumanizeAPIErrorReturnsOriginalOnUnparseableBody verifies the function
+// returns the original generated error (not a humanized one) when the body
+// does not match the shared {message, details} contract, so callers still see
+// the upstream status information.
+func TestHumanizeAPIErrorReturnsOriginalOnUnparseableBody(t *testing.T) {
+	t.Parallel()
+	apiErr := newTestGenericOpenAPIError([]byte("not-json"))
+	if got := humanizeAPIError(apiErr); got != error(apiErr) {
+		t.Fatalf("expected pass-through of original error, got %v", got)
+	}
+}
+
+// TestHumanizeAPIErrorReturnsOriginalOnEmptyBody verifies the empty-body path
+// through a real GenericOpenAPIError so Body() is invoked.
+func TestHumanizeAPIErrorReturnsOriginalOnEmptyBody(t *testing.T) {
+	t.Parallel()
+	apiErr := newTestGenericOpenAPIError(nil)
+	if got := humanizeAPIError(apiErr); got != error(apiErr) {
+		t.Fatalf("expected pass-through of original error, got %v", got)
+	}
+}
+
+// newTestGenericOpenAPIError fabricates a v3.GenericOpenAPIError with the
+// given body. The struct is copied from v3 so its unexported fields can be
+// populated via unsafe; the layout must mirror the generated definition
+// exactly. This is only ever used in tests.
+func newTestGenericOpenAPIError(body []byte) *v3.GenericOpenAPIError {
+	type genericOpenAPIError struct {
+		body  []byte
+		error string
+		model interface{}
+	}
+	e := genericOpenAPIError{body: body}
+	return (*v3.GenericOpenAPIError)(unsafe.Pointer(&e))
+}
+
 type stubError struct{ msg string }
 
 func (e *stubError) Error() string { return e.msg }
+
+// Compile-time assertion that v3.GenericOpenAPIError still implements error
+// via a value receiver, so *v3.GenericOpenAPIError is assignable to the
+// error interface. If this breaks, the tests above may need updating.
+var _ error = v3.GenericOpenAPIError{}
+var _ error = &v3.GenericOpenAPIError{}
