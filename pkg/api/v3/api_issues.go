@@ -131,7 +131,7 @@ func (a *IssuesAPIService) BulkUpdateIssuesExecute(r ApiBulkUpdateIssuesRequest)
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -268,7 +268,7 @@ func (a *IssuesAPIService) CreateIssueCommentExecute(r ApiCreateIssueCommentRequ
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1325,7 +1325,7 @@ func (a *IssuesAPIService) NotifyIssueOwnersExecute(r ApiNotifyIssueOwnersReques
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1462,7 +1462,7 @@ func (a *IssuesAPIService) UpdateIssueExecute(r ApiUpdateIssueRequest) (*UpdateI
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

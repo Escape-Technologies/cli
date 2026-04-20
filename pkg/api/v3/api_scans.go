@@ -127,7 +127,7 @@ func (a *ScansAPIService) CancelScanExecute(r ApiCancelScanRequest) (*StartScan2
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -403,7 +403,7 @@ func (a *ScansAPIService) IgnoreScanExecute(r ApiIgnoreScanRequest) (*IgnoreScan
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1045,7 +1045,7 @@ func (a *ScansAPIService) StartScanExecute(r ApiStartScanRequest) (*StartScan200
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

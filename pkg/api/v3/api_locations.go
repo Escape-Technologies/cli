@@ -131,7 +131,7 @@ func (a *LocationsAPIService) CreateLocationExecute(r ApiCreateLocationRequest) 
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -270,7 +270,7 @@ func (a *LocationsAPIService) DeleteLocationExecute(r ApiDeleteLocationRequest) 
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -750,7 +750,7 @@ func (a *LocationsAPIService) UpdateLocationExecute(r ApiUpdateLocationRequest) 
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

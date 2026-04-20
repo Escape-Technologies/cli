@@ -131,7 +131,7 @@ func (a *IntegrationsAPIService) CreateakamaiIntegrationExecute(r ApiCreateakama
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -263,7 +263,7 @@ func (a *IntegrationsAPIService) CreateawsIntegrationExecute(r ApiCreateawsInteg
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -395,7 +395,7 @@ func (a *IntegrationsAPIService) CreateazureIntegrationExecute(r ApiCreateazureI
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -527,7 +527,7 @@ func (a *IntegrationsAPIService) CreatebitbucketIntegrationExecute(r ApiCreatebi
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -659,7 +659,7 @@ func (a *IntegrationsAPIService) CreatecloudflareIntegrationExecute(r ApiCreatec
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -791,7 +791,7 @@ func (a *IntegrationsAPIService) CreatecustomIntegrationExecute(r ApiCreatecusto
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -923,7 +923,7 @@ func (a *IntegrationsAPIService) CreategcpIntegrationExecute(r ApiCreategcpInteg
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1055,7 +1055,7 @@ func (a *IntegrationsAPIService) CreategithubIntegrationExecute(r ApiCreategithu
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1187,7 +1187,7 @@ func (a *IntegrationsAPIService) CreategitlabIntegrationExecute(r ApiCreategitla
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1319,7 +1319,7 @@ func (a *IntegrationsAPIService) CreatejiraIntegrationExecute(r ApiCreatejiraInt
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1451,7 +1451,7 @@ func (a *IntegrationsAPIService) CreatekubernetesIntegrationExecute(r ApiCreatek
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1583,7 +1583,7 @@ func (a *IntegrationsAPIService) CreatepostmanIntegrationExecute(r ApiCreatepost
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1715,7 +1715,7 @@ func (a *IntegrationsAPIService) CreatewizIntegrationExecute(r ApiCreatewizInteg
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1843,7 +1843,7 @@ func (a *IntegrationsAPIService) DeleteakamaiIntegrationExecute(r ApiDeleteakama
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1982,7 +1982,7 @@ func (a *IntegrationsAPIService) DeleteawsIntegrationExecute(r ApiDeleteawsInteg
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2121,7 +2121,7 @@ func (a *IntegrationsAPIService) DeleteazureIntegrationExecute(r ApiDeleteazureI
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2260,7 +2260,7 @@ func (a *IntegrationsAPIService) DeletebitbucketIntegrationExecute(r ApiDeletebi
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2399,7 +2399,7 @@ func (a *IntegrationsAPIService) DeletecloudflareIntegrationExecute(r ApiDeletec
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2538,7 +2538,7 @@ func (a *IntegrationsAPIService) DeletecustomIntegrationExecute(r ApiDeletecusto
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2677,7 +2677,7 @@ func (a *IntegrationsAPIService) DeletegcpIntegrationExecute(r ApiDeletegcpInteg
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2816,7 +2816,7 @@ func (a *IntegrationsAPIService) DeletegithubIntegrationExecute(r ApiDeletegithu
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2955,7 +2955,7 @@ func (a *IntegrationsAPIService) DeletegitlabIntegrationExecute(r ApiDeletegitla
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3094,7 +3094,7 @@ func (a *IntegrationsAPIService) DeletejiraIntegrationExecute(r ApiDeletejiraInt
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3233,7 +3233,7 @@ func (a *IntegrationsAPIService) DeletekubernetesIntegrationExecute(r ApiDeletek
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3372,7 +3372,7 @@ func (a *IntegrationsAPIService) DeletepostmanIntegrationExecute(r ApiDeletepost
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3511,7 +3511,7 @@ func (a *IntegrationsAPIService) DeletewizIntegrationExecute(r ApiDeletewizInteg
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3650,7 +3650,7 @@ func (a *IntegrationsAPIService) GetakamaiIntegrationExecute(r ApiGetakamaiInteg
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3778,7 +3778,7 @@ func (a *IntegrationsAPIService) GetawsIntegrationExecute(r ApiGetawsIntegration
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3906,7 +3906,7 @@ func (a *IntegrationsAPIService) GetazureIntegrationExecute(r ApiGetazureIntegra
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4034,7 +4034,7 @@ func (a *IntegrationsAPIService) GetbitbucketIntegrationExecute(r ApiGetbitbucke
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4162,7 +4162,7 @@ func (a *IntegrationsAPIService) GetcloudflareIntegrationExecute(r ApiGetcloudfl
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4290,7 +4290,7 @@ func (a *IntegrationsAPIService) GetcustomIntegrationExecute(r ApiGetcustomInteg
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4418,7 +4418,7 @@ func (a *IntegrationsAPIService) GetgcpIntegrationExecute(r ApiGetgcpIntegration
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4546,7 +4546,7 @@ func (a *IntegrationsAPIService) GetgithubIntegrationExecute(r ApiGetgithubInteg
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4674,7 +4674,7 @@ func (a *IntegrationsAPIService) GetgitlabIntegrationExecute(r ApiGetgitlabInteg
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4802,7 +4802,7 @@ func (a *IntegrationsAPIService) GetjiraIntegrationExecute(r ApiGetjiraIntegrati
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4930,7 +4930,7 @@ func (a *IntegrationsAPIService) GetkubernetesIntegrationExecute(r ApiGetkuberne
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -5058,7 +5058,7 @@ func (a *IntegrationsAPIService) GetpostmanIntegrationExecute(r ApiGetpostmanInt
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -5186,7 +5186,7 @@ func (a *IntegrationsAPIService) GetwizIntegrationExecute(r ApiGetwizIntegration
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -8260,7 +8260,7 @@ func (a *IntegrationsAPIService) UpdateakamaiIntegrationExecute(r ApiUpdateakama
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -8396,7 +8396,7 @@ func (a *IntegrationsAPIService) UpdateawsIntegrationExecute(r ApiUpdateawsInteg
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -8532,7 +8532,7 @@ func (a *IntegrationsAPIService) UpdateazureIntegrationExecute(r ApiUpdateazureI
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -8668,7 +8668,7 @@ func (a *IntegrationsAPIService) UpdatebitbucketIntegrationExecute(r ApiUpdatebi
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -8804,7 +8804,7 @@ func (a *IntegrationsAPIService) UpdatecloudflareIntegrationExecute(r ApiUpdatec
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -8940,7 +8940,7 @@ func (a *IntegrationsAPIService) UpdatecustomIntegrationExecute(r ApiUpdatecusto
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -9076,7 +9076,7 @@ func (a *IntegrationsAPIService) UpdategcpIntegrationExecute(r ApiUpdategcpInteg
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -9212,7 +9212,7 @@ func (a *IntegrationsAPIService) UpdategithubIntegrationExecute(r ApiUpdategithu
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -9348,7 +9348,7 @@ func (a *IntegrationsAPIService) UpdategitlabIntegrationExecute(r ApiUpdategitla
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -9484,7 +9484,7 @@ func (a *IntegrationsAPIService) UpdatejiraIntegrationExecute(r ApiUpdatejiraInt
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -9620,7 +9620,7 @@ func (a *IntegrationsAPIService) UpdatekubernetesIntegrationExecute(r ApiUpdatek
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -9756,7 +9756,7 @@ func (a *IntegrationsAPIService) UpdatepostmanIntegrationExecute(r ApiUpdatepost
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -9892,7 +9892,7 @@ func (a *IntegrationsAPIService) UpdatewizIntegrationExecute(r ApiUpdatewizInteg
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

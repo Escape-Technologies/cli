@@ -131,7 +131,7 @@ func (a *CustomRulesAPIService) CreateCustomRuleExecute(r ApiCreateCustomRuleReq
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -259,7 +259,7 @@ func (a *CustomRulesAPIService) DeleteCustomRuleExecute(r ApiDeleteCustomRuleReq
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -669,7 +669,7 @@ func (a *CustomRulesAPIService) UpdateCustomRuleExecute(r ApiUpdateCustomRuleReq
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400ResponseAnyOf
+			var v UpdateProfile400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
