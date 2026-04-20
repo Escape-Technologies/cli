@@ -360,7 +360,6 @@ itself cannot be fetched.`,
 		g.SetLimit(maxLatestEventsHydrationConcurrency)
 		var mu sync.Mutex
 		for i, eid := range eventIDs {
-			i, eid := i, eid
 			g.Go(func() error {
 				ev, err := escape.GetEvent(gctx, eid)
 				mu.Lock()
