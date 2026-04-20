@@ -19,26 +19,25 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationExperimental{}
 
 // GetProfile200ResponseConfigurationExperimental struct for GetProfile200ResponseConfigurationExperimental
 type GetProfile200ResponseConfigurationExperimental struct {
-	BlstExplorationOnly            *bool                                                                          `json:"blst_exploration_only,omitempty"`
-	AgenticIdor                    *bool                                                                          `json:"agentic_idor,omitempty"`
-	BusinessLogicAgent             *bool                                                                          `json:"business_logic_agent,omitempty"`
-	HappyPathsRegressionTesting    []string                                                                       `json:"happy_paths_regression_testing,omitempty"`
-	RegressionTestingFileUploadIds []string                                                                       `json:"regression_testing_file_upload_ids,omitempty"`
-	AsmTechnologies                *bool                                                                          `json:"asm_technologies,omitempty"`
-	AsmCodeProjects                *bool                                                                          `json:"asm_code_projects,omitempty"`
-	AsmEnumerateCodeProjects       *bool                                                                          `json:"asm_enumerate_code_projects,omitempty"`
-	LocationsNext                  *bool                                                                          `json:"locations_next,omitempty"`
-	ExternalCrawlingTask           *bool                                                                          `json:"external_crawling_task,omitempty"`
-	XssAgentModelAlias             *ENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS `json:"xss_agent_model_alias,omitempty"`
-	SqliAgentModelAlias            *ENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS `json:"sqli_agent_model_alias,omitempty"`
-	AsmCveAgent                    *bool                                                                          `json:"asm_cve_agent,omitempty"`
-	LoginPageAgent                 *bool                                                                          `json:"login_page_agent,omitempty"`
-	JsAnalysis                     *bool                                                                          `json:"js_analysis,omitempty"`
-	ExtendedPortScan               *bool                                                                          `json:"extended_port_scan,omitempty"`
-	LoginPageBruteforceAgent       *bool                                                                          `json:"login_page_bruteforce_agent,omitempty"`
-	LlmSecurityTesting             *bool                                                                          `json:"llm_security_testing,omitempty"`
-	DastMultiAgentPentest          *bool                                                                          `json:"dast_multi_agent_pentest,omitempty"`
-	AdditionalProperties           map[string]interface{}
+	BlstExplorationOnly *bool `json:"blst_exploration_only,omitempty"`
+	AgenticIdor *bool `json:"agentic_idor,omitempty"`
+	BusinessLogicAgent *bool `json:"business_logic_agent,omitempty"`
+	HappyPathsRegressionTesting []string `json:"happy_paths_regression_testing,omitempty"`
+	RegressionTestingFileUploadIds []string `json:"regression_testing_file_upload_ids,omitempty"`
+	AsmTechnologies *bool `json:"asm_technologies,omitempty"`
+	AsmCodeProjects *bool `json:"asm_code_projects,omitempty"`
+	AsmEnumerateCodeProjects *bool `json:"asm_enumerate_code_projects,omitempty"`
+	LocationsNext *bool `json:"locations_next,omitempty"`
+	ExternalCrawlingTask *bool `json:"external_crawling_task,omitempty"`
+	XssAgentModelAlias *ENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS `json:"xss_agent_model_alias,omitempty"`
+	SqliAgentModelAlias *ENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS `json:"sqli_agent_model_alias,omitempty"`
+	AsmCveAgent *bool `json:"asm_cve_agent,omitempty"`
+	LoginPageAgent *bool `json:"login_page_agent,omitempty"`
+	JsAnalysis *bool `json:"js_analysis,omitempty"`
+	ExtendedPortScan *bool `json:"extended_port_scan,omitempty"`
+	LoginPageBruteforceAgent *bool `json:"login_page_bruteforce_agent,omitempty"`
+	LlmSecurityTesting *bool `json:"llm_security_testing,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetProfile200ResponseConfigurationExperimental GetProfile200ResponseConfigurationExperimental
@@ -636,40 +635,8 @@ func (o *GetProfile200ResponseConfigurationExperimental) SetLlmSecurityTesting(v
 	o.LlmSecurityTesting = &v
 }
 
-// GetDastMultiAgentPentest returns the DastMultiAgentPentest field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationExperimental) GetDastMultiAgentPentest() bool {
-	if o == nil || IsNil(o.DastMultiAgentPentest) {
-		var ret bool
-		return ret
-	}
-	return *o.DastMultiAgentPentest
-}
-
-// GetDastMultiAgentPentestOk returns a tuple with the DastMultiAgentPentest field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationExperimental) GetDastMultiAgentPentestOk() (*bool, bool) {
-	if o == nil || IsNil(o.DastMultiAgentPentest) {
-		return nil, false
-	}
-	return o.DastMultiAgentPentest, true
-}
-
-// HasDastMultiAgentPentest returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationExperimental) HasDastMultiAgentPentest() bool {
-	if o != nil && !IsNil(o.DastMultiAgentPentest) {
-		return true
-	}
-
-	return false
-}
-
-// SetDastMultiAgentPentest gets a reference to the given bool and assigns it to the DastMultiAgentPentest field.
-func (o *GetProfile200ResponseConfigurationExperimental) SetDastMultiAgentPentest(v bool) {
-	o.DastMultiAgentPentest = &v
-}
-
 func (o GetProfile200ResponseConfigurationExperimental) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -732,9 +699,6 @@ func (o GetProfile200ResponseConfigurationExperimental) ToMap() (map[string]inte
 	if !IsNil(o.LlmSecurityTesting) {
 		toSerialize["llm_security_testing"] = o.LlmSecurityTesting
 	}
-	if !IsNil(o.DastMultiAgentPentest) {
-		toSerialize["dast_multi_agent_pentest"] = o.DastMultiAgentPentest
-	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -775,7 +739,6 @@ func (o *GetProfile200ResponseConfigurationExperimental) UnmarshalJSON(data []by
 		delete(additionalProperties, "extended_port_scan")
 		delete(additionalProperties, "login_page_bruteforce_agent")
 		delete(additionalProperties, "llm_security_testing")
-		delete(additionalProperties, "dast_multi_agent_pentest")
 		o.AdditionalProperties = additionalProperties
 	}
 
@@ -817,3 +780,5 @@ func (v *NullableGetProfile200ResponseConfigurationExperimental) UnmarshalJSON(s
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

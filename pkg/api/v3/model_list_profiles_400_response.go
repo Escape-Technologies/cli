@@ -20,8 +20,8 @@ var _ MappedNullable = &ListProfiles400Response{}
 
 // ListProfiles400Response struct for ListProfiles400Response
 type ListProfiles400Response struct {
-	Message              ENUMPROPERTIESMESSAGE `json:"message"`
-	Details              string                `json:"details"`
+	Message string `json:"message"`
+	Details string `json:"details"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -31,7 +31,7 @@ type _ListProfiles400Response ListProfiles400Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewListProfiles400Response(message ENUMPROPERTIESMESSAGE, details string) *ListProfiles400Response {
+func NewListProfiles400Response(message string, details string) *ListProfiles400Response {
 	this := ListProfiles400Response{}
 	this.Message = message
 	this.Details = details
@@ -47,9 +47,9 @@ func NewListProfiles400ResponseWithDefaults() *ListProfiles400Response {
 }
 
 // GetMessage returns the Message field value
-func (o *ListProfiles400Response) GetMessage() ENUMPROPERTIESMESSAGE {
+func (o *ListProfiles400Response) GetMessage() string {
 	if o == nil {
-		var ret ENUMPROPERTIESMESSAGE
+		var ret string
 		return ret
 	}
 
@@ -58,7 +58,7 @@ func (o *ListProfiles400Response) GetMessage() ENUMPROPERTIESMESSAGE {
 
 // GetMessageOk returns a tuple with the Message field value
 // and a boolean to check if the value has been set.
-func (o *ListProfiles400Response) GetMessageOk() (*ENUMPROPERTIESMESSAGE, bool) {
+func (o *ListProfiles400Response) GetMessageOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -66,7 +66,7 @@ func (o *ListProfiles400Response) GetMessageOk() (*ENUMPROPERTIESMESSAGE, bool) 
 }
 
 // SetMessage sets field value
-func (o *ListProfiles400Response) SetMessage(v ENUMPROPERTIESMESSAGE) {
+func (o *ListProfiles400Response) SetMessage(v string) {
 	o.Message = v
 }
 
@@ -95,7 +95,7 @@ func (o *ListProfiles400Response) SetDetails(v string) {
 }
 
 func (o ListProfiles400Response) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -128,10 +128,10 @@ func (o *ListProfiles400Response) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -193,3 +193,5 @@ func (v *NullableListProfiles400Response) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

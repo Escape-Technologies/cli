@@ -20,18 +20,18 @@ var _ MappedNullable = &CreateAssetDNSRequestPathsInsightsInnerParametersParamet
 
 // CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner struct for CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner
 type CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner struct {
-	Name                 string                                                                                    `json:"name"`
-	In                   ENUMPROPERTIESPATHSINSIGHTSITEMSPROPERTIESPARAMETERSPROPERTIESPARAMETERSITEMSPROPERTIESIN `json:"in"`
-	Required             *bool                                                                                     `json:"required,omitempty"`
-	Deprecated           *bool                                                                                     `json:"deprecated,omitempty"`
-	Description          *string                                                                                   `json:"description,omitempty"`
-	Style                *string                                                                                   `json:"style,omitempty"`
-	Explode              *bool                                                                                     `json:"explode,omitempty"`
-	AllowedReserved      *bool                                                                                     `json:"allowedReserved,omitempty"`
-	Schema               map[string]interface{}                                                                    `json:"schema,omitempty"`
-	Example              NullableCreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample           `json:"example,omitempty"`
-	Examples             map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue  `json:"examples,omitempty"`
-	Content              map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValue   `json:"content,omitempty"`
+	Name string `json:"name"`
+	In ENUMPROPERTIESPATHSINSIGHTSITEMSPROPERTIESPARAMETERSPROPERTIESPARAMETERSITEMSPROPERTIESIN `json:"in"`
+	Required *bool `json:"required,omitempty"`
+	Deprecated *bool `json:"deprecated,omitempty"`
+	Description *string `json:"description,omitempty"`
+	Style *string `json:"style,omitempty"`
+	Explode *bool `json:"explode,omitempty"`
+	AllowedReserved *bool `json:"allowedReserved,omitempty"`
+	Schema map[string]interface{} `json:"schema,omitempty"`
+	Example NullableCreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample `json:"example,omitempty"`
+	Examples map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue `json:"examples,omitempty"`
+	Content map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValue `json:"content,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -360,7 +360,6 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) HasEx
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) SetExample(v CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample) {
 	o.Example.Set(&v)
 }
-
 // SetExampleNil sets the value for Example to be an explicit nil
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) SetExampleNil() {
 	o.Example.Set(nil)
@@ -436,7 +435,7 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) SetCo
 }
 
 func (o CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -499,10 +498,10 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInner) Unmar
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -574,3 +573,5 @@ func (v *NullableCreateAssetDNSRequestPathsInsightsInnerParametersParametersInne
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
