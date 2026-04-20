@@ -21,13 +21,13 @@ var _ MappedNullable = &AuthenticationEvent{}
 // AuthenticationEvent A single progress or diagnostic message from an authentication configuration check
 type AuthenticationEvent struct {
 	// When this log entry was recorded
-	CreatedAt string                                   `json:"createdAt"`
-	Level     ENUMPROPERTIESEVENTSITEMSPROPERTIESLEVEL `json:"level"`
-	Stage     ENUMPROPERTIESEVENTSITEMSPROPERTIESSTAGE `json:"stage"`
+	CreatedAt string `json:"createdAt"`
+	Level ENUMPROPERTIESEVENTSITEMSPROPERTIESLEVEL `json:"level"`
+	Stage ENUMPROPERTIESEVENTSITEMSPROPERTIESSTAGE `json:"stage"`
 	// Short headline for the message
 	Title string `json:"title"`
 	// Full message body
-	Description          string `json:"description"`
+	Description string `json:"description"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -176,7 +176,7 @@ func (o *AuthenticationEvent) SetDescription(v string) {
 }
 
 func (o AuthenticationEvent) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -215,10 +215,10 @@ func (o *AuthenticationEvent) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -283,3 +283,5 @@ func (v *NullableAuthenticationEvent) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

@@ -25,10 +25,10 @@ type GetIssue200Response struct {
 	// The name of the issue
 	Name string `json:"name"`
 	// The full name of the issue
-	FullName string                                    `json:"fullName"`
+	FullName string `json:"fullName"`
 	Category ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY `json:"category"`
 	Severity ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY `json:"severity"`
-	Status   ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS   `json:"status"`
+	Status ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS `json:"status"`
 	// AI-generated contextual overview for the issue
 	Context *string `json:"context,omitempty"`
 	// Array of risk types associated with the issue
@@ -36,11 +36,11 @@ type GetIssue200Response struct {
 	// Unique identifier for the alert
 	AlertUid string `json:"alertUid"`
 	// When the issue was first created
-	CreatedAt string         `json:"createdAt"`
-	Asset     AssetDetailed2 `json:"asset"`
+	CreatedAt string `json:"createdAt"`
+	Asset AssetDetailed2 `json:"asset"`
 	// ID of the last scan where this issue was seen
-	LastSeenScanId *string          `json:"lastSeenScanId,omitempty"`
-	LastSeenScan   *ScanSummarized3 `json:"lastSeenScan,omitempty"`
+	LastSeenScanId *string `json:"lastSeenScanId,omitempty"`
+	LastSeenScan *ScanSummarized3 `json:"lastSeenScan,omitempty"`
 	// ID of the first scan where this issue was seen
 	FirstSeenScanId *string `json:"firstSeenScanId,omitempty"`
 	// ID of the custom rule if this is a custom issue
@@ -48,11 +48,15 @@ type GetIssue200Response struct {
 	// Framework used for AI remediation
 	AiRemediationFramework string `json:"aiRemediationFramework"`
 	// AI-generated remediation for the issue
-	Remediation *string                  `json:"remediation,omitempty"`
-	Cvss        *GetIssue200ResponseCvss `json:"cvss,omitempty"`
+	Remediation *string `json:"remediation,omitempty"`
+	Cvss *GetIssue200ResponseCvss `json:"cvss,omitempty"`
 	// Compliances associated with the issue
-	Compliances          []GetIssue200ResponseCompliancesInner `json:"compliances,omitempty"`
-	Links                IssueSummarizedLinks                  `json:"links"`
+	Compliances []GetIssue200ResponseCompliancesInner `json:"compliances,omitempty"`
+	Links IssueSummarizedLinks `json:"links"`
+	// IDs of up to 5 events from the issue's last-seen scan, newest-first. Hydrate with GET /v3/events/:id for full payload (Exchange, etc.). Only populated by GET /v3/issues/:issueId.
+	LatestEventIds []string `json:"latestEventIds,omitempty"`
+	// True when the last-seen scan has more than 5 events. Use GET /v3/events?issueIds=<id>&scanIds=<lastSeenScanId> for the full list.
+	LatestEventsTruncated *bool `json:"latestEventsTruncated,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -631,8 +635,72 @@ func (o *GetIssue200Response) SetLinks(v IssueSummarizedLinks) {
 	o.Links = v
 }
 
+// GetLatestEventIds returns the LatestEventIds field value if set, zero value otherwise.
+func (o *GetIssue200Response) GetLatestEventIds() []string {
+	if o == nil || IsNil(o.LatestEventIds) {
+		var ret []string
+		return ret
+	}
+	return o.LatestEventIds
+}
+
+// GetLatestEventIdsOk returns a tuple with the LatestEventIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetIssue200Response) GetLatestEventIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.LatestEventIds) {
+		return nil, false
+	}
+	return o.LatestEventIds, true
+}
+
+// HasLatestEventIds returns a boolean if a field has been set.
+func (o *GetIssue200Response) HasLatestEventIds() bool {
+	if o != nil && !IsNil(o.LatestEventIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetLatestEventIds gets a reference to the given []string and assigns it to the LatestEventIds field.
+func (o *GetIssue200Response) SetLatestEventIds(v []string) {
+	o.LatestEventIds = v
+}
+
+// GetLatestEventsTruncated returns the LatestEventsTruncated field value if set, zero value otherwise.
+func (o *GetIssue200Response) GetLatestEventsTruncated() bool {
+	if o == nil || IsNil(o.LatestEventsTruncated) {
+		var ret bool
+		return ret
+	}
+	return *o.LatestEventsTruncated
+}
+
+// GetLatestEventsTruncatedOk returns a tuple with the LatestEventsTruncated field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetIssue200Response) GetLatestEventsTruncatedOk() (*bool, bool) {
+	if o == nil || IsNil(o.LatestEventsTruncated) {
+		return nil, false
+	}
+	return o.LatestEventsTruncated, true
+}
+
+// HasLatestEventsTruncated returns a boolean if a field has been set.
+func (o *GetIssue200Response) HasLatestEventsTruncated() bool {
+	if o != nil && !IsNil(o.LatestEventsTruncated) {
+		return true
+	}
+
+	return false
+}
+
+// SetLatestEventsTruncated gets a reference to the given bool and assigns it to the LatestEventsTruncated field.
+func (o *GetIssue200Response) SetLatestEventsTruncated(v bool) {
+	o.LatestEventsTruncated = &v
+}
+
 func (o GetIssue200Response) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -677,6 +745,12 @@ func (o GetIssue200Response) ToMap() (map[string]interface{}, error) {
 		toSerialize["compliances"] = o.Compliances
 	}
 	toSerialize["links"] = o.Links
+	if !IsNil(o.LatestEventIds) {
+		toSerialize["latestEventIds"] = o.LatestEventIds
+	}
+	if !IsNil(o.LatestEventsTruncated) {
+		toSerialize["latestEventsTruncated"] = o.LatestEventsTruncated
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -709,10 +783,10 @@ func (o *GetIssue200Response) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -751,6 +825,8 @@ func (o *GetIssue200Response) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "cvss")
 		delete(additionalProperties, "compliances")
 		delete(additionalProperties, "links")
+		delete(additionalProperties, "latestEventIds")
+		delete(additionalProperties, "latestEventsTruncated")
 		o.AdditionalProperties = additionalProperties
 	}
 
@@ -792,3 +868,5 @@ func (v *NullableGetIssue200Response) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
