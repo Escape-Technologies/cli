@@ -454,7 +454,7 @@ func (r ApiGetIssueFunnelRequest) ProjectIds(projectIds GetIssueFunnelProjectIds
 	return r
 }
 
-func (r ApiGetIssueFunnelRequest) Execute() ([]IssueFunnelInner, *http.Response, error) {
+func (r ApiGetIssueFunnelRequest) Execute() ([]GetIssueFunnel200ResponseInner, *http.Response, error) {
 	return r.ApiService.GetIssueFunnelExecute(r)
 }
 
@@ -475,13 +475,13 @@ func (a *IssuesAPIService) GetIssueFunnel(ctx context.Context) ApiGetIssueFunnel
 
 // Execute executes the request
 //
-//	@return []IssueFunnelInner
-func (a *IssuesAPIService) GetIssueFunnelExecute(r ApiGetIssueFunnelRequest) ([]IssueFunnelInner, *http.Response, error) {
+//	@return []GetIssueFunnel200ResponseInner
+func (a *IssuesAPIService) GetIssueFunnelExecute(r ApiGetIssueFunnelRequest) ([]GetIssueFunnel200ResponseInner, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue []IssueFunnelInner
+		localVarReturnValue []GetIssueFunnel200ResponseInner
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IssuesAPIService.GetIssueFunnel")
@@ -606,7 +606,7 @@ func (r ApiGetIssueTrendsRequest) ProjectIds(projectIds GetIssueTrendsProjectIds
 	return r
 }
 
-func (r ApiGetIssueTrendsRequest) Execute() ([]IssueTrendsInner, *http.Response, error) {
+func (r ApiGetIssueTrendsRequest) Execute() ([]GetIssueTrends200ResponseInner, *http.Response, error) {
 	return r.ApiService.GetIssueTrendsExecute(r)
 }
 
@@ -627,13 +627,13 @@ func (a *IssuesAPIService) GetIssueTrends(ctx context.Context) ApiGetIssueTrends
 
 // Execute executes the request
 //
-//	@return []IssueTrendsInner
-func (a *IssuesAPIService) GetIssueTrendsExecute(r ApiGetIssueTrendsRequest) ([]IssueTrendsInner, *http.Response, error) {
+//	@return []GetIssueTrends200ResponseInner
+func (a *IssuesAPIService) GetIssueTrendsExecute(r ApiGetIssueTrendsRequest) ([]GetIssueTrends200ResponseInner, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue []IssueTrendsInner
+		localVarReturnValue []GetIssueTrends200ResponseInner
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IssuesAPIService.GetIssueTrends")
@@ -659,7 +659,6 @@ func (a *IssuesAPIService) GetIssueTrendsExecute(r ApiGetIssueTrendsRequest) ([]
 		parameterAddToHeaderOrQuery(localVarQueryParams, "interval", r.interval, "form", "")
 	} else {
 		var defaultValue string = "1 day"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "interval", defaultValue, "form", "")
 		r.interval = &defaultValue
 	}
 	if r.applicationIds != nil {
@@ -1043,7 +1042,6 @@ func (a *IssuesAPIService) ListIssuesExecute(r ApiListIssuesRequest) (*ListIssue
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
-		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.sortType != nil {
@@ -1053,7 +1051,6 @@ func (a *IssuesAPIService) ListIssuesExecute(r ApiListIssuesRequest) (*ListIssue
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
 		var defaultValue string = "asc"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
 		r.sortDirection = &defaultValue
 	}
 	if r.profileIds != nil {
