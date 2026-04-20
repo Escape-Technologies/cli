@@ -19,11 +19,12 @@ import (
 	"strings"
 )
 
+
 // UsersAPIService UsersAPI service
 type UsersAPIService service
 
 type ApiGetMeRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *UsersAPIService
 }
 
@@ -36,25 +37,24 @@ GetMe Get current user context
 
 Get basic information about the authenticated user and current organization.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetMeRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetMeRequest
 */
 func (a *UsersAPIService) GetMe(ctx context.Context) ApiGetMeRequest {
 	return ApiGetMeRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetMe200Response
+//  @return GetMe200Response
 func (a *UsersAPIService) GetMeExecute(r ApiGetMeRequest) (*GetMe200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *GetMe200Response
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetMe200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersAPIService.GetMe")
@@ -137,9 +137,9 @@ func (a *UsersAPIService) GetMeExecute(r ApiGetMeRequest) (*GetMe200Response, *h
 }
 
 type ApiGetUserRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *UsersAPIService
-	userId     string
+	userId string
 }
 
 func (r ApiGetUserRequest) Execute() (*GetUser200Response, *http.Response, error) {
@@ -151,27 +151,26 @@ GetUser Get a user
 
 Get a user by ID.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param userId The user ID
-	@return ApiGetUserRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param userId The user ID
+ @return ApiGetUserRequest
 */
 func (a *UsersAPIService) GetUser(ctx context.Context, userId string) ApiGetUserRequest {
 	return ApiGetUserRequest{
 		ApiService: a,
-		ctx:        ctx,
-		userId:     userId,
+		ctx: ctx,
+		userId: userId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetUser200Response
+//  @return GetUser200Response
 func (a *UsersAPIService) GetUserExecute(r ApiGetUserRequest) (*GetUser200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *GetUser200Response
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetUser200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersAPIService.GetUser")
@@ -255,8 +254,8 @@ func (a *UsersAPIService) GetUserExecute(r ApiGetUserRequest) (*GetUser200Respon
 }
 
 type ApiInviteUserRequest struct {
-	ctx               context.Context
-	ApiService        *UsersAPIService
+	ctx context.Context
+	ApiService *UsersAPIService
 	inviteUserRequest *InviteUserRequest
 }
 
@@ -275,25 +274,24 @@ InviteUser Invite users
 
 Invite users to the organization, and give them roles.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiInviteUserRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiInviteUserRequest
 */
 func (a *UsersAPIService) InviteUser(ctx context.Context) ApiInviteUserRequest {
 	return ApiInviteUserRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return []ListUsers200ResponseInner
+//  @return []ListUsers200ResponseInner
 func (a *UsersAPIService) InviteUserExecute(r ApiInviteUserRequest) ([]ListUsers200ResponseInner, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue []ListUsers200ResponseInner
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  []ListUsers200ResponseInner
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersAPIService.InviteUser")
@@ -372,8 +370,8 @@ func (a *UsersAPIService) InviteUserExecute(r ApiInviteUserRequest) ([]ListUsers
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -391,7 +389,7 @@ func (a *UsersAPIService) InviteUserExecute(r ApiInviteUserRequest) ([]ListUsers
 }
 
 type ApiListUsersRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *UsersAPIService
 }
 
@@ -404,25 +402,24 @@ ListUsers List users
 
 List users of the organization.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiListUsersRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiListUsersRequest
 */
 func (a *UsersAPIService) ListUsers(ctx context.Context) ApiListUsersRequest {
 	return ApiListUsersRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return []ListUsers200ResponseInner
+//  @return []ListUsers200ResponseInner
 func (a *UsersAPIService) ListUsersExecute(r ApiListUsersRequest) ([]ListUsers200ResponseInner, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue []ListUsers200ResponseInner
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  []ListUsers200ResponseInner
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersAPIService.ListUsers")

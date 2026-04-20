@@ -26,7 +26,7 @@ type CreateCustomRuleRequest struct {
 	// Whether the custom rule is enabled for Inventory
 	InventoryEnabled *bool `json:"inventoryEnabled,omitempty"`
 	// The tags of the custom rule
-	TagIds               []string `json:"tagIds,omitempty"`
+	TagIds []string `json:"tagIds,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -171,7 +171,7 @@ func (o *CreateCustomRuleRequest) SetTagIds(v []string) {
 }
 
 func (o CreateCustomRuleRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -211,10 +211,10 @@ func (o *CreateCustomRuleRequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -278,3 +278,5 @@ func (v *NullableCreateCustomRuleRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
