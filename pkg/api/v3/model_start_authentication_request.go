@@ -24,8 +24,8 @@ type StartAuthenticationRequest struct {
 	// Authentication object to validate. When `profileId` is also set, this replaces the profile saved authentication.
 	Authentication map[string]interface{} `json:"authentication,omitempty"`
 	// Force a specific Escape or private location (proxy) for this check
-	ProxyId              *string                         `json:"proxyId,omitempty"`
-	DefaultProxyType     *ENUMPROPERTIESDEFAULTPROXYTYPE `json:"defaultProxyType,omitempty"`
+	ProxyId *string `json:"proxyId,omitempty"`
+	DefaultProxyType *ENUMPROPERTIESDEFAULTPROXYTYPE `json:"defaultProxyType,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -177,7 +177,7 @@ func (o *StartAuthenticationRequest) SetDefaultProxyType(v ENUMPROPERTIESDEFAULT
 }
 
 func (o StartAuthenticationRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -265,3 +265,5 @@ func (v *NullableStartAuthenticationRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

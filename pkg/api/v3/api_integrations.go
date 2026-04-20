@@ -16,16 +16,17 @@ import (
 	"io"
 	"net/http"
 	"net/url"
-	"reflect"
 	"strings"
+	"reflect"
 )
+
 
 // IntegrationsAPIService IntegrationsAPI service
 type IntegrationsAPIService service
 
 type ApiCreateakamaiIntegrationRequest struct {
-	ctx                            context.Context
-	ApiService                     *IntegrationsAPIService
+	ctx context.Context
+	ApiService *IntegrationsAPIService
 	createakamaiIntegrationRequest *CreateakamaiIntegrationRequest
 }
 
@@ -43,25 +44,24 @@ CreateakamaiIntegration Create Akamai integrations.
 
 Create a Akamai integration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateakamaiIntegrationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateakamaiIntegrationRequest
 */
 func (a *IntegrationsAPIService) CreateakamaiIntegration(ctx context.Context) ApiCreateakamaiIntegrationRequest {
 	return ApiCreateakamaiIntegrationRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreateakamaiIntegration200Response
+//  @return CreateakamaiIntegration200Response
 func (a *IntegrationsAPIService) CreateakamaiIntegrationExecute(r ApiCreateakamaiIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreateakamaiIntegration200Response
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreateakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.CreateakamaiIntegration")
@@ -137,8 +137,8 @@ func (a *IntegrationsAPIService) CreateakamaiIntegrationExecute(r ApiCreateakama
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -156,8 +156,8 @@ func (a *IntegrationsAPIService) CreateakamaiIntegrationExecute(r ApiCreateakama
 }
 
 type ApiCreateawsIntegrationRequest struct {
-	ctx                         context.Context
-	ApiService                  *IntegrationsAPIService
+	ctx context.Context
+	ApiService *IntegrationsAPIService
 	createawsIntegrationRequest *CreateawsIntegrationRequest
 }
 
@@ -175,25 +175,24 @@ CreateawsIntegration Create AWS integrations.
 
 Create a AWS integration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateawsIntegrationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateawsIntegrationRequest
 */
 func (a *IntegrationsAPIService) CreateawsIntegration(ctx context.Context) ApiCreateawsIntegrationRequest {
 	return ApiCreateawsIntegrationRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreateawsIntegration200Response
+//  @return CreateawsIntegration200Response
 func (a *IntegrationsAPIService) CreateawsIntegrationExecute(r ApiCreateawsIntegrationRequest) (*CreateawsIntegration200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreateawsIntegration200Response
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreateawsIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.CreateawsIntegration")
@@ -269,8 +268,8 @@ func (a *IntegrationsAPIService) CreateawsIntegrationExecute(r ApiCreateawsInteg
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -288,8 +287,8 @@ func (a *IntegrationsAPIService) CreateawsIntegrationExecute(r ApiCreateawsInteg
 }
 
 type ApiCreateazureIntegrationRequest struct {
-	ctx                           context.Context
-	ApiService                    *IntegrationsAPIService
+	ctx context.Context
+	ApiService *IntegrationsAPIService
 	createazureIntegrationRequest *CreateazureIntegrationRequest
 }
 
@@ -307,25 +306,24 @@ CreateazureIntegration Create Azure integrations.
 
 Create a Azure integration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateazureIntegrationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateazureIntegrationRequest
 */
 func (a *IntegrationsAPIService) CreateazureIntegration(ctx context.Context) ApiCreateazureIntegrationRequest {
 	return ApiCreateazureIntegrationRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreateazureIntegration200Response
+//  @return CreateazureIntegration200Response
 func (a *IntegrationsAPIService) CreateazureIntegrationExecute(r ApiCreateazureIntegrationRequest) (*CreateazureIntegration200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreateazureIntegration200Response
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreateazureIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.CreateazureIntegration")
@@ -401,8 +399,8 @@ func (a *IntegrationsAPIService) CreateazureIntegrationExecute(r ApiCreateazureI
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -420,8 +418,8 @@ func (a *IntegrationsAPIService) CreateazureIntegrationExecute(r ApiCreateazureI
 }
 
 type ApiCreatebitbucketIntegrationRequest struct {
-	ctx                               context.Context
-	ApiService                        *IntegrationsAPIService
+	ctx context.Context
+	ApiService *IntegrationsAPIService
 	createbitbucketIntegrationRequest *CreatebitbucketIntegrationRequest
 }
 
@@ -439,25 +437,24 @@ CreatebitbucketIntegration Create Bitbucket integrations.
 
 Create a Bitbucket integration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreatebitbucketIntegrationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreatebitbucketIntegrationRequest
 */
 func (a *IntegrationsAPIService) CreatebitbucketIntegration(ctx context.Context) ApiCreatebitbucketIntegrationRequest {
 	return ApiCreatebitbucketIntegrationRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreatebitbucketIntegration200Response
+//  @return CreatebitbucketIntegration200Response
 func (a *IntegrationsAPIService) CreatebitbucketIntegrationExecute(r ApiCreatebitbucketIntegrationRequest) (*CreatebitbucketIntegration200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreatebitbucketIntegration200Response
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreatebitbucketIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.CreatebitbucketIntegration")
@@ -533,8 +530,8 @@ func (a *IntegrationsAPIService) CreatebitbucketIntegrationExecute(r ApiCreatebi
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -552,8 +549,8 @@ func (a *IntegrationsAPIService) CreatebitbucketIntegrationExecute(r ApiCreatebi
 }
 
 type ApiCreatecloudflareIntegrationRequest struct {
-	ctx                                context.Context
-	ApiService                         *IntegrationsAPIService
+	ctx context.Context
+	ApiService *IntegrationsAPIService
 	createcloudflareIntegrationRequest *CreatecloudflareIntegrationRequest
 }
 
@@ -571,25 +568,24 @@ CreatecloudflareIntegration Create Cloudflare integrations.
 
 Create a Cloudflare integration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreatecloudflareIntegrationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreatecloudflareIntegrationRequest
 */
 func (a *IntegrationsAPIService) CreatecloudflareIntegration(ctx context.Context) ApiCreatecloudflareIntegrationRequest {
 	return ApiCreatecloudflareIntegrationRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreatecloudflareIntegration200Response
+//  @return CreatecloudflareIntegration200Response
 func (a *IntegrationsAPIService) CreatecloudflareIntegrationExecute(r ApiCreatecloudflareIntegrationRequest) (*CreatecloudflareIntegration200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreatecloudflareIntegration200Response
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreatecloudflareIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.CreatecloudflareIntegration")
@@ -665,8 +661,8 @@ func (a *IntegrationsAPIService) CreatecloudflareIntegrationExecute(r ApiCreatec
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -684,8 +680,8 @@ func (a *IntegrationsAPIService) CreatecloudflareIntegrationExecute(r ApiCreatec
 }
 
 type ApiCreatecustomIntegrationRequest struct {
-	ctx                            context.Context
-	ApiService                     *IntegrationsAPIService
+	ctx context.Context
+	ApiService *IntegrationsAPIService
 	createcustomIntegrationRequest *CreatecustomIntegrationRequest
 }
 
@@ -703,25 +699,24 @@ CreatecustomIntegration Create Custom Integration integrations.
 
 Create a Custom Integration integration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreatecustomIntegrationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreatecustomIntegrationRequest
 */
 func (a *IntegrationsAPIService) CreatecustomIntegration(ctx context.Context) ApiCreatecustomIntegrationRequest {
 	return ApiCreatecustomIntegrationRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreatecustomIntegration200Response
+//  @return CreatecustomIntegration200Response
 func (a *IntegrationsAPIService) CreatecustomIntegrationExecute(r ApiCreatecustomIntegrationRequest) (*CreatecustomIntegration200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreatecustomIntegration200Response
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreatecustomIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.CreatecustomIntegration")
@@ -797,8 +792,8 @@ func (a *IntegrationsAPIService) CreatecustomIntegrationExecute(r ApiCreatecusto
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -816,8 +811,8 @@ func (a *IntegrationsAPIService) CreatecustomIntegrationExecute(r ApiCreatecusto
 }
 
 type ApiCreategcpIntegrationRequest struct {
-	ctx                         context.Context
-	ApiService                  *IntegrationsAPIService
+	ctx context.Context
+	ApiService *IntegrationsAPIService
 	creategcpIntegrationRequest *CreategcpIntegrationRequest
 }
 
@@ -835,25 +830,24 @@ CreategcpIntegration Create GCP integrations.
 
 Create a GCP integration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreategcpIntegrationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreategcpIntegrationRequest
 */
 func (a *IntegrationsAPIService) CreategcpIntegration(ctx context.Context) ApiCreategcpIntegrationRequest {
 	return ApiCreategcpIntegrationRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreategcpIntegration200Response
+//  @return CreategcpIntegration200Response
 func (a *IntegrationsAPIService) CreategcpIntegrationExecute(r ApiCreategcpIntegrationRequest) (*CreategcpIntegration200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreategcpIntegration200Response
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreategcpIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.CreategcpIntegration")
@@ -929,8 +923,8 @@ func (a *IntegrationsAPIService) CreategcpIntegrationExecute(r ApiCreategcpInteg
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -948,8 +942,8 @@ func (a *IntegrationsAPIService) CreategcpIntegrationExecute(r ApiCreategcpInteg
 }
 
 type ApiCreategithubIntegrationRequest struct {
-	ctx                                context.Context
-	ApiService                         *IntegrationsAPIService
+	ctx context.Context
+	ApiService *IntegrationsAPIService
 	createcloudflareIntegrationRequest *CreatecloudflareIntegrationRequest
 }
 
@@ -967,25 +961,24 @@ CreategithubIntegration Create GitHub integrations.
 
 Create a GitHub integration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreategithubIntegrationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreategithubIntegrationRequest
 */
 func (a *IntegrationsAPIService) CreategithubIntegration(ctx context.Context) ApiCreategithubIntegrationRequest {
 	return ApiCreategithubIntegrationRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreatecloudflareIntegration200Response
+//  @return CreatecloudflareIntegration200Response
 func (a *IntegrationsAPIService) CreategithubIntegrationExecute(r ApiCreategithubIntegrationRequest) (*CreatecloudflareIntegration200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreatecloudflareIntegration200Response
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreatecloudflareIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.CreategithubIntegration")
@@ -1061,8 +1054,8 @@ func (a *IntegrationsAPIService) CreategithubIntegrationExecute(r ApiCreategithu
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1080,8 +1073,8 @@ func (a *IntegrationsAPIService) CreategithubIntegrationExecute(r ApiCreategithu
 }
 
 type ApiCreategitlabIntegrationRequest struct {
-	ctx                            context.Context
-	ApiService                     *IntegrationsAPIService
+	ctx context.Context
+	ApiService *IntegrationsAPIService
 	creategitlabIntegrationRequest *CreategitlabIntegrationRequest
 }
 
@@ -1099,25 +1092,24 @@ CreategitlabIntegration Create GitLab integrations.
 
 Create a GitLab integration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreategitlabIntegrationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreategitlabIntegrationRequest
 */
 func (a *IntegrationsAPIService) CreategitlabIntegration(ctx context.Context) ApiCreategitlabIntegrationRequest {
 	return ApiCreategitlabIntegrationRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreategitlabIntegration200Response
+//  @return CreategitlabIntegration200Response
 func (a *IntegrationsAPIService) CreategitlabIntegrationExecute(r ApiCreategitlabIntegrationRequest) (*CreategitlabIntegration200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreategitlabIntegration200Response
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreategitlabIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.CreategitlabIntegration")
@@ -1193,8 +1185,8 @@ func (a *IntegrationsAPIService) CreategitlabIntegrationExecute(r ApiCreategitla
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1212,8 +1204,8 @@ func (a *IntegrationsAPIService) CreategitlabIntegrationExecute(r ApiCreategitla
 }
 
 type ApiCreatejiraIntegrationRequest struct {
-	ctx                          context.Context
-	ApiService                   *IntegrationsAPIService
+	ctx context.Context
+	ApiService *IntegrationsAPIService
 	createjiraIntegrationRequest *CreatejiraIntegrationRequest
 }
 
@@ -1231,25 +1223,24 @@ CreatejiraIntegration Create Jira integrations.
 
 Create a Jira integration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreatejiraIntegrationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreatejiraIntegrationRequest
 */
 func (a *IntegrationsAPIService) CreatejiraIntegration(ctx context.Context) ApiCreatejiraIntegrationRequest {
 	return ApiCreatejiraIntegrationRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreatejiraIntegration200Response
+//  @return CreatejiraIntegration200Response
 func (a *IntegrationsAPIService) CreatejiraIntegrationExecute(r ApiCreatejiraIntegrationRequest) (*CreatejiraIntegration200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreatejiraIntegration200Response
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreatejiraIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.CreatejiraIntegration")
@@ -1325,8 +1316,8 @@ func (a *IntegrationsAPIService) CreatejiraIntegrationExecute(r ApiCreatejiraInt
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1344,8 +1335,8 @@ func (a *IntegrationsAPIService) CreatejiraIntegrationExecute(r ApiCreatejiraInt
 }
 
 type ApiCreatekubernetesIntegrationRequest struct {
-	ctx                                context.Context
-	ApiService                         *IntegrationsAPIService
+	ctx context.Context
+	ApiService *IntegrationsAPIService
 	createkubernetesIntegrationRequest *CreatekubernetesIntegrationRequest
 }
 
@@ -1363,25 +1354,24 @@ CreatekubernetesIntegration Create Kubernetes integrations.
 
 Create a Kubernetes integration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreatekubernetesIntegrationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreatekubernetesIntegrationRequest
 */
 func (a *IntegrationsAPIService) CreatekubernetesIntegration(ctx context.Context) ApiCreatekubernetesIntegrationRequest {
 	return ApiCreatekubernetesIntegrationRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreatekubernetesIntegration200Response
+//  @return CreatekubernetesIntegration200Response
 func (a *IntegrationsAPIService) CreatekubernetesIntegrationExecute(r ApiCreatekubernetesIntegrationRequest) (*CreatekubernetesIntegration200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreatekubernetesIntegration200Response
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreatekubernetesIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.CreatekubernetesIntegration")
@@ -1457,8 +1447,8 @@ func (a *IntegrationsAPIService) CreatekubernetesIntegrationExecute(r ApiCreatek
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1476,8 +1466,8 @@ func (a *IntegrationsAPIService) CreatekubernetesIntegrationExecute(r ApiCreatek
 }
 
 type ApiCreatepostmanIntegrationRequest struct {
-	ctx                                context.Context
-	ApiService                         *IntegrationsAPIService
+	ctx context.Context
+	ApiService *IntegrationsAPIService
 	createcloudflareIntegrationRequest *CreatecloudflareIntegrationRequest
 }
 
@@ -1495,25 +1485,24 @@ CreatepostmanIntegration Create Postman integrations.
 
 Create a Postman integration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreatepostmanIntegrationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreatepostmanIntegrationRequest
 */
 func (a *IntegrationsAPIService) CreatepostmanIntegration(ctx context.Context) ApiCreatepostmanIntegrationRequest {
 	return ApiCreatepostmanIntegrationRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreatecloudflareIntegration200Response
+//  @return CreatecloudflareIntegration200Response
 func (a *IntegrationsAPIService) CreatepostmanIntegrationExecute(r ApiCreatepostmanIntegrationRequest) (*CreatecloudflareIntegration200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreatecloudflareIntegration200Response
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreatecloudflareIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.CreatepostmanIntegration")
@@ -1589,8 +1578,8 @@ func (a *IntegrationsAPIService) CreatepostmanIntegrationExecute(r ApiCreatepost
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1608,8 +1597,8 @@ func (a *IntegrationsAPIService) CreatepostmanIntegrationExecute(r ApiCreatepost
 }
 
 type ApiCreatewizIntegrationRequest struct {
-	ctx                         context.Context
-	ApiService                  *IntegrationsAPIService
+	ctx context.Context
+	ApiService *IntegrationsAPIService
 	createwizIntegrationRequest *CreatewizIntegrationRequest
 }
 
@@ -1627,25 +1616,24 @@ CreatewizIntegration Create Wiz integrations.
 
 Create a Wiz integration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreatewizIntegrationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreatewizIntegrationRequest
 */
 func (a *IntegrationsAPIService) CreatewizIntegration(ctx context.Context) ApiCreatewizIntegrationRequest {
 	return ApiCreatewizIntegrationRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreatewizIntegration200Response
+//  @return CreatewizIntegration200Response
 func (a *IntegrationsAPIService) CreatewizIntegrationExecute(r ApiCreatewizIntegrationRequest) (*CreatewizIntegration200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreatewizIntegration200Response
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreatewizIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.CreatewizIntegration")
@@ -1721,8 +1709,8 @@ func (a *IntegrationsAPIService) CreatewizIntegrationExecute(r ApiCreatewizInteg
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1740,9 +1728,9 @@ func (a *IntegrationsAPIService) CreatewizIntegrationExecute(r ApiCreatewizInteg
 }
 
 type ApiDeleteakamaiIntegrationRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *IntegrationsAPIService
-	id         string
+	id string
 }
 
 func (r ApiDeleteakamaiIntegrationRequest) Execute() (*CreateakamaiIntegration200Response, *http.Response, error) {
@@ -1754,27 +1742,26 @@ DeleteakamaiIntegration Delete Akamai integration.
 
 Delete a Akamai integration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The integration ID
-	@return ApiDeleteakamaiIntegrationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The integration ID
+ @return ApiDeleteakamaiIntegrationRequest
 */
 func (a *IntegrationsAPIService) DeleteakamaiIntegration(ctx context.Context, id string) ApiDeleteakamaiIntegrationRequest {
 	return ApiDeleteakamaiIntegrationRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreateakamaiIntegration200Response
+//  @return CreateakamaiIntegration200Response
 func (a *IntegrationsAPIService) DeleteakamaiIntegrationExecute(r ApiDeleteakamaiIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodDelete
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreateakamaiIntegration200Response
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreateakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.DeleteakamaiIntegration")
@@ -1849,8 +1836,8 @@ func (a *IntegrationsAPIService) DeleteakamaiIntegrationExecute(r ApiDeleteakama
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1860,8 +1847,8 @@ func (a *IntegrationsAPIService) DeleteakamaiIntegrationExecute(r ApiDeleteakama
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1879,9 +1866,9 @@ func (a *IntegrationsAPIService) DeleteakamaiIntegrationExecute(r ApiDeleteakama
 }
 
 type ApiDeleteawsIntegrationRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *IntegrationsAPIService
-	id         string
+	id string
 }
 
 func (r ApiDeleteawsIntegrationRequest) Execute() (*CreateawsIntegration200Response, *http.Response, error) {
@@ -1893,27 +1880,26 @@ DeleteawsIntegration Delete AWS integration.
 
 Delete a AWS integration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The integration ID
-	@return ApiDeleteawsIntegrationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The integration ID
+ @return ApiDeleteawsIntegrationRequest
 */
 func (a *IntegrationsAPIService) DeleteawsIntegration(ctx context.Context, id string) ApiDeleteawsIntegrationRequest {
 	return ApiDeleteawsIntegrationRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreateawsIntegration200Response
+//  @return CreateawsIntegration200Response
 func (a *IntegrationsAPIService) DeleteawsIntegrationExecute(r ApiDeleteawsIntegrationRequest) (*CreateawsIntegration200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodDelete
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreateawsIntegration200Response
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreateawsIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.DeleteawsIntegration")
@@ -1988,8 +1974,8 @@ func (a *IntegrationsAPIService) DeleteawsIntegrationExecute(r ApiDeleteawsInteg
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1999,8 +1985,8 @@ func (a *IntegrationsAPIService) DeleteawsIntegrationExecute(r ApiDeleteawsInteg
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2018,9 +2004,9 @@ func (a *IntegrationsAPIService) DeleteawsIntegrationExecute(r ApiDeleteawsInteg
 }
 
 type ApiDeleteazureIntegrationRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *IntegrationsAPIService
-	id         string
+	id string
 }
 
 func (r ApiDeleteazureIntegrationRequest) Execute() (*CreateazureIntegration200Response, *http.Response, error) {
@@ -2032,27 +2018,26 @@ DeleteazureIntegration Delete Azure integration.
 
 Delete a Azure integration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The integration ID
-	@return ApiDeleteazureIntegrationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The integration ID
+ @return ApiDeleteazureIntegrationRequest
 */
 func (a *IntegrationsAPIService) DeleteazureIntegration(ctx context.Context, id string) ApiDeleteazureIntegrationRequest {
 	return ApiDeleteazureIntegrationRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreateazureIntegration200Response
+//  @return CreateazureIntegration200Response
 func (a *IntegrationsAPIService) DeleteazureIntegrationExecute(r ApiDeleteazureIntegrationRequest) (*CreateazureIntegration200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodDelete
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreateazureIntegration200Response
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreateazureIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.DeleteazureIntegration")
@@ -2127,8 +2112,8 @@ func (a *IntegrationsAPIService) DeleteazureIntegrationExecute(r ApiDeleteazureI
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -2138,8 +2123,8 @@ func (a *IntegrationsAPIService) DeleteazureIntegrationExecute(r ApiDeleteazureI
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2157,9 +2142,9 @@ func (a *IntegrationsAPIService) DeleteazureIntegrationExecute(r ApiDeleteazureI
 }
 
 type ApiDeletebitbucketIntegrationRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *IntegrationsAPIService
-	id         string
+	id string
 }
 
 func (r ApiDeletebitbucketIntegrationRequest) Execute() (*CreatebitbucketIntegration200Response, *http.Response, error) {
@@ -2171,27 +2156,26 @@ DeletebitbucketIntegration Delete Bitbucket integration.
 
 Delete a Bitbucket integration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The integration ID
-	@return ApiDeletebitbucketIntegrationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The integration ID
+ @return ApiDeletebitbucketIntegrationRequest
 */
 func (a *IntegrationsAPIService) DeletebitbucketIntegration(ctx context.Context, id string) ApiDeletebitbucketIntegrationRequest {
 	return ApiDeletebitbucketIntegrationRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreatebitbucketIntegration200Response
+//  @return CreatebitbucketIntegration200Response
 func (a *IntegrationsAPIService) DeletebitbucketIntegrationExecute(r ApiDeletebitbucketIntegrationRequest) (*CreatebitbucketIntegration200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodDelete
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreatebitbucketIntegration200Response
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreatebitbucketIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.DeletebitbucketIntegration")
@@ -2266,8 +2250,8 @@ func (a *IntegrationsAPIService) DeletebitbucketIntegrationExecute(r ApiDeletebi
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -2277,8 +2261,8 @@ func (a *IntegrationsAPIService) DeletebitbucketIntegrationExecute(r ApiDeletebi
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2296,9 +2280,9 @@ func (a *IntegrationsAPIService) DeletebitbucketIntegrationExecute(r ApiDeletebi
 }
 
 type ApiDeletecloudflareIntegrationRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *IntegrationsAPIService
-	id         string
+	id string
 }
 
 func (r ApiDeletecloudflareIntegrationRequest) Execute() (*CreatecloudflareIntegration200Response, *http.Response, error) {
@@ -2310,27 +2294,26 @@ DeletecloudflareIntegration Delete Cloudflare integration.
 
 Delete a Cloudflare integration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The integration ID
-	@return ApiDeletecloudflareIntegrationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The integration ID
+ @return ApiDeletecloudflareIntegrationRequest
 */
 func (a *IntegrationsAPIService) DeletecloudflareIntegration(ctx context.Context, id string) ApiDeletecloudflareIntegrationRequest {
 	return ApiDeletecloudflareIntegrationRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreatecloudflareIntegration200Response
+//  @return CreatecloudflareIntegration200Response
 func (a *IntegrationsAPIService) DeletecloudflareIntegrationExecute(r ApiDeletecloudflareIntegrationRequest) (*CreatecloudflareIntegration200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodDelete
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreatecloudflareIntegration200Response
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreatecloudflareIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.DeletecloudflareIntegration")
@@ -2405,8 +2388,8 @@ func (a *IntegrationsAPIService) DeletecloudflareIntegrationExecute(r ApiDeletec
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -2416,8 +2399,8 @@ func (a *IntegrationsAPIService) DeletecloudflareIntegrationExecute(r ApiDeletec
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2435,9 +2418,9 @@ func (a *IntegrationsAPIService) DeletecloudflareIntegrationExecute(r ApiDeletec
 }
 
 type ApiDeletecustomIntegrationRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *IntegrationsAPIService
-	id         string
+	id string
 }
 
 func (r ApiDeletecustomIntegrationRequest) Execute() (*CreatecustomIntegration200Response, *http.Response, error) {
@@ -2449,27 +2432,26 @@ DeletecustomIntegration Delete Custom Integration integration.
 
 Delete a Custom Integration integration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The integration ID
-	@return ApiDeletecustomIntegrationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The integration ID
+ @return ApiDeletecustomIntegrationRequest
 */
 func (a *IntegrationsAPIService) DeletecustomIntegration(ctx context.Context, id string) ApiDeletecustomIntegrationRequest {
 	return ApiDeletecustomIntegrationRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreatecustomIntegration200Response
+//  @return CreatecustomIntegration200Response
 func (a *IntegrationsAPIService) DeletecustomIntegrationExecute(r ApiDeletecustomIntegrationRequest) (*CreatecustomIntegration200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodDelete
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreatecustomIntegration200Response
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreatecustomIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.DeletecustomIntegration")
@@ -2544,8 +2526,8 @@ func (a *IntegrationsAPIService) DeletecustomIntegrationExecute(r ApiDeletecusto
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -2555,8 +2537,8 @@ func (a *IntegrationsAPIService) DeletecustomIntegrationExecute(r ApiDeletecusto
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2574,9 +2556,9 @@ func (a *IntegrationsAPIService) DeletecustomIntegrationExecute(r ApiDeletecusto
 }
 
 type ApiDeletegcpIntegrationRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *IntegrationsAPIService
-	id         string
+	id string
 }
 
 func (r ApiDeletegcpIntegrationRequest) Execute() (*CreategcpIntegration200Response, *http.Response, error) {
@@ -2588,27 +2570,26 @@ DeletegcpIntegration Delete GCP integration.
 
 Delete a GCP integration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The integration ID
-	@return ApiDeletegcpIntegrationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The integration ID
+ @return ApiDeletegcpIntegrationRequest
 */
 func (a *IntegrationsAPIService) DeletegcpIntegration(ctx context.Context, id string) ApiDeletegcpIntegrationRequest {
 	return ApiDeletegcpIntegrationRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreategcpIntegration200Response
+//  @return CreategcpIntegration200Response
 func (a *IntegrationsAPIService) DeletegcpIntegrationExecute(r ApiDeletegcpIntegrationRequest) (*CreategcpIntegration200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodDelete
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreategcpIntegration200Response
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreategcpIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.DeletegcpIntegration")
@@ -2683,8 +2664,8 @@ func (a *IntegrationsAPIService) DeletegcpIntegrationExecute(r ApiDeletegcpInteg
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -2694,8 +2675,8 @@ func (a *IntegrationsAPIService) DeletegcpIntegrationExecute(r ApiDeletegcpInteg
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2713,9 +2694,9 @@ func (a *IntegrationsAPIService) DeletegcpIntegrationExecute(r ApiDeletegcpInteg
 }
 
 type ApiDeletegithubIntegrationRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *IntegrationsAPIService
-	id         string
+	id string
 }
 
 func (r ApiDeletegithubIntegrationRequest) Execute() (*CreatecloudflareIntegration200Response, *http.Response, error) {
@@ -2727,27 +2708,26 @@ DeletegithubIntegration Delete GitHub integration.
 
 Delete a GitHub integration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The integration ID
-	@return ApiDeletegithubIntegrationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The integration ID
+ @return ApiDeletegithubIntegrationRequest
 */
 func (a *IntegrationsAPIService) DeletegithubIntegration(ctx context.Context, id string) ApiDeletegithubIntegrationRequest {
 	return ApiDeletegithubIntegrationRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreatecloudflareIntegration200Response
+//  @return CreatecloudflareIntegration200Response
 func (a *IntegrationsAPIService) DeletegithubIntegrationExecute(r ApiDeletegithubIntegrationRequest) (*CreatecloudflareIntegration200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodDelete
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreatecloudflareIntegration200Response
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreatecloudflareIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.DeletegithubIntegration")
@@ -2822,8 +2802,8 @@ func (a *IntegrationsAPIService) DeletegithubIntegrationExecute(r ApiDeletegithu
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -2833,8 +2813,8 @@ func (a *IntegrationsAPIService) DeletegithubIntegrationExecute(r ApiDeletegithu
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2852,9 +2832,9 @@ func (a *IntegrationsAPIService) DeletegithubIntegrationExecute(r ApiDeletegithu
 }
 
 type ApiDeletegitlabIntegrationRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *IntegrationsAPIService
-	id         string
+	id string
 }
 
 func (r ApiDeletegitlabIntegrationRequest) Execute() (*CreategitlabIntegration200Response, *http.Response, error) {
@@ -2866,27 +2846,26 @@ DeletegitlabIntegration Delete GitLab integration.
 
 Delete a GitLab integration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The integration ID
-	@return ApiDeletegitlabIntegrationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The integration ID
+ @return ApiDeletegitlabIntegrationRequest
 */
 func (a *IntegrationsAPIService) DeletegitlabIntegration(ctx context.Context, id string) ApiDeletegitlabIntegrationRequest {
 	return ApiDeletegitlabIntegrationRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreategitlabIntegration200Response
+//  @return CreategitlabIntegration200Response
 func (a *IntegrationsAPIService) DeletegitlabIntegrationExecute(r ApiDeletegitlabIntegrationRequest) (*CreategitlabIntegration200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodDelete
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreategitlabIntegration200Response
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreategitlabIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.DeletegitlabIntegration")
@@ -2961,8 +2940,8 @@ func (a *IntegrationsAPIService) DeletegitlabIntegrationExecute(r ApiDeletegitla
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -2972,8 +2951,8 @@ func (a *IntegrationsAPIService) DeletegitlabIntegrationExecute(r ApiDeletegitla
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2991,9 +2970,9 @@ func (a *IntegrationsAPIService) DeletegitlabIntegrationExecute(r ApiDeletegitla
 }
 
 type ApiDeletejiraIntegrationRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *IntegrationsAPIService
-	id         string
+	id string
 }
 
 func (r ApiDeletejiraIntegrationRequest) Execute() (*CreatejiraIntegration200Response, *http.Response, error) {
@@ -3005,27 +2984,26 @@ DeletejiraIntegration Delete Jira integration.
 
 Delete a Jira integration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The integration ID
-	@return ApiDeletejiraIntegrationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The integration ID
+ @return ApiDeletejiraIntegrationRequest
 */
 func (a *IntegrationsAPIService) DeletejiraIntegration(ctx context.Context, id string) ApiDeletejiraIntegrationRequest {
 	return ApiDeletejiraIntegrationRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreatejiraIntegration200Response
+//  @return CreatejiraIntegration200Response
 func (a *IntegrationsAPIService) DeletejiraIntegrationExecute(r ApiDeletejiraIntegrationRequest) (*CreatejiraIntegration200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodDelete
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreatejiraIntegration200Response
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreatejiraIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.DeletejiraIntegration")
@@ -3100,8 +3078,8 @@ func (a *IntegrationsAPIService) DeletejiraIntegrationExecute(r ApiDeletejiraInt
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -3111,8 +3089,8 @@ func (a *IntegrationsAPIService) DeletejiraIntegrationExecute(r ApiDeletejiraInt
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -3130,9 +3108,9 @@ func (a *IntegrationsAPIService) DeletejiraIntegrationExecute(r ApiDeletejiraInt
 }
 
 type ApiDeletekubernetesIntegrationRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *IntegrationsAPIService
-	id         string
+	id string
 }
 
 func (r ApiDeletekubernetesIntegrationRequest) Execute() (*CreatekubernetesIntegration200Response, *http.Response, error) {
@@ -3144,27 +3122,26 @@ DeletekubernetesIntegration Delete Kubernetes integration.
 
 Delete a Kubernetes integration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The integration ID
-	@return ApiDeletekubernetesIntegrationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The integration ID
+ @return ApiDeletekubernetesIntegrationRequest
 */
 func (a *IntegrationsAPIService) DeletekubernetesIntegration(ctx context.Context, id string) ApiDeletekubernetesIntegrationRequest {
 	return ApiDeletekubernetesIntegrationRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreatekubernetesIntegration200Response
+//  @return CreatekubernetesIntegration200Response
 func (a *IntegrationsAPIService) DeletekubernetesIntegrationExecute(r ApiDeletekubernetesIntegrationRequest) (*CreatekubernetesIntegration200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodDelete
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreatekubernetesIntegration200Response
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreatekubernetesIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.DeletekubernetesIntegration")
@@ -3239,8 +3216,8 @@ func (a *IntegrationsAPIService) DeletekubernetesIntegrationExecute(r ApiDeletek
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -3250,8 +3227,8 @@ func (a *IntegrationsAPIService) DeletekubernetesIntegrationExecute(r ApiDeletek
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -3269,9 +3246,9 @@ func (a *IntegrationsAPIService) DeletekubernetesIntegrationExecute(r ApiDeletek
 }
 
 type ApiDeletepostmanIntegrationRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *IntegrationsAPIService
-	id         string
+	id string
 }
 
 func (r ApiDeletepostmanIntegrationRequest) Execute() (*CreatecloudflareIntegration200Response, *http.Response, error) {
@@ -3283,27 +3260,26 @@ DeletepostmanIntegration Delete Postman integration.
 
 Delete a Postman integration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The integration ID
-	@return ApiDeletepostmanIntegrationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The integration ID
+ @return ApiDeletepostmanIntegrationRequest
 */
 func (a *IntegrationsAPIService) DeletepostmanIntegration(ctx context.Context, id string) ApiDeletepostmanIntegrationRequest {
 	return ApiDeletepostmanIntegrationRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreatecloudflareIntegration200Response
+//  @return CreatecloudflareIntegration200Response
 func (a *IntegrationsAPIService) DeletepostmanIntegrationExecute(r ApiDeletepostmanIntegrationRequest) (*CreatecloudflareIntegration200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodDelete
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreatecloudflareIntegration200Response
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreatecloudflareIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.DeletepostmanIntegration")
@@ -3378,8 +3354,8 @@ func (a *IntegrationsAPIService) DeletepostmanIntegrationExecute(r ApiDeletepost
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -3389,8 +3365,8 @@ func (a *IntegrationsAPIService) DeletepostmanIntegrationExecute(r ApiDeletepost
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -3408,9 +3384,9 @@ func (a *IntegrationsAPIService) DeletepostmanIntegrationExecute(r ApiDeletepost
 }
 
 type ApiDeletewizIntegrationRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *IntegrationsAPIService
-	id         string
+	id string
 }
 
 func (r ApiDeletewizIntegrationRequest) Execute() (*CreatewizIntegration200Response, *http.Response, error) {
@@ -3422,27 +3398,26 @@ DeletewizIntegration Delete Wiz integration.
 
 Delete a Wiz integration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The integration ID
-	@return ApiDeletewizIntegrationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The integration ID
+ @return ApiDeletewizIntegrationRequest
 */
 func (a *IntegrationsAPIService) DeletewizIntegration(ctx context.Context, id string) ApiDeletewizIntegrationRequest {
 	return ApiDeletewizIntegrationRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreatewizIntegration200Response
+//  @return CreatewizIntegration200Response
 func (a *IntegrationsAPIService) DeletewizIntegrationExecute(r ApiDeletewizIntegrationRequest) (*CreatewizIntegration200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodDelete
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreatewizIntegration200Response
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreatewizIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.DeletewizIntegration")
@@ -3517,8 +3492,8 @@ func (a *IntegrationsAPIService) DeletewizIntegrationExecute(r ApiDeletewizInteg
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -3528,8 +3503,8 @@ func (a *IntegrationsAPIService) DeletewizIntegrationExecute(r ApiDeletewizInteg
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -3547,9 +3522,9 @@ func (a *IntegrationsAPIService) DeletewizIntegrationExecute(r ApiDeletewizInteg
 }
 
 type ApiGetakamaiIntegrationRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *IntegrationsAPIService
-	id         string
+	id string
 }
 
 func (r ApiGetakamaiIntegrationRequest) Execute() (*CreateakamaiIntegration200Response, *http.Response, error) {
@@ -3561,27 +3536,26 @@ GetakamaiIntegration Get Akamai integration.
 
 Get a Akamai integration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The integration ID
-	@return ApiGetakamaiIntegrationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The integration ID
+ @return ApiGetakamaiIntegrationRequest
 */
 func (a *IntegrationsAPIService) GetakamaiIntegration(ctx context.Context, id string) ApiGetakamaiIntegrationRequest {
 	return ApiGetakamaiIntegrationRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreateakamaiIntegration200Response
+//  @return CreateakamaiIntegration200Response
 func (a *IntegrationsAPIService) GetakamaiIntegrationExecute(r ApiGetakamaiIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreateakamaiIntegration200Response
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreateakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.GetakamaiIntegration")
@@ -3656,8 +3630,8 @@ func (a *IntegrationsAPIService) GetakamaiIntegrationExecute(r ApiGetakamaiInteg
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -3675,9 +3649,9 @@ func (a *IntegrationsAPIService) GetakamaiIntegrationExecute(r ApiGetakamaiInteg
 }
 
 type ApiGetawsIntegrationRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *IntegrationsAPIService
-	id         string
+	id string
 }
 
 func (r ApiGetawsIntegrationRequest) Execute() (*CreateawsIntegration200Response, *http.Response, error) {
@@ -3689,27 +3663,26 @@ GetawsIntegration Get AWS integration.
 
 Get a AWS integration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The integration ID
-	@return ApiGetawsIntegrationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The integration ID
+ @return ApiGetawsIntegrationRequest
 */
 func (a *IntegrationsAPIService) GetawsIntegration(ctx context.Context, id string) ApiGetawsIntegrationRequest {
 	return ApiGetawsIntegrationRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreateawsIntegration200Response
+//  @return CreateawsIntegration200Response
 func (a *IntegrationsAPIService) GetawsIntegrationExecute(r ApiGetawsIntegrationRequest) (*CreateawsIntegration200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreateawsIntegration200Response
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreateawsIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.GetawsIntegration")
@@ -3784,8 +3757,8 @@ func (a *IntegrationsAPIService) GetawsIntegrationExecute(r ApiGetawsIntegration
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -3803,9 +3776,9 @@ func (a *IntegrationsAPIService) GetawsIntegrationExecute(r ApiGetawsIntegration
 }
 
 type ApiGetazureIntegrationRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *IntegrationsAPIService
-	id         string
+	id string
 }
 
 func (r ApiGetazureIntegrationRequest) Execute() (*CreateazureIntegration200Response, *http.Response, error) {
@@ -3817,27 +3790,26 @@ GetazureIntegration Get Azure integration.
 
 Get a Azure integration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The integration ID
-	@return ApiGetazureIntegrationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The integration ID
+ @return ApiGetazureIntegrationRequest
 */
 func (a *IntegrationsAPIService) GetazureIntegration(ctx context.Context, id string) ApiGetazureIntegrationRequest {
 	return ApiGetazureIntegrationRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreateazureIntegration200Response
+//  @return CreateazureIntegration200Response
 func (a *IntegrationsAPIService) GetazureIntegrationExecute(r ApiGetazureIntegrationRequest) (*CreateazureIntegration200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreateazureIntegration200Response
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreateazureIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.GetazureIntegration")
@@ -3912,8 +3884,8 @@ func (a *IntegrationsAPIService) GetazureIntegrationExecute(r ApiGetazureIntegra
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -3931,9 +3903,9 @@ func (a *IntegrationsAPIService) GetazureIntegrationExecute(r ApiGetazureIntegra
 }
 
 type ApiGetbitbucketIntegrationRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *IntegrationsAPIService
-	id         string
+	id string
 }
 
 func (r ApiGetbitbucketIntegrationRequest) Execute() (*CreatebitbucketIntegration200Response, *http.Response, error) {
@@ -3945,27 +3917,26 @@ GetbitbucketIntegration Get Bitbucket integration.
 
 Get a Bitbucket integration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The integration ID
-	@return ApiGetbitbucketIntegrationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The integration ID
+ @return ApiGetbitbucketIntegrationRequest
 */
 func (a *IntegrationsAPIService) GetbitbucketIntegration(ctx context.Context, id string) ApiGetbitbucketIntegrationRequest {
 	return ApiGetbitbucketIntegrationRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreatebitbucketIntegration200Response
+//  @return CreatebitbucketIntegration200Response
 func (a *IntegrationsAPIService) GetbitbucketIntegrationExecute(r ApiGetbitbucketIntegrationRequest) (*CreatebitbucketIntegration200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreatebitbucketIntegration200Response
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreatebitbucketIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.GetbitbucketIntegration")
@@ -4040,8 +4011,8 @@ func (a *IntegrationsAPIService) GetbitbucketIntegrationExecute(r ApiGetbitbucke
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -4059,9 +4030,9 @@ func (a *IntegrationsAPIService) GetbitbucketIntegrationExecute(r ApiGetbitbucke
 }
 
 type ApiGetcloudflareIntegrationRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *IntegrationsAPIService
-	id         string
+	id string
 }
 
 func (r ApiGetcloudflareIntegrationRequest) Execute() (*CreatecloudflareIntegration200Response, *http.Response, error) {
@@ -4073,27 +4044,26 @@ GetcloudflareIntegration Get Cloudflare integration.
 
 Get a Cloudflare integration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The integration ID
-	@return ApiGetcloudflareIntegrationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The integration ID
+ @return ApiGetcloudflareIntegrationRequest
 */
 func (a *IntegrationsAPIService) GetcloudflareIntegration(ctx context.Context, id string) ApiGetcloudflareIntegrationRequest {
 	return ApiGetcloudflareIntegrationRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreatecloudflareIntegration200Response
+//  @return CreatecloudflareIntegration200Response
 func (a *IntegrationsAPIService) GetcloudflareIntegrationExecute(r ApiGetcloudflareIntegrationRequest) (*CreatecloudflareIntegration200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreatecloudflareIntegration200Response
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreatecloudflareIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.GetcloudflareIntegration")
@@ -4168,8 +4138,8 @@ func (a *IntegrationsAPIService) GetcloudflareIntegrationExecute(r ApiGetcloudfl
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -4187,9 +4157,9 @@ func (a *IntegrationsAPIService) GetcloudflareIntegrationExecute(r ApiGetcloudfl
 }
 
 type ApiGetcustomIntegrationRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *IntegrationsAPIService
-	id         string
+	id string
 }
 
 func (r ApiGetcustomIntegrationRequest) Execute() (*CreatecustomIntegration200Response, *http.Response, error) {
@@ -4201,27 +4171,26 @@ GetcustomIntegration Get Custom Integration integration.
 
 Get a Custom Integration integration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The integration ID
-	@return ApiGetcustomIntegrationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The integration ID
+ @return ApiGetcustomIntegrationRequest
 */
 func (a *IntegrationsAPIService) GetcustomIntegration(ctx context.Context, id string) ApiGetcustomIntegrationRequest {
 	return ApiGetcustomIntegrationRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreatecustomIntegration200Response
+//  @return CreatecustomIntegration200Response
 func (a *IntegrationsAPIService) GetcustomIntegrationExecute(r ApiGetcustomIntegrationRequest) (*CreatecustomIntegration200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreatecustomIntegration200Response
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreatecustomIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.GetcustomIntegration")
@@ -4296,8 +4265,8 @@ func (a *IntegrationsAPIService) GetcustomIntegrationExecute(r ApiGetcustomInteg
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -4315,9 +4284,9 @@ func (a *IntegrationsAPIService) GetcustomIntegrationExecute(r ApiGetcustomInteg
 }
 
 type ApiGetgcpIntegrationRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *IntegrationsAPIService
-	id         string
+	id string
 }
 
 func (r ApiGetgcpIntegrationRequest) Execute() (*CreategcpIntegration200Response, *http.Response, error) {
@@ -4329,27 +4298,26 @@ GetgcpIntegration Get GCP integration.
 
 Get a GCP integration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The integration ID
-	@return ApiGetgcpIntegrationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The integration ID
+ @return ApiGetgcpIntegrationRequest
 */
 func (a *IntegrationsAPIService) GetgcpIntegration(ctx context.Context, id string) ApiGetgcpIntegrationRequest {
 	return ApiGetgcpIntegrationRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreategcpIntegration200Response
+//  @return CreategcpIntegration200Response
 func (a *IntegrationsAPIService) GetgcpIntegrationExecute(r ApiGetgcpIntegrationRequest) (*CreategcpIntegration200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreategcpIntegration200Response
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreategcpIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.GetgcpIntegration")
@@ -4424,8 +4392,8 @@ func (a *IntegrationsAPIService) GetgcpIntegrationExecute(r ApiGetgcpIntegration
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -4443,9 +4411,9 @@ func (a *IntegrationsAPIService) GetgcpIntegrationExecute(r ApiGetgcpIntegration
 }
 
 type ApiGetgithubIntegrationRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *IntegrationsAPIService
-	id         string
+	id string
 }
 
 func (r ApiGetgithubIntegrationRequest) Execute() (*CreatecloudflareIntegration200Response, *http.Response, error) {
@@ -4457,27 +4425,26 @@ GetgithubIntegration Get GitHub integration.
 
 Get a GitHub integration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The integration ID
-	@return ApiGetgithubIntegrationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The integration ID
+ @return ApiGetgithubIntegrationRequest
 */
 func (a *IntegrationsAPIService) GetgithubIntegration(ctx context.Context, id string) ApiGetgithubIntegrationRequest {
 	return ApiGetgithubIntegrationRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreatecloudflareIntegration200Response
+//  @return CreatecloudflareIntegration200Response
 func (a *IntegrationsAPIService) GetgithubIntegrationExecute(r ApiGetgithubIntegrationRequest) (*CreatecloudflareIntegration200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreatecloudflareIntegration200Response
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreatecloudflareIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.GetgithubIntegration")
@@ -4552,8 +4519,8 @@ func (a *IntegrationsAPIService) GetgithubIntegrationExecute(r ApiGetgithubInteg
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -4571,9 +4538,9 @@ func (a *IntegrationsAPIService) GetgithubIntegrationExecute(r ApiGetgithubInteg
 }
 
 type ApiGetgitlabIntegrationRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *IntegrationsAPIService
-	id         string
+	id string
 }
 
 func (r ApiGetgitlabIntegrationRequest) Execute() (*CreategitlabIntegration200Response, *http.Response, error) {
@@ -4585,27 +4552,26 @@ GetgitlabIntegration Get GitLab integration.
 
 Get a GitLab integration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The integration ID
-	@return ApiGetgitlabIntegrationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The integration ID
+ @return ApiGetgitlabIntegrationRequest
 */
 func (a *IntegrationsAPIService) GetgitlabIntegration(ctx context.Context, id string) ApiGetgitlabIntegrationRequest {
 	return ApiGetgitlabIntegrationRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreategitlabIntegration200Response
+//  @return CreategitlabIntegration200Response
 func (a *IntegrationsAPIService) GetgitlabIntegrationExecute(r ApiGetgitlabIntegrationRequest) (*CreategitlabIntegration200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreategitlabIntegration200Response
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreategitlabIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.GetgitlabIntegration")
@@ -4680,8 +4646,8 @@ func (a *IntegrationsAPIService) GetgitlabIntegrationExecute(r ApiGetgitlabInteg
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -4699,9 +4665,9 @@ func (a *IntegrationsAPIService) GetgitlabIntegrationExecute(r ApiGetgitlabInteg
 }
 
 type ApiGetjiraIntegrationRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *IntegrationsAPIService
-	id         string
+	id string
 }
 
 func (r ApiGetjiraIntegrationRequest) Execute() (*CreatejiraIntegration200Response, *http.Response, error) {
@@ -4713,27 +4679,26 @@ GetjiraIntegration Get Jira integration.
 
 Get a Jira integration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The integration ID
-	@return ApiGetjiraIntegrationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The integration ID
+ @return ApiGetjiraIntegrationRequest
 */
 func (a *IntegrationsAPIService) GetjiraIntegration(ctx context.Context, id string) ApiGetjiraIntegrationRequest {
 	return ApiGetjiraIntegrationRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreatejiraIntegration200Response
+//  @return CreatejiraIntegration200Response
 func (a *IntegrationsAPIService) GetjiraIntegrationExecute(r ApiGetjiraIntegrationRequest) (*CreatejiraIntegration200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreatejiraIntegration200Response
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreatejiraIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.GetjiraIntegration")
@@ -4808,8 +4773,8 @@ func (a *IntegrationsAPIService) GetjiraIntegrationExecute(r ApiGetjiraIntegrati
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -4827,9 +4792,9 @@ func (a *IntegrationsAPIService) GetjiraIntegrationExecute(r ApiGetjiraIntegrati
 }
 
 type ApiGetkubernetesIntegrationRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *IntegrationsAPIService
-	id         string
+	id string
 }
 
 func (r ApiGetkubernetesIntegrationRequest) Execute() (*CreatekubernetesIntegration200Response, *http.Response, error) {
@@ -4841,27 +4806,26 @@ GetkubernetesIntegration Get Kubernetes integration.
 
 Get a Kubernetes integration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The integration ID
-	@return ApiGetkubernetesIntegrationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The integration ID
+ @return ApiGetkubernetesIntegrationRequest
 */
 func (a *IntegrationsAPIService) GetkubernetesIntegration(ctx context.Context, id string) ApiGetkubernetesIntegrationRequest {
 	return ApiGetkubernetesIntegrationRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreatekubernetesIntegration200Response
+//  @return CreatekubernetesIntegration200Response
 func (a *IntegrationsAPIService) GetkubernetesIntegrationExecute(r ApiGetkubernetesIntegrationRequest) (*CreatekubernetesIntegration200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreatekubernetesIntegration200Response
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreatekubernetesIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.GetkubernetesIntegration")
@@ -4936,8 +4900,8 @@ func (a *IntegrationsAPIService) GetkubernetesIntegrationExecute(r ApiGetkuberne
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -4955,9 +4919,9 @@ func (a *IntegrationsAPIService) GetkubernetesIntegrationExecute(r ApiGetkuberne
 }
 
 type ApiGetpostmanIntegrationRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *IntegrationsAPIService
-	id         string
+	id string
 }
 
 func (r ApiGetpostmanIntegrationRequest) Execute() (*CreatecloudflareIntegration200Response, *http.Response, error) {
@@ -4969,27 +4933,26 @@ GetpostmanIntegration Get Postman integration.
 
 Get a Postman integration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The integration ID
-	@return ApiGetpostmanIntegrationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The integration ID
+ @return ApiGetpostmanIntegrationRequest
 */
 func (a *IntegrationsAPIService) GetpostmanIntegration(ctx context.Context, id string) ApiGetpostmanIntegrationRequest {
 	return ApiGetpostmanIntegrationRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreatecloudflareIntegration200Response
+//  @return CreatecloudflareIntegration200Response
 func (a *IntegrationsAPIService) GetpostmanIntegrationExecute(r ApiGetpostmanIntegrationRequest) (*CreatecloudflareIntegration200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreatecloudflareIntegration200Response
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreatecloudflareIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.GetpostmanIntegration")
@@ -5064,8 +5027,8 @@ func (a *IntegrationsAPIService) GetpostmanIntegrationExecute(r ApiGetpostmanInt
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -5083,9 +5046,9 @@ func (a *IntegrationsAPIService) GetpostmanIntegrationExecute(r ApiGetpostmanInt
 }
 
 type ApiGetwizIntegrationRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *IntegrationsAPIService
-	id         string
+	id string
 }
 
 func (r ApiGetwizIntegrationRequest) Execute() (*CreatewizIntegration200Response, *http.Response, error) {
@@ -5097,27 +5060,26 @@ GetwizIntegration Get Wiz integration.
 
 Get a Wiz integration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The integration ID
-	@return ApiGetwizIntegrationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The integration ID
+ @return ApiGetwizIntegrationRequest
 */
 func (a *IntegrationsAPIService) GetwizIntegration(ctx context.Context, id string) ApiGetwizIntegrationRequest {
 	return ApiGetwizIntegrationRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreatewizIntegration200Response
+//  @return CreatewizIntegration200Response
 func (a *IntegrationsAPIService) GetwizIntegrationExecute(r ApiGetwizIntegrationRequest) (*CreatewizIntegration200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreatewizIntegration200Response
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreatewizIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.GetwizIntegration")
@@ -5192,8 +5154,8 @@ func (a *IntegrationsAPIService) GetwizIntegrationExecute(r ApiGetwizIntegration
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -5211,16 +5173,16 @@ func (a *IntegrationsAPIService) GetwizIntegrationExecute(r ApiGetwizIntegration
 }
 
 type ApiListakamaiIntegrationsRequest struct {
-	ctx           context.Context
-	ApiService    *IntegrationsAPIService
-	cursor        *string
-	size          *int
-	sortType      *string
+	ctx context.Context
+	ApiService *IntegrationsAPIService
+	cursor *string
+	size *int
+	sortType *string
 	sortDirection *string
-	projectIds    *[]string
-	ids           *string
-	locationIds   *[]string
-	search        *string
+	projectIds *[]string
+	ids *string
+	locationIds *[]string
+	search *string
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
@@ -5280,25 +5242,24 @@ ListakamaiIntegrations List Akamai integrations.
 
 List and search Akamai integrations of the organization.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiListakamaiIntegrationsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiListakamaiIntegrationsRequest
 */
 func (a *IntegrationsAPIService) ListakamaiIntegrations(ctx context.Context) ApiListakamaiIntegrationsRequest {
 	return ApiListakamaiIntegrationsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ListIntegrations200Response
+//  @return ListIntegrations200Response
 func (a *IntegrationsAPIService) ListakamaiIntegrationsExecute(r ApiListakamaiIntegrationsRequest) (*ListIntegrations200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ListIntegrations200Response
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ListIntegrations200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.ListakamaiIntegrations")
@@ -5319,6 +5280,7 @@ func (a *IntegrationsAPIService) ListakamaiIntegrationsExecute(r ApiListakamaiIn
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.sortType != nil {
@@ -5328,6 +5290,7 @@ func (a *IntegrationsAPIService) ListakamaiIntegrationsExecute(r ApiListakamaiIn
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
 		var defaultValue string = "asc"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
 		r.sortDirection = &defaultValue
 	}
 	if r.projectIds != nil {
@@ -5418,8 +5381,8 @@ func (a *IntegrationsAPIService) ListakamaiIntegrationsExecute(r ApiListakamaiIn
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -5437,16 +5400,16 @@ func (a *IntegrationsAPIService) ListakamaiIntegrationsExecute(r ApiListakamaiIn
 }
 
 type ApiListawsIntegrationsRequest struct {
-	ctx           context.Context
-	ApiService    *IntegrationsAPIService
-	cursor        *string
-	size          *int
-	sortType      *string
+	ctx context.Context
+	ApiService *IntegrationsAPIService
+	cursor *string
+	size *int
+	sortType *string
 	sortDirection *string
-	projectIds    *[]string
-	ids           *string
-	locationIds   *[]string
-	search        *string
+	projectIds *[]string
+	ids *string
+	locationIds *[]string
+	search *string
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
@@ -5506,25 +5469,24 @@ ListawsIntegrations List AWS integrations.
 
 List and search AWS integrations of the organization.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiListawsIntegrationsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiListawsIntegrationsRequest
 */
 func (a *IntegrationsAPIService) ListawsIntegrations(ctx context.Context) ApiListawsIntegrationsRequest {
 	return ApiListawsIntegrationsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ListIntegrations200Response
+//  @return ListIntegrations200Response
 func (a *IntegrationsAPIService) ListawsIntegrationsExecute(r ApiListawsIntegrationsRequest) (*ListIntegrations200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ListIntegrations200Response
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ListIntegrations200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.ListawsIntegrations")
@@ -5545,6 +5507,7 @@ func (a *IntegrationsAPIService) ListawsIntegrationsExecute(r ApiListawsIntegrat
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.sortType != nil {
@@ -5554,6 +5517,7 @@ func (a *IntegrationsAPIService) ListawsIntegrationsExecute(r ApiListawsIntegrat
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
 		var defaultValue string = "asc"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
 		r.sortDirection = &defaultValue
 	}
 	if r.projectIds != nil {
@@ -5644,8 +5608,8 @@ func (a *IntegrationsAPIService) ListawsIntegrationsExecute(r ApiListawsIntegrat
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -5663,16 +5627,16 @@ func (a *IntegrationsAPIService) ListawsIntegrationsExecute(r ApiListawsIntegrat
 }
 
 type ApiListazureIntegrationsRequest struct {
-	ctx           context.Context
-	ApiService    *IntegrationsAPIService
-	cursor        *string
-	size          *int
-	sortType      *string
+	ctx context.Context
+	ApiService *IntegrationsAPIService
+	cursor *string
+	size *int
+	sortType *string
 	sortDirection *string
-	projectIds    *[]string
-	ids           *string
-	locationIds   *[]string
-	search        *string
+	projectIds *[]string
+	ids *string
+	locationIds *[]string
+	search *string
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
@@ -5732,25 +5696,24 @@ ListazureIntegrations List Azure integrations.
 
 List and search Azure integrations of the organization.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiListazureIntegrationsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiListazureIntegrationsRequest
 */
 func (a *IntegrationsAPIService) ListazureIntegrations(ctx context.Context) ApiListazureIntegrationsRequest {
 	return ApiListazureIntegrationsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ListIntegrations200Response
+//  @return ListIntegrations200Response
 func (a *IntegrationsAPIService) ListazureIntegrationsExecute(r ApiListazureIntegrationsRequest) (*ListIntegrations200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ListIntegrations200Response
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ListIntegrations200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.ListazureIntegrations")
@@ -5771,6 +5734,7 @@ func (a *IntegrationsAPIService) ListazureIntegrationsExecute(r ApiListazureInte
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.sortType != nil {
@@ -5780,6 +5744,7 @@ func (a *IntegrationsAPIService) ListazureIntegrationsExecute(r ApiListazureInte
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
 		var defaultValue string = "asc"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
 		r.sortDirection = &defaultValue
 	}
 	if r.projectIds != nil {
@@ -5870,8 +5835,8 @@ func (a *IntegrationsAPIService) ListazureIntegrationsExecute(r ApiListazureInte
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -5889,16 +5854,16 @@ func (a *IntegrationsAPIService) ListazureIntegrationsExecute(r ApiListazureInte
 }
 
 type ApiListbitbucketIntegrationsRequest struct {
-	ctx           context.Context
-	ApiService    *IntegrationsAPIService
-	cursor        *string
-	size          *int
-	sortType      *string
+	ctx context.Context
+	ApiService *IntegrationsAPIService
+	cursor *string
+	size *int
+	sortType *string
 	sortDirection *string
-	projectIds    *[]string
-	ids           *string
-	locationIds   *[]string
-	search        *string
+	projectIds *[]string
+	ids *string
+	locationIds *[]string
+	search *string
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
@@ -5958,25 +5923,24 @@ ListbitbucketIntegrations List Bitbucket integrations.
 
 List and search Bitbucket integrations of the organization.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiListbitbucketIntegrationsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiListbitbucketIntegrationsRequest
 */
 func (a *IntegrationsAPIService) ListbitbucketIntegrations(ctx context.Context) ApiListbitbucketIntegrationsRequest {
 	return ApiListbitbucketIntegrationsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ListIntegrations200Response
+//  @return ListIntegrations200Response
 func (a *IntegrationsAPIService) ListbitbucketIntegrationsExecute(r ApiListbitbucketIntegrationsRequest) (*ListIntegrations200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ListIntegrations200Response
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ListIntegrations200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.ListbitbucketIntegrations")
@@ -5997,6 +5961,7 @@ func (a *IntegrationsAPIService) ListbitbucketIntegrationsExecute(r ApiListbitbu
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.sortType != nil {
@@ -6006,6 +5971,7 @@ func (a *IntegrationsAPIService) ListbitbucketIntegrationsExecute(r ApiListbitbu
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
 		var defaultValue string = "asc"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
 		r.sortDirection = &defaultValue
 	}
 	if r.projectIds != nil {
@@ -6096,8 +6062,8 @@ func (a *IntegrationsAPIService) ListbitbucketIntegrationsExecute(r ApiListbitbu
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -6115,16 +6081,16 @@ func (a *IntegrationsAPIService) ListbitbucketIntegrationsExecute(r ApiListbitbu
 }
 
 type ApiListcloudflareIntegrationsRequest struct {
-	ctx           context.Context
-	ApiService    *IntegrationsAPIService
-	cursor        *string
-	size          *int
-	sortType      *string
+	ctx context.Context
+	ApiService *IntegrationsAPIService
+	cursor *string
+	size *int
+	sortType *string
 	sortDirection *string
-	projectIds    *[]string
-	ids           *string
-	locationIds   *[]string
-	search        *string
+	projectIds *[]string
+	ids *string
+	locationIds *[]string
+	search *string
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
@@ -6184,25 +6150,24 @@ ListcloudflareIntegrations List Cloudflare integrations.
 
 List and search Cloudflare integrations of the organization.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiListcloudflareIntegrationsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiListcloudflareIntegrationsRequest
 */
 func (a *IntegrationsAPIService) ListcloudflareIntegrations(ctx context.Context) ApiListcloudflareIntegrationsRequest {
 	return ApiListcloudflareIntegrationsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ListIntegrations200Response
+//  @return ListIntegrations200Response
 func (a *IntegrationsAPIService) ListcloudflareIntegrationsExecute(r ApiListcloudflareIntegrationsRequest) (*ListIntegrations200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ListIntegrations200Response
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ListIntegrations200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.ListcloudflareIntegrations")
@@ -6223,6 +6188,7 @@ func (a *IntegrationsAPIService) ListcloudflareIntegrationsExecute(r ApiListclou
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.sortType != nil {
@@ -6232,6 +6198,7 @@ func (a *IntegrationsAPIService) ListcloudflareIntegrationsExecute(r ApiListclou
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
 		var defaultValue string = "asc"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
 		r.sortDirection = &defaultValue
 	}
 	if r.projectIds != nil {
@@ -6322,8 +6289,8 @@ func (a *IntegrationsAPIService) ListcloudflareIntegrationsExecute(r ApiListclou
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -6341,16 +6308,16 @@ func (a *IntegrationsAPIService) ListcloudflareIntegrationsExecute(r ApiListclou
 }
 
 type ApiListcustomIntegrationsRequest struct {
-	ctx           context.Context
-	ApiService    *IntegrationsAPIService
-	cursor        *string
-	size          *int
-	sortType      *string
+	ctx context.Context
+	ApiService *IntegrationsAPIService
+	cursor *string
+	size *int
+	sortType *string
 	sortDirection *string
-	projectIds    *[]string
-	ids           *string
-	locationIds   *[]string
-	search        *string
+	projectIds *[]string
+	ids *string
+	locationIds *[]string
+	search *string
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
@@ -6410,25 +6377,24 @@ ListcustomIntegrations List Custom Integration integrations.
 
 List and search Custom Integration integrations of the organization.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiListcustomIntegrationsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiListcustomIntegrationsRequest
 */
 func (a *IntegrationsAPIService) ListcustomIntegrations(ctx context.Context) ApiListcustomIntegrationsRequest {
 	return ApiListcustomIntegrationsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ListIntegrations200Response
+//  @return ListIntegrations200Response
 func (a *IntegrationsAPIService) ListcustomIntegrationsExecute(r ApiListcustomIntegrationsRequest) (*ListIntegrations200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ListIntegrations200Response
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ListIntegrations200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.ListcustomIntegrations")
@@ -6449,6 +6415,7 @@ func (a *IntegrationsAPIService) ListcustomIntegrationsExecute(r ApiListcustomIn
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.sortType != nil {
@@ -6458,6 +6425,7 @@ func (a *IntegrationsAPIService) ListcustomIntegrationsExecute(r ApiListcustomIn
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
 		var defaultValue string = "asc"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
 		r.sortDirection = &defaultValue
 	}
 	if r.projectIds != nil {
@@ -6548,8 +6516,8 @@ func (a *IntegrationsAPIService) ListcustomIntegrationsExecute(r ApiListcustomIn
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -6567,16 +6535,16 @@ func (a *IntegrationsAPIService) ListcustomIntegrationsExecute(r ApiListcustomIn
 }
 
 type ApiListgcpIntegrationsRequest struct {
-	ctx           context.Context
-	ApiService    *IntegrationsAPIService
-	cursor        *string
-	size          *int
-	sortType      *string
+	ctx context.Context
+	ApiService *IntegrationsAPIService
+	cursor *string
+	size *int
+	sortType *string
 	sortDirection *string
-	projectIds    *[]string
-	ids           *string
-	locationIds   *[]string
-	search        *string
+	projectIds *[]string
+	ids *string
+	locationIds *[]string
+	search *string
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
@@ -6636,25 +6604,24 @@ ListgcpIntegrations List GCP integrations.
 
 List and search GCP integrations of the organization.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiListgcpIntegrationsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiListgcpIntegrationsRequest
 */
 func (a *IntegrationsAPIService) ListgcpIntegrations(ctx context.Context) ApiListgcpIntegrationsRequest {
 	return ApiListgcpIntegrationsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ListIntegrations200Response
+//  @return ListIntegrations200Response
 func (a *IntegrationsAPIService) ListgcpIntegrationsExecute(r ApiListgcpIntegrationsRequest) (*ListIntegrations200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ListIntegrations200Response
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ListIntegrations200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.ListgcpIntegrations")
@@ -6675,6 +6642,7 @@ func (a *IntegrationsAPIService) ListgcpIntegrationsExecute(r ApiListgcpIntegrat
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.sortType != nil {
@@ -6684,6 +6652,7 @@ func (a *IntegrationsAPIService) ListgcpIntegrationsExecute(r ApiListgcpIntegrat
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
 		var defaultValue string = "asc"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
 		r.sortDirection = &defaultValue
 	}
 	if r.projectIds != nil {
@@ -6774,8 +6743,8 @@ func (a *IntegrationsAPIService) ListgcpIntegrationsExecute(r ApiListgcpIntegrat
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -6793,16 +6762,16 @@ func (a *IntegrationsAPIService) ListgcpIntegrationsExecute(r ApiListgcpIntegrat
 }
 
 type ApiListgithubIntegrationsRequest struct {
-	ctx           context.Context
-	ApiService    *IntegrationsAPIService
-	cursor        *string
-	size          *int
-	sortType      *string
+	ctx context.Context
+	ApiService *IntegrationsAPIService
+	cursor *string
+	size *int
+	sortType *string
 	sortDirection *string
-	projectIds    *[]string
-	ids           *string
-	locationIds   *[]string
-	search        *string
+	projectIds *[]string
+	ids *string
+	locationIds *[]string
+	search *string
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
@@ -6862,25 +6831,24 @@ ListgithubIntegrations List GitHub integrations.
 
 List and search GitHub integrations of the organization.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiListgithubIntegrationsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiListgithubIntegrationsRequest
 */
 func (a *IntegrationsAPIService) ListgithubIntegrations(ctx context.Context) ApiListgithubIntegrationsRequest {
 	return ApiListgithubIntegrationsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ListIntegrations200Response
+//  @return ListIntegrations200Response
 func (a *IntegrationsAPIService) ListgithubIntegrationsExecute(r ApiListgithubIntegrationsRequest) (*ListIntegrations200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ListIntegrations200Response
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ListIntegrations200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.ListgithubIntegrations")
@@ -6901,6 +6869,7 @@ func (a *IntegrationsAPIService) ListgithubIntegrationsExecute(r ApiListgithubIn
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.sortType != nil {
@@ -6910,6 +6879,7 @@ func (a *IntegrationsAPIService) ListgithubIntegrationsExecute(r ApiListgithubIn
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
 		var defaultValue string = "asc"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
 		r.sortDirection = &defaultValue
 	}
 	if r.projectIds != nil {
@@ -7000,8 +6970,8 @@ func (a *IntegrationsAPIService) ListgithubIntegrationsExecute(r ApiListgithubIn
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -7019,16 +6989,16 @@ func (a *IntegrationsAPIService) ListgithubIntegrationsExecute(r ApiListgithubIn
 }
 
 type ApiListgitlabIntegrationsRequest struct {
-	ctx           context.Context
-	ApiService    *IntegrationsAPIService
-	cursor        *string
-	size          *int
-	sortType      *string
+	ctx context.Context
+	ApiService *IntegrationsAPIService
+	cursor *string
+	size *int
+	sortType *string
 	sortDirection *string
-	projectIds    *[]string
-	ids           *string
-	locationIds   *[]string
-	search        *string
+	projectIds *[]string
+	ids *string
+	locationIds *[]string
+	search *string
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
@@ -7088,25 +7058,24 @@ ListgitlabIntegrations List GitLab integrations.
 
 List and search GitLab integrations of the organization.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiListgitlabIntegrationsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiListgitlabIntegrationsRequest
 */
 func (a *IntegrationsAPIService) ListgitlabIntegrations(ctx context.Context) ApiListgitlabIntegrationsRequest {
 	return ApiListgitlabIntegrationsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ListIntegrations200Response
+//  @return ListIntegrations200Response
 func (a *IntegrationsAPIService) ListgitlabIntegrationsExecute(r ApiListgitlabIntegrationsRequest) (*ListIntegrations200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ListIntegrations200Response
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ListIntegrations200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.ListgitlabIntegrations")
@@ -7127,6 +7096,7 @@ func (a *IntegrationsAPIService) ListgitlabIntegrationsExecute(r ApiListgitlabIn
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.sortType != nil {
@@ -7136,6 +7106,7 @@ func (a *IntegrationsAPIService) ListgitlabIntegrationsExecute(r ApiListgitlabIn
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
 		var defaultValue string = "asc"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
 		r.sortDirection = &defaultValue
 	}
 	if r.projectIds != nil {
@@ -7226,8 +7197,8 @@ func (a *IntegrationsAPIService) ListgitlabIntegrationsExecute(r ApiListgitlabIn
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -7245,16 +7216,16 @@ func (a *IntegrationsAPIService) ListgitlabIntegrationsExecute(r ApiListgitlabIn
 }
 
 type ApiListjiraIntegrationsRequest struct {
-	ctx           context.Context
-	ApiService    *IntegrationsAPIService
-	cursor        *string
-	size          *int
-	sortType      *string
+	ctx context.Context
+	ApiService *IntegrationsAPIService
+	cursor *string
+	size *int
+	sortType *string
 	sortDirection *string
-	projectIds    *[]string
-	ids           *string
-	locationIds   *[]string
-	search        *string
+	projectIds *[]string
+	ids *string
+	locationIds *[]string
+	search *string
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
@@ -7314,25 +7285,24 @@ ListjiraIntegrations List Jira integrations.
 
 List and search Jira integrations of the organization.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiListjiraIntegrationsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiListjiraIntegrationsRequest
 */
 func (a *IntegrationsAPIService) ListjiraIntegrations(ctx context.Context) ApiListjiraIntegrationsRequest {
 	return ApiListjiraIntegrationsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ListIntegrations200Response
+//  @return ListIntegrations200Response
 func (a *IntegrationsAPIService) ListjiraIntegrationsExecute(r ApiListjiraIntegrationsRequest) (*ListIntegrations200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ListIntegrations200Response
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ListIntegrations200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.ListjiraIntegrations")
@@ -7353,6 +7323,7 @@ func (a *IntegrationsAPIService) ListjiraIntegrationsExecute(r ApiListjiraIntegr
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.sortType != nil {
@@ -7362,6 +7333,7 @@ func (a *IntegrationsAPIService) ListjiraIntegrationsExecute(r ApiListjiraIntegr
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
 		var defaultValue string = "asc"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
 		r.sortDirection = &defaultValue
 	}
 	if r.projectIds != nil {
@@ -7452,8 +7424,8 @@ func (a *IntegrationsAPIService) ListjiraIntegrationsExecute(r ApiListjiraIntegr
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -7471,16 +7443,16 @@ func (a *IntegrationsAPIService) ListjiraIntegrationsExecute(r ApiListjiraIntegr
 }
 
 type ApiListkubernetesIntegrationsRequest struct {
-	ctx           context.Context
-	ApiService    *IntegrationsAPIService
-	cursor        *string
-	size          *int
-	sortType      *string
+	ctx context.Context
+	ApiService *IntegrationsAPIService
+	cursor *string
+	size *int
+	sortType *string
 	sortDirection *string
-	projectIds    *[]string
-	ids           *string
-	locationIds   *[]string
-	search        *string
+	projectIds *[]string
+	ids *string
+	locationIds *[]string
+	search *string
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
@@ -7540,25 +7512,24 @@ ListkubernetesIntegrations List Kubernetes integrations.
 
 List and search Kubernetes integrations of the organization.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiListkubernetesIntegrationsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiListkubernetesIntegrationsRequest
 */
 func (a *IntegrationsAPIService) ListkubernetesIntegrations(ctx context.Context) ApiListkubernetesIntegrationsRequest {
 	return ApiListkubernetesIntegrationsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ListIntegrations200Response
+//  @return ListIntegrations200Response
 func (a *IntegrationsAPIService) ListkubernetesIntegrationsExecute(r ApiListkubernetesIntegrationsRequest) (*ListIntegrations200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ListIntegrations200Response
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ListIntegrations200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.ListkubernetesIntegrations")
@@ -7579,6 +7550,7 @@ func (a *IntegrationsAPIService) ListkubernetesIntegrationsExecute(r ApiListkube
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.sortType != nil {
@@ -7588,6 +7560,7 @@ func (a *IntegrationsAPIService) ListkubernetesIntegrationsExecute(r ApiListkube
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
 		var defaultValue string = "asc"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
 		r.sortDirection = &defaultValue
 	}
 	if r.projectIds != nil {
@@ -7678,8 +7651,8 @@ func (a *IntegrationsAPIService) ListkubernetesIntegrationsExecute(r ApiListkube
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -7697,16 +7670,16 @@ func (a *IntegrationsAPIService) ListkubernetesIntegrationsExecute(r ApiListkube
 }
 
 type ApiListpostmanIntegrationsRequest struct {
-	ctx           context.Context
-	ApiService    *IntegrationsAPIService
-	cursor        *string
-	size          *int
-	sortType      *string
+	ctx context.Context
+	ApiService *IntegrationsAPIService
+	cursor *string
+	size *int
+	sortType *string
 	sortDirection *string
-	projectIds    *[]string
-	ids           *string
-	locationIds   *[]string
-	search        *string
+	projectIds *[]string
+	ids *string
+	locationIds *[]string
+	search *string
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
@@ -7766,25 +7739,24 @@ ListpostmanIntegrations List Postman integrations.
 
 List and search Postman integrations of the organization.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiListpostmanIntegrationsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiListpostmanIntegrationsRequest
 */
 func (a *IntegrationsAPIService) ListpostmanIntegrations(ctx context.Context) ApiListpostmanIntegrationsRequest {
 	return ApiListpostmanIntegrationsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ListIntegrations200Response
+//  @return ListIntegrations200Response
 func (a *IntegrationsAPIService) ListpostmanIntegrationsExecute(r ApiListpostmanIntegrationsRequest) (*ListIntegrations200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ListIntegrations200Response
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ListIntegrations200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.ListpostmanIntegrations")
@@ -7805,6 +7777,7 @@ func (a *IntegrationsAPIService) ListpostmanIntegrationsExecute(r ApiListpostman
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.sortType != nil {
@@ -7814,6 +7787,7 @@ func (a *IntegrationsAPIService) ListpostmanIntegrationsExecute(r ApiListpostman
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
 		var defaultValue string = "asc"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
 		r.sortDirection = &defaultValue
 	}
 	if r.projectIds != nil {
@@ -7904,8 +7878,8 @@ func (a *IntegrationsAPIService) ListpostmanIntegrationsExecute(r ApiListpostman
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -7923,16 +7897,16 @@ func (a *IntegrationsAPIService) ListpostmanIntegrationsExecute(r ApiListpostman
 }
 
 type ApiListwizIntegrationsRequest struct {
-	ctx           context.Context
-	ApiService    *IntegrationsAPIService
-	cursor        *string
-	size          *int
-	sortType      *string
+	ctx context.Context
+	ApiService *IntegrationsAPIService
+	cursor *string
+	size *int
+	sortType *string
 	sortDirection *string
-	projectIds    *[]string
-	ids           *string
-	locationIds   *[]string
-	search        *string
+	projectIds *[]string
+	ids *string
+	locationIds *[]string
+	search *string
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
@@ -7992,25 +7966,24 @@ ListwizIntegrations List Wiz integrations.
 
 List and search Wiz integrations of the organization.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiListwizIntegrationsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiListwizIntegrationsRequest
 */
 func (a *IntegrationsAPIService) ListwizIntegrations(ctx context.Context) ApiListwizIntegrationsRequest {
 	return ApiListwizIntegrationsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ListIntegrations200Response
+//  @return ListIntegrations200Response
 func (a *IntegrationsAPIService) ListwizIntegrationsExecute(r ApiListwizIntegrationsRequest) (*ListIntegrations200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ListIntegrations200Response
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ListIntegrations200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.ListwizIntegrations")
@@ -8031,6 +8004,7 @@ func (a *IntegrationsAPIService) ListwizIntegrationsExecute(r ApiListwizIntegrat
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.sortType != nil {
@@ -8040,6 +8014,7 @@ func (a *IntegrationsAPIService) ListwizIntegrationsExecute(r ApiListwizIntegrat
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
 		var defaultValue string = "asc"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
 		r.sortDirection = &defaultValue
 	}
 	if r.projectIds != nil {
@@ -8130,8 +8105,8 @@ func (a *IntegrationsAPIService) ListwizIntegrationsExecute(r ApiListwizIntegrat
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -8149,9 +8124,9 @@ func (a *IntegrationsAPIService) ListwizIntegrationsExecute(r ApiListwizIntegrat
 }
 
 type ApiUpdateakamaiIntegrationRequest struct {
-	ctx                            context.Context
-	ApiService                     *IntegrationsAPIService
-	id                             string
+	ctx context.Context
+	ApiService *IntegrationsAPIService
+	id string
 	updateakamaiIntegrationRequest *UpdateakamaiIntegrationRequest
 }
 
@@ -8169,27 +8144,26 @@ UpdateakamaiIntegration Update Akamai integration.
 
 Update a Akamai integration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The integration ID
-	@return ApiUpdateakamaiIntegrationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The integration ID
+ @return ApiUpdateakamaiIntegrationRequest
 */
 func (a *IntegrationsAPIService) UpdateakamaiIntegration(ctx context.Context, id string) ApiUpdateakamaiIntegrationRequest {
 	return ApiUpdateakamaiIntegrationRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreateakamaiIntegration200Response
+//  @return CreateakamaiIntegration200Response
 func (a *IntegrationsAPIService) UpdateakamaiIntegrationExecute(r ApiUpdateakamaiIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPut
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreateakamaiIntegration200Response
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreateakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.UpdateakamaiIntegration")
@@ -8266,8 +8240,8 @@ func (a *IntegrationsAPIService) UpdateakamaiIntegrationExecute(r ApiUpdateakama
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -8285,9 +8259,9 @@ func (a *IntegrationsAPIService) UpdateakamaiIntegrationExecute(r ApiUpdateakama
 }
 
 type ApiUpdateawsIntegrationRequest struct {
-	ctx                         context.Context
-	ApiService                  *IntegrationsAPIService
-	id                          string
+	ctx context.Context
+	ApiService *IntegrationsAPIService
+	id string
 	updateawsIntegrationRequest *UpdateawsIntegrationRequest
 }
 
@@ -8305,27 +8279,26 @@ UpdateawsIntegration Update AWS integration.
 
 Update a AWS integration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The integration ID
-	@return ApiUpdateawsIntegrationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The integration ID
+ @return ApiUpdateawsIntegrationRequest
 */
 func (a *IntegrationsAPIService) UpdateawsIntegration(ctx context.Context, id string) ApiUpdateawsIntegrationRequest {
 	return ApiUpdateawsIntegrationRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreateawsIntegration200Response
+//  @return CreateawsIntegration200Response
 func (a *IntegrationsAPIService) UpdateawsIntegrationExecute(r ApiUpdateawsIntegrationRequest) (*CreateawsIntegration200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPut
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreateawsIntegration200Response
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreateawsIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.UpdateawsIntegration")
@@ -8402,8 +8375,8 @@ func (a *IntegrationsAPIService) UpdateawsIntegrationExecute(r ApiUpdateawsInteg
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -8421,9 +8394,9 @@ func (a *IntegrationsAPIService) UpdateawsIntegrationExecute(r ApiUpdateawsInteg
 }
 
 type ApiUpdateazureIntegrationRequest struct {
-	ctx                           context.Context
-	ApiService                    *IntegrationsAPIService
-	id                            string
+	ctx context.Context
+	ApiService *IntegrationsAPIService
+	id string
 	updateazureIntegrationRequest *UpdateazureIntegrationRequest
 }
 
@@ -8441,27 +8414,26 @@ UpdateazureIntegration Update Azure integration.
 
 Update a Azure integration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The integration ID
-	@return ApiUpdateazureIntegrationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The integration ID
+ @return ApiUpdateazureIntegrationRequest
 */
 func (a *IntegrationsAPIService) UpdateazureIntegration(ctx context.Context, id string) ApiUpdateazureIntegrationRequest {
 	return ApiUpdateazureIntegrationRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreateazureIntegration200Response
+//  @return CreateazureIntegration200Response
 func (a *IntegrationsAPIService) UpdateazureIntegrationExecute(r ApiUpdateazureIntegrationRequest) (*CreateazureIntegration200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPut
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreateazureIntegration200Response
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreateazureIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.UpdateazureIntegration")
@@ -8538,8 +8510,8 @@ func (a *IntegrationsAPIService) UpdateazureIntegrationExecute(r ApiUpdateazureI
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -8557,9 +8529,9 @@ func (a *IntegrationsAPIService) UpdateazureIntegrationExecute(r ApiUpdateazureI
 }
 
 type ApiUpdatebitbucketIntegrationRequest struct {
-	ctx                               context.Context
-	ApiService                        *IntegrationsAPIService
-	id                                string
+	ctx context.Context
+	ApiService *IntegrationsAPIService
+	id string
 	updatebitbucketIntegrationRequest *UpdatebitbucketIntegrationRequest
 }
 
@@ -8577,27 +8549,26 @@ UpdatebitbucketIntegration Update Bitbucket integration.
 
 Update a Bitbucket integration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The integration ID
-	@return ApiUpdatebitbucketIntegrationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The integration ID
+ @return ApiUpdatebitbucketIntegrationRequest
 */
 func (a *IntegrationsAPIService) UpdatebitbucketIntegration(ctx context.Context, id string) ApiUpdatebitbucketIntegrationRequest {
 	return ApiUpdatebitbucketIntegrationRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreatebitbucketIntegration200Response
+//  @return CreatebitbucketIntegration200Response
 func (a *IntegrationsAPIService) UpdatebitbucketIntegrationExecute(r ApiUpdatebitbucketIntegrationRequest) (*CreatebitbucketIntegration200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPut
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreatebitbucketIntegration200Response
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreatebitbucketIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.UpdatebitbucketIntegration")
@@ -8674,8 +8645,8 @@ func (a *IntegrationsAPIService) UpdatebitbucketIntegrationExecute(r ApiUpdatebi
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -8693,9 +8664,9 @@ func (a *IntegrationsAPIService) UpdatebitbucketIntegrationExecute(r ApiUpdatebi
 }
 
 type ApiUpdatecloudflareIntegrationRequest struct {
-	ctx                                context.Context
-	ApiService                         *IntegrationsAPIService
-	id                                 string
+	ctx context.Context
+	ApiService *IntegrationsAPIService
+	id string
 	updatecloudflareIntegrationRequest *UpdatecloudflareIntegrationRequest
 }
 
@@ -8713,27 +8684,26 @@ UpdatecloudflareIntegration Update Cloudflare integration.
 
 Update a Cloudflare integration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The integration ID
-	@return ApiUpdatecloudflareIntegrationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The integration ID
+ @return ApiUpdatecloudflareIntegrationRequest
 */
 func (a *IntegrationsAPIService) UpdatecloudflareIntegration(ctx context.Context, id string) ApiUpdatecloudflareIntegrationRequest {
 	return ApiUpdatecloudflareIntegrationRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreatecloudflareIntegration200Response
+//  @return CreatecloudflareIntegration200Response
 func (a *IntegrationsAPIService) UpdatecloudflareIntegrationExecute(r ApiUpdatecloudflareIntegrationRequest) (*CreatecloudflareIntegration200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPut
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreatecloudflareIntegration200Response
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreatecloudflareIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.UpdatecloudflareIntegration")
@@ -8810,8 +8780,8 @@ func (a *IntegrationsAPIService) UpdatecloudflareIntegrationExecute(r ApiUpdatec
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -8829,9 +8799,9 @@ func (a *IntegrationsAPIService) UpdatecloudflareIntegrationExecute(r ApiUpdatec
 }
 
 type ApiUpdatecustomIntegrationRequest struct {
-	ctx                            context.Context
-	ApiService                     *IntegrationsAPIService
-	id                             string
+	ctx context.Context
+	ApiService *IntegrationsAPIService
+	id string
 	updatecustomIntegrationRequest *UpdatecustomIntegrationRequest
 }
 
@@ -8849,27 +8819,26 @@ UpdatecustomIntegration Update Custom Integration integration.
 
 Update a Custom Integration integration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The integration ID
-	@return ApiUpdatecustomIntegrationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The integration ID
+ @return ApiUpdatecustomIntegrationRequest
 */
 func (a *IntegrationsAPIService) UpdatecustomIntegration(ctx context.Context, id string) ApiUpdatecustomIntegrationRequest {
 	return ApiUpdatecustomIntegrationRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreatecustomIntegration200Response
+//  @return CreatecustomIntegration200Response
 func (a *IntegrationsAPIService) UpdatecustomIntegrationExecute(r ApiUpdatecustomIntegrationRequest) (*CreatecustomIntegration200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPut
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreatecustomIntegration200Response
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreatecustomIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.UpdatecustomIntegration")
@@ -8946,8 +8915,8 @@ func (a *IntegrationsAPIService) UpdatecustomIntegrationExecute(r ApiUpdatecusto
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -8965,9 +8934,9 @@ func (a *IntegrationsAPIService) UpdatecustomIntegrationExecute(r ApiUpdatecusto
 }
 
 type ApiUpdategcpIntegrationRequest struct {
-	ctx                         context.Context
-	ApiService                  *IntegrationsAPIService
-	id                          string
+	ctx context.Context
+	ApiService *IntegrationsAPIService
+	id string
 	updategcpIntegrationRequest *UpdategcpIntegrationRequest
 }
 
@@ -8985,27 +8954,26 @@ UpdategcpIntegration Update GCP integration.
 
 Update a GCP integration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The integration ID
-	@return ApiUpdategcpIntegrationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The integration ID
+ @return ApiUpdategcpIntegrationRequest
 */
 func (a *IntegrationsAPIService) UpdategcpIntegration(ctx context.Context, id string) ApiUpdategcpIntegrationRequest {
 	return ApiUpdategcpIntegrationRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreategcpIntegration200Response
+//  @return CreategcpIntegration200Response
 func (a *IntegrationsAPIService) UpdategcpIntegrationExecute(r ApiUpdategcpIntegrationRequest) (*CreategcpIntegration200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPut
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreategcpIntegration200Response
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreategcpIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.UpdategcpIntegration")
@@ -9082,8 +9050,8 @@ func (a *IntegrationsAPIService) UpdategcpIntegrationExecute(r ApiUpdategcpInteg
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -9101,9 +9069,9 @@ func (a *IntegrationsAPIService) UpdategcpIntegrationExecute(r ApiUpdategcpInteg
 }
 
 type ApiUpdategithubIntegrationRequest struct {
-	ctx                                context.Context
-	ApiService                         *IntegrationsAPIService
-	id                                 string
+	ctx context.Context
+	ApiService *IntegrationsAPIService
+	id string
 	updatecloudflareIntegrationRequest *UpdatecloudflareIntegrationRequest
 }
 
@@ -9121,27 +9089,26 @@ UpdategithubIntegration Update GitHub integration.
 
 Update a GitHub integration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The integration ID
-	@return ApiUpdategithubIntegrationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The integration ID
+ @return ApiUpdategithubIntegrationRequest
 */
 func (a *IntegrationsAPIService) UpdategithubIntegration(ctx context.Context, id string) ApiUpdategithubIntegrationRequest {
 	return ApiUpdategithubIntegrationRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreatecloudflareIntegration200Response
+//  @return CreatecloudflareIntegration200Response
 func (a *IntegrationsAPIService) UpdategithubIntegrationExecute(r ApiUpdategithubIntegrationRequest) (*CreatecloudflareIntegration200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPut
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreatecloudflareIntegration200Response
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreatecloudflareIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.UpdategithubIntegration")
@@ -9218,8 +9185,8 @@ func (a *IntegrationsAPIService) UpdategithubIntegrationExecute(r ApiUpdategithu
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -9237,9 +9204,9 @@ func (a *IntegrationsAPIService) UpdategithubIntegrationExecute(r ApiUpdategithu
 }
 
 type ApiUpdategitlabIntegrationRequest struct {
-	ctx                            context.Context
-	ApiService                     *IntegrationsAPIService
-	id                             string
+	ctx context.Context
+	ApiService *IntegrationsAPIService
+	id string
 	updategitlabIntegrationRequest *UpdategitlabIntegrationRequest
 }
 
@@ -9257,27 +9224,26 @@ UpdategitlabIntegration Update GitLab integration.
 
 Update a GitLab integration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The integration ID
-	@return ApiUpdategitlabIntegrationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The integration ID
+ @return ApiUpdategitlabIntegrationRequest
 */
 func (a *IntegrationsAPIService) UpdategitlabIntegration(ctx context.Context, id string) ApiUpdategitlabIntegrationRequest {
 	return ApiUpdategitlabIntegrationRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreategitlabIntegration200Response
+//  @return CreategitlabIntegration200Response
 func (a *IntegrationsAPIService) UpdategitlabIntegrationExecute(r ApiUpdategitlabIntegrationRequest) (*CreategitlabIntegration200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPut
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreategitlabIntegration200Response
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreategitlabIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.UpdategitlabIntegration")
@@ -9354,8 +9320,8 @@ func (a *IntegrationsAPIService) UpdategitlabIntegrationExecute(r ApiUpdategitla
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -9373,9 +9339,9 @@ func (a *IntegrationsAPIService) UpdategitlabIntegrationExecute(r ApiUpdategitla
 }
 
 type ApiUpdatejiraIntegrationRequest struct {
-	ctx                          context.Context
-	ApiService                   *IntegrationsAPIService
-	id                           string
+	ctx context.Context
+	ApiService *IntegrationsAPIService
+	id string
 	updatejiraIntegrationRequest *UpdatejiraIntegrationRequest
 }
 
@@ -9393,27 +9359,26 @@ UpdatejiraIntegration Update Jira integration.
 
 Update a Jira integration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The integration ID
-	@return ApiUpdatejiraIntegrationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The integration ID
+ @return ApiUpdatejiraIntegrationRequest
 */
 func (a *IntegrationsAPIService) UpdatejiraIntegration(ctx context.Context, id string) ApiUpdatejiraIntegrationRequest {
 	return ApiUpdatejiraIntegrationRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreatejiraIntegration200Response
+//  @return CreatejiraIntegration200Response
 func (a *IntegrationsAPIService) UpdatejiraIntegrationExecute(r ApiUpdatejiraIntegrationRequest) (*CreatejiraIntegration200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPut
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreatejiraIntegration200Response
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreatejiraIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.UpdatejiraIntegration")
@@ -9490,8 +9455,8 @@ func (a *IntegrationsAPIService) UpdatejiraIntegrationExecute(r ApiUpdatejiraInt
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -9509,9 +9474,9 @@ func (a *IntegrationsAPIService) UpdatejiraIntegrationExecute(r ApiUpdatejiraInt
 }
 
 type ApiUpdatekubernetesIntegrationRequest struct {
-	ctx                                context.Context
-	ApiService                         *IntegrationsAPIService
-	id                                 string
+	ctx context.Context
+	ApiService *IntegrationsAPIService
+	id string
 	updatekubernetesIntegrationRequest *UpdatekubernetesIntegrationRequest
 }
 
@@ -9529,27 +9494,26 @@ UpdatekubernetesIntegration Update Kubernetes integration.
 
 Update a Kubernetes integration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The integration ID
-	@return ApiUpdatekubernetesIntegrationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The integration ID
+ @return ApiUpdatekubernetesIntegrationRequest
 */
 func (a *IntegrationsAPIService) UpdatekubernetesIntegration(ctx context.Context, id string) ApiUpdatekubernetesIntegrationRequest {
 	return ApiUpdatekubernetesIntegrationRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreatekubernetesIntegration200Response
+//  @return CreatekubernetesIntegration200Response
 func (a *IntegrationsAPIService) UpdatekubernetesIntegrationExecute(r ApiUpdatekubernetesIntegrationRequest) (*CreatekubernetesIntegration200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPut
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreatekubernetesIntegration200Response
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreatekubernetesIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.UpdatekubernetesIntegration")
@@ -9626,8 +9590,8 @@ func (a *IntegrationsAPIService) UpdatekubernetesIntegrationExecute(r ApiUpdatek
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -9645,9 +9609,9 @@ func (a *IntegrationsAPIService) UpdatekubernetesIntegrationExecute(r ApiUpdatek
 }
 
 type ApiUpdatepostmanIntegrationRequest struct {
-	ctx                                context.Context
-	ApiService                         *IntegrationsAPIService
-	id                                 string
+	ctx context.Context
+	ApiService *IntegrationsAPIService
+	id string
 	updatecloudflareIntegrationRequest *UpdatecloudflareIntegrationRequest
 }
 
@@ -9665,27 +9629,26 @@ UpdatepostmanIntegration Update Postman integration.
 
 Update a Postman integration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The integration ID
-	@return ApiUpdatepostmanIntegrationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The integration ID
+ @return ApiUpdatepostmanIntegrationRequest
 */
 func (a *IntegrationsAPIService) UpdatepostmanIntegration(ctx context.Context, id string) ApiUpdatepostmanIntegrationRequest {
 	return ApiUpdatepostmanIntegrationRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreatecloudflareIntegration200Response
+//  @return CreatecloudflareIntegration200Response
 func (a *IntegrationsAPIService) UpdatepostmanIntegrationExecute(r ApiUpdatepostmanIntegrationRequest) (*CreatecloudflareIntegration200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPut
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreatecloudflareIntegration200Response
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreatecloudflareIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.UpdatepostmanIntegration")
@@ -9762,8 +9725,8 @@ func (a *IntegrationsAPIService) UpdatepostmanIntegrationExecute(r ApiUpdatepost
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -9781,9 +9744,9 @@ func (a *IntegrationsAPIService) UpdatepostmanIntegrationExecute(r ApiUpdatepost
 }
 
 type ApiUpdatewizIntegrationRequest struct {
-	ctx                         context.Context
-	ApiService                  *IntegrationsAPIService
-	id                          string
+	ctx context.Context
+	ApiService *IntegrationsAPIService
+	id string
 	updatewizIntegrationRequest *UpdatewizIntegrationRequest
 }
 
@@ -9801,27 +9764,26 @@ UpdatewizIntegration Update Wiz integration.
 
 Update a Wiz integration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The integration ID
-	@return ApiUpdatewizIntegrationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The integration ID
+ @return ApiUpdatewizIntegrationRequest
 */
 func (a *IntegrationsAPIService) UpdatewizIntegration(ctx context.Context, id string) ApiUpdatewizIntegrationRequest {
 	return ApiUpdatewizIntegrationRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreatewizIntegration200Response
+//  @return CreatewizIntegration200Response
 func (a *IntegrationsAPIService) UpdatewizIntegrationExecute(r ApiUpdatewizIntegrationRequest) (*CreatewizIntegration200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPut
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreatewizIntegration200Response
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreatewizIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.UpdatewizIntegration")
@@ -9898,8 +9860,8 @@ func (a *IntegrationsAPIService) UpdatewizIntegrationExecute(r ApiUpdatewizInteg
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

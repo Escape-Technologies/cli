@@ -4,7 +4,10 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"io"
+	"net/http"
 	"strings"
+	"time"
 
 	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
 )
@@ -183,6 +186,61 @@ func UpdateProfileConfiguration(ctx context.Context, profileID string, data []by
 		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return result, nil
+}
+
+// CreateSchemaAsset turns a temporary upload object key into a SCHEMA asset.
+// POST /v3/assets/schema polls the schema-build workflow internally; the
+// server returns the finalized asset or a 400 on workflow timeout.
+func CreateSchemaAsset(ctx context.Context, temporaryObjectKey string, name string) (*v3.UpdateAsset200Response, error) {
+	client, err := newAPIV3Client()
+	if err != nil {
+		return nil, fmt.Errorf("unable to init client: %w", err)
+	}
+
+	upload := v3.CreateSchemaViaUpload{
+		AssetType: v3.ENUMSCHEMA_SCHEMA,
+		Upload: v3.CreateSchemaViaUploadUpload{
+			TemporaryObjectKey: temporaryObjectKey,
+		},
+	}
+	if name != "" {
+		upload.Name = &name
+	}
+
+	asset, _, err := client.AssetsAPI.CreateAssetSchema(ctx).
+		CreateAssetSchemaRequest(v3.CreateAssetSchemaRequest{CreateSchemaViaUpload: &upload}).
+		Execute()
+	if err != nil {
+		return nil, fmt.Errorf("api error: %w", err)
+	}
+	return asset, nil
+}
+
+// DownloadSignedURL streams the body of a pre-signed URL to the writer.
+// Used to download schema bytes after `GetProfile` returns a signedUrl.
+// The caller controls the timeout via ctx (typical schemas are small but the
+// signed-URL fetch is the one leg the generated v3 client does not cover).
+func DownloadSignedURL(ctx context.Context, signedURL string, dst io.Writer, timeout time.Duration) error {
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, signedURL, nil)
+	if err != nil {
+		return fmt.Errorf("unable to build request: %w", err)
+	}
+
+	client := &http.Client{Timeout: timeout}
+	resp, err := client.Do(req)
+	if err != nil {
+		return fmt.Errorf("unable to fetch signed url: %w", err)
+	}
+	defer func() { _ = resp.Body.Close() }()
+
+	if resp.StatusCode != http.StatusOK {
+		return fmt.Errorf("unable to fetch signed url: %s", resp.Status)
+	}
+
+	if _, err := io.Copy(dst, resp.Body); err != nil {
+		return fmt.Errorf("unable to write schema body: %w", err)
+	}
+	return nil
 }
 
 // UpdateProfileSchema updates the schema attached to a profile

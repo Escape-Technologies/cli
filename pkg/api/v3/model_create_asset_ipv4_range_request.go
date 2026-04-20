@@ -23,14 +23,14 @@ type CreateAssetIPV4RANGERequest struct {
 	// The list of project IDs bind the asset on.
 	ProjectIds []string `json:"projectIds,omitempty"`
 	// The custom name of the asset. If not provided, the default name will be used.
-	Name                 *string                `json:"name,omitempty"`
-	AssetClass           ENUMNETWORK            `json:"asset_class"`
-	ExtraMetadata        map[string]interface{} `json:"extra_metadata,omitempty"`
-	ScreenshotS3Key      *string                `json:"screenshot_s3_key,omitempty"`
-	AssetType            ENUMIPV4RANGE          `json:"asset_type"`
-	Cidr                 string                 `json:"cidr"`
-	Private              *bool                  `json:"private,omitempty"`
-	PrivateLocationId    *string                `json:"private_location_id,omitempty"`
+	Name *string `json:"name,omitempty"`
+	AssetClass ENUMNETWORK `json:"asset_class"`
+	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
+	ScreenshotS3Key *string `json:"screenshot_s3_key,omitempty"`
+	AssetType ENUMIPV4RANGE `json:"asset_type"`
+	Cidr string `json:"cidr"`
+	Private *bool `json:"private,omitempty"`
+	PrivateLocationId *string `json:"private_location_id,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -321,7 +321,7 @@ func (o *CreateAssetIPV4RANGERequest) SetPrivateLocationId(v string) {
 }
 
 func (o CreateAssetIPV4RANGERequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -374,10 +374,10 @@ func (o *CreateAssetIPV4RANGERequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -446,3 +446,5 @@ func (v *NullableCreateAssetIPV4RANGERequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

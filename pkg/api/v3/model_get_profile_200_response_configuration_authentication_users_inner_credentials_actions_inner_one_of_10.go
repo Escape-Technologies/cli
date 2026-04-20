@@ -20,15 +20,15 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationAuthenticationUsersInn
 
 // GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10 struct for GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10
 type GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10 struct {
-	Action                ENUMPROPERTIESCONFIGURATIONPROPERTIESAUTHENTICATIONPROPERTIESUSERSITEMSPROPERTIESCREDENTIALSPROPERTIESACTIONSITEMS10PROPERTIESACTION `json:"action"`
-	AllowFailure          *bool                                                                                                                                `json:"allow_failure,omitempty"`
-	EmailAddress          string                                                                                                                               `json:"email_address"`
-	Locator               string                                                                                                                               `json:"locator"`
-	OneByOne              *bool                                                                                                                                `json:"one_by_one,omitempty"`
-	AutoSubmit            *bool                                                                                                                                `json:"auto_submit,omitempty"`
-	Timeout               *float32                                                                                                                             `json:"timeout,omitempty"`
-	SelectFirstIfMultiple *bool                                                                                                                                `json:"select_first_if_multiple,omitempty"`
-	AdditionalProperties  map[string]interface{}
+	Action ENUMFILLMAILTOTP `json:"action"`
+	AllowFailure *bool `json:"allow_failure,omitempty"`
+	EmailAddress string `json:"email_address"`
+	Locator string `json:"locator"`
+	OneByOne *bool `json:"one_by_one,omitempty"`
+	AutoSubmit *bool `json:"auto_submit,omitempty"`
+	Timeout *float32 `json:"timeout,omitempty"`
+	SelectFirstIfMultiple *bool `json:"select_first_if_multiple,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10 GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10
@@ -37,7 +37,7 @@ type _GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActio
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10(action ENUMPROPERTIESCONFIGURATIONPROPERTIESAUTHENTICATIONPROPERTIESUSERSITEMSPROPERTIESCREDENTIALSPROPERTIESACTIONSITEMS10PROPERTIESACTION, emailAddress string, locator string) *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10 {
+func NewGetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10(action ENUMFILLMAILTOTP, emailAddress string, locator string) *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10 {
 	this := GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10{}
 	this.Action = action
 	this.EmailAddress = emailAddress
@@ -54,9 +54,9 @@ func NewGetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsAct
 }
 
 // GetAction returns the Action field value
-func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) GetAction() ENUMPROPERTIESCONFIGURATIONPROPERTIESAUTHENTICATIONPROPERTIESUSERSITEMSPROPERTIESCREDENTIALSPROPERTIESACTIONSITEMS10PROPERTIESACTION {
+func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) GetAction() ENUMFILLMAILTOTP {
 	if o == nil {
-		var ret ENUMPROPERTIESCONFIGURATIONPROPERTIESAUTHENTICATIONPROPERTIESUSERSITEMSPROPERTIESCREDENTIALSPROPERTIESACTIONSITEMS10PROPERTIESACTION
+		var ret ENUMFILLMAILTOTP
 		return ret
 	}
 
@@ -65,7 +65,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsAc
 
 // GetActionOk returns a tuple with the Action field value
 // and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) GetActionOk() (*ENUMPROPERTIESCONFIGURATIONPROPERTIESAUTHENTICATIONPROPERTIESUSERSITEMSPROPERTIESCREDENTIALSPROPERTIESACTIONSITEMS10PROPERTIESACTION, bool) {
+func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) GetActionOk() (*ENUMFILLMAILTOTP, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -73,7 +73,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsAc
 }
 
 // SetAction sets field value
-func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) SetAction(v ENUMPROPERTIESCONFIGURATIONPROPERTIESAUTHENTICATIONPROPERTIESUSERSITEMSPROPERTIESCREDENTIALSPROPERTIESACTIONSITEMS10PROPERTIESACTION) {
+func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) SetAction(v ENUMFILLMAILTOTP) {
 	o.Action = v
 }
 
@@ -286,7 +286,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsAc
 }
 
 func (o GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -336,10 +336,10 @@ func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsAc
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -407,3 +407,5 @@ func (v *NullableGetProfile200ResponseConfigurationAuthenticationUsersInnerCrede
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

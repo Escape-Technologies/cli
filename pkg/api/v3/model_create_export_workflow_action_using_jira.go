@@ -20,10 +20,10 @@ var _ MappedNullable = &CreateExportWorkflowActionUsingJira{}
 
 // CreateExportWorkflowActionUsingJira struct for CreateExportWorkflowActionUsingJira
 type CreateExportWorkflowActionUsingJira struct {
-	Type                 ENUMEXPORT                                    `json:"type"`
-	Parameters           CreateExportWorkflowActionUsingJiraParameters `json:"parameters"`
-	IntegrationKind      ENUMJIRA                                      `json:"integrationKind"`
-	IntegrationId        string                                        `json:"integrationId"`
+	Type ENUMEXPORT `json:"type"`
+	Parameters CreateExportWorkflowActionUsingJiraParameters `json:"parameters"`
+	IntegrationKind ENUMJIRA `json:"integrationKind"`
+	IntegrationId string `json:"integrationId"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -147,7 +147,7 @@ func (o *CreateExportWorkflowActionUsingJira) SetIntegrationId(v string) {
 }
 
 func (o CreateExportWorkflowActionUsingJira) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -184,10 +184,10 @@ func (o *CreateExportWorkflowActionUsingJira) UnmarshalJSON(data []byte) (err er
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -251,3 +251,5 @@ func (v *NullableCreateExportWorkflowActionUsingJira) UnmarshalJSON(src []byte) 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

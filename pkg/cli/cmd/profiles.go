@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"context"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -8,6 +9,7 @@ import (
 	"os"
 	"strconv"
 	"strings"
+	"time"
 
 	"github.com/Escape-Technologies/cli/pkg/api/escape"
 	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
@@ -789,6 +791,209 @@ WORKFLOW:
 	},
 }
 
+var (
+	profileGetSchemaID      string
+	profileGetSchemaOutFile string
+	profileGetSchemaTimeout time.Duration
+
+	profileUploadSchemaFile    string
+	profileUploadSchemaName    string
+	profileUploadSchemaTimeout time.Duration
+)
+
+// pickProfileSchema picks a SCHEMA-class entry from the profile's extraAssets.
+// With schemaID="" it returns the active schema (isActive=true); otherwise it
+// returns the entry whose id matches schemaID. Mirrors the server-side
+// pickProfileSchemaAssetId but on the already-enriched client payload.
+func pickProfileSchema(profile *v3.GetProfile200Response, schemaID string) (*v3.ProfileExtraAsset, error) {
+	if profile == nil {
+		return nil, errors.New("profile is nil")
+	}
+	for i, asset := range profile.ExtraAssets {
+		if string(asset.Class) != "SCHEMA" {
+			continue
+		}
+		if schemaID == "" && asset.IsActive {
+			return &profile.ExtraAssets[i], nil
+		}
+		if schemaID != "" && asset.Id == schemaID {
+			return &profile.ExtraAssets[i], nil
+		}
+	}
+	if schemaID != "" {
+		return nil, fmt.Errorf("no schema asset with id %s attached to profile", schemaID)
+	}
+	return nil, errors.New("no active schema attached to this profile")
+}
+
+var profileGetSchemaCmd = &cobra.Command{
+	Use:     "get-schema profile-id",
+	Aliases: []string{"gs"},
+	Short:   "Get the schema attached to a profile",
+	Long: `Get Profile Schema - Inspect or Download a Schema Asset
+
+Returns metadata (including a fresh signed URL) for the active schema attached
+to the profile. Use --schema-id to pick a specific schema from extraAssets.
+Use -f to stream the raw bytes of the schema instead of metadata.
+
+The signed URL is time-limited; fetch the bytes promptly or use -f to
+download in one shot.`,
+	Example: `  # Print JSON metadata + signed URL for the active schema
+  escape-cli profiles get-schema <profile-id>
+
+  # Download the active schema to a file
+  escape-cli profiles get-schema <profile-id> -f openapi.json
+
+  # Stream to stdout (pipe into jq, etc.)
+  escape-cli profiles get-schema <profile-id> -f -
+
+  # Pick a specific (non-active) schema attached to the profile
+  escape-cli profiles get-schema <profile-id> --schema-id <schema-id> -f spec.json
+
+  # Override timeout on the body fetch (default 10m)
+  escape-cli profiles get-schema <profile-id> -f big.json --timeout 30m`,
+	Args: cobra.ExactArgs(1),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		if out.Schema(v3.ProfileExtraAsset{}) {
+			return nil
+		}
+
+		profileID := args[0]
+
+		profile, err := escape.GetProfile(cmd.Context(), profileID)
+		if err != nil || profile == nil {
+			return fmt.Errorf("unable to get profile %s: %w", profileID, err)
+		}
+
+		schema, err := pickProfileSchema(profile, profileGetSchemaID)
+		if err != nil {
+			return err
+		}
+
+		if profileGetSchemaOutFile == "" {
+			out.Table(schema, func() []string {
+				url := ""
+				if schema.SignedUrl != nil {
+					url = *schema.SignedUrl
+				}
+				active := "false"
+				if schema.IsActive {
+					active = "true"
+				}
+				return []string{
+					"ID\tACTIVE\tNAME\tCREATED AT\tSIGNED URL",
+					fmt.Sprintf("%s\t%s\t%s\t%s\t%s", schema.Id, active, schema.Name, schema.CreatedAt, url),
+				}
+			})
+			return nil
+		}
+
+		if schema.SignedUrl == nil || *schema.SignedUrl == "" {
+			return errors.New("schema asset has no signed URL; cannot download")
+		}
+
+		var dst io.Writer
+		switch profileGetSchemaOutFile {
+		case "-":
+			dst = os.Stdout
+		default:
+			f, err := os.Create(profileGetSchemaOutFile)
+			if err != nil {
+				return fmt.Errorf("unable to open %s: %w", profileGetSchemaOutFile, err)
+			}
+			defer func() { _ = f.Close() }()
+			dst = f
+		}
+
+		if err := escape.DownloadSignedURL(cmd.Context(), *schema.SignedUrl, dst, profileGetSchemaTimeout); err != nil {
+			return err
+		}
+
+		if profileGetSchemaOutFile != "-" {
+			out.Log(fmt.Sprintf("Schema %s written to %s", schema.Id, profileGetSchemaOutFile))
+		}
+		return nil
+	},
+}
+
+var profileUploadSchemaCmd = &cobra.Command{
+	Use:     "upload-schema profile-id",
+	Aliases: []string{"ups"},
+	Short:   "Upload a schema file and attach it to a profile",
+	Long: `Upload Schema - One-Shot Upload + Attach
+
+Read schema bytes from --file (or stdin), upload them to Escape, wait for the
+schema-build workflow to finish, and attach the resulting asset to the
+profile. This collapses the three-step upload/create-asset/attach flow into
+a single command.
+
+The schema-build workflow can take up to 10 minutes for very large schemas.
+Tune --timeout if the default of 15m is not enough (or lower it to fail
+fast in CI).`,
+	Example: `  # Upload from a file and attach
+  escape-cli profiles upload-schema <profile-id> --file openapi.json
+
+  # Upload from stdin
+  cat openapi.json | escape-cli profiles upload-schema <profile-id>
+
+  # Give the new schema asset a name
+  escape-cli profiles upload-schema <profile-id> --file spec.json --name "v2 prod"`,
+	Args: cobra.ExactArgs(1),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		if out.Schema(v3.GetProfile200Response{}) {
+			return nil
+		}
+
+		profileID := args[0]
+
+		var data []byte
+		var err error
+		if profileUploadSchemaFile != "" {
+			data, err = os.ReadFile(profileUploadSchemaFile)
+			if err != nil {
+				return fmt.Errorf("unable to read %s: %w", profileUploadSchemaFile, err)
+			}
+		} else {
+			data, err = io.ReadAll(os.Stdin)
+			if err != nil {
+				return fmt.Errorf("failed to read stdin: %w", err)
+			}
+		}
+		if len(data) == 0 {
+			return errors.New("no schema bytes provided: pass --file or pipe JSON via stdin")
+		}
+
+		ctx, cancel := context.WithTimeout(cmd.Context(), profileUploadSchemaTimeout)
+		defer cancel()
+
+		upload, err := escape.GetUploadSignedURL(ctx)
+		if err != nil {
+			return fmt.Errorf("unable to get signed url: %w", err)
+		}
+		if err := escape.UploadSchema(ctx, upload.GetUrl(), data); err != nil {
+			return fmt.Errorf("failed to upload schema bytes: %w", err)
+		}
+
+		asset, err := escape.CreateSchemaAsset(ctx, upload.GetId(), profileUploadSchemaName)
+		if err != nil {
+			return fmt.Errorf("failed to create schema asset: %w", err)
+		}
+
+		profile, err := escape.UpdateProfileSchema(ctx, profileID, asset.GetId())
+		if err != nil {
+			return fmt.Errorf("failed to attach schema to profile: %w", err)
+		}
+
+		out.Table(profile, func() []string {
+			return []string{
+				"PROFILE ID\tSCHEMA ID\tPROFILE NAME\tASSET TYPE",
+				fmt.Sprintf("%s\t%s\t%s\t%s", profile.GetId(), asset.GetId(), profile.GetName(), profile.Asset.GetType()),
+			}
+		})
+		return nil
+	},
+}
+
 var profileDeleteCmd = &cobra.Command{
 	Use:     "delete profile-id",
 	Aliases: []string{"del", "rm"},
@@ -823,8 +1028,17 @@ func init() {
 		profileUpdateCmd,
 		profileUpdateConfigurationCmd,
 		profileUpdateSchemaCmd,
+		profileGetSchemaCmd,
+		profileUploadSchemaCmd,
 		profileDeleteCmd,
 	)
+	profileGetSchemaCmd.Flags().StringVar(&profileGetSchemaID, "schema-id", "", "specific schema asset ID to pick from extraAssets (default: active schema)")
+	profileGetSchemaCmd.Flags().StringVarP(&profileGetSchemaOutFile, "file", "f", "", "write schema bytes to file path (- for stdout); omit to print JSON metadata")
+	profileGetSchemaCmd.Flags().DurationVar(&profileGetSchemaTimeout, "timeout", 10*time.Minute, "timeout for the signed-URL body fetch when -f is used")
+
+	profileUploadSchemaCmd.Flags().StringVar(&profileUploadSchemaFile, "file", "", "path to the schema file (reads stdin when omitted)")
+	profileUploadSchemaCmd.Flags().StringVar(&profileUploadSchemaName, "name", "", "optional name for the created schema asset")
+	profileUploadSchemaCmd.Flags().DurationVar(&profileUploadSchemaTimeout, "timeout", 15*time.Minute, "end-to-end timeout for upload + schema-build workflow + attach")
 	profileUpdateCmd.Flags().StringVar(&profileUpdateName, "name", "", "profile name")
 	profileUpdateCmd.Flags().StringVar(&profileUpdateDescription, "description", "", "profile description")
 	profileUpdateCmd.Flags().StringVar(&profileUpdateCron, "cron", "", "cron schedule (e.g., \"0 22 * * *\")")

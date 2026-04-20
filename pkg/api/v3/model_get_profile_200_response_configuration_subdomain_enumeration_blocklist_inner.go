@@ -15,17 +15,18 @@ import (
 	"fmt"
 )
 
+
 // GetProfile200ResponseConfigurationSubdomainEnumerationBlocklistInner struct for GetProfile200ResponseConfigurationSubdomainEnumerationBlocklistInner
 type GetProfile200ResponseConfigurationSubdomainEnumerationBlocklistInner struct {
 	GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf *GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf
-	String                                                     *string
+	String *string
 }
 
 // Unmarshal JSON data into any of the pointers in the struct
 func (dst *GetProfile200ResponseConfigurationSubdomainEnumerationBlocklistInner) UnmarshalJSON(data []byte) error {
 	var err error
 	// try to unmarshal JSON data into GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf
-	err = json.Unmarshal(data, &dst.GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf)
+	err = json.Unmarshal(data, &dst.GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf);
 	if err == nil {
 		jsonGetProfile200ResponseConfigurationScopeAllowlistInnerOneOf, _ := json.Marshal(dst.GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf)
 		if string(jsonGetProfile200ResponseConfigurationScopeAllowlistInnerOneOf) == "{}" { // empty struct
@@ -38,7 +39,7 @@ func (dst *GetProfile200ResponseConfigurationSubdomainEnumerationBlocklistInner)
 	}
 
 	// try to unmarshal JSON data into String
-	err = json.Unmarshal(data, &dst.String)
+	err = json.Unmarshal(data, &dst.String);
 	if err == nil {
 		jsonString, _ := json.Marshal(dst.String)
 		if string(jsonString) == "{}" { // empty struct
@@ -65,6 +66,7 @@ func (src GetProfile200ResponseConfigurationSubdomainEnumerationBlocklistInner) 
 
 	return nil, nil // no data in anyOf schemas
 }
+
 
 type NullableGetProfile200ResponseConfigurationSubdomainEnumerationBlocklistInner struct {
 	value *GetProfile200ResponseConfigurationSubdomainEnumerationBlocklistInner
@@ -101,3 +103,5 @@ func (v *NullableGetProfile200ResponseConfigurationSubdomainEnumerationBlocklist
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

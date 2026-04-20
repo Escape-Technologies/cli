@@ -18,9 +18,15 @@ import (
 // checks if the NotFound type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &NotFound{}
 
+<<<<<<< HEAD:packages/cli/pkg/api/v3/model_not_found.go
 // NotFound Returned when the requested resource does not exist
 type NotFound struct {
 	Message              ENUMNOTFOUND `json:"message"`
+=======
+// GetProfile404Response struct for GetProfile404Response
+type GetProfile404Response struct {
+	Message ENUMNOTFOUND `json:"message"`
+>>>>>>> d3ba35d609 (feat(public-api,cli): enrich profile extraAssets with signedUrl + isActive; add profiles get-schema/upload-schema):packages/cli/pkg/api/v3/model_get_profile_404_response.go
 	AdditionalProperties map[string]interface{}
 }
 
@@ -68,8 +74,13 @@ func (o *NotFound) SetMessage(v ENUMNOTFOUND) {
 	o.Message = v
 }
 
+<<<<<<< HEAD:packages/cli/pkg/api/v3/model_not_found.go
 func (o NotFound) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
+=======
+func (o GetProfile404Response) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+>>>>>>> d3ba35d609 (feat(public-api,cli): enrich profile extraAssets with signedUrl + isActive; add profiles get-schema/upload-schema):packages/cli/pkg/api/v3/model_get_profile_404_response.go
 	if err != nil {
 		return []byte{}, err
 	}
@@ -100,10 +111,10 @@ func (o *NotFound) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -164,3 +175,5 @@ func (v *NullableNotFound) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

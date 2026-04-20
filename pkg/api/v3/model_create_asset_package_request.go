@@ -23,20 +23,19 @@ type CreateAssetPACKAGERequest struct {
 	// The list of project IDs bind the asset on.
 	ProjectIds []string `json:"projectIds,omitempty"`
 	// The custom name of the asset. If not provided, the default name will be used.
-	Name                 *string                            `json:"name,omitempty"`
-	AssetClass           ENUMTECHNOLOGY                     `json:"asset_class"`
-	ExtraMetadata        map[string]interface{}             `json:"extra_metadata,omitempty"`
-	ScreenshotS3Key      *string                            `json:"screenshot_s3_key,omitempty"`
-	AssetType            ENUMPACKAGE                        `json:"asset_type"`
-	TechnologyKey        string                             `json:"technology_key"`
-	Version              *string                            `json:"version,omitempty"`
-	ReferenceUrl         *string                            `json:"reference_url,omitempty"`
-	Cpe                  *string                            `json:"cpe,omitempty"`
-	CpeGuessed           *bool                              `json:"cpe_guessed,omitempty"`
-	WellKnownTechnology  *ENUMPROPERTIESWELLKNOWNTECHNOLOGY `json:"well_known_technology,omitempty"`
-	Description          *string                            `json:"description,omitempty"`
-	Purl                 string                             `json:"purl"`
-	PackageType          ENUMPROPERTIESPACKAGETYPE          `json:"package_type"`
+	Name *string `json:"name,omitempty"`
+	AssetClass ENUMTECHNOLOGY `json:"asset_class"`
+	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
+	ScreenshotS3Key *string `json:"screenshot_s3_key,omitempty"`
+	AssetType ENUMPACKAGE `json:"asset_type"`
+	TechnologyKey string `json:"technology_key"`
+	Version *string `json:"version,omitempty"`
+	ReferenceUrl *string `json:"reference_url,omitempty"`
+	Cpe *string `json:"cpe,omitempty"`
+	WellKnownTechnology *ENUMPROPERTIESWELLKNOWNTECHNOLOGY `json:"well_known_technology,omitempty"`
+	Description *string `json:"description,omitempty"`
+	Purl string `json:"purl"`
+	PackageType ENUMPROPERTIESPACKAGETYPE `json:"package_type"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -360,38 +359,6 @@ func (o *CreateAssetPACKAGERequest) SetCpe(v string) {
 	o.Cpe = &v
 }
 
-// GetCpeGuessed returns the CpeGuessed field value if set, zero value otherwise.
-func (o *CreateAssetPACKAGERequest) GetCpeGuessed() bool {
-	if o == nil || IsNil(o.CpeGuessed) {
-		var ret bool
-		return ret
-	}
-	return *o.CpeGuessed
-}
-
-// GetCpeGuessedOk returns a tuple with the CpeGuessed field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateAssetPACKAGERequest) GetCpeGuessedOk() (*bool, bool) {
-	if o == nil || IsNil(o.CpeGuessed) {
-		return nil, false
-	}
-	return o.CpeGuessed, true
-}
-
-// HasCpeGuessed returns a boolean if a field has been set.
-func (o *CreateAssetPACKAGERequest) HasCpeGuessed() bool {
-	if o != nil && !IsNil(o.CpeGuessed) {
-		return true
-	}
-
-	return false
-}
-
-// SetCpeGuessed gets a reference to the given bool and assigns it to the CpeGuessed field.
-func (o *CreateAssetPACKAGERequest) SetCpeGuessed(v bool) {
-	o.CpeGuessed = &v
-}
-
 // GetWellKnownTechnology returns the WellKnownTechnology field value if set, zero value otherwise.
 func (o *CreateAssetPACKAGERequest) GetWellKnownTechnology() ENUMPROPERTIESWELLKNOWNTECHNOLOGY {
 	if o == nil || IsNil(o.WellKnownTechnology) {
@@ -505,7 +472,7 @@ func (o *CreateAssetPACKAGERequest) SetPackageType(v ENUMPROPERTIESPACKAGETYPE) 
 }
 
 func (o CreateAssetPACKAGERequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -537,9 +504,6 @@ func (o CreateAssetPACKAGERequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Cpe) {
 		toSerialize["cpe"] = o.Cpe
-	}
-	if !IsNil(o.CpeGuessed) {
-		toSerialize["cpe_guessed"] = o.CpeGuessed
 	}
 	if !IsNil(o.WellKnownTechnology) {
 		toSerialize["well_known_technology"] = o.WellKnownTechnology
@@ -574,10 +538,10 @@ func (o *CreateAssetPACKAGERequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -606,7 +570,6 @@ func (o *CreateAssetPACKAGERequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "version")
 		delete(additionalProperties, "reference_url")
 		delete(additionalProperties, "cpe")
-		delete(additionalProperties, "cpe_guessed")
 		delete(additionalProperties, "well_known_technology")
 		delete(additionalProperties, "description")
 		delete(additionalProperties, "purl")
@@ -652,3 +615,5 @@ func (v *NullableCreateAssetPACKAGERequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

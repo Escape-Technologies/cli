@@ -19,13 +19,14 @@ import (
 	"strings"
 )
 
+
 // JobsAPIService JobsAPI service
 type JobsAPIService service
 
 type ApiGetJobRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *JobsAPIService
-	jobId      string
+	jobId string
 }
 
 func (r ApiGetJobRequest) Execute() (*GetJob200Response, *http.Response, error) {
@@ -37,27 +38,26 @@ GetJob Get a job
 
 Returns job status, parameters, and artefacts (including signedUrl download links for completed export outputs).
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param jobId The job ID
-	@return ApiGetJobRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param jobId The job ID
+ @return ApiGetJobRequest
 */
 func (a *JobsAPIService) GetJob(ctx context.Context, jobId string) ApiGetJobRequest {
 	return ApiGetJobRequest{
 		ApiService: a,
-		ctx:        ctx,
-		jobId:      jobId,
+		ctx: ctx,
+		jobId: jobId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetJob200Response
+//  @return GetJob200Response
 func (a *JobsAPIService) GetJobExecute(r ApiGetJobRequest) (*GetJob200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *GetJob200Response
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetJob200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "JobsAPIService.GetJob")
@@ -132,8 +132,8 @@ func (a *JobsAPIService) GetJobExecute(r ApiGetJobRequest) (*GetJob200Response, 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -143,8 +143,8 @@ func (a *JobsAPIService) GetJobExecute(r ApiGetJobRequest) (*GetJob200Response, 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -162,8 +162,8 @@ func (a *JobsAPIService) GetJobExecute(r ApiGetJobRequest) (*GetJob200Response, 
 }
 
 type ApiTriggerExportRequest struct {
-	ctx                  context.Context
-	ApiService           *JobsAPIService
+	ctx context.Context
+	ApiService *JobsAPIService
 	triggerExportRequest *TriggerExportRequest
 }
 
@@ -181,25 +181,24 @@ TriggerExport Trigger a template export job
 
 Schedules the same export job as the product UI (SAAS_EXPORT_TEMPLATE): PDF/report blocks, optional scan and issue scope. Use GET /jobs/{jobId} to read status and artefact download URLs when completed.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiTriggerExportRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiTriggerExportRequest
 */
 func (a *JobsAPIService) TriggerExport(ctx context.Context) ApiTriggerExportRequest {
 	return ApiTriggerExportRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return TriggerExport200Response
+//  @return TriggerExport200Response
 func (a *JobsAPIService) TriggerExportExecute(r ApiTriggerExportRequest) (*TriggerExport200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *TriggerExport200Response
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *TriggerExport200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "JobsAPIService.TriggerExport")
@@ -275,8 +274,8 @@ func (a *JobsAPIService) TriggerExportExecute(r ApiTriggerExportRequest) (*Trigg
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
