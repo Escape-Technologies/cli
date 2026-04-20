@@ -18,11 +18,19 @@ import (
 // checks if the Conflict type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Conflict{}
 
+<<<<<<< HEAD:packages/cli/pkg/api/v3/model_conflict.go
 // Conflict Returned when the request conflicts with an existing resource
 type Conflict struct {
 	Message              ENUMCONFLICTONTHEFOLLOWINGFIELD `json:"message"`
 	Field                string                          `json:"field"`
 	InstanceId           string                          `json:"instanceId"`
+=======
+// IgnoreScan409Response struct for IgnoreScan409Response
+type IgnoreScan409Response struct {
+	Message ENUMCONFLICTONTHEFOLLOWINGFIELD `json:"message"`
+	Field string `json:"field"`
+	InstanceId string `json:"instanceId"`
+>>>>>>> d3ba35d609 (feat(public-api,cli): enrich profile extraAssets with signedUrl + isActive; add profiles get-schema/upload-schema):packages/cli/pkg/api/v3/model_ignore_scan_409_response.go
 	AdditionalProperties map[string]interface{}
 }
 
@@ -120,8 +128,13 @@ func (o *Conflict) SetInstanceId(v string) {
 	o.InstanceId = v
 }
 
+<<<<<<< HEAD:packages/cli/pkg/api/v3/model_conflict.go
 func (o Conflict) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
+=======
+func (o IgnoreScan409Response) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+>>>>>>> d3ba35d609 (feat(public-api,cli): enrich profile extraAssets with signedUrl + isActive; add profiles get-schema/upload-schema):packages/cli/pkg/api/v3/model_ignore_scan_409_response.go
 	if err != nil {
 		return []byte{}, err
 	}
@@ -156,10 +169,10 @@ func (o *Conflict) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -222,3 +235,5 @@ func (v *NullableConflict) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

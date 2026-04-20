@@ -23,12 +23,16 @@ type ProfileExtraAsset struct {
 	// The id of the asset
 	Id string `json:"id"`
 	// The name of the asset
-	Name   string                                                            `json:"name"`
-	Class  ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS  `json:"class"`
-	Type   ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE   `json:"type"`
+	Name string `json:"name"`
+	Class ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS `json:"class"`
+	Type ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE `json:"type"`
 	Status ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS `json:"status"`
 	// The date and time the asset was created
-	CreatedAt            string `json:"createdAt"`
+	CreatedAt string `json:"createdAt"`
+	// True when this asset's id equals the profile's resolved `schemaAssetId`. Callers can filter `class === 'SCHEMA' && isActive` to find the schema currently driving scans.
+	IsActive bool `json:"isActive"`
+	// Time-limited HTTPS URL to download the backing schema bytes. Non-null only for `class === \"SCHEMA\"` entries; null for other asset classes.
+	SignedUrl *string `json:"signedUrl,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -38,7 +42,7 @@ type _ProfileExtraAsset ProfileExtraAsset
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProfileExtraAsset(id string, name string, class ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS, type_ ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE, status ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS, createdAt string) *ProfileExtraAsset {
+func NewProfileExtraAsset(id string, name string, class ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS, type_ ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE, status ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS, createdAt string, isActive bool) *ProfileExtraAsset {
 	this := ProfileExtraAsset{}
 	this.Id = id
 	this.Name = name
@@ -46,6 +50,7 @@ func NewProfileExtraAsset(id string, name string, class ENUMPROPERTIESDATAITEMSP
 	this.Type = type_
 	this.Status = status
 	this.CreatedAt = createdAt
+	this.IsActive = isActive
 	return &this
 }
 
@@ -201,8 +206,64 @@ func (o *ProfileExtraAsset) SetCreatedAt(v string) {
 	o.CreatedAt = v
 }
 
+// GetIsActive returns the IsActive field value
+func (o *ProfileExtraAsset) GetIsActive() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.IsActive
+}
+
+// GetIsActiveOk returns a tuple with the IsActive field value
+// and a boolean to check if the value has been set.
+func (o *ProfileExtraAsset) GetIsActiveOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.IsActive, true
+}
+
+// SetIsActive sets field value
+func (o *ProfileExtraAsset) SetIsActive(v bool) {
+	o.IsActive = v
+}
+
+// GetSignedUrl returns the SignedUrl field value if set, zero value otherwise.
+func (o *ProfileExtraAsset) GetSignedUrl() string {
+	if o == nil || IsNil(o.SignedUrl) {
+		var ret string
+		return ret
+	}
+	return *o.SignedUrl
+}
+
+// GetSignedUrlOk returns a tuple with the SignedUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileExtraAsset) GetSignedUrlOk() (*string, bool) {
+	if o == nil || IsNil(o.SignedUrl) {
+		return nil, false
+	}
+	return o.SignedUrl, true
+}
+
+// HasSignedUrl returns a boolean if a field has been set.
+func (o *ProfileExtraAsset) HasSignedUrl() bool {
+	if o != nil && !IsNil(o.SignedUrl) {
+		return true
+	}
+
+	return false
+}
+
+// SetSignedUrl gets a reference to the given string and assigns it to the SignedUrl field.
+func (o *ProfileExtraAsset) SetSignedUrl(v string) {
+	o.SignedUrl = &v
+}
+
 func (o ProfileExtraAsset) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -217,6 +278,10 @@ func (o ProfileExtraAsset) ToMap() (map[string]interface{}, error) {
 	toSerialize["type"] = o.Type
 	toSerialize["status"] = o.Status
 	toSerialize["createdAt"] = o.CreatedAt
+	toSerialize["isActive"] = o.IsActive
+	if !IsNil(o.SignedUrl) {
+		toSerialize["signedUrl"] = o.SignedUrl
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -236,6 +301,7 @@ func (o *ProfileExtraAsset) UnmarshalJSON(data []byte) (err error) {
 		"type",
 		"status",
 		"createdAt",
+		"isActive",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -243,10 +309,10 @@ func (o *ProfileExtraAsset) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -271,6 +337,8 @@ func (o *ProfileExtraAsset) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "type")
 		delete(additionalProperties, "status")
 		delete(additionalProperties, "createdAt")
+		delete(additionalProperties, "isActive")
+		delete(additionalProperties, "signedUrl")
 		o.AdditionalProperties = additionalProperties
 	}
 
@@ -312,3 +380,5 @@ func (v *NullableProfileExtraAsset) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
