@@ -20,15 +20,15 @@ var _ MappedNullable = &CreateAssetGITLABREPOSITORYRequestGroup{}
 
 // CreateAssetGITLABREPOSITORYRequestGroup struct for CreateAssetGITLABREPOSITORYRequestGroup
 type CreateAssetGITLABREPOSITORYRequestGroup struct {
-	AssetClass ENUMSOURCECODEMANAGEMENT `json:"asset_class"`
-	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
-	ScreenshotS3Key *string `json:"screenshot_s3_key,omitempty"`
-	AssetType ENUMGITLABGROUP `json:"asset_type"`
-	Name *string `json:"name,omitempty"`
-	ImmutableKey string `json:"immutable_key"`
-	ApiKey string `json:"api_key"`
-	InstanceUrl *string `json:"instance_url,omitempty"`
-	LocationId *string `json:"location_id,omitempty"`
+	AssetClass           ENUMSOURCECODEMANAGEMENT `json:"asset_class"`
+	ExtraMetadata        map[string]interface{}   `json:"extra_metadata,omitempty"`
+	ScreenshotS3Key      *string                  `json:"screenshot_s3_key,omitempty"`
+	AssetType            ENUMGITLABGROUP          `json:"asset_type"`
+	Name                 *string                  `json:"name,omitempty"`
+	ImmutableKey         string                   `json:"immutable_key"`
+	ApiKey               string                   `json:"api_key"`
+	InstanceUrl          *string                  `json:"instance_url,omitempty"`
+	LocationId           *string                  `json:"location_id,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -312,7 +312,7 @@ func (o *CreateAssetGITLABREPOSITORYRequestGroup) SetLocationId(v string) {
 }
 
 func (o CreateAssetGITLABREPOSITORYRequestGroup) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -364,10 +364,10 @@ func (o *CreateAssetGITLABREPOSITORYRequestGroup) UnmarshalJSON(data []byte) (er
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -436,5 +436,3 @@ func (v *NullableCreateAssetGITLABREPOSITORYRequestGroup) UnmarshalJSON(src []by
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

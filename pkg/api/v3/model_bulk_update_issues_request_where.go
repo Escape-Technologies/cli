@@ -30,7 +30,7 @@ type BulkUpdateIssuesRequestWhere struct {
 	// Filter by tag IDs
 	TagIds []string `json:"tagIds,omitempty"`
 	// Filter by scanner kinds
-	ScannerKinds []ENUMPROPERTIESWHEREPROPERTIESSCANNERKINDSITEMS `json:"scannerKinds,omitempty"`
+	ScannerKinds         []ENUMPROPERTIESWHEREPROPERTIESSCANNERKINDSITEMS `json:"scannerKinds,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -246,7 +246,7 @@ func (o *BulkUpdateIssuesRequestWhere) SetScannerKinds(v []ENUMPROPERTIESWHEREPR
 }
 
 func (o BulkUpdateIssuesRequestWhere) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -342,5 +342,3 @@ func (v *NullableBulkUpdateIssuesRequestWhere) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

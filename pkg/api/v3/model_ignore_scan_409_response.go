@@ -20,9 +20,9 @@ var _ MappedNullable = &IgnoreScan409Response{}
 
 // IgnoreScan409Response struct for IgnoreScan409Response
 type IgnoreScan409Response struct {
-	Message ENUMCONFLICTONTHEFOLLOWINGFIELD `json:"message"`
-	Field string `json:"field"`
-	InstanceId string `json:"instanceId"`
+	Message              ENUMCONFLICTONTHEFOLLOWINGFIELD `json:"message"`
+	Field                string                          `json:"field"`
+	InstanceId           string                          `json:"instanceId"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -121,7 +121,7 @@ func (o *IgnoreScan409Response) SetInstanceId(v string) {
 }
 
 func (o IgnoreScan409Response) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -156,10 +156,10 @@ func (o *IgnoreScan409Response) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -222,5 +222,3 @@ func (v *NullableIgnoreScan409Response) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

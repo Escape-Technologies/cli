@@ -12,8 +12,8 @@ package v3
 
 import (
 	"encoding/json"
-	"time"
 	"fmt"
+	"time"
 )
 
 // checks if the GetUser200Response type satisfies the MappedNullable interface at compile time
@@ -30,7 +30,7 @@ type GetUser200Response struct {
 	// The date and time the user was activated
 	ActivatedAt *time.Time `json:"activatedAt,omitempty"`
 	// The bindings of the user
-	RoleBindings []CreateProject200ResponseBindingsInner `json:"roleBindings"`
+	RoleBindings         []CreateProject200ResponseBindingsInner `json:"roleBindings"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -186,7 +186,7 @@ func (o *GetUser200Response) SetRoleBindings(v []CreateProject200ResponseBinding
 }
 
 func (o GetUser200Response) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -226,10 +226,10 @@ func (o *GetUser200Response) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -294,5 +294,3 @@ func (v *NullableGetUser200Response) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
