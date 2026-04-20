@@ -131,7 +131,7 @@ func (a *AssetsAPIService) BulkDeleteAssetsExecute(r ApiBulkDeleteAssetsRequest)
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v UpdateProfile400Response
+			var v BadRequest
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -263,7 +263,7 @@ func (a *AssetsAPIService) BulkUpdateAssetsExecute(r ApiBulkUpdateAssetsRequest)
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v UpdateProfile400Response
+			var v BadRequest
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -396,7 +396,7 @@ func (a *AssetsAPIService) CreateAssetAWSLAMBDAExecute(r ApiCreateAssetAWSLAMBDA
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v UpdateProfile400Response
+			var v BadRequest
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -529,7 +529,7 @@ func (a *AssetsAPIService) CreateAssetAZURETENANTExecute(r ApiCreateAssetAZURETE
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v UpdateProfile400Response
+			var v BadRequest
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -662,7 +662,7 @@ func (a *AssetsAPIService) CreateAssetBITBUCKETREPOSITORYExecute(r ApiCreateAsse
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v UpdateProfile400Response
+			var v BadRequest
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -795,7 +795,7 @@ func (a *AssetsAPIService) CreateAssetCODEPROJECTExecute(r ApiCreateAssetCODEPRO
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v UpdateProfile400Response
+			var v BadRequest
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -931,7 +931,7 @@ func (a *AssetsAPIService) CreateAssetCommentExecute(r ApiCreateAssetCommentRequ
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v UpdateProfile400Response
+			var v BadRequest
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -942,7 +942,7 @@ func (a *AssetsAPIService) CreateAssetCommentExecute(r ApiCreateAssetCommentRequ
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v CreateAssetComment500Response
+			var v InternalServerError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1075,7 +1075,7 @@ func (a *AssetsAPIService) CreateAssetDNSExecute(r ApiCreateAssetDNSRequest) (*U
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v UpdateProfile400Response
+			var v BadRequest
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1208,7 +1208,7 @@ func (a *AssetsAPIService) CreateAssetGITHUBREPOSITORYExecute(r ApiCreateAssetGI
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v UpdateProfile400Response
+			var v BadRequest
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1341,7 +1341,7 @@ func (a *AssetsAPIService) CreateAssetGITLABREPOSITORYExecute(r ApiCreateAssetGI
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v UpdateProfile400Response
+			var v BadRequest
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1474,7 +1474,7 @@ func (a *AssetsAPIService) CreateAssetGRAPHQLExecute(r ApiCreateAssetGRAPHQLRequ
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v UpdateProfile400Response
+			var v BadRequest
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1607,7 +1607,7 @@ func (a *AssetsAPIService) CreateAssetGRPCExecute(r ApiCreateAssetGRPCRequest) (
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v UpdateProfile400Response
+			var v BadRequest
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1740,7 +1740,7 @@ func (a *AssetsAPIService) CreateAssetIPV4Execute(r ApiCreateAssetIPV4Request) (
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v UpdateProfile400Response
+			var v BadRequest
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1873,7 +1873,7 @@ func (a *AssetsAPIService) CreateAssetIPV4RANGEExecute(r ApiCreateAssetIPV4RANGE
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v UpdateProfile400Response
+			var v BadRequest
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2006,7 +2006,7 @@ func (a *AssetsAPIService) CreateAssetIPV6Execute(r ApiCreateAssetIPV6Request) (
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v UpdateProfile400Response
+			var v BadRequest
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2139,7 +2139,7 @@ func (a *AssetsAPIService) CreateAssetMCPExecute(r ApiCreateAssetMCPRequest) (*U
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v UpdateProfile400Response
+			var v BadRequest
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2272,7 +2272,7 @@ func (a *AssetsAPIService) CreateAssetPACKAGEExecute(r ApiCreateAssetPACKAGERequ
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v UpdateProfile400Response
+			var v BadRequest
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2405,7 +2405,7 @@ func (a *AssetsAPIService) CreateAssetRESTExecute(r ApiCreateAssetRESTRequest) (
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v UpdateProfile400Response
+			var v BadRequest
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2538,7 +2538,7 @@ func (a *AssetsAPIService) CreateAssetSOAPExecute(r ApiCreateAssetSOAPRequest) (
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v UpdateProfile400Response
+			var v BadRequest
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2671,7 +2671,7 @@ func (a *AssetsAPIService) CreateAssetSOFTWAREExecute(r ApiCreateAssetSOFTWARERe
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v UpdateProfile400Response
+			var v BadRequest
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2835,7 +2835,7 @@ func (a *AssetsAPIService) CreateAssetSchemaExecute(r ApiCreateAssetSchemaReques
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v UpdateProfile400Response
+			var v BadRequest
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2968,7 +2968,7 @@ func (a *AssetsAPIService) CreateAssetWEBAPPExecute(r ApiCreateAssetWEBAPPReques
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v UpdateProfile400Response
+			var v BadRequest
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3101,7 +3101,7 @@ func (a *AssetsAPIService) CreateAssetWEBSOCKETExecute(r ApiCreateAssetWEBSOCKET
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v UpdateProfile400Response
+			var v BadRequest
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3229,7 +3229,7 @@ func (a *AssetsAPIService) DeleteAssetExecute(r ApiDeleteAssetRequest) (*DeleteP
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v UpdateProfile400Response
+			var v BadRequest
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3240,7 +3240,7 @@ func (a *AssetsAPIService) DeleteAssetExecute(r ApiDeleteAssetRequest) (*DeleteP
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v GetProfile404Response
+			var v NotFound
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3368,7 +3368,7 @@ func (a *AssetsAPIService) GetAssetExecute(r ApiGetAssetRequest) (*AssetDetailed
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v GetProfile404Response
+			var v NotFound
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3496,7 +3496,7 @@ func (a *AssetsAPIService) ListAssetActivitiesExecute(r ApiListAssetActivitiesRe
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v GetProfile404Response
+			var v NotFound
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3629,6 +3629,7 @@ func (a *AssetsAPIService) ListAssetsExecute(r ApiListAssetsRequest) (*ListAsset
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.sortType != nil {
@@ -3638,6 +3639,7 @@ func (a *AssetsAPIService) ListAssetsExecute(r ApiListAssetsRequest) (*ListAsset
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
 		var defaultValue string = "asc"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
 		r.sortDirection = &defaultValue
 	}
 	if r.search != nil {
@@ -3722,7 +3724,7 @@ func (a *AssetsAPIService) ListAssetsExecute(r ApiListAssetsRequest) (*ListAsset
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400Response
+			var v PaginationError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3859,7 +3861,7 @@ func (a *AssetsAPIService) UpdateAssetExecute(r ApiUpdateAssetRequest) (*UpdateA
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v UpdateProfile400Response
+			var v BadRequest
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3870,7 +3872,7 @@ func (a *AssetsAPIService) UpdateAssetExecute(r ApiUpdateAssetRequest) (*UpdateA
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v GetProfile404Response
+			var v NotFound
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

@@ -126,7 +126,7 @@ func (a *JobsAPIService) GetJobExecute(r ApiGetJobRequest) (*GetJob200Response, 
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v UpdateProfile400Response
+			var v BadRequest
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -137,7 +137,7 @@ func (a *JobsAPIService) GetJobExecute(r ApiGetJobRequest) (*GetJob200Response, 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v GetProfile404Response
+			var v NotFound
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -269,7 +269,7 @@ func (a *JobsAPIService) TriggerExportExecute(r ApiTriggerExportRequest) (*Trigg
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v UpdateProfile400Response
+			var v BadRequest
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

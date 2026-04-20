@@ -37,6 +37,7 @@ type GetProfile200ResponseConfigurationExperimental struct {
 	ExtendedPortScan               *bool                                                                          `json:"extended_port_scan,omitempty"`
 	LoginPageBruteforceAgent       *bool                                                                          `json:"login_page_bruteforce_agent,omitempty"`
 	LlmSecurityTesting             *bool                                                                          `json:"llm_security_testing,omitempty"`
+	DastMultiAgentPentest          *bool                                                                          `json:"dast_multi_agent_pentest,omitempty"`
 	AdditionalProperties           map[string]interface{}
 }
 
@@ -635,6 +636,38 @@ func (o *GetProfile200ResponseConfigurationExperimental) SetLlmSecurityTesting(v
 	o.LlmSecurityTesting = &v
 }
 
+// GetDastMultiAgentPentest returns the DastMultiAgentPentest field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationExperimental) GetDastMultiAgentPentest() bool {
+	if o == nil || IsNil(o.DastMultiAgentPentest) {
+		var ret bool
+		return ret
+	}
+	return *o.DastMultiAgentPentest
+}
+
+// GetDastMultiAgentPentestOk returns a tuple with the DastMultiAgentPentest field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationExperimental) GetDastMultiAgentPentestOk() (*bool, bool) {
+	if o == nil || IsNil(o.DastMultiAgentPentest) {
+		return nil, false
+	}
+	return o.DastMultiAgentPentest, true
+}
+
+// HasDastMultiAgentPentest returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationExperimental) HasDastMultiAgentPentest() bool {
+	if o != nil && !IsNil(o.DastMultiAgentPentest) {
+		return true
+	}
+
+	return false
+}
+
+// SetDastMultiAgentPentest gets a reference to the given bool and assigns it to the DastMultiAgentPentest field.
+func (o *GetProfile200ResponseConfigurationExperimental) SetDastMultiAgentPentest(v bool) {
+	o.DastMultiAgentPentest = &v
+}
+
 func (o GetProfile200ResponseConfigurationExperimental) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -699,6 +732,9 @@ func (o GetProfile200ResponseConfigurationExperimental) ToMap() (map[string]inte
 	if !IsNil(o.LlmSecurityTesting) {
 		toSerialize["llm_security_testing"] = o.LlmSecurityTesting
 	}
+	if !IsNil(o.DastMultiAgentPentest) {
+		toSerialize["dast_multi_agent_pentest"] = o.DastMultiAgentPentest
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -739,6 +775,7 @@ func (o *GetProfile200ResponseConfigurationExperimental) UnmarshalJSON(data []by
 		delete(additionalProperties, "extended_port_scan")
 		delete(additionalProperties, "login_page_bruteforce_agent")
 		delete(additionalProperties, "llm_security_testing")
+		delete(additionalProperties, "dast_multi_agent_pentest")
 		o.AdditionalProperties = additionalProperties
 	}
 

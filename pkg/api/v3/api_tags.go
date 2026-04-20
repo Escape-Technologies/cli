@@ -131,7 +131,7 @@ func (a *TagsAPIService) CreateTagExecute(r ApiCreateTagRequest) (*CreateTag200R
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v UpdateProfile400Response
+			var v BadRequest
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -259,7 +259,7 @@ func (a *TagsAPIService) DeleteTagExecute(r ApiDeleteTagRequest) (*DeleteProfile
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v GetProfile404Response
+			var v NotFound
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -281,7 +281,7 @@ func (a *TagsAPIService) DeleteTagExecute(r ApiDeleteTagRequest) (*DeleteProfile
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v CreateAssetComment500Response
+			var v InternalServerError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -409,7 +409,7 @@ func (a *TagsAPIService) GetTagExecute(r ApiGetTagRequest) (*CreateTag200Respons
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v GetProfile404Response
+			var v NotFound
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -420,7 +420,7 @@ func (a *TagsAPIService) GetTagExecute(r ApiGetTagRequest) (*CreateTag200Respons
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v CreateAssetComment500Response
+			var v InternalServerError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -544,7 +544,7 @@ func (a *TagsAPIService) ListTagsExecute(r ApiListTagsRequest) ([]TagDetail, *ht
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400Response
+			var v PaginationError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -680,7 +680,7 @@ func (a *TagsAPIService) UpdateTagExecute(r ApiUpdateTagRequest) (*CreateTag200R
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v UpdateProfile400Response
+			var v BadRequest
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -691,7 +691,7 @@ func (a *TagsAPIService) UpdateTagExecute(r ApiUpdateTagRequest) (*CreateTag200R
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v GetProfile404Response
+			var v NotFound
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

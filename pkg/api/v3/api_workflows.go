@@ -131,7 +131,7 @@ func (a *WorkflowsAPIService) CreateWorkflowExecute(r ApiCreateWorkflowRequest) 
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v UpdateProfile400Response
+			var v BadRequest
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -142,7 +142,7 @@ func (a *WorkflowsAPIService) CreateWorkflowExecute(r ApiCreateWorkflowRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v CreateAssetComment500Response
+			var v InternalServerError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -270,7 +270,7 @@ func (a *WorkflowsAPIService) DeleteWorkflowExecute(r ApiDeleteWorkflowRequest) 
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v UpdateProfile400Response
+			var v BadRequest
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -281,7 +281,7 @@ func (a *WorkflowsAPIService) DeleteWorkflowExecute(r ApiDeleteWorkflowRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v CreateAssetComment500Response
+			var v InternalServerError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -409,7 +409,7 @@ func (a *WorkflowsAPIService) GetWorkflowExecute(r ApiGetWorkflowRequest) (*Crea
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v UpdateProfile400Response
+			var v BadRequest
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -549,6 +549,7 @@ func (a *WorkflowsAPIService) ListWorkflowsExecute(r ApiListWorkflowsRequest) (*
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.sortType != nil {
@@ -558,6 +559,7 @@ func (a *WorkflowsAPIService) ListWorkflowsExecute(r ApiListWorkflowsRequest) (*
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
 		var defaultValue string = "asc"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
 		r.sortDirection = &defaultValue
 	}
 	if r.workflowIds != nil {
@@ -661,7 +663,7 @@ func (a *WorkflowsAPIService) ListWorkflowsExecute(r ApiListWorkflowsRequest) (*
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400Response
+			var v PaginationError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -797,7 +799,7 @@ func (a *WorkflowsAPIService) UpdateWorkflowExecute(r ApiUpdateWorkflowRequest) 
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v UpdateProfile400Response
+			var v BadRequest
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -808,7 +810,7 @@ func (a *WorkflowsAPIService) UpdateWorkflowExecute(r ApiUpdateWorkflowRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v CreateAssetComment500Response
+			var v InternalServerError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

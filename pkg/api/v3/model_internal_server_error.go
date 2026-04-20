@@ -15,41 +15,41 @@ import (
 	"fmt"
 )
 
-// checks if the ListProfiles400Response type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &ListProfiles400Response{}
+// checks if the InternalServerError type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &InternalServerError{}
 
-// ListProfiles400Response struct for ListProfiles400Response
-type ListProfiles400Response struct {
-	Message              ENUMINVALIDCURSOR `json:"message"`
-	Details              string            `json:"details"`
+// InternalServerError Returned when the server fails to fulfil the request
+type InternalServerError struct {
+	Message              ENUMINTERNALSERVERERROR `json:"message"`
+	Details              string                  `json:"details"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _ListProfiles400Response ListProfiles400Response
+type _InternalServerError InternalServerError
 
-// NewListProfiles400Response instantiates a new ListProfiles400Response object
+// NewInternalServerError instantiates a new InternalServerError object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewListProfiles400Response(message ENUMINVALIDCURSOR, details string) *ListProfiles400Response {
-	this := ListProfiles400Response{}
+func NewInternalServerError(message ENUMINTERNALSERVERERROR, details string) *InternalServerError {
+	this := InternalServerError{}
 	this.Message = message
 	this.Details = details
 	return &this
 }
 
-// NewListProfiles400ResponseWithDefaults instantiates a new ListProfiles400Response object
+// NewInternalServerErrorWithDefaults instantiates a new InternalServerError object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewListProfiles400ResponseWithDefaults() *ListProfiles400Response {
-	this := ListProfiles400Response{}
+func NewInternalServerErrorWithDefaults() *InternalServerError {
+	this := InternalServerError{}
 	return &this
 }
 
 // GetMessage returns the Message field value
-func (o *ListProfiles400Response) GetMessage() ENUMINVALIDCURSOR {
+func (o *InternalServerError) GetMessage() ENUMINTERNALSERVERERROR {
 	if o == nil {
-		var ret ENUMINVALIDCURSOR
+		var ret ENUMINTERNALSERVERERROR
 		return ret
 	}
 
@@ -58,7 +58,7 @@ func (o *ListProfiles400Response) GetMessage() ENUMINVALIDCURSOR {
 
 // GetMessageOk returns a tuple with the Message field value
 // and a boolean to check if the value has been set.
-func (o *ListProfiles400Response) GetMessageOk() (*ENUMINVALIDCURSOR, bool) {
+func (o *InternalServerError) GetMessageOk() (*ENUMINTERNALSERVERERROR, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -66,12 +66,12 @@ func (o *ListProfiles400Response) GetMessageOk() (*ENUMINVALIDCURSOR, bool) {
 }
 
 // SetMessage sets field value
-func (o *ListProfiles400Response) SetMessage(v ENUMINVALIDCURSOR) {
+func (o *InternalServerError) SetMessage(v ENUMINTERNALSERVERERROR) {
 	o.Message = v
 }
 
 // GetDetails returns the Details field value
-func (o *ListProfiles400Response) GetDetails() string {
+func (o *InternalServerError) GetDetails() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -82,7 +82,7 @@ func (o *ListProfiles400Response) GetDetails() string {
 
 // GetDetailsOk returns a tuple with the Details field value
 // and a boolean to check if the value has been set.
-func (o *ListProfiles400Response) GetDetailsOk() (*string, bool) {
+func (o *InternalServerError) GetDetailsOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -90,11 +90,11 @@ func (o *ListProfiles400Response) GetDetailsOk() (*string, bool) {
 }
 
 // SetDetails sets field value
-func (o *ListProfiles400Response) SetDetails(v string) {
+func (o *InternalServerError) SetDetails(v string) {
 	o.Details = v
 }
 
-func (o ListProfiles400Response) MarshalJSON() ([]byte, error) {
+func (o InternalServerError) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -102,7 +102,7 @@ func (o ListProfiles400Response) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ListProfiles400Response) ToMap() (map[string]interface{}, error) {
+func (o InternalServerError) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["message"] = o.Message
 	toSerialize["details"] = o.Details
@@ -114,7 +114,7 @@ func (o ListProfiles400Response) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *ListProfiles400Response) UnmarshalJSON(data []byte) (err error) {
+func (o *InternalServerError) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -137,15 +137,15 @@ func (o *ListProfiles400Response) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varListProfiles400Response := _ListProfiles400Response{}
+	varInternalServerError := _InternalServerError{}
 
-	err = json.Unmarshal(data, &varListProfiles400Response)
+	err = json.Unmarshal(data, &varInternalServerError)
 
 	if err != nil {
 		return err
 	}
 
-	*o = ListProfiles400Response(varListProfiles400Response)
+	*o = InternalServerError(varInternalServerError)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -158,38 +158,38 @@ func (o *ListProfiles400Response) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableListProfiles400Response struct {
-	value *ListProfiles400Response
+type NullableInternalServerError struct {
+	value *InternalServerError
 	isSet bool
 }
 
-func (v NullableListProfiles400Response) Get() *ListProfiles400Response {
+func (v NullableInternalServerError) Get() *InternalServerError {
 	return v.value
 }
 
-func (v *NullableListProfiles400Response) Set(val *ListProfiles400Response) {
+func (v *NullableInternalServerError) Set(val *InternalServerError) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableListProfiles400Response) IsSet() bool {
+func (v NullableInternalServerError) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableListProfiles400Response) Unset() {
+func (v *NullableInternalServerError) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableListProfiles400Response(val *ListProfiles400Response) *NullableListProfiles400Response {
-	return &NullableListProfiles400Response{value: val, isSet: true}
+func NewNullableInternalServerError(val *InternalServerError) *NullableInternalServerError {
+	return &NullableInternalServerError{value: val, isSet: true}
 }
 
-func (v NullableListProfiles400Response) MarshalJSON() ([]byte, error) {
+func (v NullableInternalServerError) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableListProfiles400Response) UnmarshalJSON(src []byte) error {
+func (v *NullableInternalServerError) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

@@ -10,20 +10,18 @@ import (
 
 // apiErrorBody mirrors the {message, details} shape returned by the public API
 // for both validation failures (`Bad Request`) and pagination errors
-// (`Invalid cursor`). Captured here so we can humanize errors without leaking
-// internal anyOf wrapper structs from the generated client to callers.
+// (`Invalid cursor`). Captured here so we can humanize errors without coupling
+// to the generated client's per-endpoint response structs.
 type apiErrorBody struct {
 	Message string `json:"message"`
 	Details string `json:"details"`
 }
 
 // humanizeAPIError attaches the human-readable {message, details} payload to
-// errors returned by the generated v3 client. The OpenAPI generator buries the
-// useful fields inside an anyOf wrapper struct (e.g. ListProfiles400Response
-// holds two ListProfiles400ResponseAnyOf* pointers), and the default
-// formatErrorMessage only inspects RFC-7807 Title/Detail. We re-parse the raw
-// body so callers see e.g. `Bad Request: severities.0: Invalid enum value`
-// instead of the bare HTTP status.
+// errors returned by the generated v3 client. The default formatErrorMessage
+// only inspects RFC-7807 Title/Detail, so we re-parse the raw body to surface
+// e.g. `Bad Request: severities.0: Invalid enum value` instead of the bare
+// HTTP status.
 func humanizeAPIError(err error) error {
 	if err == nil {
 		return nil
