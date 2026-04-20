@@ -131,7 +131,7 @@ func (a *IssuesAPIService) BulkUpdateIssuesExecute(r ApiBulkUpdateIssuesRequest)
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v UpdateProfile400Response
+			var v BadRequest
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -268,7 +268,7 @@ func (a *IssuesAPIService) CreateIssueCommentExecute(r ApiCreateIssueCommentRequ
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v UpdateProfile400Response
+			var v BadRequest
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -279,7 +279,7 @@ func (a *IssuesAPIService) CreateIssueCommentExecute(r ApiCreateIssueCommentRequ
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v GetProfile404Response
+			var v NotFound
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -290,7 +290,7 @@ func (a *IssuesAPIService) CreateIssueCommentExecute(r ApiCreateIssueCommentRequ
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v CreateAssetComment500Response
+			var v InternalServerError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -418,7 +418,7 @@ func (a *IssuesAPIService) GetIssueExecute(r ApiGetIssueRequest) (*GetIssue200Re
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v GetProfile404Response
+			var v NotFound
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -454,7 +454,7 @@ func (r ApiGetIssueFunnelRequest) ProjectIds(projectIds GetIssueFunnelProjectIds
 	return r
 }
 
-func (r ApiGetIssueFunnelRequest) Execute() ([]GetIssueFunnel200ResponseInner, *http.Response, error) {
+func (r ApiGetIssueFunnelRequest) Execute() ([]IssueFunnelInner, *http.Response, error) {
 	return r.ApiService.GetIssueFunnelExecute(r)
 }
 
@@ -475,13 +475,13 @@ func (a *IssuesAPIService) GetIssueFunnel(ctx context.Context) ApiGetIssueFunnel
 
 // Execute executes the request
 //
-//	@return []GetIssueFunnel200ResponseInner
-func (a *IssuesAPIService) GetIssueFunnelExecute(r ApiGetIssueFunnelRequest) ([]GetIssueFunnel200ResponseInner, *http.Response, error) {
+//	@return []IssueFunnelInner
+func (a *IssuesAPIService) GetIssueFunnelExecute(r ApiGetIssueFunnelRequest) ([]IssueFunnelInner, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue []GetIssueFunnel200ResponseInner
+		localVarReturnValue []IssueFunnelInner
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IssuesAPIService.GetIssueFunnel")
@@ -606,7 +606,7 @@ func (r ApiGetIssueTrendsRequest) ProjectIds(projectIds GetIssueTrendsProjectIds
 	return r
 }
 
-func (r ApiGetIssueTrendsRequest) Execute() ([]GetIssueTrends200ResponseInner, *http.Response, error) {
+func (r ApiGetIssueTrendsRequest) Execute() ([]IssueTrendsInner, *http.Response, error) {
 	return r.ApiService.GetIssueTrendsExecute(r)
 }
 
@@ -627,13 +627,13 @@ func (a *IssuesAPIService) GetIssueTrends(ctx context.Context) ApiGetIssueTrends
 
 // Execute executes the request
 //
-//	@return []GetIssueTrends200ResponseInner
-func (a *IssuesAPIService) GetIssueTrendsExecute(r ApiGetIssueTrendsRequest) ([]GetIssueTrends200ResponseInner, *http.Response, error) {
+//	@return []IssueTrendsInner
+func (a *IssuesAPIService) GetIssueTrendsExecute(r ApiGetIssueTrendsRequest) ([]IssueTrendsInner, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue []GetIssueTrends200ResponseInner
+		localVarReturnValue []IssueTrendsInner
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IssuesAPIService.GetIssueTrends")
@@ -659,6 +659,7 @@ func (a *IssuesAPIService) GetIssueTrendsExecute(r ApiGetIssueTrendsRequest) ([]
 		parameterAddToHeaderOrQuery(localVarQueryParams, "interval", r.interval, "form", "")
 	} else {
 		var defaultValue string = "1 day"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "interval", defaultValue, "form", "")
 		r.interval = &defaultValue
 	}
 	if r.applicationIds != nil {
@@ -839,7 +840,7 @@ func (a *IssuesAPIService) ListIssueActivitiesExecute(r ApiListIssueActivitiesRe
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v GetProfile404Response
+			var v NotFound
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1042,6 +1043,7 @@ func (a *IssuesAPIService) ListIssuesExecute(r ApiListIssuesRequest) (*ListIssue
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.sortType != nil {
@@ -1051,6 +1053,7 @@ func (a *IssuesAPIService) ListIssuesExecute(r ApiListIssuesRequest) (*ListIssue
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
 		var defaultValue string = "asc"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
 		r.sortDirection = &defaultValue
 	}
 	if r.profileIds != nil {
@@ -1189,7 +1192,7 @@ func (a *IssuesAPIService) ListIssuesExecute(r ApiListIssuesRequest) (*ListIssue
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListProfiles400Response
+			var v PaginationError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1325,7 +1328,7 @@ func (a *IssuesAPIService) NotifyIssueOwnersExecute(r ApiNotifyIssueOwnersReques
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v UpdateProfile400Response
+			var v BadRequest
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1462,7 +1465,7 @@ func (a *IssuesAPIService) UpdateIssueExecute(r ApiUpdateIssueRequest) (*UpdateI
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v UpdateProfile400Response
+			var v BadRequest
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1473,7 +1476,7 @@ func (a *IssuesAPIService) UpdateIssueExecute(r ApiUpdateIssueRequest) (*UpdateI
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v GetProfile404Response
+			var v NotFound
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

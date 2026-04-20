@@ -15,41 +15,41 @@ import (
 	"fmt"
 )
 
-// checks if the CreateAssetComment500Response type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &CreateAssetComment500Response{}
+// checks if the PaginationError type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &PaginationError{}
 
-// CreateAssetComment500Response struct for CreateAssetComment500Response
-type CreateAssetComment500Response struct {
-	Message              ENUMINTERNALSERVERERROR `json:"message"`
-	Details              string                  `json:"details"`
+// PaginationError Returned when an invalid pagination cursor is supplied
+type PaginationError struct {
+	Message              ENUMINVALIDCURSOR `json:"message"`
+	Details              string            `json:"details"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _CreateAssetComment500Response CreateAssetComment500Response
+type _PaginationError PaginationError
 
-// NewCreateAssetComment500Response instantiates a new CreateAssetComment500Response object
+// NewPaginationError instantiates a new PaginationError object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetComment500Response(message ENUMINTERNALSERVERERROR, details string) *CreateAssetComment500Response {
-	this := CreateAssetComment500Response{}
+func NewPaginationError(message ENUMINVALIDCURSOR, details string) *PaginationError {
+	this := PaginationError{}
 	this.Message = message
 	this.Details = details
 	return &this
 }
 
-// NewCreateAssetComment500ResponseWithDefaults instantiates a new CreateAssetComment500Response object
+// NewPaginationErrorWithDefaults instantiates a new PaginationError object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCreateAssetComment500ResponseWithDefaults() *CreateAssetComment500Response {
-	this := CreateAssetComment500Response{}
+func NewPaginationErrorWithDefaults() *PaginationError {
+	this := PaginationError{}
 	return &this
 }
 
 // GetMessage returns the Message field value
-func (o *CreateAssetComment500Response) GetMessage() ENUMINTERNALSERVERERROR {
+func (o *PaginationError) GetMessage() ENUMINVALIDCURSOR {
 	if o == nil {
-		var ret ENUMINTERNALSERVERERROR
+		var ret ENUMINVALIDCURSOR
 		return ret
 	}
 
@@ -58,7 +58,7 @@ func (o *CreateAssetComment500Response) GetMessage() ENUMINTERNALSERVERERROR {
 
 // GetMessageOk returns a tuple with the Message field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetComment500Response) GetMessageOk() (*ENUMINTERNALSERVERERROR, bool) {
+func (o *PaginationError) GetMessageOk() (*ENUMINVALIDCURSOR, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -66,12 +66,12 @@ func (o *CreateAssetComment500Response) GetMessageOk() (*ENUMINTERNALSERVERERROR
 }
 
 // SetMessage sets field value
-func (o *CreateAssetComment500Response) SetMessage(v ENUMINTERNALSERVERERROR) {
+func (o *PaginationError) SetMessage(v ENUMINVALIDCURSOR) {
 	o.Message = v
 }
 
 // GetDetails returns the Details field value
-func (o *CreateAssetComment500Response) GetDetails() string {
+func (o *PaginationError) GetDetails() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -82,7 +82,7 @@ func (o *CreateAssetComment500Response) GetDetails() string {
 
 // GetDetailsOk returns a tuple with the Details field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetComment500Response) GetDetailsOk() (*string, bool) {
+func (o *PaginationError) GetDetailsOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -90,11 +90,11 @@ func (o *CreateAssetComment500Response) GetDetailsOk() (*string, bool) {
 }
 
 // SetDetails sets field value
-func (o *CreateAssetComment500Response) SetDetails(v string) {
+func (o *PaginationError) SetDetails(v string) {
 	o.Details = v
 }
 
-func (o CreateAssetComment500Response) MarshalJSON() ([]byte, error) {
+func (o PaginationError) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -102,7 +102,7 @@ func (o CreateAssetComment500Response) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CreateAssetComment500Response) ToMap() (map[string]interface{}, error) {
+func (o PaginationError) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["message"] = o.Message
 	toSerialize["details"] = o.Details
@@ -114,7 +114,7 @@ func (o CreateAssetComment500Response) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *CreateAssetComment500Response) UnmarshalJSON(data []byte) (err error) {
+func (o *PaginationError) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -137,15 +137,15 @@ func (o *CreateAssetComment500Response) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varCreateAssetComment500Response := _CreateAssetComment500Response{}
+	varPaginationError := _PaginationError{}
 
-	err = json.Unmarshal(data, &varCreateAssetComment500Response)
+	err = json.Unmarshal(data, &varPaginationError)
 
 	if err != nil {
 		return err
 	}
 
-	*o = CreateAssetComment500Response(varCreateAssetComment500Response)
+	*o = PaginationError(varPaginationError)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -158,38 +158,38 @@ func (o *CreateAssetComment500Response) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableCreateAssetComment500Response struct {
-	value *CreateAssetComment500Response
+type NullablePaginationError struct {
+	value *PaginationError
 	isSet bool
 }
 
-func (v NullableCreateAssetComment500Response) Get() *CreateAssetComment500Response {
+func (v NullablePaginationError) Get() *PaginationError {
 	return v.value
 }
 
-func (v *NullableCreateAssetComment500Response) Set(val *CreateAssetComment500Response) {
+func (v *NullablePaginationError) Set(val *PaginationError) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCreateAssetComment500Response) IsSet() bool {
+func (v NullablePaginationError) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCreateAssetComment500Response) Unset() {
+func (v *NullablePaginationError) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCreateAssetComment500Response(val *CreateAssetComment500Response) *NullableCreateAssetComment500Response {
-	return &NullableCreateAssetComment500Response{value: val, isSet: true}
+func NewNullablePaginationError(val *PaginationError) *NullablePaginationError {
+	return &NullablePaginationError{value: val, isSet: true}
 }
 
-func (v NullableCreateAssetComment500Response) MarshalJSON() ([]byte, error) {
+func (v NullablePaginationError) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCreateAssetComment500Response) UnmarshalJSON(src []byte) error {
+func (v *NullablePaginationError) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

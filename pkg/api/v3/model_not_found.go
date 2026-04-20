@@ -15,37 +15,37 @@ import (
 	"fmt"
 )
 
-// checks if the GetProfile404Response type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &GetProfile404Response{}
+// checks if the NotFound type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &NotFound{}
 
-// GetProfile404Response struct for GetProfile404Response
-type GetProfile404Response struct {
+// NotFound Returned when the requested resource does not exist
+type NotFound struct {
 	Message              ENUMNOTFOUND `json:"message"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _GetProfile404Response GetProfile404Response
+type _NotFound NotFound
 
-// NewGetProfile404Response instantiates a new GetProfile404Response object
+// NewNotFound instantiates a new NotFound object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetProfile404Response(message ENUMNOTFOUND) *GetProfile404Response {
-	this := GetProfile404Response{}
+func NewNotFound(message ENUMNOTFOUND) *NotFound {
+	this := NotFound{}
 	this.Message = message
 	return &this
 }
 
-// NewGetProfile404ResponseWithDefaults instantiates a new GetProfile404Response object
+// NewNotFoundWithDefaults instantiates a new NotFound object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewGetProfile404ResponseWithDefaults() *GetProfile404Response {
-	this := GetProfile404Response{}
+func NewNotFoundWithDefaults() *NotFound {
+	this := NotFound{}
 	return &this
 }
 
 // GetMessage returns the Message field value
-func (o *GetProfile404Response) GetMessage() ENUMNOTFOUND {
+func (o *NotFound) GetMessage() ENUMNOTFOUND {
 	if o == nil {
 		var ret ENUMNOTFOUND
 		return ret
@@ -56,7 +56,7 @@ func (o *GetProfile404Response) GetMessage() ENUMNOTFOUND {
 
 // GetMessageOk returns a tuple with the Message field value
 // and a boolean to check if the value has been set.
-func (o *GetProfile404Response) GetMessageOk() (*ENUMNOTFOUND, bool) {
+func (o *NotFound) GetMessageOk() (*ENUMNOTFOUND, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -64,11 +64,11 @@ func (o *GetProfile404Response) GetMessageOk() (*ENUMNOTFOUND, bool) {
 }
 
 // SetMessage sets field value
-func (o *GetProfile404Response) SetMessage(v ENUMNOTFOUND) {
+func (o *NotFound) SetMessage(v ENUMNOTFOUND) {
 	o.Message = v
 }
 
-func (o GetProfile404Response) MarshalJSON() ([]byte, error) {
+func (o NotFound) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -76,7 +76,7 @@ func (o GetProfile404Response) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o GetProfile404Response) ToMap() (map[string]interface{}, error) {
+func (o NotFound) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["message"] = o.Message
 
@@ -87,7 +87,7 @@ func (o GetProfile404Response) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *GetProfile404Response) UnmarshalJSON(data []byte) (err error) {
+func (o *NotFound) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -109,15 +109,15 @@ func (o *GetProfile404Response) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varGetProfile404Response := _GetProfile404Response{}
+	varNotFound := _NotFound{}
 
-	err = json.Unmarshal(data, &varGetProfile404Response)
+	err = json.Unmarshal(data, &varNotFound)
 
 	if err != nil {
 		return err
 	}
 
-	*o = GetProfile404Response(varGetProfile404Response)
+	*o = NotFound(varNotFound)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -129,38 +129,38 @@ func (o *GetProfile404Response) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableGetProfile404Response struct {
-	value *GetProfile404Response
+type NullableNotFound struct {
+	value *NotFound
 	isSet bool
 }
 
-func (v NullableGetProfile404Response) Get() *GetProfile404Response {
+func (v NullableNotFound) Get() *NotFound {
 	return v.value
 }
 
-func (v *NullableGetProfile404Response) Set(val *GetProfile404Response) {
+func (v *NullableNotFound) Set(val *NotFound) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableGetProfile404Response) IsSet() bool {
+func (v NullableNotFound) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableGetProfile404Response) Unset() {
+func (v *NullableNotFound) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableGetProfile404Response(val *GetProfile404Response) *NullableGetProfile404Response {
-	return &NullableGetProfile404Response{value: val, isSet: true}
+func NewNullableNotFound(val *NotFound) *NullableNotFound {
+	return &NullableNotFound{value: val, isSet: true}
 }
 
-func (v NullableGetProfile404Response) MarshalJSON() ([]byte, error) {
+func (v NullableNotFound) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableGetProfile404Response) UnmarshalJSON(src []byte) error {
+func (v *NullableNotFound) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

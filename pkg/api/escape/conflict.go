@@ -11,7 +11,7 @@ func extractConflict(err error) (string, error) {
 		return "", nil
 	}
 	if oapiErr, ok := err.(*v3.GenericOpenAPIError); ok {
-		if conflict, ok := oapiErr.Model().(v3.IgnoreScan409Response); ok {
+		if conflict, ok := oapiErr.Model().(v3.Conflict); ok {
 			return conflict.GetInstanceId(), nil
 		}
 	}

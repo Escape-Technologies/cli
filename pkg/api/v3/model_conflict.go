@@ -15,41 +15,43 @@ import (
 	"fmt"
 )
 
-// checks if the UpdateProfile400Response type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &UpdateProfile400Response{}
+// checks if the Conflict type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &Conflict{}
 
-// UpdateProfile400Response struct for UpdateProfile400Response
-type UpdateProfile400Response struct {
-	Message              ENUMBADREQUEST `json:"message"`
-	Details              string         `json:"details"`
+// Conflict Returned when the request conflicts with an existing resource
+type Conflict struct {
+	Message              ENUMCONFLICTONTHEFOLLOWINGFIELD `json:"message"`
+	Field                string                          `json:"field"`
+	InstanceId           string                          `json:"instanceId"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _UpdateProfile400Response UpdateProfile400Response
+type _Conflict Conflict
 
-// NewUpdateProfile400Response instantiates a new UpdateProfile400Response object
+// NewConflict instantiates a new Conflict object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateProfile400Response(message ENUMBADREQUEST, details string) *UpdateProfile400Response {
-	this := UpdateProfile400Response{}
+func NewConflict(message ENUMCONFLICTONTHEFOLLOWINGFIELD, field string, instanceId string) *Conflict {
+	this := Conflict{}
 	this.Message = message
-	this.Details = details
+	this.Field = field
+	this.InstanceId = instanceId
 	return &this
 }
 
-// NewUpdateProfile400ResponseWithDefaults instantiates a new UpdateProfile400Response object
+// NewConflictWithDefaults instantiates a new Conflict object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewUpdateProfile400ResponseWithDefaults() *UpdateProfile400Response {
-	this := UpdateProfile400Response{}
+func NewConflictWithDefaults() *Conflict {
+	this := Conflict{}
 	return &this
 }
 
 // GetMessage returns the Message field value
-func (o *UpdateProfile400Response) GetMessage() ENUMBADREQUEST {
+func (o *Conflict) GetMessage() ENUMCONFLICTONTHEFOLLOWINGFIELD {
 	if o == nil {
-		var ret ENUMBADREQUEST
+		var ret ENUMCONFLICTONTHEFOLLOWINGFIELD
 		return ret
 	}
 
@@ -58,7 +60,7 @@ func (o *UpdateProfile400Response) GetMessage() ENUMBADREQUEST {
 
 // GetMessageOk returns a tuple with the Message field value
 // and a boolean to check if the value has been set.
-func (o *UpdateProfile400Response) GetMessageOk() (*ENUMBADREQUEST, bool) {
+func (o *Conflict) GetMessageOk() (*ENUMCONFLICTONTHEFOLLOWINGFIELD, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -66,35 +68,59 @@ func (o *UpdateProfile400Response) GetMessageOk() (*ENUMBADREQUEST, bool) {
 }
 
 // SetMessage sets field value
-func (o *UpdateProfile400Response) SetMessage(v ENUMBADREQUEST) {
+func (o *Conflict) SetMessage(v ENUMCONFLICTONTHEFOLLOWINGFIELD) {
 	o.Message = v
 }
 
-// GetDetails returns the Details field value
-func (o *UpdateProfile400Response) GetDetails() string {
+// GetField returns the Field field value
+func (o *Conflict) GetField() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Details
+	return o.Field
 }
 
-// GetDetailsOk returns a tuple with the Details field value
+// GetFieldOk returns a tuple with the Field field value
 // and a boolean to check if the value has been set.
-func (o *UpdateProfile400Response) GetDetailsOk() (*string, bool) {
+func (o *Conflict) GetFieldOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Details, true
+	return &o.Field, true
 }
 
-// SetDetails sets field value
-func (o *UpdateProfile400Response) SetDetails(v string) {
-	o.Details = v
+// SetField sets field value
+func (o *Conflict) SetField(v string) {
+	o.Field = v
 }
 
-func (o UpdateProfile400Response) MarshalJSON() ([]byte, error) {
+// GetInstanceId returns the InstanceId field value
+func (o *Conflict) GetInstanceId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.InstanceId
+}
+
+// GetInstanceIdOk returns a tuple with the InstanceId field value
+// and a boolean to check if the value has been set.
+func (o *Conflict) GetInstanceIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.InstanceId, true
+}
+
+// SetInstanceId sets field value
+func (o *Conflict) SetInstanceId(v string) {
+	o.InstanceId = v
+}
+
+func (o Conflict) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -102,10 +128,11 @@ func (o UpdateProfile400Response) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o UpdateProfile400Response) ToMap() (map[string]interface{}, error) {
+func (o Conflict) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["message"] = o.Message
-	toSerialize["details"] = o.Details
+	toSerialize["field"] = o.Field
+	toSerialize["instanceId"] = o.InstanceId
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -114,13 +141,14 @@ func (o UpdateProfile400Response) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *UpdateProfile400Response) UnmarshalJSON(data []byte) (err error) {
+func (o *Conflict) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"message",
-		"details",
+		"field",
+		"instanceId",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -137,59 +165,60 @@ func (o *UpdateProfile400Response) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varUpdateProfile400Response := _UpdateProfile400Response{}
+	varConflict := _Conflict{}
 
-	err = json.Unmarshal(data, &varUpdateProfile400Response)
+	err = json.Unmarshal(data, &varConflict)
 
 	if err != nil {
 		return err
 	}
 
-	*o = UpdateProfile400Response(varUpdateProfile400Response)
+	*o = Conflict(varConflict)
 
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "message")
-		delete(additionalProperties, "details")
+		delete(additionalProperties, "field")
+		delete(additionalProperties, "instanceId")
 		o.AdditionalProperties = additionalProperties
 	}
 
 	return err
 }
 
-type NullableUpdateProfile400Response struct {
-	value *UpdateProfile400Response
+type NullableConflict struct {
+	value *Conflict
 	isSet bool
 }
 
-func (v NullableUpdateProfile400Response) Get() *UpdateProfile400Response {
+func (v NullableConflict) Get() *Conflict {
 	return v.value
 }
 
-func (v *NullableUpdateProfile400Response) Set(val *UpdateProfile400Response) {
+func (v *NullableConflict) Set(val *Conflict) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableUpdateProfile400Response) IsSet() bool {
+func (v NullableConflict) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableUpdateProfile400Response) Unset() {
+func (v *NullableConflict) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableUpdateProfile400Response(val *UpdateProfile400Response) *NullableUpdateProfile400Response {
-	return &NullableUpdateProfile400Response{value: val, isSet: true}
+func NewNullableConflict(val *Conflict) *NullableConflict {
+	return &NullableConflict{value: val, isSet: true}
 }
 
-func (v NullableUpdateProfile400Response) MarshalJSON() ([]byte, error) {
+func (v NullableConflict) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableUpdateProfile400Response) UnmarshalJSON(src []byte) error {
+func (v *NullableConflict) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
