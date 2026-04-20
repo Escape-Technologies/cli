@@ -77,7 +77,7 @@ func RegisterBuiltinTools(server *mcpserver.MCPServer, specs []ToolSpec) {
 			lines = append(lines, fmt.Sprintf("- %s: %s", item["name"], item["description"]))
 		}
 
-		return mcpgo.NewToolResultStructured(items, strings.Join(lines, "\n")), nil
+		return mcpgo.NewToolResultStructured(wrapStructuredPayload(items), strings.Join(lines, "\n")), nil
 	})
 }
 
