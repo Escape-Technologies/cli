@@ -20,8 +20,8 @@ var _ MappedNullable = &GetAuthentication200ResponseAuthentication{}
 
 // GetAuthentication200ResponseAuthentication Null while the check is running. When FINISHED, contains the authenticated users and their tokens.
 type GetAuthentication200ResponseAuthentication struct {
-	ModelDiscriminator ENUMAUTHENTICATIONRESULT `json:"model_discriminator_"`
-	Users []GetAuthentication200ResponseAuthenticationUsersInner `json:"users"`
+	ModelDiscriminator   ENUMAUTHENTICATIONRESULT                               `json:"model_discriminator_"`
+	Users                []GetAuthentication200ResponseAuthenticationUsersInner `json:"users"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -95,7 +95,7 @@ func (o *GetAuthentication200ResponseAuthentication) SetUsers(v []GetAuthenticat
 }
 
 func (o GetAuthentication200ResponseAuthentication) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -128,10 +128,10 @@ func (o *GetAuthentication200ResponseAuthentication) UnmarshalJSON(data []byte) 
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -193,5 +193,3 @@ func (v *NullableGetAuthentication200ResponseAuthentication) UnmarshalJSON(src [
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
