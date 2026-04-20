@@ -3,6 +3,7 @@ package cmd
 import (
 	"errors"
 	"fmt"
+	"strconv"
 	"strings"
 	"sync"
 
@@ -18,11 +19,19 @@ import (
 // 5 latest event IDs per issue, so this is also the worst-case fan-out.
 const maxLatestEventsHydrationConcurrency = 5
 
-func formatLatestEventIDs(ids []string, truncated bool) string {
-	if len(ids) == 0 {
+// formatLatestEventIDs renders the LATEST EVENTS column for `issues get`.
+// Uses presence-aware inputs (pointers) so the three states stay distinct:
+//   - ids == nil      → enrichment unavailable / field omitted by API → "(n/a)"
+//   - len(*ids) == 0  → enrichment succeeded but no events             → "-"
+//   - otherwise       → comma-joined IDs, with a trailing "…" when truncated
+func formatLatestEventIDs(ids *[]string, truncated bool) string {
+	if ids == nil {
+		return "(n/a)"
+	}
+	if len(*ids) == 0 {
 		return "-"
 	}
-	joined := strings.Join(ids, ", ")
+	joined := strings.Join(*ids, ", ")
 	if truncated {
 		joined += ", …"
 	}
@@ -32,11 +41,16 @@ func formatLatestEventIDs(ids []string, truncated bool) string {
 // IssueWithEvents bundles an issue with its hydrated latest-scan events so the
 // MCP/CLI can hand an AI agent the full context (including each event's
 // Exchange) in a single tool call.
+//
+// LatestEvents and LatestEventsTruncated are pointers so the JSON output can
+// distinguish "field omitted by the API" (nil, key absent) from "no events"
+// (empty slice) or "not truncated" (false). This mirrors the public API's
+// optional wire contract — see `IssueDetailedSchema` in services/public-api.
 type IssueWithEvents struct {
-	Issue                 v3.GetIssue200Response   `json:"issue"`
-	LatestEvents          []v3.GetEvent200Response `json:"latestEvents"`
-	LatestEventsTruncated bool                     `json:"latestEventsTruncated"`
-	EventErrors           []IssueEventHydrateError `json:"eventErrors,omitempty"`
+	Issue                 v3.GetIssue200Response    `json:"issue"`
+	LatestEvents          *[]v3.GetEvent200Response `json:"latestEvents,omitempty"`
+	LatestEventsTruncated *bool                     `json:"latestEventsTruncated,omitempty"`
+	EventErrors           []IssueEventHydrateError  `json:"eventErrors,omitempty"`
 }
 
 // IssueEventHydrateError captures a per-event hydration failure so partial
@@ -295,7 +309,11 @@ ID                                      CREATED AT                SEVERITY  CATE
 			if cvssData.GetScore() != 0 || cvssData.GetVector() != "" {
 				cvss = fmt.Sprintf("%.1f %s", cvssData.GetScore(), cvssData.GetVector())
 			}
-			latestEvents := formatLatestEventIDs(issue.GetLatestEventIds(), issue.GetLatestEventsTruncated())
+			var latestEventIDs *[]string
+			if ids, ok := issue.GetLatestEventIdsOk(); ok {
+				latestEventIDs = &ids
+			}
+			latestEvents := formatLatestEventIDs(latestEventIDs, issue.GetLatestEventsTruncated())
 			res := []string{"ID\tCREATED AT\tSEVERITY\tCATEGORY\tSTATUS\tNAME\tASSET\tFIRST SEEN SCAN\tCVSS\tFRAMEWORK\tCOMPLIANCES\tREMEDIATION\tCONTEXT\tLATEST EVENTS\tLINK"}
 			res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s", issue.GetId(), issue.GetCreatedAt(), issue.GetSeverity(), issue.GetCategory(), issue.GetStatus(), issue.GetName(), issue.GetAsset().Name, issue.GetFirstSeenScanId(), cvss, issue.GetAiRemediationFramework(), formatIssueCompliances(issue.GetCompliances()), issue.GetRemediation(), issue.GetContext(), latestEvents, issue.GetLinks().IssueOverview))
 			return res
@@ -351,7 +369,24 @@ itself cannot be fetched.`,
 			return fmt.Errorf("unable to get issue %s: %w", issueID, err)
 		}
 
-		eventIDs := issue.GetLatestEventIds()
+		result := IssueWithEvents{Issue: *issue}
+
+		// `latestEventIds` and `latestEventsTruncated` are optional on the wire:
+		// the public API omits them when `lastSeenScanId` is null or the extra
+		// GraphQL enrichment fails. Propagate that absence to the output so
+		// clients can tell "unavailable" from "empty" / "not truncated".
+		eventIDs, idsOK := issue.GetLatestEventIdsOk()
+		if truncated, ok := issue.GetLatestEventsTruncatedOk(); ok {
+			result.LatestEventsTruncated = truncated
+		}
+
+		if !idsOK {
+			if err := renderIssueWithEvents(result); err != nil {
+				return err
+			}
+			return nil
+		}
+
 		latestEvents := make([]v3.GetEvent200Response, len(eventIDs))
 		eventErrors := make([]IssueEventHydrateError, len(eventIDs))
 		eventOK := make([]bool, len(eventIDs))
@@ -388,28 +423,35 @@ itself cannot be fetched.`,
 				hydratedErrors = append(hydratedErrors, eventErrors[i])
 			}
 		}
-
-		result := IssueWithEvents{
-			Issue:                 *issue,
-			LatestEvents:          hydratedEvents,
-			LatestEventsTruncated: issue.GetLatestEventsTruncated(),
-		}
+		result.LatestEvents = &hydratedEvents
 		if len(hydratedErrors) > 0 {
 			result.EventErrors = hydratedErrors
 		}
 
-		out.Table(result, func() []string {
-			res := []string{"ISSUE ID\tEVENTS HYDRATED\tEVENTS FAILED\tTRUNCATED"}
-			res = append(res, fmt.Sprintf("%s\t%d\t%d\t%t",
-				result.Issue.GetId(),
-				len(result.LatestEvents),
-				len(result.EventErrors),
-				result.LatestEventsTruncated,
-			))
-			return res
-		})
-		return nil
+		return renderIssueWithEvents(result)
 	},
+}
+
+func renderIssueWithEvents(result IssueWithEvents) error {
+	out.Table(result, func() []string {
+		hydrated := "(n/a)"
+		if result.LatestEvents != nil {
+			hydrated = strconv.Itoa(len(*result.LatestEvents))
+		}
+		truncated := "(n/a)"
+		if result.LatestEventsTruncated != nil {
+			truncated = strconv.FormatBool(*result.LatestEventsTruncated)
+		}
+		res := []string{"ISSUE ID\tEVENTS HYDRATED\tEVENTS FAILED\tTRUNCATED"}
+		res = append(res, fmt.Sprintf("%s\t%s\t%d\t%s",
+			result.Issue.GetId(),
+			hydrated,
+			len(result.EventErrors),
+			truncated,
+		))
+		return res
+	})
+	return nil
 }
 
 var issueUpdateStatusCmd = &cobra.Command{
