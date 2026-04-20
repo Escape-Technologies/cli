@@ -21,10 +21,10 @@ var _ MappedNullable = &CreateSchemaViaUpload{}
 // CreateSchemaViaUpload struct for CreateSchemaViaUpload
 type CreateSchemaViaUpload struct {
 	AssetType ENUMSCHEMA `json:"asset_type"`
-	Name *string `json:"name,omitempty"`
+	Name      *string    `json:"name,omitempty"`
 	// The list of project IDs bind the asset on.
-	ProjectIds []string `json:"projectIds,omitempty"`
-	Upload CreateSchemaViaUploadUpload `json:"upload"`
+	ProjectIds           []string                    `json:"projectIds,omitempty"`
+	Upload               CreateSchemaViaUploadUpload `json:"upload"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -162,7 +162,7 @@ func (o *CreateSchemaViaUpload) SetUpload(v CreateSchemaViaUploadUpload) {
 }
 
 func (o CreateSchemaViaUpload) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -201,10 +201,10 @@ func (o *CreateSchemaViaUpload) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -268,5 +268,3 @@ func (v *NullableCreateSchemaViaUpload) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

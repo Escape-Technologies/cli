@@ -19,14 +19,14 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationAuthentication{}
 
 // GetProfile200ResponseConfigurationAuthentication struct for GetProfile200ResponseConfigurationAuthentication
 type GetProfile200ResponseConfigurationAuthentication struct {
-	Schema *string `json:"$schema,omitempty"`
-	Lifetime *float32 `json:"lifetime,omitempty"`
-	Procedures []GetProfile200ResponseConfigurationAuthenticationProceduresInner `json:"procedures,omitempty"`
-	Users []GetProfile200ResponseConfigurationAuthenticationUsersInner `json:"users,omitempty"`
-	Validation *bool `json:"validation,omitempty"`
-	Proxy *string `json:"proxy,omitempty"`
-	Presets []GetProfile200ResponseConfigurationAuthenticationPresetsInner `json:"presets,omitempty"`
-	MultiUserIsFallback *bool `json:"multi_user_is_fallback,omitempty"`
+	Schema               *string                                                           `json:"$schema,omitempty"`
+	Lifetime             *float32                                                          `json:"lifetime,omitempty"`
+	Procedures           []GetProfile200ResponseConfigurationAuthenticationProceduresInner `json:"procedures,omitempty"`
+	Users                []GetProfile200ResponseConfigurationAuthenticationUsersInner      `json:"users,omitempty"`
+	Validation           *bool                                                             `json:"validation,omitempty"`
+	Proxy                *string                                                           `json:"proxy,omitempty"`
+	Presets              []GetProfile200ResponseConfigurationAuthenticationPresetsInner    `json:"presets,omitempty"`
+	MultiUserIsFallback  *bool                                                             `json:"multi_user_is_fallback,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -306,7 +306,7 @@ func (o *GetProfile200ResponseConfigurationAuthentication) SetMultiUserIsFallbac
 }
 
 func (o GetProfile200ResponseConfigurationAuthentication) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -410,5 +410,3 @@ func (v *NullableGetProfile200ResponseConfigurationAuthentication) UnmarshalJSON
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
