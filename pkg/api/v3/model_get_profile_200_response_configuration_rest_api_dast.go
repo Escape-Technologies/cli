@@ -30,7 +30,6 @@ type GetProfile200ResponseConfigurationRestApiDast struct {
 	Hotstart                 []string                                                                       `json:"hotstart,omitempty"`
 	HotstartOnly             *bool                                                                          `json:"hotstart_only,omitempty"`
 	Scope                    *GetProfile200ResponseConfigurationGraphqlApiDastScope                         `json:"scope,omitempty"`
-	AdditionalSchemaS3Keys   []string                                                                       `json:"additional_schema_s3_keys,omitempty"`
 	QueryParamsAreRequired   *bool                                                                          `json:"query_params_are_required,omitempty"`
 	InScopeOnly              *bool                                                                          `json:"in_scope_only,omitempty"`
 	AdditionalProperties     map[string]interface{}
@@ -407,38 +406,6 @@ func (o *GetProfile200ResponseConfigurationRestApiDast) SetScope(v GetProfile200
 	o.Scope = &v
 }
 
-// GetAdditionalSchemaS3Keys returns the AdditionalSchemaS3Keys field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationRestApiDast) GetAdditionalSchemaS3Keys() []string {
-	if o == nil || IsNil(o.AdditionalSchemaS3Keys) {
-		var ret []string
-		return ret
-	}
-	return o.AdditionalSchemaS3Keys
-}
-
-// GetAdditionalSchemaS3KeysOk returns a tuple with the AdditionalSchemaS3Keys field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationRestApiDast) GetAdditionalSchemaS3KeysOk() ([]string, bool) {
-	if o == nil || IsNil(o.AdditionalSchemaS3Keys) {
-		return nil, false
-	}
-	return o.AdditionalSchemaS3Keys, true
-}
-
-// HasAdditionalSchemaS3Keys returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationRestApiDast) HasAdditionalSchemaS3Keys() bool {
-	if o != nil && !IsNil(o.AdditionalSchemaS3Keys) {
-		return true
-	}
-
-	return false
-}
-
-// SetAdditionalSchemaS3Keys gets a reference to the given []string and assigns it to the AdditionalSchemaS3Keys field.
-func (o *GetProfile200ResponseConfigurationRestApiDast) SetAdditionalSchemaS3Keys(v []string) {
-	o.AdditionalSchemaS3Keys = v
-}
-
 // GetQueryParamsAreRequired returns the QueryParamsAreRequired field value if set, zero value otherwise.
 func (o *GetProfile200ResponseConfigurationRestApiDast) GetQueryParamsAreRequired() bool {
 	if o == nil || IsNil(o.QueryParamsAreRequired) {
@@ -546,9 +513,6 @@ func (o GetProfile200ResponseConfigurationRestApiDast) ToMap() (map[string]inter
 	if !IsNil(o.Scope) {
 		toSerialize["scope"] = o.Scope
 	}
-	if !IsNil(o.AdditionalSchemaS3Keys) {
-		toSerialize["additional_schema_s3_keys"] = o.AdditionalSchemaS3Keys
-	}
 	if !IsNil(o.QueryParamsAreRequired) {
 		toSerialize["query_params_are_required"] = o.QueryParamsAreRequired
 	}
@@ -588,7 +552,6 @@ func (o *GetProfile200ResponseConfigurationRestApiDast) UnmarshalJSON(data []byt
 		delete(additionalProperties, "hotstart")
 		delete(additionalProperties, "hotstart_only")
 		delete(additionalProperties, "scope")
-		delete(additionalProperties, "additional_schema_s3_keys")
 		delete(additionalProperties, "query_params_are_required")
 		delete(additionalProperties, "in_scope_only")
 		o.AdditionalProperties = additionalProperties
