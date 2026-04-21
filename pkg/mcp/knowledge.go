@@ -38,7 +38,7 @@ type KnowledgeOptions struct {
 }
 
 // RegisterKnowledgeTools registers the knowledge_answer_question tool on the
-// given server. Port of createKnowledgeTools from the TS mcp-server.
+// given server.
 func RegisterKnowledgeTools(server *mcpserver.MCPServer, opts KnowledgeOptions) error {
 	docsSite := firstNonEmpty(opts.DocsSiteURL, firstNonEmpty(os.Getenv(knowledgeDocsSiteEnv), defaultDocsSiteURL))
 	docsIndex := firstNonEmpty(opts.DocsIndexURL, firstNonEmpty(os.Getenv(knowledgeDocsIndexEnv), defaultDocsSearchIndexURL))

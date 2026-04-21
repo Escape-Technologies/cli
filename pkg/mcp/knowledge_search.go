@@ -34,8 +34,8 @@ const (
 	termCoverageWeight = 3
 )
 
-// DocsSearchIndex is the Go port of
-// services/mcp-server/src/lanes/knowledge/search-index.ts.
+// DocsSearchIndex caches and queries the docs.escape.tech search index built
+// by Docusaurus.
 type DocsSearchIndex struct {
 	docsSiteURL    string
 	searchIndexURL string
