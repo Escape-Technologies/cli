@@ -19,12 +19,12 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationNetwork{}
 
 // GetProfile200ResponseConfigurationNetwork struct for GetProfile200ResponseConfigurationNetwork
 type GetProfile200ResponseConfigurationNetwork struct {
-	RequestTimeoutS *float32 `json:"request_timeout_s,omitempty"`
-	RequestsPerSecond *float32 `json:"requests_per_second,omitempty"`
-	CustomHeaders map[string][]string `json:"custom_headers,omitempty"`
-	EscapeUser *bool `json:"escape_user,omitempty"`
-	SecEscapeUser *bool `json:"sec_escape_user,omitempty"`
-	ParallelRequests *float32 `json:"parallel_requests,omitempty"`
+	RequestTimeoutS      *float32            `json:"request_timeout_s,omitempty"`
+	RequestsPerSecond    *float32            `json:"requests_per_second,omitempty"`
+	CustomHeaders        map[string][]string `json:"custom_headers,omitempty"`
+	EscapeUser           *bool               `json:"escape_user,omitempty"`
+	SecEscapeUser        *bool               `json:"sec_escape_user,omitempty"`
+	ParallelRequests     *float32            `json:"parallel_requests,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -240,7 +240,7 @@ func (o *GetProfile200ResponseConfigurationNetwork) SetParallelRequests(v float3
 }
 
 func (o GetProfile200ResponseConfigurationNetwork) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -336,5 +336,3 @@ func (v *NullableGetProfile200ResponseConfigurationNetwork) UnmarshalJSON(src []
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -15,44 +15,44 @@ import (
 	"fmt"
 )
 
-// checks if the IssueFunnelInner type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &IssueFunnelInner{}
+// checks if the GetIssueFunnel200ResponseInner type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &GetIssueFunnel200ResponseInner{}
 
-// IssueFunnelInner struct for IssueFunnelInner
-type IssueFunnelInner struct {
+// GetIssueFunnel200ResponseInner struct for GetIssueFunnel200ResponseInner
+type GetIssueFunnel200ResponseInner struct {
 	// Issue category
 	Category string `json:"category"`
 	// Funnel step name
 	Step string `json:"step"`
 	// Number of issues at this step
-	Count float32 `json:"count"`
+	Count                float32 `json:"count"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _IssueFunnelInner IssueFunnelInner
+type _GetIssueFunnel200ResponseInner GetIssueFunnel200ResponseInner
 
-// NewIssueFunnelInner instantiates a new IssueFunnelInner object
+// NewGetIssueFunnel200ResponseInner instantiates a new GetIssueFunnel200ResponseInner object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIssueFunnelInner(category string, step string, count float32) *IssueFunnelInner {
-	this := IssueFunnelInner{}
+func NewGetIssueFunnel200ResponseInner(category string, step string, count float32) *GetIssueFunnel200ResponseInner {
+	this := GetIssueFunnel200ResponseInner{}
 	this.Category = category
 	this.Step = step
 	this.Count = count
 	return &this
 }
 
-// NewIssueFunnelInnerWithDefaults instantiates a new IssueFunnelInner object
+// NewGetIssueFunnel200ResponseInnerWithDefaults instantiates a new GetIssueFunnel200ResponseInner object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewIssueFunnelInnerWithDefaults() *IssueFunnelInner {
-	this := IssueFunnelInner{}
+func NewGetIssueFunnel200ResponseInnerWithDefaults() *GetIssueFunnel200ResponseInner {
+	this := GetIssueFunnel200ResponseInner{}
 	return &this
 }
 
 // GetCategory returns the Category field value
-func (o *IssueFunnelInner) GetCategory() string {
+func (o *GetIssueFunnel200ResponseInner) GetCategory() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -63,7 +63,7 @@ func (o *IssueFunnelInner) GetCategory() string {
 
 // GetCategoryOk returns a tuple with the Category field value
 // and a boolean to check if the value has been set.
-func (o *IssueFunnelInner) GetCategoryOk() (*string, bool) {
+func (o *GetIssueFunnel200ResponseInner) GetCategoryOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -71,12 +71,12 @@ func (o *IssueFunnelInner) GetCategoryOk() (*string, bool) {
 }
 
 // SetCategory sets field value
-func (o *IssueFunnelInner) SetCategory(v string) {
+func (o *GetIssueFunnel200ResponseInner) SetCategory(v string) {
 	o.Category = v
 }
 
 // GetStep returns the Step field value
-func (o *IssueFunnelInner) GetStep() string {
+func (o *GetIssueFunnel200ResponseInner) GetStep() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -87,7 +87,7 @@ func (o *IssueFunnelInner) GetStep() string {
 
 // GetStepOk returns a tuple with the Step field value
 // and a boolean to check if the value has been set.
-func (o *IssueFunnelInner) GetStepOk() (*string, bool) {
+func (o *GetIssueFunnel200ResponseInner) GetStepOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -95,12 +95,12 @@ func (o *IssueFunnelInner) GetStepOk() (*string, bool) {
 }
 
 // SetStep sets field value
-func (o *IssueFunnelInner) SetStep(v string) {
+func (o *GetIssueFunnel200ResponseInner) SetStep(v string) {
 	o.Step = v
 }
 
 // GetCount returns the Count field value
-func (o *IssueFunnelInner) GetCount() float32 {
+func (o *GetIssueFunnel200ResponseInner) GetCount() float32 {
 	if o == nil {
 		var ret float32
 		return ret
@@ -111,7 +111,7 @@ func (o *IssueFunnelInner) GetCount() float32 {
 
 // GetCountOk returns a tuple with the Count field value
 // and a boolean to check if the value has been set.
-func (o *IssueFunnelInner) GetCountOk() (*float32, bool) {
+func (o *GetIssueFunnel200ResponseInner) GetCountOk() (*float32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -119,19 +119,19 @@ func (o *IssueFunnelInner) GetCountOk() (*float32, bool) {
 }
 
 // SetCount sets field value
-func (o *IssueFunnelInner) SetCount(v float32) {
+func (o *GetIssueFunnel200ResponseInner) SetCount(v float32) {
 	o.Count = v
 }
 
-func (o IssueFunnelInner) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+func (o GetIssueFunnel200ResponseInner) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
 }
 
-func (o IssueFunnelInner) ToMap() (map[string]interface{}, error) {
+func (o GetIssueFunnel200ResponseInner) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["category"] = o.Category
 	toSerialize["step"] = o.Step
@@ -144,7 +144,7 @@ func (o IssueFunnelInner) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *IssueFunnelInner) UnmarshalJSON(data []byte) (err error) {
+func (o *GetIssueFunnel200ResponseInner) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -159,24 +159,24 @@ func (o *IssueFunnelInner) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
 	}
 
-	varIssueFunnelInner := _IssueFunnelInner{}
+	varGetIssueFunnel200ResponseInner := _GetIssueFunnel200ResponseInner{}
 
-	err = json.Unmarshal(data, &varIssueFunnelInner)
+	err = json.Unmarshal(data, &varGetIssueFunnel200ResponseInner)
 
 	if err != nil {
 		return err
 	}
 
-	*o = IssueFunnelInner(varIssueFunnelInner)
+	*o = GetIssueFunnel200ResponseInner(varGetIssueFunnel200ResponseInner)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -190,40 +190,38 @@ func (o *IssueFunnelInner) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableIssueFunnelInner struct {
-	value *IssueFunnelInner
+type NullableGetIssueFunnel200ResponseInner struct {
+	value *GetIssueFunnel200ResponseInner
 	isSet bool
 }
 
-func (v NullableIssueFunnelInner) Get() *IssueFunnelInner {
+func (v NullableGetIssueFunnel200ResponseInner) Get() *GetIssueFunnel200ResponseInner {
 	return v.value
 }
 
-func (v *NullableIssueFunnelInner) Set(val *IssueFunnelInner) {
+func (v *NullableGetIssueFunnel200ResponseInner) Set(val *GetIssueFunnel200ResponseInner) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableIssueFunnelInner) IsSet() bool {
+func (v NullableGetIssueFunnel200ResponseInner) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableIssueFunnelInner) Unset() {
+func (v *NullableGetIssueFunnel200ResponseInner) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableIssueFunnelInner(val *IssueFunnelInner) *NullableIssueFunnelInner {
-	return &NullableIssueFunnelInner{value: val, isSet: true}
+func NewNullableGetIssueFunnel200ResponseInner(val *GetIssueFunnel200ResponseInner) *NullableGetIssueFunnel200ResponseInner {
+	return &NullableGetIssueFunnel200ResponseInner{value: val, isSet: true}
 }
 
-func (v NullableIssueFunnelInner) MarshalJSON() ([]byte, error) {
+func (v NullableGetIssueFunnel200ResponseInner) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableIssueFunnelInner) UnmarshalJSON(src []byte) error {
+func (v *NullableGetIssueFunnel200ResponseInner) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

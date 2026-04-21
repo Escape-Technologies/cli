@@ -24,8 +24,8 @@ type UpdateProfileRequest struct {
 	// The description of the profile
 	Description *string `json:"description,omitempty"`
 	// The cron of the profile
-	Cron *string `json:"cron,omitempty"`
-	ExtraAssetIds *UpdateProfileRequestExtraAssetIds `json:"extraAssetIds,omitempty"`
+	Cron                 *string                            `json:"cron,omitempty"`
+	ExtraAssetIds        *UpdateProfileRequestExtraAssetIds `json:"extraAssetIds,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -177,7 +177,7 @@ func (o *UpdateProfileRequest) SetExtraAssetIds(v UpdateProfileRequestExtraAsset
 }
 
 func (o UpdateProfileRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -265,5 +265,3 @@ func (v *NullableUpdateProfileRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -18,7 +18,7 @@ import (
 
 // CreateNotifyWorkflowActionUsingEmailParametersTo - struct for CreateNotifyWorkflowActionUsingEmailParametersTo
 type CreateNotifyWorkflowActionUsingEmailParametersTo struct {
-	CreateNotifyWorkflowActionUsingEmailParametersToOneOf *CreateNotifyWorkflowActionUsingEmailParametersToOneOf
+	CreateNotifyWorkflowActionUsingEmailParametersToOneOf  *CreateNotifyWorkflowActionUsingEmailParametersToOneOf
 	CreateNotifyWorkflowActionUsingEmailParametersToOneOf1 *CreateNotifyWorkflowActionUsingEmailParametersToOneOf1
 	CreateNotifyWorkflowActionUsingEmailParametersToOneOf2 *CreateNotifyWorkflowActionUsingEmailParametersToOneOf2
 	CreateNotifyWorkflowActionUsingEmailParametersToOneOf3 *CreateNotifyWorkflowActionUsingEmailParametersToOneOf3
@@ -59,7 +59,6 @@ func CreateNotifyWorkflowActionUsingEmailParametersToOneOf4AsCreateNotifyWorkflo
 		CreateNotifyWorkflowActionUsingEmailParametersToOneOf4: v,
 	}
 }
-
 
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *CreateNotifyWorkflowActionUsingEmailParametersTo) UnmarshalJSON(data []byte) error {
@@ -192,7 +191,7 @@ func (src CreateNotifyWorkflowActionUsingEmailParametersTo) MarshalJSON() ([]byt
 }
 
 // Get the actual instance
-func (obj *CreateNotifyWorkflowActionUsingEmailParametersTo) GetActualInstance() (interface{}) {
+func (obj *CreateNotifyWorkflowActionUsingEmailParametersTo) GetActualInstance() interface{} {
 	if obj == nil {
 		return nil
 	}
@@ -221,7 +220,7 @@ func (obj *CreateNotifyWorkflowActionUsingEmailParametersTo) GetActualInstance()
 }
 
 // Get the actual instance value
-func (obj CreateNotifyWorkflowActionUsingEmailParametersTo) GetActualInstanceValue() (interface{}) {
+func (obj CreateNotifyWorkflowActionUsingEmailParametersTo) GetActualInstanceValue() interface{} {
 	if obj.CreateNotifyWorkflowActionUsingEmailParametersToOneOf != nil {
 		return *obj.CreateNotifyWorkflowActionUsingEmailParametersToOneOf
 	}
@@ -281,5 +280,3 @@ func (v *NullableCreateNotifyWorkflowActionUsingEmailParametersTo) UnmarshalJSON
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
