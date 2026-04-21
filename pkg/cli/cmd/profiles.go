@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"path/filepath"
 	"strconv"
 	"strings"
 	"time"
@@ -936,26 +937,46 @@ download in one shot.`,
 			return errors.New("schema asset has no signed URL; cannot download")
 		}
 
-		var dst io.Writer
-		switch profileGetSchemaOutFile {
-		case "-":
-			dst = os.Stdout
-		default:
-			f, err := os.Create(profileGetSchemaOutFile)
-			if err != nil {
-				return fmt.Errorf("unable to open %s: %w", profileGetSchemaOutFile, err)
+		if profileGetSchemaOutFile == "-" {
+			if err := escape.DownloadSignedURL(ctx, *schema.SignedUrl, os.Stdout, profileGetSchemaTimeout); err != nil {
+				return fmt.Errorf("failed to download schema bytes: %w", err)
 			}
-			defer func() { _ = f.Close() }()
-			dst = f
+			return nil
 		}
 
-		if err := escape.DownloadSignedURL(ctx, *schema.SignedUrl, dst, profileGetSchemaTimeout); err != nil {
+		// Write to a sibling temp file and rename on success so a failed
+		// download (expired signed URL, mid-stream connection drop, context
+		// deadline) never leaves a truncated or empty file at the target
+		// path. The temp file lives in the same directory as the destination
+		// so the rename stays on one filesystem and is atomic on POSIX.
+		destDir, destName := filepath.Split(profileGetSchemaOutFile)
+		if destDir == "" {
+			destDir = "."
+		}
+		tmp, err := os.CreateTemp(destDir, destName+".*.part")
+		if err != nil {
+			return fmt.Errorf("unable to create temp file in %s: %w", destDir, err)
+		}
+		tmpPath := tmp.Name()
+		cleanup := func() {
+			_ = tmp.Close()
+			_ = os.Remove(tmpPath)
+		}
+
+		if err := escape.DownloadSignedURL(ctx, *schema.SignedUrl, tmp, profileGetSchemaTimeout); err != nil {
+			cleanup()
 			return fmt.Errorf("failed to download schema bytes: %w", err)
 		}
-
-		if profileGetSchemaOutFile != "-" {
-			out.Log(fmt.Sprintf("Schema %s written to %s", schema.Id, profileGetSchemaOutFile))
+		if err := tmp.Close(); err != nil {
+			_ = os.Remove(tmpPath)
+			return fmt.Errorf("failed to finalize temp file %s: %w", tmpPath, err)
 		}
+		if err := os.Rename(tmpPath, profileGetSchemaOutFile); err != nil {
+			_ = os.Remove(tmpPath)
+			return fmt.Errorf("failed to move %s to %s: %w", tmpPath, profileGetSchemaOutFile, err)
+		}
+
+		out.Log(fmt.Sprintf("Schema %s written to %s", schema.Id, profileGetSchemaOutFile))
 		return nil
 	},
 }
