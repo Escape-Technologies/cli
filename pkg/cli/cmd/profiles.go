@@ -916,20 +916,17 @@ download in one shot.`,
 		}
 
 		if profileGetSchemaOutFile == "" {
-			out.Table(schema, func() []string {
-				url := ""
-				if schema.SignedUrl != nil {
-					url = *schema.SignedUrl
-				}
-				active := "false"
-				if schema.IsActive {
-					active = "true"
-				}
-				return []string{
-					"ID\tACTIVE\tNAME\tCREATED AT\tSIGNED URL",
-					fmt.Sprintf("%s\t%s\t%s\t%s\t%s", schema.Id, active, schema.Name, schema.CreatedAt, url),
-				}
-			})
+			// Agent-oriented command: default to JSON so scripted callers
+			// get structured output without needing `-o json`. `out.Print`
+			// still honors `-o yaml` / `-o schema` when the user sets them
+			// globally; only the default ("pretty") path is flipped to
+			// JSON here because rendering a single schema entry as a
+			// one-row table hurts rather than helps agents.
+			buf, err := json.MarshalIndent(schema, "", "  ")
+			if err != nil {
+				return fmt.Errorf("unable to marshal schema: %w", err)
+			}
+			out.Print(schema, string(buf))
 			return nil
 		}
 
