@@ -791,6 +791,21 @@ WORKFLOW:
 	},
 }
 
+const (
+	// profileGetSchemaDefaultTimeout bounds the whole `profiles get-schema`
+	// RunE (GetProfile API call + S3 body fetch when -f is used). 10m is
+	// generous for large schemas while staying well under a reasonable
+	// proxy-cut ceiling; the generated v3 client itself uses
+	// http.DefaultClient with no timeout so this is the only bound.
+	profileGetSchemaDefaultTimeout = 10 * time.Minute
+
+	// profileUploadSchemaDefaultTimeout wraps the end-to-end upload +
+	// schema-build workflow + attach pipeline. The server-side schema-build
+	// workflow caps at 10m, so we add ~5m slack for the S3 PUT, workflow
+	// polling, and the final profile PUT.
+	profileUploadSchemaDefaultTimeout = 15 * time.Minute
+)
+
 var (
 	profileGetSchemaID      string
 	profileGetSchemaOutFile string
@@ -935,7 +950,7 @@ download in one shot.`,
 		}
 
 		if err := escape.DownloadSignedURL(ctx, *schema.SignedUrl, dst, profileGetSchemaTimeout); err != nil {
-			return err
+			return fmt.Errorf("failed to download schema bytes: %w", err)
 		}
 
 		if profileGetSchemaOutFile != "-" {
@@ -1063,11 +1078,11 @@ func init() {
 	)
 	profileGetSchemaCmd.Flags().StringVar(&profileGetSchemaID, "schema-id", "", "specific schema asset ID to pick from extraAssets (default: active schema)")
 	profileGetSchemaCmd.Flags().StringVarP(&profileGetSchemaOutFile, "file", "f", "", "write schema bytes to file path (- for stdout); omit to print JSON metadata")
-	profileGetSchemaCmd.Flags().DurationVar(&profileGetSchemaTimeout, "timeout", 10*time.Minute, "end-to-end timeout bounding both the GetProfile API call and the signed-URL body fetch (when -f is used)")
+	profileGetSchemaCmd.Flags().DurationVar(&profileGetSchemaTimeout, "timeout", profileGetSchemaDefaultTimeout, "end-to-end timeout bounding both the GetProfile API call and the signed-URL body fetch (when -f is used)")
 
 	profileUploadSchemaCmd.Flags().StringVar(&profileUploadSchemaFile, "file", "", "path to the schema file (reads stdin when omitted)")
 	profileUploadSchemaCmd.Flags().StringVar(&profileUploadSchemaName, "name", "", "optional name for the created schema asset")
-	profileUploadSchemaCmd.Flags().DurationVar(&profileUploadSchemaTimeout, "timeout", 15*time.Minute, "end-to-end timeout for upload + schema-build workflow + attach")
+	profileUploadSchemaCmd.Flags().DurationVar(&profileUploadSchemaTimeout, "timeout", profileUploadSchemaDefaultTimeout, "end-to-end timeout for upload + schema-build workflow + attach")
 	profileUpdateCmd.Flags().StringVar(&profileUpdateName, "name", "", "profile name")
 	profileUpdateCmd.Flags().StringVar(&profileUpdateDescription, "description", "", "profile description")
 	profileUpdateCmd.Flags().StringVar(&profileUpdateCron, "cron", "", "cron schedule (e.g., \"0 22 * * *\")")
