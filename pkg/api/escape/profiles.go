@@ -211,7 +211,7 @@ func CreateSchemaAsset(ctx context.Context, temporaryObjectKey string, name stri
 		CreateAssetSchemaRequest(v3.CreateAssetSchemaRequest{CreateSchemaViaUpload: &upload}).
 		Execute()
 	if err != nil {
-		return nil, fmt.Errorf("api error: %w", err)
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return asset, nil
 }
