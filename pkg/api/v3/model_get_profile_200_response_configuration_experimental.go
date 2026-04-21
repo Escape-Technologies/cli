@@ -25,7 +25,6 @@ type GetProfile200ResponseConfigurationExperimental struct {
 	AsmTechnologies                *bool                                                                          `json:"asm_technologies,omitempty"`
 	AsmCodeProjects                *bool                                                                          `json:"asm_code_projects,omitempty"`
 	AsmEnumerateCodeProjects       *bool                                                                          `json:"asm_enumerate_code_projects,omitempty"`
-	LocationsNext                  *bool                                                                          `json:"locations_next,omitempty"`
 	ExternalCrawlingTask           *bool                                                                          `json:"external_crawling_task,omitempty"`
 	XssAgentModelAlias             *ENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS `json:"xss_agent_model_alias,omitempty"`
 	SqliAgentModelAlias            *ENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS `json:"sqli_agent_model_alias,omitempty"`
@@ -246,38 +245,6 @@ func (o *GetProfile200ResponseConfigurationExperimental) HasAsmEnumerateCodeProj
 // SetAsmEnumerateCodeProjects gets a reference to the given bool and assigns it to the AsmEnumerateCodeProjects field.
 func (o *GetProfile200ResponseConfigurationExperimental) SetAsmEnumerateCodeProjects(v bool) {
 	o.AsmEnumerateCodeProjects = &v
-}
-
-// GetLocationsNext returns the LocationsNext field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationExperimental) GetLocationsNext() bool {
-	if o == nil || IsNil(o.LocationsNext) {
-		var ret bool
-		return ret
-	}
-	return *o.LocationsNext
-}
-
-// GetLocationsNextOk returns a tuple with the LocationsNext field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationExperimental) GetLocationsNextOk() (*bool, bool) {
-	if o == nil || IsNil(o.LocationsNext) {
-		return nil, false
-	}
-	return o.LocationsNext, true
-}
-
-// HasLocationsNext returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationExperimental) HasLocationsNext() bool {
-	if o != nil && !IsNil(o.LocationsNext) {
-		return true
-	}
-
-	return false
-}
-
-// SetLocationsNext gets a reference to the given bool and assigns it to the LocationsNext field.
-func (o *GetProfile200ResponseConfigurationExperimental) SetLocationsNext(v bool) {
-	o.LocationsNext = &v
 }
 
 // GetExternalCrawlingTask returns the ExternalCrawlingTask field value if set, zero value otherwise.
@@ -564,9 +531,6 @@ func (o GetProfile200ResponseConfigurationExperimental) ToMap() (map[string]inte
 	if !IsNil(o.AsmEnumerateCodeProjects) {
 		toSerialize["asm_enumerate_code_projects"] = o.AsmEnumerateCodeProjects
 	}
-	if !IsNil(o.LocationsNext) {
-		toSerialize["locations_next"] = o.LocationsNext
-	}
 	if !IsNil(o.ExternalCrawlingTask) {
 		toSerialize["external_crawling_task"] = o.ExternalCrawlingTask
 	}
@@ -619,7 +583,6 @@ func (o *GetProfile200ResponseConfigurationExperimental) UnmarshalJSON(data []by
 		delete(additionalProperties, "asm_technologies")
 		delete(additionalProperties, "asm_code_projects")
 		delete(additionalProperties, "asm_enumerate_code_projects")
-		delete(additionalProperties, "locations_next")
 		delete(additionalProperties, "external_crawling_task")
 		delete(additionalProperties, "xss_agent_model_alias")
 		delete(additionalProperties, "sqli_agent_model_alias")
