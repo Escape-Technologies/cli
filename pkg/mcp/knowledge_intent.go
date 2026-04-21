@@ -3,13 +3,11 @@ package mcp
 import "strings"
 
 // LinkTarget describes which surfaces the link-intent detector thinks the
-// question is about. Ported from
-// services/mcp-server/src/lanes/knowledge/link-intent.ts.
+// question is about.
 type LinkTarget string
 
 // LinkTarget* enumerate the surfaces the link-intent detector can route the
-// caller to. Mirrors the TS LinkTarget enum so behavior matches across both
-// MCP servers.
+// caller to.
 const (
 	LinkTargetDocs     LinkTarget = "docs"
 	LinkTargetPlatform LinkTarget = "platform"
