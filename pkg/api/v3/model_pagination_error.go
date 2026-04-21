@@ -18,17 +18,10 @@ import (
 // checks if the PaginationError type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PaginationError{}
 
-<<<<<<< HEAD:packages/cli/pkg/api/v3/model_pagination_error.go
 // PaginationError Returned when an invalid pagination cursor is supplied
 type PaginationError struct {
-	Message              ENUMINVALIDCURSOR `json:"message"`
-	Details              string            `json:"details"`
-=======
-// ListProfiles400Response struct for ListProfiles400Response
-type ListProfiles400Response struct {
 	Message ENUMINVALIDCURSOR `json:"message"`
 	Details string `json:"details"`
->>>>>>> d3ba35d609 (feat(public-api,cli): enrich profile extraAssets with signedUrl + isActive; add profiles get-schema/upload-schema):packages/cli/pkg/api/v3/model_list_profiles_400_response.go
 	AdditionalProperties map[string]interface{}
 }
 
@@ -101,13 +94,8 @@ func (o *PaginationError) SetDetails(v string) {
 	o.Details = v
 }
 
-<<<<<<< HEAD:packages/cli/pkg/api/v3/model_pagination_error.go
 func (o PaginationError) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
-=======
-func (o ListProfiles400Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
->>>>>>> d3ba35d609 (feat(public-api,cli): enrich profile extraAssets with signedUrl + isActive; add profiles get-schema/upload-schema):packages/cli/pkg/api/v3/model_list_profiles_400_response.go
 	if err != nil {
 		return []byte{}, err
 	}

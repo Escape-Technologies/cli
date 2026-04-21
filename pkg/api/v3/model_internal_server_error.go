@@ -18,17 +18,10 @@ import (
 // checks if the InternalServerError type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &InternalServerError{}
 
-<<<<<<< HEAD:packages/cli/pkg/api/v3/model_internal_server_error.go
 // InternalServerError Returned when the server fails to fulfil the request
 type InternalServerError struct {
-	Message              ENUMINTERNALSERVERERROR `json:"message"`
-	Details              string                  `json:"details"`
-=======
-// CreateAssetComment500Response struct for CreateAssetComment500Response
-type CreateAssetComment500Response struct {
 	Message ENUMINTERNALSERVERERROR `json:"message"`
 	Details string `json:"details"`
->>>>>>> d3ba35d609 (feat(public-api,cli): enrich profile extraAssets with signedUrl + isActive; add profiles get-schema/upload-schema):packages/cli/pkg/api/v3/model_create_asset_comment_500_response.go
 	AdditionalProperties map[string]interface{}
 }
 
@@ -101,13 +94,8 @@ func (o *InternalServerError) SetDetails(v string) {
 	o.Details = v
 }
 
-<<<<<<< HEAD:packages/cli/pkg/api/v3/model_internal_server_error.go
 func (o InternalServerError) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
-=======
-func (o CreateAssetComment500Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
->>>>>>> d3ba35d609 (feat(public-api,cli): enrich profile extraAssets with signedUrl + isActive; add profiles get-schema/upload-schema):packages/cli/pkg/api/v3/model_create_asset_comment_500_response.go
 	if err != nil {
 		return []byte{}, err
 	}

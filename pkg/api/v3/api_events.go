@@ -16,8 +16,8 @@ import (
 	"io"
 	"net/http"
 	"net/url"
-	"reflect"
 	"strings"
+	"reflect"
 )
 
 
@@ -152,22 +152,6 @@ func (a *EventsAPIService) GetEventExecute(r ApiGetEventRequest) (*GetEvent200Re
 }
 
 type ApiListEventsRequest struct {
-<<<<<<< HEAD
-	ctx            context.Context
-	ApiService     *EventsAPIService
-	cursor         *string
-	size           *int
-	sortType       *string
-	sortDirection  *string
-	search         *string
-	scanIds        *string
-	assetIds       *string
-	issueIds       *string
-	levels         *[]string
-	stages         *[]string
-	hasAttachments *string
-	attachments    *[]string
-=======
 	ctx context.Context
 	ApiService *EventsAPIService
 	cursor *string
@@ -178,11 +162,10 @@ type ApiListEventsRequest struct {
 	scanIds *string
 	assetIds *string
 	issueIds *string
-	levels *string
-	stages *string
+	levels *[]string
+	stages *[]string
 	hasAttachments *string
-	attachments *string
->>>>>>> d3ba35d609 (feat(public-api,cli): enrich profile extraAssets with signedUrl + isActive; add profiles get-schema/upload-schema)
+	attachments *[]string
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.

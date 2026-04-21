@@ -52,17 +52,12 @@ type GetIssue200Response struct {
 	Cvss *GetIssue200ResponseCvss `json:"cvss,omitempty"`
 	// Compliances associated with the issue
 	Compliances []GetIssue200ResponseCompliancesInner `json:"compliances,omitempty"`
-<<<<<<< HEAD
-	Links       IssueSummarizedLinks                  `json:"links"`
+	Links IssueSummarizedLinks `json:"links"`
 	// IDs of up to 5 events from the issue's last-seen scan, newest-first. Hydrate with GET /v3/events/:id for full payload (Exchange, etc.). Only populated by GET /v3/issues/:issueId. IDs are opaque strings (GraphQL `ID` scalars), not guaranteed UUIDs.
 	LatestEventIds []string `json:"latestEventIds,omitempty"`
 	// True when the last-seen scan has more than 5 events. Use GET /v3/events?issueIds=<id>&scanIds=<lastSeenScanId> for the full list.
 	LatestEventsTruncated *bool `json:"latestEventsTruncated,omitempty"`
-	AdditionalProperties  map[string]interface{}
-=======
-	Links IssueSummarizedLinks `json:"links"`
 	AdditionalProperties map[string]interface{}
->>>>>>> d3ba35d609 (feat(public-api,cli): enrich profile extraAssets with signedUrl + isActive; add profiles get-schema/upload-schema)
 }
 
 type _GetIssue200Response GetIssue200Response

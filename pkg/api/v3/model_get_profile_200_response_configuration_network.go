@@ -19,22 +19,12 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationNetwork{}
 
 // GetProfile200ResponseConfigurationNetwork struct for GetProfile200ResponseConfigurationNetwork
 type GetProfile200ResponseConfigurationNetwork struct {
-<<<<<<< HEAD
-	RequestTimeoutS      *float32            `json:"request_timeout_s,omitempty"`
-	RequestsPerSecond    *float32            `json:"requests_per_second,omitempty"`
-	CustomHeaders        map[string][]string `json:"custom_headers,omitempty"`
-	EscapeUser           *bool               `json:"escape_user,omitempty"`
-	SecEscapeUser        *bool               `json:"sec_escape_user,omitempty"`
-	ParallelRequests     *float32            `json:"parallel_requests,omitempty"`
-=======
 	RequestTimeoutS *float32 `json:"request_timeout_s,omitempty"`
 	RequestsPerSecond *float32 `json:"requests_per_second,omitempty"`
 	CustomHeaders map[string][]string `json:"custom_headers,omitempty"`
-	CancelUnhealthyScanAfter *float32 `json:"cancel_unhealthy_scan_after,omitempty"`
 	EscapeUser *bool `json:"escape_user,omitempty"`
 	SecEscapeUser *bool `json:"sec_escape_user,omitempty"`
 	ParallelRequests *float32 `json:"parallel_requests,omitempty"`
->>>>>>> d3ba35d609 (feat(public-api,cli): enrich profile extraAssets with signedUrl + isActive; add profiles get-schema/upload-schema)
 	AdditionalProperties map[string]interface{}
 }
 
