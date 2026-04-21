@@ -38,6 +38,7 @@ type GetProfile200ResponseConfigurationExperimental struct {
 	LoginPageBruteforceAgent       *bool                                                                          `json:"login_page_bruteforce_agent,omitempty"`
 	LlmSecurityTesting             *bool                                                                          `json:"llm_security_testing,omitempty"`
 	DastMultiAgentPentest          *bool                                                                          `json:"dast_multi_agent_pentest,omitempty"`
+	FeatureFlags                   []string                                                                       `json:"feature_flags,omitempty"`
 	AdditionalProperties           map[string]interface{}
 }
 
@@ -668,6 +669,38 @@ func (o *GetProfile200ResponseConfigurationExperimental) SetDastMultiAgentPentes
 	o.DastMultiAgentPentest = &v
 }
 
+// GetFeatureFlags returns the FeatureFlags field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationExperimental) GetFeatureFlags() []string {
+	if o == nil || IsNil(o.FeatureFlags) {
+		var ret []string
+		return ret
+	}
+	return o.FeatureFlags
+}
+
+// GetFeatureFlagsOk returns a tuple with the FeatureFlags field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationExperimental) GetFeatureFlagsOk() ([]string, bool) {
+	if o == nil || IsNil(o.FeatureFlags) {
+		return nil, false
+	}
+	return o.FeatureFlags, true
+}
+
+// HasFeatureFlags returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationExperimental) HasFeatureFlags() bool {
+	if o != nil && !IsNil(o.FeatureFlags) {
+		return true
+	}
+
+	return false
+}
+
+// SetFeatureFlags gets a reference to the given []string and assigns it to the FeatureFlags field.
+func (o *GetProfile200ResponseConfigurationExperimental) SetFeatureFlags(v []string) {
+	o.FeatureFlags = v
+}
+
 func (o GetProfile200ResponseConfigurationExperimental) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -735,6 +768,9 @@ func (o GetProfile200ResponseConfigurationExperimental) ToMap() (map[string]inte
 	if !IsNil(o.DastMultiAgentPentest) {
 		toSerialize["dast_multi_agent_pentest"] = o.DastMultiAgentPentest
 	}
+	if !IsNil(o.FeatureFlags) {
+		toSerialize["feature_flags"] = o.FeatureFlags
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -776,6 +812,7 @@ func (o *GetProfile200ResponseConfigurationExperimental) UnmarshalJSON(data []by
 		delete(additionalProperties, "login_page_bruteforce_agent")
 		delete(additionalProperties, "llm_security_testing")
 		delete(additionalProperties, "dast_multi_agent_pentest")
+		delete(additionalProperties, "feature_flags")
 		o.AdditionalProperties = additionalProperties
 	}
 
