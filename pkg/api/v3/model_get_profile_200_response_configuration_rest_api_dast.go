@@ -19,7 +19,6 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationRestApiDast{}
 
 // GetProfile200ResponseConfigurationRestApiDast struct for GetProfile200ResponseConfigurationRestApiDast
 type GetProfile200ResponseConfigurationRestApiDast struct {
-	CustomData               map[string]string                                                              `json:"custom_data,omitempty"`
 	SchemaS3Key              *string                                                                        `json:"schema_s3_key,omitempty"`
 	LocationId               *string                                                                        `json:"location_id,omitempty"`
 	Profile                  *ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESPROFILE          `json:"profile,omitempty"`
@@ -54,38 +53,6 @@ func NewGetProfile200ResponseConfigurationRestApiDast() *GetProfile200ResponseCo
 func NewGetProfile200ResponseConfigurationRestApiDastWithDefaults() *GetProfile200ResponseConfigurationRestApiDast {
 	this := GetProfile200ResponseConfigurationRestApiDast{}
 	return &this
-}
-
-// GetCustomData returns the CustomData field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationRestApiDast) GetCustomData() map[string]string {
-	if o == nil || IsNil(o.CustomData) {
-		var ret map[string]string
-		return ret
-	}
-	return o.CustomData
-}
-
-// GetCustomDataOk returns a tuple with the CustomData field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationRestApiDast) GetCustomDataOk() (map[string]string, bool) {
-	if o == nil || IsNil(o.CustomData) {
-		return map[string]string{}, false
-	}
-	return o.CustomData, true
-}
-
-// HasCustomData returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationRestApiDast) HasCustomData() bool {
-	if o != nil && !IsNil(o.CustomData) {
-		return true
-	}
-
-	return false
-}
-
-// SetCustomData gets a reference to the given map[string]string and assigns it to the CustomData field.
-func (o *GetProfile200ResponseConfigurationRestApiDast) SetCustomData(v map[string]string) {
-	o.CustomData = v
 }
 
 // GetSchemaS3Key returns the SchemaS3Key field value if set, zero value otherwise.
@@ -546,9 +513,6 @@ func (o GetProfile200ResponseConfigurationRestApiDast) MarshalJSON() ([]byte, er
 
 func (o GetProfile200ResponseConfigurationRestApiDast) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.CustomData) {
-		toSerialize["custom_data"] = o.CustomData
-	}
 	if !IsNil(o.SchemaS3Key) {
 		toSerialize["schema_s3_key"] = o.SchemaS3Key
 	}
@@ -613,7 +577,6 @@ func (o *GetProfile200ResponseConfigurationRestApiDast) UnmarshalJSON(data []byt
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "custom_data")
 		delete(additionalProperties, "schema_s3_key")
 		delete(additionalProperties, "location_id")
 		delete(additionalProperties, "profile")
