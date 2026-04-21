@@ -16,8 +16,8 @@ import (
 	"io"
 	"net/http"
 	"net/url"
-	"reflect"
 	"strings"
+	"reflect"
 )
 
 
@@ -3494,17 +3494,6 @@ func (a *AssetsAPIService) ListAssetActivitiesExecute(r ApiListAssetActivitiesRe
 }
 
 type ApiListAssetsRequest struct {
-<<<<<<< HEAD
-	ctx             context.Context
-	ApiService      *AssetsAPIService
-	cursor          *string
-	size            *int
-	sortType        *string
-	sortDirection   *string
-	search          *string
-	types           *[]string
-	statuses        *[]string
-=======
 	ctx context.Context
 	ApiService *AssetsAPIService
 	cursor *string
@@ -3512,9 +3501,8 @@ type ApiListAssetsRequest struct {
 	sortType *string
 	sortDirection *string
 	search *string
-	types *string
-	statuses *string
->>>>>>> d3ba35d609 (feat(public-api,cli): enrich profile extraAssets with signedUrl + isActive; add profiles get-schema/upload-schema)
+	types *[]string
+	statuses *[]string
 	manuallyCreated *string
 }
 

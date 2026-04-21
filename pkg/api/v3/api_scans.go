@@ -455,11 +455,7 @@ type ApiListScanTargetsRequest struct {
 	size *int
 	sortType *string
 	sortDirection *string
-<<<<<<< HEAD
-	types         *[]string
-=======
-	types *string
->>>>>>> d3ba35d609 (feat(public-api,cli): enrich profile extraAssets with signedUrl + isActive; add profiles get-schema/upload-schema)
+	types *[]string
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
@@ -662,27 +658,15 @@ type ApiListScansRequest struct {
 	size *int
 	sortType *string
 	sortDirection *string
-<<<<<<< HEAD
-	after         *string
-	before        *string
-	assetIds      *string
-	profileIds    *string
-	ignored       *string
-	initiator     *[]string
-	kinds         *[]string
-	status        *[]string
-	projectIds    *ListScansProjectIdsParameter
-=======
 	after *string
 	before *string
 	assetIds *string
 	profileIds *string
 	ignored *string
-	initiator *string
+	initiator *[]string
 	kinds *[]string
-	status *string
+	status *[]string
 	projectIds *ListScansProjectIdsParameter
->>>>>>> d3ba35d609 (feat(public-api,cli): enrich profile extraAssets with signedUrl + isActive; add profiles get-schema/upload-schema)
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.

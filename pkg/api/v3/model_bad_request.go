@@ -18,17 +18,10 @@ import (
 // checks if the BadRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &BadRequest{}
 
-<<<<<<< HEAD:packages/cli/pkg/api/v3/model_bad_request.go
 // BadRequest Returned when the request payload fails validation
 type BadRequest struct {
-	Message              ENUMBADREQUEST `json:"message"`
-	Details              string         `json:"details"`
-=======
-// UpdateProfile400Response struct for UpdateProfile400Response
-type UpdateProfile400Response struct {
 	Message ENUMBADREQUEST `json:"message"`
 	Details string `json:"details"`
->>>>>>> d3ba35d609 (feat(public-api,cli): enrich profile extraAssets with signedUrl + isActive; add profiles get-schema/upload-schema):packages/cli/pkg/api/v3/model_update_profile_400_response.go
 	AdditionalProperties map[string]interface{}
 }
 
@@ -101,13 +94,8 @@ func (o *BadRequest) SetDetails(v string) {
 	o.Details = v
 }
 
-<<<<<<< HEAD:packages/cli/pkg/api/v3/model_bad_request.go
 func (o BadRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
-=======
-func (o UpdateProfile400Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
->>>>>>> d3ba35d609 (feat(public-api,cli): enrich profile extraAssets with signedUrl + isActive; add profiles get-schema/upload-schema):packages/cli/pkg/api/v3/model_update_profile_400_response.go
 	if err != nil {
 		return []byte{}, err
 	}

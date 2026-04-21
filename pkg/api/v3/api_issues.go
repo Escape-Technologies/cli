@@ -866,22 +866,6 @@ type ApiListIssuesRequest struct {
 	size *int
 	sortType *string
 	sortDirection *string
-<<<<<<< HEAD
-	profileIds    *string
-	assetIds      *string
-	domains       *string
-	ids           *string
-	names         *ListIssuesNamesParameter
-	scanIds       *string
-	tagIds        *string
-	search        *string
-	jiraTicket    *string
-	risks         *[]string
-	assetClasses  *[]string
-	scannerKinds  *[]string
-	severities    *[]string
-	status        *[]string
-=======
 	profileIds *string
 	assetIds *string
 	domains *string
@@ -892,11 +876,10 @@ type ApiListIssuesRequest struct {
 	search *string
 	jiraTicket *string
 	risks *[]string
-	assetClasses *string
-	scannerKinds *string
-	severities *string
-	status *string
->>>>>>> d3ba35d609 (feat(public-api,cli): enrich profile extraAssets with signedUrl + isActive; add profiles get-schema/upload-schema)
+	assetClasses *[]string
+	scannerKinds *[]string
+	severities *[]string
+	status *[]string
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.

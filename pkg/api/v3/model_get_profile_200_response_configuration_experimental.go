@@ -19,29 +19,6 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationExperimental{}
 
 // GetProfile200ResponseConfigurationExperimental struct for GetProfile200ResponseConfigurationExperimental
 type GetProfile200ResponseConfigurationExperimental struct {
-<<<<<<< HEAD
-	BlstExplorationOnly            *bool                                                                          `json:"blst_exploration_only,omitempty"`
-	AgenticIdor                    *bool                                                                          `json:"agentic_idor,omitempty"`
-	BusinessLogicAgent             *bool                                                                          `json:"business_logic_agent,omitempty"`
-	HappyPathsRegressionTesting    []string                                                                       `json:"happy_paths_regression_testing,omitempty"`
-	RegressionTestingFileUploadIds []string                                                                       `json:"regression_testing_file_upload_ids,omitempty"`
-	AsmTechnologies                *bool                                                                          `json:"asm_technologies,omitempty"`
-	AsmCodeProjects                *bool                                                                          `json:"asm_code_projects,omitempty"`
-	AsmEnumerateCodeProjects       *bool                                                                          `json:"asm_enumerate_code_projects,omitempty"`
-	LocationsNext                  *bool                                                                          `json:"locations_next,omitempty"`
-	ExternalCrawlingTask           *bool                                                                          `json:"external_crawling_task,omitempty"`
-	XssAgentModelAlias             *ENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS `json:"xss_agent_model_alias,omitempty"`
-	SqliAgentModelAlias            *ENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS `json:"sqli_agent_model_alias,omitempty"`
-	AsmCveAgent                    *bool                                                                          `json:"asm_cve_agent,omitempty"`
-	LoginPageAgent                 *bool                                                                          `json:"login_page_agent,omitempty"`
-	JsAnalysis                     *bool                                                                          `json:"js_analysis,omitempty"`
-	ExtendedPortScan               *bool                                                                          `json:"extended_port_scan,omitempty"`
-	LoginPageBruteforceAgent       *bool                                                                          `json:"login_page_bruteforce_agent,omitempty"`
-	LlmSecurityTesting             *bool                                                                          `json:"llm_security_testing,omitempty"`
-	DastMultiAgentPentest          *bool                                                                          `json:"dast_multi_agent_pentest,omitempty"`
-	FeatureFlags                   []string                                                                       `json:"feature_flags,omitempty"`
-	AdditionalProperties           map[string]interface{}
-=======
 	BlstExplorationOnly *bool `json:"blst_exploration_only,omitempty"`
 	AgenticIdor *bool `json:"agentic_idor,omitempty"`
 	BusinessLogicAgent *bool `json:"business_logic_agent,omitempty"`
@@ -60,8 +37,9 @@ type GetProfile200ResponseConfigurationExperimental struct {
 	ExtendedPortScan *bool `json:"extended_port_scan,omitempty"`
 	LoginPageBruteforceAgent *bool `json:"login_page_bruteforce_agent,omitempty"`
 	LlmSecurityTesting *bool `json:"llm_security_testing,omitempty"`
+	DastMultiAgentPentest *bool `json:"dast_multi_agent_pentest,omitempty"`
+	FeatureFlags []string `json:"feature_flags,omitempty"`
 	AdditionalProperties map[string]interface{}
->>>>>>> d3ba35d609 (feat(public-api,cli): enrich profile extraAssets with signedUrl + isActive; add profiles get-schema/upload-schema)
 }
 
 type _GetProfile200ResponseConfigurationExperimental GetProfile200ResponseConfigurationExperimental

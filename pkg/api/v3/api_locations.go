@@ -16,8 +16,8 @@ import (
 	"io"
 	"net/http"
 	"net/url"
-	"reflect"
 	"strings"
+	"reflect"
 )
 
 
@@ -438,15 +438,9 @@ type ApiListLocationsRequest struct {
 	size *int
 	sortType *string
 	sortDirection *string
-<<<<<<< HEAD
-	search        *string
-	enabled       *string
-	type_         *[]string
-=======
 	search *string
 	enabled *string
-	type_ *string
->>>>>>> d3ba35d609 (feat(public-api,cli): enrich profile extraAssets with signedUrl + isActive; add profiles get-schema/upload-schema)
+	type_ *[]string
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
