@@ -51,9 +51,13 @@ type IssueDetailed struct {
 	Remediation *string                  `json:"remediation,omitempty"`
 	Cvss        *GetIssue200ResponseCvss `json:"cvss,omitempty"`
 	// Compliances associated with the issue
-	Compliances          []GetIssue200ResponseCompliancesInner `json:"compliances,omitempty"`
-	Links                IssueSummarizedLinks                  `json:"links"`
-	AdditionalProperties map[string]interface{}
+	Compliances []GetIssue200ResponseCompliancesInner `json:"compliances,omitempty"`
+	Links       IssueSummarizedLinks                  `json:"links"`
+	// IDs of up to 5 events from the issue's last-seen scan, newest-first. Hydrate with GET /v3/events/:id for full payload (Exchange, etc.). Only populated by GET /v3/issues/:issueId. IDs are opaque strings (GraphQL `ID` scalars), not guaranteed UUIDs.
+	LatestEventIds []string `json:"latestEventIds,omitempty"`
+	// True when the last-seen scan has more than 5 events. Use GET /v3/events?issueIds=<id>&scanIds=<lastSeenScanId> for the full list.
+	LatestEventsTruncated *bool `json:"latestEventsTruncated,omitempty"`
+	AdditionalProperties  map[string]interface{}
 }
 
 type _IssueDetailed IssueDetailed
@@ -631,6 +635,70 @@ func (o *IssueDetailed) SetLinks(v IssueSummarizedLinks) {
 	o.Links = v
 }
 
+// GetLatestEventIds returns the LatestEventIds field value if set, zero value otherwise.
+func (o *IssueDetailed) GetLatestEventIds() []string {
+	if o == nil || IsNil(o.LatestEventIds) {
+		var ret []string
+		return ret
+	}
+	return o.LatestEventIds
+}
+
+// GetLatestEventIdsOk returns a tuple with the LatestEventIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IssueDetailed) GetLatestEventIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.LatestEventIds) {
+		return nil, false
+	}
+	return o.LatestEventIds, true
+}
+
+// HasLatestEventIds returns a boolean if a field has been set.
+func (o *IssueDetailed) HasLatestEventIds() bool {
+	if o != nil && !IsNil(o.LatestEventIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetLatestEventIds gets a reference to the given []string and assigns it to the LatestEventIds field.
+func (o *IssueDetailed) SetLatestEventIds(v []string) {
+	o.LatestEventIds = v
+}
+
+// GetLatestEventsTruncated returns the LatestEventsTruncated field value if set, zero value otherwise.
+func (o *IssueDetailed) GetLatestEventsTruncated() bool {
+	if o == nil || IsNil(o.LatestEventsTruncated) {
+		var ret bool
+		return ret
+	}
+	return *o.LatestEventsTruncated
+}
+
+// GetLatestEventsTruncatedOk returns a tuple with the LatestEventsTruncated field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IssueDetailed) GetLatestEventsTruncatedOk() (*bool, bool) {
+	if o == nil || IsNil(o.LatestEventsTruncated) {
+		return nil, false
+	}
+	return o.LatestEventsTruncated, true
+}
+
+// HasLatestEventsTruncated returns a boolean if a field has been set.
+func (o *IssueDetailed) HasLatestEventsTruncated() bool {
+	if o != nil && !IsNil(o.LatestEventsTruncated) {
+		return true
+	}
+
+	return false
+}
+
+// SetLatestEventsTruncated gets a reference to the given bool and assigns it to the LatestEventsTruncated field.
+func (o *IssueDetailed) SetLatestEventsTruncated(v bool) {
+	o.LatestEventsTruncated = &v
+}
+
 func (o IssueDetailed) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -677,6 +745,12 @@ func (o IssueDetailed) ToMap() (map[string]interface{}, error) {
 		toSerialize["compliances"] = o.Compliances
 	}
 	toSerialize["links"] = o.Links
+	if !IsNil(o.LatestEventIds) {
+		toSerialize["latestEventIds"] = o.LatestEventIds
+	}
+	if !IsNil(o.LatestEventsTruncated) {
+		toSerialize["latestEventsTruncated"] = o.LatestEventsTruncated
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -751,6 +825,8 @@ func (o *IssueDetailed) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "cvss")
 		delete(additionalProperties, "compliances")
 		delete(additionalProperties, "links")
+		delete(additionalProperties, "latestEventIds")
+		delete(additionalProperties, "latestEventsTruncated")
 		o.AdditionalProperties = additionalProperties
 	}
 
