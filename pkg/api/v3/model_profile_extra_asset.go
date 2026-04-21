@@ -23,16 +23,16 @@ type ProfileExtraAsset struct {
 	// The id of the asset
 	Id string `json:"id"`
 	// The name of the asset
-	Name string `json:"name"`
-	Class ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS `json:"class"`
-	Type ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE `json:"type"`
+	Name   string                                                            `json:"name"`
+	Class  ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS  `json:"class"`
+	Type   ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE   `json:"type"`
 	Status ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS `json:"status"`
 	// The date and time the asset was created
 	CreatedAt string `json:"createdAt"`
 	// True when this asset's id equals the profile's resolved `schemaAssetId`. Callers can filter `class === 'SCHEMA' && isActive` to find the schema currently driving scans.
 	IsActive bool `json:"isActive"`
 	// Time-limited HTTPS URL to download the backing schema bytes. Non-null only for `class === \"SCHEMA\"` entries; null for other asset classes.
-	SignedUrl *string `json:"signedUrl,omitempty"`
+	SignedUrl            *string `json:"signedUrl,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -263,7 +263,7 @@ func (o *ProfileExtraAsset) SetSignedUrl(v string) {
 }
 
 func (o ProfileExtraAsset) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -309,10 +309,10 @@ func (o *ProfileExtraAsset) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -380,5 +380,3 @@ func (v *NullableProfileExtraAsset) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

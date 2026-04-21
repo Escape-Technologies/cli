@@ -19,22 +19,22 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationGraphqlApiDast{}
 
 // GetProfile200ResponseConfigurationGraphqlApiDast struct for GetProfile200ResponseConfigurationGraphqlApiDast
 type GetProfile200ResponseConfigurationGraphqlApiDast struct {
-	SchemaS3Key *string `json:"schema_s3_key,omitempty"`
-	AdditionalSchemaS3Keys []string `json:"additional_schema_s3_keys,omitempty"`
-	Url *string `json:"url,omitempty"`
-	LocationId *string `json:"location_id,omitempty"`
-	Profile *ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESPROFILE `json:"profile,omitempty"`
-	ExplorationDepth *ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESEXPLORATIONDEPTH `json:"exploration_depth,omitempty"`
-	ExploreWithAllUsers *bool `json:"explore_with_all_users,omitempty"`
-	CrossUserMemoryAllowlist []string `json:"cross_user_memory_allowlist,omitempty"`
-	Mode *ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE `json:"mode,omitempty"`
-	MaxDuration *float32 `json:"max_duration,omitempty"`
-	MaxGeneratedDepth *float32 `json:"max_generated_depth,omitempty"`
-	Hotstart []string `json:"hotstart,omitempty"`
-	HotstartOnly *bool `json:"hotstart_only,omitempty"`
-	Scope *GetProfile200ResponseConfigurationGraphqlApiDastScope `json:"scope,omitempty"`
-	InScopeOnly *bool `json:"in_scope_only,omitempty"`
-	AdditionalProperties map[string]interface{}
+	SchemaS3Key              *string                                                                        `json:"schema_s3_key,omitempty"`
+	AdditionalSchemaS3Keys   []string                                                                       `json:"additional_schema_s3_keys,omitempty"`
+	Url                      *string                                                                        `json:"url,omitempty"`
+	LocationId               *string                                                                        `json:"location_id,omitempty"`
+	Profile                  *ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESPROFILE          `json:"profile,omitempty"`
+	ExplorationDepth         *ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESEXPLORATIONDEPTH `json:"exploration_depth,omitempty"`
+	ExploreWithAllUsers      *bool                                                                          `json:"explore_with_all_users,omitempty"`
+	CrossUserMemoryAllowlist []string                                                                       `json:"cross_user_memory_allowlist,omitempty"`
+	Mode                     *ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE               `json:"mode,omitempty"`
+	MaxDuration              *float32                                                                       `json:"max_duration,omitempty"`
+	MaxGeneratedDepth        *float32                                                                       `json:"max_generated_depth,omitempty"`
+	Hotstart                 []string                                                                       `json:"hotstart,omitempty"`
+	HotstartOnly             *bool                                                                          `json:"hotstart_only,omitempty"`
+	Scope                    *GetProfile200ResponseConfigurationGraphqlApiDastScope                         `json:"scope,omitempty"`
+	InScopeOnly              *bool                                                                          `json:"in_scope_only,omitempty"`
+	AdditionalProperties     map[string]interface{}
 }
 
 type _GetProfile200ResponseConfigurationGraphqlApiDast GetProfile200ResponseConfigurationGraphqlApiDast
@@ -537,7 +537,7 @@ func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetInScopeOnly(v bool
 }
 
 func (o GetProfile200ResponseConfigurationGraphqlApiDast) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -669,5 +669,3 @@ func (v *NullableGetProfile200ResponseConfigurationGraphqlApiDast) UnmarshalJSON
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

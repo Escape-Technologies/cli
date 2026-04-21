@@ -19,13 +19,12 @@ import (
 	"strings"
 )
 
-
 // CustomRulesAPIService CustomRulesAPI service
 type CustomRulesAPIService service
 
 type ApiCreateCustomRuleRequest struct {
-	ctx context.Context
-	ApiService *CustomRulesAPIService
+	ctx                     context.Context
+	ApiService              *CustomRulesAPIService
 	createCustomRuleRequest *CreateCustomRuleRequest
 }
 
@@ -44,24 +43,25 @@ CreateCustomRule Create a custom rule
 
 Create a custom rule for the organization.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateCustomRuleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateCustomRuleRequest
 */
 func (a *CustomRulesAPIService) CreateCustomRule(ctx context.Context) ApiCreateCustomRuleRequest {
 	return ApiCreateCustomRuleRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return CreateCustomRule200Response
+//
+//	@return CreateCustomRule200Response
 func (a *CustomRulesAPIService) CreateCustomRuleExecute(r ApiCreateCustomRuleRequest) (*CreateCustomRule200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CreateCustomRule200Response
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CreateCustomRule200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomRulesAPIService.CreateCustomRule")
@@ -137,8 +137,8 @@ func (a *CustomRulesAPIService) CreateCustomRuleExecute(r ApiCreateCustomRuleReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -156,8 +156,8 @@ func (a *CustomRulesAPIService) CreateCustomRuleExecute(r ApiCreateCustomRuleReq
 }
 
 type ApiDeleteCustomRuleRequest struct {
-	ctx context.Context
-	ApiService *CustomRulesAPIService
+	ctx          context.Context
+	ApiService   *CustomRulesAPIService
 	customRuleId string
 }
 
@@ -170,26 +170,27 @@ DeleteCustomRule Delete a custom rule
 
 Delete a custom rule for the organization.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param customRuleId The ID of the custom rule to delete
- @return ApiDeleteCustomRuleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param customRuleId The ID of the custom rule to delete
+	@return ApiDeleteCustomRuleRequest
 */
 func (a *CustomRulesAPIService) DeleteCustomRule(ctx context.Context, customRuleId string) ApiDeleteCustomRuleRequest {
 	return ApiDeleteCustomRuleRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:   a,
+		ctx:          ctx,
 		customRuleId: customRuleId,
 	}
 }
 
 // Execute executes the request
-//  @return DeleteCustomRule200Response
+//
+//	@return DeleteCustomRule200Response
 func (a *CustomRulesAPIService) DeleteCustomRuleExecute(r ApiDeleteCustomRuleRequest) (*DeleteCustomRule200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DeleteCustomRule200Response
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DeleteCustomRule200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomRulesAPIService.DeleteCustomRule")
@@ -264,8 +265,8 @@ func (a *CustomRulesAPIService) DeleteCustomRuleExecute(r ApiDeleteCustomRuleReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -283,8 +284,8 @@ func (a *CustomRulesAPIService) DeleteCustomRuleExecute(r ApiDeleteCustomRuleReq
 }
 
 type ApiGetCustomRuleRequest struct {
-	ctx context.Context
-	ApiService *CustomRulesAPIService
+	ctx          context.Context
+	ApiService   *CustomRulesAPIService
 	customRuleId string
 }
 
@@ -297,26 +298,27 @@ GetCustomRule Get a custom rule
 
 Get a custom rule of the organization.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param customRuleId
- @return ApiGetCustomRuleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param customRuleId
+	@return ApiGetCustomRuleRequest
 */
 func (a *CustomRulesAPIService) GetCustomRule(ctx context.Context, customRuleId string) ApiGetCustomRuleRequest {
 	return ApiGetCustomRuleRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:   a,
+		ctx:          ctx,
 		customRuleId: customRuleId,
 	}
 }
 
 // Execute executes the request
-//  @return CreateCustomRule200Response
+//
+//	@return CreateCustomRule200Response
 func (a *CustomRulesAPIService) GetCustomRuleExecute(r ApiGetCustomRuleRequest) (*CreateCustomRule200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CreateCustomRule200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CreateCustomRule200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomRulesAPIService.GetCustomRule")
@@ -391,8 +393,8 @@ func (a *CustomRulesAPIService) GetCustomRuleExecute(r ApiGetCustomRuleRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -402,8 +404,8 @@ func (a *CustomRulesAPIService) GetCustomRuleExecute(r ApiGetCustomRuleRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -421,9 +423,9 @@ func (a *CustomRulesAPIService) GetCustomRuleExecute(r ApiGetCustomRuleRequest) 
 }
 
 type ApiListCustomRulesRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CustomRulesAPIService
-	context *string
+	context    *string
 }
 
 // Filter by custom rule context
@@ -441,24 +443,25 @@ ListCustomRules List custom rules
 
 List and search custom rules of the organization.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListCustomRulesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListCustomRulesRequest
 */
 func (a *CustomRulesAPIService) ListCustomRules(ctx context.Context) ApiListCustomRulesRequest {
 	return ApiListCustomRulesRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return []CustomRuleSummarized
+//
+//	@return []CustomRuleSummarized
 func (a *CustomRulesAPIService) ListCustomRulesExecute(r ApiListCustomRulesRequest) ([]CustomRuleSummarized, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []CustomRuleSummarized
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []CustomRuleSummarized
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomRulesAPIService.ListCustomRules")
@@ -535,8 +538,8 @@ func (a *CustomRulesAPIService) ListCustomRulesExecute(r ApiListCustomRulesReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -554,9 +557,9 @@ func (a *CustomRulesAPIService) ListCustomRulesExecute(r ApiListCustomRulesReque
 }
 
 type ApiUpdateCustomRuleRequest struct {
-	ctx context.Context
-	ApiService *CustomRulesAPIService
-	customRuleId string
+	ctx                     context.Context
+	ApiService              *CustomRulesAPIService
+	customRuleId            string
 	updateCustomRuleRequest *UpdateCustomRuleRequest
 }
 
@@ -575,26 +578,27 @@ UpdateCustomRule Update a custom rule
 
 Update a custom rule for the organization.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param customRuleId The ID of the custom rule to update
- @return ApiUpdateCustomRuleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param customRuleId The ID of the custom rule to update
+	@return ApiUpdateCustomRuleRequest
 */
 func (a *CustomRulesAPIService) UpdateCustomRule(ctx context.Context, customRuleId string) ApiUpdateCustomRuleRequest {
 	return ApiUpdateCustomRuleRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:   a,
+		ctx:          ctx,
 		customRuleId: customRuleId,
 	}
 }
 
 // Execute executes the request
-//  @return CreateCustomRule200Response
+//
+//	@return CreateCustomRule200Response
 func (a *CustomRulesAPIService) UpdateCustomRuleExecute(r ApiUpdateCustomRuleRequest) (*CreateCustomRule200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CreateCustomRule200Response
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CreateCustomRule200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomRulesAPIService.UpdateCustomRule")
@@ -671,8 +675,8 @@ func (a *CustomRulesAPIService) UpdateCustomRuleExecute(r ApiUpdateCustomRuleReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

@@ -18,7 +18,7 @@ import (
 
 // CustomRuleRule - struct for CustomRuleRule
 type CustomRuleRule struct {
-	CustomRuleRuleOneOf *CustomRuleRuleOneOf
+	CustomRuleRuleOneOf  *CustomRuleRuleOneOf
 	CustomRuleRuleOneOf1 *CustomRuleRuleOneOf1
 }
 
@@ -35,7 +35,6 @@ func CustomRuleRuleOneOf1AsCustomRuleRule(v *CustomRuleRuleOneOf1) CustomRuleRul
 		CustomRuleRuleOneOf1: v,
 	}
 }
-
 
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *CustomRuleRule) UnmarshalJSON(data []byte) error {
@@ -102,7 +101,7 @@ func (src CustomRuleRule) MarshalJSON() ([]byte, error) {
 }
 
 // Get the actual instance
-func (obj *CustomRuleRule) GetActualInstance() (interface{}) {
+func (obj *CustomRuleRule) GetActualInstance() interface{} {
 	if obj == nil {
 		return nil
 	}
@@ -119,7 +118,7 @@ func (obj *CustomRuleRule) GetActualInstance() (interface{}) {
 }
 
 // Get the actual instance value
-func (obj CustomRuleRule) GetActualInstanceValue() (interface{}) {
+func (obj CustomRuleRule) GetActualInstanceValue() interface{} {
 	if obj.CustomRuleRuleOneOf != nil {
 		return *obj.CustomRuleRuleOneOf
 	}
@@ -167,5 +166,3 @@ func (v *NullableCustomRuleRule) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
