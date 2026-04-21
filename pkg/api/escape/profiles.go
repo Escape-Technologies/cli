@@ -7,7 +7,6 @@ import (
 	"io"
 	"net/http"
 	"strings"
-	"time"
 
 	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
 )
@@ -218,16 +217,18 @@ func CreateSchemaAsset(ctx context.Context, temporaryObjectKey string, name stri
 
 // DownloadSignedURL streams the body of a pre-signed URL to the writer.
 // Used to download schema bytes after `GetProfile` returns a signedUrl.
-// The caller controls the timeout via ctx (typical schemas are small but the
-// signed-URL fetch is the one leg the generated v3 client does not cover).
-func DownloadSignedURL(ctx context.Context, signedURL string, dst io.Writer, timeout time.Duration) error {
+// The caller is the sole authority on deadlines: pass a ctx with the desired
+// deadline via context.WithTimeout / context.WithDeadline. We deliberately
+// don't set http.Client.Timeout here — stacking two independent timeout
+// mechanisms (ctx deadline + client timeout) produces confusing failure
+// modes where the shorter one wins silently.
+func DownloadSignedURL(ctx context.Context, signedURL string, dst io.Writer) error {
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, signedURL, nil)
 	if err != nil {
 		return fmt.Errorf("unable to build request: %w", err)
 	}
 
-	client := &http.Client{Timeout: timeout}
-	resp, err := client.Do(req)
+	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
 		return fmt.Errorf("unable to fetch signed url: %w", err)
 	}
