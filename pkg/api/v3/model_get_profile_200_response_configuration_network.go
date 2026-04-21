@@ -19,14 +19,13 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationNetwork{}
 
 // GetProfile200ResponseConfigurationNetwork struct for GetProfile200ResponseConfigurationNetwork
 type GetProfile200ResponseConfigurationNetwork struct {
-	RequestTimeoutS          *float32            `json:"request_timeout_s,omitempty"`
-	RequestsPerSecond        *float32            `json:"requests_per_second,omitempty"`
-	CustomHeaders            map[string][]string `json:"custom_headers,omitempty"`
-	CancelUnhealthyScanAfter *float32            `json:"cancel_unhealthy_scan_after,omitempty"`
-	EscapeUser               *bool               `json:"escape_user,omitempty"`
-	SecEscapeUser            *bool               `json:"sec_escape_user,omitempty"`
-	ParallelRequests         *float32            `json:"parallel_requests,omitempty"`
-	AdditionalProperties     map[string]interface{}
+	RequestTimeoutS      *float32            `json:"request_timeout_s,omitempty"`
+	RequestsPerSecond    *float32            `json:"requests_per_second,omitempty"`
+	CustomHeaders        map[string][]string `json:"custom_headers,omitempty"`
+	EscapeUser           *bool               `json:"escape_user,omitempty"`
+	SecEscapeUser        *bool               `json:"sec_escape_user,omitempty"`
+	ParallelRequests     *float32            `json:"parallel_requests,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetProfile200ResponseConfigurationNetwork GetProfile200ResponseConfigurationNetwork
@@ -144,38 +143,6 @@ func (o *GetProfile200ResponseConfigurationNetwork) SetCustomHeaders(v map[strin
 	o.CustomHeaders = v
 }
 
-// GetCancelUnhealthyScanAfter returns the CancelUnhealthyScanAfter field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationNetwork) GetCancelUnhealthyScanAfter() float32 {
-	if o == nil || IsNil(o.CancelUnhealthyScanAfter) {
-		var ret float32
-		return ret
-	}
-	return *o.CancelUnhealthyScanAfter
-}
-
-// GetCancelUnhealthyScanAfterOk returns a tuple with the CancelUnhealthyScanAfter field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationNetwork) GetCancelUnhealthyScanAfterOk() (*float32, bool) {
-	if o == nil || IsNil(o.CancelUnhealthyScanAfter) {
-		return nil, false
-	}
-	return o.CancelUnhealthyScanAfter, true
-}
-
-// HasCancelUnhealthyScanAfter returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationNetwork) HasCancelUnhealthyScanAfter() bool {
-	if o != nil && !IsNil(o.CancelUnhealthyScanAfter) {
-		return true
-	}
-
-	return false
-}
-
-// SetCancelUnhealthyScanAfter gets a reference to the given float32 and assigns it to the CancelUnhealthyScanAfter field.
-func (o *GetProfile200ResponseConfigurationNetwork) SetCancelUnhealthyScanAfter(v float32) {
-	o.CancelUnhealthyScanAfter = &v
-}
-
 // GetEscapeUser returns the EscapeUser field value if set, zero value otherwise.
 func (o *GetProfile200ResponseConfigurationNetwork) GetEscapeUser() bool {
 	if o == nil || IsNil(o.EscapeUser) {
@@ -291,9 +258,6 @@ func (o GetProfile200ResponseConfigurationNetwork) ToMap() (map[string]interface
 	if !IsNil(o.CustomHeaders) {
 		toSerialize["custom_headers"] = o.CustomHeaders
 	}
-	if !IsNil(o.CancelUnhealthyScanAfter) {
-		toSerialize["cancel_unhealthy_scan_after"] = o.CancelUnhealthyScanAfter
-	}
 	if !IsNil(o.EscapeUser) {
 		toSerialize["escape_user"] = o.EscapeUser
 	}
@@ -328,7 +292,6 @@ func (o *GetProfile200ResponseConfigurationNetwork) UnmarshalJSON(data []byte) (
 		delete(additionalProperties, "request_timeout_s")
 		delete(additionalProperties, "requests_per_second")
 		delete(additionalProperties, "custom_headers")
-		delete(additionalProperties, "cancel_unhealthy_scan_after")
 		delete(additionalProperties, "escape_user")
 		delete(additionalProperties, "sec_escape_user")
 		delete(additionalProperties, "parallel_requests")
