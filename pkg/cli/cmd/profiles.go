@@ -938,7 +938,7 @@ download in one shot.`,
 		}
 
 		if profileGetSchemaOutFile == "-" {
-			if err := escape.DownloadSignedURL(ctx, *schema.SignedUrl, os.Stdout, profileGetSchemaTimeout); err != nil {
+			if err := escape.DownloadSignedURL(ctx, *schema.SignedUrl, os.Stdout); err != nil {
 				return fmt.Errorf("failed to download schema bytes: %w", err)
 			}
 			return nil
@@ -963,7 +963,7 @@ download in one shot.`,
 			_ = os.Remove(tmpPath)
 		}
 
-		if err := escape.DownloadSignedURL(ctx, *schema.SignedUrl, tmp, profileGetSchemaTimeout); err != nil {
+		if err := escape.DownloadSignedURL(ctx, *schema.SignedUrl, tmp); err != nil {
 			cleanup()
 			return fmt.Errorf("failed to download schema bytes: %w", err)
 		}
