@@ -22,7 +22,6 @@ type GetProfile200ResponseConfigurationNetwork struct {
 	RequestTimeoutS      *float32            `json:"request_timeout_s,omitempty"`
 	RequestsPerSecond    *float32            `json:"requests_per_second,omitempty"`
 	CustomHeaders        map[string][]string `json:"custom_headers,omitempty"`
-	SecEscapeUser        *bool               `json:"sec_escape_user,omitempty"`
 	ParallelRequests     *float32            `json:"parallel_requests,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -142,38 +141,6 @@ func (o *GetProfile200ResponseConfigurationNetwork) SetCustomHeaders(v map[strin
 	o.CustomHeaders = v
 }
 
-// GetSecEscapeUser returns the SecEscapeUser field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationNetwork) GetSecEscapeUser() bool {
-	if o == nil || IsNil(o.SecEscapeUser) {
-		var ret bool
-		return ret
-	}
-	return *o.SecEscapeUser
-}
-
-// GetSecEscapeUserOk returns a tuple with the SecEscapeUser field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationNetwork) GetSecEscapeUserOk() (*bool, bool) {
-	if o == nil || IsNil(o.SecEscapeUser) {
-		return nil, false
-	}
-	return o.SecEscapeUser, true
-}
-
-// HasSecEscapeUser returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationNetwork) HasSecEscapeUser() bool {
-	if o != nil && !IsNil(o.SecEscapeUser) {
-		return true
-	}
-
-	return false
-}
-
-// SetSecEscapeUser gets a reference to the given bool and assigns it to the SecEscapeUser field.
-func (o *GetProfile200ResponseConfigurationNetwork) SetSecEscapeUser(v bool) {
-	o.SecEscapeUser = &v
-}
-
 // GetParallelRequests returns the ParallelRequests field value if set, zero value otherwise.
 func (o *GetProfile200ResponseConfigurationNetwork) GetParallelRequests() float32 {
 	if o == nil || IsNil(o.ParallelRequests) {
@@ -225,9 +192,6 @@ func (o GetProfile200ResponseConfigurationNetwork) ToMap() (map[string]interface
 	if !IsNil(o.CustomHeaders) {
 		toSerialize["custom_headers"] = o.CustomHeaders
 	}
-	if !IsNil(o.SecEscapeUser) {
-		toSerialize["sec_escape_user"] = o.SecEscapeUser
-	}
 	if !IsNil(o.ParallelRequests) {
 		toSerialize["parallel_requests"] = o.ParallelRequests
 	}
@@ -256,7 +220,6 @@ func (o *GetProfile200ResponseConfigurationNetwork) UnmarshalJSON(data []byte) (
 		delete(additionalProperties, "request_timeout_s")
 		delete(additionalProperties, "requests_per_second")
 		delete(additionalProperties, "custom_headers")
-		delete(additionalProperties, "sec_escape_user")
 		delete(additionalProperties, "parallel_requests")
 		o.AdditionalProperties = additionalProperties
 	}
