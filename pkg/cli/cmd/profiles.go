@@ -872,7 +872,7 @@ download in one shot.`,
   # Pick a specific (non-active) schema attached to the profile
   escape-cli profiles get-schema <profile-id> --schema-id <schema-id> -f spec.json
 
-  # Override timeout on the body fetch (default 10m)
+  # Override the end-to-end timeout (default 10m; bounds both API call and body fetch)
   escape-cli profiles get-schema <profile-id> -f big.json --timeout 30m`,
 	Args: cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
@@ -882,7 +882,14 @@ download in one shot.`,
 
 		profileID := args[0]
 
-		profile, err := escape.GetProfile(cmd.Context(), profileID)
+		// A single timeout bounds the entire command: the GetProfile API
+		// call (the generated v3 client uses http.DefaultClient with no
+		// timeout and can hang indefinitely behind a proxy) AND the
+		// subsequent S3 body fetch when -f is used.
+		ctx, cancel := context.WithTimeout(cmd.Context(), profileGetSchemaTimeout)
+		defer cancel()
+
+		profile, err := escape.GetProfile(ctx, profileID)
 		if err != nil || profile == nil {
 			return fmt.Errorf("unable to get profile %s: %w", profileID, err)
 		}
@@ -927,7 +934,7 @@ download in one shot.`,
 			dst = f
 		}
 
-		if err := escape.DownloadSignedURL(cmd.Context(), *schema.SignedUrl, dst, profileGetSchemaTimeout); err != nil {
+		if err := escape.DownloadSignedURL(ctx, *schema.SignedUrl, dst, profileGetSchemaTimeout); err != nil {
 			return err
 		}
 
@@ -1056,7 +1063,7 @@ func init() {
 	)
 	profileGetSchemaCmd.Flags().StringVar(&profileGetSchemaID, "schema-id", "", "specific schema asset ID to pick from extraAssets (default: active schema)")
 	profileGetSchemaCmd.Flags().StringVarP(&profileGetSchemaOutFile, "file", "f", "", "write schema bytes to file path (- for stdout); omit to print JSON metadata")
-	profileGetSchemaCmd.Flags().DurationVar(&profileGetSchemaTimeout, "timeout", 10*time.Minute, "timeout for the signed-URL body fetch when -f is used")
+	profileGetSchemaCmd.Flags().DurationVar(&profileGetSchemaTimeout, "timeout", 10*time.Minute, "end-to-end timeout bounding both the GetProfile API call and the signed-URL body fetch (when -f is used)")
 
 	profileUploadSchemaCmd.Flags().StringVar(&profileUploadSchemaFile, "file", "", "path to the schema file (reads stdin when omitted)")
 	profileUploadSchemaCmd.Flags().StringVar(&profileUploadSchemaName, "name", "", "optional name for the created schema asset")
