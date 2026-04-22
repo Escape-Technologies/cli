@@ -148,7 +148,6 @@ type GetProfile200ResponseConfigurationSecurityTests struct {
 	ExposedJwt                             *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"exposed_jwt,omitempty"`
 	JwtSignCheck                           *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"jwt_sign_check,omitempty"`
 	LeakingAuthentication                  *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"leaking_authentication,omitempty"`
-	LlmDetected                            *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"llm_detected,omitempty"`
 	LlmPromptInjection                     *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"llm_prompt_injection,omitempty"`
 	LlmSystemPromptLeak                    *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"llm_system_prompt_leak,omitempty"`
 	LlmInsecureOutputHandling              *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"llm_insecure_output_handling,omitempty"`
@@ -4456,38 +4455,6 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) HasLeakingAuthenticati
 // SetLeakingAuthentication gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the LeakingAuthentication field.
 func (o *GetProfile200ResponseConfigurationSecurityTests) SetLeakingAuthentication(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
 	o.LeakingAuthentication = &v
-}
-
-// GetLlmDetected returns the LlmDetected field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationSecurityTests) GetLlmDetected() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
-	if o == nil || IsNil(o.LlmDetected) {
-		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
-		return ret
-	}
-	return *o.LlmDetected
-}
-
-// GetLlmDetectedOk returns a tuple with the LlmDetected field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationSecurityTests) GetLlmDetectedOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
-	if o == nil || IsNil(o.LlmDetected) {
-		return nil, false
-	}
-	return o.LlmDetected, true
-}
-
-// HasLlmDetected returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationSecurityTests) HasLlmDetected() bool {
-	if o != nil && !IsNil(o.LlmDetected) {
-		return true
-	}
-
-	return false
-}
-
-// SetLlmDetected gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the LlmDetected field.
-func (o *GetProfile200ResponseConfigurationSecurityTests) SetLlmDetected(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
-	o.LlmDetected = &v
 }
 
 // GetLlmPromptInjection returns the LlmPromptInjection field value if set, zero value otherwise.
@@ -9975,9 +9942,6 @@ func (o GetProfile200ResponseConfigurationSecurityTests) ToMap() (map[string]int
 	if !IsNil(o.LeakingAuthentication) {
 		toSerialize["leaking_authentication"] = o.LeakingAuthentication
 	}
-	if !IsNil(o.LlmDetected) {
-		toSerialize["llm_detected"] = o.LlmDetected
-	}
 	if !IsNil(o.LlmPromptInjection) {
 		toSerialize["llm_prompt_injection"] = o.LlmPromptInjection
 	}
@@ -10606,7 +10570,6 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) UnmarshalJSON(data []b
 		delete(additionalProperties, "exposed_jwt")
 		delete(additionalProperties, "jwt_sign_check")
 		delete(additionalProperties, "leaking_authentication")
-		delete(additionalProperties, "llm_detected")
 		delete(additionalProperties, "llm_prompt_injection")
 		delete(additionalProperties, "llm_system_prompt_leak")
 		delete(additionalProperties, "llm_insecure_output_handling")
