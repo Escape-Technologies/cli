@@ -27,8 +27,8 @@ const (
 	platformDeepRoutePenalty   = 0.15
 )
 
-// PlatformRoute is a single entry of the curated platform-URL catalog.
-// Ported from services/mcp-server/src/generated/platform-routes.generated.ts.
+// PlatformRoute is a single entry of the curated platform-URL catalog
+// generated from the SvelteKit (app) routes by services/frontend/scripts/generate-platform-routes.ts.
 type PlatformRoute struct {
 	Path   string   `json:"path"`
 	Tokens []string `json:"tokens"`
