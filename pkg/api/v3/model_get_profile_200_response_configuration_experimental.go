@@ -21,7 +21,6 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationExperimental{}
 type GetProfile200ResponseConfigurationExperimental struct {
 	BlstExplorationOnly            *bool                                                                          `json:"blst_exploration_only,omitempty"`
 	AgenticIdor                    *bool                                                                          `json:"agentic_idor,omitempty"`
-	BusinessLogicAgent             *bool                                                                          `json:"business_logic_agent,omitempty"`
 	HappyPathsRegressionTesting    []string                                                                       `json:"happy_paths_regression_testing,omitempty"`
 	RegressionTestingFileUploadIds []string                                                                       `json:"regression_testing_file_upload_ids,omitempty"`
 	AsmTechnologies                *bool                                                                          `json:"asm_technologies,omitempty"`
@@ -123,38 +122,6 @@ func (o *GetProfile200ResponseConfigurationExperimental) HasAgenticIdor() bool {
 // SetAgenticIdor gets a reference to the given bool and assigns it to the AgenticIdor field.
 func (o *GetProfile200ResponseConfigurationExperimental) SetAgenticIdor(v bool) {
 	o.AgenticIdor = &v
-}
-
-// GetBusinessLogicAgent returns the BusinessLogicAgent field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationExperimental) GetBusinessLogicAgent() bool {
-	if o == nil || IsNil(o.BusinessLogicAgent) {
-		var ret bool
-		return ret
-	}
-	return *o.BusinessLogicAgent
-}
-
-// GetBusinessLogicAgentOk returns a tuple with the BusinessLogicAgent field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationExperimental) GetBusinessLogicAgentOk() (*bool, bool) {
-	if o == nil || IsNil(o.BusinessLogicAgent) {
-		return nil, false
-	}
-	return o.BusinessLogicAgent, true
-}
-
-// HasBusinessLogicAgent returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationExperimental) HasBusinessLogicAgent() bool {
-	if o != nil && !IsNil(o.BusinessLogicAgent) {
-		return true
-	}
-
-	return false
-}
-
-// SetBusinessLogicAgent gets a reference to the given bool and assigns it to the BusinessLogicAgent field.
-func (o *GetProfile200ResponseConfigurationExperimental) SetBusinessLogicAgent(v bool) {
-	o.BusinessLogicAgent = &v
 }
 
 // GetHappyPathsRegressionTesting returns the HappyPathsRegressionTesting field value if set, zero value otherwise.
@@ -717,9 +684,6 @@ func (o GetProfile200ResponseConfigurationExperimental) ToMap() (map[string]inte
 	if !IsNil(o.AgenticIdor) {
 		toSerialize["agentic_idor"] = o.AgenticIdor
 	}
-	if !IsNil(o.BusinessLogicAgent) {
-		toSerialize["business_logic_agent"] = o.BusinessLogicAgent
-	}
 	if !IsNil(o.HappyPathsRegressionTesting) {
 		toSerialize["happy_paths_regression_testing"] = o.HappyPathsRegressionTesting
 	}
@@ -795,7 +759,6 @@ func (o *GetProfile200ResponseConfigurationExperimental) UnmarshalJSON(data []by
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "blst_exploration_only")
 		delete(additionalProperties, "agentic_idor")
-		delete(additionalProperties, "business_logic_agent")
 		delete(additionalProperties, "happy_paths_regression_testing")
 		delete(additionalProperties, "regression_testing_file_upload_ids")
 		delete(additionalProperties, "asm_technologies")
