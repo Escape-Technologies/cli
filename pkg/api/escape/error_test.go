@@ -1,6 +1,7 @@
 package escape
 
 import (
+	"errors"
 	"fmt"
 	"testing"
 	"unsafe"
@@ -11,64 +12,56 @@ import (
 func TestHumanizeAPIErrorBodyExtractsBadRequest(t *testing.T) {
 	t.Parallel()
 	got := humanizeAPIErrorBody([]byte(`{"message":"Bad Request","details":"severities.0: Invalid enum value"}`))
-	if got == nil {
-		t.Fatal("expected error, got nil")
-	}
 	const want = "Bad Request: severities.0: Invalid enum value"
-	if got.Error() != want {
-		t.Fatalf("expected %q, got %q", want, got.Error())
+	if got != want {
+		t.Fatalf("expected %q, got %q", want, got)
 	}
 }
 
 func TestHumanizeAPIErrorBodyExtractsInvalidCursor(t *testing.T) {
 	t.Parallel()
 	got := humanizeAPIErrorBody([]byte(`{"message":"Invalid cursor","details":"cursor expired"}`))
-	if got == nil {
-		t.Fatal("expected error, got nil")
-	}
 	const want = "Invalid cursor: cursor expired"
-	if got.Error() != want {
-		t.Fatalf("expected %q, got %q", want, got.Error())
+	if got != want {
+		t.Fatalf("expected %q, got %q", want, got)
 	}
 }
 
 func TestHumanizeAPIErrorBodyMessageOnly(t *testing.T) {
 	t.Parallel()
-	got := humanizeAPIErrorBody([]byte(`{"message":"Not Found"}`))
-	if got == nil || got.Error() != "Not Found" {
-		t.Fatalf("expected just message, got %v", got)
+	if got := humanizeAPIErrorBody([]byte(`{"message":"Not Found"}`)); got != "Not Found" {
+		t.Fatalf("expected just message, got %q", got)
 	}
 }
 
 func TestHumanizeAPIErrorBodyDetailsOnly(t *testing.T) {
 	t.Parallel()
-	got := humanizeAPIErrorBody([]byte(`{"details":"raw details"}`))
-	if got == nil || got.Error() != "raw details" {
-		t.Fatalf("expected just details, got %v", got)
+	if got := humanizeAPIErrorBody([]byte(`{"details":"raw details"}`)); got != "raw details" {
+		t.Fatalf("expected just details, got %q", got)
 	}
 }
 
-func TestHumanizeAPIErrorBodyReturnsNilOnEmpty(t *testing.T) {
+func TestHumanizeAPIErrorBodyReturnsEmptyOnEmpty(t *testing.T) {
 	t.Parallel()
-	if got := humanizeAPIErrorBody(nil); got != nil {
-		t.Fatalf("expected nil for nil body, got %v", got)
+	if got := humanizeAPIErrorBody(nil); got != "" {
+		t.Fatalf("expected empty for nil body, got %q", got)
 	}
-	if got := humanizeAPIErrorBody([]byte("")); got != nil {
-		t.Fatalf("expected nil for empty body, got %v", got)
-	}
-}
-
-func TestHumanizeAPIErrorBodyReturnsNilOnUnparseable(t *testing.T) {
-	t.Parallel()
-	if got := humanizeAPIErrorBody([]byte("not json")); got != nil {
-		t.Fatalf("expected nil for non-json body, got %v", got)
+	if got := humanizeAPIErrorBody([]byte("")); got != "" {
+		t.Fatalf("expected empty for empty body, got %q", got)
 	}
 }
 
-func TestHumanizeAPIErrorBodyReturnsNilOnUnknownShape(t *testing.T) {
+func TestHumanizeAPIErrorBodyReturnsEmptyOnUnparseable(t *testing.T) {
 	t.Parallel()
-	if got := humanizeAPIErrorBody([]byte(`{"foo":"bar"}`)); got != nil {
-		t.Fatalf("expected nil for unknown body shape, got %v", got)
+	if got := humanizeAPIErrorBody([]byte("not json")); got != "" {
+		t.Fatalf("expected empty for non-json body, got %q", got)
+	}
+}
+
+func TestHumanizeAPIErrorBodyReturnsEmptyOnUnknownShape(t *testing.T) {
+	t.Parallel()
+	if got := humanizeAPIErrorBody([]byte(`{"foo":"bar"}`)); got != "" {
+		t.Fatalf("expected empty for unknown body shape, got %q", got)
 	}
 }
 
@@ -143,6 +136,21 @@ func TestHumanizeAPIErrorReturnsOriginalOnEmptyBody(t *testing.T) {
 	apiErr := newTestGenericOpenAPIError(nil)
 	if got := humanizeAPIError(apiErr); got != error(apiErr) {
 		t.Fatalf("expected pass-through of original error, got %v", got)
+	}
+}
+
+// TestHumanizeAPIErrorPreservesChain ensures that callers like
+// extractConflict can still walk the wrapped error and reach the original
+// *v3.GenericOpenAPIError. Regression: a previous implementation returned a
+// detached errors.New(...), breaking UpsertLocation's conflict recovery.
+func TestHumanizeAPIErrorPreservesChain(t *testing.T) {
+	t.Parallel()
+	apiErr := newTestGenericOpenAPIError([]byte(`{"message":"Bad Request","details":"x"}`))
+	wrapped := fmt.Errorf("api error: %w", apiErr)
+	humanized := humanizeAPIError(wrapped)
+	var unwrapped *v3.GenericOpenAPIError
+	if !errors.As(humanized, &unwrapped) || unwrapped != apiErr {
+		t.Fatalf("expected errors.As to reach the original *v3.GenericOpenAPIError, got %#v", humanized)
 	}
 }
 
