@@ -137,13 +137,13 @@ func DeleteLocation(ctx context.Context, id string) error {
 
 // UpsertLocation Creates or updates a location
 func UpsertLocation(ctx context.Context, name, sshPublicKey string) (string, error) {
-	id, err := CreateLocation(ctx, name, sshPublicKey)
-	if err == nil {
+	id, createErr := CreateLocation(ctx, name, sshPublicKey)
+	if createErr == nil {
 		return id, nil
 	}
-	id, err = extractConflict(err)
-	if err != nil {
-		return "", fmt.Errorf("unable to extract conflict: %w", err)
+	id, extractErr := extractConflict(createErr)
+	if extractErr != nil {
+		return "", createErr
 	}
 	return id, UpdateLocation(ctx, id, &name, &sshPublicKey, nil)
 }
