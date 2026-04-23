@@ -4,6 +4,7 @@ go 1.25.9
 
 require (
 	github.com/Escape-Technologies/go-socks5 v1.0.0
+	github.com/go-jose/go-jose/v4 v4.1.4
 	github.com/mark3labs/mcp-go v0.48.0
 	github.com/miekg/dns v1.1.66
 	github.com/sirupsen/logrus v1.9.3

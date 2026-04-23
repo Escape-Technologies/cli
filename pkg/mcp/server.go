@@ -4,9 +4,11 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"log/slog"
 	"net/http"
 	"os"
 	"strconv"
+	"strings"
 	"time"
 
 	mcpserver "github.com/mark3labs/mcp-go/server"
@@ -32,6 +34,14 @@ type ServerOptions struct {
 	// Classifier is an optional ranker used when IntentMode == IntentModeOn.
 	// If nil while IntentModeOn, the server behaves as IntentModeCompactOnly.
 	Classifier Classifier
+
+	// OAuth options. When IssuerURL and ResourceURL are both empty the
+	// server skips OAuth wiring and keeps the legacy X-ESCAPE-API-KEY
+	// behavior (useful for locally-run CLI MCP). In prod, both are set.
+	IssuerURL           string
+	ResourceURL         string
+	OAuthPrivateKeyPath string
+	ExtraRedirectHosts  []string
 }
 
 // Server is the embedded MCP server that exposes CLI commands over HTTP.
@@ -85,13 +95,40 @@ func (s *Server) Serve(ctx context.Context) error {
 		Specs:      s.options.Tools,
 	})
 
+	var oauth *oauthHandlers
+	if s.options.IssuerURL != "" || s.options.ResourceURL != "" {
+		handlers, err := newOAuthHandlers(oauthConfig{
+			IssuerURL:           s.options.IssuerURL,
+			ResourceURL:         s.options.ResourceURL,
+			PublicAPIURL:        s.options.PublicAPIURL,
+			OAuthPrivateKeyPath: s.options.OAuthPrivateKeyPath,
+			ExtraRedirectHosts:  s.options.ExtraRedirectHosts,
+		})
+		if err != nil {
+			return fmt.Errorf("initialize oauth handlers: %w", err)
+		}
+		oauth = handlers
+		if s.options.OAuthPrivateKeyPath == "" {
+			slog.WarnContext(
+				ctx,
+				"oauth: using ephemeral RSA keypair (no --oauth-private-key); tokens minted before restart become unredeemable",
+			)
+		}
+	}
+
 	mainMux := http.NewServeMux()
-	mainMux.Handle("/mcp", interceptedMCP)
+	mainMux.Handle("/mcp", wrapWithAuthMiddleware(interceptedMCP, oauth))
 	mainMux.HandleFunc("/health", healthHandler)
+	if oauth != nil {
+		mainMux.HandleFunc("/.well-known/oauth-protected-resource", oauth.ServePRM)
+		mainMux.HandleFunc("/oauth/mcp/jwks", oauth.ServeJWKS)
+		mainMux.HandleFunc("/oauth/mcp/token", oauth.ServeToken)
+	}
 
 	httpServer := &http.Server{
-		Addr:    fmt.Sprintf(":%d", s.options.Port),
-		Handler: mainMux,
+		Addr:              fmt.Sprintf(":%d", s.options.Port),
+		Handler:           mainMux,
+		ReadHeaderTimeout: 10 * time.Second, //nolint:mnd
 	}
 
 	var healthServer *http.Server
@@ -100,8 +137,9 @@ func (s *Server) Serve(ctx context.Context) error {
 		healthMux := http.NewServeMux()
 		healthMux.HandleFunc("/health", healthHandler)
 		healthServer = &http.Server{
-			Addr:    fmt.Sprintf(":%d", healthPort),
-			Handler: healthMux,
+			Addr:              fmt.Sprintf(":%d", healthPort),
+			Handler:           healthMux,
+			ReadHeaderTimeout: 10 * time.Second, //nolint:mnd
 		}
 	}
 
@@ -142,13 +180,70 @@ func (s *Server) Serve(ctx context.Context) error {
 	return fmt.Errorf("mcp http server: %w", err)
 }
 
+// wrapWithAuthMiddleware wraps the MCP handler with:
+//  1. auth_method telemetry (see auth.go AuthMethod).
+//  2. a requireValidAuth gate when OAuth is enabled — absent creds AND
+//     revoked/invalid creds both produce 401 + WWW-Authenticate so MCP
+//     clients re-run discovery. When OAuth is disabled (locally-run CLI)
+//     only telemetry is added; the downstream handler surfaces auth
+//     errors via its existing JSON-RPC path.
+func wrapWithAuthMiddleware(next http.Handler, oauth *oauthHandlers) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
+		// InjectAuthContext has already run via the mcp-go HTTPContextFunc,
+		// so the method+key are already available in context. Read them
+		// directly from headers here as well because the streamable
+		// handler constructs its own context internally and this HTTP
+		// middleware runs earlier.
+		authCtx := InjectAuthContext(req.Context(), req)
+		req = req.WithContext(authCtx)
+
+		method := authMethodFromContext(authCtx)
+		slog.InfoContext(req.Context(), "mcp.request", "auth_method", string(method))
+
+		if oauth != nil {
+			apiKey := apiKeyFromRequest(req)
+			if apiKey == "" {
+				oauth.WriteUnauthorized(w, "invalid_token", "missing credentials")
+				return
+			}
+			if !oauth.ValidateAPIKey(apiKey) {
+				oauth.WriteUnauthorized(w, "invalid_token", "revoked or invalid api key")
+				return
+			}
+		}
+
+		next.ServeHTTP(w, req)
+	})
+}
+
+// authMethodFromContext returns the method classification recorded by
+// InjectAuthContext, or AuthMethodNone if the context is empty.
+func authMethodFromContext(ctx context.Context) AuthMethod {
+	raw := ctx.Value(authContextKey{})
+	auth, ok := raw.(Auth)
+	if !ok {
+		return AuthMethodNone
+	}
+	return auth.Method
+}
+
+// apiKeyFromRequest extracts the api key from headers in the same order
+// as InjectAuthContext, without requiring the context value (so the
+// middleware can gate before handing off to the MCP streamable handler).
+func apiKeyFromRequest(req *http.Request) string {
+	if key := strings.TrimSpace(req.Header.Get("X-ESCAPE-API-KEY")); key != "" {
+		return key
+	}
+	return apiKeyFromAuthorization(strings.TrimSpace(req.Header.Get("Authorization")))
+}
+
 func parseHealthCheckPort(mainPort int) int {
 	raw := os.Getenv(healthCheckPortEnv)
 	if raw == "" {
 		return 0
 	}
 	port, err := strconv.Atoi(raw)
-	if err != nil || port <= 0 || port > 65535 || port == mainPort {
+	if err != nil || port <= 0 || port > 65535 || port == mainPort { //nolint:mnd
 		return 0
 	}
 	return port
