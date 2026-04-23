@@ -15,8 +15,14 @@ import (
 
 const defaultMCPServePort = 8080
 
-var mcpServePort int
-var mcpServePublicAPIURL string
+var (
+	mcpServePort                    int
+	mcpServePublicAPIURL            string
+	mcpServeOAuthIssuerURL          string
+	mcpServeOAuthResourceURL        string
+	mcpServeOAuthPrivateKey         string
+	mcpServeOAuthExtraRedirectHosts []string
+)
 
 var mcpCmd = &cobra.Command{
 	Use:    "mcp",
@@ -48,12 +54,16 @@ var mcpServeCmd = &cobra.Command{
 		}
 
 		server := climcp.NewServer(climcp.ServerOptions{
-			Version:      version.GetVersion().DisplayVersion(),
-			Port:         mcpServePort,
-			PublicAPIURL: resolveMCPPublicAPIURL(),
-			Tools:        toolSpecs,
-			IntentMode:   mode,
-			Classifier:   classifier,
+			Version:             version.GetVersion().DisplayVersion(),
+			Port:                mcpServePort,
+			PublicAPIURL:        resolveMCPPublicAPIURL(),
+			Tools:               toolSpecs,
+			IntentMode:          mode,
+			Classifier:          classifier,
+			IssuerURL:           mcpServeOAuthIssuerURL,
+			ResourceURL:         mcpServeOAuthResourceURL,
+			OAuthPrivateKeyPath: mcpServeOAuthPrivateKey,
+			ExtraRedirectHosts:  mcpServeOAuthExtraRedirectHosts,
 		})
 
 		return server.Serve(cmd.Context())
@@ -67,6 +77,30 @@ func init() {
 		"public-api-url",
 		"",
 		"public API base URL (defaults to ESCAPE_API_URL)",
+	)
+	mcpServeCmd.Flags().StringVar(
+		&mcpServeOAuthIssuerURL,
+		"oauth-issuer-url",
+		"",
+		"OAuth 2.1 issuer (e.g. https://app.escape.tech); empty disables the OAuth flow",
+	)
+	mcpServeCmd.Flags().StringVar(
+		&mcpServeOAuthResourceURL,
+		"oauth-resource-url",
+		"",
+		"OAuth protected resource URL (e.g. https://mcp.escape.tech/mcp); empty disables the OAuth flow",
+	)
+	mcpServeCmd.Flags().StringVar(
+		&mcpServeOAuthPrivateKey,
+		"oauth-private-key",
+		"",
+		"path to the RSA private key PEM used to decrypt JWE authorization codes; generated at the path if missing, or ephemeral when empty",
+	)
+	mcpServeCmd.Flags().StringSliceVar(
+		&mcpServeOAuthExtraRedirectHosts,
+		"oauth-extra-redirect-hosts",
+		nil,
+		"extra HTTPS redirect_uri hosts appended to the hardcoded allowlist (for staging/QA clients)",
 	)
 	mcpCmd.AddCommand(mcpServeCmd)
 	rootCmd.AddCommand(mcpCmd)
