@@ -1,6 +1,7 @@
 package mcp
 
 import (
+	"context"
 	"crypto"
 	"crypto/rand"
 	"crypto/rsa"
@@ -33,7 +34,14 @@ const (
 	oauthAccessTokenTTL    = 31536000         // 1 year (seconds) — real expiry is api-key revocation
 	oauthClientID          = "escape-mcp-public"
 	oauthCodeChallengeAlg  = "S256"
-	jwksCacheFilePerm      = 0o600
+	// oauthKeyDirPerm is the mode for the directory that holds the OAuth
+	// RSA private key PEM (u=rwx, g=-, o=-).
+	oauthKeyDirPerm        os.FileMode = 0o700
+	// oauthKeyFilePerm matches the sensitive-file convention for secrets
+	// at rest (u=rw, g=-, o=-).
+	oauthKeyFilePerm os.FileMode = 0o600
+	// jwksCacheFilePerm kept for backwards-compat with external writers.
+	jwksCacheFilePerm      = oauthKeyFilePerm
 	validationCacheTTL     = 60 * time.Second
 	upstreamValidationPath = "/v3/me"
 )
@@ -283,8 +291,9 @@ func (h *oauthHandlers) WriteUnauthorized(w http.ResponseWriter, errorCode, desc
 
 // ValidateAPIKey hits the upstream API's /v3/me to check the key is
 // active (not revoked). Cached per-hash for validationCacheTTL.
-// Returns true if the key is valid.
-func (h *oauthHandlers) ValidateAPIKey(apiKey string) bool {
+// Returns true if the key is valid. Takes a context so upstream
+// validation inherits the caller's timeout / cancellation.
+func (h *oauthHandlers) ValidateAPIKey(ctx context.Context, apiKey string) bool {
 	if apiKey == "" {
 		return false
 	}
@@ -312,7 +321,12 @@ func (h *oauthHandlers) ValidateAPIKey(apiKey string) bool {
 		return true
 	}
 
-	req, err := http.NewRequest(http.MethodGet, h.publicAPIURL+upstreamValidationPath, http.NoBody)
+	req, err := http.NewRequestWithContext(
+		ctx,
+		http.MethodGet,
+		h.publicAPIURL+upstreamValidationPath,
+		http.NoBody,
+	)
 	if err != nil {
 		return false
 	}
@@ -325,7 +339,9 @@ func (h *oauthHandlers) ValidateAPIKey(apiKey string) bool {
 	}
 	defer func() { _ = resp.Body.Close() }()
 
-	if resp.StatusCode >= 200 && resp.StatusCode < 300 { //nolint:mnd
+	const httpOKFloor = 200
+	const httpOKCeil = 300
+	if resp.StatusCode >= httpOKFloor && resp.StatusCode < httpOKCeil {
 		h.validationCacheMu.Lock()
 		h.validationCache[cacheKey] = now + int64(validationCacheTTL.Seconds())
 		h.validationCacheMu.Unlock()
@@ -413,7 +429,11 @@ func (h *oauthHandlers) EncryptCodeForTest(payload oauthCodePayload) (string, er
 	if err != nil {
 		return "", fmt.Errorf("encrypt payload: %w", err)
 	}
-	return object.CompactSerialize()
+	serialized, err := object.CompactSerialize()
+	if err != nil {
+		return "", fmt.Errorf("serialize jwe: %w", err)
+	}
+	return serialized, nil
 }
 
 // verifyPKCE validates the code_verifier against an S256 code_challenge.
@@ -439,7 +459,11 @@ func loadOrGenerateKey(path string) (*rsa.PrivateKey, error) {
 		// Development / ad-hoc mode: generate an ephemeral key. Tokens
 		// minted before a restart become unredeemable, which is fine for
 		// dev — the authorize flow is interactive and short-lived.
-		return rsa.GenerateKey(rand.Reader, oauthKeyBits)
+		key, err := rsa.GenerateKey(rand.Reader, oauthKeyBits)
+		if err != nil {
+			return nil, fmt.Errorf("generate ephemeral rsa key: %w", err)
+		}
+		return key, nil
 	}
 	data, err := os.ReadFile(path)
 	if err != nil {
@@ -483,13 +507,13 @@ func loadOrGenerateKey(path string) (*rsa.PrivateKey, error) {
 
 func writePrivateKeyPEM(path string, key *rsa.PrivateKey) error {
 	if dir := filepath.Dir(path); dir != "" && dir != "." {
-		if err := os.MkdirAll(dir, 0o700); err != nil {
+		if err := os.MkdirAll(dir, oauthKeyDirPerm); err != nil {
 			return fmt.Errorf("mkdir key dir: %w", err)
 		}
 	}
 	der := x509.MarshalPKCS1PrivateKey(key)
 	block := &pem.Block{Type: "RSA PRIVATE KEY", Bytes: der}
-	file, err := os.OpenFile(path, os.O_WRONLY|os.O_CREATE|os.O_EXCL, jwksCacheFilePerm)
+	file, err := os.OpenFile(path, os.O_WRONLY|os.O_CREATE|os.O_EXCL, oauthKeyFilePerm)
 	if err != nil {
 		return fmt.Errorf("open key file: %w", err)
 	}
@@ -614,7 +638,11 @@ func (a *redirectAllowlist) allow(raw string) bool {
 	if scheme != "http" && scheme != "https" {
 		return false
 	}
-	host := strings.ToLower(u.Hostname())
+	// net/url.Hostname() already strips brackets from IPv6 literals in
+	// Go ≥1.5, but normalize defensively so the matcher stays identical
+	// in shape to the TS/Node peer (where URL.hostname *does* preserve
+	// brackets).
+	host := stripBrackets(strings.ToLower(u.Hostname()))
 	if host == "" {
 		return false
 	}
@@ -648,6 +676,13 @@ func (a *redirectAllowlist) allow(raw string) bool {
 		}
 	}
 	return false
+}
+
+func stripBrackets(host string) string {
+	if len(host) >= 2 && host[0] == '[' && host[len(host)-1] == ']' { //nolint:mnd
+		return host[1 : len(host)-1]
+	}
+	return host
 }
 
 // IsLoopbackHost is a small helper exposed for tests.

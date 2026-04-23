@@ -60,7 +60,12 @@ func InjectAuthContext(ctx context.Context, req *http.Request) context.Context {
 	switch {
 	case headerAPIKey != "":
 		auth.APIKey = headerAPIKey
-		auth.Authorization = rawAuthorization
+		// Drop the Authorization header even when X-ESCAPE-API-KEY wins:
+		// executor.go forwards Auth.Authorization as ESCAPE_AUTHORIZATION,
+		// and env/key.go prefers that over ESCAPE_API_KEY, so preserving
+		// rawAuthorization here would let a stale `Bearer <token>` still
+		// reach the backend as a JWT and 401 every tool call.
+		auth.Authorization = ""
 		auth.Method = AuthMethodAPIKeyHeader
 	case rawAuthorization != "":
 		scheme, token := splitAuthorization(rawAuthorization)
@@ -100,11 +105,15 @@ func AuthFromContext(ctx context.Context) (Auth, error) {
 	return auth, nil
 }
 
+// authorizationParts is the number of space-separated parts expected in a
+// well-formed Authorization header (scheme + token).
+const authorizationParts = 2
+
 // splitAuthorization returns the lowercase scheme and trimmed token from
 // a raw Authorization header. Returns ("", "") on malformed input.
 func splitAuthorization(authorization string) (scheme, token string) {
-	parts := strings.SplitN(authorization, " ", 2) //nolint:mnd
-	if len(parts) != 2 {
+	parts := strings.SplitN(authorization, " ", authorizationParts)
+	if len(parts) != authorizationParts {
 		return "", ""
 	}
 	return strings.ToLower(strings.TrimSpace(parts[0])), strings.TrimSpace(parts[1])

@@ -103,9 +103,10 @@ func TestInjectAuthContextBearerCaseInsensitive(t *testing.T) {
 
 // TestInjectAuthContextXEscapeAPIKeyTakesPrecedenceOverBearer documents the
 // explicit precedence rule: when both headers are present, X-ESCAPE-API-KEY
-// wins and the Authorization header is preserved (as received) for any
-// downstream caller that wants it. Method is classified by the winning
-// credential source.
+// wins AND the losing Authorization header is dropped. If we kept the raw
+// Bearer header around, executor.go would forward it as
+// ESCAPE_AUTHORIZATION and env/key.go would prefer that over the winning
+// API key, so a mixed-header request would still 401 the backend.
 func TestInjectAuthContextXEscapeAPIKeyTakesPrecedenceOverBearer(t *testing.T) {
 	t.Parallel()
 
@@ -119,6 +120,12 @@ func TestInjectAuthContextXEscapeAPIKeyTakesPrecedenceOverBearer(t *testing.T) {
 
 	if auth.APIKey != "from-header" {
 		t.Fatalf("expected X-ESCAPE-API-KEY to win, got %q", auth.APIKey)
+	}
+	if auth.Authorization != "" {
+		t.Fatalf(
+			"expected losing Authorization to be cleared to prevent leak into child CLI, got %q",
+			auth.Authorization,
+		)
 	}
 	if auth.Method != AuthMethodAPIKeyHeader {
 		t.Fatalf("expected method %q, got %q", AuthMethodAPIKeyHeader, auth.Method)

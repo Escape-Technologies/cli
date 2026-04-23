@@ -190,15 +190,14 @@ func (s *Server) Serve(ctx context.Context) error {
 func wrapWithAuthMiddleware(next http.Handler, oauth *oauthHandlers) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
 		// InjectAuthContext has already run via the mcp-go HTTPContextFunc,
-		// so the method+key are already available in context. Read them
-		// directly from headers here as well because the streamable
-		// handler constructs its own context internally and this HTTP
-		// middleware runs earlier.
-		authCtx := InjectAuthContext(req.Context(), req)
-		req = req.WithContext(authCtx)
+		// so the method+key are already available in context. Re-derive
+		// here as well because the streamable handler constructs its own
+		// context internally and this HTTP middleware runs earlier.
+		ctx := InjectAuthContext(req.Context(), req)
+		req = req.WithContext(ctx)
 
-		method := authMethodFromContext(authCtx)
-		slog.InfoContext(req.Context(), "mcp.request", "auth_method", string(method))
+		method := authMethodFromContext(ctx)
+		slog.InfoContext(ctx, "mcp.request", "auth_method", string(method))
 
 		if oauth != nil {
 			apiKey := apiKeyFromRequest(req)
@@ -206,7 +205,7 @@ func wrapWithAuthMiddleware(next http.Handler, oauth *oauthHandlers) http.Handle
 				oauth.WriteUnauthorized(w, "invalid_token", "missing credentials")
 				return
 			}
-			if !oauth.ValidateAPIKey(apiKey) {
+			if !oauth.ValidateAPIKey(ctx, apiKey) {
 				oauth.WriteUnauthorized(w, "invalid_token", "revoked or invalid api key")
 				return
 			}
