@@ -117,11 +117,20 @@ func (s *Server) Serve(ctx context.Context) error {
 	}
 
 	mainMux := http.NewServeMux()
-	mainMux.Handle("/mcp", wrapWithAuthMiddleware(interceptedMCP, oauth))
+	// wrapWithCORS wraps the /mcp handler. Claude Desktop and Cowork (and
+	// any future browser-based MCP client) send an OPTIONS preflight before
+	// the actual POST. Without CORS headers the browser silently drops the
+	// request and reports "Couldn't reach the MCP server". We allow the
+	// same set of origins that the OAuth allowlist permits; the pre-flight
+	// does not require credentials, so `Access-Control-Allow-Credentials`
+	// is intentionally omitted here.
+	// CORS must wrap auth: OPTIONS preflights carry no credentials and
+	// must receive CORS headers (status 204) without triggering a 401.
+	mainMux.Handle("/mcp", wrapWithCORS(wrapWithAuthMiddleware(interceptedMCP, oauth)))
 	mainMux.HandleFunc("/health", healthHandler)
 	if oauth != nil {
-		mainMux.HandleFunc("/.well-known/oauth-protected-resource", oauth.ServePRM)
-		mainMux.HandleFunc("/oauth/mcp/jwks", oauth.ServeJWKS)
+		mainMux.Handle("/.well-known/oauth-protected-resource", wrapWithCORS(http.HandlerFunc(oauth.ServePRM)))
+		mainMux.Handle("/oauth/mcp/jwks", wrapWithCORS(http.HandlerFunc(oauth.ServeJWKS)))
 		mainMux.HandleFunc("/oauth/mcp/token", oauth.ServeToken)
 	}
 
@@ -224,6 +233,31 @@ func authMethodFromContext(ctx context.Context) AuthMethod {
 		return AuthMethodNone
 	}
 	return auth.Method
+}
+
+// wrapWithCORS adds the CORS headers required by browser-based MCP clients
+// (Claude Desktop, Cowork) so OPTIONS preflights don't silently drop the
+// request and produce "Couldn't reach the MCP server" errors. We reflect
+// the origin from the request rather than a hardcoded list to avoid
+// maintenance — the actual API-key auth gates the sensitive operations;
+// CORS here only controls which origins the browser allows to read
+// responses, not who can mint tokens.
+func wrapWithCORS(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
+		origin := req.Header.Get("Origin")
+		if origin != "" {
+			w.Header().Set("Access-Control-Allow-Origin", origin)
+			w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS, DELETE")
+			w.Header().Set("Access-Control-Allow-Headers",
+				"Authorization, Content-Type, Mcp-Session-Id, Accept")
+			w.Header().Set("Vary", "Origin")
+		}
+		if req.Method == http.MethodOptions {
+			w.WriteHeader(http.StatusNoContent)
+			return
+		}
+		next.ServeHTTP(w, req)
+	})
 }
 
 // apiKeyFromRequest extracts the api key from headers in the same order
