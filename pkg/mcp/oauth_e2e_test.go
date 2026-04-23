@@ -1,30 +1,65 @@
 package mcp
 
 import (
+	"context"
 	"encoding/json"
 	"io"
 	"net/http"
 	"net/http/httptest"
 	"net/url"
 	"strings"
+	"sync"
 	"testing"
 	"time"
 )
 
-// TestOAuthEndToEnd exercises the full handshake against the MCP server
-// mux. Proves: 401 discovery, token exchange with cache headers, Bearer
-// auth accepted at /mcp AFTER normalization (no leak into child env),
-// revoked keys also trigger 401, and replay is rejected.
-func TestOAuthEndToEnd(t *testing.T) {
-	t.Parallel()
+// observedUpstream captures the Authorization header seen by the upstream
+// stub. httptest runs handlers on separate goroutines, so writes MUST be
+// synchronized with the test goroutine's reads — otherwise `go test -race`
+// flags it and the assertion can be flaky.
+type observedUpstream struct {
+	mu               sync.Mutex
+	lastAuthHeader   string
+	seenMCPHandlerAt Auth
+}
+
+func (o *observedUpstream) recordUpstream(header string) {
+	o.mu.Lock()
+	o.lastAuthHeader = header
+	o.mu.Unlock()
+}
+
+func (o *observedUpstream) recordMCPHandler(auth Auth) {
+	o.mu.Lock()
+	o.seenMCPHandlerAt = auth
+	o.mu.Unlock()
+}
+
+func (o *observedUpstream) snapshot() (string, Auth) {
+	o.mu.Lock()
+	defer o.mu.Unlock()
+	return o.lastAuthHeader, o.seenMCPHandlerAt
+}
+
+// e2eFixture holds the live httptest.Server + helpers used by each
+// subtest. Extracted so TestOAuthEndToEnd itself stays under the
+// cyclomatic complexity limit.
+type e2eFixture struct {
+	t          *testing.T
+	server     *httptest.Server
+	oauth      *oauthHandlers
+	validKey   string
+	observed   *observedUpstream
+}
+
+func newE2EFixture(t *testing.T) *e2eFixture {
+	t.Helper()
 
 	const validAPIKey = "valid-api-key-12345"
+	observed := &observedUpstream{}
 
-	// Upstream API stub. Validates keys via /v3/me and captures the
-	// Authorization header so we can assert the Bearer-normalization fix.
-	var lastAuthHeaderSeen string
 	upstream := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		lastAuthHeaderSeen = r.Header.Get("Authorization")
+		observed.recordUpstream(r.Header.Get("Authorization"))
 		if r.URL.Path != upstreamValidationPath {
 			http.NotFound(w, r)
 			return
@@ -36,9 +71,8 @@ func TestOAuthEndToEnd(t *testing.T) {
 		}
 		w.WriteHeader(http.StatusUnauthorized)
 	}))
-	defer upstream.Close()
+	t.Cleanup(upstream.Close)
 
-	// Build the OAuth handlers pointed at the upstream stub.
 	oauth, err := newOAuthHandlers(oauthConfig{
 		IssuerURL:    "https://app.test",
 		ResourceURL:  "https://mcp.test/mcp",
@@ -48,11 +82,9 @@ func TestOAuthEndToEnd(t *testing.T) {
 		t.Fatalf("build oauth: %v", err)
 	}
 
-	// Stub /mcp handler that records the Auth struct it saw.
-	var seenAuth Auth
 	mcpEcho := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		auth, _ := AuthFromContext(InjectAuthContext(r.Context(), r))
-		seenAuth = auth
+		observed.recordMCPHandler(auth)
 		w.WriteHeader(http.StatusOK)
 		_, _ = w.Write([]byte(`{"ok":true}`))
 	})
@@ -64,80 +96,67 @@ func TestOAuthEndToEnd(t *testing.T) {
 	mux.HandleFunc("/oauth/mcp/token", oauth.ServeToken)
 
 	server := httptest.NewServer(mux)
-	defer server.Close()
+	t.Cleanup(server.Close)
 
-	// 1. POST /mcp without creds → 401 + WWW-Authenticate + PRM URL at origin root.
-	t.Run("unauthenticated_returns_401_with_discovery", func(t *testing.T) {
-		resp, err := http.Post(server.URL+"/mcp", "application/json", strings.NewReader(`{}`))
-		if err != nil {
-			t.Fatalf("post: %v", err)
-		}
-		defer drain(resp.Body)
-		if resp.StatusCode != http.StatusUnauthorized {
-			t.Fatalf("expected 401, got %d", resp.StatusCode)
-		}
-		wwwAuth := resp.Header.Get("WWW-Authenticate")
-		// The PRM URL advertised must be at the origin root, not under /mcp.
-		if !strings.Contains(wwwAuth, "/.well-known/oauth-protected-resource") {
-			t.Fatalf("PRM URL missing from WWW-Authenticate: %q", wwwAuth)
-		}
-		if strings.Contains(wwwAuth, "/mcp/.well-known/") {
-			t.Fatalf("PRM URL must NOT be under /mcp: %q", wwwAuth)
-		}
-	})
+	return &e2eFixture{
+		t:        t,
+		server:   server,
+		oauth:    oauth,
+		validKey: validAPIKey,
+		observed: observed,
+	}
+}
 
-	// 2. POST /mcp with an invalid/revoked key → 401 + WWW-Authenticate.
-	// Regression for reviewer's point: revoked keys must also trigger discovery.
-	t.Run("invalid_key_also_returns_401_discovery", func(t *testing.T) {
-		req, _ := http.NewRequest(http.MethodPost, server.URL+"/mcp", strings.NewReader(`{}`))
-		req.Header.Set("Authorization", "Bearer revoked-key")
-		resp, err := http.DefaultClient.Do(req)
-		if err != nil {
-			t.Fatalf("post: %v", err)
-		}
-		defer drain(resp.Body)
-		if resp.StatusCode != http.StatusUnauthorized {
-			t.Fatalf("expected 401, got %d", resp.StatusCode)
-		}
-		if resp.Header.Get("WWW-Authenticate") == "" {
-			t.Fatalf("missing WWW-Authenticate")
-		}
-	})
+func (f *e2eFixture) post(path, contentType, body string, headers map[string]string) *http.Response {
+	f.t.Helper()
+	req, err := http.NewRequestWithContext(
+		context.Background(),
+		http.MethodPost,
+		f.server.URL+path,
+		strings.NewReader(body),
+	)
+	if err != nil {
+		f.t.Fatalf("build request: %v", err)
+	}
+	if contentType != "" {
+		req.Header.Set("Content-Type", contentType)
+	}
+	for k, v := range headers {
+		req.Header.Set(k, v)
+	}
+	resp, err := http.DefaultClient.Do(req)
+	if err != nil {
+		f.t.Fatalf("post %s: %v", path, err)
+	}
+	return resp
+}
 
-	// 3. GET /.well-known/oauth-protected-resource returns PRM JSON.
-	t.Run("prm_endpoint", func(t *testing.T) {
-		resp, err := http.Get(server.URL + "/.well-known/oauth-protected-resource")
-		if err != nil {
-			t.Fatalf("get: %v", err)
-		}
-		defer drain(resp.Body)
-		if resp.StatusCode != http.StatusOK {
-			t.Fatalf("expected 200, got %d", resp.StatusCode)
-		}
-		var doc map[string]any
-		_ = json.NewDecoder(resp.Body).Decode(&doc)
-		if doc["resource"] != "https://mcp.test/mcp" {
-			t.Fatalf("unexpected resource: %v", doc["resource"])
-		}
-	})
+func (f *e2eFixture) get(path string) *http.Response {
+	f.t.Helper()
+	req, err := http.NewRequestWithContext(context.Background(), http.MethodGet, f.server.URL+path, http.NoBody)
+	if err != nil {
+		f.t.Fatalf("build request: %v", err)
+	}
+	resp, err := http.DefaultClient.Do(req)
+	if err != nil {
+		f.t.Fatalf("get %s: %v", path, err)
+	}
+	return resp
+}
 
-	// 4. GET /oauth/mcp/jwks parses.
-	t.Run("jwks_endpoint", func(t *testing.T) {
-		resp, err := http.Get(server.URL + "/oauth/mcp/jwks")
-		if err != nil {
-			t.Fatalf("get: %v", err)
-		}
-		defer drain(resp.Body)
-		if resp.StatusCode != http.StatusOK {
-			t.Fatalf("expected 200, got %d", resp.StatusCode)
-		}
-	})
+// TestOAuthEndToEnd exercises the full handshake against the MCP server
+// mux. Proves: 401 discovery, token exchange with cache headers, Bearer
+// auth accepted at /mcp AFTER normalization (no leak into child env),
+// revoked keys also trigger 401, and replay is rejected.
+func TestOAuthEndToEnd(t *testing.T) {
+	t.Parallel()
 
-	// 5. Mint a JWE in-test with a valid api key, exchange it at /oauth/mcp/token,
-	//    assert cache headers + expires_in=1y + access_token matches the embedded key.
+	f := newE2EFixture(t)
 	verifier, challenge := pkcePair(t)
-	jwe, err := oauth.EncryptCodeForTest(oauthCodePayload{
-		APIKey:              validAPIKey,
+
+	// Pre-mint a valid JWE now so per-subtest complexity stays low.
+	jwe, err := f.oauth.EncryptCodeForTest(oauthCodePayload{
+		APIKey:              f.validKey,
 		CodeChallenge:       challenge,
 		CodeChallengeMethod: oauthCodeChallengeAlg,
 		ClientID:            oauthClientID,
@@ -158,50 +177,64 @@ func TestOAuthEndToEnd(t *testing.T) {
 		"client_id":     {oauthClientID},
 	}
 
-	t.Run("token_exchange_returns_cache_headers", func(t *testing.T) {
-		resp, err := http.PostForm(server.URL+"/oauth/mcp/token", tokenForm)
-		if err != nil {
-			t.Fatalf("post: %v", err)
-		}
+	t.Run("unauthenticated_returns_401_with_discovery", func(t *testing.T) {
+		resp := f.post("/mcp", "application/json", `{}`, nil) //nolint:bodyclose // drained below
+		defer drain(resp.Body)
+		assertStatusAndDiscoveryHeader(t, resp, http.StatusUnauthorized)
+	})
+
+	t.Run("invalid_key_also_returns_401_discovery", func(t *testing.T) {
+		resp := f.post("/mcp", "application/json", `{}`, map[string]string{ //nolint:bodyclose // drained below
+			"Authorization": "Bearer revoked-key",
+		})
+		defer drain(resp.Body)
+		assertStatusAndDiscoveryHeader(t, resp, http.StatusUnauthorized)
+	})
+
+	t.Run("prm_endpoint", func(t *testing.T) {
+		resp := f.get("/.well-known/oauth-protected-resource") //nolint:bodyclose // drained below
 		defer drain(resp.Body)
 		if resp.StatusCode != http.StatusOK {
-			body, _ := io.ReadAll(resp.Body)
-			t.Fatalf("expected 200, got %d body=%s", resp.StatusCode, body)
+			t.Fatalf("expected 200, got %d", resp.StatusCode)
 		}
-		if resp.Header.Get("Cache-Control") != "no-store" {
-			t.Fatalf("missing Cache-Control: %q", resp.Header.Get("Cache-Control"))
-		}
-		if resp.Header.Get("Pragma") != "no-cache" {
-			t.Fatalf("missing Pragma: %q", resp.Header.Get("Pragma"))
-		}
-		var body map[string]any
-		_ = json.NewDecoder(resp.Body).Decode(&body)
-		if body["access_token"] != validAPIKey {
-			t.Fatalf("unexpected access_token: %v", body["access_token"])
-		}
-		if v, ok := body["expires_in"].(float64); !ok || int64(v) != 31536000 {
-			t.Fatalf("unexpected expires_in: %v", body["expires_in"])
+		var doc map[string]any
+		_ = json.NewDecoder(resp.Body).Decode(&doc)
+		if doc["resource"] != "https://mcp.test/mcp" {
+			t.Fatalf("unexpected resource: %v", doc["resource"])
 		}
 	})
 
-	// 6. POST /mcp with the Bearer token → 200, handler-observed Auth has
-	//    APIKey set and Authorization cleared (Bearer normalization). The
-	//    upstream API also saw `Key <key>` (not `Bearer ...`), preventing
-	//    JWT-verify 401 at the backend.
-	t.Run("bearer_accepted_and_normalized", func(t *testing.T) {
-		req, _ := http.NewRequest(http.MethodPost, server.URL+"/mcp", strings.NewReader(`{}`))
-		req.Header.Set("Authorization", "Bearer "+validAPIKey)
-		resp, err := http.DefaultClient.Do(req)
-		if err != nil {
-			t.Fatalf("post: %v", err)
+	t.Run("jwks_endpoint", func(t *testing.T) {
+		resp := f.get("/oauth/mcp/jwks") //nolint:bodyclose // drained below
+		defer drain(resp.Body)
+		if resp.StatusCode != http.StatusOK {
+			t.Fatalf("expected 200, got %d", resp.StatusCode)
 		}
+	})
+
+	t.Run("token_exchange_returns_cache_headers", func(t *testing.T) {
+		resp := f.post( //nolint:bodyclose // drained below
+			"/oauth/mcp/token",
+			"application/x-www-form-urlencoded",
+			tokenForm.Encode(),
+			nil,
+		)
+		defer drain(resp.Body)
+		assertTokenResponse(t, resp, f.validKey)
+	})
+
+	t.Run("bearer_accepted_and_normalized", func(t *testing.T) {
+		resp := f.post("/mcp", "application/json", `{}`, map[string]string{ //nolint:bodyclose // drained below
+			"Authorization": "Bearer " + f.validKey,
+		})
 		defer drain(resp.Body)
 		if resp.StatusCode != http.StatusOK {
 			body, _ := io.ReadAll(resp.Body)
 			t.Fatalf("expected 200, got %d body=%s", resp.StatusCode, body)
 		}
-		if seenAuth.APIKey != validAPIKey {
-			t.Fatalf("expected handler to see APIKey %q, got %q", validAPIKey, seenAuth.APIKey)
+		lastAuth, seenAuth := f.observed.snapshot()
+		if seenAuth.APIKey != f.validKey {
+			t.Fatalf("expected handler to see APIKey %q, got %q", f.validKey, seenAuth.APIKey)
 		}
 		if seenAuth.Authorization != "" {
 			t.Fatalf(
@@ -212,18 +245,18 @@ func TestOAuthEndToEnd(t *testing.T) {
 		if seenAuth.Method != AuthMethodAuthorizationBearer {
 			t.Fatalf("expected bearer method, got %q", seenAuth.Method)
 		}
-		// Upstream validation hit should have used "Key <apikey>".
-		if !strings.HasPrefix(lastAuthHeaderSeen, "Key ") {
-			t.Fatalf("upstream saw unexpected authorization: %q", lastAuthHeaderSeen)
+		if !strings.HasPrefix(lastAuth, "Key ") {
+			t.Fatalf("upstream saw unexpected authorization: %q", lastAuth)
 		}
 	})
 
-	// 7. Replay: re-POST the same code → 400 invalid_grant.
 	t.Run("replay_rejected", func(t *testing.T) {
-		resp, err := http.PostForm(server.URL+"/oauth/mcp/token", tokenForm)
-		if err != nil {
-			t.Fatalf("post: %v", err)
-		}
+		resp := f.post( //nolint:bodyclose // drained below
+			"/oauth/mcp/token",
+			"application/x-www-form-urlencoded",
+			tokenForm.Encode(),
+			nil,
+		)
 		defer drain(resp.Body)
 		if resp.StatusCode != http.StatusBadRequest {
 			t.Fatalf("expected 400, got %d", resp.StatusCode)
@@ -234,6 +267,43 @@ func TestOAuthEndToEnd(t *testing.T) {
 			t.Fatalf("expected invalid_grant, got %v", body["error"])
 		}
 	})
+}
+
+func assertStatusAndDiscoveryHeader(t *testing.T, resp *http.Response, want int) {
+	t.Helper()
+	if resp.StatusCode != want {
+		t.Fatalf("expected status %d, got %d", want, resp.StatusCode)
+	}
+	wwwAuth := resp.Header.Get("WWW-Authenticate")
+	if !strings.Contains(wwwAuth, "/.well-known/oauth-protected-resource") {
+		t.Fatalf("PRM URL missing from WWW-Authenticate: %q", wwwAuth)
+	}
+	if strings.Contains(wwwAuth, "/mcp/.well-known/") {
+		t.Fatalf("PRM URL must NOT be under /mcp: %q", wwwAuth)
+	}
+}
+
+func assertTokenResponse(t *testing.T, resp *http.Response, expectedAPIKey string) {
+	t.Helper()
+	if resp.StatusCode != http.StatusOK {
+		body, _ := io.ReadAll(resp.Body)
+		t.Fatalf("expected 200, got %d body=%s", resp.StatusCode, body)
+	}
+	if resp.Header.Get("Cache-Control") != "no-store" {
+		t.Fatalf("missing Cache-Control: %q", resp.Header.Get("Cache-Control"))
+	}
+	if resp.Header.Get("Pragma") != "no-cache" {
+		t.Fatalf("missing Pragma: %q", resp.Header.Get("Pragma"))
+	}
+	var body map[string]any
+	_ = json.NewDecoder(resp.Body).Decode(&body)
+	if body["access_token"] != expectedAPIKey {
+		t.Fatalf("unexpected access_token: %v", body["access_token"])
+	}
+	const oneYearSeconds = 31536000
+	if v, ok := body["expires_in"].(float64); !ok || int64(v) != oneYearSeconds {
+		t.Fatalf("unexpected expires_in: %v", body["expires_in"])
+	}
 }
 
 func drain(body io.ReadCloser) {

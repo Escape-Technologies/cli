@@ -1,6 +1,7 @@
 package mcp
 
 import (
+	"context"
 	"crypto/sha256"
 	"encoding/base64"
 	"encoding/json"
@@ -92,7 +93,15 @@ func TestPRMResponse(t *testing.T) {
 	t.Parallel()
 	h, _ := newTestOAuth(t, "test-api-key")
 	rec := httptest.NewRecorder()
-	h.ServePRM(rec, httptest.NewRequest(http.MethodGet, "/.well-known/oauth-protected-resource", nil))
+	h.ServePRM(
+		rec,
+		httptest.NewRequestWithContext(
+			context.Background(),
+			http.MethodGet,
+			"/.well-known/oauth-protected-resource",
+			nil,
+		),
+	)
 
 	if rec.Code != http.StatusOK {
 		t.Fatalf("expected 200, got %d", rec.Code)
@@ -116,7 +125,10 @@ func TestJWKSShape(t *testing.T) {
 	t.Parallel()
 	h, _ := newTestOAuth(t, "test-api-key")
 	rec := httptest.NewRecorder()
-	h.ServeJWKS(rec, httptest.NewRequest(http.MethodGet, "/oauth/mcp/jwks", nil))
+	h.ServeJWKS(
+		rec,
+		httptest.NewRequestWithContext(context.Background(), http.MethodGet, "/oauth/mcp/jwks", nil),
+	)
 
 	if rec.Code != http.StatusOK {
 		t.Fatalf("expected 200, got %d", rec.Code)
@@ -170,7 +182,6 @@ func TestUnauthorizedResponse(t *testing.T) {
 type tokenTestCase struct {
 	name         string
 	form         url.Values
-	mutatePayload func(*oauthCodePayload)
 	expectStatus int
 	expectError  string
 }
@@ -373,6 +384,10 @@ func TestRedirectAllowlist(t *testing.T) {
 		{"https://sub.cowork.ai/cb", true},
 		{"http://localhost:12345/cb", true},
 		{"http://127.0.0.1:8080/cb", true},
+		// IPv6 loopback — URL parsers may or may not keep brackets on
+		// Hostname(); both forms must match so MCP clients binding to
+		// [::1] don't get rejected at the loopback gate.
+		{"http://[::1]:8080/cb", true},
 		{"https://qa.staging.example/cb", true},
 
 		// Rejected — phishing vectors.
@@ -407,7 +422,12 @@ func TestRedirectAllowlist(t *testing.T) {
 }
 
 func newFormRequest(form url.Values) *http.Request {
-	req := httptest.NewRequest(http.MethodPost, "/oauth/mcp/token", strings.NewReader(form.Encode()))
+	req := httptest.NewRequestWithContext(
+		context.Background(),
+		http.MethodPost,
+		"/oauth/mcp/token",
+		strings.NewReader(form.Encode()),
+	)
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 	return req
 }
