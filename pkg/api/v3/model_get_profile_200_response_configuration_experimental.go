@@ -31,7 +31,6 @@ type GetProfile200ResponseConfigurationExperimental struct {
 	XssAgentModelAlias             *ENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS `json:"xss_agent_model_alias,omitempty"`
 	SqliAgentModelAlias            *ENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS `json:"sqli_agent_model_alias,omitempty"`
 	AsmCveAgent                    *bool                                                                          `json:"asm_cve_agent,omitempty"`
-	LoginPageAgent                 *bool                                                                          `json:"login_page_agent,omitempty"`
 	JsAnalysis                     *bool                                                                          `json:"js_analysis,omitempty"`
 	ExtendedPortScan               *bool                                                                          `json:"extended_port_scan,omitempty"`
 	LoginPageBruteforceAgent       *bool                                                                          `json:"login_page_bruteforce_agent,omitempty"`
@@ -444,38 +443,6 @@ func (o *GetProfile200ResponseConfigurationExperimental) SetAsmCveAgent(v bool) 
 	o.AsmCveAgent = &v
 }
 
-// GetLoginPageAgent returns the LoginPageAgent field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationExperimental) GetLoginPageAgent() bool {
-	if o == nil || IsNil(o.LoginPageAgent) {
-		var ret bool
-		return ret
-	}
-	return *o.LoginPageAgent
-}
-
-// GetLoginPageAgentOk returns a tuple with the LoginPageAgent field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationExperimental) GetLoginPageAgentOk() (*bool, bool) {
-	if o == nil || IsNil(o.LoginPageAgent) {
-		return nil, false
-	}
-	return o.LoginPageAgent, true
-}
-
-// HasLoginPageAgent returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationExperimental) HasLoginPageAgent() bool {
-	if o != nil && !IsNil(o.LoginPageAgent) {
-		return true
-	}
-
-	return false
-}
-
-// SetLoginPageAgent gets a reference to the given bool and assigns it to the LoginPageAgent field.
-func (o *GetProfile200ResponseConfigurationExperimental) SetLoginPageAgent(v bool) {
-	o.LoginPageAgent = &v
-}
-
 // GetJsAnalysis returns the JsAnalysis field value if set, zero value otherwise.
 func (o *GetProfile200ResponseConfigurationExperimental) GetJsAnalysis() bool {
 	if o == nil || IsNil(o.JsAnalysis) {
@@ -714,9 +681,6 @@ func (o GetProfile200ResponseConfigurationExperimental) ToMap() (map[string]inte
 	if !IsNil(o.AsmCveAgent) {
 		toSerialize["asm_cve_agent"] = o.AsmCveAgent
 	}
-	if !IsNil(o.LoginPageAgent) {
-		toSerialize["login_page_agent"] = o.LoginPageAgent
-	}
 	if !IsNil(o.JsAnalysis) {
 		toSerialize["js_analysis"] = o.JsAnalysis
 	}
@@ -769,7 +733,6 @@ func (o *GetProfile200ResponseConfigurationExperimental) UnmarshalJSON(data []by
 		delete(additionalProperties, "xss_agent_model_alias")
 		delete(additionalProperties, "sqli_agent_model_alias")
 		delete(additionalProperties, "asm_cve_agent")
-		delete(additionalProperties, "login_page_agent")
 		delete(additionalProperties, "js_analysis")
 		delete(additionalProperties, "extended_port_scan")
 		delete(additionalProperties, "login_page_bruteforce_agent")
