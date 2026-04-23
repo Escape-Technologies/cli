@@ -33,7 +33,6 @@ type GetProfile200ResponseConfigurationExperimental struct {
 	AsmCveAgent                    *bool                                                                          `json:"asm_cve_agent,omitempty"`
 	JsAnalysis                     *bool                                                                          `json:"js_analysis,omitempty"`
 	ExtendedPortScan               *bool                                                                          `json:"extended_port_scan,omitempty"`
-	LoginPageBruteforceAgent       *bool                                                                          `json:"login_page_bruteforce_agent,omitempty"`
 	LlmSecurityTesting             *bool                                                                          `json:"llm_security_testing,omitempty"`
 	DastMultiAgentPentest          *bool                                                                          `json:"dast_multi_agent_pentest,omitempty"`
 	FeatureFlags                   []string                                                                       `json:"feature_flags,omitempty"`
@@ -507,38 +506,6 @@ func (o *GetProfile200ResponseConfigurationExperimental) SetExtendedPortScan(v b
 	o.ExtendedPortScan = &v
 }
 
-// GetLoginPageBruteforceAgent returns the LoginPageBruteforceAgent field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationExperimental) GetLoginPageBruteforceAgent() bool {
-	if o == nil || IsNil(o.LoginPageBruteforceAgent) {
-		var ret bool
-		return ret
-	}
-	return *o.LoginPageBruteforceAgent
-}
-
-// GetLoginPageBruteforceAgentOk returns a tuple with the LoginPageBruteforceAgent field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationExperimental) GetLoginPageBruteforceAgentOk() (*bool, bool) {
-	if o == nil || IsNil(o.LoginPageBruteforceAgent) {
-		return nil, false
-	}
-	return o.LoginPageBruteforceAgent, true
-}
-
-// HasLoginPageBruteforceAgent returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationExperimental) HasLoginPageBruteforceAgent() bool {
-	if o != nil && !IsNil(o.LoginPageBruteforceAgent) {
-		return true
-	}
-
-	return false
-}
-
-// SetLoginPageBruteforceAgent gets a reference to the given bool and assigns it to the LoginPageBruteforceAgent field.
-func (o *GetProfile200ResponseConfigurationExperimental) SetLoginPageBruteforceAgent(v bool) {
-	o.LoginPageBruteforceAgent = &v
-}
-
 // GetLlmSecurityTesting returns the LlmSecurityTesting field value if set, zero value otherwise.
 func (o *GetProfile200ResponseConfigurationExperimental) GetLlmSecurityTesting() bool {
 	if o == nil || IsNil(o.LlmSecurityTesting) {
@@ -687,9 +654,6 @@ func (o GetProfile200ResponseConfigurationExperimental) ToMap() (map[string]inte
 	if !IsNil(o.ExtendedPortScan) {
 		toSerialize["extended_port_scan"] = o.ExtendedPortScan
 	}
-	if !IsNil(o.LoginPageBruteforceAgent) {
-		toSerialize["login_page_bruteforce_agent"] = o.LoginPageBruteforceAgent
-	}
 	if !IsNil(o.LlmSecurityTesting) {
 		toSerialize["llm_security_testing"] = o.LlmSecurityTesting
 	}
@@ -735,7 +699,6 @@ func (o *GetProfile200ResponseConfigurationExperimental) UnmarshalJSON(data []by
 		delete(additionalProperties, "asm_cve_agent")
 		delete(additionalProperties, "js_analysis")
 		delete(additionalProperties, "extended_port_scan")
-		delete(additionalProperties, "login_page_bruteforce_agent")
 		delete(additionalProperties, "llm_security_testing")
 		delete(additionalProperties, "dast_multi_agent_pentest")
 		delete(additionalProperties, "feature_flags")
