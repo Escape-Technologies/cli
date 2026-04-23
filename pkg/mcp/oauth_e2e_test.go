@@ -90,9 +90,9 @@ func newE2EFixture(t *testing.T) *e2eFixture {
 	})
 
 	mux := http.NewServeMux()
-	mux.Handle("/mcp", wrapWithAuthMiddleware(mcpEcho, oauth))
-	mux.HandleFunc("/.well-known/oauth-protected-resource", oauth.ServePRM)
-	mux.HandleFunc("/oauth/mcp/jwks", oauth.ServeJWKS)
+	mux.Handle("/mcp", wrapWithCORS(wrapWithAuthMiddleware(mcpEcho, oauth)))
+	mux.Handle("/.well-known/oauth-protected-resource", wrapWithCORS(http.HandlerFunc(oauth.ServePRM)))
+	mux.Handle("/oauth/mcp/jwks", wrapWithCORS(http.HandlerFunc(oauth.ServeJWKS)))
 	mux.HandleFunc("/oauth/mcp/token", oauth.ServeToken)
 
 	server := httptest.NewServer(mux)
@@ -181,6 +181,38 @@ func TestOAuthEndToEnd(t *testing.T) {
 		resp := f.post("/mcp", "application/json", `{}`, nil) //nolint:bodyclose // drained below
 		defer drain(resp.Body)
 		assertStatusAndDiscoveryHeader(t, resp, http.StatusUnauthorized)
+	})
+
+	// Regression for "Couldn't reach the MCP server" from Claude.
+	// Browser-based MCP clients (Cowork, Claude web) send an OPTIONS
+	// preflight before the POST /mcp. Without CORS headers the browser
+	// treats the silence as a rejection and drops the request entirely —
+	// no 401, no JSON-RPC error, just a network-level block that shows
+	// up as "Couldn't reach the MCP server" in the client UI.
+	t.Run("options_preflight_returns_204_with_cors_headers", func(t *testing.T) {
+		req, _ := http.NewRequestWithContext(context.Background(), http.MethodOptions, f.server.URL+"/mcp", http.NoBody)
+		req.Header.Set("Origin", "https://claude.ai")
+		req.Header.Set("Access-Control-Request-Method", "POST")
+		req.Header.Set("Access-Control-Request-Headers", "Authorization,Content-Type")
+		resp, err := http.DefaultClient.Do(req) //nolint:bodyclose // drained below
+		if err != nil {
+			t.Fatalf("options: %v", err)
+		}
+		defer drain(resp.Body)
+		if resp.StatusCode != http.StatusNoContent {
+			t.Fatalf("expected 204 for OPTIONS preflight, got %d", resp.StatusCode)
+		}
+		if resp.Header.Get("Access-Control-Allow-Origin") != "https://claude.ai" {
+			t.Fatalf("ACAO header missing or wrong: %q", resp.Header.Get("Access-Control-Allow-Origin"))
+		}
+		if resp.Header.Get("Access-Control-Allow-Methods") == "" {
+			t.Fatalf("ACAM header missing")
+		}
+		// Preflights must NOT carry WWW-Authenticate (that would break
+		// the browser's CORS check before any auth happens).
+		if resp.Header.Get("Www-Authenticate") != "" {
+			t.Fatalf("WWW-Authenticate must be absent on OPTIONS preflight, got: %q", resp.Header.Get("Www-Authenticate"))
+		}
 	})
 
 	t.Run("invalid_key_also_returns_401_discovery", func(t *testing.T) {
