@@ -29,14 +29,14 @@ import (
 )
 
 const (
-	oauthKeyBits           = 3072
-	oauthCodeExpiryWindow  = 75 * time.Second // jti kept > code exp to catch late replays
-	oauthAccessTokenTTL    = 31536000         // 1 year (seconds) — real expiry is api-key revocation
-	oauthClientID          = "escape-mcp-public"
-	oauthCodeChallengeAlg  = "S256"
+	oauthKeyBits          = 3072
+	oauthCodeExpiryWindow = 75 * time.Second // jti kept > code exp to catch late replays
+	oauthAccessTokenTTL   = 31536000         // 1 year (seconds) — real expiry is api-key revocation
+	oauthClientID         = "escape-mcp-public"
+	oauthCodeChallengeAlg = "S256"
 	// oauthKeyDirPerm is the mode for the directory that holds the OAuth
 	// RSA private key PEM (u=rwx, g=-, o=-).
-	oauthKeyDirPerm        os.FileMode = 0o700
+	oauthKeyDirPerm os.FileMode = 0o700
 	// oauthKeyFilePerm matches the sensitive-file convention for secrets
 	// at rest (u=rw, g=-, o=-).
 	oauthKeyFilePerm os.FileMode = 0o600
@@ -50,23 +50,23 @@ const (
 // upstream validation cache), and the compiled redirect allowlist.
 // It is created once at server start and shared across requests.
 type oauthHandlers struct {
-	privateKey         *rsa.PrivateKey
-	publicKey          *rsa.PublicKey
-	kid                string
-	issuerURL          string
-	resourceURL        string
-	prmURL             string
-	jwksURL            string
-	tokenURL           string
-	authorizeURL       string
-	registrationURL    string
-	publicAPIURL       string
-	allowlist          *redirectAllowlist
-	seenJTI            map[string]int64
-	seenJTIMu          sync.Mutex
-	upstreamClient     *http.Client
-	validationCache    map[string]int64
-	validationCacheMu  sync.Mutex
+	privateKey        *rsa.PrivateKey
+	publicKey         *rsa.PublicKey
+	kid               string
+	issuerURL         string
+	resourceURL       string
+	prmURL            string
+	jwksURL           string
+	tokenURL          string
+	authorizeURL      string
+	registrationURL   string
+	publicAPIURL      string
+	allowlist         *redirectAllowlist
+	seenJTI           map[string]int64
+	seenJTIMu         sync.Mutex
+	upstreamClient    *http.Client
+	validationCache   map[string]int64
+	validationCacheMu sync.Mutex
 	// TODO(mcp-oauth): seenJTI and validationCache are process-local.
 	// mcp.escape.tech must run as a single replica (or with sticky routing
 	// keyed on jti) until we move jti to a shared short-TTL store such as
@@ -89,11 +89,11 @@ type oauthCodePayload struct {
 
 // oauthConfig is what server.go passes when building the handlers.
 type oauthConfig struct {
-	IssuerURL          string
-	ResourceURL        string
-	PublicAPIURL       string
+	IssuerURL           string
+	ResourceURL         string
+	PublicAPIURL        string
 	OAuthPrivateKeyPath string
-	ExtraRedirectHosts []string
+	ExtraRedirectHosts  []string
 }
 
 // newOAuthHandlers bootstraps the RSA keypair, compiles the allowlist, and

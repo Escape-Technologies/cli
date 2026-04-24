@@ -45,11 +45,11 @@ func (o *observedUpstream) snapshot() (string, Auth) {
 // subtest. Extracted so TestOAuthEndToEnd itself stays under the
 // cyclomatic complexity limit.
 type e2eFixture struct {
-	t          *testing.T
-	server     *httptest.Server
-	oauth      *oauthHandlers
-	validKey   string
-	observed   *observedUpstream
+	t        *testing.T
+	server   *httptest.Server
+	oauth    *oauthHandlers
+	validKey string
+	observed *observedUpstream
 }
 
 func newE2EFixture(t *testing.T) *e2eFixture {
