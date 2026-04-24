@@ -382,6 +382,22 @@ func TestRedirectAllowlist(t *testing.T) {
 		{"https://foo.anthropic.com/cb", true},
 		{"https://cowork.ai/cb", true},
 		{"https://sub.cowork.ai/cb", true},
+		{"https://cursor.com/cb", true},
+		{"https://app.cursor.com/cb", true},
+		{"https://cursor.sh/cb", true},
+		{"https://app.cursor.sh/cb", true},
+		{"https://openai.com/cb", true},
+		{"https://platform.openai.com/cb", true},
+		{"https://chatgpt.com/cb", true},
+		{"https://app.chatgpt.com/cb", true},
+		{"https://continue.dev/cb", true},
+		{"https://api.continue.dev/cb", true},
+		{"https://zed.dev/cb", true},
+		{"https://api.zed.dev/cb", true},
+		{"https://windsurf.com/cb", true},
+		{"https://app.windsurf.com/cb", true},
+		{"https://codeium.com/cb", true},
+		{"https://api.codeium.com/cb", true},
 		{"http://localhost:12345/cb", true},
 		{"http://127.0.0.1:8080/cb", true},
 		// IPv6 loopback — URL parsers may or may not keep brackets on
@@ -390,11 +406,21 @@ func TestRedirectAllowlist(t *testing.T) {
 		{"http://[::1]:8080/cb", true},
 		{"https://qa.staging.example/cb", true},
 
-		// Rejected — phishing vectors.
+		// Rejected — phishing vectors. One per vendor so a regression
+		// in the apex/wildcard match logic surfaces immediately.
 		{"https://evil.claude.ai.attacker.com/cb", false},
 		{"https://claude.ai.attacker.com/cb", false},
 		{"https://anthropic.com.evil/cb", false},
 		{"https://fakeclaude.ai/cb", false},
+		{"https://cursor.com.attacker.com/cb", false},
+		{"https://fake-cursor.com/cb", false},
+		{"https://openai.com.attacker.com/cb", false},
+		{"https://fakeopenai.com/cb", false},
+		{"https://chatgpt.com.attacker.com/cb", false},
+		{"https://continue.dev.attacker.com/cb", false},
+		{"https://zed.dev.attacker.com/cb", false},
+		{"https://windsurf.com.attacker.com/cb", false},
+		{"https://codeium.com.attacker.com/cb", false},
 
 		// Rejected — wrong scheme.
 		{"javascript:alert(1)", false},

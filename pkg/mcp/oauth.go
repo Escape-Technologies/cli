@@ -586,7 +586,10 @@ type allowedHost struct {
 
 // buildRedirectAllowlist constructs the compiled allowlist. `extras` are
 // HTTPS-only hostnames (or `*.host`) passed via ESCAPE_MCP_EXTRA_REDIRECT_HOSTS
-// for staging/QA. Keep in sync with services/api and services/frontend.
+// for staging/QA. Keep in sync with services/api/src/lib/oauth/redirect-allowlist.ts
+// and services/frontend/src/routes/oauth/mcp/_lib/allowlist.ts (Anthropic +
+// Cowork + Cursor + OpenAI/ChatGPT + Continue.dev + Zed + Windsurf/Codeium,
+// each as apex + wildcard subdomains, HTTPS only).
 func buildRedirectAllowlist(extras []string) *redirectAllowlist {
 	hosts := []allowedHost{
 		{scheme: "http", host: "127.0.0.1", loopback: true, allowPort: true},
@@ -595,6 +598,22 @@ func buildRedirectAllowlist(extras []string) *redirectAllowlist {
 		{scheme: "https", host: "anthropic.com", wildcard: true},
 		{scheme: "https", host: "cowork.ai"},
 		{scheme: "https", host: "cowork.ai", wildcard: true},
+		{scheme: "https", host: "cursor.com"},
+		{scheme: "https", host: "cursor.com", wildcard: true},
+		{scheme: "https", host: "cursor.sh"},
+		{scheme: "https", host: "cursor.sh", wildcard: true},
+		{scheme: "https", host: "openai.com"},
+		{scheme: "https", host: "openai.com", wildcard: true},
+		{scheme: "https", host: "chatgpt.com"},
+		{scheme: "https", host: "chatgpt.com", wildcard: true},
+		{scheme: "https", host: "continue.dev"},
+		{scheme: "https", host: "continue.dev", wildcard: true},
+		{scheme: "https", host: "zed.dev"},
+		{scheme: "https", host: "zed.dev", wildcard: true},
+		{scheme: "https", host: "windsurf.com"},
+		{scheme: "https", host: "windsurf.com", wildcard: true},
+		{scheme: "https", host: "codeium.com"},
+		{scheme: "https", host: "codeium.com", wildcard: true},
 	}
 	for _, raw := range extras {
 		host := strings.TrimSpace(raw)
