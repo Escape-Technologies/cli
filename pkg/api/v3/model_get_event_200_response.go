@@ -28,8 +28,8 @@ type GetEvent200Response struct {
 	Description string `json:"description"`
 	// The attachments of the event
 	Attachments []AttachmentDetailed `json:"attachments,omitempty"`
-	// The issues of the event
-	Issues []IssueDetailed `json:"issues,omitempty"`
+	// The issues of the event (summarized). Hydrate with GET /v3/issues/:issueId for full payload (remediation, CVSS, compliances, full asset details).
+	Issues []IssueSummarized `json:"issues,omitempty"`
 	// The number of issues of the event
 	IssuesCount float32                                  `json:"issuesCount"`
 	Level       ENUMPROPERTIESEVENTSITEMSPROPERTIESLEVEL `json:"level"`
@@ -173,9 +173,9 @@ func (o *GetEvent200Response) SetAttachments(v []AttachmentDetailed) {
 }
 
 // GetIssues returns the Issues field value if set, zero value otherwise.
-func (o *GetEvent200Response) GetIssues() []IssueDetailed {
+func (o *GetEvent200Response) GetIssues() []IssueSummarized {
 	if o == nil || IsNil(o.Issues) {
-		var ret []IssueDetailed
+		var ret []IssueSummarized
 		return ret
 	}
 	return o.Issues
@@ -183,7 +183,7 @@ func (o *GetEvent200Response) GetIssues() []IssueDetailed {
 
 // GetIssuesOk returns a tuple with the Issues field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetEvent200Response) GetIssuesOk() ([]IssueDetailed, bool) {
+func (o *GetEvent200Response) GetIssuesOk() ([]IssueSummarized, bool) {
 	if o == nil || IsNil(o.Issues) {
 		return nil, false
 	}
@@ -199,8 +199,8 @@ func (o *GetEvent200Response) HasIssues() bool {
 	return false
 }
 
-// SetIssues gets a reference to the given []IssueDetailed and assigns it to the Issues field.
-func (o *GetEvent200Response) SetIssues(v []IssueDetailed) {
+// SetIssues gets a reference to the given []IssueSummarized and assigns it to the Issues field.
+func (o *GetEvent200Response) SetIssues(v []IssueSummarized) {
 	o.Issues = v
 }
 
