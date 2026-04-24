@@ -211,8 +211,8 @@ func TestServeToken(t *testing.T) {
 			expectError:  "unsupported_grant_type",
 		},
 		{
-			name: "missing code_verifier",
-			form: url.Values{"grant_type": {"authorization_code"}, "code": {"x"}, "redirect_uri": {"https://claude.ai/cb"}, "client_id": {oauthClientID}},
+			name:         "missing code_verifier",
+			form:         url.Values{"grant_type": {"authorization_code"}, "code": {"x"}, "redirect_uri": {"https://claude.ai/cb"}, "client_id": {oauthClientID}},
 			expectStatus: http.StatusBadRequest,
 			expectError:  "invalid_request",
 		},
