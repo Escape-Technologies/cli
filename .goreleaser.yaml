@@ -48,10 +48,22 @@ builds:
 
 archives:
   - id: windows
-    builds: [unix, windows]
+    ids: [unix, windows]
     format_overrides:
       - goos: windows
         formats: [zip]
+
+homebrew_casks:
+  - name: escape-cli
+    ids: [windows]
+    binaries: [escape-cli]
+    repository:
+      owner: Escape-Technologies
+      name: homebrew-tap
+      git:
+        url: git@github.com:Escape-Technologies/homebrew-tap.git
+        private_key: '{{ .Env.HOMEBREW_TAP_SSH_KEY }}'
+    directory: Casks
 
 kos:
   - repositories: [escapetech/cli]
