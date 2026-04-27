@@ -13,6 +13,13 @@ Full documentation: [docs.escape.tech/documentation/tooling/cli](https://docs.es
 
 **Binary** (Linux, macOS, Windows): download from [GitHub Releases](https://github.com/Escape-Technologies/cli/releases/latest).
 
+**Homebrew** (macOS):
+
+```bash
+brew install --cask escape-technologies/tap/escape-cli
+brew upgrade --cask escape-technologies/tap/escape-cli
+```
+
 **Docker:**
 
 ```bash

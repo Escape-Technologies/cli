@@ -3,11 +3,11 @@ name: Release
 on:
   push:
     tags:
-      - "v*"
+      - 'v*'
   workflow_dispatch:
     inputs:
       tag:
-        description: "Tag to release (e.g. v1.2.3). Required when dispatched from a branch."
+        description: 'Tag to release (e.g. v1.2.3). Required when dispatched from a branch.'
         required: false
         type: string
 
@@ -32,10 +32,11 @@ jobs:
 
       - uses: goreleaser/goreleaser-action@v4
         with:
-          args: "release --clean"
+          args: 'release --clean'
           version: latest
         env:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+          HOMEBREW_TAP_SSH_KEY: '${{ secrets.HOMEBREW_TAP_SSH_KEY }}'
           GORELEASER_CURRENT_TAG: ${{ github.event.inputs.tag }}
 
   action:
