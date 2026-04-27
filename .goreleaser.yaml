@@ -47,15 +47,17 @@ builds:
       - -s -w -X github.com/Escape-Technologies/cli/pkg/version.Version={{.Version}} -X github.com/Escape-Technologies/cli/pkg/version.Commit={{.ShortCommit}} -X github.com/Escape-Technologies/cli/pkg/version.BuildDate={{.CommitDate}}
 
 archives:
+  - id: unix
+    ids: [unix]
   - id: windows
-    ids: [unix, windows]
+    ids: [windows]
     format_overrides:
       - goos: windows
         formats: [zip]
 
 homebrew_casks:
   - name: escape-cli
-    ids: [windows]
+    ids: [unix]
     binaries: [escape-cli]
     repository:
       owner: Escape-Technologies
