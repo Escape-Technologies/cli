@@ -22,7 +22,6 @@ type GetProfile200ResponseConfigurationNetwork struct {
 	RequestTimeoutS      *float32            `json:"request_timeout_s,omitempty"`
 	RequestsPerSecond    *float32            `json:"requests_per_second,omitempty"`
 	CustomHeaders        map[string][]string `json:"custom_headers,omitempty"`
-	ParallelRequests     *float32            `json:"parallel_requests,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -141,38 +140,6 @@ func (o *GetProfile200ResponseConfigurationNetwork) SetCustomHeaders(v map[strin
 	o.CustomHeaders = v
 }
 
-// GetParallelRequests returns the ParallelRequests field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationNetwork) GetParallelRequests() float32 {
-	if o == nil || IsNil(o.ParallelRequests) {
-		var ret float32
-		return ret
-	}
-	return *o.ParallelRequests
-}
-
-// GetParallelRequestsOk returns a tuple with the ParallelRequests field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationNetwork) GetParallelRequestsOk() (*float32, bool) {
-	if o == nil || IsNil(o.ParallelRequests) {
-		return nil, false
-	}
-	return o.ParallelRequests, true
-}
-
-// HasParallelRequests returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationNetwork) HasParallelRequests() bool {
-	if o != nil && !IsNil(o.ParallelRequests) {
-		return true
-	}
-
-	return false
-}
-
-// SetParallelRequests gets a reference to the given float32 and assigns it to the ParallelRequests field.
-func (o *GetProfile200ResponseConfigurationNetwork) SetParallelRequests(v float32) {
-	o.ParallelRequests = &v
-}
-
 func (o GetProfile200ResponseConfigurationNetwork) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -191,9 +158,6 @@ func (o GetProfile200ResponseConfigurationNetwork) ToMap() (map[string]interface
 	}
 	if !IsNil(o.CustomHeaders) {
 		toSerialize["custom_headers"] = o.CustomHeaders
-	}
-	if !IsNil(o.ParallelRequests) {
-		toSerialize["parallel_requests"] = o.ParallelRequests
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -220,7 +184,6 @@ func (o *GetProfile200ResponseConfigurationNetwork) UnmarshalJSON(data []byte) (
 		delete(additionalProperties, "request_timeout_s")
 		delete(additionalProperties, "requests_per_second")
 		delete(additionalProperties, "custom_headers")
-		delete(additionalProperties, "parallel_requests")
 		o.AdditionalProperties = additionalProperties
 	}
 
