@@ -21,7 +21,6 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationExperimental{}
 type GetProfile200ResponseConfigurationExperimental struct {
 	BlstExplorationOnly            *bool                                                                          `json:"blst_exploration_only,omitempty"`
 	AgenticIdor                    *bool                                                                          `json:"agentic_idor,omitempty"`
-	HappyPathsRegressionTesting    []string                                                                       `json:"happy_paths_regression_testing,omitempty"`
 	RegressionTestingFileUploadIds []string                                                                       `json:"regression_testing_file_upload_ids,omitempty"`
 	AsmTechnologies                *bool                                                                          `json:"asm_technologies,omitempty"`
 	AsmCodeProjects                *bool                                                                          `json:"asm_code_projects,omitempty"`
@@ -120,38 +119,6 @@ func (o *GetProfile200ResponseConfigurationExperimental) HasAgenticIdor() bool {
 // SetAgenticIdor gets a reference to the given bool and assigns it to the AgenticIdor field.
 func (o *GetProfile200ResponseConfigurationExperimental) SetAgenticIdor(v bool) {
 	o.AgenticIdor = &v
-}
-
-// GetHappyPathsRegressionTesting returns the HappyPathsRegressionTesting field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationExperimental) GetHappyPathsRegressionTesting() []string {
-	if o == nil || IsNil(o.HappyPathsRegressionTesting) {
-		var ret []string
-		return ret
-	}
-	return o.HappyPathsRegressionTesting
-}
-
-// GetHappyPathsRegressionTestingOk returns a tuple with the HappyPathsRegressionTesting field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationExperimental) GetHappyPathsRegressionTestingOk() ([]string, bool) {
-	if o == nil || IsNil(o.HappyPathsRegressionTesting) {
-		return nil, false
-	}
-	return o.HappyPathsRegressionTesting, true
-}
-
-// HasHappyPathsRegressionTesting returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationExperimental) HasHappyPathsRegressionTesting() bool {
-	if o != nil && !IsNil(o.HappyPathsRegressionTesting) {
-		return true
-	}
-
-	return false
-}
-
-// SetHappyPathsRegressionTesting gets a reference to the given []string and assigns it to the HappyPathsRegressionTesting field.
-func (o *GetProfile200ResponseConfigurationExperimental) SetHappyPathsRegressionTesting(v []string) {
-	o.HappyPathsRegressionTesting = v
 }
 
 // GetRegressionTestingFileUploadIds returns the RegressionTestingFileUploadIds field value if set, zero value otherwise.
@@ -618,9 +585,6 @@ func (o GetProfile200ResponseConfigurationExperimental) ToMap() (map[string]inte
 	if !IsNil(o.AgenticIdor) {
 		toSerialize["agentic_idor"] = o.AgenticIdor
 	}
-	if !IsNil(o.HappyPathsRegressionTesting) {
-		toSerialize["happy_paths_regression_testing"] = o.HappyPathsRegressionTesting
-	}
 	if !IsNil(o.RegressionTestingFileUploadIds) {
 		toSerialize["regression_testing_file_upload_ids"] = o.RegressionTestingFileUploadIds
 	}
@@ -687,7 +651,6 @@ func (o *GetProfile200ResponseConfigurationExperimental) UnmarshalJSON(data []by
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "blst_exploration_only")
 		delete(additionalProperties, "agentic_idor")
-		delete(additionalProperties, "happy_paths_regression_testing")
 		delete(additionalProperties, "regression_testing_file_upload_ids")
 		delete(additionalProperties, "asm_technologies")
 		delete(additionalProperties, "asm_code_projects")
