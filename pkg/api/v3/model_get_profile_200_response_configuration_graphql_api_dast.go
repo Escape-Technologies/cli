@@ -19,7 +19,6 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationGraphqlApiDast{}
 
 // GetProfile200ResponseConfigurationGraphqlApiDast struct for GetProfile200ResponseConfigurationGraphqlApiDast
 type GetProfile200ResponseConfigurationGraphqlApiDast struct {
-	SchemaS3Key              *string                                                                        `json:"schema_s3_key,omitempty"`
 	AdditionalSchemaS3Keys   []string                                                                       `json:"additional_schema_s3_keys,omitempty"`
 	Url                      *string                                                                        `json:"url,omitempty"`
 	LocationId               *string                                                                        `json:"location_id,omitempty"`
@@ -54,38 +53,6 @@ func NewGetProfile200ResponseConfigurationGraphqlApiDast() *GetProfile200Respons
 func NewGetProfile200ResponseConfigurationGraphqlApiDastWithDefaults() *GetProfile200ResponseConfigurationGraphqlApiDast {
 	this := GetProfile200ResponseConfigurationGraphqlApiDast{}
 	return &this
-}
-
-// GetSchemaS3Key returns the SchemaS3Key field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationGraphqlApiDast) GetSchemaS3Key() string {
-	if o == nil || IsNil(o.SchemaS3Key) {
-		var ret string
-		return ret
-	}
-	return *o.SchemaS3Key
-}
-
-// GetSchemaS3KeyOk returns a tuple with the SchemaS3Key field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationGraphqlApiDast) GetSchemaS3KeyOk() (*string, bool) {
-	if o == nil || IsNil(o.SchemaS3Key) {
-		return nil, false
-	}
-	return o.SchemaS3Key, true
-}
-
-// HasSchemaS3Key returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationGraphqlApiDast) HasSchemaS3Key() bool {
-	if o != nil && !IsNil(o.SchemaS3Key) {
-		return true
-	}
-
-	return false
-}
-
-// SetSchemaS3Key gets a reference to the given string and assigns it to the SchemaS3Key field.
-func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetSchemaS3Key(v string) {
-	o.SchemaS3Key = &v
 }
 
 // GetAdditionalSchemaS3Keys returns the AdditionalSchemaS3Keys field value if set, zero value otherwise.
@@ -546,9 +513,6 @@ func (o GetProfile200ResponseConfigurationGraphqlApiDast) MarshalJSON() ([]byte,
 
 func (o GetProfile200ResponseConfigurationGraphqlApiDast) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.SchemaS3Key) {
-		toSerialize["schema_s3_key"] = o.SchemaS3Key
-	}
 	if !IsNil(o.AdditionalSchemaS3Keys) {
 		toSerialize["additional_schema_s3_keys"] = o.AdditionalSchemaS3Keys
 	}
@@ -613,7 +577,6 @@ func (o *GetProfile200ResponseConfigurationGraphqlApiDast) UnmarshalJSON(data []
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "schema_s3_key")
 		delete(additionalProperties, "additional_schema_s3_keys")
 		delete(additionalProperties, "url")
 		delete(additionalProperties, "location_id")
