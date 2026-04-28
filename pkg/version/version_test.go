@@ -135,6 +135,12 @@ func TestUpgradeCommand(t *testing.T) {
 			latest:   "1.2.3",
 			expected: "uses: Escape-Technologies/cli@v1.2.3",
 		},
+		{
+			name:     "homebrew uses cask upgrade",
+			method:   InstallMethodHomebrew,
+			latest:   "1.2.3",
+			expected: "brew upgrade --cask escape-technologies/tap/escape-cli",
+		},
 	}
 
 	for _, tc := range tests {

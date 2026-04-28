@@ -19,6 +19,8 @@ const (
 	InstallMethodDocker InstallMethod = "docker"
 	// InstallMethodGitHubActions runs through the GitHub Action.
 	InstallMethodGitHubActions InstallMethod = "github-actions"
+	// InstallMethodHomebrew uses the published Homebrew cask.
+	InstallMethodHomebrew InstallMethod = "homebrew"
 	// InstallMethodWindowsScript uses the PowerShell install script.
 	InstallMethodWindowsScript InstallMethod = "windows-script"
 	// InstallMethodManual covers binaries installed without a known wrapper.
@@ -67,6 +69,10 @@ func getExecutablePath() string {
 }
 
 func detectInstallMethod(path string) InstallMethod {
+	return detectInstallMethodForGOOS(path, runtime.GOOS)
+}
+
+func detectInstallMethodForGOOS(path string, goos string) InstallMethod {
 	if method, ok := parseInstallMethod(InstallMethodOverride); ok {
 		return method
 	}
@@ -75,8 +81,12 @@ func detectInstallMethod(path string) InstallMethod {
 		return InstallMethodGitHubActions
 	}
 
-	if runtime.GOOS == "windows" {
+	if goos == "windows" {
 		return InstallMethodWindowsScript
+	}
+
+	if isHomebrewCaskPath(path, goos) {
+		return InstallMethodHomebrew
 	}
 
 	if path == "/usr/local/bin/escape-cli" {
@@ -84,6 +94,28 @@ func detectInstallMethod(path string) InstallMethod {
 	}
 
 	return InstallMethodManual
+}
+
+func isHomebrewCaskPath(path string, goos string) bool {
+	if goos != "darwin" {
+		return false
+	}
+
+	normalized := filepath.ToSlash(filepath.Clean(path))
+	for _, prefix := range []string{
+		"/opt/homebrew/Caskroom/escape-cli/",
+		"/usr/local/Caskroom/escape-cli/",
+	} {
+		rest, ok := strings.CutPrefix(normalized, prefix)
+		if !ok {
+			continue
+		}
+
+		version, binary, ok := strings.Cut(rest, "/")
+		return ok && version != "" && binary == "escape-cli"
+	}
+
+	return false
 }
 
 func parseInstallMethod(value string) (InstallMethod, bool) {
@@ -94,6 +126,8 @@ func parseInstallMethod(value string) (InstallMethod, bool) {
 		return InstallMethodDocker, true
 	case InstallMethodGitHubActions:
 		return InstallMethodGitHubActions, true
+	case InstallMethodHomebrew:
+		return InstallMethodHomebrew, true
 	case InstallMethodWindowsScript:
 		return InstallMethodWindowsScript, true
 	case InstallMethodManual:
@@ -115,6 +149,11 @@ func (i InstallInfo) DisplayName() string {
 		return "docker image"
 	case InstallMethodGitHubActions:
 		return "GitHub Actions"
+	case InstallMethodHomebrew:
+		if i.Path == "" {
+			return "Homebrew cask"
+		}
+		return fmt.Sprintf("Homebrew cask (%s)", i.Path)
 	case InstallMethodWindowsScript:
 		if i.Path == "" {
 			return "PowerShell script"
@@ -142,6 +181,8 @@ func UpgradeCommand(method InstallMethod, latestVersion string) string {
 			return "uses: Escape-Technologies/cli@latest"
 		}
 		return "uses: Escape-Technologies/cli@v" + normalizeVersion(latestVersion)
+	case InstallMethodHomebrew:
+		return "brew upgrade --cask escape-technologies/tap/escape-cli"
 	case InstallMethodWindowsScript:
 		return `powershell -c "irm https://raw.githubusercontent.com/Escape-Technologies/cli/refs/heads/main/scripts/install.ps1 | iex"`
 	case InstallMethodManual:
