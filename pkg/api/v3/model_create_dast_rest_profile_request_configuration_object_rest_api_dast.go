@@ -19,7 +19,6 @@ var _ MappedNullable = &CreateDastRestProfileRequestConfigurationObjectRestApiDa
 
 // CreateDastRestProfileRequestConfigurationObjectRestApiDast struct for CreateDastRestProfileRequestConfigurationObjectRestApiDast
 type CreateDastRestProfileRequestConfigurationObjectRestApiDast struct {
-	SchemaS3Key              *string                                                                        `json:"schema_s3_key,omitempty"`
 	LocationId               *string                                                                        `json:"location_id,omitempty"`
 	ExplorationDepth         *ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESEXPLORATIONDEPTH `json:"exploration_depth,omitempty"`
 	ExploreWithAllUsers      *bool                                                                          `json:"explore_with_all_users,omitempty"`
@@ -51,38 +50,6 @@ func NewCreateDastRestProfileRequestConfigurationObjectRestApiDast() *CreateDast
 func NewCreateDastRestProfileRequestConfigurationObjectRestApiDastWithDefaults() *CreateDastRestProfileRequestConfigurationObjectRestApiDast {
 	this := CreateDastRestProfileRequestConfigurationObjectRestApiDast{}
 	return &this
-}
-
-// GetSchemaS3Key returns the SchemaS3Key field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) GetSchemaS3Key() string {
-	if o == nil || IsNil(o.SchemaS3Key) {
-		var ret string
-		return ret
-	}
-	return *o.SchemaS3Key
-}
-
-// GetSchemaS3KeyOk returns a tuple with the SchemaS3Key field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) GetSchemaS3KeyOk() (*string, bool) {
-	if o == nil || IsNil(o.SchemaS3Key) {
-		return nil, false
-	}
-	return o.SchemaS3Key, true
-}
-
-// HasSchemaS3Key returns a boolean if a field has been set.
-func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) HasSchemaS3Key() bool {
-	if o != nil && !IsNil(o.SchemaS3Key) {
-		return true
-	}
-
-	return false
-}
-
-// SetSchemaS3Key gets a reference to the given string and assigns it to the SchemaS3Key field.
-func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) SetSchemaS3Key(v string) {
-	o.SchemaS3Key = &v
 }
 
 // GetLocationId returns the LocationId field value if set, zero value otherwise.
@@ -447,9 +414,6 @@ func (o CreateDastRestProfileRequestConfigurationObjectRestApiDast) MarshalJSON(
 
 func (o CreateDastRestProfileRequestConfigurationObjectRestApiDast) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.SchemaS3Key) {
-		toSerialize["schema_s3_key"] = o.SchemaS3Key
-	}
 	if !IsNil(o.LocationId) {
 		toSerialize["location_id"] = o.LocationId
 	}
@@ -505,7 +469,6 @@ func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) UnmarshalJS
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "schema_s3_key")
 		delete(additionalProperties, "location_id")
 		delete(additionalProperties, "exploration_depth")
 		delete(additionalProperties, "explore_with_all_users")
