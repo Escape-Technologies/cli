@@ -20,6 +20,12 @@ brew install --cask escape-technologies/tap/escape-cli
 brew upgrade --cask escape-technologies/tap/escape-cli
 ```
 
+> On first run, macOS Gatekeeper may block the binary (_"Apple could not verify 'escape-cli' is free of malware"_). Strip the quarantine attribute:
+>
+> ```bash
+> xattr -d com.apple.quarantine "$(which escape-cli)"
+> ```
+
 **Docker:**
 
 ```bash
