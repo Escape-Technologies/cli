@@ -25,7 +25,7 @@ type EventSummarizedAttachmentsInnerTargetCodeFile struct {
 	// The language of the code file
 	Language string `json:"language"`
 	// The path of the code file
-	Path                 string `json:"path"`
+	Path string `json:"path"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -124,7 +124,7 @@ func (o *EventSummarizedAttachmentsInnerTargetCodeFile) SetPath(v string) {
 }
 
 func (o EventSummarizedAttachmentsInnerTargetCodeFile) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -159,10 +159,10 @@ func (o *EventSummarizedAttachmentsInnerTargetCodeFile) UnmarshalJSON(data []byt
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -225,3 +225,5 @@ func (v *NullableEventSummarizedAttachmentsInnerTargetCodeFile) UnmarshalJSON(sr
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

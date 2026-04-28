@@ -20,13 +20,13 @@ var _ MappedNullable = &CreateExportWorkflowActionUsingJira1Parameters{}
 
 // CreateExportWorkflowActionUsingJira1Parameters struct for CreateExportWorkflowActionUsingJira1Parameters
 type CreateExportWorkflowActionUsingJira1Parameters struct {
-	ProjectId               string                                                                      `json:"projectId"`
-	IssueType               string                                                                      `json:"issueType"`
-	PropertiesMapping       []CreateExportWorkflowActionUsingJiraParametersPropertiesMappingInner       `json:"propertiesMapping"`
+	ProjectId string `json:"projectId"`
+	IssueType string `json:"issueType"`
+	PropertiesMapping []CreateExportWorkflowActionUsingJiraParametersPropertiesMappingInner `json:"propertiesMapping"`
 	StaticPropertiesMapping []CreateExportWorkflowActionUsingJiraParametersStaticPropertiesMappingInner `json:"staticPropertiesMapping,omitempty"`
-	ParentKey               *string                                                                     `json:"parentKey,omitempty"`
-	DisableDefaultMappings  *bool                                                                       `json:"disableDefaultMappings,omitempty"`
-	AdditionalProperties    map[string]interface{}
+	ParentKey *string `json:"parentKey,omitempty"`
+	DisableDefaultMappings *bool `json:"disableDefaultMappings,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateExportWorkflowActionUsingJira1Parameters CreateExportWorkflowActionUsingJira1Parameters
@@ -220,7 +220,7 @@ func (o *CreateExportWorkflowActionUsingJira1Parameters) SetDisableDefaultMappin
 }
 
 func (o CreateExportWorkflowActionUsingJira1Parameters) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -264,10 +264,10 @@ func (o *CreateExportWorkflowActionUsingJira1Parameters) UnmarshalJSON(data []by
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -333,3 +333,5 @@ func (v *NullableCreateExportWorkflowActionUsingJira1Parameters) UnmarshalJSON(s
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

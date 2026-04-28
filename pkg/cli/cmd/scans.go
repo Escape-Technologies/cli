@@ -737,6 +737,67 @@ FILTER OPTIONS:
 	},
 }
 
+var scansProblemsCmd = &cobra.Command{
+	Use:     "problems",
+	Aliases: []string{"pb"},
+	Short:   "List scans with their problems",
+	Long: `List Scans with Problems - Identify Failing Scans
+
+Display scans whose execution surfaced validation problems (broken authentication,
+unreachable target, schema invalid, etc.). Diagnostic counterpart of
+'escape-cli profiles problems' but indexed by scan instead of profile.`,
+	Example: `  # List all scans with problems
+  escape-cli scans problems
+
+  # Filter by profile
+  escape-cli scans problems --profile-id <profile-id>
+
+  # Filter by status
+  escape-cli scans problems --status FAILED
+
+  # Export to JSON
+  escape-cli scans problems -o json`,
+	RunE: func(cmd *cobra.Command, _ []string) error {
+		if out.Schema([]v3.ScanSummarizedWithProblems2{}) {
+			return nil
+		}
+
+		filters := &escape.ListScanProblemsFilters{
+			After:         scanAfter,
+			Before:        scanBefore,
+			AssetIDs:      scanAssetIDs,
+			ProfileIDs:    scanProfileIDs,
+			ProjectIDs:    scanProjectIDs,
+			Ignored:       scanIgnored,
+			Initiator:     scanInitiator,
+			Kinds:         scanKinds,
+			Status:        scanStatus,
+			SortType:      scanSortType,
+			SortDirection: scanSortDirection,
+		}
+		scans, next, err := escape.ListScanProblems(cmd.Context(), "", filters)
+		if err != nil {
+			return fmt.Errorf("unable to list scan problems: %w", err)
+		}
+		all := scans
+		for next != nil && *next != "" {
+			scans, next, err = escape.ListScanProblems(cmd.Context(), *next, filters)
+			if err != nil {
+				return fmt.Errorf("unable to list scan problems: %w", err)
+			}
+			all = append(all, scans...)
+		}
+		out.Table(all, func() []string {
+			res := []string{"SCAN ID\tSTATUS\tKIND\tINITIATOR\tPROBLEMS\tCREATED AT\tLINK"}
+			for _, scan := range all {
+				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%d\t%s\t%s", scan.GetId(), scan.GetStatus(), scan.GetKind(), scan.GetInitiator(), len(scan.GetProblems()), scan.GetCreatedAt(), scan.GetLinks().ScanIssues))
+			}
+			return res
+		})
+		return nil
+	},
+}
+
 func init() {
 	scansCmd.AddCommand(scansListCmd)
 	scansListCmd.PersistentFlags().StringSliceVarP(&scanProfileIDs, "profile-id", "p", []string{}, "filter by profile ID(s) - comma-separated for multiple")
@@ -767,5 +828,17 @@ func init() {
 	scansCmd.AddCommand(scanTargetsCmd)
 	scanTargetsCmd.Flags().StringVar(&scanTargetsType, "type", "", "filter by target type: API_ROUTE, GRAPHQL_RESOLVER")
 	scanTargetsCmd.Flags().IntVar(&scanTargetsSize, "size", 0, "limit total number of targets returned")
+	scansCmd.AddCommand(scansProblemsCmd)
+	scansProblemsCmd.PersistentFlags().StringSliceVarP(&scanProfileIDs, "profile-id", "p", []string{}, "filter by profile ID(s) - comma-separated for multiple")
+	scansProblemsCmd.PersistentFlags().StringSliceVar(&scanProjectIDs, "project-id", []string{}, "filter by project ID(s)")
+	scansProblemsCmd.PersistentFlags().StringSliceVarP(&scanAssetIDs, "asset-id", "a", []string{}, "filter by asset ID(s) - comma-separated for multiple")
+	scansProblemsCmd.PersistentFlags().StringVar(&scanAfter, "after", "", "show scans created after this date (RFC3339 format, e.g., 2025-01-01T00:00:00Z)")
+	scansProblemsCmd.PersistentFlags().StringVar(&scanBefore, "before", "", "show scans created before this date (RFC3339 format)")
+	scansProblemsCmd.PersistentFlags().StringVar(&scanIgnored, "ignored", "", "filter by ignored status (true/false)")
+	scansProblemsCmd.PersistentFlags().StringSliceVarP(&scanInitiator, "initiator", "i", []string{}, "filter by initiator: MANUAL, API, SCHEDULED, CI")
+	scansProblemsCmd.PersistentFlags().StringSliceVarP(&scanKinds, "kind", "k", []string{}, "filter by scanner type: BLST_REST, BLST_GRAPHQL, FRONTEND_DAST")
+	scansProblemsCmd.PersistentFlags().StringSliceVarP(&scanStatus, "status", "s", []string{}, "filter by status: STARTING, RUNNING, FINISHED, FAILED, CANCELED")
+	scansProblemsCmd.PersistentFlags().StringVar(&scanSortType, "sort-by", "", "sort field (e.g., createdAt)")
+	scansProblemsCmd.PersistentFlags().StringVar(&scanSortDirection, "sort-direction", "", "sort direction: asc, desc")
 	rootCmd.AddCommand(scansCmd)
 }

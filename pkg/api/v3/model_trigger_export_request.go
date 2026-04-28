@@ -25,10 +25,10 @@ type TriggerExportRequest struct {
 	// Restrict scope to a scan (optional).
 	ScanId *string `json:"scanId,omitempty"`
 	// If true, validates selection only and does not schedule a job.
-	Dry                  *bool       `json:"dry,omitempty"`
-	AssetWhere           interface{} `json:"assetWhere,omitempty"`
-	ProfileWhere         interface{} `json:"profileWhere,omitempty"`
-	IssueWhere           interface{} `json:"issueWhere,omitempty"`
+	Dry *bool `json:"dry,omitempty"`
+	AssetWhere interface{} `json:"assetWhere,omitempty"`
+	ProfileWhere interface{} `json:"profileWhere,omitempty"`
+	IssueWhere interface{} `json:"issueWhere,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -240,7 +240,7 @@ func (o *TriggerExportRequest) SetIssueWhere(v interface{}) {
 }
 
 func (o TriggerExportRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -286,10 +286,10 @@ func (o *TriggerExportRequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -355,3 +355,5 @@ func (v *NullableTriggerExportRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

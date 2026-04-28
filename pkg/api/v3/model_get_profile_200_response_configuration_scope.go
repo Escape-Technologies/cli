@@ -19,9 +19,9 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationScope{}
 
 // GetProfile200ResponseConfigurationScope struct for GetProfile200ResponseConfigurationScope
 type GetProfile200ResponseConfigurationScope struct {
-	UseDefaults          *bool                                                   `json:"use_defaults,omitempty"`
-	Allowlist            []GetProfile200ResponseConfigurationScopeAllowlistInner `json:"allowlist,omitempty"`
-	Blocklist            []GetProfile200ResponseConfigurationScopeAllowlistInner `json:"blocklist,omitempty"`
+	UseDefaults *bool `json:"use_defaults,omitempty"`
+	Allowlist []GetProfile200ResponseConfigurationScopeAllowlistInner `json:"allowlist,omitempty"`
+	Blocklist []GetProfile200ResponseConfigurationScopeAllowlistInner `json:"blocklist,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -141,7 +141,7 @@ func (o *GetProfile200ResponseConfigurationScope) SetBlocklist(v []GetProfile200
 }
 
 func (o GetProfile200ResponseConfigurationScope) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -225,3 +225,5 @@ func (v *NullableGetProfile200ResponseConfigurationScope) UnmarshalJSON(src []by
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

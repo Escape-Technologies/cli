@@ -20,16 +20,16 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationAuthenticationProcedur
 
 // GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters struct for GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters
 type GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters struct {
-	ProxyOverride        *string                                                                                                     `json:"proxy_override,omitempty"`
-	Url                  string                                                                                                      `json:"url"`
-	Method               ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD                         `json:"method"`
-	Headers              []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner `json:"headers"`
-	Cookies              []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner `json:"cookies"`
-	QueryParameters      []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner `json:"queryParameters"`
-	Body                 interface{}                                                                                                 `json:"body,omitempty"`
-	Timeout              *float32                                                                                                    `json:"timeout,omitempty"`
-	Insecure             *bool                                                                                                       `json:"insecure,omitempty"`
-	FollowRedirects      *float32                                                                                                    `json:"follow_redirects,omitempty"`
+	ProxyOverride *string `json:"proxy_override,omitempty"`
+	Url string `json:"url"`
+	Method ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD `json:"method"`
+	Headers []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner `json:"headers"`
+	Cookies []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner `json:"cookies"`
+	QueryParameters []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner `json:"queryParameters"`
+	Body interface{} `json:"body,omitempty"`
+	Timeout *float32 `json:"timeout,omitempty"`
+	Insecure *bool `json:"insecure,omitempty"`
+	FollowRedirects *float32 `json:"follow_redirects,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -339,7 +339,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 }
 
 func (o GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -393,10 +393,10 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -466,3 +466,5 @@ func (v *NullableGetProfile200ResponseConfigurationAuthenticationProceduresInner
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

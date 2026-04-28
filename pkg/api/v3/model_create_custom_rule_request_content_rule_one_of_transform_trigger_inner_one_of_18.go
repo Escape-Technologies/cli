@@ -20,10 +20,10 @@ var _ MappedNullable = &CreateCustomRuleRequestContentRuleOneOfTransformTriggerI
 
 // CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf18 struct for CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf18
 type CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf18 struct {
-	Type                 *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf7Type `json:"type,omitempty"`
-	Name                 *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf7Name `json:"name,omitempty"`
-	Value                *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf7Name `json:"value,omitempty"`
-	If                   ENUMRESPONSEOBJECT                                                      `json:"if"`
+	Type *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf7Type `json:"type,omitempty"`
+	Name *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf7Name `json:"name,omitempty"`
+	Value *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf7Name `json:"value,omitempty"`
+	If ENUMRESPONSEOBJECT `json:"if"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -168,7 +168,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf18) Se
 }
 
 func (o CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf18) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -208,10 +208,10 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf18) Un
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -275,3 +275,5 @@ func (v *NullableCreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOne
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

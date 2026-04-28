@@ -15,19 +15,20 @@ import (
 	"fmt"
 )
 
+
 // CreateWorkflowRequestFiltersInner struct for CreateWorkflowRequestFiltersInner
 type CreateWorkflowRequestFiltersInner struct {
-	CreateWorkflowFilterUsingCustomFilterOnAssets   *CreateWorkflowFilterUsingCustomFilterOnAssets
-	CreateWorkflowFilterUsingCustomFilterOnIssues   *CreateWorkflowFilterUsingCustomFilterOnIssues
+	CreateWorkflowFilterUsingCustomFilterOnAssets *CreateWorkflowFilterUsingCustomFilterOnAssets
+	CreateWorkflowFilterUsingCustomFilterOnIssues *CreateWorkflowFilterUsingCustomFilterOnIssues
 	CreateWorkflowFilterUsingCustomFilterOnProfiles *CreateWorkflowFilterUsingCustomFilterOnProfiles
-	CreateWorkflowFilterUsingView                   *CreateWorkflowFilterUsingView
+	CreateWorkflowFilterUsingView *CreateWorkflowFilterUsingView
 }
 
 // Unmarshal JSON data into any of the pointers in the struct
 func (dst *CreateWorkflowRequestFiltersInner) UnmarshalJSON(data []byte) error {
 	var err error
 	// try to unmarshal JSON data into CreateWorkflowFilterUsingCustomFilterOnAssets
-	err = json.Unmarshal(data, &dst.CreateWorkflowFilterUsingCustomFilterOnAssets)
+	err = json.Unmarshal(data, &dst.CreateWorkflowFilterUsingCustomFilterOnAssets);
 	if err == nil {
 		jsonCreateWorkflowFilterUsingCustomFilterOnAssets, _ := json.Marshal(dst.CreateWorkflowFilterUsingCustomFilterOnAssets)
 		if string(jsonCreateWorkflowFilterUsingCustomFilterOnAssets) == "{}" { // empty struct
@@ -40,7 +41,7 @@ func (dst *CreateWorkflowRequestFiltersInner) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal JSON data into CreateWorkflowFilterUsingCustomFilterOnIssues
-	err = json.Unmarshal(data, &dst.CreateWorkflowFilterUsingCustomFilterOnIssues)
+	err = json.Unmarshal(data, &dst.CreateWorkflowFilterUsingCustomFilterOnIssues);
 	if err == nil {
 		jsonCreateWorkflowFilterUsingCustomFilterOnIssues, _ := json.Marshal(dst.CreateWorkflowFilterUsingCustomFilterOnIssues)
 		if string(jsonCreateWorkflowFilterUsingCustomFilterOnIssues) == "{}" { // empty struct
@@ -53,7 +54,7 @@ func (dst *CreateWorkflowRequestFiltersInner) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal JSON data into CreateWorkflowFilterUsingCustomFilterOnProfiles
-	err = json.Unmarshal(data, &dst.CreateWorkflowFilterUsingCustomFilterOnProfiles)
+	err = json.Unmarshal(data, &dst.CreateWorkflowFilterUsingCustomFilterOnProfiles);
 	if err == nil {
 		jsonCreateWorkflowFilterUsingCustomFilterOnProfiles, _ := json.Marshal(dst.CreateWorkflowFilterUsingCustomFilterOnProfiles)
 		if string(jsonCreateWorkflowFilterUsingCustomFilterOnProfiles) == "{}" { // empty struct
@@ -66,7 +67,7 @@ func (dst *CreateWorkflowRequestFiltersInner) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal JSON data into CreateWorkflowFilterUsingView
-	err = json.Unmarshal(data, &dst.CreateWorkflowFilterUsingView)
+	err = json.Unmarshal(data, &dst.CreateWorkflowFilterUsingView);
 	if err == nil {
 		jsonCreateWorkflowFilterUsingView, _ := json.Marshal(dst.CreateWorkflowFilterUsingView)
 		if string(jsonCreateWorkflowFilterUsingView) == "{}" { // empty struct
@@ -101,6 +102,7 @@ func (src CreateWorkflowRequestFiltersInner) MarshalJSON() ([]byte, error) {
 
 	return nil, nil // no data in anyOf schemas
 }
+
 
 type NullableCreateWorkflowRequestFiltersInner struct {
 	value *CreateWorkflowRequestFiltersInner
@@ -137,3 +139,5 @@ func (v *NullableCreateWorkflowRequestFiltersInner) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

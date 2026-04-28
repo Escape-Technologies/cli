@@ -12,8 +12,8 @@ package v3
 
 import (
 	"encoding/json"
-	"fmt"
 	"time"
+	"fmt"
 )
 
 // checks if the CreateazureIntegration200Response type satisfies the MappedNullable interface at compile time
@@ -32,8 +32,8 @@ type CreateazureIntegration200Response struct {
 	// The date and time the integration is scheduled for deletion
 	ScheduledForDeletionAt *time.Time `json:"scheduledForDeletionAt,omitempty"`
 	// The date and time the last pull workflow was executed
-	LastPullWorkflowAt *time.Time                            `json:"lastPullWorkflowAt,omitempty"`
-	Kind               ENUMPROPERTIESDATAITEMSPROPERTIESKIND `json:"kind"`
+	LastPullWorkflowAt *time.Time `json:"lastPullWorkflowAt,omitempty"`
+	Kind ENUMPROPERTIESDATAITEMSPROPERTIESKIND `json:"kind"`
 	// Whether the integration is valid
 	Valid bool `json:"valid"`
 	// The validation errors of the integration
@@ -41,9 +41,9 @@ type CreateazureIntegration200Response struct {
 	// The id of the organization the integration belongs to
 	OrganizationId string `json:"organizationId"`
 	// The projects of the integration
-	Projects             []ListProjects200ResponseDataInner      `json:"projects"`
-	Parameters           CreateazureIntegrationRequestParameters `json:"parameters"`
-	Location             *LocationDetailed                       `json:"location,omitempty"`
+	Projects []ListProjects200ResponseDataInner `json:"projects"`
+	Parameters CreateazureIntegrationRequestParameters `json:"parameters"`
+	Location *LocationDetailed `json:"location,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -413,7 +413,7 @@ func (o *CreateazureIntegration200Response) SetLocation(v LocationDetailed) {
 }
 
 func (o CreateazureIntegration200Response) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -471,10 +471,10 @@ func (o *CreateazureIntegration200Response) UnmarshalJSON(data []byte) (err erro
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -547,3 +547,5 @@ func (v *NullableCreateazureIntegration200Response) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

@@ -20,27 +20,27 @@ var _ MappedNullable = &CreateAssetCODEPROJECTRequestRepositoryOneOf{}
 
 // CreateAssetCODEPROJECTRequestRepositoryOneOf struct for CreateAssetCODEPROJECTRequestRepositoryOneOf
 type CreateAssetCODEPROJECTRequestRepositoryOneOf struct {
-	AssetClass           ENUMREPOSITORY                                  `json:"asset_class"`
-	ExtraMetadata        map[string]interface{}                          `json:"extra_metadata,omitempty"`
-	ScreenshotS3Key      *string                                         `json:"screenshot_s3_key,omitempty"`
-	AssetType            ENUMGITLABREPOSITORY                            `json:"asset_type"`
-	Url                  string                                          `json:"url"`
-	Name                 *string                                         `json:"name,omitempty"`
-	HttpUrlToRepo        *string                                         `json:"http_url_to_repo,omitempty"`
-	Description          *string                                         `json:"description,omitempty"`
-	LocationId           *string                                         `json:"location_id,omitempty"`
-	DefaultBranch        *string                                         `json:"default_branch,omitempty"`
-	BlobBaseUrl          *string                                         `json:"blob_base_url,omitempty"`
-	LastCommit           *CreateAssetGITLABREPOSITORYRequestLastCommit   `json:"last_commit,omitempty"`
-	Owners               []CreateAssetGITLABREPOSITORYRequestOwnersInner `json:"owners,omitempty"`
-	Languages            []ENUMPROPERTIESLANGUAGESITEMS                  `json:"languages,omitempty"`
-	GroupId              *float32                                        `json:"group_id,omitempty"`
-	GroupFullPath        *string                                         `json:"group_full_path,omitempty"`
-	GroupWebUrl          *string                                         `json:"group_web_url,omitempty"`
-	ProjectId            *float32                                        `json:"project_id,omitempty"`
-	Archived             *bool                                           `json:"archived,omitempty"`
-	Visibility           *ENUMPROPERTIESVISIBILITY                       `json:"visibility,omitempty"`
-	Group                *CreateAssetGITLABREPOSITORYRequestGroup        `json:"group,omitempty"`
+	AssetClass ENUMREPOSITORY `json:"asset_class"`
+	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
+	ScreenshotS3Key *string `json:"screenshot_s3_key,omitempty"`
+	AssetType ENUMGITLABREPOSITORY `json:"asset_type"`
+	Url string `json:"url"`
+	Name *string `json:"name,omitempty"`
+	HttpUrlToRepo *string `json:"http_url_to_repo,omitempty"`
+	Description *string `json:"description,omitempty"`
+	LocationId *string `json:"location_id,omitempty"`
+	DefaultBranch *string `json:"default_branch,omitempty"`
+	BlobBaseUrl *string `json:"blob_base_url,omitempty"`
+	LastCommit *CreateAssetGITLABREPOSITORYRequestLastCommit `json:"last_commit,omitempty"`
+	Owners []CreateAssetGITLABREPOSITORYRequestOwnersInner `json:"owners,omitempty"`
+	Languages []ENUMPROPERTIESLANGUAGESITEMS `json:"languages,omitempty"`
+	GroupId *float32 `json:"group_id,omitempty"`
+	GroupFullPath *string `json:"group_full_path,omitempty"`
+	GroupWebUrl *string `json:"group_web_url,omitempty"`
+	ProjectId *float32 `json:"project_id,omitempty"`
+	Archived *bool `json:"archived,omitempty"`
+	Visibility *ENUMPROPERTIESVISIBILITY `json:"visibility,omitempty"`
+	Group *CreateAssetGITLABREPOSITORYRequestGroup `json:"group,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -715,7 +715,7 @@ func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) SetGroup(v CreateAssetGIT
 }
 
 func (o CreateAssetCODEPROJECTRequestRepositoryOneOf) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -804,10 +804,10 @@ func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf) UnmarshalJSON(data []byte
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -888,3 +888,5 @@ func (v *NullableCreateAssetCODEPROJECTRequestRepositoryOneOf) UnmarshalJSON(src
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

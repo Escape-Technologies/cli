@@ -20,7 +20,7 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationSecurityTestsMultiUser
 
 // GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControlSpecificUsersValue struct for GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControlSpecificUsersValue
 type GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControlSpecificUsersValue struct {
-	Detect               []interface{} `json:"detect"`
+	Detect []interface{} `json:"detect"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -69,7 +69,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControlSp
 }
 
 func (o GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControlSpecificUsersValue) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -100,10 +100,10 @@ func (o *GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControlSp
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -164,3 +164,5 @@ func (v *NullableGetProfile200ResponseConfigurationSecurityTestsMultiUserAccessC
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

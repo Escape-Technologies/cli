@@ -18,7 +18,7 @@ import (
 
 // CreateCustomRuleRequestContentRuleOneOfTransformMutateInner - struct for CreateCustomRuleRequestContentRuleOneOfTransformMutateInner
 type CreateCustomRuleRequestContentRuleOneOfTransformMutateInner struct {
-	CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf  *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf
+	CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf
 	CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf1 *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf1
 	CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf2 *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf2
 	CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf3 *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf3
@@ -83,6 +83,7 @@ func CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf7AsCreateCu
 		CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf7: v,
 	}
 }
+
 
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *CreateCustomRuleRequestContentRuleOneOfTransformMutateInner) UnmarshalJSON(data []byte) error {
@@ -281,7 +282,7 @@ func (src CreateCustomRuleRequestContentRuleOneOfTransformMutateInner) MarshalJS
 }
 
 // Get the actual instance
-func (obj *CreateCustomRuleRequestContentRuleOneOfTransformMutateInner) GetActualInstance() interface{} {
+func (obj *CreateCustomRuleRequestContentRuleOneOfTransformMutateInner) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
@@ -322,7 +323,7 @@ func (obj *CreateCustomRuleRequestContentRuleOneOfTransformMutateInner) GetActua
 }
 
 // Get the actual instance value
-func (obj CreateCustomRuleRequestContentRuleOneOfTransformMutateInner) GetActualInstanceValue() interface{} {
+func (obj CreateCustomRuleRequestContentRuleOneOfTransformMutateInner) GetActualInstanceValue() (interface{}) {
 	if obj.CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf != nil {
 		return *obj.CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf
 	}
@@ -394,3 +395,5 @@ func (v *NullableCreateCustomRuleRequestContentRuleOneOfTransformMutateInner) Un
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

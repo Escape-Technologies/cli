@@ -198,6 +198,81 @@ func ListScanTargets(ctx context.Context, scanID string, next string, targetType
 	return data.Data, data.NextCursor, nil
 }
 
+// ListScanProblemsFilters holds optional filters for listing scan problems
+type ListScanProblemsFilters struct {
+	After         string
+	Before        string
+	AssetIDs      []string
+	ProfileIDs    []string
+	ProjectIDs    []string
+	Ignored       string
+	Initiator     []string
+	Kinds         []string
+	Status        []string
+	SortType      string
+	SortDirection string
+}
+
+// ListScanProblems lists scans together with their validation problems
+func ListScanProblems(ctx context.Context, next string, filters *ListScanProblemsFilters) ([]v3.ScanSummarizedWithProblems2, *string, error) {
+	client, err := newAPIV3Client()
+	if err != nil {
+		return nil, nil, fmt.Errorf("unable to init client: %w", err)
+	}
+	req := client.ScansAPI.ScansProblems(ctx)
+
+	batchSize := 100
+	if filters != nil && filters.SortType != "" {
+		req = req.SortType(filters.SortType)
+	} else {
+		req = req.SortType("createdAt")
+	}
+	if filters != nil && filters.SortDirection != "" {
+		req = req.SortDirection(filters.SortDirection)
+	} else {
+		req = req.SortDirection("desc")
+	}
+	req = req.Size(batchSize)
+	if next != "" {
+		req = req.Cursor(next)
+	}
+	if filters != nil {
+		if filters.After != "" {
+			req = req.After(filters.After)
+		}
+		if filters.Before != "" {
+			req = req.Before(filters.Before)
+		}
+		if len(filters.AssetIDs) > 0 {
+			req = req.AssetIds(strings.Join(filters.AssetIDs, ","))
+		}
+		if len(filters.ProfileIDs) > 0 {
+			req = req.ProfileIds(strings.Join(filters.ProfileIDs, ","))
+		}
+		if len(filters.ProjectIDs) > 0 {
+			ids := filters.ProjectIDs
+			req = req.ProjectIds(v3.ListScansProjectIdsParameter{ArrayOfString: &ids})
+		}
+		if filters.Ignored != "" {
+			req = req.Ignored(filters.Ignored)
+		}
+		if len(filters.Initiator) > 0 {
+			req = req.Initiator(filters.Initiator)
+		}
+		if len(filters.Kinds) > 0 {
+			req = req.Kinds(filters.Kinds)
+		}
+		if len(filters.Status) > 0 {
+			req = req.Status(filters.Status)
+		}
+	}
+	data, _, err := req.Execute()
+	if err != nil {
+		return nil, nil, fmt.Errorf("unable to list scan problems: %w", humanizeAPIError(err))
+	}
+	return data.Data, data.NextCursor, nil
+}
+
 // IgnoreScan ignore a scan
 func IgnoreScan(ctx context.Context, scanID string) error {
 	client, err := newAPIV3Client()

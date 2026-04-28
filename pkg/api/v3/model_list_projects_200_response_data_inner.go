@@ -12,8 +12,8 @@ package v3
 
 import (
 	"encoding/json"
-	"fmt"
 	"time"
+	"fmt"
 )
 
 // checks if the ListProjects200ResponseDataInner type satisfies the MappedNullable interface at compile time
@@ -28,7 +28,7 @@ type ListProjects200ResponseDataInner struct {
 	// The date and time the project was created
 	CreatedAt time.Time `json:"createdAt"`
 	// The bindings of the project
-	Bindings             []ListProjects200ResponseDataInnerBindingsInner `json:"bindings"`
+	Bindings []ListProjects200ResponseDataInnerBindingsInner `json:"bindings"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -152,7 +152,7 @@ func (o *ListProjects200ResponseDataInner) SetBindings(v []ListProjects200Respon
 }
 
 func (o ListProjects200ResponseDataInner) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -189,10 +189,10 @@ func (o *ListProjects200ResponseDataInner) UnmarshalJSON(data []byte) (err error
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -256,3 +256,5 @@ func (v *NullableListProjects200ResponseDataInner) UnmarshalJSON(src []byte) err
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

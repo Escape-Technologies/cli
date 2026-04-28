@@ -19,10 +19,10 @@ var _ MappedNullable = &CreateAssetDNSRequestPathsInsightsInnerParametersParamet
 
 // CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValue struct for CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValue
 type CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValue struct {
-	Schema               map[string]interface{}                                                                               `json:"schema,omitempty"`
-	Example              NullableCreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample                      `json:"example,omitempty"`
-	Examples             map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue             `json:"examples,omitempty"`
-	Encoding             map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValueEncodingValue `json:"encoding,omitempty"`
+	Schema map[string]interface{} `json:"schema,omitempty"`
+	Example NullableCreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample `json:"example,omitempty"`
+	Examples map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue `json:"examples,omitempty"`
+	Encoding map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValueEncodingValue `json:"encoding,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -109,7 +109,6 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContent
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValue) SetExample(v CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample) {
 	o.Example.Set(&v)
 }
-
 // SetExampleNil sets the value for Example to be an explicit nil
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValue) SetExampleNil() {
 	o.Example.Set(nil)
@@ -185,7 +184,7 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContent
 }
 
 func (o CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValue) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -273,3 +272,5 @@ func (v *NullableCreateAssetDNSRequestPathsInsightsInnerParametersParametersInne
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

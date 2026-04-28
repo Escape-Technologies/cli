@@ -20,8 +20,8 @@ var _ MappedNullable = &CreatejiraIntegrationRequestParametersTemplatesInnerProp
 
 // CreatejiraIntegrationRequestParametersTemplatesInnerPropertiesMappingInner struct for CreatejiraIntegrationRequestParametersTemplatesInnerPropertiesMappingInner
 type CreatejiraIntegrationRequestParametersTemplatesInnerPropertiesMappingInner struct {
-	Name                 string                                                                                   `json:"name"`
-	Mapping              []CreatejiraIntegrationRequestParametersTemplatesInnerPropertiesMappingInnerMappingInner `json:"mapping"`
+	Name string `json:"name"`
+	Mapping []CreatejiraIntegrationRequestParametersTemplatesInnerPropertiesMappingInnerMappingInner `json:"mapping"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -95,7 +95,7 @@ func (o *CreatejiraIntegrationRequestParametersTemplatesInnerPropertiesMappingIn
 }
 
 func (o CreatejiraIntegrationRequestParametersTemplatesInnerPropertiesMappingInner) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -128,10 +128,10 @@ func (o *CreatejiraIntegrationRequestParametersTemplatesInnerPropertiesMappingIn
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -193,3 +193,5 @@ func (v *NullableCreatejiraIntegrationRequestParametersTemplatesInnerPropertiesM
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

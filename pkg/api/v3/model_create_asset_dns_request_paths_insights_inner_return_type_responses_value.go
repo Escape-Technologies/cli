@@ -20,9 +20,9 @@ var _ MappedNullable = &CreateAssetDNSRequestPathsInsightsInnerReturnTypeRespons
 
 // CreateAssetDNSRequestPathsInsightsInnerReturnTypeResponsesValue struct for CreateAssetDNSRequestPathsInsightsInnerReturnTypeResponsesValue
 type CreateAssetDNSRequestPathsInsightsInnerReturnTypeResponsesValue struct {
-	Description          string                                                                                                           `json:"description"`
-	Headers              map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValueEncodingValueHeadersValue `json:"headers,omitempty"`
-	Content              map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValue                          `json:"content,omitempty"`
+	Description string `json:"description"`
+	Headers map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValueEncodingValueHeadersValue `json:"headers,omitempty"`
+	Content map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValue `json:"content,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -135,7 +135,7 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerReturnTypeResponsesValue) SetCon
 }
 
 func (o CreateAssetDNSRequestPathsInsightsInnerReturnTypeResponsesValue) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -172,10 +172,10 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerReturnTypeResponsesValue) Unmars
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -238,3 +238,5 @@ func (v *NullableCreateAssetDNSRequestPathsInsightsInnerReturnTypeResponsesValue
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

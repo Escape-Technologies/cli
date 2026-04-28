@@ -21,7 +21,7 @@ var _ MappedNullable = &UpdateWorkflowRequest{}
 // UpdateWorkflowRequest struct for UpdateWorkflowRequest
 type UpdateWorkflowRequest struct {
 	// The new name of the integration
-	Name    *string                                  `json:"name,omitempty"`
+	Name *string `json:"name,omitempty"`
 	Trigger ENUMPROPERTIESDATAITEMSPROPERTIESTRIGGER `json:"trigger"`
 	// The throttle in milliseconds for the workflow.
 	ThrottleMs *float32 `json:"throttleMs,omitempty"`
@@ -30,7 +30,7 @@ type UpdateWorkflowRequest struct {
 	// The actions to update the workflow with, this will replace the existing actions
 	Actions []UpdateWorkflowRequestActionsInner `json:"actions,omitempty"`
 	// Optional list of project IDs to attach to the integration
-	ProjectIds           []string `json:"projectIds,omitempty"`
+	ProjectIds []string `json:"projectIds,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -239,7 +239,7 @@ func (o *UpdateWorkflowRequest) SetProjectIds(v []string) {
 }
 
 func (o UpdateWorkflowRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -285,10 +285,10 @@ func (o *UpdateWorkflowRequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -354,3 +354,5 @@ func (v *NullableUpdateWorkflowRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

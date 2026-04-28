@@ -20,9 +20,9 @@ var _ MappedNullable = &CreateExportWorkflowActionUsingWebhook{}
 
 // CreateExportWorkflowActionUsingWebhook struct for CreateExportWorkflowActionUsingWebhook
 type CreateExportWorkflowActionUsingWebhook struct {
-	Type                 ENUMEXPORT                                       `json:"type"`
-	Parameters           CreateExportWorkflowActionUsingWebhookParameters `json:"parameters"`
-	IntegrationKind      ENUMWEBHOOK                                      `json:"integrationKind"`
+	Type ENUMEXPORT `json:"type"`
+	Parameters CreateExportWorkflowActionUsingWebhookParameters `json:"parameters"`
+	IntegrationKind ENUMWEBHOOK `json:"integrationKind"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -121,7 +121,7 @@ func (o *CreateExportWorkflowActionUsingWebhook) SetIntegrationKind(v ENUMWEBHOO
 }
 
 func (o CreateExportWorkflowActionUsingWebhook) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -156,10 +156,10 @@ func (o *CreateExportWorkflowActionUsingWebhook) UnmarshalJSON(data []byte) (err
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -222,3 +222,5 @@ func (v *NullableCreateExportWorkflowActionUsingWebhook) UnmarshalJSON(src []byt
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
