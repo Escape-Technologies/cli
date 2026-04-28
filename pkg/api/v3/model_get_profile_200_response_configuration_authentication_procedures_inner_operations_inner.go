@@ -18,7 +18,7 @@ import (
 
 // GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInner - struct for GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInner
 type GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInner struct {
-	GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf  *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf
+	GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf
 	GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1 *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1
 	GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf2 *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf2
 	GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf3 *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf3
@@ -67,6 +67,7 @@ func GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsIn
 		GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf5: v,
 	}
 }
+
 
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInner) UnmarshalJSON(data []byte) error {
@@ -221,7 +222,7 @@ func (src GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperati
 }
 
 // Get the actual instance
-func (obj *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInner) GetActualInstance() interface{} {
+func (obj *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInner) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
@@ -254,7 +255,7 @@ func (obj *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperat
 }
 
 // Get the actual instance value
-func (obj GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInner) GetActualInstanceValue() interface{} {
+func (obj GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInner) GetActualInstanceValue() (interface{}) {
 	if obj.GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf != nil {
 		return *obj.GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf
 	}
@@ -318,3 +319,5 @@ func (v *NullableGetProfile200ResponseConfigurationAuthenticationProceduresInner
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

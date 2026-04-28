@@ -20,13 +20,13 @@ var _ MappedNullable = &CreateCustomRuleRequestContentRuleOneOfAlert{}
 
 // CreateCustomRuleRequestContentRuleOneOfAlert struct for CreateCustomRuleRequestContentRuleOneOfAlert
 type CreateCustomRuleRequestContentRuleOneOfAlert struct {
-	Severity             ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESSEVERITY `json:"severity"`
-	Name                 string                                                                `json:"name"`
-	Context              string                                                                `json:"context"`
-	Category             ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY                             `json:"category"`
-	Description          *string                                                               `json:"description,omitempty"`
-	Remediation          *string                                                               `json:"remediation,omitempty"`
-	Compliance           *CreateCustomRuleRequestContentRuleOneOfAlertCompliance               `json:"compliance,omitempty"`
+	Severity ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESSEVERITY `json:"severity"`
+	Name string `json:"name"`
+	Context string `json:"context"`
+	Category ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY `json:"category"`
+	Description *string `json:"description,omitempty"`
+	Remediation *string `json:"remediation,omitempty"`
+	Compliance *CreateCustomRuleRequestContentRuleOneOfAlertCompliance `json:"compliance,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -246,7 +246,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOfAlert) SetCompliance(v CreateCus
 }
 
 func (o CreateCustomRuleRequestContentRuleOneOfAlert) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -292,10 +292,10 @@ func (o *CreateCustomRuleRequestContentRuleOneOfAlert) UnmarshalJSON(data []byte
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -362,3 +362,5 @@ func (v *NullableCreateCustomRuleRequestContentRuleOneOfAlert) UnmarshalJSON(src
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

@@ -20,12 +20,12 @@ var _ MappedNullable = &CreateCustomRuleRequestContentRuleOneOfTransformTriggerI
 
 // CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf14 struct for CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf14
 type CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf14 struct {
-	Is                   *float32               `json:"is,omitempty"`
-	IsNot                *float32               `json:"is_not,omitempty"`
-	In                   []float32              `json:"in,omitempty"`
-	Gt                   *float32               `json:"gt,omitempty"`
-	Lt                   *float32               `json:"lt,omitempty"`
-	If                   ENUMRESPONSEDURATIONMS `json:"if"`
+	Is *float32 `json:"is,omitempty"`
+	IsNot *float32 `json:"is_not,omitempty"`
+	In []float32 `json:"in,omitempty"`
+	Gt *float32 `json:"gt,omitempty"`
+	Lt *float32 `json:"lt,omitempty"`
+	If ENUMRESPONSEDURATIONMS `json:"if"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -234,7 +234,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf14) Se
 }
 
 func (o CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf14) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -280,10 +280,10 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOneOf14) Un
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -349,3 +349,5 @@ func (v *NullableCreateCustomRuleRequestContentRuleOneOfTransformTriggerInnerOne
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

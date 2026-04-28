@@ -19,12 +19,12 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationServiceDiscovery{}
 
 // GetProfile200ResponseConfigurationServiceDiscovery struct for GetProfile200ResponseConfigurationServiceDiscovery
 type GetProfile200ResponseConfigurationServiceDiscovery struct {
-	Blocklist                []GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf `json:"blocklist,omitempty"`
-	BaseUrlsDelimiters       []string                                                     `json:"base_urls_delimiters,omitempty"`
-	BaseUrlsWordlist         []string                                                     `json:"base_urls_wordlist,omitempty"`
-	EndpointsWordlist        []string                                                     `json:"endpoints_wordlist,omitempty"`
-	GraphqlEndpointsWordlist []string                                                     `json:"graphql_endpoints_wordlist,omitempty"`
-	AdditionalProperties     map[string]interface{}
+	Blocklist []GetProfile200ResponseConfigurationScopeAllowlistInnerOneOf `json:"blocklist,omitempty"`
+	BaseUrlsDelimiters []string `json:"base_urls_delimiters,omitempty"`
+	BaseUrlsWordlist []string `json:"base_urls_wordlist,omitempty"`
+	EndpointsWordlist []string `json:"endpoints_wordlist,omitempty"`
+	GraphqlEndpointsWordlist []string `json:"graphql_endpoints_wordlist,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetProfile200ResponseConfigurationServiceDiscovery GetProfile200ResponseConfigurationServiceDiscovery
@@ -207,7 +207,7 @@ func (o *GetProfile200ResponseConfigurationServiceDiscovery) SetGraphqlEndpoints
 }
 
 func (o GetProfile200ResponseConfigurationServiceDiscovery) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -299,3 +299,5 @@ func (v *NullableGetProfile200ResponseConfigurationServiceDiscovery) UnmarshalJS
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

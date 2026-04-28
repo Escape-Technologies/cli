@@ -20,18 +20,19 @@ import (
 	"time"
 )
 
+
 // EmailsAPIService EmailsAPI service
 type EmailsAPIService service
 
 type ApiListInboxEmailsRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *EmailsAPIService
-	email      *string
-	cursor     *string
-	size       *int
-	ids        *string
-	before     *time.Time
-	after      *time.Time
+	email *string
+	cursor *string
+	size *int
+	ids *string
+	before *time.Time
+	after *time.Time
 }
 
 // Inbox email address used as &#x60;to&#x60; filter
@@ -79,25 +80,24 @@ ListInboxEmails List inbox emails
 
 Given a target email address, list inbox emails with cursor pagination.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiListInboxEmailsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiListInboxEmailsRequest
 */
 func (a *EmailsAPIService) ListInboxEmails(ctx context.Context) ApiListInboxEmailsRequest {
 	return ApiListInboxEmailsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ListInboxEmails200Response
+//  @return ListInboxEmails200Response
 func (a *EmailsAPIService) ListInboxEmailsExecute(r ApiListInboxEmailsRequest) (*ListInboxEmails200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ListInboxEmails200Response
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ListInboxEmails200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EmailsAPIService.ListInboxEmails")
@@ -121,6 +121,7 @@ func (a *EmailsAPIService) ListInboxEmailsExecute(r ApiListInboxEmailsRequest) (
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.ids != nil {
@@ -193,8 +194,8 @@ func (a *EmailsAPIService) ListInboxEmailsExecute(r ApiListInboxEmailsRequest) (
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -204,8 +205,8 @@ func (a *EmailsAPIService) ListInboxEmailsExecute(r ApiListInboxEmailsRequest) (
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -223,9 +224,9 @@ func (a *EmailsAPIService) ListInboxEmailsExecute(r ApiListInboxEmailsRequest) (
 }
 
 type ApiReadInboxEmailRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *EmailsAPIService
-	id         string
+	id string
 }
 
 func (r ApiReadInboxEmailRequest) Execute() (*ScanEmailDetails, *http.Response, error) {
@@ -237,27 +238,26 @@ ReadInboxEmail Read inbox email content
 
 Given an email id, fetch and return its full raw content.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The inbox email ID
-	@return ApiReadInboxEmailRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The inbox email ID
+ @return ApiReadInboxEmailRequest
 */
 func (a *EmailsAPIService) ReadInboxEmail(ctx context.Context, id string) ApiReadInboxEmailRequest {
 	return ApiReadInboxEmailRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ScanEmailDetails
+//  @return ScanEmailDetails
 func (a *EmailsAPIService) ReadInboxEmailExecute(r ApiReadInboxEmailRequest) (*ScanEmailDetails, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ScanEmailDetails
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ScanEmailDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EmailsAPIService.ReadInboxEmail")
@@ -332,8 +332,8 @@ func (a *EmailsAPIService) ReadInboxEmailExecute(r ApiReadInboxEmailRequest) (*S
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -343,8 +343,8 @@ func (a *EmailsAPIService) ReadInboxEmailExecute(r ApiReadInboxEmailRequest) (*S
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

@@ -20,10 +20,10 @@ var _ MappedNullable = &UpdateakamaiIntegrationRequestParameters{}
 
 // UpdateakamaiIntegrationRequestParameters The new parameters of the integration
 type UpdateakamaiIntegrationRequestParameters struct {
-	ClientSecret         string `json:"client_secret"`
-	Host                 string `json:"host"`
-	AccessToken          string `json:"access_token"`
-	ClientToken          string `json:"client_token"`
+	ClientSecret string `json:"client_secret"`
+	Host string `json:"host"`
+	AccessToken string `json:"access_token"`
+	ClientToken string `json:"client_token"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -147,7 +147,7 @@ func (o *UpdateakamaiIntegrationRequestParameters) SetClientToken(v string) {
 }
 
 func (o UpdateakamaiIntegrationRequestParameters) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -184,10 +184,10 @@ func (o *UpdateakamaiIntegrationRequestParameters) UnmarshalJSON(data []byte) (e
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -251,3 +251,5 @@ func (v *NullableUpdateakamaiIntegrationRequestParameters) UnmarshalJSON(src []b
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

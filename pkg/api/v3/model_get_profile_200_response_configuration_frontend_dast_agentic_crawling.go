@@ -19,9 +19,9 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationFrontendDastAgenticCra
 
 // GetProfile200ResponseConfigurationFrontendDastAgenticCrawling struct for GetProfile200ResponseConfigurationFrontendDastAgenticCrawling
 type GetProfile200ResponseConfigurationFrontendDastAgenticCrawling struct {
-	Enabled              *bool   `json:"enabled,omitempty"`
-	SpaCrawling          *bool   `json:"spa_crawling,omitempty"`
-	Instructions         *string `json:"instructions,omitempty"`
+	Enabled *bool `json:"enabled,omitempty"`
+	SpaCrawling *bool `json:"spa_crawling,omitempty"`
+	Instructions *string `json:"instructions,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -141,7 +141,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDastAgenticCrawling) SetInstr
 }
 
 func (o GetProfile200ResponseConfigurationFrontendDastAgenticCrawling) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -225,3 +225,5 @@ func (v *NullableGetProfile200ResponseConfigurationFrontendDastAgenticCrawling) 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

@@ -24,8 +24,8 @@ type CreateNotifyWorkflowActionUsingEmailParametersToOneOf1 struct {
 	// Send the notification to global holders of the role
 	Global bool `json:"global"`
 	// Send the notification to holders of the role in the projects
-	ProjectIds           []string `json:"projectIds"`
-	Roles                []string `json:"roles"`
+	ProjectIds []string `json:"projectIds"`
+	Roles []string `json:"roles"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -149,7 +149,7 @@ func (o *CreateNotifyWorkflowActionUsingEmailParametersToOneOf1) SetRoles(v []st
 }
 
 func (o CreateNotifyWorkflowActionUsingEmailParametersToOneOf1) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -186,10 +186,10 @@ func (o *CreateNotifyWorkflowActionUsingEmailParametersToOneOf1) UnmarshalJSON(d
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -253,3 +253,5 @@ func (v *NullableCreateNotifyWorkflowActionUsingEmailParametersToOneOf1) Unmarsh
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

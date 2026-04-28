@@ -21,30 +21,30 @@ var _ MappedNullable = &CreateAssetGITHUBREPOSITORYRequest{}
 // CreateAssetGITHUBREPOSITORYRequest struct for CreateAssetGITHUBREPOSITORYRequest
 type CreateAssetGITHUBREPOSITORYRequest struct {
 	// The list of project IDs bind the asset on.
-	ProjectIds           []string                                        `json:"projectIds,omitempty"`
-	Name                 *string                                         `json:"name,omitempty"`
-	AssetClass           ENUMREPOSITORY                                  `json:"asset_class"`
-	ExtraMetadata        map[string]interface{}                          `json:"extra_metadata,omitempty"`
-	ScreenshotS3Key      *string                                         `json:"screenshot_s3_key,omitempty"`
-	AssetType            ENUMGITHUBREPOSITORY                            `json:"asset_type"`
-	Url                  string                                          `json:"url"`
-	HttpUrlToRepo        *string                                         `json:"http_url_to_repo,omitempty"`
-	Description          *string                                         `json:"description,omitempty"`
-	LocationId           *string                                         `json:"location_id,omitempty"`
-	DefaultBranch        *string                                         `json:"default_branch,omitempty"`
-	BlobBaseUrl          *string                                         `json:"blob_base_url,omitempty"`
-	LastCommit           *CreateAssetGITLABREPOSITORYRequestLastCommit   `json:"last_commit,omitempty"`
-	Owners               []CreateAssetGITLABREPOSITORYRequestOwnersInner `json:"owners,omitempty"`
-	Languages            []ENUMPROPERTIESLANGUAGESITEMS                  `json:"languages,omitempty"`
-	OwnerId              *float32                                        `json:"owner_id,omitempty"`
-	OwnerLogin           *string                                         `json:"owner_login,omitempty"`
-	OwnerHtmlUrl         *string                                         `json:"owner_html_url,omitempty"`
-	Fork                 *bool                                           `json:"fork,omitempty"`
-	Archived             *bool                                           `json:"archived,omitempty"`
-	Disabled             *bool                                           `json:"disabled,omitempty"`
-	Clonable             *bool                                           `json:"clonable,omitempty"`
-	Private              *bool                                           `json:"private,omitempty"`
-	Org                  *CreateAssetGITHUBREPOSITORYRequestOrg          `json:"org,omitempty"`
+	ProjectIds []string `json:"projectIds,omitempty"`
+	Name *string `json:"name,omitempty"`
+	AssetClass ENUMREPOSITORY `json:"asset_class"`
+	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
+	ScreenshotS3Key *string `json:"screenshot_s3_key,omitempty"`
+	AssetType ENUMGITHUBREPOSITORY `json:"asset_type"`
+	Url string `json:"url"`
+	HttpUrlToRepo *string `json:"http_url_to_repo,omitempty"`
+	Description *string `json:"description,omitempty"`
+	LocationId *string `json:"location_id,omitempty"`
+	DefaultBranch *string `json:"default_branch,omitempty"`
+	BlobBaseUrl *string `json:"blob_base_url,omitempty"`
+	LastCommit *CreateAssetGITLABREPOSITORYRequestLastCommit `json:"last_commit,omitempty"`
+	Owners []CreateAssetGITLABREPOSITORYRequestOwnersInner `json:"owners,omitempty"`
+	Languages []ENUMPROPERTIESLANGUAGESITEMS `json:"languages,omitempty"`
+	OwnerId *float32 `json:"owner_id,omitempty"`
+	OwnerLogin *string `json:"owner_login,omitempty"`
+	OwnerHtmlUrl *string `json:"owner_html_url,omitempty"`
+	Fork *bool `json:"fork,omitempty"`
+	Archived *bool `json:"archived,omitempty"`
+	Disabled *bool `json:"disabled,omitempty"`
+	Clonable *bool `json:"clonable,omitempty"`
+	Private *bool `json:"private,omitempty"`
+	Org *CreateAssetGITHUBREPOSITORYRequestOrg `json:"org,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -815,7 +815,7 @@ func (o *CreateAssetGITHUBREPOSITORYRequest) SetOrg(v CreateAssetGITHUBREPOSITOR
 }
 
 func (o CreateAssetGITHUBREPOSITORYRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -913,10 +913,10 @@ func (o *CreateAssetGITHUBREPOSITORYRequest) UnmarshalJSON(data []byte) (err err
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -1000,3 +1000,5 @@ func (v *NullableCreateAssetGITHUBREPOSITORYRequest) UnmarshalJSON(src []byte) e
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

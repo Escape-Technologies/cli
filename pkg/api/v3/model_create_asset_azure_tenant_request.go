@@ -21,16 +21,16 @@ var _ MappedNullable = &CreateAssetAZURETENANTRequest{}
 // CreateAssetAZURETENANTRequest struct for CreateAssetAZURETENANTRequest
 type CreateAssetAZURETENANTRequest struct {
 	// The list of project IDs bind the asset on.
-	ProjectIds           []string               `json:"projectIds,omitempty"`
-	Name                 *string                `json:"name,omitempty"`
-	AssetClass           ENUMCLOUDHOSTING       `json:"asset_class"`
-	ExtraMetadata        map[string]interface{} `json:"extra_metadata,omitempty"`
-	ScreenshotS3Key      *string                `json:"screenshot_s3_key,omitempty"`
-	AssetType            ENUMAZURETENANT        `json:"asset_type"`
-	ImmutableKey         string                 `json:"immutable_key"`
-	ClientId             string                 `json:"client_id"`
-	ClientSecret         string                 `json:"client_secret"`
-	TenantId             string                 `json:"tenant_id"`
+	ProjectIds []string `json:"projectIds,omitempty"`
+	Name *string `json:"name,omitempty"`
+	AssetClass ENUMCLOUDHOSTING `json:"asset_class"`
+	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
+	ScreenshotS3Key *string `json:"screenshot_s3_key,omitempty"`
+	AssetType ENUMAZURETENANT `json:"asset_type"`
+	ImmutableKey string `json:"immutable_key"`
+	ClientId string `json:"client_id"`
+	ClientSecret string `json:"client_secret"`
+	TenantId string `json:"tenant_id"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -332,7 +332,7 @@ func (o *CreateAssetAZURETENANTRequest) SetTenantId(v string) {
 }
 
 func (o CreateAssetAZURETENANTRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -385,10 +385,10 @@ func (o *CreateAssetAZURETENANTRequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -458,3 +458,5 @@ func (v *NullableCreateAssetAZURETENANTRequest) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

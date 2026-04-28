@@ -24,7 +24,7 @@ type UpdateLocationRequest struct {
 	// Whether the location is enabled.
 	Enabled *bool `json:"enabled,omitempty"`
 	// The SSH public key of the location.
-	SshPublicKey         *string `json:"sshPublicKey,omitempty"`
+	SshPublicKey *string `json:"sshPublicKey,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -144,7 +144,7 @@ func (o *UpdateLocationRequest) SetSshPublicKey(v string) {
 }
 
 func (o UpdateLocationRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -228,3 +228,5 @@ func (v *NullableUpdateLocationRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

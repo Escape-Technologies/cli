@@ -19,7 +19,7 @@ var _ MappedNullable = &CreateExportWorkflowActionUsingWizParameters{}
 
 // CreateExportWorkflowActionUsingWizParameters struct for CreateExportWorkflowActionUsingWizParameters
 type CreateExportWorkflowActionUsingWizParameters struct {
-	MinSeverity          *ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY `json:"minSeverity,omitempty"`
+	MinSeverity *ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY `json:"minSeverity,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -75,7 +75,7 @@ func (o *CreateExportWorkflowActionUsingWizParameters) SetMinSeverity(v ENUMPROP
 }
 
 func (o CreateExportWorkflowActionUsingWizParameters) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -151,3 +151,5 @@ func (v *NullableCreateExportWorkflowActionUsingWizParameters) UnmarshalJSON(src
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

@@ -20,15 +20,15 @@ var _ MappedNullable = &GetJob200Response{}
 
 // GetJob200Response struct for GetJob200Response
 type GetJob200Response struct {
-	Id                   string               `json:"id"`
-	Status               ENUMPROPERTIESSTATUS `json:"status"`
-	Kind                 ENUMPROPERTIESKIND   `json:"kind"`
-	CreatedAt            string               `json:"createdAt"`
-	ScheduledAt          *string              `json:"scheduledAt,omitempty"`
-	TriggeredAt          *string              `json:"triggeredAt,omitempty"`
-	CompletedAt          *string              `json:"completedAt,omitempty"`
-	Parameters           interface{}          `json:"parameters,omitempty"`
-	Artefacts            []JobArtefact        `json:"artefacts"`
+	Id string `json:"id"`
+	Status ENUMPROPERTIESSTATUS `json:"status"`
+	Kind ENUMPROPERTIESKIND `json:"kind"`
+	CreatedAt string `json:"createdAt"`
+	ScheduledAt *string `json:"scheduledAt,omitempty"`
+	TriggeredAt *string `json:"triggeredAt,omitempty"`
+	CompletedAt *string `json:"completedAt,omitempty"`
+	Parameters interface{} `json:"parameters,omitempty"`
+	Artefacts []JobArtefact `json:"artefacts"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -306,7 +306,7 @@ func (o *GetJob200Response) SetArtefacts(v []JobArtefact) {
 }
 
 func (o GetJob200Response) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -357,10 +357,10 @@ func (o *GetJob200Response) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -429,3 +429,5 @@ func (v *NullableGetJob200Response) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

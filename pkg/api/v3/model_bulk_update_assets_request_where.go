@@ -24,7 +24,7 @@ type BulkUpdateAssetsRequestWhere struct {
 	// Filter by asset types
 	Types []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE `json:"types,omitempty"`
 	// Filter by asset statuses
-	Statuses             []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS `json:"statuses,omitempty"`
+	Statuses []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS `json:"statuses,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -144,7 +144,7 @@ func (o *BulkUpdateAssetsRequestWhere) SetStatuses(v []ENUMPROPERTIESDATAITEMSPR
 }
 
 func (o BulkUpdateAssetsRequestWhere) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -228,3 +228,5 @@ func (v *NullableBulkUpdateAssetsRequestWhere) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

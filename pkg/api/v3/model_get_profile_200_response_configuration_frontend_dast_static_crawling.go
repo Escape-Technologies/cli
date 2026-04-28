@@ -19,8 +19,8 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationFrontendDastStaticCraw
 
 // GetProfile200ResponseConfigurationFrontendDastStaticCrawling struct for GetProfile200ResponseConfigurationFrontendDastStaticCrawling
 type GetProfile200ResponseConfigurationFrontendDastStaticCrawling struct {
-	Enabled              *bool    `json:"enabled,omitempty"`
-	TimeLimitSeconds     *float32 `json:"time_limit_seconds,omitempty"`
+	Enabled *bool `json:"enabled,omitempty"`
+	TimeLimitSeconds *float32 `json:"time_limit_seconds,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -108,7 +108,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDastStaticCrawling) SetTimeLi
 }
 
 func (o GetProfile200ResponseConfigurationFrontendDastStaticCrawling) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -188,3 +188,5 @@ func (v *NullableGetProfile200ResponseConfigurationFrontendDastStaticCrawling) U
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

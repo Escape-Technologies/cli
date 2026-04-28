@@ -20,7 +20,7 @@ var _ MappedNullable = &CreateNotifyWorkflowActionUsingSlackParameters{}
 
 // CreateNotifyWorkflowActionUsingSlackParameters struct for CreateNotifyWorkflowActionUsingSlackParameters
 type CreateNotifyWorkflowActionUsingSlackParameters struct {
-	Url                  string `json:"url"`
+	Url string `json:"url"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -69,7 +69,7 @@ func (o *CreateNotifyWorkflowActionUsingSlackParameters) SetUrl(v string) {
 }
 
 func (o CreateNotifyWorkflowActionUsingSlackParameters) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -100,10 +100,10 @@ func (o *CreateNotifyWorkflowActionUsingSlackParameters) UnmarshalJSON(data []by
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -164,3 +164,5 @@ func (v *NullableCreateNotifyWorkflowActionUsingSlackParameters) UnmarshalJSON(s
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

@@ -21,7 +21,7 @@ var _ MappedNullable = &UpdateProfileSchemaRequest{}
 // UpdateProfileSchemaRequest struct for UpdateProfileSchemaRequest
 type UpdateProfileSchemaRequest struct {
 	// The asset schema ID
-	SchemaId             string `json:"schemaId"`
+	SchemaId string `json:"schemaId"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -70,7 +70,7 @@ func (o *UpdateProfileSchemaRequest) SetSchemaId(v string) {
 }
 
 func (o UpdateProfileSchemaRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -101,10 +101,10 @@ func (o *UpdateProfileSchemaRequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -165,3 +165,5 @@ func (v *NullableUpdateProfileSchemaRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

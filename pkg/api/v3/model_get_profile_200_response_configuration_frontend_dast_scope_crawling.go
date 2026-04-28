@@ -19,9 +19,9 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationFrontendDastScopeCrawl
 
 // GetProfile200ResponseConfigurationFrontendDastScopeCrawling struct for GetProfile200ResponseConfigurationFrontendDastScopeCrawling
 type GetProfile200ResponseConfigurationFrontendDastScopeCrawling struct {
-	ExtendGlobalScope    *bool                                                                       `json:"extend_global_scope,omitempty"`
-	Allowlist            []GetProfile200ResponseConfigurationFrontendDastScopeCrawlingAllowlistInner `json:"allowlist,omitempty"`
-	Blocklist            []GetProfile200ResponseConfigurationFrontendDastScopeCrawlingAllowlistInner `json:"blocklist,omitempty"`
+	ExtendGlobalScope *bool `json:"extend_global_scope,omitempty"`
+	Allowlist []GetProfile200ResponseConfigurationFrontendDastScopeCrawlingAllowlistInner `json:"allowlist,omitempty"`
+	Blocklist []GetProfile200ResponseConfigurationFrontendDastScopeCrawlingAllowlistInner `json:"blocklist,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -141,7 +141,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDastScopeCrawling) SetBlockli
 }
 
 func (o GetProfile200ResponseConfigurationFrontendDastScopeCrawling) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -225,3 +225,5 @@ func (v *NullableGetProfile200ResponseConfigurationFrontendDastScopeCrawling) Un
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

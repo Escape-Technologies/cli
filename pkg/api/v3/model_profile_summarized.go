@@ -36,7 +36,7 @@ type ProfileSummarized struct {
 	SchemaAssetId *string `json:"schemaAssetId,omitempty"`
 	// Extra assets linked to the profile
 	ExtraAssets []ProfileExtraAsset `json:"extraAssets"`
-	Asset       AssetDetailed       `json:"asset"`
+	Asset AssetDetailed `json:"asset"`
 	// Security score of the last scan (0-100). Null if no scan has completed.
 	Score *float32 `json:"score,omitempty"`
 	// Coverage ratio of the last scan (0-1). Null if no scan has completed.
@@ -44,8 +44,8 @@ type ProfileSummarized struct {
 	// Number of open issues across all scans for this profile.
 	OpenIssueCount *int `json:"openIssueCount,omitempty"`
 	// Status of the most recent scan (e.g. FINISHED, RUNNING, FAILED).
-	LastScanStatus       *string                `json:"lastScanStatus,omitempty"`
-	Links                ProfileSummarizedLinks `json:"links"`
+	LastScanStatus *string `json:"lastScanStatus,omitempty"`
+	Links ProfileSummarizedLinks `json:"links"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -461,7 +461,7 @@ func (o *ProfileSummarized) SetLinks(v ProfileSummarizedLinks) {
 }
 
 func (o ProfileSummarized) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -524,10 +524,10 @@ func (o *ProfileSummarized) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -601,3 +601,5 @@ func (v *NullableProfileSummarized) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

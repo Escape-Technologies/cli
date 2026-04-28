@@ -20,7 +20,7 @@ var _ MappedNullable = &DeleteProfile200Response{}
 
 // DeleteProfile200Response struct for DeleteProfile200Response
 type DeleteProfile200Response struct {
-	Message              string `json:"message"`
+	Message string `json:"message"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -69,7 +69,7 @@ func (o *DeleteProfile200Response) SetMessage(v string) {
 }
 
 func (o DeleteProfile200Response) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -100,10 +100,10 @@ func (o *DeleteProfile200Response) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -164,3 +164,5 @@ func (v *NullableDeleteProfile200Response) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
