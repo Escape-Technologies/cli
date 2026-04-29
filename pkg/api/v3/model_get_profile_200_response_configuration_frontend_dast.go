@@ -19,6 +19,7 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationFrontendDast{}
 
 // GetProfile200ResponseConfigurationFrontendDast struct for GetProfile200ResponseConfigurationFrontendDast
 type GetProfile200ResponseConfigurationFrontendDast struct {
+	CustomData            map[string]string                                                                       `json:"custom_data,omitempty"`
 	LocationId            *string                                                                                 `json:"location_id,omitempty"`
 	Mode                  *ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE                        `json:"mode,omitempty"`
 	MaxDuration           *float32                                                                                `json:"max_duration,omitempty"`
@@ -57,6 +58,38 @@ func NewGetProfile200ResponseConfigurationFrontendDast() *GetProfile200ResponseC
 func NewGetProfile200ResponseConfigurationFrontendDastWithDefaults() *GetProfile200ResponseConfigurationFrontendDast {
 	this := GetProfile200ResponseConfigurationFrontendDast{}
 	return &this
+}
+
+// GetCustomData returns the CustomData field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationFrontendDast) GetCustomData() map[string]string {
+	if o == nil || IsNil(o.CustomData) {
+		var ret map[string]string
+		return ret
+	}
+	return o.CustomData
+}
+
+// GetCustomDataOk returns a tuple with the CustomData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationFrontendDast) GetCustomDataOk() (map[string]string, bool) {
+	if o == nil || IsNil(o.CustomData) {
+		return map[string]string{}, false
+	}
+	return o.CustomData, true
+}
+
+// HasCustomData returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationFrontendDast) HasCustomData() bool {
+	if o != nil && !IsNil(o.CustomData) {
+		return true
+	}
+
+	return false
+}
+
+// SetCustomData gets a reference to the given map[string]string and assigns it to the CustomData field.
+func (o *GetProfile200ResponseConfigurationFrontendDast) SetCustomData(v map[string]string) {
+	o.CustomData = v
 }
 
 // GetLocationId returns the LocationId field value if set, zero value otherwise.
@@ -645,6 +678,9 @@ func (o GetProfile200ResponseConfigurationFrontendDast) MarshalJSON() ([]byte, e
 
 func (o GetProfile200ResponseConfigurationFrontendDast) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.CustomData) {
+		toSerialize["custom_data"] = o.CustomData
+	}
 	if !IsNil(o.LocationId) {
 		toSerialize["location_id"] = o.LocationId
 	}
@@ -721,6 +757,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) UnmarshalJSON(data []by
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "custom_data")
 		delete(additionalProperties, "location_id")
 		delete(additionalProperties, "mode")
 		delete(additionalProperties, "max_duration")
