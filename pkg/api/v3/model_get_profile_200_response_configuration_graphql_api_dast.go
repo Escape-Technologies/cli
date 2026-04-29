@@ -19,20 +19,21 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationGraphqlApiDast{}
 
 // GetProfile200ResponseConfigurationGraphqlApiDast struct for GetProfile200ResponseConfigurationGraphqlApiDast
 type GetProfile200ResponseConfigurationGraphqlApiDast struct {
-	Url                    *string                                                                        `json:"url,omitempty"`
-	LocationId             *string                                                                        `json:"location_id,omitempty"`
-	Profile                *ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESPROFILE          `json:"profile,omitempty"`
-	ExplorationDepth       *ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESEXPLORATIONDEPTH `json:"exploration_depth,omitempty"`
-	ExploreWithAllUsers    *bool                                                                          `json:"explore_with_all_users,omitempty"`
-	CrossUserMemoryEnabled *bool                                                                          `json:"cross_user_memory_enabled,omitempty"`
-	Mode                   *ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE               `json:"mode,omitempty"`
-	MaxDuration            *float32                                                                       `json:"max_duration,omitempty"`
-	MaxGeneratedDepth      *float32                                                                       `json:"max_generated_depth,omitempty"`
-	Hotstart               []string                                                                       `json:"hotstart,omitempty"`
-	HotstartOnly           *bool                                                                          `json:"hotstart_only,omitempty"`
-	Scope                  *GetProfile200ResponseConfigurationGraphqlApiDastScope                         `json:"scope,omitempty"`
-	InScopeOnly            *bool                                                                          `json:"in_scope_only,omitempty"`
-	AdditionalProperties   map[string]interface{}
+	Url                      *string                                                                        `json:"url,omitempty"`
+	LocationId               *string                                                                        `json:"location_id,omitempty"`
+	Profile                  *ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESPROFILE          `json:"profile,omitempty"`
+	ExplorationDepth         *ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESEXPLORATIONDEPTH `json:"exploration_depth,omitempty"`
+	ExploreWithAllUsers      *bool                                                                          `json:"explore_with_all_users,omitempty"`
+	CrossUserMemoryEnabled   *bool                                                                          `json:"cross_user_memory_enabled,omitempty"`
+	CrossUserMemoryAllowlist []string                                                                       `json:"cross_user_memory_allowlist,omitempty"`
+	Mode                     *ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE               `json:"mode,omitempty"`
+	MaxDuration              *float32                                                                       `json:"max_duration,omitempty"`
+	MaxGeneratedDepth        *float32                                                                       `json:"max_generated_depth,omitempty"`
+	Hotstart                 []string                                                                       `json:"hotstart,omitempty"`
+	HotstartOnly             *bool                                                                          `json:"hotstart_only,omitempty"`
+	Scope                    *GetProfile200ResponseConfigurationGraphqlApiDastScope                         `json:"scope,omitempty"`
+	InScopeOnly              *bool                                                                          `json:"in_scope_only,omitempty"`
+	AdditionalProperties     map[string]interface{}
 }
 
 type _GetProfile200ResponseConfigurationGraphqlApiDast GetProfile200ResponseConfigurationGraphqlApiDast
@@ -244,6 +245,38 @@ func (o *GetProfile200ResponseConfigurationGraphqlApiDast) HasCrossUserMemoryEna
 // SetCrossUserMemoryEnabled gets a reference to the given bool and assigns it to the CrossUserMemoryEnabled field.
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetCrossUserMemoryEnabled(v bool) {
 	o.CrossUserMemoryEnabled = &v
+}
+
+// GetCrossUserMemoryAllowlist returns the CrossUserMemoryAllowlist field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationGraphqlApiDast) GetCrossUserMemoryAllowlist() []string {
+	if o == nil || IsNil(o.CrossUserMemoryAllowlist) {
+		var ret []string
+		return ret
+	}
+	return o.CrossUserMemoryAllowlist
+}
+
+// GetCrossUserMemoryAllowlistOk returns a tuple with the CrossUserMemoryAllowlist field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationGraphqlApiDast) GetCrossUserMemoryAllowlistOk() ([]string, bool) {
+	if o == nil || IsNil(o.CrossUserMemoryAllowlist) {
+		return nil, false
+	}
+	return o.CrossUserMemoryAllowlist, true
+}
+
+// HasCrossUserMemoryAllowlist returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationGraphqlApiDast) HasCrossUserMemoryAllowlist() bool {
+	if o != nil && !IsNil(o.CrossUserMemoryAllowlist) {
+		return true
+	}
+
+	return false
+}
+
+// SetCrossUserMemoryAllowlist gets a reference to the given []string and assigns it to the CrossUserMemoryAllowlist field.
+func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetCrossUserMemoryAllowlist(v []string) {
+	o.CrossUserMemoryAllowlist = v
 }
 
 // GetMode returns the Mode field value if set, zero value otherwise.
@@ -498,6 +531,9 @@ func (o GetProfile200ResponseConfigurationGraphqlApiDast) ToMap() (map[string]in
 	if !IsNil(o.CrossUserMemoryEnabled) {
 		toSerialize["cross_user_memory_enabled"] = o.CrossUserMemoryEnabled
 	}
+	if !IsNil(o.CrossUserMemoryAllowlist) {
+		toSerialize["cross_user_memory_allowlist"] = o.CrossUserMemoryAllowlist
+	}
 	if !IsNil(o.Mode) {
 		toSerialize["mode"] = o.Mode
 	}
@@ -547,6 +583,7 @@ func (o *GetProfile200ResponseConfigurationGraphqlApiDast) UnmarshalJSON(data []
 		delete(additionalProperties, "exploration_depth")
 		delete(additionalProperties, "explore_with_all_users")
 		delete(additionalProperties, "cross_user_memory_enabled")
+		delete(additionalProperties, "cross_user_memory_allowlist")
 		delete(additionalProperties, "mode")
 		delete(additionalProperties, "max_duration")
 		delete(additionalProperties, "max_generated_depth")
