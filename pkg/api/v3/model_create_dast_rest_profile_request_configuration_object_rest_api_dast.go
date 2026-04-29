@@ -19,18 +19,18 @@ var _ MappedNullable = &CreateDastRestProfileRequestConfigurationObjectRestApiDa
 
 // CreateDastRestProfileRequestConfigurationObjectRestApiDast struct for CreateDastRestProfileRequestConfigurationObjectRestApiDast
 type CreateDastRestProfileRequestConfigurationObjectRestApiDast struct {
-	LocationId               *string                                                                        `json:"location_id,omitempty"`
-	ExplorationDepth         *ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESEXPLORATIONDEPTH `json:"exploration_depth,omitempty"`
-	ExploreWithAllUsers      *bool                                                                          `json:"explore_with_all_users,omitempty"`
-	CrossUserMemoryAllowlist []string                                                                       `json:"cross_user_memory_allowlist,omitempty"`
-	Mode                     *ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE               `json:"mode,omitempty"`
-	MaxDuration              *float32                                                                       `json:"max_duration,omitempty"`
-	Hotstart                 []string                                                                       `json:"hotstart,omitempty"`
-	HotstartOnly             *bool                                                                          `json:"hotstart_only,omitempty"`
-	Scope                    *GetProfile200ResponseConfigurationGraphqlApiDastScope                         `json:"scope,omitempty"`
-	QueryParamsAreRequired   *bool                                                                          `json:"query_params_are_required,omitempty"`
-	InScopeOnly              *bool                                                                          `json:"in_scope_only,omitempty"`
-	AdditionalProperties     map[string]interface{}
+	LocationId             *string                                                                        `json:"location_id,omitempty"`
+	ExplorationDepth       *ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESEXPLORATIONDEPTH `json:"exploration_depth,omitempty"`
+	ExploreWithAllUsers    *bool                                                                          `json:"explore_with_all_users,omitempty"`
+	CrossUserMemoryEnabled *bool                                                                          `json:"cross_user_memory_enabled,omitempty"`
+	Mode                   *ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE               `json:"mode,omitempty"`
+	MaxDuration            *float32                                                                       `json:"max_duration,omitempty"`
+	Hotstart               []string                                                                       `json:"hotstart,omitempty"`
+	HotstartOnly           *bool                                                                          `json:"hotstart_only,omitempty"`
+	Scope                  *GetProfile200ResponseConfigurationGraphqlApiDastScope                         `json:"scope,omitempty"`
+	QueryParamsAreRequired *bool                                                                          `json:"query_params_are_required,omitempty"`
+	InScopeOnly            *bool                                                                          `json:"in_scope_only,omitempty"`
+	AdditionalProperties   map[string]interface{}
 }
 
 type _CreateDastRestProfileRequestConfigurationObjectRestApiDast CreateDastRestProfileRequestConfigurationObjectRestApiDast
@@ -146,38 +146,6 @@ func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) HasExploreW
 // SetExploreWithAllUsers gets a reference to the given bool and assigns it to the ExploreWithAllUsers field.
 func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) SetExploreWithAllUsers(v bool) {
 	o.ExploreWithAllUsers = &v
-}
-
-// GetCrossUserMemoryAllowlist returns the CrossUserMemoryAllowlist field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) GetCrossUserMemoryAllowlist() []string {
-	if o == nil || IsNil(o.CrossUserMemoryAllowlist) {
-		var ret []string
-		return ret
-	}
-	return o.CrossUserMemoryAllowlist
-}
-
-// GetCrossUserMemoryAllowlistOk returns a tuple with the CrossUserMemoryAllowlist field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) GetCrossUserMemoryAllowlistOk() ([]string, bool) {
-	if o == nil || IsNil(o.CrossUserMemoryAllowlist) {
-		return nil, false
-	}
-	return o.CrossUserMemoryAllowlist, true
-}
-
-// HasCrossUserMemoryAllowlist returns a boolean if a field has been set.
-func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) HasCrossUserMemoryAllowlist() bool {
-	if o != nil && !IsNil(o.CrossUserMemoryAllowlist) {
-		return true
-	}
-
-	return false
-}
-
-// SetCrossUserMemoryAllowlist gets a reference to the given []string and assigns it to the CrossUserMemoryAllowlist field.
-func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) SetCrossUserMemoryAllowlist(v []string) {
-	o.CrossUserMemoryAllowlist = v
 }
 
 // GetMode returns the Mode field value if set, zero value otherwise.
@@ -423,8 +391,8 @@ func (o CreateDastRestProfileRequestConfigurationObjectRestApiDast) ToMap() (map
 	if !IsNil(o.ExploreWithAllUsers) {
 		toSerialize["explore_with_all_users"] = o.ExploreWithAllUsers
 	}
-	if !IsNil(o.CrossUserMemoryAllowlist) {
-		toSerialize["cross_user_memory_allowlist"] = o.CrossUserMemoryAllowlist
+	if !IsNil(o.CrossUserMemoryEnabled) {
+		toSerialize["cross_user_memory_enabled"] = o.CrossUserMemoryEnabled
 	}
 	if !IsNil(o.Mode) {
 		toSerialize["mode"] = o.Mode
@@ -472,7 +440,7 @@ func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) UnmarshalJS
 		delete(additionalProperties, "location_id")
 		delete(additionalProperties, "exploration_depth")
 		delete(additionalProperties, "explore_with_all_users")
-		delete(additionalProperties, "cross_user_memory_allowlist")
+		delete(additionalProperties, "cross_user_memory_enabled")
 		delete(additionalProperties, "mode")
 		delete(additionalProperties, "max_duration")
 		delete(additionalProperties, "hotstart")
