@@ -214,6 +214,38 @@ func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetExploreWithAllUser
 	o.ExploreWithAllUsers = &v
 }
 
+// GetCrossUserMemoryEnabled returns the CrossUserMemoryEnabled field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationGraphqlApiDast) GetCrossUserMemoryEnabled() bool {
+	if o == nil || IsNil(o.CrossUserMemoryEnabled) {
+		var ret bool
+		return ret
+	}
+	return *o.CrossUserMemoryEnabled
+}
+
+// GetCrossUserMemoryEnabledOk returns a tuple with the CrossUserMemoryEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationGraphqlApiDast) GetCrossUserMemoryEnabledOk() (*bool, bool) {
+	if o == nil || IsNil(o.CrossUserMemoryEnabled) {
+		return nil, false
+	}
+	return o.CrossUserMemoryEnabled, true
+}
+
+// HasCrossUserMemoryEnabled returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationGraphqlApiDast) HasCrossUserMemoryEnabled() bool {
+	if o != nil && !IsNil(o.CrossUserMemoryEnabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetCrossUserMemoryEnabled gets a reference to the given bool and assigns it to the CrossUserMemoryEnabled field.
+func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetCrossUserMemoryEnabled(v bool) {
+	o.CrossUserMemoryEnabled = &v
+}
+
 // GetMode returns the Mode field value if set, zero value otherwise.
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) GetMode() ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE {
 	if o == nil || IsNil(o.Mode) {
