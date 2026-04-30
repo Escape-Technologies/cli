@@ -14,11 +14,11 @@ import (
 	"encoding/json"
 )
 
-// checks if the GetProfile200ResponseConfigurationFrontendDast type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &GetProfile200ResponseConfigurationFrontendDast{}
+// checks if the UpdateProfileConfigurationRequestConfigurationFrontendDast type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &UpdateProfileConfigurationRequestConfigurationFrontendDast{}
 
-// GetProfile200ResponseConfigurationFrontendDast struct for GetProfile200ResponseConfigurationFrontendDast
-type GetProfile200ResponseConfigurationFrontendDast struct {
+// UpdateProfileConfigurationRequestConfigurationFrontendDast struct for UpdateProfileConfigurationRequestConfigurationFrontendDast
+type UpdateProfileConfigurationRequestConfigurationFrontendDast struct {
 	LocationId            *string                                                                                 `json:"location_id,omitempty"`
 	MaxDuration           *float32                                                                                `json:"max_duration,omitempty"`
 	Hotstart              []string                                                                                `json:"hotstart,omitempty"`
@@ -36,30 +36,31 @@ type GetProfile200ResponseConfigurationFrontendDast struct {
 	Scope                 *GetProfile200ResponseConfigurationFrontendDastScope                                    `json:"scope,omitempty"`
 	InScopeOnly           *bool                                                                                   `json:"in_scope_only,omitempty"`
 	AgenticCrawling       *GetProfile200ResponseConfigurationFrontendDastAgenticCrawling                          `json:"agentic_crawling,omitempty"`
+	Mode                  *ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE                                              `json:"mode,omitempty"`
 	AdditionalProperties  map[string]interface{}
 }
 
-type _GetProfile200ResponseConfigurationFrontendDast GetProfile200ResponseConfigurationFrontendDast
+type _UpdateProfileConfigurationRequestConfigurationFrontendDast UpdateProfileConfigurationRequestConfigurationFrontendDast
 
-// NewGetProfile200ResponseConfigurationFrontendDast instantiates a new GetProfile200ResponseConfigurationFrontendDast object
+// NewUpdateProfileConfigurationRequestConfigurationFrontendDast instantiates a new UpdateProfileConfigurationRequestConfigurationFrontendDast object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetProfile200ResponseConfigurationFrontendDast() *GetProfile200ResponseConfigurationFrontendDast {
-	this := GetProfile200ResponseConfigurationFrontendDast{}
+func NewUpdateProfileConfigurationRequestConfigurationFrontendDast() *UpdateProfileConfigurationRequestConfigurationFrontendDast {
+	this := UpdateProfileConfigurationRequestConfigurationFrontendDast{}
 	return &this
 }
 
-// NewGetProfile200ResponseConfigurationFrontendDastWithDefaults instantiates a new GetProfile200ResponseConfigurationFrontendDast object
+// NewUpdateProfileConfigurationRequestConfigurationFrontendDastWithDefaults instantiates a new UpdateProfileConfigurationRequestConfigurationFrontendDast object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewGetProfile200ResponseConfigurationFrontendDastWithDefaults() *GetProfile200ResponseConfigurationFrontendDast {
-	this := GetProfile200ResponseConfigurationFrontendDast{}
+func NewUpdateProfileConfigurationRequestConfigurationFrontendDastWithDefaults() *UpdateProfileConfigurationRequestConfigurationFrontendDast {
+	this := UpdateProfileConfigurationRequestConfigurationFrontendDast{}
 	return &this
 }
 
 // GetLocationId returns the LocationId field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationFrontendDast) GetLocationId() string {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) GetLocationId() string {
 	if o == nil || IsNil(o.LocationId) {
 		var ret string
 		return ret
@@ -69,7 +70,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) GetLocationId() string 
 
 // GetLocationIdOk returns a tuple with the LocationId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationFrontendDast) GetLocationIdOk() (*string, bool) {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) GetLocationIdOk() (*string, bool) {
 	if o == nil || IsNil(o.LocationId) {
 		return nil, false
 	}
@@ -77,7 +78,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) GetLocationIdOk() (*str
 }
 
 // HasLocationId returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationFrontendDast) HasLocationId() bool {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) HasLocationId() bool {
 	if o != nil && !IsNil(o.LocationId) {
 		return true
 	}
@@ -86,12 +87,12 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) HasLocationId() bool {
 }
 
 // SetLocationId gets a reference to the given string and assigns it to the LocationId field.
-func (o *GetProfile200ResponseConfigurationFrontendDast) SetLocationId(v string) {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) SetLocationId(v string) {
 	o.LocationId = &v
 }
 
 // GetMaxDuration returns the MaxDuration field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationFrontendDast) GetMaxDuration() float32 {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) GetMaxDuration() float32 {
 	if o == nil || IsNil(o.MaxDuration) {
 		var ret float32
 		return ret
@@ -101,7 +102,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) GetMaxDuration() float3
 
 // GetMaxDurationOk returns a tuple with the MaxDuration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationFrontendDast) GetMaxDurationOk() (*float32, bool) {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) GetMaxDurationOk() (*float32, bool) {
 	if o == nil || IsNil(o.MaxDuration) {
 		return nil, false
 	}
@@ -109,7 +110,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) GetMaxDurationOk() (*fl
 }
 
 // HasMaxDuration returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationFrontendDast) HasMaxDuration() bool {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) HasMaxDuration() bool {
 	if o != nil && !IsNil(o.MaxDuration) {
 		return true
 	}
@@ -118,12 +119,12 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) HasMaxDuration() bool {
 }
 
 // SetMaxDuration gets a reference to the given float32 and assigns it to the MaxDuration field.
-func (o *GetProfile200ResponseConfigurationFrontendDast) SetMaxDuration(v float32) {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) SetMaxDuration(v float32) {
 	o.MaxDuration = &v
 }
 
 // GetHotstart returns the Hotstart field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationFrontendDast) GetHotstart() []string {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) GetHotstart() []string {
 	if o == nil || IsNil(o.Hotstart) {
 		var ret []string
 		return ret
@@ -133,7 +134,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) GetHotstart() []string 
 
 // GetHotstartOk returns a tuple with the Hotstart field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationFrontendDast) GetHotstartOk() ([]string, bool) {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) GetHotstartOk() ([]string, bool) {
 	if o == nil || IsNil(o.Hotstart) {
 		return nil, false
 	}
@@ -141,7 +142,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) GetHotstartOk() ([]stri
 }
 
 // HasHotstart returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationFrontendDast) HasHotstart() bool {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) HasHotstart() bool {
 	if o != nil && !IsNil(o.Hotstart) {
 		return true
 	}
@@ -150,12 +151,12 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) HasHotstart() bool {
 }
 
 // SetHotstart gets a reference to the given []string and assigns it to the Hotstart field.
-func (o *GetProfile200ResponseConfigurationFrontendDast) SetHotstart(v []string) {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) SetHotstart(v []string) {
 	o.Hotstart = v
 }
 
 // GetSecurityChecksEnabled returns the SecurityChecksEnabled field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationFrontendDast) GetSecurityChecksEnabled() []ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSECURITYCHECKSENABLEDITEMS {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) GetSecurityChecksEnabled() []ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSECURITYCHECKSENABLEDITEMS {
 	if o == nil || IsNil(o.SecurityChecksEnabled) {
 		var ret []ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSECURITYCHECKSENABLEDITEMS
 		return ret
@@ -165,7 +166,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) GetSecurityChecksEnable
 
 // GetSecurityChecksEnabledOk returns a tuple with the SecurityChecksEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationFrontendDast) GetSecurityChecksEnabledOk() ([]ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSECURITYCHECKSENABLEDITEMS, bool) {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) GetSecurityChecksEnabledOk() ([]ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSECURITYCHECKSENABLEDITEMS, bool) {
 	if o == nil || IsNil(o.SecurityChecksEnabled) {
 		return nil, false
 	}
@@ -173,7 +174,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) GetSecurityChecksEnable
 }
 
 // HasSecurityChecksEnabled returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationFrontendDast) HasSecurityChecksEnabled() bool {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) HasSecurityChecksEnabled() bool {
 	if o != nil && !IsNil(o.SecurityChecksEnabled) {
 		return true
 	}
@@ -182,12 +183,12 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) HasSecurityChecksEnable
 }
 
 // SetSecurityChecksEnabled gets a reference to the given []ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSECURITYCHECKSENABLEDITEMS and assigns it to the SecurityChecksEnabled field.
-func (o *GetProfile200ResponseConfigurationFrontendDast) SetSecurityChecksEnabled(v []ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSECURITYCHECKSENABLEDITEMS) {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) SetSecurityChecksEnabled(v []ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSECURITYCHECKSENABLEDITEMS) {
 	o.SecurityChecksEnabled = v
 }
 
 // GetApiChecksDuringAuth returns the ApiChecksDuringAuth field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationFrontendDast) GetApiChecksDuringAuth() bool {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) GetApiChecksDuringAuth() bool {
 	if o == nil || IsNil(o.ApiChecksDuringAuth) {
 		var ret bool
 		return ret
@@ -197,7 +198,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) GetApiChecksDuringAuth(
 
 // GetApiChecksDuringAuthOk returns a tuple with the ApiChecksDuringAuth field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationFrontendDast) GetApiChecksDuringAuthOk() (*bool, bool) {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) GetApiChecksDuringAuthOk() (*bool, bool) {
 	if o == nil || IsNil(o.ApiChecksDuringAuth) {
 		return nil, false
 	}
@@ -205,7 +206,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) GetApiChecksDuringAuthO
 }
 
 // HasApiChecksDuringAuth returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationFrontendDast) HasApiChecksDuringAuth() bool {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) HasApiChecksDuringAuth() bool {
 	if o != nil && !IsNil(o.ApiChecksDuringAuth) {
 		return true
 	}
@@ -214,12 +215,12 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) HasApiChecksDuringAuth(
 }
 
 // SetApiChecksDuringAuth gets a reference to the given bool and assigns it to the ApiChecksDuringAuth field.
-func (o *GetProfile200ResponseConfigurationFrontendDast) SetApiChecksDuringAuth(v bool) {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) SetApiChecksDuringAuth(v bool) {
 	o.ApiChecksDuringAuth = &v
 }
 
 // GetSinglePageWorker returns the SinglePageWorker field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationFrontendDast) GetSinglePageWorker() bool {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) GetSinglePageWorker() bool {
 	if o == nil || IsNil(o.SinglePageWorker) {
 		var ret bool
 		return ret
@@ -229,7 +230,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) GetSinglePageWorker() b
 
 // GetSinglePageWorkerOk returns a tuple with the SinglePageWorker field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationFrontendDast) GetSinglePageWorkerOk() (*bool, bool) {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) GetSinglePageWorkerOk() (*bool, bool) {
 	if o == nil || IsNil(o.SinglePageWorker) {
 		return nil, false
 	}
@@ -237,7 +238,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) GetSinglePageWorkerOk()
 }
 
 // HasSinglePageWorker returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationFrontendDast) HasSinglePageWorker() bool {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) HasSinglePageWorker() bool {
 	if o != nil && !IsNil(o.SinglePageWorker) {
 		return true
 	}
@@ -246,12 +247,12 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) HasSinglePageWorker() b
 }
 
 // SetSinglePageWorker gets a reference to the given bool and assigns it to the SinglePageWorker field.
-func (o *GetProfile200ResponseConfigurationFrontendDast) SetSinglePageWorker(v bool) {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) SetSinglePageWorker(v bool) {
 	o.SinglePageWorker = &v
 }
 
 // GetParallelWorkers returns the ParallelWorkers field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationFrontendDast) GetParallelWorkers() float32 {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) GetParallelWorkers() float32 {
 	if o == nil || IsNil(o.ParallelWorkers) {
 		var ret float32
 		return ret
@@ -261,7 +262,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) GetParallelWorkers() fl
 
 // GetParallelWorkersOk returns a tuple with the ParallelWorkers field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationFrontendDast) GetParallelWorkersOk() (*float32, bool) {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) GetParallelWorkersOk() (*float32, bool) {
 	if o == nil || IsNil(o.ParallelWorkers) {
 		return nil, false
 	}
@@ -269,7 +270,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) GetParallelWorkersOk() 
 }
 
 // HasParallelWorkers returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationFrontendDast) HasParallelWorkers() bool {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) HasParallelWorkers() bool {
 	if o != nil && !IsNil(o.ParallelWorkers) {
 		return true
 	}
@@ -278,12 +279,12 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) HasParallelWorkers() bo
 }
 
 // SetParallelWorkers gets a reference to the given float32 and assigns it to the ParallelWorkers field.
-func (o *GetProfile200ResponseConfigurationFrontendDast) SetParallelWorkers(v float32) {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) SetParallelWorkers(v float32) {
 	o.ParallelWorkers = &v
 }
 
 // GetRelaxCorsSecurity returns the RelaxCorsSecurity field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationFrontendDast) GetRelaxCorsSecurity() bool {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) GetRelaxCorsSecurity() bool {
 	if o == nil || IsNil(o.RelaxCorsSecurity) {
 		var ret bool
 		return ret
@@ -293,7 +294,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) GetRelaxCorsSecurity() 
 
 // GetRelaxCorsSecurityOk returns a tuple with the RelaxCorsSecurity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationFrontendDast) GetRelaxCorsSecurityOk() (*bool, bool) {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) GetRelaxCorsSecurityOk() (*bool, bool) {
 	if o == nil || IsNil(o.RelaxCorsSecurity) {
 		return nil, false
 	}
@@ -301,7 +302,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) GetRelaxCorsSecurityOk(
 }
 
 // HasRelaxCorsSecurity returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationFrontendDast) HasRelaxCorsSecurity() bool {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) HasRelaxCorsSecurity() bool {
 	if o != nil && !IsNil(o.RelaxCorsSecurity) {
 		return true
 	}
@@ -310,12 +311,12 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) HasRelaxCorsSecurity() 
 }
 
 // SetRelaxCorsSecurity gets a reference to the given bool and assigns it to the RelaxCorsSecurity field.
-func (o *GetProfile200ResponseConfigurationFrontendDast) SetRelaxCorsSecurity(v bool) {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) SetRelaxCorsSecurity(v bool) {
 	o.RelaxCorsSecurity = &v
 }
 
 // GetUserAgent returns the UserAgent field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationFrontendDast) GetUserAgent() string {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) GetUserAgent() string {
 	if o == nil || IsNil(o.UserAgent) {
 		var ret string
 		return ret
@@ -325,7 +326,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) GetUserAgent() string {
 
 // GetUserAgentOk returns a tuple with the UserAgent field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationFrontendDast) GetUserAgentOk() (*string, bool) {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) GetUserAgentOk() (*string, bool) {
 	if o == nil || IsNil(o.UserAgent) {
 		return nil, false
 	}
@@ -333,7 +334,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) GetUserAgentOk() (*stri
 }
 
 // HasUserAgent returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationFrontendDast) HasUserAgent() bool {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) HasUserAgent() bool {
 	if o != nil && !IsNil(o.UserAgent) {
 		return true
 	}
@@ -342,12 +343,12 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) HasUserAgent() bool {
 }
 
 // SetUserAgent gets a reference to the given string and assigns it to the UserAgent field.
-func (o *GetProfile200ResponseConfigurationFrontendDast) SetUserAgent(v string) {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) SetUserAgent(v string) {
 	o.UserAgent = &v
 }
 
 // GetEscapeUserHeader returns the EscapeUserHeader field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationFrontendDast) GetEscapeUserHeader() bool {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) GetEscapeUserHeader() bool {
 	if o == nil || IsNil(o.EscapeUserHeader) {
 		var ret bool
 		return ret
@@ -357,7 +358,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) GetEscapeUserHeader() b
 
 // GetEscapeUserHeaderOk returns a tuple with the EscapeUserHeader field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationFrontendDast) GetEscapeUserHeaderOk() (*bool, bool) {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) GetEscapeUserHeaderOk() (*bool, bool) {
 	if o == nil || IsNil(o.EscapeUserHeader) {
 		return nil, false
 	}
@@ -365,7 +366,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) GetEscapeUserHeaderOk()
 }
 
 // HasEscapeUserHeader returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationFrontendDast) HasEscapeUserHeader() bool {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) HasEscapeUserHeader() bool {
 	if o != nil && !IsNil(o.EscapeUserHeader) {
 		return true
 	}
@@ -374,12 +375,12 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) HasEscapeUserHeader() b
 }
 
 // SetEscapeUserHeader gets a reference to the given bool and assigns it to the EscapeUserHeader field.
-func (o *GetProfile200ResponseConfigurationFrontendDast) SetEscapeUserHeader(v bool) {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) SetEscapeUserHeader(v bool) {
 	o.EscapeUserHeader = &v
 }
 
 // GetPrefetchSitemap returns the PrefetchSitemap field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationFrontendDast) GetPrefetchSitemap() bool {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) GetPrefetchSitemap() bool {
 	if o == nil || IsNil(o.PrefetchSitemap) {
 		var ret bool
 		return ret
@@ -389,7 +390,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) GetPrefetchSitemap() bo
 
 // GetPrefetchSitemapOk returns a tuple with the PrefetchSitemap field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationFrontendDast) GetPrefetchSitemapOk() (*bool, bool) {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) GetPrefetchSitemapOk() (*bool, bool) {
 	if o == nil || IsNil(o.PrefetchSitemap) {
 		return nil, false
 	}
@@ -397,7 +398,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) GetPrefetchSitemapOk() 
 }
 
 // HasPrefetchSitemap returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationFrontendDast) HasPrefetchSitemap() bool {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) HasPrefetchSitemap() bool {
 	if o != nil && !IsNil(o.PrefetchSitemap) {
 		return true
 	}
@@ -406,12 +407,12 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) HasPrefetchSitemap() bo
 }
 
 // SetPrefetchSitemap gets a reference to the given bool and assigns it to the PrefetchSitemap field.
-func (o *GetProfile200ResponseConfigurationFrontendDast) SetPrefetchSitemap(v bool) {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) SetPrefetchSitemap(v bool) {
 	o.PrefetchSitemap = &v
 }
 
 // GetCrawlingTuning returns the CrawlingTuning field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationFrontendDast) GetCrawlingTuning() GetProfile200ResponseConfigurationFrontendDastCrawlingTuning {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) GetCrawlingTuning() GetProfile200ResponseConfigurationFrontendDastCrawlingTuning {
 	if o == nil || IsNil(o.CrawlingTuning) {
 		var ret GetProfile200ResponseConfigurationFrontendDastCrawlingTuning
 		return ret
@@ -421,7 +422,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) GetCrawlingTuning() Get
 
 // GetCrawlingTuningOk returns a tuple with the CrawlingTuning field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationFrontendDast) GetCrawlingTuningOk() (*GetProfile200ResponseConfigurationFrontendDastCrawlingTuning, bool) {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) GetCrawlingTuningOk() (*GetProfile200ResponseConfigurationFrontendDastCrawlingTuning, bool) {
 	if o == nil || IsNil(o.CrawlingTuning) {
 		return nil, false
 	}
@@ -429,7 +430,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) GetCrawlingTuningOk() (
 }
 
 // HasCrawlingTuning returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationFrontendDast) HasCrawlingTuning() bool {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) HasCrawlingTuning() bool {
 	if o != nil && !IsNil(o.CrawlingTuning) {
 		return true
 	}
@@ -438,12 +439,12 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) HasCrawlingTuning() boo
 }
 
 // SetCrawlingTuning gets a reference to the given GetProfile200ResponseConfigurationFrontendDastCrawlingTuning and assigns it to the CrawlingTuning field.
-func (o *GetProfile200ResponseConfigurationFrontendDast) SetCrawlingTuning(v GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) SetCrawlingTuning(v GetProfile200ResponseConfigurationFrontendDastCrawlingTuning) {
 	o.CrawlingTuning = &v
 }
 
 // GetStaticCrawling returns the StaticCrawling field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationFrontendDast) GetStaticCrawling() GetProfile200ResponseConfigurationFrontendDastStaticCrawling {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) GetStaticCrawling() GetProfile200ResponseConfigurationFrontendDastStaticCrawling {
 	if o == nil || IsNil(o.StaticCrawling) {
 		var ret GetProfile200ResponseConfigurationFrontendDastStaticCrawling
 		return ret
@@ -453,7 +454,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) GetStaticCrawling() Get
 
 // GetStaticCrawlingOk returns a tuple with the StaticCrawling field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationFrontendDast) GetStaticCrawlingOk() (*GetProfile200ResponseConfigurationFrontendDastStaticCrawling, bool) {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) GetStaticCrawlingOk() (*GetProfile200ResponseConfigurationFrontendDastStaticCrawling, bool) {
 	if o == nil || IsNil(o.StaticCrawling) {
 		return nil, false
 	}
@@ -461,7 +462,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) GetStaticCrawlingOk() (
 }
 
 // HasStaticCrawling returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationFrontendDast) HasStaticCrawling() bool {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) HasStaticCrawling() bool {
 	if o != nil && !IsNil(o.StaticCrawling) {
 		return true
 	}
@@ -470,12 +471,12 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) HasStaticCrawling() boo
 }
 
 // SetStaticCrawling gets a reference to the given GetProfile200ResponseConfigurationFrontendDastStaticCrawling and assigns it to the StaticCrawling field.
-func (o *GetProfile200ResponseConfigurationFrontendDast) SetStaticCrawling(v GetProfile200ResponseConfigurationFrontendDastStaticCrawling) {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) SetStaticCrawling(v GetProfile200ResponseConfigurationFrontendDastStaticCrawling) {
 	o.StaticCrawling = &v
 }
 
 // GetLogoutDetection returns the LogoutDetection field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationFrontendDast) GetLogoutDetection() GetProfile200ResponseConfigurationFrontendDastLogoutDetection {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) GetLogoutDetection() GetProfile200ResponseConfigurationFrontendDastLogoutDetection {
 	if o == nil || IsNil(o.LogoutDetection) {
 		var ret GetProfile200ResponseConfigurationFrontendDastLogoutDetection
 		return ret
@@ -485,7 +486,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) GetLogoutDetection() Ge
 
 // GetLogoutDetectionOk returns a tuple with the LogoutDetection field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationFrontendDast) GetLogoutDetectionOk() (*GetProfile200ResponseConfigurationFrontendDastLogoutDetection, bool) {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) GetLogoutDetectionOk() (*GetProfile200ResponseConfigurationFrontendDastLogoutDetection, bool) {
 	if o == nil || IsNil(o.LogoutDetection) {
 		return nil, false
 	}
@@ -493,7 +494,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) GetLogoutDetectionOk() 
 }
 
 // HasLogoutDetection returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationFrontendDast) HasLogoutDetection() bool {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) HasLogoutDetection() bool {
 	if o != nil && !IsNil(o.LogoutDetection) {
 		return true
 	}
@@ -502,12 +503,12 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) HasLogoutDetection() bo
 }
 
 // SetLogoutDetection gets a reference to the given GetProfile200ResponseConfigurationFrontendDastLogoutDetection and assigns it to the LogoutDetection field.
-func (o *GetProfile200ResponseConfigurationFrontendDast) SetLogoutDetection(v GetProfile200ResponseConfigurationFrontendDastLogoutDetection) {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) SetLogoutDetection(v GetProfile200ResponseConfigurationFrontendDastLogoutDetection) {
 	o.LogoutDetection = &v
 }
 
 // GetScope returns the Scope field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationFrontendDast) GetScope() GetProfile200ResponseConfigurationFrontendDastScope {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) GetScope() GetProfile200ResponseConfigurationFrontendDastScope {
 	if o == nil || IsNil(o.Scope) {
 		var ret GetProfile200ResponseConfigurationFrontendDastScope
 		return ret
@@ -517,7 +518,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) GetScope() GetProfile20
 
 // GetScopeOk returns a tuple with the Scope field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationFrontendDast) GetScopeOk() (*GetProfile200ResponseConfigurationFrontendDastScope, bool) {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) GetScopeOk() (*GetProfile200ResponseConfigurationFrontendDastScope, bool) {
 	if o == nil || IsNil(o.Scope) {
 		return nil, false
 	}
@@ -525,7 +526,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) GetScopeOk() (*GetProfi
 }
 
 // HasScope returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationFrontendDast) HasScope() bool {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) HasScope() bool {
 	if o != nil && !IsNil(o.Scope) {
 		return true
 	}
@@ -534,12 +535,12 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) HasScope() bool {
 }
 
 // SetScope gets a reference to the given GetProfile200ResponseConfigurationFrontendDastScope and assigns it to the Scope field.
-func (o *GetProfile200ResponseConfigurationFrontendDast) SetScope(v GetProfile200ResponseConfigurationFrontendDastScope) {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) SetScope(v GetProfile200ResponseConfigurationFrontendDastScope) {
 	o.Scope = &v
 }
 
 // GetInScopeOnly returns the InScopeOnly field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationFrontendDast) GetInScopeOnly() bool {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) GetInScopeOnly() bool {
 	if o == nil || IsNil(o.InScopeOnly) {
 		var ret bool
 		return ret
@@ -549,7 +550,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) GetInScopeOnly() bool {
 
 // GetInScopeOnlyOk returns a tuple with the InScopeOnly field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationFrontendDast) GetInScopeOnlyOk() (*bool, bool) {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) GetInScopeOnlyOk() (*bool, bool) {
 	if o == nil || IsNil(o.InScopeOnly) {
 		return nil, false
 	}
@@ -557,7 +558,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) GetInScopeOnlyOk() (*bo
 }
 
 // HasInScopeOnly returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationFrontendDast) HasInScopeOnly() bool {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) HasInScopeOnly() bool {
 	if o != nil && !IsNil(o.InScopeOnly) {
 		return true
 	}
@@ -566,12 +567,12 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) HasInScopeOnly() bool {
 }
 
 // SetInScopeOnly gets a reference to the given bool and assigns it to the InScopeOnly field.
-func (o *GetProfile200ResponseConfigurationFrontendDast) SetInScopeOnly(v bool) {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) SetInScopeOnly(v bool) {
 	o.InScopeOnly = &v
 }
 
 // GetAgenticCrawling returns the AgenticCrawling field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationFrontendDast) GetAgenticCrawling() GetProfile200ResponseConfigurationFrontendDastAgenticCrawling {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) GetAgenticCrawling() GetProfile200ResponseConfigurationFrontendDastAgenticCrawling {
 	if o == nil || IsNil(o.AgenticCrawling) {
 		var ret GetProfile200ResponseConfigurationFrontendDastAgenticCrawling
 		return ret
@@ -581,7 +582,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) GetAgenticCrawling() Ge
 
 // GetAgenticCrawlingOk returns a tuple with the AgenticCrawling field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationFrontendDast) GetAgenticCrawlingOk() (*GetProfile200ResponseConfigurationFrontendDastAgenticCrawling, bool) {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) GetAgenticCrawlingOk() (*GetProfile200ResponseConfigurationFrontendDastAgenticCrawling, bool) {
 	if o == nil || IsNil(o.AgenticCrawling) {
 		return nil, false
 	}
@@ -589,7 +590,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) GetAgenticCrawlingOk() 
 }
 
 // HasAgenticCrawling returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationFrontendDast) HasAgenticCrawling() bool {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) HasAgenticCrawling() bool {
 	if o != nil && !IsNil(o.AgenticCrawling) {
 		return true
 	}
@@ -598,11 +599,43 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) HasAgenticCrawling() bo
 }
 
 // SetAgenticCrawling gets a reference to the given GetProfile200ResponseConfigurationFrontendDastAgenticCrawling and assigns it to the AgenticCrawling field.
-func (o *GetProfile200ResponseConfigurationFrontendDast) SetAgenticCrawling(v GetProfile200ResponseConfigurationFrontendDastAgenticCrawling) {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) SetAgenticCrawling(v GetProfile200ResponseConfigurationFrontendDastAgenticCrawling) {
 	o.AgenticCrawling = &v
 }
 
-func (o GetProfile200ResponseConfigurationFrontendDast) MarshalJSON() ([]byte, error) {
+// GetMode returns the Mode field value if set, zero value otherwise.
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) GetMode() ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE {
+	if o == nil || IsNil(o.Mode) {
+		var ret ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE
+		return ret
+	}
+	return *o.Mode
+}
+
+// GetModeOk returns a tuple with the Mode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) GetModeOk() (*ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE, bool) {
+	if o == nil || IsNil(o.Mode) {
+		return nil, false
+	}
+	return o.Mode, true
+}
+
+// HasMode returns a boolean if a field has been set.
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) HasMode() bool {
+	if o != nil && !IsNil(o.Mode) {
+		return true
+	}
+
+	return false
+}
+
+// SetMode gets a reference to the given ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE and assigns it to the Mode field.
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) SetMode(v ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE) {
+	o.Mode = &v
+}
+
+func (o UpdateProfileConfigurationRequestConfigurationFrontendDast) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -610,7 +643,7 @@ func (o GetProfile200ResponseConfigurationFrontendDast) MarshalJSON() ([]byte, e
 	return json.Marshal(toSerialize)
 }
 
-func (o GetProfile200ResponseConfigurationFrontendDast) ToMap() (map[string]interface{}, error) {
+func (o UpdateProfileConfigurationRequestConfigurationFrontendDast) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.LocationId) {
 		toSerialize["location_id"] = o.LocationId
@@ -663,6 +696,9 @@ func (o GetProfile200ResponseConfigurationFrontendDast) ToMap() (map[string]inte
 	if !IsNil(o.AgenticCrawling) {
 		toSerialize["agentic_crawling"] = o.AgenticCrawling
 	}
+	if !IsNil(o.Mode) {
+		toSerialize["mode"] = o.Mode
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -671,16 +707,16 @@ func (o GetProfile200ResponseConfigurationFrontendDast) ToMap() (map[string]inte
 	return toSerialize, nil
 }
 
-func (o *GetProfile200ResponseConfigurationFrontendDast) UnmarshalJSON(data []byte) (err error) {
-	varGetProfile200ResponseConfigurationFrontendDast := _GetProfile200ResponseConfigurationFrontendDast{}
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) UnmarshalJSON(data []byte) (err error) {
+	varUpdateProfileConfigurationRequestConfigurationFrontendDast := _UpdateProfileConfigurationRequestConfigurationFrontendDast{}
 
-	err = json.Unmarshal(data, &varGetProfile200ResponseConfigurationFrontendDast)
+	err = json.Unmarshal(data, &varUpdateProfileConfigurationRequestConfigurationFrontendDast)
 
 	if err != nil {
 		return err
 	}
 
-	*o = GetProfile200ResponseConfigurationFrontendDast(varGetProfile200ResponseConfigurationFrontendDast)
+	*o = UpdateProfileConfigurationRequestConfigurationFrontendDast(varUpdateProfileConfigurationRequestConfigurationFrontendDast)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -702,44 +738,45 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) UnmarshalJSON(data []by
 		delete(additionalProperties, "scope")
 		delete(additionalProperties, "in_scope_only")
 		delete(additionalProperties, "agentic_crawling")
+		delete(additionalProperties, "mode")
 		o.AdditionalProperties = additionalProperties
 	}
 
 	return err
 }
 
-type NullableGetProfile200ResponseConfigurationFrontendDast struct {
-	value *GetProfile200ResponseConfigurationFrontendDast
+type NullableUpdateProfileConfigurationRequestConfigurationFrontendDast struct {
+	value *UpdateProfileConfigurationRequestConfigurationFrontendDast
 	isSet bool
 }
 
-func (v NullableGetProfile200ResponseConfigurationFrontendDast) Get() *GetProfile200ResponseConfigurationFrontendDast {
+func (v NullableUpdateProfileConfigurationRequestConfigurationFrontendDast) Get() *UpdateProfileConfigurationRequestConfigurationFrontendDast {
 	return v.value
 }
 
-func (v *NullableGetProfile200ResponseConfigurationFrontendDast) Set(val *GetProfile200ResponseConfigurationFrontendDast) {
+func (v *NullableUpdateProfileConfigurationRequestConfigurationFrontendDast) Set(val *UpdateProfileConfigurationRequestConfigurationFrontendDast) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableGetProfile200ResponseConfigurationFrontendDast) IsSet() bool {
+func (v NullableUpdateProfileConfigurationRequestConfigurationFrontendDast) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableGetProfile200ResponseConfigurationFrontendDast) Unset() {
+func (v *NullableUpdateProfileConfigurationRequestConfigurationFrontendDast) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableGetProfile200ResponseConfigurationFrontendDast(val *GetProfile200ResponseConfigurationFrontendDast) *NullableGetProfile200ResponseConfigurationFrontendDast {
-	return &NullableGetProfile200ResponseConfigurationFrontendDast{value: val, isSet: true}
+func NewNullableUpdateProfileConfigurationRequestConfigurationFrontendDast(val *UpdateProfileConfigurationRequestConfigurationFrontendDast) *NullableUpdateProfileConfigurationRequestConfigurationFrontendDast {
+	return &NullableUpdateProfileConfigurationRequestConfigurationFrontendDast{value: val, isSet: true}
 }
 
-func (v NullableGetProfile200ResponseConfigurationFrontendDast) MarshalJSON() ([]byte, error) {
+func (v NullableUpdateProfileConfigurationRequestConfigurationFrontendDast) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableGetProfile200ResponseConfigurationFrontendDast) UnmarshalJSON(src []byte) error {
+func (v *NullableUpdateProfileConfigurationRequestConfigurationFrontendDast) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
