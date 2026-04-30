@@ -40,8 +40,8 @@ type CreateDastRestProfileRequest struct {
 	// The extra asset IDs for the profile
 	ExtraAssetIds []string `json:"extraAssetIds,omitempty"`
 	// Whether to use all available extra assets for the profile
-	UseAllAvailableExtraAssets *bool                                                            `json:"useAllAvailableExtraAssets,omitempty"`
-	Mode                       *ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE `json:"mode,omitempty"`
+	UseAllAvailableExtraAssets *bool                                      `json:"useAllAvailableExtraAssets,omitempty"`
+	Mode                       *ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE `json:"mode,omitempty"`
 	// Whether to start the scan immediately
 	Start                *bool `json:"start,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -409,9 +409,9 @@ func (o *CreateDastRestProfileRequest) SetUseAllAvailableExtraAssets(v bool) {
 }
 
 // GetMode returns the Mode field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequest) GetMode() ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE {
+func (o *CreateDastRestProfileRequest) GetMode() ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE {
 	if o == nil || IsNil(o.Mode) {
-		var ret ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE
+		var ret ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE
 		return ret
 	}
 	return *o.Mode
@@ -419,7 +419,7 @@ func (o *CreateDastRestProfileRequest) GetMode() ENUMPROPERTIESCONFIGURATIONPROP
 
 // GetModeOk returns a tuple with the Mode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequest) GetModeOk() (*ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE, bool) {
+func (o *CreateDastRestProfileRequest) GetModeOk() (*ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE, bool) {
 	if o == nil || IsNil(o.Mode) {
 		return nil, false
 	}
@@ -435,8 +435,8 @@ func (o *CreateDastRestProfileRequest) HasMode() bool {
 	return false
 }
 
-// SetMode gets a reference to the given ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE and assigns it to the Mode field.
-func (o *CreateDastRestProfileRequest) SetMode(v ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE) {
+// SetMode gets a reference to the given ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE and assigns it to the Mode field.
+func (o *CreateDastRestProfileRequest) SetMode(v ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE) {
 	o.Mode = &v
 }
 

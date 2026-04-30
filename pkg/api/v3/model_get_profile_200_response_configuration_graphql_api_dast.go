@@ -26,7 +26,6 @@ type GetProfile200ResponseConfigurationGraphqlApiDast struct {
 	ExploreWithAllUsers      *bool                                                                          `json:"explore_with_all_users,omitempty"`
 	CrossUserMemoryEnabled   *bool                                                                          `json:"cross_user_memory_enabled,omitempty"`
 	CrossUserMemoryAllowlist []string                                                                       `json:"cross_user_memory_allowlist,omitempty"`
-	Mode                     *ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE               `json:"mode,omitempty"`
 	MaxDuration              *float32                                                                       `json:"max_duration,omitempty"`
 	MaxGeneratedDepth        *float32                                                                       `json:"max_generated_depth,omitempty"`
 	Hotstart                 []string                                                                       `json:"hotstart,omitempty"`
@@ -279,38 +278,6 @@ func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetCrossUserMemoryAll
 	o.CrossUserMemoryAllowlist = v
 }
 
-// GetMode returns the Mode field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationGraphqlApiDast) GetMode() ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE {
-	if o == nil || IsNil(o.Mode) {
-		var ret ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE
-		return ret
-	}
-	return *o.Mode
-}
-
-// GetModeOk returns a tuple with the Mode field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationGraphqlApiDast) GetModeOk() (*ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE, bool) {
-	if o == nil || IsNil(o.Mode) {
-		return nil, false
-	}
-	return o.Mode, true
-}
-
-// HasMode returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationGraphqlApiDast) HasMode() bool {
-	if o != nil && !IsNil(o.Mode) {
-		return true
-	}
-
-	return false
-}
-
-// SetMode gets a reference to the given ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE and assigns it to the Mode field.
-func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetMode(v ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESMODE) {
-	o.Mode = &v
-}
-
 // GetMaxDuration returns the MaxDuration field value if set, zero value otherwise.
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) GetMaxDuration() float32 {
 	if o == nil || IsNil(o.MaxDuration) {
@@ -534,9 +501,6 @@ func (o GetProfile200ResponseConfigurationGraphqlApiDast) ToMap() (map[string]in
 	if !IsNil(o.CrossUserMemoryAllowlist) {
 		toSerialize["cross_user_memory_allowlist"] = o.CrossUserMemoryAllowlist
 	}
-	if !IsNil(o.Mode) {
-		toSerialize["mode"] = o.Mode
-	}
 	if !IsNil(o.MaxDuration) {
 		toSerialize["max_duration"] = o.MaxDuration
 	}
@@ -584,7 +548,6 @@ func (o *GetProfile200ResponseConfigurationGraphqlApiDast) UnmarshalJSON(data []
 		delete(additionalProperties, "explore_with_all_users")
 		delete(additionalProperties, "cross_user_memory_enabled")
 		delete(additionalProperties, "cross_user_memory_allowlist")
-		delete(additionalProperties, "mode")
 		delete(additionalProperties, "max_duration")
 		delete(additionalProperties, "max_generated_depth")
 		delete(additionalProperties, "hotstart")

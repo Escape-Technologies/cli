@@ -14,47 +14,81 @@ import (
 	"encoding/json"
 )
 
-// checks if the CreateDastRestProfileRequestConfigurationObjectRestApiDast type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &CreateDastRestProfileRequestConfigurationObjectRestApiDast{}
+// checks if the UpdateProfileConfigurationRequestConfigurationGraphqlApiDast type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &UpdateProfileConfigurationRequestConfigurationGraphqlApiDast{}
 
-// CreateDastRestProfileRequestConfigurationObjectRestApiDast struct for CreateDastRestProfileRequestConfigurationObjectRestApiDast
-type CreateDastRestProfileRequestConfigurationObjectRestApiDast struct {
+// UpdateProfileConfigurationRequestConfigurationGraphqlApiDast struct for UpdateProfileConfigurationRequestConfigurationGraphqlApiDast
+type UpdateProfileConfigurationRequestConfigurationGraphqlApiDast struct {
+	Url                      *string                                                                        `json:"url,omitempty"`
 	LocationId               *string                                                                        `json:"location_id,omitempty"`
+	Profile                  *ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESPROFILE          `json:"profile,omitempty"`
 	ExplorationDepth         *ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESEXPLORATIONDEPTH `json:"exploration_depth,omitempty"`
 	ExploreWithAllUsers      *bool                                                                          `json:"explore_with_all_users,omitempty"`
 	CrossUserMemoryEnabled   *bool                                                                          `json:"cross_user_memory_enabled,omitempty"`
 	CrossUserMemoryAllowlist []string                                                                       `json:"cross_user_memory_allowlist,omitempty"`
 	MaxDuration              *float32                                                                       `json:"max_duration,omitempty"`
+	MaxGeneratedDepth        *float32                                                                       `json:"max_generated_depth,omitempty"`
 	Hotstart                 []string                                                                       `json:"hotstart,omitempty"`
 	HotstartOnly             *bool                                                                          `json:"hotstart_only,omitempty"`
 	Scope                    *GetProfile200ResponseConfigurationGraphqlApiDastScope                         `json:"scope,omitempty"`
-	QueryParamsAreRequired   *bool                                                                          `json:"query_params_are_required,omitempty"`
 	InScopeOnly              *bool                                                                          `json:"in_scope_only,omitempty"`
 	Mode                     *ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE                                     `json:"mode,omitempty"`
 	AdditionalProperties     map[string]interface{}
 }
 
-type _CreateDastRestProfileRequestConfigurationObjectRestApiDast CreateDastRestProfileRequestConfigurationObjectRestApiDast
+type _UpdateProfileConfigurationRequestConfigurationGraphqlApiDast UpdateProfileConfigurationRequestConfigurationGraphqlApiDast
 
-// NewCreateDastRestProfileRequestConfigurationObjectRestApiDast instantiates a new CreateDastRestProfileRequestConfigurationObjectRestApiDast object
+// NewUpdateProfileConfigurationRequestConfigurationGraphqlApiDast instantiates a new UpdateProfileConfigurationRequestConfigurationGraphqlApiDast object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateDastRestProfileRequestConfigurationObjectRestApiDast() *CreateDastRestProfileRequestConfigurationObjectRestApiDast {
-	this := CreateDastRestProfileRequestConfigurationObjectRestApiDast{}
+func NewUpdateProfileConfigurationRequestConfigurationGraphqlApiDast() *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast {
+	this := UpdateProfileConfigurationRequestConfigurationGraphqlApiDast{}
 	return &this
 }
 
-// NewCreateDastRestProfileRequestConfigurationObjectRestApiDastWithDefaults instantiates a new CreateDastRestProfileRequestConfigurationObjectRestApiDast object
+// NewUpdateProfileConfigurationRequestConfigurationGraphqlApiDastWithDefaults instantiates a new UpdateProfileConfigurationRequestConfigurationGraphqlApiDast object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCreateDastRestProfileRequestConfigurationObjectRestApiDastWithDefaults() *CreateDastRestProfileRequestConfigurationObjectRestApiDast {
-	this := CreateDastRestProfileRequestConfigurationObjectRestApiDast{}
+func NewUpdateProfileConfigurationRequestConfigurationGraphqlApiDastWithDefaults() *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast {
+	this := UpdateProfileConfigurationRequestConfigurationGraphqlApiDast{}
 	return &this
+}
+
+// GetUrl returns the Url field value if set, zero value otherwise.
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) GetUrl() string {
+	if o == nil || IsNil(o.Url) {
+		var ret string
+		return ret
+	}
+	return *o.Url
+}
+
+// GetUrlOk returns a tuple with the Url field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) GetUrlOk() (*string, bool) {
+	if o == nil || IsNil(o.Url) {
+		return nil, false
+	}
+	return o.Url, true
+}
+
+// HasUrl returns a boolean if a field has been set.
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) HasUrl() bool {
+	if o != nil && !IsNil(o.Url) {
+		return true
+	}
+
+	return false
+}
+
+// SetUrl gets a reference to the given string and assigns it to the Url field.
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) SetUrl(v string) {
+	o.Url = &v
 }
 
 // GetLocationId returns the LocationId field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) GetLocationId() string {
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) GetLocationId() string {
 	if o == nil || IsNil(o.LocationId) {
 		var ret string
 		return ret
@@ -64,7 +98,7 @@ func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) GetLocation
 
 // GetLocationIdOk returns a tuple with the LocationId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) GetLocationIdOk() (*string, bool) {
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) GetLocationIdOk() (*string, bool) {
 	if o == nil || IsNil(o.LocationId) {
 		return nil, false
 	}
@@ -72,7 +106,7 @@ func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) GetLocation
 }
 
 // HasLocationId returns a boolean if a field has been set.
-func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) HasLocationId() bool {
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) HasLocationId() bool {
 	if o != nil && !IsNil(o.LocationId) {
 		return true
 	}
@@ -81,12 +115,44 @@ func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) HasLocation
 }
 
 // SetLocationId gets a reference to the given string and assigns it to the LocationId field.
-func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) SetLocationId(v string) {
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) SetLocationId(v string) {
 	o.LocationId = &v
 }
 
+// GetProfile returns the Profile field value if set, zero value otherwise.
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) GetProfile() ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESPROFILE {
+	if o == nil || IsNil(o.Profile) {
+		var ret ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESPROFILE
+		return ret
+	}
+	return *o.Profile
+}
+
+// GetProfileOk returns a tuple with the Profile field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) GetProfileOk() (*ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESPROFILE, bool) {
+	if o == nil || IsNil(o.Profile) {
+		return nil, false
+	}
+	return o.Profile, true
+}
+
+// HasProfile returns a boolean if a field has been set.
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) HasProfile() bool {
+	if o != nil && !IsNil(o.Profile) {
+		return true
+	}
+
+	return false
+}
+
+// SetProfile gets a reference to the given ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESPROFILE and assigns it to the Profile field.
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) SetProfile(v ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESPROFILE) {
+	o.Profile = &v
+}
+
 // GetExplorationDepth returns the ExplorationDepth field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) GetExplorationDepth() ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESEXPLORATIONDEPTH {
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) GetExplorationDepth() ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESEXPLORATIONDEPTH {
 	if o == nil || IsNil(o.ExplorationDepth) {
 		var ret ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESEXPLORATIONDEPTH
 		return ret
@@ -96,7 +162,7 @@ func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) GetExplorat
 
 // GetExplorationDepthOk returns a tuple with the ExplorationDepth field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) GetExplorationDepthOk() (*ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESEXPLORATIONDEPTH, bool) {
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) GetExplorationDepthOk() (*ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESEXPLORATIONDEPTH, bool) {
 	if o == nil || IsNil(o.ExplorationDepth) {
 		return nil, false
 	}
@@ -104,7 +170,7 @@ func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) GetExplorat
 }
 
 // HasExplorationDepth returns a boolean if a field has been set.
-func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) HasExplorationDepth() bool {
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) HasExplorationDepth() bool {
 	if o != nil && !IsNil(o.ExplorationDepth) {
 		return true
 	}
@@ -113,12 +179,12 @@ func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) HasExplorat
 }
 
 // SetExplorationDepth gets a reference to the given ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESEXPLORATIONDEPTH and assigns it to the ExplorationDepth field.
-func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) SetExplorationDepth(v ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESEXPLORATIONDEPTH) {
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) SetExplorationDepth(v ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESEXPLORATIONDEPTH) {
 	o.ExplorationDepth = &v
 }
 
 // GetExploreWithAllUsers returns the ExploreWithAllUsers field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) GetExploreWithAllUsers() bool {
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) GetExploreWithAllUsers() bool {
 	if o == nil || IsNil(o.ExploreWithAllUsers) {
 		var ret bool
 		return ret
@@ -128,7 +194,7 @@ func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) GetExploreW
 
 // GetExploreWithAllUsersOk returns a tuple with the ExploreWithAllUsers field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) GetExploreWithAllUsersOk() (*bool, bool) {
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) GetExploreWithAllUsersOk() (*bool, bool) {
 	if o == nil || IsNil(o.ExploreWithAllUsers) {
 		return nil, false
 	}
@@ -136,7 +202,7 @@ func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) GetExploreW
 }
 
 // HasExploreWithAllUsers returns a boolean if a field has been set.
-func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) HasExploreWithAllUsers() bool {
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) HasExploreWithAllUsers() bool {
 	if o != nil && !IsNil(o.ExploreWithAllUsers) {
 		return true
 	}
@@ -145,12 +211,12 @@ func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) HasExploreW
 }
 
 // SetExploreWithAllUsers gets a reference to the given bool and assigns it to the ExploreWithAllUsers field.
-func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) SetExploreWithAllUsers(v bool) {
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) SetExploreWithAllUsers(v bool) {
 	o.ExploreWithAllUsers = &v
 }
 
 // GetCrossUserMemoryEnabled returns the CrossUserMemoryEnabled field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) GetCrossUserMemoryEnabled() bool {
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) GetCrossUserMemoryEnabled() bool {
 	if o == nil || IsNil(o.CrossUserMemoryEnabled) {
 		var ret bool
 		return ret
@@ -160,7 +226,7 @@ func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) GetCrossUse
 
 // GetCrossUserMemoryEnabledOk returns a tuple with the CrossUserMemoryEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) GetCrossUserMemoryEnabledOk() (*bool, bool) {
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) GetCrossUserMemoryEnabledOk() (*bool, bool) {
 	if o == nil || IsNil(o.CrossUserMemoryEnabled) {
 		return nil, false
 	}
@@ -168,7 +234,7 @@ func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) GetCrossUse
 }
 
 // HasCrossUserMemoryEnabled returns a boolean if a field has been set.
-func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) HasCrossUserMemoryEnabled() bool {
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) HasCrossUserMemoryEnabled() bool {
 	if o != nil && !IsNil(o.CrossUserMemoryEnabled) {
 		return true
 	}
@@ -177,12 +243,12 @@ func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) HasCrossUse
 }
 
 // SetCrossUserMemoryEnabled gets a reference to the given bool and assigns it to the CrossUserMemoryEnabled field.
-func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) SetCrossUserMemoryEnabled(v bool) {
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) SetCrossUserMemoryEnabled(v bool) {
 	o.CrossUserMemoryEnabled = &v
 }
 
 // GetCrossUserMemoryAllowlist returns the CrossUserMemoryAllowlist field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) GetCrossUserMemoryAllowlist() []string {
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) GetCrossUserMemoryAllowlist() []string {
 	if o == nil || IsNil(o.CrossUserMemoryAllowlist) {
 		var ret []string
 		return ret
@@ -192,7 +258,7 @@ func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) GetCrossUse
 
 // GetCrossUserMemoryAllowlistOk returns a tuple with the CrossUserMemoryAllowlist field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) GetCrossUserMemoryAllowlistOk() ([]string, bool) {
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) GetCrossUserMemoryAllowlistOk() ([]string, bool) {
 	if o == nil || IsNil(o.CrossUserMemoryAllowlist) {
 		return nil, false
 	}
@@ -200,7 +266,7 @@ func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) GetCrossUse
 }
 
 // HasCrossUserMemoryAllowlist returns a boolean if a field has been set.
-func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) HasCrossUserMemoryAllowlist() bool {
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) HasCrossUserMemoryAllowlist() bool {
 	if o != nil && !IsNil(o.CrossUserMemoryAllowlist) {
 		return true
 	}
@@ -209,12 +275,12 @@ func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) HasCrossUse
 }
 
 // SetCrossUserMemoryAllowlist gets a reference to the given []string and assigns it to the CrossUserMemoryAllowlist field.
-func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) SetCrossUserMemoryAllowlist(v []string) {
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) SetCrossUserMemoryAllowlist(v []string) {
 	o.CrossUserMemoryAllowlist = v
 }
 
 // GetMaxDuration returns the MaxDuration field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) GetMaxDuration() float32 {
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) GetMaxDuration() float32 {
 	if o == nil || IsNil(o.MaxDuration) {
 		var ret float32
 		return ret
@@ -224,7 +290,7 @@ func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) GetMaxDurat
 
 // GetMaxDurationOk returns a tuple with the MaxDuration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) GetMaxDurationOk() (*float32, bool) {
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) GetMaxDurationOk() (*float32, bool) {
 	if o == nil || IsNil(o.MaxDuration) {
 		return nil, false
 	}
@@ -232,7 +298,7 @@ func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) GetMaxDurat
 }
 
 // HasMaxDuration returns a boolean if a field has been set.
-func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) HasMaxDuration() bool {
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) HasMaxDuration() bool {
 	if o != nil && !IsNil(o.MaxDuration) {
 		return true
 	}
@@ -241,12 +307,44 @@ func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) HasMaxDurat
 }
 
 // SetMaxDuration gets a reference to the given float32 and assigns it to the MaxDuration field.
-func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) SetMaxDuration(v float32) {
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) SetMaxDuration(v float32) {
 	o.MaxDuration = &v
 }
 
+// GetMaxGeneratedDepth returns the MaxGeneratedDepth field value if set, zero value otherwise.
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) GetMaxGeneratedDepth() float32 {
+	if o == nil || IsNil(o.MaxGeneratedDepth) {
+		var ret float32
+		return ret
+	}
+	return *o.MaxGeneratedDepth
+}
+
+// GetMaxGeneratedDepthOk returns a tuple with the MaxGeneratedDepth field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) GetMaxGeneratedDepthOk() (*float32, bool) {
+	if o == nil || IsNil(o.MaxGeneratedDepth) {
+		return nil, false
+	}
+	return o.MaxGeneratedDepth, true
+}
+
+// HasMaxGeneratedDepth returns a boolean if a field has been set.
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) HasMaxGeneratedDepth() bool {
+	if o != nil && !IsNil(o.MaxGeneratedDepth) {
+		return true
+	}
+
+	return false
+}
+
+// SetMaxGeneratedDepth gets a reference to the given float32 and assigns it to the MaxGeneratedDepth field.
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) SetMaxGeneratedDepth(v float32) {
+	o.MaxGeneratedDepth = &v
+}
+
 // GetHotstart returns the Hotstart field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) GetHotstart() []string {
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) GetHotstart() []string {
 	if o == nil || IsNil(o.Hotstart) {
 		var ret []string
 		return ret
@@ -256,7 +354,7 @@ func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) GetHotstart
 
 // GetHotstartOk returns a tuple with the Hotstart field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) GetHotstartOk() ([]string, bool) {
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) GetHotstartOk() ([]string, bool) {
 	if o == nil || IsNil(o.Hotstart) {
 		return nil, false
 	}
@@ -264,7 +362,7 @@ func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) GetHotstart
 }
 
 // HasHotstart returns a boolean if a field has been set.
-func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) HasHotstart() bool {
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) HasHotstart() bool {
 	if o != nil && !IsNil(o.Hotstart) {
 		return true
 	}
@@ -273,12 +371,12 @@ func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) HasHotstart
 }
 
 // SetHotstart gets a reference to the given []string and assigns it to the Hotstart field.
-func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) SetHotstart(v []string) {
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) SetHotstart(v []string) {
 	o.Hotstart = v
 }
 
 // GetHotstartOnly returns the HotstartOnly field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) GetHotstartOnly() bool {
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) GetHotstartOnly() bool {
 	if o == nil || IsNil(o.HotstartOnly) {
 		var ret bool
 		return ret
@@ -288,7 +386,7 @@ func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) GetHotstart
 
 // GetHotstartOnlyOk returns a tuple with the HotstartOnly field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) GetHotstartOnlyOk() (*bool, bool) {
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) GetHotstartOnlyOk() (*bool, bool) {
 	if o == nil || IsNil(o.HotstartOnly) {
 		return nil, false
 	}
@@ -296,7 +394,7 @@ func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) GetHotstart
 }
 
 // HasHotstartOnly returns a boolean if a field has been set.
-func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) HasHotstartOnly() bool {
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) HasHotstartOnly() bool {
 	if o != nil && !IsNil(o.HotstartOnly) {
 		return true
 	}
@@ -305,12 +403,12 @@ func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) HasHotstart
 }
 
 // SetHotstartOnly gets a reference to the given bool and assigns it to the HotstartOnly field.
-func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) SetHotstartOnly(v bool) {
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) SetHotstartOnly(v bool) {
 	o.HotstartOnly = &v
 }
 
 // GetScope returns the Scope field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) GetScope() GetProfile200ResponseConfigurationGraphqlApiDastScope {
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) GetScope() GetProfile200ResponseConfigurationGraphqlApiDastScope {
 	if o == nil || IsNil(o.Scope) {
 		var ret GetProfile200ResponseConfigurationGraphqlApiDastScope
 		return ret
@@ -320,7 +418,7 @@ func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) GetScope() 
 
 // GetScopeOk returns a tuple with the Scope field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) GetScopeOk() (*GetProfile200ResponseConfigurationGraphqlApiDastScope, bool) {
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) GetScopeOk() (*GetProfile200ResponseConfigurationGraphqlApiDastScope, bool) {
 	if o == nil || IsNil(o.Scope) {
 		return nil, false
 	}
@@ -328,7 +426,7 @@ func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) GetScopeOk(
 }
 
 // HasScope returns a boolean if a field has been set.
-func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) HasScope() bool {
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) HasScope() bool {
 	if o != nil && !IsNil(o.Scope) {
 		return true
 	}
@@ -337,44 +435,12 @@ func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) HasScope() 
 }
 
 // SetScope gets a reference to the given GetProfile200ResponseConfigurationGraphqlApiDastScope and assigns it to the Scope field.
-func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) SetScope(v GetProfile200ResponseConfigurationGraphqlApiDastScope) {
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) SetScope(v GetProfile200ResponseConfigurationGraphqlApiDastScope) {
 	o.Scope = &v
 }
 
-// GetQueryParamsAreRequired returns the QueryParamsAreRequired field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) GetQueryParamsAreRequired() bool {
-	if o == nil || IsNil(o.QueryParamsAreRequired) {
-		var ret bool
-		return ret
-	}
-	return *o.QueryParamsAreRequired
-}
-
-// GetQueryParamsAreRequiredOk returns a tuple with the QueryParamsAreRequired field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) GetQueryParamsAreRequiredOk() (*bool, bool) {
-	if o == nil || IsNil(o.QueryParamsAreRequired) {
-		return nil, false
-	}
-	return o.QueryParamsAreRequired, true
-}
-
-// HasQueryParamsAreRequired returns a boolean if a field has been set.
-func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) HasQueryParamsAreRequired() bool {
-	if o != nil && !IsNil(o.QueryParamsAreRequired) {
-		return true
-	}
-
-	return false
-}
-
-// SetQueryParamsAreRequired gets a reference to the given bool and assigns it to the QueryParamsAreRequired field.
-func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) SetQueryParamsAreRequired(v bool) {
-	o.QueryParamsAreRequired = &v
-}
-
 // GetInScopeOnly returns the InScopeOnly field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) GetInScopeOnly() bool {
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) GetInScopeOnly() bool {
 	if o == nil || IsNil(o.InScopeOnly) {
 		var ret bool
 		return ret
@@ -384,7 +450,7 @@ func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) GetInScopeO
 
 // GetInScopeOnlyOk returns a tuple with the InScopeOnly field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) GetInScopeOnlyOk() (*bool, bool) {
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) GetInScopeOnlyOk() (*bool, bool) {
 	if o == nil || IsNil(o.InScopeOnly) {
 		return nil, false
 	}
@@ -392,7 +458,7 @@ func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) GetInScopeO
 }
 
 // HasInScopeOnly returns a boolean if a field has been set.
-func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) HasInScopeOnly() bool {
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) HasInScopeOnly() bool {
 	if o != nil && !IsNil(o.InScopeOnly) {
 		return true
 	}
@@ -401,12 +467,12 @@ func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) HasInScopeO
 }
 
 // SetInScopeOnly gets a reference to the given bool and assigns it to the InScopeOnly field.
-func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) SetInScopeOnly(v bool) {
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) SetInScopeOnly(v bool) {
 	o.InScopeOnly = &v
 }
 
 // GetMode returns the Mode field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) GetMode() ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE {
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) GetMode() ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE {
 	if o == nil || IsNil(o.Mode) {
 		var ret ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE
 		return ret
@@ -416,7 +482,7 @@ func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) GetMode() E
 
 // GetModeOk returns a tuple with the Mode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) GetModeOk() (*ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE, bool) {
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) GetModeOk() (*ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE, bool) {
 	if o == nil || IsNil(o.Mode) {
 		return nil, false
 	}
@@ -424,7 +490,7 @@ func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) GetModeOk()
 }
 
 // HasMode returns a boolean if a field has been set.
-func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) HasMode() bool {
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) HasMode() bool {
 	if o != nil && !IsNil(o.Mode) {
 		return true
 	}
@@ -433,11 +499,11 @@ func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) HasMode() b
 }
 
 // SetMode gets a reference to the given ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE and assigns it to the Mode field.
-func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) SetMode(v ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE) {
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) SetMode(v ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE) {
 	o.Mode = &v
 }
 
-func (o CreateDastRestProfileRequestConfigurationObjectRestApiDast) MarshalJSON() ([]byte, error) {
+func (o UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -445,10 +511,16 @@ func (o CreateDastRestProfileRequestConfigurationObjectRestApiDast) MarshalJSON(
 	return json.Marshal(toSerialize)
 }
 
-func (o CreateDastRestProfileRequestConfigurationObjectRestApiDast) ToMap() (map[string]interface{}, error) {
+func (o UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Url) {
+		toSerialize["url"] = o.Url
+	}
 	if !IsNil(o.LocationId) {
 		toSerialize["location_id"] = o.LocationId
+	}
+	if !IsNil(o.Profile) {
+		toSerialize["profile"] = o.Profile
 	}
 	if !IsNil(o.ExplorationDepth) {
 		toSerialize["exploration_depth"] = o.ExplorationDepth
@@ -465,6 +537,9 @@ func (o CreateDastRestProfileRequestConfigurationObjectRestApiDast) ToMap() (map
 	if !IsNil(o.MaxDuration) {
 		toSerialize["max_duration"] = o.MaxDuration
 	}
+	if !IsNil(o.MaxGeneratedDepth) {
+		toSerialize["max_generated_depth"] = o.MaxGeneratedDepth
+	}
 	if !IsNil(o.Hotstart) {
 		toSerialize["hotstart"] = o.Hotstart
 	}
@@ -473,9 +548,6 @@ func (o CreateDastRestProfileRequestConfigurationObjectRestApiDast) ToMap() (map
 	}
 	if !IsNil(o.Scope) {
 		toSerialize["scope"] = o.Scope
-	}
-	if !IsNil(o.QueryParamsAreRequired) {
-		toSerialize["query_params_are_required"] = o.QueryParamsAreRequired
 	}
 	if !IsNil(o.InScopeOnly) {
 		toSerialize["in_scope_only"] = o.InScopeOnly
@@ -491,30 +563,32 @@ func (o CreateDastRestProfileRequestConfigurationObjectRestApiDast) ToMap() (map
 	return toSerialize, nil
 }
 
-func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) UnmarshalJSON(data []byte) (err error) {
-	varCreateDastRestProfileRequestConfigurationObjectRestApiDast := _CreateDastRestProfileRequestConfigurationObjectRestApiDast{}
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) UnmarshalJSON(data []byte) (err error) {
+	varUpdateProfileConfigurationRequestConfigurationGraphqlApiDast := _UpdateProfileConfigurationRequestConfigurationGraphqlApiDast{}
 
-	err = json.Unmarshal(data, &varCreateDastRestProfileRequestConfigurationObjectRestApiDast)
+	err = json.Unmarshal(data, &varUpdateProfileConfigurationRequestConfigurationGraphqlApiDast)
 
 	if err != nil {
 		return err
 	}
 
-	*o = CreateDastRestProfileRequestConfigurationObjectRestApiDast(varCreateDastRestProfileRequestConfigurationObjectRestApiDast)
+	*o = UpdateProfileConfigurationRequestConfigurationGraphqlApiDast(varUpdateProfileConfigurationRequestConfigurationGraphqlApiDast)
 
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "url")
 		delete(additionalProperties, "location_id")
+		delete(additionalProperties, "profile")
 		delete(additionalProperties, "exploration_depth")
 		delete(additionalProperties, "explore_with_all_users")
 		delete(additionalProperties, "cross_user_memory_enabled")
 		delete(additionalProperties, "cross_user_memory_allowlist")
 		delete(additionalProperties, "max_duration")
+		delete(additionalProperties, "max_generated_depth")
 		delete(additionalProperties, "hotstart")
 		delete(additionalProperties, "hotstart_only")
 		delete(additionalProperties, "scope")
-		delete(additionalProperties, "query_params_are_required")
 		delete(additionalProperties, "in_scope_only")
 		delete(additionalProperties, "mode")
 		o.AdditionalProperties = additionalProperties
@@ -523,38 +597,38 @@ func (o *CreateDastRestProfileRequestConfigurationObjectRestApiDast) UnmarshalJS
 	return err
 }
 
-type NullableCreateDastRestProfileRequestConfigurationObjectRestApiDast struct {
-	value *CreateDastRestProfileRequestConfigurationObjectRestApiDast
+type NullableUpdateProfileConfigurationRequestConfigurationGraphqlApiDast struct {
+	value *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast
 	isSet bool
 }
 
-func (v NullableCreateDastRestProfileRequestConfigurationObjectRestApiDast) Get() *CreateDastRestProfileRequestConfigurationObjectRestApiDast {
+func (v NullableUpdateProfileConfigurationRequestConfigurationGraphqlApiDast) Get() *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast {
 	return v.value
 }
 
-func (v *NullableCreateDastRestProfileRequestConfigurationObjectRestApiDast) Set(val *CreateDastRestProfileRequestConfigurationObjectRestApiDast) {
+func (v *NullableUpdateProfileConfigurationRequestConfigurationGraphqlApiDast) Set(val *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCreateDastRestProfileRequestConfigurationObjectRestApiDast) IsSet() bool {
+func (v NullableUpdateProfileConfigurationRequestConfigurationGraphqlApiDast) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCreateDastRestProfileRequestConfigurationObjectRestApiDast) Unset() {
+func (v *NullableUpdateProfileConfigurationRequestConfigurationGraphqlApiDast) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCreateDastRestProfileRequestConfigurationObjectRestApiDast(val *CreateDastRestProfileRequestConfigurationObjectRestApiDast) *NullableCreateDastRestProfileRequestConfigurationObjectRestApiDast {
-	return &NullableCreateDastRestProfileRequestConfigurationObjectRestApiDast{value: val, isSet: true}
+func NewNullableUpdateProfileConfigurationRequestConfigurationGraphqlApiDast(val *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) *NullableUpdateProfileConfigurationRequestConfigurationGraphqlApiDast {
+	return &NullableUpdateProfileConfigurationRequestConfigurationGraphqlApiDast{value: val, isSet: true}
 }
 
-func (v NullableCreateDastRestProfileRequestConfigurationObjectRestApiDast) MarshalJSON() ([]byte, error) {
+func (v NullableUpdateProfileConfigurationRequestConfigurationGraphqlApiDast) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCreateDastRestProfileRequestConfigurationObjectRestApiDast) UnmarshalJSON(src []byte) error {
+func (v *NullableUpdateProfileConfigurationRequestConfigurationGraphqlApiDast) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

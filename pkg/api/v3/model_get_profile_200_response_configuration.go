@@ -25,6 +25,7 @@ type GetProfile200ResponseConfiguration struct {
 	ExplorationScope      []string                                                `json:"exploration_scope,omitempty"`
 	ApiCustomRuleIds      []string                                                `json:"api_custom_rule_ids,omitempty"`
 	FrontendCustomRuleIds []string                                                `json:"frontend_custom_rule_ids,omitempty"`
+	Mode                  *ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE              `json:"mode,omitempty"`
 	Authentication        *GetProfile200ResponseConfigurationAuthentication       `json:"authentication,omitempty"`
 	SecurityTests         *GetProfile200ResponseConfigurationSecurityTests        `json:"security_tests,omitempty"`
 	Inference             *GetProfile200ResponseConfigurationInference            `json:"inference,omitempty"`
@@ -249,6 +250,38 @@ func (o *GetProfile200ResponseConfiguration) HasFrontendCustomRuleIds() bool {
 // SetFrontendCustomRuleIds gets a reference to the given []string and assigns it to the FrontendCustomRuleIds field.
 func (o *GetProfile200ResponseConfiguration) SetFrontendCustomRuleIds(v []string) {
 	o.FrontendCustomRuleIds = v
+}
+
+// GetMode returns the Mode field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfiguration) GetMode() ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE {
+	if o == nil || IsNil(o.Mode) {
+		var ret ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE
+		return ret
+	}
+	return *o.Mode
+}
+
+// GetModeOk returns a tuple with the Mode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfiguration) GetModeOk() (*ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE, bool) {
+	if o == nil || IsNil(o.Mode) {
+		return nil, false
+	}
+	return o.Mode, true
+}
+
+// HasMode returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfiguration) HasMode() bool {
+	if o != nil && !IsNil(o.Mode) {
+		return true
+	}
+
+	return false
+}
+
+// SetMode gets a reference to the given ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE and assigns it to the Mode field.
+func (o *GetProfile200ResponseConfiguration) SetMode(v ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE) {
+	o.Mode = &v
 }
 
 // GetAuthentication returns the Authentication field value if set, zero value otherwise.
@@ -663,6 +696,9 @@ func (o GetProfile200ResponseConfiguration) ToMap() (map[string]interface{}, err
 	if !IsNil(o.FrontendCustomRuleIds) {
 		toSerialize["frontend_custom_rule_ids"] = o.FrontendCustomRuleIds
 	}
+	if !IsNil(o.Mode) {
+		toSerialize["mode"] = o.Mode
+	}
 	if !IsNil(o.Authentication) {
 		toSerialize["authentication"] = o.Authentication
 	}
@@ -727,6 +763,7 @@ func (o *GetProfile200ResponseConfiguration) UnmarshalJSON(data []byte) (err err
 		delete(additionalProperties, "exploration_scope")
 		delete(additionalProperties, "api_custom_rule_ids")
 		delete(additionalProperties, "frontend_custom_rule_ids")
+		delete(additionalProperties, "mode")
 		delete(additionalProperties, "authentication")
 		delete(additionalProperties, "security_tests")
 		delete(additionalProperties, "inference")
