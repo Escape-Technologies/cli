@@ -215,6 +215,53 @@ func TestIntentMiddleware_OnSelectsTopK(t *testing.T) {
 	}
 }
 
+func TestIntentMiddleware_PreservesNativeTools(t *testing.T) {
+	t.Parallel()
+
+	commandSpec := specWithBody(t, "alpha_create", "create an alpha")
+	nativeRaw, err := json.Marshal(map[string]any{
+		"type": "object",
+		"properties": map[string]any{
+			"question": map[string]any{"type": "string"},
+		},
+		"required": []string{"question"},
+	})
+	if err != nil {
+		t.Fatalf("marshal native schema: %v", err)
+	}
+	nativeTool := mcpgo.NewToolWithRawSchema(publicAPIToolName, "Answer questions about the public API.", nativeRaw)
+
+	libraryBody := minimalLibraryToolsListResponse(t, []mcpgo.Tool{commandSpec.Tool, nativeTool})
+
+	handler := NewIntentMiddleware(
+		fakeHandler(libraryBody),
+		IntentOptions{Mode: IntentModeCompactOnly, Specs: []ToolSpec{commandSpec}},
+	)
+
+	resp := callToolsList(t, handler, "")
+	tools := parseToolsFromResponse(t, resp.Body.Bytes())
+
+	var nativeRendered map[string]any
+	for _, tool := range tools {
+		if name, _ := tool["name"].(string); name == publicAPIToolName {
+			nativeRendered = tool
+			break
+		}
+	}
+	if nativeRendered == nil {
+		t.Fatalf("native tool %q missing from compact-mode tools/list, got %d tools", publicAPIToolName, len(tools))
+	}
+	// Native tools are preserved verbatim; their schema must NOT be stubbed.
+	schema, _ := nativeRendered["inputSchema"].(map[string]any)
+	props, _ := schema["properties"].(map[string]any)
+	if _, ok := props["question"]; !ok {
+		t.Fatalf("expected question property preserved on native tool, got %v", props)
+	}
+	if schema["additionalProperties"] == true {
+		t.Fatalf("native tool schema should not be stubbed: %v", schema)
+	}
+}
+
 func TestIntentMiddleware_ClassifierErrorFallsBackToCompact(t *testing.T) {
 	t.Parallel()
 
