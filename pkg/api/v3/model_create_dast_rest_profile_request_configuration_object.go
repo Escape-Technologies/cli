@@ -19,24 +19,25 @@ var _ MappedNullable = &CreateDastRestProfileRequestConfigurationObject{}
 
 // CreateDastRestProfileRequestConfigurationObject The scan configuration as an object. Use this field for typed payloads; kept separate to preserve compatibility on `configuration`.
 type CreateDastRestProfileRequestConfigurationObject struct {
-	PublicLocationIds     []string                                                    `json:"public_location_ids,omitempty"`
-	PrivateLocationIds    []string                                                    `json:"private_location_ids,omitempty"`
-	Scope                 *GetProfile200ResponseConfigurationScope                    `json:"scope,omitempty"`
-	ExplorationScope      []string                                                    `json:"exploration_scope,omitempty"`
-	ApiCustomRuleIds      []string                                                    `json:"api_custom_rule_ids,omitempty"`
-	FrontendCustomRuleIds []string                                                    `json:"frontend_custom_rule_ids,omitempty"`
-	Authentication        *GetProfile200ResponseConfigurationAuthentication           `json:"authentication,omitempty"`
-	SecurityTests         *GetProfile200ResponseConfigurationSecurityTests            `json:"security_tests,omitempty"`
-	Inference             *GetProfile200ResponseConfigurationInference                `json:"inference,omitempty"`
-	Network               *GetProfile200ResponseConfigurationNetwork                  `json:"network,omitempty"`
-	SubdomainEnumeration  *GetProfile200ResponseConfigurationSubdomainEnumeration     `json:"subdomain_enumeration,omitempty"`
-	PortScanning          *GetProfile200ResponseConfigurationPortScanning             `json:"port_scanning,omitempty"`
-	ServiceDiscovery      *GetProfile200ResponseConfigurationServiceDiscovery         `json:"service_discovery,omitempty"`
-	FrontendDast          *GetProfile200ResponseConfigurationFrontendDast             `json:"frontend_dast,omitempty"`
-	GraphqlApiDast        *GetProfile200ResponseConfigurationGraphqlApiDast           `json:"graphql_api_dast,omitempty"`
-	RestApiDast           *CreateDastRestProfileRequestConfigurationObjectRestApiDast `json:"rest_api_dast,omitempty"`
-	AutomatedPentesting   *GetProfile200ResponseConfigurationAutomatedPentesting      `json:"automated_pentesting,omitempty"`
-	Experimental          *GetProfile200ResponseConfigurationExperimental             `json:"experimental,omitempty"`
+	PublicLocationIds     []string                                                      `json:"public_location_ids,omitempty"`
+	PrivateLocationIds    []string                                                      `json:"private_location_ids,omitempty"`
+	Scope                 *GetProfile200ResponseConfigurationScope                      `json:"scope,omitempty"`
+	ExplorationScope      []string                                                      `json:"exploration_scope,omitempty"`
+	ApiCustomRuleIds      []string                                                      `json:"api_custom_rule_ids,omitempty"`
+	FrontendCustomRuleIds []string                                                      `json:"frontend_custom_rule_ids,omitempty"`
+	Mode                  *ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE                    `json:"mode,omitempty"`
+	Authentication        *GetProfile200ResponseConfigurationAuthentication             `json:"authentication,omitempty"`
+	SecurityTests         *GetProfile200ResponseConfigurationSecurityTests              `json:"security_tests,omitempty"`
+	Inference             *GetProfile200ResponseConfigurationInference                  `json:"inference,omitempty"`
+	Network               *GetProfile200ResponseConfigurationNetwork                    `json:"network,omitempty"`
+	SubdomainEnumeration  *GetProfile200ResponseConfigurationSubdomainEnumeration       `json:"subdomain_enumeration,omitempty"`
+	PortScanning          *GetProfile200ResponseConfigurationPortScanning               `json:"port_scanning,omitempty"`
+	ServiceDiscovery      *GetProfile200ResponseConfigurationServiceDiscovery           `json:"service_discovery,omitempty"`
+	FrontendDast          *UpdateProfileConfigurationRequestConfigurationFrontendDast   `json:"frontend_dast,omitempty"`
+	GraphqlApiDast        *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast `json:"graphql_api_dast,omitempty"`
+	RestApiDast           *CreateDastRestProfileRequestConfigurationObjectRestApiDast   `json:"rest_api_dast,omitempty"`
+	AutomatedPentesting   *GetProfile200ResponseConfigurationAutomatedPentesting        `json:"automated_pentesting,omitempty"`
+	Experimental          *GetProfile200ResponseConfigurationExperimental               `json:"experimental,omitempty"`
 	AdditionalProperties  map[string]interface{}
 }
 
@@ -249,6 +250,38 @@ func (o *CreateDastRestProfileRequestConfigurationObject) HasFrontendCustomRuleI
 // SetFrontendCustomRuleIds gets a reference to the given []string and assigns it to the FrontendCustomRuleIds field.
 func (o *CreateDastRestProfileRequestConfigurationObject) SetFrontendCustomRuleIds(v []string) {
 	o.FrontendCustomRuleIds = v
+}
+
+// GetMode returns the Mode field value if set, zero value otherwise.
+func (o *CreateDastRestProfileRequestConfigurationObject) GetMode() ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE {
+	if o == nil || IsNil(o.Mode) {
+		var ret ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE
+		return ret
+	}
+	return *o.Mode
+}
+
+// GetModeOk returns a tuple with the Mode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateDastRestProfileRequestConfigurationObject) GetModeOk() (*ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE, bool) {
+	if o == nil || IsNil(o.Mode) {
+		return nil, false
+	}
+	return o.Mode, true
+}
+
+// HasMode returns a boolean if a field has been set.
+func (o *CreateDastRestProfileRequestConfigurationObject) HasMode() bool {
+	if o != nil && !IsNil(o.Mode) {
+		return true
+	}
+
+	return false
+}
+
+// SetMode gets a reference to the given ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE and assigns it to the Mode field.
+func (o *CreateDastRestProfileRequestConfigurationObject) SetMode(v ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE) {
+	o.Mode = &v
 }
 
 // GetAuthentication returns the Authentication field value if set, zero value otherwise.
@@ -476,9 +509,9 @@ func (o *CreateDastRestProfileRequestConfigurationObject) SetServiceDiscovery(v 
 }
 
 // GetFrontendDast returns the FrontendDast field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationObject) GetFrontendDast() GetProfile200ResponseConfigurationFrontendDast {
+func (o *CreateDastRestProfileRequestConfigurationObject) GetFrontendDast() UpdateProfileConfigurationRequestConfigurationFrontendDast {
 	if o == nil || IsNil(o.FrontendDast) {
-		var ret GetProfile200ResponseConfigurationFrontendDast
+		var ret UpdateProfileConfigurationRequestConfigurationFrontendDast
 		return ret
 	}
 	return *o.FrontendDast
@@ -486,7 +519,7 @@ func (o *CreateDastRestProfileRequestConfigurationObject) GetFrontendDast() GetP
 
 // GetFrontendDastOk returns a tuple with the FrontendDast field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationObject) GetFrontendDastOk() (*GetProfile200ResponseConfigurationFrontendDast, bool) {
+func (o *CreateDastRestProfileRequestConfigurationObject) GetFrontendDastOk() (*UpdateProfileConfigurationRequestConfigurationFrontendDast, bool) {
 	if o == nil || IsNil(o.FrontendDast) {
 		return nil, false
 	}
@@ -502,15 +535,15 @@ func (o *CreateDastRestProfileRequestConfigurationObject) HasFrontendDast() bool
 	return false
 }
 
-// SetFrontendDast gets a reference to the given GetProfile200ResponseConfigurationFrontendDast and assigns it to the FrontendDast field.
-func (o *CreateDastRestProfileRequestConfigurationObject) SetFrontendDast(v GetProfile200ResponseConfigurationFrontendDast) {
+// SetFrontendDast gets a reference to the given UpdateProfileConfigurationRequestConfigurationFrontendDast and assigns it to the FrontendDast field.
+func (o *CreateDastRestProfileRequestConfigurationObject) SetFrontendDast(v UpdateProfileConfigurationRequestConfigurationFrontendDast) {
 	o.FrontendDast = &v
 }
 
 // GetGraphqlApiDast returns the GraphqlApiDast field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationObject) GetGraphqlApiDast() GetProfile200ResponseConfigurationGraphqlApiDast {
+func (o *CreateDastRestProfileRequestConfigurationObject) GetGraphqlApiDast() UpdateProfileConfigurationRequestConfigurationGraphqlApiDast {
 	if o == nil || IsNil(o.GraphqlApiDast) {
-		var ret GetProfile200ResponseConfigurationGraphqlApiDast
+		var ret UpdateProfileConfigurationRequestConfigurationGraphqlApiDast
 		return ret
 	}
 	return *o.GraphqlApiDast
@@ -518,7 +551,7 @@ func (o *CreateDastRestProfileRequestConfigurationObject) GetGraphqlApiDast() Ge
 
 // GetGraphqlApiDastOk returns a tuple with the GraphqlApiDast field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationObject) GetGraphqlApiDastOk() (*GetProfile200ResponseConfigurationGraphqlApiDast, bool) {
+func (o *CreateDastRestProfileRequestConfigurationObject) GetGraphqlApiDastOk() (*UpdateProfileConfigurationRequestConfigurationGraphqlApiDast, bool) {
 	if o == nil || IsNil(o.GraphqlApiDast) {
 		return nil, false
 	}
@@ -534,8 +567,8 @@ func (o *CreateDastRestProfileRequestConfigurationObject) HasGraphqlApiDast() bo
 	return false
 }
 
-// SetGraphqlApiDast gets a reference to the given GetProfile200ResponseConfigurationGraphqlApiDast and assigns it to the GraphqlApiDast field.
-func (o *CreateDastRestProfileRequestConfigurationObject) SetGraphqlApiDast(v GetProfile200ResponseConfigurationGraphqlApiDast) {
+// SetGraphqlApiDast gets a reference to the given UpdateProfileConfigurationRequestConfigurationGraphqlApiDast and assigns it to the GraphqlApiDast field.
+func (o *CreateDastRestProfileRequestConfigurationObject) SetGraphqlApiDast(v UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) {
 	o.GraphqlApiDast = &v
 }
 
@@ -663,6 +696,9 @@ func (o CreateDastRestProfileRequestConfigurationObject) ToMap() (map[string]int
 	if !IsNil(o.FrontendCustomRuleIds) {
 		toSerialize["frontend_custom_rule_ids"] = o.FrontendCustomRuleIds
 	}
+	if !IsNil(o.Mode) {
+		toSerialize["mode"] = o.Mode
+	}
 	if !IsNil(o.Authentication) {
 		toSerialize["authentication"] = o.Authentication
 	}
@@ -727,6 +763,7 @@ func (o *CreateDastRestProfileRequestConfigurationObject) UnmarshalJSON(data []b
 		delete(additionalProperties, "exploration_scope")
 		delete(additionalProperties, "api_custom_rule_ids")
 		delete(additionalProperties, "frontend_custom_rule_ids")
+		delete(additionalProperties, "mode")
 		delete(additionalProperties, "authentication")
 		delete(additionalProperties, "security_tests")
 		delete(additionalProperties, "inference")
