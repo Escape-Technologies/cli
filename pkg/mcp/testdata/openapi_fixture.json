@@ -10,10 +10,34 @@
         "description": "Returns scans for the current organization, optionally filtered by date range.",
         "tags": ["scans"],
         "parameters": [
-          { "name": "after", "in": "query", "required": false, "schema": { "type": "string", "format": "date-time" }, "description": "ISO8601 lower bound on scan start time" },
-          { "name": "before", "in": "query", "required": false, "schema": { "type": "string", "format": "date-time" }, "description": "ISO8601 upper bound on scan start time" },
-          { "name": "size", "in": "query", "required": false, "schema": { "type": "integer", "default": 50, "maximum": 200 }, "description": "Page size" },
-          { "name": "cursor", "in": "query", "required": false, "schema": { "type": "string" }, "description": "Pagination cursor" }
+          {
+            "name": "after",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string", "format": "date-time" },
+            "description": "ISO8601 lower bound on scan start time"
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string", "format": "date-time" },
+            "description": "ISO8601 upper bound on scan start time"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "default": 50, "maximum": 200 },
+            "description": "Page size"
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string" },
+            "description": "Pagination cursor"
+          }
         ]
       }
     },
@@ -24,9 +48,27 @@
         "description": "Returns scanner-level problems (warnings, errors) reported during scan execution.",
         "tags": ["scans", "problems"],
         "parameters": [
-          { "name": "from", "in": "query", "required": false, "schema": { "type": "string", "format": "date-time" }, "description": "ISO8601 inclusive lower bound on scan completion time" },
-          { "name": "to", "in": "query", "required": false, "schema": { "type": "string", "format": "date-time" }, "description": "ISO8601 inclusive upper bound on scan completion time" },
-          { "name": "limit", "in": "query", "required": false, "schema": { "type": "integer", "default": 100 }, "description": "Maximum number of problems" }
+          {
+            "name": "from",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string", "format": "date-time" },
+            "description": "ISO8601 inclusive lower bound on scan completion time"
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string", "format": "date-time" },
+            "description": "ISO8601 inclusive upper bound on scan completion time"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "default": 100 },
+            "description": "Maximum number of problems"
+          }
         ]
       }
     },
@@ -37,8 +79,19 @@
         "description": "Returns the issues found by a specific scan.",
         "tags": ["scans", "issues"],
         "parameters": [
-          { "name": "scanId", "in": "path", "required": true, "schema": { "type": "string" }, "description": "Scan identifier" },
-          { "name": "severity", "in": "query", "required": false, "schema": { "type": "string", "enum": ["LOW", "MEDIUM", "HIGH", "CRITICAL"] } }
+          {
+            "name": "scanId",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" },
+            "description": "Scan identifier"
+          },
+          {
+            "name": "severity",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string", "enum": ["LOW", "MEDIUM", "HIGH", "CRITICAL"] }
+          }
         ]
       }
     },
@@ -56,6 +109,30 @@
             }
           }
         }
+      }
+    },
+    "/locations": {
+      "get": {
+        "operationId": "listLocations",
+        "summary": "List locations",
+        "description": "Returns all private locations for the current organization.",
+        "tags": ["locations"],
+        "parameters": [
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "default": 50, "maximum": 200 },
+            "description": "Page size"
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string" },
+            "description": "Pagination cursor"
+          }
+        ]
       }
     }
   },

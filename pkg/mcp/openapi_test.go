@@ -105,6 +105,39 @@ func TestPublicAPIHandler_ReturnsCurlBlock(t *testing.T) {
 	}
 }
 
+func TestPublicAPIHandler_ReturnsLocationsOperation(t *testing.T) {
+	t.Parallel()
+
+	handler, _ := newPublicAPIHandlerWithFixture(t)
+	res, err := handler(newAuthedContext(), newCallToolRequest(map[string]any{
+		"question": "how to get all locations using the public api ?",
+	}))
+	if err != nil {
+		t.Fatalf("handler err: %v", err)
+	}
+	if res.IsError {
+		t.Fatalf("unexpected error result: %+v", res)
+	}
+
+	text := textFromResult(t, res)
+	if !strings.Contains(text, "## GET /locations") {
+		t.Fatalf("expected GET /locations heading, got:\n%s", text)
+	}
+
+	payload := structuredFromResult(t, res)
+	matches, ok := payload["matches"].([]any)
+	if !ok || len(matches) == 0 {
+		t.Fatalf("expected non-empty matches in payload, got %T %v", payload["matches"], payload["matches"])
+	}
+	first := matches[0].(map[string]any)
+	if first["method"] != "GET" || first["path"] != "/locations" {
+		t.Fatalf("unexpected first match: %+v", first)
+	}
+	if curl, _ := first["curl"].(string); !strings.Contains(curl, "https://public.escape.tech/v3/locations") {
+		t.Fatalf("expected public API locations curl, got:\n%s", curl)
+	}
+}
+
 func TestPublicAPIHandler_LimitClampedToThree(t *testing.T) {
 	t.Parallel()
 
