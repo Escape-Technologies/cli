@@ -48,29 +48,30 @@ func RenderCurl(op indexedOperation, baseURL string) string {
 		fullURL = appendQueryParams(fullURL, queryParams)
 	}
 
-	lines := []string{fmt.Sprintf("curl -X %s '%s'", method, fullURL)}
+	lines := []string{fmt.Sprintf("curl -X %s %s", method, shellQuote(fullURL))}
 	if useGet {
 		lines = append(lines, "  --get")
 		for _, p := range queryParams {
-			lines = append(lines, fmt.Sprintf("  --data-urlencode '%s=%s'", p.Name, paramPlaceholder(p)))
+			lines = append(lines, "  --data-urlencode "+shellQuote(fmt.Sprintf("%s=%s", p.Name, paramPlaceholder(p))))
 		}
 	}
 
 	lines = append(lines,
-		fmt.Sprintf("  -H '%s'", curlAPIKeyHeader),
-		fmt.Sprintf("  -H '%s'", curlAcceptJSON),
+		"  -H "+shellQuote(curlAPIKeyHeader),
+		"  -H "+shellQuote(curlAcceptJSON),
 	)
 
 	if op.RequestBody != nil && op.RequestBody.Schema != nil {
 		bodyJSON := renderJSONSkeleton(op.RequestBody.Schema, 0)
-		lines = append(lines, fmt.Sprintf("  -H '%s'", curlContentTypeJSON))
-		// Newlines survive inside a shell single-quoted string. Single quotes
-		// inside the body are pre-escaped.
-		escaped := strings.ReplaceAll(bodyJSON, `'`, `'\''`)
-		lines = append(lines, fmt.Sprintf("  --data '%s'", escaped))
+		lines = append(lines, "  -H "+shellQuote(curlContentTypeJSON))
+		lines = append(lines, "  --data "+shellQuote(bodyJSON))
 	}
 
 	return strings.Join(joinWithContinuations(lines), "\n")
+}
+
+func shellQuote(value string) string {
+	return "'" + strings.ReplaceAll(value, "'", `'\''`) + "'"
 }
 
 // joinWithContinuations appends ` \` to every line except the last so the
