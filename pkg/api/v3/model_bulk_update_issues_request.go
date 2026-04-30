@@ -20,8 +20,8 @@ var _ MappedNullable = &BulkUpdateIssuesRequest{}
 
 // BulkUpdateIssuesRequest struct for BulkUpdateIssuesRequest
 type BulkUpdateIssuesRequest struct {
-	Status ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS `json:"status"`
-	Where *BulkUpdateIssuesRequestWhere `json:"where,omitempty"`
+	Status               ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS `json:"status"`
+	Where                *BulkUpdateIssuesRequestWhere           `json:"where,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -102,7 +102,7 @@ func (o *BulkUpdateIssuesRequest) SetWhere(v BulkUpdateIssuesRequestWhere) {
 }
 
 func (o BulkUpdateIssuesRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -136,10 +136,10 @@ func (o *BulkUpdateIssuesRequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -201,5 +201,3 @@ func (v *NullableBulkUpdateIssuesRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -20,13 +20,13 @@ var _ MappedNullable = &CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf
 
 // CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf2 struct for CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf2
 type CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf2 struct {
-	UseExtraction *bool `json:"use_extraction,omitempty"`
-	Is *string `json:"is,omitempty"`
-	IsNot *string `json:"is_not,omitempty"`
-	In []string `json:"in,omitempty"`
-	Contains *string `json:"contains,omitempty"`
-	Regex *string `json:"regex,omitempty"`
-	If ENUMDIALOGMESSAGE `json:"if"`
+	UseExtraction        *bool             `json:"use_extraction,omitempty"`
+	Is                   *string           `json:"is,omitempty"`
+	IsNot                *string           `json:"is_not,omitempty"`
+	In                   []string          `json:"in,omitempty"`
+	Contains             *string           `json:"contains,omitempty"`
+	Regex                *string           `json:"regex,omitempty"`
+	If                   ENUMDIALOGMESSAGE `json:"if"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -267,7 +267,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf2) SetIf(v ENUM
 }
 
 func (o CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf2) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -316,10 +316,10 @@ func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf2) UnmarshalJSO
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -386,5 +386,3 @@ func (v *NullableCreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf2) Unma
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -20,11 +20,11 @@ var _ MappedNullable = &WorkflowSummarizedActionsInner{}
 
 // WorkflowSummarizedActionsInner struct for WorkflowSummarizedActionsInner
 type WorkflowSummarizedActionsInner struct {
-	Id string `json:"id"`
-	Type ENUMPROPERTIESDATAITEMSPROPERTIESACTIONSITEMSPROPERTIESTYPE `json:"type"`
-	Parameters interface{} `json:"parameters,omitempty"`
-	InternalAction *ENUMPROPERTIESDATAITEMSPROPERTIESACTIONSITEMSPROPERTIESINTERNALACTION `json:"internalAction,omitempty"`
-	Integration *WorkflowSummarizedActionsInnerIntegration `json:"integration,omitempty"`
+	Id                   string                                                                 `json:"id"`
+	Type                 ENUMPROPERTIESDATAITEMSPROPERTIESACTIONSITEMSPROPERTIESTYPE            `json:"type"`
+	Parameters           interface{}                                                            `json:"parameters,omitempty"`
+	InternalAction       *ENUMPROPERTIESDATAITEMSPROPERTIESACTIONSITEMSPROPERTIESINTERNALACTION `json:"internalAction,omitempty"`
+	Integration          *WorkflowSummarizedActionsInnerIntegration                             `json:"integration,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -195,7 +195,7 @@ func (o *WorkflowSummarizedActionsInner) SetIntegration(v WorkflowSummarizedActi
 }
 
 func (o WorkflowSummarizedActionsInner) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -237,10 +237,10 @@ func (o *WorkflowSummarizedActionsInner) UnmarshalJSON(data []byte) (err error) 
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -305,5 +305,3 @@ func (v *NullableWorkflowSummarizedActionsInner) UnmarshalJSON(src []byte) error
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

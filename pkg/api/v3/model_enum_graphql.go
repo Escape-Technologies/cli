@@ -20,7 +20,7 @@ type ENUMGRAPHQL string
 
 // List of ENUM_GRAPHQL
 const (
-	ENUMGRAPHQL_GRAPHQL ENUMGRAPHQL = "GRAPHQL"
+	ENUMGRAPHQL_GRAPHQL  ENUMGRAPHQL = "GRAPHQL"
 	ENUMGRAPHQL_GRAPHQL2 ENUMGRAPHQL = "graphql"
 )
 
@@ -108,4 +108,3 @@ func (v *NullableENUMGRAPHQL) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

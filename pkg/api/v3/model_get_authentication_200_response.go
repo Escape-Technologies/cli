@@ -21,15 +21,15 @@ var _ MappedNullable = &GetAuthentication200Response{}
 // GetAuthentication200Response struct for GetAuthentication200Response
 type GetAuthentication200Response struct {
 	// Identifier of this check
-	Id string `json:"id"`
+	Id     string               `json:"id"`
 	Status ENUMPROPERTIESSTATUS `json:"status"`
 	// Approximate progress between 0 and 1 while the check is running
 	ProgressRatio float32 `json:"progressRatio"`
 	// When the check was started
-	CreatedAt string `json:"createdAt"`
+	CreatedAt      string                                      `json:"createdAt"`
 	Authentication *GetAuthentication200ResponseAuthentication `json:"authentication,omitempty"`
 	// Chronological messages from the check, including errors that explain misconfiguration
-	Events []AuthenticationEvent `json:"events"`
+	Events               []AuthenticationEvent `json:"events"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -210,7 +210,7 @@ func (o *GetAuthentication200Response) SetEvents(v []AuthenticationEvent) {
 }
 
 func (o GetAuthentication200Response) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -252,10 +252,10 @@ func (o *GetAuthentication200Response) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -321,5 +321,3 @@ func (v *NullableGetAuthentication200Response) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

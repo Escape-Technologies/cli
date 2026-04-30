@@ -21,16 +21,16 @@ var _ MappedNullable = &CreateAssetAWSLAMBDARequest{}
 // CreateAssetAWSLAMBDARequest struct for CreateAssetAWSLAMBDARequest
 type CreateAssetAWSLAMBDARequest struct {
 	// The list of project IDs bind the asset on.
-	ProjectIds []string `json:"projectIds,omitempty"`
-	Name string `json:"name"`
-	AssetClass ENUMCLOUDCOMPONENT `json:"asset_class"`
-	ExtraMetadata map[string]interface{} `json:"extra_metadata,omitempty"`
-	ScreenshotS3Key *string `json:"screenshot_s3_key,omitempty"`
-	AssetType ENUMAWSLAMBDA `json:"asset_type"`
-	FunctionArn string `json:"function_arn"`
-	Runtime *string `json:"runtime,omitempty"`
-	Description *string `json:"description,omitempty"`
-	FunctionUrl *string `json:"function_url,omitempty"`
+	ProjectIds           []string               `json:"projectIds,omitempty"`
+	Name                 string                 `json:"name"`
+	AssetClass           ENUMCLOUDCOMPONENT     `json:"asset_class"`
+	ExtraMetadata        map[string]interface{} `json:"extra_metadata,omitempty"`
+	ScreenshotS3Key      *string                `json:"screenshot_s3_key,omitempty"`
+	AssetType            ENUMAWSLAMBDA          `json:"asset_type"`
+	FunctionArn          string                 `json:"function_arn"`
+	Runtime              *string                `json:"runtime,omitempty"`
+	Description          *string                `json:"description,omitempty"`
+	FunctionUrl          *string                `json:"function_url,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -346,7 +346,7 @@ func (o *CreateAssetAWSLAMBDARequest) SetFunctionUrl(v string) {
 }
 
 func (o CreateAssetAWSLAMBDARequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -401,10 +401,10 @@ func (o *CreateAssetAWSLAMBDARequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -474,5 +474,3 @@ func (v *NullableCreateAssetAWSLAMBDARequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

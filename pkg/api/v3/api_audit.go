@@ -18,22 +18,21 @@ import (
 	"net/url"
 )
 
-
 // AuditAPIService AuditAPI service
 type AuditAPIService service
 
 type ApiListAuditLogsRequest struct {
-	ctx context.Context
-	ApiService *AuditAPIService
-	cursor *string
-	size *int
-	sortType *string
+	ctx           context.Context
+	ApiService    *AuditAPIService
+	cursor        *string
+	size          *int
+	sortType      *string
 	sortDirection *string
-	startTime *string
-	endTime *string
-	action *string
-	actor *string
-	search *string
+	startTime     *string
+	endTime       *string
+	action        *string
+	actor         *string
+	search        *string
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
@@ -99,24 +98,25 @@ ListAuditLogs List audit logs
 
 List audit logs of the organization.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListAuditLogsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListAuditLogsRequest
 */
 func (a *AuditAPIService) ListAuditLogs(ctx context.Context) ApiListAuditLogsRequest {
 	return ApiListAuditLogsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ListAuditLogs200Response
+//
+//	@return ListAuditLogs200Response
 func (a *AuditAPIService) ListAuditLogsExecute(r ApiListAuditLogsRequest) (*ListAuditLogs200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ListAuditLogs200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ListAuditLogs200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AuditAPIService.ListAuditLogs")
@@ -137,7 +137,6 @@ func (a *AuditAPIService) ListAuditLogsExecute(r ApiListAuditLogsRequest) (*List
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
-		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.sortType != nil {
@@ -147,7 +146,6 @@ func (a *AuditAPIService) ListAuditLogsExecute(r ApiListAuditLogsRequest) (*List
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
 		var defaultValue string = "asc"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
 		r.sortDirection = &defaultValue
 	}
 	if r.startTime != nil {
@@ -225,8 +223,8 @@ func (a *AuditAPIService) ListAuditLogsExecute(r ApiListAuditLogsRequest) (*List
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

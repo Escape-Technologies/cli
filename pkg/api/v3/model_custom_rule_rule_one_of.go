@@ -20,13 +20,13 @@ var _ MappedNullable = &CustomRuleRuleOneOf{}
 
 // CustomRuleRuleOneOf struct for CustomRuleRuleOneOf
 type CustomRuleRuleOneOf struct {
-	Id string `json:"id"`
-	Alert CreateCustomRuleRequestContentRuleOneOfAlert `json:"alert"`
-	Type ENUMAPI `json:"type"`
-	Seed []CreateCustomRuleRequestContentRuleOneOfSeedInner `json:"seed,omitempty"`
-	Transform *CreateCustomRuleRequestContentRuleOneOfTransform `json:"transform,omitempty"`
-	Detect []CreateCustomRuleRequestContentRuleOneOfTransformTriggerInner `json:"detect"`
-	Extractors []CreateCustomRuleRequestContentRuleOneOfExtractorsInner `json:"extractors,omitempty"`
+	Id                   string                                                         `json:"id"`
+	Alert                CreateCustomRuleRequestContentRuleOneOfAlert                   `json:"alert"`
+	Type                 ENUMAPI                                                        `json:"type"`
+	Seed                 []CreateCustomRuleRequestContentRuleOneOfSeedInner             `json:"seed,omitempty"`
+	Transform            *CreateCustomRuleRequestContentRuleOneOfTransform              `json:"transform,omitempty"`
+	Detect               []CreateCustomRuleRequestContentRuleOneOfTransformTriggerInner `json:"detect"`
+	Extractors           []CreateCustomRuleRequestContentRuleOneOfExtractorsInner       `json:"extractors,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -246,7 +246,7 @@ func (o *CustomRuleRuleOneOf) SetExtractors(v []CreateCustomRuleRequestContentRu
 }
 
 func (o CustomRuleRuleOneOf) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -292,10 +292,10 @@ func (o *CustomRuleRuleOneOf) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -362,5 +362,3 @@ func (v *NullableCustomRuleRuleOneOf) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

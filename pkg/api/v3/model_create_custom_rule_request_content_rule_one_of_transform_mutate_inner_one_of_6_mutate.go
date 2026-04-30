@@ -19,10 +19,10 @@ var _ MappedNullable = &CreateCustomRuleRequestContentRuleOneOfTransformMutateIn
 
 // CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf6Mutate struct for CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf6Mutate
 type CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf6Mutate struct {
-	UseExtraction *bool `json:"use_extraction,omitempty"`
-	Value *string `json:"value,omitempty"`
-	Values []string `json:"values,omitempty"`
-	RegexReplace *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOfRegexReplace `json:"regex_replace,omitempty"`
+	UseExtraction        *bool                                                                         `json:"use_extraction,omitempty"`
+	Value                *string                                                                       `json:"value,omitempty"`
+	Values               []string                                                                      `json:"values,omitempty"`
+	RegexReplace         *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOfRegexReplace `json:"regex_replace,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -174,7 +174,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf6Mutate
 }
 
 func (o CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOf6Mutate) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -262,5 +262,3 @@ func (v *NullableCreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneO
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

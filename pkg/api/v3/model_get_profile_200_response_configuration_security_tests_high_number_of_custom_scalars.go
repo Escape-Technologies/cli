@@ -19,8 +19,8 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationSecurityTestsHighNumbe
 
 // GetProfile200ResponseConfigurationSecurityTestsHighNumberOfCustomScalars struct for GetProfile200ResponseConfigurationSecurityTestsHighNumberOfCustomScalars
 type GetProfile200ResponseConfigurationSecurityTestsHighNumberOfCustomScalars struct {
-	Skip *bool `json:"skip,omitempty"`
-	DetectionThreshold *float32 `json:"detection_threshold,omitempty"`
+	Skip                 *bool    `json:"skip,omitempty"`
+	DetectionThreshold   *float32 `json:"detection_threshold,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -108,7 +108,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTestsHighNumberOfCustomScalar
 }
 
 func (o GetProfile200ResponseConfigurationSecurityTestsHighNumberOfCustomScalars) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -188,5 +188,3 @@ func (v *NullableGetProfile200ResponseConfigurationSecurityTestsHighNumberOfCust
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

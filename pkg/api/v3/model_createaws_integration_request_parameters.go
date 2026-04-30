@@ -20,8 +20,8 @@ var _ MappedNullable = &CreateawsIntegrationRequestParameters{}
 
 // CreateawsIntegrationRequestParameters The parameters of the integration
 type CreateawsIntegrationRequestParameters struct {
-	PublicKey string `json:"public_key"`
-	PrivateKey string `json:"private_key"`
+	PublicKey            string `json:"public_key"`
+	PrivateKey           string `json:"private_key"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -95,7 +95,7 @@ func (o *CreateawsIntegrationRequestParameters) SetPrivateKey(v string) {
 }
 
 func (o CreateawsIntegrationRequestParameters) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -128,10 +128,10 @@ func (o *CreateawsIntegrationRequestParameters) UnmarshalJSON(data []byte) (err 
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -193,5 +193,3 @@ func (v *NullableCreateawsIntegrationRequestParameters) UnmarshalJSON(src []byte
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

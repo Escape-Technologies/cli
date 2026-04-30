@@ -20,8 +20,8 @@ var _ MappedNullable = &CreateWorkflowFilterUsingCustomFilterOnAssetsFilterChild
 
 // CreateWorkflowFilterUsingCustomFilterOnAssetsFilterChildrenLinksInner struct for CreateWorkflowFilterUsingCustomFilterOnAssetsFilterChildrenLinksInner
 type CreateWorkflowFilterUsingCustomFilterOnAssetsFilterChildrenLinksInner struct {
-	ChildId *string `json:"childId,omitempty"`
-	Verb ENUMPROPERTIESFILTERSITEMS3PROPERTIESFILTERPROPERTIESPARENTLINKSITEMSPROPERTIESVERB `json:"verb"`
+	ChildId              *string                                                                             `json:"childId,omitempty"`
+	Verb                 ENUMPROPERTIESFILTERSITEMS3PROPERTIESFILTERPROPERTIESPARENTLINKSITEMSPROPERTIESVERB `json:"verb"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -102,7 +102,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilterChildrenLinksInner) 
 }
 
 func (o CreateWorkflowFilterUsingCustomFilterOnAssetsFilterChildrenLinksInner) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -136,10 +136,10 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilterChildrenLinksInner) 
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -201,5 +201,3 @@ func (v *NullableCreateWorkflowFilterUsingCustomFilterOnAssetsFilterChildrenLink
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

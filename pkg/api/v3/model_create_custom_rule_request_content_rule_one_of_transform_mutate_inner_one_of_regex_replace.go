@@ -20,9 +20,9 @@ var _ MappedNullable = &CreateCustomRuleRequestContentRuleOneOfTransformMutateIn
 
 // CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOfRegexReplace struct for CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOfRegexReplace
 type CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOfRegexReplace struct {
-	UseExtraction *bool `json:"use_extraction,omitempty"`
-	Pattern string `json:"pattern"`
-	Replacement string `json:"replacement"`
+	UseExtraction        *bool  `json:"use_extraction,omitempty"`
+	Pattern              string `json:"pattern"`
+	Replacement          string `json:"replacement"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -128,7 +128,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOfRegexRe
 }
 
 func (o CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOfRegexReplace) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -164,10 +164,10 @@ func (o *CreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneOfRegexRe
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -230,5 +230,3 @@ func (v *NullableCreateCustomRuleRequestContentRuleOneOfTransformMutateInnerOneO
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

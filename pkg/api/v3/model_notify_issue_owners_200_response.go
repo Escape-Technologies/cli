@@ -21,7 +21,7 @@ var _ MappedNullable = &NotifyIssueOwners200Response{}
 // NotifyIssueOwners200Response struct for NotifyIssueOwners200Response
 type NotifyIssueOwners200Response struct {
 	// Whether owners were found and notified
-	Notified bool `json:"notified"`
+	Notified             bool `json:"notified"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -70,7 +70,7 @@ func (o *NotifyIssueOwners200Response) SetNotified(v bool) {
 }
 
 func (o NotifyIssueOwners200Response) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -101,10 +101,10 @@ func (o *NotifyIssueOwners200Response) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -165,5 +165,3 @@ func (v *NullableNotifyIssueOwners200Response) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
