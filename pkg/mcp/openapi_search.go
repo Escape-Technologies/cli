@@ -23,6 +23,7 @@ const (
 	openapiMaxResultsPerQuery = 3
 	openapiMaxNormalizedField = 4096
 	openapiTermCoverageWeight = 3
+	openapiExpectedMethods    = 4
 )
 
 // OpenAPISearchIndexOptions configures the OpenAPI-spec index.
@@ -88,7 +89,7 @@ func (s *openapiSchema) UnmarshalJSON(data []byte) error {
 	}
 	raw.alias = (*alias)(s)
 	if err := json.Unmarshal(data, &raw); err != nil {
-		return err
+		return fmt.Errorf("decode openapi schema: %w", err)
 	}
 	switch typed := raw.Type.(type) {
 	case string:
@@ -177,9 +178,9 @@ func NewOpenAPISearchIndex(options OpenAPISearchIndexOptions) *OpenAPISearchInde
 	return index
 }
 
-// Search returns the top-N operations matching the query. Limit is clamped to
+// search returns the top-N operations matching the query. Limit is clamped to
 // [1, openapiMaxResultsPerQuery].
-func (o *OpenAPISearchIndex) Search(ctx context.Context, query string, limit int) ([]indexedOperation, []string, error) {
+func (o *OpenAPISearchIndex) search(ctx context.Context, query string, limit int) ([]indexedOperation, []string, error) {
 	if limit < 1 {
 		limit = 1
 	}
@@ -278,7 +279,7 @@ func scoreOperation(op indexedOperation, query docsQuerySpec) float64 {
 			hit = true
 		}
 		if strings.Contains(op.normalizedDescription, term) {
-			score += 1
+			score++
 			hit = true
 		}
 		if strings.Contains(op.normalizedTags, term) {
@@ -375,7 +376,7 @@ func parseOpenAPISpec(body []byte) ([]indexedOperation, []string, error) {
 		}
 	}
 
-	ops := make([]indexedOperation, 0, len(raw.Paths)*4)
+	ops := make([]indexedOperation, 0, len(raw.Paths)*openapiExpectedMethods)
 	for path, item := range raw.Paths {
 		pathParameters := decodePathParameters(item["parameters"])
 		for method, rawOp := range item {

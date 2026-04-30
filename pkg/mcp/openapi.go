@@ -85,7 +85,7 @@ func buildPublicAPIHandler(index *OpenAPISearchIndex, configuredBaseURL string) 
 			limit = publicAPIMaxLimit
 		}
 
-		matches, servers, err := index.Search(ctx, question, limit)
+		matches, servers, err := index.search(ctx, question, limit)
 		if err != nil {
 			return formatPublicAPIFallback(question, err), nil
 		}
@@ -118,7 +118,7 @@ func resolveBaseURL(configured string, servers []string) string {
 }
 
 func formatPublicAPIResult(question string, matches []indexedOperation, baseURL string) *mcpgo.CallToolResult {
-	lines := []string{fmt.Sprintf("Question: %s", question), ""}
+	lines := []string{"Question: " + question, ""}
 
 	apiMatches := make([]map[string]any, 0, len(matches))
 	for i, op := range matches {
@@ -163,7 +163,7 @@ func formatPublicAPIFallback(question string, fetchErr error) *mcpgo.CallToolRes
 		lead = "The OpenAPI spec is temporarily unreachable; please try again in a moment."
 	}
 	lines := []string{
-		fmt.Sprintf("Question: %s", question),
+		"Question: " + question,
 		"",
 		lead,
 		"Browse the full reference: https://public.escape.tech/v3/",

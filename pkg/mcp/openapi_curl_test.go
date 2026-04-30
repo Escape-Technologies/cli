@@ -29,6 +29,23 @@ func TestRenderCurl_GETUsesDataUrlencodePerLine(t *testing.T) {
 	requireMissing(t, got, "Authorization:")
 }
 
+func TestRenderCurl_ShellQuotesSpecDerivedValues(t *testing.T) {
+	t.Parallel()
+
+	op := indexedOperation{
+		Method: "GET",
+		Path:   "/assets/{assetId}",
+		Parameters: []openapiParameter{
+			{Name: "assetId", In: "path", Required: true, Schema: &openapiSchema{Type: "string"}},
+			{Name: "filter", In: "query", Required: true, Schema: &openapiSchema{Type: "string", Default: "owner's asset"}},
+		},
+	}
+	got := RenderCurl(op, "https://public.escape.tech/v3")
+
+	requireContains(t, got, "curl -X GET 'https://public.escape.tech/v3/assets/<assetId>' \\")
+	requireContains(t, got, "  --data-urlencode 'filter=owner'\\''s asset' \\")
+}
+
 func TestRenderCurl_UsesPreferredComposedSchemaForParams(t *testing.T) {
 	t.Parallel()
 

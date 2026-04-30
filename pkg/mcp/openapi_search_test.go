@@ -38,7 +38,7 @@ func TestOpenAPISearch_PicksScansForLastDaysQuestion(t *testing.T) {
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
-	matches, servers, err := index.Search(ctx, "how do I list scans that ran in the last 3 days", 1)
+	matches, servers, err := index.search(ctx, "how do I list scans that ran in the last 3 days", 1)
 	if err != nil {
 		t.Fatalf("Search: %v", err)
 	}
@@ -60,7 +60,7 @@ func TestOpenAPISearch_PicksScanProblems(t *testing.T) {
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
-	matches, _, err := index.Search(ctx, "how to get all scan problems", 1)
+	matches, _, err := index.search(ctx, "how to get all scan problems", 1)
 	if err != nil {
 		t.Fatalf("Search: %v", err)
 	}
@@ -79,7 +79,7 @@ func TestOpenAPISearch_PicksCreateAsset(t *testing.T) {
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
-	matches, _, err := index.Search(ctx, "create an asset", 1)
+	matches, _, err := index.search(ctx, "create an asset", 1)
 	if err != nil {
 		t.Fatalf("Search: %v", err)
 	}
@@ -174,7 +174,7 @@ func TestOpenAPISearch_LimitClamping(t *testing.T) {
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
-	matches, _, err := index.Search(ctx, "scans", 99)
+	matches, _, err := index.search(ctx, "scans", 99)
 	if err != nil {
 		t.Fatalf("Search: %v", err)
 	}
@@ -182,7 +182,7 @@ func TestOpenAPISearch_LimitClamping(t *testing.T) {
 		t.Fatalf("expected limit clamped to %d, got %d", openapiMaxResultsPerQuery, len(matches))
 	}
 
-	matches, _, err = index.Search(ctx, "scans", 0)
+	matches, _, err = index.search(ctx, "scans", 0)
 	if err != nil {
 		t.Fatalf("Search: %v", err)
 	}
@@ -198,7 +198,7 @@ func TestOpenAPISearch_EmptyQuestionReturnsNoMatch(t *testing.T) {
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
-	matches, _, err := index.Search(ctx, "   ", 1)
+	matches, _, err := index.search(ctx, "   ", 1)
 	if err != nil {
 		t.Fatalf("Search: %v", err)
 	}
@@ -220,7 +220,7 @@ func TestOpenAPISearch_FetchErrorPropagates(t *testing.T) {
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
-	_, _, err := index.Search(ctx, "list scans", 1)
+	_, _, err := index.search(ctx, "list scans", 1)
 	if err == nil {
 		t.Fatalf("expected error on 500 response")
 	}
