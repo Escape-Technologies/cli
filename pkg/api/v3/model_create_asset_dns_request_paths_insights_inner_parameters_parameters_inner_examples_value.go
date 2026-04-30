@@ -19,10 +19,10 @@ var _ MappedNullable = &CreateAssetDNSRequestPathsInsightsInnerParametersParamet
 
 // CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue struct for CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue
 type CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue struct {
-	Summary *string `json:"summary,omitempty"`
-	Description *string `json:"description,omitempty"`
-	Value NullableCreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample `json:"value,omitempty"`
-	ExternalValue *string `json:"externalValue,omitempty"`
+	Summary              *string                                                                         `json:"summary,omitempty"`
+	Description          *string                                                                         `json:"description,omitempty"`
+	Value                NullableCreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample `json:"value,omitempty"`
+	ExternalValue        *string                                                                         `json:"externalValue,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -141,6 +141,7 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue) SetValue(v CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample) {
 	o.Value.Set(&v)
 }
+
 // SetValueNil sets the value for Value to be an explicit nil
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue) SetValueNil() {
 	o.Value.Set(nil)
@@ -184,7 +185,7 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample
 }
 
 func (o CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -272,5 +273,3 @@ func (v *NullableCreateAssetDNSRequestPathsInsightsInnerParametersParametersInne
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

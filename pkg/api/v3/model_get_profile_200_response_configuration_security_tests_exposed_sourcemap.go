@@ -19,8 +19,8 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationSecurityTestsExposedSo
 
 // GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap struct for GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap
 type GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap struct {
-	Skip *bool `json:"skip,omitempty"`
-	IssuesCountLimit *float32 `json:"issues_count_limit,omitempty"`
+	Skip                 *bool    `json:"skip,omitempty"`
+	IssuesCountLimit     *float32 `json:"issues_count_limit,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -108,7 +108,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap) SetIss
 }
 
 func (o GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -188,5 +188,3 @@ func (v *NullableGetProfile200ResponseConfigurationSecurityTestsExposedSourcemap
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

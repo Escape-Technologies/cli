@@ -21,7 +21,7 @@ var _ MappedNullable = &BulkUpdateIssues200Response{}
 // BulkUpdateIssues200Response struct for BulkUpdateIssues200Response
 type BulkUpdateIssues200Response struct {
 	// IDs of the updated issues
-	Ids []string `json:"ids"`
+	Ids                  []string `json:"ids"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -70,7 +70,7 @@ func (o *BulkUpdateIssues200Response) SetIds(v []string) {
 }
 
 func (o BulkUpdateIssues200Response) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -101,10 +101,10 @@ func (o *BulkUpdateIssues200Response) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -165,5 +165,3 @@ func (v *NullableBulkUpdateIssues200Response) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

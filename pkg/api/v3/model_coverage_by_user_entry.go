@@ -21,8 +21,8 @@ var _ MappedNullable = &CoverageByUserEntry{}
 // CoverageByUserEntry struct for CoverageByUserEntry
 type CoverageByUserEntry struct {
 	// User or session label associated with this target entry
-	Name string `json:"name"`
-	Coverage ENUMPROPERTIESDATAITEMSPROPERTIESAPIROUTEPROPERTIESCOVERAGE `json:"coverage"`
+	Name                 string                                                      `json:"name"`
+	Coverage             ENUMPROPERTIESDATAITEMSPROPERTIESAPIROUTEPROPERTIESCOVERAGE `json:"coverage"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -96,7 +96,7 @@ func (o *CoverageByUserEntry) SetCoverage(v ENUMPROPERTIESDATAITEMSPROPERTIESAPI
 }
 
 func (o CoverageByUserEntry) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -129,10 +129,10 @@ func (o *CoverageByUserEntry) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -194,5 +194,3 @@ func (v *NullableCoverageByUserEntry) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

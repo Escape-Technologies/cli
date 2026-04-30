@@ -20,7 +20,7 @@ var _ MappedNullable = &CreatecloudflareIntegrationRequestParameters{}
 
 // CreatecloudflareIntegrationRequestParameters The parameters of the integration
 type CreatecloudflareIntegrationRequestParameters struct {
-	ApiKey string `json:"api_key"`
+	ApiKey               string `json:"api_key"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -69,7 +69,7 @@ func (o *CreatecloudflareIntegrationRequestParameters) SetApiKey(v string) {
 }
 
 func (o CreatecloudflareIntegrationRequestParameters) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -100,10 +100,10 @@ func (o *CreatecloudflareIntegrationRequestParameters) UnmarshalJSON(data []byte
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -164,5 +164,3 @@ func (v *NullableCreatecloudflareIntegrationRequestParameters) UnmarshalJSON(src
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

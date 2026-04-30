@@ -19,8 +19,8 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationFrontendDastScope{}
 
 // GetProfile200ResponseConfigurationFrontendDastScope struct for GetProfile200ResponseConfigurationFrontendDastScope
 type GetProfile200ResponseConfigurationFrontendDastScope struct {
-	ApiTesting *GetProfile200ResponseConfigurationFrontendDastScopeApiTesting `json:"api_testing,omitempty"`
-	Crawling *GetProfile200ResponseConfigurationFrontendDastScopeCrawling `json:"crawling,omitempty"`
+	ApiTesting           *GetProfile200ResponseConfigurationFrontendDastScopeApiTesting `json:"api_testing,omitempty"`
+	Crawling             *GetProfile200ResponseConfigurationFrontendDastScopeCrawling   `json:"crawling,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -108,7 +108,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDastScope) SetCrawling(v GetP
 }
 
 func (o GetProfile200ResponseConfigurationFrontendDastScope) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -188,5 +188,3 @@ func (v *NullableGetProfile200ResponseConfigurationFrontendDastScope) UnmarshalJ
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

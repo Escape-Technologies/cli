@@ -20,9 +20,9 @@ var _ MappedNullable = &CreateExportWorkflowActionUsingJiraParametersPropertiesM
 
 // CreateExportWorkflowActionUsingJiraParametersPropertiesMappingInnerOneOf5 struct for CreateExportWorkflowActionUsingJiraParametersPropertiesMappingInnerOneOf5
 type CreateExportWorkflowActionUsingJiraParametersPropertiesMappingInnerOneOf5 struct {
-	JiraPropertyId string `json:"jiraPropertyId"`
-	Map []CreateExportWorkflowActionUsingJiraParametersPropertiesMappingInnerOneOfMapInner `json:"map"`
-	Field ENUMISSUESTATUS `json:"field"`
+	JiraPropertyId       string                                                                             `json:"jiraPropertyId"`
+	Map                  []CreateExportWorkflowActionUsingJiraParametersPropertiesMappingInnerOneOfMapInner `json:"map"`
+	Field                ENUMISSUESTATUS                                                                    `json:"field"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -121,7 +121,7 @@ func (o *CreateExportWorkflowActionUsingJiraParametersPropertiesMappingInnerOneO
 }
 
 func (o CreateExportWorkflowActionUsingJiraParametersPropertiesMappingInnerOneOf5) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -156,10 +156,10 @@ func (o *CreateExportWorkflowActionUsingJiraParametersPropertiesMappingInnerOneO
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -222,5 +222,3 @@ func (v *NullableCreateExportWorkflowActionUsingJiraParametersPropertiesMappingI
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

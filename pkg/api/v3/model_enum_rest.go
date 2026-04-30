@@ -20,7 +20,7 @@ type ENUMREST string
 
 // List of ENUM_REST
 const (
-	ENUMREST_REST ENUMREST = "REST"
+	ENUMREST_REST  ENUMREST = "REST"
 	ENUMREST_REST2 ENUMREST = "rest"
 )
 
@@ -108,4 +108,3 @@ func (v *NullableENUMREST) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

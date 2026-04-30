@@ -21,7 +21,7 @@ var _ MappedNullable = &IssueSummarizedLinks{}
 // IssueSummarizedLinks struct for IssueSummarizedLinks
 type IssueSummarizedLinks struct {
 	// URL to view the issue overview in the platform
-	IssueOverview string `json:"issueOverview"`
+	IssueOverview        string `json:"issueOverview"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -70,7 +70,7 @@ func (o *IssueSummarizedLinks) SetIssueOverview(v string) {
 }
 
 func (o IssueSummarizedLinks) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -101,10 +101,10 @@ func (o *IssueSummarizedLinks) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -165,5 +165,3 @@ func (v *NullableIssueSummarizedLinks) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

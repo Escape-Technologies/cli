@@ -19,9 +19,9 @@ var _ MappedNullable = &CreateWorkflowFilterUsingCustomFilterOnAssetsFilterSourc
 
 // CreateWorkflowFilterUsingCustomFilterOnAssetsFilterSourcesInner struct for CreateWorkflowFilterUsingCustomFilterOnAssetsFilterSourcesInner
 type CreateWorkflowFilterUsingCustomFilterOnAssetsFilterSourcesInner struct {
-	ManuallyCreated *bool `json:"manuallyCreated,omitempty"`
-	IntegrationId *string `json:"integrationId,omitempty"`
-	AssetId *string `json:"assetId,omitempty"`
+	ManuallyCreated      *bool   `json:"manuallyCreated,omitempty"`
+	IntegrationId        *string `json:"integrationId,omitempty"`
+	AssetId              *string `json:"assetId,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -141,7 +141,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilterSourcesInner) SetAss
 }
 
 func (o CreateWorkflowFilterUsingCustomFilterOnAssetsFilterSourcesInner) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -225,5 +225,3 @@ func (v *NullableCreateWorkflowFilterUsingCustomFilterOnAssetsFilterSourcesInner
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -20,7 +20,7 @@ var _ MappedNullable = &UpdateProjectRequestProject{}
 // UpdateProjectRequestProject struct for UpdateProjectRequestProject
 type UpdateProjectRequestProject struct {
 	// The name of the project
-	Name *string `json:"name,omitempty"`
+	Name                 *string `json:"name,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -76,7 +76,7 @@ func (o *UpdateProjectRequestProject) SetName(v string) {
 }
 
 func (o UpdateProjectRequestProject) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -152,5 +152,3 @@ func (v *NullableUpdateProjectRequestProject) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

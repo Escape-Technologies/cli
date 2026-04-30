@@ -23,7 +23,7 @@ type CreateUploadSignedUrl200Response struct {
 	// The signed URL to upload a file to the Escape Platform.
 	Url string `json:"url"`
 	// The signed URL ID to upload a file to the Escape Platform.
-	Id string `json:"id"`
+	Id                   string `json:"id"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -97,7 +97,7 @@ func (o *CreateUploadSignedUrl200Response) SetId(v string) {
 }
 
 func (o CreateUploadSignedUrl200Response) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -130,10 +130,10 @@ func (o *CreateUploadSignedUrl200Response) UnmarshalJSON(data []byte) (err error
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -195,5 +195,3 @@ func (v *NullableCreateUploadSignedUrl200Response) UnmarshalJSON(src []byte) err
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

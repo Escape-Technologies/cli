@@ -19,11 +19,11 @@ var _ MappedNullable = &CreateAssetDNSRequestPathsInsightsInnerParametersParamet
 
 // CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValueEncodingValue struct for CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValueEncodingValue
 type CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValueEncodingValue struct {
-	ContentType *string `json:"contentType,omitempty"`
-	Style *string `json:"style,omitempty"`
-	Headers map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValueEncodingValueHeadersValue `json:"headers,omitempty"`
-	Explode *bool `json:"explode,omitempty"`
-	AllowReserved *bool `json:"allowReserved,omitempty"`
+	ContentType          *string                                                                                                          `json:"contentType,omitempty"`
+	Style                *string                                                                                                          `json:"style,omitempty"`
+	Headers              map[string]CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValueEncodingValueHeadersValue `json:"headers,omitempty"`
+	Explode              *bool                                                                                                            `json:"explode,omitempty"`
+	AllowReserved        *bool                                                                                                            `json:"allowReserved,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -207,7 +207,7 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContent
 }
 
 func (o CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerContentValueEncodingValue) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -299,5 +299,3 @@ func (v *NullableCreateAssetDNSRequestPathsInsightsInnerParametersParametersInne
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

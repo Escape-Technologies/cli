@@ -20,11 +20,11 @@ var _ MappedNullable = &CreatebitbucketIntegrationRequestParameters{}
 
 // CreatebitbucketIntegrationRequestParameters The parameters of the integration
 type CreatebitbucketIntegrationRequestParameters struct {
-	Email string `json:"email"`
-	ApiKey string `json:"api_key"`
-	WorkspaceSlug string `json:"workspace_slug"`
-	InstanceUrl *string `json:"instance_url,omitempty"`
-	LocationId *string `json:"location_id,omitempty"`
+	Email                string  `json:"email"`
+	ApiKey               string  `json:"api_key"`
+	WorkspaceSlug        string  `json:"workspace_slug"`
+	InstanceUrl          *string `json:"instance_url,omitempty"`
+	LocationId           *string `json:"location_id,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -187,7 +187,7 @@ func (o *CreatebitbucketIntegrationRequestParameters) SetLocationId(v string) {
 }
 
 func (o CreatebitbucketIntegrationRequestParameters) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -228,10 +228,10 @@ func (o *CreatebitbucketIntegrationRequestParameters) UnmarshalJSON(data []byte)
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -296,5 +296,3 @@ func (v *NullableCreatebitbucketIntegrationRequestParameters) UnmarshalJSON(src 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -19,18 +19,18 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationInferenceScalarsValue{
 
 // GetProfile200ResponseConfigurationInferenceScalarsValue struct for GetProfile200ResponseConfigurationInferenceScalarsValue
 type GetProfile200ResponseConfigurationInferenceScalarsValue struct {
-	Names []string `json:"names,omitempty"`
-	IgnoredNames []string `json:"ignored_names,omitempty"`
-	Description *string `json:"description,omitempty"`
-	Pattern *string `json:"pattern,omitempty"`
-	IgnoredPattern *string `json:"ignored_pattern,omitempty"`
-	Examples []string `json:"examples,omitempty"`
-	Parents []ENUMPROPERTIESCONFIGURATIONPROPERTIESINFERENCEPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESPARENTSITEMS `json:"parents,omitempty"`
-	Sensitivity *ENUMPROPERTIESCONFIGURATIONPROPERTIESINFERENCEPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESSENSITIVITY `json:"sensitivity,omitempty"`
-	Strategy *ENUMPROPERTIESCONFIGURATIONPROPERTIESINFERENCEPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESSTRATEGY `json:"strategy,omitempty"`
-	RaiseOnCommit *bool `json:"raise_on_commit,omitempty"`
-	RaiseOnExposure *bool `json:"raise_on_exposure,omitempty"`
-	IsSourceable *bool `json:"is_sourceable,omitempty"`
+	Names                []string                                                                                                    `json:"names,omitempty"`
+	IgnoredNames         []string                                                                                                    `json:"ignored_names,omitempty"`
+	Description          *string                                                                                                     `json:"description,omitempty"`
+	Pattern              *string                                                                                                     `json:"pattern,omitempty"`
+	IgnoredPattern       *string                                                                                                     `json:"ignored_pattern,omitempty"`
+	Examples             []string                                                                                                    `json:"examples,omitempty"`
+	Parents              []ENUMPROPERTIESCONFIGURATIONPROPERTIESINFERENCEPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESPARENTSITEMS `json:"parents,omitempty"`
+	Sensitivity          *ENUMPROPERTIESCONFIGURATIONPROPERTIESINFERENCEPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESSENSITIVITY   `json:"sensitivity,omitempty"`
+	Strategy             *ENUMPROPERTIESCONFIGURATIONPROPERTIESINFERENCEPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESSTRATEGY      `json:"strategy,omitempty"`
+	RaiseOnCommit        *bool                                                                                                       `json:"raise_on_commit,omitempty"`
+	RaiseOnExposure      *bool                                                                                                       `json:"raise_on_exposure,omitempty"`
+	IsSourceable         *bool                                                                                                       `json:"is_sourceable,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -438,7 +438,7 @@ func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) SetIsSourceabl
 }
 
 func (o GetProfile200ResponseConfigurationInferenceScalarsValue) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -558,5 +558,3 @@ func (v *NullableGetProfile200ResponseConfigurationInferenceScalarsValue) Unmars
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
