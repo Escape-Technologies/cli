@@ -17,6 +17,7 @@
   { "path": "/asm/technology/", "tokens": ["asm", "technology"] },
   { "path": "/asm/webapps/", "tokens": ["asm", "webapps"] },
   { "path": "/create-next/", "tokens": ["create", "next"] },
+  { "path": "/create-pentest/", "tokens": ["create", "pentest"] },
   { "path": "/create/", "tokens": ["create"] },
   { "path": "/custom-rules/", "tokens": ["custom", "rules"] },
   { "path": "/files/", "tokens": ["files"] },
