@@ -67,6 +67,11 @@ func (s *Server) Serve(ctx context.Context) error {
 	if err := RegisterKnowledgeTools(rootServer, KnowledgeOptions{}); err != nil {
 		return fmt.Errorf("register knowledge tools: %w", err)
 	}
+	if err := RegisterPublicAPITools(rootServer, PublicAPIOptions{
+		PublicAPIURL: s.options.PublicAPIURL,
+	}); err != nil {
+		return fmt.Errorf("register public api tools: %w", err)
+	}
 	RegisterCommandTools(rootServer, s.options.Tools, CommandExecutionOptions{
 		PublicAPIURL: s.options.PublicAPIURL,
 	})
