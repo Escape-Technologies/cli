@@ -1,0 +1,90 @@
+{
+  "openapi": "3.1.0",
+  "info": { "title": "Escape Public API", "version": "3.0.0" },
+  "servers": [{ "url": "https://public.escape.tech/v3" }],
+  "paths": {
+    "/scans": {
+      "get": {
+        "operationId": "listScans",
+        "summary": "List scans",
+        "description": "Returns scans for the current organization, optionally filtered by date range.",
+        "tags": ["scans"],
+        "parameters": [
+          { "name": "after", "in": "query", "required": false, "schema": { "type": "string", "format": "date-time" }, "description": "ISO8601 lower bound on scan start time" },
+          { "name": "before", "in": "query", "required": false, "schema": { "type": "string", "format": "date-time" }, "description": "ISO8601 upper bound on scan start time" },
+          { "name": "size", "in": "query", "required": false, "schema": { "type": "integer", "default": 50, "maximum": 200 }, "description": "Page size" },
+          { "name": "cursor", "in": "query", "required": false, "schema": { "type": "string" }, "description": "Pagination cursor" }
+        ]
+      }
+    },
+    "/scans/problems": {
+      "get": {
+        "operationId": "listScanProblems",
+        "summary": "List scan problems",
+        "description": "Returns scanner-level problems (warnings, errors) reported during scan execution.",
+        "tags": ["scans", "problems"],
+        "parameters": [
+          { "name": "from", "in": "query", "required": false, "schema": { "type": "string", "format": "date-time" }, "description": "ISO8601 inclusive lower bound on scan completion time" },
+          { "name": "to", "in": "query", "required": false, "schema": { "type": "string", "format": "date-time" }, "description": "ISO8601 inclusive upper bound on scan completion time" },
+          { "name": "limit", "in": "query", "required": false, "schema": { "type": "integer", "default": 100 }, "description": "Maximum number of problems" }
+        ]
+      }
+    },
+    "/scans/{scanId}/issues": {
+      "get": {
+        "operationId": "listScanIssues",
+        "summary": "List scan issues",
+        "description": "Returns the issues found by a specific scan.",
+        "tags": ["scans", "issues"],
+        "parameters": [
+          { "name": "scanId", "in": "path", "required": true, "schema": { "type": "string" }, "description": "Scan identifier" },
+          { "name": "severity", "in": "query", "required": false, "schema": { "type": "string", "enum": ["LOW", "MEDIUM", "HIGH", "CRITICAL"] } }
+        ]
+      }
+    },
+    "/assets": {
+      "post": {
+        "operationId": "createAsset",
+        "summary": "Create an asset",
+        "description": "Registers a new asset on the platform.",
+        "tags": ["assets"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CreateAssetInput" }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CreateAssetInput": {
+        "type": "object",
+        "required": ["name", "kind"],
+        "properties": {
+          "name": { "type": "string", "description": "Display name" },
+          "kind": { "type": "string", "enum": ["REST", "GRAPHQL", "WEBAPP"] },
+          "url": { "type": "string", "format": "uri" },
+          "tags": { "type": "array", "items": { "type": "string" } },
+          "metadata": {
+            "type": "object",
+            "properties": {
+              "owner": { "type": "string" },
+              "criticality": { "type": "string", "enum": ["LOW", "HIGH"] }
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-ESCAPE-API-KEY"
+      }
+    }
+  }
+}
