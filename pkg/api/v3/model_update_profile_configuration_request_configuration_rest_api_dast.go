@@ -23,6 +23,7 @@ type UpdateProfileConfigurationRequestConfigurationRestApiDast struct {
 	Profile                  *ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESPROFILE          `json:"profile,omitempty"`
 	ExplorationDepth         *ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESEXPLORATIONDEPTH `json:"exploration_depth,omitempty"`
 	ExploreWithAllUsers      *bool                                                                          `json:"explore_with_all_users,omitempty"`
+	CrossUserMemoryEnabled   *bool                                                                          `json:"cross_user_memory_enabled,omitempty"`
 	CrossUserMemoryAllowlist []string                                                                       `json:"cross_user_memory_allowlist,omitempty"`
 	MaxDuration              *float32                                                                       `json:"max_duration,omitempty"`
 	Hotstart                 []string                                                                       `json:"hotstart,omitempty"`
@@ -179,6 +180,38 @@ func (o *UpdateProfileConfigurationRequestConfigurationRestApiDast) HasExploreWi
 // SetExploreWithAllUsers gets a reference to the given bool and assigns it to the ExploreWithAllUsers field.
 func (o *UpdateProfileConfigurationRequestConfigurationRestApiDast) SetExploreWithAllUsers(v bool) {
 	o.ExploreWithAllUsers = &v
+}
+
+// GetCrossUserMemoryEnabled returns the CrossUserMemoryEnabled field value if set, zero value otherwise.
+func (o *UpdateProfileConfigurationRequestConfigurationRestApiDast) GetCrossUserMemoryEnabled() bool {
+	if o == nil || IsNil(o.CrossUserMemoryEnabled) {
+		var ret bool
+		return ret
+	}
+	return *o.CrossUserMemoryEnabled
+}
+
+// GetCrossUserMemoryEnabledOk returns a tuple with the CrossUserMemoryEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateProfileConfigurationRequestConfigurationRestApiDast) GetCrossUserMemoryEnabledOk() (*bool, bool) {
+	if o == nil || IsNil(o.CrossUserMemoryEnabled) {
+		return nil, false
+	}
+	return o.CrossUserMemoryEnabled, true
+}
+
+// HasCrossUserMemoryEnabled returns a boolean if a field has been set.
+func (o *UpdateProfileConfigurationRequestConfigurationRestApiDast) HasCrossUserMemoryEnabled() bool {
+	if o != nil && !IsNil(o.CrossUserMemoryEnabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetCrossUserMemoryEnabled gets a reference to the given bool and assigns it to the CrossUserMemoryEnabled field.
+func (o *UpdateProfileConfigurationRequestConfigurationRestApiDast) SetCrossUserMemoryEnabled(v bool) {
+	o.CrossUserMemoryEnabled = &v
 }
 
 // GetCrossUserMemoryAllowlist returns the CrossUserMemoryAllowlist field value if set, zero value otherwise.
@@ -459,6 +492,9 @@ func (o UpdateProfileConfigurationRequestConfigurationRestApiDast) ToMap() (map[
 	if !IsNil(o.ExploreWithAllUsers) {
 		toSerialize["explore_with_all_users"] = o.ExploreWithAllUsers
 	}
+	if !IsNil(o.CrossUserMemoryEnabled) {
+		toSerialize["cross_user_memory_enabled"] = o.CrossUserMemoryEnabled
+	}
 	if !IsNil(o.CrossUserMemoryAllowlist) {
 		toSerialize["cross_user_memory_allowlist"] = o.CrossUserMemoryAllowlist
 	}
@@ -509,6 +545,7 @@ func (o *UpdateProfileConfigurationRequestConfigurationRestApiDast) UnmarshalJSO
 		delete(additionalProperties, "profile")
 		delete(additionalProperties, "exploration_depth")
 		delete(additionalProperties, "explore_with_all_users")
+		delete(additionalProperties, "cross_user_memory_enabled")
 		delete(additionalProperties, "cross_user_memory_allowlist")
 		delete(additionalProperties, "max_duration")
 		delete(additionalProperties, "hotstart")
