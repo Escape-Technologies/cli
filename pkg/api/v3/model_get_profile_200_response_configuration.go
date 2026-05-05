@@ -19,8 +19,6 @@ var _ MappedNullable = &GetProfile200ResponseConfiguration{}
 
 // GetProfile200ResponseConfiguration The active configuration of the profile
 type GetProfile200ResponseConfiguration struct {
-	PublicLocationIds     []string                                                `json:"public_location_ids,omitempty"`
-	PrivateLocationIds    []string                                                `json:"private_location_ids,omitempty"`
 	Scope                 *GetProfile200ResponseConfigurationScope                `json:"scope,omitempty"`
 	ExplorationScope      []string                                                `json:"exploration_scope,omitempty"`
 	ApiCustomRuleIds      []string                                                `json:"api_custom_rule_ids,omitempty"`
@@ -59,70 +57,6 @@ func NewGetProfile200ResponseConfiguration() *GetProfile200ResponseConfiguration
 func NewGetProfile200ResponseConfigurationWithDefaults() *GetProfile200ResponseConfiguration {
 	this := GetProfile200ResponseConfiguration{}
 	return &this
-}
-
-// GetPublicLocationIds returns the PublicLocationIds field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfiguration) GetPublicLocationIds() []string {
-	if o == nil || IsNil(o.PublicLocationIds) {
-		var ret []string
-		return ret
-	}
-	return o.PublicLocationIds
-}
-
-// GetPublicLocationIdsOk returns a tuple with the PublicLocationIds field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfiguration) GetPublicLocationIdsOk() ([]string, bool) {
-	if o == nil || IsNil(o.PublicLocationIds) {
-		return nil, false
-	}
-	return o.PublicLocationIds, true
-}
-
-// HasPublicLocationIds returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfiguration) HasPublicLocationIds() bool {
-	if o != nil && !IsNil(o.PublicLocationIds) {
-		return true
-	}
-
-	return false
-}
-
-// SetPublicLocationIds gets a reference to the given []string and assigns it to the PublicLocationIds field.
-func (o *GetProfile200ResponseConfiguration) SetPublicLocationIds(v []string) {
-	o.PublicLocationIds = v
-}
-
-// GetPrivateLocationIds returns the PrivateLocationIds field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfiguration) GetPrivateLocationIds() []string {
-	if o == nil || IsNil(o.PrivateLocationIds) {
-		var ret []string
-		return ret
-	}
-	return o.PrivateLocationIds
-}
-
-// GetPrivateLocationIdsOk returns a tuple with the PrivateLocationIds field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfiguration) GetPrivateLocationIdsOk() ([]string, bool) {
-	if o == nil || IsNil(o.PrivateLocationIds) {
-		return nil, false
-	}
-	return o.PrivateLocationIds, true
-}
-
-// HasPrivateLocationIds returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfiguration) HasPrivateLocationIds() bool {
-	if o != nil && !IsNil(o.PrivateLocationIds) {
-		return true
-	}
-
-	return false
-}
-
-// SetPrivateLocationIds gets a reference to the given []string and assigns it to the PrivateLocationIds field.
-func (o *GetProfile200ResponseConfiguration) SetPrivateLocationIds(v []string) {
-	o.PrivateLocationIds = v
 }
 
 // GetScope returns the Scope field value if set, zero value otherwise.
@@ -711,12 +645,6 @@ func (o GetProfile200ResponseConfiguration) MarshalJSON() ([]byte, error) {
 
 func (o GetProfile200ResponseConfiguration) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.PublicLocationIds) {
-		toSerialize["public_location_ids"] = o.PublicLocationIds
-	}
-	if !IsNil(o.PrivateLocationIds) {
-		toSerialize["private_location_ids"] = o.PrivateLocationIds
-	}
 	if !IsNil(o.Scope) {
 		toSerialize["scope"] = o.Scope
 	}
@@ -793,8 +721,6 @@ func (o *GetProfile200ResponseConfiguration) UnmarshalJSON(data []byte) (err err
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "public_location_ids")
-		delete(additionalProperties, "private_location_ids")
 		delete(additionalProperties, "scope")
 		delete(additionalProperties, "exploration_scope")
 		delete(additionalProperties, "api_custom_rule_ids")
