@@ -19,8 +19,6 @@ var _ MappedNullable = &CreateDastRestProfileRequestConfigurationObject{}
 
 // CreateDastRestProfileRequestConfigurationObject The scan configuration as an object. Use this field for typed payloads; kept separate to preserve compatibility on `configuration`.
 type CreateDastRestProfileRequestConfigurationObject struct {
-	PublicLocationIds     []string                                                      `json:"public_location_ids,omitempty"`
-	PrivateLocationIds    []string                                                      `json:"private_location_ids,omitempty"`
 	Scope                 *GetProfile200ResponseConfigurationScope                      `json:"scope,omitempty"`
 	ExplorationScope      []string                                                      `json:"exploration_scope,omitempty"`
 	ApiCustomRuleIds      []string                                                      `json:"api_custom_rule_ids,omitempty"`
@@ -59,70 +57,6 @@ func NewCreateDastRestProfileRequestConfigurationObject() *CreateDastRestProfile
 func NewCreateDastRestProfileRequestConfigurationObjectWithDefaults() *CreateDastRestProfileRequestConfigurationObject {
 	this := CreateDastRestProfileRequestConfigurationObject{}
 	return &this
-}
-
-// GetPublicLocationIds returns the PublicLocationIds field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationObject) GetPublicLocationIds() []string {
-	if o == nil || IsNil(o.PublicLocationIds) {
-		var ret []string
-		return ret
-	}
-	return o.PublicLocationIds
-}
-
-// GetPublicLocationIdsOk returns a tuple with the PublicLocationIds field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationObject) GetPublicLocationIdsOk() ([]string, bool) {
-	if o == nil || IsNil(o.PublicLocationIds) {
-		return nil, false
-	}
-	return o.PublicLocationIds, true
-}
-
-// HasPublicLocationIds returns a boolean if a field has been set.
-func (o *CreateDastRestProfileRequestConfigurationObject) HasPublicLocationIds() bool {
-	if o != nil && !IsNil(o.PublicLocationIds) {
-		return true
-	}
-
-	return false
-}
-
-// SetPublicLocationIds gets a reference to the given []string and assigns it to the PublicLocationIds field.
-func (o *CreateDastRestProfileRequestConfigurationObject) SetPublicLocationIds(v []string) {
-	o.PublicLocationIds = v
-}
-
-// GetPrivateLocationIds returns the PrivateLocationIds field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequestConfigurationObject) GetPrivateLocationIds() []string {
-	if o == nil || IsNil(o.PrivateLocationIds) {
-		var ret []string
-		return ret
-	}
-	return o.PrivateLocationIds
-}
-
-// GetPrivateLocationIdsOk returns a tuple with the PrivateLocationIds field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequestConfigurationObject) GetPrivateLocationIdsOk() ([]string, bool) {
-	if o == nil || IsNil(o.PrivateLocationIds) {
-		return nil, false
-	}
-	return o.PrivateLocationIds, true
-}
-
-// HasPrivateLocationIds returns a boolean if a field has been set.
-func (o *CreateDastRestProfileRequestConfigurationObject) HasPrivateLocationIds() bool {
-	if o != nil && !IsNil(o.PrivateLocationIds) {
-		return true
-	}
-
-	return false
-}
-
-// SetPrivateLocationIds gets a reference to the given []string and assigns it to the PrivateLocationIds field.
-func (o *CreateDastRestProfileRequestConfigurationObject) SetPrivateLocationIds(v []string) {
-	o.PrivateLocationIds = v
 }
 
 // GetScope returns the Scope field value if set, zero value otherwise.
@@ -711,12 +645,6 @@ func (o CreateDastRestProfileRequestConfigurationObject) MarshalJSON() ([]byte, 
 
 func (o CreateDastRestProfileRequestConfigurationObject) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.PublicLocationIds) {
-		toSerialize["public_location_ids"] = o.PublicLocationIds
-	}
-	if !IsNil(o.PrivateLocationIds) {
-		toSerialize["private_location_ids"] = o.PrivateLocationIds
-	}
 	if !IsNil(o.Scope) {
 		toSerialize["scope"] = o.Scope
 	}
@@ -793,8 +721,6 @@ func (o *CreateDastRestProfileRequestConfigurationObject) UnmarshalJSON(data []b
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "public_location_ids")
-		delete(additionalProperties, "private_location_ids")
 		delete(additionalProperties, "scope")
 		delete(additionalProperties, "exploration_scope")
 		delete(additionalProperties, "api_custom_rule_ids")
