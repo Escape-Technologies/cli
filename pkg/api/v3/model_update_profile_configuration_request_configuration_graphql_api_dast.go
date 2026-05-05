@@ -21,7 +21,6 @@ var _ MappedNullable = &UpdateProfileConfigurationRequestConfigurationGraphqlApi
 type UpdateProfileConfigurationRequestConfigurationGraphqlApiDast struct {
 	Url                      *string                                                                        `json:"url,omitempty"`
 	LocationId               *string                                                                        `json:"location_id,omitempty"`
-	Profile                  *ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESPROFILE          `json:"profile,omitempty"`
 	ExplorationDepth         *ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESEXPLORATIONDEPTH `json:"exploration_depth,omitempty"`
 	ExploreWithAllUsers      *bool                                                                          `json:"explore_with_all_users,omitempty"`
 	CrossUserMemoryEnabled   *bool                                                                          `json:"cross_user_memory_enabled,omitempty"`
@@ -33,6 +32,7 @@ type UpdateProfileConfigurationRequestConfigurationGraphqlApiDast struct {
 	Scope                    *GetProfile200ResponseConfigurationGraphqlApiDastScope                         `json:"scope,omitempty"`
 	InScopeOnly              *bool                                                                          `json:"in_scope_only,omitempty"`
 	Mode                     *ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE                                     `json:"mode,omitempty"`
+	Profile                  *ENUMPROPERTIESCONFIGURATIONPROPERTIESPROFILE                                  `json:"profile,omitempty"`
 	AdditionalProperties     map[string]interface{}
 }
 
@@ -117,38 +117,6 @@ func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) HasLocati
 // SetLocationId gets a reference to the given string and assigns it to the LocationId field.
 func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) SetLocationId(v string) {
 	o.LocationId = &v
-}
-
-// GetProfile returns the Profile field value if set, zero value otherwise.
-func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) GetProfile() ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESPROFILE {
-	if o == nil || IsNil(o.Profile) {
-		var ret ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESPROFILE
-		return ret
-	}
-	return *o.Profile
-}
-
-// GetProfileOk returns a tuple with the Profile field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) GetProfileOk() (*ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESPROFILE, bool) {
-	if o == nil || IsNil(o.Profile) {
-		return nil, false
-	}
-	return o.Profile, true
-}
-
-// HasProfile returns a boolean if a field has been set.
-func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) HasProfile() bool {
-	if o != nil && !IsNil(o.Profile) {
-		return true
-	}
-
-	return false
-}
-
-// SetProfile gets a reference to the given ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESPROFILE and assigns it to the Profile field.
-func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) SetProfile(v ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESPROFILE) {
-	o.Profile = &v
 }
 
 // GetExplorationDepth returns the ExplorationDepth field value if set, zero value otherwise.
@@ -503,6 +471,38 @@ func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) SetMode(v
 	o.Mode = &v
 }
 
+// GetProfile returns the Profile field value if set, zero value otherwise.
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) GetProfile() ENUMPROPERTIESCONFIGURATIONPROPERTIESPROFILE {
+	if o == nil || IsNil(o.Profile) {
+		var ret ENUMPROPERTIESCONFIGURATIONPROPERTIESPROFILE
+		return ret
+	}
+	return *o.Profile
+}
+
+// GetProfileOk returns a tuple with the Profile field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) GetProfileOk() (*ENUMPROPERTIESCONFIGURATIONPROPERTIESPROFILE, bool) {
+	if o == nil || IsNil(o.Profile) {
+		return nil, false
+	}
+	return o.Profile, true
+}
+
+// HasProfile returns a boolean if a field has been set.
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) HasProfile() bool {
+	if o != nil && !IsNil(o.Profile) {
+		return true
+	}
+
+	return false
+}
+
+// SetProfile gets a reference to the given ENUMPROPERTIESCONFIGURATIONPROPERTIESPROFILE and assigns it to the Profile field.
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) SetProfile(v ENUMPROPERTIESCONFIGURATIONPROPERTIESPROFILE) {
+	o.Profile = &v
+}
+
 func (o UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -518,9 +518,6 @@ func (o UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) ToMap() (m
 	}
 	if !IsNil(o.LocationId) {
 		toSerialize["location_id"] = o.LocationId
-	}
-	if !IsNil(o.Profile) {
-		toSerialize["profile"] = o.Profile
 	}
 	if !IsNil(o.ExplorationDepth) {
 		toSerialize["exploration_depth"] = o.ExplorationDepth
@@ -555,6 +552,9 @@ func (o UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) ToMap() (m
 	if !IsNil(o.Mode) {
 		toSerialize["mode"] = o.Mode
 	}
+	if !IsNil(o.Profile) {
+		toSerialize["profile"] = o.Profile
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -579,7 +579,6 @@ func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) Unmarshal
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "url")
 		delete(additionalProperties, "location_id")
-		delete(additionalProperties, "profile")
 		delete(additionalProperties, "exploration_depth")
 		delete(additionalProperties, "explore_with_all_users")
 		delete(additionalProperties, "cross_user_memory_enabled")
@@ -591,6 +590,7 @@ func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) Unmarshal
 		delete(additionalProperties, "scope")
 		delete(additionalProperties, "in_scope_only")
 		delete(additionalProperties, "mode")
+		delete(additionalProperties, "profile")
 		o.AdditionalProperties = additionalProperties
 	}
 

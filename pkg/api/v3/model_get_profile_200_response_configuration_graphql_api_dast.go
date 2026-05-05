@@ -21,7 +21,6 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationGraphqlApiDast{}
 type GetProfile200ResponseConfigurationGraphqlApiDast struct {
 	Url                      *string                                                                        `json:"url,omitempty"`
 	LocationId               *string                                                                        `json:"location_id,omitempty"`
-	Profile                  *ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESPROFILE          `json:"profile,omitempty"`
 	ExplorationDepth         *ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESEXPLORATIONDEPTH `json:"exploration_depth,omitempty"`
 	ExploreWithAllUsers      *bool                                                                          `json:"explore_with_all_users,omitempty"`
 	CrossUserMemoryEnabled   *bool                                                                          `json:"cross_user_memory_enabled,omitempty"`
@@ -116,38 +115,6 @@ func (o *GetProfile200ResponseConfigurationGraphqlApiDast) HasLocationId() bool 
 // SetLocationId gets a reference to the given string and assigns it to the LocationId field.
 func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetLocationId(v string) {
 	o.LocationId = &v
-}
-
-// GetProfile returns the Profile field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationGraphqlApiDast) GetProfile() ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESPROFILE {
-	if o == nil || IsNil(o.Profile) {
-		var ret ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESPROFILE
-		return ret
-	}
-	return *o.Profile
-}
-
-// GetProfileOk returns a tuple with the Profile field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationGraphqlApiDast) GetProfileOk() (*ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESPROFILE, bool) {
-	if o == nil || IsNil(o.Profile) {
-		return nil, false
-	}
-	return o.Profile, true
-}
-
-// HasProfile returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationGraphqlApiDast) HasProfile() bool {
-	if o != nil && !IsNil(o.Profile) {
-		return true
-	}
-
-	return false
-}
-
-// SetProfile gets a reference to the given ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESPROFILE and assigns it to the Profile field.
-func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetProfile(v ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESPROFILE) {
-	o.Profile = &v
 }
 
 // GetExplorationDepth returns the ExplorationDepth field value if set, zero value otherwise.
@@ -486,9 +453,6 @@ func (o GetProfile200ResponseConfigurationGraphqlApiDast) ToMap() (map[string]in
 	if !IsNil(o.LocationId) {
 		toSerialize["location_id"] = o.LocationId
 	}
-	if !IsNil(o.Profile) {
-		toSerialize["profile"] = o.Profile
-	}
 	if !IsNil(o.ExplorationDepth) {
 		toSerialize["exploration_depth"] = o.ExplorationDepth
 	}
@@ -543,7 +507,6 @@ func (o *GetProfile200ResponseConfigurationGraphqlApiDast) UnmarshalJSON(data []
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "url")
 		delete(additionalProperties, "location_id")
-		delete(additionalProperties, "profile")
 		delete(additionalProperties, "exploration_depth")
 		delete(additionalProperties, "explore_with_all_users")
 		delete(additionalProperties, "cross_user_memory_enabled")
