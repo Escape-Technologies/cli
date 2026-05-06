@@ -26,7 +26,6 @@ type UpdateProfileConfigurationRequestConfiguration struct {
 	ApiCustomRuleIds      []string                                                      `json:"api_custom_rule_ids,omitempty"`
 	FrontendCustomRuleIds []string                                                      `json:"frontend_custom_rule_ids,omitempty"`
 	Mode                  *ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE                    `json:"mode,omitempty"`
-	Profile               *ENUMPROPERTIESCONFIGURATIONPROPERTIESPROFILE                 `json:"profile,omitempty"`
 	Authentication        *GetProfile200ResponseConfigurationAuthentication             `json:"authentication,omitempty"`
 	SecurityTests         *GetProfile200ResponseConfigurationSecurityTests              `json:"security_tests,omitempty"`
 	Inference             *GetProfile200ResponseConfigurationInference                  `json:"inference,omitempty"`
@@ -283,38 +282,6 @@ func (o *UpdateProfileConfigurationRequestConfiguration) HasMode() bool {
 // SetMode gets a reference to the given ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE and assigns it to the Mode field.
 func (o *UpdateProfileConfigurationRequestConfiguration) SetMode(v ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE) {
 	o.Mode = &v
-}
-
-// GetProfile returns the Profile field value if set, zero value otherwise.
-func (o *UpdateProfileConfigurationRequestConfiguration) GetProfile() ENUMPROPERTIESCONFIGURATIONPROPERTIESPROFILE {
-	if o == nil || IsNil(o.Profile) {
-		var ret ENUMPROPERTIESCONFIGURATIONPROPERTIESPROFILE
-		return ret
-	}
-	return *o.Profile
-}
-
-// GetProfileOk returns a tuple with the Profile field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UpdateProfileConfigurationRequestConfiguration) GetProfileOk() (*ENUMPROPERTIESCONFIGURATIONPROPERTIESPROFILE, bool) {
-	if o == nil || IsNil(o.Profile) {
-		return nil, false
-	}
-	return o.Profile, true
-}
-
-// HasProfile returns a boolean if a field has been set.
-func (o *UpdateProfileConfigurationRequestConfiguration) HasProfile() bool {
-	if o != nil && !IsNil(o.Profile) {
-		return true
-	}
-
-	return false
-}
-
-// SetProfile gets a reference to the given ENUMPROPERTIESCONFIGURATIONPROPERTIESPROFILE and assigns it to the Profile field.
-func (o *UpdateProfileConfigurationRequestConfiguration) SetProfile(v ENUMPROPERTIESCONFIGURATIONPROPERTIESPROFILE) {
-	o.Profile = &v
 }
 
 // GetAuthentication returns the Authentication field value if set, zero value otherwise.
@@ -732,9 +699,6 @@ func (o UpdateProfileConfigurationRequestConfiguration) ToMap() (map[string]inte
 	if !IsNil(o.Mode) {
 		toSerialize["mode"] = o.Mode
 	}
-	if !IsNil(o.Profile) {
-		toSerialize["profile"] = o.Profile
-	}
 	if !IsNil(o.Authentication) {
 		toSerialize["authentication"] = o.Authentication
 	}
@@ -800,7 +764,6 @@ func (o *UpdateProfileConfigurationRequestConfiguration) UnmarshalJSON(data []by
 		delete(additionalProperties, "api_custom_rule_ids")
 		delete(additionalProperties, "frontend_custom_rule_ids")
 		delete(additionalProperties, "mode")
-		delete(additionalProperties, "profile")
 		delete(additionalProperties, "authentication")
 		delete(additionalProperties, "security_tests")
 		delete(additionalProperties, "inference")
