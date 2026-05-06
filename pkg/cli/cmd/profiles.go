@@ -157,7 +157,7 @@ profiles only (REST, GraphQL, WEBAPP). Use --all to include pentest profiles.`,
 var profileGetCmd = &cobra.Command{
 	Use:     "get profile-id",
 	Aliases: []string{"describe", "show"},
-	Short:   "Get detailed profile information",
+	Short:   "Get detailed profile information and current configuration",
 	Long: `Get Profile Details - View Complete Configuration
 
 Retrieve comprehensive information about a security testing profile including
@@ -680,7 +680,7 @@ func parseExtraAssetIDs(raw string) []string {
 var profileUpdateConfigurationCmd = &cobra.Command{
 	Use:     "update-configuration profile-id",
 	Aliases: []string{"uc", "update-config"},
-	Short:   "Update profile configuration",
+	Short:   "Update profile configuration: authentication, headers, scope, security tests, read-only mode",
 	Long: `Update Profile Configuration - Modify Auth, Scope, and Scanner Settings
 
 Update a profile's scan configuration via JSON through stdin. The JSON must
