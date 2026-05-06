@@ -192,6 +192,7 @@ type GetProfile200ResponseConfigurationSecurityTests struct {
 	Timeout                                *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"timeout,omitempty"`
 	UnreachableServer                      *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"unreachable_server,omitempty"`
 	UnsafeFunctionUse                      *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"unsafe_function_use,omitempty"`
+	UnusuallyHighOpenPorts                 *GetProfile200ResponseConfigurationSecurityTestsHighNumberOfCustomScalars `json:"unusually_high_open_ports,omitempty"`
 	VueDevelopmentBuild                    *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"vue_development_build,omitempty"`
 	WafBypass                              *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"waf_bypass,omitempty"`
 	WordpressOembedEndpointExposed         *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"wordpress_oembed_endpoint_exposed,omitempty"`
@@ -5866,6 +5867,38 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) SetUnsafeFunctionUse(v
 	o.UnsafeFunctionUse = &v
 }
 
+// GetUnusuallyHighOpenPorts returns the UnusuallyHighOpenPorts field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetUnusuallyHighOpenPorts() GetProfile200ResponseConfigurationSecurityTestsHighNumberOfCustomScalars {
+	if o == nil || IsNil(o.UnusuallyHighOpenPorts) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsHighNumberOfCustomScalars
+		return ret
+	}
+	return *o.UnusuallyHighOpenPorts
+}
+
+// GetUnusuallyHighOpenPortsOk returns a tuple with the UnusuallyHighOpenPorts field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetUnusuallyHighOpenPortsOk() (*GetProfile200ResponseConfigurationSecurityTestsHighNumberOfCustomScalars, bool) {
+	if o == nil || IsNil(o.UnusuallyHighOpenPorts) {
+		return nil, false
+	}
+	return o.UnusuallyHighOpenPorts, true
+}
+
+// HasUnusuallyHighOpenPorts returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasUnusuallyHighOpenPorts() bool {
+	if o != nil && !IsNil(o.UnusuallyHighOpenPorts) {
+		return true
+	}
+
+	return false
+}
+
+// SetUnusuallyHighOpenPorts gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsHighNumberOfCustomScalars and assigns it to the UnusuallyHighOpenPorts field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetUnusuallyHighOpenPorts(v GetProfile200ResponseConfigurationSecurityTestsHighNumberOfCustomScalars) {
+	o.UnusuallyHighOpenPorts = &v
+}
+
 // GetVueDevelopmentBuild returns the VueDevelopmentBuild field value if set, zero value otherwise.
 func (o *GetProfile200ResponseConfigurationSecurityTests) GetVueDevelopmentBuild() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
 	if o == nil || IsNil(o.VueDevelopmentBuild) {
@@ -10107,6 +10140,9 @@ func (o GetProfile200ResponseConfigurationSecurityTests) ToMap() (map[string]int
 	if !IsNil(o.UnsafeFunctionUse) {
 		toSerialize["unsafe_function_use"] = o.UnsafeFunctionUse
 	}
+	if !IsNil(o.UnusuallyHighOpenPorts) {
+		toSerialize["unusually_high_open_ports"] = o.UnusuallyHighOpenPorts
+	}
 	if !IsNil(o.VueDevelopmentBuild) {
 		toSerialize["vue_development_build"] = o.VueDevelopmentBuild
 	}
@@ -10650,6 +10686,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) UnmarshalJSON(data []b
 		delete(additionalProperties, "timeout")
 		delete(additionalProperties, "unreachable_server")
 		delete(additionalProperties, "unsafe_function_use")
+		delete(additionalProperties, "unusually_high_open_ports")
 		delete(additionalProperties, "vue_development_build")
 		delete(additionalProperties, "waf_bypass")
 		delete(additionalProperties, "wordpress_oembed_endpoint_exposed")
