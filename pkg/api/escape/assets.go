@@ -50,7 +50,7 @@ func ListAssets(ctx context.Context, next string, filters *ListAssetsFilters) ([
 			req = req.Statuses(filters.AssetStatuses)
 		}
 		if len(filters.ProjectIDs) > 0 {
-			req = req.ProjectIds(v3.ListAssetsProjectIdsParameter{ArrayOfString: &filters.ProjectIDs})
+			req = req.ProjectIds(filters.ProjectIDs)
 		}
 		if filters.Search != "" {
 			req = req.Search(filters.Search)
