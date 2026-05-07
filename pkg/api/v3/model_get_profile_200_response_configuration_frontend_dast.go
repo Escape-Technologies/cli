@@ -23,8 +23,13 @@ type GetProfile200ResponseConfigurationFrontendDast struct {
 	MaxDuration           *float32                                                                                `json:"max_duration,omitempty"`
 	Hotstart              []string                                                                                `json:"hotstart,omitempty"`
 	SecurityChecksEnabled []ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSECURITYCHECKSENABLEDITEMS `json:"security_checks_enabled,omitempty"`
+	ApiChecksDuringAuth   *bool                                                                                   `json:"api_checks_during_auth,omitempty"`
 	SinglePageWorker      *bool                                                                                   `json:"single_page_worker,omitempty"`
 	ParallelWorkers       *float32                                                                                `json:"parallel_workers,omitempty"`
+	RelaxCorsSecurity     *bool                                                                                   `json:"relax_cors_security,omitempty"`
+	UserAgent             *string                                                                                 `json:"user_agent,omitempty"`
+	EscapeUserHeader      *bool                                                                                   `json:"escape_user_header,omitempty"`
+	PrefetchSitemap       *bool                                                                                   `json:"prefetch_sitemap,omitempty"`
 	CrawlingTuning        *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning                           `json:"crawling_tuning,omitempty"`
 	StaticCrawling        *GetProfile200ResponseConfigurationFrontendDastStaticCrawling                           `json:"static_crawling,omitempty"`
 	LogoutDetection       *GetProfile200ResponseConfigurationFrontendDastLogoutDetection                          `json:"logout_detection,omitempty"`
@@ -181,6 +186,38 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) SetSecurityChecksEnable
 	o.SecurityChecksEnabled = v
 }
 
+// GetApiChecksDuringAuth returns the ApiChecksDuringAuth field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationFrontendDast) GetApiChecksDuringAuth() bool {
+	if o == nil || IsNil(o.ApiChecksDuringAuth) {
+		var ret bool
+		return ret
+	}
+	return *o.ApiChecksDuringAuth
+}
+
+// GetApiChecksDuringAuthOk returns a tuple with the ApiChecksDuringAuth field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationFrontendDast) GetApiChecksDuringAuthOk() (*bool, bool) {
+	if o == nil || IsNil(o.ApiChecksDuringAuth) {
+		return nil, false
+	}
+	return o.ApiChecksDuringAuth, true
+}
+
+// HasApiChecksDuringAuth returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationFrontendDast) HasApiChecksDuringAuth() bool {
+	if o != nil && !IsNil(o.ApiChecksDuringAuth) {
+		return true
+	}
+
+	return false
+}
+
+// SetApiChecksDuringAuth gets a reference to the given bool and assigns it to the ApiChecksDuringAuth field.
+func (o *GetProfile200ResponseConfigurationFrontendDast) SetApiChecksDuringAuth(v bool) {
+	o.ApiChecksDuringAuth = &v
+}
+
 // GetSinglePageWorker returns the SinglePageWorker field value if set, zero value otherwise.
 func (o *GetProfile200ResponseConfigurationFrontendDast) GetSinglePageWorker() bool {
 	if o == nil || IsNil(o.SinglePageWorker) {
@@ -243,6 +280,134 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) HasParallelWorkers() bo
 // SetParallelWorkers gets a reference to the given float32 and assigns it to the ParallelWorkers field.
 func (o *GetProfile200ResponseConfigurationFrontendDast) SetParallelWorkers(v float32) {
 	o.ParallelWorkers = &v
+}
+
+// GetRelaxCorsSecurity returns the RelaxCorsSecurity field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationFrontendDast) GetRelaxCorsSecurity() bool {
+	if o == nil || IsNil(o.RelaxCorsSecurity) {
+		var ret bool
+		return ret
+	}
+	return *o.RelaxCorsSecurity
+}
+
+// GetRelaxCorsSecurityOk returns a tuple with the RelaxCorsSecurity field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationFrontendDast) GetRelaxCorsSecurityOk() (*bool, bool) {
+	if o == nil || IsNil(o.RelaxCorsSecurity) {
+		return nil, false
+	}
+	return o.RelaxCorsSecurity, true
+}
+
+// HasRelaxCorsSecurity returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationFrontendDast) HasRelaxCorsSecurity() bool {
+	if o != nil && !IsNil(o.RelaxCorsSecurity) {
+		return true
+	}
+
+	return false
+}
+
+// SetRelaxCorsSecurity gets a reference to the given bool and assigns it to the RelaxCorsSecurity field.
+func (o *GetProfile200ResponseConfigurationFrontendDast) SetRelaxCorsSecurity(v bool) {
+	o.RelaxCorsSecurity = &v
+}
+
+// GetUserAgent returns the UserAgent field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationFrontendDast) GetUserAgent() string {
+	if o == nil || IsNil(o.UserAgent) {
+		var ret string
+		return ret
+	}
+	return *o.UserAgent
+}
+
+// GetUserAgentOk returns a tuple with the UserAgent field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationFrontendDast) GetUserAgentOk() (*string, bool) {
+	if o == nil || IsNil(o.UserAgent) {
+		return nil, false
+	}
+	return o.UserAgent, true
+}
+
+// HasUserAgent returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationFrontendDast) HasUserAgent() bool {
+	if o != nil && !IsNil(o.UserAgent) {
+		return true
+	}
+
+	return false
+}
+
+// SetUserAgent gets a reference to the given string and assigns it to the UserAgent field.
+func (o *GetProfile200ResponseConfigurationFrontendDast) SetUserAgent(v string) {
+	o.UserAgent = &v
+}
+
+// GetEscapeUserHeader returns the EscapeUserHeader field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationFrontendDast) GetEscapeUserHeader() bool {
+	if o == nil || IsNil(o.EscapeUserHeader) {
+		var ret bool
+		return ret
+	}
+	return *o.EscapeUserHeader
+}
+
+// GetEscapeUserHeaderOk returns a tuple with the EscapeUserHeader field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationFrontendDast) GetEscapeUserHeaderOk() (*bool, bool) {
+	if o == nil || IsNil(o.EscapeUserHeader) {
+		return nil, false
+	}
+	return o.EscapeUserHeader, true
+}
+
+// HasEscapeUserHeader returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationFrontendDast) HasEscapeUserHeader() bool {
+	if o != nil && !IsNil(o.EscapeUserHeader) {
+		return true
+	}
+
+	return false
+}
+
+// SetEscapeUserHeader gets a reference to the given bool and assigns it to the EscapeUserHeader field.
+func (o *GetProfile200ResponseConfigurationFrontendDast) SetEscapeUserHeader(v bool) {
+	o.EscapeUserHeader = &v
+}
+
+// GetPrefetchSitemap returns the PrefetchSitemap field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationFrontendDast) GetPrefetchSitemap() bool {
+	if o == nil || IsNil(o.PrefetchSitemap) {
+		var ret bool
+		return ret
+	}
+	return *o.PrefetchSitemap
+}
+
+// GetPrefetchSitemapOk returns a tuple with the PrefetchSitemap field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationFrontendDast) GetPrefetchSitemapOk() (*bool, bool) {
+	if o == nil || IsNil(o.PrefetchSitemap) {
+		return nil, false
+	}
+	return o.PrefetchSitemap, true
+}
+
+// HasPrefetchSitemap returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationFrontendDast) HasPrefetchSitemap() bool {
+	if o != nil && !IsNil(o.PrefetchSitemap) {
+		return true
+	}
+
+	return false
+}
+
+// SetPrefetchSitemap gets a reference to the given bool and assigns it to the PrefetchSitemap field.
+func (o *GetProfile200ResponseConfigurationFrontendDast) SetPrefetchSitemap(v bool) {
+	o.PrefetchSitemap = &v
 }
 
 // GetCrawlingTuning returns the CrawlingTuning field value if set, zero value otherwise.
@@ -459,11 +624,26 @@ func (o GetProfile200ResponseConfigurationFrontendDast) ToMap() (map[string]inte
 	if !IsNil(o.SecurityChecksEnabled) {
 		toSerialize["security_checks_enabled"] = o.SecurityChecksEnabled
 	}
+	if !IsNil(o.ApiChecksDuringAuth) {
+		toSerialize["api_checks_during_auth"] = o.ApiChecksDuringAuth
+	}
 	if !IsNil(o.SinglePageWorker) {
 		toSerialize["single_page_worker"] = o.SinglePageWorker
 	}
 	if !IsNil(o.ParallelWorkers) {
 		toSerialize["parallel_workers"] = o.ParallelWorkers
+	}
+	if !IsNil(o.RelaxCorsSecurity) {
+		toSerialize["relax_cors_security"] = o.RelaxCorsSecurity
+	}
+	if !IsNil(o.UserAgent) {
+		toSerialize["user_agent"] = o.UserAgent
+	}
+	if !IsNil(o.EscapeUserHeader) {
+		toSerialize["escape_user_header"] = o.EscapeUserHeader
+	}
+	if !IsNil(o.PrefetchSitemap) {
+		toSerialize["prefetch_sitemap"] = o.PrefetchSitemap
 	}
 	if !IsNil(o.CrawlingTuning) {
 		toSerialize["crawling_tuning"] = o.CrawlingTuning
@@ -509,8 +689,13 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) UnmarshalJSON(data []by
 		delete(additionalProperties, "max_duration")
 		delete(additionalProperties, "hotstart")
 		delete(additionalProperties, "security_checks_enabled")
+		delete(additionalProperties, "api_checks_during_auth")
 		delete(additionalProperties, "single_page_worker")
 		delete(additionalProperties, "parallel_workers")
+		delete(additionalProperties, "relax_cors_security")
+		delete(additionalProperties, "user_agent")
+		delete(additionalProperties, "escape_user_header")
+		delete(additionalProperties, "prefetch_sitemap")
 		delete(additionalProperties, "crawling_tuning")
 		delete(additionalProperties, "static_crawling")
 		delete(additionalProperties, "logout_detection")
