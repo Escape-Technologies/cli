@@ -3530,7 +3530,7 @@ type ApiListAssetsRequest struct {
 	search          *string
 	types           *[]string
 	statuses        *[]string
-	projectIds      *ListAssetsProjectIdsParameter
+	projectIds      *[]string
 	manuallyCreated *string
 }
 
@@ -3577,7 +3577,7 @@ func (r ApiListAssetsRequest) Statuses(statuses []string) ApiListAssetsRequest {
 }
 
 // Filter by any of the listed project IDs
-func (r ApiListAssetsRequest) ProjectIds(projectIds ListAssetsProjectIdsParameter) ApiListAssetsRequest {
+func (r ApiListAssetsRequest) ProjectIds(projectIds []string) ApiListAssetsRequest {
 	r.projectIds = &projectIds
 	return r
 }
@@ -3673,7 +3673,7 @@ func (a *AssetsAPIService) ListAssetsExecute(r ApiListAssetsRequest) (*ListAsset
 		}
 	}
 	if r.projectIds != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "projectIds", r.projectIds, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "projectIds", *r.projectIds, "form", "csv")
 	}
 	if r.manuallyCreated != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "manuallyCreated", r.manuallyCreated, "form", "")
