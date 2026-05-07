@@ -44,12 +44,14 @@ type UpdateAsset200Response struct {
 	// The tags of the asset
 	Tags []Tag `json:"tags"`
 	// The risks of the asset
-	Risks         []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS `json:"risks"`
-	FirstSeenScan *ScanSummarized                                              `json:"firstSeenScan,omitempty"`
-	LastSeenScan  *ScanSummarized1                                             `json:"lastSeenScan,omitempty"`
-	Service       *AssetServiceDetailed                                        `json:"service,omitempty"`
-	Frontend      *AssetFrontendDetailed                                       `json:"frontend,omitempty"`
-	Host          *AssetHostDetailed                                           `json:"host,omitempty"`
+	Risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS `json:"risks"`
+	// IDs of the projects this asset is assigned to
+	ProjectIds    []string               `json:"projectIds"`
+	FirstSeenScan *ScanSummarized        `json:"firstSeenScan,omitempty"`
+	LastSeenScan  *ScanSummarized1       `json:"lastSeenScan,omitempty"`
+	Service       *AssetServiceDetailed  `json:"service,omitempty"`
+	Frontend      *AssetFrontendDetailed `json:"frontend,omitempty"`
+	Host          *AssetHostDetailed     `json:"host,omitempty"`
 	// Time-limited HTTPS URL for schema-class assets; null for other asset classes
 	SchemaUrl            *string            `json:"schemaUrl,omitempty"`
 	Links                AssetDetailedLinks `json:"links"`
@@ -62,7 +64,7 @@ type _UpdateAsset200Response UpdateAsset200Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateAsset200Response(id string, class ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS, type_ ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE, name string, createdAt string, lastSeenAt string, status ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS, tags []Tag, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, links AssetDetailedLinks) *UpdateAsset200Response {
+func NewUpdateAsset200Response(id string, class ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS, type_ ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE, name string, createdAt string, lastSeenAt string, status ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS, tags []Tag, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, projectIds []string, links AssetDetailedLinks) *UpdateAsset200Response {
 	this := UpdateAsset200Response{}
 	this.Id = id
 	this.Class = class
@@ -73,6 +75,7 @@ func NewUpdateAsset200Response(id string, class ENUMPROPERTIESDATAITEMSPROPERTIE
 	this.Status = status
 	this.Tags = tags
 	this.Risks = risks
+	this.ProjectIds = projectIds
 	this.Links = links
 	return &this
 }
@@ -461,6 +464,30 @@ func (o *UpdateAsset200Response) SetRisks(v []ENUMPROPERTIESDATAITEMSPROPERTIESA
 	o.Risks = v
 }
 
+// GetProjectIds returns the ProjectIds field value
+func (o *UpdateAsset200Response) GetProjectIds() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+
+	return o.ProjectIds
+}
+
+// GetProjectIdsOk returns a tuple with the ProjectIds field value
+// and a boolean to check if the value has been set.
+func (o *UpdateAsset200Response) GetProjectIdsOk() ([]string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ProjectIds, true
+}
+
+// SetProjectIds sets field value
+func (o *UpdateAsset200Response) SetProjectIds(v []string) {
+	o.ProjectIds = v
+}
+
 // GetFirstSeenScan returns the FirstSeenScan field value if set, zero value otherwise.
 func (o *UpdateAsset200Response) GetFirstSeenScan() ScanSummarized {
 	if o == nil || IsNil(o.FirstSeenScan) {
@@ -711,6 +738,7 @@ func (o UpdateAsset200Response) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["tags"] = o.Tags
 	toSerialize["risks"] = o.Risks
+	toSerialize["projectIds"] = o.ProjectIds
 	if !IsNil(o.FirstSeenScan) {
 		toSerialize["firstSeenScan"] = o.FirstSeenScan
 	}
@@ -752,6 +780,7 @@ func (o *UpdateAsset200Response) UnmarshalJSON(data []byte) (err error) {
 		"status",
 		"tags",
 		"risks",
+		"projectIds",
 		"links",
 	}
 
@@ -796,6 +825,7 @@ func (o *UpdateAsset200Response) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "owners")
 		delete(additionalProperties, "tags")
 		delete(additionalProperties, "risks")
+		delete(additionalProperties, "projectIds")
 		delete(additionalProperties, "firstSeenScan")
 		delete(additionalProperties, "lastSeenScan")
 		delete(additionalProperties, "service")

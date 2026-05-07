@@ -44,17 +44,17 @@ type AssetDetailed struct {
 	// The tags of the asset
 	Tags []Tag `json:"tags"`
 	// The risks of the asset
-	Risks         []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS `json:"risks"`
-	FirstSeenScan *ScanSummarized                                              `json:"firstSeenScan,omitempty"`
-	LastSeenScan  *ScanSummarized1                                             `json:"lastSeenScan,omitempty"`
-	Service       *AssetServiceDetailed                                        `json:"service,omitempty"`
-	Frontend      *AssetFrontendDetailed                                       `json:"frontend,omitempty"`
-	Host          *AssetHostDetailed                                           `json:"host,omitempty"`
-	// Time-limited HTTPS URL for schema-class assets; null for other asset classes
-	SchemaUrl *string            `json:"schemaUrl,omitempty"`
-	Links     AssetDetailedLinks `json:"links"`
+	Risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS `json:"risks"`
 	// IDs of the projects this asset is assigned to
-	ProjectIds           []string `json:"projectIds"`
+	ProjectIds    []string               `json:"projectIds"`
+	FirstSeenScan *ScanSummarized        `json:"firstSeenScan,omitempty"`
+	LastSeenScan  *ScanSummarized1       `json:"lastSeenScan,omitempty"`
+	Service       *AssetServiceDetailed  `json:"service,omitempty"`
+	Frontend      *AssetFrontendDetailed `json:"frontend,omitempty"`
+	Host          *AssetHostDetailed     `json:"host,omitempty"`
+	// Time-limited HTTPS URL for schema-class assets; null for other asset classes
+	SchemaUrl            *string            `json:"schemaUrl,omitempty"`
+	Links                AssetDetailedLinks `json:"links"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -64,7 +64,7 @@ type _AssetDetailed AssetDetailed
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAssetDetailed(id string, class ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS, type_ ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE, name string, createdAt string, lastSeenAt string, status ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS, tags []Tag, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, links AssetDetailedLinks, projectIds []string) *AssetDetailed {
+func NewAssetDetailed(id string, class ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS, type_ ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE, name string, createdAt string, lastSeenAt string, status ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS, tags []Tag, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, projectIds []string, links AssetDetailedLinks) *AssetDetailed {
 	this := AssetDetailed{}
 	this.Id = id
 	this.Class = class
@@ -75,8 +75,8 @@ func NewAssetDetailed(id string, class ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASS
 	this.Status = status
 	this.Tags = tags
 	this.Risks = risks
-	this.Links = links
 	this.ProjectIds = projectIds
+	this.Links = links
 	return &this
 }
 
@@ -464,6 +464,30 @@ func (o *AssetDetailed) SetRisks(v []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPE
 	o.Risks = v
 }
 
+// GetProjectIds returns the ProjectIds field value
+func (o *AssetDetailed) GetProjectIds() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+
+	return o.ProjectIds
+}
+
+// GetProjectIdsOk returns a tuple with the ProjectIds field value
+// and a boolean to check if the value has been set.
+func (o *AssetDetailed) GetProjectIdsOk() ([]string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ProjectIds, true
+}
+
+// SetProjectIds sets field value
+func (o *AssetDetailed) SetProjectIds(v []string) {
+	o.ProjectIds = v
+}
+
 // GetFirstSeenScan returns the FirstSeenScan field value if set, zero value otherwise.
 func (o *AssetDetailed) GetFirstSeenScan() ScanSummarized {
 	if o == nil || IsNil(o.FirstSeenScan) {
@@ -680,30 +704,6 @@ func (o *AssetDetailed) SetLinks(v AssetDetailedLinks) {
 	o.Links = v
 }
 
-// GetProjectIds returns the ProjectIds field value
-func (o *AssetDetailed) GetProjectIds() []string {
-	if o == nil {
-		var ret []string
-		return ret
-	}
-
-	return o.ProjectIds
-}
-
-// GetProjectIdsOk returns a tuple with the ProjectIds field value
-// and a boolean to check if the value has been set.
-func (o *AssetDetailed) GetProjectIdsOk() ([]string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.ProjectIds, true
-}
-
-// SetProjectIds sets field value
-func (o *AssetDetailed) SetProjectIds(v []string) {
-	o.ProjectIds = v
-}
-
 func (o AssetDetailed) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -738,6 +738,7 @@ func (o AssetDetailed) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["tags"] = o.Tags
 	toSerialize["risks"] = o.Risks
+	toSerialize["projectIds"] = o.ProjectIds
 	if !IsNil(o.FirstSeenScan) {
 		toSerialize["firstSeenScan"] = o.FirstSeenScan
 	}
@@ -757,7 +758,6 @@ func (o AssetDetailed) ToMap() (map[string]interface{}, error) {
 		toSerialize["schemaUrl"] = o.SchemaUrl
 	}
 	toSerialize["links"] = o.Links
-	toSerialize["projectIds"] = o.ProjectIds
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -780,8 +780,8 @@ func (o *AssetDetailed) UnmarshalJSON(data []byte) (err error) {
 		"status",
 		"tags",
 		"risks",
-		"links",
 		"projectIds",
+		"links",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -825,6 +825,7 @@ func (o *AssetDetailed) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "owners")
 		delete(additionalProperties, "tags")
 		delete(additionalProperties, "risks")
+		delete(additionalProperties, "projectIds")
 		delete(additionalProperties, "firstSeenScan")
 		delete(additionalProperties, "lastSeenScan")
 		delete(additionalProperties, "service")
@@ -832,7 +833,6 @@ func (o *AssetDetailed) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "host")
 		delete(additionalProperties, "schemaUrl")
 		delete(additionalProperties, "links")
-		delete(additionalProperties, "projectIds")
 		o.AdditionalProperties = additionalProperties
 	}
 
