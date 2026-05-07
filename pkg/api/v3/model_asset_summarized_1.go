@@ -42,11 +42,13 @@ type AssetSummarized1 struct {
 	// The risks of the asset
 	Risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS `json:"risks"`
 	// Email addresses of the owners of this asset.
-	Owners               []string                 `json:"owners,omitempty"`
-	Service              *AssetServiceSummarized  `json:"service,omitempty"`
-	Frontend             *AssetFrontendSummarized `json:"frontend,omitempty"`
-	Host                 *AssetHostSummarized     `json:"host,omitempty"`
-	Links                AssetDetailedLinks       `json:"links"`
+	Owners   []string                 `json:"owners,omitempty"`
+	Service  *AssetServiceSummarized  `json:"service,omitempty"`
+	Frontend *AssetFrontendSummarized `json:"frontend,omitempty"`
+	Host     *AssetHostSummarized     `json:"host,omitempty"`
+	Links    AssetDetailedLinks       `json:"links"`
+	// IDs of the projects this asset is assigned to
+	ProjectIds           []string `json:"projectIds"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -56,7 +58,7 @@ type _AssetSummarized1 AssetSummarized1
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAssetSummarized1(id string, class ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS, type_ ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE, name string, createdAt string, lastSeenAt string, status ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS, tags []Tag, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, links AssetDetailedLinks) *AssetSummarized1 {
+func NewAssetSummarized1(id string, class ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS, type_ ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE, name string, createdAt string, lastSeenAt string, status ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS, tags []Tag, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, links AssetDetailedLinks, projectIds []string) *AssetSummarized1 {
 	this := AssetSummarized1{}
 	this.Id = id
 	this.Class = class
@@ -68,6 +70,7 @@ func NewAssetSummarized1(id string, class ENUMPROPERTIESDATAITEMSPROPERTIESEXTRA
 	this.Tags = tags
 	this.Risks = risks
 	this.Links = links
+	this.ProjectIds = projectIds
 	return &this
 }
 
@@ -543,6 +546,30 @@ func (o *AssetSummarized1) SetLinks(v AssetDetailedLinks) {
 	o.Links = v
 }
 
+// GetProjectIds returns the ProjectIds field value
+func (o *AssetSummarized1) GetProjectIds() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+
+	return o.ProjectIds
+}
+
+// GetProjectIdsOk returns a tuple with the ProjectIds field value
+// and a boolean to check if the value has been set.
+func (o *AssetSummarized1) GetProjectIdsOk() ([]string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ProjectIds, true
+}
+
+// SetProjectIds sets field value
+func (o *AssetSummarized1) SetProjectIds(v []string) {
+	o.ProjectIds = v
+}
+
 func (o AssetSummarized1) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -584,6 +611,7 @@ func (o AssetSummarized1) ToMap() (map[string]interface{}, error) {
 		toSerialize["host"] = o.Host
 	}
 	toSerialize["links"] = o.Links
+	toSerialize["projectIds"] = o.ProjectIds
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -607,6 +635,7 @@ func (o *AssetSummarized1) UnmarshalJSON(data []byte) (err error) {
 		"tags",
 		"risks",
 		"links",
+		"projectIds",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -653,6 +682,7 @@ func (o *AssetSummarized1) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "frontend")
 		delete(additionalProperties, "host")
 		delete(additionalProperties, "links")
+		delete(additionalProperties, "projectIds")
 		o.AdditionalProperties = additionalProperties
 	}
 

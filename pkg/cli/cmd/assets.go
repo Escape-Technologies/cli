@@ -17,6 +17,7 @@ import (
 var (
 	assetTypes         = []string{}
 	assetStatuses      = []string{}
+	assetProjectIDs    = []string{}
 	assetActivities    = false
 	manuallyCreated    = false
 	assetSortType      string
@@ -82,6 +83,7 @@ the APIs, applications, and infrastructure being monitored by Escape.
 FILTER OPTIONS:
   -t, --types            Filter by asset types (WEBAPP, REST_API, GRAPHQL_API, etc.)
   --statuses             Filter by monitoring status (MONITORED, UNMONITORED, ARCHIVED)
+  --project-id           Filter by project ID
   -s, --search           Free-text search across asset names and URLs
   -m, --manually-created Filter assets created manually vs auto-discovered
 
@@ -126,6 +128,7 @@ ID                                      CREATED AT                TYPE          
 		filters := &escape.ListAssetsFilters{
 			AssetTypes:      assetTypes,
 			AssetStatuses:   assetStatuses,
+			ProjectIDs:      assetProjectIDs,
 			Search:          search,
 			ManuallyCreated: manuallyCreated,
 			SortType:        assetSortType,
@@ -144,9 +147,9 @@ ID                                      CREATED AT                TYPE          
 			allAssets = append(allAssets, assets...)
 		}
 		out.Table(allAssets, func() []string {
-			res := []string{"ID\tCREATED AT\tTYPE\tSTATUS\tLAST SEEN\tRISKS\tTAGS\tOWNERS\tNAME"}
+			res := []string{"ID\tCREATED AT\tTYPE\tSTATUS\tLAST SEEN\tRISKS\tTAGS\tOWNERS\tPROJECTS\tNAME"}
 			for _, asset := range allAssets {
-				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s", asset.GetId(), asset.GetCreatedAt(), asset.GetType(), asset.GetStatus(), asset.GetLastSeenAt(), asset.GetRisks(), joinTags(asset.GetTags()), ownersColumn(asset.AdditionalProperties), asset.GetName()))
+				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%d\t%s", asset.GetId(), asset.GetCreatedAt(), asset.GetType(), asset.GetStatus(), asset.GetLastSeenAt(), asset.GetRisks(), joinTags(asset.GetTags()), ownersColumn(asset.AdditionalProperties), len(asset.GetProjectIds()), asset.GetName()))
 			}
 			return res
 		})
@@ -237,8 +240,8 @@ ID                                      CREATED AT                TYPE    NAME  
 		} else {
 
 			out.Table(asset, func() []string {
-				res := []string{"ID\tCREATED AT\tTYPE\tSTATUS\tLAST SEEN\tRISKS\tTAGS\tOWNERS\tNAME"}
-				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s", asset.GetId(), asset.GetCreatedAt(), asset.GetType(), asset.GetStatus(), asset.GetLastSeenAt(), asset.GetRisks(), joinTags(asset.GetTags()), ownersColumn(asset.AdditionalProperties), asset.GetName()))
+				res := []string{"ID\tCREATED AT\tTYPE\tSTATUS\tLAST SEEN\tRISKS\tTAGS\tOWNERS\tPROJECTS\tNAME"}
+				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%d\t%s", asset.GetId(), asset.GetCreatedAt(), asset.GetType(), asset.GetStatus(), asset.GetLastSeenAt(), asset.GetRisks(), joinTags(asset.GetTags()), ownersColumn(asset.AdditionalProperties), len(asset.GetProjectIds()), asset.GetName()))
 				return res
 			})
 		}
@@ -673,6 +676,7 @@ func init() {
 	assetsCmd.AddCommand(assetsListCmd)
 	assetsListCmd.Flags().StringSliceVarP(&assetTypes, "types", "t", []string{}, fmt.Sprintf("filter by asset types (comma-separated): %v", v3.AllowedENUMPROPERTIESFRAMEWORKEnumValues))
 	assetsListCmd.Flags().StringSliceVarP(&assetStatuses, "statuses", "", []string{}, fmt.Sprintf("filter by monitoring status: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUSEnumValues))
+	assetsListCmd.Flags().StringSliceVar(&assetProjectIDs, "project-id", []string{}, "filter by project IDs")
 	assetsListCmd.Flags().StringVarP(&search, "search", "s", "", "free-text search across asset names and URLs")
 	assetsListCmd.Flags().BoolVarP(&manuallyCreated, "manually-created", "m", false, "show only manually created assets (exclude auto-discovered)")
 	assetsListCmd.Flags().StringVar(&assetSortType, "sort-by", "", "sort field (e.g., LAST_SEEN, CREATED_AT)")
