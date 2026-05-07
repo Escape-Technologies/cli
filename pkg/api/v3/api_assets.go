@@ -3673,7 +3673,7 @@ func (a *AssetsAPIService) ListAssetsExecute(r ApiListAssetsRequest) (*ListAsset
 		}
 	}
 	if r.projectIds != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "projectIds", *r.projectIds, "form", "csv")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "projectIds", r.projectIds, "form", "csv")
 	}
 	if r.manuallyCreated != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "manuallyCreated", r.manuallyCreated, "form", "")
