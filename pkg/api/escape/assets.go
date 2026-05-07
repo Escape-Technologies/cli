@@ -18,6 +18,7 @@ import (
 type ListAssetsFilters struct {
 	AssetTypes      []string
 	AssetStatuses   []string
+	ProjectIDs      []string
 	Search          string
 	ManuallyCreated bool
 	SortType        string
@@ -47,6 +48,9 @@ func ListAssets(ctx context.Context, next string, filters *ListAssetsFilters) ([
 		}
 		if len(filters.AssetStatuses) > 0 {
 			req = req.Statuses(filters.AssetStatuses)
+		}
+		if len(filters.ProjectIDs) > 0 {
+			req = req.ProjectIds(v3.ListAssetsProjectIdsParameter{ArrayOfString: &filters.ProjectIDs})
 		}
 		if filters.Search != "" {
 			req = req.Search(filters.Search)
