@@ -20,7 +20,6 @@ var _ MappedNullable = &UpdateProfileConfigurationRequestConfigurationRestApiDas
 // UpdateProfileConfigurationRequestConfigurationRestApiDast struct for UpdateProfileConfigurationRequestConfigurationRestApiDast
 type UpdateProfileConfigurationRequestConfigurationRestApiDast struct {
 	LocationId               *string                                                                        `json:"location_id,omitempty"`
-	Profile                  *ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESPROFILE          `json:"profile,omitempty"`
 	ExplorationDepth         *ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESEXPLORATIONDEPTH `json:"exploration_depth,omitempty"`
 	ExploreWithAllUsers      *bool                                                                          `json:"explore_with_all_users,omitempty"`
 	CrossUserMemoryEnabled   *bool                                                                          `json:"cross_user_memory_enabled,omitempty"`
@@ -32,6 +31,7 @@ type UpdateProfileConfigurationRequestConfigurationRestApiDast struct {
 	QueryParamsAreRequired   *bool                                                                          `json:"query_params_are_required,omitempty"`
 	InScopeOnly              *bool                                                                          `json:"in_scope_only,omitempty"`
 	Mode                     *ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE                                     `json:"mode,omitempty"`
+	Profile                  *ENUMPROPERTIESCONFIGURATIONPROPERTIESPROFILE                                  `json:"profile,omitempty"`
 	AdditionalProperties     map[string]interface{}
 }
 
@@ -84,38 +84,6 @@ func (o *UpdateProfileConfigurationRequestConfigurationRestApiDast) HasLocationI
 // SetLocationId gets a reference to the given string and assigns it to the LocationId field.
 func (o *UpdateProfileConfigurationRequestConfigurationRestApiDast) SetLocationId(v string) {
 	o.LocationId = &v
-}
-
-// GetProfile returns the Profile field value if set, zero value otherwise.
-func (o *UpdateProfileConfigurationRequestConfigurationRestApiDast) GetProfile() ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESPROFILE {
-	if o == nil || IsNil(o.Profile) {
-		var ret ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESPROFILE
-		return ret
-	}
-	return *o.Profile
-}
-
-// GetProfileOk returns a tuple with the Profile field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UpdateProfileConfigurationRequestConfigurationRestApiDast) GetProfileOk() (*ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESPROFILE, bool) {
-	if o == nil || IsNil(o.Profile) {
-		return nil, false
-	}
-	return o.Profile, true
-}
-
-// HasProfile returns a boolean if a field has been set.
-func (o *UpdateProfileConfigurationRequestConfigurationRestApiDast) HasProfile() bool {
-	if o != nil && !IsNil(o.Profile) {
-		return true
-	}
-
-	return false
-}
-
-// SetProfile gets a reference to the given ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESPROFILE and assigns it to the Profile field.
-func (o *UpdateProfileConfigurationRequestConfigurationRestApiDast) SetProfile(v ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESPROFILE) {
-	o.Profile = &v
 }
 
 // GetExplorationDepth returns the ExplorationDepth field value if set, zero value otherwise.
@@ -470,6 +438,38 @@ func (o *UpdateProfileConfigurationRequestConfigurationRestApiDast) SetMode(v EN
 	o.Mode = &v
 }
 
+// GetProfile returns the Profile field value if set, zero value otherwise.
+func (o *UpdateProfileConfigurationRequestConfigurationRestApiDast) GetProfile() ENUMPROPERTIESCONFIGURATIONPROPERTIESPROFILE {
+	if o == nil || IsNil(o.Profile) {
+		var ret ENUMPROPERTIESCONFIGURATIONPROPERTIESPROFILE
+		return ret
+	}
+	return *o.Profile
+}
+
+// GetProfileOk returns a tuple with the Profile field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateProfileConfigurationRequestConfigurationRestApiDast) GetProfileOk() (*ENUMPROPERTIESCONFIGURATIONPROPERTIESPROFILE, bool) {
+	if o == nil || IsNil(o.Profile) {
+		return nil, false
+	}
+	return o.Profile, true
+}
+
+// HasProfile returns a boolean if a field has been set.
+func (o *UpdateProfileConfigurationRequestConfigurationRestApiDast) HasProfile() bool {
+	if o != nil && !IsNil(o.Profile) {
+		return true
+	}
+
+	return false
+}
+
+// SetProfile gets a reference to the given ENUMPROPERTIESCONFIGURATIONPROPERTIESPROFILE and assigns it to the Profile field.
+func (o *UpdateProfileConfigurationRequestConfigurationRestApiDast) SetProfile(v ENUMPROPERTIESCONFIGURATIONPROPERTIESPROFILE) {
+	o.Profile = &v
+}
+
 func (o UpdateProfileConfigurationRequestConfigurationRestApiDast) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -482,9 +482,6 @@ func (o UpdateProfileConfigurationRequestConfigurationRestApiDast) ToMap() (map[
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.LocationId) {
 		toSerialize["location_id"] = o.LocationId
-	}
-	if !IsNil(o.Profile) {
-		toSerialize["profile"] = o.Profile
 	}
 	if !IsNil(o.ExplorationDepth) {
 		toSerialize["exploration_depth"] = o.ExplorationDepth
@@ -519,6 +516,9 @@ func (o UpdateProfileConfigurationRequestConfigurationRestApiDast) ToMap() (map[
 	if !IsNil(o.Mode) {
 		toSerialize["mode"] = o.Mode
 	}
+	if !IsNil(o.Profile) {
+		toSerialize["profile"] = o.Profile
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -542,7 +542,6 @@ func (o *UpdateProfileConfigurationRequestConfigurationRestApiDast) UnmarshalJSO
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "location_id")
-		delete(additionalProperties, "profile")
 		delete(additionalProperties, "exploration_depth")
 		delete(additionalProperties, "explore_with_all_users")
 		delete(additionalProperties, "cross_user_memory_enabled")
@@ -554,6 +553,7 @@ func (o *UpdateProfileConfigurationRequestConfigurationRestApiDast) UnmarshalJSO
 		delete(additionalProperties, "query_params_are_required")
 		delete(additionalProperties, "in_scope_only")
 		delete(additionalProperties, "mode")
+		delete(additionalProperties, "profile")
 		o.AdditionalProperties = additionalProperties
 	}
 
