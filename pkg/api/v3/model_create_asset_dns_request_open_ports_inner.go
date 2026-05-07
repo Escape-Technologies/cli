@@ -23,6 +23,7 @@ type CreateAssetDNSRequestOpenPortsInner struct {
 	Port                 float32                                                `json:"port"`
 	Protocols            []ENUMPROPERTIESOPENPORTSITEMSPROPERTIESPROTOCOLSITEMS `json:"protocols"`
 	LocationIds          []string                                               `json:"location_ids,omitempty"`
+	MissCount            *float32                                               `json:"miss_count,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -127,6 +128,38 @@ func (o *CreateAssetDNSRequestOpenPortsInner) SetLocationIds(v []string) {
 	o.LocationIds = v
 }
 
+// GetMissCount returns the MissCount field value if set, zero value otherwise.
+func (o *CreateAssetDNSRequestOpenPortsInner) GetMissCount() float32 {
+	if o == nil || IsNil(o.MissCount) {
+		var ret float32
+		return ret
+	}
+	return *o.MissCount
+}
+
+// GetMissCountOk returns a tuple with the MissCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetDNSRequestOpenPortsInner) GetMissCountOk() (*float32, bool) {
+	if o == nil || IsNil(o.MissCount) {
+		return nil, false
+	}
+	return o.MissCount, true
+}
+
+// HasMissCount returns a boolean if a field has been set.
+func (o *CreateAssetDNSRequestOpenPortsInner) HasMissCount() bool {
+	if o != nil && !IsNil(o.MissCount) {
+		return true
+	}
+
+	return false
+}
+
+// SetMissCount gets a reference to the given float32 and assigns it to the MissCount field.
+func (o *CreateAssetDNSRequestOpenPortsInner) SetMissCount(v float32) {
+	o.MissCount = &v
+}
+
 func (o CreateAssetDNSRequestOpenPortsInner) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -141,6 +174,9 @@ func (o CreateAssetDNSRequestOpenPortsInner) ToMap() (map[string]interface{}, er
 	toSerialize["protocols"] = o.Protocols
 	if !IsNil(o.LocationIds) {
 		toSerialize["location_ids"] = o.LocationIds
+	}
+	if !IsNil(o.MissCount) {
+		toSerialize["miss_count"] = o.MissCount
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -189,6 +225,7 @@ func (o *CreateAssetDNSRequestOpenPortsInner) UnmarshalJSON(data []byte) (err er
 		delete(additionalProperties, "port")
 		delete(additionalProperties, "protocols")
 		delete(additionalProperties, "location_ids")
+		delete(additionalProperties, "miss_count")
 		o.AdditionalProperties = additionalProperties
 	}
 
