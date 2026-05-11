@@ -22,9 +22,10 @@ import (
 // DAST profile-creation endpoint, so these aliases keep each command's input
 // schema aligned with the profile it creates.
 type (
-	createRestProfileInput    = v3.CreateDastRestProfileRequest
-	createWebappProfileInput  = v3.CreateDastRestProfileRequest
-	createGraphqlProfileInput = v3.CreateDastRestProfileRequest
+	createRestProfileInput             = v3.CreateDastRestProfileRequest
+	createWebappProfileInput           = v3.CreateDastRestProfileRequest
+	createGraphqlProfileInput          = v3.CreateDastRestProfileRequest
+	createAiPentestingProfileInput = v3.CreateAiPentestProfileRequest
 )
 
 var profileKinds = []string{
@@ -56,7 +57,10 @@ configures authentication, scope, and security checks for a specific asset.
 DAST PROFILES:
   create-rest           REST API security testing
   create-graphql        GraphQL API security testing
-  create-webapp         Web application security testing`,
+  create-webapp         Web application security testing
+
+AI PENTESTING:
+  create-ai-pentesting   AI pentesting (POST /profiles/ai-pentesting)`,
 }
 
 var profilesListCmd = &cobra.Command{
@@ -351,6 +355,48 @@ Create a new profile for testing GraphQL APIs. Provide configuration via JSON th
 		response, err := escape.CreateProfileGraphql(cmd.Context(), data)
 		if err != nil {
 			return fmt.Errorf("failed to create profile: %w", err)
+		}
+
+		out.Table(response, func() []string {
+			result := []string{"ID\tCREATED AT\tNAME\tASSET TYPE"}
+			if profileResponse, ok := response.(*v3.GetProfile200Response); ok {
+				result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s", profileResponse.GetId(), profileResponse.GetCreatedAt(), profileResponse.GetName(), profileResponse.Asset.GetType()))
+			}
+			return result
+		})
+		return nil
+	},
+}
+
+var profileCreateAiPentestingCmd = &cobra.Command{
+	Use:     "create-ai-pentesting",
+	Aliases: []string{"caip"},
+	Short:   "Create an AI pentesting profile",
+	Long: `Create AI Pentesting Profile
+
+Creates a profile via POST /v3/profiles/ai-pentesting. Send a JSON body on stdin;
+use the configuration object to target REST, GraphQL, or web application scanning.`,
+	RunE: func(cmd *cobra.Command, _ []string) error {
+		if out.InputSchema(createAiPentestingProfileInput{}) {
+			return nil
+		}
+		if out.Schema(v3.GetProfile200Response{}) {
+			return nil
+		}
+
+		b, err := io.ReadAll(os.Stdin)
+		if err != nil {
+			return fmt.Errorf("failed to read stdin: %w", err)
+		}
+
+		var sanity map[string]interface{}
+		if err := json.Unmarshal(b, &sanity); err != nil {
+			return fmt.Errorf("invalid JSON: %w", err)
+		}
+
+		response, err := escape.CreateProfileAiPentesting(cmd.Context(), b)
+		if err != nil {
+			return fmt.Errorf("failed to create AI pentesting profile: %w", err)
 		}
 
 		out.Table(response, func() []string {
@@ -965,6 +1011,7 @@ func init() {
 		profileCreateRestCmd,
 		profileCreateWebappCmd,
 		profileCreateGraphqlCmd,
+		profileCreateAiPentestingCmd,
 		profileUpdateCmd,
 		profileUpdateConfigurationCmd,
 		profileUpdateSchemaCmd,

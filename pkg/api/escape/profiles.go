@@ -149,6 +149,25 @@ func CreateProfileGraphql(ctx context.Context, data []byte) (interface{}, error)
 	return profile, nil
 }
 
+// CreateProfileAiPentesting creates an AI pentesting profile (POST /profiles/ai-pentesting).
+func CreateProfileAiPentesting(ctx context.Context, data []byte) (interface{}, error) {
+	client, err := newAPIV3Client()
+	if err != nil {
+		return nil, fmt.Errorf("unable to init client: %w", err)
+	}
+
+	var payload v3.CreateAiPentestProfileRequest
+	if err := json.Unmarshal(data, &payload); err != nil {
+		return nil, fmt.Errorf("invalid JSON: %w", err)
+	}
+
+	profile, _, err := client.ProfilesAPI.CreateAiPentestProfile(ctx).CreateAiPentestProfileRequest(payload).Execute()
+	if err != nil {
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
+	}
+	return profile, nil
+}
+
 // UpdateProfile updates profile metadata (name, description, cron, extra assets)
 func UpdateProfile(ctx context.Context, profileID string, data []byte) (*v3.GetProfile200Response, error) {
 	client, err := newAPIV3Client()
