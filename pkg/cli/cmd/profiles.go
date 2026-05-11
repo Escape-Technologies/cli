@@ -19,15 +19,12 @@ import (
 )
 
 // The generated API client reuses CreateDastRestProfileRequest for every
-// profile-creation endpoint, so these aliases keep each command's input schema
-// semantically aligned with the profile it creates.
+// DAST profile-creation endpoint, so these aliases keep each command's input
+// schema aligned with the profile it creates.
 type (
-	createRestProfileInput           = v3.CreateDastRestProfileRequest
-	createWebappProfileInput         = v3.CreateDastRestProfileRequest
-	createGraphqlProfileInput        = v3.CreateDastRestProfileRequest
-	createPentestRestProfileInput    = v3.CreateDastRestProfileRequest
-	createPentestGraphqlProfileInput = v3.CreateDastRestProfileRequest
-	createPentestWebappProfileInput  = v3.CreateDastRestProfileRequest
+	createRestProfileInput    = v3.CreateDastRestProfileRequest
+	createWebappProfileInput  = v3.CreateDastRestProfileRequest
+	createGraphqlProfileInput = v3.CreateDastRestProfileRequest
 )
 
 var profileKinds = []string{
@@ -59,12 +56,7 @@ configures authentication, scope, and security checks for a specific asset.
 DAST PROFILES:
   create-rest           REST API security testing
   create-graphql        GraphQL API security testing
-  create-webapp         Web application security testing
-
-AI PENTEST PROFILES:
-  create-pentest-rest       AI-driven penetration testing for REST APIs
-  create-pentest-graphql    AI-driven penetration testing for GraphQL APIs
-  create-pentest-webapp     AI-driven penetration testing for web applications`,
+  create-webapp         Web application security testing`,
 }
 
 var profilesListCmd = &cobra.Command{
@@ -359,117 +351,6 @@ Create a new profile for testing GraphQL APIs. Provide configuration via JSON th
 		response, err := escape.CreateProfileGraphql(cmd.Context(), data)
 		if err != nil {
 			return fmt.Errorf("failed to create profile: %w", err)
-		}
-
-		out.Table(response, func() []string {
-			result := []string{"ID\tCREATED AT\tNAME\tASSET TYPE"}
-			if profileResponse, ok := response.(*v3.GetProfile200Response); ok {
-				result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s", profileResponse.GetId(), profileResponse.GetCreatedAt(), profileResponse.GetName(), profileResponse.Asset.GetType()))
-			}
-			return result
-		})
-		return nil
-	},
-}
-
-var profileCreatePentestRestCmd = &cobra.Command{
-	Use:     "create-pentest-rest",
-	Aliases: []string{"cpr"},
-	Short:   "Create an AI Pentest REST API profile",
-	Long: `Create AI Pentest REST Profile - Configure Automated Penetration Testing
-
-Create a new AI-powered penetration testing profile for REST APIs.
-Provide configuration via JSON through stdin.`,
-	RunE: func(cmd *cobra.Command, _ []string) error {
-		if out.InputSchema(createPentestRestProfileInput{}) {
-			return nil
-		}
-		if out.Schema(v3.GetProfile200Response{}) {
-			return nil
-		}
-
-		b, err := io.ReadAll(os.Stdin)
-		if err != nil {
-			return fmt.Errorf("failed to read stdin: %w", err)
-		}
-
-		response, err := escape.CreateProfilePentestRest(cmd.Context(), b)
-		if err != nil {
-			return fmt.Errorf("failed to create pentest REST profile: %w", err)
-		}
-
-		out.Table(response, func() []string {
-			result := []string{"ID\tCREATED AT\tNAME\tASSET TYPE"}
-			if profileResponse, ok := response.(*v3.GetProfile200Response); ok {
-				result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s", profileResponse.GetId(), profileResponse.GetCreatedAt(), profileResponse.GetName(), profileResponse.Asset.GetType()))
-			}
-			return result
-		})
-		return nil
-	},
-}
-
-var profileCreatePentestGraphqlCmd = &cobra.Command{
-	Use:     "create-pentest-graphql",
-	Aliases: []string{"cpg"},
-	Short:   "Create an AI Pentest GraphQL profile",
-	Long: `Create AI Pentest GraphQL Profile - Configure Automated Penetration Testing
-
-Create a new AI-powered penetration testing profile for GraphQL APIs.
-Provide configuration via JSON through stdin.`,
-	RunE: func(cmd *cobra.Command, _ []string) error {
-		if out.InputSchema(createPentestGraphqlProfileInput{}) {
-			return nil
-		}
-		if out.Schema(v3.GetProfile200Response{}) {
-			return nil
-		}
-
-		b, err := io.ReadAll(os.Stdin)
-		if err != nil {
-			return fmt.Errorf("failed to read stdin: %w", err)
-		}
-
-		response, err := escape.CreateProfilePentestGraphql(cmd.Context(), b)
-		if err != nil {
-			return fmt.Errorf("failed to create pentest GraphQL profile: %w", err)
-		}
-
-		out.Table(response, func() []string {
-			result := []string{"ID\tCREATED AT\tNAME\tASSET TYPE"}
-			if profileResponse, ok := response.(*v3.GetProfile200Response); ok {
-				result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s", profileResponse.GetId(), profileResponse.GetCreatedAt(), profileResponse.GetName(), profileResponse.Asset.GetType()))
-			}
-			return result
-		})
-		return nil
-	},
-}
-
-var profileCreatePentestWebappCmd = &cobra.Command{
-	Use:     "create-pentest-webapp",
-	Aliases: []string{"cpw"},
-	Short:   "Create an AI Pentest WebApp profile",
-	Long: `Create AI Pentest WebApp Profile - Configure Automated Penetration Testing
-
-Create a new AI-powered penetration testing profile for web applications.
-Provide configuration via JSON through stdin.`,
-	RunE: func(cmd *cobra.Command, _ []string) error {
-		if out.InputSchema(createPentestWebappProfileInput{}) {
-			return nil
-		}
-		if out.Schema(v3.GetProfile200Response{}) {
-			return nil
-		}
-
-		b, err := io.ReadAll(os.Stdin)
-		if err != nil {
-			return fmt.Errorf("failed to read stdin: %w", err)
-		}
-
-		response, err := escape.CreateProfilePentestWebapp(cmd.Context(), b)
-		if err != nil {
-			return fmt.Errorf("failed to create pentest WebApp profile: %w", err)
 		}
 
 		out.Table(response, func() []string {
@@ -1084,9 +965,6 @@ func init() {
 		profileCreateRestCmd,
 		profileCreateWebappCmd,
 		profileCreateGraphqlCmd,
-		profileCreatePentestRestCmd,
-		profileCreatePentestGraphqlCmd,
-		profileCreatePentestWebappCmd,
 		profileUpdateCmd,
 		profileUpdateConfigurationCmd,
 		profileUpdateSchemaCmd,
