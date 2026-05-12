@@ -149,8 +149,8 @@ func CreateProfileGraphql(ctx context.Context, data []byte) (interface{}, error)
 	return profile, nil
 }
 
-// CreateProfileAiPentesting creates an AI pentesting profile (POST /profiles/ai-pentesting).
-func CreateProfileAiPentesting(ctx context.Context, data []byte) (interface{}, error) {
+// CreateProfileAiPentest creates an AI pentest profile (POST /profiles/ai-pentest).
+func CreateProfileAiPentest(ctx context.Context, data []byte) (interface{}, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
