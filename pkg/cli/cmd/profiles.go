@@ -22,9 +22,9 @@ import (
 // DAST profile-creation endpoint, so these aliases keep each command's input
 // schema aligned with the profile it creates.
 type (
-	createRestProfileInput         = v3.CreateDastRestProfileRequest
-	createWebappProfileInput       = v3.CreateDastRestProfileRequest
-	createGraphqlProfileInput      = v3.CreateDastRestProfileRequest
+	createRestProfileInput      = v3.CreateDastRestProfileRequest
+	createWebappProfileInput    = v3.CreateDastRestProfileRequest
+	createGraphqlProfileInput   = v3.CreateDastRestProfileRequest
 	createAiPentestProfileInput = v3.CreateAiPentestProfileRequest
 )
 
