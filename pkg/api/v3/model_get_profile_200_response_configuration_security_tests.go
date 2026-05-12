@@ -118,6 +118,14 @@ type GetProfile200ResponseConfigurationSecurityTests struct {
 	ExposedSourcemap                       *GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap          `json:"exposed_sourcemap,omitempty"`
 	ExposedSqlDumps                        *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"exposed_sql_dumps,omitempty"`
 	FileDisclosure                         *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"file_disclosure,omitempty"`
+	FileUploadDetected                     *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"file_upload_detected,omitempty"`
+	FileUploadUnrestricted                 *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"file_upload_unrestricted,omitempty"`
+	FileUploadStoredXss                    *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"file_upload_stored_xss,omitempty"`
+	FileUploadRce                          *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"file_upload_rce,omitempty"`
+	FileUploadPathTraversal                *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"file_upload_path_traversal,omitempty"`
+	FileUploadXxe                          *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"file_upload_xxe,omitempty"`
+	FileUploadSsrf                         *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"file_upload_ssrf,omitempty"`
+	FileUploadZipSlip                      *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"file_upload_zip_slip,omitempty"`
 	GraphqlAliasLimit                      *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"graphql_alias_limit,omitempty"`
 	GraphqlBatchLimit                      *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"graphql_batch_limit,omitempty"`
 	GraphqlCircularIntrospection           *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"graphql_circular_introspection,omitempty"`
@@ -3497,6 +3505,262 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) HasFileDisclosure() bo
 // SetFileDisclosure gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the FileDisclosure field.
 func (o *GetProfile200ResponseConfigurationSecurityTests) SetFileDisclosure(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
 	o.FileDisclosure = &v
+}
+
+// GetFileUploadDetected returns the FileUploadDetected field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetFileUploadDetected() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.FileUploadDetected) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.FileUploadDetected
+}
+
+// GetFileUploadDetectedOk returns a tuple with the FileUploadDetected field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetFileUploadDetectedOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.FileUploadDetected) {
+		return nil, false
+	}
+	return o.FileUploadDetected, true
+}
+
+// HasFileUploadDetected returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasFileUploadDetected() bool {
+	if o != nil && !IsNil(o.FileUploadDetected) {
+		return true
+	}
+
+	return false
+}
+
+// SetFileUploadDetected gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the FileUploadDetected field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetFileUploadDetected(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.FileUploadDetected = &v
+}
+
+// GetFileUploadUnrestricted returns the FileUploadUnrestricted field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetFileUploadUnrestricted() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.FileUploadUnrestricted) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.FileUploadUnrestricted
+}
+
+// GetFileUploadUnrestrictedOk returns a tuple with the FileUploadUnrestricted field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetFileUploadUnrestrictedOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.FileUploadUnrestricted) {
+		return nil, false
+	}
+	return o.FileUploadUnrestricted, true
+}
+
+// HasFileUploadUnrestricted returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasFileUploadUnrestricted() bool {
+	if o != nil && !IsNil(o.FileUploadUnrestricted) {
+		return true
+	}
+
+	return false
+}
+
+// SetFileUploadUnrestricted gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the FileUploadUnrestricted field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetFileUploadUnrestricted(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.FileUploadUnrestricted = &v
+}
+
+// GetFileUploadStoredXss returns the FileUploadStoredXss field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetFileUploadStoredXss() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.FileUploadStoredXss) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.FileUploadStoredXss
+}
+
+// GetFileUploadStoredXssOk returns a tuple with the FileUploadStoredXss field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetFileUploadStoredXssOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.FileUploadStoredXss) {
+		return nil, false
+	}
+	return o.FileUploadStoredXss, true
+}
+
+// HasFileUploadStoredXss returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasFileUploadStoredXss() bool {
+	if o != nil && !IsNil(o.FileUploadStoredXss) {
+		return true
+	}
+
+	return false
+}
+
+// SetFileUploadStoredXss gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the FileUploadStoredXss field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetFileUploadStoredXss(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.FileUploadStoredXss = &v
+}
+
+// GetFileUploadRce returns the FileUploadRce field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetFileUploadRce() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.FileUploadRce) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.FileUploadRce
+}
+
+// GetFileUploadRceOk returns a tuple with the FileUploadRce field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetFileUploadRceOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.FileUploadRce) {
+		return nil, false
+	}
+	return o.FileUploadRce, true
+}
+
+// HasFileUploadRce returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasFileUploadRce() bool {
+	if o != nil && !IsNil(o.FileUploadRce) {
+		return true
+	}
+
+	return false
+}
+
+// SetFileUploadRce gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the FileUploadRce field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetFileUploadRce(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.FileUploadRce = &v
+}
+
+// GetFileUploadPathTraversal returns the FileUploadPathTraversal field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetFileUploadPathTraversal() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.FileUploadPathTraversal) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.FileUploadPathTraversal
+}
+
+// GetFileUploadPathTraversalOk returns a tuple with the FileUploadPathTraversal field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetFileUploadPathTraversalOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.FileUploadPathTraversal) {
+		return nil, false
+	}
+	return o.FileUploadPathTraversal, true
+}
+
+// HasFileUploadPathTraversal returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasFileUploadPathTraversal() bool {
+	if o != nil && !IsNil(o.FileUploadPathTraversal) {
+		return true
+	}
+
+	return false
+}
+
+// SetFileUploadPathTraversal gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the FileUploadPathTraversal field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetFileUploadPathTraversal(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.FileUploadPathTraversal = &v
+}
+
+// GetFileUploadXxe returns the FileUploadXxe field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetFileUploadXxe() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.FileUploadXxe) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.FileUploadXxe
+}
+
+// GetFileUploadXxeOk returns a tuple with the FileUploadXxe field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetFileUploadXxeOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.FileUploadXxe) {
+		return nil, false
+	}
+	return o.FileUploadXxe, true
+}
+
+// HasFileUploadXxe returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasFileUploadXxe() bool {
+	if o != nil && !IsNil(o.FileUploadXxe) {
+		return true
+	}
+
+	return false
+}
+
+// SetFileUploadXxe gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the FileUploadXxe field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetFileUploadXxe(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.FileUploadXxe = &v
+}
+
+// GetFileUploadSsrf returns the FileUploadSsrf field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetFileUploadSsrf() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.FileUploadSsrf) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.FileUploadSsrf
+}
+
+// GetFileUploadSsrfOk returns a tuple with the FileUploadSsrf field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetFileUploadSsrfOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.FileUploadSsrf) {
+		return nil, false
+	}
+	return o.FileUploadSsrf, true
+}
+
+// HasFileUploadSsrf returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasFileUploadSsrf() bool {
+	if o != nil && !IsNil(o.FileUploadSsrf) {
+		return true
+	}
+
+	return false
+}
+
+// SetFileUploadSsrf gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the FileUploadSsrf field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetFileUploadSsrf(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.FileUploadSsrf = &v
+}
+
+// GetFileUploadZipSlip returns the FileUploadZipSlip field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetFileUploadZipSlip() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.FileUploadZipSlip) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.FileUploadZipSlip
+}
+
+// GetFileUploadZipSlipOk returns a tuple with the FileUploadZipSlip field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetFileUploadZipSlipOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.FileUploadZipSlip) {
+		return nil, false
+	}
+	return o.FileUploadZipSlip, true
+}
+
+// HasFileUploadZipSlip returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasFileUploadZipSlip() bool {
+	if o != nil && !IsNil(o.FileUploadZipSlip) {
+		return true
+	}
+
+	return false
+}
+
+// SetFileUploadZipSlip gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the FileUploadZipSlip field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetFileUploadZipSlip(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.FileUploadZipSlip = &v
 }
 
 // GetGraphqlAliasLimit returns the GraphqlAliasLimit field value if set, zero value otherwise.
@@ -9918,6 +10182,30 @@ func (o GetProfile200ResponseConfigurationSecurityTests) ToMap() (map[string]int
 	if !IsNil(o.FileDisclosure) {
 		toSerialize["file_disclosure"] = o.FileDisclosure
 	}
+	if !IsNil(o.FileUploadDetected) {
+		toSerialize["file_upload_detected"] = o.FileUploadDetected
+	}
+	if !IsNil(o.FileUploadUnrestricted) {
+		toSerialize["file_upload_unrestricted"] = o.FileUploadUnrestricted
+	}
+	if !IsNil(o.FileUploadStoredXss) {
+		toSerialize["file_upload_stored_xss"] = o.FileUploadStoredXss
+	}
+	if !IsNil(o.FileUploadRce) {
+		toSerialize["file_upload_rce"] = o.FileUploadRce
+	}
+	if !IsNil(o.FileUploadPathTraversal) {
+		toSerialize["file_upload_path_traversal"] = o.FileUploadPathTraversal
+	}
+	if !IsNil(o.FileUploadXxe) {
+		toSerialize["file_upload_xxe"] = o.FileUploadXxe
+	}
+	if !IsNil(o.FileUploadSsrf) {
+		toSerialize["file_upload_ssrf"] = o.FileUploadSsrf
+	}
+	if !IsNil(o.FileUploadZipSlip) {
+		toSerialize["file_upload_zip_slip"] = o.FileUploadZipSlip
+	}
 	if !IsNil(o.GraphqlAliasLimit) {
 		toSerialize["graphql_alias_limit"] = o.GraphqlAliasLimit
 	}
@@ -10612,6 +10900,14 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) UnmarshalJSON(data []b
 		delete(additionalProperties, "exposed_sourcemap")
 		delete(additionalProperties, "exposed_sql_dumps")
 		delete(additionalProperties, "file_disclosure")
+		delete(additionalProperties, "file_upload_detected")
+		delete(additionalProperties, "file_upload_unrestricted")
+		delete(additionalProperties, "file_upload_stored_xss")
+		delete(additionalProperties, "file_upload_rce")
+		delete(additionalProperties, "file_upload_path_traversal")
+		delete(additionalProperties, "file_upload_xxe")
+		delete(additionalProperties, "file_upload_ssrf")
+		delete(additionalProperties, "file_upload_zip_slip")
 		delete(additionalProperties, "graphql_alias_limit")
 		delete(additionalProperties, "graphql_batch_limit")
 		delete(additionalProperties, "graphql_circular_introspection")
