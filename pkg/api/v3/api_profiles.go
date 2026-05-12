@@ -70,7 +70,7 @@ func (a *ProfilesAPIService) CreateAiPentestProfileExecute(r ApiCreateAiPentestP
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/profiles/ai-pentesting"
+	localVarPath := localBasePath + "/profiles/ai-pentest"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

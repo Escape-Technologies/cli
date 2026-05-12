@@ -25,7 +25,7 @@ type (
 	createRestProfileInput         = v3.CreateDastRestProfileRequest
 	createWebappProfileInput       = v3.CreateDastRestProfileRequest
 	createGraphqlProfileInput      = v3.CreateDastRestProfileRequest
-	createAiPentestingProfileInput = v3.CreateAiPentestProfileRequest
+	createAiPentestProfileInput = v3.CreateAiPentestProfileRequest
 )
 
 var profileKinds = []string{
@@ -60,7 +60,7 @@ DAST PROFILES:
   create-webapp         Web application security testing
 
 AI PENTESTING:
-  create-ai-pentesting   AI pentesting (POST /profiles/ai-pentesting)`,
+  create-ai-pentest   AI pentest (POST /profiles/ai-pentest)`,
 }
 
 var profilesListCmd = &cobra.Command{
@@ -368,16 +368,16 @@ Create a new profile for testing GraphQL APIs. Provide configuration via JSON th
 	},
 }
 
-var profileCreateAiPentestingCmd = &cobra.Command{
-	Use:     "create-ai-pentesting",
+var profileCreateAiPentestCmd = &cobra.Command{
+	Use:     "create-ai-pentest",
 	Aliases: []string{"caip"},
-	Short:   "Create an AI pentesting profile",
-	Long: `Create AI Pentesting Profile
+	Short:   "Create an AI pentest profile",
+	Long: `Create AI Pentest Profile
 
-Creates a profile via POST /v3/profiles/ai-pentesting. Send a JSON body on stdin;
+Creates a profile via POST /v3/profiles/ai-pentest. Send a JSON body on stdin;
 use the configuration object to target REST, GraphQL, or web application scanning.`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
-		if out.InputSchema(createAiPentestingProfileInput{}) {
+		if out.InputSchema(createAiPentestProfileInput{}) {
 			return nil
 		}
 		if out.Schema(v3.GetProfile200Response{}) {
@@ -394,9 +394,9 @@ use the configuration object to target REST, GraphQL, or web application scannin
 			return fmt.Errorf("invalid JSON: %w", err)
 		}
 
-		response, err := escape.CreateProfileAiPentesting(cmd.Context(), b)
+		response, err := escape.CreateProfileAiPentest(cmd.Context(), b)
 		if err != nil {
-			return fmt.Errorf("failed to create AI pentesting profile: %w", err)
+			return fmt.Errorf("failed to create AI pentest profile: %w", err)
 		}
 
 		out.Table(response, func() []string {
@@ -1011,7 +1011,7 @@ func init() {
 		profileCreateRestCmd,
 		profileCreateWebappCmd,
 		profileCreateGraphqlCmd,
-		profileCreateAiPentestingCmd,
+		profileCreateAiPentestCmd,
 		profileUpdateCmd,
 		profileUpdateConfigurationCmd,
 		profileUpdateSchemaCmd,
