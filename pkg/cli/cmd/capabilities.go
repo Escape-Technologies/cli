@@ -89,7 +89,7 @@ func CommandSchemaRegistry() map[string]CommandSchemas {
 		"escape-cli profiles create-rest":          {Input: createRestProfileInput{}, Output: v3.GetProfile200Response{}},
 		"escape-cli profiles create-webapp":        {Input: createWebappProfileInput{}, Output: v3.GetProfile200Response{}},
 		"escape-cli profiles create-graphql":       {Input: createGraphqlProfileInput{}, Output: v3.GetProfile200Response{}},
-		"escape-cli profiles create-ai-pentest": {Input: createAiPentestProfileInput{}, Output: v3.GetProfile200Response{}},
+		"escape-cli profiles create-ai-pentest":    {Input: createAiPentestProfileInput{}, Output: v3.GetProfile200Response{}},
 		"escape-cli profiles update":               {Input: v3.UpdateProfileRequest{}, Output: v3.GetProfile200Response{}},
 		"escape-cli profiles update-configuration": {Input: v3.UpdateProfileConfigurationRequest{}},
 		"escape-cli issues list":                   {Output: []v3.IssueSummarized{}},
