@@ -299,6 +299,8 @@ type GetProfile200ResponseConfigurationSecurityTests struct {
 	SshDefaultCredentials                  *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"ssh_default_credentials,omitempty"`
 	SshExposed                             *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"ssh_exposed,omitempty"`
 	SshPasswordAuthEnabled                 *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"ssh_password_auth_enabled,omitempty"`
+	DefaultCredentialsUsed                 *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"default_credentials_used,omitempty"`
+	InsecureTechnologyUsed                 *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"insecure_technology_used,omitempty"`
 	Thinkphp6ArbitraryWrite                *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"thinkphp6_arbitrary_write,omitempty"`
 	Thinkphp2Rce                           *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"thinkphp_2_rce,omitempty"`
 	Thinkphp501Rce                         *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"thinkphp_501_rce,omitempty"`
@@ -9299,6 +9301,70 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) SetSshPasswordAuthEnab
 	o.SshPasswordAuthEnabled = &v
 }
 
+// GetDefaultCredentialsUsed returns the DefaultCredentialsUsed field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetDefaultCredentialsUsed() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.DefaultCredentialsUsed) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.DefaultCredentialsUsed
+}
+
+// GetDefaultCredentialsUsedOk returns a tuple with the DefaultCredentialsUsed field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetDefaultCredentialsUsedOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.DefaultCredentialsUsed) {
+		return nil, false
+	}
+	return o.DefaultCredentialsUsed, true
+}
+
+// HasDefaultCredentialsUsed returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasDefaultCredentialsUsed() bool {
+	if o != nil && !IsNil(o.DefaultCredentialsUsed) {
+		return true
+	}
+
+	return false
+}
+
+// SetDefaultCredentialsUsed gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the DefaultCredentialsUsed field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetDefaultCredentialsUsed(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.DefaultCredentialsUsed = &v
+}
+
+// GetInsecureTechnologyUsed returns the InsecureTechnologyUsed field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetInsecureTechnologyUsed() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.InsecureTechnologyUsed) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.InsecureTechnologyUsed
+}
+
+// GetInsecureTechnologyUsedOk returns a tuple with the InsecureTechnologyUsed field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetInsecureTechnologyUsedOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.InsecureTechnologyUsed) {
+		return nil, false
+	}
+	return o.InsecureTechnologyUsed, true
+}
+
+// HasInsecureTechnologyUsed returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasInsecureTechnologyUsed() bool {
+	if o != nil && !IsNil(o.InsecureTechnologyUsed) {
+		return true
+	}
+
+	return false
+}
+
+// SetInsecureTechnologyUsed gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the InsecureTechnologyUsed field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetInsecureTechnologyUsed(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.InsecureTechnologyUsed = &v
+}
+
 // GetThinkphp6ArbitraryWrite returns the Thinkphp6ArbitraryWrite field value if set, zero value otherwise.
 func (o *GetProfile200ResponseConfigurationSecurityTests) GetThinkphp6ArbitraryWrite() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
 	if o == nil || IsNil(o.Thinkphp6ArbitraryWrite) {
@@ -10725,6 +10791,12 @@ func (o GetProfile200ResponseConfigurationSecurityTests) ToMap() (map[string]int
 	if !IsNil(o.SshPasswordAuthEnabled) {
 		toSerialize["ssh_password_auth_enabled"] = o.SshPasswordAuthEnabled
 	}
+	if !IsNil(o.DefaultCredentialsUsed) {
+		toSerialize["default_credentials_used"] = o.DefaultCredentialsUsed
+	}
+	if !IsNil(o.InsecureTechnologyUsed) {
+		toSerialize["insecure_technology_used"] = o.InsecureTechnologyUsed
+	}
 	if !IsNil(o.Thinkphp6ArbitraryWrite) {
 		toSerialize["thinkphp6_arbitrary_write"] = o.Thinkphp6ArbitraryWrite
 	}
@@ -11081,6 +11153,8 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) UnmarshalJSON(data []b
 		delete(additionalProperties, "ssh_default_credentials")
 		delete(additionalProperties, "ssh_exposed")
 		delete(additionalProperties, "ssh_password_auth_enabled")
+		delete(additionalProperties, "default_credentials_used")
+		delete(additionalProperties, "insecure_technology_used")
 		delete(additionalProperties, "thinkphp6_arbitrary_write")
 		delete(additionalProperties, "thinkphp_2_rce")
 		delete(additionalProperties, "thinkphp_501_rce")
