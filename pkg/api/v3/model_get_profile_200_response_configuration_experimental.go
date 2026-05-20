@@ -19,22 +19,23 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationExperimental{}
 
 // GetProfile200ResponseConfigurationExperimental struct for GetProfile200ResponseConfigurationExperimental
 type GetProfile200ResponseConfigurationExperimental struct {
-	BlstExplorationOnly            *bool                                                                          `json:"blst_exploration_only,omitempty"`
-	AgenticIdor                    *bool                                                                          `json:"agentic_idor,omitempty"`
-	RegressionTestingFileUploadIds []string                                                                       `json:"regression_testing_file_upload_ids,omitempty"`
-	AsmTechnologies                *bool                                                                          `json:"asm_technologies,omitempty"`
-	AsmCodeProjects                *bool                                                                          `json:"asm_code_projects,omitempty"`
-	AsmEnumerateCodeProjects       *bool                                                                          `json:"asm_enumerate_code_projects,omitempty"`
-	ExternalCrawlingTask           *bool                                                                          `json:"external_crawling_task,omitempty"`
-	XssAgentModelAlias             *ENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS `json:"xss_agent_model_alias,omitempty"`
-	SqliAgentModelAlias            *ENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS `json:"sqli_agent_model_alias,omitempty"`
-	AsmCveAgent                    *bool                                                                          `json:"asm_cve_agent,omitempty"`
-	JsAnalysis                     *bool                                                                          `json:"js_analysis,omitempty"`
-	ExtendedPortScan               *bool                                                                          `json:"extended_port_scan,omitempty"`
-	DastMultiAgentPentest          *bool                                                                          `json:"dast_multi_agent_pentest,omitempty"`
-	FileUploadSecurityTesting      *bool                                                                          `json:"file_upload_security_testing,omitempty"`
-	FeatureFlags                   []string                                                                       `json:"feature_flags,omitempty"`
-	AdditionalProperties           map[string]interface{}
+	BlstExplorationOnly              *bool                                                                          `json:"blst_exploration_only,omitempty"`
+	AgenticIdor                      *bool                                                                          `json:"agentic_idor,omitempty"`
+	RegressionTestingFileUploadIds   []string                                                                       `json:"regression_testing_file_upload_ids,omitempty"`
+	AsmTechnologies                  *bool                                                                          `json:"asm_technologies,omitempty"`
+	AsmCodeProjects                  *bool                                                                          `json:"asm_code_projects,omitempty"`
+	AsmEnumerateCodeProjects         *bool                                                                          `json:"asm_enumerate_code_projects,omitempty"`
+	ExternalCrawlingTask             *bool                                                                          `json:"external_crawling_task,omitempty"`
+	XssAgentModelAlias               *ENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS `json:"xss_agent_model_alias,omitempty"`
+	SqliAgentModelAlias              *ENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS `json:"sqli_agent_model_alias,omitempty"`
+	AsmCveAgent                      *bool                                                                          `json:"asm_cve_agent,omitempty"`
+	AsmSourcemapThirdPartyTechnology *bool                                                                          `json:"asm_sourcemap_third_party_technology,omitempty"`
+	JsAnalysis                       *bool                                                                          `json:"js_analysis,omitempty"`
+	ExtendedPortScan                 *bool                                                                          `json:"extended_port_scan,omitempty"`
+	DastMultiAgentPentest            *bool                                                                          `json:"dast_multi_agent_pentest,omitempty"`
+	FileUploadSecurityTesting        *bool                                                                          `json:"file_upload_security_testing,omitempty"`
+	FeatureFlags                     []string                                                                       `json:"feature_flags,omitempty"`
+	AdditionalProperties             map[string]interface{}
 }
 
 type _GetProfile200ResponseConfigurationExperimental GetProfile200ResponseConfigurationExperimental
@@ -376,6 +377,38 @@ func (o *GetProfile200ResponseConfigurationExperimental) SetAsmCveAgent(v bool) 
 	o.AsmCveAgent = &v
 }
 
+// GetAsmSourcemapThirdPartyTechnology returns the AsmSourcemapThirdPartyTechnology field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationExperimental) GetAsmSourcemapThirdPartyTechnology() bool {
+	if o == nil || IsNil(o.AsmSourcemapThirdPartyTechnology) {
+		var ret bool
+		return ret
+	}
+	return *o.AsmSourcemapThirdPartyTechnology
+}
+
+// GetAsmSourcemapThirdPartyTechnologyOk returns a tuple with the AsmSourcemapThirdPartyTechnology field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationExperimental) GetAsmSourcemapThirdPartyTechnologyOk() (*bool, bool) {
+	if o == nil || IsNil(o.AsmSourcemapThirdPartyTechnology) {
+		return nil, false
+	}
+	return o.AsmSourcemapThirdPartyTechnology, true
+}
+
+// HasAsmSourcemapThirdPartyTechnology returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationExperimental) HasAsmSourcemapThirdPartyTechnology() bool {
+	if o != nil && !IsNil(o.AsmSourcemapThirdPartyTechnology) {
+		return true
+	}
+
+	return false
+}
+
+// SetAsmSourcemapThirdPartyTechnology gets a reference to the given bool and assigns it to the AsmSourcemapThirdPartyTechnology field.
+func (o *GetProfile200ResponseConfigurationExperimental) SetAsmSourcemapThirdPartyTechnology(v bool) {
+	o.AsmSourcemapThirdPartyTechnology = &v
+}
+
 // GetJsAnalysis returns the JsAnalysis field value if set, zero value otherwise.
 func (o *GetProfile200ResponseConfigurationExperimental) GetJsAnalysis() bool {
 	if o == nil || IsNil(o.JsAnalysis) {
@@ -576,6 +609,9 @@ func (o GetProfile200ResponseConfigurationExperimental) ToMap() (map[string]inte
 	if !IsNil(o.AsmCveAgent) {
 		toSerialize["asm_cve_agent"] = o.AsmCveAgent
 	}
+	if !IsNil(o.AsmSourcemapThirdPartyTechnology) {
+		toSerialize["asm_sourcemap_third_party_technology"] = o.AsmSourcemapThirdPartyTechnology
+	}
 	if !IsNil(o.JsAnalysis) {
 		toSerialize["js_analysis"] = o.JsAnalysis
 	}
@@ -623,6 +659,7 @@ func (o *GetProfile200ResponseConfigurationExperimental) UnmarshalJSON(data []by
 		delete(additionalProperties, "xss_agent_model_alias")
 		delete(additionalProperties, "sqli_agent_model_alias")
 		delete(additionalProperties, "asm_cve_agent")
+		delete(additionalProperties, "asm_sourcemap_third_party_technology")
 		delete(additionalProperties, "js_analysis")
 		delete(additionalProperties, "extended_port_scan")
 		delete(additionalProperties, "dast_multi_agent_pentest")
