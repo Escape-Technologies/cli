@@ -29,6 +29,7 @@ type CreateDastRestProfileRequestConfigurationObject struct {
 	SecurityTests         *GetProfile200ResponseConfigurationSecurityTests              `json:"security_tests,omitempty"`
 	Inference             *GetProfile200ResponseConfigurationInference                  `json:"inference,omitempty"`
 	Network               *GetProfile200ResponseConfigurationNetwork                    `json:"network,omitempty"`
+	MaxDuration           *float32                                                      `json:"max_duration,omitempty"`
 	SubdomainEnumeration  *GetProfile200ResponseConfigurationSubdomainEnumeration       `json:"subdomain_enumeration,omitempty"`
 	PortScanning          *GetProfile200ResponseConfigurationPortScanning               `json:"port_scanning,omitempty"`
 	ServiceDiscovery      *GetProfile200ResponseConfigurationServiceDiscovery           `json:"service_discovery,omitempty"`
@@ -379,6 +380,38 @@ func (o *CreateDastRestProfileRequestConfigurationObject) SetNetwork(v GetProfil
 	o.Network = &v
 }
 
+// GetMaxDuration returns the MaxDuration field value if set, zero value otherwise.
+func (o *CreateDastRestProfileRequestConfigurationObject) GetMaxDuration() float32 {
+	if o == nil || IsNil(o.MaxDuration) {
+		var ret float32
+		return ret
+	}
+	return *o.MaxDuration
+}
+
+// GetMaxDurationOk returns a tuple with the MaxDuration field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateDastRestProfileRequestConfigurationObject) GetMaxDurationOk() (*float32, bool) {
+	if o == nil || IsNil(o.MaxDuration) {
+		return nil, false
+	}
+	return o.MaxDuration, true
+}
+
+// HasMaxDuration returns a boolean if a field has been set.
+func (o *CreateDastRestProfileRequestConfigurationObject) HasMaxDuration() bool {
+	if o != nil && !IsNil(o.MaxDuration) {
+		return true
+	}
+
+	return false
+}
+
+// SetMaxDuration gets a reference to the given float32 and assigns it to the MaxDuration field.
+func (o *CreateDastRestProfileRequestConfigurationObject) SetMaxDuration(v float32) {
+	o.MaxDuration = &v
+}
+
 // GetSubdomainEnumeration returns the SubdomainEnumeration field value if set, zero value otherwise.
 func (o *CreateDastRestProfileRequestConfigurationObject) GetSubdomainEnumeration() GetProfile200ResponseConfigurationSubdomainEnumeration {
 	if o == nil || IsNil(o.SubdomainEnumeration) {
@@ -675,6 +708,9 @@ func (o CreateDastRestProfileRequestConfigurationObject) ToMap() (map[string]int
 	if !IsNil(o.Network) {
 		toSerialize["network"] = o.Network
 	}
+	if !IsNil(o.MaxDuration) {
+		toSerialize["max_duration"] = o.MaxDuration
+	}
 	if !IsNil(o.SubdomainEnumeration) {
 		toSerialize["subdomain_enumeration"] = o.SubdomainEnumeration
 	}
@@ -731,6 +767,7 @@ func (o *CreateDastRestProfileRequestConfigurationObject) UnmarshalJSON(data []b
 		delete(additionalProperties, "security_tests")
 		delete(additionalProperties, "inference")
 		delete(additionalProperties, "network")
+		delete(additionalProperties, "max_duration")
 		delete(additionalProperties, "subdomain_enumeration")
 		delete(additionalProperties, "port_scanning")
 		delete(additionalProperties, "service_discovery")
