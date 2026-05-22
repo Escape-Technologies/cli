@@ -7,13 +7,14 @@ import (
 	"strings"
 
 	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
+	"github.com/Escape-Technologies/cli/pkg/env"
 )
 
 const (
 	// InvalidAPIKeyMessage is the user-facing error when the API rejects credentials.
 	InvalidAPIKeyMessage = "Invalid API Key."
 	// InvalidAPIKeyHint tells users where to retrieve a valid API key.
-	InvalidAPIKeyHint = "Get your key here: https://app.escape.tech/user/profile/"
+	InvalidAPIKeyHint = env.APIKeyHint
 )
 
 // apiErrorBody mirrors the {message, details} shape returned by the public API

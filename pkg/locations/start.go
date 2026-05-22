@@ -49,7 +49,7 @@ func Start(ctx context.Context, name string) error {
 		id, err := escape.UpsertLocation(ctx, name, sshPublicKey)
 		if err != nil {
 			if escape.IsInvalidAPIKey(err) {
-				return err
+				return fmt.Errorf("unable to update private location on Escape Platform: %w", err)
 			}
 			log.Error("Unable to update private location on Escape Platform: %s", err)
 			time.Sleep(retryInterval)
