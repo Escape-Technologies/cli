@@ -295,10 +295,11 @@ COMMIT TRACKING:
     --commit-link      Link to commit in your VCS
 
 CONFIGURATION OVERRIDE:
-  Temporarily override profile settings for a single scan using --override:
-    '{"scan": {"read_only": true}}'                    # Non-destructive testing only
-    '{"scan": {"timeout": 3600}}'                      # Custom timeout
-    '{"scan": {"max_attack_surface": 1000}}'          # Limit endpoints tested
+  Temporarily override profile settings for a single scan using --override.
+  JSON must match the Scanner Next config schema (top-level fields, not a "scan" wrapper):
+    '{"mode": "read_only"}'                           # Non-destructive testing only
+    '{"max_duration": 3600}'                          # Custom max duration (seconds)
+    '{"exploration_scope": ["api.example.com"]}'      # Limit exploration scope
 
 WATCH MODE:
   Use --watch to monitor scan progress in real-time. The command will:
@@ -323,7 +324,7 @@ CI/CD INTEGRATION:
 
   # Start with configuration override (read-only mode)
   escape-cli scans start <profile-id> \
-    --override '{"scan": {"read_only": true}}'
+    --override '{"mode": "read_only"}'
 
   # GitHub Actions example
   escape-cli scans start $PROFILE_ID \
