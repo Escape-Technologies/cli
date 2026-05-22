@@ -104,9 +104,11 @@ func TestDocsSearchIndex_SearchScoresMatches(t *testing.T) {
 	t.Parallel()
 
 	mockIndex := struct {
-		Docs []rawSearchIndexDoc `json:"docs"`
+		Config map[string]any      `json:"config"`
+		Items  []rawSearchIndexDoc `json:"items"`
 	}{
-		Docs: []rawSearchIndexDoc{
+		Config: map[string]any{"lang": "en"},
+		Items: []rawSearchIndexDoc{
 			{Location: "documentation/private-location/", Title: "Private Location", Text: "A private location is a self-hosted scanner tunnel."},
 			{Location: "documentation/api-reference/", Title: "API reference", Text: "Endpoints and payloads."},
 		},

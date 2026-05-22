@@ -15,7 +15,7 @@ import (
 
 const (
 	defaultDocsSiteURL        = "https://docs.escape.tech/"
-	defaultDocsSearchIndexURL = "https://docs.escape.tech/search/search_index.json"
+	defaultDocsSearchIndexURL = "https://docs.escape.tech/search.json"
 	defaultDocsIndexTTL       = 5 * time.Minute
 	maxDocsSnippetChars       = 220
 	maxDocsResultsPerQuery    = 8
@@ -35,7 +35,7 @@ const (
 )
 
 // DocsSearchIndex caches and queries the docs.escape.tech search index built
-// by Docusaurus.
+// by Zensical.
 type DocsSearchIndex struct {
 	docsSiteURL    string
 	searchIndexURL string
@@ -309,14 +309,14 @@ func (d *DocsSearchIndex) fetchDocs(ctx context.Context) ([]indexedDoc, error) {
 	}
 
 	var payload struct {
-		Docs []rawSearchIndexDoc `json:"docs"`
+		Items []rawSearchIndexDoc `json:"items"`
 	}
 	if err := json.NewDecoder(resp.Body).Decode(&payload); err != nil {
 		return nil, fmt.Errorf("decode docs index: %w", err)
 	}
 
-	docs := make([]indexedDoc, 0, len(payload.Docs))
-	for _, raw := range payload.Docs {
+	docs := make([]indexedDoc, 0, len(payload.Items))
+	for _, raw := range payload.Items {
 		if strings.TrimSpace(raw.Location) == "" {
 			continue
 		}
