@@ -23,7 +23,7 @@ type CreateExportWorkflowActionUsingWebhookParameters struct {
 	Url     string                                                          `json:"url"`
 	Format  ENUMPROPERTIESACTIONSITEMS0PROPERTIESPARAMETERSPROPERTIESFORMAT `json:"format"`
 	Headers []CreateExportWorkflowActionUsingWebhookParametersHeadersInner  `json:"headers,omitempty"`
-	// Optional JSON body template string. After substitution, the result is sent as the request body. Use {{payload}} to splice the default export object directly into the template. Use {{payload_string}} to insert a JSON-escaped string literal (e.g., for GitHub Actions workflow_dispatch string inputs). If omitted, the default export object is sent as-is.
+	// Optional JSON body template string. After substitution, the result is sent as the request body. Use {{payload}} to splice the default export object directly into the template. Use {{payload_string}} to insert a JSON-escaped string literal (e.g. for GitHub Actions workflow_dispatch string inputs). If omitted, the default export object is sent as-is.
 	BodyTemplate         *string `json:"bodyTemplate,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
