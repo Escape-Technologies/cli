@@ -386,7 +386,11 @@ CI/CD INTEGRATION:
 		if err != nil {
 			return fmt.Errorf("unable to start scan: %w", err)
 		}
-		out.Print(scan, "Scan started: "+scan.GetId())
+		started := "Scan started: " + scan.GetId()
+		if link := scan.GetLinks().ScanIssues; link != "" {
+			started += "\n  " + link
+		}
+		out.Print(scan, started)
 		if scanStartCmdWatch {
 			err := watchScan(cmd.Context(), scan.GetId())
 			if err != nil {
