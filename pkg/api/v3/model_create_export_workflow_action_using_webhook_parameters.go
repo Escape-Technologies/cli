@@ -20,9 +20,9 @@ var _ MappedNullable = &CreateExportWorkflowActionUsingWebhookParameters{}
 
 // CreateExportWorkflowActionUsingWebhookParameters struct for CreateExportWorkflowActionUsingWebhookParameters
 type CreateExportWorkflowActionUsingWebhookParameters struct {
-	Url     string                                                          `json:"url"`
-	Format  ENUMPROPERTIESACTIONSITEMS0PROPERTIESPARAMETERSPROPERTIESFORMAT `json:"format"`
-	Headers []CreateExportWorkflowActionUsingWebhookParametersHeadersInner  `json:"headers,omitempty"`
+	Url                  string                                                          `json:"url"`
+	Format               ENUMPROPERTIESACTIONSITEMS0PROPERTIESPARAMETERSPROPERTIESFORMAT `json:"format"`
+	Headers              []CreateExportWorkflowActionUsingWebhookParametersHeadersInner  `json:"headers,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
