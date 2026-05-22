@@ -61,6 +61,7 @@ runs:
         GH_ACTION_REF: ${{ github.action_ref }}
       run: |
         set -euo pipefail
+        GH_ACTION_REF="${GH_ACTION_REF#v}"
         ESCAPE_CLI_IMAGE="${ESCAPE_CLI_IMAGE_OVERRIDE:-docker.io/escapetech/cli:${GH_ACTION_REF:-latest}}"
         PROFILE_ID="${INPUT_PROFILE_ID:-}"
         if [ -z "${PROFILE_ID}" ]; then
