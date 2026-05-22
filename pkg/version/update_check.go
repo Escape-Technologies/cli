@@ -21,9 +21,10 @@ type githubRelease struct {
 
 // UpdateInfo stores the cached result of the latest release lookup.
 type UpdateInfo struct {
-	Current   string `json:"current,omitempty"`
-	Latest    string `json:"latest,omitempty"`
-	Available bool   `json:"available,omitempty"`
+	Current    string `json:"current,omitempty"`
+	Latest     string `json:"latest,omitempty"`
+	Available  bool   `json:"available,omitempty"`
+	CheckError string `json:"checkError,omitempty"`
 }
 
 var (
@@ -66,6 +67,8 @@ func getLatestReleaseTag(ctx context.Context) (string, error) {
 	if err != nil {
 		return "", fmt.Errorf("create request: %w", err)
 	}
+	req.Header.Set("Accept", "application/vnd.github+json")
+	req.Header.Set("User-Agent", "escape-cli/"+normalizeVersion(GetVersion().Version))
 
 	resp, err := client.Do(req)
 	if err != nil {
@@ -101,7 +104,13 @@ func CheckForUpdate(parentCtx context.Context) *UpdateInfo {
 		defer cancel()
 
 		latest, err := getLatestReleaseTag(ctx)
-		if err != nil || latest == "" {
+		if err != nil {
+			info.CheckError = err.Error()
+			updateInfo = info
+			return
+		}
+		if latest == "" {
+			info.CheckError = "empty latest release tag"
 			updateInfo = info
 			return
 		}
