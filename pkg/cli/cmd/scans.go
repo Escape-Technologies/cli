@@ -6,6 +6,7 @@ import (
 	"errors"
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/Escape-Technologies/cli/pkg/api/escape"
 	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
@@ -25,6 +26,10 @@ var scanKinds []string
 var scanStatus []string
 var scanSortType string
 var scanSortDirection string
+var scanListAllKinds bool
+var scanListLimit int
+
+var defaultDastScanKinds = []string{"BLST_REST", "BLST_GRAPHQL", "FRONTEND_DAST"}
 
 var scansCmd = &cobra.Command{
 	Use:     "scans",
@@ -64,12 +69,17 @@ var scansListCmd = &cobra.Command{
 	Long: `List Security Scans - Query and Filter Scan History
 
 List all scans across your organization with powerful filtering capabilities.
+By default only DAST scan kinds are returned (REST, GraphQL, WebApp). Use --all-kinds
+to include ASM and other kinds.
+
 Filter by profile, status, date range, scanner type, and more.
 
 FILTER OPTIONS:
   -p, --profile-id    Filter by one or more profile IDs
   -s, --status        Filter by scan status (RUNNING, FINISHED, FAILED, CANCELED)
-  -k, --kind          Filter by scanner type (BLST_REST, BLST_GRAPHQL, FRONTEND_DAST)
+  -k, --kind          Filter by scanner type (overrides the DAST default)
+  --all-kinds         Include ASM and all scan kinds (default: DAST only)
+  --limit             Cap how many scans are fetched (0 = no limit)
   -i, --initiator     Filter by who started the scan (MANUAL, API, SCHEDULED, CI)
   --after             Show scans created after this date (RFC3339 format)
   --before            Show scans created before this date (RFC3339 format)
@@ -104,6 +114,7 @@ ID                                      CREATED AT                           KIN
 			return nil
 		}
 
+		kinds := resolveScanListKinds(cmd)
 		filters := &escape.ListScansFilters{
 			ProfileIDs:    &scanProfileIDs,
 			ProjectIDs:    &scanProjectIDs,
@@ -112,22 +123,20 @@ ID                                      CREATED AT                           KIN
 			Before:        scanBefore,
 			Ignored:       scanIgnored,
 			Initiator:     &scanInitiator,
-			Kinds:         &scanKinds,
+			Kinds:         &kinds,
 			Status:        &scanStatus,
 			SortType:      scanSortType,
 			SortDirection: scanSortDirection,
 		}
-		scans, next, err := escape.ListScans(cmd.Context(), "", filters)
+		allScans, err := fetchAllScans(cmd.Context(), filters, scanListLimit, isPrettyOutput())
 		if err != nil {
-			return fmt.Errorf("unable to list scans: %w", err)
+			return err
 		}
-		allScans := scans
-		for next != nil && *next != "" {
-			scans, next, err = escape.ListScans(cmd.Context(), *next, filters)
-			if err != nil {
-				return fmt.Errorf("unable to list scans: %w", err)
-			}
-			allScans = append(allScans, scans...)
+		if len(scanProfileIDs) > 0 && len(allScans) == 0 {
+			return fmt.Errorf(
+				"no scans found for profile ID(s) %s; verify the profile exists with profiles get",
+				strings.Join(scanProfileIDs, ", "),
+			)
 		}
 		out.Table(allScans, func() []string {
 			res := []string{"ID\tCREATED AT\tKIND\tSTATUS\tPROGRESS\tLINK"}
@@ -799,8 +808,47 @@ unreachable target, schema invalid, etc.). Diagnostic counterpart of
 	},
 }
 
+func resolveScanListKinds(cmd *cobra.Command) []string {
+	if cmd.Flags().Changed("kind") || scanListAllKinds {
+		return scanKinds
+	}
+	return defaultDastScanKinds
+}
+
+func fetchAllScans(
+	ctx context.Context,
+	filters *escape.ListScansFilters,
+	limit int,
+	progress bool,
+) ([]v3.ScanSummarized2, error) {
+	var allScans []v3.ScanSummarized2
+	next := ""
+	page := 0
+	for {
+		page++
+		if progress {
+			out.Log(fmt.Sprintf("Fetching scans (page %d, %d loaded)...", page, len(allScans)))
+		}
+		scans, cursor, err := escape.ListScans(ctx, next, filters)
+		if err != nil {
+			return nil, fmt.Errorf("unable to list scans: %w", err)
+		}
+		allScans = append(allScans, scans...)
+		if limit > 0 && len(allScans) >= limit {
+			return allScans[:limit], nil
+		}
+		if cursor == nil || *cursor == "" {
+			break
+		}
+		next = *cursor
+	}
+	return allScans, nil
+}
+
 func init() {
 	scansCmd.AddCommand(scansListCmd)
+	scansListCmd.Flags().BoolVar(&scanListAllKinds, "all-kinds", false, "include ASM and all scan kinds (default: DAST kinds only)")
+	scansListCmd.Flags().IntVar(&scanListLimit, "limit", 0, "maximum number of scans to return (0 = no limit)")
 	scansListCmd.PersistentFlags().StringSliceVarP(&scanProfileIDs, "profile-id", "p", []string{}, "filter by profile ID(s) - comma-separated for multiple")
 	scansListCmd.PersistentFlags().StringSliceVar(&scanProjectIDs, "project-id", []string{}, "filter by project ID(s)")
 	scansListCmd.PersistentFlags().StringSliceVarP(&scanAssetIDs, "asset-id", "a", []string{}, "filter by asset ID(s) - comma-separated for multiple")
