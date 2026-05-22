@@ -85,6 +85,33 @@ func TestHumanizeAPIErrorPassesThroughNil(t *testing.T) {
 // that the CLI actually receives from the public API client. The body is
 // poked in via unsafe because the generated struct's fields are unexported
 // and there is no exported constructor.
+func TestHumanizeAPIErrorMapsUnauthorized(t *testing.T) {
+	t.Parallel()
+	apiErr := newTestGenericOpenAPIErrorWithStatus(
+		[]byte(`{"error":"Unauthorized","message":"Authorization header is missing or you are not authorized to access this resource"}`),
+		"401 Unauthorized",
+	)
+	got := humanizeAPIError(apiErr)
+	if got == nil {
+		t.Fatal("expected humanized error, got nil")
+	}
+	if got.Error() != InvalidAPIKeyMessage {
+		t.Fatalf("expected %q, got %q", InvalidAPIKeyMessage, got.Error())
+	}
+	if !IsInvalidAPIKey(got) {
+		t.Fatal("expected humanized error to keep invalid API key detection")
+	}
+}
+
+func TestIsInvalidAPIKeyDetectsWrappedChain(t *testing.T) {
+	t.Parallel()
+	apiErr := newTestGenericOpenAPIErrorWithStatus([]byte(`{"message":"Not authorized."}`), "401 Unauthorized")
+	wrapped := fmt.Errorf("failed to execute command: %w", fmt.Errorf("unable to update private location on Escape Platform: %w", fmt.Errorf("unable to create location: %w", humanizeAPIError(apiErr))))
+	if !IsInvalidAPIKey(wrapped) {
+		t.Fatal("expected invalid API key error in wrapped chain")
+	}
+}
+
 func TestHumanizeAPIErrorHumanizesGeneratedAPIError(t *testing.T) {
 	t.Parallel()
 	apiErr := newTestGenericOpenAPIError(
@@ -159,12 +186,16 @@ func TestHumanizeAPIErrorPreservesChain(t *testing.T) {
 // populated via unsafe; the layout must mirror the generated definition
 // exactly. This is only ever used in tests.
 func newTestGenericOpenAPIError(body []byte) *v3.GenericOpenAPIError {
+	return newTestGenericOpenAPIErrorWithStatus(body, "")
+}
+
+func newTestGenericOpenAPIErrorWithStatus(body []byte, status string) *v3.GenericOpenAPIError {
 	type genericOpenAPIError struct {
 		body  []byte
 		error string
 		model interface{}
 	}
-	e := genericOpenAPIError{body: body}
+	e := genericOpenAPIError{body: body, error: status}
 	return (*v3.GenericOpenAPIError)(unsafe.Pointer(&e))
 }
 

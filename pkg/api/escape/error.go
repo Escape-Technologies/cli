@@ -4,8 +4,16 @@ package escape
 import (
 	"encoding/json"
 	"errors"
+	"strings"
 
 	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
+)
+
+const (
+	// InvalidAPIKeyMessage is the user-facing error when the API rejects credentials.
+	InvalidAPIKeyMessage = "Invalid API Key."
+	// InvalidAPIKeyHint tells users where to retrieve a valid API key.
+	InvalidAPIKeyHint = "Get your key here: https://app.escape.tech/user/profile/"
 )
 
 // apiErrorBody mirrors the {message, details} shape returned by the public API
@@ -47,11 +55,33 @@ func humanizeAPIError(err error) error {
 	if !errors.As(err, &apiErr) || apiErr == nil {
 		return err
 	}
+	if isUnauthorizedAPIError(apiErr) {
+		return &humanizedAPIError{msg: InvalidAPIKeyMessage, err: err}
+	}
 	msg := humanizeAPIErrorBody(apiErr.Body())
 	if msg == "" {
 		return err
 	}
 	return &humanizedAPIError{msg: msg, err: err}
+}
+
+// IsInvalidAPIKey reports whether err was produced by an unauthorized API response.
+func IsInvalidAPIKey(err error) bool {
+	var apiErr *v3.GenericOpenAPIError
+	return errors.As(err, &apiErr) && isUnauthorizedAPIError(apiErr)
+}
+
+func isUnauthorizedAPIError(apiErr *v3.GenericOpenAPIError) bool {
+	if apiErr == nil {
+		return false
+	}
+	if strings.Contains(apiErr.Error(), "401") {
+		return true
+	}
+	normalized := strings.ToLower(humanizeAPIErrorBody(apiErr.Body()))
+	return strings.Contains(normalized, "not authorized") ||
+		strings.Contains(normalized, "no valid access token") ||
+		strings.Contains(normalized, "unauthorized")
 }
 
 // humanizeAPIErrorBody parses a public-API error response body and returns the
