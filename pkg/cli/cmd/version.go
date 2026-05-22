@@ -20,7 +20,11 @@ and build date. Use this to verify your installation and check for updates.`,
   escape-cli version -o json`,
 	Run: func(c *cobra.Command, _ []string) {
 		v := version.GetDetailedVersion(c.Context())
-		out.Print(v, v.String())
+		text := v.String()
+		if rootCmdVerbose > 0 && v.UpdateCheckError != "" {
+			text += "\n  Check error:  " + v.UpdateCheckError
+		}
+		out.Print(v, text)
 	},
 }
 

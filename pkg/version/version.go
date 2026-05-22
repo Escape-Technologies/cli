@@ -22,8 +22,9 @@ type V struct {
 	Commit         string `json:"commit"`
 	BuildDate      string `json:"buildDate"`
 	InstallMethod  string `json:"installMethod,omitempty"`
-	LatestVersion  string `json:"latestVersion,omitempty"`
-	UpgradeCommand string `json:"upgradeCommand,omitempty"`
+	LatestVersion     string `json:"latestVersion,omitempty"`
+	UpgradeCommand    string `json:"upgradeCommand,omitempty"`
+	UpdateCheckError  string `json:"updateCheckError,omitempty"`
 }
 
 // GetVersion returns the version information
@@ -43,6 +44,7 @@ func GetDetailedVersion(ctx context.Context) V {
 
 	v.InstallMethod = string(installInfo.Method)
 	v.LatestVersion = updateInfo.Latest
+	v.UpdateCheckError = updateInfo.CheckError
 	if updateInfo.Available {
 		v.UpgradeCommand = UpgradeCommand(installInfo.Method, updateInfo.Latest)
 	}
