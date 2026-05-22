@@ -20,8 +20,8 @@ var _ MappedNullable = &CreateExportWorkflowActionUsingWebhookParametersHeadersI
 
 // CreateExportWorkflowActionUsingWebhookParametersHeadersInner struct for CreateExportWorkflowActionUsingWebhookParametersHeadersInner
 type CreateExportWorkflowActionUsingWebhookParametersHeadersInner struct {
-	Name                 string `json:"name" validate:"regexp=^[^\\\\r\\\\n]+$"`
-	Value                string `json:"value" validate:"regexp=^[^\\\\r\\\\n]+$"`
+	Name                 string `json:"name"`
+	Value                string `json:"value"`
 	AdditionalProperties map[string]interface{}
 }
 
