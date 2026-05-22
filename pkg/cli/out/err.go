@@ -4,10 +4,22 @@ import (
 	"errors"
 	"fmt"
 	"strings"
+
+	"github.com/Escape-Technologies/cli/pkg/api/escape"
+	"github.com/Escape-Technologies/cli/pkg/log"
 )
 
 // PrintError prints an error stack trace
 func PrintError(err error) {
+	if escape.IsInvalidAPIKey(err) {
+		fmt.Println("Error:")
+		fmt.Printf("  %s\n", escape.InvalidAPIKeyMessage)
+		fmt.Printf("  %s\n", escape.InvalidAPIKeyHint)
+		if log.IsVerbose() {
+			printError(err)
+		}
+		return
+	}
 	fmt.Println("Error:")
 	printError(err)
 }

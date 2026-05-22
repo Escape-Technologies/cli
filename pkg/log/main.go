@@ -29,6 +29,11 @@ func SetLevel(level logrus.Level) {
 	log.SetLevel(level)
 }
 
+// IsVerbose reports whether debug-level output is enabled.
+func IsVerbose() bool {
+	return log.GetLevel() >= logrus.DebugLevel
+}
+
 func doLog(level logrus.Level, format string, args ...any) {
 	line := fmt.Sprintf(format, args...)
 	log.Logf(level, format, args...)
