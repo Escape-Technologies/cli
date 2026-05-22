@@ -10,6 +10,8 @@ import (
 
 const (
 	uuidRegex = `^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$`
+	// APIKeyHint tells users where to retrieve a valid API key.
+	APIKeyHint = "Get your key here: https://app.escape.tech/user/profile/"
 )
 
 var uuidRegexp = regexp.MustCompile(uuidRegex)
@@ -25,7 +27,7 @@ func validateUUIDKey(key string) error {
 func GetAPIKey() (string, error) {
 	key := os.Getenv("ESCAPE_API_KEY")
 	if key == "" {
-		return "", errors.New("ESCAPE_API_KEY environment variable is not set")
+		return "", errors.New("ESCAPE_API_KEY environment variable is not set. " + APIKeyHint)
 	}
 	err := validateUUIDKey(key)
 	if err != nil {
