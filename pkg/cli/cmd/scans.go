@@ -34,9 +34,6 @@ var defaultScanKinds = []string{
 	"BLST_GRAPHQL",
 	"FRONTEND_DAST",
 	"AUTOMATED_PENTEST",
-	"AUTOMATED_PENTEST_REST",
-	"AUTOMATED_PENTEST_GRAPHQL",
-	"AUTOMATED_PENTEST_WEBAPP",
 }
 
 var scansCmd = &cobra.Command{
