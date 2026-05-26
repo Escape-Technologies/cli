@@ -95,9 +95,6 @@ SCANNER TYPES:
   • BLST_GRAPHQL               - GraphQL API security testing
   • FRONTEND_DAST              - Web application security testing
   • AUTOMATED_PENTEST          - AI Pentesting
-  • AUTOMATED_PENTEST_REST     - REST AI Pentesting
-  • AUTOMATED_PENTEST_GRAPHQL  - GraphQL AI Pentesting
-  • AUTOMATED_PENTEST_WEBAPP   - Web application AI Pentesting
 
 Example output:
 ID                                      CREATED AT                           KIND           STATUS      PROGRESS    LINK
@@ -879,7 +876,7 @@ func init() {
 	scansListCmd.PersistentFlags().StringVar(&scanBefore, "before", "", "show scans created before this date (RFC3339 format)")
 	scansListCmd.PersistentFlags().StringVar(&scanIgnored, "ignored", "", "filter by ignored status (true/false)")
 	scansListCmd.PersistentFlags().StringSliceVarP(&scanInitiator, "initiator", "i", []string{}, "filter by initiator: MANUAL, API, SCHEDULED, CI")
-	scansListCmd.PersistentFlags().StringSliceVarP(&scanKinds, "kind", "k", []string{}, "filter by scanner type: BLST_REST, BLST_GRAPHQL, FRONTEND_DAST, AUTOMATED_PENTEST, AUTOMATED_PENTEST_REST, AUTOMATED_PENTEST_GRAPHQL, AUTOMATED_PENTEST_WEBAPP")
+	scansListCmd.PersistentFlags().StringSliceVarP(&scanKinds, "kind", "k", []string{}, "filter by scanner type: BLST_REST, BLST_GRAPHQL, FRONTEND_DAST, AUTOMATED_PENTEST")
 	scansListCmd.PersistentFlags().StringSliceVarP(&scanStatus, "status", "s", []string{}, "filter by status: STARTING, RUNNING, FINISHED, FAILED, CANCELED")
 	scansListCmd.PersistentFlags().StringVar(&scanSortType, "sort-by", "", "sort field (e.g., createdAt)")
 	scansListCmd.PersistentFlags().StringVar(&scanSortDirection, "sort-direction", "", "sort direction: asc, desc")
@@ -909,7 +906,7 @@ func init() {
 	scansProblemsCmd.PersistentFlags().StringVar(&scanBefore, "before", "", "show scans created before this date (RFC3339 format)")
 	scansProblemsCmd.PersistentFlags().StringVar(&scanIgnored, "ignored", "", "filter by ignored status (true/false)")
 	scansProblemsCmd.PersistentFlags().StringSliceVarP(&scanInitiator, "initiator", "i", []string{}, "filter by initiator: MANUAL, API, SCHEDULED, CI")
-	scansProblemsCmd.PersistentFlags().StringSliceVarP(&scanKinds, "kind", "k", []string{}, "filter by scanner type: BLST_REST, BLST_GRAPHQL, FRONTEND_DAST, AUTOMATED_PENTEST, AUTOMATED_PENTEST_REST, AUTOMATED_PENTEST_GRAPHQL, AUTOMATED_PENTEST_WEBAPP")
+	scansProblemsCmd.PersistentFlags().StringSliceVarP(&scanKinds, "kind", "k", []string{}, "filter by scanner type: BLST_REST, BLST_GRAPHQL, FRONTEND_DAST, AUTOMATED_PENTEST")
 	scansProblemsCmd.PersistentFlags().StringSliceVarP(&scanStatus, "status", "s", []string{}, "filter by status: STARTING, RUNNING, FINISHED, FAILED, CANCELED")
 	scansProblemsCmd.PersistentFlags().StringVar(&scanSortType, "sort-by", "", "sort field (e.g., createdAt)")
 	scansProblemsCmd.PersistentFlags().StringVar(&scanSortDirection, "sort-direction", "", "sort direction: asc, desc")
