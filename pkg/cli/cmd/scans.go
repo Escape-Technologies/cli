@@ -29,7 +29,15 @@ var scanSortDirection string
 var scanListAllKinds bool
 var scanListLimit int
 
-var defaultDastScanKinds = []string{"BLST_REST", "BLST_GRAPHQL", "FRONTEND_DAST"}
+var defaultScanKinds = []string{
+	"BLST_REST",
+	"BLST_GRAPHQL",
+	"FRONTEND_DAST",
+	"AUTOMATED_PENTEST",
+	"AUTOMATED_PENTEST_REST",
+	"AUTOMATED_PENTEST_GRAPHQL",
+	"AUTOMATED_PENTEST_WEBAPP",
+}
 
 var scansCmd = &cobra.Command{
 	Use:     "scans",
@@ -69,16 +77,16 @@ var scansListCmd = &cobra.Command{
 	Long: `List Security Scans - Query and Filter Scan History
 
 List all scans across your organization with powerful filtering capabilities.
-By default only DAST scan kinds are returned (REST, GraphQL, WebApp). Use --all-kinds
-to include ASM and other kinds.
+By default DAST and AI Pentesting scan kinds are returned (REST, GraphQL,
+WebApp, and automated pentests). Use --all-kinds to include ASM and other kinds.
 
 Filter by profile, status, date range, scanner type, and more.
 
 FILTER OPTIONS:
   -p, --profile-id    Filter by one or more profile IDs
   -s, --status        Filter by scan status (RUNNING, FINISHED, FAILED, CANCELED)
-  -k, --kind          Filter by scanner type (overrides the DAST default)
-  --all-kinds         Include ASM and all scan kinds (default: DAST only)
+  -k, --kind          Filter by scanner type (overrides the default)
+  --all-kinds         Include ASM and all scan kinds (default: DAST + AI Pentesting)
   --limit             Cap how many scans are fetched (0 = no limit)
   -i, --initiator     Filter by who started the scan (MANUAL, API, SCHEDULED, CI)
   --after             Show scans created after this date (RFC3339 format)
@@ -86,9 +94,13 @@ FILTER OPTIONS:
   --ignored           Filter by ignored status (true/false)
 
 SCANNER TYPES:
-  • BLST_REST         - REST API security testing
-  • BLST_GRAPHQL      - GraphQL API security testing  
-  • FRONTEND_DAST     - Web application security testing
+  • BLST_REST                  - REST API security testing
+  • BLST_GRAPHQL               - GraphQL API security testing
+  • FRONTEND_DAST              - Web application security testing
+  • AUTOMATED_PENTEST          - AI Pentesting
+  • AUTOMATED_PENTEST_REST     - REST AI Pentesting
+  • AUTOMATED_PENTEST_GRAPHQL  - GraphQL AI Pentesting
+  • AUTOMATED_PENTEST_WEBAPP   - Web application AI Pentesting
 
 Example output:
 ID                                      CREATED AT                           KIND           STATUS      PROGRESS    LINK
@@ -114,7 +126,7 @@ ID                                      CREATED AT                           KIN
 			return nil
 		}
 
-		kinds := resolveScanListKinds(cmd)
+		kinds := resolveScanKinds(cmd)
 		filters := &escape.ListScansFilters{
 			ProfileIDs:    &scanProfileIDs,
 			ProjectIDs:    &scanProjectIDs,
@@ -123,7 +135,7 @@ ID                                      CREATED AT                           KIN
 			Before:        scanBefore,
 			Ignored:       scanIgnored,
 			Initiator:     &scanInitiator,
-			Kinds:         &kinds,
+			Kinds:         scanKindsFilter(kinds),
 			Status:        &scanStatus,
 			SortType:      scanSortType,
 			SortDirection: scanSortDirection,
@@ -772,6 +784,7 @@ unreachable target, schema invalid, etc.). Diagnostic counterpart of
 			return nil
 		}
 
+		kinds := resolveScanKinds(cmd)
 		filters := &escape.ListScanProblemsFilters{
 			After:         scanAfter,
 			Before:        scanBefore,
@@ -780,7 +793,7 @@ unreachable target, schema invalid, etc.). Diagnostic counterpart of
 			ProjectIDs:    scanProjectIDs,
 			Ignored:       scanIgnored,
 			Initiator:     scanInitiator,
-			Kinds:         scanKinds,
+			Kinds:         kinds,
 			Status:        scanStatus,
 			SortType:      scanSortType,
 			SortDirection: scanSortDirection,
@@ -808,11 +821,24 @@ unreachable target, schema invalid, etc.). Diagnostic counterpart of
 	},
 }
 
-func resolveScanListKinds(cmd *cobra.Command) []string {
-	if cmd.Flags().Changed("kind") || scanListAllKinds {
+func resolveScanKinds(cmd *cobra.Command) []string {
+	if scanListAllKinds && cmd.Flags().Changed("kind") {
+		_, _ = fmt.Fprintln(cmd.ErrOrStderr(), "Warning: --all-kinds is ignored when --kind is explicitly set")
+	}
+	if cmd.Flags().Changed("kind") {
 		return scanKinds
 	}
-	return defaultDastScanKinds
+	if scanListAllKinds {
+		return nil
+	}
+	return defaultScanKinds
+}
+
+func scanKindsFilter(kinds []string) *[]string {
+	if kinds == nil {
+		return nil
+	}
+	return &kinds
 }
 
 func fetchAllScans(
@@ -847,7 +873,7 @@ func fetchAllScans(
 
 func init() {
 	scansCmd.AddCommand(scansListCmd)
-	scansListCmd.Flags().BoolVar(&scanListAllKinds, "all-kinds", false, "include ASM and all scan kinds (default: DAST kinds only)")
+	scansListCmd.Flags().BoolVar(&scanListAllKinds, "all-kinds", false, "include ASM and all scan kinds (default: DAST and AI Pentesting kinds only)")
 	scansListCmd.Flags().IntVar(&scanListLimit, "limit", 0, "maximum number of scans to return (0 = no limit)")
 	scansListCmd.PersistentFlags().StringSliceVarP(&scanProfileIDs, "profile-id", "p", []string{}, "filter by profile ID(s) - comma-separated for multiple")
 	scansListCmd.PersistentFlags().StringSliceVar(&scanProjectIDs, "project-id", []string{}, "filter by project ID(s)")
@@ -856,7 +882,7 @@ func init() {
 	scansListCmd.PersistentFlags().StringVar(&scanBefore, "before", "", "show scans created before this date (RFC3339 format)")
 	scansListCmd.PersistentFlags().StringVar(&scanIgnored, "ignored", "", "filter by ignored status (true/false)")
 	scansListCmd.PersistentFlags().StringSliceVarP(&scanInitiator, "initiator", "i", []string{}, "filter by initiator: MANUAL, API, SCHEDULED, CI")
-	scansListCmd.PersistentFlags().StringSliceVarP(&scanKinds, "kind", "k", []string{}, "filter by scanner type: BLST_REST, BLST_GRAPHQL, FRONTEND_DAST")
+	scansListCmd.PersistentFlags().StringSliceVarP(&scanKinds, "kind", "k", []string{}, "filter by scanner type: BLST_REST, BLST_GRAPHQL, FRONTEND_DAST, AUTOMATED_PENTEST, AUTOMATED_PENTEST_REST, AUTOMATED_PENTEST_GRAPHQL, AUTOMATED_PENTEST_WEBAPP")
 	scansListCmd.PersistentFlags().StringSliceVarP(&scanStatus, "status", "s", []string{}, "filter by status: STARTING, RUNNING, FINISHED, FAILED, CANCELED")
 	scansListCmd.PersistentFlags().StringVar(&scanSortType, "sort-by", "", "sort field (e.g., createdAt)")
 	scansListCmd.PersistentFlags().StringVar(&scanSortDirection, "sort-direction", "", "sort direction: asc, desc")
@@ -878,6 +904,7 @@ func init() {
 	scanTargetsCmd.Flags().StringVar(&scanTargetsType, "type", "", "filter by target type: API_ROUTE, GRAPHQL_RESOLVER")
 	scanTargetsCmd.Flags().IntVar(&scanTargetsSize, "size", 0, "limit total number of targets returned")
 	scansCmd.AddCommand(scansProblemsCmd)
+	scansProblemsCmd.Flags().BoolVar(&scanListAllKinds, "all-kinds", false, "include ASM and all scan kinds (default: DAST and AI Pentesting kinds only)")
 	scansProblemsCmd.PersistentFlags().StringSliceVarP(&scanProfileIDs, "profile-id", "p", []string{}, "filter by profile ID(s) - comma-separated for multiple")
 	scansProblemsCmd.PersistentFlags().StringSliceVar(&scanProjectIDs, "project-id", []string{}, "filter by project ID(s)")
 	scansProblemsCmd.PersistentFlags().StringSliceVarP(&scanAssetIDs, "asset-id", "a", []string{}, "filter by asset ID(s) - comma-separated for multiple")
@@ -885,7 +912,7 @@ func init() {
 	scansProblemsCmd.PersistentFlags().StringVar(&scanBefore, "before", "", "show scans created before this date (RFC3339 format)")
 	scansProblemsCmd.PersistentFlags().StringVar(&scanIgnored, "ignored", "", "filter by ignored status (true/false)")
 	scansProblemsCmd.PersistentFlags().StringSliceVarP(&scanInitiator, "initiator", "i", []string{}, "filter by initiator: MANUAL, API, SCHEDULED, CI")
-	scansProblemsCmd.PersistentFlags().StringSliceVarP(&scanKinds, "kind", "k", []string{}, "filter by scanner type: BLST_REST, BLST_GRAPHQL, FRONTEND_DAST")
+	scansProblemsCmd.PersistentFlags().StringSliceVarP(&scanKinds, "kind", "k", []string{}, "filter by scanner type: BLST_REST, BLST_GRAPHQL, FRONTEND_DAST, AUTOMATED_PENTEST, AUTOMATED_PENTEST_REST, AUTOMATED_PENTEST_GRAPHQL, AUTOMATED_PENTEST_WEBAPP")
 	scansProblemsCmd.PersistentFlags().StringSliceVarP(&scanStatus, "status", "s", []string{}, "filter by status: STARTING, RUNNING, FINISHED, FAILED, CANCELED")
 	scansProblemsCmd.PersistentFlags().StringVar(&scanSortType, "sort-by", "", "sort field (e.g., createdAt)")
 	scansProblemsCmd.PersistentFlags().StringVar(&scanSortDirection, "sort-direction", "", "sort direction: asc, desc")
