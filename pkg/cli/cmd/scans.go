@@ -388,7 +388,7 @@ CI/CD INTEGRATION:
 		}
 		started := "Scan started: " + scan.GetId()
 		if link := scan.GetLinks().ScanIssues; link != "" {
-			started += "\n  " + link
+			started += "\n  " + out.Link(link)
 		}
 		out.Print(scan, started)
 		if scanStartCmdWatch {

@@ -55,6 +55,12 @@ func escapeText(value string) string { return makeColored(value, "\x1b[38;2;6;22
 func shortEscapeLink(value string) string {
 	return fmt.Sprintf("\x1b]8;;%s\x1b\\%s\x1b]8;;\x1b\\", value, linkText("Link"))
 }
+
+// Link returns the standard clickable link label used in pretty output.
+func Link(value string) string {
+	return shortEscapeLink(value)
+}
+
 func noColor(value string) string { return makeColored(value, "") }
 
 func colorizeBool(value string) string {
