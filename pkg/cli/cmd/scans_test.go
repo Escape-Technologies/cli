@@ -8,8 +8,8 @@ import (
 	"github.com/spf13/cobra"
 )
 
-func TestResolveScanKindsUsesDefaultScanKinds(t *testing.T) {
-	cmd := newScansTestCommand()
+func TestResolveKinds_Defaults(t *testing.T) {
+	cmd := newTestCommand(t)
 
 	got := resolveScanKinds(cmd)
 
@@ -18,8 +18,8 @@ func TestResolveScanKindsUsesDefaultScanKinds(t *testing.T) {
 	}
 }
 
-func TestResolveScanKindsAllKindsDisablesKindFilter(t *testing.T) {
-	cmd := newScansTestCommand()
+func TestResolveKinds_AllKinds(t *testing.T) {
+	cmd := newTestCommand(t)
 	if err := cmd.Flags().Set("all-kinds", "true"); err != nil {
 		t.Fatalf("failed to set all-kinds flag: %v", err)
 	}
@@ -34,8 +34,8 @@ func TestResolveScanKindsAllKindsDisablesKindFilter(t *testing.T) {
 	}
 }
 
-func TestResolveScanKindsKindOverridesAllKinds(t *testing.T) {
-	cmd := newScansTestCommand()
+func TestResolveKinds_KindOverrides(t *testing.T) {
+	cmd := newTestCommand(t)
 	if err := cmd.Flags().Set("all-kinds", "true"); err != nil {
 		t.Fatalf("failed to set all-kinds flag: %v", err)
 	}
@@ -51,7 +51,16 @@ func TestResolveScanKindsKindOverridesAllKinds(t *testing.T) {
 	}
 }
 
-func newScansTestCommand() *cobra.Command {
+func newTestCommand(t *testing.T) *cobra.Command {
+	t.Helper()
+
+	prevKinds := scanKinds
+	prevAllKinds := scanListAllKinds
+	t.Cleanup(func() {
+		scanKinds = prevKinds
+		scanListAllKinds = prevAllKinds
+	})
+
 	scanKinds = []string{}
 	scanListAllKinds = false
 
