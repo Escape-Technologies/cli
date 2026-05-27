@@ -26,7 +26,7 @@ const boldYellowColor = "\x1b[1;33m"
 const dimColor = "\x1b[90m"
 const resetColor = "\x1b[0m"
 
-const startupUpdateTimeout = 200 * time.Millisecond
+const startupUpdateTimeout = 1000 * time.Millisecond
 
 var rootCmd = &cobra.Command{
 	Use:   "escape-cli",
@@ -200,7 +200,8 @@ func resolveUpgrade(ctx context.Context) string {
 
 func isCompletionCommand(cmd *cobra.Command) bool {
 	for c := cmd; c != nil; c = c.Parent() {
-		if c.Name() == "completion" {
+		switch c.Name() {
+		case "completion", cobra.ShellCompRequestCmd, cobra.ShellCompNoDescRequestCmd:
 			return true
 		}
 	}
