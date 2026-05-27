@@ -26,7 +26,7 @@ const boldYellowColor = "\x1b[1;33m"
 const dimColor = "\x1b[90m"
 const resetColor = "\x1b[0m"
 
-const startupUpdateTimeout = 200 * time.Millisecond
+const startupUpdateTimeout = 1000 * time.Millisecond
 
 var rootCmd = &cobra.Command{
 	Use:   "escape-cli",
@@ -75,7 +75,9 @@ DOCUMENTATION:
 			return fmt.Errorf("failed to set output format: %w", err)
 		}
 		out.SetInputSchema(rootCmdInputSchema)
-		printStartupHeader(cmd.Context())
+		if !isCompletionCommand(cmd) {
+			printStartupHeader(cmd.Context())
+		}
 		return nil
 	},
 	RunE: func(cmd *cobra.Command, _ []string) error {
@@ -194,6 +196,16 @@ func resolveUpgrade(ctx context.Context) string {
 	case <-checkCtx.Done():
 		return ""
 	}
+}
+
+func isCompletionCommand(cmd *cobra.Command) bool {
+	for c := cmd; c != nil; c = c.Parent() {
+		switch c.Name() {
+		case "completion", cobra.ShellCompRequestCmd, cobra.ShellCompNoDescRequestCmd:
+			return true
+		}
+	}
+	return false
 }
 
 func isPrettyOutput() bool {
