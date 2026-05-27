@@ -75,7 +75,9 @@ DOCUMENTATION:
 			return fmt.Errorf("failed to set output format: %w", err)
 		}
 		out.SetInputSchema(rootCmdInputSchema)
-		printStartupHeader(cmd.Context())
+		if !isCompletionCommand(cmd) {
+			printStartupHeader(cmd.Context())
+		}
 		return nil
 	},
 	RunE: func(cmd *cobra.Command, _ []string) error {
@@ -194,6 +196,15 @@ func resolveUpgrade(ctx context.Context) string {
 	case <-checkCtx.Done():
 		return ""
 	}
+}
+
+func isCompletionCommand(cmd *cobra.Command) bool {
+	for c := cmd; c != nil; c = c.Parent() {
+		if c.Name() == "completion" {
+			return true
+		}
+	}
+	return false
 }
 
 func isPrettyOutput() bool {
