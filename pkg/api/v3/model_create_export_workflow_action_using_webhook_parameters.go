@@ -22,6 +22,7 @@ var _ MappedNullable = &CreateExportWorkflowActionUsingWebhookParameters{}
 type CreateExportWorkflowActionUsingWebhookParameters struct {
 	Url                  string                                                          `json:"url"`
 	Format               ENUMPROPERTIESACTIONSITEMS0PROPERTIESPARAMETERSPROPERTIESFORMAT `json:"format"`
+	Headers              []CreateExportWorkflowActionUsingWebhookParametersHeadersInner  `json:"headers,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -94,6 +95,38 @@ func (o *CreateExportWorkflowActionUsingWebhookParameters) SetFormat(v ENUMPROPE
 	o.Format = v
 }
 
+// GetHeaders returns the Headers field value if set, zero value otherwise.
+func (o *CreateExportWorkflowActionUsingWebhookParameters) GetHeaders() []CreateExportWorkflowActionUsingWebhookParametersHeadersInner {
+	if o == nil || IsNil(o.Headers) {
+		var ret []CreateExportWorkflowActionUsingWebhookParametersHeadersInner
+		return ret
+	}
+	return o.Headers
+}
+
+// GetHeadersOk returns a tuple with the Headers field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateExportWorkflowActionUsingWebhookParameters) GetHeadersOk() ([]CreateExportWorkflowActionUsingWebhookParametersHeadersInner, bool) {
+	if o == nil || IsNil(o.Headers) {
+		return nil, false
+	}
+	return o.Headers, true
+}
+
+// HasHeaders returns a boolean if a field has been set.
+func (o *CreateExportWorkflowActionUsingWebhookParameters) HasHeaders() bool {
+	if o != nil && !IsNil(o.Headers) {
+		return true
+	}
+
+	return false
+}
+
+// SetHeaders gets a reference to the given []CreateExportWorkflowActionUsingWebhookParametersHeadersInner and assigns it to the Headers field.
+func (o *CreateExportWorkflowActionUsingWebhookParameters) SetHeaders(v []CreateExportWorkflowActionUsingWebhookParametersHeadersInner) {
+	o.Headers = v
+}
+
 func (o CreateExportWorkflowActionUsingWebhookParameters) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -106,6 +139,9 @@ func (o CreateExportWorkflowActionUsingWebhookParameters) ToMap() (map[string]in
 	toSerialize := map[string]interface{}{}
 	toSerialize["url"] = o.Url
 	toSerialize["format"] = o.Format
+	if !IsNil(o.Headers) {
+		toSerialize["headers"] = o.Headers
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -152,6 +188,7 @@ func (o *CreateExportWorkflowActionUsingWebhookParameters) UnmarshalJSON(data []
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "url")
 		delete(additionalProperties, "format")
+		delete(additionalProperties, "headers")
 		o.AdditionalProperties = additionalProperties
 	}
 
