@@ -21,7 +21,7 @@ const (
 	classifierTimeoutMSEnv = "MCP_CLASSIFIER_TIMEOUT_MS"
 	classifierTopKEnv      = "MCP_CLASSIFIER_TOP_K"
 
-	defaultClassifierModel     = "gpt-5-nano"
+	defaultClassifierModel     = "gpt-5.4-nano"
 	defaultClassifierTimeoutMS = 2000
 	defaultClassifierTopK      = 15
 
