@@ -74,7 +74,7 @@ func RegisterKnowledgeTools(server *mcpserver.MCPServer, opts KnowledgeOptions) 
 			mcpgo.Description("Maximum number of documentation matches to return."),
 		),
 		// Read-only lookup: the default annotations (destructive=true) discourage
-		// reasoning models (KIMIK2THINKING etc.) from calling the tool even when
+		// reasoning models (DEEPSEEKV32 etc.) from calling the tool even when
 		// the system prompt explicitly asks them to.
 		mcpgo.WithReadOnlyHintAnnotation(true),
 		mcpgo.WithDestructiveHintAnnotation(false),
