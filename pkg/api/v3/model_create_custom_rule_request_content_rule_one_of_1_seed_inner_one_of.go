@@ -25,7 +25,7 @@ type CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf struct {
 	NewPage              *bool    `json:"new_page,omitempty"`
 	Url                  string   `json:"url"`
 	Timeout              *float32 `json:"timeout,omitempty"`
-	SkipScope            *bool    `json:"skip_scope,omitempty"`
+	VerifyScope          *bool    `json:"verify_scope,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -194,36 +194,36 @@ func (o *CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf) SetTimeout(v fl
 	o.Timeout = &v
 }
 
-// GetSkipScope returns the SkipScope field value if set, zero value otherwise.
-func (o *CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf) GetSkipScope() bool {
-	if o == nil || IsNil(o.SkipScope) {
+// GetVerifyScope returns the VerifyScope field value if set, zero value otherwise.
+func (o *CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf) GetVerifyScope() bool {
+	if o == nil || IsNil(o.VerifyScope) {
 		var ret bool
 		return ret
 	}
-	return *o.SkipScope
+	return *o.VerifyScope
 }
 
-// GetSkipScopeOk returns a tuple with the SkipScope field value if set, nil otherwise
+// GetVerifyScopeOk returns a tuple with the VerifyScope field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf) GetSkipScopeOk() (*bool, bool) {
-	if o == nil || IsNil(o.SkipScope) {
+func (o *CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf) GetVerifyScopeOk() (*bool, bool) {
+	if o == nil || IsNil(o.VerifyScope) {
 		return nil, false
 	}
-	return o.SkipScope, true
+	return o.VerifyScope, true
 }
 
-// HasSkipScope returns a boolean if a field has been set.
-func (o *CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf) HasSkipScope() bool {
-	if o != nil && !IsNil(o.SkipScope) {
+// HasVerifyScope returns a boolean if a field has been set.
+func (o *CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf) HasVerifyScope() bool {
+	if o != nil && !IsNil(o.VerifyScope) {
 		return true
 	}
 
 	return false
 }
 
-// SetSkipScope gets a reference to the given bool and assigns it to the SkipScope field.
-func (o *CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf) SetSkipScope(v bool) {
-	o.SkipScope = &v
+// SetVerifyScope gets a reference to the given bool and assigns it to the VerifyScope field.
+func (o *CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf) SetVerifyScope(v bool) {
+	o.VerifyScope = &v
 }
 
 func (o CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf) MarshalJSON() ([]byte, error) {
@@ -247,8 +247,8 @@ func (o CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf) ToMap() (map[str
 	if !IsNil(o.Timeout) {
 		toSerialize["timeout"] = o.Timeout
 	}
-	if !IsNil(o.SkipScope) {
-		toSerialize["skip_scope"] = o.SkipScope
+	if !IsNil(o.VerifyScope) {
+		toSerialize["verify_scope"] = o.VerifyScope
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -299,7 +299,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf) UnmarshalJSON(d
 		delete(additionalProperties, "new_page")
 		delete(additionalProperties, "url")
 		delete(additionalProperties, "timeout")
-		delete(additionalProperties, "skip_scope")
+		delete(additionalProperties, "verify_scope")
 		o.AdditionalProperties = additionalProperties
 	}
 
