@@ -29,10 +29,8 @@ type GetProfile200ResponseConfigurationExperimental struct {
 	XssAgentModelAlias             *ENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS `json:"xss_agent_model_alias,omitempty"`
 	SqliAgentModelAlias            *ENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS `json:"sqli_agent_model_alias,omitempty"`
 	AsmCveAgent                    *bool                                                                          `json:"asm_cve_agent,omitempty"`
-	JsAnalysis                     *bool                                                                          `json:"js_analysis,omitempty"`
 	ExtendedPortScan               *bool                                                                          `json:"extended_port_scan,omitempty"`
 	DastMultiAgentPentest          *bool                                                                          `json:"dast_multi_agent_pentest,omitempty"`
-	FileUploadSecurityTesting      *bool                                                                          `json:"file_upload_security_testing,omitempty"`
 	FeatureFlags                   []string                                                                       `json:"feature_flags,omitempty"`
 	AdditionalProperties           map[string]interface{}
 }
@@ -376,38 +374,6 @@ func (o *GetProfile200ResponseConfigurationExperimental) SetAsmCveAgent(v bool) 
 	o.AsmCveAgent = &v
 }
 
-// GetJsAnalysis returns the JsAnalysis field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationExperimental) GetJsAnalysis() bool {
-	if o == nil || IsNil(o.JsAnalysis) {
-		var ret bool
-		return ret
-	}
-	return *o.JsAnalysis
-}
-
-// GetJsAnalysisOk returns a tuple with the JsAnalysis field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationExperimental) GetJsAnalysisOk() (*bool, bool) {
-	if o == nil || IsNil(o.JsAnalysis) {
-		return nil, false
-	}
-	return o.JsAnalysis, true
-}
-
-// HasJsAnalysis returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationExperimental) HasJsAnalysis() bool {
-	if o != nil && !IsNil(o.JsAnalysis) {
-		return true
-	}
-
-	return false
-}
-
-// SetJsAnalysis gets a reference to the given bool and assigns it to the JsAnalysis field.
-func (o *GetProfile200ResponseConfigurationExperimental) SetJsAnalysis(v bool) {
-	o.JsAnalysis = &v
-}
-
 // GetExtendedPortScan returns the ExtendedPortScan field value if set, zero value otherwise.
 func (o *GetProfile200ResponseConfigurationExperimental) GetExtendedPortScan() bool {
 	if o == nil || IsNil(o.ExtendedPortScan) {
@@ -470,38 +436,6 @@ func (o *GetProfile200ResponseConfigurationExperimental) HasDastMultiAgentPentes
 // SetDastMultiAgentPentest gets a reference to the given bool and assigns it to the DastMultiAgentPentest field.
 func (o *GetProfile200ResponseConfigurationExperimental) SetDastMultiAgentPentest(v bool) {
 	o.DastMultiAgentPentest = &v
-}
-
-// GetFileUploadSecurityTesting returns the FileUploadSecurityTesting field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationExperimental) GetFileUploadSecurityTesting() bool {
-	if o == nil || IsNil(o.FileUploadSecurityTesting) {
-		var ret bool
-		return ret
-	}
-	return *o.FileUploadSecurityTesting
-}
-
-// GetFileUploadSecurityTestingOk returns a tuple with the FileUploadSecurityTesting field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationExperimental) GetFileUploadSecurityTestingOk() (*bool, bool) {
-	if o == nil || IsNil(o.FileUploadSecurityTesting) {
-		return nil, false
-	}
-	return o.FileUploadSecurityTesting, true
-}
-
-// HasFileUploadSecurityTesting returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationExperimental) HasFileUploadSecurityTesting() bool {
-	if o != nil && !IsNil(o.FileUploadSecurityTesting) {
-		return true
-	}
-
-	return false
-}
-
-// SetFileUploadSecurityTesting gets a reference to the given bool and assigns it to the FileUploadSecurityTesting field.
-func (o *GetProfile200ResponseConfigurationExperimental) SetFileUploadSecurityTesting(v bool) {
-	o.FileUploadSecurityTesting = &v
 }
 
 // GetFeatureFlags returns the FeatureFlags field value if set, zero value otherwise.
@@ -576,17 +510,11 @@ func (o GetProfile200ResponseConfigurationExperimental) ToMap() (map[string]inte
 	if !IsNil(o.AsmCveAgent) {
 		toSerialize["asm_cve_agent"] = o.AsmCveAgent
 	}
-	if !IsNil(o.JsAnalysis) {
-		toSerialize["js_analysis"] = o.JsAnalysis
-	}
 	if !IsNil(o.ExtendedPortScan) {
 		toSerialize["extended_port_scan"] = o.ExtendedPortScan
 	}
 	if !IsNil(o.DastMultiAgentPentest) {
 		toSerialize["dast_multi_agent_pentest"] = o.DastMultiAgentPentest
-	}
-	if !IsNil(o.FileUploadSecurityTesting) {
-		toSerialize["file_upload_security_testing"] = o.FileUploadSecurityTesting
 	}
 	if !IsNil(o.FeatureFlags) {
 		toSerialize["feature_flags"] = o.FeatureFlags
@@ -623,10 +551,8 @@ func (o *GetProfile200ResponseConfigurationExperimental) UnmarshalJSON(data []by
 		delete(additionalProperties, "xss_agent_model_alias")
 		delete(additionalProperties, "sqli_agent_model_alias")
 		delete(additionalProperties, "asm_cve_agent")
-		delete(additionalProperties, "js_analysis")
 		delete(additionalProperties, "extended_port_scan")
 		delete(additionalProperties, "dast_multi_agent_pentest")
-		delete(additionalProperties, "file_upload_security_testing")
 		delete(additionalProperties, "feature_flags")
 		o.AdditionalProperties = additionalProperties
 	}
