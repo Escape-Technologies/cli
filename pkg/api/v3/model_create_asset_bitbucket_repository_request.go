@@ -39,6 +39,7 @@ type CreateAssetBITBUCKETREPOSITORYRequest struct {
 	WorkspaceName        *string                                         `json:"workspace_name,omitempty"`
 	RepositoryName       *string                                         `json:"repository_name,omitempty"`
 	IsPrivate            *bool                                           `json:"is_private,omitempty"`
+	Archived             *bool                                           `json:"archived,omitempty"`
 	Org                  *CreateAssetBITBUCKETREPOSITORYRequestOrg       `json:"org,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -617,6 +618,38 @@ func (o *CreateAssetBITBUCKETREPOSITORYRequest) SetIsPrivate(v bool) {
 	o.IsPrivate = &v
 }
 
+// GetArchived returns the Archived field value if set, zero value otherwise.
+func (o *CreateAssetBITBUCKETREPOSITORYRequest) GetArchived() bool {
+	if o == nil || IsNil(o.Archived) {
+		var ret bool
+		return ret
+	}
+	return *o.Archived
+}
+
+// GetArchivedOk returns a tuple with the Archived field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetBITBUCKETREPOSITORYRequest) GetArchivedOk() (*bool, bool) {
+	if o == nil || IsNil(o.Archived) {
+		return nil, false
+	}
+	return o.Archived, true
+}
+
+// HasArchived returns a boolean if a field has been set.
+func (o *CreateAssetBITBUCKETREPOSITORYRequest) HasArchived() bool {
+	if o != nil && !IsNil(o.Archived) {
+		return true
+	}
+
+	return false
+}
+
+// SetArchived gets a reference to the given bool and assigns it to the Archived field.
+func (o *CreateAssetBITBUCKETREPOSITORYRequest) SetArchived(v bool) {
+	o.Archived = &v
+}
+
 // GetOrg returns the Org field value if set, zero value otherwise.
 func (o *CreateAssetBITBUCKETREPOSITORYRequest) GetOrg() CreateAssetBITBUCKETREPOSITORYRequestOrg {
 	if o == nil || IsNil(o.Org) {
@@ -707,6 +740,9 @@ func (o CreateAssetBITBUCKETREPOSITORYRequest) ToMap() (map[string]interface{}, 
 	if !IsNil(o.IsPrivate) {
 		toSerialize["is_private"] = o.IsPrivate
 	}
+	if !IsNil(o.Archived) {
+		toSerialize["archived"] = o.Archived
+	}
 	if !IsNil(o.Org) {
 		toSerialize["org"] = o.Org
 	}
@@ -773,6 +809,7 @@ func (o *CreateAssetBITBUCKETREPOSITORYRequest) UnmarshalJSON(data []byte) (err 
 		delete(additionalProperties, "workspace_name")
 		delete(additionalProperties, "repository_name")
 		delete(additionalProperties, "is_private")
+		delete(additionalProperties, "archived")
 		delete(additionalProperties, "org")
 		o.AdditionalProperties = additionalProperties
 	}
