@@ -23,8 +23,10 @@ type UpdateProfileRequest struct {
 	Name *string `json:"name,omitempty"`
 	// The description of the profile
 	Description *string `json:"description,omitempty"`
-	// The cron of the profile
+	// Deprecated: use `schedule.cron` instead.
+	// Deprecated
 	Cron                 *string                            `json:"cron,omitempty"`
+	Schedule             *ProfileScheduleUpdateInput        `json:"schedule,omitempty"`
 	ExtraAssetIds        *UpdateProfileRequestExtraAssetIds `json:"extraAssetIds,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -113,6 +115,7 @@ func (o *UpdateProfileRequest) SetDescription(v string) {
 }
 
 // GetCron returns the Cron field value if set, zero value otherwise.
+// Deprecated
 func (o *UpdateProfileRequest) GetCron() string {
 	if o == nil || IsNil(o.Cron) {
 		var ret string
@@ -123,6 +126,7 @@ func (o *UpdateProfileRequest) GetCron() string {
 
 // GetCronOk returns a tuple with the Cron field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *UpdateProfileRequest) GetCronOk() (*string, bool) {
 	if o == nil || IsNil(o.Cron) {
 		return nil, false
@@ -140,8 +144,41 @@ func (o *UpdateProfileRequest) HasCron() bool {
 }
 
 // SetCron gets a reference to the given string and assigns it to the Cron field.
+// Deprecated
 func (o *UpdateProfileRequest) SetCron(v string) {
 	o.Cron = &v
+}
+
+// GetSchedule returns the Schedule field value if set, zero value otherwise.
+func (o *UpdateProfileRequest) GetSchedule() ProfileScheduleUpdateInput {
+	if o == nil || IsNil(o.Schedule) {
+		var ret ProfileScheduleUpdateInput
+		return ret
+	}
+	return *o.Schedule
+}
+
+// GetScheduleOk returns a tuple with the Schedule field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateProfileRequest) GetScheduleOk() (*ProfileScheduleUpdateInput, bool) {
+	if o == nil || IsNil(o.Schedule) {
+		return nil, false
+	}
+	return o.Schedule, true
+}
+
+// HasSchedule returns a boolean if a field has been set.
+func (o *UpdateProfileRequest) HasSchedule() bool {
+	if o != nil && !IsNil(o.Schedule) {
+		return true
+	}
+
+	return false
+}
+
+// SetSchedule gets a reference to the given ProfileScheduleUpdateInput and assigns it to the Schedule field.
+func (o *UpdateProfileRequest) SetSchedule(v ProfileScheduleUpdateInput) {
+	o.Schedule = &v
 }
 
 // GetExtraAssetIds returns the ExtraAssetIds field value if set, zero value otherwise.
@@ -195,6 +232,9 @@ func (o UpdateProfileRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Cron) {
 		toSerialize["cron"] = o.Cron
 	}
+	if !IsNil(o.Schedule) {
+		toSerialize["schedule"] = o.Schedule
+	}
 	if !IsNil(o.ExtraAssetIds) {
 		toSerialize["extraAssetIds"] = o.ExtraAssetIds
 	}
@@ -223,6 +263,7 @@ func (o *UpdateProfileRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "description")
 		delete(additionalProperties, "cron")
+		delete(additionalProperties, "schedule")
 		delete(additionalProperties, "extraAssetIds")
 		o.AdditionalProperties = additionalProperties
 	}

@@ -25,8 +25,10 @@ type CreateDastRestProfileRequest struct {
 	// The scan configuration encoded as a JSON string (legacy public API contract).
 	Configuration       *string                                          `json:"configuration,omitempty"`
 	ConfigurationObject *CreateDastRestProfileRequestConfigurationObject `json:"configurationObject,omitempty"`
-	// The cron string
-	Cron *string `json:"cron,omitempty"`
+	// Deprecated: use `schedule.cron` instead.
+	// Deprecated
+	Cron     *string                     `json:"cron,omitempty"`
+	Schedule *ProfileScheduleCreateInput `json:"schedule,omitempty"`
 	// The name of the profile
 	Name string `json:"name"`
 	// The description of the profile
@@ -161,6 +163,7 @@ func (o *CreateDastRestProfileRequest) SetConfigurationObject(v CreateDastRestPr
 }
 
 // GetCron returns the Cron field value if set, zero value otherwise.
+// Deprecated
 func (o *CreateDastRestProfileRequest) GetCron() string {
 	if o == nil || IsNil(o.Cron) {
 		var ret string
@@ -171,6 +174,7 @@ func (o *CreateDastRestProfileRequest) GetCron() string {
 
 // GetCronOk returns a tuple with the Cron field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *CreateDastRestProfileRequest) GetCronOk() (*string, bool) {
 	if o == nil || IsNil(o.Cron) {
 		return nil, false
@@ -188,8 +192,41 @@ func (o *CreateDastRestProfileRequest) HasCron() bool {
 }
 
 // SetCron gets a reference to the given string and assigns it to the Cron field.
+// Deprecated
 func (o *CreateDastRestProfileRequest) SetCron(v string) {
 	o.Cron = &v
+}
+
+// GetSchedule returns the Schedule field value if set, zero value otherwise.
+func (o *CreateDastRestProfileRequest) GetSchedule() ProfileScheduleCreateInput {
+	if o == nil || IsNil(o.Schedule) {
+		var ret ProfileScheduleCreateInput
+		return ret
+	}
+	return *o.Schedule
+}
+
+// GetScheduleOk returns a tuple with the Schedule field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateDastRestProfileRequest) GetScheduleOk() (*ProfileScheduleCreateInput, bool) {
+	if o == nil || IsNil(o.Schedule) {
+		return nil, false
+	}
+	return o.Schedule, true
+}
+
+// HasSchedule returns a boolean if a field has been set.
+func (o *CreateDastRestProfileRequest) HasSchedule() bool {
+	if o != nil && !IsNil(o.Schedule) {
+		return true
+	}
+
+	return false
+}
+
+// SetSchedule gets a reference to the given ProfileScheduleCreateInput and assigns it to the Schedule field.
+func (o *CreateDastRestProfileRequest) SetSchedule(v ProfileScheduleCreateInput) {
+	o.Schedule = &v
 }
 
 // GetName returns the Name field value
@@ -492,6 +529,9 @@ func (o CreateDastRestProfileRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Cron) {
 		toSerialize["cron"] = o.Cron
 	}
+	if !IsNil(o.Schedule) {
+		toSerialize["schedule"] = o.Schedule
+	}
 	toSerialize["name"] = o.Name
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
@@ -565,6 +605,7 @@ func (o *CreateDastRestProfileRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "configuration")
 		delete(additionalProperties, "configurationObject")
 		delete(additionalProperties, "cron")
+		delete(additionalProperties, "schedule")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "description")
 		delete(additionalProperties, "proxyId")
