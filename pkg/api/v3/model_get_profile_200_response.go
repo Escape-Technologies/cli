@@ -31,8 +31,10 @@ type GetProfile200Response struct {
 	// The date and time the profile was created
 	CreatedAt string `json:"createdAt"`
 	// The date and time the profile was updated
-	UpdatedAt string `json:"updatedAt"`
-	// The cron of the profile
+	UpdatedAt string           `json:"updatedAt"`
+	Schedule  *ProfileSchedule `json:"schedule,omitempty"`
+	// Deprecated: use `schedule.cron` instead.
+	// Deprecated
 	Cron *string `json:"cron,omitempty"`
 	// The date and time the profile is scheduled for deletion
 	ScheduledForDeletionAt *string `json:"scheduledForDeletionAt,omitempty"`
@@ -238,7 +240,40 @@ func (o *GetProfile200Response) SetUpdatedAt(v string) {
 	o.UpdatedAt = v
 }
 
+// GetSchedule returns the Schedule field value if set, zero value otherwise.
+func (o *GetProfile200Response) GetSchedule() ProfileSchedule {
+	if o == nil || IsNil(o.Schedule) {
+		var ret ProfileSchedule
+		return ret
+	}
+	return *o.Schedule
+}
+
+// GetScheduleOk returns a tuple with the Schedule field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200Response) GetScheduleOk() (*ProfileSchedule, bool) {
+	if o == nil || IsNil(o.Schedule) {
+		return nil, false
+	}
+	return o.Schedule, true
+}
+
+// HasSchedule returns a boolean if a field has been set.
+func (o *GetProfile200Response) HasSchedule() bool {
+	if o != nil && !IsNil(o.Schedule) {
+		return true
+	}
+
+	return false
+}
+
+// SetSchedule gets a reference to the given ProfileSchedule and assigns it to the Schedule field.
+func (o *GetProfile200Response) SetSchedule(v ProfileSchedule) {
+	o.Schedule = &v
+}
+
 // GetCron returns the Cron field value if set, zero value otherwise.
+// Deprecated
 func (o *GetProfile200Response) GetCron() string {
 	if o == nil || IsNil(o.Cron) {
 		var ret string
@@ -249,6 +284,7 @@ func (o *GetProfile200Response) GetCron() string {
 
 // GetCronOk returns a tuple with the Cron field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *GetProfile200Response) GetCronOk() (*string, bool) {
 	if o == nil || IsNil(o.Cron) {
 		return nil, false
@@ -266,6 +302,7 @@ func (o *GetProfile200Response) HasCron() bool {
 }
 
 // SetCron gets a reference to the given string and assigns it to the Cron field.
+// Deprecated
 func (o *GetProfile200Response) SetCron(v string) {
 	o.Cron = &v
 }
@@ -756,6 +793,9 @@ func (o GetProfile200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize["scannerKind"] = o.ScannerKind
 	toSerialize["createdAt"] = o.CreatedAt
 	toSerialize["updatedAt"] = o.UpdatedAt
+	if !IsNil(o.Schedule) {
+		toSerialize["schedule"] = o.Schedule
+	}
 	if !IsNil(o.Cron) {
 		toSerialize["cron"] = o.Cron
 	}
@@ -855,6 +895,7 @@ func (o *GetProfile200Response) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "scannerKind")
 		delete(additionalProperties, "createdAt")
 		delete(additionalProperties, "updatedAt")
+		delete(additionalProperties, "schedule")
 		delete(additionalProperties, "cron")
 		delete(additionalProperties, "scheduledForDeletionAt")
 		delete(additionalProperties, "score")

@@ -30,7 +30,9 @@ type ProfileSummarized struct {
 	CreatedAt string `json:"createdAt"`
 	// The initiators of the profile
 	Initiators []ENUMPROPERTIESDATAITEMSPROPERTIESINITIATORSITEMS `json:"initiators"`
-	// The cron of the profile
+	Schedule   *ProfileSchedule                                   `json:"schedule,omitempty"`
+	// Deprecated: use `schedule.cron` instead.
+	// Deprecated
 	Cron *string `json:"cron,omitempty"`
 	// Schema asset id derived from the first `extraAssets` entry with class SCHEMA, or the legacy `assetSchemaId` when the link is not yet visible in `extraAssets`.
 	SchemaAssetId *string `json:"schemaAssetId,omitempty"`
@@ -196,7 +198,40 @@ func (o *ProfileSummarized) SetInitiators(v []ENUMPROPERTIESDATAITEMSPROPERTIESI
 	o.Initiators = v
 }
 
+// GetSchedule returns the Schedule field value if set, zero value otherwise.
+func (o *ProfileSummarized) GetSchedule() ProfileSchedule {
+	if o == nil || IsNil(o.Schedule) {
+		var ret ProfileSchedule
+		return ret
+	}
+	return *o.Schedule
+}
+
+// GetScheduleOk returns a tuple with the Schedule field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileSummarized) GetScheduleOk() (*ProfileSchedule, bool) {
+	if o == nil || IsNil(o.Schedule) {
+		return nil, false
+	}
+	return o.Schedule, true
+}
+
+// HasSchedule returns a boolean if a field has been set.
+func (o *ProfileSummarized) HasSchedule() bool {
+	if o != nil && !IsNil(o.Schedule) {
+		return true
+	}
+
+	return false
+}
+
+// SetSchedule gets a reference to the given ProfileSchedule and assigns it to the Schedule field.
+func (o *ProfileSummarized) SetSchedule(v ProfileSchedule) {
+	o.Schedule = &v
+}
+
 // GetCron returns the Cron field value if set, zero value otherwise.
+// Deprecated
 func (o *ProfileSummarized) GetCron() string {
 	if o == nil || IsNil(o.Cron) {
 		var ret string
@@ -207,6 +242,7 @@ func (o *ProfileSummarized) GetCron() string {
 
 // GetCronOk returns a tuple with the Cron field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *ProfileSummarized) GetCronOk() (*string, bool) {
 	if o == nil || IsNil(o.Cron) {
 		return nil, false
@@ -224,6 +260,7 @@ func (o *ProfileSummarized) HasCron() bool {
 }
 
 // SetCron gets a reference to the given string and assigns it to the Cron field.
+// Deprecated
 func (o *ProfileSummarized) SetCron(v string) {
 	o.Cron = &v
 }
@@ -475,6 +512,9 @@ func (o ProfileSummarized) ToMap() (map[string]interface{}, error) {
 	toSerialize["description"] = o.Description
 	toSerialize["createdAt"] = o.CreatedAt
 	toSerialize["initiators"] = o.Initiators
+	if !IsNil(o.Schedule) {
+		toSerialize["schedule"] = o.Schedule
+	}
 	if !IsNil(o.Cron) {
 		toSerialize["cron"] = o.Cron
 	}
@@ -551,6 +591,7 @@ func (o *ProfileSummarized) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "description")
 		delete(additionalProperties, "createdAt")
 		delete(additionalProperties, "initiators")
+		delete(additionalProperties, "schedule")
 		delete(additionalProperties, "cron")
 		delete(additionalProperties, "schemaAssetId")
 		delete(additionalProperties, "extraAssets")
