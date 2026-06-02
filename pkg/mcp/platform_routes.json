@@ -55,7 +55,7 @@
   { "path": "/pentest/", "tokens": ["pentest"] },
   { "path": "/pentest/create/", "tokens": ["pentest", "create"] },
   { "path": "/pentest/profiles/", "tokens": ["pentest", "profiles"] },
-  { "path": "/pentest/scans/", "tokens": ["pentest", "scans"] },
+  { "path": "/pentest/assessments/", "tokens": ["pentest", "assessments", "scans"] },
   { "path": "/profiles/", "tokens": ["profiles"] },
   { "path": "/profiles/custom-rules/", "tokens": ["profiles", "custom", "rules"] },
   { "path": "/profiles/scans/", "tokens": ["profiles", "scans"] },
