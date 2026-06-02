@@ -61,6 +61,11 @@ func Link(value string) string {
 	return shortEscapeLink(value)
 }
 
+// LinkURL renders a hyperlink with the URL as visible text (for messages, not tables).
+func LinkURL(value string) string {
+	return fmt.Sprintf("\x1b]8;;%s\x1b\\%s\x1b]8;;\x1b\\", value, linkText(value))
+}
+
 func noColor(value string) string { return makeColored(value, "") }
 
 func colorizeBool(value string) string {
