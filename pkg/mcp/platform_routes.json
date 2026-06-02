@@ -53,6 +53,7 @@
   },
   { "path": "/organization/tags/", "tokens": ["organization", "tags"] },
   { "path": "/pentest/", "tokens": ["pentest"] },
+  { "path": "/pentest/assessments/", "tokens": ["pentest", "assessments"] },
   { "path": "/pentest/create/", "tokens": ["pentest", "create"] },
   { "path": "/pentest/profiles/", "tokens": ["pentest", "profiles"] },
   { "path": "/pentest/scans/", "tokens": ["pentest", "scans"] },
