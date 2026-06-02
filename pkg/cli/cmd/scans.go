@@ -386,9 +386,9 @@ CI/CD INTEGRATION:
 		if err != nil {
 			return fmt.Errorf("unable to start scan: %w", err)
 		}
-		started := fmt.Sprintf("Scan started\n  ID:   %s", scan.GetId())
+		started := "Scan started\n  ID:   " + scan.GetId()
 		if link := scan.GetLinks().ScanIssues; link != "" {
-			started += fmt.Sprintf("\n  View: %s", out.LinkURL(link))
+			started += "\n  View: " + out.LinkURL(link)
 		}
 		out.Print(scan, started)
 		if scanStartCmdWatch {
