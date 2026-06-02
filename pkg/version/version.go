@@ -18,13 +18,13 @@ var (
 
 // V Version JSON struct
 type V struct {
-	Version        string `json:"version"`
-	Commit         string `json:"commit"`
-	BuildDate      string `json:"buildDate"`
-	InstallMethod  string `json:"installMethod,omitempty"`
-	LatestVersion     string `json:"latestVersion,omitempty"`
-	UpgradeCommand    string `json:"upgradeCommand,omitempty"`
-	UpdateCheckError  string `json:"updateCheckError,omitempty"`
+	Version          string `json:"version"`
+	Commit           string `json:"commit"`
+	BuildDate        string `json:"buildDate"`
+	InstallMethod    string `json:"installMethod,omitempty"`
+	LatestVersion    string `json:"latestVersion,omitempty"`
+	UpgradeCommand   string `json:"upgradeCommand,omitempty"`
+	UpdateCheckError string `json:"updateCheckError,omitempty"`
 }
 
 // GetVersion returns the version information
