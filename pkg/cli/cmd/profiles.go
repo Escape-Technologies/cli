@@ -123,15 +123,11 @@ profiles only (REST, GraphQL, WEBAPP). Use --all to include pentest profiles.`,
 			allProfiles = append(allProfiles, profiles...)
 		}
 		out.Table(allProfiles, func() []string {
-			result := []string{"ID\tCREATED AT\tASSET TYPE\tINITIATORS\tSCORE\tCOVERAGE\tOPEN ISSUES\tLAST SCAN STATUS\tNAME"}
+			result := []string{"ID\tCREATED AT\tASSET TYPE\tINITIATORS\tSCORE\tOPEN ISSUES\tLAST SCAN STATUS\tNAME"}
 			for _, profile := range allProfiles {
 				score := ""
 				if value, ok := profile.GetScoreOk(); ok {
 					score = fmt.Sprintf("%.2f", *value)
-				}
-				coverage := ""
-				if value, ok := profile.GetCoverageOk(); ok {
-					coverage = fmt.Sprintf("%.2f", *value)
 				}
 				openIssueCount := ""
 				if value, ok := profile.GetOpenIssueCountOk(); ok {
@@ -141,7 +137,7 @@ profiles only (REST, GraphQL, WEBAPP). Use --all to include pentest profiles.`,
 				if value, ok := profile.GetLastScanStatusOk(); ok {
 					lastScanStatus = *value
 				}
-				result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s", profile.GetId(), profile.GetCreatedAt(), profile.Asset.GetType(), profile.GetInitiators(), score, coverage, openIssueCount, lastScanStatus, profile.GetName()))
+				result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s", profile.GetId(), profile.GetCreatedAt(), profile.Asset.GetType(), profile.GetInitiators(), score, openIssueCount, lastScanStatus, profile.GetName()))
 			}
 			return result
 		})
