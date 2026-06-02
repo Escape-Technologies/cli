@@ -53,7 +53,6 @@ type CreateWorkflowFilterUsingCustomFilterOnAssetsFilter struct {
 	ManuallyCreated       *bool                                                                            `json:"manuallyCreated,omitempty"`
 	Sources               []CreateWorkflowFilterUsingCustomFilterOnAssetsFilterSourcesInner                `json:"sources,omitempty"`
 	Visibility            []ENUMPROPERTIESVISIBILITY                                                       `json:"visibility,omitempty"`
-	RepositoryArchived    *bool                                                                            `json:"repositoryArchived,omitempty"`
 	Ports                 []float32                                                                        `json:"ports,omitempty"`
 	Frameworks            []ENUMPROPERTIESFILTERSITEMS3PROPERTIESFILTERPROPERTIESFRAMEWORKSITEMS           `json:"frameworks,omitempty"`
 	PrioritizeFavorites   *bool                                                                            `json:"prioritizeFavorites,omitempty"`
@@ -1172,38 +1171,6 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilter) SetVisibility(v []
 	o.Visibility = v
 }
 
-// GetRepositoryArchived returns the RepositoryArchived field value if set, zero value otherwise.
-func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilter) GetRepositoryArchived() bool {
-	if o == nil || IsNil(o.RepositoryArchived) {
-		var ret bool
-		return ret
-	}
-	return *o.RepositoryArchived
-}
-
-// GetRepositoryArchivedOk returns a tuple with the RepositoryArchived field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilter) GetRepositoryArchivedOk() (*bool, bool) {
-	if o == nil || IsNil(o.RepositoryArchived) {
-		return nil, false
-	}
-	return o.RepositoryArchived, true
-}
-
-// HasRepositoryArchived returns a boolean if a field has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilter) HasRepositoryArchived() bool {
-	if o != nil && !IsNil(o.RepositoryArchived) {
-		return true
-	}
-
-	return false
-}
-
-// SetRepositoryArchived gets a reference to the given bool and assigns it to the RepositoryArchived field.
-func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilter) SetRepositoryArchived(v bool) {
-	o.RepositoryArchived = &v
-}
-
 // GetPorts returns the Ports field value if set, zero value otherwise.
 func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilter) GetPorts() []float32 {
 	if o == nil || IsNil(o.Ports) {
@@ -1572,9 +1539,6 @@ func (o CreateWorkflowFilterUsingCustomFilterOnAssetsFilter) ToMap() (map[string
 	if !IsNil(o.Visibility) {
 		toSerialize["visibility"] = o.Visibility
 	}
-	if !IsNil(o.RepositoryArchived) {
-		toSerialize["repositoryArchived"] = o.RepositoryArchived
-	}
 	if !IsNil(o.Ports) {
 		toSerialize["ports"] = o.Ports
 	}
@@ -1655,7 +1619,6 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnAssetsFilter) UnmarshalJSON(data
 		delete(additionalProperties, "manuallyCreated")
 		delete(additionalProperties, "sources")
 		delete(additionalProperties, "visibility")
-		delete(additionalProperties, "repositoryArchived")
 		delete(additionalProperties, "ports")
 		delete(additionalProperties, "frameworks")
 		delete(additionalProperties, "prioritizeFavorites")
