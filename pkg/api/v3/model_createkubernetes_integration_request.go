@@ -20,8 +20,6 @@ var _ MappedNullable = &CreatekubernetesIntegrationRequest{}
 
 // CreatekubernetesIntegrationRequest struct for CreatekubernetesIntegrationRequest
 type CreatekubernetesIntegrationRequest struct {
-	// The organization ID to create the integration for
-	OrganizationId *string `json:"organizationId,omitempty"`
 	// The name of the integration
 	Name       string                                       `json:"name"`
 	Parameters CreatekubernetesIntegrationRequestParameters `json:"parameters"`
@@ -51,38 +49,6 @@ func NewCreatekubernetesIntegrationRequest(name string, parameters Createkuberne
 func NewCreatekubernetesIntegrationRequestWithDefaults() *CreatekubernetesIntegrationRequest {
 	this := CreatekubernetesIntegrationRequest{}
 	return &this
-}
-
-// GetOrganizationId returns the OrganizationId field value if set, zero value otherwise.
-func (o *CreatekubernetesIntegrationRequest) GetOrganizationId() string {
-	if o == nil || IsNil(o.OrganizationId) {
-		var ret string
-		return ret
-	}
-	return *o.OrganizationId
-}
-
-// GetOrganizationIdOk returns a tuple with the OrganizationId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreatekubernetesIntegrationRequest) GetOrganizationIdOk() (*string, bool) {
-	if o == nil || IsNil(o.OrganizationId) {
-		return nil, false
-	}
-	return o.OrganizationId, true
-}
-
-// HasOrganizationId returns a boolean if a field has been set.
-func (o *CreatekubernetesIntegrationRequest) HasOrganizationId() bool {
-	if o != nil && !IsNil(o.OrganizationId) {
-		return true
-	}
-
-	return false
-}
-
-// SetOrganizationId gets a reference to the given string and assigns it to the OrganizationId field.
-func (o *CreatekubernetesIntegrationRequest) SetOrganizationId(v string) {
-	o.OrganizationId = &v
 }
 
 // GetName returns the Name field value
@@ -207,9 +173,6 @@ func (o CreatekubernetesIntegrationRequest) MarshalJSON() ([]byte, error) {
 
 func (o CreatekubernetesIntegrationRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.OrganizationId) {
-		toSerialize["organizationId"] = o.OrganizationId
-	}
 	toSerialize["name"] = o.Name
 	toSerialize["parameters"] = o.Parameters
 	if !IsNil(o.ProxyId) {
@@ -262,7 +225,6 @@ func (o *CreatekubernetesIntegrationRequest) UnmarshalJSON(data []byte) (err err
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "organizationId")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "parameters")
 		delete(additionalProperties, "proxyId")
