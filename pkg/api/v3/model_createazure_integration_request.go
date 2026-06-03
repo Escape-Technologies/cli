@@ -20,8 +20,6 @@ var _ MappedNullable = &CreateazureIntegrationRequest{}
 
 // CreateazureIntegrationRequest struct for CreateazureIntegrationRequest
 type CreateazureIntegrationRequest struct {
-	// The organization ID to create the integration for
-	OrganizationId *string `json:"organizationId,omitempty"`
 	// The name of the integration
 	Name       string                                  `json:"name"`
 	Parameters CreateazureIntegrationRequestParameters `json:"parameters"`
@@ -51,38 +49,6 @@ func NewCreateazureIntegrationRequest(name string, parameters CreateazureIntegra
 func NewCreateazureIntegrationRequestWithDefaults() *CreateazureIntegrationRequest {
 	this := CreateazureIntegrationRequest{}
 	return &this
-}
-
-// GetOrganizationId returns the OrganizationId field value if set, zero value otherwise.
-func (o *CreateazureIntegrationRequest) GetOrganizationId() string {
-	if o == nil || IsNil(o.OrganizationId) {
-		var ret string
-		return ret
-	}
-	return *o.OrganizationId
-}
-
-// GetOrganizationIdOk returns a tuple with the OrganizationId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateazureIntegrationRequest) GetOrganizationIdOk() (*string, bool) {
-	if o == nil || IsNil(o.OrganizationId) {
-		return nil, false
-	}
-	return o.OrganizationId, true
-}
-
-// HasOrganizationId returns a boolean if a field has been set.
-func (o *CreateazureIntegrationRequest) HasOrganizationId() bool {
-	if o != nil && !IsNil(o.OrganizationId) {
-		return true
-	}
-
-	return false
-}
-
-// SetOrganizationId gets a reference to the given string and assigns it to the OrganizationId field.
-func (o *CreateazureIntegrationRequest) SetOrganizationId(v string) {
-	o.OrganizationId = &v
 }
 
 // GetName returns the Name field value
@@ -207,9 +173,6 @@ func (o CreateazureIntegrationRequest) MarshalJSON() ([]byte, error) {
 
 func (o CreateazureIntegrationRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.OrganizationId) {
-		toSerialize["organizationId"] = o.OrganizationId
-	}
 	toSerialize["name"] = o.Name
 	toSerialize["parameters"] = o.Parameters
 	if !IsNil(o.ProxyId) {
@@ -262,7 +225,6 @@ func (o *CreateazureIntegrationRequest) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "organizationId")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "parameters")
 		delete(additionalProperties, "proxyId")
