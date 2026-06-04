@@ -574,12 +574,12 @@ func writeJSON(w http.ResponseWriter, status int, body any, setNoCache bool) {
 // (this file, defense layer 2 — the credential-exposing one).
 type redirectAllowlist struct {
 	allowedHosts []allowedHost
-	exactURIs    map[string]struct{}
 }
 
 type allowedHost struct {
 	scheme    string
 	host      string
+	path      string
 	wildcard  bool
 	loopback  bool
 	allowPort bool
@@ -604,6 +604,7 @@ func buildRedirectAllowlist(extras []string) *redirectAllowlist {
 		{scheme: "https", host: "cursor.com", wildcard: true},
 		{scheme: "https", host: "cursor.sh"},
 		{scheme: "https", host: "cursor.sh", wildcard: true},
+		{scheme: "cursor", host: "anysphere.cursor-mcp", path: "/oauth/callback"},
 		{scheme: "https", host: "openai.com"},
 		{scheme: "https", host: "openai.com", wildcard: true},
 		{scheme: "https", host: "chatgpt.com"},
@@ -642,22 +643,14 @@ func buildRedirectAllowlist(extras []string) *redirectAllowlist {
 		}
 		hosts = append(hosts, allowedHost{scheme: "https", host: host, wildcard: wildcard})
 	}
-	exact := map[string]struct{}{
-		// Cursor desktop MCP OAuth — uses a custom URI scheme, not https://.
-		"cursor://anysphere.cursor-mcp/oauth/callback": {},
-	}
-	return &redirectAllowlist{allowedHosts: hosts, exactURIs: exact}
+	return &redirectAllowlist{allowedHosts: hosts}
 }
 
 // allow returns true when the URI is permitted by the allowlist.
-// Rejects non-http(s) schemes, userinfo, fragments, and unrecognized hosts,
-// unless the URI is listed verbatim in exactURIs (for custom-scheme clients).
+// Rejects unrecognized schemes, userinfo, fragments, and unrecognized hosts.
 func (a *redirectAllowlist) allow(raw string) bool {
 	if a == nil || raw == "" {
 		return false
-	}
-	if _, ok := a.exactURIs[raw]; ok {
-		return true
 	}
 	u, err := url.Parse(raw)
 	if err != nil {
@@ -667,9 +660,6 @@ func (a *redirectAllowlist) allow(raw string) bool {
 		return false
 	}
 	scheme := strings.ToLower(u.Scheme)
-	if scheme != "http" && scheme != "https" {
-		return false
-	}
 	// net/url.Hostname() already strips brackets from IPv6 literals in
 	// Go ≥1.5, but normalize defensively so the matcher stays identical
 	// in shape to the TS/Node peer (where URL.hostname *does* preserve
@@ -685,6 +675,9 @@ func (a *redirectAllowlist) allow(raw string) bool {
 			continue
 		}
 		if !allowed.allowPort && port != "" {
+			continue
+		}
+		if allowed.path != "" && (u.EscapedPath() != allowed.path || u.RawQuery != "") {
 			continue
 		}
 		if allowed.loopback {
