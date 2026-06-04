@@ -405,6 +405,8 @@ func TestRedirectAllowlist(t *testing.T) {
 		// [::1] don't get rejected at the loopback gate.
 		{"http://[::1]:8080/cb", true},
 		{"https://qa.staging.example/cb", true},
+		// Cursor desktop — custom URI scheme exact match.
+		{"cursor://anysphere.cursor-mcp/oauth/callback", true},
 
 		// Rejected — phishing vectors. One per vendor so a regression
 		// in the apex/wildcard match logic surfaces immediately.
