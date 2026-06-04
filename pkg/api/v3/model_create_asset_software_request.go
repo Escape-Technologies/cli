@@ -23,19 +23,20 @@ type CreateAssetSOFTWARERequest struct {
 	// The list of project IDs bind the asset on.
 	ProjectIds []string `json:"projectIds,omitempty"`
 	// The custom name of the asset. If not provided, the default name will be used.
-	Name                 *string                            `json:"name,omitempty"`
-	AssetClass           ENUMTECHNOLOGY                     `json:"asset_class"`
-	ExtraMetadata        map[string]interface{}             `json:"extra_metadata,omitempty"`
-	ScreenshotS3Key      *string                            `json:"screenshot_s3_key,omitempty"`
-	AssetType            ENUMSOFTWARE                       `json:"asset_type"`
-	TechnologyKey        string                             `json:"technology_key"`
-	Version              *string                            `json:"version,omitempty"`
-	ReferenceUrl         *string                            `json:"reference_url,omitempty"`
-	Cpe                  *string                            `json:"cpe,omitempty"`
-	CpeGuessed           *bool                              `json:"cpe_guessed,omitempty"`
-	WellKnownTechnology  *ENUMPROPERTIESWELLKNOWNTECHNOLOGY `json:"well_known_technology,omitempty"`
-	Description          *string                            `json:"description,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Name                  *string                            `json:"name,omitempty"`
+	AssetClass            ENUMTECHNOLOGY                     `json:"asset_class"`
+	ExtraMetadata         map[string]interface{}             `json:"extra_metadata,omitempty"`
+	ScreenshotS3Key       *string                            `json:"screenshot_s3_key,omitempty"`
+	AssetType             ENUMSOFTWARE                       `json:"asset_type"`
+	TechnologyKey         string                             `json:"technology_key"`
+	Version               *string                            `json:"version,omitempty"`
+	ReferenceUrl          *string                            `json:"reference_url,omitempty"`
+	Cpe                   *string                            `json:"cpe,omitempty"`
+	CpeGuessed            *bool                              `json:"cpe_guessed,omitempty"`
+	WellKnownTechnology   *ENUMPROPERTIESWELLKNOWNTECHNOLOGY `json:"well_known_technology,omitempty"`
+	Description           *string                            `json:"description,omitempty"`
+	EvidenceAttachmentB64 *string                            `json:"evidence_attachment_b64,omitempty"`
+	AdditionalProperties  map[string]interface{}
 }
 
 type _CreateAssetSOFTWARERequest CreateAssetSOFTWARERequest
@@ -452,6 +453,38 @@ func (o *CreateAssetSOFTWARERequest) SetDescription(v string) {
 	o.Description = &v
 }
 
+// GetEvidenceAttachmentB64 returns the EvidenceAttachmentB64 field value if set, zero value otherwise.
+func (o *CreateAssetSOFTWARERequest) GetEvidenceAttachmentB64() string {
+	if o == nil || IsNil(o.EvidenceAttachmentB64) {
+		var ret string
+		return ret
+	}
+	return *o.EvidenceAttachmentB64
+}
+
+// GetEvidenceAttachmentB64Ok returns a tuple with the EvidenceAttachmentB64 field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetSOFTWARERequest) GetEvidenceAttachmentB64Ok() (*string, bool) {
+	if o == nil || IsNil(o.EvidenceAttachmentB64) {
+		return nil, false
+	}
+	return o.EvidenceAttachmentB64, true
+}
+
+// HasEvidenceAttachmentB64 returns a boolean if a field has been set.
+func (o *CreateAssetSOFTWARERequest) HasEvidenceAttachmentB64() bool {
+	if o != nil && !IsNil(o.EvidenceAttachmentB64) {
+		return true
+	}
+
+	return false
+}
+
+// SetEvidenceAttachmentB64 gets a reference to the given string and assigns it to the EvidenceAttachmentB64 field.
+func (o *CreateAssetSOFTWARERequest) SetEvidenceAttachmentB64(v string) {
+	o.EvidenceAttachmentB64 = &v
+}
+
 func (o CreateAssetSOFTWARERequest) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -494,6 +527,9 @@ func (o CreateAssetSOFTWARERequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
+	}
+	if !IsNil(o.EvidenceAttachmentB64) {
+		toSerialize["evidence_attachment_b64"] = o.EvidenceAttachmentB64
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -553,6 +589,7 @@ func (o *CreateAssetSOFTWARERequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "cpe_guessed")
 		delete(additionalProperties, "well_known_technology")
 		delete(additionalProperties, "description")
+		delete(additionalProperties, "evidence_attachment_b64")
 		o.AdditionalProperties = additionalProperties
 	}
 
