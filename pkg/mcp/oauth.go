@@ -590,7 +590,8 @@ type allowedHost struct {
 // for staging/QA. Keep in sync with services/api/src/lib/oauth/redirect-allowlist.ts
 // and services/frontend/src/routes/oauth/mcp/_lib/allowlist.ts (Anthropic +
 // Cowork + Cursor + OpenAI/ChatGPT + Continue.dev + Zed + Windsurf/Codeium,
-// each as apex + wildcard subdomains, HTTPS only).
+// each as apex + wildcard subdomains, HTTPS only). VS Code uses vscode.dev for its static
+// redirect URI fallback when DCR is unsupported.
 func buildRedirectAllowlist(extras []string) *redirectAllowlist {
 	hosts := []allowedHost{
 		{scheme: "http", host: "127.0.0.1", loopback: true, allowPort: true},
@@ -615,6 +616,9 @@ func buildRedirectAllowlist(extras []string) *redirectAllowlist {
 		{scheme: "https", host: "windsurf.com", wildcard: true},
 		{scheme: "https", host: "codeium.com"},
 		{scheme: "https", host: "codeium.com", wildcard: true},
+		// VS Code / GitHub Copilot — static OAuth fallback redirect for non-DCR providers.
+		{scheme: "https", host: "vscode.dev"},
+		{scheme: "https", host: "vscode.dev", wildcard: true},
 	}
 	for _, raw := range extras {
 		host := strings.TrimSpace(raw)

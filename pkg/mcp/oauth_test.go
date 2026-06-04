@@ -407,6 +407,9 @@ func TestRedirectAllowlist(t *testing.T) {
 		{"https://qa.staging.example/cb", true},
 		// Cursor desktop — custom URI scheme exact match.
 		{"cursor://anysphere.cursor-mcp/oauth/callback", true},
+		// VS Code — static HTTPS fallback redirect.
+		{"https://vscode.dev/redirect", true},
+		{"https://insiders.vscode.dev/redirect", true},
 
 		// Rejected — phishing vectors. One per vendor so a regression
 		// in the apex/wildcard match logic surfaces immediately.
