@@ -432,6 +432,9 @@ func TestRedirectAllowlist(t *testing.T) {
 		{"data:text/html,x", false},
 		{"ftp://cowork.ai/cb", false},
 		{"http://claude.ai/cb", false}, // must be https for non-loopback
+		{"cursor://evil.cursor-mcp/oauth/callback", false},
+		{"cursor://anysphere.cursor-mcp/oauth/other", false},
+		{"cursor://anysphere.cursor-mcp/oauth/callback?code=x", false},
 
 		// Rejected — userinfo + fragments.
 		{"https://claude.ai@evil/cb", false},
