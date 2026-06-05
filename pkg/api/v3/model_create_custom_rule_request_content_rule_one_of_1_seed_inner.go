@@ -19,6 +19,7 @@ import (
 // CreateCustomRuleRequestContentRuleOneOf1SeedInner - struct for CreateCustomRuleRequestContentRuleOneOf1SeedInner
 type CreateCustomRuleRequestContentRuleOneOf1SeedInner struct {
 	CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf                                   *CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf
+	CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf1                                  *CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf1
 	GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf   *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf
 	GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf1  *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf1
 	GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10 *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10
@@ -37,6 +38,13 @@ type CreateCustomRuleRequestContentRuleOneOf1SeedInner struct {
 func CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOfAsCreateCustomRuleRequestContentRuleOneOf1SeedInner(v *CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf) CreateCustomRuleRequestContentRuleOneOf1SeedInner {
 	return CreateCustomRuleRequestContentRuleOneOf1SeedInner{
 		CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf: v,
+	}
+}
+
+// CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf1AsCreateCustomRuleRequestContentRuleOneOf1SeedInner is a convenience function that returns CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf1 wrapped in CreateCustomRuleRequestContentRuleOneOf1SeedInner
+func CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf1AsCreateCustomRuleRequestContentRuleOneOf1SeedInner(v *CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf1) CreateCustomRuleRequestContentRuleOneOf1SeedInner {
+	return CreateCustomRuleRequestContentRuleOneOf1SeedInner{
+		CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf1: v,
 	}
 }
 
@@ -143,6 +151,23 @@ func (dst *CreateCustomRuleRequestContentRuleOneOf1SeedInner) UnmarshalJSON(data
 		}
 	} else {
 		dst.CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf = nil
+	}
+
+	// try to unmarshal data into CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf1
+	err = newStrictDecoder(data).Decode(&dst.CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf1)
+	if err == nil {
+		jsonCreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf1, _ := json.Marshal(dst.CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf1)
+		if string(jsonCreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf1) == "{}" { // empty struct
+			dst.CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf1 = nil
+		} else {
+			if err = validator.Validate(dst.CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf1); err != nil {
+				dst.CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf1 = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf1 = nil
 	}
 
 	// try to unmarshal data into GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf
@@ -352,6 +377,7 @@ func (dst *CreateCustomRuleRequestContentRuleOneOf1SeedInner) UnmarshalJSON(data
 	if match > 1 { // more than 1 match
 		// reset to nil
 		dst.CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf = nil
+		dst.CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf1 = nil
 		dst.GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf = nil
 		dst.GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf1 = nil
 		dst.GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf10 = nil
@@ -377,6 +403,10 @@ func (dst *CreateCustomRuleRequestContentRuleOneOf1SeedInner) UnmarshalJSON(data
 func (src CreateCustomRuleRequestContentRuleOneOf1SeedInner) MarshalJSON() ([]byte, error) {
 	if src.CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf != nil {
 		return json.Marshal(&src.CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf)
+	}
+
+	if src.CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf1 != nil {
+		return json.Marshal(&src.CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf1)
 	}
 
 	if src.GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf != nil {
@@ -439,6 +469,10 @@ func (obj *CreateCustomRuleRequestContentRuleOneOf1SeedInner) GetActualInstance(
 		return obj.CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf
 	}
 
+	if obj.CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf1 != nil {
+		return obj.CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf1
+	}
+
 	if obj.GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf != nil {
 		return obj.GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf
 	}
@@ -495,6 +529,10 @@ func (obj *CreateCustomRuleRequestContentRuleOneOf1SeedInner) GetActualInstance(
 func (obj CreateCustomRuleRequestContentRuleOneOf1SeedInner) GetActualInstanceValue() interface{} {
 	if obj.CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf != nil {
 		return *obj.CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf
+	}
+
+	if obj.CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf1 != nil {
+		return *obj.CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf1
 	}
 
 	if obj.GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf != nil {
