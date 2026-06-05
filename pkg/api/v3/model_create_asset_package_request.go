@@ -23,22 +23,21 @@ type CreateAssetPACKAGERequest struct {
 	// The list of project IDs bind the asset on.
 	ProjectIds []string `json:"projectIds,omitempty"`
 	// The custom name of the asset. If not provided, the default name will be used.
-	Name                   *string                            `json:"name,omitempty"`
-	AssetClass             ENUMTECHNOLOGY                     `json:"asset_class"`
-	ExtraMetadata          map[string]interface{}             `json:"extra_metadata,omitempty"`
-	ScreenshotS3Key        *string                            `json:"screenshot_s3_key,omitempty"`
-	AssetType              ENUMPACKAGE                        `json:"asset_type"`
-	TechnologyKey          string                             `json:"technology_key"`
-	Version                *string                            `json:"version,omitempty"`
-	ReferenceUrl           *string                            `json:"reference_url,omitempty"`
-	Cpe                    *string                            `json:"cpe,omitempty"`
-	CpeGuessed             *bool                              `json:"cpe_guessed,omitempty"`
-	WellKnownTechnology    *ENUMPROPERTIESWELLKNOWNTECHNOLOGY `json:"well_known_technology,omitempty"`
-	Description            *string                            `json:"description,omitempty"`
-	EvidenceAttachmentsB64 []string                           `json:"evidence_attachments_b64,omitempty"`
-	Purl                   string                             `json:"purl"`
-	PackageType            ENUMPROPERTIESPACKAGETYPE          `json:"package_type"`
-	AdditionalProperties   map[string]interface{}
+	Name                 *string                            `json:"name,omitempty"`
+	AssetClass           ENUMTECHNOLOGY                     `json:"asset_class"`
+	ExtraMetadata        map[string]interface{}             `json:"extra_metadata,omitempty"`
+	ScreenshotS3Key      *string                            `json:"screenshot_s3_key,omitempty"`
+	AssetType            ENUMPACKAGE                        `json:"asset_type"`
+	TechnologyKey        string                             `json:"technology_key"`
+	Version              *string                            `json:"version,omitempty"`
+	ReferenceUrl         *string                            `json:"reference_url,omitempty"`
+	Cpe                  *string                            `json:"cpe,omitempty"`
+	CpeGuessed           *bool                              `json:"cpe_guessed,omitempty"`
+	WellKnownTechnology  *ENUMPROPERTIESWELLKNOWNTECHNOLOGY `json:"well_known_technology,omitempty"`
+	Description          *string                            `json:"description,omitempty"`
+	Purl                 string                             `json:"purl"`
+	PackageType          ENUMPROPERTIESPACKAGETYPE          `json:"package_type"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateAssetPACKAGERequest CreateAssetPACKAGERequest
@@ -457,38 +456,6 @@ func (o *CreateAssetPACKAGERequest) SetDescription(v string) {
 	o.Description = &v
 }
 
-// GetEvidenceAttachmentsB64 returns the EvidenceAttachmentsB64 field value if set, zero value otherwise.
-func (o *CreateAssetPACKAGERequest) GetEvidenceAttachmentsB64() []string {
-	if o == nil || IsNil(o.EvidenceAttachmentsB64) {
-		var ret []string
-		return ret
-	}
-	return o.EvidenceAttachmentsB64
-}
-
-// GetEvidenceAttachmentsB64Ok returns a tuple with the EvidenceAttachmentsB64 field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateAssetPACKAGERequest) GetEvidenceAttachmentsB64Ok() ([]string, bool) {
-	if o == nil || IsNil(o.EvidenceAttachmentsB64) {
-		return nil, false
-	}
-	return o.EvidenceAttachmentsB64, true
-}
-
-// HasEvidenceAttachmentsB64 returns a boolean if a field has been set.
-func (o *CreateAssetPACKAGERequest) HasEvidenceAttachmentsB64() bool {
-	if o != nil && !IsNil(o.EvidenceAttachmentsB64) {
-		return true
-	}
-
-	return false
-}
-
-// SetEvidenceAttachmentsB64 gets a reference to the given []string and assigns it to the EvidenceAttachmentsB64 field.
-func (o *CreateAssetPACKAGERequest) SetEvidenceAttachmentsB64(v []string) {
-	o.EvidenceAttachmentsB64 = v
-}
-
 // GetPurl returns the Purl field value
 func (o *CreateAssetPACKAGERequest) GetPurl() string {
 	if o == nil {
@@ -580,9 +547,6 @@ func (o CreateAssetPACKAGERequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	if !IsNil(o.EvidenceAttachmentsB64) {
-		toSerialize["evidence_attachments_b64"] = o.EvidenceAttachmentsB64
-	}
 	toSerialize["purl"] = o.Purl
 	toSerialize["package_type"] = o.PackageType
 
@@ -645,7 +609,6 @@ func (o *CreateAssetPACKAGERequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "cpe_guessed")
 		delete(additionalProperties, "well_known_technology")
 		delete(additionalProperties, "description")
-		delete(additionalProperties, "evidence_attachments_b64")
 		delete(additionalProperties, "purl")
 		delete(additionalProperties, "package_type")
 		o.AdditionalProperties = additionalProperties
