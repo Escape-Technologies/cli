@@ -1,4 +1,5 @@
 [
+  { "path": "/ai-pentesting/", "tokens": ["ai", "pentesting"] },
   { "path": "/all-risks/", "tokens": ["all", "risks"] },
   { "path": "/all-risks/issues/", "tokens": ["all", "risks", "issues"] },
   { "path": "/all-risks/next/", "tokens": ["all", "risks", "next"] },
