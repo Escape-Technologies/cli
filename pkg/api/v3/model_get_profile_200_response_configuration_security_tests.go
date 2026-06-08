@@ -203,6 +203,7 @@ type GetProfile200ResponseConfigurationSecurityTests struct {
 	UnusuallyHighOpenPorts                 *GetProfile200ResponseConfigurationSecurityTestsHighNumberOfCustomScalars `json:"unusually_high_open_ports,omitempty"`
 	VueDevelopmentBuild                    *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"vue_development_build,omitempty"`
 	WafBypass                              *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"waf_bypass,omitempty"`
+	WildcardPortsDetected                  *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"wildcard_ports_detected,omitempty"`
 	WordpressOembedEndpointExposed         *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"wordpress_oembed_endpoint_exposed,omitempty"`
 	WordpressRdfFeedUserExposed            *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"wordpress_rdf_feed_user_exposed,omitempty"`
 	WordpressRestApiUsersExposed           *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"wordpress_rest_api_users_exposed,omitempty"`
@@ -6229,6 +6230,38 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) SetWafBypass(v GetProf
 	o.WafBypass = &v
 }
 
+// GetWildcardPortsDetected returns the WildcardPortsDetected field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetWildcardPortsDetected() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.WildcardPortsDetected) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.WildcardPortsDetected
+}
+
+// GetWildcardPortsDetectedOk returns a tuple with the WildcardPortsDetected field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetWildcardPortsDetectedOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.WildcardPortsDetected) {
+		return nil, false
+	}
+	return o.WildcardPortsDetected, true
+}
+
+// HasWildcardPortsDetected returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasWildcardPortsDetected() bool {
+	if o != nil && !IsNil(o.WildcardPortsDetected) {
+		return true
+	}
+
+	return false
+}
+
+// SetWildcardPortsDetected gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the WildcardPortsDetected field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetWildcardPortsDetected(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.WildcardPortsDetected = &v
+}
+
 // GetWordpressOembedEndpointExposed returns the WordpressOembedEndpointExposed field value if set, zero value otherwise.
 func (o *GetProfile200ResponseConfigurationSecurityTests) GetWordpressOembedEndpointExposed() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
 	if o == nil || IsNil(o.WordpressOembedEndpointExposed) {
@@ -10503,6 +10536,9 @@ func (o GetProfile200ResponseConfigurationSecurityTests) ToMap() (map[string]int
 	if !IsNil(o.WafBypass) {
 		toSerialize["waf_bypass"] = o.WafBypass
 	}
+	if !IsNil(o.WildcardPortsDetected) {
+		toSerialize["wildcard_ports_detected"] = o.WildcardPortsDetected
+	}
 	if !IsNil(o.WordpressOembedEndpointExposed) {
 		toSerialize["wordpress_oembed_endpoint_exposed"] = o.WordpressOembedEndpointExposed
 	}
@@ -11057,6 +11093,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) UnmarshalJSON(data []b
 		delete(additionalProperties, "unusually_high_open_ports")
 		delete(additionalProperties, "vue_development_build")
 		delete(additionalProperties, "waf_bypass")
+		delete(additionalProperties, "wildcard_ports_detected")
 		delete(additionalProperties, "wordpress_oembed_endpoint_exposed")
 		delete(additionalProperties, "wordpress_rdf_feed_user_exposed")
 		delete(additionalProperties, "wordpress_rest_api_users_exposed")
