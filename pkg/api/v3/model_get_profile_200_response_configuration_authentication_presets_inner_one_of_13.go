@@ -23,6 +23,7 @@ type GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf13 struct 
 	Type                 ENUMCUSTOMBPCE                                                                                                                                  `json:"type"`
 	Users                []GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf13UsersInner                                                                 `json:"users"`
 	Environment          ENUMPROPERTIESCONFIGURATIONPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS4PROPERTIESPARAMETERSPROPERTIESENVIRONMENT `json:"environment"`
+	EnvironmentOverrides *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf4ParametersEnvironmentOverrides                             `json:"environment_overrides,omitempty"`
 	Extractions          []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfExtractionsInner                                           `json:"extractions,omitempty"`
 	Injections           []GetProfile200ResponseConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner                                                           `json:"injections,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -122,6 +123,38 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf13) Se
 	o.Environment = v
 }
 
+// GetEnvironmentOverrides returns the EnvironmentOverrides field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf13) GetEnvironmentOverrides() GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf4ParametersEnvironmentOverrides {
+	if o == nil || IsNil(o.EnvironmentOverrides) {
+		var ret GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf4ParametersEnvironmentOverrides
+		return ret
+	}
+	return *o.EnvironmentOverrides
+}
+
+// GetEnvironmentOverridesOk returns a tuple with the EnvironmentOverrides field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf13) GetEnvironmentOverridesOk() (*GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf4ParametersEnvironmentOverrides, bool) {
+	if o == nil || IsNil(o.EnvironmentOverrides) {
+		return nil, false
+	}
+	return o.EnvironmentOverrides, true
+}
+
+// HasEnvironmentOverrides returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf13) HasEnvironmentOverrides() bool {
+	if o != nil && !IsNil(o.EnvironmentOverrides) {
+		return true
+	}
+
+	return false
+}
+
+// SetEnvironmentOverrides gets a reference to the given GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf4ParametersEnvironmentOverrides and assigns it to the EnvironmentOverrides field.
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf13) SetEnvironmentOverrides(v GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf4ParametersEnvironmentOverrides) {
+	o.EnvironmentOverrides = &v
+}
+
 // GetExtractions returns the Extractions field value if set, zero value otherwise.
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf13) GetExtractions() []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfExtractionsInner {
 	if o == nil || IsNil(o.Extractions) {
@@ -199,6 +232,9 @@ func (o GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf13) ToM
 	toSerialize["type"] = o.Type
 	toSerialize["users"] = o.Users
 	toSerialize["environment"] = o.Environment
+	if !IsNil(o.EnvironmentOverrides) {
+		toSerialize["environment_overrides"] = o.EnvironmentOverrides
+	}
 	if !IsNil(o.Extractions) {
 		toSerialize["extractions"] = o.Extractions
 	}
@@ -253,6 +289,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf13) Un
 		delete(additionalProperties, "type")
 		delete(additionalProperties, "users")
 		delete(additionalProperties, "environment")
+		delete(additionalProperties, "environment_overrides")
 		delete(additionalProperties, "extractions")
 		delete(additionalProperties, "injections")
 		o.AdditionalProperties = additionalProperties
