@@ -3,6 +3,7 @@
 package dns
 
 import (
+	"fmt"
 	"net"
 
 	"github.com/miekg/dns"
@@ -13,7 +14,7 @@ import (
 func systemResolvers() ([]string, error) {
 	config, err := dns.ClientConfigFromFile("/etc/resolv.conf")
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to read /etc/resolv.conf: %w", err)
 	}
 	port := config.Port
 	if port == "" {
