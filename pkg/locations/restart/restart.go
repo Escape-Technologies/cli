@@ -33,8 +33,9 @@ func Start() {
 
 	finalDelay := jitter(restartTimeoutDuration)
 	log.Debug("Restarting the private location at %s (in %s)", time.Now().Add(finalDelay), finalDelay.String())
-	time.Sleep(restartTimeoutDuration)
+	time.Sleep(finalDelay)
 
 	log.Debug("Restart timeout reached, restarting the private location")
+	time.Sleep(30 * time.Second)
 	os.Exit(0)
 }
