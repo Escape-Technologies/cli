@@ -30,12 +30,16 @@ func Start() {
 		log.Error("Failed to parse ESCAPE_CLI_RESTART_INTERVAL(%s): %v", restartTimeout, err)
 		return
 	}
+	if restartTimeoutDuration <= 0 {
+		log.Error("ESCAPE_CLI_RESTART_INTERVAL must be > 0, got %s", restartTimeoutDuration)
+		return
+	}
 
 	finalDelay := jitter(restartTimeoutDuration)
 	log.Debug("Restarting the private location at %s (in %s)", time.Now().Add(finalDelay), finalDelay.String())
 	time.Sleep(finalDelay)
 
 	log.Debug("Restart timeout reached, restarting the private location")
-	time.Sleep(30 * time.Second)
+	time.Sleep(30 * time.Second) // nolint:mnd
 	os.Exit(0)
 }
