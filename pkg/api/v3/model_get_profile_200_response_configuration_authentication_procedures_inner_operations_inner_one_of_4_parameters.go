@@ -22,6 +22,7 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationAuthenticationProcedur
 type GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf4Parameters struct {
 	ProxyOverride        *string                                                                                                                                         `json:"proxy_override,omitempty"`
 	Environment          ENUMPROPERTIESCONFIGURATIONPROPERTIESAUTHENTICATIONPROPERTIESPROCEDURESITEMSPROPERTIESOPERATIONSITEMS4PROPERTIESPARAMETERSPROPERTIESENVIRONMENT `json:"environment"`
+	EnvironmentOverrides *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf4ParametersEnvironmentOverrides                             `json:"environment_overrides,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -101,6 +102,38 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 	o.Environment = v
 }
 
+// GetEnvironmentOverrides returns the EnvironmentOverrides field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf4Parameters) GetEnvironmentOverrides() GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf4ParametersEnvironmentOverrides {
+	if o == nil || IsNil(o.EnvironmentOverrides) {
+		var ret GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf4ParametersEnvironmentOverrides
+		return ret
+	}
+	return *o.EnvironmentOverrides
+}
+
+// GetEnvironmentOverridesOk returns a tuple with the EnvironmentOverrides field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf4Parameters) GetEnvironmentOverridesOk() (*GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf4ParametersEnvironmentOverrides, bool) {
+	if o == nil || IsNil(o.EnvironmentOverrides) {
+		return nil, false
+	}
+	return o.EnvironmentOverrides, true
+}
+
+// HasEnvironmentOverrides returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf4Parameters) HasEnvironmentOverrides() bool {
+	if o != nil && !IsNil(o.EnvironmentOverrides) {
+		return true
+	}
+
+	return false
+}
+
+// SetEnvironmentOverrides gets a reference to the given GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf4ParametersEnvironmentOverrides and assigns it to the EnvironmentOverrides field.
+func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf4Parameters) SetEnvironmentOverrides(v GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf4ParametersEnvironmentOverrides) {
+	o.EnvironmentOverrides = &v
+}
+
 func (o GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf4Parameters) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -115,6 +148,9 @@ func (o GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperation
 		toSerialize["proxy_override"] = o.ProxyOverride
 	}
 	toSerialize["environment"] = o.Environment
+	if !IsNil(o.EnvironmentOverrides) {
+		toSerialize["environment_overrides"] = o.EnvironmentOverrides
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -160,6 +196,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "proxy_override")
 		delete(additionalProperties, "environment")
+		delete(additionalProperties, "environment_overrides")
 		o.AdditionalProperties = additionalProperties
 	}
 
