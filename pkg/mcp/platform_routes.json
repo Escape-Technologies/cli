@@ -70,6 +70,7 @@
   { "path": "/user/", "tokens": ["user"] },
   { "path": "/user/profile/", "tokens": ["user", "profile"] },
   { "path": "/user/subscription/", "tokens": ["user", "subscription"] },
+  { "path": "/workflows-next/", "tokens": ["workflows", "next"] },
   { "path": "/workflows/", "tokens": ["workflows"] },
   { "path": "/workflows/create/", "tokens": ["workflows", "create"] },
   { "path": "/workflows/history/", "tokens": ["workflows", "history"] },
