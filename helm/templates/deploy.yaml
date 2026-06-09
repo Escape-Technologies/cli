@@ -45,7 +45,7 @@ spec:
             - name: HEALTH_CHECK_PORT
               value: '8080'
             - name: ESCAPE_CLI_RESTART_INTERVAL
-              value: '24h'
+              value: {{ .Values.ESCAPE_CLI_RESTART_INTERVAL | default "24h" | quote }}
             - name: ESCAPE_API_KEY
               {{- if .Values.existingSecret.name }}
               valueFrom:
