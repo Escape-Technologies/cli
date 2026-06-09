@@ -5,17 +5,20 @@ import (
 	"encoding/json"
 
 	"github.com/Escape-Technologies/cli/pkg/log"
+	"github.com/sirupsen/logrus"
 	"golang.org/x/crypto/ssh"
 )
 
 const (
-	maxLogLevel    = 4
 	logChannelSize = 100
 )
 
 type logPayload struct {
 	Message   string `json:"message"`
 	Timestamp int64  `json:"timestamp_ms"`
+
+	// Log levels: trace: 6, debug: 5, info: 4, warn: 3, error: 2, fatal: 1, panic: 0
+	Level *logrus.Level `json:"level,omitempty"`
 }
 
 func sendLogs(ctx context.Context, ch ssh.Channel) {
@@ -37,6 +40,7 @@ func sendLogs(ctx context.Context, ch ssh.Channel) {
 				payload := logPayload{
 					Message:   entry.Message,
 					Timestamp: entry.Timestamp,
+					Level:     &entry.Level,
 				}
 				data, err := json.Marshal(payload)
 				if err != nil {
@@ -51,13 +55,10 @@ func sendLogs(ctx context.Context, ch ssh.Channel) {
 	<-ready
 
 	log.AddHook("monitor", func(entry log.Entry) {
-		// Log levels: trace: 6, debug: 5, info: 4, warn: 3, error: 2, fatal: 1, panic: 0
-		if entry.Level <= maxLogLevel {
-			select {
-			case logChan <- entry:
-			case <-ctx.Done():
-				return
-			}
+		select {
+		case logChan <- entry:
+		case <-ctx.Done():
+			return
 		}
 	})
 }
