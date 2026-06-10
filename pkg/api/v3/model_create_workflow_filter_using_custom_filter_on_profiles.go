@@ -20,8 +20,8 @@ var _ MappedNullable = &CreateWorkflowFilterUsingCustomFilterOnProfiles{}
 
 // CreateWorkflowFilterUsingCustomFilterOnProfiles struct for CreateWorkflowFilterUsingCustomFilterOnProfiles
 type CreateWorkflowFilterUsingCustomFilterOnProfiles struct {
-	Type                 ENUMPROFILES                                          `json:"type"`
-	Filter               CreateWorkflowFilterUsingCustomFilterOnProfilesFilter `json:"filter"`
+	Type                 ENUMPROFILES         `json:"type"`
+	Filter               WorkflowFilterAnyOf3 `json:"filter"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -31,7 +31,7 @@ type _CreateWorkflowFilterUsingCustomFilterOnProfiles CreateWorkflowFilterUsingC
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateWorkflowFilterUsingCustomFilterOnProfiles(type_ ENUMPROFILES, filter CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) *CreateWorkflowFilterUsingCustomFilterOnProfiles {
+func NewCreateWorkflowFilterUsingCustomFilterOnProfiles(type_ ENUMPROFILES, filter WorkflowFilterAnyOf3) *CreateWorkflowFilterUsingCustomFilterOnProfiles {
 	this := CreateWorkflowFilterUsingCustomFilterOnProfiles{}
 	this.Type = type_
 	this.Filter = filter
@@ -71,9 +71,9 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfiles) SetType(v ENUMPROFILES
 }
 
 // GetFilter returns the Filter field value
-func (o *CreateWorkflowFilterUsingCustomFilterOnProfiles) GetFilter() CreateWorkflowFilterUsingCustomFilterOnProfilesFilter {
+func (o *CreateWorkflowFilterUsingCustomFilterOnProfiles) GetFilter() WorkflowFilterAnyOf3 {
 	if o == nil {
-		var ret CreateWorkflowFilterUsingCustomFilterOnProfilesFilter
+		var ret WorkflowFilterAnyOf3
 		return ret
 	}
 
@@ -82,7 +82,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfiles) GetFilter() CreateWork
 
 // GetFilterOk returns a tuple with the Filter field value
 // and a boolean to check if the value has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnProfiles) GetFilterOk() (*CreateWorkflowFilterUsingCustomFilterOnProfilesFilter, bool) {
+func (o *CreateWorkflowFilterUsingCustomFilterOnProfiles) GetFilterOk() (*WorkflowFilterAnyOf3, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -90,7 +90,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfiles) GetFilterOk() (*Create
 }
 
 // SetFilter sets field value
-func (o *CreateWorkflowFilterUsingCustomFilterOnProfiles) SetFilter(v CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) {
+func (o *CreateWorkflowFilterUsingCustomFilterOnProfiles) SetFilter(v WorkflowFilterAnyOf3) {
 	o.Filter = v
 }
 

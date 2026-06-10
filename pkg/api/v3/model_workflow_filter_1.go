@@ -22,6 +22,7 @@ type WorkflowFilter1 struct {
 	WorkflowFilterAnyOf2 *WorkflowFilterAnyOf2
 	WorkflowFilterAnyOf3 *WorkflowFilterAnyOf3
 	WorkflowFilterAnyOf4 *WorkflowFilterAnyOf4
+	WorkflowFilterAnyOf5 *WorkflowFilterAnyOf5
 }
 
 // Unmarshal JSON data into any of the pointers in the struct
@@ -97,6 +98,19 @@ func (dst *WorkflowFilter1) UnmarshalJSON(data []byte) error {
 		dst.WorkflowFilterAnyOf4 = nil
 	}
 
+	// try to unmarshal JSON data into WorkflowFilterAnyOf5
+	err = json.Unmarshal(data, &dst.WorkflowFilterAnyOf5)
+	if err == nil {
+		jsonWorkflowFilterAnyOf5, _ := json.Marshal(dst.WorkflowFilterAnyOf5)
+		if string(jsonWorkflowFilterAnyOf5) == "{}" { // empty struct
+			dst.WorkflowFilterAnyOf5 = nil
+		} else {
+			return nil // data stored in dst.WorkflowFilterAnyOf5, return on the first match
+		}
+	} else {
+		dst.WorkflowFilterAnyOf5 = nil
+	}
+
 	return fmt.Errorf("data failed to match schemas in anyOf(WorkflowFilter1)")
 }
 
@@ -120,6 +134,10 @@ func (src WorkflowFilter1) MarshalJSON() ([]byte, error) {
 
 	if src.WorkflowFilterAnyOf4 != nil {
 		return json.Marshal(&src.WorkflowFilterAnyOf4)
+	}
+
+	if src.WorkflowFilterAnyOf5 != nil {
+		return json.Marshal(&src.WorkflowFilterAnyOf5)
 	}
 
 	return nil, nil // no data in anyOf schemas

@@ -20,9 +20,10 @@ var _ MappedNullable = &WorkflowFilterAnyOf4{}
 // WorkflowFilterAnyOf4 struct for WorkflowFilterAnyOf4
 type WorkflowFilterAnyOf4 struct {
 	Search               *string                                 `json:"search,omitempty"`
-	Enabled              *bool                                   `json:"enabled,omitempty"`
-	Type                 []ENUMPROPERTIESLOCATION1PROPERTIESTYPE `json:"type,omitempty"`
-	Dnf                  interface{}                             `json:"dnf,omitempty"`
+	Kinds                []ENUMPROPERTIESDATAITEMSPROPERTIESKIND `json:"kinds,omitempty"`
+	ProjectIds           []string                                `json:"projectIds,omitempty"`
+	Ids                  []string                                `json:"ids,omitempty"`
+	LocationIds          []string                                `json:"locationIds,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -77,101 +78,132 @@ func (o *WorkflowFilterAnyOf4) SetSearch(v string) {
 	o.Search = &v
 }
 
-// GetEnabled returns the Enabled field value if set, zero value otherwise.
-func (o *WorkflowFilterAnyOf4) GetEnabled() bool {
-	if o == nil || IsNil(o.Enabled) {
-		var ret bool
+// GetKinds returns the Kinds field value if set, zero value otherwise.
+func (o *WorkflowFilterAnyOf4) GetKinds() []ENUMPROPERTIESDATAITEMSPROPERTIESKIND {
+	if o == nil || IsNil(o.Kinds) {
+		var ret []ENUMPROPERTIESDATAITEMSPROPERTIESKIND
 		return ret
 	}
-	return *o.Enabled
+	return o.Kinds
 }
 
-// GetEnabledOk returns a tuple with the Enabled field value if set, nil otherwise
+// GetKindsOk returns a tuple with the Kinds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *WorkflowFilterAnyOf4) GetEnabledOk() (*bool, bool) {
-	if o == nil || IsNil(o.Enabled) {
+func (o *WorkflowFilterAnyOf4) GetKindsOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESKIND, bool) {
+	if o == nil || IsNil(o.Kinds) {
 		return nil, false
 	}
-	return o.Enabled, true
+	return o.Kinds, true
 }
 
-// HasEnabled returns a boolean if a field has been set.
-func (o *WorkflowFilterAnyOf4) HasEnabled() bool {
-	if o != nil && !IsNil(o.Enabled) {
+// HasKinds returns a boolean if a field has been set.
+func (o *WorkflowFilterAnyOf4) HasKinds() bool {
+	if o != nil && !IsNil(o.Kinds) {
 		return true
 	}
 
 	return false
 }
 
-// SetEnabled gets a reference to the given bool and assigns it to the Enabled field.
-func (o *WorkflowFilterAnyOf4) SetEnabled(v bool) {
-	o.Enabled = &v
+// SetKinds gets a reference to the given []ENUMPROPERTIESDATAITEMSPROPERTIESKIND and assigns it to the Kinds field.
+func (o *WorkflowFilterAnyOf4) SetKinds(v []ENUMPROPERTIESDATAITEMSPROPERTIESKIND) {
+	o.Kinds = v
 }
 
-// GetType returns the Type field value if set, zero value otherwise.
-func (o *WorkflowFilterAnyOf4) GetType() []ENUMPROPERTIESLOCATION1PROPERTIESTYPE {
-	if o == nil || IsNil(o.Type) {
-		var ret []ENUMPROPERTIESLOCATION1PROPERTIESTYPE
+// GetProjectIds returns the ProjectIds field value if set, zero value otherwise.
+func (o *WorkflowFilterAnyOf4) GetProjectIds() []string {
+	if o == nil || IsNil(o.ProjectIds) {
+		var ret []string
 		return ret
 	}
-	return o.Type
+	return o.ProjectIds
 }
 
-// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
+// GetProjectIdsOk returns a tuple with the ProjectIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *WorkflowFilterAnyOf4) GetTypeOk() ([]ENUMPROPERTIESLOCATION1PROPERTIESTYPE, bool) {
-	if o == nil || IsNil(o.Type) {
+func (o *WorkflowFilterAnyOf4) GetProjectIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.ProjectIds) {
 		return nil, false
 	}
-	return o.Type, true
+	return o.ProjectIds, true
 }
 
-// HasType returns a boolean if a field has been set.
-func (o *WorkflowFilterAnyOf4) HasType() bool {
-	if o != nil && !IsNil(o.Type) {
+// HasProjectIds returns a boolean if a field has been set.
+func (o *WorkflowFilterAnyOf4) HasProjectIds() bool {
+	if o != nil && !IsNil(o.ProjectIds) {
 		return true
 	}
 
 	return false
 }
 
-// SetType gets a reference to the given []ENUMPROPERTIESLOCATION1PROPERTIESTYPE and assigns it to the Type field.
-func (o *WorkflowFilterAnyOf4) SetType(v []ENUMPROPERTIESLOCATION1PROPERTIESTYPE) {
-	o.Type = v
+// SetProjectIds gets a reference to the given []string and assigns it to the ProjectIds field.
+func (o *WorkflowFilterAnyOf4) SetProjectIds(v []string) {
+	o.ProjectIds = v
 }
 
-// GetDnf returns the Dnf field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *WorkflowFilterAnyOf4) GetDnf() interface{} {
-	if o == nil {
-		var ret interface{}
+// GetIds returns the Ids field value if set, zero value otherwise.
+func (o *WorkflowFilterAnyOf4) GetIds() []string {
+	if o == nil || IsNil(o.Ids) {
+		var ret []string
 		return ret
 	}
-	return o.Dnf
+	return o.Ids
 }
 
-// GetDnfOk returns a tuple with the Dnf field value if set, nil otherwise
+// GetIdsOk returns a tuple with the Ids field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *WorkflowFilterAnyOf4) GetDnfOk() (*interface{}, bool) {
-	if o == nil || IsNil(o.Dnf) {
+func (o *WorkflowFilterAnyOf4) GetIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.Ids) {
 		return nil, false
 	}
-	return &o.Dnf, true
+	return o.Ids, true
 }
 
-// HasDnf returns a boolean if a field has been set.
-func (o *WorkflowFilterAnyOf4) HasDnf() bool {
-	if o != nil && !IsNil(o.Dnf) {
+// HasIds returns a boolean if a field has been set.
+func (o *WorkflowFilterAnyOf4) HasIds() bool {
+	if o != nil && !IsNil(o.Ids) {
 		return true
 	}
 
 	return false
 }
 
-// SetDnf gets a reference to the given interface{} and assigns it to the Dnf field.
-func (o *WorkflowFilterAnyOf4) SetDnf(v interface{}) {
-	o.Dnf = v
+// SetIds gets a reference to the given []string and assigns it to the Ids field.
+func (o *WorkflowFilterAnyOf4) SetIds(v []string) {
+	o.Ids = v
+}
+
+// GetLocationIds returns the LocationIds field value if set, zero value otherwise.
+func (o *WorkflowFilterAnyOf4) GetLocationIds() []string {
+	if o == nil || IsNil(o.LocationIds) {
+		var ret []string
+		return ret
+	}
+	return o.LocationIds
+}
+
+// GetLocationIdsOk returns a tuple with the LocationIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowFilterAnyOf4) GetLocationIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.LocationIds) {
+		return nil, false
+	}
+	return o.LocationIds, true
+}
+
+// HasLocationIds returns a boolean if a field has been set.
+func (o *WorkflowFilterAnyOf4) HasLocationIds() bool {
+	if o != nil && !IsNil(o.LocationIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetLocationIds gets a reference to the given []string and assigns it to the LocationIds field.
+func (o *WorkflowFilterAnyOf4) SetLocationIds(v []string) {
+	o.LocationIds = v
 }
 
 func (o WorkflowFilterAnyOf4) MarshalJSON() ([]byte, error) {
@@ -187,14 +219,17 @@ func (o WorkflowFilterAnyOf4) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Search) {
 		toSerialize["search"] = o.Search
 	}
-	if !IsNil(o.Enabled) {
-		toSerialize["enabled"] = o.Enabled
+	if !IsNil(o.Kinds) {
+		toSerialize["kinds"] = o.Kinds
 	}
-	if !IsNil(o.Type) {
-		toSerialize["type"] = o.Type
+	if !IsNil(o.ProjectIds) {
+		toSerialize["projectIds"] = o.ProjectIds
 	}
-	if o.Dnf != nil {
-		toSerialize["dnf"] = o.Dnf
+	if !IsNil(o.Ids) {
+		toSerialize["ids"] = o.Ids
+	}
+	if !IsNil(o.LocationIds) {
+		toSerialize["locationIds"] = o.LocationIds
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -219,9 +254,10 @@ func (o *WorkflowFilterAnyOf4) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "search")
-		delete(additionalProperties, "enabled")
-		delete(additionalProperties, "type")
-		delete(additionalProperties, "dnf")
+		delete(additionalProperties, "kinds")
+		delete(additionalProperties, "projectIds")
+		delete(additionalProperties, "ids")
+		delete(additionalProperties, "locationIds")
 		o.AdditionalProperties = additionalProperties
 	}
 
