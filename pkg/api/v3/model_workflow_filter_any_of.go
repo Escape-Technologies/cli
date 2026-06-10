@@ -14,11 +14,11 @@ import (
 	"encoding/json"
 )
 
-// checks if the CreateWorkflowFilterUsingCustomFilterOnIssuesFilter type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &CreateWorkflowFilterUsingCustomFilterOnIssuesFilter{}
+// checks if the WorkflowFilterAnyOf type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &WorkflowFilterAnyOf{}
 
-// CreateWorkflowFilterUsingCustomFilterOnIssuesFilter struct for CreateWorkflowFilterUsingCustomFilterOnIssuesFilter
-type CreateWorkflowFilterUsingCustomFilterOnIssuesFilter struct {
+// WorkflowFilterAnyOf struct for WorkflowFilterAnyOf
+type WorkflowFilterAnyOf struct {
 	Severities []ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY                  `json:"severities,omitempty"`
 	Risks      []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS `json:"risks,omitempty"`
 	ProjectIds []string                                                     `json:"projectIds,omitempty"`
@@ -48,30 +48,31 @@ type CreateWorkflowFilterUsingCustomFilterOnIssuesFilter struct {
 	Domains              []string                                                            `json:"domains,omitempty"`
 	IgnoreInventory      *bool                                                               `json:"ignoreInventory,omitempty"`
 	Ignored              *bool                                                               `json:"ignored,omitempty"`
+	Dnf                  interface{}                                                         `json:"dnf,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _CreateWorkflowFilterUsingCustomFilterOnIssuesFilter CreateWorkflowFilterUsingCustomFilterOnIssuesFilter
+type _WorkflowFilterAnyOf WorkflowFilterAnyOf
 
-// NewCreateWorkflowFilterUsingCustomFilterOnIssuesFilter instantiates a new CreateWorkflowFilterUsingCustomFilterOnIssuesFilter object
+// NewWorkflowFilterAnyOf instantiates a new WorkflowFilterAnyOf object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateWorkflowFilterUsingCustomFilterOnIssuesFilter() *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter {
-	this := CreateWorkflowFilterUsingCustomFilterOnIssuesFilter{}
+func NewWorkflowFilterAnyOf() *WorkflowFilterAnyOf {
+	this := WorkflowFilterAnyOf{}
 	return &this
 }
 
-// NewCreateWorkflowFilterUsingCustomFilterOnIssuesFilterWithDefaults instantiates a new CreateWorkflowFilterUsingCustomFilterOnIssuesFilter object
+// NewWorkflowFilterAnyOfWithDefaults instantiates a new WorkflowFilterAnyOf object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCreateWorkflowFilterUsingCustomFilterOnIssuesFilterWithDefaults() *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter {
-	this := CreateWorkflowFilterUsingCustomFilterOnIssuesFilter{}
+func NewWorkflowFilterAnyOfWithDefaults() *WorkflowFilterAnyOf {
+	this := WorkflowFilterAnyOf{}
 	return &this
 }
 
 // GetSeverities returns the Severities field value if set, zero value otherwise.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetSeverities() []ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY {
+func (o *WorkflowFilterAnyOf) GetSeverities() []ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY {
 	if o == nil || IsNil(o.Severities) {
 		var ret []ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY
 		return ret
@@ -81,7 +82,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetSeverities() []
 
 // GetSeveritiesOk returns a tuple with the Severities field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetSeveritiesOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY, bool) {
+func (o *WorkflowFilterAnyOf) GetSeveritiesOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY, bool) {
 	if o == nil || IsNil(o.Severities) {
 		return nil, false
 	}
@@ -89,7 +90,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetSeveritiesOk() 
 }
 
 // HasSeverities returns a boolean if a field has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasSeverities() bool {
+func (o *WorkflowFilterAnyOf) HasSeverities() bool {
 	if o != nil && !IsNil(o.Severities) {
 		return true
 	}
@@ -98,12 +99,12 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasSeverities() bo
 }
 
 // SetSeverities gets a reference to the given []ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY and assigns it to the Severities field.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) SetSeverities(v []ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY) {
+func (o *WorkflowFilterAnyOf) SetSeverities(v []ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY) {
 	o.Severities = v
 }
 
 // GetRisks returns the Risks field value if set, zero value otherwise.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetRisks() []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS {
+func (o *WorkflowFilterAnyOf) GetRisks() []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS {
 	if o == nil || IsNil(o.Risks) {
 		var ret []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS
 		return ret
@@ -113,7 +114,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetRisks() []ENUMP
 
 // GetRisksOk returns a tuple with the Risks field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetRisksOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, bool) {
+func (o *WorkflowFilterAnyOf) GetRisksOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, bool) {
 	if o == nil || IsNil(o.Risks) {
 		return nil, false
 	}
@@ -121,7 +122,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetRisksOk() ([]EN
 }
 
 // HasRisks returns a boolean if a field has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasRisks() bool {
+func (o *WorkflowFilterAnyOf) HasRisks() bool {
 	if o != nil && !IsNil(o.Risks) {
 		return true
 	}
@@ -130,12 +131,12 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasRisks() bool {
 }
 
 // SetRisks gets a reference to the given []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS and assigns it to the Risks field.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) SetRisks(v []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS) {
+func (o *WorkflowFilterAnyOf) SetRisks(v []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS) {
 	o.Risks = v
 }
 
 // GetProjectIds returns the ProjectIds field value if set, zero value otherwise.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetProjectIds() []string {
+func (o *WorkflowFilterAnyOf) GetProjectIds() []string {
 	if o == nil || IsNil(o.ProjectIds) {
 		var ret []string
 		return ret
@@ -145,7 +146,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetProjectIds() []
 
 // GetProjectIdsOk returns a tuple with the ProjectIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetProjectIdsOk() ([]string, bool) {
+func (o *WorkflowFilterAnyOf) GetProjectIdsOk() ([]string, bool) {
 	if o == nil || IsNil(o.ProjectIds) {
 		return nil, false
 	}
@@ -153,7 +154,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetProjectIdsOk() 
 }
 
 // HasProjectIds returns a boolean if a field has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasProjectIds() bool {
+func (o *WorkflowFilterAnyOf) HasProjectIds() bool {
 	if o != nil && !IsNil(o.ProjectIds) {
 		return true
 	}
@@ -162,12 +163,12 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasProjectIds() bo
 }
 
 // SetProjectIds gets a reference to the given []string and assigns it to the ProjectIds field.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) SetProjectIds(v []string) {
+func (o *WorkflowFilterAnyOf) SetProjectIds(v []string) {
 	o.ProjectIds = v
 }
 
 // GetApplicationIds returns the ApplicationIds field value if set, zero value otherwise.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetApplicationIds() []string {
+func (o *WorkflowFilterAnyOf) GetApplicationIds() []string {
 	if o == nil || IsNil(o.ApplicationIds) {
 		var ret []string
 		return ret
@@ -177,7 +178,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetApplicationIds(
 
 // GetApplicationIdsOk returns a tuple with the ApplicationIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetApplicationIdsOk() ([]string, bool) {
+func (o *WorkflowFilterAnyOf) GetApplicationIdsOk() ([]string, bool) {
 	if o == nil || IsNil(o.ApplicationIds) {
 		return nil, false
 	}
@@ -185,7 +186,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetApplicationIdsO
 }
 
 // HasApplicationIds returns a boolean if a field has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasApplicationIds() bool {
+func (o *WorkflowFilterAnyOf) HasApplicationIds() bool {
 	if o != nil && !IsNil(o.ApplicationIds) {
 		return true
 	}
@@ -194,12 +195,12 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasApplicationIds(
 }
 
 // SetApplicationIds gets a reference to the given []string and assigns it to the ApplicationIds field.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) SetApplicationIds(v []string) {
+func (o *WorkflowFilterAnyOf) SetApplicationIds(v []string) {
 	o.ApplicationIds = v
 }
 
 // GetProfileIds returns the ProfileIds field value if set, zero value otherwise.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetProfileIds() []string {
+func (o *WorkflowFilterAnyOf) GetProfileIds() []string {
 	if o == nil || IsNil(o.ProfileIds) {
 		var ret []string
 		return ret
@@ -209,7 +210,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetProfileIds() []
 
 // GetProfileIdsOk returns a tuple with the ProfileIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetProfileIdsOk() ([]string, bool) {
+func (o *WorkflowFilterAnyOf) GetProfileIdsOk() ([]string, bool) {
 	if o == nil || IsNil(o.ProfileIds) {
 		return nil, false
 	}
@@ -217,7 +218,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetProfileIdsOk() 
 }
 
 // HasProfileIds returns a boolean if a field has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasProfileIds() bool {
+func (o *WorkflowFilterAnyOf) HasProfileIds() bool {
 	if o != nil && !IsNil(o.ProfileIds) {
 		return true
 	}
@@ -226,12 +227,12 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasProfileIds() bo
 }
 
 // SetProfileIds gets a reference to the given []string and assigns it to the ProfileIds field.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) SetProfileIds(v []string) {
+func (o *WorkflowFilterAnyOf) SetProfileIds(v []string) {
 	o.ProfileIds = v
 }
 
 // GetAssetIds returns the AssetIds field value if set, zero value otherwise.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetAssetIds() []string {
+func (o *WorkflowFilterAnyOf) GetAssetIds() []string {
 	if o == nil || IsNil(o.AssetIds) {
 		var ret []string
 		return ret
@@ -241,7 +242,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetAssetIds() []st
 
 // GetAssetIdsOk returns a tuple with the AssetIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetAssetIdsOk() ([]string, bool) {
+func (o *WorkflowFilterAnyOf) GetAssetIdsOk() ([]string, bool) {
 	if o == nil || IsNil(o.AssetIds) {
 		return nil, false
 	}
@@ -249,7 +250,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetAssetIdsOk() ([
 }
 
 // HasAssetIds returns a boolean if a field has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasAssetIds() bool {
+func (o *WorkflowFilterAnyOf) HasAssetIds() bool {
 	if o != nil && !IsNil(o.AssetIds) {
 		return true
 	}
@@ -258,12 +259,12 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasAssetIds() bool
 }
 
 // SetAssetIds gets a reference to the given []string and assigns it to the AssetIds field.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) SetAssetIds(v []string) {
+func (o *WorkflowFilterAnyOf) SetAssetIds(v []string) {
 	o.AssetIds = v
 }
 
 // GetJiraTicket returns the JiraTicket field value if set, zero value otherwise.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetJiraTicket() bool {
+func (o *WorkflowFilterAnyOf) GetJiraTicket() bool {
 	if o == nil || IsNil(o.JiraTicket) {
 		var ret bool
 		return ret
@@ -273,7 +274,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetJiraTicket() bo
 
 // GetJiraTicketOk returns a tuple with the JiraTicket field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetJiraTicketOk() (*bool, bool) {
+func (o *WorkflowFilterAnyOf) GetJiraTicketOk() (*bool, bool) {
 	if o == nil || IsNil(o.JiraTicket) {
 		return nil, false
 	}
@@ -281,7 +282,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetJiraTicketOk() 
 }
 
 // HasJiraTicket returns a boolean if a field has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasJiraTicket() bool {
+func (o *WorkflowFilterAnyOf) HasJiraTicket() bool {
 	if o != nil && !IsNil(o.JiraTicket) {
 		return true
 	}
@@ -290,12 +291,12 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasJiraTicket() bo
 }
 
 // SetJiraTicket gets a reference to the given bool and assigns it to the JiraTicket field.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) SetJiraTicket(v bool) {
+func (o *WorkflowFilterAnyOf) SetJiraTicket(v bool) {
 	o.JiraTicket = &v
 }
 
 // GetSearch returns the Search field value if set, zero value otherwise.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetSearch() string {
+func (o *WorkflowFilterAnyOf) GetSearch() string {
 	if o == nil || IsNil(o.Search) {
 		var ret string
 		return ret
@@ -305,7 +306,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetSearch() string
 
 // GetSearchOk returns a tuple with the Search field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetSearchOk() (*string, bool) {
+func (o *WorkflowFilterAnyOf) GetSearchOk() (*string, bool) {
 	if o == nil || IsNil(o.Search) {
 		return nil, false
 	}
@@ -313,7 +314,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetSearchOk() (*st
 }
 
 // HasSearch returns a boolean if a field has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasSearch() bool {
+func (o *WorkflowFilterAnyOf) HasSearch() bool {
 	if o != nil && !IsNil(o.Search) {
 		return true
 	}
@@ -322,12 +323,12 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasSearch() bool {
 }
 
 // SetSearch gets a reference to the given string and assigns it to the Search field.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) SetSearch(v string) {
+func (o *WorkflowFilterAnyOf) SetSearch(v string) {
 	o.Search = &v
 }
 
 // GetCategories returns the Categories field value if set, zero value otherwise.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetCategories() []ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY {
+func (o *WorkflowFilterAnyOf) GetCategories() []ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY {
 	if o == nil || IsNil(o.Categories) {
 		var ret []ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY
 		return ret
@@ -337,7 +338,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetCategories() []
 
 // GetCategoriesOk returns a tuple with the Categories field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetCategoriesOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY, bool) {
+func (o *WorkflowFilterAnyOf) GetCategoriesOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY, bool) {
 	if o == nil || IsNil(o.Categories) {
 		return nil, false
 	}
@@ -345,7 +346,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetCategoriesOk() 
 }
 
 // HasCategories returns a boolean if a field has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasCategories() bool {
+func (o *WorkflowFilterAnyOf) HasCategories() bool {
 	if o != nil && !IsNil(o.Categories) {
 		return true
 	}
@@ -354,12 +355,12 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasCategories() bo
 }
 
 // SetCategories gets a reference to the given []ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY and assigns it to the Categories field.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) SetCategories(v []ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY) {
+func (o *WorkflowFilterAnyOf) SetCategories(v []ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY) {
 	o.Categories = v
 }
 
 // GetScannerKinds returns the ScannerKinds field value if set, zero value otherwise.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetScannerKinds() []ENUMPROPERTIESWHEREPROPERTIESSCANNERKINDSITEMS {
+func (o *WorkflowFilterAnyOf) GetScannerKinds() []ENUMPROPERTIESWHEREPROPERTIESSCANNERKINDSITEMS {
 	if o == nil || IsNil(o.ScannerKinds) {
 		var ret []ENUMPROPERTIESWHEREPROPERTIESSCANNERKINDSITEMS
 		return ret
@@ -369,7 +370,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetScannerKinds() 
 
 // GetScannerKindsOk returns a tuple with the ScannerKinds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetScannerKindsOk() ([]ENUMPROPERTIESWHEREPROPERTIESSCANNERKINDSITEMS, bool) {
+func (o *WorkflowFilterAnyOf) GetScannerKindsOk() ([]ENUMPROPERTIESWHEREPROPERTIESSCANNERKINDSITEMS, bool) {
 	if o == nil || IsNil(o.ScannerKinds) {
 		return nil, false
 	}
@@ -377,7 +378,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetScannerKindsOk(
 }
 
 // HasScannerKinds returns a boolean if a field has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasScannerKinds() bool {
+func (o *WorkflowFilterAnyOf) HasScannerKinds() bool {
 	if o != nil && !IsNil(o.ScannerKinds) {
 		return true
 	}
@@ -386,12 +387,12 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasScannerKinds() 
 }
 
 // SetScannerKinds gets a reference to the given []ENUMPROPERTIESWHEREPROPERTIESSCANNERKINDSITEMS and assigns it to the ScannerKinds field.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) SetScannerKinds(v []ENUMPROPERTIESWHEREPROPERTIESSCANNERKINDSITEMS) {
+func (o *WorkflowFilterAnyOf) SetScannerKinds(v []ENUMPROPERTIESWHEREPROPERTIESSCANNERKINDSITEMS) {
 	o.ScannerKinds = v
 }
 
 // GetAssetClasses returns the AssetClasses field value if set, zero value otherwise.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetAssetClasses() []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS {
+func (o *WorkflowFilterAnyOf) GetAssetClasses() []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS {
 	if o == nil || IsNil(o.AssetClasses) {
 		var ret []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS
 		return ret
@@ -401,7 +402,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetAssetClasses() 
 
 // GetAssetClassesOk returns a tuple with the AssetClasses field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetAssetClassesOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS, bool) {
+func (o *WorkflowFilterAnyOf) GetAssetClassesOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS, bool) {
 	if o == nil || IsNil(o.AssetClasses) {
 		return nil, false
 	}
@@ -409,7 +410,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetAssetClassesOk(
 }
 
 // HasAssetClasses returns a boolean if a field has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasAssetClasses() bool {
+func (o *WorkflowFilterAnyOf) HasAssetClasses() bool {
 	if o != nil && !IsNil(o.AssetClasses) {
 		return true
 	}
@@ -418,12 +419,12 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasAssetClasses() 
 }
 
 // SetAssetClasses gets a reference to the given []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS and assigns it to the AssetClasses field.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) SetAssetClasses(v []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS) {
+func (o *WorkflowFilterAnyOf) SetAssetClasses(v []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS) {
 	o.AssetClasses = v
 }
 
 // GetAssetTypes returns the AssetTypes field value if set, zero value otherwise.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetAssetTypes() []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE {
+func (o *WorkflowFilterAnyOf) GetAssetTypes() []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE {
 	if o == nil || IsNil(o.AssetTypes) {
 		var ret []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE
 		return ret
@@ -433,7 +434,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetAssetTypes() []
 
 // GetAssetTypesOk returns a tuple with the AssetTypes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetAssetTypesOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE, bool) {
+func (o *WorkflowFilterAnyOf) GetAssetTypesOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE, bool) {
 	if o == nil || IsNil(o.AssetTypes) {
 		return nil, false
 	}
@@ -441,7 +442,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetAssetTypesOk() 
 }
 
 // HasAssetTypes returns a boolean if a field has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasAssetTypes() bool {
+func (o *WorkflowFilterAnyOf) HasAssetTypes() bool {
 	if o != nil && !IsNil(o.AssetTypes) {
 		return true
 	}
@@ -450,12 +451,12 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasAssetTypes() bo
 }
 
 // SetAssetTypes gets a reference to the given []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE and assigns it to the AssetTypes field.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) SetAssetTypes(v []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE) {
+func (o *WorkflowFilterAnyOf) SetAssetTypes(v []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE) {
 	o.AssetTypes = v
 }
 
 // GetTagIds returns the TagIds field value if set, zero value otherwise.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetTagIds() []string {
+func (o *WorkflowFilterAnyOf) GetTagIds() []string {
 	if o == nil || IsNil(o.TagIds) {
 		var ret []string
 		return ret
@@ -465,7 +466,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetTagIds() []stri
 
 // GetTagIdsOk returns a tuple with the TagIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetTagIdsOk() ([]string, bool) {
+func (o *WorkflowFilterAnyOf) GetTagIdsOk() ([]string, bool) {
 	if o == nil || IsNil(o.TagIds) {
 		return nil, false
 	}
@@ -473,7 +474,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetTagIdsOk() ([]s
 }
 
 // HasTagIds returns a boolean if a field has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasTagIds() bool {
+func (o *WorkflowFilterAnyOf) HasTagIds() bool {
 	if o != nil && !IsNil(o.TagIds) {
 		return true
 	}
@@ -482,12 +483,12 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasTagIds() bool {
 }
 
 // SetTagIds gets a reference to the given []string and assigns it to the TagIds field.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) SetTagIds(v []string) {
+func (o *WorkflowFilterAnyOf) SetTagIds(v []string) {
 	o.TagIds = v
 }
 
 // GetNoTags returns the NoTags field value if set, zero value otherwise.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetNoTags() bool {
+func (o *WorkflowFilterAnyOf) GetNoTags() bool {
 	if o == nil || IsNil(o.NoTags) {
 		var ret bool
 		return ret
@@ -497,7 +498,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetNoTags() bool {
 
 // GetNoTagsOk returns a tuple with the NoTags field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetNoTagsOk() (*bool, bool) {
+func (o *WorkflowFilterAnyOf) GetNoTagsOk() (*bool, bool) {
 	if o == nil || IsNil(o.NoTags) {
 		return nil, false
 	}
@@ -505,7 +506,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetNoTagsOk() (*bo
 }
 
 // HasNoTags returns a boolean if a field has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasNoTags() bool {
+func (o *WorkflowFilterAnyOf) HasNoTags() bool {
 	if o != nil && !IsNil(o.NoTags) {
 		return true
 	}
@@ -514,12 +515,12 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasNoTags() bool {
 }
 
 // SetNoTags gets a reference to the given bool and assigns it to the NoTags field.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) SetNoTags(v bool) {
+func (o *WorkflowFilterAnyOf) SetNoTags(v bool) {
 	o.NoTags = &v
 }
 
 // GetScanIds returns the ScanIds field value if set, zero value otherwise.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetScanIds() []string {
+func (o *WorkflowFilterAnyOf) GetScanIds() []string {
 	if o == nil || IsNil(o.ScanIds) {
 		var ret []string
 		return ret
@@ -529,7 +530,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetScanIds() []str
 
 // GetScanIdsOk returns a tuple with the ScanIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetScanIdsOk() ([]string, bool) {
+func (o *WorkflowFilterAnyOf) GetScanIdsOk() ([]string, bool) {
 	if o == nil || IsNil(o.ScanIds) {
 		return nil, false
 	}
@@ -537,7 +538,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetScanIdsOk() ([]
 }
 
 // HasScanIds returns a boolean if a field has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasScanIds() bool {
+func (o *WorkflowFilterAnyOf) HasScanIds() bool {
 	if o != nil && !IsNil(o.ScanIds) {
 		return true
 	}
@@ -546,12 +547,12 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasScanIds() bool 
 }
 
 // SetScanIds gets a reference to the given []string and assigns it to the ScanIds field.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) SetScanIds(v []string) {
+func (o *WorkflowFilterAnyOf) SetScanIds(v []string) {
 	o.ScanIds = v
 }
 
 // GetSecurityTestUids returns the SecurityTestUids field value if set, zero value otherwise.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetSecurityTestUids() []string {
+func (o *WorkflowFilterAnyOf) GetSecurityTestUids() []string {
 	if o == nil || IsNil(o.SecurityTestUids) {
 		var ret []string
 		return ret
@@ -561,7 +562,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetSecurityTestUid
 
 // GetSecurityTestUidsOk returns a tuple with the SecurityTestUids field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetSecurityTestUidsOk() ([]string, bool) {
+func (o *WorkflowFilterAnyOf) GetSecurityTestUidsOk() ([]string, bool) {
 	if o == nil || IsNil(o.SecurityTestUids) {
 		return nil, false
 	}
@@ -569,7 +570,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetSecurityTestUid
 }
 
 // HasSecurityTestUids returns a boolean if a field has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasSecurityTestUids() bool {
+func (o *WorkflowFilterAnyOf) HasSecurityTestUids() bool {
 	if o != nil && !IsNil(o.SecurityTestUids) {
 		return true
 	}
@@ -578,12 +579,12 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasSecurityTestUid
 }
 
 // SetSecurityTestUids gets a reference to the given []string and assigns it to the SecurityTestUids field.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) SetSecurityTestUids(v []string) {
+func (o *WorkflowFilterAnyOf) SetSecurityTestUids(v []string) {
 	o.SecurityTestUids = v
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetStatus() []ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS {
+func (o *WorkflowFilterAnyOf) GetStatus() []ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS {
 	if o == nil || IsNil(o.Status) {
 		var ret []ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS
 		return ret
@@ -593,7 +594,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetStatus() []ENUM
 
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetStatusOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS, bool) {
+func (o *WorkflowFilterAnyOf) GetStatusOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS, bool) {
 	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
@@ -601,7 +602,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetStatusOk() ([]E
 }
 
 // HasStatus returns a boolean if a field has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasStatus() bool {
+func (o *WorkflowFilterAnyOf) HasStatus() bool {
 	if o != nil && !IsNil(o.Status) {
 		return true
 	}
@@ -610,12 +611,12 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasStatus() bool {
 }
 
 // SetStatus gets a reference to the given []ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS and assigns it to the Status field.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) SetStatus(v []ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS) {
+func (o *WorkflowFilterAnyOf) SetStatus(v []ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS) {
 	o.Status = v
 }
 
 // GetIds returns the Ids field value if set, zero value otherwise.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetIds() []string {
+func (o *WorkflowFilterAnyOf) GetIds() []string {
 	if o == nil || IsNil(o.Ids) {
 		var ret []string
 		return ret
@@ -625,7 +626,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetIds() []string 
 
 // GetIdsOk returns a tuple with the Ids field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetIdsOk() ([]string, bool) {
+func (o *WorkflowFilterAnyOf) GetIdsOk() ([]string, bool) {
 	if o == nil || IsNil(o.Ids) {
 		return nil, false
 	}
@@ -633,7 +634,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetIdsOk() ([]stri
 }
 
 // HasIds returns a boolean if a field has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasIds() bool {
+func (o *WorkflowFilterAnyOf) HasIds() bool {
 	if o != nil && !IsNil(o.Ids) {
 		return true
 	}
@@ -642,12 +643,12 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasIds() bool {
 }
 
 // SetIds gets a reference to the given []string and assigns it to the Ids field.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) SetIds(v []string) {
+func (o *WorkflowFilterAnyOf) SetIds(v []string) {
 	o.Ids = v
 }
 
 // GetBlacklistedIds returns the BlacklistedIds field value if set, zero value otherwise.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetBlacklistedIds() []string {
+func (o *WorkflowFilterAnyOf) GetBlacklistedIds() []string {
 	if o == nil || IsNil(o.BlacklistedIds) {
 		var ret []string
 		return ret
@@ -657,7 +658,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetBlacklistedIds(
 
 // GetBlacklistedIdsOk returns a tuple with the BlacklistedIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetBlacklistedIdsOk() ([]string, bool) {
+func (o *WorkflowFilterAnyOf) GetBlacklistedIdsOk() ([]string, bool) {
 	if o == nil || IsNil(o.BlacklistedIds) {
 		return nil, false
 	}
@@ -665,7 +666,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetBlacklistedIdsO
 }
 
 // HasBlacklistedIds returns a boolean if a field has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasBlacklistedIds() bool {
+func (o *WorkflowFilterAnyOf) HasBlacklistedIds() bool {
 	if o != nil && !IsNil(o.BlacklistedIds) {
 		return true
 	}
@@ -674,12 +675,12 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasBlacklistedIds(
 }
 
 // SetBlacklistedIds gets a reference to the given []string and assigns it to the BlacklistedIds field.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) SetBlacklistedIds(v []string) {
+func (o *WorkflowFilterAnyOf) SetBlacklistedIds(v []string) {
 	o.BlacklistedIds = v
 }
 
 // GetFullNames returns the FullNames field value if set, zero value otherwise.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetFullNames() []string {
+func (o *WorkflowFilterAnyOf) GetFullNames() []string {
 	if o == nil || IsNil(o.FullNames) {
 		var ret []string
 		return ret
@@ -689,7 +690,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetFullNames() []s
 
 // GetFullNamesOk returns a tuple with the FullNames field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetFullNamesOk() ([]string, bool) {
+func (o *WorkflowFilterAnyOf) GetFullNamesOk() ([]string, bool) {
 	if o == nil || IsNil(o.FullNames) {
 		return nil, false
 	}
@@ -697,7 +698,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetFullNamesOk() (
 }
 
 // HasFullNames returns a boolean if a field has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasFullNames() bool {
+func (o *WorkflowFilterAnyOf) HasFullNames() bool {
 	if o != nil && !IsNil(o.FullNames) {
 		return true
 	}
@@ -706,12 +707,12 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasFullNames() boo
 }
 
 // SetFullNames gets a reference to the given []string and assigns it to the FullNames field.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) SetFullNames(v []string) {
+func (o *WorkflowFilterAnyOf) SetFullNames(v []string) {
 	o.FullNames = v
 }
 
 // GetBlacklistedNames returns the BlacklistedNames field value if set, zero value otherwise.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetBlacklistedNames() []string {
+func (o *WorkflowFilterAnyOf) GetBlacklistedNames() []string {
 	if o == nil || IsNil(o.BlacklistedNames) {
 		var ret []string
 		return ret
@@ -721,7 +722,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetBlacklistedName
 
 // GetBlacklistedNamesOk returns a tuple with the BlacklistedNames field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetBlacklistedNamesOk() ([]string, bool) {
+func (o *WorkflowFilterAnyOf) GetBlacklistedNamesOk() ([]string, bool) {
 	if o == nil || IsNil(o.BlacklistedNames) {
 		return nil, false
 	}
@@ -729,7 +730,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetBlacklistedName
 }
 
 // HasBlacklistedNames returns a boolean if a field has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasBlacklistedNames() bool {
+func (o *WorkflowFilterAnyOf) HasBlacklistedNames() bool {
 	if o != nil && !IsNil(o.BlacklistedNames) {
 		return true
 	}
@@ -738,12 +739,12 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasBlacklistedName
 }
 
 // SetBlacklistedNames gets a reference to the given []string and assigns it to the BlacklistedNames field.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) SetBlacklistedNames(v []string) {
+func (o *WorkflowFilterAnyOf) SetBlacklistedNames(v []string) {
 	o.BlacklistedNames = v
 }
 
 // GetAssetStatuses returns the AssetStatuses field value if set, zero value otherwise.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetAssetStatuses() []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS {
+func (o *WorkflowFilterAnyOf) GetAssetStatuses() []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS {
 	if o == nil || IsNil(o.AssetStatuses) {
 		var ret []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS
 		return ret
@@ -753,7 +754,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetAssetStatuses()
 
 // GetAssetStatusesOk returns a tuple with the AssetStatuses field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetAssetStatusesOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS, bool) {
+func (o *WorkflowFilterAnyOf) GetAssetStatusesOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS, bool) {
 	if o == nil || IsNil(o.AssetStatuses) {
 		return nil, false
 	}
@@ -761,7 +762,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetAssetStatusesOk
 }
 
 // HasAssetStatuses returns a boolean if a field has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasAssetStatuses() bool {
+func (o *WorkflowFilterAnyOf) HasAssetStatuses() bool {
 	if o != nil && !IsNil(o.AssetStatuses) {
 		return true
 	}
@@ -770,12 +771,12 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasAssetStatuses()
 }
 
 // SetAssetStatuses gets a reference to the given []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS and assigns it to the AssetStatuses field.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) SetAssetStatuses(v []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS) {
+func (o *WorkflowFilterAnyOf) SetAssetStatuses(v []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS) {
 	o.AssetStatuses = v
 }
 
 // GetAiFalsePositive returns the AiFalsePositive field value if set, zero value otherwise.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetAiFalsePositive() bool {
+func (o *WorkflowFilterAnyOf) GetAiFalsePositive() bool {
 	if o == nil || IsNil(o.AiFalsePositive) {
 		var ret bool
 		return ret
@@ -785,7 +786,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetAiFalsePositive
 
 // GetAiFalsePositiveOk returns a tuple with the AiFalsePositive field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetAiFalsePositiveOk() (*bool, bool) {
+func (o *WorkflowFilterAnyOf) GetAiFalsePositiveOk() (*bool, bool) {
 	if o == nil || IsNil(o.AiFalsePositive) {
 		return nil, false
 	}
@@ -793,7 +794,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetAiFalsePositive
 }
 
 // HasAiFalsePositive returns a boolean if a field has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasAiFalsePositive() bool {
+func (o *WorkflowFilterAnyOf) HasAiFalsePositive() bool {
 	if o != nil && !IsNil(o.AiFalsePositive) {
 		return true
 	}
@@ -802,12 +803,12 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasAiFalsePositive
 }
 
 // SetAiFalsePositive gets a reference to the given bool and assigns it to the AiFalsePositive field.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) SetAiFalsePositive(v bool) {
+func (o *WorkflowFilterAnyOf) SetAiFalsePositive(v bool) {
 	o.AiFalsePositive = &v
 }
 
 // GetAgentic returns the Agentic field value if set, zero value otherwise.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetAgentic() bool {
+func (o *WorkflowFilterAnyOf) GetAgentic() bool {
 	if o == nil || IsNil(o.Agentic) {
 		var ret bool
 		return ret
@@ -817,7 +818,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetAgentic() bool 
 
 // GetAgenticOk returns a tuple with the Agentic field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetAgenticOk() (*bool, bool) {
+func (o *WorkflowFilterAnyOf) GetAgenticOk() (*bool, bool) {
 	if o == nil || IsNil(o.Agentic) {
 		return nil, false
 	}
@@ -825,7 +826,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetAgenticOk() (*b
 }
 
 // HasAgentic returns a boolean if a field has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasAgentic() bool {
+func (o *WorkflowFilterAnyOf) HasAgentic() bool {
 	if o != nil && !IsNil(o.Agentic) {
 		return true
 	}
@@ -834,12 +835,12 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasAgentic() bool 
 }
 
 // SetAgentic gets a reference to the given bool and assigns it to the Agentic field.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) SetAgentic(v bool) {
+func (o *WorkflowFilterAnyOf) SetAgentic(v bool) {
 	o.Agentic = &v
 }
 
 // GetTargetIds returns the TargetIds field value if set, zero value otherwise.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetTargetIds() []string {
+func (o *WorkflowFilterAnyOf) GetTargetIds() []string {
 	if o == nil || IsNil(o.TargetIds) {
 		var ret []string
 		return ret
@@ -849,7 +850,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetTargetIds() []s
 
 // GetTargetIdsOk returns a tuple with the TargetIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetTargetIdsOk() ([]string, bool) {
+func (o *WorkflowFilterAnyOf) GetTargetIdsOk() ([]string, bool) {
 	if o == nil || IsNil(o.TargetIds) {
 		return nil, false
 	}
@@ -857,7 +858,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetTargetIdsOk() (
 }
 
 // HasTargetIds returns a boolean if a field has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasTargetIds() bool {
+func (o *WorkflowFilterAnyOf) HasTargetIds() bool {
 	if o != nil && !IsNil(o.TargetIds) {
 		return true
 	}
@@ -866,12 +867,12 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasTargetIds() boo
 }
 
 // SetTargetIds gets a reference to the given []string and assigns it to the TargetIds field.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) SetTargetIds(v []string) {
+func (o *WorkflowFilterAnyOf) SetTargetIds(v []string) {
 	o.TargetIds = v
 }
 
 // GetDomains returns the Domains field value if set, zero value otherwise.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetDomains() []string {
+func (o *WorkflowFilterAnyOf) GetDomains() []string {
 	if o == nil || IsNil(o.Domains) {
 		var ret []string
 		return ret
@@ -881,7 +882,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetDomains() []str
 
 // GetDomainsOk returns a tuple with the Domains field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetDomainsOk() ([]string, bool) {
+func (o *WorkflowFilterAnyOf) GetDomainsOk() ([]string, bool) {
 	if o == nil || IsNil(o.Domains) {
 		return nil, false
 	}
@@ -889,7 +890,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetDomainsOk() ([]
 }
 
 // HasDomains returns a boolean if a field has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasDomains() bool {
+func (o *WorkflowFilterAnyOf) HasDomains() bool {
 	if o != nil && !IsNil(o.Domains) {
 		return true
 	}
@@ -898,12 +899,12 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasDomains() bool 
 }
 
 // SetDomains gets a reference to the given []string and assigns it to the Domains field.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) SetDomains(v []string) {
+func (o *WorkflowFilterAnyOf) SetDomains(v []string) {
 	o.Domains = v
 }
 
 // GetIgnoreInventory returns the IgnoreInventory field value if set, zero value otherwise.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetIgnoreInventory() bool {
+func (o *WorkflowFilterAnyOf) GetIgnoreInventory() bool {
 	if o == nil || IsNil(o.IgnoreInventory) {
 		var ret bool
 		return ret
@@ -913,7 +914,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetIgnoreInventory
 
 // GetIgnoreInventoryOk returns a tuple with the IgnoreInventory field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetIgnoreInventoryOk() (*bool, bool) {
+func (o *WorkflowFilterAnyOf) GetIgnoreInventoryOk() (*bool, bool) {
 	if o == nil || IsNil(o.IgnoreInventory) {
 		return nil, false
 	}
@@ -921,7 +922,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetIgnoreInventory
 }
 
 // HasIgnoreInventory returns a boolean if a field has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasIgnoreInventory() bool {
+func (o *WorkflowFilterAnyOf) HasIgnoreInventory() bool {
 	if o != nil && !IsNil(o.IgnoreInventory) {
 		return true
 	}
@@ -930,12 +931,12 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasIgnoreInventory
 }
 
 // SetIgnoreInventory gets a reference to the given bool and assigns it to the IgnoreInventory field.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) SetIgnoreInventory(v bool) {
+func (o *WorkflowFilterAnyOf) SetIgnoreInventory(v bool) {
 	o.IgnoreInventory = &v
 }
 
 // GetIgnored returns the Ignored field value if set, zero value otherwise.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetIgnored() bool {
+func (o *WorkflowFilterAnyOf) GetIgnored() bool {
 	if o == nil || IsNil(o.Ignored) {
 		var ret bool
 		return ret
@@ -945,7 +946,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetIgnored() bool 
 
 // GetIgnoredOk returns a tuple with the Ignored field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetIgnoredOk() (*bool, bool) {
+func (o *WorkflowFilterAnyOf) GetIgnoredOk() (*bool, bool) {
 	if o == nil || IsNil(o.Ignored) {
 		return nil, false
 	}
@@ -953,7 +954,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) GetIgnoredOk() (*b
 }
 
 // HasIgnored returns a boolean if a field has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasIgnored() bool {
+func (o *WorkflowFilterAnyOf) HasIgnored() bool {
 	if o != nil && !IsNil(o.Ignored) {
 		return true
 	}
@@ -962,11 +963,44 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) HasIgnored() bool 
 }
 
 // SetIgnored gets a reference to the given bool and assigns it to the Ignored field.
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) SetIgnored(v bool) {
+func (o *WorkflowFilterAnyOf) SetIgnored(v bool) {
 	o.Ignored = &v
 }
 
-func (o CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) MarshalJSON() ([]byte, error) {
+// GetDnf returns the Dnf field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *WorkflowFilterAnyOf) GetDnf() interface{} {
+	if o == nil {
+		var ret interface{}
+		return ret
+	}
+	return o.Dnf
+}
+
+// GetDnfOk returns a tuple with the Dnf field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *WorkflowFilterAnyOf) GetDnfOk() (*interface{}, bool) {
+	if o == nil || IsNil(o.Dnf) {
+		return nil, false
+	}
+	return &o.Dnf, true
+}
+
+// HasDnf returns a boolean if a field has been set.
+func (o *WorkflowFilterAnyOf) HasDnf() bool {
+	if o != nil && !IsNil(o.Dnf) {
+		return true
+	}
+
+	return false
+}
+
+// SetDnf gets a reference to the given interface{} and assigns it to the Dnf field.
+func (o *WorkflowFilterAnyOf) SetDnf(v interface{}) {
+	o.Dnf = v
+}
+
+func (o WorkflowFilterAnyOf) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -974,7 +1008,7 @@ func (o CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) MarshalJSON() ([]by
 	return json.Marshal(toSerialize)
 }
 
-func (o CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) ToMap() (map[string]interface{}, error) {
+func (o WorkflowFilterAnyOf) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Severities) {
 		toSerialize["severities"] = o.Severities
@@ -1060,6 +1094,9 @@ func (o CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) ToMap() (map[string
 	if !IsNil(o.Ignored) {
 		toSerialize["ignored"] = o.Ignored
 	}
+	if o.Dnf != nil {
+		toSerialize["dnf"] = o.Dnf
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -1068,16 +1105,16 @@ func (o CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) ToMap() (map[string
 	return toSerialize, nil
 }
 
-func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) UnmarshalJSON(data []byte) (err error) {
-	varCreateWorkflowFilterUsingCustomFilterOnIssuesFilter := _CreateWorkflowFilterUsingCustomFilterOnIssuesFilter{}
+func (o *WorkflowFilterAnyOf) UnmarshalJSON(data []byte) (err error) {
+	varWorkflowFilterAnyOf := _WorkflowFilterAnyOf{}
 
-	err = json.Unmarshal(data, &varCreateWorkflowFilterUsingCustomFilterOnIssuesFilter)
+	err = json.Unmarshal(data, &varWorkflowFilterAnyOf)
 
 	if err != nil {
 		return err
 	}
 
-	*o = CreateWorkflowFilterUsingCustomFilterOnIssuesFilter(varCreateWorkflowFilterUsingCustomFilterOnIssuesFilter)
+	*o = WorkflowFilterAnyOf(varWorkflowFilterAnyOf)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -1110,44 +1147,45 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) UnmarshalJSON(data
 		delete(additionalProperties, "domains")
 		delete(additionalProperties, "ignoreInventory")
 		delete(additionalProperties, "ignored")
+		delete(additionalProperties, "dnf")
 		o.AdditionalProperties = additionalProperties
 	}
 
 	return err
 }
 
-type NullableCreateWorkflowFilterUsingCustomFilterOnIssuesFilter struct {
-	value *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter
+type NullableWorkflowFilterAnyOf struct {
+	value *WorkflowFilterAnyOf
 	isSet bool
 }
 
-func (v NullableCreateWorkflowFilterUsingCustomFilterOnIssuesFilter) Get() *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter {
+func (v NullableWorkflowFilterAnyOf) Get() *WorkflowFilterAnyOf {
 	return v.value
 }
 
-func (v *NullableCreateWorkflowFilterUsingCustomFilterOnIssuesFilter) Set(val *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) {
+func (v *NullableWorkflowFilterAnyOf) Set(val *WorkflowFilterAnyOf) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCreateWorkflowFilterUsingCustomFilterOnIssuesFilter) IsSet() bool {
+func (v NullableWorkflowFilterAnyOf) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCreateWorkflowFilterUsingCustomFilterOnIssuesFilter) Unset() {
+func (v *NullableWorkflowFilterAnyOf) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCreateWorkflowFilterUsingCustomFilterOnIssuesFilter(val *CreateWorkflowFilterUsingCustomFilterOnIssuesFilter) *NullableCreateWorkflowFilterUsingCustomFilterOnIssuesFilter {
-	return &NullableCreateWorkflowFilterUsingCustomFilterOnIssuesFilter{value: val, isSet: true}
+func NewNullableWorkflowFilterAnyOf(val *WorkflowFilterAnyOf) *NullableWorkflowFilterAnyOf {
+	return &NullableWorkflowFilterAnyOf{value: val, isSet: true}
 }
 
-func (v NullableCreateWorkflowFilterUsingCustomFilterOnIssuesFilter) MarshalJSON() ([]byte, error) {
+func (v NullableWorkflowFilterAnyOf) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCreateWorkflowFilterUsingCustomFilterOnIssuesFilter) UnmarshalJSON(src []byte) error {
+func (v *NullableWorkflowFilterAnyOf) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
