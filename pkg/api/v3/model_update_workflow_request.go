@@ -25,10 +25,7 @@ type UpdateWorkflowRequest struct {
 	Trigger ENUMPROPERTIESDATAITEMSPROPERTIESTRIGGER `json:"trigger"`
 	// The throttle in milliseconds for the workflow.
 	ThrottleMs *float32 `json:"throttleMs,omitempty"`
-	// Saved view to apply as the workflow filter.
-	ViewId *string                 `json:"viewId,omitempty"`
-	Filter NullableWorkflowFilter1 `json:"filter,omitempty"`
-	// Deprecated. Use `viewId` and `filter` instead.
+	// The filters to update the workflow with, this will replace the existing filters
 	Filters []CreateWorkflowRequestFiltersInner `json:"filters,omitempty"`
 	// The actions to update the workflow with, this will replace the existing actions
 	Actions []UpdateWorkflowRequestActionsInner `json:"actions,omitempty"`
@@ -145,81 +142,6 @@ func (o *UpdateWorkflowRequest) SetThrottleMs(v float32) {
 	o.ThrottleMs = &v
 }
 
-// GetViewId returns the ViewId field value if set, zero value otherwise.
-func (o *UpdateWorkflowRequest) GetViewId() string {
-	if o == nil || IsNil(o.ViewId) {
-		var ret string
-		return ret
-	}
-	return *o.ViewId
-}
-
-// GetViewIdOk returns a tuple with the ViewId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UpdateWorkflowRequest) GetViewIdOk() (*string, bool) {
-	if o == nil || IsNil(o.ViewId) {
-		return nil, false
-	}
-	return o.ViewId, true
-}
-
-// HasViewId returns a boolean if a field has been set.
-func (o *UpdateWorkflowRequest) HasViewId() bool {
-	if o != nil && !IsNil(o.ViewId) {
-		return true
-	}
-
-	return false
-}
-
-// SetViewId gets a reference to the given string and assigns it to the ViewId field.
-func (o *UpdateWorkflowRequest) SetViewId(v string) {
-	o.ViewId = &v
-}
-
-// GetFilter returns the Filter field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *UpdateWorkflowRequest) GetFilter() WorkflowFilter1 {
-	if o == nil || IsNil(o.Filter.Get()) {
-		var ret WorkflowFilter1
-		return ret
-	}
-	return *o.Filter.Get()
-}
-
-// GetFilterOk returns a tuple with the Filter field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *UpdateWorkflowRequest) GetFilterOk() (*WorkflowFilter1, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Filter.Get(), o.Filter.IsSet()
-}
-
-// HasFilter returns a boolean if a field has been set.
-func (o *UpdateWorkflowRequest) HasFilter() bool {
-	if o != nil && o.Filter.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetFilter gets a reference to the given NullableWorkflowFilter1 and assigns it to the Filter field.
-func (o *UpdateWorkflowRequest) SetFilter(v WorkflowFilter1) {
-	o.Filter.Set(&v)
-}
-
-// SetFilterNil sets the value for Filter to be an explicit nil
-func (o *UpdateWorkflowRequest) SetFilterNil() {
-	o.Filter.Set(nil)
-}
-
-// UnsetFilter ensures that no value is present for Filter, not even an explicit nil
-func (o *UpdateWorkflowRequest) UnsetFilter() {
-	o.Filter.Unset()
-}
-
 // GetFilters returns the Filters field value if set, zero value otherwise.
 func (o *UpdateWorkflowRequest) GetFilters() []CreateWorkflowRequestFiltersInner {
 	if o == nil || IsNil(o.Filters) {
@@ -333,12 +255,6 @@ func (o UpdateWorkflowRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ThrottleMs) {
 		toSerialize["throttleMs"] = o.ThrottleMs
 	}
-	if !IsNil(o.ViewId) {
-		toSerialize["viewId"] = o.ViewId
-	}
-	if o.Filter.IsSet() {
-		toSerialize["filter"] = o.Filter.Get()
-	}
 	if !IsNil(o.Filters) {
 		toSerialize["filters"] = o.Filters
 	}
@@ -394,8 +310,6 @@ func (o *UpdateWorkflowRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "trigger")
 		delete(additionalProperties, "throttleMs")
-		delete(additionalProperties, "viewId")
-		delete(additionalProperties, "filter")
 		delete(additionalProperties, "filters")
 		delete(additionalProperties, "actions")
 		delete(additionalProperties, "projectIds")

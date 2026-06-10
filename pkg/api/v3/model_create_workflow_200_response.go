@@ -26,11 +26,8 @@ type CreateWorkflow200Response struct {
 	Name    *string                                  `json:"name,omitempty"`
 	Trigger ENUMPROPERTIESDATAITEMSPROPERTIESTRIGGER `json:"trigger"`
 	// The throttle in milliseconds for the workflow.
-	ThrottleMs *float32               `json:"throttleMs,omitempty"`
-	Filter     NullableWorkflowFilter `json:"filter"`
-	View       *WorkflowView          `json:"view,omitempty"`
-	// Deprecated. Always empty. Use `filter` and `view` instead.
-	Filters              []WorkflowLegacyFilter           `json:"filters"`
+	ThrottleMs           *float32                         `json:"throttleMs,omitempty"`
+	Filters              []WorkflowSummarizedFiltersInner `json:"filters"`
 	Actions              []WorkflowSummarizedActionsInner `json:"actions"`
 	AdditionalProperties map[string]interface{}
 }
@@ -41,14 +38,13 @@ type _CreateWorkflow200Response CreateWorkflow200Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateWorkflow200Response(trigger ENUMPROPERTIESDATAITEMSPROPERTIESTRIGGER, filter NullableWorkflowFilter, filters []WorkflowLegacyFilter, actions []WorkflowSummarizedActionsInner) *CreateWorkflow200Response {
+func NewCreateWorkflow200Response(trigger ENUMPROPERTIESDATAITEMSPROPERTIESTRIGGER, filters []WorkflowSummarizedFiltersInner, actions []WorkflowSummarizedActionsInner) *CreateWorkflow200Response {
 	this := CreateWorkflow200Response{}
 	var id string = "00000000-0000-0000-0000-000000000000"
 	this.Id = &id
 	var name string = "Workflow Name"
 	this.Name = &name
 	this.Trigger = trigger
-	this.Filter = filter
 	this.Filters = filters
 	this.Actions = actions
 	return &this
@@ -186,68 +182,10 @@ func (o *CreateWorkflow200Response) SetThrottleMs(v float32) {
 	o.ThrottleMs = &v
 }
 
-// GetFilter returns the Filter field value
-// If the value is explicit nil, the zero value for WorkflowFilter will be returned
-func (o *CreateWorkflow200Response) GetFilter() WorkflowFilter {
-	if o == nil || o.Filter.Get() == nil {
-		var ret WorkflowFilter
-		return ret
-	}
-
-	return *o.Filter.Get()
-}
-
-// GetFilterOk returns a tuple with the Filter field value
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *CreateWorkflow200Response) GetFilterOk() (*WorkflowFilter, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Filter.Get(), o.Filter.IsSet()
-}
-
-// SetFilter sets field value
-func (o *CreateWorkflow200Response) SetFilter(v WorkflowFilter) {
-	o.Filter.Set(&v)
-}
-
-// GetView returns the View field value if set, zero value otherwise.
-func (o *CreateWorkflow200Response) GetView() WorkflowView {
-	if o == nil || IsNil(o.View) {
-		var ret WorkflowView
-		return ret
-	}
-	return *o.View
-}
-
-// GetViewOk returns a tuple with the View field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateWorkflow200Response) GetViewOk() (*WorkflowView, bool) {
-	if o == nil || IsNil(o.View) {
-		return nil, false
-	}
-	return o.View, true
-}
-
-// HasView returns a boolean if a field has been set.
-func (o *CreateWorkflow200Response) HasView() bool {
-	if o != nil && !IsNil(o.View) {
-		return true
-	}
-
-	return false
-}
-
-// SetView gets a reference to the given WorkflowView and assigns it to the View field.
-func (o *CreateWorkflow200Response) SetView(v WorkflowView) {
-	o.View = &v
-}
-
 // GetFilters returns the Filters field value
-func (o *CreateWorkflow200Response) GetFilters() []WorkflowLegacyFilter {
+func (o *CreateWorkflow200Response) GetFilters() []WorkflowSummarizedFiltersInner {
 	if o == nil {
-		var ret []WorkflowLegacyFilter
+		var ret []WorkflowSummarizedFiltersInner
 		return ret
 	}
 
@@ -256,7 +194,7 @@ func (o *CreateWorkflow200Response) GetFilters() []WorkflowLegacyFilter {
 
 // GetFiltersOk returns a tuple with the Filters field value
 // and a boolean to check if the value has been set.
-func (o *CreateWorkflow200Response) GetFiltersOk() ([]WorkflowLegacyFilter, bool) {
+func (o *CreateWorkflow200Response) GetFiltersOk() ([]WorkflowSummarizedFiltersInner, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -264,7 +202,7 @@ func (o *CreateWorkflow200Response) GetFiltersOk() ([]WorkflowLegacyFilter, bool
 }
 
 // SetFilters sets field value
-func (o *CreateWorkflow200Response) SetFilters(v []WorkflowLegacyFilter) {
+func (o *CreateWorkflow200Response) SetFilters(v []WorkflowSummarizedFiltersInner) {
 	o.Filters = v
 }
 
@@ -312,10 +250,6 @@ func (o CreateWorkflow200Response) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ThrottleMs) {
 		toSerialize["throttleMs"] = o.ThrottleMs
 	}
-	toSerialize["filter"] = o.Filter.Get()
-	if !IsNil(o.View) {
-		toSerialize["view"] = o.View
-	}
 	toSerialize["filters"] = o.Filters
 	toSerialize["actions"] = o.Actions
 
@@ -332,7 +266,6 @@ func (o *CreateWorkflow200Response) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"trigger",
-		"filter",
 		"filters",
 		"actions",
 	}
@@ -368,8 +301,6 @@ func (o *CreateWorkflow200Response) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "trigger")
 		delete(additionalProperties, "throttleMs")
-		delete(additionalProperties, "filter")
-		delete(additionalProperties, "view")
 		delete(additionalProperties, "filters")
 		delete(additionalProperties, "actions")
 		o.AdditionalProperties = additionalProperties
