@@ -13,6 +13,7 @@ import (
 	"github.com/Escape-Technologies/cli/pkg/locations/health"
 	"github.com/Escape-Technologies/cli/pkg/locations/kube"
 	"github.com/Escape-Technologies/cli/pkg/locations/private"
+	"github.com/Escape-Technologies/cli/pkg/locations/restart"
 	"github.com/Escape-Technologies/cli/pkg/locations/ssh"
 	"github.com/Escape-Technologies/cli/pkg/log"
 )
@@ -26,6 +27,7 @@ func Start(ctx context.Context, name string) error {
 	healthy := &atomic.Bool{}
 	healthy.Store(false)
 	go health.Start(ctx, healthy)
+	go restart.Start()
 
 	log.Trace("Generating SSH Keys")
 	sshPublicKey, sshPrivateKey, err := ssh.GenSSHKeys(name)
