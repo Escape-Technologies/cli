@@ -19,11 +19,27 @@ var _ MappedNullable = &WorkflowFilterAnyOf3{}
 
 // WorkflowFilterAnyOf3 struct for WorkflowFilterAnyOf3
 type WorkflowFilterAnyOf3 struct {
-	Search               *string                                 `json:"search,omitempty"`
-	Kinds                []ENUMPROPERTIESDATAITEMSPROPERTIESKIND `json:"kinds,omitempty"`
-	ProjectIds           []string                                `json:"projectIds,omitempty"`
-	Ids                  []string                                `json:"ids,omitempty"`
-	LocationIds          []string                                `json:"locationIds,omitempty"`
+	Ids                  []string                                                                   `json:"ids,omitempty"`
+	Search               *string                                                                    `json:"search,omitempty"`
+	Risks                []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS               `json:"risks,omitempty"`
+	TagIds               []string                                                                   `json:"tagIds,omitempty"`
+	NoTags               *bool                                                                      `json:"noTags,omitempty"`
+	ProjectIds           []string                                                                   `json:"projectIds,omitempty"`
+	NoProjects           *bool                                                                      `json:"noProjects,omitempty"`
+	AssetIds             []string                                                                   `json:"assetIds,omitempty"`
+	AssetSchemaIds       []string                                                                   `json:"assetSchemaIds,omitempty"`
+	IssueIds             []string                                                                   `json:"issueIds,omitempty"`
+	Kinds                []ENUMPROPERTIESWHEREPROPERTIESSCANNERKINDSITEMS                           `json:"kinds,omitempty"`
+	Domains              []string                                                                   `json:"domains,omitempty"`
+	Initiators           []ENUMPROPERTIESDATAITEMSPROPERTIESINITIATORSITEMS                         `json:"initiators,omitempty"`
+	LastScanStatuses     []ENUMPROPERTIESSTATUS                                                     `json:"lastScanStatuses,omitempty"`
+	ProblemSeverities    []ENUMPROPERTIESDATAITEMSPROPERTIESFILTER2PROPERTIESPROBLEMSEVERITIESITEMS `json:"problemSeverities,omitempty"`
+	ProblemCodes         []ENUMPROPERTIESDATAITEMSPROPERTIESFILTER2PROPERTIESPROBLEMCODESITEMS      `json:"problemCodes,omitempty"`
+	AssetClasses         []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS         `json:"assetClasses,omitempty"`
+	AssetStatuses        []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS        `json:"assetStatuses,omitempty"`
+	AssetTypes           []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE          `json:"assetTypes,omitempty"`
+	ScanIds              []string                                                                   `json:"scanIds,omitempty"`
+	Dnf                  interface{}                                                                `json:"dnf,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -44,102 +60,6 @@ func NewWorkflowFilterAnyOf3() *WorkflowFilterAnyOf3 {
 func NewWorkflowFilterAnyOf3WithDefaults() *WorkflowFilterAnyOf3 {
 	this := WorkflowFilterAnyOf3{}
 	return &this
-}
-
-// GetSearch returns the Search field value if set, zero value otherwise.
-func (o *WorkflowFilterAnyOf3) GetSearch() string {
-	if o == nil || IsNil(o.Search) {
-		var ret string
-		return ret
-	}
-	return *o.Search
-}
-
-// GetSearchOk returns a tuple with the Search field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *WorkflowFilterAnyOf3) GetSearchOk() (*string, bool) {
-	if o == nil || IsNil(o.Search) {
-		return nil, false
-	}
-	return o.Search, true
-}
-
-// HasSearch returns a boolean if a field has been set.
-func (o *WorkflowFilterAnyOf3) HasSearch() bool {
-	if o != nil && !IsNil(o.Search) {
-		return true
-	}
-
-	return false
-}
-
-// SetSearch gets a reference to the given string and assigns it to the Search field.
-func (o *WorkflowFilterAnyOf3) SetSearch(v string) {
-	o.Search = &v
-}
-
-// GetKinds returns the Kinds field value if set, zero value otherwise.
-func (o *WorkflowFilterAnyOf3) GetKinds() []ENUMPROPERTIESDATAITEMSPROPERTIESKIND {
-	if o == nil || IsNil(o.Kinds) {
-		var ret []ENUMPROPERTIESDATAITEMSPROPERTIESKIND
-		return ret
-	}
-	return o.Kinds
-}
-
-// GetKindsOk returns a tuple with the Kinds field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *WorkflowFilterAnyOf3) GetKindsOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESKIND, bool) {
-	if o == nil || IsNil(o.Kinds) {
-		return nil, false
-	}
-	return o.Kinds, true
-}
-
-// HasKinds returns a boolean if a field has been set.
-func (o *WorkflowFilterAnyOf3) HasKinds() bool {
-	if o != nil && !IsNil(o.Kinds) {
-		return true
-	}
-
-	return false
-}
-
-// SetKinds gets a reference to the given []ENUMPROPERTIESDATAITEMSPROPERTIESKIND and assigns it to the Kinds field.
-func (o *WorkflowFilterAnyOf3) SetKinds(v []ENUMPROPERTIESDATAITEMSPROPERTIESKIND) {
-	o.Kinds = v
-}
-
-// GetProjectIds returns the ProjectIds field value if set, zero value otherwise.
-func (o *WorkflowFilterAnyOf3) GetProjectIds() []string {
-	if o == nil || IsNil(o.ProjectIds) {
-		var ret []string
-		return ret
-	}
-	return o.ProjectIds
-}
-
-// GetProjectIdsOk returns a tuple with the ProjectIds field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *WorkflowFilterAnyOf3) GetProjectIdsOk() ([]string, bool) {
-	if o == nil || IsNil(o.ProjectIds) {
-		return nil, false
-	}
-	return o.ProjectIds, true
-}
-
-// HasProjectIds returns a boolean if a field has been set.
-func (o *WorkflowFilterAnyOf3) HasProjectIds() bool {
-	if o != nil && !IsNil(o.ProjectIds) {
-		return true
-	}
-
-	return false
-}
-
-// SetProjectIds gets a reference to the given []string and assigns it to the ProjectIds field.
-func (o *WorkflowFilterAnyOf3) SetProjectIds(v []string) {
-	o.ProjectIds = v
 }
 
 // GetIds returns the Ids field value if set, zero value otherwise.
@@ -174,36 +94,645 @@ func (o *WorkflowFilterAnyOf3) SetIds(v []string) {
 	o.Ids = v
 }
 
-// GetLocationIds returns the LocationIds field value if set, zero value otherwise.
-func (o *WorkflowFilterAnyOf3) GetLocationIds() []string {
-	if o == nil || IsNil(o.LocationIds) {
-		var ret []string
+// GetSearch returns the Search field value if set, zero value otherwise.
+func (o *WorkflowFilterAnyOf3) GetSearch() string {
+	if o == nil || IsNil(o.Search) {
+		var ret string
 		return ret
 	}
-	return o.LocationIds
+	return *o.Search
 }
 
-// GetLocationIdsOk returns a tuple with the LocationIds field value if set, nil otherwise
+// GetSearchOk returns a tuple with the Search field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *WorkflowFilterAnyOf3) GetLocationIdsOk() ([]string, bool) {
-	if o == nil || IsNil(o.LocationIds) {
+func (o *WorkflowFilterAnyOf3) GetSearchOk() (*string, bool) {
+	if o == nil || IsNil(o.Search) {
 		return nil, false
 	}
-	return o.LocationIds, true
+	return o.Search, true
 }
 
-// HasLocationIds returns a boolean if a field has been set.
-func (o *WorkflowFilterAnyOf3) HasLocationIds() bool {
-	if o != nil && !IsNil(o.LocationIds) {
+// HasSearch returns a boolean if a field has been set.
+func (o *WorkflowFilterAnyOf3) HasSearch() bool {
+	if o != nil && !IsNil(o.Search) {
 		return true
 	}
 
 	return false
 }
 
-// SetLocationIds gets a reference to the given []string and assigns it to the LocationIds field.
-func (o *WorkflowFilterAnyOf3) SetLocationIds(v []string) {
-	o.LocationIds = v
+// SetSearch gets a reference to the given string and assigns it to the Search field.
+func (o *WorkflowFilterAnyOf3) SetSearch(v string) {
+	o.Search = &v
+}
+
+// GetRisks returns the Risks field value if set, zero value otherwise.
+func (o *WorkflowFilterAnyOf3) GetRisks() []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS {
+	if o == nil || IsNil(o.Risks) {
+		var ret []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS
+		return ret
+	}
+	return o.Risks
+}
+
+// GetRisksOk returns a tuple with the Risks field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowFilterAnyOf3) GetRisksOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, bool) {
+	if o == nil || IsNil(o.Risks) {
+		return nil, false
+	}
+	return o.Risks, true
+}
+
+// HasRisks returns a boolean if a field has been set.
+func (o *WorkflowFilterAnyOf3) HasRisks() bool {
+	if o != nil && !IsNil(o.Risks) {
+		return true
+	}
+
+	return false
+}
+
+// SetRisks gets a reference to the given []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS and assigns it to the Risks field.
+func (o *WorkflowFilterAnyOf3) SetRisks(v []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS) {
+	o.Risks = v
+}
+
+// GetTagIds returns the TagIds field value if set, zero value otherwise.
+func (o *WorkflowFilterAnyOf3) GetTagIds() []string {
+	if o == nil || IsNil(o.TagIds) {
+		var ret []string
+		return ret
+	}
+	return o.TagIds
+}
+
+// GetTagIdsOk returns a tuple with the TagIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowFilterAnyOf3) GetTagIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.TagIds) {
+		return nil, false
+	}
+	return o.TagIds, true
+}
+
+// HasTagIds returns a boolean if a field has been set.
+func (o *WorkflowFilterAnyOf3) HasTagIds() bool {
+	if o != nil && !IsNil(o.TagIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetTagIds gets a reference to the given []string and assigns it to the TagIds field.
+func (o *WorkflowFilterAnyOf3) SetTagIds(v []string) {
+	o.TagIds = v
+}
+
+// GetNoTags returns the NoTags field value if set, zero value otherwise.
+func (o *WorkflowFilterAnyOf3) GetNoTags() bool {
+	if o == nil || IsNil(o.NoTags) {
+		var ret bool
+		return ret
+	}
+	return *o.NoTags
+}
+
+// GetNoTagsOk returns a tuple with the NoTags field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowFilterAnyOf3) GetNoTagsOk() (*bool, bool) {
+	if o == nil || IsNil(o.NoTags) {
+		return nil, false
+	}
+	return o.NoTags, true
+}
+
+// HasNoTags returns a boolean if a field has been set.
+func (o *WorkflowFilterAnyOf3) HasNoTags() bool {
+	if o != nil && !IsNil(o.NoTags) {
+		return true
+	}
+
+	return false
+}
+
+// SetNoTags gets a reference to the given bool and assigns it to the NoTags field.
+func (o *WorkflowFilterAnyOf3) SetNoTags(v bool) {
+	o.NoTags = &v
+}
+
+// GetProjectIds returns the ProjectIds field value if set, zero value otherwise.
+func (o *WorkflowFilterAnyOf3) GetProjectIds() []string {
+	if o == nil || IsNil(o.ProjectIds) {
+		var ret []string
+		return ret
+	}
+	return o.ProjectIds
+}
+
+// GetProjectIdsOk returns a tuple with the ProjectIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowFilterAnyOf3) GetProjectIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.ProjectIds) {
+		return nil, false
+	}
+	return o.ProjectIds, true
+}
+
+// HasProjectIds returns a boolean if a field has been set.
+func (o *WorkflowFilterAnyOf3) HasProjectIds() bool {
+	if o != nil && !IsNil(o.ProjectIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetProjectIds gets a reference to the given []string and assigns it to the ProjectIds field.
+func (o *WorkflowFilterAnyOf3) SetProjectIds(v []string) {
+	o.ProjectIds = v
+}
+
+// GetNoProjects returns the NoProjects field value if set, zero value otherwise.
+func (o *WorkflowFilterAnyOf3) GetNoProjects() bool {
+	if o == nil || IsNil(o.NoProjects) {
+		var ret bool
+		return ret
+	}
+	return *o.NoProjects
+}
+
+// GetNoProjectsOk returns a tuple with the NoProjects field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowFilterAnyOf3) GetNoProjectsOk() (*bool, bool) {
+	if o == nil || IsNil(o.NoProjects) {
+		return nil, false
+	}
+	return o.NoProjects, true
+}
+
+// HasNoProjects returns a boolean if a field has been set.
+func (o *WorkflowFilterAnyOf3) HasNoProjects() bool {
+	if o != nil && !IsNil(o.NoProjects) {
+		return true
+	}
+
+	return false
+}
+
+// SetNoProjects gets a reference to the given bool and assigns it to the NoProjects field.
+func (o *WorkflowFilterAnyOf3) SetNoProjects(v bool) {
+	o.NoProjects = &v
+}
+
+// GetAssetIds returns the AssetIds field value if set, zero value otherwise.
+func (o *WorkflowFilterAnyOf3) GetAssetIds() []string {
+	if o == nil || IsNil(o.AssetIds) {
+		var ret []string
+		return ret
+	}
+	return o.AssetIds
+}
+
+// GetAssetIdsOk returns a tuple with the AssetIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowFilterAnyOf3) GetAssetIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.AssetIds) {
+		return nil, false
+	}
+	return o.AssetIds, true
+}
+
+// HasAssetIds returns a boolean if a field has been set.
+func (o *WorkflowFilterAnyOf3) HasAssetIds() bool {
+	if o != nil && !IsNil(o.AssetIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetAssetIds gets a reference to the given []string and assigns it to the AssetIds field.
+func (o *WorkflowFilterAnyOf3) SetAssetIds(v []string) {
+	o.AssetIds = v
+}
+
+// GetAssetSchemaIds returns the AssetSchemaIds field value if set, zero value otherwise.
+func (o *WorkflowFilterAnyOf3) GetAssetSchemaIds() []string {
+	if o == nil || IsNil(o.AssetSchemaIds) {
+		var ret []string
+		return ret
+	}
+	return o.AssetSchemaIds
+}
+
+// GetAssetSchemaIdsOk returns a tuple with the AssetSchemaIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowFilterAnyOf3) GetAssetSchemaIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.AssetSchemaIds) {
+		return nil, false
+	}
+	return o.AssetSchemaIds, true
+}
+
+// HasAssetSchemaIds returns a boolean if a field has been set.
+func (o *WorkflowFilterAnyOf3) HasAssetSchemaIds() bool {
+	if o != nil && !IsNil(o.AssetSchemaIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetAssetSchemaIds gets a reference to the given []string and assigns it to the AssetSchemaIds field.
+func (o *WorkflowFilterAnyOf3) SetAssetSchemaIds(v []string) {
+	o.AssetSchemaIds = v
+}
+
+// GetIssueIds returns the IssueIds field value if set, zero value otherwise.
+func (o *WorkflowFilterAnyOf3) GetIssueIds() []string {
+	if o == nil || IsNil(o.IssueIds) {
+		var ret []string
+		return ret
+	}
+	return o.IssueIds
+}
+
+// GetIssueIdsOk returns a tuple with the IssueIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowFilterAnyOf3) GetIssueIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.IssueIds) {
+		return nil, false
+	}
+	return o.IssueIds, true
+}
+
+// HasIssueIds returns a boolean if a field has been set.
+func (o *WorkflowFilterAnyOf3) HasIssueIds() bool {
+	if o != nil && !IsNil(o.IssueIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueIds gets a reference to the given []string and assigns it to the IssueIds field.
+func (o *WorkflowFilterAnyOf3) SetIssueIds(v []string) {
+	o.IssueIds = v
+}
+
+// GetKinds returns the Kinds field value if set, zero value otherwise.
+func (o *WorkflowFilterAnyOf3) GetKinds() []ENUMPROPERTIESWHEREPROPERTIESSCANNERKINDSITEMS {
+	if o == nil || IsNil(o.Kinds) {
+		var ret []ENUMPROPERTIESWHEREPROPERTIESSCANNERKINDSITEMS
+		return ret
+	}
+	return o.Kinds
+}
+
+// GetKindsOk returns a tuple with the Kinds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowFilterAnyOf3) GetKindsOk() ([]ENUMPROPERTIESWHEREPROPERTIESSCANNERKINDSITEMS, bool) {
+	if o == nil || IsNil(o.Kinds) {
+		return nil, false
+	}
+	return o.Kinds, true
+}
+
+// HasKinds returns a boolean if a field has been set.
+func (o *WorkflowFilterAnyOf3) HasKinds() bool {
+	if o != nil && !IsNil(o.Kinds) {
+		return true
+	}
+
+	return false
+}
+
+// SetKinds gets a reference to the given []ENUMPROPERTIESWHEREPROPERTIESSCANNERKINDSITEMS and assigns it to the Kinds field.
+func (o *WorkflowFilterAnyOf3) SetKinds(v []ENUMPROPERTIESWHEREPROPERTIESSCANNERKINDSITEMS) {
+	o.Kinds = v
+}
+
+// GetDomains returns the Domains field value if set, zero value otherwise.
+func (o *WorkflowFilterAnyOf3) GetDomains() []string {
+	if o == nil || IsNil(o.Domains) {
+		var ret []string
+		return ret
+	}
+	return o.Domains
+}
+
+// GetDomainsOk returns a tuple with the Domains field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowFilterAnyOf3) GetDomainsOk() ([]string, bool) {
+	if o == nil || IsNil(o.Domains) {
+		return nil, false
+	}
+	return o.Domains, true
+}
+
+// HasDomains returns a boolean if a field has been set.
+func (o *WorkflowFilterAnyOf3) HasDomains() bool {
+	if o != nil && !IsNil(o.Domains) {
+		return true
+	}
+
+	return false
+}
+
+// SetDomains gets a reference to the given []string and assigns it to the Domains field.
+func (o *WorkflowFilterAnyOf3) SetDomains(v []string) {
+	o.Domains = v
+}
+
+// GetInitiators returns the Initiators field value if set, zero value otherwise.
+func (o *WorkflowFilterAnyOf3) GetInitiators() []ENUMPROPERTIESDATAITEMSPROPERTIESINITIATORSITEMS {
+	if o == nil || IsNil(o.Initiators) {
+		var ret []ENUMPROPERTIESDATAITEMSPROPERTIESINITIATORSITEMS
+		return ret
+	}
+	return o.Initiators
+}
+
+// GetInitiatorsOk returns a tuple with the Initiators field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowFilterAnyOf3) GetInitiatorsOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESINITIATORSITEMS, bool) {
+	if o == nil || IsNil(o.Initiators) {
+		return nil, false
+	}
+	return o.Initiators, true
+}
+
+// HasInitiators returns a boolean if a field has been set.
+func (o *WorkflowFilterAnyOf3) HasInitiators() bool {
+	if o != nil && !IsNil(o.Initiators) {
+		return true
+	}
+
+	return false
+}
+
+// SetInitiators gets a reference to the given []ENUMPROPERTIESDATAITEMSPROPERTIESINITIATORSITEMS and assigns it to the Initiators field.
+func (o *WorkflowFilterAnyOf3) SetInitiators(v []ENUMPROPERTIESDATAITEMSPROPERTIESINITIATORSITEMS) {
+	o.Initiators = v
+}
+
+// GetLastScanStatuses returns the LastScanStatuses field value if set, zero value otherwise.
+func (o *WorkflowFilterAnyOf3) GetLastScanStatuses() []ENUMPROPERTIESSTATUS {
+	if o == nil || IsNil(o.LastScanStatuses) {
+		var ret []ENUMPROPERTIESSTATUS
+		return ret
+	}
+	return o.LastScanStatuses
+}
+
+// GetLastScanStatusesOk returns a tuple with the LastScanStatuses field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowFilterAnyOf3) GetLastScanStatusesOk() ([]ENUMPROPERTIESSTATUS, bool) {
+	if o == nil || IsNil(o.LastScanStatuses) {
+		return nil, false
+	}
+	return o.LastScanStatuses, true
+}
+
+// HasLastScanStatuses returns a boolean if a field has been set.
+func (o *WorkflowFilterAnyOf3) HasLastScanStatuses() bool {
+	if o != nil && !IsNil(o.LastScanStatuses) {
+		return true
+	}
+
+	return false
+}
+
+// SetLastScanStatuses gets a reference to the given []ENUMPROPERTIESSTATUS and assigns it to the LastScanStatuses field.
+func (o *WorkflowFilterAnyOf3) SetLastScanStatuses(v []ENUMPROPERTIESSTATUS) {
+	o.LastScanStatuses = v
+}
+
+// GetProblemSeverities returns the ProblemSeverities field value if set, zero value otherwise.
+func (o *WorkflowFilterAnyOf3) GetProblemSeverities() []ENUMPROPERTIESDATAITEMSPROPERTIESFILTER2PROPERTIESPROBLEMSEVERITIESITEMS {
+	if o == nil || IsNil(o.ProblemSeverities) {
+		var ret []ENUMPROPERTIESDATAITEMSPROPERTIESFILTER2PROPERTIESPROBLEMSEVERITIESITEMS
+		return ret
+	}
+	return o.ProblemSeverities
+}
+
+// GetProblemSeveritiesOk returns a tuple with the ProblemSeverities field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowFilterAnyOf3) GetProblemSeveritiesOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESFILTER2PROPERTIESPROBLEMSEVERITIESITEMS, bool) {
+	if o == nil || IsNil(o.ProblemSeverities) {
+		return nil, false
+	}
+	return o.ProblemSeverities, true
+}
+
+// HasProblemSeverities returns a boolean if a field has been set.
+func (o *WorkflowFilterAnyOf3) HasProblemSeverities() bool {
+	if o != nil && !IsNil(o.ProblemSeverities) {
+		return true
+	}
+
+	return false
+}
+
+// SetProblemSeverities gets a reference to the given []ENUMPROPERTIESDATAITEMSPROPERTIESFILTER2PROPERTIESPROBLEMSEVERITIESITEMS and assigns it to the ProblemSeverities field.
+func (o *WorkflowFilterAnyOf3) SetProblemSeverities(v []ENUMPROPERTIESDATAITEMSPROPERTIESFILTER2PROPERTIESPROBLEMSEVERITIESITEMS) {
+	o.ProblemSeverities = v
+}
+
+// GetProblemCodes returns the ProblemCodes field value if set, zero value otherwise.
+func (o *WorkflowFilterAnyOf3) GetProblemCodes() []ENUMPROPERTIESDATAITEMSPROPERTIESFILTER2PROPERTIESPROBLEMCODESITEMS {
+	if o == nil || IsNil(o.ProblemCodes) {
+		var ret []ENUMPROPERTIESDATAITEMSPROPERTIESFILTER2PROPERTIESPROBLEMCODESITEMS
+		return ret
+	}
+	return o.ProblemCodes
+}
+
+// GetProblemCodesOk returns a tuple with the ProblemCodes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowFilterAnyOf3) GetProblemCodesOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESFILTER2PROPERTIESPROBLEMCODESITEMS, bool) {
+	if o == nil || IsNil(o.ProblemCodes) {
+		return nil, false
+	}
+	return o.ProblemCodes, true
+}
+
+// HasProblemCodes returns a boolean if a field has been set.
+func (o *WorkflowFilterAnyOf3) HasProblemCodes() bool {
+	if o != nil && !IsNil(o.ProblemCodes) {
+		return true
+	}
+
+	return false
+}
+
+// SetProblemCodes gets a reference to the given []ENUMPROPERTIESDATAITEMSPROPERTIESFILTER2PROPERTIESPROBLEMCODESITEMS and assigns it to the ProblemCodes field.
+func (o *WorkflowFilterAnyOf3) SetProblemCodes(v []ENUMPROPERTIESDATAITEMSPROPERTIESFILTER2PROPERTIESPROBLEMCODESITEMS) {
+	o.ProblemCodes = v
+}
+
+// GetAssetClasses returns the AssetClasses field value if set, zero value otherwise.
+func (o *WorkflowFilterAnyOf3) GetAssetClasses() []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS {
+	if o == nil || IsNil(o.AssetClasses) {
+		var ret []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS
+		return ret
+	}
+	return o.AssetClasses
+}
+
+// GetAssetClassesOk returns a tuple with the AssetClasses field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowFilterAnyOf3) GetAssetClassesOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS, bool) {
+	if o == nil || IsNil(o.AssetClasses) {
+		return nil, false
+	}
+	return o.AssetClasses, true
+}
+
+// HasAssetClasses returns a boolean if a field has been set.
+func (o *WorkflowFilterAnyOf3) HasAssetClasses() bool {
+	if o != nil && !IsNil(o.AssetClasses) {
+		return true
+	}
+
+	return false
+}
+
+// SetAssetClasses gets a reference to the given []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS and assigns it to the AssetClasses field.
+func (o *WorkflowFilterAnyOf3) SetAssetClasses(v []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS) {
+	o.AssetClasses = v
+}
+
+// GetAssetStatuses returns the AssetStatuses field value if set, zero value otherwise.
+func (o *WorkflowFilterAnyOf3) GetAssetStatuses() []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS {
+	if o == nil || IsNil(o.AssetStatuses) {
+		var ret []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS
+		return ret
+	}
+	return o.AssetStatuses
+}
+
+// GetAssetStatusesOk returns a tuple with the AssetStatuses field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowFilterAnyOf3) GetAssetStatusesOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS, bool) {
+	if o == nil || IsNil(o.AssetStatuses) {
+		return nil, false
+	}
+	return o.AssetStatuses, true
+}
+
+// HasAssetStatuses returns a boolean if a field has been set.
+func (o *WorkflowFilterAnyOf3) HasAssetStatuses() bool {
+	if o != nil && !IsNil(o.AssetStatuses) {
+		return true
+	}
+
+	return false
+}
+
+// SetAssetStatuses gets a reference to the given []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS and assigns it to the AssetStatuses field.
+func (o *WorkflowFilterAnyOf3) SetAssetStatuses(v []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS) {
+	o.AssetStatuses = v
+}
+
+// GetAssetTypes returns the AssetTypes field value if set, zero value otherwise.
+func (o *WorkflowFilterAnyOf3) GetAssetTypes() []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE {
+	if o == nil || IsNil(o.AssetTypes) {
+		var ret []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE
+		return ret
+	}
+	return o.AssetTypes
+}
+
+// GetAssetTypesOk returns a tuple with the AssetTypes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowFilterAnyOf3) GetAssetTypesOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE, bool) {
+	if o == nil || IsNil(o.AssetTypes) {
+		return nil, false
+	}
+	return o.AssetTypes, true
+}
+
+// HasAssetTypes returns a boolean if a field has been set.
+func (o *WorkflowFilterAnyOf3) HasAssetTypes() bool {
+	if o != nil && !IsNil(o.AssetTypes) {
+		return true
+	}
+
+	return false
+}
+
+// SetAssetTypes gets a reference to the given []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE and assigns it to the AssetTypes field.
+func (o *WorkflowFilterAnyOf3) SetAssetTypes(v []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE) {
+	o.AssetTypes = v
+}
+
+// GetScanIds returns the ScanIds field value if set, zero value otherwise.
+func (o *WorkflowFilterAnyOf3) GetScanIds() []string {
+	if o == nil || IsNil(o.ScanIds) {
+		var ret []string
+		return ret
+	}
+	return o.ScanIds
+}
+
+// GetScanIdsOk returns a tuple with the ScanIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowFilterAnyOf3) GetScanIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.ScanIds) {
+		return nil, false
+	}
+	return o.ScanIds, true
+}
+
+// HasScanIds returns a boolean if a field has been set.
+func (o *WorkflowFilterAnyOf3) HasScanIds() bool {
+	if o != nil && !IsNil(o.ScanIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetScanIds gets a reference to the given []string and assigns it to the ScanIds field.
+func (o *WorkflowFilterAnyOf3) SetScanIds(v []string) {
+	o.ScanIds = v
+}
+
+// GetDnf returns the Dnf field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *WorkflowFilterAnyOf3) GetDnf() interface{} {
+	if o == nil {
+		var ret interface{}
+		return ret
+	}
+	return o.Dnf
+}
+
+// GetDnfOk returns a tuple with the Dnf field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *WorkflowFilterAnyOf3) GetDnfOk() (*interface{}, bool) {
+	if o == nil || IsNil(o.Dnf) {
+		return nil, false
+	}
+	return &o.Dnf, true
+}
+
+// HasDnf returns a boolean if a field has been set.
+func (o *WorkflowFilterAnyOf3) HasDnf() bool {
+	if o != nil && !IsNil(o.Dnf) {
+		return true
+	}
+
+	return false
+}
+
+// SetDnf gets a reference to the given interface{} and assigns it to the Dnf field.
+func (o *WorkflowFilterAnyOf3) SetDnf(v interface{}) {
+	o.Dnf = v
 }
 
 func (o WorkflowFilterAnyOf3) MarshalJSON() ([]byte, error) {
@@ -216,20 +745,68 @@ func (o WorkflowFilterAnyOf3) MarshalJSON() ([]byte, error) {
 
 func (o WorkflowFilterAnyOf3) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Ids) {
+		toSerialize["ids"] = o.Ids
+	}
 	if !IsNil(o.Search) {
 		toSerialize["search"] = o.Search
 	}
-	if !IsNil(o.Kinds) {
-		toSerialize["kinds"] = o.Kinds
+	if !IsNil(o.Risks) {
+		toSerialize["risks"] = o.Risks
+	}
+	if !IsNil(o.TagIds) {
+		toSerialize["tagIds"] = o.TagIds
+	}
+	if !IsNil(o.NoTags) {
+		toSerialize["noTags"] = o.NoTags
 	}
 	if !IsNil(o.ProjectIds) {
 		toSerialize["projectIds"] = o.ProjectIds
 	}
-	if !IsNil(o.Ids) {
-		toSerialize["ids"] = o.Ids
+	if !IsNil(o.NoProjects) {
+		toSerialize["noProjects"] = o.NoProjects
 	}
-	if !IsNil(o.LocationIds) {
-		toSerialize["locationIds"] = o.LocationIds
+	if !IsNil(o.AssetIds) {
+		toSerialize["assetIds"] = o.AssetIds
+	}
+	if !IsNil(o.AssetSchemaIds) {
+		toSerialize["assetSchemaIds"] = o.AssetSchemaIds
+	}
+	if !IsNil(o.IssueIds) {
+		toSerialize["issueIds"] = o.IssueIds
+	}
+	if !IsNil(o.Kinds) {
+		toSerialize["kinds"] = o.Kinds
+	}
+	if !IsNil(o.Domains) {
+		toSerialize["domains"] = o.Domains
+	}
+	if !IsNil(o.Initiators) {
+		toSerialize["initiators"] = o.Initiators
+	}
+	if !IsNil(o.LastScanStatuses) {
+		toSerialize["lastScanStatuses"] = o.LastScanStatuses
+	}
+	if !IsNil(o.ProblemSeverities) {
+		toSerialize["problemSeverities"] = o.ProblemSeverities
+	}
+	if !IsNil(o.ProblemCodes) {
+		toSerialize["problemCodes"] = o.ProblemCodes
+	}
+	if !IsNil(o.AssetClasses) {
+		toSerialize["assetClasses"] = o.AssetClasses
+	}
+	if !IsNil(o.AssetStatuses) {
+		toSerialize["assetStatuses"] = o.AssetStatuses
+	}
+	if !IsNil(o.AssetTypes) {
+		toSerialize["assetTypes"] = o.AssetTypes
+	}
+	if !IsNil(o.ScanIds) {
+		toSerialize["scanIds"] = o.ScanIds
+	}
+	if o.Dnf != nil {
+		toSerialize["dnf"] = o.Dnf
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -253,11 +830,27 @@ func (o *WorkflowFilterAnyOf3) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "search")
-		delete(additionalProperties, "kinds")
-		delete(additionalProperties, "projectIds")
 		delete(additionalProperties, "ids")
-		delete(additionalProperties, "locationIds")
+		delete(additionalProperties, "search")
+		delete(additionalProperties, "risks")
+		delete(additionalProperties, "tagIds")
+		delete(additionalProperties, "noTags")
+		delete(additionalProperties, "projectIds")
+		delete(additionalProperties, "noProjects")
+		delete(additionalProperties, "assetIds")
+		delete(additionalProperties, "assetSchemaIds")
+		delete(additionalProperties, "issueIds")
+		delete(additionalProperties, "kinds")
+		delete(additionalProperties, "domains")
+		delete(additionalProperties, "initiators")
+		delete(additionalProperties, "lastScanStatuses")
+		delete(additionalProperties, "problemSeverities")
+		delete(additionalProperties, "problemCodes")
+		delete(additionalProperties, "assetClasses")
+		delete(additionalProperties, "assetStatuses")
+		delete(additionalProperties, "assetTypes")
+		delete(additionalProperties, "scanIds")
+		delete(additionalProperties, "dnf")
 		o.AdditionalProperties = additionalProperties
 	}
 
