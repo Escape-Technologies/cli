@@ -20,8 +20,8 @@ var _ MappedNullable = &CreateWorkflowFilterUsingCustomFilterOnAssets{}
 
 // CreateWorkflowFilterUsingCustomFilterOnAssets struct for CreateWorkflowFilterUsingCustomFilterOnAssets
 type CreateWorkflowFilterUsingCustomFilterOnAssets struct {
-	Type                 ENUMASSETS                                          `json:"type"`
-	Filter               CreateWorkflowFilterUsingCustomFilterOnAssetsFilter `json:"filter"`
+	Type                 ENUMASSETS           `json:"type"`
+	Filter               WorkflowFilterAnyOf1 `json:"filter"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -31,7 +31,7 @@ type _CreateWorkflowFilterUsingCustomFilterOnAssets CreateWorkflowFilterUsingCus
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateWorkflowFilterUsingCustomFilterOnAssets(type_ ENUMASSETS, filter CreateWorkflowFilterUsingCustomFilterOnAssetsFilter) *CreateWorkflowFilterUsingCustomFilterOnAssets {
+func NewCreateWorkflowFilterUsingCustomFilterOnAssets(type_ ENUMASSETS, filter WorkflowFilterAnyOf1) *CreateWorkflowFilterUsingCustomFilterOnAssets {
 	this := CreateWorkflowFilterUsingCustomFilterOnAssets{}
 	this.Type = type_
 	this.Filter = filter
@@ -71,9 +71,9 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnAssets) SetType(v ENUMASSETS) {
 }
 
 // GetFilter returns the Filter field value
-func (o *CreateWorkflowFilterUsingCustomFilterOnAssets) GetFilter() CreateWorkflowFilterUsingCustomFilterOnAssetsFilter {
+func (o *CreateWorkflowFilterUsingCustomFilterOnAssets) GetFilter() WorkflowFilterAnyOf1 {
 	if o == nil {
-		var ret CreateWorkflowFilterUsingCustomFilterOnAssetsFilter
+		var ret WorkflowFilterAnyOf1
 		return ret
 	}
 
@@ -82,7 +82,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnAssets) GetFilter() CreateWorkfl
 
 // GetFilterOk returns a tuple with the Filter field value
 // and a boolean to check if the value has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnAssets) GetFilterOk() (*CreateWorkflowFilterUsingCustomFilterOnAssetsFilter, bool) {
+func (o *CreateWorkflowFilterUsingCustomFilterOnAssets) GetFilterOk() (*WorkflowFilterAnyOf1, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -90,7 +90,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnAssets) GetFilterOk() (*CreateWo
 }
 
 // SetFilter sets field value
-func (o *CreateWorkflowFilterUsingCustomFilterOnAssets) SetFilter(v CreateWorkflowFilterUsingCustomFilterOnAssetsFilter) {
+func (o *CreateWorkflowFilterUsingCustomFilterOnAssets) SetFilter(v WorkflowFilterAnyOf1) {
 	o.Filter = v
 }
 
