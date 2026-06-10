@@ -26,13 +26,9 @@ type CreateWorkflowRequest struct {
 	Name    string                                   `json:"name"`
 	Trigger ENUMPROPERTIESDATAITEMSPROPERTIESTRIGGER `json:"trigger"`
 	// The throttle in milliseconds for the workflow.
-	ThrottleMs *float32 `json:"throttleMs,omitempty"`
-	// Saved view to apply as the workflow filter.
-	ViewId *string                 `json:"viewId,omitempty"`
-	Filter NullableWorkflowFilter1 `json:"filter,omitempty"`
-	// Deprecated. Use `viewId` and `filter` instead.
-	Filters []CreateWorkflowRequestFiltersInner `json:"filters,omitempty"`
-	Actions []CreateWorkflowRequestActionsInner `json:"actions"`
+	ThrottleMs *float32                            `json:"throttleMs,omitempty"`
+	Filters    []CreateWorkflowRequestFiltersInner `json:"filters"`
+	Actions    []CreateWorkflowRequestActionsInner `json:"actions"`
 	// Optional list of project IDs to create the integration for
 	ProjectIds           []string `json:"projectIds,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -44,11 +40,12 @@ type _CreateWorkflowRequest CreateWorkflowRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateWorkflowRequest(organizationId string, name string, trigger ENUMPROPERTIESDATAITEMSPROPERTIESTRIGGER, actions []CreateWorkflowRequestActionsInner) *CreateWorkflowRequest {
+func NewCreateWorkflowRequest(organizationId string, name string, trigger ENUMPROPERTIESDATAITEMSPROPERTIESTRIGGER, filters []CreateWorkflowRequestFiltersInner, actions []CreateWorkflowRequestActionsInner) *CreateWorkflowRequest {
 	this := CreateWorkflowRequest{}
 	this.OrganizationId = organizationId
 	this.Name = name
 	this.Trigger = trigger
+	this.Filters = filters
 	this.Actions = actions
 	return &this
 }
@@ -165,109 +162,26 @@ func (o *CreateWorkflowRequest) SetThrottleMs(v float32) {
 	o.ThrottleMs = &v
 }
 
-// GetViewId returns the ViewId field value if set, zero value otherwise.
-func (o *CreateWorkflowRequest) GetViewId() string {
-	if o == nil || IsNil(o.ViewId) {
-		var ret string
-		return ret
-	}
-	return *o.ViewId
-}
-
-// GetViewIdOk returns a tuple with the ViewId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateWorkflowRequest) GetViewIdOk() (*string, bool) {
-	if o == nil || IsNil(o.ViewId) {
-		return nil, false
-	}
-	return o.ViewId, true
-}
-
-// HasViewId returns a boolean if a field has been set.
-func (o *CreateWorkflowRequest) HasViewId() bool {
-	if o != nil && !IsNil(o.ViewId) {
-		return true
-	}
-
-	return false
-}
-
-// SetViewId gets a reference to the given string and assigns it to the ViewId field.
-func (o *CreateWorkflowRequest) SetViewId(v string) {
-	o.ViewId = &v
-}
-
-// GetFilter returns the Filter field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *CreateWorkflowRequest) GetFilter() WorkflowFilter1 {
-	if o == nil || IsNil(o.Filter.Get()) {
-		var ret WorkflowFilter1
-		return ret
-	}
-	return *o.Filter.Get()
-}
-
-// GetFilterOk returns a tuple with the Filter field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *CreateWorkflowRequest) GetFilterOk() (*WorkflowFilter1, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Filter.Get(), o.Filter.IsSet()
-}
-
-// HasFilter returns a boolean if a field has been set.
-func (o *CreateWorkflowRequest) HasFilter() bool {
-	if o != nil && o.Filter.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetFilter gets a reference to the given NullableWorkflowFilter1 and assigns it to the Filter field.
-func (o *CreateWorkflowRequest) SetFilter(v WorkflowFilter1) {
-	o.Filter.Set(&v)
-}
-
-// SetFilterNil sets the value for Filter to be an explicit nil
-func (o *CreateWorkflowRequest) SetFilterNil() {
-	o.Filter.Set(nil)
-}
-
-// UnsetFilter ensures that no value is present for Filter, not even an explicit nil
-func (o *CreateWorkflowRequest) UnsetFilter() {
-	o.Filter.Unset()
-}
-
-// GetFilters returns the Filters field value if set, zero value otherwise.
+// GetFilters returns the Filters field value
 func (o *CreateWorkflowRequest) GetFilters() []CreateWorkflowRequestFiltersInner {
-	if o == nil || IsNil(o.Filters) {
+	if o == nil {
 		var ret []CreateWorkflowRequestFiltersInner
 		return ret
 	}
+
 	return o.Filters
 }
 
-// GetFiltersOk returns a tuple with the Filters field value if set, nil otherwise
+// GetFiltersOk returns a tuple with the Filters field value
 // and a boolean to check if the value has been set.
 func (o *CreateWorkflowRequest) GetFiltersOk() ([]CreateWorkflowRequestFiltersInner, bool) {
-	if o == nil || IsNil(o.Filters) {
+	if o == nil {
 		return nil, false
 	}
 	return o.Filters, true
 }
 
-// HasFilters returns a boolean if a field has been set.
-func (o *CreateWorkflowRequest) HasFilters() bool {
-	if o != nil && !IsNil(o.Filters) {
-		return true
-	}
-
-	return false
-}
-
-// SetFilters gets a reference to the given []CreateWorkflowRequestFiltersInner and assigns it to the Filters field.
+// SetFilters sets field value
 func (o *CreateWorkflowRequest) SetFilters(v []CreateWorkflowRequestFiltersInner) {
 	o.Filters = v
 }
@@ -344,15 +258,7 @@ func (o CreateWorkflowRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ThrottleMs) {
 		toSerialize["throttleMs"] = o.ThrottleMs
 	}
-	if !IsNil(o.ViewId) {
-		toSerialize["viewId"] = o.ViewId
-	}
-	if o.Filter.IsSet() {
-		toSerialize["filter"] = o.Filter.Get()
-	}
-	if !IsNil(o.Filters) {
-		toSerialize["filters"] = o.Filters
-	}
+	toSerialize["filters"] = o.Filters
 	toSerialize["actions"] = o.Actions
 	if !IsNil(o.ProjectIds) {
 		toSerialize["projectIds"] = o.ProjectIds
@@ -373,6 +279,7 @@ func (o *CreateWorkflowRequest) UnmarshalJSON(data []byte) (err error) {
 		"organizationId",
 		"name",
 		"trigger",
+		"filters",
 		"actions",
 	}
 
@@ -407,8 +314,6 @@ func (o *CreateWorkflowRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "trigger")
 		delete(additionalProperties, "throttleMs")
-		delete(additionalProperties, "viewId")
-		delete(additionalProperties, "filter")
 		delete(additionalProperties, "filters")
 		delete(additionalProperties, "actions")
 		delete(additionalProperties, "projectIds")
