@@ -15,41 +15,41 @@ import (
 	"fmt"
 )
 
-// checks if the WorkflowSummarizedFiltersInner type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &WorkflowSummarizedFiltersInner{}
+// checks if the WorkflowLegacyFilter type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &WorkflowLegacyFilter{}
 
-// WorkflowSummarizedFiltersInner struct for WorkflowSummarizedFiltersInner
-type WorkflowSummarizedFiltersInner struct {
-	Id                   string                                                      `json:"id"`
-	Type                 ENUMPROPERTIESDATAITEMSPROPERTIESFILTERSITEMSPROPERTIESTYPE `json:"type"`
-	Filter               interface{}                                                 `json:"filter,omitempty"`
-	View                 *WorkflowSummarizedFiltersInnerView                         `json:"view,omitempty"`
+// WorkflowLegacyFilter struct for WorkflowLegacyFilter
+type WorkflowLegacyFilter struct {
+	Id                   string                                                `json:"id"`
+	Type                 ENUMPROPERTIESDATAITEMSPROPERTIESVIEWPROPERTIESTARGET `json:"type"`
+	Filter               interface{}                                           `json:"filter,omitempty"`
+	View                 *WorkflowView1                                        `json:"view,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _WorkflowSummarizedFiltersInner WorkflowSummarizedFiltersInner
+type _WorkflowLegacyFilter WorkflowLegacyFilter
 
-// NewWorkflowSummarizedFiltersInner instantiates a new WorkflowSummarizedFiltersInner object
+// NewWorkflowLegacyFilter instantiates a new WorkflowLegacyFilter object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewWorkflowSummarizedFiltersInner(id string, type_ ENUMPROPERTIESDATAITEMSPROPERTIESFILTERSITEMSPROPERTIESTYPE) *WorkflowSummarizedFiltersInner {
-	this := WorkflowSummarizedFiltersInner{}
+func NewWorkflowLegacyFilter(id string, type_ ENUMPROPERTIESDATAITEMSPROPERTIESVIEWPROPERTIESTARGET) *WorkflowLegacyFilter {
+	this := WorkflowLegacyFilter{}
 	this.Id = id
 	this.Type = type_
 	return &this
 }
 
-// NewWorkflowSummarizedFiltersInnerWithDefaults instantiates a new WorkflowSummarizedFiltersInner object
+// NewWorkflowLegacyFilterWithDefaults instantiates a new WorkflowLegacyFilter object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewWorkflowSummarizedFiltersInnerWithDefaults() *WorkflowSummarizedFiltersInner {
-	this := WorkflowSummarizedFiltersInner{}
+func NewWorkflowLegacyFilterWithDefaults() *WorkflowLegacyFilter {
+	this := WorkflowLegacyFilter{}
 	return &this
 }
 
 // GetId returns the Id field value
-func (o *WorkflowSummarizedFiltersInner) GetId() string {
+func (o *WorkflowLegacyFilter) GetId() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -60,7 +60,7 @@ func (o *WorkflowSummarizedFiltersInner) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *WorkflowSummarizedFiltersInner) GetIdOk() (*string, bool) {
+func (o *WorkflowLegacyFilter) GetIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -68,14 +68,14 @@ func (o *WorkflowSummarizedFiltersInner) GetIdOk() (*string, bool) {
 }
 
 // SetId sets field value
-func (o *WorkflowSummarizedFiltersInner) SetId(v string) {
+func (o *WorkflowLegacyFilter) SetId(v string) {
 	o.Id = v
 }
 
 // GetType returns the Type field value
-func (o *WorkflowSummarizedFiltersInner) GetType() ENUMPROPERTIESDATAITEMSPROPERTIESFILTERSITEMSPROPERTIESTYPE {
+func (o *WorkflowLegacyFilter) GetType() ENUMPROPERTIESDATAITEMSPROPERTIESVIEWPROPERTIESTARGET {
 	if o == nil {
-		var ret ENUMPROPERTIESDATAITEMSPROPERTIESFILTERSITEMSPROPERTIESTYPE
+		var ret ENUMPROPERTIESDATAITEMSPROPERTIESVIEWPROPERTIESTARGET
 		return ret
 	}
 
@@ -84,7 +84,7 @@ func (o *WorkflowSummarizedFiltersInner) GetType() ENUMPROPERTIESDATAITEMSPROPER
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *WorkflowSummarizedFiltersInner) GetTypeOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESFILTERSITEMSPROPERTIESTYPE, bool) {
+func (o *WorkflowLegacyFilter) GetTypeOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESVIEWPROPERTIESTARGET, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -92,12 +92,12 @@ func (o *WorkflowSummarizedFiltersInner) GetTypeOk() (*ENUMPROPERTIESDATAITEMSPR
 }
 
 // SetType sets field value
-func (o *WorkflowSummarizedFiltersInner) SetType(v ENUMPROPERTIESDATAITEMSPROPERTIESFILTERSITEMSPROPERTIESTYPE) {
+func (o *WorkflowLegacyFilter) SetType(v ENUMPROPERTIESDATAITEMSPROPERTIESVIEWPROPERTIESTARGET) {
 	o.Type = v
 }
 
 // GetFilter returns the Filter field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *WorkflowSummarizedFiltersInner) GetFilter() interface{} {
+func (o *WorkflowLegacyFilter) GetFilter() interface{} {
 	if o == nil {
 		var ret interface{}
 		return ret
@@ -108,7 +108,7 @@ func (o *WorkflowSummarizedFiltersInner) GetFilter() interface{} {
 // GetFilterOk returns a tuple with the Filter field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *WorkflowSummarizedFiltersInner) GetFilterOk() (*interface{}, bool) {
+func (o *WorkflowLegacyFilter) GetFilterOk() (*interface{}, bool) {
 	if o == nil || IsNil(o.Filter) {
 		return nil, false
 	}
@@ -116,7 +116,7 @@ func (o *WorkflowSummarizedFiltersInner) GetFilterOk() (*interface{}, bool) {
 }
 
 // HasFilter returns a boolean if a field has been set.
-func (o *WorkflowSummarizedFiltersInner) HasFilter() bool {
+func (o *WorkflowLegacyFilter) HasFilter() bool {
 	if o != nil && !IsNil(o.Filter) {
 		return true
 	}
@@ -125,14 +125,14 @@ func (o *WorkflowSummarizedFiltersInner) HasFilter() bool {
 }
 
 // SetFilter gets a reference to the given interface{} and assigns it to the Filter field.
-func (o *WorkflowSummarizedFiltersInner) SetFilter(v interface{}) {
+func (o *WorkflowLegacyFilter) SetFilter(v interface{}) {
 	o.Filter = v
 }
 
 // GetView returns the View field value if set, zero value otherwise.
-func (o *WorkflowSummarizedFiltersInner) GetView() WorkflowSummarizedFiltersInnerView {
+func (o *WorkflowLegacyFilter) GetView() WorkflowView1 {
 	if o == nil || IsNil(o.View) {
-		var ret WorkflowSummarizedFiltersInnerView
+		var ret WorkflowView1
 		return ret
 	}
 	return *o.View
@@ -140,7 +140,7 @@ func (o *WorkflowSummarizedFiltersInner) GetView() WorkflowSummarizedFiltersInne
 
 // GetViewOk returns a tuple with the View field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *WorkflowSummarizedFiltersInner) GetViewOk() (*WorkflowSummarizedFiltersInnerView, bool) {
+func (o *WorkflowLegacyFilter) GetViewOk() (*WorkflowView1, bool) {
 	if o == nil || IsNil(o.View) {
 		return nil, false
 	}
@@ -148,7 +148,7 @@ func (o *WorkflowSummarizedFiltersInner) GetViewOk() (*WorkflowSummarizedFilters
 }
 
 // HasView returns a boolean if a field has been set.
-func (o *WorkflowSummarizedFiltersInner) HasView() bool {
+func (o *WorkflowLegacyFilter) HasView() bool {
 	if o != nil && !IsNil(o.View) {
 		return true
 	}
@@ -156,12 +156,12 @@ func (o *WorkflowSummarizedFiltersInner) HasView() bool {
 	return false
 }
 
-// SetView gets a reference to the given WorkflowSummarizedFiltersInnerView and assigns it to the View field.
-func (o *WorkflowSummarizedFiltersInner) SetView(v WorkflowSummarizedFiltersInnerView) {
+// SetView gets a reference to the given WorkflowView1 and assigns it to the View field.
+func (o *WorkflowLegacyFilter) SetView(v WorkflowView1) {
 	o.View = &v
 }
 
-func (o WorkflowSummarizedFiltersInner) MarshalJSON() ([]byte, error) {
+func (o WorkflowLegacyFilter) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -169,7 +169,7 @@ func (o WorkflowSummarizedFiltersInner) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o WorkflowSummarizedFiltersInner) ToMap() (map[string]interface{}, error) {
+func (o WorkflowLegacyFilter) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["type"] = o.Type
@@ -187,7 +187,7 @@ func (o WorkflowSummarizedFiltersInner) ToMap() (map[string]interface{}, error) 
 	return toSerialize, nil
 }
 
-func (o *WorkflowSummarizedFiltersInner) UnmarshalJSON(data []byte) (err error) {
+func (o *WorkflowLegacyFilter) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -210,15 +210,15 @@ func (o *WorkflowSummarizedFiltersInner) UnmarshalJSON(data []byte) (err error) 
 		}
 	}
 
-	varWorkflowSummarizedFiltersInner := _WorkflowSummarizedFiltersInner{}
+	varWorkflowLegacyFilter := _WorkflowLegacyFilter{}
 
-	err = json.Unmarshal(data, &varWorkflowSummarizedFiltersInner)
+	err = json.Unmarshal(data, &varWorkflowLegacyFilter)
 
 	if err != nil {
 		return err
 	}
 
-	*o = WorkflowSummarizedFiltersInner(varWorkflowSummarizedFiltersInner)
+	*o = WorkflowLegacyFilter(varWorkflowLegacyFilter)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -233,38 +233,38 @@ func (o *WorkflowSummarizedFiltersInner) UnmarshalJSON(data []byte) (err error) 
 	return err
 }
 
-type NullableWorkflowSummarizedFiltersInner struct {
-	value *WorkflowSummarizedFiltersInner
+type NullableWorkflowLegacyFilter struct {
+	value *WorkflowLegacyFilter
 	isSet bool
 }
 
-func (v NullableWorkflowSummarizedFiltersInner) Get() *WorkflowSummarizedFiltersInner {
+func (v NullableWorkflowLegacyFilter) Get() *WorkflowLegacyFilter {
 	return v.value
 }
 
-func (v *NullableWorkflowSummarizedFiltersInner) Set(val *WorkflowSummarizedFiltersInner) {
+func (v *NullableWorkflowLegacyFilter) Set(val *WorkflowLegacyFilter) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableWorkflowSummarizedFiltersInner) IsSet() bool {
+func (v NullableWorkflowLegacyFilter) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableWorkflowSummarizedFiltersInner) Unset() {
+func (v *NullableWorkflowLegacyFilter) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableWorkflowSummarizedFiltersInner(val *WorkflowSummarizedFiltersInner) *NullableWorkflowSummarizedFiltersInner {
-	return &NullableWorkflowSummarizedFiltersInner{value: val, isSet: true}
+func NewNullableWorkflowLegacyFilter(val *WorkflowLegacyFilter) *NullableWorkflowLegacyFilter {
+	return &NullableWorkflowLegacyFilter{value: val, isSet: true}
 }
 
-func (v NullableWorkflowSummarizedFiltersInner) MarshalJSON() ([]byte, error) {
+func (v NullableWorkflowLegacyFilter) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableWorkflowSummarizedFiltersInner) UnmarshalJSON(src []byte) error {
+func (v *NullableWorkflowLegacyFilter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
