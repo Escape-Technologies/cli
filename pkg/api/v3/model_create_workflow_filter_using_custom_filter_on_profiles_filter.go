@@ -19,26 +19,27 @@ var _ MappedNullable = &CreateWorkflowFilterUsingCustomFilterOnProfilesFilter{}
 
 // CreateWorkflowFilterUsingCustomFilterOnProfilesFilter struct for CreateWorkflowFilterUsingCustomFilterOnProfilesFilter
 type CreateWorkflowFilterUsingCustomFilterOnProfilesFilter struct {
-	Ids                  []string                                                                      `json:"ids,omitempty"`
-	Search               *string                                                                       `json:"search,omitempty"`
-	Risks                []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS                  `json:"risks,omitempty"`
-	TagIds               []string                                                                      `json:"tagIds,omitempty"`
-	NoTags               *bool                                                                         `json:"noTags,omitempty"`
-	ProjectIds           []string                                                                      `json:"projectIds,omitempty"`
-	NoProjects           *bool                                                                         `json:"noProjects,omitempty"`
-	AssetIds             []string                                                                      `json:"assetIds,omitempty"`
-	AssetSchemaIds       []string                                                                      `json:"assetSchemaIds,omitempty"`
-	IssueIds             []string                                                                      `json:"issueIds,omitempty"`
-	Kinds                []ENUMPROPERTIESWHEREPROPERTIESSCANNERKINDSITEMS                              `json:"kinds,omitempty"`
-	Domains              []string                                                                      `json:"domains,omitempty"`
-	Initiators           []ENUMPROPERTIESDATAITEMSPROPERTIESINITIATORSITEMS                            `json:"initiators,omitempty"`
-	LastScanStatuses     []ENUMPROPERTIESSTATUS                                                        `json:"lastScanStatuses,omitempty"`
-	ProblemSeverities    []ENUMPROPERTIESFILTERSITEMS2PROPERTIESFILTERPROPERTIESPROBLEMSEVERITIESITEMS `json:"problemSeverities,omitempty"`
-	ProblemCodes         []ENUMPROPERTIESFILTERSITEMS2PROPERTIESFILTERPROPERTIESPROBLEMCODESITEMS      `json:"problemCodes,omitempty"`
-	AssetClasses         []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS            `json:"assetClasses,omitempty"`
-	AssetStatuses        []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS           `json:"assetStatuses,omitempty"`
-	AssetTypes           []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE             `json:"assetTypes,omitempty"`
-	ScanIds              []string                                                                      `json:"scanIds,omitempty"`
+	Ids                  []string                                                                   `json:"ids,omitempty"`
+	Search               *string                                                                    `json:"search,omitempty"`
+	Risks                []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS               `json:"risks,omitempty"`
+	TagIds               []string                                                                   `json:"tagIds,omitempty"`
+	NoTags               *bool                                                                      `json:"noTags,omitempty"`
+	ProjectIds           []string                                                                   `json:"projectIds,omitempty"`
+	NoProjects           *bool                                                                      `json:"noProjects,omitempty"`
+	AssetIds             []string                                                                   `json:"assetIds,omitempty"`
+	AssetSchemaIds       []string                                                                   `json:"assetSchemaIds,omitempty"`
+	IssueIds             []string                                                                   `json:"issueIds,omitempty"`
+	Kinds                []ENUMPROPERTIESWHEREPROPERTIESSCANNERKINDSITEMS                           `json:"kinds,omitempty"`
+	Domains              []string                                                                   `json:"domains,omitempty"`
+	Initiators           []ENUMPROPERTIESDATAITEMSPROPERTIESINITIATORSITEMS                         `json:"initiators,omitempty"`
+	LastScanStatuses     []ENUMPROPERTIESSTATUS                                                     `json:"lastScanStatuses,omitempty"`
+	ProblemSeverities    []ENUMPROPERTIESDATAITEMSPROPERTIESFILTER2PROPERTIESPROBLEMSEVERITIESITEMS `json:"problemSeverities,omitempty"`
+	ProblemCodes         []ENUMPROPERTIESDATAITEMSPROPERTIESFILTER2PROPERTIESPROBLEMCODESITEMS      `json:"problemCodes,omitempty"`
+	AssetClasses         []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS         `json:"assetClasses,omitempty"`
+	AssetStatuses        []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS        `json:"assetStatuses,omitempty"`
+	AssetTypes           []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE          `json:"assetTypes,omitempty"`
+	ScanIds              []string                                                                   `json:"scanIds,omitempty"`
+	Dnf                  interface{}                                                                `json:"dnf,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -510,9 +511,9 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) SetLastScanStatu
 }
 
 // GetProblemSeverities returns the ProblemSeverities field value if set, zero value otherwise.
-func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetProblemSeverities() []ENUMPROPERTIESFILTERSITEMS2PROPERTIESFILTERPROPERTIESPROBLEMSEVERITIESITEMS {
+func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetProblemSeverities() []ENUMPROPERTIESDATAITEMSPROPERTIESFILTER2PROPERTIESPROBLEMSEVERITIESITEMS {
 	if o == nil || IsNil(o.ProblemSeverities) {
-		var ret []ENUMPROPERTIESFILTERSITEMS2PROPERTIESFILTERPROPERTIESPROBLEMSEVERITIESITEMS
+		var ret []ENUMPROPERTIESDATAITEMSPROPERTIESFILTER2PROPERTIESPROBLEMSEVERITIESITEMS
 		return ret
 	}
 	return o.ProblemSeverities
@@ -520,7 +521,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetProblemSeveri
 
 // GetProblemSeveritiesOk returns a tuple with the ProblemSeverities field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetProblemSeveritiesOk() ([]ENUMPROPERTIESFILTERSITEMS2PROPERTIESFILTERPROPERTIESPROBLEMSEVERITIESITEMS, bool) {
+func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetProblemSeveritiesOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESFILTER2PROPERTIESPROBLEMSEVERITIESITEMS, bool) {
 	if o == nil || IsNil(o.ProblemSeverities) {
 		return nil, false
 	}
@@ -536,15 +537,15 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) HasProblemSeveri
 	return false
 }
 
-// SetProblemSeverities gets a reference to the given []ENUMPROPERTIESFILTERSITEMS2PROPERTIESFILTERPROPERTIESPROBLEMSEVERITIESITEMS and assigns it to the ProblemSeverities field.
-func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) SetProblemSeverities(v []ENUMPROPERTIESFILTERSITEMS2PROPERTIESFILTERPROPERTIESPROBLEMSEVERITIESITEMS) {
+// SetProblemSeverities gets a reference to the given []ENUMPROPERTIESDATAITEMSPROPERTIESFILTER2PROPERTIESPROBLEMSEVERITIESITEMS and assigns it to the ProblemSeverities field.
+func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) SetProblemSeverities(v []ENUMPROPERTIESDATAITEMSPROPERTIESFILTER2PROPERTIESPROBLEMSEVERITIESITEMS) {
 	o.ProblemSeverities = v
 }
 
 // GetProblemCodes returns the ProblemCodes field value if set, zero value otherwise.
-func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetProblemCodes() []ENUMPROPERTIESFILTERSITEMS2PROPERTIESFILTERPROPERTIESPROBLEMCODESITEMS {
+func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetProblemCodes() []ENUMPROPERTIESDATAITEMSPROPERTIESFILTER2PROPERTIESPROBLEMCODESITEMS {
 	if o == nil || IsNil(o.ProblemCodes) {
-		var ret []ENUMPROPERTIESFILTERSITEMS2PROPERTIESFILTERPROPERTIESPROBLEMCODESITEMS
+		var ret []ENUMPROPERTIESDATAITEMSPROPERTIESFILTER2PROPERTIESPROBLEMCODESITEMS
 		return ret
 	}
 	return o.ProblemCodes
@@ -552,7 +553,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetProblemCodes(
 
 // GetProblemCodesOk returns a tuple with the ProblemCodes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetProblemCodesOk() ([]ENUMPROPERTIESFILTERSITEMS2PROPERTIESFILTERPROPERTIESPROBLEMCODESITEMS, bool) {
+func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetProblemCodesOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESFILTER2PROPERTIESPROBLEMCODESITEMS, bool) {
 	if o == nil || IsNil(o.ProblemCodes) {
 		return nil, false
 	}
@@ -568,8 +569,8 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) HasProblemCodes(
 	return false
 }
 
-// SetProblemCodes gets a reference to the given []ENUMPROPERTIESFILTERSITEMS2PROPERTIESFILTERPROPERTIESPROBLEMCODESITEMS and assigns it to the ProblemCodes field.
-func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) SetProblemCodes(v []ENUMPROPERTIESFILTERSITEMS2PROPERTIESFILTERPROPERTIESPROBLEMCODESITEMS) {
+// SetProblemCodes gets a reference to the given []ENUMPROPERTIESDATAITEMSPROPERTIESFILTER2PROPERTIESPROBLEMCODESITEMS and assigns it to the ProblemCodes field.
+func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) SetProblemCodes(v []ENUMPROPERTIESDATAITEMSPROPERTIESFILTER2PROPERTIESPROBLEMCODESITEMS) {
 	o.ProblemCodes = v
 }
 
@@ -701,6 +702,39 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) SetScanIds(v []s
 	o.ScanIds = v
 }
 
+// GetDnf returns the Dnf field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetDnf() interface{} {
+	if o == nil {
+		var ret interface{}
+		return ret
+	}
+	return o.Dnf
+}
+
+// GetDnfOk returns a tuple with the Dnf field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) GetDnfOk() (*interface{}, bool) {
+	if o == nil || IsNil(o.Dnf) {
+		return nil, false
+	}
+	return &o.Dnf, true
+}
+
+// HasDnf returns a boolean if a field has been set.
+func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) HasDnf() bool {
+	if o != nil && !IsNil(o.Dnf) {
+		return true
+	}
+
+	return false
+}
+
+// SetDnf gets a reference to the given interface{} and assigns it to the Dnf field.
+func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) SetDnf(v interface{}) {
+	o.Dnf = v
+}
+
 func (o CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -771,6 +805,9 @@ func (o CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) ToMap() (map[stri
 	if !IsNil(o.ScanIds) {
 		toSerialize["scanIds"] = o.ScanIds
 	}
+	if o.Dnf != nil {
+		toSerialize["dnf"] = o.Dnf
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -813,6 +850,7 @@ func (o *CreateWorkflowFilterUsingCustomFilterOnProfilesFilter) UnmarshalJSON(da
 		delete(additionalProperties, "assetStatuses")
 		delete(additionalProperties, "assetTypes")
 		delete(additionalProperties, "scanIds")
+		delete(additionalProperties, "dnf")
 		o.AdditionalProperties = additionalProperties
 	}
 
