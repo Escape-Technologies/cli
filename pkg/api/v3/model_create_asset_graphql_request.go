@@ -27,11 +27,11 @@ type CreateAssetGRAPHQLRequest struct {
 	AssetClass                ENUMAPISERVICE                                                                   `json:"asset_class"`
 	ExtraMetadata             map[string]interface{}                                                           `json:"extra_metadata,omitempty"`
 	ScreenshotS3Key           *string                                                                          `json:"screenshot_s3_key,omitempty"`
-	AssetType                 ENUMGRAPHQL                                                                      `json:"asset_type"`
 	Url                       string                                                                           `json:"url"`
-	Favicon                   *string                                                                          `json:"favicon,omitempty"`
 	ReachableVia              []string                                                                         `json:"reachable_via,omitempty"`
 	ReachableViaExternalProxy *bool                                                                            `json:"reachable_via_external_proxy,omitempty"`
+	AssetType                 ENUMGRAPHQL                                                                      `json:"asset_type"`
+	Favicon                   *string                                                                          `json:"favicon,omitempty"`
 	Private                   *bool                                                                            `json:"private,omitempty"`
 	PrivateLocationId         *string                                                                          `json:"private_location_id,omitempty"`
 	Environment               *ENUMPROPERTIESENVIRONMENT                                                       `json:"environment,omitempty"`
@@ -53,11 +53,11 @@ type _CreateAssetGRAPHQLRequest CreateAssetGRAPHQLRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetGRAPHQLRequest(assetClass ENUMAPISERVICE, assetType ENUMGRAPHQL, url string) *CreateAssetGRAPHQLRequest {
+func NewCreateAssetGRAPHQLRequest(assetClass ENUMAPISERVICE, url string, assetType ENUMGRAPHQL) *CreateAssetGRAPHQLRequest {
 	this := CreateAssetGRAPHQLRequest{}
 	this.AssetClass = assetClass
-	this.AssetType = assetType
 	this.Url = url
+	this.AssetType = assetType
 	return &this
 }
 
@@ -221,30 +221,6 @@ func (o *CreateAssetGRAPHQLRequest) SetScreenshotS3Key(v string) {
 	o.ScreenshotS3Key = &v
 }
 
-// GetAssetType returns the AssetType field value
-func (o *CreateAssetGRAPHQLRequest) GetAssetType() ENUMGRAPHQL {
-	if o == nil {
-		var ret ENUMGRAPHQL
-		return ret
-	}
-
-	return o.AssetType
-}
-
-// GetAssetTypeOk returns a tuple with the AssetType field value
-// and a boolean to check if the value has been set.
-func (o *CreateAssetGRAPHQLRequest) GetAssetTypeOk() (*ENUMGRAPHQL, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.AssetType, true
-}
-
-// SetAssetType sets field value
-func (o *CreateAssetGRAPHQLRequest) SetAssetType(v ENUMGRAPHQL) {
-	o.AssetType = v
-}
-
 // GetUrl returns the Url field value
 func (o *CreateAssetGRAPHQLRequest) GetUrl() string {
 	if o == nil {
@@ -267,38 +243,6 @@ func (o *CreateAssetGRAPHQLRequest) GetUrlOk() (*string, bool) {
 // SetUrl sets field value
 func (o *CreateAssetGRAPHQLRequest) SetUrl(v string) {
 	o.Url = v
-}
-
-// GetFavicon returns the Favicon field value if set, zero value otherwise.
-func (o *CreateAssetGRAPHQLRequest) GetFavicon() string {
-	if o == nil || IsNil(o.Favicon) {
-		var ret string
-		return ret
-	}
-	return *o.Favicon
-}
-
-// GetFaviconOk returns a tuple with the Favicon field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateAssetGRAPHQLRequest) GetFaviconOk() (*string, bool) {
-	if o == nil || IsNil(o.Favicon) {
-		return nil, false
-	}
-	return o.Favicon, true
-}
-
-// HasFavicon returns a boolean if a field has been set.
-func (o *CreateAssetGRAPHQLRequest) HasFavicon() bool {
-	if o != nil && !IsNil(o.Favicon) {
-		return true
-	}
-
-	return false
-}
-
-// SetFavicon gets a reference to the given string and assigns it to the Favicon field.
-func (o *CreateAssetGRAPHQLRequest) SetFavicon(v string) {
-	o.Favicon = &v
 }
 
 // GetReachableVia returns the ReachableVia field value if set, zero value otherwise.
@@ -363,6 +307,62 @@ func (o *CreateAssetGRAPHQLRequest) HasReachableViaExternalProxy() bool {
 // SetReachableViaExternalProxy gets a reference to the given bool and assigns it to the ReachableViaExternalProxy field.
 func (o *CreateAssetGRAPHQLRequest) SetReachableViaExternalProxy(v bool) {
 	o.ReachableViaExternalProxy = &v
+}
+
+// GetAssetType returns the AssetType field value
+func (o *CreateAssetGRAPHQLRequest) GetAssetType() ENUMGRAPHQL {
+	if o == nil {
+		var ret ENUMGRAPHQL
+		return ret
+	}
+
+	return o.AssetType
+}
+
+// GetAssetTypeOk returns a tuple with the AssetType field value
+// and a boolean to check if the value has been set.
+func (o *CreateAssetGRAPHQLRequest) GetAssetTypeOk() (*ENUMGRAPHQL, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.AssetType, true
+}
+
+// SetAssetType sets field value
+func (o *CreateAssetGRAPHQLRequest) SetAssetType(v ENUMGRAPHQL) {
+	o.AssetType = v
+}
+
+// GetFavicon returns the Favicon field value if set, zero value otherwise.
+func (o *CreateAssetGRAPHQLRequest) GetFavicon() string {
+	if o == nil || IsNil(o.Favicon) {
+		var ret string
+		return ret
+	}
+	return *o.Favicon
+}
+
+// GetFaviconOk returns a tuple with the Favicon field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetGRAPHQLRequest) GetFaviconOk() (*string, bool) {
+	if o == nil || IsNil(o.Favicon) {
+		return nil, false
+	}
+	return o.Favicon, true
+}
+
+// HasFavicon returns a boolean if a field has been set.
+func (o *CreateAssetGRAPHQLRequest) HasFavicon() bool {
+	if o != nil && !IsNil(o.Favicon) {
+		return true
+	}
+
+	return false
+}
+
+// SetFavicon gets a reference to the given string and assigns it to the Favicon field.
+func (o *CreateAssetGRAPHQLRequest) SetFavicon(v string) {
+	o.Favicon = &v
 }
 
 // GetPrivate returns the Private field value if set, zero value otherwise.
@@ -772,16 +772,16 @@ func (o CreateAssetGRAPHQLRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ScreenshotS3Key) {
 		toSerialize["screenshot_s3_key"] = o.ScreenshotS3Key
 	}
-	toSerialize["asset_type"] = o.AssetType
 	toSerialize["url"] = o.Url
-	if !IsNil(o.Favicon) {
-		toSerialize["favicon"] = o.Favicon
-	}
 	if !IsNil(o.ReachableVia) {
 		toSerialize["reachable_via"] = o.ReachableVia
 	}
 	if !IsNil(o.ReachableViaExternalProxy) {
 		toSerialize["reachable_via_external_proxy"] = o.ReachableViaExternalProxy
+	}
+	toSerialize["asset_type"] = o.AssetType
+	if !IsNil(o.Favicon) {
+		toSerialize["favicon"] = o.Favicon
 	}
 	if !IsNil(o.Private) {
 		toSerialize["private"] = o.Private
@@ -833,8 +833,8 @@ func (o *CreateAssetGRAPHQLRequest) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"asset_class",
-		"asset_type",
 		"url",
+		"asset_type",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -869,11 +869,11 @@ func (o *CreateAssetGRAPHQLRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "asset_class")
 		delete(additionalProperties, "extra_metadata")
 		delete(additionalProperties, "screenshot_s3_key")
-		delete(additionalProperties, "asset_type")
 		delete(additionalProperties, "url")
-		delete(additionalProperties, "favicon")
 		delete(additionalProperties, "reachable_via")
 		delete(additionalProperties, "reachable_via_external_proxy")
+		delete(additionalProperties, "asset_type")
+		delete(additionalProperties, "favicon")
 		delete(additionalProperties, "private")
 		delete(additionalProperties, "private_location_id")
 		delete(additionalProperties, "environment")
