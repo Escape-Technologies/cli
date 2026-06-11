@@ -19,15 +19,16 @@ var _ MappedNullable = &CreateSchemaViaFetchAuthentication{}
 
 // CreateSchemaViaFetchAuthentication The authentication object of the asset
 type CreateSchemaViaFetchAuthentication struct {
-	Schema               *string                                                           `json:"$schema,omitempty"`
-	Lifetime             *float32                                                          `json:"lifetime,omitempty"`
-	Procedures           []GetProfile200ResponseConfigurationAuthenticationProceduresInner `json:"procedures,omitempty"`
-	Users                []GetProfile200ResponseConfigurationAuthenticationUsersInner      `json:"users,omitempty"`
-	Validation           *bool                                                             `json:"validation,omitempty"`
-	Proxy                *string                                                           `json:"proxy,omitempty"`
-	Presets              []GetProfile200ResponseConfigurationAuthenticationPresetsInner    `json:"presets,omitempty"`
-	MultiUserIsFallback  *bool                                                             `json:"multi_user_is_fallback,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Schema                   *string                                                           `json:"$schema,omitempty"`
+	Lifetime                 *float32                                                          `json:"lifetime,omitempty"`
+	Procedures               []GetProfile200ResponseConfigurationAuthenticationProceduresInner `json:"procedures,omitempty"`
+	Users                    []GetProfile200ResponseConfigurationAuthenticationUsersInner      `json:"users,omitempty"`
+	Validation               *bool                                                             `json:"validation,omitempty"`
+	Proxy                    *string                                                           `json:"proxy,omitempty"`
+	Presets                  []GetProfile200ResponseConfigurationAuthenticationPresetsInner    `json:"presets,omitempty"`
+	MultiUserIsFallback      *bool                                                             `json:"multi_user_is_fallback,omitempty"`
+	IsParallelAuthValidation *bool                                                             `json:"is_parallel_auth_validation,omitempty"`
+	AdditionalProperties     map[string]interface{}
 }
 
 type _CreateSchemaViaFetchAuthentication CreateSchemaViaFetchAuthentication
@@ -305,6 +306,38 @@ func (o *CreateSchemaViaFetchAuthentication) SetMultiUserIsFallback(v bool) {
 	o.MultiUserIsFallback = &v
 }
 
+// GetIsParallelAuthValidation returns the IsParallelAuthValidation field value if set, zero value otherwise.
+func (o *CreateSchemaViaFetchAuthentication) GetIsParallelAuthValidation() bool {
+	if o == nil || IsNil(o.IsParallelAuthValidation) {
+		var ret bool
+		return ret
+	}
+	return *o.IsParallelAuthValidation
+}
+
+// GetIsParallelAuthValidationOk returns a tuple with the IsParallelAuthValidation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateSchemaViaFetchAuthentication) GetIsParallelAuthValidationOk() (*bool, bool) {
+	if o == nil || IsNil(o.IsParallelAuthValidation) {
+		return nil, false
+	}
+	return o.IsParallelAuthValidation, true
+}
+
+// HasIsParallelAuthValidation returns a boolean if a field has been set.
+func (o *CreateSchemaViaFetchAuthentication) HasIsParallelAuthValidation() bool {
+	if o != nil && !IsNil(o.IsParallelAuthValidation) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsParallelAuthValidation gets a reference to the given bool and assigns it to the IsParallelAuthValidation field.
+func (o *CreateSchemaViaFetchAuthentication) SetIsParallelAuthValidation(v bool) {
+	o.IsParallelAuthValidation = &v
+}
+
 func (o CreateSchemaViaFetchAuthentication) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -339,6 +372,9 @@ func (o CreateSchemaViaFetchAuthentication) ToMap() (map[string]interface{}, err
 	if !IsNil(o.MultiUserIsFallback) {
 		toSerialize["multi_user_is_fallback"] = o.MultiUserIsFallback
 	}
+	if !IsNil(o.IsParallelAuthValidation) {
+		toSerialize["is_parallel_auth_validation"] = o.IsParallelAuthValidation
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -369,6 +405,7 @@ func (o *CreateSchemaViaFetchAuthentication) UnmarshalJSON(data []byte) (err err
 		delete(additionalProperties, "proxy")
 		delete(additionalProperties, "presets")
 		delete(additionalProperties, "multi_user_is_fallback")
+		delete(additionalProperties, "is_parallel_auth_validation")
 		o.AdditionalProperties = additionalProperties
 	}
 
