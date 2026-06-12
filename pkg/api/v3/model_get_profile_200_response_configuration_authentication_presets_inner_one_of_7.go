@@ -24,7 +24,7 @@ type GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf7 struct {
 	Users                []GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf1UsersInner             `json:"users"`
 	Region               ENUMPROPERTIESCONFIGURATIONPROPERTIESAUTHENTICATIONPROPERTIESPRESETSITEMS7PROPERTIESREGION `json:"region"`
 	ClientId             string                                                                                     `json:"client_id"`
-	ClientSecret         string                                                                                     `json:"client_secret"`
+	ClientSecret         *string                                                                                    `json:"client_secret,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -34,13 +34,12 @@ type _GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf7 GetProf
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf7(type_ ENUMCOGNITOUSERPASS, users []GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf1UsersInner, region ENUMPROPERTIESCONFIGURATIONPROPERTIESAUTHENTICATIONPROPERTIESPRESETSITEMS7PROPERTIESREGION, clientId string, clientSecret string) *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf7 {
+func NewGetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf7(type_ ENUMCOGNITOUSERPASS, users []GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf1UsersInner, region ENUMPROPERTIESCONFIGURATIONPROPERTIESAUTHENTICATIONPROPERTIESPRESETSITEMS7PROPERTIESREGION, clientId string) *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf7 {
 	this := GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf7{}
 	this.Type = type_
 	this.Users = users
 	this.Region = region
 	this.ClientId = clientId
-	this.ClientSecret = clientSecret
 	return &this
 }
 
@@ -148,28 +147,36 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf7) Set
 	o.ClientId = v
 }
 
-// GetClientSecret returns the ClientSecret field value
+// GetClientSecret returns the ClientSecret field value if set, zero value otherwise.
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf7) GetClientSecret() string {
-	if o == nil {
+	if o == nil || IsNil(o.ClientSecret) {
 		var ret string
 		return ret
 	}
-
-	return o.ClientSecret
+	return *o.ClientSecret
 }
 
-// GetClientSecretOk returns a tuple with the ClientSecret field value
+// GetClientSecretOk returns a tuple with the ClientSecret field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf7) GetClientSecretOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.ClientSecret) {
 		return nil, false
 	}
-	return &o.ClientSecret, true
+	return o.ClientSecret, true
 }
 
-// SetClientSecret sets field value
+// HasClientSecret returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf7) HasClientSecret() bool {
+	if o != nil && !IsNil(o.ClientSecret) {
+		return true
+	}
+
+	return false
+}
+
+// SetClientSecret gets a reference to the given string and assigns it to the ClientSecret field.
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf7) SetClientSecret(v string) {
-	o.ClientSecret = v
+	o.ClientSecret = &v
 }
 
 func (o GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf7) MarshalJSON() ([]byte, error) {
@@ -186,7 +193,9 @@ func (o GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf7) ToMa
 	toSerialize["users"] = o.Users
 	toSerialize["region"] = o.Region
 	toSerialize["client_id"] = o.ClientId
-	toSerialize["client_secret"] = o.ClientSecret
+	if !IsNil(o.ClientSecret) {
+		toSerialize["client_secret"] = o.ClientSecret
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -204,7 +213,6 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf7) Unm
 		"users",
 		"region",
 		"client_id",
-		"client_secret",
 	}
 
 	allProperties := make(map[string]interface{})
