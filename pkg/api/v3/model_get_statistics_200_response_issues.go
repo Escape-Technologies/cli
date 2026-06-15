@@ -20,6 +20,8 @@ var _ MappedNullable = &GetStatistics200ResponseIssues{}
 
 // GetStatistics200ResponseIssues struct for GetStatistics200ResponseIssues
 type GetStatistics200ResponseIssues struct {
+	// Number of CRITICAL severity open issues
+	Critical float32 `json:"critical"`
 	// Number of HIGH severity open issues
 	High float32 `json:"high"`
 	// Number of MEDIUM severity open issues
@@ -37,8 +39,9 @@ type _GetStatistics200ResponseIssues GetStatistics200ResponseIssues
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetStatistics200ResponseIssues(high float32, medium float32, low float32, info float32) *GetStatistics200ResponseIssues {
+func NewGetStatistics200ResponseIssues(critical float32, high float32, medium float32, low float32, info float32) *GetStatistics200ResponseIssues {
 	this := GetStatistics200ResponseIssues{}
+	this.Critical = critical
 	this.High = high
 	this.Medium = medium
 	this.Low = low
@@ -52,6 +55,30 @@ func NewGetStatistics200ResponseIssues(high float32, medium float32, low float32
 func NewGetStatistics200ResponseIssuesWithDefaults() *GetStatistics200ResponseIssues {
 	this := GetStatistics200ResponseIssues{}
 	return &this
+}
+
+// GetCritical returns the Critical field value
+func (o *GetStatistics200ResponseIssues) GetCritical() float32 {
+	if o == nil {
+		var ret float32
+		return ret
+	}
+
+	return o.Critical
+}
+
+// GetCriticalOk returns a tuple with the Critical field value
+// and a boolean to check if the value has been set.
+func (o *GetStatistics200ResponseIssues) GetCriticalOk() (*float32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Critical, true
+}
+
+// SetCritical sets field value
+func (o *GetStatistics200ResponseIssues) SetCritical(v float32) {
+	o.Critical = v
 }
 
 // GetHigh returns the High field value
@@ -160,6 +187,7 @@ func (o GetStatistics200ResponseIssues) MarshalJSON() ([]byte, error) {
 
 func (o GetStatistics200ResponseIssues) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["critical"] = o.Critical
 	toSerialize["high"] = o.High
 	toSerialize["medium"] = o.Medium
 	toSerialize["low"] = o.Low
@@ -177,6 +205,7 @@ func (o *GetStatistics200ResponseIssues) UnmarshalJSON(data []byte) (err error) 
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"critical",
 		"high",
 		"medium",
 		"low",
@@ -210,6 +239,7 @@ func (o *GetStatistics200ResponseIssues) UnmarshalJSON(data []byte) (err error) 
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "critical")
 		delete(additionalProperties, "high")
 		delete(additionalProperties, "medium")
 		delete(additionalProperties, "low")
