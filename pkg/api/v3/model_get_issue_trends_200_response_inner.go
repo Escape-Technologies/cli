@@ -22,6 +22,8 @@ var _ MappedNullable = &GetIssueTrends200ResponseInner{}
 type GetIssueTrends200ResponseInner struct {
 	// Time bucket start date
 	Date string `json:"date"`
+	// Number of CRITICAL severity issues
+	CRITICAL float32 `json:"CRITICAL"`
 	// Number of HIGH severity issues
 	HIGH float32 `json:"HIGH"`
 	// Number of MEDIUM severity issues
@@ -39,9 +41,10 @@ type _GetIssueTrends200ResponseInner GetIssueTrends200ResponseInner
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetIssueTrends200ResponseInner(date string, hIGH float32, mEDIUM float32, lOW float32, iNFO float32) *GetIssueTrends200ResponseInner {
+func NewGetIssueTrends200ResponseInner(date string, cRITICAL float32, hIGH float32, mEDIUM float32, lOW float32, iNFO float32) *GetIssueTrends200ResponseInner {
 	this := GetIssueTrends200ResponseInner{}
 	this.Date = date
+	this.CRITICAL = cRITICAL
 	this.HIGH = hIGH
 	this.MEDIUM = mEDIUM
 	this.LOW = lOW
@@ -79,6 +82,30 @@ func (o *GetIssueTrends200ResponseInner) GetDateOk() (*string, bool) {
 // SetDate sets field value
 func (o *GetIssueTrends200ResponseInner) SetDate(v string) {
 	o.Date = v
+}
+
+// GetCRITICAL returns the CRITICAL field value
+func (o *GetIssueTrends200ResponseInner) GetCRITICAL() float32 {
+	if o == nil {
+		var ret float32
+		return ret
+	}
+
+	return o.CRITICAL
+}
+
+// GetCRITICALOk returns a tuple with the CRITICAL field value
+// and a boolean to check if the value has been set.
+func (o *GetIssueTrends200ResponseInner) GetCRITICALOk() (*float32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.CRITICAL, true
+}
+
+// SetCRITICAL sets field value
+func (o *GetIssueTrends200ResponseInner) SetCRITICAL(v float32) {
+	o.CRITICAL = v
 }
 
 // GetHIGH returns the HIGH field value
@@ -188,6 +215,7 @@ func (o GetIssueTrends200ResponseInner) MarshalJSON() ([]byte, error) {
 func (o GetIssueTrends200ResponseInner) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["date"] = o.Date
+	toSerialize["CRITICAL"] = o.CRITICAL
 	toSerialize["HIGH"] = o.HIGH
 	toSerialize["MEDIUM"] = o.MEDIUM
 	toSerialize["LOW"] = o.LOW
@@ -206,6 +234,7 @@ func (o *GetIssueTrends200ResponseInner) UnmarshalJSON(data []byte) (err error) 
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"date",
+		"CRITICAL",
 		"HIGH",
 		"MEDIUM",
 		"LOW",
@@ -240,6 +269,7 @@ func (o *GetIssueTrends200ResponseInner) UnmarshalJSON(data []byte) (err error) 
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "date")
+		delete(additionalProperties, "CRITICAL")
 		delete(additionalProperties, "HIGH")
 		delete(additionalProperties, "MEDIUM")
 		delete(additionalProperties, "LOW")
