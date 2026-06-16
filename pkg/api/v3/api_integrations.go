@@ -173,7 +173,7 @@ func (r ApiCreateawsAccountIntegrationRequest) Execute() (*CreateawsAccountInteg
 /*
 CreateawsAccountIntegration Create AWS Account integrations.
 
-Create a AWS Account integration.
+Create an AWS Account integration.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCreateawsAccountIntegrationRequest
