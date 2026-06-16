@@ -15,39 +15,39 @@ import (
 	"fmt"
 )
 
-// checks if the CustomRule type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &CustomRule{}
+// checks if the CreateCustomRule200ResponseContent type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CreateCustomRule200ResponseContent{}
 
-// CustomRule Detailed information about a custom rule
-type CustomRule struct {
-	Rule                 CustomRuleRule `json:"rule"`
+// CreateCustomRule200ResponseContent Detailed information about a custom rule
+type CreateCustomRule200ResponseContent struct {
+	Rule                 CreateCustomRule200ResponseContentRule `json:"rule"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _CustomRule CustomRule
+type _CreateCustomRule200ResponseContent CreateCustomRule200ResponseContent
 
-// NewCustomRule instantiates a new CustomRule object
+// NewCreateCustomRule200ResponseContent instantiates a new CreateCustomRule200ResponseContent object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCustomRule(rule CustomRuleRule) *CustomRule {
-	this := CustomRule{}
+func NewCreateCustomRule200ResponseContent(rule CreateCustomRule200ResponseContentRule) *CreateCustomRule200ResponseContent {
+	this := CreateCustomRule200ResponseContent{}
 	this.Rule = rule
 	return &this
 }
 
-// NewCustomRuleWithDefaults instantiates a new CustomRule object
+// NewCreateCustomRule200ResponseContentWithDefaults instantiates a new CreateCustomRule200ResponseContent object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCustomRuleWithDefaults() *CustomRule {
-	this := CustomRule{}
+func NewCreateCustomRule200ResponseContentWithDefaults() *CreateCustomRule200ResponseContent {
+	this := CreateCustomRule200ResponseContent{}
 	return &this
 }
 
 // GetRule returns the Rule field value
-func (o *CustomRule) GetRule() CustomRuleRule {
+func (o *CreateCustomRule200ResponseContent) GetRule() CreateCustomRule200ResponseContentRule {
 	if o == nil {
-		var ret CustomRuleRule
+		var ret CreateCustomRule200ResponseContentRule
 		return ret
 	}
 
@@ -56,7 +56,7 @@ func (o *CustomRule) GetRule() CustomRuleRule {
 
 // GetRuleOk returns a tuple with the Rule field value
 // and a boolean to check if the value has been set.
-func (o *CustomRule) GetRuleOk() (*CustomRuleRule, bool) {
+func (o *CreateCustomRule200ResponseContent) GetRuleOk() (*CreateCustomRule200ResponseContentRule, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -64,11 +64,11 @@ func (o *CustomRule) GetRuleOk() (*CustomRuleRule, bool) {
 }
 
 // SetRule sets field value
-func (o *CustomRule) SetRule(v CustomRuleRule) {
+func (o *CreateCustomRule200ResponseContent) SetRule(v CreateCustomRule200ResponseContentRule) {
 	o.Rule = v
 }
 
-func (o CustomRule) MarshalJSON() ([]byte, error) {
+func (o CreateCustomRule200ResponseContent) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -76,7 +76,7 @@ func (o CustomRule) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CustomRule) ToMap() (map[string]interface{}, error) {
+func (o CreateCustomRule200ResponseContent) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["rule"] = o.Rule
 
@@ -87,7 +87,7 @@ func (o CustomRule) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *CustomRule) UnmarshalJSON(data []byte) (err error) {
+func (o *CreateCustomRule200ResponseContent) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -109,15 +109,15 @@ func (o *CustomRule) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varCustomRule := _CustomRule{}
+	varCreateCustomRule200ResponseContent := _CreateCustomRule200ResponseContent{}
 
-	err = json.Unmarshal(data, &varCustomRule)
+	err = json.Unmarshal(data, &varCreateCustomRule200ResponseContent)
 
 	if err != nil {
 		return err
 	}
 
-	*o = CustomRule(varCustomRule)
+	*o = CreateCustomRule200ResponseContent(varCreateCustomRule200ResponseContent)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -129,38 +129,38 @@ func (o *CustomRule) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableCustomRule struct {
-	value *CustomRule
+type NullableCreateCustomRule200ResponseContent struct {
+	value *CreateCustomRule200ResponseContent
 	isSet bool
 }
 
-func (v NullableCustomRule) Get() *CustomRule {
+func (v NullableCreateCustomRule200ResponseContent) Get() *CreateCustomRule200ResponseContent {
 	return v.value
 }
 
-func (v *NullableCustomRule) Set(val *CustomRule) {
+func (v *NullableCreateCustomRule200ResponseContent) Set(val *CreateCustomRule200ResponseContent) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCustomRule) IsSet() bool {
+func (v NullableCreateCustomRule200ResponseContent) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCustomRule) Unset() {
+func (v *NullableCreateCustomRule200ResponseContent) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCustomRule(val *CustomRule) *NullableCustomRule {
-	return &NullableCustomRule{value: val, isSet: true}
+func NewNullableCreateCustomRule200ResponseContent(val *CreateCustomRule200ResponseContent) *NullableCreateCustomRule200ResponseContent {
+	return &NullableCreateCustomRule200ResponseContent{value: val, isSet: true}
 }
 
-func (v NullableCustomRule) MarshalJSON() ([]byte, error) {
+func (v NullableCreateCustomRule200ResponseContent) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCustomRule) UnmarshalJSON(src []byte) error {
+func (v *NullableCreateCustomRule200ResponseContent) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

@@ -15,11 +15,11 @@ import (
 	"fmt"
 )
 
-// checks if the CustomRuleRuleOneOf1 type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &CustomRuleRuleOneOf1{}
+// checks if the CreateCustomRule200ResponseContentRuleOneOf1 type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CreateCustomRule200ResponseContentRuleOneOf1{}
 
-// CustomRuleRuleOneOf1 struct for CustomRuleRuleOneOf1
-type CustomRuleRuleOneOf1 struct {
+// CreateCustomRule200ResponseContentRuleOneOf1 struct for CreateCustomRule200ResponseContentRuleOneOf1
+type CreateCustomRule200ResponseContentRuleOneOf1 struct {
 	Id                   string                                                `json:"id"`
 	Alert                CreateCustomRuleRequestContentRuleOneOfAlert          `json:"alert"`
 	Type                 ENUMWEBAPP                                            `json:"type"`
@@ -29,14 +29,14 @@ type CustomRuleRuleOneOf1 struct {
 	AdditionalProperties map[string]interface{}
 }
 
-type _CustomRuleRuleOneOf1 CustomRuleRuleOneOf1
+type _CreateCustomRule200ResponseContentRuleOneOf1 CreateCustomRule200ResponseContentRuleOneOf1
 
-// NewCustomRuleRuleOneOf1 instantiates a new CustomRuleRuleOneOf1 object
+// NewCreateCustomRule200ResponseContentRuleOneOf1 instantiates a new CreateCustomRule200ResponseContentRuleOneOf1 object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCustomRuleRuleOneOf1(id string, alert CreateCustomRuleRequestContentRuleOneOfAlert, type_ ENUMWEBAPP, seed []CreateCustomRuleRequestContentRuleOneOf1SeedInner, detect []CreateCustomRuleRequestContentRuleOneOf1DetectInner) *CustomRuleRuleOneOf1 {
-	this := CustomRuleRuleOneOf1{}
+func NewCreateCustomRule200ResponseContentRuleOneOf1(id string, alert CreateCustomRuleRequestContentRuleOneOfAlert, type_ ENUMWEBAPP, seed []CreateCustomRuleRequestContentRuleOneOf1SeedInner, detect []CreateCustomRuleRequestContentRuleOneOf1DetectInner) *CreateCustomRule200ResponseContentRuleOneOf1 {
+	this := CreateCustomRule200ResponseContentRuleOneOf1{}
 	this.Id = id
 	this.Alert = alert
 	this.Type = type_
@@ -45,16 +45,16 @@ func NewCustomRuleRuleOneOf1(id string, alert CreateCustomRuleRequestContentRule
 	return &this
 }
 
-// NewCustomRuleRuleOneOf1WithDefaults instantiates a new CustomRuleRuleOneOf1 object
+// NewCreateCustomRule200ResponseContentRuleOneOf1WithDefaults instantiates a new CreateCustomRule200ResponseContentRuleOneOf1 object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCustomRuleRuleOneOf1WithDefaults() *CustomRuleRuleOneOf1 {
-	this := CustomRuleRuleOneOf1{}
+func NewCreateCustomRule200ResponseContentRuleOneOf1WithDefaults() *CreateCustomRule200ResponseContentRuleOneOf1 {
+	this := CreateCustomRule200ResponseContentRuleOneOf1{}
 	return &this
 }
 
 // GetId returns the Id field value
-func (o *CustomRuleRuleOneOf1) GetId() string {
+func (o *CreateCustomRule200ResponseContentRuleOneOf1) GetId() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -65,7 +65,7 @@ func (o *CustomRuleRuleOneOf1) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *CustomRuleRuleOneOf1) GetIdOk() (*string, bool) {
+func (o *CreateCustomRule200ResponseContentRuleOneOf1) GetIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -73,12 +73,12 @@ func (o *CustomRuleRuleOneOf1) GetIdOk() (*string, bool) {
 }
 
 // SetId sets field value
-func (o *CustomRuleRuleOneOf1) SetId(v string) {
+func (o *CreateCustomRule200ResponseContentRuleOneOf1) SetId(v string) {
 	o.Id = v
 }
 
 // GetAlert returns the Alert field value
-func (o *CustomRuleRuleOneOf1) GetAlert() CreateCustomRuleRequestContentRuleOneOfAlert {
+func (o *CreateCustomRule200ResponseContentRuleOneOf1) GetAlert() CreateCustomRuleRequestContentRuleOneOfAlert {
 	if o == nil {
 		var ret CreateCustomRuleRequestContentRuleOneOfAlert
 		return ret
@@ -89,7 +89,7 @@ func (o *CustomRuleRuleOneOf1) GetAlert() CreateCustomRuleRequestContentRuleOneO
 
 // GetAlertOk returns a tuple with the Alert field value
 // and a boolean to check if the value has been set.
-func (o *CustomRuleRuleOneOf1) GetAlertOk() (*CreateCustomRuleRequestContentRuleOneOfAlert, bool) {
+func (o *CreateCustomRule200ResponseContentRuleOneOf1) GetAlertOk() (*CreateCustomRuleRequestContentRuleOneOfAlert, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -97,12 +97,12 @@ func (o *CustomRuleRuleOneOf1) GetAlertOk() (*CreateCustomRuleRequestContentRule
 }
 
 // SetAlert sets field value
-func (o *CustomRuleRuleOneOf1) SetAlert(v CreateCustomRuleRequestContentRuleOneOfAlert) {
+func (o *CreateCustomRule200ResponseContentRuleOneOf1) SetAlert(v CreateCustomRuleRequestContentRuleOneOfAlert) {
 	o.Alert = v
 }
 
 // GetType returns the Type field value
-func (o *CustomRuleRuleOneOf1) GetType() ENUMWEBAPP {
+func (o *CreateCustomRule200ResponseContentRuleOneOf1) GetType() ENUMWEBAPP {
 	if o == nil {
 		var ret ENUMWEBAPP
 		return ret
@@ -113,7 +113,7 @@ func (o *CustomRuleRuleOneOf1) GetType() ENUMWEBAPP {
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *CustomRuleRuleOneOf1) GetTypeOk() (*ENUMWEBAPP, bool) {
+func (o *CreateCustomRule200ResponseContentRuleOneOf1) GetTypeOk() (*ENUMWEBAPP, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -121,12 +121,12 @@ func (o *CustomRuleRuleOneOf1) GetTypeOk() (*ENUMWEBAPP, bool) {
 }
 
 // SetType sets field value
-func (o *CustomRuleRuleOneOf1) SetType(v ENUMWEBAPP) {
+func (o *CreateCustomRule200ResponseContentRuleOneOf1) SetType(v ENUMWEBAPP) {
 	o.Type = v
 }
 
 // GetSeed returns the Seed field value
-func (o *CustomRuleRuleOneOf1) GetSeed() []CreateCustomRuleRequestContentRuleOneOf1SeedInner {
+func (o *CreateCustomRule200ResponseContentRuleOneOf1) GetSeed() []CreateCustomRuleRequestContentRuleOneOf1SeedInner {
 	if o == nil {
 		var ret []CreateCustomRuleRequestContentRuleOneOf1SeedInner
 		return ret
@@ -137,7 +137,7 @@ func (o *CustomRuleRuleOneOf1) GetSeed() []CreateCustomRuleRequestContentRuleOne
 
 // GetSeedOk returns a tuple with the Seed field value
 // and a boolean to check if the value has been set.
-func (o *CustomRuleRuleOneOf1) GetSeedOk() ([]CreateCustomRuleRequestContentRuleOneOf1SeedInner, bool) {
+func (o *CreateCustomRule200ResponseContentRuleOneOf1) GetSeedOk() ([]CreateCustomRuleRequestContentRuleOneOf1SeedInner, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -145,12 +145,12 @@ func (o *CustomRuleRuleOneOf1) GetSeedOk() ([]CreateCustomRuleRequestContentRule
 }
 
 // SetSeed sets field value
-func (o *CustomRuleRuleOneOf1) SetSeed(v []CreateCustomRuleRequestContentRuleOneOf1SeedInner) {
+func (o *CreateCustomRule200ResponseContentRuleOneOf1) SetSeed(v []CreateCustomRuleRequestContentRuleOneOf1SeedInner) {
 	o.Seed = v
 }
 
 // GetDetect returns the Detect field value
-func (o *CustomRuleRuleOneOf1) GetDetect() []CreateCustomRuleRequestContentRuleOneOf1DetectInner {
+func (o *CreateCustomRule200ResponseContentRuleOneOf1) GetDetect() []CreateCustomRuleRequestContentRuleOneOf1DetectInner {
 	if o == nil {
 		var ret []CreateCustomRuleRequestContentRuleOneOf1DetectInner
 		return ret
@@ -161,7 +161,7 @@ func (o *CustomRuleRuleOneOf1) GetDetect() []CreateCustomRuleRequestContentRuleO
 
 // GetDetectOk returns a tuple with the Detect field value
 // and a boolean to check if the value has been set.
-func (o *CustomRuleRuleOneOf1) GetDetectOk() ([]CreateCustomRuleRequestContentRuleOneOf1DetectInner, bool) {
+func (o *CreateCustomRule200ResponseContentRuleOneOf1) GetDetectOk() ([]CreateCustomRuleRequestContentRuleOneOf1DetectInner, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -169,12 +169,12 @@ func (o *CustomRuleRuleOneOf1) GetDetectOk() ([]CreateCustomRuleRequestContentRu
 }
 
 // SetDetect sets field value
-func (o *CustomRuleRuleOneOf1) SetDetect(v []CreateCustomRuleRequestContentRuleOneOf1DetectInner) {
+func (o *CreateCustomRule200ResponseContentRuleOneOf1) SetDetect(v []CreateCustomRuleRequestContentRuleOneOf1DetectInner) {
 	o.Detect = v
 }
 
 // GetExtractors returns the Extractors field value if set, zero value otherwise.
-func (o *CustomRuleRuleOneOf1) GetExtractors() []interface{} {
+func (o *CreateCustomRule200ResponseContentRuleOneOf1) GetExtractors() []interface{} {
 	if o == nil || IsNil(o.Extractors) {
 		var ret []interface{}
 		return ret
@@ -184,7 +184,7 @@ func (o *CustomRuleRuleOneOf1) GetExtractors() []interface{} {
 
 // GetExtractorsOk returns a tuple with the Extractors field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CustomRuleRuleOneOf1) GetExtractorsOk() ([]interface{}, bool) {
+func (o *CreateCustomRule200ResponseContentRuleOneOf1) GetExtractorsOk() ([]interface{}, bool) {
 	if o == nil || IsNil(o.Extractors) {
 		return nil, false
 	}
@@ -192,7 +192,7 @@ func (o *CustomRuleRuleOneOf1) GetExtractorsOk() ([]interface{}, bool) {
 }
 
 // HasExtractors returns a boolean if a field has been set.
-func (o *CustomRuleRuleOneOf1) HasExtractors() bool {
+func (o *CreateCustomRule200ResponseContentRuleOneOf1) HasExtractors() bool {
 	if o != nil && !IsNil(o.Extractors) {
 		return true
 	}
@@ -201,11 +201,11 @@ func (o *CustomRuleRuleOneOf1) HasExtractors() bool {
 }
 
 // SetExtractors gets a reference to the given []interface{} and assigns it to the Extractors field.
-func (o *CustomRuleRuleOneOf1) SetExtractors(v []interface{}) {
+func (o *CreateCustomRule200ResponseContentRuleOneOf1) SetExtractors(v []interface{}) {
 	o.Extractors = v
 }
 
-func (o CustomRuleRuleOneOf1) MarshalJSON() ([]byte, error) {
+func (o CreateCustomRule200ResponseContentRuleOneOf1) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -213,7 +213,7 @@ func (o CustomRuleRuleOneOf1) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CustomRuleRuleOneOf1) ToMap() (map[string]interface{}, error) {
+func (o CreateCustomRule200ResponseContentRuleOneOf1) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["alert"] = o.Alert
@@ -231,7 +231,7 @@ func (o CustomRuleRuleOneOf1) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *CustomRuleRuleOneOf1) UnmarshalJSON(data []byte) (err error) {
+func (o *CreateCustomRule200ResponseContentRuleOneOf1) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -257,15 +257,15 @@ func (o *CustomRuleRuleOneOf1) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varCustomRuleRuleOneOf1 := _CustomRuleRuleOneOf1{}
+	varCreateCustomRule200ResponseContentRuleOneOf1 := _CreateCustomRule200ResponseContentRuleOneOf1{}
 
-	err = json.Unmarshal(data, &varCustomRuleRuleOneOf1)
+	err = json.Unmarshal(data, &varCreateCustomRule200ResponseContentRuleOneOf1)
 
 	if err != nil {
 		return err
 	}
 
-	*o = CustomRuleRuleOneOf1(varCustomRuleRuleOneOf1)
+	*o = CreateCustomRule200ResponseContentRuleOneOf1(varCreateCustomRule200ResponseContentRuleOneOf1)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -282,38 +282,38 @@ func (o *CustomRuleRuleOneOf1) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableCustomRuleRuleOneOf1 struct {
-	value *CustomRuleRuleOneOf1
+type NullableCreateCustomRule200ResponseContentRuleOneOf1 struct {
+	value *CreateCustomRule200ResponseContentRuleOneOf1
 	isSet bool
 }
 
-func (v NullableCustomRuleRuleOneOf1) Get() *CustomRuleRuleOneOf1 {
+func (v NullableCreateCustomRule200ResponseContentRuleOneOf1) Get() *CreateCustomRule200ResponseContentRuleOneOf1 {
 	return v.value
 }
 
-func (v *NullableCustomRuleRuleOneOf1) Set(val *CustomRuleRuleOneOf1) {
+func (v *NullableCreateCustomRule200ResponseContentRuleOneOf1) Set(val *CreateCustomRule200ResponseContentRuleOneOf1) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCustomRuleRuleOneOf1) IsSet() bool {
+func (v NullableCreateCustomRule200ResponseContentRuleOneOf1) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCustomRuleRuleOneOf1) Unset() {
+func (v *NullableCreateCustomRule200ResponseContentRuleOneOf1) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCustomRuleRuleOneOf1(val *CustomRuleRuleOneOf1) *NullableCustomRuleRuleOneOf1 {
-	return &NullableCustomRuleRuleOneOf1{value: val, isSet: true}
+func NewNullableCreateCustomRule200ResponseContentRuleOneOf1(val *CreateCustomRule200ResponseContentRuleOneOf1) *NullableCreateCustomRule200ResponseContentRuleOneOf1 {
+	return &NullableCreateCustomRule200ResponseContentRuleOneOf1{value: val, isSet: true}
 }
 
-func (v NullableCustomRuleRuleOneOf1) MarshalJSON() ([]byte, error) {
+func (v NullableCreateCustomRule200ResponseContentRuleOneOf1) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCustomRuleRuleOneOf1) UnmarshalJSON(src []byte) error {
+func (v *NullableCreateCustomRule200ResponseContentRuleOneOf1) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

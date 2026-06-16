@@ -20,7 +20,7 @@ var _ MappedNullable = &CreateCustomRule200Response{}
 
 // CreateCustomRule200Response struct for CreateCustomRule200Response
 type CreateCustomRule200Response struct {
-	Content CustomRule `json:"content"`
+	Content CreateCustomRule200ResponseContent `json:"content"`
 	// The context of the custom rule
 	Context string `json:"context"`
 	// The created at date of the custom rule
@@ -47,7 +47,7 @@ type _CreateCustomRule200Response CreateCustomRule200Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateCustomRule200Response(content CustomRule, context string, createdAt string, dastEnabled bool, id string, asmEnabled bool, name string, severity ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESSEVERITY, tags []TagDetail, updatedAt string) *CreateCustomRule200Response {
+func NewCreateCustomRule200Response(content CreateCustomRule200ResponseContent, context string, createdAt string, dastEnabled bool, id string, asmEnabled bool, name string, severity ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESSEVERITY, tags []TagDetail, updatedAt string) *CreateCustomRule200Response {
 	this := CreateCustomRule200Response{}
 	this.Content = content
 	this.Context = context
@@ -71,9 +71,9 @@ func NewCreateCustomRule200ResponseWithDefaults() *CreateCustomRule200Response {
 }
 
 // GetContent returns the Content field value
-func (o *CreateCustomRule200Response) GetContent() CustomRule {
+func (o *CreateCustomRule200Response) GetContent() CreateCustomRule200ResponseContent {
 	if o == nil {
-		var ret CustomRule
+		var ret CreateCustomRule200ResponseContent
 		return ret
 	}
 
@@ -82,7 +82,7 @@ func (o *CreateCustomRule200Response) GetContent() CustomRule {
 
 // GetContentOk returns a tuple with the Content field value
 // and a boolean to check if the value has been set.
-func (o *CreateCustomRule200Response) GetContentOk() (*CustomRule, bool) {
+func (o *CreateCustomRule200Response) GetContentOk() (*CreateCustomRule200ResponseContent, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -90,7 +90,7 @@ func (o *CreateCustomRule200Response) GetContentOk() (*CustomRule, bool) {
 }
 
 // SetContent sets field value
-func (o *CreateCustomRule200Response) SetContent(v CustomRule) {
+func (o *CreateCustomRule200Response) SetContent(v CreateCustomRule200ResponseContent) {
 	o.Content = v
 }
 
