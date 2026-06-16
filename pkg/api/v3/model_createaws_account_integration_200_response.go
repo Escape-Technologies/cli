@@ -16,11 +16,11 @@ import (
 	"time"
 )
 
-// checks if the CreateawsIntegration200Response type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &CreateawsIntegration200Response{}
+// checks if the CreateawsAccountIntegration200Response type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CreateawsAccountIntegration200Response{}
 
-// CreateawsIntegration200Response struct for CreateawsIntegration200Response
-type CreateawsIntegration200Response struct {
+// CreateawsAccountIntegration200Response struct for CreateawsAccountIntegration200Response
+type CreateawsAccountIntegration200Response struct {
 	// The id of the integration
 	Id string `json:"id"`
 	// The name of the integration
@@ -41,20 +41,20 @@ type CreateawsIntegration200Response struct {
 	// The id of the organization the integration belongs to
 	OrganizationId string `json:"organizationId"`
 	// The projects of the integration
-	Projects             []ListProjects200ResponseDataInner    `json:"projects"`
-	Parameters           CreateawsIntegrationRequestParameters `json:"parameters"`
-	Location             *LocationDetailed                     `json:"location,omitempty"`
+	Projects             []ListProjects200ResponseDataInner           `json:"projects"`
+	Parameters           CreateawsAccountIntegrationRequestParameters `json:"parameters"`
+	Location             *LocationDetailed                            `json:"location,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _CreateawsIntegration200Response CreateawsIntegration200Response
+type _CreateawsAccountIntegration200Response CreateawsAccountIntegration200Response
 
-// NewCreateawsIntegration200Response instantiates a new CreateawsIntegration200Response object
+// NewCreateawsAccountIntegration200Response instantiates a new CreateawsAccountIntegration200Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateawsIntegration200Response(id string, name string, createdAt time.Time, updatedAt time.Time, kind ENUMPROPERTIESDATAITEMSPROPERTIESKIND, valid bool, validationErrors []string, organizationId string, projects []ListProjects200ResponseDataInner, parameters CreateawsIntegrationRequestParameters) *CreateawsIntegration200Response {
-	this := CreateawsIntegration200Response{}
+func NewCreateawsAccountIntegration200Response(id string, name string, createdAt time.Time, updatedAt time.Time, kind ENUMPROPERTIESDATAITEMSPROPERTIESKIND, valid bool, validationErrors []string, organizationId string, projects []ListProjects200ResponseDataInner, parameters CreateawsAccountIntegrationRequestParameters) *CreateawsAccountIntegration200Response {
+	this := CreateawsAccountIntegration200Response{}
 	this.Id = id
 	this.Name = name
 	this.CreatedAt = createdAt
@@ -68,16 +68,16 @@ func NewCreateawsIntegration200Response(id string, name string, createdAt time.T
 	return &this
 }
 
-// NewCreateawsIntegration200ResponseWithDefaults instantiates a new CreateawsIntegration200Response object
+// NewCreateawsAccountIntegration200ResponseWithDefaults instantiates a new CreateawsAccountIntegration200Response object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCreateawsIntegration200ResponseWithDefaults() *CreateawsIntegration200Response {
-	this := CreateawsIntegration200Response{}
+func NewCreateawsAccountIntegration200ResponseWithDefaults() *CreateawsAccountIntegration200Response {
+	this := CreateawsAccountIntegration200Response{}
 	return &this
 }
 
 // GetId returns the Id field value
-func (o *CreateawsIntegration200Response) GetId() string {
+func (o *CreateawsAccountIntegration200Response) GetId() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -88,7 +88,7 @@ func (o *CreateawsIntegration200Response) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *CreateawsIntegration200Response) GetIdOk() (*string, bool) {
+func (o *CreateawsAccountIntegration200Response) GetIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -96,12 +96,12 @@ func (o *CreateawsIntegration200Response) GetIdOk() (*string, bool) {
 }
 
 // SetId sets field value
-func (o *CreateawsIntegration200Response) SetId(v string) {
+func (o *CreateawsAccountIntegration200Response) SetId(v string) {
 	o.Id = v
 }
 
 // GetName returns the Name field value
-func (o *CreateawsIntegration200Response) GetName() string {
+func (o *CreateawsAccountIntegration200Response) GetName() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -112,7 +112,7 @@ func (o *CreateawsIntegration200Response) GetName() string {
 
 // GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
-func (o *CreateawsIntegration200Response) GetNameOk() (*string, bool) {
+func (o *CreateawsAccountIntegration200Response) GetNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -120,12 +120,12 @@ func (o *CreateawsIntegration200Response) GetNameOk() (*string, bool) {
 }
 
 // SetName sets field value
-func (o *CreateawsIntegration200Response) SetName(v string) {
+func (o *CreateawsAccountIntegration200Response) SetName(v string) {
 	o.Name = v
 }
 
 // GetCreatedAt returns the CreatedAt field value
-func (o *CreateawsIntegration200Response) GetCreatedAt() time.Time {
+func (o *CreateawsAccountIntegration200Response) GetCreatedAt() time.Time {
 	if o == nil {
 		var ret time.Time
 		return ret
@@ -136,7 +136,7 @@ func (o *CreateawsIntegration200Response) GetCreatedAt() time.Time {
 
 // GetCreatedAtOk returns a tuple with the CreatedAt field value
 // and a boolean to check if the value has been set.
-func (o *CreateawsIntegration200Response) GetCreatedAtOk() (*time.Time, bool) {
+func (o *CreateawsAccountIntegration200Response) GetCreatedAtOk() (*time.Time, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -144,12 +144,12 @@ func (o *CreateawsIntegration200Response) GetCreatedAtOk() (*time.Time, bool) {
 }
 
 // SetCreatedAt sets field value
-func (o *CreateawsIntegration200Response) SetCreatedAt(v time.Time) {
+func (o *CreateawsAccountIntegration200Response) SetCreatedAt(v time.Time) {
 	o.CreatedAt = v
 }
 
 // GetUpdatedAt returns the UpdatedAt field value
-func (o *CreateawsIntegration200Response) GetUpdatedAt() time.Time {
+func (o *CreateawsAccountIntegration200Response) GetUpdatedAt() time.Time {
 	if o == nil {
 		var ret time.Time
 		return ret
@@ -160,7 +160,7 @@ func (o *CreateawsIntegration200Response) GetUpdatedAt() time.Time {
 
 // GetUpdatedAtOk returns a tuple with the UpdatedAt field value
 // and a boolean to check if the value has been set.
-func (o *CreateawsIntegration200Response) GetUpdatedAtOk() (*time.Time, bool) {
+func (o *CreateawsAccountIntegration200Response) GetUpdatedAtOk() (*time.Time, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -168,12 +168,12 @@ func (o *CreateawsIntegration200Response) GetUpdatedAtOk() (*time.Time, bool) {
 }
 
 // SetUpdatedAt sets field value
-func (o *CreateawsIntegration200Response) SetUpdatedAt(v time.Time) {
+func (o *CreateawsAccountIntegration200Response) SetUpdatedAt(v time.Time) {
 	o.UpdatedAt = v
 }
 
 // GetScheduledForDeletionAt returns the ScheduledForDeletionAt field value if set, zero value otherwise.
-func (o *CreateawsIntegration200Response) GetScheduledForDeletionAt() time.Time {
+func (o *CreateawsAccountIntegration200Response) GetScheduledForDeletionAt() time.Time {
 	if o == nil || IsNil(o.ScheduledForDeletionAt) {
 		var ret time.Time
 		return ret
@@ -183,7 +183,7 @@ func (o *CreateawsIntegration200Response) GetScheduledForDeletionAt() time.Time 
 
 // GetScheduledForDeletionAtOk returns a tuple with the ScheduledForDeletionAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateawsIntegration200Response) GetScheduledForDeletionAtOk() (*time.Time, bool) {
+func (o *CreateawsAccountIntegration200Response) GetScheduledForDeletionAtOk() (*time.Time, bool) {
 	if o == nil || IsNil(o.ScheduledForDeletionAt) {
 		return nil, false
 	}
@@ -191,7 +191,7 @@ func (o *CreateawsIntegration200Response) GetScheduledForDeletionAtOk() (*time.T
 }
 
 // HasScheduledForDeletionAt returns a boolean if a field has been set.
-func (o *CreateawsIntegration200Response) HasScheduledForDeletionAt() bool {
+func (o *CreateawsAccountIntegration200Response) HasScheduledForDeletionAt() bool {
 	if o != nil && !IsNil(o.ScheduledForDeletionAt) {
 		return true
 	}
@@ -200,12 +200,12 @@ func (o *CreateawsIntegration200Response) HasScheduledForDeletionAt() bool {
 }
 
 // SetScheduledForDeletionAt gets a reference to the given time.Time and assigns it to the ScheduledForDeletionAt field.
-func (o *CreateawsIntegration200Response) SetScheduledForDeletionAt(v time.Time) {
+func (o *CreateawsAccountIntegration200Response) SetScheduledForDeletionAt(v time.Time) {
 	o.ScheduledForDeletionAt = &v
 }
 
 // GetLastPullWorkflowAt returns the LastPullWorkflowAt field value if set, zero value otherwise.
-func (o *CreateawsIntegration200Response) GetLastPullWorkflowAt() time.Time {
+func (o *CreateawsAccountIntegration200Response) GetLastPullWorkflowAt() time.Time {
 	if o == nil || IsNil(o.LastPullWorkflowAt) {
 		var ret time.Time
 		return ret
@@ -215,7 +215,7 @@ func (o *CreateawsIntegration200Response) GetLastPullWorkflowAt() time.Time {
 
 // GetLastPullWorkflowAtOk returns a tuple with the LastPullWorkflowAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateawsIntegration200Response) GetLastPullWorkflowAtOk() (*time.Time, bool) {
+func (o *CreateawsAccountIntegration200Response) GetLastPullWorkflowAtOk() (*time.Time, bool) {
 	if o == nil || IsNil(o.LastPullWorkflowAt) {
 		return nil, false
 	}
@@ -223,7 +223,7 @@ func (o *CreateawsIntegration200Response) GetLastPullWorkflowAtOk() (*time.Time,
 }
 
 // HasLastPullWorkflowAt returns a boolean if a field has been set.
-func (o *CreateawsIntegration200Response) HasLastPullWorkflowAt() bool {
+func (o *CreateawsAccountIntegration200Response) HasLastPullWorkflowAt() bool {
 	if o != nil && !IsNil(o.LastPullWorkflowAt) {
 		return true
 	}
@@ -232,12 +232,12 @@ func (o *CreateawsIntegration200Response) HasLastPullWorkflowAt() bool {
 }
 
 // SetLastPullWorkflowAt gets a reference to the given time.Time and assigns it to the LastPullWorkflowAt field.
-func (o *CreateawsIntegration200Response) SetLastPullWorkflowAt(v time.Time) {
+func (o *CreateawsAccountIntegration200Response) SetLastPullWorkflowAt(v time.Time) {
 	o.LastPullWorkflowAt = &v
 }
 
 // GetKind returns the Kind field value
-func (o *CreateawsIntegration200Response) GetKind() ENUMPROPERTIESDATAITEMSPROPERTIESKIND {
+func (o *CreateawsAccountIntegration200Response) GetKind() ENUMPROPERTIESDATAITEMSPROPERTIESKIND {
 	if o == nil {
 		var ret ENUMPROPERTIESDATAITEMSPROPERTIESKIND
 		return ret
@@ -248,7 +248,7 @@ func (o *CreateawsIntegration200Response) GetKind() ENUMPROPERTIESDATAITEMSPROPE
 
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
-func (o *CreateawsIntegration200Response) GetKindOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESKIND, bool) {
+func (o *CreateawsAccountIntegration200Response) GetKindOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESKIND, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -256,12 +256,12 @@ func (o *CreateawsIntegration200Response) GetKindOk() (*ENUMPROPERTIESDATAITEMSP
 }
 
 // SetKind sets field value
-func (o *CreateawsIntegration200Response) SetKind(v ENUMPROPERTIESDATAITEMSPROPERTIESKIND) {
+func (o *CreateawsAccountIntegration200Response) SetKind(v ENUMPROPERTIESDATAITEMSPROPERTIESKIND) {
 	o.Kind = v
 }
 
 // GetValid returns the Valid field value
-func (o *CreateawsIntegration200Response) GetValid() bool {
+func (o *CreateawsAccountIntegration200Response) GetValid() bool {
 	if o == nil {
 		var ret bool
 		return ret
@@ -272,7 +272,7 @@ func (o *CreateawsIntegration200Response) GetValid() bool {
 
 // GetValidOk returns a tuple with the Valid field value
 // and a boolean to check if the value has been set.
-func (o *CreateawsIntegration200Response) GetValidOk() (*bool, bool) {
+func (o *CreateawsAccountIntegration200Response) GetValidOk() (*bool, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -280,12 +280,12 @@ func (o *CreateawsIntegration200Response) GetValidOk() (*bool, bool) {
 }
 
 // SetValid sets field value
-func (o *CreateawsIntegration200Response) SetValid(v bool) {
+func (o *CreateawsAccountIntegration200Response) SetValid(v bool) {
 	o.Valid = v
 }
 
 // GetValidationErrors returns the ValidationErrors field value
-func (o *CreateawsIntegration200Response) GetValidationErrors() []string {
+func (o *CreateawsAccountIntegration200Response) GetValidationErrors() []string {
 	if o == nil {
 		var ret []string
 		return ret
@@ -296,7 +296,7 @@ func (o *CreateawsIntegration200Response) GetValidationErrors() []string {
 
 // GetValidationErrorsOk returns a tuple with the ValidationErrors field value
 // and a boolean to check if the value has been set.
-func (o *CreateawsIntegration200Response) GetValidationErrorsOk() ([]string, bool) {
+func (o *CreateawsAccountIntegration200Response) GetValidationErrorsOk() ([]string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -304,12 +304,12 @@ func (o *CreateawsIntegration200Response) GetValidationErrorsOk() ([]string, boo
 }
 
 // SetValidationErrors sets field value
-func (o *CreateawsIntegration200Response) SetValidationErrors(v []string) {
+func (o *CreateawsAccountIntegration200Response) SetValidationErrors(v []string) {
 	o.ValidationErrors = v
 }
 
 // GetOrganizationId returns the OrganizationId field value
-func (o *CreateawsIntegration200Response) GetOrganizationId() string {
+func (o *CreateawsAccountIntegration200Response) GetOrganizationId() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -320,7 +320,7 @@ func (o *CreateawsIntegration200Response) GetOrganizationId() string {
 
 // GetOrganizationIdOk returns a tuple with the OrganizationId field value
 // and a boolean to check if the value has been set.
-func (o *CreateawsIntegration200Response) GetOrganizationIdOk() (*string, bool) {
+func (o *CreateawsAccountIntegration200Response) GetOrganizationIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -328,12 +328,12 @@ func (o *CreateawsIntegration200Response) GetOrganizationIdOk() (*string, bool) 
 }
 
 // SetOrganizationId sets field value
-func (o *CreateawsIntegration200Response) SetOrganizationId(v string) {
+func (o *CreateawsAccountIntegration200Response) SetOrganizationId(v string) {
 	o.OrganizationId = v
 }
 
 // GetProjects returns the Projects field value
-func (o *CreateawsIntegration200Response) GetProjects() []ListProjects200ResponseDataInner {
+func (o *CreateawsAccountIntegration200Response) GetProjects() []ListProjects200ResponseDataInner {
 	if o == nil {
 		var ret []ListProjects200ResponseDataInner
 		return ret
@@ -344,7 +344,7 @@ func (o *CreateawsIntegration200Response) GetProjects() []ListProjects200Respons
 
 // GetProjectsOk returns a tuple with the Projects field value
 // and a boolean to check if the value has been set.
-func (o *CreateawsIntegration200Response) GetProjectsOk() ([]ListProjects200ResponseDataInner, bool) {
+func (o *CreateawsAccountIntegration200Response) GetProjectsOk() ([]ListProjects200ResponseDataInner, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -352,14 +352,14 @@ func (o *CreateawsIntegration200Response) GetProjectsOk() ([]ListProjects200Resp
 }
 
 // SetProjects sets field value
-func (o *CreateawsIntegration200Response) SetProjects(v []ListProjects200ResponseDataInner) {
+func (o *CreateawsAccountIntegration200Response) SetProjects(v []ListProjects200ResponseDataInner) {
 	o.Projects = v
 }
 
 // GetParameters returns the Parameters field value
-func (o *CreateawsIntegration200Response) GetParameters() CreateawsIntegrationRequestParameters {
+func (o *CreateawsAccountIntegration200Response) GetParameters() CreateawsAccountIntegrationRequestParameters {
 	if o == nil {
-		var ret CreateawsIntegrationRequestParameters
+		var ret CreateawsAccountIntegrationRequestParameters
 		return ret
 	}
 
@@ -368,7 +368,7 @@ func (o *CreateawsIntegration200Response) GetParameters() CreateawsIntegrationRe
 
 // GetParametersOk returns a tuple with the Parameters field value
 // and a boolean to check if the value has been set.
-func (o *CreateawsIntegration200Response) GetParametersOk() (*CreateawsIntegrationRequestParameters, bool) {
+func (o *CreateawsAccountIntegration200Response) GetParametersOk() (*CreateawsAccountIntegrationRequestParameters, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -376,12 +376,12 @@ func (o *CreateawsIntegration200Response) GetParametersOk() (*CreateawsIntegrati
 }
 
 // SetParameters sets field value
-func (o *CreateawsIntegration200Response) SetParameters(v CreateawsIntegrationRequestParameters) {
+func (o *CreateawsAccountIntegration200Response) SetParameters(v CreateawsAccountIntegrationRequestParameters) {
 	o.Parameters = v
 }
 
 // GetLocation returns the Location field value if set, zero value otherwise.
-func (o *CreateawsIntegration200Response) GetLocation() LocationDetailed {
+func (o *CreateawsAccountIntegration200Response) GetLocation() LocationDetailed {
 	if o == nil || IsNil(o.Location) {
 		var ret LocationDetailed
 		return ret
@@ -391,7 +391,7 @@ func (o *CreateawsIntegration200Response) GetLocation() LocationDetailed {
 
 // GetLocationOk returns a tuple with the Location field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateawsIntegration200Response) GetLocationOk() (*LocationDetailed, bool) {
+func (o *CreateawsAccountIntegration200Response) GetLocationOk() (*LocationDetailed, bool) {
 	if o == nil || IsNil(o.Location) {
 		return nil, false
 	}
@@ -399,7 +399,7 @@ func (o *CreateawsIntegration200Response) GetLocationOk() (*LocationDetailed, bo
 }
 
 // HasLocation returns a boolean if a field has been set.
-func (o *CreateawsIntegration200Response) HasLocation() bool {
+func (o *CreateawsAccountIntegration200Response) HasLocation() bool {
 	if o != nil && !IsNil(o.Location) {
 		return true
 	}
@@ -408,11 +408,11 @@ func (o *CreateawsIntegration200Response) HasLocation() bool {
 }
 
 // SetLocation gets a reference to the given LocationDetailed and assigns it to the Location field.
-func (o *CreateawsIntegration200Response) SetLocation(v LocationDetailed) {
+func (o *CreateawsAccountIntegration200Response) SetLocation(v LocationDetailed) {
 	o.Location = &v
 }
 
-func (o CreateawsIntegration200Response) MarshalJSON() ([]byte, error) {
+func (o CreateawsAccountIntegration200Response) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -420,7 +420,7 @@ func (o CreateawsIntegration200Response) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CreateawsIntegration200Response) ToMap() (map[string]interface{}, error) {
+func (o CreateawsAccountIntegration200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["name"] = o.Name
@@ -449,7 +449,7 @@ func (o CreateawsIntegration200Response) ToMap() (map[string]interface{}, error)
 	return toSerialize, nil
 }
 
-func (o *CreateawsIntegration200Response) UnmarshalJSON(data []byte) (err error) {
+func (o *CreateawsAccountIntegration200Response) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -480,15 +480,15 @@ func (o *CreateawsIntegration200Response) UnmarshalJSON(data []byte) (err error)
 		}
 	}
 
-	varCreateawsIntegration200Response := _CreateawsIntegration200Response{}
+	varCreateawsAccountIntegration200Response := _CreateawsAccountIntegration200Response{}
 
-	err = json.Unmarshal(data, &varCreateawsIntegration200Response)
+	err = json.Unmarshal(data, &varCreateawsAccountIntegration200Response)
 
 	if err != nil {
 		return err
 	}
 
-	*o = CreateawsIntegration200Response(varCreateawsIntegration200Response)
+	*o = CreateawsAccountIntegration200Response(varCreateawsAccountIntegration200Response)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -512,38 +512,38 @@ func (o *CreateawsIntegration200Response) UnmarshalJSON(data []byte) (err error)
 	return err
 }
 
-type NullableCreateawsIntegration200Response struct {
-	value *CreateawsIntegration200Response
+type NullableCreateawsAccountIntegration200Response struct {
+	value *CreateawsAccountIntegration200Response
 	isSet bool
 }
 
-func (v NullableCreateawsIntegration200Response) Get() *CreateawsIntegration200Response {
+func (v NullableCreateawsAccountIntegration200Response) Get() *CreateawsAccountIntegration200Response {
 	return v.value
 }
 
-func (v *NullableCreateawsIntegration200Response) Set(val *CreateawsIntegration200Response) {
+func (v *NullableCreateawsAccountIntegration200Response) Set(val *CreateawsAccountIntegration200Response) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCreateawsIntegration200Response) IsSet() bool {
+func (v NullableCreateawsAccountIntegration200Response) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCreateawsIntegration200Response) Unset() {
+func (v *NullableCreateawsAccountIntegration200Response) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCreateawsIntegration200Response(val *CreateawsIntegration200Response) *NullableCreateawsIntegration200Response {
-	return &NullableCreateawsIntegration200Response{value: val, isSet: true}
+func NewNullableCreateawsAccountIntegration200Response(val *CreateawsAccountIntegration200Response) *NullableCreateawsAccountIntegration200Response {
+	return &NullableCreateawsAccountIntegration200Response{value: val, isSet: true}
 }
 
-func (v NullableCreateawsIntegration200Response) MarshalJSON() ([]byte, error) {
+func (v NullableCreateawsAccountIntegration200Response) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCreateawsIntegration200Response) UnmarshalJSON(src []byte) error {
+func (v *NullableCreateawsAccountIntegration200Response) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
