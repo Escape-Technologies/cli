@@ -15,39 +15,39 @@ import (
 	"fmt"
 )
 
-// checks if the CreateawsIntegrationRequestParameters type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &CreateawsIntegrationRequestParameters{}
+// checks if the UpdateawsAccountIntegrationRequestParameters type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &UpdateawsAccountIntegrationRequestParameters{}
 
-// CreateawsIntegrationRequestParameters The parameters of the integration
-type CreateawsIntegrationRequestParameters struct {
+// UpdateawsAccountIntegrationRequestParameters The new parameters of the integration
+type UpdateawsAccountIntegrationRequestParameters struct {
 	PublicKey            string `json:"public_key"`
 	PrivateKey           string `json:"private_key"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _CreateawsIntegrationRequestParameters CreateawsIntegrationRequestParameters
+type _UpdateawsAccountIntegrationRequestParameters UpdateawsAccountIntegrationRequestParameters
 
-// NewCreateawsIntegrationRequestParameters instantiates a new CreateawsIntegrationRequestParameters object
+// NewUpdateawsAccountIntegrationRequestParameters instantiates a new UpdateawsAccountIntegrationRequestParameters object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateawsIntegrationRequestParameters(publicKey string, privateKey string) *CreateawsIntegrationRequestParameters {
-	this := CreateawsIntegrationRequestParameters{}
+func NewUpdateawsAccountIntegrationRequestParameters(publicKey string, privateKey string) *UpdateawsAccountIntegrationRequestParameters {
+	this := UpdateawsAccountIntegrationRequestParameters{}
 	this.PublicKey = publicKey
 	this.PrivateKey = privateKey
 	return &this
 }
 
-// NewCreateawsIntegrationRequestParametersWithDefaults instantiates a new CreateawsIntegrationRequestParameters object
+// NewUpdateawsAccountIntegrationRequestParametersWithDefaults instantiates a new UpdateawsAccountIntegrationRequestParameters object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCreateawsIntegrationRequestParametersWithDefaults() *CreateawsIntegrationRequestParameters {
-	this := CreateawsIntegrationRequestParameters{}
+func NewUpdateawsAccountIntegrationRequestParametersWithDefaults() *UpdateawsAccountIntegrationRequestParameters {
+	this := UpdateawsAccountIntegrationRequestParameters{}
 	return &this
 }
 
 // GetPublicKey returns the PublicKey field value
-func (o *CreateawsIntegrationRequestParameters) GetPublicKey() string {
+func (o *UpdateawsAccountIntegrationRequestParameters) GetPublicKey() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -58,7 +58,7 @@ func (o *CreateawsIntegrationRequestParameters) GetPublicKey() string {
 
 // GetPublicKeyOk returns a tuple with the PublicKey field value
 // and a boolean to check if the value has been set.
-func (o *CreateawsIntegrationRequestParameters) GetPublicKeyOk() (*string, bool) {
+func (o *UpdateawsAccountIntegrationRequestParameters) GetPublicKeyOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -66,12 +66,12 @@ func (o *CreateawsIntegrationRequestParameters) GetPublicKeyOk() (*string, bool)
 }
 
 // SetPublicKey sets field value
-func (o *CreateawsIntegrationRequestParameters) SetPublicKey(v string) {
+func (o *UpdateawsAccountIntegrationRequestParameters) SetPublicKey(v string) {
 	o.PublicKey = v
 }
 
 // GetPrivateKey returns the PrivateKey field value
-func (o *CreateawsIntegrationRequestParameters) GetPrivateKey() string {
+func (o *UpdateawsAccountIntegrationRequestParameters) GetPrivateKey() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -82,7 +82,7 @@ func (o *CreateawsIntegrationRequestParameters) GetPrivateKey() string {
 
 // GetPrivateKeyOk returns a tuple with the PrivateKey field value
 // and a boolean to check if the value has been set.
-func (o *CreateawsIntegrationRequestParameters) GetPrivateKeyOk() (*string, bool) {
+func (o *UpdateawsAccountIntegrationRequestParameters) GetPrivateKeyOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -90,11 +90,11 @@ func (o *CreateawsIntegrationRequestParameters) GetPrivateKeyOk() (*string, bool
 }
 
 // SetPrivateKey sets field value
-func (o *CreateawsIntegrationRequestParameters) SetPrivateKey(v string) {
+func (o *UpdateawsAccountIntegrationRequestParameters) SetPrivateKey(v string) {
 	o.PrivateKey = v
 }
 
-func (o CreateawsIntegrationRequestParameters) MarshalJSON() ([]byte, error) {
+func (o UpdateawsAccountIntegrationRequestParameters) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -102,7 +102,7 @@ func (o CreateawsIntegrationRequestParameters) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CreateawsIntegrationRequestParameters) ToMap() (map[string]interface{}, error) {
+func (o UpdateawsAccountIntegrationRequestParameters) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["public_key"] = o.PublicKey
 	toSerialize["private_key"] = o.PrivateKey
@@ -114,7 +114,7 @@ func (o CreateawsIntegrationRequestParameters) ToMap() (map[string]interface{}, 
 	return toSerialize, nil
 }
 
-func (o *CreateawsIntegrationRequestParameters) UnmarshalJSON(data []byte) (err error) {
+func (o *UpdateawsAccountIntegrationRequestParameters) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -137,15 +137,15 @@ func (o *CreateawsIntegrationRequestParameters) UnmarshalJSON(data []byte) (err 
 		}
 	}
 
-	varCreateawsIntegrationRequestParameters := _CreateawsIntegrationRequestParameters{}
+	varUpdateawsAccountIntegrationRequestParameters := _UpdateawsAccountIntegrationRequestParameters{}
 
-	err = json.Unmarshal(data, &varCreateawsIntegrationRequestParameters)
+	err = json.Unmarshal(data, &varUpdateawsAccountIntegrationRequestParameters)
 
 	if err != nil {
 		return err
 	}
 
-	*o = CreateawsIntegrationRequestParameters(varCreateawsIntegrationRequestParameters)
+	*o = UpdateawsAccountIntegrationRequestParameters(varUpdateawsAccountIntegrationRequestParameters)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -158,38 +158,38 @@ func (o *CreateawsIntegrationRequestParameters) UnmarshalJSON(data []byte) (err 
 	return err
 }
 
-type NullableCreateawsIntegrationRequestParameters struct {
-	value *CreateawsIntegrationRequestParameters
+type NullableUpdateawsAccountIntegrationRequestParameters struct {
+	value *UpdateawsAccountIntegrationRequestParameters
 	isSet bool
 }
 
-func (v NullableCreateawsIntegrationRequestParameters) Get() *CreateawsIntegrationRequestParameters {
+func (v NullableUpdateawsAccountIntegrationRequestParameters) Get() *UpdateawsAccountIntegrationRequestParameters {
 	return v.value
 }
 
-func (v *NullableCreateawsIntegrationRequestParameters) Set(val *CreateawsIntegrationRequestParameters) {
+func (v *NullableUpdateawsAccountIntegrationRequestParameters) Set(val *UpdateawsAccountIntegrationRequestParameters) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCreateawsIntegrationRequestParameters) IsSet() bool {
+func (v NullableUpdateawsAccountIntegrationRequestParameters) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCreateawsIntegrationRequestParameters) Unset() {
+func (v *NullableUpdateawsAccountIntegrationRequestParameters) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCreateawsIntegrationRequestParameters(val *CreateawsIntegrationRequestParameters) *NullableCreateawsIntegrationRequestParameters {
-	return &NullableCreateawsIntegrationRequestParameters{value: val, isSet: true}
+func NewNullableUpdateawsAccountIntegrationRequestParameters(val *UpdateawsAccountIntegrationRequestParameters) *NullableUpdateawsAccountIntegrationRequestParameters {
+	return &NullableUpdateawsAccountIntegrationRequestParameters{value: val, isSet: true}
 }
 
-func (v NullableCreateawsIntegrationRequestParameters) MarshalJSON() ([]byte, error) {
+func (v NullableUpdateawsAccountIntegrationRequestParameters) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCreateawsIntegrationRequestParameters) UnmarshalJSON(src []byte) error {
+func (v *NullableUpdateawsAccountIntegrationRequestParameters) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

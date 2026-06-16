@@ -155,31 +155,31 @@ func (a *IntegrationsAPIService) CreateakamaiIntegrationExecute(r ApiCreateakama
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiCreateawsIntegrationRequest struct {
-	ctx                         context.Context
-	ApiService                  *IntegrationsAPIService
-	createawsIntegrationRequest *CreateawsIntegrationRequest
+type ApiCreateawsAccountIntegrationRequest struct {
+	ctx                                context.Context
+	ApiService                         *IntegrationsAPIService
+	createawsAccountIntegrationRequest *CreateawsAccountIntegrationRequest
 }
 
-func (r ApiCreateawsIntegrationRequest) CreateawsIntegrationRequest(createawsIntegrationRequest CreateawsIntegrationRequest) ApiCreateawsIntegrationRequest {
-	r.createawsIntegrationRequest = &createawsIntegrationRequest
+func (r ApiCreateawsAccountIntegrationRequest) CreateawsAccountIntegrationRequest(createawsAccountIntegrationRequest CreateawsAccountIntegrationRequest) ApiCreateawsAccountIntegrationRequest {
+	r.createawsAccountIntegrationRequest = &createawsAccountIntegrationRequest
 	return r
 }
 
-func (r ApiCreateawsIntegrationRequest) Execute() (*CreateawsIntegration200Response, *http.Response, error) {
-	return r.ApiService.CreateawsIntegrationExecute(r)
+func (r ApiCreateawsAccountIntegrationRequest) Execute() (*CreateawsAccountIntegration200Response, *http.Response, error) {
+	return r.ApiService.CreateawsAccountIntegrationExecute(r)
 }
 
 /*
-CreateawsIntegration Create AWS integrations.
+CreateawsAccountIntegration Create AWS Account integrations.
 
-Create a AWS integration.
+Create a AWS Account integration.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateawsIntegrationRequest
+	@return ApiCreateawsAccountIntegrationRequest
 */
-func (a *IntegrationsAPIService) CreateawsIntegration(ctx context.Context) ApiCreateawsIntegrationRequest {
-	return ApiCreateawsIntegrationRequest{
+func (a *IntegrationsAPIService) CreateawsAccountIntegration(ctx context.Context) ApiCreateawsAccountIntegrationRequest {
+	return ApiCreateawsAccountIntegrationRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
@@ -187,21 +187,21 @@ func (a *IntegrationsAPIService) CreateawsIntegration(ctx context.Context) ApiCr
 
 // Execute executes the request
 //
-//	@return CreateawsIntegration200Response
-func (a *IntegrationsAPIService) CreateawsIntegrationExecute(r ApiCreateawsIntegrationRequest) (*CreateawsIntegration200Response, *http.Response, error) {
+//	@return CreateawsAccountIntegration200Response
+func (a *IntegrationsAPIService) CreateawsAccountIntegrationExecute(r ApiCreateawsAccountIntegrationRequest) (*CreateawsAccountIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreateawsIntegration200Response
+		localVarReturnValue *CreateawsAccountIntegration200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.CreateawsIntegration")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.CreateawsAccountIntegration")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/integrations/aws"
+	localVarPath := localBasePath + "/integrations/aws-account"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -225,7 +225,7 @@ func (a *IntegrationsAPIService) CreateawsIntegrationExecute(r ApiCreateawsInteg
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.createawsIntegrationRequest
+	localVarPostBody = r.createawsAccountIntegrationRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1878,27 +1878,27 @@ func (a *IntegrationsAPIService) DeleteakamaiIntegrationExecute(r ApiDeleteakama
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiDeleteawsIntegrationRequest struct {
+type ApiDeleteawsAccountIntegrationRequest struct {
 	ctx        context.Context
 	ApiService *IntegrationsAPIService
 	id         string
 }
 
-func (r ApiDeleteawsIntegrationRequest) Execute() (*CreateawsIntegration200Response, *http.Response, error) {
-	return r.ApiService.DeleteawsIntegrationExecute(r)
+func (r ApiDeleteawsAccountIntegrationRequest) Execute() (*CreateawsAccountIntegration200Response, *http.Response, error) {
+	return r.ApiService.DeleteawsAccountIntegrationExecute(r)
 }
 
 /*
-DeleteawsIntegration Delete AWS integration.
+DeleteawsAccountIntegration Delete AWS Account integration.
 
-Delete a AWS integration.
+Delete a AWS Account integration.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The integration ID
-	@return ApiDeleteawsIntegrationRequest
+	@return ApiDeleteawsAccountIntegrationRequest
 */
-func (a *IntegrationsAPIService) DeleteawsIntegration(ctx context.Context, id string) ApiDeleteawsIntegrationRequest {
-	return ApiDeleteawsIntegrationRequest{
+func (a *IntegrationsAPIService) DeleteawsAccountIntegration(ctx context.Context, id string) ApiDeleteawsAccountIntegrationRequest {
+	return ApiDeleteawsAccountIntegrationRequest{
 		ApiService: a,
 		ctx:        ctx,
 		id:         id,
@@ -1907,21 +1907,21 @@ func (a *IntegrationsAPIService) DeleteawsIntegration(ctx context.Context, id st
 
 // Execute executes the request
 //
-//	@return CreateawsIntegration200Response
-func (a *IntegrationsAPIService) DeleteawsIntegrationExecute(r ApiDeleteawsIntegrationRequest) (*CreateawsIntegration200Response, *http.Response, error) {
+//	@return CreateawsAccountIntegration200Response
+func (a *IntegrationsAPIService) DeleteawsAccountIntegrationExecute(r ApiDeleteawsAccountIntegrationRequest) (*CreateawsAccountIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodDelete
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreateawsIntegration200Response
+		localVarReturnValue *CreateawsAccountIntegration200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.DeleteawsIntegration")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.DeleteawsAccountIntegration")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/integrations/aws/{id}"
+	localVarPath := localBasePath + "/integrations/aws-account/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -3674,27 +3674,27 @@ func (a *IntegrationsAPIService) GetakamaiIntegrationExecute(r ApiGetakamaiInteg
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetawsIntegrationRequest struct {
+type ApiGetawsAccountIntegrationRequest struct {
 	ctx        context.Context
 	ApiService *IntegrationsAPIService
 	id         string
 }
 
-func (r ApiGetawsIntegrationRequest) Execute() (*CreateawsIntegration200Response, *http.Response, error) {
-	return r.ApiService.GetawsIntegrationExecute(r)
+func (r ApiGetawsAccountIntegrationRequest) Execute() (*CreateawsAccountIntegration200Response, *http.Response, error) {
+	return r.ApiService.GetawsAccountIntegrationExecute(r)
 }
 
 /*
-GetawsIntegration Get AWS integration.
+GetawsAccountIntegration Get AWS Account integration.
 
-Get a AWS integration.
+Get a AWS Account integration.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The integration ID
-	@return ApiGetawsIntegrationRequest
+	@return ApiGetawsAccountIntegrationRequest
 */
-func (a *IntegrationsAPIService) GetawsIntegration(ctx context.Context, id string) ApiGetawsIntegrationRequest {
-	return ApiGetawsIntegrationRequest{
+func (a *IntegrationsAPIService) GetawsAccountIntegration(ctx context.Context, id string) ApiGetawsAccountIntegrationRequest {
+	return ApiGetawsAccountIntegrationRequest{
 		ApiService: a,
 		ctx:        ctx,
 		id:         id,
@@ -3703,21 +3703,21 @@ func (a *IntegrationsAPIService) GetawsIntegration(ctx context.Context, id strin
 
 // Execute executes the request
 //
-//	@return CreateawsIntegration200Response
-func (a *IntegrationsAPIService) GetawsIntegrationExecute(r ApiGetawsIntegrationRequest) (*CreateawsIntegration200Response, *http.Response, error) {
+//	@return CreateawsAccountIntegration200Response
+func (a *IntegrationsAPIService) GetawsAccountIntegrationExecute(r ApiGetawsAccountIntegrationRequest) (*CreateawsAccountIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreateawsIntegration200Response
+		localVarReturnValue *CreateawsAccountIntegration200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.GetawsIntegration")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.GetawsAccountIntegration")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/integrations/aws/{id}"
+	localVarPath := localBasePath + "/integrations/aws-account/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -5436,7 +5436,7 @@ func (a *IntegrationsAPIService) ListakamaiIntegrationsExecute(r ApiListakamaiIn
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiListawsIntegrationsRequest struct {
+type ApiListawsAccountIntegrationsRequest struct {
 	ctx           context.Context
 	ApiService    *IntegrationsAPIService
 	cursor        *string
@@ -5450,67 +5450,67 @@ type ApiListawsIntegrationsRequest struct {
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
-func (r ApiListawsIntegrationsRequest) Cursor(cursor string) ApiListawsIntegrationsRequest {
+func (r ApiListawsAccountIntegrationsRequest) Cursor(cursor string) ApiListawsAccountIntegrationsRequest {
 	r.cursor = &cursor
 	return r
 }
 
 // The number of items to return per page
-func (r ApiListawsIntegrationsRequest) Size(size int) ApiListawsIntegrationsRequest {
+func (r ApiListawsAccountIntegrationsRequest) Size(size int) ApiListawsAccountIntegrationsRequest {
 	r.size = &size
 	return r
 }
 
 // The type to sort by
-func (r ApiListawsIntegrationsRequest) SortType(sortType string) ApiListawsIntegrationsRequest {
+func (r ApiListawsAccountIntegrationsRequest) SortType(sortType string) ApiListawsAccountIntegrationsRequest {
 	r.sortType = &sortType
 	return r
 }
 
 // The direction to sort by
-func (r ApiListawsIntegrationsRequest) SortDirection(sortDirection string) ApiListawsIntegrationsRequest {
+func (r ApiListawsAccountIntegrationsRequest) SortDirection(sortDirection string) ApiListawsAccountIntegrationsRequest {
 	r.sortDirection = &sortDirection
 	return r
 }
 
 // Filter by project IDs
-func (r ApiListawsIntegrationsRequest) ProjectIds(projectIds []string) ApiListawsIntegrationsRequest {
+func (r ApiListawsAccountIntegrationsRequest) ProjectIds(projectIds []string) ApiListawsAccountIntegrationsRequest {
 	r.projectIds = &projectIds
 	return r
 }
 
 // Filter by integration IDs
-func (r ApiListawsIntegrationsRequest) Ids(ids string) ApiListawsIntegrationsRequest {
+func (r ApiListawsAccountIntegrationsRequest) Ids(ids string) ApiListawsAccountIntegrationsRequest {
 	r.ids = &ids
 	return r
 }
 
 // Filter by location IDs
-func (r ApiListawsIntegrationsRequest) LocationIds(locationIds []string) ApiListawsIntegrationsRequest {
+func (r ApiListawsAccountIntegrationsRequest) LocationIds(locationIds []string) ApiListawsAccountIntegrationsRequest {
 	r.locationIds = &locationIds
 	return r
 }
 
 // Search term to filter integrations by name or description
-func (r ApiListawsIntegrationsRequest) Search(search string) ApiListawsIntegrationsRequest {
+func (r ApiListawsAccountIntegrationsRequest) Search(search string) ApiListawsAccountIntegrationsRequest {
 	r.search = &search
 	return r
 }
 
-func (r ApiListawsIntegrationsRequest) Execute() (*ListIntegrations200Response, *http.Response, error) {
-	return r.ApiService.ListawsIntegrationsExecute(r)
+func (r ApiListawsAccountIntegrationsRequest) Execute() (*ListIntegrations200Response, *http.Response, error) {
+	return r.ApiService.ListawsAccountIntegrationsExecute(r)
 }
 
 /*
-ListawsIntegrations List AWS integrations.
+ListawsAccountIntegrations List AWS Account integrations.
 
-List and search AWS integrations of the organization.
+List and search AWS Account integrations of the organization.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiListawsIntegrationsRequest
+	@return ApiListawsAccountIntegrationsRequest
 */
-func (a *IntegrationsAPIService) ListawsIntegrations(ctx context.Context) ApiListawsIntegrationsRequest {
-	return ApiListawsIntegrationsRequest{
+func (a *IntegrationsAPIService) ListawsAccountIntegrations(ctx context.Context) ApiListawsAccountIntegrationsRequest {
+	return ApiListawsAccountIntegrationsRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
@@ -5519,7 +5519,7 @@ func (a *IntegrationsAPIService) ListawsIntegrations(ctx context.Context) ApiLis
 // Execute executes the request
 //
 //	@return ListIntegrations200Response
-func (a *IntegrationsAPIService) ListawsIntegrationsExecute(r ApiListawsIntegrationsRequest) (*ListIntegrations200Response, *http.Response, error) {
+func (a *IntegrationsAPIService) ListawsAccountIntegrationsExecute(r ApiListawsAccountIntegrationsRequest) (*ListIntegrations200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -5527,12 +5527,12 @@ func (a *IntegrationsAPIService) ListawsIntegrationsExecute(r ApiListawsIntegrat
 		localVarReturnValue *ListIntegrations200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.ListawsIntegrations")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.ListawsAccountIntegrations")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/integrations/aws"
+	localVarPath := localBasePath + "/integrations/aws-account"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -8284,33 +8284,33 @@ func (a *IntegrationsAPIService) UpdateakamaiIntegrationExecute(r ApiUpdateakama
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateawsIntegrationRequest struct {
-	ctx                         context.Context
-	ApiService                  *IntegrationsAPIService
-	id                          string
-	updateawsIntegrationRequest *UpdateawsIntegrationRequest
+type ApiUpdateawsAccountIntegrationRequest struct {
+	ctx                                context.Context
+	ApiService                         *IntegrationsAPIService
+	id                                 string
+	updateawsAccountIntegrationRequest *UpdateawsAccountIntegrationRequest
 }
 
-func (r ApiUpdateawsIntegrationRequest) UpdateawsIntegrationRequest(updateawsIntegrationRequest UpdateawsIntegrationRequest) ApiUpdateawsIntegrationRequest {
-	r.updateawsIntegrationRequest = &updateawsIntegrationRequest
+func (r ApiUpdateawsAccountIntegrationRequest) UpdateawsAccountIntegrationRequest(updateawsAccountIntegrationRequest UpdateawsAccountIntegrationRequest) ApiUpdateawsAccountIntegrationRequest {
+	r.updateawsAccountIntegrationRequest = &updateawsAccountIntegrationRequest
 	return r
 }
 
-func (r ApiUpdateawsIntegrationRequest) Execute() (*CreateawsIntegration200Response, *http.Response, error) {
-	return r.ApiService.UpdateawsIntegrationExecute(r)
+func (r ApiUpdateawsAccountIntegrationRequest) Execute() (*CreateawsAccountIntegration200Response, *http.Response, error) {
+	return r.ApiService.UpdateawsAccountIntegrationExecute(r)
 }
 
 /*
-UpdateawsIntegration Update AWS integration.
+UpdateawsAccountIntegration Update AWS Account integration.
 
-Update a AWS integration.
+Update a AWS Account integration.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The integration ID
-	@return ApiUpdateawsIntegrationRequest
+	@return ApiUpdateawsAccountIntegrationRequest
 */
-func (a *IntegrationsAPIService) UpdateawsIntegration(ctx context.Context, id string) ApiUpdateawsIntegrationRequest {
-	return ApiUpdateawsIntegrationRequest{
+func (a *IntegrationsAPIService) UpdateawsAccountIntegration(ctx context.Context, id string) ApiUpdateawsAccountIntegrationRequest {
+	return ApiUpdateawsAccountIntegrationRequest{
 		ApiService: a,
 		ctx:        ctx,
 		id:         id,
@@ -8319,21 +8319,21 @@ func (a *IntegrationsAPIService) UpdateawsIntegration(ctx context.Context, id st
 
 // Execute executes the request
 //
-//	@return CreateawsIntegration200Response
-func (a *IntegrationsAPIService) UpdateawsIntegrationExecute(r ApiUpdateawsIntegrationRequest) (*CreateawsIntegration200Response, *http.Response, error) {
+//	@return CreateawsAccountIntegration200Response
+func (a *IntegrationsAPIService) UpdateawsAccountIntegrationExecute(r ApiUpdateawsAccountIntegrationRequest) (*CreateawsAccountIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreateawsIntegration200Response
+		localVarReturnValue *CreateawsAccountIntegration200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.UpdateawsIntegration")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.UpdateawsAccountIntegration")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/integrations/aws/{id}"
+	localVarPath := localBasePath + "/integrations/aws-account/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -8358,7 +8358,7 @@ func (a *IntegrationsAPIService) UpdateawsIntegrationExecute(r ApiUpdateawsInteg
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.updateawsIntegrationRequest
+	localVarPostBody = r.updateawsAccountIntegrationRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

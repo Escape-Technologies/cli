@@ -14,14 +14,14 @@ import (
 	"encoding/json"
 )
 
-// checks if the UpdateawsIntegrationRequest type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &UpdateawsIntegrationRequest{}
+// checks if the UpdateawsAccountIntegrationRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &UpdateawsAccountIntegrationRequest{}
 
-// UpdateawsIntegrationRequest struct for UpdateawsIntegrationRequest
-type UpdateawsIntegrationRequest struct {
+// UpdateawsAccountIntegrationRequest struct for UpdateawsAccountIntegrationRequest
+type UpdateawsAccountIntegrationRequest struct {
 	// The new name of the integration
-	Name       *string                                `json:"name,omitempty"`
-	Parameters *UpdateawsIntegrationRequestParameters `json:"parameters,omitempty"`
+	Name       *string                                       `json:"name,omitempty"`
+	Parameters *UpdateawsAccountIntegrationRequestParameters `json:"parameters,omitempty"`
 	// Optional proxy ID to attach to the integration
 	ProxyId *string `json:"proxyId,omitempty"`
 	// Optional list of project IDs to attach to the integration
@@ -29,27 +29,27 @@ type UpdateawsIntegrationRequest struct {
 	AdditionalProperties map[string]interface{}
 }
 
-type _UpdateawsIntegrationRequest UpdateawsIntegrationRequest
+type _UpdateawsAccountIntegrationRequest UpdateawsAccountIntegrationRequest
 
-// NewUpdateawsIntegrationRequest instantiates a new UpdateawsIntegrationRequest object
+// NewUpdateawsAccountIntegrationRequest instantiates a new UpdateawsAccountIntegrationRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateawsIntegrationRequest() *UpdateawsIntegrationRequest {
-	this := UpdateawsIntegrationRequest{}
+func NewUpdateawsAccountIntegrationRequest() *UpdateawsAccountIntegrationRequest {
+	this := UpdateawsAccountIntegrationRequest{}
 	return &this
 }
 
-// NewUpdateawsIntegrationRequestWithDefaults instantiates a new UpdateawsIntegrationRequest object
+// NewUpdateawsAccountIntegrationRequestWithDefaults instantiates a new UpdateawsAccountIntegrationRequest object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewUpdateawsIntegrationRequestWithDefaults() *UpdateawsIntegrationRequest {
-	this := UpdateawsIntegrationRequest{}
+func NewUpdateawsAccountIntegrationRequestWithDefaults() *UpdateawsAccountIntegrationRequest {
+	this := UpdateawsAccountIntegrationRequest{}
 	return &this
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
-func (o *UpdateawsIntegrationRequest) GetName() string {
+func (o *UpdateawsAccountIntegrationRequest) GetName() string {
 	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
@@ -59,7 +59,7 @@ func (o *UpdateawsIntegrationRequest) GetName() string {
 
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateawsIntegrationRequest) GetNameOk() (*string, bool) {
+func (o *UpdateawsAccountIntegrationRequest) GetNameOk() (*string, bool) {
 	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
@@ -67,7 +67,7 @@ func (o *UpdateawsIntegrationRequest) GetNameOk() (*string, bool) {
 }
 
 // HasName returns a boolean if a field has been set.
-func (o *UpdateawsIntegrationRequest) HasName() bool {
+func (o *UpdateawsAccountIntegrationRequest) HasName() bool {
 	if o != nil && !IsNil(o.Name) {
 		return true
 	}
@@ -76,14 +76,14 @@ func (o *UpdateawsIntegrationRequest) HasName() bool {
 }
 
 // SetName gets a reference to the given string and assigns it to the Name field.
-func (o *UpdateawsIntegrationRequest) SetName(v string) {
+func (o *UpdateawsAccountIntegrationRequest) SetName(v string) {
 	o.Name = &v
 }
 
 // GetParameters returns the Parameters field value if set, zero value otherwise.
-func (o *UpdateawsIntegrationRequest) GetParameters() UpdateawsIntegrationRequestParameters {
+func (o *UpdateawsAccountIntegrationRequest) GetParameters() UpdateawsAccountIntegrationRequestParameters {
 	if o == nil || IsNil(o.Parameters) {
-		var ret UpdateawsIntegrationRequestParameters
+		var ret UpdateawsAccountIntegrationRequestParameters
 		return ret
 	}
 	return *o.Parameters
@@ -91,7 +91,7 @@ func (o *UpdateawsIntegrationRequest) GetParameters() UpdateawsIntegrationReques
 
 // GetParametersOk returns a tuple with the Parameters field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateawsIntegrationRequest) GetParametersOk() (*UpdateawsIntegrationRequestParameters, bool) {
+func (o *UpdateawsAccountIntegrationRequest) GetParametersOk() (*UpdateawsAccountIntegrationRequestParameters, bool) {
 	if o == nil || IsNil(o.Parameters) {
 		return nil, false
 	}
@@ -99,7 +99,7 @@ func (o *UpdateawsIntegrationRequest) GetParametersOk() (*UpdateawsIntegrationRe
 }
 
 // HasParameters returns a boolean if a field has been set.
-func (o *UpdateawsIntegrationRequest) HasParameters() bool {
+func (o *UpdateawsAccountIntegrationRequest) HasParameters() bool {
 	if o != nil && !IsNil(o.Parameters) {
 		return true
 	}
@@ -107,13 +107,13 @@ func (o *UpdateawsIntegrationRequest) HasParameters() bool {
 	return false
 }
 
-// SetParameters gets a reference to the given UpdateawsIntegrationRequestParameters and assigns it to the Parameters field.
-func (o *UpdateawsIntegrationRequest) SetParameters(v UpdateawsIntegrationRequestParameters) {
+// SetParameters gets a reference to the given UpdateawsAccountIntegrationRequestParameters and assigns it to the Parameters field.
+func (o *UpdateawsAccountIntegrationRequest) SetParameters(v UpdateawsAccountIntegrationRequestParameters) {
 	o.Parameters = &v
 }
 
 // GetProxyId returns the ProxyId field value if set, zero value otherwise.
-func (o *UpdateawsIntegrationRequest) GetProxyId() string {
+func (o *UpdateawsAccountIntegrationRequest) GetProxyId() string {
 	if o == nil || IsNil(o.ProxyId) {
 		var ret string
 		return ret
@@ -123,7 +123,7 @@ func (o *UpdateawsIntegrationRequest) GetProxyId() string {
 
 // GetProxyIdOk returns a tuple with the ProxyId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateawsIntegrationRequest) GetProxyIdOk() (*string, bool) {
+func (o *UpdateawsAccountIntegrationRequest) GetProxyIdOk() (*string, bool) {
 	if o == nil || IsNil(o.ProxyId) {
 		return nil, false
 	}
@@ -131,7 +131,7 @@ func (o *UpdateawsIntegrationRequest) GetProxyIdOk() (*string, bool) {
 }
 
 // HasProxyId returns a boolean if a field has been set.
-func (o *UpdateawsIntegrationRequest) HasProxyId() bool {
+func (o *UpdateawsAccountIntegrationRequest) HasProxyId() bool {
 	if o != nil && !IsNil(o.ProxyId) {
 		return true
 	}
@@ -140,12 +140,12 @@ func (o *UpdateawsIntegrationRequest) HasProxyId() bool {
 }
 
 // SetProxyId gets a reference to the given string and assigns it to the ProxyId field.
-func (o *UpdateawsIntegrationRequest) SetProxyId(v string) {
+func (o *UpdateawsAccountIntegrationRequest) SetProxyId(v string) {
 	o.ProxyId = &v
 }
 
 // GetProjectIds returns the ProjectIds field value if set, zero value otherwise.
-func (o *UpdateawsIntegrationRequest) GetProjectIds() []string {
+func (o *UpdateawsAccountIntegrationRequest) GetProjectIds() []string {
 	if o == nil || IsNil(o.ProjectIds) {
 		var ret []string
 		return ret
@@ -155,7 +155,7 @@ func (o *UpdateawsIntegrationRequest) GetProjectIds() []string {
 
 // GetProjectIdsOk returns a tuple with the ProjectIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateawsIntegrationRequest) GetProjectIdsOk() ([]string, bool) {
+func (o *UpdateawsAccountIntegrationRequest) GetProjectIdsOk() ([]string, bool) {
 	if o == nil || IsNil(o.ProjectIds) {
 		return nil, false
 	}
@@ -163,7 +163,7 @@ func (o *UpdateawsIntegrationRequest) GetProjectIdsOk() ([]string, bool) {
 }
 
 // HasProjectIds returns a boolean if a field has been set.
-func (o *UpdateawsIntegrationRequest) HasProjectIds() bool {
+func (o *UpdateawsAccountIntegrationRequest) HasProjectIds() bool {
 	if o != nil && !IsNil(o.ProjectIds) {
 		return true
 	}
@@ -172,11 +172,11 @@ func (o *UpdateawsIntegrationRequest) HasProjectIds() bool {
 }
 
 // SetProjectIds gets a reference to the given []string and assigns it to the ProjectIds field.
-func (o *UpdateawsIntegrationRequest) SetProjectIds(v []string) {
+func (o *UpdateawsAccountIntegrationRequest) SetProjectIds(v []string) {
 	o.ProjectIds = v
 }
 
-func (o UpdateawsIntegrationRequest) MarshalJSON() ([]byte, error) {
+func (o UpdateawsAccountIntegrationRequest) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -184,7 +184,7 @@ func (o UpdateawsIntegrationRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o UpdateawsIntegrationRequest) ToMap() (map[string]interface{}, error) {
+func (o UpdateawsAccountIntegrationRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
@@ -206,16 +206,16 @@ func (o UpdateawsIntegrationRequest) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *UpdateawsIntegrationRequest) UnmarshalJSON(data []byte) (err error) {
-	varUpdateawsIntegrationRequest := _UpdateawsIntegrationRequest{}
+func (o *UpdateawsAccountIntegrationRequest) UnmarshalJSON(data []byte) (err error) {
+	varUpdateawsAccountIntegrationRequest := _UpdateawsAccountIntegrationRequest{}
 
-	err = json.Unmarshal(data, &varUpdateawsIntegrationRequest)
+	err = json.Unmarshal(data, &varUpdateawsAccountIntegrationRequest)
 
 	if err != nil {
 		return err
 	}
 
-	*o = UpdateawsIntegrationRequest(varUpdateawsIntegrationRequest)
+	*o = UpdateawsAccountIntegrationRequest(varUpdateawsAccountIntegrationRequest)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -230,38 +230,38 @@ func (o *UpdateawsIntegrationRequest) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableUpdateawsIntegrationRequest struct {
-	value *UpdateawsIntegrationRequest
+type NullableUpdateawsAccountIntegrationRequest struct {
+	value *UpdateawsAccountIntegrationRequest
 	isSet bool
 }
 
-func (v NullableUpdateawsIntegrationRequest) Get() *UpdateawsIntegrationRequest {
+func (v NullableUpdateawsAccountIntegrationRequest) Get() *UpdateawsAccountIntegrationRequest {
 	return v.value
 }
 
-func (v *NullableUpdateawsIntegrationRequest) Set(val *UpdateawsIntegrationRequest) {
+func (v *NullableUpdateawsAccountIntegrationRequest) Set(val *UpdateawsAccountIntegrationRequest) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableUpdateawsIntegrationRequest) IsSet() bool {
+func (v NullableUpdateawsAccountIntegrationRequest) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableUpdateawsIntegrationRequest) Unset() {
+func (v *NullableUpdateawsAccountIntegrationRequest) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableUpdateawsIntegrationRequest(val *UpdateawsIntegrationRequest) *NullableUpdateawsIntegrationRequest {
-	return &NullableUpdateawsIntegrationRequest{value: val, isSet: true}
+func NewNullableUpdateawsAccountIntegrationRequest(val *UpdateawsAccountIntegrationRequest) *NullableUpdateawsAccountIntegrationRequest {
+	return &NullableUpdateawsAccountIntegrationRequest{value: val, isSet: true}
 }
 
-func (v NullableUpdateawsIntegrationRequest) MarshalJSON() ([]byte, error) {
+func (v NullableUpdateawsAccountIntegrationRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableUpdateawsIntegrationRequest) UnmarshalJSON(src []byte) error {
+func (v *NullableUpdateawsAccountIntegrationRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
