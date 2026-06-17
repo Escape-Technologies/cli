@@ -31,6 +31,7 @@ type GetProfile200ResponseConfigurationSecurityTests struct {
 	SsrfAgent                              *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"ssrf_agent,omitempty"`
 	CommandInjectionAgent                  *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"command_injection_agent,omitempty"`
 	AccessControlAgent                     *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"access_control_agent,omitempty"`
+	BusinessLogicAgent                     *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"business_logic_agent,omitempty"`
 	AirflowConfigExposure                  *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"airflow_config_exposure,omitempty"`
 	AirflowDefaultLogin                    *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"airflow_default_login,omitempty"`
 	AirflowV3DefaultLogin                  *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"airflow_v3_default_login,omitempty"`
@@ -724,6 +725,38 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) HasAccessControlAgent(
 // SetAccessControlAgent gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the AccessControlAgent field.
 func (o *GetProfile200ResponseConfigurationSecurityTests) SetAccessControlAgent(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
 	o.AccessControlAgent = &v
+}
+
+// GetBusinessLogicAgent returns the BusinessLogicAgent field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetBusinessLogicAgent() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.BusinessLogicAgent) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.BusinessLogicAgent
+}
+
+// GetBusinessLogicAgentOk returns a tuple with the BusinessLogicAgent field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetBusinessLogicAgentOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.BusinessLogicAgent) {
+		return nil, false
+	}
+	return o.BusinessLogicAgent, true
+}
+
+// HasBusinessLogicAgent returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasBusinessLogicAgent() bool {
+	if o != nil && !IsNil(o.BusinessLogicAgent) {
+		return true
+	}
+
+	return false
+}
+
+// SetBusinessLogicAgent gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the BusinessLogicAgent field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetBusinessLogicAgent(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.BusinessLogicAgent = &v
 }
 
 // GetAirflowConfigExposure returns the AirflowConfigExposure field value if set, zero value otherwise.
@@ -10020,6 +10053,9 @@ func (o GetProfile200ResponseConfigurationSecurityTests) ToMap() (map[string]int
 	if !IsNil(o.AccessControlAgent) {
 		toSerialize["access_control_agent"] = o.AccessControlAgent
 	}
+	if !IsNil(o.BusinessLogicAgent) {
+		toSerialize["business_logic_agent"] = o.BusinessLogicAgent
+	}
 	if !IsNil(o.AirflowConfigExposure) {
 		toSerialize["airflow_config_exposure"] = o.AirflowConfigExposure
 	}
@@ -10921,6 +10957,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) UnmarshalJSON(data []b
 		delete(additionalProperties, "ssrf_agent")
 		delete(additionalProperties, "command_injection_agent")
 		delete(additionalProperties, "access_control_agent")
+		delete(additionalProperties, "business_logic_agent")
 		delete(additionalProperties, "airflow_config_exposure")
 		delete(additionalProperties, "airflow_default_login")
 		delete(additionalProperties, "airflow_v3_default_login")
