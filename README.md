@@ -74,7 +74,7 @@ For Kubernetes, use the provided Helm chart. See [`helm/values.yaml`](./helm/val
 
 ```yaml
 - name: Escape scan
-  uses: Escape-Technologies/cli@v1
+  uses: Escape-Technologies/cli@v1.6.0
   with:
     profile_id: ${{ secrets.ESCAPE_PROFILE_ID }}
     api_key: ${{ secrets.ESCAPE_API_KEY }}
