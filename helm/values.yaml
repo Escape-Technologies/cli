@@ -20,6 +20,12 @@ ESCAPE_ENABLE_LOGS_ENDPOINT: false
 # Disable color output in the cli
 ESCAPE_COLOR_DISABLED: false
 
+# Labels applied to all chart resources (Deployment, ServiceAccount, ClusterRole/Binding, pods)
+commonLabels: {}
+
+# Additional labels applied only to pods
+podLabels: {}
+
 container:
   image: escapetech/cli:latest
   resources:
