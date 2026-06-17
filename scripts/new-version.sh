@@ -50,8 +50,8 @@ appVersion: ${new_version}
 EOF
 
 git add helm/Chart.yaml
-git add $PROJECT_ROOT/version.txt
-git add $PROJECT_ROOT/README.md
+git add "$PROJECT_ROOT/version.txt"
+git add "$PROJECT_ROOT/README.md"
 git commit -m "v${new_version}"
 git tag -a "v${new_version}" -m "v${new_version}"
 git push
