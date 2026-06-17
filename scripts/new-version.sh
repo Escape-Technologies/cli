@@ -34,6 +34,11 @@ new_version="${_major}.${_minor}.${_patch}"
 echo "Bump done: $old_version -> $new_version"
 
 echo "${new_version}" > $PROJECT_ROOT/version.txt
+DOCS_GITHUB="$PROJECT_ROOT/../../docs/docs/01-documentation/05-automate/ci-cd/01-github.md"
+for f in "$PROJECT_ROOT/README.md" "$DOCS_GITHUB"; do
+  sed -i.bak "s|uses: Escape-Technologies/cli@v[0-9.]*|uses: Escape-Technologies/cli@v${new_version}|" "$f"
+  rm -f "${f}.bak"
+done
 cat <<EOF > helm/Chart.yaml
 ---
 apiVersion: v2
@@ -45,7 +50,8 @@ appVersion: ${new_version}
 EOF
 
 git add helm/Chart.yaml
-git add $PROJECT_ROOT/version.txt
+git add "$PROJECT_ROOT/version.txt"
+git add "$PROJECT_ROOT/README.md"
 git commit -m "v${new_version}"
 git tag -a "v${new_version}" -m "v${new_version}"
 git push
