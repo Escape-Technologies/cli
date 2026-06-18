@@ -44,6 +44,8 @@ type CreateDastRestProfileRequest struct {
 	// Whether to use all available extra assets for the profile
 	UseAllAvailableExtraAssets *bool                                      `json:"useAllAvailableExtraAssets,omitempty"`
 	Mode                       *ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE `json:"mode,omitempty"`
+	// Maximum scan duration in milliseconds. Defaults to 7_200_000 (2 hours) when omitted.
+	MaxDurationMs *int `json:"maxDurationMs,omitempty"`
 	// Whether to start the scan immediately
 	Start                *bool `json:"start,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -477,6 +479,38 @@ func (o *CreateDastRestProfileRequest) SetMode(v ENUMPROPERTIESCONFIGURATIONPROP
 	o.Mode = &v
 }
 
+// GetMaxDurationMs returns the MaxDurationMs field value if set, zero value otherwise.
+func (o *CreateDastRestProfileRequest) GetMaxDurationMs() int {
+	if o == nil || IsNil(o.MaxDurationMs) {
+		var ret int
+		return ret
+	}
+	return *o.MaxDurationMs
+}
+
+// GetMaxDurationMsOk returns a tuple with the MaxDurationMs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateDastRestProfileRequest) GetMaxDurationMsOk() (*int, bool) {
+	if o == nil || IsNil(o.MaxDurationMs) {
+		return nil, false
+	}
+	return o.MaxDurationMs, true
+}
+
+// HasMaxDurationMs returns a boolean if a field has been set.
+func (o *CreateDastRestProfileRequest) HasMaxDurationMs() bool {
+	if o != nil && !IsNil(o.MaxDurationMs) {
+		return true
+	}
+
+	return false
+}
+
+// SetMaxDurationMs gets a reference to the given int and assigns it to the MaxDurationMs field.
+func (o *CreateDastRestProfileRequest) SetMaxDurationMs(v int) {
+	o.MaxDurationMs = &v
+}
+
 // GetStart returns the Start field value if set, zero value otherwise.
 func (o *CreateDastRestProfileRequest) GetStart() bool {
 	if o == nil || IsNil(o.Start) {
@@ -554,6 +588,9 @@ func (o CreateDastRestProfileRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Mode) {
 		toSerialize["mode"] = o.Mode
 	}
+	if !IsNil(o.MaxDurationMs) {
+		toSerialize["maxDurationMs"] = o.MaxDurationMs
+	}
 	if !IsNil(o.Start) {
 		toSerialize["start"] = o.Start
 	}
@@ -614,6 +651,7 @@ func (o *CreateDastRestProfileRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "extraAssetIds")
 		delete(additionalProperties, "useAllAvailableExtraAssets")
 		delete(additionalProperties, "mode")
+		delete(additionalProperties, "maxDurationMs")
 		delete(additionalProperties, "start")
 		o.AdditionalProperties = additionalProperties
 	}
