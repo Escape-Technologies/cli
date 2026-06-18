@@ -44,7 +44,7 @@ type ProfileSummarized struct {
 	// Coverage ratio of the last scan (0-1). Null if no scan has completed.
 	Coverage *float32 `json:"coverage,omitempty"`
 	// Maximum scan duration in milliseconds
-	MaxDurationMs int `json:"maxDurationMs"`
+	MaxDurationMs *int `json:"maxDurationMs,omitempty"`
 	// Number of open issues across all scans for this profile.
 	OpenIssueCount *int `json:"openIssueCount,omitempty"`
 	// Status of the most recent scan (e.g. FINISHED, RUNNING, FAILED).
@@ -59,7 +59,7 @@ type _ProfileSummarized ProfileSummarized
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProfileSummarized(id string, name string, description string, createdAt string, initiators []ENUMPROPERTIESDATAITEMSPROPERTIESINITIATORSITEMS, extraAssets []ProfileExtraAsset, asset AssetDetailed, maxDurationMs int, links ProfileSummarizedLinks) *ProfileSummarized {
+func NewProfileSummarized(id string, name string, description string, createdAt string, initiators []ENUMPROPERTIESDATAITEMSPROPERTIESINITIATORSITEMS, extraAssets []ProfileExtraAsset, asset AssetDetailed, links ProfileSummarizedLinks) *ProfileSummarized {
 	this := ProfileSummarized{}
 	this.Id = id
 	this.Name = name
@@ -68,7 +68,6 @@ func NewProfileSummarized(id string, name string, description string, createdAt 
 	this.Initiators = initiators
 	this.ExtraAssets = extraAssets
 	this.Asset = asset
-	this.MaxDurationMs = maxDurationMs
 	this.Links = links
 	return &this
 }
@@ -412,28 +411,36 @@ func (o *ProfileSummarized) SetCoverage(v float32) {
 	o.Coverage = &v
 }
 
-// GetMaxDurationMs returns the MaxDurationMs field value
+// GetMaxDurationMs returns the MaxDurationMs field value if set, zero value otherwise.
 func (o *ProfileSummarized) GetMaxDurationMs() int {
-	if o == nil {
+	if o == nil || IsNil(o.MaxDurationMs) {
 		var ret int
 		return ret
 	}
-
-	return o.MaxDurationMs
+	return *o.MaxDurationMs
 }
 
-// GetMaxDurationMsOk returns a tuple with the MaxDurationMs field value
+// GetMaxDurationMsOk returns a tuple with the MaxDurationMs field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ProfileSummarized) GetMaxDurationMsOk() (*int, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.MaxDurationMs) {
 		return nil, false
 	}
-	return &o.MaxDurationMs, true
+	return o.MaxDurationMs, true
 }
 
-// SetMaxDurationMs sets field value
+// HasMaxDurationMs returns a boolean if a field has been set.
+func (o *ProfileSummarized) HasMaxDurationMs() bool {
+	if o != nil && !IsNil(o.MaxDurationMs) {
+		return true
+	}
+
+	return false
+}
+
+// SetMaxDurationMs gets a reference to the given int and assigns it to the MaxDurationMs field.
 func (o *ProfileSummarized) SetMaxDurationMs(v int) {
-	o.MaxDurationMs = v
+	o.MaxDurationMs = &v
 }
 
 // GetOpenIssueCount returns the OpenIssueCount field value if set, zero value otherwise.
@@ -556,7 +563,9 @@ func (o ProfileSummarized) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Coverage) {
 		toSerialize["coverage"] = o.Coverage
 	}
-	toSerialize["maxDurationMs"] = o.MaxDurationMs
+	if !IsNil(o.MaxDurationMs) {
+		toSerialize["maxDurationMs"] = o.MaxDurationMs
+	}
 	if !IsNil(o.OpenIssueCount) {
 		toSerialize["openIssueCount"] = o.OpenIssueCount
 	}
@@ -584,7 +593,6 @@ func (o *ProfileSummarized) UnmarshalJSON(data []byte) (err error) {
 		"initiators",
 		"extraAssets",
 		"asset",
-		"maxDurationMs",
 		"links",
 	}
 
