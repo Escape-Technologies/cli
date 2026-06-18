@@ -44,7 +44,7 @@ type CreateDastRestProfileRequest struct {
 	// Whether to use all available extra assets for the profile
 	UseAllAvailableExtraAssets *bool                                      `json:"useAllAvailableExtraAssets,omitempty"`
 	Mode                       *ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE `json:"mode,omitempty"`
-	// Maximum scan duration in milliseconds. Defaults to 7_200_000 (2 hours) when omitted.
+	// Maximum scan duration in milliseconds. Null or omitted when unset.
 	MaxDurationMs *int `json:"maxDurationMs,omitempty"`
 	// Whether to start the scan immediately
 	Start                *bool `json:"start,omitempty"`

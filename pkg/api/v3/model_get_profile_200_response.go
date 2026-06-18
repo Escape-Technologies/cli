@@ -43,7 +43,7 @@ type GetProfile200Response struct {
 	// The coverage of the profile
 	Coverage *float32 `json:"coverage,omitempty"`
 	// Maximum scan duration in milliseconds
-	MaxDurationMs int                                `json:"maxDurationMs"`
+	MaxDurationMs *int                               `json:"maxDurationMs,omitempty"`
 	Configuration GetProfile200ResponseConfiguration `json:"configuration"`
 	// Schema asset id derived from the first `extraAssets` entry with class SCHEMA, a request hint when the link is not yet visible in `extraAssets` (e.g. immediately after a mutation), or the legacy `assetSchemaId` while migration/backfill is incomplete.
 	SchemaAssetId *string `json:"schemaAssetId,omitempty"`
@@ -73,7 +73,7 @@ type _GetProfile200Response GetProfile200Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetProfile200Response(id string, name string, description string, scannerKind string, createdAt string, updatedAt string, maxDurationMs int, configuration GetProfile200ResponseConfiguration, extraAssets []ProfileExtraAsset, asset AssetDetailed, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, statistics StatisticsDetailed, links ProfileSummarizedLinks) *GetProfile200Response {
+func NewGetProfile200Response(id string, name string, description string, scannerKind string, createdAt string, updatedAt string, configuration GetProfile200ResponseConfiguration, extraAssets []ProfileExtraAsset, asset AssetDetailed, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, statistics StatisticsDetailed, links ProfileSummarizedLinks) *GetProfile200Response {
 	this := GetProfile200Response{}
 	this.Id = id
 	this.Name = name
@@ -81,7 +81,6 @@ func NewGetProfile200Response(id string, name string, description string, scanne
 	this.ScannerKind = scannerKind
 	this.CreatedAt = createdAt
 	this.UpdatedAt = updatedAt
-	this.MaxDurationMs = maxDurationMs
 	this.Configuration = configuration
 	this.ExtraAssets = extraAssets
 	this.Asset = asset
@@ -406,28 +405,36 @@ func (o *GetProfile200Response) SetCoverage(v float32) {
 	o.Coverage = &v
 }
 
-// GetMaxDurationMs returns the MaxDurationMs field value
+// GetMaxDurationMs returns the MaxDurationMs field value if set, zero value otherwise.
 func (o *GetProfile200Response) GetMaxDurationMs() int {
-	if o == nil {
+	if o == nil || IsNil(o.MaxDurationMs) {
 		var ret int
 		return ret
 	}
-
-	return o.MaxDurationMs
+	return *o.MaxDurationMs
 }
 
-// GetMaxDurationMsOk returns a tuple with the MaxDurationMs field value
+// GetMaxDurationMsOk returns a tuple with the MaxDurationMs field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GetProfile200Response) GetMaxDurationMsOk() (*int, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.MaxDurationMs) {
 		return nil, false
 	}
-	return &o.MaxDurationMs, true
+	return o.MaxDurationMs, true
 }
 
-// SetMaxDurationMs sets field value
+// HasMaxDurationMs returns a boolean if a field has been set.
+func (o *GetProfile200Response) HasMaxDurationMs() bool {
+	if o != nil && !IsNil(o.MaxDurationMs) {
+		return true
+	}
+
+	return false
+}
+
+// SetMaxDurationMs gets a reference to the given int and assigns it to the MaxDurationMs field.
 func (o *GetProfile200Response) SetMaxDurationMs(v int) {
-	o.MaxDurationMs = v
+	o.MaxDurationMs = &v
 }
 
 // GetConfiguration returns the Configuration field value
@@ -835,7 +842,9 @@ func (o GetProfile200Response) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Coverage) {
 		toSerialize["coverage"] = o.Coverage
 	}
-	toSerialize["maxDurationMs"] = o.MaxDurationMs
+	if !IsNil(o.MaxDurationMs) {
+		toSerialize["maxDurationMs"] = o.MaxDurationMs
+	}
 	toSerialize["configuration"] = o.Configuration
 	if !IsNil(o.SchemaAssetId) {
 		toSerialize["schemaAssetId"] = o.SchemaAssetId
@@ -882,7 +891,6 @@ func (o *GetProfile200Response) UnmarshalJSON(data []byte) (err error) {
 		"scannerKind",
 		"createdAt",
 		"updatedAt",
-		"maxDurationMs",
 		"configuration",
 		"extraAssets",
 		"asset",
