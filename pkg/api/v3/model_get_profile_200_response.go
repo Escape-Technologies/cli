@@ -41,7 +41,9 @@ type GetProfile200Response struct {
 	// The score of the profile
 	Score *float32 `json:"score,omitempty"`
 	// The coverage of the profile
-	Coverage      *float32                           `json:"coverage,omitempty"`
+	Coverage *float32 `json:"coverage,omitempty"`
+	// Maximum scan duration in milliseconds
+	MaxDurationMs *int                               `json:"maxDurationMs,omitempty"`
 	Configuration GetProfile200ResponseConfiguration `json:"configuration"`
 	// Schema asset id derived from the first `extraAssets` entry with class SCHEMA, a request hint when the link is not yet visible in `extraAssets` (e.g. immediately after a mutation), or the legacy `assetSchemaId` while migration/backfill is incomplete.
 	SchemaAssetId *string `json:"schemaAssetId,omitempty"`
@@ -401,6 +403,38 @@ func (o *GetProfile200Response) HasCoverage() bool {
 // SetCoverage gets a reference to the given float32 and assigns it to the Coverage field.
 func (o *GetProfile200Response) SetCoverage(v float32) {
 	o.Coverage = &v
+}
+
+// GetMaxDurationMs returns the MaxDurationMs field value if set, zero value otherwise.
+func (o *GetProfile200Response) GetMaxDurationMs() int {
+	if o == nil || IsNil(o.MaxDurationMs) {
+		var ret int
+		return ret
+	}
+	return *o.MaxDurationMs
+}
+
+// GetMaxDurationMsOk returns a tuple with the MaxDurationMs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200Response) GetMaxDurationMsOk() (*int, bool) {
+	if o == nil || IsNil(o.MaxDurationMs) {
+		return nil, false
+	}
+	return o.MaxDurationMs, true
+}
+
+// HasMaxDurationMs returns a boolean if a field has been set.
+func (o *GetProfile200Response) HasMaxDurationMs() bool {
+	if o != nil && !IsNil(o.MaxDurationMs) {
+		return true
+	}
+
+	return false
+}
+
+// SetMaxDurationMs gets a reference to the given int and assigns it to the MaxDurationMs field.
+func (o *GetProfile200Response) SetMaxDurationMs(v int) {
+	o.MaxDurationMs = &v
 }
 
 // GetConfiguration returns the Configuration field value
@@ -808,6 +842,9 @@ func (o GetProfile200Response) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Coverage) {
 		toSerialize["coverage"] = o.Coverage
 	}
+	if !IsNil(o.MaxDurationMs) {
+		toSerialize["maxDurationMs"] = o.MaxDurationMs
+	}
 	toSerialize["configuration"] = o.Configuration
 	if !IsNil(o.SchemaAssetId) {
 		toSerialize["schemaAssetId"] = o.SchemaAssetId
@@ -900,6 +937,7 @@ func (o *GetProfile200Response) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "scheduledForDeletionAt")
 		delete(additionalProperties, "score")
 		delete(additionalProperties, "coverage")
+		delete(additionalProperties, "maxDurationMs")
 		delete(additionalProperties, "configuration")
 		delete(additionalProperties, "schemaAssetId")
 		delete(additionalProperties, "extraAssets")

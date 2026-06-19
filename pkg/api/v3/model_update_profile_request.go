@@ -25,9 +25,11 @@ type UpdateProfileRequest struct {
 	Description *string `json:"description,omitempty"`
 	// Deprecated: use `schedule.cron` instead.
 	// Deprecated
-	Cron                 *string                            `json:"cron,omitempty"`
-	Schedule             *ProfileScheduleUpdateInput        `json:"schedule,omitempty"`
-	ExtraAssetIds        *UpdateProfileRequestExtraAssetIds `json:"extraAssetIds,omitempty"`
+	Cron          *string                            `json:"cron,omitempty"`
+	Schedule      *ProfileScheduleUpdateInput        `json:"schedule,omitempty"`
+	ExtraAssetIds *UpdateProfileRequestExtraAssetIds `json:"extraAssetIds,omitempty"`
+	// Maximum scan duration in milliseconds
+	MaxDurationMs        *int `json:"maxDurationMs,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -213,6 +215,38 @@ func (o *UpdateProfileRequest) SetExtraAssetIds(v UpdateProfileRequestExtraAsset
 	o.ExtraAssetIds = &v
 }
 
+// GetMaxDurationMs returns the MaxDurationMs field value if set, zero value otherwise.
+func (o *UpdateProfileRequest) GetMaxDurationMs() int {
+	if o == nil || IsNil(o.MaxDurationMs) {
+		var ret int
+		return ret
+	}
+	return *o.MaxDurationMs
+}
+
+// GetMaxDurationMsOk returns a tuple with the MaxDurationMs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateProfileRequest) GetMaxDurationMsOk() (*int, bool) {
+	if o == nil || IsNil(o.MaxDurationMs) {
+		return nil, false
+	}
+	return o.MaxDurationMs, true
+}
+
+// HasMaxDurationMs returns a boolean if a field has been set.
+func (o *UpdateProfileRequest) HasMaxDurationMs() bool {
+	if o != nil && !IsNil(o.MaxDurationMs) {
+		return true
+	}
+
+	return false
+}
+
+// SetMaxDurationMs gets a reference to the given int and assigns it to the MaxDurationMs field.
+func (o *UpdateProfileRequest) SetMaxDurationMs(v int) {
+	o.MaxDurationMs = &v
+}
+
 func (o UpdateProfileRequest) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -237,6 +271,9 @@ func (o UpdateProfileRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.ExtraAssetIds) {
 		toSerialize["extraAssetIds"] = o.ExtraAssetIds
+	}
+	if !IsNil(o.MaxDurationMs) {
+		toSerialize["maxDurationMs"] = o.MaxDurationMs
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -265,6 +302,7 @@ func (o *UpdateProfileRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "cron")
 		delete(additionalProperties, "schedule")
 		delete(additionalProperties, "extraAssetIds")
+		delete(additionalProperties, "maxDurationMs")
 		o.AdditionalProperties = additionalProperties
 	}
 

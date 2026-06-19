@@ -43,6 +43,8 @@ type ProfileSummarized struct {
 	Score *float32 `json:"score,omitempty"`
 	// Coverage ratio of the last scan (0-1). Null if no scan has completed.
 	Coverage *float32 `json:"coverage,omitempty"`
+	// Maximum scan duration in milliseconds
+	MaxDurationMs *int `json:"maxDurationMs,omitempty"`
 	// Number of open issues across all scans for this profile.
 	OpenIssueCount *int `json:"openIssueCount,omitempty"`
 	// Status of the most recent scan (e.g. FINISHED, RUNNING, FAILED).
@@ -409,6 +411,38 @@ func (o *ProfileSummarized) SetCoverage(v float32) {
 	o.Coverage = &v
 }
 
+// GetMaxDurationMs returns the MaxDurationMs field value if set, zero value otherwise.
+func (o *ProfileSummarized) GetMaxDurationMs() int {
+	if o == nil || IsNil(o.MaxDurationMs) {
+		var ret int
+		return ret
+	}
+	return *o.MaxDurationMs
+}
+
+// GetMaxDurationMsOk returns a tuple with the MaxDurationMs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProfileSummarized) GetMaxDurationMsOk() (*int, bool) {
+	if o == nil || IsNil(o.MaxDurationMs) {
+		return nil, false
+	}
+	return o.MaxDurationMs, true
+}
+
+// HasMaxDurationMs returns a boolean if a field has been set.
+func (o *ProfileSummarized) HasMaxDurationMs() bool {
+	if o != nil && !IsNil(o.MaxDurationMs) {
+		return true
+	}
+
+	return false
+}
+
+// SetMaxDurationMs gets a reference to the given int and assigns it to the MaxDurationMs field.
+func (o *ProfileSummarized) SetMaxDurationMs(v int) {
+	o.MaxDurationMs = &v
+}
+
 // GetOpenIssueCount returns the OpenIssueCount field value if set, zero value otherwise.
 func (o *ProfileSummarized) GetOpenIssueCount() int {
 	if o == nil || IsNil(o.OpenIssueCount) {
@@ -529,6 +563,9 @@ func (o ProfileSummarized) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Coverage) {
 		toSerialize["coverage"] = o.Coverage
 	}
+	if !IsNil(o.MaxDurationMs) {
+		toSerialize["maxDurationMs"] = o.MaxDurationMs
+	}
 	if !IsNil(o.OpenIssueCount) {
 		toSerialize["openIssueCount"] = o.OpenIssueCount
 	}
@@ -598,6 +635,7 @@ func (o *ProfileSummarized) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "asset")
 		delete(additionalProperties, "score")
 		delete(additionalProperties, "coverage")
+		delete(additionalProperties, "maxDurationMs")
 		delete(additionalProperties, "openIssueCount")
 		delete(additionalProperties, "lastScanStatus")
 		delete(additionalProperties, "links")
