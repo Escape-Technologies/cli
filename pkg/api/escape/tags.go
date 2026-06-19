@@ -74,7 +74,7 @@ func DeleteTag(ctx context.Context, id string) error {
 	req := client.TagsAPI.DeleteTag(ctx, id)
 	_, _, err = req.Execute()
 	if err != nil {
-		return fmt.Errorf("unable to delete tag: %w", err)
+		return fmt.Errorf("unable to delete tag: %w", humanizeAPIError(err))
 	}
 	return nil
 }
