@@ -85,8 +85,8 @@ func DeleteAsset(ctx context.Context, id string) error {
 	if err != nil {
 		return fmt.Errorf("unable to init client: %w", err)
 	}
-	_, _, err = client.AssetsAPI.DeleteAsset(ctx, id).Execute()
-	if err != nil {
+	_, httpRes, err := client.AssetsAPI.DeleteAsset(ctx, id).Execute()
+	if err != nil && httpRes.StatusCode != http.StatusOK {
 		return fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 	return nil
