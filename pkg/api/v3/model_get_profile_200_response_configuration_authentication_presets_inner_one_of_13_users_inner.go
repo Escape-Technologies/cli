@@ -31,6 +31,7 @@ type GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf13UsersInn
 	Role                 *string           `json:"role,omitempty"`
 	Password             string            `json:"password"`
 	Otp                  string            `json:"otp"`
+	Cdetab               *string           `json:"cdetab,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -384,6 +385,38 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf13User
 	o.Otp = v
 }
 
+// GetCdetab returns the Cdetab field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf13UsersInner) GetCdetab() string {
+	if o == nil || IsNil(o.Cdetab) {
+		var ret string
+		return ret
+	}
+	return *o.Cdetab
+}
+
+// GetCdetabOk returns a tuple with the Cdetab field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf13UsersInner) GetCdetabOk() (*string, bool) {
+	if o == nil || IsNil(o.Cdetab) {
+		return nil, false
+	}
+	return o.Cdetab, true
+}
+
+// HasCdetab returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf13UsersInner) HasCdetab() bool {
+	if o != nil && !IsNil(o.Cdetab) {
+		return true
+	}
+
+	return false
+}
+
+// SetCdetab gets a reference to the given string and assigns it to the Cdetab field.
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf13UsersInner) SetCdetab(v string) {
+	o.Cdetab = &v
+}
+
 func (o GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf13UsersInner) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -421,6 +454,9 @@ func (o GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf13Users
 	}
 	toSerialize["password"] = o.Password
 	toSerialize["otp"] = o.Otp
+	if !IsNil(o.Cdetab) {
+		toSerialize["cdetab"] = o.Cdetab
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -477,6 +513,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf13User
 		delete(additionalProperties, "role")
 		delete(additionalProperties, "password")
 		delete(additionalProperties, "otp")
+		delete(additionalProperties, "cdetab")
 		o.AdditionalProperties = additionalProperties
 	}
 

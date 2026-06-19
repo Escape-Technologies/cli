@@ -25,7 +25,6 @@ type GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsIn
 	RsUrl                *string `json:"rs_url,omitempty"`
 	ClientId             *string `json:"client_id,omitempty"`
 	RedirectUri          *string `json:"redirect_uri,omitempty"`
-	Cdetab               *string `json:"cdetab,omitempty"`
 	State                *string `json:"state,omitempty"`
 	Enseigne             *string `json:"enseigne,omitempty"`
 	TypSrv               *string `json:"typ_srv,omitempty"`
@@ -243,38 +242,6 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 	o.RedirectUri = &v
 }
 
-// GetCdetab returns the Cdetab field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf4ParametersEnvironmentOverrides) GetCdetab() string {
-	if o == nil || IsNil(o.Cdetab) {
-		var ret string
-		return ret
-	}
-	return *o.Cdetab
-}
-
-// GetCdetabOk returns a tuple with the Cdetab field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf4ParametersEnvironmentOverrides) GetCdetabOk() (*string, bool) {
-	if o == nil || IsNil(o.Cdetab) {
-		return nil, false
-	}
-	return o.Cdetab, true
-}
-
-// HasCdetab returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf4ParametersEnvironmentOverrides) HasCdetab() bool {
-	if o != nil && !IsNil(o.Cdetab) {
-		return true
-	}
-
-	return false
-}
-
-// SetCdetab gets a reference to the given string and assigns it to the Cdetab field.
-func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf4ParametersEnvironmentOverrides) SetCdetab(v string) {
-	o.Cdetab = &v
-}
-
 // GetState returns the State field value if set, zero value otherwise.
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf4ParametersEnvironmentOverrides) GetState() string {
 	if o == nil || IsNil(o.State) {
@@ -399,9 +366,6 @@ func (o GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperation
 	if !IsNil(o.RedirectUri) {
 		toSerialize["redirect_uri"] = o.RedirectUri
 	}
-	if !IsNil(o.Cdetab) {
-		toSerialize["cdetab"] = o.Cdetab
-	}
 	if !IsNil(o.State) {
 		toSerialize["state"] = o.State
 	}
@@ -439,7 +403,6 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 		delete(additionalProperties, "rs_url")
 		delete(additionalProperties, "client_id")
 		delete(additionalProperties, "redirect_uri")
-		delete(additionalProperties, "cdetab")
 		delete(additionalProperties, "state")
 		delete(additionalProperties, "enseigne")
 		delete(additionalProperties, "typ_srv")
