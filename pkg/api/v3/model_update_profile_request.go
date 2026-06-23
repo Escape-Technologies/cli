@@ -29,7 +29,10 @@ type UpdateProfileRequest struct {
 	Schedule      *ProfileScheduleUpdateInput        `json:"schedule,omitempty"`
 	ExtraAssetIds *UpdateProfileRequestExtraAssetIds `json:"extraAssetIds,omitempty"`
 	// Maximum scan duration in milliseconds
-	MaxDurationMs        *int `json:"maxDurationMs,omitempty"`
+	MaxDurationMs *int `json:"maxDurationMs,omitempty"`
+	// The proxy ID (private location) for the profile. Set to `null` and use `defaultProxyType` to `PRIVATE` to auto-select any healthy private location at scan time.
+	ProxyId              *string                         `json:"proxyId,omitempty"`
+	DefaultProxyType     *ENUMPROPERTIESDEFAULTPROXYTYPE `json:"defaultProxyType,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -247,6 +250,70 @@ func (o *UpdateProfileRequest) SetMaxDurationMs(v int) {
 	o.MaxDurationMs = &v
 }
 
+// GetProxyId returns the ProxyId field value if set, zero value otherwise.
+func (o *UpdateProfileRequest) GetProxyId() string {
+	if o == nil || IsNil(o.ProxyId) {
+		var ret string
+		return ret
+	}
+	return *o.ProxyId
+}
+
+// GetProxyIdOk returns a tuple with the ProxyId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateProfileRequest) GetProxyIdOk() (*string, bool) {
+	if o == nil || IsNil(o.ProxyId) {
+		return nil, false
+	}
+	return o.ProxyId, true
+}
+
+// HasProxyId returns a boolean if a field has been set.
+func (o *UpdateProfileRequest) HasProxyId() bool {
+	if o != nil && !IsNil(o.ProxyId) {
+		return true
+	}
+
+	return false
+}
+
+// SetProxyId gets a reference to the given string and assigns it to the ProxyId field.
+func (o *UpdateProfileRequest) SetProxyId(v string) {
+	o.ProxyId = &v
+}
+
+// GetDefaultProxyType returns the DefaultProxyType field value if set, zero value otherwise.
+func (o *UpdateProfileRequest) GetDefaultProxyType() ENUMPROPERTIESDEFAULTPROXYTYPE {
+	if o == nil || IsNil(o.DefaultProxyType) {
+		var ret ENUMPROPERTIESDEFAULTPROXYTYPE
+		return ret
+	}
+	return *o.DefaultProxyType
+}
+
+// GetDefaultProxyTypeOk returns a tuple with the DefaultProxyType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateProfileRequest) GetDefaultProxyTypeOk() (*ENUMPROPERTIESDEFAULTPROXYTYPE, bool) {
+	if o == nil || IsNil(o.DefaultProxyType) {
+		return nil, false
+	}
+	return o.DefaultProxyType, true
+}
+
+// HasDefaultProxyType returns a boolean if a field has been set.
+func (o *UpdateProfileRequest) HasDefaultProxyType() bool {
+	if o != nil && !IsNil(o.DefaultProxyType) {
+		return true
+	}
+
+	return false
+}
+
+// SetDefaultProxyType gets a reference to the given ENUMPROPERTIESDEFAULTPROXYTYPE and assigns it to the DefaultProxyType field.
+func (o *UpdateProfileRequest) SetDefaultProxyType(v ENUMPROPERTIESDEFAULTPROXYTYPE) {
+	o.DefaultProxyType = &v
+}
+
 func (o UpdateProfileRequest) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -274,6 +341,12 @@ func (o UpdateProfileRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.MaxDurationMs) {
 		toSerialize["maxDurationMs"] = o.MaxDurationMs
+	}
+	if !IsNil(o.ProxyId) {
+		toSerialize["proxyId"] = o.ProxyId
+	}
+	if !IsNil(o.DefaultProxyType) {
+		toSerialize["defaultProxyType"] = o.DefaultProxyType
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -303,6 +376,8 @@ func (o *UpdateProfileRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "schedule")
 		delete(additionalProperties, "extraAssetIds")
 		delete(additionalProperties, "maxDurationMs")
+		delete(additionalProperties, "proxyId")
+		delete(additionalProperties, "defaultProxyType")
 		o.AdditionalProperties = additionalProperties
 	}
 
