@@ -19,10 +19,10 @@ var _ MappedNullable = &WorkflowFilterAnyOf5{}
 
 // WorkflowFilterAnyOf5 struct for WorkflowFilterAnyOf5
 type WorkflowFilterAnyOf5 struct {
-	Search               *string                                 `json:"search,omitempty"`
-	Enabled              *bool                                   `json:"enabled,omitempty"`
-	Type                 []ENUMPROPERTIESLOCATION1PROPERTIESTYPE `json:"type,omitempty"`
-	Dnf                  interface{}                             `json:"dnf,omitempty"`
+	Search               *string                          `json:"search,omitempty"`
+	Enabled              *bool                            `json:"enabled,omitempty"`
+	Type                 []ENUMPROPERTIESDEFAULTPROXYTYPE `json:"type,omitempty"`
+	Dnf                  interface{}                      `json:"dnf,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -110,9 +110,9 @@ func (o *WorkflowFilterAnyOf5) SetEnabled(v bool) {
 }
 
 // GetType returns the Type field value if set, zero value otherwise.
-func (o *WorkflowFilterAnyOf5) GetType() []ENUMPROPERTIESLOCATION1PROPERTIESTYPE {
+func (o *WorkflowFilterAnyOf5) GetType() []ENUMPROPERTIESDEFAULTPROXYTYPE {
 	if o == nil || IsNil(o.Type) {
-		var ret []ENUMPROPERTIESLOCATION1PROPERTIESTYPE
+		var ret []ENUMPROPERTIESDEFAULTPROXYTYPE
 		return ret
 	}
 	return o.Type
@@ -120,7 +120,7 @@ func (o *WorkflowFilterAnyOf5) GetType() []ENUMPROPERTIESLOCATION1PROPERTIESTYPE
 
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *WorkflowFilterAnyOf5) GetTypeOk() ([]ENUMPROPERTIESLOCATION1PROPERTIESTYPE, bool) {
+func (o *WorkflowFilterAnyOf5) GetTypeOk() ([]ENUMPROPERTIESDEFAULTPROXYTYPE, bool) {
 	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
@@ -136,8 +136,8 @@ func (o *WorkflowFilterAnyOf5) HasType() bool {
 	return false
 }
 
-// SetType gets a reference to the given []ENUMPROPERTIESLOCATION1PROPERTIESTYPE and assigns it to the Type field.
-func (o *WorkflowFilterAnyOf5) SetType(v []ENUMPROPERTIESLOCATION1PROPERTIESTYPE) {
+// SetType gets a reference to the given []ENUMPROPERTIESDEFAULTPROXYTYPE and assigns it to the Type field.
+func (o *WorkflowFilterAnyOf5) SetType(v []ENUMPROPERTIESDEFAULTPROXYTYPE) {
 	o.Type = v
 }
 
