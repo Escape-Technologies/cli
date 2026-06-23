@@ -171,9 +171,9 @@ func (r ApiCreateawsAccountIntegrationRequest) Execute() (*CreateawsAccountInteg
 }
 
 /*
-CreateawsAccountIntegration Create AWS Account integrations.
+CreateawsAccountIntegration Create AWS Account (Legacy) integrations.
 
-Create a AWS Account integration.
+Create a AWS Account (Legacy) integration.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCreateawsAccountIntegrationRequest
@@ -2021,9 +2021,9 @@ func (r ApiDeleteawsAccountIntegrationRequest) Execute() (*CreateawsAccountInteg
 }
 
 /*
-DeleteawsAccountIntegration Delete AWS Account integration.
+DeleteawsAccountIntegration Delete AWS Account (Legacy) integration.
 
-Delete a AWS Account integration.
+Delete a AWS Account (Legacy) integration.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The integration ID
@@ -3956,9 +3956,9 @@ func (r ApiGetawsAccountIntegrationRequest) Execute() (*CreateawsAccountIntegrat
 }
 
 /*
-GetawsAccountIntegration Get AWS Account integration.
+GetawsAccountIntegration Get AWS Account (Legacy) integration.
 
-Get a AWS Account integration.
+Get a AWS Account (Legacy) integration.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The integration ID
@@ -5901,9 +5901,9 @@ func (r ApiListawsAccountIntegrationsRequest) Execute() (*ListIntegrations200Res
 }
 
 /*
-ListawsAccountIntegrations List AWS Account integrations.
+ListawsAccountIntegrations List AWS Account (Legacy) integrations.
 
-List and search AWS Account integrations of the organization.
+List and search AWS Account (Legacy) integrations of the organization.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiListawsAccountIntegrationsRequest
@@ -8926,9 +8926,9 @@ func (r ApiUpdateawsAccountIntegrationRequest) Execute() (*CreateawsAccountInteg
 }
 
 /*
-UpdateawsAccountIntegration Update AWS Account integration.
+UpdateawsAccountIntegration Update AWS Account (Legacy) integration.
 
-Update a AWS Account integration.
+Update a AWS Account (Legacy) integration.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The integration ID
