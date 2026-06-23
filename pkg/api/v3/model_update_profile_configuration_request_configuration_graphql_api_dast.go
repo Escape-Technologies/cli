@@ -25,15 +25,17 @@ type UpdateProfileConfigurationRequestConfigurationGraphqlApiDast struct {
 	ExploreWithAllUsers      *bool                                                                          `json:"explore_with_all_users,omitempty"`
 	CrossUserMemoryEnabled   *bool                                                                          `json:"cross_user_memory_enabled,omitempty"`
 	CrossUserMemoryAllowlist []string                                                                       `json:"cross_user_memory_allowlist,omitempty"`
-	MaxDuration              *float32                                                                       `json:"max_duration,omitempty"`
-	MaxGeneratedDepth        *float32                                                                       `json:"max_generated_depth,omitempty"`
-	Hotstart                 []string                                                                       `json:"hotstart,omitempty"`
-	HotstartOnly             *bool                                                                          `json:"hotstart_only,omitempty"`
-	Scope                    *GetProfile200ResponseConfigurationGraphqlApiDastScope                         `json:"scope,omitempty"`
-	InScopeOnly              *bool                                                                          `json:"in_scope_only,omitempty"`
-	Mode                     *ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE                                     `json:"mode,omitempty"`
-	Profile                  *ENUMPROPERTIESCONFIGURATIONPROPERTIESPROFILE                                  `json:"profile,omitempty"`
-	AdditionalProperties     map[string]interface{}
+	// Deprecated: use `maxDurationMs` on the profile instead.
+	// Deprecated
+	MaxDuration          *float32                                               `json:"max_duration,omitempty"`
+	MaxGeneratedDepth    *float32                                               `json:"max_generated_depth,omitempty"`
+	Hotstart             []string                                               `json:"hotstart,omitempty"`
+	HotstartOnly         *bool                                                  `json:"hotstart_only,omitempty"`
+	Scope                *GetProfile200ResponseConfigurationGraphqlApiDastScope `json:"scope,omitempty"`
+	InScopeOnly          *bool                                                  `json:"in_scope_only,omitempty"`
+	Mode                 *ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE             `json:"mode,omitempty"`
+	Profile              *ENUMPROPERTIESCONFIGURATIONPROPERTIESPROFILE          `json:"profile,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpdateProfileConfigurationRequestConfigurationGraphqlApiDast UpdateProfileConfigurationRequestConfigurationGraphqlApiDast
@@ -248,6 +250,7 @@ func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) SetCrossU
 }
 
 // GetMaxDuration returns the MaxDuration field value if set, zero value otherwise.
+// Deprecated
 func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) GetMaxDuration() float32 {
 	if o == nil || IsNil(o.MaxDuration) {
 		var ret float32
@@ -258,6 +261,7 @@ func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) GetMaxDur
 
 // GetMaxDurationOk returns a tuple with the MaxDuration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) GetMaxDurationOk() (*float32, bool) {
 	if o == nil || IsNil(o.MaxDuration) {
 		return nil, false
@@ -275,6 +279,7 @@ func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) HasMaxDur
 }
 
 // SetMaxDuration gets a reference to the given float32 and assigns it to the MaxDuration field.
+// Deprecated
 func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) SetMaxDuration(v float32) {
 	o.MaxDuration = &v
 }
