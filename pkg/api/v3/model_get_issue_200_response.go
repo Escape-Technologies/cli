@@ -23,9 +23,7 @@ type GetIssue200Response struct {
 	// The id of the issue
 	Id string `json:"id"`
 	// The name of the issue
-	Name string `json:"name"`
-	// The full name of the issue
-	FullName string                                    `json:"fullName"`
+	Name     string                                    `json:"name"`
 	Category ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY `json:"category"`
 	Severity ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY `json:"severity"`
 	// Whether the severity has been manually overridden
@@ -68,11 +66,10 @@ type _GetIssue200Response GetIssue200Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetIssue200Response(id string, name string, fullName string, category ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY, severity ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY, manualSeverity bool, status ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, alertUid string, createdAt string, asset AssetDetailed2, aiRemediationFramework string, links IssueSummarizedLinks) *GetIssue200Response {
+func NewGetIssue200Response(id string, name string, category ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY, severity ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY, manualSeverity bool, status ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, alertUid string, createdAt string, asset AssetDetailed2, aiRemediationFramework string, links IssueSummarizedLinks) *GetIssue200Response {
 	this := GetIssue200Response{}
 	this.Id = id
 	this.Name = name
-	this.FullName = fullName
 	this.Category = category
 	this.Severity = severity
 	this.ManualSeverity = manualSeverity
@@ -140,30 +137,6 @@ func (o *GetIssue200Response) GetNameOk() (*string, bool) {
 // SetName sets field value
 func (o *GetIssue200Response) SetName(v string) {
 	o.Name = v
-}
-
-// GetFullName returns the FullName field value
-func (o *GetIssue200Response) GetFullName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.FullName
-}
-
-// GetFullNameOk returns a tuple with the FullName field value
-// and a boolean to check if the value has been set.
-func (o *GetIssue200Response) GetFullNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.FullName, true
-}
-
-// SetFullName sets field value
-func (o *GetIssue200Response) SetFullName(v string) {
-	o.FullName = v
 }
 
 // GetCategory returns the Category field value
@@ -738,7 +711,6 @@ func (o GetIssue200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["name"] = o.Name
-	toSerialize["fullName"] = o.FullName
 	toSerialize["category"] = o.Category
 	toSerialize["severity"] = o.Severity
 	toSerialize["manualSeverity"] = o.ManualSeverity
@@ -794,7 +766,6 @@ func (o *GetIssue200Response) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"id",
 		"name",
-		"fullName",
 		"category",
 		"severity",
 		"manualSeverity",
@@ -836,7 +807,6 @@ func (o *GetIssue200Response) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "name")
-		delete(additionalProperties, "fullName")
 		delete(additionalProperties, "category")
 		delete(additionalProperties, "severity")
 		delete(additionalProperties, "manualSeverity")
