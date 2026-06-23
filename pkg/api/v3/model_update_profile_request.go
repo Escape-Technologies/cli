@@ -30,7 +30,7 @@ type UpdateProfileRequest struct {
 	ExtraAssetIds *UpdateProfileRequestExtraAssetIds `json:"extraAssetIds,omitempty"`
 	// Maximum scan duration in milliseconds
 	MaxDurationMs *int `json:"maxDurationMs,omitempty"`
-	// The proxy ID (private location) for the profile. Set to `null` and use `defaultProxyType` to `PRIVATE` to auto-select any healthy private location at scan time.
+	// The proxy ID (private location) for the profile. Omit and set `defaultProxyType` to `PRIVATE` to auto-select any healthy private location at scan time.
 	ProxyId              *string                         `json:"proxyId,omitempty"`
 	DefaultProxyType     *ENUMPROPERTIESDEFAULTPROXYTYPE `json:"defaultProxyType,omitempty"`
 	AdditionalProperties map[string]interface{}
