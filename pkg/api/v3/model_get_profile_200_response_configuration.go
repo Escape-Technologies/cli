@@ -19,26 +19,28 @@ var _ MappedNullable = &GetProfile200ResponseConfiguration{}
 
 // GetProfile200ResponseConfiguration The active configuration of the profile
 type GetProfile200ResponseConfiguration struct {
-	Scope                 *GetProfile200ResponseConfigurationScope                `json:"scope,omitempty"`
-	ExplorationScope      []string                                                `json:"exploration_scope,omitempty"`
-	ApiCustomRuleIds      []string                                                `json:"api_custom_rule_ids,omitempty"`
-	FrontendCustomRuleIds []string                                                `json:"frontend_custom_rule_ids,omitempty"`
-	Mode                  *ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE              `json:"mode,omitempty"`
-	Profile               *ENUMPROPERTIESCONFIGURATIONPROPERTIESPROFILE           `json:"profile,omitempty"`
-	Authentication        *GetProfile200ResponseConfigurationAuthentication       `json:"authentication,omitempty"`
-	SecurityTests         *GetProfile200ResponseConfigurationSecurityTests        `json:"security_tests,omitempty"`
-	Inference             *GetProfile200ResponseConfigurationInference            `json:"inference,omitempty"`
-	Network               *GetProfile200ResponseConfigurationNetwork              `json:"network,omitempty"`
-	MaxDuration           *float32                                                `json:"max_duration,omitempty"`
-	SubdomainEnumeration  *GetProfile200ResponseConfigurationSubdomainEnumeration `json:"subdomain_enumeration,omitempty"`
-	PortScanning          *GetProfile200ResponseConfigurationPortScanning         `json:"port_scanning,omitempty"`
-	ServiceDiscovery      *GetProfile200ResponseConfigurationServiceDiscovery     `json:"service_discovery,omitempty"`
-	FrontendDast          *GetProfile200ResponseConfigurationFrontendDast         `json:"frontend_dast,omitempty"`
-	GraphqlApiDast        *GetProfile200ResponseConfigurationGraphqlApiDast       `json:"graphql_api_dast,omitempty"`
-	RestApiDast           *GetProfile200ResponseConfigurationRestApiDast          `json:"rest_api_dast,omitempty"`
-	AutomatedPentesting   *GetProfile200ResponseConfigurationAutomatedPentesting  `json:"automated_pentesting,omitempty"`
-	Experimental          *GetProfile200ResponseConfigurationExperimental         `json:"experimental,omitempty"`
-	AdditionalProperties  map[string]interface{}
+	Scope                 *GetProfile200ResponseConfigurationScope          `json:"scope,omitempty"`
+	ExplorationScope      []string                                          `json:"exploration_scope,omitempty"`
+	ApiCustomRuleIds      []string                                          `json:"api_custom_rule_ids,omitempty"`
+	FrontendCustomRuleIds []string                                          `json:"frontend_custom_rule_ids,omitempty"`
+	Mode                  *ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE        `json:"mode,omitempty"`
+	Profile               *ENUMPROPERTIESCONFIGURATIONPROPERTIESPROFILE     `json:"profile,omitempty"`
+	Authentication        *GetProfile200ResponseConfigurationAuthentication `json:"authentication,omitempty"`
+	SecurityTests         *GetProfile200ResponseConfigurationSecurityTests  `json:"security_tests,omitempty"`
+	Inference             *GetProfile200ResponseConfigurationInference      `json:"inference,omitempty"`
+	Network               *GetProfile200ResponseConfigurationNetwork        `json:"network,omitempty"`
+	// Deprecated: use `maxDurationMs` on the profile instead.
+	// Deprecated
+	MaxDuration          *float32                                                `json:"max_duration,omitempty"`
+	SubdomainEnumeration *GetProfile200ResponseConfigurationSubdomainEnumeration `json:"subdomain_enumeration,omitempty"`
+	PortScanning         *GetProfile200ResponseConfigurationPortScanning         `json:"port_scanning,omitempty"`
+	ServiceDiscovery     *GetProfile200ResponseConfigurationServiceDiscovery     `json:"service_discovery,omitempty"`
+	FrontendDast         *GetProfile200ResponseConfigurationFrontendDast         `json:"frontend_dast,omitempty"`
+	GraphqlApiDast       *GetProfile200ResponseConfigurationGraphqlApiDast       `json:"graphql_api_dast,omitempty"`
+	RestApiDast          *GetProfile200ResponseConfigurationRestApiDast          `json:"rest_api_dast,omitempty"`
+	AutomatedPentesting  *GetProfile200ResponseConfigurationAutomatedPentesting  `json:"automated_pentesting,omitempty"`
+	Experimental         *GetProfile200ResponseConfigurationExperimental         `json:"experimental,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetProfile200ResponseConfiguration GetProfile200ResponseConfiguration
@@ -381,6 +383,7 @@ func (o *GetProfile200ResponseConfiguration) SetNetwork(v GetProfile200ResponseC
 }
 
 // GetMaxDuration returns the MaxDuration field value if set, zero value otherwise.
+// Deprecated
 func (o *GetProfile200ResponseConfiguration) GetMaxDuration() float32 {
 	if o == nil || IsNil(o.MaxDuration) {
 		var ret float32
@@ -391,6 +394,7 @@ func (o *GetProfile200ResponseConfiguration) GetMaxDuration() float32 {
 
 // GetMaxDurationOk returns a tuple with the MaxDuration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *GetProfile200ResponseConfiguration) GetMaxDurationOk() (*float32, bool) {
 	if o == nil || IsNil(o.MaxDuration) {
 		return nil, false
@@ -408,6 +412,7 @@ func (o *GetProfile200ResponseConfiguration) HasMaxDuration() bool {
 }
 
 // SetMaxDuration gets a reference to the given float32 and assigns it to the MaxDuration field.
+// Deprecated
 func (o *GetProfile200ResponseConfiguration) SetMaxDuration(v float32) {
 	o.MaxDuration = &v
 }
