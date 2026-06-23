@@ -19,7 +19,9 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationFrontendDast{}
 
 // GetProfile200ResponseConfigurationFrontendDast struct for GetProfile200ResponseConfigurationFrontendDast
 type GetProfile200ResponseConfigurationFrontendDast struct {
-	LocationId            *string                                                                                 `json:"location_id,omitempty"`
+	LocationId *string `json:"location_id,omitempty"`
+	// Deprecated: use `maxDurationMs` on the profile instead.
+	// Deprecated
 	MaxDuration           *float32                                                                                `json:"max_duration,omitempty"`
 	Hotstart              []string                                                                                `json:"hotstart,omitempty"`
 	SecurityChecksEnabled []ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSECURITYCHECKSENABLEDITEMS `json:"security_checks_enabled,omitempty"`
@@ -86,6 +88,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) SetLocationId(v string)
 }
 
 // GetMaxDuration returns the MaxDuration field value if set, zero value otherwise.
+// Deprecated
 func (o *GetProfile200ResponseConfigurationFrontendDast) GetMaxDuration() float32 {
 	if o == nil || IsNil(o.MaxDuration) {
 		var ret float32
@@ -96,6 +99,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) GetMaxDuration() float3
 
 // GetMaxDurationOk returns a tuple with the MaxDuration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *GetProfile200ResponseConfigurationFrontendDast) GetMaxDurationOk() (*float32, bool) {
 	if o == nil || IsNil(o.MaxDuration) {
 		return nil, false
@@ -113,6 +117,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) HasMaxDuration() bool {
 }
 
 // SetMaxDuration gets a reference to the given float32 and assigns it to the MaxDuration field.
+// Deprecated
 func (o *GetProfile200ResponseConfigurationFrontendDast) SetMaxDuration(v float32) {
 	o.MaxDuration = &v
 }
