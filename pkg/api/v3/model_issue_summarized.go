@@ -23,9 +23,7 @@ type IssueSummarized struct {
 	// The id of the issue
 	Id string `json:"id"`
 	// The name of the issue
-	Name string `json:"name"`
-	// The full name of the issue
-	FullName string                                    `json:"fullName"`
+	Name     string                                    `json:"name"`
 	Category ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY `json:"category"`
 	Severity ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY `json:"severity"`
 	// Whether the severity has been manually overridden
@@ -57,11 +55,10 @@ type _IssueSummarized IssueSummarized
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIssueSummarized(id string, name string, fullName string, category ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY, severity ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY, manualSeverity bool, status ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS, context string, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, alertUid string, createdAt string, asset AssetSummarized1, links IssueSummarizedLinks) *IssueSummarized {
+func NewIssueSummarized(id string, name string, category ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY, severity ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY, manualSeverity bool, status ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS, context string, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, alertUid string, createdAt string, asset AssetSummarized1, links IssueSummarizedLinks) *IssueSummarized {
 	this := IssueSummarized{}
 	this.Id = id
 	this.Name = name
-	this.FullName = fullName
 	this.Category = category
 	this.Severity = severity
 	this.ManualSeverity = manualSeverity
@@ -129,30 +126,6 @@ func (o *IssueSummarized) GetNameOk() (*string, bool) {
 // SetName sets field value
 func (o *IssueSummarized) SetName(v string) {
 	o.Name = v
-}
-
-// GetFullName returns the FullName field value
-func (o *IssueSummarized) GetFullName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.FullName
-}
-
-// GetFullNameOk returns a tuple with the FullName field value
-// and a boolean to check if the value has been set.
-func (o *IssueSummarized) GetFullNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.FullName, true
-}
-
-// SetFullName sets field value
-func (o *IssueSummarized) SetFullName(v string) {
-	o.FullName = v
 }
 
 // GetCategory returns the Category field value
@@ -535,7 +508,6 @@ func (o IssueSummarized) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["name"] = o.Name
-	toSerialize["fullName"] = o.FullName
 	toSerialize["category"] = o.Category
 	toSerialize["severity"] = o.Severity
 	toSerialize["manualSeverity"] = o.ManualSeverity
@@ -573,7 +545,6 @@ func (o *IssueSummarized) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"id",
 		"name",
-		"fullName",
 		"category",
 		"severity",
 		"manualSeverity",
@@ -615,7 +586,6 @@ func (o *IssueSummarized) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "name")
-		delete(additionalProperties, "fullName")
 		delete(additionalProperties, "category")
 		delete(additionalProperties, "severity")
 		delete(additionalProperties, "manualSeverity")
