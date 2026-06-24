@@ -24,8 +24,8 @@ type StartAuthenticationRequest struct {
 	// Authentication object to validate. When `profileId` is also set, this replaces the profile saved authentication.
 	Authentication map[string]interface{} `json:"authentication,omitempty"`
 	// Force a specific Escape or private location (proxy) for this check
-	ProxyId              *string                                `json:"proxyId,omitempty"`
-	DefaultProxyType     *ENUMPROPERTIESLOCATION1PROPERTIESTYPE `json:"defaultProxyType,omitempty"`
+	ProxyId              *string                         `json:"proxyId,omitempty"`
+	DefaultProxyType     *ENUMPROPERTIESDEFAULTPROXYTYPE `json:"defaultProxyType,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -145,9 +145,9 @@ func (o *StartAuthenticationRequest) SetProxyId(v string) {
 }
 
 // GetDefaultProxyType returns the DefaultProxyType field value if set, zero value otherwise.
-func (o *StartAuthenticationRequest) GetDefaultProxyType() ENUMPROPERTIESLOCATION1PROPERTIESTYPE {
+func (o *StartAuthenticationRequest) GetDefaultProxyType() ENUMPROPERTIESDEFAULTPROXYTYPE {
 	if o == nil || IsNil(o.DefaultProxyType) {
-		var ret ENUMPROPERTIESLOCATION1PROPERTIESTYPE
+		var ret ENUMPROPERTIESDEFAULTPROXYTYPE
 		return ret
 	}
 	return *o.DefaultProxyType
@@ -155,7 +155,7 @@ func (o *StartAuthenticationRequest) GetDefaultProxyType() ENUMPROPERTIESLOCATIO
 
 // GetDefaultProxyTypeOk returns a tuple with the DefaultProxyType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *StartAuthenticationRequest) GetDefaultProxyTypeOk() (*ENUMPROPERTIESLOCATION1PROPERTIESTYPE, bool) {
+func (o *StartAuthenticationRequest) GetDefaultProxyTypeOk() (*ENUMPROPERTIESDEFAULTPROXYTYPE, bool) {
 	if o == nil || IsNil(o.DefaultProxyType) {
 		return nil, false
 	}
@@ -171,8 +171,8 @@ func (o *StartAuthenticationRequest) HasDefaultProxyType() bool {
 	return false
 }
 
-// SetDefaultProxyType gets a reference to the given ENUMPROPERTIESLOCATION1PROPERTIESTYPE and assigns it to the DefaultProxyType field.
-func (o *StartAuthenticationRequest) SetDefaultProxyType(v ENUMPROPERTIESLOCATION1PROPERTIESTYPE) {
+// SetDefaultProxyType gets a reference to the given ENUMPROPERTIESDEFAULTPROXYTYPE and assigns it to the DefaultProxyType field.
+func (o *StartAuthenticationRequest) SetDefaultProxyType(v ENUMPROPERTIESDEFAULTPROXYTYPE) {
 	o.DefaultProxyType = &v
 }
 
