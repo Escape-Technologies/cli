@@ -20,8 +20,9 @@ var _ MappedNullable = &CreateSchemaViaFetchFetch{}
 
 // CreateSchemaViaFetchFetch struct for CreateSchemaViaFetchFetch
 type CreateSchemaViaFetchFetch struct {
-	Url                  string  `json:"url"`
-	ProxyId              *string `json:"proxyId,omitempty"`
+	Url                  string                          `json:"url"`
+	ProxyId              *string                         `json:"proxyId,omitempty"`
+	DefaultProxyType     *ENUMPROPERTIESDEFAULTPROXYTYPE `json:"defaultProxyType,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -101,6 +102,38 @@ func (o *CreateSchemaViaFetchFetch) SetProxyId(v string) {
 	o.ProxyId = &v
 }
 
+// GetDefaultProxyType returns the DefaultProxyType field value if set, zero value otherwise.
+func (o *CreateSchemaViaFetchFetch) GetDefaultProxyType() ENUMPROPERTIESDEFAULTPROXYTYPE {
+	if o == nil || IsNil(o.DefaultProxyType) {
+		var ret ENUMPROPERTIESDEFAULTPROXYTYPE
+		return ret
+	}
+	return *o.DefaultProxyType
+}
+
+// GetDefaultProxyTypeOk returns a tuple with the DefaultProxyType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateSchemaViaFetchFetch) GetDefaultProxyTypeOk() (*ENUMPROPERTIESDEFAULTPROXYTYPE, bool) {
+	if o == nil || IsNil(o.DefaultProxyType) {
+		return nil, false
+	}
+	return o.DefaultProxyType, true
+}
+
+// HasDefaultProxyType returns a boolean if a field has been set.
+func (o *CreateSchemaViaFetchFetch) HasDefaultProxyType() bool {
+	if o != nil && !IsNil(o.DefaultProxyType) {
+		return true
+	}
+
+	return false
+}
+
+// SetDefaultProxyType gets a reference to the given ENUMPROPERTIESDEFAULTPROXYTYPE and assigns it to the DefaultProxyType field.
+func (o *CreateSchemaViaFetchFetch) SetDefaultProxyType(v ENUMPROPERTIESDEFAULTPROXYTYPE) {
+	o.DefaultProxyType = &v
+}
+
 func (o CreateSchemaViaFetchFetch) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -114,6 +147,9 @@ func (o CreateSchemaViaFetchFetch) ToMap() (map[string]interface{}, error) {
 	toSerialize["url"] = o.Url
 	if !IsNil(o.ProxyId) {
 		toSerialize["proxyId"] = o.ProxyId
+	}
+	if !IsNil(o.DefaultProxyType) {
+		toSerialize["defaultProxyType"] = o.DefaultProxyType
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -160,6 +196,7 @@ func (o *CreateSchemaViaFetchFetch) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "url")
 		delete(additionalProperties, "proxyId")
+		delete(additionalProperties, "defaultProxyType")
 		o.AdditionalProperties = additionalProperties
 	}
 
