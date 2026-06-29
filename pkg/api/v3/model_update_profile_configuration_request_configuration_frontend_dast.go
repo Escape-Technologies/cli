@@ -19,10 +19,7 @@ var _ MappedNullable = &UpdateProfileConfigurationRequestConfigurationFrontendDa
 
 // UpdateProfileConfigurationRequestConfigurationFrontendDast struct for UpdateProfileConfigurationRequestConfigurationFrontendDast
 type UpdateProfileConfigurationRequestConfigurationFrontendDast struct {
-	LocationId *string `json:"location_id,omitempty"`
-	// Deprecated: use `maxDurationMs` on the profile instead.
-	// Deprecated
-	MaxDuration           *float32                                                                                `json:"max_duration,omitempty"`
+	LocationId            *string                                                                                 `json:"location_id,omitempty"`
 	Hotstart              []string                                                                                `json:"hotstart,omitempty"`
 	SecurityChecksEnabled []ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSECURITYCHECKSENABLEDITEMS `json:"security_checks_enabled,omitempty"`
 	SinglePageWorker      *bool                                                                                   `json:"single_page_worker,omitempty"`
@@ -33,8 +30,11 @@ type UpdateProfileConfigurationRequestConfigurationFrontendDast struct {
 	Scope                 *GetProfile200ResponseConfigurationFrontendDastScope                                    `json:"scope,omitempty"`
 	InScopeOnly           *bool                                                                                   `json:"in_scope_only,omitempty"`
 	AgenticCrawling       *GetProfile200ResponseConfigurationFrontendDastAgenticCrawling                          `json:"agentic_crawling,omitempty"`
-	Mode                  *ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE                                              `json:"mode,omitempty"`
-	AdditionalProperties  map[string]interface{}
+	// Deprecated: use `maxDurationMs` on the profile instead.
+	// Deprecated
+	MaxDuration          *float32                                   `json:"max_duration,omitempty"`
+	Mode                 *ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE `json:"mode,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpdateProfileConfigurationRequestConfigurationFrontendDast UpdateProfileConfigurationRequestConfigurationFrontendDast
@@ -86,41 +86,6 @@ func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) HasLocation
 // SetLocationId gets a reference to the given string and assigns it to the LocationId field.
 func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) SetLocationId(v string) {
 	o.LocationId = &v
-}
-
-// GetMaxDuration returns the MaxDuration field value if set, zero value otherwise.
-// Deprecated
-func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) GetMaxDuration() float32 {
-	if o == nil || IsNil(o.MaxDuration) {
-		var ret float32
-		return ret
-	}
-	return *o.MaxDuration
-}
-
-// GetMaxDurationOk returns a tuple with the MaxDuration field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// Deprecated
-func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) GetMaxDurationOk() (*float32, bool) {
-	if o == nil || IsNil(o.MaxDuration) {
-		return nil, false
-	}
-	return o.MaxDuration, true
-}
-
-// HasMaxDuration returns a boolean if a field has been set.
-func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) HasMaxDuration() bool {
-	if o != nil && !IsNil(o.MaxDuration) {
-		return true
-	}
-
-	return false
-}
-
-// SetMaxDuration gets a reference to the given float32 and assigns it to the MaxDuration field.
-// Deprecated
-func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) SetMaxDuration(v float32) {
-	o.MaxDuration = &v
 }
 
 // GetHotstart returns the Hotstart field value if set, zero value otherwise.
@@ -443,6 +408,41 @@ func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) SetAgenticC
 	o.AgenticCrawling = &v
 }
 
+// GetMaxDuration returns the MaxDuration field value if set, zero value otherwise.
+// Deprecated
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) GetMaxDuration() float32 {
+	if o == nil || IsNil(o.MaxDuration) {
+		var ret float32
+		return ret
+	}
+	return *o.MaxDuration
+}
+
+// GetMaxDurationOk returns a tuple with the MaxDuration field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// Deprecated
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) GetMaxDurationOk() (*float32, bool) {
+	if o == nil || IsNil(o.MaxDuration) {
+		return nil, false
+	}
+	return o.MaxDuration, true
+}
+
+// HasMaxDuration returns a boolean if a field has been set.
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) HasMaxDuration() bool {
+	if o != nil && !IsNil(o.MaxDuration) {
+		return true
+	}
+
+	return false
+}
+
+// SetMaxDuration gets a reference to the given float32 and assigns it to the MaxDuration field.
+// Deprecated
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) SetMaxDuration(v float32) {
+	o.MaxDuration = &v
+}
+
 // GetMode returns the Mode field value if set, zero value otherwise.
 func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) GetMode() ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE {
 	if o == nil || IsNil(o.Mode) {
@@ -488,9 +488,6 @@ func (o UpdateProfileConfigurationRequestConfigurationFrontendDast) ToMap() (map
 	if !IsNil(o.LocationId) {
 		toSerialize["location_id"] = o.LocationId
 	}
-	if !IsNil(o.MaxDuration) {
-		toSerialize["max_duration"] = o.MaxDuration
-	}
 	if !IsNil(o.Hotstart) {
 		toSerialize["hotstart"] = o.Hotstart
 	}
@@ -521,6 +518,9 @@ func (o UpdateProfileConfigurationRequestConfigurationFrontendDast) ToMap() (map
 	if !IsNil(o.AgenticCrawling) {
 		toSerialize["agentic_crawling"] = o.AgenticCrawling
 	}
+	if !IsNil(o.MaxDuration) {
+		toSerialize["max_duration"] = o.MaxDuration
+	}
 	if !IsNil(o.Mode) {
 		toSerialize["mode"] = o.Mode
 	}
@@ -547,7 +547,6 @@ func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) UnmarshalJS
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "location_id")
-		delete(additionalProperties, "max_duration")
 		delete(additionalProperties, "hotstart")
 		delete(additionalProperties, "security_checks_enabled")
 		delete(additionalProperties, "single_page_worker")
@@ -558,6 +557,7 @@ func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) UnmarshalJS
 		delete(additionalProperties, "scope")
 		delete(additionalProperties, "in_scope_only")
 		delete(additionalProperties, "agentic_crawling")
+		delete(additionalProperties, "max_duration")
 		delete(additionalProperties, "mode")
 		o.AdditionalProperties = additionalProperties
 	}
