@@ -25,16 +25,16 @@ type UpdateProfileConfigurationRequestConfigurationGraphqlApiDast struct {
 	ExploreWithAllUsers      *bool                                                                          `json:"explore_with_all_users,omitempty"`
 	CrossUserMemoryEnabled   *bool                                                                          `json:"cross_user_memory_enabled,omitempty"`
 	CrossUserMemoryAllowlist []string                                                                       `json:"cross_user_memory_allowlist,omitempty"`
+	MaxGeneratedDepth        *float32                                                                       `json:"max_generated_depth,omitempty"`
+	Hotstart                 []string                                                                       `json:"hotstart,omitempty"`
+	HotstartOnly             *bool                                                                          `json:"hotstart_only,omitempty"`
+	Scope                    *GetProfile200ResponseConfigurationGraphqlApiDastScope                         `json:"scope,omitempty"`
+	InScopeOnly              *bool                                                                          `json:"in_scope_only,omitempty"`
 	// Deprecated: use `maxDurationMs` on the profile instead.
 	// Deprecated
-	MaxDuration          *float32                                               `json:"max_duration,omitempty"`
-	MaxGeneratedDepth    *float32                                               `json:"max_generated_depth,omitempty"`
-	Hotstart             []string                                               `json:"hotstart,omitempty"`
-	HotstartOnly         *bool                                                  `json:"hotstart_only,omitempty"`
-	Scope                *GetProfile200ResponseConfigurationGraphqlApiDastScope `json:"scope,omitempty"`
-	InScopeOnly          *bool                                                  `json:"in_scope_only,omitempty"`
-	Mode                 *ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE             `json:"mode,omitempty"`
-	Profile              *ENUMPROPERTIESCONFIGURATIONPROPERTIESPROFILE          `json:"profile,omitempty"`
+	MaxDuration          *float32                                      `json:"max_duration,omitempty"`
+	Mode                 *ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE    `json:"mode,omitempty"`
+	Profile              *ENUMPROPERTIESCONFIGURATIONPROPERTIESPROFILE `json:"profile,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -249,41 +249,6 @@ func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) SetCrossU
 	o.CrossUserMemoryAllowlist = v
 }
 
-// GetMaxDuration returns the MaxDuration field value if set, zero value otherwise.
-// Deprecated
-func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) GetMaxDuration() float32 {
-	if o == nil || IsNil(o.MaxDuration) {
-		var ret float32
-		return ret
-	}
-	return *o.MaxDuration
-}
-
-// GetMaxDurationOk returns a tuple with the MaxDuration field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// Deprecated
-func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) GetMaxDurationOk() (*float32, bool) {
-	if o == nil || IsNil(o.MaxDuration) {
-		return nil, false
-	}
-	return o.MaxDuration, true
-}
-
-// HasMaxDuration returns a boolean if a field has been set.
-func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) HasMaxDuration() bool {
-	if o != nil && !IsNil(o.MaxDuration) {
-		return true
-	}
-
-	return false
-}
-
-// SetMaxDuration gets a reference to the given float32 and assigns it to the MaxDuration field.
-// Deprecated
-func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) SetMaxDuration(v float32) {
-	o.MaxDuration = &v
-}
-
 // GetMaxGeneratedDepth returns the MaxGeneratedDepth field value if set, zero value otherwise.
 func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) GetMaxGeneratedDepth() float32 {
 	if o == nil || IsNil(o.MaxGeneratedDepth) {
@@ -444,6 +409,41 @@ func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) SetInScop
 	o.InScopeOnly = &v
 }
 
+// GetMaxDuration returns the MaxDuration field value if set, zero value otherwise.
+// Deprecated
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) GetMaxDuration() float32 {
+	if o == nil || IsNil(o.MaxDuration) {
+		var ret float32
+		return ret
+	}
+	return *o.MaxDuration
+}
+
+// GetMaxDurationOk returns a tuple with the MaxDuration field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// Deprecated
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) GetMaxDurationOk() (*float32, bool) {
+	if o == nil || IsNil(o.MaxDuration) {
+		return nil, false
+	}
+	return o.MaxDuration, true
+}
+
+// HasMaxDuration returns a boolean if a field has been set.
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) HasMaxDuration() bool {
+	if o != nil && !IsNil(o.MaxDuration) {
+		return true
+	}
+
+	return false
+}
+
+// SetMaxDuration gets a reference to the given float32 and assigns it to the MaxDuration field.
+// Deprecated
+func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) SetMaxDuration(v float32) {
+	o.MaxDuration = &v
+}
+
 // GetMode returns the Mode field value if set, zero value otherwise.
 func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) GetMode() ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE {
 	if o == nil || IsNil(o.Mode) {
@@ -536,9 +536,6 @@ func (o UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) ToMap() (m
 	if !IsNil(o.CrossUserMemoryAllowlist) {
 		toSerialize["cross_user_memory_allowlist"] = o.CrossUserMemoryAllowlist
 	}
-	if !IsNil(o.MaxDuration) {
-		toSerialize["max_duration"] = o.MaxDuration
-	}
 	if !IsNil(o.MaxGeneratedDepth) {
 		toSerialize["max_generated_depth"] = o.MaxGeneratedDepth
 	}
@@ -553,6 +550,9 @@ func (o UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) ToMap() (m
 	}
 	if !IsNil(o.InScopeOnly) {
 		toSerialize["in_scope_only"] = o.InScopeOnly
+	}
+	if !IsNil(o.MaxDuration) {
+		toSerialize["max_duration"] = o.MaxDuration
 	}
 	if !IsNil(o.Mode) {
 		toSerialize["mode"] = o.Mode
@@ -588,12 +588,12 @@ func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) Unmarshal
 		delete(additionalProperties, "explore_with_all_users")
 		delete(additionalProperties, "cross_user_memory_enabled")
 		delete(additionalProperties, "cross_user_memory_allowlist")
-		delete(additionalProperties, "max_duration")
 		delete(additionalProperties, "max_generated_depth")
 		delete(additionalProperties, "hotstart")
 		delete(additionalProperties, "hotstart_only")
 		delete(additionalProperties, "scope")
 		delete(additionalProperties, "in_scope_only")
+		delete(additionalProperties, "max_duration")
 		delete(additionalProperties, "mode")
 		delete(additionalProperties, "profile")
 		o.AdditionalProperties = additionalProperties

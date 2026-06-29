@@ -24,17 +24,17 @@ type UpdateProfileConfigurationRequestConfigurationRestApiDast struct {
 	ExploreWithAllUsers      *bool                                                                          `json:"explore_with_all_users,omitempty"`
 	CrossUserMemoryEnabled   *bool                                                                          `json:"cross_user_memory_enabled,omitempty"`
 	CrossUserMemoryAllowlist []string                                                                       `json:"cross_user_memory_allowlist,omitempty"`
+	Hotstart                 []string                                                                       `json:"hotstart,omitempty"`
+	HotstartOnly             *bool                                                                          `json:"hotstart_only,omitempty"`
+	Scope                    *GetProfile200ResponseConfigurationGraphqlApiDastScope                         `json:"scope,omitempty"`
+	QueryParamsAreRequired   *bool                                                                          `json:"query_params_are_required,omitempty"`
+	InScopeOnly              *bool                                                                          `json:"in_scope_only,omitempty"`
 	// Deprecated: use `maxDurationMs` on the profile instead.
 	// Deprecated
-	MaxDuration            *float32                                               `json:"max_duration,omitempty"`
-	Hotstart               []string                                               `json:"hotstart,omitempty"`
-	HotstartOnly           *bool                                                  `json:"hotstart_only,omitempty"`
-	Scope                  *GetProfile200ResponseConfigurationGraphqlApiDastScope `json:"scope,omitempty"`
-	QueryParamsAreRequired *bool                                                  `json:"query_params_are_required,omitempty"`
-	InScopeOnly            *bool                                                  `json:"in_scope_only,omitempty"`
-	Mode                   *ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE             `json:"mode,omitempty"`
-	Profile                *ENUMPROPERTIESCONFIGURATIONPROPERTIESPROFILE          `json:"profile,omitempty"`
-	AdditionalProperties   map[string]interface{}
+	MaxDuration          *float32                                      `json:"max_duration,omitempty"`
+	Mode                 *ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE    `json:"mode,omitempty"`
+	Profile              *ENUMPROPERTIESCONFIGURATIONPROPERTIESPROFILE `json:"profile,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpdateProfileConfigurationRequestConfigurationRestApiDast UpdateProfileConfigurationRequestConfigurationRestApiDast
@@ -216,41 +216,6 @@ func (o *UpdateProfileConfigurationRequestConfigurationRestApiDast) SetCrossUser
 	o.CrossUserMemoryAllowlist = v
 }
 
-// GetMaxDuration returns the MaxDuration field value if set, zero value otherwise.
-// Deprecated
-func (o *UpdateProfileConfigurationRequestConfigurationRestApiDast) GetMaxDuration() float32 {
-	if o == nil || IsNil(o.MaxDuration) {
-		var ret float32
-		return ret
-	}
-	return *o.MaxDuration
-}
-
-// GetMaxDurationOk returns a tuple with the MaxDuration field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// Deprecated
-func (o *UpdateProfileConfigurationRequestConfigurationRestApiDast) GetMaxDurationOk() (*float32, bool) {
-	if o == nil || IsNil(o.MaxDuration) {
-		return nil, false
-	}
-	return o.MaxDuration, true
-}
-
-// HasMaxDuration returns a boolean if a field has been set.
-func (o *UpdateProfileConfigurationRequestConfigurationRestApiDast) HasMaxDuration() bool {
-	if o != nil && !IsNil(o.MaxDuration) {
-		return true
-	}
-
-	return false
-}
-
-// SetMaxDuration gets a reference to the given float32 and assigns it to the MaxDuration field.
-// Deprecated
-func (o *UpdateProfileConfigurationRequestConfigurationRestApiDast) SetMaxDuration(v float32) {
-	o.MaxDuration = &v
-}
-
 // GetHotstart returns the Hotstart field value if set, zero value otherwise.
 func (o *UpdateProfileConfigurationRequestConfigurationRestApiDast) GetHotstart() []string {
 	if o == nil || IsNil(o.Hotstart) {
@@ -411,6 +376,41 @@ func (o *UpdateProfileConfigurationRequestConfigurationRestApiDast) SetInScopeOn
 	o.InScopeOnly = &v
 }
 
+// GetMaxDuration returns the MaxDuration field value if set, zero value otherwise.
+// Deprecated
+func (o *UpdateProfileConfigurationRequestConfigurationRestApiDast) GetMaxDuration() float32 {
+	if o == nil || IsNil(o.MaxDuration) {
+		var ret float32
+		return ret
+	}
+	return *o.MaxDuration
+}
+
+// GetMaxDurationOk returns a tuple with the MaxDuration field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// Deprecated
+func (o *UpdateProfileConfigurationRequestConfigurationRestApiDast) GetMaxDurationOk() (*float32, bool) {
+	if o == nil || IsNil(o.MaxDuration) {
+		return nil, false
+	}
+	return o.MaxDuration, true
+}
+
+// HasMaxDuration returns a boolean if a field has been set.
+func (o *UpdateProfileConfigurationRequestConfigurationRestApiDast) HasMaxDuration() bool {
+	if o != nil && !IsNil(o.MaxDuration) {
+		return true
+	}
+
+	return false
+}
+
+// SetMaxDuration gets a reference to the given float32 and assigns it to the MaxDuration field.
+// Deprecated
+func (o *UpdateProfileConfigurationRequestConfigurationRestApiDast) SetMaxDuration(v float32) {
+	o.MaxDuration = &v
+}
+
 // GetMode returns the Mode field value if set, zero value otherwise.
 func (o *UpdateProfileConfigurationRequestConfigurationRestApiDast) GetMode() ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE {
 	if o == nil || IsNil(o.Mode) {
@@ -500,9 +500,6 @@ func (o UpdateProfileConfigurationRequestConfigurationRestApiDast) ToMap() (map[
 	if !IsNil(o.CrossUserMemoryAllowlist) {
 		toSerialize["cross_user_memory_allowlist"] = o.CrossUserMemoryAllowlist
 	}
-	if !IsNil(o.MaxDuration) {
-		toSerialize["max_duration"] = o.MaxDuration
-	}
 	if !IsNil(o.Hotstart) {
 		toSerialize["hotstart"] = o.Hotstart
 	}
@@ -517,6 +514,9 @@ func (o UpdateProfileConfigurationRequestConfigurationRestApiDast) ToMap() (map[
 	}
 	if !IsNil(o.InScopeOnly) {
 		toSerialize["in_scope_only"] = o.InScopeOnly
+	}
+	if !IsNil(o.MaxDuration) {
+		toSerialize["max_duration"] = o.MaxDuration
 	}
 	if !IsNil(o.Mode) {
 		toSerialize["mode"] = o.Mode
@@ -551,12 +551,12 @@ func (o *UpdateProfileConfigurationRequestConfigurationRestApiDast) UnmarshalJSO
 		delete(additionalProperties, "explore_with_all_users")
 		delete(additionalProperties, "cross_user_memory_enabled")
 		delete(additionalProperties, "cross_user_memory_allowlist")
-		delete(additionalProperties, "max_duration")
 		delete(additionalProperties, "hotstart")
 		delete(additionalProperties, "hotstart_only")
 		delete(additionalProperties, "scope")
 		delete(additionalProperties, "query_params_are_required")
 		delete(additionalProperties, "in_scope_only")
+		delete(additionalProperties, "max_duration")
 		delete(additionalProperties, "mode")
 		delete(additionalProperties, "profile")
 		o.AdditionalProperties = additionalProperties
