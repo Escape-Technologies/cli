@@ -33,8 +33,9 @@ type CreateDastRestProfileRequest struct {
 	Name string `json:"name"`
 	// The description of the profile
 	Description *string `json:"description,omitempty"`
-	// The proxy ID for the profile
-	ProxyId *string `json:"proxyId,omitempty"`
+	// The proxy ID (private location) for the profile. Omit and set `defaultProxyType` to `PRIVATE` to auto-select any healthy private location at scan time.
+	ProxyId          *string                         `json:"proxyId,omitempty"`
+	DefaultProxyType *ENUMPROPERTIESDEFAULTPROXYTYPE `json:"defaultProxyType,omitempty"`
 	// The ID of the asset schema for the profile
 	SchemaId *string `json:"schemaId,omitempty"`
 	// The tags IDs for the profile
@@ -319,6 +320,38 @@ func (o *CreateDastRestProfileRequest) SetProxyId(v string) {
 	o.ProxyId = &v
 }
 
+// GetDefaultProxyType returns the DefaultProxyType field value if set, zero value otherwise.
+func (o *CreateDastRestProfileRequest) GetDefaultProxyType() ENUMPROPERTIESDEFAULTPROXYTYPE {
+	if o == nil || IsNil(o.DefaultProxyType) {
+		var ret ENUMPROPERTIESDEFAULTPROXYTYPE
+		return ret
+	}
+	return *o.DefaultProxyType
+}
+
+// GetDefaultProxyTypeOk returns a tuple with the DefaultProxyType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateDastRestProfileRequest) GetDefaultProxyTypeOk() (*ENUMPROPERTIESDEFAULTPROXYTYPE, bool) {
+	if o == nil || IsNil(o.DefaultProxyType) {
+		return nil, false
+	}
+	return o.DefaultProxyType, true
+}
+
+// HasDefaultProxyType returns a boolean if a field has been set.
+func (o *CreateDastRestProfileRequest) HasDefaultProxyType() bool {
+	if o != nil && !IsNil(o.DefaultProxyType) {
+		return true
+	}
+
+	return false
+}
+
+// SetDefaultProxyType gets a reference to the given ENUMPROPERTIESDEFAULTPROXYTYPE and assigns it to the DefaultProxyType field.
+func (o *CreateDastRestProfileRequest) SetDefaultProxyType(v ENUMPROPERTIESDEFAULTPROXYTYPE) {
+	o.DefaultProxyType = &v
+}
+
 // GetSchemaId returns the SchemaId field value if set, zero value otherwise.
 func (o *CreateDastRestProfileRequest) GetSchemaId() string {
 	if o == nil || IsNil(o.SchemaId) {
@@ -573,6 +606,9 @@ func (o CreateDastRestProfileRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ProxyId) {
 		toSerialize["proxyId"] = o.ProxyId
 	}
+	if !IsNil(o.DefaultProxyType) {
+		toSerialize["defaultProxyType"] = o.DefaultProxyType
+	}
 	if !IsNil(o.SchemaId) {
 		toSerialize["schemaId"] = o.SchemaId
 	}
@@ -646,6 +682,7 @@ func (o *CreateDastRestProfileRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "description")
 		delete(additionalProperties, "proxyId")
+		delete(additionalProperties, "defaultProxyType")
 		delete(additionalProperties, "schemaId")
 		delete(additionalProperties, "tagsIds")
 		delete(additionalProperties, "extraAssetIds")

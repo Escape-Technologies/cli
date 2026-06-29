@@ -20,14 +20,15 @@ var _ MappedNullable = &CreateCustomRuleRequestContentRuleOneOfAlert{}
 
 // CreateCustomRuleRequestContentRuleOneOfAlert struct for CreateCustomRuleRequestContentRuleOneOfAlert
 type CreateCustomRuleRequestContentRuleOneOfAlert struct {
-	Severity             ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESSEVERITY `json:"severity"`
-	Name                 string                                                                `json:"name"`
-	Context              string                                                                `json:"context"`
-	Category             ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY                             `json:"category"`
-	Description          *string                                                               `json:"description,omitempty"`
-	Remediation          *string                                                               `json:"remediation,omitempty"`
-	Compliance           *CreateCustomRuleRequestContentRuleOneOfAlertCompliance               `json:"compliance,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Severity              ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESSEVERITY `json:"severity"`
+	Name                  string                                                                `json:"name"`
+	Context               string                                                                `json:"context"`
+	Category              ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY                             `json:"category"`
+	Description           *string                                                               `json:"description,omitempty"`
+	Remediation           *string                                                               `json:"remediation,omitempty"`
+	Compliance            *CreateCustomRuleRequestContentRuleOneOfAlertCompliance               `json:"compliance,omitempty"`
+	CustomSecurityTestUid *string                                                               `json:"custom_security_test_uid,omitempty"`
+	AdditionalProperties  map[string]interface{}
 }
 
 type _CreateCustomRuleRequestContentRuleOneOfAlert CreateCustomRuleRequestContentRuleOneOfAlert
@@ -245,6 +246,38 @@ func (o *CreateCustomRuleRequestContentRuleOneOfAlert) SetCompliance(v CreateCus
 	o.Compliance = &v
 }
 
+// GetCustomSecurityTestUid returns the CustomSecurityTestUid field value if set, zero value otherwise.
+func (o *CreateCustomRuleRequestContentRuleOneOfAlert) GetCustomSecurityTestUid() string {
+	if o == nil || IsNil(o.CustomSecurityTestUid) {
+		var ret string
+		return ret
+	}
+	return *o.CustomSecurityTestUid
+}
+
+// GetCustomSecurityTestUidOk returns a tuple with the CustomSecurityTestUid field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateCustomRuleRequestContentRuleOneOfAlert) GetCustomSecurityTestUidOk() (*string, bool) {
+	if o == nil || IsNil(o.CustomSecurityTestUid) {
+		return nil, false
+	}
+	return o.CustomSecurityTestUid, true
+}
+
+// HasCustomSecurityTestUid returns a boolean if a field has been set.
+func (o *CreateCustomRuleRequestContentRuleOneOfAlert) HasCustomSecurityTestUid() bool {
+	if o != nil && !IsNil(o.CustomSecurityTestUid) {
+		return true
+	}
+
+	return false
+}
+
+// SetCustomSecurityTestUid gets a reference to the given string and assigns it to the CustomSecurityTestUid field.
+func (o *CreateCustomRuleRequestContentRuleOneOfAlert) SetCustomSecurityTestUid(v string) {
+	o.CustomSecurityTestUid = &v
+}
+
 func (o CreateCustomRuleRequestContentRuleOneOfAlert) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -267,6 +300,9 @@ func (o CreateCustomRuleRequestContentRuleOneOfAlert) ToMap() (map[string]interf
 	}
 	if !IsNil(o.Compliance) {
 		toSerialize["compliance"] = o.Compliance
+	}
+	if !IsNil(o.CustomSecurityTestUid) {
+		toSerialize["custom_security_test_uid"] = o.CustomSecurityTestUid
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -321,6 +357,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOfAlert) UnmarshalJSON(data []byte
 		delete(additionalProperties, "description")
 		delete(additionalProperties, "remediation")
 		delete(additionalProperties, "compliance")
+		delete(additionalProperties, "custom_security_test_uid")
 		o.AdditionalProperties = additionalProperties
 	}
 
