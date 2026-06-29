@@ -19,10 +19,7 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationFrontendDast{}
 
 // GetProfile200ResponseConfigurationFrontendDast struct for GetProfile200ResponseConfigurationFrontendDast
 type GetProfile200ResponseConfigurationFrontendDast struct {
-	LocationId *string `json:"location_id,omitempty"`
-	// Deprecated: use `maxDurationMs` on the profile instead.
-	// Deprecated
-	MaxDuration           *float32                                                                                `json:"max_duration,omitempty"`
+	LocationId            *string                                                                                 `json:"location_id,omitempty"`
 	Hotstart              []string                                                                                `json:"hotstart,omitempty"`
 	SecurityChecksEnabled []ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSECURITYCHECKSENABLEDITEMS `json:"security_checks_enabled,omitempty"`
 	SinglePageWorker      *bool                                                                                   `json:"single_page_worker,omitempty"`
@@ -33,7 +30,10 @@ type GetProfile200ResponseConfigurationFrontendDast struct {
 	Scope                 *GetProfile200ResponseConfigurationFrontendDastScope                                    `json:"scope,omitempty"`
 	InScopeOnly           *bool                                                                                   `json:"in_scope_only,omitempty"`
 	AgenticCrawling       *GetProfile200ResponseConfigurationFrontendDastAgenticCrawling                          `json:"agentic_crawling,omitempty"`
-	AdditionalProperties  map[string]interface{}
+	// Deprecated: use `maxDurationMs` on the profile instead.
+	// Deprecated
+	MaxDuration          *float32 `json:"max_duration,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetProfile200ResponseConfigurationFrontendDast GetProfile200ResponseConfigurationFrontendDast
@@ -85,41 +85,6 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) HasLocationId() bool {
 // SetLocationId gets a reference to the given string and assigns it to the LocationId field.
 func (o *GetProfile200ResponseConfigurationFrontendDast) SetLocationId(v string) {
 	o.LocationId = &v
-}
-
-// GetMaxDuration returns the MaxDuration field value if set, zero value otherwise.
-// Deprecated
-func (o *GetProfile200ResponseConfigurationFrontendDast) GetMaxDuration() float32 {
-	if o == nil || IsNil(o.MaxDuration) {
-		var ret float32
-		return ret
-	}
-	return *o.MaxDuration
-}
-
-// GetMaxDurationOk returns a tuple with the MaxDuration field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// Deprecated
-func (o *GetProfile200ResponseConfigurationFrontendDast) GetMaxDurationOk() (*float32, bool) {
-	if o == nil || IsNil(o.MaxDuration) {
-		return nil, false
-	}
-	return o.MaxDuration, true
-}
-
-// HasMaxDuration returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationFrontendDast) HasMaxDuration() bool {
-	if o != nil && !IsNil(o.MaxDuration) {
-		return true
-	}
-
-	return false
-}
-
-// SetMaxDuration gets a reference to the given float32 and assigns it to the MaxDuration field.
-// Deprecated
-func (o *GetProfile200ResponseConfigurationFrontendDast) SetMaxDuration(v float32) {
-	o.MaxDuration = &v
 }
 
 // GetHotstart returns the Hotstart field value if set, zero value otherwise.
@@ -442,6 +407,41 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) SetAgenticCrawling(v Ge
 	o.AgenticCrawling = &v
 }
 
+// GetMaxDuration returns the MaxDuration field value if set, zero value otherwise.
+// Deprecated
+func (o *GetProfile200ResponseConfigurationFrontendDast) GetMaxDuration() float32 {
+	if o == nil || IsNil(o.MaxDuration) {
+		var ret float32
+		return ret
+	}
+	return *o.MaxDuration
+}
+
+// GetMaxDurationOk returns a tuple with the MaxDuration field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// Deprecated
+func (o *GetProfile200ResponseConfigurationFrontendDast) GetMaxDurationOk() (*float32, bool) {
+	if o == nil || IsNil(o.MaxDuration) {
+		return nil, false
+	}
+	return o.MaxDuration, true
+}
+
+// HasMaxDuration returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationFrontendDast) HasMaxDuration() bool {
+	if o != nil && !IsNil(o.MaxDuration) {
+		return true
+	}
+
+	return false
+}
+
+// SetMaxDuration gets a reference to the given float32 and assigns it to the MaxDuration field.
+// Deprecated
+func (o *GetProfile200ResponseConfigurationFrontendDast) SetMaxDuration(v float32) {
+	o.MaxDuration = &v
+}
+
 func (o GetProfile200ResponseConfigurationFrontendDast) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -454,9 +454,6 @@ func (o GetProfile200ResponseConfigurationFrontendDast) ToMap() (map[string]inte
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.LocationId) {
 		toSerialize["location_id"] = o.LocationId
-	}
-	if !IsNil(o.MaxDuration) {
-		toSerialize["max_duration"] = o.MaxDuration
 	}
 	if !IsNil(o.Hotstart) {
 		toSerialize["hotstart"] = o.Hotstart
@@ -488,6 +485,9 @@ func (o GetProfile200ResponseConfigurationFrontendDast) ToMap() (map[string]inte
 	if !IsNil(o.AgenticCrawling) {
 		toSerialize["agentic_crawling"] = o.AgenticCrawling
 	}
+	if !IsNil(o.MaxDuration) {
+		toSerialize["max_duration"] = o.MaxDuration
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -511,7 +511,6 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) UnmarshalJSON(data []by
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "location_id")
-		delete(additionalProperties, "max_duration")
 		delete(additionalProperties, "hotstart")
 		delete(additionalProperties, "security_checks_enabled")
 		delete(additionalProperties, "single_page_worker")
@@ -522,6 +521,7 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) UnmarshalJSON(data []by
 		delete(additionalProperties, "scope")
 		delete(additionalProperties, "in_scope_only")
 		delete(additionalProperties, "agentic_crawling")
+		delete(additionalProperties, "max_duration")
 		o.AdditionalProperties = additionalProperties
 	}
 
