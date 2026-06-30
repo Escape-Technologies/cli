@@ -23,20 +23,20 @@ type CreateAssetPACKAGERequest struct {
 	// The list of project IDs bind the asset on.
 	ProjectIds []string `json:"projectIds,omitempty"`
 	// The custom name of the asset. If not provided, the default name will be used.
-	Name                 *string                            `json:"name,omitempty"`
-	AssetClass           ENUMTECHNOLOGY                     `json:"asset_class"`
-	ExtraMetadata        map[string]interface{}             `json:"extra_metadata,omitempty"`
-	ScreenshotS3Key      *string                            `json:"screenshot_s3_key,omitempty"`
-	AssetType            ENUMPACKAGE                        `json:"asset_type"`
-	TechnologyKey        string                             `json:"technology_key"`
-	Version              *string                            `json:"version,omitempty"`
-	ReferenceUrl         *string                            `json:"reference_url,omitempty"`
-	Cpe                  *string                            `json:"cpe,omitempty"`
-	CpeGuessed           *bool                              `json:"cpe_guessed,omitempty"`
-	WellKnownTechnology  *ENUMPROPERTIESWELLKNOWNTECHNOLOGY `json:"well_known_technology,omitempty"`
-	Description          *string                            `json:"description,omitempty"`
-	Purl                 string                             `json:"purl"`
-	PackageType          ENUMPROPERTIESPACKAGETYPE          `json:"package_type"`
+	Name                 *string                                                                                  `json:"name,omitempty"`
+	AssetClass           ENUMTECHNOLOGY                                                                           `json:"asset_class"`
+	ExtraMetadata        map[string]interface{}                                                                   `json:"extra_metadata,omitempty"`
+	ScreenshotS3Key      *string                                                                                  `json:"screenshot_s3_key,omitempty"`
+	AssetType            ENUMPACKAGE                                                                              `json:"asset_type"`
+	TechnologyKey        string                                                                                   `json:"technology_key"`
+	Version              *string                                                                                  `json:"version,omitempty"`
+	ReferenceUrl         *string                                                                                  `json:"reference_url,omitempty"`
+	Cpe                  *string                                                                                  `json:"cpe,omitempty"`
+	CpeGuessed           *bool                                                                                    `json:"cpe_guessed,omitempty"`
+	WellKnownTechnology  *ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTECHNOLOGYPROPERTIESWELLKNOWNTECHNOLOGY `json:"well_known_technology,omitempty"`
+	Description          *string                                                                                  `json:"description,omitempty"`
+	Purl                 string                                                                                   `json:"purl"`
+	PackageType          ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTECHNOLOGYPROPERTIESPACKAGETYPE          `json:"package_type"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -46,7 +46,7 @@ type _CreateAssetPACKAGERequest CreateAssetPACKAGERequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetPACKAGERequest(assetClass ENUMTECHNOLOGY, assetType ENUMPACKAGE, technologyKey string, purl string, packageType ENUMPROPERTIESPACKAGETYPE) *CreateAssetPACKAGERequest {
+func NewCreateAssetPACKAGERequest(assetClass ENUMTECHNOLOGY, assetType ENUMPACKAGE, technologyKey string, purl string, packageType ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTECHNOLOGYPROPERTIESPACKAGETYPE) *CreateAssetPACKAGERequest {
 	this := CreateAssetPACKAGERequest{}
 	this.AssetClass = assetClass
 	this.AssetType = assetType
@@ -393,9 +393,9 @@ func (o *CreateAssetPACKAGERequest) SetCpeGuessed(v bool) {
 }
 
 // GetWellKnownTechnology returns the WellKnownTechnology field value if set, zero value otherwise.
-func (o *CreateAssetPACKAGERequest) GetWellKnownTechnology() ENUMPROPERTIESWELLKNOWNTECHNOLOGY {
+func (o *CreateAssetPACKAGERequest) GetWellKnownTechnology() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTECHNOLOGYPROPERTIESWELLKNOWNTECHNOLOGY {
 	if o == nil || IsNil(o.WellKnownTechnology) {
-		var ret ENUMPROPERTIESWELLKNOWNTECHNOLOGY
+		var ret ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTECHNOLOGYPROPERTIESWELLKNOWNTECHNOLOGY
 		return ret
 	}
 	return *o.WellKnownTechnology
@@ -403,7 +403,7 @@ func (o *CreateAssetPACKAGERequest) GetWellKnownTechnology() ENUMPROPERTIESWELLK
 
 // GetWellKnownTechnologyOk returns a tuple with the WellKnownTechnology field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetPACKAGERequest) GetWellKnownTechnologyOk() (*ENUMPROPERTIESWELLKNOWNTECHNOLOGY, bool) {
+func (o *CreateAssetPACKAGERequest) GetWellKnownTechnologyOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTECHNOLOGYPROPERTIESWELLKNOWNTECHNOLOGY, bool) {
 	if o == nil || IsNil(o.WellKnownTechnology) {
 		return nil, false
 	}
@@ -419,8 +419,8 @@ func (o *CreateAssetPACKAGERequest) HasWellKnownTechnology() bool {
 	return false
 }
 
-// SetWellKnownTechnology gets a reference to the given ENUMPROPERTIESWELLKNOWNTECHNOLOGY and assigns it to the WellKnownTechnology field.
-func (o *CreateAssetPACKAGERequest) SetWellKnownTechnology(v ENUMPROPERTIESWELLKNOWNTECHNOLOGY) {
+// SetWellKnownTechnology gets a reference to the given ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTECHNOLOGYPROPERTIESWELLKNOWNTECHNOLOGY and assigns it to the WellKnownTechnology field.
+func (o *CreateAssetPACKAGERequest) SetWellKnownTechnology(v ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTECHNOLOGYPROPERTIESWELLKNOWNTECHNOLOGY) {
 	o.WellKnownTechnology = &v
 }
 
@@ -481,9 +481,9 @@ func (o *CreateAssetPACKAGERequest) SetPurl(v string) {
 }
 
 // GetPackageType returns the PackageType field value
-func (o *CreateAssetPACKAGERequest) GetPackageType() ENUMPROPERTIESPACKAGETYPE {
+func (o *CreateAssetPACKAGERequest) GetPackageType() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTECHNOLOGYPROPERTIESPACKAGETYPE {
 	if o == nil {
-		var ret ENUMPROPERTIESPACKAGETYPE
+		var ret ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTECHNOLOGYPROPERTIESPACKAGETYPE
 		return ret
 	}
 
@@ -492,7 +492,7 @@ func (o *CreateAssetPACKAGERequest) GetPackageType() ENUMPROPERTIESPACKAGETYPE {
 
 // GetPackageTypeOk returns a tuple with the PackageType field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetPACKAGERequest) GetPackageTypeOk() (*ENUMPROPERTIESPACKAGETYPE, bool) {
+func (o *CreateAssetPACKAGERequest) GetPackageTypeOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTECHNOLOGYPROPERTIESPACKAGETYPE, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -500,7 +500,7 @@ func (o *CreateAssetPACKAGERequest) GetPackageTypeOk() (*ENUMPROPERTIESPACKAGETY
 }
 
 // SetPackageType sets field value
-func (o *CreateAssetPACKAGERequest) SetPackageType(v ENUMPROPERTIESPACKAGETYPE) {
+func (o *CreateAssetPACKAGERequest) SetPackageType(v ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTECHNOLOGYPROPERTIESPACKAGETYPE) {
 	o.PackageType = v
 }
 
