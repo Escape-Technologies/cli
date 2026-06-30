@@ -23,18 +23,18 @@ type CreateAssetSOFTWARERequest struct {
 	// The list of project IDs bind the asset on.
 	ProjectIds []string `json:"projectIds,omitempty"`
 	// The custom name of the asset. If not provided, the default name will be used.
-	Name                 *string                            `json:"name,omitempty"`
-	AssetClass           ENUMTECHNOLOGY                     `json:"asset_class"`
-	ExtraMetadata        map[string]interface{}             `json:"extra_metadata,omitempty"`
-	ScreenshotS3Key      *string                            `json:"screenshot_s3_key,omitempty"`
-	AssetType            ENUMSOFTWARE                       `json:"asset_type"`
-	TechnologyKey        string                             `json:"technology_key"`
-	Version              *string                            `json:"version,omitempty"`
-	ReferenceUrl         *string                            `json:"reference_url,omitempty"`
-	Cpe                  *string                            `json:"cpe,omitempty"`
-	CpeGuessed           *bool                              `json:"cpe_guessed,omitempty"`
-	WellKnownTechnology  *ENUMPROPERTIESWELLKNOWNTECHNOLOGY `json:"well_known_technology,omitempty"`
-	Description          *string                            `json:"description,omitempty"`
+	Name                 *string                                                                                  `json:"name,omitempty"`
+	AssetClass           ENUMTECHNOLOGY                                                                           `json:"asset_class"`
+	ExtraMetadata        map[string]interface{}                                                                   `json:"extra_metadata,omitempty"`
+	ScreenshotS3Key      *string                                                                                  `json:"screenshot_s3_key,omitempty"`
+	AssetType            ENUMSOFTWARE                                                                             `json:"asset_type"`
+	TechnologyKey        string                                                                                   `json:"technology_key"`
+	Version              *string                                                                                  `json:"version,omitempty"`
+	ReferenceUrl         *string                                                                                  `json:"reference_url,omitempty"`
+	Cpe                  *string                                                                                  `json:"cpe,omitempty"`
+	CpeGuessed           *bool                                                                                    `json:"cpe_guessed,omitempty"`
+	WellKnownTechnology  *ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTECHNOLOGYPROPERTIESWELLKNOWNTECHNOLOGY `json:"well_known_technology,omitempty"`
+	Description          *string                                                                                  `json:"description,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -389,9 +389,9 @@ func (o *CreateAssetSOFTWARERequest) SetCpeGuessed(v bool) {
 }
 
 // GetWellKnownTechnology returns the WellKnownTechnology field value if set, zero value otherwise.
-func (o *CreateAssetSOFTWARERequest) GetWellKnownTechnology() ENUMPROPERTIESWELLKNOWNTECHNOLOGY {
+func (o *CreateAssetSOFTWARERequest) GetWellKnownTechnology() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTECHNOLOGYPROPERTIESWELLKNOWNTECHNOLOGY {
 	if o == nil || IsNil(o.WellKnownTechnology) {
-		var ret ENUMPROPERTIESWELLKNOWNTECHNOLOGY
+		var ret ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTECHNOLOGYPROPERTIESWELLKNOWNTECHNOLOGY
 		return ret
 	}
 	return *o.WellKnownTechnology
@@ -399,7 +399,7 @@ func (o *CreateAssetSOFTWARERequest) GetWellKnownTechnology() ENUMPROPERTIESWELL
 
 // GetWellKnownTechnologyOk returns a tuple with the WellKnownTechnology field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetSOFTWARERequest) GetWellKnownTechnologyOk() (*ENUMPROPERTIESWELLKNOWNTECHNOLOGY, bool) {
+func (o *CreateAssetSOFTWARERequest) GetWellKnownTechnologyOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTECHNOLOGYPROPERTIESWELLKNOWNTECHNOLOGY, bool) {
 	if o == nil || IsNil(o.WellKnownTechnology) {
 		return nil, false
 	}
@@ -415,8 +415,8 @@ func (o *CreateAssetSOFTWARERequest) HasWellKnownTechnology() bool {
 	return false
 }
 
-// SetWellKnownTechnology gets a reference to the given ENUMPROPERTIESWELLKNOWNTECHNOLOGY and assigns it to the WellKnownTechnology field.
-func (o *CreateAssetSOFTWARERequest) SetWellKnownTechnology(v ENUMPROPERTIESWELLKNOWNTECHNOLOGY) {
+// SetWellKnownTechnology gets a reference to the given ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTECHNOLOGYPROPERTIESWELLKNOWNTECHNOLOGY and assigns it to the WellKnownTechnology field.
+func (o *CreateAssetSOFTWARERequest) SetWellKnownTechnology(v ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESTECHNOLOGYPROPERTIESWELLKNOWNTECHNOLOGY) {
 	o.WellKnownTechnology = &v
 }
 

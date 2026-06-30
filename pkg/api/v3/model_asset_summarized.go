@@ -44,11 +44,12 @@ type AssetSummarized struct {
 	// IDs of the projects this asset is assigned to
 	ProjectIds []string `json:"projectIds"`
 	// Email addresses of the owners of this asset.
-	Owners               []string                 `json:"owners,omitempty"`
-	Service              *AssetServiceSummarized  `json:"service,omitempty"`
-	Frontend             *AssetFrontendSummarized `json:"frontend,omitempty"`
-	Host                 *AssetHostSummarized     `json:"host,omitempty"`
-	Links                AssetDetailedLinks       `json:"links"`
+	Owners               []string                   `json:"owners,omitempty"`
+	Service              *AssetServiceSummarized    `json:"service,omitempty"`
+	Frontend             *AssetFrontendSummarized   `json:"frontend,omitempty"`
+	Host                 *AssetHostSummarized       `json:"host,omitempty"`
+	Technology           *AssetTechnologySummarized `json:"technology,omitempty"`
+	Links                AssetDetailedLinks         `json:"links"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -546,6 +547,38 @@ func (o *AssetSummarized) SetHost(v AssetHostSummarized) {
 	o.Host = &v
 }
 
+// GetTechnology returns the Technology field value if set, zero value otherwise.
+func (o *AssetSummarized) GetTechnology() AssetTechnologySummarized {
+	if o == nil || IsNil(o.Technology) {
+		var ret AssetTechnologySummarized
+		return ret
+	}
+	return *o.Technology
+}
+
+// GetTechnologyOk returns a tuple with the Technology field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AssetSummarized) GetTechnologyOk() (*AssetTechnologySummarized, bool) {
+	if o == nil || IsNil(o.Technology) {
+		return nil, false
+	}
+	return o.Technology, true
+}
+
+// HasTechnology returns a boolean if a field has been set.
+func (o *AssetSummarized) HasTechnology() bool {
+	if o != nil && !IsNil(o.Technology) {
+		return true
+	}
+
+	return false
+}
+
+// SetTechnology gets a reference to the given AssetTechnologySummarized and assigns it to the Technology field.
+func (o *AssetSummarized) SetTechnology(v AssetTechnologySummarized) {
+	o.Technology = &v
+}
+
 // GetLinks returns the Links field value
 func (o *AssetSummarized) GetLinks() AssetDetailedLinks {
 	if o == nil {
@@ -610,6 +643,9 @@ func (o AssetSummarized) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Host) {
 		toSerialize["host"] = o.Host
+	}
+	if !IsNil(o.Technology) {
+		toSerialize["technology"] = o.Technology
 	}
 	toSerialize["links"] = o.Links
 
@@ -682,6 +718,7 @@ func (o *AssetSummarized) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "service")
 		delete(additionalProperties, "frontend")
 		delete(additionalProperties, "host")
+		delete(additionalProperties, "technology")
 		delete(additionalProperties, "links")
 		o.AdditionalProperties = additionalProperties
 	}
