@@ -25,11 +25,12 @@ type GetIssue200Response struct {
 	// The name of the issue
 	Name string `json:"name"`
 	// The full name of the issue
-	FullName        string                                     `json:"fullName"`
-	Category        ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY  `json:"category"`
-	Severity        ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY  `json:"severity"`
-	ScannerSeverity *ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY `json:"scannerSeverity,omitempty"`
-	Status          ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS    `json:"status"`
+	FullName string                                    `json:"fullName"`
+	Category ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY `json:"category"`
+	Severity ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY `json:"severity"`
+	// Whether the severity has been manually overridden
+	ManualSeverity bool                                    `json:"manualSeverity"`
+	Status         ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS `json:"status"`
 	// AI-generated contextual overview for the issue
 	Context *string `json:"context,omitempty"`
 	// Array of risk types associated with the issue
@@ -67,13 +68,14 @@ type _GetIssue200Response GetIssue200Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetIssue200Response(id string, name string, fullName string, category ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY, severity ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY, status ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, alertUid string, createdAt string, asset AssetDetailed2, aiRemediationFramework string, links IssueSummarizedLinks) *GetIssue200Response {
+func NewGetIssue200Response(id string, name string, fullName string, category ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY, severity ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY, manualSeverity bool, status ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, alertUid string, createdAt string, asset AssetDetailed2, aiRemediationFramework string, links IssueSummarizedLinks) *GetIssue200Response {
 	this := GetIssue200Response{}
 	this.Id = id
 	this.Name = name
 	this.FullName = fullName
 	this.Category = category
 	this.Severity = severity
+	this.ManualSeverity = manualSeverity
 	this.Status = status
 	this.Risks = risks
 	this.AlertUid = alertUid
@@ -212,36 +214,28 @@ func (o *GetIssue200Response) SetSeverity(v ENUMPROPERTIESDATAITEMSPROPERTIESSEV
 	o.Severity = v
 }
 
-// GetScannerSeverity returns the ScannerSeverity field value if set, zero value otherwise.
-func (o *GetIssue200Response) GetScannerSeverity() ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY {
-	if o == nil || IsNil(o.ScannerSeverity) {
-		var ret ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY
+// GetManualSeverity returns the ManualSeverity field value
+func (o *GetIssue200Response) GetManualSeverity() bool {
+	if o == nil {
+		var ret bool
 		return ret
 	}
-	return *o.ScannerSeverity
+
+	return o.ManualSeverity
 }
 
-// GetScannerSeverityOk returns a tuple with the ScannerSeverity field value if set, nil otherwise
+// GetManualSeverityOk returns a tuple with the ManualSeverity field value
 // and a boolean to check if the value has been set.
-func (o *GetIssue200Response) GetScannerSeverityOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY, bool) {
-	if o == nil || IsNil(o.ScannerSeverity) {
+func (o *GetIssue200Response) GetManualSeverityOk() (*bool, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ScannerSeverity, true
+	return &o.ManualSeverity, true
 }
 
-// HasScannerSeverity returns a boolean if a field has been set.
-func (o *GetIssue200Response) HasScannerSeverity() bool {
-	if o != nil && !IsNil(o.ScannerSeverity) {
-		return true
-	}
-
-	return false
-}
-
-// SetScannerSeverity gets a reference to the given ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY and assigns it to the ScannerSeverity field.
-func (o *GetIssue200Response) SetScannerSeverity(v ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY) {
-	o.ScannerSeverity = &v
+// SetManualSeverity sets field value
+func (o *GetIssue200Response) SetManualSeverity(v bool) {
+	o.ManualSeverity = v
 }
 
 // GetStatus returns the Status field value
@@ -747,9 +741,7 @@ func (o GetIssue200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize["fullName"] = o.FullName
 	toSerialize["category"] = o.Category
 	toSerialize["severity"] = o.Severity
-	if !IsNil(o.ScannerSeverity) {
-		toSerialize["scannerSeverity"] = o.ScannerSeverity
-	}
+	toSerialize["manualSeverity"] = o.ManualSeverity
 	toSerialize["status"] = o.Status
 	if !IsNil(o.Context) {
 		toSerialize["context"] = o.Context
@@ -805,6 +797,7 @@ func (o *GetIssue200Response) UnmarshalJSON(data []byte) (err error) {
 		"fullName",
 		"category",
 		"severity",
+		"manualSeverity",
 		"status",
 		"risks",
 		"alertUid",
@@ -846,7 +839,7 @@ func (o *GetIssue200Response) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "fullName")
 		delete(additionalProperties, "category")
 		delete(additionalProperties, "severity")
-		delete(additionalProperties, "scannerSeverity")
+		delete(additionalProperties, "manualSeverity")
 		delete(additionalProperties, "status")
 		delete(additionalProperties, "context")
 		delete(additionalProperties, "risks")

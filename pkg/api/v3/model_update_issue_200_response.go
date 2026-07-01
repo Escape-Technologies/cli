@@ -21,9 +21,7 @@ var _ MappedNullable = &UpdateIssue200Response{}
 // UpdateIssue200Response struct for UpdateIssue200Response
 type UpdateIssue200Response struct {
 	// The IDs of the updated issues
-	Ids                  []string                                   `json:"ids"`
-	Severity             ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY  `json:"severity"`
-	ScannerSeverity      *ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY `json:"scannerSeverity,omitempty"`
+	Ids                  []string `json:"ids"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -33,10 +31,9 @@ type _UpdateIssue200Response UpdateIssue200Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateIssue200Response(ids []string, severity ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY) *UpdateIssue200Response {
+func NewUpdateIssue200Response(ids []string) *UpdateIssue200Response {
 	this := UpdateIssue200Response{}
 	this.Ids = ids
-	this.Severity = severity
 	return &this
 }
 
@@ -72,62 +69,6 @@ func (o *UpdateIssue200Response) SetIds(v []string) {
 	o.Ids = v
 }
 
-// GetSeverity returns the Severity field value
-func (o *UpdateIssue200Response) GetSeverity() ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY {
-	if o == nil {
-		var ret ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY
-		return ret
-	}
-
-	return o.Severity
-}
-
-// GetSeverityOk returns a tuple with the Severity field value
-// and a boolean to check if the value has been set.
-func (o *UpdateIssue200Response) GetSeverityOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Severity, true
-}
-
-// SetSeverity sets field value
-func (o *UpdateIssue200Response) SetSeverity(v ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY) {
-	o.Severity = v
-}
-
-// GetScannerSeverity returns the ScannerSeverity field value if set, zero value otherwise.
-func (o *UpdateIssue200Response) GetScannerSeverity() ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY {
-	if o == nil || IsNil(o.ScannerSeverity) {
-		var ret ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY
-		return ret
-	}
-	return *o.ScannerSeverity
-}
-
-// GetScannerSeverityOk returns a tuple with the ScannerSeverity field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UpdateIssue200Response) GetScannerSeverityOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY, bool) {
-	if o == nil || IsNil(o.ScannerSeverity) {
-		return nil, false
-	}
-	return o.ScannerSeverity, true
-}
-
-// HasScannerSeverity returns a boolean if a field has been set.
-func (o *UpdateIssue200Response) HasScannerSeverity() bool {
-	if o != nil && !IsNil(o.ScannerSeverity) {
-		return true
-	}
-
-	return false
-}
-
-// SetScannerSeverity gets a reference to the given ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY and assigns it to the ScannerSeverity field.
-func (o *UpdateIssue200Response) SetScannerSeverity(v ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY) {
-	o.ScannerSeverity = &v
-}
-
 func (o UpdateIssue200Response) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -139,10 +80,6 @@ func (o UpdateIssue200Response) MarshalJSON() ([]byte, error) {
 func (o UpdateIssue200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["ids"] = o.Ids
-	toSerialize["severity"] = o.Severity
-	if !IsNil(o.ScannerSeverity) {
-		toSerialize["scannerSeverity"] = o.ScannerSeverity
-	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -157,7 +94,6 @@ func (o *UpdateIssue200Response) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"ids",
-		"severity",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -188,8 +124,6 @@ func (o *UpdateIssue200Response) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ids")
-		delete(additionalProperties, "severity")
-		delete(additionalProperties, "scannerSeverity")
 		o.AdditionalProperties = additionalProperties
 	}
 
