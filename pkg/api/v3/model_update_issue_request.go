@@ -19,7 +19,8 @@ var _ MappedNullable = &UpdateIssueRequest{}
 
 // UpdateIssueRequest struct for UpdateIssueRequest
 type UpdateIssueRequest struct {
-	Status               *ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS `json:"status,omitempty"`
+	Status               *ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS   `json:"status,omitempty"`
+	Severity             *ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY `json:"severity,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -74,6 +75,38 @@ func (o *UpdateIssueRequest) SetStatus(v ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS
 	o.Status = &v
 }
 
+// GetSeverity returns the Severity field value if set, zero value otherwise.
+func (o *UpdateIssueRequest) GetSeverity() ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY {
+	if o == nil || IsNil(o.Severity) {
+		var ret ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY
+		return ret
+	}
+	return *o.Severity
+}
+
+// GetSeverityOk returns a tuple with the Severity field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateIssueRequest) GetSeverityOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY, bool) {
+	if o == nil || IsNil(o.Severity) {
+		return nil, false
+	}
+	return o.Severity, true
+}
+
+// HasSeverity returns a boolean if a field has been set.
+func (o *UpdateIssueRequest) HasSeverity() bool {
+	if o != nil && !IsNil(o.Severity) {
+		return true
+	}
+
+	return false
+}
+
+// SetSeverity gets a reference to the given ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY and assigns it to the Severity field.
+func (o *UpdateIssueRequest) SetSeverity(v ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY) {
+	o.Severity = &v
+}
+
 func (o UpdateIssueRequest) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -86,6 +119,9 @@ func (o UpdateIssueRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
+	}
+	if !IsNil(o.Severity) {
+		toSerialize["severity"] = o.Severity
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -110,6 +146,7 @@ func (o *UpdateIssueRequest) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "status")
+		delete(additionalProperties, "severity")
 		o.AdditionalProperties = additionalProperties
 	}
 
