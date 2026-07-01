@@ -46,12 +46,13 @@ type UpdateAsset200Response struct {
 	// The risks of the asset
 	Risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS `json:"risks"`
 	// IDs of the projects this asset is assigned to
-	ProjectIds    []string               `json:"projectIds"`
-	FirstSeenScan *ScanSummarized        `json:"firstSeenScan,omitempty"`
-	LastSeenScan  *ScanSummarized1       `json:"lastSeenScan,omitempty"`
-	Service       *AssetServiceDetailed  `json:"service,omitempty"`
-	Frontend      *AssetFrontendDetailed `json:"frontend,omitempty"`
-	Host          *AssetHostDetailed     `json:"host,omitempty"`
+	ProjectIds    []string                 `json:"projectIds"`
+	FirstSeenScan *ScanSummarized          `json:"firstSeenScan,omitempty"`
+	LastSeenScan  *ScanSummarized1         `json:"lastSeenScan,omitempty"`
+	Service       *AssetServiceDetailed    `json:"service,omitempty"`
+	Frontend      *AssetFrontendDetailed   `json:"frontend,omitempty"`
+	Host          *AssetHostDetailed       `json:"host,omitempty"`
+	Technology    *AssetTechnologyDetailed `json:"technology,omitempty"`
 	// Time-limited HTTPS URL for schema-class assets; null for other asset classes
 	SchemaUrl            *string            `json:"schemaUrl,omitempty"`
 	Links                AssetDetailedLinks `json:"links"`
@@ -648,6 +649,38 @@ func (o *UpdateAsset200Response) SetHost(v AssetHostDetailed) {
 	o.Host = &v
 }
 
+// GetTechnology returns the Technology field value if set, zero value otherwise.
+func (o *UpdateAsset200Response) GetTechnology() AssetTechnologyDetailed {
+	if o == nil || IsNil(o.Technology) {
+		var ret AssetTechnologyDetailed
+		return ret
+	}
+	return *o.Technology
+}
+
+// GetTechnologyOk returns a tuple with the Technology field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateAsset200Response) GetTechnologyOk() (*AssetTechnologyDetailed, bool) {
+	if o == nil || IsNil(o.Technology) {
+		return nil, false
+	}
+	return o.Technology, true
+}
+
+// HasTechnology returns a boolean if a field has been set.
+func (o *UpdateAsset200Response) HasTechnology() bool {
+	if o != nil && !IsNil(o.Technology) {
+		return true
+	}
+
+	return false
+}
+
+// SetTechnology gets a reference to the given AssetTechnologyDetailed and assigns it to the Technology field.
+func (o *UpdateAsset200Response) SetTechnology(v AssetTechnologyDetailed) {
+	o.Technology = &v
+}
+
 // GetSchemaUrl returns the SchemaUrl field value if set, zero value otherwise.
 func (o *UpdateAsset200Response) GetSchemaUrl() string {
 	if o == nil || IsNil(o.SchemaUrl) {
@@ -754,6 +787,9 @@ func (o UpdateAsset200Response) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Host) {
 		toSerialize["host"] = o.Host
 	}
+	if !IsNil(o.Technology) {
+		toSerialize["technology"] = o.Technology
+	}
 	if !IsNil(o.SchemaUrl) {
 		toSerialize["schemaUrl"] = o.SchemaUrl
 	}
@@ -831,6 +867,7 @@ func (o *UpdateAsset200Response) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "service")
 		delete(additionalProperties, "frontend")
 		delete(additionalProperties, "host")
+		delete(additionalProperties, "technology")
 		delete(additionalProperties, "schemaUrl")
 		delete(additionalProperties, "links")
 		o.AdditionalProperties = additionalProperties
