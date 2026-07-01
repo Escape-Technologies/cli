@@ -25,10 +25,11 @@ type IssueSummarized struct {
 	// The name of the issue
 	Name string `json:"name"`
 	// The full name of the issue
-	FullName string                                    `json:"fullName"`
-	Category ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY `json:"category"`
-	Severity ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY `json:"severity"`
-	Status   ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS   `json:"status"`
+	FullName        string                                     `json:"fullName"`
+	Category        ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY  `json:"category"`
+	Severity        ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY  `json:"severity"`
+	ScannerSeverity *ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY `json:"scannerSeverity,omitempty"`
+	Status          ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS    `json:"status"`
 	// The context of the issue
 	Context string `json:"context"`
 	// Array of risk types associated with the issue
@@ -198,6 +199,38 @@ func (o *IssueSummarized) GetSeverityOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESSEV
 // SetSeverity sets field value
 func (o *IssueSummarized) SetSeverity(v ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY) {
 	o.Severity = v
+}
+
+// GetScannerSeverity returns the ScannerSeverity field value if set, zero value otherwise.
+func (o *IssueSummarized) GetScannerSeverity() ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY {
+	if o == nil || IsNil(o.ScannerSeverity) {
+		var ret ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY
+		return ret
+	}
+	return *o.ScannerSeverity
+}
+
+// GetScannerSeverityOk returns a tuple with the ScannerSeverity field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IssueSummarized) GetScannerSeverityOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY, bool) {
+	if o == nil || IsNil(o.ScannerSeverity) {
+		return nil, false
+	}
+	return o.ScannerSeverity, true
+}
+
+// HasScannerSeverity returns a boolean if a field has been set.
+func (o *IssueSummarized) HasScannerSeverity() bool {
+	if o != nil && !IsNil(o.ScannerSeverity) {
+		return true
+	}
+
+	return false
+}
+
+// SetScannerSeverity gets a reference to the given ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY and assigns it to the ScannerSeverity field.
+func (o *IssueSummarized) SetScannerSeverity(v ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY) {
+	o.ScannerSeverity = &v
 }
 
 // GetStatus returns the Status field value
@@ -511,6 +544,9 @@ func (o IssueSummarized) ToMap() (map[string]interface{}, error) {
 	toSerialize["fullName"] = o.FullName
 	toSerialize["category"] = o.Category
 	toSerialize["severity"] = o.Severity
+	if !IsNil(o.ScannerSeverity) {
+		toSerialize["scannerSeverity"] = o.ScannerSeverity
+	}
 	toSerialize["status"] = o.Status
 	toSerialize["context"] = o.Context
 	toSerialize["risks"] = o.Risks
@@ -589,6 +625,7 @@ func (o *IssueSummarized) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "fullName")
 		delete(additionalProperties, "category")
 		delete(additionalProperties, "severity")
+		delete(additionalProperties, "scannerSeverity")
 		delete(additionalProperties, "status")
 		delete(additionalProperties, "context")
 		delete(additionalProperties, "risks")
