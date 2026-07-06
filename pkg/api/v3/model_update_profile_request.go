@@ -28,7 +28,7 @@ type UpdateProfileRequest struct {
 	Cron          *string                            `json:"cron,omitempty"`
 	Schedule      *ProfileScheduleUpdateInput        `json:"schedule,omitempty"`
 	ExtraAssetIds *UpdateProfileRequestExtraAssetIds `json:"extraAssetIds,omitempty"`
-	// Maximum scan duration in minutes
+	// Maximum scan duration in minutes.
 	MaxDurationMinutes *int `json:"maxDurationMinutes,omitempty"`
 	// The proxy ID (private location) for the profile. Omit and set `defaultProxyType` to `PRIVATE` to auto-select any healthy private location at scan time.
 	ProxyId              *string                         `json:"proxyId,omitempty"`
