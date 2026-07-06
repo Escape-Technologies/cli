@@ -30,7 +30,7 @@ type UpdateProfileConfigurationRequestConfigurationFrontendDast struct {
 	Scope                 *GetProfile200ResponseConfigurationFrontendDastScope                                    `json:"scope,omitempty"`
 	InScopeOnly           *bool                                                                                   `json:"in_scope_only,omitempty"`
 	AgenticCrawling       *GetProfile200ResponseConfigurationFrontendDastAgenticCrawling                          `json:"agentic_crawling,omitempty"`
-	// Deprecated: use `maxDurationMs` on the profile instead.
+	// Deprecated: use `maxDurationMinutes` on the profile instead.
 	// Deprecated
 	MaxDuration          *float32                                   `json:"max_duration,omitempty"`
 	Mode                 *ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE `json:"mode,omitempty"`
