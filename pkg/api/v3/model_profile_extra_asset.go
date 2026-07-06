@@ -18,7 +18,7 @@ import (
 // checks if the ProfileExtraAsset type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ProfileExtraAsset{}
 
-// ProfileExtraAsset Extra asset associated with a profile
+// ProfileExtraAsset Extra asset linked to a profile. Entries with `class === \"SCHEMA\"` are API schema assets used during scans; a profile may include several schemas. Use `isActive` to see which schema drives the current scan when multiple are linked.
 type ProfileExtraAsset struct {
 	// The id of the asset
 	Id string `json:"id"`

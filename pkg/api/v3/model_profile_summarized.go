@@ -36,7 +36,7 @@ type ProfileSummarized struct {
 	Cron *string `json:"cron,omitempty"`
 	// Schema asset id derived from the first `extraAssets` entry with class SCHEMA, or the legacy `assetSchemaId` when the link is not yet visible in `extraAssets`.
 	SchemaAssetId *string `json:"schemaAssetId,omitempty"`
-	// Extra assets linked to the profile
+	// Assets linked to the profile, including API schemas (`class === \"SCHEMA\"`). A profile can reference multiple schema assets.
 	ExtraAssets []ProfileExtraAsset `json:"extraAssets"`
 	Asset       AssetDetailed       `json:"asset"`
 	// Security score of the last scan (0-100). Null if no scan has completed.

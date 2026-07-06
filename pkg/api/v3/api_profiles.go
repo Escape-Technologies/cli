@@ -1946,10 +1946,12 @@ func (r ApiUpdateProfileSchemaRequest) Execute() (*GetProfile200Response, *http.
 /*
 UpdateProfileSchema Update profile schema
 
-*This route is deprecated, use the [PUT /profiles/:profileId](#tag/profiles/PUT/profiles/:profileId) endpoint instead.*
+*This route is deprecated. Use [PUT /profiles/:profileId](#tag/profiles/PUT/profiles/:profileId) with `extraAssetIds` instead.*
 
 Update the schema used to scan this profile.
 The schema ID is the ID of a schema uploaded to the Escape Platform using the [POST /assets/schema](#tag/assets/POST/assets/schema) endpoint.
+
+**Migration:** send `extraAssetIds` on `PUT /profiles/:profileId` with every schema asset ID to link (one or more). Example: `{ "extraAssetIds": ["<schema-asset-id-1>", "<schema-asset-id-2>"] }`.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param profileId The profile ID

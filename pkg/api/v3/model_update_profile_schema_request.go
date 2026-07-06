@@ -20,7 +20,8 @@ var _ MappedNullable = &UpdateProfileSchemaRequest{}
 
 // UpdateProfileSchemaRequest struct for UpdateProfileSchemaRequest
 type UpdateProfileSchemaRequest struct {
-	// The asset schema ID
+	// Deprecated: use `extraAssetIds` on [PUT /profiles/:profileId](#tag/profiles/PUT/profiles/:profileId) instead. Single schema asset ID to link to the profile.
+	// Deprecated
 	SchemaId             string `json:"schemaId"`
 	AdditionalProperties map[string]interface{}
 }
@@ -46,6 +47,7 @@ func NewUpdateProfileSchemaRequestWithDefaults() *UpdateProfileSchemaRequest {
 }
 
 // GetSchemaId returns the SchemaId field value
+// Deprecated
 func (o *UpdateProfileSchemaRequest) GetSchemaId() string {
 	if o == nil {
 		var ret string
@@ -57,6 +59,7 @@ func (o *UpdateProfileSchemaRequest) GetSchemaId() string {
 
 // GetSchemaIdOk returns a tuple with the SchemaId field value
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *UpdateProfileSchemaRequest) GetSchemaIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
@@ -65,6 +68,7 @@ func (o *UpdateProfileSchemaRequest) GetSchemaIdOk() (*string, bool) {
 }
 
 // SetSchemaId sets field value
+// Deprecated
 func (o *UpdateProfileSchemaRequest) SetSchemaId(v string) {
 	o.SchemaId = v
 }
