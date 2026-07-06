@@ -46,8 +46,8 @@ type CreateDastRestProfileRequest struct {
 	// Whether to use all available extra assets for the profile
 	UseAllAvailableExtraAssets *bool                                      `json:"useAllAvailableExtraAssets,omitempty"`
 	Mode                       *ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE `json:"mode,omitempty"`
-	// Maximum scan duration in milliseconds. Null or omitted when unset.
-	MaxDurationMs *int `json:"maxDurationMs,omitempty"`
+	// Maximum scan duration in minutes.
+	MaxDurationMinutes *int `json:"maxDurationMinutes,omitempty"`
 	// Whether to start the scan immediately
 	Start                *bool `json:"start,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -516,36 +516,36 @@ func (o *CreateDastRestProfileRequest) SetMode(v ENUMPROPERTIESCONFIGURATIONPROP
 	o.Mode = &v
 }
 
-// GetMaxDurationMs returns the MaxDurationMs field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequest) GetMaxDurationMs() int {
-	if o == nil || IsNil(o.MaxDurationMs) {
+// GetMaxDurationMinutes returns the MaxDurationMinutes field value if set, zero value otherwise.
+func (o *CreateDastRestProfileRequest) GetMaxDurationMinutes() int {
+	if o == nil || IsNil(o.MaxDurationMinutes) {
 		var ret int
 		return ret
 	}
-	return *o.MaxDurationMs
+	return *o.MaxDurationMinutes
 }
 
-// GetMaxDurationMsOk returns a tuple with the MaxDurationMs field value if set, nil otherwise
+// GetMaxDurationMinutesOk returns a tuple with the MaxDurationMinutes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequest) GetMaxDurationMsOk() (*int, bool) {
-	if o == nil || IsNil(o.MaxDurationMs) {
+func (o *CreateDastRestProfileRequest) GetMaxDurationMinutesOk() (*int, bool) {
+	if o == nil || IsNil(o.MaxDurationMinutes) {
 		return nil, false
 	}
-	return o.MaxDurationMs, true
+	return o.MaxDurationMinutes, true
 }
 
-// HasMaxDurationMs returns a boolean if a field has been set.
-func (o *CreateDastRestProfileRequest) HasMaxDurationMs() bool {
-	if o != nil && !IsNil(o.MaxDurationMs) {
+// HasMaxDurationMinutes returns a boolean if a field has been set.
+func (o *CreateDastRestProfileRequest) HasMaxDurationMinutes() bool {
+	if o != nil && !IsNil(o.MaxDurationMinutes) {
 		return true
 	}
 
 	return false
 }
 
-// SetMaxDurationMs gets a reference to the given int and assigns it to the MaxDurationMs field.
-func (o *CreateDastRestProfileRequest) SetMaxDurationMs(v int) {
-	o.MaxDurationMs = &v
+// SetMaxDurationMinutes gets a reference to the given int and assigns it to the MaxDurationMinutes field.
+func (o *CreateDastRestProfileRequest) SetMaxDurationMinutes(v int) {
+	o.MaxDurationMinutes = &v
 }
 
 // GetStart returns the Start field value if set, zero value otherwise.
@@ -628,8 +628,8 @@ func (o CreateDastRestProfileRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Mode) {
 		toSerialize["mode"] = o.Mode
 	}
-	if !IsNil(o.MaxDurationMs) {
-		toSerialize["maxDurationMs"] = o.MaxDurationMs
+	if !IsNil(o.MaxDurationMinutes) {
+		toSerialize["maxDurationMinutes"] = o.MaxDurationMinutes
 	}
 	if !IsNil(o.Start) {
 		toSerialize["start"] = o.Start
@@ -692,7 +692,7 @@ func (o *CreateDastRestProfileRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "extraAssetIds")
 		delete(additionalProperties, "useAllAvailableExtraAssets")
 		delete(additionalProperties, "mode")
-		delete(additionalProperties, "maxDurationMs")
+		delete(additionalProperties, "maxDurationMinutes")
 		delete(additionalProperties, "start")
 		o.AdditionalProperties = additionalProperties
 	}

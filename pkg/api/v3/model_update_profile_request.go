@@ -28,8 +28,8 @@ type UpdateProfileRequest struct {
 	Cron          *string                            `json:"cron,omitempty"`
 	Schedule      *ProfileScheduleUpdateInput        `json:"schedule,omitempty"`
 	ExtraAssetIds *UpdateProfileRequestExtraAssetIds `json:"extraAssetIds,omitempty"`
-	// Maximum scan duration in milliseconds
-	MaxDurationMs *int `json:"maxDurationMs,omitempty"`
+	// Maximum scan duration in minutes
+	MaxDurationMinutes *int `json:"maxDurationMinutes,omitempty"`
 	// The proxy ID (private location) for the profile. Omit and set `defaultProxyType` to `PRIVATE` to auto-select any healthy private location at scan time.
 	ProxyId              *string                         `json:"proxyId,omitempty"`
 	DefaultProxyType     *ENUMPROPERTIESDEFAULTPROXYTYPE `json:"defaultProxyType,omitempty"`
@@ -218,36 +218,36 @@ func (o *UpdateProfileRequest) SetExtraAssetIds(v UpdateProfileRequestExtraAsset
 	o.ExtraAssetIds = &v
 }
 
-// GetMaxDurationMs returns the MaxDurationMs field value if set, zero value otherwise.
-func (o *UpdateProfileRequest) GetMaxDurationMs() int {
-	if o == nil || IsNil(o.MaxDurationMs) {
+// GetMaxDurationMinutes returns the MaxDurationMinutes field value if set, zero value otherwise.
+func (o *UpdateProfileRequest) GetMaxDurationMinutes() int {
+	if o == nil || IsNil(o.MaxDurationMinutes) {
 		var ret int
 		return ret
 	}
-	return *o.MaxDurationMs
+	return *o.MaxDurationMinutes
 }
 
-// GetMaxDurationMsOk returns a tuple with the MaxDurationMs field value if set, nil otherwise
+// GetMaxDurationMinutesOk returns a tuple with the MaxDurationMinutes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateProfileRequest) GetMaxDurationMsOk() (*int, bool) {
-	if o == nil || IsNil(o.MaxDurationMs) {
+func (o *UpdateProfileRequest) GetMaxDurationMinutesOk() (*int, bool) {
+	if o == nil || IsNil(o.MaxDurationMinutes) {
 		return nil, false
 	}
-	return o.MaxDurationMs, true
+	return o.MaxDurationMinutes, true
 }
 
-// HasMaxDurationMs returns a boolean if a field has been set.
-func (o *UpdateProfileRequest) HasMaxDurationMs() bool {
-	if o != nil && !IsNil(o.MaxDurationMs) {
+// HasMaxDurationMinutes returns a boolean if a field has been set.
+func (o *UpdateProfileRequest) HasMaxDurationMinutes() bool {
+	if o != nil && !IsNil(o.MaxDurationMinutes) {
 		return true
 	}
 
 	return false
 }
 
-// SetMaxDurationMs gets a reference to the given int and assigns it to the MaxDurationMs field.
-func (o *UpdateProfileRequest) SetMaxDurationMs(v int) {
-	o.MaxDurationMs = &v
+// SetMaxDurationMinutes gets a reference to the given int and assigns it to the MaxDurationMinutes field.
+func (o *UpdateProfileRequest) SetMaxDurationMinutes(v int) {
+	o.MaxDurationMinutes = &v
 }
 
 // GetProxyId returns the ProxyId field value if set, zero value otherwise.
@@ -339,8 +339,8 @@ func (o UpdateProfileRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ExtraAssetIds) {
 		toSerialize["extraAssetIds"] = o.ExtraAssetIds
 	}
-	if !IsNil(o.MaxDurationMs) {
-		toSerialize["maxDurationMs"] = o.MaxDurationMs
+	if !IsNil(o.MaxDurationMinutes) {
+		toSerialize["maxDurationMinutes"] = o.MaxDurationMinutes
 	}
 	if !IsNil(o.ProxyId) {
 		toSerialize["proxyId"] = o.ProxyId
@@ -375,7 +375,7 @@ func (o *UpdateProfileRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "cron")
 		delete(additionalProperties, "schedule")
 		delete(additionalProperties, "extraAssetIds")
-		delete(additionalProperties, "maxDurationMs")
+		delete(additionalProperties, "maxDurationMinutes")
 		delete(additionalProperties, "proxyId")
 		delete(additionalProperties, "defaultProxyType")
 		o.AdditionalProperties = additionalProperties
