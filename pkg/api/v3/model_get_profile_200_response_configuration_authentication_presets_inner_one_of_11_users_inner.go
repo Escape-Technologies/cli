@@ -33,6 +33,7 @@ type GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11UsersInn
 	AdditionalFields     []GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11UsersInnerAdditionalFieldsInner `json:"additional_fields,omitempty"`
 	PreLoginActions      []GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInner                  `json:"pre_login_actions,omitempty"`
 	PostLoginActions     []GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInner                  `json:"post_login_actions,omitempty"`
+	OnTriggerActions     []GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsOnTriggerActionsInner         `json:"on_trigger_actions,omitempty"`
 	Instructions         *string                                                                                              `json:"instructions,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -458,6 +459,38 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11User
 	o.PostLoginActions = v
 }
 
+// GetOnTriggerActions returns the OnTriggerActions field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11UsersInner) GetOnTriggerActions() []GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsOnTriggerActionsInner {
+	if o == nil || IsNil(o.OnTriggerActions) {
+		var ret []GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsOnTriggerActionsInner
+		return ret
+	}
+	return o.OnTriggerActions
+}
+
+// GetOnTriggerActionsOk returns a tuple with the OnTriggerActions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11UsersInner) GetOnTriggerActionsOk() ([]GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsOnTriggerActionsInner, bool) {
+	if o == nil || IsNil(o.OnTriggerActions) {
+		return nil, false
+	}
+	return o.OnTriggerActions, true
+}
+
+// HasOnTriggerActions returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11UsersInner) HasOnTriggerActions() bool {
+	if o != nil && !IsNil(o.OnTriggerActions) {
+		return true
+	}
+
+	return false
+}
+
+// SetOnTriggerActions gets a reference to the given []GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsOnTriggerActionsInner and assigns it to the OnTriggerActions field.
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11UsersInner) SetOnTriggerActions(v []GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsOnTriggerActionsInner) {
+	o.OnTriggerActions = v
+}
+
 // GetInstructions returns the Instructions field value if set, zero value otherwise.
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11UsersInner) GetInstructions() string {
 	if o == nil || IsNil(o.Instructions) {
@@ -535,6 +568,9 @@ func (o GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11Users
 	if !IsNil(o.PostLoginActions) {
 		toSerialize["post_login_actions"] = o.PostLoginActions
 	}
+	if !IsNil(o.OnTriggerActions) {
+		toSerialize["on_trigger_actions"] = o.OnTriggerActions
+	}
 	if !IsNil(o.Instructions) {
 		toSerialize["instructions"] = o.Instructions
 	}
@@ -595,6 +631,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11User
 		delete(additionalProperties, "additional_fields")
 		delete(additionalProperties, "pre_login_actions")
 		delete(additionalProperties, "post_login_actions")
+		delete(additionalProperties, "on_trigger_actions")
 		delete(additionalProperties, "instructions")
 		o.AdditionalProperties = additionalProperties
 	}
