@@ -30,7 +30,7 @@ type GetProfile200ResponseConfigurationGraphqlApiDast struct {
 	HotstartOnly             *bool                                                                          `json:"hotstart_only,omitempty"`
 	Scope                    *GetProfile200ResponseConfigurationGraphqlApiDastScope                         `json:"scope,omitempty"`
 	InScopeOnly              *bool                                                                          `json:"in_scope_only,omitempty"`
-	// Deprecated: use `maxDurationMs` on the profile instead.
+	// Deprecated: use `maxDurationMinutes` on the profile instead.
 	// Deprecated
 	MaxDuration          *float32 `json:"max_duration,omitempty"`
 	AdditionalProperties map[string]interface{}

@@ -29,7 +29,7 @@ type GetProfile200ResponseConfiguration struct {
 	SecurityTests         *GetProfile200ResponseConfigurationSecurityTests  `json:"security_tests,omitempty"`
 	Inference             *GetProfile200ResponseConfigurationInference      `json:"inference,omitempty"`
 	Network               *GetProfile200ResponseConfigurationNetwork        `json:"network,omitempty"`
-	// Deprecated: use `maxDurationMs` on the profile instead.
+	// Deprecated: use `maxDurationMinutes` on the profile instead.
 	// Deprecated
 	MaxDuration          *float32                                                `json:"max_duration,omitempty"`
 	SubdomainEnumeration *GetProfile200ResponseConfigurationSubdomainEnumeration `json:"subdomain_enumeration,omitempty"`
