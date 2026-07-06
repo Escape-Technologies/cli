@@ -147,6 +147,7 @@ type GetProfile200ResponseConfigurationSecurityTests struct {
 	HttpParamPollution                     *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"http_param_pollution,omitempty"`
 	IdeEnabled                             *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"ide_enabled,omitempty"`
 	ImproperInputClientSideProtoPollution  *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"improper_input_client_side_proto_pollution,omitempty"`
+	ImproperInputCspBypass                 *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"improper_input_csp_bypass,omitempty"`
 	ImproperInputFrontendTemplateInjection *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"improper_input_frontend_template_injection,omitempty"`
 	ImproperInputXss                       *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"improper_input_xss,omitempty"`
 	ImproperInputXssQueryParams            *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"improper_input_xss_query_params,omitempty"`
@@ -4436,6 +4437,38 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) HasImproperInputClient
 // SetImproperInputClientSideProtoPollution gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the ImproperInputClientSideProtoPollution field.
 func (o *GetProfile200ResponseConfigurationSecurityTests) SetImproperInputClientSideProtoPollution(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
 	o.ImproperInputClientSideProtoPollution = &v
+}
+
+// GetImproperInputCspBypass returns the ImproperInputCspBypass field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetImproperInputCspBypass() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.ImproperInputCspBypass) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.ImproperInputCspBypass
+}
+
+// GetImproperInputCspBypassOk returns a tuple with the ImproperInputCspBypass field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetImproperInputCspBypassOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.ImproperInputCspBypass) {
+		return nil, false
+	}
+	return o.ImproperInputCspBypass, true
+}
+
+// HasImproperInputCspBypass returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasImproperInputCspBypass() bool {
+	if o != nil && !IsNil(o.ImproperInputCspBypass) {
+		return true
+	}
+
+	return false
+}
+
+// SetImproperInputCspBypass gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the ImproperInputCspBypass field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetImproperInputCspBypass(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.ImproperInputCspBypass = &v
 }
 
 // GetImproperInputFrontendTemplateInjection returns the ImproperInputFrontendTemplateInjection field value if set, zero value otherwise.
@@ -10368,6 +10401,9 @@ func (o GetProfile200ResponseConfigurationSecurityTests) ToMap() (map[string]int
 	if !IsNil(o.ImproperInputClientSideProtoPollution) {
 		toSerialize["improper_input_client_side_proto_pollution"] = o.ImproperInputClientSideProtoPollution
 	}
+	if !IsNil(o.ImproperInputCspBypass) {
+		toSerialize["improper_input_csp_bypass"] = o.ImproperInputCspBypass
+	}
 	if !IsNil(o.ImproperInputFrontendTemplateInjection) {
 		toSerialize["improper_input_frontend_template_injection"] = o.ImproperInputFrontendTemplateInjection
 	}
@@ -11037,6 +11073,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) UnmarshalJSON(data []b
 		delete(additionalProperties, "http_param_pollution")
 		delete(additionalProperties, "ide_enabled")
 		delete(additionalProperties, "improper_input_client_side_proto_pollution")
+		delete(additionalProperties, "improper_input_csp_bypass")
 		delete(additionalProperties, "improper_input_frontend_template_injection")
 		delete(additionalProperties, "improper_input_xss")
 		delete(additionalProperties, "improper_input_xss_query_params")
