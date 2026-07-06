@@ -36,11 +36,12 @@ type CreateDastRestProfileRequest struct {
 	// The proxy ID (private location) for the profile. Omit and set `defaultProxyType` to `PRIVATE` to auto-select any healthy private location at scan time.
 	ProxyId          *string                         `json:"proxyId,omitempty"`
 	DefaultProxyType *ENUMPROPERTIESDEFAULTPROXYTYPE `json:"defaultProxyType,omitempty"`
-	// The ID of the asset schema for the profile
+	// Deprecated: use `extraAssetIds` instead. Legacy single-schema shortcut; when set, the ID is merged into `extraAssetIds` on create. Prefer sending all schema asset IDs in `extraAssetIds` to link multiple schemas to one profile.
+	// Deprecated
 	SchemaId *string `json:"schemaId,omitempty"`
 	// The tags IDs for the profile
 	TagsIds []string `json:"tagsIds,omitempty"`
-	// The extra asset IDs for the profile
+	// Asset IDs to link to the profile. For REST and GraphQL profiles this is the primary way to attach one or more OpenAPI/GraphQL schema assets (class `SCHEMA`) created via [POST /assets/schema](#tag/assets/POST/assets/schema). Pass every schema asset ID when a profile should scan against multiple API definitions. On create, a legacy `schemaId` (if present) is prepended to this list. On update, use [PUT /profiles/:profileId](#tag/profiles/PUT/profiles/:profileId) with this field.
 	ExtraAssetIds []string `json:"extraAssetIds,omitempty"`
 	// Whether to use all available extra assets for the profile
 	UseAllAvailableExtraAssets *bool                                      `json:"useAllAvailableExtraAssets,omitempty"`
@@ -353,6 +354,7 @@ func (o *CreateDastRestProfileRequest) SetDefaultProxyType(v ENUMPROPERTIESDEFAU
 }
 
 // GetSchemaId returns the SchemaId field value if set, zero value otherwise.
+// Deprecated
 func (o *CreateDastRestProfileRequest) GetSchemaId() string {
 	if o == nil || IsNil(o.SchemaId) {
 		var ret string
@@ -363,6 +365,7 @@ func (o *CreateDastRestProfileRequest) GetSchemaId() string {
 
 // GetSchemaIdOk returns a tuple with the SchemaId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *CreateDastRestProfileRequest) GetSchemaIdOk() (*string, bool) {
 	if o == nil || IsNil(o.SchemaId) {
 		return nil, false
@@ -380,6 +383,7 @@ func (o *CreateDastRestProfileRequest) HasSchemaId() bool {
 }
 
 // SetSchemaId gets a reference to the given string and assigns it to the SchemaId field.
+// Deprecated
 func (o *CreateDastRestProfileRequest) SetSchemaId(v string) {
 	o.SchemaId = &v
 }

@@ -47,7 +47,7 @@ type GetProfile200Response struct {
 	Configuration GetProfile200ResponseConfiguration `json:"configuration"`
 	// Schema asset id derived from the first `extraAssets` entry with class SCHEMA, a request hint when the link is not yet visible in `extraAssets` (e.g. immediately after a mutation), or the legacy `assetSchemaId` while migration/backfill is incomplete.
 	SchemaAssetId *string `json:"schemaAssetId,omitempty"`
-	// The extra assets of the profile
+	// Assets linked to the profile, including API schemas (`class === \"SCHEMA\"`). A profile can reference multiple schema assets; inspect `schemaAssetId` and `isActive` on each entry.
 	ExtraAssets []ProfileExtraAsset `json:"extraAssets"`
 	Asset       AssetDetailed       `json:"asset"`
 	// The ID of the last scan of the profile
