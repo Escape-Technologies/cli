@@ -165,6 +165,7 @@ type GetProfile200ResponseConfigurationSecurityTests struct {
 	LlmToolExposure                        *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"llm_tool_exposure,omitempty"`
 	MassAssignment                         *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"mass_assignment,omitempty"`
 	McpUnauth                              *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"mcp_unauth,omitempty"`
+	MfaBypass                              *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"mfa_bypass,omitempty"`
 	Nosql                                  *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"nosql,omitempty"`
 	FrontendNosqlInjection                 *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"frontend_nosql_injection,omitempty"`
 	PaginationMissing                      *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"pagination_missing,omitempty"`
@@ -5012,6 +5013,38 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) HasMcpUnauth() bool {
 // SetMcpUnauth gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the McpUnauth field.
 func (o *GetProfile200ResponseConfigurationSecurityTests) SetMcpUnauth(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
 	o.McpUnauth = &v
+}
+
+// GetMfaBypass returns the MfaBypass field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetMfaBypass() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.MfaBypass) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.MfaBypass
+}
+
+// GetMfaBypassOk returns a tuple with the MfaBypass field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetMfaBypassOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.MfaBypass) {
+		return nil, false
+	}
+	return o.MfaBypass, true
+}
+
+// HasMfaBypass returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasMfaBypass() bool {
+	if o != nil && !IsNil(o.MfaBypass) {
+		return true
+	}
+
+	return false
+}
+
+// SetMfaBypass gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the MfaBypass field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetMfaBypass(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.MfaBypass = &v
 }
 
 // GetNosql returns the Nosql field value if set, zero value otherwise.
@@ -10422,6 +10455,9 @@ func (o GetProfile200ResponseConfigurationSecurityTests) ToMap() (map[string]int
 	if !IsNil(o.McpUnauth) {
 		toSerialize["mcp_unauth"] = o.McpUnauth
 	}
+	if !IsNil(o.MfaBypass) {
+		toSerialize["mfa_bypass"] = o.MfaBypass
+	}
 	if !IsNil(o.Nosql) {
 		toSerialize["nosql"] = o.Nosql
 	}
@@ -11055,6 +11091,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) UnmarshalJSON(data []b
 		delete(additionalProperties, "llm_tool_exposure")
 		delete(additionalProperties, "mass_assignment")
 		delete(additionalProperties, "mcp_unauth")
+		delete(additionalProperties, "mfa_bypass")
 		delete(additionalProperties, "nosql")
 		delete(additionalProperties, "frontend_nosql_injection")
 		delete(additionalProperties, "pagination_missing")
