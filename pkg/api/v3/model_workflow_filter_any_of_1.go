@@ -39,6 +39,8 @@ type WorkflowFilterAnyOf1 struct {
 	ScannerKinds          []ENUMPROPERTIESWHEREPROPERTIESSCANNERKINDSITEMS                                 `json:"scannerKinds,omitempty"`
 	WorkflowIds           []string                                                                         `json:"workflowIds,omitempty"`
 	Domains               []string                                                                         `json:"domains,omitempty"`
+	RootFQDNs             []string                                                                         `json:"rootFQDNs,omitempty"`
+	NoRootFQDN            *bool                                                                            `json:"noRootFQDN,omitempty"`
 	Environments          []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESENVIRONMENT   `json:"environments,omitempty"`
 	CloudProviders        []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER `json:"cloudProviders,omitempty"`
 	WafProviders          []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESWAFPROVIDER   `json:"wafProviders,omitempty"`
@@ -723,6 +725,70 @@ func (o *WorkflowFilterAnyOf1) HasDomains() bool {
 // SetDomains gets a reference to the given []string and assigns it to the Domains field.
 func (o *WorkflowFilterAnyOf1) SetDomains(v []string) {
 	o.Domains = v
+}
+
+// GetRootFQDNs returns the RootFQDNs field value if set, zero value otherwise.
+func (o *WorkflowFilterAnyOf1) GetRootFQDNs() []string {
+	if o == nil || IsNil(o.RootFQDNs) {
+		var ret []string
+		return ret
+	}
+	return o.RootFQDNs
+}
+
+// GetRootFQDNsOk returns a tuple with the RootFQDNs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowFilterAnyOf1) GetRootFQDNsOk() ([]string, bool) {
+	if o == nil || IsNil(o.RootFQDNs) {
+		return nil, false
+	}
+	return o.RootFQDNs, true
+}
+
+// HasRootFQDNs returns a boolean if a field has been set.
+func (o *WorkflowFilterAnyOf1) HasRootFQDNs() bool {
+	if o != nil && !IsNil(o.RootFQDNs) {
+		return true
+	}
+
+	return false
+}
+
+// SetRootFQDNs gets a reference to the given []string and assigns it to the RootFQDNs field.
+func (o *WorkflowFilterAnyOf1) SetRootFQDNs(v []string) {
+	o.RootFQDNs = v
+}
+
+// GetNoRootFQDN returns the NoRootFQDN field value if set, zero value otherwise.
+func (o *WorkflowFilterAnyOf1) GetNoRootFQDN() bool {
+	if o == nil || IsNil(o.NoRootFQDN) {
+		var ret bool
+		return ret
+	}
+	return *o.NoRootFQDN
+}
+
+// GetNoRootFQDNOk returns a tuple with the NoRootFQDN field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowFilterAnyOf1) GetNoRootFQDNOk() (*bool, bool) {
+	if o == nil || IsNil(o.NoRootFQDN) {
+		return nil, false
+	}
+	return o.NoRootFQDN, true
+}
+
+// HasNoRootFQDN returns a boolean if a field has been set.
+func (o *WorkflowFilterAnyOf1) HasNoRootFQDN() bool {
+	if o != nil && !IsNil(o.NoRootFQDN) {
+		return true
+	}
+
+	return false
+}
+
+// SetNoRootFQDN gets a reference to the given bool and assigns it to the NoRootFQDN field.
+func (o *WorkflowFilterAnyOf1) SetNoRootFQDN(v bool) {
+	o.NoRootFQDN = &v
 }
 
 // GetEnvironments returns the Environments field value if set, zero value otherwise.
@@ -1564,6 +1630,12 @@ func (o WorkflowFilterAnyOf1) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Domains) {
 		toSerialize["domains"] = o.Domains
 	}
+	if !IsNil(o.RootFQDNs) {
+		toSerialize["rootFQDNs"] = o.RootFQDNs
+	}
+	if !IsNil(o.NoRootFQDN) {
+		toSerialize["noRootFQDN"] = o.NoRootFQDN
+	}
 	if !IsNil(o.Environments) {
 		toSerialize["environments"] = o.Environments
 	}
@@ -1678,6 +1750,8 @@ func (o *WorkflowFilterAnyOf1) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "scannerKinds")
 		delete(additionalProperties, "workflowIds")
 		delete(additionalProperties, "domains")
+		delete(additionalProperties, "rootFQDNs")
+		delete(additionalProperties, "noRootFQDN")
 		delete(additionalProperties, "environments")
 		delete(additionalProperties, "cloudProviders")
 		delete(additionalProperties, "wafProviders")
