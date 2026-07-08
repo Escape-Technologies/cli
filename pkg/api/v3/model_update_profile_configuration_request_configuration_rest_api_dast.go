@@ -29,7 +29,7 @@ type UpdateProfileConfigurationRequestConfigurationRestApiDast struct {
 	Scope                    *GetProfile200ResponseConfigurationGraphqlApiDastScope                         `json:"scope,omitempty"`
 	QueryParamsAreRequired   *bool                                                                          `json:"query_params_are_required,omitempty"`
 	InScopeOnly              *bool                                                                          `json:"in_scope_only,omitempty"`
-	// Deprecated: use `maxDurationMs` on the profile instead.
+	// Deprecated: use `maxDurationMinutes` on the profile instead.
 	// Deprecated
 	MaxDuration          *float32                                      `json:"max_duration,omitempty"`
 	Mode                 *ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE    `json:"mode,omitempty"`
