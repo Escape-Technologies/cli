@@ -169,6 +169,7 @@ type GetProfile200ResponseConfigurationSecurityTests struct {
 	MassAssignment                            *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"mass_assignment,omitempty"`
 	McpUnauth                                 *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"mcp_unauth,omitempty"`
 	MfaBypass                                 *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"mfa_bypass,omitempty"`
+	NegativeValue                             *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"negative_value,omitempty"`
 	Nosql                                     *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"nosql,omitempty"`
 	FrontendNosqlInjection                    *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"frontend_nosql_injection,omitempty"`
 	PaginationMissing                         *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"pagination_missing,omitempty"`
