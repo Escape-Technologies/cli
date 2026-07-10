@@ -5151,6 +5151,38 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) SetMfaBypass(v GetProf
 	o.MfaBypass = &v
 }
 
+// GetNegativeValue returns the NegativeValue field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetNegativeValue() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.NegativeValue) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.NegativeValue
+}
+
+// GetNegativeValueOk returns a tuple with the NegativeValue field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetNegativeValueOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.NegativeValue) {
+		return nil, false
+	}
+	return o.NegativeValue, true
+}
+
+// HasNegativeValue returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasNegativeValue() bool {
+	if o != nil && !IsNil(o.NegativeValue) {
+		return true
+	}
+
+	return false
+}
+
+// SetNegativeValue gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the NegativeValue field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetNegativeValue(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.NegativeValue = &v
+}
+
 // GetNosql returns the Nosql field value if set, zero value otherwise.
 func (o *GetProfile200ResponseConfigurationSecurityTests) GetNosql() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
 	if o == nil || IsNil(o.Nosql) {
@@ -10731,6 +10763,9 @@ func (o GetProfile200ResponseConfigurationSecurityTests) ToMap() (map[string]int
 	if !IsNil(o.MfaBypass) {
 		toSerialize["mfa_bypass"] = o.MfaBypass
 	}
+	if !IsNil(o.NegativeValue) {
+		toSerialize["negative_value"] = o.NegativeValue
+	}
 	if !IsNil(o.Nosql) {
 		toSerialize["nosql"] = o.Nosql
 	}
@@ -11383,6 +11418,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) UnmarshalJSON(data []b
 		delete(additionalProperties, "mass_assignment")
 		delete(additionalProperties, "mcp_unauth")
 		delete(additionalProperties, "mfa_bypass")
+		delete(additionalProperties, "negative_value")
 		delete(additionalProperties, "nosql")
 		delete(additionalProperties, "frontend_nosql_injection")
 		delete(additionalProperties, "pagination_missing")
