@@ -61,6 +61,8 @@
   { "path": "/profiles/custom-rules/", "tokens": ["profiles", "custom", "rules"] },
   { "path": "/profiles/scans/", "tokens": ["profiles", "scans"] },
   { "path": "/profiles/security-tests/", "tokens": ["profiles", "security", "tests"] },
+  { "path": "/regression-testing/", "tokens": ["regression", "testing"] },
+  { "path": "/regression-testing/create/", "tokens": ["regression", "testing", "create"] },
   { "path": "/reporting/", "tokens": ["reporting"] },
   { "path": "/reporting/compliance/", "tokens": ["reporting", "compliance"] },
   { "path": "/reporting/exports/", "tokens": ["reporting", "exports"] },
