@@ -656,15 +656,15 @@ var (
 	trendApplicationIDs []string
 	trendProjectIDs     []string
 
-	bulkIssueStatus   string
-	setSeverity       string
-	resetSeverity     bool
-	bulkIssueIDs      []string
-	bulkIssueAssetIDs      []string
-	bulkIssueSeverities    []string
-	bulkIssueProfileIDs    []string
-	bulkIssueTagIDs        []string
-	bulkIssueScannerKinds  []string
+	bulkIssueStatus       string
+	setSeverity           string
+	resetSeverity         bool
+	bulkIssueIDs          []string
+	bulkIssueAssetIDs     []string
+	bulkIssueSeverities   []string
+	bulkIssueProfileIDs   []string
+	bulkIssueTagIDs       []string
+	bulkIssueScannerKinds []string
 
 	notifyScanID string
 )
