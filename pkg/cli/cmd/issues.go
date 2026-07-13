@@ -656,10 +656,10 @@ var (
 	trendApplicationIDs []string
 	trendProjectIDs     []string
 
-	bulkIssueStatus        string
-	bulkIssueSetSeverity   string
-	bulkIssueResetSeverity bool
-	bulkIssueIDs           []string
+	bulkIssueStatus   string
+	setSeverity       string
+	resetSeverity     bool
+	bulkIssueIDs      []string
 	bulkIssueAssetIDs      []string
 	bulkIssueSeverities    []string
 	bulkIssueProfileIDs    []string
@@ -731,22 +731,22 @@ var issueBulkUpdateCmd = &cobra.Command{
 			}
 			body.SetStatus(status)
 		}
-		if bulkIssueResetSeverity && bulkIssueSetSeverity != "" {
+		if resetSeverity && setSeverity != "" {
 			return errors.New("--reset-severity and --set-severity are mutually exclusive")
 		}
-		if bulkIssueResetSeverity {
+		if resetSeverity {
 			if body.AdditionalProperties == nil {
 				body.AdditionalProperties = make(map[string]interface{})
 			}
 			body.AdditionalProperties["severity"] = nil
-		} else if bulkIssueSetSeverity != "" {
-			severity := v3.ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY(bulkIssueSetSeverity)
+		} else if setSeverity != "" {
+			severity := v3.ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY(setSeverity)
 			if !severity.IsValid() {
-				return fmt.Errorf("invalid severity %q; valid values: %v", bulkIssueSetSeverity, v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESSEVERITYEnumValues)
+				return fmt.Errorf("invalid severity %q; valid values: %v", setSeverity, v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESSEVERITYEnumValues)
 			}
 			body.SetSeverity(severity)
 		}
-		if !body.HasStatus() && !body.HasSeverity() && !bulkIssueResetSeverity {
+		if !body.HasStatus() && !body.HasSeverity() && !resetSeverity {
 			return errors.New("at least one of --status, --set-severity, or --reset-severity is required")
 		}
 		where := v3.BulkUpdateIssuesRequestWhere{}
@@ -843,8 +843,8 @@ func init() {
 
 	issuesCmd.AddCommand(issueBulkUpdateCmd)
 	issueBulkUpdateCmd.Flags().StringVar(&bulkIssueStatus, "status", "", "new status to apply")
-	issueBulkUpdateCmd.Flags().StringVar(&bulkIssueSetSeverity, "set-severity", "", "new severity to apply")
-	issueBulkUpdateCmd.Flags().BoolVar(&bulkIssueResetSeverity, "reset-severity", false, "reset severity to the scanner value")
+	issueBulkUpdateCmd.Flags().StringVar(&setSeverity, "set-severity", "", "new severity to apply")
+	issueBulkUpdateCmd.Flags().BoolVar(&resetSeverity, "reset-severity", false, "reset severity to the scanner value")
 	issueBulkUpdateCmd.Flags().StringSliceVar(&bulkIssueIDs, "issue-id", nil, "filter by issue ID(s)")
 	issueBulkUpdateCmd.Flags().StringSliceVar(&bulkIssueAssetIDs, "asset-id", nil, "filter by asset ID(s)")
 	issueBulkUpdateCmd.Flags().StringSliceVar(&bulkIssueSeverities, "severity", nil, "filter by severity")
