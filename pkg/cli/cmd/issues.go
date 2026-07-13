@@ -660,11 +660,11 @@ var (
 	bulkIssueSetSeverity   string
 	bulkIssueResetSeverity bool
 	bulkIssueIDs           []string
-	bulkIssueAssetIDs     []string
-	bulkIssueSeverities   []string
-	bulkIssueProfileIDs   []string
-	bulkIssueTagIDs       []string
-	bulkIssueScannerKinds []string
+	bulkIssueAssetIDs      []string
+	bulkIssueSeverities    []string
+	bulkIssueProfileIDs    []string
+	bulkIssueTagIDs        []string
+	bulkIssueScannerKinds  []string
 
 	notifyScanID string
 )

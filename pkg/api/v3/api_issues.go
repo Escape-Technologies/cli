@@ -41,7 +41,7 @@ func (r ApiBulkUpdateIssuesRequest) Execute() (*BulkUpdateIssues200Response, *ht
 /*
 BulkUpdateIssues Bulk update issues
 
-Update the status of multiple issues matching a filter predicate. For example, mark all LOW severity issues on a given asset as IGNORED.
+Update the status and/or severity of multiple issues matching a filter predicate. For example, mark all LOW severity issues on a given asset as IGNORED, or reset severities to scanner values.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiBulkUpdateIssuesRequest
