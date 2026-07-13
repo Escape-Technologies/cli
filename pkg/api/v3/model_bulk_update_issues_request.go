@@ -19,9 +19,9 @@ var _ MappedNullable = &BulkUpdateIssuesRequest{}
 
 // BulkUpdateIssuesRequest struct for BulkUpdateIssuesRequest
 type BulkUpdateIssuesRequest struct {
-	Status               *ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS          `json:"status,omitempty"`
-	Severity             NullableENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY `json:"severity,omitempty"`
-	Where                *BulkUpdateIssuesRequestWhere                     `json:"where,omitempty"`
+	Status               *ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS   `json:"status,omitempty"`
+	Severity             *ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY `json:"severity,omitempty"`
+	Where                *BulkUpdateIssuesRequestWhere              `json:"where,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -76,27 +76,27 @@ func (o *BulkUpdateIssuesRequest) SetStatus(v ENUMPROPERTIESDATAITEMSPROPERTIESS
 	o.Status = &v
 }
 
-// GetSeverity returns the Severity field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetSeverity returns the Severity field value if set, zero value otherwise.
 func (o *BulkUpdateIssuesRequest) GetSeverity() ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY {
-	if o == nil || IsNil(o.Severity.Get()) {
+	if o == nil || IsNil(o.Severity) {
 		var ret ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY
 		return ret
 	}
-	return *o.Severity.Get()
+	return *o.Severity
 }
 
 // GetSeverityOk returns a tuple with the Severity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BulkUpdateIssuesRequest) GetSeverityOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Severity) {
 		return nil, false
 	}
-	return o.Severity.Get(), o.Severity.IsSet()
+	return o.Severity, true
 }
 
 // HasSeverity returns a boolean if a field has been set.
 func (o *BulkUpdateIssuesRequest) HasSeverity() bool {
-	if o != nil && o.Severity.IsSet() {
+	if o != nil && !IsNil(o.Severity) {
 		return true
 	}
 
@@ -105,17 +105,7 @@ func (o *BulkUpdateIssuesRequest) HasSeverity() bool {
 
 // SetSeverity gets a reference to the given ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY and assigns it to the Severity field.
 func (o *BulkUpdateIssuesRequest) SetSeverity(v ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY) {
-	o.Severity.Set(&v)
-}
-
-// SetSeverityNil sets the value for Severity to be an explicit nil
-func (o *BulkUpdateIssuesRequest) SetSeverityNil() {
-	o.Severity.Set(nil)
-}
-
-// UnsetSeverity ensures that no value is present for Severity, not even an explicit nil
-func (o *BulkUpdateIssuesRequest) UnsetSeverity() {
-	o.Severity.Unset()
+	o.Severity = &v
 }
 
 // GetWhere returns the Where field value if set, zero value otherwise.
@@ -163,8 +153,8 @@ func (o BulkUpdateIssuesRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
-	if o.Severity.IsSet() {
-		toSerialize["severity"] = o.Severity.Get()
+	if !IsNil(o.Severity) {
+		toSerialize["severity"] = o.Severity
 	}
 	if !IsNil(o.Where) {
 		toSerialize["where"] = o.Where
