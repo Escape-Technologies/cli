@@ -735,7 +735,10 @@ var issueBulkUpdateCmd = &cobra.Command{
 			return errors.New("--reset-severity and --set-severity are mutually exclusive")
 		}
 		if bulkIssueResetSeverity {
-			body.SetSeverityNil()
+			if body.AdditionalProperties == nil {
+				body.AdditionalProperties = make(map[string]interface{})
+			}
+			body.AdditionalProperties["severity"] = nil
 		} else if bulkIssueSetSeverity != "" {
 			severity := v3.ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY(bulkIssueSetSeverity)
 			if !severity.IsValid() {
@@ -743,7 +746,7 @@ var issueBulkUpdateCmd = &cobra.Command{
 			}
 			body.SetSeverity(severity)
 		}
-		if !body.HasStatus() && !body.HasSeverity() {
+		if !body.HasStatus() && !body.HasSeverity() && !bulkIssueResetSeverity {
 			return errors.New("at least one of --status, --set-severity, or --reset-severity is required")
 		}
 		where := v3.BulkUpdateIssuesRequestWhere{}
