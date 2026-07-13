@@ -12,7 +12,6 @@ package v3
 
 import (
 	"encoding/json"
-	"fmt"
 )
 
 // checks if the BulkUpdateIssuesRequest type satisfies the MappedNullable interface at compile time
@@ -20,8 +19,9 @@ var _ MappedNullable = &BulkUpdateIssuesRequest{}
 
 // BulkUpdateIssuesRequest struct for BulkUpdateIssuesRequest
 type BulkUpdateIssuesRequest struct {
-	Status               ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS `json:"status"`
-	Where                *BulkUpdateIssuesRequestWhere           `json:"where,omitempty"`
+	Status               *ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS          `json:"status,omitempty"`
+	Severity             NullableENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY `json:"severity,omitempty"`
+	Where                *BulkUpdateIssuesRequestWhere                     `json:"where,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -31,9 +31,8 @@ type _BulkUpdateIssuesRequest BulkUpdateIssuesRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBulkUpdateIssuesRequest(status ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS) *BulkUpdateIssuesRequest {
+func NewBulkUpdateIssuesRequest() *BulkUpdateIssuesRequest {
 	this := BulkUpdateIssuesRequest{}
-	this.Status = status
 	return &this
 }
 
@@ -45,28 +44,78 @@ func NewBulkUpdateIssuesRequestWithDefaults() *BulkUpdateIssuesRequest {
 	return &this
 }
 
-// GetStatus returns the Status field value
+// GetStatus returns the Status field value if set, zero value otherwise.
 func (o *BulkUpdateIssuesRequest) GetStatus() ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS {
-	if o == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS
 		return ret
 	}
-
-	return o.Status
+	return *o.Status
 }
 
-// GetStatusOk returns a tuple with the Status field value
+// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BulkUpdateIssuesRequest) GetStatusOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS, bool) {
+	if o == nil || IsNil(o.Status) {
+		return nil, false
+	}
+	return o.Status, true
+}
+
+// HasStatus returns a boolean if a field has been set.
+func (o *BulkUpdateIssuesRequest) HasStatus() bool {
+	if o != nil && !IsNil(o.Status) {
+		return true
+	}
+
+	return false
+}
+
+// SetStatus gets a reference to the given ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS and assigns it to the Status field.
+func (o *BulkUpdateIssuesRequest) SetStatus(v ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS) {
+	o.Status = &v
+}
+
+// GetSeverity returns the Severity field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *BulkUpdateIssuesRequest) GetSeverity() ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY {
+	if o == nil || IsNil(o.Severity.Get()) {
+		var ret ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY
+		return ret
+	}
+	return *o.Severity.Get()
+}
+
+// GetSeverityOk returns a tuple with the Severity field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BulkUpdateIssuesRequest) GetSeverityOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Status, true
+	return o.Severity.Get(), o.Severity.IsSet()
 }
 
-// SetStatus sets field value
-func (o *BulkUpdateIssuesRequest) SetStatus(v ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS) {
-	o.Status = v
+// HasSeverity returns a boolean if a field has been set.
+func (o *BulkUpdateIssuesRequest) HasSeverity() bool {
+	if o != nil && o.Severity.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetSeverity gets a reference to the given ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY and assigns it to the Severity field.
+func (o *BulkUpdateIssuesRequest) SetSeverity(v ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY) {
+	o.Severity.Set(&v)
+}
+
+// SetSeverityNil sets the value for Severity to be an explicit nil
+func (o *BulkUpdateIssuesRequest) SetSeverityNil() {
+	o.Severity.Set(nil)
+}
+
+// UnsetSeverity ensures that no value is present for Severity, not even an explicit nil
+func (o *BulkUpdateIssuesRequest) UnsetSeverity() {
+	o.Severity.Unset()
 }
 
 // GetWhere returns the Where field value if set, zero value otherwise.
@@ -111,7 +160,12 @@ func (o BulkUpdateIssuesRequest) MarshalJSON() ([]byte, error) {
 
 func (o BulkUpdateIssuesRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["status"] = o.Status
+	if !IsNil(o.Status) {
+		toSerialize["status"] = o.Status
+	}
+	if o.Severity.IsSet() {
+		toSerialize["severity"] = o.Severity.Get()
+	}
 	if !IsNil(o.Where) {
 		toSerialize["where"] = o.Where
 	}
@@ -124,27 +178,6 @@ func (o BulkUpdateIssuesRequest) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *BulkUpdateIssuesRequest) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"status",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err
-	}
-
-	for _, requiredProperty := range requiredProperties {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
 	varBulkUpdateIssuesRequest := _BulkUpdateIssuesRequest{}
 
 	err = json.Unmarshal(data, &varBulkUpdateIssuesRequest)
@@ -159,6 +192,7 @@ func (o *BulkUpdateIssuesRequest) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "status")
+		delete(additionalProperties, "severity")
 		delete(additionalProperties, "where")
 		o.AdditionalProperties = additionalProperties
 	}

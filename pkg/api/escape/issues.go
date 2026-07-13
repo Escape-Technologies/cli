@@ -243,14 +243,10 @@ func GetIssueTrends(ctx context.Context, after, before, interval string, applica
 }
 
 // BulkUpdateIssues updates multiple issues matching a filter
-func BulkUpdateIssues(ctx context.Context, status v3.ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS, where *v3.BulkUpdateIssuesRequestWhere) (*v3.BulkUpdateIssues200Response, error) {
+func BulkUpdateIssues(ctx context.Context, body v3.BulkUpdateIssuesRequest) (*v3.BulkUpdateIssues200Response, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
-	}
-	body := v3.BulkUpdateIssuesRequest{Status: status}
-	if where != nil {
-		body.Where = where
 	}
 	data, _, err := client.IssuesAPI.BulkUpdateIssues(ctx).BulkUpdateIssuesRequest(body).Execute()
 	if err != nil {
