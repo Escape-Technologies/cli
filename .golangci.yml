@@ -1,13 +1,13 @@
 ---
-version: "2"
+version: '2'
 linters:
   exclusions:
     generated: disable
     paths:
-      - "pkg/api/v2/.*.go"
-      - "pkg/api/v3/.*.go"
+      - 'pkg/api/v2/.*.go'
+      - 'pkg/api/v3/.*.go'
     rules:
-      - path: "pkg/api/escape/.*.go"
+      - path: 'pkg/api/escape/.*.go'
         linters:
           - bodyclose
   enable:
