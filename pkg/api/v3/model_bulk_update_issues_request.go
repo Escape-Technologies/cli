@@ -19,9 +19,9 @@ var _ MappedNullable = &BulkUpdateIssuesRequest{}
 
 // BulkUpdateIssuesRequest struct for BulkUpdateIssuesRequest
 type BulkUpdateIssuesRequest struct {
-	Status               *ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS   `json:"status,omitempty"`
+	Status               *BulkUpdateIssuesRequestStatus            `json:"status,omitempty"`
 	Severity             *ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY `json:"severity,omitempty"`
-	Where                *BulkUpdateIssuesRequestWhere              `json:"where,omitempty"`
+	Where                *BulkUpdateIssuesRequestWhere             `json:"where,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -45,9 +45,9 @@ func NewBulkUpdateIssuesRequestWithDefaults() *BulkUpdateIssuesRequest {
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
-func (o *BulkUpdateIssuesRequest) GetStatus() ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS {
+func (o *BulkUpdateIssuesRequest) GetStatus() BulkUpdateIssuesRequestStatus {
 	if o == nil || IsNil(o.Status) {
-		var ret ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS
+		var ret BulkUpdateIssuesRequestStatus
 		return ret
 	}
 	return *o.Status
@@ -55,7 +55,7 @@ func (o *BulkUpdateIssuesRequest) GetStatus() ENUMPROPERTIESDATAITEMSPROPERTIESS
 
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *BulkUpdateIssuesRequest) GetStatusOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS, bool) {
+func (o *BulkUpdateIssuesRequest) GetStatusOk() (*BulkUpdateIssuesRequestStatus, bool) {
 	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
@@ -71,8 +71,8 @@ func (o *BulkUpdateIssuesRequest) HasStatus() bool {
 	return false
 }
 
-// SetStatus gets a reference to the given ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS and assigns it to the Status field.
-func (o *BulkUpdateIssuesRequest) SetStatus(v ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS) {
+// SetStatus gets a reference to the given BulkUpdateIssuesRequestStatus and assigns it to the Status field.
+func (o *BulkUpdateIssuesRequest) SetStatus(v BulkUpdateIssuesRequestStatus) {
 	o.Status = &v
 }
 

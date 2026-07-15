@@ -4,7 +4,6 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"net/http"
 	"strings"
 
 	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
@@ -131,25 +130,23 @@ func ListIssues(ctx context.Context, next string, filters *ListIssuesFilters, so
 	return data.Data, data.NextCursor, nil
 }
 
-// UpdateIssue updates an issue status with an optional comment
-func UpdateIssue(ctx context.Context, issueID string, status v3.ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS, comment string) (bool, error) {
+// UpdateIssue updates an issue status with an optional reason
+func UpdateIssue(ctx context.Context, issueID string, status v3.ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS, reason string) (bool, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
 		return false, fmt.Errorf("unable to init client: %w", err)
 	}
 
-	if comment == "" {
-		comment = "Updated via CLI"
+	statusPayload := v3.NewBulkUpdateIssuesRequestStatusAnyOf(status)
+	if reason != "" {
+		statusPayload.SetReason(reason)
 	}
 	req := client.IssuesAPI.UpdateIssue(ctx, issueID).UpdateIssueRequest(v3.UpdateIssueRequest{
-		Status: &status,
-		AdditionalProperties: map[string]interface{}{
-			"comment": comment,
-		},
+		Status: &v3.UpdateIssueRequestStatus{BulkUpdateIssuesRequestStatusAnyOf: statusPayload},
 	})
 
-	_, httpRes, err := req.Execute()
-	if err != nil && httpRes.StatusCode != http.StatusOK {
+	_, _, err = req.Execute()
+	if err != nil {
 		return false, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 
