@@ -87,7 +87,7 @@ var validIssueSortFields = map[string]struct{}{
 
 var (
 	issueUpdateStatusStr string
-	issueUpdateComment   string
+	issueUpdateReason    string
 	issueSortType        string
 	issueSortDirection   string
 	issueSeverity        []string
@@ -523,7 +523,7 @@ TRACKING:
 			return fmt.Errorf("unable to get issue %s: %w", issueID, err)
 		}
 
-		isUpdated, err := escape.UpdateIssue(cmd.Context(), issueID, newStatus, issueUpdateComment)
+		isUpdated, err := escape.UpdateIssue(cmd.Context(), issueID, newStatus, issueUpdateReason)
 		if err != nil || !isUpdated {
 			return fmt.Errorf("unable to update issue %s: %w", issueID, err)
 		}
@@ -657,6 +657,7 @@ var (
 	trendProjectIDs     []string
 
 	bulkIssueStatus       string
+	bulkIssueReason       string
 	setSeverity           string
 	resetSeverity         bool
 	bulkIssueIDs          []string
@@ -729,7 +730,11 @@ var issueBulkUpdateCmd = &cobra.Command{
 			if !status.IsValid() {
 				return fmt.Errorf("invalid status %q; valid values: %v", bulkIssueStatus, v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESSTATUSEnumValues)
 			}
-			body.SetStatus(status)
+			statusPayload := v3.NewBulkUpdateIssuesRequestStatusAnyOf(status)
+			if bulkIssueReason != "" {
+				statusPayload.SetReason(bulkIssueReason)
+			}
+			body.SetStatus(v3.BulkUpdateIssuesRequestStatus{BulkUpdateIssuesRequestStatusAnyOf: statusPayload})
 		}
 		if resetSeverity && setSeverity != "" {
 			return errors.New("--reset-severity and --set-severity are mutually exclusive")
@@ -829,7 +834,9 @@ func init() {
 
 	issuesCmd.AddCommand(issueUpdateStatusCmd)
 	issueUpdateStatusCmd.Flags().StringVarP(&issueUpdateStatusStr, "status", "s", issueUpdateStatusStr, fmt.Sprintf("new status for the issue: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESSTATUSEnumValues))
-	issueUpdateStatusCmd.Flags().StringVar(&issueUpdateComment, "comment", "", "optional comment explaining the status change")
+	issueUpdateStatusCmd.Flags().StringVar(&issueUpdateReason, "reason", "", "reason for the status change")
+	issueUpdateStatusCmd.Flags().StringVar(&issueUpdateReason, "comment", "", "deprecated: use --reason")
+	_ = issueUpdateStatusCmd.Flags().MarkDeprecated("comment", "use --reason instead")
 
 	issuesCmd.AddCommand(issueFunnelCmd)
 	issueFunnelCmd.Flags().StringSliceVar(&funnelProjectIDs, "project-id", nil, "filter by project ID(s)")
@@ -843,6 +850,7 @@ func init() {
 
 	issuesCmd.AddCommand(issueBulkUpdateCmd)
 	issueBulkUpdateCmd.Flags().StringVar(&bulkIssueStatus, "status", "", "new status to apply")
+	issueBulkUpdateCmd.Flags().StringVar(&bulkIssueReason, "reason", "", "reason for the status change")
 	issueBulkUpdateCmd.Flags().StringVar(&setSeverity, "set-severity", "", "new severity to apply")
 	issueBulkUpdateCmd.Flags().BoolVar(&resetSeverity, "reset-severity", false, "reset severity to the scanner value")
 	issueBulkUpdateCmd.Flags().StringSliceVar(&bulkIssueIDs, "issue-id", nil, "filter by issue ID(s)")

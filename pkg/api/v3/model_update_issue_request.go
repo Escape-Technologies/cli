@@ -19,8 +19,8 @@ var _ MappedNullable = &UpdateIssueRequest{}
 
 // UpdateIssueRequest struct for UpdateIssueRequest
 type UpdateIssueRequest struct {
-	Status               *ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS   `json:"status,omitempty"`
-	Severity             *ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY `json:"severity,omitempty"`
+	Status *UpdateIssueRequestStatus `json:"status,omitempty"`
+	Severity NullableUpdateIssueRequestSeverity `json:"severity,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -44,9 +44,9 @@ func NewUpdateIssueRequestWithDefaults() *UpdateIssueRequest {
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
-func (o *UpdateIssueRequest) GetStatus() ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS {
+func (o *UpdateIssueRequest) GetStatus() UpdateIssueRequestStatus {
 	if o == nil || IsNil(o.Status) {
-		var ret ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS
+		var ret UpdateIssueRequestStatus
 		return ret
 	}
 	return *o.Status
@@ -54,7 +54,7 @@ func (o *UpdateIssueRequest) GetStatus() ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS
 
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateIssueRequest) GetStatusOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS, bool) {
+func (o *UpdateIssueRequest) GetStatusOk() (*UpdateIssueRequestStatus, bool) {
 	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
@@ -70,45 +70,55 @@ func (o *UpdateIssueRequest) HasStatus() bool {
 	return false
 }
 
-// SetStatus gets a reference to the given ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS and assigns it to the Status field.
-func (o *UpdateIssueRequest) SetStatus(v ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS) {
+// SetStatus gets a reference to the given UpdateIssueRequestStatus and assigns it to the Status field.
+func (o *UpdateIssueRequest) SetStatus(v UpdateIssueRequestStatus) {
 	o.Status = &v
 }
 
-// GetSeverity returns the Severity field value if set, zero value otherwise.
-func (o *UpdateIssueRequest) GetSeverity() ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY {
-	if o == nil || IsNil(o.Severity) {
-		var ret ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY
+// GetSeverity returns the Severity field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *UpdateIssueRequest) GetSeverity() UpdateIssueRequestSeverity {
+	if o == nil || IsNil(o.Severity.Get()) {
+		var ret UpdateIssueRequestSeverity
 		return ret
 	}
-	return *o.Severity
+	return *o.Severity.Get()
 }
 
 // GetSeverityOk returns a tuple with the Severity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateIssueRequest) GetSeverityOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY, bool) {
-	if o == nil || IsNil(o.Severity) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *UpdateIssueRequest) GetSeverityOk() (*UpdateIssueRequestSeverity, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Severity, true
+	return o.Severity.Get(), o.Severity.IsSet()
 }
 
 // HasSeverity returns a boolean if a field has been set.
 func (o *UpdateIssueRequest) HasSeverity() bool {
-	if o != nil && !IsNil(o.Severity) {
+	if o != nil && o.Severity.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSeverity gets a reference to the given ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY and assigns it to the Severity field.
-func (o *UpdateIssueRequest) SetSeverity(v ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY) {
-	o.Severity = &v
+// SetSeverity gets a reference to the given NullableUpdateIssueRequestSeverity and assigns it to the Severity field.
+func (o *UpdateIssueRequest) SetSeverity(v UpdateIssueRequestSeverity) {
+	o.Severity.Set(&v)
+}
+// SetSeverityNil sets the value for Severity to be an explicit nil
+func (o *UpdateIssueRequest) SetSeverityNil() {
+	o.Severity.Set(nil)
+}
+
+// UnsetSeverity ensures that no value is present for Severity, not even an explicit nil
+func (o *UpdateIssueRequest) UnsetSeverity() {
+	o.Severity.Unset()
 }
 
 func (o UpdateIssueRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -120,8 +130,8 @@ func (o UpdateIssueRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
-	if !IsNil(o.Severity) {
-		toSerialize["severity"] = o.Severity
+	if o.Severity.IsSet() {
+		toSerialize["severity"] = o.Severity.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -188,3 +198,5 @@ func (v *NullableUpdateIssueRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
