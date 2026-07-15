@@ -740,18 +740,17 @@ var issueBulkUpdateCmd = &cobra.Command{
 			return errors.New("--reset-severity and --set-severity are mutually exclusive")
 		}
 		if resetSeverity {
-			if body.AdditionalProperties == nil {
-				body.AdditionalProperties = make(map[string]interface{})
-			}
-			body.AdditionalProperties["severity"] = nil
+			body.SetSeverityNil()
 		} else if setSeverity != "" {
 			severity := v3.ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY(setSeverity)
 			if !severity.IsValid() {
 				return fmt.Errorf("invalid severity %q; valid values: %v", setSeverity, v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESSEVERITYEnumValues)
 			}
-			body.SetSeverity(severity)
+			severityPayload := v3.NewBulkUpdateIssuesRequestSeverityAnyOf()
+			severityPayload.SetValue(severity)
+			body.SetSeverity(v3.BulkUpdateIssuesRequestSeverity{BulkUpdateIssuesRequestSeverityAnyOf: severityPayload})
 		}
-		if !body.HasStatus() && !body.HasSeverity() && !resetSeverity {
+		if !body.HasStatus() && !body.HasSeverity() {
 			return errors.New("at least one of --status, --set-severity, or --reset-severity is required")
 		}
 		where := v3.BulkUpdateIssuesRequestWhere{}
