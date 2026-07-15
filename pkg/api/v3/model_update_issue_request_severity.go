@@ -15,11 +15,10 @@ import (
 	"fmt"
 )
 
-
 // UpdateIssueRequestSeverity The issue severity
 type UpdateIssueRequestSeverity struct {
+	BulkUpdateIssuesRequestSeverityAnyOf      *BulkUpdateIssuesRequestSeverityAnyOf
 	ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY *ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY
-	UpdateIssueRequestSeverityAnyOf *UpdateIssueRequestSeverityAnyOf
 }
 
 // Unmarshal JSON data into any of the pointers in the struct
@@ -30,8 +29,21 @@ func (dst *UpdateIssueRequestSeverity) UnmarshalJSON(data []byte) error {
 		return nil
 	}
 
+	// try to unmarshal JSON data into BulkUpdateIssuesRequestSeverityAnyOf
+	err = json.Unmarshal(data, &dst.BulkUpdateIssuesRequestSeverityAnyOf)
+	if err == nil {
+		jsonBulkUpdateIssuesRequestSeverityAnyOf, _ := json.Marshal(dst.BulkUpdateIssuesRequestSeverityAnyOf)
+		if string(jsonBulkUpdateIssuesRequestSeverityAnyOf) == "{}" { // empty struct
+			dst.BulkUpdateIssuesRequestSeverityAnyOf = nil
+		} else {
+			return nil // data stored in dst.BulkUpdateIssuesRequestSeverityAnyOf, return on the first match
+		}
+	} else {
+		dst.BulkUpdateIssuesRequestSeverityAnyOf = nil
+	}
+
 	// try to unmarshal JSON data into ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY
-	err = json.Unmarshal(data, &dst.ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY);
+	err = json.Unmarshal(data, &dst.ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY)
 	if err == nil {
 		jsonENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY, _ := json.Marshal(dst.ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY)
 		if string(jsonENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY) == "{}" { // empty struct
@@ -43,35 +55,21 @@ func (dst *UpdateIssueRequestSeverity) UnmarshalJSON(data []byte) error {
 		dst.ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY = nil
 	}
 
-	// try to unmarshal JSON data into UpdateIssueRequestSeverityAnyOf
-	err = json.Unmarshal(data, &dst.UpdateIssueRequestSeverityAnyOf);
-	if err == nil {
-		jsonUpdateIssueRequestSeverityAnyOf, _ := json.Marshal(dst.UpdateIssueRequestSeverityAnyOf)
-		if string(jsonUpdateIssueRequestSeverityAnyOf) == "{}" { // empty struct
-			dst.UpdateIssueRequestSeverityAnyOf = nil
-		} else {
-			return nil // data stored in dst.UpdateIssueRequestSeverityAnyOf, return on the first match
-		}
-	} else {
-		dst.UpdateIssueRequestSeverityAnyOf = nil
-	}
-
 	return fmt.Errorf("data failed to match schemas in anyOf(UpdateIssueRequestSeverity)")
 }
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src UpdateIssueRequestSeverity) MarshalJSON() ([]byte, error) {
+	if src.BulkUpdateIssuesRequestSeverityAnyOf != nil {
+		return json.Marshal(&src.BulkUpdateIssuesRequestSeverityAnyOf)
+	}
+
 	if src.ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY != nil {
 		return json.Marshal(&src.ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY)
 	}
 
-	if src.UpdateIssueRequestSeverityAnyOf != nil {
-		return json.Marshal(&src.UpdateIssueRequestSeverityAnyOf)
-	}
-
 	return nil, nil // no data in anyOf schemas
 }
-
 
 type NullableUpdateIssueRequestSeverity struct {
 	value *UpdateIssueRequestSeverity
@@ -108,5 +106,3 @@ func (v *NullableUpdateIssueRequestSeverity) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

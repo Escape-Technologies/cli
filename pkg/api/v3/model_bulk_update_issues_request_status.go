@@ -15,10 +15,9 @@ import (
 	"fmt"
 )
 
-
 // BulkUpdateIssuesRequestStatus The new status to apply
 type BulkUpdateIssuesRequestStatus struct {
-	BulkUpdateIssuesRequestStatusAnyOf *BulkUpdateIssuesRequestStatusAnyOf
+	BulkUpdateIssuesRequestStatusAnyOf      *BulkUpdateIssuesRequestStatusAnyOf
 	ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS *ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS
 }
 
@@ -26,7 +25,7 @@ type BulkUpdateIssuesRequestStatus struct {
 func (dst *BulkUpdateIssuesRequestStatus) UnmarshalJSON(data []byte) error {
 	var err error
 	// try to unmarshal JSON data into BulkUpdateIssuesRequestStatusAnyOf
-	err = json.Unmarshal(data, &dst.BulkUpdateIssuesRequestStatusAnyOf);
+	err = json.Unmarshal(data, &dst.BulkUpdateIssuesRequestStatusAnyOf)
 	if err == nil {
 		jsonBulkUpdateIssuesRequestStatusAnyOf, _ := json.Marshal(dst.BulkUpdateIssuesRequestStatusAnyOf)
 		if string(jsonBulkUpdateIssuesRequestStatusAnyOf) == "{}" { // empty struct
@@ -39,7 +38,7 @@ func (dst *BulkUpdateIssuesRequestStatus) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal JSON data into ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS
-	err = json.Unmarshal(data, &dst.ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS);
+	err = json.Unmarshal(data, &dst.ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS)
 	if err == nil {
 		jsonENUMPROPERTIESDATAITEMSPROPERTIESSTATUS, _ := json.Marshal(dst.ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS)
 		if string(jsonENUMPROPERTIESDATAITEMSPROPERTIESSTATUS) == "{}" { // empty struct
@@ -66,7 +65,6 @@ func (src BulkUpdateIssuesRequestStatus) MarshalJSON() ([]byte, error) {
 
 	return nil, nil // no data in anyOf schemas
 }
-
 
 type NullableBulkUpdateIssuesRequestStatus struct {
 	value *BulkUpdateIssuesRequestStatus
@@ -103,5 +101,3 @@ func (v *NullableBulkUpdateIssuesRequestStatus) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

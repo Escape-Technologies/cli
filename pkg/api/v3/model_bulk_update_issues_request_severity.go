@@ -15,10 +15,9 @@ import (
 	"fmt"
 )
 
-
 // BulkUpdateIssuesRequestSeverity The new severity to apply. Pass null to reset to the scanner severity.
 type BulkUpdateIssuesRequestSeverity struct {
-	BulkUpdateIssuesRequestSeverityAnyOf *BulkUpdateIssuesRequestSeverityAnyOf
+	BulkUpdateIssuesRequestSeverityAnyOf      *BulkUpdateIssuesRequestSeverityAnyOf
 	ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY *ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY
 }
 
@@ -31,7 +30,7 @@ func (dst *BulkUpdateIssuesRequestSeverity) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal JSON data into BulkUpdateIssuesRequestSeverityAnyOf
-	err = json.Unmarshal(data, &dst.BulkUpdateIssuesRequestSeverityAnyOf);
+	err = json.Unmarshal(data, &dst.BulkUpdateIssuesRequestSeverityAnyOf)
 	if err == nil {
 		jsonBulkUpdateIssuesRequestSeverityAnyOf, _ := json.Marshal(dst.BulkUpdateIssuesRequestSeverityAnyOf)
 		if string(jsonBulkUpdateIssuesRequestSeverityAnyOf) == "{}" { // empty struct
@@ -44,7 +43,7 @@ func (dst *BulkUpdateIssuesRequestSeverity) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal JSON data into ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY
-	err = json.Unmarshal(data, &dst.ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY);
+	err = json.Unmarshal(data, &dst.ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY)
 	if err == nil {
 		jsonENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY, _ := json.Marshal(dst.ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY)
 		if string(jsonENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY) == "{}" { // empty struct
@@ -71,7 +70,6 @@ func (src BulkUpdateIssuesRequestSeverity) MarshalJSON() ([]byte, error) {
 
 	return nil, nil // no data in anyOf schemas
 }
-
 
 type NullableBulkUpdateIssuesRequestSeverity struct {
 	value *BulkUpdateIssuesRequestSeverity
@@ -108,5 +106,3 @@ func (v *NullableBulkUpdateIssuesRequestSeverity) UnmarshalJSON(src []byte) erro
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
