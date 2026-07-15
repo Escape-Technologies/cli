@@ -19,8 +19,8 @@ var _ MappedNullable = &UpdateIssueRequest{}
 
 // UpdateIssueRequest struct for UpdateIssueRequest
 type UpdateIssueRequest struct {
-	Status *UpdateIssueRequestStatus `json:"status,omitempty"`
-	Severity NullableUpdateIssueRequestSeverity `json:"severity,omitempty"`
+	Status               *UpdateIssueRequestStatus          `json:"status,omitempty"`
+	Severity             NullableUpdateIssueRequestSeverity `json:"severity,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -107,6 +107,7 @@ func (o *UpdateIssueRequest) HasSeverity() bool {
 func (o *UpdateIssueRequest) SetSeverity(v UpdateIssueRequestSeverity) {
 	o.Severity.Set(&v)
 }
+
 // SetSeverityNil sets the value for Severity to be an explicit nil
 func (o *UpdateIssueRequest) SetSeverityNil() {
 	o.Severity.Set(nil)
@@ -118,7 +119,7 @@ func (o *UpdateIssueRequest) UnsetSeverity() {
 }
 
 func (o UpdateIssueRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -198,5 +199,3 @@ func (v *NullableUpdateIssueRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

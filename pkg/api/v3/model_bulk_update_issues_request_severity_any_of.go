@@ -21,7 +21,7 @@ var _ MappedNullable = &BulkUpdateIssuesRequestSeverityAnyOf{}
 type BulkUpdateIssuesRequestSeverityAnyOf struct {
 	Value *ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY `json:"value,omitempty"`
 	// Reason for the change (required if your organization enforces it)
-	Reason *string `json:"reason,omitempty"`
+	Reason               *string `json:"reason,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -109,7 +109,7 @@ func (o *BulkUpdateIssuesRequestSeverityAnyOf) SetReason(v string) {
 }
 
 func (o BulkUpdateIssuesRequestSeverityAnyOf) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -189,5 +189,3 @@ func (v *NullableBulkUpdateIssuesRequestSeverityAnyOf) UnmarshalJSON(src []byte)
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

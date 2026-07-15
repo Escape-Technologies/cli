@@ -19,9 +19,9 @@ var _ MappedNullable = &BulkUpdateIssuesRequest{}
 
 // BulkUpdateIssuesRequest struct for BulkUpdateIssuesRequest
 type BulkUpdateIssuesRequest struct {
-	Status *BulkUpdateIssuesRequestStatus `json:"status,omitempty"`
-	Severity NullableBulkUpdateIssuesRequestSeverity `json:"severity,omitempty"`
-	Where *BulkUpdateIssuesRequestWhere `json:"where,omitempty"`
+	Status               *BulkUpdateIssuesRequestStatus          `json:"status,omitempty"`
+	Severity             NullableBulkUpdateIssuesRequestSeverity `json:"severity,omitempty"`
+	Where                *BulkUpdateIssuesRequestWhere           `json:"where,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -108,6 +108,7 @@ func (o *BulkUpdateIssuesRequest) HasSeverity() bool {
 func (o *BulkUpdateIssuesRequest) SetSeverity(v BulkUpdateIssuesRequestSeverity) {
 	o.Severity.Set(&v)
 }
+
 // SetSeverityNil sets the value for Severity to be an explicit nil
 func (o *BulkUpdateIssuesRequest) SetSeverityNil() {
 	o.Severity.Set(nil)
@@ -151,7 +152,7 @@ func (o *BulkUpdateIssuesRequest) SetWhere(v BulkUpdateIssuesRequestWhere) {
 }
 
 func (o BulkUpdateIssuesRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -235,5 +236,3 @@ func (v *NullableBulkUpdateIssuesRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
