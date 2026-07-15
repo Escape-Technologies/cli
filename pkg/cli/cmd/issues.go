@@ -657,6 +657,8 @@ var (
 	trendProjectIDs     []string
 
 	bulkIssueStatus       string
+	setSeverity           string
+	resetSeverity         bool
 	bulkIssueIDs          []string
 	bulkIssueAssetIDs     []string
 	bulkIssueSeverities   []string
@@ -718,13 +720,35 @@ var issueTrendsCmd = &cobra.Command{
 
 var issueBulkUpdateCmd = &cobra.Command{
 	Use:   "bulk-update",
-	Short: "Update status of multiple issues matching a filter",
-	Long:  `Bulk update the status of issues. For example, mark all LOW severity issues on a given asset as IGNORED.`,
+	Short: "Update status and/or severity of multiple issues matching a filter",
+	Long:  `Bulk update issues. For example, mark all LOW severity issues on a given asset as IGNORED, or reset severities to scanner values.`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
-		if bulkIssueStatus == "" {
-			return errors.New("--status is required")
+		body := v3.NewBulkUpdateIssuesRequestWithDefaults()
+		if bulkIssueStatus != "" {
+			status := v3.ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS(bulkIssueStatus)
+			if !status.IsValid() {
+				return fmt.Errorf("invalid status %q; valid values: %v", bulkIssueStatus, v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESSTATUSEnumValues)
+			}
+			body.SetStatus(status)
 		}
-		status := v3.ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS(bulkIssueStatus)
+		if resetSeverity && setSeverity != "" {
+			return errors.New("--reset-severity and --set-severity are mutually exclusive")
+		}
+		if resetSeverity {
+			if body.AdditionalProperties == nil {
+				body.AdditionalProperties = make(map[string]interface{})
+			}
+			body.AdditionalProperties["severity"] = nil
+		} else if setSeverity != "" {
+			severity := v3.ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY(setSeverity)
+			if !severity.IsValid() {
+				return fmt.Errorf("invalid severity %q; valid values: %v", setSeverity, v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESSEVERITYEnumValues)
+			}
+			body.SetSeverity(severity)
+		}
+		if !body.HasStatus() && !body.HasSeverity() && !resetSeverity {
+			return errors.New("at least one of --status, --set-severity, or --reset-severity is required")
+		}
 		where := v3.BulkUpdateIssuesRequestWhere{}
 		if len(bulkIssueIDs) > 0 {
 			where.Ids = bulkIssueIDs
@@ -752,7 +776,8 @@ var issueBulkUpdateCmd = &cobra.Command{
 			}
 			where.ScannerKinds = kinds
 		}
-		result, err := escape.BulkUpdateIssues(cmd.Context(), status, &where)
+		body.SetWhere(where)
+		result, err := escape.BulkUpdateIssues(cmd.Context(), *body)
 		if err != nil {
 			return fmt.Errorf("unable to bulk update issues: %w", err)
 		}
@@ -817,7 +842,9 @@ func init() {
 	issueTrendsCmd.Flags().StringSliceVar(&trendProjectIDs, "project-id", nil, "filter by project ID(s)")
 
 	issuesCmd.AddCommand(issueBulkUpdateCmd)
-	issueBulkUpdateCmd.Flags().StringVar(&bulkIssueStatus, "status", "", "new status to apply (required)")
+	issueBulkUpdateCmd.Flags().StringVar(&bulkIssueStatus, "status", "", "new status to apply")
+	issueBulkUpdateCmd.Flags().StringVar(&setSeverity, "set-severity", "", "new severity to apply")
+	issueBulkUpdateCmd.Flags().BoolVar(&resetSeverity, "reset-severity", false, "reset severity to the scanner value")
 	issueBulkUpdateCmd.Flags().StringSliceVar(&bulkIssueIDs, "issue-id", nil, "filter by issue ID(s)")
 	issueBulkUpdateCmd.Flags().StringSliceVar(&bulkIssueAssetIDs, "asset-id", nil, "filter by asset ID(s)")
 	issueBulkUpdateCmd.Flags().StringSliceVar(&bulkIssueSeverities, "severity", nil, "filter by severity")
