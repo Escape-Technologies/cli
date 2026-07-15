@@ -1,51 +1,51 @@
 ---
-name: "Escape CLI"
-author: "Escape Technologies"
-description: "Run the Escape CLI in GitHub Actions."
+name: 'Escape CLI'
+author: 'Escape Technologies'
+description: 'Run the Escape CLI in GitHub Actions.'
 
 inputs:
   profile_id:
-    description: "The id of the profile to scan"
+    description: 'The id of the profile to scan'
     required: true
   api_key:
-    description: "Your escape api key"
+    description: 'Your escape api key'
     required: true
   configuration_override:
-    description: "Partial JSON configuration for the scan"
+    description: 'Partial JSON configuration for the scan'
     required: false
   schema:
-    description: "The schema local path or publicly accessible URL. If provided, it will update the schema for the application"
+    description: 'The schema local path or publicly accessible URL. If provided, it will update the schema for the application'
     required: false
   watch:
-    description: "Wait until the scan ends and print the results"
+    description: 'Wait until the scan ends and print the results'
     required: false
-    default: "false"
+    default: 'false'
   cli_image:
-    description: "Override the CLI Docker image. Defaults to the released version."
+    description: 'Override the CLI Docker image. Defaults to the released version.'
     required: false
 
   # Deprecated
   timeout:
-    description: "Maximum blocking time for a CI/CD run"
+    description: 'Maximum blocking time for a CI/CD run'
     required: false
-    deprecationMessage: "Deprecated"
+    deprecationMessage: 'Deprecated'
   configuration_override_path:
-    description: "Path to JSON file containing a partial configuration for the scan"
+    description: 'Path to JSON file containing a partial configuration for the scan'
     required: false
-    deprecationMessage: "Deprecated, use configuration_override instead"
+    deprecationMessage: 'Deprecated, use configuration_override instead'
   introspection_file:
-    description: "Path to the introspection response file"
+    description: 'Path to the introspection response file'
     required: false
-    deprecationMessage: "Deprecated, use schema instead"
+    deprecationMessage: 'Deprecated, use schema instead'
   schema_file:
-    description: "Path to the schema file"
+    description: 'Path to the schema file'
     required: false
-    deprecationMessage: "Deprecated, use schema instead"
+    deprecationMessage: 'Deprecated, use schema instead'
   fail_on_severities:
-    description: "A csv-delimited list of severities to fail on, can be HIGH, MEDIUM, LOW, INFO"
-    default: "HIGH"
+    description: 'A csv-delimited list of severities to fail on, can be HIGH, MEDIUM, LOW, INFO'
+    default: 'HIGH'
     required: false
-    deprecationMessage: "Deprecated"
+    deprecationMessage: 'Deprecated'
 runs:
   using: composite
   steps:
@@ -91,5 +91,5 @@ runs:
         printf '%q ' "${args[@]}"; echo
         run_cli "${args[@]}"
 branding:
-  icon: "shield"
-  color: "white"
+  icon: 'shield'
+  color: 'white'
