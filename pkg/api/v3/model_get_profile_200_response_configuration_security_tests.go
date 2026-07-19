@@ -77,6 +77,7 @@ type GetProfile200ResponseConfigurationSecurityTests struct {
 	Cve202425723                              *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"cve_2024_25723,omitempty"`
 	Cve202432651                              *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"cve_2024_32651,omitempty"`
 	Cve202440711                              *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"cve_2024_40711,omitempty"`
+	Cve202663030                              *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"cve_2026_63030,omitempty"`
 	CsrfPostBased                             *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"csrf_post_based,omitempty"`
 	FrontendCsrfGetBased                      *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"frontend_csrf_get_based,omitempty"`
 	FrontendCsrfPostBased                     *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"frontend_csrf_post_based,omitempty"`
@@ -2206,6 +2207,38 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) HasCve202440711() bool
 // SetCve202440711 gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the Cve202440711 field.
 func (o *GetProfile200ResponseConfigurationSecurityTests) SetCve202440711(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
 	o.Cve202440711 = &v
+}
+
+// GetCve202663030 returns the Cve202663030 field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetCve202663030() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.Cve202663030) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.Cve202663030
+}
+
+// GetCve202663030Ok returns a tuple with the Cve202663030 field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetCve202663030Ok() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.Cve202663030) {
+		return nil, false
+	}
+	return o.Cve202663030, true
+}
+
+// HasCve202663030 returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasCve202663030() bool {
+	if o != nil && !IsNil(o.Cve202663030) {
+		return true
+	}
+
+	return false
+}
+
+// SetCve202663030 gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the Cve202663030 field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetCve202663030(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.Cve202663030 = &v
 }
 
 // GetCsrfPostBased returns the CsrfPostBased field value if set, zero value otherwise.
@@ -10488,6 +10521,9 @@ func (o GetProfile200ResponseConfigurationSecurityTests) ToMap() (map[string]int
 	if !IsNil(o.Cve202440711) {
 		toSerialize["cve_2024_40711"] = o.Cve202440711
 	}
+	if !IsNil(o.Cve202663030) {
+		toSerialize["cve_2026_63030"] = o.Cve202663030
+	}
 	if !IsNil(o.CsrfPostBased) {
 		toSerialize["csrf_post_based"] = o.CsrfPostBased
 	}
@@ -11327,6 +11363,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) UnmarshalJSON(data []b
 		delete(additionalProperties, "cve_2024_25723")
 		delete(additionalProperties, "cve_2024_32651")
 		delete(additionalProperties, "cve_2024_40711")
+		delete(additionalProperties, "cve_2026_63030")
 		delete(additionalProperties, "csrf_post_based")
 		delete(additionalProperties, "frontend_csrf_get_based")
 		delete(additionalProperties, "frontend_csrf_post_based")
