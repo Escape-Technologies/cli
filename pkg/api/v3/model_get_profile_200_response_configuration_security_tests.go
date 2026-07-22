@@ -162,9 +162,11 @@ type GetProfile200ResponseConfigurationSecurityTests struct {
 	ImproperInputXssReflection                *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"improper_input_xss_reflection,omitempty"`
 	IntrospectionEnabled                      *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"introspection_enabled,omitempty"`
 	JwtAlgConfusion                           *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"jwt_alg_confusion,omitempty"`
+	JwtAlgConfusionRsToHs                     *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"jwt_alg_confusion_rs_to_hs,omitempty"`
 	JwtAlgNone                                *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"jwt_alg_none,omitempty"`
 	ExposedJwt                                *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"exposed_jwt,omitempty"`
 	JwtSignCheck                              *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"jwt_sign_check,omitempty"`
+	JwtWeakSecret                             *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"jwt_weak_secret,omitempty"`
 	LeakingAuthentication                     *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"leaking_authentication,omitempty"`
 	LlmPromptInjection                        *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"llm_prompt_injection,omitempty"`
 	LlmSystemPromptLeak                       *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"llm_system_prompt_leak,omitempty"`
@@ -4996,6 +4998,38 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) SetJwtAlgConfusion(v G
 	o.JwtAlgConfusion = &v
 }
 
+// GetJwtAlgConfusionRsToHs returns the JwtAlgConfusionRsToHs field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetJwtAlgConfusionRsToHs() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.JwtAlgConfusionRsToHs) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.JwtAlgConfusionRsToHs
+}
+
+// GetJwtAlgConfusionRsToHsOk returns a tuple with the JwtAlgConfusionRsToHs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetJwtAlgConfusionRsToHsOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.JwtAlgConfusionRsToHs) {
+		return nil, false
+	}
+	return o.JwtAlgConfusionRsToHs, true
+}
+
+// HasJwtAlgConfusionRsToHs returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasJwtAlgConfusionRsToHs() bool {
+	if o != nil && !IsNil(o.JwtAlgConfusionRsToHs) {
+		return true
+	}
+
+	return false
+}
+
+// SetJwtAlgConfusionRsToHs gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the JwtAlgConfusionRsToHs field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetJwtAlgConfusionRsToHs(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.JwtAlgConfusionRsToHs = &v
+}
+
 // GetJwtAlgNone returns the JwtAlgNone field value if set, zero value otherwise.
 func (o *GetProfile200ResponseConfigurationSecurityTests) GetJwtAlgNone() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
 	if o == nil || IsNil(o.JwtAlgNone) {
@@ -5090,6 +5124,38 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) HasJwtSignCheck() bool
 // SetJwtSignCheck gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the JwtSignCheck field.
 func (o *GetProfile200ResponseConfigurationSecurityTests) SetJwtSignCheck(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
 	o.JwtSignCheck = &v
+}
+
+// GetJwtWeakSecret returns the JwtWeakSecret field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetJwtWeakSecret() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.JwtWeakSecret) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.JwtWeakSecret
+}
+
+// GetJwtWeakSecretOk returns a tuple with the JwtWeakSecret field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetJwtWeakSecretOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.JwtWeakSecret) {
+		return nil, false
+	}
+	return o.JwtWeakSecret, true
+}
+
+// HasJwtWeakSecret returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasJwtWeakSecret() bool {
+	if o != nil && !IsNil(o.JwtWeakSecret) {
+		return true
+	}
+
+	return false
+}
+
+// SetJwtWeakSecret gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the JwtWeakSecret field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetJwtWeakSecret(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.JwtWeakSecret = &v
 }
 
 // GetLeakingAuthentication returns the LeakingAuthentication field value if set, zero value otherwise.
@@ -12987,6 +13053,9 @@ func (o GetProfile200ResponseConfigurationSecurityTests) ToMap() (map[string]int
 	if !IsNil(o.JwtAlgConfusion) {
 		toSerialize["jwt_alg_confusion"] = o.JwtAlgConfusion
 	}
+	if !IsNil(o.JwtAlgConfusionRsToHs) {
+		toSerialize["jwt_alg_confusion_rs_to_hs"] = o.JwtAlgConfusionRsToHs
+	}
 	if !IsNil(o.JwtAlgNone) {
 		toSerialize["jwt_alg_none"] = o.JwtAlgNone
 	}
@@ -12995,6 +13064,9 @@ func (o GetProfile200ResponseConfigurationSecurityTests) ToMap() (map[string]int
 	}
 	if !IsNil(o.JwtSignCheck) {
 		toSerialize["jwt_sign_check"] = o.JwtSignCheck
+	}
+	if !IsNil(o.JwtWeakSecret) {
+		toSerialize["jwt_weak_secret"] = o.JwtWeakSecret
 	}
 	if !IsNil(o.LeakingAuthentication) {
 		toSerialize["leaking_authentication"] = o.LeakingAuthentication
@@ -13860,9 +13932,11 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) UnmarshalJSON(data []b
 		delete(additionalProperties, "improper_input_xss_reflection")
 		delete(additionalProperties, "introspection_enabled")
 		delete(additionalProperties, "jwt_alg_confusion")
+		delete(additionalProperties, "jwt_alg_confusion_rs_to_hs")
 		delete(additionalProperties, "jwt_alg_none")
 		delete(additionalProperties, "exposed_jwt")
 		delete(additionalProperties, "jwt_sign_check")
+		delete(additionalProperties, "jwt_weak_secret")
 		delete(additionalProperties, "leaking_authentication")
 		delete(additionalProperties, "llm_prompt_injection")
 		delete(additionalProperties, "llm_system_prompt_leak")
