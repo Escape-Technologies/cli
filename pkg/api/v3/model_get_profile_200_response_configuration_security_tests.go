@@ -204,6 +204,68 @@ type GetProfile200ResponseConfigurationSecurityTests struct {
 	SqlInjectionOracleBased                   *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"sql_injection_oracle_based,omitempty"`
 	SslCertificate                            *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"ssl_certificate,omitempty"`
 	Ssl                                       *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"ssl,omitempty"`
+	IssueSslAnonymousNullCiphers              *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_anonymous_null_ciphers,omitempty"`
+	IssueSslBeastCbcCiphersPresent            *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_beast_cbc_ciphers_present,omitempty"`
+	IssueSslBeastTls10CbcCiphers              *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_beast_tls10_cbc_ciphers,omitempty"`
+	IssueSslBrokenChainOfTrust                *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_broken_chain_of_trust,omitempty"`
+	IssueSslCcsInjectionVulnerability         *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_ccs_injection_vulnerability,omitempty"`
+	IssueSslCertificateRevocationStatusIssue  *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_certificate_revocation_status_issue,omitempty"`
+	IssueSslCrimeTlsCompression               *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_crime_tls_compression,omitempty"`
+	IssueSslDrownVulnerability                *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_drown_vulnerability,omitempty"`
+	IssueSslExcessiveServerCertificates       *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_excessive_server_certificates,omitempty"`
+	IssueSslImproperCertificateChainOrder     *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_improper_certificate_chain_order,omitempty"`
+	IssueSslImproperCertificateEku            *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_improper_certificate_eku,omitempty"`
+	IssueSslImproperCertificateKeyUsage       *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_improper_certificate_key_usage,omitempty"`
+	IssueSslImproperCipherSuiteOrder          *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_improper_cipher_suite_order,omitempty"`
+	IssueSslImproperTls10CipherOrder          *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_improper_tls10_cipher_order,omitempty"`
+	IssueSslImproperTls11CipherOrder          *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_improper_tls11_cipher_order,omitempty"`
+	IssueSslImproperTls12CipherOrder          *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_improper_tls12_cipher_order,omitempty"`
+	IssueSslImproperTls13CipherOrder          *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_improper_tls13_cipher_order,omitempty"`
+	IssueSslImproperTlsHandshakeTimestamp     *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_improper_tls_handshake_timestamp,omitempty"`
+	IssueSslInsecureProtocolNegotiation       *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_insecure_protocol_negotiation,omitempty"`
+	IssueSslInsufficientCertificateKeySize    *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_insufficient_certificate_key_size,omitempty"`
+	IssueSslInvalidCertificateValidityPeriod  *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_invalid_certificate_validity_period,omitempty"`
+	IssueSslLogjamCommonPrimes                *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_logjam_common_primes,omitempty"`
+	IssueSslMisconfiguredSan                  *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_misconfigured_san,omitempty"`
+	IssueSslMisconfiguredTls12                *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_misconfigured_tls12,omitempty"`
+	IssueSslMismatchedCertificateCommonName   *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_mismatched_certificate_common_name,omitempty"`
+	IssueSslMismatchedCommonNameWithoutSni    *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_mismatched_common_name_without_sni,omitempty"`
+	IssueSslMissingAlpn                       *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_missing_alpn,omitempty"`
+	IssueSslMissingCertificateTransparency    *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_missing_certificate_transparency,omitempty"`
+	IssueSslMissingCrlDistributionPoints      *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_missing_crl_distribution_points,omitempty"`
+	IssueSslMissingEtls                       *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_missing_etls,omitempty"`
+	IssueSslMissingEvCertificatePolicies      *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_missing_ev_certificate_policies,omitempty"`
+	IssueSslMissingMustStaple                 *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_missing_must_staple,omitempty"`
+	IssueSslMissingNpn                        *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_missing_npn,omitempty"`
+	IssueSslMissingOcspStapling               *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_missing_ocsp_stapling,omitempty"`
+	IssueSslMissingOcspUrls                   *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_missing_ocsp_urls,omitempty"`
+	IssueSslMissingSecureClientRenegotiation  *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_missing_secure_client_renegotiation,omitempty"`
+	IssueSslMissingSecureRenegotiation        *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_missing_secure_renegotiation,omitempty"`
+	IssueSslMissingSessionResumptionIds       *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_missing_session_resumption_ids,omitempty"`
+	IssueSslMissingSessionResumptionTickets   *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_missing_session_resumption_tickets,omitempty"`
+	IssueSslMissingSslSessionIdSupport        *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_missing_ssl_session_id_support,omitempty"`
+	IssueSslMissingTls13Support               *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_missing_tls13_support,omitempty"`
+	IssueSslMissingTlsExtensions              *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_missing_tls_extensions,omitempty"`
+	IssueSslMissingTlsFallbackScsv            *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_missing_tls_fallback_scsv,omitempty"`
+	IssueSslMissingTlsSessionTickets          *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_missing_tls_session_tickets,omitempty"`
+	IssueSslNonCompliantCertificateDetails    *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_non_compliant_certificate_details,omitempty"`
+	IssueSslNullCiphers                       *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_null_ciphers,omitempty"`
+	IssueSslRc4CipherUsage                    *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_rc4_cipher_usage,omitempty"`
+	IssueSslRevokedCertificateOcsp            *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_revoked_certificate_ocsp,omitempty"`
+	IssueSslRobotVulnerability                *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_robot_vulnerability,omitempty"`
+	IssueSslSha1CertificateFingerprint        *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_sha1_certificate_fingerprint,omitempty"`
+	IssueSslSslv2Support                      *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_sslv2_support,omitempty"`
+	IssueSslSweet32Vulnerability              *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_sweet32_vulnerability,omitempty"`
+	IssueSslTicketbleedVulnerability          *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_ticketbleed_vulnerability,omitempty"`
+	IssueSslTls10Support                      *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_tls10_support,omitempty"`
+	IssueSslTls11Support                      *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_tls11_support,omitempty"`
+	IssueSslUntrustedCertificate              *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_untrusted_certificate,omitempty"`
+	IssueSslUntrustedCertificateAuthorities   *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_untrusted_certificate_authorities,omitempty"`
+	IssueSslWeak3desIdeaCiphers               *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_weak_3des_idea_ciphers,omitempty"`
+	IssueSslWeakCertificateSignatureAlgorithm *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_weak_certificate_signature_algorithm,omitempty"`
+	IssueSslWeakCipherNegotiation             *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_weak_cipher_negotiation,omitempty"`
+	IssueSslWeakLowSecurityCiphers            *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_weak_low_security_ciphers,omitempty"`
+	IssueSslWeakPreRfc128bitCiphers           *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_weak_pre_rfc_128bit_ciphers,omitempty"`
 	Ssrf                                      *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"ssrf,omitempty"`
 	Ssti                                      *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"ssti,omitempty"`
 	FrontendSsrfHeader                        *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"frontend_ssrf_header,omitempty"`
@@ -6278,6 +6340,1990 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) SetSsl(v GetProfile200
 	o.Ssl = &v
 }
 
+// GetIssueSslAnonymousNullCiphers returns the IssueSslAnonymousNullCiphers field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslAnonymousNullCiphers() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslAnonymousNullCiphers) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslAnonymousNullCiphers
+}
+
+// GetIssueSslAnonymousNullCiphersOk returns a tuple with the IssueSslAnonymousNullCiphers field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslAnonymousNullCiphersOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslAnonymousNullCiphers) {
+		return nil, false
+	}
+	return o.IssueSslAnonymousNullCiphers, true
+}
+
+// HasIssueSslAnonymousNullCiphers returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslAnonymousNullCiphers() bool {
+	if o != nil && !IsNil(o.IssueSslAnonymousNullCiphers) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslAnonymousNullCiphers gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslAnonymousNullCiphers field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslAnonymousNullCiphers(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslAnonymousNullCiphers = &v
+}
+
+// GetIssueSslBeastCbcCiphersPresent returns the IssueSslBeastCbcCiphersPresent field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslBeastCbcCiphersPresent() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslBeastCbcCiphersPresent) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslBeastCbcCiphersPresent
+}
+
+// GetIssueSslBeastCbcCiphersPresentOk returns a tuple with the IssueSslBeastCbcCiphersPresent field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslBeastCbcCiphersPresentOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslBeastCbcCiphersPresent) {
+		return nil, false
+	}
+	return o.IssueSslBeastCbcCiphersPresent, true
+}
+
+// HasIssueSslBeastCbcCiphersPresent returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslBeastCbcCiphersPresent() bool {
+	if o != nil && !IsNil(o.IssueSslBeastCbcCiphersPresent) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslBeastCbcCiphersPresent gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslBeastCbcCiphersPresent field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslBeastCbcCiphersPresent(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslBeastCbcCiphersPresent = &v
+}
+
+// GetIssueSslBeastTls10CbcCiphers returns the IssueSslBeastTls10CbcCiphers field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslBeastTls10CbcCiphers() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslBeastTls10CbcCiphers) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslBeastTls10CbcCiphers
+}
+
+// GetIssueSslBeastTls10CbcCiphersOk returns a tuple with the IssueSslBeastTls10CbcCiphers field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslBeastTls10CbcCiphersOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslBeastTls10CbcCiphers) {
+		return nil, false
+	}
+	return o.IssueSslBeastTls10CbcCiphers, true
+}
+
+// HasIssueSslBeastTls10CbcCiphers returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslBeastTls10CbcCiphers() bool {
+	if o != nil && !IsNil(o.IssueSslBeastTls10CbcCiphers) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslBeastTls10CbcCiphers gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslBeastTls10CbcCiphers field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslBeastTls10CbcCiphers(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslBeastTls10CbcCiphers = &v
+}
+
+// GetIssueSslBrokenChainOfTrust returns the IssueSslBrokenChainOfTrust field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslBrokenChainOfTrust() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslBrokenChainOfTrust) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslBrokenChainOfTrust
+}
+
+// GetIssueSslBrokenChainOfTrustOk returns a tuple with the IssueSslBrokenChainOfTrust field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslBrokenChainOfTrustOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslBrokenChainOfTrust) {
+		return nil, false
+	}
+	return o.IssueSslBrokenChainOfTrust, true
+}
+
+// HasIssueSslBrokenChainOfTrust returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslBrokenChainOfTrust() bool {
+	if o != nil && !IsNil(o.IssueSslBrokenChainOfTrust) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslBrokenChainOfTrust gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslBrokenChainOfTrust field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslBrokenChainOfTrust(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslBrokenChainOfTrust = &v
+}
+
+// GetIssueSslCcsInjectionVulnerability returns the IssueSslCcsInjectionVulnerability field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslCcsInjectionVulnerability() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslCcsInjectionVulnerability) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslCcsInjectionVulnerability
+}
+
+// GetIssueSslCcsInjectionVulnerabilityOk returns a tuple with the IssueSslCcsInjectionVulnerability field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslCcsInjectionVulnerabilityOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslCcsInjectionVulnerability) {
+		return nil, false
+	}
+	return o.IssueSslCcsInjectionVulnerability, true
+}
+
+// HasIssueSslCcsInjectionVulnerability returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslCcsInjectionVulnerability() bool {
+	if o != nil && !IsNil(o.IssueSslCcsInjectionVulnerability) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslCcsInjectionVulnerability gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslCcsInjectionVulnerability field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslCcsInjectionVulnerability(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslCcsInjectionVulnerability = &v
+}
+
+// GetIssueSslCertificateRevocationStatusIssue returns the IssueSslCertificateRevocationStatusIssue field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslCertificateRevocationStatusIssue() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslCertificateRevocationStatusIssue) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslCertificateRevocationStatusIssue
+}
+
+// GetIssueSslCertificateRevocationStatusIssueOk returns a tuple with the IssueSslCertificateRevocationStatusIssue field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslCertificateRevocationStatusIssueOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslCertificateRevocationStatusIssue) {
+		return nil, false
+	}
+	return o.IssueSslCertificateRevocationStatusIssue, true
+}
+
+// HasIssueSslCertificateRevocationStatusIssue returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslCertificateRevocationStatusIssue() bool {
+	if o != nil && !IsNil(o.IssueSslCertificateRevocationStatusIssue) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslCertificateRevocationStatusIssue gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslCertificateRevocationStatusIssue field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslCertificateRevocationStatusIssue(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslCertificateRevocationStatusIssue = &v
+}
+
+// GetIssueSslCrimeTlsCompression returns the IssueSslCrimeTlsCompression field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslCrimeTlsCompression() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslCrimeTlsCompression) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslCrimeTlsCompression
+}
+
+// GetIssueSslCrimeTlsCompressionOk returns a tuple with the IssueSslCrimeTlsCompression field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslCrimeTlsCompressionOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslCrimeTlsCompression) {
+		return nil, false
+	}
+	return o.IssueSslCrimeTlsCompression, true
+}
+
+// HasIssueSslCrimeTlsCompression returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslCrimeTlsCompression() bool {
+	if o != nil && !IsNil(o.IssueSslCrimeTlsCompression) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslCrimeTlsCompression gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslCrimeTlsCompression field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslCrimeTlsCompression(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslCrimeTlsCompression = &v
+}
+
+// GetIssueSslDrownVulnerability returns the IssueSslDrownVulnerability field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslDrownVulnerability() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslDrownVulnerability) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslDrownVulnerability
+}
+
+// GetIssueSslDrownVulnerabilityOk returns a tuple with the IssueSslDrownVulnerability field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslDrownVulnerabilityOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslDrownVulnerability) {
+		return nil, false
+	}
+	return o.IssueSslDrownVulnerability, true
+}
+
+// HasIssueSslDrownVulnerability returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslDrownVulnerability() bool {
+	if o != nil && !IsNil(o.IssueSslDrownVulnerability) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslDrownVulnerability gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslDrownVulnerability field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslDrownVulnerability(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslDrownVulnerability = &v
+}
+
+// GetIssueSslExcessiveServerCertificates returns the IssueSslExcessiveServerCertificates field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslExcessiveServerCertificates() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslExcessiveServerCertificates) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslExcessiveServerCertificates
+}
+
+// GetIssueSslExcessiveServerCertificatesOk returns a tuple with the IssueSslExcessiveServerCertificates field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslExcessiveServerCertificatesOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslExcessiveServerCertificates) {
+		return nil, false
+	}
+	return o.IssueSslExcessiveServerCertificates, true
+}
+
+// HasIssueSslExcessiveServerCertificates returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslExcessiveServerCertificates() bool {
+	if o != nil && !IsNil(o.IssueSslExcessiveServerCertificates) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslExcessiveServerCertificates gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslExcessiveServerCertificates field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslExcessiveServerCertificates(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslExcessiveServerCertificates = &v
+}
+
+// GetIssueSslImproperCertificateChainOrder returns the IssueSslImproperCertificateChainOrder field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslImproperCertificateChainOrder() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslImproperCertificateChainOrder) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslImproperCertificateChainOrder
+}
+
+// GetIssueSslImproperCertificateChainOrderOk returns a tuple with the IssueSslImproperCertificateChainOrder field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslImproperCertificateChainOrderOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslImproperCertificateChainOrder) {
+		return nil, false
+	}
+	return o.IssueSslImproperCertificateChainOrder, true
+}
+
+// HasIssueSslImproperCertificateChainOrder returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslImproperCertificateChainOrder() bool {
+	if o != nil && !IsNil(o.IssueSslImproperCertificateChainOrder) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslImproperCertificateChainOrder gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslImproperCertificateChainOrder field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslImproperCertificateChainOrder(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslImproperCertificateChainOrder = &v
+}
+
+// GetIssueSslImproperCertificateEku returns the IssueSslImproperCertificateEku field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslImproperCertificateEku() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslImproperCertificateEku) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslImproperCertificateEku
+}
+
+// GetIssueSslImproperCertificateEkuOk returns a tuple with the IssueSslImproperCertificateEku field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslImproperCertificateEkuOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslImproperCertificateEku) {
+		return nil, false
+	}
+	return o.IssueSslImproperCertificateEku, true
+}
+
+// HasIssueSslImproperCertificateEku returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslImproperCertificateEku() bool {
+	if o != nil && !IsNil(o.IssueSslImproperCertificateEku) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslImproperCertificateEku gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslImproperCertificateEku field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslImproperCertificateEku(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslImproperCertificateEku = &v
+}
+
+// GetIssueSslImproperCertificateKeyUsage returns the IssueSslImproperCertificateKeyUsage field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslImproperCertificateKeyUsage() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslImproperCertificateKeyUsage) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslImproperCertificateKeyUsage
+}
+
+// GetIssueSslImproperCertificateKeyUsageOk returns a tuple with the IssueSslImproperCertificateKeyUsage field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslImproperCertificateKeyUsageOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslImproperCertificateKeyUsage) {
+		return nil, false
+	}
+	return o.IssueSslImproperCertificateKeyUsage, true
+}
+
+// HasIssueSslImproperCertificateKeyUsage returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslImproperCertificateKeyUsage() bool {
+	if o != nil && !IsNil(o.IssueSslImproperCertificateKeyUsage) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslImproperCertificateKeyUsage gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslImproperCertificateKeyUsage field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslImproperCertificateKeyUsage(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslImproperCertificateKeyUsage = &v
+}
+
+// GetIssueSslImproperCipherSuiteOrder returns the IssueSslImproperCipherSuiteOrder field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslImproperCipherSuiteOrder() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslImproperCipherSuiteOrder) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslImproperCipherSuiteOrder
+}
+
+// GetIssueSslImproperCipherSuiteOrderOk returns a tuple with the IssueSslImproperCipherSuiteOrder field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslImproperCipherSuiteOrderOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslImproperCipherSuiteOrder) {
+		return nil, false
+	}
+	return o.IssueSslImproperCipherSuiteOrder, true
+}
+
+// HasIssueSslImproperCipherSuiteOrder returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslImproperCipherSuiteOrder() bool {
+	if o != nil && !IsNil(o.IssueSslImproperCipherSuiteOrder) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslImproperCipherSuiteOrder gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslImproperCipherSuiteOrder field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslImproperCipherSuiteOrder(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslImproperCipherSuiteOrder = &v
+}
+
+// GetIssueSslImproperTls10CipherOrder returns the IssueSslImproperTls10CipherOrder field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslImproperTls10CipherOrder() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslImproperTls10CipherOrder) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslImproperTls10CipherOrder
+}
+
+// GetIssueSslImproperTls10CipherOrderOk returns a tuple with the IssueSslImproperTls10CipherOrder field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslImproperTls10CipherOrderOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslImproperTls10CipherOrder) {
+		return nil, false
+	}
+	return o.IssueSslImproperTls10CipherOrder, true
+}
+
+// HasIssueSslImproperTls10CipherOrder returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslImproperTls10CipherOrder() bool {
+	if o != nil && !IsNil(o.IssueSslImproperTls10CipherOrder) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslImproperTls10CipherOrder gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslImproperTls10CipherOrder field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslImproperTls10CipherOrder(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslImproperTls10CipherOrder = &v
+}
+
+// GetIssueSslImproperTls11CipherOrder returns the IssueSslImproperTls11CipherOrder field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslImproperTls11CipherOrder() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslImproperTls11CipherOrder) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslImproperTls11CipherOrder
+}
+
+// GetIssueSslImproperTls11CipherOrderOk returns a tuple with the IssueSslImproperTls11CipherOrder field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslImproperTls11CipherOrderOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslImproperTls11CipherOrder) {
+		return nil, false
+	}
+	return o.IssueSslImproperTls11CipherOrder, true
+}
+
+// HasIssueSslImproperTls11CipherOrder returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslImproperTls11CipherOrder() bool {
+	if o != nil && !IsNil(o.IssueSslImproperTls11CipherOrder) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslImproperTls11CipherOrder gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslImproperTls11CipherOrder field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslImproperTls11CipherOrder(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslImproperTls11CipherOrder = &v
+}
+
+// GetIssueSslImproperTls12CipherOrder returns the IssueSslImproperTls12CipherOrder field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslImproperTls12CipherOrder() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslImproperTls12CipherOrder) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslImproperTls12CipherOrder
+}
+
+// GetIssueSslImproperTls12CipherOrderOk returns a tuple with the IssueSslImproperTls12CipherOrder field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslImproperTls12CipherOrderOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslImproperTls12CipherOrder) {
+		return nil, false
+	}
+	return o.IssueSslImproperTls12CipherOrder, true
+}
+
+// HasIssueSslImproperTls12CipherOrder returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslImproperTls12CipherOrder() bool {
+	if o != nil && !IsNil(o.IssueSslImproperTls12CipherOrder) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslImproperTls12CipherOrder gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslImproperTls12CipherOrder field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslImproperTls12CipherOrder(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslImproperTls12CipherOrder = &v
+}
+
+// GetIssueSslImproperTls13CipherOrder returns the IssueSslImproperTls13CipherOrder field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslImproperTls13CipherOrder() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslImproperTls13CipherOrder) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslImproperTls13CipherOrder
+}
+
+// GetIssueSslImproperTls13CipherOrderOk returns a tuple with the IssueSslImproperTls13CipherOrder field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslImproperTls13CipherOrderOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslImproperTls13CipherOrder) {
+		return nil, false
+	}
+	return o.IssueSslImproperTls13CipherOrder, true
+}
+
+// HasIssueSslImproperTls13CipherOrder returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslImproperTls13CipherOrder() bool {
+	if o != nil && !IsNil(o.IssueSslImproperTls13CipherOrder) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslImproperTls13CipherOrder gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslImproperTls13CipherOrder field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslImproperTls13CipherOrder(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslImproperTls13CipherOrder = &v
+}
+
+// GetIssueSslImproperTlsHandshakeTimestamp returns the IssueSslImproperTlsHandshakeTimestamp field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslImproperTlsHandshakeTimestamp() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslImproperTlsHandshakeTimestamp) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslImproperTlsHandshakeTimestamp
+}
+
+// GetIssueSslImproperTlsHandshakeTimestampOk returns a tuple with the IssueSslImproperTlsHandshakeTimestamp field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslImproperTlsHandshakeTimestampOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslImproperTlsHandshakeTimestamp) {
+		return nil, false
+	}
+	return o.IssueSslImproperTlsHandshakeTimestamp, true
+}
+
+// HasIssueSslImproperTlsHandshakeTimestamp returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslImproperTlsHandshakeTimestamp() bool {
+	if o != nil && !IsNil(o.IssueSslImproperTlsHandshakeTimestamp) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslImproperTlsHandshakeTimestamp gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslImproperTlsHandshakeTimestamp field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslImproperTlsHandshakeTimestamp(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslImproperTlsHandshakeTimestamp = &v
+}
+
+// GetIssueSslInsecureProtocolNegotiation returns the IssueSslInsecureProtocolNegotiation field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslInsecureProtocolNegotiation() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslInsecureProtocolNegotiation) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslInsecureProtocolNegotiation
+}
+
+// GetIssueSslInsecureProtocolNegotiationOk returns a tuple with the IssueSslInsecureProtocolNegotiation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslInsecureProtocolNegotiationOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslInsecureProtocolNegotiation) {
+		return nil, false
+	}
+	return o.IssueSslInsecureProtocolNegotiation, true
+}
+
+// HasIssueSslInsecureProtocolNegotiation returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslInsecureProtocolNegotiation() bool {
+	if o != nil && !IsNil(o.IssueSslInsecureProtocolNegotiation) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslInsecureProtocolNegotiation gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslInsecureProtocolNegotiation field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslInsecureProtocolNegotiation(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslInsecureProtocolNegotiation = &v
+}
+
+// GetIssueSslInsufficientCertificateKeySize returns the IssueSslInsufficientCertificateKeySize field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslInsufficientCertificateKeySize() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslInsufficientCertificateKeySize) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslInsufficientCertificateKeySize
+}
+
+// GetIssueSslInsufficientCertificateKeySizeOk returns a tuple with the IssueSslInsufficientCertificateKeySize field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslInsufficientCertificateKeySizeOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslInsufficientCertificateKeySize) {
+		return nil, false
+	}
+	return o.IssueSslInsufficientCertificateKeySize, true
+}
+
+// HasIssueSslInsufficientCertificateKeySize returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslInsufficientCertificateKeySize() bool {
+	if o != nil && !IsNil(o.IssueSslInsufficientCertificateKeySize) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslInsufficientCertificateKeySize gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslInsufficientCertificateKeySize field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslInsufficientCertificateKeySize(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslInsufficientCertificateKeySize = &v
+}
+
+// GetIssueSslInvalidCertificateValidityPeriod returns the IssueSslInvalidCertificateValidityPeriod field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslInvalidCertificateValidityPeriod() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslInvalidCertificateValidityPeriod) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslInvalidCertificateValidityPeriod
+}
+
+// GetIssueSslInvalidCertificateValidityPeriodOk returns a tuple with the IssueSslInvalidCertificateValidityPeriod field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslInvalidCertificateValidityPeriodOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslInvalidCertificateValidityPeriod) {
+		return nil, false
+	}
+	return o.IssueSslInvalidCertificateValidityPeriod, true
+}
+
+// HasIssueSslInvalidCertificateValidityPeriod returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslInvalidCertificateValidityPeriod() bool {
+	if o != nil && !IsNil(o.IssueSslInvalidCertificateValidityPeriod) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslInvalidCertificateValidityPeriod gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslInvalidCertificateValidityPeriod field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslInvalidCertificateValidityPeriod(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslInvalidCertificateValidityPeriod = &v
+}
+
+// GetIssueSslLogjamCommonPrimes returns the IssueSslLogjamCommonPrimes field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslLogjamCommonPrimes() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslLogjamCommonPrimes) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslLogjamCommonPrimes
+}
+
+// GetIssueSslLogjamCommonPrimesOk returns a tuple with the IssueSslLogjamCommonPrimes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslLogjamCommonPrimesOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslLogjamCommonPrimes) {
+		return nil, false
+	}
+	return o.IssueSslLogjamCommonPrimes, true
+}
+
+// HasIssueSslLogjamCommonPrimes returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslLogjamCommonPrimes() bool {
+	if o != nil && !IsNil(o.IssueSslLogjamCommonPrimes) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslLogjamCommonPrimes gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslLogjamCommonPrimes field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslLogjamCommonPrimes(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslLogjamCommonPrimes = &v
+}
+
+// GetIssueSslMisconfiguredSan returns the IssueSslMisconfiguredSan field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslMisconfiguredSan() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslMisconfiguredSan) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslMisconfiguredSan
+}
+
+// GetIssueSslMisconfiguredSanOk returns a tuple with the IssueSslMisconfiguredSan field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslMisconfiguredSanOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslMisconfiguredSan) {
+		return nil, false
+	}
+	return o.IssueSslMisconfiguredSan, true
+}
+
+// HasIssueSslMisconfiguredSan returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslMisconfiguredSan() bool {
+	if o != nil && !IsNil(o.IssueSslMisconfiguredSan) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslMisconfiguredSan gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslMisconfiguredSan field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslMisconfiguredSan(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslMisconfiguredSan = &v
+}
+
+// GetIssueSslMisconfiguredTls12 returns the IssueSslMisconfiguredTls12 field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslMisconfiguredTls12() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslMisconfiguredTls12) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslMisconfiguredTls12
+}
+
+// GetIssueSslMisconfiguredTls12Ok returns a tuple with the IssueSslMisconfiguredTls12 field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslMisconfiguredTls12Ok() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslMisconfiguredTls12) {
+		return nil, false
+	}
+	return o.IssueSslMisconfiguredTls12, true
+}
+
+// HasIssueSslMisconfiguredTls12 returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslMisconfiguredTls12() bool {
+	if o != nil && !IsNil(o.IssueSslMisconfiguredTls12) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslMisconfiguredTls12 gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslMisconfiguredTls12 field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslMisconfiguredTls12(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslMisconfiguredTls12 = &v
+}
+
+// GetIssueSslMismatchedCertificateCommonName returns the IssueSslMismatchedCertificateCommonName field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslMismatchedCertificateCommonName() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslMismatchedCertificateCommonName) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslMismatchedCertificateCommonName
+}
+
+// GetIssueSslMismatchedCertificateCommonNameOk returns a tuple with the IssueSslMismatchedCertificateCommonName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslMismatchedCertificateCommonNameOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslMismatchedCertificateCommonName) {
+		return nil, false
+	}
+	return o.IssueSslMismatchedCertificateCommonName, true
+}
+
+// HasIssueSslMismatchedCertificateCommonName returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslMismatchedCertificateCommonName() bool {
+	if o != nil && !IsNil(o.IssueSslMismatchedCertificateCommonName) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslMismatchedCertificateCommonName gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslMismatchedCertificateCommonName field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslMismatchedCertificateCommonName(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslMismatchedCertificateCommonName = &v
+}
+
+// GetIssueSslMismatchedCommonNameWithoutSni returns the IssueSslMismatchedCommonNameWithoutSni field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslMismatchedCommonNameWithoutSni() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslMismatchedCommonNameWithoutSni) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslMismatchedCommonNameWithoutSni
+}
+
+// GetIssueSslMismatchedCommonNameWithoutSniOk returns a tuple with the IssueSslMismatchedCommonNameWithoutSni field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslMismatchedCommonNameWithoutSniOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslMismatchedCommonNameWithoutSni) {
+		return nil, false
+	}
+	return o.IssueSslMismatchedCommonNameWithoutSni, true
+}
+
+// HasIssueSslMismatchedCommonNameWithoutSni returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslMismatchedCommonNameWithoutSni() bool {
+	if o != nil && !IsNil(o.IssueSslMismatchedCommonNameWithoutSni) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslMismatchedCommonNameWithoutSni gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslMismatchedCommonNameWithoutSni field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslMismatchedCommonNameWithoutSni(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslMismatchedCommonNameWithoutSni = &v
+}
+
+// GetIssueSslMissingAlpn returns the IssueSslMissingAlpn field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslMissingAlpn() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslMissingAlpn) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslMissingAlpn
+}
+
+// GetIssueSslMissingAlpnOk returns a tuple with the IssueSslMissingAlpn field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslMissingAlpnOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslMissingAlpn) {
+		return nil, false
+	}
+	return o.IssueSslMissingAlpn, true
+}
+
+// HasIssueSslMissingAlpn returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslMissingAlpn() bool {
+	if o != nil && !IsNil(o.IssueSslMissingAlpn) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslMissingAlpn gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslMissingAlpn field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslMissingAlpn(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslMissingAlpn = &v
+}
+
+// GetIssueSslMissingCertificateTransparency returns the IssueSslMissingCertificateTransparency field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslMissingCertificateTransparency() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslMissingCertificateTransparency) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslMissingCertificateTransparency
+}
+
+// GetIssueSslMissingCertificateTransparencyOk returns a tuple with the IssueSslMissingCertificateTransparency field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslMissingCertificateTransparencyOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslMissingCertificateTransparency) {
+		return nil, false
+	}
+	return o.IssueSslMissingCertificateTransparency, true
+}
+
+// HasIssueSslMissingCertificateTransparency returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslMissingCertificateTransparency() bool {
+	if o != nil && !IsNil(o.IssueSslMissingCertificateTransparency) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslMissingCertificateTransparency gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslMissingCertificateTransparency field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslMissingCertificateTransparency(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslMissingCertificateTransparency = &v
+}
+
+// GetIssueSslMissingCrlDistributionPoints returns the IssueSslMissingCrlDistributionPoints field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslMissingCrlDistributionPoints() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslMissingCrlDistributionPoints) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslMissingCrlDistributionPoints
+}
+
+// GetIssueSslMissingCrlDistributionPointsOk returns a tuple with the IssueSslMissingCrlDistributionPoints field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslMissingCrlDistributionPointsOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslMissingCrlDistributionPoints) {
+		return nil, false
+	}
+	return o.IssueSslMissingCrlDistributionPoints, true
+}
+
+// HasIssueSslMissingCrlDistributionPoints returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslMissingCrlDistributionPoints() bool {
+	if o != nil && !IsNil(o.IssueSslMissingCrlDistributionPoints) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslMissingCrlDistributionPoints gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslMissingCrlDistributionPoints field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslMissingCrlDistributionPoints(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslMissingCrlDistributionPoints = &v
+}
+
+// GetIssueSslMissingEtls returns the IssueSslMissingEtls field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslMissingEtls() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslMissingEtls) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslMissingEtls
+}
+
+// GetIssueSslMissingEtlsOk returns a tuple with the IssueSslMissingEtls field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslMissingEtlsOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslMissingEtls) {
+		return nil, false
+	}
+	return o.IssueSslMissingEtls, true
+}
+
+// HasIssueSslMissingEtls returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslMissingEtls() bool {
+	if o != nil && !IsNil(o.IssueSslMissingEtls) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslMissingEtls gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslMissingEtls field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslMissingEtls(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslMissingEtls = &v
+}
+
+// GetIssueSslMissingEvCertificatePolicies returns the IssueSslMissingEvCertificatePolicies field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslMissingEvCertificatePolicies() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslMissingEvCertificatePolicies) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslMissingEvCertificatePolicies
+}
+
+// GetIssueSslMissingEvCertificatePoliciesOk returns a tuple with the IssueSslMissingEvCertificatePolicies field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslMissingEvCertificatePoliciesOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslMissingEvCertificatePolicies) {
+		return nil, false
+	}
+	return o.IssueSslMissingEvCertificatePolicies, true
+}
+
+// HasIssueSslMissingEvCertificatePolicies returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslMissingEvCertificatePolicies() bool {
+	if o != nil && !IsNil(o.IssueSslMissingEvCertificatePolicies) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslMissingEvCertificatePolicies gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslMissingEvCertificatePolicies field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslMissingEvCertificatePolicies(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslMissingEvCertificatePolicies = &v
+}
+
+// GetIssueSslMissingMustStaple returns the IssueSslMissingMustStaple field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslMissingMustStaple() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslMissingMustStaple) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslMissingMustStaple
+}
+
+// GetIssueSslMissingMustStapleOk returns a tuple with the IssueSslMissingMustStaple field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslMissingMustStapleOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslMissingMustStaple) {
+		return nil, false
+	}
+	return o.IssueSslMissingMustStaple, true
+}
+
+// HasIssueSslMissingMustStaple returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslMissingMustStaple() bool {
+	if o != nil && !IsNil(o.IssueSslMissingMustStaple) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslMissingMustStaple gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslMissingMustStaple field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslMissingMustStaple(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslMissingMustStaple = &v
+}
+
+// GetIssueSslMissingNpn returns the IssueSslMissingNpn field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslMissingNpn() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslMissingNpn) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslMissingNpn
+}
+
+// GetIssueSslMissingNpnOk returns a tuple with the IssueSslMissingNpn field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslMissingNpnOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslMissingNpn) {
+		return nil, false
+	}
+	return o.IssueSslMissingNpn, true
+}
+
+// HasIssueSslMissingNpn returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslMissingNpn() bool {
+	if o != nil && !IsNil(o.IssueSslMissingNpn) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslMissingNpn gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslMissingNpn field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslMissingNpn(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslMissingNpn = &v
+}
+
+// GetIssueSslMissingOcspStapling returns the IssueSslMissingOcspStapling field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslMissingOcspStapling() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslMissingOcspStapling) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslMissingOcspStapling
+}
+
+// GetIssueSslMissingOcspStaplingOk returns a tuple with the IssueSslMissingOcspStapling field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslMissingOcspStaplingOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslMissingOcspStapling) {
+		return nil, false
+	}
+	return o.IssueSslMissingOcspStapling, true
+}
+
+// HasIssueSslMissingOcspStapling returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslMissingOcspStapling() bool {
+	if o != nil && !IsNil(o.IssueSslMissingOcspStapling) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslMissingOcspStapling gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslMissingOcspStapling field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslMissingOcspStapling(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslMissingOcspStapling = &v
+}
+
+// GetIssueSslMissingOcspUrls returns the IssueSslMissingOcspUrls field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslMissingOcspUrls() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslMissingOcspUrls) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslMissingOcspUrls
+}
+
+// GetIssueSslMissingOcspUrlsOk returns a tuple with the IssueSslMissingOcspUrls field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslMissingOcspUrlsOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslMissingOcspUrls) {
+		return nil, false
+	}
+	return o.IssueSslMissingOcspUrls, true
+}
+
+// HasIssueSslMissingOcspUrls returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslMissingOcspUrls() bool {
+	if o != nil && !IsNil(o.IssueSslMissingOcspUrls) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslMissingOcspUrls gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslMissingOcspUrls field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslMissingOcspUrls(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslMissingOcspUrls = &v
+}
+
+// GetIssueSslMissingSecureClientRenegotiation returns the IssueSslMissingSecureClientRenegotiation field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslMissingSecureClientRenegotiation() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslMissingSecureClientRenegotiation) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslMissingSecureClientRenegotiation
+}
+
+// GetIssueSslMissingSecureClientRenegotiationOk returns a tuple with the IssueSslMissingSecureClientRenegotiation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslMissingSecureClientRenegotiationOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslMissingSecureClientRenegotiation) {
+		return nil, false
+	}
+	return o.IssueSslMissingSecureClientRenegotiation, true
+}
+
+// HasIssueSslMissingSecureClientRenegotiation returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslMissingSecureClientRenegotiation() bool {
+	if o != nil && !IsNil(o.IssueSslMissingSecureClientRenegotiation) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslMissingSecureClientRenegotiation gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslMissingSecureClientRenegotiation field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslMissingSecureClientRenegotiation(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslMissingSecureClientRenegotiation = &v
+}
+
+// GetIssueSslMissingSecureRenegotiation returns the IssueSslMissingSecureRenegotiation field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslMissingSecureRenegotiation() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslMissingSecureRenegotiation) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslMissingSecureRenegotiation
+}
+
+// GetIssueSslMissingSecureRenegotiationOk returns a tuple with the IssueSslMissingSecureRenegotiation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslMissingSecureRenegotiationOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslMissingSecureRenegotiation) {
+		return nil, false
+	}
+	return o.IssueSslMissingSecureRenegotiation, true
+}
+
+// HasIssueSslMissingSecureRenegotiation returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslMissingSecureRenegotiation() bool {
+	if o != nil && !IsNil(o.IssueSslMissingSecureRenegotiation) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslMissingSecureRenegotiation gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslMissingSecureRenegotiation field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslMissingSecureRenegotiation(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslMissingSecureRenegotiation = &v
+}
+
+// GetIssueSslMissingSessionResumptionIds returns the IssueSslMissingSessionResumptionIds field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslMissingSessionResumptionIds() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslMissingSessionResumptionIds) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslMissingSessionResumptionIds
+}
+
+// GetIssueSslMissingSessionResumptionIdsOk returns a tuple with the IssueSslMissingSessionResumptionIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslMissingSessionResumptionIdsOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslMissingSessionResumptionIds) {
+		return nil, false
+	}
+	return o.IssueSslMissingSessionResumptionIds, true
+}
+
+// HasIssueSslMissingSessionResumptionIds returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslMissingSessionResumptionIds() bool {
+	if o != nil && !IsNil(o.IssueSslMissingSessionResumptionIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslMissingSessionResumptionIds gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslMissingSessionResumptionIds field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslMissingSessionResumptionIds(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslMissingSessionResumptionIds = &v
+}
+
+// GetIssueSslMissingSessionResumptionTickets returns the IssueSslMissingSessionResumptionTickets field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslMissingSessionResumptionTickets() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslMissingSessionResumptionTickets) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslMissingSessionResumptionTickets
+}
+
+// GetIssueSslMissingSessionResumptionTicketsOk returns a tuple with the IssueSslMissingSessionResumptionTickets field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslMissingSessionResumptionTicketsOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslMissingSessionResumptionTickets) {
+		return nil, false
+	}
+	return o.IssueSslMissingSessionResumptionTickets, true
+}
+
+// HasIssueSslMissingSessionResumptionTickets returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslMissingSessionResumptionTickets() bool {
+	if o != nil && !IsNil(o.IssueSslMissingSessionResumptionTickets) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslMissingSessionResumptionTickets gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslMissingSessionResumptionTickets field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslMissingSessionResumptionTickets(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslMissingSessionResumptionTickets = &v
+}
+
+// GetIssueSslMissingSslSessionIdSupport returns the IssueSslMissingSslSessionIdSupport field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslMissingSslSessionIdSupport() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslMissingSslSessionIdSupport) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslMissingSslSessionIdSupport
+}
+
+// GetIssueSslMissingSslSessionIdSupportOk returns a tuple with the IssueSslMissingSslSessionIdSupport field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslMissingSslSessionIdSupportOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslMissingSslSessionIdSupport) {
+		return nil, false
+	}
+	return o.IssueSslMissingSslSessionIdSupport, true
+}
+
+// HasIssueSslMissingSslSessionIdSupport returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslMissingSslSessionIdSupport() bool {
+	if o != nil && !IsNil(o.IssueSslMissingSslSessionIdSupport) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslMissingSslSessionIdSupport gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslMissingSslSessionIdSupport field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslMissingSslSessionIdSupport(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslMissingSslSessionIdSupport = &v
+}
+
+// GetIssueSslMissingTls13Support returns the IssueSslMissingTls13Support field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslMissingTls13Support() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslMissingTls13Support) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslMissingTls13Support
+}
+
+// GetIssueSslMissingTls13SupportOk returns a tuple with the IssueSslMissingTls13Support field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslMissingTls13SupportOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslMissingTls13Support) {
+		return nil, false
+	}
+	return o.IssueSslMissingTls13Support, true
+}
+
+// HasIssueSslMissingTls13Support returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslMissingTls13Support() bool {
+	if o != nil && !IsNil(o.IssueSslMissingTls13Support) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslMissingTls13Support gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslMissingTls13Support field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslMissingTls13Support(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslMissingTls13Support = &v
+}
+
+// GetIssueSslMissingTlsExtensions returns the IssueSslMissingTlsExtensions field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslMissingTlsExtensions() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslMissingTlsExtensions) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslMissingTlsExtensions
+}
+
+// GetIssueSslMissingTlsExtensionsOk returns a tuple with the IssueSslMissingTlsExtensions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslMissingTlsExtensionsOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslMissingTlsExtensions) {
+		return nil, false
+	}
+	return o.IssueSslMissingTlsExtensions, true
+}
+
+// HasIssueSslMissingTlsExtensions returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslMissingTlsExtensions() bool {
+	if o != nil && !IsNil(o.IssueSslMissingTlsExtensions) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslMissingTlsExtensions gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslMissingTlsExtensions field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslMissingTlsExtensions(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslMissingTlsExtensions = &v
+}
+
+// GetIssueSslMissingTlsFallbackScsv returns the IssueSslMissingTlsFallbackScsv field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslMissingTlsFallbackScsv() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslMissingTlsFallbackScsv) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslMissingTlsFallbackScsv
+}
+
+// GetIssueSslMissingTlsFallbackScsvOk returns a tuple with the IssueSslMissingTlsFallbackScsv field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslMissingTlsFallbackScsvOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslMissingTlsFallbackScsv) {
+		return nil, false
+	}
+	return o.IssueSslMissingTlsFallbackScsv, true
+}
+
+// HasIssueSslMissingTlsFallbackScsv returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslMissingTlsFallbackScsv() bool {
+	if o != nil && !IsNil(o.IssueSslMissingTlsFallbackScsv) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslMissingTlsFallbackScsv gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslMissingTlsFallbackScsv field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslMissingTlsFallbackScsv(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslMissingTlsFallbackScsv = &v
+}
+
+// GetIssueSslMissingTlsSessionTickets returns the IssueSslMissingTlsSessionTickets field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslMissingTlsSessionTickets() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslMissingTlsSessionTickets) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslMissingTlsSessionTickets
+}
+
+// GetIssueSslMissingTlsSessionTicketsOk returns a tuple with the IssueSslMissingTlsSessionTickets field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslMissingTlsSessionTicketsOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslMissingTlsSessionTickets) {
+		return nil, false
+	}
+	return o.IssueSslMissingTlsSessionTickets, true
+}
+
+// HasIssueSslMissingTlsSessionTickets returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslMissingTlsSessionTickets() bool {
+	if o != nil && !IsNil(o.IssueSslMissingTlsSessionTickets) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslMissingTlsSessionTickets gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslMissingTlsSessionTickets field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslMissingTlsSessionTickets(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslMissingTlsSessionTickets = &v
+}
+
+// GetIssueSslNonCompliantCertificateDetails returns the IssueSslNonCompliantCertificateDetails field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslNonCompliantCertificateDetails() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslNonCompliantCertificateDetails) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslNonCompliantCertificateDetails
+}
+
+// GetIssueSslNonCompliantCertificateDetailsOk returns a tuple with the IssueSslNonCompliantCertificateDetails field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslNonCompliantCertificateDetailsOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslNonCompliantCertificateDetails) {
+		return nil, false
+	}
+	return o.IssueSslNonCompliantCertificateDetails, true
+}
+
+// HasIssueSslNonCompliantCertificateDetails returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslNonCompliantCertificateDetails() bool {
+	if o != nil && !IsNil(o.IssueSslNonCompliantCertificateDetails) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslNonCompliantCertificateDetails gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslNonCompliantCertificateDetails field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslNonCompliantCertificateDetails(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslNonCompliantCertificateDetails = &v
+}
+
+// GetIssueSslNullCiphers returns the IssueSslNullCiphers field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslNullCiphers() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslNullCiphers) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslNullCiphers
+}
+
+// GetIssueSslNullCiphersOk returns a tuple with the IssueSslNullCiphers field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslNullCiphersOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslNullCiphers) {
+		return nil, false
+	}
+	return o.IssueSslNullCiphers, true
+}
+
+// HasIssueSslNullCiphers returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslNullCiphers() bool {
+	if o != nil && !IsNil(o.IssueSslNullCiphers) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslNullCiphers gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslNullCiphers field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslNullCiphers(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslNullCiphers = &v
+}
+
+// GetIssueSslRc4CipherUsage returns the IssueSslRc4CipherUsage field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslRc4CipherUsage() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslRc4CipherUsage) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslRc4CipherUsage
+}
+
+// GetIssueSslRc4CipherUsageOk returns a tuple with the IssueSslRc4CipherUsage field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslRc4CipherUsageOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslRc4CipherUsage) {
+		return nil, false
+	}
+	return o.IssueSslRc4CipherUsage, true
+}
+
+// HasIssueSslRc4CipherUsage returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslRc4CipherUsage() bool {
+	if o != nil && !IsNil(o.IssueSslRc4CipherUsage) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslRc4CipherUsage gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslRc4CipherUsage field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslRc4CipherUsage(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslRc4CipherUsage = &v
+}
+
+// GetIssueSslRevokedCertificateOcsp returns the IssueSslRevokedCertificateOcsp field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslRevokedCertificateOcsp() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslRevokedCertificateOcsp) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslRevokedCertificateOcsp
+}
+
+// GetIssueSslRevokedCertificateOcspOk returns a tuple with the IssueSslRevokedCertificateOcsp field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslRevokedCertificateOcspOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslRevokedCertificateOcsp) {
+		return nil, false
+	}
+	return o.IssueSslRevokedCertificateOcsp, true
+}
+
+// HasIssueSslRevokedCertificateOcsp returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslRevokedCertificateOcsp() bool {
+	if o != nil && !IsNil(o.IssueSslRevokedCertificateOcsp) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslRevokedCertificateOcsp gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslRevokedCertificateOcsp field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslRevokedCertificateOcsp(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslRevokedCertificateOcsp = &v
+}
+
+// GetIssueSslRobotVulnerability returns the IssueSslRobotVulnerability field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslRobotVulnerability() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslRobotVulnerability) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslRobotVulnerability
+}
+
+// GetIssueSslRobotVulnerabilityOk returns a tuple with the IssueSslRobotVulnerability field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslRobotVulnerabilityOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslRobotVulnerability) {
+		return nil, false
+	}
+	return o.IssueSslRobotVulnerability, true
+}
+
+// HasIssueSslRobotVulnerability returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslRobotVulnerability() bool {
+	if o != nil && !IsNil(o.IssueSslRobotVulnerability) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslRobotVulnerability gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslRobotVulnerability field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslRobotVulnerability(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslRobotVulnerability = &v
+}
+
+// GetIssueSslSha1CertificateFingerprint returns the IssueSslSha1CertificateFingerprint field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslSha1CertificateFingerprint() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslSha1CertificateFingerprint) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslSha1CertificateFingerprint
+}
+
+// GetIssueSslSha1CertificateFingerprintOk returns a tuple with the IssueSslSha1CertificateFingerprint field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslSha1CertificateFingerprintOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslSha1CertificateFingerprint) {
+		return nil, false
+	}
+	return o.IssueSslSha1CertificateFingerprint, true
+}
+
+// HasIssueSslSha1CertificateFingerprint returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslSha1CertificateFingerprint() bool {
+	if o != nil && !IsNil(o.IssueSslSha1CertificateFingerprint) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslSha1CertificateFingerprint gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslSha1CertificateFingerprint field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslSha1CertificateFingerprint(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslSha1CertificateFingerprint = &v
+}
+
+// GetIssueSslSslv2Support returns the IssueSslSslv2Support field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslSslv2Support() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslSslv2Support) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslSslv2Support
+}
+
+// GetIssueSslSslv2SupportOk returns a tuple with the IssueSslSslv2Support field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslSslv2SupportOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslSslv2Support) {
+		return nil, false
+	}
+	return o.IssueSslSslv2Support, true
+}
+
+// HasIssueSslSslv2Support returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslSslv2Support() bool {
+	if o != nil && !IsNil(o.IssueSslSslv2Support) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslSslv2Support gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslSslv2Support field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslSslv2Support(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslSslv2Support = &v
+}
+
+// GetIssueSslSweet32Vulnerability returns the IssueSslSweet32Vulnerability field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslSweet32Vulnerability() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslSweet32Vulnerability) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslSweet32Vulnerability
+}
+
+// GetIssueSslSweet32VulnerabilityOk returns a tuple with the IssueSslSweet32Vulnerability field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslSweet32VulnerabilityOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslSweet32Vulnerability) {
+		return nil, false
+	}
+	return o.IssueSslSweet32Vulnerability, true
+}
+
+// HasIssueSslSweet32Vulnerability returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslSweet32Vulnerability() bool {
+	if o != nil && !IsNil(o.IssueSslSweet32Vulnerability) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslSweet32Vulnerability gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslSweet32Vulnerability field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslSweet32Vulnerability(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslSweet32Vulnerability = &v
+}
+
+// GetIssueSslTicketbleedVulnerability returns the IssueSslTicketbleedVulnerability field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslTicketbleedVulnerability() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslTicketbleedVulnerability) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslTicketbleedVulnerability
+}
+
+// GetIssueSslTicketbleedVulnerabilityOk returns a tuple with the IssueSslTicketbleedVulnerability field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslTicketbleedVulnerabilityOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslTicketbleedVulnerability) {
+		return nil, false
+	}
+	return o.IssueSslTicketbleedVulnerability, true
+}
+
+// HasIssueSslTicketbleedVulnerability returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslTicketbleedVulnerability() bool {
+	if o != nil && !IsNil(o.IssueSslTicketbleedVulnerability) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslTicketbleedVulnerability gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslTicketbleedVulnerability field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslTicketbleedVulnerability(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslTicketbleedVulnerability = &v
+}
+
+// GetIssueSslTls10Support returns the IssueSslTls10Support field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslTls10Support() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslTls10Support) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslTls10Support
+}
+
+// GetIssueSslTls10SupportOk returns a tuple with the IssueSslTls10Support field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslTls10SupportOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslTls10Support) {
+		return nil, false
+	}
+	return o.IssueSslTls10Support, true
+}
+
+// HasIssueSslTls10Support returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslTls10Support() bool {
+	if o != nil && !IsNil(o.IssueSslTls10Support) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslTls10Support gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslTls10Support field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslTls10Support(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslTls10Support = &v
+}
+
+// GetIssueSslTls11Support returns the IssueSslTls11Support field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslTls11Support() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslTls11Support) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslTls11Support
+}
+
+// GetIssueSslTls11SupportOk returns a tuple with the IssueSslTls11Support field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslTls11SupportOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslTls11Support) {
+		return nil, false
+	}
+	return o.IssueSslTls11Support, true
+}
+
+// HasIssueSslTls11Support returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslTls11Support() bool {
+	if o != nil && !IsNil(o.IssueSslTls11Support) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslTls11Support gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslTls11Support field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslTls11Support(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslTls11Support = &v
+}
+
+// GetIssueSslUntrustedCertificate returns the IssueSslUntrustedCertificate field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslUntrustedCertificate() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslUntrustedCertificate) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslUntrustedCertificate
+}
+
+// GetIssueSslUntrustedCertificateOk returns a tuple with the IssueSslUntrustedCertificate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslUntrustedCertificateOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslUntrustedCertificate) {
+		return nil, false
+	}
+	return o.IssueSslUntrustedCertificate, true
+}
+
+// HasIssueSslUntrustedCertificate returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslUntrustedCertificate() bool {
+	if o != nil && !IsNil(o.IssueSslUntrustedCertificate) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslUntrustedCertificate gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslUntrustedCertificate field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslUntrustedCertificate(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslUntrustedCertificate = &v
+}
+
+// GetIssueSslUntrustedCertificateAuthorities returns the IssueSslUntrustedCertificateAuthorities field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslUntrustedCertificateAuthorities() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslUntrustedCertificateAuthorities) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslUntrustedCertificateAuthorities
+}
+
+// GetIssueSslUntrustedCertificateAuthoritiesOk returns a tuple with the IssueSslUntrustedCertificateAuthorities field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslUntrustedCertificateAuthoritiesOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslUntrustedCertificateAuthorities) {
+		return nil, false
+	}
+	return o.IssueSslUntrustedCertificateAuthorities, true
+}
+
+// HasIssueSslUntrustedCertificateAuthorities returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslUntrustedCertificateAuthorities() bool {
+	if o != nil && !IsNil(o.IssueSslUntrustedCertificateAuthorities) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslUntrustedCertificateAuthorities gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslUntrustedCertificateAuthorities field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslUntrustedCertificateAuthorities(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslUntrustedCertificateAuthorities = &v
+}
+
+// GetIssueSslWeak3desIdeaCiphers returns the IssueSslWeak3desIdeaCiphers field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslWeak3desIdeaCiphers() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslWeak3desIdeaCiphers) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslWeak3desIdeaCiphers
+}
+
+// GetIssueSslWeak3desIdeaCiphersOk returns a tuple with the IssueSslWeak3desIdeaCiphers field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslWeak3desIdeaCiphersOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslWeak3desIdeaCiphers) {
+		return nil, false
+	}
+	return o.IssueSslWeak3desIdeaCiphers, true
+}
+
+// HasIssueSslWeak3desIdeaCiphers returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslWeak3desIdeaCiphers() bool {
+	if o != nil && !IsNil(o.IssueSslWeak3desIdeaCiphers) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslWeak3desIdeaCiphers gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslWeak3desIdeaCiphers field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslWeak3desIdeaCiphers(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslWeak3desIdeaCiphers = &v
+}
+
+// GetIssueSslWeakCertificateSignatureAlgorithm returns the IssueSslWeakCertificateSignatureAlgorithm field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslWeakCertificateSignatureAlgorithm() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslWeakCertificateSignatureAlgorithm) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslWeakCertificateSignatureAlgorithm
+}
+
+// GetIssueSslWeakCertificateSignatureAlgorithmOk returns a tuple with the IssueSslWeakCertificateSignatureAlgorithm field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslWeakCertificateSignatureAlgorithmOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslWeakCertificateSignatureAlgorithm) {
+		return nil, false
+	}
+	return o.IssueSslWeakCertificateSignatureAlgorithm, true
+}
+
+// HasIssueSslWeakCertificateSignatureAlgorithm returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslWeakCertificateSignatureAlgorithm() bool {
+	if o != nil && !IsNil(o.IssueSslWeakCertificateSignatureAlgorithm) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslWeakCertificateSignatureAlgorithm gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslWeakCertificateSignatureAlgorithm field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslWeakCertificateSignatureAlgorithm(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslWeakCertificateSignatureAlgorithm = &v
+}
+
+// GetIssueSslWeakCipherNegotiation returns the IssueSslWeakCipherNegotiation field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslWeakCipherNegotiation() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslWeakCipherNegotiation) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslWeakCipherNegotiation
+}
+
+// GetIssueSslWeakCipherNegotiationOk returns a tuple with the IssueSslWeakCipherNegotiation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslWeakCipherNegotiationOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslWeakCipherNegotiation) {
+		return nil, false
+	}
+	return o.IssueSslWeakCipherNegotiation, true
+}
+
+// HasIssueSslWeakCipherNegotiation returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslWeakCipherNegotiation() bool {
+	if o != nil && !IsNil(o.IssueSslWeakCipherNegotiation) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslWeakCipherNegotiation gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslWeakCipherNegotiation field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslWeakCipherNegotiation(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslWeakCipherNegotiation = &v
+}
+
+// GetIssueSslWeakLowSecurityCiphers returns the IssueSslWeakLowSecurityCiphers field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslWeakLowSecurityCiphers() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslWeakLowSecurityCiphers) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslWeakLowSecurityCiphers
+}
+
+// GetIssueSslWeakLowSecurityCiphersOk returns a tuple with the IssueSslWeakLowSecurityCiphers field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslWeakLowSecurityCiphersOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslWeakLowSecurityCiphers) {
+		return nil, false
+	}
+	return o.IssueSslWeakLowSecurityCiphers, true
+}
+
+// HasIssueSslWeakLowSecurityCiphers returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslWeakLowSecurityCiphers() bool {
+	if o != nil && !IsNil(o.IssueSslWeakLowSecurityCiphers) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslWeakLowSecurityCiphers gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslWeakLowSecurityCiphers field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslWeakLowSecurityCiphers(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslWeakLowSecurityCiphers = &v
+}
+
+// GetIssueSslWeakPreRfc128bitCiphers returns the IssueSslWeakPreRfc128bitCiphers field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslWeakPreRfc128bitCiphers() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslWeakPreRfc128bitCiphers) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslWeakPreRfc128bitCiphers
+}
+
+// GetIssueSslWeakPreRfc128bitCiphersOk returns a tuple with the IssueSslWeakPreRfc128bitCiphers field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslWeakPreRfc128bitCiphersOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslWeakPreRfc128bitCiphers) {
+		return nil, false
+	}
+	return o.IssueSslWeakPreRfc128bitCiphers, true
+}
+
+// HasIssueSslWeakPreRfc128bitCiphers returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslWeakPreRfc128bitCiphers() bool {
+	if o != nil && !IsNil(o.IssueSslWeakPreRfc128bitCiphers) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslWeakPreRfc128bitCiphers gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslWeakPreRfc128bitCiphers field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslWeakPreRfc128bitCiphers(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslWeakPreRfc128bitCiphers = &v
+}
+
 // GetSsrf returns the Ssrf field value if set, zero value otherwise.
 func (o *GetProfile200ResponseConfigurationSecurityTests) GetSsrf() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
 	if o == nil || IsNil(o.Ssrf) {
@@ -11067,6 +13113,192 @@ func (o GetProfile200ResponseConfigurationSecurityTests) ToMap() (map[string]int
 	if !IsNil(o.Ssl) {
 		toSerialize["ssl"] = o.Ssl
 	}
+	if !IsNil(o.IssueSslAnonymousNullCiphers) {
+		toSerialize["issue_ssl_anonymous_null_ciphers"] = o.IssueSslAnonymousNullCiphers
+	}
+	if !IsNil(o.IssueSslBeastCbcCiphersPresent) {
+		toSerialize["issue_ssl_beast_cbc_ciphers_present"] = o.IssueSslBeastCbcCiphersPresent
+	}
+	if !IsNil(o.IssueSslBeastTls10CbcCiphers) {
+		toSerialize["issue_ssl_beast_tls10_cbc_ciphers"] = o.IssueSslBeastTls10CbcCiphers
+	}
+	if !IsNil(o.IssueSslBrokenChainOfTrust) {
+		toSerialize["issue_ssl_broken_chain_of_trust"] = o.IssueSslBrokenChainOfTrust
+	}
+	if !IsNil(o.IssueSslCcsInjectionVulnerability) {
+		toSerialize["issue_ssl_ccs_injection_vulnerability"] = o.IssueSslCcsInjectionVulnerability
+	}
+	if !IsNil(o.IssueSslCertificateRevocationStatusIssue) {
+		toSerialize["issue_ssl_certificate_revocation_status_issue"] = o.IssueSslCertificateRevocationStatusIssue
+	}
+	if !IsNil(o.IssueSslCrimeTlsCompression) {
+		toSerialize["issue_ssl_crime_tls_compression"] = o.IssueSslCrimeTlsCompression
+	}
+	if !IsNil(o.IssueSslDrownVulnerability) {
+		toSerialize["issue_ssl_drown_vulnerability"] = o.IssueSslDrownVulnerability
+	}
+	if !IsNil(o.IssueSslExcessiveServerCertificates) {
+		toSerialize["issue_ssl_excessive_server_certificates"] = o.IssueSslExcessiveServerCertificates
+	}
+	if !IsNil(o.IssueSslImproperCertificateChainOrder) {
+		toSerialize["issue_ssl_improper_certificate_chain_order"] = o.IssueSslImproperCertificateChainOrder
+	}
+	if !IsNil(o.IssueSslImproperCertificateEku) {
+		toSerialize["issue_ssl_improper_certificate_eku"] = o.IssueSslImproperCertificateEku
+	}
+	if !IsNil(o.IssueSslImproperCertificateKeyUsage) {
+		toSerialize["issue_ssl_improper_certificate_key_usage"] = o.IssueSslImproperCertificateKeyUsage
+	}
+	if !IsNil(o.IssueSslImproperCipherSuiteOrder) {
+		toSerialize["issue_ssl_improper_cipher_suite_order"] = o.IssueSslImproperCipherSuiteOrder
+	}
+	if !IsNil(o.IssueSslImproperTls10CipherOrder) {
+		toSerialize["issue_ssl_improper_tls10_cipher_order"] = o.IssueSslImproperTls10CipherOrder
+	}
+	if !IsNil(o.IssueSslImproperTls11CipherOrder) {
+		toSerialize["issue_ssl_improper_tls11_cipher_order"] = o.IssueSslImproperTls11CipherOrder
+	}
+	if !IsNil(o.IssueSslImproperTls12CipherOrder) {
+		toSerialize["issue_ssl_improper_tls12_cipher_order"] = o.IssueSslImproperTls12CipherOrder
+	}
+	if !IsNil(o.IssueSslImproperTls13CipherOrder) {
+		toSerialize["issue_ssl_improper_tls13_cipher_order"] = o.IssueSslImproperTls13CipherOrder
+	}
+	if !IsNil(o.IssueSslImproperTlsHandshakeTimestamp) {
+		toSerialize["issue_ssl_improper_tls_handshake_timestamp"] = o.IssueSslImproperTlsHandshakeTimestamp
+	}
+	if !IsNil(o.IssueSslInsecureProtocolNegotiation) {
+		toSerialize["issue_ssl_insecure_protocol_negotiation"] = o.IssueSslInsecureProtocolNegotiation
+	}
+	if !IsNil(o.IssueSslInsufficientCertificateKeySize) {
+		toSerialize["issue_ssl_insufficient_certificate_key_size"] = o.IssueSslInsufficientCertificateKeySize
+	}
+	if !IsNil(o.IssueSslInvalidCertificateValidityPeriod) {
+		toSerialize["issue_ssl_invalid_certificate_validity_period"] = o.IssueSslInvalidCertificateValidityPeriod
+	}
+	if !IsNil(o.IssueSslLogjamCommonPrimes) {
+		toSerialize["issue_ssl_logjam_common_primes"] = o.IssueSslLogjamCommonPrimes
+	}
+	if !IsNil(o.IssueSslMisconfiguredSan) {
+		toSerialize["issue_ssl_misconfigured_san"] = o.IssueSslMisconfiguredSan
+	}
+	if !IsNil(o.IssueSslMisconfiguredTls12) {
+		toSerialize["issue_ssl_misconfigured_tls12"] = o.IssueSslMisconfiguredTls12
+	}
+	if !IsNil(o.IssueSslMismatchedCertificateCommonName) {
+		toSerialize["issue_ssl_mismatched_certificate_common_name"] = o.IssueSslMismatchedCertificateCommonName
+	}
+	if !IsNil(o.IssueSslMismatchedCommonNameWithoutSni) {
+		toSerialize["issue_ssl_mismatched_common_name_without_sni"] = o.IssueSslMismatchedCommonNameWithoutSni
+	}
+	if !IsNil(o.IssueSslMissingAlpn) {
+		toSerialize["issue_ssl_missing_alpn"] = o.IssueSslMissingAlpn
+	}
+	if !IsNil(o.IssueSslMissingCertificateTransparency) {
+		toSerialize["issue_ssl_missing_certificate_transparency"] = o.IssueSslMissingCertificateTransparency
+	}
+	if !IsNil(o.IssueSslMissingCrlDistributionPoints) {
+		toSerialize["issue_ssl_missing_crl_distribution_points"] = o.IssueSslMissingCrlDistributionPoints
+	}
+	if !IsNil(o.IssueSslMissingEtls) {
+		toSerialize["issue_ssl_missing_etls"] = o.IssueSslMissingEtls
+	}
+	if !IsNil(o.IssueSslMissingEvCertificatePolicies) {
+		toSerialize["issue_ssl_missing_ev_certificate_policies"] = o.IssueSslMissingEvCertificatePolicies
+	}
+	if !IsNil(o.IssueSslMissingMustStaple) {
+		toSerialize["issue_ssl_missing_must_staple"] = o.IssueSslMissingMustStaple
+	}
+	if !IsNil(o.IssueSslMissingNpn) {
+		toSerialize["issue_ssl_missing_npn"] = o.IssueSslMissingNpn
+	}
+	if !IsNil(o.IssueSslMissingOcspStapling) {
+		toSerialize["issue_ssl_missing_ocsp_stapling"] = o.IssueSslMissingOcspStapling
+	}
+	if !IsNil(o.IssueSslMissingOcspUrls) {
+		toSerialize["issue_ssl_missing_ocsp_urls"] = o.IssueSslMissingOcspUrls
+	}
+	if !IsNil(o.IssueSslMissingSecureClientRenegotiation) {
+		toSerialize["issue_ssl_missing_secure_client_renegotiation"] = o.IssueSslMissingSecureClientRenegotiation
+	}
+	if !IsNil(o.IssueSslMissingSecureRenegotiation) {
+		toSerialize["issue_ssl_missing_secure_renegotiation"] = o.IssueSslMissingSecureRenegotiation
+	}
+	if !IsNil(o.IssueSslMissingSessionResumptionIds) {
+		toSerialize["issue_ssl_missing_session_resumption_ids"] = o.IssueSslMissingSessionResumptionIds
+	}
+	if !IsNil(o.IssueSslMissingSessionResumptionTickets) {
+		toSerialize["issue_ssl_missing_session_resumption_tickets"] = o.IssueSslMissingSessionResumptionTickets
+	}
+	if !IsNil(o.IssueSslMissingSslSessionIdSupport) {
+		toSerialize["issue_ssl_missing_ssl_session_id_support"] = o.IssueSslMissingSslSessionIdSupport
+	}
+	if !IsNil(o.IssueSslMissingTls13Support) {
+		toSerialize["issue_ssl_missing_tls13_support"] = o.IssueSslMissingTls13Support
+	}
+	if !IsNil(o.IssueSslMissingTlsExtensions) {
+		toSerialize["issue_ssl_missing_tls_extensions"] = o.IssueSslMissingTlsExtensions
+	}
+	if !IsNil(o.IssueSslMissingTlsFallbackScsv) {
+		toSerialize["issue_ssl_missing_tls_fallback_scsv"] = o.IssueSslMissingTlsFallbackScsv
+	}
+	if !IsNil(o.IssueSslMissingTlsSessionTickets) {
+		toSerialize["issue_ssl_missing_tls_session_tickets"] = o.IssueSslMissingTlsSessionTickets
+	}
+	if !IsNil(o.IssueSslNonCompliantCertificateDetails) {
+		toSerialize["issue_ssl_non_compliant_certificate_details"] = o.IssueSslNonCompliantCertificateDetails
+	}
+	if !IsNil(o.IssueSslNullCiphers) {
+		toSerialize["issue_ssl_null_ciphers"] = o.IssueSslNullCiphers
+	}
+	if !IsNil(o.IssueSslRc4CipherUsage) {
+		toSerialize["issue_ssl_rc4_cipher_usage"] = o.IssueSslRc4CipherUsage
+	}
+	if !IsNil(o.IssueSslRevokedCertificateOcsp) {
+		toSerialize["issue_ssl_revoked_certificate_ocsp"] = o.IssueSslRevokedCertificateOcsp
+	}
+	if !IsNil(o.IssueSslRobotVulnerability) {
+		toSerialize["issue_ssl_robot_vulnerability"] = o.IssueSslRobotVulnerability
+	}
+	if !IsNil(o.IssueSslSha1CertificateFingerprint) {
+		toSerialize["issue_ssl_sha1_certificate_fingerprint"] = o.IssueSslSha1CertificateFingerprint
+	}
+	if !IsNil(o.IssueSslSslv2Support) {
+		toSerialize["issue_ssl_sslv2_support"] = o.IssueSslSslv2Support
+	}
+	if !IsNil(o.IssueSslSweet32Vulnerability) {
+		toSerialize["issue_ssl_sweet32_vulnerability"] = o.IssueSslSweet32Vulnerability
+	}
+	if !IsNil(o.IssueSslTicketbleedVulnerability) {
+		toSerialize["issue_ssl_ticketbleed_vulnerability"] = o.IssueSslTicketbleedVulnerability
+	}
+	if !IsNil(o.IssueSslTls10Support) {
+		toSerialize["issue_ssl_tls10_support"] = o.IssueSslTls10Support
+	}
+	if !IsNil(o.IssueSslTls11Support) {
+		toSerialize["issue_ssl_tls11_support"] = o.IssueSslTls11Support
+	}
+	if !IsNil(o.IssueSslUntrustedCertificate) {
+		toSerialize["issue_ssl_untrusted_certificate"] = o.IssueSslUntrustedCertificate
+	}
+	if !IsNil(o.IssueSslUntrustedCertificateAuthorities) {
+		toSerialize["issue_ssl_untrusted_certificate_authorities"] = o.IssueSslUntrustedCertificateAuthorities
+	}
+	if !IsNil(o.IssueSslWeak3desIdeaCiphers) {
+		toSerialize["issue_ssl_weak_3des_idea_ciphers"] = o.IssueSslWeak3desIdeaCiphers
+	}
+	if !IsNil(o.IssueSslWeakCertificateSignatureAlgorithm) {
+		toSerialize["issue_ssl_weak_certificate_signature_algorithm"] = o.IssueSslWeakCertificateSignatureAlgorithm
+	}
+	if !IsNil(o.IssueSslWeakCipherNegotiation) {
+		toSerialize["issue_ssl_weak_cipher_negotiation"] = o.IssueSslWeakCipherNegotiation
+	}
+	if !IsNil(o.IssueSslWeakLowSecurityCiphers) {
+		toSerialize["issue_ssl_weak_low_security_ciphers"] = o.IssueSslWeakLowSecurityCiphers
+	}
+	if !IsNil(o.IssueSslWeakPreRfc128bitCiphers) {
+		toSerialize["issue_ssl_weak_pre_rfc_128bit_ciphers"] = o.IssueSslWeakPreRfc128bitCiphers
+	}
 	if !IsNil(o.Ssrf) {
 		toSerialize["ssrf"] = o.Ssrf
 	}
@@ -11670,6 +13902,68 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) UnmarshalJSON(data []b
 		delete(additionalProperties, "sql_injection_oracle_based")
 		delete(additionalProperties, "ssl_certificate")
 		delete(additionalProperties, "ssl")
+		delete(additionalProperties, "issue_ssl_anonymous_null_ciphers")
+		delete(additionalProperties, "issue_ssl_beast_cbc_ciphers_present")
+		delete(additionalProperties, "issue_ssl_beast_tls10_cbc_ciphers")
+		delete(additionalProperties, "issue_ssl_broken_chain_of_trust")
+		delete(additionalProperties, "issue_ssl_ccs_injection_vulnerability")
+		delete(additionalProperties, "issue_ssl_certificate_revocation_status_issue")
+		delete(additionalProperties, "issue_ssl_crime_tls_compression")
+		delete(additionalProperties, "issue_ssl_drown_vulnerability")
+		delete(additionalProperties, "issue_ssl_excessive_server_certificates")
+		delete(additionalProperties, "issue_ssl_improper_certificate_chain_order")
+		delete(additionalProperties, "issue_ssl_improper_certificate_eku")
+		delete(additionalProperties, "issue_ssl_improper_certificate_key_usage")
+		delete(additionalProperties, "issue_ssl_improper_cipher_suite_order")
+		delete(additionalProperties, "issue_ssl_improper_tls10_cipher_order")
+		delete(additionalProperties, "issue_ssl_improper_tls11_cipher_order")
+		delete(additionalProperties, "issue_ssl_improper_tls12_cipher_order")
+		delete(additionalProperties, "issue_ssl_improper_tls13_cipher_order")
+		delete(additionalProperties, "issue_ssl_improper_tls_handshake_timestamp")
+		delete(additionalProperties, "issue_ssl_insecure_protocol_negotiation")
+		delete(additionalProperties, "issue_ssl_insufficient_certificate_key_size")
+		delete(additionalProperties, "issue_ssl_invalid_certificate_validity_period")
+		delete(additionalProperties, "issue_ssl_logjam_common_primes")
+		delete(additionalProperties, "issue_ssl_misconfigured_san")
+		delete(additionalProperties, "issue_ssl_misconfigured_tls12")
+		delete(additionalProperties, "issue_ssl_mismatched_certificate_common_name")
+		delete(additionalProperties, "issue_ssl_mismatched_common_name_without_sni")
+		delete(additionalProperties, "issue_ssl_missing_alpn")
+		delete(additionalProperties, "issue_ssl_missing_certificate_transparency")
+		delete(additionalProperties, "issue_ssl_missing_crl_distribution_points")
+		delete(additionalProperties, "issue_ssl_missing_etls")
+		delete(additionalProperties, "issue_ssl_missing_ev_certificate_policies")
+		delete(additionalProperties, "issue_ssl_missing_must_staple")
+		delete(additionalProperties, "issue_ssl_missing_npn")
+		delete(additionalProperties, "issue_ssl_missing_ocsp_stapling")
+		delete(additionalProperties, "issue_ssl_missing_ocsp_urls")
+		delete(additionalProperties, "issue_ssl_missing_secure_client_renegotiation")
+		delete(additionalProperties, "issue_ssl_missing_secure_renegotiation")
+		delete(additionalProperties, "issue_ssl_missing_session_resumption_ids")
+		delete(additionalProperties, "issue_ssl_missing_session_resumption_tickets")
+		delete(additionalProperties, "issue_ssl_missing_ssl_session_id_support")
+		delete(additionalProperties, "issue_ssl_missing_tls13_support")
+		delete(additionalProperties, "issue_ssl_missing_tls_extensions")
+		delete(additionalProperties, "issue_ssl_missing_tls_fallback_scsv")
+		delete(additionalProperties, "issue_ssl_missing_tls_session_tickets")
+		delete(additionalProperties, "issue_ssl_non_compliant_certificate_details")
+		delete(additionalProperties, "issue_ssl_null_ciphers")
+		delete(additionalProperties, "issue_ssl_rc4_cipher_usage")
+		delete(additionalProperties, "issue_ssl_revoked_certificate_ocsp")
+		delete(additionalProperties, "issue_ssl_robot_vulnerability")
+		delete(additionalProperties, "issue_ssl_sha1_certificate_fingerprint")
+		delete(additionalProperties, "issue_ssl_sslv2_support")
+		delete(additionalProperties, "issue_ssl_sweet32_vulnerability")
+		delete(additionalProperties, "issue_ssl_ticketbleed_vulnerability")
+		delete(additionalProperties, "issue_ssl_tls10_support")
+		delete(additionalProperties, "issue_ssl_tls11_support")
+		delete(additionalProperties, "issue_ssl_untrusted_certificate")
+		delete(additionalProperties, "issue_ssl_untrusted_certificate_authorities")
+		delete(additionalProperties, "issue_ssl_weak_3des_idea_ciphers")
+		delete(additionalProperties, "issue_ssl_weak_certificate_signature_algorithm")
+		delete(additionalProperties, "issue_ssl_weak_cipher_negotiation")
+		delete(additionalProperties, "issue_ssl_weak_low_security_ciphers")
+		delete(additionalProperties, "issue_ssl_weak_pre_rfc_128bit_ciphers")
 		delete(additionalProperties, "ssrf")
 		delete(additionalProperties, "ssti")
 		delete(additionalProperties, "frontend_ssrf_header")
