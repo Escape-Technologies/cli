@@ -324,6 +324,15 @@ type GetProfile200ResponseConfigurationSecurityTests struct {
 	JoomlaSolidresXss                         *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"joomla_solidres_xss,omitempty"`
 	JsDangerousEval                           *GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap          `json:"js_dangerous_eval,omitempty"`
 	JsDataLeak                                *GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap          `json:"js_data_leak,omitempty"`
+	JsDataLeakAuthHeader                      *GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap          `json:"js_data_leak_auth_header,omitempty"`
+	JsDataLeakAwsKey                          *GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap          `json:"js_data_leak_aws_key,omitempty"`
+	JsDataLeakBearerToken                     *GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap          `json:"js_data_leak_bearer_token,omitempty"`
+	JsDataLeakGithubPat                       *GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap          `json:"js_data_leak_github_pat,omitempty"`
+	JsDataLeakGitlabPat                       *GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap          `json:"js_data_leak_gitlab_pat,omitempty"`
+	JsDataLeakJwtToken                        *GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap          `json:"js_data_leak_jwt_token,omitempty"`
+	JsDataLeakPrivateKey                      *GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap          `json:"js_data_leak_private_key,omitempty"`
+	JsDataLeakSlackToken                      *GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap          `json:"js_data_leak_slack_token,omitempty"`
+	JsDataLeakStripeKey                       *GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap          `json:"js_data_leak_stripe_key,omitempty"`
 	JsExposedApi                              *GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap          `json:"js_exposed_api,omitempty"`
 	JsHardcodedSecret                         *GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap          `json:"js_hardcoded_secret,omitempty"`
 	JupyterNotebookRce                        *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"jupyter_notebook_rce,omitempty"`
@@ -10180,6 +10189,294 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) SetJsDataLeak(v GetPro
 	o.JsDataLeak = &v
 }
 
+// GetJsDataLeakAuthHeader returns the JsDataLeakAuthHeader field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetJsDataLeakAuthHeader() GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap {
+	if o == nil || IsNil(o.JsDataLeakAuthHeader) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap
+		return ret
+	}
+	return *o.JsDataLeakAuthHeader
+}
+
+// GetJsDataLeakAuthHeaderOk returns a tuple with the JsDataLeakAuthHeader field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetJsDataLeakAuthHeaderOk() (*GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap, bool) {
+	if o == nil || IsNil(o.JsDataLeakAuthHeader) {
+		return nil, false
+	}
+	return o.JsDataLeakAuthHeader, true
+}
+
+// HasJsDataLeakAuthHeader returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasJsDataLeakAuthHeader() bool {
+	if o != nil && !IsNil(o.JsDataLeakAuthHeader) {
+		return true
+	}
+
+	return false
+}
+
+// SetJsDataLeakAuthHeader gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap and assigns it to the JsDataLeakAuthHeader field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetJsDataLeakAuthHeader(v GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap) {
+	o.JsDataLeakAuthHeader = &v
+}
+
+// GetJsDataLeakAwsKey returns the JsDataLeakAwsKey field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetJsDataLeakAwsKey() GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap {
+	if o == nil || IsNil(o.JsDataLeakAwsKey) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap
+		return ret
+	}
+	return *o.JsDataLeakAwsKey
+}
+
+// GetJsDataLeakAwsKeyOk returns a tuple with the JsDataLeakAwsKey field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetJsDataLeakAwsKeyOk() (*GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap, bool) {
+	if o == nil || IsNil(o.JsDataLeakAwsKey) {
+		return nil, false
+	}
+	return o.JsDataLeakAwsKey, true
+}
+
+// HasJsDataLeakAwsKey returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasJsDataLeakAwsKey() bool {
+	if o != nil && !IsNil(o.JsDataLeakAwsKey) {
+		return true
+	}
+
+	return false
+}
+
+// SetJsDataLeakAwsKey gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap and assigns it to the JsDataLeakAwsKey field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetJsDataLeakAwsKey(v GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap) {
+	o.JsDataLeakAwsKey = &v
+}
+
+// GetJsDataLeakBearerToken returns the JsDataLeakBearerToken field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetJsDataLeakBearerToken() GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap {
+	if o == nil || IsNil(o.JsDataLeakBearerToken) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap
+		return ret
+	}
+	return *o.JsDataLeakBearerToken
+}
+
+// GetJsDataLeakBearerTokenOk returns a tuple with the JsDataLeakBearerToken field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetJsDataLeakBearerTokenOk() (*GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap, bool) {
+	if o == nil || IsNil(o.JsDataLeakBearerToken) {
+		return nil, false
+	}
+	return o.JsDataLeakBearerToken, true
+}
+
+// HasJsDataLeakBearerToken returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasJsDataLeakBearerToken() bool {
+	if o != nil && !IsNil(o.JsDataLeakBearerToken) {
+		return true
+	}
+
+	return false
+}
+
+// SetJsDataLeakBearerToken gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap and assigns it to the JsDataLeakBearerToken field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetJsDataLeakBearerToken(v GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap) {
+	o.JsDataLeakBearerToken = &v
+}
+
+// GetJsDataLeakGithubPat returns the JsDataLeakGithubPat field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetJsDataLeakGithubPat() GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap {
+	if o == nil || IsNil(o.JsDataLeakGithubPat) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap
+		return ret
+	}
+	return *o.JsDataLeakGithubPat
+}
+
+// GetJsDataLeakGithubPatOk returns a tuple with the JsDataLeakGithubPat field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetJsDataLeakGithubPatOk() (*GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap, bool) {
+	if o == nil || IsNil(o.JsDataLeakGithubPat) {
+		return nil, false
+	}
+	return o.JsDataLeakGithubPat, true
+}
+
+// HasJsDataLeakGithubPat returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasJsDataLeakGithubPat() bool {
+	if o != nil && !IsNil(o.JsDataLeakGithubPat) {
+		return true
+	}
+
+	return false
+}
+
+// SetJsDataLeakGithubPat gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap and assigns it to the JsDataLeakGithubPat field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetJsDataLeakGithubPat(v GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap) {
+	o.JsDataLeakGithubPat = &v
+}
+
+// GetJsDataLeakGitlabPat returns the JsDataLeakGitlabPat field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetJsDataLeakGitlabPat() GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap {
+	if o == nil || IsNil(o.JsDataLeakGitlabPat) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap
+		return ret
+	}
+	return *o.JsDataLeakGitlabPat
+}
+
+// GetJsDataLeakGitlabPatOk returns a tuple with the JsDataLeakGitlabPat field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetJsDataLeakGitlabPatOk() (*GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap, bool) {
+	if o == nil || IsNil(o.JsDataLeakGitlabPat) {
+		return nil, false
+	}
+	return o.JsDataLeakGitlabPat, true
+}
+
+// HasJsDataLeakGitlabPat returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasJsDataLeakGitlabPat() bool {
+	if o != nil && !IsNil(o.JsDataLeakGitlabPat) {
+		return true
+	}
+
+	return false
+}
+
+// SetJsDataLeakGitlabPat gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap and assigns it to the JsDataLeakGitlabPat field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetJsDataLeakGitlabPat(v GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap) {
+	o.JsDataLeakGitlabPat = &v
+}
+
+// GetJsDataLeakJwtToken returns the JsDataLeakJwtToken field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetJsDataLeakJwtToken() GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap {
+	if o == nil || IsNil(o.JsDataLeakJwtToken) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap
+		return ret
+	}
+	return *o.JsDataLeakJwtToken
+}
+
+// GetJsDataLeakJwtTokenOk returns a tuple with the JsDataLeakJwtToken field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetJsDataLeakJwtTokenOk() (*GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap, bool) {
+	if o == nil || IsNil(o.JsDataLeakJwtToken) {
+		return nil, false
+	}
+	return o.JsDataLeakJwtToken, true
+}
+
+// HasJsDataLeakJwtToken returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasJsDataLeakJwtToken() bool {
+	if o != nil && !IsNil(o.JsDataLeakJwtToken) {
+		return true
+	}
+
+	return false
+}
+
+// SetJsDataLeakJwtToken gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap and assigns it to the JsDataLeakJwtToken field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetJsDataLeakJwtToken(v GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap) {
+	o.JsDataLeakJwtToken = &v
+}
+
+// GetJsDataLeakPrivateKey returns the JsDataLeakPrivateKey field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetJsDataLeakPrivateKey() GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap {
+	if o == nil || IsNil(o.JsDataLeakPrivateKey) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap
+		return ret
+	}
+	return *o.JsDataLeakPrivateKey
+}
+
+// GetJsDataLeakPrivateKeyOk returns a tuple with the JsDataLeakPrivateKey field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetJsDataLeakPrivateKeyOk() (*GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap, bool) {
+	if o == nil || IsNil(o.JsDataLeakPrivateKey) {
+		return nil, false
+	}
+	return o.JsDataLeakPrivateKey, true
+}
+
+// HasJsDataLeakPrivateKey returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasJsDataLeakPrivateKey() bool {
+	if o != nil && !IsNil(o.JsDataLeakPrivateKey) {
+		return true
+	}
+
+	return false
+}
+
+// SetJsDataLeakPrivateKey gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap and assigns it to the JsDataLeakPrivateKey field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetJsDataLeakPrivateKey(v GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap) {
+	o.JsDataLeakPrivateKey = &v
+}
+
+// GetJsDataLeakSlackToken returns the JsDataLeakSlackToken field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetJsDataLeakSlackToken() GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap {
+	if o == nil || IsNil(o.JsDataLeakSlackToken) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap
+		return ret
+	}
+	return *o.JsDataLeakSlackToken
+}
+
+// GetJsDataLeakSlackTokenOk returns a tuple with the JsDataLeakSlackToken field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetJsDataLeakSlackTokenOk() (*GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap, bool) {
+	if o == nil || IsNil(o.JsDataLeakSlackToken) {
+		return nil, false
+	}
+	return o.JsDataLeakSlackToken, true
+}
+
+// HasJsDataLeakSlackToken returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasJsDataLeakSlackToken() bool {
+	if o != nil && !IsNil(o.JsDataLeakSlackToken) {
+		return true
+	}
+
+	return false
+}
+
+// SetJsDataLeakSlackToken gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap and assigns it to the JsDataLeakSlackToken field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetJsDataLeakSlackToken(v GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap) {
+	o.JsDataLeakSlackToken = &v
+}
+
+// GetJsDataLeakStripeKey returns the JsDataLeakStripeKey field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetJsDataLeakStripeKey() GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap {
+	if o == nil || IsNil(o.JsDataLeakStripeKey) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap
+		return ret
+	}
+	return *o.JsDataLeakStripeKey
+}
+
+// GetJsDataLeakStripeKeyOk returns a tuple with the JsDataLeakStripeKey field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetJsDataLeakStripeKeyOk() (*GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap, bool) {
+	if o == nil || IsNil(o.JsDataLeakStripeKey) {
+		return nil, false
+	}
+	return o.JsDataLeakStripeKey, true
+}
+
+// HasJsDataLeakStripeKey returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasJsDataLeakStripeKey() bool {
+	if o != nil && !IsNil(o.JsDataLeakStripeKey) {
+		return true
+	}
+
+	return false
+}
+
+// SetJsDataLeakStripeKey gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap and assigns it to the JsDataLeakStripeKey field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetJsDataLeakStripeKey(v GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap) {
+	o.JsDataLeakStripeKey = &v
+}
+
 // GetJsExposedApi returns the JsExposedApi field value if set, zero value otherwise.
 func (o *GetProfile200ResponseConfigurationSecurityTests) GetJsExposedApi() GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap {
 	if o == nil || IsNil(o.JsExposedApi) {
@@ -13473,6 +13770,33 @@ func (o GetProfile200ResponseConfigurationSecurityTests) ToMap() (map[string]int
 	if !IsNil(o.JsDataLeak) {
 		toSerialize["js_data_leak"] = o.JsDataLeak
 	}
+	if !IsNil(o.JsDataLeakAuthHeader) {
+		toSerialize["js_data_leak_auth_header"] = o.JsDataLeakAuthHeader
+	}
+	if !IsNil(o.JsDataLeakAwsKey) {
+		toSerialize["js_data_leak_aws_key"] = o.JsDataLeakAwsKey
+	}
+	if !IsNil(o.JsDataLeakBearerToken) {
+		toSerialize["js_data_leak_bearer_token"] = o.JsDataLeakBearerToken
+	}
+	if !IsNil(o.JsDataLeakGithubPat) {
+		toSerialize["js_data_leak_github_pat"] = o.JsDataLeakGithubPat
+	}
+	if !IsNil(o.JsDataLeakGitlabPat) {
+		toSerialize["js_data_leak_gitlab_pat"] = o.JsDataLeakGitlabPat
+	}
+	if !IsNil(o.JsDataLeakJwtToken) {
+		toSerialize["js_data_leak_jwt_token"] = o.JsDataLeakJwtToken
+	}
+	if !IsNil(o.JsDataLeakPrivateKey) {
+		toSerialize["js_data_leak_private_key"] = o.JsDataLeakPrivateKey
+	}
+	if !IsNil(o.JsDataLeakSlackToken) {
+		toSerialize["js_data_leak_slack_token"] = o.JsDataLeakSlackToken
+	}
+	if !IsNil(o.JsDataLeakStripeKey) {
+		toSerialize["js_data_leak_stripe_key"] = o.JsDataLeakStripeKey
+	}
 	if !IsNil(o.JsExposedApi) {
 		toSerialize["js_exposed_api"] = o.JsExposedApi
 	}
@@ -14022,6 +14346,15 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) UnmarshalJSON(data []b
 		delete(additionalProperties, "joomla_solidres_xss")
 		delete(additionalProperties, "js_dangerous_eval")
 		delete(additionalProperties, "js_data_leak")
+		delete(additionalProperties, "js_data_leak_auth_header")
+		delete(additionalProperties, "js_data_leak_aws_key")
+		delete(additionalProperties, "js_data_leak_bearer_token")
+		delete(additionalProperties, "js_data_leak_github_pat")
+		delete(additionalProperties, "js_data_leak_gitlab_pat")
+		delete(additionalProperties, "js_data_leak_jwt_token")
+		delete(additionalProperties, "js_data_leak_private_key")
+		delete(additionalProperties, "js_data_leak_slack_token")
+		delete(additionalProperties, "js_data_leak_stripe_key")
 		delete(additionalProperties, "js_exposed_api")
 		delete(additionalProperties, "js_hardcoded_secret")
 		delete(additionalProperties, "jupyter_notebook_rce")
