@@ -69,6 +69,9 @@ type GetProfile200ResponseConfigurationSecurityTests struct {
 	FrontendCommandInjection                  *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"frontend_command_injection,omitempty"`
 	ConsoleError                              *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"console_error,omitempty"`
 	Cors                                      *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"cors,omitempty"`
+	CspAllowedScripts                         *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"csp_allowed_scripts,omitempty"`
+	CspMissing                                *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"csp_missing,omitempty"`
+	CspUnsafeEval                             *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"csp_unsafe_eval,omitempty"`
 	CrashingPage                              *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"crashing_page,omitempty"`
 	DbgateUnauthRce                           *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"dbgate_unauth_rce,omitempty"`
 	FrontendCrlf                              *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"frontend_crlf,omitempty"`
@@ -1951,6 +1954,102 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) HasCors() bool {
 // SetCors gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the Cors field.
 func (o *GetProfile200ResponseConfigurationSecurityTests) SetCors(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
 	o.Cors = &v
+}
+
+// GetCspAllowedScripts returns the CspAllowedScripts field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetCspAllowedScripts() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.CspAllowedScripts) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.CspAllowedScripts
+}
+
+// GetCspAllowedScriptsOk returns a tuple with the CspAllowedScripts field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetCspAllowedScriptsOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.CspAllowedScripts) {
+		return nil, false
+	}
+	return o.CspAllowedScripts, true
+}
+
+// HasCspAllowedScripts returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasCspAllowedScripts() bool {
+	if o != nil && !IsNil(o.CspAllowedScripts) {
+		return true
+	}
+
+	return false
+}
+
+// SetCspAllowedScripts gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the CspAllowedScripts field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetCspAllowedScripts(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.CspAllowedScripts = &v
+}
+
+// GetCspMissing returns the CspMissing field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetCspMissing() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.CspMissing) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.CspMissing
+}
+
+// GetCspMissingOk returns a tuple with the CspMissing field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetCspMissingOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.CspMissing) {
+		return nil, false
+	}
+	return o.CspMissing, true
+}
+
+// HasCspMissing returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasCspMissing() bool {
+	if o != nil && !IsNil(o.CspMissing) {
+		return true
+	}
+
+	return false
+}
+
+// SetCspMissing gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the CspMissing field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetCspMissing(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.CspMissing = &v
+}
+
+// GetCspUnsafeEval returns the CspUnsafeEval field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetCspUnsafeEval() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.CspUnsafeEval) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.CspUnsafeEval
+}
+
+// GetCspUnsafeEvalOk returns a tuple with the CspUnsafeEval field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetCspUnsafeEvalOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.CspUnsafeEval) {
+		return nil, false
+	}
+	return o.CspUnsafeEval, true
+}
+
+// HasCspUnsafeEval returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasCspUnsafeEval() bool {
+	if o != nil && !IsNil(o.CspUnsafeEval) {
+		return true
+	}
+
+	return false
+}
+
+// SetCspUnsafeEval gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the CspUnsafeEval field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetCspUnsafeEval(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.CspUnsafeEval = &v
 }
 
 // GetCrashingPage returns the CrashingPage field value if set, zero value otherwise.
@@ -10497,6 +10596,15 @@ func (o GetProfile200ResponseConfigurationSecurityTests) ToMap() (map[string]int
 	if !IsNil(o.Cors) {
 		toSerialize["cors"] = o.Cors
 	}
+	if !IsNil(o.CspAllowedScripts) {
+		toSerialize["csp_allowed_scripts"] = o.CspAllowedScripts
+	}
+	if !IsNil(o.CspMissing) {
+		toSerialize["csp_missing"] = o.CspMissing
+	}
+	if !IsNil(o.CspUnsafeEval) {
+		toSerialize["csp_unsafe_eval"] = o.CspUnsafeEval
+	}
 	if !IsNil(o.CrashingPage) {
 		toSerialize["crashing_page"] = o.CrashingPage
 	}
@@ -11355,6 +11463,9 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) UnmarshalJSON(data []b
 		delete(additionalProperties, "frontend_command_injection")
 		delete(additionalProperties, "console_error")
 		delete(additionalProperties, "cors")
+		delete(additionalProperties, "csp_allowed_scripts")
+		delete(additionalProperties, "csp_missing")
+		delete(additionalProperties, "csp_unsafe_eval")
 		delete(additionalProperties, "crashing_page")
 		delete(additionalProperties, "dbgate_unauth_rce")
 		delete(additionalProperties, "frontend_crlf")
