@@ -147,6 +147,8 @@ type GetProfile200ResponseConfigurationSecurityTests struct {
 	HeaderStrictTransportSecurity             *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"header_strict_transport_security,omitempty"`
 	HeaderXContentTypeOptions                 *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"header_x_content_type_options,omitempty"`
 	HeaderXFrameOptions                       *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"header_x_frame_options,omitempty"`
+	HostHeaderInjectionRedirect               *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"host_header_injection_redirect,omitempty"`
+	HostHeaderInjectionReflected              *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"host_header_injection_reflected,omitempty"`
 	HtmlInjection                             *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"html_injection,omitempty"`
 	Http2NotSupported                         *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"http2_not_supported,omitempty"`
 	HttpNoHttpsRedirect                       *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"http_no_https_redirect,omitempty"`
@@ -4450,6 +4452,70 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) HasHeaderXFrameOptions
 // SetHeaderXFrameOptions gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the HeaderXFrameOptions field.
 func (o *GetProfile200ResponseConfigurationSecurityTests) SetHeaderXFrameOptions(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
 	o.HeaderXFrameOptions = &v
+}
+
+// GetHostHeaderInjectionRedirect returns the HostHeaderInjectionRedirect field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetHostHeaderInjectionRedirect() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.HostHeaderInjectionRedirect) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.HostHeaderInjectionRedirect
+}
+
+// GetHostHeaderInjectionRedirectOk returns a tuple with the HostHeaderInjectionRedirect field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetHostHeaderInjectionRedirectOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.HostHeaderInjectionRedirect) {
+		return nil, false
+	}
+	return o.HostHeaderInjectionRedirect, true
+}
+
+// HasHostHeaderInjectionRedirect returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasHostHeaderInjectionRedirect() bool {
+	if o != nil && !IsNil(o.HostHeaderInjectionRedirect) {
+		return true
+	}
+
+	return false
+}
+
+// SetHostHeaderInjectionRedirect gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the HostHeaderInjectionRedirect field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetHostHeaderInjectionRedirect(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.HostHeaderInjectionRedirect = &v
+}
+
+// GetHostHeaderInjectionReflected returns the HostHeaderInjectionReflected field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetHostHeaderInjectionReflected() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.HostHeaderInjectionReflected) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.HostHeaderInjectionReflected
+}
+
+// GetHostHeaderInjectionReflectedOk returns a tuple with the HostHeaderInjectionReflected field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetHostHeaderInjectionReflectedOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.HostHeaderInjectionReflected) {
+		return nil, false
+	}
+	return o.HostHeaderInjectionReflected, true
+}
+
+// HasHostHeaderInjectionReflected returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasHostHeaderInjectionReflected() bool {
+	if o != nil && !IsNil(o.HostHeaderInjectionReflected) {
+		return true
+	}
+
+	return false
+}
+
+// SetHostHeaderInjectionReflected gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the HostHeaderInjectionReflected field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetHostHeaderInjectionReflected(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.HostHeaderInjectionReflected = &v
 }
 
 // GetHtmlInjection returns the HtmlInjection field value if set, zero value otherwise.
@@ -10830,6 +10896,12 @@ func (o GetProfile200ResponseConfigurationSecurityTests) ToMap() (map[string]int
 	if !IsNil(o.HeaderXFrameOptions) {
 		toSerialize["header_x_frame_options"] = o.HeaderXFrameOptions
 	}
+	if !IsNil(o.HostHeaderInjectionRedirect) {
+		toSerialize["host_header_injection_redirect"] = o.HostHeaderInjectionRedirect
+	}
+	if !IsNil(o.HostHeaderInjectionReflected) {
+		toSerialize["host_header_injection_reflected"] = o.HostHeaderInjectionReflected
+	}
 	if !IsNil(o.HtmlInjection) {
 		toSerialize["html_injection"] = o.HtmlInjection
 	}
@@ -11541,6 +11613,8 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) UnmarshalJSON(data []b
 		delete(additionalProperties, "header_strict_transport_security")
 		delete(additionalProperties, "header_x_content_type_options")
 		delete(additionalProperties, "header_x_frame_options")
+		delete(additionalProperties, "host_header_injection_redirect")
+		delete(additionalProperties, "host_header_injection_reflected")
 		delete(additionalProperties, "html_injection")
 		delete(additionalProperties, "http2_not_supported")
 		delete(additionalProperties, "http_no_https_redirect")
