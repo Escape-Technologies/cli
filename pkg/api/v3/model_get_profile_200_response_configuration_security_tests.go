@@ -212,7 +212,6 @@ type GetProfile200ResponseConfigurationSecurityTests struct {
 	SslCertificate                            *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"ssl_certificate,omitempty"`
 	Ssl                                       *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"ssl,omitempty"`
 	IssueSslAnonymousNullCiphers              *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_anonymous_null_ciphers,omitempty"`
-	IssueSslBeastCbcCiphersPresent            *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_beast_cbc_ciphers_present,omitempty"`
 	IssueSslBeastTls10CbcCiphers              *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_beast_tls10_cbc_ciphers,omitempty"`
 	IssueSslBrokenChainOfTrust                *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_broken_chain_of_trust,omitempty"`
 	IssueSslCcsInjectionVulnerability         *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_ccs_injection_vulnerability,omitempty"`
@@ -262,6 +261,7 @@ type GetProfile200ResponseConfigurationSecurityTests struct {
 	IssueSslRobotVulnerability                *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_robot_vulnerability,omitempty"`
 	IssueSslSha1CertificateFingerprint        *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_sha1_certificate_fingerprint,omitempty"`
 	IssueSslSslv2Support                      *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_sslv2_support,omitempty"`
+	IssueSslSuboptimalAverageStrengthCiphers  *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_suboptimal_average_strength_ciphers,omitempty"`
 	IssueSslSweet32Vulnerability              *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_sweet32_vulnerability,omitempty"`
 	IssueSslTicketbleedVulnerability          *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_ticketbleed_vulnerability,omitempty"`
 	IssueSslTls10Support                      *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_tls10_support,omitempty"`
@@ -6612,38 +6612,6 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslAnonymousNu
 	o.IssueSslAnonymousNullCiphers = &v
 }
 
-// GetIssueSslBeastCbcCiphersPresent returns the IssueSslBeastCbcCiphersPresent field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslBeastCbcCiphersPresent() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
-	if o == nil || IsNil(o.IssueSslBeastCbcCiphersPresent) {
-		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
-		return ret
-	}
-	return *o.IssueSslBeastCbcCiphersPresent
-}
-
-// GetIssueSslBeastCbcCiphersPresentOk returns a tuple with the IssueSslBeastCbcCiphersPresent field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslBeastCbcCiphersPresentOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
-	if o == nil || IsNil(o.IssueSslBeastCbcCiphersPresent) {
-		return nil, false
-	}
-	return o.IssueSslBeastCbcCiphersPresent, true
-}
-
-// HasIssueSslBeastCbcCiphersPresent returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslBeastCbcCiphersPresent() bool {
-	if o != nil && !IsNil(o.IssueSslBeastCbcCiphersPresent) {
-		return true
-	}
-
-	return false
-}
-
-// SetIssueSslBeastCbcCiphersPresent gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslBeastCbcCiphersPresent field.
-func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslBeastCbcCiphersPresent(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
-	o.IssueSslBeastCbcCiphersPresent = &v
-}
-
 // GetIssueSslBeastTls10CbcCiphers returns the IssueSslBeastTls10CbcCiphers field value if set, zero value otherwise.
 func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslBeastTls10CbcCiphers() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
 	if o == nil || IsNil(o.IssueSslBeastTls10CbcCiphers) {
@@ -8210,6 +8178,38 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslSslv2Suppor
 // SetIssueSslSslv2Support gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslSslv2Support field.
 func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslSslv2Support(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
 	o.IssueSslSslv2Support = &v
+}
+
+// GetIssueSslSuboptimalAverageStrengthCiphers returns the IssueSslSuboptimalAverageStrengthCiphers field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslSuboptimalAverageStrengthCiphers() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslSuboptimalAverageStrengthCiphers) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslSuboptimalAverageStrengthCiphers
+}
+
+// GetIssueSslSuboptimalAverageStrengthCiphersOk returns a tuple with the IssueSslSuboptimalAverageStrengthCiphers field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslSuboptimalAverageStrengthCiphersOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslSuboptimalAverageStrengthCiphers) {
+		return nil, false
+	}
+	return o.IssueSslSuboptimalAverageStrengthCiphers, true
+}
+
+// HasIssueSslSuboptimalAverageStrengthCiphers returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslSuboptimalAverageStrengthCiphers() bool {
+	if o != nil && !IsNil(o.IssueSslSuboptimalAverageStrengthCiphers) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslSuboptimalAverageStrengthCiphers gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslSuboptimalAverageStrengthCiphers field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslSuboptimalAverageStrengthCiphers(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslSuboptimalAverageStrengthCiphers = &v
 }
 
 // GetIssueSslSweet32Vulnerability returns the IssueSslSweet32Vulnerability field value if set, zero value otherwise.
@@ -13665,9 +13665,6 @@ func (o GetProfile200ResponseConfigurationSecurityTests) ToMap() (map[string]int
 	if !IsNil(o.IssueSslAnonymousNullCiphers) {
 		toSerialize["issue_ssl_anonymous_null_ciphers"] = o.IssueSslAnonymousNullCiphers
 	}
-	if !IsNil(o.IssueSslBeastCbcCiphersPresent) {
-		toSerialize["issue_ssl_beast_cbc_ciphers_present"] = o.IssueSslBeastCbcCiphersPresent
-	}
 	if !IsNil(o.IssueSslBeastTls10CbcCiphers) {
 		toSerialize["issue_ssl_beast_tls10_cbc_ciphers"] = o.IssueSslBeastTls10CbcCiphers
 	}
@@ -13814,6 +13811,9 @@ func (o GetProfile200ResponseConfigurationSecurityTests) ToMap() (map[string]int
 	}
 	if !IsNil(o.IssueSslSslv2Support) {
 		toSerialize["issue_ssl_sslv2_support"] = o.IssueSslSslv2Support
+	}
+	if !IsNil(o.IssueSslSuboptimalAverageStrengthCiphers) {
+		toSerialize["issue_ssl_suboptimal_average_strength_ciphers"] = o.IssueSslSuboptimalAverageStrengthCiphers
 	}
 	if !IsNil(o.IssueSslSweet32Vulnerability) {
 		toSerialize["issue_ssl_sweet32_vulnerability"] = o.IssueSslSweet32Vulnerability
@@ -14486,7 +14486,6 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) UnmarshalJSON(data []b
 		delete(additionalProperties, "ssl_certificate")
 		delete(additionalProperties, "ssl")
 		delete(additionalProperties, "issue_ssl_anonymous_null_ciphers")
-		delete(additionalProperties, "issue_ssl_beast_cbc_ciphers_present")
 		delete(additionalProperties, "issue_ssl_beast_tls10_cbc_ciphers")
 		delete(additionalProperties, "issue_ssl_broken_chain_of_trust")
 		delete(additionalProperties, "issue_ssl_ccs_injection_vulnerability")
@@ -14536,6 +14535,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) UnmarshalJSON(data []b
 		delete(additionalProperties, "issue_ssl_robot_vulnerability")
 		delete(additionalProperties, "issue_ssl_sha1_certificate_fingerprint")
 		delete(additionalProperties, "issue_ssl_sslv2_support")
+		delete(additionalProperties, "issue_ssl_suboptimal_average_strength_ciphers")
 		delete(additionalProperties, "issue_ssl_sweet32_vulnerability")
 		delete(additionalProperties, "issue_ssl_ticketbleed_vulnerability")
 		delete(additionalProperties, "issue_ssl_tls10_support")
