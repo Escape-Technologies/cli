@@ -69,6 +69,9 @@ type GetProfile200ResponseConfigurationSecurityTests struct {
 	FrontendCommandInjection                  *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"frontend_command_injection,omitempty"`
 	ConsoleError                              *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"console_error,omitempty"`
 	Cors                                      *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"cors,omitempty"`
+	CorsAcaoMissing                           *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"cors_acao_missing,omitempty"`
+	CorsAcaoMisconfig                         *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"cors_acao_misconfig,omitempty"`
+	CorsVaryHeader                            *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"cors_vary_header,omitempty"`
 	CspAllowedScripts                         *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"csp_allowed_scripts,omitempty"`
 	CspMissing                                *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"csp_missing,omitempty"`
 	CspUnsafeEval                             *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"csp_unsafe_eval,omitempty"`
@@ -2029,6 +2032,102 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) HasCors() bool {
 // SetCors gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the Cors field.
 func (o *GetProfile200ResponseConfigurationSecurityTests) SetCors(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
 	o.Cors = &v
+}
+
+// GetCorsAcaoMissing returns the CorsAcaoMissing field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetCorsAcaoMissing() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.CorsAcaoMissing) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.CorsAcaoMissing
+}
+
+// GetCorsAcaoMissingOk returns a tuple with the CorsAcaoMissing field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetCorsAcaoMissingOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.CorsAcaoMissing) {
+		return nil, false
+	}
+	return o.CorsAcaoMissing, true
+}
+
+// HasCorsAcaoMissing returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasCorsAcaoMissing() bool {
+	if o != nil && !IsNil(o.CorsAcaoMissing) {
+		return true
+	}
+
+	return false
+}
+
+// SetCorsAcaoMissing gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the CorsAcaoMissing field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetCorsAcaoMissing(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.CorsAcaoMissing = &v
+}
+
+// GetCorsAcaoMisconfig returns the CorsAcaoMisconfig field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetCorsAcaoMisconfig() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.CorsAcaoMisconfig) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.CorsAcaoMisconfig
+}
+
+// GetCorsAcaoMisconfigOk returns a tuple with the CorsAcaoMisconfig field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetCorsAcaoMisconfigOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.CorsAcaoMisconfig) {
+		return nil, false
+	}
+	return o.CorsAcaoMisconfig, true
+}
+
+// HasCorsAcaoMisconfig returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasCorsAcaoMisconfig() bool {
+	if o != nil && !IsNil(o.CorsAcaoMisconfig) {
+		return true
+	}
+
+	return false
+}
+
+// SetCorsAcaoMisconfig gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the CorsAcaoMisconfig field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetCorsAcaoMisconfig(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.CorsAcaoMisconfig = &v
+}
+
+// GetCorsVaryHeader returns the CorsVaryHeader field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetCorsVaryHeader() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.CorsVaryHeader) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.CorsVaryHeader
+}
+
+// GetCorsVaryHeaderOk returns a tuple with the CorsVaryHeader field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetCorsVaryHeaderOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.CorsVaryHeader) {
+		return nil, false
+	}
+	return o.CorsVaryHeader, true
+}
+
+// HasCorsVaryHeader returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasCorsVaryHeader() bool {
+	if o != nil && !IsNil(o.CorsVaryHeader) {
+		return true
+	}
+
+	return false
+}
+
+// SetCorsVaryHeader gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the CorsVaryHeader field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetCorsVaryHeader(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.CorsVaryHeader = &v
 }
 
 // GetCspAllowedScripts returns the CspAllowedScripts field value if set, zero value otherwise.
@@ -13071,6 +13170,15 @@ func (o GetProfile200ResponseConfigurationSecurityTests) ToMap() (map[string]int
 	if !IsNil(o.Cors) {
 		toSerialize["cors"] = o.Cors
 	}
+	if !IsNil(o.CorsAcaoMissing) {
+		toSerialize["cors_acao_missing"] = o.CorsAcaoMissing
+	}
+	if !IsNil(o.CorsAcaoMisconfig) {
+		toSerialize["cors_acao_misconfig"] = o.CorsAcaoMisconfig
+	}
+	if !IsNil(o.CorsVaryHeader) {
+		toSerialize["cors_vary_header"] = o.CorsVaryHeader
+	}
 	if !IsNil(o.CspAllowedScripts) {
 		toSerialize["csp_allowed_scripts"] = o.CspAllowedScripts
 	}
@@ -14163,6 +14271,9 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) UnmarshalJSON(data []b
 		delete(additionalProperties, "frontend_command_injection")
 		delete(additionalProperties, "console_error")
 		delete(additionalProperties, "cors")
+		delete(additionalProperties, "cors_acao_missing")
+		delete(additionalProperties, "cors_acao_misconfig")
+		delete(additionalProperties, "cors_vary_header")
 		delete(additionalProperties, "csp_allowed_scripts")
 		delete(additionalProperties, "csp_missing")
 		delete(additionalProperties, "csp_unsafe_eval")
