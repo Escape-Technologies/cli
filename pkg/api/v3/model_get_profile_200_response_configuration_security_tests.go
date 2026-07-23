@@ -60,6 +60,8 @@ type GetProfile200ResponseConfigurationSecurityTests struct {
 	AwstatsExposure                           *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"awstats_exposure,omitempty"`
 	BsphpInfo                                 *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"bsphp_info,omitempty"`
 	Bola                                      *GetProfile200ResponseConfigurationSecurityTestsBola                      `json:"bola,omitempty"`
+	BolaEnum                                  *GetProfile200ResponseConfigurationSecurityTestsBola                      `json:"bola_enum,omitempty"`
+	BolaIdor                                  *GetProfile200ResponseConfigurationSecurityTestsBola                      `json:"bola_idor,omitempty"`
 	CharacterLimit                            *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"character_limit,omitempty"`
 	FrontendBola                              *GetProfile200ResponseConfigurationSecurityTestsBola                      `json:"frontend_bola,omitempty"`
 	CloudstackDefaultLogin                    *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"cloudstack_default_login,omitempty"`
@@ -1744,6 +1746,70 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) HasBola() bool {
 // SetBola gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsBola and assigns it to the Bola field.
 func (o *GetProfile200ResponseConfigurationSecurityTests) SetBola(v GetProfile200ResponseConfigurationSecurityTestsBola) {
 	o.Bola = &v
+}
+
+// GetBolaEnum returns the BolaEnum field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetBolaEnum() GetProfile200ResponseConfigurationSecurityTestsBola {
+	if o == nil || IsNil(o.BolaEnum) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsBola
+		return ret
+	}
+	return *o.BolaEnum
+}
+
+// GetBolaEnumOk returns a tuple with the BolaEnum field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetBolaEnumOk() (*GetProfile200ResponseConfigurationSecurityTestsBola, bool) {
+	if o == nil || IsNil(o.BolaEnum) {
+		return nil, false
+	}
+	return o.BolaEnum, true
+}
+
+// HasBolaEnum returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasBolaEnum() bool {
+	if o != nil && !IsNil(o.BolaEnum) {
+		return true
+	}
+
+	return false
+}
+
+// SetBolaEnum gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsBola and assigns it to the BolaEnum field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetBolaEnum(v GetProfile200ResponseConfigurationSecurityTestsBola) {
+	o.BolaEnum = &v
+}
+
+// GetBolaIdor returns the BolaIdor field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetBolaIdor() GetProfile200ResponseConfigurationSecurityTestsBola {
+	if o == nil || IsNil(o.BolaIdor) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsBola
+		return ret
+	}
+	return *o.BolaIdor
+}
+
+// GetBolaIdorOk returns a tuple with the BolaIdor field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetBolaIdorOk() (*GetProfile200ResponseConfigurationSecurityTestsBola, bool) {
+	if o == nil || IsNil(o.BolaIdor) {
+		return nil, false
+	}
+	return o.BolaIdor, true
+}
+
+// HasBolaIdor returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasBolaIdor() bool {
+	if o != nil && !IsNil(o.BolaIdor) {
+		return true
+	}
+
+	return false
+}
+
+// SetBolaIdor gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsBola and assigns it to the BolaIdor field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetBolaIdor(v GetProfile200ResponseConfigurationSecurityTestsBola) {
+	o.BolaIdor = &v
 }
 
 // GetCharacterLimit returns the CharacterLimit field value if set, zero value otherwise.
@@ -13143,6 +13209,12 @@ func (o GetProfile200ResponseConfigurationSecurityTests) ToMap() (map[string]int
 	if !IsNil(o.Bola) {
 		toSerialize["bola"] = o.Bola
 	}
+	if !IsNil(o.BolaEnum) {
+		toSerialize["bola_enum"] = o.BolaEnum
+	}
+	if !IsNil(o.BolaIdor) {
+		toSerialize["bola_idor"] = o.BolaIdor
+	}
 	if !IsNil(o.CharacterLimit) {
 		toSerialize["character_limit"] = o.CharacterLimit
 	}
@@ -14262,6 +14334,8 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) UnmarshalJSON(data []b
 		delete(additionalProperties, "awstats_exposure")
 		delete(additionalProperties, "bsphp_info")
 		delete(additionalProperties, "bola")
+		delete(additionalProperties, "bola_enum")
+		delete(additionalProperties, "bola_idor")
 		delete(additionalProperties, "character_limit")
 		delete(additionalProperties, "frontend_bola")
 		delete(additionalProperties, "cloudstack_default_login")
