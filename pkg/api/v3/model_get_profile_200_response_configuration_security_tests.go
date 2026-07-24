@@ -166,7 +166,6 @@ type GetProfile200ResponseConfigurationSecurityTests struct {
 	ImproperInputXssQueryParams               *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"improper_input_xss_query_params,omitempty"`
 	ImproperInputXssReflection                *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"improper_input_xss_reflection,omitempty"`
 	IntrospectionEnabled                      *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"introspection_enabled,omitempty"`
-	JwtAlgConfusion                           *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"jwt_alg_confusion,omitempty"`
 	JwtAlgConfusionRsToHs                     *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"jwt_alg_confusion_rs_to_hs,omitempty"`
 	JwtAlgNone                                *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"jwt_alg_none,omitempty"`
 	ExposedJwt                                *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"exposed_jwt,omitempty"`
@@ -5138,38 +5137,6 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) HasIntrospectionEnable
 // SetIntrospectionEnabled gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IntrospectionEnabled field.
 func (o *GetProfile200ResponseConfigurationSecurityTests) SetIntrospectionEnabled(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
 	o.IntrospectionEnabled = &v
-}
-
-// GetJwtAlgConfusion returns the JwtAlgConfusion field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationSecurityTests) GetJwtAlgConfusion() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
-	if o == nil || IsNil(o.JwtAlgConfusion) {
-		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
-		return ret
-	}
-	return *o.JwtAlgConfusion
-}
-
-// GetJwtAlgConfusionOk returns a tuple with the JwtAlgConfusion field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationSecurityTests) GetJwtAlgConfusionOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
-	if o == nil || IsNil(o.JwtAlgConfusion) {
-		return nil, false
-	}
-	return o.JwtAlgConfusion, true
-}
-
-// HasJwtAlgConfusion returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationSecurityTests) HasJwtAlgConfusion() bool {
-	if o != nil && !IsNil(o.JwtAlgConfusion) {
-		return true
-	}
-
-	return false
-}
-
-// SetJwtAlgConfusion gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the JwtAlgConfusion field.
-func (o *GetProfile200ResponseConfigurationSecurityTests) SetJwtAlgConfusion(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
-	o.JwtAlgConfusion = &v
 }
 
 // GetJwtAlgConfusionRsToHs returns the JwtAlgConfusionRsToHs field value if set, zero value otherwise.
@@ -13527,9 +13494,6 @@ func (o GetProfile200ResponseConfigurationSecurityTests) ToMap() (map[string]int
 	if !IsNil(o.IntrospectionEnabled) {
 		toSerialize["introspection_enabled"] = o.IntrospectionEnabled
 	}
-	if !IsNil(o.JwtAlgConfusion) {
-		toSerialize["jwt_alg_confusion"] = o.JwtAlgConfusion
-	}
 	if !IsNil(o.JwtAlgConfusionRsToHs) {
 		toSerialize["jwt_alg_confusion_rs_to_hs"] = o.JwtAlgConfusionRsToHs
 	}
@@ -14440,7 +14404,6 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) UnmarshalJSON(data []b
 		delete(additionalProperties, "improper_input_xss_query_params")
 		delete(additionalProperties, "improper_input_xss_reflection")
 		delete(additionalProperties, "introspection_enabled")
-		delete(additionalProperties, "jwt_alg_confusion")
 		delete(additionalProperties, "jwt_alg_confusion_rs_to_hs")
 		delete(additionalProperties, "jwt_alg_none")
 		delete(additionalProperties, "exposed_jwt")
