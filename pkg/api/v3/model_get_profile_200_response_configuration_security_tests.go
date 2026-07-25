@@ -63,6 +63,7 @@ type GetProfile200ResponseConfigurationSecurityTests struct {
 	BolaEnum                                  *GetProfile200ResponseConfigurationSecurityTestsBola                      `json:"bola_enum,omitempty"`
 	BolaIdor                                  *GetProfile200ResponseConfigurationSecurityTestsBola                      `json:"bola_idor,omitempty"`
 	CharacterLimit                            *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"character_limit,omitempty"`
+	CgiBinRce                                 *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"cgi_bin_rce,omitempty"`
 	FrontendBola                              *GetProfile200ResponseConfigurationSecurityTestsBola                      `json:"frontend_bola,omitempty"`
 	CloudstackDefaultLogin                    *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"cloudstack_default_login,omitempty"`
 	CodimdUnauthFileUpload                    *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"codimd_unauth_file_upload,omitempty"`
@@ -1832,6 +1833,38 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) HasCharacterLimit() bo
 // SetCharacterLimit gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the CharacterLimit field.
 func (o *GetProfile200ResponseConfigurationSecurityTests) SetCharacterLimit(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
 	o.CharacterLimit = &v
+}
+
+// GetCgiBinRce returns the CgiBinRce field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetCgiBinRce() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.CgiBinRce) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.CgiBinRce
+}
+
+// GetCgiBinRceOk returns a tuple with the CgiBinRce field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetCgiBinRceOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.CgiBinRce) {
+		return nil, false
+	}
+	return o.CgiBinRce, true
+}
+
+// HasCgiBinRce returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasCgiBinRce() bool {
+	if o != nil && !IsNil(o.CgiBinRce) {
+		return true
+	}
+
+	return false
+}
+
+// SetCgiBinRce gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the CgiBinRce field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetCgiBinRce(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.CgiBinRce = &v
 }
 
 // GetFrontendBola returns the FrontendBola field value if set, zero value otherwise.
@@ -12888,6 +12921,9 @@ func (o GetProfile200ResponseConfigurationSecurityTests) ToMap() (map[string]int
 	if !IsNil(o.CharacterLimit) {
 		toSerialize["character_limit"] = o.CharacterLimit
 	}
+	if !IsNil(o.CgiBinRce) {
+		toSerialize["cgi_bin_rce"] = o.CgiBinRce
+	}
 	if !IsNil(o.FrontendBola) {
 		toSerialize["frontend_bola"] = o.FrontendBola
 	}
@@ -13977,6 +14013,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) UnmarshalJSON(data []b
 		delete(additionalProperties, "bola_enum")
 		delete(additionalProperties, "bola_idor")
 		delete(additionalProperties, "character_limit")
+		delete(additionalProperties, "cgi_bin_rce")
 		delete(additionalProperties, "frontend_bola")
 		delete(additionalProperties, "cloudstack_default_login")
 		delete(additionalProperties, "codimd_unauth_file_upload")
