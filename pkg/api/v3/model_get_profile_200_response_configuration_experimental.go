@@ -19,18 +19,17 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationExperimental{}
 
 // GetProfile200ResponseConfigurationExperimental struct for GetProfile200ResponseConfigurationExperimental
 type GetProfile200ResponseConfigurationExperimental struct {
-	BlstExplorationOnly            *bool                                                                          `json:"blst_exploration_only,omitempty"`
-	AgenticIdor                    *bool                                                                          `json:"agentic_idor,omitempty"`
-	RegressionTestingFileUploadIds []string                                                                       `json:"regression_testing_file_upload_ids,omitempty"`
-	AsmTechnologies                *bool                                                                          `json:"asm_technologies,omitempty"`
-	AsmCodeProjects                *bool                                                                          `json:"asm_code_projects,omitempty"`
-	AsmEnumerateCodeProjects       *bool                                                                          `json:"asm_enumerate_code_projects,omitempty"`
-	ExternalCrawlingTask           *bool                                                                          `json:"external_crawling_task,omitempty"`
-	XssAgentModelAlias             *ENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS `json:"xss_agent_model_alias,omitempty"`
-	AsmCveAgent                    *bool                                                                          `json:"asm_cve_agent,omitempty"`
-	ExtendedPortScan               *bool                                                                          `json:"extended_port_scan,omitempty"`
-	DastMultiAgentPentest          *bool                                                                          `json:"dast_multi_agent_pentest,omitempty"`
-	FeatureFlags                   []string                                                                       `json:"feature_flags,omitempty"`
+	BlstExplorationOnly            *bool    `json:"blst_exploration_only,omitempty"`
+	AgenticIdor                    *bool    `json:"agentic_idor,omitempty"`
+	RegressionTestingFileUploadIds []string `json:"regression_testing_file_upload_ids,omitempty"`
+	AsmTechnologies                *bool    `json:"asm_technologies,omitempty"`
+	AsmCodeProjects                *bool    `json:"asm_code_projects,omitempty"`
+	AsmEnumerateCodeProjects       *bool    `json:"asm_enumerate_code_projects,omitempty"`
+	ExternalCrawlingTask           *bool    `json:"external_crawling_task,omitempty"`
+	AsmCveAgent                    *bool    `json:"asm_cve_agent,omitempty"`
+	ExtendedPortScan               *bool    `json:"extended_port_scan,omitempty"`
+	DastMultiAgentPentest          *bool    `json:"dast_multi_agent_pentest,omitempty"`
+	FeatureFlags                   []string `json:"feature_flags,omitempty"`
 	AdditionalProperties           map[string]interface{}
 }
 
@@ -277,38 +276,6 @@ func (o *GetProfile200ResponseConfigurationExperimental) SetExternalCrawlingTask
 	o.ExternalCrawlingTask = &v
 }
 
-// GetXssAgentModelAlias returns the XssAgentModelAlias field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationExperimental) GetXssAgentModelAlias() ENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS {
-	if o == nil || IsNil(o.XssAgentModelAlias) {
-		var ret ENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS
-		return ret
-	}
-	return *o.XssAgentModelAlias
-}
-
-// GetXssAgentModelAliasOk returns a tuple with the XssAgentModelAlias field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationExperimental) GetXssAgentModelAliasOk() (*ENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS, bool) {
-	if o == nil || IsNil(o.XssAgentModelAlias) {
-		return nil, false
-	}
-	return o.XssAgentModelAlias, true
-}
-
-// HasXssAgentModelAlias returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationExperimental) HasXssAgentModelAlias() bool {
-	if o != nil && !IsNil(o.XssAgentModelAlias) {
-		return true
-	}
-
-	return false
-}
-
-// SetXssAgentModelAlias gets a reference to the given ENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS and assigns it to the XssAgentModelAlias field.
-func (o *GetProfile200ResponseConfigurationExperimental) SetXssAgentModelAlias(v ENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS) {
-	o.XssAgentModelAlias = &v
-}
-
 // GetAsmCveAgent returns the AsmCveAgent field value if set, zero value otherwise.
 func (o *GetProfile200ResponseConfigurationExperimental) GetAsmCveAgent() bool {
 	if o == nil || IsNil(o.AsmCveAgent) {
@@ -468,9 +435,6 @@ func (o GetProfile200ResponseConfigurationExperimental) ToMap() (map[string]inte
 	if !IsNil(o.ExternalCrawlingTask) {
 		toSerialize["external_crawling_task"] = o.ExternalCrawlingTask
 	}
-	if !IsNil(o.XssAgentModelAlias) {
-		toSerialize["xss_agent_model_alias"] = o.XssAgentModelAlias
-	}
 	if !IsNil(o.AsmCveAgent) {
 		toSerialize["asm_cve_agent"] = o.AsmCveAgent
 	}
@@ -512,7 +476,6 @@ func (o *GetProfile200ResponseConfigurationExperimental) UnmarshalJSON(data []by
 		delete(additionalProperties, "asm_code_projects")
 		delete(additionalProperties, "asm_enumerate_code_projects")
 		delete(additionalProperties, "external_crawling_task")
-		delete(additionalProperties, "xss_agent_model_alias")
 		delete(additionalProperties, "asm_cve_agent")
 		delete(additionalProperties, "extended_port_scan")
 		delete(additionalProperties, "dast_multi_agent_pentest")
