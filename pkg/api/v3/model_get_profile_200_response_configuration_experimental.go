@@ -27,7 +27,6 @@ type GetProfile200ResponseConfigurationExperimental struct {
 	AsmEnumerateCodeProjects       *bool                                                                          `json:"asm_enumerate_code_projects,omitempty"`
 	ExternalCrawlingTask           *bool                                                                          `json:"external_crawling_task,omitempty"`
 	XssAgentModelAlias             *ENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS `json:"xss_agent_model_alias,omitempty"`
-	SqliAgentModelAlias            *ENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS `json:"sqli_agent_model_alias,omitempty"`
 	AsmCveAgent                    *bool                                                                          `json:"asm_cve_agent,omitempty"`
 	ExtendedPortScan               *bool                                                                          `json:"extended_port_scan,omitempty"`
 	DastMultiAgentPentest          *bool                                                                          `json:"dast_multi_agent_pentest,omitempty"`
@@ -310,38 +309,6 @@ func (o *GetProfile200ResponseConfigurationExperimental) SetXssAgentModelAlias(v
 	o.XssAgentModelAlias = &v
 }
 
-// GetSqliAgentModelAlias returns the SqliAgentModelAlias field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationExperimental) GetSqliAgentModelAlias() ENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS {
-	if o == nil || IsNil(o.SqliAgentModelAlias) {
-		var ret ENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS
-		return ret
-	}
-	return *o.SqliAgentModelAlias
-}
-
-// GetSqliAgentModelAliasOk returns a tuple with the SqliAgentModelAlias field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationExperimental) GetSqliAgentModelAliasOk() (*ENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS, bool) {
-	if o == nil || IsNil(o.SqliAgentModelAlias) {
-		return nil, false
-	}
-	return o.SqliAgentModelAlias, true
-}
-
-// HasSqliAgentModelAlias returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationExperimental) HasSqliAgentModelAlias() bool {
-	if o != nil && !IsNil(o.SqliAgentModelAlias) {
-		return true
-	}
-
-	return false
-}
-
-// SetSqliAgentModelAlias gets a reference to the given ENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS and assigns it to the SqliAgentModelAlias field.
-func (o *GetProfile200ResponseConfigurationExperimental) SetSqliAgentModelAlias(v ENUMPROPERTIESCONFIGURATIONPROPERTIESEXPERIMENTALPROPERTIESXSSAGENTMODELALIAS) {
-	o.SqliAgentModelAlias = &v
-}
-
 // GetAsmCveAgent returns the AsmCveAgent field value if set, zero value otherwise.
 func (o *GetProfile200ResponseConfigurationExperimental) GetAsmCveAgent() bool {
 	if o == nil || IsNil(o.AsmCveAgent) {
@@ -504,9 +471,6 @@ func (o GetProfile200ResponseConfigurationExperimental) ToMap() (map[string]inte
 	if !IsNil(o.XssAgentModelAlias) {
 		toSerialize["xss_agent_model_alias"] = o.XssAgentModelAlias
 	}
-	if !IsNil(o.SqliAgentModelAlias) {
-		toSerialize["sqli_agent_model_alias"] = o.SqliAgentModelAlias
-	}
 	if !IsNil(o.AsmCveAgent) {
 		toSerialize["asm_cve_agent"] = o.AsmCveAgent
 	}
@@ -549,7 +513,6 @@ func (o *GetProfile200ResponseConfigurationExperimental) UnmarshalJSON(data []by
 		delete(additionalProperties, "asm_enumerate_code_projects")
 		delete(additionalProperties, "external_crawling_task")
 		delete(additionalProperties, "xss_agent_model_alias")
-		delete(additionalProperties, "sqli_agent_model_alias")
 		delete(additionalProperties, "asm_cve_agent")
 		delete(additionalProperties, "extended_port_scan")
 		delete(additionalProperties, "dast_multi_agent_pentest")
