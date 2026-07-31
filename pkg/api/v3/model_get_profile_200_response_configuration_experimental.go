@@ -28,7 +28,6 @@ type GetProfile200ResponseConfigurationExperimental struct {
 	ExternalCrawlingTask           *bool    `json:"external_crawling_task,omitempty"`
 	AsmCveAgent                    *bool    `json:"asm_cve_agent,omitempty"`
 	ExtendedPortScan               *bool    `json:"extended_port_scan,omitempty"`
-	DastMultiAgentPentest          *bool    `json:"dast_multi_agent_pentest,omitempty"`
 	FeatureFlags                   []string `json:"feature_flags,omitempty"`
 	AdditionalProperties           map[string]interface{}
 }
@@ -340,38 +339,6 @@ func (o *GetProfile200ResponseConfigurationExperimental) SetExtendedPortScan(v b
 	o.ExtendedPortScan = &v
 }
 
-// GetDastMultiAgentPentest returns the DastMultiAgentPentest field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationExperimental) GetDastMultiAgentPentest() bool {
-	if o == nil || IsNil(o.DastMultiAgentPentest) {
-		var ret bool
-		return ret
-	}
-	return *o.DastMultiAgentPentest
-}
-
-// GetDastMultiAgentPentestOk returns a tuple with the DastMultiAgentPentest field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationExperimental) GetDastMultiAgentPentestOk() (*bool, bool) {
-	if o == nil || IsNil(o.DastMultiAgentPentest) {
-		return nil, false
-	}
-	return o.DastMultiAgentPentest, true
-}
-
-// HasDastMultiAgentPentest returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationExperimental) HasDastMultiAgentPentest() bool {
-	if o != nil && !IsNil(o.DastMultiAgentPentest) {
-		return true
-	}
-
-	return false
-}
-
-// SetDastMultiAgentPentest gets a reference to the given bool and assigns it to the DastMultiAgentPentest field.
-func (o *GetProfile200ResponseConfigurationExperimental) SetDastMultiAgentPentest(v bool) {
-	o.DastMultiAgentPentest = &v
-}
-
 // GetFeatureFlags returns the FeatureFlags field value if set, zero value otherwise.
 func (o *GetProfile200ResponseConfigurationExperimental) GetFeatureFlags() []string {
 	if o == nil || IsNil(o.FeatureFlags) {
@@ -441,9 +408,6 @@ func (o GetProfile200ResponseConfigurationExperimental) ToMap() (map[string]inte
 	if !IsNil(o.ExtendedPortScan) {
 		toSerialize["extended_port_scan"] = o.ExtendedPortScan
 	}
-	if !IsNil(o.DastMultiAgentPentest) {
-		toSerialize["dast_multi_agent_pentest"] = o.DastMultiAgentPentest
-	}
 	if !IsNil(o.FeatureFlags) {
 		toSerialize["feature_flags"] = o.FeatureFlags
 	}
@@ -478,7 +442,6 @@ func (o *GetProfile200ResponseConfigurationExperimental) UnmarshalJSON(data []by
 		delete(additionalProperties, "external_crawling_task")
 		delete(additionalProperties, "asm_cve_agent")
 		delete(additionalProperties, "extended_port_scan")
-		delete(additionalProperties, "dast_multi_agent_pentest")
 		delete(additionalProperties, "feature_flags")
 		o.AdditionalProperties = additionalProperties
 	}
