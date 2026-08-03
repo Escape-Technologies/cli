@@ -900,6 +900,12 @@ func init() {
 	scansCmd.AddCommand(scanIgnoreCmd)
 	scansCmd.AddCommand(scansReasoningCmd)
 	scansReasoningCmd.Flags().IntVar(
+		&reasoningListLimit,
+		"list-limit",
+		defaultReasoningListLimit,
+		fmt.Sprintf("maximum number of event summaries to fetch from the API (max %d)", maxReasoningListLimit),
+	)
+	scansReasoningCmd.Flags().IntVar(
 		&reasoningHydrateLimit,
 		"hydrate-limit",
 		defaultReasoningHydrateLimit,
