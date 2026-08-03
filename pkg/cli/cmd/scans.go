@@ -898,6 +898,13 @@ func init() {
 	scansCmd.AddCommand(scanWatchCmd)
 	scansCmd.AddCommand(scanCancelCmd)
 	scansCmd.AddCommand(scanIgnoreCmd)
+	scansCmd.AddCommand(scansReasoningCmd)
+	scansReasoningCmd.Flags().IntVar(
+		&reasoningHydrateLimit,
+		"hydrate-limit",
+		defaultReasoningHydrateLimit,
+		fmt.Sprintf("maximum number of events to hydrate with full descriptions (0 = summaries only, max %d)", maxReasoningHydrateLimit),
+	)
 	scansCmd.AddCommand(scanTargetsCmd)
 	scanTargetsCmd.Flags().StringVar(&scanTargetsType, "type", "", "filter by target type: API_ROUTE, GRAPHQL_RESOLVER")
 	scanTargetsCmd.Flags().IntVar(&scanTargetsSize, "size", 0, "limit total number of targets returned")
