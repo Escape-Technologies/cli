@@ -24,10 +24,10 @@ var reasoningHydrateLimit int
 // ScanReasoningLogs bundles AI agent reasoning and action events for a scan so
 // MCP/CLI callers can inspect how an assessment unfolded in one tool call.
 type ScanReasoningLogs struct {
-	ScanID          string                      `json:"scanId"`
-	Events          []v3.GetEvent200Response    `json:"events"`
-	EventsTruncated bool                        `json:"eventsTruncated,omitempty"`
-	EventErrors     []IssueEventHydrateError    `json:"eventErrors,omitempty"`
+	ScanID          string                   `json:"scanId"`
+	Events          []v3.GetEvent200Response `json:"events"`
+	EventsTruncated bool                     `json:"eventsTruncated,omitempty"`
+	EventErrors     []IssueEventHydrateError `json:"eventErrors,omitempty"`
 }
 
 var reasoningStages = []string{
@@ -86,7 +86,7 @@ events cannot be completed.`,
 
 func fetchScanReasoningLogs(ctx context.Context, scanID string, hydrateLimit int) (ScanReasoningLogs, error) {
 	if hydrateLimit < 0 {
-		return ScanReasoningLogs{}, fmt.Errorf("hydrate-limit must be >= 0")
+		return ScanReasoningLogs{}, errors.New("hydrate-limit must be >= 0")
 	}
 	if hydrateLimit > maxReasoningHydrateLimit {
 		return ScanReasoningLogs{}, fmt.Errorf("hydrate-limit must be <= %d", maxReasoningHydrateLimit)
