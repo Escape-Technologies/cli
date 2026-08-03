@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"strings"
+	"time"
 
 	"github.com/Escape-Technologies/cli/pkg/env"
 	climcp "github.com/Escape-Technologies/cli/pkg/mcp"
@@ -132,7 +133,7 @@ func buildMCPToolSpecs(
 			return nil, err
 		}
 
-		toolSpecs = append(toolSpecs, climcp.ToolSpec{
+		spec := climcp.ToolSpec{
 			Name:           tool.Name,
 			Path:           capability.Path,
 			Description:    capability.Short,
@@ -141,7 +142,11 @@ func buildMCPToolSpecs(
 			PositionalArgs: positionalArgs,
 			FlagBindings:   flagBindings,
 			BodyProperty:   bodyProperty,
-		})
+		}
+		if capability.Path == "escape-cli scans reasoning" {
+			spec.ExecutionTimeout = 2 * time.Minute
+		}
+		toolSpecs = append(toolSpecs, spec)
 	}
 
 	return toolSpecs, nil

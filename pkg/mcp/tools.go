@@ -46,6 +46,8 @@ type ToolSpec struct {
 	// from the request payload and forwarding it verbatim to the subprocess.
 	// Off by default so the Cobra-to-MCP mapping remains an explicit allowlist.
 	AllowExtraArgs bool
+	// ExecutionTimeout overrides defaultToolExecutionTimeout when set.
+	ExecutionTimeout time.Duration
 }
 
 // CommandExecutionOptions carries the shared runtime inputs the tool handlers
@@ -81,7 +83,11 @@ func buildToolHandler(
 			return mcpgo.NewToolResultError(err.Error()), nil
 		}
 
-		execCtx, cancel := context.WithTimeout(ctx, defaultToolExecutionTimeout)
+		timeout := defaultToolExecutionTimeout
+		if spec.ExecutionTimeout > 0 {
+			timeout = spec.ExecutionTimeout
+		}
+		execCtx, cancel := context.WithTimeout(ctx, timeout)
 		defer cancel()
 
 		result, err := ExecuteCLICommand(execCtx, ExecutionOptions{

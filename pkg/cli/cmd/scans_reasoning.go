@@ -16,15 +16,20 @@ import (
 const (
 	defaultReasoningHydrateLimit = 50
 	maxReasoningHydrateLimit     = 200
+	defaultReasoningListLimit    = 200
+	maxReasoningListLimit        = 500
 	maxReasoningHydrateWorkers   = 10
 )
 
 var reasoningHydrateLimit int
+var reasoningListLimit int
 
 // ScanReasoningLogs bundles AI agent reasoning and action events for a scan so
 // MCP/CLI callers can inspect how an assessment unfolded in one tool call.
 type ScanReasoningLogs struct {
 	ScanID          string                   `json:"scanId"`
+	Summaries       []v3.EventSummarized     `json:"summaries"`
+	ListTruncated   bool                     `json:"listTruncated,omitempty"`
 	Events          []v3.GetEvent200Response `json:"events"`
 	EventsTruncated bool                     `json:"eventsTruncated,omitempty"`
 	EventErrors     []IssueEventHydrateError `json:"eventErrors,omitempty"`
@@ -41,16 +46,18 @@ var scansReasoningCmd = &cobra.Command{
 	Short:   "List AI agent reasoning logs for a scan",
 	Long: `List AI Agent Reasoning Logs - Inspect How an Assessment Unfolded
 
-Fetches AGENT_REASONING and AGENT_ACTION events for a scan and hydrates each
-event's description and attachments so an AI agent can answer questions such as
-which scenarios were tested, how many vulnerabilities were found, and how a
-specific finding was discovered.
+Fetches AGENT_REASONING and AGENT_ACTION events for a scan. Summaries are always
+returned (up to --list-limit). Full descriptions and attachments are hydrated
+for the first --hydrate-limit events only — AI pentest scans can emit thousands
+of reasoning lines, so both caps keep responses bounded.
 
 OUTPUT SHAPE (JSON):
   {
     "scanId": "<scan-id>",
-    "events": [<EventDetailed>, ...],
-    "eventsTruncated": <bool>,          // true when more events exist than hydrated
+    "summaries": [<EventSummarized>, ...],
+    "listTruncated": <bool>,           // true when more events exist beyond list-limit
+    "events": [<EventDetailed>, ...],  // hydrated subset
+    "eventsTruncated": <bool>,         // true when more summaries exist than hydrated
     "eventErrors": [{"eventId": "...", "error": "..."}, ...]  // omitted on full success
   }
 
@@ -60,8 +67,11 @@ events cannot be completed.`,
 	Example: `  # Fetch reasoning logs for an AI pentest scan
   escape-cli scans reasoning <scan-id> -o json
 
-  # Hydrate more events (default limit is 50)
-  escape-cli scans reasoning <scan-id> --hydrate-limit 100 -o json`,
+  # Summaries only (no per-event GET fan-out)
+  escape-cli scans reasoning <scan-id> --hydrate-limit 0 -o json
+
+  # More summaries and hydrated events
+  escape-cli scans reasoning <scan-id> --list-limit 500 --hydrate-limit 100 -o json`,
 	Args: func(cmd *cobra.Command, args []string) error {
 		if len(args) != 1 {
 			_ = cmd.Help()
@@ -74,7 +84,12 @@ events cannot be completed.`,
 			return nil
 		}
 
-		result, err := fetchScanReasoningLogs(cmd.Context(), args[0], reasoningHydrateLimit)
+		result, err := fetchScanReasoningLogs(
+			cmd.Context(),
+			args[0],
+			reasoningListLimit,
+			reasoningHydrateLimit,
+		)
 		if err != nil {
 			return err
 		}
@@ -84,7 +99,18 @@ events cannot be completed.`,
 	},
 }
 
-func fetchScanReasoningLogs(ctx context.Context, scanID string, hydrateLimit int) (ScanReasoningLogs, error) {
+func fetchScanReasoningLogs(
+	ctx context.Context,
+	scanID string,
+	listLimit int,
+	hydrateLimit int,
+) (ScanReasoningLogs, error) {
+	if listLimit < 0 {
+		return ScanReasoningLogs{}, fmt.Errorf("list-limit must be >= 0")
+	}
+	if listLimit > maxReasoningListLimit {
+		return ScanReasoningLogs{}, fmt.Errorf("list-limit must be <= %d", maxReasoningListLimit)
+	}
 	if hydrateLimit < 0 {
 		return ScanReasoningLogs{}, errors.New("hydrate-limit must be >= 0")
 	}
@@ -92,13 +118,19 @@ func fetchScanReasoningLogs(ctx context.Context, scanID string, hydrateLimit int
 		return ScanReasoningLogs{}, fmt.Errorf("hydrate-limit must be <= %d", maxReasoningHydrateLimit)
 	}
 
-	summaries, err := listAllReasoningEvents(ctx, scanID)
+	if listLimit == 0 {
+		listLimit = defaultReasoningListLimit
+	}
+
+	summaries, listTruncated, err := listReasoningEvents(ctx, scanID, listLimit)
 	if err != nil {
 		return ScanReasoningLogs{}, err
 	}
 
 	result := ScanReasoningLogs{
 		ScanID:          scanID,
+		Summaries:       summaries,
+		ListTruncated:   listTruncated,
 		Events:          []v3.GetEvent200Response{},
 		EventsTruncated: hydrateLimit > 0 && len(summaries) > hydrateLimit,
 	}
@@ -120,26 +152,38 @@ func fetchScanReasoningLogs(ctx context.Context, scanID string, hydrateLimit int
 	return result, nil
 }
 
-func listAllReasoningEvents(ctx context.Context, scanID string) ([]v3.EventSummarized, error) {
+// ponytail: caps API pagination — assessments can have 10k+ reasoning events;
+// listing them all times out MCP (30s default) and staging public API.
+func listReasoningEvents(
+	ctx context.Context,
+	scanID string,
+	limit int,
+) ([]v3.EventSummarized, bool, error) {
 	filters := &escape.ListEventsFilters{
 		ScanIDs: []string{scanID},
 		Stages:  reasoningStages,
 	}
 
-	var allEvents []v3.EventSummarized
+	var summaries []v3.EventSummarized
 	next := ""
+	listTruncated := false
 	for {
 		events, cursor, err := escape.ListEvents(ctx, next, filters)
 		if err != nil {
-			return nil, fmt.Errorf("unable to list reasoning events: %w", err)
+			return nil, false, fmt.Errorf("unable to list reasoning events: %w", err)
 		}
-		allEvents = append(allEvents, events...)
+		summaries = append(summaries, events...)
+		if len(summaries) >= limit {
+			summaries = summaries[:limit]
+			listTruncated = cursor != nil && *cursor != ""
+			break
+		}
 		if cursor == nil || *cursor == "" {
 			break
 		}
 		next = *cursor
 	}
-	return allEvents, nil
+	return summaries, listTruncated, nil
 }
 
 func hydrateReasoningEvents(
