@@ -104,6 +104,7 @@ type GetProfile200ResponseConfigurationSecurityTests struct {
 	DnsrecordTxtSensitive                     *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"dnsrecord_txt_sensitive,omitempty"`
 	DnssecDisabled                            *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"dnssec_disabled,omitempty"`
 	StoredXss                                 *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"stored_xss,omitempty"`
+	ReflectedXss                              *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"reflected_xss,omitempty"`
 	DomainTakeover                            *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"domain_takeover,omitempty"`
 	Drupal7ElfinderRce                        *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"drupal7_elfinder_rce,omitempty"`
 	DrupalAvatarXss                           *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"drupal_avatar_xss,omitempty"`
@@ -3145,6 +3146,38 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) HasStoredXss() bool {
 // SetStoredXss gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the StoredXss field.
 func (o *GetProfile200ResponseConfigurationSecurityTests) SetStoredXss(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
 	o.StoredXss = &v
+}
+
+// GetReflectedXss returns the ReflectedXss field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetReflectedXss() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.ReflectedXss) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.ReflectedXss
+}
+
+// GetReflectedXssOk returns a tuple with the ReflectedXss field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetReflectedXssOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.ReflectedXss) {
+		return nil, false
+	}
+	return o.ReflectedXss, true
+}
+
+// HasReflectedXss returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasReflectedXss() bool {
+	if o != nil && !IsNil(o.ReflectedXss) {
+		return true
+	}
+
+	return false
+}
+
+// SetReflectedXss gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the ReflectedXss field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetReflectedXss(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.ReflectedXss = &v
 }
 
 // GetDomainTakeover returns the DomainTakeover field value if set, zero value otherwise.
@@ -13044,6 +13077,9 @@ func (o GetProfile200ResponseConfigurationSecurityTests) ToMap() (map[string]int
 	if !IsNil(o.StoredXss) {
 		toSerialize["stored_xss"] = o.StoredXss
 	}
+	if !IsNil(o.ReflectedXss) {
+		toSerialize["reflected_xss"] = o.ReflectedXss
+	}
 	if !IsNil(o.DomainTakeover) {
 		toSerialize["domain_takeover"] = o.DomainTakeover
 	}
@@ -14054,6 +14090,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) UnmarshalJSON(data []b
 		delete(additionalProperties, "dnsrecord_txt_sensitive")
 		delete(additionalProperties, "dnssec_disabled")
 		delete(additionalProperties, "stored_xss")
+		delete(additionalProperties, "reflected_xss")
 		delete(additionalProperties, "domain_takeover")
 		delete(additionalProperties, "drupal7_elfinder_rce")
 		delete(additionalProperties, "drupal_avatar_xss")
