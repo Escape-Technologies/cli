@@ -18,6 +18,10 @@ import (
 // per-request context deadline elapses.
 const defaultToolExecutionTimeout = 30 * time.Second
 
+// ReasoningToolExecutionTimeout extends the default MCP subprocess budget for
+// scans reasoning, which may list and hydrate hundreds of events.
+const ReasoningToolExecutionTimeout = 2 * time.Minute //nolint:mnd
+
 // stringSliceFlagArgsPerValue is the number of CLI args emitted per value for
 // a repeated string flag (flag name + value), e.g. `--status RUNNING`.
 const stringSliceFlagArgsPerValue = 2

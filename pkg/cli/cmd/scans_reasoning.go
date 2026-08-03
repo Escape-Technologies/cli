@@ -106,7 +106,7 @@ func fetchScanReasoningLogs(
 	hydrateLimit int,
 ) (ScanReasoningLogs, error) {
 	if listLimit < 0 {
-		return ScanReasoningLogs{}, fmt.Errorf("list-limit must be >= 0")
+		return ScanReasoningLogs{}, errors.New("list-limit must be >= 0")
 	}
 	if listLimit > maxReasoningListLimit {
 		return ScanReasoningLogs{}, fmt.Errorf("list-limit must be <= %d", maxReasoningListLimit)
