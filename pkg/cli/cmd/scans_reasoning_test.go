@@ -9,22 +9,22 @@ import (
 func TestFetchScanReasoningLogsRejectsInvalidLimits(t *testing.T) {
 	t.Parallel()
 
-	_, err := fetchScanReasoningLogs(t.Context(), "scan-1", -1, 50)
+	_, err := fetchScanReasoningLogs(t.Context(), "scan-1", "", "", -1, 50)
 	if err == nil {
 		t.Fatal("expected negative list-limit error")
 	}
 
-	_, err = fetchScanReasoningLogs(t.Context(), "scan-1", maxReasoningListLimit+1, 50)
+	_, err = fetchScanReasoningLogs(t.Context(), "scan-1", "", "", maxReasoningListLimit+1, 50)
 	if err == nil {
 		t.Fatal("expected list-limit cap error")
 	}
 
-	_, err = fetchScanReasoningLogs(t.Context(), "scan-1", 50, -1)
+	_, err = fetchScanReasoningLogs(t.Context(), "scan-1", "", "", 50, -1)
 	if err == nil {
 		t.Fatal("expected negative hydrate-limit error")
 	}
 
-	_, err = fetchScanReasoningLogs(t.Context(), "scan-1", 50, maxReasoningHydrateLimit+1)
+	_, err = fetchScanReasoningLogs(t.Context(), "scan-1", "", "", 50, maxReasoningHydrateLimit+1)
 	if err == nil {
 		t.Fatal("expected hydrate-limit cap error")
 	}

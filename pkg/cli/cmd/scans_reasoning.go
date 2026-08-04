@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"strings"
 	"sync"
 
 	"github.com/Escape-Technologies/cli/pkg/api/escape"
@@ -23,6 +24,8 @@ const (
 
 var reasoningHydrateLimit int
 var reasoningListLimit int
+var reasoningAgentID string
+var reasoningSearch string
 
 // ScanReasoningLogs bundles AI agent reasoning and action events for a scan so
 // MCP/CLI callers can inspect how an assessment unfolded in one tool call.
@@ -70,8 +73,11 @@ events cannot be completed.`,
   # Summaries only (no per-event GET fan-out)
   escape-cli scans reasoning <scan-id> --hydrate-limit 0 -o json
 
-  # More summaries and hydrated events
-  escape-cli scans reasoning <scan-id> --list-limit 500 --hydrate-limit 100 -o json`,
+  # Fetch reasoning logs for one agent
+  escape-cli scans reasoning <scan-id> --agent-id <agent-id> -o json
+
+  # Search within agent reasoning logs
+  escape-cli scans reasoning <scan-id> --agent-id <agent-id> --search "catalog/product" -o json`,
 	Args: func(cmd *cobra.Command, args []string) error {
 		if len(args) != 1 {
 			_ = cmd.Help()
@@ -87,6 +93,8 @@ events cannot be completed.`,
 		result, err := fetchScanReasoningLogs(
 			cmd.Context(),
 			args[0],
+			reasoningAgentID,
+			reasoningSearch,
 			reasoningListLimit,
 			reasoningHydrateLimit,
 		)
@@ -102,6 +110,8 @@ events cannot be completed.`,
 func fetchScanReasoningLogs(
 	ctx context.Context,
 	scanID string,
+	agentID string,
+	search string,
 	listLimit int,
 	hydrateLimit int,
 ) (ScanReasoningLogs, error) {
@@ -122,7 +132,7 @@ func fetchScanReasoningLogs(
 		listLimit = defaultReasoningListLimit
 	}
 
-	summaries, listTruncated, err := listReasoningEvents(ctx, scanID, listLimit)
+	summaries, listTruncated, err := listReasoningEvents(ctx, scanID, agentID, search, listLimit)
 	if err != nil {
 		return ScanReasoningLogs{}, err
 	}
@@ -157,11 +167,18 @@ func fetchScanReasoningLogs(
 func listReasoningEvents(
 	ctx context.Context,
 	scanID string,
+	agentID string,
+	search string,
 	limit int,
 ) ([]v3.EventSummarized, bool, error) {
+	if strings.TrimSpace(agentID) != "" {
+		return listAgentReasoningEvents(ctx, scanID, agentID, search, limit)
+	}
+
 	filters := &escape.ListEventsFilters{
 		ScanIDs: []string{scanID},
 		Stages:  reasoningStages,
+		Search:  search,
 	}
 
 	var summaries []v3.EventSummarized
@@ -173,6 +190,50 @@ func listReasoningEvents(
 			return nil, false, fmt.Errorf("unable to list reasoning events: %w", err)
 		}
 		summaries = append(summaries, events...)
+		if len(summaries) >= limit {
+			summaries = summaries[:limit]
+			listTruncated = cursor != nil && *cursor != ""
+			break
+		}
+		if cursor == nil || *cursor == "" {
+			break
+		}
+		next = *cursor
+	}
+	return summaries, listTruncated, nil
+}
+
+func listAgentReasoningEvents(
+	ctx context.Context,
+	scanID string,
+	agentID string,
+	search string,
+	limit int,
+) ([]v3.EventSummarized, bool, error) {
+	filters := &escape.ListScanAgentLogsFilters{
+		Search:        search,
+		Stages:        reasoningStages,
+		SortDirection: "desc",
+	}
+
+	var summaries []v3.EventSummarized
+	next := ""
+	listTruncated := false
+	for {
+		logs, cursor, err := escape.ListScanAgentLogs(ctx, scanID, agentID, next, 100, filters)
+		if err != nil {
+			return nil, false, fmt.Errorf("unable to list agent reasoning logs: %w", err)
+		}
+		for _, log := range logs {
+			summary := v3.EventSummarized{
+				Id:        log.ID,
+				CreatedAt: log.CreatedAt,
+				Title:     log.Title,
+				Stage:     v3.ENUMPROPERTIESEVENTSITEMSPROPERTIESSTAGE(log.Stage),
+				Level:     v3.ENUMPROPERTIESEVENTSITEMSPROPERTIESLEVEL(log.Level),
+			}
+			summaries = append(summaries, summary)
+		}
 		if len(summaries) >= limit {
 			summaries = summaries[:limit]
 			listTruncated = cursor != nil && *cursor != ""
