@@ -22,6 +22,7 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationAuthenticationPresetsI
 type GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf10RequestsInner struct {
 	Curl                 string                                                                                                `json:"curl"`
 	Extractions          []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfExtractionsInner `json:"extractions,omitempty"`
+	Timeout              *float32                                                                                              `json:"timeout,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -101,6 +102,38 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf10Requ
 	o.Extractions = v
 }
 
+// GetTimeout returns the Timeout field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf10RequestsInner) GetTimeout() float32 {
+	if o == nil || IsNil(o.Timeout) {
+		var ret float32
+		return ret
+	}
+	return *o.Timeout
+}
+
+// GetTimeoutOk returns a tuple with the Timeout field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf10RequestsInner) GetTimeoutOk() (*float32, bool) {
+	if o == nil || IsNil(o.Timeout) {
+		return nil, false
+	}
+	return o.Timeout, true
+}
+
+// HasTimeout returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf10RequestsInner) HasTimeout() bool {
+	if o != nil && !IsNil(o.Timeout) {
+		return true
+	}
+
+	return false
+}
+
+// SetTimeout gets a reference to the given float32 and assigns it to the Timeout field.
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf10RequestsInner) SetTimeout(v float32) {
+	o.Timeout = &v
+}
+
 func (o GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf10RequestsInner) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -114,6 +147,9 @@ func (o GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf10Reque
 	toSerialize["curl"] = o.Curl
 	if !IsNil(o.Extractions) {
 		toSerialize["extractions"] = o.Extractions
+	}
+	if !IsNil(o.Timeout) {
+		toSerialize["timeout"] = o.Timeout
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -160,6 +196,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf10Requ
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "curl")
 		delete(additionalProperties, "extractions")
+		delete(additionalProperties, "timeout")
 		o.AdditionalProperties = additionalProperties
 	}
 
