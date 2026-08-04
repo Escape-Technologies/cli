@@ -23,8 +23,8 @@ type CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf1 struct {
 	Action               ENUMSENDREQUEST                                                                      `json:"action"`
 	AllowFailure         *bool                                                                                `json:"allow_failure,omitempty"`
 	Url                  string                                                                               `json:"url"`
-	Timeout              *float32                                                                             `json:"timeout,omitempty"`
-	MaxRedirects         *float32                                                                             `json:"max_redirects,omitempty"`
+	Timeout              *int                                                                                 `json:"timeout,omitempty"`
+	MaxRedirects         *int                                                                                 `json:"max_redirects,omitempty"`
 	Method               *ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD `json:"method,omitempty"`
 	Headers              map[string]string                                                                    `json:"headers,omitempty"`
 	Body                 *string                                                                              `json:"body,omitempty"`
@@ -133,9 +133,9 @@ func (o *CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf1) SetUrl(v strin
 }
 
 // GetTimeout returns the Timeout field value if set, zero value otherwise.
-func (o *CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf1) GetTimeout() float32 {
+func (o *CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf1) GetTimeout() int {
 	if o == nil || IsNil(o.Timeout) {
-		var ret float32
+		var ret int
 		return ret
 	}
 	return *o.Timeout
@@ -143,7 +143,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf1) GetTimeout() f
 
 // GetTimeoutOk returns a tuple with the Timeout field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf1) GetTimeoutOk() (*float32, bool) {
+func (o *CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf1) GetTimeoutOk() (*int, bool) {
 	if o == nil || IsNil(o.Timeout) {
 		return nil, false
 	}
@@ -159,15 +159,15 @@ func (o *CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf1) HasTimeout() b
 	return false
 }
 
-// SetTimeout gets a reference to the given float32 and assigns it to the Timeout field.
-func (o *CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf1) SetTimeout(v float32) {
+// SetTimeout gets a reference to the given int and assigns it to the Timeout field.
+func (o *CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf1) SetTimeout(v int) {
 	o.Timeout = &v
 }
 
 // GetMaxRedirects returns the MaxRedirects field value if set, zero value otherwise.
-func (o *CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf1) GetMaxRedirects() float32 {
+func (o *CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf1) GetMaxRedirects() int {
 	if o == nil || IsNil(o.MaxRedirects) {
-		var ret float32
+		var ret int
 		return ret
 	}
 	return *o.MaxRedirects
@@ -175,7 +175,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf1) GetMaxRedirect
 
 // GetMaxRedirectsOk returns a tuple with the MaxRedirects field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf1) GetMaxRedirectsOk() (*float32, bool) {
+func (o *CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf1) GetMaxRedirectsOk() (*int, bool) {
 	if o == nil || IsNil(o.MaxRedirects) {
 		return nil, false
 	}
@@ -191,8 +191,8 @@ func (o *CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf1) HasMaxRedirect
 	return false
 }
 
-// SetMaxRedirects gets a reference to the given float32 and assigns it to the MaxRedirects field.
-func (o *CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf1) SetMaxRedirects(v float32) {
+// SetMaxRedirects gets a reference to the given int and assigns it to the MaxRedirects field.
+func (o *CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf1) SetMaxRedirects(v int) {
 	o.MaxRedirects = &v
 }
 

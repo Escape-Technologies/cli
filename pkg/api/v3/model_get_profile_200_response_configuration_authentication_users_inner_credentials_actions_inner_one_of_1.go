@@ -26,7 +26,7 @@ type GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsAction
 	OneByOne              *bool    `json:"one_by_one,omitempty"`
 	Value                 string   `json:"value"`
 	AutoSubmit            *bool    `json:"auto_submit,omitempty"`
-	Timeout               *float32 `json:"timeout,omitempty"`
+	Timeout               *int     `json:"timeout,omitempty"`
 	SelectFirstIfMultiple *bool    `json:"select_first_if_multiple,omitempty"`
 	AdditionalProperties  map[string]interface{}
 }
@@ -222,9 +222,9 @@ func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsAc
 }
 
 // GetTimeout returns the Timeout field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf1) GetTimeout() float32 {
+func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf1) GetTimeout() int {
 	if o == nil || IsNil(o.Timeout) {
-		var ret float32
+		var ret int
 		return ret
 	}
 	return *o.Timeout
@@ -232,7 +232,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsAc
 
 // GetTimeoutOk returns a tuple with the Timeout field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf1) GetTimeoutOk() (*float32, bool) {
+func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf1) GetTimeoutOk() (*int, bool) {
 	if o == nil || IsNil(o.Timeout) {
 		return nil, false
 	}
@@ -248,8 +248,8 @@ func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsAc
 	return false
 }
 
-// SetTimeout gets a reference to the given float32 and assigns it to the Timeout field.
-func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf1) SetTimeout(v float32) {
+// SetTimeout gets a reference to the given int and assigns it to the Timeout field.
+func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInnerOneOf1) SetTimeout(v int) {
 	o.Timeout = &v
 }
 

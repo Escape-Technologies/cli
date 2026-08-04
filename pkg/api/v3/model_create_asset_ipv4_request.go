@@ -31,7 +31,7 @@ type CreateAssetIPV4Request struct {
 	Address              string                                    `json:"address"`
 	Favicon              *string                                   `json:"favicon,omitempty"`
 	OpenPorts            []CreateAssetDNSRequestOpenPortsInner     `json:"open_ports,omitempty"`
-	PortsInsights        []float32                                 `json:"ports_insights,omitempty"`
+	PortsInsights        []int                                     `json:"ports_insights,omitempty"`
 	PathsInsights        []CreateAssetDNSRequestPathsInsightsInner `json:"paths_insights,omitempty"`
 	Private              *bool                                     `json:"private,omitempty"`
 	ThirdParty           *ENUMPROPERTIESTHIRDPARTY                 `json:"third_party,omitempty"`
@@ -327,9 +327,9 @@ func (o *CreateAssetIPV4Request) SetOpenPorts(v []CreateAssetDNSRequestOpenPorts
 }
 
 // GetPortsInsights returns the PortsInsights field value if set, zero value otherwise.
-func (o *CreateAssetIPV4Request) GetPortsInsights() []float32 {
+func (o *CreateAssetIPV4Request) GetPortsInsights() []int {
 	if o == nil || IsNil(o.PortsInsights) {
-		var ret []float32
+		var ret []int
 		return ret
 	}
 	return o.PortsInsights
@@ -337,7 +337,7 @@ func (o *CreateAssetIPV4Request) GetPortsInsights() []float32 {
 
 // GetPortsInsightsOk returns a tuple with the PortsInsights field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetIPV4Request) GetPortsInsightsOk() ([]float32, bool) {
+func (o *CreateAssetIPV4Request) GetPortsInsightsOk() ([]int, bool) {
 	if o == nil || IsNil(o.PortsInsights) {
 		return nil, false
 	}
@@ -353,8 +353,8 @@ func (o *CreateAssetIPV4Request) HasPortsInsights() bool {
 	return false
 }
 
-// SetPortsInsights gets a reference to the given []float32 and assigns it to the PortsInsights field.
-func (o *CreateAssetIPV4Request) SetPortsInsights(v []float32) {
+// SetPortsInsights gets a reference to the given []int and assigns it to the PortsInsights field.
+func (o *CreateAssetIPV4Request) SetPortsInsights(v []int) {
 	o.PortsInsights = v
 }
 

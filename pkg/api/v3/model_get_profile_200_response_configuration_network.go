@@ -19,8 +19,8 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationNetwork{}
 
 // GetProfile200ResponseConfigurationNetwork struct for GetProfile200ResponseConfigurationNetwork
 type GetProfile200ResponseConfigurationNetwork struct {
-	RequestTimeoutS      *float32            `json:"request_timeout_s,omitempty"`
-	RequestsPerSecond    *float32            `json:"requests_per_second,omitempty"`
+	RequestTimeoutS      *int                `json:"request_timeout_s,omitempty"`
+	RequestsPerSecond    *int                `json:"requests_per_second,omitempty"`
 	CustomHeaders        map[string][]string `json:"custom_headers,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -45,9 +45,9 @@ func NewGetProfile200ResponseConfigurationNetworkWithDefaults() *GetProfile200Re
 }
 
 // GetRequestTimeoutS returns the RequestTimeoutS field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationNetwork) GetRequestTimeoutS() float32 {
+func (o *GetProfile200ResponseConfigurationNetwork) GetRequestTimeoutS() int {
 	if o == nil || IsNil(o.RequestTimeoutS) {
-		var ret float32
+		var ret int
 		return ret
 	}
 	return *o.RequestTimeoutS
@@ -55,7 +55,7 @@ func (o *GetProfile200ResponseConfigurationNetwork) GetRequestTimeoutS() float32
 
 // GetRequestTimeoutSOk returns a tuple with the RequestTimeoutS field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationNetwork) GetRequestTimeoutSOk() (*float32, bool) {
+func (o *GetProfile200ResponseConfigurationNetwork) GetRequestTimeoutSOk() (*int, bool) {
 	if o == nil || IsNil(o.RequestTimeoutS) {
 		return nil, false
 	}
@@ -71,15 +71,15 @@ func (o *GetProfile200ResponseConfigurationNetwork) HasRequestTimeoutS() bool {
 	return false
 }
 
-// SetRequestTimeoutS gets a reference to the given float32 and assigns it to the RequestTimeoutS field.
-func (o *GetProfile200ResponseConfigurationNetwork) SetRequestTimeoutS(v float32) {
+// SetRequestTimeoutS gets a reference to the given int and assigns it to the RequestTimeoutS field.
+func (o *GetProfile200ResponseConfigurationNetwork) SetRequestTimeoutS(v int) {
 	o.RequestTimeoutS = &v
 }
 
 // GetRequestsPerSecond returns the RequestsPerSecond field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationNetwork) GetRequestsPerSecond() float32 {
+func (o *GetProfile200ResponseConfigurationNetwork) GetRequestsPerSecond() int {
 	if o == nil || IsNil(o.RequestsPerSecond) {
-		var ret float32
+		var ret int
 		return ret
 	}
 	return *o.RequestsPerSecond
@@ -87,7 +87,7 @@ func (o *GetProfile200ResponseConfigurationNetwork) GetRequestsPerSecond() float
 
 // GetRequestsPerSecondOk returns a tuple with the RequestsPerSecond field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationNetwork) GetRequestsPerSecondOk() (*float32, bool) {
+func (o *GetProfile200ResponseConfigurationNetwork) GetRequestsPerSecondOk() (*int, bool) {
 	if o == nil || IsNil(o.RequestsPerSecond) {
 		return nil, false
 	}
@@ -103,8 +103,8 @@ func (o *GetProfile200ResponseConfigurationNetwork) HasRequestsPerSecond() bool 
 	return false
 }
 
-// SetRequestsPerSecond gets a reference to the given float32 and assigns it to the RequestsPerSecond field.
-func (o *GetProfile200ResponseConfigurationNetwork) SetRequestsPerSecond(v float32) {
+// SetRequestsPerSecond gets a reference to the given int and assigns it to the RequestsPerSecond field.
+func (o *GetProfile200ResponseConfigurationNetwork) SetRequestsPerSecond(v int) {
 	o.RequestsPerSecond = &v
 }
 
