@@ -18,7 +18,7 @@ var scanAgentsRootsOnly bool
 
 // ScanAgents lists AI pentest agents for a scan.
 type ScanAgents struct {
-	ScanID string                `json:"scanId"`
+	ScanID string                   `json:"scanId"`
 	Agents []escape.AgentSummarized `json:"agents"`
 }
 
