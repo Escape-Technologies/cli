@@ -22,6 +22,11 @@ const (
 	maxReasoningHydrateWorkers   = 10
 )
 
+// reasoningListTruncated reports whether capped results omit events still available.
+func reasoningListTruncated(accumulated int, limit int, cursor *string) bool {
+	return accumulated > limit || (cursor != nil && *cursor != "")
+}
+
 var reasoningHydrateLimit int
 var reasoningListLimit int
 var reasoningAgentID string
@@ -191,8 +196,8 @@ func listReasoningEvents(
 		}
 		summaries = append(summaries, events...)
 		if len(summaries) >= limit {
+			listTruncated = reasoningListTruncated(len(summaries), limit, cursor)
 			summaries = summaries[:limit]
-			listTruncated = cursor != nil && *cursor != ""
 			break
 		}
 		if cursor == nil || *cursor == "" {
@@ -235,8 +240,8 @@ func listAgentReasoningEvents(
 			summaries = append(summaries, summary)
 		}
 		if len(summaries) >= limit {
+			listTruncated = reasoningListTruncated(len(summaries), limit, cursor)
 			summaries = summaries[:limit]
-			listTruncated = cursor != nil && *cursor != ""
 			break
 		}
 		if cursor == nil || *cursor == "" {

@@ -44,6 +44,67 @@ func TestReasoningStagesIncludeAgentReasoningAndAction(t *testing.T) {
 	}
 }
 
+func TestReasoningListTruncated(t *testing.T) {
+	t.Parallel()
+
+	empty := ""
+	more := "next-page"
+
+	cases := []struct {
+		name        string
+		accumulated int
+		limit       int
+		cursor      *string
+		want        bool
+	}{
+		{
+			name:        "final page exceeds remaining limit without next cursor",
+			accumulated: 210,
+			limit:       200,
+			cursor:      &empty,
+			want:        true,
+		},
+		{
+			name:        "exact limit with no next cursor",
+			accumulated: 200,
+			limit:       200,
+			cursor:      &empty,
+			want:        false,
+		},
+		{
+			name:        "exact limit with next cursor",
+			accumulated: 200,
+			limit:       200,
+			cursor:      &more,
+			want:        true,
+		},
+		{
+			name:        "overflow with next cursor",
+			accumulated: 250,
+			limit:       200,
+			cursor:      &more,
+			want:        true,
+		},
+		{
+			name:        "nil cursor",
+			accumulated: 205,
+			limit:       200,
+			cursor:      nil,
+			want:        true,
+		},
+	}
+
+	for _, tc := range cases {
+		t.Run(tc.name, func(t *testing.T) {
+			t.Parallel()
+			if got := reasoningListTruncated(tc.accumulated, tc.limit, tc.cursor); got != tc.want {
+				t.Fatalf("reasoningListTruncated(%d, %d, %v) = %v, want %v",
+					tc.accumulated, tc.limit, tc.cursor, got, tc.want)
+			}
+		})
+	}
+}
+
 func TestListReasoningEventsStopsAtLimit(t *testing.T) {
 	t.Parallel()
 
@@ -53,16 +114,11 @@ func TestListReasoningEventsStopsAtLimit(t *testing.T) {
 	}
 
 	limit := 200
-	capped := summaries
-	listTruncated := true
-	if len(capped) > limit {
-		capped = capped[:limit]
+	if !reasoningListTruncated(len(summaries), limit, nil) {
+		t.Fatal("expected listTruncated when source exceeds limit")
 	}
-
+	capped := summaries[:limit]
 	if len(capped) != limit {
 		t.Fatalf("expected %d summaries, got %d", limit, len(capped))
-	}
-	if !listTruncated {
-		t.Fatal("expected listTruncated when source exceeds limit")
 	}
 }
