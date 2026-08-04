@@ -31,7 +31,7 @@ type CreateAssetDNSRequest struct {
 	Address              string                                    `json:"address"`
 	Favicon              *string                                   `json:"favicon,omitempty"`
 	OpenPorts            []CreateAssetDNSRequestOpenPortsInner     `json:"open_ports,omitempty"`
-	PortsInsights        []int                                     `json:"ports_insights,omitempty"`
+	PortsInsights        []float32                                 `json:"ports_insights,omitempty"`
 	PathsInsights        []CreateAssetDNSRequestPathsInsightsInner `json:"paths_insights,omitempty"`
 	Private              *bool                                     `json:"private,omitempty"`
 	ThirdParty           *ENUMPROPERTIESTHIRDPARTY                 `json:"third_party,omitempty"`
@@ -329,9 +329,9 @@ func (o *CreateAssetDNSRequest) SetOpenPorts(v []CreateAssetDNSRequestOpenPortsI
 }
 
 // GetPortsInsights returns the PortsInsights field value if set, zero value otherwise.
-func (o *CreateAssetDNSRequest) GetPortsInsights() []int {
+func (o *CreateAssetDNSRequest) GetPortsInsights() []float32 {
 	if o == nil || IsNil(o.PortsInsights) {
-		var ret []int
+		var ret []float32
 		return ret
 	}
 	return o.PortsInsights
@@ -339,7 +339,7 @@ func (o *CreateAssetDNSRequest) GetPortsInsights() []int {
 
 // GetPortsInsightsOk returns a tuple with the PortsInsights field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAssetDNSRequest) GetPortsInsightsOk() ([]int, bool) {
+func (o *CreateAssetDNSRequest) GetPortsInsightsOk() ([]float32, bool) {
 	if o == nil || IsNil(o.PortsInsights) {
 		return nil, false
 	}
@@ -355,8 +355,8 @@ func (o *CreateAssetDNSRequest) HasPortsInsights() bool {
 	return false
 }
 
-// SetPortsInsights gets a reference to the given []int and assigns it to the PortsInsights field.
-func (o *CreateAssetDNSRequest) SetPortsInsights(v []int) {
+// SetPortsInsights gets a reference to the given []float32 and assigns it to the PortsInsights field.
+func (o *CreateAssetDNSRequest) SetPortsInsights(v []float32) {
 	o.PortsInsights = v
 }
 

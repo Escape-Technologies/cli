@@ -25,7 +25,7 @@ type GetProfile200ResponseConfigurationGraphqlApiDast struct {
 	ExploreWithAllUsers      *bool                                                                          `json:"explore_with_all_users,omitempty"`
 	CrossUserMemoryEnabled   *bool                                                                          `json:"cross_user_memory_enabled,omitempty"`
 	CrossUserMemoryAllowlist []string                                                                       `json:"cross_user_memory_allowlist,omitempty"`
-	MaxGeneratedDepth        *int                                                                           `json:"max_generated_depth,omitempty"`
+	MaxGeneratedDepth        *float32                                                                       `json:"max_generated_depth,omitempty"`
 	Hotstart                 []string                                                                       `json:"hotstart,omitempty"`
 	HotstartOnly             *bool                                                                          `json:"hotstart_only,omitempty"`
 	Scope                    *GetProfile200ResponseConfigurationGraphqlApiDastScope                         `json:"scope,omitempty"`
@@ -248,9 +248,9 @@ func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetCrossUserMemoryAll
 }
 
 // GetMaxGeneratedDepth returns the MaxGeneratedDepth field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationGraphqlApiDast) GetMaxGeneratedDepth() int {
+func (o *GetProfile200ResponseConfigurationGraphqlApiDast) GetMaxGeneratedDepth() float32 {
 	if o == nil || IsNil(o.MaxGeneratedDepth) {
-		var ret int
+		var ret float32
 		return ret
 	}
 	return *o.MaxGeneratedDepth
@@ -258,7 +258,7 @@ func (o *GetProfile200ResponseConfigurationGraphqlApiDast) GetMaxGeneratedDepth(
 
 // GetMaxGeneratedDepthOk returns a tuple with the MaxGeneratedDepth field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationGraphqlApiDast) GetMaxGeneratedDepthOk() (*int, bool) {
+func (o *GetProfile200ResponseConfigurationGraphqlApiDast) GetMaxGeneratedDepthOk() (*float32, bool) {
 	if o == nil || IsNil(o.MaxGeneratedDepth) {
 		return nil, false
 	}
@@ -274,8 +274,8 @@ func (o *GetProfile200ResponseConfigurationGraphqlApiDast) HasMaxGeneratedDepth(
 	return false
 }
 
-// SetMaxGeneratedDepth gets a reference to the given int and assigns it to the MaxGeneratedDepth field.
-func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetMaxGeneratedDepth(v int) {
+// SetMaxGeneratedDepth gets a reference to the given float32 and assigns it to the MaxGeneratedDepth field.
+func (o *GetProfile200ResponseConfigurationGraphqlApiDast) SetMaxGeneratedDepth(v float32) {
 	o.MaxGeneratedDepth = &v
 }
 

@@ -19,8 +19,8 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationSecurityTestsHighNumbe
 
 // GetProfile200ResponseConfigurationSecurityTestsHighNumberOfCustomScalars struct for GetProfile200ResponseConfigurationSecurityTestsHighNumberOfCustomScalars
 type GetProfile200ResponseConfigurationSecurityTestsHighNumberOfCustomScalars struct {
-	Skip                 *bool `json:"skip,omitempty"`
-	DetectionThreshold   *int  `json:"detection_threshold,omitempty"`
+	Skip                 *bool    `json:"skip,omitempty"`
+	DetectionThreshold   *float32 `json:"detection_threshold,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -76,9 +76,9 @@ func (o *GetProfile200ResponseConfigurationSecurityTestsHighNumberOfCustomScalar
 }
 
 // GetDetectionThreshold returns the DetectionThreshold field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationSecurityTestsHighNumberOfCustomScalars) GetDetectionThreshold() int {
+func (o *GetProfile200ResponseConfigurationSecurityTestsHighNumberOfCustomScalars) GetDetectionThreshold() float32 {
 	if o == nil || IsNil(o.DetectionThreshold) {
-		var ret int
+		var ret float32
 		return ret
 	}
 	return *o.DetectionThreshold
@@ -86,7 +86,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTestsHighNumberOfCustomScalar
 
 // GetDetectionThresholdOk returns a tuple with the DetectionThreshold field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationSecurityTestsHighNumberOfCustomScalars) GetDetectionThresholdOk() (*int, bool) {
+func (o *GetProfile200ResponseConfigurationSecurityTestsHighNumberOfCustomScalars) GetDetectionThresholdOk() (*float32, bool) {
 	if o == nil || IsNil(o.DetectionThreshold) {
 		return nil, false
 	}
@@ -102,8 +102,8 @@ func (o *GetProfile200ResponseConfigurationSecurityTestsHighNumberOfCustomScalar
 	return false
 }
 
-// SetDetectionThreshold gets a reference to the given int and assigns it to the DetectionThreshold field.
-func (o *GetProfile200ResponseConfigurationSecurityTestsHighNumberOfCustomScalars) SetDetectionThreshold(v int) {
+// SetDetectionThreshold gets a reference to the given float32 and assigns it to the DetectionThreshold field.
+func (o *GetProfile200ResponseConfigurationSecurityTestsHighNumberOfCustomScalars) SetDetectionThreshold(v float32) {
 	o.DetectionThreshold = &v
 }
 
