@@ -19,10 +19,10 @@ var _ MappedNullable = &CreateAssetDNSRequestPathsInsightsInnerParametersParamet
 
 // CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue struct for CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue
 type CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue struct {
-	Summary              *string     `json:"summary,omitempty"`
-	Description          *string     `json:"description,omitempty"`
-	Value                interface{} `json:"value,omitempty"`
-	ExternalValue        *string     `json:"externalValue,omitempty"`
+	Summary              *string                                                                         `json:"summary,omitempty"`
+	Description          *string                                                                         `json:"description,omitempty"`
+	Value                NullableCreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample `json:"value,omitempty"`
+	ExternalValue        *string                                                                         `json:"externalValue,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -110,36 +110,46 @@ func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample
 }
 
 // GetValue returns the Value field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue) GetValue() interface{} {
-	if o == nil {
-		var ret interface{}
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue) GetValue() CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample {
+	if o == nil || IsNil(o.Value.Get()) {
+		var ret CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample
 		return ret
 	}
-	return o.Value
+	return *o.Value.Get()
 }
 
 // GetValueOk returns a tuple with the Value field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue) GetValueOk() (*interface{}, bool) {
-	if o == nil || IsNil(o.Value) {
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue) GetValueOk() (*CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return &o.Value, true
+	return o.Value.Get(), o.Value.IsSet()
 }
 
 // HasValue returns a boolean if a field has been set.
 func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue) HasValue() bool {
-	if o != nil && !IsNil(o.Value) {
+	if o != nil && o.Value.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetValue gets a reference to the given interface{} and assigns it to the Value field.
-func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue) SetValue(v interface{}) {
-	o.Value = v
+// SetValue gets a reference to the given NullableCreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample and assigns it to the Value field.
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue) SetValue(v CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExample) {
+	o.Value.Set(&v)
+}
+
+// SetValueNil sets the value for Value to be an explicit nil
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue) SetValueNil() {
+	o.Value.Set(nil)
+}
+
+// UnsetValue ensures that no value is present for Value, not even an explicit nil
+func (o *CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamplesValue) UnsetValue() {
+	o.Value.Unset()
 }
 
 // GetExternalValue returns the ExternalValue field value if set, zero value otherwise.
@@ -190,8 +200,8 @@ func (o CreateAssetDNSRequestPathsInsightsInnerParametersParametersInnerExamples
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	if o.Value != nil {
-		toSerialize["value"] = o.Value
+	if o.Value.IsSet() {
+		toSerialize["value"] = o.Value.Get()
 	}
 	if !IsNil(o.ExternalValue) {
 		toSerialize["externalValue"] = o.ExternalValue

@@ -19,8 +19,8 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationSecurityTestsExposedSo
 
 // GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap struct for GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap
 type GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap struct {
-	Skip                 *bool `json:"skip,omitempty"`
-	IssuesCountLimit     *int  `json:"issues_count_limit,omitempty"`
+	Skip                 *bool    `json:"skip,omitempty"`
+	IssuesCountLimit     *float32 `json:"issues_count_limit,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -76,9 +76,9 @@ func (o *GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap) SetSki
 }
 
 // GetIssuesCountLimit returns the IssuesCountLimit field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap) GetIssuesCountLimit() int {
+func (o *GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap) GetIssuesCountLimit() float32 {
 	if o == nil || IsNil(o.IssuesCountLimit) {
-		var ret int
+		var ret float32
 		return ret
 	}
 	return *o.IssuesCountLimit
@@ -86,7 +86,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap) GetIss
 
 // GetIssuesCountLimitOk returns a tuple with the IssuesCountLimit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap) GetIssuesCountLimitOk() (*int, bool) {
+func (o *GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap) GetIssuesCountLimitOk() (*float32, bool) {
 	if o == nil || IsNil(o.IssuesCountLimit) {
 		return nil, false
 	}
@@ -102,8 +102,8 @@ func (o *GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap) HasIss
 	return false
 }
 
-// SetIssuesCountLimit gets a reference to the given int and assigns it to the IssuesCountLimit field.
-func (o *GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap) SetIssuesCountLimit(v int) {
+// SetIssuesCountLimit gets a reference to the given float32 and assigns it to the IssuesCountLimit field.
+func (o *GetProfile200ResponseConfigurationSecurityTestsExposedSourcemap) SetIssuesCountLimit(v float32) {
 	o.IssuesCountLimit = &v
 }
 

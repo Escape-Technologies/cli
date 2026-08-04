@@ -23,7 +23,7 @@ type UpdateProfileConfigurationRequestConfigurationFrontendDast struct {
 	Hotstart              []string                                                                                `json:"hotstart,omitempty"`
 	SecurityChecksEnabled []ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSECURITYCHECKSENABLEDITEMS `json:"security_checks_enabled,omitempty"`
 	SinglePageWorker      *bool                                                                                   `json:"single_page_worker,omitempty"`
-	ParallelWorkers       *int                                                                                    `json:"parallel_workers,omitempty"`
+	ParallelWorkers       *float32                                                                                `json:"parallel_workers,omitempty"`
 	CrawlingTuning        *GetProfile200ResponseConfigurationFrontendDastCrawlingTuning                           `json:"crawling_tuning,omitempty"`
 	StaticCrawling        *GetProfile200ResponseConfigurationFrontendDastStaticCrawling                           `json:"static_crawling,omitempty"`
 	LogoutDetection       *GetProfile200ResponseConfigurationFrontendDastLogoutDetection                          `json:"logout_detection,omitempty"`
@@ -185,9 +185,9 @@ func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) SetSinglePa
 }
 
 // GetParallelWorkers returns the ParallelWorkers field value if set, zero value otherwise.
-func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) GetParallelWorkers() int {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) GetParallelWorkers() float32 {
 	if o == nil || IsNil(o.ParallelWorkers) {
-		var ret int
+		var ret float32
 		return ret
 	}
 	return *o.ParallelWorkers
@@ -195,7 +195,7 @@ func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) GetParallel
 
 // GetParallelWorkersOk returns a tuple with the ParallelWorkers field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) GetParallelWorkersOk() (*int, bool) {
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) GetParallelWorkersOk() (*float32, bool) {
 	if o == nil || IsNil(o.ParallelWorkers) {
 		return nil, false
 	}
@@ -211,8 +211,8 @@ func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) HasParallel
 	return false
 }
 
-// SetParallelWorkers gets a reference to the given int and assigns it to the ParallelWorkers field.
-func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) SetParallelWorkers(v int) {
+// SetParallelWorkers gets a reference to the given float32 and assigns it to the ParallelWorkers field.
+func (o *UpdateProfileConfigurationRequestConfigurationFrontendDast) SetParallelWorkers(v float32) {
 	o.ParallelWorkers = &v
 }
 
