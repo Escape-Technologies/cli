@@ -24,6 +24,7 @@ type GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf9 struct {
 	Users                []GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf9UsersInner                        `json:"users"`
 	Extractions          []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfExtractionsInner `json:"extractions"`
 	Injections           []GetProfile200ResponseConfigurationAuthenticationProceduresInnerInjectionsAnyOfInner                 `json:"injections"`
+	Timeout              *float32                                                                                              `json:"timeout,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -146,6 +147,38 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf9) Set
 	o.Injections = v
 }
 
+// GetTimeout returns the Timeout field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf9) GetTimeout() float32 {
+	if o == nil || IsNil(o.Timeout) {
+		var ret float32
+		return ret
+	}
+	return *o.Timeout
+}
+
+// GetTimeoutOk returns a tuple with the Timeout field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf9) GetTimeoutOk() (*float32, bool) {
+	if o == nil || IsNil(o.Timeout) {
+		return nil, false
+	}
+	return o.Timeout, true
+}
+
+// HasTimeout returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf9) HasTimeout() bool {
+	if o != nil && !IsNil(o.Timeout) {
+		return true
+	}
+
+	return false
+}
+
+// SetTimeout gets a reference to the given float32 and assigns it to the Timeout field.
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf9) SetTimeout(v float32) {
+	o.Timeout = &v
+}
+
 func (o GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf9) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -160,6 +193,9 @@ func (o GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf9) ToMa
 	toSerialize["users"] = o.Users
 	toSerialize["extractions"] = o.Extractions
 	toSerialize["injections"] = o.Injections
+	if !IsNil(o.Timeout) {
+		toSerialize["timeout"] = o.Timeout
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -210,6 +246,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf9) Unm
 		delete(additionalProperties, "users")
 		delete(additionalProperties, "extractions")
 		delete(additionalProperties, "injections")
+		delete(additionalProperties, "timeout")
 		o.AdditionalProperties = additionalProperties
 	}
 
