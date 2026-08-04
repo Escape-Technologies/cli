@@ -899,6 +899,9 @@ func init() {
 	scansCmd.AddCommand(scanCancelCmd)
 	scansCmd.AddCommand(scanIgnoreCmd)
 	scansCmd.AddCommand(scansReasoningCmd)
+	scansCmd.AddCommand(scansAgentsCmd)
+	scansReasoningCmd.Flags().StringVar(&reasoningAgentID, "agent-id", "", "limit logs to a single agent")
+	scansReasoningCmd.Flags().StringVar(&reasoningSearch, "search", "", "search in log titles and descriptions")
 	scansReasoningCmd.Flags().IntVar(
 		&reasoningListLimit,
 		"list-limit",
@@ -911,6 +914,9 @@ func init() {
 		defaultReasoningHydrateLimit,
 		fmt.Sprintf("maximum number of events to hydrate with full descriptions (0 = summaries only, max %d)", maxReasoningHydrateLimit),
 	)
+	scansAgentsCmd.Flags().StringVar(&scanAgentsSearch, "search", "", "filter agents by title")
+	scansAgentsCmd.Flags().StringVar(&scanAgentsEventSearch, "event-search", "", "filter agents by text found in their reasoning logs")
+	scansAgentsCmd.Flags().BoolVar(&scanAgentsRootsOnly, "roots-only", false, "return only root agents")
 	scansCmd.AddCommand(scanTargetsCmd)
 	scanTargetsCmd.Flags().StringVar(&scanTargetsType, "type", "", "filter by target type: API_ROUTE, GRAPHQL_RESOLVER")
 	scanTargetsCmd.Flags().IntVar(&scanTargetsSize, "size", 0, "limit total number of targets returned")
