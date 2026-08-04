@@ -140,6 +140,7 @@ type GetProfile200ResponseConfigurationSecurityTests struct {
 	FileUploadSsrf                            *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"file_upload_ssrf,omitempty"`
 	FileUploadZipSlip                         *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"file_upload_zip_slip,omitempty"`
 	GraphqlAliasLimit                         *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"graphql_alias_limit,omitempty"`
+	GraphqlAuthzBypass                        *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"graphql_authz_bypass,omitempty"`
 	GraphqlBatchLimit                         *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"graphql_batch_limit,omitempty"`
 	GraphqlCircularIntrospection              *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"graphql_circular_introspection,omitempty"`
 	GraphqlDirectiveOverload                  *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"graphql_directive_overload,omitempty"`
@@ -4298,6 +4299,38 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) HasGraphqlAliasLimit()
 // SetGraphqlAliasLimit gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the GraphqlAliasLimit field.
 func (o *GetProfile200ResponseConfigurationSecurityTests) SetGraphqlAliasLimit(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
 	o.GraphqlAliasLimit = &v
+}
+
+// GetGraphqlAuthzBypass returns the GraphqlAuthzBypass field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetGraphqlAuthzBypass() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.GraphqlAuthzBypass) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.GraphqlAuthzBypass
+}
+
+// GetGraphqlAuthzBypassOk returns a tuple with the GraphqlAuthzBypass field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetGraphqlAuthzBypassOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.GraphqlAuthzBypass) {
+		return nil, false
+	}
+	return o.GraphqlAuthzBypass, true
+}
+
+// HasGraphqlAuthzBypass returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasGraphqlAuthzBypass() bool {
+	if o != nil && !IsNil(o.GraphqlAuthzBypass) {
+		return true
+	}
+
+	return false
+}
+
+// SetGraphqlAuthzBypass gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the GraphqlAuthzBypass field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetGraphqlAuthzBypass(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.GraphqlAuthzBypass = &v
 }
 
 // GetGraphqlBatchLimit returns the GraphqlBatchLimit field value if set, zero value otherwise.
@@ -13185,6 +13218,9 @@ func (o GetProfile200ResponseConfigurationSecurityTests) ToMap() (map[string]int
 	if !IsNil(o.GraphqlAliasLimit) {
 		toSerialize["graphql_alias_limit"] = o.GraphqlAliasLimit
 	}
+	if !IsNil(o.GraphqlAuthzBypass) {
+		toSerialize["graphql_authz_bypass"] = o.GraphqlAuthzBypass
+	}
 	if !IsNil(o.GraphqlBatchLimit) {
 		toSerialize["graphql_batch_limit"] = o.GraphqlBatchLimit
 	}
@@ -14126,6 +14162,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) UnmarshalJSON(data []b
 		delete(additionalProperties, "file_upload_ssrf")
 		delete(additionalProperties, "file_upload_zip_slip")
 		delete(additionalProperties, "graphql_alias_limit")
+		delete(additionalProperties, "graphql_authz_bypass")
 		delete(additionalProperties, "graphql_batch_limit")
 		delete(additionalProperties, "graphql_circular_introspection")
 		delete(additionalProperties, "graphql_directive_overload")
