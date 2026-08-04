@@ -3,11 +3,14 @@ package cmd
 import (
 	"context"
 	"errors"
+	"fmt"
 
 	"github.com/Escape-Technologies/cli/pkg/api/escape"
 	"github.com/Escape-Technologies/cli/pkg/cli/out"
 	"github.com/spf13/cobra"
 )
+
+const scanAgentsPageSize = 100
 
 var scanAgentsSearch string
 var scanAgentsEventSearch string
@@ -62,9 +65,9 @@ func listScanAgents(ctx context.Context, scanID string) ([]escape.AgentSummarize
 	var agents []escape.AgentSummarized
 	next := ""
 	for {
-		page, cursor, err := escape.ListScanAgents(ctx, scanID, next, 100, filters)
+		page, cursor, err := escape.ListScanAgents(ctx, scanID, next, scanAgentsPageSize, filters)
 		if err != nil {
-			return nil, err
+			return nil, fmt.Errorf("unable to list scan agents: %w", err)
 		}
 		agents = append(agents, page...)
 		if cursor == nil || *cursor == "" {
