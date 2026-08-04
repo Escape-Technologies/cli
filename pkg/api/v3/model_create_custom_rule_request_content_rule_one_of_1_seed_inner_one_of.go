@@ -24,7 +24,7 @@ type CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf struct {
 	AllowFailure         *bool    `json:"allow_failure,omitempty"`
 	NewPage              *bool    `json:"new_page,omitempty"`
 	Url                  string   `json:"url"`
-	Timeout              *float32 `json:"timeout,omitempty"`
+	Timeout              *int     `json:"timeout,omitempty"`
 	VerifyScope          *bool    `json:"verify_scope,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -163,9 +163,9 @@ func (o *CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf) SetUrl(v string
 }
 
 // GetTimeout returns the Timeout field value if set, zero value otherwise.
-func (o *CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf) GetTimeout() float32 {
+func (o *CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf) GetTimeout() int {
 	if o == nil || IsNil(o.Timeout) {
-		var ret float32
+		var ret int
 		return ret
 	}
 	return *o.Timeout
@@ -173,7 +173,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf) GetTimeout() fl
 
 // GetTimeoutOk returns a tuple with the Timeout field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf) GetTimeoutOk() (*float32, bool) {
+func (o *CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf) GetTimeoutOk() (*int, bool) {
 	if o == nil || IsNil(o.Timeout) {
 		return nil, false
 	}
@@ -189,8 +189,8 @@ func (o *CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf) HasTimeout() bo
 	return false
 }
 
-// SetTimeout gets a reference to the given float32 and assigns it to the Timeout field.
-func (o *CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf) SetTimeout(v float32) {
+// SetTimeout gets a reference to the given int and assigns it to the Timeout field.
+func (o *CreateCustomRuleRequestContentRuleOneOf1SeedInnerOneOf) SetTimeout(v int) {
 	o.Timeout = &v
 }
 

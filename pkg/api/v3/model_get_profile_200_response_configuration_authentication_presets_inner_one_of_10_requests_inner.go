@@ -22,7 +22,7 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationAuthenticationPresetsI
 type GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf10RequestsInner struct {
 	Curl                 string                                                                                                `json:"curl"`
 	Extractions          []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfExtractionsInner `json:"extractions,omitempty"`
-	Timeout              *int                                                                                                  `json:"timeout,omitempty"`
+	Timeout              *float32                                                                                              `json:"timeout,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -103,9 +103,9 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf10Requ
 }
 
 // GetTimeout returns the Timeout field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf10RequestsInner) GetTimeout() int {
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf10RequestsInner) GetTimeout() float32 {
 	if o == nil || IsNil(o.Timeout) {
-		var ret int
+		var ret float32
 		return ret
 	}
 	return *o.Timeout
@@ -113,7 +113,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf10Requ
 
 // GetTimeoutOk returns a tuple with the Timeout field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf10RequestsInner) GetTimeoutOk() (*int, bool) {
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf10RequestsInner) GetTimeoutOk() (*float32, bool) {
 	if o == nil || IsNil(o.Timeout) {
 		return nil, false
 	}
@@ -129,8 +129,8 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf10Requ
 	return false
 }
 
-// SetTimeout gets a reference to the given int and assigns it to the Timeout field.
-func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf10RequestsInner) SetTimeout(v int) {
+// SetTimeout gets a reference to the given float32 and assigns it to the Timeout field.
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf10RequestsInner) SetTimeout(v float32) {
 	o.Timeout = &v
 }
 

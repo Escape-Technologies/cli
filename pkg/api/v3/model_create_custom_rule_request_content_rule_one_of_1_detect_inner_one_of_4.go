@@ -20,11 +20,11 @@ var _ MappedNullable = &CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf
 
 // CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4 struct for CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4
 type CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4 struct {
-	Is                   *float32           `json:"is,omitempty"`
-	IsNot                *float32           `json:"is_not,omitempty"`
-	In                   []float32          `json:"in,omitempty"`
-	Gt                   *float32           `json:"gt,omitempty"`
-	Lt                   *float32           `json:"lt,omitempty"`
+	Is                   *int               `json:"is,omitempty"`
+	IsNot                *int               `json:"is_not,omitempty"`
+	In                   []int              `json:"in,omitempty"`
+	Gt                   *int               `json:"gt,omitempty"`
+	Lt                   *int               `json:"lt,omitempty"`
 	If                   ENUMPAGESTATUSCODE `json:"if"`
 	AdditionalProperties map[string]interface{}
 }
@@ -50,9 +50,9 @@ func NewCreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4WithDefaults() 
 }
 
 // GetIs returns the Is field value if set, zero value otherwise.
-func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) GetIs() float32 {
+func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) GetIs() int {
 	if o == nil || IsNil(o.Is) {
-		var ret float32
+		var ret int
 		return ret
 	}
 	return *o.Is
@@ -60,7 +60,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) GetIs() floa
 
 // GetIsOk returns a tuple with the Is field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) GetIsOk() (*float32, bool) {
+func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) GetIsOk() (*int, bool) {
 	if o == nil || IsNil(o.Is) {
 		return nil, false
 	}
@@ -76,15 +76,15 @@ func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) HasIs() bool
 	return false
 }
 
-// SetIs gets a reference to the given float32 and assigns it to the Is field.
-func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) SetIs(v float32) {
+// SetIs gets a reference to the given int and assigns it to the Is field.
+func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) SetIs(v int) {
 	o.Is = &v
 }
 
 // GetIsNot returns the IsNot field value if set, zero value otherwise.
-func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) GetIsNot() float32 {
+func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) GetIsNot() int {
 	if o == nil || IsNil(o.IsNot) {
-		var ret float32
+		var ret int
 		return ret
 	}
 	return *o.IsNot
@@ -92,7 +92,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) GetIsNot() f
 
 // GetIsNotOk returns a tuple with the IsNot field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) GetIsNotOk() (*float32, bool) {
+func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) GetIsNotOk() (*int, bool) {
 	if o == nil || IsNil(o.IsNot) {
 		return nil, false
 	}
@@ -108,15 +108,15 @@ func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) HasIsNot() b
 	return false
 }
 
-// SetIsNot gets a reference to the given float32 and assigns it to the IsNot field.
-func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) SetIsNot(v float32) {
+// SetIsNot gets a reference to the given int and assigns it to the IsNot field.
+func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) SetIsNot(v int) {
 	o.IsNot = &v
 }
 
 // GetIn returns the In field value if set, zero value otherwise.
-func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) GetIn() []float32 {
+func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) GetIn() []int {
 	if o == nil || IsNil(o.In) {
-		var ret []float32
+		var ret []int
 		return ret
 	}
 	return o.In
@@ -124,7 +124,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) GetIn() []fl
 
 // GetInOk returns a tuple with the In field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) GetInOk() ([]float32, bool) {
+func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) GetInOk() ([]int, bool) {
 	if o == nil || IsNil(o.In) {
 		return nil, false
 	}
@@ -140,15 +140,15 @@ func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) HasIn() bool
 	return false
 }
 
-// SetIn gets a reference to the given []float32 and assigns it to the In field.
-func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) SetIn(v []float32) {
+// SetIn gets a reference to the given []int and assigns it to the In field.
+func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) SetIn(v []int) {
 	o.In = v
 }
 
 // GetGt returns the Gt field value if set, zero value otherwise.
-func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) GetGt() float32 {
+func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) GetGt() int {
 	if o == nil || IsNil(o.Gt) {
-		var ret float32
+		var ret int
 		return ret
 	}
 	return *o.Gt
@@ -156,7 +156,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) GetGt() floa
 
 // GetGtOk returns a tuple with the Gt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) GetGtOk() (*float32, bool) {
+func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) GetGtOk() (*int, bool) {
 	if o == nil || IsNil(o.Gt) {
 		return nil, false
 	}
@@ -172,15 +172,15 @@ func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) HasGt() bool
 	return false
 }
 
-// SetGt gets a reference to the given float32 and assigns it to the Gt field.
-func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) SetGt(v float32) {
+// SetGt gets a reference to the given int and assigns it to the Gt field.
+func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) SetGt(v int) {
 	o.Gt = &v
 }
 
 // GetLt returns the Lt field value if set, zero value otherwise.
-func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) GetLt() float32 {
+func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) GetLt() int {
 	if o == nil || IsNil(o.Lt) {
-		var ret float32
+		var ret int
 		return ret
 	}
 	return *o.Lt
@@ -188,7 +188,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) GetLt() floa
 
 // GetLtOk returns a tuple with the Lt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) GetLtOk() (*float32, bool) {
+func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) GetLtOk() (*int, bool) {
 	if o == nil || IsNil(o.Lt) {
 		return nil, false
 	}
@@ -204,8 +204,8 @@ func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) HasLt() bool
 	return false
 }
 
-// SetLt gets a reference to the given float32 and assigns it to the Lt field.
-func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) SetLt(v float32) {
+// SetLt gets a reference to the given int and assigns it to the Lt field.
+func (o *CreateCustomRuleRequestContentRuleOneOf1DetectInnerOneOf4) SetLt(v int) {
 	o.Lt = &v
 }
 
