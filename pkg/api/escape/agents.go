@@ -2,20 +2,22 @@ package escape
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"net/url"
+	"strconv"
 	"strings"
 )
 
 // AgentSummarized is a lightweight AI pentest agent row.
 type AgentSummarized struct {
-	ID           string   `json:"id"`
-	Title        string   `json:"title"`
-	Status       string   `json:"status"`
-	ParentID     *string  `json:"parentId"`
-	HasChildren  bool     `json:"hasChildren"`
-	Duration     *float64 `json:"duration"`
-	IssuesCount  int      `json:"issuesCount"`
+	ID          string   `json:"id"`
+	Title       string   `json:"title"`
+	Status      string   `json:"status"`
+	ParentID    *string  `json:"parentId"`
+	HasChildren bool     `json:"hasChildren"`
+	Duration    *float64 `json:"duration"`
+	IssuesCount int      `json:"issuesCount"`
 }
 
 // AgentLogSummarized is a reasoning or action log entry for an agent.
@@ -36,10 +38,10 @@ type pageResponse[T any] struct {
 
 // ListScanAgentsFilters holds optional filters for listing scan agents.
 type ListScanAgentsFilters struct {
-	Search      string
-	EventSearch string
-	RootsOnly   bool
-	SortType    string
+	Search        string
+	EventSearch   string
+	RootsOnly     bool
+	SortType      string
 	SortDirection string
 }
 
@@ -52,7 +54,7 @@ func ListScanAgents(
 	filters *ListScanAgentsFilters,
 ) ([]AgentSummarized, *string, error) {
 	if strings.TrimSpace(scanID) == "" {
-		return nil, nil, fmt.Errorf("scanID is required")
+		return nil, nil, errors.New("scanID is required")
 	}
 
 	query := url.Values{}
@@ -60,7 +62,7 @@ func ListScanAgents(
 		query.Set("cursor", next)
 	}
 	if size > 0 {
-		query.Set("size", fmt.Sprintf("%d", size))
+		query.Set("size", strconv.Itoa(size))
 	}
 	if filters != nil {
 		if filters.Search != "" {
@@ -110,10 +112,10 @@ func ListScanAgentLogs(
 	filters *ListScanAgentLogsFilters,
 ) ([]AgentLogSummarized, *string, error) {
 	if strings.TrimSpace(scanID) == "" {
-		return nil, nil, fmt.Errorf("scanID is required")
+		return nil, nil, errors.New("scanID is required")
 	}
 	if strings.TrimSpace(agentID) == "" {
-		return nil, nil, fmt.Errorf("agentID is required")
+		return nil, nil, errors.New("agentID is required")
 	}
 
 	query := url.Values{}
@@ -121,7 +123,7 @@ func ListScanAgentLogs(
 		query.Set("cursor", next)
 	}
 	if size > 0 {
-		query.Set("size", fmt.Sprintf("%d", size))
+		query.Set("size", strconv.Itoa(size))
 	}
 	if filters != nil {
 		if filters.Search != "" {

@@ -220,7 +220,7 @@ func listAgentReasoningEvents(
 	next := ""
 	listTruncated := false
 	for {
-		logs, cursor, err := escape.ListScanAgentLogs(ctx, scanID, agentID, next, 100, filters)
+		logs, cursor, err := escape.ListScanAgentLogs(ctx, scanID, agentID, next, scanAgentsPageSize, filters)
 		if err != nil {
 			return nil, false, fmt.Errorf("unable to list agent reasoning logs: %w", err)
 		}
