@@ -7,6 +7,7 @@ import (
 	"net"
 	"os"
 	"sync/atomic"
+	"time"
 
 	"github.com/Escape-Technologies/cli/pkg/env"
 	"github.com/Escape-Technologies/cli/pkg/locations/private/monitor"
@@ -14,6 +15,8 @@ import (
 
 	"golang.org/x/crypto/ssh"
 )
+
+const sshDialTimeout = 30 * time.Second
 
 func getClient(target string, conn net.Conn, config *ssh.ClientConfig) (*ssh.Client, error) {
 	c, chans, reqs, err := ssh.NewClientConn(conn, target, config)
@@ -45,9 +48,11 @@ func dialSSH(ctx context.Context, locationID string, sshPrivateKey ed25519.Priva
 	proxyURL := env.GetFrontendProxyURL()
 
 	log.Trace("Getting conn for target: %s", targetURL)
-	conn, err := getConn(ctx, targetURL, proxyURL)
-	if ctx.Err() != nil {
-		return fmt.Errorf("getConn: %w", ctx.Err())
+	dialCtx, cancel := context.WithTimeout(ctx, sshDialTimeout)
+	defer cancel()
+	conn, err := getConn(dialCtx, targetURL, proxyURL)
+	if dialCtx.Err() != nil {
+		return fmt.Errorf("getConn: %w", dialCtx.Err())
 	}
 	if err != nil {
 		return fmt.Errorf("failed to get conn: %w", err)
@@ -59,12 +64,12 @@ func dialSSH(ctx context.Context, locationID string, sshPrivateKey ed25519.Priva
 	}
 
 	log.Debug("SSH connection established to Escape Platform")
-	ctx, cancel := context.WithCancel(ctx)
-	go monitor.Start(ctx, client)
+	listenerCtx, listenerCancel := context.WithCancel(ctx)
+	go monitor.Start(listenerCtx, client)
 
 	log.Trace("Starting listener")
-	err = startListener(ctx, client, healthy)
-	cancel()
+	err = startListener(listenerCtx, client, healthy)
+	listenerCancel()
 	if err != nil {
 		return fmt.Errorf("failed to start listener: %w", err)
 	}
