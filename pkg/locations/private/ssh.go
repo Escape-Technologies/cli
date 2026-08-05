@@ -5,7 +5,6 @@ import (
 	"crypto/ed25519"
 	"fmt"
 	"net"
-	"os"
 	"sync/atomic"
 	"time"
 
@@ -41,19 +40,13 @@ func dialSSH(ctx context.Context, locationID string, sshPrivateKey ed25519.Priva
 		HostKeyCallback: ssh.InsecureIgnoreHostKey(),
 	}
 
-	targetURL := os.Getenv("ESCAPE_PRIVATE_LOCATION_URL")
-	if targetURL == "" {
-		targetURL = "private-location.escape.tech:2222"
-	}
+	targetURL := sshTarget()
 	proxyURL := env.GetFrontendProxyURL()
 
 	log.Trace("Getting conn for target: %s", targetURL)
 	dialCtx, cancel := context.WithTimeout(ctx, sshDialTimeout)
 	defer cancel()
 	conn, err := getConn(dialCtx, targetURL, proxyURL)
-	if dialCtx.Err() != nil {
-		return fmt.Errorf("getConn: %w", dialCtx.Err())
-	}
 	if err != nil {
 		return fmt.Errorf("failed to get conn: %w", err)
 	}

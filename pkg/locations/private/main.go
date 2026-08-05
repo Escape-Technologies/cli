@@ -72,7 +72,7 @@ func logSSHDialTimeoutHints(hasLoggedTimeoutHint *atomic.Bool) {
 		return
 	}
 	hasLoggedTimeoutHint.Store(true)
-	log.Error("Timed out connecting to Escape SSH endpoint (private-location.escape.tech:2222)")
+	log.Error("Timed out connecting to Escape SSH endpoint (%s)", sshTarget())
 	if env.GetFrontendProxyURL() == nil {
 		log.Error("Outbound traffic may require a proxy: set ESCAPE_FRONTEND_PROXY_URL on the deployment")
 	}
