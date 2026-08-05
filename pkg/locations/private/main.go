@@ -4,10 +4,12 @@ package private
 import (
 	"context"
 	"crypto/ed25519"
+	"errors"
 	"strings"
 	"sync/atomic"
 	"time"
 
+	"github.com/Escape-Technologies/cli/pkg/env"
 	"github.com/Escape-Technologies/cli/pkg/log"
 )
 
@@ -15,6 +17,7 @@ import (
 func StartLocation(ctx context.Context, locationID string, sshPrivateKey ed25519.PrivateKey, healthy *atomic.Bool) error {
 	log.Trace("Starting private location %s", locationID)
 	var hasEverConnected atomic.Bool
+	var hasLoggedTimeoutHint atomic.Bool
 	var failureStartTime time.Time
 	const failureThreshold = 1 * time.Minute
 
@@ -25,12 +28,19 @@ func StartLocation(ctx context.Context, locationID string, sshPrivateKey ed25519
 				failureStartTime = time.Now()
 			}
 
-			if !hasEverConnected.Load() || time.Since(failureStartTime) >= failureThreshold {
+			isTimeout := isDialTimeout(err)
+			shouldLog := isTimeout && !hasEverConnected.Load()
+			if !shouldLog && (!hasEverConnected.Load() || time.Since(failureStartTime) >= failureThreshold) {
+				shouldLog = true
+			}
+			if shouldLog {
 				log.Error("Failed to dial SSH: %s, retrying...", err)
 			}
 			errMsg := err.Error()
 
-			if strings.Contains(errMsg, "connection refused") {
+			if isTimeout && !hasEverConnected.Load() {
+				logSSHDialTimeoutHints(&hasLoggedTimeoutHint)
+			} else if strings.Contains(errMsg, "connection refused") {
 				if !hasEverConnected.Load() {
 					log.Error("Firewall is likely blocking outbound connections to port 2222")
 					log.Error("Ensure private-location.escape.tech:2222 outbound access is allowed")
@@ -40,10 +50,31 @@ func StartLocation(ctx context.Context, locationID string, sshPrivateKey ed25519
 			}
 		} else {
 			hasEverConnected.Store(true)
+			hasLoggedTimeoutHint.Store(false)
 			failureStartTime = time.Time{}
 			// First failure may just be a network issue, we dont want to notify the customer yet
 			log.Info("SSH connection lost, retrying...")
 		}
 		time.Sleep(1 * time.Second)
 	}
+}
+
+func isDialTimeout(err error) bool {
+	if errors.Is(err, context.DeadlineExceeded) {
+		return true
+	}
+	errMsg := err.Error()
+	return strings.Contains(errMsg, "context deadline exceeded") || strings.Contains(errMsg, "i/o timeout")
+}
+
+func logSSHDialTimeoutHints(hasLoggedTimeoutHint *atomic.Bool) {
+	if hasLoggedTimeoutHint.Load() {
+		return
+	}
+	hasLoggedTimeoutHint.Store(true)
+	log.Error("Timed out connecting to Escape SSH endpoint (private-location.escape.tech:2222)")
+	if env.GetFrontendProxyURL() == nil {
+		log.Error("Outbound traffic may require a proxy: set ESCAPE_FRONTEND_PROXY_URL on the deployment")
+	}
+	log.Error("Ensure private-location.escape.tech:2222 is reachable from this network")
 }
