@@ -38,7 +38,7 @@ func StartLocation(ctx context.Context, locationID string, sshPrivateKey ed25519
 			}
 			errMsg := err.Error()
 
-			if isTimeout && !hasEverConnected.Load() {
+			if isTimeout {
 				logSSHDialTimeoutHints(&hasLoggedTimeoutHint)
 			} else if strings.Contains(errMsg, "connection refused") {
 				if !hasEverConnected.Load() {
@@ -72,9 +72,10 @@ func logSSHDialTimeoutHints(hasLoggedTimeoutHint *atomic.Bool) {
 		return
 	}
 	hasLoggedTimeoutHint.Store(true)
-	log.Error("Timed out connecting to Escape SSH endpoint (%s)", sshTarget())
+	target := sshTarget()
+	log.Error("Timed out connecting to Escape SSH endpoint (%s)", target)
 	if env.GetFrontendProxyURL() == nil {
 		log.Error("Outbound traffic may require a proxy: set ESCAPE_FRONTEND_PROXY_URL on the deployment")
 	}
-	log.Error("Ensure private-location.escape.tech:2222 is reachable from this network")
+	log.Error("Ensure %s is reachable from this network", target)
 }
