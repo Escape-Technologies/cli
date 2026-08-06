@@ -20,14 +20,14 @@ var _ MappedNullable = &GetAuthentication200ResponseAuthenticationUsersInnerAuth
 
 // GetAuthentication200ResponseAuthenticationUsersInnerAuthentication struct for GetAuthentication200ResponseAuthenticationUsersInnerAuthentication
 type GetAuthentication200ResponseAuthenticationUsersInnerAuthentication struct {
-	Headers              []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner         `json:"headers"`
-	Cookies              []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner         `json:"cookies"`
-	QueryParameters      []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersQueryParametersInner `json:"query_parameters"`
-	Body                 map[string]string                                                                                                   `json:"body"`
-	LocalStorage         map[string]map[string]string                                                                                        `json:"local_storage"`
-	SessionStorage       map[string]map[string]string                                                                                        `json:"session_storage"`
-	Digest               *string                                                                                                             `json:"digest,omitempty"`
-	Basic                *string                                                                                                             `json:"basic,omitempty"`
+	Headers              []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner `json:"headers"`
+	Cookies              []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner `json:"cookies"`
+	QueryParameters      []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner `json:"query_parameters"`
+	Body                 map[string]string                                                                                           `json:"body"`
+	LocalStorage         map[string]map[string]string                                                                                `json:"local_storage"`
+	SessionStorage       map[string]map[string]string                                                                                `json:"session_storage"`
+	Digest               *string                                                                                                     `json:"digest,omitempty"`
+	Basic                *string                                                                                                     `json:"basic,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -37,7 +37,7 @@ type _GetAuthentication200ResponseAuthenticationUsersInnerAuthentication GetAuth
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetAuthentication200ResponseAuthenticationUsersInnerAuthentication(headers []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner, cookies []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner, queryParameters []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersQueryParametersInner, body map[string]string, localStorage map[string]map[string]string, sessionStorage map[string]map[string]string) *GetAuthentication200ResponseAuthenticationUsersInnerAuthentication {
+func NewGetAuthentication200ResponseAuthenticationUsersInnerAuthentication(headers []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner, cookies []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner, queryParameters []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner, body map[string]string, localStorage map[string]map[string]string, sessionStorage map[string]map[string]string) *GetAuthentication200ResponseAuthenticationUsersInnerAuthentication {
 	this := GetAuthentication200ResponseAuthenticationUsersInnerAuthentication{}
 	this.Headers = headers
 	this.Cookies = cookies
@@ -105,9 +105,9 @@ func (o *GetAuthentication200ResponseAuthenticationUsersInnerAuthentication) Set
 }
 
 // GetQueryParameters returns the QueryParameters field value
-func (o *GetAuthentication200ResponseAuthenticationUsersInnerAuthentication) GetQueryParameters() []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersQueryParametersInner {
+func (o *GetAuthentication200ResponseAuthenticationUsersInnerAuthentication) GetQueryParameters() []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner {
 	if o == nil {
-		var ret []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersQueryParametersInner
+		var ret []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner
 		return ret
 	}
 
@@ -116,7 +116,7 @@ func (o *GetAuthentication200ResponseAuthenticationUsersInnerAuthentication) Get
 
 // GetQueryParametersOk returns a tuple with the QueryParameters field value
 // and a boolean to check if the value has been set.
-func (o *GetAuthentication200ResponseAuthenticationUsersInnerAuthentication) GetQueryParametersOk() ([]GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersQueryParametersInner, bool) {
+func (o *GetAuthentication200ResponseAuthenticationUsersInnerAuthentication) GetQueryParametersOk() ([]GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -124,7 +124,7 @@ func (o *GetAuthentication200ResponseAuthenticationUsersInnerAuthentication) Get
 }
 
 // SetQueryParameters sets field value
-func (o *GetAuthentication200ResponseAuthenticationUsersInnerAuthentication) SetQueryParameters(v []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersQueryParametersInner) {
+func (o *GetAuthentication200ResponseAuthenticationUsersInnerAuthentication) SetQueryParameters(v []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner) {
 	o.QueryParameters = v
 }
 

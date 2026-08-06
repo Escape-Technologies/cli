@@ -20,16 +20,16 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationAuthenticationProcedur
 
 // GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters struct for GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters
 type GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters struct {
-	ProxyOverride        *string                                                                                                             `json:"proxy_override,omitempty"`
-	Url                  string                                                                                                              `json:"url"`
-	Method               ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD                                 `json:"method"`
-	Headers              []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner         `json:"headers"`
-	Cookies              []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner         `json:"cookies"`
-	QueryParameters      []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersQueryParametersInner `json:"queryParameters"`
-	Body                 interface{}                                                                                                         `json:"body,omitempty"`
-	Timeout              *float32                                                                                                            `json:"timeout,omitempty"`
-	Insecure             *bool                                                                                                               `json:"insecure,omitempty"`
-	FollowRedirects      *float32                                                                                                            `json:"follow_redirects,omitempty"`
+	ProxyOverride        *string                                                                                                     `json:"proxy_override,omitempty"`
+	Url                  string                                                                                                      `json:"url"`
+	Method               ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD                         `json:"method"`
+	Headers              []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner `json:"headers"`
+	Cookies              []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner `json:"cookies"`
+	QueryParameters      []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner `json:"queryParameters"`
+	Body                 interface{}                                                                                                 `json:"body,omitempty"`
+	Timeout              *float32                                                                                                    `json:"timeout,omitempty"`
+	Insecure             *bool                                                                                                       `json:"insecure,omitempty"`
+	FollowRedirects      *float32                                                                                                    `json:"follow_redirects,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -39,7 +39,7 @@ type _GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsI
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters(url string, method ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD, headers []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner, cookies []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner, queryParameters []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersQueryParametersInner) *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters {
+func NewGetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters(url string, method ENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHOD, headers []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner, cookies []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner, queryParameters []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner) *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters {
 	this := GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters{}
 	this.Url = url
 	this.Method = method
@@ -186,9 +186,9 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 }
 
 // GetQueryParameters returns the QueryParameters field value
-func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters) GetQueryParameters() []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersQueryParametersInner {
+func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters) GetQueryParameters() []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner {
 	if o == nil {
-		var ret []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersQueryParametersInner
+		var ret []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner
 		return ret
 	}
 
@@ -197,7 +197,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 
 // GetQueryParametersOk returns a tuple with the QueryParameters field value
 // and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters) GetQueryParametersOk() ([]GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersQueryParametersInner, bool) {
+func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters) GetQueryParametersOk() ([]GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -205,7 +205,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 }
 
 // SetQueryParameters sets field value
-func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters) SetQueryParameters(v []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersQueryParametersInner) {
+func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParameters) SetQueryParameters(v []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner) {
 	o.QueryParameters = v
 }
 
