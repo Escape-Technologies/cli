@@ -19,20 +19,20 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationAuthenticationUsersInn
 
 // GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentials struct for GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentials
 type GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentials struct {
-	Username             *string                                                                                                     `json:"username,omitempty"`
-	Password             *string                                                                                                     `json:"password,omitempty"`
-	Headers              []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner `json:"headers,omitempty"`
-	Cookies              []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner `json:"cookies,omitempty"`
-	QueryParameters      []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner `json:"query_parameters,omitempty"`
-	Body                 interface{}                                                                                                 `json:"body,omitempty"`
-	LocalStorage         map[string]map[string]string                                                                                `json:"local_storage,omitempty"`
-	SessionStorage       map[string]map[string]string                                                                                `json:"session_storage,omitempty"`
-	Actions              []GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInner                         `json:"actions,omitempty"`
-	PreLoginActions      []GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInner                         `json:"pre_login_actions,omitempty"`
-	PostLoginActions     []GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInner                         `json:"post_login_actions,omitempty"`
-	OnTriggerActions     []GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsOnTriggerActionsInner                `json:"on_trigger_actions,omitempty"`
-	Digest               *string                                                                                                     `json:"digest,omitempty"`
-	Basic                *string                                                                                                     `json:"basic,omitempty"`
+	Username             *string                                                                                                             `json:"username,omitempty"`
+	Password             *string                                                                                                             `json:"password,omitempty"`
+	Headers              []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner         `json:"headers,omitempty"`
+	Cookies              []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner         `json:"cookies,omitempty"`
+	QueryParameters      []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersQueryParametersInner `json:"query_parameters,omitempty"`
+	Body                 interface{}                                                                                                         `json:"body,omitempty"`
+	LocalStorage         map[string]map[string]string                                                                                        `json:"local_storage,omitempty"`
+	SessionStorage       map[string]map[string]string                                                                                        `json:"session_storage,omitempty"`
+	Actions              []GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInner                                 `json:"actions,omitempty"`
+	PreLoginActions      []GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInner                                 `json:"pre_login_actions,omitempty"`
+	PostLoginActions     []GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInner                                 `json:"post_login_actions,omitempty"`
+	OnTriggerActions     []GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsOnTriggerActionsInner                        `json:"on_trigger_actions,omitempty"`
+	Digest               *string                                                                                                             `json:"digest,omitempty"`
+	Basic                *string                                                                                                             `json:"basic,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -184,9 +184,9 @@ func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentials) 
 }
 
 // GetQueryParameters returns the QueryParameters field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentials) GetQueryParameters() []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner {
+func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentials) GetQueryParameters() []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersQueryParametersInner {
 	if o == nil || IsNil(o.QueryParameters) {
-		var ret []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner
+		var ret []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersQueryParametersInner
 		return ret
 	}
 	return o.QueryParameters
@@ -194,7 +194,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentials) 
 
 // GetQueryParametersOk returns a tuple with the QueryParameters field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentials) GetQueryParametersOk() ([]GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner, bool) {
+func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentials) GetQueryParametersOk() ([]GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersQueryParametersInner, bool) {
 	if o == nil || IsNil(o.QueryParameters) {
 		return nil, false
 	}
@@ -210,8 +210,8 @@ func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentials) 
 	return false
 }
 
-// SetQueryParameters gets a reference to the given []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner and assigns it to the QueryParameters field.
-func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentials) SetQueryParameters(v []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner) {
+// SetQueryParameters gets a reference to the given []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersQueryParametersInner and assigns it to the QueryParameters field.
+func (o *GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentials) SetQueryParameters(v []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersQueryParametersInner) {
 	o.QueryParameters = v
 }
 
