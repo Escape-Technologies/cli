@@ -46,7 +46,8 @@ type GetIssue200Response struct {
 	// ID of the first scan where this issue was seen
 	FirstSeenScanId *string `json:"firstSeenScanId,omitempty"`
 	// ID of the custom rule if this is a custom issue
-	CustomRuleId *string `json:"customRuleId,omitempty"`
+	CustomRuleId *string                         `json:"customRuleId,omitempty"`
+	SecurityTest GetIssue200ResponseSecurityTest `json:"securityTest"`
 	// Framework used for AI remediation
 	AiRemediationFramework string `json:"aiRemediationFramework"`
 	// AI-generated remediation for the issue
@@ -68,7 +69,7 @@ type _GetIssue200Response GetIssue200Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetIssue200Response(id string, name string, fullName string, category ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY, severity ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY, manualSeverity bool, status ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, alertUid string, createdAt string, asset AssetDetailed2, aiRemediationFramework string, links IssueSummarizedLinks) *GetIssue200Response {
+func NewGetIssue200Response(id string, name string, fullName string, category ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY, severity ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY, manualSeverity bool, status ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, alertUid string, createdAt string, asset AssetDetailed2, securityTest GetIssue200ResponseSecurityTest, aiRemediationFramework string, links IssueSummarizedLinks) *GetIssue200Response {
 	this := GetIssue200Response{}
 	this.Id = id
 	this.Name = name
@@ -81,6 +82,7 @@ func NewGetIssue200Response(id string, name string, fullName string, category EN
 	this.AlertUid = alertUid
 	this.CreatedAt = createdAt
 	this.Asset = asset
+	this.SecurityTest = securityTest
 	this.AiRemediationFramework = aiRemediationFramework
 	this.Links = links
 	return &this
@@ -518,6 +520,30 @@ func (o *GetIssue200Response) SetCustomRuleId(v string) {
 	o.CustomRuleId = &v
 }
 
+// GetSecurityTest returns the SecurityTest field value
+func (o *GetIssue200Response) GetSecurityTest() GetIssue200ResponseSecurityTest {
+	if o == nil {
+		var ret GetIssue200ResponseSecurityTest
+		return ret
+	}
+
+	return o.SecurityTest
+}
+
+// GetSecurityTestOk returns a tuple with the SecurityTest field value
+// and a boolean to check if the value has been set.
+func (o *GetIssue200Response) GetSecurityTestOk() (*GetIssue200ResponseSecurityTest, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.SecurityTest, true
+}
+
+// SetSecurityTest sets field value
+func (o *GetIssue200Response) SetSecurityTest(v GetIssue200ResponseSecurityTest) {
+	o.SecurityTest = v
+}
+
 // GetAiRemediationFramework returns the AiRemediationFramework field value
 func (o *GetIssue200Response) GetAiRemediationFramework() string {
 	if o == nil {
@@ -762,6 +788,7 @@ func (o GetIssue200Response) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CustomRuleId) {
 		toSerialize["customRuleId"] = o.CustomRuleId
 	}
+	toSerialize["securityTest"] = o.SecurityTest
 	toSerialize["aiRemediationFramework"] = o.AiRemediationFramework
 	if !IsNil(o.Remediation) {
 		toSerialize["remediation"] = o.Remediation
@@ -803,6 +830,7 @@ func (o *GetIssue200Response) UnmarshalJSON(data []byte) (err error) {
 		"alertUid",
 		"createdAt",
 		"asset",
+		"securityTest",
 		"aiRemediationFramework",
 		"links",
 	}
@@ -850,6 +878,7 @@ func (o *GetIssue200Response) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "lastSeenScan")
 		delete(additionalProperties, "firstSeenScanId")
 		delete(additionalProperties, "customRuleId")
+		delete(additionalProperties, "securityTest")
 		delete(additionalProperties, "aiRemediationFramework")
 		delete(additionalProperties, "remediation")
 		delete(additionalProperties, "cvss")
