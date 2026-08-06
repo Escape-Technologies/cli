@@ -20,8 +20,9 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationAuthenticationProcedur
 
 // GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner struct for GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner
 type GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner struct {
-	Name                 string   `json:"name"`
-	Values               []string `json:"values"`
+	Name                 string              `json:"name"`
+	Values               []string            `json:"values"`
+	Source               *ENUMAUTOEXTRACTION `json:"source,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -94,6 +95,38 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 	o.Values = v
 }
 
+// GetSource returns the Source field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner) GetSource() ENUMAUTOEXTRACTION {
+	if o == nil || IsNil(o.Source) {
+		var ret ENUMAUTOEXTRACTION
+		return ret
+	}
+	return *o.Source
+}
+
+// GetSourceOk returns a tuple with the Source field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner) GetSourceOk() (*ENUMAUTOEXTRACTION, bool) {
+	if o == nil || IsNil(o.Source) {
+		return nil, false
+	}
+	return o.Source, true
+}
+
+// HasSource returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner) HasSource() bool {
+	if o != nil && !IsNil(o.Source) {
+		return true
+	}
+
+	return false
+}
+
+// SetSource gets a reference to the given ENUMAUTOEXTRACTION and assigns it to the Source field.
+func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner) SetSource(v ENUMAUTOEXTRACTION) {
+	o.Source = &v
+}
+
 func (o GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -106,6 +139,9 @@ func (o GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperation
 	toSerialize := map[string]interface{}{}
 	toSerialize["name"] = o.Name
 	toSerialize["values"] = o.Values
+	if !IsNil(o.Source) {
+		toSerialize["source"] = o.Source
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -152,6 +188,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "values")
+		delete(additionalProperties, "source")
 		o.AdditionalProperties = additionalProperties
 	}
 
