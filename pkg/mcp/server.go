@@ -41,7 +41,6 @@ type ServerOptions struct {
 	IssuerURL           string
 	ResourceURL         string
 	OAuthPrivateKeyPath string
-	ExtraRedirectHosts  []string
 }
 
 // Server is the embedded MCP server that exposes CLI commands over HTTP.
@@ -107,7 +106,6 @@ func (s *Server) Serve(ctx context.Context) error {
 			ResourceURL:         s.options.ResourceURL,
 			PublicAPIURL:        s.options.PublicAPIURL,
 			OAuthPrivateKeyPath: s.options.OAuthPrivateKeyPath,
-			ExtraRedirectHosts:  s.options.ExtraRedirectHosts,
 		})
 		if err != nil {
 			return fmt.Errorf("initialize oauth handlers: %w", err)
@@ -125,10 +123,10 @@ func (s *Server) Serve(ctx context.Context) error {
 	// wrapWithCORS wraps the /mcp handler. Claude Desktop and Cowork (and
 	// any future browser-based MCP client) send an OPTIONS preflight before
 	// the actual POST. Without CORS headers the browser silently drops the
-	// request and reports "Couldn't reach the MCP server". We allow the
-	// same set of origins that the OAuth allowlist permits; the pre-flight
-	// does not require credentials, so `Access-Control-Allow-Credentials`
-	// is intentionally omitted here.
+	// request and reports "Couldn't reach the MCP server". Any origin is
+	// reflected because MCP clients run from origins we cannot enumerate;
+	// the pre-flight does not require credentials, so
+	// `Access-Control-Allow-Credentials` is intentionally omitted here.
 	// CORS must wrap auth: OPTIONS preflights carry no credentials and
 	// must receive CORS headers (status 204) without triggering a 401.
 	mainMux.Handle("/mcp", wrapWithCORS(wrapWithAuthMiddleware(interceptedMCP, oauth)))

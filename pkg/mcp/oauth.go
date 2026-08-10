@@ -46,9 +46,9 @@ const (
 	upstreamValidationPath = "/v3/me"
 )
 
-// oauthHandlers owns the keypair, per-request state (jti seen-set,
-// upstream validation cache), and the compiled redirect allowlist.
-// It is created once at server start and shared across requests.
+// oauthHandlers owns the keypair and the per-request state (jti seen-set,
+// upstream validation cache). It is created once at server start and shared
+// across requests.
 type oauthHandlers struct {
 	privateKey        *rsa.PrivateKey
 	publicKey         *rsa.PublicKey
@@ -61,7 +61,6 @@ type oauthHandlers struct {
 	authorizeURL      string
 	registrationURL   string
 	publicAPIURL      string
-	allowlist         *redirectAllowlist
 	seenJTI           map[string]int64
 	seenJTIMu         sync.Mutex
 	upstreamClient    *http.Client
@@ -93,12 +92,11 @@ type oauthConfig struct {
 	ResourceURL         string
 	PublicAPIURL        string
 	OAuthPrivateKeyPath string
-	ExtraRedirectHosts  []string
 }
 
-// newOAuthHandlers bootstraps the RSA keypair, compiles the allowlist, and
-// prepares the shared state. It never returns a partially-initialized
-// handler — on any failure it errors out so the serve command aborts.
+// newOAuthHandlers bootstraps the RSA keypair and prepares the shared state.
+// It never returns a partially-initialized handler — on any failure it errors
+// out so the serve command aborts.
 func newOAuthHandlers(cfg oauthConfig) (*oauthHandlers, error) {
 	privateKey, err := loadOrGenerateKey(cfg.OAuthPrivateKeyPath)
 	if err != nil {
@@ -145,7 +143,6 @@ func newOAuthHandlers(cfg oauthConfig) (*oauthHandlers, error) {
 		authorizeURL:    strings.TrimRight(issuerURL, "/") + "/oauth/mcp/authorize",
 		registrationURL: "", // Hosted on the Node API; advertised via AS metadata, not by this server.
 		publicAPIURL:    strings.TrimRight(cfg.PublicAPIURL, "/"),
-		allowlist:       buildRedirectAllowlist(cfg.ExtraRedirectHosts),
 		seenJTI:         make(map[string]int64),
 		validationCache: make(map[string]int64),
 		upstreamClient:  &http.Client{Timeout: 5 * time.Second}, //nolint:mnd
@@ -240,11 +237,11 @@ func (h *oauthHandlers) ServeToken(w http.ResponseWriter, req *http.Request) {
 		h.writeOAuthError(w, http.StatusBadRequest, "invalid_grant", "redirect_uri mismatch")
 		return
 	}
-	// Defense-in-depth: validate the decrypted redirect_uri against the
-	// server's allowlist even though the authorize endpoint should have
-	// rejected it already. Protects against a compromised authorize path.
-	if !h.allowlist.allow(payload.RedirectURI) {
-		h.writeOAuthError(w, http.StatusBadRequest, "invalid_grant", "redirect_uri is not in the server allowlist")
+	// Defense-in-depth: re-validate the decrypted redirect_uri even though the
+	// authorize endpoint should have rejected it already. Protects against a
+	// compromised authorize path.
+	if !allowRedirect(payload.RedirectURI) {
+		h.writeOAuthError(w, http.StatusBadRequest, "invalid_grant", "redirect_uri is not accepted")
 		return
 	}
 	if payload.ClientID != oauthClientID {
@@ -569,87 +566,42 @@ func writeJSON(w http.ResponseWriter, status int, body any, setNoCache bool) {
 	_, _ = w.Write(data)
 }
 
-// redirectAllowlist is a compiled host matcher shared between the
-// authorize page (frontend, defense layer 1) and the token endpoint
-// (this file, defense layer 2 — the credential-exposing one).
-type redirectAllowlist struct {
-	allowedHosts []allowedHost
+// dangerousRedirectSchemes are the schemes a browser may execute or resolve
+// locally instead of navigating to. The consent page navigates to the redirect
+// URI, so letting one through would be XSS on the app origin. Blocked whatever
+// their shape: `javascript://host/%0aalert(1)` parses with a host and would
+// otherwise pass as a private-use scheme.
+var dangerousRedirectSchemes = map[string]bool{
+	"javascript":  true,
+	"data":        true,
+	"vbscript":    true,
+	"file":        true,
+	"blob":        true,
+	"filesystem":  true,
+	"about":       true,
+	"view-source": true,
 }
 
-type allowedHost struct {
-	scheme    string
-	host      string
-	path      string
-	wildcard  bool
-	loopback  bool
-	allowPort bool
+var loopbackRedirectHosts = map[string]bool{
+	"127.0.0.1": true,
+	"::1":       true,
+	"localhost": true,
 }
 
-// buildRedirectAllowlist constructs the compiled allowlist. `extras` are
-// HTTPS-only hostnames (or `*.host`) passed via ESCAPE_MCP_EXTRA_REDIRECT_HOSTS
-// for staging/QA. Keep in sync with services/api/src/lib/oauth/redirect-allowlist.ts
-// and services/frontend/src/routes/oauth/mcp/_lib/allowlist.ts (Anthropic +
-// Cowork + Cursor + OpenAI/ChatGPT + Continue.dev + Zed + Windsurf/Codeium,
-// each as apex + wildcard subdomains, HTTPS only). VS Code uses vscode.dev for its static
-// redirect URI fallback when DCR is unsupported.
-func buildRedirectAllowlist(extras []string) *redirectAllowlist {
-	hosts := []allowedHost{
-		{scheme: "http", host: "127.0.0.1", loopback: true, allowPort: true},
-		{scheme: "http", host: "localhost", loopback: true, allowPort: true},
-		{scheme: "https", host: "claude.ai"},
-		{scheme: "https", host: "anthropic.com", wildcard: true},
-		{scheme: "https", host: "cowork.ai"},
-		{scheme: "https", host: "cowork.ai", wildcard: true},
-		{scheme: "https", host: "cursor.com"},
-		{scheme: "https", host: "cursor.com", wildcard: true},
-		{scheme: "https", host: "cursor.sh"},
-		{scheme: "https", host: "cursor.sh", wildcard: true},
-		{scheme: "cursor", host: "anysphere.cursor-mcp", path: "/oauth/callback"},
-		{scheme: "https", host: "openai.com"},
-		{scheme: "https", host: "openai.com", wildcard: true},
-		{scheme: "https", host: "chatgpt.com"},
-		{scheme: "https", host: "chatgpt.com", wildcard: true},
-		{scheme: "https", host: "continue.dev"},
-		{scheme: "https", host: "continue.dev", wildcard: true},
-		{scheme: "https", host: "zed.dev"},
-		{scheme: "https", host: "zed.dev", wildcard: true},
-		{scheme: "https", host: "windsurf.com"},
-		{scheme: "https", host: "windsurf.com", wildcard: true},
-		{scheme: "https", host: "codeium.com"},
-		{scheme: "https", host: "codeium.com", wildcard: true},
-		// VS Code / GitHub Copilot — static OAuth fallback redirect for non-DCR providers.
-		{scheme: "https", host: "vscode.dev"},
-		{scheme: "https", host: "vscode.dev", wildcard: true},
-	}
-	for _, raw := range extras {
-		host := strings.TrimSpace(raw)
-		if host == "" {
-			continue
-		}
-		// Tolerate scheme prefixes and paths so operators can paste a
-		// URL. We always compile as HTTPS (enforced at match time).
-		host = strings.TrimPrefix(host, "https://")
-		host = strings.TrimPrefix(host, "http://")
-		if idx := strings.IndexAny(host, "/?#"); idx >= 0 {
-			host = host[:idx]
-		}
-		wildcard := false
-		if strings.HasPrefix(host, "*.") {
-			wildcard = true
-			host = strings.TrimPrefix(host, "*.")
-		}
-		if host == "" {
-			continue
-		}
-		hosts = append(hosts, allowedHost{scheme: "https", host: host, wildcard: wildcard})
-	}
-	return &redirectAllowlist{allowedHosts: hosts}
-}
-
-// allow returns true when the URI is permitted by the allowlist.
-// Rejects unrecognized schemes, userinfo, fragments, and unrecognized hosts.
-func (a *redirectAllowlist) allow(raw string) bool {
-	if a == nil || raw == "" {
+// allowRedirect reports whether the URI is a redirect target we accept. This is
+// defense layer 2 (the credential-exposing one); the consent page runs the same
+// check as layer 1. Keep in sync with services/api/src/lib/oauth/redirect.ts and
+// services/frontend/src/routes/oauth/mcp/_lib/redirect.ts.
+//
+// Any destination is accepted as long as the shape is safe to hand to a browser,
+// because MCP clients reach us through proxies and gateways we cannot enumerate.
+// The user approves the destination on the consent screen, which displays it
+// before the code is minted — that consent authorizes the redirect, not a vendor
+// list. Rejected: script-bearing schemes, cleartext http outside loopback (OAuth
+// 2.1), userinfo (spoofs the host shown at consent), and fragments (RFC 6749
+// §3.1.2).
+func allowRedirect(raw string) bool {
+	if raw == "" {
 		return false
 	}
 	u, err := url.Parse(raw)
@@ -659,48 +611,29 @@ func (a *redirectAllowlist) allow(raw string) bool {
 	if u.User != nil || u.Fragment != "" {
 		return false
 	}
+
 	scheme := strings.ToLower(u.Scheme)
-	// net/url.Hostname() already strips brackets from IPv6 literals in
-	// Go ≥1.5, but normalize defensively so the matcher stays identical
-	// in shape to the TS/Node peer (where URL.hostname *does* preserve
-	// brackets).
-	host := stripBrackets(strings.ToLower(u.Hostname()))
-	if host == "" {
+	if dangerousRedirectSchemes[scheme] {
 		return false
 	}
-	port := u.Port()
 
-	for _, allowed := range a.allowedHosts {
-		if allowed.scheme != scheme {
-			continue
-		}
-		if !allowed.allowPort && port != "" {
-			continue
-		}
-		if allowed.path != "" && (u.EscapedPath() != allowed.path || u.RawQuery != "") {
-			continue
-		}
-		if allowed.loopback {
-			if host == allowed.host {
-				return true
-			}
-			// Also accept IPv6 loopback.
-			if allowed.host == "127.0.0.1" && host == "::1" {
-				return true
-			}
-			continue
-		}
-		if allowed.wildcard {
-			if strings.HasSuffix(host, "."+allowed.host) {
-				return true
-			}
-			continue
-		}
-		if host == allowed.host {
-			return true
-		}
+	// net/url.Hostname() already strips brackets from IPv6 literals, but
+	// normalize defensively so the matcher stays identical in shape to the
+	// TS peers (where URL.hostname *does* preserve brackets).
+	host := stripBrackets(strings.ToLower(u.Hostname()))
+
+	switch scheme {
+	case "https":
+		return host != ""
+	case "http":
+		return loopbackRedirectHosts[host]
+	default:
+		// Private-use scheme per RFC 8252 §7.1: require a host
+		// (cursor://anysphere.cursor-mcp/cb) or an absolute path
+		// (com.example.app:/oauth2redirect) so a bare `scheme:opaque`
+		// string cannot pass.
+		return host != "" || strings.HasPrefix(u.Path, "/")
 	}
-	return false
 }
 
 func stripBrackets(host string) string {

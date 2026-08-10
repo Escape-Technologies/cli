@@ -319,20 +319,22 @@ func TestServeToken(t *testing.T) {
 		assertOAuthError(t, rec, http.StatusBadRequest, "invalid_grant")
 	})
 
-	t.Run("redirect_uri_outside_allowlist_defense_in_depth", func(t *testing.T) {
+	t.Run("unsafe_redirect_uri_defense_in_depth", func(t *testing.T) {
 		t.Parallel()
 		verifierLocal, challengeLocal := pkcePair(t)
-		// Mint a code where the payload's redirect_uri is NOT on the
-		// allowlist. This simulates a compromised authorize step.
+		// Mint a code whose payload redirect_uri is a shape we never accept,
+		// simulating a compromised authorize step. Arbitrary hosts are fine
+		// now, so the vector to keep out is the script-bearing scheme.
+		const unsafeRedirect = "javascript:alert(1)"
 		code := mintJWE(t, h, func(p *oauthCodePayload) {
 			p.CodeChallenge = challengeLocal
-			p.RedirectURI = "https://evil.com/cb"
+			p.RedirectURI = unsafeRedirect
 		})
 		form := url.Values{
 			"grant_type":    {"authorization_code"},
 			"code":          {code},
 			"code_verifier": {verifierLocal},
-			"redirect_uri":  {"https://evil.com/cb"},
+			"redirect_uri":  {unsafeRedirect},
 			"client_id":     {oauthClientID},
 		}
 		rec := httptest.NewRecorder()
@@ -369,78 +371,58 @@ func TestServeToken(t *testing.T) {
 	})
 }
 
-func TestRedirectAllowlist(t *testing.T) {
+// Kept in sync with services/api/src/lib/oauth/redirect.test.ts and
+// services/frontend/src/routes/oauth/mcp/_lib/redirect.test.ts. When adding a
+// case, mirror it in all three test suites.
+func TestAllowRedirect(t *testing.T) {
 	t.Parallel()
-	a := buildRedirectAllowlist([]string{"qa.staging.example"})
 
 	cases := []struct {
 		raw  string
 		want bool
 	}{
-		// Allowed.
+		// Accepted.
 		{"https://claude.ai/cb", true},
 		{"https://foo.anthropic.com/cb", true},
-		{"https://cowork.ai/cb", true},
-		{"https://sub.cowork.ai/cb", true},
-		{"https://cursor.com/cb", true},
-		{"https://app.cursor.com/cb", true},
-		{"https://cursor.sh/cb", true},
-		{"https://app.cursor.sh/cb", true},
-		{"https://openai.com/cb", true},
-		{"https://platform.openai.com/cb", true},
-		{"https://chatgpt.com/cb", true},
-		{"https://app.chatgpt.com/cb", true},
-		{"https://continue.dev/cb", true},
-		{"https://api.continue.dev/cb", true},
-		{"https://zed.dev/cb", true},
-		{"https://api.zed.dev/cb", true},
-		{"https://windsurf.com/cb", true},
-		{"https://app.windsurf.com/cb", true},
-		{"https://codeium.com/cb", true},
-		{"https://api.codeium.com/cb", true},
+		// The customer case this policy was opened up for: an MCP gateway on
+		// a host we cannot enumerate ahead of time.
+		{"https://connect.aigateway.cequence.ai/oauth/callback", true},
+		{"https://auth.aigateway.cequence.ai/v1/outbound/oauth/callback", true},
+		{"https://mcp.customer.internal.example/cb", true},
+		{"https://proxy.example:8443/cb", true},
+		{"https://proxy.example/cb?tenant=acme", true},
 		{"http://localhost:12345/cb", true},
 		{"http://127.0.0.1:8080/cb", true},
 		// IPv6 loopback — URL parsers may or may not keep brackets on
 		// Hostname(); both forms must match so MCP clients binding to
 		// [::1] don't get rejected at the loopback gate.
 		{"http://[::1]:8080/cb", true},
-		{"https://qa.staging.example/cb", true},
-		// Cursor desktop — custom URI scheme exact match.
+		// Private-use URI schemes for native clients, RFC 8252 §7.1.
 		{"cursor://anysphere.cursor-mcp/oauth/callback", true},
-		// VS Code — static HTTPS fallback redirect.
-		{"https://vscode.dev/redirect", true},
-		{"https://insiders.vscode.dev/redirect", true},
+		{"com.example.app:/oauth2redirect", true},
+		{"vscode://escape.escape/did-authenticate", true},
 
-		// Rejected — phishing vectors. One per vendor so a regression
-		// in the apex/wildcard match logic surfaces immediately.
-		{"https://evil.claude.ai.attacker.com/cb", false},
-		{"https://claude.ai.attacker.com/cb", false},
-		{"https://anthropic.com.evil/cb", false},
-		{"https://fakeclaude.ai/cb", false},
-		{"https://cursor.com.attacker.com/cb", false},
-		{"https://fake-cursor.com/cb", false},
-		{"https://openai.com.attacker.com/cb", false},
-		{"https://fakeopenai.com/cb", false},
-		{"https://chatgpt.com.attacker.com/cb", false},
-		{"https://continue.dev.attacker.com/cb", false},
-		{"https://zed.dev.attacker.com/cb", false},
-		{"https://windsurf.com.attacker.com/cb", false},
-		{"https://codeium.com.attacker.com/cb", false},
-
-		// Rejected — wrong scheme.
+		// Rejected — the consent page navigates to the redirect URI, so a
+		// script-bearing scheme would be XSS on the app origin.
 		{"javascript:alert(1)", false},
+		{"javascript://x/%0aalert(1)", false},
 		{"data:text/html,x", false},
-		{"ftp://cowork.ai/cb", false},
-		{"http://claude.ai/cb", false}, // must be https for non-loopback
-		{"cursor://evil.cursor-mcp/oauth/callback", false},
-		{"cursor://anysphere.cursor-mcp/oauth/other", false},
-		{"cursor://anysphere.cursor-mcp/oauth/callback?code=x", false},
+		{"file:///etc/passwd", false},
+		{"blob:https://app.escape.tech/uuid", false},
+		{"view-source:https://app.escape.tech", false},
 
-		// Rejected — userinfo + fragments.
-		{"https://claude.ai@evil/cb", false},
+		// Rejected — OAuth 2.1 forbids cleartext outside loopback.
+		{"http://claude.ai/cb", false},
+		{"http://192.168.1.10:3000/cb", false},
+
+		// Rejected — userinfo spoofs the host shown at consent, and RFC 6749
+		// §3.1.2 forbids a fragment on the redirect endpoint.
+		{"https://claude.ai@evil.example/cb", false},
 		{"https://claude.ai/cb#fragment", false},
 
-		// Empty.
+		// Rejected — no destination to redirect to.
+		{"https://", false},
+		{"weird:opaque-payload", false},
 		{"", false},
 	}
 
@@ -448,8 +430,8 @@ func TestRedirectAllowlist(t *testing.T) {
 		tc := tc
 		t.Run(tc.raw, func(t *testing.T) {
 			t.Parallel()
-			if got := a.allow(tc.raw); got != tc.want {
-				t.Fatalf("allow(%q) = %v, want %v", tc.raw, got, tc.want)
+			if got := allowRedirect(tc.raw); got != tc.want {
+				t.Fatalf("allowRedirect(%q) = %v, want %v", tc.raw, got, tc.want)
 			}
 		})
 	}
