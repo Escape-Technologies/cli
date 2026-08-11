@@ -20,10 +20,7 @@ var _ MappedNullable = &CreateAssetBITBUCKETREPOSITORYRequestOrg{}
 
 // CreateAssetBITBUCKETREPOSITORYRequestOrg struct for CreateAssetBITBUCKETREPOSITORYRequestOrg
 type CreateAssetBITBUCKETREPOSITORYRequestOrg struct {
-	AssetClass           ENUMSOURCECODEMANAGEMENT  `json:"asset_class"`
-	ExtraMetadata        map[string]interface{}    `json:"extra_metadata,omitempty"`
-	ScreenshotS3Key      *string                   `json:"screenshot_s3_key,omitempty"`
-	AssetType            ENUMBITBUCKETORGANIZATION `json:"asset_type"`
+	ModelDiscriminator   ENUMBITBUCKETORGANIZATION `json:"model_discriminator_"`
 	Name                 *string                   `json:"name,omitempty"`
 	ImmutableKey         string                    `json:"immutable_key"`
 	Email                string                    `json:"email"`
@@ -39,10 +36,9 @@ type _CreateAssetBITBUCKETREPOSITORYRequestOrg CreateAssetBITBUCKETREPOSITORYReq
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAssetBITBUCKETREPOSITORYRequestOrg(assetClass ENUMSOURCECODEMANAGEMENT, assetType ENUMBITBUCKETORGANIZATION, immutableKey string, email string, apiKey string, workspaceSlug string) *CreateAssetBITBUCKETREPOSITORYRequestOrg {
+func NewCreateAssetBITBUCKETREPOSITORYRequestOrg(modelDiscriminator ENUMBITBUCKETORGANIZATION, immutableKey string, email string, apiKey string, workspaceSlug string) *CreateAssetBITBUCKETREPOSITORYRequestOrg {
 	this := CreateAssetBITBUCKETREPOSITORYRequestOrg{}
-	this.AssetClass = assetClass
-	this.AssetType = assetType
+	this.ModelDiscriminator = modelDiscriminator
 	this.ImmutableKey = immutableKey
 	this.Email = email
 	this.ApiKey = apiKey
@@ -58,116 +54,28 @@ func NewCreateAssetBITBUCKETREPOSITORYRequestOrgWithDefaults() *CreateAssetBITBU
 	return &this
 }
 
-// GetAssetClass returns the AssetClass field value
-func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) GetAssetClass() ENUMSOURCECODEMANAGEMENT {
-	if o == nil {
-		var ret ENUMSOURCECODEMANAGEMENT
-		return ret
-	}
-
-	return o.AssetClass
-}
-
-// GetAssetClassOk returns a tuple with the AssetClass field value
-// and a boolean to check if the value has been set.
-func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) GetAssetClassOk() (*ENUMSOURCECODEMANAGEMENT, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.AssetClass, true
-}
-
-// SetAssetClass sets field value
-func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) SetAssetClass(v ENUMSOURCECODEMANAGEMENT) {
-	o.AssetClass = v
-}
-
-// GetExtraMetadata returns the ExtraMetadata field value if set, zero value otherwise.
-func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) GetExtraMetadata() map[string]interface{} {
-	if o == nil || IsNil(o.ExtraMetadata) {
-		var ret map[string]interface{}
-		return ret
-	}
-	return o.ExtraMetadata
-}
-
-// GetExtraMetadataOk returns a tuple with the ExtraMetadata field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) GetExtraMetadataOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.ExtraMetadata) {
-		return map[string]interface{}{}, false
-	}
-	return o.ExtraMetadata, true
-}
-
-// HasExtraMetadata returns a boolean if a field has been set.
-func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) HasExtraMetadata() bool {
-	if o != nil && !IsNil(o.ExtraMetadata) {
-		return true
-	}
-
-	return false
-}
-
-// SetExtraMetadata gets a reference to the given map[string]interface{} and assigns it to the ExtraMetadata field.
-func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) SetExtraMetadata(v map[string]interface{}) {
-	o.ExtraMetadata = v
-}
-
-// GetScreenshotS3Key returns the ScreenshotS3Key field value if set, zero value otherwise.
-func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) GetScreenshotS3Key() string {
-	if o == nil || IsNil(o.ScreenshotS3Key) {
-		var ret string
-		return ret
-	}
-	return *o.ScreenshotS3Key
-}
-
-// GetScreenshotS3KeyOk returns a tuple with the ScreenshotS3Key field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) GetScreenshotS3KeyOk() (*string, bool) {
-	if o == nil || IsNil(o.ScreenshotS3Key) {
-		return nil, false
-	}
-	return o.ScreenshotS3Key, true
-}
-
-// HasScreenshotS3Key returns a boolean if a field has been set.
-func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) HasScreenshotS3Key() bool {
-	if o != nil && !IsNil(o.ScreenshotS3Key) {
-		return true
-	}
-
-	return false
-}
-
-// SetScreenshotS3Key gets a reference to the given string and assigns it to the ScreenshotS3Key field.
-func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) SetScreenshotS3Key(v string) {
-	o.ScreenshotS3Key = &v
-}
-
-// GetAssetType returns the AssetType field value
-func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) GetAssetType() ENUMBITBUCKETORGANIZATION {
+// GetModelDiscriminator returns the ModelDiscriminator field value
+func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) GetModelDiscriminator() ENUMBITBUCKETORGANIZATION {
 	if o == nil {
 		var ret ENUMBITBUCKETORGANIZATION
 		return ret
 	}
 
-	return o.AssetType
+	return o.ModelDiscriminator
 }
 
-// GetAssetTypeOk returns a tuple with the AssetType field value
+// GetModelDiscriminatorOk returns a tuple with the ModelDiscriminator field value
 // and a boolean to check if the value has been set.
-func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) GetAssetTypeOk() (*ENUMBITBUCKETORGANIZATION, bool) {
+func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) GetModelDiscriminatorOk() (*ENUMBITBUCKETORGANIZATION, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.AssetType, true
+	return &o.ModelDiscriminator, true
 }
 
-// SetAssetType sets field value
-func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) SetAssetType(v ENUMBITBUCKETORGANIZATION) {
-	o.AssetType = v
+// SetModelDiscriminator sets field value
+func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) SetModelDiscriminator(v ENUMBITBUCKETORGANIZATION) {
+	o.ModelDiscriminator = v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -340,14 +248,7 @@ func (o CreateAssetBITBUCKETREPOSITORYRequestOrg) MarshalJSON() ([]byte, error) 
 
 func (o CreateAssetBITBUCKETREPOSITORYRequestOrg) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["asset_class"] = o.AssetClass
-	if !IsNil(o.ExtraMetadata) {
-		toSerialize["extra_metadata"] = o.ExtraMetadata
-	}
-	if !IsNil(o.ScreenshotS3Key) {
-		toSerialize["screenshot_s3_key"] = o.ScreenshotS3Key
-	}
-	toSerialize["asset_type"] = o.AssetType
+	toSerialize["model_discriminator_"] = o.ModelDiscriminator
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
@@ -371,8 +272,7 @@ func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) UnmarshalJSON(data []byte) (e
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"asset_class",
-		"asset_type",
+		"model_discriminator_",
 		"immutable_key",
 		"email",
 		"api_key",
@@ -406,10 +306,7 @@ func (o *CreateAssetBITBUCKETREPOSITORYRequestOrg) UnmarshalJSON(data []byte) (e
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "asset_class")
-		delete(additionalProperties, "extra_metadata")
-		delete(additionalProperties, "screenshot_s3_key")
-		delete(additionalProperties, "asset_type")
+		delete(additionalProperties, "model_discriminator_")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "immutable_key")
 		delete(additionalProperties, "email")
