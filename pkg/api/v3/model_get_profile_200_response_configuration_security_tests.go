@@ -52,6 +52,7 @@ type GetProfile200ResponseConfigurationSecurityTests struct {
 	AppveyorConfigExposure                    *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"appveyor_config_exposure,omitempty"`
 	AspNetViewStateEncryption                 *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"asp_net_view_state_encryption,omitempty"`
 	AspNetViewStateMacValidationDisabled      *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"asp_net_view_state_mac_validation_disabled,omitempty"`
+	AuthenticationBypass                      *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"authentication_bypass,omitempty"`
 	ArcadePhpSqli                             *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"arcade_php_sqli,omitempty"`
 	AwsAccessToken                            *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"aws_access_token,omitempty"`
 	AwsConfigExposure                         *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"aws_config_exposure,omitempty"`
@@ -185,6 +186,7 @@ type GetProfile200ResponseConfigurationSecurityTests struct {
 	MassAssignment                            *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"mass_assignment,omitempty"`
 	McpUnauth                                 *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"mcp_unauth,omitempty"`
 	MfaBypass                                 *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"mfa_bypass,omitempty"`
+	MissingAuthentication                     *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"missing_authentication,omitempty"`
 	NegativeValue                             *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"negative_value,omitempty"`
 	Nosql                                     *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"nosql,omitempty"`
 	FrontendNosqlInjection                    *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"frontend_nosql_injection,omitempty"`
@@ -1485,6 +1487,38 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) HasAspNetViewStateMacV
 // SetAspNetViewStateMacValidationDisabled gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the AspNetViewStateMacValidationDisabled field.
 func (o *GetProfile200ResponseConfigurationSecurityTests) SetAspNetViewStateMacValidationDisabled(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
 	o.AspNetViewStateMacValidationDisabled = &v
+}
+
+// GetAuthenticationBypass returns the AuthenticationBypass field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetAuthenticationBypass() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.AuthenticationBypass) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.AuthenticationBypass
+}
+
+// GetAuthenticationBypassOk returns a tuple with the AuthenticationBypass field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetAuthenticationBypassOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.AuthenticationBypass) {
+		return nil, false
+	}
+	return o.AuthenticationBypass, true
+}
+
+// HasAuthenticationBypass returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasAuthenticationBypass() bool {
+	if o != nil && !IsNil(o.AuthenticationBypass) {
+		return true
+	}
+
+	return false
+}
+
+// SetAuthenticationBypass gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the AuthenticationBypass field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetAuthenticationBypass(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.AuthenticationBypass = &v
 }
 
 // GetArcadePhpSqli returns the ArcadePhpSqli field value if set, zero value otherwise.
@@ -5741,6 +5775,38 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) HasMfaBypass() bool {
 // SetMfaBypass gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the MfaBypass field.
 func (o *GetProfile200ResponseConfigurationSecurityTests) SetMfaBypass(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
 	o.MfaBypass = &v
+}
+
+// GetMissingAuthentication returns the MissingAuthentication field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetMissingAuthentication() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.MissingAuthentication) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.MissingAuthentication
+}
+
+// GetMissingAuthenticationOk returns a tuple with the MissingAuthentication field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetMissingAuthenticationOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.MissingAuthentication) {
+		return nil, false
+	}
+	return o.MissingAuthentication, true
+}
+
+// HasMissingAuthentication returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasMissingAuthentication() bool {
+	if o != nil && !IsNil(o.MissingAuthentication) {
+		return true
+	}
+
+	return false
+}
+
+// SetMissingAuthentication gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the MissingAuthentication field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetMissingAuthentication(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.MissingAuthentication = &v
 }
 
 // GetNegativeValue returns the NegativeValue field value if set, zero value otherwise.
@@ -13020,6 +13086,9 @@ func (o GetProfile200ResponseConfigurationSecurityTests) ToMap() (map[string]int
 	if !IsNil(o.AspNetViewStateMacValidationDisabled) {
 		toSerialize["asp_net_view_state_mac_validation_disabled"] = o.AspNetViewStateMacValidationDisabled
 	}
+	if !IsNil(o.AuthenticationBypass) {
+		toSerialize["authentication_bypass"] = o.AuthenticationBypass
+	}
 	if !IsNil(o.ArcadePhpSqli) {
 		toSerialize["arcade_php_sqli"] = o.ArcadePhpSqli
 	}
@@ -13418,6 +13487,9 @@ func (o GetProfile200ResponseConfigurationSecurityTests) ToMap() (map[string]int
 	}
 	if !IsNil(o.MfaBypass) {
 		toSerialize["mfa_bypass"] = o.MfaBypass
+	}
+	if !IsNil(o.MissingAuthentication) {
+		toSerialize["missing_authentication"] = o.MissingAuthentication
 	}
 	if !IsNil(o.NegativeValue) {
 		toSerialize["negative_value"] = o.NegativeValue
@@ -14146,6 +14218,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) UnmarshalJSON(data []b
 		delete(additionalProperties, "appveyor_config_exposure")
 		delete(additionalProperties, "asp_net_view_state_encryption")
 		delete(additionalProperties, "asp_net_view_state_mac_validation_disabled")
+		delete(additionalProperties, "authentication_bypass")
 		delete(additionalProperties, "arcade_php_sqli")
 		delete(additionalProperties, "aws_access_token")
 		delete(additionalProperties, "aws_config_exposure")
@@ -14279,6 +14352,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) UnmarshalJSON(data []b
 		delete(additionalProperties, "mass_assignment")
 		delete(additionalProperties, "mcp_unauth")
 		delete(additionalProperties, "mfa_bypass")
+		delete(additionalProperties, "missing_authentication")
 		delete(additionalProperties, "negative_value")
 		delete(additionalProperties, "nosql")
 		delete(additionalProperties, "frontend_nosql_injection")
