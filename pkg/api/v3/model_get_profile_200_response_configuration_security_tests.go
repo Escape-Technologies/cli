@@ -161,6 +161,7 @@ type GetProfile200ResponseConfigurationSecurityTests struct {
 	HostHeaderInjectionReflected              *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"host_header_injection_reflected,omitempty"`
 	HtmlInjection                             *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"html_injection,omitempty"`
 	Http2NotSupported                         *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"http2_not_supported,omitempty"`
+	HttpMethodOverride                        *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"http_method_override,omitempty"`
 	HttpNoHttpsRedirect                       *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"http_no_https_redirect,omitempty"`
 	HttpParamPollution                        *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"http_param_pollution,omitempty"`
 	IdeEnabled                                *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"ide_enabled,omitempty"`
@@ -4975,6 +4976,38 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) HasHttp2NotSupported()
 // SetHttp2NotSupported gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the Http2NotSupported field.
 func (o *GetProfile200ResponseConfigurationSecurityTests) SetHttp2NotSupported(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
 	o.Http2NotSupported = &v
+}
+
+// GetHttpMethodOverride returns the HttpMethodOverride field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetHttpMethodOverride() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.HttpMethodOverride) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.HttpMethodOverride
+}
+
+// GetHttpMethodOverrideOk returns a tuple with the HttpMethodOverride field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetHttpMethodOverrideOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.HttpMethodOverride) {
+		return nil, false
+	}
+	return o.HttpMethodOverride, true
+}
+
+// HasHttpMethodOverride returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasHttpMethodOverride() bool {
+	if o != nil && !IsNil(o.HttpMethodOverride) {
+		return true
+	}
+
+	return false
+}
+
+// SetHttpMethodOverride gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the HttpMethodOverride field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetHttpMethodOverride(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.HttpMethodOverride = &v
 }
 
 // GetHttpNoHttpsRedirect returns the HttpNoHttpsRedirect field value if set, zero value otherwise.
@@ -13413,6 +13446,9 @@ func (o GetProfile200ResponseConfigurationSecurityTests) ToMap() (map[string]int
 	if !IsNil(o.Http2NotSupported) {
 		toSerialize["http2_not_supported"] = o.Http2NotSupported
 	}
+	if !IsNil(o.HttpMethodOverride) {
+		toSerialize["http_method_override"] = o.HttpMethodOverride
+	}
 	if !IsNil(o.HttpNoHttpsRedirect) {
 		toSerialize["http_no_https_redirect"] = o.HttpNoHttpsRedirect
 	}
@@ -14327,6 +14363,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) UnmarshalJSON(data []b
 		delete(additionalProperties, "host_header_injection_reflected")
 		delete(additionalProperties, "html_injection")
 		delete(additionalProperties, "http2_not_supported")
+		delete(additionalProperties, "http_method_override")
 		delete(additionalProperties, "http_no_https_redirect")
 		delete(additionalProperties, "http_param_pollution")
 		delete(additionalProperties, "ide_enabled")
