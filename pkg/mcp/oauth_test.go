@@ -422,9 +422,12 @@ func TestAllowRedirect(t *testing.T) {
 		{"https://claude.ai@evil.example/cb", false},
 		{"https://claude.ai/cb#fragment", false},
 
-		// Rejected — no destination to redirect to.
+		// Rejected — no destination to redirect to. net/url parses "not a url"
+		// as a relative path, so it falls through to the private-use branch and
+		// is rejected there for having neither a host nor an absolute path.
 		{"https://", false},
 		{"weird:opaque-payload", false},
+		{"not a url", false},
 		{"", false},
 	}
 
