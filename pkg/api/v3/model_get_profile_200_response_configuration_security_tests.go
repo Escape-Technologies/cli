@@ -201,6 +201,7 @@ type GetProfile200ResponseConfigurationSecurityTests struct {
 	ResponseSize                              *GetProfile200ResponseConfigurationSecurityTestsResponseSize              `json:"response_size,omitempty"`
 	SensitiveComments                         *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"sensitive_comments,omitempty"`
 	ServerError                               *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"server_error,omitempty"`
+	SessionFixation                           *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"session_fixation,omitempty"`
 	SoftwareComponentLeak                     *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"software_component_leak,omitempty"`
 	SpringbootActuatorDump                    *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"springboot_actuator_dump,omitempty"`
 	SpringbootActuatorEnv                     *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"springboot_actuator_env,omitempty"`
@@ -6252,6 +6253,38 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) HasServerError() bool 
 // SetServerError gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the ServerError field.
 func (o *GetProfile200ResponseConfigurationSecurityTests) SetServerError(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
 	o.ServerError = &v
+}
+
+// GetSessionFixation returns the SessionFixation field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetSessionFixation() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.SessionFixation) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.SessionFixation
+}
+
+// GetSessionFixationOk returns a tuple with the SessionFixation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetSessionFixationOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.SessionFixation) {
+		return nil, false
+	}
+	return o.SessionFixation, true
+}
+
+// HasSessionFixation returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasSessionFixation() bool {
+	if o != nil && !IsNil(o.SessionFixation) {
+		return true
+	}
+
+	return false
+}
+
+// SetSessionFixation gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the SessionFixation field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetSessionFixation(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.SessionFixation = &v
 }
 
 // GetSoftwareComponentLeak returns the SoftwareComponentLeak field value if set, zero value otherwise.
@@ -13434,6 +13467,9 @@ func (o GetProfile200ResponseConfigurationSecurityTests) ToMap() (map[string]int
 	if !IsNil(o.ServerError) {
 		toSerialize["server_error"] = o.ServerError
 	}
+	if !IsNil(o.SessionFixation) {
+		toSerialize["session_fixation"] = o.SessionFixation
+	}
 	if !IsNil(o.SoftwareComponentLeak) {
 		toSerialize["software_component_leak"] = o.SoftwareComponentLeak
 	}
@@ -14259,6 +14295,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) UnmarshalJSON(data []b
 		delete(additionalProperties, "response_size")
 		delete(additionalProperties, "sensitive_comments")
 		delete(additionalProperties, "server_error")
+		delete(additionalProperties, "session_fixation")
 		delete(additionalProperties, "software_component_leak")
 		delete(additionalProperties, "springboot_actuator_dump")
 		delete(additionalProperties, "springboot_actuator_env")
