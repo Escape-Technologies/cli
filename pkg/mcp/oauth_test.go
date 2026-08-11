@@ -397,6 +397,8 @@ func TestAllowRedirect(t *testing.T) {
 		// Hostname(); both forms must match so MCP clients binding to
 		// [::1] don't get rejected at the loopback gate.
 		{"http://[::1]:8080/cb", true},
+		// Loopback only exempts cleartext, it does not forbid HTTPS.
+		{"https://localhost:12345/cb", true},
 		// Private-use URI schemes for native clients, RFC 8252 §7.1.
 		{"cursor://anysphere.cursor-mcp/oauth/callback", true},
 		{"com.example.app:/oauth2redirect", true},
