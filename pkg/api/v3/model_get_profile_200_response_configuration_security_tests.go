@@ -193,6 +193,7 @@ type GetProfile200ResponseConfigurationSecurityTests struct {
 	NegativeValue                             *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"negative_value,omitempty"`
 	Nosql                                     *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"nosql,omitempty"`
 	FrontendNosqlInjection                    *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"frontend_nosql_injection,omitempty"`
+	OauthMissingStateValidation               *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"oauth_missing_state_validation,omitempty"`
 	PaginationMissing                         *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"pagination_missing,omitempty"`
 	FrontendOpenRedirect                      *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"frontend_open_redirect,omitempty"`
 	FrontendPageFingerprintInternal           *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"frontend_page_fingerprint_internal,omitempty"`
@@ -6003,6 +6004,38 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) HasFrontendNosqlInject
 // SetFrontendNosqlInjection gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the FrontendNosqlInjection field.
 func (o *GetProfile200ResponseConfigurationSecurityTests) SetFrontendNosqlInjection(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
 	o.FrontendNosqlInjection = &v
+}
+
+// GetOauthMissingStateValidation returns the OauthMissingStateValidation field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetOauthMissingStateValidation() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.OauthMissingStateValidation) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.OauthMissingStateValidation
+}
+
+// GetOauthMissingStateValidationOk returns a tuple with the OauthMissingStateValidation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetOauthMissingStateValidationOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.OauthMissingStateValidation) {
+		return nil, false
+	}
+	return o.OauthMissingStateValidation, true
+}
+
+// HasOauthMissingStateValidation returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasOauthMissingStateValidation() bool {
+	if o != nil && !IsNil(o.OauthMissingStateValidation) {
+		return true
+	}
+
+	return false
+}
+
+// SetOauthMissingStateValidation gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the OauthMissingStateValidation field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetOauthMissingStateValidation(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.OauthMissingStateValidation = &v
 }
 
 // GetPaginationMissing returns the PaginationMissing field value if set, zero value otherwise.
@@ -13641,6 +13674,9 @@ func (o GetProfile200ResponseConfigurationSecurityTests) ToMap() (map[string]int
 	if !IsNil(o.FrontendNosqlInjection) {
 		toSerialize["frontend_nosql_injection"] = o.FrontendNosqlInjection
 	}
+	if !IsNil(o.OauthMissingStateValidation) {
+		toSerialize["oauth_missing_state_validation"] = o.OauthMissingStateValidation
+	}
 	if !IsNil(o.PaginationMissing) {
 		toSerialize["pagination_missing"] = o.PaginationMissing
 	}
@@ -14503,6 +14539,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) UnmarshalJSON(data []b
 		delete(additionalProperties, "negative_value")
 		delete(additionalProperties, "nosql")
 		delete(additionalProperties, "frontend_nosql_injection")
+		delete(additionalProperties, "oauth_missing_state_validation")
 		delete(additionalProperties, "pagination_missing")
 		delete(additionalProperties, "frontend_open_redirect")
 		delete(additionalProperties, "frontend_page_fingerprint_internal")
