@@ -23,14 +23,16 @@ type CreateAssetIPV4RANGERequest struct {
 	// The list of project IDs bind the asset on.
 	ProjectIds []string `json:"projectIds,omitempty"`
 	// The custom name of the asset. If not provided, the default name will be used.
-	Name                 *string                `json:"name,omitempty"`
-	AssetClass           ENUMNETWORK            `json:"asset_class"`
-	ExtraMetadata        map[string]interface{} `json:"extra_metadata,omitempty"`
-	ScreenshotS3Key      *string                `json:"screenshot_s3_key,omitempty"`
-	AssetType            ENUMIPV4RANGE          `json:"asset_type"`
-	Cidr                 string                 `json:"cidr"`
-	Private              *bool                  `json:"private,omitempty"`
-	PrivateLocationId    *string                `json:"private_location_id,omitempty"`
+	Name                 *string                             `json:"name,omitempty"`
+	AssetClass           ENUMNETWORK                         `json:"asset_class"`
+	ExtraMetadata        map[string]interface{}              `json:"extra_metadata,omitempty"`
+	ScreenshotS3Key      *string                             `json:"screenshot_s3_key,omitempty"`
+	Parents              []CreateAssetDNSRequestParentsInner `json:"parents,omitempty"`
+	Childrens            []CreateAssetDNSRequestParentsInner `json:"childrens,omitempty"`
+	AssetType            ENUMIPV4RANGE                       `json:"asset_type"`
+	Cidr                 string                              `json:"cidr"`
+	Private              *bool                               `json:"private,omitempty"`
+	PrivateLocationId    *string                             `json:"private_location_id,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -208,6 +210,70 @@ func (o *CreateAssetIPV4RANGERequest) SetScreenshotS3Key(v string) {
 	o.ScreenshotS3Key = &v
 }
 
+// GetParents returns the Parents field value if set, zero value otherwise.
+func (o *CreateAssetIPV4RANGERequest) GetParents() []CreateAssetDNSRequestParentsInner {
+	if o == nil || IsNil(o.Parents) {
+		var ret []CreateAssetDNSRequestParentsInner
+		return ret
+	}
+	return o.Parents
+}
+
+// GetParentsOk returns a tuple with the Parents field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetIPV4RANGERequest) GetParentsOk() ([]CreateAssetDNSRequestParentsInner, bool) {
+	if o == nil || IsNil(o.Parents) {
+		return nil, false
+	}
+	return o.Parents, true
+}
+
+// HasParents returns a boolean if a field has been set.
+func (o *CreateAssetIPV4RANGERequest) HasParents() bool {
+	if o != nil && !IsNil(o.Parents) {
+		return true
+	}
+
+	return false
+}
+
+// SetParents gets a reference to the given []CreateAssetDNSRequestParentsInner and assigns it to the Parents field.
+func (o *CreateAssetIPV4RANGERequest) SetParents(v []CreateAssetDNSRequestParentsInner) {
+	o.Parents = v
+}
+
+// GetChildrens returns the Childrens field value if set, zero value otherwise.
+func (o *CreateAssetIPV4RANGERequest) GetChildrens() []CreateAssetDNSRequestParentsInner {
+	if o == nil || IsNil(o.Childrens) {
+		var ret []CreateAssetDNSRequestParentsInner
+		return ret
+	}
+	return o.Childrens
+}
+
+// GetChildrensOk returns a tuple with the Childrens field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetIPV4RANGERequest) GetChildrensOk() ([]CreateAssetDNSRequestParentsInner, bool) {
+	if o == nil || IsNil(o.Childrens) {
+		return nil, false
+	}
+	return o.Childrens, true
+}
+
+// HasChildrens returns a boolean if a field has been set.
+func (o *CreateAssetIPV4RANGERequest) HasChildrens() bool {
+	if o != nil && !IsNil(o.Childrens) {
+		return true
+	}
+
+	return false
+}
+
+// SetChildrens gets a reference to the given []CreateAssetDNSRequestParentsInner and assigns it to the Childrens field.
+func (o *CreateAssetIPV4RANGERequest) SetChildrens(v []CreateAssetDNSRequestParentsInner) {
+	o.Childrens = v
+}
+
 // GetAssetType returns the AssetType field value
 func (o *CreateAssetIPV4RANGERequest) GetAssetType() ENUMIPV4RANGE {
 	if o == nil {
@@ -343,6 +409,12 @@ func (o CreateAssetIPV4RANGERequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ScreenshotS3Key) {
 		toSerialize["screenshot_s3_key"] = o.ScreenshotS3Key
 	}
+	if !IsNil(o.Parents) {
+		toSerialize["parents"] = o.Parents
+	}
+	if !IsNil(o.Childrens) {
+		toSerialize["childrens"] = o.Childrens
+	}
 	toSerialize["asset_type"] = o.AssetType
 	toSerialize["cidr"] = o.Cidr
 	if !IsNil(o.Private) {
@@ -401,6 +473,8 @@ func (o *CreateAssetIPV4RANGERequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "asset_class")
 		delete(additionalProperties, "extra_metadata")
 		delete(additionalProperties, "screenshot_s3_key")
+		delete(additionalProperties, "parents")
+		delete(additionalProperties, "childrens")
 		delete(additionalProperties, "asset_type")
 		delete(additionalProperties, "cidr")
 		delete(additionalProperties, "private")
