@@ -48,6 +48,7 @@ type GetProfile200ResponseConfigurationSecurityTests struct {
 	ApacheSolrLog4jRce                        *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"apache_solr_log4j_rce,omitempty"`
 	ApacheSolrRce                             *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"apache_solr_rce,omitempty"`
 	ApisixDefaultLogin                        *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"apisix_default_login,omitempty"`
+	ApplicationEnumeration                    *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"application_enumeration,omitempty"`
 	AppspecExposure                           *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"appspec_exposure,omitempty"`
 	AppveyorConfigExposure                    *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"appveyor_config_exposure,omitempty"`
 	AspNetViewStateEncryption                 *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"asp_net_view_state_encryption,omitempty"`
@@ -63,6 +64,7 @@ type GetProfile200ResponseConfigurationSecurityTests struct {
 	Bola                                      *GetProfile200ResponseConfigurationSecurityTestsBola                      `json:"bola,omitempty"`
 	BolaEnum                                  *GetProfile200ResponseConfigurationSecurityTestsBola                      `json:"bola_enum,omitempty"`
 	BolaIdor                                  *GetProfile200ResponseConfigurationSecurityTestsBola                      `json:"bola_idor,omitempty"`
+	BrokenFunctionLevelAuthorization          *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"broken_function_level_authorization,omitempty"`
 	CharacterLimit                            *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"character_limit,omitempty"`
 	CgiBinRce                                 *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"cgi_bin_rce,omitempty"`
 	FrontendBola                              *GetProfile200ResponseConfigurationSecurityTestsBola                      `json:"frontend_bola,omitempty"`
@@ -287,6 +289,7 @@ type GetProfile200ResponseConfigurationSecurityTests struct {
 	SubresourceIntegrityMissing               *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"subresource_integrity_missing,omitempty"`
 	MultiUserAccessControl                    *GetProfile200ResponseConfigurationSecurityTestsMultiUserAccessControl    `json:"multi_user_access_control,omitempty"`
 	Timeout                                   *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"timeout,omitempty"`
+	UnboundSessionToken                       *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"unbound_session_token,omitempty"`
 	UnreachableServer                         *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"unreachable_server,omitempty"`
 	UnsafeFunctionUse                         *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"unsafe_function_use,omitempty"`
 	UnusuallyHighOpenPorts                    *GetProfile200ResponseConfigurationSecurityTestsHighNumberOfCustomScalars `json:"unusually_high_open_ports,omitempty"`
@@ -1362,6 +1365,38 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) SetApisixDefaultLogin(
 	o.ApisixDefaultLogin = &v
 }
 
+// GetApplicationEnumeration returns the ApplicationEnumeration field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetApplicationEnumeration() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.ApplicationEnumeration) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.ApplicationEnumeration
+}
+
+// GetApplicationEnumerationOk returns a tuple with the ApplicationEnumeration field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetApplicationEnumerationOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.ApplicationEnumeration) {
+		return nil, false
+	}
+	return o.ApplicationEnumeration, true
+}
+
+// HasApplicationEnumeration returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasApplicationEnumeration() bool {
+	if o != nil && !IsNil(o.ApplicationEnumeration) {
+		return true
+	}
+
+	return false
+}
+
+// SetApplicationEnumeration gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the ApplicationEnumeration field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetApplicationEnumeration(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.ApplicationEnumeration = &v
+}
+
 // GetAppspecExposure returns the AppspecExposure field value if set, zero value otherwise.
 func (o *GetProfile200ResponseConfigurationSecurityTests) GetAppspecExposure() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
 	if o == nil || IsNil(o.AppspecExposure) {
@@ -1840,6 +1875,38 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) HasBolaIdor() bool {
 // SetBolaIdor gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsBola and assigns it to the BolaIdor field.
 func (o *GetProfile200ResponseConfigurationSecurityTests) SetBolaIdor(v GetProfile200ResponseConfigurationSecurityTestsBola) {
 	o.BolaIdor = &v
+}
+
+// GetBrokenFunctionLevelAuthorization returns the BrokenFunctionLevelAuthorization field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetBrokenFunctionLevelAuthorization() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.BrokenFunctionLevelAuthorization) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.BrokenFunctionLevelAuthorization
+}
+
+// GetBrokenFunctionLevelAuthorizationOk returns a tuple with the BrokenFunctionLevelAuthorization field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetBrokenFunctionLevelAuthorizationOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.BrokenFunctionLevelAuthorization) {
+		return nil, false
+	}
+	return o.BrokenFunctionLevelAuthorization, true
+}
+
+// HasBrokenFunctionLevelAuthorization returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasBrokenFunctionLevelAuthorization() bool {
+	if o != nil && !IsNil(o.BrokenFunctionLevelAuthorization) {
+		return true
+	}
+
+	return false
+}
+
+// SetBrokenFunctionLevelAuthorization gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the BrokenFunctionLevelAuthorization field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetBrokenFunctionLevelAuthorization(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.BrokenFunctionLevelAuthorization = &v
 }
 
 // GetCharacterLimit returns the CharacterLimit field value if set, zero value otherwise.
@@ -9010,6 +9077,38 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) SetTimeout(v GetProfil
 	o.Timeout = &v
 }
 
+// GetUnboundSessionToken returns the UnboundSessionToken field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetUnboundSessionToken() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.UnboundSessionToken) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.UnboundSessionToken
+}
+
+// GetUnboundSessionTokenOk returns a tuple with the UnboundSessionToken field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetUnboundSessionTokenOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.UnboundSessionToken) {
+		return nil, false
+	}
+	return o.UnboundSessionToken, true
+}
+
+// HasUnboundSessionToken returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasUnboundSessionToken() bool {
+	if o != nil && !IsNil(o.UnboundSessionToken) {
+		return true
+	}
+
+	return false
+}
+
+// SetUnboundSessionToken gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the UnboundSessionToken field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetUnboundSessionToken(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.UnboundSessionToken = &v
+}
+
 // GetUnreachableServer returns the UnreachableServer field value if set, zero value otherwise.
 func (o *GetProfile200ResponseConfigurationSecurityTests) GetUnreachableServer() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
 	if o == nil || IsNil(o.UnreachableServer) {
@@ -13107,6 +13206,9 @@ func (o GetProfile200ResponseConfigurationSecurityTests) ToMap() (map[string]int
 	if !IsNil(o.ApisixDefaultLogin) {
 		toSerialize["apisix_default_login"] = o.ApisixDefaultLogin
 	}
+	if !IsNil(o.ApplicationEnumeration) {
+		toSerialize["application_enumeration"] = o.ApplicationEnumeration
+	}
 	if !IsNil(o.AppspecExposure) {
 		toSerialize["appspec_exposure"] = o.AppspecExposure
 	}
@@ -13151,6 +13253,9 @@ func (o GetProfile200ResponseConfigurationSecurityTests) ToMap() (map[string]int
 	}
 	if !IsNil(o.BolaIdor) {
 		toSerialize["bola_idor"] = o.BolaIdor
+	}
+	if !IsNil(o.BrokenFunctionLevelAuthorization) {
+		toSerialize["broken_function_level_authorization"] = o.BrokenFunctionLevelAuthorization
 	}
 	if !IsNil(o.CharacterLimit) {
 		toSerialize["character_limit"] = o.CharacterLimit
@@ -13824,6 +13929,9 @@ func (o GetProfile200ResponseConfigurationSecurityTests) ToMap() (map[string]int
 	if !IsNil(o.Timeout) {
 		toSerialize["timeout"] = o.Timeout
 	}
+	if !IsNil(o.UnboundSessionToken) {
+		toSerialize["unbound_session_token"] = o.UnboundSessionToken
+	}
 	if !IsNil(o.UnreachableServer) {
 		toSerialize["unreachable_server"] = o.UnreachableServer
 	}
@@ -14250,6 +14358,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) UnmarshalJSON(data []b
 		delete(additionalProperties, "apache_solr_log4j_rce")
 		delete(additionalProperties, "apache_solr_rce")
 		delete(additionalProperties, "apisix_default_login")
+		delete(additionalProperties, "application_enumeration")
 		delete(additionalProperties, "appspec_exposure")
 		delete(additionalProperties, "appveyor_config_exposure")
 		delete(additionalProperties, "asp_net_view_state_encryption")
@@ -14265,6 +14374,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) UnmarshalJSON(data []b
 		delete(additionalProperties, "bola")
 		delete(additionalProperties, "bola_enum")
 		delete(additionalProperties, "bola_idor")
+		delete(additionalProperties, "broken_function_level_authorization")
 		delete(additionalProperties, "character_limit")
 		delete(additionalProperties, "cgi_bin_rce")
 		delete(additionalProperties, "frontend_bola")
@@ -14489,6 +14599,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) UnmarshalJSON(data []b
 		delete(additionalProperties, "subresource_integrity_missing")
 		delete(additionalProperties, "multi_user_access_control")
 		delete(additionalProperties, "timeout")
+		delete(additionalProperties, "unbound_session_token")
 		delete(additionalProperties, "unreachable_server")
 		delete(additionalProperties, "unsafe_function_use")
 		delete(additionalProperties, "unusually_high_open_ports")
