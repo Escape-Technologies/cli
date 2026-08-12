@@ -27,6 +27,8 @@ type CreateAssetIPV6Request struct {
 	AssetClass           ENUMHOST                                  `json:"asset_class"`
 	ExtraMetadata        map[string]interface{}                    `json:"extra_metadata,omitempty"`
 	ScreenshotS3Key      *string                                   `json:"screenshot_s3_key,omitempty"`
+	Parents              []CreateAssetDNSRequestParentsInner       `json:"parents,omitempty"`
+	Childrens            []CreateAssetDNSRequestParentsInner       `json:"childrens,omitempty"`
 	AssetType            ENUMIPV6                                  `json:"asset_type"`
 	Address              string                                    `json:"address"`
 	Favicon              *string                                   `json:"favicon,omitempty"`
@@ -212,6 +214,70 @@ func (o *CreateAssetIPV6Request) HasScreenshotS3Key() bool {
 // SetScreenshotS3Key gets a reference to the given string and assigns it to the ScreenshotS3Key field.
 func (o *CreateAssetIPV6Request) SetScreenshotS3Key(v string) {
 	o.ScreenshotS3Key = &v
+}
+
+// GetParents returns the Parents field value if set, zero value otherwise.
+func (o *CreateAssetIPV6Request) GetParents() []CreateAssetDNSRequestParentsInner {
+	if o == nil || IsNil(o.Parents) {
+		var ret []CreateAssetDNSRequestParentsInner
+		return ret
+	}
+	return o.Parents
+}
+
+// GetParentsOk returns a tuple with the Parents field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetIPV6Request) GetParentsOk() ([]CreateAssetDNSRequestParentsInner, bool) {
+	if o == nil || IsNil(o.Parents) {
+		return nil, false
+	}
+	return o.Parents, true
+}
+
+// HasParents returns a boolean if a field has been set.
+func (o *CreateAssetIPV6Request) HasParents() bool {
+	if o != nil && !IsNil(o.Parents) {
+		return true
+	}
+
+	return false
+}
+
+// SetParents gets a reference to the given []CreateAssetDNSRequestParentsInner and assigns it to the Parents field.
+func (o *CreateAssetIPV6Request) SetParents(v []CreateAssetDNSRequestParentsInner) {
+	o.Parents = v
+}
+
+// GetChildrens returns the Childrens field value if set, zero value otherwise.
+func (o *CreateAssetIPV6Request) GetChildrens() []CreateAssetDNSRequestParentsInner {
+	if o == nil || IsNil(o.Childrens) {
+		var ret []CreateAssetDNSRequestParentsInner
+		return ret
+	}
+	return o.Childrens
+}
+
+// GetChildrensOk returns a tuple with the Childrens field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetIPV6Request) GetChildrensOk() ([]CreateAssetDNSRequestParentsInner, bool) {
+	if o == nil || IsNil(o.Childrens) {
+		return nil, false
+	}
+	return o.Childrens, true
+}
+
+// HasChildrens returns a boolean if a field has been set.
+func (o *CreateAssetIPV6Request) HasChildrens() bool {
+	if o != nil && !IsNil(o.Childrens) {
+		return true
+	}
+
+	return false
+}
+
+// SetChildrens gets a reference to the given []CreateAssetDNSRequestParentsInner and assigns it to the Childrens field.
+func (o *CreateAssetIPV6Request) SetChildrens(v []CreateAssetDNSRequestParentsInner) {
+	o.Childrens = v
 }
 
 // GetAssetType returns the AssetType field value
@@ -541,6 +607,12 @@ func (o CreateAssetIPV6Request) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ScreenshotS3Key) {
 		toSerialize["screenshot_s3_key"] = o.ScreenshotS3Key
 	}
+	if !IsNil(o.Parents) {
+		toSerialize["parents"] = o.Parents
+	}
+	if !IsNil(o.Childrens) {
+		toSerialize["childrens"] = o.Childrens
+	}
 	toSerialize["asset_type"] = o.AssetType
 	toSerialize["address"] = o.Address
 	if !IsNil(o.Favicon) {
@@ -617,6 +689,8 @@ func (o *CreateAssetIPV6Request) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "asset_class")
 		delete(additionalProperties, "extra_metadata")
 		delete(additionalProperties, "screenshot_s3_key")
+		delete(additionalProperties, "parents")
+		delete(additionalProperties, "childrens")
 		delete(additionalProperties, "asset_type")
 		delete(additionalProperties, "address")
 		delete(additionalProperties, "favicon")
