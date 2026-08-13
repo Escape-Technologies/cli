@@ -193,6 +193,7 @@ type GetProfile200ResponseConfigurationSecurityTests struct {
 	McpUnauth                                 *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"mcp_unauth,omitempty"`
 	MfaBypass                                 *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"mfa_bypass,omitempty"`
 	MissingAuthentication                     *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"missing_authentication,omitempty"`
+	MissingPkce                               *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"missing_pkce,omitempty"`
 	MissingRateLimiting                       *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"missing_rate_limiting,omitempty"`
 	NegativeValue                             *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"negative_value,omitempty"`
 	Nosql                                     *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"nosql,omitempty"`
@@ -6010,6 +6011,38 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) HasMissingAuthenticati
 // SetMissingAuthentication gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the MissingAuthentication field.
 func (o *GetProfile200ResponseConfigurationSecurityTests) SetMissingAuthentication(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
 	o.MissingAuthentication = &v
+}
+
+// GetMissingPkce returns the MissingPkce field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetMissingPkce() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.MissingPkce) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.MissingPkce
+}
+
+// GetMissingPkceOk returns a tuple with the MissingPkce field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetMissingPkceOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.MissingPkce) {
+		return nil, false
+	}
+	return o.MissingPkce, true
+}
+
+// HasMissingPkce returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasMissingPkce() bool {
+	if o != nil && !IsNil(o.MissingPkce) {
+		return true
+	}
+
+	return false
+}
+
+// SetMissingPkce gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the MissingPkce field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetMissingPkce(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.MissingPkce = &v
 }
 
 // GetMissingRateLimiting returns the MissingRateLimiting field value if set, zero value otherwise.
@@ -13872,6 +13905,9 @@ func (o GetProfile200ResponseConfigurationSecurityTests) ToMap() (map[string]int
 	if !IsNil(o.MissingAuthentication) {
 		toSerialize["missing_authentication"] = o.MissingAuthentication
 	}
+	if !IsNil(o.MissingPkce) {
+		toSerialize["missing_pkce"] = o.MissingPkce
+	}
 	if !IsNil(o.MissingRateLimiting) {
 		toSerialize["missing_rate_limiting"] = o.MissingRateLimiting
 	}
@@ -14755,6 +14791,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) UnmarshalJSON(data []b
 		delete(additionalProperties, "mcp_unauth")
 		delete(additionalProperties, "mfa_bypass")
 		delete(additionalProperties, "missing_authentication")
+		delete(additionalProperties, "missing_pkce")
 		delete(additionalProperties, "missing_rate_limiting")
 		delete(additionalProperties, "negative_value")
 		delete(additionalProperties, "nosql")
