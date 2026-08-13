@@ -174,6 +174,7 @@ type GetProfile200ResponseConfigurationSecurityTests struct {
 	ImproperInputXss                          *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"improper_input_xss,omitempty"`
 	ImproperInputXssQueryParams               *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"improper_input_xss_query_params,omitempty"`
 	ImproperInputXssReflection                *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"improper_input_xss_reflection,omitempty"`
+	ImproperSessionInvalidation               *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"improper_session_invalidation,omitempty"`
 	IntrospectionEnabled                      *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"introspection_enabled,omitempty"`
 	JwtAlgConfusionRsToHs                     *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"jwt_alg_confusion_rs_to_hs,omitempty"`
 	JwtAlgNone                                *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"jwt_alg_none,omitempty"`
@@ -5399,6 +5400,38 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) HasImproperInputXssRef
 // SetImproperInputXssReflection gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the ImproperInputXssReflection field.
 func (o *GetProfile200ResponseConfigurationSecurityTests) SetImproperInputXssReflection(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
 	o.ImproperInputXssReflection = &v
+}
+
+// GetImproperSessionInvalidation returns the ImproperSessionInvalidation field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetImproperSessionInvalidation() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.ImproperSessionInvalidation) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.ImproperSessionInvalidation
+}
+
+// GetImproperSessionInvalidationOk returns a tuple with the ImproperSessionInvalidation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetImproperSessionInvalidationOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.ImproperSessionInvalidation) {
+		return nil, false
+	}
+	return o.ImproperSessionInvalidation, true
+}
+
+// HasImproperSessionInvalidation returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasImproperSessionInvalidation() bool {
+	if o != nil && !IsNil(o.ImproperSessionInvalidation) {
+		return true
+	}
+
+	return false
+}
+
+// SetImproperSessionInvalidation gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the ImproperSessionInvalidation field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetImproperSessionInvalidation(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.ImproperSessionInvalidation = &v
 }
 
 // GetIntrospectionEnabled returns the IntrospectionEnabled field value if set, zero value otherwise.
@@ -13716,6 +13749,9 @@ func (o GetProfile200ResponseConfigurationSecurityTests) ToMap() (map[string]int
 	if !IsNil(o.ImproperInputXssReflection) {
 		toSerialize["improper_input_xss_reflection"] = o.ImproperInputXssReflection
 	}
+	if !IsNil(o.ImproperSessionInvalidation) {
+		toSerialize["improper_session_invalidation"] = o.ImproperSessionInvalidation
+	}
 	if !IsNil(o.IntrospectionEnabled) {
 		toSerialize["introspection_enabled"] = o.IntrospectionEnabled
 	}
@@ -14628,6 +14664,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) UnmarshalJSON(data []b
 		delete(additionalProperties, "improper_input_xss")
 		delete(additionalProperties, "improper_input_xss_query_params")
 		delete(additionalProperties, "improper_input_xss_reflection")
+		delete(additionalProperties, "improper_session_invalidation")
 		delete(additionalProperties, "introspection_enabled")
 		delete(additionalProperties, "jwt_alg_confusion_rs_to_hs")
 		delete(additionalProperties, "jwt_alg_none")
