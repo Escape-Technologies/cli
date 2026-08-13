@@ -16,6 +16,7 @@ type ListAuditLogsFilters struct {
 	Search        string
 	SortType      string
 	SortDirection string
+	Size          int
 }
 
 // ListAuditLogs lists audit logs
@@ -51,6 +52,9 @@ func ListAuditLogs(ctx context.Context, next string, filters *ListAuditLogsFilte
 		}
 		if filters.Search != "" {
 			req = req.Search(filters.Search)
+		}
+		if filters.Size > 0 {
+			req = req.Size(filters.Size)
 		}
 	}
 	data, _, err := req.Execute()
