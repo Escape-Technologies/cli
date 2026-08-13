@@ -657,7 +657,7 @@ func (r ApiUpdateLocationRequest) Execute() (*CreateLocation200Response, *http.R
 /*
 UpdateLocation Update a location
 
-Update a Private Location details.
+Update a Private Location details. Location names are immutable and cannot be changed.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param locationId The ID of the location to update

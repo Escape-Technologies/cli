@@ -19,7 +19,8 @@ var _ MappedNullable = &UpdateLocationRequest{}
 
 // UpdateLocationRequest struct for UpdateLocationRequest
 type UpdateLocationRequest struct {
-	// The name of the location.
+	// Deprecated. Location names are immutable and this field is ignored if provided.
+	// Deprecated
 	Name *string `json:"name,omitempty"`
 	// Whether the location is enabled.
 	Enabled *bool `json:"enabled,omitempty"`
@@ -48,6 +49,7 @@ func NewUpdateLocationRequestWithDefaults() *UpdateLocationRequest {
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
+// Deprecated
 func (o *UpdateLocationRequest) GetName() string {
 	if o == nil || IsNil(o.Name) {
 		var ret string
@@ -58,6 +60,7 @@ func (o *UpdateLocationRequest) GetName() string {
 
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *UpdateLocationRequest) GetNameOk() (*string, bool) {
 	if o == nil || IsNil(o.Name) {
 		return nil, false
@@ -75,6 +78,7 @@ func (o *UpdateLocationRequest) HasName() bool {
 }
 
 // SetName gets a reference to the given string and assigns it to the Name field.
+// Deprecated
 func (o *UpdateLocationRequest) SetName(v string) {
 	o.Name = &v
 }
