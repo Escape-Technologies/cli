@@ -16,6 +16,7 @@ var (
 	auditCmdEventType  = ""
 	auditCmdActor      = ""
 	auditCmdSearch     = ""
+	auditCmdLimit      int
 	auditSortType      string
 	auditSortDirection string
 )
@@ -55,7 +56,8 @@ FILTER OPTIONS:
   -t, --date-to      End date (RFC3339 format)
   -e, --event-type   Event type (scan.started, scan.finished, user.authenticated, etc.)
   -a, --actor        Filter by actor (user ID or email)
-  -s, --search       Free-text search`,
+  -s, --search       Free-text search
+      --limit        Maximum number of audit logs to return (0 = no limit)`,
 	Example: `  # List recent audit logs
   escape-cli audit list
 
@@ -69,8 +71,14 @@ FILTER OPTIONS:
   escape-cli audit list --actor user@example.com
 
   # Export for compliance reporting
-  escape-cli audit list --date-from 2025-01-01T00:00:00Z -o json > audit-report-jan2025.json`,
+  escape-cli audit list --date-from 2025-01-01T00:00:00Z -o json > audit-report-jan2025.json
+
+  # Fetch only the first 5 audit logs
+  escape-cli audit list --limit 5 -o json`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
+		if auditCmdLimit < 0 {
+			return fmt.Errorf("--limit must be greater than or equal to 0")
+		}
 		// Output JSON Schema if requested
 		if out.Schema([]v3.AuditLogSummarized{}) {
 			return nil
@@ -91,11 +99,17 @@ FILTER OPTIONS:
 		}
 		allLogs := logs
 		for next != nil && *next != "" {
+			if auditCmdLimit > 0 && len(allLogs) >= auditCmdLimit {
+				break
+			}
 			logs, next, err = escape.ListAuditLogs(cmd.Context(), *next, filters)
 			if err != nil {
 				return fmt.Errorf("unable to list audits: %w", err)
 			}
 			allLogs = append(allLogs, logs...)
+		}
+		if auditCmdLimit > 0 && len(allLogs) > auditCmdLimit {
+			allLogs = allLogs[:auditCmdLimit]
 		}
 		out.Table(allLogs, func() []string {
 			fields := []string{"DATE\tACTION\tACTOR\tACTOR EMAIL\tTITLE"}
@@ -127,4 +141,5 @@ func init() {
 	auditListCmd.Flags().StringVarP(&auditCmdSearch, "search", "s", "", "Search term to filter audit logs by")
 	auditListCmd.Flags().StringVar(&auditSortType, "sort-by", "", "sort field")
 	auditListCmd.Flags().StringVar(&auditSortDirection, "sort-direction", "", "sort direction: asc, desc")
+	auditListCmd.Flags().IntVar(&auditCmdLimit, "limit", 0, "maximum number of audit logs to return (0 = no limit)")
 }
