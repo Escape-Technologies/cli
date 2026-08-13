@@ -42,7 +42,6 @@ type CreateAssetGITLABREPOSITORYRequest struct {
 	ProjectId            *float32                                        `json:"project_id,omitempty"`
 	Archived             *bool                                           `json:"archived,omitempty"`
 	Visibility           *ENUMPROPERTIESVISIBILITY                       `json:"visibility,omitempty"`
-	Group                *CreateAssetGITLABREPOSITORYRequestGroup        `json:"group,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -716,38 +715,6 @@ func (o *CreateAssetGITLABREPOSITORYRequest) SetVisibility(v ENUMPROPERTIESVISIB
 	o.Visibility = &v
 }
 
-// GetGroup returns the Group field value if set, zero value otherwise.
-func (o *CreateAssetGITLABREPOSITORYRequest) GetGroup() CreateAssetGITLABREPOSITORYRequestGroup {
-	if o == nil || IsNil(o.Group) {
-		var ret CreateAssetGITLABREPOSITORYRequestGroup
-		return ret
-	}
-	return *o.Group
-}
-
-// GetGroupOk returns a tuple with the Group field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateAssetGITLABREPOSITORYRequest) GetGroupOk() (*CreateAssetGITLABREPOSITORYRequestGroup, bool) {
-	if o == nil || IsNil(o.Group) {
-		return nil, false
-	}
-	return o.Group, true
-}
-
-// HasGroup returns a boolean if a field has been set.
-func (o *CreateAssetGITLABREPOSITORYRequest) HasGroup() bool {
-	if o != nil && !IsNil(o.Group) {
-		return true
-	}
-
-	return false
-}
-
-// SetGroup gets a reference to the given CreateAssetGITLABREPOSITORYRequestGroup and assigns it to the Group field.
-func (o *CreateAssetGITLABREPOSITORYRequest) SetGroup(v CreateAssetGITLABREPOSITORYRequestGroup) {
-	o.Group = &v
-}
-
 func (o CreateAssetGITLABREPOSITORYRequest) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -815,9 +782,6 @@ func (o CreateAssetGITLABREPOSITORYRequest) ToMap() (map[string]interface{}, err
 	if !IsNil(o.Visibility) {
 		toSerialize["visibility"] = o.Visibility
 	}
-	if !IsNil(o.Group) {
-		toSerialize["group"] = o.Group
-	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -884,7 +848,6 @@ func (o *CreateAssetGITLABREPOSITORYRequest) UnmarshalJSON(data []byte) (err err
 		delete(additionalProperties, "project_id")
 		delete(additionalProperties, "archived")
 		delete(additionalProperties, "visibility")
-		delete(additionalProperties, "group")
 		o.AdditionalProperties = additionalProperties
 	}
 
