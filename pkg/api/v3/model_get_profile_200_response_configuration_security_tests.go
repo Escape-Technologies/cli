@@ -191,6 +191,7 @@ type GetProfile200ResponseConfigurationSecurityTests struct {
 	McpUnauth                                 *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"mcp_unauth,omitempty"`
 	MfaBypass                                 *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"mfa_bypass,omitempty"`
 	MissingAuthentication                     *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"missing_authentication,omitempty"`
+	MissingRateLimiting                       *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"missing_rate_limiting,omitempty"`
 	NegativeValue                             *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"negative_value,omitempty"`
 	Nosql                                     *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"nosql,omitempty"`
 	FrontendNosqlInjection                    *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"frontend_nosql_injection,omitempty"`
@@ -5942,6 +5943,38 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) HasMissingAuthenticati
 // SetMissingAuthentication gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the MissingAuthentication field.
 func (o *GetProfile200ResponseConfigurationSecurityTests) SetMissingAuthentication(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
 	o.MissingAuthentication = &v
+}
+
+// GetMissingRateLimiting returns the MissingRateLimiting field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetMissingRateLimiting() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.MissingRateLimiting) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.MissingRateLimiting
+}
+
+// GetMissingRateLimitingOk returns a tuple with the MissingRateLimiting field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetMissingRateLimitingOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.MissingRateLimiting) {
+		return nil, false
+	}
+	return o.MissingRateLimiting, true
+}
+
+// HasMissingRateLimiting returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasMissingRateLimiting() bool {
+	if o != nil && !IsNil(o.MissingRateLimiting) {
+		return true
+	}
+
+	return false
+}
+
+// SetMissingRateLimiting gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the MissingRateLimiting field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetMissingRateLimiting(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.MissingRateLimiting = &v
 }
 
 // GetNegativeValue returns the NegativeValue field value if set, zero value otherwise.
@@ -13734,6 +13767,9 @@ func (o GetProfile200ResponseConfigurationSecurityTests) ToMap() (map[string]int
 	if !IsNil(o.MissingAuthentication) {
 		toSerialize["missing_authentication"] = o.MissingAuthentication
 	}
+	if !IsNil(o.MissingRateLimiting) {
+		toSerialize["missing_rate_limiting"] = o.MissingRateLimiting
+	}
 	if !IsNil(o.NegativeValue) {
 		toSerialize["negative_value"] = o.NegativeValue
 	}
@@ -14609,6 +14645,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) UnmarshalJSON(data []b
 		delete(additionalProperties, "mcp_unauth")
 		delete(additionalProperties, "mfa_bypass")
 		delete(additionalProperties, "missing_authentication")
+		delete(additionalProperties, "missing_rate_limiting")
 		delete(additionalProperties, "negative_value")
 		delete(additionalProperties, "nosql")
 		delete(additionalProperties, "frontend_nosql_injection")
