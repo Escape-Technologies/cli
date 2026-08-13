@@ -44,7 +44,6 @@ type CreateAssetGITHUBREPOSITORYRequest struct {
 	Disabled             *bool                                           `json:"disabled,omitempty"`
 	Clonable             *bool                                           `json:"clonable,omitempty"`
 	Private              *bool                                           `json:"private,omitempty"`
-	Org                  *CreateAssetGITHUBREPOSITORYRequestOrg          `json:"org,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -782,38 +781,6 @@ func (o *CreateAssetGITHUBREPOSITORYRequest) SetPrivate(v bool) {
 	o.Private = &v
 }
 
-// GetOrg returns the Org field value if set, zero value otherwise.
-func (o *CreateAssetGITHUBREPOSITORYRequest) GetOrg() CreateAssetGITHUBREPOSITORYRequestOrg {
-	if o == nil || IsNil(o.Org) {
-		var ret CreateAssetGITHUBREPOSITORYRequestOrg
-		return ret
-	}
-	return *o.Org
-}
-
-// GetOrgOk returns a tuple with the Org field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateAssetGITHUBREPOSITORYRequest) GetOrgOk() (*CreateAssetGITHUBREPOSITORYRequestOrg, bool) {
-	if o == nil || IsNil(o.Org) {
-		return nil, false
-	}
-	return o.Org, true
-}
-
-// HasOrg returns a boolean if a field has been set.
-func (o *CreateAssetGITHUBREPOSITORYRequest) HasOrg() bool {
-	if o != nil && !IsNil(o.Org) {
-		return true
-	}
-
-	return false
-}
-
-// SetOrg gets a reference to the given CreateAssetGITHUBREPOSITORYRequestOrg and assigns it to the Org field.
-func (o *CreateAssetGITHUBREPOSITORYRequest) SetOrg(v CreateAssetGITHUBREPOSITORYRequestOrg) {
-	o.Org = &v
-}
-
 func (o CreateAssetGITHUBREPOSITORYRequest) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -887,9 +854,6 @@ func (o CreateAssetGITHUBREPOSITORYRequest) ToMap() (map[string]interface{}, err
 	if !IsNil(o.Private) {
 		toSerialize["private"] = o.Private
 	}
-	if !IsNil(o.Org) {
-		toSerialize["org"] = o.Org
-	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -958,7 +922,6 @@ func (o *CreateAssetGITHUBREPOSITORYRequest) UnmarshalJSON(data []byte) (err err
 		delete(additionalProperties, "disabled")
 		delete(additionalProperties, "clonable")
 		delete(additionalProperties, "private")
-		delete(additionalProperties, "org")
 		o.AdditionalProperties = additionalProperties
 	}
 
