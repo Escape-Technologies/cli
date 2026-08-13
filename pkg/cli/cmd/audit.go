@@ -77,7 +77,7 @@ FILTER OPTIONS:
   escape-cli audit list --limit 5 -o json`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
 		if auditCmdLimit < 0 {
-			return fmt.Errorf("--limit must be greater than or equal to 0")
+			return errors.New("--limit must be greater than or equal to 0")
 		}
 		// Output JSON Schema if requested
 		if out.Schema([]v3.AuditLogSummarized{}) {
