@@ -406,6 +406,7 @@ type GetProfile200ResponseConfigurationSecurityTests struct {
 	Thinkphp509InformationDisclosure          *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"thinkphp_509_information_disclosure,omitempty"`
 	TomcatDefaultLogin                        *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"tomcat_default_login,omitempty"`
 	TomcatExamplesLogin                       *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"tomcat_examples_login,omitempty"`
+	TotpSecretExposure                        *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"totp_secret_exposure,omitempty"`
 	TotolinkN150rtPasswordExposure            *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"totolink_n150rt_password_exposure,omitempty"`
 	TwigPhpSsti                               *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"twig_php_ssti,omitempty"`
 	TwonkyServerExposure                      *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"twonky_server_exposure,omitempty"`
@@ -12823,6 +12824,38 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) SetTomcatExamplesLogin
 	o.TomcatExamplesLogin = &v
 }
 
+// GetTotpSecretExposure returns the TotpSecretExposure field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetTotpSecretExposure() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.TotpSecretExposure) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.TotpSecretExposure
+}
+
+// GetTotpSecretExposureOk returns a tuple with the TotpSecretExposure field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetTotpSecretExposureOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.TotpSecretExposure) {
+		return nil, false
+	}
+	return o.TotpSecretExposure, true
+}
+
+// HasTotpSecretExposure returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasTotpSecretExposure() bool {
+	if o != nil && !IsNil(o.TotpSecretExposure) {
+		return true
+	}
+
+	return false
+}
+
+// SetTotpSecretExposure gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the TotpSecretExposure field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetTotpSecretExposure(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.TotpSecretExposure = &v
+}
+
 // GetTotolinkN150rtPasswordExposure returns the TotolinkN150rtPasswordExposure field value if set, zero value otherwise.
 func (o *GetProfile200ResponseConfigurationSecurityTests) GetTotolinkN150rtPasswordExposure() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
 	if o == nil || IsNil(o.TotolinkN150rtPasswordExposure) {
@@ -14346,6 +14379,9 @@ func (o GetProfile200ResponseConfigurationSecurityTests) ToMap() (map[string]int
 	if !IsNil(o.TomcatExamplesLogin) {
 		toSerialize["tomcat_examples_login"] = o.TomcatExamplesLogin
 	}
+	if !IsNil(o.TotpSecretExposure) {
+		toSerialize["totp_secret_exposure"] = o.TotpSecretExposure
+	}
 	if !IsNil(o.TotolinkN150rtPasswordExposure) {
 		toSerialize["totolink_n150rt_password_exposure"] = o.TotolinkN150rtPasswordExposure
 	}
@@ -14788,6 +14824,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) UnmarshalJSON(data []b
 		delete(additionalProperties, "thinkphp_509_information_disclosure")
 		delete(additionalProperties, "tomcat_default_login")
 		delete(additionalProperties, "tomcat_examples_login")
+		delete(additionalProperties, "totp_secret_exposure")
 		delete(additionalProperties, "totolink_n150rt_password_exposure")
 		delete(additionalProperties, "twig_php_ssti")
 		delete(additionalProperties, "twonky_server_exposure")
