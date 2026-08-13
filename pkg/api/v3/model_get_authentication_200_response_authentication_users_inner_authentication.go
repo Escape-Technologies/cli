@@ -28,6 +28,7 @@ type GetAuthentication200ResponseAuthenticationUsersInnerAuthentication struct {
 	SessionStorage       map[string]map[string]string                                                                                `json:"session_storage"`
 	Digest               *string                                                                                                     `json:"digest,omitempty"`
 	Basic                *string                                                                                                     `json:"basic,omitempty"`
+	Username             string                                                                                                      `json:"username"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -37,7 +38,7 @@ type _GetAuthentication200ResponseAuthenticationUsersInnerAuthentication GetAuth
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetAuthentication200ResponseAuthenticationUsersInnerAuthentication(headers []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner, cookies []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner, queryParameters []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner, body map[string]string, localStorage map[string]map[string]string, sessionStorage map[string]map[string]string) *GetAuthentication200ResponseAuthenticationUsersInnerAuthentication {
+func NewGetAuthentication200ResponseAuthenticationUsersInnerAuthentication(headers []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner, cookies []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner, queryParameters []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner, body map[string]string, localStorage map[string]map[string]string, sessionStorage map[string]map[string]string, username string) *GetAuthentication200ResponseAuthenticationUsersInnerAuthentication {
 	this := GetAuthentication200ResponseAuthenticationUsersInnerAuthentication{}
 	this.Headers = headers
 	this.Cookies = cookies
@@ -45,6 +46,7 @@ func NewGetAuthentication200ResponseAuthenticationUsersInnerAuthentication(heade
 	this.Body = body
 	this.LocalStorage = localStorage
 	this.SessionStorage = sessionStorage
+	this.Username = username
 	return &this
 }
 
@@ -264,6 +266,30 @@ func (o *GetAuthentication200ResponseAuthenticationUsersInnerAuthentication) Set
 	o.Basic = &v
 }
 
+// GetUsername returns the Username field value
+func (o *GetAuthentication200ResponseAuthenticationUsersInnerAuthentication) GetUsername() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Username
+}
+
+// GetUsernameOk returns a tuple with the Username field value
+// and a boolean to check if the value has been set.
+func (o *GetAuthentication200ResponseAuthenticationUsersInnerAuthentication) GetUsernameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Username, true
+}
+
+// SetUsername sets field value
+func (o *GetAuthentication200ResponseAuthenticationUsersInnerAuthentication) SetUsername(v string) {
+	o.Username = v
+}
+
 func (o GetAuthentication200ResponseAuthenticationUsersInnerAuthentication) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -286,6 +312,7 @@ func (o GetAuthentication200ResponseAuthenticationUsersInnerAuthentication) ToMa
 	if !IsNil(o.Basic) {
 		toSerialize["basic"] = o.Basic
 	}
+	toSerialize["username"] = o.Username
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -305,6 +332,7 @@ func (o *GetAuthentication200ResponseAuthenticationUsersInnerAuthentication) Unm
 		"body",
 		"local_storage",
 		"session_storage",
+		"username",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -342,6 +370,7 @@ func (o *GetAuthentication200ResponseAuthenticationUsersInnerAuthentication) Unm
 		delete(additionalProperties, "session_storage")
 		delete(additionalProperties, "digest")
 		delete(additionalProperties, "basic")
+		delete(additionalProperties, "username")
 		o.AdditionalProperties = additionalProperties
 	}
 
