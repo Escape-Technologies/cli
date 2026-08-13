@@ -93,6 +93,7 @@ type GetProfile200ResponseConfigurationSecurityTests struct {
 	Cve202663030                              *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"cve_2026_63030,omitempty"`
 	Cve202664638                              *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"cve_2026_64638,omitempty"`
 	CsrfPostBased                             *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"csrf_post_based,omitempty"`
+	CsrfTokenInvalidation                     *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"csrf_token_invalidation,omitempty"`
 	FrontendCsrfGetBased                      *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"frontend_csrf_get_based,omitempty"`
 	FrontendCsrfPostBased                     *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"frontend_csrf_post_based,omitempty"`
 	DebugMode                                 *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"debug_mode,omitempty"`
@@ -196,6 +197,7 @@ type GetProfile200ResponseConfigurationSecurityTests struct {
 	NegativeValue                             *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"negative_value,omitempty"`
 	Nosql                                     *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"nosql,omitempty"`
 	FrontendNosqlInjection                    *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"frontend_nosql_injection,omitempty"`
+	OauthGrantMisconfiguration                *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"oauth_grant_misconfiguration,omitempty"`
 	OauthMissingStateValidation               *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"oauth_missing_state_validation,omitempty"`
 	PaginationMissing                         *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"pagination_missing,omitempty"`
 	FrontendOpenRedirect                      *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"frontend_open_redirect,omitempty"`
@@ -2808,6 +2810,38 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) HasCsrfPostBased() boo
 // SetCsrfPostBased gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the CsrfPostBased field.
 func (o *GetProfile200ResponseConfigurationSecurityTests) SetCsrfPostBased(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
 	o.CsrfPostBased = &v
+}
+
+// GetCsrfTokenInvalidation returns the CsrfTokenInvalidation field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetCsrfTokenInvalidation() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.CsrfTokenInvalidation) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.CsrfTokenInvalidation
+}
+
+// GetCsrfTokenInvalidationOk returns a tuple with the CsrfTokenInvalidation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetCsrfTokenInvalidationOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.CsrfTokenInvalidation) {
+		return nil, false
+	}
+	return o.CsrfTokenInvalidation, true
+}
+
+// HasCsrfTokenInvalidation returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasCsrfTokenInvalidation() bool {
+	if o != nil && !IsNil(o.CsrfTokenInvalidation) {
+		return true
+	}
+
+	return false
+}
+
+// SetCsrfTokenInvalidation gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the CsrfTokenInvalidation field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetCsrfTokenInvalidation(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.CsrfTokenInvalidation = &v
 }
 
 // GetFrontendCsrfGetBased returns the FrontendCsrfGetBased field value if set, zero value otherwise.
@@ -6104,6 +6138,38 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) HasFrontendNosqlInject
 // SetFrontendNosqlInjection gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the FrontendNosqlInjection field.
 func (o *GetProfile200ResponseConfigurationSecurityTests) SetFrontendNosqlInjection(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
 	o.FrontendNosqlInjection = &v
+}
+
+// GetOauthGrantMisconfiguration returns the OauthGrantMisconfiguration field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetOauthGrantMisconfiguration() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.OauthGrantMisconfiguration) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.OauthGrantMisconfiguration
+}
+
+// GetOauthGrantMisconfigurationOk returns a tuple with the OauthGrantMisconfiguration field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetOauthGrantMisconfigurationOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.OauthGrantMisconfiguration) {
+		return nil, false
+	}
+	return o.OauthGrantMisconfiguration, true
+}
+
+// HasOauthGrantMisconfiguration returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasOauthGrantMisconfiguration() bool {
+	if o != nil && !IsNil(o.OauthGrantMisconfiguration) {
+		return true
+	}
+
+	return false
+}
+
+// SetOauthGrantMisconfiguration gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the OauthGrantMisconfiguration field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetOauthGrantMisconfiguration(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.OauthGrantMisconfiguration = &v
 }
 
 // GetOauthMissingStateValidation returns the OauthMissingStateValidation field value if set, zero value otherwise.
@@ -13506,6 +13572,9 @@ func (o GetProfile200ResponseConfigurationSecurityTests) ToMap() (map[string]int
 	if !IsNil(o.CsrfPostBased) {
 		toSerialize["csrf_post_based"] = o.CsrfPostBased
 	}
+	if !IsNil(o.CsrfTokenInvalidation) {
+		toSerialize["csrf_token_invalidation"] = o.CsrfTokenInvalidation
+	}
 	if !IsNil(o.FrontendCsrfGetBased) {
 		toSerialize["frontend_csrf_get_based"] = o.FrontendCsrfGetBased
 	}
@@ -13814,6 +13883,9 @@ func (o GetProfile200ResponseConfigurationSecurityTests) ToMap() (map[string]int
 	}
 	if !IsNil(o.FrontendNosqlInjection) {
 		toSerialize["frontend_nosql_injection"] = o.FrontendNosqlInjection
+	}
+	if !IsNil(o.OauthGrantMisconfiguration) {
+		toSerialize["oauth_grant_misconfiguration"] = o.OauthGrantMisconfiguration
 	}
 	if !IsNil(o.OauthMissingStateValidation) {
 		toSerialize["oauth_missing_state_validation"] = o.OauthMissingStateValidation
@@ -14583,6 +14655,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) UnmarshalJSON(data []b
 		delete(additionalProperties, "cve_2026_63030")
 		delete(additionalProperties, "cve_2026_64638")
 		delete(additionalProperties, "csrf_post_based")
+		delete(additionalProperties, "csrf_token_invalidation")
 		delete(additionalProperties, "frontend_csrf_get_based")
 		delete(additionalProperties, "frontend_csrf_post_based")
 		delete(additionalProperties, "debug_mode")
@@ -14686,6 +14759,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) UnmarshalJSON(data []b
 		delete(additionalProperties, "negative_value")
 		delete(additionalProperties, "nosql")
 		delete(additionalProperties, "frontend_nosql_injection")
+		delete(additionalProperties, "oauth_grant_misconfiguration")
 		delete(additionalProperties, "oauth_missing_state_validation")
 		delete(additionalProperties, "pagination_missing")
 		delete(additionalProperties, "frontend_open_redirect")
