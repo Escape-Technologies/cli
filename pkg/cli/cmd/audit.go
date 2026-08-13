@@ -1,6 +1,8 @@
 package cmd
 
 import (
+	"context"
+	"errors"
 	"fmt"
 	"time"
 
@@ -9,6 +11,8 @@ import (
 	"github.com/Escape-Technologies/cli/pkg/cli/out"
 	"github.com/spf13/cobra"
 )
+
+const auditPageSize = 100
 
 var (
 	auditCmdDateFrom   = time.Now().Add(-12 * time.Hour).Format(time.RFC3339)
@@ -84,6 +88,11 @@ FILTER OPTIONS:
 			return nil
 		}
 
+		pageSize := auditPageSize
+		if auditCmdLimit > 0 && auditCmdLimit < pageSize {
+			pageSize = auditCmdLimit
+		}
+
 		filters := &escape.ListAuditLogsFilters{
 			DateFrom:      auditCmdDateFrom,
 			DateTo:        auditCmdDateTo,
@@ -92,24 +101,11 @@ FILTER OPTIONS:
 			Search:        auditCmdSearch,
 			SortType:      auditSortType,
 			SortDirection: auditSortDirection,
+			Size:          pageSize,
 		}
-		logs, next, err := escape.ListAuditLogs(cmd.Context(), "", filters)
+		allLogs, err := fetchAllAuditLogs(cmd.Context(), filters, auditCmdLimit)
 		if err != nil {
-			return fmt.Errorf("unable to list audits: %w", err)
-		}
-		allLogs := logs
-		for next != nil && *next != "" {
-			if auditCmdLimit > 0 && len(allLogs) >= auditCmdLimit {
-				break
-			}
-			logs, next, err = escape.ListAuditLogs(cmd.Context(), *next, filters)
-			if err != nil {
-				return fmt.Errorf("unable to list audits: %w", err)
-			}
-			allLogs = append(allLogs, logs...)
-		}
-		if auditCmdLimit > 0 && len(allLogs) > auditCmdLimit {
-			allLogs = allLogs[:auditCmdLimit]
+			return err
 		}
 		out.Table(allLogs, func() []string {
 			fields := []string{"DATE\tACTION\tACTOR\tACTOR EMAIL\tTITLE"}
@@ -127,6 +123,30 @@ FILTER OPTIONS:
 		})
 		return nil
 	},
+}
+
+func fetchAllAuditLogs(
+	ctx context.Context,
+	filters *escape.ListAuditLogsFilters,
+	limit int,
+) ([]v3.AuditLogSummarized, error) {
+	var allLogs []v3.AuditLogSummarized
+	next := ""
+	for {
+		logs, cursor, err := escape.ListAuditLogs(ctx, next, filters)
+		if err != nil {
+			return nil, fmt.Errorf("unable to list audits: %w", err)
+		}
+		allLogs = append(allLogs, logs...)
+		if limit > 0 && len(allLogs) >= limit {
+			return allLogs[:limit], nil
+		}
+		if cursor == nil || *cursor == "" {
+			break
+		}
+		next = *cursor
+	}
+	return allLogs, nil
 }
 
 func init() {
