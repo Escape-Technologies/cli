@@ -37,7 +37,6 @@ type CreateAssetCODEPROJECTRequestRepositoryOneOf2 struct {
 	WorkspaceName        *string                                         `json:"workspace_name,omitempty"`
 	RepositoryName       *string                                         `json:"repository_name,omitempty"`
 	IsPrivate            *bool                                           `json:"is_private,omitempty"`
-	Org                  *CreateAssetBITBUCKETREPOSITORYRequestOrg       `json:"org,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -583,38 +582,6 @@ func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) SetIsPrivate(v bool) {
 	o.IsPrivate = &v
 }
 
-// GetOrg returns the Org field value if set, zero value otherwise.
-func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) GetOrg() CreateAssetBITBUCKETREPOSITORYRequestOrg {
-	if o == nil || IsNil(o.Org) {
-		var ret CreateAssetBITBUCKETREPOSITORYRequestOrg
-		return ret
-	}
-	return *o.Org
-}
-
-// GetOrgOk returns a tuple with the Org field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) GetOrgOk() (*CreateAssetBITBUCKETREPOSITORYRequestOrg, bool) {
-	if o == nil || IsNil(o.Org) {
-		return nil, false
-	}
-	return o.Org, true
-}
-
-// HasOrg returns a boolean if a field has been set.
-func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) HasOrg() bool {
-	if o != nil && !IsNil(o.Org) {
-		return true
-	}
-
-	return false
-}
-
-// SetOrg gets a reference to the given CreateAssetBITBUCKETREPOSITORYRequestOrg and assigns it to the Org field.
-func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) SetOrg(v CreateAssetBITBUCKETREPOSITORYRequestOrg) {
-	o.Org = &v
-}
-
 func (o CreateAssetCODEPROJECTRequestRepositoryOneOf2) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -669,9 +636,6 @@ func (o CreateAssetCODEPROJECTRequestRepositoryOneOf2) ToMap() (map[string]inter
 	}
 	if !IsNil(o.IsPrivate) {
 		toSerialize["is_private"] = o.IsPrivate
-	}
-	if !IsNil(o.Org) {
-		toSerialize["org"] = o.Org
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -735,7 +699,6 @@ func (o *CreateAssetCODEPROJECTRequestRepositoryOneOf2) UnmarshalJSON(data []byt
 		delete(additionalProperties, "workspace_name")
 		delete(additionalProperties, "repository_name")
 		delete(additionalProperties, "is_private")
-		delete(additionalProperties, "org")
 		o.AdditionalProperties = additionalProperties
 	}
 
