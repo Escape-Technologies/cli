@@ -66,6 +66,7 @@ type GetProfile200ResponseConfigurationSecurityTests struct {
 	BolaIdor                                  *GetProfile200ResponseConfigurationSecurityTestsBola                      `json:"bola_idor,omitempty"`
 	BrokenFunctionLevelAuthorization          *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"broken_function_level_authorization,omitempty"`
 	CharacterLimit                            *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"character_limit,omitempty"`
+	ClientSideStateTampering                  *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"client_side_state_tampering,omitempty"`
 	CgiBinRce                                 *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"cgi_bin_rce,omitempty"`
 	FrontendBola                              *GetProfile200ResponseConfigurationSecurityTestsBola                      `json:"frontend_bola,omitempty"`
 	CloudstackDefaultLogin                    *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"cloudstack_default_login,omitempty"`
@@ -1940,6 +1941,38 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) HasCharacterLimit() bo
 // SetCharacterLimit gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the CharacterLimit field.
 func (o *GetProfile200ResponseConfigurationSecurityTests) SetCharacterLimit(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
 	o.CharacterLimit = &v
+}
+
+// GetClientSideStateTampering returns the ClientSideStateTampering field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetClientSideStateTampering() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.ClientSideStateTampering) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.ClientSideStateTampering
+}
+
+// GetClientSideStateTamperingOk returns a tuple with the ClientSideStateTampering field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetClientSideStateTamperingOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.ClientSideStateTampering) {
+		return nil, false
+	}
+	return o.ClientSideStateTampering, true
+}
+
+// HasClientSideStateTampering returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasClientSideStateTampering() bool {
+	if o != nil && !IsNil(o.ClientSideStateTampering) {
+		return true
+	}
+
+	return false
+}
+
+// SetClientSideStateTampering gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the ClientSideStateTampering field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetClientSideStateTampering(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.ClientSideStateTampering = &v
 }
 
 // GetCgiBinRce returns the CgiBinRce field value if set, zero value otherwise.
@@ -13293,6 +13326,9 @@ func (o GetProfile200ResponseConfigurationSecurityTests) ToMap() (map[string]int
 	if !IsNil(o.CharacterLimit) {
 		toSerialize["character_limit"] = o.CharacterLimit
 	}
+	if !IsNil(o.ClientSideStateTampering) {
+		toSerialize["client_side_state_tampering"] = o.ClientSideStateTampering
+	}
 	if !IsNil(o.CgiBinRce) {
 		toSerialize["cgi_bin_rce"] = o.CgiBinRce
 	}
@@ -14412,6 +14448,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) UnmarshalJSON(data []b
 		delete(additionalProperties, "bola_idor")
 		delete(additionalProperties, "broken_function_level_authorization")
 		delete(additionalProperties, "character_limit")
+		delete(additionalProperties, "client_side_state_tampering")
 		delete(additionalProperties, "cgi_bin_rce")
 		delete(additionalProperties, "frontend_bola")
 		delete(additionalProperties, "cloudstack_default_login")
