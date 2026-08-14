@@ -20,14 +20,14 @@ var _ MappedNullable = &CreateCustomRuleRequestContentRuleOneOfAlert{}
 
 // CreateCustomRuleRequestContentRuleOneOfAlert struct for CreateCustomRuleRequestContentRuleOneOfAlert
 type CreateCustomRuleRequestContentRuleOneOfAlert struct {
-	Severity              ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESSEVERITY `json:"severity"`
-	Name                  string                                                                `json:"name"`
-	Context               string                                                                `json:"context"`
-	Category              ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY                             `json:"category"`
-	Description           *string                                                               `json:"description,omitempty"`
-	Remediation           *string                                                               `json:"remediation,omitempty"`
-	Compliance            *CreateCustomRuleRequestContentRuleOneOfAlertCompliance               `json:"compliance,omitempty"`
-	CustomSecurityTestUid *string                                                               `json:"custom_security_test_uid,omitempty"`
+	Severity              ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESSEVERITY               `json:"severity"`
+	Name                  string                                                                              `json:"name"`
+	Context               string                                                                              `json:"context"`
+	Category              ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY                                           `json:"category"`
+	Description           *string                                                                             `json:"description,omitempty"`
+	Remediation           *string                                                                             `json:"remediation,omitempty"`
+	Compliance            *CreateCustomRuleRequestContentRuleOneOfAlertCompliance                             `json:"compliance,omitempty"`
+	CustomSecurityTestUid *ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESCUSTOMSECURITYTESTUID `json:"custom_security_test_uid,omitempty"`
 	AdditionalProperties  map[string]interface{}
 }
 
@@ -247,9 +247,9 @@ func (o *CreateCustomRuleRequestContentRuleOneOfAlert) SetCompliance(v CreateCus
 }
 
 // GetCustomSecurityTestUid returns the CustomSecurityTestUid field value if set, zero value otherwise.
-func (o *CreateCustomRuleRequestContentRuleOneOfAlert) GetCustomSecurityTestUid() string {
+func (o *CreateCustomRuleRequestContentRuleOneOfAlert) GetCustomSecurityTestUid() ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESCUSTOMSECURITYTESTUID {
 	if o == nil || IsNil(o.CustomSecurityTestUid) {
-		var ret string
+		var ret ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESCUSTOMSECURITYTESTUID
 		return ret
 	}
 	return *o.CustomSecurityTestUid
@@ -257,7 +257,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOfAlert) GetCustomSecurityTestUid(
 
 // GetCustomSecurityTestUidOk returns a tuple with the CustomSecurityTestUid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateCustomRuleRequestContentRuleOneOfAlert) GetCustomSecurityTestUidOk() (*string, bool) {
+func (o *CreateCustomRuleRequestContentRuleOneOfAlert) GetCustomSecurityTestUidOk() (*ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESCUSTOMSECURITYTESTUID, bool) {
 	if o == nil || IsNil(o.CustomSecurityTestUid) {
 		return nil, false
 	}
@@ -273,8 +273,8 @@ func (o *CreateCustomRuleRequestContentRuleOneOfAlert) HasCustomSecurityTestUid(
 	return false
 }
 
-// SetCustomSecurityTestUid gets a reference to the given string and assigns it to the CustomSecurityTestUid field.
-func (o *CreateCustomRuleRequestContentRuleOneOfAlert) SetCustomSecurityTestUid(v string) {
+// SetCustomSecurityTestUid gets a reference to the given ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESCUSTOMSECURITYTESTUID and assigns it to the CustomSecurityTestUid field.
+func (o *CreateCustomRuleRequestContentRuleOneOfAlert) SetCustomSecurityTestUid(v ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESCUSTOMSECURITYTESTUID) {
 	o.CustomSecurityTestUid = &v
 }
 
