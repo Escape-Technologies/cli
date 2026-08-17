@@ -26,6 +26,7 @@ type ActivitySummarized struct {
 	// The date and time the activity was created
 	CreatedAt            string                  `json:"createdAt"`
 	Kind                 ENUMITEMSPROPERTIESKIND `json:"kind"`
+	Comment              *string                 `json:"comment,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -155,6 +156,38 @@ func (o *ActivitySummarized) SetKind(v ENUMITEMSPROPERTIESKIND) {
 	o.Kind = v
 }
 
+// GetComment returns the Comment field value if set, zero value otherwise.
+func (o *ActivitySummarized) GetComment() string {
+	if o == nil || IsNil(o.Comment) {
+		var ret string
+		return ret
+	}
+	return *o.Comment
+}
+
+// GetCommentOk returns a tuple with the Comment field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ActivitySummarized) GetCommentOk() (*string, bool) {
+	if o == nil || IsNil(o.Comment) {
+		return nil, false
+	}
+	return o.Comment, true
+}
+
+// HasComment returns a boolean if a field has been set.
+func (o *ActivitySummarized) HasComment() bool {
+	if o != nil && !IsNil(o.Comment) {
+		return true
+	}
+
+	return false
+}
+
+// SetComment gets a reference to the given string and assigns it to the Comment field.
+func (o *ActivitySummarized) SetComment(v string) {
+	o.Comment = &v
+}
+
 func (o ActivitySummarized) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -171,6 +204,9 @@ func (o ActivitySummarized) ToMap() (map[string]interface{}, error) {
 	toSerialize["id"] = o.Id
 	toSerialize["createdAt"] = o.CreatedAt
 	toSerialize["kind"] = o.Kind
+	if !IsNil(o.Comment) {
+		toSerialize["comment"] = o.Comment
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -220,6 +256,7 @@ func (o *ActivitySummarized) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "createdAt")
 		delete(additionalProperties, "kind")
+		delete(additionalProperties, "comment")
 		o.AdditionalProperties = additionalProperties
 	}
 
