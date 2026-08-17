@@ -209,7 +209,7 @@ func ListAssetActivities(ctx context.Context, assetID string) ([]v3.ActivitySumm
 }
 
 // normalizeAssetType normalizes asset type tokens to match generated method names
-// e.g. GITHUB_REPOSITORY -> GITHUBREPOSITORY, http-endpoint -> httpendpoint
+// e.g. KUBERNETES_CLUSTER -> KUBERNETESCLUSTER, http-endpoint -> httpendpoint
 func normalizeAssetType(s string) string {
 	s = strings.ReplaceAll(s, "_", "")
 	s = strings.ReplaceAll(s, "-", "")

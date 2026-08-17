@@ -48,6 +48,7 @@ ASSET TYPES:
   • GRAPHQL_API         - GraphQL endpoints
   • SOAP_API            - SOAP/XML web services
   • GRPC_API            - gRPC services
+  • KUBERNETES_CLUSTER  - K8s clusters (private locations)
   • IPV4, IPV6          - Network endpoints
   • DOMAIN              - DNS domains
 
@@ -101,7 +102,7 @@ ASSET LIFECYCLE:
 
 Example output:
 ID                                      CREATED AT                TYPE                NAME                   RISKS                      STATUS       LAST SEEN
-00000000-0000-0000-0000-000000000001    2025-07-22T15:42:12.127Z  GITHUB_REPOSITORY   escape-api             []                         MONITORED    2025-07-22T15:42:12.127Z
+00000000-0000-0000-0000-000000000001    2025-07-22T15:42:12.127Z  KUBERNETES_CLUSTER  private-location       []                         MONITORED    2025-07-22T15:42:12.127Z
 00000000-0000-0000-0000-000000000002    2025-07-22T15:52:41.697Z  WEBAPP              https://escape.tech    [EXPOSED UNAUTHENTICATED]  MONITORED    2025-07-22T15:52:41.697Z`,
 	Example: `  # List all monitored assets
   escape-cli assets list --statuses MONITORED
