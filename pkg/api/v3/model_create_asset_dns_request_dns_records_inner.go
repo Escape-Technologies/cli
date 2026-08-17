@@ -20,11 +20,12 @@ var _ MappedNullable = &CreateAssetDNSRequestDnsRecordsInner{}
 
 // CreateAssetDNSRequestDnsRecordsInner struct for CreateAssetDNSRequestDnsRecordsInner
 type CreateAssetDNSRequestDnsRecordsInner struct {
-	Name                 string  `json:"name"`
-	Type                 string  `json:"type"`
-	Ttl                  float32 `json:"ttl"`
-	Data                 string  `json:"data"`
-	AdditionalProperties map[string]interface{}
+	Name                      string  `json:"name"`
+	Type                      string  `json:"type"`
+	Ttl                       float32 `json:"ttl"`
+	Data                      string  `json:"data"`
+	FoundUsingPrivateLocation *bool   `json:"found_using_private_location,omitempty"`
+	AdditionalProperties      map[string]interface{}
 }
 
 type _CreateAssetDNSRequestDnsRecordsInner CreateAssetDNSRequestDnsRecordsInner
@@ -146,6 +147,38 @@ func (o *CreateAssetDNSRequestDnsRecordsInner) SetData(v string) {
 	o.Data = v
 }
 
+// GetFoundUsingPrivateLocation returns the FoundUsingPrivateLocation field value if set, zero value otherwise.
+func (o *CreateAssetDNSRequestDnsRecordsInner) GetFoundUsingPrivateLocation() bool {
+	if o == nil || IsNil(o.FoundUsingPrivateLocation) {
+		var ret bool
+		return ret
+	}
+	return *o.FoundUsingPrivateLocation
+}
+
+// GetFoundUsingPrivateLocationOk returns a tuple with the FoundUsingPrivateLocation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAssetDNSRequestDnsRecordsInner) GetFoundUsingPrivateLocationOk() (*bool, bool) {
+	if o == nil || IsNil(o.FoundUsingPrivateLocation) {
+		return nil, false
+	}
+	return o.FoundUsingPrivateLocation, true
+}
+
+// HasFoundUsingPrivateLocation returns a boolean if a field has been set.
+func (o *CreateAssetDNSRequestDnsRecordsInner) HasFoundUsingPrivateLocation() bool {
+	if o != nil && !IsNil(o.FoundUsingPrivateLocation) {
+		return true
+	}
+
+	return false
+}
+
+// SetFoundUsingPrivateLocation gets a reference to the given bool and assigns it to the FoundUsingPrivateLocation field.
+func (o *CreateAssetDNSRequestDnsRecordsInner) SetFoundUsingPrivateLocation(v bool) {
+	o.FoundUsingPrivateLocation = &v
+}
+
 func (o CreateAssetDNSRequestDnsRecordsInner) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -160,6 +193,9 @@ func (o CreateAssetDNSRequestDnsRecordsInner) ToMap() (map[string]interface{}, e
 	toSerialize["type"] = o.Type
 	toSerialize["ttl"] = o.Ttl
 	toSerialize["data"] = o.Data
+	if !IsNil(o.FoundUsingPrivateLocation) {
+		toSerialize["found_using_private_location"] = o.FoundUsingPrivateLocation
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -210,6 +246,7 @@ func (o *CreateAssetDNSRequestDnsRecordsInner) UnmarshalJSON(data []byte) (err e
 		delete(additionalProperties, "type")
 		delete(additionalProperties, "ttl")
 		delete(additionalProperties, "data")
+		delete(additionalProperties, "found_using_private_location")
 		o.AdditionalProperties = additionalProperties
 	}
 
