@@ -60,7 +60,9 @@ type GetIssue200Response struct {
 	LatestEventIds []string `json:"latestEventIds,omitempty"`
 	// True when the last-seen scan has more than 5 events. Use GET /v3/events?issueIds=<id>&scanIds=<lastSeenScanId> for the full list.
 	LatestEventsTruncated *bool `json:"latestEventsTruncated,omitempty"`
-	AdditionalProperties  map[string]interface{}
+	// Scan targets associated with the issue, deduplicated
+	Targets              []IssueTarget `json:"targets"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetIssue200Response GetIssue200Response
@@ -69,7 +71,7 @@ type _GetIssue200Response GetIssue200Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetIssue200Response(id string, name string, fullName string, category ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY, severity ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY, manualSeverity bool, status ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, alertUid string, createdAt string, asset AssetDetailed2, securityTest GetIssue200ResponseSecurityTest, aiRemediationFramework string, links IssueSummarizedLinks) *GetIssue200Response {
+func NewGetIssue200Response(id string, name string, fullName string, category ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY, severity ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY, manualSeverity bool, status ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, alertUid string, createdAt string, asset AssetDetailed2, securityTest GetIssue200ResponseSecurityTest, aiRemediationFramework string, links IssueSummarizedLinks, targets []IssueTarget) *GetIssue200Response {
 	this := GetIssue200Response{}
 	this.Id = id
 	this.Name = name
@@ -85,6 +87,7 @@ func NewGetIssue200Response(id string, name string, fullName string, category EN
 	this.SecurityTest = securityTest
 	this.AiRemediationFramework = aiRemediationFramework
 	this.Links = links
+	this.Targets = targets
 	return &this
 }
 
@@ -752,6 +755,30 @@ func (o *GetIssue200Response) SetLatestEventsTruncated(v bool) {
 	o.LatestEventsTruncated = &v
 }
 
+// GetTargets returns the Targets field value
+func (o *GetIssue200Response) GetTargets() []IssueTarget {
+	if o == nil {
+		var ret []IssueTarget
+		return ret
+	}
+
+	return o.Targets
+}
+
+// GetTargetsOk returns a tuple with the Targets field value
+// and a boolean to check if the value has been set.
+func (o *GetIssue200Response) GetTargetsOk() ([]IssueTarget, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Targets, true
+}
+
+// SetTargets sets field value
+func (o *GetIssue200Response) SetTargets(v []IssueTarget) {
+	o.Targets = v
+}
+
 func (o GetIssue200Response) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -806,6 +833,7 @@ func (o GetIssue200Response) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.LatestEventsTruncated) {
 		toSerialize["latestEventsTruncated"] = o.LatestEventsTruncated
 	}
+	toSerialize["targets"] = o.Targets
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -833,6 +861,7 @@ func (o *GetIssue200Response) UnmarshalJSON(data []byte) (err error) {
 		"securityTest",
 		"aiRemediationFramework",
 		"links",
+		"targets",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -886,6 +915,7 @@ func (o *GetIssue200Response) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "links")
 		delete(additionalProperties, "latestEventIds")
 		delete(additionalProperties, "latestEventsTruncated")
+		delete(additionalProperties, "targets")
 		o.AdditionalProperties = additionalProperties
 	}
 
