@@ -16,12 +16,11 @@ import (
 const defaultMCPServePort = 8080
 
 var (
-	mcpServePort                    int
-	mcpServePublicAPIURL            string
-	mcpServeOAuthIssuerURL          string
-	mcpServeOAuthResourceURL        string
-	mcpServeOAuthPrivateKey         string
-	mcpServeOAuthExtraRedirectHosts []string
+	mcpServePort             int
+	mcpServePublicAPIURL     string
+	mcpServeOAuthIssuerURL   string
+	mcpServeOAuthResourceURL string
+	mcpServeOAuthPrivateKey  string
 )
 
 var mcpCmd = &cobra.Command{
@@ -63,7 +62,6 @@ var mcpServeCmd = &cobra.Command{
 			IssuerURL:           mcpServeOAuthIssuerURL,
 			ResourceURL:         mcpServeOAuthResourceURL,
 			OAuthPrivateKeyPath: mcpServeOAuthPrivateKey,
-			ExtraRedirectHosts:  mcpServeOAuthExtraRedirectHosts,
 		})
 
 		return server.Serve(cmd.Context())
@@ -95,12 +93,6 @@ func init() {
 		"oauth-private-key",
 		"",
 		"path to the RSA private key PEM used to decrypt JWE authorization codes; generated at the path if missing, or ephemeral when empty",
-	)
-	mcpServeCmd.Flags().StringSliceVar(
-		&mcpServeOAuthExtraRedirectHosts,
-		"oauth-extra-redirect-hosts",
-		nil,
-		"extra HTTPS redirect_uri hosts appended to the hardcoded allowlist (for staging/QA clients)",
 	)
 	mcpCmd.AddCommand(mcpServeCmd)
 	rootCmd.AddCommand(mcpCmd)
