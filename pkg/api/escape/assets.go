@@ -257,11 +257,40 @@ func CreateAsset(ctx context.Context, data []byte, assetType string) (interface{
 				if !executeMethod.IsValid() {
 					return nil, errors.New("failed to find Execute method")
 				}
-				results := executeMethod.Call(nil)
-
-				return results[0].Interface(), nil
+				return unpackExecute(executeMethod.Call(nil))
 			}
 		}
 	}
 	return nil, fmt.Errorf("asset type %s not found", assetType)
+}
+
+// unpackExecute reads the (body, ..., error) values returned by generated Execute methods.
+func unpackExecute(results []reflect.Value) (interface{}, error) {
+	if len(results) == 0 {
+		return nil, errors.New("unexpected Execute signature")
+	}
+	last := results[len(results)-1]
+	if last.IsValid() && last.Kind() == reflect.Interface && !last.IsNil() {
+		if err, ok := last.Interface().(error); ok {
+			return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
+		}
+	}
+	value := results[0].Interface()
+	if isNilResponse(value) {
+		return nil, errors.New("api error: empty response")
+	}
+	return value, nil
+}
+
+func isNilResponse(value interface{}) bool {
+	if value == nil {
+		return true
+	}
+	rv := reflect.ValueOf(value)
+	switch rv.Kind() {
+	case reflect.Pointer, reflect.Interface, reflect.Map, reflect.Slice:
+		return rv.IsNil()
+	default:
+		return false
+	}
 }
