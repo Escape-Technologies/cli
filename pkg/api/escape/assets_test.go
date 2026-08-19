@@ -11,7 +11,7 @@ import (
 )
 
 func errorResult(err error) reflect.Value {
-	var wrapped error = err
+	wrapped := err
 	return reflect.ValueOf(&wrapped).Elem()
 }
 
