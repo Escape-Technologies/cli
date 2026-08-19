@@ -287,10 +287,9 @@ func isNilResponse(value interface{}) bool {
 		return true
 	}
 	rv := reflect.ValueOf(value)
-	switch rv.Kind() {
-	case reflect.Pointer, reflect.Interface, reflect.Map, reflect.Slice:
-		return rv.IsNil()
-	default:
-		return false
-	}
+	nillable := rv.Kind() == reflect.Pointer ||
+		rv.Kind() == reflect.Interface ||
+		rv.Kind() == reflect.Map ||
+		rv.Kind() == reflect.Slice
+	return nillable && rv.IsNil()
 }
