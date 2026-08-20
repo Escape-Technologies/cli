@@ -2,7 +2,7 @@ module github.com/Escape-Technologies/cli
 
 go 1.26.0
 
-toolchain go1.26.7
+toolchain go1.26.0
 
 require (
 	github.com/Escape-Technologies/go-socks5 v1.0.0
