@@ -19,9 +19,8 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationInference{}
 
 // GetProfile200ResponseConfigurationInference struct for GetProfile200ResponseConfigurationInference
 type GetProfile200ResponseConfigurationInference struct {
-	Scalars               map[string]GetProfile200ResponseConfigurationInferenceScalarsValue `json:"scalars,omitempty"`
-	NullIsUnauthenticated *bool                                                              `json:"null_is_unauthenticated,omitempty"`
-	AdditionalProperties  map[string]interface{}
+	Scalars              map[string]GetProfile200ResponseConfigurationInferenceScalarsValue `json:"scalars,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetProfile200ResponseConfigurationInference GetProfile200ResponseConfigurationInference
@@ -75,38 +74,6 @@ func (o *GetProfile200ResponseConfigurationInference) SetScalars(v map[string]Ge
 	o.Scalars = v
 }
 
-// GetNullIsUnauthenticated returns the NullIsUnauthenticated field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationInference) GetNullIsUnauthenticated() bool {
-	if o == nil || IsNil(o.NullIsUnauthenticated) {
-		var ret bool
-		return ret
-	}
-	return *o.NullIsUnauthenticated
-}
-
-// GetNullIsUnauthenticatedOk returns a tuple with the NullIsUnauthenticated field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationInference) GetNullIsUnauthenticatedOk() (*bool, bool) {
-	if o == nil || IsNil(o.NullIsUnauthenticated) {
-		return nil, false
-	}
-	return o.NullIsUnauthenticated, true
-}
-
-// HasNullIsUnauthenticated returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationInference) HasNullIsUnauthenticated() bool {
-	if o != nil && !IsNil(o.NullIsUnauthenticated) {
-		return true
-	}
-
-	return false
-}
-
-// SetNullIsUnauthenticated gets a reference to the given bool and assigns it to the NullIsUnauthenticated field.
-func (o *GetProfile200ResponseConfigurationInference) SetNullIsUnauthenticated(v bool) {
-	o.NullIsUnauthenticated = &v
-}
-
 func (o GetProfile200ResponseConfigurationInference) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -119,9 +86,6 @@ func (o GetProfile200ResponseConfigurationInference) ToMap() (map[string]interfa
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Scalars) {
 		toSerialize["scalars"] = o.Scalars
-	}
-	if !IsNil(o.NullIsUnauthenticated) {
-		toSerialize["null_is_unauthenticated"] = o.NullIsUnauthenticated
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -146,7 +110,6 @@ func (o *GetProfile200ResponseConfigurationInference) UnmarshalJSON(data []byte)
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "scalars")
-		delete(additionalProperties, "null_is_unauthenticated")
 		o.AdditionalProperties = additionalProperties
 	}
 
