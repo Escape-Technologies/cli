@@ -28,7 +28,6 @@ type GetProfile200ResponseConfigurationInferenceScalarsValue struct {
 	Parents              []ENUMPROPERTIESCONFIGURATIONPROPERTIESINFERENCEPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESPARENTSITEMS `json:"parents,omitempty"`
 	Sensitivity          *ENUMPROPERTIESCONFIGURATIONPROPERTIESINFERENCEPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESSENSITIVITY   `json:"sensitivity,omitempty"`
 	Strategy             *ENUMPROPERTIESCONFIGURATIONPROPERTIESINFERENCEPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESSTRATEGY      `json:"strategy,omitempty"`
-	RaiseOnCommit        *bool                                                                                                       `json:"raise_on_commit,omitempty"`
 	RaiseOnExposure      *bool                                                                                                       `json:"raise_on_exposure,omitempty"`
 	IsSourceable         *bool                                                                                                       `json:"is_sourceable,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -341,38 +340,6 @@ func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) SetStrategy(v 
 	o.Strategy = &v
 }
 
-// GetRaiseOnCommit returns the RaiseOnCommit field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) GetRaiseOnCommit() bool {
-	if o == nil || IsNil(o.RaiseOnCommit) {
-		var ret bool
-		return ret
-	}
-	return *o.RaiseOnCommit
-}
-
-// GetRaiseOnCommitOk returns a tuple with the RaiseOnCommit field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) GetRaiseOnCommitOk() (*bool, bool) {
-	if o == nil || IsNil(o.RaiseOnCommit) {
-		return nil, false
-	}
-	return o.RaiseOnCommit, true
-}
-
-// HasRaiseOnCommit returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) HasRaiseOnCommit() bool {
-	if o != nil && !IsNil(o.RaiseOnCommit) {
-		return true
-	}
-
-	return false
-}
-
-// SetRaiseOnCommit gets a reference to the given bool and assigns it to the RaiseOnCommit field.
-func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) SetRaiseOnCommit(v bool) {
-	o.RaiseOnCommit = &v
-}
-
 // GetRaiseOnExposure returns the RaiseOnExposure field value if set, zero value otherwise.
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) GetRaiseOnExposure() bool {
 	if o == nil || IsNil(o.RaiseOnExposure) {
@@ -474,9 +441,6 @@ func (o GetProfile200ResponseConfigurationInferenceScalarsValue) ToMap() (map[st
 	if !IsNil(o.Strategy) {
 		toSerialize["strategy"] = o.Strategy
 	}
-	if !IsNil(o.RaiseOnCommit) {
-		toSerialize["raise_on_commit"] = o.RaiseOnCommit
-	}
 	if !IsNil(o.RaiseOnExposure) {
 		toSerialize["raise_on_exposure"] = o.RaiseOnExposure
 	}
@@ -514,7 +478,6 @@ func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) UnmarshalJSON(
 		delete(additionalProperties, "parents")
 		delete(additionalProperties, "sensitivity")
 		delete(additionalProperties, "strategy")
-		delete(additionalProperties, "raise_on_commit")
 		delete(additionalProperties, "raise_on_exposure")
 		delete(additionalProperties, "is_sourceable")
 		o.AdditionalProperties = additionalProperties
