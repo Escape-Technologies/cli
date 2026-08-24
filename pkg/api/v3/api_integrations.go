@@ -3823,14 +3823,14 @@ type ApiGetakamaiIntegrationRequest struct {
 	id         string
 }
 
-func (r ApiGetakamaiIntegrationRequest) Execute() (*CreateakamaiIntegration200Response, *http.Response, error) {
+func (r ApiGetakamaiIntegrationRequest) Execute() (*GetakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.GetakamaiIntegrationExecute(r)
 }
 
 /*
 GetakamaiIntegration Get Akamai integration.
 
-Get a Akamai integration.
+Get a Akamai integration. Credentials and other parameters are omitted.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The integration ID
@@ -3846,13 +3846,13 @@ func (a *IntegrationsAPIService) GetakamaiIntegration(ctx context.Context, id st
 
 // Execute executes the request
 //
-//	@return CreateakamaiIntegration200Response
-func (a *IntegrationsAPIService) GetakamaiIntegrationExecute(r ApiGetakamaiIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
+//	@return GetakamaiIntegration200Response
+func (a *IntegrationsAPIService) GetakamaiIntegrationExecute(r ApiGetakamaiIntegrationRequest) (*GetakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreateakamaiIntegration200Response
+		localVarReturnValue *GetakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.GetakamaiIntegration")
@@ -3951,14 +3951,14 @@ type ApiGetawsAccountIntegrationRequest struct {
 	id         string
 }
 
-func (r ApiGetawsAccountIntegrationRequest) Execute() (*CreateawsAccountIntegration200Response, *http.Response, error) {
+func (r ApiGetawsAccountIntegrationRequest) Execute() (*GetakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.GetawsAccountIntegrationExecute(r)
 }
 
 /*
 GetawsAccountIntegration Get AWS Account (Legacy) integration.
 
-Get a AWS Account (Legacy) integration.
+Get a AWS Account (Legacy) integration. Credentials and other parameters are omitted.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The integration ID
@@ -3974,13 +3974,13 @@ func (a *IntegrationsAPIService) GetawsAccountIntegration(ctx context.Context, i
 
 // Execute executes the request
 //
-//	@return CreateawsAccountIntegration200Response
-func (a *IntegrationsAPIService) GetawsAccountIntegrationExecute(r ApiGetawsAccountIntegrationRequest) (*CreateawsAccountIntegration200Response, *http.Response, error) {
+//	@return GetakamaiIntegration200Response
+func (a *IntegrationsAPIService) GetawsAccountIntegrationExecute(r ApiGetawsAccountIntegrationRequest) (*GetakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreateawsAccountIntegration200Response
+		localVarReturnValue *GetakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.GetawsAccountIntegration")
@@ -4079,14 +4079,14 @@ type ApiGetawsIntegrationRequest struct {
 	id         string
 }
 
-func (r ApiGetawsIntegrationRequest) Execute() (*CreateawsIntegration200Response, *http.Response, error) {
+func (r ApiGetawsIntegrationRequest) Execute() (*GetakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.GetawsIntegrationExecute(r)
 }
 
 /*
 GetawsIntegration Get AWS integration.
 
-Get a AWS integration.
+Get a AWS integration. Credentials and other parameters are omitted.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The integration ID
@@ -4102,13 +4102,13 @@ func (a *IntegrationsAPIService) GetawsIntegration(ctx context.Context, id strin
 
 // Execute executes the request
 //
-//	@return CreateawsIntegration200Response
-func (a *IntegrationsAPIService) GetawsIntegrationExecute(r ApiGetawsIntegrationRequest) (*CreateawsIntegration200Response, *http.Response, error) {
+//	@return GetakamaiIntegration200Response
+func (a *IntegrationsAPIService) GetawsIntegrationExecute(r ApiGetawsIntegrationRequest) (*GetakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreateawsIntegration200Response
+		localVarReturnValue *GetakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.GetawsIntegration")
@@ -4207,14 +4207,14 @@ type ApiGetazureIntegrationRequest struct {
 	id         string
 }
 
-func (r ApiGetazureIntegrationRequest) Execute() (*CreateazureIntegration200Response, *http.Response, error) {
+func (r ApiGetazureIntegrationRequest) Execute() (*GetakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.GetazureIntegrationExecute(r)
 }
 
 /*
 GetazureIntegration Get Azure integration.
 
-Get a Azure integration.
+Get a Azure integration. Credentials and other parameters are omitted.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The integration ID
@@ -4230,13 +4230,13 @@ func (a *IntegrationsAPIService) GetazureIntegration(ctx context.Context, id str
 
 // Execute executes the request
 //
-//	@return CreateazureIntegration200Response
-func (a *IntegrationsAPIService) GetazureIntegrationExecute(r ApiGetazureIntegrationRequest) (*CreateazureIntegration200Response, *http.Response, error) {
+//	@return GetakamaiIntegration200Response
+func (a *IntegrationsAPIService) GetazureIntegrationExecute(r ApiGetazureIntegrationRequest) (*GetakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreateazureIntegration200Response
+		localVarReturnValue *GetakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.GetazureIntegration")
@@ -4335,14 +4335,14 @@ type ApiGetbitbucketIntegrationRequest struct {
 	id         string
 }
 
-func (r ApiGetbitbucketIntegrationRequest) Execute() (*CreatebitbucketIntegration200Response, *http.Response, error) {
+func (r ApiGetbitbucketIntegrationRequest) Execute() (*GetakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.GetbitbucketIntegrationExecute(r)
 }
 
 /*
 GetbitbucketIntegration Get Bitbucket integration.
 
-Get a Bitbucket integration.
+Get a Bitbucket integration. Credentials and other parameters are omitted.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The integration ID
@@ -4358,13 +4358,13 @@ func (a *IntegrationsAPIService) GetbitbucketIntegration(ctx context.Context, id
 
 // Execute executes the request
 //
-//	@return CreatebitbucketIntegration200Response
-func (a *IntegrationsAPIService) GetbitbucketIntegrationExecute(r ApiGetbitbucketIntegrationRequest) (*CreatebitbucketIntegration200Response, *http.Response, error) {
+//	@return GetakamaiIntegration200Response
+func (a *IntegrationsAPIService) GetbitbucketIntegrationExecute(r ApiGetbitbucketIntegrationRequest) (*GetakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreatebitbucketIntegration200Response
+		localVarReturnValue *GetakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.GetbitbucketIntegration")
@@ -4463,14 +4463,14 @@ type ApiGetcloudflareIntegrationRequest struct {
 	id         string
 }
 
-func (r ApiGetcloudflareIntegrationRequest) Execute() (*CreatecloudflareIntegration200Response, *http.Response, error) {
+func (r ApiGetcloudflareIntegrationRequest) Execute() (*GetakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.GetcloudflareIntegrationExecute(r)
 }
 
 /*
 GetcloudflareIntegration Get Cloudflare integration.
 
-Get a Cloudflare integration.
+Get a Cloudflare integration. Credentials and other parameters are omitted.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The integration ID
@@ -4486,13 +4486,13 @@ func (a *IntegrationsAPIService) GetcloudflareIntegration(ctx context.Context, i
 
 // Execute executes the request
 //
-//	@return CreatecloudflareIntegration200Response
-func (a *IntegrationsAPIService) GetcloudflareIntegrationExecute(r ApiGetcloudflareIntegrationRequest) (*CreatecloudflareIntegration200Response, *http.Response, error) {
+//	@return GetakamaiIntegration200Response
+func (a *IntegrationsAPIService) GetcloudflareIntegrationExecute(r ApiGetcloudflareIntegrationRequest) (*GetakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreatecloudflareIntegration200Response
+		localVarReturnValue *GetakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.GetcloudflareIntegration")
@@ -4591,14 +4591,14 @@ type ApiGetcustomIntegrationRequest struct {
 	id         string
 }
 
-func (r ApiGetcustomIntegrationRequest) Execute() (*CreatecustomIntegration200Response, *http.Response, error) {
+func (r ApiGetcustomIntegrationRequest) Execute() (*GetakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.GetcustomIntegrationExecute(r)
 }
 
 /*
 GetcustomIntegration Get Custom Integration integration.
 
-Get a Custom Integration integration.
+Get a Custom Integration integration. Credentials and other parameters are omitted.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The integration ID
@@ -4614,13 +4614,13 @@ func (a *IntegrationsAPIService) GetcustomIntegration(ctx context.Context, id st
 
 // Execute executes the request
 //
-//	@return CreatecustomIntegration200Response
-func (a *IntegrationsAPIService) GetcustomIntegrationExecute(r ApiGetcustomIntegrationRequest) (*CreatecustomIntegration200Response, *http.Response, error) {
+//	@return GetakamaiIntegration200Response
+func (a *IntegrationsAPIService) GetcustomIntegrationExecute(r ApiGetcustomIntegrationRequest) (*GetakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreatecustomIntegration200Response
+		localVarReturnValue *GetakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.GetcustomIntegration")
@@ -4719,14 +4719,14 @@ type ApiGetgcpIntegrationRequest struct {
 	id         string
 }
 
-func (r ApiGetgcpIntegrationRequest) Execute() (*CreategcpIntegration200Response, *http.Response, error) {
+func (r ApiGetgcpIntegrationRequest) Execute() (*GetakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.GetgcpIntegrationExecute(r)
 }
 
 /*
 GetgcpIntegration Get GCP integration.
 
-Get a GCP integration.
+Get a GCP integration. Credentials and other parameters are omitted.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The integration ID
@@ -4742,13 +4742,13 @@ func (a *IntegrationsAPIService) GetgcpIntegration(ctx context.Context, id strin
 
 // Execute executes the request
 //
-//	@return CreategcpIntegration200Response
-func (a *IntegrationsAPIService) GetgcpIntegrationExecute(r ApiGetgcpIntegrationRequest) (*CreategcpIntegration200Response, *http.Response, error) {
+//	@return GetakamaiIntegration200Response
+func (a *IntegrationsAPIService) GetgcpIntegrationExecute(r ApiGetgcpIntegrationRequest) (*GetakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreategcpIntegration200Response
+		localVarReturnValue *GetakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.GetgcpIntegration")
@@ -4847,14 +4847,14 @@ type ApiGetgithubIntegrationRequest struct {
 	id         string
 }
 
-func (r ApiGetgithubIntegrationRequest) Execute() (*CreatecloudflareIntegration200Response, *http.Response, error) {
+func (r ApiGetgithubIntegrationRequest) Execute() (*GetakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.GetgithubIntegrationExecute(r)
 }
 
 /*
 GetgithubIntegration Get GitHub integration.
 
-Get a GitHub integration.
+Get a GitHub integration. Credentials and other parameters are omitted.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The integration ID
@@ -4870,13 +4870,13 @@ func (a *IntegrationsAPIService) GetgithubIntegration(ctx context.Context, id st
 
 // Execute executes the request
 //
-//	@return CreatecloudflareIntegration200Response
-func (a *IntegrationsAPIService) GetgithubIntegrationExecute(r ApiGetgithubIntegrationRequest) (*CreatecloudflareIntegration200Response, *http.Response, error) {
+//	@return GetakamaiIntegration200Response
+func (a *IntegrationsAPIService) GetgithubIntegrationExecute(r ApiGetgithubIntegrationRequest) (*GetakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreatecloudflareIntegration200Response
+		localVarReturnValue *GetakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.GetgithubIntegration")
@@ -4975,14 +4975,14 @@ type ApiGetgitlabIntegrationRequest struct {
 	id         string
 }
 
-func (r ApiGetgitlabIntegrationRequest) Execute() (*CreategitlabIntegration200Response, *http.Response, error) {
+func (r ApiGetgitlabIntegrationRequest) Execute() (*GetakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.GetgitlabIntegrationExecute(r)
 }
 
 /*
 GetgitlabIntegration Get GitLab integration.
 
-Get a GitLab integration.
+Get a GitLab integration. Credentials and other parameters are omitted.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The integration ID
@@ -4998,13 +4998,13 @@ func (a *IntegrationsAPIService) GetgitlabIntegration(ctx context.Context, id st
 
 // Execute executes the request
 //
-//	@return CreategitlabIntegration200Response
-func (a *IntegrationsAPIService) GetgitlabIntegrationExecute(r ApiGetgitlabIntegrationRequest) (*CreategitlabIntegration200Response, *http.Response, error) {
+//	@return GetakamaiIntegration200Response
+func (a *IntegrationsAPIService) GetgitlabIntegrationExecute(r ApiGetgitlabIntegrationRequest) (*GetakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreategitlabIntegration200Response
+		localVarReturnValue *GetakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.GetgitlabIntegration")
@@ -5103,14 +5103,14 @@ type ApiGetjiraIntegrationRequest struct {
 	id         string
 }
 
-func (r ApiGetjiraIntegrationRequest) Execute() (*CreatejiraIntegration200Response, *http.Response, error) {
+func (r ApiGetjiraIntegrationRequest) Execute() (*GetakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.GetjiraIntegrationExecute(r)
 }
 
 /*
 GetjiraIntegration Get Jira integration.
 
-Get a Jira integration.
+Get a Jira integration. Credentials and other parameters are omitted.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The integration ID
@@ -5126,13 +5126,13 @@ func (a *IntegrationsAPIService) GetjiraIntegration(ctx context.Context, id stri
 
 // Execute executes the request
 //
-//	@return CreatejiraIntegration200Response
-func (a *IntegrationsAPIService) GetjiraIntegrationExecute(r ApiGetjiraIntegrationRequest) (*CreatejiraIntegration200Response, *http.Response, error) {
+//	@return GetakamaiIntegration200Response
+func (a *IntegrationsAPIService) GetjiraIntegrationExecute(r ApiGetjiraIntegrationRequest) (*GetakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreatejiraIntegration200Response
+		localVarReturnValue *GetakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.GetjiraIntegration")
@@ -5231,14 +5231,14 @@ type ApiGetkubernetesIntegrationRequest struct {
 	id         string
 }
 
-func (r ApiGetkubernetesIntegrationRequest) Execute() (*CreatekubernetesIntegration200Response, *http.Response, error) {
+func (r ApiGetkubernetesIntegrationRequest) Execute() (*GetakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.GetkubernetesIntegrationExecute(r)
 }
 
 /*
 GetkubernetesIntegration Get Kubernetes integration.
 
-Get a Kubernetes integration.
+Get a Kubernetes integration. Credentials and other parameters are omitted.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The integration ID
@@ -5254,13 +5254,13 @@ func (a *IntegrationsAPIService) GetkubernetesIntegration(ctx context.Context, i
 
 // Execute executes the request
 //
-//	@return CreatekubernetesIntegration200Response
-func (a *IntegrationsAPIService) GetkubernetesIntegrationExecute(r ApiGetkubernetesIntegrationRequest) (*CreatekubernetesIntegration200Response, *http.Response, error) {
+//	@return GetakamaiIntegration200Response
+func (a *IntegrationsAPIService) GetkubernetesIntegrationExecute(r ApiGetkubernetesIntegrationRequest) (*GetakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreatekubernetesIntegration200Response
+		localVarReturnValue *GetakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.GetkubernetesIntegration")
@@ -5359,14 +5359,14 @@ type ApiGetpostmanIntegrationRequest struct {
 	id         string
 }
 
-func (r ApiGetpostmanIntegrationRequest) Execute() (*CreatecloudflareIntegration200Response, *http.Response, error) {
+func (r ApiGetpostmanIntegrationRequest) Execute() (*GetakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.GetpostmanIntegrationExecute(r)
 }
 
 /*
 GetpostmanIntegration Get Postman integration.
 
-Get a Postman integration.
+Get a Postman integration. Credentials and other parameters are omitted.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The integration ID
@@ -5382,13 +5382,13 @@ func (a *IntegrationsAPIService) GetpostmanIntegration(ctx context.Context, id s
 
 // Execute executes the request
 //
-//	@return CreatecloudflareIntegration200Response
-func (a *IntegrationsAPIService) GetpostmanIntegrationExecute(r ApiGetpostmanIntegrationRequest) (*CreatecloudflareIntegration200Response, *http.Response, error) {
+//	@return GetakamaiIntegration200Response
+func (a *IntegrationsAPIService) GetpostmanIntegrationExecute(r ApiGetpostmanIntegrationRequest) (*GetakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreatecloudflareIntegration200Response
+		localVarReturnValue *GetakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.GetpostmanIntegration")
@@ -5487,14 +5487,14 @@ type ApiGetwizIntegrationRequest struct {
 	id         string
 }
 
-func (r ApiGetwizIntegrationRequest) Execute() (*CreatewizIntegration200Response, *http.Response, error) {
+func (r ApiGetwizIntegrationRequest) Execute() (*GetakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.GetwizIntegrationExecute(r)
 }
 
 /*
 GetwizIntegration Get Wiz integration.
 
-Get a Wiz integration.
+Get a Wiz integration. Credentials and other parameters are omitted.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The integration ID
@@ -5510,13 +5510,13 @@ func (a *IntegrationsAPIService) GetwizIntegration(ctx context.Context, id strin
 
 // Execute executes the request
 //
-//	@return CreatewizIntegration200Response
-func (a *IntegrationsAPIService) GetwizIntegrationExecute(r ApiGetwizIntegrationRequest) (*CreatewizIntegration200Response, *http.Response, error) {
+//	@return GetakamaiIntegration200Response
+func (a *IntegrationsAPIService) GetwizIntegrationExecute(r ApiGetwizIntegrationRequest) (*GetakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreatewizIntegration200Response
+		localVarReturnValue *GetakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.GetwizIntegration")

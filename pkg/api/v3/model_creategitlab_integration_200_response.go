@@ -42,8 +42,8 @@ type CreategitlabIntegration200Response struct {
 	OrganizationId string `json:"organizationId"`
 	// The projects of the integration
 	Projects             []ListProjects200ResponseDataInner       `json:"projects"`
-	Parameters           CreategitlabIntegrationRequestParameters `json:"parameters"`
 	Location             *LocationDetailed                        `json:"location,omitempty"`
+	Parameters           CreategitlabIntegrationRequestParameters `json:"parameters"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -356,30 +356,6 @@ func (o *CreategitlabIntegration200Response) SetProjects(v []ListProjects200Resp
 	o.Projects = v
 }
 
-// GetParameters returns the Parameters field value
-func (o *CreategitlabIntegration200Response) GetParameters() CreategitlabIntegrationRequestParameters {
-	if o == nil {
-		var ret CreategitlabIntegrationRequestParameters
-		return ret
-	}
-
-	return o.Parameters
-}
-
-// GetParametersOk returns a tuple with the Parameters field value
-// and a boolean to check if the value has been set.
-func (o *CreategitlabIntegration200Response) GetParametersOk() (*CreategitlabIntegrationRequestParameters, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Parameters, true
-}
-
-// SetParameters sets field value
-func (o *CreategitlabIntegration200Response) SetParameters(v CreategitlabIntegrationRequestParameters) {
-	o.Parameters = v
-}
-
 // GetLocation returns the Location field value if set, zero value otherwise.
 func (o *CreategitlabIntegration200Response) GetLocation() LocationDetailed {
 	if o == nil || IsNil(o.Location) {
@@ -412,6 +388,30 @@ func (o *CreategitlabIntegration200Response) SetLocation(v LocationDetailed) {
 	o.Location = &v
 }
 
+// GetParameters returns the Parameters field value
+func (o *CreategitlabIntegration200Response) GetParameters() CreategitlabIntegrationRequestParameters {
+	if o == nil {
+		var ret CreategitlabIntegrationRequestParameters
+		return ret
+	}
+
+	return o.Parameters
+}
+
+// GetParametersOk returns a tuple with the Parameters field value
+// and a boolean to check if the value has been set.
+func (o *CreategitlabIntegration200Response) GetParametersOk() (*CreategitlabIntegrationRequestParameters, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Parameters, true
+}
+
+// SetParameters sets field value
+func (o *CreategitlabIntegration200Response) SetParameters(v CreategitlabIntegrationRequestParameters) {
+	o.Parameters = v
+}
+
 func (o CreategitlabIntegration200Response) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -437,10 +437,10 @@ func (o CreategitlabIntegration200Response) ToMap() (map[string]interface{}, err
 	toSerialize["validationErrors"] = o.ValidationErrors
 	toSerialize["organizationId"] = o.OrganizationId
 	toSerialize["projects"] = o.Projects
-	toSerialize["parameters"] = o.Parameters
 	if !IsNil(o.Location) {
 		toSerialize["location"] = o.Location
 	}
+	toSerialize["parameters"] = o.Parameters
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -504,8 +504,8 @@ func (o *CreategitlabIntegration200Response) UnmarshalJSON(data []byte) (err err
 		delete(additionalProperties, "validationErrors")
 		delete(additionalProperties, "organizationId")
 		delete(additionalProperties, "projects")
-		delete(additionalProperties, "parameters")
 		delete(additionalProperties, "location")
+		delete(additionalProperties, "parameters")
 		o.AdditionalProperties = additionalProperties
 	}
 

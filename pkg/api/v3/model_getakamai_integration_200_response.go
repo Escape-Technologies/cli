@@ -16,11 +16,11 @@ import (
 	"time"
 )
 
-// checks if the CreateazureIntegration200Response type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &CreateazureIntegration200Response{}
+// checks if the GetakamaiIntegration200Response type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &GetakamaiIntegration200Response{}
 
-// CreateazureIntegration200Response struct for CreateazureIntegration200Response
-type CreateazureIntegration200Response struct {
+// GetakamaiIntegration200Response struct for GetakamaiIntegration200Response
+type GetakamaiIntegration200Response struct {
 	// The id of the integration
 	Id string `json:"id"`
 	// The name of the integration
@@ -41,20 +41,19 @@ type CreateazureIntegration200Response struct {
 	// The id of the organization the integration belongs to
 	OrganizationId string `json:"organizationId"`
 	// The projects of the integration
-	Projects             []ListProjects200ResponseDataInner      `json:"projects"`
-	Location             *LocationDetailed                       `json:"location,omitempty"`
-	Parameters           CreateazureIntegrationRequestParameters `json:"parameters"`
+	Projects             []ListProjects200ResponseDataInner `json:"projects"`
+	Location             *LocationDetailed                  `json:"location,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _CreateazureIntegration200Response CreateazureIntegration200Response
+type _GetakamaiIntegration200Response GetakamaiIntegration200Response
 
-// NewCreateazureIntegration200Response instantiates a new CreateazureIntegration200Response object
+// NewGetakamaiIntegration200Response instantiates a new GetakamaiIntegration200Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateazureIntegration200Response(id string, name string, createdAt time.Time, updatedAt time.Time, kind ENUMPROPERTIESDATAITEMSPROPERTIESKIND, valid bool, validationErrors []string, organizationId string, projects []ListProjects200ResponseDataInner, parameters CreateazureIntegrationRequestParameters) *CreateazureIntegration200Response {
-	this := CreateazureIntegration200Response{}
+func NewGetakamaiIntegration200Response(id string, name string, createdAt time.Time, updatedAt time.Time, kind ENUMPROPERTIESDATAITEMSPROPERTIESKIND, valid bool, validationErrors []string, organizationId string, projects []ListProjects200ResponseDataInner) *GetakamaiIntegration200Response {
+	this := GetakamaiIntegration200Response{}
 	this.Id = id
 	this.Name = name
 	this.CreatedAt = createdAt
@@ -64,20 +63,19 @@ func NewCreateazureIntegration200Response(id string, name string, createdAt time
 	this.ValidationErrors = validationErrors
 	this.OrganizationId = organizationId
 	this.Projects = projects
-	this.Parameters = parameters
 	return &this
 }
 
-// NewCreateazureIntegration200ResponseWithDefaults instantiates a new CreateazureIntegration200Response object
+// NewGetakamaiIntegration200ResponseWithDefaults instantiates a new GetakamaiIntegration200Response object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCreateazureIntegration200ResponseWithDefaults() *CreateazureIntegration200Response {
-	this := CreateazureIntegration200Response{}
+func NewGetakamaiIntegration200ResponseWithDefaults() *GetakamaiIntegration200Response {
+	this := GetakamaiIntegration200Response{}
 	return &this
 }
 
 // GetId returns the Id field value
-func (o *CreateazureIntegration200Response) GetId() string {
+func (o *GetakamaiIntegration200Response) GetId() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -88,7 +86,7 @@ func (o *CreateazureIntegration200Response) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *CreateazureIntegration200Response) GetIdOk() (*string, bool) {
+func (o *GetakamaiIntegration200Response) GetIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -96,12 +94,12 @@ func (o *CreateazureIntegration200Response) GetIdOk() (*string, bool) {
 }
 
 // SetId sets field value
-func (o *CreateazureIntegration200Response) SetId(v string) {
+func (o *GetakamaiIntegration200Response) SetId(v string) {
 	o.Id = v
 }
 
 // GetName returns the Name field value
-func (o *CreateazureIntegration200Response) GetName() string {
+func (o *GetakamaiIntegration200Response) GetName() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -112,7 +110,7 @@ func (o *CreateazureIntegration200Response) GetName() string {
 
 // GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
-func (o *CreateazureIntegration200Response) GetNameOk() (*string, bool) {
+func (o *GetakamaiIntegration200Response) GetNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -120,12 +118,12 @@ func (o *CreateazureIntegration200Response) GetNameOk() (*string, bool) {
 }
 
 // SetName sets field value
-func (o *CreateazureIntegration200Response) SetName(v string) {
+func (o *GetakamaiIntegration200Response) SetName(v string) {
 	o.Name = v
 }
 
 // GetCreatedAt returns the CreatedAt field value
-func (o *CreateazureIntegration200Response) GetCreatedAt() time.Time {
+func (o *GetakamaiIntegration200Response) GetCreatedAt() time.Time {
 	if o == nil {
 		var ret time.Time
 		return ret
@@ -136,7 +134,7 @@ func (o *CreateazureIntegration200Response) GetCreatedAt() time.Time {
 
 // GetCreatedAtOk returns a tuple with the CreatedAt field value
 // and a boolean to check if the value has been set.
-func (o *CreateazureIntegration200Response) GetCreatedAtOk() (*time.Time, bool) {
+func (o *GetakamaiIntegration200Response) GetCreatedAtOk() (*time.Time, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -144,12 +142,12 @@ func (o *CreateazureIntegration200Response) GetCreatedAtOk() (*time.Time, bool) 
 }
 
 // SetCreatedAt sets field value
-func (o *CreateazureIntegration200Response) SetCreatedAt(v time.Time) {
+func (o *GetakamaiIntegration200Response) SetCreatedAt(v time.Time) {
 	o.CreatedAt = v
 }
 
 // GetUpdatedAt returns the UpdatedAt field value
-func (o *CreateazureIntegration200Response) GetUpdatedAt() time.Time {
+func (o *GetakamaiIntegration200Response) GetUpdatedAt() time.Time {
 	if o == nil {
 		var ret time.Time
 		return ret
@@ -160,7 +158,7 @@ func (o *CreateazureIntegration200Response) GetUpdatedAt() time.Time {
 
 // GetUpdatedAtOk returns a tuple with the UpdatedAt field value
 // and a boolean to check if the value has been set.
-func (o *CreateazureIntegration200Response) GetUpdatedAtOk() (*time.Time, bool) {
+func (o *GetakamaiIntegration200Response) GetUpdatedAtOk() (*time.Time, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -168,12 +166,12 @@ func (o *CreateazureIntegration200Response) GetUpdatedAtOk() (*time.Time, bool) 
 }
 
 // SetUpdatedAt sets field value
-func (o *CreateazureIntegration200Response) SetUpdatedAt(v time.Time) {
+func (o *GetakamaiIntegration200Response) SetUpdatedAt(v time.Time) {
 	o.UpdatedAt = v
 }
 
 // GetScheduledForDeletionAt returns the ScheduledForDeletionAt field value if set, zero value otherwise.
-func (o *CreateazureIntegration200Response) GetScheduledForDeletionAt() time.Time {
+func (o *GetakamaiIntegration200Response) GetScheduledForDeletionAt() time.Time {
 	if o == nil || IsNil(o.ScheduledForDeletionAt) {
 		var ret time.Time
 		return ret
@@ -183,7 +181,7 @@ func (o *CreateazureIntegration200Response) GetScheduledForDeletionAt() time.Tim
 
 // GetScheduledForDeletionAtOk returns a tuple with the ScheduledForDeletionAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateazureIntegration200Response) GetScheduledForDeletionAtOk() (*time.Time, bool) {
+func (o *GetakamaiIntegration200Response) GetScheduledForDeletionAtOk() (*time.Time, bool) {
 	if o == nil || IsNil(o.ScheduledForDeletionAt) {
 		return nil, false
 	}
@@ -191,7 +189,7 @@ func (o *CreateazureIntegration200Response) GetScheduledForDeletionAtOk() (*time
 }
 
 // HasScheduledForDeletionAt returns a boolean if a field has been set.
-func (o *CreateazureIntegration200Response) HasScheduledForDeletionAt() bool {
+func (o *GetakamaiIntegration200Response) HasScheduledForDeletionAt() bool {
 	if o != nil && !IsNil(o.ScheduledForDeletionAt) {
 		return true
 	}
@@ -200,12 +198,12 @@ func (o *CreateazureIntegration200Response) HasScheduledForDeletionAt() bool {
 }
 
 // SetScheduledForDeletionAt gets a reference to the given time.Time and assigns it to the ScheduledForDeletionAt field.
-func (o *CreateazureIntegration200Response) SetScheduledForDeletionAt(v time.Time) {
+func (o *GetakamaiIntegration200Response) SetScheduledForDeletionAt(v time.Time) {
 	o.ScheduledForDeletionAt = &v
 }
 
 // GetLastPullWorkflowAt returns the LastPullWorkflowAt field value if set, zero value otherwise.
-func (o *CreateazureIntegration200Response) GetLastPullWorkflowAt() time.Time {
+func (o *GetakamaiIntegration200Response) GetLastPullWorkflowAt() time.Time {
 	if o == nil || IsNil(o.LastPullWorkflowAt) {
 		var ret time.Time
 		return ret
@@ -215,7 +213,7 @@ func (o *CreateazureIntegration200Response) GetLastPullWorkflowAt() time.Time {
 
 // GetLastPullWorkflowAtOk returns a tuple with the LastPullWorkflowAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateazureIntegration200Response) GetLastPullWorkflowAtOk() (*time.Time, bool) {
+func (o *GetakamaiIntegration200Response) GetLastPullWorkflowAtOk() (*time.Time, bool) {
 	if o == nil || IsNil(o.LastPullWorkflowAt) {
 		return nil, false
 	}
@@ -223,7 +221,7 @@ func (o *CreateazureIntegration200Response) GetLastPullWorkflowAtOk() (*time.Tim
 }
 
 // HasLastPullWorkflowAt returns a boolean if a field has been set.
-func (o *CreateazureIntegration200Response) HasLastPullWorkflowAt() bool {
+func (o *GetakamaiIntegration200Response) HasLastPullWorkflowAt() bool {
 	if o != nil && !IsNil(o.LastPullWorkflowAt) {
 		return true
 	}
@@ -232,12 +230,12 @@ func (o *CreateazureIntegration200Response) HasLastPullWorkflowAt() bool {
 }
 
 // SetLastPullWorkflowAt gets a reference to the given time.Time and assigns it to the LastPullWorkflowAt field.
-func (o *CreateazureIntegration200Response) SetLastPullWorkflowAt(v time.Time) {
+func (o *GetakamaiIntegration200Response) SetLastPullWorkflowAt(v time.Time) {
 	o.LastPullWorkflowAt = &v
 }
 
 // GetKind returns the Kind field value
-func (o *CreateazureIntegration200Response) GetKind() ENUMPROPERTIESDATAITEMSPROPERTIESKIND {
+func (o *GetakamaiIntegration200Response) GetKind() ENUMPROPERTIESDATAITEMSPROPERTIESKIND {
 	if o == nil {
 		var ret ENUMPROPERTIESDATAITEMSPROPERTIESKIND
 		return ret
@@ -248,7 +246,7 @@ func (o *CreateazureIntegration200Response) GetKind() ENUMPROPERTIESDATAITEMSPRO
 
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
-func (o *CreateazureIntegration200Response) GetKindOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESKIND, bool) {
+func (o *GetakamaiIntegration200Response) GetKindOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESKIND, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -256,12 +254,12 @@ func (o *CreateazureIntegration200Response) GetKindOk() (*ENUMPROPERTIESDATAITEM
 }
 
 // SetKind sets field value
-func (o *CreateazureIntegration200Response) SetKind(v ENUMPROPERTIESDATAITEMSPROPERTIESKIND) {
+func (o *GetakamaiIntegration200Response) SetKind(v ENUMPROPERTIESDATAITEMSPROPERTIESKIND) {
 	o.Kind = v
 }
 
 // GetValid returns the Valid field value
-func (o *CreateazureIntegration200Response) GetValid() bool {
+func (o *GetakamaiIntegration200Response) GetValid() bool {
 	if o == nil {
 		var ret bool
 		return ret
@@ -272,7 +270,7 @@ func (o *CreateazureIntegration200Response) GetValid() bool {
 
 // GetValidOk returns a tuple with the Valid field value
 // and a boolean to check if the value has been set.
-func (o *CreateazureIntegration200Response) GetValidOk() (*bool, bool) {
+func (o *GetakamaiIntegration200Response) GetValidOk() (*bool, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -280,12 +278,12 @@ func (o *CreateazureIntegration200Response) GetValidOk() (*bool, bool) {
 }
 
 // SetValid sets field value
-func (o *CreateazureIntegration200Response) SetValid(v bool) {
+func (o *GetakamaiIntegration200Response) SetValid(v bool) {
 	o.Valid = v
 }
 
 // GetValidationErrors returns the ValidationErrors field value
-func (o *CreateazureIntegration200Response) GetValidationErrors() []string {
+func (o *GetakamaiIntegration200Response) GetValidationErrors() []string {
 	if o == nil {
 		var ret []string
 		return ret
@@ -296,7 +294,7 @@ func (o *CreateazureIntegration200Response) GetValidationErrors() []string {
 
 // GetValidationErrorsOk returns a tuple with the ValidationErrors field value
 // and a boolean to check if the value has been set.
-func (o *CreateazureIntegration200Response) GetValidationErrorsOk() ([]string, bool) {
+func (o *GetakamaiIntegration200Response) GetValidationErrorsOk() ([]string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -304,12 +302,12 @@ func (o *CreateazureIntegration200Response) GetValidationErrorsOk() ([]string, b
 }
 
 // SetValidationErrors sets field value
-func (o *CreateazureIntegration200Response) SetValidationErrors(v []string) {
+func (o *GetakamaiIntegration200Response) SetValidationErrors(v []string) {
 	o.ValidationErrors = v
 }
 
 // GetOrganizationId returns the OrganizationId field value
-func (o *CreateazureIntegration200Response) GetOrganizationId() string {
+func (o *GetakamaiIntegration200Response) GetOrganizationId() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -320,7 +318,7 @@ func (o *CreateazureIntegration200Response) GetOrganizationId() string {
 
 // GetOrganizationIdOk returns a tuple with the OrganizationId field value
 // and a boolean to check if the value has been set.
-func (o *CreateazureIntegration200Response) GetOrganizationIdOk() (*string, bool) {
+func (o *GetakamaiIntegration200Response) GetOrganizationIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -328,12 +326,12 @@ func (o *CreateazureIntegration200Response) GetOrganizationIdOk() (*string, bool
 }
 
 // SetOrganizationId sets field value
-func (o *CreateazureIntegration200Response) SetOrganizationId(v string) {
+func (o *GetakamaiIntegration200Response) SetOrganizationId(v string) {
 	o.OrganizationId = v
 }
 
 // GetProjects returns the Projects field value
-func (o *CreateazureIntegration200Response) GetProjects() []ListProjects200ResponseDataInner {
+func (o *GetakamaiIntegration200Response) GetProjects() []ListProjects200ResponseDataInner {
 	if o == nil {
 		var ret []ListProjects200ResponseDataInner
 		return ret
@@ -344,7 +342,7 @@ func (o *CreateazureIntegration200Response) GetProjects() []ListProjects200Respo
 
 // GetProjectsOk returns a tuple with the Projects field value
 // and a boolean to check if the value has been set.
-func (o *CreateazureIntegration200Response) GetProjectsOk() ([]ListProjects200ResponseDataInner, bool) {
+func (o *GetakamaiIntegration200Response) GetProjectsOk() ([]ListProjects200ResponseDataInner, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -352,12 +350,12 @@ func (o *CreateazureIntegration200Response) GetProjectsOk() ([]ListProjects200Re
 }
 
 // SetProjects sets field value
-func (o *CreateazureIntegration200Response) SetProjects(v []ListProjects200ResponseDataInner) {
+func (o *GetakamaiIntegration200Response) SetProjects(v []ListProjects200ResponseDataInner) {
 	o.Projects = v
 }
 
 // GetLocation returns the Location field value if set, zero value otherwise.
-func (o *CreateazureIntegration200Response) GetLocation() LocationDetailed {
+func (o *GetakamaiIntegration200Response) GetLocation() LocationDetailed {
 	if o == nil || IsNil(o.Location) {
 		var ret LocationDetailed
 		return ret
@@ -367,7 +365,7 @@ func (o *CreateazureIntegration200Response) GetLocation() LocationDetailed {
 
 // GetLocationOk returns a tuple with the Location field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateazureIntegration200Response) GetLocationOk() (*LocationDetailed, bool) {
+func (o *GetakamaiIntegration200Response) GetLocationOk() (*LocationDetailed, bool) {
 	if o == nil || IsNil(o.Location) {
 		return nil, false
 	}
@@ -375,7 +373,7 @@ func (o *CreateazureIntegration200Response) GetLocationOk() (*LocationDetailed, 
 }
 
 // HasLocation returns a boolean if a field has been set.
-func (o *CreateazureIntegration200Response) HasLocation() bool {
+func (o *GetakamaiIntegration200Response) HasLocation() bool {
 	if o != nil && !IsNil(o.Location) {
 		return true
 	}
@@ -384,35 +382,11 @@ func (o *CreateazureIntegration200Response) HasLocation() bool {
 }
 
 // SetLocation gets a reference to the given LocationDetailed and assigns it to the Location field.
-func (o *CreateazureIntegration200Response) SetLocation(v LocationDetailed) {
+func (o *GetakamaiIntegration200Response) SetLocation(v LocationDetailed) {
 	o.Location = &v
 }
 
-// GetParameters returns the Parameters field value
-func (o *CreateazureIntegration200Response) GetParameters() CreateazureIntegrationRequestParameters {
-	if o == nil {
-		var ret CreateazureIntegrationRequestParameters
-		return ret
-	}
-
-	return o.Parameters
-}
-
-// GetParametersOk returns a tuple with the Parameters field value
-// and a boolean to check if the value has been set.
-func (o *CreateazureIntegration200Response) GetParametersOk() (*CreateazureIntegrationRequestParameters, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Parameters, true
-}
-
-// SetParameters sets field value
-func (o *CreateazureIntegration200Response) SetParameters(v CreateazureIntegrationRequestParameters) {
-	o.Parameters = v
-}
-
-func (o CreateazureIntegration200Response) MarshalJSON() ([]byte, error) {
+func (o GetakamaiIntegration200Response) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -420,7 +394,7 @@ func (o CreateazureIntegration200Response) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CreateazureIntegration200Response) ToMap() (map[string]interface{}, error) {
+func (o GetakamaiIntegration200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["name"] = o.Name
@@ -440,7 +414,6 @@ func (o CreateazureIntegration200Response) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.Location) {
 		toSerialize["location"] = o.Location
 	}
-	toSerialize["parameters"] = o.Parameters
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -449,7 +422,7 @@ func (o CreateazureIntegration200Response) ToMap() (map[string]interface{}, erro
 	return toSerialize, nil
 }
 
-func (o *CreateazureIntegration200Response) UnmarshalJSON(data []byte) (err error) {
+func (o *GetakamaiIntegration200Response) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -463,7 +436,6 @@ func (o *CreateazureIntegration200Response) UnmarshalJSON(data []byte) (err erro
 		"validationErrors",
 		"organizationId",
 		"projects",
-		"parameters",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -480,15 +452,15 @@ func (o *CreateazureIntegration200Response) UnmarshalJSON(data []byte) (err erro
 		}
 	}
 
-	varCreateazureIntegration200Response := _CreateazureIntegration200Response{}
+	varGetakamaiIntegration200Response := _GetakamaiIntegration200Response{}
 
-	err = json.Unmarshal(data, &varCreateazureIntegration200Response)
+	err = json.Unmarshal(data, &varGetakamaiIntegration200Response)
 
 	if err != nil {
 		return err
 	}
 
-	*o = CreateazureIntegration200Response(varCreateazureIntegration200Response)
+	*o = GetakamaiIntegration200Response(varGetakamaiIntegration200Response)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -505,45 +477,44 @@ func (o *CreateazureIntegration200Response) UnmarshalJSON(data []byte) (err erro
 		delete(additionalProperties, "organizationId")
 		delete(additionalProperties, "projects")
 		delete(additionalProperties, "location")
-		delete(additionalProperties, "parameters")
 		o.AdditionalProperties = additionalProperties
 	}
 
 	return err
 }
 
-type NullableCreateazureIntegration200Response struct {
-	value *CreateazureIntegration200Response
+type NullableGetakamaiIntegration200Response struct {
+	value *GetakamaiIntegration200Response
 	isSet bool
 }
 
-func (v NullableCreateazureIntegration200Response) Get() *CreateazureIntegration200Response {
+func (v NullableGetakamaiIntegration200Response) Get() *GetakamaiIntegration200Response {
 	return v.value
 }
 
-func (v *NullableCreateazureIntegration200Response) Set(val *CreateazureIntegration200Response) {
+func (v *NullableGetakamaiIntegration200Response) Set(val *GetakamaiIntegration200Response) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCreateazureIntegration200Response) IsSet() bool {
+func (v NullableGetakamaiIntegration200Response) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCreateazureIntegration200Response) Unset() {
+func (v *NullableGetakamaiIntegration200Response) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCreateazureIntegration200Response(val *CreateazureIntegration200Response) *NullableCreateazureIntegration200Response {
-	return &NullableCreateazureIntegration200Response{value: val, isSet: true}
+func NewNullableGetakamaiIntegration200Response(val *GetakamaiIntegration200Response) *NullableGetakamaiIntegration200Response {
+	return &NullableGetakamaiIntegration200Response{value: val, isSet: true}
 }
 
-func (v NullableCreateazureIntegration200Response) MarshalJSON() ([]byte, error) {
+func (v NullableGetakamaiIntegration200Response) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCreateazureIntegration200Response) UnmarshalJSON(src []byte) error {
+func (v *NullableGetakamaiIntegration200Response) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

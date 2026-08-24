@@ -42,8 +42,8 @@ type CreatecustomIntegration200Response struct {
 	OrganizationId string `json:"organizationId"`
 	// The projects of the integration
 	Projects             []ListProjects200ResponseDataInner       `json:"projects"`
-	Parameters           CreatecustomIntegrationRequestParameters `json:"parameters"`
 	Location             *LocationDetailed                        `json:"location,omitempty"`
+	Parameters           CreatecustomIntegrationRequestParameters `json:"parameters"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -356,30 +356,6 @@ func (o *CreatecustomIntegration200Response) SetProjects(v []ListProjects200Resp
 	o.Projects = v
 }
 
-// GetParameters returns the Parameters field value
-func (o *CreatecustomIntegration200Response) GetParameters() CreatecustomIntegrationRequestParameters {
-	if o == nil {
-		var ret CreatecustomIntegrationRequestParameters
-		return ret
-	}
-
-	return o.Parameters
-}
-
-// GetParametersOk returns a tuple with the Parameters field value
-// and a boolean to check if the value has been set.
-func (o *CreatecustomIntegration200Response) GetParametersOk() (*CreatecustomIntegrationRequestParameters, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Parameters, true
-}
-
-// SetParameters sets field value
-func (o *CreatecustomIntegration200Response) SetParameters(v CreatecustomIntegrationRequestParameters) {
-	o.Parameters = v
-}
-
 // GetLocation returns the Location field value if set, zero value otherwise.
 func (o *CreatecustomIntegration200Response) GetLocation() LocationDetailed {
 	if o == nil || IsNil(o.Location) {
@@ -412,6 +388,30 @@ func (o *CreatecustomIntegration200Response) SetLocation(v LocationDetailed) {
 	o.Location = &v
 }
 
+// GetParameters returns the Parameters field value
+func (o *CreatecustomIntegration200Response) GetParameters() CreatecustomIntegrationRequestParameters {
+	if o == nil {
+		var ret CreatecustomIntegrationRequestParameters
+		return ret
+	}
+
+	return o.Parameters
+}
+
+// GetParametersOk returns a tuple with the Parameters field value
+// and a boolean to check if the value has been set.
+func (o *CreatecustomIntegration200Response) GetParametersOk() (*CreatecustomIntegrationRequestParameters, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Parameters, true
+}
+
+// SetParameters sets field value
+func (o *CreatecustomIntegration200Response) SetParameters(v CreatecustomIntegrationRequestParameters) {
+	o.Parameters = v
+}
+
 func (o CreatecustomIntegration200Response) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -437,10 +437,10 @@ func (o CreatecustomIntegration200Response) ToMap() (map[string]interface{}, err
 	toSerialize["validationErrors"] = o.ValidationErrors
 	toSerialize["organizationId"] = o.OrganizationId
 	toSerialize["projects"] = o.Projects
-	toSerialize["parameters"] = o.Parameters
 	if !IsNil(o.Location) {
 		toSerialize["location"] = o.Location
 	}
+	toSerialize["parameters"] = o.Parameters
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -504,8 +504,8 @@ func (o *CreatecustomIntegration200Response) UnmarshalJSON(data []byte) (err err
 		delete(additionalProperties, "validationErrors")
 		delete(additionalProperties, "organizationId")
 		delete(additionalProperties, "projects")
-		delete(additionalProperties, "parameters")
 		delete(additionalProperties, "location")
+		delete(additionalProperties, "parameters")
 		o.AdditionalProperties = additionalProperties
 	}
 
