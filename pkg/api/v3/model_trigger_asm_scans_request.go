@@ -19,7 +19,7 @@ var _ MappedNullable = &TriggerAsmScansRequest{}
 
 // TriggerAsmScansRequest struct for TriggerAsmScansRequest
 type TriggerAsmScansRequest struct {
-	Where                *TriggerAsmScansRequestWhere `json:"where,omitempty"`
+	Where                *BulkUpdateAssetsRequestWhere `json:"where,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -43,9 +43,9 @@ func NewTriggerAsmScansRequestWithDefaults() *TriggerAsmScansRequest {
 }
 
 // GetWhere returns the Where field value if set, zero value otherwise.
-func (o *TriggerAsmScansRequest) GetWhere() TriggerAsmScansRequestWhere {
+func (o *TriggerAsmScansRequest) GetWhere() BulkUpdateAssetsRequestWhere {
 	if o == nil || IsNil(o.Where) {
-		var ret TriggerAsmScansRequestWhere
+		var ret BulkUpdateAssetsRequestWhere
 		return ret
 	}
 	return *o.Where
@@ -53,7 +53,7 @@ func (o *TriggerAsmScansRequest) GetWhere() TriggerAsmScansRequestWhere {
 
 // GetWhereOk returns a tuple with the Where field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TriggerAsmScansRequest) GetWhereOk() (*TriggerAsmScansRequestWhere, bool) {
+func (o *TriggerAsmScansRequest) GetWhereOk() (*BulkUpdateAssetsRequestWhere, bool) {
 	if o == nil || IsNil(o.Where) {
 		return nil, false
 	}
@@ -69,8 +69,8 @@ func (o *TriggerAsmScansRequest) HasWhere() bool {
 	return false
 }
 
-// SetWhere gets a reference to the given TriggerAsmScansRequestWhere and assigns it to the Where field.
-func (o *TriggerAsmScansRequest) SetWhere(v TriggerAsmScansRequestWhere) {
+// SetWhere gets a reference to the given BulkUpdateAssetsRequestWhere and assigns it to the Where field.
+func (o *TriggerAsmScansRequest) SetWhere(v BulkUpdateAssetsRequestWhere) {
 	o.Where = &v
 }
 

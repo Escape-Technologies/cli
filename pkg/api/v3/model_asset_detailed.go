@@ -48,7 +48,7 @@ type AssetDetailed struct {
 	// IDs of the projects this asset is assigned to
 	ProjectIds    []string                 `json:"projectIds"`
 	FirstSeenScan *ScanSummarized          `json:"firstSeenScan,omitempty"`
-	LastSeenScan  *ScanSummarized1         `json:"lastSeenScan,omitempty"`
+	LastSeenScan  *ScanSummarized          `json:"lastSeenScan,omitempty"`
 	Service       *AssetServiceDetailed    `json:"service,omitempty"`
 	Frontend      *AssetFrontendDetailed   `json:"frontend,omitempty"`
 	Host          *AssetHostDetailed       `json:"host,omitempty"`
@@ -522,9 +522,9 @@ func (o *AssetDetailed) SetFirstSeenScan(v ScanSummarized) {
 }
 
 // GetLastSeenScan returns the LastSeenScan field value if set, zero value otherwise.
-func (o *AssetDetailed) GetLastSeenScan() ScanSummarized1 {
+func (o *AssetDetailed) GetLastSeenScan() ScanSummarized {
 	if o == nil || IsNil(o.LastSeenScan) {
-		var ret ScanSummarized1
+		var ret ScanSummarized
 		return ret
 	}
 	return *o.LastSeenScan
@@ -532,7 +532,7 @@ func (o *AssetDetailed) GetLastSeenScan() ScanSummarized1 {
 
 // GetLastSeenScanOk returns a tuple with the LastSeenScan field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AssetDetailed) GetLastSeenScanOk() (*ScanSummarized1, bool) {
+func (o *AssetDetailed) GetLastSeenScanOk() (*ScanSummarized, bool) {
 	if o == nil || IsNil(o.LastSeenScan) {
 		return nil, false
 	}
@@ -548,8 +548,8 @@ func (o *AssetDetailed) HasLastSeenScan() bool {
 	return false
 }
 
-// SetLastSeenScan gets a reference to the given ScanSummarized1 and assigns it to the LastSeenScan field.
-func (o *AssetDetailed) SetLastSeenScan(v ScanSummarized1) {
+// SetLastSeenScan gets a reference to the given ScanSummarized and assigns it to the LastSeenScan field.
+func (o *AssetDetailed) SetLastSeenScan(v ScanSummarized) {
 	o.LastSeenScan = &v
 }
 

@@ -166,7 +166,7 @@ func (r ApiCreateawsAccountIntegrationRequest) CreateawsAccountIntegrationReques
 	return r
 }
 
-func (r ApiCreateawsAccountIntegrationRequest) Execute() (*CreateawsAccountIntegration200Response, *http.Response, error) {
+func (r ApiCreateawsAccountIntegrationRequest) Execute() (*CreateakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.CreateawsAccountIntegrationExecute(r)
 }
 
@@ -187,13 +187,13 @@ func (a *IntegrationsAPIService) CreateawsAccountIntegration(ctx context.Context
 
 // Execute executes the request
 //
-//	@return CreateawsAccountIntegration200Response
-func (a *IntegrationsAPIService) CreateawsAccountIntegrationExecute(r ApiCreateawsAccountIntegrationRequest) (*CreateawsAccountIntegration200Response, *http.Response, error) {
+//	@return CreateakamaiIntegration200Response
+func (a *IntegrationsAPIService) CreateawsAccountIntegrationExecute(r ApiCreateawsAccountIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreateawsAccountIntegration200Response
+		localVarReturnValue *CreateakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.CreateawsAccountIntegration")
@@ -298,7 +298,7 @@ func (r ApiCreateawsIntegrationRequest) CreateawsIntegrationRequest(createawsInt
 	return r
 }
 
-func (r ApiCreateawsIntegrationRequest) Execute() (*CreateawsIntegration200Response, *http.Response, error) {
+func (r ApiCreateawsIntegrationRequest) Execute() (*CreateakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.CreateawsIntegrationExecute(r)
 }
 
@@ -319,13 +319,13 @@ func (a *IntegrationsAPIService) CreateawsIntegration(ctx context.Context) ApiCr
 
 // Execute executes the request
 //
-//	@return CreateawsIntegration200Response
-func (a *IntegrationsAPIService) CreateawsIntegrationExecute(r ApiCreateawsIntegrationRequest) (*CreateawsIntegration200Response, *http.Response, error) {
+//	@return CreateakamaiIntegration200Response
+func (a *IntegrationsAPIService) CreateawsIntegrationExecute(r ApiCreateawsIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreateawsIntegration200Response
+		localVarReturnValue *CreateakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.CreateawsIntegration")
@@ -430,7 +430,7 @@ func (r ApiCreateazureIntegrationRequest) CreateazureIntegrationRequest(createaz
 	return r
 }
 
-func (r ApiCreateazureIntegrationRequest) Execute() (*CreateazureIntegration200Response, *http.Response, error) {
+func (r ApiCreateazureIntegrationRequest) Execute() (*CreateakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.CreateazureIntegrationExecute(r)
 }
 
@@ -451,13 +451,13 @@ func (a *IntegrationsAPIService) CreateazureIntegration(ctx context.Context) Api
 
 // Execute executes the request
 //
-//	@return CreateazureIntegration200Response
-func (a *IntegrationsAPIService) CreateazureIntegrationExecute(r ApiCreateazureIntegrationRequest) (*CreateazureIntegration200Response, *http.Response, error) {
+//	@return CreateakamaiIntegration200Response
+func (a *IntegrationsAPIService) CreateazureIntegrationExecute(r ApiCreateazureIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreateazureIntegration200Response
+		localVarReturnValue *CreateakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.CreateazureIntegration")
@@ -562,7 +562,7 @@ func (r ApiCreatebitbucketIntegrationRequest) CreatebitbucketIntegrationRequest(
 	return r
 }
 
-func (r ApiCreatebitbucketIntegrationRequest) Execute() (*CreatebitbucketIntegration200Response, *http.Response, error) {
+func (r ApiCreatebitbucketIntegrationRequest) Execute() (*CreateakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.CreatebitbucketIntegrationExecute(r)
 }
 
@@ -583,13 +583,13 @@ func (a *IntegrationsAPIService) CreatebitbucketIntegration(ctx context.Context)
 
 // Execute executes the request
 //
-//	@return CreatebitbucketIntegration200Response
-func (a *IntegrationsAPIService) CreatebitbucketIntegrationExecute(r ApiCreatebitbucketIntegrationRequest) (*CreatebitbucketIntegration200Response, *http.Response, error) {
+//	@return CreateakamaiIntegration200Response
+func (a *IntegrationsAPIService) CreatebitbucketIntegrationExecute(r ApiCreatebitbucketIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreatebitbucketIntegration200Response
+		localVarReturnValue *CreateakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.CreatebitbucketIntegration")
@@ -694,7 +694,7 @@ func (r ApiCreatecloudflareIntegrationRequest) CreatecloudflareIntegrationReques
 	return r
 }
 
-func (r ApiCreatecloudflareIntegrationRequest) Execute() (*CreatecloudflareIntegration200Response, *http.Response, error) {
+func (r ApiCreatecloudflareIntegrationRequest) Execute() (*CreateakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.CreatecloudflareIntegrationExecute(r)
 }
 
@@ -715,13 +715,13 @@ func (a *IntegrationsAPIService) CreatecloudflareIntegration(ctx context.Context
 
 // Execute executes the request
 //
-//	@return CreatecloudflareIntegration200Response
-func (a *IntegrationsAPIService) CreatecloudflareIntegrationExecute(r ApiCreatecloudflareIntegrationRequest) (*CreatecloudflareIntegration200Response, *http.Response, error) {
+//	@return CreateakamaiIntegration200Response
+func (a *IntegrationsAPIService) CreatecloudflareIntegrationExecute(r ApiCreatecloudflareIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreatecloudflareIntegration200Response
+		localVarReturnValue *CreateakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.CreatecloudflareIntegration")
@@ -826,7 +826,7 @@ func (r ApiCreatecustomIntegrationRequest) CreatecustomIntegrationRequest(create
 	return r
 }
 
-func (r ApiCreatecustomIntegrationRequest) Execute() (*CreatecustomIntegration200Response, *http.Response, error) {
+func (r ApiCreatecustomIntegrationRequest) Execute() (*CreateakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.CreatecustomIntegrationExecute(r)
 }
 
@@ -847,13 +847,13 @@ func (a *IntegrationsAPIService) CreatecustomIntegration(ctx context.Context) Ap
 
 // Execute executes the request
 //
-//	@return CreatecustomIntegration200Response
-func (a *IntegrationsAPIService) CreatecustomIntegrationExecute(r ApiCreatecustomIntegrationRequest) (*CreatecustomIntegration200Response, *http.Response, error) {
+//	@return CreateakamaiIntegration200Response
+func (a *IntegrationsAPIService) CreatecustomIntegrationExecute(r ApiCreatecustomIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreatecustomIntegration200Response
+		localVarReturnValue *CreateakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.CreatecustomIntegration")
@@ -958,7 +958,7 @@ func (r ApiCreategcpIntegrationRequest) CreategcpIntegrationRequest(creategcpInt
 	return r
 }
 
-func (r ApiCreategcpIntegrationRequest) Execute() (*CreategcpIntegration200Response, *http.Response, error) {
+func (r ApiCreategcpIntegrationRequest) Execute() (*CreateakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.CreategcpIntegrationExecute(r)
 }
 
@@ -979,13 +979,13 @@ func (a *IntegrationsAPIService) CreategcpIntegration(ctx context.Context) ApiCr
 
 // Execute executes the request
 //
-//	@return CreategcpIntegration200Response
-func (a *IntegrationsAPIService) CreategcpIntegrationExecute(r ApiCreategcpIntegrationRequest) (*CreategcpIntegration200Response, *http.Response, error) {
+//	@return CreateakamaiIntegration200Response
+func (a *IntegrationsAPIService) CreategcpIntegrationExecute(r ApiCreategcpIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreategcpIntegration200Response
+		localVarReturnValue *CreateakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.CreategcpIntegration")
@@ -1090,7 +1090,7 @@ func (r ApiCreategithubIntegrationRequest) CreatecloudflareIntegrationRequest(cr
 	return r
 }
 
-func (r ApiCreategithubIntegrationRequest) Execute() (*CreatecloudflareIntegration200Response, *http.Response, error) {
+func (r ApiCreategithubIntegrationRequest) Execute() (*CreateakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.CreategithubIntegrationExecute(r)
 }
 
@@ -1111,13 +1111,13 @@ func (a *IntegrationsAPIService) CreategithubIntegration(ctx context.Context) Ap
 
 // Execute executes the request
 //
-//	@return CreatecloudflareIntegration200Response
-func (a *IntegrationsAPIService) CreategithubIntegrationExecute(r ApiCreategithubIntegrationRequest) (*CreatecloudflareIntegration200Response, *http.Response, error) {
+//	@return CreateakamaiIntegration200Response
+func (a *IntegrationsAPIService) CreategithubIntegrationExecute(r ApiCreategithubIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreatecloudflareIntegration200Response
+		localVarReturnValue *CreateakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.CreategithubIntegration")
@@ -1222,7 +1222,7 @@ func (r ApiCreategitlabIntegrationRequest) CreategitlabIntegrationRequest(create
 	return r
 }
 
-func (r ApiCreategitlabIntegrationRequest) Execute() (*CreategitlabIntegration200Response, *http.Response, error) {
+func (r ApiCreategitlabIntegrationRequest) Execute() (*CreateakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.CreategitlabIntegrationExecute(r)
 }
 
@@ -1243,13 +1243,13 @@ func (a *IntegrationsAPIService) CreategitlabIntegration(ctx context.Context) Ap
 
 // Execute executes the request
 //
-//	@return CreategitlabIntegration200Response
-func (a *IntegrationsAPIService) CreategitlabIntegrationExecute(r ApiCreategitlabIntegrationRequest) (*CreategitlabIntegration200Response, *http.Response, error) {
+//	@return CreateakamaiIntegration200Response
+func (a *IntegrationsAPIService) CreategitlabIntegrationExecute(r ApiCreategitlabIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreategitlabIntegration200Response
+		localVarReturnValue *CreateakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.CreategitlabIntegration")
@@ -1354,7 +1354,7 @@ func (r ApiCreatejiraIntegrationRequest) CreatejiraIntegrationRequest(createjira
 	return r
 }
 
-func (r ApiCreatejiraIntegrationRequest) Execute() (*CreatejiraIntegration200Response, *http.Response, error) {
+func (r ApiCreatejiraIntegrationRequest) Execute() (*CreateakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.CreatejiraIntegrationExecute(r)
 }
 
@@ -1375,13 +1375,13 @@ func (a *IntegrationsAPIService) CreatejiraIntegration(ctx context.Context) ApiC
 
 // Execute executes the request
 //
-//	@return CreatejiraIntegration200Response
-func (a *IntegrationsAPIService) CreatejiraIntegrationExecute(r ApiCreatejiraIntegrationRequest) (*CreatejiraIntegration200Response, *http.Response, error) {
+//	@return CreateakamaiIntegration200Response
+func (a *IntegrationsAPIService) CreatejiraIntegrationExecute(r ApiCreatejiraIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreatejiraIntegration200Response
+		localVarReturnValue *CreateakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.CreatejiraIntegration")
@@ -1486,7 +1486,7 @@ func (r ApiCreatekubernetesIntegrationRequest) CreatekubernetesIntegrationReques
 	return r
 }
 
-func (r ApiCreatekubernetesIntegrationRequest) Execute() (*CreatekubernetesIntegration200Response, *http.Response, error) {
+func (r ApiCreatekubernetesIntegrationRequest) Execute() (*CreateakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.CreatekubernetesIntegrationExecute(r)
 }
 
@@ -1507,13 +1507,13 @@ func (a *IntegrationsAPIService) CreatekubernetesIntegration(ctx context.Context
 
 // Execute executes the request
 //
-//	@return CreatekubernetesIntegration200Response
-func (a *IntegrationsAPIService) CreatekubernetesIntegrationExecute(r ApiCreatekubernetesIntegrationRequest) (*CreatekubernetesIntegration200Response, *http.Response, error) {
+//	@return CreateakamaiIntegration200Response
+func (a *IntegrationsAPIService) CreatekubernetesIntegrationExecute(r ApiCreatekubernetesIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreatekubernetesIntegration200Response
+		localVarReturnValue *CreateakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.CreatekubernetesIntegration")
@@ -1618,7 +1618,7 @@ func (r ApiCreatepostmanIntegrationRequest) CreatecloudflareIntegrationRequest(c
 	return r
 }
 
-func (r ApiCreatepostmanIntegrationRequest) Execute() (*CreatecloudflareIntegration200Response, *http.Response, error) {
+func (r ApiCreatepostmanIntegrationRequest) Execute() (*CreateakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.CreatepostmanIntegrationExecute(r)
 }
 
@@ -1639,13 +1639,13 @@ func (a *IntegrationsAPIService) CreatepostmanIntegration(ctx context.Context) A
 
 // Execute executes the request
 //
-//	@return CreatecloudflareIntegration200Response
-func (a *IntegrationsAPIService) CreatepostmanIntegrationExecute(r ApiCreatepostmanIntegrationRequest) (*CreatecloudflareIntegration200Response, *http.Response, error) {
+//	@return CreateakamaiIntegration200Response
+func (a *IntegrationsAPIService) CreatepostmanIntegrationExecute(r ApiCreatepostmanIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreatecloudflareIntegration200Response
+		localVarReturnValue *CreateakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.CreatepostmanIntegration")
@@ -1750,7 +1750,7 @@ func (r ApiCreatewizIntegrationRequest) CreatewizIntegrationRequest(createwizInt
 	return r
 }
 
-func (r ApiCreatewizIntegrationRequest) Execute() (*CreatewizIntegration200Response, *http.Response, error) {
+func (r ApiCreatewizIntegrationRequest) Execute() (*CreateakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.CreatewizIntegrationExecute(r)
 }
 
@@ -1771,13 +1771,13 @@ func (a *IntegrationsAPIService) CreatewizIntegration(ctx context.Context) ApiCr
 
 // Execute executes the request
 //
-//	@return CreatewizIntegration200Response
-func (a *IntegrationsAPIService) CreatewizIntegrationExecute(r ApiCreatewizIntegrationRequest) (*CreatewizIntegration200Response, *http.Response, error) {
+//	@return CreateakamaiIntegration200Response
+func (a *IntegrationsAPIService) CreatewizIntegrationExecute(r ApiCreatewizIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreatewizIntegration200Response
+		localVarReturnValue *CreateakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.CreatewizIntegration")
@@ -2016,7 +2016,7 @@ type ApiDeleteawsAccountIntegrationRequest struct {
 	id         string
 }
 
-func (r ApiDeleteawsAccountIntegrationRequest) Execute() (*CreateawsAccountIntegration200Response, *http.Response, error) {
+func (r ApiDeleteawsAccountIntegrationRequest) Execute() (*CreateakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.DeleteawsAccountIntegrationExecute(r)
 }
 
@@ -2039,13 +2039,13 @@ func (a *IntegrationsAPIService) DeleteawsAccountIntegration(ctx context.Context
 
 // Execute executes the request
 //
-//	@return CreateawsAccountIntegration200Response
-func (a *IntegrationsAPIService) DeleteawsAccountIntegrationExecute(r ApiDeleteawsAccountIntegrationRequest) (*CreateawsAccountIntegration200Response, *http.Response, error) {
+//	@return CreateakamaiIntegration200Response
+func (a *IntegrationsAPIService) DeleteawsAccountIntegrationExecute(r ApiDeleteawsAccountIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodDelete
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreateawsAccountIntegration200Response
+		localVarReturnValue *CreateakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.DeleteawsAccountIntegration")
@@ -2155,7 +2155,7 @@ type ApiDeleteawsIntegrationRequest struct {
 	id         string
 }
 
-func (r ApiDeleteawsIntegrationRequest) Execute() (*CreateawsIntegration200Response, *http.Response, error) {
+func (r ApiDeleteawsIntegrationRequest) Execute() (*CreateakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.DeleteawsIntegrationExecute(r)
 }
 
@@ -2178,13 +2178,13 @@ func (a *IntegrationsAPIService) DeleteawsIntegration(ctx context.Context, id st
 
 // Execute executes the request
 //
-//	@return CreateawsIntegration200Response
-func (a *IntegrationsAPIService) DeleteawsIntegrationExecute(r ApiDeleteawsIntegrationRequest) (*CreateawsIntegration200Response, *http.Response, error) {
+//	@return CreateakamaiIntegration200Response
+func (a *IntegrationsAPIService) DeleteawsIntegrationExecute(r ApiDeleteawsIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodDelete
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreateawsIntegration200Response
+		localVarReturnValue *CreateakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.DeleteawsIntegration")
@@ -2294,7 +2294,7 @@ type ApiDeleteazureIntegrationRequest struct {
 	id         string
 }
 
-func (r ApiDeleteazureIntegrationRequest) Execute() (*CreateazureIntegration200Response, *http.Response, error) {
+func (r ApiDeleteazureIntegrationRequest) Execute() (*CreateakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.DeleteazureIntegrationExecute(r)
 }
 
@@ -2317,13 +2317,13 @@ func (a *IntegrationsAPIService) DeleteazureIntegration(ctx context.Context, id 
 
 // Execute executes the request
 //
-//	@return CreateazureIntegration200Response
-func (a *IntegrationsAPIService) DeleteazureIntegrationExecute(r ApiDeleteazureIntegrationRequest) (*CreateazureIntegration200Response, *http.Response, error) {
+//	@return CreateakamaiIntegration200Response
+func (a *IntegrationsAPIService) DeleteazureIntegrationExecute(r ApiDeleteazureIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodDelete
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreateazureIntegration200Response
+		localVarReturnValue *CreateakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.DeleteazureIntegration")
@@ -2433,7 +2433,7 @@ type ApiDeletebitbucketIntegrationRequest struct {
 	id         string
 }
 
-func (r ApiDeletebitbucketIntegrationRequest) Execute() (*CreatebitbucketIntegration200Response, *http.Response, error) {
+func (r ApiDeletebitbucketIntegrationRequest) Execute() (*CreateakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.DeletebitbucketIntegrationExecute(r)
 }
 
@@ -2456,13 +2456,13 @@ func (a *IntegrationsAPIService) DeletebitbucketIntegration(ctx context.Context,
 
 // Execute executes the request
 //
-//	@return CreatebitbucketIntegration200Response
-func (a *IntegrationsAPIService) DeletebitbucketIntegrationExecute(r ApiDeletebitbucketIntegrationRequest) (*CreatebitbucketIntegration200Response, *http.Response, error) {
+//	@return CreateakamaiIntegration200Response
+func (a *IntegrationsAPIService) DeletebitbucketIntegrationExecute(r ApiDeletebitbucketIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodDelete
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreatebitbucketIntegration200Response
+		localVarReturnValue *CreateakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.DeletebitbucketIntegration")
@@ -2572,7 +2572,7 @@ type ApiDeletecloudflareIntegrationRequest struct {
 	id         string
 }
 
-func (r ApiDeletecloudflareIntegrationRequest) Execute() (*CreatecloudflareIntegration200Response, *http.Response, error) {
+func (r ApiDeletecloudflareIntegrationRequest) Execute() (*CreateakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.DeletecloudflareIntegrationExecute(r)
 }
 
@@ -2595,13 +2595,13 @@ func (a *IntegrationsAPIService) DeletecloudflareIntegration(ctx context.Context
 
 // Execute executes the request
 //
-//	@return CreatecloudflareIntegration200Response
-func (a *IntegrationsAPIService) DeletecloudflareIntegrationExecute(r ApiDeletecloudflareIntegrationRequest) (*CreatecloudflareIntegration200Response, *http.Response, error) {
+//	@return CreateakamaiIntegration200Response
+func (a *IntegrationsAPIService) DeletecloudflareIntegrationExecute(r ApiDeletecloudflareIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodDelete
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreatecloudflareIntegration200Response
+		localVarReturnValue *CreateakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.DeletecloudflareIntegration")
@@ -2711,7 +2711,7 @@ type ApiDeletecustomIntegrationRequest struct {
 	id         string
 }
 
-func (r ApiDeletecustomIntegrationRequest) Execute() (*CreatecustomIntegration200Response, *http.Response, error) {
+func (r ApiDeletecustomIntegrationRequest) Execute() (*CreateakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.DeletecustomIntegrationExecute(r)
 }
 
@@ -2734,13 +2734,13 @@ func (a *IntegrationsAPIService) DeletecustomIntegration(ctx context.Context, id
 
 // Execute executes the request
 //
-//	@return CreatecustomIntegration200Response
-func (a *IntegrationsAPIService) DeletecustomIntegrationExecute(r ApiDeletecustomIntegrationRequest) (*CreatecustomIntegration200Response, *http.Response, error) {
+//	@return CreateakamaiIntegration200Response
+func (a *IntegrationsAPIService) DeletecustomIntegrationExecute(r ApiDeletecustomIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodDelete
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreatecustomIntegration200Response
+		localVarReturnValue *CreateakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.DeletecustomIntegration")
@@ -2850,7 +2850,7 @@ type ApiDeletegcpIntegrationRequest struct {
 	id         string
 }
 
-func (r ApiDeletegcpIntegrationRequest) Execute() (*CreategcpIntegration200Response, *http.Response, error) {
+func (r ApiDeletegcpIntegrationRequest) Execute() (*CreateakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.DeletegcpIntegrationExecute(r)
 }
 
@@ -2873,13 +2873,13 @@ func (a *IntegrationsAPIService) DeletegcpIntegration(ctx context.Context, id st
 
 // Execute executes the request
 //
-//	@return CreategcpIntegration200Response
-func (a *IntegrationsAPIService) DeletegcpIntegrationExecute(r ApiDeletegcpIntegrationRequest) (*CreategcpIntegration200Response, *http.Response, error) {
+//	@return CreateakamaiIntegration200Response
+func (a *IntegrationsAPIService) DeletegcpIntegrationExecute(r ApiDeletegcpIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodDelete
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreategcpIntegration200Response
+		localVarReturnValue *CreateakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.DeletegcpIntegration")
@@ -2989,7 +2989,7 @@ type ApiDeletegithubIntegrationRequest struct {
 	id         string
 }
 
-func (r ApiDeletegithubIntegrationRequest) Execute() (*CreatecloudflareIntegration200Response, *http.Response, error) {
+func (r ApiDeletegithubIntegrationRequest) Execute() (*CreateakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.DeletegithubIntegrationExecute(r)
 }
 
@@ -3012,13 +3012,13 @@ func (a *IntegrationsAPIService) DeletegithubIntegration(ctx context.Context, id
 
 // Execute executes the request
 //
-//	@return CreatecloudflareIntegration200Response
-func (a *IntegrationsAPIService) DeletegithubIntegrationExecute(r ApiDeletegithubIntegrationRequest) (*CreatecloudflareIntegration200Response, *http.Response, error) {
+//	@return CreateakamaiIntegration200Response
+func (a *IntegrationsAPIService) DeletegithubIntegrationExecute(r ApiDeletegithubIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodDelete
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreatecloudflareIntegration200Response
+		localVarReturnValue *CreateakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.DeletegithubIntegration")
@@ -3128,7 +3128,7 @@ type ApiDeletegitlabIntegrationRequest struct {
 	id         string
 }
 
-func (r ApiDeletegitlabIntegrationRequest) Execute() (*CreategitlabIntegration200Response, *http.Response, error) {
+func (r ApiDeletegitlabIntegrationRequest) Execute() (*CreateakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.DeletegitlabIntegrationExecute(r)
 }
 
@@ -3151,13 +3151,13 @@ func (a *IntegrationsAPIService) DeletegitlabIntegration(ctx context.Context, id
 
 // Execute executes the request
 //
-//	@return CreategitlabIntegration200Response
-func (a *IntegrationsAPIService) DeletegitlabIntegrationExecute(r ApiDeletegitlabIntegrationRequest) (*CreategitlabIntegration200Response, *http.Response, error) {
+//	@return CreateakamaiIntegration200Response
+func (a *IntegrationsAPIService) DeletegitlabIntegrationExecute(r ApiDeletegitlabIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodDelete
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreategitlabIntegration200Response
+		localVarReturnValue *CreateakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.DeletegitlabIntegration")
@@ -3267,7 +3267,7 @@ type ApiDeletejiraIntegrationRequest struct {
 	id         string
 }
 
-func (r ApiDeletejiraIntegrationRequest) Execute() (*CreatejiraIntegration200Response, *http.Response, error) {
+func (r ApiDeletejiraIntegrationRequest) Execute() (*CreateakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.DeletejiraIntegrationExecute(r)
 }
 
@@ -3290,13 +3290,13 @@ func (a *IntegrationsAPIService) DeletejiraIntegration(ctx context.Context, id s
 
 // Execute executes the request
 //
-//	@return CreatejiraIntegration200Response
-func (a *IntegrationsAPIService) DeletejiraIntegrationExecute(r ApiDeletejiraIntegrationRequest) (*CreatejiraIntegration200Response, *http.Response, error) {
+//	@return CreateakamaiIntegration200Response
+func (a *IntegrationsAPIService) DeletejiraIntegrationExecute(r ApiDeletejiraIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodDelete
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreatejiraIntegration200Response
+		localVarReturnValue *CreateakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.DeletejiraIntegration")
@@ -3406,7 +3406,7 @@ type ApiDeletekubernetesIntegrationRequest struct {
 	id         string
 }
 
-func (r ApiDeletekubernetesIntegrationRequest) Execute() (*CreatekubernetesIntegration200Response, *http.Response, error) {
+func (r ApiDeletekubernetesIntegrationRequest) Execute() (*CreateakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.DeletekubernetesIntegrationExecute(r)
 }
 
@@ -3429,13 +3429,13 @@ func (a *IntegrationsAPIService) DeletekubernetesIntegration(ctx context.Context
 
 // Execute executes the request
 //
-//	@return CreatekubernetesIntegration200Response
-func (a *IntegrationsAPIService) DeletekubernetesIntegrationExecute(r ApiDeletekubernetesIntegrationRequest) (*CreatekubernetesIntegration200Response, *http.Response, error) {
+//	@return CreateakamaiIntegration200Response
+func (a *IntegrationsAPIService) DeletekubernetesIntegrationExecute(r ApiDeletekubernetesIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodDelete
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreatekubernetesIntegration200Response
+		localVarReturnValue *CreateakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.DeletekubernetesIntegration")
@@ -3545,7 +3545,7 @@ type ApiDeletepostmanIntegrationRequest struct {
 	id         string
 }
 
-func (r ApiDeletepostmanIntegrationRequest) Execute() (*CreatecloudflareIntegration200Response, *http.Response, error) {
+func (r ApiDeletepostmanIntegrationRequest) Execute() (*CreateakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.DeletepostmanIntegrationExecute(r)
 }
 
@@ -3568,13 +3568,13 @@ func (a *IntegrationsAPIService) DeletepostmanIntegration(ctx context.Context, i
 
 // Execute executes the request
 //
-//	@return CreatecloudflareIntegration200Response
-func (a *IntegrationsAPIService) DeletepostmanIntegrationExecute(r ApiDeletepostmanIntegrationRequest) (*CreatecloudflareIntegration200Response, *http.Response, error) {
+//	@return CreateakamaiIntegration200Response
+func (a *IntegrationsAPIService) DeletepostmanIntegrationExecute(r ApiDeletepostmanIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodDelete
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreatecloudflareIntegration200Response
+		localVarReturnValue *CreateakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.DeletepostmanIntegration")
@@ -3684,7 +3684,7 @@ type ApiDeletewizIntegrationRequest struct {
 	id         string
 }
 
-func (r ApiDeletewizIntegrationRequest) Execute() (*CreatewizIntegration200Response, *http.Response, error) {
+func (r ApiDeletewizIntegrationRequest) Execute() (*CreateakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.DeletewizIntegrationExecute(r)
 }
 
@@ -3707,13 +3707,13 @@ func (a *IntegrationsAPIService) DeletewizIntegration(ctx context.Context, id st
 
 // Execute executes the request
 //
-//	@return CreatewizIntegration200Response
-func (a *IntegrationsAPIService) DeletewizIntegrationExecute(r ApiDeletewizIntegrationRequest) (*CreatewizIntegration200Response, *http.Response, error) {
+//	@return CreateakamaiIntegration200Response
+func (a *IntegrationsAPIService) DeletewizIntegrationExecute(r ApiDeletewizIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodDelete
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreatewizIntegration200Response
+		localVarReturnValue *CreateakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.DeletewizIntegration")
@@ -3823,14 +3823,14 @@ type ApiGetakamaiIntegrationRequest struct {
 	id         string
 }
 
-func (r ApiGetakamaiIntegrationRequest) Execute() (*GetakamaiIntegration200Response, *http.Response, error) {
+func (r ApiGetakamaiIntegrationRequest) Execute() (*CreateakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.GetakamaiIntegrationExecute(r)
 }
 
 /*
 GetakamaiIntegration Get Akamai integration.
 
-Get a Akamai integration. Credentials and other parameters are omitted.
+Get a Akamai integration.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The integration ID
@@ -3846,13 +3846,13 @@ func (a *IntegrationsAPIService) GetakamaiIntegration(ctx context.Context, id st
 
 // Execute executes the request
 //
-//	@return GetakamaiIntegration200Response
-func (a *IntegrationsAPIService) GetakamaiIntegrationExecute(r ApiGetakamaiIntegrationRequest) (*GetakamaiIntegration200Response, *http.Response, error) {
+//	@return CreateakamaiIntegration200Response
+func (a *IntegrationsAPIService) GetakamaiIntegrationExecute(r ApiGetakamaiIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *GetakamaiIntegration200Response
+		localVarReturnValue *CreateakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.GetakamaiIntegration")
@@ -3951,14 +3951,14 @@ type ApiGetawsAccountIntegrationRequest struct {
 	id         string
 }
 
-func (r ApiGetawsAccountIntegrationRequest) Execute() (*GetakamaiIntegration200Response, *http.Response, error) {
+func (r ApiGetawsAccountIntegrationRequest) Execute() (*CreateakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.GetawsAccountIntegrationExecute(r)
 }
 
 /*
 GetawsAccountIntegration Get AWS Account (Legacy) integration.
 
-Get a AWS Account (Legacy) integration. Credentials and other parameters are omitted.
+Get a AWS Account (Legacy) integration.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The integration ID
@@ -3974,13 +3974,13 @@ func (a *IntegrationsAPIService) GetawsAccountIntegration(ctx context.Context, i
 
 // Execute executes the request
 //
-//	@return GetakamaiIntegration200Response
-func (a *IntegrationsAPIService) GetawsAccountIntegrationExecute(r ApiGetawsAccountIntegrationRequest) (*GetakamaiIntegration200Response, *http.Response, error) {
+//	@return CreateakamaiIntegration200Response
+func (a *IntegrationsAPIService) GetawsAccountIntegrationExecute(r ApiGetawsAccountIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *GetakamaiIntegration200Response
+		localVarReturnValue *CreateakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.GetawsAccountIntegration")
@@ -4079,14 +4079,14 @@ type ApiGetawsIntegrationRequest struct {
 	id         string
 }
 
-func (r ApiGetawsIntegrationRequest) Execute() (*GetakamaiIntegration200Response, *http.Response, error) {
+func (r ApiGetawsIntegrationRequest) Execute() (*CreateakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.GetawsIntegrationExecute(r)
 }
 
 /*
 GetawsIntegration Get AWS integration.
 
-Get a AWS integration. Credentials and other parameters are omitted.
+Get a AWS integration.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The integration ID
@@ -4102,13 +4102,13 @@ func (a *IntegrationsAPIService) GetawsIntegration(ctx context.Context, id strin
 
 // Execute executes the request
 //
-//	@return GetakamaiIntegration200Response
-func (a *IntegrationsAPIService) GetawsIntegrationExecute(r ApiGetawsIntegrationRequest) (*GetakamaiIntegration200Response, *http.Response, error) {
+//	@return CreateakamaiIntegration200Response
+func (a *IntegrationsAPIService) GetawsIntegrationExecute(r ApiGetawsIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *GetakamaiIntegration200Response
+		localVarReturnValue *CreateakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.GetawsIntegration")
@@ -4207,14 +4207,14 @@ type ApiGetazureIntegrationRequest struct {
 	id         string
 }
 
-func (r ApiGetazureIntegrationRequest) Execute() (*GetakamaiIntegration200Response, *http.Response, error) {
+func (r ApiGetazureIntegrationRequest) Execute() (*CreateakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.GetazureIntegrationExecute(r)
 }
 
 /*
 GetazureIntegration Get Azure integration.
 
-Get a Azure integration. Credentials and other parameters are omitted.
+Get a Azure integration.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The integration ID
@@ -4230,13 +4230,13 @@ func (a *IntegrationsAPIService) GetazureIntegration(ctx context.Context, id str
 
 // Execute executes the request
 //
-//	@return GetakamaiIntegration200Response
-func (a *IntegrationsAPIService) GetazureIntegrationExecute(r ApiGetazureIntegrationRequest) (*GetakamaiIntegration200Response, *http.Response, error) {
+//	@return CreateakamaiIntegration200Response
+func (a *IntegrationsAPIService) GetazureIntegrationExecute(r ApiGetazureIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *GetakamaiIntegration200Response
+		localVarReturnValue *CreateakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.GetazureIntegration")
@@ -4335,14 +4335,14 @@ type ApiGetbitbucketIntegrationRequest struct {
 	id         string
 }
 
-func (r ApiGetbitbucketIntegrationRequest) Execute() (*GetakamaiIntegration200Response, *http.Response, error) {
+func (r ApiGetbitbucketIntegrationRequest) Execute() (*CreateakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.GetbitbucketIntegrationExecute(r)
 }
 
 /*
 GetbitbucketIntegration Get Bitbucket integration.
 
-Get a Bitbucket integration. Credentials and other parameters are omitted.
+Get a Bitbucket integration.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The integration ID
@@ -4358,13 +4358,13 @@ func (a *IntegrationsAPIService) GetbitbucketIntegration(ctx context.Context, id
 
 // Execute executes the request
 //
-//	@return GetakamaiIntegration200Response
-func (a *IntegrationsAPIService) GetbitbucketIntegrationExecute(r ApiGetbitbucketIntegrationRequest) (*GetakamaiIntegration200Response, *http.Response, error) {
+//	@return CreateakamaiIntegration200Response
+func (a *IntegrationsAPIService) GetbitbucketIntegrationExecute(r ApiGetbitbucketIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *GetakamaiIntegration200Response
+		localVarReturnValue *CreateakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.GetbitbucketIntegration")
@@ -4463,14 +4463,14 @@ type ApiGetcloudflareIntegrationRequest struct {
 	id         string
 }
 
-func (r ApiGetcloudflareIntegrationRequest) Execute() (*GetakamaiIntegration200Response, *http.Response, error) {
+func (r ApiGetcloudflareIntegrationRequest) Execute() (*CreateakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.GetcloudflareIntegrationExecute(r)
 }
 
 /*
 GetcloudflareIntegration Get Cloudflare integration.
 
-Get a Cloudflare integration. Credentials and other parameters are omitted.
+Get a Cloudflare integration.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The integration ID
@@ -4486,13 +4486,13 @@ func (a *IntegrationsAPIService) GetcloudflareIntegration(ctx context.Context, i
 
 // Execute executes the request
 //
-//	@return GetakamaiIntegration200Response
-func (a *IntegrationsAPIService) GetcloudflareIntegrationExecute(r ApiGetcloudflareIntegrationRequest) (*GetakamaiIntegration200Response, *http.Response, error) {
+//	@return CreateakamaiIntegration200Response
+func (a *IntegrationsAPIService) GetcloudflareIntegrationExecute(r ApiGetcloudflareIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *GetakamaiIntegration200Response
+		localVarReturnValue *CreateakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.GetcloudflareIntegration")
@@ -4591,14 +4591,14 @@ type ApiGetcustomIntegrationRequest struct {
 	id         string
 }
 
-func (r ApiGetcustomIntegrationRequest) Execute() (*GetakamaiIntegration200Response, *http.Response, error) {
+func (r ApiGetcustomIntegrationRequest) Execute() (*CreateakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.GetcustomIntegrationExecute(r)
 }
 
 /*
 GetcustomIntegration Get Custom Integration integration.
 
-Get a Custom Integration integration. Credentials and other parameters are omitted.
+Get a Custom Integration integration.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The integration ID
@@ -4614,13 +4614,13 @@ func (a *IntegrationsAPIService) GetcustomIntegration(ctx context.Context, id st
 
 // Execute executes the request
 //
-//	@return GetakamaiIntegration200Response
-func (a *IntegrationsAPIService) GetcustomIntegrationExecute(r ApiGetcustomIntegrationRequest) (*GetakamaiIntegration200Response, *http.Response, error) {
+//	@return CreateakamaiIntegration200Response
+func (a *IntegrationsAPIService) GetcustomIntegrationExecute(r ApiGetcustomIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *GetakamaiIntegration200Response
+		localVarReturnValue *CreateakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.GetcustomIntegration")
@@ -4719,14 +4719,14 @@ type ApiGetgcpIntegrationRequest struct {
 	id         string
 }
 
-func (r ApiGetgcpIntegrationRequest) Execute() (*GetakamaiIntegration200Response, *http.Response, error) {
+func (r ApiGetgcpIntegrationRequest) Execute() (*CreateakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.GetgcpIntegrationExecute(r)
 }
 
 /*
 GetgcpIntegration Get GCP integration.
 
-Get a GCP integration. Credentials and other parameters are omitted.
+Get a GCP integration.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The integration ID
@@ -4742,13 +4742,13 @@ func (a *IntegrationsAPIService) GetgcpIntegration(ctx context.Context, id strin
 
 // Execute executes the request
 //
-//	@return GetakamaiIntegration200Response
-func (a *IntegrationsAPIService) GetgcpIntegrationExecute(r ApiGetgcpIntegrationRequest) (*GetakamaiIntegration200Response, *http.Response, error) {
+//	@return CreateakamaiIntegration200Response
+func (a *IntegrationsAPIService) GetgcpIntegrationExecute(r ApiGetgcpIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *GetakamaiIntegration200Response
+		localVarReturnValue *CreateakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.GetgcpIntegration")
@@ -4847,14 +4847,14 @@ type ApiGetgithubIntegrationRequest struct {
 	id         string
 }
 
-func (r ApiGetgithubIntegrationRequest) Execute() (*GetakamaiIntegration200Response, *http.Response, error) {
+func (r ApiGetgithubIntegrationRequest) Execute() (*CreateakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.GetgithubIntegrationExecute(r)
 }
 
 /*
 GetgithubIntegration Get GitHub integration.
 
-Get a GitHub integration. Credentials and other parameters are omitted.
+Get a GitHub integration.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The integration ID
@@ -4870,13 +4870,13 @@ func (a *IntegrationsAPIService) GetgithubIntegration(ctx context.Context, id st
 
 // Execute executes the request
 //
-//	@return GetakamaiIntegration200Response
-func (a *IntegrationsAPIService) GetgithubIntegrationExecute(r ApiGetgithubIntegrationRequest) (*GetakamaiIntegration200Response, *http.Response, error) {
+//	@return CreateakamaiIntegration200Response
+func (a *IntegrationsAPIService) GetgithubIntegrationExecute(r ApiGetgithubIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *GetakamaiIntegration200Response
+		localVarReturnValue *CreateakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.GetgithubIntegration")
@@ -4975,14 +4975,14 @@ type ApiGetgitlabIntegrationRequest struct {
 	id         string
 }
 
-func (r ApiGetgitlabIntegrationRequest) Execute() (*GetakamaiIntegration200Response, *http.Response, error) {
+func (r ApiGetgitlabIntegrationRequest) Execute() (*CreateakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.GetgitlabIntegrationExecute(r)
 }
 
 /*
 GetgitlabIntegration Get GitLab integration.
 
-Get a GitLab integration. Credentials and other parameters are omitted.
+Get a GitLab integration.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The integration ID
@@ -4998,13 +4998,13 @@ func (a *IntegrationsAPIService) GetgitlabIntegration(ctx context.Context, id st
 
 // Execute executes the request
 //
-//	@return GetakamaiIntegration200Response
-func (a *IntegrationsAPIService) GetgitlabIntegrationExecute(r ApiGetgitlabIntegrationRequest) (*GetakamaiIntegration200Response, *http.Response, error) {
+//	@return CreateakamaiIntegration200Response
+func (a *IntegrationsAPIService) GetgitlabIntegrationExecute(r ApiGetgitlabIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *GetakamaiIntegration200Response
+		localVarReturnValue *CreateakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.GetgitlabIntegration")
@@ -5103,14 +5103,14 @@ type ApiGetjiraIntegrationRequest struct {
 	id         string
 }
 
-func (r ApiGetjiraIntegrationRequest) Execute() (*GetakamaiIntegration200Response, *http.Response, error) {
+func (r ApiGetjiraIntegrationRequest) Execute() (*CreateakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.GetjiraIntegrationExecute(r)
 }
 
 /*
 GetjiraIntegration Get Jira integration.
 
-Get a Jira integration. Credentials and other parameters are omitted.
+Get a Jira integration.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The integration ID
@@ -5126,13 +5126,13 @@ func (a *IntegrationsAPIService) GetjiraIntegration(ctx context.Context, id stri
 
 // Execute executes the request
 //
-//	@return GetakamaiIntegration200Response
-func (a *IntegrationsAPIService) GetjiraIntegrationExecute(r ApiGetjiraIntegrationRequest) (*GetakamaiIntegration200Response, *http.Response, error) {
+//	@return CreateakamaiIntegration200Response
+func (a *IntegrationsAPIService) GetjiraIntegrationExecute(r ApiGetjiraIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *GetakamaiIntegration200Response
+		localVarReturnValue *CreateakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.GetjiraIntegration")
@@ -5231,14 +5231,14 @@ type ApiGetkubernetesIntegrationRequest struct {
 	id         string
 }
 
-func (r ApiGetkubernetesIntegrationRequest) Execute() (*GetakamaiIntegration200Response, *http.Response, error) {
+func (r ApiGetkubernetesIntegrationRequest) Execute() (*CreateakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.GetkubernetesIntegrationExecute(r)
 }
 
 /*
 GetkubernetesIntegration Get Kubernetes integration.
 
-Get a Kubernetes integration. Credentials and other parameters are omitted.
+Get a Kubernetes integration.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The integration ID
@@ -5254,13 +5254,13 @@ func (a *IntegrationsAPIService) GetkubernetesIntegration(ctx context.Context, i
 
 // Execute executes the request
 //
-//	@return GetakamaiIntegration200Response
-func (a *IntegrationsAPIService) GetkubernetesIntegrationExecute(r ApiGetkubernetesIntegrationRequest) (*GetakamaiIntegration200Response, *http.Response, error) {
+//	@return CreateakamaiIntegration200Response
+func (a *IntegrationsAPIService) GetkubernetesIntegrationExecute(r ApiGetkubernetesIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *GetakamaiIntegration200Response
+		localVarReturnValue *CreateakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.GetkubernetesIntegration")
@@ -5359,14 +5359,14 @@ type ApiGetpostmanIntegrationRequest struct {
 	id         string
 }
 
-func (r ApiGetpostmanIntegrationRequest) Execute() (*GetakamaiIntegration200Response, *http.Response, error) {
+func (r ApiGetpostmanIntegrationRequest) Execute() (*CreateakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.GetpostmanIntegrationExecute(r)
 }
 
 /*
 GetpostmanIntegration Get Postman integration.
 
-Get a Postman integration. Credentials and other parameters are omitted.
+Get a Postman integration.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The integration ID
@@ -5382,13 +5382,13 @@ func (a *IntegrationsAPIService) GetpostmanIntegration(ctx context.Context, id s
 
 // Execute executes the request
 //
-//	@return GetakamaiIntegration200Response
-func (a *IntegrationsAPIService) GetpostmanIntegrationExecute(r ApiGetpostmanIntegrationRequest) (*GetakamaiIntegration200Response, *http.Response, error) {
+//	@return CreateakamaiIntegration200Response
+func (a *IntegrationsAPIService) GetpostmanIntegrationExecute(r ApiGetpostmanIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *GetakamaiIntegration200Response
+		localVarReturnValue *CreateakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.GetpostmanIntegration")
@@ -5487,14 +5487,14 @@ type ApiGetwizIntegrationRequest struct {
 	id         string
 }
 
-func (r ApiGetwizIntegrationRequest) Execute() (*GetakamaiIntegration200Response, *http.Response, error) {
+func (r ApiGetwizIntegrationRequest) Execute() (*CreateakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.GetwizIntegrationExecute(r)
 }
 
 /*
 GetwizIntegration Get Wiz integration.
 
-Get a Wiz integration. Credentials and other parameters are omitted.
+Get a Wiz integration.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The integration ID
@@ -5510,13 +5510,13 @@ func (a *IntegrationsAPIService) GetwizIntegration(ctx context.Context, id strin
 
 // Execute executes the request
 //
-//	@return GetakamaiIntegration200Response
-func (a *IntegrationsAPIService) GetwizIntegrationExecute(r ApiGetwizIntegrationRequest) (*GetakamaiIntegration200Response, *http.Response, error) {
+//	@return CreateakamaiIntegration200Response
+func (a *IntegrationsAPIService) GetwizIntegrationExecute(r ApiGetwizIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *GetakamaiIntegration200Response
+		localVarReturnValue *CreateakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.GetwizIntegration")
@@ -5718,6 +5718,7 @@ func (a *IntegrationsAPIService) ListakamaiIntegrationsExecute(r ApiListakamaiIn
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.sortType != nil {
@@ -5727,6 +5728,7 @@ func (a *IntegrationsAPIService) ListakamaiIntegrationsExecute(r ApiListakamaiIn
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
 		var defaultValue string = "asc"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
 		r.sortDirection = &defaultValue
 	}
 	if r.projectIds != nil {
@@ -5944,6 +5946,7 @@ func (a *IntegrationsAPIService) ListawsAccountIntegrationsExecute(r ApiListawsA
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.sortType != nil {
@@ -5953,6 +5956,7 @@ func (a *IntegrationsAPIService) ListawsAccountIntegrationsExecute(r ApiListawsA
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
 		var defaultValue string = "asc"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
 		r.sortDirection = &defaultValue
 	}
 	if r.projectIds != nil {
@@ -6170,6 +6174,7 @@ func (a *IntegrationsAPIService) ListawsIntegrationsExecute(r ApiListawsIntegrat
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.sortType != nil {
@@ -6179,6 +6184,7 @@ func (a *IntegrationsAPIService) ListawsIntegrationsExecute(r ApiListawsIntegrat
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
 		var defaultValue string = "asc"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
 		r.sortDirection = &defaultValue
 	}
 	if r.projectIds != nil {
@@ -6396,6 +6402,7 @@ func (a *IntegrationsAPIService) ListazureIntegrationsExecute(r ApiListazureInte
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.sortType != nil {
@@ -6405,6 +6412,7 @@ func (a *IntegrationsAPIService) ListazureIntegrationsExecute(r ApiListazureInte
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
 		var defaultValue string = "asc"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
 		r.sortDirection = &defaultValue
 	}
 	if r.projectIds != nil {
@@ -6622,6 +6630,7 @@ func (a *IntegrationsAPIService) ListbitbucketIntegrationsExecute(r ApiListbitbu
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.sortType != nil {
@@ -6631,6 +6640,7 @@ func (a *IntegrationsAPIService) ListbitbucketIntegrationsExecute(r ApiListbitbu
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
 		var defaultValue string = "asc"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
 		r.sortDirection = &defaultValue
 	}
 	if r.projectIds != nil {
@@ -6848,6 +6858,7 @@ func (a *IntegrationsAPIService) ListcloudflareIntegrationsExecute(r ApiListclou
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.sortType != nil {
@@ -6857,6 +6868,7 @@ func (a *IntegrationsAPIService) ListcloudflareIntegrationsExecute(r ApiListclou
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
 		var defaultValue string = "asc"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
 		r.sortDirection = &defaultValue
 	}
 	if r.projectIds != nil {
@@ -7074,6 +7086,7 @@ func (a *IntegrationsAPIService) ListcustomIntegrationsExecute(r ApiListcustomIn
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.sortType != nil {
@@ -7083,6 +7096,7 @@ func (a *IntegrationsAPIService) ListcustomIntegrationsExecute(r ApiListcustomIn
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
 		var defaultValue string = "asc"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
 		r.sortDirection = &defaultValue
 	}
 	if r.projectIds != nil {
@@ -7300,6 +7314,7 @@ func (a *IntegrationsAPIService) ListgcpIntegrationsExecute(r ApiListgcpIntegrat
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.sortType != nil {
@@ -7309,6 +7324,7 @@ func (a *IntegrationsAPIService) ListgcpIntegrationsExecute(r ApiListgcpIntegrat
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
 		var defaultValue string = "asc"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
 		r.sortDirection = &defaultValue
 	}
 	if r.projectIds != nil {
@@ -7526,6 +7542,7 @@ func (a *IntegrationsAPIService) ListgithubIntegrationsExecute(r ApiListgithubIn
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.sortType != nil {
@@ -7535,6 +7552,7 @@ func (a *IntegrationsAPIService) ListgithubIntegrationsExecute(r ApiListgithubIn
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
 		var defaultValue string = "asc"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
 		r.sortDirection = &defaultValue
 	}
 	if r.projectIds != nil {
@@ -7752,6 +7770,7 @@ func (a *IntegrationsAPIService) ListgitlabIntegrationsExecute(r ApiListgitlabIn
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.sortType != nil {
@@ -7761,6 +7780,7 @@ func (a *IntegrationsAPIService) ListgitlabIntegrationsExecute(r ApiListgitlabIn
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
 		var defaultValue string = "asc"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
 		r.sortDirection = &defaultValue
 	}
 	if r.projectIds != nil {
@@ -7978,6 +7998,7 @@ func (a *IntegrationsAPIService) ListjiraIntegrationsExecute(r ApiListjiraIntegr
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.sortType != nil {
@@ -7987,6 +8008,7 @@ func (a *IntegrationsAPIService) ListjiraIntegrationsExecute(r ApiListjiraIntegr
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
 		var defaultValue string = "asc"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
 		r.sortDirection = &defaultValue
 	}
 	if r.projectIds != nil {
@@ -8204,6 +8226,7 @@ func (a *IntegrationsAPIService) ListkubernetesIntegrationsExecute(r ApiListkube
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.sortType != nil {
@@ -8213,6 +8236,7 @@ func (a *IntegrationsAPIService) ListkubernetesIntegrationsExecute(r ApiListkube
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
 		var defaultValue string = "asc"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
 		r.sortDirection = &defaultValue
 	}
 	if r.projectIds != nil {
@@ -8430,6 +8454,7 @@ func (a *IntegrationsAPIService) ListpostmanIntegrationsExecute(r ApiListpostman
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.sortType != nil {
@@ -8439,6 +8464,7 @@ func (a *IntegrationsAPIService) ListpostmanIntegrationsExecute(r ApiListpostman
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
 		var defaultValue string = "asc"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
 		r.sortDirection = &defaultValue
 	}
 	if r.projectIds != nil {
@@ -8656,6 +8682,7 @@ func (a *IntegrationsAPIService) ListwizIntegrationsExecute(r ApiListwizIntegrat
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.sortType != nil {
@@ -8665,6 +8692,7 @@ func (a *IntegrationsAPIService) ListwizIntegrationsExecute(r ApiListwizIntegrat
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
 		var defaultValue string = "asc"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
 		r.sortDirection = &defaultValue
 	}
 	if r.projectIds != nil {
@@ -8921,7 +8949,7 @@ func (r ApiUpdateawsAccountIntegrationRequest) UpdateawsAccountIntegrationReques
 	return r
 }
 
-func (r ApiUpdateawsAccountIntegrationRequest) Execute() (*CreateawsAccountIntegration200Response, *http.Response, error) {
+func (r ApiUpdateawsAccountIntegrationRequest) Execute() (*CreateakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.UpdateawsAccountIntegrationExecute(r)
 }
 
@@ -8944,13 +8972,13 @@ func (a *IntegrationsAPIService) UpdateawsAccountIntegration(ctx context.Context
 
 // Execute executes the request
 //
-//	@return CreateawsAccountIntegration200Response
-func (a *IntegrationsAPIService) UpdateawsAccountIntegrationExecute(r ApiUpdateawsAccountIntegrationRequest) (*CreateawsAccountIntegration200Response, *http.Response, error) {
+//	@return CreateakamaiIntegration200Response
+func (a *IntegrationsAPIService) UpdateawsAccountIntegrationExecute(r ApiUpdateawsAccountIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreateawsAccountIntegration200Response
+		localVarReturnValue *CreateakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.UpdateawsAccountIntegration")
@@ -9057,7 +9085,7 @@ func (r ApiUpdateawsIntegrationRequest) UpdateawsIntegrationRequest(updateawsInt
 	return r
 }
 
-func (r ApiUpdateawsIntegrationRequest) Execute() (*CreateawsIntegration200Response, *http.Response, error) {
+func (r ApiUpdateawsIntegrationRequest) Execute() (*CreateakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.UpdateawsIntegrationExecute(r)
 }
 
@@ -9080,13 +9108,13 @@ func (a *IntegrationsAPIService) UpdateawsIntegration(ctx context.Context, id st
 
 // Execute executes the request
 //
-//	@return CreateawsIntegration200Response
-func (a *IntegrationsAPIService) UpdateawsIntegrationExecute(r ApiUpdateawsIntegrationRequest) (*CreateawsIntegration200Response, *http.Response, error) {
+//	@return CreateakamaiIntegration200Response
+func (a *IntegrationsAPIService) UpdateawsIntegrationExecute(r ApiUpdateawsIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreateawsIntegration200Response
+		localVarReturnValue *CreateakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.UpdateawsIntegration")
@@ -9193,7 +9221,7 @@ func (r ApiUpdateazureIntegrationRequest) UpdateazureIntegrationRequest(updateaz
 	return r
 }
 
-func (r ApiUpdateazureIntegrationRequest) Execute() (*CreateazureIntegration200Response, *http.Response, error) {
+func (r ApiUpdateazureIntegrationRequest) Execute() (*CreateakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.UpdateazureIntegrationExecute(r)
 }
 
@@ -9216,13 +9244,13 @@ func (a *IntegrationsAPIService) UpdateazureIntegration(ctx context.Context, id 
 
 // Execute executes the request
 //
-//	@return CreateazureIntegration200Response
-func (a *IntegrationsAPIService) UpdateazureIntegrationExecute(r ApiUpdateazureIntegrationRequest) (*CreateazureIntegration200Response, *http.Response, error) {
+//	@return CreateakamaiIntegration200Response
+func (a *IntegrationsAPIService) UpdateazureIntegrationExecute(r ApiUpdateazureIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreateazureIntegration200Response
+		localVarReturnValue *CreateakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.UpdateazureIntegration")
@@ -9329,7 +9357,7 @@ func (r ApiUpdatebitbucketIntegrationRequest) UpdatebitbucketIntegrationRequest(
 	return r
 }
 
-func (r ApiUpdatebitbucketIntegrationRequest) Execute() (*CreatebitbucketIntegration200Response, *http.Response, error) {
+func (r ApiUpdatebitbucketIntegrationRequest) Execute() (*CreateakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.UpdatebitbucketIntegrationExecute(r)
 }
 
@@ -9352,13 +9380,13 @@ func (a *IntegrationsAPIService) UpdatebitbucketIntegration(ctx context.Context,
 
 // Execute executes the request
 //
-//	@return CreatebitbucketIntegration200Response
-func (a *IntegrationsAPIService) UpdatebitbucketIntegrationExecute(r ApiUpdatebitbucketIntegrationRequest) (*CreatebitbucketIntegration200Response, *http.Response, error) {
+//	@return CreateakamaiIntegration200Response
+func (a *IntegrationsAPIService) UpdatebitbucketIntegrationExecute(r ApiUpdatebitbucketIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreatebitbucketIntegration200Response
+		localVarReturnValue *CreateakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.UpdatebitbucketIntegration")
@@ -9465,7 +9493,7 @@ func (r ApiUpdatecloudflareIntegrationRequest) UpdatecloudflareIntegrationReques
 	return r
 }
 
-func (r ApiUpdatecloudflareIntegrationRequest) Execute() (*CreatecloudflareIntegration200Response, *http.Response, error) {
+func (r ApiUpdatecloudflareIntegrationRequest) Execute() (*CreateakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.UpdatecloudflareIntegrationExecute(r)
 }
 
@@ -9488,13 +9516,13 @@ func (a *IntegrationsAPIService) UpdatecloudflareIntegration(ctx context.Context
 
 // Execute executes the request
 //
-//	@return CreatecloudflareIntegration200Response
-func (a *IntegrationsAPIService) UpdatecloudflareIntegrationExecute(r ApiUpdatecloudflareIntegrationRequest) (*CreatecloudflareIntegration200Response, *http.Response, error) {
+//	@return CreateakamaiIntegration200Response
+func (a *IntegrationsAPIService) UpdatecloudflareIntegrationExecute(r ApiUpdatecloudflareIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreatecloudflareIntegration200Response
+		localVarReturnValue *CreateakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.UpdatecloudflareIntegration")
@@ -9601,7 +9629,7 @@ func (r ApiUpdatecustomIntegrationRequest) UpdatecustomIntegrationRequest(update
 	return r
 }
 
-func (r ApiUpdatecustomIntegrationRequest) Execute() (*CreatecustomIntegration200Response, *http.Response, error) {
+func (r ApiUpdatecustomIntegrationRequest) Execute() (*CreateakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.UpdatecustomIntegrationExecute(r)
 }
 
@@ -9624,13 +9652,13 @@ func (a *IntegrationsAPIService) UpdatecustomIntegration(ctx context.Context, id
 
 // Execute executes the request
 //
-//	@return CreatecustomIntegration200Response
-func (a *IntegrationsAPIService) UpdatecustomIntegrationExecute(r ApiUpdatecustomIntegrationRequest) (*CreatecustomIntegration200Response, *http.Response, error) {
+//	@return CreateakamaiIntegration200Response
+func (a *IntegrationsAPIService) UpdatecustomIntegrationExecute(r ApiUpdatecustomIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreatecustomIntegration200Response
+		localVarReturnValue *CreateakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.UpdatecustomIntegration")
@@ -9737,7 +9765,7 @@ func (r ApiUpdategcpIntegrationRequest) UpdategcpIntegrationRequest(updategcpInt
 	return r
 }
 
-func (r ApiUpdategcpIntegrationRequest) Execute() (*CreategcpIntegration200Response, *http.Response, error) {
+func (r ApiUpdategcpIntegrationRequest) Execute() (*CreateakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.UpdategcpIntegrationExecute(r)
 }
 
@@ -9760,13 +9788,13 @@ func (a *IntegrationsAPIService) UpdategcpIntegration(ctx context.Context, id st
 
 // Execute executes the request
 //
-//	@return CreategcpIntegration200Response
-func (a *IntegrationsAPIService) UpdategcpIntegrationExecute(r ApiUpdategcpIntegrationRequest) (*CreategcpIntegration200Response, *http.Response, error) {
+//	@return CreateakamaiIntegration200Response
+func (a *IntegrationsAPIService) UpdategcpIntegrationExecute(r ApiUpdategcpIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreategcpIntegration200Response
+		localVarReturnValue *CreateakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.UpdategcpIntegration")
@@ -9873,7 +9901,7 @@ func (r ApiUpdategithubIntegrationRequest) UpdatecloudflareIntegrationRequest(up
 	return r
 }
 
-func (r ApiUpdategithubIntegrationRequest) Execute() (*CreatecloudflareIntegration200Response, *http.Response, error) {
+func (r ApiUpdategithubIntegrationRequest) Execute() (*CreateakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.UpdategithubIntegrationExecute(r)
 }
 
@@ -9896,13 +9924,13 @@ func (a *IntegrationsAPIService) UpdategithubIntegration(ctx context.Context, id
 
 // Execute executes the request
 //
-//	@return CreatecloudflareIntegration200Response
-func (a *IntegrationsAPIService) UpdategithubIntegrationExecute(r ApiUpdategithubIntegrationRequest) (*CreatecloudflareIntegration200Response, *http.Response, error) {
+//	@return CreateakamaiIntegration200Response
+func (a *IntegrationsAPIService) UpdategithubIntegrationExecute(r ApiUpdategithubIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreatecloudflareIntegration200Response
+		localVarReturnValue *CreateakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.UpdategithubIntegration")
@@ -10009,7 +10037,7 @@ func (r ApiUpdategitlabIntegrationRequest) UpdategitlabIntegrationRequest(update
 	return r
 }
 
-func (r ApiUpdategitlabIntegrationRequest) Execute() (*CreategitlabIntegration200Response, *http.Response, error) {
+func (r ApiUpdategitlabIntegrationRequest) Execute() (*CreateakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.UpdategitlabIntegrationExecute(r)
 }
 
@@ -10032,13 +10060,13 @@ func (a *IntegrationsAPIService) UpdategitlabIntegration(ctx context.Context, id
 
 // Execute executes the request
 //
-//	@return CreategitlabIntegration200Response
-func (a *IntegrationsAPIService) UpdategitlabIntegrationExecute(r ApiUpdategitlabIntegrationRequest) (*CreategitlabIntegration200Response, *http.Response, error) {
+//	@return CreateakamaiIntegration200Response
+func (a *IntegrationsAPIService) UpdategitlabIntegrationExecute(r ApiUpdategitlabIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreategitlabIntegration200Response
+		localVarReturnValue *CreateakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.UpdategitlabIntegration")
@@ -10145,7 +10173,7 @@ func (r ApiUpdatejiraIntegrationRequest) UpdatejiraIntegrationRequest(updatejira
 	return r
 }
 
-func (r ApiUpdatejiraIntegrationRequest) Execute() (*CreatejiraIntegration200Response, *http.Response, error) {
+func (r ApiUpdatejiraIntegrationRequest) Execute() (*CreateakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.UpdatejiraIntegrationExecute(r)
 }
 
@@ -10168,13 +10196,13 @@ func (a *IntegrationsAPIService) UpdatejiraIntegration(ctx context.Context, id s
 
 // Execute executes the request
 //
-//	@return CreatejiraIntegration200Response
-func (a *IntegrationsAPIService) UpdatejiraIntegrationExecute(r ApiUpdatejiraIntegrationRequest) (*CreatejiraIntegration200Response, *http.Response, error) {
+//	@return CreateakamaiIntegration200Response
+func (a *IntegrationsAPIService) UpdatejiraIntegrationExecute(r ApiUpdatejiraIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreatejiraIntegration200Response
+		localVarReturnValue *CreateakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.UpdatejiraIntegration")
@@ -10281,7 +10309,7 @@ func (r ApiUpdatekubernetesIntegrationRequest) UpdatekubernetesIntegrationReques
 	return r
 }
 
-func (r ApiUpdatekubernetesIntegrationRequest) Execute() (*CreatekubernetesIntegration200Response, *http.Response, error) {
+func (r ApiUpdatekubernetesIntegrationRequest) Execute() (*CreateakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.UpdatekubernetesIntegrationExecute(r)
 }
 
@@ -10304,13 +10332,13 @@ func (a *IntegrationsAPIService) UpdatekubernetesIntegration(ctx context.Context
 
 // Execute executes the request
 //
-//	@return CreatekubernetesIntegration200Response
-func (a *IntegrationsAPIService) UpdatekubernetesIntegrationExecute(r ApiUpdatekubernetesIntegrationRequest) (*CreatekubernetesIntegration200Response, *http.Response, error) {
+//	@return CreateakamaiIntegration200Response
+func (a *IntegrationsAPIService) UpdatekubernetesIntegrationExecute(r ApiUpdatekubernetesIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreatekubernetesIntegration200Response
+		localVarReturnValue *CreateakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.UpdatekubernetesIntegration")
@@ -10417,7 +10445,7 @@ func (r ApiUpdatepostmanIntegrationRequest) UpdatecloudflareIntegrationRequest(u
 	return r
 }
 
-func (r ApiUpdatepostmanIntegrationRequest) Execute() (*CreatecloudflareIntegration200Response, *http.Response, error) {
+func (r ApiUpdatepostmanIntegrationRequest) Execute() (*CreateakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.UpdatepostmanIntegrationExecute(r)
 }
 
@@ -10440,13 +10468,13 @@ func (a *IntegrationsAPIService) UpdatepostmanIntegration(ctx context.Context, i
 
 // Execute executes the request
 //
-//	@return CreatecloudflareIntegration200Response
-func (a *IntegrationsAPIService) UpdatepostmanIntegrationExecute(r ApiUpdatepostmanIntegrationRequest) (*CreatecloudflareIntegration200Response, *http.Response, error) {
+//	@return CreateakamaiIntegration200Response
+func (a *IntegrationsAPIService) UpdatepostmanIntegrationExecute(r ApiUpdatepostmanIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreatecloudflareIntegration200Response
+		localVarReturnValue *CreateakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.UpdatepostmanIntegration")
@@ -10553,7 +10581,7 @@ func (r ApiUpdatewizIntegrationRequest) UpdatewizIntegrationRequest(updatewizInt
 	return r
 }
 
-func (r ApiUpdatewizIntegrationRequest) Execute() (*CreatewizIntegration200Response, *http.Response, error) {
+func (r ApiUpdatewizIntegrationRequest) Execute() (*CreateakamaiIntegration200Response, *http.Response, error) {
 	return r.ApiService.UpdatewizIntegrationExecute(r)
 }
 
@@ -10576,13 +10604,13 @@ func (a *IntegrationsAPIService) UpdatewizIntegration(ctx context.Context, id st
 
 // Execute executes the request
 //
-//	@return CreatewizIntegration200Response
-func (a *IntegrationsAPIService) UpdatewizIntegrationExecute(r ApiUpdatewizIntegrationRequest) (*CreatewizIntegration200Response, *http.Response, error) {
+//	@return CreateakamaiIntegration200Response
+func (a *IntegrationsAPIService) UpdatewizIntegrationExecute(r ApiUpdatewizIntegrationRequest) (*CreateakamaiIntegration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreatewizIntegration200Response
+		localVarReturnValue *CreateakamaiIntegration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.UpdatewizIntegration")

@@ -33,7 +33,7 @@ type GetEvent200Response struct {
 	// The number of issues of the event
 	IssuesCount float32                                  `json:"issuesCount"`
 	Level       ENUMPROPERTIESEVENTSITEMSPROPERTIESLEVEL `json:"level"`
-	Scan        *ScanDetailed4                           `json:"scan,omitempty"`
+	Scan        *ScanDetailed                            `json:"scan,omitempty"`
 	// The id of the scan of the event
 	ScanId *string                                  `json:"scanId,omitempty"`
 	Stage  ENUMPROPERTIESEVENTSITEMSPROPERTIESSTAGE `json:"stage"`
@@ -253,9 +253,9 @@ func (o *GetEvent200Response) SetLevel(v ENUMPROPERTIESEVENTSITEMSPROPERTIESLEVE
 }
 
 // GetScan returns the Scan field value if set, zero value otherwise.
-func (o *GetEvent200Response) GetScan() ScanDetailed4 {
+func (o *GetEvent200Response) GetScan() ScanDetailed {
 	if o == nil || IsNil(o.Scan) {
-		var ret ScanDetailed4
+		var ret ScanDetailed
 		return ret
 	}
 	return *o.Scan
@@ -263,7 +263,7 @@ func (o *GetEvent200Response) GetScan() ScanDetailed4 {
 
 // GetScanOk returns a tuple with the Scan field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetEvent200Response) GetScanOk() (*ScanDetailed4, bool) {
+func (o *GetEvent200Response) GetScanOk() (*ScanDetailed, bool) {
 	if o == nil || IsNil(o.Scan) {
 		return nil, false
 	}
@@ -279,8 +279,8 @@ func (o *GetEvent200Response) HasScan() bool {
 	return false
 }
 
-// SetScan gets a reference to the given ScanDetailed4 and assigns it to the Scan field.
-func (o *GetEvent200Response) SetScan(v ScanDetailed4) {
+// SetScan gets a reference to the given ScanDetailed and assigns it to the Scan field.
+func (o *GetEvent200Response) SetScan(v ScanDetailed) {
 	o.Scan = &v
 }
 

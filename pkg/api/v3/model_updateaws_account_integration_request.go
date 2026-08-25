@@ -21,7 +21,7 @@ var _ MappedNullable = &UpdateawsAccountIntegrationRequest{}
 type UpdateawsAccountIntegrationRequest struct {
 	// The new name of the integration
 	Name       *string                                       `json:"name,omitempty"`
-	Parameters *UpdateawsAccountIntegrationRequestParameters `json:"parameters,omitempty"`
+	Parameters *CreateawsAccountIntegrationRequestParameters `json:"parameters,omitempty"`
 	// Optional proxy ID to attach to the integration
 	ProxyId *string `json:"proxyId,omitempty"`
 	// Optional list of project IDs to attach to the integration
@@ -81,9 +81,9 @@ func (o *UpdateawsAccountIntegrationRequest) SetName(v string) {
 }
 
 // GetParameters returns the Parameters field value if set, zero value otherwise.
-func (o *UpdateawsAccountIntegrationRequest) GetParameters() UpdateawsAccountIntegrationRequestParameters {
+func (o *UpdateawsAccountIntegrationRequest) GetParameters() CreateawsAccountIntegrationRequestParameters {
 	if o == nil || IsNil(o.Parameters) {
-		var ret UpdateawsAccountIntegrationRequestParameters
+		var ret CreateawsAccountIntegrationRequestParameters
 		return ret
 	}
 	return *o.Parameters
@@ -91,7 +91,7 @@ func (o *UpdateawsAccountIntegrationRequest) GetParameters() UpdateawsAccountInt
 
 // GetParametersOk returns a tuple with the Parameters field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateawsAccountIntegrationRequest) GetParametersOk() (*UpdateawsAccountIntegrationRequestParameters, bool) {
+func (o *UpdateawsAccountIntegrationRequest) GetParametersOk() (*CreateawsAccountIntegrationRequestParameters, bool) {
 	if o == nil || IsNil(o.Parameters) {
 		return nil, false
 	}
@@ -107,8 +107,8 @@ func (o *UpdateawsAccountIntegrationRequest) HasParameters() bool {
 	return false
 }
 
-// SetParameters gets a reference to the given UpdateawsAccountIntegrationRequestParameters and assigns it to the Parameters field.
-func (o *UpdateawsAccountIntegrationRequest) SetParameters(v UpdateawsAccountIntegrationRequestParameters) {
+// SetParameters gets a reference to the given CreateawsAccountIntegrationRequestParameters and assigns it to the Parameters field.
+func (o *UpdateawsAccountIntegrationRequest) SetParameters(v CreateawsAccountIntegrationRequestParameters) {
 	o.Parameters = &v
 }
 

@@ -19,8 +19,8 @@ var _ MappedNullable = &UpdateIssueRequest{}
 
 // UpdateIssueRequest struct for UpdateIssueRequest
 type UpdateIssueRequest struct {
-	Status               *UpdateIssueRequestStatus          `json:"status,omitempty"`
-	Severity             NullableUpdateIssueRequestSeverity `json:"severity,omitempty"`
+	Status               *BulkUpdateIssuesRequestStatus          `json:"status,omitempty"`
+	Severity             NullableBulkUpdateIssuesRequestSeverity `json:"severity,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -44,9 +44,9 @@ func NewUpdateIssueRequestWithDefaults() *UpdateIssueRequest {
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
-func (o *UpdateIssueRequest) GetStatus() UpdateIssueRequestStatus {
+func (o *UpdateIssueRequest) GetStatus() BulkUpdateIssuesRequestStatus {
 	if o == nil || IsNil(o.Status) {
-		var ret UpdateIssueRequestStatus
+		var ret BulkUpdateIssuesRequestStatus
 		return ret
 	}
 	return *o.Status
@@ -54,7 +54,7 @@ func (o *UpdateIssueRequest) GetStatus() UpdateIssueRequestStatus {
 
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateIssueRequest) GetStatusOk() (*UpdateIssueRequestStatus, bool) {
+func (o *UpdateIssueRequest) GetStatusOk() (*BulkUpdateIssuesRequestStatus, bool) {
 	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
@@ -70,15 +70,15 @@ func (o *UpdateIssueRequest) HasStatus() bool {
 	return false
 }
 
-// SetStatus gets a reference to the given UpdateIssueRequestStatus and assigns it to the Status field.
-func (o *UpdateIssueRequest) SetStatus(v UpdateIssueRequestStatus) {
+// SetStatus gets a reference to the given BulkUpdateIssuesRequestStatus and assigns it to the Status field.
+func (o *UpdateIssueRequest) SetStatus(v BulkUpdateIssuesRequestStatus) {
 	o.Status = &v
 }
 
 // GetSeverity returns the Severity field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *UpdateIssueRequest) GetSeverity() UpdateIssueRequestSeverity {
+func (o *UpdateIssueRequest) GetSeverity() BulkUpdateIssuesRequestSeverity {
 	if o == nil || IsNil(o.Severity.Get()) {
-		var ret UpdateIssueRequestSeverity
+		var ret BulkUpdateIssuesRequestSeverity
 		return ret
 	}
 	return *o.Severity.Get()
@@ -87,7 +87,7 @@ func (o *UpdateIssueRequest) GetSeverity() UpdateIssueRequestSeverity {
 // GetSeverityOk returns a tuple with the Severity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *UpdateIssueRequest) GetSeverityOk() (*UpdateIssueRequestSeverity, bool) {
+func (o *UpdateIssueRequest) GetSeverityOk() (*BulkUpdateIssuesRequestSeverity, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -103,8 +103,8 @@ func (o *UpdateIssueRequest) HasSeverity() bool {
 	return false
 }
 
-// SetSeverity gets a reference to the given NullableUpdateIssueRequestSeverity and assigns it to the Severity field.
-func (o *UpdateIssueRequest) SetSeverity(v UpdateIssueRequestSeverity) {
+// SetSeverity gets a reference to the given NullableBulkUpdateIssuesRequestSeverity and assigns it to the Severity field.
+func (o *UpdateIssueRequest) SetSeverity(v BulkUpdateIssuesRequestSeverity) {
 	o.Severity.Set(&v)
 }
 

@@ -19,8 +19,8 @@ var _ MappedNullable = &UpdateAssetRequest{}
 
 // UpdateAssetRequest struct for UpdateAssetRequest
 type UpdateAssetRequest struct {
-	TagIds *UpdateAssetRequestTagIds `json:"tagIds,omitempty"`
-	Owners *UpdateAssetRequestOwners `json:"owners,omitempty"`
+	TagIds *UpdateProfileRequestExtraAssetIds `json:"tagIds,omitempty"`
+	Owners *UpdateProfileRequestExtraAssetIds `json:"owners,omitempty"`
 	// The project IDs of the asset
 	ProjectIds []string                                                           `json:"projectIds,omitempty"`
 	Framework  *ENUMPROPERTIESFRAMEWORK                                           `json:"framework,omitempty"`
@@ -52,9 +52,9 @@ func NewUpdateAssetRequestWithDefaults() *UpdateAssetRequest {
 }
 
 // GetTagIds returns the TagIds field value if set, zero value otherwise.
-func (o *UpdateAssetRequest) GetTagIds() UpdateAssetRequestTagIds {
+func (o *UpdateAssetRequest) GetTagIds() UpdateProfileRequestExtraAssetIds {
 	if o == nil || IsNil(o.TagIds) {
-		var ret UpdateAssetRequestTagIds
+		var ret UpdateProfileRequestExtraAssetIds
 		return ret
 	}
 	return *o.TagIds
@@ -62,7 +62,7 @@ func (o *UpdateAssetRequest) GetTagIds() UpdateAssetRequestTagIds {
 
 // GetTagIdsOk returns a tuple with the TagIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateAssetRequest) GetTagIdsOk() (*UpdateAssetRequestTagIds, bool) {
+func (o *UpdateAssetRequest) GetTagIdsOk() (*UpdateProfileRequestExtraAssetIds, bool) {
 	if o == nil || IsNil(o.TagIds) {
 		return nil, false
 	}
@@ -78,15 +78,15 @@ func (o *UpdateAssetRequest) HasTagIds() bool {
 	return false
 }
 
-// SetTagIds gets a reference to the given UpdateAssetRequestTagIds and assigns it to the TagIds field.
-func (o *UpdateAssetRequest) SetTagIds(v UpdateAssetRequestTagIds) {
+// SetTagIds gets a reference to the given UpdateProfileRequestExtraAssetIds and assigns it to the TagIds field.
+func (o *UpdateAssetRequest) SetTagIds(v UpdateProfileRequestExtraAssetIds) {
 	o.TagIds = &v
 }
 
 // GetOwners returns the Owners field value if set, zero value otherwise.
-func (o *UpdateAssetRequest) GetOwners() UpdateAssetRequestOwners {
+func (o *UpdateAssetRequest) GetOwners() UpdateProfileRequestExtraAssetIds {
 	if o == nil || IsNil(o.Owners) {
-		var ret UpdateAssetRequestOwners
+		var ret UpdateProfileRequestExtraAssetIds
 		return ret
 	}
 	return *o.Owners
@@ -94,7 +94,7 @@ func (o *UpdateAssetRequest) GetOwners() UpdateAssetRequestOwners {
 
 // GetOwnersOk returns a tuple with the Owners field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateAssetRequest) GetOwnersOk() (*UpdateAssetRequestOwners, bool) {
+func (o *UpdateAssetRequest) GetOwnersOk() (*UpdateProfileRequestExtraAssetIds, bool) {
 	if o == nil || IsNil(o.Owners) {
 		return nil, false
 	}
@@ -110,8 +110,8 @@ func (o *UpdateAssetRequest) HasOwners() bool {
 	return false
 }
 
-// SetOwners gets a reference to the given UpdateAssetRequestOwners and assigns it to the Owners field.
-func (o *UpdateAssetRequest) SetOwners(v UpdateAssetRequestOwners) {
+// SetOwners gets a reference to the given UpdateProfileRequestExtraAssetIds and assigns it to the Owners field.
+func (o *UpdateAssetRequest) SetOwners(v UpdateProfileRequestExtraAssetIds) {
 	o.Owners = &v
 }
 

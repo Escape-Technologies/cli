@@ -21,7 +21,7 @@ var _ MappedNullable = &UpdatejiraIntegrationRequest{}
 type UpdatejiraIntegrationRequest struct {
 	// The new name of the integration
 	Name       *string                                 `json:"name,omitempty"`
-	Parameters *UpdatejiraIntegrationRequestParameters `json:"parameters,omitempty"`
+	Parameters *CreatejiraIntegrationRequestParameters `json:"parameters,omitempty"`
 	// Optional proxy ID to attach to the integration
 	ProxyId *string `json:"proxyId,omitempty"`
 	// Optional list of project IDs to attach to the integration
@@ -81,9 +81,9 @@ func (o *UpdatejiraIntegrationRequest) SetName(v string) {
 }
 
 // GetParameters returns the Parameters field value if set, zero value otherwise.
-func (o *UpdatejiraIntegrationRequest) GetParameters() UpdatejiraIntegrationRequestParameters {
+func (o *UpdatejiraIntegrationRequest) GetParameters() CreatejiraIntegrationRequestParameters {
 	if o == nil || IsNil(o.Parameters) {
-		var ret UpdatejiraIntegrationRequestParameters
+		var ret CreatejiraIntegrationRequestParameters
 		return ret
 	}
 	return *o.Parameters
@@ -91,7 +91,7 @@ func (o *UpdatejiraIntegrationRequest) GetParameters() UpdatejiraIntegrationRequ
 
 // GetParametersOk returns a tuple with the Parameters field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdatejiraIntegrationRequest) GetParametersOk() (*UpdatejiraIntegrationRequestParameters, bool) {
+func (o *UpdatejiraIntegrationRequest) GetParametersOk() (*CreatejiraIntegrationRequestParameters, bool) {
 	if o == nil || IsNil(o.Parameters) {
 		return nil, false
 	}
@@ -107,8 +107,8 @@ func (o *UpdatejiraIntegrationRequest) HasParameters() bool {
 	return false
 }
 
-// SetParameters gets a reference to the given UpdatejiraIntegrationRequestParameters and assigns it to the Parameters field.
-func (o *UpdatejiraIntegrationRequest) SetParameters(v UpdatejiraIntegrationRequestParameters) {
+// SetParameters gets a reference to the given CreatejiraIntegrationRequestParameters and assigns it to the Parameters field.
+func (o *UpdatejiraIntegrationRequest) SetParameters(v CreatejiraIntegrationRequestParameters) {
 	o.Parameters = &v
 }
 

@@ -18,7 +18,7 @@ import (
 // checks if the ScanDetailed1 type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ScanDetailed1{}
 
-// ScanDetailed1 The most recent successful scan for this profile
+// ScanDetailed1 Deprecated: identical to `lastScan`. Prefer `lastScan`.
 type ScanDetailed1 struct {
 	// The id of the scan
 	Id string `json:"id"`
@@ -45,13 +45,13 @@ type ScanDetailed1 struct {
 	// The id of the profile of the scan
 	ProfileId string `json:"profileId"`
 	// The id of the organization of the scan
-	OrganizationId                 string            `json:"organizationId"`
-	CommitHash                     *string           `json:"commitHash,omitempty"`
-	CommitBranch                   *string           `json:"commitBranch,omitempty"`
-	CommitAuthor                   *string           `json:"commitAuthor,omitempty"`
-	CommitLink                     *string           `json:"commitLink,omitempty"`
-	CommitAuthorProfilePictureLink *string           `json:"commitAuthorProfilePictureLink,omitempty"`
-	Links                          ScanDetailedLinks `json:"links"`
+	OrganizationId                 string              `json:"organizationId"`
+	CommitHash                     *string             `json:"commitHash,omitempty"`
+	CommitBranch                   *string             `json:"commitBranch,omitempty"`
+	CommitAuthor                   *string             `json:"commitAuthor,omitempty"`
+	CommitLink                     *string             `json:"commitLink,omitempty"`
+	CommitAuthorProfilePictureLink *string             `json:"commitAuthorProfilePictureLink,omitempty"`
+	Links                          ScanSummarizedLinks `json:"links"`
 	AdditionalProperties           map[string]interface{}
 }
 
@@ -61,7 +61,7 @@ type _ScanDetailed1 ScanDetailed1
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewScanDetailed1(id string, status string, createdAt string, updatedAt string, duration float32, progressRatio float32, initiator string, kind string, profileId string, organizationId string, links ScanDetailedLinks) *ScanDetailed1 {
+func NewScanDetailed1(id string, status string, createdAt string, updatedAt string, duration float32, progressRatio float32, initiator string, kind string, profileId string, organizationId string, links ScanSummarizedLinks) *ScanDetailed1 {
 	this := ScanDetailed1{}
 	this.Id = id
 	this.Status = status
@@ -582,9 +582,9 @@ func (o *ScanDetailed1) SetCommitAuthorProfilePictureLink(v string) {
 }
 
 // GetLinks returns the Links field value
-func (o *ScanDetailed1) GetLinks() ScanDetailedLinks {
+func (o *ScanDetailed1) GetLinks() ScanSummarizedLinks {
 	if o == nil {
-		var ret ScanDetailedLinks
+		var ret ScanSummarizedLinks
 		return ret
 	}
 
@@ -593,7 +593,7 @@ func (o *ScanDetailed1) GetLinks() ScanDetailedLinks {
 
 // GetLinksOk returns a tuple with the Links field value
 // and a boolean to check if the value has been set.
-func (o *ScanDetailed1) GetLinksOk() (*ScanDetailedLinks, bool) {
+func (o *ScanDetailed1) GetLinksOk() (*ScanSummarizedLinks, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -601,7 +601,7 @@ func (o *ScanDetailed1) GetLinksOk() (*ScanDetailedLinks, bool) {
 }
 
 // SetLinks sets field value
-func (o *ScanDetailed1) SetLinks(v ScanDetailedLinks) {
+func (o *ScanDetailed1) SetLinks(v ScanSummarizedLinks) {
 	o.Links = v
 }
 

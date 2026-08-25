@@ -21,7 +21,7 @@ var _ MappedNullable = &UpdateazureIntegrationRequest{}
 type UpdateazureIntegrationRequest struct {
 	// The new name of the integration
 	Name       *string                                  `json:"name,omitempty"`
-	Parameters *UpdateazureIntegrationRequestParameters `json:"parameters,omitempty"`
+	Parameters *CreateazureIntegrationRequestParameters `json:"parameters,omitempty"`
 	// Optional proxy ID to attach to the integration
 	ProxyId *string `json:"proxyId,omitempty"`
 	// Optional list of project IDs to attach to the integration
@@ -81,9 +81,9 @@ func (o *UpdateazureIntegrationRequest) SetName(v string) {
 }
 
 // GetParameters returns the Parameters field value if set, zero value otherwise.
-func (o *UpdateazureIntegrationRequest) GetParameters() UpdateazureIntegrationRequestParameters {
+func (o *UpdateazureIntegrationRequest) GetParameters() CreateazureIntegrationRequestParameters {
 	if o == nil || IsNil(o.Parameters) {
-		var ret UpdateazureIntegrationRequestParameters
+		var ret CreateazureIntegrationRequestParameters
 		return ret
 	}
 	return *o.Parameters
@@ -91,7 +91,7 @@ func (o *UpdateazureIntegrationRequest) GetParameters() UpdateazureIntegrationRe
 
 // GetParametersOk returns a tuple with the Parameters field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateazureIntegrationRequest) GetParametersOk() (*UpdateazureIntegrationRequestParameters, bool) {
+func (o *UpdateazureIntegrationRequest) GetParametersOk() (*CreateazureIntegrationRequestParameters, bool) {
 	if o == nil || IsNil(o.Parameters) {
 		return nil, false
 	}
@@ -107,8 +107,8 @@ func (o *UpdateazureIntegrationRequest) HasParameters() bool {
 	return false
 }
 
-// SetParameters gets a reference to the given UpdateazureIntegrationRequestParameters and assigns it to the Parameters field.
-func (o *UpdateazureIntegrationRequest) SetParameters(v UpdateazureIntegrationRequestParameters) {
+// SetParameters gets a reference to the given CreateazureIntegrationRequestParameters and assigns it to the Parameters field.
+func (o *UpdateazureIntegrationRequest) SetParameters(v CreateazureIntegrationRequestParameters) {
 	o.Parameters = &v
 }
 

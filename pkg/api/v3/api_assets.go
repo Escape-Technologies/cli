@@ -3137,7 +3137,7 @@ type ApiGetAssetRequest struct {
 	assetId    string
 }
 
-func (r ApiGetAssetRequest) Execute() (*AssetDetailed1, *http.Response, error) {
+func (r ApiGetAssetRequest) Execute() (*AssetDetailed, *http.Response, error) {
 	return r.ApiService.GetAssetExecute(r)
 }
 
@@ -3160,13 +3160,13 @@ func (a *AssetsAPIService) GetAsset(ctx context.Context, assetId string) ApiGetA
 
 // Execute executes the request
 //
-//	@return AssetDetailed1
-func (a *AssetsAPIService) GetAssetExecute(r ApiGetAssetRequest) (*AssetDetailed1, *http.Response, error) {
+//	@return AssetDetailed
+func (a *AssetsAPIService) GetAssetExecute(r ApiGetAssetRequest) (*AssetDetailed, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *AssetDetailed1
+		localVarReturnValue *AssetDetailed
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.GetAsset")
@@ -3503,6 +3503,7 @@ func (a *AssetsAPIService) ListAssetsExecute(r ApiListAssetsRequest) (*ListAsset
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.sortType != nil {
@@ -3512,6 +3513,7 @@ func (a *AssetsAPIService) ListAssetsExecute(r ApiListAssetsRequest) (*ListAsset
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
 		var defaultValue string = "asc"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
 		r.sortDirection = &defaultValue
 	}
 	if r.search != nil {

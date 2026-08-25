@@ -19,7 +19,7 @@ var _ MappedNullable = &UpdateCustomRuleRequest{}
 
 // UpdateCustomRuleRequest struct for UpdateCustomRuleRequest
 type UpdateCustomRuleRequest struct {
-	Content *UpdateCustomRuleRequestContent `json:"content,omitempty"`
+	Content *CreateCustomRuleRequestContent `json:"content,omitempty"`
 	// Whether the custom rule is enabled for DAST
 	DastEnabled *bool `json:"dastEnabled,omitempty"`
 	// Whether the custom rule is enabled for ASM
@@ -49,9 +49,9 @@ func NewUpdateCustomRuleRequestWithDefaults() *UpdateCustomRuleRequest {
 }
 
 // GetContent returns the Content field value if set, zero value otherwise.
-func (o *UpdateCustomRuleRequest) GetContent() UpdateCustomRuleRequestContent {
+func (o *UpdateCustomRuleRequest) GetContent() CreateCustomRuleRequestContent {
 	if o == nil || IsNil(o.Content) {
-		var ret UpdateCustomRuleRequestContent
+		var ret CreateCustomRuleRequestContent
 		return ret
 	}
 	return *o.Content
@@ -59,7 +59,7 @@ func (o *UpdateCustomRuleRequest) GetContent() UpdateCustomRuleRequestContent {
 
 // GetContentOk returns a tuple with the Content field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateCustomRuleRequest) GetContentOk() (*UpdateCustomRuleRequestContent, bool) {
+func (o *UpdateCustomRuleRequest) GetContentOk() (*CreateCustomRuleRequestContent, bool) {
 	if o == nil || IsNil(o.Content) {
 		return nil, false
 	}
@@ -75,8 +75,8 @@ func (o *UpdateCustomRuleRequest) HasContent() bool {
 	return false
 }
 
-// SetContent gets a reference to the given UpdateCustomRuleRequestContent and assigns it to the Content field.
-func (o *UpdateCustomRuleRequest) SetContent(v UpdateCustomRuleRequestContent) {
+// SetContent gets a reference to the given CreateCustomRuleRequestContent and assigns it to the Content field.
+func (o *UpdateCustomRuleRequest) SetContent(v CreateCustomRuleRequestContent) {
 	o.Content = &v
 }
 

@@ -21,7 +21,7 @@ var _ MappedNullable = &UpdateawsIntegrationRequest{}
 type UpdateawsIntegrationRequest struct {
 	// The new name of the integration
 	Name       *string                                `json:"name,omitempty"`
-	Parameters *UpdateawsIntegrationRequestParameters `json:"parameters,omitempty"`
+	Parameters *CreateawsIntegrationRequestParameters `json:"parameters,omitempty"`
 	// Optional proxy ID to attach to the integration
 	ProxyId *string `json:"proxyId,omitempty"`
 	// Optional list of project IDs to attach to the integration
@@ -81,9 +81,9 @@ func (o *UpdateawsIntegrationRequest) SetName(v string) {
 }
 
 // GetParameters returns the Parameters field value if set, zero value otherwise.
-func (o *UpdateawsIntegrationRequest) GetParameters() UpdateawsIntegrationRequestParameters {
+func (o *UpdateawsIntegrationRequest) GetParameters() CreateawsIntegrationRequestParameters {
 	if o == nil || IsNil(o.Parameters) {
-		var ret UpdateawsIntegrationRequestParameters
+		var ret CreateawsIntegrationRequestParameters
 		return ret
 	}
 	return *o.Parameters
@@ -91,7 +91,7 @@ func (o *UpdateawsIntegrationRequest) GetParameters() UpdateawsIntegrationReques
 
 // GetParametersOk returns a tuple with the Parameters field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateawsIntegrationRequest) GetParametersOk() (*UpdateawsIntegrationRequestParameters, bool) {
+func (o *UpdateawsIntegrationRequest) GetParametersOk() (*CreateawsIntegrationRequestParameters, bool) {
 	if o == nil || IsNil(o.Parameters) {
 		return nil, false
 	}
@@ -107,8 +107,8 @@ func (o *UpdateawsIntegrationRequest) HasParameters() bool {
 	return false
 }
 
-// SetParameters gets a reference to the given UpdateawsIntegrationRequestParameters and assigns it to the Parameters field.
-func (o *UpdateawsIntegrationRequest) SetParameters(v UpdateawsIntegrationRequestParameters) {
+// SetParameters gets a reference to the given CreateawsIntegrationRequestParameters and assigns it to the Parameters field.
+func (o *UpdateawsIntegrationRequest) SetParameters(v CreateawsIntegrationRequestParameters) {
 	o.Parameters = &v
 }
 

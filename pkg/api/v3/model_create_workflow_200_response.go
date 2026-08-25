@@ -30,6 +30,7 @@ type CreateWorkflow200Response struct {
 	Filter     NullableWorkflowFilter `json:"filter"`
 	View       *WorkflowView          `json:"view,omitempty"`
 	// Deprecated. Always empty. Use `filter` and `view` instead.
+	// Deprecated
 	Filters              []WorkflowLegacyFilter           `json:"filters"`
 	Actions              []WorkflowSummarizedActionsInner `json:"actions"`
 	AdditionalProperties map[string]interface{}
@@ -245,6 +246,7 @@ func (o *CreateWorkflow200Response) SetView(v WorkflowView) {
 }
 
 // GetFilters returns the Filters field value
+// Deprecated
 func (o *CreateWorkflow200Response) GetFilters() []WorkflowLegacyFilter {
 	if o == nil {
 		var ret []WorkflowLegacyFilter
@@ -256,6 +258,7 @@ func (o *CreateWorkflow200Response) GetFilters() []WorkflowLegacyFilter {
 
 // GetFiltersOk returns a tuple with the Filters field value
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *CreateWorkflow200Response) GetFiltersOk() ([]WorkflowLegacyFilter, bool) {
 	if o == nil {
 		return nil, false
@@ -264,6 +267,7 @@ func (o *CreateWorkflow200Response) GetFiltersOk() ([]WorkflowLegacyFilter, bool
 }
 
 // SetFilters sets field value
+// Deprecated
 func (o *CreateWorkflow200Response) SetFilters(v []WorkflowLegacyFilter) {
 	o.Filters = v
 }

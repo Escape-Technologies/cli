@@ -21,7 +21,7 @@ var _ MappedNullable = &UpdatekubernetesIntegrationRequest{}
 type UpdatekubernetesIntegrationRequest struct {
 	// The new name of the integration
 	Name       *string                                       `json:"name,omitempty"`
-	Parameters *UpdatekubernetesIntegrationRequestParameters `json:"parameters,omitempty"`
+	Parameters *CreatekubernetesIntegrationRequestParameters `json:"parameters,omitempty"`
 	// Optional proxy ID to attach to the integration
 	ProxyId *string `json:"proxyId,omitempty"`
 	// Optional list of project IDs to attach to the integration
@@ -81,9 +81,9 @@ func (o *UpdatekubernetesIntegrationRequest) SetName(v string) {
 }
 
 // GetParameters returns the Parameters field value if set, zero value otherwise.
-func (o *UpdatekubernetesIntegrationRequest) GetParameters() UpdatekubernetesIntegrationRequestParameters {
+func (o *UpdatekubernetesIntegrationRequest) GetParameters() CreatekubernetesIntegrationRequestParameters {
 	if o == nil || IsNil(o.Parameters) {
-		var ret UpdatekubernetesIntegrationRequestParameters
+		var ret CreatekubernetesIntegrationRequestParameters
 		return ret
 	}
 	return *o.Parameters
@@ -91,7 +91,7 @@ func (o *UpdatekubernetesIntegrationRequest) GetParameters() UpdatekubernetesInt
 
 // GetParametersOk returns a tuple with the Parameters field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdatekubernetesIntegrationRequest) GetParametersOk() (*UpdatekubernetesIntegrationRequestParameters, bool) {
+func (o *UpdatekubernetesIntegrationRequest) GetParametersOk() (*CreatekubernetesIntegrationRequestParameters, bool) {
 	if o == nil || IsNil(o.Parameters) {
 		return nil, false
 	}
@@ -107,8 +107,8 @@ func (o *UpdatekubernetesIntegrationRequest) HasParameters() bool {
 	return false
 }
 
-// SetParameters gets a reference to the given UpdatekubernetesIntegrationRequestParameters and assigns it to the Parameters field.
-func (o *UpdatekubernetesIntegrationRequest) SetParameters(v UpdatekubernetesIntegrationRequestParameters) {
+// SetParameters gets a reference to the given CreatekubernetesIntegrationRequestParameters and assigns it to the Parameters field.
+func (o *UpdatekubernetesIntegrationRequest) SetParameters(v CreatekubernetesIntegrationRequestParameters) {
 	o.Parameters = &v
 }
 

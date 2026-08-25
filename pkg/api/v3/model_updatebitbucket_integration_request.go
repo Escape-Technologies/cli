@@ -21,7 +21,7 @@ var _ MappedNullable = &UpdatebitbucketIntegrationRequest{}
 type UpdatebitbucketIntegrationRequest struct {
 	// The new name of the integration
 	Name       *string                                      `json:"name,omitempty"`
-	Parameters *UpdatebitbucketIntegrationRequestParameters `json:"parameters,omitempty"`
+	Parameters *CreatebitbucketIntegrationRequestParameters `json:"parameters,omitempty"`
 	// Optional proxy ID to attach to the integration
 	ProxyId *string `json:"proxyId,omitempty"`
 	// Optional list of project IDs to attach to the integration
@@ -81,9 +81,9 @@ func (o *UpdatebitbucketIntegrationRequest) SetName(v string) {
 }
 
 // GetParameters returns the Parameters field value if set, zero value otherwise.
-func (o *UpdatebitbucketIntegrationRequest) GetParameters() UpdatebitbucketIntegrationRequestParameters {
+func (o *UpdatebitbucketIntegrationRequest) GetParameters() CreatebitbucketIntegrationRequestParameters {
 	if o == nil || IsNil(o.Parameters) {
-		var ret UpdatebitbucketIntegrationRequestParameters
+		var ret CreatebitbucketIntegrationRequestParameters
 		return ret
 	}
 	return *o.Parameters
@@ -91,7 +91,7 @@ func (o *UpdatebitbucketIntegrationRequest) GetParameters() UpdatebitbucketInteg
 
 // GetParametersOk returns a tuple with the Parameters field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdatebitbucketIntegrationRequest) GetParametersOk() (*UpdatebitbucketIntegrationRequestParameters, bool) {
+func (o *UpdatebitbucketIntegrationRequest) GetParametersOk() (*CreatebitbucketIntegrationRequestParameters, bool) {
 	if o == nil || IsNil(o.Parameters) {
 		return nil, false
 	}
@@ -107,8 +107,8 @@ func (o *UpdatebitbucketIntegrationRequest) HasParameters() bool {
 	return false
 }
 
-// SetParameters gets a reference to the given UpdatebitbucketIntegrationRequestParameters and assigns it to the Parameters field.
-func (o *UpdatebitbucketIntegrationRequest) SetParameters(v UpdatebitbucketIntegrationRequestParameters) {
+// SetParameters gets a reference to the given CreatebitbucketIntegrationRequestParameters and assigns it to the Parameters field.
+func (o *UpdatebitbucketIntegrationRequest) SetParameters(v CreatebitbucketIntegrationRequestParameters) {
 	o.Parameters = &v
 }
 

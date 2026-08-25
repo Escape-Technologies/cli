@@ -41,9 +41,8 @@ type CreateakamaiIntegration200Response struct {
 	// The id of the organization the integration belongs to
 	OrganizationId string `json:"organizationId"`
 	// The projects of the integration
-	Projects             []ListProjects200ResponseDataInner       `json:"projects"`
-	Location             *LocationDetailed                        `json:"location,omitempty"`
-	Parameters           CreateakamaiIntegrationRequestParameters `json:"parameters"`
+	Projects             []ListProjects200ResponseDataInner `json:"projects"`
+	Location             *LocationDetailed                  `json:"location,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -53,7 +52,7 @@ type _CreateakamaiIntegration200Response CreateakamaiIntegration200Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateakamaiIntegration200Response(id string, name string, createdAt time.Time, updatedAt time.Time, kind ENUMPROPERTIESDATAITEMSPROPERTIESKIND, valid bool, validationErrors []string, organizationId string, projects []ListProjects200ResponseDataInner, parameters CreateakamaiIntegrationRequestParameters) *CreateakamaiIntegration200Response {
+func NewCreateakamaiIntegration200Response(id string, name string, createdAt time.Time, updatedAt time.Time, kind ENUMPROPERTIESDATAITEMSPROPERTIESKIND, valid bool, validationErrors []string, organizationId string, projects []ListProjects200ResponseDataInner) *CreateakamaiIntegration200Response {
 	this := CreateakamaiIntegration200Response{}
 	this.Id = id
 	this.Name = name
@@ -64,7 +63,6 @@ func NewCreateakamaiIntegration200Response(id string, name string, createdAt tim
 	this.ValidationErrors = validationErrors
 	this.OrganizationId = organizationId
 	this.Projects = projects
-	this.Parameters = parameters
 	return &this
 }
 
@@ -388,30 +386,6 @@ func (o *CreateakamaiIntegration200Response) SetLocation(v LocationDetailed) {
 	o.Location = &v
 }
 
-// GetParameters returns the Parameters field value
-func (o *CreateakamaiIntegration200Response) GetParameters() CreateakamaiIntegrationRequestParameters {
-	if o == nil {
-		var ret CreateakamaiIntegrationRequestParameters
-		return ret
-	}
-
-	return o.Parameters
-}
-
-// GetParametersOk returns a tuple with the Parameters field value
-// and a boolean to check if the value has been set.
-func (o *CreateakamaiIntegration200Response) GetParametersOk() (*CreateakamaiIntegrationRequestParameters, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Parameters, true
-}
-
-// SetParameters sets field value
-func (o *CreateakamaiIntegration200Response) SetParameters(v CreateakamaiIntegrationRequestParameters) {
-	o.Parameters = v
-}
-
 func (o CreateakamaiIntegration200Response) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -440,7 +414,6 @@ func (o CreateakamaiIntegration200Response) ToMap() (map[string]interface{}, err
 	if !IsNil(o.Location) {
 		toSerialize["location"] = o.Location
 	}
-	toSerialize["parameters"] = o.Parameters
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -463,7 +436,6 @@ func (o *CreateakamaiIntegration200Response) UnmarshalJSON(data []byte) (err err
 		"validationErrors",
 		"organizationId",
 		"projects",
-		"parameters",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -505,7 +477,6 @@ func (o *CreateakamaiIntegration200Response) UnmarshalJSON(data []byte) (err err
 		delete(additionalProperties, "organizationId")
 		delete(additionalProperties, "projects")
 		delete(additionalProperties, "location")
-		delete(additionalProperties, "parameters")
 		o.AdditionalProperties = additionalProperties
 	}
 

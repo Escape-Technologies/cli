@@ -53,13 +53,13 @@ type GetProfile200Response struct {
 	// The ID of the last scan of the profile
 	LastScanId *string `json:"lastScanId,omitempty"`
 	// The ID of the last successful scan of the profile
-	LastSuccessfulScanId *string        `json:"lastSuccessfulScanId,omitempty"`
-	LastScan             *ScanDetailed  `json:"lastScan,omitempty"`
-	LastSuccessfulScan   *ScanDetailed1 `json:"lastSuccessfulScan,omitempty"`
+	LastSuccessfulScanId *string       `json:"lastSuccessfulScanId,omitempty"`
+	LastScan             *ScanDetailed `json:"lastScan,omitempty"`
+	LastSuccessfulScan   *ScanDetailed `json:"lastSuccessfulScan,omitempty"`
 	// Deprecated
-	LastResourceScan *ScanDetailed2 `json:"lastResourceScan,omitempty"`
+	LastResourceScan *ScanDetailed1 `json:"lastResourceScan,omitempty"`
 	// Deprecated
-	LastSuccessfulResourceScan *ScanDetailed3 `json:"lastSuccessfulResourceScan,omitempty"`
+	LastSuccessfulResourceScan *ScanDetailed1 `json:"lastSuccessfulResourceScan,omitempty"`
 	// The risks of the profile
 	Risks                []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS `json:"risks"`
 	Statistics           StatisticsDetailed                                           `json:"statistics"`
@@ -638,9 +638,9 @@ func (o *GetProfile200Response) SetLastScan(v ScanDetailed) {
 }
 
 // GetLastSuccessfulScan returns the LastSuccessfulScan field value if set, zero value otherwise.
-func (o *GetProfile200Response) GetLastSuccessfulScan() ScanDetailed1 {
+func (o *GetProfile200Response) GetLastSuccessfulScan() ScanDetailed {
 	if o == nil || IsNil(o.LastSuccessfulScan) {
-		var ret ScanDetailed1
+		var ret ScanDetailed
 		return ret
 	}
 	return *o.LastSuccessfulScan
@@ -648,7 +648,7 @@ func (o *GetProfile200Response) GetLastSuccessfulScan() ScanDetailed1 {
 
 // GetLastSuccessfulScanOk returns a tuple with the LastSuccessfulScan field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetProfile200Response) GetLastSuccessfulScanOk() (*ScanDetailed1, bool) {
+func (o *GetProfile200Response) GetLastSuccessfulScanOk() (*ScanDetailed, bool) {
 	if o == nil || IsNil(o.LastSuccessfulScan) {
 		return nil, false
 	}
@@ -664,16 +664,16 @@ func (o *GetProfile200Response) HasLastSuccessfulScan() bool {
 	return false
 }
 
-// SetLastSuccessfulScan gets a reference to the given ScanDetailed1 and assigns it to the LastSuccessfulScan field.
-func (o *GetProfile200Response) SetLastSuccessfulScan(v ScanDetailed1) {
+// SetLastSuccessfulScan gets a reference to the given ScanDetailed and assigns it to the LastSuccessfulScan field.
+func (o *GetProfile200Response) SetLastSuccessfulScan(v ScanDetailed) {
 	o.LastSuccessfulScan = &v
 }
 
 // GetLastResourceScan returns the LastResourceScan field value if set, zero value otherwise.
 // Deprecated
-func (o *GetProfile200Response) GetLastResourceScan() ScanDetailed2 {
+func (o *GetProfile200Response) GetLastResourceScan() ScanDetailed1 {
 	if o == nil || IsNil(o.LastResourceScan) {
-		var ret ScanDetailed2
+		var ret ScanDetailed1
 		return ret
 	}
 	return *o.LastResourceScan
@@ -682,7 +682,7 @@ func (o *GetProfile200Response) GetLastResourceScan() ScanDetailed2 {
 // GetLastResourceScanOk returns a tuple with the LastResourceScan field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // Deprecated
-func (o *GetProfile200Response) GetLastResourceScanOk() (*ScanDetailed2, bool) {
+func (o *GetProfile200Response) GetLastResourceScanOk() (*ScanDetailed1, bool) {
 	if o == nil || IsNil(o.LastResourceScan) {
 		return nil, false
 	}
@@ -698,17 +698,17 @@ func (o *GetProfile200Response) HasLastResourceScan() bool {
 	return false
 }
 
-// SetLastResourceScan gets a reference to the given ScanDetailed2 and assigns it to the LastResourceScan field.
+// SetLastResourceScan gets a reference to the given ScanDetailed1 and assigns it to the LastResourceScan field.
 // Deprecated
-func (o *GetProfile200Response) SetLastResourceScan(v ScanDetailed2) {
+func (o *GetProfile200Response) SetLastResourceScan(v ScanDetailed1) {
 	o.LastResourceScan = &v
 }
 
 // GetLastSuccessfulResourceScan returns the LastSuccessfulResourceScan field value if set, zero value otherwise.
 // Deprecated
-func (o *GetProfile200Response) GetLastSuccessfulResourceScan() ScanDetailed3 {
+func (o *GetProfile200Response) GetLastSuccessfulResourceScan() ScanDetailed1 {
 	if o == nil || IsNil(o.LastSuccessfulResourceScan) {
-		var ret ScanDetailed3
+		var ret ScanDetailed1
 		return ret
 	}
 	return *o.LastSuccessfulResourceScan
@@ -717,7 +717,7 @@ func (o *GetProfile200Response) GetLastSuccessfulResourceScan() ScanDetailed3 {
 // GetLastSuccessfulResourceScanOk returns a tuple with the LastSuccessfulResourceScan field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // Deprecated
-func (o *GetProfile200Response) GetLastSuccessfulResourceScanOk() (*ScanDetailed3, bool) {
+func (o *GetProfile200Response) GetLastSuccessfulResourceScanOk() (*ScanDetailed1, bool) {
 	if o == nil || IsNil(o.LastSuccessfulResourceScan) {
 		return nil, false
 	}
@@ -733,9 +733,9 @@ func (o *GetProfile200Response) HasLastSuccessfulResourceScan() bool {
 	return false
 }
 
-// SetLastSuccessfulResourceScan gets a reference to the given ScanDetailed3 and assigns it to the LastSuccessfulResourceScan field.
+// SetLastSuccessfulResourceScan gets a reference to the given ScanDetailed1 and assigns it to the LastSuccessfulResourceScan field.
 // Deprecated
-func (o *GetProfile200Response) SetLastSuccessfulResourceScan(v ScanDetailed3) {
+func (o *GetProfile200Response) SetLastSuccessfulResourceScan(v ScanDetailed1) {
 	o.LastSuccessfulResourceScan = &v
 }
 

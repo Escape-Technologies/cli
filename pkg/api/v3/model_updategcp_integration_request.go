@@ -21,7 +21,7 @@ var _ MappedNullable = &UpdategcpIntegrationRequest{}
 type UpdategcpIntegrationRequest struct {
 	// The new name of the integration
 	Name       *string                                `json:"name,omitempty"`
-	Parameters *UpdategcpIntegrationRequestParameters `json:"parameters,omitempty"`
+	Parameters *CreategcpIntegrationRequestParameters `json:"parameters,omitempty"`
 	// Optional proxy ID to attach to the integration
 	ProxyId *string `json:"proxyId,omitempty"`
 	// Optional list of project IDs to attach to the integration
@@ -81,9 +81,9 @@ func (o *UpdategcpIntegrationRequest) SetName(v string) {
 }
 
 // GetParameters returns the Parameters field value if set, zero value otherwise.
-func (o *UpdategcpIntegrationRequest) GetParameters() UpdategcpIntegrationRequestParameters {
+func (o *UpdategcpIntegrationRequest) GetParameters() CreategcpIntegrationRequestParameters {
 	if o == nil || IsNil(o.Parameters) {
-		var ret UpdategcpIntegrationRequestParameters
+		var ret CreategcpIntegrationRequestParameters
 		return ret
 	}
 	return *o.Parameters
@@ -91,7 +91,7 @@ func (o *UpdategcpIntegrationRequest) GetParameters() UpdategcpIntegrationReques
 
 // GetParametersOk returns a tuple with the Parameters field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdategcpIntegrationRequest) GetParametersOk() (*UpdategcpIntegrationRequestParameters, bool) {
+func (o *UpdategcpIntegrationRequest) GetParametersOk() (*CreategcpIntegrationRequestParameters, bool) {
 	if o == nil || IsNil(o.Parameters) {
 		return nil, false
 	}
@@ -107,8 +107,8 @@ func (o *UpdategcpIntegrationRequest) HasParameters() bool {
 	return false
 }
 
-// SetParameters gets a reference to the given UpdategcpIntegrationRequestParameters and assigns it to the Parameters field.
-func (o *UpdategcpIntegrationRequest) SetParameters(v UpdategcpIntegrationRequestParameters) {
+// SetParameters gets a reference to the given CreategcpIntegrationRequestParameters and assigns it to the Parameters field.
+func (o *UpdategcpIntegrationRequest) SetParameters(v CreategcpIntegrationRequestParameters) {
 	o.Parameters = &v
 }
 

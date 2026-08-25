@@ -26,12 +26,13 @@ type UpdateWorkflowRequest struct {
 	// The throttle in milliseconds for the workflow.
 	ThrottleMs *float32 `json:"throttleMs,omitempty"`
 	// Saved view to apply as the workflow filter.
-	ViewId *string                 `json:"viewId,omitempty"`
-	Filter NullableWorkflowFilter1 `json:"filter,omitempty"`
+	ViewId *string                `json:"viewId,omitempty"`
+	Filter NullableWorkflowFilter `json:"filter,omitempty"`
 	// Deprecated. Use `viewId` and `filter` instead.
+	// Deprecated
 	Filters []CreateWorkflowRequestFiltersInner `json:"filters,omitempty"`
 	// The actions to update the workflow with, this will replace the existing actions
-	Actions []UpdateWorkflowRequestActionsInner `json:"actions,omitempty"`
+	Actions []CreateWorkflowRequestActionsInner `json:"actions,omitempty"`
 	// Optional list of project IDs to attach to the integration
 	ProjectIds           []string `json:"projectIds,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -178,9 +179,9 @@ func (o *UpdateWorkflowRequest) SetViewId(v string) {
 }
 
 // GetFilter returns the Filter field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *UpdateWorkflowRequest) GetFilter() WorkflowFilter1 {
+func (o *UpdateWorkflowRequest) GetFilter() WorkflowFilter {
 	if o == nil || IsNil(o.Filter.Get()) {
-		var ret WorkflowFilter1
+		var ret WorkflowFilter
 		return ret
 	}
 	return *o.Filter.Get()
@@ -189,7 +190,7 @@ func (o *UpdateWorkflowRequest) GetFilter() WorkflowFilter1 {
 // GetFilterOk returns a tuple with the Filter field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *UpdateWorkflowRequest) GetFilterOk() (*WorkflowFilter1, bool) {
+func (o *UpdateWorkflowRequest) GetFilterOk() (*WorkflowFilter, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -205,8 +206,8 @@ func (o *UpdateWorkflowRequest) HasFilter() bool {
 	return false
 }
 
-// SetFilter gets a reference to the given NullableWorkflowFilter1 and assigns it to the Filter field.
-func (o *UpdateWorkflowRequest) SetFilter(v WorkflowFilter1) {
+// SetFilter gets a reference to the given NullableWorkflowFilter and assigns it to the Filter field.
+func (o *UpdateWorkflowRequest) SetFilter(v WorkflowFilter) {
 	o.Filter.Set(&v)
 }
 
@@ -221,6 +222,7 @@ func (o *UpdateWorkflowRequest) UnsetFilter() {
 }
 
 // GetFilters returns the Filters field value if set, zero value otherwise.
+// Deprecated
 func (o *UpdateWorkflowRequest) GetFilters() []CreateWorkflowRequestFiltersInner {
 	if o == nil || IsNil(o.Filters) {
 		var ret []CreateWorkflowRequestFiltersInner
@@ -231,6 +233,7 @@ func (o *UpdateWorkflowRequest) GetFilters() []CreateWorkflowRequestFiltersInner
 
 // GetFiltersOk returns a tuple with the Filters field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *UpdateWorkflowRequest) GetFiltersOk() ([]CreateWorkflowRequestFiltersInner, bool) {
 	if o == nil || IsNil(o.Filters) {
 		return nil, false
@@ -248,14 +251,15 @@ func (o *UpdateWorkflowRequest) HasFilters() bool {
 }
 
 // SetFilters gets a reference to the given []CreateWorkflowRequestFiltersInner and assigns it to the Filters field.
+// Deprecated
 func (o *UpdateWorkflowRequest) SetFilters(v []CreateWorkflowRequestFiltersInner) {
 	o.Filters = v
 }
 
 // GetActions returns the Actions field value if set, zero value otherwise.
-func (o *UpdateWorkflowRequest) GetActions() []UpdateWorkflowRequestActionsInner {
+func (o *UpdateWorkflowRequest) GetActions() []CreateWorkflowRequestActionsInner {
 	if o == nil || IsNil(o.Actions) {
-		var ret []UpdateWorkflowRequestActionsInner
+		var ret []CreateWorkflowRequestActionsInner
 		return ret
 	}
 	return o.Actions
@@ -263,7 +267,7 @@ func (o *UpdateWorkflowRequest) GetActions() []UpdateWorkflowRequestActionsInner
 
 // GetActionsOk returns a tuple with the Actions field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateWorkflowRequest) GetActionsOk() ([]UpdateWorkflowRequestActionsInner, bool) {
+func (o *UpdateWorkflowRequest) GetActionsOk() ([]CreateWorkflowRequestActionsInner, bool) {
 	if o == nil || IsNil(o.Actions) {
 		return nil, false
 	}
@@ -279,8 +283,8 @@ func (o *UpdateWorkflowRequest) HasActions() bool {
 	return false
 }
 
-// SetActions gets a reference to the given []UpdateWorkflowRequestActionsInner and assigns it to the Actions field.
-func (o *UpdateWorkflowRequest) SetActions(v []UpdateWorkflowRequestActionsInner) {
+// SetActions gets a reference to the given []CreateWorkflowRequestActionsInner and assigns it to the Actions field.
+func (o *UpdateWorkflowRequest) SetActions(v []CreateWorkflowRequestActionsInner) {
 	o.Actions = v
 }
 

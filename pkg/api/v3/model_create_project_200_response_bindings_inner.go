@@ -24,10 +24,10 @@ type CreateProject200ResponseBindingsInner struct {
 	// The id of the role binding
 	Id string `json:"id"`
 	// The date and time the role binding was created
-	CreatedAt            time.Time                                    `json:"createdAt"`
-	Role                 CreateProject200ResponseBindingsInnerRole    `json:"role"`
-	Project              CreateProject200ResponseBindingsInnerProject `json:"project"`
-	User                 CreateProject200ResponseBindingsInnerUser    `json:"user"`
+	CreatedAt            time.Time                                 `json:"createdAt"`
+	Role                 CreateProject200ResponseBindingsInnerRole `json:"role"`
+	Project              CreateProject200ResponseBindingsInnerRole `json:"project"`
+	User                 CreateProject200ResponseBindingsInnerUser `json:"user"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -37,7 +37,7 @@ type _CreateProject200ResponseBindingsInner CreateProject200ResponseBindingsInne
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateProject200ResponseBindingsInner(id string, createdAt time.Time, role CreateProject200ResponseBindingsInnerRole, project CreateProject200ResponseBindingsInnerProject, user CreateProject200ResponseBindingsInnerUser) *CreateProject200ResponseBindingsInner {
+func NewCreateProject200ResponseBindingsInner(id string, createdAt time.Time, role CreateProject200ResponseBindingsInnerRole, project CreateProject200ResponseBindingsInnerRole, user CreateProject200ResponseBindingsInnerUser) *CreateProject200ResponseBindingsInner {
 	this := CreateProject200ResponseBindingsInner{}
 	this.Id = id
 	this.CreatedAt = createdAt
@@ -128,9 +128,9 @@ func (o *CreateProject200ResponseBindingsInner) SetRole(v CreateProject200Respon
 }
 
 // GetProject returns the Project field value
-func (o *CreateProject200ResponseBindingsInner) GetProject() CreateProject200ResponseBindingsInnerProject {
+func (o *CreateProject200ResponseBindingsInner) GetProject() CreateProject200ResponseBindingsInnerRole {
 	if o == nil {
-		var ret CreateProject200ResponseBindingsInnerProject
+		var ret CreateProject200ResponseBindingsInnerRole
 		return ret
 	}
 
@@ -139,7 +139,7 @@ func (o *CreateProject200ResponseBindingsInner) GetProject() CreateProject200Res
 
 // GetProjectOk returns a tuple with the Project field value
 // and a boolean to check if the value has been set.
-func (o *CreateProject200ResponseBindingsInner) GetProjectOk() (*CreateProject200ResponseBindingsInnerProject, bool) {
+func (o *CreateProject200ResponseBindingsInner) GetProjectOk() (*CreateProject200ResponseBindingsInnerRole, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -147,7 +147,7 @@ func (o *CreateProject200ResponseBindingsInner) GetProjectOk() (*CreateProject20
 }
 
 // SetProject sets field value
-func (o *CreateProject200ResponseBindingsInner) SetProject(v CreateProject200ResponseBindingsInnerProject) {
+func (o *CreateProject200ResponseBindingsInner) SetProject(v CreateProject200ResponseBindingsInnerRole) {
 	o.Project = v
 }
 

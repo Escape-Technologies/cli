@@ -34,7 +34,7 @@ type listIntegrationsResponse struct {
 }
 
 // UpsertKubernetesIntegration creates a Kubernetes integration if it doesn't exist
-func UpsertKubernetesIntegration(ctx context.Context, req v3.CreatekubernetesIntegrationRequest) (*v3.CreatekubernetesIntegration200Response, error) {
+func UpsertKubernetesIntegration(ctx context.Context, req v3.CreatekubernetesIntegrationRequest) (*v3.CreateakamaiIntegration200Response, error) {
 	list, _, err := listKubernetesIntegrations(ctx, "", &ListKubernetesIntegrationsFilters{
 		LocationIDs: strings.Join([]string{*req.ProxyId}, ","),
 	})
@@ -58,7 +58,7 @@ func UpsertKubernetesIntegration(ctx context.Context, req v3.CreatekubernetesInt
 	return resp, nil
 }
 
-func createKubernetesIntegration(ctx context.Context, req v3.CreatekubernetesIntegrationRequest) (*v3.CreatekubernetesIntegration200Response, error) {
+func createKubernetesIntegration(ctx context.Context, req v3.CreatekubernetesIntegrationRequest) (*v3.CreateakamaiIntegration200Response, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)

@@ -21,7 +21,7 @@ var _ MappedNullable = &UpdatecloudflareIntegrationRequest{}
 type UpdatecloudflareIntegrationRequest struct {
 	// The new name of the integration
 	Name       *string                                       `json:"name,omitempty"`
-	Parameters *UpdatecloudflareIntegrationRequestParameters `json:"parameters,omitempty"`
+	Parameters *CreatecloudflareIntegrationRequestParameters `json:"parameters,omitempty"`
 	// Optional proxy ID to attach to the integration
 	ProxyId *string `json:"proxyId,omitempty"`
 	// Optional list of project IDs to attach to the integration
@@ -81,9 +81,9 @@ func (o *UpdatecloudflareIntegrationRequest) SetName(v string) {
 }
 
 // GetParameters returns the Parameters field value if set, zero value otherwise.
-func (o *UpdatecloudflareIntegrationRequest) GetParameters() UpdatecloudflareIntegrationRequestParameters {
+func (o *UpdatecloudflareIntegrationRequest) GetParameters() CreatecloudflareIntegrationRequestParameters {
 	if o == nil || IsNil(o.Parameters) {
-		var ret UpdatecloudflareIntegrationRequestParameters
+		var ret CreatecloudflareIntegrationRequestParameters
 		return ret
 	}
 	return *o.Parameters
@@ -91,7 +91,7 @@ func (o *UpdatecloudflareIntegrationRequest) GetParameters() UpdatecloudflareInt
 
 // GetParametersOk returns a tuple with the Parameters field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdatecloudflareIntegrationRequest) GetParametersOk() (*UpdatecloudflareIntegrationRequestParameters, bool) {
+func (o *UpdatecloudflareIntegrationRequest) GetParametersOk() (*CreatecloudflareIntegrationRequestParameters, bool) {
 	if o == nil || IsNil(o.Parameters) {
 		return nil, false
 	}
@@ -107,8 +107,8 @@ func (o *UpdatecloudflareIntegrationRequest) HasParameters() bool {
 	return false
 }
 
-// SetParameters gets a reference to the given UpdatecloudflareIntegrationRequestParameters and assigns it to the Parameters field.
-func (o *UpdatecloudflareIntegrationRequest) SetParameters(v UpdatecloudflareIntegrationRequestParameters) {
+// SetParameters gets a reference to the given CreatecloudflareIntegrationRequestParameters and assigns it to the Parameters field.
+func (o *UpdatecloudflareIntegrationRequest) SetParameters(v CreatecloudflareIntegrationRequestParameters) {
 	o.Parameters = &v
 }
 
