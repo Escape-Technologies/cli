@@ -20,7 +20,6 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationExperimental{}
 // GetProfile200ResponseConfigurationExperimental struct for GetProfile200ResponseConfigurationExperimental
 type GetProfile200ResponseConfigurationExperimental struct {
 	BlstExplorationOnly            *bool    `json:"blst_exploration_only,omitempty"`
-	AgenticIdor                    *bool    `json:"agentic_idor,omitempty"`
 	RegressionTestingFileUploadIds []string `json:"regression_testing_file_upload_ids,omitempty"`
 	AsmTechnologies                *bool    `json:"asm_technologies,omitempty"`
 	AsmCodeProjects                *bool    `json:"asm_code_projects,omitempty"`
@@ -81,38 +80,6 @@ func (o *GetProfile200ResponseConfigurationExperimental) HasBlstExplorationOnly(
 // SetBlstExplorationOnly gets a reference to the given bool and assigns it to the BlstExplorationOnly field.
 func (o *GetProfile200ResponseConfigurationExperimental) SetBlstExplorationOnly(v bool) {
 	o.BlstExplorationOnly = &v
-}
-
-// GetAgenticIdor returns the AgenticIdor field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationExperimental) GetAgenticIdor() bool {
-	if o == nil || IsNil(o.AgenticIdor) {
-		var ret bool
-		return ret
-	}
-	return *o.AgenticIdor
-}
-
-// GetAgenticIdorOk returns a tuple with the AgenticIdor field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationExperimental) GetAgenticIdorOk() (*bool, bool) {
-	if o == nil || IsNil(o.AgenticIdor) {
-		return nil, false
-	}
-	return o.AgenticIdor, true
-}
-
-// HasAgenticIdor returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationExperimental) HasAgenticIdor() bool {
-	if o != nil && !IsNil(o.AgenticIdor) {
-		return true
-	}
-
-	return false
-}
-
-// SetAgenticIdor gets a reference to the given bool and assigns it to the AgenticIdor field.
-func (o *GetProfile200ResponseConfigurationExperimental) SetAgenticIdor(v bool) {
-	o.AgenticIdor = &v
 }
 
 // GetRegressionTestingFileUploadIds returns the RegressionTestingFileUploadIds field value if set, zero value otherwise.
@@ -384,9 +351,6 @@ func (o GetProfile200ResponseConfigurationExperimental) ToMap() (map[string]inte
 	if !IsNil(o.BlstExplorationOnly) {
 		toSerialize["blst_exploration_only"] = o.BlstExplorationOnly
 	}
-	if !IsNil(o.AgenticIdor) {
-		toSerialize["agentic_idor"] = o.AgenticIdor
-	}
 	if !IsNil(o.RegressionTestingFileUploadIds) {
 		toSerialize["regression_testing_file_upload_ids"] = o.RegressionTestingFileUploadIds
 	}
@@ -434,7 +398,6 @@ func (o *GetProfile200ResponseConfigurationExperimental) UnmarshalJSON(data []by
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "blst_exploration_only")
-		delete(additionalProperties, "agentic_idor")
 		delete(additionalProperties, "regression_testing_file_upload_ids")
 		delete(additionalProperties, "asm_technologies")
 		delete(additionalProperties, "asm_code_projects")
