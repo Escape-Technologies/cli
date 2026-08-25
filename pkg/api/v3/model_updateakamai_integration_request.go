@@ -21,7 +21,7 @@ var _ MappedNullable = &UpdateakamaiIntegrationRequest{}
 type UpdateakamaiIntegrationRequest struct {
 	// The new name of the integration
 	Name       *string                                   `json:"name,omitempty"`
-	Parameters *CreateakamaiIntegrationRequestParameters `json:"parameters,omitempty"`
+	Parameters *UpdateakamaiIntegrationRequestParameters `json:"parameters,omitempty"`
 	// Optional proxy ID to attach to the integration
 	ProxyId *string `json:"proxyId,omitempty"`
 	// Optional list of project IDs to attach to the integration
@@ -81,9 +81,9 @@ func (o *UpdateakamaiIntegrationRequest) SetName(v string) {
 }
 
 // GetParameters returns the Parameters field value if set, zero value otherwise.
-func (o *UpdateakamaiIntegrationRequest) GetParameters() CreateakamaiIntegrationRequestParameters {
+func (o *UpdateakamaiIntegrationRequest) GetParameters() UpdateakamaiIntegrationRequestParameters {
 	if o == nil || IsNil(o.Parameters) {
-		var ret CreateakamaiIntegrationRequestParameters
+		var ret UpdateakamaiIntegrationRequestParameters
 		return ret
 	}
 	return *o.Parameters
@@ -91,7 +91,7 @@ func (o *UpdateakamaiIntegrationRequest) GetParameters() CreateakamaiIntegration
 
 // GetParametersOk returns a tuple with the Parameters field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateakamaiIntegrationRequest) GetParametersOk() (*CreateakamaiIntegrationRequestParameters, bool) {
+func (o *UpdateakamaiIntegrationRequest) GetParametersOk() (*UpdateakamaiIntegrationRequestParameters, bool) {
 	if o == nil || IsNil(o.Parameters) {
 		return nil, false
 	}
@@ -107,8 +107,8 @@ func (o *UpdateakamaiIntegrationRequest) HasParameters() bool {
 	return false
 }
 
-// SetParameters gets a reference to the given CreateakamaiIntegrationRequestParameters and assigns it to the Parameters field.
-func (o *UpdateakamaiIntegrationRequest) SetParameters(v CreateakamaiIntegrationRequestParameters) {
+// SetParameters gets a reference to the given UpdateakamaiIntegrationRequestParameters and assigns it to the Parameters field.
+func (o *UpdateakamaiIntegrationRequest) SetParameters(v UpdateakamaiIntegrationRequestParameters) {
 	o.Parameters = &v
 }
 

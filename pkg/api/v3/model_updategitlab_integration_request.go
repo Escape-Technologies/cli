@@ -21,7 +21,7 @@ var _ MappedNullable = &UpdategitlabIntegrationRequest{}
 type UpdategitlabIntegrationRequest struct {
 	// The new name of the integration
 	Name       *string                                   `json:"name,omitempty"`
-	Parameters *CreategitlabIntegrationRequestParameters `json:"parameters,omitempty"`
+	Parameters *UpdategitlabIntegrationRequestParameters `json:"parameters,omitempty"`
 	// Optional proxy ID to attach to the integration
 	ProxyId *string `json:"proxyId,omitempty"`
 	// Optional list of project IDs to attach to the integration
@@ -81,9 +81,9 @@ func (o *UpdategitlabIntegrationRequest) SetName(v string) {
 }
 
 // GetParameters returns the Parameters field value if set, zero value otherwise.
-func (o *UpdategitlabIntegrationRequest) GetParameters() CreategitlabIntegrationRequestParameters {
+func (o *UpdategitlabIntegrationRequest) GetParameters() UpdategitlabIntegrationRequestParameters {
 	if o == nil || IsNil(o.Parameters) {
-		var ret CreategitlabIntegrationRequestParameters
+		var ret UpdategitlabIntegrationRequestParameters
 		return ret
 	}
 	return *o.Parameters
@@ -91,7 +91,7 @@ func (o *UpdategitlabIntegrationRequest) GetParameters() CreategitlabIntegration
 
 // GetParametersOk returns a tuple with the Parameters field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdategitlabIntegrationRequest) GetParametersOk() (*CreategitlabIntegrationRequestParameters, bool) {
+func (o *UpdategitlabIntegrationRequest) GetParametersOk() (*UpdategitlabIntegrationRequestParameters, bool) {
 	if o == nil || IsNil(o.Parameters) {
 		return nil, false
 	}
@@ -107,8 +107,8 @@ func (o *UpdategitlabIntegrationRequest) HasParameters() bool {
 	return false
 }
 
-// SetParameters gets a reference to the given CreategitlabIntegrationRequestParameters and assigns it to the Parameters field.
-func (o *UpdategitlabIntegrationRequest) SetParameters(v CreategitlabIntegrationRequestParameters) {
+// SetParameters gets a reference to the given UpdategitlabIntegrationRequestParameters and assigns it to the Parameters field.
+func (o *UpdategitlabIntegrationRequest) SetParameters(v UpdategitlabIntegrationRequestParameters) {
 	o.Parameters = &v
 }
 

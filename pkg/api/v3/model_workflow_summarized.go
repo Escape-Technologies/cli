@@ -30,7 +30,6 @@ type WorkflowSummarized struct {
 	Filter     NullableWorkflowFilter `json:"filter"`
 	View       *WorkflowView          `json:"view,omitempty"`
 	// Deprecated. Always empty. Use `filter` and `view` instead.
-	// Deprecated
 	Filters              []WorkflowLegacyFilter           `json:"filters"`
 	Actions              []WorkflowSummarizedActionsInner `json:"actions"`
 	AdditionalProperties map[string]interface{}
@@ -246,7 +245,6 @@ func (o *WorkflowSummarized) SetView(v WorkflowView) {
 }
 
 // GetFilters returns the Filters field value
-// Deprecated
 func (o *WorkflowSummarized) GetFilters() []WorkflowLegacyFilter {
 	if o == nil {
 		var ret []WorkflowLegacyFilter
@@ -258,7 +256,6 @@ func (o *WorkflowSummarized) GetFilters() []WorkflowLegacyFilter {
 
 // GetFiltersOk returns a tuple with the Filters field value
 // and a boolean to check if the value has been set.
-// Deprecated
 func (o *WorkflowSummarized) GetFiltersOk() ([]WorkflowLegacyFilter, bool) {
 	if o == nil {
 		return nil, false
@@ -267,7 +264,6 @@ func (o *WorkflowSummarized) GetFiltersOk() ([]WorkflowLegacyFilter, bool) {
 }
 
 // SetFilters sets field value
-// Deprecated
 func (o *WorkflowSummarized) SetFilters(v []WorkflowLegacyFilter) {
 	o.Filters = v
 }

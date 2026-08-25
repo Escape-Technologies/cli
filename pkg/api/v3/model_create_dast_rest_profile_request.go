@@ -23,8 +23,8 @@ type CreateDastRestProfileRequest struct {
 	// The asset ID for the profile
 	AssetId string `json:"assetId"`
 	// The scan configuration encoded as a JSON string (legacy public API contract).
-	Configuration       *string                                         `json:"configuration,omitempty"`
-	ConfigurationObject *UpdateProfileConfigurationRequestConfiguration `json:"configurationObject,omitempty"`
+	Configuration       *string                                          `json:"configuration,omitempty"`
+	ConfigurationObject *CreateDastRestProfileRequestConfigurationObject `json:"configurationObject,omitempty"`
 	// Deprecated: use `schedule.cron` instead.
 	// Deprecated
 	Cron     *string                     `json:"cron,omitempty"`
@@ -135,9 +135,9 @@ func (o *CreateDastRestProfileRequest) SetConfiguration(v string) {
 }
 
 // GetConfigurationObject returns the ConfigurationObject field value if set, zero value otherwise.
-func (o *CreateDastRestProfileRequest) GetConfigurationObject() UpdateProfileConfigurationRequestConfiguration {
+func (o *CreateDastRestProfileRequest) GetConfigurationObject() CreateDastRestProfileRequestConfigurationObject {
 	if o == nil || IsNil(o.ConfigurationObject) {
-		var ret UpdateProfileConfigurationRequestConfiguration
+		var ret CreateDastRestProfileRequestConfigurationObject
 		return ret
 	}
 	return *o.ConfigurationObject
@@ -145,7 +145,7 @@ func (o *CreateDastRestProfileRequest) GetConfigurationObject() UpdateProfileCon
 
 // GetConfigurationObjectOk returns a tuple with the ConfigurationObject field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDastRestProfileRequest) GetConfigurationObjectOk() (*UpdateProfileConfigurationRequestConfiguration, bool) {
+func (o *CreateDastRestProfileRequest) GetConfigurationObjectOk() (*CreateDastRestProfileRequestConfigurationObject, bool) {
 	if o == nil || IsNil(o.ConfigurationObject) {
 		return nil, false
 	}
@@ -161,8 +161,8 @@ func (o *CreateDastRestProfileRequest) HasConfigurationObject() bool {
 	return false
 }
 
-// SetConfigurationObject gets a reference to the given UpdateProfileConfigurationRequestConfiguration and assigns it to the ConfigurationObject field.
-func (o *CreateDastRestProfileRequest) SetConfigurationObject(v UpdateProfileConfigurationRequestConfiguration) {
+// SetConfigurationObject gets a reference to the given CreateDastRestProfileRequestConfigurationObject and assigns it to the ConfigurationObject field.
+func (o *CreateDastRestProfileRequest) SetConfigurationObject(v CreateDastRestProfileRequestConfigurationObject) {
 	o.ConfigurationObject = &v
 }
 

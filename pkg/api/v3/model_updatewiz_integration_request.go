@@ -21,7 +21,7 @@ var _ MappedNullable = &UpdatewizIntegrationRequest{}
 type UpdatewizIntegrationRequest struct {
 	// The new name of the integration
 	Name       *string                                `json:"name,omitempty"`
-	Parameters *CreatewizIntegrationRequestParameters `json:"parameters,omitempty"`
+	Parameters *UpdatewizIntegrationRequestParameters `json:"parameters,omitempty"`
 	// Optional proxy ID to attach to the integration
 	ProxyId *string `json:"proxyId,omitempty"`
 	// Optional list of project IDs to attach to the integration
@@ -81,9 +81,9 @@ func (o *UpdatewizIntegrationRequest) SetName(v string) {
 }
 
 // GetParameters returns the Parameters field value if set, zero value otherwise.
-func (o *UpdatewizIntegrationRequest) GetParameters() CreatewizIntegrationRequestParameters {
+func (o *UpdatewizIntegrationRequest) GetParameters() UpdatewizIntegrationRequestParameters {
 	if o == nil || IsNil(o.Parameters) {
-		var ret CreatewizIntegrationRequestParameters
+		var ret UpdatewizIntegrationRequestParameters
 		return ret
 	}
 	return *o.Parameters
@@ -91,7 +91,7 @@ func (o *UpdatewizIntegrationRequest) GetParameters() CreatewizIntegrationReques
 
 // GetParametersOk returns a tuple with the Parameters field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdatewizIntegrationRequest) GetParametersOk() (*CreatewizIntegrationRequestParameters, bool) {
+func (o *UpdatewizIntegrationRequest) GetParametersOk() (*UpdatewizIntegrationRequestParameters, bool) {
 	if o == nil || IsNil(o.Parameters) {
 		return nil, false
 	}
@@ -107,8 +107,8 @@ func (o *UpdatewizIntegrationRequest) HasParameters() bool {
 	return false
 }
 
-// SetParameters gets a reference to the given CreatewizIntegrationRequestParameters and assigns it to the Parameters field.
-func (o *UpdatewizIntegrationRequest) SetParameters(v CreatewizIntegrationRequestParameters) {
+// SetParameters gets a reference to the given UpdatewizIntegrationRequestParameters and assigns it to the Parameters field.
+func (o *UpdatewizIntegrationRequest) SetParameters(v UpdatewizIntegrationRequestParameters) {
 	o.Parameters = &v
 }
 

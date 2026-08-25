@@ -38,11 +38,11 @@ type GetIssue200Response struct {
 	// Unique identifier for the alert
 	AlertUid string `json:"alertUid"`
 	// When the issue was first created
-	CreatedAt string        `json:"createdAt"`
-	Asset     AssetDetailed `json:"asset"`
+	CreatedAt string         `json:"createdAt"`
+	Asset     AssetDetailed2 `json:"asset"`
 	// ID of the last scan where this issue was seen
-	LastSeenScanId *string         `json:"lastSeenScanId,omitempty"`
-	LastSeenScan   *ScanSummarized `json:"lastSeenScan,omitempty"`
+	LastSeenScanId *string          `json:"lastSeenScanId,omitempty"`
+	LastSeenScan   *ScanSummarized3 `json:"lastSeenScan,omitempty"`
 	// ID of the first scan where this issue was seen
 	FirstSeenScanId *string `json:"firstSeenScanId,omitempty"`
 	// ID of the custom rule if this is a custom issue
@@ -71,7 +71,7 @@ type _GetIssue200Response GetIssue200Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetIssue200Response(id string, name string, fullName string, category ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY, severity ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY, manualSeverity bool, status ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, alertUid string, createdAt string, asset AssetDetailed, securityTest GetIssue200ResponseSecurityTest, aiRemediationFramework string, links IssueSummarizedLinks, targets []IssueTarget) *GetIssue200Response {
+func NewGetIssue200Response(id string, name string, fullName string, category ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY, severity ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY, manualSeverity bool, status ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, alertUid string, createdAt string, asset AssetDetailed2, securityTest GetIssue200ResponseSecurityTest, aiRemediationFramework string, links IssueSummarizedLinks, targets []IssueTarget) *GetIssue200Response {
 	this := GetIssue200Response{}
 	this.Id = id
 	this.Name = name
@@ -372,9 +372,9 @@ func (o *GetIssue200Response) SetCreatedAt(v string) {
 }
 
 // GetAsset returns the Asset field value
-func (o *GetIssue200Response) GetAsset() AssetDetailed {
+func (o *GetIssue200Response) GetAsset() AssetDetailed2 {
 	if o == nil {
-		var ret AssetDetailed
+		var ret AssetDetailed2
 		return ret
 	}
 
@@ -383,7 +383,7 @@ func (o *GetIssue200Response) GetAsset() AssetDetailed {
 
 // GetAssetOk returns a tuple with the Asset field value
 // and a boolean to check if the value has been set.
-func (o *GetIssue200Response) GetAssetOk() (*AssetDetailed, bool) {
+func (o *GetIssue200Response) GetAssetOk() (*AssetDetailed2, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -391,7 +391,7 @@ func (o *GetIssue200Response) GetAssetOk() (*AssetDetailed, bool) {
 }
 
 // SetAsset sets field value
-func (o *GetIssue200Response) SetAsset(v AssetDetailed) {
+func (o *GetIssue200Response) SetAsset(v AssetDetailed2) {
 	o.Asset = v
 }
 
@@ -428,9 +428,9 @@ func (o *GetIssue200Response) SetLastSeenScanId(v string) {
 }
 
 // GetLastSeenScan returns the LastSeenScan field value if set, zero value otherwise.
-func (o *GetIssue200Response) GetLastSeenScan() ScanSummarized {
+func (o *GetIssue200Response) GetLastSeenScan() ScanSummarized3 {
 	if o == nil || IsNil(o.LastSeenScan) {
-		var ret ScanSummarized
+		var ret ScanSummarized3
 		return ret
 	}
 	return *o.LastSeenScan
@@ -438,7 +438,7 @@ func (o *GetIssue200Response) GetLastSeenScan() ScanSummarized {
 
 // GetLastSeenScanOk returns a tuple with the LastSeenScan field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetIssue200Response) GetLastSeenScanOk() (*ScanSummarized, bool) {
+func (o *GetIssue200Response) GetLastSeenScanOk() (*ScanSummarized3, bool) {
 	if o == nil || IsNil(o.LastSeenScan) {
 		return nil, false
 	}
@@ -454,8 +454,8 @@ func (o *GetIssue200Response) HasLastSeenScan() bool {
 	return false
 }
 
-// SetLastSeenScan gets a reference to the given ScanSummarized and assigns it to the LastSeenScan field.
-func (o *GetIssue200Response) SetLastSeenScan(v ScanSummarized) {
+// SetLastSeenScan gets a reference to the given ScanSummarized3 and assigns it to the LastSeenScan field.
+func (o *GetIssue200Response) SetLastSeenScan(v ScanSummarized3) {
 	o.LastSeenScan = &v
 }
 

@@ -23,7 +23,7 @@ type WorkflowLegacyFilter struct {
 	Id                   string                                                `json:"id"`
 	Type                 ENUMPROPERTIESDATAITEMSPROPERTIESVIEWPROPERTIESTARGET `json:"type"`
 	Filter               interface{}                                           `json:"filter,omitempty"`
-	View                 *WorkflowView                                         `json:"view,omitempty"`
+	View                 *WorkflowView1                                        `json:"view,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -130,9 +130,9 @@ func (o *WorkflowLegacyFilter) SetFilter(v interface{}) {
 }
 
 // GetView returns the View field value if set, zero value otherwise.
-func (o *WorkflowLegacyFilter) GetView() WorkflowView {
+func (o *WorkflowLegacyFilter) GetView() WorkflowView1 {
 	if o == nil || IsNil(o.View) {
-		var ret WorkflowView
+		var ret WorkflowView1
 		return ret
 	}
 	return *o.View
@@ -140,7 +140,7 @@ func (o *WorkflowLegacyFilter) GetView() WorkflowView {
 
 // GetViewOk returns a tuple with the View field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *WorkflowLegacyFilter) GetViewOk() (*WorkflowView, bool) {
+func (o *WorkflowLegacyFilter) GetViewOk() (*WorkflowView1, bool) {
 	if o == nil || IsNil(o.View) {
 		return nil, false
 	}
@@ -156,8 +156,8 @@ func (o *WorkflowLegacyFilter) HasView() bool {
 	return false
 }
 
-// SetView gets a reference to the given WorkflowView and assigns it to the View field.
-func (o *WorkflowLegacyFilter) SetView(v WorkflowView) {
+// SetView gets a reference to the given WorkflowView1 and assigns it to the View field.
+func (o *WorkflowLegacyFilter) SetView(v WorkflowView1) {
 	o.View = &v
 }
 

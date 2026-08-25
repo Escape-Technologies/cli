@@ -172,7 +172,7 @@ func (r ApiTriggerExportRequest) TriggerExportRequest(triggerExportRequest Trigg
 	return r
 }
 
-func (r ApiTriggerExportRequest) Execute() (*CreateAiPentestProfileRequestLocationAnyOf, *http.Response, error) {
+func (r ApiTriggerExportRequest) Execute() (*TriggerExport200Response, *http.Response, error) {
 	return r.ApiService.TriggerExportExecute(r)
 }
 
@@ -193,13 +193,13 @@ func (a *JobsAPIService) TriggerExport(ctx context.Context) ApiTriggerExportRequ
 
 // Execute executes the request
 //
-//	@return CreateAiPentestProfileRequestLocationAnyOf
-func (a *JobsAPIService) TriggerExportExecute(r ApiTriggerExportRequest) (*CreateAiPentestProfileRequestLocationAnyOf, *http.Response, error) {
+//	@return TriggerExport200Response
+func (a *JobsAPIService) TriggerExportExecute(r ApiTriggerExportRequest) (*TriggerExport200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreateAiPentestProfileRequestLocationAnyOf
+		localVarReturnValue *TriggerExport200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "JobsAPIService.TriggerExport")

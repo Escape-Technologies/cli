@@ -45,13 +45,13 @@ type ScanDetailed struct {
 	// The id of the profile of the scan
 	ProfileId string `json:"profileId"`
 	// The id of the organization of the scan
-	OrganizationId                 string              `json:"organizationId"`
-	CommitHash                     *string             `json:"commitHash,omitempty"`
-	CommitBranch                   *string             `json:"commitBranch,omitempty"`
-	CommitAuthor                   *string             `json:"commitAuthor,omitempty"`
-	CommitLink                     *string             `json:"commitLink,omitempty"`
-	CommitAuthorProfilePictureLink *string             `json:"commitAuthorProfilePictureLink,omitempty"`
-	Links                          ScanSummarizedLinks `json:"links"`
+	OrganizationId                 string            `json:"organizationId"`
+	CommitHash                     *string           `json:"commitHash,omitempty"`
+	CommitBranch                   *string           `json:"commitBranch,omitempty"`
+	CommitAuthor                   *string           `json:"commitAuthor,omitempty"`
+	CommitLink                     *string           `json:"commitLink,omitempty"`
+	CommitAuthorProfilePictureLink *string           `json:"commitAuthorProfilePictureLink,omitempty"`
+	Links                          ScanDetailedLinks `json:"links"`
 	AdditionalProperties           map[string]interface{}
 }
 
@@ -61,7 +61,7 @@ type _ScanDetailed ScanDetailed
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewScanDetailed(id string, status string, createdAt string, updatedAt string, duration float32, progressRatio float32, initiator string, kind string, profileId string, organizationId string, links ScanSummarizedLinks) *ScanDetailed {
+func NewScanDetailed(id string, status string, createdAt string, updatedAt string, duration float32, progressRatio float32, initiator string, kind string, profileId string, organizationId string, links ScanDetailedLinks) *ScanDetailed {
 	this := ScanDetailed{}
 	this.Id = id
 	this.Status = status
@@ -582,9 +582,9 @@ func (o *ScanDetailed) SetCommitAuthorProfilePictureLink(v string) {
 }
 
 // GetLinks returns the Links field value
-func (o *ScanDetailed) GetLinks() ScanSummarizedLinks {
+func (o *ScanDetailed) GetLinks() ScanDetailedLinks {
 	if o == nil {
-		var ret ScanSummarizedLinks
+		var ret ScanDetailedLinks
 		return ret
 	}
 
@@ -593,7 +593,7 @@ func (o *ScanDetailed) GetLinks() ScanSummarizedLinks {
 
 // GetLinksOk returns a tuple with the Links field value
 // and a boolean to check if the value has been set.
-func (o *ScanDetailed) GetLinksOk() (*ScanSummarizedLinks, bool) {
+func (o *ScanDetailed) GetLinksOk() (*ScanDetailedLinks, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -601,7 +601,7 @@ func (o *ScanDetailed) GetLinksOk() (*ScanSummarizedLinks, bool) {
 }
 
 // SetLinks sets field value
-func (o *ScanDetailed) SetLinks(v ScanSummarizedLinks) {
+func (o *ScanDetailed) SetLinks(v ScanDetailedLinks) {
 	o.Links = v
 }
 

@@ -28,10 +28,9 @@ type CreateWorkflowRequest struct {
 	// The throttle in milliseconds for the workflow.
 	ThrottleMs *float32 `json:"throttleMs,omitempty"`
 	// Saved view to apply as the workflow filter.
-	ViewId *string                `json:"viewId,omitempty"`
-	Filter NullableWorkflowFilter `json:"filter,omitempty"`
+	ViewId *string                 `json:"viewId,omitempty"`
+	Filter NullableWorkflowFilter1 `json:"filter,omitempty"`
 	// Deprecated. Use `viewId` and `filter` instead.
-	// Deprecated
 	Filters []CreateWorkflowRequestFiltersInner `json:"filters,omitempty"`
 	Actions []CreateWorkflowRequestActionsInner `json:"actions"`
 	// Optional list of project IDs to create the integration for
@@ -199,9 +198,9 @@ func (o *CreateWorkflowRequest) SetViewId(v string) {
 }
 
 // GetFilter returns the Filter field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *CreateWorkflowRequest) GetFilter() WorkflowFilter {
+func (o *CreateWorkflowRequest) GetFilter() WorkflowFilter1 {
 	if o == nil || IsNil(o.Filter.Get()) {
-		var ret WorkflowFilter
+		var ret WorkflowFilter1
 		return ret
 	}
 	return *o.Filter.Get()
@@ -210,7 +209,7 @@ func (o *CreateWorkflowRequest) GetFilter() WorkflowFilter {
 // GetFilterOk returns a tuple with the Filter field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *CreateWorkflowRequest) GetFilterOk() (*WorkflowFilter, bool) {
+func (o *CreateWorkflowRequest) GetFilterOk() (*WorkflowFilter1, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -226,8 +225,8 @@ func (o *CreateWorkflowRequest) HasFilter() bool {
 	return false
 }
 
-// SetFilter gets a reference to the given NullableWorkflowFilter and assigns it to the Filter field.
-func (o *CreateWorkflowRequest) SetFilter(v WorkflowFilter) {
+// SetFilter gets a reference to the given NullableWorkflowFilter1 and assigns it to the Filter field.
+func (o *CreateWorkflowRequest) SetFilter(v WorkflowFilter1) {
 	o.Filter.Set(&v)
 }
 
@@ -242,7 +241,6 @@ func (o *CreateWorkflowRequest) UnsetFilter() {
 }
 
 // GetFilters returns the Filters field value if set, zero value otherwise.
-// Deprecated
 func (o *CreateWorkflowRequest) GetFilters() []CreateWorkflowRequestFiltersInner {
 	if o == nil || IsNil(o.Filters) {
 		var ret []CreateWorkflowRequestFiltersInner
@@ -253,7 +251,6 @@ func (o *CreateWorkflowRequest) GetFilters() []CreateWorkflowRequestFiltersInner
 
 // GetFiltersOk returns a tuple with the Filters field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
 func (o *CreateWorkflowRequest) GetFiltersOk() ([]CreateWorkflowRequestFiltersInner, bool) {
 	if o == nil || IsNil(o.Filters) {
 		return nil, false
@@ -271,7 +268,6 @@ func (o *CreateWorkflowRequest) HasFilters() bool {
 }
 
 // SetFilters gets a reference to the given []CreateWorkflowRequestFiltersInner and assigns it to the Filters field.
-// Deprecated
 func (o *CreateWorkflowRequest) SetFilters(v []CreateWorkflowRequestFiltersInner) {
 	o.Filters = v
 }

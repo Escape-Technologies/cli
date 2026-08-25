@@ -303,7 +303,7 @@ func (r ApiIgnoreScanRequest) IgnoreScanRequest(ignoreScanRequest IgnoreScanRequ
 	return r
 }
 
-func (r ApiIgnoreScanRequest) Execute() (*IgnoreScanRequest, *http.Response, error) {
+func (r ApiIgnoreScanRequest) Execute() (*IgnoreScan200Response, *http.Response, error) {
 	return r.ApiService.IgnoreScanExecute(r)
 }
 
@@ -326,13 +326,13 @@ func (a *ScansAPIService) IgnoreScan(ctx context.Context, scanId string) ApiIgno
 
 // Execute executes the request
 //
-//	@return IgnoreScanRequest
-func (a *ScansAPIService) IgnoreScanExecute(r ApiIgnoreScanRequest) (*IgnoreScanRequest, *http.Response, error) {
+//	@return IgnoreScan200Response
+func (a *ScansAPIService) IgnoreScanExecute(r ApiIgnoreScanRequest) (*IgnoreScan200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *IgnoreScanRequest
+		localVarReturnValue *IgnoreScan200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ScansAPIService.IgnoreScan")
@@ -552,7 +552,6 @@ func (a *ScansAPIService) ListScanAgentLogsExecute(r ApiListScanAgentLogsRequest
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
-		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.sortType != nil {
@@ -562,7 +561,6 @@ func (a *ScansAPIService) ListScanAgentLogsExecute(r ApiListScanAgentLogsRequest
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
 		var defaultValue string = "asc"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
 		r.sortDirection = &defaultValue
 	}
 	if r.search != nil {
@@ -774,7 +772,6 @@ func (a *ScansAPIService) ListScanAgentsExecute(r ApiListScanAgentsRequest) (*Li
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
-		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.sortType != nil {
@@ -784,7 +781,6 @@ func (a *ScansAPIService) ListScanAgentsExecute(r ApiListScanAgentsRequest) (*Li
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
 		var defaultValue string = "asc"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
 		r.sortDirection = &defaultValue
 	}
 	if r.search != nil {
@@ -977,7 +973,6 @@ func (a *ScansAPIService) ListScanTargetsExecute(r ApiListScanTargetsRequest) (*
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
-		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.sortType != nil {
@@ -987,7 +982,6 @@ func (a *ScansAPIService) ListScanTargetsExecute(r ApiListScanTargetsRequest) (*
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
 		var defaultValue string = "asc"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
 		r.sortDirection = &defaultValue
 	}
 	if r.types != nil {
@@ -1105,7 +1099,7 @@ type ApiListScansRequest struct {
 	initiator     *[]string
 	kinds         *[]string
 	status        *[]string
-	projectIds    *UpdateProfileRequestExtraAssetIds
+	projectIds    *ListScansProjectIdsParameter
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
@@ -1181,7 +1175,7 @@ func (r ApiListScansRequest) Status(status []string) ApiListScansRequest {
 }
 
 // Filter by project IDs
-func (r ApiListScansRequest) ProjectIds(projectIds UpdateProfileRequestExtraAssetIds) ApiListScansRequest {
+func (r ApiListScansRequest) ProjectIds(projectIds ListScansProjectIdsParameter) ApiListScansRequest {
 	r.projectIds = &projectIds
 	return r
 }
@@ -1234,7 +1228,6 @@ func (a *ScansAPIService) ListScansExecute(r ApiListScansRequest) (*ListScans200
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
-		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.sortType != nil {
@@ -1244,7 +1237,6 @@ func (a *ScansAPIService) ListScansExecute(r ApiListScansRequest) (*ListScans200
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
 		var defaultValue string = "asc"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
 		r.sortDirection = &defaultValue
 	}
 	if r.after != nil {
@@ -1387,7 +1379,7 @@ type ApiScansProblemsRequest struct {
 	before        *string
 	assetIds      *string
 	profileIds    *string
-	projectIds    *UpdateProfileRequestExtraAssetIds
+	projectIds    *ListScansProjectIdsParameter
 	ignored       *string
 	initiator     *[]string
 	kinds         *[]string
@@ -1443,7 +1435,7 @@ func (r ApiScansProblemsRequest) ProfileIds(profileIds string) ApiScansProblemsR
 }
 
 // Filter by project IDs
-func (r ApiScansProblemsRequest) ProjectIds(projectIds UpdateProfileRequestExtraAssetIds) ApiScansProblemsRequest {
+func (r ApiScansProblemsRequest) ProjectIds(projectIds ListScansProjectIdsParameter) ApiScansProblemsRequest {
 	r.projectIds = &projectIds
 	return r
 }
@@ -1520,7 +1512,6 @@ func (a *ScansAPIService) ScansProblemsExecute(r ApiScansProblemsRequest) (*Scan
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
 		var defaultValue int = 50
-		parameterAddToHeaderOrQuery(localVarQueryParams, "size", defaultValue, "form", "")
 		r.size = &defaultValue
 	}
 	if r.sortType != nil {
@@ -1530,7 +1521,6 @@ func (a *ScansAPIService) ScansProblemsExecute(r ApiScansProblemsRequest) (*Scan
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
 	} else {
 		var defaultValue string = "asc"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
 		r.sortDirection = &defaultValue
 	}
 	if r.after != nil {

@@ -38,11 +38,11 @@ type IssueSummarized struct {
 	// Unique identifier for the alert
 	AlertUid string `json:"alertUid"`
 	// When the issue was first created
-	CreatedAt string          `json:"createdAt"`
-	Asset     AssetSummarized `json:"asset"`
+	CreatedAt string           `json:"createdAt"`
+	Asset     AssetSummarized1 `json:"asset"`
 	// ID of the last scan where this issue was seen
-	LastSeenScanId *string         `json:"lastSeenScanId,omitempty"`
-	LastSeenScan   *ScanSummarized `json:"lastSeenScan,omitempty"`
+	LastSeenScanId *string          `json:"lastSeenScanId,omitempty"`
+	LastSeenScan   *ScanSummarized3 `json:"lastSeenScan,omitempty"`
 	// ID of the first scan where this issue was seen
 	FirstSeenScanId *string `json:"firstSeenScanId,omitempty"`
 	// ID of the custom rule if this is a custom issue
@@ -57,7 +57,7 @@ type _IssueSummarized IssueSummarized
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIssueSummarized(id string, name string, fullName string, category ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY, severity ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY, manualSeverity bool, status ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS, context string, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, alertUid string, createdAt string, asset AssetSummarized, links IssueSummarizedLinks) *IssueSummarized {
+func NewIssueSummarized(id string, name string, fullName string, category ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY, severity ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY, manualSeverity bool, status ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS, context string, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, alertUid string, createdAt string, asset AssetSummarized1, links IssueSummarizedLinks) *IssueSummarized {
 	this := IssueSummarized{}
 	this.Id = id
 	this.Name = name
@@ -348,9 +348,9 @@ func (o *IssueSummarized) SetCreatedAt(v string) {
 }
 
 // GetAsset returns the Asset field value
-func (o *IssueSummarized) GetAsset() AssetSummarized {
+func (o *IssueSummarized) GetAsset() AssetSummarized1 {
 	if o == nil {
-		var ret AssetSummarized
+		var ret AssetSummarized1
 		return ret
 	}
 
@@ -359,7 +359,7 @@ func (o *IssueSummarized) GetAsset() AssetSummarized {
 
 // GetAssetOk returns a tuple with the Asset field value
 // and a boolean to check if the value has been set.
-func (o *IssueSummarized) GetAssetOk() (*AssetSummarized, bool) {
+func (o *IssueSummarized) GetAssetOk() (*AssetSummarized1, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -367,7 +367,7 @@ func (o *IssueSummarized) GetAssetOk() (*AssetSummarized, bool) {
 }
 
 // SetAsset sets field value
-func (o *IssueSummarized) SetAsset(v AssetSummarized) {
+func (o *IssueSummarized) SetAsset(v AssetSummarized1) {
 	o.Asset = v
 }
 
@@ -404,9 +404,9 @@ func (o *IssueSummarized) SetLastSeenScanId(v string) {
 }
 
 // GetLastSeenScan returns the LastSeenScan field value if set, zero value otherwise.
-func (o *IssueSummarized) GetLastSeenScan() ScanSummarized {
+func (o *IssueSummarized) GetLastSeenScan() ScanSummarized3 {
 	if o == nil || IsNil(o.LastSeenScan) {
-		var ret ScanSummarized
+		var ret ScanSummarized3
 		return ret
 	}
 	return *o.LastSeenScan
@@ -414,7 +414,7 @@ func (o *IssueSummarized) GetLastSeenScan() ScanSummarized {
 
 // GetLastSeenScanOk returns a tuple with the LastSeenScan field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IssueSummarized) GetLastSeenScanOk() (*ScanSummarized, bool) {
+func (o *IssueSummarized) GetLastSeenScanOk() (*ScanSummarized3, bool) {
 	if o == nil || IsNil(o.LastSeenScan) {
 		return nil, false
 	}
@@ -430,8 +430,8 @@ func (o *IssueSummarized) HasLastSeenScan() bool {
 	return false
 }
 
-// SetLastSeenScan gets a reference to the given ScanSummarized and assigns it to the LastSeenScan field.
-func (o *IssueSummarized) SetLastSeenScan(v ScanSummarized) {
+// SetLastSeenScan gets a reference to the given ScanSummarized3 and assigns it to the LastSeenScan field.
+func (o *IssueSummarized) SetLastSeenScan(v ScanSummarized3) {
 	o.LastSeenScan = &v
 }
 

@@ -45,13 +45,13 @@ type StartScan200Response struct {
 	// The id of the profile of the scan
 	ProfileId string `json:"profileId"`
 	// The id of the organization of the scan
-	OrganizationId                 string              `json:"organizationId"`
-	CommitHash                     *string             `json:"commitHash,omitempty"`
-	CommitBranch                   *string             `json:"commitBranch,omitempty"`
-	CommitAuthor                   *string             `json:"commitAuthor,omitempty"`
-	CommitLink                     *string             `json:"commitLink,omitempty"`
-	CommitAuthorProfilePictureLink *string             `json:"commitAuthorProfilePictureLink,omitempty"`
-	Links                          ScanSummarizedLinks `json:"links"`
+	OrganizationId                 string            `json:"organizationId"`
+	CommitHash                     *string           `json:"commitHash,omitempty"`
+	CommitBranch                   *string           `json:"commitBranch,omitempty"`
+	CommitAuthor                   *string           `json:"commitAuthor,omitempty"`
+	CommitLink                     *string           `json:"commitLink,omitempty"`
+	CommitAuthorProfilePictureLink *string           `json:"commitAuthorProfilePictureLink,omitempty"`
+	Links                          ScanDetailedLinks `json:"links"`
 	AdditionalProperties           map[string]interface{}
 }
 
@@ -61,7 +61,7 @@ type _StartScan200Response StartScan200Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewStartScan200Response(id string, status string, createdAt string, updatedAt string, duration float32, progressRatio float32, initiator string, kind string, profileId string, organizationId string, links ScanSummarizedLinks) *StartScan200Response {
+func NewStartScan200Response(id string, status string, createdAt string, updatedAt string, duration float32, progressRatio float32, initiator string, kind string, profileId string, organizationId string, links ScanDetailedLinks) *StartScan200Response {
 	this := StartScan200Response{}
 	this.Id = id
 	this.Status = status
@@ -582,9 +582,9 @@ func (o *StartScan200Response) SetCommitAuthorProfilePictureLink(v string) {
 }
 
 // GetLinks returns the Links field value
-func (o *StartScan200Response) GetLinks() ScanSummarizedLinks {
+func (o *StartScan200Response) GetLinks() ScanDetailedLinks {
 	if o == nil {
-		var ret ScanSummarizedLinks
+		var ret ScanDetailedLinks
 		return ret
 	}
 
@@ -593,7 +593,7 @@ func (o *StartScan200Response) GetLinks() ScanSummarizedLinks {
 
 // GetLinksOk returns a tuple with the Links field value
 // and a boolean to check if the value has been set.
-func (o *StartScan200Response) GetLinksOk() (*ScanSummarizedLinks, bool) {
+func (o *StartScan200Response) GetLinksOk() (*ScanDetailedLinks, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -601,7 +601,7 @@ func (o *StartScan200Response) GetLinksOk() (*ScanSummarizedLinks, bool) {
 }
 
 // SetLinks sets field value
-func (o *StartScan200Response) SetLinks(v ScanSummarizedLinks) {
+func (o *StartScan200Response) SetLinks(v ScanDetailedLinks) {
 	o.Links = v
 }
 

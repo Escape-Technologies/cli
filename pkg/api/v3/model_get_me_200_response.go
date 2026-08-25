@@ -20,8 +20,8 @@ var _ MappedNullable = &GetMe200Response{}
 
 // GetMe200Response struct for GetMe200Response
 type GetMe200Response struct {
-	User                 GetMe200ResponseUser                          `json:"user"`
-	Organization         TriggerIssueManualWorkflow200ResponseWorkflow `json:"organization"`
+	User                 GetMe200ResponseUser         `json:"user"`
+	Organization         GetMe200ResponseOrganization `json:"organization"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -31,7 +31,7 @@ type _GetMe200Response GetMe200Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetMe200Response(user GetMe200ResponseUser, organization TriggerIssueManualWorkflow200ResponseWorkflow) *GetMe200Response {
+func NewGetMe200Response(user GetMe200ResponseUser, organization GetMe200ResponseOrganization) *GetMe200Response {
 	this := GetMe200Response{}
 	this.User = user
 	this.Organization = organization
@@ -71,9 +71,9 @@ func (o *GetMe200Response) SetUser(v GetMe200ResponseUser) {
 }
 
 // GetOrganization returns the Organization field value
-func (o *GetMe200Response) GetOrganization() TriggerIssueManualWorkflow200ResponseWorkflow {
+func (o *GetMe200Response) GetOrganization() GetMe200ResponseOrganization {
 	if o == nil {
-		var ret TriggerIssueManualWorkflow200ResponseWorkflow
+		var ret GetMe200ResponseOrganization
 		return ret
 	}
 
@@ -82,7 +82,7 @@ func (o *GetMe200Response) GetOrganization() TriggerIssueManualWorkflow200Respon
 
 // GetOrganizationOk returns a tuple with the Organization field value
 // and a boolean to check if the value has been set.
-func (o *GetMe200Response) GetOrganizationOk() (*TriggerIssueManualWorkflow200ResponseWorkflow, bool) {
+func (o *GetMe200Response) GetOrganizationOk() (*GetMe200ResponseOrganization, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -90,7 +90,7 @@ func (o *GetMe200Response) GetOrganizationOk() (*TriggerIssueManualWorkflow200Re
 }
 
 // SetOrganization sets field value
-func (o *GetMe200Response) SetOrganization(v TriggerIssueManualWorkflow200ResponseWorkflow) {
+func (o *GetMe200Response) SetOrganization(v GetMe200ResponseOrganization) {
 	o.Organization = v
 }
 
