@@ -28,7 +28,6 @@ type GetProfile200ResponseConfigurationInferenceScalarsValue struct {
 	Sensitivity          *ENUMPROPERTIESCONFIGURATIONPROPERTIESINFERENCEPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESSENSITIVITY `json:"sensitivity,omitempty"`
 	Strategy             *ENUMPROPERTIESCONFIGURATIONPROPERTIESINFERENCEPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESSTRATEGY    `json:"strategy,omitempty"`
 	RaiseOnExposure      *bool                                                                                                     `json:"raise_on_exposure,omitempty"`
-	IsSourceable         *bool                                                                                                     `json:"is_sourceable,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -339,38 +338,6 @@ func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) SetRaiseOnExpo
 	o.RaiseOnExposure = &v
 }
 
-// GetIsSourceable returns the IsSourceable field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) GetIsSourceable() bool {
-	if o == nil || IsNil(o.IsSourceable) {
-		var ret bool
-		return ret
-	}
-	return *o.IsSourceable
-}
-
-// GetIsSourceableOk returns a tuple with the IsSourceable field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) GetIsSourceableOk() (*bool, bool) {
-	if o == nil || IsNil(o.IsSourceable) {
-		return nil, false
-	}
-	return o.IsSourceable, true
-}
-
-// HasIsSourceable returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) HasIsSourceable() bool {
-	if o != nil && !IsNil(o.IsSourceable) {
-		return true
-	}
-
-	return false
-}
-
-// SetIsSourceable gets a reference to the given bool and assigns it to the IsSourceable field.
-func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) SetIsSourceable(v bool) {
-	o.IsSourceable = &v
-}
-
 func (o GetProfile200ResponseConfigurationInferenceScalarsValue) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -408,9 +375,6 @@ func (o GetProfile200ResponseConfigurationInferenceScalarsValue) ToMap() (map[st
 	if !IsNil(o.RaiseOnExposure) {
 		toSerialize["raise_on_exposure"] = o.RaiseOnExposure
 	}
-	if !IsNil(o.IsSourceable) {
-		toSerialize["is_sourceable"] = o.IsSourceable
-	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -442,7 +406,6 @@ func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) UnmarshalJSON(
 		delete(additionalProperties, "sensitivity")
 		delete(additionalProperties, "strategy")
 		delete(additionalProperties, "raise_on_exposure")
-		delete(additionalProperties, "is_sourceable")
 		o.AdditionalProperties = additionalProperties
 	}
 
