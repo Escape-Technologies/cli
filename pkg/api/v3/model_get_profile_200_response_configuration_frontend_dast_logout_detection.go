@@ -25,6 +25,8 @@ type GetProfile200ResponseConfigurationFrontendDastLogoutDetection struct {
 	SessionCookieRegexPatterns     []string `json:"session_cookie_regex_patterns,omitempty"`
 	AutoReauthenticate             *bool    `json:"auto_reauthenticate,omitempty"`
 	AgenticDetectionEnabled        *bool    `json:"agentic_detection_enabled,omitempty"`
+	CheckUrl                       *string  `json:"check_url,omitempty"`
+	IgnoreUrlPatterns              []string `json:"ignore_url_patterns,omitempty"`
 	AdditionalProperties           map[string]interface{}
 }
 
@@ -239,6 +241,70 @@ func (o *GetProfile200ResponseConfigurationFrontendDastLogoutDetection) SetAgent
 	o.AgenticDetectionEnabled = &v
 }
 
+// GetCheckUrl returns the CheckUrl field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationFrontendDastLogoutDetection) GetCheckUrl() string {
+	if o == nil || IsNil(o.CheckUrl) {
+		var ret string
+		return ret
+	}
+	return *o.CheckUrl
+}
+
+// GetCheckUrlOk returns a tuple with the CheckUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationFrontendDastLogoutDetection) GetCheckUrlOk() (*string, bool) {
+	if o == nil || IsNil(o.CheckUrl) {
+		return nil, false
+	}
+	return o.CheckUrl, true
+}
+
+// HasCheckUrl returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationFrontendDastLogoutDetection) HasCheckUrl() bool {
+	if o != nil && !IsNil(o.CheckUrl) {
+		return true
+	}
+
+	return false
+}
+
+// SetCheckUrl gets a reference to the given string and assigns it to the CheckUrl field.
+func (o *GetProfile200ResponseConfigurationFrontendDastLogoutDetection) SetCheckUrl(v string) {
+	o.CheckUrl = &v
+}
+
+// GetIgnoreUrlPatterns returns the IgnoreUrlPatterns field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationFrontendDastLogoutDetection) GetIgnoreUrlPatterns() []string {
+	if o == nil || IsNil(o.IgnoreUrlPatterns) {
+		var ret []string
+		return ret
+	}
+	return o.IgnoreUrlPatterns
+}
+
+// GetIgnoreUrlPatternsOk returns a tuple with the IgnoreUrlPatterns field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationFrontendDastLogoutDetection) GetIgnoreUrlPatternsOk() ([]string, bool) {
+	if o == nil || IsNil(o.IgnoreUrlPatterns) {
+		return nil, false
+	}
+	return o.IgnoreUrlPatterns, true
+}
+
+// HasIgnoreUrlPatterns returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationFrontendDastLogoutDetection) HasIgnoreUrlPatterns() bool {
+	if o != nil && !IsNil(o.IgnoreUrlPatterns) {
+		return true
+	}
+
+	return false
+}
+
+// SetIgnoreUrlPatterns gets a reference to the given []string and assigns it to the IgnoreUrlPatterns field.
+func (o *GetProfile200ResponseConfigurationFrontendDastLogoutDetection) SetIgnoreUrlPatterns(v []string) {
+	o.IgnoreUrlPatterns = v
+}
+
 func (o GetProfile200ResponseConfigurationFrontendDastLogoutDetection) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -266,6 +332,12 @@ func (o GetProfile200ResponseConfigurationFrontendDastLogoutDetection) ToMap() (
 	}
 	if !IsNil(o.AgenticDetectionEnabled) {
 		toSerialize["agentic_detection_enabled"] = o.AgenticDetectionEnabled
+	}
+	if !IsNil(o.CheckUrl) {
+		toSerialize["check_url"] = o.CheckUrl
+	}
+	if !IsNil(o.IgnoreUrlPatterns) {
+		toSerialize["ignore_url_patterns"] = o.IgnoreUrlPatterns
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -295,6 +367,8 @@ func (o *GetProfile200ResponseConfigurationFrontendDastLogoutDetection) Unmarsha
 		delete(additionalProperties, "session_cookie_regex_patterns")
 		delete(additionalProperties, "auto_reauthenticate")
 		delete(additionalProperties, "agentic_detection_enabled")
+		delete(additionalProperties, "check_url")
+		delete(additionalProperties, "ignore_url_patterns")
 		o.AdditionalProperties = additionalProperties
 	}
 
