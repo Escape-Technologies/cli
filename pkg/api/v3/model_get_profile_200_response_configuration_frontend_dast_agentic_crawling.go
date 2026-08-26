@@ -19,7 +19,6 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationFrontendDastAgenticCra
 
 // GetProfile200ResponseConfigurationFrontendDastAgenticCrawling struct for GetProfile200ResponseConfigurationFrontendDastAgenticCrawling
 type GetProfile200ResponseConfigurationFrontendDastAgenticCrawling struct {
-	Enabled              *bool   `json:"enabled,omitempty"`
 	SpaCrawling          *bool   `json:"spa_crawling,omitempty"`
 	Instructions         *string `json:"instructions,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -42,38 +41,6 @@ func NewGetProfile200ResponseConfigurationFrontendDastAgenticCrawling() *GetProf
 func NewGetProfile200ResponseConfigurationFrontendDastAgenticCrawlingWithDefaults() *GetProfile200ResponseConfigurationFrontendDastAgenticCrawling {
 	this := GetProfile200ResponseConfigurationFrontendDastAgenticCrawling{}
 	return &this
-}
-
-// GetEnabled returns the Enabled field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationFrontendDastAgenticCrawling) GetEnabled() bool {
-	if o == nil || IsNil(o.Enabled) {
-		var ret bool
-		return ret
-	}
-	return *o.Enabled
-}
-
-// GetEnabledOk returns a tuple with the Enabled field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationFrontendDastAgenticCrawling) GetEnabledOk() (*bool, bool) {
-	if o == nil || IsNil(o.Enabled) {
-		return nil, false
-	}
-	return o.Enabled, true
-}
-
-// HasEnabled returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationFrontendDastAgenticCrawling) HasEnabled() bool {
-	if o != nil && !IsNil(o.Enabled) {
-		return true
-	}
-
-	return false
-}
-
-// SetEnabled gets a reference to the given bool and assigns it to the Enabled field.
-func (o *GetProfile200ResponseConfigurationFrontendDastAgenticCrawling) SetEnabled(v bool) {
-	o.Enabled = &v
 }
 
 // GetSpaCrawling returns the SpaCrawling field value if set, zero value otherwise.
@@ -150,9 +117,6 @@ func (o GetProfile200ResponseConfigurationFrontendDastAgenticCrawling) MarshalJS
 
 func (o GetProfile200ResponseConfigurationFrontendDastAgenticCrawling) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Enabled) {
-		toSerialize["enabled"] = o.Enabled
-	}
 	if !IsNil(o.SpaCrawling) {
 		toSerialize["spa_crawling"] = o.SpaCrawling
 	}
@@ -181,7 +145,6 @@ func (o *GetProfile200ResponseConfigurationFrontendDastAgenticCrawling) Unmarsha
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "enabled")
 		delete(additionalProperties, "spa_crawling")
 		delete(additionalProperties, "instructions")
 		o.AdditionalProperties = additionalProperties
