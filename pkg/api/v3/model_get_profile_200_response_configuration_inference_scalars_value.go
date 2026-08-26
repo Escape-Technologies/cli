@@ -19,17 +19,16 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationInferenceScalarsValue{
 
 // GetProfile200ResponseConfigurationInferenceScalarsValue struct for GetProfile200ResponseConfigurationInferenceScalarsValue
 type GetProfile200ResponseConfigurationInferenceScalarsValue struct {
-	Names                []string                                                                                                    `json:"names,omitempty"`
-	IgnoredNames         []string                                                                                                    `json:"ignored_names,omitempty"`
-	Description          *string                                                                                                     `json:"description,omitempty"`
-	Pattern              *string                                                                                                     `json:"pattern,omitempty"`
-	IgnoredPattern       *string                                                                                                     `json:"ignored_pattern,omitempty"`
-	Examples             []string                                                                                                    `json:"examples,omitempty"`
-	Parents              []ENUMPROPERTIESCONFIGURATIONPROPERTIESINFERENCEPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESPARENTSITEMS `json:"parents,omitempty"`
-	Sensitivity          *ENUMPROPERTIESCONFIGURATIONPROPERTIESINFERENCEPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESSENSITIVITY   `json:"sensitivity,omitempty"`
-	Strategy             *ENUMPROPERTIESCONFIGURATIONPROPERTIESINFERENCEPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESSTRATEGY      `json:"strategy,omitempty"`
-	RaiseOnExposure      *bool                                                                                                       `json:"raise_on_exposure,omitempty"`
-	IsSourceable         *bool                                                                                                       `json:"is_sourceable,omitempty"`
+	Names                []string                                                                                                  `json:"names,omitempty"`
+	IgnoredNames         []string                                                                                                  `json:"ignored_names,omitempty"`
+	Description          *string                                                                                                   `json:"description,omitempty"`
+	Pattern              *string                                                                                                   `json:"pattern,omitempty"`
+	IgnoredPattern       *string                                                                                                   `json:"ignored_pattern,omitempty"`
+	Examples             []string                                                                                                  `json:"examples,omitempty"`
+	Sensitivity          *ENUMPROPERTIESCONFIGURATIONPROPERTIESINFERENCEPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESSENSITIVITY `json:"sensitivity,omitempty"`
+	Strategy             *ENUMPROPERTIESCONFIGURATIONPROPERTIESINFERENCEPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESSTRATEGY    `json:"strategy,omitempty"`
+	RaiseOnExposure      *bool                                                                                                     `json:"raise_on_exposure,omitempty"`
+	IsSourceable         *bool                                                                                                     `json:"is_sourceable,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -244,38 +243,6 @@ func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) SetExamples(v 
 	o.Examples = v
 }
 
-// GetParents returns the Parents field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) GetParents() []ENUMPROPERTIESCONFIGURATIONPROPERTIESINFERENCEPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESPARENTSITEMS {
-	if o == nil || IsNil(o.Parents) {
-		var ret []ENUMPROPERTIESCONFIGURATIONPROPERTIESINFERENCEPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESPARENTSITEMS
-		return ret
-	}
-	return o.Parents
-}
-
-// GetParentsOk returns a tuple with the Parents field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) GetParentsOk() ([]ENUMPROPERTIESCONFIGURATIONPROPERTIESINFERENCEPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESPARENTSITEMS, bool) {
-	if o == nil || IsNil(o.Parents) {
-		return nil, false
-	}
-	return o.Parents, true
-}
-
-// HasParents returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) HasParents() bool {
-	if o != nil && !IsNil(o.Parents) {
-		return true
-	}
-
-	return false
-}
-
-// SetParents gets a reference to the given []ENUMPROPERTIESCONFIGURATIONPROPERTIESINFERENCEPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESPARENTSITEMS and assigns it to the Parents field.
-func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) SetParents(v []ENUMPROPERTIESCONFIGURATIONPROPERTIESINFERENCEPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESPARENTSITEMS) {
-	o.Parents = v
-}
-
 // GetSensitivity returns the Sensitivity field value if set, zero value otherwise.
 func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) GetSensitivity() ENUMPROPERTIESCONFIGURATIONPROPERTIESINFERENCEPROPERTIESSCALARSADDITIONALPROPERTIESPROPERTIESSENSITIVITY {
 	if o == nil || IsNil(o.Sensitivity) {
@@ -432,9 +399,6 @@ func (o GetProfile200ResponseConfigurationInferenceScalarsValue) ToMap() (map[st
 	if !IsNil(o.Examples) {
 		toSerialize["examples"] = o.Examples
 	}
-	if !IsNil(o.Parents) {
-		toSerialize["parents"] = o.Parents
-	}
 	if !IsNil(o.Sensitivity) {
 		toSerialize["sensitivity"] = o.Sensitivity
 	}
@@ -475,7 +439,6 @@ func (o *GetProfile200ResponseConfigurationInferenceScalarsValue) UnmarshalJSON(
 		delete(additionalProperties, "pattern")
 		delete(additionalProperties, "ignored_pattern")
 		delete(additionalProperties, "examples")
-		delete(additionalProperties, "parents")
 		delete(additionalProperties, "sensitivity")
 		delete(additionalProperties, "strategy")
 		delete(additionalProperties, "raise_on_exposure")
