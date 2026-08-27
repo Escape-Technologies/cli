@@ -53,6 +53,7 @@ Display events from security scans with filtering by scan, asset, severity, and 
 
 FILTER OPTIONS:
   -s, --search         Free-text search
+  -p, --profile-id     Filter by profile ID
   --scan-id            Filter by scan ID
   -a, --asset-id       Filter by asset ID
   -i, --issue-id       Filter by issue ID
@@ -61,6 +62,9 @@ FILTER OPTIONS:
   --has-attachments    Show only events with attachments`,
 	Example: `  # List recent events
   escape-cli events list
+
+  # List events for a specific profile
+  escape-cli events list --profile-id <profile-id>
 
   # List events for a specific scan
   escape-cli events list --scan-id <scan-id>
@@ -73,6 +77,7 @@ FILTER OPTIONS:
 	RunE: func(cmd *cobra.Command, _ []string) error {
 		filters := &escape.ListEventsFilters{
 			Search:         search,
+			ProfileIDs:     profileIDs,
 			ScanIDs:        scanIDs,
 			AssetIDs:       assetIDs,
 			IssueIDs:       issueIDs,
@@ -172,6 +177,7 @@ ID                                      LEVEL    TITLE                          
 func init() {
 	eventsCmd.AddCommand(eventsListCmd)
 	eventsListCmd.Flags().StringVarP(&search, "search", "s", "", "Search term to filter events by")
+	eventsListCmd.Flags().StringSliceVarP(&profileIDs, "profile-id", "p", profileIDs, "filter by profile ID(s) - comma-separated for multiple")
 	eventsListCmd.Flags().StringSliceVarP(&scanIDs, "scan-id", "", []string{}, "Scan ID to filter events by")
 	eventsListCmd.Flags().StringSliceVarP(&assetIDs, "asset-id", "a", assetIDs, "Asset ID to filter events by")
 	eventsListCmd.Flags().StringSliceVarP(&issueIDs, "issue-id", "i", []string{}, "Issue ID to filter events by")

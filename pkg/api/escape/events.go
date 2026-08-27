@@ -12,6 +12,7 @@ import (
 // ListEventsFilters holds optional filters for listing events
 type ListEventsFilters struct {
 	Search         string
+	ProfileIDs     []string
 	ScanIDs        []string
 	AssetIDs       []string
 	IssueIDs       []string
@@ -45,6 +46,9 @@ func ListEvents(ctx context.Context, next string, filters *ListEventsFilters) ([
 	if filters != nil {
 		if filters.Search != "" {
 			req = req.Search(filters.Search)
+		}
+		if len(filters.ProfileIDs) > 0 {
+			req = req.ProfileIds(strings.Join(filters.ProfileIDs, ","))
 		}
 		if len(filters.ScanIDs) > 0 {
 			req = req.ScanIds(strings.Join(filters.ScanIDs, ","))
