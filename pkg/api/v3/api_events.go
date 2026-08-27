@@ -160,6 +160,7 @@ type ApiListEventsRequest struct {
 	sortDirection  *string
 	search         *string
 	scanIds        *string
+	profileIds     *string
 	assetIds       *string
 	issueIds       *string
 	levels         *[]string
@@ -201,6 +202,12 @@ func (r ApiListEventsRequest) Search(search string) ApiListEventsRequest {
 // Filter by scan IDs
 func (r ApiListEventsRequest) ScanIds(scanIds string) ApiListEventsRequest {
 	r.scanIds = &scanIds
+	return r
+}
+
+// Filter by profile IDs
+func (r ApiListEventsRequest) ProfileIds(profileIds string) ApiListEventsRequest {
+	r.profileIds = &profileIds
 	return r
 }
 
@@ -304,6 +311,9 @@ func (a *EventsAPIService) ListEventsExecute(r ApiListEventsRequest) (*ListEvent
 	}
 	if r.scanIds != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "scanIds", r.scanIds, "form", "")
+	}
+	if r.profileIds != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "profileIds", r.profileIds, "form", "")
 	}
 	if r.assetIds != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "assetIds", r.assetIds, "form", "")
