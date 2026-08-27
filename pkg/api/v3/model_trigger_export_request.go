@@ -25,7 +25,9 @@ type TriggerExportRequest struct {
 	// Restrict scope to a scan (optional).
 	ScanId *string `json:"scanId,omitempty"`
 	// If true, validates selection only and does not schedule a job.
-	Dry                  *bool       `json:"dry,omitempty"`
+	Dry *bool `json:"dry,omitempty"`
+	// If false, skip the email notification when the report is ready. Defaults to true.
+	Notify               *bool       `json:"notify,omitempty"`
 	AssetWhere           interface{} `json:"assetWhere,omitempty"`
 	ProfileWhere         interface{} `json:"profileWhere,omitempty"`
 	IssueWhere           interface{} `json:"issueWhere,omitempty"`
@@ -138,6 +140,38 @@ func (o *TriggerExportRequest) HasDry() bool {
 // SetDry gets a reference to the given bool and assigns it to the Dry field.
 func (o *TriggerExportRequest) SetDry(v bool) {
 	o.Dry = &v
+}
+
+// GetNotify returns the Notify field value if set, zero value otherwise.
+func (o *TriggerExportRequest) GetNotify() bool {
+	if o == nil || IsNil(o.Notify) {
+		var ret bool
+		return ret
+	}
+	return *o.Notify
+}
+
+// GetNotifyOk returns a tuple with the Notify field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TriggerExportRequest) GetNotifyOk() (*bool, bool) {
+	if o == nil || IsNil(o.Notify) {
+		return nil, false
+	}
+	return o.Notify, true
+}
+
+// HasNotify returns a boolean if a field has been set.
+func (o *TriggerExportRequest) HasNotify() bool {
+	if o != nil && !IsNil(o.Notify) {
+		return true
+	}
+
+	return false
+}
+
+// SetNotify gets a reference to the given bool and assigns it to the Notify field.
+func (o *TriggerExportRequest) SetNotify(v bool) {
+	o.Notify = &v
 }
 
 // GetAssetWhere returns the AssetWhere field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -256,6 +290,9 @@ func (o TriggerExportRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Dry) {
 		toSerialize["dry"] = o.Dry
 	}
+	if !IsNil(o.Notify) {
+		toSerialize["notify"] = o.Notify
+	}
 	if o.AssetWhere != nil {
 		toSerialize["assetWhere"] = o.AssetWhere
 	}
@@ -311,6 +348,7 @@ func (o *TriggerExportRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "blocks")
 		delete(additionalProperties, "scanId")
 		delete(additionalProperties, "dry")
+		delete(additionalProperties, "notify")
 		delete(additionalProperties, "assetWhere")
 		delete(additionalProperties, "profileWhere")
 		delete(additionalProperties, "issueWhere")
