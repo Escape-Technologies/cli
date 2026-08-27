@@ -20,11 +20,11 @@ var _ MappedNullable = &UpdateazureBoardsIntegrationRequestParameters{}
 
 // UpdateazureBoardsIntegrationRequestParameters The new parameters of the integration
 type UpdateazureBoardsIntegrationRequestParameters struct {
-	Name                 string  `json:"name"`
-	AccountId            string  `json:"account_id"`
-	OrganizationUrl      string  `json:"organization_url"`
-	Pat                  string  `json:"pat"`
-	ProxyId              *string `json:"proxy_id,omitempty"`
+	Name                 string                                                   `json:"name"`
+	AccountId            string                                                   `json:"account_id"`
+	OrganizationUrl      string                                                   `json:"organization_url"`
+	Credentials          CreateazureBoardsIntegrationRequestParametersCredentials `json:"credentials"`
+	ProxyId              *string                                                  `json:"proxy_id,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -34,12 +34,12 @@ type _UpdateazureBoardsIntegrationRequestParameters UpdateazureBoardsIntegration
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateazureBoardsIntegrationRequestParameters(name string, accountId string, organizationUrl string, pat string) *UpdateazureBoardsIntegrationRequestParameters {
+func NewUpdateazureBoardsIntegrationRequestParameters(name string, accountId string, organizationUrl string, credentials CreateazureBoardsIntegrationRequestParametersCredentials) *UpdateazureBoardsIntegrationRequestParameters {
 	this := UpdateazureBoardsIntegrationRequestParameters{}
 	this.Name = name
 	this.AccountId = accountId
 	this.OrganizationUrl = organizationUrl
-	this.Pat = pat
+	this.Credentials = credentials
 	return &this
 }
 
@@ -123,28 +123,28 @@ func (o *UpdateazureBoardsIntegrationRequestParameters) SetOrganizationUrl(v str
 	o.OrganizationUrl = v
 }
 
-// GetPat returns the Pat field value
-func (o *UpdateazureBoardsIntegrationRequestParameters) GetPat() string {
+// GetCredentials returns the Credentials field value
+func (o *UpdateazureBoardsIntegrationRequestParameters) GetCredentials() CreateazureBoardsIntegrationRequestParametersCredentials {
 	if o == nil {
-		var ret string
+		var ret CreateazureBoardsIntegrationRequestParametersCredentials
 		return ret
 	}
 
-	return o.Pat
+	return o.Credentials
 }
 
-// GetPatOk returns a tuple with the Pat field value
+// GetCredentialsOk returns a tuple with the Credentials field value
 // and a boolean to check if the value has been set.
-func (o *UpdateazureBoardsIntegrationRequestParameters) GetPatOk() (*string, bool) {
+func (o *UpdateazureBoardsIntegrationRequestParameters) GetCredentialsOk() (*CreateazureBoardsIntegrationRequestParametersCredentials, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Pat, true
+	return &o.Credentials, true
 }
 
-// SetPat sets field value
-func (o *UpdateazureBoardsIntegrationRequestParameters) SetPat(v string) {
-	o.Pat = v
+// SetCredentials sets field value
+func (o *UpdateazureBoardsIntegrationRequestParameters) SetCredentials(v CreateazureBoardsIntegrationRequestParametersCredentials) {
+	o.Credentials = v
 }
 
 // GetProxyId returns the ProxyId field value if set, zero value otherwise.
@@ -192,7 +192,7 @@ func (o UpdateazureBoardsIntegrationRequestParameters) ToMap() (map[string]inter
 	toSerialize["name"] = o.Name
 	toSerialize["account_id"] = o.AccountId
 	toSerialize["organization_url"] = o.OrganizationUrl
-	toSerialize["pat"] = o.Pat
+	toSerialize["credentials"] = o.Credentials
 	if !IsNil(o.ProxyId) {
 		toSerialize["proxy_id"] = o.ProxyId
 	}
@@ -212,7 +212,7 @@ func (o *UpdateazureBoardsIntegrationRequestParameters) UnmarshalJSON(data []byt
 		"name",
 		"account_id",
 		"organization_url",
-		"pat",
+		"credentials",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -245,7 +245,7 @@ func (o *UpdateazureBoardsIntegrationRequestParameters) UnmarshalJSON(data []byt
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "account_id")
 		delete(additionalProperties, "organization_url")
-		delete(additionalProperties, "pat")
+		delete(additionalProperties, "credentials")
 		delete(additionalProperties, "proxy_id")
 		o.AdditionalProperties = additionalProperties
 	}
