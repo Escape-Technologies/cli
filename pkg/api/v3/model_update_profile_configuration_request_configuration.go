@@ -20,7 +20,6 @@ var _ MappedNullable = &UpdateProfileConfigurationRequestConfiguration{}
 // UpdateProfileConfigurationRequestConfiguration The configuration to update
 type UpdateProfileConfigurationRequestConfiguration struct {
 	Scope                 *GetProfile200ResponseConfigurationScope          `json:"scope,omitempty"`
-	ExplorationScope      []string                                          `json:"exploration_scope,omitempty"`
 	ApiCustomRuleIds      []string                                          `json:"api_custom_rule_ids,omitempty"`
 	FrontendCustomRuleIds []string                                          `json:"frontend_custom_rule_ids,omitempty"`
 	Mode                  *ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE        `json:"mode,omitempty"`
@@ -92,38 +91,6 @@ func (o *UpdateProfileConfigurationRequestConfiguration) HasScope() bool {
 // SetScope gets a reference to the given GetProfile200ResponseConfigurationScope and assigns it to the Scope field.
 func (o *UpdateProfileConfigurationRequestConfiguration) SetScope(v GetProfile200ResponseConfigurationScope) {
 	o.Scope = &v
-}
-
-// GetExplorationScope returns the ExplorationScope field value if set, zero value otherwise.
-func (o *UpdateProfileConfigurationRequestConfiguration) GetExplorationScope() []string {
-	if o == nil || IsNil(o.ExplorationScope) {
-		var ret []string
-		return ret
-	}
-	return o.ExplorationScope
-}
-
-// GetExplorationScopeOk returns a tuple with the ExplorationScope field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UpdateProfileConfigurationRequestConfiguration) GetExplorationScopeOk() ([]string, bool) {
-	if o == nil || IsNil(o.ExplorationScope) {
-		return nil, false
-	}
-	return o.ExplorationScope, true
-}
-
-// HasExplorationScope returns a boolean if a field has been set.
-func (o *UpdateProfileConfigurationRequestConfiguration) HasExplorationScope() bool {
-	if o != nil && !IsNil(o.ExplorationScope) {
-		return true
-	}
-
-	return false
-}
-
-// SetExplorationScope gets a reference to the given []string and assigns it to the ExplorationScope field.
-func (o *UpdateProfileConfigurationRequestConfiguration) SetExplorationScope(v []string) {
-	o.ExplorationScope = v
 }
 
 // GetApiCustomRuleIds returns the ApiCustomRuleIds field value if set, zero value otherwise.
@@ -686,9 +653,6 @@ func (o UpdateProfileConfigurationRequestConfiguration) ToMap() (map[string]inte
 	if !IsNil(o.Scope) {
 		toSerialize["scope"] = o.Scope
 	}
-	if !IsNil(o.ExplorationScope) {
-		toSerialize["exploration_scope"] = o.ExplorationScope
-	}
 	if !IsNil(o.ApiCustomRuleIds) {
 		toSerialize["api_custom_rule_ids"] = o.ApiCustomRuleIds
 	}
@@ -763,7 +727,6 @@ func (o *UpdateProfileConfigurationRequestConfiguration) UnmarshalJSON(data []by
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "scope")
-		delete(additionalProperties, "exploration_scope")
 		delete(additionalProperties, "api_custom_rule_ids")
 		delete(additionalProperties, "frontend_custom_rule_ids")
 		delete(additionalProperties, "mode")
