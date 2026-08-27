@@ -20,11 +20,18 @@ var _ MappedNullable = &UpdateazureBoardsIntegrationRequestParameters{}
 
 // UpdateazureBoardsIntegrationRequestParameters The new parameters of the integration
 type UpdateazureBoardsIntegrationRequestParameters struct {
-	Name                 string  `json:"name"`
-	AccountId            string  `json:"account_id"`
-	OrganizationUrl      string  `json:"organization_url"`
-	Pat                  string  `json:"pat"`
-	ProxyId              *string `json:"proxy_id,omitempty"`
+	Name                 string                                        `json:"name"`
+	AccountId            string                                        `json:"account_id"`
+	OrganizationUrl      string                                        `json:"organization_url"`
+	AuthMethod           *ENUMPROPERTIESPARAMETERSPROPERTIESAUTHMETHOD `json:"auth_method,omitempty"`
+	Pat                  *string                                       `json:"pat,omitempty"`
+	TenantId             *string                                       `json:"tenant_id,omitempty"`
+	ClientId             *string                                       `json:"client_id,omitempty"`
+	ClientSecret         *string                                       `json:"client_secret,omitempty"`
+	AccessToken          *string                                       `json:"access_token,omitempty"`
+	RefreshToken         *string                                       `json:"refresh_token,omitempty"`
+	TokenExpiresAt       *string                                       `json:"token_expires_at,omitempty"`
+	ProxyId              *string                                       `json:"proxy_id,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -34,12 +41,13 @@ type _UpdateazureBoardsIntegrationRequestParameters UpdateazureBoardsIntegration
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateazureBoardsIntegrationRequestParameters(name string, accountId string, organizationUrl string, pat string) *UpdateazureBoardsIntegrationRequestParameters {
+func NewUpdateazureBoardsIntegrationRequestParameters(name string, accountId string, organizationUrl string) *UpdateazureBoardsIntegrationRequestParameters {
 	this := UpdateazureBoardsIntegrationRequestParameters{}
 	this.Name = name
 	this.AccountId = accountId
 	this.OrganizationUrl = organizationUrl
-	this.Pat = pat
+	var authMethod ENUMPROPERTIESPARAMETERSPROPERTIESAUTHMETHOD = ENUMPROPERTIESPARAMETERSPROPERTIESAUTHMETHOD_PAT
+	this.AuthMethod = &authMethod
 	return &this
 }
 
@@ -48,6 +56,8 @@ func NewUpdateazureBoardsIntegrationRequestParameters(name string, accountId str
 // but it doesn't guarantee that properties required by API are set
 func NewUpdateazureBoardsIntegrationRequestParametersWithDefaults() *UpdateazureBoardsIntegrationRequestParameters {
 	this := UpdateazureBoardsIntegrationRequestParameters{}
+	var authMethod ENUMPROPERTIESPARAMETERSPROPERTIESAUTHMETHOD = ENUMPROPERTIESPARAMETERSPROPERTIESAUTHMETHOD_PAT
+	this.AuthMethod = &authMethod
 	return &this
 }
 
@@ -123,28 +133,260 @@ func (o *UpdateazureBoardsIntegrationRequestParameters) SetOrganizationUrl(v str
 	o.OrganizationUrl = v
 }
 
-// GetPat returns the Pat field value
+// GetAuthMethod returns the AuthMethod field value if set, zero value otherwise.
+func (o *UpdateazureBoardsIntegrationRequestParameters) GetAuthMethod() ENUMPROPERTIESPARAMETERSPROPERTIESAUTHMETHOD {
+	if o == nil || IsNil(o.AuthMethod) {
+		var ret ENUMPROPERTIESPARAMETERSPROPERTIESAUTHMETHOD
+		return ret
+	}
+	return *o.AuthMethod
+}
+
+// GetAuthMethodOk returns a tuple with the AuthMethod field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateazureBoardsIntegrationRequestParameters) GetAuthMethodOk() (*ENUMPROPERTIESPARAMETERSPROPERTIESAUTHMETHOD, bool) {
+	if o == nil || IsNil(o.AuthMethod) {
+		return nil, false
+	}
+	return o.AuthMethod, true
+}
+
+// HasAuthMethod returns a boolean if a field has been set.
+func (o *UpdateazureBoardsIntegrationRequestParameters) HasAuthMethod() bool {
+	if o != nil && !IsNil(o.AuthMethod) {
+		return true
+	}
+
+	return false
+}
+
+// SetAuthMethod gets a reference to the given ENUMPROPERTIESPARAMETERSPROPERTIESAUTHMETHOD and assigns it to the AuthMethod field.
+func (o *UpdateazureBoardsIntegrationRequestParameters) SetAuthMethod(v ENUMPROPERTIESPARAMETERSPROPERTIESAUTHMETHOD) {
+	o.AuthMethod = &v
+}
+
+// GetPat returns the Pat field value if set, zero value otherwise.
 func (o *UpdateazureBoardsIntegrationRequestParameters) GetPat() string {
-	if o == nil {
+	if o == nil || IsNil(o.Pat) {
 		var ret string
 		return ret
 	}
-
-	return o.Pat
+	return *o.Pat
 }
 
-// GetPatOk returns a tuple with the Pat field value
+// GetPatOk returns a tuple with the Pat field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateazureBoardsIntegrationRequestParameters) GetPatOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Pat) {
 		return nil, false
 	}
-	return &o.Pat, true
+	return o.Pat, true
 }
 
-// SetPat sets field value
+// HasPat returns a boolean if a field has been set.
+func (o *UpdateazureBoardsIntegrationRequestParameters) HasPat() bool {
+	if o != nil && !IsNil(o.Pat) {
+		return true
+	}
+
+	return false
+}
+
+// SetPat gets a reference to the given string and assigns it to the Pat field.
 func (o *UpdateazureBoardsIntegrationRequestParameters) SetPat(v string) {
-	o.Pat = v
+	o.Pat = &v
+}
+
+// GetTenantId returns the TenantId field value if set, zero value otherwise.
+func (o *UpdateazureBoardsIntegrationRequestParameters) GetTenantId() string {
+	if o == nil || IsNil(o.TenantId) {
+		var ret string
+		return ret
+	}
+	return *o.TenantId
+}
+
+// GetTenantIdOk returns a tuple with the TenantId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateazureBoardsIntegrationRequestParameters) GetTenantIdOk() (*string, bool) {
+	if o == nil || IsNil(o.TenantId) {
+		return nil, false
+	}
+	return o.TenantId, true
+}
+
+// HasTenantId returns a boolean if a field has been set.
+func (o *UpdateazureBoardsIntegrationRequestParameters) HasTenantId() bool {
+	if o != nil && !IsNil(o.TenantId) {
+		return true
+	}
+
+	return false
+}
+
+// SetTenantId gets a reference to the given string and assigns it to the TenantId field.
+func (o *UpdateazureBoardsIntegrationRequestParameters) SetTenantId(v string) {
+	o.TenantId = &v
+}
+
+// GetClientId returns the ClientId field value if set, zero value otherwise.
+func (o *UpdateazureBoardsIntegrationRequestParameters) GetClientId() string {
+	if o == nil || IsNil(o.ClientId) {
+		var ret string
+		return ret
+	}
+	return *o.ClientId
+}
+
+// GetClientIdOk returns a tuple with the ClientId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateazureBoardsIntegrationRequestParameters) GetClientIdOk() (*string, bool) {
+	if o == nil || IsNil(o.ClientId) {
+		return nil, false
+	}
+	return o.ClientId, true
+}
+
+// HasClientId returns a boolean if a field has been set.
+func (o *UpdateazureBoardsIntegrationRequestParameters) HasClientId() bool {
+	if o != nil && !IsNil(o.ClientId) {
+		return true
+	}
+
+	return false
+}
+
+// SetClientId gets a reference to the given string and assigns it to the ClientId field.
+func (o *UpdateazureBoardsIntegrationRequestParameters) SetClientId(v string) {
+	o.ClientId = &v
+}
+
+// GetClientSecret returns the ClientSecret field value if set, zero value otherwise.
+func (o *UpdateazureBoardsIntegrationRequestParameters) GetClientSecret() string {
+	if o == nil || IsNil(o.ClientSecret) {
+		var ret string
+		return ret
+	}
+	return *o.ClientSecret
+}
+
+// GetClientSecretOk returns a tuple with the ClientSecret field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateazureBoardsIntegrationRequestParameters) GetClientSecretOk() (*string, bool) {
+	if o == nil || IsNil(o.ClientSecret) {
+		return nil, false
+	}
+	return o.ClientSecret, true
+}
+
+// HasClientSecret returns a boolean if a field has been set.
+func (o *UpdateazureBoardsIntegrationRequestParameters) HasClientSecret() bool {
+	if o != nil && !IsNil(o.ClientSecret) {
+		return true
+	}
+
+	return false
+}
+
+// SetClientSecret gets a reference to the given string and assigns it to the ClientSecret field.
+func (o *UpdateazureBoardsIntegrationRequestParameters) SetClientSecret(v string) {
+	o.ClientSecret = &v
+}
+
+// GetAccessToken returns the AccessToken field value if set, zero value otherwise.
+func (o *UpdateazureBoardsIntegrationRequestParameters) GetAccessToken() string {
+	if o == nil || IsNil(o.AccessToken) {
+		var ret string
+		return ret
+	}
+	return *o.AccessToken
+}
+
+// GetAccessTokenOk returns a tuple with the AccessToken field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateazureBoardsIntegrationRequestParameters) GetAccessTokenOk() (*string, bool) {
+	if o == nil || IsNil(o.AccessToken) {
+		return nil, false
+	}
+	return o.AccessToken, true
+}
+
+// HasAccessToken returns a boolean if a field has been set.
+func (o *UpdateazureBoardsIntegrationRequestParameters) HasAccessToken() bool {
+	if o != nil && !IsNil(o.AccessToken) {
+		return true
+	}
+
+	return false
+}
+
+// SetAccessToken gets a reference to the given string and assigns it to the AccessToken field.
+func (o *UpdateazureBoardsIntegrationRequestParameters) SetAccessToken(v string) {
+	o.AccessToken = &v
+}
+
+// GetRefreshToken returns the RefreshToken field value if set, zero value otherwise.
+func (o *UpdateazureBoardsIntegrationRequestParameters) GetRefreshToken() string {
+	if o == nil || IsNil(o.RefreshToken) {
+		var ret string
+		return ret
+	}
+	return *o.RefreshToken
+}
+
+// GetRefreshTokenOk returns a tuple with the RefreshToken field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateazureBoardsIntegrationRequestParameters) GetRefreshTokenOk() (*string, bool) {
+	if o == nil || IsNil(o.RefreshToken) {
+		return nil, false
+	}
+	return o.RefreshToken, true
+}
+
+// HasRefreshToken returns a boolean if a field has been set.
+func (o *UpdateazureBoardsIntegrationRequestParameters) HasRefreshToken() bool {
+	if o != nil && !IsNil(o.RefreshToken) {
+		return true
+	}
+
+	return false
+}
+
+// SetRefreshToken gets a reference to the given string and assigns it to the RefreshToken field.
+func (o *UpdateazureBoardsIntegrationRequestParameters) SetRefreshToken(v string) {
+	o.RefreshToken = &v
+}
+
+// GetTokenExpiresAt returns the TokenExpiresAt field value if set, zero value otherwise.
+func (o *UpdateazureBoardsIntegrationRequestParameters) GetTokenExpiresAt() string {
+	if o == nil || IsNil(o.TokenExpiresAt) {
+		var ret string
+		return ret
+	}
+	return *o.TokenExpiresAt
+}
+
+// GetTokenExpiresAtOk returns a tuple with the TokenExpiresAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateazureBoardsIntegrationRequestParameters) GetTokenExpiresAtOk() (*string, bool) {
+	if o == nil || IsNil(o.TokenExpiresAt) {
+		return nil, false
+	}
+	return o.TokenExpiresAt, true
+}
+
+// HasTokenExpiresAt returns a boolean if a field has been set.
+func (o *UpdateazureBoardsIntegrationRequestParameters) HasTokenExpiresAt() bool {
+	if o != nil && !IsNil(o.TokenExpiresAt) {
+		return true
+	}
+
+	return false
+}
+
+// SetTokenExpiresAt gets a reference to the given string and assigns it to the TokenExpiresAt field.
+func (o *UpdateazureBoardsIntegrationRequestParameters) SetTokenExpiresAt(v string) {
+	o.TokenExpiresAt = &v
 }
 
 // GetProxyId returns the ProxyId field value if set, zero value otherwise.
@@ -192,7 +434,30 @@ func (o UpdateazureBoardsIntegrationRequestParameters) ToMap() (map[string]inter
 	toSerialize["name"] = o.Name
 	toSerialize["account_id"] = o.AccountId
 	toSerialize["organization_url"] = o.OrganizationUrl
-	toSerialize["pat"] = o.Pat
+	if !IsNil(o.AuthMethod) {
+		toSerialize["auth_method"] = o.AuthMethod
+	}
+	if !IsNil(o.Pat) {
+		toSerialize["pat"] = o.Pat
+	}
+	if !IsNil(o.TenantId) {
+		toSerialize["tenant_id"] = o.TenantId
+	}
+	if !IsNil(o.ClientId) {
+		toSerialize["client_id"] = o.ClientId
+	}
+	if !IsNil(o.ClientSecret) {
+		toSerialize["client_secret"] = o.ClientSecret
+	}
+	if !IsNil(o.AccessToken) {
+		toSerialize["access_token"] = o.AccessToken
+	}
+	if !IsNil(o.RefreshToken) {
+		toSerialize["refresh_token"] = o.RefreshToken
+	}
+	if !IsNil(o.TokenExpiresAt) {
+		toSerialize["token_expires_at"] = o.TokenExpiresAt
+	}
 	if !IsNil(o.ProxyId) {
 		toSerialize["proxy_id"] = o.ProxyId
 	}
@@ -212,7 +477,6 @@ func (o *UpdateazureBoardsIntegrationRequestParameters) UnmarshalJSON(data []byt
 		"name",
 		"account_id",
 		"organization_url",
-		"pat",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -245,7 +509,14 @@ func (o *UpdateazureBoardsIntegrationRequestParameters) UnmarshalJSON(data []byt
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "account_id")
 		delete(additionalProperties, "organization_url")
+		delete(additionalProperties, "auth_method")
 		delete(additionalProperties, "pat")
+		delete(additionalProperties, "tenant_id")
+		delete(additionalProperties, "client_id")
+		delete(additionalProperties, "client_secret")
+		delete(additionalProperties, "access_token")
+		delete(additionalProperties, "refresh_token")
+		delete(additionalProperties, "token_expires_at")
 		delete(additionalProperties, "proxy_id")
 		o.AdditionalProperties = additionalProperties
 	}

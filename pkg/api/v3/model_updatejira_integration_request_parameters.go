@@ -53,6 +53,8 @@ func NewUpdatejiraIntegrationRequestParameters(name string, accountId string, in
 // but it doesn't guarantee that properties required by API are set
 func NewUpdatejiraIntegrationRequestParametersWithDefaults() *UpdatejiraIntegrationRequestParameters {
 	this := UpdatejiraIntegrationRequestParameters{}
+	var authMethod ENUMPROPERTIESPARAMETERSPROPERTIESAUTHMETHOD = ENUMPROPERTIESPARAMETERSPROPERTIESAUTHMETHOD_PAT
+	this.AuthMethod = authMethod
 	return &this
 }
 
