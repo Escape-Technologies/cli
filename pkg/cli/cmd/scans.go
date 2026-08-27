@@ -314,7 +314,6 @@ CONFIGURATION OVERRIDE:
   JSON must match the Scanner Next config schema (top-level fields, not a "scan" wrapper):
     '{"mode": "read_only"}'                           # Non-destructive testing only
     '{"max_duration": 3600}'                          # Custom max duration (seconds)
-    '{"exploration_scope": ["api.example.com"]}'      # Limit exploration scope
 
 WATCH MODE:
   Use --watch to monitor scan progress in real-time. The command will:
