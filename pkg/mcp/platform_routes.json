@@ -28,6 +28,10 @@
   { "path": "/dast/tests/", "tokens": ["dast", "tests"] },
   { "path": "/files/", "tokens": ["files"] },
   { "path": "/integrations-next/", "tokens": ["integrations", "next"] },
+  {
+    "path": "/integrations-next/azure-boards/oauth/callback/",
+    "tokens": ["integrations", "next", "azure", "boards", "oauth", "callback"]
+  },
   { "path": "/organization/", "tokens": ["organization"] },
   { "path": "/organization/audit-logs/", "tokens": ["organization", "audit", "logs"] },
   { "path": "/organization/billing/", "tokens": ["organization", "billing"] },
