@@ -21,9 +21,14 @@ func TestSchemaUploadContentType(t *testing.T) {
 			want: "application/yaml",
 		},
 		{
-			name: "leading whitespace yaml",
-			data: []byte("\n  openapi: 3.0.3\n"),
+			name: "yaml flow mapping",
+			data: []byte("{openapi: 3.0.3, info: {title: org, version: \"1.0.0\"}}\n"),
 			want: "application/yaml",
+		},
+		{
+			name: "leading whitespace json",
+			data: []byte("\n{\"openapi\":\"3.0.0\"}\n"),
+			want: "application/json",
 		},
 	}
 

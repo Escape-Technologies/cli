@@ -3,16 +3,15 @@ package escape
 import (
 	"bytes"
 	"context"
+	"encoding/json"
 	"fmt"
 	"net/http"
-	"strings"
 
 	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
 )
 
 func schemaUploadContentType(data []byte) string {
-	trimmed := strings.TrimSpace(string(data))
-	if len(trimmed) > 0 && trimmed[0] == '{' {
+	if json.Valid(data) {
 		return "application/json"
 	}
 	return "application/yaml"

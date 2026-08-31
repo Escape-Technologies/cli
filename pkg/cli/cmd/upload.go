@@ -43,23 +43,20 @@ when creating profiles that reference large schema files.`,
 
   # Use in profile creation
   echo '{"schema_upload_id": "'$UPLOAD_ID'", ...}' | escape-cli profiles create-rest`, RunE: func(cmd *cobra.Command, _ []string) error {
+		data, err := io.ReadAll(os.Stdin)
+		if err != nil {
+			return fmt.Errorf("failed to read stdin: %w", err)
+		}
+		if len(data) == 0 {
+			return errors.New("no schema bytes provided: pipe a schema file via stdin")
+		}
+
 		upload, err := escape.GetUploadSignedURL(cmd.Context())
 		if err != nil {
 			return fmt.Errorf("unable to get signed url: %w", err)
 		}
 
 		id, url := upload.GetId(), upload.GetUrl()
-
-		var data []byte
-
-		b, err := io.ReadAll(os.Stdin)
-		if err != nil {
-			return fmt.Errorf("failed to read stdin: %w", err)
-		}
-		data = b
-		if len(data) == 0 {
-			return errors.New("no schema bytes provided: pipe a schema file via stdin")
-		}
 
 		err = escape.UploadSchema(cmd.Context(), url, data)
 		if err != nil {
