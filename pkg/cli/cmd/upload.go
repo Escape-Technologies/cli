@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"os"
@@ -34,33 +34,29 @@ var uploadSchemaCmd = &cobra.Command{
 
 Upload API schema files to temporary storage and receive an upload ID. Use this ID
 when creating profiles that reference large schema files.`,
-	Example: `  # Upload OpenAPI schema
+	Example: `  # Upload OpenAPI schema (JSON or YAML)
   escape-cli upload schema < openapi-spec.json
+  escape-cli upload schema < openapi-spec.yaml
 
   # Upload and capture ID
-  UPLOAD_ID=$(escape-cli upload schema < schema.json -o json | jq -r '.id')
+  UPLOAD_ID=$(escape-cli upload schema < schema.yaml -o json | jq -r '.id')
 
   # Use in profile creation
   echo '{"schema_upload_id": "'$UPLOAD_ID'", ...}' | escape-cli profiles create-rest`, RunE: func(cmd *cobra.Command, _ []string) error {
+		data, err := io.ReadAll(os.Stdin)
+		if err != nil {
+			return fmt.Errorf("failed to read stdin: %w", err)
+		}
+		if len(data) == 0 {
+			return errors.New("no schema bytes provided: pipe a schema file via stdin")
+		}
+
 		upload, err := escape.GetUploadSignedURL(cmd.Context())
 		if err != nil {
 			return fmt.Errorf("unable to get signed url: %w", err)
 		}
 
 		id, url := upload.GetId(), upload.GetUrl()
-
-		var data []byte
-
-		b, err := io.ReadAll(os.Stdin)
-		if err != nil {
-			return fmt.Errorf("failed to read stdin: %w", err)
-		}
-		data = b
-
-		var schema map[string]interface{}
-		if err := json.Unmarshal(data, &schema); err != nil {
-			return fmt.Errorf("invalid JSON: %w", err)
-		}
 
 		err = escape.UploadSchema(cmd.Context(), url, data)
 		if err != nil {

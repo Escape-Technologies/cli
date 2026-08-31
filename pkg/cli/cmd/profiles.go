@@ -945,7 +945,7 @@ fast in CI).`,
 			}
 		}
 		if len(data) == 0 {
-			return errors.New("no schema bytes provided: pass --file or pipe JSON via stdin")
+			return errors.New("no schema bytes provided: pass --file or pipe a schema file via stdin")
 		}
 
 		ctx, cancel := context.WithTimeout(cmd.Context(), profileUploadSchemaTimeout)
