@@ -5,9 +5,18 @@ import (
 	"context"
 	"fmt"
 	"net/http"
+	"strings"
 
 	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
 )
+
+func schemaUploadContentType(data []byte) string {
+	trimmed := strings.TrimSpace(string(data))
+	if len(trimmed) > 0 && trimmed[0] == '{' {
+		return "application/json"
+	}
+	return "application/yaml"
+}
 
 // GetUploadSignedURL gets a signed url
 func GetUploadSignedURL(ctx context.Context) (*v3.CreateUploadSignedUrl200Response, error) {
@@ -26,7 +35,7 @@ func GetUploadSignedURL(ctx context.Context) (*v3.CreateUploadSignedUrl200Respon
 // UploadSchema uploads a file to the signed url
 func UploadSchema(ctx context.Context, url string, data []byte) error {
 	req, err := http.NewRequestWithContext(ctx, http.MethodPut, url, bytes.NewBuffer(data))
-	req.Header.Set("Content-Type", "application/json")
+	req.Header.Set("Content-Type", schemaUploadContentType(data))
 	if err != nil {
 		return fmt.Errorf("unable to create request: %w", err)
 	}
