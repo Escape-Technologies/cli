@@ -186,7 +186,7 @@ func listScanTargets(
 		}
 		page, next, pageTotal, err := escape.ListScanTargets(ctx, scanID, cursor, targetType, pageSize)
 		if err != nil {
-			return nil, 0, false, err
+			return nil, 0, false, fmt.Errorf("unable to list targets: %w", err)
 		}
 		if totalCount == 0 {
 			totalCount = pageTotal
