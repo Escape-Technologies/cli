@@ -19,15 +19,13 @@ var _ MappedNullable = &GetProfile200ResponseConfiguration{}
 
 // GetProfile200ResponseConfiguration The active configuration of the profile
 type GetProfile200ResponseConfiguration struct {
-	Scope                 *GetProfile200ResponseConfigurationScope          `json:"scope,omitempty"`
-	ApiCustomRuleIds      []string                                          `json:"api_custom_rule_ids,omitempty"`
-	FrontendCustomRuleIds []string                                          `json:"frontend_custom_rule_ids,omitempty"`
-	Mode                  *ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE        `json:"mode,omitempty"`
-	Profile               *ENUMPROPERTIESCONFIGURATIONPROPERTIESPROFILE     `json:"profile,omitempty"`
-	Authentication        *GetProfile200ResponseConfigurationAuthentication `json:"authentication,omitempty"`
-	SecurityTests         *GetProfile200ResponseConfigurationSecurityTests  `json:"security_tests,omitempty"`
-	Inference             *GetProfile200ResponseConfigurationInference      `json:"inference,omitempty"`
-	Network               *GetProfile200ResponseConfigurationNetwork        `json:"network,omitempty"`
+	Scope          *GetProfile200ResponseConfigurationScope          `json:"scope,omitempty"`
+	Mode           *ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE        `json:"mode,omitempty"`
+	Profile        *ENUMPROPERTIESCONFIGURATIONPROPERTIESPROFILE     `json:"profile,omitempty"`
+	Authentication *GetProfile200ResponseConfigurationAuthentication `json:"authentication,omitempty"`
+	SecurityTests  *GetProfile200ResponseConfigurationSecurityTests  `json:"security_tests,omitempty"`
+	Inference      *GetProfile200ResponseConfigurationInference      `json:"inference,omitempty"`
+	Network        *GetProfile200ResponseConfigurationNetwork        `json:"network,omitempty"`
 	// Deprecated: use `maxDurationMinutes` on the profile instead.
 	// Deprecated
 	MaxDuration          *float32                                                `json:"max_duration,omitempty"`
@@ -91,70 +89,6 @@ func (o *GetProfile200ResponseConfiguration) HasScope() bool {
 // SetScope gets a reference to the given GetProfile200ResponseConfigurationScope and assigns it to the Scope field.
 func (o *GetProfile200ResponseConfiguration) SetScope(v GetProfile200ResponseConfigurationScope) {
 	o.Scope = &v
-}
-
-// GetApiCustomRuleIds returns the ApiCustomRuleIds field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfiguration) GetApiCustomRuleIds() []string {
-	if o == nil || IsNil(o.ApiCustomRuleIds) {
-		var ret []string
-		return ret
-	}
-	return o.ApiCustomRuleIds
-}
-
-// GetApiCustomRuleIdsOk returns a tuple with the ApiCustomRuleIds field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfiguration) GetApiCustomRuleIdsOk() ([]string, bool) {
-	if o == nil || IsNil(o.ApiCustomRuleIds) {
-		return nil, false
-	}
-	return o.ApiCustomRuleIds, true
-}
-
-// HasApiCustomRuleIds returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfiguration) HasApiCustomRuleIds() bool {
-	if o != nil && !IsNil(o.ApiCustomRuleIds) {
-		return true
-	}
-
-	return false
-}
-
-// SetApiCustomRuleIds gets a reference to the given []string and assigns it to the ApiCustomRuleIds field.
-func (o *GetProfile200ResponseConfiguration) SetApiCustomRuleIds(v []string) {
-	o.ApiCustomRuleIds = v
-}
-
-// GetFrontendCustomRuleIds returns the FrontendCustomRuleIds field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfiguration) GetFrontendCustomRuleIds() []string {
-	if o == nil || IsNil(o.FrontendCustomRuleIds) {
-		var ret []string
-		return ret
-	}
-	return o.FrontendCustomRuleIds
-}
-
-// GetFrontendCustomRuleIdsOk returns a tuple with the FrontendCustomRuleIds field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfiguration) GetFrontendCustomRuleIdsOk() ([]string, bool) {
-	if o == nil || IsNil(o.FrontendCustomRuleIds) {
-		return nil, false
-	}
-	return o.FrontendCustomRuleIds, true
-}
-
-// HasFrontendCustomRuleIds returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfiguration) HasFrontendCustomRuleIds() bool {
-	if o != nil && !IsNil(o.FrontendCustomRuleIds) {
-		return true
-	}
-
-	return false
-}
-
-// SetFrontendCustomRuleIds gets a reference to the given []string and assigns it to the FrontendCustomRuleIds field.
-func (o *GetProfile200ResponseConfiguration) SetFrontendCustomRuleIds(v []string) {
-	o.FrontendCustomRuleIds = v
 }
 
 // GetMode returns the Mode field value if set, zero value otherwise.
@@ -653,12 +587,6 @@ func (o GetProfile200ResponseConfiguration) ToMap() (map[string]interface{}, err
 	if !IsNil(o.Scope) {
 		toSerialize["scope"] = o.Scope
 	}
-	if !IsNil(o.ApiCustomRuleIds) {
-		toSerialize["api_custom_rule_ids"] = o.ApiCustomRuleIds
-	}
-	if !IsNil(o.FrontendCustomRuleIds) {
-		toSerialize["frontend_custom_rule_ids"] = o.FrontendCustomRuleIds
-	}
 	if !IsNil(o.Mode) {
 		toSerialize["mode"] = o.Mode
 	}
@@ -727,8 +655,6 @@ func (o *GetProfile200ResponseConfiguration) UnmarshalJSON(data []byte) (err err
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "scope")
-		delete(additionalProperties, "api_custom_rule_ids")
-		delete(additionalProperties, "frontend_custom_rule_ids")
 		delete(additionalProperties, "mode")
 		delete(additionalProperties, "profile")
 		delete(additionalProperties, "authentication")
