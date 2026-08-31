@@ -28,6 +28,7 @@ type GetProfile200ResponseConfigurationExperimental struct {
 	AsmCveAgent                    *bool    `json:"asm_cve_agent,omitempty"`
 	ExtendedPortScan               *bool    `json:"extended_port_scan,omitempty"`
 	FeatureFlags                   []string `json:"feature_flags,omitempty"`
+	HarCollectorFlushThreshold     *float32 `json:"har_collector_flush_threshold,omitempty"`
 	AdditionalProperties           map[string]interface{}
 }
 
@@ -338,6 +339,38 @@ func (o *GetProfile200ResponseConfigurationExperimental) SetFeatureFlags(v []str
 	o.FeatureFlags = v
 }
 
+// GetHarCollectorFlushThreshold returns the HarCollectorFlushThreshold field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationExperimental) GetHarCollectorFlushThreshold() float32 {
+	if o == nil || IsNil(o.HarCollectorFlushThreshold) {
+		var ret float32
+		return ret
+	}
+	return *o.HarCollectorFlushThreshold
+}
+
+// GetHarCollectorFlushThresholdOk returns a tuple with the HarCollectorFlushThreshold field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationExperimental) GetHarCollectorFlushThresholdOk() (*float32, bool) {
+	if o == nil || IsNil(o.HarCollectorFlushThreshold) {
+		return nil, false
+	}
+	return o.HarCollectorFlushThreshold, true
+}
+
+// HasHarCollectorFlushThreshold returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationExperimental) HasHarCollectorFlushThreshold() bool {
+	if o != nil && !IsNil(o.HarCollectorFlushThreshold) {
+		return true
+	}
+
+	return false
+}
+
+// SetHarCollectorFlushThreshold gets a reference to the given float32 and assigns it to the HarCollectorFlushThreshold field.
+func (o *GetProfile200ResponseConfigurationExperimental) SetHarCollectorFlushThreshold(v float32) {
+	o.HarCollectorFlushThreshold = &v
+}
+
 func (o GetProfile200ResponseConfigurationExperimental) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -375,6 +408,9 @@ func (o GetProfile200ResponseConfigurationExperimental) ToMap() (map[string]inte
 	if !IsNil(o.FeatureFlags) {
 		toSerialize["feature_flags"] = o.FeatureFlags
 	}
+	if !IsNil(o.HarCollectorFlushThreshold) {
+		toSerialize["har_collector_flush_threshold"] = o.HarCollectorFlushThreshold
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -406,6 +442,7 @@ func (o *GetProfile200ResponseConfigurationExperimental) UnmarshalJSON(data []by
 		delete(additionalProperties, "asm_cve_agent")
 		delete(additionalProperties, "extended_port_scan")
 		delete(additionalProperties, "feature_flags")
+		delete(additionalProperties, "har_collector_flush_threshold")
 		o.AdditionalProperties = additionalProperties
 	}
 
