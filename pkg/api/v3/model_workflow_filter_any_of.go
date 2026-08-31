@@ -29,7 +29,7 @@ type WorkflowFilterAnyOf struct {
 	JiraTicket           *bool                                                               `json:"jiraTicket,omitempty"`
 	Search               *string                                                             `json:"search,omitempty"`
 	Categories           []ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY                         `json:"categories,omitempty"`
-	ScannerKinds         []ENUMPROPERTIESWHEREPROPERTIESSCANNERKINDSITEMS                    `json:"scannerKinds,omitempty"`
+	ScannerKinds         []string                                                            `json:"scannerKinds,omitempty"`
 	AssetClasses         []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS  `json:"assetClasses,omitempty"`
 	AssetTypes           []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE   `json:"assetTypes,omitempty"`
 	TagIds               []string                                                            `json:"tagIds,omitempty"`
@@ -360,9 +360,9 @@ func (o *WorkflowFilterAnyOf) SetCategories(v []ENUMPROPERTIESDATAITEMSPROPERTIE
 }
 
 // GetScannerKinds returns the ScannerKinds field value if set, zero value otherwise.
-func (o *WorkflowFilterAnyOf) GetScannerKinds() []ENUMPROPERTIESWHEREPROPERTIESSCANNERKINDSITEMS {
+func (o *WorkflowFilterAnyOf) GetScannerKinds() []string {
 	if o == nil || IsNil(o.ScannerKinds) {
-		var ret []ENUMPROPERTIESWHEREPROPERTIESSCANNERKINDSITEMS
+		var ret []string
 		return ret
 	}
 	return o.ScannerKinds
@@ -370,7 +370,7 @@ func (o *WorkflowFilterAnyOf) GetScannerKinds() []ENUMPROPERTIESWHEREPROPERTIESS
 
 // GetScannerKindsOk returns a tuple with the ScannerKinds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *WorkflowFilterAnyOf) GetScannerKindsOk() ([]ENUMPROPERTIESWHEREPROPERTIESSCANNERKINDSITEMS, bool) {
+func (o *WorkflowFilterAnyOf) GetScannerKindsOk() ([]string, bool) {
 	if o == nil || IsNil(o.ScannerKinds) {
 		return nil, false
 	}
@@ -386,8 +386,8 @@ func (o *WorkflowFilterAnyOf) HasScannerKinds() bool {
 	return false
 }
 
-// SetScannerKinds gets a reference to the given []ENUMPROPERTIESWHEREPROPERTIESSCANNERKINDSITEMS and assigns it to the ScannerKinds field.
-func (o *WorkflowFilterAnyOf) SetScannerKinds(v []ENUMPROPERTIESWHEREPROPERTIESSCANNERKINDSITEMS) {
+// SetScannerKinds gets a reference to the given []string and assigns it to the ScannerKinds field.
+func (o *WorkflowFilterAnyOf) SetScannerKinds(v []string) {
 	o.ScannerKinds = v
 }
 

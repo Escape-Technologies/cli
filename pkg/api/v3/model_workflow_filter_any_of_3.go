@@ -29,7 +29,7 @@ type WorkflowFilterAnyOf3 struct {
 	AssetIds             []string                                                                   `json:"assetIds,omitempty"`
 	AssetSchemaIds       []string                                                                   `json:"assetSchemaIds,omitempty"`
 	IssueIds             []string                                                                   `json:"issueIds,omitempty"`
-	Kinds                []ENUMPROPERTIESWHEREPROPERTIESSCANNERKINDSITEMS                           `json:"kinds,omitempty"`
+	Kinds                []string                                                                   `json:"kinds,omitempty"`
 	Domains              []string                                                                   `json:"domains,omitempty"`
 	Initiators           []ENUMPROPERTIESDATAITEMSPROPERTIESINITIATORSITEMS                         `json:"initiators,omitempty"`
 	LastScanStatuses     []ENUMPROPERTIESSTATUS                                                     `json:"lastScanStatuses,omitempty"`
@@ -383,9 +383,9 @@ func (o *WorkflowFilterAnyOf3) SetIssueIds(v []string) {
 }
 
 // GetKinds returns the Kinds field value if set, zero value otherwise.
-func (o *WorkflowFilterAnyOf3) GetKinds() []ENUMPROPERTIESWHEREPROPERTIESSCANNERKINDSITEMS {
+func (o *WorkflowFilterAnyOf3) GetKinds() []string {
 	if o == nil || IsNil(o.Kinds) {
-		var ret []ENUMPROPERTIESWHEREPROPERTIESSCANNERKINDSITEMS
+		var ret []string
 		return ret
 	}
 	return o.Kinds
@@ -393,7 +393,7 @@ func (o *WorkflowFilterAnyOf3) GetKinds() []ENUMPROPERTIESWHEREPROPERTIESSCANNER
 
 // GetKindsOk returns a tuple with the Kinds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *WorkflowFilterAnyOf3) GetKindsOk() ([]ENUMPROPERTIESWHEREPROPERTIESSCANNERKINDSITEMS, bool) {
+func (o *WorkflowFilterAnyOf3) GetKindsOk() ([]string, bool) {
 	if o == nil || IsNil(o.Kinds) {
 		return nil, false
 	}
@@ -409,8 +409,8 @@ func (o *WorkflowFilterAnyOf3) HasKinds() bool {
 	return false
 }
 
-// SetKinds gets a reference to the given []ENUMPROPERTIESWHEREPROPERTIESSCANNERKINDSITEMS and assigns it to the Kinds field.
-func (o *WorkflowFilterAnyOf3) SetKinds(v []ENUMPROPERTIESWHEREPROPERTIESSCANNERKINDSITEMS) {
+// SetKinds gets a reference to the given []string and assigns it to the Kinds field.
+func (o *WorkflowFilterAnyOf3) SetKinds(v []string) {
 	o.Kinds = v
 }
 
