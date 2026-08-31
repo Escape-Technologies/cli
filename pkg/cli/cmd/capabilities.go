@@ -102,6 +102,7 @@ func CommandSchemaRegistry() map[string]CommandSchemas {
 		"escape-cli scans watch":                   {Output: v3.ScanDetailed1{}},
 		"escape-cli scans issues":                  {Output: []v3.IssueSummarized{}},
 		"escape-cli scans targets":                 {Output: []v3.TargetDetailed{}},
+		"escape-cli scans coverage":                {Output: ScanCoverage{}},
 		"escape-cli scans reasoning":               {Output: ScanReasoningLogs{}},
 		"escape-cli scans agents":                  {Output: ScanAgents{}},
 		"escape-cli events list":                   {Output: []v3.EventSummarized{}},

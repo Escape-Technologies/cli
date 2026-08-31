@@ -134,7 +134,8 @@ func buildMCPToolSpecs(
 			FlagBindings:   flagBindings,
 			BodyProperty:   bodyProperty,
 		}
-		if capability.Path == "escape-cli scans reasoning" {
+		if capability.Path == "escape-cli scans reasoning" ||
+			capability.Path == "escape-cli scans coverage" {
 			spec.ExecutionTimeout = climcp.ReasoningToolExecutionTimeout
 		}
 		toolSpecs = append(toolSpecs, spec)

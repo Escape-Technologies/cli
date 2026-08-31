@@ -38,17 +38,18 @@ const (
 	// classifier reply we echo back in the error string.
 	classifierUnparseableSnippetChars = 200
 
-	classifierSystemPrompt = `You rank CLI tools by relevance to a user's chat message and recent history.
+	classifierSystemPrompt = `You rank CLI tools by relevance to a user's chat message, the page they are on (pageContext), and recent history.
 Return ONLY a JSON object of the form {"tools":["name1","name2",...]}. Names must be picked from the provided catalog. At most K items, sorted by relevance (most relevant first). No commentary.`
 )
 
 // ChatContext is the payload carried in the X-Escape-Chat-Context header. It
-// holds the user's current message and a few recent turns, so the classifier
-// can resolve ambiguous pronouns and domain paraphrases (e.g. "findings"
-// vs "issues").
+// holds the user's current message, optional page context (URL/title), and a
+// few recent turns, so the classifier can resolve ambiguous pronouns and
+// domain paraphrases (e.g. "findings" vs "issues", coverage page vs reasoning).
 type ChatContext struct {
-	Current string             `json:"current"`
-	History []ChatContextEntry `json:"history,omitempty"`
+	Current     string             `json:"current"`
+	PageContext string             `json:"pageContext,omitempty"`
+	History     []ChatContextEntry `json:"history,omitempty"`
 }
 
 // ChatContextEntry is one prior chat turn.
@@ -146,10 +147,11 @@ type classifierResponse struct {
 }
 
 type classifierPayload struct {
-	Current string             `json:"current"`
-	History []ChatContextEntry `json:"history,omitempty"`
-	Catalog []ToolDigest       `json:"catalog"`
-	TopK    int                `json:"top_k"`
+	Current     string             `json:"current"`
+	PageContext string             `json:"pageContext,omitempty"`
+	History     []ChatContextEntry `json:"history,omitempty"`
+	Catalog     []ToolDigest       `json:"catalog"`
+	TopK        int                `json:"top_k"`
 }
 
 func (c *openAIClassifier) Rank(
@@ -168,10 +170,11 @@ func (c *openAIClassifier) Rank(
 	defer cancel()
 
 	userBody, err := json.Marshal(classifierPayload{
-		Current: chatCtx.Current,
-		History: chatCtx.History,
-		Catalog: digest,
-		TopK:    c.topK,
+		Current:     chatCtx.Current,
+		PageContext: chatCtx.PageContext,
+		History:     chatCtx.History,
+		Catalog:     digest,
+		TopK:        c.topK,
 	})
 	if err != nil {
 		return nil, fmt.Errorf("marshal classifier payload: %w", err)

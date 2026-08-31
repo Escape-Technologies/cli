@@ -171,15 +171,24 @@ func CancelScan(ctx context.Context, scanID string) error {
 	return nil
 }
 
-// ListScanTargets lists all targets discovered during a scan
-func ListScanTargets(ctx context.Context, scanID string, next string, targetTypes string, size int) ([]v3.TargetDetailed, *string, error) {
+const scanTargetsAPIPageSize = 100
+
+// ListScanTargets lists one page of targets discovered during a scan.
+// size is the API page size (max 100). Pass 0 to use scanTargetsAPIPageSize.
+func ListScanTargets(
+	ctx context.Context,
+	scanID string,
+	next string,
+	targetTypes string,
+	size int,
+) ([]v3.TargetDetailed, *string, int, error) {
 	if strings.TrimSpace(scanID) == "" {
-		return nil, nil, errors.New("scanID is required")
+		return nil, nil, 0, errors.New("scanID is required")
 	}
 
 	client, err := newAPIV3Client()
 	if err != nil {
-		return nil, nil, fmt.Errorf("unable to init client: %w", err)
+		return nil, nil, 0, fmt.Errorf("unable to init client: %w", err)
 	}
 	req := client.ScansAPI.ListScanTargets(ctx, scanID)
 	if next != "" {
@@ -188,14 +197,16 @@ func ListScanTargets(ctx context.Context, scanID string, next string, targetType
 	if targetTypes != "" {
 		req = req.Types(strings.Split(targetTypes, ","))
 	}
-	if size > 0 {
-		req = req.Size(size)
+	pageSize := size
+	if pageSize <= 0 {
+		pageSize = scanTargetsAPIPageSize
 	}
+	req = req.Size(pageSize)
 	data, _, err := req.Execute()
 	if err != nil {
-		return nil, nil, fmt.Errorf("unable to list scan targets: %w", humanizeAPIError(err))
+		return nil, nil, 0, fmt.Errorf("unable to list scan targets: %w", humanizeAPIError(err))
 	}
-	return data.Data, data.NextCursor, nil
+	return data.Data, data.NextCursor, data.GetTotalCount(), nil
 }
 
 // ListScanProblemsFilters holds optional filters for listing scan problems

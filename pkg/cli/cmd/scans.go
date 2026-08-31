@@ -660,7 +660,7 @@ var (
 var scanTargetsCmd = &cobra.Command{
 	Use:     "targets scan-id",
 	Aliases: []string{"target"},
-	Short:   "List API targets discovered during a scan",
+	Short:   "List API targets discovered during a scan. For per-user request success, use scans coverage.",
 	Long: `List Scan Targets - View Discovered Endpoints
 
 Display all API endpoints and GraphQL resolvers discovered and tested
@@ -668,7 +668,7 @@ during a scan. Useful for coverage analysis and CI/CD quality gates.
 
 FILTER OPTIONS:
   --type    Filter by target type: API_ROUTE, GRAPHQL_RESOLVER
-  --size    Limit total number of results`,
+  --size    Total cap on results (0 = fetch every page; not a page size). Prefer 'scans coverage' for per-user coverage questions.`,
 	Example: `  # List all targets for a scan
   escape-cli scans targets <scan-id>
 
@@ -692,25 +692,9 @@ FILTER OPTIONS:
 			return errors.New("--size must be greater than or equal to 0")
 		}
 
-		targets, next, err := escape.ListScanTargets(cmd.Context(), args[0], "", scanTargetsType, scanTargetsSize)
+		all, _, _, err := listScanTargets(cmd.Context(), args[0], scanTargetsType, scanTargetsSize)
 		if err != nil {
 			return fmt.Errorf("unable to list targets: %w", err)
-		}
-		all := targets
-		if scanTargetsSize > 0 && len(all) >= scanTargetsSize {
-			all = all[:scanTargetsSize]
-			next = nil
-		}
-		for next != nil && *next != "" {
-			targets, next, err = escape.ListScanTargets(cmd.Context(), args[0], *next, scanTargetsType, scanTargetsSize)
-			if err != nil {
-				return fmt.Errorf("unable to list targets: %w", err)
-			}
-			all = append(all, targets...)
-			if scanTargetsSize > 0 && len(all) >= scanTargetsSize {
-				all = all[:scanTargetsSize]
-				break
-			}
 		}
 
 		out.Table(all, func() []string {
@@ -918,7 +902,32 @@ func init() {
 	scansAgentsCmd.Flags().BoolVar(&scanAgentsRootsOnly, "roots-only", false, "return only root agents")
 	scansCmd.AddCommand(scanTargetsCmd)
 	scanTargetsCmd.Flags().StringVar(&scanTargetsType, "type", "", "filter by target type: API_ROUTE, GRAPHQL_RESOLVER")
-	scanTargetsCmd.Flags().IntVar(&scanTargetsSize, "size", 0, "limit total number of targets returned")
+	scanTargetsCmd.Flags().IntVar(
+		&scanTargetsSize,
+		"size",
+		0,
+		"total cap on returned targets, not a page size (0 = fetch every page)",
+	)
+	scansCmd.AddCommand(scansCoverageCmd)
+	scansCoverageCmd.Flags().StringVar(&scanCoverageType, "type", "", "filter by target type: API_ROUTE, GRAPHQL_RESOLVER")
+	scansCoverageCmd.Flags().StringVar(
+		&scanCoverageStatus,
+		"coverage",
+		"",
+		"filter the targets sample by coverage status (e.g. OK). With --user, match that user's status, not overall. byUser stays exhaustive.",
+	)
+	scansCoverageCmd.Flags().StringVar(
+		&scanCoverageUser,
+		"user",
+		"",
+		"filter the targets sample to routes that include this scanner user. byUser still covers every user.",
+	)
+	scansCoverageCmd.Flags().IntVar(
+		&scanCoverageSize,
+		"size",
+		defaultCoverageTargetListSize,
+		fmt.Sprintf("max compact routes to return in targets (0 = all matching, max %d)", maxCoverageTargetListSize),
+	)
 	scansCmd.AddCommand(scansProblemsCmd)
 	scansProblemsCmd.Flags().BoolVar(&scanListAllKinds, "all-kinds", false, "include ASM and all scan kinds (default: DAST and AI Pentesting kinds only)")
 	scansProblemsCmd.PersistentFlags().StringSliceVarP(&scanProfileIDs, "profile-id", "p", []string{}, "filter by profile ID(s) - comma-separated for multiple")

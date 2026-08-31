@@ -364,6 +364,29 @@ func TestParseChatContext_AcceptsBase64AndUnicode(t *testing.T) {
 	}
 }
 
+func TestParseChatContext_KeepsPageContext(t *testing.T) {
+	t.Parallel()
+
+	payload, err := json.Marshal(ChatContext{
+		Current:     "did user A make successful requests?",
+		PageContext: "Current URL: https://app.escape.tech/pentest/assessments/fbc37c64-b718-4cca-a966-d17e2f5d8a5f/coverage/",
+	})
+	if err != nil {
+		t.Fatalf("marshal: %v", err)
+	}
+
+	parsed, ok := parseChatContext(string(payload))
+	if !ok {
+		t.Fatal("expected payload with pageContext to parse")
+	}
+	if parsed.PageContext == "" {
+		t.Fatal("pageContext was dropped; classifier would never see the coverage URL")
+	}
+	if !strings.Contains(parsed.PageContext, "/coverage/") {
+		t.Fatalf("unexpected pageContext: %q", parsed.PageContext)
+	}
+}
+
 func TestModeFromEnv(t *testing.T) {
 	cases := []struct {
 		set  string
