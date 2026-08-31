@@ -24,7 +24,7 @@ type WorkflowFilterAnyOf2 struct {
 	AssetIds             []string                                                                   `json:"assetIds,omitempty"`
 	Status               []ENUMPROPERTIESSTATUS                                                     `json:"status,omitempty"`
 	Initiator            []ENUMPROPERTIESDATAITEMSPROPERTIESINITIATORSITEMS                         `json:"initiator,omitempty"`
-	Kinds                []string                                                                   `json:"kinds,omitempty"`
+	Kinds                []ENUMPROPERTIESDATAITEMSPROPERTIESFILTER0PROPERTIESSCANNERKINDSITEMS      `json:"kinds,omitempty"`
 	ProjectIds           []string                                                                   `json:"projectIds,omitempty"`
 	ProblemSeverities    []ENUMPROPERTIESDATAITEMSPROPERTIESFILTER2PROPERTIESPROBLEMSEVERITIESITEMS `json:"problemSeverities,omitempty"`
 	ProblemCodes         []ENUMPROPERTIESDATAITEMSPROPERTIESFILTER2PROPERTIESPROBLEMCODESITEMS      `json:"problemCodes,omitempty"`
@@ -187,9 +187,9 @@ func (o *WorkflowFilterAnyOf2) SetInitiator(v []ENUMPROPERTIESDATAITEMSPROPERTIE
 }
 
 // GetKinds returns the Kinds field value if set, zero value otherwise.
-func (o *WorkflowFilterAnyOf2) GetKinds() []string {
+func (o *WorkflowFilterAnyOf2) GetKinds() []ENUMPROPERTIESDATAITEMSPROPERTIESFILTER0PROPERTIESSCANNERKINDSITEMS {
 	if o == nil || IsNil(o.Kinds) {
-		var ret []string
+		var ret []ENUMPROPERTIESDATAITEMSPROPERTIESFILTER0PROPERTIESSCANNERKINDSITEMS
 		return ret
 	}
 	return o.Kinds
@@ -197,7 +197,7 @@ func (o *WorkflowFilterAnyOf2) GetKinds() []string {
 
 // GetKindsOk returns a tuple with the Kinds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *WorkflowFilterAnyOf2) GetKindsOk() ([]string, bool) {
+func (o *WorkflowFilterAnyOf2) GetKindsOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESFILTER0PROPERTIESSCANNERKINDSITEMS, bool) {
 	if o == nil || IsNil(o.Kinds) {
 		return nil, false
 	}
@@ -213,8 +213,8 @@ func (o *WorkflowFilterAnyOf2) HasKinds() bool {
 	return false
 }
 
-// SetKinds gets a reference to the given []string and assigns it to the Kinds field.
-func (o *WorkflowFilterAnyOf2) SetKinds(v []string) {
+// SetKinds gets a reference to the given []ENUMPROPERTIESDATAITEMSPROPERTIESFILTER0PROPERTIESSCANNERKINDSITEMS and assigns it to the Kinds field.
+func (o *WorkflowFilterAnyOf2) SetKinds(v []ENUMPROPERTIESDATAITEMSPROPERTIESFILTER0PROPERTIESSCANNERKINDSITEMS) {
 	o.Kinds = v
 }
 

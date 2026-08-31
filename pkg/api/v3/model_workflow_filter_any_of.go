@@ -23,32 +23,32 @@ type WorkflowFilterAnyOf struct {
 	Risks      []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS `json:"risks,omitempty"`
 	ProjectIds []string                                                     `json:"projectIds,omitempty"`
 	// Deprecated, use profileIds instead
-	ApplicationIds       []string                                                            `json:"applicationIds,omitempty"`
-	ProfileIds           []string                                                            `json:"profileIds,omitempty"`
-	AssetIds             []string                                                            `json:"assetIds,omitempty"`
-	JiraTicket           *bool                                                               `json:"jiraTicket,omitempty"`
-	Search               *string                                                             `json:"search,omitempty"`
-	Categories           []ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY                         `json:"categories,omitempty"`
-	ScannerKinds         []string                                                            `json:"scannerKinds,omitempty"`
-	AssetClasses         []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS  `json:"assetClasses,omitempty"`
-	AssetTypes           []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE   `json:"assetTypes,omitempty"`
-	TagIds               []string                                                            `json:"tagIds,omitempty"`
-	NoTags               *bool                                                               `json:"noTags,omitempty"`
-	ScanIds              []string                                                            `json:"scanIds,omitempty"`
-	SecurityTestUids     []string                                                            `json:"securityTestUids,omitempty"`
-	Status               []ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS                           `json:"status,omitempty"`
-	Ids                  []string                                                            `json:"ids,omitempty"`
-	BlacklistedIds       []string                                                            `json:"blacklistedIds,omitempty"`
-	FullNames            []string                                                            `json:"fullNames,omitempty"`
-	BlacklistedNames     []string                                                            `json:"blacklistedNames,omitempty"`
-	AssetStatuses        []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS `json:"assetStatuses,omitempty"`
-	AiFalsePositive      *bool                                                               `json:"aiFalsePositive,omitempty"`
-	Agentic              *bool                                                               `json:"agentic,omitempty"`
-	TargetIds            []string                                                            `json:"targetIds,omitempty"`
-	Domains              []string                                                            `json:"domains,omitempty"`
-	IgnoreInventory      *bool                                                               `json:"ignoreInventory,omitempty"`
-	Ignored              *bool                                                               `json:"ignored,omitempty"`
-	Dnf                  interface{}                                                         `json:"dnf,omitempty"`
+	ApplicationIds       []string                                                              `json:"applicationIds,omitempty"`
+	ProfileIds           []string                                                              `json:"profileIds,omitempty"`
+	AssetIds             []string                                                              `json:"assetIds,omitempty"`
+	JiraTicket           *bool                                                                 `json:"jiraTicket,omitempty"`
+	Search               *string                                                               `json:"search,omitempty"`
+	Categories           []ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY                           `json:"categories,omitempty"`
+	ScannerKinds         []ENUMPROPERTIESDATAITEMSPROPERTIESFILTER0PROPERTIESSCANNERKINDSITEMS `json:"scannerKinds,omitempty"`
+	AssetClasses         []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS    `json:"assetClasses,omitempty"`
+	AssetTypes           []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE     `json:"assetTypes,omitempty"`
+	TagIds               []string                                                              `json:"tagIds,omitempty"`
+	NoTags               *bool                                                                 `json:"noTags,omitempty"`
+	ScanIds              []string                                                              `json:"scanIds,omitempty"`
+	SecurityTestUids     []string                                                              `json:"securityTestUids,omitempty"`
+	Status               []ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS                             `json:"status,omitempty"`
+	Ids                  []string                                                              `json:"ids,omitempty"`
+	BlacklistedIds       []string                                                              `json:"blacklistedIds,omitempty"`
+	FullNames            []string                                                              `json:"fullNames,omitempty"`
+	BlacklistedNames     []string                                                              `json:"blacklistedNames,omitempty"`
+	AssetStatuses        []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS   `json:"assetStatuses,omitempty"`
+	AiFalsePositive      *bool                                                                 `json:"aiFalsePositive,omitempty"`
+	Agentic              *bool                                                                 `json:"agentic,omitempty"`
+	TargetIds            []string                                                              `json:"targetIds,omitempty"`
+	Domains              []string                                                              `json:"domains,omitempty"`
+	IgnoreInventory      *bool                                                                 `json:"ignoreInventory,omitempty"`
+	Ignored              *bool                                                                 `json:"ignored,omitempty"`
+	Dnf                  interface{}                                                           `json:"dnf,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -360,9 +360,9 @@ func (o *WorkflowFilterAnyOf) SetCategories(v []ENUMPROPERTIESDATAITEMSPROPERTIE
 }
 
 // GetScannerKinds returns the ScannerKinds field value if set, zero value otherwise.
-func (o *WorkflowFilterAnyOf) GetScannerKinds() []string {
+func (o *WorkflowFilterAnyOf) GetScannerKinds() []ENUMPROPERTIESDATAITEMSPROPERTIESFILTER0PROPERTIESSCANNERKINDSITEMS {
 	if o == nil || IsNil(o.ScannerKinds) {
-		var ret []string
+		var ret []ENUMPROPERTIESDATAITEMSPROPERTIESFILTER0PROPERTIESSCANNERKINDSITEMS
 		return ret
 	}
 	return o.ScannerKinds
@@ -370,7 +370,7 @@ func (o *WorkflowFilterAnyOf) GetScannerKinds() []string {
 
 // GetScannerKindsOk returns a tuple with the ScannerKinds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *WorkflowFilterAnyOf) GetScannerKindsOk() ([]string, bool) {
+func (o *WorkflowFilterAnyOf) GetScannerKindsOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESFILTER0PROPERTIESSCANNERKINDSITEMS, bool) {
 	if o == nil || IsNil(o.ScannerKinds) {
 		return nil, false
 	}
@@ -386,8 +386,8 @@ func (o *WorkflowFilterAnyOf) HasScannerKinds() bool {
 	return false
 }
 
-// SetScannerKinds gets a reference to the given []string and assigns it to the ScannerKinds field.
-func (o *WorkflowFilterAnyOf) SetScannerKinds(v []string) {
+// SetScannerKinds gets a reference to the given []ENUMPROPERTIESDATAITEMSPROPERTIESFILTER0PROPERTIESSCANNERKINDSITEMS and assigns it to the ScannerKinds field.
+func (o *WorkflowFilterAnyOf) SetScannerKinds(v []ENUMPROPERTIESDATAITEMSPROPERTIESFILTER0PROPERTIESSCANNERKINDSITEMS) {
 	o.ScannerKinds = v
 }
 
