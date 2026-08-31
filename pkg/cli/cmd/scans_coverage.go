@@ -77,7 +77,7 @@ OUTPUT SHAPE (JSON):
     "complete": true,            // all target pages were fetched
     "totalCount": <int>,         // targets in the scan
     "matchedCount": <int>,       // targets after --coverage/--user filters
-    "targetsTruncated": <bool>,  // targets array was capped by --size
+    "targetsTruncated": <bool>,  // targets array was capped by --size (false when --size 0)
     "byUser": { "<user>": { "targets": n, "statuses": {"OK": n, ...}, "okExamples": [...] } },
     "targets": [ compact routes ]
   }
@@ -128,10 +128,7 @@ func buildScanCoverage(
 		return ScanCoverage{}, errors.New("size must be >= 0")
 	}
 	if listSize > maxCoverageTargetListSize {
-		return ScanCoverage{}, fmt.Errorf("size must be <= %d", maxCoverageTargetListSize)
-	}
-	if listSize == 0 {
-		listSize = maxCoverageTargetListSize
+		return ScanCoverage{}, fmt.Errorf("size must be <= %d (0 = all matching)", maxCoverageTargetListSize)
 	}
 
 	raw, totalCount, complete, err := listScanTargets(ctx, scanID, targetType, 0)
@@ -149,11 +146,7 @@ func buildScanCoverage(
 		}
 	}
 
-	returned := matched
-	truncated := len(matched) > listSize
-	if truncated {
-		returned = matched[:listSize]
-	}
+	returned, truncated := capCoverageTargets(matched, listSize)
 
 	return ScanCoverage{
 		ScanID:           scanID,
@@ -264,6 +257,13 @@ func compactCoverageByUser(entries []v3.CoverageByUserEntry) []ScanCoverageUserR
 		})
 	}
 	return rows
+}
+
+func capCoverageTargets(matched []ScanCoverageTarget, listSize int) ([]ScanCoverageTarget, bool) {
+	if listSize == 0 || len(matched) <= listSize {
+		return matched, false
+	}
+	return matched[:listSize], true
 }
 
 func matchCoverageFilter(row ScanCoverageTarget, coverage string, user string) bool {

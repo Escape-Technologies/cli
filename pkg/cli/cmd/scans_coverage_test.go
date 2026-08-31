@@ -145,6 +145,31 @@ func TestBuildScanCoverageRejectsInvalidSize(t *testing.T) {
 	}
 }
 
+func TestCapCoverageTargetsZeroMeansUnlimited(t *testing.T) {
+	t.Parallel()
+
+	matched := []ScanCoverageTarget{
+		{ID: "a"},
+		{ID: "b"},
+		{ID: "c"},
+	}
+
+	got, truncated := capCoverageTargets(matched, 0)
+	if truncated || len(got) != 3 {
+		t.Fatalf("size 0 should return all matching, got len=%d truncated=%t", len(got), truncated)
+	}
+
+	got, truncated = capCoverageTargets(matched, 2)
+	if !truncated || len(got) != 2 || got[0].ID != "a" || got[1].ID != "b" {
+		t.Fatalf("size 2 should cap, got %+v truncated=%t", got, truncated)
+	}
+
+	got, truncated = capCoverageTargets(matched, 5)
+	if truncated || len(got) != 3 {
+		t.Fatalf("size above len should not truncate, got len=%d truncated=%t", len(got), truncated)
+	}
+}
+
 func TestGuidanceMentionsCompleteByUser(t *testing.T) {
 	t.Parallel()
 
