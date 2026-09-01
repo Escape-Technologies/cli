@@ -79,6 +79,7 @@
   { "path": "/workflows-next/", "tokens": ["workflows", "next"] },
   { "path": "/workflows/", "tokens": ["workflows"] },
   { "path": "/workflows/create/", "tokens": ["workflows", "create"] },
+  { "path": "/workflows/executions/", "tokens": ["workflows", "executions"] },
   { "path": "/workflows/history/", "tokens": ["workflows", "history"] },
   { "path": "/workflows/rules/", "tokens": ["workflows", "rules"] }
 ]
