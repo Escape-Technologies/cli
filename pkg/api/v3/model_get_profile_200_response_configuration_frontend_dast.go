@@ -19,7 +19,6 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationFrontendDast{}
 
 // GetProfile200ResponseConfigurationFrontendDast struct for GetProfile200ResponseConfigurationFrontendDast
 type GetProfile200ResponseConfigurationFrontendDast struct {
-	LocationId            *string                                                                                 `json:"location_id,omitempty"`
 	Hotstart              []string                                                                                `json:"hotstart,omitempty"`
 	SecurityChecksEnabled []ENUMPROPERTIESCONFIGURATIONPROPERTIESFRONTENDDASTPROPERTIESSECURITYCHECKSENABLEDITEMS `json:"security_checks_enabled,omitempty"`
 	SinglePageWorker      *bool                                                                                   `json:"single_page_worker,omitempty"`
@@ -53,38 +52,6 @@ func NewGetProfile200ResponseConfigurationFrontendDast() *GetProfile200ResponseC
 func NewGetProfile200ResponseConfigurationFrontendDastWithDefaults() *GetProfile200ResponseConfigurationFrontendDast {
 	this := GetProfile200ResponseConfigurationFrontendDast{}
 	return &this
-}
-
-// GetLocationId returns the LocationId field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationFrontendDast) GetLocationId() string {
-	if o == nil || IsNil(o.LocationId) {
-		var ret string
-		return ret
-	}
-	return *o.LocationId
-}
-
-// GetLocationIdOk returns a tuple with the LocationId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationFrontendDast) GetLocationIdOk() (*string, bool) {
-	if o == nil || IsNil(o.LocationId) {
-		return nil, false
-	}
-	return o.LocationId, true
-}
-
-// HasLocationId returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationFrontendDast) HasLocationId() bool {
-	if o != nil && !IsNil(o.LocationId) {
-		return true
-	}
-
-	return false
-}
-
-// SetLocationId gets a reference to the given string and assigns it to the LocationId field.
-func (o *GetProfile200ResponseConfigurationFrontendDast) SetLocationId(v string) {
-	o.LocationId = &v
 }
 
 // GetHotstart returns the Hotstart field value if set, zero value otherwise.
@@ -452,9 +419,6 @@ func (o GetProfile200ResponseConfigurationFrontendDast) MarshalJSON() ([]byte, e
 
 func (o GetProfile200ResponseConfigurationFrontendDast) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.LocationId) {
-		toSerialize["location_id"] = o.LocationId
-	}
 	if !IsNil(o.Hotstart) {
 		toSerialize["hotstart"] = o.Hotstart
 	}
@@ -510,7 +474,6 @@ func (o *GetProfile200ResponseConfigurationFrontendDast) UnmarshalJSON(data []by
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "location_id")
 		delete(additionalProperties, "hotstart")
 		delete(additionalProperties, "security_checks_enabled")
 		delete(additionalProperties, "single_page_worker")

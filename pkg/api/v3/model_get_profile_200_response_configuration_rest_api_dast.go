@@ -19,7 +19,6 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationRestApiDast{}
 
 // GetProfile200ResponseConfigurationRestApiDast struct for GetProfile200ResponseConfigurationRestApiDast
 type GetProfile200ResponseConfigurationRestApiDast struct {
-	LocationId               *string                                                                        `json:"location_id,omitempty"`
 	ExplorationDepth         *ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESEXPLORATIONDEPTH `json:"exploration_depth,omitempty"`
 	ExploreWithAllUsers      *bool                                                                          `json:"explore_with_all_users,omitempty"`
 	CrossUserMemoryEnabled   *bool                                                                          `json:"cross_user_memory_enabled,omitempty"`
@@ -52,38 +51,6 @@ func NewGetProfile200ResponseConfigurationRestApiDast() *GetProfile200ResponseCo
 func NewGetProfile200ResponseConfigurationRestApiDastWithDefaults() *GetProfile200ResponseConfigurationRestApiDast {
 	this := GetProfile200ResponseConfigurationRestApiDast{}
 	return &this
-}
-
-// GetLocationId returns the LocationId field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationRestApiDast) GetLocationId() string {
-	if o == nil || IsNil(o.LocationId) {
-		var ret string
-		return ret
-	}
-	return *o.LocationId
-}
-
-// GetLocationIdOk returns a tuple with the LocationId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationRestApiDast) GetLocationIdOk() (*string, bool) {
-	if o == nil || IsNil(o.LocationId) {
-		return nil, false
-	}
-	return o.LocationId, true
-}
-
-// HasLocationId returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationRestApiDast) HasLocationId() bool {
-	if o != nil && !IsNil(o.LocationId) {
-		return true
-	}
-
-	return false
-}
-
-// SetLocationId gets a reference to the given string and assigns it to the LocationId field.
-func (o *GetProfile200ResponseConfigurationRestApiDast) SetLocationId(v string) {
-	o.LocationId = &v
 }
 
 // GetExplorationDepth returns the ExplorationDepth field value if set, zero value otherwise.
@@ -419,9 +386,6 @@ func (o GetProfile200ResponseConfigurationRestApiDast) MarshalJSON() ([]byte, er
 
 func (o GetProfile200ResponseConfigurationRestApiDast) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.LocationId) {
-		toSerialize["location_id"] = o.LocationId
-	}
 	if !IsNil(o.ExplorationDepth) {
 		toSerialize["exploration_depth"] = o.ExplorationDepth
 	}
@@ -474,7 +438,6 @@ func (o *GetProfile200ResponseConfigurationRestApiDast) UnmarshalJSON(data []byt
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "location_id")
 		delete(additionalProperties, "exploration_depth")
 		delete(additionalProperties, "explore_with_all_users")
 		delete(additionalProperties, "cross_user_memory_enabled")

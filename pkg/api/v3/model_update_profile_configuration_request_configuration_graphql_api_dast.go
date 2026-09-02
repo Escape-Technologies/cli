@@ -20,7 +20,6 @@ var _ MappedNullable = &UpdateProfileConfigurationRequestConfigurationGraphqlApi
 // UpdateProfileConfigurationRequestConfigurationGraphqlApiDast struct for UpdateProfileConfigurationRequestConfigurationGraphqlApiDast
 type UpdateProfileConfigurationRequestConfigurationGraphqlApiDast struct {
 	Url                      *string                                                                        `json:"url,omitempty"`
-	LocationId               *string                                                                        `json:"location_id,omitempty"`
 	ExplorationDepth         *ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESEXPLORATIONDEPTH `json:"exploration_depth,omitempty"`
 	ExploreWithAllUsers      *bool                                                                          `json:"explore_with_all_users,omitempty"`
 	CrossUserMemoryEnabled   *bool                                                                          `json:"cross_user_memory_enabled,omitempty"`
@@ -87,38 +86,6 @@ func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) HasUrl() 
 // SetUrl gets a reference to the given string and assigns it to the Url field.
 func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) SetUrl(v string) {
 	o.Url = &v
-}
-
-// GetLocationId returns the LocationId field value if set, zero value otherwise.
-func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) GetLocationId() string {
-	if o == nil || IsNil(o.LocationId) {
-		var ret string
-		return ret
-	}
-	return *o.LocationId
-}
-
-// GetLocationIdOk returns a tuple with the LocationId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) GetLocationIdOk() (*string, bool) {
-	if o == nil || IsNil(o.LocationId) {
-		return nil, false
-	}
-	return o.LocationId, true
-}
-
-// HasLocationId returns a boolean if a field has been set.
-func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) HasLocationId() bool {
-	if o != nil && !IsNil(o.LocationId) {
-		return true
-	}
-
-	return false
-}
-
-// SetLocationId gets a reference to the given string and assigns it to the LocationId field.
-func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) SetLocationId(v string) {
-	o.LocationId = &v
 }
 
 // GetExplorationDepth returns the ExplorationDepth field value if set, zero value otherwise.
@@ -521,9 +488,6 @@ func (o UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) ToMap() (m
 	if !IsNil(o.Url) {
 		toSerialize["url"] = o.Url
 	}
-	if !IsNil(o.LocationId) {
-		toSerialize["location_id"] = o.LocationId
-	}
 	if !IsNil(o.ExplorationDepth) {
 		toSerialize["exploration_depth"] = o.ExplorationDepth
 	}
@@ -583,7 +547,6 @@ func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) Unmarshal
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "url")
-		delete(additionalProperties, "location_id")
 		delete(additionalProperties, "exploration_depth")
 		delete(additionalProperties, "explore_with_all_users")
 		delete(additionalProperties, "cross_user_memory_enabled")
