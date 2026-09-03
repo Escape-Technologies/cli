@@ -547,7 +547,7 @@ TRACKING:
 			return fmt.Errorf("unable to update issue %s: %w", issueID, err)
 		}
 
-		out.Log(fmt.Sprintf("Updated issue %s", issueID))
+		out.Log("Updated issue " + issueID)
 		out.Table(result, func() []string {
 			res := []string{"UPDATED IDS"}
 			res = append(res, result.GetIds()...)
