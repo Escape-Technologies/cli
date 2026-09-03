@@ -46,9 +46,9 @@ next new email is received.`,
 var emailsListCmd = &cobra.Command{
 	Use:   "list",
 	Short: "List inbox emails for a target scan address",
-	Example: `  escape-cli emails list --email test.00000000-0000-0000-0000-000000000000@scan.escape.tech
-  escape-cli emails list --email test.00000000-0000-0000-0000-000000000000@scan.escape.tech --limit 10
-  escape-cli emails list --email test.00000000-0000-0000-0000-000000000000@scan.escape.tech --after 2026-04-15T16:47:32Z`,
+	Example: `  escape-cli emails list --email test.abc123@scan.escape.tech
+  escape-cli emails list --email test.abc123@scan.escape.tech --limit 10
+  escape-cli emails list --email test.abc123@scan.escape.tech --after 2026-04-15T16:47:32Z`,
 	Args: cobra.NoArgs,
 	RunE: func(cmd *cobra.Command, _ []string) error {
 		if out.Schema([]v3.ScanEmailSummary{}) {
@@ -122,9 +122,9 @@ var emailsReadCmd = &cobra.Command{
 var emailsWaitCmd = &cobra.Command{
 	Use:   "wait",
 	Short: "Poll until the next new inbox email is received",
-	Example: `  escape-cli emails wait --email test.00000000-0000-0000-0000-000000000000@scan.escape.tech
-  escape-cli emails wait --email test.00000000-0000-0000-0000-000000000000@scan.escape.tech --timeout 2m
-  escape-cli emails wait --email test.00000000-0000-0000-0000-000000000000@scan.escape.tech --poll-interval 1s`,
+	Example: `  escape-cli emails wait --email test.abc123@scan.escape.tech
+  escape-cli emails wait --email test.abc123@scan.escape.tech --timeout 2m
+  escape-cli emails wait --email test.abc123@scan.escape.tech --poll-interval 1s`,
 	Args: cobra.NoArgs,
 	RunE: func(cmd *cobra.Command, _ []string) error {
 		if out.Schema(v3.ScanEmailDetails{}) {
