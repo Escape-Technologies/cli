@@ -96,6 +96,8 @@ func CommandSchemaRegistry() map[string]CommandSchemas {
 		"escape-cli issues get":                    {Output: v3.GetIssue200Response{}},
 		"escape-cli issues get-with-events":        {Output: IssueWithEvents{}},
 		"escape-cli issues list-activities":        {Output: []v3.ActivitySummarized{}},
+		"escape-cli issues update":                 {Output: v3.UpdateIssue200Response{}},
+		"escape-cli issues bulk-update":            {Output: v3.BulkUpdateIssues200Response{}},
 		"escape-cli scans list":                    {Output: []v3.ScanSummarized{}},
 		"escape-cli scans get":                     {Output: v3.StartScan200Response{}},
 		"escape-cli scans start":                   {Output: v3.ScanDetailed1{}},

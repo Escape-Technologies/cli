@@ -88,6 +88,8 @@ var validIssueSortFields = map[string]struct{}{
 var (
 	issueUpdateStatusStr string
 	issueUpdateReason    string
+	issueUpdateSeverity  string
+	issueResetSeverity   bool
 	issueSortType        string
 	issueSortDirection   string
 	issueSeverity        []string
@@ -455,9 +457,9 @@ func renderIssueWithEvents(result IssueWithEvents) error {
 }
 
 var issueUpdateStatusCmd = &cobra.Command{
-	Use:     "update issue-id --status STATUS",
+	Use:     "update issue-id",
 	Aliases: []string{"set-status"},
-	Short:   "Update issue status to track remediation progress",
+	Short:   "Update issue status or severity to track remediation progress",
 	Args: func(cmd *cobra.Command, args []string) error {
 		if len(args) != 1 {
 			_ = cmd.Help()
@@ -503,32 +505,54 @@ TRACKING:
   # Bulk update issues from a list
   cat issue_ids.txt | xargs -I {} escape-cli issues update {} --status IN_PROGRESS`,
 	RunE: func(cmd *cobra.Command, args []string) error {
+		if out.Schema(v3.UpdateIssue200Response{}) {
+			return nil
+		}
+
 		issueID := args[0]
-		if err := cmd.MarkFlagRequired("status"); err != nil {
-			return fmt.Errorf("failed to mark status flag as required: %w", err)
+		if issueResetSeverity && issueUpdateSeverity != "" {
+			return errors.New("--reset-severity and --severity are mutually exclusive")
 		}
-		if issueUpdateStatusStr == "" {
+		if issueUpdateStatusStr == "" && issueUpdateSeverity == "" && !issueResetSeverity {
 			_ = cmd.Help()
-			return errors.New("--status flag is required")
+			return errors.New("at least one of --status, --severity, or --reset-severity is required")
 		}
 
-		// Validate provided status against generated enum
-		newStatus := v3.ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS(issueUpdateStatusStr)
-		if !newStatus.IsValid() {
-			return fmt.Errorf("invalid status %q; valid values: %v", issueUpdateStatusStr, v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESSTATUSEnumValues)
+		body := v3.NewUpdateIssueRequestWithDefaults()
+		if issueUpdateStatusStr != "" {
+			newStatus := v3.ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS(issueUpdateStatusStr)
+			if !newStatus.IsValid() {
+				return fmt.Errorf("invalid status %q; valid values: %v", issueUpdateStatusStr, v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESSTATUSEnumValues)
+			}
+			statusPayload := v3.NewBulkUpdateIssuesRequestStatusAnyOf(newStatus)
+			if issueUpdateReason != "" {
+				statusPayload.SetReason(issueUpdateReason)
+			}
+			body.SetStatus(v3.UpdateIssueRequestStatus{BulkUpdateIssuesRequestStatusAnyOf: statusPayload})
+		}
+		if issueResetSeverity {
+			body.SetSeverityNil()
+		} else if issueUpdateSeverity != "" {
+			severity := v3.ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY(issueUpdateSeverity)
+			if !severity.IsValid() {
+				return fmt.Errorf("invalid severity %q; valid values: %v", issueUpdateSeverity, v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESSEVERITYEnumValues)
+			}
+			body.SetSeverity(v3.UpdateIssueRequestSeverity{
+				ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY: &severity,
+			})
 		}
 
-		issue, err := escape.GetIssue(cmd.Context(), issueID)
-		if err != nil || issue == nil {
-			return fmt.Errorf("unable to get issue %s: %w", issueID, err)
-		}
-
-		isUpdated, err := escape.UpdateIssue(cmd.Context(), issueID, newStatus, issueUpdateReason)
-		if err != nil || !isUpdated {
+		result, err := escape.UpdateIssue(cmd.Context(), issueID, *body)
+		if err != nil {
 			return fmt.Errorf("unable to update issue %s: %w", issueID, err)
 		}
 
-		fmt.Printf("Issue %s updated to status %s\n", issueID, newStatus)
+		out.Log(fmt.Sprintf("Updated issue %s", issueID))
+		out.Table(result, func() []string {
+			res := []string{"UPDATED IDS"}
+			res = append(res, result.GetIds()...)
+			return res
+		})
 
 		return nil
 	},
@@ -835,6 +859,8 @@ func init() {
 	issueUpdateStatusCmd.Flags().StringVarP(&issueUpdateStatusStr, "status", "s", issueUpdateStatusStr, fmt.Sprintf("new status for the issue: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESSTATUSEnumValues))
 	issueUpdateStatusCmd.Flags().StringVar(&issueUpdateReason, "reason", "", "reason for the status change")
 	issueUpdateStatusCmd.Flags().StringVar(&issueUpdateReason, "comment", "", "deprecated: use --reason")
+	issueUpdateStatusCmd.Flags().StringVar(&issueUpdateSeverity, "severity", "", fmt.Sprintf("new severity for the issue: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESSEVERITYEnumValues))
+	issueUpdateStatusCmd.Flags().BoolVar(&issueResetSeverity, "reset-severity", false, "reset severity to the scanner value")
 	_ = issueUpdateStatusCmd.Flags().MarkDeprecated("comment", "use --reason instead")
 
 	issuesCmd.AddCommand(issueFunnelCmd)

@@ -130,27 +130,19 @@ func ListIssues(ctx context.Context, next string, filters *ListIssuesFilters, so
 	return data.Data, data.NextCursor, nil
 }
 
-// UpdateIssue updates an issue status with an optional reason
-func UpdateIssue(ctx context.Context, issueID string, status v3.ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS, reason string) (bool, error) {
+// UpdateIssue applies the supplied mutation to a single issue.
+func UpdateIssue(ctx context.Context, issueID string, body v3.UpdateIssueRequest) (*v3.UpdateIssue200Response, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
-		return false, fmt.Errorf("unable to init client: %w", err)
+		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
 
-	statusPayload := v3.NewBulkUpdateIssuesRequestStatusAnyOf(status)
-	if reason != "" {
-		statusPayload.SetReason(reason)
-	}
-	req := client.IssuesAPI.UpdateIssue(ctx, issueID).UpdateIssueRequest(v3.UpdateIssueRequest{
-		Status: &v3.UpdateIssueRequestStatus{BulkUpdateIssuesRequestStatusAnyOf: statusPayload},
-	})
-
-	_, _, err = req.Execute()
+	data, _, err := client.IssuesAPI.UpdateIssue(ctx, issueID).UpdateIssueRequest(body).Execute()
 	if err != nil {
-		return false, fmt.Errorf("api error: %w", humanizeAPIError(err))
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 
-	return true, nil
+	return data, nil
 }
 
 // CommentIssue adds a comment to an issue
