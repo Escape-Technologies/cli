@@ -513,6 +513,9 @@ TRACKING:
 		if issueResetSeverity && issueUpdateSeverity != "" {
 			return errors.New("--reset-severity and --severity are mutually exclusive")
 		}
+		if issueUpdateReason != "" && issueUpdateStatusStr == "" {
+			return errors.New("--reason requires --status")
+		}
 		if issueUpdateStatusStr == "" && issueUpdateSeverity == "" && !issueResetSeverity {
 			_ = cmd.Help()
 			return errors.New("at least one of --status, --severity, or --reset-severity is required")
