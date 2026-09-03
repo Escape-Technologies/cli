@@ -890,6 +890,7 @@ type ApiListScanTargetsRequest struct {
 	sortType      *string
 	sortDirection *string
 	types         *[]string
+	sources       *[]string
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
@@ -922,6 +923,12 @@ func (r ApiListScanTargetsRequest) Types(types []string) ApiListScanTargetsReque
 	return r
 }
 
+// Optional filter by how the target was discovered (comma-separated or repeated). SOURCE_SPECIFICATION comes from the API schema; SOURCE_INFERRED was found during the scan. Applies to API_ROUTE and GRAPHQL_RESOLVER.
+func (r ApiListScanTargetsRequest) Sources(sources []string) ApiListScanTargetsRequest {
+	r.sources = &sources
+	return r
+}
+
 func (r ApiListScanTargetsRequest) Execute() (*ListScanTargets200Response, *http.Response, error) {
 	return r.ApiService.ListScanTargetsExecute(r)
 }
@@ -929,7 +936,7 @@ func (r ApiListScanTargetsRequest) Execute() (*ListScanTargets200Response, *http
 /*
 ListScanTargets List scan targets and API coverage
 
-Returns targets discovered during a scan, including REST and GraphQL operations with per-endpoint coverage. Filter by target type to focus on API routes and resolvers for CI/CD quality gates.
+Returns targets discovered during a scan, including REST and GraphQL operations with per-endpoint coverage. Filter by target type and source (specification vs inferred) to focus on API routes and resolvers for CI/CD quality gates.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param scanId The scan ID
@@ -993,6 +1000,17 @@ func (a *ScansAPIService) ListScanTargetsExecute(r ApiListScanTargetsRequest) (*
 			}
 		} else {
 			parameterAddToHeaderOrQuery(localVarQueryParams, "types", t, "form", "multi")
+		}
+	}
+	if r.sources != nil {
+		t := *r.sources
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "sources", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "sources", t, "form", "multi")
 		}
 	}
 	// to determine the Content-Type header
