@@ -21,7 +21,7 @@ func jitter(duration time.Duration) time.Duration {
 func Start() {
 	restartTimeout := os.Getenv("ESCAPE_CLI_RESTART_INTERVAL")
 	if restartTimeout == "" {
-		log.Debug("ESCAPE_CLI_RESTART_INTERVAL not set, not restarting the private location")
+		log.Debug("Scheduled restart disabled: ESCAPE_CLI_RESTART_INTERVAL is not set")
 		return
 	}
 

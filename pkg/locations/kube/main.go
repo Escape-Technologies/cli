@@ -24,6 +24,10 @@ const (
 	defaultAddress      = "127.0.0.1"
 )
 
+func isInCluster() bool {
+	return os.Getenv("KUBERNETES_SERVICE_HOST") != "" && os.Getenv("KUBERNETES_SERVICE_PORT") != ""
+}
+
 func inferConfig() (*rest.Config, error) {
 	kubeconfig := os.Getenv("KUBECONFIG")
 	var c *rest.Config
@@ -107,10 +111,14 @@ func connectAndRun(ctx context.Context, cfg *rest.Config, isConnected *atomic.Bo
 
 // Start the kubernetes integration
 func Start(ctx context.Context, locationID string, locationName string, healthy *atomic.Bool) {
+	if os.Getenv("KUBECONFIG") == "" && !isInCluster() {
+		log.Info("Kubernetes integration skipped: no KUBECONFIG is set and no in-cluster Kubernetes configuration is available")
+		return
+	}
+
 	cfg, err := inferConfig()
 	if err != nil {
-		log.Debug("Error inferring kubeconfig: %s", err)
-		log.Info("Not connected to k8s API")
+		log.Error("Kubernetes integration could not start: %s", err)
 		return
 	}
 	for {
