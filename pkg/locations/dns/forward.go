@@ -1,6 +1,7 @@
 package dns
 
 import (
+	"github.com/Escape-Technologies/cli/pkg/locations/stats"
 	"github.com/Escape-Technologies/cli/pkg/log"
 
 	"github.com/miekg/dns"
@@ -12,6 +13,7 @@ import (
 // query cannot take the server down.
 func newHandler(upstreams []string) dns.HandlerFunc {
 	return func(w dns.ResponseWriter, r *dns.Msg) {
+		stats.IncDNS()
 		defer func() {
 			if rec := recover(); rec != nil {
 				log.Error("[DNS] recovered from panic while forwarding: %v", rec)
