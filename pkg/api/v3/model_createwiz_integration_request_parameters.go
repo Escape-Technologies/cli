@@ -20,12 +20,13 @@ var _ MappedNullable = &CreatewizIntegrationRequestParameters{}
 
 // CreatewizIntegrationRequestParameters The parameters of the integration
 type CreatewizIntegrationRequestParameters struct {
-	ClientId             string                                                        `json:"client_id"`
-	ClientSecret         string                                                        `json:"client_secret"`
-	TokenUri             string                                                        `json:"token_uri"`
-	ApiEndpoint          string                                                        `json:"api_endpoint"`
-	UploadSeverityLevels []ENUMPROPERTIESPARAMETERSPROPERTIESUPLOADSEVERITYLEVELSITEMS `json:"upload_severity_levels,omitempty"`
-	AdditionalProperties map[string]interface{}
+	ClientId               string                                                        `json:"client_id"`
+	ClientSecret           string                                                        `json:"client_secret"`
+	TokenUri               string                                                        `json:"token_uri"`
+	ApiEndpoint            string                                                        `json:"api_endpoint"`
+	UploadSeverityLevels   []ENUMPROPERTIESPARAMETERSPROPERTIESUPLOADSEVERITYLEVELSITEMS `json:"upload_severity_levels,omitempty"`
+	PushIssuesForAllAssets *bool                                                         `json:"push_issues_for_all_assets,omitempty"`
+	AdditionalProperties   map[string]interface{}
 }
 
 type _CreatewizIntegrationRequestParameters CreatewizIntegrationRequestParameters
@@ -179,6 +180,38 @@ func (o *CreatewizIntegrationRequestParameters) SetUploadSeverityLevels(v []ENUM
 	o.UploadSeverityLevels = v
 }
 
+// GetPushIssuesForAllAssets returns the PushIssuesForAllAssets field value if set, zero value otherwise.
+func (o *CreatewizIntegrationRequestParameters) GetPushIssuesForAllAssets() bool {
+	if o == nil || IsNil(o.PushIssuesForAllAssets) {
+		var ret bool
+		return ret
+	}
+	return *o.PushIssuesForAllAssets
+}
+
+// GetPushIssuesForAllAssetsOk returns a tuple with the PushIssuesForAllAssets field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreatewizIntegrationRequestParameters) GetPushIssuesForAllAssetsOk() (*bool, bool) {
+	if o == nil || IsNil(o.PushIssuesForAllAssets) {
+		return nil, false
+	}
+	return o.PushIssuesForAllAssets, true
+}
+
+// HasPushIssuesForAllAssets returns a boolean if a field has been set.
+func (o *CreatewizIntegrationRequestParameters) HasPushIssuesForAllAssets() bool {
+	if o != nil && !IsNil(o.PushIssuesForAllAssets) {
+		return true
+	}
+
+	return false
+}
+
+// SetPushIssuesForAllAssets gets a reference to the given bool and assigns it to the PushIssuesForAllAssets field.
+func (o *CreatewizIntegrationRequestParameters) SetPushIssuesForAllAssets(v bool) {
+	o.PushIssuesForAllAssets = &v
+}
+
 func (o CreatewizIntegrationRequestParameters) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -195,6 +228,9 @@ func (o CreatewizIntegrationRequestParameters) ToMap() (map[string]interface{}, 
 	toSerialize["api_endpoint"] = o.ApiEndpoint
 	if !IsNil(o.UploadSeverityLevels) {
 		toSerialize["upload_severity_levels"] = o.UploadSeverityLevels
+	}
+	if !IsNil(o.PushIssuesForAllAssets) {
+		toSerialize["push_issues_for_all_assets"] = o.PushIssuesForAllAssets
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -247,6 +283,7 @@ func (o *CreatewizIntegrationRequestParameters) UnmarshalJSON(data []byte) (err 
 		delete(additionalProperties, "token_uri")
 		delete(additionalProperties, "api_endpoint")
 		delete(additionalProperties, "upload_severity_levels")
+		delete(additionalProperties, "push_issues_for_all_assets")
 		o.AdditionalProperties = additionalProperties
 	}
 
