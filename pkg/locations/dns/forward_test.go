@@ -74,14 +74,14 @@ func query(name string) *dns.Msg {
 
 func TestForwardCountsDNSRequests(t *testing.T) {
 	upstream := startUpstream(t, "1.2.3.4")
-	before := stats.SnapshotAndReset()
+	stats.SnapshotAndReset()
 
 	w := &capture{} // nolint:exhaustruct
 	newHandler([]string{upstream})(w, query("example.com"))
 
 	after := stats.SnapshotAndReset()
-	if after.Requests != 0 || after.DNS != before.DNS+1 {
-		t.Fatalf("dns count=%d want %d", after.DNS, before.DNS+1)
+	if after.Requests != 0 || after.DNS != 1 {
+		t.Fatalf("dns count=%d want 1", after.DNS)
 	}
 }
 
