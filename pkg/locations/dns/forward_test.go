@@ -4,6 +4,7 @@ import (
 	"net"
 	"testing"
 
+	"github.com/Escape-Technologies/cli/pkg/locations/stats"
 	"github.com/miekg/dns"
 )
 
@@ -69,6 +70,19 @@ func query(name string) *dns.Msg {
 	m := new(dns.Msg)
 	m.SetQuestion(dns.Fqdn(name), dns.TypeA)
 	return m
+}
+
+func TestForwardCountsDNSRequests(t *testing.T) {
+	upstream := startUpstream(t, "1.2.3.4")
+	stats.SnapshotAndReset()
+
+	w := &capture{} // nolint:exhaustruct
+	newHandler([]string{upstream})(w, query("example.com"))
+
+	after := stats.SnapshotAndReset()
+	if after.Requests != 0 || after.DNS != 1 {
+		t.Fatalf("dns count=%d want 1", after.DNS)
+	}
 }
 
 func TestForwardSuccess(t *testing.T) {

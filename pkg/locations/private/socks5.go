@@ -10,14 +10,19 @@ import (
 	stdlog "log"
 
 	"github.com/Escape-Technologies/cli/pkg/env"
+	"github.com/Escape-Technologies/cli/pkg/locations/stats"
 	"github.com/Escape-Technologies/cli/pkg/log"
 	socks5 "github.com/Escape-Technologies/go-socks5"
 )
 
 func startSocks5Server(ctx context.Context, listener net.Listener, healthy *atomic.Bool) error {
 	log.Trace("Starting socks5 server")
+	baseDial := env.BuildProxyDialer(env.GetBackendProxyURL())
 	socks5Server, err := socks5.New(&socks5.Config{
-		Dial:   env.BuildProxyDialer(env.GetBackendProxyURL()),
+		Dial: func(ctx context.Context, network, addr string) (net.Conn, error) {
+			stats.IncRequest()
+			return baseDial(ctx, network, addr)
+		},
 		Logger: stdlog.New(io.Discard, "", 0),
 	})
 	if err != nil {

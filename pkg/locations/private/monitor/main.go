@@ -18,4 +18,5 @@ func Start(ctx context.Context, client *ssh.Client) {
 
 	sendLogs(ctx, ch)
 	go healthTicker(ctx, ch)
+	go usageTicker(ctx)
 }
