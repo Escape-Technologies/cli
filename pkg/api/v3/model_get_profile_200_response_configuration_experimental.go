@@ -22,8 +22,6 @@ type GetProfile200ResponseConfigurationExperimental struct {
 	BlstExplorationOnly            *bool    `json:"blst_exploration_only,omitempty"`
 	RegressionTestingFileUploadIds []string `json:"regression_testing_file_upload_ids,omitempty"`
 	AsmTechnologies                *bool    `json:"asm_technologies,omitempty"`
-	AsmCodeProjects                *bool    `json:"asm_code_projects,omitempty"`
-	AsmEnumerateCodeProjects       *bool    `json:"asm_enumerate_code_projects,omitempty"`
 	ExternalCrawlingTask           *bool    `json:"external_crawling_task,omitempty"`
 	AsmCveAgent                    *bool    `json:"asm_cve_agent,omitempty"`
 	ExtendedPortScan               *bool    `json:"extended_port_scan,omitempty"`
@@ -145,70 +143,6 @@ func (o *GetProfile200ResponseConfigurationExperimental) HasAsmTechnologies() bo
 // SetAsmTechnologies gets a reference to the given bool and assigns it to the AsmTechnologies field.
 func (o *GetProfile200ResponseConfigurationExperimental) SetAsmTechnologies(v bool) {
 	o.AsmTechnologies = &v
-}
-
-// GetAsmCodeProjects returns the AsmCodeProjects field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationExperimental) GetAsmCodeProjects() bool {
-	if o == nil || IsNil(o.AsmCodeProjects) {
-		var ret bool
-		return ret
-	}
-	return *o.AsmCodeProjects
-}
-
-// GetAsmCodeProjectsOk returns a tuple with the AsmCodeProjects field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationExperimental) GetAsmCodeProjectsOk() (*bool, bool) {
-	if o == nil || IsNil(o.AsmCodeProjects) {
-		return nil, false
-	}
-	return o.AsmCodeProjects, true
-}
-
-// HasAsmCodeProjects returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationExperimental) HasAsmCodeProjects() bool {
-	if o != nil && !IsNil(o.AsmCodeProjects) {
-		return true
-	}
-
-	return false
-}
-
-// SetAsmCodeProjects gets a reference to the given bool and assigns it to the AsmCodeProjects field.
-func (o *GetProfile200ResponseConfigurationExperimental) SetAsmCodeProjects(v bool) {
-	o.AsmCodeProjects = &v
-}
-
-// GetAsmEnumerateCodeProjects returns the AsmEnumerateCodeProjects field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationExperimental) GetAsmEnumerateCodeProjects() bool {
-	if o == nil || IsNil(o.AsmEnumerateCodeProjects) {
-		var ret bool
-		return ret
-	}
-	return *o.AsmEnumerateCodeProjects
-}
-
-// GetAsmEnumerateCodeProjectsOk returns a tuple with the AsmEnumerateCodeProjects field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationExperimental) GetAsmEnumerateCodeProjectsOk() (*bool, bool) {
-	if o == nil || IsNil(o.AsmEnumerateCodeProjects) {
-		return nil, false
-	}
-	return o.AsmEnumerateCodeProjects, true
-}
-
-// HasAsmEnumerateCodeProjects returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationExperimental) HasAsmEnumerateCodeProjects() bool {
-	if o != nil && !IsNil(o.AsmEnumerateCodeProjects) {
-		return true
-	}
-
-	return false
-}
-
-// SetAsmEnumerateCodeProjects gets a reference to the given bool and assigns it to the AsmEnumerateCodeProjects field.
-func (o *GetProfile200ResponseConfigurationExperimental) SetAsmEnumerateCodeProjects(v bool) {
-	o.AsmEnumerateCodeProjects = &v
 }
 
 // GetExternalCrawlingTask returns the ExternalCrawlingTask field value if set, zero value otherwise.
@@ -390,12 +324,6 @@ func (o GetProfile200ResponseConfigurationExperimental) ToMap() (map[string]inte
 	if !IsNil(o.AsmTechnologies) {
 		toSerialize["asm_technologies"] = o.AsmTechnologies
 	}
-	if !IsNil(o.AsmCodeProjects) {
-		toSerialize["asm_code_projects"] = o.AsmCodeProjects
-	}
-	if !IsNil(o.AsmEnumerateCodeProjects) {
-		toSerialize["asm_enumerate_code_projects"] = o.AsmEnumerateCodeProjects
-	}
 	if !IsNil(o.ExternalCrawlingTask) {
 		toSerialize["external_crawling_task"] = o.ExternalCrawlingTask
 	}
@@ -436,8 +364,6 @@ func (o *GetProfile200ResponseConfigurationExperimental) UnmarshalJSON(data []by
 		delete(additionalProperties, "blst_exploration_only")
 		delete(additionalProperties, "regression_testing_file_upload_ids")
 		delete(additionalProperties, "asm_technologies")
-		delete(additionalProperties, "asm_code_projects")
-		delete(additionalProperties, "asm_enumerate_code_projects")
 		delete(additionalProperties, "external_crawling_task")
 		delete(additionalProperties, "asm_cve_agent")
 		delete(additionalProperties, "extended_port_scan")
