@@ -26,7 +26,6 @@
   { "path": "/dast/rules/", "tokens": ["dast", "rules"] },
   { "path": "/dast/scans/", "tokens": ["dast", "scans"] },
   { "path": "/dast/tests/", "tokens": ["dast", "tests"] },
-  { "path": "/files/", "tokens": ["files"] },
   { "path": "/integrations-next/", "tokens": ["integrations", "next"] },
   {
     "path": "/integrations-next/azure-boards/oauth/callback/",
