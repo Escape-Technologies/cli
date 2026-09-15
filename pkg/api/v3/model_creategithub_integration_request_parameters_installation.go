@@ -20,7 +20,7 @@ var _ MappedNullable = &CreategithubIntegrationRequestParametersInstallation{}
 
 // CreategithubIntegrationRequestParametersInstallation struct for CreategithubIntegrationRequestParametersInstallation
 type CreategithubIntegrationRequestParametersInstallation struct {
-	InstallationId       float32           `json:"installation_id"`
+	InstallationId       string            `json:"installation_id"`
 	AccountLogin         string            `json:"account_login"`
 	Permissions          map[string]string `json:"permissions"`
 	SuspendedAt          *string           `json:"suspended_at,omitempty"`
@@ -34,7 +34,7 @@ type _CreategithubIntegrationRequestParametersInstallation CreategithubIntegrati
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreategithubIntegrationRequestParametersInstallation(installationId float32, accountLogin string, permissions map[string]string, lastSyncedAt string) *CreategithubIntegrationRequestParametersInstallation {
+func NewCreategithubIntegrationRequestParametersInstallation(installationId string, accountLogin string, permissions map[string]string, lastSyncedAt string) *CreategithubIntegrationRequestParametersInstallation {
 	this := CreategithubIntegrationRequestParametersInstallation{}
 	this.InstallationId = installationId
 	this.AccountLogin = accountLogin
@@ -52,9 +52,9 @@ func NewCreategithubIntegrationRequestParametersInstallationWithDefaults() *Crea
 }
 
 // GetInstallationId returns the InstallationId field value
-func (o *CreategithubIntegrationRequestParametersInstallation) GetInstallationId() float32 {
+func (o *CreategithubIntegrationRequestParametersInstallation) GetInstallationId() string {
 	if o == nil {
-		var ret float32
+		var ret string
 		return ret
 	}
 
@@ -63,7 +63,7 @@ func (o *CreategithubIntegrationRequestParametersInstallation) GetInstallationId
 
 // GetInstallationIdOk returns a tuple with the InstallationId field value
 // and a boolean to check if the value has been set.
-func (o *CreategithubIntegrationRequestParametersInstallation) GetInstallationIdOk() (*float32, bool) {
+func (o *CreategithubIntegrationRequestParametersInstallation) GetInstallationIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -71,7 +71,7 @@ func (o *CreategithubIntegrationRequestParametersInstallation) GetInstallationId
 }
 
 // SetInstallationId sets field value
-func (o *CreategithubIntegrationRequestParametersInstallation) SetInstallationId(v float32) {
+func (o *CreategithubIntegrationRequestParametersInstallation) SetInstallationId(v string) {
 	o.InstallationId = v
 }
 
