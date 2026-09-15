@@ -56,6 +56,7 @@
     "tokens": ["organization", "roles", "next", "create"]
   },
   { "path": "/organization/tags/", "tokens": ["organization", "tags"] },
+  { "path": "/organization/vault-variables/", "tokens": ["organization", "vault", "variables"] },
   { "path": "/pentest/", "tokens": ["pentest"] },
   { "path": "/pentest/assessments/", "tokens": ["pentest", "assessments"] },
   { "path": "/pentest/create/", "tokens": ["pentest", "create"] },
