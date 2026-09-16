@@ -20,16 +20,17 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationAuthenticationPresetsI
 
 // GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf12UsersInner struct for GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf12UsersInner
 type GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf12UsersInner struct {
-	Username             string                                                                              `json:"username"`
-	Headers              map[string]string                                                                   `json:"headers,omitempty"`
-	Cookies              map[string]string                                                                   `json:"cookies,omitempty"`
-	QueryParameters      map[string]string                                                                   `json:"query_parameters,omitempty"`
-	MainUser             *bool                                                                               `json:"main_user,omitempty"`
-	AllowFailure         *bool                                                                               `json:"allow_failure,omitempty"`
-	Basic                *string                                                                             `json:"basic,omitempty"`
-	Digest               *string                                                                             `json:"digest,omitempty"`
-	Role                 *string                                                                             `json:"role,omitempty"`
-	Actions              []GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInner `json:"actions"`
+	Username             string                                                                                       `json:"username"`
+	Headers              map[string]string                                                                            `json:"headers,omitempty"`
+	Cookies              map[string]string                                                                            `json:"cookies,omitempty"`
+	QueryParameters      map[string]string                                                                            `json:"query_parameters,omitempty"`
+	MainUser             *bool                                                                                        `json:"main_user,omitempty"`
+	AllowFailure         *bool                                                                                        `json:"allow_failure,omitempty"`
+	Basic                *string                                                                                      `json:"basic,omitempty"`
+	Digest               *string                                                                                      `json:"digest,omitempty"`
+	Role                 *string                                                                                      `json:"role,omitempty"`
+	Actions              []GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInner          `json:"actions"`
+	OnTriggerActions     []GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsOnTriggerActionsInner `json:"on_trigger_actions,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -358,6 +359,38 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf12User
 	o.Actions = v
 }
 
+// GetOnTriggerActions returns the OnTriggerActions field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf12UsersInner) GetOnTriggerActions() []GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsOnTriggerActionsInner {
+	if o == nil || IsNil(o.OnTriggerActions) {
+		var ret []GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsOnTriggerActionsInner
+		return ret
+	}
+	return o.OnTriggerActions
+}
+
+// GetOnTriggerActionsOk returns a tuple with the OnTriggerActions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf12UsersInner) GetOnTriggerActionsOk() ([]GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsOnTriggerActionsInner, bool) {
+	if o == nil || IsNil(o.OnTriggerActions) {
+		return nil, false
+	}
+	return o.OnTriggerActions, true
+}
+
+// HasOnTriggerActions returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf12UsersInner) HasOnTriggerActions() bool {
+	if o != nil && !IsNil(o.OnTriggerActions) {
+		return true
+	}
+
+	return false
+}
+
+// SetOnTriggerActions gets a reference to the given []GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsOnTriggerActionsInner and assigns it to the OnTriggerActions field.
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf12UsersInner) SetOnTriggerActions(v []GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsOnTriggerActionsInner) {
+	o.OnTriggerActions = v
+}
+
 func (o GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf12UsersInner) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -394,6 +427,9 @@ func (o GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf12Users
 		toSerialize["role"] = o.Role
 	}
 	toSerialize["actions"] = o.Actions
+	if !IsNil(o.OnTriggerActions) {
+		toSerialize["on_trigger_actions"] = o.OnTriggerActions
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -448,6 +484,7 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf12User
 		delete(additionalProperties, "digest")
 		delete(additionalProperties, "role")
 		delete(additionalProperties, "actions")
+		delete(additionalProperties, "on_trigger_actions")
 		o.AdditionalProperties = additionalProperties
 	}
 
