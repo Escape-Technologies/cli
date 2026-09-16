@@ -1212,13 +1212,13 @@ func (a *IntegrationsAPIService) CreategcpIntegrationExecute(r ApiCreategcpInteg
 }
 
 type ApiCreategithubIntegrationRequest struct {
-	ctx                                context.Context
-	ApiService                         *IntegrationsAPIService
-	createcloudflareIntegrationRequest *CreatecloudflareIntegrationRequest
+	ctx                            context.Context
+	ApiService                     *IntegrationsAPIService
+	creategithubIntegrationRequest *CreategithubIntegrationRequest
 }
 
-func (r ApiCreategithubIntegrationRequest) CreatecloudflareIntegrationRequest(createcloudflareIntegrationRequest CreatecloudflareIntegrationRequest) ApiCreategithubIntegrationRequest {
-	r.createcloudflareIntegrationRequest = &createcloudflareIntegrationRequest
+func (r ApiCreategithubIntegrationRequest) CreategithubIntegrationRequest(creategithubIntegrationRequest CreategithubIntegrationRequest) ApiCreategithubIntegrationRequest {
+	r.creategithubIntegrationRequest = &creategithubIntegrationRequest
 	return r
 }
 
@@ -1281,7 +1281,7 @@ func (a *IntegrationsAPIService) CreategithubIntegrationExecute(r ApiCreategithu
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.createcloudflareIntegrationRequest
+	localVarPostBody = r.creategithubIntegrationRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -10623,14 +10623,14 @@ func (a *IntegrationsAPIService) UpdategcpIntegrationExecute(r ApiUpdategcpInteg
 }
 
 type ApiUpdategithubIntegrationRequest struct {
-	ctx                                context.Context
-	ApiService                         *IntegrationsAPIService
-	id                                 string
-	updatecloudflareIntegrationRequest *UpdatecloudflareIntegrationRequest
+	ctx                            context.Context
+	ApiService                     *IntegrationsAPIService
+	id                             string
+	updategithubIntegrationRequest *UpdategithubIntegrationRequest
 }
 
-func (r ApiUpdategithubIntegrationRequest) UpdatecloudflareIntegrationRequest(updatecloudflareIntegrationRequest UpdatecloudflareIntegrationRequest) ApiUpdategithubIntegrationRequest {
-	r.updatecloudflareIntegrationRequest = &updatecloudflareIntegrationRequest
+func (r ApiUpdategithubIntegrationRequest) UpdategithubIntegrationRequest(updategithubIntegrationRequest UpdategithubIntegrationRequest) ApiUpdategithubIntegrationRequest {
+	r.updategithubIntegrationRequest = &updategithubIntegrationRequest
 	return r
 }
 
@@ -10696,7 +10696,7 @@ func (a *IntegrationsAPIService) UpdategithubIntegrationExecute(r ApiUpdategithu
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.updatecloudflareIntegrationRequest
+	localVarPostBody = r.updategithubIntegrationRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
