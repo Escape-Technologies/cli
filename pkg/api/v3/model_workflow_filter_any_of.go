@@ -19,7 +19,7 @@ var _ MappedNullable = &WorkflowFilterAnyOf{}
 
 // WorkflowFilterAnyOf struct for WorkflowFilterAnyOf
 type WorkflowFilterAnyOf struct {
-	Severities []ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY                  `json:"severities,omitempty"`
+	Severities []ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS              `json:"severities,omitempty"`
 	Risks      []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS `json:"risks,omitempty"`
 	ProjectIds []string                                                     `json:"projectIds,omitempty"`
 	// Deprecated, use profileIds instead
@@ -29,14 +29,14 @@ type WorkflowFilterAnyOf struct {
 	JiraTicket           *bool                                                               `json:"jiraTicket,omitempty"`
 	Search               *string                                                             `json:"search,omitempty"`
 	Categories           []ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY                         `json:"categories,omitempty"`
-	ScannerKinds         []ENUMPROPERTIESWHEREPROPERTIESSCANNERKINDSITEMS                    `json:"scannerKinds,omitempty"`
+	ScannerKinds         []ENUMPROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS                   `json:"scannerKinds,omitempty"`
 	AssetClasses         []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS  `json:"assetClasses,omitempty"`
 	AssetTypes           []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE   `json:"assetTypes,omitempty"`
 	TagIds               []string                                                            `json:"tagIds,omitempty"`
 	NoTags               *bool                                                               `json:"noTags,omitempty"`
 	ScanIds              []string                                                            `json:"scanIds,omitempty"`
 	SecurityTestUids     []string                                                            `json:"securityTestUids,omitempty"`
-	Status               []ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS                           `json:"status,omitempty"`
+	Status               []ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS                         `json:"status,omitempty"`
 	Ids                  []string                                                            `json:"ids,omitempty"`
 	BlacklistedIds       []string                                                            `json:"blacklistedIds,omitempty"`
 	FullNames            []string                                                            `json:"fullNames,omitempty"`
@@ -72,9 +72,9 @@ func NewWorkflowFilterAnyOfWithDefaults() *WorkflowFilterAnyOf {
 }
 
 // GetSeverities returns the Severities field value if set, zero value otherwise.
-func (o *WorkflowFilterAnyOf) GetSeverities() []ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY {
+func (o *WorkflowFilterAnyOf) GetSeverities() []ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS {
 	if o == nil || IsNil(o.Severities) {
-		var ret []ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY
+		var ret []ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS
 		return ret
 	}
 	return o.Severities
@@ -82,7 +82,7 @@ func (o *WorkflowFilterAnyOf) GetSeverities() []ENUMPROPERTIESDATAITEMSPROPERTIE
 
 // GetSeveritiesOk returns a tuple with the Severities field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *WorkflowFilterAnyOf) GetSeveritiesOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY, bool) {
+func (o *WorkflowFilterAnyOf) GetSeveritiesOk() ([]ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS, bool) {
 	if o == nil || IsNil(o.Severities) {
 		return nil, false
 	}
@@ -98,8 +98,8 @@ func (o *WorkflowFilterAnyOf) HasSeverities() bool {
 	return false
 }
 
-// SetSeverities gets a reference to the given []ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY and assigns it to the Severities field.
-func (o *WorkflowFilterAnyOf) SetSeverities(v []ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY) {
+// SetSeverities gets a reference to the given []ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS and assigns it to the Severities field.
+func (o *WorkflowFilterAnyOf) SetSeverities(v []ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS) {
 	o.Severities = v
 }
 
@@ -360,9 +360,9 @@ func (o *WorkflowFilterAnyOf) SetCategories(v []ENUMPROPERTIESDATAITEMSPROPERTIE
 }
 
 // GetScannerKinds returns the ScannerKinds field value if set, zero value otherwise.
-func (o *WorkflowFilterAnyOf) GetScannerKinds() []ENUMPROPERTIESWHEREPROPERTIESSCANNERKINDSITEMS {
+func (o *WorkflowFilterAnyOf) GetScannerKinds() []ENUMPROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS {
 	if o == nil || IsNil(o.ScannerKinds) {
-		var ret []ENUMPROPERTIESWHEREPROPERTIESSCANNERKINDSITEMS
+		var ret []ENUMPROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS
 		return ret
 	}
 	return o.ScannerKinds
@@ -370,7 +370,7 @@ func (o *WorkflowFilterAnyOf) GetScannerKinds() []ENUMPROPERTIESWHEREPROPERTIESS
 
 // GetScannerKindsOk returns a tuple with the ScannerKinds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *WorkflowFilterAnyOf) GetScannerKindsOk() ([]ENUMPROPERTIESWHEREPROPERTIESSCANNERKINDSITEMS, bool) {
+func (o *WorkflowFilterAnyOf) GetScannerKindsOk() ([]ENUMPROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS, bool) {
 	if o == nil || IsNil(o.ScannerKinds) {
 		return nil, false
 	}
@@ -386,8 +386,8 @@ func (o *WorkflowFilterAnyOf) HasScannerKinds() bool {
 	return false
 }
 
-// SetScannerKinds gets a reference to the given []ENUMPROPERTIESWHEREPROPERTIESSCANNERKINDSITEMS and assigns it to the ScannerKinds field.
-func (o *WorkflowFilterAnyOf) SetScannerKinds(v []ENUMPROPERTIESWHEREPROPERTIESSCANNERKINDSITEMS) {
+// SetScannerKinds gets a reference to the given []ENUMPROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS and assigns it to the ScannerKinds field.
+func (o *WorkflowFilterAnyOf) SetScannerKinds(v []ENUMPROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS) {
 	o.ScannerKinds = v
 }
 
@@ -584,9 +584,9 @@ func (o *WorkflowFilterAnyOf) SetSecurityTestUids(v []string) {
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
-func (o *WorkflowFilterAnyOf) GetStatus() []ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS {
+func (o *WorkflowFilterAnyOf) GetStatus() []ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS {
 	if o == nil || IsNil(o.Status) {
-		var ret []ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS
+		var ret []ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS
 		return ret
 	}
 	return o.Status
@@ -594,7 +594,7 @@ func (o *WorkflowFilterAnyOf) GetStatus() []ENUMPROPERTIESDATAITEMSPROPERTIESSTA
 
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *WorkflowFilterAnyOf) GetStatusOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS, bool) {
+func (o *WorkflowFilterAnyOf) GetStatusOk() ([]ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS, bool) {
 	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
@@ -610,8 +610,8 @@ func (o *WorkflowFilterAnyOf) HasStatus() bool {
 	return false
 }
 
-// SetStatus gets a reference to the given []ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS and assigns it to the Status field.
-func (o *WorkflowFilterAnyOf) SetStatus(v []ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS) {
+// SetStatus gets a reference to the given []ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS and assigns it to the Status field.
+func (o *WorkflowFilterAnyOf) SetStatus(v []ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS) {
 	o.Status = v
 }
 

@@ -25,12 +25,12 @@ type GetIssue200Response struct {
 	// The name of the issue
 	Name string `json:"name"`
 	// The full name of the issue
-	FullName string                                    `json:"fullName"`
-	Category ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY `json:"category"`
-	Severity ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY `json:"severity"`
+	FullName string                                        `json:"fullName"`
+	Category ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY     `json:"category"`
+	Severity ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS `json:"severity"`
 	// Whether the severity has been manually overridden
-	ManualSeverity bool                                    `json:"manualSeverity"`
-	Status         ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS `json:"status"`
+	ManualSeverity bool                                      `json:"manualSeverity"`
+	Status         ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS `json:"status"`
 	// AI-generated contextual overview for the issue
 	Context *string `json:"context,omitempty"`
 	// Array of risk types associated with the issue
@@ -71,7 +71,7 @@ type _GetIssue200Response GetIssue200Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetIssue200Response(id string, name string, fullName string, category ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY, severity ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY, manualSeverity bool, status ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, alertUid string, createdAt string, asset AssetDetailed2, securityTest GetIssue200ResponseSecurityTest, aiRemediationFramework string, links IssueSummarizedLinks, targets []IssueTarget) *GetIssue200Response {
+func NewGetIssue200Response(id string, name string, fullName string, category ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY, severity ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS, manualSeverity bool, status ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, alertUid string, createdAt string, asset AssetDetailed2, securityTest GetIssue200ResponseSecurityTest, aiRemediationFramework string, links IssueSummarizedLinks, targets []IssueTarget) *GetIssue200Response {
 	this := GetIssue200Response{}
 	this.Id = id
 	this.Name = name
@@ -196,9 +196,9 @@ func (o *GetIssue200Response) SetCategory(v ENUMPROPERTIESDATAITEMSPROPERTIESCAT
 }
 
 // GetSeverity returns the Severity field value
-func (o *GetIssue200Response) GetSeverity() ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY {
+func (o *GetIssue200Response) GetSeverity() ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS {
 	if o == nil {
-		var ret ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY
+		var ret ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS
 		return ret
 	}
 
@@ -207,7 +207,7 @@ func (o *GetIssue200Response) GetSeverity() ENUMPROPERTIESDATAITEMSPROPERTIESSEV
 
 // GetSeverityOk returns a tuple with the Severity field value
 // and a boolean to check if the value has been set.
-func (o *GetIssue200Response) GetSeverityOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY, bool) {
+func (o *GetIssue200Response) GetSeverityOk() (*ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -215,7 +215,7 @@ func (o *GetIssue200Response) GetSeverityOk() (*ENUMPROPERTIESDATAITEMSPROPERTIE
 }
 
 // SetSeverity sets field value
-func (o *GetIssue200Response) SetSeverity(v ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY) {
+func (o *GetIssue200Response) SetSeverity(v ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS) {
 	o.Severity = v
 }
 
@@ -244,9 +244,9 @@ func (o *GetIssue200Response) SetManualSeverity(v bool) {
 }
 
 // GetStatus returns the Status field value
-func (o *GetIssue200Response) GetStatus() ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS {
+func (o *GetIssue200Response) GetStatus() ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS {
 	if o == nil {
-		var ret ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS
+		var ret ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS
 		return ret
 	}
 
@@ -255,7 +255,7 @@ func (o *GetIssue200Response) GetStatus() ENUMPROPERTIESDATAITEMSPROPERTIESSTATU
 
 // GetStatusOk returns a tuple with the Status field value
 // and a boolean to check if the value has been set.
-func (o *GetIssue200Response) GetStatusOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS, bool) {
+func (o *GetIssue200Response) GetStatusOk() (*ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -263,7 +263,7 @@ func (o *GetIssue200Response) GetStatusOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESS
 }
 
 // SetStatus sets field value
-func (o *GetIssue200Response) SetStatus(v ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS) {
+func (o *GetIssue200Response) SetStatus(v ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS) {
 	o.Status = v
 }
 

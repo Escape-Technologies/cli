@@ -14,47 +14,49 @@ import (
 	"encoding/json"
 )
 
-// checks if the BulkUpdateIssuesRequestWhere type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &BulkUpdateIssuesRequestWhere{}
+// checks if the StartRetestRequestFilter type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StartRetestRequestFilter{}
 
-// BulkUpdateIssuesRequestWhere Filter predicate; omit to match all issues
-type BulkUpdateIssuesRequestWhere struct {
+// StartRetestRequestFilter Issue filter. Matches issues on the given profile.
+type StartRetestRequestFilter struct {
 	// Filter by specific issue IDs
 	Ids []string `json:"ids,omitempty"`
 	// Filter by asset IDs
 	AssetIds []string `json:"assetIds,omitempty"`
 	// Filter by severities
 	Severities []ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS `json:"severities,omitempty"`
-	// Filter by profile IDs
-	ProfileIds []string `json:"profileIds,omitempty"`
 	// Filter by tag IDs
 	TagIds []string `json:"tagIds,omitempty"`
 	// Filter by scanner kinds
-	ScannerKinds         []ENUMPROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS `json:"scannerKinds,omitempty"`
+	ScannerKinds []ENUMPROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS `json:"scannerKinds,omitempty"`
+	// Filter by issue status
+	Status []ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS `json:"status,omitempty"`
+	// Search term to filter issues by name or description
+	Search               *string `json:"search,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _BulkUpdateIssuesRequestWhere BulkUpdateIssuesRequestWhere
+type _StartRetestRequestFilter StartRetestRequestFilter
 
-// NewBulkUpdateIssuesRequestWhere instantiates a new BulkUpdateIssuesRequestWhere object
+// NewStartRetestRequestFilter instantiates a new StartRetestRequestFilter object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBulkUpdateIssuesRequestWhere() *BulkUpdateIssuesRequestWhere {
-	this := BulkUpdateIssuesRequestWhere{}
+func NewStartRetestRequestFilter() *StartRetestRequestFilter {
+	this := StartRetestRequestFilter{}
 	return &this
 }
 
-// NewBulkUpdateIssuesRequestWhereWithDefaults instantiates a new BulkUpdateIssuesRequestWhere object
+// NewStartRetestRequestFilterWithDefaults instantiates a new StartRetestRequestFilter object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewBulkUpdateIssuesRequestWhereWithDefaults() *BulkUpdateIssuesRequestWhere {
-	this := BulkUpdateIssuesRequestWhere{}
+func NewStartRetestRequestFilterWithDefaults() *StartRetestRequestFilter {
+	this := StartRetestRequestFilter{}
 	return &this
 }
 
 // GetIds returns the Ids field value if set, zero value otherwise.
-func (o *BulkUpdateIssuesRequestWhere) GetIds() []string {
+func (o *StartRetestRequestFilter) GetIds() []string {
 	if o == nil || IsNil(o.Ids) {
 		var ret []string
 		return ret
@@ -64,7 +66,7 @@ func (o *BulkUpdateIssuesRequestWhere) GetIds() []string {
 
 // GetIdsOk returns a tuple with the Ids field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *BulkUpdateIssuesRequestWhere) GetIdsOk() ([]string, bool) {
+func (o *StartRetestRequestFilter) GetIdsOk() ([]string, bool) {
 	if o == nil || IsNil(o.Ids) {
 		return nil, false
 	}
@@ -72,7 +74,7 @@ func (o *BulkUpdateIssuesRequestWhere) GetIdsOk() ([]string, bool) {
 }
 
 // HasIds returns a boolean if a field has been set.
-func (o *BulkUpdateIssuesRequestWhere) HasIds() bool {
+func (o *StartRetestRequestFilter) HasIds() bool {
 	if o != nil && !IsNil(o.Ids) {
 		return true
 	}
@@ -81,12 +83,12 @@ func (o *BulkUpdateIssuesRequestWhere) HasIds() bool {
 }
 
 // SetIds gets a reference to the given []string and assigns it to the Ids field.
-func (o *BulkUpdateIssuesRequestWhere) SetIds(v []string) {
+func (o *StartRetestRequestFilter) SetIds(v []string) {
 	o.Ids = v
 }
 
 // GetAssetIds returns the AssetIds field value if set, zero value otherwise.
-func (o *BulkUpdateIssuesRequestWhere) GetAssetIds() []string {
+func (o *StartRetestRequestFilter) GetAssetIds() []string {
 	if o == nil || IsNil(o.AssetIds) {
 		var ret []string
 		return ret
@@ -96,7 +98,7 @@ func (o *BulkUpdateIssuesRequestWhere) GetAssetIds() []string {
 
 // GetAssetIdsOk returns a tuple with the AssetIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *BulkUpdateIssuesRequestWhere) GetAssetIdsOk() ([]string, bool) {
+func (o *StartRetestRequestFilter) GetAssetIdsOk() ([]string, bool) {
 	if o == nil || IsNil(o.AssetIds) {
 		return nil, false
 	}
@@ -104,7 +106,7 @@ func (o *BulkUpdateIssuesRequestWhere) GetAssetIdsOk() ([]string, bool) {
 }
 
 // HasAssetIds returns a boolean if a field has been set.
-func (o *BulkUpdateIssuesRequestWhere) HasAssetIds() bool {
+func (o *StartRetestRequestFilter) HasAssetIds() bool {
 	if o != nil && !IsNil(o.AssetIds) {
 		return true
 	}
@@ -113,12 +115,12 @@ func (o *BulkUpdateIssuesRequestWhere) HasAssetIds() bool {
 }
 
 // SetAssetIds gets a reference to the given []string and assigns it to the AssetIds field.
-func (o *BulkUpdateIssuesRequestWhere) SetAssetIds(v []string) {
+func (o *StartRetestRequestFilter) SetAssetIds(v []string) {
 	o.AssetIds = v
 }
 
 // GetSeverities returns the Severities field value if set, zero value otherwise.
-func (o *BulkUpdateIssuesRequestWhere) GetSeverities() []ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS {
+func (o *StartRetestRequestFilter) GetSeverities() []ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS {
 	if o == nil || IsNil(o.Severities) {
 		var ret []ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS
 		return ret
@@ -128,7 +130,7 @@ func (o *BulkUpdateIssuesRequestWhere) GetSeverities() []ENUMPROPERTIESFILTERPRO
 
 // GetSeveritiesOk returns a tuple with the Severities field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *BulkUpdateIssuesRequestWhere) GetSeveritiesOk() ([]ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS, bool) {
+func (o *StartRetestRequestFilter) GetSeveritiesOk() ([]ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS, bool) {
 	if o == nil || IsNil(o.Severities) {
 		return nil, false
 	}
@@ -136,7 +138,7 @@ func (o *BulkUpdateIssuesRequestWhere) GetSeveritiesOk() ([]ENUMPROPERTIESFILTER
 }
 
 // HasSeverities returns a boolean if a field has been set.
-func (o *BulkUpdateIssuesRequestWhere) HasSeverities() bool {
+func (o *StartRetestRequestFilter) HasSeverities() bool {
 	if o != nil && !IsNil(o.Severities) {
 		return true
 	}
@@ -145,44 +147,12 @@ func (o *BulkUpdateIssuesRequestWhere) HasSeverities() bool {
 }
 
 // SetSeverities gets a reference to the given []ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS and assigns it to the Severities field.
-func (o *BulkUpdateIssuesRequestWhere) SetSeverities(v []ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS) {
+func (o *StartRetestRequestFilter) SetSeverities(v []ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS) {
 	o.Severities = v
 }
 
-// GetProfileIds returns the ProfileIds field value if set, zero value otherwise.
-func (o *BulkUpdateIssuesRequestWhere) GetProfileIds() []string {
-	if o == nil || IsNil(o.ProfileIds) {
-		var ret []string
-		return ret
-	}
-	return o.ProfileIds
-}
-
-// GetProfileIdsOk returns a tuple with the ProfileIds field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *BulkUpdateIssuesRequestWhere) GetProfileIdsOk() ([]string, bool) {
-	if o == nil || IsNil(o.ProfileIds) {
-		return nil, false
-	}
-	return o.ProfileIds, true
-}
-
-// HasProfileIds returns a boolean if a field has been set.
-func (o *BulkUpdateIssuesRequestWhere) HasProfileIds() bool {
-	if o != nil && !IsNil(o.ProfileIds) {
-		return true
-	}
-
-	return false
-}
-
-// SetProfileIds gets a reference to the given []string and assigns it to the ProfileIds field.
-func (o *BulkUpdateIssuesRequestWhere) SetProfileIds(v []string) {
-	o.ProfileIds = v
-}
-
 // GetTagIds returns the TagIds field value if set, zero value otherwise.
-func (o *BulkUpdateIssuesRequestWhere) GetTagIds() []string {
+func (o *StartRetestRequestFilter) GetTagIds() []string {
 	if o == nil || IsNil(o.TagIds) {
 		var ret []string
 		return ret
@@ -192,7 +162,7 @@ func (o *BulkUpdateIssuesRequestWhere) GetTagIds() []string {
 
 // GetTagIdsOk returns a tuple with the TagIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *BulkUpdateIssuesRequestWhere) GetTagIdsOk() ([]string, bool) {
+func (o *StartRetestRequestFilter) GetTagIdsOk() ([]string, bool) {
 	if o == nil || IsNil(o.TagIds) {
 		return nil, false
 	}
@@ -200,7 +170,7 @@ func (o *BulkUpdateIssuesRequestWhere) GetTagIdsOk() ([]string, bool) {
 }
 
 // HasTagIds returns a boolean if a field has been set.
-func (o *BulkUpdateIssuesRequestWhere) HasTagIds() bool {
+func (o *StartRetestRequestFilter) HasTagIds() bool {
 	if o != nil && !IsNil(o.TagIds) {
 		return true
 	}
@@ -209,12 +179,12 @@ func (o *BulkUpdateIssuesRequestWhere) HasTagIds() bool {
 }
 
 // SetTagIds gets a reference to the given []string and assigns it to the TagIds field.
-func (o *BulkUpdateIssuesRequestWhere) SetTagIds(v []string) {
+func (o *StartRetestRequestFilter) SetTagIds(v []string) {
 	o.TagIds = v
 }
 
 // GetScannerKinds returns the ScannerKinds field value if set, zero value otherwise.
-func (o *BulkUpdateIssuesRequestWhere) GetScannerKinds() []ENUMPROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS {
+func (o *StartRetestRequestFilter) GetScannerKinds() []ENUMPROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS {
 	if o == nil || IsNil(o.ScannerKinds) {
 		var ret []ENUMPROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS
 		return ret
@@ -224,7 +194,7 @@ func (o *BulkUpdateIssuesRequestWhere) GetScannerKinds() []ENUMPROPERTIESFILTERP
 
 // GetScannerKindsOk returns a tuple with the ScannerKinds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *BulkUpdateIssuesRequestWhere) GetScannerKindsOk() ([]ENUMPROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS, bool) {
+func (o *StartRetestRequestFilter) GetScannerKindsOk() ([]ENUMPROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS, bool) {
 	if o == nil || IsNil(o.ScannerKinds) {
 		return nil, false
 	}
@@ -232,7 +202,7 @@ func (o *BulkUpdateIssuesRequestWhere) GetScannerKindsOk() ([]ENUMPROPERTIESFILT
 }
 
 // HasScannerKinds returns a boolean if a field has been set.
-func (o *BulkUpdateIssuesRequestWhere) HasScannerKinds() bool {
+func (o *StartRetestRequestFilter) HasScannerKinds() bool {
 	if o != nil && !IsNil(o.ScannerKinds) {
 		return true
 	}
@@ -241,11 +211,75 @@ func (o *BulkUpdateIssuesRequestWhere) HasScannerKinds() bool {
 }
 
 // SetScannerKinds gets a reference to the given []ENUMPROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS and assigns it to the ScannerKinds field.
-func (o *BulkUpdateIssuesRequestWhere) SetScannerKinds(v []ENUMPROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS) {
+func (o *StartRetestRequestFilter) SetScannerKinds(v []ENUMPROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS) {
 	o.ScannerKinds = v
 }
 
-func (o BulkUpdateIssuesRequestWhere) MarshalJSON() ([]byte, error) {
+// GetStatus returns the Status field value if set, zero value otherwise.
+func (o *StartRetestRequestFilter) GetStatus() []ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS {
+	if o == nil || IsNil(o.Status) {
+		var ret []ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS
+		return ret
+	}
+	return o.Status
+}
+
+// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StartRetestRequestFilter) GetStatusOk() ([]ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS, bool) {
+	if o == nil || IsNil(o.Status) {
+		return nil, false
+	}
+	return o.Status, true
+}
+
+// HasStatus returns a boolean if a field has been set.
+func (o *StartRetestRequestFilter) HasStatus() bool {
+	if o != nil && !IsNil(o.Status) {
+		return true
+	}
+
+	return false
+}
+
+// SetStatus gets a reference to the given []ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS and assigns it to the Status field.
+func (o *StartRetestRequestFilter) SetStatus(v []ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS) {
+	o.Status = v
+}
+
+// GetSearch returns the Search field value if set, zero value otherwise.
+func (o *StartRetestRequestFilter) GetSearch() string {
+	if o == nil || IsNil(o.Search) {
+		var ret string
+		return ret
+	}
+	return *o.Search
+}
+
+// GetSearchOk returns a tuple with the Search field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StartRetestRequestFilter) GetSearchOk() (*string, bool) {
+	if o == nil || IsNil(o.Search) {
+		return nil, false
+	}
+	return o.Search, true
+}
+
+// HasSearch returns a boolean if a field has been set.
+func (o *StartRetestRequestFilter) HasSearch() bool {
+	if o != nil && !IsNil(o.Search) {
+		return true
+	}
+
+	return false
+}
+
+// SetSearch gets a reference to the given string and assigns it to the Search field.
+func (o *StartRetestRequestFilter) SetSearch(v string) {
+	o.Search = &v
+}
+
+func (o StartRetestRequestFilter) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -253,7 +287,7 @@ func (o BulkUpdateIssuesRequestWhere) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o BulkUpdateIssuesRequestWhere) ToMap() (map[string]interface{}, error) {
+func (o StartRetestRequestFilter) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Ids) {
 		toSerialize["ids"] = o.Ids
@@ -264,14 +298,17 @@ func (o BulkUpdateIssuesRequestWhere) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Severities) {
 		toSerialize["severities"] = o.Severities
 	}
-	if !IsNil(o.ProfileIds) {
-		toSerialize["profileIds"] = o.ProfileIds
-	}
 	if !IsNil(o.TagIds) {
 		toSerialize["tagIds"] = o.TagIds
 	}
 	if !IsNil(o.ScannerKinds) {
 		toSerialize["scannerKinds"] = o.ScannerKinds
+	}
+	if !IsNil(o.Status) {
+		toSerialize["status"] = o.Status
+	}
+	if !IsNil(o.Search) {
+		toSerialize["search"] = o.Search
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -281,16 +318,16 @@ func (o BulkUpdateIssuesRequestWhere) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *BulkUpdateIssuesRequestWhere) UnmarshalJSON(data []byte) (err error) {
-	varBulkUpdateIssuesRequestWhere := _BulkUpdateIssuesRequestWhere{}
+func (o *StartRetestRequestFilter) UnmarshalJSON(data []byte) (err error) {
+	varStartRetestRequestFilter := _StartRetestRequestFilter{}
 
-	err = json.Unmarshal(data, &varBulkUpdateIssuesRequestWhere)
+	err = json.Unmarshal(data, &varStartRetestRequestFilter)
 
 	if err != nil {
 		return err
 	}
 
-	*o = BulkUpdateIssuesRequestWhere(varBulkUpdateIssuesRequestWhere)
+	*o = StartRetestRequestFilter(varStartRetestRequestFilter)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -298,47 +335,48 @@ func (o *BulkUpdateIssuesRequestWhere) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ids")
 		delete(additionalProperties, "assetIds")
 		delete(additionalProperties, "severities")
-		delete(additionalProperties, "profileIds")
 		delete(additionalProperties, "tagIds")
 		delete(additionalProperties, "scannerKinds")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "search")
 		o.AdditionalProperties = additionalProperties
 	}
 
 	return err
 }
 
-type NullableBulkUpdateIssuesRequestWhere struct {
-	value *BulkUpdateIssuesRequestWhere
+type NullableStartRetestRequestFilter struct {
+	value *StartRetestRequestFilter
 	isSet bool
 }
 
-func (v NullableBulkUpdateIssuesRequestWhere) Get() *BulkUpdateIssuesRequestWhere {
+func (v NullableStartRetestRequestFilter) Get() *StartRetestRequestFilter {
 	return v.value
 }
 
-func (v *NullableBulkUpdateIssuesRequestWhere) Set(val *BulkUpdateIssuesRequestWhere) {
+func (v *NullableStartRetestRequestFilter) Set(val *StartRetestRequestFilter) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableBulkUpdateIssuesRequestWhere) IsSet() bool {
+func (v NullableStartRetestRequestFilter) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableBulkUpdateIssuesRequestWhere) Unset() {
+func (v *NullableStartRetestRequestFilter) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableBulkUpdateIssuesRequestWhere(val *BulkUpdateIssuesRequestWhere) *NullableBulkUpdateIssuesRequestWhere {
-	return &NullableBulkUpdateIssuesRequestWhere{value: val, isSet: true}
+func NewNullableStartRetestRequestFilter(val *StartRetestRequestFilter) *NullableStartRetestRequestFilter {
+	return &NullableStartRetestRequestFilter{value: val, isSet: true}
 }
 
-func (v NullableBulkUpdateIssuesRequestWhere) MarshalJSON() ([]byte, error) {
+func (v NullableStartRetestRequestFilter) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableBulkUpdateIssuesRequestWhere) UnmarshalJSON(src []byte) error {
+func (v *NullableStartRetestRequestFilter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

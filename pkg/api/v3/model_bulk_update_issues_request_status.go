@@ -17,8 +17,8 @@ import (
 
 // BulkUpdateIssuesRequestStatus The new status to apply
 type BulkUpdateIssuesRequestStatus struct {
-	BulkUpdateIssuesRequestStatusAnyOf      *BulkUpdateIssuesRequestStatusAnyOf
-	ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS *ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS
+	BulkUpdateIssuesRequestStatusAnyOf        *BulkUpdateIssuesRequestStatusAnyOf
+	ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS *ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS
 }
 
 // Unmarshal JSON data into any of the pointers in the struct
@@ -37,17 +37,17 @@ func (dst *BulkUpdateIssuesRequestStatus) UnmarshalJSON(data []byte) error {
 		dst.BulkUpdateIssuesRequestStatusAnyOf = nil
 	}
 
-	// try to unmarshal JSON data into ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS
-	err = json.Unmarshal(data, &dst.ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS)
+	// try to unmarshal JSON data into ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS
+	err = json.Unmarshal(data, &dst.ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS)
 	if err == nil {
-		jsonENUMPROPERTIESDATAITEMSPROPERTIESSTATUS, _ := json.Marshal(dst.ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS)
-		if string(jsonENUMPROPERTIESDATAITEMSPROPERTIESSTATUS) == "{}" { // empty struct
-			dst.ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS = nil
+		jsonENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS, _ := json.Marshal(dst.ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS)
+		if string(jsonENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS) == "{}" { // empty struct
+			dst.ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS = nil
 		} else {
-			return nil // data stored in dst.ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS, return on the first match
+			return nil // data stored in dst.ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS, return on the first match
 		}
 	} else {
-		dst.ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS = nil
+		dst.ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS = nil
 	}
 
 	return fmt.Errorf("data failed to match schemas in anyOf(BulkUpdateIssuesRequestStatus)")
@@ -59,8 +59,8 @@ func (src BulkUpdateIssuesRequestStatus) MarshalJSON() ([]byte, error) {
 		return json.Marshal(&src.BulkUpdateIssuesRequestStatusAnyOf)
 	}
 
-	if src.ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS != nil {
-		return json.Marshal(&src.ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS)
+	if src.ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS != nil {
+		return json.Marshal(&src.ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS)
 	}
 
 	return nil, nil // no data in anyOf schemas
