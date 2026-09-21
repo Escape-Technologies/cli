@@ -19,15 +19,14 @@ var _ MappedNullable = &UpdateProfileConfigurationRequestConfigurationRestApiDas
 
 // UpdateProfileConfigurationRequestConfigurationRestApiDast struct for UpdateProfileConfigurationRequestConfigurationRestApiDast
 type UpdateProfileConfigurationRequestConfigurationRestApiDast struct {
-	ExplorationDepth         *ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESEXPLORATIONDEPTH `json:"exploration_depth,omitempty"`
-	ExploreWithAllUsers      *bool                                                                          `json:"explore_with_all_users,omitempty"`
-	CrossUserMemoryEnabled   *bool                                                                          `json:"cross_user_memory_enabled,omitempty"`
-	CrossUserMemoryAllowlist []string                                                                       `json:"cross_user_memory_allowlist,omitempty"`
-	Hotstart                 []string                                                                       `json:"hotstart,omitempty"`
-	HotstartOnly             *bool                                                                          `json:"hotstart_only,omitempty"`
-	Scope                    *GetProfile200ResponseConfigurationGraphqlApiDastScope                         `json:"scope,omitempty"`
-	QueryParamsAreRequired   *bool                                                                          `json:"query_params_are_required,omitempty"`
-	InScopeOnly              *bool                                                                          `json:"in_scope_only,omitempty"`
+	ExplorationDepth       *ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESEXPLORATIONDEPTH `json:"exploration_depth,omitempty"`
+	ExploreWithAllUsers    *bool                                                                          `json:"explore_with_all_users,omitempty"`
+	CrossUserMemoryEnabled *bool                                                                          `json:"cross_user_memory_enabled,omitempty"`
+	Hotstart               []string                                                                       `json:"hotstart,omitempty"`
+	HotstartOnly           *bool                                                                          `json:"hotstart_only,omitempty"`
+	Scope                  *GetProfile200ResponseConfigurationGraphqlApiDastScope                         `json:"scope,omitempty"`
+	QueryParamsAreRequired *bool                                                                          `json:"query_params_are_required,omitempty"`
+	InScopeOnly            *bool                                                                          `json:"in_scope_only,omitempty"`
 	// Deprecated: use `maxDurationMinutes` on the profile instead.
 	// Deprecated
 	MaxDuration          *float32                                      `json:"max_duration,omitempty"`
@@ -149,38 +148,6 @@ func (o *UpdateProfileConfigurationRequestConfigurationRestApiDast) HasCrossUser
 // SetCrossUserMemoryEnabled gets a reference to the given bool and assigns it to the CrossUserMemoryEnabled field.
 func (o *UpdateProfileConfigurationRequestConfigurationRestApiDast) SetCrossUserMemoryEnabled(v bool) {
 	o.CrossUserMemoryEnabled = &v
-}
-
-// GetCrossUserMemoryAllowlist returns the CrossUserMemoryAllowlist field value if set, zero value otherwise.
-func (o *UpdateProfileConfigurationRequestConfigurationRestApiDast) GetCrossUserMemoryAllowlist() []string {
-	if o == nil || IsNil(o.CrossUserMemoryAllowlist) {
-		var ret []string
-		return ret
-	}
-	return o.CrossUserMemoryAllowlist
-}
-
-// GetCrossUserMemoryAllowlistOk returns a tuple with the CrossUserMemoryAllowlist field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UpdateProfileConfigurationRequestConfigurationRestApiDast) GetCrossUserMemoryAllowlistOk() ([]string, bool) {
-	if o == nil || IsNil(o.CrossUserMemoryAllowlist) {
-		return nil, false
-	}
-	return o.CrossUserMemoryAllowlist, true
-}
-
-// HasCrossUserMemoryAllowlist returns a boolean if a field has been set.
-func (o *UpdateProfileConfigurationRequestConfigurationRestApiDast) HasCrossUserMemoryAllowlist() bool {
-	if o != nil && !IsNil(o.CrossUserMemoryAllowlist) {
-		return true
-	}
-
-	return false
-}
-
-// SetCrossUserMemoryAllowlist gets a reference to the given []string and assigns it to the CrossUserMemoryAllowlist field.
-func (o *UpdateProfileConfigurationRequestConfigurationRestApiDast) SetCrossUserMemoryAllowlist(v []string) {
-	o.CrossUserMemoryAllowlist = v
 }
 
 // GetHotstart returns the Hotstart field value if set, zero value otherwise.
@@ -461,9 +428,6 @@ func (o UpdateProfileConfigurationRequestConfigurationRestApiDast) ToMap() (map[
 	if !IsNil(o.CrossUserMemoryEnabled) {
 		toSerialize["cross_user_memory_enabled"] = o.CrossUserMemoryEnabled
 	}
-	if !IsNil(o.CrossUserMemoryAllowlist) {
-		toSerialize["cross_user_memory_allowlist"] = o.CrossUserMemoryAllowlist
-	}
 	if !IsNil(o.Hotstart) {
 		toSerialize["hotstart"] = o.Hotstart
 	}
@@ -513,7 +477,6 @@ func (o *UpdateProfileConfigurationRequestConfigurationRestApiDast) UnmarshalJSO
 		delete(additionalProperties, "exploration_depth")
 		delete(additionalProperties, "explore_with_all_users")
 		delete(additionalProperties, "cross_user_memory_enabled")
-		delete(additionalProperties, "cross_user_memory_allowlist")
 		delete(additionalProperties, "hotstart")
 		delete(additionalProperties, "hotstart_only")
 		delete(additionalProperties, "scope")
