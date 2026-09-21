@@ -523,9 +523,9 @@ TRACKING:
 
 		body := v3.NewUpdateIssueRequestWithDefaults()
 		if issueUpdateStatusStr != "" {
-			newStatus := v3.ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS(issueUpdateStatusStr)
+			newStatus := v3.ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS(issueUpdateStatusStr)
 			if !newStatus.IsValid() {
-				return fmt.Errorf("invalid status %q; valid values: %v", issueUpdateStatusStr, v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESSTATUSEnumValues)
+				return fmt.Errorf("invalid status %q; valid values: %v", issueUpdateStatusStr, v3.AllowedENUMPROPERTIESFILTERPROPERTIESSTATUSITEMSEnumValues)
 			}
 			statusPayload := v3.NewBulkUpdateIssuesRequestStatusAnyOf(newStatus)
 			if issueUpdateReason != "" {
@@ -536,12 +536,12 @@ TRACKING:
 		if issueResetSeverity {
 			body.SetSeverityNil()
 		} else if issueUpdateSeverity != "" {
-			severity := v3.ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY(issueUpdateSeverity)
+			severity := v3.ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS(issueUpdateSeverity)
 			if !severity.IsValid() {
-				return fmt.Errorf("invalid severity %q; valid values: %v", issueUpdateSeverity, v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESSEVERITYEnumValues)
+				return fmt.Errorf("invalid severity %q; valid values: %v", issueUpdateSeverity, v3.AllowedENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMSEnumValues)
 			}
 			body.SetSeverity(v3.UpdateIssueRequestSeverity{
-				ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY: &severity,
+				ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS: &severity,
 			})
 		}
 
@@ -753,9 +753,9 @@ var issueBulkUpdateCmd = &cobra.Command{
 	RunE: func(cmd *cobra.Command, _ []string) error {
 		body := v3.NewBulkUpdateIssuesRequestWithDefaults()
 		if bulkIssueStatus != "" {
-			status := v3.ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS(bulkIssueStatus)
+			status := v3.ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS(bulkIssueStatus)
 			if !status.IsValid() {
-				return fmt.Errorf("invalid status %q; valid values: %v", bulkIssueStatus, v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESSTATUSEnumValues)
+				return fmt.Errorf("invalid status %q; valid values: %v", bulkIssueStatus, v3.AllowedENUMPROPERTIESFILTERPROPERTIESSTATUSITEMSEnumValues)
 			}
 			statusPayload := v3.NewBulkUpdateIssuesRequestStatusAnyOf(status)
 			if bulkIssueReason != "" {
@@ -769,9 +769,9 @@ var issueBulkUpdateCmd = &cobra.Command{
 		if resetSeverity {
 			body.SetSeverityNil()
 		} else if setSeverity != "" {
-			severity := v3.ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY(setSeverity)
+			severity := v3.ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS(setSeverity)
 			if !severity.IsValid() {
-				return fmt.Errorf("invalid severity %q; valid values: %v", setSeverity, v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESSEVERITYEnumValues)
+				return fmt.Errorf("invalid severity %q; valid values: %v", setSeverity, v3.AllowedENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMSEnumValues)
 			}
 			severityPayload := v3.NewBulkUpdateIssuesRequestSeverityAnyOf()
 			severityPayload.SetValue(severity)
@@ -788,9 +788,9 @@ var issueBulkUpdateCmd = &cobra.Command{
 			where.AssetIds = bulkIssueAssetIDs
 		}
 		if len(bulkIssueSeverities) > 0 {
-			severities := make([]v3.ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY, len(bulkIssueSeverities))
+			severities := make([]v3.ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS, len(bulkIssueSeverities))
 			for i, s := range bulkIssueSeverities {
-				severities[i] = v3.ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY(s)
+				severities[i] = v3.ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS(s)
 			}
 			where.Severities = severities
 		}
@@ -801,9 +801,9 @@ var issueBulkUpdateCmd = &cobra.Command{
 			where.TagIds = bulkIssueTagIDs
 		}
 		if len(bulkIssueScannerKinds) > 0 {
-			kinds := make([]v3.ENUMPROPERTIESWHEREPROPERTIESSCANNERKINDSITEMS, len(bulkIssueScannerKinds))
+			kinds := make([]v3.ENUMPROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS, len(bulkIssueScannerKinds))
 			for i, k := range bulkIssueScannerKinds {
-				kinds[i] = v3.ENUMPROPERTIESWHEREPROPERTIESSCANNERKINDSITEMS(k)
+				kinds[i] = v3.ENUMPROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS(k)
 			}
 			where.ScannerKinds = kinds
 		}
@@ -859,10 +859,10 @@ func init() {
 	issueCommentCmd.Flags().String("message", "", "comment message to add to the issue")
 
 	issuesCmd.AddCommand(issueUpdateStatusCmd)
-	issueUpdateStatusCmd.Flags().StringVarP(&issueUpdateStatusStr, "status", "s", issueUpdateStatusStr, fmt.Sprintf("new status for the issue: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESSTATUSEnumValues))
+	issueUpdateStatusCmd.Flags().StringVarP(&issueUpdateStatusStr, "status", "s", issueUpdateStatusStr, fmt.Sprintf("new status for the issue: %v", v3.AllowedENUMPROPERTIESFILTERPROPERTIESSTATUSITEMSEnumValues))
 	issueUpdateStatusCmd.Flags().StringVar(&issueUpdateReason, "reason", "", "reason for the status change")
 	issueUpdateStatusCmd.Flags().StringVar(&issueUpdateReason, "comment", "", "deprecated: use --reason")
-	issueUpdateStatusCmd.Flags().StringVar(&issueUpdateSeverity, "severity", "", fmt.Sprintf("new severity for the issue: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESSEVERITYEnumValues))
+	issueUpdateStatusCmd.Flags().StringVar(&issueUpdateSeverity, "severity", "", fmt.Sprintf("new severity for the issue: %v", v3.AllowedENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMSEnumValues))
 	issueUpdateStatusCmd.Flags().BoolVar(&issueResetSeverity, "reset-severity", false, "reset severity to the scanner value")
 	_ = issueUpdateStatusCmd.Flags().MarkDeprecated("comment", "use --reason instead")
 
@@ -894,8 +894,8 @@ func init() {
 	issuesCmd.AddCommand(issueListCmd)
 
 	issueListCmd.Flags().StringVarP(&search, "search", "s", "", "free-text search across issue names and descriptions")
-	issueListCmd.Flags().StringSliceVarP(&issueStatus, "status", "", issueStatus, fmt.Sprintf("filter by status: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESSTATUSEnumValues))
-	issueListCmd.Flags().StringSliceVarP(&issueSeverity, "severity", "l", issueSeverity, fmt.Sprintf("filter by severity level: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESSEVERITYEnumValues))
+	issueListCmd.Flags().StringSliceVarP(&issueStatus, "status", "", issueStatus, fmt.Sprintf("filter by status: %v", v3.AllowedENUMPROPERTIESFILTERPROPERTIESSTATUSITEMSEnumValues))
+	issueListCmd.Flags().StringSliceVarP(&issueSeverity, "severity", "l", issueSeverity, fmt.Sprintf("filter by severity level: %v", v3.AllowedENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMSEnumValues))
 	issueListCmd.Flags().StringSliceVarP(&profileIDs, "profile-id", "p", profileIDs, "filter by profile ID(s) - comma-separated for multiple")
 	issueListCmd.Flags().StringSliceVarP(&assetIDs, "asset-id", "a", assetIDs, "filter by asset ID(s) - comma-separated for multiple")
 	issueListCmd.Flags().StringSliceVarP(&domains, "domain", "d", domains, "filter by domain name(s)")

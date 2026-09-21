@@ -17,8 +17,8 @@ import (
 
 // UpdateIssueRequestSeverity The issue severity
 type UpdateIssueRequestSeverity struct {
-	BulkUpdateIssuesRequestSeverityAnyOf      *BulkUpdateIssuesRequestSeverityAnyOf
-	ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY *ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY
+	BulkUpdateIssuesRequestSeverityAnyOf          *BulkUpdateIssuesRequestSeverityAnyOf
+	ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS *ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS
 }
 
 // Unmarshal JSON data into any of the pointers in the struct
@@ -42,17 +42,17 @@ func (dst *UpdateIssueRequestSeverity) UnmarshalJSON(data []byte) error {
 		dst.BulkUpdateIssuesRequestSeverityAnyOf = nil
 	}
 
-	// try to unmarshal JSON data into ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY
-	err = json.Unmarshal(data, &dst.ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY)
+	// try to unmarshal JSON data into ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS
+	err = json.Unmarshal(data, &dst.ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS)
 	if err == nil {
-		jsonENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY, _ := json.Marshal(dst.ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY)
-		if string(jsonENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY) == "{}" { // empty struct
-			dst.ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY = nil
+		jsonENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS, _ := json.Marshal(dst.ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS)
+		if string(jsonENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS) == "{}" { // empty struct
+			dst.ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS = nil
 		} else {
-			return nil // data stored in dst.ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY, return on the first match
+			return nil // data stored in dst.ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS, return on the first match
 		}
 	} else {
-		dst.ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY = nil
+		dst.ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS = nil
 	}
 
 	return fmt.Errorf("data failed to match schemas in anyOf(UpdateIssueRequestSeverity)")
@@ -64,8 +64,8 @@ func (src UpdateIssueRequestSeverity) MarshalJSON() ([]byte, error) {
 		return json.Marshal(&src.BulkUpdateIssuesRequestSeverityAnyOf)
 	}
 
-	if src.ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY != nil {
-		return json.Marshal(&src.ENUMPROPERTIESDATAITEMSPROPERTIESSEVERITY)
+	if src.ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS != nil {
+		return json.Marshal(&src.ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS)
 	}
 
 	return nil, nil // no data in anyOf schemas

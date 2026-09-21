@@ -20,7 +20,7 @@ var _ MappedNullable = &BulkUpdateIssuesRequestStatusAnyOf{}
 
 // BulkUpdateIssuesRequestStatusAnyOf struct for BulkUpdateIssuesRequestStatusAnyOf
 type BulkUpdateIssuesRequestStatusAnyOf struct {
-	Value ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS `json:"value"`
+	Value ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS `json:"value"`
 	// Reason for the change (required if your organization enforces it)
 	Reason               *string `json:"reason,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -32,7 +32,7 @@ type _BulkUpdateIssuesRequestStatusAnyOf BulkUpdateIssuesRequestStatusAnyOf
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBulkUpdateIssuesRequestStatusAnyOf(value ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS) *BulkUpdateIssuesRequestStatusAnyOf {
+func NewBulkUpdateIssuesRequestStatusAnyOf(value ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS) *BulkUpdateIssuesRequestStatusAnyOf {
 	this := BulkUpdateIssuesRequestStatusAnyOf{}
 	this.Value = value
 	return &this
@@ -47,9 +47,9 @@ func NewBulkUpdateIssuesRequestStatusAnyOfWithDefaults() *BulkUpdateIssuesReques
 }
 
 // GetValue returns the Value field value
-func (o *BulkUpdateIssuesRequestStatusAnyOf) GetValue() ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS {
+func (o *BulkUpdateIssuesRequestStatusAnyOf) GetValue() ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS {
 	if o == nil {
-		var ret ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS
+		var ret ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS
 		return ret
 	}
 
@@ -58,7 +58,7 @@ func (o *BulkUpdateIssuesRequestStatusAnyOf) GetValue() ENUMPROPERTIESDATAITEMSP
 
 // GetValueOk returns a tuple with the Value field value
 // and a boolean to check if the value has been set.
-func (o *BulkUpdateIssuesRequestStatusAnyOf) GetValueOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS, bool) {
+func (o *BulkUpdateIssuesRequestStatusAnyOf) GetValueOk() (*ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -66,7 +66,7 @@ func (o *BulkUpdateIssuesRequestStatusAnyOf) GetValueOk() (*ENUMPROPERTIESDATAIT
 }
 
 // SetValue sets field value
-func (o *BulkUpdateIssuesRequestStatusAnyOf) SetValue(v ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS) {
+func (o *BulkUpdateIssuesRequestStatusAnyOf) SetValue(v ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS) {
 	o.Value = v
 }
 
