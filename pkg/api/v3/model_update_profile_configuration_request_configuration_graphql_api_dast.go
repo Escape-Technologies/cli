@@ -19,16 +19,15 @@ var _ MappedNullable = &UpdateProfileConfigurationRequestConfigurationGraphqlApi
 
 // UpdateProfileConfigurationRequestConfigurationGraphqlApiDast struct for UpdateProfileConfigurationRequestConfigurationGraphqlApiDast
 type UpdateProfileConfigurationRequestConfigurationGraphqlApiDast struct {
-	Url                      *string                                                                        `json:"url,omitempty"`
-	ExplorationDepth         *ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESEXPLORATIONDEPTH `json:"exploration_depth,omitempty"`
-	ExploreWithAllUsers      *bool                                                                          `json:"explore_with_all_users,omitempty"`
-	CrossUserMemoryEnabled   *bool                                                                          `json:"cross_user_memory_enabled,omitempty"`
-	CrossUserMemoryAllowlist []string                                                                       `json:"cross_user_memory_allowlist,omitempty"`
-	MaxGeneratedDepth        *float32                                                                       `json:"max_generated_depth,omitempty"`
-	Hotstart                 []string                                                                       `json:"hotstart,omitempty"`
-	HotstartOnly             *bool                                                                          `json:"hotstart_only,omitempty"`
-	Scope                    *GetProfile200ResponseConfigurationGraphqlApiDastScope                         `json:"scope,omitempty"`
-	InScopeOnly              *bool                                                                          `json:"in_scope_only,omitempty"`
+	Url                    *string                                                                        `json:"url,omitempty"`
+	ExplorationDepth       *ENUMPROPERTIESCONFIGURATIONPROPERTIESGRAPHQLAPIDASTPROPERTIESEXPLORATIONDEPTH `json:"exploration_depth,omitempty"`
+	ExploreWithAllUsers    *bool                                                                          `json:"explore_with_all_users,omitempty"`
+	CrossUserMemoryEnabled *bool                                                                          `json:"cross_user_memory_enabled,omitempty"`
+	MaxGeneratedDepth      *float32                                                                       `json:"max_generated_depth,omitempty"`
+	Hotstart               []string                                                                       `json:"hotstart,omitempty"`
+	HotstartOnly           *bool                                                                          `json:"hotstart_only,omitempty"`
+	Scope                  *GetProfile200ResponseConfigurationGraphqlApiDastScope                         `json:"scope,omitempty"`
+	InScopeOnly            *bool                                                                          `json:"in_scope_only,omitempty"`
 	// Deprecated: use `maxDurationMinutes` on the profile instead.
 	// Deprecated
 	MaxDuration          *float32                                      `json:"max_duration,omitempty"`
@@ -182,38 +181,6 @@ func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) HasCrossU
 // SetCrossUserMemoryEnabled gets a reference to the given bool and assigns it to the CrossUserMemoryEnabled field.
 func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) SetCrossUserMemoryEnabled(v bool) {
 	o.CrossUserMemoryEnabled = &v
-}
-
-// GetCrossUserMemoryAllowlist returns the CrossUserMemoryAllowlist field value if set, zero value otherwise.
-func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) GetCrossUserMemoryAllowlist() []string {
-	if o == nil || IsNil(o.CrossUserMemoryAllowlist) {
-		var ret []string
-		return ret
-	}
-	return o.CrossUserMemoryAllowlist
-}
-
-// GetCrossUserMemoryAllowlistOk returns a tuple with the CrossUserMemoryAllowlist field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) GetCrossUserMemoryAllowlistOk() ([]string, bool) {
-	if o == nil || IsNil(o.CrossUserMemoryAllowlist) {
-		return nil, false
-	}
-	return o.CrossUserMemoryAllowlist, true
-}
-
-// HasCrossUserMemoryAllowlist returns a boolean if a field has been set.
-func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) HasCrossUserMemoryAllowlist() bool {
-	if o != nil && !IsNil(o.CrossUserMemoryAllowlist) {
-		return true
-	}
-
-	return false
-}
-
-// SetCrossUserMemoryAllowlist gets a reference to the given []string and assigns it to the CrossUserMemoryAllowlist field.
-func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) SetCrossUserMemoryAllowlist(v []string) {
-	o.CrossUserMemoryAllowlist = v
 }
 
 // GetMaxGeneratedDepth returns the MaxGeneratedDepth field value if set, zero value otherwise.
@@ -497,9 +464,6 @@ func (o UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) ToMap() (m
 	if !IsNil(o.CrossUserMemoryEnabled) {
 		toSerialize["cross_user_memory_enabled"] = o.CrossUserMemoryEnabled
 	}
-	if !IsNil(o.CrossUserMemoryAllowlist) {
-		toSerialize["cross_user_memory_allowlist"] = o.CrossUserMemoryAllowlist
-	}
 	if !IsNil(o.MaxGeneratedDepth) {
 		toSerialize["max_generated_depth"] = o.MaxGeneratedDepth
 	}
@@ -550,7 +514,6 @@ func (o *UpdateProfileConfigurationRequestConfigurationGraphqlApiDast) Unmarshal
 		delete(additionalProperties, "exploration_depth")
 		delete(additionalProperties, "explore_with_all_users")
 		delete(additionalProperties, "cross_user_memory_enabled")
-		delete(additionalProperties, "cross_user_memory_allowlist")
 		delete(additionalProperties, "max_generated_depth")
 		delete(additionalProperties, "hotstart")
 		delete(additionalProperties, "hotstart_only")
