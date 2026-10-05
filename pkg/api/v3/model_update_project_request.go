@@ -21,8 +21,8 @@ var _ MappedNullable = &UpdateProjectRequest{}
 // UpdateProjectRequest struct for UpdateProjectRequest
 type UpdateProjectRequest struct {
 	Project UpdateProjectRequestProject `json:"project"`
-	// The slug of the project
-	Slug                 *string `json:"slug,omitempty"`
+	// The slug of the project: lowercase alphanumerics separated by hyphens
+	Slug                 *string `json:"slug,omitempty" validate:"regexp=^[a-z0-9]+(?:-[a-z0-9]+)*$"`
 	AdditionalProperties map[string]interface{}
 }
 

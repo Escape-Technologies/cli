@@ -31,7 +31,9 @@ type AuditLogSummarized struct {
 	// The actor of the audit log
 	Actor *string `json:"actor,omitempty"`
 	// The email of the actor
-	ActorEmail           *string `json:"actorEmail,omitempty"`
+	ActorEmail *string `json:"actorEmail,omitempty"`
+	// The target of the audit log
+	Target               *string `json:"target,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -218,6 +220,38 @@ func (o *AuditLogSummarized) SetActorEmail(v string) {
 	o.ActorEmail = &v
 }
 
+// GetTarget returns the Target field value if set, zero value otherwise.
+func (o *AuditLogSummarized) GetTarget() string {
+	if o == nil || IsNil(o.Target) {
+		var ret string
+		return ret
+	}
+	return *o.Target
+}
+
+// GetTargetOk returns a tuple with the Target field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AuditLogSummarized) GetTargetOk() (*string, bool) {
+	if o == nil || IsNil(o.Target) {
+		return nil, false
+	}
+	return o.Target, true
+}
+
+// HasTarget returns a boolean if a field has been set.
+func (o *AuditLogSummarized) HasTarget() bool {
+	if o != nil && !IsNil(o.Target) {
+		return true
+	}
+
+	return false
+}
+
+// SetTarget gets a reference to the given string and assigns it to the Target field.
+func (o *AuditLogSummarized) SetTarget(v string) {
+	o.Target = &v
+}
+
 func (o AuditLogSummarized) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -237,6 +271,9 @@ func (o AuditLogSummarized) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.ActorEmail) {
 		toSerialize["actorEmail"] = o.ActorEmail
+	}
+	if !IsNil(o.Target) {
+		toSerialize["target"] = o.Target
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -290,6 +327,7 @@ func (o *AuditLogSummarized) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "action")
 		delete(additionalProperties, "actor")
 		delete(additionalProperties, "actorEmail")
+		delete(additionalProperties, "target")
 		o.AdditionalProperties = additionalProperties
 	}
 

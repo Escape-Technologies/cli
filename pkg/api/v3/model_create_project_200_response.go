@@ -25,6 +25,8 @@ type CreateProject200Response struct {
 	Id string `json:"id"`
 	// The name of the project
 	Name string `json:"name"`
+	// The slug of the project
+	Slug string `json:"slug"`
 	// The date and time the project was created
 	CreatedAt time.Time `json:"createdAt"`
 	// The bindings of the project
@@ -38,10 +40,11 @@ type _CreateProject200Response CreateProject200Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateProject200Response(id string, name string, createdAt time.Time, bindings []CreateProject200ResponseBindingsInner) *CreateProject200Response {
+func NewCreateProject200Response(id string, name string, slug string, createdAt time.Time, bindings []CreateProject200ResponseBindingsInner) *CreateProject200Response {
 	this := CreateProject200Response{}
 	this.Id = id
 	this.Name = name
+	this.Slug = slug
 	this.CreatedAt = createdAt
 	this.Bindings = bindings
 	return &this
@@ -101,6 +104,30 @@ func (o *CreateProject200Response) GetNameOk() (*string, bool) {
 // SetName sets field value
 func (o *CreateProject200Response) SetName(v string) {
 	o.Name = v
+}
+
+// GetSlug returns the Slug field value
+func (o *CreateProject200Response) GetSlug() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Slug
+}
+
+// GetSlugOk returns a tuple with the Slug field value
+// and a boolean to check if the value has been set.
+func (o *CreateProject200Response) GetSlugOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Slug, true
+}
+
+// SetSlug sets field value
+func (o *CreateProject200Response) SetSlug(v string) {
+	o.Slug = v
 }
 
 // GetCreatedAt returns the CreatedAt field value
@@ -163,6 +190,7 @@ func (o CreateProject200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["name"] = o.Name
+	toSerialize["slug"] = o.Slug
 	toSerialize["createdAt"] = o.CreatedAt
 	toSerialize["bindings"] = o.Bindings
 
@@ -180,6 +208,7 @@ func (o *CreateProject200Response) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"id",
 		"name",
+		"slug",
 		"createdAt",
 		"bindings",
 	}
@@ -213,6 +242,7 @@ func (o *CreateProject200Response) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "name")
+		delete(additionalProperties, "slug")
 		delete(additionalProperties, "createdAt")
 		delete(additionalProperties, "bindings")
 		o.AdditionalProperties = additionalProperties

@@ -617,7 +617,7 @@ func (a *TagsAPIService) UpdateTagExecute(r ApiUpdateTagRequest) (*CreateTag200R
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/tags/{tagId}/{tagId}"
+	localVarPath := localBasePath + "/tags/{tagId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"tagId"+"}", url.PathEscape(parameterValueToString(r.tagId, "tagId")), -1)
 
 	localVarHeaderParams := make(map[string]string)

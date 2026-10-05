@@ -32,6 +32,7 @@ type ApiListAuditLogsRequest struct {
 	endTime       *string
 	action        *string
 	actor         *string
+	target        *string
 	search        *string
 }
 
@@ -71,15 +72,21 @@ func (r ApiListAuditLogsRequest) EndTime(endTime string) ApiListAuditLogsRequest
 	return r
 }
 
-// Filter by action type
+// Filter by action type (exact match)
 func (r ApiListAuditLogsRequest) Action(action string) ApiListAuditLogsRequest {
 	r.action = &action
 	return r
 }
 
-// Filter by actor
+// Filter by actor (exact match on the actor ID; use &#x60;search&#x60; for emails or partial values)
 func (r ApiListAuditLogsRequest) Actor(actor string) ApiListAuditLogsRequest {
 	r.actor = &actor
+	return r
+}
+
+// Filter by target (case-insensitive substring match)
+func (r ApiListAuditLogsRequest) Target(target string) ApiListAuditLogsRequest {
+	r.target = &target
 	return r
 }
 
@@ -159,6 +166,9 @@ func (a *AuditAPIService) ListAuditLogsExecute(r ApiListAuditLogsRequest) (*List
 	}
 	if r.actor != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "actor", r.actor, "form", "")
+	}
+	if r.target != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "target", r.target, "form", "")
 	}
 	if r.search != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")
