@@ -18,5 +18,6 @@ func serve(addr string, handler dns.Handler) error {
 	if err != nil {
 		return fmt.Errorf("failed to listen and serve DNS server: %w", err)
 	}
+
 	return nil
 }

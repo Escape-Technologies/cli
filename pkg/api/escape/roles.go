@@ -15,10 +15,12 @@ func ListRoles(ctx context.Context) ([]v3.ListRoles200ResponseInner, error) {
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
+
 	data, _, err := client.RolesAPI.ListRoles(ctx).Execute()
 	if err != nil {
 		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
+
 	return data, nil
 }
 
@@ -28,10 +30,12 @@ func GetRole(ctx context.Context, roleID string) (*v3.CreateRole200Response, err
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
+
 	data, _, err := client.RolesAPI.GetRole(ctx, roleID).Execute()
 	if err != nil {
 		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
+
 	return data, nil
 }
 
@@ -41,14 +45,17 @@ func CreateRole(ctx context.Context, body []byte) (*v3.CreateRole200Response, er
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
+
 	var req v3.CreateRoleRequest
 	if err := json.Unmarshal(body, &req); err != nil {
 		return nil, fmt.Errorf("invalid JSON: %w", err)
 	}
+
 	data, _, err := client.RolesAPI.CreateRole(ctx).CreateRoleRequest(req).Execute()
 	if err != nil {
 		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
+
 	return data, nil
 }
 
@@ -58,14 +65,17 @@ func UpdateRole(ctx context.Context, roleID string, body []byte) (*v3.CreateRole
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
+
 	var req v3.UpdateRoleRequest
 	if err := json.Unmarshal(body, &req); err != nil {
 		return nil, fmt.Errorf("invalid JSON: %w", err)
 	}
+
 	data, _, err := client.RolesAPI.UpdateRole(ctx, roleID).UpdateRoleRequest(req).Execute()
 	if err != nil {
 		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
+
 	return data, nil
 }
 
@@ -75,6 +85,7 @@ func CreateRoleBindings(ctx context.Context, roleID, userID string) ([]v3.Create
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
+
 	req := v3.CreateRoleBindingsRequest{
 		Bindings: []v3.CreateRoleBindingsRequestBindingsInner{
 			{RoleId: roleID, UserId: userID},
@@ -84,20 +95,23 @@ func CreateRoleBindings(ctx context.Context, roleID, userID string) ([]v3.Create
 	if err != nil {
 		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
+
 	return data, nil
 }
 
-// DeleteRoleBinding deletes a role binding by ID
-func DeleteRoleBinding(ctx context.Context, bindingID string) error {
+// DeleteRoleBinding deletes a role binding by ID.
+func DeleteRoleBinding(ctx context.Context, bindingID string) (*v3.DeleteCustomRule200Response, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
-		return fmt.Errorf("unable to init client: %w", err)
+		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
-	_, _, err = client.RolesAPI.DeleteRoleBinding(ctx, bindingID).Execute()
+
+	data, _, err := client.RolesAPI.DeleteRoleBinding(ctx, bindingID).Execute()
 	if err != nil {
-		return fmt.Errorf("api error: %w", humanizeAPIError(err))
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
-	return nil
+
+	return data, nil
 }
 
 // DeleteRole deletes a role by ID.
@@ -105,5 +119,6 @@ func DeleteRole(ctx context.Context, roleID string) error {
 	if err := rawRequest(ctx, http.MethodDelete, rawPath("roles", roleID), nil, nil); err != nil {
 		return fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
+
 	return nil
 }

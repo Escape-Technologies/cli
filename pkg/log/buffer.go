@@ -39,9 +39,11 @@ func (b *logBuffer) sync() {
 		if !ok {
 			offset = 0
 		}
+
 		for i := offset; i < len(b.queue); i++ {
 			callback(b.queue[i])
 		}
+
 		b.hooksOffset[name] = len(b.queue)
 	}
 }
@@ -59,6 +61,7 @@ func (b *logBuffer) Ingest(log Entry) {
 			}
 		}
 	}
+
 	b.queue = append(b.queue, log)
 	b.sync()
 }

@@ -43,6 +43,16 @@ var profileInitiators []string
 var profileRisks []string
 var profileSortType string
 var profileSortDirection string
+var profileListPage pageFlags
+var profileProblemsPage pageFlags
+var profileProblemsAssetIDs []string
+var profileProblemsDomains []string
+var profileProblemsIssueIDs []string
+var profileProblemsTagsIDs []string
+var profileProblemsSearch string
+var profileProblemsInitiators []string
+var profileProblemsKinds []string
+var profileProblemsRisks []string
 var profileGetExtraAssets bool
 
 var profilesCmd = &cobra.Command{
@@ -110,37 +120,33 @@ profiles only (REST, GraphQL, WEBAPP). Use --all to include pentest profiles.`,
 			SortType:      profileSortType,
 			SortDirection: profileSortDirection,
 		}
-		profiles, next, err := escape.ListProfiles(cmd.Context(), "", filters)
-		if err != nil {
-			return fmt.Errorf("unable to list profiles: %w", err)
-		}
-		allProfiles := profiles
-		for next != nil && *next != "" {
-			profiles, next, err = escape.ListProfiles(cmd.Context(), *next, filters)
-			if err != nil {
-				return fmt.Errorf("unable to list profiles: %w", err)
-			}
-			allProfiles = append(allProfiles, profiles...)
-		}
-		out.Table(allProfiles, func() []string {
+		if err := runPagedList(cmd, profileListPage, func(ctx context.Context, cursor string, size int) ([]v3.ProfileSummarized, *string, int, error) {
+			return escape.ListProfiles(ctx, cursor, filters, size)
+		}, func(profiles []v3.ProfileSummarized) []string {
 			result := []string{"ID\tCREATED AT\tASSET TYPE\tINITIATORS\tSCORE\tOPEN ISSUES\tLAST SCAN STATUS\tNAME"}
-			for _, profile := range allProfiles {
+			for _, profile := range profiles {
 				score := ""
 				if value, ok := profile.GetScoreOk(); ok {
 					score = fmt.Sprintf("%.2f", *value)
 				}
+
 				openIssueCount := ""
 				if value, ok := profile.GetOpenIssueCountOk(); ok {
 					openIssueCount = strconv.Itoa(*value)
 				}
+
 				lastScanStatus := ""
 				if value, ok := profile.GetLastScanStatusOk(); ok {
 					lastScanStatus = *value
 				}
+
 				result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s", profile.GetId(), profile.GetCreatedAt(), profile.Asset.GetType(), profile.GetInitiators(), score, openIssueCount, lastScanStatus, profile.GetName()))
 			}
+
 			return result
-		})
+		}); err != nil {
+			return fmt.Errorf("unable to list profiles: %w", err)
+		}
 
 		return nil
 	},
@@ -196,8 +202,10 @@ schedule, risks, and configuration details.`,
 						asset.GetName(),
 					))
 				}
+
 				return rows
 			})
+
 			return nil
 		}
 
@@ -212,8 +220,10 @@ schedule, risks, and configuration details.`,
 				profile.GetName(),
 				formatExtraAssets(profile.GetExtraAssets()),
 			))
+
 			return result
 		})
+
 		return nil
 	},
 }
@@ -222,10 +232,12 @@ func formatExtraAssets(extraAssets []v3.ProfileExtraAsset) string {
 	if len(extraAssets) == 0 {
 		return ""
 	}
+
 	ids := make([]string, 0, len(extraAssets))
 	for _, asset := range extraAssets {
 		ids = append(ids, asset.GetId())
 	}
+
 	return strings.Join(ids, ", ")
 }
 
@@ -242,6 +254,7 @@ See https://public.escape.tech/v3/#tag/profiles for complete schema.`,
 		if out.InputSchema(createRestProfileInput{}) {
 			return nil
 		}
+
 		// Output JSON Schema if requested
 		if out.Schema(v3.GetProfile200Response{}) {
 			return nil
@@ -252,6 +265,7 @@ See https://public.escape.tech/v3/#tag/profiles for complete schema.`,
 		if err != nil {
 			return fmt.Errorf("failed to read stdin: %w", err)
 		}
+
 		data = b
 
 		var profile map[string]interface{}
@@ -269,8 +283,10 @@ See https://public.escape.tech/v3/#tag/profiles for complete schema.`,
 			if profileResponse, ok := response.(*v3.GetProfile200Response); ok {
 				result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s", profileResponse.GetId(), profileResponse.GetCreatedAt(), profileResponse.GetName(), profileResponse.Asset.GetType()))
 			}
+
 			return result
 		})
+
 		return nil
 	},
 }
@@ -287,6 +303,7 @@ Create a new profile for testing web applications. Provide configuration via JSO
 		if out.InputSchema(createWebappProfileInput{}) {
 			return nil
 		}
+
 		// Output JSON Schema if requested
 		if out.Schema(v3.GetProfile200Response{}) {
 			return nil
@@ -297,6 +314,7 @@ Create a new profile for testing web applications. Provide configuration via JSO
 		if err != nil {
 			return fmt.Errorf("failed to read stdin: %w", err)
 		}
+
 		data = b
 
 		var profile map[string]interface{}
@@ -314,8 +332,10 @@ Create a new profile for testing web applications. Provide configuration via JSO
 			if profileResponse, ok := response.(*v3.GetProfile200Response); ok {
 				result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s", profileResponse.GetId(), profileResponse.GetCreatedAt(), profileResponse.GetName(), profileResponse.Asset.GetType()))
 			}
+
 			return result
 		})
+
 		return nil
 	},
 }
@@ -331,6 +351,7 @@ Create a new profile for testing GraphQL APIs. Provide configuration via JSON th
 		if out.InputSchema(createGraphqlProfileInput{}) {
 			return nil
 		}
+
 		// Output JSON Schema if requested
 		if out.Schema(v3.GetProfile200Response{}) {
 			return nil
@@ -341,6 +362,7 @@ Create a new profile for testing GraphQL APIs. Provide configuration via JSON th
 		if err != nil {
 			return fmt.Errorf("failed to read stdin: %w", err)
 		}
+
 		data = b
 
 		var profile map[string]interface{}
@@ -358,8 +380,10 @@ Create a new profile for testing GraphQL APIs. Provide configuration via JSON th
 			if profileResponse, ok := response.(*v3.GetProfile200Response); ok {
 				result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s", profileResponse.GetId(), profileResponse.GetCreatedAt(), profileResponse.GetName(), profileResponse.Asset.GetType()))
 			}
+
 			return result
 		})
+
 		return nil
 	},
 }
@@ -376,6 +400,7 @@ use the configuration object to target REST, GraphQL, or web application scannin
 		if out.InputSchema(createAiPentestProfileInput{}) {
 			return nil
 		}
+
 		if out.Schema(v3.GetProfile200Response{}) {
 			return nil
 		}
@@ -400,8 +425,10 @@ use the configuration object to target REST, GraphQL, or web application scannin
 			if profileResponse, ok := response.(*v3.GetProfile200Response); ok {
 				result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s", profileResponse.GetId(), profileResponse.GetCreatedAt(), profileResponse.GetName(), profileResponse.Asset.GetType()))
 			}
+
 			return result
 		})
+
 		return nil
 	},
 }
@@ -423,35 +450,30 @@ identifying configuration issues, broken authentication, or unreachable targets.
   # Export to JSON
   escape-cli profiles problems -o json`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
-		if out.Schema([]v3.ProfileScanProblemsRow{}) {
+		if out.Schema(Page[v3.ProfileScanProblemsRow]{}) {
 			return nil
 		}
 
 		filters := &escape.ListProblemsFilters{
-			AssetIDs:   profileAssetIDs,
-			Domains:    profileDomains,
-			IssueIDs:   profileIssueIDs,
-			TagsIDs:    profileTagsIDs,
-			Search:     profileSearch,
-			Initiators: profileInitiators,
-			Kinds:      profileKinds,
-			Risks:      profileRisks,
+			AssetIDs:   profileProblemsAssetIDs,
+			Domains:    profileProblemsDomains,
+			IssueIDs:   profileProblemsIssueIDs,
+			TagsIDs:    profileProblemsTagsIDs,
+			Search:     profileProblemsSearch,
+			Initiators: profileProblemsInitiators,
+			Kinds:      profileProblemsKinds,
+			Risks:      profileProblemsRisks,
 		}
-		problems, next, err := escape.ListProblems(cmd.Context(), "", filters)
-		if err != nil {
-			return fmt.Errorf("unable to list problems: %w", err)
-		}
-		all := problems
-		for next != nil && *next != "" {
-			problems, next, err = escape.ListProblems(cmd.Context(), *next, filters)
+		if err := runPagedList(cmd, profileProblemsPage, func(ctx context.Context, cursor string, size int) ([]v3.ProfileScanProblemsRow, *string, int, error) {
+			rows, next, total, err := escape.ListProblems(ctx, cursor, filters, size)
 			if err != nil {
-				return fmt.Errorf("unable to list problems: %w", err)
+				return nil, nil, 0, fmt.Errorf("unable to list problems: %w", err)
 			}
-			all = append(all, problems...)
-		}
-		out.Table(all, func() []string {
+
+			return rows, next, total, nil
+		}, func(rows []v3.ProfileScanProblemsRow) []string {
 			res := []string{"PROFILE ID\tNAME\tLAST SCAN ID\tSTATUS\tSCORE\tCREATED AT"}
-			for _, row := range all {
+			for _, row := range rows {
 				scanID, status, score, createdAt := "-", "-", "-", "-"
 				if row.LastScan != nil {
 					scanID = row.LastScan.GetId()
@@ -459,12 +481,18 @@ identifying configuration issues, broken authentication, or unreachable targets.
 					if s := row.LastScan.GetScore(); s != 0 {
 						score = fmt.Sprintf("%.0f", s)
 					}
+
 					createdAt = row.LastScan.GetCreatedAt()
 				}
+
 				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s", row.GetId(), row.GetName(), scanID, status, score, createdAt))
 			}
+
 			return res
-		})
+		}); err != nil {
+			return err
+		}
+
 		return nil
 	},
 }
@@ -510,6 +538,7 @@ Alternatively, provide a JSON object via stdin with any combination of fields.`,
 		if out.Schema(v3.GetProfile200Response{}) {
 			return nil
 		}
+
 		if out.InputSchema(v3.UpdateProfileRequest{}) {
 			return nil
 		}
@@ -525,6 +554,7 @@ Alternatively, provide a JSON object via stdin with any combination of fields.`,
 			if err != nil {
 				return fmt.Errorf("failed to read stdin: %w", err)
 			}
+
 			if len(b) > 0 {
 				if err := json.Unmarshal(b, &payload); err != nil {
 					return fmt.Errorf("invalid JSON: %w", err)
@@ -540,12 +570,15 @@ Alternatively, provide a JSON object via stdin with any combination of fields.`,
 		if cmd.Flags().Changed("name") {
 			payload["name"] = profileUpdateName
 		}
+
 		if cmd.Flags().Changed("description") {
 			payload["description"] = profileUpdateDescription
 		}
+
 		if cmd.Flags().Changed("cron") {
 			payload["cron"] = profileUpdateCron
 		}
+
 		if cmd.Flags().Changed("clear-extra-assets") && profileUpdateClearExtraAssets {
 			payload["extraAssetIds"] = []string{}
 		} else if cmd.Flags().Changed("extra-asset-id") {
@@ -572,6 +605,7 @@ Alternatively, provide a JSON object via stdin with any combination of fields.`,
 				fmt.Sprintf("%s\t%s\t%s\t%s", profile.GetId(), profile.GetName(), profile.GetCreatedAt(), profile.Asset.GetType()),
 			}
 		})
+
 		return nil
 	},
 }
@@ -595,24 +629,39 @@ func parseExtraAssetIDs(raw string) []string {
 		if id == "" {
 			continue
 		}
+
 		ids = append(ids, id)
 	}
+
 	return ids
 }
+
+// profileUpdateConfigurationMerge opts the command into fetching the current
+// configuration and deep-merging the stdin JSON. The flag defaults to false
+// so existing CLI callers keep full-replace behavior. The mcp-default
+// annotation tells the MCP schema to send true when the caller omits it.
+var profileUpdateConfigurationMerge bool
 
 var profileUpdateConfigurationCmd = &cobra.Command{
 	Use:     "update-configuration profile-id",
 	Aliases: []string{"uc", "update-config"},
-	Short:   "Update profile configuration: authentication, headers, scope, security tests, read-only mode",
+	Short:   "Update profile configuration (auth, headers, scope, security tests, read-only mode). Replaces the whole configuration unless --merge is set",
 	Long: `Update Profile Configuration - Modify Auth, Scope, and Scanner Settings
 
 Update a profile's scan configuration via JSON through stdin. The JSON must
 contain a "configuration" object with the fields to update.
 
-IMPORTANT: This is a full replace, not a merge. Any configuration section not
-included in the JSON will be reset to defaults. Always send the complete
-configuration. Use "profiles get <id> -o json" to retrieve the current
-configuration before updating.
+IMPORTANT: Without --merge this is a full replace. Any configuration section
+not included in the JSON is reset to defaults. Send the complete configuration,
+or pass --merge to deep-merge the JSON into the configuration currently stored
+on the profile. Objects merge recursively. Arrays, scalars, and null replace
+the current value. Keys omitted from the patch are kept.
+
+The CLI defaults to replace so existing scripts stay intact. The hosted MCP
+tool fills in --merge when the caller omits it.
+
+Use "profiles get <id> -o json" to read the current configuration before a
+full replace.
 
 CONFIGURABLE SECTIONS:
   authentication    - Users, credentials, browser login procedures
@@ -637,8 +686,11 @@ CONFIGURABLE SECTIONS:
   # Update authentication
   cat auth.json | escape-cli profiles update-configuration <profile-id>
 
-  # Update hotstart URLs
-  echo '{"configuration":{"frontend_dast":{"hotstart":["https://app.example.com/#/accounts"]}}}' | escape-cli profiles update-configuration <profile-id>`,
+  # Update hotstart URLs (full replace: other sections reset)
+  echo '{"configuration":{"frontend_dast":{"hotstart":["https://app.example.com/#/accounts"]}}}' | escape-cli profiles update-configuration <profile-id>
+
+  # Keep every other section and only set read-only mode
+  echo '{"configuration":{"mode":"read_only"}}' | escape-cli profiles update-configuration --merge <profile-id>`,
 	Args: cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		if out.InputSchema(v3.UpdateProfileConfigurationRequest{}) {
@@ -651,6 +703,7 @@ CONFIGURABLE SECTIONS:
 		if err != nil {
 			return fmt.Errorf("failed to read stdin: %w", err)
 		}
+
 		if len(b) == 0 {
 			return errors.New("no input provided: pipe JSON configuration via stdin")
 		}
@@ -660,12 +713,30 @@ CONFIGURABLE SECTIONS:
 			return fmt.Errorf("invalid JSON: %w", err)
 		}
 
-		result, err := escape.UpdateProfileConfiguration(cmd.Context(), profileID, b)
+		body := b
+		if profileUpdateConfigurationMerge {
+			profile, err := escape.GetProfile(cmd.Context(), profileID)
+			if err != nil {
+				return fmt.Errorf("failed to read profile %s before merge: %w", profileID, err)
+			}
+
+			if profile == nil {
+				return fmt.Errorf("profile %s not found", profileID)
+			}
+
+			body, err = mergeProfileConfiguration(profile.Configuration, b)
+			if err != nil {
+				return err
+			}
+		}
+
+		result, err := escape.UpdateProfileConfiguration(cmd.Context(), profileID, body)
 		if err != nil {
 			return fmt.Errorf("failed to update configuration: %w", err)
 		}
 
 		out.Print(result, "Configuration updated successfully")
+
 		return nil
 	},
 }
@@ -711,6 +782,7 @@ WORKFLOW:
 				fmt.Sprintf("%s\t%s\t%s\t%s", profile.GetId(), profile.GetName(), profile.GetCreatedAt(), profile.Asset.GetType()),
 			}
 		})
+
 		return nil
 	},
 }
@@ -763,6 +835,7 @@ func pickProfileSchema(profile *v3.GetProfile200Response, schemaID string) (*v3.
 				return &profile.ExtraAssets[i], nil
 			}
 		}
+
 		return nil, fmt.Errorf("no schema asset with id %s attached to profile", schemaID)
 	}
 
@@ -774,6 +847,7 @@ func pickProfileSchema(profile *v3.GetProfile200Response, schemaID string) (*v3.
 			activeCount++
 		}
 	}
+
 	switch activeCount {
 	case 0:
 		return nil, errors.New("no active schema attached to this profile")
@@ -849,7 +923,9 @@ download in one shot.`,
 			if err != nil {
 				return fmt.Errorf("unable to marshal schema: %w", err)
 			}
+
 			out.Print(schema, string(buf))
+
 			return nil
 		}
 
@@ -861,6 +937,7 @@ download in one shot.`,
 			if err := escape.DownloadSignedURL(ctx, *schema.SignedUrl, os.Stdout); err != nil {
 				return fmt.Errorf("failed to download schema bytes: %w", err)
 			}
+
 			return nil
 		}
 
@@ -873,10 +950,12 @@ download in one shot.`,
 		if destDir == "" {
 			destDir = "."
 		}
+
 		tmp, err := os.CreateTemp(destDir, destName+".*.part")
 		if err != nil {
 			return fmt.Errorf("unable to create temp file in %s: %w", destDir, err)
 		}
+
 		tmpPath := tmp.Name()
 		cleanup := func() {
 			_ = tmp.Close()
@@ -887,16 +966,25 @@ download in one shot.`,
 			cleanup()
 			return fmt.Errorf("failed to download schema bytes: %w", err)
 		}
+
 		if err := tmp.Close(); err != nil {
 			_ = os.Remove(tmpPath)
 			return fmt.Errorf("failed to finalize temp file %s: %w", tmpPath, err)
 		}
+
 		if err := os.Rename(tmpPath, profileGetSchemaOutFile); err != nil {
 			_ = os.Remove(tmpPath)
 			return fmt.Errorf("failed to move %s to %s: %w", tmpPath, profileGetSchemaOutFile, err)
 		}
 
+		// -o json keeps the declared ProfileExtraAsset document. The path
+		// notice follows it, so it stays on stderr once the document exists.
+		if out.IsJSON() {
+			out.Print(schema, "")
+		}
+
 		out.Log(fmt.Sprintf("Schema %s written to %s", schema.Id, profileGetSchemaOutFile))
+
 		return nil
 	},
 }
@@ -944,6 +1032,7 @@ fast in CI).`,
 				return fmt.Errorf("failed to read stdin: %w", err)
 			}
 		}
+
 		if len(data) == 0 {
 			return errors.New("no schema bytes provided: pass --file or pipe a schema file via stdin")
 		}
@@ -955,6 +1044,7 @@ fast in CI).`,
 		if err != nil {
 			return fmt.Errorf("unable to get signed url: %w", err)
 		}
+
 		if err := escape.UploadSchema(ctx, upload.GetUrl(), data); err != nil {
 			return fmt.Errorf("failed to upload schema bytes: %w", err)
 		}
@@ -975,6 +1065,7 @@ fast in CI).`,
 				fmt.Sprintf("%s\t%s\t%s\t%s", profile.GetId(), asset.GetId(), profile.GetName(), profile.Asset.GetType()),
 			}
 		})
+
 		return nil
 	},
 }
@@ -988,12 +1079,18 @@ var profileDeleteCmd = &cobra.Command{
 Permanently delete a security testing profile. This will also remove scan history
 and scheduled scans. The asset itself is NOT deleted.`,
 	RunE: func(cmd *cobra.Command, args []string) error {
+		if out.Schema(v3.DeleteProfile200Response{}) {
+			return nil
+		}
+
 		profileID := args[0]
-		err := escape.DeleteProfile(cmd.Context(), profileID)
+		result, err := escape.DeleteProfile(cmd.Context(), profileID)
 		if err != nil {
 			return fmt.Errorf("unable to delete profile %s: %w", profileID, err)
 		}
-		out.Log(fmt.Sprintf("Profile %s successfully deleted", profileID))
+
+		out.Print(result, fmt.Sprintf("Profile %s successfully deleted", profileID))
+
 		return nil
 	},
 	Args: cobra.ExactArgs(1),
@@ -1022,6 +1119,13 @@ func init() {
 	profileUploadSchemaCmd.Flags().StringVar(&profileUploadSchemaFile, "file", "", "path to the schema file (reads stdin when omitted)")
 	profileUploadSchemaCmd.Flags().StringVar(&profileUploadSchemaName, "name", "", "optional name for the created schema asset")
 	profileUploadSchemaCmd.Flags().DurationVar(&profileUploadSchemaTimeout, "timeout", profileUploadSchemaDefaultTimeout, "end-to-end timeout for upload + schema-build workflow + attach")
+	profileUpdateConfigurationCmd.Flags().BoolVar(
+		&profileUpdateConfigurationMerge,
+		"merge",
+		false,
+		"Deep-merge stdin into the stored configuration. CLI default off (full replace). MCP default: true",
+	)
+	markMCPDefault(profileUpdateConfigurationCmd.Flags(), "merge")
 	profileUpdateCmd.Flags().StringVar(&profileUpdateName, "name", "", "profile name")
 	profileUpdateCmd.Flags().StringVar(&profileUpdateDescription, "description", "", "profile description")
 	profileUpdateCmd.Flags().StringVar(&profileUpdateCron, "cron", "", "cron schedule (e.g., \"0 22 * * *\")")
@@ -1040,5 +1144,19 @@ func init() {
 	profilesListCmd.Flags().StringSliceVarP(&profileRisks, "risk", "r", []string{}, "risk")
 	profilesListCmd.Flags().StringVar(&profileSortType, "sort-by", "", "sort field")
 	profilesListCmd.Flags().StringVar(&profileSortDirection, "sort-direction", "", "sort direction: asc, desc")
+	profileListPage.bind(profilesListCmd)
+	// These filters used to read the list command's variables, so
+	// `profiles problems --asset-id` was an unknown flag and the MCP tool
+	// advertised no filter properties. They stay separate so listing profiles
+	// does not change a problems query in the same process.
+	profileProblemsCmd.Flags().StringSliceVarP(&profileProblemsAssetIDs, "asset-id", "a", []string{}, "asset ID")
+	profileProblemsCmd.Flags().StringSliceVarP(&profileProblemsDomains, "domain", "d", []string{}, "domain")
+	profileProblemsCmd.Flags().StringSliceVarP(&profileProblemsIssueIDs, "issue-id", "i", []string{}, "issue ID")
+	profileProblemsCmd.Flags().StringSliceVarP(&profileProblemsTagsIDs, "tag-id", "t", []string{}, "tag ID")
+	profileProblemsCmd.Flags().StringVarP(&profileProblemsSearch, "search", "s", "", "search")
+	profileProblemsCmd.Flags().StringSliceVarP(&profileProblemsInitiators, "initiator", "n", []string{}, "initiator")
+	profileProblemsCmd.Flags().StringSliceVarP(&profileProblemsKinds, "kind", "k", []string{}, "kind")
+	profileProblemsCmd.Flags().StringSliceVarP(&profileProblemsRisks, "risk", "r", []string{}, "risk")
+	profileProblemsPage.bind(profileProblemsCmd)
 	rootCmd.AddCommand(profilesCmd)
 }

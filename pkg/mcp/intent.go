@@ -79,8 +79,10 @@ func NewIntentMiddleware(next http.Handler, opts IntentOptions) http.Handler {
 			// Restore body so the downstream handler can surface the real error.
 			r.Body = io.NopCloser(bytes.NewReader(nil))
 			next.ServeHTTP(w, r)
+
 			return
 		}
+
 		r.Body = io.NopCloser(bytes.NewReader(body))
 
 		var peek struct {
@@ -123,6 +125,7 @@ func NewIntentMiddleware(next http.Handler, opts IntentOptions) http.Handler {
 		if rerr != nil {
 			log.Printf("WARN intent tools/list rewrite failed: %v", rerr)
 			recorder.flushTo(w)
+
 			return
 		}
 
@@ -136,10 +139,12 @@ func NewIntentMiddleware(next http.Handler, opts IntentOptions) http.Handler {
 			if strings.EqualFold(key, "Content-Length") {
 				continue
 			}
+
 			for _, value := range values {
 				w.Header().Add(key, value)
 			}
 		}
+
 		w.Header().Set("Content-Length", strconv.Itoa(bytesOut))
 		w.WriteHeader(http.StatusOK)
 		_, _ = w.Write(rewritten)
@@ -154,6 +159,7 @@ func ModeFromEnv(fallback IntentMode) IntentMode {
 	case string(IntentModeOn), string(IntentModeCompactOnly), string(IntentModeOff):
 		return IntentMode(raw)
 	}
+
 	return fallback
 }
 
@@ -177,9 +183,11 @@ func parseChatContext(raw string) (ChatContext, bool) {
 	if err := json.Unmarshal(payload, &parsed); err != nil {
 		return ChatContext{}, false
 	}
+
 	if strings.TrimSpace(parsed.Current) == "" && len(parsed.History) == 0 {
 		return ChatContext{}, false
 	}
+
 	return parsed, true
 }
 
@@ -194,8 +202,10 @@ func buildDigest(specs []ToolSpec) []ToolDigest {
 		if len(runes) > maxToolDescriptionRunes {
 			desc = string(runes[:toolDescriptionEllipsisCutoff]) + "..."
 		}
+
 		digest = append(digest, ToolDigest{Name: s.Name, Description: desc})
 	}
+
 	return digest
 }
 
@@ -204,6 +214,7 @@ func indexSpecs(specs []ToolSpec) map[string]ToolSpec {
 	for _, s := range specs {
 		m[s.Name] = s
 	}
+
 	return m
 }
 
@@ -215,15 +226,19 @@ func filterKnown(names []string, known map[string]struct{}) []string {
 		if n == "" {
 			continue
 		}
+
 		if _, ok := known[n]; !ok {
 			continue
 		}
+
 		if _, dup := seen[n]; dup {
 			continue
 		}
+
 		seen[n] = struct{}{}
 		out = append(out, n)
 	}
+
 	return out
 }
 
@@ -260,6 +275,7 @@ func rewriteToolsListResponse(
 	if jerr := json.Unmarshal(trimmed, &envelope); jerr != nil {
 		return nil, 0, 0, 0, fmt.Errorf("unmarshal tools/list envelope: %w", jerr)
 	}
+
 	if len(envelope.Error) > 0 {
 		// Don't rewrite error responses.
 		return nil, 0, 0, 0, errors.New("response carries error; skipping rewrite")
@@ -285,22 +301,26 @@ func rewriteToolsListResponse(
 			rewrittenTools = append(rewrittenTools, json.RawMessage(raw))
 			continue
 		}
+
 		spec, isCommandBacked := byName[header.Name]
 		if !isCommandBacked {
 			rewrittenTools = append(rewrittenTools, json.RawMessage(raw))
 			continue
 		}
+
 		if _, picked := selectedSet[header.Name]; picked {
 			rewrittenTools = append(rewrittenTools, json.RawMessage(raw))
 			fullCount++
 			continue
 		}
+
 		stub, err := BuildStubTool(spec)
 		if err != nil {
 			rewrittenTools = append(rewrittenTools, json.RawMessage(raw))
 			fullCount++
 			continue
 		}
+
 		rewrittenTools = append(rewrittenTools, stub)
 		stubCount++
 	}
@@ -310,6 +330,7 @@ func rewriteToolsListResponse(
 	if envelope.Result.NextCursor != "" {
 		result["nextCursor"] = envelope.Result.NextCursor
 	}
+
 	out := map[string]any{
 		"jsonrpc": envelope.JSONRPC,
 		"result":  result,
@@ -322,6 +343,7 @@ func rewriteToolsListResponse(
 	if err != nil {
 		return nil, 0, 0, 0, fmt.Errorf("marshal rewritten tools/list: %w", err)
 	}
+
 	return encoded, fullCount, stubCount, len(encoded), nil
 }
 
@@ -334,6 +356,7 @@ func extractFirstDataFrame(body []byte) ([]byte, bool) {
 			return bytes.TrimSpace(line[len("data:"):]), true
 		}
 	}
+
 	return nil, false
 }
 
@@ -345,6 +368,7 @@ func classifierErrString(err error) string {
 	if err == nil {
 		return "<nil>"
 	}
+
 	return err.Error()
 }
 
@@ -372,10 +396,12 @@ func (r *responseRecorder) Write(b []byte) (int, error) {
 	if r.status == 0 {
 		r.status = http.StatusOK
 	}
+
 	n, err := r.buffer.Write(b)
 	if err != nil {
 		return n, fmt.Errorf("buffer response: %w", err)
 	}
+
 	return n, nil
 }
 
@@ -383,6 +409,7 @@ func (r *responseRecorder) WriteHeader(status int) {
 	if r.done {
 		return
 	}
+
 	r.status = status
 	r.done = true
 }
@@ -398,9 +425,11 @@ func (r *responseRecorder) flushTo(w http.ResponseWriter) {
 			w.Header().Add(key, value)
 		}
 	}
+
 	if r.status == 0 {
 		r.status = http.StatusOK
 	}
+
 	w.WriteHeader(r.status)
 	_, _ = io.Copy(w, r.buffer)
 }

@@ -16,13 +16,16 @@ func systemResolvers() ([]string, error) {
 	if err != nil {
 		return nil, fmt.Errorf("failed to read /etc/resolv.conf: %w", err)
 	}
+
 	port := config.Port
 	if port == "" {
 		port = defaultPort
 	}
+
 	servers := make([]string, 0, len(config.Servers))
 	for _, s := range config.Servers {
 		servers = append(servers, net.JoinHostPort(s, port))
 	}
+
 	return servers, nil
 }

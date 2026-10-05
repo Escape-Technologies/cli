@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"strings"
@@ -18,6 +19,7 @@ var (
 	eventLevels        []string
 	eventSortType      string
 	eventSortDirection string
+	eventListPage      pageFlags
 )
 
 var eventsCmd = &cobra.Command{
@@ -88,32 +90,25 @@ FILTER OPTIONS:
 			SortType:       eventSortType,
 			SortDirection:  eventSortDirection,
 		}
-		events, next, err := escape.ListEvents(cmd.Context(), "", filters)
-		if err != nil {
-			return fmt.Errorf("unable to list events: %w", err)
-		}
-		allEvents := events
-		for next != nil && *next != "" {
-			events, next, err = escape.ListEvents(cmd.Context(), *next, filters)
-			if err != nil {
-				return fmt.Errorf("unable to list events: %w", err)
-			}
-			allEvents = append(allEvents, events...)
-		}
-		out.Table(allEvents, func() []string {
+		if err := runPagedList(cmd, eventListPage, func(ctx context.Context, cursor string, size int) ([]v3.EventSummarized, *string, int, error) {
+			return escape.ListEvents(ctx, cursor, filters, size)
+		}, func(events []v3.EventSummarized) []string {
 			res := []string{"ID\tCREATED AT\tLEVEL\tSTAGE\tTITLE"}
-			for _, event := range allEvents {
+			for _, event := range events {
 				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s", event.GetId(), event.GetCreatedAt(), event.GetLevel(), event.GetStage(), event.GetTitle()))
 			}
+
 			return res
-		})
+		}); err != nil {
+			return fmt.Errorf("unable to list events: %w", err)
+		}
 
 		return nil
 	},
 }
 
 var eventGetCmd = &cobra.Command{
-	Use:     "get",
+	Use:     "get <event-id>",
 	Aliases: []string{"g"},
 	Short:   "Get an event",
 	Long: `Get an event.
@@ -127,6 +122,7 @@ ID                                      LEVEL    TITLE                          
 			_ = cmd.Help()
 			return errors.New("event ID is required")
 		}
+
 		return nil
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
@@ -144,10 +140,12 @@ ID                                      LEVEL    TITLE                          
 		if event.ScanId != nil {
 			scanID = *event.ScanId
 		}
+
 		link := ""
 		if event.Scan != nil {
 			link = strings.Replace(event.Scan.GetLinks().ScanIssues, "/issues", "/logs", 1)
 		}
+
 		attachmentIDs := make([]string, 0, len(event.GetAttachments()))
 		for _, a := range event.GetAttachments() {
 			attachmentIDs = append(attachmentIDs, a.GetId())
@@ -167,6 +165,7 @@ ID                                      LEVEL    TITLE                          
 				strings.Join(attachmentIDs, ", "),
 				link,
 			))
+
 			return res
 		})
 
@@ -187,6 +186,7 @@ func init() {
 	eventsListCmd.Flags().StringSliceVarP(&eventLevels, "levels", "l", eventLevels, fmt.Sprintf("levels of events: %v", v3.AllowedENUMPROPERTIESEVENTSITEMSPROPERTIESLEVELEnumValues))
 	eventsListCmd.Flags().StringVar(&eventSortType, "sort-by", "", "sort field")
 	eventsListCmd.Flags().StringVar(&eventSortDirection, "sort-direction", "", "sort direction: asc, desc")
+	eventListPage.bind(eventsListCmd)
 
 	eventsCmd.AddCommand(eventGetCmd)
 

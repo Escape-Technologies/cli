@@ -38,5 +38,6 @@ func nextBackoff(current time.Duration) time.Duration {
 	if next > maxBackoff {
 		return maxBackoff
 	}
+
 	return next
 }

@@ -91,6 +91,7 @@ func (s *openapiSchema) UnmarshalJSON(data []byte) error {
 	if err := json.Unmarshal(data, &raw); err != nil {
 		return fmt.Errorf("decode openapi schema: %w", err)
 	}
+
 	switch typed := raw.Type.(type) {
 	case string:
 		s.Type = typed
@@ -103,6 +104,7 @@ func (s *openapiSchema) UnmarshalJSON(data []byte) error {
 			}
 		}
 	}
+
 	return nil
 }
 
@@ -175,6 +177,7 @@ func NewOpenAPISearchIndex(options OpenAPISearchIndexOptions) *OpenAPISearchInde
 	if index.httpClient == nil {
 		index.httpClient = &http.Client{Timeout: openapiHTTPTimeout}
 	}
+
 	return index
 }
 
@@ -184,6 +187,7 @@ func (o *OpenAPISearchIndex) search(ctx context.Context, query string, limit int
 	if limit < 1 {
 		limit = 1
 	}
+
 	if limit > openapiMaxResultsPerQuery {
 		limit = openapiMaxResultsPerQuery
 	}
@@ -209,24 +213,29 @@ func (o *OpenAPISearchIndex) search(ctx context.Context, query string, limit int
 			ranked = append(ranked, scored{op: op, score: s})
 		}
 	}
+
 	sort.SliceStable(ranked, func(i, j int) bool {
 		if ranked[i].score != ranked[j].score {
 			return ranked[i].score > ranked[j].score
 		}
+
 		// Prefer shorter paths (closer match to a resource root) on ties.
 		if len(ranked[i].op.Path) != len(ranked[j].op.Path) {
 			return len(ranked[i].op.Path) < len(ranked[j].op.Path)
 		}
+
 		return ranked[i].op.OperationID < ranked[j].op.OperationID
 	})
 
 	if len(ranked) > limit {
 		ranked = ranked[:limit]
 	}
+
 	out := make([]indexedOperation, 0, len(ranked))
 	for _, entry := range ranked {
 		out = append(out, entry.op)
 	}
+
 	return out, servers, nil
 }
 
@@ -250,15 +259,19 @@ func scoreOperation(op indexedOperation, query docsQuerySpec) float64 {
 	if strings.Contains(op.normalizedSummary, query.normalizedQuery) {
 		score += 8
 	}
+
 	if strings.Contains(op.normalizedOperationID, query.normalizedQuery) {
 		score += 7
 	}
+
 	if strings.Contains(op.normalizedPath, query.normalizedQuery) {
 		score += 6
 	}
+
 	if strings.Contains(op.normalizedDescription, query.normalizedQuery) {
 		score += 3
 	}
+
 	if strings.Contains(op.normalizedTags, query.normalizedQuery) {
 		score += 2
 	}
@@ -270,26 +283,32 @@ func scoreOperation(op indexedOperation, query docsQuerySpec) float64 {
 			score += 2.5
 			hit = true
 		}
+
 		if strings.Contains(op.normalizedOperationID, term) {
 			score += 2
 			hit = true
 		}
+
 		if strings.Contains(op.normalizedPath, term) {
 			score += 1.75
 			hit = true
 		}
+
 		if strings.Contains(op.normalizedDescription, term) {
 			score++
 			hit = true
 		}
+
 		if strings.Contains(op.normalizedTags, term) {
 			score += 0.75
 			hit = true
 		}
+
 		if hit {
 			matched++
 		}
 	}
+
 	score += (float64(matched) / float64(len(query.terms))) * openapiTermCoverageWeight
 
 	return score
@@ -301,6 +320,7 @@ func (o *OpenAPISearchIndex) loadOperations(ctx context.Context) ([]indexedOpera
 		defer o.mu.Unlock()
 		return o.cache, o.specServers, nil
 	}
+
 	if o.inFlight != nil {
 		ch := o.inFlight
 		o.mu.Unlock()
@@ -311,6 +331,7 @@ func (o *OpenAPISearchIndex) loadOperations(ctx context.Context) ([]indexedOpera
 			if o.inFlightErr != nil {
 				return nil, nil, o.inFlightErr
 			}
+
 			return o.inFlightRes, o.inFlightSrv, nil
 		case <-ctx.Done():
 			return nil, nil, fmt.Errorf("openapi index wait: %w", ctx.Err())
@@ -333,7 +354,9 @@ func (o *OpenAPISearchIndex) loadOperations(ctx context.Context) ([]indexedOpera
 		o.specServers = servers
 		o.cacheUntil = time.Now().Add(o.ttl)
 	}
+
 	o.mu.Unlock()
+
 	return ops, servers, err
 }
 
@@ -342,12 +365,14 @@ func (o *OpenAPISearchIndex) fetchOperations(ctx context.Context) ([]indexedOper
 	if err != nil {
 		return nil, nil, fmt.Errorf("new openapi request: %w", err)
 	}
+
 	req.Header.Set("Accept", "application/json")
 
 	resp, err := o.httpClient.Do(req)
 	if err != nil {
 		return nil, nil, fmt.Errorf("openapi fetch: %w", err)
 	}
+
 	defer func() { _ = resp.Body.Close() }()
 
 	if resp.StatusCode < http.StatusOK || resp.StatusCode >= http.StatusMultipleChoices {
@@ -359,6 +384,7 @@ func (o *OpenAPISearchIndex) fetchOperations(ctx context.Context) ([]indexedOper
 	if err != nil {
 		return nil, nil, fmt.Errorf("read openapi body: %w", err)
 	}
+
 	return parseOpenAPISpec(body)
 }
 
@@ -384,17 +410,21 @@ func parseOpenAPISpec(body []byte) ([]indexedOperation, []string, error) {
 			if _, ok := httpMethodSet[lower]; !ok {
 				continue
 			}
+
 			var op rawOpenAPIOperation
 			if err := json.Unmarshal(rawOp, &op); err != nil {
 				continue
 			}
+
 			if len(pathParameters) > 0 {
 				op.Parameters = append(append([]openapiParameter{}, pathParameters...), op.Parameters...)
 			}
+
 			indexed := toIndexedOperation(strings.ToUpper(lower), path, op, raw.Components.Schemas)
 			ops = append(ops, indexed)
 		}
 	}
+
 	return ops, servers, nil
 }
 
@@ -402,10 +432,12 @@ func decodePathParameters(raw json.RawMessage) []openapiParameter {
 	if len(raw) == 0 {
 		return nil
 	}
+
 	var params []openapiParameter
 	if err := json.Unmarshal(raw, &params); err != nil {
 		return nil
 	}
+
 	return params
 }
 
@@ -419,6 +451,7 @@ func toIndexedOperation(
 		if p.Schema != nil {
 			p.Schema = resolveSchemaRef(p.Schema, schemas)
 		}
+
 		resolvedParams = append(resolvedParams, p)
 	}
 
@@ -464,41 +497,53 @@ func resolveSchemaRefSeen(
 	if schema == nil {
 		return nil
 	}
+
 	if schema.Ref != "" {
 		name := strings.TrimPrefix(schema.Ref, "#/components/schemas/")
 		if _, cycle := seen[name]; cycle {
 			return schema
 		}
+
 		if resolved, ok := schemas[name]; ok && resolved != nil {
 			nextSeen := make(map[string]struct{}, len(seen)+1)
 			for k, v := range seen {
 				nextSeen[k] = v
 			}
+
 			nextSeen[name] = struct{}{}
 			cp := *resolved
+
 			return resolveSchemaRefSeen(&cp, schemas, nextSeen)
 		}
+
 		return schema
 	}
+
 	if len(schema.Properties) > 0 {
 		resolvedProps := make(map[string]*openapiSchema, len(schema.Properties))
 		for k, v := range schema.Properties {
 			resolvedProps[k] = resolveSchemaRefSeen(v, schemas, seen)
 		}
+
 		schema.Properties = resolvedProps
 	}
+
 	if schema.Items != nil {
 		schema.Items = resolveSchemaRefSeen(schema.Items, schemas, seen)
 	}
+
 	for i, branch := range schema.AnyOf {
 		schema.AnyOf[i] = resolveSchemaRefSeen(branch, schemas, seen)
 	}
+
 	for i, branch := range schema.OneOf {
 		schema.OneOf[i] = resolveSchemaRefSeen(branch, schemas, seen)
 	}
+
 	for i, branch := range schema.AllOf {
 		schema.AllOf[i] = resolveSchemaRefSeen(branch, schemas, seen)
 	}
+
 	return schema
 }
 
@@ -506,6 +551,7 @@ func truncateField(value string) string {
 	if len(value) <= openapiMaxNormalizedField {
 		return value
 	}
+
 	return value[:openapiMaxNormalizedField]
 }
 

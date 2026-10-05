@@ -25,53 +25,71 @@ type ListProfilesFilters struct {
 	SortDirection string
 }
 
-// ListProfiles lists all profiles
-func ListProfiles(ctx context.Context, next string, filters *ListProfilesFilters) ([]v3.ProfileSummarized, *string, error) {
+// ListProfiles lists one page of profiles.
+// size 0 keeps the API default page size. The returned total is totalCount.
+func ListProfiles(ctx context.Context, next string, filters *ListProfilesFilters, size int) ([]v3.ProfileSummarized, *string, int, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
-		return nil, nil, fmt.Errorf("unable to init client: %w", err)
+		return nil, nil, 0, fmt.Errorf("unable to init client: %w", err)
 	}
+
 	req := client.ProfilesAPI.ListProfiles(ctx)
 	if next != "" {
 		req = req.Cursor(next)
 	}
+
+	if size > 0 {
+		req = req.Size(size)
+	}
+
 	if filters != nil {
 		if filters.SortType != "" {
 			req = req.SortType(filters.SortType)
 		}
+
 		if filters.SortDirection != "" {
 			req = req.SortDirection(filters.SortDirection)
 		}
+
 		if len(filters.AssetIDs) > 0 {
 			req = req.AssetIds(strings.Join(filters.AssetIDs, ","))
 		}
+
 		if len(filters.Domains) > 0 {
 			req = req.Domains(strings.Join(filters.Domains, ","))
 		}
+
 		if len(filters.IssueIDs) > 0 {
 			req = req.IssueIds(strings.Join(filters.IssueIDs, ","))
 		}
+
 		if len(filters.TagsIDs) > 0 {
 			req = req.TagIds(strings.Join(filters.TagsIDs, ","))
 		}
+
 		if filters.Search != "" {
 			req = req.Search(filters.Search)
 		}
+
 		if len(filters.Initiators) > 0 {
 			req = req.Initiators((filters.Initiators))
 		}
+
 		if len(filters.Kinds) > 0 {
 			req = req.Kinds((filters.Kinds))
 		}
+
 		if len(filters.Risks) > 0 {
 			req = req.Risks((filters.Risks))
 		}
 	}
+
 	data, _, err := req.Execute()
 	if err != nil {
-		return nil, nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
+		return nil, nil, 0, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
-	return data.Data, data.NextCursor, nil
+
+	return data.Data, data.NextCursor, data.GetTotalCount(), nil
 }
 
 // GetProfile gets a profile by ID
@@ -86,6 +104,7 @@ func GetProfile(ctx context.Context, profileID string) (*v3.GetProfile200Respons
 	if err != nil {
 		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
+
 	return data, nil
 }
 
@@ -106,6 +125,7 @@ func CreateProfileRest(ctx context.Context, data []byte) (interface{}, error) {
 	if err != nil {
 		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
+
 	return profile, nil
 }
 
@@ -126,6 +146,7 @@ func CreateProfileWebapp(ctx context.Context, data []byte) (interface{}, error) 
 	if err != nil {
 		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
+
 	return profile, nil
 }
 
@@ -146,6 +167,7 @@ func CreateProfileGraphql(ctx context.Context, data []byte) (interface{}, error)
 	if err != nil {
 		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
+
 	return profile, nil
 }
 
@@ -165,6 +187,7 @@ func CreateProfileAiPentest(ctx context.Context, data []byte) (interface{}, erro
 	if err != nil {
 		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
+
 	return profile, nil
 }
 
@@ -184,6 +207,7 @@ func UpdateProfile(ctx context.Context, profileID string, data []byte) (*v3.GetP
 	if err != nil {
 		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
+
 	return profile, nil
 }
 
@@ -203,6 +227,7 @@ func UpdateProfileConfiguration(ctx context.Context, profileID string, data []by
 	if err != nil {
 		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
+
 	return result, nil
 }
 
@@ -231,6 +256,7 @@ func CreateSchemaAsset(ctx context.Context, temporaryObjectKey string, name stri
 	if err != nil {
 		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
+
 	return asset, nil
 }
 
@@ -251,6 +277,7 @@ func DownloadSignedURL(ctx context.Context, signedURL string, dst io.Writer) err
 	if err != nil {
 		return fmt.Errorf("unable to fetch signed url: %w", err)
 	}
+
 	defer func() { _ = resp.Body.Close() }()
 
 	if resp.StatusCode != http.StatusOK {
@@ -260,6 +287,7 @@ func DownloadSignedURL(ctx context.Context, signedURL string, dst io.Writer) err
 	if _, err := io.Copy(dst, resp.Body); err != nil {
 		return fmt.Errorf("unable to write schema body: %w", err)
 	}
+
 	return nil
 }
 
@@ -278,22 +306,23 @@ func UpdateProfileSchema(ctx context.Context, profileID string, schemaID string)
 	if err != nil {
 		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
+
 	return profile, nil
 }
 
 // DeleteProfile deletes a profile by ID
-func DeleteProfile(ctx context.Context, profileID string) error {
+func DeleteProfile(ctx context.Context, profileID string) (*v3.DeleteProfile200Response, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
-		return fmt.Errorf("unable to init client: %w", err)
+		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
 
-	req := client.ProfilesAPI.DeleteProfile(ctx, profileID)
-	_, _, err = req.Execute()
+	data, _, err := client.ProfilesAPI.DeleteProfile(ctx, profileID).Execute()
 	if err != nil {
-		return fmt.Errorf("api error: %w", humanizeAPIError(err))
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
-	return nil
+
+	return data, nil
 }
 
 // ListProblemsFilters holds optional filters for listing problems
@@ -308,45 +337,61 @@ type ListProblemsFilters struct {
 	Risks      []string
 }
 
-// ListProblems lists all scan problems
-func ListProblems(ctx context.Context, next string, filters *ListProblemsFilters) ([]v3.ProfileScanProblemsRow, *string, error) {
+// ListProblems lists one page of profile scan problems.
+// size 0 keeps the API default page size. The returned total is totalCount.
+func ListProblems(ctx context.Context, next string, filters *ListProblemsFilters, size int) ([]v3.ProfileScanProblemsRow, *string, int, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
-		return nil, nil, fmt.Errorf("unable to init client: %w", err)
+		return nil, nil, 0, fmt.Errorf("unable to init client: %w", err)
 	}
+
 	req := client.ProfilesAPI.Problems(ctx)
 	if next != "" {
 		req = req.Cursor(next)
 	}
+
+	if size > 0 {
+		req = req.Size(size)
+	}
+
 	if filters != nil {
 		if len(filters.AssetIDs) > 0 {
 			req = req.AssetIds(strings.Join(filters.AssetIDs, ","))
 		}
+
 		if len(filters.Domains) > 0 {
 			req = req.Domains(strings.Join(filters.Domains, ","))
 		}
+
 		if len(filters.IssueIDs) > 0 {
 			req = req.IssueIds(strings.Join(filters.IssueIDs, ","))
 		}
+
 		if len(filters.TagsIDs) > 0 {
 			req = req.TagIds(strings.Join(filters.TagsIDs, ","))
 		}
+
 		if filters.Search != "" {
 			req = req.Search(filters.Search)
 		}
+
 		if len(filters.Initiators) > 0 {
 			req = req.Initiators((filters.Initiators))
 		}
+
 		if len(filters.Kinds) > 0 {
 			req = req.Kinds((filters.Kinds))
 		}
+
 		if len(filters.Risks) > 0 {
 			req = req.Risks((filters.Risks))
 		}
 	}
+
 	data, _, err := req.Execute()
 	if err != nil {
-		return nil, nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
+		return nil, nil, 0, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
-	return data.Data, data.NextCursor, nil
+
+	return data.Data, data.NextCursor, data.GetTotalCount(), nil
 }

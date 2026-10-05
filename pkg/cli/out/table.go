@@ -27,6 +27,7 @@ func makeColored(value string, prefix string) string {
 	if isColorDisabled {
 		return value
 	}
+
 	base := prefix + value + ansiReset
 	used := len(prefix) + len(ansiReset)
 	remaining := max(0, targetOverhead-used)
@@ -38,9 +39,11 @@ func makeColored(value string, prefix string) string {
 			remaining -= 4
 			continue
 		}
+
 		b.WriteString(ansiFgDefault)
 		remaining -= 5
 	}
+
 	return b.String()
 }
 
@@ -72,6 +75,7 @@ func colorizeBool(value string) string {
 	if isColorDisabled {
 		return value
 	}
+
 	switch strings.ToLower(value) {
 	case "true":
 		return greenText(value)
@@ -86,6 +90,7 @@ func colorizeSeverity(value string) string {
 	if isColorDisabled {
 		return value
 	}
+
 	switch strings.ToLower(value) {
 	case "info":
 		return grayText(value)
@@ -104,9 +109,11 @@ func colorizeProgress(value string) string {
 	if isColorDisabled {
 		return value
 	}
+
 	if strings.HasPrefix(value, "100") || strings.HasPrefix(value, "1.000") {
 		return greenText(value)
 	}
+
 	return yellowText(value)
 }
 
@@ -114,6 +121,7 @@ func colorizeLevel(value string) string {
 	if isColorDisabled {
 		return value
 	}
+
 	switch strings.ToLower(value) {
 	case "info":
 		return grayText(value)
@@ -130,6 +138,7 @@ func colorizeStatus(value string) string {
 	if isColorDisabled {
 		return value
 	}
+
 	switch strings.ToLower(value) {
 	case "open":
 		return redText(value)
@@ -164,6 +173,7 @@ func colorizeEnum(value string) string {
 	if isColorDisabled {
 		return value
 	}
+
 	return escapeText(value)
 }
 
@@ -171,6 +181,7 @@ func colorizeDate(value string) string {
 	if isColorDisabled {
 		return value
 	}
+
 	return grayText(value)
 }
 
@@ -178,14 +189,17 @@ func colorizeLastSeen(value string) string {
 	if isColorDisabled {
 		return value
 	}
+
 	lastSeen, err := time.Parse(time.RFC3339, value)
 	if err != nil {
 		return grayText(value)
 	}
+
 	//if less than 15 days, return green
 	if time.Since(lastSeen) < 15*24*time.Hour {
 		return greenText(value)
 	}
+
 	//if less than 30 days, return yellow
 	if time.Since(lastSeen) < 30*24*time.Hour {
 		return yellowText(value)
@@ -198,9 +212,11 @@ func colorizeHelpAll(value string) string {
 	if isColorDisabled {
 		return value
 	}
+
 	if strings.HasPrefix(value, "  ") {
 		return escapeText(boldText(value))
 	}
+
 	return redText(boldText(value))
 }
 
@@ -208,9 +224,11 @@ func colorizeActor(value string) string {
 	if isColorDisabled {
 		return value
 	}
+
 	if strings.ToLower(value) == "escape" {
 		return escapeText(value)
 	}
+
 	return idText(value)
 }
 
@@ -219,6 +237,7 @@ func colorizeWithHex(text string, hexRGB string) string {
 	if isColorDisabled {
 		return text
 	}
+
 	const expectedHexRGBLen = 6
 	if len(hexRGB) == expectedHexRGBLen {
 		if r, errR := strconv.ParseInt(hexRGB[0:2], 16, 0); errR == nil {
@@ -230,6 +249,7 @@ func colorizeWithHex(text string, hexRGB string) string {
 			}
 		}
 	}
+
 	return grayText(text)
 }
 
@@ -242,24 +262,30 @@ func colorizeValue(value string, columnName string, isLastColumn bool) string {
 	if isColorDisabled {
 		return value
 	}
+
 	if value == "[]" || value == "" {
 		return boldText("-")
 	}
+
 	if columnName == "ACTION" {
 		return escapeText(value)
 	}
+
 	if columnName == "ACTOR EMAIL" {
 		return yellowText(value)
 	}
+
 	// handle links
 	urlRegex := regexp.MustCompile(`\b(?:(?:https?|grpc):\/\/)?(?:localhost|(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}|(?:\d{1,3}\.){3}\d{1,3})(?::\d+)?\b`)
 	if urlRegex.MatchString(strings.ToLower(value)) {
 		if isLastColumn && strings.HasPrefix(value, "https://app.escape") {
 			return shortEscapeLink(value)
 		}
+
 		if strings.Contains(value, " ") {
 			return boldText(value)
 		}
+
 		return linkText(value)
 	}
 
@@ -312,6 +338,8 @@ func colorizeValue(value string, columnName string, isLastColumn bool) string {
 func Table(data any, tableMaker func() []string) {
 	if output != outputPretty {
 		pprint(output, data, "")
+		noteJSONDocument()
+
 		return
 	}
 
@@ -325,6 +353,7 @@ func Table(data any, tableMaker func() []string) {
 		for i, header := range headers {
 			boldHeaders[i] = boldText(header)
 		}
+
 		fmt.Fprintln(w, strings.Join(boldHeaders, "\t")) //nolint:errcheck
 
 		for i := 1; i < len(table); i++ {
@@ -337,6 +366,7 @@ func Table(data any, tableMaker func() []string) {
 					fields[j] = colorizeValue(field, "", isLastColumn)
 				}
 			}
+
 			fmt.Fprintln(w, strings.Join(fields, "\t")) //nolint:errcheck
 		}
 	}

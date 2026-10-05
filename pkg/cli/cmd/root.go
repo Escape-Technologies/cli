@@ -40,6 +40,7 @@ QUICK START:
   $ escape-cli scans start <profile-id> --watch        Launch a scan
   $ escape-cli emails list --email <scan-inbox>        Inspect scan inbox emails
   $ escape-cli issues list --severity HIGH,CRITICAL    Review findings
+  $ escape-cli retests start -p <profile-id> -i <issue-id>  Verify a fix
   $ escape-cli asm trigger                             Trigger attack surface discovery
 
 AGENT INTEGRATION:
@@ -62,20 +63,25 @@ DOCUMENTATION:
 		if rootCmdVerbose > 0 { //nolint:mnd
 			log.SetLevel(logrus.DebugLevel)
 		}
+
 		if rootCmdVerbose > 1 { //nolint:mnd
 			log.SetLevel(logrus.TraceLevel)
 		}
+
 		if rootCmdVerbose > 2 { //nolint:mnd
 			escape.Debug = true
 		}
+
 		log.Info("Verbose mode: %d from %s", rootCmdVerbose, verbosityFrom)
 		log.Info("escape-cli version: %s", version.GetVersion().LogString())
 		err := out.SetOutput(rootCmdOutputStr)
 		if err != nil {
 			return fmt.Errorf("failed to set output format: %w", err)
 		}
+
 		out.SetInputSchema(rootCmdInputSchema)
 		printStartupHeader(cmd.Context())
+
 		return nil
 	},
 	RunE: func(cmd *cobra.Command, _ []string) error {
@@ -98,7 +104,7 @@ COMMAND CATEGORIES:
   Offensive Testing:    scans, profiles, authentications   Scan targets and configurations
   Scan Inbox:           emails                             Inspect scan inbox messages
   Attack Surface:       asm, assets                        Discovery and inventory
-  Findings:             issues, problems, events           Vulnerabilities and diagnostics
+  Findings:             issues, problems, events, retests  Vulnerabilities, retests, and diagnostics
   Infrastructure:       locations                          Private scanning locations
   Organization:         users, roles, projects, audit      Access control and audit trail
   Automation:           workflows, jobs                    CI/CD triggers and exports
@@ -121,10 +127,12 @@ func Execute(ctx context.Context) error {
 	if isColorDisabled {
 		out.DisableColor()
 	}
+
 	cmd, err := rootCmd.ExecuteContextC(ctx)
 	if err != nil {
 		return fmt.Errorf("command %s failed: %w", cmd.Name(), err)
 	}
+
 	return nil
 }
 
@@ -159,6 +167,7 @@ func printStartupHeader(ctx context.Context) {
 	if upgrade := resolveUpgrade(ctx); upgrade != "" {
 		versionLine += "  " + upgrade
 	}
+
 	fmt.Fprintf(os.Stderr, "%s  %s\n", brandText(logo[2]), versionLine)
 
 	fmt.Fprintln(os.Stderr)
@@ -186,10 +195,12 @@ func resolveUpgrade(ctx context.Context) string {
 		if r.update == nil || !r.update.Available {
 			return ""
 		}
+
 		cmd := version.UpgradeCommand(r.method, r.update.Latest)
 		if cmd != "" {
 			return boldYellowText("Update v" + r.update.Latest + " · " + cmd)
 		}
+
 		return boldYellowText("Update available: v" + r.update.Latest)
 	case <-checkCtx.Done():
 		return ""

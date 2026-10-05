@@ -16,6 +16,7 @@ func StemToken(value string) string {
 			clean.WriteRune(r)
 		}
 	}
+
 	out := clean.String()
 
 	if len(out) <= minStemmableLength {

@@ -19,9 +19,11 @@ func TestInjectAuthContextWithAPIKey(t *testing.T) {
 	if auth.APIKey != "1234" {
 		t.Fatalf("expected api key 1234, got %q", auth.APIKey)
 	}
+
 	if auth.Authorization != "" {
 		t.Fatalf("expected empty authorization, got %q", auth.Authorization)
 	}
+
 	if auth.Method != AuthMethodAPIKeyHeader {
 		t.Fatalf("expected method %q, got %q", AuthMethodAPIKeyHeader, auth.Method)
 	}
@@ -40,9 +42,11 @@ func TestInjectAuthContextWithKeyAuthorizationHeader(t *testing.T) {
 	if auth.APIKey != "1234" {
 		t.Fatalf("expected api key 1234, got %q", auth.APIKey)
 	}
+
 	if auth.Authorization != "Key 1234" {
 		t.Fatalf("expected authorization header to be preserved, got %q", auth.Authorization)
 	}
+
 	if auth.Method != AuthMethodAuthorizationKey {
 		t.Fatalf("expected method %q, got %q", AuthMethodAuthorizationKey, auth.Method)
 	}
@@ -68,12 +72,14 @@ func TestInjectAuthContextWithBearerAuthorizationHeader(t *testing.T) {
 	if auth.APIKey != "my-api-key" {
 		t.Fatalf("expected api key my-api-key, got %q", auth.APIKey)
 	}
+
 	if auth.Authorization != "" {
 		t.Fatalf(
 			"expected authorization to be cleared to prevent leak into child CLI, got %q",
 			auth.Authorization,
 		)
 	}
+
 	if auth.Method != AuthMethodAuthorizationBearer {
 		t.Fatalf("expected method %q, got %q", AuthMethodAuthorizationBearer, auth.Method)
 	}
@@ -91,9 +97,11 @@ func TestInjectAuthContextBearerCaseInsensitive(t *testing.T) {
 			if err != nil {
 				t.Fatalf("expected auth context, got error: %v", err)
 			}
+
 			if auth.APIKey != "my-api-key" {
 				t.Fatalf("expected api key my-api-key, got %q", auth.APIKey)
 			}
+
 			if auth.Method != AuthMethodAuthorizationBearer {
 				t.Fatalf("expected bearer method, got %q", auth.Method)
 			}
@@ -121,12 +129,14 @@ func TestInjectAuthContextXEscapeAPIKeyTakesPrecedenceOverBearer(t *testing.T) {
 	if auth.APIKey != "from-header" {
 		t.Fatalf("expected X-ESCAPE-API-KEY to win, got %q", auth.APIKey)
 	}
+
 	if auth.Authorization != "" {
 		t.Fatalf(
 			"expected losing Authorization to be cleared to prevent leak into child CLI, got %q",
 			auth.Authorization,
 		)
 	}
+
 	if auth.Method != AuthMethodAPIKeyHeader {
 		t.Fatalf("expected method %q, got %q", AuthMethodAPIKeyHeader, auth.Method)
 	}
@@ -139,6 +149,7 @@ func TestInjectAuthContextMissingCredentialsMethodNone(t *testing.T) {
 	if err != nil {
 		t.Fatalf("failed to build request: %v", err)
 	}
+
 	ctx := InjectAuthContext(context.Background(), req)
 
 	// AuthFromContext must surface the missing-credentials error for the
@@ -153,6 +164,7 @@ func TestInjectAuthContextMissingCredentialsMethodNone(t *testing.T) {
 	if !ok {
 		t.Fatalf("expected Auth struct in context")
 	}
+
 	if raw.Method != AuthMethodNone {
 		t.Fatalf("expected method %q, got %q", AuthMethodNone, raw.Method)
 	}
@@ -165,6 +177,8 @@ func buildTestRequest(t *testing.T, header, value string) *http.Request {
 	if err != nil {
 		t.Fatalf("failed to build request: %v", err)
 	}
+
 	req.Header.Set(header, value)
+
 	return req
 }

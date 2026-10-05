@@ -43,6 +43,7 @@ func tokenizeNormalized(value string) []string {
 	if normalized == "" {
 		return nil
 	}
+
 	return strings.Fields(normalized)
 }
 
@@ -50,6 +51,7 @@ func containsTokenSequence(tokens, sequence []string) bool {
 	if len(sequence) == 0 || len(tokens) < len(sequence) {
 		return false
 	}
+
 	for start := 0; start+len(sequence) <= len(tokens); start++ {
 		matches := true
 		for offset, expected := range sequence {
@@ -58,10 +60,12 @@ func containsTokenSequence(tokens, sequence []string) bool {
 				break
 			}
 		}
+
 		if matches {
 			return true
 		}
 	}
+
 	return false
 }
 
@@ -70,27 +74,33 @@ func containsHint(text string, hints []string) bool {
 	if normalized == "" {
 		return false
 	}
+
 	tokens := strings.Fields(normalized)
 	tokenSet := make(map[string]struct{}, len(tokens))
 	for _, t := range tokens {
 		tokenSet[t] = struct{}{}
 	}
+
 	for _, hint := range hints {
 		hintNormalized := normalizeForSearch(hint)
 		if hintNormalized == "" {
 			continue
 		}
+
 		hintTokens := strings.Fields(hintNormalized)
 		if len(hintTokens) == 1 {
 			if _, ok := tokenSet[hintTokens[0]]; ok {
 				return true
 			}
+
 			continue
 		}
+
 		if containsTokenSequence(tokens, hintTokens) {
 			return true
 		}
 	}
+
 	return false
 }
 
@@ -100,6 +110,7 @@ func startsWithAny(value string, prefixes []string) bool {
 			return true
 		}
 	}
+
 	return false
 }
 
@@ -108,9 +119,11 @@ func isKnowledgeQuestion(query string) bool {
 	if normalized == "" || startsWithAny(normalized, actionPrefixes) {
 		return false
 	}
+
 	if startsWithAny(normalized, knowledgePrefixes) {
 		return true
 	}
+
 	return containsHint(normalized, knowledgeIntentHints)
 }
 
@@ -132,10 +145,12 @@ func DetectLinkIntent(query string) LinkIntent {
 		if knowledge {
 			target = LinkTargetBoth
 		}
+
 		return LinkIntent{ExplicitLinkRequest: explicit, Target: target}
 	case explicit:
 		return LinkIntent{ExplicitLinkRequest: explicit, Target: LinkTargetBoth}
 	}
+
 	return LinkIntent{ExplicitLinkRequest: explicit, Target: LinkTargetNone}
 }
 
@@ -148,10 +163,13 @@ func BuildDocsQuery(query string) string {
 		if _, noise := queryNoise[token]; noise {
 			continue
 		}
+
 		filtered = append(filtered, token)
 	}
+
 	if len(filtered) == 0 {
 		return normalizeForSearch(query)
 	}
+
 	return strings.Join(filtered, " ")
 }

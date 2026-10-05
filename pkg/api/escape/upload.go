@@ -14,6 +14,7 @@ func schemaUploadContentType(data []byte) string {
 	if json.Valid(data) {
 		return "application/json"
 	}
+
 	return "application/yaml"
 }
 
@@ -23,11 +24,13 @@ func GetUploadSignedURL(ctx context.Context) (*v3.CreateUploadSignedUrl200Respon
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
+
 	req := client.UploadAPI.CreateUploadSignedUrl(ctx)
 	data, _, err := req.Execute()
 	if err != nil {
 		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
+
 	return data, nil
 }
 
@@ -43,6 +46,7 @@ func UploadSchema(ctx context.Context, url string, data []byte) error {
 	if err != nil {
 		return fmt.Errorf("unable to upload schema: %w", err)
 	}
+
 	defer func() { _ = resp.Body.Close() }()
 
 	if resp.StatusCode != http.StatusOK {

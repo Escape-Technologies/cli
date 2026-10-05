@@ -29,6 +29,7 @@ func TestResolveKinds_AllKinds(t *testing.T) {
 	if got != nil {
 		t.Fatalf("expected nil kinds for all-kinds, got %v", got)
 	}
+
 	if filter := scanKindsFilter(got); filter != nil {
 		t.Fatalf("expected nil filter for all-kinds, got %v", *filter)
 	}
@@ -39,6 +40,7 @@ func TestResolveKinds_KindOverrides(t *testing.T) {
 	if err := cmd.Flags().Set("all-kinds", "true"); err != nil {
 		t.Fatalf("failed to set all-kinds flag: %v", err)
 	}
+
 	if err := cmd.Flags().Set("kind", "ASM_REST"); err != nil {
 		t.Fatalf("failed to set kind flag: %v", err)
 	}
@@ -68,5 +70,6 @@ func newTestCommand(t *testing.T) *cobra.Command {
 	cmd.SetErr(io.Discard)
 	cmd.Flags().StringSliceVarP(&scanKinds, "kind", "k", []string{}, "")
 	cmd.Flags().BoolVar(&scanListAllKinds, "all-kinds", false, "")
+
 	return cmd
 }

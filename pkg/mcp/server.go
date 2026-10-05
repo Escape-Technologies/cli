@@ -57,23 +57,10 @@ func NewServer(options ServerOptions) *Server {
 // is cancelled. The shutdown path uses a detached context to give in-flight
 // handlers a bounded drain window.
 func (s *Server) Serve(ctx context.Context) error {
-	rootServer := mcpserver.NewMCPServer(
-		"Escape.tech-API-MCP",
-		s.options.Version,
-		mcpserver.WithToolCapabilities(false),
-	)
-	RegisterBuiltinTools(rootServer, s.options.Tools)
-	if err := RegisterKnowledgeTools(rootServer, KnowledgeOptions{}); err != nil {
-		return fmt.Errorf("register knowledge tools: %w", err)
+	rootServer, err := s.protocolServer()
+	if err != nil {
+		return err
 	}
-	if err := RegisterPublicAPITools(rootServer, PublicAPIOptions{
-		PublicAPIURL: s.options.PublicAPIURL,
-	}); err != nil {
-		return fmt.Errorf("register public api tools: %w", err)
-	}
-	RegisterCommandTools(rootServer, s.options.Tools, CommandExecutionOptions{
-		PublicAPIURL: s.options.PublicAPIURL,
-	})
 
 	mcpHandler := mcpserver.NewStreamableHTTPServer(
 		rootServer,
@@ -93,6 +80,7 @@ func (s *Server) Serve(ctx context.Context) error {
 	if mcpMode == "" {
 		mcpMode = IntentModeCompactOnly
 	}
+
 	interceptedMCP := NewIntentMiddleware(mcpHandler, IntentOptions{
 		Mode:       mcpMode,
 		Classifier: s.options.Classifier,
@@ -110,6 +98,7 @@ func (s *Server) Serve(ctx context.Context) error {
 		if err != nil {
 			return fmt.Errorf("initialize oauth handlers: %w", err)
 		}
+
 		oauth = handlers
 		if s.options.OAuthPrivateKeyPath == "" {
 			slog.WarnContext(
@@ -175,6 +164,7 @@ func (s *Server) Serve(ctx context.Context) error {
 				errCh <- nil
 				return
 			}
+
 			errCh <- fmt.Errorf("health http server: %w", err)
 		}()
 		defer func() {
@@ -184,12 +174,42 @@ func (s *Server) Serve(ctx context.Context) error {
 			}
 		}()
 	}
-	err := httpServer.ListenAndServe()
+
+	err = httpServer.ListenAndServe()
 	if errors.Is(err, http.ErrServerClosed) {
 		return nil
 	}
 
 	return fmt.Errorf("mcp http server: %w", err)
+}
+
+// protocolServer builds the MCP protocol server: instructions, prompts, and
+// tools. Serve wraps it in HTTP. Tests drive initialize and prompts/get
+// through this server so they exercise the same registration Serve uses.
+func (s *Server) protocolServer() (*mcpserver.MCPServer, error) {
+	rootServer := mcpserver.NewMCPServer(
+		"Escape.tech-API-MCP",
+		s.options.Version,
+		mcpserver.WithToolCapabilities(false),
+		mcpserver.WithInstructions(ServerInstructions),
+	)
+	RegisterBuiltinTools(rootServer, s.options.Tools)
+	if err := RegisterKnowledgeTools(rootServer, KnowledgeOptions{}); err != nil {
+		return nil, fmt.Errorf("register knowledge tools: %w", err)
+	}
+
+	if err := RegisterPublicAPITools(rootServer, PublicAPIOptions{
+		PublicAPIURL: s.options.PublicAPIURL,
+	}); err != nil {
+		return nil, fmt.Errorf("register public api tools: %w", err)
+	}
+
+	RegisterCommandTools(rootServer, s.options.Tools, CommandExecutionOptions{
+		PublicAPIURL: s.options.PublicAPIURL,
+	})
+	RegisterPrompts(rootServer)
+
+	return rootServer, nil
 }
 
 // wrapWithAuthMiddleware wraps the MCP handler with:
@@ -217,6 +237,7 @@ func wrapWithAuthMiddleware(next http.Handler, oauth *oauthHandlers) http.Handle
 				oauth.WriteUnauthorized(w, "invalid_token", "missing credentials")
 				return
 			}
+
 			if !oauth.ValidateAPIKey(ctx, apiKey) {
 				oauth.WriteUnauthorized(w, "invalid_token", "revoked or invalid api key")
 				return
@@ -235,6 +256,7 @@ func authMethodFromContext(ctx context.Context) AuthMethod {
 	if !ok {
 		return AuthMethodNone
 	}
+
 	return auth.Method
 }
 
@@ -255,10 +277,12 @@ func wrapWithCORS(next http.Handler) http.Handler {
 				"Authorization, Content-Type, Mcp-Session-Id, Accept")
 			w.Header().Set("Vary", "Origin")
 		}
+
 		if req.Method == http.MethodOptions {
 			w.WriteHeader(http.StatusNoContent)
 			return
 		}
+
 		next.ServeHTTP(w, req)
 	})
 }
@@ -270,6 +294,7 @@ func apiKeyFromRequest(req *http.Request) string {
 	if key := strings.TrimSpace(req.Header.Get("X-ESCAPE-API-KEY")); key != "" {
 		return key
 	}
+
 	return apiKeyFromAuthorization(strings.TrimSpace(req.Header.Get("Authorization")))
 }
 
@@ -278,9 +303,11 @@ func parseHealthCheckPort(mainPort int) int {
 	if raw == "" {
 		return 0
 	}
+
 	port, err := strconv.Atoi(raw)
 	if err != nil || port <= 0 || port > 65535 || port == mainPort { //nolint:mnd
 		return 0
 	}
+
 	return port
 }

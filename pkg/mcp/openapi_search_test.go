@@ -17,6 +17,7 @@ func loadFixtureSpec(t *testing.T) []byte {
 	if err != nil {
 		t.Fatalf("read fixture: %v", err)
 	}
+
 	return body
 }
 
@@ -28,6 +29,7 @@ func newFixtureIndex(t *testing.T) *OpenAPISearchIndex {
 		_, _ = w.Write(body)
 	}))
 	t.Cleanup(srv.Close)
+
 	return NewOpenAPISearchIndex(OpenAPISearchIndexOptions{SpecURL: srv.URL, TTL: time.Minute})
 }
 
@@ -42,12 +44,15 @@ func TestOpenAPISearch_PicksScansForLastDaysQuestion(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Search: %v", err)
 	}
+
 	if len(matches) != 1 {
 		t.Fatalf("expected 1 match, got %d", len(matches))
 	}
+
 	if matches[0].Method != "GET" || matches[0].Path != "/scans" {
 		t.Fatalf("expected GET /scans, got %s %s", matches[0].Method, matches[0].Path)
 	}
+
 	if len(servers) == 0 || !strings.Contains(servers[0], "public.escape.tech") {
 		t.Fatalf("expected fixture server URL, got %v", servers)
 	}
@@ -64,9 +69,11 @@ func TestOpenAPISearch_PicksScanProblems(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Search: %v", err)
 	}
+
 	if len(matches) == 0 {
 		t.Fatalf("expected at least one match")
 	}
+
 	if matches[0].Path != "/scans/problems" {
 		t.Fatalf("expected /scans/problems, got %s", matches[0].Path)
 	}
@@ -83,15 +90,19 @@ func TestOpenAPISearch_PicksCreateAsset(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Search: %v", err)
 	}
+
 	if len(matches) == 0 {
 		t.Fatalf("expected match")
 	}
+
 	if matches[0].Method != "POST" || matches[0].Path != "/assets" {
 		t.Fatalf("expected POST /assets, got %s %s", matches[0].Method, matches[0].Path)
 	}
+
 	if matches[0].RequestBody == nil || matches[0].RequestBody.Schema == nil {
 		t.Fatalf("expected resolved request body schema")
 	}
+
 	if _, ok := matches[0].RequestBody.Schema.Properties["name"]; !ok {
 		t.Fatalf("expected $ref to be resolved into Properties[name]")
 	}
@@ -148,19 +159,24 @@ func TestParseOpenAPISpec_AcceptsOpenAPI31SchemaForms(t *testing.T) {
 	if err != nil {
 		t.Fatalf("parseOpenAPISpec: %v", err)
 	}
+
 	if len(servers) != 1 || servers[0] != "https://public.escape.tech/v3" {
 		t.Fatalf("unexpected servers: %v", servers)
 	}
+
 	if len(ops) != 1 {
 		t.Fatalf("expected one operation, got %d", len(ops))
 	}
+
 	if len(ops[0].Parameters) != 2 || ops[0].Parameters[0].Name != "id" {
 		t.Fatalf("expected path-level parameter to be included first, got %+v", ops[0].Parameters)
 	}
+
 	name := ops[0].RequestBody.Schema.Properties["name"]
 	if name.Type != "string" {
 		t.Fatalf("expected nullable type array to choose string, got %q", name.Type)
 	}
+
 	owner := ops[0].RequestBody.Schema.Properties["owner"]
 	if owner == nil || owner.Properties["id"].Type != "string" {
 		t.Fatalf("expected owner ref resolved, got %+v", owner)
@@ -178,6 +194,7 @@ func TestOpenAPISearch_LimitClamping(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Search: %v", err)
 	}
+
 	if len(matches) > openapiMaxResultsPerQuery {
 		t.Fatalf("expected limit clamped to %d, got %d", openapiMaxResultsPerQuery, len(matches))
 	}
@@ -186,6 +203,7 @@ func TestOpenAPISearch_LimitClamping(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Search: %v", err)
 	}
+
 	if len(matches) != 1 {
 		t.Fatalf("expected limit clamped up to 1, got %d", len(matches))
 	}
@@ -202,6 +220,7 @@ func TestOpenAPISearch_EmptyQuestionReturnsNoMatch(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Search: %v", err)
 	}
+
 	if len(matches) != 0 {
 		t.Fatalf("expected no matches for blank question, got %d", len(matches))
 	}
@@ -224,6 +243,7 @@ func TestOpenAPISearch_FetchErrorPropagates(t *testing.T) {
 	if err == nil {
 		t.Fatalf("expected error on 500 response")
 	}
+
 	if !strings.Contains(err.Error(), "500") {
 		t.Fatalf("expected status code in error, got %v", err)
 	}

@@ -26,6 +26,7 @@ func GetCertificates() (*tls.Config, error) {
 	if err != nil {
 		return nil, fmt.Errorf("failed to read ESCAPE_SSL_CERT_PATH: %w", err)
 	}
+
 	certPool := x509.NewCertPool()
 	if !certPool.AppendCertsFromPEM(cert) {
 		return nil, errors.New("failed to append certificate to pool")

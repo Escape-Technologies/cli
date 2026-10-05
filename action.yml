@@ -42,10 +42,10 @@ inputs:
     required: false
     deprecationMessage: 'Deprecated, use schema instead'
   fail_on_severities:
-    description: 'A csv-delimited list of severities to fail on, can be HIGH, MEDIUM, LOW, INFO'
+    description: 'A csv-delimited list of severities to fail on, can be CRITICAL, HIGH, MEDIUM, LOW, INFO. Wired to --fail-on-severity: the least severe listed level becomes the floor (watch mode only)'
     default: 'HIGH'
     required: false
-    deprecationMessage: 'Deprecated'
+    deprecationMessage: 'Deprecated, superseded by the --fail-on-severity flag of scans start'
 runs:
   using: composite
   steps:
@@ -58,6 +58,7 @@ runs:
         ESCAPE_CONFIGURATION_OVERRIDE: ${{ inputs.configuration_override }}
         ESCAPE_SCHEMA: ${{ inputs.schema }}
         ESCAPE_CLI_IMAGE_OVERRIDE: ${{ inputs.cli_image }}
+        INPUT_FAIL_ON_SEVERITIES: ${{ inputs.fail_on_severities }}
         GH_ACTION_REF: ${{ github.action_ref }}
       run: |
         set -euo pipefail
@@ -82,6 +83,36 @@ runs:
         args=(scans start "${PROFILE_ID}")
         if [ "${ESCAPE_WATCH}" = "true" ]; then
           args+=(--watch)
+        fi
+        # fail_on_severities is deprecated but still honored. --fail-on-severity
+        # takes one floor severity, so a list maps to its least severe entry:
+        # an issue at or above that level fails the run. Only meaningful with
+        # watch=true, which the flag requires on scans start.
+        if [ "${ESCAPE_WATCH}" = "true" ] && [ -n "${INPUT_FAIL_ON_SEVERITIES}" ]; then
+          floor=""
+          floor_rank=5
+          read -ra severities <<< "$(echo "${INPUT_FAIL_ON_SEVERITIES}" | tr ',' ' ')"
+          for sev in "${severities[@]}"; do
+            sev="$(echo "${sev}" | tr '[:lower:]' '[:upper:]')"
+            case "${sev}" in
+              INFO)     rank=0 ;;
+              LOW)      rank=1 ;;
+              MEDIUM)   rank=2 ;;
+              HIGH)     rank=3 ;;
+              CRITICAL) rank=4 ;;
+              *)
+                echo "::error::Invalid severity '${sev}' in fail_on_severities (expected CRITICAL, HIGH, MEDIUM, LOW or INFO)"
+                exit 1
+                ;;
+            esac
+            if [ "${rank}" -lt "${floor_rank}" ]; then
+              floor="${sev}"
+              floor_rank="${rank}"
+            fi
+          done
+          if [ -n "${floor}" ]; then
+            args+=("--fail-on-severity=${floor}")
+          fi
         fi
         if [ -n "${ESCAPE_CONFIGURATION_OVERRIDE}" ]; then
           args+=(--override "${ESCAPE_CONFIGURATION_OVERRIDE}")

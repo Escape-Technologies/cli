@@ -14,6 +14,7 @@ import (
 func jitter(duration time.Duration) time.Duration {
 	random := rand.Float64()*0.2 - 0.1 // nolint:mnd
 	ratio := 1 + random
+
 	return time.Duration(float64(duration) * ratio)
 }
 
@@ -30,6 +31,7 @@ func Start() {
 		log.Error("Failed to parse ESCAPE_CLI_RESTART_INTERVAL(%s): %v", restartTimeout, err)
 		return
 	}
+
 	if restartTimeoutDuration <= 0 {
 		log.Error("ESCAPE_CLI_RESTART_INTERVAL must be > 0, got %s", restartTimeoutDuration)
 		return

@@ -27,8 +27,10 @@ func minimalLibraryToolsListResponse(t *testing.T, tools []mcpgo.Tool) []byte {
 		if err != nil {
 			t.Fatalf("marshal tool: %v", err)
 		}
+
 		raw = append(raw, encoded)
 	}
+
 	body, err := json.Marshal(map[string]any{
 		"jsonrpc": "2.0",
 		"id":      1,
@@ -37,6 +39,7 @@ func minimalLibraryToolsListResponse(t *testing.T, tools []mcpgo.Tool) []byte {
 	if err != nil {
 		t.Fatalf("marshal envelope: %v", err)
 	}
+
 	return body
 }
 
@@ -54,6 +57,7 @@ func specWithBody(t *testing.T, name, description string) ToolSpec {
 	if err != nil {
 		t.Fatalf("marshal raw schema: %v", err)
 	}
+
 	return ToolSpec{
 		Name:         name,
 		Description:  description,
@@ -95,8 +99,10 @@ func callToolsList(t *testing.T, handler http.Handler, header string) *httptest.
 	if header != "" {
 		req.Header.Set(chatContextHeader, header)
 	}
+
 	resp := httptest.NewRecorder()
 	handler.ServeHTTP(resp, req)
+
 	return resp
 }
 
@@ -110,6 +116,7 @@ func parseToolsFromResponse(t *testing.T, body []byte) []map[string]any {
 	if err := json.Unmarshal(body, &envelope); err != nil {
 		t.Fatalf("unmarshal response: %v\n%s", err, body)
 	}
+
 	return envelope.Result.Tools
 }
 
@@ -129,6 +136,7 @@ func TestIntentMiddleware_OffPassesThrough(t *testing.T) {
 	if len(tools) != 1 {
 		t.Fatalf("expected 1 tool, got %d", len(tools))
 	}
+
 	// Verify the schema was NOT replaced — Off mode must be a no-op.
 	inputSchema, _ := tools[0]["inputSchema"].(map[string]any)
 	props, _ := inputSchema["properties"].(map[string]any)
@@ -158,6 +166,7 @@ func TestIntentMiddleware_CompactOnlyNoContext(t *testing.T) {
 	if len(tools) != 2 {
 		t.Fatalf("expected 2 tools, got %d", len(tools))
 	}
+
 	for _, tool := range tools {
 		inputSchema, _ := tool["inputSchema"].(map[string]any)
 		props, _ := inputSchema["properties"].(map[string]any)
@@ -191,6 +200,7 @@ func TestIntentMiddleware_OnSelectsTopK(t *testing.T) {
 	if !classifier.called {
 		t.Fatalf("classifier should have been called")
 	}
+
 	tools := parseToolsFromResponse(t, resp.Body.Bytes())
 	if len(tools) != 2 {
 		t.Fatalf("expected 2 tools, got %d", len(tools))
@@ -229,6 +239,7 @@ func TestIntentMiddleware_PreservesNativeTools(t *testing.T) {
 	if err != nil {
 		t.Fatalf("marshal native schema: %v", err)
 	}
+
 	nativeTool := mcpgo.NewToolWithRawSchema(publicAPIToolName, "Answer questions about the public API.", nativeRaw)
 
 	libraryBody := minimalLibraryToolsListResponse(t, []mcpgo.Tool{commandSpec.Tool, nativeTool})
@@ -248,15 +259,18 @@ func TestIntentMiddleware_PreservesNativeTools(t *testing.T) {
 			break
 		}
 	}
+
 	if nativeRendered == nil {
 		t.Fatalf("native tool %q missing from compact-mode tools/list, got %d tools", publicAPIToolName, len(tools))
 	}
+
 	// Native tools are preserved verbatim; their schema must NOT be stubbed.
 	schema, _ := nativeRendered["inputSchema"].(map[string]any)
 	props, _ := schema["properties"].(map[string]any)
 	if _, ok := props["question"]; !ok {
 		t.Fatalf("expected question property preserved on native tool, got %v", props)
 	}
+
 	if schema["additionalProperties"] == true {
 		t.Fatalf("native tool schema should not be stubbed: %v", schema)
 	}
@@ -284,6 +298,7 @@ func TestIntentMiddleware_ClassifierErrorFallsBackToCompact(t *testing.T) {
 	if len(tools) != 1 {
 		t.Fatalf("expected 1 tool, got %d", len(tools))
 	}
+
 	tool := tools[0]
 	inputSchema, _ := tool["inputSchema"].(map[string]any)
 	body, _ := inputSchema["properties"].(map[string]any)["body"].(map[string]any)
@@ -302,6 +317,7 @@ func TestIntentMiddleware_PassesThroughNonToolsList(t *testing.T) {
 		if !strings.Contains(string(body), "initialize") {
 			t.Fatalf("downstream received unexpected body: %s", body)
 		}
+
 		w.WriteHeader(http.StatusOK)
 		_, _ = w.Write([]byte(`{"jsonrpc":"2.0","id":1,"result":{}}`))
 	})
@@ -353,12 +369,14 @@ func TestParseChatContext_AcceptsBase64AndUnicode(t *testing.T) {
 	if err != nil {
 		t.Fatalf("marshal: %v", err)
 	}
+
 	encoded := base64.StdEncoding.EncodeToString(payload)
 
 	parsed, ok := parseChatContext(encoded)
 	if !ok {
 		t.Fatalf("expected base64 payload to parse")
 	}
+
 	if parsed.Current != "show me findings 🔍 日本語" {
 		t.Fatalf("unexpected current: %q", parsed.Current)
 	}
@@ -379,9 +397,11 @@ func TestParseChatContext_KeepsPageContext(t *testing.T) {
 	if !ok {
 		t.Fatal("expected payload with pageContext to parse")
 	}
+
 	if parsed.PageContext == "" {
 		t.Fatal("pageContext was dropped; classifier would never see the coverage URL")
 	}
+
 	if !strings.Contains(parsed.PageContext, "/coverage/") {
 		t.Fatalf("unexpected pageContext: %q", parsed.PageContext)
 	}
@@ -417,6 +437,7 @@ func TestParseClassifierResult(t *testing.T) {
 	if err != nil {
 		t.Fatalf("object form: %v", err)
 	}
+
 	if !reflectEqualStrings(names, []string{"a", "b"}) {
 		t.Fatalf("object form names: %v", names)
 	}
@@ -425,6 +446,7 @@ func TestParseClassifierResult(t *testing.T) {
 	if err != nil {
 		t.Fatalf("array form: %v", err)
 	}
+
 	if !reflectEqualStrings(names, []string{"c", "d"}) {
 		t.Fatalf("array form names: %v", names)
 	}
@@ -432,6 +454,7 @@ func TestParseClassifierResult(t *testing.T) {
 	if _, err := parseClassifierResult(``); err == nil {
 		t.Fatal("empty input should error")
 	}
+
 	if _, err := parseClassifierResult(`nonsense`); err == nil {
 		t.Fatal("nonsense input should error")
 	}
@@ -441,10 +464,12 @@ func reflectEqualStrings(a, b []string) bool {
 	if len(a) != len(b) {
 		return false
 	}
+
 	for i := range a {
 		if a[i] != b[i] {
 			return false
 		}
 	}
+
 	return true
 }

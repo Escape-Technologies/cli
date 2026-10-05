@@ -17,6 +17,7 @@ var validJobsExportBlocks = func() []string {
 	for _, block := range v3.AllowedENUMPROPERTIESBLOCKSITEMSPROPERTIESKINDEnumValues {
 		blocks = append(blocks, string(block))
 	}
+
 	return blocks
 }()
 
@@ -69,6 +70,7 @@ AVAILABLE BLOCKS:
 		if len(jobsExportBlocks) == 0 {
 			return errors.New("at least one --block is required")
 		}
+
 		for _, block := range jobsExportBlocks {
 			if !v3.ENUMPROPERTIESBLOCKSITEMSPROPERTIESKIND(block).IsValid() {
 				return fmt.Errorf("invalid block %q; valid values: %s", block, strings.Join(validJobsExportBlocks, ", "))
@@ -85,6 +87,7 @@ AVAILABLE BLOCKS:
 		if jobsWatch {
 			return watchJob(cmd, job.GetId())
 		}
+
 		return nil
 	},
 }
@@ -106,6 +109,7 @@ Use --watch to poll until the job completes.`,
 		if out.Schema(v3.GetJob200Response{}) {
 			return nil
 		}
+
 		if len(args) != 1 {
 			_ = cmd.Help()
 			return errors.New("job ID is required")
@@ -119,7 +123,9 @@ Use --watch to poll until the job completes.`,
 		if err != nil {
 			return fmt.Errorf("unable to get job: %w", err)
 		}
+
 		printJob(job)
+
 		return nil
 	},
 }
@@ -128,6 +134,7 @@ func printJob(job *v3.GetJob200Response) {
 	out.Table(job, func() []string {
 		res := []string{"ID\tSTATUS\tCREATED AT"}
 		res = append(res, fmt.Sprintf("%s\t%s\t%s", job.GetId(), job.GetStatus(), job.GetCreatedAt()))
+
 		return res
 	})
 }
@@ -143,14 +150,17 @@ func watchJob(cmd *cobra.Command, jobID string) error {
 		if err != nil {
 			return fmt.Errorf("unable to get job: %w", err)
 		}
+
 		printJob(job)
 		status := strings.ToUpper(string(job.GetStatus()))
 		if terminalStatuses[status] {
 			if status == "FAILED" || status == "CANCELED" {
 				return fmt.Errorf("job ended with status %s", status)
 			}
+
 			return nil
 		}
+
 		time.Sleep(3 * time.Second) //nolint:mnd
 	}
 }
@@ -160,6 +170,8 @@ func init() {
 	jobsTriggerExportCmd.Flags().StringArrayVar(&jobsExportBlocks, "block", []string{}, "report block to include (can be specified multiple times)")
 	jobsTriggerExportCmd.Flags().StringVar(&jobsExportScanID, "scan-id", "", "scan ID to export (defaults to latest)")
 	jobsTriggerExportCmd.Flags().BoolVarP(&jobsWatch, "watch", "w", false, "watch until job completes")
+	markMCPSkip(jobsTriggerExportCmd.Flags(), "watch")
 	jobsGetCmd.Flags().BoolVarP(&jobsWatch, "watch", "w", false, "watch until job completes")
+	markMCPSkip(jobsGetCmd.Flags(), "watch")
 	rootCmd.AddCommand(jobsCmd)
 }

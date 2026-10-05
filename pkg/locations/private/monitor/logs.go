@@ -32,11 +32,13 @@ func sendLogs(ctx context.Context, ch ssh.Channel) {
 			case <-ctx.Done():
 				log.RemoveHook("monitor")
 				close(logChan)
+
 				return
 			case entry, ok := <-logChan:
 				if !ok {
 					return
 				}
+
 				payload := logPayload{
 					Message:   entry.Message,
 					Timestamp: entry.Timestamp,

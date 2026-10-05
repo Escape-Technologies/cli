@@ -29,6 +29,12 @@ var scanSortDirection string
 var scanListAllKinds bool
 var scanListLimit int
 
+var (
+	scanKindUsage      = fmt.Sprintf("filter by scanner type: %v", v3.AllowedENUMPROPERTIESFILTERPROPERTIESSCANNERKINDSITEMSEnumValues)
+	scanStatusUsage    = fmt.Sprintf("filter by status: %v", v3.AllowedENUMPROPERTIESSTATUSEnumValues)
+	scanInitiatorUsage = fmt.Sprintf("filter by initiator: %v", v3.AllowedENUMPROPERTIESINITIATOREnumValues)
+)
+
 var defaultScanKinds = []string{
 	"BLST_REST",
 	"BLST_GRAPHQL",
@@ -138,19 +144,23 @@ ID                                      CREATED AT                           KIN
 		if err != nil {
 			return err
 		}
+
 		if len(scanProfileIDs) > 0 && len(allScans) == 0 {
 			return fmt.Errorf(
 				"no scans found for profile ID(s) %s; verify the profile exists with profiles get",
 				strings.Join(scanProfileIDs, ", "),
 			)
 		}
+
 		out.Table(allScans, func() []string {
 			res := []string{"ID\tCREATED AT\tKIND\tSTATUS\tPROGRESS\tLINK"}
 			for _, scan := range allScans {
 				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%f\t%s", scan.GetId(), scan.GetCreatedAt(), scan.GetKind(), scan.GetStatus(), scan.GetProgressRatio(), scan.GetLinks().ScanIssues))
 			}
+
 			return res
 		})
+
 		return nil
 	},
 }
@@ -163,6 +173,7 @@ var scanGetCmd = &cobra.Command{
 			_ = cmd.Help()
 			return errors.New("scan ID is required")
 		}
+
 		return nil
 	},
 	Short: "Get detailed information about a specific scan",
@@ -195,6 +206,7 @@ ID                                      CREATED AT                           KIN
 		if err != nil {
 			return fmt.Errorf("unable to get scan: %w", err)
 		}
+
 		out.Table(scan, func() []string {
 			res := []string{"ID\tCREATED AT\tFINISHED AT\tKIND\tSTATUS\tPROGRESS\tSCORE\tCOVERAGE\tDURATION\tPROFILE ID\tORG ID\tCOMMIT BRANCH\tCOMMIT HASH\tCOMMIT AUTHOR\tLINK"}
 			res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%d%%\t%.0f\t%.0f%%\t%.0fs\t%s\t%s\t%s\t%s\t%s\t%s",
@@ -214,8 +226,10 @@ ID                                      CREATED AT                           KIN
 				scan.GetCommitAuthor(),
 				scan.GetLinks().ScanIssues,
 			))
+
 			return res
 		})
+
 		return nil
 	},
 }
@@ -239,8 +253,10 @@ func extractCommitDataFromEnv() {
 		scanStartCmdCommitAuthor = os.Getenv("GITHUB_ACTOR")
 		scanStartCmdCommitAuthorProfilePictureLink = "https://avatars.githubusercontent.com/u/" + os.Getenv("GITHUB_ACTOR_ID") + "?v=4"
 		scanStartCmdCommitLink = os.Getenv("GITHUB_SERVER_URL") + "/" + os.Getenv("GITHUB_REPOSITORY") + "/commit/" + scanStartCmdCommitHash
+
 		return
 	}
+
 	if os.Getenv("GITLAB_CI") != "" {
 		log.Info("Extracting commit data from GitLab environment variables")
 		// https://docs.gitlab.com/ci/variables/predefined_variables/
@@ -248,22 +264,27 @@ func extractCommitDataFromEnv() {
 		scanStartCmdCommitBranch = os.Getenv("CI_COMMIT_REF_NAME")
 		scanStartCmdCommitAuthor = os.Getenv("GITLAB_USER_EMAIL")
 		scanStartCmdCommitLink = os.Getenv("CI_PROJECT_URL") + "/-/commit/" + scanStartCmdCommitHash
+
 		return
 	}
+
 	if os.Getenv("CIRCLE_SHA1") != "" {
 		log.Info("Extracting commit data from CircleCI environment variables")
 		// https://circleci.com/docs/variables/#built-in-environment-variables
 		scanStartCmdCommitHash = os.Getenv("CIRCLE_SHA1")
 		scanStartCmdCommitBranch = os.Getenv("CIRCLE_BRANCH")
 		scanStartCmdCommitAuthor = os.Getenv("CIRCLE_USERNAME")
+
 		return
 	}
+
 	if os.Getenv("COMMIT_HASH") != "" {
 		log.Info("Extracting commit data from local environment variables")
 		scanStartCmdCommitHash = os.Getenv("COMMIT_HASH")
 		scanStartCmdCommitLink = os.Getenv("COMMIT_LINK")
 		scanStartCmdCommitBranch = os.Getenv("COMMIT_BRANCH")
 		scanStartCmdCommitAuthor = os.Getenv("COMMIT_AUTHOR")
+
 		return
 	}
 
@@ -286,6 +307,36 @@ var scanStartCmdCommitAuthorProfilePictureLink = ""
 var scanStartCmdConfigurationOverride = ""
 var scanStartCmdAdditionalProperties = ""
 var scanStartCmdWatch bool
+
+// scanFailOnSeverity is the canonical issue severity for the watch gate.
+// Empty means the gate is off. scans start and scans watch share it because
+// one process runs one command.
+var scanFailOnSeverity string
+
+// issueSeverityOrder is least to most severe. The generated Allowed list is
+// alphabetical, so it is not a rank. A test checks that every generated value
+// has a place here.
+var issueSeverityOrder = []v3.ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS{
+	v3.ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS_INFO,
+	v3.ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS_LOW,
+	v3.ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS_MEDIUM,
+	v3.ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS_HIGH,
+	v3.ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS_CRITICAL,
+}
+
+// severityLadder renders issueSeverityOrder as flag help, least to most
+// severe. The generated Allowed list is alphabetical and would read as a rank.
+func severityLadder() string {
+	levels := make([]string, len(issueSeverityOrder))
+	for i, level := range issueSeverityOrder {
+		levels[i] = string(level)
+	}
+
+	return strings.Join(levels, " < ")
+}
+
+var failOnSeverityUsage = "exit non-zero when a finished scan has an open issue at or above this severity (requires --watch on scans start): " + severityLadder()
+
 var scanStartCmd = &cobra.Command{
 	Use: "start profile-id",
 	Args: func(cmd *cobra.Command, args []string) error {
@@ -293,6 +344,7 @@ var scanStartCmd = &cobra.Command{
 			_ = cmd.Help()
 			return errors.New("profile ID is required")
 		}
+
 		return nil
 	},
 	Short: "Start a new security scan on a profile",
@@ -316,10 +368,20 @@ CONFIGURATION OVERRIDE:
     '{"max_duration": 3600}'                          # Custom max duration (seconds)
 
 WATCH MODE:
-  Use --watch to monitor scan progress in real-time. The command will:
-    • Display progress updates as they happen
-    • Show final results when complete
-    • Exit with appropriate status code for CI/CD
+  Use --watch to block until the scan ends. Progress updates print as they
+  happen and the exit code follows the scans watch contract: 0 only when
+  the scan finishes and no severity gate fails; non-zero when the scan
+  fails ("scan <scan-id> failed"), is canceled ("scan <scan-id> was
+  canceled"), or never reaches a terminal status ("scan <scan-id> did not
+  finish (last status X)").
+
+  --fail-on-severity is rejected unless --watch is set. It exits non-zero
+  when a finished scan has an open issue at or above LEVEL (severity rules
+  in scans watch).
+
+  The process error is written to stderr and the exit code is 1. JSON mode
+  does not add an error document. --watch -o json prints one document, the
+  final scan; issues are read for the severity gate and are not printed.
 
 CI/CD INTEGRATION:
   Perfect for automated security testing in your pipeline. The CLI automatically
@@ -346,12 +408,19 @@ CI/CD INTEGRATION:
     --commit-hash $GITHUB_SHA \
     --commit-branch $GITHUB_REF_NAME
 
+  # Fail the pipeline on a high or critical finding
+  escape-cli scans start <profile-id> --watch --fail-on-severity HIGH
+
   # Start and save scan ID for later use
   SCAN_ID=$(escape-cli scans start <profile-id> -o json | jq -r '.id')`,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		// Output JSON Schema if requested
 		if out.Schema(v3.ScanDetailed1{}) {
 			return nil
+		}
+
+		if err := validateScanFailOnSeverity(scanStartCmdWatch); err != nil {
+			return err
 		}
 
 		configurationOverride := map[string]interface{}{}
@@ -361,6 +430,7 @@ CI/CD INTEGRATION:
 				return fmt.Errorf("unable to unmarshal configuration override: %w", err)
 			}
 		}
+
 		additionalProperties := map[string]interface{}{}
 		if scanStartCmdAdditionalProperties != "" {
 			err := json.Unmarshal([]byte(scanStartCmdAdditionalProperties), &additionalProperties)
@@ -368,6 +438,7 @@ CI/CD INTEGRATION:
 				return fmt.Errorf("unable to unmarshal additional properties: %w", err)
 			}
 		}
+
 		extractCommitDataFromEnv()
 		debugCommitData()
 		scan, err := escape.StartScan(
@@ -385,17 +456,25 @@ CI/CD INTEGRATION:
 		if err != nil {
 			return fmt.Errorf("unable to start scan: %w", err)
 		}
+
 		started := "Scan started\n  ID:   " + scan.GetId()
 		if link := scan.GetLinks().ScanIssues; link != "" {
 			started += "\n  View: " + out.LinkURL(link)
 		}
+
+		// --watch -o json prints the finished scan once. The create response
+		// is still STARTING, and a second document would break jq. A failed,
+		// canceled, or unfinished scan returns the watch error after that
+		// document.
+		if scanStartCmdWatch && out.IsJSON() {
+			return watchScan(cmd.Context(), scan.GetId(), watchJSONStatus)
+		}
+
 		out.Print(scan, started)
 		if scanStartCmdWatch {
-			err := watchScan(cmd.Context(), scan.GetId())
-			if err != nil {
-				return fmt.Errorf("unable to watch scan: %w", err)
-			}
+			return watchScan(cmd.Context(), scan.GetId(), watchJSONSilent)
 		}
+
 		return nil
 	},
 }
@@ -407,6 +486,7 @@ var scanCancelCmd = &cobra.Command{
 			_ = cmd.Help()
 			return errors.New("scan ID is required")
 		}
+
 		return nil
 	},
 	Short: "Cancel a running scan",
@@ -439,7 +519,9 @@ USE CASES:
 		if err != nil {
 			return fmt.Errorf("unable to cancel scan: %w", err)
 		}
-		out.Log("Scan canceled")
+
+		out.Print(out.Message{Msg: "Scan canceled"}, "Scan canceled")
+
 		return nil
 	},
 }
@@ -451,6 +533,7 @@ var scanIgnoreCmd = &cobra.Command{
 			_ = cmd.Help()
 			return errors.New("scan ID is required")
 		}
+
 		return nil
 	},
 	Short: "Mark a scan as ignored",
@@ -477,22 +560,56 @@ NOTE: You can filter ignored scans in listings with --ignored flag`,
 		if err != nil {
 			return fmt.Errorf("unable to ignore scan: %w", err)
 		}
-		out.Log("Scan ignored")
+
+		out.Print(out.Message{Msg: "Scan ignored"}, "Scan ignored")
+
 		return nil
 	},
 }
 
-func watchScan(ctx context.Context, scanID string) error {
+// watchJSONResult selects the JSON document written when a watch ends.
+// Pretty mode ignores it and keeps the progress tables.
+type watchJSONResult int
+
+const (
+	// watchJSONSilent writes nothing. Pretty `scans start --watch` already
+	// printed the create response and uses the tables for progress.
+	watchJSONSilent watchJSONResult = iota
+	// watchJSONStatus writes one document: the final scan. That is the
+	// `scans start --watch -o json` contract.
+	watchJSONStatus
+	// watchJSONStatusAndIssues writes the final scan, then the issue list
+	// when the scan finished. That is the `scans watch -o json` contract.
+	watchJSONStatusAndIssues
+)
+
+// watchScan follows a scan until it reaches a terminal status.
+func watchScan(ctx context.Context, scanID string, jsonResult watchJSONResult) error {
 	ch, err := escape.WatchScan(ctx, scanID)
 	if err != nil {
 		return fmt.Errorf("unable to watch scan: %w", err)
 	}
+
+	return followWatch(ctx, scanID, ch, jsonResult)
+}
+
+// followWatch consumes WatchScan events until the stream closes, printing
+// progress in pretty mode, then hands the last status to finishWatch. The
+// stream can close without a terminal status when the API stops answering;
+// finishWatch turns that into an error instead of success.
+func followWatch(ctx context.Context, scanID string, ch <-chan *v3.StartScan200Response, jsonResult watchJSONResult) error {
+	jsonMode := out.IsJSON()
 	var status *v3.StartScan200Response
 	for event := range ch {
 		if event == nil {
 			continue
 		}
+
 		status = event
+		if jsonMode {
+			continue
+		}
+
 		out.Table(event, func() []string {
 			res := []string{}
 			res = append(res, "STATUS\tPROGRESS")
@@ -500,23 +617,104 @@ func watchScan(ctx context.Context, scanID string) error {
 				res,
 				fmt.Sprintf("%s\t%d%%", event.Status, int(event.ProgressRatio*100)), //nolint:mnd
 			)
+
 			return res
 		})
 	}
+
 	if status == nil {
 		return errors.New("unable to watch scan")
-	} else if status.Status == "CANCELED" {
-		out.Log("Scan canceled")
-	} else if status.Status == "FAILED" {
-		out.Log("Scan failed")
-	} else {
-		out.Print(status, "Scan completed")
-		err := printScanIssues(ctx, scanID)
-		if err != nil {
-			return fmt.Errorf("unable to fetch scan issues: %w", err)
+	}
+
+	return finishWatch(ctx, scanID, status, jsonResult)
+}
+
+// validateScanFailOnSeverity checks --fail-on-severity before any scan work.
+// scans start accepts the flag only together with --watch. Input is matched
+// against the generated issue severity enum without case and stored in
+// canonical form.
+func validateScanFailOnSeverity(watch bool) error {
+	scanFailOnSeverity = strings.TrimSpace(scanFailOnSeverity)
+	if scanFailOnSeverity == "" {
+		return nil
+	}
+
+	if !watch {
+		return errors.New("--fail-on-severity requires --watch")
+	}
+
+	level, err := parseIssueSeverity(scanFailOnSeverity)
+	if err != nil {
+		return err
+	}
+
+	scanFailOnSeverity = string(level)
+
+	return nil
+}
+
+func parseIssueSeverity(value string) (v3.ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS, error) {
+	return parseStringEnum(
+		strings.ToUpper(strings.TrimSpace(value)),
+		"severity",
+		v3.AllowedENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMSEnumValues,
+	)
+}
+
+func severityRank(level v3.ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS) (int, bool) {
+	for rank, candidate := range issueSeverityOrder {
+		if candidate == level {
+			return rank, true
 		}
 	}
-	return nil
+
+	return 0, false
+}
+
+// issueCountsTowardGate reports whether an issue can fail --fail-on-severity.
+// OPEN and MANUAL_REVIEW are still open. IGNORED, RESOLVED, and FALSE_POSITIVE
+// are not. An unknown status still counts, so a new status cannot hide a finding.
+func issueCountsTowardGate(issue v3.IssueSummarized) bool {
+	switch issue.GetStatus() {
+	case v3.ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS_OPEN,
+		v3.ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS_MANUAL_REVIEW:
+		return true
+	case v3.ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS_IGNORED,
+		v3.ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS_RESOLVED,
+		v3.ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS_FALSE_POSITIVE:
+		return false
+	default:
+		return true
+	}
+}
+
+// severityGate fails when an open issue is at least as severe as the flag.
+// validateScanFailOnSeverity has already stored a canonical level, so the
+// floor is always a known rank. The message keeps the literal "issue(s)" so
+// callers can match it.
+func severityGate(issues []v3.IssueSummarized) error {
+	if scanFailOnSeverity == "" {
+		return nil
+	}
+
+	floor, _ := severityRank(v3.ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS(scanFailOnSeverity))
+	count := 0
+	for _, issue := range issues {
+		if !issueCountsTowardGate(issue) {
+			continue
+		}
+
+		rank, known := severityRank(issue.GetSeverity())
+		if !known || rank >= floor {
+			count++
+		}
+	}
+
+	if count == 0 {
+		return nil
+	}
+
+	return fmt.Errorf("%d issue(s) at or above %s", count, scanFailOnSeverity)
 }
 
 var scanWatchCmd = &cobra.Command{
@@ -526,6 +724,7 @@ var scanWatchCmd = &cobra.Command{
 			_ = cmd.Help()
 			return errors.New("scan ID is required")
 		}
+
 		return nil
 	},
 	Short: "Watch scan progress in real-time",
@@ -538,7 +737,21 @@ BEHAVIOR:
   • Shows real-time progress percentage
   • Updates as scan progresses through testing phases
   • Displays final results upon completion
-  • Exits with status code 0 on success, non-zero on failure
+  • Exits 0 when the scan finishes and no severity gate fails
+  • Exits non-zero when the scan fails ("scan <scan-id> failed"), is
+    canceled ("scan <scan-id> was canceled"), or the stream ends before a
+    terminal status ("scan <scan-id> did not finish (last status X)")
+  • --fail-on-severity LEVEL also exits non-zero when a finished scan has an
+    open issue at or above LEVEL. The error is "N issue(s) at or above LEVEL".
+    LEVEL is INFO, LOW, MEDIUM, HIGH, CRITICAL, matched without case.
+    OPEN and MANUAL_REVIEW issues count. Resolved, ignored, and false-positive
+    issues do not.
+
+JSON output keeps the existing documents. The error is written to stderr and
+is not another JSON document. -o json prints the final scan, then the issue
+list, when the scan finishes. A failed, canceled, or unfinished scan prints
+only the scan document. scans start --watch -o json prints only the final
+scan; issues are read for --fail-on-severity and are not printed.
 
 USE CASES:
   • Monitor long-running scans
@@ -546,44 +759,149 @@ USE CASES:
   • Get immediate feedback on scan progress
   • CI/CD pipelines that need to block until scan completes
 
-The watch will continue until the scan reaches a terminal state:
-  FINISHED, FAILED, or CANCELED`,
+The watch polls until the scan reaches a terminal state (FINISHED, FAILED,
+or CANCELED) or the API stops answering.`,
 	Example: `  # Watch a running scan
   escape-cli scans watch 00000000-0000-0000-0000-000000000000
 
   # Start and watch in one command (recommended)
   escape-cli scans start <profile-id> --watch
 
-  # CI/CD example: Start, watch, and fail if scan fails
-  escape-cli scans watch $(escape-cli scans start <profile-id> -o json | jq -r '.id')`,
+  # CI/CD example: Start, watch, and fail if the scan fails
+  escape-cli scans watch $(escape-cli scans start <profile-id> -o json | jq -r '.id')
+
+  # Fail when the finished scan has a high or critical issue
+  escape-cli scans watch <scan-id> --fail-on-severity HIGH`,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		// Output JSON Schema if requested
 		if out.Schema(v3.ScanDetailed1{}) {
 			return nil
 		}
 
-		return watchScan(cmd.Context(), args[0])
+		if err := validateScanFailOnSeverity(true); err != nil {
+			return err
+		}
+
+		return watchScan(cmd.Context(), args[0], watchJSONStatusAndIssues)
 	},
 }
 
-func printScanIssues(ctx context.Context, scanID string) error {
-	issues, err := escape.GetScanIssues(ctx, scanID)
-	if err != nil {
-		return fmt.Errorf("unable to fetch scan issues: %w", err)
+var scanIssuesPage pageFlags
+var scanProblemsPage pageFlags
+
+// finishWatch prints the terminal scan and returns the process error.
+// FAILED and CANCELED fail in pretty and JSON mode. JSON prints the scan
+// document first and does not print issues for those statuses. Only a
+// finished scan succeeds: any other last status (STARTING, RUNNING, PENDING,
+// or an unknown value — the stream can close without a terminal status when
+// the API stops answering) fails the run the same way.
+// A finished scan prints issues: a pretty table, or the second JSON document
+// for `scans watch`. `scans start --watch -o json` stays one scan document.
+// --fail-on-severity then returns "N issue(s) at or above LEVEL".
+// main writes the error to stderr and exits 1, so stdout stays the documents.
+func finishWatch(ctx context.Context, scanID string, status *v3.StartScan200Response, jsonResult watchJSONResult) error {
+	switch v3.ENUMPROPERTIESSTATUS(status.Status) {
+	case v3.ENUMPROPERTIESSTATUS_FINISHED, v3.ENUMPROPERTIESSTATUS_COMPLETED:
+		return finishSuccessfulWatch(ctx, scanID, status, jsonResult)
+	case v3.ENUMPROPERTIESSTATUS_FAILED:
+		writeWatchFailure(status, jsonResult, "Scan failed")
+		return fmt.Errorf("scan %s failed", scanID)
+	case v3.ENUMPROPERTIESSTATUS_CANCELED:
+		writeWatchFailure(status, jsonResult, "Scan canceled")
+		return fmt.Errorf("scan %s was canceled", scanID)
+	case v3.ENUMPROPERTIESSTATUS_PENDING, v3.ENUMPROPERTIESSTATUS_RUNNING, v3.ENUMPROPERTIESSTATUS_STARTING:
+		// The stream closed while the scan was still queued or running.
+		fallthrough
+	default:
+		// An unknown status is not a terminal one either.
+		writeWatchFailure(status, jsonResult, fmt.Sprintf("Scan did not finish (status %s)", status.Status))
+		return fmt.Errorf("scan %s did not finish (last status %s)", scanID, status.Status)
 	}
-	out.Table(issues, func() []string {
+}
+
+// writeWatchFailure prints the terminal failure without an issue list.
+// JSON silent mode leaves the caller's document alone. Pretty mode logs a
+// status line. The returned error is what makes the process exit non-zero.
+func writeWatchFailure(status *v3.StartScan200Response, jsonResult watchJSONResult, prettyLine string) {
+	if out.IsJSON() {
+		if jsonResult == watchJSONSilent {
+			return
+		}
+
+		out.Print(status, "")
+
+		return
+	}
+
+	out.Log(prettyLine)
+}
+
+// finishSuccessfulWatch prints a finished scan, then applies the severity gate.
+// Issues are fetched once. They are printed in pretty mode and for
+// `scans watch -o json`. `scans start --watch -o json` reads them only when
+// the gate is set, and still prints just the scan document.
+func finishSuccessfulWatch(ctx context.Context, scanID string, status *v3.StartScan200Response, jsonResult watchJSONResult) error {
+	printIssues := !out.IsJSON() || jsonResult == watchJSONStatusAndIssues
+	if out.IsJSON() {
+		if jsonResult != watchJSONSilent {
+			out.Print(status, "")
+		}
+	} else {
+		out.Print(status, "Scan completed")
+	}
+
+	if !printIssues && scanFailOnSeverity == "" {
+		return nil
+	}
+
+	issues, _, _, err := fetchScanIssues(ctx, scanID, false, "", 0)
+	if err != nil {
+		return err
+	}
+
+	if printIssues {
+		emitScanIssues(false, issues, nil, 0)
+	}
+
+	return severityGate(issues)
+}
+
+func fetchScanIssues(ctx context.Context, scanID string, single bool, cursor string, size int) ([]v3.IssueSummarized, *string, int, error) {
+	issues, next, total, err := resolveList(ctx, single, cursor, size, func(ctx context.Context, cursor string, size int) ([]v3.IssueSummarized, *string, int, error) {
+		return escape.GetScanIssues(ctx, scanID, cursor, size)
+	})
+	if err != nil {
+		return nil, nil, 0, fmt.Errorf("unable to fetch scan issues: %w", err)
+	}
+
+	return issues, next, total, nil
+}
+
+func emitScanIssues(single bool, issues []v3.IssueSummarized, next *string, total int) {
+	emitList(single, issues, next, total, func() []string {
 		res := []string{"ID\tSEVERITY\tCATEGORY\tNAME\tLINK"}
-		for _, i := range issues {
+		for _, issue := range issues {
 			res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s",
-				i.GetId(),
-				i.GetSeverity(),
-				i.GetCategory(),
-				i.GetName(),
-				i.GetLinks().IssueOverview,
+				issue.GetId(),
+				issue.GetSeverity(),
+				issue.GetCategory(),
+				issue.GetName(),
+				issue.GetLinks().IssueOverview,
 			))
 		}
+
 		return res
 	})
+}
+
+func printScanIssues(ctx context.Context, scanID string, single bool, cursor string, size int) error {
+	issues, next, total, err := fetchScanIssues(ctx, scanID, single, cursor, size)
+	if err != nil {
+		return err
+	}
+
+	emitScanIssues(single, issues, next, total)
+
 	return nil
 }
 
@@ -595,6 +913,7 @@ var scanIssuesCmd = &cobra.Command{
 			_ = cmd.Help()
 			return errors.New("scan ID is required")
 		}
+
 		return nil
 	},
 	Short: "View security issues found in a scan",
@@ -644,10 +963,16 @@ ID                                      SEVERITY    CATEGORY                  NA
 			_ = cmd.Help()
 			return errors.New("scan ID is required")
 		}
-		err := printScanIssues(cmd.Context(), args[0])
+
+		if err := validatePageFlags(cmd, scanIssuesPage.size); err != nil {
+			return err
+		}
+
+		err := printScanIssues(cmd.Context(), args[0], singlePageRequested(cmd), scanIssuesPage.cursor, scanIssuesPage.size)
 		if err != nil {
 			return fmt.Errorf("unable to get scan issues: %w", err)
 		}
+
 		return nil
 	},
 }
@@ -682,12 +1007,14 @@ FILTER OPTIONS:
 			_ = cmd.Help()
 			return errors.New("scan ID is required")
 		}
+
 		return nil
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
 		if out.Schema([]v3.TargetDetailed{}) {
 			return nil
 		}
+
 		if scanTargetsSize < 0 {
 			return errors.New("--size must be greater than or equal to 0")
 		}
@@ -700,42 +1027,25 @@ FILTER OPTIONS:
 		out.Table(all, func() []string {
 			res := []string{"ID\tTYPE\tMETHOD\tPATH/RESOLVER\tCOVERAGE\tREQUEST COUNT\tMEAN DURATION MS"}
 			for _, t := range all {
-				targetType := "UNKNOWN"
-				method := ""
-				name := ""
-				var requestCount float32
-				coverage := "-"
-				var meanDuration float32
-				if ar := t.GetApiRoute(); ar.Id != "" {
-					targetType = "API_ROUTE"
-					method = ar.GetOperation()
-					name = ar.GetDisplayName()
-					requestCount = ar.GetRequestCount()
-					if ar.Coverage != nil {
-						coverage = string(*ar.Coverage)
-					}
-					meanDuration = ar.GetMeanDuration()
-				} else if gr := t.GetGraphqlResolver(); gr.Id != "" {
-					targetType = "GRAPHQL_RESOLVER"
-					name = gr.GetDisplayName()
-					requestCount = gr.GetRequestCount()
-					if gr.Coverage != nil {
-						coverage = string(*gr.Coverage)
-					}
-					meanDuration = gr.GetMeanDuration()
-				} else if cf := t.GetCodeFile(); cf.Id != "" {
-					targetType = "CODE_FILE"
-					method = cf.GetLanguage()
-					name = cf.GetPath()
-				} else if port := t.GetPort(); port.Id != "" {
-					targetType = "PORT"
-					method = port.GetProtocol()
-					name = fmt.Sprintf("%.0f", port.GetPort())
+				row := compactScanTarget(t)
+				coverage := row.Coverage
+				if coverage == "" {
+					coverage = "-"
 				}
-				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%.0f\t%.0f", t.GetId(), targetType, method, name, coverage, requestCount, meanDuration))
+
+				var meanDuration float32
+				if route, ok := t.GetApiRouteOk(); ok && route != nil {
+					meanDuration = route.GetMeanDuration()
+				} else if resolver, ok := t.GetGraphqlResolverOk(); ok && resolver != nil {
+					meanDuration = resolver.GetMeanDuration()
+				}
+
+				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%d\t%.0f", t.GetId(), row.Type, row.Method, row.Name, coverage, row.RequestCount, meanDuration))
 			}
+
 			return res
 		})
+
 		return nil
 	},
 }
@@ -761,7 +1071,7 @@ unreachable target, schema invalid, etc.). Diagnostic counterpart of
   # Export to JSON
   escape-cli scans problems -o json`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
-		if out.Schema([]v3.ScanSummarizedWithProblems2{}) {
+		if out.Schema(Page[v3.ScanSummarizedWithProblems2]{}) {
 			return nil
 		}
 
@@ -779,26 +1089,22 @@ unreachable target, schema invalid, etc.). Diagnostic counterpart of
 			SortType:      scanSortType,
 			SortDirection: scanSortDirection,
 		}
-		scans, next, err := escape.ListScanProblems(cmd.Context(), "", filters)
-		if err != nil {
-			return fmt.Errorf("unable to list scan problems: %w", err)
-		}
-		all := scans
-		for next != nil && *next != "" {
-			scans, next, err = escape.ListScanProblems(cmd.Context(), *next, filters)
+
+		return runPagedList(cmd, scanProblemsPage, func(ctx context.Context, cursor string, size int) ([]v3.ScanSummarizedWithProblems2, *string, int, error) {
+			scans, next, total, err := escape.ListScanProblems(ctx, cursor, filters, size)
 			if err != nil {
-				return fmt.Errorf("unable to list scan problems: %w", err)
+				return nil, nil, 0, fmt.Errorf("unable to list scan problems: %w", err)
 			}
-			all = append(all, scans...)
-		}
-		out.Table(all, func() []string {
+
+			return scans, next, total, nil
+		}, func(scans []v3.ScanSummarizedWithProblems2) []string {
 			res := []string{"SCAN ID\tSTATUS\tKIND\tINITIATOR\tPROBLEMS\tCREATED AT\tLINK"}
-			for _, scan := range all {
+			for _, scan := range scans {
 				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%d\t%s\t%s", scan.GetId(), scan.GetStatus(), scan.GetKind(), scan.GetInitiator(), len(scan.GetProblems()), scan.GetCreatedAt(), scan.GetLinks().ScanIssues))
 			}
+
 			return res
 		})
-		return nil
 	},
 }
 
@@ -806,12 +1112,15 @@ func resolveScanKinds(cmd *cobra.Command) []string {
 	if scanListAllKinds && cmd.Flags().Changed("kind") {
 		_, _ = fmt.Fprintln(cmd.ErrOrStderr(), "Warning: --all-kinds is ignored when --kind is explicitly set")
 	}
+
 	if cmd.Flags().Changed("kind") {
 		return scanKinds
 	}
+
 	if scanListAllKinds {
 		return nil
 	}
+
 	return defaultScanKinds
 }
 
@@ -819,6 +1128,7 @@ func scanKindsFilter(kinds []string) *[]string {
 	if kinds == nil {
 		return nil
 	}
+
 	return &kinds
 }
 
@@ -836,19 +1146,24 @@ func fetchAllScans(
 		if progress {
 			out.Log(fmt.Sprintf("Fetching scans (page %d, %d loaded)...", page, len(allScans)))
 		}
+
 		scans, cursor, err := escape.ListScans(ctx, next, filters)
 		if err != nil {
 			return nil, fmt.Errorf("unable to list scans: %w", err)
 		}
+
 		allScans = append(allScans, scans...)
 		if limit > 0 && len(allScans) >= limit {
 			return allScans[:limit], nil
 		}
+
 		if cursor == nil || *cursor == "" {
 			break
 		}
+
 		next = *cursor
 	}
+
 	return allScans, nil
 }
 
@@ -856,28 +1171,36 @@ func init() {
 	scansCmd.AddCommand(scansListCmd)
 	scansListCmd.Flags().BoolVar(&scanListAllKinds, "all-kinds", false, "include ASM and all scan kinds (default: DAST and AI Pentesting kinds only)")
 	scansListCmd.Flags().IntVar(&scanListLimit, "limit", 0, "maximum number of scans to return (0 = no limit)")
-	scansListCmd.PersistentFlags().StringSliceVarP(&scanProfileIDs, "profile-id", "p", []string{}, "filter by profile ID(s) - comma-separated for multiple")
-	scansListCmd.PersistentFlags().StringSliceVar(&scanProjectIDs, "project-id", []string{}, "filter by project ID(s)")
-	scansListCmd.PersistentFlags().StringSliceVarP(&scanAssetIDs, "asset-id", "a", []string{}, "filter by asset ID(s) - comma-separated for multiple")
-	scansListCmd.PersistentFlags().StringVar(&scanAfter, "after", "", "show scans created after this date (RFC3339 format, e.g., 2025-01-01T00:00:00Z)")
-	scansListCmd.PersistentFlags().StringVar(&scanBefore, "before", "", "show scans created before this date (RFC3339 format)")
-	scansListCmd.PersistentFlags().StringVar(&scanIgnored, "ignored", "", "filter by ignored status (true/false)")
-	scansListCmd.PersistentFlags().StringSliceVarP(&scanInitiator, "initiator", "i", []string{}, "filter by initiator: MANUAL, API, SCHEDULED, CI")
-	scansListCmd.PersistentFlags().StringSliceVarP(&scanKinds, "kind", "k", []string{}, "filter by scanner type: BLST_REST, BLST_GRAPHQL, FRONTEND_DAST, AUTOMATED_PENTEST")
-	scansListCmd.PersistentFlags().StringSliceVarP(&scanStatus, "status", "s", []string{}, "filter by status: STARTING, RUNNING, FINISHED, FAILED, CANCELED")
-	scansListCmd.PersistentFlags().StringVar(&scanSortType, "sort-by", "", "sort field (e.g., createdAt)")
-	scansListCmd.PersistentFlags().StringVar(&scanSortDirection, "sort-direction", "", "sort direction: asc, desc")
-	scanStartCmd.PersistentFlags().BoolVarP(&scanStartCmdWatch, "watch", "w", false, "watch scan progress in real-time until completion")
-	scanStartCmd.PersistentFlags().StringVar(&scanStartCmdCommitHash, "commit-hash", "", "git commit SHA for traceability (auto-detected in CI/CD)")
-	scanStartCmd.PersistentFlags().StringVar(&scanStartCmdCommitLink, "commit-link", "", "URL to commit in your VCS")
-	scanStartCmd.PersistentFlags().StringVar(&scanStartCmdCommitBranch, "commit-branch", "", "git branch name (auto-detected in CI/CD)")
-	scanStartCmd.PersistentFlags().StringVar(&scanStartCmdCommitAuthor, "commit-author", "", "commit author name or email")
-	scanStartCmd.PersistentFlags().StringVar(&scanStartCmdCommitAuthorProfilePictureLink, "profile-picture", "", "URL to author's profile picture")
-	scanStartCmd.PersistentFlags().StringVarP(&scanStartCmdConfigurationOverride, "override", "c", "", "JSON configuration override for this scan")
-	scanStartCmd.PersistentFlags().StringVar(&scanStartCmdAdditionalProperties, "additional-properties", "", "JSON additional properties for the scan request")
+	// Local flags: these leaves have no subcommands, so nothing inherits them.
+	// The MCP catalog reads LocalFlags, which covers both registrations.
+	scansListCmd.Flags().StringSliceVarP(&scanProfileIDs, "profile-id", "p", []string{}, "filter by profile ID(s) - comma-separated for multiple")
+	scansListCmd.Flags().StringSliceVar(&scanProjectIDs, "project-id", []string{}, "filter by project ID(s)")
+	scansListCmd.Flags().StringSliceVarP(&scanAssetIDs, "asset-id", "a", []string{}, "filter by asset ID(s) - comma-separated for multiple")
+	scansListCmd.Flags().StringVar(&scanAfter, "after", "", "show scans created after this date (RFC3339 format, e.g., 2025-01-01T00:00:00Z)")
+	scansListCmd.Flags().StringVar(&scanBefore, "before", "", "show scans created before this date (RFC3339 format)")
+	scansListCmd.Flags().StringVar(&scanIgnored, "ignored", "", "filter by ignored status (true/false)")
+	scansListCmd.Flags().StringSliceVarP(&scanInitiator, "initiator", "i", []string{}, scanInitiatorUsage)
+	scansListCmd.Flags().StringSliceVarP(&scanKinds, "kind", "k", []string{}, scanKindUsage)
+	scansListCmd.Flags().StringSliceVarP(&scanStatus, "status", "s", []string{}, scanStatusUsage)
+	scansListCmd.Flags().StringVar(&scanSortType, "sort-by", "", "sort field (e.g., createdAt)")
+	scansListCmd.Flags().StringVar(&scanSortDirection, "sort-direction", "", "sort direction: asc, desc")
+	scanStartCmd.Flags().BoolVarP(&scanStartCmdWatch, "watch", "w", false, "watch scan progress in real-time until completion")
+	markMCPSkip(scanStartCmd.Flags(), "watch")
+	scanStartCmd.Flags().StringVar(&scanFailOnSeverity, "fail-on-severity", "", failOnSeverityUsage)
+	markMCPSkip(scanStartCmd.Flags(), "fail-on-severity")
+	scanStartCmd.Flags().StringVar(&scanStartCmdCommitHash, "commit-hash", "", "git commit SHA for traceability (auto-detected in CI/CD)")
+	scanStartCmd.Flags().StringVar(&scanStartCmdCommitLink, "commit-link", "", "URL to commit in your VCS")
+	scanStartCmd.Flags().StringVar(&scanStartCmdCommitBranch, "commit-branch", "", "git branch name (auto-detected in CI/CD)")
+	scanStartCmd.Flags().StringVar(&scanStartCmdCommitAuthor, "commit-author", "", "commit author name or email")
+	scanStartCmd.Flags().StringVar(&scanStartCmdCommitAuthorProfilePictureLink, "profile-picture", "", "URL to author's profile picture")
+	scanStartCmd.Flags().StringVarP(&scanStartCmdConfigurationOverride, "override", "c", "", "JSON configuration override for this scan")
+	scanStartCmd.Flags().StringVar(&scanStartCmdAdditionalProperties, "additional-properties", "", "JSON additional properties for the scan request")
 	scansCmd.AddCommand(scanStartCmd)
 	scansCmd.AddCommand(scanGetCmd)
 	scansCmd.AddCommand(scanIssuesCmd)
+	scanIssuesPage.bind(scanIssuesCmd)
+	scanWatchCmd.Flags().StringVar(&scanFailOnSeverity, "fail-on-severity", "", failOnSeverityUsage)
+	markMCPSkip(scanWatchCmd.Flags(), "fail-on-severity")
 	scansCmd.AddCommand(scanWatchCmd)
 	scansCmd.AddCommand(scanCancelCmd)
 	scansCmd.AddCommand(scanIgnoreCmd)
@@ -914,13 +1237,13 @@ func init() {
 		&scanCoverageStatus,
 		"coverage",
 		"",
-		"filter the targets sample by coverage status (e.g. OK). With --user, match that user's status, not overall. byUser stays exhaustive.",
+		"filter the targets sample by coverage status (e.g. OK, SKIPPED). With --user, match that user's status, not overall. overall and byUser stay exhaustive.",
 	)
 	scansCoverageCmd.Flags().StringVar(
 		&scanCoverageUser,
 		"user",
 		"",
-		"filter the targets sample to routes that include this scanner user. byUser still covers every user.",
+		"filter the targets sample to routes that include this scanner user. overall and byUser still cover every route.",
 	)
 	scansCoverageCmd.Flags().IntVar(
 		&scanCoverageSize,
@@ -929,6 +1252,7 @@ func init() {
 		fmt.Sprintf("max compact routes to return in targets (0 = all matching, max %d)", maxCoverageTargetListSize),
 	)
 	scansCmd.AddCommand(scansProblemsCmd)
+	scanProblemsPage.bind(scansProblemsCmd)
 	scansProblemsCmd.Flags().BoolVar(&scanListAllKinds, "all-kinds", false, "include ASM and all scan kinds (default: DAST and AI Pentesting kinds only)")
 	scansProblemsCmd.PersistentFlags().StringSliceVarP(&scanProfileIDs, "profile-id", "p", []string{}, "filter by profile ID(s) - comma-separated for multiple")
 	scansProblemsCmd.PersistentFlags().StringSliceVar(&scanProjectIDs, "project-id", []string{}, "filter by project ID(s)")
@@ -936,9 +1260,9 @@ func init() {
 	scansProblemsCmd.PersistentFlags().StringVar(&scanAfter, "after", "", "show scans created after this date (RFC3339 format, e.g., 2025-01-01T00:00:00Z)")
 	scansProblemsCmd.PersistentFlags().StringVar(&scanBefore, "before", "", "show scans created before this date (RFC3339 format)")
 	scansProblemsCmd.PersistentFlags().StringVar(&scanIgnored, "ignored", "", "filter by ignored status (true/false)")
-	scansProblemsCmd.PersistentFlags().StringSliceVarP(&scanInitiator, "initiator", "i", []string{}, "filter by initiator: MANUAL, API, SCHEDULED, CI")
-	scansProblemsCmd.PersistentFlags().StringSliceVarP(&scanKinds, "kind", "k", []string{}, "filter by scanner type: BLST_REST, BLST_GRAPHQL, FRONTEND_DAST, AUTOMATED_PENTEST")
-	scansProblemsCmd.PersistentFlags().StringSliceVarP(&scanStatus, "status", "s", []string{}, "filter by status: STARTING, RUNNING, FINISHED, FAILED, CANCELED")
+	scansProblemsCmd.PersistentFlags().StringSliceVarP(&scanInitiator, "initiator", "i", []string{}, scanInitiatorUsage)
+	scansProblemsCmd.PersistentFlags().StringSliceVarP(&scanKinds, "kind", "k", []string{}, scanKindUsage)
+	scansProblemsCmd.PersistentFlags().StringSliceVarP(&scanStatus, "status", "s", []string{}, scanStatusUsage)
 	scansProblemsCmd.PersistentFlags().StringVar(&scanSortType, "sort-by", "", "sort field (e.g., createdAt)")
 	scansProblemsCmd.PersistentFlags().StringVar(&scanSortDirection, "sort-direction", "", "sort direction: asc, desc")
 	rootCmd.AddCommand(scansCmd)

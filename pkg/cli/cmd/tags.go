@@ -57,10 +57,12 @@ Use these tag IDs when filtering or updating assets, profiles, and issues.`,
 		for _, tag := range tags {
 			result = append(result, &tag)
 		}
+
 		out.Table(result, func() []string {
 			for _, tag := range result {
 				fields = append(fields, fmt.Sprintf("%s\t%s\t%s", tag.GetId(), tag.GetName(), tag.GetColor()))
 			}
+
 			return fields
 		})
 
@@ -95,11 +97,14 @@ Create a new tag with a custom name and color. Use hex color codes without the #
 		if strings.TrimSpace(name) == "" || strings.TrimSpace(color) == "" {
 			return errors.New("name and color are required: use --name and --color flags")
 		}
+
 		tag, err := escape.CreateTag(cmd.Context(), name, color)
 		if err != nil {
 			return fmt.Errorf("unable to create tag: %w", err)
 		}
+
 		out.Print(tag, "Tag created")
+
 		return nil
 	},
 }
@@ -131,6 +136,7 @@ var tagsGetCmd = &cobra.Command{
 				fmt.Sprintf("%s\t%s\t%s", tag.GetId(), tag.GetName(), tag.GetColor()),
 			}
 		})
+
 		return nil
 	},
 }
@@ -159,9 +165,11 @@ var tagsUpdateCmd = &cobra.Command{
 		if cmd.Flags().Changed("name") {
 			name = &tagUpdateName
 		}
+
 		if cmd.Flags().Changed("color") {
 			color = &tagUpdateColor
 		}
+
 		if name == nil && color == nil {
 			return errors.New("at least one of --name or --color is required")
 		}
@@ -170,12 +178,14 @@ var tagsUpdateCmd = &cobra.Command{
 		if err != nil {
 			return fmt.Errorf("unable to update tag: %w", err)
 		}
+
 		out.Table(tag, func() []string {
 			return []string{
 				"ID\tNAME\tCOLOR",
 				fmt.Sprintf("%s\t%s\t%s", tag.GetId(), tag.GetName(), tag.GetColor()),
 			}
 		})
+
 		return nil
 	},
 }
@@ -191,12 +201,18 @@ Permanently delete a tag from your organization`,
 	Example: `  # Delete a tag
   escape-cli tags delete 00000000-0000-0000-0000-000000000000`,
 	RunE: func(cmd *cobra.Command, args []string) error {
+		if out.Schema(v3.DeleteProfile200Response{}) {
+			return nil
+		}
+
 		id := args[0]
-		err := escape.DeleteTag(cmd.Context(), id)
+		result, err := escape.DeleteTag(cmd.Context(), id)
 		if err != nil {
 			return fmt.Errorf("unable to delete tag: %w", err)
 		}
-		out.Log("Tag deleted")
+
+		out.Print(result, "Tag deleted")
+
 		return nil
 	},
 }

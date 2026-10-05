@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"io"
@@ -28,6 +29,7 @@ COMMON WORKFLOWS:
 }
 
 var projectsSearchFlag string
+var projectListPage pageFlags
 
 var projectsListCmd = &cobra.Command{
 	Use:     "list",
@@ -40,26 +42,19 @@ var projectsListCmd = &cobra.Command{
 		}
 
 		filters := &escape.ListProjectsFilters{Search: projectsSearchFlag}
-		projects, next, err := escape.ListProjects(cmd.Context(), "", filters)
-		if err != nil {
-			return fmt.Errorf("unable to list projects: %w", err)
-		}
-		all := projects
-		for next != nil && *next != "" {
-			projects, next, err = escape.ListProjects(cmd.Context(), *next, filters)
-			if err != nil {
-				return fmt.Errorf("unable to list projects: %w", err)
-			}
-			all = append(all, projects...)
-		}
-
-		out.Table(all, func() []string {
+		if err := runPagedList(cmd, projectListPage, func(ctx context.Context, cursor string, size int) ([]v3.ListProjects200ResponseDataInner, *string, int, error) {
+			return escape.ListProjects(ctx, cursor, filters, size)
+		}, func(projects []v3.ListProjects200ResponseDataInner) []string {
 			res := []string{"ID\tNAME\tCREATED AT"}
-			for _, p := range all {
+			for _, p := range projects {
 				res = append(res, fmt.Sprintf("%s\t%s\t%s", p.GetId(), p.GetName(), out.GetShortDate(p.GetCreatedAt().String())))
 			}
+
 			return res
-		})
+		}); err != nil {
+			return fmt.Errorf("unable to list projects: %w", err)
+		}
+
 		return nil
 	},
 }
@@ -73,6 +68,7 @@ var projectsGetCmd = &cobra.Command{
 			_ = cmd.Help()
 			return errors.New("project ID is required")
 		}
+
 		return nil
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
@@ -88,8 +84,10 @@ var projectsGetCmd = &cobra.Command{
 		out.Table(project, func() []string {
 			res := []string{"ID\tNAME\tCREATED AT"}
 			res = append(res, fmt.Sprintf("%s\t%s\t%s", project.GetId(), project.GetName(), out.GetShortDate(project.GetCreatedAt().String())))
+
 			return res
 		})
+
 		return nil
 	},
 }
@@ -107,6 +105,7 @@ var projectsCreateCmd = &cobra.Command{
 		if out.InputSchema(v3.CreateProjectRequest{}) {
 			return nil
 		}
+
 		if out.Schema(v3.CreateProject200Response{}) {
 			return nil
 		}
@@ -127,6 +126,7 @@ var projectsCreateCmd = &cobra.Command{
 				fmt.Sprintf("%s\t%s\t%s", project.GetId(), project.GetName(), out.GetShortDate(project.GetCreatedAt().String())),
 			}
 		})
+
 		return nil
 	},
 }
@@ -139,12 +139,14 @@ var projectsUpdateCmd = &cobra.Command{
 			_ = cmd.Help()
 			return errors.New("project ID is required")
 		}
+
 		return nil
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
 		if out.InputSchema(v3.UpdateProjectRequest{}) {
 			return nil
 		}
+
 		if out.Schema(v3.CreateProject200Response{}) {
 			return nil
 		}
@@ -165,6 +167,7 @@ var projectsUpdateCmd = &cobra.Command{
 				fmt.Sprintf("%s\t%s\t%s", project.GetId(), project.GetName(), out.GetShortDate(project.GetCreatedAt().String())),
 			}
 		})
+
 		return nil
 	},
 }
@@ -178,13 +181,20 @@ var projectsDeleteCmd = &cobra.Command{
 			_ = cmd.Help()
 			return errors.New("project ID is required")
 		}
+
 		return nil
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
+		if out.Schema(out.Message{}) {
+			return nil
+		}
+
 		if err := escape.DeleteProject(cmd.Context(), args[0]); err != nil {
 			return fmt.Errorf("failed to delete project: %w", err)
 		}
+
 		out.Log(fmt.Sprintf("Project %s deleted", args[0]))
+
 		return nil
 	},
 }
@@ -192,5 +202,6 @@ var projectsDeleteCmd = &cobra.Command{
 func init() {
 	projectsCmd.AddCommand(projectsListCmd, projectsGetCmd, projectsCreateCmd, projectsUpdateCmd, projectsDeleteCmd)
 	projectsListCmd.Flags().StringVarP(&projectsSearchFlag, "search", "s", "", "search projects by name")
+	projectListPage.bind(projectsListCmd)
 	rootCmd.AddCommand(projectsCmd)
 }

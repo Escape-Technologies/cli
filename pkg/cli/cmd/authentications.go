@@ -33,6 +33,7 @@ var authenticationsStartCmd = &cobra.Command{
 		if out.InputSchema(v3.StartAuthenticationRequest{}) {
 			return nil
 		}
+
 		if out.Schema(v3.StartAuthentication200Response{}) {
 			return nil
 		}
@@ -51,6 +52,7 @@ var authenticationsStartCmd = &cobra.Command{
 		if authenticationsWatch {
 			return watchAuthentication(cmd, auth.GetId())
 		}
+
 		return nil
 	},
 }
@@ -64,12 +66,14 @@ var authenticationsGetCmd = &cobra.Command{
 			_ = cmd.Help()
 			return errors.New("authentication ID is required")
 		}
+
 		return nil
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
 		if out.Schema(v3.GetAuthentication200Response{}) {
 			return nil
 		}
+
 		if authenticationsWatch {
 			return watchAuthentication(cmd, args[0])
 		}
@@ -85,6 +89,7 @@ var authenticationsGetCmd = &cobra.Command{
 				fmt.Sprintf("%s\t%s\t%d%%\t%s\t%d", auth.GetId(), auth.GetStatus(), int(auth.GetProgressRatio()*authenticationProgressPercent), auth.GetCreatedAt(), len(auth.GetEvents())),
 			}
 		})
+
 		return nil
 	},
 }
@@ -124,6 +129,8 @@ func watchAuthentication(cmd *cobra.Command, authenticationID string) error {
 func init() {
 	authenticationsCmd.AddCommand(authenticationsStartCmd, authenticationsGetCmd)
 	authenticationsStartCmd.Flags().BoolVarP(&authenticationsWatch, "watch", "w", false, "watch authentication status until completion")
+	markMCPSkip(authenticationsStartCmd.Flags(), "watch")
 	authenticationsGetCmd.Flags().BoolVarP(&authenticationsWatch, "watch", "w", false, "watch authentication status until completion")
+	markMCPSkip(authenticationsGetCmd.Flags(), "watch")
 	rootCmd.AddCommand(authenticationsCmd)
 }

@@ -23,6 +23,7 @@ func usageTicker(ctx context.Context) {
 			if snapshot.Requests == 0 && snapshot.DNS == 0 {
 				continue
 			}
+
 			log.Info(
 				"Sent %d requests and %d DNS requests in the last 5 minutes",
 				snapshot.Requests,

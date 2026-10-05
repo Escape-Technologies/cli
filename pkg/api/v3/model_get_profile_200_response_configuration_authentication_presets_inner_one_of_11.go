@@ -27,7 +27,6 @@ type GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11 struct 
 	LogoutDetection         *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ParametersLogoutDetection `json:"logout_detection,omitempty"`
 	Extractions             []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1ExtractionsAnyOfInner    `json:"extractions,omitempty"`
 	Injections              NullableGetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11Injections                          `json:"injections,omitempty"`
-	AutoExtractionUrls      []string                                                                                                       `json:"auto_extraction_urls,omitempty"`
 	LoggedInDetectorText    *string                                                                                                        `json:"logged_in_detector_text,omitempty"`
 	LoggedInDetectorTimeout *float32                                                                                                       `json:"logged_in_detector_timeout,omitempty"`
 	Agentic                 *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf2ParametersAgentic         `json:"agentic,omitempty"`
@@ -267,38 +266,6 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11) Un
 	o.Injections.Unset()
 }
 
-// GetAutoExtractionUrls returns the AutoExtractionUrls field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11) GetAutoExtractionUrls() []string {
-	if o == nil || IsNil(o.AutoExtractionUrls) {
-		var ret []string
-		return ret
-	}
-	return o.AutoExtractionUrls
-}
-
-// GetAutoExtractionUrlsOk returns a tuple with the AutoExtractionUrls field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11) GetAutoExtractionUrlsOk() ([]string, bool) {
-	if o == nil || IsNil(o.AutoExtractionUrls) {
-		return nil, false
-	}
-	return o.AutoExtractionUrls, true
-}
-
-// HasAutoExtractionUrls returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11) HasAutoExtractionUrls() bool {
-	if o != nil && !IsNil(o.AutoExtractionUrls) {
-		return true
-	}
-
-	return false
-}
-
-// SetAutoExtractionUrls gets a reference to the given []string and assigns it to the AutoExtractionUrls field.
-func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11) SetAutoExtractionUrls(v []string) {
-	o.AutoExtractionUrls = v
-}
-
 // GetLoggedInDetectorText returns the LoggedInDetectorText field value if set, zero value otherwise.
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11) GetLoggedInDetectorText() string {
 	if o == nil || IsNil(o.LoggedInDetectorText) {
@@ -420,9 +387,6 @@ func (o GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11) ToM
 	if o.Injections.IsSet() {
 		toSerialize["injections"] = o.Injections.Get()
 	}
-	if !IsNil(o.AutoExtractionUrls) {
-		toSerialize["auto_extraction_urls"] = o.AutoExtractionUrls
-	}
 	if !IsNil(o.LoggedInDetectorText) {
 		toSerialize["logged_in_detector_text"] = o.LoggedInDetectorText
 	}
@@ -484,7 +448,6 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11) Un
 		delete(additionalProperties, "logout_detection")
 		delete(additionalProperties, "extractions")
 		delete(additionalProperties, "injections")
-		delete(additionalProperties, "auto_extraction_urls")
 		delete(additionalProperties, "logged_in_detector_text")
 		delete(additionalProperties, "logged_in_detector_timeout")
 		delete(additionalProperties, "agentic")

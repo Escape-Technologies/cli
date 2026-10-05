@@ -29,5 +29,12 @@ linters:
     - contextcheck
     - whitespace
     - wrapcheck
+    - wsl_v5 # Blank line after blocks and before return.
+  settings:
+    wsl_v5:
+      default: none
+      enable:
+        - after-block
+        - return
 run:
   timeout: 5m

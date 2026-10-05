@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"io"
@@ -32,6 +33,7 @@ var workflowsSearchFlag string
 var workflowsProjectIDs []string
 var workflowsIntegrationIDs []string
 var workflowsWorkflowIDs []string
+var workflowListPage pageFlags
 
 var workflowsListCmd = &cobra.Command{
 	Use:     "list",
@@ -50,26 +52,19 @@ var workflowsListCmd = &cobra.Command{
 			IntegrationIDs: workflowsIntegrationIDs,
 			WorkflowIDs:    workflowsWorkflowIDs,
 		}
-		workflows, next, err := escape.ListWorkflows(cmd.Context(), "", filters)
-		if err != nil {
-			return fmt.Errorf("unable to list workflows: %w", err)
-		}
-		all := workflows
-		for next != nil && *next != "" {
-			workflows, next, err = escape.ListWorkflows(cmd.Context(), *next, filters)
-			if err != nil {
-				return fmt.Errorf("unable to list workflows: %w", err)
-			}
-			all = append(all, workflows...)
-		}
-
-		out.Table(all, func() []string {
+		if err := runPagedList(cmd, workflowListPage, func(ctx context.Context, cursor string, size int) ([]v3.WorkflowSummarized, *string, int, error) {
+			return escape.ListWorkflows(ctx, cursor, filters, size)
+		}, func(workflows []v3.WorkflowSummarized) []string {
 			res := []string{"ID\tNAME\tTRIGGER"}
-			for _, w := range all {
+			for _, w := range workflows {
 				res = append(res, fmt.Sprintf("%s\t%s\t%s", w.GetId(), w.GetName(), w.GetTrigger()))
 			}
+
 			return res
-		})
+		}); err != nil {
+			return fmt.Errorf("unable to list workflows: %w", err)
+		}
+
 		return nil
 	},
 }
@@ -83,6 +78,7 @@ var workflowsGetCmd = &cobra.Command{
 			_ = cmd.Help()
 			return errors.New("workflow ID is required")
 		}
+
 		return nil
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
@@ -98,8 +94,10 @@ var workflowsGetCmd = &cobra.Command{
 		out.Table(workflow, func() []string {
 			res := []string{"ID\tNAME\tTRIGGER"}
 			res = append(res, fmt.Sprintf("%s\t%s\t%s", workflow.GetId(), workflow.GetName(), workflow.GetTrigger()))
+
 			return res
 		})
+
 		return nil
 	},
 }
@@ -117,6 +115,7 @@ var workflowsCreateCmd = &cobra.Command{
 		if out.InputSchema(v3.CreateWorkflowRequest{}) {
 			return nil
 		}
+
 		if out.Schema(v3.CreateWorkflow200Response{}) {
 			return nil
 		}
@@ -137,6 +136,7 @@ var workflowsCreateCmd = &cobra.Command{
 				fmt.Sprintf("%s\t%s\t%s", workflow.GetId(), workflow.GetName(), workflow.GetTrigger()),
 			}
 		})
+
 		return nil
 	},
 }
@@ -149,12 +149,14 @@ var workflowsUpdateCmd = &cobra.Command{
 			_ = cmd.Help()
 			return errors.New("workflow ID is required")
 		}
+
 		return nil
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
 		if out.InputSchema(v3.UpdateWorkflowRequest{}) {
 			return nil
 		}
+
 		if out.Schema(v3.CreateWorkflow200Response{}) {
 			return nil
 		}
@@ -175,6 +177,7 @@ var workflowsUpdateCmd = &cobra.Command{
 				fmt.Sprintf("%s\t%s\t%s", workflow.GetId(), workflow.GetName(), workflow.GetTrigger()),
 			}
 		})
+
 		return nil
 	},
 }
@@ -188,13 +191,21 @@ var workflowsDeleteCmd = &cobra.Command{
 			_ = cmd.Help()
 			return errors.New("workflow ID is required")
 		}
+
 		return nil
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
-		if err := escape.DeleteWorkflow(cmd.Context(), args[0]); err != nil {
+		if out.Schema(v3.CreateWorkflow200Response{}) {
+			return nil
+		}
+
+		result, err := escape.DeleteWorkflow(cmd.Context(), args[0])
+		if err != nil {
 			return fmt.Errorf("failed to delete workflow: %w", err)
 		}
-		out.Log(fmt.Sprintf("Workflow %s deleted", args[0]))
+
+		out.Print(result, fmt.Sprintf("Workflow %s deleted", args[0]))
+
 		return nil
 	},
 }
@@ -206,5 +217,6 @@ func init() {
 	workflowsListCmd.Flags().StringSliceVar(&workflowsProjectIDs, "project-id", []string{}, "filter by project ID(s)")
 	workflowsListCmd.Flags().StringSliceVar(&workflowsIntegrationIDs, "integration-id", []string{}, "filter by integration ID(s)")
 	workflowsListCmd.Flags().StringSliceVar(&workflowsWorkflowIDs, "workflow-id", []string{}, "filter by workflow ID(s)")
+	workflowListPage.bind(workflowsListCmd)
 	rootCmd.AddCommand(workflowsCmd)
 }

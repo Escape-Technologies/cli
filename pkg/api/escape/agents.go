@@ -61,22 +61,28 @@ func ListScanAgents(
 	if next != "" {
 		query.Set("cursor", next)
 	}
+
 	if size > 0 {
 		query.Set("size", strconv.Itoa(size))
 	}
+
 	if filters != nil {
 		if filters.Search != "" {
 			query.Set("search", filters.Search)
 		}
+
 		if filters.EventSearch != "" {
 			query.Set("eventSearch", filters.EventSearch)
 		}
+
 		if filters.RootsOnly {
 			query.Set("rootsOnly", "true")
 		}
+
 		if filters.SortType != "" {
 			query.Set("sortType", filters.SortType)
 		}
+
 		if filters.SortDirection != "" {
 			query.Set("sortDirection", filters.SortDirection)
 		}
@@ -91,6 +97,7 @@ func ListScanAgents(
 	if err := rawRequest(ctx, "GET", path, nil, &page); err != nil {
 		return nil, nil, fmt.Errorf("unable to list scan agents: %w", err)
 	}
+
 	return page.Data, page.NextCursor, nil
 }
 
@@ -114,6 +121,7 @@ func ListScanAgentLogs(
 	if strings.TrimSpace(scanID) == "" {
 		return nil, nil, errors.New("scanID is required")
 	}
+
 	if strings.TrimSpace(agentID) == "" {
 		return nil, nil, errors.New("agentID is required")
 	}
@@ -122,19 +130,24 @@ func ListScanAgentLogs(
 	if next != "" {
 		query.Set("cursor", next)
 	}
+
 	if size > 0 {
 		query.Set("size", strconv.Itoa(size))
 	}
+
 	if filters != nil {
 		if filters.Search != "" {
 			query.Set("search", filters.Search)
 		}
+
 		for _, stage := range filters.Stages {
 			query.Add("stages", stage)
 		}
+
 		if filters.SortType != "" {
 			query.Set("sortType", filters.SortType)
 		}
+
 		if filters.SortDirection != "" {
 			query.Set("sortDirection", filters.SortDirection)
 		}
@@ -149,5 +162,6 @@ func ListScanAgentLogs(
 	if err := rawRequest(ctx, "GET", path, nil, &page); err != nil {
 		return nil, nil, fmt.Errorf("unable to list scan agent logs: %w", err)
 	}
+
 	return page.Data, page.NextCursor, nil
 }

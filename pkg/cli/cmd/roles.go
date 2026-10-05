@@ -47,8 +47,10 @@ var rolesListCmd = &cobra.Command{
 			for _, r := range roles {
 				res = append(res, fmt.Sprintf("%s\t%s\t%s", r.GetId(), r.GetName(), out.GetShortDate(r.GetCreatedAt().String())))
 			}
+
 			return res
 		})
+
 		return nil
 	},
 }
@@ -62,6 +64,7 @@ var rolesGetCmd = &cobra.Command{
 			_ = cmd.Help()
 			return errors.New("role ID is required")
 		}
+
 		return nil
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
@@ -77,8 +80,10 @@ var rolesGetCmd = &cobra.Command{
 		out.Table(role, func() []string {
 			res := []string{"ID\tNAME\tCREATED AT"}
 			res = append(res, fmt.Sprintf("%s\t%s\t%s", role.GetId(), role.GetName(), out.GetShortDate(role.GetCreatedAt().String())))
+
 			return res
 		})
+
 		return nil
 	},
 }
@@ -103,6 +108,7 @@ Use --input-schema to see the expected JSON format.`,
 		if out.InputSchema(v3.CreateRoleRequest{}) {
 			return nil
 		}
+
 		if out.Schema(v3.CreateRole200Response{}) {
 			return nil
 		}
@@ -123,6 +129,7 @@ Use --input-schema to see the expected JSON format.`,
 				fmt.Sprintf("%s\t%s\t%s", role.GetId(), role.GetName(), out.GetShortDate(role.GetCreatedAt().String())),
 			}
 		})
+
 		return nil
 	},
 }
@@ -135,12 +142,14 @@ var rolesUpdateCmd = &cobra.Command{
 			_ = cmd.Help()
 			return errors.New("role ID is required")
 		}
+
 		return nil
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
 		if out.InputSchema(v3.UpdateRoleRequest{}) {
 			return nil
 		}
+
 		if out.Schema(v3.CreateRole200Response{}) {
 			return nil
 		}
@@ -161,6 +170,7 @@ var rolesUpdateCmd = &cobra.Command{
 				fmt.Sprintf("%s\t%s\t%s", role.GetId(), role.GetName(), out.GetShortDate(role.GetCreatedAt().String())),
 			}
 		})
+
 		return nil
 	},
 }
@@ -177,6 +187,10 @@ var rolesBindCmd = &cobra.Command{
   escape-cli roles bind --role-id <role-id> --user-id <user-id>`,
 	Args: cobra.NoArgs,
 	RunE: func(cmd *cobra.Command, _ []string) error {
+		if out.Schema([]v3.CreateRoleBindings200ResponseInner{}) {
+			return nil
+		}
+
 		if rolesBindRoleID == "" || rolesBindUserID == "" {
 			return errors.New("--role-id and --user-id are required")
 		}
@@ -191,8 +205,10 @@ var rolesBindCmd = &cobra.Command{
 			for _, b := range bindings {
 				res = append(res, fmt.Sprintf("%s\t%s\t%s", b.GetId(), b.GetRoleId(), b.GetUserId()))
 			}
+
 			return res
 		})
+
 		return nil
 	},
 }
@@ -205,13 +221,21 @@ var rolesUnbindCmd = &cobra.Command{
 			_ = cmd.Help()
 			return errors.New("binding ID is required")
 		}
+
 		return nil
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
-		if err := escape.DeleteRoleBinding(cmd.Context(), args[0]); err != nil {
+		if out.Schema(v3.DeleteCustomRule200Response{}) {
+			return nil
+		}
+
+		result, err := escape.DeleteRoleBinding(cmd.Context(), args[0])
+		if err != nil {
 			return fmt.Errorf("failed to unbind role: %w", err)
 		}
-		out.Log(fmt.Sprintf("Role binding %s removed", args[0]))
+
+		out.Print(result, fmt.Sprintf("Role binding %s removed", args[0]))
+
 		return nil
 	},
 }
@@ -225,13 +249,20 @@ var rolesDeleteCmd = &cobra.Command{
 			_ = cmd.Help()
 			return errors.New("role ID is required")
 		}
+
 		return nil
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
+		if out.Schema(out.Message{}) {
+			return nil
+		}
+
 		if err := escape.DeleteRole(cmd.Context(), args[0]); err != nil {
 			return fmt.Errorf("failed to delete role: %w", err)
 		}
+
 		out.Log(fmt.Sprintf("Role %s deleted", args[0]))
+
 		return nil
 	},
 }

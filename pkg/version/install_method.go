@@ -112,6 +112,7 @@ func isHomebrewCaskPath(path string, goos string) bool {
 		}
 
 		version, binary, ok := strings.Cut(rest, "/")
+
 		return ok && version != "" && binary == "escape-cli"
 	}
 
@@ -144,6 +145,7 @@ func (i InstallInfo) DisplayName() string {
 		if i.Path == "" {
 			return "curl script"
 		}
+
 		return fmt.Sprintf("curl script (%s)", i.Path)
 	case InstallMethodDocker:
 		return "docker image"
@@ -153,16 +155,19 @@ func (i InstallInfo) DisplayName() string {
 		if i.Path == "" {
 			return "Homebrew cask"
 		}
+
 		return fmt.Sprintf("Homebrew cask (%s)", i.Path)
 	case InstallMethodWindowsScript:
 		if i.Path == "" {
 			return "PowerShell script"
 		}
+
 		return fmt.Sprintf("PowerShell script (%s)", i.Path)
 	case InstallMethodManual:
 		if i.Path == "" {
 			return "manual install"
 		}
+
 		return fmt.Sprintf("manual install (%s)", i.Path)
 	default:
 		return "unknown install"
@@ -180,6 +185,7 @@ func UpgradeCommand(method InstallMethod, latestVersion string) string {
 		if latestVersion == "" {
 			return "uses: Escape-Technologies/cli@latest"
 		}
+
 		return "uses: Escape-Technologies/cli@v" + normalizeVersion(latestVersion)
 	case InstallMethodHomebrew:
 		return "brew upgrade --cask escape-technologies/tap/escape-cli"

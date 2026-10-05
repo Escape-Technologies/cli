@@ -27,6 +27,7 @@ func newPublicAPIHandlerWithFixture(t *testing.T) (handler func(ctx context.Cont
 	}))
 	t.Cleanup(srv.Close)
 	index := NewOpenAPISearchIndex(OpenAPISearchIndexOptions{SpecURL: srv.URL})
+
 	return buildPublicAPIHandler(index, "https://public.escape.tech"), srv.URL
 }
 
@@ -46,6 +47,7 @@ func TestPublicAPIHandler_AuthGate(t *testing.T) {
 	if err != nil {
 		t.Fatalf("handler err: %v", err)
 	}
+
 	if !res.IsError {
 		t.Fatalf("expected auth error, got: %+v", res)
 	}
@@ -61,6 +63,7 @@ func TestPublicAPIHandler_RejectsEmptyQuestion(t *testing.T) {
 	if err != nil {
 		t.Fatalf("handler err: %v", err)
 	}
+
 	if !res.IsError {
 		t.Fatalf("expected validation error for empty question, got: %+v", res)
 	}
@@ -76,6 +79,7 @@ func TestPublicAPIHandler_ReturnsCurlBlock(t *testing.T) {
 	if err != nil {
 		t.Fatalf("handler err: %v", err)
 	}
+
 	if res.IsError {
 		t.Fatalf("unexpected error result: %+v", res)
 	}
@@ -84,9 +88,11 @@ func TestPublicAPIHandler_ReturnsCurlBlock(t *testing.T) {
 	if !strings.Contains(text, "```bash") {
 		t.Fatalf("expected fenced bash block, got:\n%s", text)
 	}
+
 	if !strings.Contains(text, "X-ESCAPE-API-KEY: $ESCAPE_API_KEY") {
 		t.Fatalf("expected API key placeholder header, got:\n%s", text)
 	}
+
 	if !strings.Contains(text, "## GET /scans") {
 		t.Fatalf("expected GET /scans heading, got:\n%s", text)
 	}
@@ -96,13 +102,44 @@ func TestPublicAPIHandler_ReturnsCurlBlock(t *testing.T) {
 	if !ok || len(matches) == 0 {
 		t.Fatalf("expected non-empty matches in payload, got %T %v", payload["matches"], payload["matches"])
 	}
+
 	first := matches[0].(map[string]any)
 	if first["method"] != "GET" || first["path"] != "/scans" {
 		t.Fatalf("unexpected first match: %+v", first)
 	}
-	if curl, _ := first["curl"].(string); !strings.Contains(curl, "--data-urlencode 'after=") {
-		t.Fatalf("expected after= placeholder in curl, got:\n%s", curl)
+
+	curl, _ := first["curl"].(string)
+	if strings.Contains(curl, "after=") {
+		t.Fatalf("optional after filter was sent in the command:\n%s", curl)
 	}
+
+	if !strings.Contains(curl, "size=50") {
+		t.Fatalf("expected defaulted page size in the command, got:\n%s", curl)
+	}
+
+	if strings.Contains(curlBlock(t, text), "after (string") {
+		t.Fatalf("optional parameters were placed inside the bash block:\n%s", text)
+	}
+
+	if !strings.Contains(text, "- after (string, date-time)") {
+		t.Fatalf("expected after to be listed after the command, got:\n%s", text)
+	}
+}
+
+func curlBlock(t *testing.T, text string) string {
+	t.Helper()
+	start := strings.Index(text, "```bash")
+	if start == -1 {
+		t.Fatalf("missing bash fence in:\n%s", text)
+	}
+
+	rest := text[start+len("```bash"):]
+	end := strings.Index(rest, "```")
+	if end == -1 {
+		t.Fatalf("unclosed bash fence in:\n%s", text)
+	}
+
+	return rest[:end]
 }
 
 func TestPublicAPIHandler_ReturnsLocationsOperation(t *testing.T) {
@@ -115,6 +152,7 @@ func TestPublicAPIHandler_ReturnsLocationsOperation(t *testing.T) {
 	if err != nil {
 		t.Fatalf("handler err: %v", err)
 	}
+
 	if res.IsError {
 		t.Fatalf("unexpected error result: %+v", res)
 	}
@@ -129,10 +167,12 @@ func TestPublicAPIHandler_ReturnsLocationsOperation(t *testing.T) {
 	if !ok || len(matches) == 0 {
 		t.Fatalf("expected non-empty matches in payload, got %T %v", payload["matches"], payload["matches"])
 	}
+
 	first := matches[0].(map[string]any)
 	if first["method"] != "GET" || first["path"] != "/locations" {
 		t.Fatalf("unexpected first match: %+v", first)
 	}
+
 	if curl, _ := first["curl"].(string); !strings.Contains(curl, "https://public.escape.tech/v3/locations") {
 		t.Fatalf("expected public API locations curl, got:\n%s", curl)
 	}
@@ -173,13 +213,16 @@ func TestPublicAPIHandler_FallbackOnSpecUnavailable(t *testing.T) {
 	if err != nil {
 		t.Fatalf("handler err: %v", err)
 	}
+
 	if res.IsError {
 		t.Fatalf("fallback should be a normal result, not an error")
 	}
+
 	payload := structuredFromResult(t, res)
 	if fallback, _ := payload["fallback"].(bool); !fallback {
 		t.Fatalf("expected fallback=true, got %v", payload)
 	}
+
 	if specOff, _ := payload["specUnavailable"].(bool); !specOff {
 		t.Fatalf("expected specUnavailable=true, got %v", payload)
 	}
@@ -192,14 +235,17 @@ func TestResolveBaseURL_Precedence(t *testing.T) {
 	if got := resolveBaseURL("https://staging.escape.tech", []string{"https://ignored/v3"}); got != "https://staging.escape.tech/v3" {
 		t.Fatalf("configured w/o /v3: got %q", got)
 	}
+
 	// Configured already ending in /v3 stays as-is.
 	if got := resolveBaseURL("https://staging.escape.tech/v3", nil); got != "https://staging.escape.tech/v3" {
 		t.Fatalf("configured /v3: got %q", got)
 	}
+
 	// Falls back to spec server.
 	if got := resolveBaseURL("", []string{"https://public.escape.tech/v3"}); got != "https://public.escape.tech/v3" {
 		t.Fatalf("spec server fallback: got %q", got)
 	}
+
 	// Final default.
 	if got := resolveBaseURL("", nil); got != publicAPIDefaultBaseURL {
 		t.Fatalf("default fallback: got %q", got)
@@ -213,7 +259,9 @@ func textFromResult(t *testing.T, res *mcpgo.CallToolResult) string {
 			return tc.Text
 		}
 	}
+
 	t.Fatalf("no TextContent in result: %+v", res)
+
 	return ""
 }
 
@@ -222,13 +270,16 @@ func structuredFromResult(t *testing.T, res *mcpgo.CallToolResult) map[string]an
 	if res.StructuredContent == nil {
 		t.Fatalf("missing structured content")
 	}
+
 	encoded, err := json.Marshal(res.StructuredContent)
 	if err != nil {
 		t.Fatalf("marshal structured: %v", err)
 	}
+
 	var out map[string]any
 	if err := json.Unmarshal(encoded, &out); err != nil {
 		t.Fatalf("unmarshal structured: %v", err)
 	}
+
 	return out
 }

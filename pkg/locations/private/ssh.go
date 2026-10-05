@@ -22,6 +22,7 @@ func getClient(target string, conn net.Conn, config *ssh.ClientConfig) (*ssh.Cli
 	if err != nil {
 		return nil, fmt.Errorf("failed to create client conn: %w", err)
 	}
+
 	return ssh.NewClient(c, chans, reqs), nil
 }
 
@@ -66,5 +67,6 @@ func dialSSH(ctx context.Context, locationID string, sshPrivateKey ed25519.Priva
 	if err != nil {
 		return fmt.Errorf("failed to start listener: %w", err)
 	}
+
 	return nil
 }

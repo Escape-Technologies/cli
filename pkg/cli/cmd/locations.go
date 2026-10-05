@@ -1,6 +1,9 @@
 package cmd
 
 import (
+	"bytes"
+	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"strconv"
@@ -17,6 +20,7 @@ var locationsEnabled = false
 var locationsLocationTypes = []string{}
 var locationsSortType string
 var locationsSortDirection string
+var locationListPage pageFlags
 
 var locationsCmd = &cobra.Command{
 	Use:     "locations",
@@ -70,21 +74,11 @@ ID                                      NAME                 TYPE     ENABLED  L
 			SortType:      locationsSortType,
 			SortDirection: locationsSortDirection,
 		}
-		locations, next, err := escape.ListLocations(cmd.Context(), "", filters)
-		if err != nil {
-			return fmt.Errorf("failed to list locations: %w", err)
-		}
-		allLocations := locations
-		for next != nil && *next != "" {
-			locations, next, err = escape.ListLocations(cmd.Context(), *next, filters)
-			if err != nil {
-				return fmt.Errorf("failed to list locations: %w", err)
-			}
-			allLocations = append(allLocations, locations...)
-		}
-		out.Table(allLocations, func() []string {
+		if err := runPagedList(cmd, locationListPage, func(ctx context.Context, cursor string, size int) ([]v3.LocationSummarized, *string, int, error) {
+			return escape.ListLocations(ctx, cursor, filters, size)
+		}, func(locations []v3.LocationSummarized) []string {
 			res := []string{"ID\tNAME\tTYPE\tENABLED\tLAST SEEN\tLINK"}
-			for _, location := range allLocations {
+			for _, location := range locations {
 				res = append(
 					res,
 					fmt.Sprintf(
@@ -98,8 +92,12 @@ ID                                      NAME                 TYPE     ENABLED  L
 					),
 				)
 			}
+
 			return res
-		})
+		}); err != nil {
+			return fmt.Errorf("failed to list locations: %w", err)
+		}
+
 		return nil
 	},
 }
@@ -121,12 +119,14 @@ var locationsGetCmd = &cobra.Command{
 		if err != nil {
 			return fmt.Errorf("failed to get location: %w", err)
 		}
+
 		out.Table(location, func() []string {
 			return []string{
 				"ID\tNAME\tTYPE\tENABLED\tLINK",
 				fmt.Sprintf("%s\t%s\t%s\t%s\t%s", location.GetId(), location.GetName(), location.GetType(), strconv.FormatBool(location.GetEnabled()), location.GetLinks().LocationOverview),
 			}
 		})
+
 		return nil
 	},
 }
@@ -166,6 +166,7 @@ Run with -v for detailed logging. Use Ctrl+C to stop gracefully.`,
 			out.SetupTerminalLog()
 			defer out.StopTerminalLog()
 		}
+
 		return locations.Start(cmd.Context(), args[0])
 	},
 }
@@ -181,11 +182,17 @@ Location deleted`,
 	Args:    cobra.ExactArgs(1),
 	Example: `escape-cli locations delete 00000000-0000-0000-0000-000000000000`,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		err := escape.DeleteLocation(cmd.Context(), args[0])
+		if out.Schema(v3.DeleteLocation200Response{}) {
+			return nil
+		}
+
+		result, err := escape.DeleteLocation(cmd.Context(), args[0])
 		if err != nil {
 			return fmt.Errorf("failed to delete location: %w", err)
 		}
-		out.Log("Location deleted")
+
+		out.Print(result, "Location deleted")
+
 		return nil
 	},
 }
@@ -206,24 +213,50 @@ var locationsCreateCmd = &cobra.Command{
 Register a new private location in the Escape platform. After creation,
 deploy the agent using 'escape-cli locations start <name>'.`,
 	Example: `  # Create a new location
-  escape-cli locations create --name "prod-vpc" --ssh-public-key "ssh-ed25519 AAAA..."`,
+  escape-cli locations create --name "prod-vpc" --ssh-public-key "ssh-ed25519 AAAA..."
+
+  # Or pipe the JSON body the command advertises. Flags override the body.
+  echo '{"name":"prod-vpc","sshPublicKey":"ssh-ed25519 AAAA..."}' | escape-cli locations create`,
 	Args: cobra.NoArgs,
 	RunE: func(cmd *cobra.Command, _ []string) error {
 		if out.InputSchema(v3.CreateLocationRequest{}) {
 			return nil
 		}
+
 		if out.Schema(v3.CreateLocation200Response{}) {
 			return nil
 		}
-		if locationCreateName == "" {
-			return errors.New("--name is required")
+
+		var body locationBody
+		// Stdin is the body only when --name was not passed. A set name means
+		// the caller already supplied the input, and reading a pipe here
+		// steals the next line of a shell loop.
+		if !cmd.Flags().Changed("name") {
+			var err error
+			body, err = readLocationBody(cmd)
+			if err != nil {
+				return err
+			}
 		}
 
-		id, err := escape.CreateLocation(cmd.Context(), locationCreateName, locationCreateSSHPublicKey)
+		created, err := mergeLocationCreate(
+			body,
+			locationCreateName,
+			locationCreateSSHPublicKey,
+			cmd.Flags().Changed("name"),
+			cmd.Flags().Changed("ssh-public-key"),
+		)
+		if err != nil {
+			return err
+		}
+
+		location, err := escape.CreateLocation(cmd.Context(), created.Name, created.SSHPublicKey)
 		if err != nil {
 			return fmt.Errorf("failed to create location: %w", err)
 		}
-		out.Log("Location created: " + id)
+
+		out.Print(location, "Location created: "+location.GetId())
+
 		return nil
 	},
 }
@@ -233,41 +266,148 @@ var locationsUpdateCmd = &cobra.Command{
 	Short: "Update an existing location",
 	Long:  `Update Location - Modify Name or SSH Public Key`,
 	Example: `  # Update location name
-  escape-cli locations update <location-id> --name "new-name"`,
+  escape-cli locations update <location-id> --name "new-name"
+
+  # Or pipe the JSON body. Flags override the body.
+  echo '{"enabled":false}' | escape-cli locations update <location-id>`,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		if out.InputSchema(v3.UpdateLocationRequest{}) {
 			return nil
 		}
+
 		if out.Schema(v3.CreateLocation200Response{}) {
 			return nil
 		}
+
 		if len(args) != 1 {
 			_ = cmd.Help()
 			return errors.New("location ID is required")
 		}
 
-		var name *string
-		var sshPublicKey *string
-		var enabled *bool
-		if cmd.Flags().Changed("name") {
-			name = &locationUpdateName
+		var body locationBody
+		// Same rule as create: read the body only when no update flag was set.
+		if !cmd.Flags().Changed("name") && !cmd.Flags().Changed("ssh-public-key") && !cmd.Flags().Changed("enabled") {
+			var err error
+			body, err = readLocationBody(cmd)
+			if err != nil {
+				return err
+			}
 		}
-		if cmd.Flags().Changed("ssh-public-key") {
-			sshPublicKey = &locationUpdateSSHPublicKey
+
+		updated, err := mergeLocationUpdate(
+			body,
+			locationUpdateName,
+			locationUpdateSSHPublicKey,
+			locationUpdateEnabled,
+			cmd.Flags().Changed("name"),
+			cmd.Flags().Changed("ssh-public-key"),
+			cmd.Flags().Changed("enabled"),
+		)
+		if err != nil {
+			return err
 		}
-		if cmd.Flags().Changed("enabled") {
-			enabled = &locationUpdateEnabled
-		}
-		if name == nil && sshPublicKey == nil && enabled == nil {
-			return errors.New("at least one of --name, --ssh-public-key, or --enabled is required")
-		}
-		err := escape.UpdateLocation(cmd.Context(), args[0], name, sshPublicKey, enabled)
+
+		location, err := escape.UpdateLocation(cmd.Context(), args[0], updated.Name, updated.SSHPublicKey, updated.Enabled)
 		if err != nil {
 			return fmt.Errorf("failed to update location: %w", err)
 		}
-		out.Log(fmt.Sprintf("Location %s updated", args[0]))
+
+		out.Print(location, fmt.Sprintf("Location %s updated", args[0]))
+
 		return nil
 	},
+}
+
+// locationBody is the stdin shape advertised for location create and update.
+// Pointers keep omitted fields distinct from empty and false.
+type locationBody struct {
+	Name         *string `json:"name"`
+	SSHPublicKey *string `json:"sshPublicKey"`
+	Enabled      *bool   `json:"enabled"`
+}
+
+type locationCreateInput struct {
+	Name         string
+	SSHPublicKey string
+}
+
+type locationUpdateInput struct {
+	Name         *string
+	SSHPublicKey *string
+	Enabled      *bool
+}
+
+func readLocationBody(cmd *cobra.Command) (locationBody, error) {
+	data, err := readPipedStdin(cmd.InOrStdin())
+	if err != nil {
+		return locationBody{}, err
+	}
+
+	return parseLocationBody(data)
+}
+
+func parseLocationBody(stdin []byte) (locationBody, error) {
+	if len(bytes.TrimSpace(stdin)) == 0 {
+		return locationBody{}, nil
+	}
+
+	var body locationBody
+	if err := json.Unmarshal(stdin, &body); err != nil {
+		return locationBody{}, fmt.Errorf("invalid JSON: %w", err)
+	}
+
+	return body, nil
+}
+
+// mergeLocationCreate overlays flags on the stdin body. A flag that was set
+// wins, including when it is empty. An unset flag leaves the body value, and
+// falls back to the flag variable so flag-only calls keep working.
+func mergeLocationCreate(body locationBody, nameFlag, sshFlag string, nameChanged, sshChanged bool) (locationCreateInput, error) {
+	name := nameFlag
+	ssh := sshFlag
+	if body.Name != nil && !nameChanged {
+		name = *body.Name
+	}
+
+	if body.SSHPublicKey != nil && !sshChanged {
+		ssh = *body.SSHPublicKey
+	}
+
+	if name == "" {
+		return locationCreateInput{}, errors.New("--name is required")
+	}
+
+	return locationCreateInput{Name: name, SSHPublicKey: ssh}, nil
+}
+
+// mergeLocationUpdate overlays flags on the stdin body. false and empty string
+// count as set when the flag was passed or the JSON field was present.
+func mergeLocationUpdate(
+	body locationBody,
+	nameFlag, sshFlag string,
+	enabledFlag bool,
+	nameChanged, sshChanged, enabledChanged bool,
+) (locationUpdateInput, error) {
+	name := body.Name
+	ssh := body.SSHPublicKey
+	enabled := body.Enabled
+	if nameChanged {
+		name = &nameFlag
+	}
+
+	if sshChanged {
+		ssh = &sshFlag
+	}
+
+	if enabledChanged {
+		enabled = &enabledFlag
+	}
+
+	if name == nil && ssh == nil && enabled == nil {
+		return locationUpdateInput{}, errors.New("at least one of --name, --ssh-public-key, or --enabled is required")
+	}
+
+	return locationUpdateInput{Name: name, SSHPublicKey: ssh, Enabled: enabled}, nil
 }
 
 func init() {
@@ -280,9 +420,10 @@ func init() {
 	rootCmd.AddCommand(locationsCmd)
 	locationsListCmd.Flags().StringVarP(&locationsSearch, "search", "s", "", "Search term to filter locations by")
 	locationsListCmd.Flags().BoolVarP(&locationsEnabled, "enabled", "e", false, "Filter by enabled locations")
-	locationsListCmd.Flags().StringSliceVarP(&locationsLocationTypes, "type", "t", []string{}, "Filter by location type: PRIVATE or ESCAPE (case-insensitive)")
+	locationsListCmd.Flags().StringSliceVarP(&locationsLocationTypes, "type", "t", []string{}, "Filter by location type, case-insensitive (PRIVATE or ESCAPE)")
 	locationsListCmd.Flags().StringVar(&locationsSortType, "sort-by", "", "sort field")
 	locationsListCmd.Flags().StringVar(&locationsSortDirection, "sort-direction", "", "sort direction: asc, desc")
+	locationListPage.bind(locationsListCmd)
 	locationsCreateCmd.Flags().StringVar(&locationCreateName, "name", "", "location name")
 	locationsCreateCmd.Flags().StringVar(&locationCreateSSHPublicKey, "ssh-public-key", "", "SSH public key for the location")
 	locationsUpdateCmd.Flags().StringVar(&locationUpdateName, "name", "", "new location name")

@@ -61,6 +61,7 @@ func RegisterPublicAPITools(server *mcpserver.MCPServer, opts PublicAPIOptions) 
 	)
 
 	server.AddTool(tool, buildPublicAPIHandler(index, opts.PublicAPIURL))
+
 	return nil
 }
 
@@ -81,6 +82,7 @@ func buildPublicAPIHandler(index *OpenAPISearchIndex, configuredBaseURL string) 
 		if limit < 1 {
 			limit = publicAPIDefaultLimit
 		}
+
 		if limit > publicAPIMaxLimit {
 			limit = publicAPIMaxLimit
 		}
@@ -89,11 +91,13 @@ func buildPublicAPIHandler(index *OpenAPISearchIndex, configuredBaseURL string) 
 		if err != nil {
 			return formatPublicAPIFallback(question, err), nil
 		}
+
 		if len(matches) == 0 {
 			return formatPublicAPIFallback(question, nil), nil
 		}
 
 		baseURL := resolveBaseURL(configuredBaseURL, servers)
+
 		return formatPublicAPIResult(question, matches, baseURL), nil
 	}
 }
@@ -109,11 +113,14 @@ func resolveBaseURL(configured string, servers []string) string {
 		if strings.HasSuffix(base, "/v3") {
 			return base
 		}
+
 		return base + "/v3"
 	}
+
 	if len(servers) > 0 && strings.TrimSpace(servers[0]) != "" {
 		return strings.TrimRight(servers[0], "/")
 	}
+
 	return publicAPIDefaultBaseURL
 }
 
@@ -122,19 +129,25 @@ func formatPublicAPIResult(question string, matches []indexedOperation, baseURL 
 
 	apiMatches := make([]map[string]any, 0, len(matches))
 	for i, op := range matches {
-		curl := RenderCurl(op, baseURL)
+		command, notes := RenderCurl(op, baseURL)
 		header := fmt.Sprintf("## %s %s", op.Method, op.Path)
 		if i > 0 {
 			lines = append(lines, "")
 		}
+
 		lines = append(lines, header)
 		if op.Summary != "" {
 			lines = append(lines, op.Summary)
 		}
+
 		if op.Description != "" {
 			lines = append(lines, "", op.Description)
 		}
-		lines = append(lines, "", "```bash", curl, "```")
+
+		lines = append(lines, "", "```bash", command, "```")
+		if notes != "" {
+			lines = append(lines, "", notes)
+		}
 
 		apiMatches = append(apiMatches, map[string]any{
 			"operationId": op.OperationID,
@@ -145,7 +158,7 @@ func formatPublicAPIResult(question string, matches []indexedOperation, baseURL 
 			"tags":        op.Tags,
 			"parameters":  op.Parameters,
 			"requestBody": op.RequestBody,
-			"curl":        curl,
+			"curl":        command,
 		})
 	}
 
@@ -154,6 +167,7 @@ func formatPublicAPIResult(question string, matches []indexedOperation, baseURL 
 		"baseUrl":  baseURL,
 		"matches":  apiMatches,
 	}
+
 	return mcpgo.NewToolResultStructured(payload, strings.Join(lines, "\n"))
 }
 
@@ -162,6 +176,7 @@ func formatPublicAPIFallback(question string, fetchErr error) *mcpgo.CallToolRes
 	if fetchErr != nil {
 		lead = "The OpenAPI spec is temporarily unreachable; please try again in a moment."
 	}
+
 	lines := []string{
 		"Question: " + question,
 		"",
@@ -174,5 +189,6 @@ func formatPublicAPIFallback(question string, fetchErr error) *mcpgo.CallToolRes
 		"fallback":        true,
 		"specUnavailable": fetchErr != nil,
 	}
+
 	return mcpgo.NewToolResultStructured(payload, strings.Join(lines, "\n"))
 }

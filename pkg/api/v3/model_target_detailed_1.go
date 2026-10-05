@@ -26,8 +26,11 @@ type TargetDetailed1 struct {
 	CodeFile        *CodeFileDetailed        `json:"codeFile,omitempty"`
 	GraphqlResolver *GraphqlResolverDetailed `json:"graphqlResolver,omitempty"`
 	// The id of the target
-	Id                   string        `json:"id"`
-	Port                 *PortDetailed `json:"port,omitempty"`
+	Id                   string                 `json:"id"`
+	Port                 *PortDetailed          `json:"port,omitempty"`
+	WebPage              *WebPageDetailed       `json:"webPage,omitempty"`
+	WebCrawledUrl        *WebCrawledUrlDetailed `json:"webCrawledUrl,omitempty"`
+	Cve                  *CveDetailed           `json:"cve,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -228,6 +231,102 @@ func (o *TargetDetailed1) SetPort(v PortDetailed) {
 	o.Port = &v
 }
 
+// GetWebPage returns the WebPage field value if set, zero value otherwise.
+func (o *TargetDetailed1) GetWebPage() WebPageDetailed {
+	if o == nil || IsNil(o.WebPage) {
+		var ret WebPageDetailed
+		return ret
+	}
+	return *o.WebPage
+}
+
+// GetWebPageOk returns a tuple with the WebPage field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TargetDetailed1) GetWebPageOk() (*WebPageDetailed, bool) {
+	if o == nil || IsNil(o.WebPage) {
+		return nil, false
+	}
+	return o.WebPage, true
+}
+
+// HasWebPage returns a boolean if a field has been set.
+func (o *TargetDetailed1) HasWebPage() bool {
+	if o != nil && !IsNil(o.WebPage) {
+		return true
+	}
+
+	return false
+}
+
+// SetWebPage gets a reference to the given WebPageDetailed and assigns it to the WebPage field.
+func (o *TargetDetailed1) SetWebPage(v WebPageDetailed) {
+	o.WebPage = &v
+}
+
+// GetWebCrawledUrl returns the WebCrawledUrl field value if set, zero value otherwise.
+func (o *TargetDetailed1) GetWebCrawledUrl() WebCrawledUrlDetailed {
+	if o == nil || IsNil(o.WebCrawledUrl) {
+		var ret WebCrawledUrlDetailed
+		return ret
+	}
+	return *o.WebCrawledUrl
+}
+
+// GetWebCrawledUrlOk returns a tuple with the WebCrawledUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TargetDetailed1) GetWebCrawledUrlOk() (*WebCrawledUrlDetailed, bool) {
+	if o == nil || IsNil(o.WebCrawledUrl) {
+		return nil, false
+	}
+	return o.WebCrawledUrl, true
+}
+
+// HasWebCrawledUrl returns a boolean if a field has been set.
+func (o *TargetDetailed1) HasWebCrawledUrl() bool {
+	if o != nil && !IsNil(o.WebCrawledUrl) {
+		return true
+	}
+
+	return false
+}
+
+// SetWebCrawledUrl gets a reference to the given WebCrawledUrlDetailed and assigns it to the WebCrawledUrl field.
+func (o *TargetDetailed1) SetWebCrawledUrl(v WebCrawledUrlDetailed) {
+	o.WebCrawledUrl = &v
+}
+
+// GetCve returns the Cve field value if set, zero value otherwise.
+func (o *TargetDetailed1) GetCve() CveDetailed {
+	if o == nil || IsNil(o.Cve) {
+		var ret CveDetailed
+		return ret
+	}
+	return *o.Cve
+}
+
+// GetCveOk returns a tuple with the Cve field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TargetDetailed1) GetCveOk() (*CveDetailed, bool) {
+	if o == nil || IsNil(o.Cve) {
+		return nil, false
+	}
+	return o.Cve, true
+}
+
+// HasCve returns a boolean if a field has been set.
+func (o *TargetDetailed1) HasCve() bool {
+	if o != nil && !IsNil(o.Cve) {
+		return true
+	}
+
+	return false
+}
+
+// SetCve gets a reference to the given CveDetailed and assigns it to the Cve field.
+func (o *TargetDetailed1) SetCve(v CveDetailed) {
+	o.Cve = &v
+}
+
 func (o TargetDetailed1) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -251,6 +350,15 @@ func (o TargetDetailed1) ToMap() (map[string]interface{}, error) {
 	toSerialize["id"] = o.Id
 	if !IsNil(o.Port) {
 		toSerialize["port"] = o.Port
+	}
+	if !IsNil(o.WebPage) {
+		toSerialize["webPage"] = o.WebPage
+	}
+	if !IsNil(o.WebCrawledUrl) {
+		toSerialize["webCrawledUrl"] = o.WebCrawledUrl
+	}
+	if !IsNil(o.Cve) {
+		toSerialize["cve"] = o.Cve
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -302,6 +410,9 @@ func (o *TargetDetailed1) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "graphqlResolver")
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "port")
+		delete(additionalProperties, "webPage")
+		delete(additionalProperties, "webCrawledUrl")
+		delete(additionalProperties, "cve")
 		o.AdditionalProperties = additionalProperties
 	}
 

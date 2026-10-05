@@ -28,6 +28,7 @@ func startSocks5Server(ctx context.Context, listener net.Listener, healthy *atom
 	if err != nil {
 		return fmt.Errorf("failed to create socks5 server config: %w", err)
 	}
+
 	log.Info("Private location ready to accept connections")
 	healthy.Store(true)
 

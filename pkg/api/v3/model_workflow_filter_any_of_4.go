@@ -19,13 +19,13 @@ var _ MappedNullable = &WorkflowFilterAnyOf4{}
 
 // WorkflowFilterAnyOf4 struct for WorkflowFilterAnyOf4
 type WorkflowFilterAnyOf4 struct {
-	Search                   *string                                 `json:"search,omitempty"`
-	Kinds                    []ENUMPROPERTIESDATAITEMSPROPERTIESKIND `json:"kinds,omitempty"`
-	ProjectIds               []string                                `json:"projectIds,omitempty"`
-	Ids                      []string                                `json:"ids,omitempty"`
-	LocationIds              []string                                `json:"locationIds,omitempty"`
-	HasGithubAppInstallation *bool                                   `json:"hasGithubAppInstallation,omitempty"`
-	AdditionalProperties     map[string]interface{}
+	Search               *string                                 `json:"search,omitempty"`
+	Kinds                []ENUMPROPERTIESDATAITEMSPROPERTIESKIND `json:"kinds,omitempty"`
+	ProjectIds           []string                                `json:"projectIds,omitempty"`
+	Ids                  []string                                `json:"ids,omitempty"`
+	LocationIds          []string                                `json:"locationIds,omitempty"`
+	Github               *WorkflowFilterAnyOf4Github             `json:"github,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _WorkflowFilterAnyOf4 WorkflowFilterAnyOf4
@@ -207,36 +207,36 @@ func (o *WorkflowFilterAnyOf4) SetLocationIds(v []string) {
 	o.LocationIds = v
 }
 
-// GetHasGithubAppInstallation returns the HasGithubAppInstallation field value if set, zero value otherwise.
-func (o *WorkflowFilterAnyOf4) GetHasGithubAppInstallation() bool {
-	if o == nil || IsNil(o.HasGithubAppInstallation) {
-		var ret bool
+// GetGithub returns the Github field value if set, zero value otherwise.
+func (o *WorkflowFilterAnyOf4) GetGithub() WorkflowFilterAnyOf4Github {
+	if o == nil || IsNil(o.Github) {
+		var ret WorkflowFilterAnyOf4Github
 		return ret
 	}
-	return *o.HasGithubAppInstallation
+	return *o.Github
 }
 
-// GetHasGithubAppInstallationOk returns a tuple with the HasGithubAppInstallation field value if set, nil otherwise
+// GetGithubOk returns a tuple with the Github field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *WorkflowFilterAnyOf4) GetHasGithubAppInstallationOk() (*bool, bool) {
-	if o == nil || IsNil(o.HasGithubAppInstallation) {
+func (o *WorkflowFilterAnyOf4) GetGithubOk() (*WorkflowFilterAnyOf4Github, bool) {
+	if o == nil || IsNil(o.Github) {
 		return nil, false
 	}
-	return o.HasGithubAppInstallation, true
+	return o.Github, true
 }
 
-// HasHasGithubAppInstallation returns a boolean if a field has been set.
-func (o *WorkflowFilterAnyOf4) HasHasGithubAppInstallation() bool {
-	if o != nil && !IsNil(o.HasGithubAppInstallation) {
+// HasGithub returns a boolean if a field has been set.
+func (o *WorkflowFilterAnyOf4) HasGithub() bool {
+	if o != nil && !IsNil(o.Github) {
 		return true
 	}
 
 	return false
 }
 
-// SetHasGithubAppInstallation gets a reference to the given bool and assigns it to the HasGithubAppInstallation field.
-func (o *WorkflowFilterAnyOf4) SetHasGithubAppInstallation(v bool) {
-	o.HasGithubAppInstallation = &v
+// SetGithub gets a reference to the given WorkflowFilterAnyOf4Github and assigns it to the Github field.
+func (o *WorkflowFilterAnyOf4) SetGithub(v WorkflowFilterAnyOf4Github) {
+	o.Github = &v
 }
 
 func (o WorkflowFilterAnyOf4) MarshalJSON() ([]byte, error) {
@@ -264,8 +264,8 @@ func (o WorkflowFilterAnyOf4) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.LocationIds) {
 		toSerialize["locationIds"] = o.LocationIds
 	}
-	if !IsNil(o.HasGithubAppInstallation) {
-		toSerialize["hasGithubAppInstallation"] = o.HasGithubAppInstallation
+	if !IsNil(o.Github) {
+		toSerialize["github"] = o.Github
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -294,7 +294,7 @@ func (o *WorkflowFilterAnyOf4) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "projectIds")
 		delete(additionalProperties, "ids")
 		delete(additionalProperties, "locationIds")
-		delete(additionalProperties, "hasGithubAppInstallation")
+		delete(additionalProperties, "github")
 		o.AdditionalProperties = additionalProperties
 	}
 

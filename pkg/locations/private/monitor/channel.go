@@ -13,6 +13,7 @@ func openEscapeChannel(ctx context.Context, client *ssh.Client) (ssh.Channel, er
 	if err != nil {
 		return nil, fmt.Errorf("failed to open log channel: %w", err)
 	}
+
 	log.Trace("escape channel opened")
 
 	go func() {

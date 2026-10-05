@@ -16,6 +16,7 @@ func extractConflict(err error) (string, error) {
 	if err == nil {
 		return "", errNotAConflict
 	}
+
 	var oapiErr *v3.GenericOpenAPIError
 	if errors.As(err, &oapiErr) {
 		if conflict, ok := oapiErr.Model().(v3.Conflict); ok {
@@ -23,8 +24,10 @@ func extractConflict(err error) (string, error) {
 			if id == "" {
 				return "", fmt.Errorf("conflict response missing instanceId: %w", err)
 			}
+
 			return id, nil
 		}
 	}
+
 	return "", errNotAConflict
 }

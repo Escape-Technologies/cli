@@ -21,7 +21,6 @@ var _ MappedNullable = &TriggerExportRequestBlocksInner{}
 // TriggerExportRequestBlocksInner struct for TriggerExportRequestBlocksInner
 type TriggerExportRequestBlocksInner struct {
 	Kind                 ENUMPROPERTIESBLOCKSITEMSPROPERTIESKIND `json:"kind"`
-	Params               interface{}                             `json:"params,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -69,39 +68,6 @@ func (o *TriggerExportRequestBlocksInner) SetKind(v ENUMPROPERTIESBLOCKSITEMSPRO
 	o.Kind = v
 }
 
-// GetParams returns the Params field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *TriggerExportRequestBlocksInner) GetParams() interface{} {
-	if o == nil {
-		var ret interface{}
-		return ret
-	}
-	return o.Params
-}
-
-// GetParamsOk returns a tuple with the Params field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *TriggerExportRequestBlocksInner) GetParamsOk() (*interface{}, bool) {
-	if o == nil || IsNil(o.Params) {
-		return nil, false
-	}
-	return &o.Params, true
-}
-
-// HasParams returns a boolean if a field has been set.
-func (o *TriggerExportRequestBlocksInner) HasParams() bool {
-	if o != nil && !IsNil(o.Params) {
-		return true
-	}
-
-	return false
-}
-
-// SetParams gets a reference to the given interface{} and assigns it to the Params field.
-func (o *TriggerExportRequestBlocksInner) SetParams(v interface{}) {
-	o.Params = v
-}
-
 func (o TriggerExportRequestBlocksInner) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -113,9 +79,6 @@ func (o TriggerExportRequestBlocksInner) MarshalJSON() ([]byte, error) {
 func (o TriggerExportRequestBlocksInner) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["kind"] = o.Kind
-	if o.Params != nil {
-		toSerialize["params"] = o.Params
-	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -160,7 +123,6 @@ func (o *TriggerExportRequestBlocksInner) UnmarshalJSON(data []byte) (err error)
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "kind")
-		delete(additionalProperties, "params")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -18,6 +18,7 @@ func (h *helpAllCmdData) String() string {
 	if h.Parent != nil {
 		prefix = "  "
 	}
+
 	return fmt.Sprintf("%s%s\t%s", prefix, h.Name, h.Description)
 }
 
@@ -30,6 +31,7 @@ func listCommands(cmd *cobra.Command, parent *helpAllCmdData) []*helpAllCmdData 
 			c.Name() == "completion") {
 			continue
 		}
+
 		cmd := &helpAllCmdData{
 			Parent:      parent,
 			Name:        c.Name(),
@@ -38,6 +40,7 @@ func listCommands(cmd *cobra.Command, parent *helpAllCmdData) []*helpAllCmdData 
 		commands = append(commands, cmd)
 		commands = append(commands, listCommands(c, cmd)...)
 	}
+
 	return commands
 }
 
@@ -51,6 +54,7 @@ var helpAllCmd = &cobra.Command{
 			for _, c := range commands {
 				res = append(res, c.String())
 			}
+
 			return res
 		})
 	},

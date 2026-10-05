@@ -27,8 +27,10 @@ func newHandler(upstreams []string) dns.HandlerFunc {
 				_ = w.WriteMsg(resp)
 				return
 			}
+
 			log.Debug("[DNS] error forwarding to %s: %v", upstream, err)
 		}
+
 		_ = w.WriteMsg(servfail(r))
 	}
 }
@@ -36,5 +38,6 @@ func newHandler(upstreams []string) dns.HandlerFunc {
 func servfail(r *dns.Msg) *dns.Msg {
 	m := new(dns.Msg)
 	m.SetRcode(r, dns.RcodeServerFailure)
+
 	return m
 }

@@ -52,6 +52,7 @@ func InjectAuthContext(ctx context.Context, req *http.Request) context.Context {
 	if req == nil {
 		return ctx
 	}
+
 	headerAPIKey := strings.TrimSpace(req.Header.Get("X-ESCAPE-API-KEY"))
 	rawAuthorization := strings.TrimSpace(req.Header.Get("Authorization"))
 
@@ -95,13 +96,16 @@ func AuthFromContext(ctx context.Context) (Auth, error) {
 	if ctx == nil {
 		return Auth{}, errors.New("missing authentication context")
 	}
+
 	auth, ok := ctx.Value(authContextKey{}).(Auth)
 	if !ok {
 		return Auth{}, errors.New("missing authentication context")
 	}
+
 	if auth.APIKey == "" && auth.Authorization == "" {
 		return Auth{}, errors.New("missing X-ESCAPE-API-KEY or Authorization header")
 	}
+
 	return auth, nil
 }
 
@@ -116,6 +120,7 @@ func splitAuthorization(authorization string) (scheme, token string) {
 	if len(parts) != authorizationParts {
 		return "", ""
 	}
+
 	return strings.ToLower(strings.TrimSpace(parts[0])), strings.TrimSpace(parts[1])
 }
 

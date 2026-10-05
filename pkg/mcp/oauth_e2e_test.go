@@ -38,6 +38,7 @@ func (o *observedUpstream) recordMCPHandler(auth Auth) {
 func (o *observedUpstream) snapshot() (string, Auth) {
 	o.mu.Lock()
 	defer o.mu.Unlock()
+
 	return o.lastAuthHeader, o.seenMCPHandlerAt
 }
 
@@ -64,11 +65,14 @@ func newE2EFixture(t *testing.T) *e2eFixture {
 			http.NotFound(w, r)
 			return
 		}
+
 		if r.Header.Get("Authorization") == "Key "+validAPIKey {
 			w.WriteHeader(http.StatusOK)
 			_, _ = w.Write([]byte(`{"id":"user-1"}`))
+
 			return
 		}
+
 		w.WriteHeader(http.StatusUnauthorized)
 	}))
 	t.Cleanup(upstream.Close)
@@ -118,16 +122,20 @@ func (f *e2eFixture) post(path, contentType, body string, headers map[string]str
 	if err != nil {
 		f.t.Fatalf("build request: %v", err)
 	}
+
 	if contentType != "" {
 		req.Header.Set("Content-Type", contentType)
 	}
+
 	for k, v := range headers {
 		req.Header.Set(k, v)
 	}
+
 	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
 		f.t.Fatalf("post %s: %v", path, err)
 	}
+
 	return resp
 }
 
@@ -137,10 +145,12 @@ func (f *e2eFixture) get(path string) *http.Response {
 	if err != nil {
 		f.t.Fatalf("build request: %v", err)
 	}
+
 	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
 		f.t.Fatalf("get %s: %v", path, err)
 	}
+
 	return resp
 }
 
@@ -202,12 +212,15 @@ func TestOAuthEndToEnd(t *testing.T) {
 		if resp.StatusCode != http.StatusNoContent {
 			t.Fatalf("expected 204 for OPTIONS preflight, got %d", resp.StatusCode)
 		}
+
 		if resp.Header.Get("Access-Control-Allow-Origin") != "https://claude.ai" {
 			t.Fatalf("ACAO header missing or wrong: %q", resp.Header.Get("Access-Control-Allow-Origin"))
 		}
+
 		if resp.Header.Get("Access-Control-Allow-Methods") == "" {
 			t.Fatalf("ACAM header missing")
 		}
+
 		// Preflights must NOT carry WWW-Authenticate (that would break
 		// the browser's CORS check before any auth happens).
 		if resp.Header.Get("Www-Authenticate") != "" {
@@ -229,6 +242,7 @@ func TestOAuthEndToEnd(t *testing.T) {
 		if resp.StatusCode != http.StatusOK {
 			t.Fatalf("expected 200, got %d", resp.StatusCode)
 		}
+
 		var doc map[string]any
 		_ = json.NewDecoder(resp.Body).Decode(&doc)
 		if doc["resource"] != "https://mcp.test/mcp" {
@@ -264,19 +278,23 @@ func TestOAuthEndToEnd(t *testing.T) {
 			body, _ := io.ReadAll(resp.Body)
 			t.Fatalf("expected 200, got %d body=%s", resp.StatusCode, body)
 		}
+
 		lastAuth, seenAuth := f.observed.snapshot()
 		if seenAuth.APIKey != f.validKey {
 			t.Fatalf("expected handler to see APIKey %q, got %q", f.validKey, seenAuth.APIKey)
 		}
+
 		if seenAuth.Authorization != "" {
 			t.Fatalf(
 				"expected Authorization to be cleared to prevent leak into child CLI, got %q",
 				seenAuth.Authorization,
 			)
 		}
+
 		if seenAuth.Method != AuthMethodAuthorizationBearer {
 			t.Fatalf("expected bearer method, got %q", seenAuth.Method)
 		}
+
 		if !strings.HasPrefix(lastAuth, "Key ") {
 			t.Fatalf("upstream saw unexpected authorization: %q", lastAuth)
 		}
@@ -293,6 +311,7 @@ func TestOAuthEndToEnd(t *testing.T) {
 		if resp.StatusCode != http.StatusBadRequest {
 			t.Fatalf("expected 400, got %d", resp.StatusCode)
 		}
+
 		var body map[string]any
 		_ = json.NewDecoder(resp.Body).Decode(&body)
 		if body["error"] != "invalid_grant" {
@@ -306,10 +325,12 @@ func assertStatusAndDiscoveryHeader(t *testing.T, resp *http.Response, want int)
 	if resp.StatusCode != want {
 		t.Fatalf("expected status %d, got %d", want, resp.StatusCode)
 	}
+
 	wwwAuth := resp.Header.Get("WWW-Authenticate")
 	if !strings.Contains(wwwAuth, "/.well-known/oauth-protected-resource") {
 		t.Fatalf("PRM URL missing from WWW-Authenticate: %q", wwwAuth)
 	}
+
 	if strings.Contains(wwwAuth, "/mcp/.well-known/") {
 		t.Fatalf("PRM URL must NOT be under /mcp: %q", wwwAuth)
 	}
@@ -321,17 +342,21 @@ func assertTokenResponse(t *testing.T, resp *http.Response, expectedAPIKey strin
 		body, _ := io.ReadAll(resp.Body)
 		t.Fatalf("expected 200, got %d body=%s", resp.StatusCode, body)
 	}
+
 	if resp.Header.Get("Cache-Control") != "no-store" {
 		t.Fatalf("missing Cache-Control: %q", resp.Header.Get("Cache-Control"))
 	}
+
 	if resp.Header.Get("Pragma") != "no-cache" {
 		t.Fatalf("missing Pragma: %q", resp.Header.Get("Pragma"))
 	}
+
 	var body map[string]any
 	_ = json.NewDecoder(resp.Body).Decode(&body)
 	if body["access_token"] != expectedAPIKey {
 		t.Fatalf("unexpected access_token: %v", body["access_token"])
 	}
+
 	const oneYearSeconds = 31536000
 	if v, ok := body["expires_in"].(float64); !ok || int64(v) != oneYearSeconds {
 		t.Fatalf("unexpected expires_in: %v", body["expires_in"])

@@ -20,15 +20,16 @@ var _ MappedNullable = &GetAuthentication200ResponseAuthenticationUsersInnerAuth
 
 // GetAuthentication200ResponseAuthenticationUsersInnerAuthentication struct for GetAuthentication200ResponseAuthenticationUsersInnerAuthentication
 type GetAuthentication200ResponseAuthenticationUsersInnerAuthentication struct {
-	Headers              []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner `json:"headers"`
-	Cookies              []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner `json:"cookies"`
-	QueryParameters      []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner `json:"query_parameters"`
-	Body                 map[string]string                                                                                           `json:"body"`
-	LocalStorage         map[string]map[string]string                                                                                `json:"local_storage"`
-	SessionStorage       map[string]map[string]string                                                                                `json:"session_storage"`
-	Digest               *string                                                                                                     `json:"digest,omitempty"`
-	Basic                *string                                                                                                     `json:"basic,omitempty"`
-	Username             string                                                                                                      `json:"username"`
+	Headers              []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner            `json:"headers"`
+	ExtractedHeaders     map[string][]GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner `json:"extracted_headers,omitempty"`
+	Cookies              []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersCookiesInner            `json:"cookies"`
+	QueryParameters      []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner            `json:"query_parameters"`
+	Body                 map[string]string                                                                                                      `json:"body"`
+	LocalStorage         map[string]map[string]string                                                                                           `json:"local_storage"`
+	SessionStorage       map[string]map[string]string                                                                                           `json:"session_storage"`
+	Digest               *string                                                                                                                `json:"digest,omitempty"`
+	Basic                *string                                                                                                                `json:"basic,omitempty"`
+	Username             string                                                                                                                 `json:"username"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -80,6 +81,38 @@ func (o *GetAuthentication200ResponseAuthenticationUsersInnerAuthentication) Get
 // SetHeaders sets field value
 func (o *GetAuthentication200ResponseAuthenticationUsersInnerAuthentication) SetHeaders(v []GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner) {
 	o.Headers = v
+}
+
+// GetExtractedHeaders returns the ExtractedHeaders field value if set, zero value otherwise.
+func (o *GetAuthentication200ResponseAuthenticationUsersInnerAuthentication) GetExtractedHeaders() map[string][]GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner {
+	if o == nil || IsNil(o.ExtractedHeaders) {
+		var ret map[string][]GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner
+		return ret
+	}
+	return o.ExtractedHeaders
+}
+
+// GetExtractedHeadersOk returns a tuple with the ExtractedHeaders field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetAuthentication200ResponseAuthenticationUsersInnerAuthentication) GetExtractedHeadersOk() (map[string][]GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner, bool) {
+	if o == nil || IsNil(o.ExtractedHeaders) {
+		return map[string][]GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner{}, false
+	}
+	return o.ExtractedHeaders, true
+}
+
+// HasExtractedHeaders returns a boolean if a field has been set.
+func (o *GetAuthentication200ResponseAuthenticationUsersInnerAuthentication) HasExtractedHeaders() bool {
+	if o != nil && !IsNil(o.ExtractedHeaders) {
+		return true
+	}
+
+	return false
+}
+
+// SetExtractedHeaders gets a reference to the given map[string][]GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner and assigns it to the ExtractedHeaders field.
+func (o *GetAuthentication200ResponseAuthenticationUsersInnerAuthentication) SetExtractedHeaders(v map[string][]GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOfParametersHeadersInner) {
+	o.ExtractedHeaders = v
 }
 
 // GetCookies returns the Cookies field value
@@ -301,6 +334,9 @@ func (o GetAuthentication200ResponseAuthenticationUsersInnerAuthentication) Mars
 func (o GetAuthentication200ResponseAuthenticationUsersInnerAuthentication) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["headers"] = o.Headers
+	if !IsNil(o.ExtractedHeaders) {
+		toSerialize["extracted_headers"] = o.ExtractedHeaders
+	}
 	toSerialize["cookies"] = o.Cookies
 	toSerialize["query_parameters"] = o.QueryParameters
 	toSerialize["body"] = o.Body
@@ -363,6 +399,7 @@ func (o *GetAuthentication200ResponseAuthenticationUsersInnerAuthentication) Unm
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "headers")
+		delete(additionalProperties, "extracted_headers")
 		delete(additionalProperties, "cookies")
 		delete(additionalProperties, "query_parameters")
 		delete(additionalProperties, "body")

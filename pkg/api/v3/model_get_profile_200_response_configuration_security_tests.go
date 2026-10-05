@@ -261,6 +261,7 @@ type GetProfile200ResponseConfigurationSecurityTests struct {
 	IssueSslMissingNpn                        *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_missing_npn,omitempty"`
 	IssueSslMissingOcspStapling               *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_missing_ocsp_stapling,omitempty"`
 	IssueSslMissingOcspUrls                   *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_missing_ocsp_urls,omitempty"`
+	IssueSslMissingPostQuantumKeyExchange     *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_missing_post_quantum_key_exchange,omitempty"`
 	IssueSslMissingSecureClientRenegotiation  *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_missing_secure_client_renegotiation,omitempty"`
 	IssueSslMissingSecureRenegotiation        *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_missing_secure_renegotiation,omitempty"`
 	IssueSslMissingSessionResumptionIds       *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_missing_session_resumption_ids,omitempty"`
@@ -8189,6 +8190,38 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslMissingOcsp
 	o.IssueSslMissingOcspUrls = &v
 }
 
+// GetIssueSslMissingPostQuantumKeyExchange returns the IssueSslMissingPostQuantumKeyExchange field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslMissingPostQuantumKeyExchange() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.IssueSslMissingPostQuantumKeyExchange) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.IssueSslMissingPostQuantumKeyExchange
+}
+
+// GetIssueSslMissingPostQuantumKeyExchangeOk returns a tuple with the IssueSslMissingPostQuantumKeyExchange field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslMissingPostQuantumKeyExchangeOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.IssueSslMissingPostQuantumKeyExchange) {
+		return nil, false
+	}
+	return o.IssueSslMissingPostQuantumKeyExchange, true
+}
+
+// HasIssueSslMissingPostQuantumKeyExchange returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasIssueSslMissingPostQuantumKeyExchange() bool {
+	if o != nil && !IsNil(o.IssueSslMissingPostQuantumKeyExchange) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssueSslMissingPostQuantumKeyExchange gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the IssueSslMissingPostQuantumKeyExchange field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslMissingPostQuantumKeyExchange(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.IssueSslMissingPostQuantumKeyExchange = &v
+}
+
 // GetIssueSslMissingSecureClientRenegotiation returns the IssueSslMissingSecureClientRenegotiation field value if set, zero value otherwise.
 func (o *GetProfile200ResponseConfigurationSecurityTests) GetIssueSslMissingSecureClientRenegotiation() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
 	if o == nil || IsNil(o.IssueSslMissingSecureClientRenegotiation) {
@@ -14109,6 +14142,9 @@ func (o GetProfile200ResponseConfigurationSecurityTests) ToMap() (map[string]int
 	if !IsNil(o.IssueSslMissingOcspUrls) {
 		toSerialize["issue_ssl_missing_ocsp_urls"] = o.IssueSslMissingOcspUrls
 	}
+	if !IsNil(o.IssueSslMissingPostQuantumKeyExchange) {
+		toSerialize["issue_ssl_missing_post_quantum_key_exchange"] = o.IssueSslMissingPostQuantumKeyExchange
+	}
 	if !IsNil(o.IssueSslMissingSecureClientRenegotiation) {
 		toSerialize["issue_ssl_missing_secure_client_renegotiation"] = o.IssueSslMissingSecureClientRenegotiation
 	}
@@ -14859,6 +14895,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) UnmarshalJSON(data []b
 		delete(additionalProperties, "issue_ssl_missing_npn")
 		delete(additionalProperties, "issue_ssl_missing_ocsp_stapling")
 		delete(additionalProperties, "issue_ssl_missing_ocsp_urls")
+		delete(additionalProperties, "issue_ssl_missing_post_quantum_key_exchange")
 		delete(additionalProperties, "issue_ssl_missing_secure_client_renegotiation")
 		delete(additionalProperties, "issue_ssl_missing_secure_renegotiation")
 		delete(additionalProperties, "issue_ssl_missing_session_resumption_ids")

@@ -33,9 +33,11 @@ func StartLocation(ctx context.Context, locationID string, sshPrivateKey ed25519
 			if !shouldLog && (!hasEverConnected.Load() || time.Since(failureStartTime) >= failureThreshold) {
 				shouldLog = true
 			}
+
 			if shouldLog {
 				log.Error("Failed to dial SSH: %s, retrying...", err)
 			}
+
 			errMsg := err.Error()
 
 			if isTimeout {
@@ -55,6 +57,7 @@ func StartLocation(ctx context.Context, locationID string, sshPrivateKey ed25519
 			// First failure may just be a network issue, we dont want to notify the customer yet
 			log.Info("SSH connection lost, retrying...")
 		}
+
 		time.Sleep(1 * time.Second)
 	}
 }
@@ -63,7 +66,9 @@ func isDialTimeout(err error) bool {
 	if errors.Is(err, context.DeadlineExceeded) {
 		return true
 	}
+
 	errMsg := err.Error()
+
 	return strings.Contains(errMsg, "context deadline exceeded") || strings.Contains(errMsg, "i/o timeout")
 }
 
@@ -71,11 +76,13 @@ func logSSHDialTimeoutHints(hasLoggedTimeoutHint *atomic.Bool) {
 	if hasLoggedTimeoutHint.Load() {
 		return
 	}
+
 	hasLoggedTimeoutHint.Store(true)
 	target := sshTarget()
 	log.Error("Timed out connecting to Escape SSH endpoint (%s)", target)
 	if env.GetFrontendProxyURL() == nil {
 		log.Error("Outbound traffic may require a proxy: set ESCAPE_FRONTEND_PROXY_URL on the deployment")
 	}
+
 	log.Error("Ensure %s is reachable from this network", target)
 }

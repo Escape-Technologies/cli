@@ -1,11 +1,10 @@
 package cmd
 
 import (
+	"context"
 	"encoding/json"
 	"errors"
 	"fmt"
-	"io"
-	"os"
 	"strings"
 
 	"github.com/Escape-Technologies/cli/pkg/api/escape"
@@ -22,14 +21,17 @@ var (
 	manuallyCreated    = false
 	assetSortType      string
 	assetSortDirection string
+	assetListPage      pageFlags
 )
 
 var (
-	assetDescription string
-	assetFramework   string
-	assetOwners      []string
-	assetStatus      string
-	assetTagIDs      []string
+	assetDescription      string
+	assetFramework        string
+	assetName             string
+	assetOwners           []string
+	assetStatus           string
+	assetTagIDs           []string
+	assetUpdateProjectIDs []string
 )
 
 var assetsCmd = &cobra.Command{
@@ -133,25 +135,19 @@ ID                                      CREATED AT                TYPE          
 			SortType:        assetSortType,
 			SortDirection:   assetSortDirection,
 		}
-		assets, next, err := escape.ListAssets(cmd.Context(), "", filters)
-		if err != nil {
-			return fmt.Errorf("unable to list assets: %w", err)
-		}
-		allAssets := assets
-		for next != nil && *next != "" {
-			assets, next, err = escape.ListAssets(cmd.Context(), *next, filters)
-			if err != nil {
-				return fmt.Errorf("unable to list assets: %w", err)
-			}
-			allAssets = append(allAssets, assets...)
-		}
-		out.Table(allAssets, func() []string {
+		if err := runPagedList(cmd, assetListPage, func(ctx context.Context, cursor string, size int) ([]v3.AssetSummarized, *string, int, error) {
+			return escape.ListAssets(ctx, cursor, filters, size)
+		}, func(assets []v3.AssetSummarized) []string {
 			res := []string{"ID\tCREATED AT\tTYPE\tSTATUS\tLAST SEEN\tRISKS\tTAGS\tOWNERS\tPROJECTS\tNAME"}
-			for _, asset := range allAssets {
+			for _, asset := range assets {
 				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%d\t%s", asset.GetId(), asset.GetCreatedAt(), asset.GetType(), asset.GetStatus(), asset.GetLastSeenAt(), asset.GetRisks(), joinTags(asset.GetTags()), ownersColumn(asset.AdditionalProperties), len(asset.GetProjectIds()), asset.GetName()))
 			}
+
 			return res
-		})
+		}); err != nil {
+			return fmt.Errorf("unable to list assets: %w", err)
+		}
+
 		return nil
 	},
 }
@@ -199,6 +195,7 @@ ID                                      CREATED AT                TYPE    NAME  
 			_ = cmd.Help()
 			return errors.New("asset ID is required")
 		}
+
 		return nil
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
@@ -213,9 +210,9 @@ ID                                      CREATED AT                TYPE    NAME  
 		}
 
 		if assetActivities {
-			issues, _, err := escape.ListIssues(cmd.Context(), "", &escape.ListIssuesFilters{
+			issues, _, _, err := escape.ListIssues(cmd.Context(), "", &escape.ListIssuesFilters{
 				AssetIDs: []string{args[0]},
-			}, "", "")
+			}, "", "", 0)
 			if err != nil {
 				return fmt.Errorf("unable to list issues: %w", err)
 			}
@@ -226,6 +223,7 @@ ID                                      CREATED AT                TYPE    NAME  
 				if err != nil {
 					return fmt.Errorf("unable to list activities: %w", err)
 				}
+
 				allActivities = append(allActivities, activities...)
 			}
 
@@ -234,6 +232,7 @@ ID                                      CREATED AT                TYPE    NAME  
 				for _, activity := range allActivities {
 					res = append(res, fmt.Sprintf("%s\t%s\t%s", activity.GetId(), activity.GetCreatedAt(), activity.GetKind()))
 				}
+
 				return res
 			})
 		} else {
@@ -241,6 +240,7 @@ ID                                      CREATED AT                TYPE    NAME  
 			out.Table(asset, func() []string {
 				res := []string{"ID\tCREATED AT\tTYPE\tSTATUS\tLAST SEEN\tRISKS\tTAGS\tOWNERS\tPROJECTS\tNAME"}
 				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%d\t%s", asset.GetId(), asset.GetCreatedAt(), asset.GetType(), asset.GetStatus(), asset.GetLastSeenAt(), asset.GetRisks(), joinTags(asset.GetTags()), ownersColumn(asset.AdditionalProperties), len(asset.GetProjectIds()), asset.GetName()))
+
 				return res
 			})
 		}
@@ -256,6 +256,7 @@ func joinTags(tags []v3.Tag) string {
 			names = append(names, tag.GetName())
 		}
 	}
+
 	return strings.Join(names, ",")
 }
 
@@ -264,14 +265,17 @@ func ownersColumn(additionalProperties map[string]interface{}) string {
 	if !ok {
 		return ""
 	}
+
 	items, ok := value.([]interface{})
 	if !ok {
 		return stringValue(value)
 	}
+
 	owners := make([]string, 0, len(items))
 	for _, item := range items {
 		owners = append(owners, stringValue(item))
 	}
+
 	return strings.Join(owners, ",")
 }
 
@@ -318,14 +322,21 @@ BEFORE DELETING:
 			_ = cmd.Help()
 			return errors.New("asset ID is required")
 		}
+
 		return nil
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
-		err := escape.DeleteAsset(cmd.Context(), args[0])
+		if out.Schema(v3.DeleteProfile200Response{}) {
+			return nil
+		}
+
+		result, err := escape.DeleteAsset(cmd.Context(), args[0])
 		if err != nil {
 			return fmt.Errorf("unable to delete asset: %w", err)
 		}
-		fmt.Printf("Asset %s successfully deleted\n", args[0])
+
+		out.Print(result, fmt.Sprintf("Asset %s successfully deleted", args[0]))
+
 		return nil
 	},
 }
@@ -342,6 +353,8 @@ and framework classification. Use this to maintain accurate asset inventory.
 UPDATABLE FIELDS:
   -d, --description    Human-readable description
   -f, --framework      Asset framework/type classification
+  --name               Custom asset name (defaults to the discovered name)
+  --project-id         Project IDs to assign the asset to
   -s, --status         Monitoring status (MONITORED, UNMONITORED, ARCHIVED)
   --owners             Asset owners (email addresses)
   -t, --tag-ids        Tag IDs for organization
@@ -369,6 +382,9 @@ USE CASES:
   # Add tags for organization
   escape-cli assets update <asset-id> --tag-ids "tag-prod,tag-critical"
 
+  # Assign to projects and rename
+  escape-cli assets update <asset-id> --project-id "proj-1,proj-2" --name "Payments API"
+
   # Archive decommissioned asset
   escape-cli assets update <asset-id> --status ARCHIVED --description "Deprecated - removed 2025-10-01"
 
@@ -383,9 +399,14 @@ USE CASES:
 			_ = cmd.Help()
 			return errors.New("asset ID is required")
 		}
+
 		return nil
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
+		if out.Schema(v3.UpdateAsset200Response{}) {
+			return nil
+		}
+
 		var framework *v3.ENUMPROPERTIESFRAMEWORK
 		if assetFramework != "" {
 			f := v3.ENUMPROPERTIESFRAMEWORK(assetFramework)
@@ -403,6 +424,11 @@ USE CASES:
 			desc = &assetDescription
 		}
 
+		var name *string
+		if assetName != "" {
+			name = &assetName
+		}
+
 		var owners *[]string
 		if len(assetOwners) > 0 {
 			owners = &assetOwners
@@ -413,11 +439,18 @@ USE CASES:
 			tagIDs = &assetTagIDs
 		}
 
-		err := escape.UpdateAsset(cmd.Context(), args[0], desc, framework, owners, status, tagIDs)
+		var projectIDs *[]string
+		if len(assetUpdateProjectIDs) > 0 {
+			projectIDs = &assetUpdateProjectIDs
+		}
+
+		asset, err := escape.UpdateAsset(cmd.Context(), args[0], desc, framework, owners, status, tagIDs, projectIDs, name)
 		if err != nil {
 			return fmt.Errorf("unable to update asset: %w", err)
 		}
-		fmt.Printf("Asset %s successfully updated\n", args[0])
+
+		out.Print(asset, "Asset "+args[0]+" successfully updated")
+
 		return nil
 	},
 }
@@ -439,18 +472,18 @@ COMMON ASSET TYPES & EXAMPLES:
   WEBAPP:
     {"asset_type": "WEBAPP", "url": "https://app.example.com"}
   
-  REST_API:
-    {"asset_type": "REST_API", "url": "https://api.example.com"}
+  REST:
+    {"asset_type": "REST", "url": "https://api.example.com"}
   
-  GRAPHQL_API:
-    {"asset_type": "GRAPHQL_API", "url": "https://api.example.com/graphql"}
+  GRAPHQL:
+    {"asset_type": "GRAPHQL", "url": "https://api.example.com/graphql"}
   
   IPV4/IPV6:
     {"asset_type": "IPV4", "ip": "192.168.1.1"}
     {"asset_type": "IPV6", "ip": "2001:0db8:85a3::8a2e:0370:7334"}
   
-  DOMAIN:
-    {"asset_type": "DOMAIN", "name": "example.com"}
+  DNS:
+    {"asset_type": "DNS", "name": "example.com"}
 
 OPTIONAL FIELDS:
   • description  - Human-readable description
@@ -472,7 +505,7 @@ ID                                    TYPE    NAME                  STATUS
   # Create REST API asset
   cat <<EOF | escape-cli assets create
   {
-    "asset_type": "REST_API",
+    "asset_type": "REST",
     "url": "https://api.example.com",
     "description": "Production API",
     "status": "MONITORED"
@@ -486,25 +519,35 @@ ID                                    TYPE    NAME                  STATUS
 			_ = cmd.Help()
 			return errors.New("this command does not accept any arguments, it reads from stdin")
 		}
+
 		return nil
 	},
 	RunE: func(cmd *cobra.Command, _ []string) error {
-		// Output JSON Schema for input format if requested (REST as example, varies by asset_type)
-		if out.InputSchema(v3.CreateAssetRESTRequest{}) {
-			return nil
+		if rootCmdInputSchema {
+			schema, err := assetCreateInputSchema()
+			if err != nil {
+				return fmt.Errorf("input schema: %w", err)
+			}
+
+			out.SetInputSchema(true)
+			if out.InputSchema(providedSchema{schema: schema}) {
+				return nil
+			}
 		}
+
 		// Output JSON Schema if requested
 		if out.Schema(v3.AssetDetailed{}) {
 			return nil
 		}
 
-		var data []byte
-
-		b, err := io.ReadAll(os.Stdin)
+		data, err := readPipedStdin(cmd.InOrStdin())
 		if err != nil {
-			return fmt.Errorf("failed to read stdin: %w", err)
+			return err
 		}
-		data = b
+
+		if len(data) == 0 {
+			return errors.New("JSON body is required on stdin")
+		}
 
 		var asset map[string]interface{}
 		if err := json.Unmarshal(data, &asset); err != nil {
@@ -531,8 +574,10 @@ ID                                    TYPE    NAME                  STATUS
 					assetResponse.GetStatus(),
 				))
 			}
+
 			return result
 		})
+
 		return nil
 	},
 }
@@ -555,16 +600,25 @@ var assetCommentCmd = &cobra.Command{
 			_ = cmd.Help()
 			return errors.New("asset ID is required")
 		}
+
 		return nil
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
+		if out.Schema(v3.CreateAssetComment200Response{}) {
+			return nil
+		}
+
 		if assetCommentMsg == "" {
 			return errors.New("--message is required")
 		}
-		if err := escape.CommentAsset(cmd.Context(), args[0], assetCommentMsg); err != nil {
+
+		comment, err := escape.CommentAsset(cmd.Context(), args[0], assetCommentMsg)
+		if err != nil {
 			return fmt.Errorf("unable to add comment: %w", err)
 		}
-		out.Log("Comment added to asset " + args[0])
+
+		out.Print(comment, "Comment added to asset "+args[0])
+
 		return nil
 	},
 }
@@ -578,16 +632,19 @@ var assetListActivitiesCmd = &cobra.Command{
 			_ = cmd.Help()
 			return errors.New("asset ID is required")
 		}
+
 		return nil
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
 		if out.Schema([]v3.ActivitySummarized{}) {
 			return nil
 		}
+
 		activities, err := escape.ListAssetActivities(cmd.Context(), args[0])
 		if err != nil {
 			return fmt.Errorf("unable to list activities: %w", err)
 		}
+
 		out.Table(activities, func() []string {
 			res := []string{"ID\tCREATED AT\tKIND\tAUTHOR EMAIL"}
 			for _, a := range activities {
@@ -595,10 +652,13 @@ var assetListActivitiesCmd = &cobra.Command{
 				if a.Author != nil {
 					email = a.Author.Email
 				}
+
 				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s", a.GetId(), a.GetCreatedAt(), a.GetKind(), email))
 			}
+
 			return res
 		})
+
 		return nil
 	},
 }
@@ -608,33 +668,50 @@ var assetBulkUpdateCmd = &cobra.Command{
 	Short: "Update multiple assets matching a filter",
 	Long:  `Bulk update tags, projects, or status of assets matching a filter predicate.`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
+		if out.Schema(v3.BulkUpdateAssets200Response{}) {
+			return nil
+		}
+
+		if err := requireAssetBulkSelection(); err != nil {
+			return err
+		}
+
 		where := v3.BulkUpdateAssetsRequestWhere{}
 		if len(bulkAssetIDs) > 0 {
 			where.AssetIds = bulkAssetIDs
 		}
+
 		if len(bulkAssetTypes) > 0 {
 			types := make([]v3.ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE, len(bulkAssetTypes))
 			for i, t := range bulkAssetTypes {
 				types[i] = v3.ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE(t)
 			}
+
 			where.Types = types
 		}
+
 		if len(bulkAssetStatuses) > 0 {
 			statuses := make([]v3.ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS, len(bulkAssetStatuses))
 			for i, s := range bulkAssetStatuses {
 				statuses[i] = v3.ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS(s)
 			}
+
 			where.Statuses = statuses
 		}
+
 		var status *v3.ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS
 		if bulkAssetStatus != "" {
 			s := v3.ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS(bulkAssetStatus)
 			status = &s
 		}
-		if err := escape.BulkUpdateAssets(cmd.Context(), where, bulkAssetTagIDs, bulkAssetProjIDs, status); err != nil {
+
+		result, err := escape.BulkUpdateAssets(cmd.Context(), where, bulkAssetTagIDs, bulkAssetProjIDs, status)
+		if err != nil {
 			return fmt.Errorf("unable to bulk update assets: %w", err)
 		}
-		out.Log("Bulk update completed")
+
+		out.Print(result, "Bulk update completed")
+
 		return nil
 	},
 }
@@ -644,30 +721,57 @@ var assetBulkDeleteCmd = &cobra.Command{
 	Short: "Delete multiple assets matching a filter",
 	Long:  `Schedule multiple assets matching a filter predicate for deletion.`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
+		if out.Schema(v3.BulkUpdateAssets200Response{}) {
+			return nil
+		}
+
+		if err := requireAssetBulkSelection(); err != nil {
+			return err
+		}
+
 		where := v3.BulkUpdateAssetsRequestWhere{}
 		if len(bulkAssetIDs) > 0 {
 			where.AssetIds = bulkAssetIDs
 		}
+
 		if len(bulkAssetTypes) > 0 {
 			types := make([]v3.ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE, len(bulkAssetTypes))
 			for i, t := range bulkAssetTypes {
 				types[i] = v3.ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE(t)
 			}
+
 			where.Types = types
 		}
+
 		if len(bulkAssetStatuses) > 0 {
 			statuses := make([]v3.ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS, len(bulkAssetStatuses))
 			for i, s := range bulkAssetStatuses {
 				statuses[i] = v3.ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS(s)
 			}
+
 			where.Statuses = statuses
 		}
-		if err := escape.BulkDeleteAssets(cmd.Context(), where); err != nil {
+
+		result, err := escape.BulkDeleteAssets(cmd.Context(), where)
+		if err != nil {
 			return fmt.Errorf("unable to bulk delete assets: %w", err)
 		}
-		out.Log("Bulk delete scheduled")
+
+		out.Print(result, "Bulk delete scheduled")
+
 		return nil
 	},
+}
+
+// requireAssetBulkSelection rejects a bulk asset mutation with an empty where.
+// The public API accepts that payload, and deleteAssets/updateAssets then match
+// every asset the caller can see.
+func requireAssetBulkSelection() error {
+	if len(bulkAssetIDs) > 0 || len(bulkAssetTypes) > 0 || len(bulkAssetStatuses) > 0 {
+		return nil
+	}
+
+	return errors.New("at least one of --asset-id, --type, or --asset-status is required")
 }
 
 func init() {
@@ -680,6 +784,7 @@ func init() {
 	assetsListCmd.Flags().BoolVarP(&manuallyCreated, "manually-created", "m", false, "show only manually created assets (exclude auto-discovered)")
 	assetsListCmd.Flags().StringVar(&assetSortType, "sort-by", "", "sort field (e.g., LAST_SEEN, CREATED_AT)")
 	assetsListCmd.Flags().StringVar(&assetSortDirection, "sort-direction", "", "sort direction: asc, desc")
+	assetListPage.bind(assetsListCmd)
 
 	assetsCmd.AddCommand(assetGetCmd)
 	assetGetCmd.Flags().BoolVarP(&assetActivities, "activities", "a", false, "include issue activity timeline for this asset")
@@ -688,6 +793,8 @@ func init() {
 	assetsCmd.AddCommand(assetUpdateCmd)
 	assetUpdateCmd.Flags().StringVarP(&assetDescription, "description", "d", "", "human-readable description of the asset")
 	assetUpdateCmd.Flags().StringVarP(&assetFramework, "framework", "f", "", fmt.Sprintf("asset framework/type classification: %v", v3.AllowedENUMPROPERTIESFRAMEWORKEnumValues))
+	assetUpdateCmd.Flags().StringVar(&assetName, "name", "", "custom asset name (falls back to the discovered name when empty)")
+	assetUpdateCmd.Flags().StringSliceVar(&assetUpdateProjectIDs, "project-id", nil, "project IDs to assign the asset to")
 	assetUpdateCmd.Flags().StringSliceVarP(&assetOwners, "owners", "", []string{}, "comma-separated list of owner email addresses")
 	assetUpdateCmd.Flags().StringVarP(&assetStatus, "status", "s", "", fmt.Sprintf("monitoring status: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUSEnumValues))
 	assetUpdateCmd.Flags().StringSliceVarP(&assetTagIDs, "tag-ids", "t", []string{}, "comma-separated list of tag IDs for organization")

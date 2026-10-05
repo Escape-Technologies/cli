@@ -49,6 +49,7 @@ func humanizeAPIError(err error) error {
 	if err == nil {
 		return nil
 	}
+
 	// The generated v3 client returns *v3.GenericOpenAPIError, so target the
 	// pointer type — targeting the value type silently fails to match and
 	// drops all humanization (see TestHumanizeAPIErrorHumanizesGeneratedAPIError).
@@ -56,13 +57,16 @@ func humanizeAPIError(err error) error {
 	if !errors.As(err, &apiErr) || apiErr == nil {
 		return err
 	}
+
 	if isUnauthorizedAPIError(apiErr) {
 		return &humanizedAPIError{msg: InvalidAPIKeyMessage, err: err}
 	}
+
 	msg := humanizeAPIErrorBody(apiErr.Body())
 	if msg == "" {
 		return err
 	}
+
 	return &humanizedAPIError{msg: msg, err: err}
 }
 
@@ -76,10 +80,13 @@ func isUnauthorizedAPIError(apiErr *v3.GenericOpenAPIError) bool {
 	if apiErr == nil {
 		return false
 	}
+
 	if strings.Contains(apiErr.Error(), "401") {
 		return true
 	}
+
 	normalized := strings.ToLower(humanizeAPIErrorBody(apiErr.Body()))
+
 	return strings.Contains(normalized, "not authorized") ||
 		strings.Contains(normalized, "no valid access token") ||
 		strings.Contains(normalized, "unauthorized")
@@ -94,18 +101,23 @@ func humanizeAPIErrorBody(body []byte) string {
 	if len(body) == 0 {
 		return ""
 	}
+
 	var parsed apiErrorBody
 	if jsonErr := json.Unmarshal(body, &parsed); jsonErr != nil {
 		return ""
 	}
+
 	if parsed.Message == "" && parsed.Details == "" {
 		return ""
 	}
+
 	if parsed.Details == "" {
 		return parsed.Message
 	}
+
 	if parsed.Message == "" {
 		return parsed.Details
 	}
+
 	return parsed.Message + ": " + parsed.Details
 }

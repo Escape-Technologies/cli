@@ -47,8 +47,10 @@ func runUsersMe(cmd *cobra.Command) error {
 	out.Table(user, func() []string {
 		res := []string{"ID\tNAME\tEMAIL\tORG ID\tORG NAME"}
 		res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s", u.GetId(), name, u.GetEmail(), org.GetId(), org.GetName()))
+
 		return res
 	})
+
 	return nil
 }
 
@@ -108,8 +110,10 @@ email addresses, and role information.`,
 			for _, u := range users {
 				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s", u.GetId(), u.GetEmail(), stringValue(u.AdditionalProperties["name"]), strings.Join(roleIDs(u.GetRoleBindings()), ","), out.GetShortDate(u.GetCreatedAt().String())))
 			}
+
 			return res
 		})
+
 		return nil
 	},
 }
@@ -122,6 +126,7 @@ var usersGetCmd = &cobra.Command{
 		if out.Schema(v3.GetUser200Response{}) {
 			return nil
 		}
+
 		if len(args) != 1 {
 			_ = cmd.Help()
 			return errors.New("user ID is required")
@@ -135,8 +140,10 @@ var usersGetCmd = &cobra.Command{
 		out.Table(user, func() []string {
 			res := []string{"ID\tEMAIL\tNAME\tROLES\tCREATED AT"}
 			res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s", user.GetId(), user.GetEmail(), stringValue(user.AdditionalProperties["name"]), strings.Join(roleNames(user.GetRoleBindings()), ","), out.GetShortDate(user.GetCreatedAt().String())))
+
 			return res
 		})
+
 		return nil
 	},
 }
@@ -154,6 +161,7 @@ func roleIDs(bindings []v3.ListProjects200ResponseDataInnerBindingsInner) []stri
 			ids = append(ids, binding.GetRoleId())
 		}
 	}
+
 	return ids
 }
 
@@ -165,6 +173,7 @@ func roleNames(bindings []v3.CreateProject200ResponseBindingsInner) []string {
 			names = append(names, role.GetName())
 		}
 	}
+
 	return names
 }
 
@@ -185,6 +194,7 @@ They will receive an invitation to set up their account.`,
 		if out.Schema([]v3.ListUsers200ResponseInner{}) {
 			return nil
 		}
+
 		if len(usersInviteEmails) == 0 {
 			return errors.New("at least one --email is required")
 		}
@@ -199,8 +209,10 @@ They will receive an invitation to set up their account.`,
 			for _, u := range users {
 				res = append(res, fmt.Sprintf("%s\t%s", u.GetId(), u.GetEmail()))
 			}
+
 			return res
 		})
+
 		return nil
 	},
 }

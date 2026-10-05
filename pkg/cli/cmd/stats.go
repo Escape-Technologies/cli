@@ -21,10 +21,12 @@ application count, monitored asset count, and open issue counts by severity.`,
 		if out.Schema(v3.GetStatistics200Response{}) {
 			return nil
 		}
+
 		stats, err := escape.GetStatistics(cmd.Context())
 		if err != nil {
 			return fmt.Errorf("unable to get statistics: %w", err)
 		}
+
 		out.Table(stats, func() []string {
 			return []string{
 				"APPLICATIONS\tASSETS\tHIGH\tMEDIUM\tLOW\tINFO",
@@ -38,6 +40,7 @@ application count, monitored asset count, and open issue counts by severity.`,
 				),
 			}
 		})
+
 		return nil
 	},
 }

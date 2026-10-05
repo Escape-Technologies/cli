@@ -23,16 +23,24 @@ var asmTriggerCmd = &cobra.Command{
 	Short:   "Trigger ASM scans on assets",
 	Long:    `Trigger Attack Surface Management scans. Optionally filter by asset IDs to scan specific assets.`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
+		if out.Schema(v3.TriggerAsmScans200Response{}) {
+			return nil
+		}
+
 		var where *v3.TriggerAsmScansRequestWhere
 		if len(asmAssetIDs) > 0 {
 			where = &v3.TriggerAsmScansRequestWhere{
 				AssetIds: asmAssetIDs,
 			}
 		}
-		if err := escape.TriggerAsmScans(cmd.Context(), where); err != nil {
+
+		result, err := escape.TriggerAsmScans(cmd.Context(), where)
+		if err != nil {
 			return fmt.Errorf("unable to trigger ASM scans: %w", err)
 		}
-		out.Log("ASM scans triggered successfully")
+
+		out.Print(result, "ASM scans triggered successfully")
+
 		return nil
 	},
 }
@@ -41,4 +49,7 @@ func init() {
 	rootCmd.AddCommand(asmCmd)
 	asmCmd.AddCommand(asmTriggerCmd)
 	asmTriggerCmd.Flags().StringSliceVar(&asmAssetIDs, "asset-id", nil, "filter by asset ID(s)")
+	// Without an asset id the API scans every asset. The CLI keeps that as an
+	// explicit operator action. The MCP tool must name the assets.
+	markMCPRequired(asmTriggerCmd.Flags(), "asset-id")
 }

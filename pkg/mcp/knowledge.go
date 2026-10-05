@@ -3,6 +3,7 @@ package mcp
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"log"
 	"net/url"
@@ -15,6 +16,7 @@ import (
 
 const (
 	knowledgeToolName        = "knowledge_answer_question"
+	knowledgeGetPageToolName = "knowledge_get_page"
 	defaultPlatformBaseURL   = "https://app.escape.tech"
 	knowledgePlatformBaseEnv = "PLATFORM_BASE_URL"
 	knowledgeDocsIndexEnv    = "DOCS_SEARCH_INDEX_URL"
@@ -28,6 +30,12 @@ const (
 	platformLinkLimit = 3
 )
 
+// KnowledgeToolNames are the documentation tools RegisterKnowledgeTools adds.
+// Guidance may name these; it may not invent others.
+func KnowledgeToolNames() []string {
+	return []string{knowledgeToolName, knowledgeGetPageToolName}
+}
+
 // KnowledgeOptions configures the answer_question tool. Zero-value fields
 // fall back to the production defaults (docs.escape.tech, app.escape.tech).
 type KnowledgeOptions struct {
@@ -37,8 +45,8 @@ type KnowledgeOptions struct {
 	DocsTTL         int64
 }
 
-// RegisterKnowledgeTools registers the knowledge_answer_question tool on the
-// given server.
+// RegisterKnowledgeTools registers the knowledge_answer_question and
+// knowledge_get_page tools on the given server.
 func RegisterKnowledgeTools(server *mcpserver.MCPServer, opts KnowledgeOptions) error {
 	docsSite := firstNonEmpty(opts.DocsSiteURL, firstNonEmpty(os.Getenv(knowledgeDocsSiteEnv), defaultDocsSiteURL))
 	docsIndex := firstNonEmpty(opts.DocsIndexURL, firstNonEmpty(os.Getenv(knowledgeDocsIndexEnv), defaultDocsSearchIndexURL))
@@ -58,7 +66,8 @@ func RegisterKnowledgeTools(server *mcpserver.MCPServer, opts KnowledgeOptions) 
 		knowledgeToolName,
 		mcpgo.WithDescription(
 			"Answer Escape product/documentation questions and return authoritative docs/platform links. "+
-				"Call this for any conceptual, how-to, setup, troubleshooting, or link-request question before replying.",
+				"Call this for any conceptual, how-to, setup, troubleshooting, or link-request question before replying. "+
+				"Results include links and short snippets; call knowledge_get_page with a result URL to read the full page.",
 		),
 		mcpgo.WithString(
 			"question",
@@ -83,7 +92,81 @@ func RegisterKnowledgeTools(server *mcpserver.MCPServer, opts KnowledgeOptions) 
 	)
 
 	server.AddTool(tool, buildKnowledgeHandler(index, selector, docsSite, platformBase))
+	server.AddTool(buildKnowledgeGetPageTool(), buildKnowledgeGetPageHandler(index))
+
 	return nil
+}
+
+func buildKnowledgeGetPageTool() mcpgo.Tool {
+	return mcpgo.NewTool(
+		knowledgeGetPageToolName,
+		mcpgo.WithDescription(
+			"Fetch the full text of an Escape documentation page. "+
+				"Use after knowledge_answer_question when the short snippets are not enough: "+
+				"pass the page URL (or path) from one of its results.",
+		),
+		mcpgo.WithString(
+			"url",
+			mcpgo.Required(),
+			mcpgo.Description(
+				"Docs page URL or path returned by knowledge_answer_question, e.g. "+
+					"https://docs.escape.tech/documentation/private-location/ or /documentation/private-location/. "+
+					"Anchors (#section) are ignored; the whole page is returned.",
+			),
+		),
+		mcpgo.WithReadOnlyHintAnnotation(true),
+		mcpgo.WithDestructiveHintAnnotation(false),
+		mcpgo.WithIdempotentHintAnnotation(true),
+		mcpgo.WithOpenWorldHintAnnotation(false),
+	)
+}
+
+func buildKnowledgeGetPageHandler(index *DocsSearchIndex) mcpserver.ToolHandlerFunc {
+	return func(ctx context.Context, request mcpgo.CallToolRequest) (*mcpgo.CallToolResult, error) {
+		if _, err := AuthFromContext(ctx); err != nil {
+			return mcpgo.NewToolResultError(err.Error()), nil
+		}
+
+		target := strings.TrimSpace(request.GetString("url", ""))
+		if target == "" {
+			return mcpgo.NewToolResultError(
+				`Invalid input. Expected {"url":"https://docs.escape.tech/... or /documentation/..."}.`,
+			), nil
+		}
+
+		page, err := index.GetPage(ctx, target)
+		if errors.Is(err, ErrDocsPageNotFound) {
+			return mcpgo.NewToolResultError(fmt.Sprintf(
+				"No documentation page found for %q. Call knowledge_answer_question first and pass a URL from its results.",
+				target,
+			)), nil
+		}
+
+		if err != nil {
+			return mcpgo.NewToolResultError(fmt.Sprintf(
+				"Failed to load the documentation page for %q: %v", target, err,
+			)), nil
+		}
+
+		lines := []string{
+			"# " + page.Title,
+			page.URL,
+			"",
+			page.Text,
+		}
+		if page.Truncated {
+			lines = append(lines, "", fmt.Sprintf("[page truncated at %d characters]", maxDocsPageChars))
+		}
+
+		payload := map[string]any{
+			"title":     page.Title,
+			"url":       page.URL,
+			"text":      page.Text,
+			"truncated": page.Truncated,
+		}
+
+		return mcpgo.NewToolResultStructured(payload, strings.Join(lines, "\n")), nil
+	}
 }
 
 func buildKnowledgeHandler(
@@ -103,11 +186,13 @@ func buildKnowledgeHandler(
 				`Invalid input. Expected {"question":"...","topic"?: "...","limit"?: number}.`,
 			), nil
 		}
+
 		topic := strings.TrimSpace(request.GetString("topic", ""))
 		limit := int(request.GetFloat("limit", float64(knowledgeDefaultLimit)))
 		if limit < 1 {
 			limit = knowledgeDefaultLimit
 		}
+
 		if limit > knowledgeMaxLimit {
 			limit = knowledgeMaxLimit
 		}
@@ -116,6 +201,7 @@ func buildKnowledgeHandler(
 		if topic != "" {
 			query = topic + " " + question
 		}
+
 		docsQuery := BuildDocsQuery(query)
 		intent := DetectLinkIntent(query)
 
@@ -128,11 +214,13 @@ func buildKnowledgeHandler(
 			if docsQuery == "" {
 				return nil, false
 			}
+
 			matches, err := index.Search(ctx, docsQuery, limit)
 			if err != nil {
 				log.Printf("WARN knowledge_answer_question: docs index search failed: %v", err)
 				return nil, true
 			}
+
 			return matches, false
 		}
 
@@ -146,6 +234,7 @@ func buildKnowledgeHandler(
 			for _, match := range matches {
 				parts = append(parts, match.Title)
 			}
+
 			return strings.Join(parts, " ")
 		}
 
@@ -173,6 +262,7 @@ func buildKnowledgeHandler(
 		}
 
 		platformLinks := selector.Select(platformContextFrom(matches), platformLinkLimit)
+
 		return formatGeneralResult(question, platformLinks, matches), nil
 	}
 }
@@ -191,6 +281,7 @@ func formatDirectedLinkResult(
 	if intent.Target == LinkTargetDocs || intent.Target == LinkTargetBoth {
 		appendDocumentationLinks(&lines, docsMatches, docsSite, docsQuery)
 	}
+
 	if intent.Target == LinkTargetPlatform || intent.Target == LinkTargetBoth {
 		appendPlatformLinks(&lines, platformLinks, platformBase)
 	}
@@ -203,9 +294,11 @@ func formatDirectedLinkResult(
 			if len(platformLinks) == 0 {
 				return nil
 			}
+
 			return platformLinks[0]
 		}(),
 	}
+
 	return mcpgo.NewToolResultStructured(payload, strings.Join(lines, "\n"))
 }
 
@@ -221,6 +314,7 @@ func formatFallbackResult(
 	if indexUnavailable {
 		lead = "The documentation search index is temporarily unreachable; I am falling back to top-level links."
 	}
+
 	lines := []string{
 		"Question: " + question,
 		"",
@@ -231,6 +325,7 @@ func formatFallbackResult(
 	if docsQuery != "" {
 		lines = append(lines, fmt.Sprintf("Docs search: [Documentation search](%s)", docsSearchURL(docsSite, docsQuery)))
 	}
+
 	appendPlatformLinks(&lines, platformLinks, platformBase)
 
 	payload := map[string]any{
@@ -240,6 +335,7 @@ func formatFallbackResult(
 		"fallback":         true,
 		"indexUnavailable": indexUnavailable,
 	}
+
 	return mcpgo.NewToolResultStructured(payload, strings.Join(lines, "\n"))
 }
 
@@ -254,13 +350,18 @@ func formatGeneralResult(
 		lines = append(lines, fmt.Sprintf("%d. [%s](%s)", i+1, match.Title, match.URL))
 		lines = append(lines, "   "+match.Snippet)
 	}
+
 	if len(platformLinks) > 0 {
 		lines = append(lines, "", "Relevant platform links:")
 		for _, link := range platformLinks {
 			lines = append(lines, fmt.Sprintf("- [%s](%s)", link.Label, link.URL))
 		}
 	}
-	lines = append(lines, "", "If this requires tenant-specific data, use insights/actions tools and combine with these docs.")
+
+	lines = append(lines, "",
+		"If this requires tenant-specific data, use the CLI-backed tools (for example issues_list or scans_list) "+
+			"and call list_capabilities to discover the rest; combine their results with these docs. "+
+			"Use knowledge_get_page with a result URL to read any page above in full.")
 
 	payload := map[string]any{
 		"question":      question,
@@ -270,9 +371,11 @@ func formatGeneralResult(
 			if len(platformLinks) == 0 {
 				return nil
 			}
+
 			return platformLinks[0]
 		}(),
 	}
+
 	return mcpgo.NewToolResultStructured(payload, strings.Join(lines, "\n"))
 }
 
@@ -286,8 +389,10 @@ func prependPrimaryPlatformCTA(lines []string, platformLinks []PlatformLink) []s
 	if len(platformLinks) == 0 {
 		return lines
 	}
+
 	primary := platformLinks[0]
 	cta := fmt.Sprintf("Open in Escape platform: [%s](%s)", primary.Label, primary.URL)
+
 	return append(lines, "", cta)
 }
 
@@ -297,8 +402,10 @@ func appendDocumentationLinks(lines *[]string, matches []KnowledgeSearchResult, 
 		for i, match := range matches {
 			*lines = append(*lines, fmt.Sprintf("%d. [%s](%s)", i+1, match.Title, match.URL))
 		}
+
 		return
 	}
+
 	*lines = append(*lines, fmt.Sprintf("1. [Documentation home](%s)", docsHomeURL(docsSite)))
 	if docsQuery != "" {
 		*lines = append(*lines, fmt.Sprintf("2. [Documentation search](%s)", docsSearchURL(docsSite, docsQuery)))
@@ -311,8 +418,10 @@ func appendPlatformLinks(lines *[]string, platformLinks []PlatformLink, platform
 		for i, link := range platformLinks {
 			*lines = append(*lines, fmt.Sprintf("%d. [%s](%s)", i+1, link.Label, link.URL))
 		}
+
 		return
 	}
+
 	*lines = append(*lines, fmt.Sprintf("1. [Escape platform](%s)", ensureTrailingSlash(platformBase)))
 }
 
@@ -320,6 +429,7 @@ func docsHomeURL(docsSite string) string {
 	if base, err := url.Parse(docsSite); err == nil {
 		return base.ResolveReference(&url.URL{Path: "/documentation/"}).String()
 	}
+
 	return strings.TrimRight(docsSite, "/") + "/documentation/"
 }
 
@@ -328,7 +438,9 @@ func docsSearchURL(docsSite, query string) string {
 	if err != nil {
 		return strings.TrimRight(docsSite, "/") + "/documentation/?q=" + url.QueryEscape(query)
 	}
+
 	ref := &url.URL{Path: "/documentation/", RawQuery: "q=" + url.QueryEscape(query)}
+
 	return base.ResolveReference(ref).String()
 }
 
@@ -336,6 +448,7 @@ func ensureTrailingSlash(value string) string {
 	if strings.HasSuffix(value, "/") {
 		return value
 	}
+
 	return value + "/"
 }
 

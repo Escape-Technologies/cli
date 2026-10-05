@@ -21,6 +21,7 @@ func rawRequest(ctx context.Context, method, path string, body []byte, out any) 
 	if err != nil {
 		return fmt.Errorf("failed to get API URL: %w", err)
 	}
+
 	authorization, err := env.GetAuthorizationHeader()
 	if err != nil {
 		return fmt.Errorf("failed to get authorization header: %w", err)
@@ -36,6 +37,7 @@ func rawRequest(ctx context.Context, method, path string, body []byte, out any) 
 	if err != nil {
 		return fmt.Errorf("failed to build request: %w", err)
 	}
+
 	req.Header.Set("Authorization", authorization)
 	if len(body) > 0 {
 		req.Header.Set("Content-Type", "application/json")
@@ -45,10 +47,12 @@ func rawRequest(ctx context.Context, method, path string, body []byte, out any) 
 	if _, hasDeadline := ctx.Deadline(); !hasDeadline && client.Timeout == 0 {
 		client.Timeout = defaultRawRequestTimeout
 	}
+
 	resp, err := client.Do(req)
 	if err != nil {
 		return fmt.Errorf("request failed: %w", err)
 	}
+
 	defer func() {
 		_ = resp.Body.Close()
 	}()
@@ -59,6 +63,7 @@ func rawRequest(ctx context.Context, method, path string, body []byte, out any) 
 		if msg == "" {
 			msg = resp.Status
 		}
+
 		return fmt.Errorf("api error (%s): %s", resp.Status, msg)
 	}
 
@@ -71,8 +76,10 @@ func rawRequest(ctx context.Context, method, path string, body []byte, out any) 
 		if err == io.EOF {
 			return nil
 		}
+
 		return fmt.Errorf("failed to decode response: %w", err)
 	}
+
 	return nil
 }
 
@@ -81,5 +88,6 @@ func rawPath(segments ...string) string {
 	for _, segment := range segments {
 		escaped = append(escaped, url.PathEscape(segment))
 	}
+
 	return "/" + strings.Join(escaped, "/")
 }

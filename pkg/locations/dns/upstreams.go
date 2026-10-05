@@ -26,11 +26,13 @@ func resolveUpstreams() []string {
 	if err != nil {
 		log.Debug("[DNS] system resolver discovery failed: %v", err)
 	}
+
 	upstreams := normalize(servers)
 	if len(upstreams) == 0 {
 		log.Debug("[DNS] no system resolvers found, using fallback resolvers")
 		return fallbackServers
 	}
+
 	return upstreams
 }
 
@@ -44,13 +46,16 @@ func normalize(servers []string) []string {
 		if !isUsable(host) {
 			continue
 		}
+
 		addr := withPort(s)
 		if _, dup := seen[addr]; dup {
 			continue
 		}
+
 		seen[addr] = struct{}{}
 		out = append(out, addr)
 	}
+
 	return out
 }
 
@@ -62,9 +67,11 @@ func isUsable(host string) bool {
 	if ip == nil || ip.IsUnspecified() {
 		return false
 	}
+
 	if ip.To4() == nil && ip.IsLinkLocalUnicast() {
 		return false
 	}
+
 	return true
 }
 
@@ -72,6 +79,7 @@ func hostOf(server string) string {
 	if host, _, err := net.SplitHostPort(server); err == nil {
 		return host
 	}
+
 	return server
 }
 
@@ -79,5 +87,6 @@ func withPort(server string) string {
 	if _, _, err := net.SplitHostPort(server); err == nil {
 		return server
 	}
+
 	return net.JoinHostPort(server, defaultPort)
 }

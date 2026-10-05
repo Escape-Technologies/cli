@@ -49,6 +49,7 @@ type AssetSummarized1 struct {
 	Frontend             *AssetFrontendSummarized   `json:"frontend,omitempty"`
 	Host                 *AssetHostSummarized       `json:"host,omitempty"`
 	Technology           *AssetTechnologySummarized `json:"technology,omitempty"`
+	MobileApp            *AssetMobileAppSummarized  `json:"mobileApp,omitempty"`
 	Links                AssetDetailedLinks         `json:"links"`
 	AdditionalProperties map[string]interface{}
 }
@@ -579,6 +580,38 @@ func (o *AssetSummarized1) SetTechnology(v AssetTechnologySummarized) {
 	o.Technology = &v
 }
 
+// GetMobileApp returns the MobileApp field value if set, zero value otherwise.
+func (o *AssetSummarized1) GetMobileApp() AssetMobileAppSummarized {
+	if o == nil || IsNil(o.MobileApp) {
+		var ret AssetMobileAppSummarized
+		return ret
+	}
+	return *o.MobileApp
+}
+
+// GetMobileAppOk returns a tuple with the MobileApp field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AssetSummarized1) GetMobileAppOk() (*AssetMobileAppSummarized, bool) {
+	if o == nil || IsNil(o.MobileApp) {
+		return nil, false
+	}
+	return o.MobileApp, true
+}
+
+// HasMobileApp returns a boolean if a field has been set.
+func (o *AssetSummarized1) HasMobileApp() bool {
+	if o != nil && !IsNil(o.MobileApp) {
+		return true
+	}
+
+	return false
+}
+
+// SetMobileApp gets a reference to the given AssetMobileAppSummarized and assigns it to the MobileApp field.
+func (o *AssetSummarized1) SetMobileApp(v AssetMobileAppSummarized) {
+	o.MobileApp = &v
+}
+
 // GetLinks returns the Links field value
 func (o *AssetSummarized1) GetLinks() AssetDetailedLinks {
 	if o == nil {
@@ -646,6 +679,9 @@ func (o AssetSummarized1) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Technology) {
 		toSerialize["technology"] = o.Technology
+	}
+	if !IsNil(o.MobileApp) {
+		toSerialize["mobileApp"] = o.MobileApp
 	}
 	toSerialize["links"] = o.Links
 
@@ -719,6 +755,7 @@ func (o *AssetSummarized1) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "frontend")
 		delete(additionalProperties, "host")
 		delete(additionalProperties, "technology")
+		delete(additionalProperties, "mobileApp")
 		delete(additionalProperties, "links")
 		o.AdditionalProperties = additionalProperties
 	}

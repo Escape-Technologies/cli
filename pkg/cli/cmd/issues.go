@@ -1,6 +1,9 @@
 package cmd
 
 import (
+	"bytes"
+	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"strconv"
@@ -28,13 +31,16 @@ func formatLatestEventIDs(ids *[]string, truncated bool) string {
 	if ids == nil {
 		return "(n/a)"
 	}
+
 	if len(*ids) == 0 {
 		return "-"
 	}
+
 	joined := strings.Join(*ids, ", ")
 	if truncated {
 		joined += ", …"
 	}
+
 	return joined
 }
 
@@ -70,11 +76,14 @@ func formatIssueCompliances(items []v3.GetIssue200ResponseCompliancesInner) stri
 		if item.GetFramework() == "" && item.GetItem() == "" {
 			continue
 		}
+
 		values = append(values, strings.Trim(strings.Join([]string{item.GetFramework(), item.GetItem()}, ":"), ":"))
 	}
+
 	if len(values) == 0 {
 		return "-"
 	}
+
 	return strings.Join(values, ", ")
 }
 
@@ -106,6 +115,7 @@ var (
 	assetClasses         []string
 	issueScannerKinds    []string
 	issueNames           []string
+	issueListPage        pageFlags
 )
 
 var issuesCmd = &cobra.Command{
@@ -199,12 +209,14 @@ ID                                      CREATED AT  SEVERITY  STATUS  NAME      
 		if issueSortDirection != "" && issueSortType == "" {
 			return errors.New("--sort-direction requires --sort-by")
 		}
+
 		if issueSortType != "" {
 			issueSortType = strings.ToUpper(issueSortType)
 			if _, ok := validIssueSortFields[issueSortType]; !ok {
 				return fmt.Errorf("invalid --sort-by %q; valid values: LAST_SEEN, FIRST_SEEN, SEVERITY, STATUS", issueSortType)
 			}
 		}
+
 		switch normalizedDirection := strings.ToLower(issueSortDirection); normalizedDirection {
 		case "":
 		case "asc", "desc":
@@ -229,25 +241,18 @@ ID                                      CREATED AT  SEVERITY  STATUS  NAME      
 			ScannerKinds: issueScannerKinds,
 			Names:        issueNames,
 		}
-		issues, next, err := escape.ListIssues(cmd.Context(), "", filters, issueSortType, issueSortDirection)
-		if err != nil {
-			return fmt.Errorf("unable to list issues: %w", err)
-		}
-		allIssues := issues
-		for next != nil && *next != "" {
-			issues, next, err = escape.ListIssues(cmd.Context(), *next, filters, issueSortType, issueSortDirection)
-			if err != nil {
-				return fmt.Errorf("unable to list issues: %w", err)
-			}
-			allIssues = append(allIssues, issues...)
-		}
-		out.Table(allIssues, func() []string {
+		if err := runPagedList(cmd, issueListPage, func(ctx context.Context, cursor string, size int) ([]v3.IssueSummarized, *string, int, error) {
+			return escape.ListIssues(ctx, cursor, filters, issueSortType, issueSortDirection, size)
+		}, func(issues []v3.IssueSummarized) []string {
 			res := []string{"ID\tCREATED AT\tSEVERITY\tSTATUS\tNAME\tASSET\tLINK"}
-			for _, issue := range allIssues {
+			for _, issue := range issues {
 				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s", issue.GetId(), out.GetShortDate(issue.GetCreatedAt()), issue.GetSeverity(), issue.GetStatus(), issue.GetName(), issue.GetAsset().Name, issue.GetLinks().IssueOverview))
 			}
+
 			return res
-		})
+		}); err != nil {
+			return fmt.Errorf("unable to list issues: %w", err)
+		}
 
 		return nil
 	},
@@ -291,6 +296,7 @@ ID                                      CREATED AT                SEVERITY  CATE
 			_ = cmd.Help()
 			return errors.New("issue ID is required")
 		}
+
 		return nil
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
@@ -311,13 +317,16 @@ ID                                      CREATED AT                SEVERITY  CATE
 			if cvssData.GetScore() != 0 || cvssData.GetVector() != "" {
 				cvss = fmt.Sprintf("%.1f %s", cvssData.GetScore(), cvssData.GetVector())
 			}
+
 			var latestEventIDs *[]string
 			if ids, ok := issue.GetLatestEventIdsOk(); ok {
 				latestEventIDs = &ids
 			}
+
 			latestEvents := formatLatestEventIDs(latestEventIDs, issue.GetLatestEventsTruncated())
 			res := []string{"ID\tCREATED AT\tSEVERITY\tCATEGORY\tSTATUS\tNAME\tASSET\tFIRST SEEN SCAN\tCVSS\tFRAMEWORK\tCOMPLIANCES\tREMEDIATION\tCONTEXT\tLATEST EVENTS\tLINK"}
 			res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s", issue.GetId(), issue.GetCreatedAt(), issue.GetSeverity(), issue.GetCategory(), issue.GetStatus(), issue.GetName(), issue.GetAsset().Name, issue.GetFirstSeenScanId(), cvss, issue.GetAiRemediationFramework(), formatIssueCompliances(issue.GetCompliances()), issue.GetRemediation(), issue.GetContext(), latestEvents, issue.GetLinks().IssueOverview))
+
 			return res
 		})
 
@@ -358,6 +367,7 @@ itself cannot be fetched.`,
 			_ = cmd.Help()
 			return errors.New("issue ID is required")
 		}
+
 		return nil
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
@@ -386,6 +396,7 @@ itself cannot be fetched.`,
 			if err := renderIssueWithEvents(result); err != nil {
 				return err
 			}
+
 			return nil
 		}
 
@@ -406,14 +417,19 @@ itself cannot be fetched.`,
 					if err != nil {
 						msg = err.Error()
 					}
+
 					eventErrors[i] = IssueEventHydrateError{EventID: eid, Error: msg}
+
 					return nil
 				}
+
 				latestEvents[i] = *ev
 				eventOK[i] = true
+
 				return nil
 			})
 		}
+
 		_ = g.Wait()
 
 		hydratedEvents := make([]v3.GetEvent200Response, 0, len(latestEvents))
@@ -425,6 +441,7 @@ itself cannot be fetched.`,
 				hydratedErrors = append(hydratedErrors, eventErrors[i])
 			}
 		}
+
 		result.LatestEvents = &hydratedEvents
 		if len(hydratedErrors) > 0 {
 			result.EventErrors = hydratedErrors
@@ -440,10 +457,12 @@ func renderIssueWithEvents(result IssueWithEvents) error {
 		if result.LatestEvents != nil {
 			hydrated = strconv.Itoa(len(*result.LatestEvents))
 		}
+
 		truncated := "(n/a)"
 		if result.LatestEventsTruncated != nil {
 			truncated = strconv.FormatBool(*result.LatestEventsTruncated)
 		}
+
 		res := []string{"ISSUE ID\tEVENTS HYDRATED\tEVENTS FAILED\tTRUNCATED"}
 		res = append(res, fmt.Sprintf("%s\t%s\t%d\t%s",
 			result.Issue.GetId(),
@@ -451,9 +470,80 @@ func renderIssueWithEvents(result IssueWithEvents) error {
 			len(result.EventErrors),
 			truncated,
 		))
+
 		return res
 	})
+
 	return nil
+}
+
+// buildUpdateIssueRequest assembles the PUT payload for `issues update` from the command flags.
+// A --reason is forwarded with the status change, the severity change, or a severity reset.
+// Severity changes use the { value, reason } object form only when a reason is given.
+// A reset with a reason uses the same object with value null, so organizations enforcing
+// REQUIRE_CHANGE_REASON can clear a manual severity. A reset without a reason stays a bare null.
+func buildUpdateIssueRequest() (*v3.UpdateIssueRequest, error) {
+	if issueResetSeverity && issueUpdateSeverity != "" {
+		return nil, errors.New("--reset-severity and --severity are mutually exclusive")
+	}
+
+	if issueUpdateReason != "" && issueUpdateStatusStr == "" && issueUpdateSeverity == "" && !issueResetSeverity {
+		return nil, errors.New("--reason requires --status, --severity, or --reset-severity")
+	}
+
+	body := v3.NewUpdateIssueRequestWithDefaults()
+	if issueUpdateStatusStr != "" {
+		newStatus := v3.ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS(issueUpdateStatusStr)
+		if !newStatus.IsValid() {
+			return nil, fmt.Errorf("invalid status %q; valid values: %v", issueUpdateStatusStr, v3.AllowedENUMPROPERTIESFILTERPROPERTIESSTATUSITEMSEnumValues)
+		}
+
+		statusPayload := v3.NewBulkUpdateIssuesRequestStatusAnyOf(newStatus)
+		if issueUpdateReason != "" {
+			statusPayload.SetReason(issueUpdateReason)
+		}
+
+		body.SetStatus(v3.UpdateIssueRequestStatus{BulkUpdateIssuesRequestStatusAnyOf: statusPayload})
+	}
+
+	if issueResetSeverity {
+		if issueUpdateReason != "" {
+			body.SetSeverity(v3.UpdateIssueRequestSeverity{
+				BulkUpdateIssuesRequestSeverityAnyOf: severityResetWithReason(issueUpdateReason),
+			})
+		} else {
+			body.SetSeverityNil()
+		}
+	} else if issueUpdateSeverity != "" {
+		severity := v3.ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS(issueUpdateSeverity)
+		if !severity.IsValid() {
+			return nil, fmt.Errorf("invalid severity %q; valid values: %v", issueUpdateSeverity, v3.AllowedENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMSEnumValues)
+		}
+
+		if issueUpdateReason != "" {
+			severityPayload := v3.NewBulkUpdateIssuesRequestSeverityAnyOf()
+			severityPayload.SetValue(severity)
+			severityPayload.SetReason(issueUpdateReason)
+			body.SetSeverity(v3.UpdateIssueRequestSeverity{BulkUpdateIssuesRequestSeverityAnyOf: severityPayload})
+		} else {
+			body.SetSeverity(v3.UpdateIssueRequestSeverity{
+				ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS: &severity,
+			})
+		}
+	}
+
+	return body, nil
+}
+
+// severityResetWithReason is the object form {"value": null, "reason": reason}.
+// The generated Value field is omitempty, so assigning a nil Value drops the key.
+// ToMap copies AdditionalProperties afterwards, which is what keeps the explicit null.
+func severityResetWithReason(reason string) *v3.BulkUpdateIssuesRequestSeverityAnyOf {
+	payload := v3.NewBulkUpdateIssuesRequestSeverityAnyOf()
+	payload.SetReason(reason)
+	payload.AdditionalProperties = map[string]any{"value": nil}
+
+	return payload
 }
 
 var issueUpdateStatusCmd = &cobra.Command{
@@ -465,6 +555,7 @@ var issueUpdateStatusCmd = &cobra.Command{
 			_ = cmd.Help()
 			return errors.New("issue ID is required")
 		}
+
 		return nil
 	},
 	Long: `Update Issue Status - Track Vulnerability Remediation
@@ -502,6 +593,9 @@ TRACKING:
   # Mark as false positive
   escape-cli issues update <issue-id> --status FALSE_POSITIVE
 
+  # Change severity, with the reason some organizations require
+  escape-cli issues update <issue-id> --severity CRITICAL --reason "Weaponized in the wild"
+
   # Bulk update issues from a list
   cat issue_ids.txt | xargs -I {} escape-cli issues update {} --status IN_PROGRESS`,
 	RunE: func(cmd *cobra.Command, args []string) error {
@@ -510,39 +604,14 @@ TRACKING:
 		}
 
 		issueID := args[0]
-		if issueResetSeverity && issueUpdateSeverity != "" {
-			return errors.New("--reset-severity and --severity are mutually exclusive")
-		}
-		if issueUpdateReason != "" && issueUpdateStatusStr == "" {
-			return errors.New("--reason requires --status")
-		}
 		if issueUpdateStatusStr == "" && issueUpdateSeverity == "" && !issueResetSeverity {
 			_ = cmd.Help()
 			return errors.New("at least one of --status, --severity, or --reset-severity is required")
 		}
 
-		body := v3.NewUpdateIssueRequestWithDefaults()
-		if issueUpdateStatusStr != "" {
-			newStatus := v3.ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS(issueUpdateStatusStr)
-			if !newStatus.IsValid() {
-				return fmt.Errorf("invalid status %q; valid values: %v", issueUpdateStatusStr, v3.AllowedENUMPROPERTIESFILTERPROPERTIESSTATUSITEMSEnumValues)
-			}
-			statusPayload := v3.NewBulkUpdateIssuesRequestStatusAnyOf(newStatus)
-			if issueUpdateReason != "" {
-				statusPayload.SetReason(issueUpdateReason)
-			}
-			body.SetStatus(v3.UpdateIssueRequestStatus{BulkUpdateIssuesRequestStatusAnyOf: statusPayload})
-		}
-		if issueResetSeverity {
-			body.SetSeverityNil()
-		} else if issueUpdateSeverity != "" {
-			severity := v3.ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS(issueUpdateSeverity)
-			if !severity.IsValid() {
-				return fmt.Errorf("invalid severity %q; valid values: %v", issueUpdateSeverity, v3.AllowedENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMSEnumValues)
-			}
-			body.SetSeverity(v3.UpdateIssueRequestSeverity{
-				ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS: &severity,
-			})
+		body, err := buildUpdateIssueRequest()
+		if err != nil {
+			return err
 		}
 
 		result, err := escape.UpdateIssue(cmd.Context(), issueID, *body)
@@ -550,12 +619,13 @@ TRACKING:
 			return fmt.Errorf("unable to update issue %s: %w", issueID, err)
 		}
 
-		out.Log("Updated issue " + issueID)
 		out.Table(result, func() []string {
 			res := []string{"UPDATED IDS"}
 			res = append(res, result.GetIds()...)
+
 			return res
 		})
+		out.Log("Updated issue " + issueID)
 
 		return nil
 	},
@@ -611,6 +681,7 @@ ID                                      CREATED AT                KIND          
 			_ = cmd.Help()
 			return errors.New("issue ID is required")
 		}
+
 		return nil
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
@@ -634,10 +705,11 @@ ID                                      CREATED AT                KIND          
 				authorID = author.GetId()
 				authorEmail = author.GetEmail()
 			}
+
 			result = append(result, fmt.Sprintf("%s\t%s\t%s\t%s\t%s", activity.GetId(), activity.GetCreatedAt(), activity.GetKind(), authorID, authorEmail))
 		}
 
-		out.Table(result, func() []string {
+		out.Table(activities, func() []string {
 			return result
 		})
 
@@ -648,30 +720,76 @@ ID                                      CREATED AT                KIND          
 var issueCommentCmd = &cobra.Command{
 	Use:     "comment issue-id",
 	Aliases: []string{"add-comment"},
-	Short:   "Add a comment to an issue",
+	Short:   "Add a comment to an issue. Pass message or body.",
+	Long: `Add a comment to an issue. Pass message or a JSON body {"comment":"..."}.
+When both are set, --message wins.`,
+	Example: `  escape-cli issues comment <issue-id> --message "Looks like a false positive"
+
+  echo '{"comment":"Looks like a false positive"}' | escape-cli issues comment <issue-id>`,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		if out.InputSchema(v3.CreateAssetCommentRequest{}) {
 			return nil
 		}
+
 		if out.Schema(v3.CreateAssetComment200Response{}) {
 			return nil
 		}
+
 		if len(args) != 1 {
 			_ = cmd.Help()
 			return errors.New("issue ID is required")
 		}
 
-		issueID := args[0]
 		msg, _ := cmd.Flags().GetString("message")
+		var stdin []byte
+		// A loop that passes --message must not consume the caller's stdin.
 		if strings.TrimSpace(msg) == "" {
-			return errors.New("--message is required")
+			var err error
+			stdin, err = readPipedStdin(cmd.InOrStdin())
+			if err != nil {
+				return err
+			}
 		}
-		if err := escape.CommentIssue(cmd.Context(), issueID, msg); err != nil {
+
+		text, err := issueCommentText(msg, stdin)
+		if err != nil {
+			return err
+		}
+
+		issueID := args[0]
+		comment, err := escape.CommentIssue(cmd.Context(), issueID, text)
+		if err != nil {
 			return fmt.Errorf("unable to add comment: %w", err)
 		}
-		out.Log("Comment added to issue " + issueID)
+
+		out.Print(comment, "Comment added to issue "+issueID)
+
 		return nil
 	},
+}
+
+// issueCommentText resolves the comment the MCP schema advertises.
+// --message wins. Otherwise the stdin body is a CreateAssetCommentRequest,
+// whose required field is comment.
+func issueCommentText(flagMessage string, stdin []byte) (string, error) {
+	if msg := strings.TrimSpace(flagMessage); msg != "" {
+		return msg, nil
+	}
+
+	if len(bytes.TrimSpace(stdin)) == 0 {
+		return "", errors.New("--message is required")
+	}
+
+	var body v3.CreateAssetCommentRequest
+	if err := json.Unmarshal(stdin, &body); err != nil {
+		return "", fmt.Errorf("invalid JSON: %w", err)
+	}
+
+	if strings.TrimSpace(body.Comment) == "" {
+		return "", errors.New("--message is required")
+	}
+
+	return body.Comment, nil
 }
 
 var (
@@ -695,6 +813,8 @@ var (
 	bulkIssueScannerKinds []string
 
 	notifyScanID string
+
+	triggerWorkflowID string
 )
 
 var issueFunnelCmd = &cobra.Command{
@@ -705,17 +825,21 @@ var issueFunnelCmd = &cobra.Command{
 		if out.Schema([]escape.IssueFunnelStep{}) {
 			return nil
 		}
+
 		steps, err := escape.GetIssueFunnel(cmd.Context(), funnelProjectIDs)
 		if err != nil {
 			return fmt.Errorf("unable to get issue funnel: %w", err)
 		}
+
 		out.Table(steps, func() []string {
 			res := []string{"CATEGORY\tSTEP\tCOUNT"}
 			for _, s := range steps {
 				res = append(res, fmt.Sprintf("%s\t%s\t%.0f", s.Category, s.Step, s.Count))
 			}
+
 			return res
 		})
+
 		return nil
 	},
 }
@@ -728,96 +852,169 @@ var issueTrendsCmd = &cobra.Command{
 		if out.Schema([]escape.IssueTrendPoint{}) {
 			return nil
 		}
+
 		if trendAfter == "" || trendBefore == "" {
 			return errors.New("--after and --before are required")
 		}
+
 		points, err := escape.GetIssueTrends(cmd.Context(), trendAfter, trendBefore, trendInterval, trendApplicationIDs, trendProjectIDs)
 		if err != nil {
 			return fmt.Errorf("unable to get issue trends: %w", err)
 		}
+
 		out.Table(points, func() []string {
 			res := []string{"DATE\tHIGH\tMEDIUM\tLOW\tINFO"}
 			for _, p := range points {
 				res = append(res, fmt.Sprintf("%s\t%.0f\t%.0f\t%.0f\t%.0f", p.Date, p.HIGH, p.MEDIUM, p.LOW, p.INFO))
 			}
+
 			return res
 		})
+
 		return nil
 	},
+}
+
+// buildBulkUpdateIssuesRequest assembles the bulk update payload from the bulk-update command flags.
+// --reason is forwarded with the status change, the severity change, or a severity reset so
+// organizations enforcing REQUIRE_CHANGE_REASON can change or clear severities in bulk.
+func buildBulkUpdateIssuesRequest() (*v3.BulkUpdateIssuesRequest, error) {
+	if resetSeverity && setSeverity != "" {
+		return nil, errors.New("--reset-severity and --set-severity are mutually exclusive")
+	}
+
+	if bulkIssueReason != "" && bulkIssueStatus == "" && setSeverity == "" && !resetSeverity {
+		return nil, errors.New("--reason requires --status, --set-severity, or --reset-severity")
+	}
+
+	body := v3.NewBulkUpdateIssuesRequestWithDefaults()
+	if bulkIssueStatus != "" {
+		status := v3.ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS(bulkIssueStatus)
+		if !status.IsValid() {
+			return nil, fmt.Errorf("invalid status %q; valid values: %v", bulkIssueStatus, v3.AllowedENUMPROPERTIESFILTERPROPERTIESSTATUSITEMSEnumValues)
+		}
+
+		statusPayload := v3.NewBulkUpdateIssuesRequestStatusAnyOf(status)
+		if bulkIssueReason != "" {
+			statusPayload.SetReason(bulkIssueReason)
+		}
+
+		body.SetStatus(v3.BulkUpdateIssuesRequestStatus{BulkUpdateIssuesRequestStatusAnyOf: statusPayload})
+	}
+
+	if resetSeverity {
+		if bulkIssueReason != "" {
+			body.SetSeverity(v3.BulkUpdateIssuesRequestSeverity{
+				BulkUpdateIssuesRequestSeverityAnyOf: severityResetWithReason(bulkIssueReason),
+			})
+		} else {
+			body.SetSeverityNil()
+		}
+	} else if setSeverity != "" {
+		severity := v3.ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS(setSeverity)
+		if !severity.IsValid() {
+			return nil, fmt.Errorf("invalid severity %q; valid values: %v", setSeverity, v3.AllowedENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMSEnumValues)
+		}
+
+		severityPayload := v3.NewBulkUpdateIssuesRequestSeverityAnyOf()
+		severityPayload.SetValue(severity)
+		if bulkIssueReason != "" {
+			severityPayload.SetReason(bulkIssueReason)
+		}
+
+		body.SetSeverity(v3.BulkUpdateIssuesRequestSeverity{BulkUpdateIssuesRequestSeverityAnyOf: severityPayload})
+	}
+
+	if !body.HasStatus() && !body.HasSeverity() {
+		return nil, errors.New("at least one of --status, --set-severity, or --reset-severity is required")
+	}
+
+	where := v3.BulkUpdateIssuesRequestWhere{}
+	if len(bulkIssueIDs) > 0 {
+		where.Ids = bulkIssueIDs
+	}
+
+	if len(bulkIssueAssetIDs) > 0 {
+		where.AssetIds = bulkIssueAssetIDs
+	}
+
+	if len(bulkIssueSeverities) > 0 {
+		severities := make([]v3.ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS, len(bulkIssueSeverities))
+		for i, s := range bulkIssueSeverities {
+			severities[i] = v3.ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS(s)
+		}
+
+		where.Severities = severities
+	}
+
+	if len(bulkIssueProfileIDs) > 0 {
+		where.ProfileIds = bulkIssueProfileIDs
+	}
+
+	if len(bulkIssueTagIDs) > 0 {
+		where.TagIds = bulkIssueTagIDs
+	}
+
+	if len(bulkIssueScannerKinds) > 0 {
+		kinds := make([]v3.ENUMPROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS, len(bulkIssueScannerKinds))
+		for i, k := range bulkIssueScannerKinds {
+			kinds[i] = v3.ENUMPROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS(k)
+		}
+
+		where.ScannerKinds = kinds
+	}
+
+	body.SetWhere(where)
+
+	return body, nil
+}
+
+// requireIssueBulkSelection rejects a bulk issue update whose where clause
+// would match every issue. The API accepts an empty where.
+func requireIssueBulkSelection() error {
+	if len(bulkIssueIDs) > 0 ||
+		len(bulkIssueAssetIDs) > 0 ||
+		len(bulkIssueSeverities) > 0 ||
+		len(bulkIssueProfileIDs) > 0 ||
+		len(bulkIssueTagIDs) > 0 ||
+		len(bulkIssueScannerKinds) > 0 {
+		return nil
+	}
+
+	return errors.New("at least one of --issue-id, --asset-id, --severity, --profile-id, --tag-id, or --scanner-kind is required")
 }
 
 var issueBulkUpdateCmd = &cobra.Command{
 	Use:   "bulk-update",
 	Short: "Update status and/or severity of multiple issues matching a filter",
-	Long:  `Bulk update issues. For example, mark all LOW severity issues on a given asset as IGNORED, or reset severities to scanner values.`,
+	Long:  `Bulk update issues. For example, mark all LOW severity issues on a given asset as IGNORED, or reset severities to scanner values. --reason is forwarded with both --status and --set-severity changes.`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
-		body := v3.NewBulkUpdateIssuesRequestWithDefaults()
-		if bulkIssueStatus != "" {
-			status := v3.ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS(bulkIssueStatus)
-			if !status.IsValid() {
-				return fmt.Errorf("invalid status %q; valid values: %v", bulkIssueStatus, v3.AllowedENUMPROPERTIESFILTERPROPERTIESSTATUSITEMSEnumValues)
-			}
-			statusPayload := v3.NewBulkUpdateIssuesRequestStatusAnyOf(status)
-			if bulkIssueReason != "" {
-				statusPayload.SetReason(bulkIssueReason)
-			}
-			body.SetStatus(v3.BulkUpdateIssuesRequestStatus{BulkUpdateIssuesRequestStatusAnyOf: statusPayload})
+		if out.Schema(v3.BulkUpdateIssues200Response{}) {
+			return nil
 		}
-		if resetSeverity && setSeverity != "" {
-			return errors.New("--reset-severity and --set-severity are mutually exclusive")
+
+		if err := requireIssueBulkSelection(); err != nil {
+			return err
 		}
-		if resetSeverity {
-			body.SetSeverityNil()
-		} else if setSeverity != "" {
-			severity := v3.ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS(setSeverity)
-			if !severity.IsValid() {
-				return fmt.Errorf("invalid severity %q; valid values: %v", setSeverity, v3.AllowedENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMSEnumValues)
-			}
-			severityPayload := v3.NewBulkUpdateIssuesRequestSeverityAnyOf()
-			severityPayload.SetValue(severity)
-			body.SetSeverity(v3.BulkUpdateIssuesRequestSeverity{BulkUpdateIssuesRequestSeverityAnyOf: severityPayload})
+
+		body, err := buildBulkUpdateIssuesRequest()
+		if err != nil {
+			return err
 		}
-		if !body.HasStatus() && !body.HasSeverity() {
-			return errors.New("at least one of --status, --set-severity, or --reset-severity is required")
-		}
-		where := v3.BulkUpdateIssuesRequestWhere{}
-		if len(bulkIssueIDs) > 0 {
-			where.Ids = bulkIssueIDs
-		}
-		if len(bulkIssueAssetIDs) > 0 {
-			where.AssetIds = bulkIssueAssetIDs
-		}
-		if len(bulkIssueSeverities) > 0 {
-			severities := make([]v3.ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS, len(bulkIssueSeverities))
-			for i, s := range bulkIssueSeverities {
-				severities[i] = v3.ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS(s)
-			}
-			where.Severities = severities
-		}
-		if len(bulkIssueProfileIDs) > 0 {
-			where.ProfileIds = bulkIssueProfileIDs
-		}
-		if len(bulkIssueTagIDs) > 0 {
-			where.TagIds = bulkIssueTagIDs
-		}
-		if len(bulkIssueScannerKinds) > 0 {
-			kinds := make([]v3.ENUMPROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS, len(bulkIssueScannerKinds))
-			for i, k := range bulkIssueScannerKinds {
-				kinds[i] = v3.ENUMPROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS(k)
-			}
-			where.ScannerKinds = kinds
-		}
-		body.SetWhere(where)
+
 		result, err := escape.BulkUpdateIssues(cmd.Context(), *body)
 		if err != nil {
 			return fmt.Errorf("unable to bulk update issues: %w", err)
 		}
-		out.Log(fmt.Sprintf("Updated %d issues", len(result.GetIds())))
+
 		out.Table(result, func() []string {
 			res := []string{"UPDATED IDS"}
 			res = append(res, result.GetIds()...)
+
 			return res
 		})
+		out.Log(fmt.Sprintf("Updated %d issues", len(result.GetIds())))
+
 		return nil
 	},
 }
@@ -831,22 +1028,83 @@ var issueNotifyCmd = &cobra.Command{
 			_ = cmd.Help()
 			return errors.New("issue ID is required")
 		}
+
 		return nil
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
+		if out.Schema(v3.NotifyIssueOwners200Response{}) {
+			return nil
+		}
+
 		issueID := args[0]
 		if notifyScanID == "" {
 			return errors.New("--scan-id is required")
 		}
-		notified, err := escape.NotifyIssueOwners(cmd.Context(), issueID, notifyScanID)
+
+		result, err := escape.NotifyIssueOwners(cmd.Context(), issueID, notifyScanID)
 		if err != nil {
 			return fmt.Errorf("unable to notify owners: %w", err)
 		}
-		if notified {
-			out.Log("Notification sent to asset owners for issue " + issueID)
-		} else {
-			out.Log("No owners found to notify for issue " + issueID)
+
+		pretty := "No owners found to notify for issue " + issueID
+		if result.GetNotified() {
+			pretty = "Notification sent to asset owners for issue " + issueID
 		}
+
+		out.Print(result, pretty)
+
+		return nil
+	},
+}
+
+var issueTriggerWorkflowCmd = &cobra.Command{
+	Use:   "trigger-workflow issue-id",
+	Short: "Run a manual workflow on an issue (e.g. create a Jira ticket). Use workflows_list to find manual workflow IDs.",
+	Long: `Run a Manual Workflow on an Issue - Automate Issue Actions
+
+Manual workflows are automations configured in Escape with a MANUAL trigger
+(for example, exporting the issue to Jira). This command runs one against a
+single issue and returns the workflow that was triggered.
+
+Discover the available workflow IDs with:
+  $ escape-cli workflows list --trigger MANUAL`,
+	Example: `  # Find manual workflow IDs
+  escape-cli workflows list --trigger MANUAL
+
+  # Create a Jira ticket for an issue via a manual workflow
+  escape-cli issues trigger-workflow 00000000-0000-0000-0000-000000000001 --workflow-id 00000000-0000-0000-0000-000000000002`,
+	Args: func(cmd *cobra.Command, args []string) error {
+		if len(args) != 1 {
+			_ = cmd.Help()
+			return errors.New("issue ID is required")
+		}
+
+		return nil
+	},
+	RunE: func(cmd *cobra.Command, args []string) error {
+		if out.Schema(v3.TriggerIssueManualWorkflow200Response{}) {
+			return nil
+		}
+
+		issueID := args[0]
+		if triggerWorkflowID == "" {
+			return errors.New("--workflow-id is required")
+		}
+
+		result, err := escape.TriggerIssueManualWorkflow(cmd.Context(), issueID, triggerWorkflowID)
+		if err != nil {
+			return fmt.Errorf("unable to trigger workflow on issue %s: %w", issueID, err)
+		}
+
+		workflow := result.GetWorkflow()
+		out.Table(result, func() []string {
+			return []string{
+				"WORKFLOW ID\tWORKFLOW NAME",
+				fmt.Sprintf("%s\t%s", workflow.GetId(), workflow.GetName()),
+			}
+		})
+		out.Log(fmt.Sprintf("Triggered workflow %q on issue %s", workflow.GetName(), issueID))
+
 		return nil
 	},
 }
@@ -856,11 +1114,11 @@ func init() {
 	issuesCmd.AddCommand(issueGetWithEventsCmd)
 	issuesCmd.AddCommand(issueListActivitiesCmd)
 	issuesCmd.AddCommand(issueCommentCmd)
-	issueCommentCmd.Flags().String("message", "", "comment message to add to the issue")
+	issueCommentCmd.Flags().String("message", "", "comment text; alternatively pipe {\"comment\":\"...\"}. --message wins when both are set")
 
 	issuesCmd.AddCommand(issueUpdateStatusCmd)
 	issueUpdateStatusCmd.Flags().StringVarP(&issueUpdateStatusStr, "status", "s", issueUpdateStatusStr, fmt.Sprintf("new status for the issue: %v", v3.AllowedENUMPROPERTIESFILTERPROPERTIESSTATUSITEMSEnumValues))
-	issueUpdateStatusCmd.Flags().StringVar(&issueUpdateReason, "reason", "", "reason for the status change")
+	issueUpdateStatusCmd.Flags().StringVar(&issueUpdateReason, "reason", "", "reason for the status and/or severity change (required if your organization enforces it)")
 	issueUpdateStatusCmd.Flags().StringVar(&issueUpdateReason, "comment", "", "deprecated: use --reason")
 	issueUpdateStatusCmd.Flags().StringVar(&issueUpdateSeverity, "severity", "", fmt.Sprintf("new severity for the issue: %v", v3.AllowedENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMSEnumValues))
 	issueUpdateStatusCmd.Flags().BoolVar(&issueResetSeverity, "reset-severity", false, "reset severity to the scanner value")
@@ -878,7 +1136,7 @@ func init() {
 
 	issuesCmd.AddCommand(issueBulkUpdateCmd)
 	issueBulkUpdateCmd.Flags().StringVar(&bulkIssueStatus, "status", "", "new status to apply")
-	issueBulkUpdateCmd.Flags().StringVar(&bulkIssueReason, "reason", "", "reason for the status change")
+	issueBulkUpdateCmd.Flags().StringVar(&bulkIssueReason, "reason", "", "reason for the status and/or severity change (required if your organization enforces it)")
 	issueBulkUpdateCmd.Flags().StringVar(&setSeverity, "set-severity", "", "new severity to apply")
 	issueBulkUpdateCmd.Flags().BoolVar(&resetSeverity, "reset-severity", false, "reset severity to the scanner value")
 	issueBulkUpdateCmd.Flags().StringSliceVar(&bulkIssueIDs, "issue-id", nil, "filter by issue ID(s)")
@@ -890,6 +1148,10 @@ func init() {
 
 	issuesCmd.AddCommand(issueNotifyCmd)
 	issueNotifyCmd.Flags().StringVar(&notifyScanID, "scan-id", "", "scan ID to reference in the notification (required)")
+
+	issuesCmd.AddCommand(issueTriggerWorkflowCmd)
+	issueTriggerWorkflowCmd.Flags().StringVar(&triggerWorkflowID, "workflow-id", "", "manual workflow ID to trigger (required; use 'workflows list --trigger MANUAL' to find IDs)")
+	_ = issueTriggerWorkflowCmd.MarkFlagRequired("workflow-id")
 
 	issuesCmd.AddCommand(issueListCmd)
 
@@ -909,6 +1171,7 @@ func init() {
 	issueListCmd.Flags().StringSliceVar(&issueNames, "name", []string{}, "filter by issue name(s)")
 	issueListCmd.Flags().StringVar(&issueSortType, "sort-by", "", "sort field: LAST_SEEN, FIRST_SEEN, SEVERITY, STATUS")
 	issueListCmd.Flags().StringVar(&issueSortDirection, "sort-direction", "", "sort direction: asc, desc")
+	issueListPage.bind(issueListCmd)
 
 	rootCmd.AddCommand(issuesCmd)
 }

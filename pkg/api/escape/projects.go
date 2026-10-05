@@ -14,24 +14,33 @@ type ListProjectsFilters struct {
 	Search string
 }
 
-// ListProjects lists all projects with optional search filter
-func ListProjects(ctx context.Context, next string, filters *ListProjectsFilters) ([]v3.ListProjects200ResponseDataInner, *string, error) {
+// ListProjects lists one page of projects.
+// size 0 keeps the API default page size. The returned total is totalCount.
+func ListProjects(ctx context.Context, next string, filters *ListProjectsFilters, size int) ([]v3.ListProjects200ResponseDataInner, *string, int, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
-		return nil, nil, fmt.Errorf("unable to init client: %w", err)
+		return nil, nil, 0, fmt.Errorf("unable to init client: %w", err)
 	}
+
 	req := client.ProjectsAPI.ListProjects(ctx)
 	if next != "" {
 		req = req.Cursor(next)
 	}
+
+	if size > 0 {
+		req = req.Size(size)
+	}
+
 	if filters != nil && filters.Search != "" {
 		req = req.Search(filters.Search)
 	}
+
 	data, _, err := req.Execute()
 	if err != nil {
-		return nil, nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
+		return nil, nil, 0, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
-	return data.Data, data.NextCursor, nil
+
+	return data.Data, data.NextCursor, data.GetTotalCount(), nil
 }
 
 // GetProject gets a project by ID
@@ -40,10 +49,12 @@ func GetProject(ctx context.Context, projectID string) (*v3.CreateProject200Resp
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
+
 	data, _, err := client.ProjectsAPI.GetProject(ctx, projectID).Execute()
 	if err != nil {
 		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
+
 	return data, nil
 }
 
@@ -53,14 +64,17 @@ func CreateProject(ctx context.Context, body []byte) (*v3.CreateProject200Respon
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
+
 	var req v3.CreateProjectRequest
 	if err := json.Unmarshal(body, &req); err != nil {
 		return nil, fmt.Errorf("invalid JSON: %w", err)
 	}
+
 	data, _, err := client.ProjectsAPI.CreateProject(ctx).CreateProjectRequest(req).Execute()
 	if err != nil {
 		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
+
 	return data, nil
 }
 
@@ -70,14 +84,17 @@ func UpdateProject(ctx context.Context, projectID string, body []byte) (*v3.Crea
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
+
 	var req v3.UpdateProjectRequest
 	if err := json.Unmarshal(body, &req); err != nil {
 		return nil, fmt.Errorf("invalid JSON: %w", err)
 	}
+
 	data, _, err := client.ProjectsAPI.UpdateProject(ctx, projectID).UpdateProjectRequest(req).Execute()
 	if err != nil {
 		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
+
 	return data, nil
 }
 
@@ -86,5 +103,6 @@ func DeleteProject(ctx context.Context, projectID string) error {
 	if err := rawRequest(ctx, http.MethodDelete, rawPath("projects", projectID), nil, nil); err != nil {
 		return fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
+
 	return nil
 }

@@ -1,13 +1,20 @@
 package cmd
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/Escape-Technologies/cli/pkg/api/escape"
 	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
 	"github.com/Escape-Technologies/cli/pkg/cli/out"
+	clischema "github.com/Escape-Technologies/cli/pkg/cli/schema"
 	"github.com/spf13/cobra"
 )
+
+// problemsCommandOutput is the schema for `escape-cli problems`.
+// Default output is one page of ProblemSummary. --all expands each application
+// into ProblemDetail rows. Both are pages because MCP requests one page.
+var problemsCommandOutput = providedSchema{schema: problemsOutputSchema()}
 
 var (
 	problemsDetailed   bool
@@ -19,6 +26,7 @@ var (
 	problemsInitiators []string
 	problemsKinds      []string
 	problemsRisks      []string
+	problemsPage       pageFlags
 )
 
 var problemsCmd = &cobra.Command{
@@ -83,6 +91,10 @@ ID                                      NAME                    SCAN STATUS    P
   escape-cli problems --initiators "scheduled,manual"`,
 
 	RunE: func(cmd *cobra.Command, _ []string) error {
+		if out.Schema(problemsCommandOutput) {
+			return nil
+		}
+
 		filters := &escape.ListProblemsFilters{
 			AssetIDs:   problemsAssetIDs,
 			Domains:    problemsDomains,
@@ -93,89 +105,138 @@ ID                                      NAME                    SCAN STATUS    P
 			Kinds:      problemsKinds,
 			Risks:      problemsRisks,
 		}
-		problems, next, err := escape.ListProblems(cmd.Context(), "", filters)
-		if err != nil {
-			return fmt.Errorf("unable to list problems: %w", err)
-		}
-		allRaw := problems
-		for next != nil && *next != "" {
-			problems, next, err = escape.ListProblems(cmd.Context(), *next, filters)
+		fetch := func(ctx context.Context, cursor string, size int) ([]v3.ProfileScanProblemsRow, *string, int, error) {
+			rows, next, total, err := escape.ListProblems(ctx, cursor, filters, size)
 			if err != nil {
-				return fmt.Errorf("unable to list problems: %w", err)
+				return nil, nil, 0, fmt.Errorf("unable to list problems: %w", err)
 			}
-			allRaw = append(allRaw, problems...)
-		}
 
-		// Filter out applications without problems
-		appsWithProblems := []v3.ProfileScanProblemsRow{}
-		for _, app := range allRaw {
-			if app.HasLastResourceScan() {
-				scan := app.GetLastResourceScan()
-				if len(scan.GetProblems()) > 0 {
-					appsWithProblems = append(appsWithProblems, app)
-				}
-			}
+			return rows, next, total, nil
 		}
-
+		// --all expands each application into one row per problem. Both modes
+		// still walk API pages through runPagedList, so MCP's size default
+		// bounds the request.
 		if problemsDetailed {
-			allProblems := []ProblemDetail{}
-			for _, app := range appsWithProblems {
-				scan := app.GetLastResourceScan()
-				for _, problem := range scan.GetProblems() {
-					allProblems = append(allProblems, ProblemDetail{
-						AppID:      app.GetId(),
-						AppName:    app.GetName(),
-						ScanStatus: scan.GetStatus(),
-						Code:       problem.GetCode(),
-						Severity:   problem.GetSeverity(),
-						Message:    problem.GetMessage(),
-					})
+			return runPagedList(cmd, problemsPage, func(ctx context.Context, cursor string, size int) ([]ProblemDetail, *string, int, error) {
+				rows, next, total, err := fetch(ctx, cursor, size)
+				if err != nil {
+					return nil, nil, 0, err
 				}
-			}
 
-			out.Table(allProblems, func() []string {
-				res := []string{"ID\tNAME\tSCAN STATUS\tPROBLEM CODE\tSEVERITY\tMESSAGE"}
-				for _, problem := range allProblems {
-					res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s",
-						problem.AppID,
-						problem.AppName,
-						problem.ScanStatus,
-						problem.Code,
-						problem.Severity,
-						problem.Message,
-					))
-				}
-				return res
-			})
-		} else {
-			problemSummaries := []ProblemSummary{}
-			for _, app := range appsWithProblems {
-				scan := app.GetLastResourceScan()
-				problemCount := len(scan.GetProblems())
-				problemSummaries = append(problemSummaries, ProblemSummary{
-					AppID:        app.GetId(),
-					AppName:      app.GetName(),
-					ScanStatus:   scan.GetStatus(),
-					ProblemCount: problemCount,
-				})
-			}
-
-			out.Table(problemSummaries, func() []string {
-				res := []string{"ID\tNAME\tSCAN STATUS\tPROBLEMS"}
-				for _, summary := range problemSummaries {
-					res = append(res, fmt.Sprintf("%s\t%s\t%s\t%d",
-						summary.AppID,
-						summary.AppName,
-						summary.ScanStatus,
-						summary.ProblemCount,
-					))
-				}
-				return res
-			})
+				return problemDetails(rows), next, total, nil
+			}, problemDetailTable)
 		}
 
-		return nil
+		return runPagedList(cmd, problemsPage, func(ctx context.Context, cursor string, size int) ([]ProblemSummary, *string, int, error) {
+			rows, next, total, err := fetch(ctx, cursor, size)
+			if err != nil {
+				return nil, nil, 0, err
+			}
+
+			return problemSummaries(rows), next, total, nil
+		}, problemSummaryTable)
 	},
+}
+
+func appsWithProblems(rows []v3.ProfileScanProblemsRow) []v3.ProfileScanProblemsRow {
+	apps := []v3.ProfileScanProblemsRow{}
+	for _, app := range rows {
+		if !app.HasLastResourceScan() {
+			continue
+		}
+
+		scan := app.GetLastResourceScan()
+		if len(scan.GetProblems()) == 0 {
+			continue
+		}
+
+		apps = append(apps, app)
+	}
+
+	return apps
+}
+
+func problemSummaries(rows []v3.ProfileScanProblemsRow) []ProblemSummary {
+	summaries := []ProblemSummary{}
+	for _, app := range appsWithProblems(rows) {
+		scan := app.GetLastResourceScan()
+		summaries = append(summaries, ProblemSummary{
+			AppID:        app.GetId(),
+			AppName:      app.GetName(),
+			ScanStatus:   scan.GetStatus(),
+			ProblemCount: len(scan.GetProblems()),
+		})
+	}
+
+	return summaries
+}
+
+func problemDetails(rows []v3.ProfileScanProblemsRow) []ProblemDetail {
+	details := []ProblemDetail{}
+	for _, app := range appsWithProblems(rows) {
+		scan := app.GetLastResourceScan()
+		for _, problem := range scan.GetProblems() {
+			details = append(details, ProblemDetail{
+				AppID:      app.GetId(),
+				AppName:    app.GetName(),
+				ScanStatus: scan.GetStatus(),
+				Code:       problem.GetCode(),
+				Severity:   problem.GetSeverity(),
+				Message:    problem.GetMessage(),
+			})
+		}
+	}
+
+	return details
+}
+
+func problemSummaryTable(summaries []ProblemSummary) []string {
+	res := []string{"ID\tNAME\tSCAN STATUS\tPROBLEMS"}
+	for _, summary := range summaries {
+		res = append(res, fmt.Sprintf("%s\t%s\t%s\t%d",
+			summary.AppID,
+			summary.AppName,
+			summary.ScanStatus,
+			summary.ProblemCount,
+		))
+	}
+
+	return res
+}
+
+func problemDetailTable(details []ProblemDetail) []string {
+	res := []string{"ID\tNAME\tSCAN STATUS\tPROBLEM CODE\tSEVERITY\tMESSAGE"}
+	for _, problem := range details {
+		res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s",
+			problem.AppID,
+			problem.AppName,
+			problem.ScanStatus,
+			problem.Code,
+			problem.Severity,
+			problem.Message,
+		))
+	}
+
+	return res
+}
+
+// problemsOutputSchema is the page object whose items are either summaries or
+// details. --all changes the element type; the page fields stay the same.
+// MCP requires a top-level object, so the two shapes live under items.
+func problemsOutputSchema() *clischema.JSONSchema {
+	summary := clischema.Generate(Page[ProblemSummary]{})
+	detail := clischema.Generate(Page[ProblemDetail]{})
+	summaryItems := summary.Properties["items"]
+	detailItems := detail.Properties["items"]
+	summaryItems.Description = "One ProblemSummary per application. Printed when --all is omitted."
+	detailItems.Description = "One ProblemDetail per problem. Printed when --all is set."
+	summary.Description = "Without --all, items are ProblemSummary. With --all, items are ProblemDetail. A full listing (no --size or --cursor) prints the items array by itself; one page prints this object."
+	summary.Properties["items"] = &clischema.JSONSchema{
+		Description: "ProblemSummary rows, or ProblemDetail rows when --all is set.",
+		OneOf:       []*clischema.JSONSchema{summaryItems, detailItems},
+	}
+
+	return summary
 }
 
 // ProblemSummary represents a summary of problems for an application
@@ -206,5 +267,6 @@ func init() {
 	problemsCmd.Flags().StringSliceVarP(&problemsInitiators, "initiators", "", []string{}, "filter by scan initiators (comma-separated)")
 	problemsCmd.Flags().StringSliceVarP(&problemsKinds, "kinds", "", []string{}, "filter by scan kinds (comma-separated)")
 	problemsCmd.Flags().StringSliceVarP(&problemsRisks, "risks", "", []string{}, "filter by risk types (comma-separated)")
+	problemsPage.bind(problemsCmd)
 	rootCmd.AddCommand(problemsCmd)
 }

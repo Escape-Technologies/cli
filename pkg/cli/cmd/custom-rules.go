@@ -58,6 +58,7 @@ ID                                      NAME                       SSH PUBLIC KE
 		if err != nil {
 			return fmt.Errorf("failed to list custom rules: %w", err)
 		}
+
 		out.Table(customRules, func() []string {
 			res := []string{"ID\tNAME\tSEVERITY\tCREATED AT\tUPDATED AT"}
 			for _, customRule := range customRules {
@@ -73,8 +74,10 @@ ID                                      NAME                       SSH PUBLIC KE
 					),
 				)
 			}
+
 			return res
 		})
+
 		return nil
 	},
 }
@@ -89,6 +92,7 @@ var customRulesGetCmd = &cobra.Command{
 			_ = cmd.Help()
 			return errors.New("custom rule ID is required")
 		}
+
 		return nil
 	},
 	Example: `escape-cli custom-rules get 00000000-0000-0000-0000-000000000000`,
@@ -102,9 +106,11 @@ var customRulesGetCmd = &cobra.Command{
 		if err != nil {
 			return fmt.Errorf("failed to get custom rule: %w", err)
 		}
+
 		if customRulesGetContent {
 			b, _ := json.Marshal(customRule.GetContent())
 			out.Print(customRule.GetContent(), string(b))
+
 			return nil
 		}
 
@@ -113,7 +119,9 @@ var customRulesGetCmd = &cobra.Command{
 			for _, t := range customRule.GetTags() {
 				tagNames = append(tagNames, out.TagText(t.GetName(), t.GetColor()))
 			}
+
 			tagsPretty := strings.Join(tagNames, ", ")
+
 			return []string{
 				"ID\tNAME\tCONTEXT\tSEVERITY\tASM ENABLED\tDAST ENABLED\tCREATED AT\tUPDATED AT\tTAGS",
 				fmt.Sprintf("%s\t%s\t%s\t%s\t%t\t%t\t%s\t%s\t%s",
@@ -129,6 +137,7 @@ var customRulesGetCmd = &cobra.Command{
 				),
 			}
 		})
+
 		return nil
 	},
 }
@@ -143,20 +152,30 @@ var customRulesDeleteCmd = &cobra.Command{
 			_ = cmd.Help()
 			return errors.New("custom rule ID is required")
 		}
+
 		return nil
 	},
 	Example: `escape-cli custom-rules delete 00000000-0000-0000-0000-000000000000`,
 	RunE: func(cmd *cobra.Command, args []string) error {
+		if out.Schema(v3.DeleteCustomRule200Response{}) {
+			return nil
+		}
+
 		id := args[0]
 		res, err := escape.DeleteCustomRule(cmd.Context(), id)
 		if err != nil {
 			return fmt.Errorf("failed to delete custom rule: %w", err)
 		}
-		if res.GetDeleted() {
-			out.Log(fmt.Sprintf("Custom rule %s successfully deleted", id))
-			return nil
+
+		if !res.GetDeleted() {
+			// JSON mode still emits the declared {"deleted": false} document.
+			out.Print(res, fmt.Sprintf("Custom rule %s was not deleted", id))
+			return fmt.Errorf("failed to delete custom rule %s", id)
 		}
-		return fmt.Errorf("failed to delete custom rule %s", id)
+
+		out.Print(res, fmt.Sprintf("Custom rule %s successfully deleted", id))
+
+		return nil
 	},
 }
 
@@ -170,6 +189,7 @@ var customRulesCreateCmd = &cobra.Command{
 			_ = cmd.Help()
 			return errors.New("this command does not accept any arguments, it reads from stdin")
 		}
+
 		return nil
 	},
 	RunE: func(cmd *cobra.Command, _ []string) error {
@@ -177,6 +197,7 @@ var customRulesCreateCmd = &cobra.Command{
 		if out.InputSchema(v3.CreateCustomRuleRequest{}) {
 			return nil
 		}
+
 		// Output JSON Schema if requested
 		if out.Schema(v3.CreateCustomRule200Response{}) {
 			return nil
@@ -186,21 +207,26 @@ var customRulesCreateCmd = &cobra.Command{
 		if err != nil {
 			return fmt.Errorf("failed to read stdin: %w", err)
 		}
+
 		// validate JSON early
 		var tmp map[string]interface{}
 		if err := json.Unmarshal(b, &tmp); err != nil {
 			return fmt.Errorf("invalid JSON: %w", err)
 		}
+
 		res, err := escape.CreateCustomRule(cmd.Context(), b)
 		if err != nil {
 			return fmt.Errorf("failed to create custom rule: %w", err)
 		}
+
 		out.Table(res, func() []string {
 			var tagNames []string
 			for _, t := range res.GetTags() {
 				tagNames = append(tagNames, out.TagText(t.GetName(), t.GetColor()))
 			}
+
 			tagsPretty := strings.Join(tagNames, ", ")
+
 			return []string{
 				"ID\tNAME\tCONTEXT\tSEVERITY\tASM ENABLED\tDAST ENABLED\tCREATED AT\tUPDATED AT\tTAGS",
 				fmt.Sprintf("%s\t%s\t%s\t%s\t%t\t%t\t%s\t%s\t%s",
@@ -216,6 +242,7 @@ var customRulesCreateCmd = &cobra.Command{
 				),
 			}
 		})
+
 		return nil
 	},
 }
@@ -230,6 +257,7 @@ var customRulesUpdateCmd = &cobra.Command{
 			_ = cmd.Help()
 			return errors.New("custom rule ID is required")
 		}
+
 		return nil
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
@@ -237,6 +265,7 @@ var customRulesUpdateCmd = &cobra.Command{
 		if out.InputSchema(v3.UpdateCustomRuleRequest{}) {
 			return nil
 		}
+
 		// Output JSON Schema if requested
 		if out.Schema(v3.CreateCustomRule200Response{}) {
 			return nil
@@ -247,21 +276,26 @@ var customRulesUpdateCmd = &cobra.Command{
 		if err != nil {
 			return fmt.Errorf("failed to read stdin: %w", err)
 		}
+
 		// validate JSON early
 		var tmp v3.UpdateCustomRuleRequest
 		if err := json.Unmarshal(b, &tmp); err != nil {
 			return fmt.Errorf("invalid JSON: %w", err)
 		}
+
 		res, err := escape.UpdateCustomRule(cmd.Context(), id, b)
 		if err != nil {
 			return fmt.Errorf("failed to update custom rule: %w", err)
 		}
+
 		out.Table(res, func() []string {
 			var tagNames []string
 			for _, t := range res.GetTags() {
 				tagNames = append(tagNames, out.TagText(t.GetName(), t.GetColor()))
 			}
+
 			tagsPretty := strings.Join(tagNames, ", ")
+
 			return []string{
 				"ID\tNAME\tCONTEXT\tSEVERITY\tASM ENABLED\tDAST ENABLED\tCREATED AT\tUPDATED AT\tTAGS",
 				fmt.Sprintf("%s\t%s\t%s\t%s\t%t\t%t\t%s\t%s\t%s",
@@ -277,6 +311,7 @@ var customRulesUpdateCmd = &cobra.Command{
 				),
 			}
 		})
+
 		return nil
 	},
 }

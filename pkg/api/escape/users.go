@@ -14,10 +14,12 @@ func GetMe(ctx context.Context) (*v3.GetMe200Response, error) {
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
+
 	data, _, err := client.UsersAPI.GetMe(ctx).Execute()
 	if err != nil {
 		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
+
 	return data, nil
 }
 
@@ -28,6 +30,7 @@ func ListUsers(ctx context.Context, search string) ([]v3.ListUsers200ResponseInn
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
+
 	data, _, err := client.UsersAPI.ListUsers(ctx).Execute()
 	if err != nil {
 		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
@@ -45,6 +48,7 @@ func ListUsers(ctx context.Context, search string) ([]v3.ListUsers200ResponseInn
 			filtered = append(filtered, user)
 		}
 	}
+
 	return filtered, nil
 }
 
@@ -54,10 +58,12 @@ func GetUser(ctx context.Context, userID string) (*v3.GetUser200Response, error)
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
+
 	data, _, err := client.UsersAPI.GetUser(ctx, userID).Execute()
 	if err != nil {
 		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
+
 	return data, nil
 }
 
@@ -67,6 +73,7 @@ func InviteUsers(ctx context.Context, emails []string, roleID string) ([]v3.List
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
+
 	req := v3.InviteUserRequest{
 		Emails: emails,
 	}
@@ -75,9 +82,11 @@ func InviteUsers(ctx context.Context, emails []string, roleID string) ([]v3.List
 			{RoleId: roleID},
 		}
 	}
+
 	data, _, err := client.UsersAPI.InviteUser(ctx).InviteUserRequest(req).Execute()
 	if err != nil {
 		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
+
 	return data, nil
 }

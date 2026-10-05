@@ -53,6 +53,7 @@ type UpdateAsset200Response struct {
 	Frontend      *AssetFrontendDetailed   `json:"frontend,omitempty"`
 	Host          *AssetHostDetailed       `json:"host,omitempty"`
 	Technology    *AssetTechnologyDetailed `json:"technology,omitempty"`
+	MobileApp     *AssetMobileAppDetailed  `json:"mobileApp,omitempty"`
 	// Time-limited HTTPS URL for schema-class assets; null for other asset classes
 	SchemaUrl            *string            `json:"schemaUrl,omitempty"`
 	Links                AssetDetailedLinks `json:"links"`
@@ -681,6 +682,38 @@ func (o *UpdateAsset200Response) SetTechnology(v AssetTechnologyDetailed) {
 	o.Technology = &v
 }
 
+// GetMobileApp returns the MobileApp field value if set, zero value otherwise.
+func (o *UpdateAsset200Response) GetMobileApp() AssetMobileAppDetailed {
+	if o == nil || IsNil(o.MobileApp) {
+		var ret AssetMobileAppDetailed
+		return ret
+	}
+	return *o.MobileApp
+}
+
+// GetMobileAppOk returns a tuple with the MobileApp field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateAsset200Response) GetMobileAppOk() (*AssetMobileAppDetailed, bool) {
+	if o == nil || IsNil(o.MobileApp) {
+		return nil, false
+	}
+	return o.MobileApp, true
+}
+
+// HasMobileApp returns a boolean if a field has been set.
+func (o *UpdateAsset200Response) HasMobileApp() bool {
+	if o != nil && !IsNil(o.MobileApp) {
+		return true
+	}
+
+	return false
+}
+
+// SetMobileApp gets a reference to the given AssetMobileAppDetailed and assigns it to the MobileApp field.
+func (o *UpdateAsset200Response) SetMobileApp(v AssetMobileAppDetailed) {
+	o.MobileApp = &v
+}
+
 // GetSchemaUrl returns the SchemaUrl field value if set, zero value otherwise.
 func (o *UpdateAsset200Response) GetSchemaUrl() string {
 	if o == nil || IsNil(o.SchemaUrl) {
@@ -790,6 +823,9 @@ func (o UpdateAsset200Response) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Technology) {
 		toSerialize["technology"] = o.Technology
 	}
+	if !IsNil(o.MobileApp) {
+		toSerialize["mobileApp"] = o.MobileApp
+	}
 	if !IsNil(o.SchemaUrl) {
 		toSerialize["schemaUrl"] = o.SchemaUrl
 	}
@@ -868,6 +904,7 @@ func (o *UpdateAsset200Response) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "frontend")
 		delete(additionalProperties, "host")
 		delete(additionalProperties, "technology")
+		delete(additionalProperties, "mobileApp")
 		delete(additionalProperties, "schemaUrl")
 		delete(additionalProperties, "links")
 		o.AdditionalProperties = additionalProperties

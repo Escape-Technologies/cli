@@ -24,6 +24,7 @@ func schemaAsset(id string, active bool, signed string) v3.ProfileExtraAsset {
 	if signed != "" {
 		a.SignedUrl = ptr(signed)
 	}
+
 	return a
 }
 
@@ -48,9 +49,11 @@ func TestPickProfileSchema_ActiveHappyPath(t *testing.T) {
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)
 	}
+
 	if got == nil || got.Id != "s2" {
 		t.Fatalf("expected active schema s2, got %+v", got)
 	}
+
 	if got.SignedUrl == nil || *got.SignedUrl != "https://active.example" {
 		t.Fatalf("expected active signed URL to be preserved, got %+v", got.SignedUrl)
 	}
@@ -69,6 +72,7 @@ func TestPickProfileSchema_NoActive(t *testing.T) {
 	if err == nil {
 		t.Fatalf("expected error when no active schema, got nil")
 	}
+
 	if !strings.Contains(err.Error(), "no active schema") {
 		t.Fatalf("expected 'no active schema' error, got: %v", err)
 	}
@@ -87,6 +91,7 @@ func TestPickProfileSchema_ByID(t *testing.T) {
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)
 	}
+
 	if got == nil || got.Id != "s2" {
 		t.Fatalf("expected s2, got %+v", got)
 	}
@@ -102,6 +107,7 @@ func TestPickProfileSchema_ByIDNoMatch(t *testing.T) {
 	if err == nil {
 		t.Fatalf("expected error for unknown schema id, got nil")
 	}
+
 	if !strings.Contains(err.Error(), "no schema asset with id nope") {
 		t.Fatalf("expected 'no schema asset with id nope', got: %v", err)
 	}
@@ -122,6 +128,7 @@ func TestPickProfileSchema_MultipleActive_FailsFast(t *testing.T) {
 	if err == nil {
 		t.Fatalf("expected error for multiple active schemas, got nil")
 	}
+
 	if !strings.Contains(err.Error(), "refusing to pick arbitrarily") {
 		t.Fatalf("expected fail-fast error, got: %v", err)
 	}
@@ -142,6 +149,7 @@ func TestPickProfileSchema_IgnoresNonSchemaClass(t *testing.T) {
 	if err == nil {
 		t.Fatalf("expected error, got nil")
 	}
+
 	if !strings.Contains(err.Error(), "no active schema") {
 		t.Fatalf("expected 'no active schema' error, got: %v", err)
 	}

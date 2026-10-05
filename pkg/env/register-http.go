@@ -27,6 +27,7 @@ func newHTTPProxy(uri *url.URL, forward proxy.Dialer) (proxy.Dialer, error) {
 		s.username = uri.User.Username()
 		s.password, _ = uri.User.Password()
 	}
+
 	return s, nil
 }
 
@@ -41,6 +42,7 @@ func (s *httpProxy) Dial(_, addr string) (net.Conn, error) {
 		c.Close() //nolint:errcheck
 		return nil, fmt.Errorf("failed to parse url: %w", err)
 	}
+
 	reqURL.Scheme = ""
 
 	req, err := http.NewRequest("CONNECT", reqURL.String(), nil) //nolint:noctx
@@ -48,6 +50,7 @@ func (s *httpProxy) Dial(_, addr string) (net.Conn, error) {
 		c.Close() //nolint:errcheck
 		return nil, fmt.Errorf("failed to create request: %w", err)
 	}
+
 	req.Close = false
 	if s.haveAuth {
 		req.SetBasicAuth(s.username, s.password)
@@ -64,9 +67,12 @@ func (s *httpProxy) Dial(_, addr string) (net.Conn, error) {
 		if resp != nil && resp.Body != nil {
 			resp.Body.Close() //nolint:errcheck
 		}
+
 		c.Close() //nolint:errcheck
+
 		return nil, fmt.Errorf("failed to read response: %w", err)
 	}
+
 	resp.Body.Close() //nolint:errcheck
 	if resp.StatusCode != http.StatusOK {
 		c.Close() //nolint:errcheck

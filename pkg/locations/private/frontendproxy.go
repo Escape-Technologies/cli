@@ -46,11 +46,13 @@ func proxyDialer(proxyURL *url.URL) func(context.Context, string) (net.Conn, err
 					}
 				default:
 				}
+
 				return nil, fmt.Errorf("context cancelled: %w", ctx.Err())
 			case res := <-resultChan:
 				if res.err != nil {
 					return nil, fmt.Errorf("failed to dial through SOCKS5 proxy: %w", res.err)
 				}
+
 				return res.conn, nil
 			}
 		}
@@ -64,6 +66,7 @@ func proxyDialer(proxyURL *url.URL) func(context.Context, string) (net.Conn, err
 		if err != nil {
 			return nil, fmt.Errorf("failed to dial proxy: %w", err)
 		}
+
 		return doHTTPConnectHandshake(ctx, conn, addr, *proxyURL)
 	}
 }
@@ -74,9 +77,11 @@ func getConn(ctx context.Context, target string, frontendProxyURL *url.URL) (net
 		if err != nil {
 			return conn, fmt.Errorf("failed to dial target: %w", err)
 		}
+
 		return conn, nil
 	}
 
 	dialer := proxyDialer(frontendProxyURL)
+
 	return dialer(ctx, target)
 }

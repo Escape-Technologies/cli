@@ -56,7 +56,7 @@ Display audit logs with filtering by date range, event type, and actor.
 By default shows logs from the last 12 hours.
 
 FILTER OPTIONS:
-  -f, --date-from    Start date (RFC3339 format)
+  -f, --date-from    Start date (RFC3339 format, default: 12 hours ago)
   -t, --date-to      End date (RFC3339 format)
   -e, --event-type   Event type (scan.started, scan.finished, user.authenticated, etc.)
   -a, --actor        Filter by actor (user ID or email)
@@ -83,6 +83,7 @@ FILTER OPTIONS:
 		if auditCmdLimit < 0 {
 			return errors.New("--limit must be greater than or equal to 0")
 		}
+
 		// Output JSON Schema if requested
 		if out.Schema([]v3.AuditLogSummarized{}) {
 			return nil
@@ -107,6 +108,7 @@ FILTER OPTIONS:
 		if err != nil {
 			return err
 		}
+
 		out.Table(allLogs, func() []string {
 			fields := []string{"DATE\tACTION\tACTOR\tACTOR EMAIL\tTITLE"}
 			for _, log := range allLogs {
@@ -119,8 +121,10 @@ FILTER OPTIONS:
 					log.GetTitle(),
 				))
 			}
+
 			return fields
 		})
+
 		return nil
 	},
 }
@@ -137,15 +141,19 @@ func fetchAllAuditLogs(
 		if err != nil {
 			return nil, fmt.Errorf("unable to list audits: %w", err)
 		}
+
 		allLogs = append(allLogs, logs...)
 		if limit > 0 && len(allLogs) >= limit {
 			return allLogs[:limit], nil
 		}
+
 		if cursor == nil || *cursor == "" {
 			break
 		}
+
 		next = *cursor
 	}
+
 	return allLogs, nil
 }
 
@@ -154,7 +162,7 @@ func init() {
 
 	auditCmd.AddCommand(auditListCmd)
 	// theses are optional flags for the list command
-	auditListCmd.Flags().StringVarP(&auditCmdDateFrom, "date-from", "f", auditCmdDateFrom, "Filter by date from (ISO 8601)")
+	auditListCmd.Flags().StringVarP(&auditCmdDateFrom, "date-from", "f", auditCmdDateFrom, "Filter by date from (ISO 8601, default: 12 hours ago)")
 	auditListCmd.Flags().StringVarP(&auditCmdDateTo, "date-to", "t", auditCmdDateTo, "Filter by date to (ISO 8601)")
 	auditListCmd.Flags().StringVarP(&auditCmdEventType, "event-type", "e", "", "Filter by event type: (scan.scheduled, scan.started, scan.finished, user.authenticated)")
 	auditListCmd.Flags().StringVarP(&auditCmdActor, "actor", "a", "", "Filter by actor")

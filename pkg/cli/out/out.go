@@ -5,6 +5,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"os"
 	"time"
 
 	"github.com/Escape-Technologies/cli/pkg/cli/schema"
@@ -23,9 +24,25 @@ const (
 
 var output = outputPretty
 
+// jsonDocumentEmitted is set when JSON mode has already written its one
+// document. A later Log is then a status line on stderr. Log itself writes
+// the document when nothing else has, so message-only commands still print
+// {"msg":"..."}.
+var jsonDocumentEmitted bool
+
 // IsSchemaMode returns true if the output mode is schema
 func IsSchemaMode() bool {
 	return output == outputSchema
+}
+
+// IsJSON reports whether stdout is reserved for a single JSON document.
+func IsJSON() bool {
+	return output == outputJSON
+}
+
+// IsPretty reports whether stdout is the human table.
+func IsPretty() bool {
+	return output == outputPretty
 }
 
 func pprint(o outputT, data any, pretty string) {
@@ -39,21 +56,41 @@ func pprint(o outputT, data any, pretty string) {
 		yaml.NewEncoder(buf).Encode(data) //nolint:errcheck
 		toPrint = buf.String()
 	}
+
 	fmt.Println(toPrint)
 }
 
-// Print prints the data in the output format
+// Print prints the data in the output format.
+// In JSON mode this is the command's one stdout document.
 func Print(data any, pretty string) {
 	pprint(output, data, pretty)
+	noteJSONDocument()
 }
 
-// Log prints the data in the output format
+func noteJSONDocument() {
+	if output == outputJSON {
+		jsonDocumentEmitted = true
+	}
+}
+
+// Message is the JSON payload for commands that only report success
+// (for example `scans cancel`). They declare it as their output schema and
+// Print it so structuredContent stays one validated document.
+type Message struct {
+	Msg string `json:"msg"`
+}
+
+// Log prints a human-readable status line.
+// JSON mode keeps a single stdout document. When Print or Table already
+// wrote that document, the line goes to stderr. When Log is the only output,
+// it prints {"msg":"..."} so `command -o json | jq` still works.
 func Log(pretty string) {
-	Print(struct {
-		Msg string `json:"msg"`
-	}{
-		Msg: pretty,
-	}, pretty)
+	if output == outputJSON && jsonDocumentEmitted {
+		fmt.Fprintln(os.Stderr, pretty)
+		return
+	}
+
+	Print(Message{Msg: pretty}, pretty)
 }
 
 func getOutput(o string) *outputT {
@@ -68,6 +105,7 @@ func getOutput(o string) *outputT {
 	case "schema":
 		res = outputSchema
 	}
+
 	return &res
 }
 
@@ -77,8 +115,11 @@ func SetOutput(o string) error {
 	if out == nil {
 		return fmt.Errorf("invalid output format: %s", o)
 	}
+
 	output = *out
+	jsonDocumentEmitted = false
 	log.Trace("Output format set to %s", output)
+
 	return nil
 }
 
@@ -88,6 +129,7 @@ func GetShortDate(date string) string {
 	if err != nil {
 		return date
 	}
+
 	return parsed.Format("2006-01-02")
 }
 
@@ -97,7 +139,9 @@ func Schema(v any) bool {
 	if output != outputSchema {
 		return false
 	}
+
 	_ = schema.Print(v)
+
 	return true
 }
 
@@ -115,6 +159,8 @@ func InputSchema(v any) bool {
 	if !inputSchemaRequested {
 		return false
 	}
+
 	_ = schema.Print(v)
+
 	return true
 }

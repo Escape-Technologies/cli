@@ -93,6 +93,7 @@ func NewClassifierFromEnv() (Classifier, error) {
 		if err != nil || parsed <= 0 {
 			return nil, fmt.Errorf("invalid %s=%q", classifierTimeoutMSEnv, raw)
 		}
+
 		timeout = parsed
 	}
 
@@ -102,6 +103,7 @@ func NewClassifierFromEnv() (Classifier, error) {
 		if err != nil || parsed <= 0 {
 			return nil, fmt.Errorf("invalid %s=%q", classifierTopKEnv, raw)
 		}
+
 		topK = parsed
 	}
 
@@ -162,6 +164,7 @@ func (c *openAIClassifier) Rank(
 	if strings.TrimSpace(chatCtx.Current) == "" && len(chatCtx.History) == 0 {
 		return nil, errors.New("classifier requires chat context")
 	}
+
 	if len(digest) == 0 {
 		return nil, nil
 	}
@@ -202,6 +205,7 @@ func (c *openAIClassifier) Rank(
 	if err != nil {
 		return nil, fmt.Errorf("new classifier request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", "application/json")
 	req.Header.Set("Authorization", "Bearer "+c.apiKey)
 
@@ -209,6 +213,7 @@ func (c *openAIClassifier) Rank(
 	if err != nil {
 		return nil, fmt.Errorf("classifier request: %w", err)
 	}
+
 	defer func() { _ = resp.Body.Close() }()
 
 	if resp.StatusCode != http.StatusOK {
@@ -220,6 +225,7 @@ func (c *openAIClassifier) Rank(
 	if err := json.NewDecoder(resp.Body).Decode(&parsed); err != nil {
 		return nil, fmt.Errorf("decode classifier response: %w", err)
 	}
+
 	if len(parsed.Choices) == 0 {
 		return nil, errors.New("classifier returned no choices")
 	}
@@ -229,12 +235,14 @@ func (c *openAIClassifier) Rank(
 	if err != nil {
 		return nil, err
 	}
+
 	// The system prompt asks for at most K items, but models occasionally
 	// overshoot. Hard-clamp here so intent mode can't accidentally re-expand
 	// more schemas than the size budget allows.
 	if c.topK > 0 && len(tools) > c.topK {
 		tools = tools[:c.topK]
 	}
+
 	return tools, nil
 }
 
@@ -273,12 +281,15 @@ func trimAndDedupe(values []string) []string {
 		if name == "" {
 			continue
 		}
+
 		if _, dup := seen[name]; dup {
 			continue
 		}
+
 		seen[name] = struct{}{}
 		result = append(result, name)
 	}
+
 	return result
 }
 
@@ -286,5 +297,6 @@ func truncate(value string, maxLen int) string {
 	if len(value) <= maxLen {
 		return value
 	}
+
 	return value[:maxLen] + "..."
 }

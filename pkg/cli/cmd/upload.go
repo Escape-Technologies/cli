@@ -47,6 +47,7 @@ when creating profiles that reference large schema files.`,
 		if err != nil {
 			return fmt.Errorf("failed to read stdin: %w", err)
 		}
+
 		if len(data) == 0 {
 			return errors.New("no schema bytes provided: pipe a schema file via stdin")
 		}

@@ -13,28 +13,33 @@ func GetStatistics(ctx context.Context) (*v3.GetStatistics200Response, error) {
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
+
 	data, _, err := client.StatisticsAPI.GetStatistics(ctx).Execute()
 	if err != nil {
 		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
+
 	return data, nil
 }
 
 // TriggerAsmScans triggers ASM scans on assets matching an optional filter
-func TriggerAsmScans(ctx context.Context, where *v3.TriggerAsmScansRequestWhere) error {
+func TriggerAsmScans(ctx context.Context, where *v3.TriggerAsmScansRequestWhere) (*v3.TriggerAsmScans200Response, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
-		return fmt.Errorf("unable to init client: %w", err)
+		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
+
 	req := client.AsmAPI.TriggerAsmScans(ctx)
 	body := v3.TriggerAsmScansRequest{}
 	if where != nil {
 		body.Where = where
 	}
+
 	req = req.TriggerAsmScansRequest(body)
-	_, _, err = req.Execute()
+	data, _, err := req.Execute()
 	if err != nil {
-		return fmt.Errorf("api error: %w", humanizeAPIError(err))
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
-	return nil
+
+	return data, nil
 }

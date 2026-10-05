@@ -15,12 +15,15 @@ func GetHTTPClient() *http.Client {
 	if err != nil {
 		log.Warn("Failed to get certificates: %s", err)
 	}
+
 	if certificates != nil {
 		transport.TLSClientConfig = certificates
 	}
+
 	proxyURL := GetFrontendProxyURL()
 	if proxyURL != nil {
 		transport.Proxy = http.ProxyURL(proxyURL)
 	}
+
 	return &http.Client{Transport: transport}
 }

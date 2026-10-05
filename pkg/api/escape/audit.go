@@ -25,41 +25,52 @@ func ListAuditLogs(ctx context.Context, next string, filters *ListAuditLogsFilte
 	if err != nil {
 		return nil, nil, fmt.Errorf("unable to init client: %w", err)
 	}
+
 	req := client.AuditAPI.ListAuditLogs(ctx)
 	if filters != nil && filters.SortType != "" {
 		req = req.SortType(filters.SortType)
 	}
+
 	if filters != nil && filters.SortDirection != "" {
 		req = req.SortDirection(filters.SortDirection)
 	} else {
 		req = req.SortDirection("desc")
 	}
+
 	if next != "" {
 		req = req.Cursor(next)
 	}
+
 	if filters != nil {
 		if filters.DateFrom != "" {
 			req = req.StartTime(filters.DateFrom)
 		}
+
 		if filters.DateTo != "" {
 			req = req.EndTime(filters.DateTo)
 		}
+
 		if filters.ActionType != "" {
 			req = req.Action(filters.ActionType)
 		}
+
 		if filters.Actor != "" {
 			req = req.Actor(filters.Actor)
 		}
+
 		if filters.Search != "" {
 			req = req.Search(filters.Search)
 		}
+
 		if filters.Size > 0 {
 			req = req.Size(filters.Size)
 		}
 	}
+
 	data, _, err := req.Execute()
 	if err != nil {
 		return nil, nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
+
 	return data.Data, data.NextCursor, nil
 }

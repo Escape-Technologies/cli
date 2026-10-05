@@ -36,9 +36,11 @@ func TestReasoningStagesIncludeAgentReasoningAndAction(t *testing.T) {
 	if len(reasoningStages) != 2 {
 		t.Fatalf("expected 2 reasoning stages, got %d", len(reasoningStages))
 	}
+
 	if reasoningStages[0] != "AGENT_REASONING" {
 		t.Fatalf("expected AGENT_REASONING first, got %q", reasoningStages[0])
 	}
+
 	if reasoningStages[1] != "AGENT_ACTION" {
 		t.Fatalf("expected AGENT_ACTION second, got %q", reasoningStages[1])
 	}
@@ -117,6 +119,7 @@ func TestListReasoningEventsStopsAtLimit(t *testing.T) {
 	if !reasoningListTruncated(len(summaries), limit, nil) {
 		t.Fatal("expected listTruncated when source exceeds limit")
 	}
+
 	capped := summaries[:limit]
 	if len(capped) != limit {
 		t.Fatalf("expected %d summaries, got %d", limit, len(capped))

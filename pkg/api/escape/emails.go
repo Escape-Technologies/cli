@@ -24,6 +24,7 @@ func ListInboxEmails(ctx context.Context, cursor string, filters *ListInboxEmail
 	if filters == nil {
 		return nil, errors.New("email is required")
 	}
+
 	email := strings.TrimSpace(filters.Email)
 	if email == "" {
 		return nil, errors.New("email is required")
@@ -38,15 +39,19 @@ func ListInboxEmails(ctx context.Context, cursor string, filters *ListInboxEmail
 	if cursor != "" {
 		req = req.Cursor(cursor)
 	}
+
 	if filters.Size > 0 {
 		req = req.Size(filters.Size)
 	}
+
 	if len(filters.IDs) > 0 {
 		req = req.Ids(strings.Join(filters.IDs, ","))
 	}
+
 	if filters.Before != nil {
 		req = req.Before(*filters.Before)
 	}
+
 	if filters.After != nil {
 		req = req.After(*filters.After)
 	}
@@ -55,6 +60,7 @@ func ListInboxEmails(ctx context.Context, cursor string, filters *ListInboxEmail
 	if err != nil {
 		return nil, fmt.Errorf("unable to list inbox emails: %w", humanizeAPIError(err))
 	}
+
 	return data, nil
 }
 
@@ -69,5 +75,6 @@ func ReadInboxEmail(ctx context.Context, id string) (*v3.ScanEmailDetails, error
 	if err != nil {
 		return nil, fmt.Errorf("unable to read inbox email: %w", humanizeAPIError(err))
 	}
+
 	return data, nil
 }

@@ -24,6 +24,7 @@ and build date. Use this to verify your installation and check for updates.`,
 		if rootCmdVerbose > 0 && v.UpdateCheckError != "" {
 			text += "\n  Check error:  " + v.UpdateCheckError
 		}
+
 		out.Print(v, text)
 	},
 }

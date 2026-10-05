@@ -14,5 +14,6 @@ func Run(ctx context.Context) error {
 	if err != nil {
 		return fmt.Errorf("failed to execute command: %w", err)
 	}
+
 	return nil
 }

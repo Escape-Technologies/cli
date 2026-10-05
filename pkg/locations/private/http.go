@@ -23,6 +23,7 @@ func (c *bufConn) Read(b []byte) (int, error) {
 	if err != nil {
 		return n, fmt.Errorf("failed to read from buffer: %w", err)
 	}
+
 	return n, nil
 }
 
@@ -36,6 +37,7 @@ func sendHTTPRequest(ctx context.Context, req *http.Request, conn net.Conn) erro
 	if err := req.Write(conn); err != nil {
 		return fmt.Errorf("failed to write the HTTP request: %v", err)
 	}
+
 	return nil
 }
 
@@ -69,9 +71,11 @@ func doHTTPConnectHandshake(ctx context.Context, conn net.Conn, backendAddr stri
 	if err != nil {
 		return nil, fmt.Errorf("reading server HTTP response: %v", err)
 	}
+
 	if resp != nil && resp.Body != nil {
 		defer resp.Body.Close() //nolint:errcheck
 	}
+
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("failed to do connect handshake, status code: %s", resp.Status)
 	}

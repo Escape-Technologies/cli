@@ -20,6 +20,7 @@ func validateUUIDKey(key string) error {
 	if !uuidRegexp.MatchString(key) {
 		return fmt.Errorf("%s does not match regex %s", key, uuidRegex)
 	}
+
 	return nil
 }
 
@@ -29,10 +30,12 @@ func GetAPIKey() (string, error) {
 	if key == "" {
 		return "", errors.New("ESCAPE_API_KEY environment variable is not set. " + APIKeyHint)
 	}
+
 	err := validateUUIDKey(key)
 	if err != nil {
 		return "", fmt.Errorf("ESCAPE_API_KEY invalid UUID format: %w", err)
 	}
+
 	return key, nil
 }
 

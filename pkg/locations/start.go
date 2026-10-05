@@ -34,6 +34,7 @@ func Start(ctx context.Context, name string) error {
 	if err != nil {
 		return fmt.Errorf("unable to generate SSH keys: %w", err)
 	}
+
 	log.Debug("Generated SSH Key: %s", sshPublicKey)
 
 	log.Trace("Creating location %s with public key %s", name, sshPublicKey)
@@ -41,9 +42,11 @@ func Start(ctx context.Context, name string) error {
 	if err != nil {
 		return fmt.Errorf("unable to update private location on Escape Platform: %w", err)
 	}
+
 	if os.Getenv("ESCAPE_K8S_INTEGRATION") != "false" {
 		go kube.Start(ctx, id, name, healthy)
 	}
+
 	go dns.Start()
 
 	for {
@@ -53,10 +56,12 @@ func Start(ctx context.Context, name string) error {
 			if escape.IsInvalidAPIKey(err) {
 				return fmt.Errorf("unable to update private location on Escape Platform: %w", err)
 			}
+
 			log.Error("Unable to update private location on Escape Platform: %s", err)
 			time.Sleep(retryInterval)
 			continue
 		}
+
 		log.Info("Private location %s in sync with Escape Platform, starting location...", name)
 		err = private.StartLocation(ctx, id, sshPrivateKey, healthy)
 		if err != nil {
@@ -64,6 +69,7 @@ func Start(ctx context.Context, name string) error {
 		} else {
 			log.Error("Location connection terminated unexpectedly")
 		}
+
 		time.Sleep(retryInterval)
 		if ctx.Err() != nil {
 			return nil

@@ -20,6 +20,7 @@ func newAPIV3Client() (*v3.APIClient, error) {
 	if err != nil {
 		return nil, fmt.Errorf("failed to get API URL: %w", err)
 	}
+
 	authorization, err := env.GetAuthorizationHeader()
 	if err != nil {
 		return nil, fmt.Errorf("failed to get authorization header: %w", err)

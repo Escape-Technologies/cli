@@ -20,6 +20,14 @@ const (
 	maxDocsSnippetChars       = 220
 	maxDocsResultsPerQuery    = 8
 
+	// maxDocsPageChars caps the full-page text returned by GetPage /
+	// knowledge_get_page. ~12k chars stays inside a model's context budget
+	// while covering most docs pages end to end.
+	maxDocsPageChars = 12000
+
+	// docsPageSectionCap is the initial capacity for sections of one docs page.
+	docsPageSectionCap = 4
+
 	// docsHTTPTimeout caps both the index fetch and any single search call.
 	// Generous because the docs index is ~MB-sized JSON pulled cold once.
 	docsHTTPTimeout = 15 * time.Second
@@ -57,6 +65,16 @@ type KnowledgeSearchResult struct {
 	Snippet string `json:"snippet"`
 }
 
+// KnowledgeDocPage is the full page text returned by GetPage. Text is plain
+// (the Docusaurus search index strips markdown) and capped at
+// maxDocsPageChars; Truncated reports whether the cap was applied.
+type KnowledgeDocPage struct {
+	Title     string `json:"title"`
+	URL       string `json:"url"`
+	Text      string `json:"text"`
+	Truncated bool   `json:"truncated"`
+}
+
 type rawSearchIndexDoc struct {
 	Location string `json:"location"`
 	Title    string `json:"title"`
@@ -88,6 +106,7 @@ func NewDocsSearchIndex(options DocsSearchIndexOptions) *DocsSearchIndex {
 	if index.httpClient == nil {
 		index.httpClient = &http.Client{Timeout: docsHTTPTimeout}
 	}
+
 	return index
 }
 
@@ -104,6 +123,7 @@ func (d *DocsSearchIndex) Search(ctx context.Context, queryInput string, limit i
 	if limit < 1 {
 		limit = 1
 	}
+
 	if limit > maxDocsResultsPerQuery {
 		limit = maxDocsResultsPerQuery
 	}
@@ -133,6 +153,7 @@ func (d *DocsSearchIndex) Search(ctx context.Context, queryInput string, limit i
 	if len(ranked) > limit {
 		ranked = ranked[:limit]
 	}
+
 	out := make([]KnowledgeSearchResult, 0, len(ranked))
 	for _, entry := range ranked {
 		out = append(out, KnowledgeSearchResult{
@@ -141,7 +162,81 @@ func (d *DocsSearchIndex) Search(ctx context.Context, queryInput string, limit i
 			Snippet: snippetFor(entry.doc),
 		})
 	}
+
 	return out, nil
+}
+
+// GetPage returns the full text of a documentation page identified by the URL
+// or path surfaced in a Search result. Docusaurus indexes each section as its
+// own location (page/#anchor), so the page body is rebuilt by concatenating
+// every section whose location shares the target path, in index order. The
+// text is plain (the search index strips markdown) and capped at
+// maxDocsPageChars.
+func (d *DocsSearchIndex) GetPage(ctx context.Context, urlOrPath string) (*KnowledgeDocPage, error) {
+	key := docsPageKey(urlOrPath)
+	if key == "" {
+		return nil, ErrDocsPageNotFound
+	}
+
+	docs, err := d.loadDocs(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	page := &KnowledgeDocPage{}
+	sections := make([]string, 0, docsPageSectionCap)
+	for _, doc := range docs {
+		if docsPageKey(doc.location) != key {
+			continue
+		}
+
+		if page.Title == "" {
+			page.Title = doc.title
+			page.URL = doc.url
+		}
+
+		if doc.text != "" {
+			sections = append(sections, doc.text)
+		}
+	}
+
+	if page.Title == "" {
+		return nil, ErrDocsPageNotFound
+	}
+
+	text := strings.Join(sections, "\n\n")
+	if text == "" {
+		text = page.Title
+	}
+
+	if runes := []rune(text); len(runes) > maxDocsPageChars {
+		text = string(runes[:maxDocsPageChars])
+		page.Truncated = true
+	}
+
+	page.Text = text
+
+	return page, nil
+}
+
+// docsPageKey normalises a docs location, path, or absolute URL to the
+// canonical key of the page it belongs to: scheme/host and fragment dropped,
+// slashes trimmed, lowercased. Inputs that do not identify a page yield "".
+func docsPageKey(value string) string {
+	raw := strings.TrimSpace(value)
+	if raw == "" {
+		return ""
+	}
+
+	path := raw
+	if parsed, err := url.Parse(raw); err == nil {
+		path = parsed.Path
+		if path == "" {
+			path = parsed.Opaque
+		}
+	}
+
+	return strings.ToLower(strings.Trim(path, "/"))
 }
 
 type docsQuerySpec struct {
@@ -164,18 +259,23 @@ func toDocsQuery(query string) docsQuerySpec {
 		if token == "" {
 			continue
 		}
+
 		stemmed = append(stemmed, StemToken(token))
 	}
+
 	filtered := make([]string, 0, len(stemmed))
 	for _, token := range stemmed {
 		if _, isStop := docsQueryStopWords[token]; isStop {
 			continue
 		}
+
 		filtered = append(filtered, token)
 	}
+
 	if len(filtered) == 0 {
 		filtered = stemmed
 	}
+
 	// Deduplicate while preserving order.
 	seen := make(map[string]struct{}, len(filtered))
 	unique := make([]string, 0, len(filtered))
@@ -183,9 +283,11 @@ func toDocsQuery(query string) docsQuerySpec {
 		if _, dup := seen[token]; dup {
 			continue
 		}
+
 		seen[token] = struct{}{}
 		unique = append(unique, token)
 	}
+
 	return docsQuerySpec{
 		normalizedQuery: strings.Join(unique, " "),
 		terms:           unique,
@@ -209,9 +311,11 @@ func scoreDoc(doc indexedDoc, query docsQuerySpec) float64 {
 	if strings.Contains(doc.normalizedTitle, query.normalizedQuery) {
 		score += 8
 	}
+
 	if strings.Contains(doc.normalizedLocation, query.normalizedQuery) {
 		score += 6
 	}
+
 	if strings.Contains(doc.normalizedText, query.normalizedQuery) {
 		score += 4
 	}
@@ -223,23 +327,28 @@ func scoreDoc(doc indexedDoc, query docsQuerySpec) float64 {
 			score += 2.5
 			did = true
 		}
+
 		if strings.Contains(doc.normalizedLocation, term) {
 			score += 1.5
 			did = true
 		}
+
 		if strings.Contains(doc.normalizedText, term) {
 			score++
 			did = true
 		}
+
 		if did {
 			matched++
 		}
 	}
+
 	score += (float64(matched) / float64(len(query.terms))) * termCoverageWeight
 
 	if strings.Contains(doc.location, "#") {
 		score -= 0.35
 	}
+
 	return score
 }
 
@@ -247,6 +356,7 @@ func snippetFor(doc indexedDoc) string {
 	if doc.text != "" {
 		return truncateRunes(doc.text, maxDocsSnippetChars)
 	}
+
 	return truncateRunes(doc.title, maxDocsSnippetChars)
 }
 
@@ -256,6 +366,7 @@ func (d *DocsSearchIndex) loadDocs(ctx context.Context) ([]indexedDoc, error) {
 		defer d.mu.Unlock()
 		return d.cache, nil
 	}
+
 	if d.inFlight != nil {
 		ch := d.inFlight
 		d.mu.Unlock()
@@ -266,6 +377,7 @@ func (d *DocsSearchIndex) loadDocs(ctx context.Context) ([]indexedDoc, error) {
 			if d.inFlightErr != nil {
 				return nil, d.inFlightErr
 			}
+
 			return d.inFlightRes, nil
 		case <-ctx.Done():
 			return nil, fmt.Errorf("docs index wait: %w", ctx.Err())
@@ -286,7 +398,9 @@ func (d *DocsSearchIndex) loadDocs(ctx context.Context) ([]indexedDoc, error) {
 		d.cache = docs
 		d.cacheUntil = time.Now().Add(d.ttl)
 	}
+
 	d.mu.Unlock()
+
 	return docs, err
 }
 
@@ -295,12 +409,14 @@ func (d *DocsSearchIndex) fetchDocs(ctx context.Context) ([]indexedDoc, error) {
 	if err != nil {
 		return nil, fmt.Errorf("new docs index request: %w", err)
 	}
+
 	req.Header.Set("Accept", "application/json")
 
 	resp, err := d.httpClient.Do(req)
 	if err != nil {
 		return nil, fmt.Errorf("docs index fetch: %w", err)
 	}
+
 	defer func() { _ = resp.Body.Close() }()
 
 	if resp.StatusCode < http.StatusOK || resp.StatusCode >= http.StatusMultipleChoices {
@@ -320,8 +436,10 @@ func (d *DocsSearchIndex) fetchDocs(ctx context.Context) ([]indexedDoc, error) {
 		if strings.TrimSpace(raw.Location) == "" {
 			continue
 		}
+
 		docs = append(docs, toIndexedDoc(raw, d.docsSiteURL))
 	}
+
 	return docs, nil
 }
 
@@ -366,6 +484,7 @@ func normalizeForSearch(value string) string {
 			}
 		}
 	}
+
 	return strings.TrimSpace(out.String())
 }
 
@@ -378,6 +497,7 @@ func firstNonEmpty(primary, fallback string) string {
 	if strings.TrimSpace(primary) != "" {
 		return primary
 	}
+
 	return fallback
 }
 
@@ -385,6 +505,7 @@ func firstNonZero(primary, fallback time.Duration) time.Duration {
 	if primary > 0 {
 		return primary
 	}
+
 	return fallback
 }
 
@@ -393,6 +514,7 @@ func truncateRunes(value string, maxChars int) string {
 	if len(runes) <= maxChars {
 		return value
 	}
+
 	return string(runes[:maxChars]) + "..."
 }
 
@@ -419,24 +541,34 @@ func compareScoredDocs(left, right scoredDoc) int {
 		if right.score > left.score {
 			return 1
 		}
+
 		return -1
 	}
+
 	leftAnchor := 0
 	rightAnchor := 0
 	if strings.Contains(left.doc.location, "#") {
 		leftAnchor = 1
 	}
+
 	if strings.Contains(right.doc.location, "#") {
 		rightAnchor = 1
 	}
+
 	if leftAnchor != rightAnchor {
 		return leftAnchor - rightAnchor
 	}
+
 	if len(left.doc.location) != len(right.doc.location) {
 		return len(left.doc.location) - len(right.doc.location)
 	}
+
 	return strings.Compare(left.doc.url, right.doc.url)
 }
 
 // ErrDocsIndexUnavailable is returned when the docs index can't be fetched.
 var ErrDocsIndexUnavailable = errors.New("docs index unavailable")
+
+// ErrDocsPageNotFound is returned by GetPage when the docs index has no entry
+// for the requested URL or path.
+var ErrDocsPageNotFound = errors.New("docs page not found")

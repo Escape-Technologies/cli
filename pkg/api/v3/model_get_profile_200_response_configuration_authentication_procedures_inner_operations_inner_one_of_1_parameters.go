@@ -22,7 +22,6 @@ var _ MappedNullable = &GetProfile200ResponseConfigurationAuthenticationProcedur
 type GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1Parameters struct {
 	ProxyOverride           *string                                                                                                        `json:"proxy_override,omitempty"`
 	LoginUrl                string                                                                                                         `json:"login_url"`
-	AutoExtractionUrls      []string                                                                                                       `json:"auto_extraction_urls,omitempty"`
 	LoggedInDetectorText    *string                                                                                                        `json:"logged_in_detector_text,omitempty"`
 	LoggedInDetectorTimeout *float32                                                                                                       `json:"logged_in_detector_timeout,omitempty"`
 	StealthMode             *bool                                                                                                          `json:"stealth_mode,omitempty"`
@@ -118,38 +117,6 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 // SetLoginUrl sets field value
 func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1Parameters) SetLoginUrl(v string) {
 	o.LoginUrl = v
-}
-
-// GetAutoExtractionUrls returns the AutoExtractionUrls field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1Parameters) GetAutoExtractionUrls() []string {
-	if o == nil || IsNil(o.AutoExtractionUrls) {
-		var ret []string
-		return ret
-	}
-	return o.AutoExtractionUrls
-}
-
-// GetAutoExtractionUrlsOk returns a tuple with the AutoExtractionUrls field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1Parameters) GetAutoExtractionUrlsOk() ([]string, bool) {
-	if o == nil || IsNil(o.AutoExtractionUrls) {
-		return nil, false
-	}
-	return o.AutoExtractionUrls, true
-}
-
-// HasAutoExtractionUrls returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1Parameters) HasAutoExtractionUrls() bool {
-	if o != nil && !IsNil(o.AutoExtractionUrls) {
-		return true
-	}
-
-	return false
-}
-
-// SetAutoExtractionUrls gets a reference to the given []string and assigns it to the AutoExtractionUrls field.
-func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperationsInnerOneOf1Parameters) SetAutoExtractionUrls(v []string) {
-	o.AutoExtractionUrls = v
 }
 
 // GetLoggedInDetectorText returns the LoggedInDetectorText field value if set, zero value otherwise.
@@ -462,9 +429,6 @@ func (o GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperation
 		toSerialize["proxy_override"] = o.ProxyOverride
 	}
 	toSerialize["login_url"] = o.LoginUrl
-	if !IsNil(o.AutoExtractionUrls) {
-		toSerialize["auto_extraction_urls"] = o.AutoExtractionUrls
-	}
 	if !IsNil(o.LoggedInDetectorText) {
 		toSerialize["logged_in_detector_text"] = o.LoggedInDetectorText
 	}
@@ -536,7 +500,6 @@ func (o *GetProfile200ResponseConfigurationAuthenticationProceduresInnerOperatio
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "proxy_override")
 		delete(additionalProperties, "login_url")
-		delete(additionalProperties, "auto_extraction_urls")
 		delete(additionalProperties, "logged_in_detector_text")
 		delete(additionalProperties, "logged_in_detector_timeout")
 		delete(additionalProperties, "stealth_mode")

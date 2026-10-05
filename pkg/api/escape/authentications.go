@@ -24,6 +24,7 @@ func StartAuthentication(ctx context.Context, body []byte) (*v3.StartAuthenticat
 	if err != nil {
 		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
+
 	return data, nil
 }
 
@@ -38,5 +39,6 @@ func GetAuthentication(ctx context.Context, authenticationID string) (*v3.GetAut
 	if err != nil {
 		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
+
 	return data, nil
 }

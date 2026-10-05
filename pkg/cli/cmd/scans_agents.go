@@ -38,6 +38,7 @@ agent title and --event-search to find agents whose reasoning logs mention text.
 			_ = cmd.Help()
 			return errors.New("scan ID is required")
 		}
+
 		return nil
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
@@ -51,6 +52,7 @@ agent title and --event-search to find agents whose reasoning logs mention text.
 		}
 
 		out.Print(ScanAgents{ScanID: args[0], Agents: agents}, "")
+
 		return nil
 	},
 }
@@ -69,11 +71,14 @@ func listScanAgents(ctx context.Context, scanID string) ([]escape.AgentSummarize
 		if err != nil {
 			return nil, fmt.Errorf("unable to list scan agents: %w", err)
 		}
+
 		agents = append(agents, page...)
 		if cursor == nil || *cursor == "" {
 			break
 		}
+
 		next = *cursor
 	}
+
 	return agents, nil
 }

@@ -46,6 +46,7 @@ func TestHumanizeAPIErrorBodyReturnsEmptyOnEmpty(t *testing.T) {
 	if got := humanizeAPIErrorBody(nil); got != "" {
 		t.Fatalf("expected empty for nil body, got %q", got)
 	}
+
 	if got := humanizeAPIErrorBody([]byte("")); got != "" {
 		t.Fatalf("expected empty for empty body, got %q", got)
 	}
@@ -95,9 +96,11 @@ func TestHumanizeAPIErrorMapsUnauthorized(t *testing.T) {
 	if got == nil {
 		t.Fatal("expected humanized error, got nil")
 	}
+
 	if got.Error() != InvalidAPIKeyMessage {
 		t.Fatalf("expected %q, got %q", InvalidAPIKeyMessage, got.Error())
 	}
+
 	if !IsInvalidAPIKey(got) {
 		t.Fatal("expected humanized error to keep invalid API key detection")
 	}
@@ -121,6 +124,7 @@ func TestHumanizeAPIErrorHumanizesGeneratedAPIError(t *testing.T) {
 	if got == nil {
 		t.Fatal("expected humanized error, got nil")
 	}
+
 	const want = "Bad Request: severities.0: Invalid enum value"
 	if got.Error() != want {
 		t.Fatalf("expected %q, got %q", want, got.Error())
@@ -138,6 +142,7 @@ func TestHumanizeAPIErrorUnwrapsWrappedGeneratedAPIError(t *testing.T) {
 	if got == nil {
 		t.Fatal("expected humanized error, got nil")
 	}
+
 	const want = "Invalid cursor: cursor expired"
 	if got.Error() != want {
 		t.Fatalf("expected %q, got %q", want, got.Error())
@@ -196,6 +201,7 @@ func newTestGenericOpenAPIErrorWithStatus(body []byte, status string) *v3.Generi
 		model interface{}
 	}
 	e := genericOpenAPIError{body: body, error: status}
+
 	return (*v3.GenericOpenAPIError)(unsafe.Pointer(&e))
 }
 

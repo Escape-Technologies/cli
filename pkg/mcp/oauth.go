@@ -102,6 +102,7 @@ func newOAuthHandlers(cfg oauthConfig) (*oauthHandlers, error) {
 	if err != nil {
 		return nil, fmt.Errorf("load oauth private key: %w", err)
 	}
+
 	if privateKey.N.BitLen() < 2048 { //nolint:mnd // RFC 7518 §6.3 minimum.
 		return nil, fmt.Errorf("oauth private key is too small: got %d bits, need at least 2048", privateKey.N.BitLen())
 	}
@@ -116,6 +117,7 @@ func newOAuthHandlers(cfg oauthConfig) (*oauthHandlers, error) {
 	if resourceURL == "" {
 		return nil, errors.New("ResourceURL is required")
 	}
+
 	prmURL, err := derivePRMURL(resourceURL)
 	if err != nil {
 		return nil, fmt.Errorf("derive prm url: %w", err)
@@ -186,6 +188,7 @@ func (h *oauthHandlers) ServeToken(w http.ResponseWriter, req *http.Request) {
 		h.writeOAuthError(w, http.StatusMethodNotAllowed, "invalid_request", "method not allowed")
 		return
 	}
+
 	if err := req.ParseForm(); err != nil {
 		h.writeOAuthError(w, http.StatusBadRequest, "invalid_request", "malformed form body")
 		return
@@ -194,6 +197,7 @@ func (h *oauthHandlers) ServeToken(w http.ResponseWriter, req *http.Request) {
 	if grantType := req.Form.Get("grant_type"); grantType != "authorization_code" {
 		h.writeOAuthError(w, http.StatusBadRequest, "unsupported_grant_type",
 			fmt.Sprintf("grant_type %q is not supported", grantType))
+
 		return
 	}
 
@@ -205,6 +209,7 @@ func (h *oauthHandlers) ServeToken(w http.ResponseWriter, req *http.Request) {
 	if code == "" || codeVerifier == "" || redirectURI == "" || clientID == "" {
 		h.writeOAuthError(w, http.StatusBadRequest, "invalid_request",
 			"missing one of code, code_verifier, redirect_uri, client_id")
+
 		return
 	}
 
@@ -219,10 +224,12 @@ func (h *oauthHandlers) ServeToken(w http.ResponseWriter, req *http.Request) {
 		h.writeOAuthError(w, http.StatusBadRequest, "invalid_grant", "authorization code expired")
 		return
 	}
+
 	if payload.CodeChallengeMethod != oauthCodeChallengeAlg {
 		h.writeOAuthError(w, http.StatusBadRequest, "invalid_grant", "unsupported code_challenge_method")
 		return
 	}
+
 	if !verifyPKCE(codeVerifier, payload.CodeChallenge) {
 		h.writeOAuthError(w, http.StatusBadRequest, "invalid_grant", "code_verifier does not match code_challenge")
 		return
@@ -233,10 +240,12 @@ func (h *oauthHandlers) ServeToken(w http.ResponseWriter, req *http.Request) {
 		h.writeOAuthError(w, http.StatusBadRequest, "invalid_grant", "client_id mismatch")
 		return
 	}
+
 	if subtle.ConstantTimeCompare([]byte(redirectURI), []byte(payload.RedirectURI)) != 1 {
 		h.writeOAuthError(w, http.StatusBadRequest, "invalid_grant", "redirect_uri mismatch")
 		return
 	}
+
 	// Defense-in-depth: re-validate the decrypted redirect_uri even though the
 	// authorize endpoint should have rejected it already. Protects against a
 	// compromised authorize path.
@@ -244,10 +253,12 @@ func (h *oauthHandlers) ServeToken(w http.ResponseWriter, req *http.Request) {
 		h.writeOAuthError(w, http.StatusBadRequest, "invalid_grant", "redirect_uri is not accepted")
 		return
 	}
+
 	if payload.ClientID != oauthClientID {
 		h.writeOAuthError(w, http.StatusBadRequest, "invalid_grant", "unknown client_id")
 		return
 	}
+
 	if payload.APIKey == "" {
 		h.writeOAuthError(w, http.StatusBadRequest, "invalid_grant", "authorization code has no api_key")
 		return
@@ -306,10 +317,12 @@ func (h *oauthHandlers) ValidateAPIKey(ctx context.Context, apiKey string) bool 
 			delete(h.validationCache, k)
 		}
 	}
+
 	if expAt, ok := h.validationCache[cacheKey]; ok && expAt >= now {
 		h.validationCacheMu.Unlock()
 		return true
 	}
+
 	h.validationCacheMu.Unlock()
 
 	if h.publicAPIURL == "" {
@@ -327,6 +340,7 @@ func (h *oauthHandlers) ValidateAPIKey(ctx context.Context, apiKey string) bool 
 	if err != nil {
 		return false
 	}
+
 	req.Header.Set("Authorization", "Key "+apiKey)
 	req.Header.Set("Accept", "application/json")
 
@@ -334,6 +348,7 @@ func (h *oauthHandlers) ValidateAPIKey(ctx context.Context, apiKey string) bool 
 	if err != nil {
 		return false
 	}
+
 	defer func() { _ = resp.Body.Close() }()
 
 	const httpOKFloor = 200
@@ -342,8 +357,10 @@ func (h *oauthHandlers) ValidateAPIKey(ctx context.Context, apiKey string) bool 
 		h.validationCacheMu.Lock()
 		h.validationCache[cacheKey] = now + int64(validationCacheTTL.Seconds())
 		h.validationCacheMu.Unlock()
+
 		return true
 	}
+
 	return false
 }
 
@@ -357,6 +374,7 @@ func (h *oauthHandlers) decryptCode(code string) (*oauthCodePayload, error) {
 	if err != nil {
 		return nil, fmt.Errorf("parse jwe: %w", err)
 	}
+
 	plaintext, err := jwe.Decrypt(h.privateKey)
 	if err != nil {
 		return nil, fmt.Errorf("decrypt jwe: %w", err)
@@ -366,6 +384,7 @@ func (h *oauthHandlers) decryptCode(code string) (*oauthCodePayload, error) {
 	if err := json.Unmarshal(plaintext, &payload); err != nil {
 		return nil, fmt.Errorf("unmarshal payload: %w", err)
 	}
+
 	return &payload, nil
 }
 
@@ -376,6 +395,7 @@ func (h *oauthHandlers) markJTISeen(jti string, exp int64) bool {
 		// Without a jti the token is already not single-use; reject.
 		return false
 	}
+
 	h.seenJTIMu.Lock()
 	defer h.seenJTIMu.Unlock()
 
@@ -385,11 +405,14 @@ func (h *oauthHandlers) markJTISeen(jti string, exp int64) bool {
 			delete(h.seenJTI, k)
 		}
 	}
+
 	if _, exists := h.seenJTI[jti]; exists {
 		return false
 	}
+
 	keepUntil := exp + int64(oauthCodeExpiryWindow.Seconds())
 	h.seenJTI[jti] = keepUntil
+
 	return true
 }
 
@@ -413,6 +436,7 @@ func (h *oauthHandlers) EncryptCodeForTest(payload oauthCodePayload) (string, er
 	if err != nil {
 		return "", fmt.Errorf("marshal payload: %w", err)
 	}
+
 	recipient := jose.Recipient{
 		Algorithm: jose.RSA_OAEP_256,
 		Key:       h.publicKey,
@@ -422,14 +446,17 @@ func (h *oauthHandlers) EncryptCodeForTest(payload oauthCodePayload) (string, er
 	if err != nil {
 		return "", fmt.Errorf("new encrypter: %w", err)
 	}
+
 	object, err := encrypter.Encrypt(plaintext)
 	if err != nil {
 		return "", fmt.Errorf("encrypt payload: %w", err)
 	}
+
 	serialized, err := object.CompactSerialize()
 	if err != nil {
 		return "", fmt.Errorf("serialize jwe: %w", err)
 	}
+
 	return serialized, nil
 }
 
@@ -438,6 +465,7 @@ func (h *oauthHandlers) EncryptCodeForTest(payload oauthCodePayload) (string, er
 func verifyPKCE(verifier, challenge string) bool {
 	sum := sha256.Sum256([]byte(verifier))
 	computed := base64.RawURLEncoding.EncodeToString(sum[:])
+
 	return subtle.ConstantTimeCompare([]byte(computed), []byte(challenge)) == 1
 }
 
@@ -447,7 +475,9 @@ func keyID(pub *rsa.PublicKey) (string, error) {
 	if err != nil {
 		return "", fmt.Errorf("marshal pub: %w", err)
 	}
+
 	sum := sha256.Sum256(der)
+
 	return hex.EncodeToString(sum[:8]), nil //nolint:mnd
 }
 
@@ -460,8 +490,10 @@ func loadOrGenerateKey(path string) (*rsa.PrivateKey, error) {
 		if err != nil {
 			return nil, fmt.Errorf("generate ephemeral rsa key: %w", err)
 		}
+
 		return key, nil
 	}
+
 	data, err := os.ReadFile(path)
 	if err != nil {
 		if os.IsNotExist(err) {
@@ -469,33 +501,41 @@ func loadOrGenerateKey(path string) (*rsa.PrivateKey, error) {
 			if genErr != nil {
 				return nil, fmt.Errorf("generate key: %w", genErr)
 			}
+
 			if writeErr := writePrivateKeyPEM(path, key); writeErr != nil {
 				return nil, fmt.Errorf("persist generated key: %w", writeErr)
 			}
+
 			return key, nil
 		}
+
 		return nil, fmt.Errorf("read key file: %w", err)
 	}
+
 	block, _ := pem.Decode(data)
 	if block == nil {
 		return nil, errors.New("oauth private key PEM could not be decoded")
 	}
+
 	switch block.Type {
 	case "RSA PRIVATE KEY":
 		key, parseErr := x509.ParsePKCS1PrivateKey(block.Bytes)
 		if parseErr != nil {
 			return nil, fmt.Errorf("parse pkcs1 key: %w", parseErr)
 		}
+
 		return key, nil
 	case "PRIVATE KEY":
 		parsed, parseErr := x509.ParsePKCS8PrivateKey(block.Bytes)
 		if parseErr != nil {
 			return nil, fmt.Errorf("parse pkcs8 key: %w", parseErr)
 		}
+
 		rsaKey, ok := parsed.(*rsa.PrivateKey)
 		if !ok {
 			return nil, errors.New("oauth private key is not RSA")
 		}
+
 		return rsaKey, nil
 	default:
 		return nil, fmt.Errorf("unsupported PEM type %q", block.Type)
@@ -508,16 +548,19 @@ func writePrivateKeyPEM(path string, key *rsa.PrivateKey) error {
 			return fmt.Errorf("mkdir key dir: %w", err)
 		}
 	}
+
 	der := x509.MarshalPKCS1PrivateKey(key)
 	block := &pem.Block{Type: "RSA PRIVATE KEY", Bytes: der}
 	file, err := os.OpenFile(path, os.O_WRONLY|os.O_CREATE|os.O_EXCL, oauthKeyFilePerm)
 	if err != nil {
 		return fmt.Errorf("open key file: %w", err)
 	}
+
 	defer func() { _ = file.Close() }()
 	if err := pem.Encode(file, block); err != nil {
 		return fmt.Errorf("encode pem: %w", err)
 	}
+
 	return nil
 }
 
@@ -530,6 +573,7 @@ func derivePRMURL(resource string) (string, error) {
 	if err != nil {
 		return "", err
 	}
+
 	return origin + "/.well-known/oauth-protected-resource", nil
 }
 
@@ -538,9 +582,11 @@ func originOf(raw string) (string, error) {
 	if err != nil {
 		return "", fmt.Errorf("parse url: %w", err)
 	}
+
 	if u.Scheme == "" || u.Host == "" {
 		return "", fmt.Errorf("missing scheme or host in %q", raw)
 	}
+
 	return u.Scheme + "://" + u.Host, nil
 }
 
@@ -552,6 +598,7 @@ func writeJSON(w http.ResponseWriter, status int, body any, setNoCache bool) {
 		w.Header().Set("Cache-Control", "no-store")
 		w.Header().Set("Pragma", "no-cache")
 	}
+
 	w.Header().Set("Content-Type", "application/json")
 	data, err := json.Marshal(body)
 	if err != nil {
@@ -560,8 +607,10 @@ func writeJSON(w http.ResponseWriter, status int, body any, setNoCache bool) {
 		// response cleanly.
 		w.WriteHeader(http.StatusInternalServerError)
 		_, _ = io.WriteString(w, `{"error":"server_error"}`)
+
 		return
 	}
+
 	w.WriteHeader(status)
 	_, _ = w.Write(data)
 }
@@ -604,10 +653,12 @@ func allowRedirect(raw string) bool {
 	if raw == "" {
 		return false
 	}
+
 	u, err := url.Parse(raw)
 	if err != nil {
 		return false
 	}
+
 	if u.User != nil || u.Fragment != "" {
 		return false
 	}
@@ -640,6 +691,7 @@ func stripBrackets(host string) string {
 	if len(host) >= 2 && host[0] == '[' && host[len(host)-1] == ']' { //nolint:mnd
 		return host[1 : len(host)-1]
 	}
+
 	return host
 }
 
@@ -649,6 +701,7 @@ func IsLoopbackHost(host string) bool {
 	if ip == nil {
 		return host == "localhost"
 	}
+
 	return ip.IsLoopback()
 }
 

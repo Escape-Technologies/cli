@@ -88,6 +88,7 @@ events cannot be completed.`,
 			_ = cmd.Help()
 			return errors.New("scan ID is required")
 		}
+
 		return nil
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
@@ -108,6 +109,7 @@ events cannot be completed.`,
 		}
 
 		out.Print(result, "")
+
 		return nil
 	},
 }
@@ -123,12 +125,15 @@ func fetchScanReasoningLogs(
 	if listLimit < 0 {
 		return ScanReasoningLogs{}, errors.New("list-limit must be >= 0")
 	}
+
 	if listLimit > maxReasoningListLimit {
 		return ScanReasoningLogs{}, fmt.Errorf("list-limit must be <= %d", maxReasoningListLimit)
 	}
+
 	if hydrateLimit < 0 {
 		return ScanReasoningLogs{}, errors.New("hydrate-limit must be >= 0")
 	}
+
 	if hydrateLimit > maxReasoningHydrateLimit {
 		return ScanReasoningLogs{}, fmt.Errorf("hydrate-limit must be <= %d", maxReasoningHydrateLimit)
 	}
@@ -164,6 +169,7 @@ func fetchScanReasoningLogs(
 	if len(eventErrors) > 0 {
 		result.EventErrors = eventErrors
 	}
+
 	return result, nil
 }
 
@@ -190,21 +196,25 @@ func listReasoningEvents(
 	next := ""
 	listTruncated := false
 	for {
-		events, cursor, err := escape.ListEvents(ctx, next, filters)
+		events, cursor, _, err := escape.ListEvents(ctx, next, filters, 0)
 		if err != nil {
 			return nil, false, fmt.Errorf("unable to list reasoning events: %w", err)
 		}
+
 		summaries = append(summaries, events...)
 		if len(summaries) >= limit {
 			listTruncated = reasoningListTruncated(len(summaries), limit, cursor)
 			summaries = summaries[:limit]
 			break
 		}
+
 		if cursor == nil || *cursor == "" {
 			break
 		}
+
 		next = *cursor
 	}
+
 	return summaries, listTruncated, nil
 }
 
@@ -229,6 +239,7 @@ func listAgentReasoningEvents(
 		if err != nil {
 			return nil, false, fmt.Errorf("unable to list agent reasoning logs: %w", err)
 		}
+
 		for _, log := range logs {
 			summary := v3.EventSummarized{
 				Id:        log.ID,
@@ -239,16 +250,20 @@ func listAgentReasoningEvents(
 			}
 			summaries = append(summaries, summary)
 		}
+
 		if len(summaries) >= limit {
 			listTruncated = reasoningListTruncated(len(summaries), limit, cursor)
 			summaries = summaries[:limit]
 			break
 		}
+
 		if cursor == nil || *cursor == "" {
 			break
 		}
+
 		next = *cursor
 	}
+
 	return summaries, listTruncated, nil
 }
 
@@ -273,14 +288,19 @@ func hydrateReasoningEvents(
 				if err != nil {
 					msg = err.Error()
 				}
+
 				eventErrors[index] = IssueEventHydrateError{EventID: summary.GetId(), Error: msg}
+
 				return nil
 			}
+
 			events[index] = *event
 			eventOK[index] = true
+
 			return nil
 		})
 	}
+
 	_ = g.Wait()
 
 	hydratedEvents := make([]v3.GetEvent200Response, 0, len(events))
@@ -290,9 +310,11 @@ func hydrateReasoningEvents(
 			hydratedEvents = append(hydratedEvents, events[index])
 			continue
 		}
+
 		if eventErrors[index].EventID != "" {
 			hydratedErrors = append(hydratedErrors, eventErrors[index])
 		}
 	}
+
 	return hydratedEvents, hydratedErrors
 }

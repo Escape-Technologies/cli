@@ -25,11 +25,14 @@ func newTestOAuth(t *testing.T, apiKey string) (*oauthHandlers, *httptest.Server
 			http.NotFound(w, r)
 			return
 		}
+
 		if r.Header.Get("Authorization") == "Key "+apiKey {
 			w.WriteHeader(http.StatusOK)
 			_, _ = w.Write([]byte(`{"id":"user"}`))
+
 			return
 		}
+
 		w.WriteHeader(http.StatusUnauthorized)
 	}))
 	t.Cleanup(upstream.Close)
@@ -42,6 +45,7 @@ func newTestOAuth(t *testing.T, apiKey string) (*oauthHandlers, *httptest.Server
 	if err != nil {
 		t.Fatalf("build handlers: %v", err)
 	}
+
 	return h, upstream
 }
 
@@ -50,6 +54,7 @@ func pkcePair(t *testing.T) (verifier, challenge string) {
 	verifier = "test-verifier-with-enough-entropy-to-be-long-enough-for-s256"
 	sum := sha256.Sum256([]byte(verifier))
 	challenge = base64.RawURLEncoding.EncodeToString(sum[:])
+
 	return
 }
 
@@ -69,10 +74,12 @@ func mintJWE(t *testing.T, h *oauthHandlers, mutate func(*oauthCodePayload)) str
 	if mutate != nil {
 		mutate(&payload)
 	}
+
 	jwe, err := h.EncryptCodeForTest(payload)
 	if err != nil {
 		t.Fatalf("encrypt: %v", err)
 	}
+
 	return jwe
 }
 
@@ -106,16 +113,20 @@ func TestPRMResponse(t *testing.T) {
 	if rec.Code != http.StatusOK {
 		t.Fatalf("expected 200, got %d", rec.Code)
 	}
+
 	if ct := rec.Header().Get("Content-Type"); ct != "application/json" {
 		t.Fatalf("unexpected content-type: %q", ct)
 	}
+
 	var doc map[string]any
 	if err := json.Unmarshal(rec.Body.Bytes(), &doc); err != nil {
 		t.Fatalf("unmarshal: %v", err)
 	}
+
 	if doc["resource"] != "https://mcp.test/mcp" {
 		t.Fatalf("unexpected resource: %v", doc["resource"])
 	}
+
 	if servers, ok := doc["authorization_servers"].([]any); !ok || len(servers) != 1 || servers[0] != "https://app.test" {
 		t.Fatalf("unexpected authorization_servers: %v", doc["authorization_servers"])
 	}
@@ -133,6 +144,7 @@ func TestJWKSShape(t *testing.T) {
 	if rec.Code != http.StatusOK {
 		t.Fatalf("expected 200, got %d", rec.Code)
 	}
+
 	var doc struct {
 		Keys []struct {
 			Kty string `json:"kty"`
@@ -146,9 +158,11 @@ func TestJWKSShape(t *testing.T) {
 	if err := json.Unmarshal(rec.Body.Bytes(), &doc); err != nil {
 		t.Fatalf("unmarshal: %v", err)
 	}
+
 	if len(doc.Keys) != 1 {
 		t.Fatalf("expected 1 key, got %d", len(doc.Keys))
 	}
+
 	k := doc.Keys[0]
 	if k.Kty != "RSA" || k.Use != "enc" || k.Alg != "RSA-OAEP-256" || k.Kid == "" || k.N == "" || k.E == "" {
 		t.Fatalf("unexpected jwk: %+v", k)
@@ -164,16 +178,20 @@ func TestUnauthorizedResponse(t *testing.T) {
 	if rec.Code != http.StatusUnauthorized {
 		t.Fatalf("expected 401, got %d", rec.Code)
 	}
+
 	if rec.Header().Get("Cache-Control") != "no-store" {
 		t.Fatalf("missing Cache-Control: %q", rec.Header().Get("Cache-Control"))
 	}
+
 	wwwAuth := rec.Header().Get("WWW-Authenticate")
 	if !strings.Contains(wwwAuth, `realm="mcp"`) {
 		t.Fatalf("WWW-Authenticate missing realm: %q", wwwAuth)
 	}
+
 	if !strings.Contains(wwwAuth, `resource_metadata="https://mcp.test/.well-known/oauth-protected-resource"`) {
 		t.Fatalf("WWW-Authenticate missing PRM URL: %q", wwwAuth)
 	}
+
 	if !strings.Contains(wwwAuth, `error="invalid_token"`) {
 		t.Fatalf("WWW-Authenticate missing error param: %q", wwwAuth)
 	}
@@ -194,6 +212,7 @@ func TestServeToken(t *testing.T) {
 
 	validForm := func() url.Values {
 		code := mintJWE(t, h, func(p *oauthCodePayload) { p.CodeChallenge = challenge })
+
 		return url.Values{
 			"grant_type":    {"authorization_code"},
 			"code":          {code},
@@ -245,22 +264,28 @@ func TestServeToken(t *testing.T) {
 		if rec.Code != http.StatusOK {
 			t.Fatalf("expected 200, got %d body=%s", rec.Code, rec.Body.String())
 		}
+
 		if rec.Header().Get("Cache-Control") != "no-store" {
 			t.Fatalf("missing Cache-Control")
 		}
+
 		if rec.Header().Get("Pragma") != "no-cache" {
 			t.Fatalf("missing Pragma")
 		}
+
 		var body map[string]any
 		if err := json.Unmarshal(rec.Body.Bytes(), &body); err != nil {
 			t.Fatalf("unmarshal: %v", err)
 		}
+
 		if body["access_token"] != "test-api-key" {
 			t.Fatalf("unexpected access_token: %v", body["access_token"])
 		}
+
 		if body["token_type"] != "Bearer" {
 			t.Fatalf("unexpected token_type: %v", body["token_type"])
 		}
+
 		// Regression: expires_in must be 1y (31,536,000) not 10y.
 		if v, ok := body["expires_in"].(float64); !ok || int64(v) != 31536000 {
 			t.Fatalf("unexpected expires_in: %v", body["expires_in"])
@@ -304,6 +329,7 @@ func TestServeToken(t *testing.T) {
 		if rec1.Code != http.StatusOK {
 			t.Fatalf("first redemption failed: %d %s", rec1.Code, rec1.Body.String())
 		}
+
 		// Second must fail with invalid_grant.
 		rec2 := httptest.NewRecorder()
 		h.ServeToken(rec2, newFormRequest(form))
@@ -450,6 +476,7 @@ func newFormRequest(form url.Values) *http.Request {
 		strings.NewReader(form.Encode()),
 	)
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+
 	return req
 }
 
@@ -458,13 +485,16 @@ func assertOAuthError(t *testing.T, rec *httptest.ResponseRecorder, status int, 
 	if rec.Code != status {
 		t.Fatalf("expected status %d, got %d body=%s", status, rec.Code, rec.Body.String())
 	}
+
 	if rec.Header().Get("Cache-Control") != "no-store" {
 		t.Fatalf("missing Cache-Control on error response")
 	}
+
 	var body map[string]any
 	if err := json.Unmarshal(rec.Body.Bytes(), &body); err != nil {
 		t.Fatalf("unmarshal: %v", err)
 	}
+
 	if body["error"] != expectError {
 		t.Fatalf("expected error %q, got %q", expectError, body["error"])
 	}

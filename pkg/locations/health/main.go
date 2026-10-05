@@ -23,6 +23,7 @@ func buildHandler(healthy *atomic.Bool) http.Handler {
 			w.WriteHeader(http.StatusServiceUnavailable)
 			msg = "Not connected"
 		}
+
 		_, err := w.Write([]byte(msg))
 		if err != nil {
 			log.Debug("Error during health check: %v", err)
@@ -41,6 +42,7 @@ func buildHandler(healthy *atomic.Bool) http.Handler {
 				http.Error(w, "Failed to read request body", http.StatusBadRequest)
 				return
 			}
+
 			log.Debug("Forwarded log: %s", string(bodyBytes))
 		})
 	}

@@ -35,6 +35,7 @@ var (
 func normalizeVersion(v string) string {
 	v = strings.TrimSpace(v)
 	v = strings.TrimPrefix(v, "v")
+
 	return v
 }
 
@@ -67,6 +68,7 @@ func getLatestReleaseTag(ctx context.Context) (string, error) {
 	if err != nil {
 		return "", fmt.Errorf("create request: %w", err)
 	}
+
 	req.Header.Set("Accept", "application/vnd.github+json")
 	req.Header.Set("User-Agent", "escape-cli/"+normalizeVersion(GetVersion().Version))
 
@@ -74,14 +76,17 @@ func getLatestReleaseTag(ctx context.Context) (string, error) {
 	if err != nil {
 		return "", fmt.Errorf("perform request: %w", err)
 	}
+
 	defer func() { _ = resp.Body.Close() }()
 	if resp.StatusCode != http.StatusOK {
 		return "", fmt.Errorf("unexpected status: %s", resp.Status)
 	}
+
 	var release githubRelease
 	if err := json.NewDecoder(resp.Body).Decode(&release); err != nil {
 		return "", fmt.Errorf("decode response: %w", err)
 	}
+
 	return strings.TrimSpace(release.TagName), nil
 }
 
@@ -107,11 +112,14 @@ func CheckForUpdate(parentCtx context.Context) *UpdateInfo {
 		if err != nil {
 			info.CheckError = err.Error()
 			updateInfo = info
+
 			return
 		}
+
 		if latest == "" {
 			info.CheckError = "empty latest release tag"
 			updateInfo = info
+
 			return
 		}
 

@@ -17,6 +17,15 @@ import (
 // when it decides to call one of them.
 const GetToolSpecToolName = "escape_get_tool_spec"
 
+// listCapabilitiesToolName is the built-in tool that ranks the CLI catalog.
+const listCapabilitiesToolName = "list_capabilities"
+
+// BuiltinToolNames are the helper tools RegisterBuiltinTools adds beside the
+// CLI catalog. Guidance may name these; it may not invent others.
+func BuiltinToolNames() []string {
+	return []string{GetToolSpecToolName, listCapabilitiesToolName}
+}
+
 // defaultCapabilitiesLimit caps the number of tools listed by the built-in
 // list_capabilities tool when the caller omits or passes a non-positive limit.
 const defaultCapabilitiesLimit = 25
@@ -26,7 +35,7 @@ const defaultCapabilitiesLimit = 25
 func RegisterBuiltinTools(server *mcpserver.MCPServer, specs []ToolSpec) {
 	registerGetToolSpec(server, specs)
 	tool := mcpgo.NewTool(
-		"list_capabilities",
+		listCapabilitiesToolName,
 		mcpgo.WithDescription("List the available Escape CLI-backed MCP tools."),
 		mcpgo.WithString("objective", mcpgo.Description("Optional search intent used to rank relevant tools.")),
 		mcpgo.WithNumber("limit", mcpgo.Description("Maximum number of tools to return.")),
@@ -36,7 +45,11 @@ func RegisterBuiltinTools(server *mcpserver.MCPServer, specs []ToolSpec) {
 		mcpgo.WithOpenWorldHintAnnotation(false),
 	)
 
-	server.AddTool(tool, func(ctx context.Context, request mcpgo.CallToolRequest) (*mcpgo.CallToolResult, error) {
+	server.AddTool(tool, buildListCapabilitiesHandler(specs))
+}
+
+func buildListCapabilitiesHandler(specs []ToolSpec) mcpserver.ToolHandlerFunc {
+	return func(ctx context.Context, request mcpgo.CallToolRequest) (*mcpgo.CallToolResult, error) {
 		if _, err := AuthFromContext(ctx); err != nil {
 			return mcpgo.NewToolResultError(err.Error()), nil
 		}
@@ -64,6 +77,7 @@ func RegisterBuiltinTools(server *mcpserver.MCPServer, specs []ToolSpec) {
 			if leftScore != rightScore {
 				return rightScore - leftScore
 			}
+
 			return strings.Compare(left["name"].(string), right["name"].(string))
 		})
 
@@ -78,7 +92,7 @@ func RegisterBuiltinTools(server *mcpserver.MCPServer, specs []ToolSpec) {
 		}
 
 		return mcpgo.NewToolResultStructured(wrapStructuredPayload(items), strings.Join(lines, "\n")), nil
-	})
+	}
 }
 
 func registerGetToolSpec(server *mcpserver.MCPServer, specs []ToolSpec) {
@@ -115,28 +129,62 @@ func registerGetToolSpec(server *mcpserver.MCPServer, specs []ToolSpec) {
 		}
 
 		// spec.Tool carries the original full RawInputSchema built by buildMCPTool.
-		// Serialize it back to a JSON object so the LLM can inspect fields.
-		var schema any
-		if len(spec.Tool.RawInputSchema) > 0 {
-			if err := json.Unmarshal(spec.Tool.RawInputSchema, &schema); err != nil {
-				return mcpgo.NewToolResultError(fmt.Sprintf("decode schema for %q: %v", name, err)), nil
-			}
-		} else {
-			schema = map[string]any{}
-		}
-
-		payload := map[string]any{
-			"name":        spec.Name,
-			"description": spec.Description,
-			"inputSchema": schema,
-		}
-
-		text, err := json.MarshalIndent(payload, "", "  ")
+		result, err := toolSpecResult(spec)
 		if err != nil {
-			return mcpgo.NewToolResultError(fmt.Sprintf("marshal spec for %q: %v", name, err)), nil
+			return mcpgo.NewToolResultError(fmt.Sprintf("spec for %q: %v", name, err)), nil
 		}
-		return mcpgo.NewToolResultStructured(payload, string(text)), nil
+
+		return result, nil
 	})
+}
+
+// toolSpecResult is the escape_get_tool_spec payload. The schema is one compact
+// JSON document in the text content. Structured content would repeat that
+// document, and indentation roughly doubles a body that is already large.
+func toolSpecResult(spec ToolSpec) (*mcpgo.CallToolResult, error) {
+	var schema any
+	if len(spec.Tool.RawInputSchema) > 0 {
+		if err := json.Unmarshal(spec.Tool.RawInputSchema, &schema); err != nil {
+			return nil, fmt.Errorf("decode schema: %w", err)
+		}
+	} else {
+		schema = map[string]any{}
+	}
+
+	payload := map[string]any{
+		"name":        spec.Name,
+		"description": spec.Description,
+		"inputSchema": schema,
+	}
+	text, err := json.Marshal(payload)
+	if err != nil {
+		return nil, fmt.Errorf("encode tool spec: %w", err)
+	}
+
+	return mcpgo.NewToolResultText(string(text)), nil
+}
+
+// capabilitySynonyms bridges user vocabulary and the CLI command corpus
+// (name + path + Short) used by list_capabilities ranking. Plain substring
+// matching misses cross-concept terms: "findings" never appears in an
+// issues_* descriptor. Keys are stemmed singular terms; values are stemmed
+// corpus terms. Keep this small — it is a ranking aid, not a thesaurus.
+var capabilitySynonyms = map[string][]string{
+	"finding":       {"issue"},
+	"vulnerability": {"issue", "severity"},
+	"bug":           {"issue"},
+	"domain":        {"asset"},
+	"host":          {"asset"},
+	"app":           {"profile"},
+	"application":   {"profile"},
+	"pentest":       {"scan"},
+	"pentesting":    {"pentest", "scan"},
+	"exploit":       {"pentest", "scan"},
+	"exploitation":  {"pentest", "scan"},
+	"target":        {"asset", "profile"},
+	"remediation":   {"issue"},
+	"ticket":        {"integration"},
+	"inventory":     {"asset"},
 }
 
 func capabilityScore(spec ToolSpec, objective string) int {
@@ -147,10 +195,31 @@ func capabilityScore(spec ToolSpec, objective string) int {
 	corpus := strings.ToLower(spec.Name + " " + spec.Path + " " + spec.Description)
 	score := 0
 	for _, token := range strings.Fields(objective) {
-		if strings.Contains(corpus, token) {
+		if capabilityTokenMatches(corpus, token) {
 			score++
 		}
 	}
 
 	return score
+}
+
+// capabilityTokenMatches reports whether the corpus mentions the token
+// directly or under a synonym of its (stemmed) form.
+func capabilityTokenMatches(corpus, token string) bool {
+	forms := []string{token, StemToken(token)}
+	for _, form := range forms {
+		if strings.Contains(corpus, form) {
+			return true
+		}
+	}
+
+	for _, form := range forms {
+		for _, synonym := range capabilitySynonyms[form] {
+			if strings.Contains(corpus, synonym) {
+				return true
+			}
+		}
+	}
+
+	return false
 }

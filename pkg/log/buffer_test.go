@@ -10,6 +10,7 @@ func TestLogShouldDropOldestLogsIfBufferIsFull(t *testing.T) {
 	for i := range 10 {
 		b.Ingest(Entry{Message: fmt.Sprintf("log %d", i)})
 	}
+
 	logged := []string{}
 	b.AddHook("logged", func(log Entry) {
 		logged = append(logged, log.Message)
@@ -35,6 +36,7 @@ func TestLogDropShouldUpdateOffsets(t *testing.T) {
 	for i := range 10 {
 		b.Ingest(Entry{Message: fmt.Sprintf("log %d", i)})
 	}
+
 	b.AddHook("logged", func(log Entry) {
 		logged = append(logged, log.Message)
 	})

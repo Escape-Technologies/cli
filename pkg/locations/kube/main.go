@@ -46,6 +46,7 @@ func inferConfig() (*rest.Config, error) {
 			return nil, fmt.Errorf("failed to build in cluster config: %w", err)
 		}
 	}
+
 	return c, nil
 }
 
@@ -75,10 +76,12 @@ func connectAndRun(ctx context.Context, cfg *rest.Config, isConnected *atomic.Bo
 		for !isConnected.Load() || ctx.Err() != nil {
 			time.Sleep(1 * time.Second)
 		}
+
 		if ctx.Err() != nil {
 			lis.Close() //nolint:errcheck
 			return
 		}
+
 		log.Info("Connected to K8s API")
 		log.Trace("Upserting K8s integration")
 		req := v3.NewCreatekubernetesIntegrationRequest(
@@ -94,6 +97,7 @@ func connectAndRun(ctx context.Context, cfg *rest.Config, isConnected *atomic.Bo
 				log.Error("Check your ESCAPE_API_KEY environment variable")
 				log.Error("Get your API key from https://app.escape.tech/organization/settings")
 			}
+
 			return
 		}
 
@@ -106,6 +110,7 @@ func connectAndRun(ctx context.Context, cfg *rest.Config, isConnected *atomic.Bo
 	if err != nil {
 		return fmt.Errorf("error serving: %w", err)
 	}
+
 	return nil
 }
 
@@ -121,11 +126,13 @@ func Start(ctx context.Context, locationID string, locationName string, healthy 
 		log.Error("Kubernetes integration could not start: %s", err)
 		return
 	}
+
 	for {
 		err = connectAndRun(ctx, cfg, healthy, locationID, locationName)
 		if err != nil {
 			log.Error("Failed to connect to Kubernetes API: %s", err)
 		}
+
 		if ctx.Err() != nil {
 			return
 		}

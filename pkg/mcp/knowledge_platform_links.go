@@ -69,6 +69,7 @@ func NewPlatformLinkSelectorWithCatalog(baseURL string, catalog []PlatformRoute)
 			return nil, fmt.Errorf("decode embedded platform routes: %w", err)
 		}
 	}
+
 	return &PlatformLinkSelector{
 		baseURL: strings.TrimRight(baseURL, "/"),
 		catalog: catalog,
@@ -82,12 +83,15 @@ func (s *PlatformLinkSelector) Select(queryContext string, limit int) []Platform
 	if len(tokens) == 0 {
 		return nil
 	}
+
 	if limit < 1 {
 		limit = 1
 	}
+
 	if limit > maxPlatformLinksPerSelect {
 		limit = maxPlatformLinksPerSelect
 	}
+
 	normalizedQuery := normalizeForSearch(queryContext)
 
 	type scoredRoute struct {
@@ -100,6 +104,7 @@ func (s *PlatformLinkSelector) Select(queryContext string, limit int) []Platform
 		if score < minPlatformLinkScore {
 			continue
 		}
+
 		scored = append(scored, scoredRoute{route: route, score: score})
 	}
 
@@ -107,6 +112,7 @@ func (s *PlatformLinkSelector) Select(queryContext string, limit int) []Platform
 		if scored[i].score != scored[j].score {
 			return scored[i].score > scored[j].score
 		}
+
 		return scored[i].route.Path < scored[j].route.Path
 	})
 	if len(scored) > limit {
@@ -121,11 +127,13 @@ func (s *PlatformLinkSelector) Select(queryContext string, limit int) []Platform
 				resolved = base.ResolveReference(ref).String()
 			}
 		}
+
 		out = append(out, PlatformLink{
 			Label: labelFromRoutePath(entry.route.Path),
 			URL:   resolved,
 		})
 	}
+
 	return out
 }
 
@@ -134,6 +142,7 @@ func tokenizePlatformQuery(value string) []string {
 	if normalized == "" {
 		return nil
 	}
+
 	seen := make(map[string]struct{})
 	tokens := make([]string, 0)
 	for _, token := range strings.Fields(normalized) {
@@ -141,15 +150,19 @@ func tokenizePlatformQuery(value string) []string {
 		if stemmed == "" {
 			continue
 		}
+
 		if _, stop := platformLinkStopWords[stemmed]; stop {
 			continue
 		}
+
 		if _, dup := seen[stemmed]; dup {
 			continue
 		}
+
 		seen[stemmed] = struct{}{}
 		tokens = append(tokens, stemmed)
 	}
+
 	return tokens
 }
 
@@ -157,14 +170,17 @@ func scoreRoute(route PlatformRoute, queryTokens []string, normalizedQuery strin
 	if route.Path == "/" {
 		return 0
 	}
+
 	routeTokens := make(map[string]struct{}, len(route.Tokens))
 	for _, token := range route.Tokens {
 		stemmed := StemToken(token)
 		if stemmed == "" {
 			continue
 		}
+
 		routeTokens[stemmed] = struct{}{}
 	}
+
 	if len(routeTokens) == 0 {
 		return 0
 	}
@@ -175,6 +191,7 @@ func scoreRoute(route PlatformRoute, queryTokens []string, normalizedQuery strin
 			matched++
 		}
 	}
+
 	if matched == 0 {
 		return 0
 	}
@@ -193,9 +210,11 @@ func scoreRoute(route PlatformRoute, queryTokens []string, normalizedQuery strin
 			depth++
 		}
 	}
+
 	if depth > platformDeepRouteThreshold {
 		score -= float64(depth-platformDeepRouteThreshold) * platformDeepRoutePenalty
 	}
+
 	return score
 }
 
@@ -204,6 +223,7 @@ func labelFromRoutePath(path string) string {
 	if len(segments) == 0 {
 		return "Platform"
 	}
+
 	last := segments[len(segments)-1]
 	parts := strings.Split(last, "-")
 	titled := make([]string, 0, len(parts))
@@ -211,12 +231,15 @@ func labelFromRoutePath(path string) string {
 		if part == "" {
 			continue
 		}
+
 		runes := []rune(part)
 		runes[0] = unicode.ToUpper(runes[0])
 		titled = append(titled, string(runes))
 	}
+
 	if len(titled) == 0 {
 		return "Platform"
 	}
+
 	return strings.Join(titled, " ")
 }
