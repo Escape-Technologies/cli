@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// ENUMPROPERTIESKIND the model 'ENUMPROPERTIESKIND'
+// ENUMPROPERTIESKIND Which AI remediation artefact to act on: `remediation` for the full issue-panel remediation, `summary` for the short overview summary.
 type ENUMPROPERTIESKIND string
 
 // List of ENUM_PROPERTIES_KIND
@@ -71,6 +71,8 @@ const (
 	ENUMPROPERTIESKIND_SAAS_UPSERT_ASM_PROFILES                           ENUMPROPERTIESKIND = "SAAS_UPSERT_ASM_PROFILES"
 	ENUMPROPERTIESKIND_SEND_JOB_ARTEFACTS_BY_EMAIL                        ENUMPROPERTIESKIND = "SEND_JOB_ARTEFACTS_BY_EMAIL"
 	ENUMPROPERTIESKIND_TEST_KIND                                          ENUMPROPERTIESKIND = "TEST_KIND"
+	ENUMPROPERTIESKIND_REMEDIATION                                        ENUMPROPERTIESKIND = "remediation"
+	ENUMPROPERTIESKIND_SUMMARY                                            ENUMPROPERTIESKIND = "summary"
 )
 
 // All allowed values of ENUMPROPERTIESKIND enum
@@ -126,6 +128,8 @@ var AllowedENUMPROPERTIESKINDEnumValues = []ENUMPROPERTIESKIND{
 	"SAAS_UPSERT_ASM_PROFILES",
 	"SEND_JOB_ARTEFACTS_BY_EMAIL",
 	"TEST_KIND",
+	"remediation",
+	"summary",
 }
 
 func (v *ENUMPROPERTIESKIND) UnmarshalJSON(src []byte) error {

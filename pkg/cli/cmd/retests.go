@@ -419,7 +419,7 @@ func applyRetestFilter(base *v3.StartRetestRequestFilter, input startRetestInput
 	}
 
 	if input.severitiesSet {
-		severities, err := parseStringEnums(input.severities, "severity", v3.AllowedENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMSEnumValues)
+		severities, err := parseStringEnums(input.severities, "severity", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITYEnumValues)
 		if err != nil {
 			return nil, err
 		}
@@ -780,7 +780,7 @@ func init() {
 	retestsStartCmd.Flags().StringSliceVarP(&retestStartIssueIDs, "issue-id", "i", nil, "explicit issue IDs to retest; mutually exclusive with filter flags")
 	retestsStartCmd.Flags().StringSliceVar(&retestStartFilterIDs, "filter-id", nil, "filter.ids: issue IDs combined with other filter flags")
 	retestsStartCmd.Flags().StringSliceVar(&retestStartAssetIDs, "asset-id", nil, "filter by asset ID(s)")
-	retestsStartCmd.Flags().StringSliceVar(&retestStartSeverities, "severity", nil, fmt.Sprintf("filter by severity: %v", v3.AllowedENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMSEnumValues))
+	retestsStartCmd.Flags().StringSliceVar(&retestStartSeverities, "severity", nil, fmt.Sprintf("filter by severity: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITYEnumValues))
 	retestsStartCmd.Flags().StringSliceVar(&retestStartTagIDs, "tag-id", nil, "filter by tag ID(s)")
 	retestsStartCmd.Flags().StringSliceVar(&retestStartScannerKinds, "scanner-kind", nil, fmt.Sprintf("filter by scanner kind: %v", v3.AllowedENUMPROPERTIESFILTERPROPERTIESSCANNERKINDSITEMSEnumValues))
 	retestsStartCmd.Flags().StringSliceVar(&retestStartStatuses, "status", nil, fmt.Sprintf("filter by issue status: %v", v3.AllowedENUMPROPERTIESFILTERPROPERTIESSTATUSITEMSEnumValues))

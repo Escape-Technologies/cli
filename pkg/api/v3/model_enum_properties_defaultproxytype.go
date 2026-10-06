@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// ENUMPROPERTIESDEFAULTPROXYTYPE When `proxyId` is omitted or `null`, restricts location selection to this type at scan time. Use `PRIVATE` so each scan automatically runs on any currently-healthy private location (failover), or `ESCAPE` for Escape-managed locations.
+// ENUMPROPERTIESDEFAULTPROXYTYPE Proxy type: ESCAPE (Escape-managed) or PRIVATE (user-managed)
 type ENUMPROPERTIESDEFAULTPROXYTYPE string
 
 // List of ENUM_PROPERTIES_DEFAULTPROXYTYPE

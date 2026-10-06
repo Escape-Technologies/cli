@@ -155,6 +155,138 @@ func (a *AssetsAPIService) BulkDeleteAssetsExecute(r ApiBulkDeleteAssetsRequest)
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiBulkImportAssetsRequest struct {
+	ctx              context.Context
+	ApiService       *AssetsAPIService
+	bulkImportAssets *BulkImportAssets
+}
+
+func (r ApiBulkImportAssetsRequest) BulkImportAssets(bulkImportAssets BulkImportAssets) ApiBulkImportAssetsRequest {
+	r.bulkImportAssets = &bulkImportAssets
+	return r
+}
+
+func (r ApiBulkImportAssetsRequest) Execute() (*BulkImportAssets200Response, *http.Response, error) {
+	return r.ApiService.BulkImportAssetsExecute(r)
+}
+
+/*
+BulkImportAssets Bulk import assets
+
+Trigger an asynchronous job to create multiple assets in bulk. Returns a job ID that can be used to track the import progress.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiBulkImportAssetsRequest
+*/
+func (a *AssetsAPIService) BulkImportAssets(ctx context.Context) ApiBulkImportAssetsRequest {
+	return ApiBulkImportAssetsRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return BulkImportAssets200Response
+func (a *AssetsAPIService) BulkImportAssetsExecute(r ApiBulkImportAssetsRequest) (*BulkImportAssets200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BulkImportAssets200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.BulkImportAssets")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/assets/bulk-import"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.bulkImportAssets
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v BadRequest
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiBulkUpdateAssetsRequest struct {
 	ctx                     context.Context
 	ApiService              *AssetsAPIService
@@ -3397,8 +3529,20 @@ type ApiListAssetsRequest struct {
 	search          *string
 	types           *[]string
 	statuses        *[]string
-	projectIds      *[]string
+	projectIds      *ListAssetsProjectIdsParameter
+	tagIds          *string
+	classes         *[]string
+	environments    *[]string
+	domains         *string
+	integrationIds  *ListAssetsIntegrationIdsParameter
+	ownerEmails     *ListAssetsOwnerEmailsParameter
+	technologyKeys  *ListAssetsTechnologyKeysParameter
+	ports           *ListAssetsPortsParameter
+	severities      *[]string
+	risks           *[]string
+	frameworks      *[]string
 	manuallyCreated *string
+	dnf             *string
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
@@ -3444,14 +3588,86 @@ func (r ApiListAssetsRequest) Statuses(statuses []string) ApiListAssetsRequest {
 }
 
 // Filter by any of the listed project IDs
-func (r ApiListAssetsRequest) ProjectIds(projectIds []string) ApiListAssetsRequest {
+func (r ApiListAssetsRequest) ProjectIds(projectIds ListAssetsProjectIdsParameter) ApiListAssetsRequest {
 	r.projectIds = &projectIds
+	return r
+}
+
+// Filter by any of the listed tag IDs
+func (r ApiListAssetsRequest) TagIds(tagIds string) ApiListAssetsRequest {
+	r.tagIds = &tagIds
+	return r
+}
+
+// Filter by class
+func (r ApiListAssetsRequest) Classes(classes []string) ApiListAssetsRequest {
+	r.classes = &classes
+	return r
+}
+
+// Filter by environment
+func (r ApiListAssetsRequest) Environments(environments []string) ApiListAssetsRequest {
+	r.environments = &environments
+	return r
+}
+
+// Filter by domain
+func (r ApiListAssetsRequest) Domains(domains string) ApiListAssetsRequest {
+	r.domains = &domains
+	return r
+}
+
+// Filter by source integration ID
+func (r ApiListAssetsRequest) IntegrationIds(integrationIds ListAssetsIntegrationIdsParameter) ApiListAssetsRequest {
+	r.integrationIds = &integrationIds
+	return r
+}
+
+// Filter by owner email
+func (r ApiListAssetsRequest) OwnerEmails(ownerEmails ListAssetsOwnerEmailsParameter) ApiListAssetsRequest {
+	r.ownerEmails = &ownerEmails
+	return r
+}
+
+// Filter by technology key
+func (r ApiListAssetsRequest) TechnologyKeys(technologyKeys ListAssetsTechnologyKeysParameter) ApiListAssetsRequest {
+	r.technologyKeys = &technologyKeys
+	return r
+}
+
+// Filter by port number
+func (r ApiListAssetsRequest) Ports(ports ListAssetsPortsParameter) ApiListAssetsRequest {
+	r.ports = &ports
+	return r
+}
+
+// Filter by severity
+func (r ApiListAssetsRequest) Severities(severities []string) ApiListAssetsRequest {
+	r.severities = &severities
+	return r
+}
+
+// Filter by risk
+func (r ApiListAssetsRequest) Risks(risks []string) ApiListAssetsRequest {
+	r.risks = &risks
+	return r
+}
+
+// Filter by framework
+func (r ApiListAssetsRequest) Frameworks(frameworks []string) ApiListAssetsRequest {
+	r.frameworks = &frameworks
 	return r
 }
 
 // Filter by manually created
 func (r ApiListAssetsRequest) ManuallyCreated(manuallyCreated string) ApiListAssetsRequest {
 	r.manuallyCreated = &manuallyCreated
+	return r
+}
+
+// Filter by DNF expression
+func (r ApiListAssetsRequest) Dnf(dnf string) ApiListAssetsRequest {
+	r.dnf = &dnf
 	return r
 }
 
@@ -3540,18 +3756,86 @@ func (a *AssetsAPIService) ListAssetsExecute(r ApiListAssetsRequest) (*ListAsset
 		}
 	}
 	if r.projectIds != nil {
-		t := *r.projectIds
+		parameterAddToHeaderOrQuery(localVarQueryParams, "projectIds", r.projectIds, "form", "")
+	}
+	if r.tagIds != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tagIds", r.tagIds, "form", "")
+	}
+	if r.classes != nil {
+		t := *r.classes
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
 			s := reflect.ValueOf(t)
 			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "projectIds", s.Index(i).Interface(), "form", "multi")
+				parameterAddToHeaderOrQuery(localVarQueryParams, "classes", s.Index(i).Interface(), "form", "multi")
 			}
 		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "projectIds", t, "form", "multi")
+			parameterAddToHeaderOrQuery(localVarQueryParams, "classes", t, "form", "multi")
+		}
+	}
+	if r.environments != nil {
+		t := *r.environments
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "environments", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "environments", t, "form", "multi")
+		}
+	}
+	if r.domains != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "domains", r.domains, "form", "")
+	}
+	if r.integrationIds != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "integrationIds", r.integrationIds, "form", "")
+	}
+	if r.ownerEmails != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "ownerEmails", r.ownerEmails, "form", "")
+	}
+	if r.technologyKeys != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "technologyKeys", r.technologyKeys, "form", "")
+	}
+	if r.ports != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "ports", r.ports, "form", "")
+	}
+	if r.severities != nil {
+		t := *r.severities
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "severities", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "severities", t, "form", "multi")
+		}
+	}
+	if r.risks != nil {
+		t := *r.risks
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "risks", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "risks", t, "form", "multi")
+		}
+	}
+	if r.frameworks != nil {
+		t := *r.frameworks
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "frameworks", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "frameworks", t, "form", "multi")
 		}
 	}
 	if r.manuallyCreated != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "manuallyCreated", r.manuallyCreated, "form", "")
+	}
+	if r.dnf != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "dnf", r.dnf, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -3632,15 +3916,15 @@ func (a *AssetsAPIService) ListAssetsExecute(r ApiListAssetsRequest) (*ListAsset
 }
 
 type ApiUpdateAssetRequest struct {
-	ctx                context.Context
-	ApiService         *AssetsAPIService
-	assetId            string
-	updateAssetRequest *UpdateAssetRequest
+	ctx         context.Context
+	ApiService  *AssetsAPIService
+	assetId     string
+	updateAsset *UpdateAsset
 }
 
 // Body of the request to update an asset
-func (r ApiUpdateAssetRequest) UpdateAssetRequest(updateAssetRequest UpdateAssetRequest) ApiUpdateAssetRequest {
-	r.updateAssetRequest = &updateAssetRequest
+func (r ApiUpdateAssetRequest) UpdateAsset(updateAsset UpdateAsset) ApiUpdateAssetRequest {
+	r.updateAsset = &updateAsset
 	return r
 }
 
@@ -3706,7 +3990,7 @@ func (a *AssetsAPIService) UpdateAssetExecute(r ApiUpdateAssetRequest) (*UpdateA
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.updateAssetRequest
+	localVarPostBody = r.updateAsset
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

@@ -20,8 +20,12 @@ var _ MappedNullable = &BulkUpdateIssues200Response{}
 
 // BulkUpdateIssues200Response struct for BulkUpdateIssues200Response
 type BulkUpdateIssues200Response struct {
-	// IDs of the updated issues
-	Ids                  []string `json:"ids"`
+	// IDs of the updated issues (or matching issues on dry run)
+	Ids []string `json:"ids"`
+	// Number of issue IDs in `ids`
+	Count int `json:"count"`
+	// Whether this was a preview with no update applied
+	DryRun               bool `json:"dryRun"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -31,9 +35,11 @@ type _BulkUpdateIssues200Response BulkUpdateIssues200Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBulkUpdateIssues200Response(ids []string) *BulkUpdateIssues200Response {
+func NewBulkUpdateIssues200Response(ids []string, count int, dryRun bool) *BulkUpdateIssues200Response {
 	this := BulkUpdateIssues200Response{}
 	this.Ids = ids
+	this.Count = count
+	this.DryRun = dryRun
 	return &this
 }
 
@@ -69,6 +75,54 @@ func (o *BulkUpdateIssues200Response) SetIds(v []string) {
 	o.Ids = v
 }
 
+// GetCount returns the Count field value
+func (o *BulkUpdateIssues200Response) GetCount() int {
+	if o == nil {
+		var ret int
+		return ret
+	}
+
+	return o.Count
+}
+
+// GetCountOk returns a tuple with the Count field value
+// and a boolean to check if the value has been set.
+func (o *BulkUpdateIssues200Response) GetCountOk() (*int, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Count, true
+}
+
+// SetCount sets field value
+func (o *BulkUpdateIssues200Response) SetCount(v int) {
+	o.Count = v
+}
+
+// GetDryRun returns the DryRun field value
+func (o *BulkUpdateIssues200Response) GetDryRun() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.DryRun
+}
+
+// GetDryRunOk returns a tuple with the DryRun field value
+// and a boolean to check if the value has been set.
+func (o *BulkUpdateIssues200Response) GetDryRunOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.DryRun, true
+}
+
+// SetDryRun sets field value
+func (o *BulkUpdateIssues200Response) SetDryRun(v bool) {
+	o.DryRun = v
+}
+
 func (o BulkUpdateIssues200Response) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -80,6 +134,8 @@ func (o BulkUpdateIssues200Response) MarshalJSON() ([]byte, error) {
 func (o BulkUpdateIssues200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["ids"] = o.Ids
+	toSerialize["count"] = o.Count
+	toSerialize["dryRun"] = o.DryRun
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -94,6 +150,8 @@ func (o *BulkUpdateIssues200Response) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"ids",
+		"count",
+		"dryRun",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -124,6 +182,8 @@ func (o *BulkUpdateIssues200Response) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ids")
+		delete(additionalProperties, "count")
+		delete(additionalProperties, "dryRun")
 		o.AdditionalProperties = additionalProperties
 	}
 

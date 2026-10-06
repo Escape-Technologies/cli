@@ -63,6 +63,7 @@ type GetProfile200Response struct {
 	// The risks of the profile
 	Risks                []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS `json:"risks"`
 	Statistics           StatisticsDetailed                                           `json:"statistics"`
+	Pentest              *ProfilePentest                                              `json:"pentest,omitempty"`
 	Links                ProfileSummarizedLinks                                       `json:"links"`
 	AdditionalProperties map[string]interface{}
 }
@@ -787,6 +788,38 @@ func (o *GetProfile200Response) SetStatistics(v StatisticsDetailed) {
 	o.Statistics = v
 }
 
+// GetPentest returns the Pentest field value if set, zero value otherwise.
+func (o *GetProfile200Response) GetPentest() ProfilePentest {
+	if o == nil || IsNil(o.Pentest) {
+		var ret ProfilePentest
+		return ret
+	}
+	return *o.Pentest
+}
+
+// GetPentestOk returns a tuple with the Pentest field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200Response) GetPentestOk() (*ProfilePentest, bool) {
+	if o == nil || IsNil(o.Pentest) {
+		return nil, false
+	}
+	return o.Pentest, true
+}
+
+// HasPentest returns a boolean if a field has been set.
+func (o *GetProfile200Response) HasPentest() bool {
+	if o != nil && !IsNil(o.Pentest) {
+		return true
+	}
+
+	return false
+}
+
+// SetPentest gets a reference to the given ProfilePentest and assigns it to the Pentest field.
+func (o *GetProfile200Response) SetPentest(v ProfilePentest) {
+	o.Pentest = &v
+}
+
 // GetLinks returns the Links field value
 func (o *GetProfile200Response) GetLinks() ProfileSummarizedLinks {
 	if o == nil {
@@ -871,6 +904,9 @@ func (o GetProfile200Response) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["risks"] = o.Risks
 	toSerialize["statistics"] = o.Statistics
+	if !IsNil(o.Pentest) {
+		toSerialize["pentest"] = o.Pentest
+	}
 	toSerialize["links"] = o.Links
 
 	for key, value := range o.AdditionalProperties {
@@ -950,6 +986,7 @@ func (o *GetProfile200Response) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "lastSuccessfulResourceScan")
 		delete(additionalProperties, "risks")
 		delete(additionalProperties, "statistics")
+		delete(additionalProperties, "pentest")
 		delete(additionalProperties, "links")
 		o.AdditionalProperties = additionalProperties
 	}

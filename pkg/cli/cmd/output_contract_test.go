@@ -198,7 +198,7 @@ func TestIssueBulkUpdateJSONIsOneTypedDocument(t *testing.T) {
 			return
 		}
 
-		writeJSON(t, w, map[string]any{"ids": []string{issueID}})
+		writeJSON(t, w, map[string]any{"ids": []string{issueID}, "count": 1, "dryRun": false})
 	})
 
 	saveBulkUpdateFlags(t)

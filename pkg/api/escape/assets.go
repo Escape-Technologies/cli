@@ -61,7 +61,7 @@ func ListAssets(ctx context.Context, next string, filters *ListAssetsFilters, si
 		}
 
 		if len(filters.ProjectIDs) > 0 {
-			req = req.ProjectIds(filters.ProjectIDs)
+			req = req.ProjectIds(v3.ListAssetsProjectIdsParameter{ArrayOfString: &filters.ProjectIDs})
 		}
 
 		if filters.Search != "" {
@@ -159,7 +159,7 @@ func UpdateAsset(
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
 
-	updateAssetRequest := v3.UpdateAssetRequest{}
+	updateAssetRequest := v3.UpdateAsset{}
 
 	if assetDescription != nil {
 		updateAssetRequest.Description = assetDescription
@@ -170,7 +170,7 @@ func UpdateAsset(
 	}
 
 	if assetOwners != nil && len(*assetOwners) > 0 {
-		updateAssetRequest.Owners = &v3.UpdateAssetRequestOwners{
+		updateAssetRequest.Owners = &v3.UpdateAssetOwners{
 			ArrayOfString: assetOwners,
 		}
 	}
@@ -180,7 +180,7 @@ func UpdateAsset(
 	}
 
 	if assetTagIDs != nil && len(*assetTagIDs) > 0 {
-		updateAssetRequest.TagIds = &v3.UpdateAssetRequestTagIds{
+		updateAssetRequest.TagIds = &v3.UpdateAssetTagIds{
 			ArrayOfString: assetTagIDs,
 		}
 	}
@@ -193,7 +193,7 @@ func UpdateAsset(
 		updateAssetRequest.Name = assetName
 	}
 
-	data, apiRes, err := client.AssetsAPI.UpdateAsset(ctx, id).UpdateAssetRequest(updateAssetRequest).Execute()
+	data, apiRes, err := client.AssetsAPI.UpdateAsset(ctx, id).UpdateAsset(updateAssetRequest).Execute()
 	if err != nil {
 		if apiRes.StatusCode == http.StatusBadRequest {
 			body, _ := io.ReadAll(apiRes.Body)

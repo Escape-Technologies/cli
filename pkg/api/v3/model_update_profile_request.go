@@ -28,11 +28,28 @@ type UpdateProfileRequest struct {
 	Cron          *string                            `json:"cron,omitempty"`
 	Schedule      *ProfileScheduleUpdateInput        `json:"schedule,omitempty"`
 	ExtraAssetIds *UpdateProfileRequestExtraAssetIds `json:"extraAssetIds,omitempty"`
-	// Maximum scan duration in minutes.
+	// Maximum scan duration in minutes. DAST profiles allow 60-600; AI pentest profiles allow 360-1440.
 	MaxDurationMinutes *int `json:"maxDurationMinutes,omitempty"`
 	// The proxy ID (private location) for the profile. Omit and set `defaultProxyType` to `PRIVATE` to auto-select any healthy private location at scan time.
-	ProxyId              *string                         `json:"proxyId,omitempty"`
-	DefaultProxyType     *ENUMPROPERTIESDEFAULTPROXYTYPE `json:"defaultProxyType,omitempty"`
+	ProxyId          *string                                                                                            `json:"proxyId,omitempty"`
+	DefaultProxyType *ENUMPROPERTIESDEFAULTPROXYTYPE                                                                    `json:"defaultProxyType,omitempty"`
+	Mode             *ENUMPROPERTIESCONFIGURATIONPROPERTIESAUTOMATEDPENTESTINGPROPERTIESMULTIAGENTPENTESTPROPERTIESMODE `json:"mode,omitempty"`
+	Context          *UpdateProfileRequestContext                                                                       `json:"context,omitempty"`
+	// Off-limits areas (AI pentest profiles only). Null clears the value.
+	OffLimitsAreas *string `json:"offLimitsAreas,omitempty"`
+	// Pentest user personas (AI pentest profiles only)
+	Users []UpdateProfileRequestUsersInner `json:"users,omitempty"`
+	// Scope rules for the pentest (AI pentest profiles only)
+	Rules []UpdateProfileRequestRulesInner `json:"rules,omitempty"`
+	// Uploaded file IDs for the pentest (AI pentest profiles only)
+	ArtefactIds []string `json:"artefactIds,omitempty"`
+	// Uploaded source file IDs for the pentest (AI pentest profiles only)
+	SourceIds []string `json:"sourceIds,omitempty"`
+	// Repositories to watch for the pentest (AI pentest profiles only)
+	RepositoriesSelected []UpdateProfileRequestRepositoriesSelectedInner `json:"repositoriesSelected,omitempty"`
+	Location             *UpdateProfileRequestLocation                   `json:"location,omitempty"`
+	// The rate limit of the pentest in requests per second (AI pentest profiles only)
+	RateLimitReqPerSec   *int `json:"rateLimitReqPerSec,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -314,6 +331,326 @@ func (o *UpdateProfileRequest) SetDefaultProxyType(v ENUMPROPERTIESDEFAULTPROXYT
 	o.DefaultProxyType = &v
 }
 
+// GetMode returns the Mode field value if set, zero value otherwise.
+func (o *UpdateProfileRequest) GetMode() ENUMPROPERTIESCONFIGURATIONPROPERTIESAUTOMATEDPENTESTINGPROPERTIESMULTIAGENTPENTESTPROPERTIESMODE {
+	if o == nil || IsNil(o.Mode) {
+		var ret ENUMPROPERTIESCONFIGURATIONPROPERTIESAUTOMATEDPENTESTINGPROPERTIESMULTIAGENTPENTESTPROPERTIESMODE
+		return ret
+	}
+	return *o.Mode
+}
+
+// GetModeOk returns a tuple with the Mode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateProfileRequest) GetModeOk() (*ENUMPROPERTIESCONFIGURATIONPROPERTIESAUTOMATEDPENTESTINGPROPERTIESMULTIAGENTPENTESTPROPERTIESMODE, bool) {
+	if o == nil || IsNil(o.Mode) {
+		return nil, false
+	}
+	return o.Mode, true
+}
+
+// HasMode returns a boolean if a field has been set.
+func (o *UpdateProfileRequest) HasMode() bool {
+	if o != nil && !IsNil(o.Mode) {
+		return true
+	}
+
+	return false
+}
+
+// SetMode gets a reference to the given ENUMPROPERTIESCONFIGURATIONPROPERTIESAUTOMATEDPENTESTINGPROPERTIESMULTIAGENTPENTESTPROPERTIESMODE and assigns it to the Mode field.
+func (o *UpdateProfileRequest) SetMode(v ENUMPROPERTIESCONFIGURATIONPROPERTIESAUTOMATEDPENTESTINGPROPERTIESMULTIAGENTPENTESTPROPERTIESMODE) {
+	o.Mode = &v
+}
+
+// GetContext returns the Context field value if set, zero value otherwise.
+func (o *UpdateProfileRequest) GetContext() UpdateProfileRequestContext {
+	if o == nil || IsNil(o.Context) {
+		var ret UpdateProfileRequestContext
+		return ret
+	}
+	return *o.Context
+}
+
+// GetContextOk returns a tuple with the Context field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateProfileRequest) GetContextOk() (*UpdateProfileRequestContext, bool) {
+	if o == nil || IsNil(o.Context) {
+		return nil, false
+	}
+	return o.Context, true
+}
+
+// HasContext returns a boolean if a field has been set.
+func (o *UpdateProfileRequest) HasContext() bool {
+	if o != nil && !IsNil(o.Context) {
+		return true
+	}
+
+	return false
+}
+
+// SetContext gets a reference to the given UpdateProfileRequestContext and assigns it to the Context field.
+func (o *UpdateProfileRequest) SetContext(v UpdateProfileRequestContext) {
+	o.Context = &v
+}
+
+// GetOffLimitsAreas returns the OffLimitsAreas field value if set, zero value otherwise.
+func (o *UpdateProfileRequest) GetOffLimitsAreas() string {
+	if o == nil || IsNil(o.OffLimitsAreas) {
+		var ret string
+		return ret
+	}
+	return *o.OffLimitsAreas
+}
+
+// GetOffLimitsAreasOk returns a tuple with the OffLimitsAreas field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateProfileRequest) GetOffLimitsAreasOk() (*string, bool) {
+	if o == nil || IsNil(o.OffLimitsAreas) {
+		return nil, false
+	}
+	return o.OffLimitsAreas, true
+}
+
+// HasOffLimitsAreas returns a boolean if a field has been set.
+func (o *UpdateProfileRequest) HasOffLimitsAreas() bool {
+	if o != nil && !IsNil(o.OffLimitsAreas) {
+		return true
+	}
+
+	return false
+}
+
+// SetOffLimitsAreas gets a reference to the given string and assigns it to the OffLimitsAreas field.
+func (o *UpdateProfileRequest) SetOffLimitsAreas(v string) {
+	o.OffLimitsAreas = &v
+}
+
+// GetUsers returns the Users field value if set, zero value otherwise.
+func (o *UpdateProfileRequest) GetUsers() []UpdateProfileRequestUsersInner {
+	if o == nil || IsNil(o.Users) {
+		var ret []UpdateProfileRequestUsersInner
+		return ret
+	}
+	return o.Users
+}
+
+// GetUsersOk returns a tuple with the Users field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateProfileRequest) GetUsersOk() ([]UpdateProfileRequestUsersInner, bool) {
+	if o == nil || IsNil(o.Users) {
+		return nil, false
+	}
+	return o.Users, true
+}
+
+// HasUsers returns a boolean if a field has been set.
+func (o *UpdateProfileRequest) HasUsers() bool {
+	if o != nil && !IsNil(o.Users) {
+		return true
+	}
+
+	return false
+}
+
+// SetUsers gets a reference to the given []UpdateProfileRequestUsersInner and assigns it to the Users field.
+func (o *UpdateProfileRequest) SetUsers(v []UpdateProfileRequestUsersInner) {
+	o.Users = v
+}
+
+// GetRules returns the Rules field value if set, zero value otherwise.
+func (o *UpdateProfileRequest) GetRules() []UpdateProfileRequestRulesInner {
+	if o == nil || IsNil(o.Rules) {
+		var ret []UpdateProfileRequestRulesInner
+		return ret
+	}
+	return o.Rules
+}
+
+// GetRulesOk returns a tuple with the Rules field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateProfileRequest) GetRulesOk() ([]UpdateProfileRequestRulesInner, bool) {
+	if o == nil || IsNil(o.Rules) {
+		return nil, false
+	}
+	return o.Rules, true
+}
+
+// HasRules returns a boolean if a field has been set.
+func (o *UpdateProfileRequest) HasRules() bool {
+	if o != nil && !IsNil(o.Rules) {
+		return true
+	}
+
+	return false
+}
+
+// SetRules gets a reference to the given []UpdateProfileRequestRulesInner and assigns it to the Rules field.
+func (o *UpdateProfileRequest) SetRules(v []UpdateProfileRequestRulesInner) {
+	o.Rules = v
+}
+
+// GetArtefactIds returns the ArtefactIds field value if set, zero value otherwise.
+func (o *UpdateProfileRequest) GetArtefactIds() []string {
+	if o == nil || IsNil(o.ArtefactIds) {
+		var ret []string
+		return ret
+	}
+	return o.ArtefactIds
+}
+
+// GetArtefactIdsOk returns a tuple with the ArtefactIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateProfileRequest) GetArtefactIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.ArtefactIds) {
+		return nil, false
+	}
+	return o.ArtefactIds, true
+}
+
+// HasArtefactIds returns a boolean if a field has been set.
+func (o *UpdateProfileRequest) HasArtefactIds() bool {
+	if o != nil && !IsNil(o.ArtefactIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetArtefactIds gets a reference to the given []string and assigns it to the ArtefactIds field.
+func (o *UpdateProfileRequest) SetArtefactIds(v []string) {
+	o.ArtefactIds = v
+}
+
+// GetSourceIds returns the SourceIds field value if set, zero value otherwise.
+func (o *UpdateProfileRequest) GetSourceIds() []string {
+	if o == nil || IsNil(o.SourceIds) {
+		var ret []string
+		return ret
+	}
+	return o.SourceIds
+}
+
+// GetSourceIdsOk returns a tuple with the SourceIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateProfileRequest) GetSourceIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.SourceIds) {
+		return nil, false
+	}
+	return o.SourceIds, true
+}
+
+// HasSourceIds returns a boolean if a field has been set.
+func (o *UpdateProfileRequest) HasSourceIds() bool {
+	if o != nil && !IsNil(o.SourceIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetSourceIds gets a reference to the given []string and assigns it to the SourceIds field.
+func (o *UpdateProfileRequest) SetSourceIds(v []string) {
+	o.SourceIds = v
+}
+
+// GetRepositoriesSelected returns the RepositoriesSelected field value if set, zero value otherwise.
+func (o *UpdateProfileRequest) GetRepositoriesSelected() []UpdateProfileRequestRepositoriesSelectedInner {
+	if o == nil || IsNil(o.RepositoriesSelected) {
+		var ret []UpdateProfileRequestRepositoriesSelectedInner
+		return ret
+	}
+	return o.RepositoriesSelected
+}
+
+// GetRepositoriesSelectedOk returns a tuple with the RepositoriesSelected field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateProfileRequest) GetRepositoriesSelectedOk() ([]UpdateProfileRequestRepositoriesSelectedInner, bool) {
+	if o == nil || IsNil(o.RepositoriesSelected) {
+		return nil, false
+	}
+	return o.RepositoriesSelected, true
+}
+
+// HasRepositoriesSelected returns a boolean if a field has been set.
+func (o *UpdateProfileRequest) HasRepositoriesSelected() bool {
+	if o != nil && !IsNil(o.RepositoriesSelected) {
+		return true
+	}
+
+	return false
+}
+
+// SetRepositoriesSelected gets a reference to the given []UpdateProfileRequestRepositoriesSelectedInner and assigns it to the RepositoriesSelected field.
+func (o *UpdateProfileRequest) SetRepositoriesSelected(v []UpdateProfileRequestRepositoriesSelectedInner) {
+	o.RepositoriesSelected = v
+}
+
+// GetLocation returns the Location field value if set, zero value otherwise.
+func (o *UpdateProfileRequest) GetLocation() UpdateProfileRequestLocation {
+	if o == nil || IsNil(o.Location) {
+		var ret UpdateProfileRequestLocation
+		return ret
+	}
+	return *o.Location
+}
+
+// GetLocationOk returns a tuple with the Location field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateProfileRequest) GetLocationOk() (*UpdateProfileRequestLocation, bool) {
+	if o == nil || IsNil(o.Location) {
+		return nil, false
+	}
+	return o.Location, true
+}
+
+// HasLocation returns a boolean if a field has been set.
+func (o *UpdateProfileRequest) HasLocation() bool {
+	if o != nil && !IsNil(o.Location) {
+		return true
+	}
+
+	return false
+}
+
+// SetLocation gets a reference to the given UpdateProfileRequestLocation and assigns it to the Location field.
+func (o *UpdateProfileRequest) SetLocation(v UpdateProfileRequestLocation) {
+	o.Location = &v
+}
+
+// GetRateLimitReqPerSec returns the RateLimitReqPerSec field value if set, zero value otherwise.
+func (o *UpdateProfileRequest) GetRateLimitReqPerSec() int {
+	if o == nil || IsNil(o.RateLimitReqPerSec) {
+		var ret int
+		return ret
+	}
+	return *o.RateLimitReqPerSec
+}
+
+// GetRateLimitReqPerSecOk returns a tuple with the RateLimitReqPerSec field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateProfileRequest) GetRateLimitReqPerSecOk() (*int, bool) {
+	if o == nil || IsNil(o.RateLimitReqPerSec) {
+		return nil, false
+	}
+	return o.RateLimitReqPerSec, true
+}
+
+// HasRateLimitReqPerSec returns a boolean if a field has been set.
+func (o *UpdateProfileRequest) HasRateLimitReqPerSec() bool {
+	if o != nil && !IsNil(o.RateLimitReqPerSec) {
+		return true
+	}
+
+	return false
+}
+
+// SetRateLimitReqPerSec gets a reference to the given int and assigns it to the RateLimitReqPerSec field.
+func (o *UpdateProfileRequest) SetRateLimitReqPerSec(v int) {
+	o.RateLimitReqPerSec = &v
+}
+
 func (o UpdateProfileRequest) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -348,6 +685,36 @@ func (o UpdateProfileRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.DefaultProxyType) {
 		toSerialize["defaultProxyType"] = o.DefaultProxyType
 	}
+	if !IsNil(o.Mode) {
+		toSerialize["mode"] = o.Mode
+	}
+	if !IsNil(o.Context) {
+		toSerialize["context"] = o.Context
+	}
+	if !IsNil(o.OffLimitsAreas) {
+		toSerialize["offLimitsAreas"] = o.OffLimitsAreas
+	}
+	if !IsNil(o.Users) {
+		toSerialize["users"] = o.Users
+	}
+	if !IsNil(o.Rules) {
+		toSerialize["rules"] = o.Rules
+	}
+	if !IsNil(o.ArtefactIds) {
+		toSerialize["artefactIds"] = o.ArtefactIds
+	}
+	if !IsNil(o.SourceIds) {
+		toSerialize["sourceIds"] = o.SourceIds
+	}
+	if !IsNil(o.RepositoriesSelected) {
+		toSerialize["repositoriesSelected"] = o.RepositoriesSelected
+	}
+	if !IsNil(o.Location) {
+		toSerialize["location"] = o.Location
+	}
+	if !IsNil(o.RateLimitReqPerSec) {
+		toSerialize["rateLimitReqPerSec"] = o.RateLimitReqPerSec
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -378,6 +745,16 @@ func (o *UpdateProfileRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "maxDurationMinutes")
 		delete(additionalProperties, "proxyId")
 		delete(additionalProperties, "defaultProxyType")
+		delete(additionalProperties, "mode")
+		delete(additionalProperties, "context")
+		delete(additionalProperties, "offLimitsAreas")
+		delete(additionalProperties, "users")
+		delete(additionalProperties, "rules")
+		delete(additionalProperties, "artefactIds")
+		delete(additionalProperties, "sourceIds")
+		delete(additionalProperties, "repositoriesSelected")
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "rateLimitReqPerSec")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -20,8 +20,8 @@ var _ MappedNullable = &WorkflowFilterAnyOf1ParentLinksInner{}
 
 // WorkflowFilterAnyOf1ParentLinksInner struct for WorkflowFilterAnyOf1ParentLinksInner
 type WorkflowFilterAnyOf1ParentLinksInner struct {
-	ParentId             *string                                                                          `json:"parentId,omitempty"`
-	Verb                 ENUMPROPERTIESDATAITEMSPROPERTIESFILTER1PROPERTIESPARENTLINKSITEMSPROPERTIESVERB `json:"verb"`
+	ParentId             *string                                                   `json:"parentId,omitempty"`
+	Verb                 ENUMPROPERTIESPARENTLINKSPROPERTIESSETITEMSPROPERTIESVERB `json:"verb"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -31,7 +31,7 @@ type _WorkflowFilterAnyOf1ParentLinksInner WorkflowFilterAnyOf1ParentLinksInner
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewWorkflowFilterAnyOf1ParentLinksInner(verb ENUMPROPERTIESDATAITEMSPROPERTIESFILTER1PROPERTIESPARENTLINKSITEMSPROPERTIESVERB) *WorkflowFilterAnyOf1ParentLinksInner {
+func NewWorkflowFilterAnyOf1ParentLinksInner(verb ENUMPROPERTIESPARENTLINKSPROPERTIESSETITEMSPROPERTIESVERB) *WorkflowFilterAnyOf1ParentLinksInner {
 	this := WorkflowFilterAnyOf1ParentLinksInner{}
 	this.Verb = verb
 	return &this
@@ -78,9 +78,9 @@ func (o *WorkflowFilterAnyOf1ParentLinksInner) SetParentId(v string) {
 }
 
 // GetVerb returns the Verb field value
-func (o *WorkflowFilterAnyOf1ParentLinksInner) GetVerb() ENUMPROPERTIESDATAITEMSPROPERTIESFILTER1PROPERTIESPARENTLINKSITEMSPROPERTIESVERB {
+func (o *WorkflowFilterAnyOf1ParentLinksInner) GetVerb() ENUMPROPERTIESPARENTLINKSPROPERTIESSETITEMSPROPERTIESVERB {
 	if o == nil {
-		var ret ENUMPROPERTIESDATAITEMSPROPERTIESFILTER1PROPERTIESPARENTLINKSITEMSPROPERTIESVERB
+		var ret ENUMPROPERTIESPARENTLINKSPROPERTIESSETITEMSPROPERTIESVERB
 		return ret
 	}
 
@@ -89,7 +89,7 @@ func (o *WorkflowFilterAnyOf1ParentLinksInner) GetVerb() ENUMPROPERTIESDATAITEMS
 
 // GetVerbOk returns a tuple with the Verb field value
 // and a boolean to check if the value has been set.
-func (o *WorkflowFilterAnyOf1ParentLinksInner) GetVerbOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESFILTER1PROPERTIESPARENTLINKSITEMSPROPERTIESVERB, bool) {
+func (o *WorkflowFilterAnyOf1ParentLinksInner) GetVerbOk() (*ENUMPROPERTIESPARENTLINKSPROPERTIESSETITEMSPROPERTIESVERB, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -97,7 +97,7 @@ func (o *WorkflowFilterAnyOf1ParentLinksInner) GetVerbOk() (*ENUMPROPERTIESDATAI
 }
 
 // SetVerb sets field value
-func (o *WorkflowFilterAnyOf1ParentLinksInner) SetVerb(v ENUMPROPERTIESDATAITEMSPROPERTIESFILTER1PROPERTIESPARENTLINKSITEMSPROPERTIESVERB) {
+func (o *WorkflowFilterAnyOf1ParentLinksInner) SetVerb(v ENUMPROPERTIESPARENTLINKSPROPERTIESSETITEMSPROPERTIESVERB) {
 	o.Verb = v
 }
 

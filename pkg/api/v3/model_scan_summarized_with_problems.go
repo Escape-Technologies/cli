@@ -22,6 +22,10 @@ var _ MappedNullable = &ScanSummarizedWithProblems{}
 type ScanSummarizedWithProblems struct {
 	// The id of the scan
 	Id string `json:"id"`
+	// The id of the profile that ran the scan
+	ProfileId *string `json:"profileId,omitempty"`
+	// The id of the asset that was scanned, if any
+	AssetId *string `json:"assetId,omitempty"`
 	// The status of the scan
 	Status string `json:"status"`
 	// The date and time the scan was created
@@ -100,6 +104,70 @@ func (o *ScanSummarizedWithProblems) GetIdOk() (*string, bool) {
 // SetId sets field value
 func (o *ScanSummarizedWithProblems) SetId(v string) {
 	o.Id = v
+}
+
+// GetProfileId returns the ProfileId field value if set, zero value otherwise.
+func (o *ScanSummarizedWithProblems) GetProfileId() string {
+	if o == nil || IsNil(o.ProfileId) {
+		var ret string
+		return ret
+	}
+	return *o.ProfileId
+}
+
+// GetProfileIdOk returns a tuple with the ProfileId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ScanSummarizedWithProblems) GetProfileIdOk() (*string, bool) {
+	if o == nil || IsNil(o.ProfileId) {
+		return nil, false
+	}
+	return o.ProfileId, true
+}
+
+// HasProfileId returns a boolean if a field has been set.
+func (o *ScanSummarizedWithProblems) HasProfileId() bool {
+	if o != nil && !IsNil(o.ProfileId) {
+		return true
+	}
+
+	return false
+}
+
+// SetProfileId gets a reference to the given string and assigns it to the ProfileId field.
+func (o *ScanSummarizedWithProblems) SetProfileId(v string) {
+	o.ProfileId = &v
+}
+
+// GetAssetId returns the AssetId field value if set, zero value otherwise.
+func (o *ScanSummarizedWithProblems) GetAssetId() string {
+	if o == nil || IsNil(o.AssetId) {
+		var ret string
+		return ret
+	}
+	return *o.AssetId
+}
+
+// GetAssetIdOk returns a tuple with the AssetId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ScanSummarizedWithProblems) GetAssetIdOk() (*string, bool) {
+	if o == nil || IsNil(o.AssetId) {
+		return nil, false
+	}
+	return o.AssetId, true
+}
+
+// HasAssetId returns a boolean if a field has been set.
+func (o *ScanSummarizedWithProblems) HasAssetId() bool {
+	if o != nil && !IsNil(o.AssetId) {
+		return true
+	}
+
+	return false
+}
+
+// SetAssetId gets a reference to the given string and assigns it to the AssetId field.
+func (o *ScanSummarizedWithProblems) SetAssetId(v string) {
+	o.AssetId = &v
 }
 
 // GetStatus returns the Status field value
@@ -465,6 +533,12 @@ func (o ScanSummarizedWithProblems) MarshalJSON() ([]byte, error) {
 func (o ScanSummarizedWithProblems) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
+	if !IsNil(o.ProfileId) {
+		toSerialize["profileId"] = o.ProfileId
+	}
+	if !IsNil(o.AssetId) {
+		toSerialize["assetId"] = o.AssetId
+	}
 	toSerialize["status"] = o.Status
 	toSerialize["createdAt"] = o.CreatedAt
 	if !IsNil(o.FinishedAt) {
@@ -540,6 +614,8 @@ func (o *ScanSummarizedWithProblems) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "id")
+		delete(additionalProperties, "profileId")
+		delete(additionalProperties, "assetId")
 		delete(additionalProperties, "status")
 		delete(additionalProperties, "createdAt")
 		delete(additionalProperties, "finishedAt")

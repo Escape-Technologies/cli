@@ -21,8 +21,8 @@ var _ MappedNullable = &CoverageByUserEntry{}
 // CoverageByUserEntry struct for CoverageByUserEntry
 type CoverageByUserEntry struct {
 	// User or session label associated with this target entry
-	Name                 string                                                      `json:"name"`
-	Coverage             ENUMPROPERTIESDATAITEMSPROPERTIESAPIROUTEPROPERTIESCOVERAGE `json:"coverage"`
+	Name                 string                                     `json:"name"`
+	Coverage             ENUMPROPERTIESISSUEPROPERTIESCOVERAGEITEMS `json:"coverage"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -32,7 +32,7 @@ type _CoverageByUserEntry CoverageByUserEntry
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCoverageByUserEntry(name string, coverage ENUMPROPERTIESDATAITEMSPROPERTIESAPIROUTEPROPERTIESCOVERAGE) *CoverageByUserEntry {
+func NewCoverageByUserEntry(name string, coverage ENUMPROPERTIESISSUEPROPERTIESCOVERAGEITEMS) *CoverageByUserEntry {
 	this := CoverageByUserEntry{}
 	this.Name = name
 	this.Coverage = coverage
@@ -72,9 +72,9 @@ func (o *CoverageByUserEntry) SetName(v string) {
 }
 
 // GetCoverage returns the Coverage field value
-func (o *CoverageByUserEntry) GetCoverage() ENUMPROPERTIESDATAITEMSPROPERTIESAPIROUTEPROPERTIESCOVERAGE {
+func (o *CoverageByUserEntry) GetCoverage() ENUMPROPERTIESISSUEPROPERTIESCOVERAGEITEMS {
 	if o == nil {
-		var ret ENUMPROPERTIESDATAITEMSPROPERTIESAPIROUTEPROPERTIESCOVERAGE
+		var ret ENUMPROPERTIESISSUEPROPERTIESCOVERAGEITEMS
 		return ret
 	}
 
@@ -83,7 +83,7 @@ func (o *CoverageByUserEntry) GetCoverage() ENUMPROPERTIESDATAITEMSPROPERTIESAPI
 
 // GetCoverageOk returns a tuple with the Coverage field value
 // and a boolean to check if the value has been set.
-func (o *CoverageByUserEntry) GetCoverageOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESAPIROUTEPROPERTIESCOVERAGE, bool) {
+func (o *CoverageByUserEntry) GetCoverageOk() (*ENUMPROPERTIESISSUEPROPERTIESCOVERAGEITEMS, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -91,7 +91,7 @@ func (o *CoverageByUserEntry) GetCoverageOk() (*ENUMPROPERTIESDATAITEMSPROPERTIE
 }
 
 // SetCoverage sets field value
-func (o *CoverageByUserEntry) SetCoverage(v ENUMPROPERTIESDATAITEMSPROPERTIESAPIROUTEPROPERTIESCOVERAGE) {
+func (o *CoverageByUserEntry) SetCoverage(v ENUMPROPERTIESISSUEPROPERTIESCOVERAGEITEMS) {
 	o.Coverage = v
 }
 

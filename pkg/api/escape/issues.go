@@ -256,7 +256,7 @@ func GetIssueTrends(ctx context.Context, after, before, interval string, applica
 	}
 
 	if len(projectIDs) > 0 {
-		req = req.ProjectIds(v3.GetIssueTrendsProjectIdsParameter{ArrayOfString: &projectIDs})
+		req = req.ProjectIds(v3.ListProfilesProjectIdsParameter{ArrayOfString: &projectIDs})
 	}
 
 	data, _, err := req.Execute()

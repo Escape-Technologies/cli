@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// UpdateProfileRequestExtraAssetIds Asset IDs to link to the profile. For REST and GraphQL profiles, pass schema asset IDs (class `SCHEMA`) to attach or replace linked API definitions — include every schema when linking multiple schemas to one profile. Replaces the full linked-asset set for this profile.
+// UpdateProfileRequestExtraAssetIds Asset IDs to link to the profile. For REST and GraphQL profiles, pass schema asset IDs (class `SCHEMA`) to attach or replace linked API definitions — include every schema when linking multiple schemas to one profile. For AI pentest profiles, these are additional pentest target assets. Replaces the full linked-asset set for this profile.
 type UpdateProfileRequestExtraAssetIds struct {
 	ArrayOfString *[]string
 	String        *string

@@ -19,52 +19,52 @@ var _ MappedNullable = &WorkflowFilterAnyOf1{}
 
 // WorkflowFilterAnyOf1 struct for WorkflowFilterAnyOf1
 type WorkflowFilterAnyOf1 struct {
-	Search                *string                                                                          `json:"search,omitempty"`
-	Risks                 []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS                     `json:"risks,omitempty"`
-	TagIds                []string                                                                         `json:"tagIds,omitempty"`
-	ExactTagIds           []string                                                                         `json:"exactTagIds,omitempty"`
-	NoTags                *bool                                                                            `json:"noTags,omitempty"`
-	IntegrationIds        []string                                                                         `json:"integrationIds,omitempty"`
-	Types                 []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE                `json:"types,omitempty"`
-	ExcludeTypes          []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE                `json:"excludeTypes,omitempty"`
-	Classes               []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS               `json:"classes,omitempty"`
-	ExcludeClasses        []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS               `json:"excludeClasses,omitempty"`
-	ProjectIds            []string                                                                         `json:"projectIds,omitempty"`
-	ExactProjectIds       []string                                                                         `json:"exactProjectIds,omitempty"`
-	NoProjects            *bool                                                                            `json:"noProjects,omitempty"`
-	ApplicationIds        []string                                                                         `json:"applicationIds,omitempty"`
-	FoundByProfileIds     []string                                                                         `json:"foundByProfileIds,omitempty"`
-	FoundByIntegrationIds []string                                                                         `json:"foundByIntegrationIds,omitempty"`
-	ScanIds               []string                                                                         `json:"scanIds,omitempty"`
-	ScannerKinds          []ENUMPROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS                                `json:"scannerKinds,omitempty"`
-	WorkflowIds           []string                                                                         `json:"workflowIds,omitempty"`
-	Domains               []string                                                                         `json:"domains,omitempty"`
-	RootFQDNs             []string                                                                         `json:"rootFQDNs,omitempty"`
-	NoRootFQDN            *bool                                                                            `json:"noRootFQDN,omitempty"`
-	Environments          []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESENVIRONMENT   `json:"environments,omitempty"`
-	CloudProviders        []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER `json:"cloudProviders,omitempty"`
-	WafProviders          []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESWAFPROVIDER   `json:"wafProviders,omitempty"`
-	CaptchaProviders      []ENUMPROPERTIESCAPTCHAPROVIDER                                                  `json:"captchaProviders,omitempty"`
-	Statuses              []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS              `json:"statuses,omitempty"`
-	Severities            []ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS                                  `json:"severities,omitempty"`
-	ParentLinks           []WorkflowFilterAnyOf1ParentLinksInner                                           `json:"parentLinks,omitempty"`
-	ChildrenLinks         []WorkflowFilterAnyOf1ChildrenLinksInner                                         `json:"childrenLinks,omitempty"`
-	SchemaIds             []string                                                                         `json:"schemaIds,omitempty"`
-	AssetIds              []string                                                                         `json:"assetIds,omitempty"`
-	BlacklistAssetIds     []string                                                                         `json:"blacklistAssetIds,omitempty"`
-	ManuallyCreated       *bool                                                                            `json:"manuallyCreated,omitempty"`
-	Sources               []WorkflowFilterAnyOf1SourcesInner                                               `json:"sources,omitempty"`
-	Visibility            []ENUMPROPERTIESVISIBILITY                                                       `json:"visibility,omitempty"`
-	RepositoryArchived    *bool                                                                            `json:"repositoryArchived,omitempty"`
-	Ports                 []float32                                                                        `json:"ports,omitempty"`
-	Frameworks            []ENUMPROPERTIESDATAITEMSPROPERTIESFILTER1PROPERTIESFRAMEWORKSITEMS              `json:"frameworks,omitempty"`
-	PrioritizeFavorites   *bool                                                                            `json:"prioritizeFavorites,omitempty"`
-	Languages             []string                                                                         `json:"languages,omitempty"`
-	OwnerEmails           []string                                                                         `json:"ownerEmails,omitempty"`
-	Uris                  []string                                                                         `json:"uris,omitempty"`
-	TechnologyKeys        []string                                                                         `json:"technologyKeys,omitempty"`
-	OwnTechnologyKeys     []string                                                                         `json:"ownTechnologyKeys,omitempty"`
-	Dnf                   interface{}                                                                      `json:"dnf,omitempty"`
+	Search                *string                                                                                                                 `json:"search,omitempty"`
+	Risks                 []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS                                                            `json:"risks,omitempty"`
+	TagIds                []string                                                                                                                `json:"tagIds,omitempty"`
+	ExactTagIds           []string                                                                                                                `json:"exactTagIds,omitempty"`
+	NoTags                *bool                                                                                                                   `json:"noTags,omitempty"`
+	IntegrationIds        []string                                                                                                                `json:"integrationIds,omitempty"`
+	Types                 []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE                                                       `json:"types,omitempty"`
+	ExcludeTypes          []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE                                                       `json:"excludeTypes,omitempty"`
+	Classes               []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS                                                      `json:"classes,omitempty"`
+	ExcludeClasses        []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS                                                      `json:"excludeClasses,omitempty"`
+	ProjectIds            []string                                                                                                                `json:"projectIds,omitempty"`
+	ExactProjectIds       []string                                                                                                                `json:"exactProjectIds,omitempty"`
+	NoProjects            *bool                                                                                                                   `json:"noProjects,omitempty"`
+	ApplicationIds        []string                                                                                                                `json:"applicationIds,omitempty"`
+	FoundByProfileIds     []string                                                                                                                `json:"foundByProfileIds,omitempty"`
+	FoundByIntegrationIds []string                                                                                                                `json:"foundByIntegrationIds,omitempty"`
+	ScanIds               []string                                                                                                                `json:"scanIds,omitempty"`
+	ScannerKinds          []ENUMPROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS                                                                       `json:"scannerKinds,omitempty"`
+	WorkflowIds           []string                                                                                                                `json:"workflowIds,omitempty"`
+	Domains               []string                                                                                                                `json:"domains,omitempty"`
+	RootFQDNs             []string                                                                                                                `json:"rootFQDNs,omitempty"`
+	NoRootFQDN            *bool                                                                                                                   `json:"noRootFQDN,omitempty"`
+	Environments          []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESENVIRONMENT                                          `json:"environments,omitempty"`
+	CloudProviders        []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESCLOUDPROVIDER                                        `json:"cloudProviders,omitempty"`
+	WafProviders          []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESWAFPROVIDER                                          `json:"wafProviders,omitempty"`
+	CaptchaProviders      []ENUMPROPERTIESCAPTCHAPROVIDER                                                                                         `json:"captchaProviders,omitempty"`
+	Statuses              []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS                                                     `json:"statuses,omitempty"`
+	Severities            []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY `json:"severities,omitempty"`
+	ParentLinks           []WorkflowFilterAnyOf1ParentLinksInner                                                                                  `json:"parentLinks,omitempty"`
+	ChildrenLinks         []WorkflowFilterAnyOf1ChildrenLinksInner                                                                                `json:"childrenLinks,omitempty"`
+	SchemaIds             []string                                                                                                                `json:"schemaIds,omitempty"`
+	AssetIds              []string                                                                                                                `json:"assetIds,omitempty"`
+	BlacklistAssetIds     []string                                                                                                                `json:"blacklistAssetIds,omitempty"`
+	ManuallyCreated       *bool                                                                                                                   `json:"manuallyCreated,omitempty"`
+	Sources               []WorkflowFilterAnyOf1SourcesInner                                                                                      `json:"sources,omitempty"`
+	Visibility            []ENUMPROPERTIESVISIBILITY                                                                                              `json:"visibility,omitempty"`
+	RepositoryArchived    *bool                                                                                                                   `json:"repositoryArchived,omitempty"`
+	Ports                 []float32                                                                                                               `json:"ports,omitempty"`
+	Frameworks            []ENUMPROPERTIESWHEREPROPERTIESFRAMEWORKSITEMS                                                                          `json:"frameworks,omitempty"`
+	PrioritizeFavorites   *bool                                                                                                                   `json:"prioritizeFavorites,omitempty"`
+	Languages             []string                                                                                                                `json:"languages,omitempty"`
+	OwnerEmails           []string                                                                                                                `json:"ownerEmails,omitempty"`
+	Uris                  []string                                                                                                                `json:"uris,omitempty"`
+	TechnologyKeys        []string                                                                                                                `json:"technologyKeys,omitempty"`
+	OwnTechnologyKeys     []string                                                                                                                `json:"ownTechnologyKeys,omitempty"`
+	Dnf                   interface{}                                                                                                             `json:"dnf,omitempty"`
 	AdditionalProperties  map[string]interface{}
 }
 
@@ -952,9 +952,9 @@ func (o *WorkflowFilterAnyOf1) SetStatuses(v []ENUMPROPERTIESDATAITEMSPROPERTIES
 }
 
 // GetSeverities returns the Severities field value if set, zero value otherwise.
-func (o *WorkflowFilterAnyOf1) GetSeverities() []ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS {
+func (o *WorkflowFilterAnyOf1) GetSeverities() []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY {
 	if o == nil || IsNil(o.Severities) {
-		var ret []ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS
+		var ret []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY
 		return ret
 	}
 	return o.Severities
@@ -962,7 +962,7 @@ func (o *WorkflowFilterAnyOf1) GetSeverities() []ENUMPROPERTIESFILTERPROPERTIESS
 
 // GetSeveritiesOk returns a tuple with the Severities field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *WorkflowFilterAnyOf1) GetSeveritiesOk() ([]ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS, bool) {
+func (o *WorkflowFilterAnyOf1) GetSeveritiesOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY, bool) {
 	if o == nil || IsNil(o.Severities) {
 		return nil, false
 	}
@@ -978,8 +978,8 @@ func (o *WorkflowFilterAnyOf1) HasSeverities() bool {
 	return false
 }
 
-// SetSeverities gets a reference to the given []ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS and assigns it to the Severities field.
-func (o *WorkflowFilterAnyOf1) SetSeverities(v []ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS) {
+// SetSeverities gets a reference to the given []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY and assigns it to the Severities field.
+func (o *WorkflowFilterAnyOf1) SetSeverities(v []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY) {
 	o.Severities = v
 }
 
@@ -1304,9 +1304,9 @@ func (o *WorkflowFilterAnyOf1) SetPorts(v []float32) {
 }
 
 // GetFrameworks returns the Frameworks field value if set, zero value otherwise.
-func (o *WorkflowFilterAnyOf1) GetFrameworks() []ENUMPROPERTIESDATAITEMSPROPERTIESFILTER1PROPERTIESFRAMEWORKSITEMS {
+func (o *WorkflowFilterAnyOf1) GetFrameworks() []ENUMPROPERTIESWHEREPROPERTIESFRAMEWORKSITEMS {
 	if o == nil || IsNil(o.Frameworks) {
-		var ret []ENUMPROPERTIESDATAITEMSPROPERTIESFILTER1PROPERTIESFRAMEWORKSITEMS
+		var ret []ENUMPROPERTIESWHEREPROPERTIESFRAMEWORKSITEMS
 		return ret
 	}
 	return o.Frameworks
@@ -1314,7 +1314,7 @@ func (o *WorkflowFilterAnyOf1) GetFrameworks() []ENUMPROPERTIESDATAITEMSPROPERTI
 
 // GetFrameworksOk returns a tuple with the Frameworks field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *WorkflowFilterAnyOf1) GetFrameworksOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESFILTER1PROPERTIESFRAMEWORKSITEMS, bool) {
+func (o *WorkflowFilterAnyOf1) GetFrameworksOk() ([]ENUMPROPERTIESWHEREPROPERTIESFRAMEWORKSITEMS, bool) {
 	if o == nil || IsNil(o.Frameworks) {
 		return nil, false
 	}
@@ -1330,8 +1330,8 @@ func (o *WorkflowFilterAnyOf1) HasFrameworks() bool {
 	return false
 }
 
-// SetFrameworks gets a reference to the given []ENUMPROPERTIESDATAITEMSPROPERTIESFILTER1PROPERTIESFRAMEWORKSITEMS and assigns it to the Frameworks field.
-func (o *WorkflowFilterAnyOf1) SetFrameworks(v []ENUMPROPERTIESDATAITEMSPROPERTIESFILTER1PROPERTIESFRAMEWORKSITEMS) {
+// SetFrameworks gets a reference to the given []ENUMPROPERTIESWHEREPROPERTIESFRAMEWORKSITEMS and assigns it to the Frameworks field.
+func (o *WorkflowFilterAnyOf1) SetFrameworks(v []ENUMPROPERTIESWHEREPROPERTIESFRAMEWORKSITEMS) {
 	o.Frameworks = v
 }
 

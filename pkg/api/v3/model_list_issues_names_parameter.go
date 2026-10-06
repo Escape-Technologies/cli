@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// ListIssuesNamesParameter Filter by issue names
+// ListIssuesNamesParameter Filter by issue full name (the display name including risk characteristics, e.g. 'SQL injection found on external-facing asset')
 type ListIssuesNamesParameter struct {
 	ArrayOfString *[]string
 	String        *string

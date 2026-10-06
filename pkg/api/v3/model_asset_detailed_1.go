@@ -55,8 +55,18 @@ type AssetDetailed1 struct {
 	Technology    *AssetTechnologyDetailed `json:"technology,omitempty"`
 	MobileApp     *AssetMobileAppDetailed  `json:"mobileApp,omitempty"`
 	// Time-limited HTTPS URL for schema-class assets; null for other asset classes
-	SchemaUrl            *string            `json:"schemaUrl,omitempty"`
-	Links                AssetDetailedLinks `json:"links"`
+	SchemaUrl *string `json:"schemaUrl,omitempty"`
+	// Parent assets in the relationship graph (first 20)
+	Parents []AssetRelationship `json:"parents,omitempty"`
+	// Child assets in the relationship graph (first 20)
+	Children []AssetRelationship `json:"children,omitempty"`
+	// The sources of the asset
+	Sources    []AssetSource    `json:"sources,omitempty"`
+	Statistics *AssetStatistics `json:"statistics,omitempty"`
+	RawData    interface{}      `json:"rawData,omitempty"`
+	// Metadata flags for the asset
+	Metadata             []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESMETADATAITEMS `json:"metadata,omitempty"`
+	Links                AssetDetailedLinks                                              `json:"links"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -746,6 +756,199 @@ func (o *AssetDetailed1) SetSchemaUrl(v string) {
 	o.SchemaUrl = &v
 }
 
+// GetParents returns the Parents field value if set, zero value otherwise.
+func (o *AssetDetailed1) GetParents() []AssetRelationship {
+	if o == nil || IsNil(o.Parents) {
+		var ret []AssetRelationship
+		return ret
+	}
+	return o.Parents
+}
+
+// GetParentsOk returns a tuple with the Parents field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AssetDetailed1) GetParentsOk() ([]AssetRelationship, bool) {
+	if o == nil || IsNil(o.Parents) {
+		return nil, false
+	}
+	return o.Parents, true
+}
+
+// HasParents returns a boolean if a field has been set.
+func (o *AssetDetailed1) HasParents() bool {
+	if o != nil && !IsNil(o.Parents) {
+		return true
+	}
+
+	return false
+}
+
+// SetParents gets a reference to the given []AssetRelationship and assigns it to the Parents field.
+func (o *AssetDetailed1) SetParents(v []AssetRelationship) {
+	o.Parents = v
+}
+
+// GetChildren returns the Children field value if set, zero value otherwise.
+func (o *AssetDetailed1) GetChildren() []AssetRelationship {
+	if o == nil || IsNil(o.Children) {
+		var ret []AssetRelationship
+		return ret
+	}
+	return o.Children
+}
+
+// GetChildrenOk returns a tuple with the Children field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AssetDetailed1) GetChildrenOk() ([]AssetRelationship, bool) {
+	if o == nil || IsNil(o.Children) {
+		return nil, false
+	}
+	return o.Children, true
+}
+
+// HasChildren returns a boolean if a field has been set.
+func (o *AssetDetailed1) HasChildren() bool {
+	if o != nil && !IsNil(o.Children) {
+		return true
+	}
+
+	return false
+}
+
+// SetChildren gets a reference to the given []AssetRelationship and assigns it to the Children field.
+func (o *AssetDetailed1) SetChildren(v []AssetRelationship) {
+	o.Children = v
+}
+
+// GetSources returns the Sources field value if set, zero value otherwise.
+func (o *AssetDetailed1) GetSources() []AssetSource {
+	if o == nil || IsNil(o.Sources) {
+		var ret []AssetSource
+		return ret
+	}
+	return o.Sources
+}
+
+// GetSourcesOk returns a tuple with the Sources field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AssetDetailed1) GetSourcesOk() ([]AssetSource, bool) {
+	if o == nil || IsNil(o.Sources) {
+		return nil, false
+	}
+	return o.Sources, true
+}
+
+// HasSources returns a boolean if a field has been set.
+func (o *AssetDetailed1) HasSources() bool {
+	if o != nil && !IsNil(o.Sources) {
+		return true
+	}
+
+	return false
+}
+
+// SetSources gets a reference to the given []AssetSource and assigns it to the Sources field.
+func (o *AssetDetailed1) SetSources(v []AssetSource) {
+	o.Sources = v
+}
+
+// GetStatistics returns the Statistics field value if set, zero value otherwise.
+func (o *AssetDetailed1) GetStatistics() AssetStatistics {
+	if o == nil || IsNil(o.Statistics) {
+		var ret AssetStatistics
+		return ret
+	}
+	return *o.Statistics
+}
+
+// GetStatisticsOk returns a tuple with the Statistics field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AssetDetailed1) GetStatisticsOk() (*AssetStatistics, bool) {
+	if o == nil || IsNil(o.Statistics) {
+		return nil, false
+	}
+	return o.Statistics, true
+}
+
+// HasStatistics returns a boolean if a field has been set.
+func (o *AssetDetailed1) HasStatistics() bool {
+	if o != nil && !IsNil(o.Statistics) {
+		return true
+	}
+
+	return false
+}
+
+// SetStatistics gets a reference to the given AssetStatistics and assigns it to the Statistics field.
+func (o *AssetDetailed1) SetStatistics(v AssetStatistics) {
+	o.Statistics = &v
+}
+
+// GetRawData returns the RawData field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *AssetDetailed1) GetRawData() interface{} {
+	if o == nil {
+		var ret interface{}
+		return ret
+	}
+	return o.RawData
+}
+
+// GetRawDataOk returns a tuple with the RawData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AssetDetailed1) GetRawDataOk() (*interface{}, bool) {
+	if o == nil || IsNil(o.RawData) {
+		return nil, false
+	}
+	return &o.RawData, true
+}
+
+// HasRawData returns a boolean if a field has been set.
+func (o *AssetDetailed1) HasRawData() bool {
+	if o != nil && !IsNil(o.RawData) {
+		return true
+	}
+
+	return false
+}
+
+// SetRawData gets a reference to the given interface{} and assigns it to the RawData field.
+func (o *AssetDetailed1) SetRawData(v interface{}) {
+	o.RawData = v
+}
+
+// GetMetadata returns the Metadata field value if set, zero value otherwise.
+func (o *AssetDetailed1) GetMetadata() []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESMETADATAITEMS {
+	if o == nil || IsNil(o.Metadata) {
+		var ret []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESMETADATAITEMS
+		return ret
+	}
+	return o.Metadata
+}
+
+// GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AssetDetailed1) GetMetadataOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESMETADATAITEMS, bool) {
+	if o == nil || IsNil(o.Metadata) {
+		return nil, false
+	}
+	return o.Metadata, true
+}
+
+// HasMetadata returns a boolean if a field has been set.
+func (o *AssetDetailed1) HasMetadata() bool {
+	if o != nil && !IsNil(o.Metadata) {
+		return true
+	}
+
+	return false
+}
+
+// SetMetadata gets a reference to the given []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESMETADATAITEMS and assigns it to the Metadata field.
+func (o *AssetDetailed1) SetMetadata(v []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESMETADATAITEMS) {
+	o.Metadata = v
+}
+
 // GetLinks returns the Links field value
 func (o *AssetDetailed1) GetLinks() AssetDetailedLinks {
 	if o == nil {
@@ -829,6 +1032,24 @@ func (o AssetDetailed1) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SchemaUrl) {
 		toSerialize["schemaUrl"] = o.SchemaUrl
 	}
+	if !IsNil(o.Parents) {
+		toSerialize["parents"] = o.Parents
+	}
+	if !IsNil(o.Children) {
+		toSerialize["children"] = o.Children
+	}
+	if !IsNil(o.Sources) {
+		toSerialize["sources"] = o.Sources
+	}
+	if !IsNil(o.Statistics) {
+		toSerialize["statistics"] = o.Statistics
+	}
+	if o.RawData != nil {
+		toSerialize["rawData"] = o.RawData
+	}
+	if !IsNil(o.Metadata) {
+		toSerialize["metadata"] = o.Metadata
+	}
 	toSerialize["links"] = o.Links
 
 	for key, value := range o.AdditionalProperties {
@@ -906,6 +1127,12 @@ func (o *AssetDetailed1) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "technology")
 		delete(additionalProperties, "mobileApp")
 		delete(additionalProperties, "schemaUrl")
+		delete(additionalProperties, "parents")
+		delete(additionalProperties, "children")
+		delete(additionalProperties, "sources")
+		delete(additionalProperties, "statistics")
+		delete(additionalProperties, "rawData")
+		delete(additionalProperties, "metadata")
 		delete(additionalProperties, "links")
 		o.AdditionalProperties = additionalProperties
 	}

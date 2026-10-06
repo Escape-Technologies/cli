@@ -41,7 +41,7 @@ func (r ApiBulkUpdateIssuesRequest) Execute() (*BulkUpdateIssues200Response, *ht
 /*
 BulkUpdateIssues Bulk update issues
 
-Update the status and/or severity of multiple issues matching a filter predicate. For example, mark all LOW severity issues on a given asset as IGNORED, or reset severities to scanner values.
+Update the status and/or severity of multiple issues matching a filter predicate. For example, mark all LOW severity issues on a given asset as IGNORED, or reset severities to scanner values. A non-empty `where` or `all: true` is required. Set `dryRun` to preview the matching issue IDs without changing anything. Requests matching more than 10,000 issues are rejected: narrow the filter.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiBulkUpdateIssuesRequest
@@ -291,6 +291,153 @@ func (a *IssuesAPIService) CreateIssueCommentExecute(r ApiCreateIssueCommentRequ
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
 			var v InternalServerError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGenerateIssueAiRemediationRequest struct {
+	ctx                               context.Context
+	ApiService                        *IssuesAPIService
+	issueId                           string
+	generateIssueAiRemediationRequest *GenerateIssueAiRemediationRequest
+}
+
+func (r ApiGenerateIssueAiRemediationRequest) GenerateIssueAiRemediationRequest(generateIssueAiRemediationRequest GenerateIssueAiRemediationRequest) ApiGenerateIssueAiRemediationRequest {
+	r.generateIssueAiRemediationRequest = &generateIssueAiRemediationRequest
+	return r
+}
+
+func (r ApiGenerateIssueAiRemediationRequest) Execute() (*GenerateIssueAiRemediation200Response, *http.Response, error) {
+	return r.ApiService.GenerateIssueAiRemediationExecute(r)
+}
+
+/*
+GenerateIssueAiRemediation Generate AI remediation for an issue
+
+Trigger the asynchronous generation of AI remediation for an issue. Generation only schedules a job: read the result back with GET /v3/issues/{issueId}, on `remediation` for the full issue-panel remediation or on `aiRemediationSummary` for the short overview summary. Generating the full remediation clears the previous remediation and its feedback immediately. Generating the summary replaces the previous summary, and resets its rating, only once the generation job succeeds. Identical requests repeated within a short window are ignored and return `generated: false`.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param issueId The issue ID
+	@return ApiGenerateIssueAiRemediationRequest
+*/
+func (a *IssuesAPIService) GenerateIssueAiRemediation(ctx context.Context, issueId string) ApiGenerateIssueAiRemediationRequest {
+	return ApiGenerateIssueAiRemediationRequest{
+		ApiService: a,
+		ctx:        ctx,
+		issueId:    issueId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return GenerateIssueAiRemediation200Response
+func (a *IssuesAPIService) GenerateIssueAiRemediationExecute(r ApiGenerateIssueAiRemediationRequest) (*GenerateIssueAiRemediation200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateIssueAiRemediation200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IssuesAPIService.GenerateIssueAiRemediation")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/issues/{issueId}/ai-remediation"
+	localVarPath = strings.Replace(localVarPath, "{"+"issueId"+"}", url.PathEscape(parameterValueToString(r.issueId, "issueId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.generateIssueAiRemediationRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v BadRequest
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v NotFound
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -573,7 +720,7 @@ type ApiGetIssueTrendsRequest struct {
 	before         *string
 	interval       *string
 	applicationIds *GetIssueTrendsApplicationIdsParameter
-	projectIds     *GetIssueTrendsProjectIdsParameter
+	projectIds     *ListProfilesProjectIdsParameter
 }
 
 // Start date (ISO 8601)
@@ -601,7 +748,7 @@ func (r ApiGetIssueTrendsRequest) ApplicationIds(applicationIds GetIssueTrendsAp
 }
 
 // Filter by project IDs
-func (r ApiGetIssueTrendsRequest) ProjectIds(projectIds GetIssueTrendsProjectIdsParameter) ApiGetIssueTrendsRequest {
+func (r ApiGetIssueTrendsRequest) ProjectIds(projectIds ListProfilesProjectIdsParameter) ApiGetIssueTrendsRequest {
 	r.projectIds = &projectIds
 	return r
 }
@@ -864,26 +1011,38 @@ func (a *IssuesAPIService) ListIssueActivitiesExecute(r ApiListIssueActivitiesRe
 }
 
 type ApiListIssuesRequest struct {
-	ctx           context.Context
-	ApiService    *IssuesAPIService
-	cursor        *string
-	size          *int
-	sortType      *string
-	sortDirection *string
-	profileIds    *string
-	assetIds      *string
-	domains       *string
-	ids           *string
-	names         *ListIssuesNamesParameter
-	scanIds       *string
-	tagIds        *string
-	search        *string
-	jiraTicket    *string
-	risks         *[]string
-	assetClasses  *[]string
-	scannerKinds  *[]string
-	severities    *[]string
-	status        *[]string
+	ctx              context.Context
+	ApiService       *IssuesAPIService
+	cursor           *string
+	size             *int
+	sortType         *string
+	sortDirection    *string
+	profileIds       *string
+	assetIds         *string
+	domains          *string
+	ids              *string
+	names            *ListIssuesNamesParameter
+	scanIds          *string
+	tagIds           *string
+	projectIds       *ListScansProjectIdsParameter
+	targetIds        *ListIssuesTargetIdsParameter
+	securityTestUids *ListIssuesSecurityTestUidsParameter
+	blacklistedIds   *ListIssuesBlacklistedIdsParameter
+	blacklistedNames *ListIssuesBlacklistedNamesParameter
+	search           *string
+	jiraTicket       *string
+	noTags           *string
+	aiFalsePositive  *string
+	agentic          *string
+	risks            *[]string
+	assetClasses     *[]string
+	categories       *[]string
+	assetTypes       *[]string
+	assetStatuses    *[]string
+	scannerKinds     *[]string
+	severities       *[]string
+	status           *[]string
+	dnf              *string
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
@@ -934,7 +1093,7 @@ func (r ApiListIssuesRequest) Ids(ids string) ApiListIssuesRequest {
 	return r
 }
 
-// Filter by issue names
+// Filter by issue full name (the display name including risk characteristics, e.g. &#39;SQL injection found on external-facing asset&#39;)
 func (r ApiListIssuesRequest) Names(names ListIssuesNamesParameter) ApiListIssuesRequest {
 	r.names = &names
 	return r
@@ -952,6 +1111,36 @@ func (r ApiListIssuesRequest) TagIds(tagIds string) ApiListIssuesRequest {
 	return r
 }
 
+// Filter by project IDs
+func (r ApiListIssuesRequest) ProjectIds(projectIds ListScansProjectIdsParameter) ApiListIssuesRequest {
+	r.projectIds = &projectIds
+	return r
+}
+
+// Filter by target IDs
+func (r ApiListIssuesRequest) TargetIds(targetIds ListIssuesTargetIdsParameter) ApiListIssuesRequest {
+	r.targetIds = &targetIds
+	return r
+}
+
+// Filter by security test UIDs
+func (r ApiListIssuesRequest) SecurityTestUids(securityTestUids ListIssuesSecurityTestUidsParameter) ApiListIssuesRequest {
+	r.securityTestUids = &securityTestUids
+	return r
+}
+
+// Exclude these issue IDs
+func (r ApiListIssuesRequest) BlacklistedIds(blacklistedIds ListIssuesBlacklistedIdsParameter) ApiListIssuesRequest {
+	r.blacklistedIds = &blacklistedIds
+	return r
+}
+
+// Exclude issues by their raw name (e.g. &#39;SQL injection&#39;)
+func (r ApiListIssuesRequest) BlacklistedNames(blacklistedNames ListIssuesBlacklistedNamesParameter) ApiListIssuesRequest {
+	r.blacklistedNames = &blacklistedNames
+	return r
+}
+
 // Search term to filter issues by name or description
 func (r ApiListIssuesRequest) Search(search string) ApiListIssuesRequest {
 	r.search = &search
@@ -964,6 +1153,24 @@ func (r ApiListIssuesRequest) JiraTicket(jiraTicket string) ApiListIssuesRequest
 	return r
 }
 
+// Filter by issues whose assets have no tags. Only &#x60;true&#x60; is supported: the API cannot express \&quot;assets that have tags\&quot;, so &#x60;false&#x60; is rejected instead of silently matching every issue.
+func (r ApiListIssuesRequest) NoTags(noTags string) ApiListIssuesRequest {
+	r.noTags = &noTags
+	return r
+}
+
+// Filter by AI false positive classification
+func (r ApiListIssuesRequest) AiFalsePositive(aiFalsePositive string) ApiListIssuesRequest {
+	r.aiFalsePositive = &aiFalsePositive
+	return r
+}
+
+// Filter by agentic (AI pentest) issues
+func (r ApiListIssuesRequest) Agentic(agentic string) ApiListIssuesRequest {
+	r.agentic = &agentic
+	return r
+}
+
 // Filter by risk types
 func (r ApiListIssuesRequest) Risks(risks []string) ApiListIssuesRequest {
 	r.risks = &risks
@@ -973,6 +1180,24 @@ func (r ApiListIssuesRequest) Risks(risks []string) ApiListIssuesRequest {
 // Filter by asset classes
 func (r ApiListIssuesRequest) AssetClasses(assetClasses []string) ApiListIssuesRequest {
 	r.assetClasses = &assetClasses
+	return r
+}
+
+// Filter by issue categories
+func (r ApiListIssuesRequest) Categories(categories []string) ApiListIssuesRequest {
+	r.categories = &categories
+	return r
+}
+
+// Filter by asset types
+func (r ApiListIssuesRequest) AssetTypes(assetTypes []string) ApiListIssuesRequest {
+	r.assetTypes = &assetTypes
+	return r
+}
+
+// Filter by asset statuses
+func (r ApiListIssuesRequest) AssetStatuses(assetStatuses []string) ApiListIssuesRequest {
+	r.assetStatuses = &assetStatuses
 	return r
 }
 
@@ -991,6 +1216,12 @@ func (r ApiListIssuesRequest) Severities(severities []string) ApiListIssuesReque
 // Filter by issue status
 func (r ApiListIssuesRequest) Status(status []string) ApiListIssuesRequest {
 	r.status = &status
+	return r
+}
+
+// Advanced filter as a DNF expression (URL-encoded JSON object)
+func (r ApiListIssuesRequest) Dnf(dnf string) ApiListIssuesRequest {
+	r.dnf = &dnf
 	return r
 }
 
@@ -1074,11 +1305,35 @@ func (a *IssuesAPIService) ListIssuesExecute(r ApiListIssuesRequest) (*ListIssue
 	if r.tagIds != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "tagIds", r.tagIds, "form", "")
 	}
+	if r.projectIds != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "projectIds", r.projectIds, "form", "")
+	}
+	if r.targetIds != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "targetIds", r.targetIds, "form", "")
+	}
+	if r.securityTestUids != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "securityTestUids", r.securityTestUids, "form", "")
+	}
+	if r.blacklistedIds != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "blacklistedIds", r.blacklistedIds, "form", "")
+	}
+	if r.blacklistedNames != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "blacklistedNames", r.blacklistedNames, "form", "")
+	}
 	if r.search != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")
 	}
 	if r.jiraTicket != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "jiraTicket", r.jiraTicket, "form", "")
+	}
+	if r.noTags != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "noTags", r.noTags, "form", "")
+	}
+	if r.aiFalsePositive != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "aiFalsePositive", r.aiFalsePositive, "form", "")
+	}
+	if r.agentic != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "agentic", r.agentic, "form", "")
 	}
 	if r.risks != nil {
 		t := *r.risks
@@ -1100,6 +1355,39 @@ func (a *IssuesAPIService) ListIssuesExecute(r ApiListIssuesRequest) (*ListIssue
 			}
 		} else {
 			parameterAddToHeaderOrQuery(localVarQueryParams, "assetClasses", t, "form", "multi")
+		}
+	}
+	if r.categories != nil {
+		t := *r.categories
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "categories", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "categories", t, "form", "multi")
+		}
+	}
+	if r.assetTypes != nil {
+		t := *r.assetTypes
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "assetTypes", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "assetTypes", t, "form", "multi")
+		}
+	}
+	if r.assetStatuses != nil {
+		t := *r.assetStatuses
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "assetStatuses", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "assetStatuses", t, "form", "multi")
 		}
 	}
 	if r.scannerKinds != nil {
@@ -1134,6 +1422,9 @@ func (a *IssuesAPIService) ListIssuesExecute(r ApiListIssuesRequest) (*ListIssue
 		} else {
 			parameterAddToHeaderOrQuery(localVarQueryParams, "status", t, "form", "multi")
 		}
+	}
+	if r.dnf != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "dnf", r.dnf, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1326,6 +1617,153 @@ func (a *IssuesAPIService) NotifyIssueOwnersExecute(r ApiNotifyIssueOwnersReques
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
 			var v BadRequest
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiSaveIssueAiRemediationFeedbackRequest struct {
+	ctx                                   context.Context
+	ApiService                            *IssuesAPIService
+	issueId                               string
+	saveIssueAiRemediationFeedbackRequest *SaveIssueAiRemediationFeedbackRequest
+}
+
+func (r ApiSaveIssueAiRemediationFeedbackRequest) SaveIssueAiRemediationFeedbackRequest(saveIssueAiRemediationFeedbackRequest SaveIssueAiRemediationFeedbackRequest) ApiSaveIssueAiRemediationFeedbackRequest {
+	r.saveIssueAiRemediationFeedbackRequest = &saveIssueAiRemediationFeedbackRequest
+	return r
+}
+
+func (r ApiSaveIssueAiRemediationFeedbackRequest) Execute() (*SaveIssueAiRemediationFeedback200Response, *http.Response, error) {
+	return r.ApiService.SaveIssueAiRemediationFeedbackExecute(r)
+}
+
+/*
+SaveIssueAiRemediationFeedback Send feedback on AI remediation
+
+Record whether an AI remediation artefact was useful. Use `kind` to choose the full issue-panel remediation (`aiRemediationFeedback`) or the short overview summary (`aiRemediationSummaryFeedback`). Pass `feedback: null` to clear a previous rating.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param issueId The issue ID
+	@return ApiSaveIssueAiRemediationFeedbackRequest
+*/
+func (a *IssuesAPIService) SaveIssueAiRemediationFeedback(ctx context.Context, issueId string) ApiSaveIssueAiRemediationFeedbackRequest {
+	return ApiSaveIssueAiRemediationFeedbackRequest{
+		ApiService: a,
+		ctx:        ctx,
+		issueId:    issueId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return SaveIssueAiRemediationFeedback200Response
+func (a *IssuesAPIService) SaveIssueAiRemediationFeedbackExecute(r ApiSaveIssueAiRemediationFeedbackRequest) (*SaveIssueAiRemediationFeedback200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *SaveIssueAiRemediationFeedback200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IssuesAPIService.SaveIssueAiRemediationFeedback")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/issues/{issueId}/ai-remediation/feedback"
+	localVarPath = strings.Replace(localVarPath, "{"+"issueId"+"}", url.PathEscape(parameterValueToString(r.issueId, "issueId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.saveIssueAiRemediationFeedbackRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v BadRequest
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v NotFound
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

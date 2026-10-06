@@ -156,6 +156,153 @@ func (a *ProfilesAPIService) CreateAiPentestProfileExecute(r ApiCreateAiPentestP
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiCreateContinuousPentestRequest struct {
+	ctx                          context.Context
+	ApiService                   *ProfilesAPIService
+	profileId                    string
+	continuousPentestCreateInput *ContinuousPentestCreateInput
+}
+
+func (r ApiCreateContinuousPentestRequest) ContinuousPentestCreateInput(continuousPentestCreateInput ContinuousPentestCreateInput) ApiCreateContinuousPentestRequest {
+	r.continuousPentestCreateInput = &continuousPentestCreateInput
+	return r
+}
+
+func (r ApiCreateContinuousPentestRequest) Execute() (*UpdateContinuousPentest200Response, *http.Response, error) {
+	return r.ApiService.CreateContinuousPentestExecute(r)
+}
+
+/*
+CreateContinuousPentest Create a continuous pentest
+
+Set up continuous pentesting on an AI Pentest profile: watch repositories on branches and review diffs on a cron. Each repository must be visible to a GitHub App installation.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param profileId The AI Pentest profile ID
+	@return ApiCreateContinuousPentestRequest
+*/
+func (a *ProfilesAPIService) CreateContinuousPentest(ctx context.Context, profileId string) ApiCreateContinuousPentestRequest {
+	return ApiCreateContinuousPentestRequest{
+		ApiService: a,
+		ctx:        ctx,
+		profileId:  profileId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return UpdateContinuousPentest200Response
+func (a *ProfilesAPIService) CreateContinuousPentestExecute(r ApiCreateContinuousPentestRequest) (*UpdateContinuousPentest200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UpdateContinuousPentest200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProfilesAPIService.CreateContinuousPentest")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/profiles/{profileId}/continuous-pentest"
+	localVarPath = strings.Replace(localVarPath, "{"+"profileId"+"}", url.PathEscape(parameterValueToString(r.profileId, "profileId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.continuousPentestCreateInput
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v BadRequest
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v NotFound
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiCreateDastGraphqlProfileRequest struct {
 	ctx                          context.Context
 	ApiService                   *ProfilesAPIService
@@ -694,6 +841,292 @@ func (a *ProfilesAPIService) DeleteProfileExecute(r ApiDeleteProfileRequest) (*D
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiDisableContinuousPentestRequest struct {
+	ctx        context.Context
+	ApiService *ProfilesAPIService
+	profileId  string
+}
+
+func (r ApiDisableContinuousPentestRequest) Execute() (*UpdateContinuousPentest200Response, *http.Response, error) {
+	return r.ApiService.DisableContinuousPentestExecute(r)
+}
+
+/*
+DisableContinuousPentest Disable a continuous pentest
+
+Stop the timer and keep the repositories. A run in flight still finishes.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param profileId The AI Pentest profile ID
+	@return ApiDisableContinuousPentestRequest
+*/
+func (a *ProfilesAPIService) DisableContinuousPentest(ctx context.Context, profileId string) ApiDisableContinuousPentestRequest {
+	return ApiDisableContinuousPentestRequest{
+		ApiService: a,
+		ctx:        ctx,
+		profileId:  profileId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return UpdateContinuousPentest200Response
+func (a *ProfilesAPIService) DisableContinuousPentestExecute(r ApiDisableContinuousPentestRequest) (*UpdateContinuousPentest200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UpdateContinuousPentest200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProfilesAPIService.DisableContinuousPentest")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/profiles/{profileId}/continuous-pentest/disable"
+	localVarPath = strings.Replace(localVarPath, "{"+"profileId"+"}", url.PathEscape(parameterValueToString(r.profileId, "profileId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v BadRequest
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v NotFound
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiEnableContinuousPentestRequest struct {
+	ctx                          context.Context
+	ApiService                   *ProfilesAPIService
+	profileId                    string
+	continuousPentestEnableInput *ContinuousPentestEnableInput
+}
+
+func (r ApiEnableContinuousPentestRequest) ContinuousPentestEnableInput(continuousPentestEnableInput ContinuousPentestEnableInput) ApiEnableContinuousPentestRequest {
+	r.continuousPentestEnableInput = &continuousPentestEnableInput
+	return r
+}
+
+func (r ApiEnableContinuousPentestRequest) Execute() (*UpdateContinuousPentest200Response, *http.Response, error) {
+	return r.ApiService.EnableContinuousPentestExecute(r)
+}
+
+/*
+EnableContinuousPentest Enable a continuous pentest
+
+Turn the timer back on, optionally replacing the watched repositories. Each repository restarts at its current head. The cron is required, since disabling clears it.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param profileId The AI Pentest profile ID
+	@return ApiEnableContinuousPentestRequest
+*/
+func (a *ProfilesAPIService) EnableContinuousPentest(ctx context.Context, profileId string) ApiEnableContinuousPentestRequest {
+	return ApiEnableContinuousPentestRequest{
+		ApiService: a,
+		ctx:        ctx,
+		profileId:  profileId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return UpdateContinuousPentest200Response
+func (a *ProfilesAPIService) EnableContinuousPentestExecute(r ApiEnableContinuousPentestRequest) (*UpdateContinuousPentest200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UpdateContinuousPentest200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProfilesAPIService.EnableContinuousPentest")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/profiles/{profileId}/continuous-pentest/enable"
+	localVarPath = strings.Replace(localVarPath, "{"+"profileId"+"}", url.PathEscape(parameterValueToString(r.profileId, "profileId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.continuousPentestEnableInput
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v BadRequest
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v NotFound
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetAuthenticationRequest struct {
 	ctx              context.Context
 	ApiService       *ProfilesAPIService
@@ -951,20 +1384,32 @@ func (a *ProfilesAPIService) GetProfileExecute(r ApiGetProfileRequest) (*GetProf
 }
 
 type ApiListProfilesRequest struct {
-	ctx           context.Context
-	ApiService    *ProfilesAPIService
-	cursor        *string
-	size          *int
-	sortType      *string
-	sortDirection *string
-	assetIds      *string
-	domains       *string
-	issueIds      *string
-	tagIds        *string
-	search        *string
-	initiators    *[]string
-	kinds         *[]string
-	risks         *[]string
+	ctx               context.Context
+	ApiService        *ProfilesAPIService
+	cursor            *string
+	size              *int
+	sortType          *string
+	sortDirection     *string
+	search            *string
+	assetIds          *string
+	assetSchemaIds    *ListProfilesAssetSchemaIdsParameter
+	assetTypes        *[]string
+	assetStatuses     *[]string
+	domains           *string
+	ids               *string
+	issueIds          *string
+	tagIds            *string
+	projectIds        *ListProfilesProjectIdsParameter
+	scanIds           *string
+	initiators        *[]string
+	kinds             *[]string
+	lastScanStatuses  *[]string
+	risks             *[]string
+	problemCodes      *[]string
+	problemSeverities *[]string
+	noProjects        *string
+	noTags            *string
+	dnf               *string
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
@@ -991,15 +1436,45 @@ func (r ApiListProfilesRequest) SortDirection(sortDirection string) ApiListProfi
 	return r
 }
 
+// Search term to filter profiles by name or description
+func (r ApiListProfilesRequest) Search(search string) ApiListProfilesRequest {
+	r.search = &search
+	return r
+}
+
 // Filter by asset IDs
 func (r ApiListProfilesRequest) AssetIds(assetIds string) ApiListProfilesRequest {
 	r.assetIds = &assetIds
 	return r
 }
 
+// Filter by asset schema IDs
+func (r ApiListProfilesRequest) AssetSchemaIds(assetSchemaIds ListProfilesAssetSchemaIdsParameter) ApiListProfilesRequest {
+	r.assetSchemaIds = &assetSchemaIds
+	return r
+}
+
+// Filter by asset types
+func (r ApiListProfilesRequest) AssetTypes(assetTypes []string) ApiListProfilesRequest {
+	r.assetTypes = &assetTypes
+	return r
+}
+
+// Filter by asset statuses
+func (r ApiListProfilesRequest) AssetStatuses(assetStatuses []string) ApiListProfilesRequest {
+	r.assetStatuses = &assetStatuses
+	return r
+}
+
 // Filter by domain
 func (r ApiListProfilesRequest) Domains(domains string) ApiListProfilesRequest {
 	r.domains = &domains
+	return r
+}
+
+// Filter by profile IDs
+func (r ApiListProfilesRequest) Ids(ids string) ApiListProfilesRequest {
+	r.ids = &ids
 	return r
 }
 
@@ -1015,9 +1490,15 @@ func (r ApiListProfilesRequest) TagIds(tagIds string) ApiListProfilesRequest {
 	return r
 }
 
-// Search term to filter profiles by name or description
-func (r ApiListProfilesRequest) Search(search string) ApiListProfilesRequest {
-	r.search = &search
+// Filter by project IDs
+func (r ApiListProfilesRequest) ProjectIds(projectIds ListProfilesProjectIdsParameter) ApiListProfilesRequest {
+	r.projectIds = &projectIds
+	return r
+}
+
+// Filter by scan IDs
+func (r ApiListProfilesRequest) ScanIds(scanIds string) ApiListProfilesRequest {
+	r.scanIds = &scanIds
 	return r
 }
 
@@ -1033,9 +1514,45 @@ func (r ApiListProfilesRequest) Kinds(kinds []string) ApiListProfilesRequest {
 	return r
 }
 
+// Filter by last scan statuses
+func (r ApiListProfilesRequest) LastScanStatuses(lastScanStatuses []string) ApiListProfilesRequest {
+	r.lastScanStatuses = &lastScanStatuses
+	return r
+}
+
 // Filter by risk
 func (r ApiListProfilesRequest) Risks(risks []string) ApiListProfilesRequest {
 	r.risks = &risks
+	return r
+}
+
+// Filter by problem codes
+func (r ApiListProfilesRequest) ProblemCodes(problemCodes []string) ApiListProfilesRequest {
+	r.problemCodes = &problemCodes
+	return r
+}
+
+// Filter by problem severities
+func (r ApiListProfilesRequest) ProblemSeverities(problemSeverities []string) ApiListProfilesRequest {
+	r.problemSeverities = &problemSeverities
+	return r
+}
+
+// Filter by profiles with no projects
+func (r ApiListProfilesRequest) NoProjects(noProjects string) ApiListProfilesRequest {
+	r.noProjects = &noProjects
+	return r
+}
+
+// Filter by profiles with no tags
+func (r ApiListProfilesRequest) NoTags(noTags string) ApiListProfilesRequest {
+	r.noTags = &noTags
+	return r
+}
+
+// Filter by DNF expression
+func (r ApiListProfilesRequest) Dnf(dnf string) ApiListProfilesRequest {
+	r.dnf = &dnf
 	return r
 }
 
@@ -1098,11 +1615,42 @@ func (a *ProfilesAPIService) ListProfilesExecute(r ApiListProfilesRequest) (*Lis
 		var defaultValue string = "asc"
 		r.sortDirection = &defaultValue
 	}
+	if r.search != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")
+	}
 	if r.assetIds != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "assetIds", r.assetIds, "form", "")
 	}
+	if r.assetSchemaIds != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "assetSchemaIds", r.assetSchemaIds, "form", "")
+	}
+	if r.assetTypes != nil {
+		t := *r.assetTypes
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "assetTypes", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "assetTypes", t, "form", "multi")
+		}
+	}
+	if r.assetStatuses != nil {
+		t := *r.assetStatuses
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "assetStatuses", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "assetStatuses", t, "form", "multi")
+		}
+	}
 	if r.domains != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "domains", r.domains, "form", "")
+	}
+	if r.ids != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "ids", r.ids, "form", "")
 	}
 	if r.issueIds != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "issueIds", r.issueIds, "form", "")
@@ -1110,8 +1658,11 @@ func (a *ProfilesAPIService) ListProfilesExecute(r ApiListProfilesRequest) (*Lis
 	if r.tagIds != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "tagIds", r.tagIds, "form", "")
 	}
-	if r.search != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")
+	if r.projectIds != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "projectIds", r.projectIds, "form", "")
+	}
+	if r.scanIds != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "scanIds", r.scanIds, "form", "")
 	}
 	if r.initiators != nil {
 		t := *r.initiators
@@ -1135,6 +1686,17 @@ func (a *ProfilesAPIService) ListProfilesExecute(r ApiListProfilesRequest) (*Lis
 			parameterAddToHeaderOrQuery(localVarQueryParams, "kinds", t, "form", "multi")
 		}
 	}
+	if r.lastScanStatuses != nil {
+		t := *r.lastScanStatuses
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "lastScanStatuses", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "lastScanStatuses", t, "form", "multi")
+		}
+	}
 	if r.risks != nil {
 		t := *r.risks
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
@@ -1145,6 +1707,37 @@ func (a *ProfilesAPIService) ListProfilesExecute(r ApiListProfilesRequest) (*Lis
 		} else {
 			parameterAddToHeaderOrQuery(localVarQueryParams, "risks", t, "form", "multi")
 		}
+	}
+	if r.problemCodes != nil {
+		t := *r.problemCodes
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "problemCodes", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "problemCodes", t, "form", "multi")
+		}
+	}
+	if r.problemSeverities != nil {
+		t := *r.problemSeverities
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "problemSeverities", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "problemSeverities", t, "form", "multi")
+		}
+	}
+	if r.noProjects != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "noProjects", r.noProjects, "form", "")
+	}
+	if r.noTags != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "noTags", r.noTags, "form", "")
+	}
+	if r.dnf != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "dnf", r.dnf, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1607,6 +2200,153 @@ func (a *ProfilesAPIService) StartAuthenticationExecute(r ApiStartAuthentication
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
 			var v BadRequest
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiUpdateContinuousPentestRequest struct {
+	ctx                          context.Context
+	ApiService                   *ProfilesAPIService
+	profileId                    string
+	continuousPentestUpdateInput *ContinuousPentestUpdateInput
+}
+
+func (r ApiUpdateContinuousPentestRequest) ContinuousPentestUpdateInput(continuousPentestUpdateInput ContinuousPentestUpdateInput) ApiUpdateContinuousPentestRequest {
+	r.continuousPentestUpdateInput = &continuousPentestUpdateInput
+	return r
+}
+
+func (r ApiUpdateContinuousPentestRequest) Execute() (*UpdateContinuousPentest200Response, *http.Response, error) {
+	return r.ApiService.UpdateContinuousPentestExecute(r)
+}
+
+/*
+UpdateContinuousPentest Update a continuous pentest
+
+Edit the watched repositories and the cadence of an enabled continuous pentest. Omitted fields are left unchanged. Refuses a disabled setup: re-enable it instead.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param profileId The AI Pentest profile ID
+	@return ApiUpdateContinuousPentestRequest
+*/
+func (a *ProfilesAPIService) UpdateContinuousPentest(ctx context.Context, profileId string) ApiUpdateContinuousPentestRequest {
+	return ApiUpdateContinuousPentestRequest{
+		ApiService: a,
+		ctx:        ctx,
+		profileId:  profileId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return UpdateContinuousPentest200Response
+func (a *ProfilesAPIService) UpdateContinuousPentestExecute(r ApiUpdateContinuousPentestRequest) (*UpdateContinuousPentest200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UpdateContinuousPentest200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProfilesAPIService.UpdateContinuousPentest")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/profiles/{profileId}/continuous-pentest"
+	localVarPath = strings.Replace(localVarPath, "{"+"profileId"+"}", url.PathEscape(parameterValueToString(r.profileId, "profileId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.continuousPentestUpdateInput
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v BadRequest
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v NotFound
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

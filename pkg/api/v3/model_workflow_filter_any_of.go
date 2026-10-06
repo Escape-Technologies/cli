@@ -19,16 +19,16 @@ var _ MappedNullable = &WorkflowFilterAnyOf{}
 
 // WorkflowFilterAnyOf struct for WorkflowFilterAnyOf
 type WorkflowFilterAnyOf struct {
-	Severities []ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS              `json:"severities,omitempty"`
-	Risks      []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS `json:"risks,omitempty"`
-	ProjectIds []string                                                     `json:"projectIds,omitempty"`
+	Severities []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY `json:"severities,omitempty"`
+	Risks      []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS                                                            `json:"risks,omitempty"`
+	ProjectIds []string                                                                                                                `json:"projectIds,omitempty"`
 	// Deprecated, use profileIds instead
 	ApplicationIds       []string                                                            `json:"applicationIds,omitempty"`
 	ProfileIds           []string                                                            `json:"profileIds,omitempty"`
 	AssetIds             []string                                                            `json:"assetIds,omitempty"`
 	JiraTicket           *bool                                                               `json:"jiraTicket,omitempty"`
 	Search               *string                                                             `json:"search,omitempty"`
-	Categories           []ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY                         `json:"categories,omitempty"`
+	Categories           []ENUMPROPERTIESISSUEPROPERTIESCATEGORIESITEMSPROPERTIESCATEGORY    `json:"categories,omitempty"`
 	ScannerKinds         []ENUMPROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS                   `json:"scannerKinds,omitempty"`
 	AssetClasses         []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS  `json:"assetClasses,omitempty"`
 	AssetTypes           []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE   `json:"assetTypes,omitempty"`
@@ -72,9 +72,9 @@ func NewWorkflowFilterAnyOfWithDefaults() *WorkflowFilterAnyOf {
 }
 
 // GetSeverities returns the Severities field value if set, zero value otherwise.
-func (o *WorkflowFilterAnyOf) GetSeverities() []ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS {
+func (o *WorkflowFilterAnyOf) GetSeverities() []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY {
 	if o == nil || IsNil(o.Severities) {
-		var ret []ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS
+		var ret []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY
 		return ret
 	}
 	return o.Severities
@@ -82,7 +82,7 @@ func (o *WorkflowFilterAnyOf) GetSeverities() []ENUMPROPERTIESFILTERPROPERTIESSE
 
 // GetSeveritiesOk returns a tuple with the Severities field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *WorkflowFilterAnyOf) GetSeveritiesOk() ([]ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS, bool) {
+func (o *WorkflowFilterAnyOf) GetSeveritiesOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY, bool) {
 	if o == nil || IsNil(o.Severities) {
 		return nil, false
 	}
@@ -98,8 +98,8 @@ func (o *WorkflowFilterAnyOf) HasSeverities() bool {
 	return false
 }
 
-// SetSeverities gets a reference to the given []ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS and assigns it to the Severities field.
-func (o *WorkflowFilterAnyOf) SetSeverities(v []ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS) {
+// SetSeverities gets a reference to the given []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY and assigns it to the Severities field.
+func (o *WorkflowFilterAnyOf) SetSeverities(v []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY) {
 	o.Severities = v
 }
 
@@ -328,9 +328,9 @@ func (o *WorkflowFilterAnyOf) SetSearch(v string) {
 }
 
 // GetCategories returns the Categories field value if set, zero value otherwise.
-func (o *WorkflowFilterAnyOf) GetCategories() []ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY {
+func (o *WorkflowFilterAnyOf) GetCategories() []ENUMPROPERTIESISSUEPROPERTIESCATEGORIESITEMSPROPERTIESCATEGORY {
 	if o == nil || IsNil(o.Categories) {
-		var ret []ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY
+		var ret []ENUMPROPERTIESISSUEPROPERTIESCATEGORIESITEMSPROPERTIESCATEGORY
 		return ret
 	}
 	return o.Categories
@@ -338,7 +338,7 @@ func (o *WorkflowFilterAnyOf) GetCategories() []ENUMPROPERTIESDATAITEMSPROPERTIE
 
 // GetCategoriesOk returns a tuple with the Categories field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *WorkflowFilterAnyOf) GetCategoriesOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY, bool) {
+func (o *WorkflowFilterAnyOf) GetCategoriesOk() ([]ENUMPROPERTIESISSUEPROPERTIESCATEGORIESITEMSPROPERTIESCATEGORY, bool) {
 	if o == nil || IsNil(o.Categories) {
 		return nil, false
 	}
@@ -354,8 +354,8 @@ func (o *WorkflowFilterAnyOf) HasCategories() bool {
 	return false
 }
 
-// SetCategories gets a reference to the given []ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY and assigns it to the Categories field.
-func (o *WorkflowFilterAnyOf) SetCategories(v []ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY) {
+// SetCategories gets a reference to the given []ENUMPROPERTIESISSUEPROPERTIESCATEGORIESITEMSPROPERTIESCATEGORY and assigns it to the Categories field.
+func (o *WorkflowFilterAnyOf) SetCategories(v []ENUMPROPERTIESISSUEPROPERTIESCATEGORIESITEMSPROPERTIESCATEGORY) {
 	o.Categories = v
 }
 

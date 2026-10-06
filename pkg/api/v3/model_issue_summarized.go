@@ -25,9 +25,9 @@ type IssueSummarized struct {
 	// The name of the issue
 	Name string `json:"name"`
 	// The full name of the issue
-	FullName string                                        `json:"fullName"`
-	Category ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY     `json:"category"`
-	Severity ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS `json:"severity"`
+	FullName string                                                                                                                `json:"fullName"`
+	Category ENUMPROPERTIESISSUEPROPERTIESCATEGORIESITEMSPROPERTIESCATEGORY                                                        `json:"category"`
+	Severity ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY `json:"severity"`
 	// Whether the severity has been manually overridden
 	ManualSeverity bool                                      `json:"manualSeverity"`
 	Status         ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS `json:"status"`
@@ -57,7 +57,7 @@ type _IssueSummarized IssueSummarized
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIssueSummarized(id string, name string, fullName string, category ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY, severity ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS, manualSeverity bool, status ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS, context string, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, alertUid string, createdAt string, asset AssetSummarized1, links IssueSummarizedLinks) *IssueSummarized {
+func NewIssueSummarized(id string, name string, fullName string, category ENUMPROPERTIESISSUEPROPERTIESCATEGORIESITEMSPROPERTIESCATEGORY, severity ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY, manualSeverity bool, status ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS, context string, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, alertUid string, createdAt string, asset AssetSummarized1, links IssueSummarizedLinks) *IssueSummarized {
 	this := IssueSummarized{}
 	this.Id = id
 	this.Name = name
@@ -156,9 +156,9 @@ func (o *IssueSummarized) SetFullName(v string) {
 }
 
 // GetCategory returns the Category field value
-func (o *IssueSummarized) GetCategory() ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY {
+func (o *IssueSummarized) GetCategory() ENUMPROPERTIESISSUEPROPERTIESCATEGORIESITEMSPROPERTIESCATEGORY {
 	if o == nil {
-		var ret ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY
+		var ret ENUMPROPERTIESISSUEPROPERTIESCATEGORIESITEMSPROPERTIESCATEGORY
 		return ret
 	}
 
@@ -167,7 +167,7 @@ func (o *IssueSummarized) GetCategory() ENUMPROPERTIESDATAITEMSPROPERTIESCATEGOR
 
 // GetCategoryOk returns a tuple with the Category field value
 // and a boolean to check if the value has been set.
-func (o *IssueSummarized) GetCategoryOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY, bool) {
+func (o *IssueSummarized) GetCategoryOk() (*ENUMPROPERTIESISSUEPROPERTIESCATEGORIESITEMSPROPERTIESCATEGORY, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -175,14 +175,14 @@ func (o *IssueSummarized) GetCategoryOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESCAT
 }
 
 // SetCategory sets field value
-func (o *IssueSummarized) SetCategory(v ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY) {
+func (o *IssueSummarized) SetCategory(v ENUMPROPERTIESISSUEPROPERTIESCATEGORIESITEMSPROPERTIESCATEGORY) {
 	o.Category = v
 }
 
 // GetSeverity returns the Severity field value
-func (o *IssueSummarized) GetSeverity() ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS {
+func (o *IssueSummarized) GetSeverity() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY {
 	if o == nil {
-		var ret ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS
+		var ret ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY
 		return ret
 	}
 
@@ -191,7 +191,7 @@ func (o *IssueSummarized) GetSeverity() ENUMPROPERTIESFILTERPROPERTIESSEVERITIES
 
 // GetSeverityOk returns a tuple with the Severity field value
 // and a boolean to check if the value has been set.
-func (o *IssueSummarized) GetSeverityOk() (*ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS, bool) {
+func (o *IssueSummarized) GetSeverityOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -199,7 +199,7 @@ func (o *IssueSummarized) GetSeverityOk() (*ENUMPROPERTIESFILTERPROPERTIESSEVERI
 }
 
 // SetSeverity sets field value
-func (o *IssueSummarized) SetSeverity(v ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS) {
+func (o *IssueSummarized) SetSeverity(v ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY) {
 	o.Severity = v
 }
 

@@ -53,6 +53,8 @@ func NewGetJob200Response(id string, status ENUMPROPERTIESSTATUS, kind ENUMPROPE
 // but it doesn't guarantee that properties required by API are set
 func NewGetJob200ResponseWithDefaults() *GetJob200Response {
 	this := GetJob200Response{}
+	var kind ENUMPROPERTIESKIND = ENUMPROPERTIESKIND_REMEDIATION
+	this.Kind = kind
 	return &this
 }
 

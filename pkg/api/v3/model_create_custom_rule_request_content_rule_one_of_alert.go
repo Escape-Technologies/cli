@@ -23,7 +23,7 @@ type CreateCustomRuleRequestContentRuleOneOfAlert struct {
 	Severity              ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESSEVERITY               `json:"severity"`
 	Name                  string                                                                              `json:"name"`
 	Context               string                                                                              `json:"context"`
-	Category              ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY                                           `json:"category"`
+	Category              ENUMPROPERTIESISSUEPROPERTIESCATEGORIESITEMSPROPERTIESCATEGORY                      `json:"category"`
 	Description           *string                                                                             `json:"description,omitempty"`
 	Remediation           *string                                                                             `json:"remediation,omitempty"`
 	Compliance            *CreateCustomRuleRequestContentRuleOneOfAlertCompliance                             `json:"compliance,omitempty"`
@@ -37,7 +37,7 @@ type _CreateCustomRuleRequestContentRuleOneOfAlert CreateCustomRuleRequestConten
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateCustomRuleRequestContentRuleOneOfAlert(severity ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESSEVERITY, name string, context string, category ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY) *CreateCustomRuleRequestContentRuleOneOfAlert {
+func NewCreateCustomRuleRequestContentRuleOneOfAlert(severity ENUMPROPERTIESCONTENTPROPERTIESRULE0PROPERTIESALERTPROPERTIESSEVERITY, name string, context string, category ENUMPROPERTIESISSUEPROPERTIESCATEGORIESITEMSPROPERTIESCATEGORY) *CreateCustomRuleRequestContentRuleOneOfAlert {
 	this := CreateCustomRuleRequestContentRuleOneOfAlert{}
 	this.Severity = severity
 	this.Name = name
@@ -127,9 +127,9 @@ func (o *CreateCustomRuleRequestContentRuleOneOfAlert) SetContext(v string) {
 }
 
 // GetCategory returns the Category field value
-func (o *CreateCustomRuleRequestContentRuleOneOfAlert) GetCategory() ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY {
+func (o *CreateCustomRuleRequestContentRuleOneOfAlert) GetCategory() ENUMPROPERTIESISSUEPROPERTIESCATEGORIESITEMSPROPERTIESCATEGORY {
 	if o == nil {
-		var ret ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY
+		var ret ENUMPROPERTIESISSUEPROPERTIESCATEGORIESITEMSPROPERTIESCATEGORY
 		return ret
 	}
 
@@ -138,7 +138,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOfAlert) GetCategory() ENUMPROPERT
 
 // GetCategoryOk returns a tuple with the Category field value
 // and a boolean to check if the value has been set.
-func (o *CreateCustomRuleRequestContentRuleOneOfAlert) GetCategoryOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY, bool) {
+func (o *CreateCustomRuleRequestContentRuleOneOfAlert) GetCategoryOk() (*ENUMPROPERTIESISSUEPROPERTIESCATEGORIESITEMSPROPERTIESCATEGORY, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -146,7 +146,7 @@ func (o *CreateCustomRuleRequestContentRuleOneOfAlert) GetCategoryOk() (*ENUMPRO
 }
 
 // SetCategory sets field value
-func (o *CreateCustomRuleRequestContentRuleOneOfAlert) SetCategory(v ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY) {
+func (o *CreateCustomRuleRequestContentRuleOneOfAlert) SetCategory(v ENUMPROPERTIESISSUEPROPERTIESCATEGORIESITEMSPROPERTIESCATEGORY) {
 	o.Category = v
 }
 

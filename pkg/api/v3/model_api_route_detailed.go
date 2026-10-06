@@ -37,8 +37,8 @@ type ApiRouteDetailed struct {
 	// The request count of the api route
 	RequestCount float32 `json:"requestCount"`
 	// Mean HTTP duration for this route in milliseconds, when available
-	MeanDuration *float32                                                     `json:"meanDuration,omitempty"`
-	Coverage     *ENUMPROPERTIESDATAITEMSPROPERTIESAPIROUTEPROPERTIESCOVERAGE `json:"coverage,omitempty"`
+	MeanDuration *float32                                    `json:"meanDuration,omitempty"`
+	Coverage     *ENUMPROPERTIESISSUEPROPERTIESCOVERAGEITEMS `json:"coverage,omitempty"`
 	// Per-user or per-session coverage breakdown when available
 	CoverageByUser []CoverageByUserEntry `json:"coverageByUser,omitempty"`
 	// The return type of the api route
@@ -307,9 +307,9 @@ func (o *ApiRouteDetailed) SetMeanDuration(v float32) {
 }
 
 // GetCoverage returns the Coverage field value if set, zero value otherwise.
-func (o *ApiRouteDetailed) GetCoverage() ENUMPROPERTIESDATAITEMSPROPERTIESAPIROUTEPROPERTIESCOVERAGE {
+func (o *ApiRouteDetailed) GetCoverage() ENUMPROPERTIESISSUEPROPERTIESCOVERAGEITEMS {
 	if o == nil || IsNil(o.Coverage) {
-		var ret ENUMPROPERTIESDATAITEMSPROPERTIESAPIROUTEPROPERTIESCOVERAGE
+		var ret ENUMPROPERTIESISSUEPROPERTIESCOVERAGEITEMS
 		return ret
 	}
 	return *o.Coverage
@@ -317,7 +317,7 @@ func (o *ApiRouteDetailed) GetCoverage() ENUMPROPERTIESDATAITEMSPROPERTIESAPIROU
 
 // GetCoverageOk returns a tuple with the Coverage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ApiRouteDetailed) GetCoverageOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESAPIROUTEPROPERTIESCOVERAGE, bool) {
+func (o *ApiRouteDetailed) GetCoverageOk() (*ENUMPROPERTIESISSUEPROPERTIESCOVERAGEITEMS, bool) {
 	if o == nil || IsNil(o.Coverage) {
 		return nil, false
 	}
@@ -333,8 +333,8 @@ func (o *ApiRouteDetailed) HasCoverage() bool {
 	return false
 }
 
-// SetCoverage gets a reference to the given ENUMPROPERTIESDATAITEMSPROPERTIESAPIROUTEPROPERTIESCOVERAGE and assigns it to the Coverage field.
-func (o *ApiRouteDetailed) SetCoverage(v ENUMPROPERTIESDATAITEMSPROPERTIESAPIROUTEPROPERTIESCOVERAGE) {
+// SetCoverage gets a reference to the given ENUMPROPERTIESISSUEPROPERTIESCOVERAGEITEMS and assigns it to the Coverage field.
+func (o *ApiRouteDetailed) SetCoverage(v ENUMPROPERTIESISSUEPROPERTIESCOVERAGEITEMS) {
 	o.Coverage = &v
 }
 

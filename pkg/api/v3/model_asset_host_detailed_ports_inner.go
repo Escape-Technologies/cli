@@ -20,7 +20,8 @@ var _ MappedNullable = &AssetHostDetailedPortsInner{}
 
 // AssetHostDetailedPortsInner struct for AssetHostDetailedPortsInner
 type AssetHostDetailedPortsInner struct {
-	Port                 float32 `json:"port"`
+	Port                 int      `json:"port"`
+	Protocols            []string `json:"protocols"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -30,9 +31,10 @@ type _AssetHostDetailedPortsInner AssetHostDetailedPortsInner
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAssetHostDetailedPortsInner(port float32) *AssetHostDetailedPortsInner {
+func NewAssetHostDetailedPortsInner(port int, protocols []string) *AssetHostDetailedPortsInner {
 	this := AssetHostDetailedPortsInner{}
 	this.Port = port
+	this.Protocols = protocols
 	return &this
 }
 
@@ -45,9 +47,9 @@ func NewAssetHostDetailedPortsInnerWithDefaults() *AssetHostDetailedPortsInner {
 }
 
 // GetPort returns the Port field value
-func (o *AssetHostDetailedPortsInner) GetPort() float32 {
+func (o *AssetHostDetailedPortsInner) GetPort() int {
 	if o == nil {
-		var ret float32
+		var ret int
 		return ret
 	}
 
@@ -56,7 +58,7 @@ func (o *AssetHostDetailedPortsInner) GetPort() float32 {
 
 // GetPortOk returns a tuple with the Port field value
 // and a boolean to check if the value has been set.
-func (o *AssetHostDetailedPortsInner) GetPortOk() (*float32, bool) {
+func (o *AssetHostDetailedPortsInner) GetPortOk() (*int, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -64,8 +66,32 @@ func (o *AssetHostDetailedPortsInner) GetPortOk() (*float32, bool) {
 }
 
 // SetPort sets field value
-func (o *AssetHostDetailedPortsInner) SetPort(v float32) {
+func (o *AssetHostDetailedPortsInner) SetPort(v int) {
 	o.Port = v
+}
+
+// GetProtocols returns the Protocols field value
+func (o *AssetHostDetailedPortsInner) GetProtocols() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+
+	return o.Protocols
+}
+
+// GetProtocolsOk returns a tuple with the Protocols field value
+// and a boolean to check if the value has been set.
+func (o *AssetHostDetailedPortsInner) GetProtocolsOk() ([]string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Protocols, true
+}
+
+// SetProtocols sets field value
+func (o *AssetHostDetailedPortsInner) SetProtocols(v []string) {
+	o.Protocols = v
 }
 
 func (o AssetHostDetailedPortsInner) MarshalJSON() ([]byte, error) {
@@ -79,6 +105,7 @@ func (o AssetHostDetailedPortsInner) MarshalJSON() ([]byte, error) {
 func (o AssetHostDetailedPortsInner) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["port"] = o.Port
+	toSerialize["protocols"] = o.Protocols
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -93,6 +120,7 @@ func (o *AssetHostDetailedPortsInner) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"port",
+		"protocols",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -123,6 +151,7 @@ func (o *AssetHostDetailedPortsInner) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "port")
+		delete(additionalProperties, "protocols")
 		o.AdditionalProperties = additionalProperties
 	}
 

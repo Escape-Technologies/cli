@@ -35,8 +35,8 @@ type GraphqlResolverDetailed struct {
 	// The request count for this resolver
 	RequestCount float32 `json:"requestCount"`
 	// Mean duration for this resolver in milliseconds, when available
-	MeanDuration *float32                                                     `json:"meanDuration,omitempty"`
-	Coverage     *ENUMPROPERTIESDATAITEMSPROPERTIESAPIROUTEPROPERTIESCOVERAGE `json:"coverage,omitempty"`
+	MeanDuration *float32                                    `json:"meanDuration,omitempty"`
+	Coverage     *ENUMPROPERTIESISSUEPROPERTIESCOVERAGEITEMS `json:"coverage,omitempty"`
 	// Per-user or per-session coverage breakdown when available
 	CoverageByUser []CoverageByUserEntry `json:"coverageByUser,omitempty"`
 	// GraphQL parent type (query, mutation, or subscription)
@@ -283,9 +283,9 @@ func (o *GraphqlResolverDetailed) SetMeanDuration(v float32) {
 }
 
 // GetCoverage returns the Coverage field value if set, zero value otherwise.
-func (o *GraphqlResolverDetailed) GetCoverage() ENUMPROPERTIESDATAITEMSPROPERTIESAPIROUTEPROPERTIESCOVERAGE {
+func (o *GraphqlResolverDetailed) GetCoverage() ENUMPROPERTIESISSUEPROPERTIESCOVERAGEITEMS {
 	if o == nil || IsNil(o.Coverage) {
-		var ret ENUMPROPERTIESDATAITEMSPROPERTIESAPIROUTEPROPERTIESCOVERAGE
+		var ret ENUMPROPERTIESISSUEPROPERTIESCOVERAGEITEMS
 		return ret
 	}
 	return *o.Coverage
@@ -293,7 +293,7 @@ func (o *GraphqlResolverDetailed) GetCoverage() ENUMPROPERTIESDATAITEMSPROPERTIE
 
 // GetCoverageOk returns a tuple with the Coverage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GraphqlResolverDetailed) GetCoverageOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESAPIROUTEPROPERTIESCOVERAGE, bool) {
+func (o *GraphqlResolverDetailed) GetCoverageOk() (*ENUMPROPERTIESISSUEPROPERTIESCOVERAGEITEMS, bool) {
 	if o == nil || IsNil(o.Coverage) {
 		return nil, false
 	}
@@ -309,8 +309,8 @@ func (o *GraphqlResolverDetailed) HasCoverage() bool {
 	return false
 }
 
-// SetCoverage gets a reference to the given ENUMPROPERTIESDATAITEMSPROPERTIESAPIROUTEPROPERTIESCOVERAGE and assigns it to the Coverage field.
-func (o *GraphqlResolverDetailed) SetCoverage(v ENUMPROPERTIESDATAITEMSPROPERTIESAPIROUTEPROPERTIESCOVERAGE) {
+// SetCoverage gets a reference to the given ENUMPROPERTIESISSUEPROPERTIESCOVERAGEITEMS and assigns it to the Coverage field.
+func (o *GraphqlResolverDetailed) SetCoverage(v ENUMPROPERTIESISSUEPROPERTIESCOVERAGEITEMS) {
 	o.Coverage = &v
 }
 

@@ -25,9 +25,9 @@ type GetIssue200Response struct {
 	// The name of the issue
 	Name string `json:"name"`
 	// The full name of the issue
-	FullName string                                        `json:"fullName"`
-	Category ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY     `json:"category"`
-	Severity ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS `json:"severity"`
+	FullName string                                                                                                                `json:"fullName"`
+	Category ENUMPROPERTIESISSUEPROPERTIESCATEGORIESITEMSPROPERTIESCATEGORY                                                        `json:"category"`
+	Severity ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY `json:"severity"`
 	// Whether the severity has been manually overridden
 	ManualSeverity bool                                      `json:"manualSeverity"`
 	Status         ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS `json:"status"`
@@ -50,9 +50,15 @@ type GetIssue200Response struct {
 	SecurityTest GetIssue200ResponseSecurityTest `json:"securityTest"`
 	// Framework used for AI remediation
 	AiRemediationFramework string `json:"aiRemediationFramework"`
-	// AI-generated remediation for the issue
-	Remediation *string                  `json:"remediation,omitempty"`
-	Cvss        *GetIssue200ResponseCvss `json:"cvss,omitempty"`
+	// Whether the full AI remediation (`remediation`) was rated useful. Null when no feedback was given
+	AiRemediationFeedback *bool `json:"aiRemediationFeedback,omitempty"`
+	// AI-generated remediation for the issue. Session credentials are redacted.
+	Remediation *string `json:"remediation,omitempty"`
+	// Short AI-generated remediation summary shown in the issue overview. Session credentials are redacted.
+	AiRemediationSummary *string `json:"aiRemediationSummary,omitempty"`
+	// Whether the AI remediation summary (`aiRemediationSummary`) was rated useful. Null when no feedback was given
+	AiRemediationSummaryFeedback *bool                    `json:"aiRemediationSummaryFeedback,omitempty"`
+	Cvss                         *GetIssue200ResponseCvss `json:"cvss,omitempty"`
 	// Compliances associated with the issue
 	Compliances []GetIssue200ResponseCompliancesInner `json:"compliances,omitempty"`
 	Links       IssueSummarizedLinks                  `json:"links"`
@@ -61,7 +67,27 @@ type GetIssue200Response struct {
 	// True when the last-seen scan has more than 5 events. Use GET /v3/events?issueIds=<id>&scanIds=<lastSeenScanId> for the full list.
 	LatestEventsTruncated *bool `json:"latestEventsTruncated,omitempty"`
 	// Scan targets associated with the issue, deduplicated
-	Targets              []IssueTarget `json:"targets"`
+	Targets []IssueTarget `json:"targets"`
+	// Summary of the finding (AI pentest findings)
+	Summary *string `json:"summary,omitempty"`
+	// Impact of the finding
+	Impact *string `json:"impact,omitempty"`
+	// Whether the finding was produced by an AI pentest agent
+	Agentic bool `json:"agentic"`
+	// Steps to reproduce the finding, in order
+	ReproductionSteps []IssueReproductionStep `json:"reproductionSteps"`
+	// Exploit or proof-of-concept payloads. Session credentials are redacted.
+	Exploits []string `json:"exploits"`
+	// Root causes of the finding, in order
+	Causes []IssueCause `json:"causes"`
+	// Attack chain steps (AI pentest findings), in order
+	AttackChain     []IssueAttackChainStep             `json:"attackChain"`
+	AiFalsePositive GetIssue200ResponseAiFalsePositive `json:"aiFalsePositive"`
+	Ticket          *IssueTicket                       `json:"ticket,omitempty"`
+	// Ready-to-use prompt that asks a coding agent to fix this finding
+	FixPrompt string `json:"fixPrompt"`
+	// ID of the retest validation tied to this issue, if any
+	RetestValidationId   *string `json:"retestValidationId,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -71,7 +97,7 @@ type _GetIssue200Response GetIssue200Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetIssue200Response(id string, name string, fullName string, category ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY, severity ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS, manualSeverity bool, status ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, alertUid string, createdAt string, asset AssetDetailed2, securityTest GetIssue200ResponseSecurityTest, aiRemediationFramework string, links IssueSummarizedLinks, targets []IssueTarget) *GetIssue200Response {
+func NewGetIssue200Response(id string, name string, fullName string, category ENUMPROPERTIESISSUEPROPERTIESCATEGORIESITEMSPROPERTIESCATEGORY, severity ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY, manualSeverity bool, status ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, alertUid string, createdAt string, asset AssetDetailed2, securityTest GetIssue200ResponseSecurityTest, aiRemediationFramework string, links IssueSummarizedLinks, targets []IssueTarget, agentic bool, reproductionSteps []IssueReproductionStep, exploits []string, causes []IssueCause, attackChain []IssueAttackChainStep, aiFalsePositive GetIssue200ResponseAiFalsePositive, fixPrompt string) *GetIssue200Response {
 	this := GetIssue200Response{}
 	this.Id = id
 	this.Name = name
@@ -88,6 +114,13 @@ func NewGetIssue200Response(id string, name string, fullName string, category EN
 	this.AiRemediationFramework = aiRemediationFramework
 	this.Links = links
 	this.Targets = targets
+	this.Agentic = agentic
+	this.ReproductionSteps = reproductionSteps
+	this.Exploits = exploits
+	this.Causes = causes
+	this.AttackChain = attackChain
+	this.AiFalsePositive = aiFalsePositive
+	this.FixPrompt = fixPrompt
 	return &this
 }
 
@@ -172,9 +205,9 @@ func (o *GetIssue200Response) SetFullName(v string) {
 }
 
 // GetCategory returns the Category field value
-func (o *GetIssue200Response) GetCategory() ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY {
+func (o *GetIssue200Response) GetCategory() ENUMPROPERTIESISSUEPROPERTIESCATEGORIESITEMSPROPERTIESCATEGORY {
 	if o == nil {
-		var ret ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY
+		var ret ENUMPROPERTIESISSUEPROPERTIESCATEGORIESITEMSPROPERTIESCATEGORY
 		return ret
 	}
 
@@ -183,7 +216,7 @@ func (o *GetIssue200Response) GetCategory() ENUMPROPERTIESDATAITEMSPROPERTIESCAT
 
 // GetCategoryOk returns a tuple with the Category field value
 // and a boolean to check if the value has been set.
-func (o *GetIssue200Response) GetCategoryOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY, bool) {
+func (o *GetIssue200Response) GetCategoryOk() (*ENUMPROPERTIESISSUEPROPERTIESCATEGORIESITEMSPROPERTIESCATEGORY, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -191,14 +224,14 @@ func (o *GetIssue200Response) GetCategoryOk() (*ENUMPROPERTIESDATAITEMSPROPERTIE
 }
 
 // SetCategory sets field value
-func (o *GetIssue200Response) SetCategory(v ENUMPROPERTIESDATAITEMSPROPERTIESCATEGORY) {
+func (o *GetIssue200Response) SetCategory(v ENUMPROPERTIESISSUEPROPERTIESCATEGORIESITEMSPROPERTIESCATEGORY) {
 	o.Category = v
 }
 
 // GetSeverity returns the Severity field value
-func (o *GetIssue200Response) GetSeverity() ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS {
+func (o *GetIssue200Response) GetSeverity() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY {
 	if o == nil {
-		var ret ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS
+		var ret ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY
 		return ret
 	}
 
@@ -207,7 +240,7 @@ func (o *GetIssue200Response) GetSeverity() ENUMPROPERTIESFILTERPROPERTIESSEVERI
 
 // GetSeverityOk returns a tuple with the Severity field value
 // and a boolean to check if the value has been set.
-func (o *GetIssue200Response) GetSeverityOk() (*ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS, bool) {
+func (o *GetIssue200Response) GetSeverityOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -215,7 +248,7 @@ func (o *GetIssue200Response) GetSeverityOk() (*ENUMPROPERTIESFILTERPROPERTIESSE
 }
 
 // SetSeverity sets field value
-func (o *GetIssue200Response) SetSeverity(v ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS) {
+func (o *GetIssue200Response) SetSeverity(v ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY) {
 	o.Severity = v
 }
 
@@ -571,6 +604,38 @@ func (o *GetIssue200Response) SetAiRemediationFramework(v string) {
 	o.AiRemediationFramework = v
 }
 
+// GetAiRemediationFeedback returns the AiRemediationFeedback field value if set, zero value otherwise.
+func (o *GetIssue200Response) GetAiRemediationFeedback() bool {
+	if o == nil || IsNil(o.AiRemediationFeedback) {
+		var ret bool
+		return ret
+	}
+	return *o.AiRemediationFeedback
+}
+
+// GetAiRemediationFeedbackOk returns a tuple with the AiRemediationFeedback field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetIssue200Response) GetAiRemediationFeedbackOk() (*bool, bool) {
+	if o == nil || IsNil(o.AiRemediationFeedback) {
+		return nil, false
+	}
+	return o.AiRemediationFeedback, true
+}
+
+// HasAiRemediationFeedback returns a boolean if a field has been set.
+func (o *GetIssue200Response) HasAiRemediationFeedback() bool {
+	if o != nil && !IsNil(o.AiRemediationFeedback) {
+		return true
+	}
+
+	return false
+}
+
+// SetAiRemediationFeedback gets a reference to the given bool and assigns it to the AiRemediationFeedback field.
+func (o *GetIssue200Response) SetAiRemediationFeedback(v bool) {
+	o.AiRemediationFeedback = &v
+}
+
 // GetRemediation returns the Remediation field value if set, zero value otherwise.
 func (o *GetIssue200Response) GetRemediation() string {
 	if o == nil || IsNil(o.Remediation) {
@@ -601,6 +666,70 @@ func (o *GetIssue200Response) HasRemediation() bool {
 // SetRemediation gets a reference to the given string and assigns it to the Remediation field.
 func (o *GetIssue200Response) SetRemediation(v string) {
 	o.Remediation = &v
+}
+
+// GetAiRemediationSummary returns the AiRemediationSummary field value if set, zero value otherwise.
+func (o *GetIssue200Response) GetAiRemediationSummary() string {
+	if o == nil || IsNil(o.AiRemediationSummary) {
+		var ret string
+		return ret
+	}
+	return *o.AiRemediationSummary
+}
+
+// GetAiRemediationSummaryOk returns a tuple with the AiRemediationSummary field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetIssue200Response) GetAiRemediationSummaryOk() (*string, bool) {
+	if o == nil || IsNil(o.AiRemediationSummary) {
+		return nil, false
+	}
+	return o.AiRemediationSummary, true
+}
+
+// HasAiRemediationSummary returns a boolean if a field has been set.
+func (o *GetIssue200Response) HasAiRemediationSummary() bool {
+	if o != nil && !IsNil(o.AiRemediationSummary) {
+		return true
+	}
+
+	return false
+}
+
+// SetAiRemediationSummary gets a reference to the given string and assigns it to the AiRemediationSummary field.
+func (o *GetIssue200Response) SetAiRemediationSummary(v string) {
+	o.AiRemediationSummary = &v
+}
+
+// GetAiRemediationSummaryFeedback returns the AiRemediationSummaryFeedback field value if set, zero value otherwise.
+func (o *GetIssue200Response) GetAiRemediationSummaryFeedback() bool {
+	if o == nil || IsNil(o.AiRemediationSummaryFeedback) {
+		var ret bool
+		return ret
+	}
+	return *o.AiRemediationSummaryFeedback
+}
+
+// GetAiRemediationSummaryFeedbackOk returns a tuple with the AiRemediationSummaryFeedback field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetIssue200Response) GetAiRemediationSummaryFeedbackOk() (*bool, bool) {
+	if o == nil || IsNil(o.AiRemediationSummaryFeedback) {
+		return nil, false
+	}
+	return o.AiRemediationSummaryFeedback, true
+}
+
+// HasAiRemediationSummaryFeedback returns a boolean if a field has been set.
+func (o *GetIssue200Response) HasAiRemediationSummaryFeedback() bool {
+	if o != nil && !IsNil(o.AiRemediationSummaryFeedback) {
+		return true
+	}
+
+	return false
+}
+
+// SetAiRemediationSummaryFeedback gets a reference to the given bool and assigns it to the AiRemediationSummaryFeedback field.
+func (o *GetIssue200Response) SetAiRemediationSummaryFeedback(v bool) {
+	o.AiRemediationSummaryFeedback = &v
 }
 
 // GetCvss returns the Cvss field value if set, zero value otherwise.
@@ -779,6 +908,302 @@ func (o *GetIssue200Response) SetTargets(v []IssueTarget) {
 	o.Targets = v
 }
 
+// GetSummary returns the Summary field value if set, zero value otherwise.
+func (o *GetIssue200Response) GetSummary() string {
+	if o == nil || IsNil(o.Summary) {
+		var ret string
+		return ret
+	}
+	return *o.Summary
+}
+
+// GetSummaryOk returns a tuple with the Summary field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetIssue200Response) GetSummaryOk() (*string, bool) {
+	if o == nil || IsNil(o.Summary) {
+		return nil, false
+	}
+	return o.Summary, true
+}
+
+// HasSummary returns a boolean if a field has been set.
+func (o *GetIssue200Response) HasSummary() bool {
+	if o != nil && !IsNil(o.Summary) {
+		return true
+	}
+
+	return false
+}
+
+// SetSummary gets a reference to the given string and assigns it to the Summary field.
+func (o *GetIssue200Response) SetSummary(v string) {
+	o.Summary = &v
+}
+
+// GetImpact returns the Impact field value if set, zero value otherwise.
+func (o *GetIssue200Response) GetImpact() string {
+	if o == nil || IsNil(o.Impact) {
+		var ret string
+		return ret
+	}
+	return *o.Impact
+}
+
+// GetImpactOk returns a tuple with the Impact field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetIssue200Response) GetImpactOk() (*string, bool) {
+	if o == nil || IsNil(o.Impact) {
+		return nil, false
+	}
+	return o.Impact, true
+}
+
+// HasImpact returns a boolean if a field has been set.
+func (o *GetIssue200Response) HasImpact() bool {
+	if o != nil && !IsNil(o.Impact) {
+		return true
+	}
+
+	return false
+}
+
+// SetImpact gets a reference to the given string and assigns it to the Impact field.
+func (o *GetIssue200Response) SetImpact(v string) {
+	o.Impact = &v
+}
+
+// GetAgentic returns the Agentic field value
+func (o *GetIssue200Response) GetAgentic() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.Agentic
+}
+
+// GetAgenticOk returns a tuple with the Agentic field value
+// and a boolean to check if the value has been set.
+func (o *GetIssue200Response) GetAgenticOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Agentic, true
+}
+
+// SetAgentic sets field value
+func (o *GetIssue200Response) SetAgentic(v bool) {
+	o.Agentic = v
+}
+
+// GetReproductionSteps returns the ReproductionSteps field value
+func (o *GetIssue200Response) GetReproductionSteps() []IssueReproductionStep {
+	if o == nil {
+		var ret []IssueReproductionStep
+		return ret
+	}
+
+	return o.ReproductionSteps
+}
+
+// GetReproductionStepsOk returns a tuple with the ReproductionSteps field value
+// and a boolean to check if the value has been set.
+func (o *GetIssue200Response) GetReproductionStepsOk() ([]IssueReproductionStep, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ReproductionSteps, true
+}
+
+// SetReproductionSteps sets field value
+func (o *GetIssue200Response) SetReproductionSteps(v []IssueReproductionStep) {
+	o.ReproductionSteps = v
+}
+
+// GetExploits returns the Exploits field value
+func (o *GetIssue200Response) GetExploits() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+
+	return o.Exploits
+}
+
+// GetExploitsOk returns a tuple with the Exploits field value
+// and a boolean to check if the value has been set.
+func (o *GetIssue200Response) GetExploitsOk() ([]string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Exploits, true
+}
+
+// SetExploits sets field value
+func (o *GetIssue200Response) SetExploits(v []string) {
+	o.Exploits = v
+}
+
+// GetCauses returns the Causes field value
+func (o *GetIssue200Response) GetCauses() []IssueCause {
+	if o == nil {
+		var ret []IssueCause
+		return ret
+	}
+
+	return o.Causes
+}
+
+// GetCausesOk returns a tuple with the Causes field value
+// and a boolean to check if the value has been set.
+func (o *GetIssue200Response) GetCausesOk() ([]IssueCause, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Causes, true
+}
+
+// SetCauses sets field value
+func (o *GetIssue200Response) SetCauses(v []IssueCause) {
+	o.Causes = v
+}
+
+// GetAttackChain returns the AttackChain field value
+func (o *GetIssue200Response) GetAttackChain() []IssueAttackChainStep {
+	if o == nil {
+		var ret []IssueAttackChainStep
+		return ret
+	}
+
+	return o.AttackChain
+}
+
+// GetAttackChainOk returns a tuple with the AttackChain field value
+// and a boolean to check if the value has been set.
+func (o *GetIssue200Response) GetAttackChainOk() ([]IssueAttackChainStep, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.AttackChain, true
+}
+
+// SetAttackChain sets field value
+func (o *GetIssue200Response) SetAttackChain(v []IssueAttackChainStep) {
+	o.AttackChain = v
+}
+
+// GetAiFalsePositive returns the AiFalsePositive field value
+func (o *GetIssue200Response) GetAiFalsePositive() GetIssue200ResponseAiFalsePositive {
+	if o == nil {
+		var ret GetIssue200ResponseAiFalsePositive
+		return ret
+	}
+
+	return o.AiFalsePositive
+}
+
+// GetAiFalsePositiveOk returns a tuple with the AiFalsePositive field value
+// and a boolean to check if the value has been set.
+func (o *GetIssue200Response) GetAiFalsePositiveOk() (*GetIssue200ResponseAiFalsePositive, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.AiFalsePositive, true
+}
+
+// SetAiFalsePositive sets field value
+func (o *GetIssue200Response) SetAiFalsePositive(v GetIssue200ResponseAiFalsePositive) {
+	o.AiFalsePositive = v
+}
+
+// GetTicket returns the Ticket field value if set, zero value otherwise.
+func (o *GetIssue200Response) GetTicket() IssueTicket {
+	if o == nil || IsNil(o.Ticket) {
+		var ret IssueTicket
+		return ret
+	}
+	return *o.Ticket
+}
+
+// GetTicketOk returns a tuple with the Ticket field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetIssue200Response) GetTicketOk() (*IssueTicket, bool) {
+	if o == nil || IsNil(o.Ticket) {
+		return nil, false
+	}
+	return o.Ticket, true
+}
+
+// HasTicket returns a boolean if a field has been set.
+func (o *GetIssue200Response) HasTicket() bool {
+	if o != nil && !IsNil(o.Ticket) {
+		return true
+	}
+
+	return false
+}
+
+// SetTicket gets a reference to the given IssueTicket and assigns it to the Ticket field.
+func (o *GetIssue200Response) SetTicket(v IssueTicket) {
+	o.Ticket = &v
+}
+
+// GetFixPrompt returns the FixPrompt field value
+func (o *GetIssue200Response) GetFixPrompt() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.FixPrompt
+}
+
+// GetFixPromptOk returns a tuple with the FixPrompt field value
+// and a boolean to check if the value has been set.
+func (o *GetIssue200Response) GetFixPromptOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.FixPrompt, true
+}
+
+// SetFixPrompt sets field value
+func (o *GetIssue200Response) SetFixPrompt(v string) {
+	o.FixPrompt = v
+}
+
+// GetRetestValidationId returns the RetestValidationId field value if set, zero value otherwise.
+func (o *GetIssue200Response) GetRetestValidationId() string {
+	if o == nil || IsNil(o.RetestValidationId) {
+		var ret string
+		return ret
+	}
+	return *o.RetestValidationId
+}
+
+// GetRetestValidationIdOk returns a tuple with the RetestValidationId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetIssue200Response) GetRetestValidationIdOk() (*string, bool) {
+	if o == nil || IsNil(o.RetestValidationId) {
+		return nil, false
+	}
+	return o.RetestValidationId, true
+}
+
+// HasRetestValidationId returns a boolean if a field has been set.
+func (o *GetIssue200Response) HasRetestValidationId() bool {
+	if o != nil && !IsNil(o.RetestValidationId) {
+		return true
+	}
+
+	return false
+}
+
+// SetRetestValidationId gets a reference to the given string and assigns it to the RetestValidationId field.
+func (o *GetIssue200Response) SetRetestValidationId(v string) {
+	o.RetestValidationId = &v
+}
+
 func (o GetIssue200Response) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -817,8 +1242,17 @@ func (o GetIssue200Response) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["securityTest"] = o.SecurityTest
 	toSerialize["aiRemediationFramework"] = o.AiRemediationFramework
+	if !IsNil(o.AiRemediationFeedback) {
+		toSerialize["aiRemediationFeedback"] = o.AiRemediationFeedback
+	}
 	if !IsNil(o.Remediation) {
 		toSerialize["remediation"] = o.Remediation
+	}
+	if !IsNil(o.AiRemediationSummary) {
+		toSerialize["aiRemediationSummary"] = o.AiRemediationSummary
+	}
+	if !IsNil(o.AiRemediationSummaryFeedback) {
+		toSerialize["aiRemediationSummaryFeedback"] = o.AiRemediationSummaryFeedback
 	}
 	if !IsNil(o.Cvss) {
 		toSerialize["cvss"] = o.Cvss
@@ -834,6 +1268,25 @@ func (o GetIssue200Response) ToMap() (map[string]interface{}, error) {
 		toSerialize["latestEventsTruncated"] = o.LatestEventsTruncated
 	}
 	toSerialize["targets"] = o.Targets
+	if !IsNil(o.Summary) {
+		toSerialize["summary"] = o.Summary
+	}
+	if !IsNil(o.Impact) {
+		toSerialize["impact"] = o.Impact
+	}
+	toSerialize["agentic"] = o.Agentic
+	toSerialize["reproductionSteps"] = o.ReproductionSteps
+	toSerialize["exploits"] = o.Exploits
+	toSerialize["causes"] = o.Causes
+	toSerialize["attackChain"] = o.AttackChain
+	toSerialize["aiFalsePositive"] = o.AiFalsePositive
+	if !IsNil(o.Ticket) {
+		toSerialize["ticket"] = o.Ticket
+	}
+	toSerialize["fixPrompt"] = o.FixPrompt
+	if !IsNil(o.RetestValidationId) {
+		toSerialize["retestValidationId"] = o.RetestValidationId
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -862,6 +1315,13 @@ func (o *GetIssue200Response) UnmarshalJSON(data []byte) (err error) {
 		"aiRemediationFramework",
 		"links",
 		"targets",
+		"agentic",
+		"reproductionSteps",
+		"exploits",
+		"causes",
+		"attackChain",
+		"aiFalsePositive",
+		"fixPrompt",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -909,13 +1369,27 @@ func (o *GetIssue200Response) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "customRuleId")
 		delete(additionalProperties, "securityTest")
 		delete(additionalProperties, "aiRemediationFramework")
+		delete(additionalProperties, "aiRemediationFeedback")
 		delete(additionalProperties, "remediation")
+		delete(additionalProperties, "aiRemediationSummary")
+		delete(additionalProperties, "aiRemediationSummaryFeedback")
 		delete(additionalProperties, "cvss")
 		delete(additionalProperties, "compliances")
 		delete(additionalProperties, "links")
 		delete(additionalProperties, "latestEventIds")
 		delete(additionalProperties, "latestEventsTruncated")
 		delete(additionalProperties, "targets")
+		delete(additionalProperties, "summary")
+		delete(additionalProperties, "impact")
+		delete(additionalProperties, "agentic")
+		delete(additionalProperties, "reproductionSteps")
+		delete(additionalProperties, "exploits")
+		delete(additionalProperties, "causes")
+		delete(additionalProperties, "attackChain")
+		delete(additionalProperties, "aiFalsePositive")
+		delete(additionalProperties, "ticket")
+		delete(additionalProperties, "fixPrompt")
+		delete(additionalProperties, "retestValidationId")
 		o.AdditionalProperties = additionalProperties
 	}
 

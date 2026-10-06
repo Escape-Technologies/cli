@@ -19,7 +19,7 @@ var _ MappedNullable = &BulkUpdateIssuesRequestSeverityAnyOf{}
 
 // BulkUpdateIssuesRequestSeverityAnyOf struct for BulkUpdateIssuesRequestSeverityAnyOf
 type BulkUpdateIssuesRequestSeverityAnyOf struct {
-	Value *ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS `json:"value,omitempty"`
+	Value *ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY `json:"value,omitempty"`
 	// Reason for the change (required if your organization enforces it)
 	Reason               *string `json:"reason,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -45,9 +45,9 @@ func NewBulkUpdateIssuesRequestSeverityAnyOfWithDefaults() *BulkUpdateIssuesRequ
 }
 
 // GetValue returns the Value field value if set, zero value otherwise.
-func (o *BulkUpdateIssuesRequestSeverityAnyOf) GetValue() ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS {
+func (o *BulkUpdateIssuesRequestSeverityAnyOf) GetValue() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY {
 	if o == nil || IsNil(o.Value) {
-		var ret ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS
+		var ret ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY
 		return ret
 	}
 	return *o.Value
@@ -55,7 +55,7 @@ func (o *BulkUpdateIssuesRequestSeverityAnyOf) GetValue() ENUMPROPERTIESFILTERPR
 
 // GetValueOk returns a tuple with the Value field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *BulkUpdateIssuesRequestSeverityAnyOf) GetValueOk() (*ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS, bool) {
+func (o *BulkUpdateIssuesRequestSeverityAnyOf) GetValueOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY, bool) {
 	if o == nil || IsNil(o.Value) {
 		return nil, false
 	}
@@ -71,8 +71,8 @@ func (o *BulkUpdateIssuesRequestSeverityAnyOf) HasValue() bool {
 	return false
 }
 
-// SetValue gets a reference to the given ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS and assigns it to the Value field.
-func (o *BulkUpdateIssuesRequestSeverityAnyOf) SetValue(v ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS) {
+// SetValue gets a reference to the given ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY and assigns it to the Value field.
+func (o *BulkUpdateIssuesRequestSeverityAnyOf) SetValue(v ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY) {
 	o.Value = &v
 }
 

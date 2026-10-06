@@ -19,9 +19,13 @@ var _ MappedNullable = &BulkUpdateIssuesRequest{}
 
 // BulkUpdateIssuesRequest struct for BulkUpdateIssuesRequest
 type BulkUpdateIssuesRequest struct {
-	Status               *BulkUpdateIssuesRequestStatus          `json:"status,omitempty"`
-	Severity             NullableBulkUpdateIssuesRequestSeverity `json:"severity,omitempty"`
-	Where                *BulkUpdateIssuesRequestWhere           `json:"where,omitempty"`
+	Status   *BulkUpdateIssuesRequestStatus          `json:"status,omitempty"`
+	Severity NullableBulkUpdateIssuesRequestSeverity `json:"severity,omitempty"`
+	Where    *BulkUpdateIssuesRequestWhere           `json:"where,omitempty"`
+	// Set to true to target every issue. Mutually exclusive with a non-empty `where`.
+	All *bool `json:"all,omitempty"`
+	// Return the matching issue IDs and count without updating anything
+	DryRun               *bool `json:"dryRun,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -151,6 +155,70 @@ func (o *BulkUpdateIssuesRequest) SetWhere(v BulkUpdateIssuesRequestWhere) {
 	o.Where = &v
 }
 
+// GetAll returns the All field value if set, zero value otherwise.
+func (o *BulkUpdateIssuesRequest) GetAll() bool {
+	if o == nil || IsNil(o.All) {
+		var ret bool
+		return ret
+	}
+	return *o.All
+}
+
+// GetAllOk returns a tuple with the All field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BulkUpdateIssuesRequest) GetAllOk() (*bool, bool) {
+	if o == nil || IsNil(o.All) {
+		return nil, false
+	}
+	return o.All, true
+}
+
+// HasAll returns a boolean if a field has been set.
+func (o *BulkUpdateIssuesRequest) HasAll() bool {
+	if o != nil && !IsNil(o.All) {
+		return true
+	}
+
+	return false
+}
+
+// SetAll gets a reference to the given bool and assigns it to the All field.
+func (o *BulkUpdateIssuesRequest) SetAll(v bool) {
+	o.All = &v
+}
+
+// GetDryRun returns the DryRun field value if set, zero value otherwise.
+func (o *BulkUpdateIssuesRequest) GetDryRun() bool {
+	if o == nil || IsNil(o.DryRun) {
+		var ret bool
+		return ret
+	}
+	return *o.DryRun
+}
+
+// GetDryRunOk returns a tuple with the DryRun field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BulkUpdateIssuesRequest) GetDryRunOk() (*bool, bool) {
+	if o == nil || IsNil(o.DryRun) {
+		return nil, false
+	}
+	return o.DryRun, true
+}
+
+// HasDryRun returns a boolean if a field has been set.
+func (o *BulkUpdateIssuesRequest) HasDryRun() bool {
+	if o != nil && !IsNil(o.DryRun) {
+		return true
+	}
+
+	return false
+}
+
+// SetDryRun gets a reference to the given bool and assigns it to the DryRun field.
+func (o *BulkUpdateIssuesRequest) SetDryRun(v bool) {
+	o.DryRun = &v
+}
+
 func (o BulkUpdateIssuesRequest) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -169,6 +237,12 @@ func (o BulkUpdateIssuesRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Where) {
 		toSerialize["where"] = o.Where
+	}
+	if !IsNil(o.All) {
+		toSerialize["all"] = o.All
+	}
+	if !IsNil(o.DryRun) {
+		toSerialize["dryRun"] = o.DryRun
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -195,6 +269,8 @@ func (o *BulkUpdateIssuesRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "status")
 		delete(additionalProperties, "severity")
 		delete(additionalProperties, "where")
+		delete(additionalProperties, "all")
+		delete(additionalProperties, "dryRun")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -17,20 +17,59 @@ import (
 // checks if the BulkUpdateIssuesRequestWhere type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &BulkUpdateIssuesRequestWhere{}
 
-// BulkUpdateIssuesRequestWhere Filter predicate; omit to match all issues
+// BulkUpdateIssuesRequestWhere Filter predicate. Required unless `all` is true.
 type BulkUpdateIssuesRequestWhere struct {
 	// Filter by specific issue IDs
 	Ids []string `json:"ids,omitempty"`
-	// Filter by asset IDs
-	AssetIds []string `json:"assetIds,omitempty"`
-	// Filter by severities
-	Severities []ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS `json:"severities,omitempty"`
+	// Exclude these issue IDs
+	BlacklistedIds []string `json:"blacklistedIds,omitempty"`
+	// Exclude issues by their raw name (e.g. 'SQL injection')
+	BlacklistedNames []string `json:"blacklistedNames,omitempty"`
+	// Filter by project IDs
+	ProjectIds []string `json:"projectIds,omitempty"`
 	// Filter by profile IDs
 	ProfileIds []string `json:"profileIds,omitempty"`
+	// Filter by asset IDs
+	AssetIds []string `json:"assetIds,omitempty"`
+	// Filter by target IDs
+	TargetIds []string `json:"targetIds,omitempty"`
+	// Filter by scan IDs
+	ScanIds []string `json:"scanIds,omitempty"`
 	// Filter by tag IDs
 	TagIds []string `json:"tagIds,omitempty"`
+	// Filter by security test UIDs
+	SecurityTestUids []string `json:"securityTestUids,omitempty"`
+	// Filter by domain
+	Domains []string `json:"domains,omitempty"`
+	// Filter by issue full name (the display name including risk characteristics, e.g. 'SQL injection found on external-facing asset')
+	Names []string `json:"names,omitempty"`
+	// Search term to filter issues by name or description
+	Search *string `json:"search,omitempty"`
+	// Filter by issues with Jira tickets
+	JiraTicket *bool     `json:"jiraTicket,omitempty"`
+	NoTags     *ENUMTRUE `json:"noTags,omitempty"`
+	// Filter by AI false positive classification
+	AiFalsePositive *bool `json:"aiFalsePositive,omitempty"`
+	// Filter by agentic (AI pentest) issues
+	Agentic *bool `json:"agentic,omitempty"`
+	// Filter by risk types
+	Risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS `json:"risks,omitempty"`
+	// Filter by asset classes
+	AssetClasses []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS `json:"assetClasses,omitempty"`
+	// Filter by issue categories
+	Categories []ENUMPROPERTIESISSUEPROPERTIESCATEGORIESITEMSPROPERTIESCATEGORY `json:"categories,omitempty"`
+	// Filter by asset types
+	AssetTypes []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE `json:"assetTypes,omitempty"`
+	// Filter by asset statuses
+	AssetStatuses []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS `json:"assetStatuses,omitempty"`
 	// Filter by scanner kinds
-	ScannerKinds         []ENUMPROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS `json:"scannerKinds,omitempty"`
+	ScannerKinds []ENUMPROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS `json:"scannerKinds,omitempty"`
+	// Filter by issue severities
+	Severities []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY `json:"severities,omitempty"`
+	// Filter by issue status
+	Status []ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS `json:"status,omitempty"`
+	// Advanced filter as a DNF expression (JSON object)
+	Dnf                  map[string]interface{} `json:"dnf,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -85,68 +124,100 @@ func (o *BulkUpdateIssuesRequestWhere) SetIds(v []string) {
 	o.Ids = v
 }
 
-// GetAssetIds returns the AssetIds field value if set, zero value otherwise.
-func (o *BulkUpdateIssuesRequestWhere) GetAssetIds() []string {
-	if o == nil || IsNil(o.AssetIds) {
+// GetBlacklistedIds returns the BlacklistedIds field value if set, zero value otherwise.
+func (o *BulkUpdateIssuesRequestWhere) GetBlacklistedIds() []string {
+	if o == nil || IsNil(o.BlacklistedIds) {
 		var ret []string
 		return ret
 	}
-	return o.AssetIds
+	return o.BlacklistedIds
 }
 
-// GetAssetIdsOk returns a tuple with the AssetIds field value if set, nil otherwise
+// GetBlacklistedIdsOk returns a tuple with the BlacklistedIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *BulkUpdateIssuesRequestWhere) GetAssetIdsOk() ([]string, bool) {
-	if o == nil || IsNil(o.AssetIds) {
+func (o *BulkUpdateIssuesRequestWhere) GetBlacklistedIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.BlacklistedIds) {
 		return nil, false
 	}
-	return o.AssetIds, true
+	return o.BlacklistedIds, true
 }
 
-// HasAssetIds returns a boolean if a field has been set.
-func (o *BulkUpdateIssuesRequestWhere) HasAssetIds() bool {
-	if o != nil && !IsNil(o.AssetIds) {
+// HasBlacklistedIds returns a boolean if a field has been set.
+func (o *BulkUpdateIssuesRequestWhere) HasBlacklistedIds() bool {
+	if o != nil && !IsNil(o.BlacklistedIds) {
 		return true
 	}
 
 	return false
 }
 
-// SetAssetIds gets a reference to the given []string and assigns it to the AssetIds field.
-func (o *BulkUpdateIssuesRequestWhere) SetAssetIds(v []string) {
-	o.AssetIds = v
+// SetBlacklistedIds gets a reference to the given []string and assigns it to the BlacklistedIds field.
+func (o *BulkUpdateIssuesRequestWhere) SetBlacklistedIds(v []string) {
+	o.BlacklistedIds = v
 }
 
-// GetSeverities returns the Severities field value if set, zero value otherwise.
-func (o *BulkUpdateIssuesRequestWhere) GetSeverities() []ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS {
-	if o == nil || IsNil(o.Severities) {
-		var ret []ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS
+// GetBlacklistedNames returns the BlacklistedNames field value if set, zero value otherwise.
+func (o *BulkUpdateIssuesRequestWhere) GetBlacklistedNames() []string {
+	if o == nil || IsNil(o.BlacklistedNames) {
+		var ret []string
 		return ret
 	}
-	return o.Severities
+	return o.BlacklistedNames
 }
 
-// GetSeveritiesOk returns a tuple with the Severities field value if set, nil otherwise
+// GetBlacklistedNamesOk returns a tuple with the BlacklistedNames field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *BulkUpdateIssuesRequestWhere) GetSeveritiesOk() ([]ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS, bool) {
-	if o == nil || IsNil(o.Severities) {
+func (o *BulkUpdateIssuesRequestWhere) GetBlacklistedNamesOk() ([]string, bool) {
+	if o == nil || IsNil(o.BlacklistedNames) {
 		return nil, false
 	}
-	return o.Severities, true
+	return o.BlacklistedNames, true
 }
 
-// HasSeverities returns a boolean if a field has been set.
-func (o *BulkUpdateIssuesRequestWhere) HasSeverities() bool {
-	if o != nil && !IsNil(o.Severities) {
+// HasBlacklistedNames returns a boolean if a field has been set.
+func (o *BulkUpdateIssuesRequestWhere) HasBlacklistedNames() bool {
+	if o != nil && !IsNil(o.BlacklistedNames) {
 		return true
 	}
 
 	return false
 }
 
-// SetSeverities gets a reference to the given []ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS and assigns it to the Severities field.
-func (o *BulkUpdateIssuesRequestWhere) SetSeverities(v []ENUMPROPERTIESFILTERPROPERTIESSEVERITIESITEMS) {
-	o.Severities = v
+// SetBlacklistedNames gets a reference to the given []string and assigns it to the BlacklistedNames field.
+func (o *BulkUpdateIssuesRequestWhere) SetBlacklistedNames(v []string) {
+	o.BlacklistedNames = v
+}
+
+// GetProjectIds returns the ProjectIds field value if set, zero value otherwise.
+func (o *BulkUpdateIssuesRequestWhere) GetProjectIds() []string {
+	if o == nil || IsNil(o.ProjectIds) {
+		var ret []string
+		return ret
+	}
+	return o.ProjectIds
+}
+
+// GetProjectIdsOk returns a tuple with the ProjectIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BulkUpdateIssuesRequestWhere) GetProjectIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.ProjectIds) {
+		return nil, false
+	}
+	return o.ProjectIds, true
+}
+
+// HasProjectIds returns a boolean if a field has been set.
+func (o *BulkUpdateIssuesRequestWhere) HasProjectIds() bool {
+	if o != nil && !IsNil(o.ProjectIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetProjectIds gets a reference to the given []string and assigns it to the ProjectIds field.
+func (o *BulkUpdateIssuesRequestWhere) SetProjectIds(v []string) {
+	o.ProjectIds = v
 }
 
 // GetProfileIds returns the ProfileIds field value if set, zero value otherwise.
@@ -181,6 +252,102 @@ func (o *BulkUpdateIssuesRequestWhere) SetProfileIds(v []string) {
 	o.ProfileIds = v
 }
 
+// GetAssetIds returns the AssetIds field value if set, zero value otherwise.
+func (o *BulkUpdateIssuesRequestWhere) GetAssetIds() []string {
+	if o == nil || IsNil(o.AssetIds) {
+		var ret []string
+		return ret
+	}
+	return o.AssetIds
+}
+
+// GetAssetIdsOk returns a tuple with the AssetIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BulkUpdateIssuesRequestWhere) GetAssetIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.AssetIds) {
+		return nil, false
+	}
+	return o.AssetIds, true
+}
+
+// HasAssetIds returns a boolean if a field has been set.
+func (o *BulkUpdateIssuesRequestWhere) HasAssetIds() bool {
+	if o != nil && !IsNil(o.AssetIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetAssetIds gets a reference to the given []string and assigns it to the AssetIds field.
+func (o *BulkUpdateIssuesRequestWhere) SetAssetIds(v []string) {
+	o.AssetIds = v
+}
+
+// GetTargetIds returns the TargetIds field value if set, zero value otherwise.
+func (o *BulkUpdateIssuesRequestWhere) GetTargetIds() []string {
+	if o == nil || IsNil(o.TargetIds) {
+		var ret []string
+		return ret
+	}
+	return o.TargetIds
+}
+
+// GetTargetIdsOk returns a tuple with the TargetIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BulkUpdateIssuesRequestWhere) GetTargetIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.TargetIds) {
+		return nil, false
+	}
+	return o.TargetIds, true
+}
+
+// HasTargetIds returns a boolean if a field has been set.
+func (o *BulkUpdateIssuesRequestWhere) HasTargetIds() bool {
+	if o != nil && !IsNil(o.TargetIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetTargetIds gets a reference to the given []string and assigns it to the TargetIds field.
+func (o *BulkUpdateIssuesRequestWhere) SetTargetIds(v []string) {
+	o.TargetIds = v
+}
+
+// GetScanIds returns the ScanIds field value if set, zero value otherwise.
+func (o *BulkUpdateIssuesRequestWhere) GetScanIds() []string {
+	if o == nil || IsNil(o.ScanIds) {
+		var ret []string
+		return ret
+	}
+	return o.ScanIds
+}
+
+// GetScanIdsOk returns a tuple with the ScanIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BulkUpdateIssuesRequestWhere) GetScanIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.ScanIds) {
+		return nil, false
+	}
+	return o.ScanIds, true
+}
+
+// HasScanIds returns a boolean if a field has been set.
+func (o *BulkUpdateIssuesRequestWhere) HasScanIds() bool {
+	if o != nil && !IsNil(o.ScanIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetScanIds gets a reference to the given []string and assigns it to the ScanIds field.
+func (o *BulkUpdateIssuesRequestWhere) SetScanIds(v []string) {
+	o.ScanIds = v
+}
+
 // GetTagIds returns the TagIds field value if set, zero value otherwise.
 func (o *BulkUpdateIssuesRequestWhere) GetTagIds() []string {
 	if o == nil || IsNil(o.TagIds) {
@@ -211,6 +378,422 @@ func (o *BulkUpdateIssuesRequestWhere) HasTagIds() bool {
 // SetTagIds gets a reference to the given []string and assigns it to the TagIds field.
 func (o *BulkUpdateIssuesRequestWhere) SetTagIds(v []string) {
 	o.TagIds = v
+}
+
+// GetSecurityTestUids returns the SecurityTestUids field value if set, zero value otherwise.
+func (o *BulkUpdateIssuesRequestWhere) GetSecurityTestUids() []string {
+	if o == nil || IsNil(o.SecurityTestUids) {
+		var ret []string
+		return ret
+	}
+	return o.SecurityTestUids
+}
+
+// GetSecurityTestUidsOk returns a tuple with the SecurityTestUids field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BulkUpdateIssuesRequestWhere) GetSecurityTestUidsOk() ([]string, bool) {
+	if o == nil || IsNil(o.SecurityTestUids) {
+		return nil, false
+	}
+	return o.SecurityTestUids, true
+}
+
+// HasSecurityTestUids returns a boolean if a field has been set.
+func (o *BulkUpdateIssuesRequestWhere) HasSecurityTestUids() bool {
+	if o != nil && !IsNil(o.SecurityTestUids) {
+		return true
+	}
+
+	return false
+}
+
+// SetSecurityTestUids gets a reference to the given []string and assigns it to the SecurityTestUids field.
+func (o *BulkUpdateIssuesRequestWhere) SetSecurityTestUids(v []string) {
+	o.SecurityTestUids = v
+}
+
+// GetDomains returns the Domains field value if set, zero value otherwise.
+func (o *BulkUpdateIssuesRequestWhere) GetDomains() []string {
+	if o == nil || IsNil(o.Domains) {
+		var ret []string
+		return ret
+	}
+	return o.Domains
+}
+
+// GetDomainsOk returns a tuple with the Domains field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BulkUpdateIssuesRequestWhere) GetDomainsOk() ([]string, bool) {
+	if o == nil || IsNil(o.Domains) {
+		return nil, false
+	}
+	return o.Domains, true
+}
+
+// HasDomains returns a boolean if a field has been set.
+func (o *BulkUpdateIssuesRequestWhere) HasDomains() bool {
+	if o != nil && !IsNil(o.Domains) {
+		return true
+	}
+
+	return false
+}
+
+// SetDomains gets a reference to the given []string and assigns it to the Domains field.
+func (o *BulkUpdateIssuesRequestWhere) SetDomains(v []string) {
+	o.Domains = v
+}
+
+// GetNames returns the Names field value if set, zero value otherwise.
+func (o *BulkUpdateIssuesRequestWhere) GetNames() []string {
+	if o == nil || IsNil(o.Names) {
+		var ret []string
+		return ret
+	}
+	return o.Names
+}
+
+// GetNamesOk returns a tuple with the Names field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BulkUpdateIssuesRequestWhere) GetNamesOk() ([]string, bool) {
+	if o == nil || IsNil(o.Names) {
+		return nil, false
+	}
+	return o.Names, true
+}
+
+// HasNames returns a boolean if a field has been set.
+func (o *BulkUpdateIssuesRequestWhere) HasNames() bool {
+	if o != nil && !IsNil(o.Names) {
+		return true
+	}
+
+	return false
+}
+
+// SetNames gets a reference to the given []string and assigns it to the Names field.
+func (o *BulkUpdateIssuesRequestWhere) SetNames(v []string) {
+	o.Names = v
+}
+
+// GetSearch returns the Search field value if set, zero value otherwise.
+func (o *BulkUpdateIssuesRequestWhere) GetSearch() string {
+	if o == nil || IsNil(o.Search) {
+		var ret string
+		return ret
+	}
+	return *o.Search
+}
+
+// GetSearchOk returns a tuple with the Search field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BulkUpdateIssuesRequestWhere) GetSearchOk() (*string, bool) {
+	if o == nil || IsNil(o.Search) {
+		return nil, false
+	}
+	return o.Search, true
+}
+
+// HasSearch returns a boolean if a field has been set.
+func (o *BulkUpdateIssuesRequestWhere) HasSearch() bool {
+	if o != nil && !IsNil(o.Search) {
+		return true
+	}
+
+	return false
+}
+
+// SetSearch gets a reference to the given string and assigns it to the Search field.
+func (o *BulkUpdateIssuesRequestWhere) SetSearch(v string) {
+	o.Search = &v
+}
+
+// GetJiraTicket returns the JiraTicket field value if set, zero value otherwise.
+func (o *BulkUpdateIssuesRequestWhere) GetJiraTicket() bool {
+	if o == nil || IsNil(o.JiraTicket) {
+		var ret bool
+		return ret
+	}
+	return *o.JiraTicket
+}
+
+// GetJiraTicketOk returns a tuple with the JiraTicket field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BulkUpdateIssuesRequestWhere) GetJiraTicketOk() (*bool, bool) {
+	if o == nil || IsNil(o.JiraTicket) {
+		return nil, false
+	}
+	return o.JiraTicket, true
+}
+
+// HasJiraTicket returns a boolean if a field has been set.
+func (o *BulkUpdateIssuesRequestWhere) HasJiraTicket() bool {
+	if o != nil && !IsNil(o.JiraTicket) {
+		return true
+	}
+
+	return false
+}
+
+// SetJiraTicket gets a reference to the given bool and assigns it to the JiraTicket field.
+func (o *BulkUpdateIssuesRequestWhere) SetJiraTicket(v bool) {
+	o.JiraTicket = &v
+}
+
+// GetNoTags returns the NoTags field value if set, zero value otherwise.
+func (o *BulkUpdateIssuesRequestWhere) GetNoTags() ENUMTRUE {
+	if o == nil || IsNil(o.NoTags) {
+		var ret ENUMTRUE
+		return ret
+	}
+	return *o.NoTags
+}
+
+// GetNoTagsOk returns a tuple with the NoTags field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BulkUpdateIssuesRequestWhere) GetNoTagsOk() (*ENUMTRUE, bool) {
+	if o == nil || IsNil(o.NoTags) {
+		return nil, false
+	}
+	return o.NoTags, true
+}
+
+// HasNoTags returns a boolean if a field has been set.
+func (o *BulkUpdateIssuesRequestWhere) HasNoTags() bool {
+	if o != nil && !IsNil(o.NoTags) {
+		return true
+	}
+
+	return false
+}
+
+// SetNoTags gets a reference to the given ENUMTRUE and assigns it to the NoTags field.
+func (o *BulkUpdateIssuesRequestWhere) SetNoTags(v ENUMTRUE) {
+	o.NoTags = &v
+}
+
+// GetAiFalsePositive returns the AiFalsePositive field value if set, zero value otherwise.
+func (o *BulkUpdateIssuesRequestWhere) GetAiFalsePositive() bool {
+	if o == nil || IsNil(o.AiFalsePositive) {
+		var ret bool
+		return ret
+	}
+	return *o.AiFalsePositive
+}
+
+// GetAiFalsePositiveOk returns a tuple with the AiFalsePositive field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BulkUpdateIssuesRequestWhere) GetAiFalsePositiveOk() (*bool, bool) {
+	if o == nil || IsNil(o.AiFalsePositive) {
+		return nil, false
+	}
+	return o.AiFalsePositive, true
+}
+
+// HasAiFalsePositive returns a boolean if a field has been set.
+func (o *BulkUpdateIssuesRequestWhere) HasAiFalsePositive() bool {
+	if o != nil && !IsNil(o.AiFalsePositive) {
+		return true
+	}
+
+	return false
+}
+
+// SetAiFalsePositive gets a reference to the given bool and assigns it to the AiFalsePositive field.
+func (o *BulkUpdateIssuesRequestWhere) SetAiFalsePositive(v bool) {
+	o.AiFalsePositive = &v
+}
+
+// GetAgentic returns the Agentic field value if set, zero value otherwise.
+func (o *BulkUpdateIssuesRequestWhere) GetAgentic() bool {
+	if o == nil || IsNil(o.Agentic) {
+		var ret bool
+		return ret
+	}
+	return *o.Agentic
+}
+
+// GetAgenticOk returns a tuple with the Agentic field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BulkUpdateIssuesRequestWhere) GetAgenticOk() (*bool, bool) {
+	if o == nil || IsNil(o.Agentic) {
+		return nil, false
+	}
+	return o.Agentic, true
+}
+
+// HasAgentic returns a boolean if a field has been set.
+func (o *BulkUpdateIssuesRequestWhere) HasAgentic() bool {
+	if o != nil && !IsNil(o.Agentic) {
+		return true
+	}
+
+	return false
+}
+
+// SetAgentic gets a reference to the given bool and assigns it to the Agentic field.
+func (o *BulkUpdateIssuesRequestWhere) SetAgentic(v bool) {
+	o.Agentic = &v
+}
+
+// GetRisks returns the Risks field value if set, zero value otherwise.
+func (o *BulkUpdateIssuesRequestWhere) GetRisks() []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS {
+	if o == nil || IsNil(o.Risks) {
+		var ret []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS
+		return ret
+	}
+	return o.Risks
+}
+
+// GetRisksOk returns a tuple with the Risks field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BulkUpdateIssuesRequestWhere) GetRisksOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, bool) {
+	if o == nil || IsNil(o.Risks) {
+		return nil, false
+	}
+	return o.Risks, true
+}
+
+// HasRisks returns a boolean if a field has been set.
+func (o *BulkUpdateIssuesRequestWhere) HasRisks() bool {
+	if o != nil && !IsNil(o.Risks) {
+		return true
+	}
+
+	return false
+}
+
+// SetRisks gets a reference to the given []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS and assigns it to the Risks field.
+func (o *BulkUpdateIssuesRequestWhere) SetRisks(v []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS) {
+	o.Risks = v
+}
+
+// GetAssetClasses returns the AssetClasses field value if set, zero value otherwise.
+func (o *BulkUpdateIssuesRequestWhere) GetAssetClasses() []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS {
+	if o == nil || IsNil(o.AssetClasses) {
+		var ret []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS
+		return ret
+	}
+	return o.AssetClasses
+}
+
+// GetAssetClassesOk returns a tuple with the AssetClasses field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BulkUpdateIssuesRequestWhere) GetAssetClassesOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS, bool) {
+	if o == nil || IsNil(o.AssetClasses) {
+		return nil, false
+	}
+	return o.AssetClasses, true
+}
+
+// HasAssetClasses returns a boolean if a field has been set.
+func (o *BulkUpdateIssuesRequestWhere) HasAssetClasses() bool {
+	if o != nil && !IsNil(o.AssetClasses) {
+		return true
+	}
+
+	return false
+}
+
+// SetAssetClasses gets a reference to the given []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS and assigns it to the AssetClasses field.
+func (o *BulkUpdateIssuesRequestWhere) SetAssetClasses(v []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS) {
+	o.AssetClasses = v
+}
+
+// GetCategories returns the Categories field value if set, zero value otherwise.
+func (o *BulkUpdateIssuesRequestWhere) GetCategories() []ENUMPROPERTIESISSUEPROPERTIESCATEGORIESITEMSPROPERTIESCATEGORY {
+	if o == nil || IsNil(o.Categories) {
+		var ret []ENUMPROPERTIESISSUEPROPERTIESCATEGORIESITEMSPROPERTIESCATEGORY
+		return ret
+	}
+	return o.Categories
+}
+
+// GetCategoriesOk returns a tuple with the Categories field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BulkUpdateIssuesRequestWhere) GetCategoriesOk() ([]ENUMPROPERTIESISSUEPROPERTIESCATEGORIESITEMSPROPERTIESCATEGORY, bool) {
+	if o == nil || IsNil(o.Categories) {
+		return nil, false
+	}
+	return o.Categories, true
+}
+
+// HasCategories returns a boolean if a field has been set.
+func (o *BulkUpdateIssuesRequestWhere) HasCategories() bool {
+	if o != nil && !IsNil(o.Categories) {
+		return true
+	}
+
+	return false
+}
+
+// SetCategories gets a reference to the given []ENUMPROPERTIESISSUEPROPERTIESCATEGORIESITEMSPROPERTIESCATEGORY and assigns it to the Categories field.
+func (o *BulkUpdateIssuesRequestWhere) SetCategories(v []ENUMPROPERTIESISSUEPROPERTIESCATEGORIESITEMSPROPERTIESCATEGORY) {
+	o.Categories = v
+}
+
+// GetAssetTypes returns the AssetTypes field value if set, zero value otherwise.
+func (o *BulkUpdateIssuesRequestWhere) GetAssetTypes() []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE {
+	if o == nil || IsNil(o.AssetTypes) {
+		var ret []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE
+		return ret
+	}
+	return o.AssetTypes
+}
+
+// GetAssetTypesOk returns a tuple with the AssetTypes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BulkUpdateIssuesRequestWhere) GetAssetTypesOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE, bool) {
+	if o == nil || IsNil(o.AssetTypes) {
+		return nil, false
+	}
+	return o.AssetTypes, true
+}
+
+// HasAssetTypes returns a boolean if a field has been set.
+func (o *BulkUpdateIssuesRequestWhere) HasAssetTypes() bool {
+	if o != nil && !IsNil(o.AssetTypes) {
+		return true
+	}
+
+	return false
+}
+
+// SetAssetTypes gets a reference to the given []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE and assigns it to the AssetTypes field.
+func (o *BulkUpdateIssuesRequestWhere) SetAssetTypes(v []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE) {
+	o.AssetTypes = v
+}
+
+// GetAssetStatuses returns the AssetStatuses field value if set, zero value otherwise.
+func (o *BulkUpdateIssuesRequestWhere) GetAssetStatuses() []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS {
+	if o == nil || IsNil(o.AssetStatuses) {
+		var ret []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS
+		return ret
+	}
+	return o.AssetStatuses
+}
+
+// GetAssetStatusesOk returns a tuple with the AssetStatuses field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BulkUpdateIssuesRequestWhere) GetAssetStatusesOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS, bool) {
+	if o == nil || IsNil(o.AssetStatuses) {
+		return nil, false
+	}
+	return o.AssetStatuses, true
+}
+
+// HasAssetStatuses returns a boolean if a field has been set.
+func (o *BulkUpdateIssuesRequestWhere) HasAssetStatuses() bool {
+	if o != nil && !IsNil(o.AssetStatuses) {
+		return true
+	}
+
+	return false
+}
+
+// SetAssetStatuses gets a reference to the given []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS and assigns it to the AssetStatuses field.
+func (o *BulkUpdateIssuesRequestWhere) SetAssetStatuses(v []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS) {
+	o.AssetStatuses = v
 }
 
 // GetScannerKinds returns the ScannerKinds field value if set, zero value otherwise.
@@ -245,6 +828,102 @@ func (o *BulkUpdateIssuesRequestWhere) SetScannerKinds(v []ENUMPROPERTIESFILTERP
 	o.ScannerKinds = v
 }
 
+// GetSeverities returns the Severities field value if set, zero value otherwise.
+func (o *BulkUpdateIssuesRequestWhere) GetSeverities() []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY {
+	if o == nil || IsNil(o.Severities) {
+		var ret []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY
+		return ret
+	}
+	return o.Severities
+}
+
+// GetSeveritiesOk returns a tuple with the Severities field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BulkUpdateIssuesRequestWhere) GetSeveritiesOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY, bool) {
+	if o == nil || IsNil(o.Severities) {
+		return nil, false
+	}
+	return o.Severities, true
+}
+
+// HasSeverities returns a boolean if a field has been set.
+func (o *BulkUpdateIssuesRequestWhere) HasSeverities() bool {
+	if o != nil && !IsNil(o.Severities) {
+		return true
+	}
+
+	return false
+}
+
+// SetSeverities gets a reference to the given []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY and assigns it to the Severities field.
+func (o *BulkUpdateIssuesRequestWhere) SetSeverities(v []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY) {
+	o.Severities = v
+}
+
+// GetStatus returns the Status field value if set, zero value otherwise.
+func (o *BulkUpdateIssuesRequestWhere) GetStatus() []ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS {
+	if o == nil || IsNil(o.Status) {
+		var ret []ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS
+		return ret
+	}
+	return o.Status
+}
+
+// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BulkUpdateIssuesRequestWhere) GetStatusOk() ([]ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS, bool) {
+	if o == nil || IsNil(o.Status) {
+		return nil, false
+	}
+	return o.Status, true
+}
+
+// HasStatus returns a boolean if a field has been set.
+func (o *BulkUpdateIssuesRequestWhere) HasStatus() bool {
+	if o != nil && !IsNil(o.Status) {
+		return true
+	}
+
+	return false
+}
+
+// SetStatus gets a reference to the given []ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS and assigns it to the Status field.
+func (o *BulkUpdateIssuesRequestWhere) SetStatus(v []ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS) {
+	o.Status = v
+}
+
+// GetDnf returns the Dnf field value if set, zero value otherwise.
+func (o *BulkUpdateIssuesRequestWhere) GetDnf() map[string]interface{} {
+	if o == nil || IsNil(o.Dnf) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.Dnf
+}
+
+// GetDnfOk returns a tuple with the Dnf field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BulkUpdateIssuesRequestWhere) GetDnfOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.Dnf) {
+		return map[string]interface{}{}, false
+	}
+	return o.Dnf, true
+}
+
+// HasDnf returns a boolean if a field has been set.
+func (o *BulkUpdateIssuesRequestWhere) HasDnf() bool {
+	if o != nil && !IsNil(o.Dnf) {
+		return true
+	}
+
+	return false
+}
+
+// SetDnf gets a reference to the given map[string]interface{} and assigns it to the Dnf field.
+func (o *BulkUpdateIssuesRequestWhere) SetDnf(v map[string]interface{}) {
+	o.Dnf = v
+}
+
 func (o BulkUpdateIssuesRequestWhere) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -258,20 +937,80 @@ func (o BulkUpdateIssuesRequestWhere) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Ids) {
 		toSerialize["ids"] = o.Ids
 	}
-	if !IsNil(o.AssetIds) {
-		toSerialize["assetIds"] = o.AssetIds
+	if !IsNil(o.BlacklistedIds) {
+		toSerialize["blacklistedIds"] = o.BlacklistedIds
 	}
-	if !IsNil(o.Severities) {
-		toSerialize["severities"] = o.Severities
+	if !IsNil(o.BlacklistedNames) {
+		toSerialize["blacklistedNames"] = o.BlacklistedNames
+	}
+	if !IsNil(o.ProjectIds) {
+		toSerialize["projectIds"] = o.ProjectIds
 	}
 	if !IsNil(o.ProfileIds) {
 		toSerialize["profileIds"] = o.ProfileIds
 	}
+	if !IsNil(o.AssetIds) {
+		toSerialize["assetIds"] = o.AssetIds
+	}
+	if !IsNil(o.TargetIds) {
+		toSerialize["targetIds"] = o.TargetIds
+	}
+	if !IsNil(o.ScanIds) {
+		toSerialize["scanIds"] = o.ScanIds
+	}
 	if !IsNil(o.TagIds) {
 		toSerialize["tagIds"] = o.TagIds
 	}
+	if !IsNil(o.SecurityTestUids) {
+		toSerialize["securityTestUids"] = o.SecurityTestUids
+	}
+	if !IsNil(o.Domains) {
+		toSerialize["domains"] = o.Domains
+	}
+	if !IsNil(o.Names) {
+		toSerialize["names"] = o.Names
+	}
+	if !IsNil(o.Search) {
+		toSerialize["search"] = o.Search
+	}
+	if !IsNil(o.JiraTicket) {
+		toSerialize["jiraTicket"] = o.JiraTicket
+	}
+	if !IsNil(o.NoTags) {
+		toSerialize["noTags"] = o.NoTags
+	}
+	if !IsNil(o.AiFalsePositive) {
+		toSerialize["aiFalsePositive"] = o.AiFalsePositive
+	}
+	if !IsNil(o.Agentic) {
+		toSerialize["agentic"] = o.Agentic
+	}
+	if !IsNil(o.Risks) {
+		toSerialize["risks"] = o.Risks
+	}
+	if !IsNil(o.AssetClasses) {
+		toSerialize["assetClasses"] = o.AssetClasses
+	}
+	if !IsNil(o.Categories) {
+		toSerialize["categories"] = o.Categories
+	}
+	if !IsNil(o.AssetTypes) {
+		toSerialize["assetTypes"] = o.AssetTypes
+	}
+	if !IsNil(o.AssetStatuses) {
+		toSerialize["assetStatuses"] = o.AssetStatuses
+	}
 	if !IsNil(o.ScannerKinds) {
 		toSerialize["scannerKinds"] = o.ScannerKinds
+	}
+	if !IsNil(o.Severities) {
+		toSerialize["severities"] = o.Severities
+	}
+	if !IsNil(o.Status) {
+		toSerialize["status"] = o.Status
+	}
+	if !IsNil(o.Dnf) {
+		toSerialize["dnf"] = o.Dnf
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -296,11 +1035,31 @@ func (o *BulkUpdateIssuesRequestWhere) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ids")
-		delete(additionalProperties, "assetIds")
-		delete(additionalProperties, "severities")
+		delete(additionalProperties, "blacklistedIds")
+		delete(additionalProperties, "blacklistedNames")
+		delete(additionalProperties, "projectIds")
 		delete(additionalProperties, "profileIds")
+		delete(additionalProperties, "assetIds")
+		delete(additionalProperties, "targetIds")
+		delete(additionalProperties, "scanIds")
 		delete(additionalProperties, "tagIds")
+		delete(additionalProperties, "securityTestUids")
+		delete(additionalProperties, "domains")
+		delete(additionalProperties, "names")
+		delete(additionalProperties, "search")
+		delete(additionalProperties, "jiraTicket")
+		delete(additionalProperties, "noTags")
+		delete(additionalProperties, "aiFalsePositive")
+		delete(additionalProperties, "agentic")
+		delete(additionalProperties, "risks")
+		delete(additionalProperties, "assetClasses")
+		delete(additionalProperties, "categories")
+		delete(additionalProperties, "assetTypes")
+		delete(additionalProperties, "assetStatuses")
 		delete(additionalProperties, "scannerKinds")
+		delete(additionalProperties, "severities")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "dnf")
 		o.AdditionalProperties = additionalProperties
 	}
 

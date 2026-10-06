@@ -152,21 +152,33 @@ func (a *EventsAPIService) GetEventExecute(r ApiGetEventRequest) (*GetEvent200Re
 }
 
 type ApiListEventsRequest struct {
-	ctx            context.Context
-	ApiService     *EventsAPIService
-	cursor         *string
-	size           *int
-	sortType       *string
-	sortDirection  *string
-	search         *string
-	scanIds        *string
-	profileIds     *string
-	assetIds       *string
-	issueIds       *string
-	levels         *[]string
-	stages         *[]string
-	hasAttachments *string
-	attachments    *[]string
+	ctx                 context.Context
+	ApiService          *EventsAPIService
+	cursor              *string
+	size                *int
+	sortType            *string
+	sortDirection       *string
+	search              *string
+	after               *string
+	before              *string
+	scanIds             *string
+	profileIds          *string
+	assetIds            *string
+	issueIds            *string
+	eventIds            *ListEventsEventIdsParameter
+	targetIds           *ListEventsTargetIdsParameter
+	workflowIds         *ListEventsWorkflowIdsParameter
+	groups              *ListEventsGroupsParameter
+	levels              *[]string
+	stages              *[]string
+	severities          *[]string
+	risks               *[]string
+	scanProblemCodes    *[]string
+	responseStatusCodes *ListEventsResponseStatusCodesParameter
+	hasAttachments      *string
+	attachments         *[]string
+	public              *string
+	dnf                 *string
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
@@ -199,6 +211,18 @@ func (r ApiListEventsRequest) Search(search string) ApiListEventsRequest {
 	return r
 }
 
+// Filter by after date
+func (r ApiListEventsRequest) After(after string) ApiListEventsRequest {
+	r.after = &after
+	return r
+}
+
+// Filter by before date
+func (r ApiListEventsRequest) Before(before string) ApiListEventsRequest {
+	r.before = &before
+	return r
+}
+
 // Filter by scan IDs
 func (r ApiListEventsRequest) ScanIds(scanIds string) ApiListEventsRequest {
 	r.scanIds = &scanIds
@@ -223,6 +247,30 @@ func (r ApiListEventsRequest) IssueIds(issueIds string) ApiListEventsRequest {
 	return r
 }
 
+// Filter by event IDs
+func (r ApiListEventsRequest) EventIds(eventIds ListEventsEventIdsParameter) ApiListEventsRequest {
+	r.eventIds = &eventIds
+	return r
+}
+
+// Filter by target IDs
+func (r ApiListEventsRequest) TargetIds(targetIds ListEventsTargetIdsParameter) ApiListEventsRequest {
+	r.targetIds = &targetIds
+	return r
+}
+
+// Filter by workflow IDs
+func (r ApiListEventsRequest) WorkflowIds(workflowIds ListEventsWorkflowIdsParameter) ApiListEventsRequest {
+	r.workflowIds = &workflowIds
+	return r
+}
+
+// Filter by groups
+func (r ApiListEventsRequest) Groups(groups ListEventsGroupsParameter) ApiListEventsRequest {
+	r.groups = &groups
+	return r
+}
+
 // Filter by level
 func (r ApiListEventsRequest) Levels(levels []string) ApiListEventsRequest {
 	r.levels = &levels
@@ -235,6 +283,30 @@ func (r ApiListEventsRequest) Stages(stages []string) ApiListEventsRequest {
 	return r
 }
 
+// Filter by severity
+func (r ApiListEventsRequest) Severities(severities []string) ApiListEventsRequest {
+	r.severities = &severities
+	return r
+}
+
+// Filter by risk
+func (r ApiListEventsRequest) Risks(risks []string) ApiListEventsRequest {
+	r.risks = &risks
+	return r
+}
+
+// Filter by scan problem codes
+func (r ApiListEventsRequest) ScanProblemCodes(scanProblemCodes []string) ApiListEventsRequest {
+	r.scanProblemCodes = &scanProblemCodes
+	return r
+}
+
+// Filter by response status codes
+func (r ApiListEventsRequest) ResponseStatusCodes(responseStatusCodes ListEventsResponseStatusCodesParameter) ApiListEventsRequest {
+	r.responseStatusCodes = &responseStatusCodes
+	return r
+}
+
 // Filter by attachments
 func (r ApiListEventsRequest) HasAttachments(hasAttachments string) ApiListEventsRequest {
 	r.hasAttachments = &hasAttachments
@@ -244,6 +316,18 @@ func (r ApiListEventsRequest) HasAttachments(hasAttachments string) ApiListEvent
 // Filter by attachments
 func (r ApiListEventsRequest) Attachments(attachments []string) ApiListEventsRequest {
 	r.attachments = &attachments
+	return r
+}
+
+// Filter by public events
+func (r ApiListEventsRequest) Public(public string) ApiListEventsRequest {
+	r.public = &public
+	return r
+}
+
+// Filter by DNF expression
+func (r ApiListEventsRequest) Dnf(dnf string) ApiListEventsRequest {
+	r.dnf = &dnf
 	return r
 }
 
@@ -309,6 +393,12 @@ func (a *EventsAPIService) ListEventsExecute(r ApiListEventsRequest) (*ListEvent
 	if r.search != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")
 	}
+	if r.after != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "after", r.after, "form", "")
+	}
+	if r.before != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "before", r.before, "form", "")
+	}
 	if r.scanIds != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "scanIds", r.scanIds, "form", "")
 	}
@@ -320,6 +410,18 @@ func (a *EventsAPIService) ListEventsExecute(r ApiListEventsRequest) (*ListEvent
 	}
 	if r.issueIds != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "issueIds", r.issueIds, "form", "")
+	}
+	if r.eventIds != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "eventIds", r.eventIds, "form", "")
+	}
+	if r.targetIds != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "targetIds", r.targetIds, "form", "")
+	}
+	if r.workflowIds != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "workflowIds", r.workflowIds, "form", "")
+	}
+	if r.groups != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "groups", r.groups, "form", "")
 	}
 	if r.levels != nil {
 		t := *r.levels
@@ -343,6 +445,42 @@ func (a *EventsAPIService) ListEventsExecute(r ApiListEventsRequest) (*ListEvent
 			parameterAddToHeaderOrQuery(localVarQueryParams, "stages", t, "form", "multi")
 		}
 	}
+	if r.severities != nil {
+		t := *r.severities
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "severities", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "severities", t, "form", "multi")
+		}
+	}
+	if r.risks != nil {
+		t := *r.risks
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "risks", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "risks", t, "form", "multi")
+		}
+	}
+	if r.scanProblemCodes != nil {
+		t := *r.scanProblemCodes
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "scanProblemCodes", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "scanProblemCodes", t, "form", "multi")
+		}
+	}
+	if r.responseStatusCodes != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "responseStatusCodes", r.responseStatusCodes, "form", "")
+	}
 	if r.hasAttachments != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "hasAttachments", r.hasAttachments, "form", "")
 	}
@@ -356,6 +494,12 @@ func (a *EventsAPIService) ListEventsExecute(r ApiListEventsRequest) (*ListEvent
 		} else {
 			parameterAddToHeaderOrQuery(localVarQueryParams, "attachments", t, "form", "multi")
 		}
+	}
+	if r.public != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "public", r.public, "form", "")
+	}
+	if r.dnf != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "dnf", r.dnf, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
