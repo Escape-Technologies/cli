@@ -26,7 +26,7 @@ func getClient(target string, conn net.Conn, config *ssh.ClientConfig) (*ssh.Cli
 	return ssh.NewClient(c, chans, reqs), nil
 }
 
-func dialSSH(ctx context.Context, locationID string, sshPrivateKey ed25519.PrivateKey, healthy *atomic.Bool) error {
+func dialSSH(ctx context.Context, ep endpoint, locationID string, sshPrivateKey ed25519.PrivateKey, healthy *atomic.Bool) error {
 	log.Debug("Creating signer from private key")
 	signer, err := ssh.NewSignerFromKey(sshPrivateKey)
 	if err != nil {
@@ -41,23 +41,34 @@ func dialSSH(ctx context.Context, locationID string, sshPrivateKey ed25519.Priva
 		HostKeyCallback: ssh.InsecureIgnoreHostKey(),
 	}
 
-	targetURL := sshTarget()
 	proxyURL := env.GetFrontendProxyURL()
 
-	log.Trace("Getting conn for target: %s", targetURL)
+	log.Trace("Getting %s conn for target: %s", ep.transport, ep.addr)
 	dialCtx, cancel := context.WithTimeout(ctx, sshDialTimeout)
 	defer cancel()
-	conn, err := getConn(dialCtx, targetURL, proxyURL)
+	conn, err := getConn(dialCtx, ep, proxyURL)
 	if err != nil {
 		return fmt.Errorf("failed to get conn: %w", err)
 	}
 
-	client, err := getClient(targetURL, conn, config)
+	if ep.transport != transportSSH {
+		// ssh.NewClientConn ignores config.Timeout (only ssh.Dial reads it), so the conn deadline
+		// is what bounds the handshake. Over HTTPS a stalled proxy or poll session does not
+		// reset the connection the way a dead TCP peer does, and would hang here forever.
+		config.Timeout = sshDialTimeout
+		_ = conn.SetDeadline(time.Now().Add(sshDialTimeout))
+	}
+
+	client, err := getClient(ep.addr, conn, config)
 	if err != nil {
 		return fmt.Errorf("failed to create SSH client: %w", err)
 	}
+	// Ends the WebSocket or poll session goroutines once the tunnel is gone.
+	defer client.Close() //nolint:errcheck
 
-	log.Debug("SSH connection established to Escape Platform")
+	_ = conn.SetDeadline(time.Time{})
+
+	log.Debug("SSH connection established to Escape Platform over %s", ep.transport)
 	listenerCtx, listenerCancel := context.WithCancel(ctx)
 	go monitor.Start(listenerCtx, client)
 

@@ -5,6 +5,7 @@ import (
 	"context"
 	"crypto/ed25519"
 	"errors"
+	"net"
 	"strings"
 	"sync/atomic"
 	"time"
@@ -16,13 +17,20 @@ import (
 // StartLocation starts a private location tunnel
 func StartLocation(ctx context.Context, locationID string, sshPrivateKey ed25519.PrivateKey, healthy *atomic.Bool) error {
 	log.Trace("Starting private location %s", locationID)
+	ep, err := resolveEndpoint()
+	if err != nil {
+		return err
+	}
+
+	log.Debug("Connecting to the Escape Platform over %s at %s", ep.transport, ep.addr)
+
 	var hasEverConnected atomic.Bool
 	var hasLoggedTimeoutHint atomic.Bool
 	var failureStartTime time.Time
 	const failureThreshold = 1 * time.Minute
 
 	for {
-		err := dialSSH(ctx, locationID, sshPrivateKey, healthy)
+		err := dialSSH(ctx, ep, locationID, sshPrivateKey, healthy)
 		if err != nil {
 			if failureStartTime.IsZero() {
 				failureStartTime = time.Now()
@@ -35,20 +43,25 @@ func StartLocation(ctx context.Context, locationID string, sshPrivateKey ed25519
 			}
 
 			if shouldLog {
-				log.Error("Failed to dial SSH: %s, retrying...", err)
+				log.Error("Failed to dial SSH over %s: %s, retrying...", ep.transport, err)
 			}
 
 			errMsg := err.Error()
 
 			if isTimeout {
-				logSSHDialTimeoutHints(&hasLoggedTimeoutHint)
+				logDialTimeoutHints(ep, &hasLoggedTimeoutHint)
 			} else if strings.Contains(errMsg, "connection refused") {
 				if !hasEverConnected.Load() {
-					log.Error("Firewall is likely blocking outbound connections to port 2222")
-					log.Error("Ensure private-location.escape.tech:2222 outbound access is allowed")
+					_, port, _ := net.SplitHostPort(ep.addr)
+					log.Error("Firewall is likely blocking outbound connections to port %s", port)
+					log.Error("Ensure %s outbound access is allowed", ep.addr)
 				}
 			} else if strings.Contains(errMsg, "no such host") || strings.Contains(errMsg, "could not resolve") {
-				log.Error("DNS resolution failed for private-location.escape.tech")
+				host, _, _ := net.SplitHostPort(ep.addr)
+				log.Error("DNS resolution failed for %s", host)
+			} else if errors.Is(err, errUpgradeRefused) && ep.transport == transportWSS && !hasEverConnected.Load() {
+				log.Error("A proxy or firewall on the path to %s refused or stripped the WebSocket Upgrade", ep.addr)
+				log.Error("Set ESCAPE_TRANSPORT=auto to fall back to HTTP long-poll on the same port")
 			}
 		} else {
 			hasEverConnected.Store(true)
@@ -72,17 +85,24 @@ func isDialTimeout(err error) bool {
 	return strings.Contains(errMsg, "context deadline exceeded") || strings.Contains(errMsg, "i/o timeout")
 }
 
-func logSSHDialTimeoutHints(hasLoggedTimeoutHint *atomic.Bool) {
+func logDialTimeoutHints(ep endpoint, hasLoggedTimeoutHint *atomic.Bool) {
 	if hasLoggedTimeoutHint.Load() {
 		return
 	}
 
 	hasLoggedTimeoutHint.Store(true)
-	target := sshTarget()
-	log.Error("Timed out connecting to Escape SSH endpoint (%s)", target)
+	if ep.transport == transportSSH {
+		log.Error("Timed out connecting to Escape SSH endpoint (%s)", ep.addr)
+	} else {
+		log.Error("Timed out connecting to Escape HTTPS endpoint (%s) over %s", ep.connectURL, ep.transport)
+	}
+
 	if env.GetFrontendProxyURL() == nil {
 		log.Error("Outbound traffic may require a proxy: set ESCAPE_FRONTEND_PROXY_URL on the deployment")
 	}
 
-	log.Error("Ensure %s is reachable from this network", target)
+	log.Error("Ensure %s is reachable from this network", ep.addr)
+	if ep.transport == transportHTTPS || ep.transport == transportAuto {
+		log.Error("HTTP long-poll also needs a proxy that does not buffer responses from %s", ep.addr)
+	}
 }

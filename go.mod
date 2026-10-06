@@ -5,6 +5,7 @@ go 1.26.7
 require (
 	github.com/Escape-Technologies/go-socks5 v1.0.0
 	github.com/go-jose/go-jose/v4 v4.1.4
+	github.com/gorilla/websocket v1.5.4-0.20250319132907-e064f32e3674
 	github.com/mark3labs/mcp-go v0.58.0
 	github.com/miekg/dns v1.1.73
 	github.com/sirupsen/logrus v1.10.2
