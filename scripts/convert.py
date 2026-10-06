@@ -55,10 +55,13 @@ def _enum_name(path: list[str], value: dict) -> str:
         raw += str(value["enum"][0])
     else:
         raw += "_".join(path)
+
     final = re.sub(r"[^a-zA-Z0-9_]", "_", raw).upper()
     if len(final) > 200:
         final = "Enum_" + md5("-".join(sorted(str(v) for v in value["enum"] if v is not None)))
+
     cache[cache_key] = final
+
     return final
 
 
@@ -83,10 +86,12 @@ def _rec_extract_enums(schema: dict, path: list[str]) -> tuple[dict, dict[str, d
             merged = sorted(existing.union(incoming))
             schema = dict(schema)
             schema['enum'] = merged
+
         enums[target] = schema
         ref_node_1: dict[str, Any] = {"$ref": "#/components/schemas/" + target}
         if schema.get('nullable', False):
             ref_node_1['nullable'] = True
+
         return ref_node_1, enums
 
     if isinstance(schema, dict):
@@ -98,7 +103,9 @@ def _rec_extract_enums(schema: dict, path: list[str]) -> tuple[dict, dict[str, d
                 new_prop_schema, new_enums = _rec_extract_enums(prop_schema, path + ['properties', prop_name])
                 if new_enums:
                     enums.update(new_enums)
+
                 new_props[prop_name] = new_prop_schema
+
             schema['properties'] = new_props
 
             # Filter required: drop any property marked nullable
@@ -116,6 +123,7 @@ def _rec_extract_enums(schema: dict, path: list[str]) -> tuple[dict, dict[str, d
                 for must in ['asset_class', 'asset_type']:
                     if must not in existing_required:
                         existing_required.append(must)
+
                 schema['required'] = existing_required
 
         # Process other keys within this schema
@@ -133,15 +141,18 @@ def _rec_extract_enums(schema: dict, path: list[str]) -> tuple[dict, dict[str, d
                         merged = sorted(existing.union(incoming))
                         value = dict(value)
                         value['enum'] = merged
+
                     enums[target] = value
                     ref_schema: dict[str, Any] = {"$ref": "#/components/schemas/" + target}
                     if value.get('nullable', False):
                         ref_schema['nullable'] = True
+
                     schema[key] = ref_schema
                 else:
                     new_schema, new_enums = _rec_extract_enums(value, path + [key])
                     if new_enums:
                         enums.update(new_enums)
+
                     schema[key] = new_schema
             elif isinstance(value, list):
                 for i in range(len(value)):
@@ -150,6 +161,7 @@ def _rec_extract_enums(schema: dict, path: list[str]) -> tuple[dict, dict[str, d
                         new_schema, new_enums = _rec_extract_enums(vi, path + [str(i)])
                         if new_enums:
                             enums.update(new_enums)
+
                         schema[key][i] = new_schema
 
     return schema, enums
@@ -256,6 +268,7 @@ for path, path_data in data["paths"].items():
         responses: dict[str, dict] = operation_object.get("responses", {})
         if not responses:
             continue
+
         if (
             json_schema1 := operation_object.get("requestBody", {})
             .get("content", {})
@@ -276,14 +289,17 @@ for path, path_data in data["paths"].items():
                             data["components"]["schemas"][name] = enum_schema
                     else:
                         data["components"]["schemas"][name] = enum_schema
+
                 data["paths"][path][method]["requestBody"]["content"]["application/json"]["schema"] = schema
 
         for status_code, response_object in responses.items():
             if "content" not in response_object:
                 continue
+
             content = response_object.get("content", {})
             if "application/json" not in content:
                 continue
+
             json_schema2: dict = content.get("application/json", {}).get("schema", {})
             schema, enums = _rec_extract_enums(json_schema2, [])
             if enums:
@@ -298,6 +314,7 @@ for path, path_data in data["paths"].items():
                             data["components"]["schemas"][name] = enum_schema
                     else:
                         data["components"]["schemas"][name] = enum_schema
+
                 data["paths"][path][method]["responses"][status_code]["content"]["application/json"]["schema"] = schema
 
 # Unify all integration list endpoints to return ListIntegrations200Response
@@ -332,7 +349,9 @@ for path, path_data in data["paths"].items():
                                     data["components"]["schemas"][enum_name] = enum_schema
                             else:
                                 data["components"]["schemas"][enum_name] = enum_schema
+
                         unified_integration_response_schema = processed_schema
+
                     break
 
 # If we found a unified schema, create the component and replace all integration list responses
