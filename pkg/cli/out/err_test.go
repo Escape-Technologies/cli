@@ -93,7 +93,7 @@ func captureOutErr(t *testing.T, fn func()) (string, string) {
 
 func invalidAPIKeyError() error {
 	apiErr := newTestGenericOpenAPIErrorWithStatus([]byte(`{"message":"Not authorized."}`), "401 Unauthorized")
-	return fmt.Errorf("unable to create location: %w", apiErr)
+	return fmt.Errorf("unable to create location: %w", error(apiErr))
 }
 
 func newTestGenericOpenAPIErrorWithStatus(body []byte, status string) *v3.GenericOpenAPIError {

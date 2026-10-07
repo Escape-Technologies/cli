@@ -160,7 +160,7 @@ func (g *genState) build(t reflect.Type) (*JSONSchema, bool) {
 		return &JSONSchema{Type: "object"}, false
 	}
 
-	if t.Kind() == reflect.Ptr {
+	if t.Kind() == reflect.Pointer {
 		inner, cyclic := g.build(t.Elem())
 		return withNull(inner), cyclic
 	}
@@ -288,7 +288,7 @@ func (g *genState) structSchema(t reflect.Type) *JSONSchema {
 		}
 
 		schema.Properties[fieldName] = prop
-		if !optional && field.Type.Kind() != reflect.Ptr {
+		if !optional && field.Type.Kind() != reflect.Pointer {
 			schema.Required = append(schema.Required, fieldName)
 		}
 	}

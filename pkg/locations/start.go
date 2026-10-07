@@ -63,8 +63,8 @@ func Start(ctx context.Context, name string) error {
 		}
 
 		log.Info("Private location %s in sync with Escape Platform, starting location...", name)
-		err = private.StartLocation(ctx, id, sshPrivateKey, healthy)
-		if err != nil {
+		err = private.StartLocation(ctx, id, sshPrivateKey, healthy) //nolint:staticcheck // StartLocation currently always returns an error
+		if err != nil {                                              //nolint:staticcheck // see above
 			log.Error("Error starting location: %s", err)
 		} else {
 			log.Error("Location connection terminated unexpectedly")

@@ -137,7 +137,7 @@ func TestHumanizeAPIErrorHumanizesGeneratedAPIError(t *testing.T) {
 func TestHumanizeAPIErrorUnwrapsWrappedGeneratedAPIError(t *testing.T) {
 	t.Parallel()
 	apiErr := newTestGenericOpenAPIError([]byte(`{"message":"Invalid cursor","details":"cursor expired"}`))
-	wrapped := fmt.Errorf("api error: %w", apiErr)
+	wrapped := fmt.Errorf("api error: %w", error(apiErr))
 	got := humanizeAPIError(wrapped)
 	if got == nil {
 		t.Fatal("expected humanized error, got nil")
@@ -178,7 +178,7 @@ func TestHumanizeAPIErrorReturnsOriginalOnEmptyBody(t *testing.T) {
 func TestHumanizeAPIErrorPreservesChain(t *testing.T) {
 	t.Parallel()
 	apiErr := newTestGenericOpenAPIError([]byte(`{"message":"Bad Request","details":"x"}`))
-	wrapped := fmt.Errorf("api error: %w", apiErr)
+	wrapped := fmt.Errorf("api error: %w", error(apiErr))
 	humanized := humanizeAPIError(wrapped)
 	var unwrapped *v3.GenericOpenAPIError
 	if !errors.As(humanized, &unwrapped) || unwrapped != apiErr {

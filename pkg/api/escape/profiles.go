@@ -435,7 +435,7 @@ func UpdateProfileSchema(ctx context.Context, profileID string, schemaID string)
 	}
 
 	payload := v3.UpdateProfileSchemaRequest{
-		SchemaId: schemaID,
+		SchemaId: schemaID, //nolint:staticcheck // this endpoint is the legacy single-schema API
 	}
 
 	profile, _, err := client.ProfilesAPI.UpdateProfileSchema(ctx, profileID).UpdateProfileSchemaRequest(payload).Execute()
